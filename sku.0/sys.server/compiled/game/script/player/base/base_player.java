@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class base_player extends script.base_script
 {
-    public base_player()
-    {
-    }
     public static final int TIME_DEATH = 5;
     public static final float RANGE_COUP_DE_GRACE = 3.0f;
     public static final String JEDI_CLOAK_TEMPLATE = "object/tangible/wearable/robe/robe_s05.iff";
@@ -11323,20 +11320,9 @@ public class base_player extends script.base_script
         obj_id killer = utils.getObjIdScriptVar(self, "setbounty.killer");
         utils.removeScriptVar(self, "setbounty.killer");
         int amount = utils.stringToInt(sui.getInputBoxText(params));
-        if (amount < 0)
+        if (amount < 1)
         {
             sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_invalid_number"));
-            bounty_hunter.showSetBountySUI(self, killer);
-            return SCRIPT_CONTINUE;
-        }
-        if (amount > bounty_hunter.MAX_BOUNTY_SET)
-        {
-            sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_cap"));
-            amount = bounty_hunter.MAX_BOUNTY_SET;
-        }
-        if (amount < bounty_hunter.MIN_BOUNTY_SET)
-        {
-            sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_too_little"));
             bounty_hunter.showSetBountySUI(self, killer);
             return SCRIPT_CONTINUE;
         }

@@ -786,7 +786,7 @@ public class pclib extends script.base_script
             }
             else 
             {
-                if ((getTotalMoney(player) >= bounty_hunter.MIN_BOUNTY_SET) && !dueling && getLevel(killer) >= 20)
+                if (!dueling && getLevel(killer) >= 20)
                 {
                     bounty_hunter.showSetBountySUI(player, killer);
                 }

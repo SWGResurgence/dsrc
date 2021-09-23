@@ -4,9 +4,6 @@ import script.*;
 
 public class bounty_hunter extends script.base_script
 {
-    public bounty_hunter()
-    {
-    }
     public static final String[] LOW_PAYOUT_COMMS = 
     {
         "pp_small_1",
@@ -49,9 +46,9 @@ public class bounty_hunter extends script.base_script
     public static final boolean BOUNTY_DO_LEVEL_ADJUSTER = true;
     public static final int BOUNTY_FLOOD_CONTROL_DELAY = 60;
     public static final int BOUNTY_MISSION_TIME_LIMIT = 259200;
-    public static final int MAX_BOUNTY = 2000000000;
-    public static final int MAX_BOUNTY_SET = 1000000;
-    public static final int MIN_BOUNTY_SET = 20000;
+    //public static final int MAX_BOUNTY = 2000000000;
+    //public static final int MAX_BOUNTY_SET = 1000000;
+    //public static final int MIN_BOUNTY_SET = 20000;
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String BOUNTY_CHECK_TABLE = "datatables/missions/bounty/bounty_check.iff";
     public static final String STF = "bounty_hunter";
