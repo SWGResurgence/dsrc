@@ -8,9 +8,6 @@ import script.string_id;
 
 public class combat_supply_drop_controller extends script.base_script
 {
-    public combat_supply_drop_controller()
-    {
-    }
     public static final string_id SID_ACQUIRE_HIRELING = new string_id("spam", "officer_pet_success");
     public static final string_id SID_TOO_MANY_HIRELINGS = new string_id("spam", "officer_too_many_pets");
     public static final String FOOD_TABLE = "datatables/loot/officer_supply_drop.iff";

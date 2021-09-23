@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class buff_handler extends script.base_script
 {
-    public buff_handler()
-    {
-    }
     public static final float ATTACK_RATE_DEPRICATED = 0.0f;
     public static final float DECAY_RATE_DEPRICATED = 0.0f;
     public static final String SKILLS_DATATABLE = "datatables/skill/skills.iff";
