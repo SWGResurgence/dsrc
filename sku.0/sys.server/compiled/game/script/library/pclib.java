@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class pclib extends script.base_script
 {
-    public pclib()
-    {
-    }
     public static final int MAX_NEWBIE_DEATHS = 3;
     public static final String VAR_NEWBIE_BASE = "noob";
     public static final String VAR_NEWBIE_DEATH = VAR_NEWBIE_BASE + ".death";
@@ -808,6 +805,36 @@ public class pclib extends script.base_script
         {
             group.notifyDeath(gid, player);
         }
+		
+		//RESTUSS PVP COMMENDATION SYSTEM BEGIN
+		
+		region[] regionList = getRegionsAtPoint(getLocation(killer));
+		if (regionList != null && regionList.length > 0) {
+			for (int i = 0, j = regionList.length; i < j; i++) {
+				region currentRegion = regionList[i];
+				if (currentRegion == null) {
+					continue;
+				}
+				String currentRegionName = currentRegion.getName();
+				if (currentRegionName.equals(restuss_event.PVP_REGION_NAME)) {
+					String pFac = factions.getFaction(killer);
+						obj_id inventory = utils.getInventoryContainer(killer);
+						String impcomms = "item_restuss_imperial_commendation_02_01";
+						String rebcomms = "item_restuss_rebel_commendation_02_01";
+						int commCount = 2;
+						if (pFac.equals("Rebel")) {
+							static_item.createNewItemFunction(rebcomms, inventory, commCount);
+							sendSystemMessageTestingOnly(killer, "You have recieved " + commCount +" Rebel Restuss Commendation for your efforts.");
+						}
+						else if (pFac.equals("Imperial")) {
+							static_item.createNewItemFunction(impcomms, inventory, commCount);sendSystemMessageTestingOnly(killer, "You have recieved " + commCount +" Imperial Restuss Commendation for your efforts.");
+						}
+				}
+			}
+		}
+		
+		//RESTUSS PVP COMMENDATION SYSTEM END
+		
         messageTo(player, HANDLER_PLAYER_DEATH, null, TIME_DEATH, true);
         dictionary params = new dictionary();
         params.put("victim", player);
