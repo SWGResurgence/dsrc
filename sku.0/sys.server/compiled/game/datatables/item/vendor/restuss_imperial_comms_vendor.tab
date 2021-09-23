@@ -1,23 +1,62 @@
-item	cash	token0	token1	token2	token3	token4	token5	token6	token7	token8	token9	token10	token11	token12	token13	class	script	note
-s[none]	i[0]	i[0]	i[0]	i[0]	i[0]	i[0]	i[0]	i[0]	i[0]	i[0]	i[0]	i[0]	i[0]	i[0]	i[0]	i[0]	s	c
-armor_rebel_spec_force_belt								15		15		15		15				"See library.utils for the int value of the classes. 0 is ""all"" but will only show if there are no items for the opener's class."
-armor_rebel_spec_force_bicep_l								15		15		15		15				"So in the case of this table only traders will see the ""all"" items."
-armor_rebel_spec_force_bicep_r								15		15		15		15				
-armor_rebel_spec_force_boots								15		15		15		15				
-armor_rebel_spec_force_bracer_l								15		15		15		15				
-armor_rebel_spec_force_bracer_r								15		15		15		15				
-armor_rebel_spec_force_chest_plate								15		15		15		15				
-armor_rebel_spec_force_gloves								15		15		15		15				
-armor_rebel_spec_force_helmet								15		15		15		15				
-armor_rebel_spec_force_leggings								15		15		15		15				
-weapon_carbine_ngant_zarvel_04_01								25		25		25		25				
-weapon_heavy_cr1_04_01								25		25		25		25				
-weapon_magna_guard_polearm_04_01								25		25		25		25				
-weapon_westar_pistol_04_01								25		25		25		25				
-weapon_westar_rifle_04_01								25		25		25		25		
-item_schematic_pvp_bf_saber_03_01								25		25		25		25		7
-item_schematic_pvp_bf_saber_03_02								25		25		25		25		7
-item_schematic_pvp_bf_saber_03_03								25		25		25		25		7
-weapon_knuckler_buzz_knuck								25		25		25		25		
-weapon_sword_1h_pvp_04_01								25		25		25		25		
-weapon_sword_2h_pvp_04_01								25		25		25		25		
+item	token30	limit	note
+s	i	i[0]	c
+armor_mandalorian_imperial_chest_plate_04_01	1000		Mandalorian Mark III Chestplate
+armor_mandalorian_imperial_helmet_04_01	800		Mandalorian Mark III Helmet
+armor_mandalorian_imperial_leggings_04_01	800		Mandalorian Mark III Leggings
+armor_mandalorian_imperial_bicep_l_04_01	500		Mandalorian Mark III Left Bicep
+armor_mandalorian_imperial_bicep_r_04_01	500		Mandalorian Mark III Right Bicep
+armor_mandalorian_imperial_bracer_l_04_01	500		Mandalorian Mark III Left Bracer
+armor_mandalorian_imperial_bracer_r_04_01	500		Mandalorian Mark III Right Bracer
+armor_mandalorian_imperial_belt_04_01	300		Mandalorian Mark III Belt
+armor_mandalorian_imperial_boots_04_01	300		Mandalorian Mark III Boots
+armor_mandalorian_imperial_gloves_04_01	300		Mandalorian Mark III Gloves
+armor_mandalorian_imperial_white_chest_plate_04_01	1000		White Mandalorian Mark III Chestplate
+armor_mandalorian_imperial_white_helmet_04_01	800		White Mandalorian Mark III Helmet
+armor_mandalorian_imperial_white_leggings_04_01	800		White Mandalorian Mark III Leggings
+armor_mandalorian_imperial_white_bicep_l_04_01	500		White Mandalorian Mark III Left Bicep
+armor_mandalorian_imperial_white_bicep_r_04_01	500		White Mandalorian Mark III Right Bicep
+armor_mandalorian_imperial_white_bracer_l_04_01	500		White Mandalorian Mark III Left Bracer
+armor_mandalorian_imperial_white_bracer_r_04_01	500		White Mandalorian Mark III Right Bracer
+armor_mandalorian_imperial_white_belt_04_01	300		White Mandalorian Mark III Belt
+armor_mandalorian_imperial_white_boots_04_01	300		White Mandalorian Mark III Boots
+armor_mandalorian_imperial_white_gloves_04_01	300		White Mandalorian Mark III Gloves
+armor_mandalorian_black_imperial_chest_plate_04_01	1000		Black Mandalorian Mark III Chestplate
+armor_mandalorian_black_imperial_helmet_04_01	800		Black Mandalorian Mark III Helmet
+armor_mandalorian_black_imperial_leggings_04_01	800		Black Mandalorian Mark III Leggings
+armor_mandalorian_black_imperial_bicep_l_04_01	500		Black Mandalorian Mark III Left Bicep
+armor_mandalorian_black_imperial_bicep_r_04_01	500		Black Mandalorian Mark III Right Bicep
+armor_mandalorian_black_imperial_bracer_l_04_01	500		Black Mandalorian Mark III Left Bracer
+armor_mandalorian_black_imperial_bracer_r_04_01	500		Black Mandalorian Mark III Right Bracer
+armor_mandalorian_black_imperial_belt_04_01	300		Black Mandalorian Mark III Belt
+armor_mandalorian_black_imperial_boots_04_01	300		Black Mandalorian Mark III Boots
+armor_mandalorian_black_imperial_gloves_04_01	300		Black Mandalorian Mark III Gloves
+armor_mandalorian_red_imperial_chest_plate_04_01	1000		Red Mandalorian Mark III Chestplate
+armor_mandalorian_red_imperial_helmet_04_01	800		Red Mandalorian Mark III Helmet
+armor_mandalorian_red_imperial_leggings_04_01	800		Red Mandalorian Mark III Leggings
+armor_mandalorian_red_imperial_bicep_l_04_01	500		Red Mandalorian Mark III Left Bicep
+armor_mandalorian_red_imperial_bicep_r_04_01	500		Red Mandalorian Mark III Right Bicep
+armor_mandalorian_red_imperial_bracer_l_04_01	500		Red Mandalorian Mark III Left Bracer
+armor_mandalorian_red_imperial_bracer_r_04_01	500		Red Mandalorian Mark III Right Bracer
+armor_mandalorian_red_imperial_belt_04_01	300		Red Mandalorian Mark III Belt
+armor_mandalorian_red_imperial_boots_04_01	300		Red Mandalorian Mark III Boots
+armor_mandalorian_red_imperial_gloves_04_01	300		Red Mandalorian Mark III Gloves
+armor_mandalorian_blue_imperial_chest_plate_04_01	1000		Blue Mandalorian Mark III Chestplate
+armor_mandalorian_blue_imperial_helmet_04_01	800		Blue Mandalorian Mark III Helmet
+armor_mandalorian_blue_imperial_leggings_04_01	800		Blue Mandalorian Mark III Leggings
+armor_mandalorian_blue_imperial_bicep_l_04_01	500		Blue Mandalorian Mark III Left Bicep
+armor_mandalorian_blue_imperial_bicep_r_04_01	500		Blue Mandalorian Mark III Right Bicep
+armor_mandalorian_blue_imperial_bracer_l_04_01	500		Blue Mandalorian Mark III Left Bracer
+armor_mandalorian_blue_imperial_bracer_r_04_01	500		Blue Mandalorian Mark III Right Bracer
+armor_mandalorian_blue_imperial_belt_04_01	300		Blue Mandalorian Mark III Belt
+armor_mandalorian_blue_imperial_boots_04_01	300		Blue Mandalorian Mark III Boots
+armor_mandalorian_blue_imperial_gloves_04_01	300		Blue Mandalorian Mark III Gloves
+weapon_mandalorian_lightsaber_04_01	500		Jinsu Razor Lightsaber
+weapon_mandalorian_sword_04_01	500		Templar Sword
+weapon_mandalorian_pistol_04_01		M-XII Pistol
+weapon_mandalorian_carbine_04_01	500		M-XIII Carbine
+weapon_mandalorian_rifle_04_01	500		M-XIV Rifle
+weapon_mandalorian_heavy_04_01	500		M-XX Heavy Rifle
+weapon_imperial_sword_04_01	500		Nova Edge Sword
+weapon_imperial_pistol_04_01	500		Dead Bolt Pistol
+weapon_imperial_rifle_04_01	500		Reaper Sniper Rifle
+weapon_imperial_heavy_04_01	500		Frag Storm Heavy Shotgun
