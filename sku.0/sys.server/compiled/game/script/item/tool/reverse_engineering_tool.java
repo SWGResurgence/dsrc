@@ -544,10 +544,12 @@ public class reverse_engineering_tool extends script.base_script
         float quality = getFloatObjVar(self, "res_quality");
         int randomRollMin = 35;
 		int moduleBonus = 0;
+		int luckMod = getEnhancedSkillStatisticModifierUncapped(player, "luck");
+		luckMod += getEnhancedSkillStatisticModifierUncapped(player, "luck_modified");
         LOG("reverse_engineering", "generatePowerBit quality: " + quality);
         if (quality > 0)
         {
-			moduleBonus = rand(1, 5);
+			moduleBonus = rand(1, (luckMod / 250) * (quality / 10)););
             randomRollMin += (int)(40.0f * (quality / 100.0f));
             removeObjVar(self, "res_quality");
             LOG("reverse_engineering", "generatePowerBit randomRollMin: " + randomRollMin);
@@ -564,8 +566,6 @@ public class reverse_engineering_tool extends script.base_script
             double chanceFloat = (StrictMath.pow(maxStat + 1, 4) / 502.00) + 11.00;
             int chance = (int)chanceFloat;
             int randomRoll = rand(1, chance);
-            int luckMod = getEnhancedSkillStatisticModifierUncapped(player, "luck");
-            luckMod += getEnhancedSkillStatisticModifierUncapped(player, "luck_modified");
             skillMod += luckMod;
             if (skillMod > randomRoll)
             {
