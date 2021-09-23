@@ -13,15 +13,15 @@ public class combat_supply_drop_controller extends script.base_script
     }
     public static final string_id SID_ACQUIRE_HIRELING = new string_id("spam", "officer_pet_success");
     public static final string_id SID_TOO_MANY_HIRELINGS = new string_id("spam", "officer_too_many_pets");
-    public static final String FOOD_TABLE = "datatables/loot/officer_supply_drop.iff";
+    /*public static final String FOOD_TABLE = "datatables/loot/officer_supply_drop.iff";
     public static final String FOOD_LOW = "low";
     public static final String FOOD_MID = "mid";
     public static final String FOOD_HIGH = "high";
-    public static final int FOOD_ITEMS = 2;
+    */public static final int FOOD_ITEMS = 2;
     public static final int GROUP_SIZE = 16;
-    public static final int LEVEL_LOW_CAP = 45;
+    /*public static final int LEVEL_LOW_CAP = 45;
     public static final int LEVEL_MID_CAP = 75;
-    public int startLandingSequence(obj_id self, dictionary params) throws InterruptedException
+    */public int startLandingSequence(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = params.getObjId("owner");
         int supplyId = params.getInt("supplyId");
@@ -88,27 +88,27 @@ public class combat_supply_drop_controller extends script.base_script
             case 0:
             static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
             static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
-            //static_item.createNewItemFunction("weapon_npe_grenade_frag_02_01", crate);
-            //String foodList = "";
+            static_item.createNewItemFunction("weapon_npe_grenade_frag_02_01", crate);
+            /*String foodList = "";
             if (level <= LEVEL_LOW_CAP)
-            //{
-            //    foodList = FOOD_LOW;
-            //}
+            {
+                foodList = FOOD_LOW;
+            }
             else if (level <= LEVEL_MID_CAP)
-            //{
-            //    foodList = FOOD_MID;
-            //}
-            //else 
-            //{
-            //    foodList = FOOD_HIGH;
-            //}
-            //String[] foodItems = dataTableGetStringColumn(FOOD_TABLE, foodList);
-            //for (int i = 0; i < FOOD_ITEMS; i++)
-            //{
-            //    int r = rand(0, (foodItems.length - 1));
-            //    static_item.createNewItemFunction(foodItems[r], crate);
-            //}
-            break;
+            {
+                foodList = FOOD_MID;
+            }
+            else 
+            {
+                foodList = FOOD_HIGH;
+            }
+            String[] foodItems = dataTableGetStringColumn(FOOD_TABLE, foodList);
+            for (int i = 0; i < FOOD_ITEMS; i++)
+            {
+                int r = rand(0, (foodItems.length - 1));
+                static_item.createNewItemFunction(foodItems[r], crate);
+            }
+            */break;
             case 1:
             itemString = "item_off_temp_stimpack_02_01";
 						itemString = "item_off_temp_tactical_buff_02_01";
