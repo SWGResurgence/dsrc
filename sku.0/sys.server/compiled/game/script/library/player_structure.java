@@ -649,12 +649,10 @@ public class player_structure extends script.base_script
             int expertiseExtractionIncrease = getSkillStatisticModifier(owner, "expertise_harvester_collection_increase");
             int currentExtraction = deed_info.getInt("current_extraction");
             int maxExtraction = deed_info.getInt("max_extraction");
-            setObjVar(structure, "current_extraction", currentExtraction);
-            setObjVar(structure, "max_extraction", maxExtraction);
             if (expertiseExtractionIncrease > 0)
             {
-                currentExtraction += (int)(currentExtraction * expertiseExtractionIncrease / 100.0f);
-                maxExtraction += (int)(maxExtraction * expertiseExtractionIncrease / 100.0f);
+                currentExtraction += (int)(currentExtraction * (1.0f + expertiseExtractionIncrease / 100.0f));
+                maxExtraction += (int)(maxExtraction * (1.0f + expertiseExtractionIncrease / 100.0f));
             }
             if (currentExtraction > HARVESTER_MAX_EXTRACTION_RATE)
             {
@@ -664,6 +662,8 @@ public class player_structure extends script.base_script
             {
                 maxExtraction = HARVESTER_MAX_EXTRACTION_RATE;
             }
+			setObjVar(structure, "current_extraction", currentExtraction);
+			setObjVar(structure, "max_extraction", maxExtraction);
             setCurrentExtractionRate(structure, currentExtraction);
             setMaxExtractionRate(structure, maxExtraction);
         }
