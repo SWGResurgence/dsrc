@@ -549,7 +549,7 @@ public class reverse_engineering_tool extends script.base_script
         LOG("reverse_engineering", "generatePowerBit quality: " + quality);
         if (quality > 0)
         {
-			moduleBonus = rand(1, (int)((luckMod / 250) * (quality / 10))););
+			moduleBonus = rand(1, (int)((luckMod / 250) * (quality / 10)));
             randomRollMin += (int)(40.0f * (quality / 100.0f));
             removeObjVar(self, "res_quality");
             LOG("reverse_engineering", "generatePowerBit randomRollMin: " + randomRollMin);
