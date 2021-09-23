@@ -3881,7 +3881,7 @@ public class player_structure extends script.base_script
                 setObjVar(deed, VAR_DEED_SURPLUS_POWER, power);
             }
         }
-        else 
+        else
         {
             if (isIdValid(containerForDeed) && getVolumeFree(containerForDeed) < 1 && bGetSelfPowered)
             {

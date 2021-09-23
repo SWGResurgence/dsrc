@@ -7,9 +7,6 @@ import script.library.utils;
 
 public class reverse_engineering_tool extends script.base_script
 {
-    public reverse_engineering_tool()
-    {
-    }
     public static final String STAT_OBJVAR_SUFFIX = "skillmod.bonus.";
     public static final String MODS_TABLE = "datatables/crafting/reverse_engineering_mods.iff";
     public static final String STATIC_ITEM_TABLE = "datatables/item/master_item/master_item.iff";
@@ -545,10 +542,12 @@ public class reverse_engineering_tool extends script.base_script
             }
         }
         float quality = getFloatObjVar(self, "res_quality");
-        int randomRollMin = 30;
+        int randomRollMin = 35;
+		int moduleBonus = 0;
         LOG("reverse_engineering", "generatePowerBit quality: " + quality);
         if (quality > 0)
         {
+			moduleBonus = rand(1, 5);
             randomRollMin += (int)(40.0f * (quality / 100.0f));
             removeObjVar(self, "res_quality");
             LOG("reverse_engineering", "generatePowerBit randomRollMin: " + randomRollMin);
