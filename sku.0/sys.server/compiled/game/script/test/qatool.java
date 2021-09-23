@@ -9,9 +9,6 @@ import java.util.stream.Collectors;
 
 public class qatool extends script.base_script
 {
-    public qatool()
-    {
-    }
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String SPACE_MOBILE_TABLE = "datatables/space_mobile/space_mobile.iff";
     public static final String MASTER_ITEM_TABLE = "datatables/item/master_item/master_item.iff";
@@ -874,6 +871,7 @@ public class qatool extends script.base_script
                 attachScript(self, "test.qa_resource_reward");
                 attachScript(self, "test.qadna");
                 grantSkill(self, "swg_dev");
+								CustomerServiceLog("QATOOL", "Notice: " +getName(self) + " attached the QATOOL to themselves.");
                 sendSystemMessageTestingOnly(self, "You can access the \"SWG Developer\" title by opening your Community options.");
             }
         }
@@ -912,6 +910,7 @@ public class qatool extends script.base_script
         detachScript(self, "test.qa_resource_reward");
         detachScript(self, "test.qadna");
         revokeSkillSilent(self, "swg_dev");
+				CustomerServiceLog("QATOOL", "Notice: " + getName(self) + " detached the QATOOL from themselves.");
         return SCRIPT_CONTINUE;
     }
     public int vetRewardOptionHandler(obj_id self, dictionary params) throws InterruptedException
