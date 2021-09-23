@@ -11,9 +11,6 @@ import java.util.Vector;
 
 public class trial extends script.base_script
 {
-    public trial()
-    {
-    }
     public static final String MESSAGE_SESSION = "messageTo.session";
     public static final String WP_OBJECT = "object/tangible/ground_spawning/patrol_waypoint.iff";
     public static final String PARENT = "parent";
@@ -258,30 +255,40 @@ public class trial extends script.base_script
     public static final int TIME_MONSTER_WIN = 60 * 60 * 20;
     public static final String[] HEROIC_TOKENS = 
     {
-        "item_heroic_token_axkva_01_01",
-        "item_heroic_token_tusken_01_01",
-        "item_heroic_token_ig88_01_01",
-        "item_heroic_token_black_sun_01_01",
-        "item_heroic_token_exar_01_01",
-        "item_heroic_token_echo_base_01_01",
-        "item_battlefield_rebel_token_massassi_isle",
-        "item_battlefield_imperial_token_massassi_isle",
-        "item_battlefield_rebel_token_battlefield2",
-        "item_battlefield_imperial_token_battlefield2",
-        "item_battlefield_rebel_token_battlefield3",
-        "item_battlefield_imperial_token_battlefield3",
-        "item_battlefield_rebel_token_battlefield4",
-        "item_battlefield_imperial_token_battlefield4",
-        "item_pgc_token_01",
-        "item_pgc_token_02",
-        "item_pgc_token_03",
-        "item_gcw_rebel_token",
-        "item_gcw_imperial_token",
-        "item_token_duty_space_01_01",
-        "item_imperial_station_token_01_01",
-        "item_rebel_station_token_01_01"
+        "item_heroic_token_axkva_01_01", 					//#0
+        "item_heroic_token_tusken_01_01",					//#1
+		"item_heroic_token_ig88_01_01",						//#2
+        "item_heroic_token_black_sun_01_01",				//#3
+        "item_heroic_token_exar_01_01",						//#4
+        "item_heroic_token_echo_base_01_01",				//#5
+		"item_battlefield_rebel_token_massassi_isle",		//#6
+        "item_battlefield_imperial_token_massassi_isle",	//#7
+        "item_battlefield_rebel_token_battlefield2",		//#8
+        "item_battlefield_imperial_token_battlefield2",		//#9
+        "item_battlefield_rebel_token_battlefield3",		//#10
+        "item_battlefield_imperial_token_battlefield3",		//#11
+        "item_battlefield_rebel_token_battlefield4",		//#12
+        "item_battlefield_imperial_token_battlefield4",		//#13
+		"item_pgc_token_01",								//#14
+        "item_pgc_token_02",								//#15
+        "item_pgc_token_03",								//#16
+		"item_gcw_rebel_token",								//#17
+        "item_gcw_imperial_token",							//#18
+        "item_token_duty_space_01_01",						//#19
+		"item_vet_reward_token_01_01",						//#20
+		"item_imperial_station_token_01_01",				//#21
+        "item_rebel_station_token_01_01",					//#22
+		"item_empire_day_imperial_token",					//#23
+        "item_empire_day_rebel_token",						//#24
+        "item_event_halloween_coin",						//#25
+        "item_event_lifeday_rebel_token",					//#26
+        "item_event_lifeday_imperial_token",				//#27
+        "item_event_loveday_chak_heart",					//#28
+		"item_nova_orion_space_resource_01_01",				//#29
+		"item_restuss_imperial_commendation_02_01",   		//#30
+		"item_restuss_rebel_commendation_02_01"				//#31
     };
-    public static final int NUM_HEROIC_TOKEN_TYPES = 22;
+    public static final int NUM_HEROIC_TOKEN_TYPES = 29;
     public static final String KIMARU_HATE_LIST = "kimaru_hate_list";
     public static final String WP_DATA = "nearPoint";
     public static final String PROT_CHILD = "protected_data";
