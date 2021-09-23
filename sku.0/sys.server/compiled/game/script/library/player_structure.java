@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class player_structure extends script.base_script
 {
-    public player_structure()
-    {
-    }
     public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "special_sign";
     public static final String SCRIPT_TERMINAL_STRUCTURE = "terminal.terminal_structure";
@@ -3548,7 +3545,7 @@ public class player_structure extends script.base_script
         {
             return false;
         }
-        if (amt < 1 || amt > 100000)
+        if (amt < 1 || amt > 1000000)
         {
             return false;
         }
