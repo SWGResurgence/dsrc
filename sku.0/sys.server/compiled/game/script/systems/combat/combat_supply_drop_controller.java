@@ -87,8 +87,20 @@ public class combat_supply_drop_controller extends script.base_script
         {
             case 0:
             static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
+					static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
+					static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
+					static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
+					static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
+					static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
+					static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
             static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
-            static_item.createNewItemFunction("weapon_npe_grenade_frag_02_01", crate);
+					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
+					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
+					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
+					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
+					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
+					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
+					static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
             /*String foodList = "";
             if (level <= LEVEL_LOW_CAP)
             {
