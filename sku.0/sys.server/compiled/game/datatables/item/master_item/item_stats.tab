@@ -4806,3 +4806,6 @@ item_col_syren5_reb_rank_insignia_01_01			string:collection.slotName=col_syren5_
 item_col_syren5_reb_intel_datapad_01_01			string:collection.slotName=col_syren5_reb:col_syren5_reb_intel_datapad_01_01								
 item_col_syren5_reward_y_wing_hologram											
 item_old_foes_painting
+item_schematic_armor_marine_backpack_01_01			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_backpack_armor_marine.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase4_master								
+item_schematic_hat_imperial_gunner_01_01			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_hat_imperial_gunner.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase4_master								
+item_schematic_hat_rebel_trooper_01_01			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_hat_rebel_trooper.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase4_master								
