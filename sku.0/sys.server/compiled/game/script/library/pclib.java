@@ -155,6 +155,7 @@ public class pclib extends script.base_script
     public static final String DECAY_REMAINDER = "decay.remainder";
     public static final float MIN_CLONING_SICKNESS_COST = 100;
     public static final float MAX_CLONING_SICKNESS_COST = 5000;
+	
     public static int getCloningSicknessCureCost(obj_id player) throws InterruptedException
     {
         float minCost = MIN_CLONING_SICKNESS_COST;
@@ -785,7 +786,7 @@ public class pclib extends script.base_script
             }
             else 
             {
-                if ((getTotalMoney(player) >= bounty_hunter.MIN_BOUNTY_SET) && (!dueling) && (getLevel(killer) >= 20))
+                if ((getTotalMoney(player) >= bounty_hunter.MIN_BOUNTY_SET) && !dueling && getLevel(killer) >= 20)
                 {
                     bounty_hunter.showSetBountySUI(player, killer);
                 }
@@ -819,20 +820,12 @@ public class pclib extends script.base_script
 				if (currentRegionName.equals(restuss_event.PVP_REGION_NAME)) {
 					String pFac = factions.getFaction(killer);
 						obj_id inventory = utils.getInventoryContainer(killer);
-						String impcomms = "item_restuss_imperial_commendation_02_01";
-						String rebcomms = "item_restuss_rebel_commendation_02_01";
-						int commCount = 2;
-						if (pFac.equals("Rebel")) {
-							static_item.createNewItemFunction(rebcomms, inventory, commCount);
-							sendSystemMessageTestingOnly(killer, "You have recieved (" + commCount +") Rebel Restuss Commendations for your efforts.");
-						}
-						else if (pFac.equals("Imperial")) {
-							static_item.createNewItemFunction(impcomms, inventory, commCount);sendSystemMessageTestingOnly(killer, "You have recieved (" + commCount +") Imperial Restuss Commendations for your efforts.");
-                    }
-                    else if (!isDead(player))
-                    {
-                        LOG("CustomerServiceLog", "CommDrop: Shouldn't recieved comms from: " + player + " !");
-						}
+						int commCount = pvpGetCurrentGcwRank(killer) - 1;
+
+                    if (commCount > 0) {
+                        static_item.createNewItemFunction("item_restuss_" + pFac.toLower() + "_commendation_02_01", inventory, commCount);
+                        sendSystemMessageTestingOnly(killer, "You've recieved " + commCount + " " + pFac + " Restuss Commendations for defeating " + player + " in combat.");
+					}
 				}
 			}
 		}
