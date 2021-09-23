@@ -135,3 +135,5 @@ item_bracelet_r_set_ent_01_01		2		2	2		9		entertainer
 item_necklace_set_ent_01_01		2	2			2	9		entertainer
 item_band_set_ent_01_01		2	2	2			9		entertainer
 item_ring_set_ent_01_01		2	2	2			9		entertainer
+item_force_crystal_04_01		10	10			15			
+item_force_crystal_04_02				10	10	15			
