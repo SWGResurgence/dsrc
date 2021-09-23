@@ -2258,12 +2258,12 @@ item_pvp_captain_battle_banner_rebel_reward_04_01			string:faction_recruiter.fac
 item_deed_walker_06_02			string:vehicle_attribs.object_ref=walker_at_rt_camo,float:hit_points=10000								
 item_deed_barc_rebel_06_01			string:vehicle_attribs.object_ref=barc_speeder_rebel,float:hit_points=15000								
 item_deed_barc_imperial_06_01			string:vehicle_attribs.object_ref=barc_speeder_imperial,float:hit_points=15000								
-item_off_temp_stimpack_02_01			int:healing.power=945,int:healing.combat_level_required=18								
-item_off_temp_stimpack_02_02			int:healing.power=1505,int:healing.combat_level_required=30								
-item_off_temp_stimpack_02_03			int:healing.power=1910,int:healing.combat_level_required=48								
-item_off_temp_stimpack_02_04			int:healing.power=2485,int:healing.combat_level_required=62	index_color_0=0,index_color_1=52							
-item_off_temp_stimpack_02_05			int:healing.power=2975,int:healing.combat_level_required=72	index_color_0=0,index_color_1=60							
-item_off_temp_stimpack_02_06			int:healing.power=3465,int:healing.combat_level_required=86	index_color_0=0,index_color_1=2							
+item_off_temp_stimpack_02_01			int:healing.power=1500,int:healing.combat_level_required=18								
+item_off_temp_stimpack_02_02			int:healing.power=2485,int:healing.combat_level_required=30								
+item_off_temp_stimpack_02_03			int:healing.power=3465,int:healing.combat_level_required=48								
+item_off_temp_stimpack_02_04			int:healing.power=4850,int:healing.combat_level_required=62	index_color_0=0,index_color_1=52							
+item_off_temp_stimpack_02_05			int:healing.power=6200,int:healing.combat_level_required=72	index_color_0=0,index_color_1=60							
+item_off_temp_stimpack_02_06			int:healing.power=7500,int:healing.combat_level_required=86	index_color_0=0,index_color_1=2							
 item_off_temp_tactical_buff_02_01				index_color_0=0,index_color_1=45	of_tactical_drop_1	short_reuse_4	5			appearance/pt_heal_health_buff_2.prt	
 item_off_temp_tactical_buff_02_02				index_color_0=0,index_color_1=7	of_tactical_drop_2	short_reuse_5	5			appearance/pt_heal_health_buff_2.prt	
 item_off_temp_tactical_buff_02_03				index_color_0=0,index_color_1=15	of_tactical_drop_3	short_reuse_6	5			appearance/pt_heal_health_buff_2.prt	
