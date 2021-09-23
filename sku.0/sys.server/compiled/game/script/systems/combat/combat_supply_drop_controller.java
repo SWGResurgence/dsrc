@@ -18,7 +18,7 @@ public class combat_supply_drop_controller extends script.base_script
     public static final String FOOD_MID = "mid";
     public static final String FOOD_HIGH = "high";
     public static final int FOOD_ITEMS = 2;
-    public static final int GROUP_SIZE = 8;
+    public static final int GROUP_SIZE = 16;
     public static final int LEVEL_LOW_CAP = 45;
     public static final int LEVEL_MID_CAP = 75;
     public int startLandingSequence(obj_id self, dictionary params) throws InterruptedException
@@ -86,64 +86,76 @@ public class combat_supply_drop_controller extends script.base_script
         switch (supplyId)
         {
             case 0:
-            static_item.createNewItemFunction("item_stimpack_a_02_01", crate);
-            static_item.createNewItemFunction("item_stimpack_a_02_01", crate);
-            static_item.createNewItemFunction("weapon_npe_grenade_frag_02_01", crate);
-            String foodList = "";
+            static_item.createNewItemFunction("item_off_temp_stimpack_02_06", crate);
+            static_item.createNewItemFunction("item_off_temp_tactical_buff_02_06", crate);
+            //static_item.createNewItemFunction("weapon_npe_grenade_frag_02_01", crate);
+            //String foodList = "";
             if (level <= LEVEL_LOW_CAP)
-            {
-                foodList = FOOD_LOW;
-            }
+            //{
+            //    foodList = FOOD_LOW;
+            //}
             else if (level <= LEVEL_MID_CAP)
-            {
-                foodList = FOOD_MID;
-            }
-            else 
-            {
-                foodList = FOOD_HIGH;
-            }
-            String[] foodItems = dataTableGetStringColumn(FOOD_TABLE, foodList);
-            for (int i = 0; i < FOOD_ITEMS; i++)
-            {
-                int r = rand(0, (foodItems.length - 1));
-                static_item.createNewItemFunction(foodItems[r], crate);
-            }
+            //{
+            //    foodList = FOOD_MID;
+            //}
+            //else 
+            //{
+            //    foodList = FOOD_HIGH;
+            //}
+            //String[] foodItems = dataTableGetStringColumn(FOOD_TABLE, foodList);
+            //for (int i = 0; i < FOOD_ITEMS; i++)
+            //{
+            //    int r = rand(0, (foodItems.length - 1));
+            //    static_item.createNewItemFunction(foodItems[r], crate);
+            //}
             break;
             case 1:
             itemString = "item_off_temp_stimpack_02_01";
+						itemString = "item_off_temp_tactical_buff_02_01";
             break;
             case 2:
             itemString = "item_off_temp_stimpack_02_02";
+						itemString = "item_off_temp_tactical_buff_02_02";
             break;
             case 3:
             itemString = "item_off_temp_stimpack_02_03";
+						itemString = "item_off_temp_tactical_buff_02_03";
             break;
             case 4:
             itemString = "item_off_temp_stimpack_02_04";
+						itemString = "item_off_temp_tactical_buff_02_04";
             break;
             case 5:
             itemString = "item_off_temp_stimpack_02_05";
+						itemString = "item_off_temp_tactical_buff_02_05";
             break;
             case 6:
             itemString = "item_off_temp_stimpack_02_06";
+						itemString = "item_off_temp_tactical_buff_02_06";
             break;
             case 7:
             itemString = "item_off_temp_tactical_buff_02_01";
+						itemString = "item_off_temp_stimpack_02_01";
             break;
             case 8:
             itemString = "item_off_temp_tactical_buff_02_02";
+						itemString = "item_off_temp_stimpack_02_02";
             break;
             case 9:
             itemString = "item_off_temp_tactical_buff_02_03";
+						itemString = "item_off_temp_stimpack_02_03";
             break;
             case 10:
             itemString = "item_off_temp_tactical_buff_02_04";
+						itemString = "item_off_temp_stimpack_02_04";
             break;
             case 11:
             itemString = "item_off_temp_tactical_buff_02_05";
+						itemString = "item_off_temp_stimpack_02_05";
             break;
             case 12:
             itemString = "item_off_temp_tactical_buff_02_06";
+						itemString = "item_off_temp_stimpack_02_06";
             break;
         }
         if (supplyId > 0 && supplyId <= 12 && (itemString != null || !itemString.equals("")))
