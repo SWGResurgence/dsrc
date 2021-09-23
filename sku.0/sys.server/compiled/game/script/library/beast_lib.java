@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class beast_lib extends script.base_script
 {
-    public beast_lib()
-    {
-    }
     public static final String BEASTS_TABLE = "datatables/beast/beasts.iff";
     public static final String BEASTS_STATS = "datatables/beast/beast_stats.iff";
     public static final String BEASTS_SPECIALS = "datatables/beast/beast_specials.iff";
@@ -456,7 +453,7 @@ public class beast_lib extends script.base_script
     {
         if (beast_lib.isBeastMaster(player))
         {
-            obj_id activePet = beast_lib.getBeastOnPlayer(player);
+            obj_id activePet = getBeastOnPlayer(player);
             if (isIdValid(activePet) && exists(activePet))
             {
                 if (beast_lib.isBeast(activePet))
@@ -1376,6 +1373,9 @@ public class beast_lib extends script.base_script
         setBeastBCD(beast, bcd);
         setBeastOnPlayer(player, beast);
         setMaster(beast, player);
+								int buffs[] = buff.getAllBuffs(player);
+								buff.applyBuff(beast, buffs);
+
     }
     public static void removeBeastLinks(obj_id player, obj_id bcd, obj_id beast) throws InterruptedException
     {
@@ -1658,11 +1658,12 @@ public class beast_lib extends script.base_script
         }
         addSkillModModifier(beast, "slope_move", "slope_move", 50, -1, false, false);
         updateBeastHappiness(bcd, beast);
-        int expertiseRegen = getEnhancedSkillStatisticModifierUncapped(getMaster(beast), "expertise_bm_pet_regen");
-        int expertiseHealth = getEnhancedSkillStatisticModifierUncapped(getMaster(beast), "expertise_bm_pet_health");
-        int expertiseAttackSpeed = getEnhancedSkillStatisticModifierUncapped(getMaster(beast), "expertise_bm_pet_attack_speed");
-        int expertiseArmor = getEnhancedSkillStatisticModifierUncapped(getMaster(beast), "expertise_bm_pet_armor");
-        int expertiseDamage = getEnhancedSkillStatisticModifierUncapped(getMaster(beast), "expertise_bm_pet_damage");
+        obj_id master = getMaster(beast);
+			int expertiseRegen = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_pet_regen");
+			int expertiseHealth = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_pet_health");
+			int expertiseAttackSpeed = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_pet_attack_speed");
+			int expertiseArmor = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_pet_armor");
+			int expertiseDamage = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_pet_damage");
         float incubationArmorBonus = utils.getFloatScriptVar(beast, OBJVAR_INCREASE_ARMOR);
         float incubationDamageBonus = utils.getFloatScriptVar(beast, OBJVAR_INCREASE_DPS);
         float incubationHealthBonus = utils.getFloatScriptVar(beast, OBJVAR_INCREASE_HEALTH);
@@ -1750,7 +1751,7 @@ public class beast_lib extends script.base_script
         }
         setBeastExperience(beast, getBCDBeastExperience(bcd));
         setBeastCanLevel(beast, getBCDBeastCanLevel(bcd));
-        int attentionPenaltyReduction = getEnhancedSkillStatisticModifierUncapped(getMaster(beast), "expertise_bm_self_debuff_reduction");
+        int attentionPenaltyReduction = getEnhancedSkillStatisticModifierUncapped(master, "expertise_bm_self_debuff_reduction");
         int attentionPenalty = BASE_ATTENTION_PENALTY + attentionPenaltyReduction;
         int hackeyWorkAroundValue = (attentionPenalty / 5) * -1;
         if (hackeyWorkAroundValue > 5)
@@ -1759,11 +1760,11 @@ public class beast_lib extends script.base_script
         }
         if (attentionPenalty < 0 || hackeyWorkAroundValue > 0)
         {
-            buff.applyBuff(getMaster(beast), ATTENTION_PENALTY_DEBUFF + hackeyWorkAroundValue);
+            buff.applyBuff(master, ATTENTION_PENALTY_DEBUFF + hackeyWorkAroundValue);
         }
         else 
         {
-            removeAttentionPenaltyDebuff(getMaster(beast));
+            removeAttentionPenaltyDebuff(master);
         }
     }
     public static void storeBeast(obj_id bcd) throws InterruptedException
@@ -2337,7 +2338,7 @@ public class beast_lib extends script.base_script
             obj_id beastFood = beast_lib.checkAutoFeederForBeastFood(autofeeder);
             if (isIdValid(beastFood))
             {
-                beast_lib.applyFoodEffect(beastFood, beast, player);
+                applyFoodEffect(beastFood, beast, player);
                 static_item.decrementStaticItem(beastFood);
                 sendSystemMessage(player, new string_id("tcg", "beast_auto_feeder_fed_beast"));
                 return true;
