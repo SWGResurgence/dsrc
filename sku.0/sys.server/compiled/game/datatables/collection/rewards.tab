@@ -64,25 +64,25 @@ kill_primative_tier_2	0		"bdg_col_kill_primitive,primative_tier_2_complete"		ite
 kill_cold_blooded_tier_2	0		"bdg_col_kill_cold_blooded,cold_blooded_tier_2_complete"		item_dna_uller												"Killing in 'cold blood' isn't as appalling as it seems: Badge, Rare DNA"
 kill_trophy_spawn	0.2															Badge = Big Game Hunter	"Explore the galaxy, discover exotic life forms and kill them."
 col_dna_tier_3_kill	0				item_dna_walluga												"Due to the decomposition rates of these creatures, the DNA is extremely difficult to harvest.  Handle with care: Rare DNA"
-col_rare_melee_01	0.1		bdg_col_rare_weapons_melee_mark_1													…has completed Rare Melee Weapons Mark I Collection.	Rare Melee Weapons Collection I Badge and a small amount of XP
-col_rare_melee_02	0.1		bdg_col_rare_weapons_melee_mark_2													…has completed Rare Melee Weapons Mark II Collection.	Rare Melee Weapons Collection II Badge and a small amount of XP
-col_rare_melee_03	0.2		bdg_col_rare_weapons_melee_mark_3													…has completed Rare Melee Weapons Mark III Collection.	Rare Melee Weapons Collection III Badge and a medium amount of XP
-col_rare_melee_04	0.3		bdg_col_rare_weapons_melee_mark_4													…has completed Rare Melee Weapons Mark IV Collection.	Rare Melee Weapons Collection IV Badge and a large amount of XP
-col_rare_pistol_01	0.1		bdg_col_rare_weapons_pistol_mark_1													…has completed Rare Pistol Weapons Mark I Collection.	Rare Pistol Collection I Badge and a small amount of XP
-col_rare_pistol_02	0.2		bdg_col_rare_weapons_pistol_mark_2													…has completed Rare Pistol Weapons Mark II Collection.	Rare Pistol Collection II Badge and a medium amount of XP
-col_rare_pistol_03	0.3		bdg_col_rare_weapons_pistol_mark_3													…has completed Rare Pistol Weapons Mark III Collection.	Rare Pistol Collection III Badge and a large amount of XP
-col_rare_rifle_01	0.1		bdg_col_rare_weapons_rifle_mark_1													…has completed Rare Rifle Weapons Mark I Collection.	Rare Rifle Collection I Badge and a small amount of XP
-col_rare_rifle_02	0.2		bdg_col_rare_weapons_rifle_mark_2													…has completed Rare Rifle Weapons Mark II Collection.	Rare Rifle Collection II Badge and a medium amount of XP
-col_rare_rifle_03	0.3		bdg_col_rare_weapons_rifle_mark_3													…has completed Rare Rifle Weapons Mark III Collection.	Rare Rifle Collection III Badge and a large amount of XP
-col_rare_carbine_01	0.1		bdg_col_rare_weapons_carbine_mark_1													…has completed Rare Carbine Weapons Mark I Collection.	Rare Carbine Collection I Badge and a small amount of XP
-col_rare_carbine_02	0.2		bdg_col_rare_weapons_carbine_mark_2													…has completed Rare Carbine Weapons Mark II Collection.	Rare Carbine Collection II Badge and a medium amount of XP
-col_rare_heavy_01	0.2		bdg_col_rare_weapons_heavy_mark_1													…has completed Rare Heavy Weapons Mark I Collection.	Rare Heavy Weapons Collection Badge and a medium amount of XP
-col_shock_trooper_armor	0.2		bdg_col_shock_trooper_armor													…has completed Shock Trooper Armor Collection.	Shock Trooper Armor Collection Badge and a medium amount of XP
-col_storm_trooper_armor	0.2		bdg_col_storm_trooper_armor													…has completed Storm Trooper Armor Collection.	Storm Trooper Armor Collection Badge and a medium amount of XP
-col_scout_trooper_armor	0.2		bdg_col_scout_trooper_armor													…has completed Scout Trooper Armor Collection.	Scout Trooper Armor Collection Badge and a medium amount of XP
-col_rebel_assault_armor	0.2		bdg_col_rebel_assault_armor													…has completed Rebel Assault Armor Collection.	Rebel Assault Armor Collection Badge and a medium amount of XP
-col_rebel_battle_armor	0.2		bdg_col_rebel_battle_armor													…has completed Rebel Battle Armor Collection.	Rebel Battle Armor Collection Badge and a medium amount of XP
-col_rebel_marine_armor	0.2		bdg_col_rebel_marine_armor													…has completed Rebel Marine Armor Collection.	Rebel Marine Armor Collection Badge and a medium amount of XP
+col_rare_melee_01	0.1		bdg_col_rare_weapons_melee_mark_1													?has completed Rare Melee Weapons Mark I Collection.	Rare Melee Weapons Collection I Badge and a small amount of XP
+col_rare_melee_02	0.1		bdg_col_rare_weapons_melee_mark_2													?has completed Rare Melee Weapons Mark II Collection.	Rare Melee Weapons Collection II Badge and a small amount of XP
+col_rare_melee_03	0.2		bdg_col_rare_weapons_melee_mark_3													?has completed Rare Melee Weapons Mark III Collection.	Rare Melee Weapons Collection III Badge and a medium amount of XP
+col_rare_melee_04	0.3		bdg_col_rare_weapons_melee_mark_4													?has completed Rare Melee Weapons Mark IV Collection.	Rare Melee Weapons Collection IV Badge and a large amount of XP
+col_rare_pistol_01	0.1		bdg_col_rare_weapons_pistol_mark_1													?has completed Rare Pistol Weapons Mark I Collection.	Rare Pistol Collection I Badge and a small amount of XP
+col_rare_pistol_02	0.2		bdg_col_rare_weapons_pistol_mark_2													?has completed Rare Pistol Weapons Mark II Collection.	Rare Pistol Collection II Badge and a medium amount of XP
+col_rare_pistol_03	0.3		bdg_col_rare_weapons_pistol_mark_3													?has completed Rare Pistol Weapons Mark III Collection.	Rare Pistol Collection III Badge and a large amount of XP
+col_rare_rifle_01	0.1		bdg_col_rare_weapons_rifle_mark_1													?has completed Rare Rifle Weapons Mark I Collection.	Rare Rifle Collection I Badge and a small amount of XP
+col_rare_rifle_02	0.2		bdg_col_rare_weapons_rifle_mark_2													?has completed Rare Rifle Weapons Mark II Collection.	Rare Rifle Collection II Badge and a medium amount of XP
+col_rare_rifle_03	0.3		bdg_col_rare_weapons_rifle_mark_3													?has completed Rare Rifle Weapons Mark III Collection.	Rare Rifle Collection III Badge and a large amount of XP
+col_rare_carbine_01	0.1		bdg_col_rare_weapons_carbine_mark_1													?has completed Rare Carbine Weapons Mark I Collection.	Rare Carbine Collection I Badge and a small amount of XP
+col_rare_carbine_02	0.2		bdg_col_rare_weapons_carbine_mark_2													?has completed Rare Carbine Weapons Mark II Collection.	Rare Carbine Collection II Badge and a medium amount of XP
+col_rare_heavy_01	0.2		bdg_col_rare_weapons_heavy_mark_1													?has completed Rare Heavy Weapons Mark I Collection.	Rare Heavy Weapons Collection Badge and a medium amount of XP
+col_shock_trooper_armor	0.2		bdg_col_shock_trooper_armor													?has completed Shock Trooper Armor Collection.	Shock Trooper Armor Collection Badge and a medium amount of XP
+col_storm_trooper_armor	0.2		bdg_col_storm_trooper_armor													?has completed Storm Trooper Armor Collection.	Storm Trooper Armor Collection Badge and a medium amount of XP
+col_scout_trooper_armor	0.2		bdg_col_scout_trooper_armor													?has completed Scout Trooper Armor Collection.	Scout Trooper Armor Collection Badge and a medium amount of XP
+col_rebel_assault_armor	0.2		bdg_col_rebel_assault_armor													?has completed Rebel Assault Armor Collection.	Rebel Assault Armor Collection Badge and a medium amount of XP
+col_rebel_battle_armor	0.2		bdg_col_rebel_battle_armor													?has completed Rebel Battle Armor Collection.	Rebel Battle Armor Collection Badge and a medium amount of XP
+col_rebel_marine_armor	0.2		bdg_col_rebel_marine_armor													?has completed Rebel Marine Armor Collection.	Rebel Marine Armor Collection Badge and a medium amount of XP
 inv_holocron_collection_01			jedi_robe_01_03		item_fannypack_04_01											Jedi Artifact Collection - Waist Pack	Jedi Waist Pack
 inv_holocron_collection_02			jedi_robe_01_02						meditate							Jedi Artifact Collection - Meditative Discipline	Meditative Discipline
 housing_improvement_01			"housing_improvement_mark_01_01,bdg_col_housing_improvement_01_01"		item_storage_increase_05_03											Housing Improvement: Techniques in Maximizing Space	Storage Increase
@@ -350,6 +350,7 @@ kill_hoth_wampa_01	0.2				col_reward_hoth_ice_sculpture_wampa_02_01												A
 col_hoth_frozen_tauntaun_01	0.1				col_reward_hoth_tauntaun_head_02_01												A small amount of XP and a mounted Tauntaun head.
 col_hoth_meteorite_01	0.1				col_reward_hoth_meteorite_geode_02_01												A small amount of XP and a meteorite display.
 col_hoth_probe_droid_01	0.1				item_holopet_hoth_probe_droid_data_cube_01_01												A small amount of XP and a Probe Droid Holo-Pet Data Cube
+col_necrosis_slayer item_old_foes_painting A painting and a Player Title
 col_hoth_imperial_kill_01	0.1				col_hoth_sharpshooter_buff_02_01												A small amount of XP and a Hoth Radio
 col_hoth_rebel_kill_01	0.1				col_hoth_sharpshooter_buff_02_01												A small amount of XP and a Hoth Radio
 col_holo_emitter_01	0.2				"col_holo_emitter_reward_02_01,item_holopet_hoth_tauntaun_data_cube_01_01"												"A medium amount of XP, a Holographic Emitter and a Tauntaun Holo-Pet"

@@ -1789,6 +1789,8 @@ slayer_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						
 			cold_blooded_tier_2_complete	2694	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 		col_hoth_probe_droid_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1
 			hoth_probe_droid_counter	6222	6233	15	kill_heroic_echo_probe_droid																	sound/music_acq_miner.snd	gray	0	0						0	0
+		col_necrosis_slayer																									1							1		Necrosis Neutralizer	
+			necrosis_slayer_counter	22773	22783	20	kill_ep3_general_grievous																													N-K Necrosis	You have successfully defeated Kinesworthy and Lorn's dangerous creation.
 	force_sensitive_kill			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 		col_jedi_npc_kill		0	-1	-1																		sound/music_acq_miner.snd	gray	0	1						0	1
 			kill_padawan_01	5515	5523	50	kill_fallen_padawan	kill_dark_jedi_sentinel	kill_light_jedi_sentinel	kill_treasure_guard_padawan	kill_ep3_rryatt_crazed_jedi													sound/music_acq_miner.snd	gray	0	0						0	0
