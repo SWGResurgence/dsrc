@@ -3638,10 +3638,6 @@ public class combat_actions extends script.systems.combat.combat_base {
     }
 
     public int of_del_ae_dm_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
-        if (getTopMostContainer(self) != self) {
-            sendSystemMessage(self, new string_id("spam", "cant_do_indoors"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("of_del_ae_dm_1", self, target, params, "", "")) {
             return SCRIPT_OVERRIDE;
         }
@@ -3652,14 +3648,10 @@ public class combat_actions extends script.systems.combat.combat_base {
     }
 
     public int of_del_ae_dm_2(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
-        if (getTopMostContainer(self) != self) {
-            sendSystemMessage(self, new string_id("spam", "cant_do_indoors"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("of_del_ae_dm_2", self, target, params, "", "")) {
             return SCRIPT_OVERRIDE;
         }
-        playClientEffectLoc(self, "clienteffect/combat_pt_aerialstrike.cef", getLocation(target), 0);
+        playClientEffectLoc(self, "clienteffect/combat_pt_" + (getTopMostContainer(self) == self ? "aerialstrike" : "electricalfield") + ".cef", getLocation(target), 0);
         if (successfulFastAttack(self, "of_aoe")) {
             setCommandTimerValue(self, TIMER_COOLDOWN, 0.0f);
         }
@@ -3667,14 +3659,10 @@ public class combat_actions extends script.systems.combat.combat_base {
     }
 
     public int of_del_ae_dm_3(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
-        if (getTopMostContainer(self) != self) {
-            sendSystemMessage(self, new string_id("spam", "cant_do_indoors"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("of_del_ae_dm_3", self, target, params, "", "")) {
             return SCRIPT_OVERRIDE;
         }
-        playClientEffectLoc(self, "clienteffect/combat_pt_orbitalstrike.cef", getLocation(target), 0);
+        playClientEffectLoc(self, "clienteffect/combat_pt_orbitalstrike" + (getTopMostContainer(self) == self ? "" : "_low_pt") + ".cef", getLocation(target), 0);
         if (successfulFastAttack(self, "of_aoe")) {
             setCommandTimerValue(self, TIMER_COOLDOWN, 0.0f);
         }
