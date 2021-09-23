@@ -5,9 +5,6 @@ import script.library.*;
 
 public class halloween_vendor extends script.base_script
 {
-    public halloween_vendor()
-    {
-    }
     public static String c_stringFile = "conversation/halloween_vendor";
     public boolean halloween_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
