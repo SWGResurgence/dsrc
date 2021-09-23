@@ -90,19 +90,15 @@ public class combat_supply_drop_controller extends script.base_script {
     public int dropSupplies(obj_id self, dictionary params) throws InterruptedException {
         obj_id owner = params.getObjId("owner");
         int supplyId = params.getInt("supplyId");
-        int level = getLevel(owner);
-        location loc = getLocation(self);
-        obj_id crate = createObject("object/tangible/container/drum/supply_drop_crate.iff", loc);
+        obj_id crate = createObject("object/tangible/container/drum/supply_drop_crate.iff", getLocation(self));
         utils.setScriptVar(crate, "supply_drop.crateOwner", owner);
-        attachScript(crate, "systems.combat.combat_supply_drop_crate");        
+        attachScript(crate, "systems.combat.combat_supply_drop_crate");
         if (supplyId == 0) {
             static_item.createNewItemFunction("item_stimpack_a_02_01", crate);
             static_item.createNewItemFunction("item_stimpack_a_02_01", crate);
             static_item.createNewItemFunction("weapon_npe_grenade_frag_02_01", crate);
-			//Create 1 stack of tactical, and 1 stack of medical for normal supply drop.
-            static_item.createNewItemFunction("item_off_temp_stimpack_02_01", crate);
-            static_item.createNewItemFunction("item_off_temp_tactical_buff_02_01", crate);
             String foodList = "";
+			int level = getLevel(owner);
             if (level <= LEVEL_LOW_CAP) {
                 foodList = FOOD_LOW;
             } else if (level <= LEVEL_MID_CAP) {
@@ -110,26 +106,35 @@ public class combat_supply_drop_controller extends script.base_script {
             } else {
                 foodList = FOOD_HIGH;
             }
+			int tierStims = 1;
+            if (level == 90) {
+                tierStims = 6;
+            } else if (level >= 76) {
+                tierStims = 5;
+            } else if (level >= 62) {
+                tierStims = 4;
+            } else if (level >= 48) {
+                tierStims = 3;
+            } else if (level >= 34) {
+                tierStims = 2;
+            }
+            static_item.createNewItemFunction("item_off_temp_stimpack_02_0" + tierStims, crate);
+            static_item.createNewItemFunction("item_off_temp_tactical_buff_02_0" + tierStims, crate);
             String[] foodItems = dataTableGetStringColumn(FOOD_TABLE, foodList);
             for (int i = 0; i < FOOD_ITEMS; i++) {
                 int r = rand(0, (foodItems.length - 1));
                 static_item.createNewItemFunction(foodItems[r], crate);
             }
             } else {
-        {
-            for (int i = 0; i < GROUP_SIZE; i++)
+				boolean tacStimQual = hasSkill(owner, "expertise_of_tactical_sup_1");
+				for (int i = 0; i < GROUP_SIZE; i++)
             {
-                //If you have the tactical supply drop box, give tactical and medical stims.
-                if (hasSkill(self, "expertise_of_tactical_sup_1")) {
-                    static_item.createNewItemFunction("item_off_temp_stimpack_02_0" + supplyId, crate);
+                if (tacStimQual == true) {
                     static_item.createNewItemFunction("item_off_temp_tactical_buff_02_0" + supplyId, crate);
-                } else {
-                //If you don't have the tactical supply drop box, give medical stims.
-                    static_item.createNewItemFunction("item_off_temp_stimpack_02_0" + supplyId, crate);
                 }
+				static_item.createNewItemFunction("item_off_temp_stimpack_02_0" + supplyId, crate);
             }
-
-        }
+		}
         dictionary d = new dictionary();
         d.put("owner", owner);
         messageTo(self, "startTakeOffSequence", d, 2.0f, false);
