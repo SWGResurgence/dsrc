@@ -64,9 +64,9 @@ public class restuss_imperial_comms_vendor extends script.base_script {
     }
 
     public int restuss_imperial_comms_vendor_handleBranch1(obj_id self, obj_id player, string_id response) throws InterruptedException {
-        if (response.equals("restussimperialcomms_2")) {
+        if (response.equals("RestussImperialComms_2")) {
             restuss_imperial_comms_vendor_action_showTokenVendorUI(player, self);
-            chat.chat(self, player, new string_id(c_stringFile, "restussimperialcomms_3"));
+            chat.chat(self, player, new string_id(c_stringFile, "RestussImperialComms_3"));
         }
         npcEndConversation(player);
         return SCRIPT_CONTINUE;
@@ -78,9 +78,9 @@ public class restuss_imperial_comms_vendor extends script.base_script {
         }
         if (restuss_imperial_comms_vendor_condition__defaultCondition(player, self)) {
             prose_package pp = new prose_package();
-            pp = prose.setStringId(pp, new string_id(c_stringFile, "restussimperialcomms_1"));
+            pp = prose.setStringId(pp, new string_id(c_stringFile, "RestussImperialComms_1"));
             pp.target.set(player);
-            npcStartConversation(player, self, "restuss_imperial_comms_vendor", null, pp, new string_id[]{new string_id(c_stringFile, "restussimperialcomms_2")});
+            npcStartConversation(player, self, "restuss_imperial_comms_vendor", null, pp, new string_id[]{new string_id(c_stringFile, "RestussImperialComms_2")});
             return SCRIPT_CONTINUE;
         }
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
