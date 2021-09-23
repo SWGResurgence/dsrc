@@ -1322,6 +1322,18 @@ slayer_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						
 			col_imperial_rank_ltcol_01_01	5673	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
 			col_imperial_rank_col_01_01	5674	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
 			col_imperial_rank_gen_01_01	5675	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
+		col_syren5_imp		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1
+			col_syren5_imp_false_orders_01_01	22763	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_imp_stolen_codes_01_01	22764	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_imp_forged_rank_insignia_01_01	22765	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_imp_rank_insignia_01_01	22766	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_imp_isb_datapad_01_01	22767	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+		col_syren5_reb		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1
+			col_syren5_reb_false_orders_01_01	22768	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_reb_stolen_codes_01_01	22769	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_reb_forged_rank_insignia_01_01	22770	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_reb_rank_insignia_01_01	22771	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_reb_intel_datapad_01_01	22772	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 	creature_kill			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 		kill_nyms_themepark_pirate		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1
 			kill_nyms_themepark_sulfur_lake_pirate_activate	15899	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0
@@ -3839,7 +3851,7 @@ achievement_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0	
 		col_boss_badge_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 			undead_minor_bosses_killed	15340	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 			undead_cornburr_killed	15341	-1	-1	kill_outbreak_afflicted_maintenance_boss																	sound/music_acq_miner.snd	gray	0	0						0	0
-			undead_rancor_killed	15342	-1	-1	kill_outbreak_afflicted_rancor																	sound/music_acq_miner.snd	gray	0	0						0	0
+			undead_rancor_killed	15342	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 	meatlump_theme_park			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 		col_meatlump_rank_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 			meatlump_rank_01_01	5908	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0

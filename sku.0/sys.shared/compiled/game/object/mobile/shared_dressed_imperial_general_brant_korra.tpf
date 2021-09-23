@@ -1,0 +1,20 @@
+
+@base object/mobile/skeleton/shared_humanoid.iff
+
+@class creature_object_template 3
+
+gender = GE_male
+species = SP_human
+
+@class tangible_object_template 3
+
+
+
+@class object_template 3
+
+objectName = "npc_name" "syren_4_brant_korra"
+detailedDescription = "" ""
+lookAtText = "npc_lookat" "syren_4_brant_korra"
+appearanceFilename = "appearance/hum_m.sat"
+clientDataFile = "clientdata/npc/client_shared_npc_dressed_imperial_general_brant_korra.cdf"
+
