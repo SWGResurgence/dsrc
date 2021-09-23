@@ -824,10 +824,14 @@ public class pclib extends script.base_script
 						int commCount = 2;
 						if (pFac.equals("Rebel")) {
 							static_item.createNewItemFunction(rebcomms, inventory, commCount);
-							sendSystemMessageTestingOnly(killer, "You have recieved " + commCount +" Rebel Restuss Commendation for your efforts.");
+							sendSystemMessageTestingOnly(killer, "You have recieved (" + commCount +") Rebel Restuss Commendations for your efforts.");
 						}
 						else if (pFac.equals("Imperial")) {
-							static_item.createNewItemFunction(impcomms, inventory, commCount);sendSystemMessageTestingOnly(killer, "You have recieved " + commCount +" Imperial Restuss Commendation for your efforts.");
+							static_item.createNewItemFunction(impcomms, inventory, commCount);sendSystemMessageTestingOnly(killer, "You have recieved (" + commCount +") Imperial Restuss Commendations for your efforts.");
+                    }
+                    else if (!isDead(player))
+                    {
+                        LOG("CustomerServiceLog", "CommDrop: Shouldn't recieved comms from: " + player + " !");
 						}
 				}
 			}
