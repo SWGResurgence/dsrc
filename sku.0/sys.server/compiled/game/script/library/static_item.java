@@ -9,9 +9,6 @@ import java.util.Arrays;
 
 public class static_item extends script.base_script
 {
-    public static_item()
-    {
-    }
     public static final int NUM_DYNAMIC_MODIFIERS = 3;
     public static final String MASTER_ITEM_TABLE = "datatables/item/master_item/master_item.iff";
     public static final String WEAPON_STAT_BALANCE_TABLE = "datatables/item/master_item/weapon_stats.iff";
@@ -52,7 +49,7 @@ public class static_item extends script.base_script
     }
     public static obj_id createNewItemFunction(String itemName, obj_id container, location pos, int charges) throws InterruptedException
     {
-        if (itemName == null || itemName.equals(""))
+        if (itemName == null || itemName.isEmpty())
         {
             LOG("loot", itemName + " could not be made because itemName is null");
             return null;
