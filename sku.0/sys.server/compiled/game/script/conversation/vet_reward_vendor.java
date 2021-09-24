@@ -63,7 +63,7 @@ public class vet_reward_vendor extends script.base_script {
     }
     
 	public int vet_reward_vendor_handleBranch1(obj_id self, obj_id player, string_id response) throws InterruptedException {
-        switch (response) {
+        switch (response.toString()) {
             case "s_2":
                 vet_reward_vendor_action_showTokenVendorUI(player, self);
                 chat.chat(self, player, new string_id(c_stringFile, "s_3"));
@@ -85,10 +85,10 @@ public class vet_reward_vendor extends script.base_script {
         }
         if (vet_reward_vendor_condition__defaultCondition(player, self)) {
             prose_package pp = new prose_package();
-            pp = prose.setStringId(pp, new string_id(c_stringFile, "s_1"));
-            pp = prose.target.set(player);
-            npcStartConversation(player, self, "vet_reward_vendor", pp, new string_id[]{new string_id(c_stringFile, "s_2"), new string_id(c_stringFile, "s_4"), new string_id(c_stringFile, "s_6")});
-            //setObjVar(player, "conversation.vet_reward_vendor.branchId", 1);
+            string_id welcome = new string_id(c_stringFile, "s_1");
+            pp = prose.setStringId(pp, welcome);
+            pp.target.set(player);
+            base_class.npcStartConversation(player, self, "vet_reward_vendor", welcome, pp, new string_id[]{new string_id(c_stringFile, "s_2"), new string_id(c_stringFile, "s_4"), new string_id(c_stringFile, "s_6")});
             return SCRIPT_CONTINUE;
         }
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
@@ -100,7 +100,6 @@ public class vet_reward_vendor extends script.base_script {
         if (!conversationId.equals("vet_reward_vendor")) {
             return SCRIPT_CONTINUE;
         }
-        int branchId = utils.getIntScriptVar(player, "conversation.vet_reward_vendor.branchId");
 		if (vet_reward_vendor_handleBranch1(self, player, response) == SCRIPT_CONTINUE) {
             return SCRIPT_CONTINUE;
         }
