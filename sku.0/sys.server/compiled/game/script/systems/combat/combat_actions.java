@@ -6161,7 +6161,7 @@ public class combat_actions extends script.systems.combat.combat_base {
         if (bounties != null && bounties.length > 0) {
             prose_package pp = new prose_package();
             pp.stringId = new string_id("bounty_hunter", "sm_bounty_amount_target_with_bounties");
-            prose.setTO(pp, amount);
+            prose.setTO(pp, Integer.toString(amount));
             sendSystemMessageProse(infoTarget, pp);
             for (obj_id bountyHunter : bounties) {
                 if (isIdValid(bountyHunter)) {
@@ -6174,7 +6174,7 @@ public class combat_actions extends script.systems.combat.combat_base {
         } else {
             prose_package pp = new prose_package();
             pp.stringId = new string_id("bounty_hunter", "sm_bounty_amount_target_no_bounties");
-            prose.setTO(pp, amount);
+            prose.setTO(pp, Integer.toString(amount));
             sendSystemMessageProse(infoTarget, pp);
             utils.setScriptVar(self, "bountyCheckFloodControl", getGameTime() + 60);
         }
