@@ -9888,13 +9888,15 @@ public class base_player extends script.base_script
             int stationId = getPlayerStationId(self);
 			if (getLevel(self) < 75) {
                  endSystemMessage(self, new string_id("gcw", "pvp_advanced_region_level_low"));
-                 return SCRIPT_CONTINUE;
-            } else if (restuss_event.accountIsInRestuss(stationId)) {
+                 return SCRIPT_OVERRIDE;
+            }
+            if (restuss_event.accountIsInRestuss(stationId)) {
                 sendSystemMessageTestingOnly(self, "You already have a character in Restuss");
-                return SCRIPT_CONTINUE;
-            } else if (!factions.isImperial(self) && !factions.isRebel(self)) || !factions.isCovert(self)) {
+                return SCRIPT_OVERRIDE;
+            }
+            if ((!factions.isImperial(self) && !factions.isRebel(self)) || !factions.isCovert(self)) {
                 sendSystemMessage(self, new string_id("gcw", "pvp_advanced_region_not_allowed"));
-                return SCRIPT_CONTINUE;
+                return SCRIPT_OVERRIDE;
             }
 			restuss_event.addAccountToRestuss(stationId);
             sendSystemMessage(self, new string_id("gcw", "pvp_advanced_region_entered"));
