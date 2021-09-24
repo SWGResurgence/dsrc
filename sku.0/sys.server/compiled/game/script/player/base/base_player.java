@@ -7,8 +7,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
-imort script.cureward.cureward;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
