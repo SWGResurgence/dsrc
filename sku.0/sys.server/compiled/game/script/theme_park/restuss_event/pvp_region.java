@@ -7,21 +7,8 @@ import script.library.trial;
 import script.obj_id;
 import script.region;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class pvp_region extends script.base_script
 {
-	private static List accountsInRestuss = new ArrayList<Integer>();
-	public static void addAccountToRestuss(int stationId) {
-		accountsInRestuss.add(stationId);
-	}
-	public static void removeAccountFromRestuss(int stationId) {
-		accountsInRestuss.remove(stationId);
-	}
-	public static boolean accountIsInRestuss(stationId) {
-		return accountsInRestuss.contains(stationId);
-	}
     public int OnAttach(obj_id self) throws InterruptedException
     {
         initialize(self);
