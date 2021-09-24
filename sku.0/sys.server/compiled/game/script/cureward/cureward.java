@@ -62,15 +62,15 @@ public class cureward extends script.base_script {
         if (birth <= 127 && !hasCommand(self, "veteranPlayerBuff"))
             grantCommand(self, "veteranPlayerBuff");
 
-		obj_id tatooine = getPlanetByName("tatooine");
-		String objVar = "vetTokenCD_" + getStationId(self);
-		if (!hasObjVar(tatooine, objVar)) {
-			showLootBox(self, obj_id{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self, 100) });
-			setObjVar(tatooine, objVar, getCalendarTime());
-		} else if (getCalendarTime() - getIntObjVar(tatooine, "vetTokenCD_" + getStationId(self)) >= 86400) {
-			showLootBox(self, obj_id{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self) });
-			setObjVar(tatooine, objVar, getCalendarTime());
-		}
+        obj_id tatooine = getPlanetByName("tatooine");
+        String objVar = "vetTokenCD_" + getPlayerStationId(self);
+        if (!hasObjVar(tatooine, objVar)) {
+            showLootBox(self, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self, 100) });
+            setObjVar(tatooine, objVar, getCalendarTime());
+        } else if (getCalendarTime() - getIntObjVar(tatooine, objVar) >= 86400) {
+            showLootBox(self, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self) });
+            setObjVar(tatooine, objVar, getCalendarTime());
+        }
 
         for (int i = 1; i < REWARDS.length; i++)
             if (birth <= 7 * i)

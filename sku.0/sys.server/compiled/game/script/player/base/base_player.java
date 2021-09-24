@@ -9614,7 +9614,7 @@ public class base_player extends script.base_script
         return SCRIPT_CONTINUE;
     }
 	obj_id tatooine = getPlanetByName("tatooine");
-        String objVar = "vetTokenCD_" + getStationId(self);
+        String objVar = "vetTokenCD_" + getPlayerStationId(self);
         int timeLeft = getIntObjVar(tatooine, objVar) + 86400 - getCalendarTime();
 
         if (timeLeft > 0) {
@@ -9623,7 +9623,7 @@ public class base_player extends script.base_script
             pp.digitInteger = timeLeft;
             sendSystemMessageProse(self, pp);
         } else {
-            showLootBox(self, obj_id{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self) });
+            showLootBox(self, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self) });
             setObjVar(tatooine, objVar, getCalendarTime());
     public int cmdListVeteranRewards(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
