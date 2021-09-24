@@ -3,6 +3,7 @@ package script.player.base;
 import script.*;
 import script.library.*;
 
+import script.cureward;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
@@ -9623,7 +9624,7 @@ public class base_player extends script.base_script
             pp.digitInteger = timeLeft;
             sendSystemMessageProse(self, pp);
         } else {
-            showLootBox(self, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self) });
+            cureward.giveVeteranRewardToken(1);
             setObjVar(tatooine, objVar, getCalendarTime());
     public int cmdListVeteranRewards(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
