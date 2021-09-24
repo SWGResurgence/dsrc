@@ -542,6 +542,10 @@ public class dictionary implements Serializable
 		Object value = m_data.get(key);
 		if (value instanceof Integer)
 			return (Integer) value;
+		/*if (value instanceof Byte) {
+			System.out.println("getInt being called on key " + key.toString() + ". This should be using getByte!!");
+		return ((Byte)value).byteValue();
+		}*/
 		return 0;
 	}	// getInt()
 
@@ -1799,4 +1803,3 @@ public class dictionary implements Serializable
 
 
 }	// class dictionary
-
