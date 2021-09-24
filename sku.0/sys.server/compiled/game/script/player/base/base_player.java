@@ -11330,15 +11330,6 @@ public class base_player extends script.base_script
         {
             int bounty = getIntObjVar(killer, "bounty.amount");
         }
-		if (bounty >= bounty_hunter.MAX_BOUNTY)
-            {
-                sendSystemMessage(self, new string_id("bounty_hunter", "max_bounty"));
-                return SCRIPT_CONTINUE;
-            }
-            else if ((bounty + amount) > bounty_hunter.MAX_BOUNTY)
-            {
-                amount = (bounty + amount) - bounty_hunter.MAX_BOUNTY;
-            }
         int total = getTotalMoney(self);
         if (amount > total)
         {
