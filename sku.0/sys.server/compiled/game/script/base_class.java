@@ -6714,14 +6714,14 @@ public class base_class
      */
     public static native int getObjectTemplateCrc(String name);
 
-    public static native int     getNumAI();
-    public static native int     getNumCreatures();
-    public static native int     getNumPlayers();
-    public static native int     getNumRunTimeRules();
-	public static native int     getNumDynamicAI();
-	public static native int     getNumStaticAI();
-	public static native int     getNumCombatAI();
-	public static native int     getNumHibernatingAI();
+    public static native int getNumAI();
+    public static native int getNumCreatures();
+    public static native int getNumPlayers();
+    public static native int getNumRunTimeRules();
+    public static native int getNumDynamicAI();
+    public static native int getNumStaticAI();
+    public static native int getNumCombatAI();
+    public static native int getNumHibernatingAI();
 
     /**
      * @defgroup theaterMethods Theater creation methods
@@ -22285,17 +22285,6 @@ public class base_class
     public static int getPlayerStationId(obj_id player)
     {
         return _getPlayerStationId(getLongWithNull(player));
-    }
-	
-	/**
-     * Check station id to see if two characters belong to the same account
-     * 
-     * @param player1
-     * @param player2
-	 * @return true or false
-     */
-    public static boolean charactersAreSamePlayer(obj_id player1, obj_id player2) {
-        return getPlayerStationId(player1) == getPlayerStationId(player2);
     }
 
     /**
