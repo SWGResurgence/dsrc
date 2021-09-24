@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class gcw extends script.base_script
 {
-    public gcw()
-    {
-    }
     public static final int GCW_UPDATE_PULSE = 300;
     public static final float DECAY_PER_UPDATE = 0.02f;
     public static final String SCRIPTVAR_SCAN_INTEREST = "scan.interest";
@@ -40,9 +37,9 @@ public class gcw extends script.base_script
     public static final int FACTION_IMPERIAL = 2;
     public static final String LIST_CREDIT_FOR_KILLS = "gcw_tracking.credit_for_kills";
     public static final String LIST_DAILY_KILL_VALUES = "gcw_tracking.daily_kill_credit";
-    public static final int NORMAL_GCW_VALUE = 5;
-    public static final int ELITE_GCW_VALUE = 10;
-    public static final int BOSS_GCW_VALUE = 25;
+    public static final int NORMAL_GCW_VALUE = 250;
+    public static final int ELITE_GCW_VALUE = 500;
+    public static final int BOSS_GCW_VALUE = 1000;
     public static final double SPACE_GCW_VALUE = 4.0;
     public static final int GCW_PLAYER_BASE_DESTRUCTION = 100;
     public static final String GCW_PLAYER_BASE_POINT_VALUE = "datatables/faction_perk/hq/hq_point_values.iff";
