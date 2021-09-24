@@ -41,7 +41,7 @@ public class player_image_designer extends script.base_script
     public int imageDesignRequestStart(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_image_designer::imageDesignRequestStart");
-        if (!hasCommand(self, "imagedesign"))
+        if (!hasCommand(self, "imagedesign") && !isGod(self))
         {
             LOG("LOG_CHANNEL", self + " ->You must be an image designer to do that.");
             sendSystemMessage(self, SID_NOT_AN_IMAGE_DESIGNER);
