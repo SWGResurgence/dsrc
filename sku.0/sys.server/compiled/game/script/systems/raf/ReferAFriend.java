@@ -13,6 +13,9 @@ import script.library.sui;
 
 public class ReferAFriend extends script.base_script {
     public int setReferrer(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
+		 if (!isPlayer(target)) {
+            return SCRIPT_CONTINUE;
+        }
 		int stationIdSelf = getPlayerStationId(self);
         int stationIdTarget = getPlayerStationId(target);
         if (stationIdSelf == stationIdTarget) {
@@ -42,7 +45,7 @@ public class ReferAFriend extends script.base_script {
         obj_id[] referrer_items = new obj_id[1];
         referrer_items[0] = static_item.createNewItemFunction("col_buddy_" + (rand(0, 1) == 0 ? "02_" : "") + "token", target);
         showLootBox(target, referrer_items);
-        setObjVar(tatooine, "raf.last_referred_" + stationIdTarget, getCurrentBirthDate()); // TODO: Set it to the account, not the player
+        setObjVar(tatooine, "raf.last_referred_" + stationIdTarget, getCurrentBirthDate());
         sui.msgbox(target, target, "Congratulations! You have recieved a Buddy Token for referring player " + getPlayerName(self) + " to the game!", "Refer a Friend Rewards");
         return SCRIPT_CONTINUE;
     }
