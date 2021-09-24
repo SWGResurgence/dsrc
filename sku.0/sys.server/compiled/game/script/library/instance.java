@@ -662,10 +662,10 @@ public class instance extends script.base_script
             CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-dictionary was null for player " + getFirstName(player) + "(" + player + "), we are returning here.");
             return;
         }
+		int resetAt = 0;
         int resetType = dict.getInt("lockoutTimer");
         switch (resetType)
         {
-			int resetAt = 0;
             case RESET_NONE:
             CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-resetType was RESET_NONE for player " + getFirstName(player) + "(" + player + "), doing nothing.");
 				return;
