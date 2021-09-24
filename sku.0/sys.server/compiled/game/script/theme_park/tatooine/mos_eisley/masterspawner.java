@@ -100,10 +100,11 @@ public class masterspawner extends script.base_script
     }
 	public void spawnOffice(obj_id self) throws InterruptedException {
 		obj_id room = getCellId(self, "office");
-		obj_id vendor = create.object("vet_reward_vendor", new location(-26.5f, -0.9f, 89.0f, "tatooine", room));
-		setYaw(vendor, 90);
+		obj_id vendor = create.object("vet_reward_vendor", new location(-23.9f, -0.9f, 2.9f, "tatooine", room));
+		setYaw(vendor, 163);
 		setCreatureStatic(vendor, true);
 		setInvulnerable(vendor, true);
+		setName(vendor, "Lt. Rat");
 	}
     public void spawnClosePatrons(obj_id self) throws InterruptedException
     {
