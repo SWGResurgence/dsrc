@@ -275,9 +275,9 @@ public class dictionary implements Serializable
 	{
 		if ( key == null || value == null )
 		{
-			if ( key == null )
+			if (key == null)
 				System.err.println("ERROR calling dictionary.put(Object, Object): null key");
-			if ( value == null )
+			if (value == null)
 				System.err.println("ERROR calling dictionary.put(Object, Object): null value");
 			Thread.dumpStack();
 			return null;
