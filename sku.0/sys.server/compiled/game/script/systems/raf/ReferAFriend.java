@@ -13,19 +13,22 @@ import script.library.sui;
 
 public class ReferAFriend extends script.base_script {
     public int setReferrer(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
-		if (getPlayerStationId(self) == getPlayerStationId(target)) {
+		int stationIdSelf = getPlayerStationId(self);
+        int stationIdTarget = getPlayerStationId(target);
+        if (stationIdSelf == stationIdTarget)) {
             sendSystemMessageTestingOnly(self, "You cannot refer yourself.");
             return SCRIPT_CONTINUE;
         }
-        if (hasObjVar(self, "raf.referred")) {
+        obj_id tatooine = getPlanetByName("tatooine")
+        if (hasObjVar(tatooine, "raf.referred_" + stationIdSelf)) {
             sendSystemMessageTestingOnly(self, "You have already set another player as your referrer.");
             return SCRIPT_CONTINUE;
         }
-        if (hasObjVar(target, "raf.referred") && getObjIdObjVar(target, "raf.referred") == self) {
+        if (hasObjVar(tatooine, "raf.referred_" + stationIdTarget) && getObjIdObjVar(tatooine, "raf.referred_" + stationIdTarget) == stationIdSelf) {
             sendSystemMessageTestingOnly(self, "You cannot refer this friend because he is referred to you.");
             return SCRIPT_CONTINUE;
         }
-        if (hasObjVar(target, "raf.last_referred") && getIntObjVar(target, "raf.last_referred") >= getCurrentBirthDate()) {
+        if (hasObjVar(tatooine, "raf.last_referred_" + stationIdTarget) && getIntObjVar(tatooine, "raf.last_referred_" + stationIdTarget) >= getCurrentBirthDate()) { // TODO: Check the account instead of the character
             sendSystemMessageTestingOnly(self, "You cannot refer this friend because he has referred another friend within the last 24 hours.");
             return SCRIPT_CONTINUE;
         }
@@ -33,13 +36,13 @@ public class ReferAFriend extends script.base_script {
         friend_items[0] = static_item.createNewItemFunction("item_reward_buddy_xp_chip_06_01", self);
         friend_items[1] = static_item.createNewItemFunction("item_auto_level_50_buddy_conversion", self);
         showLootBox(self, friend_items);
-        setObjVar(self, "raf.referred", target);
+        setObjVar(tatooine, "raf.referred_" + stationIdSelf, target);
         sui.msgbox(self, self, "Congratulations! You have recieved a Cybernetic Experience Chip and a Holocron of Knowledge as rewards for the Refer a Friend program! Player " + getPlayerName(target) + " is now your referrer.", "Refer a Friend Rewards");
 
         obj_id[] referrer_items = new obj_id[1];
         referrer_items[0] = static_item.createNewItemFunction("col_buddy_" + (rand(0, 1) == 0 ? "02_" : "") + "token", target);
         showLootBox(target, referrer_items);
-        setObjVar(target, "raf.last_referred", getCurrentBirthDate());
+        setObjVar(tatooine, "raf.last_referred_" + stationIdTarget, getCurrentBirthDate()); // TODO: Set it to the account, not the player
         sui.msgbox(target, target, "Congratulations! You have recieved a Buddy Token for referring player " + getPlayerName(self) + " to the game!", "Refer a Friend Rewards");
         return SCRIPT_CONTINUE;
     }

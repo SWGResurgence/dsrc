@@ -1407,7 +1407,7 @@ public class player_building extends script.base_script
         int inInv = 0;
         dictionary d = new dictionary();
         obj_id[] contents = utils.getFilteredPlayerContents(self);
-        if ((contents == null) || (contents.length == 0))
+        if (contents == null || contents.length == 0)
         {
             return SCRIPT_CONTINUE;
         }

@@ -7,9 +7,6 @@ import java.util.*;
 
 public class utils extends script.base_script
 {
-    public utils()
-    {
-    }
     public static final String VERSION = "v0.01.00";
     public static final String VAR_OWNER = "owner";
     public static final String VAR_COOWNERS = "coowners";
@@ -710,7 +707,7 @@ public class utils extends script.base_script
     }
     public static obj_id[] stringToObjId(String[] text) throws InterruptedException
     {
-        if ((text == null) || (text.length == 0))
+        if (text == null || text.length == 0)
         {
             return null;
         }
@@ -6833,7 +6830,7 @@ public class utils extends script.base_script
         {
             ctsOjbvars = getCharacterRetroactiveCtsObjvars(player);
             retrievedCtsOjbvars = true;
-            if ((ctsOjbvars != null) && (ctsOjbvars.length > 0))
+            if (ctsOjbvars != null && ctsOjbvars.length > 0)
             {
                 utils.updateRespecCTSObjvars(player, ctsOjbvars);
                 utils.updateBeastMasterCTSObjvars(player, ctsOjbvars);
@@ -6843,11 +6840,11 @@ public class utils extends script.base_script
         updateObjvar = utils.CTS_OBJVAR_HISTORY + ".2";
         if (!hasObjVar(player, updateObjvar))
         {
-            if ((ctsOjbvars == null) && !retrievedCtsOjbvars)
+            if (ctsOjbvars == null && !retrievedCtsOjbvars)
             {
                 ctsOjbvars = getCharacterRetroactiveCtsObjvars(player);
             }
-            if ((ctsOjbvars != null) && (ctsOjbvars.length > 0))
+            if (ctsOjbvars != null && ctsOjbvars.length > 0)
             {
                 utils.updateHousePackupCTSObjvars(player, ctsOjbvars);
             }
