@@ -133,7 +133,7 @@ public class object_for_sale extends script.base_script
 			obj_id tatooine = getPlanetByName("tatooine");
 			int crc = getObjectTemplateCrc(getTemplateName(self));
 			String objVar = "bought_" + crc + "_" + getPlayerStationId(player);
-			if (hasObjVar(tatooine, objVar) {
+			if (hasObjVar(tatooine, objVar)) {
 				sendSystemMessage(player, SID_LIMIT_REACHED);
 				return_false;
 			}
@@ -227,7 +227,7 @@ public class object_for_sale extends script.base_script
         obj_id purchasedItem = obj_id.NULL_ID;
         String myName = "";
 		if (!confirmLimit(self, player)) {
-			return SCRIPT_OVERRIDE;
+			return;
 		}
         if (static_item.isStaticItem(self))
         {
