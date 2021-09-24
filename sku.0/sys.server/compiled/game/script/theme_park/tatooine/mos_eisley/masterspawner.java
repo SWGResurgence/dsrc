@@ -9,9 +9,6 @@ import script.obj_id;
 
 public class masterspawner extends script.base_script
 {
-    public masterspawner()
-    {
-    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Initialized Mos Eisley Cantina spawner script");
@@ -32,6 +29,7 @@ public class masterspawner extends script.base_script
         spawnChadraFans(self);
         spawnCheatedGambler(self);
         spawnJunkDealer(self);
+		spawnOffice(self);
     }
     public void spawnHanandChewie(obj_id self) throws InterruptedException
     {
@@ -100,6 +98,13 @@ public class masterspawner extends script.base_script
         ai_lib.setDefaultCalmMood(f4, "npc_sitting_chair");
         ai_lib.setDefaultCalmMood(f5, "npc_sitting_chair");
     }
+	public void spawnOffice(obj_id self) throws InterruptedException {
+		obj_id room = getCellId(self, "office");
+		obj_id vendor = create.object("vet_reward_vendor", new location(-26.5f, -0.9f, 89.0f, "tatooine", room));
+		setYaw(vendor, 90);
+		setCreatureStatic(vendor, true);
+		setInvulnerable(vendor, true);
+	}
     public void spawnClosePatrons(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "cantina");
