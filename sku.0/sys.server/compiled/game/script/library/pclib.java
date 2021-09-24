@@ -669,12 +669,11 @@ public class pclib extends script.base_script
         {
             playDeathBlowAnimation(victim, killer);
         }
-        if ( getPosture(victim) != POSTURE_DEAD ) {
+        if (getPosture(victim) != POSTURE_DEAD) {
             if (!setPosture(victim, POSTURE_DEAD)) {
                 debugSpeakMsg(victim, "coupDeGrace: unable to set my posture to dead!");
             }
         }
-        boolean dueling = pvpIsDueling(victim, pvpKiller);
         if (killer != victim)
         {
             prose_package ppToKiller = prose.getPackage(PROSE_TARGET_DEAD, victim);
@@ -693,7 +692,7 @@ public class pclib extends script.base_script
                 return;
             }
         }
-        playerDeath(victim, killer, dueling);
+        playerDeath(victim, killer);
     }
     public static void playDeathBlowAnimation(obj_id victim, obj_id killer) throws InterruptedException
     {
@@ -749,7 +748,7 @@ public class pclib extends script.base_script
     {
         coupDeGrace(victim, killer, true);
     }
-    public static boolean playerDeath(obj_id player, obj_id killer, boolean dueling) throws InterruptedException
+    public static boolean playerDeath(obj_id player, obj_id killer) throws InterruptedException
     {
         if (!isIdValid(player) || killer == null)
         {
@@ -786,7 +785,7 @@ public class pclib extends script.base_script
             }
             else 
             {
-                if (!dueling && getLevel(killer) >= 20)
+                if (getLevel(killer) >= 20)
                 {
                     bounty_hunter.showSetBountySUI(player, killer);
                 }
@@ -824,7 +823,7 @@ public class pclib extends script.base_script
 
                     if (commCount > 0) {
                         static_item.createNewItemFunction("item_restuss_" + pFac.toLowerCase() + "_commendation_02_01", inventory, commCount);
-                        sendSystemMessageTestingOnly(killer, "You've recieved " + commCount + " " + pFac + " Restuss Commendations for defeating " + player + " in combat.");
+                        sendSystemMessageTestingOnly(killer, "You've recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + player + " in combat.");
 					}
 				}
 			}
