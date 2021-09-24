@@ -7,15 +7,13 @@ import script.string_id;
 
 public class vendor extends script.base_script
 {
-    public vendor()
-    {
-    }
     public static final String VENDOR_TABLE_DIRECTORY = "datatables/item/vendor/";
     public static final String VENDOR_TABLE_OBJVAR = "item.vendor.vendor_table";
     public static final String VENDOR_CONTAINER_TEMPLATE = "object/tangible/container/vendor/npc_only.iff";
     public static final String OBJECT_FOR_SALE_DEFAULT_SCRIPT = "npc.vendor.object_for_sale";
     public static final String OBJECT_FOR_SALE_CASH_COST = "item.object_for_sale.cash_cost";
     public static final String OBJECT_FOR_SALE_TOKEN_COST = "item.object_for_sale.token_cost";
+	public static final String OBJECT_FOR_SALE_LIMIT = "item.object_for_sale.limit";
     public static final String VENDOR_CONTAINER_LIST_OBJVAR = "item.vendor.container_list";
     public static final String VENDOR_TOKEN_TYPE = "item.token.type";
     public static final int IMPERIAL = 10;
@@ -68,6 +66,7 @@ public class vendor extends script.base_script
             int reqClass = dataTableGetInt(vendorTable, row, "class");
             String item = dataTableGetString(vendorTable, row, "item");
             int creditCost = dataTableGetInt(vendorTable, row, "cash");
+			int limit = dataTableGetInt(vendorTable, row, "limit");
             int[] tokenCost = new int[trial.HEROIC_TOKENS.length];
             if (hasObjVar(self, VENDOR_TOKEN_TYPE))
             {
@@ -103,6 +102,7 @@ public class vendor extends script.base_script
                         }
                         setObjVar(objectForSale, OBJECT_FOR_SALE_CASH_COST, creditCost);
                         setObjVar(objectForSale, OBJECT_FOR_SALE_TOKEN_COST, tokenCost);
+						setObjVar(objectForSale, OBJECT_FOR_SALE_LIMIT, limit);
                         if (hasObjVar(self, VENDOR_TOKEN_TYPE))
                         {
                             String tokenList = getStringObjVar(self, VENDOR_TOKEN_TYPE);
