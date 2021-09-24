@@ -280,6 +280,7 @@ public class base_player extends script.base_script
     };
     public static final boolean LOGGING_ON = true;
     public static final String LOGNAME = "junk_log";
+	public static final int WEALTH_LOGGING_AMOUNT = Integer.parseInt(getConfigSetting("GameServer", "wealthLoggingThreshold"));
     public int OnCustomizeFinished(obj_id self, obj_id object, String params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "armor_colorize.tool_oid") || utils.hasScriptVar(self, "structure_colorize.tool_oid"))
@@ -626,16 +627,13 @@ public class base_player extends script.base_script
         }
         int totalMoney = getTotalMoney(self);
         utils.setScriptVar(self, "profit", totalMoney);
-        String balanceThreshold = getConfigSetting("GameServer", "wealthLoggingThreshold");
-        if (balanceThreshold == null || balanceThreshold.equals(""))
+        if (WEALTH_LOGGING_AMOUNT != null && WEALTH_LOGGING_AMOUNT > 0)
         {
-            balanceThreshold = "10000000";
+            balanceThreshold = "200000000";
         }
-        if (utils.stringToInt(balanceThreshold) > -1)
+        if (totalMoney > WEALTH_LOGGING_AMOUNT)
         {
-            if (totalMoney > utils.stringToInt(balanceThreshold))
-            {
-                CustomerServiceLog("Wealth", "Extraordinary Wealth: " + getName(self) + " (" + self + ") logged in with " + totalMoney + " credits");
+            CustomerServiceLog("Wealth", "Extraordinary Wealth: " + getName(self) + " (" + self + ") logged in with " + totalMoney + " credits");
             }
         }
         utils.unequipAndNotifyUncerted(self);
