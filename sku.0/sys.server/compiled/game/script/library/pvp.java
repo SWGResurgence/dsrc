@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class pvp extends script.base_script
 {
-    public pvp()
-    {
-    }
     public static final int BUFFER_TIME = 180;
     public static final String SCRIPTVAR_PVP_BASE = "pvp";
     public static final String SCRIPTVAR_DAMAGE_BASE = SCRIPTVAR_PVP_BASE + ".damage";
@@ -846,13 +843,13 @@ public class pvp extends script.base_script
         {
             bounty = getIntObjVar(killer, "bounty.amount");
         }
-        bounty += 1000;
+        bounty += 1000000;
         setObjVar(killer, "bounty.amount", bounty);
-        if (bounty >= 10000)
+        if (bounty >= 900000000)
         {
             setJediBountyValue(killer, bounty);
         }
-        CustomerServiceLog("bounty", "A bounty of 1000 credits has been automatically put on %TU for killing %TT", killer, victim);
+        CustomerServiceLog("bounty", "A bounty of 1,000,000 credits has been automatically put on %TU for killing %TT", killer, victim);
     }
     public static void battlefieldWarp(obj_id player, location loc) throws InterruptedException
     {
