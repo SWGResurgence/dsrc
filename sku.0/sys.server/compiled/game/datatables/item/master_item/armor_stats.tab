@@ -1,113 +1,113 @@
 name	armor_level	armor_category	condition_multiplier	protection	sockets	hit_points	skill_mods	attribute_bonus	objvars	reactive_effect	color	buff_name	required_level_for_effect	client_effect
 s	"e(basic=0,standard=1,advanced=2)[basic]"	"e(recon=0,battle=1,assault=2)[recon]"	f[1.0]	f[1.0]	i	i	s	s	s	s	s	s	i	s
-armor_bone_chest_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_bone_leggings_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_bone_helmet_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_bone_bicep_l_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_bone_bicep_r_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_bone_bracer_l_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_bone_bracer_r_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_bone_gloves_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_bone_boots_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_smuggler_roadmap_chest_02_01	basic	recon	1	0.8	0	40000	"expertise_damage_weapon_2=1,expertise_critical_pistol=1,expertise_action_weapon_2=1"							
-armor_smuggler_roadmap_leggings_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
-armor_smuggler_roadmap_helmet_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
-armor_smuggler_roadmap_bicep_l_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
-armor_smuggler_roadmap_bicep_r_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
-armor_smuggler_roadmap_bracer_l_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
-armor_smuggler_roadmap_bracer_r_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
-armor_smuggler_roadmap_gloves_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
-armor_smuggler_roadmap_boots_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
-armor_officer_roadmap_chest_02_01	basic	battle	1	0.8	0	40000	"expertise_damage_weapon_2=1,expertise_critical_pistol=1,expertise_action_weapon_2=1"				index_color_2=8			
-armor_officer_roadmap_leggings_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=8			
-armor_officer_roadmap_helmet_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=8			
-armor_officer_roadmap_bicep_l_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=135			
-armor_officer_roadmap_bicep_r_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=135			
-armor_officer_roadmap_bracer_l_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=8			
-armor_officer_roadmap_bracer_r_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=8			
-armor_officer_roadmap_gloves_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=8			
-armor_officer_roadmap_boots_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=8			
-armor_commando_roadmap_chest_02_01	basic	assault	1	0.8	0	40000	",expertise_healing_line_me_heal=1,combat_block_vlaue=25,combat_block_chance=1"				index_color_2=39			
-armor_commando_roadmap_leggings_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
-armor_commando_roadmap_helmet_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
-armor_commando_roadmap_bicep_l_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
-armor_commando_roadmap_bicep_r_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
-armor_commando_roadmap_bracer_l_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
-armor_commando_roadmap_bracer_r_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
-armor_commando_roadmap_gloves_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
-armor_commando_roadmap_boots_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
-armor_bounty_hunter_roadmap_chest_02_01	basic	assault	1	0.8	0	40000	"expertise_damage_weapon_0=1,expertise_critical_rifle=1,expertise_action_weapon_0=1"				index_color_2=43			
-armor_bounty_hunter_roadmap_leggings_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
-armor_bounty_hunter_roadmap_helmet_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
-armor_bounty_hunter_roadmap_bicep_l_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
-armor_bounty_hunter_roadmap_bicep_r_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
-armor_bounty_hunter_roadmap_bracer_l_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
-armor_bounty_hunter_roadmap_bracer_r_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
-armor_bounty_hunter_roadmap_gloves_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
-armor_bounty_hunter_roadmap_boots_02_01	basic	assault	1	0.8	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
-armor_medic_roadmap_chest_02_01	basic	recon	1	0.8	0	40000	"combat_dodge=1,combat_evasion_chance=1,expertise_healing_line_me_heal=1"							
-armor_medic_roadmap_leggings_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
-armor_medic_roadmap_helmet_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
-armor_medic_roadmap_bicep_l_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
-armor_medic_roadmap_bicep_r_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
-armor_medic_roadmap_bracer_l_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
-armor_medic_roadmap_bracer_r_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
-armor_medic_roadmap_gloves_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
-armor_medic_roadmap_boots_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
-armor_spy_roadmap_chest_02_01	basic	battle	1	0.8	0	40000	"camouflag=25,expertise_damage_weapon_1=1,expertise_critical_carbine=1"				"index_color_1=32,index_color_2=34"			
-armor_spy_roadmap_leggings_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
-armor_spy_roadmap_helmet_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
-armor_spy_roadmap_bicep_l_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
-armor_spy_roadmap_bicep_r_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
-armor_spy_roadmap_bracer_l_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
-armor_spy_roadmap_bracer_r_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
-armor_spy_roadmap_gloves_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
-armor_spy_roadmap_boots_02_01	basic	battle	1	0.8	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
-armor_ithorian_roadmap_chest_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
-armor_ithorian_roadmap_leggings_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
-armor_ithorian_roadmap_helmet_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
-armor_ithorian_roadmap_bicep_l_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
-armor_ithorian_roadmap_bicep_r_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
-armor_ithorian_roadmap_bracer_l_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
-armor_ithorian_roadmap_bracer_r_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
-armor_ithorian_roadmap_gloves_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
-armor_ithorian_roadmap_boots_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
-armor_ithorian_roadmap_chest_02_02	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
-armor_ithorian_roadmap_leggings_02_02	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
-armor_ithorian_roadmap_helmet_02_02	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
-armor_ithorian_roadmap_bicep_l_02_02	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
-armor_ithorian_roadmap_bicep_r_02_02	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
-armor_ithorian_roadmap_bracer_l_02_02	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
-armor_ithorian_roadmap_bracer_r_02_02	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
-armor_ithorian_roadmap_gloves_02_02	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
-armor_ithorian_roadmap_boots_02_02	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
-armor_ithorian_roadmap_chest_02_03	basic	assault	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
-armor_ithorian_roadmap_leggings_02_03	basic	assault	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
-armor_ithorian_roadmap_helmet_02_03	basic	assault	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
-armor_ithorian_roadmap_bicep_l_02_03	basic	assault	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
-armor_ithorian_roadmap_bicep_r_02_03	basic	assault	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
-armor_ithorian_roadmap_bracer_l_02_03	basic	assault	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
-armor_ithorian_roadmap_bracer_r_02_03	basic	assault	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
-armor_ithorian_roadmap_gloves_02_03	basic	assault	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
-armor_ithorian_roadmap_boots_02_03	basic	assault	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
-armor_wookiee_roadmap_chest_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
-armor_wookiee_roadmap_leggings_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_bicep_l_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_bicep_r_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_bracer_l_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_bracer_r_02_01	basic	recon	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_chest_02_02	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_leggings_02_02	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_bicep_l_02_02	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_bicep_r_02_02	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_bracer_l_02_02	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_bracer_r_02_02	basic	battle	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_chest_02_03	basic	assault	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_leggings_02_03	basic	assault	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_bicep_l_02_03	basic	assault	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_bicep_r_02_03	basic	assault	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_bracer_l_02_03	basic	assault	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
-armor_wookiee_roadmap_bracer_r_02_03	basic	assault	1	0.8	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_bone_chest_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_bone_leggings_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_bone_helmet_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_bone_bicep_l_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_bone_bicep_r_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_bone_bracer_l_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_bone_bracer_r_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_bone_gloves_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_bone_boots_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_smuggler_roadmap_chest_02_01	advanced	recon	1	0.82	0	40000	"expertise_damage_weapon_2=1,expertise_critical_pistol=1,expertise_action_weapon_2=1"							
+armor_smuggler_roadmap_leggings_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
+armor_smuggler_roadmap_helmet_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
+armor_smuggler_roadmap_bicep_l_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
+armor_smuggler_roadmap_bicep_r_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
+armor_smuggler_roadmap_bracer_l_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
+armor_smuggler_roadmap_bracer_r_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
+armor_smuggler_roadmap_gloves_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
+armor_smuggler_roadmap_boots_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"							
+armor_officer_roadmap_chest_02_01	advanced	battle	1	0.82	0	40000	"expertise_damage_weapon_2=1,expertise_critical_pistol=1,expertise_action_weapon_2=1"				index_color_2=8			
+armor_officer_roadmap_leggings_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=8			
+armor_officer_roadmap_helmet_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=8			
+armor_officer_roadmap_bicep_l_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=135			
+armor_officer_roadmap_bicep_r_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=135			
+armor_officer_roadmap_bracer_l_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=8			
+armor_officer_roadmap_bracer_r_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=8			
+armor_officer_roadmap_gloves_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=8			
+armor_officer_roadmap_boots_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,agility_modified=25"				index_color_2=8			
+armor_commando_roadmap_chest_02_01	advanced	assault	1	0.82	0	40000	",expertise_healing_line_me_heal=1,combat_block_vlaue=25,combat_block_chance=1"				index_color_2=39			
+armor_commando_roadmap_leggings_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
+armor_commando_roadmap_helmet_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
+armor_commando_roadmap_bicep_l_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
+armor_commando_roadmap_bicep_r_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
+armor_commando_roadmap_bracer_l_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
+armor_commando_roadmap_bracer_r_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
+armor_commando_roadmap_gloves_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
+armor_commando_roadmap_boots_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,combat_block_value=25,strength_modified=25"				index_color_2=39			
+armor_bounty_hunter_roadmap_chest_02_01	advanced	assault	1	0.82	0	40000	"expertise_damage_weapon_0=1,expertise_critical_rifle=1,expertise_action_weapon_0=1"				index_color_2=43			
+armor_bounty_hunter_roadmap_leggings_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
+armor_bounty_hunter_roadmap_helmet_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
+armor_bounty_hunter_roadmap_bicep_l_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
+armor_bounty_hunter_roadmap_bicep_r_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
+armor_bounty_hunter_roadmap_bracer_l_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
+armor_bounty_hunter_roadmap_bracer_r_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
+armor_bounty_hunter_roadmap_gloves_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
+armor_bounty_hunter_roadmap_boots_02_01	advanced	assault	1	0.82	0	40000	"constitution_modified=25,precision_modified=25,luck_modified=25"				index_color_2=43			
+armor_medic_roadmap_chest_02_01	advanced	recon	1	0.82	0	40000	"combat_dodge=1,combat_evasion_chance=1,expertise_healing_line_me_heal=1"							
+armor_medic_roadmap_leggings_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
+armor_medic_roadmap_helmet_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
+armor_medic_roadmap_bicep_l_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
+armor_medic_roadmap_bicep_r_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
+armor_medic_roadmap_bracer_l_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
+armor_medic_roadmap_bracer_r_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
+armor_medic_roadmap_gloves_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
+armor_medic_roadmap_boots_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
+armor_spy_roadmap_chest_02_01	advanced	battle	1	0.82	0	40000	"camouflag=25,expertise_damage_weapon_1=1,expertise_critical_carbine=1"				"index_color_1=32,index_color_2=34"			
+armor_spy_roadmap_leggings_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
+armor_spy_roadmap_helmet_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
+armor_spy_roadmap_bicep_l_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
+armor_spy_roadmap_bicep_r_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
+armor_spy_roadmap_bracer_l_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
+armor_spy_roadmap_bracer_r_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
+armor_spy_roadmap_gloves_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
+armor_spy_roadmap_boots_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
+armor_ithorian_roadmap_chest_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
+armor_ithorian_roadmap_leggings_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
+armor_ithorian_roadmap_helmet_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
+armor_ithorian_roadmap_bicep_l_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
+armor_ithorian_roadmap_bicep_r_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
+armor_ithorian_roadmap_bracer_l_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
+armor_ithorian_roadmap_bracer_r_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
+armor_ithorian_roadmap_gloves_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
+armor_ithorian_roadmap_boots_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=6			
+armor_ithorian_roadmap_chest_02_02	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
+armor_ithorian_roadmap_leggings_02_02	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
+armor_ithorian_roadmap_helmet_02_02	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
+armor_ithorian_roadmap_bicep_l_02_02	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
+armor_ithorian_roadmap_bicep_r_02_02	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
+armor_ithorian_roadmap_bracer_l_02_02	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
+armor_ithorian_roadmap_bracer_r_02_02	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
+armor_ithorian_roadmap_gloves_02_02	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
+armor_ithorian_roadmap_boots_02_02	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				index_color_1=0			
+armor_ithorian_roadmap_chest_02_03	advanced	assault	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
+armor_ithorian_roadmap_leggings_02_03	advanced	assault	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
+armor_ithorian_roadmap_helmet_02_03	advanced	assault	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
+armor_ithorian_roadmap_bicep_l_02_03	advanced	assault	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
+armor_ithorian_roadmap_bicep_r_02_03	advanced	assault	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
+armor_ithorian_roadmap_bracer_l_02_03	advanced	assault	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
+armor_ithorian_roadmap_bracer_r_02_03	advanced	assault	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
+armor_ithorian_roadmap_gloves_02_03	advanced	assault	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
+armor_ithorian_roadmap_boots_02_03	advanced	assault	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
+armor_wookiee_roadmap_chest_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"				"index_color_1=0,index_color_2=34"			
+armor_wookiee_roadmap_leggings_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_bicep_l_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_bicep_r_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_bracer_l_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_bracer_r_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_chest_02_02	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_leggings_02_02	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_bicep_l_02_02	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_bicep_r_02_02	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_bracer_l_02_02	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_bracer_r_02_02	advanced	battle	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_chest_02_03	advanced	assault	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_leggings_02_03	advanced	assault	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_bicep_l_02_03	advanced	assault	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_bicep_r_02_03	advanced	assault	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_bracer_l_02_03	advanced	assault	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
+armor_wookiee_roadmap_bracer_r_02_03	advanced	assault	1	0.82	0	40000	"constitution_modified=25,luck_modified=25,agility_modified=25"							
 armor_tow_helmet_acc_assault_02_01	advanced	assault	1	0.65	0	40000					index_color_2=38	towHelmetAccuracy		
 armor_tow_helmet_acc_battle_02_01	advanced	battle	1	0.65	0	40000					"index_color_1=103,index_color_2=103"	towHelmetAccuracy		
 armor_tow_helmet_acc_recon_02_01	advanced	recon	1	0.65	0	40000					index_color_1=94	towHelmetAccuracy		
