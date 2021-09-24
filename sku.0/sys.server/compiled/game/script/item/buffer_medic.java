@@ -3,8 +3,8 @@ package script.item;
 import script.*;
 import script.library.buff;
 
-public class buffer extends script.base_script {
-    public buffer() {
+public class buffer_medic extends script.base_script {
+    public buffer_medic() {
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException {
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("sui", "apply_medic_buffs"));

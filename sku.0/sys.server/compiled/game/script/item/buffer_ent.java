@@ -3,9 +3,9 @@ package script.item;
 import script.*;
 import script.library.buff;
 
-public class buffer extends script.base_script {
+public class buffer_ent extends script.base_script {
 
-    public buffer() {
+    public buffer_ent() {
     }
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException {
