@@ -3,6 +3,7 @@ package script.cureward;
 import script.base_script;
 import script.library.static_item;
 import script.obj_id;
+import script.library.utils;
 
 public class cureward extends script.base_script {
     private static final int DAYS_ON_LAUNCH = 6086;
@@ -53,6 +54,15 @@ public class cureward extends script.base_script {
         return SCRIPT_CONTINUE;
     }
 
+    private static final int VET_TOKEN_BONUS = utils.getIntConfigSetting("GameServer", "veteranTokenBonus");
+
+    public static void giveVeteranRewardToken(obj_id player, int ammount) throws InterruptedException {
+        obj_id tatooine = getPlanetByName("tatooine");
+        String objVar = "vetTokenCD_" + getPlayerStationId(player);
+        showLootBox(player, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", player, ammount * VET_TOKEN_BONUS) });
+        setObjVar(tatooine, objVar, getCalendarTime());
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException {
         int birth = getPlayerBirthDate(self) - DAYS_ON_LAUNCH;
 
@@ -62,15 +72,13 @@ public class cureward extends script.base_script {
         if (birth <= 127 && !hasCommand(self, "veteranPlayerBuff"))
             grantCommand(self, "veteranPlayerBuff");
 
-		obj_id tatooine = getPlanetByName("tatooine");
-		String objVar = "vetTokenCD_" + getStationId(self);
-		if (!hasObjVar(tatooine, objVar)) {
-			showLootBox(self, obj_id{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self, 100) });
-			setObjVar(tatooine, objVar, getCalendarTime());
-		} else if (getCalendarTime() - getIntObjVar(tatooine, "vetTokenCD_" + getStationId(self)) >= 86400) {
-			showLootBox(self, obj_id{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self) });
-			setObjVar(tatooine, objVar, getCalendarTime());
-		}
+        obj_id tatooine = getPlanetByName("tatooine");
+        String objVar = "vetTokenCD_" + getPlayerStationId(self);
+        if (!hasObjVar(tatooine, objVar)) {
+            giveVeteranRewardToken(self, 100);
+        } else if (getCalendarTime() - getIntObjVar(tatooine, objVar) >= 86400) {
+            giveVeteranRewardToken(self, 1);
+        }
 
         for (int i = 1; i < REWARDS.length; i++)
             if (birth <= 7 * i)
