@@ -45,7 +45,7 @@ public class restuss_event extends script.base_script
         accountsInRestuss.add(stationId);
     }
     public static void removeAccountFromRestuss(int stationId) {
-        accountsInRestuss.remove(stationId);
+        accountsInRestuss.remove(new Integer(stationId));
     }
     public static boolean accountIsInRestuss(int stationId) {
         return accountsInRestuss.contains(stationId);

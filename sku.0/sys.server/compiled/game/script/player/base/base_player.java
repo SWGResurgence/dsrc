@@ -9886,31 +9886,15 @@ public class base_player extends script.base_script
         if (regionName.equals(restuss_event.PVP_REGION_NAME))
         {
             int stationId = getPlayerStationId(self);
-			if ((!factions.isImperial(self) && !factions.isRebel(self)) || !factions.isCovert(self) || getLevel(self) < 75 || restuss_event.accountIsInRestuss(stationId)) {
-            {
-                if (getLevel(self) < 75)
-                {
-                    sendSystemMessage(self, new string_id("gcw", "pvp_advanced_region_level_low"));
-                }
-                else 
-                {
-                    sendSystemMessage(self, new string_id("gcw", "pvp_advanced_region_not_allowed"));
-                }
-                int attempts = 0;
-                String enterAttempt = "enterRestussAttempt";
-                if (utils.hasScriptVar(self, enterAttempt))
-                {
-                    attempts = utils.getIntScriptVar(self, enterAttempt);
-                }
-                if (attempts > 5)
-                {
-                    utils.removeScriptVar(self, enterAttempt);
-                    warpPlayer(self, "rori", 5305, 80, 6188, null, 0, 0, 0);
-                    return SCRIPT_CONTINUE;
-                }
-                attempts++;
-                utils.setScriptVar(self, enterAttempt, attempts);
-                return SCRIPT_OVERRIDE;
+			if (getLevel(self) < 75) {
+                 endSystemMessage(self, new string_id("gcw", "pvp_advanced_region_level_low"));
+                 return SCRIPT_CONTINUE;
+            } else if (restuss_event.accountIsInRestuss(stationId)) {
+                sendSystemMessageTestingOnly(self, "You already have a character in Restuss");
+                return SCRIPT_CONTINUE;
+            } else if (!factions.isImperial(self) && !factions.isRebel(self)) || !factions.isCovert(self)) {
+                sendSystemMessage(self, new string_id("gcw", "pvp_advanced_region_not_allowed"));
+                return SCRIPT_CONTINUE;
             }
 			restuss_event.addAccountToRestuss(stationId);
             sendSystemMessage(self, new string_id("gcw", "pvp_advanced_region_entered"));
