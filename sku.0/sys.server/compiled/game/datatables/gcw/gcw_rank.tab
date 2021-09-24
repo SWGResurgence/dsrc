@@ -1,14 +1,14 @@
 Rank	MinRating	MaxRating	ImperialTitle	RebelTitle	RatingEarningCap	RatingDecayBalance	MaxRatingDecay	RatingDecayFloor	Comments
 i	i	i	s	s	i	i	i	i	c
 1	0	4999	imperial_private	rebel_private	20000	0	0	0	Rating Delta = (Rank Cap * (GCW Points / (GCW Points + Rank Cap))) - Decay
-2	5000	9999	imperial_lance_corporal	rebel_trooper	13500	0	0	0	(or equivalently)
-3	10000	14999	imperial_corporal	rebel_high_trooper	13000	0	0	0	Rating Delta = ((GCW Points * Rank Cap) / (GCW Points + Rank Cap)) - Decay
-4	15000	19999	imperial_sergeant	rebel_sergeant	11500	0	0	0	
-5	20000	24999	imperial_master_sergeant	rebel_senior_sergeant	11000	0	0	0	"if RatingDecayFloor is specified, the Rating cannot decay below the specified RatingDecayFloor value"
-6	25000	29999	imperial_sergeant_major	rebel_sergeant_major	10500	0	0	0	
-7	30000	34999	imperial_lieutenant	rebel_lieutenant	10000	682	500	29999	
-8	35000	39999	imperial_captain	rebel_captain	9500	686	500	0	
-9	40000	44999	imperial_major	rebel_major	9000	692	500	0	
-10	45000	49999	imperial_lieutenant_colonel	rebel_commander	8500	698	500	0	
-11	50000	54999	imperial_colonel	rebel_colonel	8000	706	500	0	
-12	55000	59999	imperial_general	rebel_general	7500	714	500	0	
+2	2500	9999	imperial_lance_corporal	rebel_trooper	13500	0	0	0	(or equivalently)
+3	5000	14999	imperial_corporal	rebel_high_trooper	13000	0	0	0	Rating Delta = ((GCW Points * Rank Cap) / (GCW Points + Rank Cap)) - Decay
+4	7500	19999	imperial_sergeant	rebel_sergeant	11500	0	0	0	
+5	10000	24999	imperial_master_sergeant	rebel_senior_sergeant	11000	0	0	0	"if RatingDecayFloor is specified, the Rating cannot decay below the specified RatingDecayFloor value"
+6	12500	29999	imperial_sergeant_major	rebel_sergeant_major	10500	0	0	0	
+7	15000	34999	imperial_lieutenant	rebel_lieutenant	10000	682	500	29999	
+8	17500	39999	imperial_captain	rebel_captain	9500	686	500	0	
+9	20000	44999	imperial_major	rebel_major	9000	692	500	0	
+10	22500	49999	imperial_lieutenant_colonel	rebel_commander	8500	698	500	0	
+11	25000	54999	imperial_colonel	rebel_colonel	8000	706	500	0	
+12	27500	59999	imperial_general	rebel_general	7500	714	500	0	
