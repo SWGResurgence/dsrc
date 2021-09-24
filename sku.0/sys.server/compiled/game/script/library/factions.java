@@ -1510,7 +1510,7 @@ public class factions extends script.base_script
                 int now = getGameTime();
                 int lastFactionResignedTime = getIntObjVar(player, "lastFactionResignedTime");
                 int interval = now - lastFactionResignedTime;
-                int minIntervalToJoin = 60 * 60 * 24 * 5;
+                int minIntervalToJoin = 60 * 60 * 24 * 2;
                 return interval < minIntervalToJoin;
             }
         }
