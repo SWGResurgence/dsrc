@@ -2263,7 +2263,7 @@ item_off_temp_stimpack_02_02			int:healing.power=2485,int:healing.combat_level_r
 item_off_temp_stimpack_02_03			int:healing.power=3465,int:healing.combat_level_required=48								
 item_off_temp_stimpack_02_04			int:healing.power=4850,int:healing.combat_level_required=62	index_color_0=0,index_color_1=52							
 item_off_temp_stimpack_02_05			int:healing.power=6200,int:healing.combat_level_required=72	index_color_0=0,index_color_1=60							
-item_off_temp_stimpack_02_06			int:healing.power=7500,int:healing.combat_level_required=86	index_color_0=0,index_color_1=2							
+item_off_temp_stimpack_02_06			int:healing.power=7500,int:healing.combat_level_required=5	index_color_0=0,index_color_1=2							
 item_off_temp_tactical_buff_02_01				index_color_0=0,index_color_1=45	of_tactical_drop_1	short_reuse_4	5			appearance/pt_heal_health_buff_2.prt	
 item_off_temp_tactical_buff_02_02				index_color_0=0,index_color_1=7	of_tactical_drop_2	short_reuse_5	5			appearance/pt_heal_health_buff_2.prt	
 item_off_temp_tactical_buff_02_03				index_color_0=0,index_color_1=15	of_tactical_drop_3	short_reuse_6	5			appearance/pt_heal_health_buff_2.prt	
