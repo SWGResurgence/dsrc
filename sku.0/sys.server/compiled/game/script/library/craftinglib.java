@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class craftinglib extends script.base_script
 {
-    public craftinglib()
-    {
-    }
     public static final String VERSION = "v0.00.00";
     public static final float COMPLEXITY_INCREMENT_MOD = 3.0f;
     public static final float RESOURCE_NOT_USED = -9999;
@@ -1147,7 +1144,7 @@ public class craftinglib extends script.base_script
         }
         float cityRollAdjust = 1.0f;
         int city_id = city.checkCity(player, false);
-        if (city_id > 0 && (city.cityHasSpec(city_id, city.SF_SPEC_RESEARCH) || city.cityHasSpec(city_id, city.SF_SPEC_MASTER_MANUFACTURING)))
+        if (city_id > 0 && (getCityRank(city_id) == 3 || city.cityHasSpec(city_id, city.SF_SPEC_MASTER_MANUFACTURING)))
         {
             cityRollAdjust = 1.15f;
             sendSystemMessage(player, new string_id("city/city", "research_center_message"));
