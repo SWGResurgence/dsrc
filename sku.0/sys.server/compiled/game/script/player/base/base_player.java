@@ -9885,7 +9885,8 @@ public class base_player extends script.base_script
         }
         if (regionName.equals(restuss_event.PVP_REGION_NAME))
         {
-            if ((!factions.isImperial(self) && !factions.isRebel(self)) || !factions.isCovert(self) || getLevel(self) < 75)
+            int stationId = getPlayerStationId(self);
+			if ((!factions.isImperial(self) && !factions.isRebel(self)) || !factions.isCovert(self) || getLevel(self) < 75 || pvp_region.accountIsInRestuss(stationId)) {
             {
                 if (getLevel(self) < 75)
                 {
@@ -9911,6 +9912,7 @@ public class base_player extends script.base_script
                 utils.setScriptVar(self, enterAttempt, attempts);
                 return SCRIPT_OVERRIDE;
             }
+			pvp_regionaddAccountToRestuss(stationId);
             sendSystemMessage(self, new string_id("gcw", "pvp_advanced_region_entered"));
             pvpMakeDeclared(self);
             utils.setScriptVar(self, factions.IN_ADHOC_PVP_AREA, true);
@@ -10110,6 +10112,7 @@ public class base_player extends script.base_script
             {
                 utils.removeScriptVar(self, factions.IN_ADHOC_PVP_AREA);
             }
+			pvp_region.removeAccountFromRestuss(getPlayerStationId));
             return SCRIPT_CONTINUE;
         }
         else if (regionName.equals("@dathomir_region_names:black_mesa"))
