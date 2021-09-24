@@ -15,16 +15,16 @@ public class ReferAFriend extends script.base_script {
     public int setReferrer(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
 		int stationIdSelf = getPlayerStationId(self);
         int stationIdTarget = getPlayerStationId(target);
-        if (stationIdSelf == stationIdTarget)) {
+        if (stationIdSelf == stationIdTarget) {
             sendSystemMessageTestingOnly(self, "You cannot refer yourself.");
             return SCRIPT_CONTINUE;
         }
-        obj_id tatooine = getPlanetByName("tatooine")
+        obj_id tatooine = getPlanetByName("tatooine");
         if (hasObjVar(tatooine, "raf.referred_" + stationIdSelf)) {
             sendSystemMessageTestingOnly(self, "You have already set another player as your referrer.");
             return SCRIPT_CONTINUE;
         }
-        if (hasObjVar(tatooine, "raf.referred_" + stationIdTarget) && getObjIdObjVar(tatooine, "raf.referred_" + stationIdTarget) == stationIdSelf) {
+        if (hasObjVar(tatooine, "raf.referred_" + stationIdTarget) && getIntObjVar(tatooine, "raf.referred_" + stationIdTarget) == stationIdSelf) {
             sendSystemMessageTestingOnly(self, "You cannot refer this friend because he is referred to you.");
             return SCRIPT_CONTINUE;
         }
