@@ -669,6 +669,10 @@ public class instance extends script.base_script
             case RESET_NONE:
             CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-resetType was RESET_NONE for player " + getFirstName(player) + "(" + player + "), doing nothing.");
 				return;
+			case RESET_6HR:
+				resetAt = getCalendarTime() + secondsUntilNextDailyTime(1, 0, 0);
+				CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-resetType was RESET_6HR, setting objvar " + PLAYER_INSTANCE + "." + instance_name + " to " + resetAt + "_" + instance_id + "_" + owner + "_" + start_time + " on player " + getFirstName(player) + "(" + player + ").");
+				break;
             case RESET_12HR:
                 resetAt = getCalendarTime() + secondsUntilNextDailyTime(3, 0, 0);
                 CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-resetType was RESET_12HR, setting objvar " + PLAYER_INSTANCE + "." + instance_name + " to " + resetAt + "_" + instance_id + "_" + owner + "_" + start_time + " on player " + getFirstName(player) + "(" + player + ").");
