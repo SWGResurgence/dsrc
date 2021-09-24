@@ -1,4 +1,74 @@
 item	token20	limit	note
 s	i	i[0]	c
-object/tangible/veteran_reward/harvester.iff	3	Self Powered Harvester Deed
-object/tangible/veteran_reward/resource.iff	6	A Crate of Free Resources
+object/tangible/veteran_reward/resource.iff	30		A Crate of Free Resources
+object/tangible/veteran_reward/frn_vet_fireplace.iff	24		A Fireplace
+object/tangible/veteran_reward/frn_vet_atat_toy.iff	36		AT-AT Miniature Replica
+object/tangible/veteran_reward/frn_vet_boba_toy.iff	36		Boba Fett Figurine
+object/tangible/veteran_reward/city_flag_kit.iff	54		City Banner Kit
+object/tangible/veteran_reward/data_terminal_s3.iff	3		Control Array
+object/tangible/veteran_reward/frn_vet_cu_pa_toy.iff	15		Cu-pa Miniature Replica
+object/tangible/veteran_reward/frn_tech_console_sectional_a.iff	12		Database Input Terminal
+item_vet_reward_72month_darth_maul	72		Darth Maul Statue
+object/tangible/veteran_reward/frn_vet_holo_darth_vader.iff	42		Darth Vader Hologram
+item_vet_66_month_jedi_temple_burning	66		Death - Destroyed Jedi Temple Miniature
+object/tangible/veteran_reward/frn_vet_holo_deathstar.iff	24		Death Star Hologram
+object/tangible/veteran_reward/frn_vet_dewback_toy.iff	27		Dewback Miniature Replica
+object/tangible/veteran_reward/frn_vet_emp_chair.iff	30		Emperor's Chair
+object/tangible/veteran_reward/frn_vet_palpatine_statue.iff	63		Empire Day Emperor's Statue
+item_vet_reward_75month_houseplant_02	75		Exotic Plant
+object/tangible/veteran_reward/structure_storage_increase_deed.iff	39	5	Extra Inventory Deed
+object/tangible/veteran_reward/frn_vet_display_stand.iff	9		Figurine Display Stand
+item_vet_reward_78month_ttgm_itt	78		Flight of the Veteran
+object/tangible/veteran_reward/vr_gacklebat_deed.iff	48	5	Gackle Bat Familiar
+item_vet_reward_greeter_gamorrean	69	5	Gamorrean Greeter
+object/tangible/veteran_reward/frn_vet_carbonite_geonosian.iff	51		Geonosian in Carbonite
+object/tangible/veteran_reward/frn_vet_carbonite_gungan.iff	51		Gungan in Carbonite
+object/tangible/veteran_reward/frn_tech_console_sectional_d.iff	12		Holonet Databank
+object/tangible/veteran_reward/data_terminal_s1.iff	3		Holonet Terminal
+object/tangible/veteran_reward/data_terminal_s4.iff	3		Holonet Tracking Console
+item_vet_homing_beacon_03_01	57		Homing Beacon
+item_deed_hover_chair_06_01	60	5	Hover Chair
+object/tangible/veteran_reward/frn_vet_houseplant.iff	9		Houseplant
+object/tangible/veteran_reward/frn_vet_holo_imperial_guard.iff	15		Imperial Guard Hologram
+object/tangible/veteran_reward/frn_vet_rug_imperial.iff	18		Imperial House Rug
+object/tangible/veteran_reward/frn_vet_jabba_toy.iff	12		Jabba the Hutt Miniature Replica
+object/tangible/veteran_reward/frn_vet_holo_jawa.iff	33		Jawa Hologram
+object/tangible/veteran_reward/frn_vet_holo_starfighter.iff	21		Jedi Starfigher Hologram
+item_vet_66_month_jedi_temple	66		Life - Jedi Temple Miniature
+object/tangible/veteran_reward/frn_vet_holo_luke_skywalker.iff	42		Luke Skywalker Hologram
+item_vet_reward_72month_mace_windu	72		Mace Windu Statue
+object/tangible/veteran_reward/frn_tech_console_sectional_c.iff	12		Main Systems Databank
+object/tangible/veteran_reward/frn_vet_salacious_crumb_toy.iff	45		Miniature Salacious Crumb Replica
+object/tangible/veteran_reward/frn_vet_tusken_raider_toy.iff	45		Miniature Tusken Raider Replica
+object/tangible/veteran_reward/vr_mouse_droid_deed.iff	48	5	Mouse Droid Familiar
+object/tangible/veteran_reward/vr_mynock_deed.iff	48	5	Mynock Familiar
+item_vet_reward_lockout_remover	81		Neural Recon Network Terminal
+object/tangible/veteran_reward/frn_vet_podracer_statue.iff	54		Podracer Statue
+object/tangible/veteran_reward/frn_vet_holo_leia.iff	27		Princess Leia Hologram
+object/tangible/veteran_reward/frn_vet_protocol_droid_toy.iff	3		Protocol Droid Minature Replica
+object/tangible/veteran_reward/frn_vet_r2_toy.iff	3		R2 Droid Miniature Replica
+object/tangible/veteran_reward/frn_vet_rancor_toy.iff	33		Rancor Miniature Replica
+object/tangible/veteran_reward/frn_vet_rug_rebel.iff	18		Rebel House Rug
+object/tangible/veteran_reward/frn_yoda_fountain.iff	63		Remembrance Day Yoda Fountain
+vet_reward_resource_crate	50		Resource Supply Generator
+vet_reward_respec_reset	174		Respec Reset Device
+object/tangible/veteran_reward/respec_voucher_deed.iff	78		Respec Voucher
+object/tangible/veteran_reward/frn_vet_holo_sandcrawler.iff	21		Sand Crawler Hologram
+object/tangible/veteran_reward/harvester.iff	15		Self Powered Harvester Deed
+item_vet_reward_sd_console_02	84		Star Destroyer System Console
+item_vet_reward_sd_console_01	84		Star Destroyer Console Row
+object/tangible/veteran_reward/frn_vet_stormtrooper_toy.iff	12		Stormtrooper Minature Replica
+st_cn_vet_reward_super_battle_droid_boss	54		Storyteller Token for B2-X Super Battle Droid
+st_cn_vet_reward_dark_jedi_boss	57		Storyteller Token for Dark Jedi Forcemaster
+st_cn_vet_reward_nightsister_boss	57		Storyteller Token for Nightsister Bloodwitch
+st_cn_vet_reward_rebel_commando_boss	54		Storyteller Token for Rebel Commando Vindicator
+st_cn_vet_reward_stormtrooper_boss	54	Storyteller Token for Stormtrooper Veteran
+st_cn_vet_reward_tusken_boss	57		Storyteller Token for Tusken Raider Dreadlord
+object/tangible/veteran_reward/frn_tech_console_sectional_b.iff	12		System Readout Terminal
+object/tangible/veteran_reward/frn_vet_tie_fighter_toy.iff	6		TIE Fighter Miniature Replica
+object/tangible/veteran_reward/data_terminal_s2.iff	3		Translator Terminal
+object/tangible/veteran_reward/frn_vet_carbonite_ugnaught.iff	51		Ugnaught in Carbonite
+object/tangible/veteran_reward/frn_vet_x_wing_toy.iff	6		X-wing Miniature Replica
+object/tangible/veteran_reward/frn_vet_holo_yoda.iff	30		Yoda Hologram
+object/tangible/veteran_reward/frn_couch_falcon_section_s01.iff	6		YT-1300 Modular Seating
+object/tangible/veteran_reward/frn_couch_falcon_corner_s01.iff	6		YT-1300 Passenger Lounge
