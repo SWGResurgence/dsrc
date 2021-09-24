@@ -3,7 +3,6 @@ package script.player.base;
 import script.*;
 import script.library.*;
 
-import script.cureward.cureward;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
@@ -9616,18 +9615,6 @@ public class base_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-	obj_id tatooine = getPlanetByName("tatooine");
-        String objVar = "vetTokenCD_" + getPlayerStationId(self);
-        int timeLeft = getIntObjVar(tatooine, objVar) + 86400 - getCalendarTime();
-
-        if (timeLeft > 0) {
-            prose_package pp = new prose_package();
-            pp.stringId = new string_id("veteran", "time_left");
-            pp.digitInteger = timeLeft;
-            sendSystemMessageProse(self, pp);
-        } else {
-            cureward.giveVeteranRewardToken(self, 1);
-            setObjVar(tatooine, objVar, getCalendarTime());
     public int cmdListVeteranRewards(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards")))
@@ -11333,9 +11320,20 @@ public class base_player extends script.base_script
         obj_id killer = utils.getObjIdScriptVar(self, "setbounty.killer");
         utils.removeScriptVar(self, "setbounty.killer");
         int amount = utils.stringToInt(sui.getInputBoxText(params));
-        if (amount < 1)
+        if (amount < 0)
         {
             sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_invalid_number"));
+            bounty_hunter.showSetBountySUI(self, killer);
+            return SCRIPT_CONTINUE;
+        }
+		if (amount > bounty_hunter.MAX_BOUNTY_SET)
+        {
+            sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_cap"));
+            amount = bounty_hunter.MAX_BOUNTY_SET;
+        }
+        if (amount < bounty_hunter.MIN_BOUNTY_SET)
+        {
+            sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_too_little"));
             bounty_hunter.showSetBountySUI(self, killer);
             return SCRIPT_CONTINUE;
         }
@@ -11343,6 +11341,15 @@ public class base_player extends script.base_script
         {
             int bounty = getIntObjVar(killer, "bounty.amount");
         }
+		if (bounty >= bounty_hunter.MAX_BOUNTY)
+            {
+                sendSystemMessage(self, new string_id("bounty_hunter", "max_bounty"));
+                return SCRIPT_CONTINUE;
+            }
+            else if ((bounty + amount) > bounty_hunter.MAX_BOUNTY)
+            {
+                amount = (bounty + amount) - bounty_hunter.MAX_BOUNTY;
+            }
         int total = getTotalMoney(self);
         if (amount > total)
         {
