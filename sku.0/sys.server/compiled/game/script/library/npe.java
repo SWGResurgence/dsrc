@@ -6,9 +6,6 @@ import java.util.HashSet;
 
 public class npe extends script.base_script
 {
-    public npe()
-    {
-    }
     public static final String SCRIPT_PUBLIC_TRAVEL = "npe.npe_instance_travel_player";
     public static final String SCRIPT_SPACE_TRAVEL = "npe.travel_player_space_dungeon_falcon";
     public static final String DUNGEON_PUBLIC_MANAGER_NAME = "npe_public_instances";
@@ -580,6 +577,14 @@ public class npe extends script.base_script
         if (utils.isProfession(player, utils.FORCE_SENSITIVE))
         {
             theSet.add(static_item.createNewItemFunction("item_npe_fs_robe_02_01", pInv));
+			theSet.add(static_item.createNewItemFunction("item_jedi_robe_light_04_01", pInv)); //Light Jedi Knight Robe
+			theSet.add(static_item.createNewItemFunction("item_jedi_robe_dark_04_01", pInv)); //Dark Jedi Knight Robe
+			theSet.add(static_item.createNewItemFunction("item_color_crystal_02_00", pInv));
+			theSet.add(static_item.createNewItemFunction("item_color_crystal_02_02", pInv));
+			theSet.add(static_item.createNewItemFunction("item_color_crystal_02_04", pInv));
+			theSet.add(static_item.createNewItemFunction("item_color_crystal_02_06", pInv));
+			theSet.add(static_item.createNewItemFunction("item_color_crystal_02_08", pInv));
+			theSet.add(static_item.createNewItemFunction("item_power_crystal_04_14", pInv));
         }
         else if (pSpecies == SPECIES_WOOKIEE)
         {
@@ -1175,6 +1180,9 @@ public class npe extends script.base_script
             questClearQuest(quest, player);
         }
     }
+	
+	// WEAPONS FOR NEW CHARACTERS //
+	
     public static obj_id[] giveProfessionWeapon(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
