@@ -65,7 +65,7 @@ public class cureward extends script.base_script {
 		obj_id tatooine = getPlanetByName("tatooine");
         String objVar = "vetTokenCD_" + getPlayerStationId(self);
         if (!hasObjVar(tatooine, objVar)) {
-            showLootBox(self, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self) });
+            showLootBox(self, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self, 500) });
         } else if (getCalendarTime() - getIntObjVar(tatooine, objVar) >= 86400) {
             showLootBox(self, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self) });
         }
