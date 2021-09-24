@@ -8,10 +8,8 @@ import java.util.Hashtable;
 import java.util.Vector;
 import script.base_script;
 
-import script.library.features;
 import script.library.static_item;
 import script.library.sui;
-import script.library.utils;
 
 public class ReferAFriend extends script.base_script {
     public int setReferrer(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
