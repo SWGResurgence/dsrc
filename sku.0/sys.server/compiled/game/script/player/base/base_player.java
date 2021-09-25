@@ -9577,13 +9577,13 @@ public class base_player extends script.base_script
     }
     public int cmdGetVeteranRewardTime(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-				obj_id tatooine = getPlanetByName("tatooine");
+				obj_id naboo = getPlanetByName("naboo");
         String objVar = "vetTokenCD_" + getPlayerStationId(self);
-		if (!hasObjVar(tatooine, objVar)) {
+		if (!hasObjVar(naboo, objVar)) {
 			cureward.giveVeteranRewardToken(self, 100);
 			return SCRIPT_CONTINUE;
 		}
-        int timeLeft = getIntObjVar(tatooine, objVar) + 86400 - getCalendarTime();
+        int timeLeft = getIntObjVar(naboo, objVar) + 86400 - getCalendarTime();
 
         if (timeLeft > 0) {
             prose_package pp = new prose_package();
