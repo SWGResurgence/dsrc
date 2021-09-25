@@ -1631,7 +1631,7 @@ public class base_player extends script.base_script
 		if (!utils.hasScriptVar(self, "performance.buildabuff.buffComponentKeys") && buff.hasBuff(self, "buildabuff_inspiration")) {
 			buff.removeBuff(self, "buildabuff_inspiration");
 		}
-        if (getLocation(self).area.equals("dungeon1")) {
+        if (getLocation(sekf).area.equals("dungeon1")) {
             if (trial.getTop(self) == self)
             {
                 warpPlayer(self, "tatooine", 0, 0, 0, null, 0, 0, 0, null, false);
