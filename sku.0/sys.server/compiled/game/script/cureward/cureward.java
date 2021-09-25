@@ -26,7 +26,9 @@ public class cureward extends script.base_script {
         "chapter11_granted",
         "chapter12_granted",
         "chapter13_granted",
-        "chapter14_granted"
+        "chapter14_granted",
+        "chapter15_granted",
+        "chapter16_granted"
     };
     private static final String[][] REWARDS = {
         new String[]{ "recapture_gift_chapter_11_hoth_hologram_02_01", "object/tangible/furniture/decorative/hologram_nebulon_frigate.iff" },
