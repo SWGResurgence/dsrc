@@ -1058,7 +1058,7 @@ public class gcw extends script.base_script
             totalDamage += utils.stringToInt(damageSplit[1]);
         }
         removeDayOldEntries(player);
-        for (obj_id attacker : attackerList) {
+        for (String attacker : attackerList) {
             String[] parseKiller = split(attacker, '-');
             obj_id killer = utils.stringToObjId(parseKiller[0]);
             float vLev = (float)getLevel(player);
@@ -1094,7 +1094,7 @@ public class gcw extends script.base_script
                     if (commCount > 0) {
                         commCount /= splitSize + 1;
                         static_item.createNewItemFunction("item_restuss_" + pFac.toLowerCase() + "_commendation_02_01", inventory, commCount);
-                        sendSystemMessageTestingOnly(killer, "You've recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + getName(player) + " in combat.");
+                        sendSystemMessageTestingOnly(killer, "You've recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + getPlayerName(victim) + " in combat.");
                     }
                     return;
                 }
