@@ -11284,7 +11284,7 @@ public class base_player extends script.base_script
         obj_id killer = utils.getObjIdScriptVar(self, "setbounty.killer");
         utils.removeScriptVar(self, "setbounty.killer");
         int amount = utils.stringToInt(sui.getInputBoxText(params));
-        if (amount < 0)
+        if (amount < 1)
         {
             sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_invalid_number"));
             bounty_hunter.showSetBountySUI(self, killer);
