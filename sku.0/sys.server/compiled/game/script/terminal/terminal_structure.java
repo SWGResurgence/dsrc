@@ -93,7 +93,7 @@ public class terminal_structure extends script.base_script
             blog("terminal_structure::OnObjectMenuRequest - you are admin");
             if (player_structure.isHarvester(structure) || player_structure.isGenerator(structure))
             {
-                if (!player_structure.isOwner(structure, player) && getPlayerStationId(player) != getPlayerStationId(getOwner(structure)))
+                if (!charactersAreSamePlayer(player, getOwner(structure)))
                 {
                     return SCRIPT_CONTINUE;
                 }
@@ -129,7 +129,8 @@ public class terminal_structure extends script.base_script
                 permissions_root = mi.addRootMenu(menu_info_types.SERVER_TERMINAL_PERMISSIONS, SID_TERMINAL_PERMISSIONS);
                 mi.addSubMenu(permissions_root, menu_info_types.SERVER_TERMINAL_PERMISSIONS_ADMIN, SID_TERMINAL_PERMISSIONS_ADMIN);
             }
-            if (template.indexOf("cityhall_") > -1)
+            //if ((template.contains("cityhall_")))
+			if (template.indexOf("cityhall_") > -1)
             {
                 return SCRIPT_CONTINUE;
             }
