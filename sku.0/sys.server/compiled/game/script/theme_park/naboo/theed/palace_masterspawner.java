@@ -7,9 +7,6 @@ import script.obj_id;
 
 public class palace_masterspawner extends script.base_script
 {
-    public palace_masterspawner()
-    {
-    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleDelayedImperialSpawn", null, 5, false);
@@ -21,6 +18,7 @@ public class palace_masterspawner extends script.base_script
         spawnLibrarian(self);
         spawnQueen(self);
         spawnComputer(self);
+		spawnOffice(self);
         return SCRIPT_CONTINUE;
     }
     public void spawnWarrenImperial(obj_id bldg) throws InterruptedException
@@ -62,4 +60,11 @@ public class palace_masterspawner extends script.base_script
         attachScript(computer, "conversation.rsf_computer");
         return;
     }
+	public void spawnOfficer(obj_id self) throws InterruptedException {
+		obj_id room = getCellId(self, "officer");
+		obj_id vendor = create.object("vet_reward_vendor", new location(-48.00f, 6.00f, 4158.00f));
+		setYaw(vendor, 90);
+		setCreatureStatic(vendor, true);
+		setInvulnerable(vendor, true);
+	}
 }
