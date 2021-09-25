@@ -21,25 +21,27 @@ public class instance_reset extends script.base_script
     public static final string_id SID_INSTANCE_GENERIC_ERROR = new string_id("spam", "instance_generic_error");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        (DeviceIsUsable(self))
+        if (DeviceIsUsable(self, player))
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_CONSUME_ITEM);
         }
         return SCRIPT_CONTINUE;
     }
-	private boolean DeviceIsUsable(obj_id self) throws InterruptedException {
+	private boolean deviceIsUsable(obj_id self, obj_id player) throws InterruptedException {
 		if (getTemplateName(self).equals("object/tangible/veteran_reward/data_terminal_s3.iff"))
             if (hasObjVar(player, "neural_cd")) {
-                int timeLeft = getIntObjVar(player, "neural_cd") + 172800 - getCalenderTime();
-                sendSystemMessageTestingOnly(player, "You must wait " + timeLeft + " seconds before using this item again.")
+                int timeLeft = getIntObjVar(player, "neural_cd") + 172800 - getCalendarTime();
+                sendSystemMessageTestingOnly(player, "You must wait " + timeLeft + " seconds before using this item again.");
+                return timeLeft <= 0;
+            } else {
+                return true;
             }
-                return  < ;
         return utils.isNestedWithinAPlayer(self);
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
-        if (item == menu_info_types.ITEM_USE && DeviceIsUsable(self))
+        if (item == menu_info_types.ITEM_USE && deviceIsUsable(self, player))
         {
             if (sui.hasPid(player, PID_NAME))
             {
@@ -114,7 +116,7 @@ public class instance_reset extends script.base_script
             utils.removeScriptVar(self, SCRIPT_VAR_INSTANCE_LIST);
             return SCRIPT_CONTINUE;
         }
-        if (!DeviceIsUsable(self))
+        if (!deviceIsUsable(self, player))
         {
             sui.removePid(player, PID_NAME);
             utils.removeScriptVar(self, SCRIPT_VAR_INSTANCE_LIST);
@@ -175,7 +177,7 @@ public class instance_reset extends script.base_script
             utils.removeScriptVar(self, SCRIPT_VAR_INSTANCE_LIST);
             return SCRIPT_CONTINUE;
         }
-        if (!DeviceIsUsable(self))
+        if (!deviceIsUsable(self, player))
         {
             sui.removePid(player, PID_NAME);
             utils.removeScriptVar(self, SCRIPT_VAR_INSTANCE_LIST);
