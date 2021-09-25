@@ -7,11 +7,24 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+import script.attribute;
+import script.dictionary;
+import script.location;
+import script.menu_info;
+import script.menu_info_data;
+import script.menu_info_types;
+import script.modifiable_int;
+import script.obj_id;
+import script.obj_var;
+import script.obj_var_list;
+import script.prose_package;
+import script.region;
+import script.script_entry;
+import script.string_id;
+import script.vector;
+
 public class base_player extends script.base_script
 {
-    public base_player()
-    {
-    }
     public static final int TIME_DEATH = 5;
     public static final float RANGE_COUP_DE_GRACE = 3.0f;
     public static final String JEDI_CLOAK_TEMPLATE = "object/tangible/wearable/robe/robe_s05.iff";
@@ -10762,7 +10775,7 @@ public class base_player extends script.base_script
     }
     public int OnGetStaticItemsAttributes(obj_id self, String staticItemName, String[] names, String[] attribs) throws InterruptedException
     {
-        if ((names == null) || (attribs == null) || (names.length != attribs.length))
+        if (names == null || attribs == null || names.length != attribs.length)
         {
             return SCRIPT_CONTINUE;
         }
