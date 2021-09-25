@@ -19,7 +19,7 @@ public class conversation extends script.base_script {
         }
         chat.chat(actor, target, pp, chat.ChatFlag_targetAndSourceGroup | chat.ChatFlag_skipTarget | chat.ChatFlag_skipSource);
     }
-	public static void npcConversationPhase(obj_id npc, obj_id player, String message, String[] string_responses, String conversationName, int phase, String c_stringFile) throws InterruptedException {
+	private static void npcConversationPhase(obj_id npc, obj_id player, String message, String[] string_responses, String conversationName, int phase, String c_stringFile) throws InterruptedException {
         string_id[] responses = new string_id[string_responses.length];
         for (int i = 0; i < responses.length; i++)
             responses[i] = new string_id(c_stringFile, string_responses[i]);
@@ -28,7 +28,7 @@ public class conversation extends script.base_script {
         npcSetConversationResponses(player, responses);
     }
 
-    public static void npcConversationPhase(obj_id npc, obj_id player, String message, String response, String conversationName, int phase, String c_stringFile) throws InterruptedException {
+    private static void npcConversationPhase(obj_id npc, obj_id player, String message, String response, String conversationName, int phase, String c_stringFile) throws InterruptedException {
         npcConversationPhase(npc, player, message, new String[]{ response }, conversationName, phase, c_stringFile);
     }
 }
