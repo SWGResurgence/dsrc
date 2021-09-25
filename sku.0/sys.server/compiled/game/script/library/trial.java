@@ -11,9 +11,6 @@ import java.util.Vector;
 
 public class trial extends script.base_script
 {
-    public trial()
-    {
-    }
     public static final String MESSAGE_SESSION = "messageTo.session";
     public static final String WP_OBJECT = "object/tangible/ground_spawning/patrol_waypoint.iff";
     public static final String PARENT = "parent";
