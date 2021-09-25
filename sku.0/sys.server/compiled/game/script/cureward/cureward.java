@@ -47,7 +47,9 @@ public class cureward extends script.base_script {
         new String[]{ "publish_gift_chapter_11_snow_machine_02_01" },
         new String[]{ "item_hologram_aotc_cybernetic_arm" },
         new String[]{ "item_publish_gift_update_14_comlink" },
-        new String[]{ "item_publish_gift_update_14_statuette" }
+        new String[]{ "item_publish_gift_update_14_statuette" },
+        new String[]{ "item_publish_gift_update_15" },
+        new String[]{ "item_publish_gift_update_16" }
     };
 
     public int OnAttach(obj_id self) throws InterruptedException {
