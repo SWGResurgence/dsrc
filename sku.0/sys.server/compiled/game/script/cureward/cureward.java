@@ -3,6 +3,7 @@ package script.cureward;
 import script.base_script;
 import script.library.static_item;
 import script.obj_id;
+import script.library.utils;
 
 public class cureward extends script.base_script {
     private static final int DAYS_ON_LAUNCH = 6086;
@@ -55,7 +56,7 @@ public class cureward extends script.base_script {
 
     private static final int VET_TOKEN_BONUS = utils.getIntConfigSetting("GameServer", "veteranTokenBonus");
 
-    public void giveVeteranRewardToken(obj_id player, int ammount) {
+    public static void giveVeteranRewardToken(obj_id player, int ammount) throws InterruptedException {
         obj_id tatooine = getPlanetByName("tatooine");
         String objVar = "vetTokenCD_" + getPlayerStationId(player);
         showLootBox(player, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", player, ammount * VET_TOKEN_BONUS) });

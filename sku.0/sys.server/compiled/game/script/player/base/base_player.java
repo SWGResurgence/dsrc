@@ -7,13 +7,10 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
-import script.cureward;
+import script.cureward.cureward;
 
 public class base_player extends script.base_script
 {
-    public base_player()
-    {
-    }
     public static final int TIME_DEATH = 5;
     public static final float RANGE_COUP_DE_GRACE = 3.0f;
     public static final String JEDI_CLOAK_TEMPLATE = "object/tangible/wearable/robe/robe_s05.iff";
