@@ -21,16 +21,19 @@ public class instance_reset extends script.base_script
     public static final string_id SID_INSTANCE_GENERIC_ERROR = new string_id("spam", "instance_generic_error");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        if (utils.isNestedWithinAPlayer(self))
+        (DeviceIsUsable(self))
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_CONSUME_ITEM);
         }
         return SCRIPT_CONTINUE;
     }
+	private boolean DeviceIsUsable(obj_id self) throws InterruptedException {
+    return utils.isNestedWithinAPlayer(self) || getTemplateName(self).equals("object/tangible/veteran_reward/data_terminal_s3.iff");
+	}
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
-        if (item == menu_info_types.ITEM_USE && utils.isNestedWithinAPlayer(self))
+        if (item == menu_info_types.ITEM_USE && DeviceIsUsable(self))
         {
             if (sui.hasPid(player, PID_NAME))
             {
@@ -105,7 +108,7 @@ public class instance_reset extends script.base_script
             utils.removeScriptVar(self, SCRIPT_VAR_INSTANCE_LIST);
             return SCRIPT_CONTINUE;
         }
-        if (!utils.isNestedWithin(self, player))
+        if (!DeviceIsUsable(self))
         {
             sui.removePid(player, PID_NAME);
             utils.removeScriptVar(self, SCRIPT_VAR_INSTANCE_LIST);
@@ -166,7 +169,7 @@ public class instance_reset extends script.base_script
             utils.removeScriptVar(self, SCRIPT_VAR_INSTANCE_LIST);
             return SCRIPT_CONTINUE;
         }
-        if (!utils.isNestedWithin(self, player))
+        if (!DeviceIsUsable(self))
         {
             sui.removePid(player, PID_NAME);
             utils.removeScriptVar(self, SCRIPT_VAR_INSTANCE_LIST);
@@ -204,7 +207,7 @@ public class instance_reset extends script.base_script
         prose.setStringId(pp, SID_INSTANCE_WAS_RESET);
         prose.setTU(pp, "@instance:" + instanceToRemove);
         sendSystemMessageProse(player, pp);
-				if (!getTemplateName(self).equals("object/tangible/veteran_reward/data_terminal_s3.iff"))
+		if (!getTemplateName(self).equals("object/tangible/veteran_reward/data_terminal_s3.iff"))
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
