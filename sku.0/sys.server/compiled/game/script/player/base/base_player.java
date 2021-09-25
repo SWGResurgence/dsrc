@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
-import script.cureward;
+import script.cureward.cureward;
 
 public class base_player extends script.base_script
 {
@@ -9580,7 +9580,7 @@ public class base_player extends script.base_script
             pp.digitInteger = timeLeft;
             sendSystemMessageProse(self, pp);
         } else {
-            cureward.giveVeteranRewardToken(1);
+            cureward.giveVeteranRewardToken(self, 1);
         }
         return SCRIPT_CONTINUE;
     }
