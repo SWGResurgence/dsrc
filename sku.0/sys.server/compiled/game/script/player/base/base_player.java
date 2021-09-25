@@ -6480,11 +6480,11 @@ public class base_player extends script.base_script
             skill.recalcPlayerPools(self, false);
         }
         // when we learn our first beast master skill, store the current expertise version we're learning from
-        if(skillName.equalsIgnoreCase("expertise_bm_incubation_base_1")) {
+        /* if(skillName.equalsIgnoreCase("expertise_bm_incubation_base_1")) {
             int row = dataTableSearchColumnForString("beast_master", "profession", respec.EXPERTISE_VERSION_TABLE);
             int bmExpertiseVersion = dataTableGetInt(respec.EXPERTISE_VERSION_TABLE, row, "version");
             setObjVar(self, respec.BEAST_MASTER_EXPERTISE_VERSION_OBJVAR, bmExpertiseVersion);
-        }
+        } */
         recomputeCommandSeries(self);
         beast_lib.verifyAndUpdateCalledBeastStats(self);
         trial.bumpSession(self, "displayDefensiveMods");
