@@ -9,21 +9,18 @@ import java.util.Vector;
 
 public class live_conversions extends script.base_script
 {
-    public live_conversions()
-    {
-    }
-    public static final int FLAG_ARRAY_SIZE = 2;
-    public static final int FLAG_MAX_BITS = FLAG_ARRAY_SIZE * 32;
-    public static final int FEMALE_PILOT_MEDAL_FLAG = 0;
-    public static final int NOT_USED = 1;
-    public static final int UNARMED_DAMAGE_SET = 2;
-    public static final int POLITICIAN_CONVERSION = 3;
-    public static final int ELDER_BUFF_GRANT = 4;
-    public static final int SKILL_VALIDATION = 5;
-    public static final int MASTER_BADGE_CORRECTIONS = 6;
-    public static final int ENT_TRADER_FREE_SKILL_FLAG = 7;
-    public static final int SKILL_VALIDATION_2 = 8;
-    public static final int FORCED_RESPEC_VERSION = 2;
+    public static final byte FLAG_ARRAY_SIZE = 2;
+    public static final byte FLAG_MAX_BITS = FLAG_ARRAY_SIZE * 32;
+    public static final byte FEMALE_PILOT_MEDAL_FLAG = 0;
+    public static final byte NOT_USED = 1;
+    public static final byte UNARMED_DAMAGE_SET = 2;
+    public static final byte POLITICIAN_CONVERSION = 3;
+    public static final byte ELDER_BUFF_GRANT = 4;
+    public static final byte SKILL_VALIDATION = 5;
+    public static final byte MASTER_BADGE_CORRECTIONS = 6;
+    public static final byte ENT_TRADER_FREE_SKILL_FLAG = 7;
+    public static final byte SKILL_VALIDATION_2 = 8;
+    public static final byte FORCED_RESPEC_VERSION = 2;
     public static final String VAR_FLAGS = "live_conversions";
     public static final string_id EXPERTISE_RESET_FROM_CHANGES = new string_id("spam", "expertise_reset_from_changes");
     public static final string_id JABBAS_COMLINK = new string_id("spam", "jabbas_comlink_system_message");
