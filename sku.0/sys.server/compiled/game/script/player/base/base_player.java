@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+import script.cureward;
+
 public class base_player extends script.base_script
 {
     public static final int TIME_DEATH = 5;
@@ -9568,9 +9570,9 @@ public class base_player extends script.base_script
     }
     public int cmdGetVeteranRewardTime(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        obj_id tatooine = getPlanetByName("tatooine");
+        obj_id naboo = getPlanetByName("naboo");
         String objVar = "vetTokenCD_" + getPlayerStationId(self);
-        int timeLeft = getIntObjVar(tatooine, objVar) + 86400 - getCalendarTime();
+        int timeLeft = getIntObjVar(naboo, objVar) + 86400 - getCalendarTime();
 
         if (timeLeft > 0) {
             prose_package pp = new prose_package();
@@ -9578,8 +9580,7 @@ public class base_player extends script.base_script
             pp.digitInteger = timeLeft;
             sendSystemMessageProse(self, pp);
         } else {
-            showLootBox(self, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self) });
-            setObjVar(tatooine, objVar, getCalendarTime());
+            cureward.giveVeteranRewardToken(1);
         }
         return SCRIPT_CONTINUE;
     }
