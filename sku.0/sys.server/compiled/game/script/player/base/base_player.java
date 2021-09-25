@@ -1301,29 +1301,6 @@ public class base_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public int OnLogin(obj_id self) throws InterruptedException
-    {
-        boolean ctsDisconnectRequested = false;
-        if (hasObjVar(self, "disableLoginCtsInProgress"))
-        {
-            int timeOut = getIntObjVar(self, "disableLoginCtsInProgress");
-            if (timeOut > getGameTime())
-            {
-                ctsDisconnectRequested = true;
-                messageTo(self, "disconnectPlayerCtsCompletedOrInProgress", null, 0.1f, false);
-                CustomerServiceLog("Login", "dropping character (" + self + ": " + getName(self) + ") because of CTS completed or in progress");
-            }
-            else 
-            {
-                removeObjVar(self, "disableLoginCtsInProgress");
-            }
-        }
-        if (!ctsDisconnectRequested && hasObjVar(self, "disableLoginCtsCompleted") && !isUsingAdminLogin(self))
-        {
-            ctsDisconnectRequested = true;
-            messageTo(self, "disconnectPlayerCtsCompletedOrInProgress", null, 0.1f, false);
-            CustomerServiceLog("Login", "dropping character (" + self + ": " + getName(self) + ") because of CTS completed or in progress");
-        }
         if (!utils.hasScriptVar(self, "galaxyMessage.showmessage"))
         {
             obj_id planetId = getPlanetByName("tatooine");
@@ -1341,7 +1318,7 @@ public class base_player extends script.base_script
                     sendConsoleMessage(self, strGalaxyMessage);
                 }
                 boolean warden = isWarden(self);
-                if (warden || (getGodLevel(self) >= 10))
+                if (warden || getGodLevel(self) >= 10)
                 {
                     String strGalaxyMessage = "\\#FF0000";
                     if (!warden)
@@ -1512,7 +1489,7 @@ public class base_player extends script.base_script
             }
         }
         meditation.endMeditation(self, false);
-        if (isIdValid(getGroupObject(self)) && (!hasScript(self, group.SCRIPT_GROUP_MEMBER)))
+        if (isIdValid(getGroupObject(self)) && !hasScript(self, group.SCRIPT_GROUP_MEMBER))
         {
             attachScript(self, group.SCRIPT_GROUP_MEMBER);
         }
@@ -9598,7 +9575,7 @@ public class base_player extends script.base_script
                 sendSystemMessageProse(self, pp);
             }
         }
-        else 
+        else
         {
             if (hasObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE))
             {
@@ -9608,7 +9585,7 @@ public class base_player extends script.base_script
                 pp.digitInteger = veteranTime;
                 sendSystemMessageProse(self, pp);
             }
-            else 
+            else
             {
                 sendSystemMessage(self, veteran_deprecated.SID_SYSTEM_INACTIVE);
             }
