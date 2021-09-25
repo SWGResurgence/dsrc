@@ -14,13 +14,14 @@ public class emperors_hand extends script.base_script
     {
         createTriggerVolume(VOLUME_NAME, 15.0f, true);
         messageTo(self, "setLoiter", null, 10.0f, false);
+		sendSystemMessagePlanetTestingOnly("ATTENTION RORI CIVILIANS: The Emperor's Hand has been located in the Restuss city ruins");
         return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume(VOLUME_NAME, 15.0f, true);
         messageTo(self, "setLoiter", null, 10.0f, false);
-		sendSystemMessagePlanet("ATTENTION RORI CIVILIANS: The Emperor's Hand has been located in the Restuss city ruins");
+		sendSystemMessagePlanetTestingOnly("ATTENTION RORI CIVILIANS: The Emperor's Hand has been located in the Restuss city ruins");
         return SCRIPT_CONTINUE;
     }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
@@ -37,7 +38,7 @@ public class emperors_hand extends script.base_script
                 detachScript(self, script);
             }
         }
-        sendSystemMessagePlanet("ATTENTION RORI CIVILIANS: The Emperor's Hand has been slain by " + getName(killer));
+        sendSystemMessagePlanetTestingOnly("ATTENTION RORI CIVILIANS: The Emperor's Hand has been slain by " + getName(killer));
 		return SCRIPT_CONTINUE;
     }
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
