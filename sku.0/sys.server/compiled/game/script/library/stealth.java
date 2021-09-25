@@ -2780,6 +2780,7 @@ public class stealth extends script.base_script
             decoyStealth(mobile);
         }
 			makeBeastInvisible(mobile);
+			makeBeastInvisible(mobile, effectName);
     }
     public static boolean canPerformCamouflageSelf(obj_id player) throws InterruptedException
     {
