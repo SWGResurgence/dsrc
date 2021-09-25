@@ -23,7 +23,6 @@ buddy_02_token	veteran_new:buddy_token	col_buddy_02_token	0	1		0
 buddy_02_holo	veteran_new:buddy_holo	item_auto_level_50_buddy_conversion	0	1		0	
 email_col_07	veteran_new:email_col_07	col_mail_opt_in_3_01	0	0		1	
 email_col_08	veteran_new:email_col_08	col_mail_opt_in_3_02	0	0		1	
-grievous_wheel_bike	veteran_new:grievous_wheel_bike	item_deed_grievous_wheel_bike	0	0		1	
 email_col_09	veteran_new:email_col_09	col_mail_opt_in_3_03	0	0		1	
 gcw_recapture_gift_01	veteran_new:gcw_recapture_gift_01	item_reward_recapture_gcw_imperial_painting_01	0	0		1	
 gcw_recapture_gift_02	veteran_new:gcw_recapture_gift_02	item_reward_recapture_gcw_rebel_painting_01	0	0		1	
