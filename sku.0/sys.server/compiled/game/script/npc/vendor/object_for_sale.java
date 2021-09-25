@@ -135,7 +135,7 @@ public class object_for_sale extends script.base_script
             obj_id naboo = getPlanetByName("naboo");
             int crc = getObjectTemplateCrc(getTemplateName(self));
             String objVar = "bought_" + crc + "_" + getPlayerStationId(player);
-            if (hasObjVar(naboo, objVar) {
+            if (hasObjVar(naboo, objVar)) {
                 sendSystemMessage(player, SID_LIMIT_REACHED);
                 return false;
             }
@@ -229,7 +229,7 @@ public class object_for_sale extends script.base_script
         obj_id purchasedItem = obj_id.NULL_ID;
         String myName = "";
 		if (!confirmLimit(self, player)) {
-                return SCRIPT_OVERRIDE;
+			return;
         }
         if (static_item.isStaticItem(self))
         {
