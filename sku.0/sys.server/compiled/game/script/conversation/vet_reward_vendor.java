@@ -69,12 +69,12 @@ public class vet_reward_vendor extends script.base_script {
         }
         if (vet_reward_vendor_condition__defaultCondition(player, self))
         {
-            rebel_emperorsday_vendor_action_showTokenVendorUI(player, self);
+            vet_reward_vendor_action_showTokenVendorUI(player, self);
             string_id message = new string_id(c_stringFile, "s_6");
             chat.chat(self, player, message);
             return SCRIPT_CONTINUE;
         }
-        chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
+        chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
 
