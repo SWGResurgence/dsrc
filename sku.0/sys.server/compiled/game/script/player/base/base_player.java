@@ -3571,13 +3571,13 @@ public class base_player extends script.base_script
     }
     public int cmdTip(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if ((params == null) || (params.equals("")))
+        if (params == null || params.equals(""))
         {
             showTipSyntax(self);
             return SCRIPT_CONTINUE;
         }
         location here = getLocation(self);
-        if (((here.area)).equals("tutorial"))
+        if ((here.area).equals("tutorial"))
         {
             sendSystemMessageTestingOnly(self, "You cannot use this command from within the tutorial.");
             return SCRIPT_CONTINUE;
@@ -4274,7 +4274,7 @@ public class base_player extends script.base_script
                 if (hasObjVar(self, pclib.VAR_CONSENT_TO_ID))
                 {
                     obj_id[] consentTo = getObjIdArrayObjVar(self, pclib.VAR_CONSENT_TO_ID);
-                    if ((consentTo == null) || (consentTo.length == 0))
+                    if (consentTo == null || consentTo.length == 0)
                     {
                         sendSystemMessage(self, SID_CONSENT_TO_EMPTY);
                         return SCRIPT_OVERRIDE;
