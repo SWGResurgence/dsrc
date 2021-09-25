@@ -47,6 +47,6 @@ public class heroic_grant extends script.base_script {
 				}
 				break;
 		}
-		return SCRIPT_CONTINUEl
+		return SCRIPT_CONTINUE;
 	}
 }
