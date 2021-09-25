@@ -8,7 +8,6 @@ import script.library.ai_lib;
 import script.library.chat;
 import script.library.conversation;
 import script.library.factions;
-import script.library.prose;
 import script.library.utils;
 
 public class vet_reward_vendor extends script.base_script {
@@ -63,41 +62,28 @@ public class vet_reward_vendor extends script.base_script {
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
 
-    public int vet_reward_vendor_handleBranch1(obj_id self, obj_id player, string_id response) throws InterruptedException {
-        if (response.equals("s_2")) {
-            vet_reward_vendor_action_showTokenVendorUI(player, self);
-            chat.chat(self, player, new string_id(c_stringFile, "s_3"));
-        } else if (response.equals("s_4")) {
-            chat.chat(self, player, new string_id(c_stringFile, "s_5"));
-        } else if (response.equals("s_6")) {
-            chat.chat(self, player, new string_id(c_stringFile, "s_7"));
-        }
-        npcEndConversation(player);
-        return SCRIPT_CONTINUE;
-    }
-
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException {
-        if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player)) {
+        if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
+        {
             return SCRIPT_OVERRIDE;
         }
-        if (vet_reward_vendor_condition__defaultCondition(player, self)) {
-            prose_package pp = new prose_package();
-            pp = prose.setStringId(pp, new string_id(c_stringFile, "s_1"));
-            pp.target.set(player);
-            npcStartConversation(player, self, "vet_reward_vendor", null, pp, new string_id[]{new string_id(c_stringFile, "s_2"), new string_id(c_stringFile, "s_4"), new string_id(c_stringFile, "s_6")});
+        if (vet_reward_vendor_condition__defaultCondition(player, self))
+        {
+            rebel_emperorsday_vendor_action_showTokenVendorUI(player, self);
+            string_id message = new string_id(c_stringFile, "s_6");
+            chat.chat(self, player, message);
             return SCRIPT_CONTINUE;
         }
-        chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
+        chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
         return SCRIPT_CONTINUE;
     }
 
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException {
-        if (!conversationId.equals("vet_reward_vendor")) {
+        if (!conversationId.equals("vet_reward_vendor"))
+        {
             return SCRIPT_CONTINUE;
         }
-        if (vet_reward_vendor_handleBranch1(self, player, response) == SCRIPT_CONTINUE) {
-            return SCRIPT_CONTINUE;
-        }
+        int branchId = utils.getIntScriptVar(player, "conversation.vet_reward_vendor.branchId");
         chat.chat(self, "Error:  Fell through all branches and responses for OnNpcConversationResponse.");
         utils.removeScriptVar(player, "conversation.vet_reward_vendor.branchId");
         return SCRIPT_CONTINUE;
