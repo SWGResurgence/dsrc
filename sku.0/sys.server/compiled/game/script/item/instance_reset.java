@@ -21,7 +21,7 @@ public class instance_reset extends script.base_script
     public static final string_id SID_INSTANCE_GENERIC_ERROR = new string_id("spam", "instance_generic_error");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        if (DeviceIsUsable(self, player))
+        if (deviceIsUsable(self, player))
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_CONSUME_ITEM);
         }
