@@ -96,30 +96,37 @@ public class veteran_deprecated extends script.base_script
     public static final string_id SID_UNKNOWN = new string_id(VETERAN_STRING_TABLE, "unknown");
     public static void updateVeteranTime(obj_id player) throws InterruptedException
     {
-        if (utils.hasScriptVar(player, SCRIPTVAR_VETERAN_LOGGED_IN) || !isIdValid(player))
+        if (!isIdValid(player)) {
+			return;
+		}
+		if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards"))) {
+			return;
+		}
+		if ((player.getScriptVars()).hasKey(SCRIPTVAR_VETERAN_LOGGED_IN))
         {
             return;
         }
-        utils.setScriptVar(player, SCRIPTVAR_VETERAN_LOGGED_IN, true);
+        (player.getScriptVars()).put(SCRIPTVAR_VETERAN_LOGGED_IN, true);
         dictionary timeData = getAccountTimeData(player);
 		
         if (timeData == null)
         {
             return;
         }
-        int totalEntitledTime = timeData.getInt("total_entitled_time");
-		setObjVar(player, OBJVAR_TIME_ACTIVE, daysOld);
+        (player.getScriptVars()).put(SCRIPTVAR_VETERAN_LOGGED_IN, true);
         if (!hasObjVar(player, OBJVAR_TIME_ACTIVE))
         {
             setObjVar(player, OBJVAR_TIME_ACTIVE, totalEntitledTime);
             setObjVar(player, OBJVAR_REWARDS_RECEIVED, new int[REWARD_FLAGS_SIZE]);
             setObjVar(player, OBJVAR_MILESTONES_NOTIFIED, new int[REWARD_FLAGS_SIZE]);
-        }
+        } else {
+			setObjVar(player, OBJVAR_TIME_ACTIVE, totalEntitledTime);
+		}
     }
     public static boolean canGetReward(obj_id player) throws InterruptedException
     {
         int[] milestones = getVeteranRewardMilestones(player);
-        return (milestones != null && milestones.length >= 1);
+        return ((milestones != null) && (milestones.length >= 1));
     }
     public static boolean requestVeteranRewards(obj_id player) throws InterruptedException
     {
@@ -128,7 +135,7 @@ public class veteran_deprecated extends script.base_script
             return false;
         }
         int[] milestones = getVeteranRewardMilestones(player);
-        if (milestones == null || milestones.length < 1)
+        if ((milestones == null) || (milestones.length < 1))
         {
             return false;
         }
@@ -611,18 +618,18 @@ public class veteran_deprecated extends script.base_script
     {
         if (isIdValid(target) && isPlayer(target))
         {
-            if (hasObjVar(target, OBJVAR_TIME_ACTIVE))
+            if (hasObjVar(target, veteran_deprecated.OBJVAR_TIME_ACTIVE))
             {
                 return true;
             }
             else
             {
-                sendSystemMessage(getSelf(), SID_SYSTEM_INACTIVE);
+                sendSystemMessage(getSelf(), veteran_deprecated.SID_SYSTEM_INACTIVE);
             }
         }
         else
         {
-            sendSystemMessage(getSelf(), SID_INVALID_TARGET);
+            sendSystemMessage(getSelf(), veteran_deprecated.SID_INVALID_TARGET);
         }
         return false;
     }
@@ -687,12 +694,12 @@ public class veteran_deprecated extends script.base_script
     {
         if (!isIdValid(player))
         {
-            LOG("flash_speeder", "checkFlashSpeeder: Player is invalid.");
+            LOG("flash_speeder", "veteran_deprecated.checkFlashSpeeder: Player is invalid.");
             return false;
         }
         if (!isPlayer(player))
         {
-            LOG("flash_speeder", "checkFlashSpeeder: " + player + " is not a player.");
+            LOG("flash_speeder", "veteran_deprecated.checkFlashSpeeder: " + player + " is not a player.");
             return false;
         }
         if (isUsingAdminLogin(player))
