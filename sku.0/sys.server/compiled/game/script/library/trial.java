@@ -299,6 +299,7 @@ public class trial extends script.base_script
     public static final String PATROL_PATH_FULL_DATA = "all_instance_patrol_path";
     public static final String SEQUENCER_PATH_DATA = "sequencer_path_data";
     public static final String SPACE_DUTY_TOKEN = "item_token_duty_space_01_01";
+	public static final String TOKEN_BOX = "item_heroic_token_box_01_01";
     public static void initializeBox(obj_id self) throws InterruptedException
     {
         int[] tokenTypes = new int[trial.NUM_HEROIC_TOKEN_TYPES];
@@ -2526,36 +2527,20 @@ public class trial extends script.base_script
             return false;
         }
         int tokensOwed = price;
-        boolean foundTokenHolderBox = false;
-        String itemName;
-        for (obj_id inventoryContent : inventoryContents) {
-            if (!isIdValid(inventoryContent) || !exists(inventoryContent)) {
-                continue;
-            }
-            itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.isEmpty()) {
-                if (itemName.equals(tokenName)) {
-                    if (getCount(inventoryContent) > 1) {
-                        if (getCount(inventoryContent) > tokensOwed) {
-                            setCount(inventoryContent, (getCount(inventoryContent) - tokensOwed));
-                            tokensOwed = 0;
-                        } else {
-                            tokensOwed = tokensOwed - getCount(inventoryContent);
-                            destroyObject(inventoryContent);
-                        }
-                    } else {
-                        destroyObject(inventoryContent);
-                        tokensOwed--;
-                    }
-                }
-                if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01")) {
-                    foundTokenHolderBox = true;
-                    withdrawTokensFromBox(inventoryContent, tokenName, tokensOwed);
-                    return true;
-                }
+        obj_id tokens = utils.getObjectInInventory(player, tokenName);
+        int invTokenAmt = tokens != null ? getCount(tokens) : 0;
+        if (invTokenAmt > 0) {
+            if (tokensOwed > invTokenAmt) {
+                destroyObject(tokens);
+                tokensOwed -= invTokenAmt;
+            } else {
+                setCount(tokens, invTokenAmt - tokensOwed);
+                return true;
             }
         }
-        return false;
+        obj_id tokenBox = utils.getObjectInInventory(player, TOKEN_BOX);
+        withdrawTokensFromBox(tokenBox, tokenName, tokensOwed);
+        return true;
     }
     public static int getSpaceDutyTokenPrice(int level) throws InterruptedException
     {
@@ -2568,27 +2553,11 @@ public class trial extends script.base_script
             return 0;
         }
 		int tokenCount = getTokenAmountInInventory(player, token);
-        obj_id tokenBox = getTokenBox(player);
+        obj_id tokenBox = utils.getObjectInInventory(player, TOKEN_BOX);
         if (tokenBox != null) {
             tokenCount += getTokenAmountInBox(tokenBox, token);
         }
         return tokenCount;
-    }
-    public static obj_id getTokenBox(obj_id player) {
-        obj_id[] inventoryContents = getInventoryAndEquipment(player);
-        String itemName;
-        for (obj_id inventoryContent : inventoryContents) {
-            if (!isIdValid(inventoryContent) || !exists(inventoryContent)) {
-                continue;
-            }
-            itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.isEmpty()) {
-                if (itemName.equals("item_heroic_token_box_01_01")) {
-                    return inventoryContent;
-                }
-            }
-        }
-        return null;
     }
     public static int getTokenAmountInBox(obj_id box, String token) throws InterruptedException {
         verifyBox(box);
@@ -2604,15 +2573,9 @@ public class trial extends script.base_script
         }
         return 0;
     }
-	public static int getTokenAmountInInventory(obj_id player, String token) throws InterruptedException {
-        obj_id inventory = utils.getInventoryContainer(player);
-        obj_id[] inventoryContents = getContents(inventory);
-        for (obj_id object : inventoryContents) {
-            if (object != null && getStaticItemName(object).equals(token)) {
-                return getCount(object);
-            }
-        }
-        return 0;
+	public static int getTokenAmountInInventory(obj_id player, String token) {
+        obj_id tokens = utils.getObjectInInventory(player, token);
+        return tokens != null ? getCount(tokens) : 0;
     }
     public static void withdrawTokensFromBox(obj_id box, String token, int amount) {
         int vTokens = 0;
