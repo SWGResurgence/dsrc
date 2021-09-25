@@ -9572,6 +9572,10 @@ public class base_player extends script.base_script
     {
         obj_id naboo = getPlanetByName("naboo");
         String objVar = "vetTokenCD_" + getPlayerStationId(self);
+		if (!hasObjVar(naboo, objVar)) {
+            giveVeteranRewardToken(self, 100);
+            return SCRIPT_CONTINUE;
+        }
         int timeLeft = getIntObjVar(naboo, objVar) + 86400 - getCalendarTime();
 
         if (timeLeft > 0) {
