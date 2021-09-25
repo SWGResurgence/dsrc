@@ -1629,6 +1629,9 @@ public class base_player extends script.base_script
         {
             badge.grantBadge(self, "bdg_kash_avatar_zssik");
         }
+		if (!utils.hasScriptVar(self, "performance.buildabuff.buffComponentKeys") && buff.hasBuff(self, "buildabuff_inspiration")) {
+			buff.removeBuff(self, "buildabuff_inspiration");
+		}
         if (getLocation(sekf).area.equals("dungeon1")) {
             if (trial.getTop(self) == self)
             {
