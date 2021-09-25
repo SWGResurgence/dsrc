@@ -1500,7 +1500,6 @@ public class base_player extends script.base_script
                 removeObjVar(self, "groupWaypoint");
             }
         }
-        veteran_deprecated.updateVeteranTime(self);
         if (hasObjVar(self, "renamePerformed"))
         {
             String old_name = getStringObjVar(self, "renamePerformed");
@@ -9600,11 +9599,6 @@ public class base_player extends script.base_script
     {
         if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards")))
         {
-            return SCRIPT_CONTINUE;
-        }
-        if (!isGod(self) && !hasObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE))
-        {
-            sendSystemMessage(self, veteran_deprecated.SID_SYSTEM_INACTIVE);
             return SCRIPT_CONTINUE;
         }
         int[] templateCrcs = dataTableGetIntColumn(veteran_deprecated.REWARDS_DATATABLE, veteran_deprecated.REWARDS_COLUMN_TEMPLATE);
