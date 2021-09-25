@@ -94,10 +94,9 @@ public class veteran_deprecated extends script.base_script
     public static final string_id SID_UNAVAILABLE_NEEDS_EXPANSION = new string_id(VETERAN_STRING_TABLE, "unavailable_needs_expansion");
     public static final string_id SID_UNAVAILABLE_NOT_ENOUGH_MILESTONE = new string_id(VETERAN_STRING_TABLE, "unavailable_not_enough_milestone");
     public static final string_id SID_UNKNOWN = new string_id(VETERAN_STRING_TABLE, "unknown");
-	public static final boolean VET_DISABLED = getConfigSetting("GameServer", "enableVeteranRewards").equals("false");
     public static void updateVeteranTime(obj_id player) throws InterruptedException
     {
-        if (!isIdValid(player) || VET_DISABLED || utils.hasScriptVar(player, SCRIPTVAR_VETERAN_LOGGED_IN))
+        if (utils.hasScriptVar(player, SCRIPTVAR_VETERAN_LOGGED_IN) || !isIdValid(player))
         {
             return;
         }
@@ -612,18 +611,18 @@ public class veteran_deprecated extends script.base_script
     {
         if (isIdValid(target) && isPlayer(target))
         {
-            if (hasObjVar(target, veteran_deprecated.OBJVAR_TIME_ACTIVE))
+            if (hasObjVar(target, OBJVAR_TIME_ACTIVE))
             {
                 return true;
             }
             else
             {
-                sendSystemMessage(getSelf(), veteran_deprecated.SID_SYSTEM_INACTIVE);
+                sendSystemMessage(getSelf(), SID_SYSTEM_INACTIVE);
             }
         }
         else
         {
-            sendSystemMessage(getSelf(), veteran_deprecated.SID_INVALID_TARGET);
+            sendSystemMessage(getSelf(), SID_INVALID_TARGET);
         }
         return false;
     }
@@ -688,12 +687,12 @@ public class veteran_deprecated extends script.base_script
     {
         if (!isIdValid(player))
         {
-            LOG("flash_speeder", "veteran_deprecated.checkFlashSpeeder: Player is invalid.");
+            LOG("flash_speeder", "checkFlashSpeeder: Player is invalid.");
             return false;
         }
         if (!isPlayer(player))
         {
-            LOG("flash_speeder", "veteran_deprecated.checkFlashSpeeder: " + player + " is not a player.");
+            LOG("flash_speeder", "checkFlashSpeeder: " + player + " is not a player.");
             return false;
         }
         if (isUsingAdminLogin(player))
