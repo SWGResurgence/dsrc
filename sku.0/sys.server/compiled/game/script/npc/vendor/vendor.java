@@ -16,8 +16,8 @@ public class vendor extends script.base_script
 	public static final String OBJECT_FOR_SALE_LIMIT = "item.object_for_sale.limit";
     public static final String VENDOR_CONTAINER_LIST_OBJVAR = "item.vendor.container_list";
     public static final String VENDOR_TOKEN_TYPE = "item.token.type";
-    public static final int IMPERIAL = 10;
-    public static final int REBEL = 11;
+    public static final byte IMPERIAL = 10;
+    public static final byte REBEL = 11;
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeVendor", null, 10, false);
