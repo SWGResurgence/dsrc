@@ -13336,7 +13336,6 @@ public class base_class
         Object [] objects = new Object [responses.length];
         java.lang.System.arraycopy (responses, 0, objects, 0, responses.length);
         return _npcStartConversation (player, npc, convoName, greeting, null, objects);
-
     }
 
     /**
