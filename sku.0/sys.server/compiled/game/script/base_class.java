@@ -3122,13 +3122,13 @@ public class base_class
     }
 
     // "messageTo" will go off at the next day of week:hour:minute:second on the week
-    public static final int DAY_OF_WEEK_SUN = 0;
-    public static final int DAY_OF_WEEK_MON = 1;
-    public static final int DAY_OF_WEEK_TUE = 2;
-    public static final int DAY_OF_WEEK_WED = 3;
-    public static final int DAY_OF_WEEK_THU = 4;
-    public static final int DAY_OF_WEEK_FRI = 5;
-    public static final int DAY_OF_WEEK_SAT = 6;
+    public static final byte DAY_OF_WEEK_SUN = 0;
+    public static final byte DAY_OF_WEEK_MON = 1;
+    public static final byte DAY_OF_WEEK_TUE = 2;
+    public static final byte DAY_OF_WEEK_WED = 3;
+    public static final byte DAY_OF_WEEK_THU = 4;
+    public static final byte DAY_OF_WEEK_FRI = 5;
+    public static final byte DAY_OF_WEEK_SAT = 6;
 
     public static int createWeeklyAlarmClock(obj_id receiver, String messageName, dictionary params, int dayOfWeek, int hour, int minute, int second)
     {
