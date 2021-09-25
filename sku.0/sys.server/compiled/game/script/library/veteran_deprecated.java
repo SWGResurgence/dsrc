@@ -622,12 +622,12 @@ public class veteran_deprecated extends script.base_script
             {
                 return true;
             }
-            else 
+            else
             {
                 sendSystemMessage(getSelf(), veteran_deprecated.SID_SYSTEM_INACTIVE);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(getSelf(), veteran_deprecated.SID_INVALID_TARGET);
         }

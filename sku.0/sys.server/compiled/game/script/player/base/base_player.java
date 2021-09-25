@@ -11191,7 +11191,7 @@ public class base_player extends script.base_script
             }
         }
         obj_id[] object_array = utils.toStaticObjIdArray(objects);
-        if ((object_array == null || object_array.length == 0))
+        if (object_array == null || object_array.length == 0)
         {
             if (noGift)
             {
