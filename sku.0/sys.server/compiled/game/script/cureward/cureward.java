@@ -53,12 +53,12 @@ public class cureward extends script.base_script {
         return SCRIPT_CONTINUE;
     }
 
-	private static final int VET_TOKEN_BONUS = utils.getIntConfigSetting("GameServer", "veteranTokenBonus");
+    private static final int VET_TOKEN_BONUS = utils.getIntConfigSetting("GameServer", "veteranTokenBonus");
 
     public void giveVeteranRewardToken(obj_id player, int ammount) {
         obj_id tatooine = getPlanetByName("tatooine");
-        String objVar = "vetTokenCD_" + getPlayerStationId(self);
-        showLootBox(self, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", player, ammount * VET_TOKEN_BONUS) });
+        String objVar = "vetTokenCD_" + getPlayerStationId(player);
+        showLootBox(player, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", player, ammount * VET_TOKEN_BONUS) });
         setObjVar(tatooine, objVar, getCalendarTime());
     }
 
@@ -71,11 +71,12 @@ public class cureward extends script.base_script {
         if (birth <= 127 && !hasCommand(self, "veteranPlayerBuff"))
             grantCommand(self, "veteranPlayerBuff");
 
-        
+        obj_id tatooine = getPlanetByName("tatooine");
+        String objVar = "vetTokenCD_" + getPlayerStationId(self);
         if (!hasObjVar(tatooine, objVar)) {
-            giveVeteranRewardToken(100);
+            giveVeteranRewardToken(self, 100);
         } else if (getCalendarTime() - getIntObjVar(tatooine, objVar) >= 86400) {
-            giveVeteranRewardToken(1);
+            giveVeteranRewardToken(self, 1);
         }
 
         for (int i = 1; i < REWARDS.length; i++)

@@ -9593,7 +9593,7 @@ public class base_player extends script.base_script
             pp.digitInteger = timeLeft;
             sendSystemMessageProse(self, pp);
         } else {
-            cureward.giveVeteranRewardToken(1);
+            cureward.giveVeteranRewardToken(self, 1);
         }
         return SCRIPT_CONTINUE;
     }
