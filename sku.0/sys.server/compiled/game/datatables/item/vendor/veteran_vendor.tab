@@ -51,7 +51,7 @@ object/tangible/veteran_reward/frn_vet_carbonite_ugnaught.iff	51		Ugnaught in Ca
 st_cn_vet_reward_super_battle_droid_boss	54		Storyteller Token for B2-X Super Battle Droid
 st_cn_vet_reward_rebel_commando_boss	54		Storyteller Token for Rebel Commando Vindicator
 st_cn_vet_reward_stormtrooper_boss	54	Storyteller Token for Stormtrooper Veteran
-object/tangible/veteran_reward/city_flag.iff	54		City Banner Kit
+object/tangible/veteran_reward/city_flag_kit.iff	54		City Banner Kit
 object/tangible/veteran_reward/frn_vet_podracer_statue.iff	54		Podracer Statue
 st_cn_vet_reward_dark_jedi_boss	57		Storyteller Token for Dark Jedi Forcemaster
 st_cn_vet_reward_nightsister_boss	57		Storyteller Token for Nightsister Bloodwitch
