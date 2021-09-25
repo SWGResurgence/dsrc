@@ -9546,10 +9546,6 @@ public class base_player extends script.base_script
     }
     public int cmdGetVeteranRewardTime(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (veteran_deprecated.VET_DISABLED)
-        {
-            return SCRIPT_CONTINUE;
-        }
         if (isGod(self))
         {
             if (!isIdValid(target))
