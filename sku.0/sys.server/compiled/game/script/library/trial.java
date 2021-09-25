@@ -2567,7 +2567,7 @@ public class trial extends script.base_script
         {
             return 0;
         }
-		int tokenCount = getTokenAmountInInventory(token);
+		int tokenCount = getTokenAmountInInventory(player, token);
         obj_id tokenBox = getTokenBox(player);
         if (tokenBox != null) {
             tokenCount += getTokenAmountInBox(tokenBox, token);
@@ -2604,7 +2604,7 @@ public class trial extends script.base_script
         }
         return 0;
     }
-	public static int getTokenAmountInInventory(obj_id player, String token) {
+	public static int getTokenAmountInInventory(obj_id player, String token) throws InterruptedException {
         obj_id inventory = utils.getInventoryContainer(player);
         obj_id[] inventoryContents = getContents(inventory);
         for (obj_id object : inventoryContents) {
