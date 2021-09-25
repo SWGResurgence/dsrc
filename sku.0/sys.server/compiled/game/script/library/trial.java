@@ -255,7 +255,7 @@ public class trial extends script.base_script
     public static final int TIME_MONSTER_WIN = 60 * 60 * 20;
     public static final String[] HEROIC_TOKENS = 
     {
-        "item_heroic_token_axkva_01_01", 					//#0
+		"item_heroic_token_axkva_01_01", 					//#0
         "item_heroic_token_tusken_01_01",					//#1
 		"item_heroic_token_ig88_01_01",						//#2
         "item_heroic_token_black_sun_01_01",				//#3
@@ -287,7 +287,7 @@ public class trial extends script.base_script
 		"item_nova_orion_space_resource_01_01",				//#29
 		"item_restuss_imperial_commendation_02_01",   		//#30
 		"item_restuss_rebel_commendation_02_01",			//#31
-		"item_mustafar_reward_token_01_01",					//#32
+		"item_mustafar_reward_token",						//#32
 		"item_heroic_token_marauder_01_01"					//#33
     };
     public static final int NUM_HEROIC_TOKEN_TYPES = 34;
@@ -2533,7 +2533,7 @@ public class trial extends script.base_script
                 continue;
             }
             itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.equals("")) {
+            if (itemName != null && !itemName.isEmpty()) {
                 if (itemName.equals(tokenName)) {
                     if (getCount(inventoryContent) > 1) {
                         if (getCount(inventoryContent) > tokensOwed) {
@@ -2550,82 +2550,91 @@ public class trial extends script.base_script
                 }
                 if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01")) {
                     foundTokenHolderBox = true;
-                    int vTokens = 0;
-                    if (hasObjVar(inventoryContent, "item.set.tokens_held")) {
-                        int[] virtualTokens = getIntArrayObjVar(inventoryContent, "item.set.tokens_held");
-                        int t = -1;
-                        for (int k = 0; k < HEROIC_TOKENS.length; k++) {
-                            if (HEROIC_TOKENS[k].equals(tokenName)) {
-                                t = k;
-                                vTokens = virtualTokens[t];
-                            }
-                        }
-                        if (t > -1) {
-                            if (vTokens > tokensOwed) {
-                                vTokens = vTokens - tokensOwed;
-                                virtualTokens[t] = vTokens;
-                                tokensOwed = 0;
-                            } else {
-                                tokensOwed = tokensOwed - vTokens;
-                                virtualTokens[t] = 0;
-                            }
-                            setObjVar(inventoryContent, "item.set.tokens_held", virtualTokens);
-                        }
-                    }
+                    withdrawTokensFromBox(inventoryContent, tokenName, tokensOwed);
+                    return true;
                 }
             }
         }
-        return tokensOwed == 0;
+        return false;
     }
     public static int getSpaceDutyTokenPrice(int level) throws InterruptedException
     {
-        int price = level * 5;
-        price = price + 50;
-        return price;
+        return (level * 5) + 50;
     }
     public static int getTokenTotal(obj_id player, String token) throws InterruptedException
     {
-        int tokenCount = 0;
         if (!isIdValid(player) || !exists(player) || token == null || token.length() <= 0)
         {
             return 0;
         }
-        obj_id[] inventoryContents = getInventoryAndEquipment(player);
-        if (inventoryContents == null || inventoryContents.length <= 0)
-        {
-            return 0;
+		int tokenCount = getTokenAmountInInventory(token);
+        obj_id tokenBox = getTokenBox(player);
+        if (tokenBox != null) {
+            tokenCount += getTokenAmountInBox(tokenBox, token);
         }
-        boolean foundTokenHolderBox = false;
+        return tokenCount;
+    }
+    public static obj_id getTokenBox(obj_id player) {
+        obj_id[] inventoryContents = getInventoryAndEquipment(player);
         String itemName;
         for (obj_id inventoryContent : inventoryContents) {
             if (!isIdValid(inventoryContent) || !exists(inventoryContent)) {
                 continue;
             }
             itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.equals("")) {
-                if (itemName.equals(token)) {
-                    if (getCount(inventoryContent) > 1) {
-                        tokenCount = tokenCount + getCount(inventoryContent);
-                    } else {
-                        tokenCount++;
-                    }
-                }
-                if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01")) {
-                    foundTokenHolderBox = true;
-                    trial.verifyBox(inventoryContent);
-                    int t = 0;
-                    if (hasObjVar(inventoryContent, "item.set.tokens_held")) {
-                        int[] virtualTokenArray = getIntArrayObjVar(inventoryContent, "item.set.tokens_held");
-                        for (int k = 0; k < trial.HEROIC_TOKENS.length; k++) {
-                            if (trial.HEROIC_TOKENS[k].equals(token)) {
-                                t = k;
-                            }
-                        }
-                        tokenCount = tokenCount + virtualTokenArray[t];
-                    }
+            if (itemName != null && !itemName.isEmpty()) {
+                if (itemName.equals("item_heroic_token_box_01_01")) {
+                    return inventoryContent;
                 }
             }
         }
-        return tokenCount;
+        return null;
+    }
+    public static int getTokenAmountInBox(obj_id box, String token) throws InterruptedException {
+        verifyBox(box);
+        int t = 0;
+        if (hasObjVar(box, "item.set.tokens_held")) {
+            int[] virtualTokenArray = getIntArrayObjVar(box, "item.set.tokens_held");
+            for (int k = 0; k < trial.HEROIC_TOKENS.length; k++) {
+                if (trial.HEROIC_TOKENS[k].equals(token)) {
+                    t = k;
+                }
+            }
+            return virtualTokenArray[t];
+        }
+        return 0;
+    }
+	public static int getTokenAmountInInventory(obj_id player, String token) {
+        obj_id inventory = utils.getInventoryContainer(player);
+        obj_id[] inventoryContents = getContents(inventory);
+        for (obj_id object : inventoryContents) {
+            if (object != null && getStaticItemName(object).equals(token)) {
+                return getCount(object);
+            }
+        }
+        return 0;
+    }
+    public static void withdrawTokensFromBox(obj_id box, String token, int amount) {
+        int vTokens = 0;
+        if (hasObjVar(box, "item.set.tokens_held")) {
+            int[] virtualTokens = getIntArrayObjVar(box, "item.set.tokens_held");
+            int t = -1;
+            for (int k = 0; k < HEROIC_TOKENS.length; k++) {
+                if (HEROIC_TOKENS[k].equals(token)) {
+                    t = k;
+                    vTokens = virtualTokens[t];
+                }
+            }
+            if (t > -1) {
+                if (vTokens > amount) {
+                    vTokens -= amount;
+                    virtualTokens[t] = vTokens;
+                } else {
+                    amount -= vTokens;
+                    virtualTokens[t] = 0;
+                }
+                setObjVar(box, "item.set.tokens_held", virtualTokens);
+            }
+        }
     }
 }
