@@ -103,20 +103,18 @@ public class veteran_deprecated extends script.base_script
         }
         utils.setScriptVar(player, SCRIPTVAR_VETERAN_LOGGED_IN, true);
         dictionary timeData = getAccountTimeData(player);
+		
         if (timeData == null)
         {
             return;
         }
         int totalEntitledTime = timeData.getInt("total_entitled_time");
+		setObjVar(player, OBJVAR_TIME_ACTIVE, daysOld);
         if (!hasObjVar(player, OBJVAR_TIME_ACTIVE))
         {
             setObjVar(player, OBJVAR_TIME_ACTIVE, totalEntitledTime);
             setObjVar(player, OBJVAR_REWARDS_RECEIVED, new int[REWARD_FLAGS_SIZE]);
             setObjVar(player, OBJVAR_MILESTONES_NOTIFIED, new int[REWARD_FLAGS_SIZE]);
-        }
-        else 
-        {
-            setObjVar(player, OBJVAR_TIME_ACTIVE, totalEntitledTime);
         }
     }
     public static boolean canGetReward(obj_id player) throws InterruptedException
@@ -131,7 +129,7 @@ public class veteran_deprecated extends script.base_script
             return false;
         }
         int[] milestones = getVeteranRewardMilestones(player);
-        if ((milestones == null) || (milestones.length < 1))
+        if (milestones == null || milestones.length < 1)
         {
             return false;
         }
