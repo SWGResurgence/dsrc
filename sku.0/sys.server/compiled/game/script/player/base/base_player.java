@@ -9581,7 +9581,7 @@ public class base_player extends script.base_script
 				obj_id tatooine = getPlanetByName("tatooine");
         String objVar = "vetTokenCD_" + getPlayerStationId(self);
 		if (!hasObjVar(tatooine, objVar)) {
-			giveVeteranRewardToken(self, 100);
+			cureward.giveVeteranRewardToken(self, 100);
 			return SCRIPT_CONTINUE;
 		}
         int timeLeft = getIntObjVar(tatooine, objVar) + 86400 - getCalendarTime();

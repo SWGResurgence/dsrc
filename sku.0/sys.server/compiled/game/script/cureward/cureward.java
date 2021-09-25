@@ -56,10 +56,10 @@ public class cureward extends script.base_script {
 
     private static final byte VET_TOKEN_BONUS = utils.getByteConfigSetting("GameServer", "veteranTokenBonus");
 
-    public static void giveVeteranRewardToken(obj_id player, int ammount) throws InterruptedException {
+    public static void giveVeteranRewardToken(obj_id player, int amount) throws InterruptedException {
         obj_id tatooine = getPlanetByName("tatooine");
         String objVar = "vetTokenCD_" + getPlayerStationId(player);
-        showLootBox(player, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", player, ammount * VET_TOKEN_BONUS) });
+        showLootBox(player, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", player, amount * VET_TOKEN_BONUS) });
         setObjVar(tatooine, objVar, getCalendarTime());
     }
 
