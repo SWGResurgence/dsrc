@@ -93,7 +93,7 @@ public class terminal_structure extends script.base_script
             blog("terminal_structure::OnObjectMenuRequest - you are admin");
             if (player_structure.isHarvester(structure) || player_structure.isGenerator(structure))
             {
-                if (!charactersAreSamePlayer(player, getOwner(structure)))
+                if (!player_structure.isOwner(structure, player) && getPlayerStationId(player) != getPlayerStationId(getOwner(structure)))
                 {
                     return SCRIPT_CONTINUE;
                 }
