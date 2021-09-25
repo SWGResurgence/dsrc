@@ -28,8 +28,14 @@ public class instance_reset extends script.base_script
         return SCRIPT_CONTINUE;
     }
 	private boolean DeviceIsUsable(obj_id self) throws InterruptedException {
-    return utils.isNestedWithinAPlayer(self) || getTemplateName(self).equals("object/tangible/veteran_reward/data_terminal_s3.iff");
-	}
+		if (getTemplateName(self).equals("object/tangible/veteran_reward/data_terminal_s3.iff"))
+            if (hasObjVar(player, "neural_cd")) {
+                int timeLeft = getIntObjVar(player, "neural_cd") + 172800 - getCalenderTime();
+                sendSystemMessageTestingOnly(player, "You must wait " + timeLeft + " seconds before using this item again.")
+            }
+                return  < ;
+        return utils.isNestedWithinAPlayer(self);
+    }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -207,7 +213,9 @@ public class instance_reset extends script.base_script
         prose.setStringId(pp, SID_INSTANCE_WAS_RESET);
         prose.setTU(pp, "@instance:" + instanceToRemove);
         sendSystemMessageProse(player, pp);
-		if (!getTemplateName(self).equals("object/tangible/veteran_reward/data_terminal_s3.iff"))
+		if (getTemplateName(self).equals("object/tangible/veteran_reward/data_terminal_s3.iff"))
+            setObjVar(player, "neural_cd", 172800);
+        else
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
