@@ -291,7 +291,7 @@ public class trial extends script.base_script
 		"item_meatlump_lump_01_01",							//#33
 		"item_nova_orion_space_resource_01_01"				//#34
     };
-    public static final int NUM_HEROIC_TOKEN_TYPES = 35;
+    public static final int NUM_HEROIC_TOKEN_TYPES = 34;
     public static final String KIMARU_HATE_LIST = "kimaru_hate_list";
     public static final String WP_DATA = "nearPoint";
     public static final String PROT_CHILD = "protected_data";
