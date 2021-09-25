@@ -104,7 +104,7 @@ public class masterspawner extends script.base_script
 		setYaw(vendor, 124);
 		setCreatureStatic(vendor, true);
 		setInvulnerable(vendor, true);
-		setName(vendor, "Lt. Rat");
+		setName(vendor, "Imperial Overseer");
 	}
     public void spawnClosePatrons(obj_id self) throws InterruptedException
     {
