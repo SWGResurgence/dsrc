@@ -8,6 +8,7 @@ import script.library.ai_lib;
 import script.library.chat;
 import script.library.conversation;
 import script.library.factions;
+import script.library.prose;
 import script.library.utils;
 
 public class vet_reward_vendor extends script.base_script {
@@ -62,7 +63,7 @@ public class vet_reward_vendor extends script.base_script {
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
 
-    public int vet_reward_vendor_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException {
+    public int vet_reward_vendor_handleBranch1(obj_id self, obj_id player, string_id response) throws InterruptedException {
         switch (response) {
             case "s_2":
                 vet_reward_vendor_action_showTokenVendorUI(player, self);
@@ -100,7 +101,7 @@ public class vet_reward_vendor extends script.base_script {
             return SCRIPT_CONTINUE;
         }
         int branchId = utils.getIntScriptVar(player, "conversation.vet_reward_vendor.branchId");
-        if (vet_reward_vendor_handleBranch1(player, npc, response) == SCRIPT_CONTINUE) {
+        if (vet_reward_vendor_handleBranch1(self, player, response) == SCRIPT_CONTINUE) {
             return SCRIPT_CONTINUE;
         }
         chat.chat(self, "Error:  Fell through all branches and responses for OnNpcConversationResponse.");
