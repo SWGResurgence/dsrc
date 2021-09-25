@@ -64,17 +64,13 @@ public class vet_reward_vendor extends script.base_script {
     }
 
     public int vet_reward_vendor_handleBranch1(obj_id self, obj_id player, string_id response) throws InterruptedException {
-        switch (response.toString()) {
-            case "s_2":
-                vet_reward_vendor_action_showTokenVendorUI(player, self);
-                chat.chat(self, player, new string_id(c_stringFile, "s_3"));
-                break;
-            case "s_4":
-                chat.chat(self, player, new string_id(c_stringFile, "s_5"));
-                break;
-            case "s_6":
-                chat.chat(self, player, new string_id(c_stringFile, "s_7"));
-                break;
+        if (response.equals("s_2")) {
+            vet_reward_vendor_action_showTokenVendorUI(player, self);
+            chat.chat(self, player, new string_id(c_stringFile, "s_3"));
+        } else if (response.equals("s_4")) {
+            chat.chat(self, player, new string_id(c_stringFile, "s_5"));
+        } else if (response.equals("s_6")) {
+            chat.chat(self, player, new string_id(c_stringFile, "s_7"));
         }
         npcEndConversation(player);
         return SCRIPT_CONTINUE;
@@ -86,10 +82,9 @@ public class vet_reward_vendor extends script.base_script {
         }
         if (vet_reward_vendor_condition__defaultCondition(player, self)) {
             prose_package pp = new prose_package();
-            string_id welcome = new string_id(c_stringFile, "s_1");
-            pp = prose.setStringId(pp, welcome);
+            pp = prose.setStringId(pp, new string_id(c_stringFile, "s_1"));
             pp.target.set(player);
-            base_class.npcStartConversation(player, self, "vet_reward_vendor", welcome, pp, new string_id[]{new string_id(c_stringFile, "s_2"), new string_id(c_stringFile, "s_4"), new string_id(c_stringFile, "s_6")});
+            npcStartConversation(player, self, "vet_reward_vendor", null, pp, new string_id[]{new string_id(c_stringFile, "s_2"), new string_id(c_stringFile, "s_4"), new string_id(c_stringFile, "s_6")});
             return SCRIPT_CONTINUE;
         }
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
