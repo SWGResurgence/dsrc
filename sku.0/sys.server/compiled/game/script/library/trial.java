@@ -279,13 +279,13 @@ public class trial extends script.base_script
 		"item_imperial_station_token_01_01",				//#18
         "item_rebel_station_token_01_01",					//#19
 		"item_gcw_rebel_token",								//#20
-        "item_gcw_imperial_token",/*						//#21
+        "item_gcw_imperial_token",							//#21
 		"item_restuss_imperial_commendation_02_01",   		//#22
-		"item_restuss_rebel_commendation_02_01",*/			//#23
+		"item_restuss_rebel_commendation_02_01",			//#23
 		"item_empire_day_imperial_token",					//#24
         "item_empire_day_rebel_token",						//#25
         "item_event_lifeday_rebel_token",					//#26
-        "item_event_lifeday_imperial_token",				//#27	
+        "item_event_lifeday_imperial_token",				//#27
 		"item_event_halloween_coin",						//#28
 		"item_event_loveday_chak_heart",					//#29
 		"item_pgc_token_01",								//#30
@@ -294,7 +294,7 @@ public class trial extends script.base_script
 		"item_meatlump_lump_01_01",							//#33
 		"item_nova_orion_space_resource_01_01"				//#34
     };
-    public static final int NUM_HEROIC_TOKEN_TYPES = 34;
+    public static final int NUM_HEROIC_TOKEN_TYPES = 35;
     public static final String KIMARU_HATE_LIST = "kimaru_hate_list";
     public static final String WP_DATA = "nearPoint";
     public static final String PROT_CHILD = "protected_data";
