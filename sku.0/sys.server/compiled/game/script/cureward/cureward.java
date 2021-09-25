@@ -26,9 +26,7 @@ public class cureward extends script.base_script {
         "chapter11_granted",
         "chapter12_granted",
         "chapter13_granted",
-        "chapter14_granted",
-        "chapter15_granted",
-        "chapter16_granted"
+        "chapter14_granted"
     };
     private static final String[][] REWARDS = {
         new String[]{ "recapture_gift_chapter_11_hoth_hologram_02_01", "object/tangible/furniture/decorative/hologram_nebulon_frigate.iff" },
@@ -49,21 +47,21 @@ public class cureward extends script.base_script {
         new String[]{ "publish_gift_chapter_11_snow_machine_02_01" },
         new String[]{ "item_hologram_aotc_cybernetic_arm" },
         new String[]{ "item_publish_gift_update_14_comlink" },
-        new String[]{ "item_publish_gift_update_14_statuette" },
-        new String[]{ "item_publish_gift_update_15" },
-        new String[]{ "item_publish_gift_update_16" }
+        new String[]{ "item_publish_gift_update_14_statuette" }
     };
 
-	private static final int VET_TOKEN_BONUS = utils.getIntConfigSetting("GameServer", "veteranTokenBonus") throws InterruptedException {
-        return VET_TOKEN_BONUS;
+    public int OnAttach(obj_id self) throws InterruptedException {
+        return SCRIPT_CONTINUE;
     }
 
-    public static void giveVeteranRewardToken(obj_id player, int amount) throws InterruptedException {
+    private static final byte VET_TOKEN_BONUS = utils.getByteConfigSetting("GameServer", "veteranTokenBonus");
+
+    public static void giveVeteranRewardToken(obj_id player, int ammount) throws InterruptedException {
         obj_id tatooine = getPlanetByName("tatooine");
         String objVar = "vetTokenCD_" + getPlayerStationId(player);
-        showLootBox(player, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", player, amount * VET_TOKEN_BONUS) });
+        showLootBox(player, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", player, ammount * VET_TOKEN_BONUS) });
         setObjVar(tatooine, objVar, getCalendarTime());
-    }
+     }
 
     public int OnInitialize(obj_id self) throws InterruptedException {
         int birth = getPlayerBirthDate(self) - DAYS_ON_LAUNCH;
@@ -73,14 +71,6 @@ public class cureward extends script.base_script {
 
         if (birth <= 127 && !hasCommand(self, "veteranPlayerBuff"))
             grantCommand(self, "veteranPlayerBuff");
-
-        obj_id tatooine = getPlanetByName("tatooine");
-        String objVar = "vetTokenCD_" + getPlayerStationId(self);
-        if (!hasObjVar(tatooine, objVar)) {
-            giveVeteranRewardToken(self, 100);
-        } else if (getCalendarTime() - getIntObjVar(tatooine, objVar) >= 86400) {
-            giveVeteranRewardToken(self, 1);
-        }
 
         for (int i = 1; i < REWARDS.length; i++)
             if (birth <= 7 * i)
