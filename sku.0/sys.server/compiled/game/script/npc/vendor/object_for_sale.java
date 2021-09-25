@@ -135,7 +135,7 @@ public class object_for_sale extends script.base_script
             obj_id naboo = getPlanetByName("naboo");
             int crc = getObjectTemplateCrc(getTemplateName(self));
             String objVar = "bought_" + crc + "_" + getPlayerStationId(player);
-            if (hasObjVar(naboo, objVar)) {
+            if (hasObjVar(naboo, objVar) {
                 sendSystemMessage(player, SID_LIMIT_REACHED);
                 return false;
             }
@@ -229,7 +229,7 @@ public class object_for_sale extends script.base_script
         obj_id purchasedItem = obj_id.NULL_ID;
         String myName = "";
 		if (!confirmLimit(self, player)) {
-                return;
+                return SCRIPT_OVERRIDE;
         }
         if (static_item.isStaticItem(self))
         {
@@ -264,88 +264,87 @@ public class object_for_sale extends script.base_script
         boolean foundTokenHolderBox = false;
         for (obj_id inventoryContent : inventoryContents) {
             String itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.equals("")) {
-				if (itemName != null && !itemName.isEmpty()) {
-					if (hasObjVar(self, VENDOR_TOKEN_TYPE)) {
-						String tokenList = getStringObjVar(self, VENDOR_TOKEN_TYPE);
-						String[] differentTokens = split(tokenList, ',');
-						for (int j = 0; j < differentTokens.length; j++) {
-							if (itemName.equals(differentTokens[j]) && tokenCostForReals[j] > 0) {
-								if (getCount(inventoryContent) > 1) {
-									int numInStack = getCount(inventoryContent);
-									for (int m = 0; m < numInStack - 1; m++) {
-										if (tokenCostForReals[j] > 0) {
-											tokenCostForReals[j]--;
-											setCount(inventoryContent, getCount(inventoryContent) - 1);
-										}
-									}
-								}
-								if (getCount(inventoryContent) <= 1 && tokenCostForReals[j] > 0) {
-									destroyObject(inventoryContent);
-									tokenCostForReals[j]--;
-								}
-							}
-						}
-					} else {
-						for (int j = 0; j < trial.HEROIC_TOKENS.length; j++) {
-							if (itemName.equals(trial.HEROIC_TOKENS[j]) && tokenCostForReals[j] > 0) {
-								if (getCount(inventoryContent) > 1) {
-									int numInStack = getCount(inventoryContent);
-									for (int m = 0; m < numInStack - 1; m++) {
-										if (tokenCostForReals[j] > 0) {
-											tokenCostForReals[j]--;
-											setCount(inventoryContent, getCount(inventoryContent) - 1);
-										}
-									}
-								}
-								if (getCount(inventoryContent) <= 1 && tokenCostForReals[j] > 0) {
-									destroyObject(inventoryContent);
-									tokenCostForReals[j]--;
-								}
-							}
-						}
-						if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01")) {
-							foundTokenHolderBox = true;
-							if (hasObjVar(inventoryContent, "item.set.tokens_held")) {
-								int[] virtualTokens = getIntArrayObjVar(inventoryContent, "item.set.tokens_held");
-								for (int k = 0; k < trial.HEROIC_TOKENS.length; k++) {
-									if (tokenCostForReals[k] > 0 && virtualTokens[k] > 0) {
-										int paymentCounter = tokenCostForReals[k];
-										for (int l = 0; l < paymentCounter; l++) {
-											if (virtualTokens[k] > 0) {
-												virtualTokens[k]--;
-												tokenCostForReals[k]--;
-											}
-										}
-									}
-								}
-								setObjVar(inventoryContent, "item.set.tokens_held", virtualTokens);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	public string_id parseNameToStringId(String itemName, obj_id item) throws InterruptedException
-	{
-		String[] parsedString = split(itemName, ':');
-		string_id itemNameSID;
-		if (static_item.isStaticItem(item))
-		{
-			itemNameSID = static_item.getStaticItemStringIdName(item);
-		}
-		else if (parsedString.length > 1)
-		{
-			String stfFile = parsedString[0];
-			String reference = parsedString[1];
-			itemNameSID = new string_id(stfFile, reference);
-		}
-		else 
-		{
-			String stfFile = parsedString[0];
-			itemNameSID = new string_id(stfFile, " ");
-		}
-		return itemNameSID;
-	}
+            if (itemName != null && !itemName.isEmpty())
+			{
+                if (hasObjVar(self, VENDOR_TOKEN_TYPE)) {
+                    String tokenList = getStringObjVar(self, VENDOR_TOKEN_TYPE);
+                    String[] differentTokens = split(tokenList, ',');
+                    for (int j = 0; j < differentTokens.length; j++) {
+                        if (itemName.equals(differentTokens[j]) && tokenCostForReals[j] > 0) {
+                            if (getCount(inventoryContent) > 1) {
+                                int numInStack = getCount(inventoryContent);
+                                for (int m = 0; m < numInStack - 1; m++) {
+                                    if (tokenCostForReals[j] > 0) {
+                                        tokenCostForReals[j]--;
+                                        setCount(inventoryContent, getCount(inventoryContent) - 1);
+                                    }
+                                }
+                            }
+                            if (getCount(inventoryContent) <= 1 && tokenCostForReals[j] > 0) {
+                                destroyObject(inventoryContent);
+                                tokenCostForReals[j]--;
+                            }
+                        }
+                    }
+                } else {
+                    for (int j = 0; j < trial.HEROIC_TOKENS.length; j++) {
+                        if (itemName.equals(trial.HEROIC_TOKENS[j]) && tokenCostForReals[j] > 0) {
+                            if (getCount(inventoryContent) > 1) {
+                                int numInStack = getCount(inventoryContent);
+                                for (int m = 0; m < numInStack - 1; m++) {
+                                    if (tokenCostForReals[j] > 0) {
+                                        tokenCostForReals[j]--;
+                                        setCount(inventoryContent, getCount(inventoryContent) - 1);
+                                    }
+                                }
+                            }
+                            if (getCount(inventoryContent) <= 1 && tokenCostForReals[j] > 0) {
+                                destroyObject(inventoryContent);
+                                tokenCostForReals[j]--;
+                            }
+                        }
+                    }
+                    if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01")) {
+                        foundTokenHolderBox = true;
+                        if (hasObjVar(inventoryContent, "item.set.tokens_held")) {
+                            int[] virtualTokens = getIntArrayObjVar(inventoryContent, "item.set.tokens_held");
+                            for (int k = 0; k < trial.HEROIC_TOKENS.length; k++) {
+                                if (tokenCostForReals[k] > 0 && virtualTokens[k] > 0) {
+                                    int paymentCounter = tokenCostForReals[k];
+                                    for (int l = 0; l < paymentCounter; l++) {
+                                        if (virtualTokens[k] > 0) {
+                                            virtualTokens[k]--;
+                                            tokenCostForReals[k]--;
+                                        }
+                                    }
+                                }
+                            }
+                            setObjVar(inventoryContent, "item.set.tokens_held", virtualTokens);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public string_id parseNameToStringId(String itemName, obj_id item) throws InterruptedException
+    {
+        String[] parsedString = split(itemName, ':');
+        string_id itemNameSID;
+        if (static_item.isStaticItem(item))
+        {
+            itemNameSID = static_item.getStaticItemStringIdName(item);
+        }
+        else if (parsedString.length > 1)
+        {
+            String stfFile = parsedString[0];
+            String reference = parsedString[1];
+            itemNameSID = new string_id(stfFile, reference);
+        }
+        else 
+        {
+            String stfFile = parsedString[0];
+            itemNameSID = new string_id(stfFile, " ");
+        }
+        return itemNameSID;
+    }
 }
