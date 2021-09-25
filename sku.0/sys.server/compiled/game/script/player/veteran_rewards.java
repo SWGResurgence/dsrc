@@ -280,7 +280,7 @@ public class veteran_rewards extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (rowSelected == 1 || rowSelected == 2)
+        if ((rowSelected == 1) || (rowSelected == 2))
         {
             if (bp == sui.BP_OK)
             {
@@ -366,7 +366,15 @@ public class veteran_rewards extends script.base_script
         utils.removeScriptVar(self, SCRIPTVAR_ALL_EVENTS);
         utils.removeScriptVar(self, SCRIPTVAR_ITEM);
         utils.removeScriptVar(self, SCRIPTVAR_REWARD_TAGS);
-        if (rewardChoicesTags == null || rewardChoicesTags.length == 0 || event == null || params == null || params.isEmpty())
+        if ((rewardChoicesTags == null) || (rewardChoicesTags.length == 0))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (event == null)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if ((params == null) || (params.isEmpty()))
         {
             return SCRIPT_CONTINUE;
         }
@@ -470,7 +478,7 @@ public class veteran_rewards extends script.base_script
         utils.removeScriptVar(self, SCRIPTVAR_ITEM);
         utils.removeScriptVar(self, SCRIPTVAR_REWARD_TAGS);
         boolean canTradeIn = false;
-        if (params != null && params.containsKey("canTradeIn"))
+        if ((params != null) && params.containsKey("canTradeIn"))
         {
             canTradeIn = params.getBoolean("canTradeIn");
         }

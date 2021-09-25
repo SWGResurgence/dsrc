@@ -9581,10 +9581,7 @@ public class base_player extends script.base_script
     }
     public int cmdGetVeteranRewardTime(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards")))
-        {
-            return SCRIPT_CONTINUE;
-        }
+				// TODO: Fix This.
         if (isGod(self))
         {
             if (!isIdValid(target))
