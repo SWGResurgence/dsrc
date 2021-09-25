@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class stealth extends script.base_script
 {
-    public stealth()
-    {
-    }
     public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###.##");
     public static final int MAX_BUILDINGS_FOR_WILDNERNESS = 5;
     public static final int MIN_BLENDIN_CROWD_SIZE = 10;
@@ -2782,6 +2779,7 @@ public class stealth extends script.base_script
         {
             decoyStealth(mobile);
         }
+			makeBeastInvisible(mobile);
     }
     public static boolean canPerformCamouflageSelf(obj_id player) throws InterruptedException
     {
