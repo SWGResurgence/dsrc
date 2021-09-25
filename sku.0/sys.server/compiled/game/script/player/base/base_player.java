@@ -9591,7 +9591,7 @@ public class base_player extends script.base_script
             pp.digitInteger = timeLeft;
             sendSystemMessageProse(self, pp);
         } else {
-            showLootBox(self, obj_id{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self) });
+            showLootBox(self, obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self) });
             setObjVar(tatooine, objVar, getCalendarTime());
         }
         return SCRIPT_CONTINUE;
