@@ -283,6 +283,7 @@ public class base_player extends script.base_script
     };
     public static final boolean LOGGING_ON = true;
     public static final String LOGNAME = "junk_log";
+	public static final boolean FLASH_ENABLED = getConfigSetting("GameServer", "flashSpeederReward").equals("true");
     public int OnCustomizeFinished(obj_id self, obj_id object, String params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "armor_colorize.tool_oid") || utils.hasScriptVar(self, "structure_colorize.tool_oid"))
@@ -1352,12 +1353,9 @@ public class base_player extends script.base_script
             setObjVar(self, "combatLevel", getIntObjVar(self, "clickRespec.combatLevel"));
             removeObjVar(self, "clickRespec.combatLevel");
         }
-        if (getConfigSetting("GameServer", "combatUpgradeReward") != null)
+        if (!hasScript(self, "cureward.cureward"))
         {
-            if (!hasScript(self, "cureward.cureward"))
-            {
-                attachScript(self, "cureward.cureward");
-            }
+            attachScript(self, "cureward.cureward");
         }
         obj_id bldg = getTopMostContainer(self);
         if (isIdValid(bldg))
@@ -1666,14 +1664,7 @@ public class base_player extends script.base_script
     }
     public int applyJediStance(obj_id self, dictionary params) throws InterruptedException
     {
-        if (hasSkill(self, "expertise_fs_path_cautious_nature_1"))
-        {
-            buff.applyBuff(self, self, jedi.JEDI_STANCE);
-        }
-        else 
-        {
-            buff.applyBuff(self, self, jedi.JEDI_FOCUS);
-        }
+        buff.applyBuff(self, self, hasSkill(self, "expertise_fs_path_cautious_nature_1") ? jedi.JEDI_STANCE : jedi.JEDI_FOCUS);
         return SCRIPT_CONTINUE;
     }
     public int applySmugglingBonuses(obj_id self, dictionary params) throws InterruptedException
@@ -9672,7 +9663,7 @@ public class base_player extends script.base_script
     }
     public int handleVeteranRewardSelected(obj_id self, dictionary params) throws InterruptedException
     {
-        if ((params == null) || (params.isEmpty()))
+        if (params == null || params.isEmpty())
         {
             veteran_deprecated.cleanupPlayerData(self);
             return SCRIPT_CONTINUE;
@@ -9747,11 +9738,6 @@ public class base_player extends script.base_script
     }
     public int cmdFlashSpeeder(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        String config = getConfigSetting("GameServer", "flashSpeederReward");
-        if (config == null || !config.equals("true"))
-        {
-            return SCRIPT_CONTINUE;
-        }
         int sub_bits = getGameFeatureBits(self);
         if (hasObjVar(self, "flash_speeder.eligible"))
         {
