@@ -31,7 +31,7 @@ public class stealth extends script.base_script
     public static final float MAX_CHANCE_TO_DETECT_HIDDEN = 99.0f;
     public static final float PASSIVE_DETECT_CHANCE = 20.0f;
     public static final float ACTIVE_DETECT_CHANCE = 50.0f;
-    public static final float MAX_HIDING_DETECT_SCORE = 220;
+    public static final float MAX_HIDING_DETECT_SCORE = 1000;
     public static final int HEP_UPKEEP_COST = 10;
     public static final String HEP_BASE_POWER = "basePower";
     public static final String HEP_EFFECTIVENESS = "effectiveness";
@@ -2779,7 +2779,6 @@ public class stealth extends script.base_script
         {
             decoyStealth(mobile);
         }
-			makeBeastInvisible(mobile);
 			makeBeastInvisible(mobile, effectName);
     }
     public static boolean canPerformCamouflageSelf(obj_id player) throws InterruptedException
