@@ -11062,6 +11062,7 @@ public class base_player extends script.base_script
     public int handleSurveyToolbarSetup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objInv = utils.getInventoryContainer(self);
+        createObject("object/tangible/survey_tool/survey_tool_mineral.iff", objInv, "");
         newbieTutorialSetToolbarElement(self, 10, "/survey");
         return SCRIPT_CONTINUE;
     }
