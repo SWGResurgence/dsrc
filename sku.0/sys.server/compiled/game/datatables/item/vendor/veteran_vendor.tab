@@ -3,8 +3,8 @@ s	i	i[0]	c
 object/tangible/veteran_reward/harvester.iff	3	1	Self Powered Harvester Deed
 object/tangible/veteran_reward/data_terminal_s1.iff	3		Holonet Terminal
 object/tangible/veteran_reward/data_terminal_s2.iff	3		Translator Terminal
-object/tangible/veteran_reward/data_terminal_s4.iff	3		Control Array
-object/tangible/veteran_reward/data_terminal_s5.iff	3		Holonet Tracking Console
+object/tangible/veteran_reward/data_terminal_s3.iff	3		Control Array
+object/tangible/veteran_reward/data_terminal_s4.iff	3		Holonet Tracking Console
 object/tangible/veteran_reward/frn_vet_protocol_droid_toy.iff	3		Protocol Droid Minature Replica
 object/tangible/veteran_reward/frn_vet_r2_toy.iff	3		R2 Droid Miniature Replica
 object/tangible/veteran_reward/resource.iff	6	1	A Crate of Free Resources
