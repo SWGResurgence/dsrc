@@ -10,7 +10,7 @@ import java.util.Vector;
 public class veteran_deprecated extends script.base_script
 {
     public static final byte DAYS_PER_MILESTONE = 7;
-    public static final int REWARD_FLAGS_SIZE = ((12 / MONTHS_PER_MILESTONE) * 10) / 32 + 1;
+    public static final byte REWARD_FLAGS_SIZE = 40 / 32 + 1;
     public static final int MAX_MILESTONE = REWARD_FLAGS_SIZE * 32;
     public static final String VETERAN_STRING_TABLE = "veteran";
     public static final String REWARDS_DATATABLE = "datatables/veteran/rewards.iff";
@@ -93,32 +93,35 @@ public class veteran_deprecated extends script.base_script
     public static final string_id SID_UNKNOWN = new string_id(VETERAN_STRING_TABLE, "unknown");
     public static void updateVeteranTime(obj_id player) throws InterruptedException
     {
-        if (!isIdValid(player)) {
-			return;
-		}
-		if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards"))) {
-			return;
-		}
-		if ((player.getScriptVars()).hasKey(SCRIPTVAR_VETERAN_LOGGED_IN))
+        if (!isIdValid(player))
+        {
+            return;
+        }
+        if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards")))
+        {
+            return;
+        }
+        if ((player.getScriptVars()).hasKey(SCRIPTVAR_VETERAN_LOGGED_IN))
         {
             return;
         }
         (player.getScriptVars()).put(SCRIPTVAR_VETERAN_LOGGED_IN, true);
         dictionary timeData = getAccountTimeData(player);
-		
         if (timeData == null)
         {
             return;
         }
-        (player.getScriptVars()).put(SCRIPTVAR_VETERAN_LOGGED_IN, true);
+        int totalEntitledTime = timeData.getInt("total_entitled_time");
         if (!hasObjVar(player, OBJVAR_TIME_ACTIVE))
         {
             setObjVar(player, OBJVAR_TIME_ACTIVE, totalEntitledTime);
             setObjVar(player, OBJVAR_REWARDS_RECEIVED, new int[REWARD_FLAGS_SIZE]);
             setObjVar(player, OBJVAR_MILESTONES_NOTIFIED, new int[REWARD_FLAGS_SIZE]);
-        } else {
-			setObjVar(player, OBJVAR_TIME_ACTIVE, totalEntitledTime);
-		}
+        }
+        else 
+        {
+            setObjVar(player, OBJVAR_TIME_ACTIVE, totalEntitledTime);
+        }
     }
     public static boolean canGetReward(obj_id player) throws InterruptedException
     {
@@ -619,12 +622,12 @@ public class veteran_deprecated extends script.base_script
             {
                 return true;
             }
-            else
+            else 
             {
                 sendSystemMessage(getSelf(), veteran_deprecated.SID_SYSTEM_INACTIVE);
             }
         }
-        else
+        else 
         {
             sendSystemMessage(getSelf(), veteran_deprecated.SID_INVALID_TARGET);
         }
