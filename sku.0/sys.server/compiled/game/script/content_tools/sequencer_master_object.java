@@ -37,8 +37,7 @@ public class sequencer_master_object extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        boolean hasScriptVar = utils.hasScriptVar(self, "intSecondaryTableStamp");
-		if (params != null && hasScriptVar)
+        if (params != null)
         {
             int intMessageStamp = params.getInt("intSecondaryTableStamp");
             int intMyStamp = utils.getIntScriptVar(self, "intSecondaryTableStamp");
@@ -47,7 +46,7 @@ public class sequencer_master_object extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else if (hasScriptVar)
+        else if (utils.hasScriptVar(self, "intSecondaryTableStamp"))
         {
             return SCRIPT_CONTINUE;
         }
