@@ -7,8 +7,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
-import script.cureward.cureward;
-
 public class base_player extends script.base_script
 {
     public static final int TIME_DEATH = 5;
@@ -383,7 +381,6 @@ public class base_player extends script.base_script
         return SCRIPT_CONTINUE;
     }
     public void grantLevelSpecificRewards(obj_id player, int newCombatLevel) throws InterruptedException{
-        if(!utils.checkConfigFlag("Custom", "grantLevelSpecificRewards")) return;
         if(hasObjVar(player, "level.reward." + newCombatLevel)) return;
         obj_id inv = utils.getInventoryContainer(player);
         switch(newCombatLevel){
@@ -1500,6 +1497,7 @@ public class base_player extends script.base_script
                 removeObjVar(self, "groupWaypoint");
             }
         }
+        veteran_deprecated.updateVeteranTime(self);
         if (hasObjVar(self, "renamePerformed"))
         {
             String old_name = getStringObjVar(self, "renamePerformed");
@@ -1518,13 +1516,10 @@ public class base_player extends script.base_script
             attachScript(self, group.SCRIPT_GROUP_MEMBER);
         }
         utils.removeScriptVar(self, COUPE_DE_GRACE_TARGET);
-        if(!isInTutorialArea(self)) {
-            if(!isGod(self) && hasObjVar(self, "npe") && isInWorldCell(self)) {
-                getClusterWideData("npe_public_instances", "npe_space_station*", false, self);
-            } else {
-                space_dungeon.verifyPlayerSession(self);
-                space_dungeon.validateInstanceControllerId(self);
-            }
+        if (!isInTutorialArea(self))
+        {
+            space_dungeon.verifyPlayerSession(self);
+            space_dungeon.validateInstanceControllerId(self);
         }
         int campXp = getExperiencePoints(self, "camp");
         if (campXp > 0)
@@ -1628,10 +1623,12 @@ public class base_player extends script.base_script
         {
             badge.grantBadge(self, "bdg_kash_avatar_zssik");
         }
-		if (!utils.hasScriptVar(self, "performance.buildabuff.buffComponentKeys") && buff.hasBuff(self, "buildabuff_inspiration")) {
-			buff.removeBuff(self, "buildabuff_inspiration");
-		}
-        if (getLocation(self).area.equals("dungeon1")) {
+        if (!utils.hasScriptVar(self, "performance.buildabuff.buffComponentKeys") && buff.hasBuff(self, "buildabuff_inspiration"))
+        {
+            buff.removeBuff(self, "buildabuff_inspiration");
+        }
+        if (getLocation(self).area == "dungeon1")
+        {
             if (trial.getTop(self) == self)
             {
                 warpPlayer(self, "tatooine", 0, 0, 0, null, 0, 0, 0, null, false);
@@ -6479,12 +6476,6 @@ public class base_player extends script.base_script
             }
             skill.recalcPlayerPools(self, false);
         }
-        // when we learn our first beast master skill, store the current expertise version we're learning from
-        /* if(skillName.equalsIgnoreCase("expertise_bm_incubation_base_1")) {
-            int row = dataTableSearchColumnForString("beast_master", "profession", respec.EXPERTISE_VERSION_TABLE);
-            int bmExpertiseVersion = dataTableGetInt(respec.EXPERTISE_VERSION_TABLE, row, "version");
-            setObjVar(self, respec.BEAST_MASTER_EXPERTISE_VERSION_OBJVAR, bmExpertiseVersion);
-        } */
         recomputeCommandSeries(self);
         beast_lib.verifyAndUpdateCalledBeastStats(self);
         trial.bumpSession(self, "displayDefensiveMods");
@@ -9577,12 +9568,8 @@ public class base_player extends script.base_script
     }
     public int cmdGetVeteranRewardTime(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-				obj_id tatooine = getPlanetByName("tatooine");
-        String objVar = "vetTokenCD_" + getPlayerStationId(self);
-		if (!hasObjVar(tatooine, objVar)) {
-			cureward.giveVeteranRewardToken(self, 100);
-			return SCRIPT_CONTINUE;
-		}
+        obj_id tatooine = getPlanetByName("tatooine");
+        String objVar = "vetTokenCD_" + getStationId(self);
         int timeLeft = getIntObjVar(tatooine, objVar) + 86400 - getCalendarTime();
 
         if (timeLeft > 0) {
@@ -9591,7 +9578,8 @@ public class base_player extends script.base_script
             pp.digitInteger = timeLeft;
             sendSystemMessageProse(self, pp);
         } else {
-            cureward.giveVeteranRewardToken(self, (timeLeft / -86400) + 1);
+            showLootBox(self, obj_id{ static_item.createNewItemFunction("item_vet_reward_token_01_01", self) });
+            setObjVar(tatooine, objVar, getCalendarTime());
         }
         return SCRIPT_CONTINUE;
     }
@@ -9599,6 +9587,11 @@ public class base_player extends script.base_script
     {
         if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards")))
         {
+            return SCRIPT_CONTINUE;
+        }
+        if (!isGod(self) && !hasObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE))
+        {
+            sendSystemMessage(self, veteran_deprecated.SID_SYSTEM_INACTIVE);
             return SCRIPT_CONTINUE;
         }
         int[] templateCrcs = dataTableGetIntColumn(veteran_deprecated.REWARDS_DATATABLE, veteran_deprecated.REWARDS_COLUMN_TEMPLATE);
@@ -10813,12 +10806,8 @@ public class base_player extends script.base_script
     public int handleSellJunkSui(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
-        obj_id dealer = utils.getObjIdScriptVar(self, "junk_dealer_transaction");
         if (!isIdValid(player))
         {
-            return SCRIPT_CONTINUE;
-        }
-        if (utils.outOfRange(dealer, self, 10.0f, true)) {
             return SCRIPT_CONTINUE;
         }
         int idx = sui.getListboxSelectedRow(params);
@@ -10925,16 +10914,10 @@ public class base_player extends script.base_script
         boolean reshowSui = params.getBoolean("reshowSui");
         if (reshowSui && fence)
         {
-            if(utils.outOfRange(self, player, 10.0f, true)) {
-                return SCRIPT_CONTINUE;
-            }
             smuggler.showSellJunkSui(player, self, true, false);
         }
         else if (reshowSui && !fence)
         {
-            if(utils.outOfRange(self, player, 10.0f, true)) {
-                return SCRIPT_CONTINUE;
-            }
             smuggler.showSellJunkSui(player, self, false, false);
         }
         return SCRIPT_CONTINUE;
@@ -11298,6 +11281,17 @@ public class base_player extends script.base_script
         if (amount < 0)
         {
             sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_invalid_number"));
+            bounty_hunter.showSetBountySUI(self, killer);
+            return SCRIPT_CONTINUE;
+        }
+        if (amount > bounty_hunter.MAX_BOUNTY_SET)
+        {
+            sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_cap"));
+            amount = bounty_hunter.MAX_BOUNTY_SET;
+        }
+        if (amount < bounty_hunter.MIN_BOUNTY_SET)
+        {
+            sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_too_little"));
             bounty_hunter.showSetBountySUI(self, killer);
             return SCRIPT_CONTINUE;
         }
@@ -12263,14 +12257,5 @@ public class base_player extends script.base_script
             LOG(LOGNAME, txt);
         }
         return true;
-    }
-    public int OnWaypointWarpRequested(obj_id self, obj_id waypoint) throws InterruptedException {
-        if(!isGod(self)) {
-            return SCRIPT_CONTINUE;
-        }
-        location loc = getWaypointLocation(waypoint);
-        sendSystemMessageTestingOnly(self, "Teleporting you to the location of Waypoint: "+getWaypointName(waypoint)+" ("+waypoint+") at "+loc+"...");
-        warpPlayer(self, loc.area, loc.x, loc.y, loc.z, loc.cell, 0, 0, 0, "noHandler", false);
-        return SCRIPT_CONTINUE;
     }
 }
