@@ -54,19 +54,15 @@ public class cureward extends script.base_script {
         new String[]{ "item_publish_gift_update_16" }
     };
 
-    public int OnAttach(obj_id self) throws InterruptedException {
-        return SCRIPT_CONTINUE;
+	private static final int VET_TOKEN_BONUS = utils.getIntConfigSetting("GameServer", "veteranTokenBonus") throws InterruptedException {
+        return VET_TOKEN_BONUS;
     }
 
-    private static final Byte VET_TOKEN_BONUS = utils.getByteConfigSetting("GameServer", "veteranTokenBonus") throws InterruptedException {
-        return VET_TOKEN_BONUS;
-	}
-
     public static void giveVeteranRewardToken(obj_id player, int amount) throws InterruptedException {
-        obj_id naboo = getPlanetByName("naboo");
+        obj_id tatooine = getPlanetByName("tatooine");
         String objVar = "vetTokenCD_" + getPlayerStationId(player);
         showLootBox(player, new obj_id[]{ static_item.createNewItemFunction("item_vet_reward_token_01_01", player, amount * VET_TOKEN_BONUS) });
-        setObjVar(naboo, objVar, getCalendarTime());
+        setObjVar(tatooine, objVar, getCalendarTime());
     }
 
     public int OnInitialize(obj_id self) throws InterruptedException {
@@ -77,6 +73,14 @@ public class cureward extends script.base_script {
 
         if (birth <= 127 && !hasCommand(self, "veteranPlayerBuff"))
             grantCommand(self, "veteranPlayerBuff");
+
+        obj_id tatooine = getPlanetByName("tatooine");
+        String objVar = "vetTokenCD_" + getPlayerStationId(self);
+        if (!hasObjVar(tatooine, objVar)) {
+            giveVeteranRewardToken(self, 100);
+        } else if (getCalendarTime() - getIntObjVar(tatooine, objVar) >= 86400) {
+            giveVeteranRewardToken(self, 1);
+        }
 
         for (int i = 1; i < REWARDS.length; i++)
             if (birth <= 7 * i)
