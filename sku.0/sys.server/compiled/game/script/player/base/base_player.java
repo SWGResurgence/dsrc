@@ -9617,7 +9617,7 @@ public class base_player extends script.base_script
     }
     public int cmdListVeteranRewards(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards")))
+        if (veteran_deprecated.VET_DISABLED)
         {
             return SCRIPT_CONTINUE;
         }
@@ -9667,7 +9667,7 @@ public class base_player extends script.base_script
     }
     public int handleVeteranMilestoneSelected(obj_id self, dictionary params) throws InterruptedException
     {
-        if ((params == null) || (params.isEmpty()))
+        if (params == null || params.isEmpty())
         {
             veteran_deprecated.cleanupPlayerData(self);
             return SCRIPT_CONTINUE;

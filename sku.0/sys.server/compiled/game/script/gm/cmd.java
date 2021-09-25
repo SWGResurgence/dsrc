@@ -3096,7 +3096,7 @@ public class cmd extends script.base_script
     }
     public int cmdSetVeteranReward(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!("true").equalsIgnoreCase(getConfigSetting("GameServer", "enableVeteranRewards")))
+        if (veteran_deprecated.VET_DISABLED)
         {
             return SCRIPT_CONTINUE;
         }
@@ -3123,7 +3123,7 @@ public class cmd extends script.base_script
     }
     public int cmdClearVeteranReward(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!("true").equalsIgnoreCase(getConfigSetting("GameServer", "enableVeteranRewards")))
+        if (veteran_deprecated.VET_DISABLED)
         {
             return SCRIPT_CONTINUE;
         }
@@ -3150,7 +3150,7 @@ public class cmd extends script.base_script
     }
     public int cmdOverrideActiveMonths(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!("true").equalsIgnoreCase(getConfigSetting("GameServer", "enableVeteranRewards")))
+        if (veteran_deprecated.VET_DISABLED)
         {
             return SCRIPT_CONTINUE;
         }

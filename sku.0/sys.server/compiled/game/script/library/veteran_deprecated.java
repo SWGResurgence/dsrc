@@ -97,11 +97,7 @@ public class veteran_deprecated extends script.base_script
 	public static final boolean VET_DISABLED = getConfigSetting("GameServer", "enableVeteranRewards").equals("false");
     public static void updateVeteranTime(obj_id player) throws InterruptedException
     {
-        if (!isIdValid(player))
-        {
-            return;
-        }
-        if (VET_DISABLED)
+        if (!isIdValid(player) || VET_DISABLED)
         {
             return;
         }
@@ -130,7 +126,7 @@ public class veteran_deprecated extends script.base_script
     public static boolean canGetReward(obj_id player) throws InterruptedException
     {
         int[] milestones = getVeteranRewardMilestones(player);
-        return ((milestones != null) && (milestones.length >= 1));
+        return (milestones != null && milestones.length >= 1);
     }
     public static boolean requestVeteranRewards(obj_id player) throws InterruptedException
     {
