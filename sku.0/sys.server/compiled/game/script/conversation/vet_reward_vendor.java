@@ -71,7 +71,7 @@ public class vet_reward_vendor extends script.base_script {
             case "s_4":
                 chat.chat(self, player, new string_id(c_stringFile, "s_5"));
                 break;
-            case "s_6"
+            case "s_6":
                 chat.chat(self, player, new string_id(c_stringFile, "s_7"));
                 break;
         }
