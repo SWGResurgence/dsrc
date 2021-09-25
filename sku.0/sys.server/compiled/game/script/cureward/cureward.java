@@ -72,14 +72,6 @@ public class cureward extends script.base_script {
         if (birth <= 127 && !hasCommand(self, "veteranPlayerBuff"))
             grantCommand(self, "veteranPlayerBuff");
 
-        obj_id tatooine = getPlanetByName("tatooine");
-        String objVar = "vetTokenCD_" + getPlayerStationId(self);
-        if (!hasObjVar(tatooine, objVar)) {
-            giveVeteranRewardToken(self, 100);
-        } else if (getCalendarTime() - getIntObjVar(tatooine, objVar) >= 86400) {
-            giveVeteranRewardToken(self, 1);
-        }
-
         for (int i = 1; i < REWARDS.length; i++)
             if (birth <= 7 * i)
                 CheckAndGrant(self, birth, i);
