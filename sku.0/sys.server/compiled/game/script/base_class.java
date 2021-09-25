@@ -10,7 +10,6 @@ import script.library.utils;
 import java.io.File;
 import java.util.*;
 
-
 public class base_class
 {
     // info about an object listening for a message
