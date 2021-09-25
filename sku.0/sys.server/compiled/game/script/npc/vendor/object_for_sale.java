@@ -135,7 +135,7 @@ public class object_for_sale extends script.base_script
             obj_id naboo = getPlanetByName("naboo");
             int crc = getObjectTemplateCrc(getTemplateName(self));
             String objVar = "bought_" + crc + "_" + getPlayerStationId(player);
-            if (hasObjVar(naboo, objVar) {
+            if (hasObjVar(naboo, objVar)) {
                 sendSystemMessage(player, SID_LIMIT_REACHED);
                 return false;
             }
@@ -326,25 +326,26 @@ public class object_for_sale extends script.base_script
 				}
 			}
 		}
-		public string_id parseNameToStringId(String itemName, obj_id item) throws InterruptedException
-		{
-			String[] parsedString = split(itemName, ':');
-			string_id itemNameSID;
-			if (static_item.isStaticItem(item))
-			{
-				itemNameSID = static_item.getStaticItemStringIdName(item);
-			}
-			else if (parsedString.length > 1)
-			{
-				String stfFile = parsedString[0];
-				String reference = parsedString[1];
-				itemNameSID = new string_id(stfFile, reference);
-			}
-			else 
-			{
-				String stfFile = parsedString[0];
-				itemNameSID = new string_id(stfFile, " ");
-			}
-			return itemNameSID;
-		}
 	}
+	public string_id parseNameToStringId(String itemName, obj_id item) throws InterruptedException
+	{
+		String[] parsedString = split(itemName, ':');
+		string_id itemNameSID;
+		if (static_item.isStaticItem(item))
+		{
+			itemNameSID = static_item.getStaticItemStringIdName(item);
+		}
+		else if (parsedString.length > 1)
+		{
+			String stfFile = parsedString[0];
+			String reference = parsedString[1];
+			itemNameSID = new string_id(stfFile, reference);
+		}
+		else 
+		{
+			String stfFile = parsedString[0];
+			itemNameSID = new string_id(stfFile, " ");
+		}
+		return itemNameSID;
+	}
+}
