@@ -229,7 +229,7 @@ public class object_for_sale extends script.base_script
         obj_id purchasedItem = obj_id.NULL_ID;
         String myName = "";
 		if (!confirmLimit(self, player)) {
-                return SCRIPT_OVERRIDE;
+                return;
         }
         if (static_item.isStaticItem(self))
         {
