@@ -5,6 +5,9 @@ import script.string_id;
 
 public class restuss_event extends script.base_script
 {
+    public restuss_event()
+    {
+    }
     public static final String MASTER_PATROL_ARRAY = "master_patrol_point_array";
     public static final String PATROL_POINTS = "patrolPoints";
     public static final String PATROL_TYPE = "patrolType";
@@ -40,16 +43,6 @@ public class restuss_event extends script.base_script
     public static final String TRIG_EXITCOMBAT = "trigger_marks.ExitCombat";
     public static final String TRIG_ARRIVELOCATION = "trigger_marks.OnArrivedAtLocation";
     public static final String TRIG_CUSTOMSIGNAL = "trigger_marks.CustomSignal";
-	private static final List accountsInRestuss = new ArrayList<Integer>();
-    public static void addAccountToRestuss(int stationId) {
-        accountsInRestuss.add(stationId);
-    }
-    public static void removeAccountFromRestuss(int stationId) {
-        accountsInRestuss.remove(new Integer(stationId));
-    }
-    public static boolean accountIsInRestuss(int stationId) {
-        return accountsInRestuss.contains(stationId);
-    }
     public static void playMusicInArea(obj_id controller, String music) throws InterruptedException
     {
         playMusicInArea(controller, music, 50.0f);

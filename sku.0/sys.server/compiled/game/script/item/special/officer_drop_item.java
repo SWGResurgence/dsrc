@@ -3,16 +3,17 @@ package script.item.special;
 import script.dictionary;
 import script.obj_id;
 
-import script.library.utils;
-
 public class officer_drop_item extends script.base_script
 {
+    public officer_drop_item()
+    {
+    }
     public static final float LIFESPAN = 18000.0f;
     public int OnAttach(obj_id self) throws InterruptedException
     {
         float rightNow = getGameTime();
         setObjVar(self, "item.temporary.time_stamp", rightNow);
-        float dieTime = getDieTime(self);
+        float dieTime = getDieTime(LIFESPAN, self);
         if (dieTime < 1)
         {
             dieTime = 1.0f;
