@@ -4410,7 +4410,14 @@ public class base_player extends script.base_script
         {
             attachScript(self, "player.player_logout");
             dictionary d = new dictionary();
-            d.put("timeLeft", LOGOUT_TIME);
+            if (isGod(self))
+            {
+                d.put("timeLeft", 1);
+            }
+            else
+            {
+                d.put("timeLeft", LOGOUT_TIME);
+            }
             d.put("countInterval", LOGOUT_COUNT_INTERVAL);
             messageTo(self, "OnLogoutPulse", d, 0.1f, false);
         }
