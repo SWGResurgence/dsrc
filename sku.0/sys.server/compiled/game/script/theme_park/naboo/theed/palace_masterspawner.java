@@ -60,11 +60,12 @@ public class palace_masterspawner extends script.base_script
         attachScript(computer, "conversation.rsf_computer");
         return;
     }
-	public void spawnOfficer(obj_id self) throws InterruptedException {
-		obj_id room = getCellId(self, "officer");
-		obj_id vendor = create.object("vet_reward_vendor", new location(-48.00f, 6.00f, 4158.00f));
-		setYaw(vendor, 90);
+	public void spawnOffice(obj_id self) throws InterruptedException {
+		obj_id room = getCellId(self, "office");
+		obj_id vendor = create.object("vet_reward_vendor", new location(-4860.00f, 6.00f, 4161.00f));
+		setYaw(vendor, 45);
 		setCreatureStatic(vendor, true);
 		setInvulnerable(vendor, true);
+		setName(vendor, "Imperial Overseer");
 	}
 }
