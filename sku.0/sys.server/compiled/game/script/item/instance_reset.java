@@ -8,9 +8,6 @@ import script.library.utils;
 
 public class instance_reset extends script.base_script
 {
-    public instance_reset()
-    {
-    }
     public static final String PID_NAME = "collectionConsume";
     public static final String SCRIPT_VAR_INSTANCE_LIST = "instance.list";
     public static final string_id SID_LIST_PROMPT = new string_id("spam", "instance_reset_list_prompt");
@@ -207,6 +204,7 @@ public class instance_reset extends script.base_script
         prose.setStringId(pp, SID_INSTANCE_WAS_RESET);
         prose.setTU(pp, "@instance:" + instanceToRemove);
         sendSystemMessageProse(player, pp);
+				if (!getTemplateName(self).equals("object/tangible/veteran_reward/data_terminal_s3.iff"))
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
