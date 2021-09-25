@@ -3,6 +3,8 @@ object_template_crc_string_table.tab
 *.iml
 sku.0/sys.server/compiled/game/script/library/utils_backup.java
 sku.0/sys.server/compiled/game/script/player/base/base_player_backup.java
+sku.0/sys.server/compiled/game/datatables/crafting/weapon_appearance_backup.tab
+sku.0/sys.server/compiled/game/datatables/crafting/weapon_schematics_backup.tab
 sku.0/sys.server/compiled/game/object/draft_schematic/armor - Copy/armor_appearance_assault_trooper_bicep_l.tpf
 sku.0/sys.server/compiled/game/object/draft_schematic/armor - Copy/armor_appearance_assault_trooper_bicep_l_gcw.tpf
 sku.0/sys.server/compiled/game/object/draft_schematic/armor - Copy/armor_appearance_assault_trooper_bicep_r.tpf
