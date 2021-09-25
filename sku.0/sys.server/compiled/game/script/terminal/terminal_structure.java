@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class terminal_structure extends script.base_script
 {
+    public terminal_structure()
+    {
+    }
     public static final String TERMINAL_LOGGING = "special_sign";
     public static final boolean LOGGING_ON = true;
     public static final string_id SID_TERMINAL_PERMISSIONS = new string_id("player_structure", "permissions");
@@ -88,12 +91,12 @@ public class terminal_structure extends script.base_script
                 int owner_root = mi.addRootMenu(menu_info_types.SERVER_MENU16, SID_SHOW_MAYOR_OWNER);
             }
         }
-        if (player_structure.isAdmin(structure, player))
+        if (player_structure.isAdmin(structure, player) || charactersAreSamePlayer(player, getOwner(structure)))
         {
             blog("terminal_structure::OnObjectMenuRequest - you are admin");
             if (player_structure.isHarvester(structure) || player_structure.isGenerator(structure))
             {
-                if (!player_structure.isOwner(structure, player) && getPlayerStationId(player) != getPlayerStationId(getOwner(structure)))
+                if (!player_structure.isOwner(structure, player))
                 {
                     return SCRIPT_CONTINUE;
                 }
@@ -129,8 +132,7 @@ public class terminal_structure extends script.base_script
                 permissions_root = mi.addRootMenu(menu_info_types.SERVER_TERMINAL_PERMISSIONS, SID_TERMINAL_PERMISSIONS);
                 mi.addSubMenu(permissions_root, menu_info_types.SERVER_TERMINAL_PERMISSIONS_ADMIN, SID_TERMINAL_PERMISSIONS_ADMIN);
             }
-            //if ((template.contains("cityhall_")))
-			if (template.indexOf("cityhall_") > -1)
+            if ((template.contains("cityhall_")))
             {
                 return SCRIPT_CONTINUE;
             }
@@ -297,7 +299,7 @@ public class terminal_structure extends script.base_script
                 player_structure.validateHarvestedResources(structure);
             }
         }
-        if (!player_structure.isAdmin(structure, player) && !player_structure.isAbandoned(structure))
+        if (!player_structure.isAdmin(structure, player) && !charactersAreSamePlayer(player, getOwner(structure)) && !player_structure.isAbandoned(structure))
         {
             return SCRIPT_CONTINUE;
         }
