@@ -97,11 +97,11 @@ public class veteran_deprecated extends script.base_script
 	public static final boolean VET_DISABLED = getConfigSetting("GameServer", "enableVeteranRewards").equals("false");
     public static void updateVeteranTime(obj_id player) throws InterruptedException
     {
-        if (!isIdValid(player) || VET_DISABLED || player.getScriptVars().hasKey(SCRIPTVAR_VETERAN_LOGGED_IN))
+        if (!isIdValid(player) || VET_DISABLED || utils.hasScriptVar(player, SCRIPTVAR_VETERAN_LOGGED_IN))
         {
             return;
         }
-        player.getScriptVars().put(SCRIPTVAR_VETERAN_LOGGED_IN, true);
+        utils.setScriptVar(player, SCRIPTVAR_VETERAN_LOGGED_IN, true);
         dictionary timeData = getAccountTimeData(player);
         if (timeData == null)
         {

@@ -2117,7 +2117,7 @@ public class base_player extends script.base_script
         {
             pclib.relinquishConsents(self);
         }
-        self.getScriptVars().remove(veteran_deprecated.SCRIPTVAR_VETERAN_LOGGED_IN);
+        utils.removeScriptVar(self, veteran_deprecated.SCRIPTVAR_VETERAN_LOGGED_IN);
         obj_id objBuilding = getTopMostContainer(self);
         if (isIdValid(objBuilding) && objBuilding != self)
         {
@@ -2171,7 +2171,7 @@ public class base_player extends script.base_script
     }
     public int OnImmediateLogout(obj_id self) throws InterruptedException
     {
-        self.getScriptVars().remove(veteran_deprecated.SCRIPTVAR_VETERAN_LOGGED_IN);
+        utils.removeScriptVar(self, veteran_deprecated.SCRIPTVAR_VETERAN_LOGGED_IN);
         if (utils.hasScriptVar(self, "profit"))
         {
             int startMoney = utils.getIntScriptVar(self, "profit");
