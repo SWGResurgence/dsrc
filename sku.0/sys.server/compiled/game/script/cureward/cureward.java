@@ -58,7 +58,7 @@ public class cureward extends script.base_script {
         return SCRIPT_CONTINUE;
     }
 
-    private static final int VET_TOKEN_BONUS = utils.getIntConfigSetting("GameServer", "veteranTokenBonus") throws InterruptedException {
+    private static final Byte VET_TOKEN_BONUS = utils.getByteConfigSetting("GameServer", "veteranTokenBonus") throws InterruptedException {
         return VET_TOKEN_BONUS;
 	}
 
