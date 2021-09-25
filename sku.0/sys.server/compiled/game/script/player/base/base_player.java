@@ -11307,17 +11307,6 @@ public class base_player extends script.base_script
             bounty_hunter.showSetBountySUI(self, killer);
             return SCRIPT_CONTINUE;
         }
-        if (amount > bounty_hunter.MAX_BOUNTY_SET)
-        {
-            sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_cap"));
-            amount = bounty_hunter.MAX_BOUNTY_SET;
-        }
-        if (amount < bounty_hunter.MIN_BOUNTY_SET)
-        {
-            sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_too_little"));
-            bounty_hunter.showSetBountySUI(self, killer);
-            return SCRIPT_CONTINUE;
-        }
         if (hasObjVar(killer, "bounty.amount"))
         {
             int bounty = getIntObjVar(killer, "bounty.amount");
