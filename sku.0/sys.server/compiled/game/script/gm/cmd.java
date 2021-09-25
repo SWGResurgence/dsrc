@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class cmd extends script.base_script
 {
-    public cmd()
-    {
-    }
     public int cmdGetPlayerId(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (params == null || params.equalsIgnoreCase(""))
@@ -3067,7 +3064,7 @@ public class cmd extends script.base_script
     }
     public int cmdHasVeteranReward(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!("true").equalsIgnoreCase(getConfigSetting("GameServer", "enableVeteranRewards")))
+        if (veteran_deprecated.VET_DISABLED)
         {
             return SCRIPT_CONTINUE;
         }

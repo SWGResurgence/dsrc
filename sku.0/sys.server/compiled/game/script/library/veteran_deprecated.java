@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class veteran_deprecated extends script.base_script
 {
-    public veteran_deprecated()
-    {
-    }
     public static final int UNENTITLED_TIME_LIMIT = 14;
     public static final int MONTHS_PER_MILESTONE = 3;
     public static final int DAYS_PER_MONTH = 30;
@@ -97,13 +94,14 @@ public class veteran_deprecated extends script.base_script
     public static final string_id SID_UNAVAILABLE_NEEDS_EXPANSION = new string_id(VETERAN_STRING_TABLE, "unavailable_needs_expansion");
     public static final string_id SID_UNAVAILABLE_NOT_ENOUGH_MILESTONE = new string_id(VETERAN_STRING_TABLE, "unavailable_not_enough_milestone");
     public static final string_id SID_UNKNOWN = new string_id(VETERAN_STRING_TABLE, "unknown");
+	public static final boolean VET_DISABLED = getConfigSetting("GameServer", "enableVeteranRewards").equals("false");
     public static void updateVeteranTime(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
         {
             return;
         }
-        if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards")))
+        if (VET_DISABLED)
         {
             return;
         }

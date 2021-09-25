@@ -7,12 +7,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 public class base_player extends script.base_script
 {
     public static final int TIME_DEATH = 5;
@@ -286,8 +280,6 @@ public class base_player extends script.base_script
     };
     public static final boolean LOGGING_ON = true;
     public static final String LOGNAME = "junk_log";
-	private static final String STATUS_URL = getConfigSetting("LoginServer", "statusUrl");
-	private static int characterPopulation = 0;
     public int OnCustomizeFinished(obj_id self, obj_id object, String params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "armor_colorize.tool_oid") || utils.hasScriptVar(self, "structure_colorize.tool_oid"))
@@ -9586,7 +9578,7 @@ public class base_player extends script.base_script
     }
     public int cmdGetVeteranRewardTime(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards")))
+        if (veteran_deprecated.VET_DISABLED)
         {
             return SCRIPT_CONTINUE;
         }
