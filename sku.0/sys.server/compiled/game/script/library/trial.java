@@ -11,6 +11,9 @@ import java.util.Vector;
 
 public class trial extends script.base_script
 {
+    public trial()
+    {
+    }
     public static final String MESSAGE_SESSION = "messageTo.session";
     public static final String WP_OBJECT = "object/tangible/ground_spawning/patrol_waypoint.iff";
     public static final String PARENT = "parent";
@@ -288,8 +291,8 @@ public class trial extends script.base_script
 		"item_pgc_token_01",								//#30
         "item_pgc_token_02",								//#31
         "item_pgc_token_03",								//#32
-		"item_meatlump_lump_01_01"							//#33
-		"item_nova_orion_space_resource_01_01",				//#34     
+		"item_meatlump_lump_01_01",							//#33
+		"item_nova_orion_space_resource_01_01"				//#34
     };
     public static final int NUM_HEROIC_TOKEN_TYPES = 34;
     public static final String KIMARU_HATE_LIST = "kimaru_hate_list";
