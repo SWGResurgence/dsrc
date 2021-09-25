@@ -54,7 +54,7 @@ public class cureward extends script.base_script {
         return SCRIPT_CONTINUE;
     }
 
-    private static final int VET_TOKEN_BONUS = utils.getIntConfigSetting("GameServer", "veteranTokenBonus");
+    private static final byte VET_TOKEN_BONUS = utils.getByteConfigSetting("GameServer", "veteranTokenBonus");
 
     public static void giveVeteranRewardToken(obj_id player, int ammount) throws InterruptedException {
         obj_id tatooine = getPlanetByName("tatooine");
