@@ -2163,7 +2163,7 @@ item_event_microservo_gloves_03_01	precision_modified=30,constitution_modified=2
 item_quest_reward_imperial_pilot_medal_01_01											
 item_quest_reward_rebel_pilot_medal_01_01											
 item_quest_reward_neutral_pilot_medal_01_01											
-item_publish_gift_27_04_01						publish_gift	3600			appearance/pt_heal.prt	
+item_publish_gift_27_04_01						publish_gift	900			appearance/pt_heal.prt	
 item_pub28_meat_pie_02_01					pub28MeatPie	short_reuse_4	5				
 item_pub28_corsec_ring_02_01	constitution_modified=9,strength_modified=9										
 item_pub28_corsec_ring_02_02	agility_modified=9,precision_modified=9										
