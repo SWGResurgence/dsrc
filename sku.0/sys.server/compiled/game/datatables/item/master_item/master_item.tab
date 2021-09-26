@@ -8530,11 +8530,7 @@ item_target_dummy_rebel_trooper	object/tangible/tcg/series3/target_dummy_deed.if
 item_target_dummy_stormtrooper	object/tangible/tcg/series3/target_dummy_deed.iff							4		systems.tcg.target_creature_deed			Target Stormtrooper Dummy Controller	"Combat lovers, take notice, AB-US3 is the latest innovation in galactic training.  Whether you choose to blast him from a distance, or assault him with a lightsaber, AB-US3 can take whatever you've got to throw at him.  A handy damage log keeps track of exactly what attacks you use on him and how much damage you do.  You can even invite your friends over to abuse him too.  Best of all, he doesn't complain... much.  This item may only be claimed once per character."	
 item_krayt_segment	object/tangible/component/armor/shared_armor_segment_composite_krayt.iff							3		"object.autostack,item.special.nomove"		1	Krayt Dragon Scale	This Krayt dragon scale may be used in the process of crafting armor.	
 item_tauntaun_dna object/tangible/loot/beast/dna_container.iff 4 systems.beast.cs_dna DNA Storage Device (Tauntaun) Device that stores harvested DNA cores.
-item_vet_reward_resource_fabricator	object/tangible/veteran_reward/data_terminal_s3.iff							4		systems.veteran_reward.resource_fabricator			Resource Fabricator	Using this device will grant the player a free crate of resources.  This item may only be used once.	
-item_vet_reward_resource_generator	object/tangible/veteran_reward/resource_supply_crate.iff							4		systems.veteran_reward.resource_supply_generator			Resource Supply Generator	Using this device will grant the player a free crate of resources.  This item may only be used once.	
+item_vet_reward_resource_fabricator	object/tangible/veteran_reward/data_terminal_s2.iff							4		systems.veteran_reward.resource_fabricator			Resource Fabricator	Using this device will grant the player a free crate of resources.  This item may only be used once.	
+item_vet_reward_resource_generator	object/tangible/veteran_reward/resource_supply_crate.iff							4		systems.veteran_reward.resource_supply_generator			Resource Supply Generator	Using this device will grant the player a free crate of resources.	
+item_vet_reward_resource_industrial_replicator	object/tangible/veteran_reward/data_terminal_s3.iff							4		systems.veteran_reward.resource_industrial_replicator			Resource Induistrial Replicator	Using this device will grant the player a free crate of resources.	
 item_level90_boost	object/tangible/loot/misc/buddy_level_holocron.iff							6		"systems.skills.auto_level,item.special.nomove"			Holocron of Knowledge	Studying this holocron will teach you many of the life experiences of its previous owner.	
-
-
-
-
-object/tangible/veteran_reward/data_terminal_s3.iff
