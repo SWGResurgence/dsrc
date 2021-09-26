@@ -32,7 +32,6 @@ public class emperors_hand_loot extends script.base_script {
 			return;
 		}
 		int x = rand(1, 100);
-		
 		if (x < 100) { /* 100% Drop Chance: Legendary Loot Chest */
 			static_item.createNewItemFunction("rare_loot_chest_quality_3", corpseInventory);
 		}
@@ -57,7 +56,6 @@ public class emperors_hand_loot extends script.base_script {
 		if (x < 100) { /* 100% Drop Chance: Sith Speeder Deed */
 			static_item.createNewItemFunction("item_tcg_loot_reward_series1_sith_speeder", corpseInventory);
 		}
-		int x = rand(1, 100);
 		if (x < 100) { /* 100% Drop Chance: Jedi Waistpack 4/5 */
 			static_item.createNewItemFunction("item_collection_jedi_holocron_01_04", corpseInventory);
 		}
