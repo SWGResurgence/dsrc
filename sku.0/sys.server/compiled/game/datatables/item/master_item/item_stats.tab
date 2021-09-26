@@ -643,8 +643,8 @@ item_tow_hk47_move_immune_06_01					towHk47MoveImmuneItem	long_reuse_4	1800
 item_tow_mafosa_mez_immune_06_01					towMafosaMezImmune	long_reuse_4	1800				
 item_tow_fwd_commander_stim_05_01				index_color_1=21	towCommanderIIRegenItem	long_reuse_4	1800	80			
 item_tow_schematic_psg_05_01			string:loot_schematic.schematic=object/draft_schematic/armor/shield_generator_personal_old_republic.iff,int:loot_schematic.uses=25,string:loot_schematic.skill_req=class_munitions_phase4_master								
-item_force_crystal_04_01					forceCrystalHealth	forceVillageBuff_1	86400	80		appearance/pt_heal_resist_states.prt	survey
-item_force_crystal_04_02					forceCrystalForce	forceVillageBuff_2	86400	80		appearance/pt_heal_resist_states.prt	survey
+item_force_crystal_04_01					forceCrystalHealth	forceVillageBuff_1	10800	50		appearance/pt_heal_resist_states.prt	survey
+item_force_crystal_04_02					forceCrystalForce	forceVillageBuff_2	10800	50		appearance/pt_heal_resist_states.prt	survey
 item_npe_spy_specop_pants	agility_modified=10										
 item_content_charged_combo_acc_02_01					contentChargedComboAcc_1	short_reuse_4	5				
 item_content_charged_rng_def_02_01					contentChargedRngDefense_1	short_reuse_4	5				
