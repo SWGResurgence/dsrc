@@ -5,6 +5,8 @@ item_tow_crystal_uber_05_01	Buffs: Shard of Ferocity
 item_tow_crystal_uber_05_02	Buffs: Shard of Retaliation
 item_tow_buff_crystal_02_03	Buffs: Shard of the Serpent
 item_tow_holocron_ab_immune_02_01	Buffs: Sith Holocron
+object/tangible/veteran_reward/resource.iff	Deed: A Crate of Free Resources
+object/tangible/veteran_reward/harvester.iff	Deed: Make A Harvester Self Powered
 item_cs_dna_mooc	DNA Storage Container
 item_pangrack_dna	DNA Storage Container
 item_crystal_allyas_redemption_01	Color Crystal: Allya's Redemption
