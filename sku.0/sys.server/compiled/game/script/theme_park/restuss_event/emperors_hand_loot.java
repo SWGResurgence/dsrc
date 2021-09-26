@@ -32,15 +32,67 @@ public class emperors_hand_loot extends script.base_script {
 			return;
 		}
 		int x = rand(1, 100);
-		if (x < 100) { /* 100% Drop Chance */
+		
+		if (x < 100) { /* 100% Drop Chance: Legendary Loot Chest */
 			static_item.createNewItemFunction("rare_loot_chest_quality_3", corpseInventory);
 		}
-			if (x < 100) { /* 100% Drop Chance */
+		if (x < 100) { /* 100% Drop Chance: Jinsu Razor Lightsaber Schematic */
+			static_item.createNewItemFunction("item_restuss_schematic_saber_04_01", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Biological Focus Crystal */
+			static_item.createNewItemFunction("item_force_crystal_04_01", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Synapse Focus Crystal */
+			static_item.createNewItemFunction("item_force_crystal_04_02", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Concentrated Bacta Tank */
+			static_item.createNewItemFunction("item_publish_gift_27_04_01", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Jedi Meditation Room Deed */
+			static_item.createNewItemFunction("item_tcg_loot_reward_series3_jedi_meditation_room_deed", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Sith Meditation Room Deed */
+			static_item.createNewItemFunction("item_tcg_loot_reward_series3_sith_meditation_room_deed", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Sith Speeder Deed */
+			static_item.createNewItemFunction("item_tcg_loot_reward_series1_sith_speeder", corpseInventory);
+		}
+		int x = rand(1, 100);
+		if (x < 100) { /* 100% Drop Chance: Jedi Waistpack 4/5 */
+			static_item.createNewItemFunction("item_collection_jedi_holocron_01_04", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Sith Waistpack 4/5 */
 			static_item.createNewItemFunction("item_collection_sith_holocron_01_04", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Rare Rol Stone */
+			static_item.createNewItemFunction("item_treasure_map_bonus_buff_04_01", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Rare Nova Crystal */
+			static_item.createNewItemFunction("item_treasure_map_bonus_buff_04_02", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Rare Power Gem */
+			static_item.createNewItemFunction("item_treasure_map_bonus_buff_04_03", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Rare Corusca Gem */
+			static_item.createNewItemFunction("item_treasure_map_bonus_buff_04_04", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Rare Sasho Gem */
+			static_item.createNewItemFunction("item_treasure_map_bonus_buff_04_05", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Rare Ankarres Sapphyre */
+			static_item.createNewItemFunction("item_treasure_map_bonus_buff_04_06", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Maul's Vengeance Lightsaber Crystal */
+			static_item.createNewItemFunction("item_color_crystal_02_12", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Kun's Blood */
+			static_item.createNewItemFunction("item_color_crystal_02_13", corpseInventory);
+		}
+		if (x < 100) { /* 100% Drop Chance: Scorpion Kliknik DNA */
+			static_item.createNewItemFunction("item_scorpion_kliknik_dna", corpseInventory);
 		}
 		/* String myLoot1 = "object/tangible/loot/loot_schematic/generic_limited_use_flashy.iff";
 		createObject(myLoot1, corpseInventory, ""); */
 		return;
 	}
 }
-		
