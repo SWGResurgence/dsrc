@@ -18,12 +18,11 @@ critical_hit_defense	combat	expertise_critical_hit_reduction	2	4	3
 devastation	combat	expertise_co_pos_secured_line_burst_fire_devastation_bonus	2	4	3	
 dodge_chance	combat	combat_dodge	2	4	3	
 evasion_chance	combat	combat_evasion_chance	2	4	3	
-glancing_blow_general	combat	expertise_glancing_blow_all	2	4	3	
+glancing_blow_increased	combat	expertise_glancing_blow_all	2	4	3	
 glancing_blow_melee	combat	expertise_glancing_blow_melee	2	4	3	
 glancing_blow_ranged	combat	expertise_glancing_blow_ranged	2	4	3	
 heal_potency	combat	expertise_healing_all	5	2	4	holism
 parry_rating	combat	combat_parry	2	4	3	
-parry_reduction	combat	exotic_parry_reduction	2	4	3	
 reactive_second_chance	combat	reactive_second_chance	4	2	2	second_chance
 resilience	combat	expertise_dot_absorption_all	5	2	4	holism
 strikethrough_chance	combat	combat_strikethrough_chance	2	4	3	
