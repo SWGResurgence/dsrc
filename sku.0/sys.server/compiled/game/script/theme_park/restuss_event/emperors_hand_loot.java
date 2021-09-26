@@ -34,12 +34,12 @@ public class emperors_hand_loot extends script.base_script {
 		int x = rand(1, 100);
 		if (x < 100) { /* 100% Drop Chance */
 			static_item.createNewItemFunction("rare_loot_chest_quality_3", corpseInventory);
+		}
 			if (x < 100) { /* 100% Drop Chance */
 			static_item.createNewItemFunction("item_collection_sith_holocron_01_04", corpseInventory);
-			}
 		}
-		String myLoot1 = "object/tangible/loot/loot_schematic/generic_limited_use_flashy.iff";
-		createObject(myLoot1, corpseInventory, "");
+		/* String myLoot1 = "object/tangible/loot/loot_schematic/generic_limited_use_flashy.iff";
+		createObject(myLoot1, corpseInventory, ""); */
 		return;
 	}
 }
