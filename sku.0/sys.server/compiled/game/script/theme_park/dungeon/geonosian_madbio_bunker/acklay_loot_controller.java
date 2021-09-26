@@ -37,6 +37,7 @@ public class acklay_loot_controller extends script.base_script
         int x = rand(1, 100);
 		if (x < 26){  // 25% Drop Chance
             static_item.createNewItemFunction("item_scorpion_kliknik_dna", corpseInventory);
+		}
         if (x < 16){  // 15% Drop Chance
             static_item.createNewItemFunction("item_tcg_loot_reward_series2_barn", corpseInventory);
         }
