@@ -752,7 +752,7 @@ public class combat_engine
 		public int		debuff							= 0;
 		public String	stanceParticle					= "";
 		public int 		dispellPlayer		 			= 1;
-		public int 		removeOnDeath		 			= 1;
+		public int 		removeOnDeath		 			= 0;
 		public int 		playerRemovable		 			= 1;
 		public int 		isCelestial			 			= 0;
 		public int 		maxStacks			 			= 1;
