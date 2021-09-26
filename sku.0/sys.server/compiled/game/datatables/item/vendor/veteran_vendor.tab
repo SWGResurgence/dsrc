@@ -10,6 +10,7 @@ object/tangible/veteran_reward/data_terminal_s1.iff	3		A Holonet Tracking Consol
 object/tangible/veteran_reward/respec_voucher_deed.iff	78		A Respec Voucher
 object/tangible/veteran_reward/data_terminal_s2.iff	3		A Sample Readout Console
 item_vet_reward_75month_houseplant_02	75		An Exotic Plant
+object/tangible/veteran_reward/one_year_anniversary/painting_01.iff	3	1	Cast Wing in Flight
 object/tangible/veteran_reward/city_flag_kit.iff	54		City Banner Kit
 st_cn_vet_reward_dark_jedi_boss	57		Dark Jedi Forcemaster Storyteller Token
 item_vet_reward_72month_darth_maul	72		Darth Maul Statue
@@ -18,9 +19,12 @@ object/tangible/veteran_reward/frn_tech_console_sectional_c.iff	12		Database Inp
 item_vet_66_month_jedi_temple_burning	66		Death - Destroyed Jedi Temple Miniature
 object/tangible/veteran_reward/frn_vet_holo_deathstar.iff	24		Death Star Hologram
 object/tangible/veteran_reward/frn_vet_houseplant.iff	9		Decorative Houseplant
+object/tangible/veteran_reward/one_year_anniversary/painting_10.iff	3	1	Dusk in Kachirho
 object/tangible/veteran_reward/frn_vet_emp_chair.iff	30		Emperor's Chair
+object/tangible/veteran_reward/one_year_anniversary/painting_09.iff	3	1	Emperor's Eyes
 object/tangible/veteran_reward/frn_vet_palpatine_statue.iff	63		Empire Day Emperor's Statue
 item_vet_reward_greeter_gamorrean	69	5	Employment Terminal: Gamorrean Greeter
+object/tangible/veteran_reward/one_year_anniversary/painting_05.iff	3	1	Fighter Study
 item_vet_reward_78month_ttgm_itt	78		Flight of the Veteran
 object/tangible/veteran_reward/vr_gacklebat_deed.iff	48		Gackle Bat Familiar
 object/tangible/veteran_reward/frn_vet_carbonite_geonosian.iff	51		Geonosian in Carbonite
@@ -28,7 +32,9 @@ object/tangible/veteran_reward/frn_vet_carbonite_gungan.iff	51		Gungan in Carbon
 object/tangible/veteran_reward/frn_tech_console_sectional_a.iff	12		Holonet Databank
 item_vet_homing_beacon_03_01	57		Homing Beacon
 item_deed_hover_chair_06_01	60	5	Hover Chair Vehicle Deed
+object/tangible/veteran_reward/one_year_anniversary/painting_06.iff	3	1	Hutt Greed
 object/tangible/veteran_reward/frn_vet_holo_imperial_guard.iff	15		Imperial Guard Hologram
+object/tangible/veteran_reward/one_year_anniversary/painting_08.iff	3	1	Imperial Oppression
 object/tangible/veteran_reward/frn_vet_rug_imperial.iff	18		Imperial Rug
 object/tangible/veteran_reward/frn_vet_holo_jawa.iff	33		Jawa Hologram
 object/tangible/veteran_reward/frn_vet_holo_sandcrawler.iff	21		Jawa Sandcrawler Hologram
@@ -69,6 +75,7 @@ st_cn_vet_reward_stormtrooper_boss	54		Stormtrooper Veteran Storyteller Token
 st_cn_vet_reward_super_battle_droid_boss	54		Super Battle Droid Storyteller Token
 object/tangible/veteran_reward/frn_tech_console_sectional_b.iff	12		System Readout Terminal
 st_cn_vet_reward_tusken_boss	57		Tusken Raider Dreadlord Storyteller Token
+object/tangible/veteran_reward/one_year_anniversary/painting_03.iff	3	1	Tatooine Dune Speeder
 object/tangible/veteran_reward/frn_vet_carbonite_ugnaught.iff	51		Ugnaught in Carbonite
 object/tangible/veteran_reward/frn_couch_falcon_section_s01.iff	6		YT-1300 Modular Seating
 object/tangible/veteran_reward/frn_couch_falcon_corner_s01.iff	6		YT-1300 Passenger Lounge
