@@ -1,4 +1,4 @@
-package script.theme_park.restuss_event;
+package script.theme_park.emperors_retreat;
 
 import script.*;
 import script.library.*;
