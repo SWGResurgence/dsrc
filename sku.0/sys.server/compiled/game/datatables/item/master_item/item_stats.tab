@@ -4266,7 +4266,7 @@ costume_spider_droid					costume_spider_droid
 item_prolog_content_decorative_science_datapad											
 item_mini_vehicle_terminal_barc			string:template=object/mobile/barc_mini.iff								
 item_mini_vehicle_terminal_awing			string:template=object/mobile/awing_mini.iff								
-item_auto_level_50_buddy_conversion			int:autoLevelTo=90								
+item_auto_level_50_buddy_conversion			int:autoLevelTo=50								
 item_mini_vehicle_terminal_basilisk			string:template=object/mobile/basilisk_mini.iff								
 item_deed_pod_racer_06_03			string:vehicle_attribs.object_ref=lb_pod_racer_one,float:hit_points=15000								
 item_tcg_loot_reward_series5_xj6_air_speeder			string:vehicle_attribs.object_ref=xj6_air_speeder,float:hit_points=15000								
@@ -4815,3 +4815,4 @@ item_target_dummy_blacksun			string:targetDummyCreatureName=target_dummy_blacksu
 item_target_dummy_rebel_trooper			string:targetDummyCreatureName=target_dummy_rebel_trooper								
 item_target_dummy_stormtrooper			string:targetDummyCreatureName=target_dummy_stormtrooper								
 item_tauntaun_dna string:beast.dna.creature_template=object/mobile/beast_master/bm_tauntaun.iff,float:beast.dna.quality=90.000000,int:beast.dna.cs_item=1
+item_level90_boost			int:autoLevelTo=90								
