@@ -6,13 +6,7 @@ import script.library.static_item;
 import script.library.utils;
 import script.obj_id;
 
-import script.library.loot;
-import script.menu_info;
-import script menu_info_types;
-import script.string_id;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class emperors_hand_loot extends script.base_script {
 	public emperors_hand_loot() {
@@ -49,9 +43,18 @@ public class emperors_hand_loot extends script.base_script {
 		/* String myLoot1 = "object/tangible/loot/loot_schematic/generic_limited_use_flashy.iff";
 		createObject(myLoot1, corpseInventory, ""); */
 		
-		obj_id[] handLootedItems = new obj_id[items.size()];
-		items.toArray(lootedItems);
-		showLootBox(self, lootedItems);
+		if (useShowLootBox) {
+			if (lootItemsResizeable.size() > 0) {
+				obj_id[] lootItems = new obj_id[0];
+				if (lootItemsResizeable != null) {
+					lootItems = new obj_id[
+					lootItemsResizeable.size()];
+					lootItemsResizeable.toArray(
+					lootItems);
+				}
+				showLootBox(self, lootItems);
+			}
+		}
 		return;
 	}
 }
