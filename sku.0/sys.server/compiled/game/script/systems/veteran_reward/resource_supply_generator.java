@@ -8,7 +8,7 @@ import script.library.veteran_deprecated;
 
 import java.util.Vector;
 
-public class resource_supply_generator extends script.base_script
+public class resource_90month extends script.base_script
 {
     public static final int RESOURCE_AMOUNT = 75000;
     public static final String ROOT_RESOURCE_CLASS = "resource";
@@ -92,7 +92,7 @@ public class resource_supply_generator extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-
+            
             {
                 String[] resourceClasses = (self.getScriptVars()).getStringArray(SCRIPTVAR_SUB_CLASSES);
                 int rowSelected = sui.getListboxSelectedRow(params);
@@ -100,7 +100,7 @@ public class resource_supply_generator extends script.base_script
                 {
                     chooseResourceClass(sui.getPlayerId(params), resourceClasses[rowSelected]);
                 }
-                else
+                else 
                 {
                     String resourceClass = (self.getScriptVars()).getString(SCRIPTVAR_BASE_CLASS);
                     chooseResourceClass(sui.getPlayerId(params), resourceClass);
@@ -108,14 +108,14 @@ public class resource_supply_generator extends script.base_script
             }
             break;
             case sui.BP_CANCEL:
-
+            
             {
                 String resourceClass = (self.getScriptVars()).getString(SCRIPTVAR_BASE_CLASS);
                 if (!resourceClass.equals(ROOT_ORGANIC_CLASS) && !resourceClass.equals(ROOT_INORGANIC_CLASS))
                 {
                     chooseResourceClass(sui.getPlayerId(params), getResourceParentClass(resourceClass));
                 }
-                else
+                else 
                 {
                     chooseResourceClass(sui.getPlayerId(params), getResourceParentClass(resourceClass), true);
                 }
@@ -186,7 +186,7 @@ public class resource_supply_generator extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-
+            
             {
                 obj_id resourceChosen = (self.getScriptVars()).getObjId(SCRIPTVAR_RESOURCECHOSEN);
                 if (isIdValid(resourceChosen))
@@ -215,7 +215,7 @@ public class resource_supply_generator extends script.base_script
                     setSUIProperty(pid, sui.MSGBOX_BTN_CANCEL, sui.PROP_TEXT, "@back");
                     sui.showSUIPage(pid);
                 }
-                else
+                else 
                 {
                     String resourceClass = (self.getScriptVars()).getString(SCRIPTVAR_BASE_CLASS);
                     chooseResourceClass(sui.getPlayerId(params), resourceClass);
@@ -223,7 +223,7 @@ public class resource_supply_generator extends script.base_script
             }
             break;
             case sui.BP_CANCEL:
-
+            
             {
                 String resourceClass = (self.getScriptVars()).getString(SCRIPTVAR_BASE_CLASS);
                 if (!resourceClass.equals(ROOT_RESOURCE_CLASS))
@@ -254,7 +254,7 @@ public class resource_supply_generator extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-
+            
             {
                 obj_id resourceChosen = (self.getScriptVars()).getObjId(SCRIPTVAR_RESOURCECHOSEN);
                 if (isIdValid(resourceChosen))
@@ -269,7 +269,7 @@ public class resource_supply_generator extends script.base_script
                     }
                     cleanup();
                 }
-                else
+                else 
                 {
                     String resourceClass = (self.getScriptVars()).getString(SCRIPTVAR_BASE_CLASS);
                     chooseResourceClass(sui.getPlayerId(params), resourceClass);
@@ -277,7 +277,7 @@ public class resource_supply_generator extends script.base_script
             }
             break;
             case sui.BP_CANCEL:
-
+            
             {
                 String resourceClass = (self.getScriptVars()).getString(SCRIPTVAR_BASE_CLASS);
                 chooseResourceClass(sui.getPlayerId(params), resourceClass);
@@ -327,7 +327,7 @@ public class resource_supply_generator extends script.base_script
             sui.showSUIPage(pid);
             ((self).getScriptVars()).put(SCRIPTVAR_RESOURCECHOSEN, resource);
         }
-        else
+        else 
         {
             cleanup();
         }
@@ -348,7 +348,7 @@ public class resource_supply_generator extends script.base_script
         {
             resourceClasses = filterTopLevelResourceList(parentClass);
         }
-        else
+        else 
         {
             resourceClasses = getImmediateResourceChildClasses(parentClass);
         }
@@ -369,7 +369,7 @@ public class resource_supply_generator extends script.base_script
             {
                 resourceClasses[i] = null;
             }
-            else
+            else 
             {
                 ++goodResources;
             }
@@ -394,7 +394,7 @@ public class resource_supply_generator extends script.base_script
         {
             prompt = "@" + SID_CHOOSE_CLASS;
         }
-        else
+        else 
         {
             prompt = "@" + SID_CHOOSE_SUB_CLASS + " " + getResourceClassName(parentClass);
         }
@@ -409,7 +409,7 @@ public class resource_supply_generator extends script.base_script
             ((getSelf()).getScriptVars()).put(SCRIPTVAR_BASE_CLASS, parentClass);
             ((getSelf()).getScriptVars()).put(SCRIPTVAR_SUB_CLASSES, resourceClasses);
         }
-        else
+        else 
         {
             cleanup();
         }
@@ -441,7 +441,7 @@ public class resource_supply_generator extends script.base_script
             ((getSelf()).getScriptVars()).put(SCRIPTVAR_BASE_CLASS, parentClass);
             ((getSelf()).getScriptVars()).put(SCRIPTVAR_TYPES, resourceTypes);
         }
-        else
+        else 
         {
             cleanup();
         }
