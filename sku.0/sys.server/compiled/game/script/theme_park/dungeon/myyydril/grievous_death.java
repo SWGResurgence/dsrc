@@ -43,6 +43,9 @@ public class grievous_death extends script.base_script
             if(x < 5){  // 5% chance to drop the wheel bike
                 static_item.createNewItemFunction("item_deed_grievous_wheel_bike", corpseInventory);
             }
+			if(x < 3){ // 2% chance to drop Grievous Gutsack
+				static_item.createNewItemFunction("item_tcg_loot_reward_series3_general_grievous_gutsack", corpseInventory);
+			}
         }
         String myLoot1 = "object/tangible/ship/crafted/chassis/grievous_starfighter_reward_deed.iff";
         String myLoot2 = "object/tangible/wearables/cybernetic/s02/cybernetic_s02_arm_r.iff";
