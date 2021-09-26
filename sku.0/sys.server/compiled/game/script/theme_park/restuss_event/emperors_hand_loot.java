@@ -6,6 +6,9 @@ import script.library.static_item;
 import script.library.utils;
 import script.obj_id;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class emperors_hand_loot extends script.base_script {
 	public emperors_hand_loot() {
 	}
@@ -40,6 +43,10 @@ public class emperors_hand_loot extends script.base_script {
 		}
 		/* String myLoot1 = "object/tangible/loot/loot_schematic/generic_limited_use_flashy.iff";
 		createObject(myLoot1, corpseInventory, ""); */
+		
+		obj_id[] handLootedItems = new obj_id[items.size()];
+		items.toArray(lootedItems);
+		showLootBox(self, lootedItems);
 		return;
 	}
 }
