@@ -63,18 +63,13 @@ public class chef_vendor extends script.base_script {
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
 
-    /*public int chef_vendor_handleBranch1(obj_id self, obj_id player, string_id response) throws InterruptedException {
-        if (response.equals("s_2")) {
-            chef_vendor_action_showTokenVendorUI(player, self);
-            chat.chat(self, player, new string_id(c_stringFile, "s_3"));
-        } else if (response.equals("s_4")) {
-            chat.chat(self, player, new string_id(c_stringFile, "s_5"));
-        } else if (response.equals("s_6")) {
-            chat.chat(self, player, new string_id(c_stringFile, "s_7"));
-        }
-        npcEndConversation(player);
-        return SCRIPT_CONTINUE;
-    }*/
+    public int chef_vendor_handleBranch1(obj_id self, obj_id player, string_id response) throws InterruptedException {
+		if (response.equals("s_2")) {
+			chef_vendor_action_showTokenVendorUI(player, self);
+		}
+		npcEndConversation(player);
+		return SCRIPT_CONTINUE;
+	}
 
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player)) {
