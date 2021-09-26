@@ -68,7 +68,7 @@ st_cn_vet_reward_rebel_commando_boss	54		Rebel Commando Vindicator Storyteller T
 object/tangible/veteran_reward/frn_vet_rug_rebel.iff	18		Rebel Rug
 object/tangible/veteran_reward/frn_yoda_fountain.iff	63		Remembrance Day Yoda Fountain
 item_vet_reward_resource_fabricator	75		Resource Fabricator
-item_vet_reward_resource_generator	50		Resource Supply Generator
+item_vet_reward_resource_supply_generator	50		Resource Supply Generator
 vet_reward_respec_reset	174		Respec Reset Device
 item_vet_reward_sd_console_01	84		Star Destroyer Console Row
 item_vet_reward_sd_console_02	84		Star Destroyer System Console
