@@ -2298,10 +2298,10 @@ expertise_en_inspired_fitness_1	expertise																					expertise_en_inspi
 expertise_en_inspired_fitness_2	expertise_en_inspired_fitness_1																					expertise_en_inspire_attrib_increase=50				
 expertise_en_inspired_fitness_3	expertise_en_inspired_fitness_2																					expertise_en_inspire_attrib_increase=50				
 expertise_en_inspired_fitness_4	expertise_en_inspired_fitness_3																					expertise_en_inspire_attrib_increase=50				
-expertise_en_inspired_resilience_1	expertise																					expertise_en_inspire_resist_increase=50				
-expertise_en_inspired_resilience_2	expertise_en_inspired_resilience_1																					expertise_en_inspire_resist_increase=50				
-expertise_en_inspired_resilience_3	expertise_en_inspired_resilience_2																					expertise_en_inspire_resist_increase=50				
-expertise_en_inspired_resilience_4	expertise_en_inspired_resilience_3																					expertise_en_inspire_resist_increase=50				
+expertise_en_inspired_resilience_1	expertise																					expertise_en_inspire_resist_increase=75				
+expertise_en_inspired_resilience_2	expertise_en_inspired_resilience_1																					expertise_en_inspire_resist_increase=75				
+expertise_en_inspired_resilience_3	expertise_en_inspired_resilience_2																					expertise_en_inspire_resist_increase=75				
+expertise_en_inspired_resilience_4	expertise_en_inspired_resilience_3																					expertise_en_inspire_resist_increase=75				
 expertise_en_inspired_industry_1	expertise																					expertise_en_inspire_trader_increase=25				
 expertise_en_inspired_industry_2	expertise_en_inspired_industry_1																					expertise_en_inspire_trader_increase=25				
 expertise_en_inspired_industry_3	expertise_en_inspired_industry_2																					expertise_en_inspire_trader_increase=25				
