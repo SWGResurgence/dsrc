@@ -8,7 +8,7 @@ import script.library.veteran_deprecated;
 
 import java.util.Vector;
 
-public class resource_generator extends script.base_script
+public class resource_supply_generator extends script.base_script
 {
     public static final int RESOURCE_AMOUNT = 75000;
     public static final String ROOT_RESOURCE_CLASS = "resource";
