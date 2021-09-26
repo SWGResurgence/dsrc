@@ -6,27 +6,26 @@ import java.util.Enumeration;
 
 public class respec extends script.base_script
 {
-    public respec()
-    {
-    }
     public static final String EXPERTISE_VERSION_TABLE = "datatables/expertise/respec_version.iff";
     public static final String EXPERTISE_VERSION_OBJVAR = "professionExpertiseVersion";
+	public static final String BEAST
     public static final String BEAST_MASTER_EXPERTISE_VERSION_OBJVAR = "beastMasterExpertiseVersion";
     public static final int RESPEC_PRICE_MULTIPLIER = 10000;
     public static final int[] RESPEC_COST = new int[]
     {
         0,
-        100000,
         150000,
-        250000,
-        500000,
-        1000000,
-        6000000,
-        7000000,
-        8000000,
-        9000000,
-        10000000,
-        25000000
+		250000,
+		500000,
+		1000000,
+		5000000,
+		10000000,
+		15000000,
+		20000000,
+		25000000,
+		50000000,
+		75000000,
+		100000000
     };
     public static final String OBJVAR_RESPEC_TOKEN = "respecToken.token";
     public static final String OBJVAR_RESPEC_TOKEN_USED = "respecToken.tokenUsed";
