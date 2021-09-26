@@ -40,9 +40,6 @@ public class grievous_death extends script.base_script
         int x = rand(1, 100);
         if (x < 15){  // 14% chance at dropping bonus loot (at least a Bane's Heart crystal)
             static_item.createNewItemFunction("item_color_crystal_02_16", corpseInventory);
-            if(x < 5){  // 5% chance to drop the wheel bike
-                static_item.createNewItemFunction("item_deed_grievous_wheel_bike", corpseInventory);
-            }
 			if(x < 3){ // 2% chance to drop Grievous Gutsack
 				static_item.createNewItemFunction("item_tcg_loot_reward_series3_general_grievous_gutsack", corpseInventory);
 			}
