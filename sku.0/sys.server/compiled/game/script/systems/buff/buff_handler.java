@@ -1759,7 +1759,7 @@ public class buff_handler extends script.base_script
         {
             actualPointsToSpend += getEnhancedSkillStatisticModifierUncapped(bufferId, "expertise_en_inspire_base_point_increase");
         }
-        int attemptingToSpendPoints = 0;
+        int attemptingToSpendPoints = 32;
         for (int i = 0; i < buffComponentKeys.length; i++)
         {
             if (internalDecay == true)
