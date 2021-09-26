@@ -4,7 +4,7 @@ agility	attributes	agility_modified	10	1	15
 block_value	attributes	combat_block_value	10	1	15	
 camouflage	attributes	camouflage	10	1	15	
 constitution	attributes	constitution_modified	10	1	15	
-detect_camoflage	attributes	detect_hidden	10	1	15	
+detect_camouflage	attributes	detect_hidden	10	1	15	
 evasion_value	attributes	combat_evasion_value	10	1	15	
 luck	attributes	luck_modified	10	1	15	
 precision	attributes	precision_modified	10	1	15	
@@ -15,7 +15,7 @@ action_cost_reduction	combat	expertise_action_all	2	4	5
 block_chance	combat	combat_block_chance	2	4	3	
 critical_hit	combat	expertise_critical_niche_all	2	4	3	
 critical_hit_defense	combat	expertise_critical_hit_reduction	2	4	3	
-devastation	combat	commando_devastation	2	4	3	
+devastation	combat	expertise_co_pos_secured_line_burst_fire_devastation_bonus	2	4	3	
 dodge_chance	combat	combat_dodge	2	4	3	
 evasion_chance	combat	combat_evasion_chance	2	4	3	
 glancing_blow_general	combat	expertise_glancing_blow_all	2	4	3	
@@ -32,15 +32,44 @@ reactive_go_with_the_flow	misc	movement_speed	5	2	5	go_with_the_flow
 kinetic	resistances	expertise_innate_protection_kinetic	5	1	450	
 energy	resistances	expertise_innate_protection_energy	5	1	450	
 elemental	resistances	elemental_resistance	5	1	450	
-general_crafting_assembly	trade	armor_assembly,clothing_assembly,cybernetic_assembly,droid_assembly,food_assembly,jedi_saber_assembly,structure_assembly,weapon_assembly,	5	2	1	harvest_faire  
-general_crafting_experimentation	trade	armor_experimentation,clothing_experimentation,cybernetic_experimentation,droid_experimentation,food_experimentation,jedi_saber_experimentation,structure_experimentation,weapon_experimentation	5	2	1	harvest_faire  
-space_crafting_assembly	trade	advanced_assembly,booster_assembly,chassis_assembly,engine_assembly,power_systems,shields_assembly,weapon_systems_assembly	5	2	1	harvest_faire  
-space_crafting_experimentation	trade	advanced_ship_experimentation,booster_experimentation,chassis_experimentation,engine_experimentation,power_systems_experimentation,shields_experimentation,weapon_systems_experimentation	5	2	1	harvest_faire  
-amazing_success_chance	trade	crafting_critical_success_bonus	2	4	2	
-factory_speed	trade	factory_speed	5	2	2	
-general_assembly	trade	general_assembly	5	2	2	
+amazing_success_chance	trade	crafting_critical_success_bonus	5	4	2	harvest_faire  
+factory_speed	trade	factory_speed	5	2	2	harvest_faire  
+general_crafting_armor_assembly	trade	armor_assembly	5	2	1	harvest_faire  
+general_crafting_armor_experimentation	trade	armor_experimentation	7	2	1	harvest_faire  
+general_crafting_artisan_assembly	trade	general_assembly	5	2	1	
+general_crafting_artisan_experimentation	trade	general_experimentation	7	2	1	
+general_crafting_clothing_assembly	trade	clothing_assembly	5	2	1	harvest_faire  
+general_crafting_clothing_experimentation	trade	clothing_experimentation	7	2	1	harvest_faire  
+general_crafting_cybernetic_assembly	trade	cybernetic_assembly	5	2	1	harvest_faire  
+general_crafting_cybernetic_experimentation	trade	cybernetic_experimentation	7	2	1	harvest_faire  
+general_crafting_droid_assembly	trade	droid_assembly	5	2	1	harvest_faire  
+general_crafting_droid_experimentation	trade	droid_experimentation	7	2	1	harvest_faire  
+general_crafting_food_assembly	trade	food_assembly	5	2	1	harvest_faire  
+general_crafting_food_experimentation	trade	food_experimentation	7	2	1	harvest_faire  
+general_crafting_instrument_assembly	trade	instrument_assembly	5	2	1	harvest_faire  
+general_crafting_lightsaber_assembly	trade	jedi_saber_assembly	5	2	1	harvest_faire  
+general_crafting_lightsaber_experimentation	trade	jedi_saber_experimentation	7	2	1	harvest_faire  
+general_crafting_prop_assembly	trade	prop_assembly	5	2	1	harvest_faire  
+general_crafting_structure_assembly	trade	structure_assembly	5	2	1	harvest_faire  
+general_crafting_structure_experimentation	trade	structure_experimentation	7	2	1	harvest_faire  
+general_crafting_weapon_assembly	trade	weapon_assembly	5	2	1	harvest_faire  
+general_crafting_weapon_experimentation	trade	weapon_experimentation	7	2	1	harvest_faire  
 hand_sampling	trade	expertise_resource_sampling_increase	5	2	2	harvest_faire  
 harvest_faire	trade	expertise_harvester_collection_increase	5	2	2	harvest_faire  
 incubation_time_reduction	trade	incubation_time_reduction	5	2	2	harvest_faire  
 mutation_chance	trade	bm_mutation_chance_increase	5	2	2	harvest_faire  
 reverse_engineering_chance	trade	expertise_reverse_engineering_bonus	5	2	2	
+space_crafting_advanced_ship_assembly	trade	advanced_assembly	5	2	1	harvest_faire  
+space_crafting_advanced_ship_experimentation	trade	advanced_ship_experimentation	7	2	1	harvest_faire  
+space_crafting_booster_assembly	trade	booster_assembly	5	2	1	harvest_faire  
+space_crafting_booster_experimentation	trade	booster_experimentation	7	2	1	harvest_faire  
+space_crafting_chassis_assembly	trade	chassis_assembly	5	2	1	harvest_faire  
+space_crafting_chassis_experimentation	trade	chassis_experimentation	7	2	1	harvest_faire  
+space_crafting_engine_assembly	trade	engine_assembly	5	2	1	harvest_faire  
+space_crafting_engine_experimentation	trade	engine_experimentation	7	2	1	harvest_faire  
+space_crafting_power_systems_assembly	trade	power_systems	5	2	1	harvest_faire  
+space_crafting_power_systems_experimentation	trade	power_systems_experimentation	7	2	1	harvest_faire  
+space_crafting_shield_assembly	trade	shields_assembly	5	2	1	harvest_faire  
+space_crafting_shield_experimentation	trade	shields_experimentation	7	2	1	harvest_faire  
+space_crafting_weapon_systems_assembly	trade	weapon_systems	5	2	1	harvest_faire  
+space_crafting_weapon_systems_experimentation	trade	weapon_systems_experimentation	7	2	1	harvest_faire  
