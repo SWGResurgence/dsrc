@@ -8,11 +8,8 @@ import script.library.veteran_deprecated;
 
 import java.util.Vector;
 
-public class resource_90month extends script.base_script
+public class resource_industrial_replicator extends script.base_script
 {
-    public resource_90month()
-    {
-    }
     public static final int RESOURCE_AMOUNT = 50000;
     public static final String ROOT_RESOURCE_CLASS = "resource";
     public static final String ROOT_ORGANIC_CLASS = "organic";
