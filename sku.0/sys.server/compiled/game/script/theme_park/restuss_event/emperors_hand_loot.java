@@ -38,7 +38,7 @@ public class emperors_hand_loot extends script.base_script {
 			static_item.createNewItemFunction("item_collection_sith_holocron_01_04", corpseInventory);
 			}
 		}
-		String myLoot1 = "item_restuss_schematic_saber_04_01"
+		String myLoot1 = "item_restuss_schematic_saber_04_01";
 		static_item.createNewItemFunction(myLoot1, corpseInventory, "");
 		return;
 	}
