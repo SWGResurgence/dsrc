@@ -4814,3 +4814,4 @@ item_duel_recording_terminal					duel_recording_tracker
 item_target_dummy_blacksun			string:targetDummyCreatureName=target_dummy_blacksun								
 item_target_dummy_rebel_trooper			string:targetDummyCreatureName=target_dummy_rebel_trooper								
 item_target_dummy_stormtrooper			string:targetDummyCreatureName=target_dummy_stormtrooper								
+item_tauntaun_dna string:beast.dna.creature_template=object/mobile/beast_master/bm_tauntaun.iff,float:beast.dna.quality=90.000000,int:beast.dna.cs_item=1
