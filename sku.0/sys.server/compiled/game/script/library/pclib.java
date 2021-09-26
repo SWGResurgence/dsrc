@@ -804,7 +804,37 @@ public class pclib extends script.base_script
         if (isIdValid(gid))
         {
             group.notifyDeath(gid, player);
-        }		
+        }
+		
+		// RESTUSS PVP COMMENDATION SYSTEM BEGIN
+		
+		region[] regionList = getRegionsAtPoint(getLocation(killer));
+        if (regionList != null && regionList.length > 0)
+        {
+            for (int i = 0, j = regionList.length; i < j; i++)
+            {
+                region currentRegion = regionList[i];
+                if (currentRegion == null)
+                {
+                    continue;
+                }
+                String currentRegionName = currentRegion.getName();
+                if (currentRegionName.equals(restuss_event.PVP_REGION_NAME))
+                {
+                    String pFac = factions.getFaction(killer);
+                    obj_id inventory = utils.getInventoryContainer(killer);
+                    int commCount = pvpGetCurrentGcwRank(killer) - 1;
+
+                    if (commCount > 0) {
+                        static_item.createNewItemFunction("item_restuss_" + pFac.toLowerCase() + "_commendation_02_01", inventory, commCount);
+                        sendSystemMessageTestingOnly(killer, "You've recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + player + " in combat.");
+                    }
+                }
+            }
+        }
+		
+		// RESTUSS PVP COMMENDATION SYSTEM END
+		
         messageTo(player, HANDLER_PLAYER_DEATH, null, TIME_DEATH, true);
         dictionary params = new dictionary();
         params.put("victim", player);
