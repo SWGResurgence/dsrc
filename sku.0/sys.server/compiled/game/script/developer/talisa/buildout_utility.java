@@ -29,10 +29,6 @@ import java.util.List;
  */
 public class buildout_utility extends script.base_script {
 
-    public buildout_utility()
-    {
-    }
-
     // Only list planets in the SCENES array that are full size (16000x16000)
     // Only worlds at full size using -8192 to 8192 coordinates should be used otherwise the positioning will be off because the buildout names won't match to the correct positioning boxes.
     public static final String[] SCENES = {
