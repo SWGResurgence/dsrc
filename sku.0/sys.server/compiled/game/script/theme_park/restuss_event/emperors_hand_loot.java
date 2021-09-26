@@ -10,7 +10,7 @@ public class emperors_hand_loot extends script.base_script {
 	public emperors_hand_loot() {
 	}
 	public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException {
-		obj_id[] corpseInventory = utils.
+		obj_id corpseInventory = utils.
 		getInventoryContainer(self);
 		if (corpseInventory == null) {
 			return SCRIPT_CONTINUE;
@@ -22,7 +22,7 @@ public class emperors_hand_loot extends script.base_script {
 		return SCRIPT_CONTINUE;
 	}
 	public void createMyLoot(obj_id self) throws InterruptedException {
-		obj_id[] corpseInventory = utils.
+		obj_id corpseInventory = utils.
 		getInventoryContainer(self);
 		if (corpseInventory == null) {
 			return;
@@ -40,8 +40,6 @@ public class emperors_hand_loot extends script.base_script {
 		}
 		/* String myLoot1 = "object/tangible/loot/loot_schematic/generic_limited_use_flashy.iff";
 		createObject(myLoot1, corpseInventory, ""); */
-		
-		showLootBox(self, corpseInventory);
 		return;
 	}
 }
