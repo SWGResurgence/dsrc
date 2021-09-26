@@ -139,8 +139,8 @@ public class emperors_hand extends script.base_script
         return SCRIPT_CONTINUE;
     }
     public int cleanupCorpse(obj_id self, dictionary params) throws InterruptedException
-    {
+    /*{
         trial.cleanupNpc(self);
         return SCRIPT_CONTINUE;
-    }
+    }*/
 }
