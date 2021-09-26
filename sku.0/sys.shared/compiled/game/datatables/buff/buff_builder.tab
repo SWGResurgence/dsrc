@@ -2,7 +2,7 @@ NAME	CATEGORY	AFFECTS	MAX_TIMES_APPLIED	COST	AFFECT_AMOUNT	REQUIRED_EXPERTISE
 s	s	s	i	i	i	s
 agility	attributes	agility_modified	10	1	15	
 block_value	attributes	combat_block_value	10	1	15	
-camoflage	attributes	camoflage	10	1	15	
+camouflage	attributes	camouflage	10	1	15	
 constitution	attributes	constitution_modified	10	1	15	
 detect_camoflage	attributes	detect_hidden	10	1	15	
 evasion_value	attributes	combat_evasion_value	10	1	15	
@@ -12,21 +12,15 @@ stamina	attributes	stamina_modified	10	1	15
 strength	attributes	strength_modified	10	1	15	
 strikethrough_value	attributes	combat_strikethrough_value	10	1	15	
 action_cost_reduction	combat	expertise_action_all	2	4	5	
-armor_penetration_acid	combat	exotic_acid_penetration	2	4	3	
-armor_penetration_cold	combat	exotic_cold_penetration	2	4	3	
-armor_penetration_heat	combat	exotic_heat_penetration	2	4	3	
-armor_penetration_electricity	combat	exotic_electricity_penetration	2	4	3	
 block_chance	combat	combat_block_chance	2	4	3	
 critical_hit	combat	expertise_critical_niche_all	2	4	3	
 critical_hit_defense	combat	expertise_critical_hit_reduction	2	4	3	
-dodge_chance	combat	combat_dodge	2	4	3	
-dodge_reduction	combat	exotic_dodge_reduction	2	4	3	
 devastation	combat	commando_devastation	2	4	3	
+dodge_chance	combat	combat_dodge	2	4	3	
 evasion_chance	combat	combat_evasion_chance	2	4	3	
 glancing_blow_general	combat	expertise_glancing_blow_all	2	4	3	
 glancing_blow_melee	combat	expertise_glancing_blow_melee	2	4	3	
 glancing_blow_ranged	combat	expertise_glancing_blow_ranged	2	4	3	
-heal_action_cost_reduction	combat	exotic_heal_action_reduction	2	4	5	
 heal_potency	combat	expertise_healing_all	5	2	4	holism
 parry_rating	combat	combat_parry	2	4	3	
 parry_reduction	combat	exotic_parry_reduction	2	4	3	
@@ -38,41 +32,15 @@ reactive_go_with_the_flow	misc	movement_speed	5	2	5	go_with_the_flow
 kinetic	resistances	expertise_innate_protection_kinetic	5	1	450	
 energy	resistances	expertise_innate_protection_energy	5	1	450	
 elemental	resistances	elemental_resistance	5	1	450	
-advanced_assembly	trade	advanced_assembly	5	2	2	
-advanced_experimentation	trade	advanced_ship_experimentation	5	2	2	
+general_crafting_assembly	trade	armor_assembly,clothing_assembly,cybernetic_assembly,droid_assembly,food_assembly,jedi_saber_assembly,structure_assembly,weapon_assembly,	5	2	1	harvest_faire  
+general_crafting_experimentation	trade	armor_experimentation,clothing_experimentation,cybernetic_experimentation,droid_experimentation,food_experimentation,jedi_saber_experimentation,structure_experimentation,weapon_experimentation	5	2	1	harvest_faire  
+space_crafting_assembly	trade	advanced_assembly,booster_assembly,chassis_assembly,engine_assembly,power_systems,shields_assembly,weapon_systems_assembly	5	2	1	harvest_faire  
+space_crafting_experimentation	trade	advanced_ship_experimentation,booster_experimentation,chassis_experimentation,engine_experimentation,power_systems_experimentation,shields_experimentation,weapon_systems_experimentation	5	2	1	harvest_faire  
 amazing_success_chance	trade	crafting_critical_success_bonus	2	4	2	
-armor_assembly	trade	armor_assembly	5	2	2	
-armor_experimentation	trade	armor_experimentation	5	2	2	
-booster_assembly	trade	booster_assembly	5	2	2	
-booster_experimentation	trade	booster_experimentation	5	2	2	
-chassis_assembly	trade	chassis_assembly	5	2	2	
-chassis_experimentation	trade	chassis_experimentation	5	2	2	
-clothing_assembly	trade	clothing_assembly	5	2	2	
-clothing_experimentation	trade	clothing_experimentation	5	2	2	
-cybernetic_assembly	trade	cybernetic_assembly	5	2	2	
-cybernetic_experimentation	trade	cybernetic_experimentation	5	2	2	
-droid_assembly	trade	droid_assembly	5	2	2	
-droid_experimentation	trade	droid_experimentation	5	2	2	
-engine_assembly	trade	engine_assembly	5	2	2	
-engine_experimentation	trade	engine_experimentation	5	2	2	
 factory_speed	trade	factory_speed	5	2	2	
-food_assembly	trade	food_assembly	5	2	2	
-food_experimentation	trade	food_experimentation	5	2	2	
 general_assembly	trade	general_assembly	5	2	2	
 hand_sampling	trade	expertise_resource_sampling_increase	5	2	2	harvest_faire  
 harvest_faire	trade	expertise_harvester_collection_increase	5	2	2	harvest_faire  
 incubation_time_reduction	trade	incubation_time_reduction	5	2	2	harvest_faire  
-lightsaber_assembly	trade	jedi_saber_assembly	5	2	2	
-lightsaber_experimentation	trade	jedi_saber_experimentation	5	2	2	
 mutation_chance	trade	bm_mutation_chance_increase	5	2	2	harvest_faire  
-power_systems_assembly	trade	power_systems	5	2	2	
-power_systems_experimentation	trade	power_systems_experimentation	5	2	2	
 reverse_engineering_chance	trade	expertise_reverse_engineering_bonus	5	2	2	
-shields_assembly	trade	shields_assembly	5	2	2	
-shields_experimentation	trade	shields_experimentation	5	2	2	
-structure_assembly	trade	structure_assembly	5	2	2	
-structure_experimentation	trade	structure_experimentation	5	2	2	
-weapon_assembly	trade	weapon_assembly	5	2	2	
-weapon_experimentation	trade	weapon_experimentation	5	2	2	
-weapon_systems_assembly	trade	weapon_systems	5	2	2	
-weapon_systems_experimentation	trade	weapon_systems_experimentation	5	2	2	
