@@ -6,6 +6,11 @@ import script.library.static_item;
 import script.library.utils;
 import script.obj_id;
 
+import script.library.loot;
+import script.menu_info;
+import script menu_info_types;
+import script.string_id;
+
 import java.util.ArrayList;
 import java.util.List;
 
