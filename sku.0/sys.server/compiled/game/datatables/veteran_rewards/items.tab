@@ -30,3 +30,4 @@ gcw_recapture_gift_02	veteran_new:gcw_recapture_gift_02	item_reward_recapture_gc
 gcw_loyalty_gift	veteran_new:gcw_loyalty_gift	item_reward_loyalty_gcw_01	0	0		1		
 facebook_reward_01	veteran_new:facebook_reward_01	item_facebook_reward_01	0	0		1		
 lockout_timer_remover	veteran_new:lockout_timer_remover	item_vet_reward_lockout_remover	0	0		0			
+item_auto_level_50_buddy_conversation	veteran_new:item_auto_level_50_buddy_conversion	item_auto_level_50_buddy_conversion	0	1		0		
