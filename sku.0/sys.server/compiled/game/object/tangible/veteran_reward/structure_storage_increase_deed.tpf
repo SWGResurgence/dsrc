@@ -5,6 +5,6 @@
 @class object_template 8
 
 sharedTemplate = "object/tangible/veteran_reward/shared_structure_storage_increase_deed.iff"
-scripts = ["systems.veteran_reward.structure_storage_increase_deed", "item.special.nomove"]
-objvars = +[ "noTrade" = 1, "increaseAmount" = 200]
+scripts = ["systems.veteran_reward.structure_storage_increase_deed"]
+objvars = +["increaseAmount" = 200]
 persistByDefault = true
