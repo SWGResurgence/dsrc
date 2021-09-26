@@ -9,7 +9,6 @@ public class emperors_hand extends script.base_script
 {
     public static final String VOLUME_NAME = "aggressive_area";
     public static final string_id FOUND_JEDI = new string_id("restuss_event/object", "jedi_located");
-    public static final string_id SID_MNU_LIGHTSABER = new string_id("restuss_event/object", "take_lightsaber");
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume(VOLUME_NAME, 15.0f, true);
@@ -26,18 +25,6 @@ public class emperors_hand extends script.base_script
     }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
-        messageTo(self, "cleanupCorpse", null, 300.0f, false);
-        String[] scriptList = getScriptList(self);
-        if (scriptList == null || scriptList.length == 0)
-        {
-            return SCRIPT_CONTINUE;
-        }
-        for (String s : scriptList) {
-            if (!s.endsWith("emperors_hand")) {
-                String script = s.substring(7, s.length());
-                detachScript(self, script);
-            }
-        }
         sendSystemMessagePlanetTestingOnly("ATTENTION RORI CIVILIANS: The Emperor's Hand has been slain by " + getName(killer));
 		return SCRIPT_CONTINUE;
     }
@@ -59,32 +46,6 @@ public class emperors_hand extends script.base_script
                 addHate(self, breacher, 500.0f);
                 return SCRIPT_CONTINUE;
             }
-        }
-        return SCRIPT_CONTINUE;
-    }
-    public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
-    {
-        Vector attackers = new Vector();
-        attackers.setSize(0);
-        Vector attackerList = utils.getResizeableObjIdArrayScriptVar(self, "attackerList");
-        if (utils.hasScriptVar(self, "attackerList"))
-        {
-            attackers = utils.getResizeableObjIdArrayScriptVar(self, "attackerList");
-            if (utils.getElementPositionInArray(attackerList, attacker) > -1)
-            {
-                return SCRIPT_CONTINUE;
-            }
-        }
-        utils.addElement(attackers, attacker);
-        utils.setScriptVar(self, "attackerList", attackers);
-        return SCRIPT_CONTINUE;
-    }
-    public int OnExitedCombat(obj_id self) throws InterruptedException
-    {
-        if (!isIncapacitated(self))
-        {
-            utils.removeScriptVar(self, "attackerList");
-            return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
