@@ -13,6 +13,8 @@ item_color_crystal_02_12	Color Crystal: Maul's Vengeance
 item_color_crystal_02_29	Color Crystal: Sunrider's Destiny
 item_color_crystal_02_20	Color Crystal: Windu's Guile
 object/tangible/veteran_reward/structure_storage_increase_deed.iff	Deed: A Deed For Increased Building Storage
+item_vet_reward_resource_fabricator	Deed: Resource Fabricator
+item_vet_reward_resource_generator	Deed: Resource Supply Generator
 weapon_carbine_e5_legendary	Legendary: E5 Carbine
 weapon_pistol_fwg5_legendary	Legendary: FWG5 Pistol
 weapon_energy_lance_legendary	Legendary: Nightsister Energy Lance
