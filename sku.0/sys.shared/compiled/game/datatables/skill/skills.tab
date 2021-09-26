@@ -1888,9 +1888,9 @@ expertise_of_sup_cool_1	expertise																					expertise_cooldown_line_of
 expertise_of_sup_cool_2	expertise_of_sup_cool_1																					expertise_cooldown_line_of_sup=4			0	
 expertise_of_sup_cool_3	expertise_of_sup_cool_2																					expertise_cooldown_line_of_sup=4			0	
 expertise_of_sup_cool_4	expertise_of_sup_cool_3																					expertise_cooldown_line_of_sup=4			0	
-expertise_of_medical_sup_1	expertise_of_sup_cool_4									expertise_of_sup_cool_4											of_medical_sup_1				0	
-expertise_of_tactical_sup_1	expertise_of_medical_sup_1									expertise_of_medical_sup_1											of_tactical_sup_1				0	
-expertise_of_reinforcements_1										expertise_of_tactical_sup_1											of_reinforcements_1				0	
+expertise_of_medical_sup_1	expertise_of_sup_cool_4									expertise_of_sup_cool_4											of_medical_sup_1				0					
+expertise_of_tactical_sup_1	expertise_of_medical_sup_1									expertise_of_medical_sup_1											of_tactical_sup_1				0					
+expertise_of_reinforcements_1	expertise_of_sup_cool_4																				of_reinforcements_1				0					
 expertise_of_aoe_act_1	expertise																					expertise_action_line_of_aoe=5			0	
 expertise_of_aoe_act_2	expertise_of_aoe_act_1																					expertise_action_line_of_aoe=5			0	
 expertise_of_aoe_act_3	expertise_of_aoe_act_2																					expertise_action_line_of_aoe=5			0	
