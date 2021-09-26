@@ -4155,6 +4155,8 @@ item_battlefield_rebel_token_battlefield3				index_color_1=24
 item_battlefield_imperial_token_battlefield3				index_color_1=24							
 item_battlefield_rebel_token_battlefield4				index_color_1=39							
 item_battlefield_imperial_token_battlefield4				index_color_1=39							
+item_battlefield_rebel_token				index_color_1=24							
+item_battlefield_imperial_token				index_color_1=39							
 item_schematic_pvp_bf_saber_03_04			string:loot_schematic.schematic=object/draft_schematic/weapon/lightsaber_one_handed_pvp_bf_gen5.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_forcesensitive_phase4_master								
 item_schematic_pvp_bf_saber_03_05			string:loot_schematic.schematic=object/draft_schematic/weapon/lightsaber_two_handed_pvp_bf_gen5.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_forcesensitive_phase4_master								
 item_schematic_pvp_bf_saber_03_06			string:loot_schematic.schematic=object/draft_schematic/weapon/lightsaber_polearm_pvp_bf_gen5.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_forcesensitive_phase4_master								
