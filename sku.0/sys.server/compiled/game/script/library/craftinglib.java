@@ -20,8 +20,8 @@ public class craftinglib extends script.base_script
     public static final float EXPERIENCE_GRANTED_MULTIPLIER = 3.0f;
     public static final int socketThreshold = 60;
     public static final int socketDelta = 10;
-    public static final int maxSockets = 1;
-    public static final int socketChance = 50;
+    public static final int maxSockets = 3;
+    public static final int socketChance = 75;
     public static final float STATION_AREA = 20.0f;
     public static final String OBJVAR_STATION = "crafting.station";
     public static final String OBJVAR_PRIVATE_STATION = "crafting.private";
