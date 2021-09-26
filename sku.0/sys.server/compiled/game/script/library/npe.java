@@ -719,9 +719,14 @@ public class npe extends script.base_script
                 {
                     theSet.add(static_item.createNewItemFunction("item_entertainer_shoes_02_01", pInv));
                 }
-            }
         }
+            }
         else if (utils.isProfession(player, utils.TRADER))
+		{
+			items = new obj_id[2];
+			items[0] = static_item.createNewItemFunction("item_npe_gen_craft_tool_trader_03_01", player);
+			items[1] = createObject("object/tangible/survey_tool/survey_tool_mineral.iff", player, "");
+		}
         {
             theSet.add(static_item.createNewItemFunction("item_trader_shirt_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_trader_pants_02_01", pInv));
