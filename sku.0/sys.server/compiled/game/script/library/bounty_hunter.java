@@ -2,6 +2,8 @@ package script.library;
 
 import script.*;
 
+import java.util.List;
+
 public class bounty_hunter extends script.base_script
 {
     public static final String[] LOW_PAYOUT_COMMS = 
@@ -390,12 +392,12 @@ public class bounty_hunter extends script.base_script
         pp = prose.setTT(pp, hunter);
         sendSystemMessageProse(target, pp);
 		pp = prose.setStringId(pp, BOUNTY_MAIL_BODY);
-		pp == prose.setTU(pp, target);
-        vector creators = getVectorObjVar(target, "bounty.creators");
+		pp = prose.setTO(pp, target);
+        List<obj_id> creators = getResizeableObjIdArrayObjVar(target, "bounty.creators");
         for (obj_id creator : creators) {
             utils.sendMail(BOUNTY_MAIL_SUBJECT, pp, creator, "Player Bounty Collected");
         }
-		removeObjVar(target, "bounty.creators")
+		removeObjVar(target, "bounty.creators");
         obj_id[] hunters = getJediBounties(target);
         if (hunters != null && hunters.length > 0)
         {

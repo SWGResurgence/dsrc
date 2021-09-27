@@ -9,6 +9,8 @@ import java.util.Vector;
 
 import script.cureward.cureward;
 
+import java.util.ArrayList;
+
 public class base_player extends script.base_script
 {
     public static final int TIME_DEATH = 5;
@@ -11347,8 +11349,10 @@ public class base_player extends script.base_script
             setJediBountyValue(killer, bounty);
         }
         setObjVar(killer, "bounty.amount", bounty);
-		vector creators = hasObjVar(kill,er "bounty.creators") ? getVectorObjVar(killer, "bounty.creators") : new vector();
-        creators.add(self);
+		List<obj_id> creators = hasObjVar(killer, "bounty.creators") ? getResizeableObjIdArrayObjVar(killer, "bounty.creators") : new ArrayList<>(1);
+        if (!creators.contains(self)) {
+            creators.add(self);
+        }
         setObjVar(killer, "bounty.creators", creators);
         CustomerServiceLog("bounty", "%TU has taken a bounty of " + amount + " credits out on %TT", self, killer);
         return SCRIPT_CONTINUE;
