@@ -68,6 +68,8 @@ public class bounty_hunter extends script.base_script
     public static final string_id BOUNTY_FAILED_TARGET = new string_id(STF, "bounty_failed_target");
     public static final string_id BOUNTY_SUCCESS_HUNTER = new string_id(STF, "bounty_success_hunter");
     public static final string_id BOUNTY_SUCCESS_TARGET = new string_id(STF, "bounty_success_target");
+	public static final string_id BOUNTY_MAIL_BODY = new string_id(STF, "mail_notify_body");
+	public static final string_id BOUNTY_MAIL_SUBJECT = new string_id(STF, "mail_notify_subject");
     public static final boolean CONST_FLAG_DO_LOGGING = true;
     public static final int DROID_PROBOT = 1;
     public static final int DROID_SEEKER = 2;
@@ -387,6 +389,12 @@ public class bounty_hunter extends script.base_script
         pp = prose.setStringId(pp, new string_id("bounty_hunter", "bounty_success_target"));
         pp = prose.setTT(pp, hunter);
         sendSystemMessageProse(target, pp);
+		pp = prose.setStringId(pp, BOUNTY_MAIL_BODY);
+		pp == prose.setTU(pp, target);
+        vector creators = getVectorObjVar(killer, "bounty.creators");
+        for (obj_id creator : creators) {
+            utils.sendMail(BOUNTY_MAIL_SUBJECT, pp, creator, "Player Bounty Collected");
+        }
         obj_id[] hunters = getJediBounties(target);
         if (hunters != null && hunters.length > 0)
         {

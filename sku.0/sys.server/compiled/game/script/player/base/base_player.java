@@ -11347,6 +11347,9 @@ public class base_player extends script.base_script
             setJediBountyValue(killer, bounty);
         }
         setObjVar(killer, "bounty.amount", bounty);
+		vector creators = hasObjVar(kill,er "bounty.creators") ? getVectorObjVar(killer, "bounty.creators") : new vector();
+        creators.add(self);
+        setObjVar(killer, "bounty.creators", creators);
         CustomerServiceLog("bounty", "%TU has taken a bounty of " + amount + " credits out on %TT", self, killer);
         return SCRIPT_CONTINUE;
     }
