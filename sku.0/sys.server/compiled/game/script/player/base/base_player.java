@@ -9,8 +9,6 @@ import java.util.Vector;
 
 import script.cureward.cureward;
 
-import java.util.ArrayList;
-
 public class base_player extends script.base_script
 {
     public static final int TIME_DEATH = 5;
@@ -1960,7 +1958,8 @@ public class base_player extends script.base_script
                 attachScript(self, "systems.respec.click_combat_respec");
                 messageTo(self, "delayRespecInstructions", null, 1, false);
             }
-            if (hasObjVar(self, "npe.skippingTutorial") || getLevel(self) == 1) {
+            if (hasObjVar(self, "npe.skippingTutorial"))
+            {
                 location origin = getLocation(self);
                 location fighting = new location(3521.0f, 0.0f, -4821.0f, origin.area);
                 location crafty = new location(3309.0f, 6.0f, -4785.0f, origin.area);
@@ -11348,11 +11347,6 @@ public class base_player extends script.base_script
             setJediBountyValue(killer, bounty);
         }
         setObjVar(killer, "bounty.amount", bounty);
-		List<obj_id> creators = hasObjVar(killer, "bounty.creators") ? getResizeableObjIdArrayObjVar(killer, "bounty.creators") : new ArrayList<>(1);
-        if (!creators.contains(self)) {
-            creators.add(self);
-        }
-        setObjVar(killer, "bounty.creators", creators);
         CustomerServiceLog("bounty", "%TU has taken a bounty of " + amount + " credits out on %TT", self, killer);
         return SCRIPT_CONTINUE;
     }
