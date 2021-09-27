@@ -1912,11 +1912,11 @@ public class base_class
      * @param name      the objvar name to search for
      * @return the string array, or null if not found
      */
-    public static ArrayList getResizeableStringArrayObjVar(obj_id object, String name)
+    public static Vector getResizeableStringArrayObjVar(obj_id object, String name)
     {
         String[] array = getStringArrayObjVar(object, name);
         if (array != null)
-            return new ArrayList<>(Arrays.asList(array));
+            return new Vector(Arrays.asList(array));
         return new ArrayList<>();
     }
     /**
