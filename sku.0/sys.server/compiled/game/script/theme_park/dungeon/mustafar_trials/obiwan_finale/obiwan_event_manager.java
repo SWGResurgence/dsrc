@@ -6,7 +6,7 @@ import script.library.*;
 import script.dictionary;
 import script.library.*;
 import script.location;
-import script.obj_id
+import script.obj_id;
 
 public class obiwan_event_manager extends script.base_script
 {
