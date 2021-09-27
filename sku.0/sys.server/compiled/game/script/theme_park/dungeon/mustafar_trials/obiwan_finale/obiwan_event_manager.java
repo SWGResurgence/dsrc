@@ -3,11 +3,6 @@ package script.theme_park.dungeon.mustafar_trials.obiwan_finale;
 import script.*;
 import script.library.*;
 
-import script.dictionary;
-import script.library.*;
-import script.location;
-import script.obj_id;
-
 public class obiwan_event_manager extends script.base_script
 {
     public obiwan_event_manager()
@@ -70,19 +65,6 @@ public class obiwan_event_manager extends script.base_script
         if (hasObjVar(player, "sawObiwanAtLauncher"))
         {
             removeObjVar(player, "sawObiwanAtLauncher");
-        }
-		trial.setDungeonCleanOutTimer(self, 15);
-		dictionary dict = new dictionary();
-		dict.put("tokenIndex", 7);
-		dict.put("tokenCount", 1);
-		utils.messageTo(players, "handleAwardtoken", dict, 0, false);
-		obj_id group = getGroupObject(players[0]);
-        int calendarTime = getCalendarTime();
-        String realTime = getCalendarTimeStringLocal(calendarTime);
-		CustomerServiceLog("instance-mustafar_trials_obiwan", "Factory Guardian Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
-        CustomerServiceLog("instance-mustafar_trials_obiwan", "Group (" + group + ") consists of: ");
-		for (int i = 0; i < players.length; ++i) {
-            /*String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));*/
         }
         return;
     }
