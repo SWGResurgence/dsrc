@@ -1,4 +1,4 @@
-package script.working;
+package script.developer.talisa;
 
 import script.dictionary;
 import script.library.*;
@@ -6,9 +6,9 @@ import script.location;
 import script.obj_id;
 import script.string_id;
 
-public class jhaskell_test extends script.base_script
+public class talisa_test extends script.base_script
 {
-    public jhaskell_test()
+    public talisa_test()
     {
     }
     public static final int SF_COST_CITY_LOW = 16;
