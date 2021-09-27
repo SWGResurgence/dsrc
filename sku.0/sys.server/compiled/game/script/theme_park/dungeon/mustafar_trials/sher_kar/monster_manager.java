@@ -4,6 +4,8 @@ import script.dictionary;
 import script.library.*;
 import script.obj_id;
 
+import java.util.HashSet;
+
 public class monster_manager extends script.base_script
 {
     public monster_manager()
