@@ -391,10 +391,11 @@ public class bounty_hunter extends script.base_script
         sendSystemMessageProse(target, pp);
 		pp = prose.setStringId(pp, BOUNTY_MAIL_BODY);
 		pp == prose.setTU(pp, target);
-        vector creators = getVectorObjVar(killer, "bounty.creators");
+        vector creators = getVectorObjVar(target, "bounty.creators");
         for (obj_id creator : creators) {
             utils.sendMail(BOUNTY_MAIL_SUBJECT, pp, creator, "Player Bounty Collected");
         }
+		removeObjVar(target, "bounty.creators")
         obj_id[] hunters = getJediBounties(target);
         if (hunters != null && hunters.length > 0)
         {
