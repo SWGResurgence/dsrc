@@ -8,9 +8,6 @@ import script.library.veteran_deprecated;
 
 import java.util.Vector;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class resource_supply_generator extends script.base_script
 {
     public static final int RESOURCE_AMOUNT = 75000;
@@ -461,7 +458,7 @@ public class resource_supply_generator extends script.base_script
     {
         String[] resourceClasses = null;
         String[] tempResourceClass = getImmediateResourceChildClasses(parentClass);
-        List tempResourceClassTwo = new ArrayList<>();
+        Vector tempResourceClassTwo = null;
         for (String tempResourceClass1 : tempResourceClass) {
             if (!tempResourceClass1.equals("energy") && !tempResourceClass1.equals("space_resource")) {
                 tempResourceClassTwo = utils.addElement(tempResourceClassTwo, tempResourceClass1);
