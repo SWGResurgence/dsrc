@@ -12,19 +12,24 @@ public class respec extends script.base_script
     public static final int RESPEC_PRICE_MULTIPLIER = 10000;
     public static final int[] RESPEC_COST = new int[]
     {
-        0,
-        150000,
-		250000,
-		500000,
-		1000000,
-		5000000,
-		10000000,
-		15000000,
-		20000000,
-		25000000,
-		50000000,
-		75000000,
-		100000000
+        0,				// Free
+        25000,			// 25K
+		50000,			// 50K				
+		100000,			// 100K
+		150000,			// 150K
+		250000,			// 250K
+		500000,			// 500K
+		1000000,		// 1MIL	
+		2500000,		// 2.5MIL
+		5000000,		// 5MIL	
+		10000000,		// 10MIL
+		15000000,		// 15MIL
+		20000000,		// 20MIL
+		25000000,		// 25MIL
+		50000000,		// 50MIL
+		75000000,		// 75MIL
+		100000000,		// 100MIL
+		
     };
     public static final String OBJVAR_RESPEC_TOKEN = "respecToken.token";
     public static final String OBJVAR_RESPEC_TOKEN_USED = "respecToken.tokenUsed";
