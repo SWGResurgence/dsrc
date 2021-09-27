@@ -124,9 +124,8 @@ public class decrepit_controller extends script.base_script {
         CustomerServiceLog("instance-mustafar_trials_decrepit_droid_factory", "Factory Guardian Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
         CustomerServiceLog("instance-mustafar_trials_decrepit_droid_factory", "Group (" + group + ") consists of: ");
 		for (int i = 0; i < players.length; ++i) {
-			String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
-            CustomerServiceLog("instance-mustafar_trials_decrepit_droid_factory", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
-		}
+            /*String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));*/
+        }
         return SCRIPT_CONTINUE;
     }
     public void deactivateTrap(obj_id self) throws InterruptedException {

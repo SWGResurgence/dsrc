@@ -74,10 +74,11 @@ public class obiwan_event_manager extends script.base_script
 		obj_id group = getGroupObject(players[0]);
         int calendarTime = getCalendarTime();
         String realTime = getCalendarTimeStringLocal(calendarTime);
+		CustomerServiceLog("instance-mustafar_trials_obiwan", "Factory Guardian Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
+        CustomerServiceLog("instance-mustafar_trials_obiwan", "Group (" + group + ") consists of: ");
 		for (int i = 0; i < players.length; ++i) {
-			String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
-            CustomerServiceLog("instance-fate_of_galaxy_cave", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
-		}
+            /*String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));*/
+        }
         return;
     }
     public void cleanupDungeonScriptvars() throws InterruptedException

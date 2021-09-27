@@ -187,9 +187,8 @@ public class link_event_manager extends script.base_script
         CustomerServiceLog("instance-mustafar_trials_beetle_cave", "Beetle Foreman Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
         CustomerServiceLog("instance-mustafar_trials_beetle_cave", "Group (" + group + ") consists of: ");
         for (int i = 0; i < players.length; ++i) {
-			String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
-            CustomerServiceLog("instance-mustafar_trials_beetle_cave", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
-		}
+            /*String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));*/
+        }
 		return SCRIPT_CONTINUE;
     }
     public void doLogging(String section, String message) throws InterruptedException {

@@ -330,9 +330,8 @@ public class valley_event_manager extends script.base_script
         CustomerServiceLog("instance-mustafar_trials_droid_army", "Forward Commander Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
         CustomerServiceLog("instance-mustafar_trials_droid_army", "Group (" + group + ") consists of: ");
         for (int i = 0; i < players.length; ++i) {
-			String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
-            CustomerServiceLog("instance-mustafar_trials_droid_army", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
-		}
+            /*String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));*/
+        }
 		return SCRIPT_CONTINUE;
 	}
     public int loseTrial(obj_id self, dictionary params) throws InterruptedException
