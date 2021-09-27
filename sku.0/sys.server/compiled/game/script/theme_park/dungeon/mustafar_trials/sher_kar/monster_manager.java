@@ -58,24 +58,24 @@ public class monster_manager extends script.base_script {
 			return;
 		}
 		int type = 0;
-		obj_id[] guards = new obj_id[4];
-		for (obj_id obj_id : wp) {
-			if ((getStringObjVar(obj_id, trial.MONSTER_WP)).startsWith("guard")) {
-				if (type == 0 || type == 1 {
-					guards[type] = create.object("som_sherkar_praetorian", getLocation(obj_id));
+        obj_id[] guards = new obj_id[4];
+        for (obj_id obj_id : wp) {
+            if ((getStringObjVar(obj_id, trial.MONSTER_WP)).startsWith("guard")) {
+                if (type == 0 || type == 1) {
+                    guards[type] = create.object("som_sherkar_praetorian", getLocation(obj_id));
                     faceTo(guards[type], utils.getObjIdScriptVar(self, trial.MONSTER_SHER_KAR));
                     type++;
-				} else if (type == 2) {
-					guards[type] = create.object("som_sherkar_karling", getLocation(obj_id));
+                } else if (type == 2) {
+                    guards[type] = create.object("som_sherkar_karling", getLocation(obj_id));
                     faceTo(guards[type], utils.getObjIdScriptVar(self, trial.MONSTER_SHER_KAR));
                     type++;
-				} else if {
-					guards[type] = create.object("som_sherkar_symbiot", getLocation(obj_id));
+                } else if (type == 3) {
+                    guards[type] = create.object("som_sherkar_symbiot", getLocation(obj_id));
                     faceTo(guards[type], utils.getObjIdScriptVar(self, trial.MONSTER_SHER_KAR));
                     type++;
-				}
-			}
-		}
+                }
+            }
+        }
 		ai_lib.establishAgroLink(guards[0], guards);
 	}
 	public int doMidEvent(obj_id self, dictionary params) throws InterruptedException {
@@ -109,7 +109,7 @@ public class monster_manager extends script.base_script {
             CustomerServiceLog("instance-mustafar_trials_sher_kar", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
 		}
 		instance.setClock(self, 305);
-		return SCRIPT_CONTINUE;*/
+		return SCRIPT_CONTINUE;
 	}
 	
 	public void doLogging(String section, String message) throws InterruptedException {
