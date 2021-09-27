@@ -1,10 +1,7 @@
 package script.theme_park.dungeon.mustafar_trials.establish_the_link;
 
 import script.dictionary;
-import script.library.badge;
-import script.library.create;
-import script.library.trial;
-import script.library.utils;
+import script.library.*;
 import script.location;
 import script.obj_id;
 
@@ -187,7 +184,7 @@ public class link_event_manager extends script.base_script
         CustomerServiceLog("instance-mustafar_trials_beetle_cave", "Beetle Foreman Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
         CustomerServiceLog("instance-mustafar_trials_beetle_cave", "Group (" + group + ") consists of: ");
         for (int i = 0; i < players.length; ++i) {
-			String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
+			//String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
             CustomerServiceLog("instance-mustafar_trials_beetle_cave", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
 		}
 		return SCRIPT_CONTINUE;

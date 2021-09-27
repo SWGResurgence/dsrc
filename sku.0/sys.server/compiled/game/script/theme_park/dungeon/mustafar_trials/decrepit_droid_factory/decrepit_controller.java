@@ -1,10 +1,7 @@
 package script.theme_park.dungeon.mustafar_trials.decrepit_droid_factory;
 
 import script.dictionary;
-import script.library.badge;
-import script.library.create;
-import script.library.trial;
-import script.library.utils;
+import script.library.*;
 import script.location;
 import script.obj_id;
 
