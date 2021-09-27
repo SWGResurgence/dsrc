@@ -66,6 +66,18 @@ public class obiwan_event_manager extends script.base_script
         {
             removeObjVar(player, "sawObiwanAtLauncher");
         }
+		trial.setDungeonCleanOutTimer(self, 15);
+		dictionary dict = new dictionary();
+		dict.put("tokenIndex", 7);
+		dict.put("tokenCount", 1);
+		utils.messageTo(players, "handleAwardtoken", dict, 0, false);
+		obj_id group = getGroupObject(players[0]);
+        int calendarTime = getCalendarTime();
+        String realTime = getCalendarTimeStringLocal(calendarTime);
+		for (int i = 0; i < players.length; ++i) {
+			String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
+            CustomerServiceLog("instance-fate_of_galaxy_cave", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
+		}
         return;
     }
     public void cleanupDungeonScriptvars() throws InterruptedException
