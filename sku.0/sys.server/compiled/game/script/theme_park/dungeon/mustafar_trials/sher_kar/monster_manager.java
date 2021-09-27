@@ -121,7 +121,7 @@ public class monster_manager extends script.base_script
         return SCRIPT_CONTINUE;
     }
 	public static void sherKarDied(obj_id player, int amount) throws InterruptedException {
-        obj_id[] players = trial.getPlayersInDungeon(self);
+        obj_id[] players = trial.getPlayersInDungeon(player);
         showLootBox(player, new obj_id[]{ static_item.createNewItemFunction("item_mustafar_reward_token_01_01", player) });
     }
     public void doLogging(String section, String message) throws InterruptedException
