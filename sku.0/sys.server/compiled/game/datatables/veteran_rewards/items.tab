@@ -10,4 +10,3 @@ cybernetic_xp_chip	veteran_new:cybernetic_experience_chip	object/tangible/vetera
 walker_at_rt	veteran_new:walker_at_rt	object/tangible/veteran_reward/vehicle_walker_at_rt_camo.iff	0	1		0		
 instant_travel_royal_ship	veteran_new:instant_travel_terminal_royal_ship	object/tangible/deed/vehicle_deed/instant_travel_terminal_royal_ship_deed.iff	0	0		1		
 hover_chair	veteran_new:hover_chair	item_deed_hover_chair_06_01	0	1		0		
-grievous_wheel_bike	veteran_new:grievous_wheel_bike	item_deed_grievous_wheel_bike	0	0		1	
