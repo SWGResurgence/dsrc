@@ -1917,7 +1917,7 @@ public class base_class
         String[] array = getStringArrayObjVar(object, name);
         if (array != null)
             return new Vector(Arrays.asList(array));
-        return null;
+        return new ArrayList<>();
     }
     /**
      * Finds an obj_id obj_var with a given name on an object.
@@ -1959,8 +1959,8 @@ public class base_class
     {
         obj_id[] array = getObjIdArrayObjVar(object, name);
         if (array != null)
-            return new Vector(Arrays.asList(array));
-        return null;
+            return new ArrayList<>(Arrays.asList(array));
+        return new ArrayList<>();
     }
     /**
      * Finds a location obj_var with a given name on an object.

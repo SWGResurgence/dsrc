@@ -8,6 +8,9 @@ import script.library.veteran_deprecated;
 
 import java.util.Vector;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class resource extends script.base_script
 {
     public static final int RESOURCE_AMOUNT = 50000;
@@ -458,7 +461,7 @@ public class resource extends script.base_script
     {
         String[] resourceClasses = null;
         String[] tempResourceClass = getImmediateResourceChildClasses(parentClass);
-        Vector tempResourceClassTwo = null;
+        List tempResourceClassTwo = new ArrayList<>();
         for (String tempResourceClass1 : tempResourceClass) {
             if (!tempResourceClass1.equals("energy") && !tempResourceClass1.equals("space_resource")) {
                 tempResourceClassTwo = utils.addElement(tempResourceClassTwo, tempResourceClass1);
