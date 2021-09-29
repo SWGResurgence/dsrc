@@ -32,7 +32,7 @@ public class qatool extends script.base_script
     public static final int XPTOOL_MENUOPTION = 7;
     public static final int FACTIONTOOL_MENUOPTION = 8;
     public static final int INVTOOL_MENUOPTION = 9;
-    //public static final int MSTRITEMTOOL_MENUOPTION = 10;
+    public static final int MSTRITEMTOOL_MENUOPTION = 10;
     public static final int NGETOOL_MENUOPTION = 11;
     public static final int NPCFINDERTOOL_MENUOPTION = 12;
     public static final int PET_OPTION = 13;
@@ -60,7 +60,7 @@ public class qatool extends script.base_script
     public static final String SCRIPT_TOOL_PROMPT = "This tool allows the tester to view, attach and detach common QA scripts. \n\n CURRENT ATTACHED SCRIPTS:\n";
     public static final String DATAPAD_TOOL_TITLE = "QA DATAPAD TOOL";
     public static final String DATAPAD_TOOL_PROMPT = "This tool allows the tester to view, warp, export and import into the datapad";
-    //public static final String ITEM_TOOL_TITLE = "QA MASTER ITEM TOOL";
+    public static final String ITEM_TOOL_TITLE = "QA MASTER ITEM TOOL";
     public static final String ITEM_TOOL_PROMPT = "This tool allows the tester to find items such as reward armor and weapons.";
     public static final String NGE_TOOL_TITLE = "QA NGE TOOL";
     public static final String NGE_TOOL_PROMPT = "This tool allows the tester to attain a Respec item in their inventory.\n\nPlease select a number that will represent the level that the player character will respec to (Example: 61).";
@@ -117,7 +117,7 @@ public class qatool extends script.base_script
         " qascript - Allows the tester to attach or detach common QA scripts without memorizing the script string",
         "* (command driven tool) lootnamesearch - Allows the tester to search for a Static Loot/Reward item by the title of the object (ex. Basic Pistol)",
         "* (command driven tool) lootcodesearch - Allows the tester to search for a Static Loot/Reward item by the staticItem code string (ex. weapon_pistol_02_01)",
-//        " qaitem - Allows the tester to attain armor and weapons. Also known as the Master Item Tool.",
+        " qaitem - Allows the tester to attain armor and weapons. Also known as the Master Item Tool.",
         "* (command driven tool) kill <target>- Allows the tester to kill another tester (or themself) depending on the current target",
         "* (command driven tool) suicide - Allows the tester to kill themself instantly.",
         "* (command driven tool) spawnitem <itemCodeString> - Allows the tester to spawn a static item into their inventory.",
