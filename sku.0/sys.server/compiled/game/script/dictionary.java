@@ -275,9 +275,9 @@ public class dictionary implements Serializable
 	{
 		if ( key == null || value == null )
 		{
-			if (key == null)
+			if ( key == null )
 				System.err.println("ERROR calling dictionary.put(Object, Object): null key");
-			if (value == null)
+			if ( value == null )
 				System.err.println("ERROR calling dictionary.put(Object, Object): null value");
 			Thread.dumpStack();
 			return null;
@@ -542,10 +542,6 @@ public class dictionary implements Serializable
 		Object value = m_data.get(key);
 		if (value instanceof Integer)
 			return (Integer) value;
-		/*if (value instanceof Byte) {
-			System.out.println("getInt being called on key " + key.toString() + ". This should be using getByte!!");
-		return ((Byte)value).byteValue();
-		}*/
 		return 0;
 	}	// getInt()
 
@@ -1799,7 +1795,4 @@ public class dictionary implements Serializable
 		}
 		return strings;
 	}
-
-
-
 }	// class dictionary
