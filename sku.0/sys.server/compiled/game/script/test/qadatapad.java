@@ -1,4 +1,4 @@
-package script.test;
+// package script.test;
 
 import script.dictionary;
 import script.library.qa;
