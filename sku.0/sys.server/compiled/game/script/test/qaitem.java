@@ -29,6 +29,7 @@ public class qaitem extends script.base_script
         "Best Weapons",
         "Get all Certified Weapons",
         "Get Roadmap Items",
+        "List Every Item by Category"
     };
     public static final String[] LENGTHY_CATEGORY_LIST = 
     {
