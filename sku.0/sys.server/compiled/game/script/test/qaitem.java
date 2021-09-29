@@ -13,6 +13,9 @@ import java.util.Vector;
 
 public class qaitem extends script.base_script
 {
+    public qaitem()
+    {
+    }
     public static final String SCRIPTVAR = "qaitem";
     public static final String EQUIPMENT_TOOL_TITLE = "QA MASTER ITEM TOOL";
     public static final String EQUIPMENT_TOOL_PROMPT = "This tool allows the tester to find items such as reward armor and weapons.";
