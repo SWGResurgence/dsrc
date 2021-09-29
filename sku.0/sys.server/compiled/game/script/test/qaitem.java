@@ -21,7 +21,6 @@ public class qaitem extends script.base_script
     public static final String EQUIPMENT_TOOL_PROMPT = "This tool allows the tester to find items such as reward armor and weapons.";
     public static final String ROADMAP_TOOL_TITLE = "QA ROADMAP ITEM TOOL";
     public static final String ROADMAP_TOOL_PROMPT = "This tool allows the tester to spawn all profession roadmap items regardless of what their current test character profession is.";
-    public static final String CATEGORY_TOOL_TITLE = "QA ITEM CATEGORIES";
     public static final String CATEGORY_TOOL_PROMPT = "This tool allows the tester to browse the master item table dynamically, based on item categories specified in the template name of the item.  To use this tool you may need to know what category the item belongs to.  For instance, a ranged weapon belongs to the weapon category.";
     public static final String[] EQUIPMENT_TOOL_MENU = 
     {
