@@ -113,7 +113,7 @@ public class player_structure extends script.base_script
     public static final float RATE_POWER_MIN = 1.0f;
     public static final float MERCHANT_SALES_MODIFIER = -0.2f;
     public static final int MIN_RESIDENCE_DURATION = 86400;
-    public static final int MAX_LOTS = 10;
+    public static final int MAX_LOTS = 20;
     public static final int MAX_LIST_SIZE = 50;
     public static final int MAIL_WARNING_INTERVAL = 86400;
     public static final int TIME_TO_NEXT_PACKUP = 86400;
