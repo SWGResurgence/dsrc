@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class pclib extends script.base_script
 {
-    public pclib()
-    {
-    }
     public static final int MAX_NEWBIE_DEATHS = 3;
     public static final String VAR_NEWBIE_BASE = "noob";
     public static final String VAR_NEWBIE_DEATH = VAR_NEWBIE_BASE + ".death";
@@ -158,6 +155,7 @@ public class pclib extends script.base_script
     public static final String DECAY_REMAINDER = "decay.remainder";
     public static final float MIN_CLONING_SICKNESS_COST = 100;
     public static final float MAX_CLONING_SICKNESS_COST = 5000;
+	
     public static int getCloningSicknessCureCost(obj_id player) throws InterruptedException
     {
         float minCost = MIN_CLONING_SICKNESS_COST;
@@ -671,12 +669,11 @@ public class pclib extends script.base_script
         {
             playDeathBlowAnimation(victim, killer);
         }
-        if ( getPosture(victim) != POSTURE_DEAD ) {
+        if (getPosture(victim) != POSTURE_DEAD) {
             if (!setPosture(victim, POSTURE_DEAD)) {
                 debugSpeakMsg(victim, "coupDeGrace: unable to set my posture to dead!");
             }
         }
-        boolean dueling = pvpIsDueling(victim, pvpKiller);
         if (killer != victim)
         {
             prose_package ppToKiller = prose.getPackage(PROSE_TARGET_DEAD, victim);
@@ -695,7 +692,7 @@ public class pclib extends script.base_script
                 return;
             }
         }
-        playerDeath(victim, killer, dueling);
+        playerDeath(victim, killer);
     }
     public static void playDeathBlowAnimation(obj_id victim, obj_id killer) throws InterruptedException
     {
@@ -751,7 +748,7 @@ public class pclib extends script.base_script
     {
         coupDeGrace(victim, killer, true);
     }
-    public static boolean playerDeath(obj_id player, obj_id killer, boolean dueling) throws InterruptedException
+    public static boolean playerDeath(obj_id player, obj_id killer) throws InterruptedException
     {
         if (!isIdValid(player) || killer == null)
         {
@@ -788,7 +785,7 @@ public class pclib extends script.base_script
             }
             else 
             {
-                if ((getTotalMoney(player) >= bounty_hunter.MIN_BOUNTY_SET) && (!dueling) && (getLevel(killer) >= 20))
+                if (getLevel(killer) >= 20)
                 {
                     bounty_hunter.showSetBountySUI(player, killer);
                 }
@@ -808,6 +805,36 @@ public class pclib extends script.base_script
         {
             group.notifyDeath(gid, player);
         }
+		
+		// RESTUSS PVP COMMENDATION SYSTEM BEGIN
+		
+		region[] regionList = getRegionsAtPoint(getLocation(killer));
+        if (regionList != null && regionList.length > 0)
+        {
+            for (int i = 0, j = regionList.length; i < j; i++)
+            {
+                region currentRegion = regionList[i];
+                if (currentRegion == null)
+                {
+                    continue;
+                }
+                String currentRegionName = currentRegion.getName();
+                if (currentRegionName.equals(restuss_event.PVP_REGION_NAME))
+                {
+                    String pFac = factions.getFaction(killer);
+                    obj_id inventory = utils.getInventoryContainer(killer);
+                    int commCount = pvpGetCurrentGcwRank(killer) - 1;
+
+                    if (commCount > 0) {
+                        static_item.createNewItemFunction("item_restuss_" + pFac.toLowerCase() + "_commendation_02_01", inventory, commCount);
+                        sendSystemMessageTestingOnly(killer, "You've recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + player + " in combat.");
+                    }
+                }
+            }
+        }
+		
+		// RESTUSS PVP COMMENDATION SYSTEM END
+		
         messageTo(player, HANDLER_PLAYER_DEATH, null, TIME_DEATH, true);
         dictionary params = new dictionary();
         params.put("victim", player);

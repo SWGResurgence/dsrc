@@ -5,9 +5,6 @@ import script.library.*;
 
 public class terminal_city_junk_dealer extends script.base_script
 {
-    public terminal_city_junk_dealer()
-    {
-    }
     public static final string_id SID_MT_REMOVE = new string_id("city/city", "mt_remove");
     public static final string_id SID_MT_REMOVED = new string_id("city/city", "mt_removed");
     public static final boolean LOGGING_ON = true;

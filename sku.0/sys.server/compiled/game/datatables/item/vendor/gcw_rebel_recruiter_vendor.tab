@@ -1,4 +1,4 @@
-item	cash	token17	class	script	note
+item	cash	token14	class	script	note
 s[none]	i[0]	i[0]	i[0]	s	c
 weapon_gcw_dh18a_pistol_03_01		1000			
 item_schematic_pvp_gcw_saber_1h_gen4		1000			
@@ -65,4 +65,5 @@ item_schematic_prop_ribbon_01_04		100
 item_schematic_prop_ribbon_01_05		100
 item_schematic_prop_ribbon_01_06		100
 item_gcw_atxt_familiar		5000
-rebel_trooper_hat_schematic		800
+item_schematic_armor_marine_backpack_01_01		4000
+item_schematic_hat_rebel_trooper_01_01		1500

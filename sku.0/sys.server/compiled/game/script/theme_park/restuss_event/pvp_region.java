@@ -9,9 +9,6 @@ import script.region;
 
 public class pvp_region extends script.base_script
 {
-    public pvp_region()
-    {
-    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         initialize(self);

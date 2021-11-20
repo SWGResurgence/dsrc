@@ -20,7 +20,6 @@
 
 sharedTemplate = "object/tangible/veteran_reward/shared_vr_bearded_jax_deed.iff"
 
-objvars = +[ "creatureName" = "vr_bearded_jax", "noTrade" = 1 ]
+objvars = +[ "creatureName" = "vr_bearded_jax" ]
 
-scripts = +[ "npc.pet_deed.reward_pet_deed", "item.special.nomove" ]
-
+scripts = +[ "npc.pet_deed.reward_pet_deed" ]

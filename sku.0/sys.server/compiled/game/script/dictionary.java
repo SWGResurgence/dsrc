@@ -1795,8 +1795,4 @@ public class dictionary implements Serializable
 		}
 		return strings;
 	}
-
-
-
 }	// class dictionary
-

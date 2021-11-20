@@ -145,7 +145,7 @@ expertise_fs_general_improved_force_shockwave_2	4	5	3	2			force_sensitive
 expertise_fs_general_improved_force_shockwave_3	4	5	3	3			force_sensitive
 expertise_fs_general_fidelity_1	4	4	5	1			force_sensitive
 expertise_fs_general_fidelity_2	4	4	5	2			force_sensitive
-expertise_fs_general_improved_force_cloak_1	4	5	5	1			force_sensitive
+expertise_fs_general_improved_force_cloak_1	4	4	4	1	expertise_fs_general_force_cloak_1		force_sensitive
 expertise_fs_general_premonition_1	4	3	3	1			force_sensitive
 expertise_fs_general_premonition_2	4	3	3	2			force_sensitive
 expertise_fs_general_premonition_3	4	3	3	3			force_sensitive
@@ -336,8 +336,6 @@ expertise_of_sup_cool_1	11	1	4	1			officer
 expertise_of_sup_cool_2	11	1	4	2			officer
 expertise_of_sup_cool_3	11	1	4	3			officer
 expertise_of_sup_cool_4	11	1	4	4			officer
-expertise_of_medical_sup_1	11	3	4	1			officer
-expertise_of_tactical_sup_1	11	4	4	1			officer
 expertise_of_reinforcements_1	11	5	4	1			officer
 expertise_of_aoe_act_1	11	1	5	1			officer
 expertise_of_aoe_act_2	11	1	5	2			officer
@@ -727,10 +725,6 @@ expertise_en_inspired_industry_1	23	1	6	1			entertainer
 expertise_en_inspired_industry_2	23	1	6	2			entertainer
 expertise_en_inspired_industry_3	23	1	6	3			entertainer
 expertise_en_inspired_industry_4	23	1	6	4			entertainer
-expertise_en_creativity_1	23	2	1	1			entertainer
-expertise_en_creativity_2	23	2	1	2			entertainer
-expertise_en_creativity_3	23	2	1	3			entertainer
-expertise_en_creativity_4	23	2	1	4			entertainer
 expertise_en_holism_1	23	2	3	1			entertainer
 expertise_en_harvest_faire_1	23	2	4	1			entertainer
 expertise_en_second_chance_1	23	2	6	1			entertainer
@@ -738,7 +732,6 @@ expertise_en_go_with_the_flow_1	23	2	7	1			entertainer
 expertise_en_intense_performer_1	23	3	1	1			entertainer
 expertise_en_intense_performer_2	23	3	1	2			entertainer
 expertise_en_intense_performer_3	23	3	1	3			entertainer
-expertise_en_intense_performer_4	23	3	1	4			entertainer
 expertise_en_affability_1	23	3	2	1			entertainer
 expertise_en_affability_2	23	3	2	2			entertainer
 expertise_en_affability_3	23	3	2	3			entertainer

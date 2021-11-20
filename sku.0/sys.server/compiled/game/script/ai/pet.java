@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class pet extends script.base_script
 {
-    public pet()
-    {
-    }
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public static final String ACTION_ALERT = "alert";
     public static final String ACTION_THREATEN = "threaten";

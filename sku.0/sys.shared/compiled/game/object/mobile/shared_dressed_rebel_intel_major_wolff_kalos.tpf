@@ -1,0 +1,19 @@
+
+@base object/mobile/skeleton/shared_humanoid.iff
+
+@class creature_object_template 3
+
+gender = GE_male
+species = SP_bothan
+
+@class tangible_object_template 3
+
+
+
+@class object_template 3
+
+objectName = "npc_name" "syren_4_wolff_kalos"
+detailedDescription = "" ""
+lookAtText = "npc_lookat" "syren_4_wolff_kalos"
+appearanceFilename = "appearance/bth_m.sat"
+clientDataFile = "clientdata/npc/client_shared_npc_dressed_rebel_intel_major_wolff_kalos.cdf"

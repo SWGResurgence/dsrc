@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class buff_handler extends script.base_script
 {
-    public buff_handler()
-    {
-    }
     public static final float ATTACK_RATE_DEPRICATED = 0.0f;
     public static final float DECAY_RATE_DEPRICATED = 0.0f;
     public static final String SKILLS_DATATABLE = "datatables/skill/skills.iff";
@@ -1757,7 +1754,7 @@ public class buff_handler extends script.base_script
             CustomerServiceLog("SuspectedCheaterChannel: ", "Storing improvDance: " + improvDance);
 
         }
-        int actualPointsToSpend = 8;
+        int actualPointsToSpend = 40;
         if (isIdValid(bufferId) && exists(bufferId))
         {
             actualPointsToSpend += getEnhancedSkillStatisticModifierUncapped(bufferId, "expertise_en_inspire_base_point_increase");

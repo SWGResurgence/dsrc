@@ -23,7 +23,6 @@ s	c	s	s	s	f	f	s	s	s	s
 6835512	QuestGiver c_ddroid_amarent -5025 21 -2259		commoner_human_male				conversation.c_ddroid_amarent
 3355372	QuestGiver Imp Defector -5520 21 -2631		rebel_officer_questgiver				conversation.c_impdefector_jom
 1284131	QuestReceiver Imp Defector -6485 398 6017		rebel_officer_questgiver				conversation.c_impdefector_teslo
-1284152	QuestGiver StoryArc1 -5237 20 2547 in bar		rebel_officer_questgiver				conversation.c_story1_1_reb_quest
 1284173	Rebel Recruiter -5546 15 -6065		rebel_recruiter				
 1284174	Rebel Recruiter -5516 23 -6187		rebel_recruiter				
 1284175	Rebel Recruiter -5156 4 -6417		rebel_recruiter				

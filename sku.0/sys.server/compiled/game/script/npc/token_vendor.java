@@ -13,19 +13,16 @@ import java.util.Vector;
 
 public class token_vendor extends script.base_script
 {
-    public token_vendor()
-    {
-    }
     public static final String VENDOR_TABLE = "datatables/item/token_vendor.iff";
-    public static final int COMMANDO = 1;
-    public static final int SMUGGLER = 2;
-    public static final int MEDIC = 3;
-    public static final int OFFICER = 4;
-    public static final int SPY = 5;
-    public static final int BOUNTY_HUNTER = 6;
-    public static final int FORCE_SENSITIVE = 7;
-    public static final int TRADER = 8;
-    public static final int ENTERTAINER = 9;
+    public static final byte COMMANDO = 1;
+    public static final byte SMUGGLER = 2;
+    public static final byte MEDIC = 3;
+    public static final byte OFFICER = 4;
+    public static final byte SPY = 5;
+    public static final byte BOUNTY_HUNTER = 6;
+    public static final byte FORCE_SENSITIVE = 7;
+    public static final byte TRADER = 8;
+    public static final byte ENTERTAINER = 9;
     public int showInventorySUI(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -203,7 +200,7 @@ public class token_vendor extends script.base_script
         boolean foundTokenHolderBox = false;
         for (obj_id inventoryContent : inventoryContents) {
             String itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.equals("")) {
+            if (itemName != null && !itemName.isEmpty()) {
                 for (int j = 0; j < trial.HEROIC_TOKENS.length; j++) {
                     if (itemName.equals(trial.HEROIC_TOKENS[j])) {
                         if (getCount(inventoryContent) > 1) {
@@ -268,7 +265,7 @@ public class token_vendor extends script.base_script
         boolean foundTokenHolderBox = false;
         for (obj_id inventoryContent : inventoryContents) {
             String itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.equals("")) {
+            if (itemName != null && !itemName.isEmpty()) {
                 for (int j = 0; j < trial.HEROIC_TOKENS.length; j++) {
                     if (itemName.equals(trial.HEROIC_TOKENS[j]) && intendedPayment[j] > 0) {
                         if (getCount(inventoryContent) > 1) {

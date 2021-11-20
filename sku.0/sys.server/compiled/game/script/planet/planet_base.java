@@ -12,9 +12,6 @@ import java.util.Vector;
 
 public class planet_base extends script.base_script
 {
-    public planet_base()
-    {
-    }
     public int OnUniverseComplete(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("holidayEvent", "planet_base.OnUniverseComplete: trigger initialized.");
@@ -96,13 +93,20 @@ public class planet_base extends script.base_script
         Vector cloneTypeList = utils.getResizeableIntArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_TYPE);
         if (idList == null || areaList == null || areaIdList == null || locList == null || respawnList == null || cloneTypeList == null)
         {
-            idList = utils.addElement(null, facilityId);
-            nameList = utils.addElement(null, cloneName);
-            areaList = utils.addElement(null, areaName);
-            areaIdList = utils.addElement(null, areaId);
-            locList = utils.addElement(null, facilityLoc);
-            respawnList = utils.addElement(null, facilityRespawn);
-            cloneTypeList = utils.addElement(null, cloneType);
+            if (idList != null)
+                idList.add(facilityId);
+            if (nameList != null)
+                nameList.add(cloneName);
+            if (areaList != null)
+                areaList.add(areaName);
+            if (areaIdList != null)
+                areaIdList.add(areaId);
+            if (locList != null)
+                locList.add(facilityLoc);
+            if (respawnList != null)
+                respawnList.add(facilityRespawn);
+            if (cloneTypeList != null)
+                cloneTypeList.add(cloneType);
         }
         else 
         {

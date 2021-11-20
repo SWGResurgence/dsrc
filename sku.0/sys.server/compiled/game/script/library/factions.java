@@ -9,11 +9,8 @@ import java.util.Vector;
 
 public class factions extends script.base_script
 {
-    public factions()
-    {
-    }
     public static final int RESIGN_TIME = 0;
-    public static final int COVERT_TIME = 300;
+    public static final int COVERT_TIME = 30;
     public static final String VAR_RESIGNING = "faction_recruiter.resigning";
     public static final float BOTHAN_NEGATIVE_MOD = 0.90f;
     public static final String FACTION = "faction";
@@ -24,7 +21,7 @@ public class factions extends script.base_script
     public static final float FACTION_RATING_SYMPATHIZER_MIN = 750.0f;
     public static final float FACTION_RATING_INVALID = 0.0f;
     public static final float MAX_FACTION_KILL_REWARD = 30.0f;
-    public static final int NEWLY_DECLARED_INTERVAL = 300;
+    public static final int NEWLY_DECLARED_INTERVAL = 30;
     public static final int AD_HOC_FACTION = -1;
     public static final int NPC_FACTION_START_INDEX = 2;
     public static final int REACTION_LIKE = 2;
@@ -1513,7 +1510,7 @@ public class factions extends script.base_script
                 int now = getGameTime();
                 int lastFactionResignedTime = getIntObjVar(player, "lastFactionResignedTime");
                 int interval = now - lastFactionResignedTime;
-                int minIntervalToJoin = 60 * 60 * 24 * 5;
+                int minIntervalToJoin = 60 * 60 * 24 * 2;
                 return interval < minIntervalToJoin;
             }
         }

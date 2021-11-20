@@ -1322,6 +1322,18 @@ slayer_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						
 			col_imperial_rank_ltcol_01_01	5673	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
 			col_imperial_rank_col_01_01	5674	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
 			col_imperial_rank_gen_01_01	5675	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
+		col_syren5_imp		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1
+			col_syren5_imp_false_orders_01_01	22763	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_imp_stolen_codes_01_01	22764	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_imp_forged_rank_insignia_01_01	22765	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_imp_rank_insignia_01_01	22766	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_imp_isb_datapad_01_01	22767	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+		col_syren5_reb		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1
+			col_syren5_reb_false_orders_01_01	22768	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_reb_stolen_codes_01_01	22769	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_reb_forged_rank_insignia_01_01	22770	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_reb_rank_insignia_01_01	22771	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			col_syren5_reb_intel_datapad_01_01	22772	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 	creature_kill			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 		kill_nyms_themepark_pirate		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1
 			kill_nyms_themepark_sulfur_lake_pirate_activate	15899	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0
@@ -1777,6 +1789,8 @@ slayer_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						
 			cold_blooded_tier_2_complete	2694	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 		col_hoth_probe_droid_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1
 			hoth_probe_droid_counter	6222	6233	15	kill_heroic_echo_probe_droid																	sound/music_acq_miner.snd	gray	0	0						0	0
+		col_necrosis_slayer																									1							1		Necrosis Neutralizer	
+			necrosis_slayer_counter	22773	22783	20	kill_ep3_general_grievous																													N-K Necrosis	You have successfully defeated Kinesworthy and Lorn's dangerous creation.
 	force_sensitive_kill			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 		col_jedi_npc_kill		0	-1	-1																		sound/music_acq_miner.snd	gray	0	1						0	1
 			kill_padawan_01	5515	5523	50	kill_fallen_padawan	kill_dark_jedi_sentinel	kill_light_jedi_sentinel	kill_treasure_guard_padawan	kill_ep3_rryatt_crazed_jedi													sound/music_acq_miner.snd	gray	0	0						0	0

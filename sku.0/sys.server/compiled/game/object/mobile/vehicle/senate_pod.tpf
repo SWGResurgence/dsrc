@@ -7,5 +7,3 @@
 @class object_template 0
 
 sharedTemplate = "object/mobile/vehicle/shared_senate_pod.iff"
-
-scripts = +["item.special.nomove"]

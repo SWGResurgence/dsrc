@@ -1,11 +1,8 @@
 
 @base object/tangible/wearables/base/base_backpack.iff
 
-@class tangible_object_template 3
-
-armor = ""
+@class tangible_object_template 0
 
 @class object_template 2
 
 sharedTemplate = "object/tangible/wearables/armor/marine/shared_armor_marine_backpack.iff"
-

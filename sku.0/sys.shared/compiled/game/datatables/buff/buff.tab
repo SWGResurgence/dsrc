@@ -1732,11 +1732,11 @@ mtp_meatlump_wine_xp_buff	exp_buff			10	buffs.mtp_meatlump_wine_xp_buff	3600	xp_
 mtp_eavesdrop_lockout	invisible_mtp_eavesdrop_buff			1		82800		0		0		0		0		0	STATE_NONE	none			0	1		0	0	0	1	1	1	0	0	1	1
 mtp_wine_lockout	invisible_mtp_wine_buff			1		82800		0		0		0		0		0	STATE_NONE	none			0	1		0	0	0	1	1	1	0	0	1	1
 event_halloween_bat_swarm	particle_swarm			1	buffs.batSwarm	300	event_halloween_bat_swarm	0		0		0		0		0	STATE_NONE	none	appearance/pt_bats.prt		1	0		0	1	1	0	1	1	0	1	1	1
-food_station	food_station			1	buffs.food_station	-1	station_buff	0	food_station	8644		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-armor_station	armor_station			1	buffs.armor_station	-1	station_buff	0	armor_station	10		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-structure_station	structure_station			1	buffs.structure_station	-1	station_buff	0	structure_station	1536		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-weapon_station	weapon_station			1	buffs.weapon_station	-1	station_buff	0	weapon_station	526369		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-space_station	space_station			1	buffs.space_station	-1	station_buff	0	space_station	393216		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+food_station	food_station			1	buffs.food_station	-1	station_buff	0	food_station	8644		0		0		0	STATE_NONE	none			1	0		0	1	0	0	1	1	0	1	1	1
+armor_station	armor_station			1	buffs.armor_station	-1	station_buff	0	armor_station	10		0		0		0	STATE_NONE	none			1	0		0	1	0	0	1	1	0	1	1	1
+structure_station	structure_station			1	buffs.structure_station	-1	station_buff	0	structure_station	1536		0		0		0	STATE_NONE	none			1	0		0	1	0	0	1	1	0	1	1	1
+weapon_station	weapon_station			1	buffs.weapon_station	-1	station_buff	0	weapon_station	526369		0		0		0	STATE_NONE	none			1	0		0	1	0	0	1	1	0	1	1	1
+space_station	space_station			1	buffs.space_station	-1	station_buff	0	space_station	393216		0		0		0	STATE_NONE	none			1	0		0	1	0	0	1	1	0	1	1	1
 event_halloween_costume_jawa	shapechange	halloween_shapechange		1	buffs.costume	1800	movement	0	event_halloween_costume	1		0		0		0	STATE_NONE	none			1	0		0	1	1	1	1	1	0	1	1	1
 event_halloween_costume_toydarian	shapechange	halloween_shapechange		1	buffs.costume	1800	movement	0	event_halloween_costume	2		0		0		0	STATE_NONE	none			1	0		0	1	1	1	1	1	0	1	1	1
 event_halloween_costume_hutt_female	shapechange	halloween_shapechange		1	buffs.costume	1800	movement	0	event_halloween_costume	3		0		0		0	STATE_NONE	none			1	0		0	1	1	1	1	1	0	1	1	1

@@ -1,0 +1,19 @@
+
+@base object/mobile/skeleton/shared_humanoid.iff
+
+@class creature_object_template 3
+
+gender = GE_male
+species = SP_human
+
+@class tangible_object_template 3
+
+@class object_template 3
+
+objectName = "npc_name" "syren_5_rebel_specforce_infiltrator"
+detailedDescription = "" ""
+lookAtText = "npc_lookat" "syren_5_rebel_specforce_infiltrator"
+appearanceFilename = "appearance/hum_m.sat"
+clientDataFile = "clientdata/npc/client_shared_npc_dressed_rebel_specforce_infiltrator_human_male_02.cdf"
+scale = 1.00..1.12
+

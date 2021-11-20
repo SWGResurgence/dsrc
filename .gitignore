@@ -1,3 +1,7 @@
 object_template_crc_string_table.tab
 **/.idea/*
 *.iml
+sku.0/sys.client/compiled/game/input/backup_groundinput_swg.mif
+sku.0/sys.server/compiled/game/script/theme_park/dungeon/mustafar_trials/old_republic_facility/ancient_tulrus_death.java
+sku.0/sys.server/compiled/game/script/theme_park/dungeon/mustafar_trials/old_republic_facility/backup_ancient_tulrus_death.java
+sku.0/sys.server/compiled/game/script/theme_park/dungeon/mustafar_trials/old_republic_facility/ancient_tulrus_death - Copy.java

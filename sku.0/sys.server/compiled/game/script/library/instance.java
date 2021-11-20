@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class instance extends script.base_script
 {
-    public instance()
-    {
-    }
     public static final String INSTANCE_DATATABLE = "datatables/instance/instance_datatable.iff";
     public static final String REQUEST_TYPE = "instance.request_name";
     public static final String REQUEST_TEAM = "instance.request_team";
@@ -28,6 +25,7 @@ public class instance extends script.base_script
     public static final int REQUEST_CLOSE = 1;
     public static final int RESET_NONE = 0;
     public static final int RESET_DAILY = 1;
+	public static final int RESET_12HR = 2;
     public static final int FAIL_INSTANCE_FULL = 0;
     public static final int FAIL_NOT_MEMBER = 1;
     public static final int INSTANCE_TIMEOUT = 2;
@@ -664,18 +662,23 @@ public class instance extends script.base_script
             CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-dictionary was null for player " + getFirstName(player) + "(" + player + "), we are returning here.");
             return;
         }
+		int resetAt = 0;
         int resetType = dict.getInt("lockoutTimer");
         switch (resetType)
         {
             case RESET_NONE:
             CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-resetType was RESET_NONE for player " + getFirstName(player) + "(" + player + "), doing nothing.");
-            break;
+				return;
+			case RESET_12HR:
+				resetAt = getCalendarTime() + secondsUntilNextDailyTime(10, 0, 0);
+				CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-resetType was RESET_12HR, setting objvar " + PLAYER_INSTANCE + "." + instance_name + " to " + resetAt + "_" + instance_id + "_" + owner + "_" + start_time + " on player " + getFirstName(player) + "(" + player + ").");
+				break;
             case RESET_DAILY:
-            int resetAt = getCalendarTime() + secondsUntilNextDailyTime(6, 0, 0);
-            setObjVar(player, PLAYER_INSTANCE + "." + instance_name, "" + resetAt + "_" + instance_id + "_" + owner + "_" + start_time);
-            CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-resetType was RESET_DAILY, setting objvar " + PLAYER_INSTANCE + "." + instance_name + " to " + resetAt + "_" + instance_id + "_" + owner + "_" + start_time + " on player " + getFirstName(player) + "(" + player + ").");
-            break;
+				resetAt = getCalendarTime() + secondsUntilNextDailyTime(10, 0, 0);
+                CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "setResetDataOnPlayer-resetType was RESET_DAILY, setting objvar " + PLAYER_INSTANCE + "." + instance_name + " to " + resetAt + "_" + instance_id + "_" + owner + "_" + start_time + " on player " + getFirstName(player) + "(" + player + ").");
+                break;
         }
+		setObjVar(player, PLAYER_INSTANCE + "." + instance_name, "" + resetAt + "_" + instance_id + "_" + owner + "_" + start_time);
     }
     public static boolean isValidatedByLockoutData(obj_id player, obj_id instance_id, obj_id owner, String instance_name) throws InterruptedException
     {

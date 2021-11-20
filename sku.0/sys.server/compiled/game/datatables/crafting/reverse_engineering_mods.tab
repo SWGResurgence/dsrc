@@ -133,7 +133,7 @@ combat_evasion_value	4
 combat_strikethrough_chance	6
 combat_strikethrough_value	4
 bm_xp_mod_boost	7
-detect_hidden	3
+detect_hidden	1
 exotic_heal_action_reduction	10
 commando_devastation	15
 exotic_dodge_reduction	8

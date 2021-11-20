@@ -7,11 +7,10 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+import script.cureward.cureward;
+
 public class base_player extends script.base_script
 {
-    public base_player()
-    {
-    }
     public static final int TIME_DEATH = 5;
     public static final float RANGE_COUP_DE_GRACE = 3.0f;
     public static final String JEDI_CLOAK_TEMPLATE = "object/tangible/wearable/robe/robe_s05.iff";
@@ -1501,7 +1500,6 @@ public class base_player extends script.base_script
                 removeObjVar(self, "groupWaypoint");
             }
         }
-        veteran_deprecated.updateVeteranTime(self);
         if (hasObjVar(self, "renamePerformed"))
         {
             String old_name = getStringObjVar(self, "renamePerformed");
@@ -1630,12 +1628,10 @@ public class base_player extends script.base_script
         {
             badge.grantBadge(self, "bdg_kash_avatar_zssik");
         }
-        if (!utils.hasScriptVar(self, "performance.buildabuff.buffComponentKeys") && buff.hasBuff(self, "buildabuff_inspiration"))
-        {
-            buff.removeBuff(self, "buildabuff_inspiration");
-        }
-        if (getLocation(self).area == "dungeon1")
-        {
+		if (!utils.hasScriptVar(self, "performance.buildabuff.buffComponentKeys") && buff.hasBuff(self, "buildabuff_inspiration")) {
+			buff.removeBuff(self, "buildabuff_inspiration");
+		}
+        if (getLocation(self).area.equals("dungeon1")) {
             if (trial.getTop(self) == self)
             {
                 warpPlayer(self, "tatooine", 0, 0, 0, null, 0, 0, 0, null, false);
@@ -9581,40 +9577,21 @@ public class base_player extends script.base_script
     }
     public int cmdGetVeteranRewardTime(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards")))
-        {
-            return SCRIPT_CONTINUE;
-        }
-        if (isGod(self))
-        {
-            if (!isIdValid(target))
-            {
-                target = self;
-            }
-            if (veteran_deprecated.checkVeteranTarget(target))
-            {
-                int veteranTime = getIntObjVar(target, veteran_deprecated.OBJVAR_TIME_ACTIVE);
-                prose_package pp = new prose_package();
-                pp.stringId = veteran_deprecated.SID_VETERAN_TIME_ACTIVE;
-                pp.target.id = target;
-                pp.digitInteger = veteranTime;
-                sendSystemMessageProse(self, pp);
-            }
-        }
-        else 
-        {
-            if (hasObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE))
-            {
-                int veteranTime = getIntObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE);
-                prose_package pp = new prose_package();
-                pp.stringId = veteran_deprecated.SID_VETERAN_SELF_TIME_ACTIVE;
-                pp.digitInteger = veteranTime;
-                sendSystemMessageProse(self, pp);
-            }
-            else 
-            {
-                sendSystemMessage(self, veteran_deprecated.SID_SYSTEM_INACTIVE);
-            }
+				obj_id tatooine = getPlanetByName("tatooine");
+        String objVar = "vetTokenCD_" + getPlayerStationId(self);
+		if (!hasObjVar(tatooine, objVar)) {
+			cureward.giveVeteranRewardToken(self, 100);
+			return SCRIPT_CONTINUE;
+		}
+        int timeLeft = getIntObjVar(tatooine, objVar) + 86400 - getCalendarTime();
+
+        if (timeLeft > 0) {
+            prose_package pp = new prose_package();
+            pp.stringId = new string_id("veteran", "time_left");
+            pp.digitInteger = timeLeft;
+            sendSystemMessageProse(self, pp);
+        } else {
+            cureward.giveVeteranRewardToken(self, (timeLeft / -86400) + 1);
         }
         return SCRIPT_CONTINUE;
     }
@@ -9622,11 +9599,6 @@ public class base_player extends script.base_script
     {
         if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards")))
         {
-            return SCRIPT_CONTINUE;
-        }
-        if (!isGod(self) && !hasObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE))
-        {
-            sendSystemMessage(self, veteran_deprecated.SID_SYSTEM_INACTIVE);
             return SCRIPT_CONTINUE;
         }
         int[] templateCrcs = dataTableGetIntColumn(veteran_deprecated.REWARDS_DATATABLE, veteran_deprecated.REWARDS_COLUMN_TEMPLATE);
@@ -10684,7 +10656,7 @@ public class base_player extends script.base_script
         exclusiveLootNames[9] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardExclusiveLootName10);
         exclusiveLootCounts[9] = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardExclusiveLootCount10);
         String badge = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnBadge);
-        int exclusiveLootCountChoice = groundquests.getExclusiveItemRewardCount(questGetQuestName(questCrc), exclusiveItemChoice);
+        int exclusiveLootCountChoice = 1;
         groundquests.grantQuestReward(self, questCrc, questLevel, questTier, experienceType, experienceAmount, factionName, factionAmount, grantGcwReward, bankCredits, item, itemCount, weapon, weaponCount, weaponSpeed, weaponDamage, weaponEfficiency, weaponElementalValue, armor, armorCount, armorQuality, inclusiveLootNames, inclusiveLootCounts, exclusiveItemChoice, exclusiveLootCountChoice, badge, (questIsQuestForceAccept(questCrc) || !questDoesUseAcceptanceUI(questCrc)), grantGcwOverwriteAmt, grantGcwSFModifier, grantGcwRebReward, grantGcwRebRewardCount, grantGcwImpReward, grantGcwImpRewardCount, grantGcwSFRewardMultip);
         experienceAmount = groundquests.getQuestExperienceReward(self, questLevel, questTier, experienceAmount);
         metrics.doQuestMetrics(self, questCrc, questLevel, questTier, experienceType, experienceAmount);
@@ -11326,17 +11298,6 @@ public class base_player extends script.base_script
         if (amount < 0)
         {
             sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_invalid_number"));
-            bounty_hunter.showSetBountySUI(self, killer);
-            return SCRIPT_CONTINUE;
-        }
-        if (amount > bounty_hunter.MAX_BOUNTY_SET)
-        {
-            sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_cap"));
-            amount = bounty_hunter.MAX_BOUNTY_SET;
-        }
-        if (amount < bounty_hunter.MIN_BOUNTY_SET)
-        {
-            sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_too_little"));
             bounty_hunter.showSetBountySUI(self, killer);
             return SCRIPT_CONTINUE;
         }

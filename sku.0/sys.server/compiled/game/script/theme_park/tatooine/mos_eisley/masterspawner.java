@@ -9,9 +9,6 @@ import script.obj_id;
 
 public class masterspawner extends script.base_script
 {
-    public masterspawner()
-    {
-    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Initialized Mos Eisley Cantina spawner script");

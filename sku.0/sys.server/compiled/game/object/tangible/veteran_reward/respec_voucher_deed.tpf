@@ -5,6 +5,6 @@
 @class object_template 8
 
 sharedTemplate = "object/tangible/veteran_reward/shared_respec_voucher_deed.iff"
-scripts = ["systems.veteran_reward.respec_voucher_deed", "item.special.nomove"]
-objvars = +[ "noTrade" = 1]
+scripts = ["systems.veteran_reward.respec_voucher_deed"]
+objvars = []
 persistByDefault = true

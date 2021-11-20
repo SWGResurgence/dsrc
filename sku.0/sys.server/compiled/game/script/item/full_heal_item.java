@@ -5,9 +5,6 @@ import script.library.*;
 
 public class full_heal_item extends script.base_script
 {
-    public full_heal_item()
-    {
-    }
     public static final string_id SID_NOT_YET = new string_id("base_player", "not_yet");
     public static final string_id SID_NOT_LINKED = new string_id("base_player", "not_linked");
     public static final string_id SID_NOT_LINKED_TO_HOLDER = new string_id("base_player", "not_linked_to_holder");
@@ -72,14 +69,14 @@ public class full_heal_item extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
             }
-            if (getState(player, STATE_COMBAT) > 0)
+            /* if (getState(player, STATE_COMBAT) > 0)
             {
                 if (!hasObjVar(self, "allowInCombat"))
                 {
                     sendSystemMessage(player, SID_NOT_WHILE_IN_COMBAT);
                     return SCRIPT_CONTINUE;
                 }
-            }
+            } */
             String itemName = getStaticItemName(self);
             if (itemName == null || itemName.equals(""))
             {

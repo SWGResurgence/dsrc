@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class player_structure extends script.base_script
 {
-    public player_structure()
-    {
-    }
     public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "special_sign";
     public static final String SCRIPT_TERMINAL_STRUCTURE = "terminal.terminal_structure";
@@ -116,7 +113,7 @@ public class player_structure extends script.base_script
     public static final float RATE_POWER_MIN = 1.0f;
     public static final float MERCHANT_SALES_MODIFIER = -0.2f;
     public static final int MIN_RESIDENCE_DURATION = 86400;
-    public static final int MAX_LOTS = 10;
+    public static final int MAX_LOTS = 20;
     public static final int MAX_LIST_SIZE = 50;
     public static final int MAIL_WARNING_INTERVAL = 86400;
     public static final int TIME_TO_NEXT_PACKUP = 86400;
@@ -652,12 +649,10 @@ public class player_structure extends script.base_script
             int expertiseExtractionIncrease = getSkillStatisticModifier(owner, "expertise_harvester_collection_increase");
             int currentExtraction = deed_info.getInt("current_extraction");
             int maxExtraction = deed_info.getInt("max_extraction");
-            setObjVar(structure, "current_extraction", currentExtraction);
-            setObjVar(structure, "max_extraction", maxExtraction);
             if (expertiseExtractionIncrease > 0)
             {
-                currentExtraction += (int)(currentExtraction * expertiseExtractionIncrease / 100.0f);
-                maxExtraction += (int)(maxExtraction * expertiseExtractionIncrease / 100.0f);
+                currentExtraction += (int)(currentExtraction * (1.0f + expertiseExtractionIncrease / 100.0f));
+                maxExtraction += (int)(maxExtraction * (1.0f + expertiseExtractionIncrease / 100.0f));
             }
             if (currentExtraction > HARVESTER_MAX_EXTRACTION_RATE)
             {
@@ -667,6 +662,8 @@ public class player_structure extends script.base_script
             {
                 maxExtraction = HARVESTER_MAX_EXTRACTION_RATE;
             }
+			setObjVar(structure, "current_extraction", currentExtraction);
+			setObjVar(structure, "max_extraction", maxExtraction);
             setCurrentExtractionRate(structure, currentExtraction);
             setMaxExtractionRate(structure, maxExtraction);
         }
@@ -3548,7 +3545,7 @@ public class player_structure extends script.base_script
         {
             return false;
         }
-        if (amt < 1 || amt > 100000)
+        if (amt < 1 || amt > 1000000)
         {
             return false;
         }
@@ -3884,7 +3881,7 @@ public class player_structure extends script.base_script
                 setObjVar(deed, VAR_DEED_SURPLUS_POWER, power);
             }
         }
-        else 
+        else
         {
             if (isIdValid(containerForDeed) && getVolumeFree(containerForDeed) < 1 && bGetSelfPowered)
             {

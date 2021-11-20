@@ -7,9 +7,6 @@ import script.string_id;
 
 public class sequencer_master_object extends script.base_script
 {
-    public sequencer_master_object()
-    {
-    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
@@ -193,7 +190,6 @@ public class sequencer_master_object extends script.base_script
         String strTarget = dctEventToRun.getString("strTarget");
         String strData1 = toLower(dctEventToRun.getString("strData1"));
         String strData2 = toLower(dctEventToRun.getString("strData2"));
-        int intTime = dctEventToRun.getInt("intTime");
         obj_id objTarget = null;
         obj_id objActor = null;
         if (!strActor.equals(""))
@@ -267,6 +263,7 @@ public class sequencer_master_object extends script.base_script
                     if (strData2.equals("") || strData2 == null) {
                         strData2 = "sound/sys_comm_generic.snd";
                     }
+					int intTime = dctEventToRun.getInt("intTime");
                     npe.commTutorialPlayer(objActor, objTarget, intTime, strChat, strData2, "");
                 }
                 break;
@@ -277,6 +274,7 @@ public class sequencer_master_object extends script.base_script
                     if (strData2.equals("") || strData2 == null) {
                         strData2 = "sound/sys_comm_generic.snd";
                     }
+					int intTime = dctEventToRun.getInt("intTime");
                     npe.commTutorialPlayer(objActor, objTarget, intTime, strChat, strData2, "object/mobile/c_3po.iff");
                 }
                 break;
@@ -287,6 +285,7 @@ public class sequencer_master_object extends script.base_script
                     if (strData2.equals("") || strData2 == null) {
                         strData2 = "sound/sys_comm_generic.snd";
                     }
+					int intTime = dctEventToRun.getInt("intTime");
                     npe.commTutorialPlayer(objActor, objTarget, intTime, strChat, strData2, "object/mobile/jabba_the_hutt.iff");
                 }
                 break;
@@ -297,6 +296,7 @@ public class sequencer_master_object extends script.base_script
                     if (strData2.equals("") || strData2 == null) {
                         strData2 = "sound/sys_comm_generic.snd";
                     }
+					int intTime = dctEventToRun.getInt("intTime");
                     npe.commTutorialPlayer(objActor, objTarget, intTime, strChat, strData2, "object/mobile/npe/npe_han_solo.iff");
                 }
                 break;
@@ -307,6 +307,7 @@ public class sequencer_master_object extends script.base_script
                     if (strData2 == null || strData2.equals("")) {
                         strData2 = "sound/sys_comm_generic.snd";
                     }
+					int intTime = dctEventToRun.getInt("intTime");
                     npe.commTutorialPlayer(objActor, objTarget, intTime, strChat, strData2, "object/mobile/darth_vader.iff");
                 }
                 break;
@@ -320,6 +321,7 @@ public class sequencer_master_object extends script.base_script
                     if (strData2.equals("") || strData2 == null) {
                         strData2 = "sound/sys_comm_generic.snd";
                     }
+					int intTime = dctEventToRun.getInt("intTime");
                     npe.commTutorialPlayer(objActor, objTarget, intTime, strChat, strData2, "object/mobile/npe/npe_chewbacca.iff");
                 }
                 break;

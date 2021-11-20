@@ -10,7 +10,6 @@ import script.library.utils;
 import java.io.File;
 import java.util.*;
 
-
 public class base_class
 {
     // info about an object listening for a message
@@ -3123,13 +3122,13 @@ public class base_class
     }
 
     // "messageTo" will go off at the next day of week:hour:minute:second on the week
-    public static final int DAY_OF_WEEK_SUN = 0;
-    public static final int DAY_OF_WEEK_MON = 1;
-    public static final int DAY_OF_WEEK_TUE = 2;
-    public static final int DAY_OF_WEEK_WED = 3;
-    public static final int DAY_OF_WEEK_THU = 4;
-    public static final int DAY_OF_WEEK_FRI = 5;
-    public static final int DAY_OF_WEEK_SAT = 6;
+    public static final byte DAY_OF_WEEK_SUN = 0;
+    public static final byte DAY_OF_WEEK_MON = 1;
+    public static final byte DAY_OF_WEEK_TUE = 2;
+    public static final byte DAY_OF_WEEK_WED = 3;
+    public static final byte DAY_OF_WEEK_THU = 4;
+    public static final byte DAY_OF_WEEK_FRI = 5;
+    public static final byte DAY_OF_WEEK_SAT = 6;
 
     public static int createWeeklyAlarmClock(obj_id receiver, String messageName, dictionary params, int dayOfWeek, int hour, int minute, int second)
     {
@@ -6714,14 +6713,14 @@ public class base_class
      */
     public static native int getObjectTemplateCrc(String name);
 
-    public static native int     getNumAI();
-    public static native int     getNumCreatures();
-    public static native int     getNumPlayers();
-    public static native int     getNumRunTimeRules();
-	public static native int     getNumDynamicAI();
-	public static native int     getNumStaticAI();
-	public static native int     getNumCombatAI();
-	public static native int     getNumHibernatingAI();
+    public static native int getNumAI();
+    public static native int getNumCreatures();
+    public static native int getNumPlayers();
+    public static native int getNumRunTimeRules();
+    public static native int getNumDynamicAI();
+    public static native int getNumStaticAI();
+    public static native int getNumCombatAI();
+    public static native int getNumHibernatingAI();
 
     /**
      * @defgroup theaterMethods Theater creation methods
@@ -13336,7 +13335,6 @@ public class base_class
         Object [] objects = new Object [responses.length];
         java.lang.System.arraycopy (responses, 0, objects, 0, responses.length);
         return _npcStartConversation (player, npc, convoName, greeting, null, objects);
-
     }
 
     /**
@@ -22285,17 +22283,6 @@ public class base_class
     public static int getPlayerStationId(obj_id player)
     {
         return _getPlayerStationId(getLongWithNull(player));
-    }
-	
-	/**
-     * Check station id to see if two characters belong to the same account
-     * 
-     * @param player1
-     * @param player2
-	 * @return true or false
-     */
-    public static boolean charactersAreSamePlayer(obj_id player1, obj_id player2) {
-        return getPlayerStationId(player1) == getPlayerStationId(player2);
     }
 
     /**

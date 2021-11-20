@@ -7,7 +7,5 @@
 
 sharedTemplate = "object/tangible/terminal/shared_terminal_syren5_shield_generator.iff"
 
-objvars = +["questName" = "c_syren5", "taskName" = "encounterWithCalHandro"]
-
-scripts = +["quest.task.ground.util.quest_use_item", "quest.util.retrieve_item_electrical_spark"]
+scripts = +["quest.task.ground.retrieve_item_on_item"]
 

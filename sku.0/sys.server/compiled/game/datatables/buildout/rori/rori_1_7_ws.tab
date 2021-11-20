@@ -7,10 +7,13 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 1233871	1233864	object/cell/cell.iff	4	0	0	0	1	0	0	0		$|
 1233872	1233864	object/cell/cell.iff	5	0	0	0	1	0	0	0		$|
 1233873	1233864	object/cell/cell.iff	6	0	0	0	1	0	0	0		$|
+2234095	1233873	object/tangible/ground_spawning/area_spawner.iff	6	19.6	-12	28.8	0.01745	0	0.99985	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|600.000000|fltMinSpawnTime|2|180.000000|fltRadius|2|4.000000|intDefaultBehavior|0|2|intGoodLocationSpawner|0|0|intSpawnCount|0|4|intSpawnSystem|0|1|registerWithController|0|1|strName|4|syren_4_scout_trooper|strSpawnerType|4|area|strSpawns|4|syren_4_scout_trooper|$|
 1233876	1233864	object/cell/cell.iff	7	0	0	0	1	0	0	0		$|
 1233877	1233864	object/cell/cell.iff	8	0	0	0	1	0	0	0		$|
 1233878	1233864	object/cell/cell.iff	9	0	0	0	1	0	0	0		$|
+2234094	1233878	object/tangible/ground_spawning/area_spawner.iff	9	41.5	-12	58.1	0.01745	0	0.99985	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|600.000000|fltMinSpawnTime|2|180.000000|fltRadius|2|4.000000|intDefaultBehavior|0|2|intGoodLocationSpawner|0|0|intSpawnCount|0|5|intSpawnSystem|0|1|registerWithController|0|1|strName|4|syren_4_scout_trooper|strSpawnerType|4|area|strSpawns|4|syren_4_scout_trooper|$|
 1233879	1233864	object/cell/cell.iff	10	0	0	0	1	0	0	0		$|
+2234093	1233879	object/tangible/ground_spawning/area_spawner.iff	10	1.2	-12	62.7	0.01745	0	0.99985	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|600.000000|fltMinSpawnTime|2|180.000000|fltRadius|2|4.000000|intDefaultBehavior|0|2|intGoodLocationSpawner|0|0|intSpawnCount|0|5|intSpawnSystem|0|1|registerWithController|0|1|strName|4|syren_4_scout_trooper|strSpawnerType|4|area|strSpawns|4|syren_4_scout_trooper|$|
 1233880	1233864	object/cell/cell.iff	11	0	0	0	1	0	0	0		$|
 1233881	1233864	object/cell/cell.iff	12	0	0	0	1	0	0	0		$|
 1233882	1233864	object/cell/cell.iff	13	0	0	0	1	0	0	0		$|
@@ -20,8 +23,12 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 1233896	1233864	object/cell/cell.iff	17	0	0	0	1	0	0	0		$|
 1233930	1233864	object/cell/cell.iff	18	0	0	0	1	0	0	0		$|
 1233934	1233864	object/cell/cell.iff	19	0	0	0	1	0	0	0		$|
+2234092	1233934	object/tangible/ground_spawning/area_spawner.iff	19	50.3	-20	110.1	0.01745	0	0.99985	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|600.000000|fltMinSpawnTime|2|180.000000|fltRadius|2|4.000000|intDefaultBehavior|0|2|intGoodLocationSpawner|0|0|intSpawnCount|0|4|intSpawnSystem|0|1|registerWithController|0|1|strName|4|syren_4_scout_trooper|strSpawnerType|4|area|strSpawns|4|syren_4_scout_trooper|$|
 1233935	1233864	object/cell/cell.iff	20	0	0	0	1	0	0	0		$|
 1233936	1233864	object/cell/cell.iff	21	0	0	0	1	0	0	0		$|
+2234090	1233936	object/tangible/ground_spawning/area_spawner.iff	21	47.5	-20	154.5	0.01745	0	0.99985	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|600.000000|fltMinSpawnTime|2|180.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|syren_4_brant_korra|strSpawnerType|4|area|strSpawns|4|syren_4_brant_korra|$|
+2234220	1233936	object/tangible/quest/syren_4_computer_terminal.iff	21	47.5	-20	158.22	1	0	0	0		$|
+2234091	1233936	object/tangible/ground_spawning/area_spawner.iff	21	48.7	-20	140.1	0.01745	0	0.99985	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|600.000000|fltMinSpawnTime|2|180.000000|fltRadius|2|4.000000|intDefaultBehavior|0|2|intGoodLocationSpawner|0|0|intSpawnCount|0|4|intSpawnSystem|0|1|registerWithController|0|1|strName|4|syren_4_scout_trooper|strSpawnerType|4|area|strSpawns|4|syren_4_scout_trooper|$|
 1233937	1233864	object/cell/cell.iff	22	0	0	0	1	0	0	0		$|
 1233938	1233864	object/cell/cell.iff	23	0	0	0	1	0	0	0		$|
 1233939	1233864	object/cell/cell.iff	24	0	0	0	1	0	0	0		$|

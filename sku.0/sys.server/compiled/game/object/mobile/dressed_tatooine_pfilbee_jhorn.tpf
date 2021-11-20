@@ -1,4 +1,3 @@
-
 @base object/mobile/mobile.iff
 
 @class creature_object_template 2
@@ -8,4 +7,3 @@
 @class object_template 0
 
 sharedTemplate = "object/mobile/shared_dressed_tatooine_pfilbee_jhorn.iff"
-

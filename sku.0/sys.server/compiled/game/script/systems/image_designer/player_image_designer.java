@@ -8,9 +8,6 @@ import script.string_id;
 
 public class player_image_designer extends script.base_script
 {
-    public player_image_designer()
-    {
-    }
     public static final String SCRIPT_IMAGE_DESIGNER_RESPONSE = "systems.image_designer.image_designer_response";
     public static final String SCRIPT_HOLO_EMOTE = "systems.image_designer.holoemote";
     public static final String SCRIPT_IMAGE_DESIGNER_CANCEL = "systems.image_designer.image_designer_cancel";
@@ -32,7 +29,7 @@ public class player_image_designer extends script.base_script
     public static final string_id SID_ALREADY_IMAGE_DESIGNING = new string_id("image_designer", "already_image_designing");
     public static final string_id SID_TARGET_IS_IMAGE_DESIGNING = new string_id("image_designer", "target_is_image_designing");
     public static final string_id SID_ALREADY_BEING_IMAGE_DESIGNED = new string_id("image_designer", "already_being_image_designed");
-    public static final float IMAGE_DESIGN_RANGE = 8.0f;
+    public static final float IMAGE_DESIGN_RANGE = 30.0f;
     public static int id_status = 0;
     public static int id_accept = 0;
     public int OnImageDesignCanceled(obj_id self) throws InterruptedException
@@ -44,7 +41,7 @@ public class player_image_designer extends script.base_script
     public int imageDesignRequestStart(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_image_designer::imageDesignRequestStart");
-        if (!hasCommand(self, "imagedesign"))
+        if (!hasCommand(self, "imagedesign") && !isGod(self))
         {
             LOG("LOG_CHANNEL", self + " ->You must be an image designer to do that.");
             sendSystemMessage(self, SID_NOT_AN_IMAGE_DESIGNER);

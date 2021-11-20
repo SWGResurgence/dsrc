@@ -9,14 +9,8 @@ import java.util.Vector;
 
 public class veteran_deprecated extends script.base_script
 {
-    public veteran_deprecated()
-    {
-    }
-    public static final int UNENTITLED_TIME_LIMIT = 14;
-    public static final int MONTHS_PER_MILESTONE = 3;
-    public static final int DAYS_PER_MONTH = 30;
-    public static final int DAYS_PER_MILESTONE = MONTHS_PER_MILESTONE * DAYS_PER_MONTH;
-    public static final int REWARD_FLAGS_SIZE = ((12 / MONTHS_PER_MILESTONE) * 10) / 32 + 1;
+    public static final byte DAYS_PER_MILESTONE = 7;
+    public static final byte REWARD_FLAGS_SIZE = 40 / 32 + 1;
     public static final int MAX_MILESTONE = REWARD_FLAGS_SIZE * 32;
     public static final String VETERAN_STRING_TABLE = "veteran";
     public static final String REWARDS_DATATABLE = "datatables/veteran/rewards.iff";
@@ -50,16 +44,16 @@ public class veteran_deprecated extends script.base_script
     public static final string_id SID_ONE_YEAR_ANNIVERSARY_FROM = new string_id(VETERAN_STRING_TABLE, "one_year_anniversary_from");
     public static final string_id SID_ONE_YEAR_ANNIVERSARY_INVENTORY_FULL = new string_id(VETERAN_STRING_TABLE, "one_year_inventory_full");
     public static final string_id SID_ONE_YEAR_ANNIVERSARY_INVENTORY_FULL_SUBJECT = new string_id(VETERAN_STRING_TABLE, "one_year_inventory_full_subject");
-    public static final int ONE_YEAR_ANNIVERSARY_REWARD_COUNT = 9;
-    public static final int MIN_ONE_YEAR_ANNIVERSARY_TIME = 30;
+    public static final byte ONE_YEAR_ANNIVERSARY_REWARD_COUNT = 9;
+    public static final byte MIN_ONE_YEAR_ANNIVERSARY_TIME = 30;
     public static final int FLASH_SPEEDER_COST = 20000;
-    public static final int CAN_GET_REWARD_SUCCESS = 0;
-    public static final int CAN_GET_REWARD_FAIL_INADEQUATE_MILESTONE = 1;
-    public static final int CAN_GET_REWARD_FAIL_ALREADY_CLAIMED = 2;
-    public static final int CAN_GET_REWARD_FAIL_INADEQUATE_SUBSCRIPTION = 3;
-    public static final int GIVE_PLAYER_REWARD_SUCCESS = 0;
-    public static final int GIVE_PLAYER_REWARD_FAILED = 1;
-    public static final int GIVE_PLAYER_REWARD_MORE_PROCESSING_REQUIRED = 2;
+    public static final byte CAN_GET_REWARD_SUCCESS = 0;
+    public static final byte CAN_GET_REWARD_FAIL_INADEQUATE_MILESTONE = 1;
+    public static final byte CAN_GET_REWARD_FAIL_ALREADY_CLAIMED = 2;
+    public static final byte CAN_GET_REWARD_FAIL_INADEQUATE_SUBSCRIPTION = 3;
+    public static final byte GIVE_PLAYER_REWARD_SUCCESS = 0;
+    public static final byte GIVE_PLAYER_REWARD_FAILED = 1;
+    public static final byte GIVE_PLAYER_REWARD_MORE_PROCESSING_REQUIRED = 2;
     public static final String OBJVAR_FAKE_VETERAN = "_testVeteran";
     public static final String OBJVAR_FAKE_VETERAN_TOTAL_TIME = OBJVAR_FAKE_VETERAN + ".total_time";
     public static final String OBJVAR_FAKE_VETERAN_ENTITLED_TIME = OBJVAR_FAKE_VETERAN + ".entitled_time";

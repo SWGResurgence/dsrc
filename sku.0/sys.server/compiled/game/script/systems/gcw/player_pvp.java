@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class player_pvp extends script.base_script
 {
-    public player_pvp()
-    {
-    }
     public static final String VAR_PVP_LAST_UPDATE = "pvp_tracker.lastupdate";
     public static final String VAR_PVP_LAST_KILLS = "pvp_tracker.lastkills";
     public static final string_id SID_PVP_BATTLEFIELD_KICK_OUT_INVALID = new string_id("spam", "pvp_battlefield_kick_out_invalid");
@@ -830,11 +827,11 @@ public class player_pvp extends script.base_script
                 {
                     if (faction == factions.FACTION_FLAG_REBEL)
                     {
-                        static_item.createNewItemFunction("item_battlefield_rebel_token_" + battlefieldName, container);
+                        static_item.createNewItemFunction("item_battlefield_rebel_token", container);
                     }
                     else 
                     {
-                        static_item.createNewItemFunction("item_battlefield_imperial_token_" + battlefieldName, container);
+                        static_item.createNewItemFunction("item_battlefield_imperial_token", container);
                     }
                 }
             }

@@ -306,24 +306,34 @@ public class valley_event_manager extends script.base_script
         utils.sendSystemMessage(players, trial.BATTLEFIELD_COMMANDER_DIED);
         return SCRIPT_CONTINUE;
     }
-    public int winTrial(obj_id self, dictionary params) throws InterruptedException
-    {
-        trial.setIsDroidArmyDefeated(self, true);
+    public int winTrial(obj_id self, dictionary params) throws InterruptedException {
+		trial.setIsDroidArmyDefeated(self, true);
         trial.setDungeonCleanOutTimer(self);
         trial.sendCompletionSignal(self, trial.ARMY_WIN_SIGNAL);
         obj_id[] players = instance.getPlayersInInstanceArea(self);
-        if (players == null || players.length == 0)
-        {
-            return SCRIPT_CONTINUE;
-        }
-        utils.sendSystemMessage(players, trial.BATTLEFIELD_WIN_MESSAGE);
+        if (players == null || players.length == 0) {
+			return SCRIPT_CONTINUE;
+		}
+		utils.sendSystemMessage(players, trial.BATTLEFIELD_WIN_MESSAGE);
         instance.playMusicInInstance(self, trial.MUS_MUST_QUEST_WIN);
         badge.grantBadge(players, "bdg_must_victory_army");
         for (obj_id player : players) {
             buff.applyBuff(player, "high_morale", 3600);
         }
-        return SCRIPT_CONTINUE;
-    }
+		dictionary dict = new dictionary();
+        dict.put("tokenIndex", 7);
+        dict.put("tokenCount", 3);
+        utils.messageTo(players, "handleAwardtoken", dict, 0, false);
+        obj_id group = getGroupObject(players[0]);
+        int calendarTime = getCalendarTime();
+        String realTime = getCalendarTimeStringLocal(calendarTime);
+        CustomerServiceLog("instance-mustafar_trials_droid_army", "Forward Commander Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
+        CustomerServiceLog("instance-mustafar_trials_droid_army", "Group (" + group + ") consists of: ");
+        for (int i = 0; i < players.length; ++i) {
+            /*String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));*/
+        }
+		return SCRIPT_CONTINUE;
+	}
     public int loseTrial(obj_id self, dictionary params) throws InterruptedException
     {
         instance.closeInstance(self);

@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class player_building extends script.base_script
 {
-    public player_building()
-    {
-    }
     public static final String LOGGING_CATEGORY = "vendor";
     public static final boolean LOGGING_ON = true;
     public static final String DATATABLE_HEIGHT = "datatables/structure/cell_height.iff";
@@ -102,7 +99,7 @@ public class player_building extends script.base_script
     public static final string_id SID_ROTATE_CONFIRM_SAVE = new string_id(STF, "rotate_confirm_save");
     public static final string_id SID_ROTATE_RESTORE_EMPTY_SLOT = new string_id(STF, "rotate_restore_empty_slot");
     public static final string_id SID_DESTRUCTION_LOCKED = new string_id("city/city", "destruction_locked");
-    public static final int VAR_TRUE = 1;
+    public static final int MAX_DEPOSIT = 1000000;
     public int OnPlaceStructure(obj_id self, obj_id player, obj_id deed, location position, int rotation) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::OnPlaceStructure");
@@ -1365,7 +1362,7 @@ public class player_building extends script.base_script
             sendSystemMessage(self, new string_id(STF, "no_building"));
             return SCRIPT_CONTINUE;
         }
-        if (!player_structure.isAdmin(structure, self) && !charactersAreSamePlayer(self, getOwner(structure))) 
+        if (!player_structure.isAdmin(structure, self))
         {
             LOG("LOG_CHANNEL", "You must be a building admin to do that.");
             sendSystemMessage(self, new string_id(STF, "must_be_admin"));
@@ -1410,7 +1407,7 @@ public class player_building extends script.base_script
         int inInv = 0;
         dictionary d = new dictionary();
         obj_id[] contents = utils.getFilteredPlayerContents(self);
-        if ((contents == null) || (contents.length == 0))
+        if (contents == null || contents.length == 0)
         {
             return SCRIPT_CONTINUE;
         }
@@ -1757,7 +1754,7 @@ public class player_building extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        if (!player_structure.isAdmin(structure, self) && !charactersAreSamePlayer(self, getOwner(structure)))
+        if (!player_structure.isAdmin(structure, self))
         {
             LOG("LOG_CHANNEL", "You must be a building admin to do that.");
             string_id strSpam = new string_id("player_structure", "not_admin");
@@ -2404,11 +2401,10 @@ public class player_building extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        String amt_str = st.nextToken();
-        int amt = utils.stringToInt(amt_str);
-        if (amt < 1 || amt > 100000)
+        int amt = utils.stringToInt(st.nextToken());
+		if (amt < 1 || amt > MAX_DEPOSIT)
         {
-            LOG("LOG_CHANNEL", "The amount must be between 1 and 100000");
+            LOG("LOG_CHANNEL", "The amount must be between 1 and 1000000");
             sendSystemMessage(self, new string_id(STF, "amount_params"));
             return SCRIPT_CONTINUE;
         }
