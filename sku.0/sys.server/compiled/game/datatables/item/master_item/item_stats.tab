@@ -4818,3 +4818,4 @@ item_target_dummy_rebel_trooper			string:targetDummyCreatureName=target_dummy_re
 item_target_dummy_stormtrooper			string:targetDummyCreatureName=target_dummy_stormtrooper								
 item_tauntaun_dna string:beast.dna.creature_template=object/mobile/beast_master/bm_tauntaun.iff,float:beast.dna.quality=90.000000,int:beast.dna.cs_item=1
 item_level90_boost			int:autoLevelTo=90								
+item_schematic_vehicle_lava_res_kit			string:loot_schematic.schematic=object/draft_schematic/item/item_lava_res_kit_schem.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_engineering_phase4_novice								
