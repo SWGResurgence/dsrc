@@ -20,8 +20,10 @@ public class event_perk extends script.base_script
     public static final String COUNTER_TIMESTAMP = new String("galacticCoinCounter.timeStamp");
     public static final String COUNTER_RESTARTTIME = new String("galacticCoinCounter.startTime");
     public static final int COIN_LIMIT = Integer.parseInt(getConfigSetting("GameServer", "halloweenCoinLimit"));
-	public static final int COIN_AMOUNT_LOW = Integer.parseInt(getConfigSetting("GameServer", "halloweenCoinLow"));
-	public static final int COIN_AMOUNT_HIGH = Integer.parseInt(getConfigSetting("GameServer", "halloweenCoinHigh"));
+    public static final int COIN_AMOUNT_LOW = Integer.parseInt(getConfigSetting("GameServer", "halloweenCoinLow"));
+    public static final int COIN_AMOUNT_HIGH = Integer.parseInt(getConfigSetting("GameServer", "halloweenCoinHigh"));
+    public static final int COIN_BONUS_LOW = Integer.parseInt(getConfigSetting("GameServer", "halloweenCoinBonusLow"));
+    public static final int COIN_BONUS_HIGH = Integer.parseInt(getConfigSetting("GameServer", "halloweenCoinBonusHigh"));
     public static final int LOCKOUT_LENGTH = 240;
     public static final String LIST_VAR = new String("galacticMoonNpcList");
     public static final string_id TOO_SOON = new string_id(HALLOWEEN, "too_soon");
