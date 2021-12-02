@@ -148,7 +148,7 @@ public class lava_resistance_kit extends script.base_script {
 				pp.stringId = STF_SUCCESS;
 				pp.actor.set(getNameStringId(vcd));
 				sendSystemMessageProse(player, pp);
-				nLOG(LogChannel.item, player, self, "Player %s (%s) consumed %s (%s) on vehicle control device "+vcd);
+				nLOG(logChannel.item, player, self, "Player %s (%s) consumed %s (%s) on vehicle control device "+vcd);
 				destroyObject(self);
 			}
 		}
