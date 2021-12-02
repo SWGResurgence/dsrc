@@ -3179,13 +3179,13 @@ public class cmd extends script.base_script
             }
             else
             {
-                int days = months * veteran_deprecated.DAYS_PER_MONTH;
+                /*int days = months * veteran_deprecated.DAYS_PER_MONTH;
                 setObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN_TOTAL_TIME, days);
                 setObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN_ENTITLED_TIME, days);
                 setObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN_LOGIN_TIME, 0);
                 setObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN_ENTITLED_LOGIN_TIME, 0);
                 setObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE, days);
-                sendSystemMessage(self, veteran_deprecated.SID_OK);
+                sendSystemMessage(self, veteran_deprecated.SID_OK);*/
             }
         return SCRIPT_CONTINUE;
     }
