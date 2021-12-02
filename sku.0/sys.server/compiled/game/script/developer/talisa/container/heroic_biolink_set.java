@@ -9,6 +9,7 @@ import static script.library.holiday.closeOldWindow;
 
 public class heroic_biolink_set extends base_script {
 {
+    public heroic_biolink_set(){}
     public static final String HANDLER_SET_TOOL_CLASS = "handleSetToolClass";
     public static final string_id REDEEM= new string_id("sui", "redeem_set_token");
     public static final String[] SETS = {
@@ -194,4 +195,5 @@ public class heroic_biolink_set extends base_script {
         static_item.destroyObject(destroy_me);
         return items;
     }
+  }
 }
