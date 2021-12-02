@@ -10,7 +10,7 @@ import java.util.Vector;
 
 public class resource_supply_generator extends script.base_script
 {
-    public static final int RESOURCE_AMOUNT = 75000;
+    public static final int RESOURCE_AMOUNT = 100000;
     public static final String ROOT_RESOURCE_CLASS = "resource";
     public static final String ROOT_ORGANIC_CLASS = "organic";
     public static final String ROOT_INORGANIC_CLASS = "inorganic";
