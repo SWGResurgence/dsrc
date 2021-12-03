@@ -23,19 +23,15 @@ public class expansion_rewards extends script.base_script {
 		obj_id pInv = utils.getInventoryContainer(player);
 		HashSet theSet = new HashSet();
 		
-		theSet.add(static_item.createNewItemFunction("item_vehicle_atrt_deed_01_01", pInv));
-    theSet.add(static_item.createNewItemFunction("item_barc_speeder_deed_01_01", pInv));
-    theSet.add(static_item.createNewItemFunction("item_vet_itv_deed_factional", pInv));
-		theSet.add(static_item.createNewItemFunction("item_vet_itv_deed_royal", pInv));
-    theSet.add(static_item.createNewItemFunction("item_tow_retail_reward_mustafar_bunker", pInv));
+		theSet.add(static_item.createNewItemFunction("walker_at_rt", pInv));
+    theSet.add(static_item.createNewItemFunction("barc_speeder", pInv));
+    theSet.add(static_item.createNewItemFunction("instant_travel", pInv));
+		theSet.add(static_item.createNewItemFunction("instant_travel_royal_ship", pInv));
+    theSet.add(static_item.createNewItemFunction("tow_retail_reward", pInv));
     theSet.add(static_item.createNewItemFunction("sorosuub", pInv));
-    theSet.add(static_item.createNewItemFunction("item_vehicle_transport_skiff_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_tow_schematic_vehicle_02_02", pInv));
     theSet.add(static_item.createNewItemFunction("item_deed_grievous_wheel_bike", pInv));
-    theSet.add(static_item.createNewItemFunction("item_varactyl_deed_01_01", pInv));
-    theSet.add(static_item.createNewItemFunction("item_vet_cybernetic_xp_buff_01_01", pInv));
-    theSet.add(static_item.createNewItemFunction("item_vet_anniversary_goggles_01_01", pInv));
-    theSet.add(static_item.createNewItemFunction("item_vet_painting_alliance_01_01", pInv));
-		theSet.add(static_item.createNewItemFunction("item_vet_painting_emperor_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("varactyl", pInv));));
     theSet.add(static_item.createNewItemFunction("item_pet_mount_lava_flea_01_01", pInv));
 		
 		obj_id[] items = new obj_id[theSet.size()];
