@@ -1401,7 +1401,7 @@ public class base_class
      * @defgroup housingConstants Housing constants.  This should correspond to CreatureObject.cpp
      * @{
      */
-    public static final int HOUSING_MAX_LOTS       = 10;
+    public static final int HOUSING_MAX_LOTS       = 20;
     /* @}*/
 
 /**
