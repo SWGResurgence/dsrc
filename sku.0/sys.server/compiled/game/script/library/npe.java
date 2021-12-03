@@ -580,15 +580,29 @@ public class npe extends script.base_script
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
-            theSet.add(static_item.createNewItemFunction("profession_jedi", pInv));
+            theSet.add(static_item.createNewItemFunction("item_npe_fs_robe_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_jedi_robe_light_04_01", pInv)); //Light Jedi Knight Robe
+            theSet.add(static_item.createNewItemFunction("item_jedi_robe_dark_04_01", pInv)); //Dark Jedi Knight Robe
+            theSet.add(static_item.createNewItemFunction("item_color_crystal_02_00", pInv));
+            theSet.add(static_item.createNewItemFunction("item_color_crystal_02_02", pInv));
+            theSet.add(static_item.createNewItemFunction("item_color_crystal_02_04", pInv));
+            theSet.add(static_item.createNewItemFunction("item_color_crystal_02_06", pInv));
+            theSet.add(static_item.createNewItemFunction("item_color_crystal_02_08", pInv));
+            theSet.add(static_item.createNewItemFunction("item_power_crystal_04_14", pInv));
         }
         else if (pSpecies == SPECIES_WOOKIEE)
         {
-            theSet.add(static_item.createNewItemFunction("species_wookie", pInv));
+            theSet.add(static_item.createNewItemFunction("item_wookiee_shirt_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_wookiee_pants_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_wookiee_hat_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_wookiee_gloves_02_01", pInv));
         }
         else if (pSpecies == SPECIES_ITHORIAN)
         {
-            theSet.add(static_item.createNewItemFunction("species_ithorian", pInv));
+            theSet.add(static_item.createNewItemFunction("item_ithorian_shirt_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_ithorian_pants_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_ithorian_vest_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_ithorian_gloves_02_01", pInv));
         }
         else if (utils.isProfession(player, utils.SMUGGLER))
         {
@@ -596,10 +610,16 @@ public class npe extends script.base_script
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
-            theSet.add(static_item.createNewItemFunction("profession_smuggler", pInv));
+            theSet.add(static_item.createNewItemFunction("item_smuggler_shirt_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_smuggler_pants_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_smuggler_vest_02_01", pInv));
             if (pSpecies == SPECIES_TRANDOSHAN)
             {
-                theSet.add(static_item.createNewItemFunction("species_trandoshan", pInv));
+                theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
+            }
+            else
+            {
+                theSet.add(static_item.createNewItemFunction("item_smuggler_boots_02_01", pInv));
             }
         }
         else if (utils.isProfession(player, utils.BOUNTY_HUNTER))
@@ -608,10 +628,16 @@ public class npe extends script.base_script
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
-            theSet.add(static_item.createNewItemFunction("profession_bounty_hunter", pInv));
+            theSet.add(static_item.createNewItemFunction("item_bounty_hunter_shirt_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_bounty_hunter_pants_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_bounty_hunter_vest_02_01", pInv));
             if (pSpecies == SPECIES_TRANDOSHAN)
             {
-                theSet.add(static_item.createNewItemFunction("species_trandoshan", pInv));
+                theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
+            }
+            else
+            {
+                theSet.add(static_item.createNewItemFunction("item_bounty_hunter_boots_02_01", pInv));
             }
         }
         else if (utils.isProfession(player, utils.OFFICER))
@@ -620,10 +646,16 @@ public class npe extends script.base_script
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
-            theSet.add(static_item.createNewItemFunction("profession_officer", pInv));
+            theSet.add(static_item.createNewItemFunction("item_officer_shirt_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_officer_pants_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_officer_belt_02_01", pInv));
             if (pSpecies == SPECIES_TRANDOSHAN)
             {
-                theSet.add(static_item.createNewItemFunction("species_trandoshan", pInv));
+                theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
+            }
+            else
+            {
+                theSet.add(static_item.createNewItemFunction("item_officer_boots_02_01", pInv));
             }
         }
         else if (utils.isProfession(player, utils.COMMANDO))
@@ -632,10 +664,16 @@ public class npe extends script.base_script
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
-            theSet.add(static_item.createNewItemFunction("profession_commando", pInv));
+            theSet.add(static_item.createNewItemFunction("item_commando_shirt_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_commando_pants_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_commando_vest_02_01", pInv));
             if (pSpecies == SPECIES_TRANDOSHAN)
             {
-                theSet.add(static_item.createNewItemFunction("species_trandoshan", pInv));
+                theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
+            }
+            else
+            {
+                theSet.add(static_item.createNewItemFunction("item_commando_boots_02_01", pInv));
             }
         }
         else if (utils.isProfession(player, utils.MEDIC))
@@ -644,10 +682,16 @@ public class npe extends script.base_script
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
-            theSet.add(static_item.createNewItemFunction("profession_medic", pInv));
+            theSet.add(static_item.createNewItemFunction("item_medic_shirt_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_medic_pants_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_medic_vest_02_01", pInv));
             if (pSpecies == SPECIES_TRANDOSHAN)
             {
-                theSet.add(static_item.createNewItemFunction("species_trandoshan", pInv));
+                theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
+            }
+            else
+            {
+                theSet.add(static_item.createNewItemFunction("item_medic_shoes_02_01", pInv));
             }
         }
         else if (utils.isProfession(player, utils.SPY))
@@ -656,10 +700,19 @@ public class npe extends script.base_script
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
-            theSet.add(static_item.createNewItemFunction("profession_spy", pInv));
+            theSet.add(static_item.createNewItemFunction("item_spy_shirt_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_spy_pants_02_01", pInv));
+            if (pSpecies != SPECIES_MON_CALAMARI && pSpecies !=SPECIES_TRANDOSHAN)
+            {
+                theSet.add(static_item.createNewItemFunction("item_spy_gloves_02_01", pInv));
+            }
             if (pSpecies == SPECIES_TRANDOSHAN)
             {
-                theSet.add(static_item.createNewItemFunction("species_trandoshan", pInv));
+                theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
+            }
+            else
+            {
+                theSet.add(static_item.createNewItemFunction("item_spy_boots_02_01", pInv));
             }
         }
         else if (utils.isProfession(player, utils.ENTERTAINER))
@@ -670,18 +723,23 @@ public class npe extends script.base_script
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
             if (pGender == GENDER_MALE)
             {
-                theSet.add(static_item.createNewItemFunction("profession_entertainer_male", pInv));
+                theSet.add(static_item.createNewItemFunction("item_entertainer_shirt_02_01", pInv));
+                theSet.add(static_item.createNewItemFunction("item_entertainer_pants_02_01", pInv));
+                theSet.add(static_item.createNewItemFunction("item_entertainer_hat_02_01", pInv));
+                theSet.add(static_item.createNewItemFunction("item_entertainer_boots_02_01", pInv));
                 if (pSpecies == SPECIES_TRANDOSHAN)
                 {
-                    theSet.add(static_item.createNewItemFunction("species_trandoshan", pInv));
+                    theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
                 }
             }
             else 
             {
-                theSet.add(static_item.createNewItemFunction("profession_entertainer_female", pInv));
+                theSet.add(static_item.createNewItemFunction("item_entertainer_shirt_02_02", pInv));
+                theSet.add(static_item.createNewItemFunction("item_entertainer_skirt_02_01", pInv));
+                theSet.add(static_item.createNewItemFunction("item_entertainer_boots_02_01", pInv));
                 if (pSpecies == SPECIES_TRANDOSHAN)
                 {
-                    theSet.add(static_item.createNewItemFunction("species_trandoshan", pInv));
+                    theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
                 }
             }
         }
@@ -691,10 +749,12 @@ public class npe extends script.base_script
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
-            theSet.add(static_item.createNewItemFunction("profession_trader", pInv));
+            theSet.add(static_item.createNewItemFunction("item_trader_shirt_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_trader_pants_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_trader_vest_02_01", pInv));
             if (pSpecies == SPECIES_TRANDOSHAN)
             {
-                theSet.add(static_item.createNewItemFunction("species_trandoshan", pInv));
+                theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
             }
         }
         obj_id[] items = new obj_id[theSet.size()];
