@@ -31,7 +31,7 @@ public class expansion_rewards extends script.base_script {
     theSet.add(static_item.createNewItemFunction("sorosuub", pInv));
     theSet.add(static_item.createNewItemFunction("item_tow_schematic_vehicle_02_02", pInv));
     theSet.add(static_item.createNewItemFunction("item_deed_grievous_wheel_bike", pInv));
-    theSet.add(static_item.createNewItemFunction("varactyl", pInv));));
+    theSet.add(static_item.createNewItemFunction("varactyl", pInv));
     theSet.add(static_item.createNewItemFunction("item_pet_mount_lava_flea_01_01", pInv));
 		
 		obj_id[] items = new obj_id[theSet.size()];
