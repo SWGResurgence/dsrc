@@ -68,8 +68,8 @@ public class base_player extends script.base_script
     public static final string_id PROSE_COIN_LOOT = new string_id("base_player", "prose_coin_loot");
     public static final string_id PROSE_COIN_LOOT_NO_TARGET = new string_id("base_player", "prose_coin_loot_no_target");
     public static final string_id PROSE_COIN_LOOT_FAILED = new string_id("error_message", "prose_coin_loot_fail");
-    public static final int LOGOUT_TIME = 30;
-    public static final int LOGOUT_COUNT_INTERVAL = 5;
+    public static final int LOGOUT_TIME = 10;
+    public static final int LOGOUT_COUNT_INTERVAL = 2;
     public static final string_id SID_SYS_SCENTMASK_NOSKILL = new string_id("skl_use", "sys_scentmask_noskill");
     public static final string_id SID_SYS_SCENTMASK_START = new string_id("skl_use", "sys_scentmask_start");
     public static final string_id SID_SYS_SCENTMASK_STOP = new string_id("skl_use", "sys_scentmask_stop");
@@ -1628,10 +1628,7 @@ public class base_player extends script.base_script
         {
             badge.grantBadge(self, "bdg_kash_avatar_zssik");
         }
-		if (!utils.hasScriptVar(self, "performance.buildabuff.buffComponentKeys") && buff.hasBuff(self, "buildabuff_inspiration")) {
-			buff.removeBuff(self, "buildabuff_inspiration");
-		}
-        if (getLocation(self).area.equals("dungeon1")) {
+		if (getLocation(self).area.equals("dungeon1")) {
             if (trial.getTop(self) == self)
             {
                 warpPlayer(self, "tatooine", 0, 0, 0, null, 0, 0, 0, null, false);

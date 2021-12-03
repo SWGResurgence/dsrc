@@ -255,37 +255,37 @@ public class trial extends script.base_script
     public static final int TIME_MONSTER_WIN = 60 * 60 * 20;
     public static final String[] HEROIC_TOKENS = 
     {
-		"item_heroic_token_axkva_01_01", 					//#0
-        "item_heroic_token_tusken_01_01",					//#1
-		"item_heroic_token_ig88_01_01",						//#2
-        "item_heroic_token_black_sun_01_01",				//#3
-        "item_heroic_token_exar_01_01",						//#4
-        "item_heroic_token_echo_base_01_01",				//#5
+		"item_heroic_token_axkva_01_01", 					  //#0
+    "item_heroic_token_tusken_01_01",					  //#1
+		"item_heroic_token_ig88_01_01",						  //#2
+    "item_heroic_token_black_sun_01_01",				//#3
+    "item_heroic_token_exar_01_01",						  //#4
+    "item_heroic_token_echo_base_01_01",				//#5
 		"item_heroic_token_marauder_01_01",					//#6
 		"item_mustafar_reward_token_01_01",					//#7
-		"item_vet_reward_token_01_01",						//#8
-		"item_token_duty_space_01_01",						//#9
-		"item_battlefield_rebel_token",						//#10
-        "item_battlefield_imperial_token",					//#11
+		"item_vet_reward_token_01_01",						  //#8
+		"item_token_duty_space_01_01",						  //#9
+		"item_battlefield_rebel_token",						  //#10
+    "item_battlefield_imperial_token",					//#11
 		"item_imperial_station_token_01_01",				//#12
-        "item_rebel_station_token_01_01",					//#13
-		"item_gcw_rebel_token",								//#14
-        "item_gcw_imperial_token",							//#15
-		"item_restuss_imperial_commendation_02_01",   		//#16
-		"item_restuss_rebel_commendation_02_01",			//#17
-		"item_empire_day_imperial_token",					//#18
-        "item_empire_day_rebel_token",						//#19
-        "item_event_lifeday_rebel_token",					//#20
-        "item_event_lifeday_imperial_token",				//#21
-		"item_event_halloween_coin",						//#22
-		"item_event_loveday_chak_heart",					//#23
-		"item_pgc_token_01",								//#24
-        "item_pgc_token_02",								//#25
-        "item_pgc_token_03",								//#26
-		"item_meatlump_lump_01_01",							//#27
-		"item_nova_orion_space_resource_01_01"				//#28
+    "item_rebel_station_token_01_01",					  //#13
+		"item_gcw_rebel_token",								      //#14
+    "item_gcw_imperial_token",							    //#15
+		"item_restuss_imperial_commendation_02_01", //#16
+		"item_restuss_rebel_commendation_02_01",		//#17
+		"item_empire_day_imperial_token",					  //#18
+    "item_empire_day_rebel_token",						  //#19
+    "item_event_lifeday_rebel_token",					  //#20
+    "item_event_lifeday_imperial_token",				//#21
+		"item_event_halloween_coin",						    //#22
+		"item_event_loveday_chak_heart",					  //#23
+		"item_pgc_token_01",								        //#24
+    "item_pgc_token_02",								        //#25
+    "item_pgc_token_03",								        //#26
+		"item_meatlump_lump_01_01",							    //#27
+		"item_nova_orion_space_resource_01_01"			//#28
     };
-    public static final int NUM_HEROIC_TOKEN_TYPES = 29;
+    public static final int NUM_HEROIC_TOKEN_TYPES = HEROIC_TOKENS.length;
     public static final String KIMARU_HATE_LIST = "kimaru_hate_list";
     public static final String WP_DATA = "nearPoint";
     public static final String PROT_CHILD = "protected_data";

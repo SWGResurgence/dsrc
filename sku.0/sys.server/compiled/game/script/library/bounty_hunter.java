@@ -314,11 +314,11 @@ public class bounty_hunter extends script.base_script
         }
         if (payBracket == 1)
         {
-            money.bankTo(money.ACCT_BOUNTY, killer, 250000);
+            money.bankTo(money.ACCT_BOUNTY, killer, 1000000);
         }
         if (payBracket == 2)
         {
-            money.bankTo(money.ACCT_BOUNTY, killer, 500000);
+            money.bankTo(money.ACCT_BOUNTY, killer, 2000000);
         }
         return;
     }
