@@ -1005,84 +1005,76 @@ public class gcw extends script.base_script
     {
         return ("" + attacker + "-" + damage);
     }
-    public static boolean releaseGcwPointCredit(obj_id player) throws InterruptedException
-    {
+    public static boolean releaseGcwPointCredit(obj_id player) {
         obj_id[] gcwEnemiesList = new obj_id[0];
-        if (verifyPvpRegionStatus(player))
-        {
+        if (verifyPvpRegionStatus(player)) {
             gcwEnemiesList = getPlayerCreaturesInRange(getLocation(player), 80.0f);
         }
         boolean isImperialPlayer = factions.isImperial(player);
         boolean isRebelPlayer = factions.isRebel(player);
         obj_id landedDeathBlow = getObjIdObjVar(player, pclib.VAR_DEATHBLOW_KILLER);
-        if (beast_lib.isBeast(landedDeathBlow) || pet_lib.isPet(landedDeathBlow))
-        {
+        if (beast_lib.isBeast(landedDeathBlow) || pet_lib.isPet(landedDeathBlow)) {
             landedDeathBlow = getMaster(landedDeathBlow);
-
         }
-        if (gcwEnemiesList != null && gcwEnemiesList.length > 0)
-        {
+        if (gcwEnemiesList != null && gcwEnemiesList.length > 0) {
             removeDayOldEntries(player);
-            for (obj_id obj_id : gcwEnemiesList) {
-                if (!isIdValid(obj_id) || !exists(obj_id) || !verifyPvpRegionStatus(obj_id)) {
+            for (obj_id gcwEnemy : gcwEnemiesList) {
+                if (!isIdValid(gcwEnemy) || !exists(gcwEnemy) || !verifyPvpRegionStatus(gcwEnemy)) {
                     continue;
                 }
-                if ((float) getLevel(player) / getLevel(obj_id) >= MIN_PVP_LEVEL_RATIO_LIMIT && ((isImperialPlayer && factions.isRebel(obj_id)) || (factions.isImperial(obj_id) && isRebelPlayer))) {
-                    int points = distributeIndividualContribution(player, obj_id, 0, GCW_POINT_TYPE_GROUND_PVP);
-                    pvpModifyCurrentPvpKills(obj_id, 1);
-                    incrementKillMeter(obj_id, 1);
+                if (getLevel(player) / (float) getLevel(gcwEnemy) >= MIN_PVP_LEVEL_RATIO_LIMIT && ((isImperialPlayer && factions.isRebel(gcwEnemy)) || (factions.isImperial(gcwEnemy) && isRebelPlayer)) && !charactersAreSamePlayer(gcwEnemy, player)) {
+                    giveRestussCommendations(gcwEnemy, player, gcwEnemiesList.length);
+                    distributeIndividualContribution(player, gcwEnemy, 0, GCW_POINT_TYPE_GROUND_PVP);
+                    pvpModifyCurrentPvpKills(gcwEnemy, 1);
+                    incrementKillMeter(gcwEnemy, 1);
                 }
             }
-            Vector attackerList = utils.getResizeableStringBatchScriptVar(player, gcw.LIST_CREDIT_FOR_KILLS);
-            if (attackerList == null || attackerList.size() == 0)
-            {
+            List<String> attackerList = utils.getResizeableStringBatchScriptVar(player, LIST_CREDIT_FOR_KILLS);
+            if (attackerList == null || attackerList.isEmpty()) {
                 return false;
             }
-            for (Object o : attackerList) {
-                String[] parseKiller = split(((String) o), '-');
+            for (int j = 0; j < attackerList.size(); j++) {
+                String[] parseKiller = attackerList.get(j).split("-");
                 obj_id killer = utils.stringToObjId(parseKiller[0]);
                 if (beast_lib.isBeast(killer) || pet_lib.isPet(killer)) {
                     killer = getMaster(killer);
                 }
-                double vLev = getLevel(player);
-                double kLev = getLevel(killer);
+                float vLev = getLevel(player);
+                float kLev = getLevel(killer);
                 boolean isOfLevel = (vLev / kLev) >= MIN_PVP_LEVEL_RATIO_LIMIT;
-                if (isOfLevel && killer != landedDeathBlow) {
+                if (isOfLevel && killer != landedDeathBlow && !charactersAreSamePlayer(player, killer)) {
                     pvp.bfCreditForAssist(killer);
                     gcwInvasionCreditForAssist(killer);
                 }
             }
-            utils.removeBatchScriptVar(player, gcw.LIST_CREDIT_FOR_KILLS);
+            utils.removeBatchScriptVar(player, LIST_CREDIT_FOR_KILLS);
             return true;
         }
-        Vector attackerList = utils.getResizeableStringBatchScriptVar(player, gcw.LIST_CREDIT_FOR_KILLS);
-        if (attackerList == null || attackerList.size() == 0)
-        {
+        List<String> attackerList = utils.getResizeableStringBatchScriptVar(player, LIST_CREDIT_FOR_KILLS);
+        if (attackerList == null || attackerList.isEmpty()) {
             return false;
         }
         int totalDamage = 0;
-                for (String attacker : attackerList)
-        for (Object o1 : attackerList) {
-            String[] damageSplit = split(attacker, '-');
+        for (String attacker : attackerList) {
+            String[] damageSplit = attacker.split("-");
             totalDamage += utils.stringToInt(damageSplit[1]);
         }
         removeDayOldEntries(player);
         for (String attacker : attackerList) {
-            String[] parseKiller = split(attacker, '-');
+            String[] parseKiller = attacker.split("-");
             obj_id killer = utils.stringToObjId(parseKiller[0]);
-            float vLev = (float)getLevel(player);
-             float kLev = (float)getLevel(killer);
-             boolean isOfLevel = (vLev / kLev) >= MIN_PVP_LEVEL_RATIO_LIMIT;
-             if (isOfLevel) {
-                int points = distributeIndividualContribution(player, attacker, totalDamage, GCW_POINT_TYPE_GROUND_PVP);
-                if (isIdValid(killer) && exists(killer)) {
+            float vLev = getLevel(player);
+            float kLev = getLevel(killer);
+            boolean isOfLevel = (vLev / kLev) >= MIN_PVP_LEVEL_RATIO_LIMIT;
+            if (isOfLevel) {
+                distributeIndividualContribution(player, attacker, totalDamage, GCW_POINT_TYPE_GROUND_PVP);
+                if (isIdValid(killer) && exists(killer) && !charactersAreSamePlayer(player, killer)) {
                     pvpModifyCurrentPvpKills(killer, 1);
                     incrementKillMeter(killer, 1);
-                                        giveRestussCommendations(killer, player, attackerList.size());
                 }
             }
         }
-        utils.removeBatchScriptVar(player, gcw.LIST_CREDIT_FOR_KILLS);
+        utils.removeBatchScriptVar(player, LIST_CREDIT_FOR_KILLS);
         return true;
     }
     
@@ -1114,7 +1106,7 @@ public class gcw extends script.base_script
         }
     }
 	
-	//RESTUSS PVP COMMENDATION SYSTEM END
+    //RESTUSS PVP COMMENDATION SYSTEM END
     
     public static void notifyPvpRegionWatcherOfDeath(obj_id player) throws InterruptedException
     {
