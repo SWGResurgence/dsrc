@@ -1,10 +1,7 @@
 package script.item;
 
 import script.*;
-import script.library.colors;
-import script.library.healing;
-import script.library.static_item;
-import script.library.utils;
+import script.library.*;
 
 public class full_heal_item extends script.base_script
 {
@@ -23,14 +20,10 @@ public class full_heal_item extends script.base_script
         "CONSTITUTION",
         "ACTION",
         "STAMINA",
+        "MIND",
+        "WILLPOWER"
     };
-    public int OnInitialize(obj_id self) {
-        if (getStaticItemName(self).equals("item_publish_gift_27_24_01") && !hasScript(self, "item.armor.biolink_item_non_faction")) {
-            attachScript(self, "item.armor.biolink_item_non_faction");
-        }
-        return SCRIPT_CONTINUE;
-    }
-    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi)
+    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))
         {
@@ -49,7 +42,7 @@ public class full_heal_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public int OnObjectMenuSelect(obj_id self, obj_id player, int item)
+    public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) != player)
         {
@@ -85,12 +78,13 @@ public class full_heal_item extends script.base_script
                 }
             } */
             String itemName = getStaticItemName(self);
-            if (itemName == null || itemName.isEmpty())
+            if (itemName == null || itemName.equals(""))
             {
                 LOG("create", "Itemname bad, name is " + itemName);
                 return SCRIPT_CONTINUE;
             }
-            dictionary itemData = dataTableGetRow(static_item.ITEM_STAT_BALANCE_TABLE, itemName);
+            dictionary itemData = new dictionary();
+            itemData = dataTableGetRow(static_item.ITEM_STAT_BALANCE_TABLE, itemName);
             if (itemData == null)
             {
                 LOG("create", itemName + "Buff Initalize could not happen because row in datatable is bad");
@@ -103,6 +97,7 @@ public class full_heal_item extends script.base_script
             int requiredLevel = itemData.getInt("required_level_for_effect");
             String varName = "clickItem." + coolDownGroup;
             int healTime = getIntObjVar(player, varName);
+            int playerLevel = getLevel(player);
             if (static_item.validateLevelRequired(player, requiredLevel))
             {
                 if (getGameTime() > healTime)
@@ -115,22 +110,13 @@ public class full_heal_item extends script.base_script
                         sendSystemMessage(player, SID_NO_NEED_TO_HEAL);
                         return SCRIPT_CONTINUE;
                     }
-                    if (getState(player, STATE_COMBAT) > 0)
-                    {
-                        if (!hasObjVar(self, "allowInCombat"))
-                        {
-                            if (to_heal > max_hp / 2)
-                            {
-                                to_heal = max_hp / 2;
-                            }
-                        }
-                    }
-                    healing.healDamage(self, player, HEALTH, to_heal);
+                    int delta = healing.healDamage(self, player, HEALTH, to_heal);
                     setObjVar(player, varName, (getGameTime() + (reuseTime)));
                     sendCooldownGroupTimingOnly(player, getStringCrc(coolDownGroup.toLowerCase()), reuseTime);
-                    prose_package pp = new prose_package("healing", "heal_fly");
-                    pp.setDI(to_heal);
-                    pp.setTO(ATTRIBUTES[HEALTH]);
+                    prose_package pp = new prose_package();
+                    pp = prose.setStringId(pp, new string_id("healing", "heal_fly"));
+                    pp = prose.setDI(pp, to_heal);
+                    pp = prose.setTO(pp, ATTRIBUTES[HEALTH]);
                     showFlyTextPrivateProseWithFlags(player, player, pp, 2.0f, colors.SEAGREEN, FLY_TEXT_FLAG_IS_HEAL);
                     doAnimationAction(player, clientAnimation);
                     playClientEffectObj(player, clientEffect, player, "");
@@ -142,7 +128,7 @@ public class full_heal_item extends script.base_script
                 else 
                 {
                     int timeDiff = healTime - getGameTime();
-                    prose_package pp = new prose_package(SID_NOT_YET, timeDiff);
+                    prose_package pp = prose.getPackage(SID_NOT_YET, timeDiff);
                     sendSystemMessageProse(player, pp);
                     return SCRIPT_CONTINUE;
                 }
