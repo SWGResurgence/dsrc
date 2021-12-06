@@ -6,6 +6,7 @@ import java.util.Vector;
 
 public class gcw extends script.base_script
 {
+    public static final byte RESTUSS_COMM_BONUS = utils.getByteConfigSetting("GameServer", "restussCommBonus");
     public static final int GCW_UPDATE_PULSE = 300;
     public static final float DECAY_PER_UPDATE = 0.02f;
     public static final String SCRIPTVAR_SCAN_INTEREST = "scan.interest";
@@ -1087,22 +1088,25 @@ public class gcw extends script.base_script
     
     //RESTUSS PVP COMMENDATION SYSTEM BEGIN
     
-    private static void giveRestussCommendations(obj_id killer, obj_id victim, int splitSize) throws InterruptedException {
+    private static void giveRestussCommendations(obj_id killer, obj_id victim, int splitSize) {
         region[] regionList = getRegionsAtPoint(getLocation(killer));
-        if (regionList != null && regionList.length > 0)
-        {
-            for (region thisRegion : regionList)
-            {
-                if (thisRegion.getName().equals(restuss_event.PVP_REGION_NAME))
-                {
+        if (regionList != null && regionList.length > 0) {
+            for (region thisRegion : regionList) {
+                if (thisRegion.getName().equals(restuss_event.PVP_REGION_NAME)) {
                     int commCount = pvpGetCurrentGcwRank(victim) - 1;
                     String pFac = factions.getFaction(killer);
                     obj_id inventory = utils.getInventoryContainer(killer);
 
                     if (commCount > 0) {
-                        commCount /= splitSize + 1;
-                        static_item.createNewItemFunction("item_restuss_" + pFac.toLowerCase() + "_commendation_02_01", inventory, commCount);
-                        sendSystemMessageTestingOnly(killer, "You've recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + getPlayerName(victim) + " in combat.");
+                        commCount /= splitSize;
+                        commCount++;
+                        commCount *= RESTUSS_COMM_BONUS;
+                        StringBuilder builder = new StringBuilder();
+                        builder.append("item_restuss_");
+                        builder.append(pFac.toLowerCase());
+                        builder.append("_commendation_02_01");
+                        static_item.createNewItemFunction(builder.toString(), inventory, commCount);
+                        sendSystemMessageTestingOnly(killer, "You have received " + commCount + " " + pFac + " Restuss Commendations for defeating player " + getPlayerName(victim) + " in combat.");
                     }
                     return;
                 }
