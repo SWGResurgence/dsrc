@@ -123,7 +123,8 @@ public class terminal_structure extends script.base_script
                 permissions_root = mi.addRootMenu(menu_info_types.SERVER_TERMINAL_PERMISSIONS, SID_TERMINAL_PERMISSIONS);
                 mi.addSubMenu(permissions_root, menu_info_types.SERVER_TERMINAL_PERMISSIONS_ADMIN, SID_TERMINAL_PERMISSIONS_ADMIN);
             }
-            if ((template.contains("cityhall_")))
+            /*if ((template.contains("cityhall_")))*/
+                      if (template.indexOf("cityhall_") > -1)
             {
                 return SCRIPT_CONTINUE;
             }
@@ -615,7 +616,7 @@ public class terminal_structure extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id structure = player_structure.getStructure(player);
-        if (!player_structure.isOwner(structure, player))
+        if (!player_structure.isOwner(structure, player) && getPlayerStationId(player) != getPlayerStationId(getOwner(structure)))
         {
             return SCRIPT_CONTINUE;
         }
