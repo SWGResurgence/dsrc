@@ -812,13 +812,18 @@ public class pclib extends script.base_script
     //RESTUSS PVP COMMENDATION SYSTEM BEGIN
 
     private static void giveRestussCommendations(obj_id killer, obj_id victim, int splitSize) {
-        region[] regionList = getRegionsAtPoint(getLocation(killer));
-        if (regionList != null && regionList.length > 0) {
-            for (region thisRegion : regionList) {
-                if (thisRegion.getName().equals(restuss_event.PVP_REGION_NAME)) {
-                    int commCount = pvpGetCurrentGcwRank(victim) - 1;
-                    String pFac = factions.getFaction(killer);
-                    obj_id inventory = utils.getInventoryContainer(killer);
+      region[] regionList = getRegionsAtPoint(getLocation(killer));
+      if (regionList != null && regionList.length > 0) {
+        for (int i = 0, j = regionList.length; i < j; i++) {
+          region currentRegion = regionList[i];
+          if (currentRegion == null) {
+              continue;
+          }
+          String currentRegionName = currentRegion.getName();
+          if (currentRegionName.equals(restuss_event.PVP_REGION_NAME)) {
+            String pFac = factions.getFaction(killer);
+            obj_id inventory = utils.getInventoryContainer(killer);
+            int commCount = pvpGetCurrentGcwRank(victim) - 1;
             
             if (commCount > 0) {
                 commCount /= splitSize;
