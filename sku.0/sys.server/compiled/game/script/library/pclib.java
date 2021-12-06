@@ -826,6 +826,7 @@ public class pclib extends script.base_script
                     int commCount = pvpGetCurrentGcwRank(killer) - 1;
 
                     if (commCount > 0) {
+                        commCount *= 2;
                         static_item.createNewItemFunction("item_restuss_" + pFac.toLowerCase() + "_commendation_02_01", inventory, commCount);
                         sendSystemMessageTestingOnly(killer, "You've recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + player + " in combat.");
                     }
