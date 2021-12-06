@@ -628,11 +628,11 @@ public class incubator extends script.base_script
                 modifiedTime -= skillModifier * 60;
             }
             int city_id = city.checkCity(player, false);
-			int cityTime = 0;
+                      int cityTime = 0;
             if (city.cityHasSpec(city_id, city.SF_SPEC_INCUBATOR))
             {
                 modifiedTime -= (5 * 60 * 60);
-				cityTime = 5;
+                                cityTime = 5;
             }
             if (stationFunctionality != 0)
             {
