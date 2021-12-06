@@ -91,50 +91,6 @@ public class emperors_hand extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
-    {
-        Vector attackerList = utils.getResizeableObjIdArrayScriptVar(self, "attackerList");
-        if (isIncapacitated(self))
-        {
-            if (utils.getElementPositionInArray(attackerList, player) > -1)
-            {
-                if (utils.isProfession(player, utils.FORCE_SENSITIVE))
-                {
-                    if (!utils.hasScriptVar(player, "lootedSchematic"))
-                    {
-                        mi.addRootMenu(menu_info_types.ITEM_USE, SID_MNU_LIGHTSABER);
-                        return SCRIPT_CONTINUE;
-                    }
-                }
-            }
-        }
-        return SCRIPT_CONTINUE;
-    }
-    public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
-    {
-        obj_id pInv = utils.getInventoryContainer(player);
-        Vector attackerList = utils.getResizeableObjIdArrayScriptVar(self, "attackerList");
-        if (isIncapacitated(self))
-        {
-            if (item == menu_info_types.ITEM_USE)
-            {
-                if (utils.getElementPositionInArray(attackerList, player) > -1)
-                {
-                    if (utils.isProfession(player, utils.FORCE_SENSITIVE))
-                    {
-                        if (!utils.hasScriptVar(player, "lootedSchematic"))
-                        {
-                            obj_id newItem = static_item.createNewItemFunction("item_restuss_schematic_saber_04_01", pInv);
-                            CustomerServiceLog("jedi_saber", "%TU - Jinsu Razor Schematic Issued: Schematic OID is " + newItem, player);
-                            utils.setScriptVar(player, "lootedSchematic", 1);
-                            return SCRIPT_CONTINUE;
-                        }
-                    }
-                }
-            }
-        }
-        return SCRIPT_CONTINUE;
-    }
     public int setLoiter(obj_id self, dictionary params) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
