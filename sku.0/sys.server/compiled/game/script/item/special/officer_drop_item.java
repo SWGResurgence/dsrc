@@ -3,6 +3,8 @@ package script.item.special;
 import script.dictionary;
 import script.obj_id;
 
+import script.library.utils;
+
 public class officer_drop_item extends script.base_script
 {
     public static final float LIFESPAN = 18000.0f;
@@ -10,7 +12,7 @@ public class officer_drop_item extends script.base_script
     {
         float rightNow = getGameTime();
         setObjVar(self, "item.temporary.time_stamp", rightNow);
-        float dieTime = getDieTime(LIFESPAN, self);
+        float dieTime = getDieTime(self);
         if (dieTime < 1)
         {
             dieTime = 1.0f;
