@@ -1,8 +1,8 @@
 forage_object	percentage
 s	i
-enzyme	25
-component	12
-worm	12
-bait	25
-nothing	25
-treasure	1
+enzyme	50
+component	10
+worm	5
+bait	5
+nothing	1
+treasure	29
