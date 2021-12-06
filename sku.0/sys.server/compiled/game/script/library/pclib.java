@@ -4,9 +4,6 @@ import script.*;
 
 import java.util.Vector;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class pclib extends script.base_script
 {
     public static final int MAX_NEWBIE_DEATHS = 3;
