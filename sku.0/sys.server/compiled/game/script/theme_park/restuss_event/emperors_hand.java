@@ -141,9 +141,9 @@ public class emperors_hand extends script.base_script
         ai_lib.setLoiterRanges(self, 0.0f, 80.0f);
         return SCRIPT_CONTINUE;
     }
-    public int cleanupCorpse(obj_id self, dictionary params) throws InterruptedException
+    /*public int cleanupCorpse(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupNpc(self);
         return SCRIPT_CONTINUE;
-    }
+    }*/
 }
