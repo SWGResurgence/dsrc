@@ -824,11 +824,23 @@ public class pclib extends script.base_script
                     String pFac = factions.getFaction(killer);
                     obj_id inventory = utils.getInventoryContainer(killer);
                     int commCount = pvpGetCurrentGcwRank(killer) - 1;
-
+                    
                     if (commCount > 0) {
+                      commCount /= splitSize;
+                      commCount++;
+                      StringBuilding builder = new StringBuilder();
+                      builder.append("item_restuss_");
+                      builder.append(pFac.toLowerCase());
+                      builder.append("_commendation_02_01");
+                      static_item.createNewItemFunction(builder.toString(), inventory, commCount);
+                      sendSystemMessageTestingOnly(killer, "You have received " +commCount + " " +pFac + " Restuss Commendations for defeating player " + getPlayerName(victim) + " in combat.");
+                    }
+                    return;
+
+                    /*if (commCount > 0) {
                         static_item.createNewItemFunction("item_restuss_" + pFac.toLowerCase() + "_commendation_02_01", inventory, commCount);
                         sendSystemMessageTestingOnly(killer, "You've recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + player + " in combat.");
-                    }
+                    }*/
                 }
             }
         }
