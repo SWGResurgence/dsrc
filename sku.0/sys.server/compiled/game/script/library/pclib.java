@@ -828,7 +828,7 @@ public class pclib extends script.base_script
                     if (commCount > 0) {
                       commCount /= splitSize;
                       commCount++;
-                      StringBuilding builder = new StringBuilder();
+                      StringBuilder builder = new StringBuilder();
                       builder.append("item_restuss_");
                       builder.append(pFac.toLowerCase());
                       builder.append("_commendation_02_01");
