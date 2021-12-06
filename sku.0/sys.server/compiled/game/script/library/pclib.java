@@ -806,42 +806,7 @@ public class pclib extends script.base_script
             group.notifyDeath(gid, player);
         }
 		
-    //RESTUSS PVP COMMENDATION SYSTEM BEGIN
-
-    private static void giveRestussCommendations(obj_id killer, obj_id victim, int splitSize) {
-      region[] regionList = getRegionsAtPoint(getLocation(killer));
-      if (regionList != null && regionList.length > 0) {
-        for (int i = 0, j = regionList.length; i < j; i++) {
-          region currentRegion = regionList[i];
-          if (currentRegion == null) {
-              continue;
-          }
-          String currentRegionName = currentRegion.getName();
-          if (currentRegionName.equals(restuss_event.PVP_REGION_NAME)) {
-            String pFac = factions.getFaction(killer);
-            obj_id inventory = utils.getInventoryContainer(killer);
-            int commCount = pvpGetCurrentGcwRank(victim) - 1;
-            
-            if (commCount > 0) {
-                commCount /= splitSize;
-                commCount++;
-                commCount *= 2;
-                StringBuilder builder = new StringBuilder();
-                builder.append("item_restuss_");
-                builder.append(pFac.toLowerCase());
-                builder.append("_commendation_02_01");
-                static_item.createNewItemFunction(builder.toString(), inventory, commCount);
-                sendSystemMessageTestingOnly(killer, "You have received " + commCount + " " + pFac + " Restuss Commendations for defeating player " + getPlayerName(victim) + " in combat.");
-            }
-            return;
-          }
-        }
-      }
-    }      
-           
-    //RESTUSS PVP COMMENDATION SYSTEM END
-    
-		/*// RESTUSS PVP COMMENDATION SYSTEM BEGIN
+		// RESTUSS PVP COMMENDATION SYSTEM BEGIN
 		
 		region[] regionList = getRegionsAtPoint(getLocation(killer));
         if (regionList != null && regionList.length > 0)
@@ -859,16 +824,28 @@ public class pclib extends script.base_script
                     String pFac = factions.getFaction(killer);
                     obj_id inventory = utils.getInventoryContainer(killer);
                     int commCount = pvpGetCurrentGcwRank(killer) - 1;
-
+                    
                     if (commCount > 0) {
+                      commCount /= splitSize;
+                      commCount++;
+                      StringBuilder builder = new StringBuilder();
+                      builder.append("item_restuss_");
+                      builder.append(pFac.toLowerCase());
+                      builder.append("_commendation_02_01");
+                      static_item.createNewItemFunction(builder.toString(), inventory, commCount);
+                      sendSystemMessageTestingOnly(killer, "You have received " +commCount + " " +pFac + " Restuss Commendations for defeating player " + getPlayerName(victim) + " in combat.");
+                    }
+                    return;
+
+                    /*if (commCount > 0) {
                         static_item.createNewItemFunction("item_restuss_" + pFac.toLowerCase() + "_commendation_02_01", inventory, commCount);
                         sendSystemMessageTestingOnly(killer, "You've recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + player + " in combat.");
-                    }
+                    }*/
                 }
             }
         }
 		
-		// RESTUSS PVP COMMENDATION SYSTEM END*/
+		// RESTUSS PVP COMMENDATION SYSTEM END
 		
         messageTo(player, HANDLER_PLAYER_DEATH, null, TIME_DEATH, true);
         dictionary params = new dictionary();
