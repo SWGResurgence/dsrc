@@ -6,6 +6,9 @@ import java.util.Vector;
 
 public class gcw extends script.base_script
 {
+    public gcw()
+    {
+    }
     public static final int GCW_UPDATE_PULSE = 300;
     public static final float DECAY_PER_UPDATE = 0.02f;
     public static final String SCRIPTVAR_SCAN_INTEREST = "scan.interest";
@@ -1060,58 +1063,28 @@ public class gcw extends script.base_script
             return false;
         }
         int totalDamage = 0;
-                for (String attacker : attackerList)
         for (Object o1 : attackerList) {
-            String[] damageSplit = split(attacker, '-');
+            String[] damageSplit = split(((String) o1), '-');
             totalDamage += utils.stringToInt(damageSplit[1]);
         }
         removeDayOldEntries(player);
-        for (obj_id attacker : attackerList) {
-            String[] parseKiller = split(attacker, '-');
+        for (Object o : attackerList) {
+            String[] parseKiller = split(((String) o), '-');
             obj_id killer = utils.stringToObjId(parseKiller[0]);
-            float vLev = (float)getLevel(player);
-             float kLev = (float)getLevel(killer);
-             boolean isOfLevel = (vLev / kLev) >= MIN_PVP_LEVEL_RATIO_LIMIT;
-             if (isOfLevel) {
-                int points = distributeIndividualContribution(player, attacker, totalDamage, GCW_POINT_TYPE_GROUND_PVP);
+            double vLev = getLevel(player);
+            double kLev = getLevel(killer);
+            boolean isOfLevel = (vLev / kLev) >= MIN_PVP_LEVEL_RATIO_LIMIT;
+            if (isOfLevel) {
+                int points = distributeIndividualContribution(player, ((String) o), totalDamage, GCW_POINT_TYPE_GROUND_PVP);
                 if (isIdValid(killer) && exists(killer)) {
                     pvpModifyCurrentPvpKills(killer, 1);
                     incrementKillMeter(killer, 1);
-                                        giveRestussCommendations(killer, player, attackerList.size());
                 }
             }
         }
         utils.removeBatchScriptVar(player, gcw.LIST_CREDIT_FOR_KILLS);
         return true;
     }
-    
-    //RESTUSS PVP COMMENDATION SYSTEM BEGIN
-    
-    private static void giveRestussCommendations(obj_id killer, obj_id victim, int splitSize) throws InterruptedException {
-        region[] regionList = getRegionsAtPoint(getLocation(killer));
-        if (regionList != null && regionList.length > 0)
-        {
-            for (region thisRegion : regionList)
-            {
-                if (thisRegion.getName().equals(restuss_event.PVP_REGION_NAME))
-                {
-                    int commCount = pvpGetCurrentGcwRank(victim) - 1;
-                    String pFac = factions.getFaction(killer);
-                    obj_id inventory = utils.getInventoryContainer(killer);
-
-                    if (commCount > 0) {
-                        commCount /= splitSize + 1;
-                        static_item.createNewItemFunction("item_restuss_" + pFac.toLowerCase() + "_commendation_02_01", inventory, commCount);
-                        sendSystemMessageTestingOnly(killer, "You've recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + getName(player) + " in combat.");
-                    }
-                    return;
-                }
-            }
-        }
-    }
-	
-	//RESTUSS PVP COMMENDATION SYSTEM END
-    
     public static void notifyPvpRegionWatcherOfDeath(obj_id player) throws InterruptedException
     {
         obj_id pvpRegionController = gcw.getPvpRegionControllerIdByPlayer(player);
