@@ -965,35 +965,31 @@ public class gcw extends script.base_script
             return -1;
         }
     }
-    public static void clearCreditForKills(obj_id player) throws InterruptedException
-    {
+    public static void clearCreditForKills(obj_id player) {
         utils.removeBatchScriptVar(player, LIST_CREDIT_FOR_KILLS);
     }
-    public static int findAttackerInArray(Vector attackList, obj_id attacker) throws InterruptedException
-    {
-        if (attackList == null || attackList.size() == 0)
-        {
+
+    public static int findAttackerInArray(List<String> attackList, obj_id attacker) {
+        if (attackList == null || attackList.isEmpty()) {
             return -1;
         }
-        for (int i = 0; i < attackList.size(); i++)
-        {
-            String[] splitEntry = split(((String)attackList.get(i)), '-');
+        List<String> tempList = new ArrayList<>(attackList);
+        for (int i = 0; i < attackList.size(); i++) {
+            String[] splitEntry = tempList.get(i).split("-");
             obj_id idAtPoint = utils.stringToObjId(splitEntry[0]);
-            if (idAtPoint == attacker)
-            {
+            if (idAtPoint == attacker) {
                 return i;
             }
         }
         return -1;
     }
-    public static int getDamageFromAttacker(Vector attackList, obj_id attacker) throws InterruptedException
-    {
-        if (attackList == null || attackList.size() == 0)
-        {
+
+    public static int getDamageFromAttacker(List<String> attackList, obj_id attacker) {
+        if (attackList == null || attackList.isEmpty()) {
             return 0;
         }
-        for (Object o : attackList) {
-            String[] splitEntry = split(((String) o), '-');
+        for (int i = 0; i < attackList.size(); i++) {
+            String[] splitEntry = attackList.get(i).split("-");
             obj_id idAtPoint = utils.stringToObjId(splitEntry[0]);
             if (idAtPoint == attacker) {
                 return utils.stringToInt(splitEntry[1]);
@@ -1001,9 +997,9 @@ public class gcw extends script.base_script
         }
         return 0;
     }
-    public static String packAttackerDamage(obj_id attacker, int damage) throws InterruptedException
+    public static String packAttackerDamage(obj_id attacker, int damage)
     {
-        return ("" + attacker + "-" + damage);
+        return (attacker + "-" + damage);
     }
     public static boolean releaseGcwPointCredit(obj_id player) {
         obj_id[] gcwEnemiesList = new obj_id[0];
