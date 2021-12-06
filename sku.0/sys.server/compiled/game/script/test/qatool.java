@@ -2373,10 +2373,10 @@ public class qatool extends script.base_script
                     case INVTOOL_MENUOPTION:
                     qa.refreshMenu(self, PROMPT, TITLE, INVENTORY_TOOL_MENU, "mainMenuOptions", "qainv.pid", sui.OK_CANCEL_REFRESH);
                     break;
-                    case MSTRITEMTOOL_MENUOPTION:
+                    /*case MSTRITEMTOOL_MENUOPTION:
                     utils.setScriptVar(self, "qaitem.mainMenu", ITEM_TOOL_MENU);
                     qa.refreshMenu(self, ITEM_TOOL_PROMPT, ITEM_TOOL_TITLE, ITEM_TOOL_MENU, "handleMainMenuOptions", "qaitem.pid", sui.OK_CANCEL_REFRESH);
-                    break;
+                    break;*/
                     case NGETOOL_MENUOPTION:
                     qa.createInputBox(player, NGE_TOOL_PROMPT, NGE_TOOL_TITLE, "handleGiveRespecItem", "qange.pid");
                     break;
