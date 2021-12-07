@@ -1327,15 +1327,15 @@ bh_surprise_attack_effect_improved_6	playerArmorReduce			90	command.bh_dm_crit	5
 aurekDuality	aurekBesh			1	command.detonateDroid	22		0		0		0		0		0	STATE_NONE	aurek_diminish			1	1		0	1	1	0	1	1	0	1	1	1
 beshDuality	aurekBesh			1	command.detonateDroid	22		0		0		0		0		0	STATE_NONE	besh_diminish			1	1		0	1	1	0	1	1	0	1	1	1
 aurek_besh_imbalance	aurek_besh_imbalance			1	command.powerBoost	-1		0		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
-treasure_bonus_combat_critical_hit	treasure_buff			1	command.fs_dm_cc_crit	120	expertise_critical_niche_all	3	healthPercent	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-treasure_bonus_combat_strikethrough_chance	treasure_buff			1	command.armorBreak	120	expertise_strikethrough_chance	3	healing_action	1000		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-treasure_bonus_combat_dodge	treasure_buff			1	command.me_enhance_dodge	120	expertise_dodge	3	debuff_purge	1		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-treasure_bonus_combat_block_chance	treasure_buff			1	command.me_enhance_block	120	expertise_block_chance	3		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-treasure_bonus_combat_evasion_chance	treasure_buff			1	command.me_evasion	120	expertise_evasion_chance	3		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+treasure_bonus_combat_critical_hit	treasure_buff			1	command.fs_dm_cc_crit	1800	expertise_critical_niche_all	3	healthPercent	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+treasure_bonus_combat_strikethrough_chance	treasure_buff			1	command.armorBreak	1800	expertise_strikethrough_chance	3	healing_action	1000		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+treasure_bonus_combat_dodge	treasure_buff			1	command.me_enhance_dodge	1800	expertise_dodge	3	debuff_purge	1		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+treasure_bonus_combat_block_chance	treasure_buff			1	command.me_enhance_block	1800	expertise_block_chance	3		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+treasure_bonus_combat_evasion_chance	treasure_buff			1	command.me_evasion	1800	expertise_evasion_chance	3		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 treasure_bonus_snare_immunity	treasure_buff			1	command.sm_path_lucky_break	10	movement	0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-treasure_bonus_combat_critical_hit_reduction	treasure_buff			1	command.vitalize	120	combat_critical_hit_reduction	30	precision_modified	20		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-treasure_bonus_combat_parry	treasure_buff			1	command.parryRiposte	120	expertise_parry	3	strength_modified	20		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-treasure_bonus_heal_health_action	treasure_buff			1	command.bactaInfusion	120	healthPercent	15	healing_action	2000		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+treasure_bonus_combat_critical_hit_reduction	treasure_buff			1	command.vitalize	1800	combat_critical_hit_reduction	30	precision_modified	20		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+treasure_bonus_combat_parry	treasure_buff			1	command.parryRiposte	1800	expertise_parry	3	strength_modified	20		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+treasure_bonus_heal_health_action	treasure_buff			1	command.bactaInfusion	1800	healthPercent	15	healing_action	2000		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 human_ability_1	speciesTrait			1	command.human_ability	80	group	0	expertise_damage_all	3		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 wookiee_ability_1	speciesTrait			1	command.wookiee_ability	30	movement	65	expertise_damage_all	-25	glancing_blow_vulnerable	25		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 rodian_ability_1	speciesTrait			1	command.rodian_ability	30	expertise_action_all	38		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
