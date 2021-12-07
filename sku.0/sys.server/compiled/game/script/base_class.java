@@ -521,6 +521,9 @@ public class base_class
     public static final int GOT_armor_segment                      = ++private_GOT_counter;
     public static final int GOT_armor_core                         = ++private_GOT_counter;
     public static final int GOT_armor_psg                          = ++private_GOT_counter;
+    
+    public static final int GOT_beastmaster_misc                   = ++private_GOT_counter;
+    public static final int GOT_beastmaster_pet                    = ++private_GOT_counter;
 
     public static final int GOT_building                           = private_GOT_counter = 0x00000200;
     public static final int GOT_building_municipal                 = ++private_GOT_counter;
