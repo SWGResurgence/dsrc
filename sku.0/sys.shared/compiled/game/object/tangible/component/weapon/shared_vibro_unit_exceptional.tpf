@@ -5,7 +5,6 @@
 
 @class object_template 10
 
-objectName = "craft_weapon_ingredients_n" "blade_vibro_unit_nightsister"
-detailedDescription = "craft_weapon_ingredients_d" "blade_vibro_unit_nightsister"
+objectName = "craft_weapon_ingredients_n" "blade_vibro_unit_exceptional"
+detailedDescription = "craft_weapon_ingredients_d" "blade_vibro_unit_exceptional"
 appearanceFilename = "appearance/eqp_comp_blade_vibro_unit.apt"
-
