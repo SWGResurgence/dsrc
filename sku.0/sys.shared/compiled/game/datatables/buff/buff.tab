@@ -1672,7 +1672,7 @@ bh_crit_hit_vuln	bh_surprise_attack_effect			90	command.bh_dm_crit	5	critical_hi
 co_cluster_bomb	co_cluster_bomb			1	command.co_cluster_bomb	15		0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 co_killing_spree	co_killing_spree			1	command.co_killing_spree	15	expertise_co_killing_spree_target	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 co_empowered_attack	co_empowered_attack			1	command.co_empowered_attack	15	expertise_damage_weapon_0	10	expertise_damage_weapon_1	10	expertise_damage_weapon_2	10		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-co_first_aid_training	co_first_aid_training			1	command.co_first_aid_training	8	expertise_healing_all	20		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+co_first_aid_training	co_first_aid_training			1	command.co_first_aid_training	900	expertise_healing_all	20		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 co_double_time	co_double_time			1	command.co_double_time	20	movement	0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 foraged_berries_mid	food			0	buffs.foodMeal	300	stamina_modified	15	luck_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 foraged_bugs_mid	food			0	buffs.foodMeal	300	agility_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
