@@ -376,7 +376,7 @@ boss_mez_immunity	stasis	mez		11	state.rage	-1	delay_attack	0	movement	0		0		0		
 boss_slow_immunity	cmSlow	warcry		10	command.warcry	-1	combat_slow	1		0		0		0		0	STATE_NONE	none			0	0		0	1	1	0	1	1	0	1	1	1
 biological_suppression	healthDebuff	actionDebuff	mindDebuff	10	command.vitalize	180	healthPercent	-50	staminaPercent	-50	willpowerPercent	-50		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 crystal_buff	som_crystal_buff			6	command.centerOfBeing	500	expertise_healing_all	100	health	90000	expertise_damage_all	350	combat_divide_damage_taken	85	expertise_glancing_blow_all	100	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-crystal_buff_drained	som_drained_crystal			6	command.centerOfBeing	120	expertise_critical_niche_all	5	expertise_damage_all	10	expertise_glancing_blow_all	5	constitution_modified	75	luck_modified	50	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+crystal_buff_drained	som_drained_crystal			6	command.centerOfBeing	1800	expertise_critical_niche_all	5	expertise_damage_all	10	expertise_glancing_blow_all	5	constitution_modified	75	luck_modified	50	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 hunted	defenseDebuff			6	buffs.spiceAction	60	ranged_defense	-200	melee_defense	-200		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 guardian_taint	mobSlow			6	command.thyroidRupture	60	glancing_blow_vulnerable	35		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 player_armor_break_immunity	armorBreak		nullification	10	command.armorBreak	20	private_armor_break	0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
