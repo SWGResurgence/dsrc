@@ -41,7 +41,7 @@ public class reverse_engineering extends script.base_script
     public static final string_id POWERUP_PID_TITLE = new string_id("spam", "powerup_override_title");
     public static final string_id POWERUP_PID_PROMPT = new string_id("spam", "powerup_override");
     public static final float EXPIRATION_TIME = utils.getIntConfigSetting("GameServer", "powerupBuffDuration");
-    //public static final float EXPIRATION_TIME = 1800.0f;
+    #public static final float EXPIRATION_TIME = 1800.0f;
     
     public static void checkPowerUpReApply(obj_id player) throws InterruptedException
     {
