@@ -583,14 +583,14 @@ npeRngSpeedLongDuration	genBuff_4			4	buffs.spiceAction	900	precision_modified	5
 npeMeleeSpeedLongDuration	genBuff_4			3	buffs.spiceAction	900	strength_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 npeComboAccLongDuration	genBuff_4			3	buffs.genericBuff	900	precision_modified	5	strength_modified	5		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towHealthMinor	genBuff_3			19	command.regeneration	300	constitution_modified	30		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-towCrystalOffenseBurst	genBuff_3			60	command.detonateDroid	300	constitution_modified	120	precision_modified	120	strength_modified	120		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-towCrystalDefenseBurst	genBuff_3			60	command.powerBoost	300	constitution_modified	120	agility_modified	120		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-towCrystalDotImmunity	genBuff_4			60	buffs.spiceHealth	300	expertise_dot_absorption_all	50	dot_resist_all	50		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+towCrystalOffenseBurst	genBuff_3			60	command.detonateDroid	1800	constitution_modified	120	precision_modified	120	strength_modified	120		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+towCrystalDefenseBurst	genBuff_3			60	command.powerBoost	1800	constitution_modified	120	agility_modified	120		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+towCrystalDotImmunity	genBuff_4			60	buffs.spiceHealth	1800	expertise_dot_absorption_all	50	dot_resist_all	50		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towHelmetAccuracy	genBuff_1			90	command.aim	-1	precision_modified	20	strength_modified	20		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 towGlovesHealEff	genBuff_1			90	command.sampledna	-1	agility_modified	20	stamina_modified	20		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-towCrystalUberCombat	towCrystal	haste		60	command.dazzle	180	constitution_modified	200	stamina_modified	200	precision_modified	200	strength_modified	200		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-towCrystalUberDs	towCrystal			60	command.powerBoost	180	constitution_modified	200	luck_modified	200	agility_modified	200		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-towCrystalABImmune	towCrystal	armorBreak		60	command.powerBoost	180	constitution_modified	150	stamina_modified	150		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+towCrystalUberCombat	towCrystal	haste		60	command.dazzle	1800	constitution_modified	200	stamina_modified	200	precision_modified	200	strength_modified	200		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+towCrystalUberDs	towCrystal			60	command.powerBoost	1800	constitution_modified	200	luck_modified	200	agility_modified	200		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+towCrystalABImmune	towCrystal	armorBreak		60	command.powerBoost	1800	constitution_modified	150	stamina_modified	150		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towRingAbsorption	genBuff_4			90	command.bandage	-1	agility_modified	20	constitution_modified	20	stamina_modified	20		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 towAbsorption	genBuff_4			60	command.bandage	900	agility_modified	20	constitution_modified	20	stamina_modified	20		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 proc_tow_proc_b_5	genBuff_4			90	command.dazzle	60	proc_buff	1		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
@@ -1447,9 +1447,9 @@ ig_head_buff_1	ig_buff			1	command.ig88_droideka_shield	30	expertise_innate_prot
 ig_head_buff_2	ig_buff			1	command.ig88_droideka_electrify	30	healing_health	9000	healing_action	9000		0		0		0	STATE_NONE	none	clienteffect/off_last_words.cef		1	0		1	1	1	0	1	1	0	1	1	1
 ig_head_buff_3	ig_buff			1	command.bh_flawless_strike	30	combat_block_reduction	300	combat_dodge_reduction	300	combat_glancing_blow_reduction	300	combat_parry_reduction	300		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 ig_head_debuff_1	ig_buff			1	command.ig88_droideka_electrify	60	movement	0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
-aurilian_crystal_small	aurilian_crystal_buff			1	command.aurilian_crystal_buff_sm	7200	stamina_modified	50	expertise_critical_niche_all	1		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
-aurilian_crystal_medium	aurilian_crystal_buff			2	command.aurilian_crystal_buff_med	7200	stamina_modified	100	expertise_critical_niche_all	2		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
-aurilian_crystal_large	aurilian_crystal_buff			3	command.aurilian_crystal_buff_lrg	7200	stamina_modified	150	expertise_critical_niche_all	3		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+aurilian_crystal_small	aurilian_crystal_buff			1	command.aurilian_crystal_buff_sm	10800	stamina_modified	50	expertise_critical_niche_all	1		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+aurilian_crystal_medium	aurilian_crystal_buff			2	command.aurilian_crystal_buff_med	10800	stamina_modified	100	expertise_critical_niche_all	2		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+aurilian_crystal_large	aurilian_crystal_buff			3	command.aurilian_crystal_buff_lrg	10800	stamina_modified	150	expertise_critical_niche_all	3		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 me_ae_rez_debuff	super_rez_debuff			1	command.hemorrhage	15	stamina_modified	-1000	movement	0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 suin_healing_debuff	healingRedux			0	jedi.forceWeaken	4	expertise_healing_reduction	50		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 tusken_bane	tusken_bane			6	command.centerOfBeing	300	expertise_critical_niche_all	5	expertise_damage_all	10	expertise_dodge	5	expertise_strikethrough_chance	5	expertise_block_chance	5	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -1752,10 +1752,10 @@ tcg_series2_keelkana_tooth	exp_buff			40	buffs.tcg_series2_keelkana_tooth	3600	t
 tcg_series1_nuna_ball_advertisement	exp_grant			1	buffs.tcg_series1_nuna_ball_advertisement	1	tcg_xp_granted	10		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 tcg_series2_versafunction88_datapad	exp_grant			1	buffs.tcg_series2_versafunction88_datapad	1	tcg_xp_granted	15		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 tcg_series9_lepese_dictionary	exp_grant			1	buffs.tcg_series9_lepese_dictionary	1	tcg_xp_granted	20		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
-tcg_series1_gorax_ear	towCrystal			70	buffs.tcg_series1_gorax_ear	180	constitution_modified	200	precision_modified	200	stamina_modified	200	luck_modified	200		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
-tcg_series1_morgukai_shadow_scroll	towCrystal			70	buffs.tcg_series1_morgukai_shadow_scroll	180	constitution_modified	200	precision_modified	200	stamina_modified	200	expertise_critical_niche_all	5		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
-tcg_series2_sanyassan_skull	towCrystal			70	buffs.tcg_series1_sanyassan_skull	180	constitution_modified	200	precision_modified	200	stamina_modified	200	agility_modified	200		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
-tcg_series1_tusken_talisman	towCrystal			70	buffs.tcg_series1_tusken_talisman	180	constitution_modified	200	precision_modified	200	stamina_modified	200	strength_modified	200		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+tcg_series1_gorax_ear	towCrystal			70	buffs.tcg_series1_gorax_ear	3600	constitution_modified	200	precision_modified	200	stamina_modified	200	luck_modified	200		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+tcg_series1_morgukai_shadow_scroll	towCrystal			70	buffs.tcg_series1_morgukai_shadow_scroll	3600	constitution_modified	200	precision_modified	200	stamina_modified	200	expertise_critical_niche_all	5		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+tcg_series2_sanyassan_skull	towCrystal			70	buffs.tcg_series1_sanyassan_skull	3600	constitution_modified	200	precision_modified	200	stamina_modified	200	agility_modified	200		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+tcg_series1_tusken_talisman	towCrystal			70	buffs.tcg_series1_tusken_talisman	3600	constitution_modified	200	precision_modified	200	stamina_modified	200	strength_modified	200		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 event_halloween_no_trick	event_halloween_no_trick			100		30		0		0		0		0		0	STATE_NONE	none			0	1		0	0	0	1	1	0	0	1	1	1
 event_halloween_spider_swarm	particle_swarm			1	buffs.spiderSwarm	300	event_halloween_spider_swarm	0		0		0		0		0	STATE_NONE	none	appearance/pt_spider_flock.prt		1	0		0	1	1	0	1	1	0	1	1	1
 event_halloween_coin_limit	event_halloween_coin_limit			1	buffs.trickTreat	86400	event_halloween_coin_limit	0		0		0		0		0	STATE_NONE	none			1	1		0	0	0	1	1	1	0	0	1	1
@@ -1944,7 +1944,7 @@ wod_rancor_super_strength	wod_rancor_super_strength			1	buffs.wod_super_strength
 wod_adaptive_biology	wod_adaptive_biology			1	buffs.wod_adaptive_bio	-1	dot_reduction_all	25	dot_resist_all	20		0		0		0	STATE_NONE	none			1	0		0	1	1	0	5	1	0	1	1	1
 wod_lethal_reflexes	wod_lethal_reflexes			1	buffs.wod_lethal_reflexes	-1	expertise_critical_niche_all	15		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	5	1	0	1	1	1
 wod_unstoppable_attack	wod_unstoppable_attack			1	buffs.wod_unstoppable_attack	-1	combat_glancing_blow_reduction	100	combat_block_reduction	100	combat_parry_reduction	100	combat_dodge_reduction	100		0	STATE_NONE	none			1	0		0	1	1	0	5	1	0	1	1	1
-tcg_series8_severed_wampa_arm	towCrystal			70	buffs.tcg_series8_wampa_arm	600	constitution_modified	100	agility_modified	100	stamina_modified	100	luck_modified	100		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+tcg_series8_severed_wampa_arm	towCrystal			70	buffs.tcg_series8_wampa_arm	1800	constitution_modified	100	agility_modified	100	stamina_modified	100	luck_modified	100		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 of_cc_melee_1	snare			4	command.sm_dm_cc_melee	2	movement	0		0		0		0		0	STATE_NONE	none	appearance/pt_smuggler_dizzy_loop.prt		1	1		1	1	1	0	1	1	0	1	1	1
 of_cc_melee_2	snare			12	command.sm_dm_cc_melee	4	movement	0		0		0		0		0	STATE_NONE	none	appearance/pt_smuggler_dizzy_loop.prt		1	1		1	1	1	0	1	1	0	1	1	1
 of_cc_melee_3	snare			20	command.sm_dm_cc_melee	6	movement	0		0		0		0		0	STATE_NONE	none	appearance/pt_smuggler_dizzy_loop.prt		1	1		1	1	1	0	1	1	0	1	1	1
