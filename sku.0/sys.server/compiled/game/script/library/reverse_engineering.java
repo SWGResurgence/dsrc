@@ -3,10 +3,11 @@ package script.library;
 import script.obj_id;
 import script.string_id;
 
-import java.util.Vector;
-
 public class reverse_engineering extends script.base_script
 {
+    public reverse_engineering()
+    {
+    }
     public static final String[] POWERUP_TYPES = 
     {
         "armor",
@@ -40,9 +41,7 @@ public class reverse_engineering extends script.base_script
     public static final String JUNK_TABLE = "datatables/crafting/reverse_engineering_junk.iff";
     public static final string_id POWERUP_PID_TITLE = new string_id("spam", "powerup_override_title");
     public static final string_id POWERUP_PID_PROMPT = new string_id("spam", "powerup_override");
-    public static final float EXPIRATION_TIME = utils.getIntConfigSetting("GameServer", "powerupBuffDuration");
-    #public static final float EXPIRATION_TIME = 1800.0f;
-    
+    public static final float EXPIRATION_TIME = 1800.0f;
     public static void checkPowerUpReApply(obj_id player) throws InterruptedException
     {
         if (isIdValid(player))
