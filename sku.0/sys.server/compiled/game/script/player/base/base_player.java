@@ -1339,8 +1339,7 @@ public class base_player extends script.base_script
                 }
                 else 
                 {
-                    String strGalaxyMessage = "\\#FF0000" + "Welcome to SWG: Resurgence!" + "\\#FFFFFF";
-                    String strGalaxyMessage = "\\#CC9900" + "If you encounter any bugs, please report them on our Mantis Bug Tracker, and thank you for participating in our testing phase!" + "\\#FFFFFF";
+                    String strGalaxyMessage = "\\#FF0000" + "Welcome to SWG: Resurgence!" + "\r\n" + "\\#CC9900" + "If you encounter any bugs, please report them on our Mantis Bug Tracker, and thank you for participating in our testing phase!" + "\\#FFFFFF";
                     sendConsoleMessage(self, strGalaxyMessage);
                 }
                 boolean warden = isWarden(self);
@@ -11769,8 +11768,7 @@ public class base_player extends script.base_script
             }
             else 
             {
-                String strGalaxyMessage = "\\#FF0000" + "Welcome to SWG: Resurgence!" + "\\#FFFFFF";
-                String strGalaxyMessage = "\\#CC9900" + "If you encounter any bugs, please report them on our Mantis Bug Tracker, and thank you for participating in our testing phase!" + "\\#FFFFFF";
+                String strGalaxyMessage = "\\#FF0000" + "Welcome to SWG: Resurgence!" + "\r\n" + "\\#CC9900" + "If you encounter any bugs, please report them on our Mantis Bug Tracker, and thank you for participating in our testing phase!" + "\\#FFFFFF";
                 sendConsoleMessage(self, strGalaxyMessage);
             }
             boolean warden = isWarden(self);
