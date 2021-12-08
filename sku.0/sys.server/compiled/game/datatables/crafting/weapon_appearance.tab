@@ -2046,6 +2046,15 @@ slot																																		resource	0	shell_handling_unit	steel_neutr
 slot																																		template	0	weapon_core	object/tangible/component/weapon/core/weapon_core_heavy_base.iff	1																												
 slot																																		template	1	scope	object/tangible/component/weapon/scope_weapon_base.iff	1	scope																											
 slot																																		template	1	stock	object/tangible/component/weapon/stock_base.iff	1	stock																											
+weapon	heavy	weapon_appearance_heavy_cr2_pvp		systems.crafting.weapon.core.crafting_new_weapon_final	0	weapon	8	weapon_crafting		object/weapon/ranged/heavy/heavy_cr2_blast_cannon.iff	object/weapon/ranged/heavy/heavy_cr2_blast_cannon.iff	40	450	900	1200	0	0	0	0	0	0	kinetic	cold	-1	-1	heavy	heavy	1	1	100	100		64							sys.server/compiled/game/object/draft_schematic/weapon/appearance/																							0	500	0	400
+slot																																		resource	0	frame_assembly	steel	150																												
+slot																																		resource	0	receiver_assembly	iron	40																												
+slot																																		resource	0	grip_assembly	petrochem_inert_polymer	20																												
+slot																																		resource	0	launch_tubes	steel	170																												
+slot																																		resource	0	shell_handling_unit	steel_neutronium	225																												
+slot																																		template	0	weapon_core	object/tangible/component/weapon/core/weapon_core_heavy_base.iff	1																												
+slot																																		template	1	scope	object/tangible/component/weapon/scope_weapon_base.iff	1	scope																											
+slot																																		template	1	stock	object/tangible/component/weapon/stock_base.iff	1	stock																											
 weapon	melee	weapon_appearance_sword_pvp_bf		systems.crafting.weapon.core.crafting_new_weapon_final	0	weapon	4	weapon_crafting		object/weapon/melee/sword/sword_pvp_bf_01.iff	object/weapon/melee/sword/sword_pvp_bf_01.iff	40	450	800	1100	0	0	0	0	0	0	kinetic	none	-1	-1	melee	melee	1	1	100	100		5							sys.server/compiled/game/object/draft_schematic/weapon/appearance/																							0	62	0	50
 slot																																		resource	0	sword_core_jacket	steel_ditanium	120																												
 slot																																		resource	0	grip	petrochem_inert_polymer	60																												
