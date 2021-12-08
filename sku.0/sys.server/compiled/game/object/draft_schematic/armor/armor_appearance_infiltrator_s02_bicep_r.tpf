@@ -3,7 +3,7 @@
 
 category = CT_armor
 itemsPerContainer = 0
-craftedObjectTemplate = "object/tangible/wearables/armor/infiltrator/armor_infiltrator_s01_bracer_l.iff"
+craftedObjectTemplate = "object/tangible/wearables/armor/infiltrator/armor_infiltrator_s02_bicep_r.iff"
 slots = [
 	[
 	optional=false,
@@ -22,7 +22,7 @@ slots = [
 	complexity = 0,
 	appearance = "" ],
 	[
-	optional=false,
+	optional=true,
 	name = "craft_armor_ingredients_n" "armor_core",
 	options = [
 		[ingredientType=IT_template, ingredients = [[name="craft_armor_ingredients_n" "armor_core", ingredient="object/tangible/component/armor/armor_core_assault.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
@@ -70,7 +70,7 @@ slots = [
 	complexity = 0,
 	appearance = "" ]]
 skillCommands = ["unskilled"]
-manufactureScripts = ["systems.crafting.armor.component.crafting_new_armor_droideng_final"]
+manufactureScripts = ["systems.crafting.armor.component.crafting_new_armor_mand_final"]
 
 @class intangible_object_template 1
 
@@ -79,6 +79,5 @@ manufactureScripts = ["systems.crafting.armor.component.crafting_new_armor_droid
 complexity = 25
 volume = 3
 objvars = +["conditionMultiplier" = 3.00, "crafting.no_critical_fail" = 1]
-sharedTemplate = "object/draft_schematic/armor/shared_armor_appearance_infiltrator_s01_bracer_l.iff"
+sharedTemplate = "object/draft_schematic/armor/shared_armor_appearance_infiltrator_s02_bicep_r.iff"
 xpPoints = [[type = XP_craftingClothingArmor, level = 0, value = 0]]
-
