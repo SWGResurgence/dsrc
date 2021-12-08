@@ -25,9 +25,15 @@ item_color_crystal_02_22	Color Crystal: Strength of Luminaria
 item_color_crystal_02_15	Color Crystal: Ulric's Redemption
 item_power_crystal_04_21	Power Crystal: Perfect
 item_publish_gift_37_04_01	Misc: War Terminal
-item_target_dummy_blacksun	Target Dummy: Black Sun Controller
-item_target_dummy_stormtrooper	Target Dummy: Imperial Controller
-item_target_dummy_rebel_trooper	Target Dummy: Rebel Controller
 object/tangible/painting/painting_han_wanted.iff	Painting: Wanted Poster Han Solo
 object/tangible/painting/painting_leia_wanted.iff	Painting: Wanted Poster Leia Organa
 object/tangible/painting/painting_luke_wanted.iff	Painting: Wanted Poster Luke Skywalker
+item_schematic_ex_blaster_pistol_barrel	Schematic: Exceptional Blaster Pistol Barrel
+item_schematic_ex_blaster_rifle_barrel	Schematic: Exceptional Blaster Rifle Barrel
+item_schematic_ex_gas_cartridge	Schematic: Exceptional Gas Cartridge
+item_schematic_ex_projectile_pistol_barrel	Schematic: Exceptional Projectile Blaster Pistol Barrel
+item_schematic_ex_projectile_pistol_rifle	Schematic: Exceptional Projectile Blaster Rifle Barrel
+item_schematic_ex_reinforcement_core	Schematic: Exceptional Weapon Reinforcement Core
+item_target_dummy_blacksun	Target Dummy: Black Sun Controller
+item_target_dummy_stormtrooper	Target Dummy: Imperial Controller
+item_target_dummy_rebel_trooper	Target Dummy: Rebel Controller

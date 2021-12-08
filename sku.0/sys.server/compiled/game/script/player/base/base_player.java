@@ -1339,7 +1339,7 @@ public class base_player extends script.base_script
                 }
                 else 
                 {
-                    String strGalaxyMessage = "\\#FF0000" + "Welcome to Star Wars Galaxies" + "\\#FFFFFF";
+                    String strGalaxyMessage = "\\#FF0000" + "Welcome to SWG: Resurgence!" + "\r\n" + "\\#CC9900" + "If you encounter any bugs, please report them on our Mantis Bug Tracker, and thank you for participating in our testing phase!" + "\\#FFFFFF";
                     sendConsoleMessage(self, strGalaxyMessage);
                 }
                 boolean warden = isWarden(self);
@@ -9577,7 +9577,7 @@ public class base_player extends script.base_script
 				obj_id tatooine = getPlanetByName("tatooine");
         String objVar = "vetTokenCD_" + getPlayerStationId(self);
 		if (!hasObjVar(tatooine, objVar)) {
-			cureward.giveVeteranRewardToken(self, 100);
+			cureward.giveVeteranRewardToken(self, 500);
 			return SCRIPT_CONTINUE;
 		}
         int timeLeft = getIntObjVar(tatooine, objVar) + 86400 - getCalendarTime();
@@ -11768,7 +11768,7 @@ public class base_player extends script.base_script
             }
             else 
             {
-                String strGalaxyMessage = "\\#FF0000" + "Welcome to Star Wars Galaxies" + "\\#FFFFFF";
+                String strGalaxyMessage = "\\#FF0000" + "Welcome to SWG: Resurgence!" + "\r\n" + "\\#CC9900" + "If you encounter any bugs, please report them on our Mantis Bug Tracker, and thank you for participating in our testing phase!" + "\\#FFFFFF";
                 sendConsoleMessage(self, strGalaxyMessage);
             }
             boolean warden = isWarden(self);

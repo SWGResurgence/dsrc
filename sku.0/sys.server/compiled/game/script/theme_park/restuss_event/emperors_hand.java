@@ -7,26 +7,29 @@ import java.util.Vector;
 
 public class emperors_hand extends script.base_script
 {
+    public emperors_hand()
+    {
+    }
     public static final String VOLUME_NAME = "aggressive_area";
     public static final string_id FOUND_JEDI = new string_id("restuss_event/object", "jedi_located");
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume(VOLUME_NAME, 15.0f, true);
         messageTo(self, "setLoiter", null, 10.0f, false);
-		sendSystemMessagePlanetTestingOnly("ATTENTION RORI CIVILIANS: The Emperor's Hand has been located in the Restuss city ruins");
+                sendSystemMessagePlanetTestingOnly("ATTENTION RORI CIVILIANS: The Hand of his majesty, The Emperor, has been located in the city ruins of Restuss.");
         return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume(VOLUME_NAME, 15.0f, true);
         messageTo(self, "setLoiter", null, 10.0f, false);
-		sendSystemMessagePlanetTestingOnly("ATTENTION RORI CIVILIANS: The Emperor's Hand has been located in the Restuss city ruins");
+                sendSystemMessagePlanetTestingOnly("ATTENTION RORI CIVILIANS: The Hand of his majesty, The Emperor, has been located in the city ruins of Restuss.");
         return SCRIPT_CONTINUE;
     }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
-        sendSystemMessagePlanetTestingOnly("ATTENTION RORI CIVILIANS: The Emperor's Hand has been slain by " + getName(killer));
-		return SCRIPT_CONTINUE;
+		sendSystemMessagePlanetTestingOnly("ATTENTION RORI CIVILIANS: The Hand, of his majesty, the Emperor, has been reported to have been killed by " + getName(killer));
+        return SCRIPT_CONTINUE;
     }
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
@@ -59,5 +62,5 @@ public class emperors_hand extends script.base_script
     {
         trial.cleanupNpc(self);
         return SCRIPT_CONTINUE;
-    } */
+    }*/
 }

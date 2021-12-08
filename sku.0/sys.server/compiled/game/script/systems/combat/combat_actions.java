@@ -9,9 +9,6 @@ import java.util.Arrays;
 import java.util.Vector;
 
 public class combat_actions extends script.systems.combat.combat_base {
-
-    public combat_actions() {
-    }
     public static String DEFAULT_EGG = "object/tangible/gravestone/gravestone05.tpf";
     public static final String COMBAT_TABLE = "datatables/combat/combat_data.iff";
     public static final float DAMAGE_STRENGTH_CUTOFF = 0.5f;

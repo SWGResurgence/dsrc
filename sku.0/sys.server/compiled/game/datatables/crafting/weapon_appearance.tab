@@ -2157,3 +2157,38 @@ slot																																		resource	0	vibro_unit_and_power_cell_brack
 slot																																		resource	0	grip_unit	petrochem_inert_polymer	35																												
 slot																																		template	0	vibration_generator	object/tangible/component/weapon/vibro_unit_base.iff	1																												
 slot																																		template	0	weapon_core	object/tangible/component/weapon/core/weapon_core_melee_base.iff	1																												
+weapon	component	new_weapon_comp_gas_cartridge_exceptional		systems.crafting.weapon.core.crafting_comp_gas_cartridge	50	weapon	5	weapon_crafting		object/tangible/component/weapon/new_weapon_comp_gas_cartridge_exceptional.iff	object/tangible/component/weapon/new_weapon_comp_gas_cartridge_exceptional.iff	42	120	1	1	0	0	0	0	0	0		none	-1	-1	component	component	1	1											sys.server/compiled/game/object/draft_schematic/weapon/component/	8	20	0	30										
+slot																																		resource	0	module_assembly	petrochem_inert_polymer	35																
+slot																																		resource	0	xciter_circuitry	copper_diatium	20																
+slot																																		resource	0	circuitry_substrate	ore_carbonate_ostrine	20																
+slot																																		resource	0	gas_containment_unit	aluminum_phrik	38																								
+slot																																		resource	0	reactant_source	gas_reactive_irolunn	30																								
+weapon	component	new_weapon_comp_reinforcement_core_exceptional		systems.crafting.weapon.core.crafting_comp_reinforcement_core	50	weapon	4	weapon_crafting		object/tangible/component/weapon/new_weapon_comp_reinforcement_core_exceptional.iff	object/tangible/component/weapon/new_weapon_comp_reinforcement_core_exceptional.iff	42	120	1	1	0	0	0	0	0	0		none	-1	-1	component	component	1	1											sys.server/compiled/game/object/draft_schematic/weapon/component/																			8	20	0	30
+slot																																		resource	0	reinforcement_base	petrochem_inert_polymer	35																								
+slot																																		resource	0	reinforcement_material	copper_diatium	20																								
+slot																																		resource	0	lining	ore_carbonate_ostrine	20																								
+slot																																		resource	0	reinforcement_attachment	aluminum_phrik	38																								
+weapon	component	new_weapon_comp_blade_vibro_unit_exceptional		systems.crafting.weapon.core.crafting_comp_vibro_unit	50	weapon	3	weapon_crafting		object/tangible/component/weapon/vibro_unit_exceptional.iff	object/tangible/component/weapon/vibro_unit_exceptional.iff	42	120	1	1	0	0	0	0	0	0		none	-1	-1	component	component	1	1											sys.server/compiled/game/object/draft_schematic/weapon/component/															6	15	0	15				
+slot																																		resource	0	module_housing	copper_desh	40																								
+slot																																		resource	0	ultrasonic_vibration_generator	petrochem_fuel_solid_type3	25																								
+slot																																		resource	0	conductive_circuits	copper_platinite	15																								
+weapon	component	new_weapon_comp_blaster_pistol_barrel_exceptional		systems.crafting.weapon.core.crafting_comp_barrel_blaster	50	weapon	5	weapon_crafting		object/tangible/component/weapon/blaster_pistol_barrel_exceptional.iff	object/tangible/component/weapon/blaster_pistol_barrel_exceptional.iff	42	120	1	1	0	0	0	0	0	0		none	-1	-1	component	component	1	1											sys.server/compiled/game/object/draft_schematic/weapon/component/															6	15	0	15
+slot																																		resource	0	emitter_nozzle	steel_rhodium	26																				
+slot																																		resource	0	actuating_blaster_module	steel_duralloy	20																				
+slot																																		resource	0	barrel_to_receiver_coupling	metal	18																				
+slot																																		resource	0	prismatic_crystal	armophous_ryll	6																				
+slot																																		resource	0	barrel_shroud	metal	12																				
+weapon	component	new_weapon_comp_blaster_rifle_barrel_exceptional		systems.crafting.weapon.core.crafting_comp_barrel_blaster	50	weapon	5	weapon_crafting		object/tangible/component/weapon/blaster_rifle_barrel_exceptional.iff	object/tangible/component/weapon/blaster_rifle_barrel_exceptional.iff	42	120	1	1	0	0	0	0	0	0		none	-1	-1	component	component	1	1											sys.server/compiled/game/object/draft_schematic/weapon/component/															6	15	0	15
+slot																																		resource	0	emitter_nozzle	steel_rhodium	45																				
+slot																																		resource	0	actuating_blaster_module	steel_duralloy	36																				
+slot																																		resource	0	barrel_to_receiver_coupling	steel_duranium	34																				
+slot																																		resource	0	prismatic_crystal	armophous_ryll	12																				
+slot																																		resource	0	barrel_shroud	metal	18																				
+weapon	component	new_weapon_comp_projectile_pistol_barrel_exceptional		systems.crafting.weapon.core.crafting_comp_barrel_projectile	50	weapon	3	weapon_crafting		object/tangible/component/weapon/projectile_pistol_barrel_exceptional.iff	object/tangible/component/weapon/projectile_pistol_barrel_exceptional.iff	42	120	1	1	0	0	0	0	0	0		none	-1	-1	component	component	1	1											sys.server/compiled/game/object/draft_schematic/weapon/component/															6	15	0	15
+slot																																		resource	0	lining	steel_duralloy	60																				
+slot																																		resource	0	bore	iron_plumbum	22																				
+slot																																		resource	0	barrel_shroud	iron_axidite	18																				
+weapon	component	new_weapon_comp_projectile_rifle_barrel_exceptional		systems.crafting.weapon.core.crafting_comp_barrel_projectile	50	weapon	3	weapon_crafting		object/tangible/component/weapon/projectile_rifle_barrel_exceptional.iff	object/tangible/component/weapon/projectile_rifle_barrel_exceptional.iff	42	120	1	1	0	0	0	0	0	0		none	-1	-1	component	component	1	1											sys.server/compiled/game/object/draft_schematic/weapon/component/															6	15	0	15								
+slot																																		resource	0	lining	steel_quadranium	65																												
+slot																																		resource	0	bore	iron_plumbum	32																												
+slot																																		resource	0	barrel_shroud	iron_axidite	18																												

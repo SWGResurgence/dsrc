@@ -6,6 +6,7 @@ import java.util.Vector;
 
 public class pclib extends script.base_script
 {
+    public static final int RESTUS_COMM_BONUS = utils.getIntConfigSetting("GameServer", "restussCommBonus");
     public static final int MAX_NEWBIE_DEATHS = 3;
     public static final String VAR_NEWBIE_BASE = "noob";
     public static final String VAR_NEWBIE_DEATH = VAR_NEWBIE_BASE + ".death";
@@ -826,6 +827,7 @@ public class pclib extends script.base_script
                     int commCount = pvpGetCurrentGcwRank(killer) - 1;
 
                     if (commCount > 0) {
+                        commCount *= RESTUS_COMM_BONUS;
                         static_item.createNewItemFunction("item_restuss_" + pFac.toLowerCase() + "_commendation_02_01", inventory, commCount);
                         sendSystemMessageTestingOnly(killer, "You've recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + player + " in combat.");
                     }
