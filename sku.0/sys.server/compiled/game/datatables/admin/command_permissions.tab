@@ -111,7 +111,7 @@ object.createTriggerVolume
 object.debugFar	
 object.deleteAuctionLocation	
 object.deletePersistedContents	30
-object.destroy	30
+object.destroy	40
 object.destroyAllMobsExcept	
 object.destroyAllWorldMobs	
 object.destroyPathNodes	
