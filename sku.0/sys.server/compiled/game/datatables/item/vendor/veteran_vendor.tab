@@ -26,7 +26,7 @@ object/tangible/veteran_reward/frn_vet_palpatine_statue.iff	63		Empire Day Emper
 item_vet_reward_greeter_gamorrean	69	5	Employment Terminal: Gamorrean Greeter
 object/tangible/veteran_reward/one_year_anniversary/painting_05.iff	3	1	Fighter Study
 item_vet_reward_78month_ttgm_itt	78		Flight of the Veteran
-object/tangible/veteran_reward/vr_gacklebat_deed.iff	48		Gackle Bat Familiar
+object/tangible/veteran_reward/vr_gacklebat_deed.iff	96		Gackle Bat Familiar
 object/tangible/veteran_reward/frn_vet_carbonite_geonosian.iff	51		Geonosian in Carbonite
 object/tangible/veteran_reward/frn_vet_carbonite_gungan.iff	51		Gungan in Carbonite
 object/tangible/veteran_reward/frn_tech_console_sectional_a.iff	12		Holonet Databank
@@ -58,8 +58,8 @@ object/tangible/veteran_reward/frn_vet_stormtrooper_toy.iff	12		Minature Stormtr
 object/tangible/veteran_reward/frn_vet_tie_fighter_toy.iff	6		Miniature TIE Fighter Replica
 object/tangible/veteran_reward/frn_vet_x_wing_toy.iff	6		Miniature X-wing Replica
 object/tangible/veteran_reward/frn_vet_tusken_raider_toy.iff	45		Miniature Tusken Raider Replica
-object/tangible/veteran_reward/vr_mouse_droid_deed.iff	48		Mouse Droid Familiar
-object/tangible/veteran_reward/vr_mynock_deed.iff	48		Mynock Familiar
+object/tangible/veteran_reward/vr_mouse_droid_deed.iff	96		Mouse Droid Familiar
+object/tangible/veteran_reward/vr_mynock_deed.iff	96		Mynock Familiar
 item_vet_reward_lockout_remover	81		Neural Recon Network Terminal
 st_cn_vet_reward_nightsister_boss	57		Nightsister Bloodwitch Storyteller Token
 object/tangible/veteran_reward/frn_vet_podracer_statue.iff	54		Podracer Statue
