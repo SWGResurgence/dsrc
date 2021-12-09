@@ -1675,3 +1675,9 @@ slot																																						resource	0	activator	aluminum_titanium
 slot																																						resource	0	handgrip	petrochem_inert_polymer	60			
 slot																																						resource	0	power_field_insulator	gas_inert_culsion	60			
 slot																																						resource	0	energizers	copper_polysteel	60			
+weapon	lightsaber_pike_gen6		systems.crafting.weapon.lightsaber.crafting_melee_lightsaber_pike	0	lightsaber	5		1	object/weapon/melee/pike/crafted_saber/sword_lightsaber_pike_gen6.iff	object/weapon/melee/pike/crafted_saber/sword_lightsaber_pike_gen6.iff	38	0	1000	1300	545	890	1235	1580	545	890	1235	1580	0	0	kinetic				100	100	12	1	1	100	100	0	10								object/draft_schematic/weapon/lightsaber/lightsaber_pike_gen6.iff
+slot																																						resource	0	emitter_shroud	steel_mustafar	500			
+slot																																						resource	0	activator	aluminum_chromium	408			
+slot																																						resource	0	handgrip	petrochem_inert_polymer	425			
+slot																																						resource	0	power_field_insulator	gas_inert_mustafar	428			
+slot																																						resource	0	energizers	copper_borocarbitic	401			
