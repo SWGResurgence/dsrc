@@ -921,7 +921,7 @@ invis_sp_buff_stealth_2	invisibility			4	command.stealth	-1	invis	0	movement	0		
 invis_sp_buff_stealth_3	invisibility			4	command.stealth	-1	invis	0	movement	0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 invis_sp_buff_stealth_4	invisibility			4	command.stealth	-1	invis	0	movement	0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 fs_force_run	fs_force_run			1	command.forceRun	15	slope_move	5	movement	0	movement_resist_snare	100	movement_resist_root	100		0	STATE_NONE	none	clienteffect/pl_force_run.cef,appearance/pt_force_speed.prt		1	0		1	1	1	0	1	1	0	1	1	1
-veteranPlayerBuff	vetBuff			1	command.veteranPlayerBuff	3600	group	0	constitution_modified	100	stamina_modified	100	agility_modified	100	luck_modified	100		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+veteranPlayerBuff	vetBuff			1	command.veteranPlayerBuff	900	group	0	constitution_modified	20	stamina_modified	20	agility_modified	20		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 agiConsumable5	genBuff_3			3	command.diveShot	300	agility_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 agiConsumable10	genBuff_3			4	command.diveShot	300	agility_modified	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 agiConsumable15	genBuff_3			5	command.diveShot	300	agility_modified	15		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -991,30 +991,30 @@ roadmapTraderClicky	genBuff_4			50	buffs.genericBuff	120	general_experimentation
 restuss_rebel_general_speech	inspiration			100	command.inspire	2400	precision_modified	40	constitution_modified	40		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 roadmapTraderClicky	genBuff_4			50	buffs.genericBuff	120	general_experimentation	25	general_assembly	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 sarlaccSnare	sarlacc			1	command.thyroidRupture	300	movement	0	agility_modified	-100	precision_modified	-100	strength_modified	-100	luck_modified	-100	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_1	vr_familiar			1	buffs.genericBuff	-1	constitution_modified	45	precision_modified	45	strength_modified	45		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_2	vr_familiar			2	buffs.genericBuff	-1	constitution_modified	50	precision_modified	50	strength_modified	50		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_3	vr_familiar			3	buffs.genericBuff	-1	constitution_modified	55	precision_modified	55	strength_modified	55		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_4	vr_familiar			4	buffs.genericBuff	-1	constitution_modified	60	precision_modified	60	strength_modified	60		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_5	vr_familiar			5	buffs.genericBuff	-1	constitution_modified	65	precision_modified	65	strength_modified	65		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_6	vr_familiar			6	buffs.genericBuff	-1	constitution_modified	70	precision_modified	70	strength_modified	70		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_7	vr_familiar			7	buffs.genericBuff	-1	constitution_modified	75	precision_modified	75	strength_modified	75		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_8	vr_familiar			8	buffs.genericBuff	-1	constitution_modified	80	precision_modified	80	strength_modified	80		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_1	vr_familiar			1	buffs.genericBuff	-1	constitution_modified	45		agility_modified	45		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_2	vr_familiar			2	buffs.genericBuff	-1	constitution_modified	50		agility_modified	50		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_3	vr_familiar			3	buffs.genericBuff	-1	constitution_modified	55		agility_modified	55		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_4	vr_familiar			4	buffs.genericBuff	-1	constitution_modified	60		agility_modified	60		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_5	vr_familiar			5	buffs.genericBuff	-1	constitution_modified	65		agility_modified	65		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_6	vr_familiar			6	buffs.genericBuff	-1	constitution_modified	70		agility_modified	70		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_7	vr_familiar			7	buffs.genericBuff	-1	constitution_modified	75		agility_modified	75		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_8	vr_familiar			8	buffs.genericBuff	-1	constitution_modified	80		agility_modified	80		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_1	vr_familiar			1	buffs.genericBuff	-1	constitution_modified	45	luck_modified	45	precision_modified	45		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_2	vr_familiar			2	buffs.genericBuff	-1	constitution_modified	50	luck_modified	50	precision_modified	50		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_3	vr_familiar			3	buffs.genericBuff	-1	constitution_modified	55	luck_modified	55	precision_modified	55		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_4	vr_familiar			4	buffs.genericBuff	-1	constitution_modified	60	luck_modified	60	precision_modified	60		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_5	vr_familiar			5	buffs.genericBuff	-1	constitution_modified	65	luck_modified	65	precision_modified	65		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_6	vr_familiar			6	buffs.genericBuff	-1	constitution_modified	70	luck_modified	70	precision_modified	70		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_7	vr_familiar			7	buffs.genericBuff	-1	constitution_modified	75	luck_modified	75	precision_modified	75		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_8	vr_familiar			8	buffs.genericBuff	-1	constitution_modified	80	luck_modified	80	precision_modified	80		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_1	vr_familiar			1	buffs.genericBuff	-1	precision_modified	5	strength_modified	5		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_2	vr_familiar			2	buffs.genericBuff	-1	precision_modified	10	strength_modified	10		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_3	vr_familiar			3	buffs.genericBuff	-1	precision_modified	15	strength_modified	15		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_4	vr_familiar			4	buffs.genericBuff	-1	precision_modified	20	strength_modified	20		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_5	vr_familiar			5	buffs.genericBuff	-1	precision_modified	25	strength_modified	25		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_6	vr_familiar			6	buffs.genericBuff	-1	precision_modified	20	strength_modified	20		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_7	vr_familiar			7	buffs.genericBuff	-1	precision_modified	35	strength_modified	35		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_8	vr_familiar			8	buffs.genericBuff	-1	precision_modified	40	strength_modified	40		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_health_1	vr_familiar			1	buffs.genericBuff	-1	constitution_modified	5		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_health_2	vr_familiar			2	buffs.genericBuff	-1	constitution_modified	10		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_health_3	vr_familiar			3	buffs.genericBuff	-1	constitution_modified	15		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_health_4	vr_familiar			4	buffs.genericBuff	-1	constitution_modified	20		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_health_5	vr_familiar			5	buffs.genericBuff	-1	constitution_modified	25		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_health_6	vr_familiar			6	buffs.genericBuff	-1	constitution_modified	30		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_health_7	vr_familiar			7	buffs.genericBuff	-1	constitution_modified	35		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_health_8	vr_familiar			8	buffs.genericBuff	-1	constitution_modified	40		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_defense_1	vr_familiar			1	buffs.genericBuff	-1	agility_modified	5		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_defense_2	vr_familiar			2	buffs.genericBuff	-1	agility_modified	10		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_defense_3	vr_familiar			3	buffs.genericBuff	-1	agility_modified	15		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_defense_4	vr_familiar			4	buffs.genericBuff	-1	agility_modified	20		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_defense_5	vr_familiar			5	buffs.genericBuff	-1	agility_modified	25		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_defense_6	vr_familiar			6	buffs.genericBuff	-1	agility_modified	30		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_defense_7	vr_familiar			7	buffs.genericBuff	-1	agility_modified	35		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_defense_8	vr_familiar			8	buffs.genericBuff	-1	agility_modified	40		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 criticalColdEffect	criticalEffect			10	buffs.cryobanSnare	15	combat_multiply_damage_taken	10		0		0		0		0	STATE_NONE	applyCritImmunityBuff			1	1		1	1	1	0	1	1	0	1	1	1
 criticalAcidEffect	criticalEffect			10	command.concussionShot	3	critical_hit_vulnerable	75		0		0		0		0	STATE_NONE	applyCritImmunityBuff			1	1		1	1	1	0	1	1	0	1	1	1
 criticalElectricEffect	criticalEffect			10	command.shock	6	glancing_blow_vulnerable	75		0		0		0		0	STATE_NONE	applyCritImmunityBuff			1	1		1	1	1	0	1	1	0	1	1	1
