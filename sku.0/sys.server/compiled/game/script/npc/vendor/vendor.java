@@ -13,7 +13,7 @@ public class vendor extends script.base_script
     public static final String OBJECT_FOR_SALE_DEFAULT_SCRIPT = "npc.vendor.object_for_sale";
     public static final String OBJECT_FOR_SALE_CASH_COST = "item.object_for_sale.cash_cost";
     public static final String OBJECT_FOR_SALE_TOKEN_COST = "item.object_for_sale.token_cost";
-    public static final String OBJECT_FOR_SALE_LIMIT = "item.object_for_sale.limit";
+	public static final String OBJECT_FOR_SALE_LIMIT = "item.object_for_sale.limit";
     public static final String VENDOR_CONTAINER_LIST_OBJVAR = "item.vendor.container_list";
     public static final String VENDOR_TOKEN_TYPE = "item.token.type";
     public static final int IMPERIAL = 10;
@@ -32,12 +32,6 @@ public class vendor extends script.base_script
     {
         if (!hasObjVar(self, VENDOR_TABLE_OBJVAR))
         {
-            return SCRIPT_CONTINUE;
-        }
-        if (hasObjVar(self, VENDOR_CONTAINER_LIST_OBJVAR)) {
-            if (utils.checkConfigFlag("GameServer", "forceVendorItemRecreation")) {
-                handleCleanVendor(self);
-            }
             return SCRIPT_CONTINUE;
         }
         if (isDead(self))
