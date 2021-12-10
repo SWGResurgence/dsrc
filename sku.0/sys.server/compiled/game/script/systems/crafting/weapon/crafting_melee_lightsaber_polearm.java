@@ -25,6 +25,7 @@ public class crafting_melee_lightsaber_polearm extends script.systems.crafting.w
     };
     public static final String[] APPEARANCES = 
     {
+        "object/weapon/melee/pike/crafted_saber/sword_lightsaber_pike_gen6.iff",
         "object/weapon/melee/polearm/crafted_saber/shared_sword_lightsaber_polearm_s1.iff",
         "object/weapon/melee/polearm/crafted_saber/shared_sword_lightsaber_polearm_s2.iff"
     };

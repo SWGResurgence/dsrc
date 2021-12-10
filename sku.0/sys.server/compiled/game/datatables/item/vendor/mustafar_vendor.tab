@@ -2,6 +2,13 @@ item	token7	limit	note
 s	i	i[0]	c
 item_tcg_loot_reward_series7_deed_commando_bunker	5000		Deed: Commando Bunker
 item_tcg_loot_reward_series7_deed_vip_bunker	5000		Deed VIP Bunker
+item_schematic_ex_blaster_pistol_barrel	1000		Exceptional Blaster Pistol Barrel Schematic
+item_schematic_ex_blaster_rifle_barrel	1000		Exceptional Blaster Rifle Barrel Schematic
+item_schematic_ex_gas_cartridge	1000		Exceptional Gas Cartridge Schematic
+item_schematic_ex_projectile_pistol_barrel	1000		Exceptional Projectile Blaster Pistol Barrel Schematic
+item_schematic_ex_projectile_pistol_barrel	1000		Exceptional Projectile Blaster Rifle Barrel Schematic
+item_schematic_ex_vibro_blade_unit	1000		Exceptional Vibro Blade Unit Schematic
+item_schematic_ex_reinforcement_core	1000		Exceptional Weapon Reinforcement Core Schematic
 item_tcg_loot_reward_series6_build02_hk47_mustafar_diorama	300		HK47: Mustafar Diorama
 item_tcg_loot_reward_series5_mustafar_diorama	150		Mustafar Diorama
 item_tow_ring_armorsmith_04_01	50		Relic Armorsmith's Ring

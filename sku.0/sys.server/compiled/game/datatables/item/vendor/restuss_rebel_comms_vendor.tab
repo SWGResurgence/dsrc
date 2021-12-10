@@ -20,7 +20,7 @@ armor_mandalorian_rebel_white_bracer_r_04_01	500		White Mandalorian Mark III Rig
 armor_mandalorian_rebel_white_belt_04_01	300		White Mandalorian Mark III Belt
 armor_mandalorian_rebel_white_boots_04_01	300		White Mandalorian Mark III Boots
 armor_mandalorian_rebel_white_gloves_04_01	300		White Mandalorian Mark III Gloves
-item_restuss_schematic_saber_04_01	1000		Jinsu Razor Lightsaber Schematic
+item_restuss_schematic_saber_04_01	150		Jinsu Razor Lightsaber Schematic
 weapon_mandalorian_sword_04_01	500		Templar Sword
 weapon_mandalorian_pistol_04_01	500		M-XII Pistol
 weapon_mandalorian_carbine_04_01	500		M-XIII Carbine
@@ -30,3 +30,4 @@ weapon_rebel_sword_04_01	500		Nova Edge Sword
 weapon_rebel_pistol_04_01	500		Dead Bolt Pistol
 weapon_rebel_rifle_04_01	500		Reaper Sniper Rifle
 weapon_rebel_heavy_04_01	500		Frag Storm Heavy Shotgun
+weapon_heavy_cr2_04_01	15000		CR-2 Blast Cannon

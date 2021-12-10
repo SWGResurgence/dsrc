@@ -133,4 +133,5 @@ object/tangible/gcw/base_rewards/shared_military_actionpack.iff		healItem
 object/tangible/faction_perk/faction_base_item/shared_mine_disarm_kit.iff		mine_disarm		
 object/weapon/ranged/heavy/shared_heavy_carbonite_rifle.iff	fireIceGun			0
 object/weapon/ranged/heavy/shared_heavy_cr1_blast_cannon.iff	fireCr1BlastCannon			0
+object/weapon/ranged/heavy/shared_heavy_cr2_blast_cannon.iff	fireCr2BlastCannon			0
 object/weapon/ranged/heavy/shared_heavy_pulse_cannon.iff	firePulseCannon			0

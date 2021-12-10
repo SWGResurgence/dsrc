@@ -79,6 +79,7 @@ weapon_appearance_heavy_acid_beam	object/weapon/ranged/heavy/heavy_acid_beam.iff
 weapon_appearance_heavy_avatar_acid_beam	object/weapon/ranged/heavy/heavy_avatar_acid_beam.iff		
 weapon_appearance_heavy_carbonite_rifle	object/weapon/ranged/heavy/heavy_carbonite_rifle.iff		
 weapon_appearance_heavy_cr1_pvp	object/weapon/ranged/heavy/heavy_cr1_blast_cannon.iff		-50
+weapon_appearance_heavy_cr2_pvp	object/weapon/ranged/heavy/heavy_cr2_blast_cannon.iff		-75
 weapon_appearance_heavy_lava_cannon	object/weapon/ranged/heavy/som_lava_cannon.iff		
 weapon_appearance_heavy_lightning_beam	object/weapon/ranged/heavy/heavy_lightning_beam.iff	profession_wheel	
 weapon_appearance_heavy_mandalorian	object/weapon/ranged/heavy/heavy_mandalorian.iff		

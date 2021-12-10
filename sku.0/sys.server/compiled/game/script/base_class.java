@@ -649,6 +649,7 @@ public class base_class
     public static final int GOT_weapon_melee_1h                    = ++private_GOT_counter;
     public static final int GOT_weapon_melee_2h                    = ++private_GOT_counter;
     public static final int GOT_weapon_melee_polearm               = ++private_GOT_counter;
+    public static final int GOT_weapon_melee_pike                  = ++private_GOT_counter;
     public static final int GOT_weapon_ranged_pistol               = ++private_GOT_counter;
     public static final int GOT_weapon_ranged_carbine              = ++private_GOT_counter;
     public static final int GOT_weapon_ranged_rifle                = ++private_GOT_counter;

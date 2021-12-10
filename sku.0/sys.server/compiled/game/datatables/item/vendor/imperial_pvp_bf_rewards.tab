@@ -11,7 +11,8 @@ armor_galactic_marine_gloves		60
 armor_galactic_marine_helmet		60			
 armor_galactic_marine_leggings		60			
 weapon_carbine_ngant_zarvel_04_01		100			
-weapon_heavy_cr1_04_01		100			
+weapon_heavy_cr1_04_01		75			
+weapon_heavy_cr2_04_01		125			
 weapon_magna_guard_polearm_04_01		100			
 weapon_westar_pistol_04_01		100			
 weapon_westar_rifle_04_01		100			
