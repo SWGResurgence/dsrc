@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.Vector;
 
 public class combat_actions extends script.systems.combat.combat_base {
+
+    public combat_actions() {
+    }
     public static String DEFAULT_EGG = "object/tangible/gravestone/gravestone05.tpf";
     public static final String COMBAT_TABLE = "datatables/combat/combat_data.iff";
     public static final float DAMAGE_STRENGTH_CUTOFF = 0.5f;
@@ -3635,6 +3638,10 @@ public class combat_actions extends script.systems.combat.combat_base {
     }
 
     public int of_del_ae_dm_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
+        if (getTopMostContainer(self) != self) {
+            sendSystemMessage(self, new string_id("spam", "cant_do_indoors"));
+            return SCRIPT_OVERRIDE;
+        }
         if (!combatStandardAction("of_del_ae_dm_1", self, target, params, "", "")) {
             return SCRIPT_OVERRIDE;
         }
@@ -3645,10 +3652,14 @@ public class combat_actions extends script.systems.combat.combat_base {
     }
 
     public int of_del_ae_dm_2(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
+        if (getTopMostContainer(self) != self) {
+            sendSystemMessage(self, new string_id("spam", "cant_do_indoors"));
+            return SCRIPT_OVERRIDE;
+        }
         if (!combatStandardAction("of_del_ae_dm_2", self, target, params, "", "")) {
             return SCRIPT_OVERRIDE;
         }
-        playClientEffectLoc(self, "clienteffect/combat_pt_" + (getTopMostContainer(self) == self ? "aerialstrike" : "electricalfield") + ".cef", getLocation(target), 0);
+        playClientEffectLoc(self, "clienteffect/combat_pt_aerialstrike.cef", getLocation(target), 0);
         if (successfulFastAttack(self, "of_aoe")) {
             setCommandTimerValue(self, TIMER_COOLDOWN, 0.0f);
         }
@@ -3656,10 +3667,14 @@ public class combat_actions extends script.systems.combat.combat_base {
     }
 
     public int of_del_ae_dm_3(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
+        if (getTopMostContainer(self) != self) {
+            sendSystemMessage(self, new string_id("spam", "cant_do_indoors"));
+            return SCRIPT_OVERRIDE;
+        }
         if (!combatStandardAction("of_del_ae_dm_3", self, target, params, "", "")) {
             return SCRIPT_OVERRIDE;
         }
-        playClientEffectLoc(self, "clienteffect/combat_pt_orbitalstrike" + (getTopMostContainer(self) == self ? "" : "_low_pt") + ".cef", getLocation(target), 0);
+        playClientEffectLoc(self, "clienteffect/combat_pt_orbitalstrike.cef", getLocation(target), 0);
         if (successfulFastAttack(self, "of_aoe")) {
             setCommandTimerValue(self, TIMER_COOLDOWN, 0.0f);
         }
@@ -6158,7 +6173,7 @@ public class combat_actions extends script.systems.combat.combat_base {
         if (bounties != null && bounties.length > 0) {
             prose_package pp = new prose_package();
             pp.stringId = new string_id("bounty_hunter", "sm_bounty_amount_target_with_bounties");
-            prose.setTO(pp, Integer.toString(amount));
+            prose.setDI(pp, amount);
             sendSystemMessageProse(infoTarget, pp);
             for (obj_id bountyHunter : bounties) {
                 if (isIdValid(bountyHunter)) {
@@ -6171,7 +6186,7 @@ public class combat_actions extends script.systems.combat.combat_base {
         } else {
             prose_package pp = new prose_package();
             pp.stringId = new string_id("bounty_hunter", "sm_bounty_amount_target_no_bounties");
-            prose.setTO(pp, Integer.toString(amount));
+            prose.setDI(pp, amount);
             sendSystemMessageProse(infoTarget, pp);
             utils.setScriptVar(self, "bountyCheckFloodControl", getGameTime() + 60);
         }
@@ -11881,13 +11896,6 @@ public class combat_actions extends script.systems.combat.combat_base {
 
     public int fireCr1BlastCannon(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
         if (!combatStandardAction("fireCr1BlastCannon", self, target, params, "", "")) {
-            return SCRIPT_OVERRIDE;
-        }
-        return SCRIPT_CONTINUE;
-    }
-    
-    public int fireCr2BlastCannon(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
-        if (!combatStandardAction("fireCr2BlastCannon", self, target, params, "", "")) {
             return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;
