@@ -3150,7 +3150,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public int cmdOverrideActiveMonths(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    /*public int cmdOverrideActiveMonths(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!("true").equalsIgnoreCase(getConfigSetting("GameServer", "enableVeteranRewards")))
         {
@@ -3172,7 +3172,7 @@ public class cmd extends script.base_script
             }
             else
             {
-                //int days = months * veteran_deprecated.DAYS_PER_MONTH;
+                int days = months * veteran_deprecated.DAYS_PER_MONTH;
                 setObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN_TOTAL_TIME, days);
                 setObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN_ENTITLED_TIME, days);
                 setObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN_LOGIN_TIME, 0);
@@ -3182,7 +3182,7 @@ public class cmd extends script.base_script
             }
         }
         return SCRIPT_CONTINUE;
-    }
+    }*/
     public int parseMilestone(String params) throws InterruptedException
     {
         String milestone;
