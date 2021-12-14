@@ -6,4 +6,4 @@ objectName = "theme_park_wod/messages"  "pro_ns_herb_storage_n"
 detailedDescription = "theme_park_wod/messages"  "pro_ns_herb_storage_d"
 
 appearanceFilename = "appearance/edb_con_tato_basket_s01.apt"
-clientDataFile = "clientdata/item/client_shared_item_gem_red_s01.cdf"
+clientDataFile = "clientdata/item/client_shared_strong_red_light.cdf"
