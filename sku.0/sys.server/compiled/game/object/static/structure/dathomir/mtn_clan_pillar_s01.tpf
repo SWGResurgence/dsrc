@@ -6,7 +6,6 @@
 
 @class object_template 4
 
-
 sharedTemplate = "object/static/structure/dathomir/shared_mtn_clan_pillar_s01.iff"
 
 updateRanges[UR_far] = 256
