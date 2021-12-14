@@ -23,5 +23,4 @@
 
 arrangementDescriptorFilename = "abstract/slot/arrangement/wearables/hold_both.iff"
 
-gameObjectType = GOT_weapon_melee_pike
-
+gameObjectType = GOT_weapon_melee_polearm
