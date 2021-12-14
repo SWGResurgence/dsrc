@@ -3,7 +3,6 @@ package script.gm;
 import script.*;
 import script.library.*;
 
-import java.util.Arrays;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -12,8 +11,6 @@ public class cmd extends script.base_script
     public cmd()
     {
     }
-    private static final boolean VETERAN_REWARDS_ENABLED = utils.checkConfigFlag("GameServer", "enableVeteranRewards");
-
     public int cmdGetPlayerId(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (params == null || params.equalsIgnoreCase(""))
@@ -286,25 +283,9 @@ public class cmd extends script.base_script
     }
     public int cmdKill(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        // If you're in space, kill the space ship you're targeting
-        if(isSpaceScene()) {
-            target = getLookAtTarget(self);
-            if(!isIdValid(target)) {
-                sendSystemMessageTestingOnly(self, "/kill: Your target for /kill was not valid.");
-                return SCRIPT_CONTINUE;
-            }
-            if(isPlayer(target)) {
-                sendSystemMessageTestingOnly(self, "/kill: You cannot use /kill on a player controlled ship. Use /killPlayer.");
-                return SCRIPT_CONTINUE;
-            }
-            messageTo(target, "megaDamage", null, 0f, false);
-            return SCRIPT_CONTINUE;
-        }
-
-        // If you're on the ground, do damage to the target to kill it (creature or static like a barricade or turret)
-        if (!isIdValid(target))
+        if (!isIdValid(target) || !isMob(target))
         {
-            sendSystemMessageTestingOnly(self, "/kill: The target specified was invalid.");
+            sendSystemMessageTestingOnly(self, "/kill: you must have a valid creature target to use this command");
             return SCRIPT_CONTINUE;
         }
         if (params.contains(gm.KEYWORD_TARGET))
@@ -324,7 +305,7 @@ public class cmd extends script.base_script
         {
             if (!isIncapacitated(target))
             {
-                damage(target, 1, 0, 999999999);
+                setPosture(target, POSTURE_INCAPACITATED);
             }
         }
         return SCRIPT_CONTINUE;
@@ -684,48 +665,74 @@ public class cmd extends script.base_script
     }
     public int cmdSetRank(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        int currentRank = pvpGetCurrentGcwRank(target);
-        int faction = pvpGetAlignedFaction(target);
-
-        if (params.contains(gm.KEYWORD_TARGET))
+        if (utils.hasScriptVar(self, "setRank.pid"))
         {
-            params = gm.removeKeyword(params, gm.KEYWORD_TARGET);
+            int oldpid = utils.getIntScriptVar(self, "setRank.pid");
+            sui.closeSUI(self, oldpid);
+            utils.removeScriptVarTree(self, "setRank");
         }
+        dictionary d = gm.parseTarget(params, target, "SETRANK");
+        if (d == null)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        else if (d.isEmpty())
+        {
+        }
+        else
+        {
+            params = d.getString("params");
+            obj_id oid = d.getObjId("oid");
+            if (isIdValid(oid))
+            {
+                target = oid;
+            }
+            else
+            {
+                target = self;
+            }
+        }
+        if (!isIdValid(target) || !isPlayer(target))
+        {
+            target = self;
+        }
+        String faction = factions.getFaction(target);
         if (params == null || params.equalsIgnoreCase(""))
         {
-            sendSystemMessageTestingOnly(self, "Syntax: /setRank -target <1 to 12> (e.g. 1 is Private, 12 is General)");
+            int rank = pvpGetCurrentGcwRank(target);
+            String title = "Set Player Rank";
+            String prompt = "Select the desired rank to set the player to.\n\n";
+            prompt += "Target = (" + target + ") " + getName(target) + "\n";
+            prompt += "Current Rank = (" + rank + ") " + getString(new string_id("faction_recruiter", factions.getRankName(rank, faction)));
+            Vector entries = new Vector();
+            entries.setSize(0);
+            for (int i = 0; i <= factions.MAXIMUM_RANK; i++)
+            {
+                entries = utils.addElement(entries, "(" + i + ") " + getString(new string_id("faction_recruiter", factions.getRankName(i, faction))));
+            }
+            int pid = sui.listbox(self, self, prompt, sui.OK_CANCEL, title, entries, "handleSetRankSelection");
+            if (pid > -1)
+            {
+                utils.setScriptVar(self, "setRank.pid", pid);
+                utils.setScriptVar(self, "setRank.target", target);
+                gm.attachHandlerScript(self);
+            }
+        }
+        int newrank = utils.stringToInt(params);
+        if (newrank < 0 || newrank > factions.MAXIMUM_RANK)
+        {
+            sendSystemMessageTestingOnly(self, "/setRank: unable to parse rank. Please choose a rank between 0 & " + factions.MAXIMUM_RANK);
             return SCRIPT_CONTINUE;
         }
-        StringTokenizer st = new StringTokenizer(params);
-        String tempGoalRank = st.nextToken();
-        int goalRank = Integer.parseInt(tempGoalRank);
-
-        if (goalRank < 1 || goalRank > 12) {
-            sendSystemMessageTestingOnly(self, "Rank must be an integer between 1 (Private) and 12 (General).");
-            return SCRIPT_CONTINUE;
+        if (factions.setRank(target, newrank))
+        {
+            int urank = pvpGetCurrentGcwRank(target);
+            sendSystemMessageTestingOnly(self, "(" + target + ") " + getName(target) + "'s rank updated to (" + urank + ") " + getString(new string_id("faction_recruiter", factions.getRankName(urank, faction))));
         }
-        if (currentRank == goalRank) {
-            sendSystemMessageTestingOnly(self, "The desired rank you specified is already the current rank of "+getPlayerName(target));
-            return SCRIPT_CONTINUE;
+        else
+        {
+            sendSystemMessageTestingOnly(self, "The system was unable to update (" + target + ") " + getName(target) + "'s rank updated to (" + newrank + ") " + getString(new string_id("faction_recruiter", factions.getRankName(newrank, faction))));
         }
-        if (faction == 0) {
-            sendSystemMessageTestingOnly(self, getPlayerName(target)+" is currently neutral and not aligned with a faction so you cannot set their rank.");
-            return SCRIPT_CONTINUE;
-        }
-
-        int neededRankChange = goalRank - currentRank;
-        if (neededRankChange > 0) {
-            do {
-                gcw.increaseGcwRatingToNextRank(target);
-                currentRank = pvpGetCurrentGcwRank(target);
-            } while (currentRank != goalRank);
-        } else if (neededRankChange < 0) {
-            do {
-                gcw.decreaseGcwRatingToPreviousRank(target);
-                currentRank = pvpGetCurrentGcwRank(target);
-            } while (currentRank != goalRank);
-        }
-        sendSystemMessageTestingOnly(self, "Successfully changed the rank of "+getPlayerName(target)+ "("+target+").");
         return SCRIPT_CONTINUE;
     }
     public int cmdGrantSkill(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
@@ -3059,15 +3066,11 @@ public class cmd extends script.base_script
     }
     public int cmdHasVeteranReward(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if(!isGod(self)) {
-            return SCRIPT_CONTINUE;
-        }
-        if (!VETERAN_REWARDS_ENABLED)
+        if (!("true").equalsIgnoreCase(getConfigSetting("GameServer", "enableVeteranRewards")))
         {
-            sendSystemMessageTestingOnly(self, "Veteran rewards are currently disabled.");
             return SCRIPT_CONTINUE;
         }
-        if (veteran_deprecated.checkVeteranTarget(target))
+        if (isGod(self) && veteran_deprecated.checkVeteranTarget(target))
         {
             if (params == null || params.length() == 0)
             {
@@ -3095,15 +3098,11 @@ public class cmd extends script.base_script
     }
     public int cmdSetVeteranReward(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if(!isGod(self)) {
-            return SCRIPT_CONTINUE;
-        }
-        if (!VETERAN_REWARDS_ENABLED)
+        if (!("true").equalsIgnoreCase(getConfigSetting("GameServer", "enableVeteranRewards")))
         {
-            sendSystemMessageTestingOnly(self, "Veteran rewards are currently disabled.");
             return SCRIPT_CONTINUE;
         }
-        if (veteran_deprecated.checkVeteranTarget(target))
+        if (isGod(self) && veteran_deprecated.checkVeteranTarget(target))
         {
             if (params == null || params.length() == 0)
             {
@@ -3126,15 +3125,11 @@ public class cmd extends script.base_script
     }
     public int cmdClearVeteranReward(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if(!isGod(self)) {
-            return SCRIPT_CONTINUE;
-        }
-        if (!VETERAN_REWARDS_ENABLED)
+        if (!("true").equalsIgnoreCase(getConfigSetting("GameServer", "enableVeteranRewards")))
         {
-            sendSystemMessageTestingOnly(self, "Veteran rewards are currently disabled.");
             return SCRIPT_CONTINUE;
         }
-        if (veteran_deprecated.checkVeteranTarget(target))
+        if (isGod(self) && veteran_deprecated.checkVeteranTarget(target))
         {
             if (params == null || params.length() == 0)
             {
@@ -3157,14 +3152,12 @@ public class cmd extends script.base_script
     }
     public int cmdOverrideActiveMonths(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if(!isGod(self)) {
-            return SCRIPT_CONTINUE;
-        }
-        if (!VETERAN_REWARDS_ENABLED)
+        if (!("true").equalsIgnoreCase(getConfigSetting("GameServer", "enableVeteranRewards")))
         {
-            sendSystemMessageTestingOnly(self, "Veteran rewards are currently disabled.");
             return SCRIPT_CONTINUE;
         }
+        if (isGod(self))
+        {
             if (params == null || params.length() == 0)
             {
                 sendSystemMessageTestingOnly(self, "format: /overrideActiveMonths <months>");
@@ -3179,14 +3172,15 @@ public class cmd extends script.base_script
             }
             else
             {
-                /*int days = months * veteran_deprecated.DAYS_PER_MONTH;
+                //int days = months * veteran_deprecated.DAYS_PER_MONTH;
                 setObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN_TOTAL_TIME, days);
                 setObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN_ENTITLED_TIME, days);
                 setObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN_LOGIN_TIME, 0);
                 setObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN_ENTITLED_LOGIN_TIME, 0);
                 setObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE, days);
-                sendSystemMessage(self, veteran_deprecated.SID_OK);*/
+                sendSystemMessage(self, veteran_deprecated.SID_OK);
             }
+        }
         return SCRIPT_CONTINUE;
     }
     public int parseMilestone(String params) throws InterruptedException
@@ -3760,27 +3754,18 @@ public class cmd extends script.base_script
     }
     public int cmdNpeGotoMedicalBay(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if(!isGod(self)) {
-            return SCRIPT_CONTINUE;
-        }
         sendSystemMessageTestingOnly(self, "Sending you to a medical bay instance");
         sendPlayerToTutorial(self);
         return SCRIPT_CONTINUE;
     }
     public int cmdNpeGotoMilleniumFalcon(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if(!isGod(self)) {
-            return SCRIPT_CONTINUE;
-        }
         sendSystemMessageTestingOnly(self, "Sending you to a millenium falcon instance");
         npe.movePlayerFromHangarToFalcon(self);
         return SCRIPT_CONTINUE;
     }
     public int cmdNpeGotoTansariiStation(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if(!isGod(self)) {
-            return SCRIPT_CONTINUE;
-        }
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
         int instanceId = 0;
         if (st.hasMoreTokens())
@@ -3798,9 +3783,6 @@ public class cmd extends script.base_script
     }
     public int cmdNpeGotoStationGamma(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if(!isGod(self)) {
-            return SCRIPT_CONTINUE;
-        }
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
         int instanceId = 0;
         if (st.hasMoreTokens())
@@ -4005,7 +3987,6 @@ public class cmd extends script.base_script
                         instance.removePlayerFlagForInstance(target, flag);
                     }
                 }
-                removeObjVar(target, "mand.acknowledge");
                 sendSystemMessageTestingOnly(target, "You are no longer flagged for or overriding instance authorization.");
                 if(target != self) {
                     sendSystemMessageTestingOnly(self, "setInstanceAuthorized: You have removed flags and instance authorization for "+getPlayerName(target)+" ("+target+"). Use this command again to re-grant instance overrides.");
@@ -4019,7 +4000,6 @@ public class cmd extends script.base_script
                         instance.flagPlayerForInstance(target, flag);
                     }
                 }
-                setObjVar(target, "mand.acknowledge", 1);
                 sendSystemMessageTestingOnly(target, "You are now flagged for all instances and overriding instance authorization.");
                 if(target != self) {
                     sendSystemMessageTestingOnly(self, "setInstanceAuthorized: You have flagged "+getPlayerName(target)+" ("+target+") to access all instances and overrode their instance authorization. Use this command again to revert this override.");
@@ -4326,236 +4306,4 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-
-    // SWG Source Admin Command Additions (we nest them in here (e.g. /admin <subcommand> <params>)
-    public int cmdAdmin(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
-
-        if(!isGod(self)) {
-            return SCRIPT_CONTINUE;
-        }
-        StringTokenizer st = new StringTokenizer(params);
-        String command;
-        if(st.hasMoreTokens()) {
-            command = st.nextToken();
-        } else {
-            showAdminCmdSyntax(self);
-            return SCRIPT_CONTINUE;
-        }
-
-        if(command.equalsIgnoreCase("dumpPermsForCell")) {
-
-            obj_id oid;
-            if(!st.hasMoreTokens()) {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin dumpPermsForCell <oid>");
-                return SCRIPT_CONTINUE;
-            } else {
-                oid = obj_id.getObjId(Long.parseLong(st.nextToken()));
-            }
-            if (!isValidId(oid)) {
-                sendSystemMessageTestingOnly(self, "The object specified for dumpPermsForCell was not valid.");
-                return SCRIPT_CONTINUE;
-            }
-
-            String message = "Access Permissions for Cell "+oid+":\n\n" +
-                    "Cell is Public? "+permissionsIsPublic(oid) + "\n\n" +
-                    "Allowed List: \n" + Arrays.toString(permissionsGetAllowed(oid)) + "\n\n" +
-                    "Banned List: \n" + Arrays.toString(permissionsGetBanned(oid)) + "\n\n";
-
-            sui.msgbox(self, self, message, sui.OK_ONLY, "Cell Permissions", "noHandler");
-
-            return SCRIPT_CONTINUE;
-        }
-
-        else if(command.equalsIgnoreCase("getRotation")) {
-
-            obj_id oid;
-            if(!st.hasMoreTokens()) {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin getRotation <oid>");
-                return SCRIPT_CONTINUE;
-            } else {
-                oid = obj_id.getObjId(Long.parseLong(st.nextToken()));
-            }
-            if (!isValidId(oid)) {
-                sendSystemMessageTestingOnly(self, "The object specified for getRotation was not valid.");
-                return SCRIPT_CONTINUE;
-            }
-            float[] q = getQuaternion(oid);
-            sendConsoleMessage(self, "Rotation Information for Object \\#FFFF00"+oid+"\\#.");
-            sendConsoleMessage(self, "\\#FFFF00Template:\\#. "+getTemplateName(oid));
-            sendConsoleMessage(self, "\\#FFFF00Rotation:\\#. "+getFurnitureRotationDegree(oid));
-            sendConsoleMessage(self, "\\#FFFF00Quaternions:\\#. qW "+q[0]+" qX "+q[1]+" qY "+q[2]+" qZ "+q[3]);
-            return SCRIPT_CONTINUE;
-        }
-
-        else if (command.equalsIgnoreCase("getUsername")) {
-
-            if(!st.hasMoreTokens()) {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin getUsername <player first name OR object ID>");
-                return SCRIPT_CONTINUE;
-            } else {
-                String toParse = st.nextToken();
-                obj_id player;
-                if(toParse.matches(".*\\d.*")) {
-                    player = obj_id.getObjId(Long.parseLong(toParse));
-                } else
-                {
-                    player = getPlayerIdFromFirstName(toParse);
-                }
-                if (isIdValid(player) && isPlayer(player)) {
-                    sendSystemMessageTestingOnly(self, "The username for "+getPlayerName(player)+" ("+player+") is: "+getPlayerAccountUsername(player));
-                } else {
-                    sendSystemMessageTestingOnly(self, "getUsername: Error: The name or OID you provided is not valid or is not a player.");
-                    sendSystemMessageTestingOnly(self, "Syntax: /admin getUsername <player first name OR object ID>");
-                }
-                return SCRIPT_CONTINUE;
-            }
-        }
-
-        else if (command.equalsIgnoreCase("setWeather")) {
-
-            String weather;
-            if(st.hasMoreTokens()) {
-                weather = st.nextToken();
-            } else {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin setWeather <clear | mild | heavy | severe>");
-                return SCRIPT_CONTINUE;
-            }
-            switch (weather) {
-                case "clear":
-                    sendSystemMessageTestingOnly(self, "setWeather: Setting Weather to Clear... It will take a minute to appear...");
-                    setWeatherData(0, 0.01f, 0.01f);
-                    break;
-                case "mild":
-                    sendSystemMessageTestingOnly(self, "setWeather: Setting Weather to Mild... It will take a minute to appear...");
-                    setWeatherData(1, 0.02f, 0.02f);
-                    break;
-                case "heavy":
-                    sendSystemMessageTestingOnly(self, "setWeather: Setting Weather to Heavy... It will take a minute to appear...");
-                    setWeatherData(2, 0.52f, 0.52f);
-                    break;
-                case "severe":
-                    sendSystemMessageTestingOnly(self, "setWeather: Setting Weather to Severe... It will take a minute to appear...");
-                    setWeatherData(3, 0.95f, 0.95f);
-                    break;
-                default:
-                    sendSystemMessageTestingOnly(self, "Syntax: /admin setWeather <clear | mild | heavy | severe>");
-                    break;
-            }
-            return SCRIPT_CONTINUE;
-        }
-
-        else if (command.equalsIgnoreCase("startGcwSpaceBattle")) {
-
-            if(!st.hasMoreTokens()) {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin startGcwSpaceBattle <scene> <type>");
-                return SCRIPT_CONTINUE;
-            }
-            else {
-                String scene = st.nextToken();
-                String[] allowedScenes = {"tatooine", "dantooine", "lok", "naboo", "corellia"};
-                if(!Arrays.asList(allowedScenes).contains(scene)) {
-                    sendSystemMessageTestingOnly(self, "Error: The scene you specified was not valid. Valid scenes are: "+ Arrays.toString(allowedScenes));
-                    return SCRIPT_CONTINUE;
-                } else {
-                    if(!st.hasMoreTokens()) {
-                        sendSystemMessageTestingOnly(self, "Syntax: /admin startGcwSpaceBattle <scene> <type>");
-                        return SCRIPT_CONTINUE;
-                    }
-                    String type = st.nextToken();
-                    if(!type.equalsIgnoreCase("pvp") && !type.equalsIgnoreCase("pve")) {
-                        sendSystemMessageTestingOnly(self, "Error: Battle type must be pvp or pve.");
-                        return SCRIPT_CONTINUE;
-                    }
-                    obj_id masterObject = getPlanetByName("tatooine");
-                    if(!hasObjVar(masterObject, "space_gcw.space_"+scene+".spawner")) {
-                        sendSystemMessageTestingOnly(self, "Error: Couldn't find the spawner for that scene. Have you started the space scene and visited it before so it can initialize?");
-                        return SCRIPT_CONTINUE;
-                    } else {
-                        obj_id spawner = getObjIdObjVar(masterObject, "space_gcw.space_"+scene+".spawner");
-                        dictionary d = new dictionary();
-                        d.put("battle_type", type);
-                        d.put("controller", masterObject);
-                        messageTo(spawner, "startSpaceGCWBattle", d, 0f, false);
-                        sendSystemMessageTestingOnly(self, "Successfully requested start for battle in the space zone of "+scene+" of type "+type);
-                        sendConsoleMessage(self, "\\#00FFFF ***startSpaceGcwBattle REMINDER: The battle will start after the configured prep time and will not begin if the space zone isn't currently active with at least 1 player in it so you may need to re-send the command when the zone is active.\\#.");
-                        return SCRIPT_CONTINUE;
-                    }
-                }
-            }
-        }
-
-        else {
-            showAdminCmdSyntax(self);
-        }
-
-        return SCRIPT_CONTINUE;
-    }
-
-    private static void showAdminCmdSyntax(obj_id self) throws InterruptedException {
-        sendSystemMessageTestingOnly(self, "Outputting nested commands and syntax of /admin to console");
-        sendConsoleMessage(self, "\\#ffff00 ============ Syntax: /admin commands ============ \\#.");
-        sendConsoleMessage(self, "\\#00ffff dumpPermsForCell \\#bfff00 <oid> \\#.");
-        sendConsoleMessage(self, "returns the public status and permissions list for the provided cell");
-        sendConsoleMessage(self, "\\#00ffff getRotation \\#bfff00 <oid> \\#.");
-        sendConsoleMessage(self, "returns the quaternions and rotation of an object");
-        sendConsoleMessage(self, "\\#00ffff getUsername \\#bfff00 <player first name OR oid> \\#.");
-        sendConsoleMessage(self, "returns the account username of the specified player");
-        sendConsoleMessage(self, "\\#00ffff setWeather \\#bfff00 <clear | mild | heavy | severe> \\#.");
-        sendConsoleMessage(self, "sets the weather for the current scene");
-        sendConsoleMessage(self, "\\#00ffff startGcwSpaceBattle \\#bfff00 <planet> <type> \\#.");
-        sendConsoleMessage(self, "sends a request to start the GCW2 space battle for the specified scene and type");
-        sendConsoleMessage(self, "\\#ffff00 ============ ============ ============ ============ \\#.");
-    }
-
-    public int cmdGenerateCraftedItem(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
-    {
-        if (!isGod(self))
-        {
-            return SCRIPT_CONTINUE;
-        }
-        LOG("LOG_CHANNEL", "player_gm.generateCraftedItem commandHandler called. IsGod check passed, and handler is executing.");
-        debugServerConsoleMsg(self, "************ Entered cmdGenerateCraftedItem.");
-        java.util.StringTokenizer st = new java.util.StringTokenizer(params);
-        if (st.countTokens() != 2)
-        {
-            sendSystemMessageTestingOnly(self, "Did not find the correct parameters needed to create an item.");
-            sendSystemMessageTestingOnly(self, "/generateCraftedItem command must at least have schematic template name and attribute percentage paramaters to function.");
-            sendSystemMessageTestingOnly(self, "Correct usage is /generateCraftedItem <schematic name> <quality-percentage(integer)>");
-            debugServerConsoleMsg(self, "************ Did not decode any string tokens from params passed into command handler. Unable to proceed with out at least schematic template name and attribute percentage.");
-            return SCRIPT_CONTINUE;
-        }
-        String template_string = ((st.nextToken())).toLowerCase();
-        String schematic = ("object/draft_schematic/" + template_string + ".iff");
-        String percentage_string = ((st.nextToken())).toLowerCase();
-        int attributePercentage = utils.stringToInt(percentage_string);
-        if (attributePercentage == -1)
-        {
-            LOG("LOG_CHANNEL", "You must specify a valid item attribute percentage.");
-            sendSystemMessageTestingOnly(self, "You must specify a valid item attribute percentage.");
-            return SCRIPT_CONTINUE;
-        }
-        obj_id creationTarget = null;
-        if (!isIdValid(target))
-        {
-            creationTarget = getLookAtTarget(self);
-            if (!isIdValid(creationTarget))
-            {
-                creationTarget = self;
-            }
-        }
-        else
-        {
-            creationTarget = target;
-        }
-        obj_id inventory = utils.getInventoryContainer(creationTarget);
-        if (inventory != null)
-        {
-            obj_id item = makeCraftedItem(schematic, attributePercentage, inventory);
-            sendSystemMessageTestingOnly(self, "Item created and placed into the inventory of " + getName(creationTarget));
-            CustomerServiceLog("generateCraftedItem", "Object obj_id " + item + " was created of type " + schematic + ". It was created in the inventory of object " + creationTarget + " which is named " + getName(creationTarget) + ".");
-            debugServerConsoleMsg(self, "Object obj_id " + item + " was created of type " + schematic + ". It was created in the inventory of object " + creationTarget + " which is named " + getName(creationTarget) + ".");
-        }
-        return SCRIPT_CONTINUE;
-    }
-
 }
