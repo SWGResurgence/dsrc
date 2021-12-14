@@ -1,3 +1,8 @@
+@base object/mobile/skeleton/shared_humanoid.iff
+
+@class creature_object_template 12
+
+gender = GE_female
 species = SP_bith
 
 @class tangible_object_template 3
