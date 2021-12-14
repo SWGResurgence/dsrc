@@ -283,7 +283,12 @@ public class trial extends script.base_script
     "item_pgc_token_02",								        //#25
     "item_pgc_token_03",								        //#26
 		"item_meatlump_lump_01_01",							    //#27
-		"item_nova_orion_space_resource_01_01"			//#28
+		"item_nova_orion_space_resource_01_01",			//#28
+    "item_wod_token_1",                         //#29
+    "item_wod_token_2",                         //#30
+    "item_wod_token_3",                         //#31
+    "item_wod_token_4",                         //#32
+    "item_wod_token_5"                          //#33
     };
     public static final int NUM_HEROIC_TOKEN_TYPES = HEROIC_TOKENS.length;
     public static final String KIMARU_HATE_LIST = "kimaru_hate_list";
