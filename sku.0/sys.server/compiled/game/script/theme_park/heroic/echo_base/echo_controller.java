@@ -232,11 +232,11 @@ public class echo_controller extends script.base_script
             int p1Tokens = 0;
             if (p1VictoryMajor)
             {
-                p1Tokens = 3;
+                p1Tokens = 6;
             }
             else if (p1VictoryMinor)
             {
-                p1Tokens = 1;
+                p1Tokens = 3;
             }
             int winCount = 0;
             boolean p2VictoryMinor = false;
@@ -285,11 +285,11 @@ public class echo_controller extends script.base_script
             int p2Tokens = 0;
             if (p2VictoryMajor)
             {
-                p2Tokens = 3;
+                p2Tokens = 6;
             }
             else if (p2VictoryMinor)
             {
-                p2Tokens = 1;
+                p2Tokens = 3;
             }
             int xport_minor = utils.getIntScriptVar(self, "quest_tracker.rebel.xport_minor");
             int xport_major = utils.getIntScriptVar(self, "quest_tracker.rebel.xport_major");
@@ -309,11 +309,11 @@ public class echo_controller extends script.base_script
             int p3Tokens = 0;
             if (p3VictoryMajor)
             {
-                p3Tokens = 3;
+                p3Tokens = 6;
             }
             else if (p3VictoryMinor)
             {
-                p3Tokens = 1;
+                p3Tokens = 3;
             }
             String message = " \\#FFFFFFNorth BattleField: (\\#FBEC5D" + p1Tokens + " \\#FFFFFFtokens)\n";
             if (!p1VictoryMajor && !p1VictoryMinor)
@@ -426,11 +426,11 @@ public class echo_controller extends script.base_script
             int p1Tokens = 0;
             if (p1VictoryMajor)
             {
-                p1Tokens = 3;
+                p1Tokens = 6;
             }
             else if (p1VictoryMinor)
             {
-                p1Tokens = 1;
+                p1Tokens = 3;
             }
             int winCount = 0;
             boolean p2VictoryMinor = false;
@@ -479,11 +479,11 @@ public class echo_controller extends script.base_script
             int p2Tokens = 0;
             if (p2VictoryMajor)
             {
-                p2Tokens = 3;
+                p2Tokens = 6;
             }
             else if (p2VictoryMinor)
             {
-                p2Tokens = 1;
+                p2Tokens = 3;
             }
             int xport_minor = utils.getIntScriptVar(self, "quest_tracker.imperial.p3_minor");
             int xport_major = utils.getIntScriptVar(self, "quest_tracker.imperial.p3_major");
@@ -503,11 +503,11 @@ public class echo_controller extends script.base_script
             int p3Tokens = 0;
             if (p3VictoryMajor)
             {
-                p3Tokens = 3;
+                p3Tokens = 6;
             }
             else if (p3VictoryMinor)
             {
-                p3Tokens = 1;
+                p3Tokens = 3;
             }
             String message = " \\#FFFFFFNorth BattleField: (\\#FBEC5D" + p1Tokens + " \\#FFFFFFtokens)\n";
             if (!p1VictoryMajor && !p1VictoryMinor)
