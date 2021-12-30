@@ -1005,29 +1005,29 @@ vr_familiar_health_3	vr_familiar			3	buffs.genericBuff	-1	constitution_modified	
 vr_familiar_health_4	vr_familiar			4	buffs.genericBuff	-1	constitution_modified	80	stamina_modified	80	agility_modified	80		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 vr_familiar_health_5	vr_familiar			5	buffs.genericBuff	-1	constitution_modified	85	stamina_modified	85	agility_modified	85		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 vr_familiar_health_6	vr_familiar			6	buffs.genericBuff	-1	constitution_modified	90	stamina_modified	90	agility_modified	90	expertise_healing_all	1	expertise_action_all	1	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1vr_familiar_accuracy_1	vr_familiar			1	buffs.genericBuff	-1	precision_modified	65	strength_modified	65		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_2	vr_familiar			2	buffs.genericBuff	-1	precision_modified	70	strength_modified	70		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_3	vr_familiar			3	buffs.genericBuff	-1	precision_modified	75	strength_modified	75		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_4	vr_familiar			4	buffs.genericBuff	-1	precision_modified	80	strength_modified	80		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_5	vr_familiar			5	buffs.genericBuff	-1	precision_modified	85	strength_modified	85		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_6	vr_familiar			6	buffs.genericBuff	-1	precision_modified	90	strength_modified	90	expertise_block_chance	1	combat_block_value	25	expertise_action_all	1	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_7	vr_familiar			7	buffs.genericBuff	-1	precision_modified	95	strength_modified	95	expertise_block_chance	5	combat_block_value	50	expertise_action_all	5	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_8	vr_familiar			8	buffs.genericBuff	-1	precision_modified	100	strength_modified	100	expertise_block_chance	10	combat_block_value	100	expertise_action_all	15	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_1	vr_familiar			1	buffs.genericBuff	-1	constitution_modified	65	stamina_modified	65	agility_modified	65		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_2	vr_familiar			2	buffs.genericBuff	-1	constitution_modified	70	stamina_modified	70	agility_modified	70		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_3	vr_familiar			3	buffs.genericBuff	-1	constitution_modified	75	stamina_modified	75	agility_modified	75		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_4	vr_familiar			4	buffs.genericBuff	-1	constitution_modified	80	stamina_modified	80	agility_modified	80		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_5	vr_familiar			5	buffs.genericBuff	-1	constitution_modified	85	stamina_modified	85	agility_modified	85		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_6	vr_familiar			6	buffs.genericBuff	-1	constitution_modified	90	stamina_modified	90	agility_modified	90	expertise_healing_all	1	expertise_action_all	1	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_7	vr_familiar			7	buffs.genericBuff	-1	constitution_modified	95	stamina_modified	95	agility_modified	95	expertise_healing_all	5	expertise_action_all	5	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_8	vr_familiar			8	buffs.genericBuff	-1	constitution_modified	100	stamina_modified	100	agility_modified	100	expertise_healing_all	25	expertise_action_all	15	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_1	vr_familiar			1	buffs.genericBuff	-1	agility_modified	65	constitution_modified	65	luck_modified	65		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_2	vr_familiar			2	buffs.genericBuff	-1	agility_modified	70	constitution_modified	70	luck_modified	70		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_3	vr_familiar			3	buffs.genericBuff	-1	agility_modified	75	constitution_modified	75	luck_modified	75		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_4	vr_familiar			4	buffs.genericBuff	-1	agility_modified	80	constitution_modified	80	luck_modified	80		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_5	vr_familiar			5	buffs.genericBuff	-1	agility_modified	85	constitution_modified	85	luck_modified	85		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_6	vr_familiar			6	buffs.genericBuff	-1	agility_modified	90	constitution_modified	90	luck_modified	90	expertise_critical_niche_all	1	expertise_action_all	1	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_7	vr_familiar			7	buffs.genericBuff	-1	agility_modified	95	constitution_modified	95	luck_modified	95	expertise_critical_niche_all	5	expertise_action_all	5	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_8	vr_familiar			8	buffs.genericBuff	-1	agility_modified	100	constitution_modified	100	luck_modified	100	expertise_critical_niche_all	25	expertise_action_all	15	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_accuracy_2	vr_familiar			2	buffs.genericBuff	-1	precision_modified	70	strength_modified	70		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_accuracy_3	vr_familiar			3	buffs.genericBuff	-1	precision_modified	75	strength_modified	75		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_accuracy_4	vr_familiar			4	buffs.genericBuff	-1	precision_modified	80	strength_modified	80		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_accuracy_5	vr_familiar			5	buffs.genericBuff	-1	precision_modified	85	strength_modified	85		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_accuracy_6	vr_familiar			6	buffs.genericBuff	-1	precision_modified	90	strength_modified	90	expertise_block_chance	1	combat_block_value	25	expertise_action_all	1	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_accuracy_7	vr_familiar			7	buffs.genericBuff	-1	precision_modified	95	strength_modified	95	expertise_block_chance	5	combat_block_value	50	expertise_action_all	5	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_accuracy_8	vr_familiar			8	buffs.genericBuff	-1	precision_modified	100	strength_modified	100	expertise_block_chance	10	combat_block_value	100	expertise_action_all	15	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_health_1	vr_familiar			1	buffs.genericBuff	-1	constitution_modified	65	stamina_modified	65	agility_modified	65		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_health_2	vr_familiar			2	buffs.genericBuff	-1	constitution_modified	70	stamina_modified	70	agility_modified	70		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_health_3	vr_familiar			3	buffs.genericBuff	-1	constitution_modified	75	stamina_modified	75	agility_modified	75		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_health_4	vr_familiar			4	buffs.genericBuff	-1	constitution_modified	80	stamina_modified	80	agility_modified	80		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_health_5	vr_familiar			5	buffs.genericBuff	-1	constitution_modified	85	stamina_modified	85	agility_modified	85		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_health_6	vr_familiar			6	buffs.genericBuff	-1	constitution_modified	90	stamina_modified	90	agility_modified	90	expertise_healing_all	1	expertise_action_all	1	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_health_7	vr_familiar			7	buffs.genericBuff	-1	constitution_modified	95	stamina_modified	95	agility_modified	95	expertise_healing_all	5	expertise_action_all	5	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_health_8	vr_familiar			8	buffs.genericBuff	-1	constitution_modified	100	stamina_modified	100	agility_modified	100	expertise_healing_all	25	expertise_action_all	15	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_defense_1	vr_familiar			1	buffs.genericBuff	-1	agility_modified	65	constitution_modified	65	luck_modified	65		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_defense_2	vr_familiar			2	buffs.genericBuff	-1	agility_modified	70	constitution_modified	70	luck_modified	70		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_defense_3	vr_familiar			3	buffs.genericBuff	-1	agility_modified	75	constitution_modified	75	luck_modified	75		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_defense_4	vr_familiar			4	buffs.genericBuff	-1	agility_modified	80	constitution_modified	80	luck_modified	80		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_defense_5	vr_familiar			5	buffs.genericBuff	-1	agility_modified	85	constitution_modified	85	luck_modified	85		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_defense_6	vr_familiar			6	buffs.genericBuff	-1	agility_modified	90	constitution_modified	90	luck_modified	90	expertise_critical_niche_all	1	expertise_action_all	1	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_defense_7	vr_familiar			7	buffs.genericBuff	-1	agility_modified	95	constitution_modified	95	luck_modified	95	expertise_critical_niche_all	5	expertise_action_all	5	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
++vr_familiar_defense_8	vr_familiar			8	buffs.genericBuff	-1	agility_modified	100	constitution_modified	100	luck_modified	100	expertise_critical_niche_all	25	expertise_action_all	15	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 vr_familiar_health_7	vr_familiar			7	buffs.genericBuff	-1	constitution_modified	95	stamina_modified	95	agility_modified	95	expertise_healing_all	5	expertise_action_all	5	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 vr_familiar_health_8	vr_familiar			8	buffs.genericBuff	-1	constitution_modified	100	stamina_modified	100	agility_modified	100	expertise_healing_all	25	expertise_action_all	15	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 vr_familiar_defense_1	vr_familiar			1	buffs.genericBuff	-1	agility_modified	65	constitution_modified	65	luck_modified	65		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
