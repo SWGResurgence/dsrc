@@ -11,4 +11,4 @@ detailedDescription = "item_d"  "lifeday_tree"
 
 appearanceFilename = "appearance/poi_kash_mystic_tree_healthy.apt"
 
-clientDataFile = "clientdata/storyteller/lifeday_tree_07.cdf"
+clientDataFile = "clientdata/storyteller/lifeday_tree_20.cdf"

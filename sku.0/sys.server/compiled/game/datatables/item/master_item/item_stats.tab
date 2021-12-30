@@ -3902,7 +3902,7 @@ item_event_lifeday_gcw_rebel_disk			string:faction=rebel,int:collection.gcw_poin
 item_event_lifeday_gcw_imperial_disk			string:faction=imperial,int:collection.gcw_point_value=50								
 item_event_lifeday_decorated_tree											
 item_event_lifeday_tree											
-item_event_lifeday_present_pile											
+item_event_lifeday_present_pile index_color_1=3,index_color_2=7											
 item_event_lifeday_stap_speeder			string:vehicle_attribs.object_ref=stap_speeder_gift,float:hit_points=10000								
 item_vet_66_month_jedi_temple											
 item_vet_66_month_jedi_temple_burning											
@@ -4827,3 +4827,15 @@ item_schematic_ex_projectile_rifle_barrel			"string:loot_schematic.schematic=obj
 item_schematic_ex_reinforcement_core			"string:loot_schematic.schematic=object/draft_schematic/weapon/component/new_weapon_comp_reinforcement_core_exceptional.iff,string:loot_schematic.skill_req=class_munitions_phase4_master,int:loot_schematic.uses=3"								
 item_schematic_ex_vibro_blade_unit			"string:loot_schematic.schematic=object/draft_schematic/weapon/component/new_weapon_comp_blade_vibro_unit_exceptional.iff,string:loot_schematic.skill_req=class_munitions_phase4_master,int:loot_schematic.uses=3"								
 item_schematic_saber_pike_gen6_01_01			"string:loot_schematic.schematic=object/draft_schematic/weapon/lightsaber/lightsaber_pike_gen6.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_forcesensitive_phase4_master"								
+item_lifeday_10_figrin_dan_jacket				index_color_1=253,index_color_2=42							
+item_schematic_lifeday_figrin_dan_jacket			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_jacket_lifeday_figrin_dan.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_lifeday_wrapped_present_2019_01											
+item_lifeday_painting_matriarch											
+item_lifeday_painting_patriarch											
+item_lifeday_painting_kashyyyk											
+item_lifeday_orb											
+item_lifeday_wrapped_present_2019_02											
+item_schematic_lifeday_present_pile			string:loot_schematic.schematic=object/draft_schematic/furniture/furniture_lifeday_present_pile.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_kashyyyk_bar_counter			string:loot_schematic.schematic=object/draft_schematic/furniture/furniture_kash_bar.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase2_novice								
+item_schematic_kashyyyk_bar_table			string:loot_schematic.schematic=object/draft_schematic/furniture/furniture_kash_bar_table_sm_s01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase2_novice								
+item_schematic_kashyyyk_bar_shelves			string:loot_schematic.schematic=object/draft_schematic/furniture/furniture_kash_bar_shelf_s01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase2_novice

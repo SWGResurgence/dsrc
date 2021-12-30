@@ -18,12 +18,12 @@ public class lifeday_tree extends script.base_script
     private static final string_id GIFT_GRANTED = new string_id("spam", "gift_granted");
     private static final String GIFT_SELF = "item_lifeday_gift_self_01_0";
     private static final String GIFT_OTHER = "item_lifeday_gift_other_01_0";
-    private static final String LIFEDAY_BADGE = "lifeday_badge_11";
+    private static final String LIFEDAY_BADGE = "lifeday_badge_20";
     private static final string_id TREE_BADGE = new string_id("spam", "tree_badge");
 
     private String currentYearObjVar() throws InterruptedException
     {
-        return utils.XMAS_RECEIVED_IX_01;
+        return utils.XMAS_RECEIVED_XX_01;
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
