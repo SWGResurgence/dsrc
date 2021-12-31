@@ -17,7 +17,15 @@ public class vet_token_stipend extends script.base_script {
         obj_id tatooine = getPlanetByName("tatooine");
         String objVar = "vetToken_" + getPlayerStationId(player);
         if (!hasObjVar(tatooine, objVar)) {
-            if (!hasObjVar(tatooine, objVar) || (isGod(player))) {
+            /*if (!hasObjVar(tatooine, objVar) || (isGod(player))) {
+                if (item == menu_info_types.ITEM_USE) {
+                    sendSystemMessage(player, new string_id(STF_FILE, "opened_crate"));
+                    grantVetTokenStipend(self, player);
+                    return SCRIPT_CONTINUE;
+                }
+            }*/
+            
+            if (!hasObjVar(tatooine, objVar) {
                 if (item == menu_info_types.ITEM_USE) {
                     sendSystemMessage(player, new string_id(STF_FILE, "opened_crate"));
                     grantVetTokenStipend(self, player);
