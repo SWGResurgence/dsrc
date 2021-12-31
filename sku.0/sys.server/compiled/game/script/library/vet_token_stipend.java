@@ -38,8 +38,8 @@ public class vet_token_stipend extends script.base_script {
 
     public void grantVetTokenStipend(obj_id self, obj_id player) throws InterruptedException {
         obj_id pInv = utils.getInventoryContainer(player);
-        obj_id[] items = new obj_id[1];
-        items[1] = static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500);
+        obj_id[] items = new obj_id[0];
+        items[0] = static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500);
         showLootBox(player, items);
         setObjVar(getPlanetByName("tatooine"), "vetToken_" + getPlayerStationId(player), "true");
         destroyObject(self);
