@@ -320,9 +320,12 @@ public class valley_event_manager extends script.base_script
         for (obj_id player : players) {
             buff.applyBuff(player, "high_morale", 3600);
         }
-		dictionary dict = new dictionary();
+		
+    // HEROIC SYSTEM BEGIN \\
+    
+    dictionary dict = new dictionary();
         dict.put("tokenIndex", 7);
-        dict.put("tokenCount", 3);
+        dict.put("tokenCount", 6);
         utils.messageTo(players, "handleAwardtoken", dict, 0, false);
         obj_id group = getGroupObject(players[0]);
         int calendarTime = getCalendarTime();
@@ -330,10 +333,14 @@ public class valley_event_manager extends script.base_script
         CustomerServiceLog("instance-mustafar_trials_droid_army", "Forward Commander Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
         CustomerServiceLog("instance-mustafar_trials_droid_army", "Group (" + group + ") consists of: ");
         for (int i = 0; i < players.length; ++i) {
-            /*String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));*/
+            String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
+            CustomerServiceLog("instance-mustafar_trials_droid_army", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
         }
-		return SCRIPT_CONTINUE;
-	}
+        
+    // HEROIC SYSTEM END \\
+        
+        return SCRIPT_CONTINUE;
+    }
     public int loseTrial(obj_id self, dictionary params) throws InterruptedException
     {
         instance.closeInstance(self);
@@ -381,3 +388,4 @@ public class valley_event_manager extends script.base_script
         }
     }
 }
+    

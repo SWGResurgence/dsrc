@@ -262,7 +262,7 @@ public class trial extends script.base_script
     "item_heroic_token_exar_01_01",						  //#4
     "item_heroic_token_echo_base_01_01",				//#5
 		"item_heroic_token_marauder_01_01",					//#6
-		"item_mustafar_reward_token_01_01",					//#7
+		"item_heroic_token_mustafar_01_01",					//#7
 		"item_vet_reward_token_01_01",						  //#8
 		"item_token_duty_space_01_01",						  //#9
 		"item_battlefield_rebel_token",						  //#10

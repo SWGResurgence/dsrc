@@ -19,8 +19,6 @@
 @class object_template 5
 objectName = "item_n"  "default"
 detailedDescription = "item_d"  "default"
-appearanceFilename = "appearance/aurilia_token.apt"
+appearanceFilename = "appearance/mustafar_token.apt"
 
 gameObjectType = GOT_misc_item_usable
-
-clientDataFile = "clientdata/index/client_shared_index_1_10.cdf"

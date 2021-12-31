@@ -1,10 +1,7 @@
 package script.theme_park.dungeon.mustafar_trials.decrepit_droid_factory;
 
 import script.dictionary;
-import script.library.badge;
-import script.library.create;
-import script.library.trial;
-import script.library.utils;
+import script.library.*;
 import script.location;
 import script.obj_id;
 
@@ -114,18 +111,25 @@ public class decrepit_controller extends script.base_script {
         trial.sendCompletionSignal(self, trial.DECREPIT_WIN_SIGNAL);
         obj_id[] players = trial.getPlayersInDungeon(self);
         badge.grantBadge(players, "bdg_must_victory_ddf");
-		dictionary dict = new dictionary();
-		dict.put("tokenIndex", 7);
-		dict.put("tokenCount", 2);
-		utils.messageTo(players, "handleAwardtoken", dict, 0, false);
-		obj_id group = getGroupObject(players[0]);
-		int calendarTime = getCalendarTime();
+        
+        // HEROIC SYSTEM BEGIN
+        
+        dictionary dict = new dictionary();
+        dict.put("tokenIndex", 7);
+        dict.put("tokenCount", 4);
+        utils.messageTo(players, "handleAwardtoken", dict, 0, false);
+        obj_id group = getGroupObject(players[0]);
+        int calendarTime = getCalendarTime();
         String realTime = getCalendarTimeStringLocal(calendarTime);
         CustomerServiceLog("instance-mustafar_trials_decrepit_droid_factory", "Factory Guardian Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
         CustomerServiceLog("instance-mustafar_trials_decrepit_droid_factory", "Group (" + group + ") consists of: ");
-		for (int i = 0; i < players.length; ++i) {
-            /*String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));*/
+        for (int i = 0; i < players.length; ++i) {
+            String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
+            CustomerServiceLog("instance-mustafar_trials_decrepit_droid_factory", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
         }
+        
+        // HEROIC SYSTEM END
+        
         return SCRIPT_CONTINUE;
     }
     public void deactivateTrap(obj_id self) throws InterruptedException {

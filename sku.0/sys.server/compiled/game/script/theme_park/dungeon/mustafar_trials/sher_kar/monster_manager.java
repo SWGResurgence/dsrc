@@ -100,23 +100,29 @@ public static final boolean LOGGING = false;
 		utils.sendSystemMessagePob(self, trial.MONSTER_SK_DEFEATED);
 		obj_id[] players = trial.getPlayersInDungeon(self);
 		badge.grantBadge(players, "bdg_must_kill_sher_kar");
-		dictionary dict = new dictionary();
-		dict.put("tokenIndex", 7);
-		utils.messageTo(players, "handleAwardtoken", dict, 0, false);
-		obj_id group = getGroupObject(players[0]);
-		int calendarTime = getCalendarTime();
-		String realTime = getCalendarTimeStringLocal(calendarTime);
-		CustomerServiceLog("instance-mustafar_trials_sher_kar", "Sher Kar Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
+    
+    // HEROIC SYSTEM BEGIN \\
+    
+    dictionary dict = new dictionary();
+        dict.put("tokenIndex", 7);
+        dict.put("tokenCount", 2);
+        utils.messageTo(players, "handleAwardtoken", dict, 0, false);
+        obj_id group = getGroupObject(players[0]);
+        int calendarTime = getCalendarTime();
+        String realTime = getCalendarTimeStringLocal(calendarTime);
+        CustomerServiceLog("instance-mustafar_trials_sher_kar", "Sher Kar Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
         CustomerServiceLog("instance-mustafar_trials_sher_kar", "Group (" + group + ") consists of: ");
-		for (int i = 0; i < players.length; ++i) {
-			String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
+        for (int i = 0; i < players.length; ++i) {
+            String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
             CustomerServiceLog("instance-mustafar_trials_sher_kar", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
-		}
-		instance.setClock(self, 305);
-		return SCRIPT_CONTINUE;
-	}
-	
-	public void doLogging(String section, String message) throws InterruptedException {
+        }
+        
+    // HEROIC SYSTEM END \\
+    
+        instance.setClock(self, 305);
+        return SCRIPT_CONTINUE; 
+    }
+    public void doLogging(String section, String message) throws InterruptedException {
         if (LOGGING || trial.MONSTER_LOGGING) {
             LOG("doLogging/monster_manager/" + section, message);
         }

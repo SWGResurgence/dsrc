@@ -17,4 +17,4 @@
 @class tangible_object_template 2
 @class object_template 5
 
-sharedTemplate = "object/tangible/loot/misc/shared_mustafar_reward_token.iff"
+sharedTemplate = "object/tangible/loot/misc/shared_mustafar_token.iff"
