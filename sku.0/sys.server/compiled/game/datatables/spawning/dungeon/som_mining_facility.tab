@@ -79,6 +79,4 @@ object/tangible/npe/npe_node.iff		medium_room_01	-83.9	11.3	50.9		theme_park.dun
 som_mustafarian_junk		control_room_02	-90	22.7	-47.9	49	"conversation.som_mustafar_junk_dealer,npc.converse.junk_dealer"			
 object/tangible/item/som/communication_console.iff		conference_room	-140.5	19	-10.2					
 clone_droid		small_room_01	-104	10.8	126.6	-121
-mustafar_reward_vendor	Mustafar Rewards	landing_deck_room	-40	31.5	-112.9	-90	conversation.mustafar_reward_vendor				landing_deck_room				
-object/tangible/terminal/terminal_space.iff		landing_deck_room	-42.9	31.5	-122.5	0
-object/tangible/terminal/terminal_space.iff		landing_deck_room	-44.9	31.5	-122.5	0
+mustafar_token_vendor	Mustafar Rewards	landing_deck_room	-40	31.5	-112.9	-90	conversation.mustafar_reward_vendor				landing_deck_room				
