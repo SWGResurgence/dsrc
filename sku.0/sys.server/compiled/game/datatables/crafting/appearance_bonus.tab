@@ -311,3 +311,5 @@ weapon_core_ranged_standard	object/tangible/component/weapon/core/weapon_core_ra
 weapon_power_bit	object/tangible/component/weapon/new_weapon/power_bit.iff	profession_wheel
 weapon_appearance_rifle_deathtroopers	object/weapon/ranged/rifle/rifle_deathtroopers.iff	
 weapon_appearance_carbine_advanced_specops_bothan_carbine	object/weapon/ranged/carbine/carbine_advanced_specops_bothan_carbine.iff		
+weapon_appearance_pistol_old_republic_ion_relic	object/weapon/ranged/pistol/pistol_old_republic_ion_relic.iff	
+weapon_appearance_carbine_republic_advanced_sfor	object/weapon/ranged/carbine/carbine_republic_advanced_sfor.iff

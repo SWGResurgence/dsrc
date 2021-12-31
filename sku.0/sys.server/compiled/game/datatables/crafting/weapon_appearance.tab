@@ -2201,3 +2201,34 @@ weapon	component	new_weapon_comp_projectile_rifle_barrel_exceptional		systems.cr
 slot																																		resource	0	lining	steel_quadranium	65																												
 slot																																		resource	0	bore	iron_plumbum	32																												
 slot																																		resource	0	barrel_shroud	iron_axidite	18																												
+weapon	carbine	weapon_appearance_carbine_republic_advanced_sfor		systems.crafting.weapon.core.crafting_new_weapon_final	0	weapon	7	weapon_crafting		object/weapon/ranged/carbine/carbine_republic_advanced_sfor.iff	object/weapon/ranged/carbine/carbine_republic_advanced_sfor.iff	40	450	800	1100	0	0	0	0	0	0	energy	none	-1	-1	carbine	carbine	1	1	100	100		55							sys.server/compiled/game/object/draft_schematic/weapon/appearance/																							0	47	0	25
+
+slot																																		resource	0	frame_assembly	iron_axidite	100																												
+
+slot																																		resource	0	receiver_assembly	copper	45																												
+
+slot																																		resource	0	grip_assembly	petrochem_inert_polymer	28																												
+
+slot																																		template	0	barrel_rifle_blaster	object/tangible/component/weapon/blaster_rifle_barrel_base.iff	1	muzzle																											
+
+slot																																		template	0	weapon_core	object/tangible/component/weapon/core/weapon_core_ranged_base.iff	1																												
+
+slot																																		template	1	scope	object/tangible/component/weapon/scope_weapon_base.iff	1	scope																											
+
+slot																																		template	1	stock	object/tangible/component/weapon/stock_base.iff	1	stock																											
+
+weapon	pistol	weapon_appearance_pistol_old_republic_ion_relic		systems.crafting.weapon.core.crafting_new_weapon_final	0	weapon	7	weapon_crafting		object/weapon/ranged/pistol/pistol_old_republic_ion_relic.iff	object/weapon/ranged/pistol/pistol_old_republic_ion_relic.iff	40	450	800	1100	0	0	0	0	0	0	kinetic	none	-1	-1	pistol	pistol	1	1	100	100		38							sys.server/compiled/game/object/draft_schematic/weapon/appearance/																							0	62	0	40
+
+slot																																		resource	0	frame_assembly	steel_ditanium	85																												
+
+slot																																		resource	0	receiver_assembly	copper_platinite	40																												
+
+slot																																		resource	0	grip_assembly	petrochem_inert_polymer	28																												
+
+slot																																		template	0	barrel_pistol_projectile	object/tangible/component/weapon/projectile_pistol_barrel_base.iff	1	muzzle																											
+
+slot																																		template	0	weapon_core	object/tangible/component/weapon/core/weapon_core_ranged_base.iff	1																												
+
+slot																																		template	1	scope	object/tangible/component/weapon/scope_weapon_base.iff	1	scope																											
+
+slot																																		template	1	stock	object/tangible/component/weapon/stock_base.iff	1	stock																											

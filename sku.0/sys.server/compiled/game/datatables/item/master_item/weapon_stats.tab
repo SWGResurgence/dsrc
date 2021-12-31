@@ -328,3 +328,5 @@ weapon_2h_sword_maul_legendary	1	1000	900	1350	0	energy	acid	20	100	1	100	0	5		i
 weapon_stun_baton_legendary	1	1000	600	1300	0	energy	electric	75	100	1	100	0	5		int:wp.canBeDisMantled=1		lvl88	1100	1100
 weapon_carbine_advanced_spec_ops_bola_04_01	1	1000	300	600	0	energy		20	60	1	100	0	55		int:wp.canBeDisMantled=1			900	900
 weapon_carbine_spec_ops_bola_04_01	1	1000	350	650	0	energy		20	60	1	100	0	50		int:wp.canBeDisMantled=1			900	900
+weapon_carbine_advanced_sfor_04_01	1	1000	350	650	0	energy		20	60	1	100	0	50		int:wp.canBeDisMantled=1			900	900
+weapon_pistol_old_republic_ion_relic_04_01	1	1000	215	425	0	kinetic	heat	20	40	1	100	0	35		int:wp.canBeDisMantled=1			900	900
