@@ -270,7 +270,7 @@ public final class deltadictionary
 			for (int i1 : array) resizeableArray.add(i1);
 			return resizeableArray;
 		}
-		return null;
+		return new Vector();
 	}	// getIntArray()
 
 	/**
@@ -491,7 +491,7 @@ public final class deltadictionary
 		potentiallyDirty.add(key);
 		if (value != null)
 			return new Vector(Arrays.asList((location[])value));
-		return null;
+		return new Vector();
 	}
 
 	public region getRegion(Object key)
@@ -566,7 +566,7 @@ public final class deltadictionary
 		potentiallyDirty.add(key);
 		if (value != null)
 			return new Vector(Arrays.asList((String[])value));
-		return null;
+		return Vector();
 	}
 
 	/**
@@ -600,7 +600,7 @@ public final class deltadictionary
 		potentiallyDirty.add(key);
 		if (value != null)
 			return new Vector(Arrays.asList((obj_id[])value));
-		return null;
+		return new Vector();
 	}
 
 	/**
