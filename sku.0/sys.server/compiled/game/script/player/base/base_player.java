@@ -2070,7 +2070,7 @@ public class base_player extends script.base_script
         }
         dictionary racial_mods = null;
         String template = utils.getTemplateFilenameNoPath(self);
-        if (template != null && !template.equals(""))
+        if (template != null && !template.isEmpty())
         {
             if (template.endsWith(".iff"))
             {
@@ -2948,15 +2948,12 @@ public class base_player extends script.base_script
                 if (utils.hasScriptVar(planet, cloninglib.VAR_PLANET_CLONE_LOC))
                 {
                     Vector cloneList = cloninglib.getAvailableCloningFacilities(self);
-                    sendSystemMessageTestingOnly(self, "There are: " + cloneList.size() + " cloning facilities available.");
                     int playerFaction = factions.getFactionFlag(self);
                     obj_id tatooinePlanet = getPlanetByName("tatooine");
                     for (Object o : cloneList) {
                         dictionary cloneData = (dictionary) o;
                         obj_id facility = cloneData.getObjId("faciltyId");
-                        sendSystemMessageTestingOnly(self, "The facility obj_id is: " + facility);
                         String cloneName = cloneData.getString("cloneName");
-                        sendSystemMessageTestingOnly(self, "The facility name is: " + cloneName);
                         location cloneLoc = cloneData.getLocation("facilityLoc");
                         location spawnLoc = cloneData.getLocation("spawnLoc");
                         if (facility == bound && !isBindListed) {
