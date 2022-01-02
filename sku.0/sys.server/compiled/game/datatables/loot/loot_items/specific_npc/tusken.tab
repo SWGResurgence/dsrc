@@ -1,15 +1,16 @@
-tusken_low	tusken_medium	tusken_high
-s	s	s
-object/tangible/wearables/bandolier/bandolier_tusken_raider_s01.iff	object/tangible/wearables/bandolier/bandolier_tusken_raider_s02.iff	object/tangible/wearables/bandolier/bandolier_tusken_raider_s03.iff
-object/tangible/wearables/bandolier/bandolier_tusken_raider_s01.iff	object/tangible/wearables/bandolier/bandolier_tusken_raider_s02.iff	object/tangible/wearables/bandolier/bandolier_tusken_raider_s03.iff
-object/tangible/wearables/bandolier/bandolier_tusken_raider_s01.iff	object/tangible/wearables/bandolier/bandolier_tusken_raider_s02.iff	object/tangible/wearables/robe/robe_tusken_raider_s01.iff
-object/tangible/wearables/boots/boots_tusken_raider.iff	object/tangible/wearables/boots/boots_tusken_raider.iff	object/tangible/wearables/robe/robe_tusken_raider_s01.iff
-object/tangible/wearables/boots/boots_tusken_raider.iff	object/tangible/wearables/boots/boots_tusken_raider.iff	object/tangible/wearables/robe/robe_tusken_raider_s02.iff
-object/tangible/wearables/gloves/gloves_tusken_raider.iff	object/tangible/wearables/gloves/gloves_tusken_raider.iff	object/tangible/wearables/robe/robe_tusken_raider_s02.iff
-object/tangible/wearables/gloves/gloves_tusken_raider.iff	object/tangible/wearables/gloves/gloves_tusken_raider.iff	object/tangible/wearables/boots/boots_tusken_raider.iff
-object/tangible/wearables/helmet/helmet_tusken_raider_s01.iff	object/tangible/wearables/helmet/helmet_tusken_raider_s01.iff	object/tangible/wearables/helmet/helmet_tusken_raider_s01.iff
-object/tangible/component/clothing/clasp_heavy_duty.iff	object/tangible/wearables/helmet/helmet_tusken_raider_s02.iff	object/tangible/wearables/helmet/helmet_tusken_raider_s02.iff
-object/tangible/component/clothing/leather_heavy_duty.iff	object/tangible/component/clothing/clasp_heavy_duty.iff	object/tangible/wearables/gloves/gloves_tusken_raider.iff
-	object/tangible/component/clothing/leather_heavy_duty.iff	object/tangible/loot/loot_schematic/tanning_hide_s01_schematic.iff
-	object/tangible/wearables/robe/robe_tusken_raider_s01.iff	object/tangible/loot/loot_schematic/tanning_hide_s02_schematic.iff
-	object/tangible/wearables/robe/robe_tusken_raider_s02.iff	object/tangible/loot/loot_schematic/tatooine_tapestry_schematic.iff
+tusken_low	tusken_medium	tusken_high	tusken_isolationist
+s	s	s	s
+object/tangible/wearables/bandolier/bandolier_tusken_raider_s01.iff	object/tangible/wearables/bandolier/bandolier_tusken_raider_s02.iff	object/tangible/wearables/bandolier/bandolier_tusken_raider_s03.iff	item_tusken_isolationist_robe_01_01
+object/tangible/wearables/bandolier/bandolier_tusken_raider_s01.iff	object/tangible/wearables/bandolier/bandolier_tusken_raider_s02.iff	object/tangible/wearables/bandolier/bandolier_tusken_raider_s03.iff	item_tusken_isolationist_robe_01_02
+object/tangible/wearables/bandolier/bandolier_tusken_raider_s01.iff	object/tangible/wearables/bandolier/bandolier_tusken_raider_s02.iff	object/tangible/wearables/robe/robe_tusken_raider_s01.iff	item_tusken_isolationist_helmet_01_01
+object/tangible/wearables/boots/boots_tusken_raider.iff	object/tangible/wearables/boots/boots_tusken_raider.iff	object/tangible/wearables/robe/robe_tusken_raider_s01.iff	item_tusken_isolationist_boots_01_01
+object/tangible/wearables/boots/boots_tusken_raider.iff	object/tangible/wearables/boots/boots_tusken_raider.iff	object/tangible/wearables/robe/robe_tusken_raider_s02.iff	item_tusken_isolationist_gloves_01_01
+object/tangible/wearables/gloves/gloves_tusken_raider.iff	object/tangible/wearables/gloves/gloves_tusken_raider.iff	object/tangible/wearables/robe/robe_tusken_raider_s02.iff	item_tusken_isolationist_bandolier_01_03
+object/tangible/wearables/gloves/gloves_tusken_raider.iff	object/tangible/wearables/gloves/gloves_tusken_raider.iff	object/tangible/wearables/boots/boots_tusken_raider.iff	weapon_rifle_tusken_isolationist_02_01
+object/tangible/wearables/helmet/helmet_tusken_raider_s01.iff	object/tangible/wearables/helmet/helmet_tusken_raider_s01.iff	object/tangible/wearables/helmet/helmet_tusken_raider_s01.iff	weapon_carbine_tusken_isolationist_02_01
+object/tangible/component/clothing/clasp_heavy_duty.iff	object/tangible/wearables/helmet/helmet_tusken_raider_s02.iff	object/tangible/wearables/helmet/helmet_tusken_raider_s02.iff	weapon_2h_sword_tusken_isolationist_02_01
+object/tangible/component/clothing/leather_heavy_duty.iff	object/tangible/component/clothing/clasp_heavy_duty.iff	object/tangible/wearables/gloves/gloves_tusken_raider.iff	item_content_decorative_krayt_claw_01_01
+	object/tangible/component/clothing/leather_heavy_duty.iff	object/tangible/loot/loot_schematic/tanning_hide_s01_schematic.iff	item_lesser_krayt_pearl
+	object/tangible/wearables/robe/robe_tusken_raider_s01.iff	object/tangible/loot/loot_schematic/tanning_hide_s02_schematic.iff	object/tangible/loot/loot_schematic/tanning_hide_s01_schematic.iff
+	object/tangible/wearables/robe/robe_tusken_raider_s02.iff	object/tangible/loot/loot_schematic/tatooine_tapestry_schematic.iff	object/tangible/loot/loot_schematic/tanning_hide_s02_schematic.iff
+			object/tangible/loot/loot_schematic/tatooine_tapestry_schematic.iff

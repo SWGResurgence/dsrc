@@ -2232,3 +2232,24 @@ slot																																		template	0	weapon_core	object/tangible/com
 slot																																		template	1	scope	object/tangible/component/weapon/scope_weapon_base.iff	1	scope																											
 
 slot																																		template	1	stock	object/tangible/component/weapon/stock_base.iff	1	stock																											
+weapon	rifle	weapon_appearance_rifle_tusken_isolationist		systems.crafting.weapon.core.crafting_new_weapon_final	0	weapon	8	weapon_crafting		object/weapon/ranged/rifle/rifle_tusken_isolationist.iff	object/weapon/ranged/rifle/rifle_tusken_isolationist.iff	40	450	800	1100	0	0	0	0	0	0	kinetic	none	-1	-1	rifle	rifle	1	1	100	100		64							sys.server/compiled/game/object/draft_schematic/weapon/appearance/																							0	53	0	30
+slot																																		resource	0	frame_assembly	iron	120																												
+slot																																		resource	0	receiver_assembly	metal_nonferrous	50																												
+slot																																		resource	0	grip_assembly	petrochem_inert_polymer	38																												
+slot																																		template	0	barrel_rifle_projectile	object/tangible/component/weapon/projectile_rifle_barrel_base.iff	1	muzzle																											
+slot																																		template	0	weapon_core	object/tangible/component/weapon/core/weapon_core_ranged_base.iff	1																												
+slot																																		template	1	scope	object/tangible/component/weapon/scope_weapon_base.iff	1	scope																											
+slot																																		template	0	scope_enhancer	object/tangible/component/weapon/lesser_krayt_pearl.iff	1	muzzle																											
+slot																																		template	1	stock	object/tangible/component/weapon/stock_base.iff	1	stock																											
+weapon	carbine	weapon_appearance_carbine_tusken_slugthrower		systems.crafting.weapon.core.crafting_new_weapon_final	0	weapon	7	weapon_crafting		object/weapon/ranged/carbine/carbine_tusken_slugthrower.iff	object/weapon/ranged/carbine/carbine_tusken_slugthrower.iff	40	450	800	1100	0	0	0	0	0	0	kinetic	none	-1	-1	carbine	carbine	1	1	100	100		50							sys.server/compiled/game/object/draft_schematic/weapon/appearance/																							0	42	0	20
+slot																																		resource	0	frame_assembly	iron_kammris	100																												
+slot																																		resource	0	receiver_assembly	steel	45																												
+slot																																		resource	0	grip_assembly	petrochem_inert_polymer	28																												
+slot																																		template	0	barrel_rifle_projectile	object/tangible/component/weapon/projectile_rifle_barrel_base.iff	1	muzzle																											
+slot																																		template	0	weapon_core	object/tangible/component/weapon/core/weapon_core_ranged_base.iff	1																												
+slot																																		template	1	scope	object/tangible/component/weapon/scope_weapon_base.iff	1	scope																											
+slot																																		template	1	stock	object/tangible/component/weapon/stock_base.iff	1	stock																											
+weapon	melee	weapon_appearance_2h_sword_krayt		systems.crafting.weapon.core.crafting_new_weapon_final	0	weapon	3	weapon_crafting		object/weapon/melee/2h_sword/2h_sword_krayt.iff	object/weapon/melee/2h_sword/2h_sword_krayt.iff	40	450	800	1100	0	0	0	0	0	0	kinetic	none	-1	-1	melee	melee	1	1	100	100		5							sys.server/compiled/game/object/draft_schematic/weapon/appearance/																							0	60	0	50
+slot																																		resource	0	sword_core_jacket	steel	120																												
+slot																																		resource	0	grip	iron	60																												
+slot																																		template	0	weapon_core	object/tangible/component/weapon/core/weapon_core_melee_base.iff	1							

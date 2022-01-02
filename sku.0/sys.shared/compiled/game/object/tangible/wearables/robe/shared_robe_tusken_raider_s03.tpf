@@ -1,0 +1,25 @@
+//            Filename:     shared_robe_tusken_raider_s03
+//            Directory:    object/tangible/wearables/robe
+//
+//            Description:
+//
+//
+//            Notes:
+//
+//
+//            Category:                   Null
+//            Sub-Category:               Null
+//            Classification:             Null
+//            
+
+@base object/tangible/wearables/base/shared_base_robe_longsleeve.iff
+
+@class tangible_object_template 3
+
+@class object_template 3
+
+objectName = "wearables_name" "robe_tusken_raider_s03"
+detailedDescription = "wearables_detail" "robe_tusken_raider_s03"
+lookAtText = "wearables_lookat" "robe_tusken_raider_s03"
+appearanceFilename = "appearance/robe_tusken_raider_s03_m.sat"
+portalLayoutFilename = ""

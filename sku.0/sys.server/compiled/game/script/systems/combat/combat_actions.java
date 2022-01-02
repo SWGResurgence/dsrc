@@ -12468,4 +12468,10 @@ public class combat_actions extends script.systems.combat.combat_base {
         }
         return SCRIPT_CONTINUE;
     }
+    public int tusken_ritual_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
+        if (!combatStandardAction("tusken_ritual_1", self, target, params, "", "")) {
+            return SCRIPT_OVERRIDE;
+        }
+        return SCRIPT_CONTINUE;
+    }
 }
