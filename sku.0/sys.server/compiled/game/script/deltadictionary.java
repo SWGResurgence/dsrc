@@ -566,7 +566,7 @@ public final class deltadictionary
 		potentiallyDirty.add(key);
 		if (value != null)
 			return new Vector(Arrays.asList((String[])value));
-		return Vector();
+		return new Vector();
 	}
 
 	/**
