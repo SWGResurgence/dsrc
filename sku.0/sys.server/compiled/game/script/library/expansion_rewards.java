@@ -23,7 +23,16 @@ public class expansion_rewards extends script.base_script {
 		obj_id pInv = utils.getInventoryContainer(player);
 		HashSet theSet = new HashSet();
 		
-    //theSet.add(static_item.createNewItemFunction("item_tow_schematic_vehicle_02_02", pInv));
+		theSet.add(static_item.createNewItemFunction("walker_at_rt", pInv));
+    theSet.add(static_item.createNewItemFunction("barc_speeder", pInv));
+    theSet.add(static_item.createNewItemFunction("instant_travel", pInv));
+		theSet.add(static_item.createNewItemFunction("instant_travel_royal_ship", pInv));
+    theSet.add(static_item.createNewItemFunction("tow_retail_reward", pInv));
+    theSet.add(static_item.createNewItemFunction("sorosuub", pInv));
+    theSet.add(static_item.createNewItemFunction("item_tow_schematic_vehicle_02_02", pInv));
+    theSet.add(static_item.createNewItemFunction("item_deed_grievous_wheel_bike", pInv));
+    theSet.add(static_item.createNewItemFunction("varactyl", pInv));
+    theSet.add(static_item.createNewItemFunction("item_pet_mount_lava_flea_01_01", pInv));
 		
 		obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);

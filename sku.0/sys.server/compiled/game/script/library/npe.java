@@ -576,6 +576,7 @@ public class npe extends script.base_script
         HashSet theSet = new HashSet();
         if (utils.isProfession(player, utils.FORCE_SENSITIVE))
         {
+            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
@@ -605,6 +606,7 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.SMUGGLER))
         {
+            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
@@ -622,6 +624,7 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.BOUNTY_HUNTER))
         {
+            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
@@ -639,6 +642,7 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.OFFICER))
         {
+            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
@@ -656,6 +660,7 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.COMMANDO))
         {
+            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
@@ -673,6 +678,7 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.MEDIC))
         {
+            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
@@ -690,6 +696,7 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.SPY))
         {
+            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
@@ -710,6 +717,7 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.ENTERTAINER))
         {
+            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
@@ -737,6 +745,7 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.TRADER))
         {
+            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
             theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
             theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
             theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
