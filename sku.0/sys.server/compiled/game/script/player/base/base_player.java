@@ -2070,7 +2070,7 @@ public class base_player extends script.base_script
         }
         dictionary racial_mods = null;
         String template = utils.getTemplateFilenameNoPath(self);
-        if (template != null && !template.equals(""))
+        if (template != null && !template.isEmpty())
         {
             if (template.endsWith(".iff"))
             {

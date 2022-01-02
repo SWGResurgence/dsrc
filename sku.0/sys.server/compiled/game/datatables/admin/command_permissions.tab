@@ -270,7 +270,7 @@ script.reload	20
 script.scriptingEnabled	30
 script.triggerAll	20
 script.triggerOne	20
-server.abortShutdown	40
+server.abortShutdown	30
 server.adjustGcwImperialScore	50
 server.adjustGcwRebelScore	50
 server.clientSaveBuildoutArea	50
@@ -322,7 +322,7 @@ server.listCharacterLastLoginTimeBetweenDetailed	50
 server.listCharacterLastLoginTimeBrief	50
 server.listCharacterLastLoginTimeDetailed	50
 server.listConnectedCharacterData	50
-server.listConnectedCharacters	50
+server.listConnectedCharacters	20
 server.listRegions	
 server.listRetroactiveCtsHistory	50
 server.listTravelPoints	50
@@ -338,8 +338,8 @@ server.reloadQuests	50
 server.reloadTable	40
 server.reloadTerrain	
 server.requestSameServer	50
-server.restartPlanet	50
-server.restartServer	50
+server.restartPlanet	30
+server.restartServer	30
 server.saveBuildoutArea	50
 server.sendMailToCharacterCreateTime	50
 server.sendMailToCharacterCreateTimeAfter	50
@@ -367,7 +367,7 @@ server.showGcwFactionalPresence	50
 server.showGcwScore	50
 server.showObjectSpheres	
 server.showTriggerSpheres	
-server.shutdown	50
+server.shutdown	30
 server.snapAllObjectsToTerrain	
 server.startSave	10
 server.testStructurePlacement	
