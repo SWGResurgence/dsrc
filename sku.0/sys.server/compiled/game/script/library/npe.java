@@ -576,10 +576,6 @@ public class npe extends script.base_script
         HashSet theSet = new HashSet();
         if (utils.isProfession(player, utils.FORCE_SENSITIVE))
         {
-            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
-            theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
-            theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
-            theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_npe_fs_robe_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_jedi_robe_light_04_01", pInv)); //Light Jedi Knight Robe
             theSet.add(static_item.createNewItemFunction("item_jedi_robe_dark_04_01", pInv)); //Dark Jedi Knight Robe
@@ -606,10 +602,6 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.SMUGGLER))
         {
-            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
-            theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
-            theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
-            theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_smuggler_shirt_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_smuggler_pants_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_smuggler_vest_02_01", pInv));
@@ -624,10 +616,6 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.BOUNTY_HUNTER))
         {
-            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
-            theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
-            theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
-            theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_bounty_hunter_shirt_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_bounty_hunter_pants_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_bounty_hunter_vest_02_01", pInv));
@@ -642,10 +630,6 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.OFFICER))
         {
-            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
-            theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
-            theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
-            theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_officer_shirt_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_officer_pants_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_officer_belt_02_01", pInv));
@@ -660,10 +644,6 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.COMMANDO))
         {
-            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
-            theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
-            theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
-            theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_commando_shirt_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_commando_pants_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_commando_vest_02_01", pInv));
@@ -678,10 +658,6 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.MEDIC))
         {
-            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
-            theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
-            theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
-            theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_medic_shirt_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_medic_pants_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_medic_vest_02_01", pInv));
@@ -696,10 +672,6 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.SPY))
         {
-            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
-            theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
-            theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
-            theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_spy_shirt_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_spy_pants_02_01", pInv));
             if (pSpecies != SPECIES_MON_CALAMARI && pSpecies !=SPECIES_TRANDOSHAN)
@@ -717,10 +689,6 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.ENTERTAINER))
         {
-            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
-            theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
-            theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
-            theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
             if (pGender == GENDER_MALE)
             {
                 theSet.add(static_item.createNewItemFunction("item_entertainer_shirt_02_01", pInv));
@@ -745,10 +713,6 @@ public class npe extends script.base_script
         }
         else if (utils.isProfession(player, utils.TRADER))
         {
-            theSet.add(static_item.createNewItemFunction("expansion_rewards", pInv));
-            theSet.add(static_item.createNewItemFunction("item_level90_boost", pInv));
-            theSet.add(static_item.createNewItemFunction("heroic_biolink_set", pInv));
-            theSet.add(static_item.createNewItemFunction("item_vet_reward_token_stipend_scroll_01_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_npe_gen_craft_tool_trader_03_01 ", pInv));
             theSet.add(static_item.createNewItemFunction("item_trader_shirt_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_trader_pants_02_01", pInv));
