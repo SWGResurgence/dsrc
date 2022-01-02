@@ -11,6 +11,3 @@ walker_at_rt	veteran_new:walker_at_rt	object/tangible/veteran_reward/vehicle_wal
 instant_travel_royal_ship	veteran_new:instant_travel_terminal_royal_ship	object/tangible/deed/vehicle_deed/instant_travel_terminal_royal_ship_deed.iff	0	0		1		
 hover_chair	veteran_new:hover_chair	item_deed_hover_chair_06_01	0	1		0		
 grievous_wheel_bike	veteran_new:grievous_wheel_bike	item_deed_grievous_wheel_bike	0	0		1		
-item_level90_boost	veteran_new:item_level90_boost	object/tangible/loot/misc/buddy_level_holocron.iff	0	0		1		
-heroic_biolink_set	veteran_new:heroic_biolink_set	object/tangible/loot/loot_schematic/generic_limited_use.iff	0	0		1		
-vet_stipend_scroll	veteran_new:vet_stipend_scroll	object/tangible/item/kashyyyk/eqp_wookiee_scroll_s01.iff	0	1		0		
