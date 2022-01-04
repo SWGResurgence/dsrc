@@ -330,6 +330,3 @@ weapon_carbine_advanced_spec_ops_bola_04_01	1	1000	300	600	0	energy		20	60	1	100
 weapon_carbine_spec_ops_bola_04_01	1	1000	350	650	0	energy		20	60	1	100	0	50		int:wp.canBeDisMantled=1			900	900
 weapon_carbine_advanced_sfor_04_01	1	1000	350	650	0	energy		20	60	1	100	0	50		int:wp.canBeDisMantled=1			900	900
 weapon_pistol_old_republic_ion_relic_04_01	1	1000	215	425	0	kinetic	heat	20	40	1	100	0	35		int:wp.canBeDisMantled=1			900	900
-weapon_rifle_tusken_isolationist_02_01	1	1000	411	821	0	kinetic			80	1	100	0	64		int:wp.canBeDisMantled=1		lvl90	770	770
-weapon_carbine_tusken_isolationist_02_01	1	1000	308	616	0	kinetic			60	1	100	0	50		int:wp.canBeDisMantled=1		lvl90	770	770
-weapon_2h_sword_tusken_isolationist_02_01	1	1000	700	1400	0	kinetic			100	1	100	0	5		int:wp.canBeDisMantled=1		lvl90	1000	1050
