@@ -367,6 +367,7 @@ col_stage_backdrop					item_limited_use_schematic_backdrop_generator_01_01						
 col_square_green_cut_gem_01	0.2				item_limited_use_schematic_green_gem_01_01												A medium amount of XP and a Green Light Gem Schematic
 col_round_purple_cut_gem_01	0.2				item_limited_use_schematic_purple_gem_01_01												A medium amount of XP and a Purple Light Gem Schematic
 col_round_red_cut_gem_01	0.2				item_limited_use_schematic_red_gem_01_01												A medium amount of XP and a Red Light Gem Schematic
+col_round_orange_cut_gem_01	0.2				item_limited_use_schematic_orange_gem_01_01												A medium amount of XP and a Orange Light Gem Schematic
 mail_opt_in_1					item_mail_opt_in_1_reward												A Bantha Skin Rug
 col_space_helper_monkey_01					item_beast_holocron_04_10												Shipwright Helper Monkey
 empire_day_recruiting_event	0.1		empire_day_recruiter_badge_2009		"col_reward_imperial_gcw_500_01_01,item_empire_day_imperial_token"												"Badge, Empire Day Token, GCW Points & XP"
