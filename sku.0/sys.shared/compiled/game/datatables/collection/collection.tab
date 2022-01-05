@@ -2122,18 +2122,18 @@ artifact_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			round_red_gem_style2_07	4881	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			round_red_gem_style2_08	4882	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			round_red_gem_style2_09	4883	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_red_gem_style2_10	4884	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
-    col_round_orange_cut_gem_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1
-      round_orange_gem_style1_01	22784	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
-			round_orange_gem_style1_02	22785	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
-			round_orange_gem_style1_03	22786	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
-			round_orange_gem_style1_04	22787	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
-			round_orange_gem_style1_05	22788	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
-			round_orange_gem_style1_06	22789	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
-			round_orange_gem_style1_07	22790	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
-			round_orange_gem_style1_08	22791	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
-			round_orange_gem_style1_09	22792	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
-			round_orange_gem_style1_10	22793	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0
+			round_red_gem_style2_10	4884	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+		col_round_orange		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
+			round_orange_gem_style1_01	22784	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			round_orange_gem_style1_02	22785	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			round_orange_gem_style1_03	22786	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			round_orange_gem_style1_04	22787	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			round_orange_gem_style1_05	22788	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			round_orange_gem_style1_06	22789	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			round_orange_gem_style1_07	22790	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			round_orange_gem_style1_08	22791	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			round_orange_gem_style1_09	22792	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			round_orange_gem_style1_10	22793	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	hoth_collections			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_hoth_frozen_tauntaun_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			hoth_frozen_tauntaun	6208	6214	10																		sound/music_acq_miner.snd	gray	0	0						0	0			
