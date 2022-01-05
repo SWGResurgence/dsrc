@@ -604,11 +604,7 @@ public class destroy_duty extends script.base_script
     }
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
-        if (params == null)
-        {
-            return SCRIPT_CONTINUE;
-        }
-        if (hasObjVar(self, "in_progress"))
+        if (params != null && hasObjVar(self, "in_progress"))
         {
             clearTargetWaypoint(self);
             cleanupShips(self);
