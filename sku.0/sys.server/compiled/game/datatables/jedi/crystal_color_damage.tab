@@ -12,29 +12,29 @@ i	"e(none=0,cold=64,heat=32,acid=128,electric=256)[none]"	f	c
 9	electric	0.04	
 10	heat	0.04	
 11	heat	0.04	
-12	heat	0.10	Allya's Exile
-13	heat	0.08	Kun's Blood
-14	acid	0.12	Bondara's Folly
-15	acid	0.08	Ulric's Redemption
-16	electric	0.10	Bane's Heart
-17	electric	0.08	Gallia's Intuition
-18	electric	0.08	Prowess of Plo Koon
-19	acid	0.12	B'nar's Sacrifice
-20	cold	0.12	Windu's Guile
-21	cold	0.08	Mundi's Response
-22	cold	0.08	Strength of Luminaria
-23	cold	0.08	Baas's Wisdom
-24	electric	0.08	Quintessence of the Force
-25	acid	0.08	Dawn of Dagobah
-26	electric	0.08	Horn's Future
-27	acid	0.08	Allya's Redemption
-28	cold	0.12	Kenobi's Legacy
-29	heat	0.12	Sunrider's Destiny
-30	acid	0.08	Kit's Ferocity
-32	heat	0.12	Cunning of Tyranus
-33	heat	0.10	Maul's Vengeance
-34	acid	0.08	Qui-gon's Devotion
-35	cold	0.01	unused
+12	heat	0.06	Maul's Vengeance
+13	heat	0.06	Kun's Blood
+14	acid	0.06	Bondara's Folly
+15	acid	0.06	Ulric's Redemption
+16	electric	0.05	Bane's Heart
+17	electric	0.06	Gallia's Intuition
+18	electric	0.06	Prowess of Plo Koon
+19	acid	0.06	B'nar's Sacrifice
+20	cold	0.06	Windu's Guile
+21	cold	0.06	Mundi's Response
+22	cold	0.06	Strength of Luminaria
+23	cold	0.06	Baas's Wisdom
+24	electric	0.06	Quintessence of the Force
+25	acid	0.06	Dawn of Dagobah
+26	electric	0.06	Horn's Future
+27	acid	0.06	Qui-gon's Devotion
+28	cold	0.06	Kenobi's Legacy
+29	heat	0.06	Sunrider's Destiny
+30	acid	0.06	Kit's Ferocity
+32	heat	0.06	Cunning of Tyranus
+33	heat	0.06	Allya's Exile
+34	acid	0.06	Allya's Redemption
+35	heat	0.06	Hett's Isolation
 36	cold	0.01	unused
 37	cold	0.01	unused
 38	cold	0.01	unused

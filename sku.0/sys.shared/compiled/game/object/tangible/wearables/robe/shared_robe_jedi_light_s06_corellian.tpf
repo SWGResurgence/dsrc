@@ -1,0 +1,27 @@
+//            Filename:     shared_robe_s06_corellian
+//            Directory:    object/tangible/wearables/robe
+//
+//            Description:
+//
+//
+//            Notes:
+//
+//
+//            Category:                   Null
+//            Sub-Category:               Null
+//            Classification:             Null
+//
+
+@base object/tangible/wearables/base/shared_base_cloak.iff
+
+@class tangible_object_template 3
+
+@class object_template 3
+
+objectName = "wearables_name" "robe_jedi_light_s06_corellian"
+detailedDescription = "wearables_detail" "robe_jedi_light_s06_corellian"
+lookAtText = "wearables_lookat" "robe_jedi_light_s06_corellian"
+
+appearanceFilename = "appearance/robe_jedi_light_s06_corellian_f.sat"
+
+arrangementDescriptorFilename = "abstract/slot/arrangement/wearables/jedi_jumpsuit_02.iff"
