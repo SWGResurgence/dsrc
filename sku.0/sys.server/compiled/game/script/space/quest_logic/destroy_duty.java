@@ -416,7 +416,7 @@ public class destroy_duty extends script.base_script
             }
         }
         int remaining = targets.length - deadships;
-        prose_package pp = prose.getPackage(SID_TARGETS_REMAINING, remaining);
+        prose_package pp = new prose_package(SID_TARGETS_REMAINING, remaining);
         space_quest.sendQuestMessage(player, pp);
         return SCRIPT_OVERRIDE;
     }
@@ -526,13 +526,13 @@ public class destroy_duty extends script.base_script
         switch (type)
         {
             case 1:
-                pp = prose.getPackage(SID_ROUND_REWARD, reward);
+                pp = new prose_package(SID_ROUND_REWARD, reward);
                 break;
             case 2:
-                pp = prose.getPackage(SID_COMPLETE_REWARD, reward);
+                pp = new prose_package(SID_COMPLETE_REWARD, reward);
                 break;
             case 3:
-                pp = prose.getPackage(SID_BOSS_REWARD, reward);
+                pp = new prose_package(SID_BOSS_REWARD, reward);
                 break;
         }
         if (pp != null)
@@ -550,7 +550,7 @@ public class destroy_duty extends script.base_script
             tokens += tokens / 2;
         }
         tokens *= dutyTokenBonus;
-        prose_package pt = prose.getPackage(SID_TOKEN_REWARD, tokens);
+        prose_package pt = new prose_package(SID_TOKEN_REWARD, tokens);
         sendQuestSystemMessage(player, pt);
         static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, tokens);
         CustomerServiceLog("space_piracy", "Player " + player + " have received " + tokens + " Space Duty Tokens (item_token_duty_space_01_01)");
@@ -567,7 +567,7 @@ public class destroy_duty extends script.base_script
             case 1:
             string_id level = new string_id("spacequest/" + questType + "/" + questName, "level_boss");
             string_id bossTitle = new string_id("spacequest/" + questType + "/" + questName, "boss_title_" + getIntObjVar(self, "difficulty.basecount"));
-            prose_package pp = prose.getPackage(level, bossTitle);
+            prose_package pp = new prose_package(level, bossTitle);
             space_quest.sendQuestMessage(player, pp);
             play2dNonLoopingMusic(player, space_quest.MUSIC_QUEST_BOSS_COMING);
             dutyUpdate(player, level);
@@ -653,7 +653,7 @@ public class destroy_duty extends script.base_script
         String questName = getStringObjVar(self, space_quest.QUEST_NAME);
         String questType = getStringObjVar(self, space_quest.QUEST_TYPE);
         string_id update_prefix = new string_id("spacequest/" + questType + "/" + questName, "duty_update");
-        prose_package pp = prose.getPackage(update_prefix, update_id);
+        prose_package pp = new prose_package(update_prefix, update_id);
         space_quest.sendQuestMessage(player, pp);
     }
     public void cleanupShips(obj_id self)
