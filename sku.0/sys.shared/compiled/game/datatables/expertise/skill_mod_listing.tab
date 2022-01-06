@@ -552,6 +552,8 @@ special_sign_reb_empire_day_standing	ALL	misc	1	7023			Empire Day 2009
 special_sign_reb_empire_day_hanging	ALL	misc	1	7024			Empire Day 2009
 special_sign_chronicle_master_standing_sign	ALL	misc	1	7025			Chronicle Master Signs - Standing
 special_sign_chronicle_master_hanging_sign	ALL	misc	1	7026			Chronicle Master Signs - Hanging
+special_sign_wod_standing_sign	ALL	misc	1	7027			Witches of Dathomir Signs - Standing
+special_sign_wod_hanging_sign	ALL	misc	1	7028			Witches of Dathomir Signs - Hanging
 milk_quantity_modified	ALL	attributes	1	8000			Modifier for milk that can be harvested
 milk_exceptional_modified	ALL	attributes	1	8010			Modifier for exceptional milk that can be harvested (collection item)
 milk_stun_modified	ALL	attributes	1	8020			Modifier for stunning while milking
