@@ -1,0 +1,13 @@
+@base object/tangible/furniture/base/shared_furniture_base.iff
+
+@class tangible_object_template 6
+
+@class object_template 5
+
+objectName = "frn_n"  "wod_sith_shadow_scroll"
+
+detailedDescription = "frn_d"  "wod_sith_shadow_scroll"
+
+appearanceFilename = "appearance/eqp_axkva_scroll_s01.apt"
+
+portalLayoutFilename = ""
