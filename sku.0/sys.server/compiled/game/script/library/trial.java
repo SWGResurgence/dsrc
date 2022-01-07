@@ -288,7 +288,8 @@ public class trial extends script.base_script
     "item_wod_token_2",                         //#30   Token: Witches of Dathomir
     "item_wod_token_3",                         //#31   Token: Witches of Dathomir
     "item_wod_token_4",                         //#32   Token: Witches of Dathomir
-    "item_wod_token_5"                          //#33   Token: Witches of Dathomir
+    "item_wod_token_5",                         //#33   Token: Witches of Dathomir
+    "item_token_apotheosis_01_01"               //#34   Token: Apotheosis of Resurgence 
     
     };
     public static final int NUM_HEROIC_TOKEN_TYPES = HEROIC_TOKENS.length;

@@ -29,6 +29,7 @@ public class masterspawner extends script.base_script
         spawnChadraFans(self);
         spawnCheatedGambler(self);
         spawnJunkDealer(self);
+        spawnStarterPilotVender(self);
     }
     public void spawnHanandChewie(obj_id self) throws InterruptedException
     {
@@ -97,6 +98,13 @@ public class masterspawner extends script.base_script
         ai_lib.setDefaultCalmMood(f4, "npc_sitting_chair");
         ai_lib.setDefaultCalmMood(f5, "npc_sitting_chair");
     }
+    public void spawnStarterPilotVender(obj_id self) throws InterruptedException {
+        obj_id room = getCellId(self, "starterpilotvendor");
+        obj_id vendor = create.object("starter_pilot_equipment_vendor", new location(-10.7f, 0.6f, 68.7f, "tatooine", room));
+        setYaw(vendor, -180);
+        setCreatureStatic(vendor, true);
+        setInvulnerable(vendor, true);
+        setName(vendor, "Starter Equipment");
     public void spawnClosePatrons(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "cantina");
