@@ -24,4 +24,4 @@ appearanceFilename = "appearance/aurilia_token.apt"
 
 gameObjectType = GOT_misc_item_usable
 
-clientDataFile = "clientdata/index/client_shared_index_1_6.cdf
+clientDataFile = "clientdata/index/client_shared_index_1_6.cdf"
