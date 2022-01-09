@@ -7,4 +7,3 @@
 @class object_template 10
 
 sharedTemplate = "object/weapon/melee/special/shared_punch_dagger.iff"
-
