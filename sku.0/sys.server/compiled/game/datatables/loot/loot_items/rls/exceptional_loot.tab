@@ -10,19 +10,6 @@ object/tangible/veteran_reward/harvester.iff	Deed: Make A Harvester Self Powered
 item_vet_reward_resource_supply_generator	Deed: Resource Supply Generator
 item_cs_dna_mooc	DNA Storage Container
 item_pangrack_dna	DNA Storage Container
-item_crystal_allyas_redemption_01	Color Crystal: Allya's Redemption
-item_color_crystal_02_23	Color Crystal: Baas's Windom
-item_color_crystal_02_25	Color Crystal: Dawn of Degobah
-item_color_crystal_02_20	Color Crystal: Kun's Blood
-item_color_crystal_02_17	Color Crystal: Gallia's Intuition
-item_color_crystal_02_26	Color Crystal: Horn's Future
-item_color_crystal_02_30	Color Crystal: Kit's Ferocity
-item_color_crystal_02_21	Color Crystal: Mundi's Response
-item_color_crystal_02_18	Color Crystal: Prowess of Plo Koon
-item_color_crystal_02_27	Color Crystal: Qui-gon's Devotion
-item_color_crystal_02_24	Color Crystal: Quintessence of the Force
-item_color_crystal_02_22	Color Crystal: Strength of Luminaria
-item_color_crystal_02_15	Color Crystal: Ulric's Redemption
 item_power_crystal_04_21	Power Crystal: Perfect
 item_publish_gift_37_04_01	Misc: War Terminal
 object/tangible/painting/painting_han_wanted.iff	Painting: Wanted Poster Han Solo

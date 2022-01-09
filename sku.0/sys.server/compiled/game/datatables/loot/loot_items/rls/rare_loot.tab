@@ -27,25 +27,6 @@ object/tangible/wearables/helmet/helmet_s06.iff	Gear: Endor Rebel Helmet
 item_jedi_robe_06_01	Gear: Jedi Master Cloak
 item_jedi_robe_06_02	Gear: Jedi Master Cloak
 object/tangible/wearables/armor/nightsister/armor_nightsister_bicep_r_s01.iff	Gear: Nightsister Melee Armguard
-object/tangible/painting/painting_rodian_f_ad_01.iff	Painting: Advertisement
-object/tangible/painting/painting_bothan_f.iff	Painting: Bothan Beauty
-object/tangible/painting/painting_bothan_m.iff	Painting: Bothan Buff
-item_painting_corl_02	Painting: Corellian Seaside
-item_painting_droid_bright	Painting: Droid in Contrast
-object/tangible/painting/painting_rodian_f.iff	Painting: Feared
-object/tangible/painting/painting_rodian_m.iff	Painting: Fighter
-object/tangible/painting/painting_trandoshan_m_01.iff	Painting: Fighter's Courage
-item_tow_decor_painting_02_04	Painting: Living Canals
-object/tangible/painting/painting_zabrak_f.iff	Painting: Mercenaries' Despair
-object/tangible/painting/painting_zabrak_m.iff	Painting: Mercenaries' Lament
-object/tangible/painting/painting_bw_stormtrooper.iff	Painting: No Division
-object/tangible/painting/painting_food_baking_s02.iff	Painting: Poster of Food Preparation
-object/tangible/painting/painting_schematic_transport_ship.iff	Painting: Poster of a Ship Schematic
-object/tangible/painting/painting_schematic_weapon_s03.iff	Painting: Poster Block Turret Schematic
-object/tangible/painting/painting_schematic_weapon.iff	Painting: Poster of Turret Schematic
-object/tangible/painting/bestine_quest_painting.iff	Painting: Rare Painting
-object/tangible/painting/painting_vader_victory.iff	Painting: Victory
-object/tangible/painting/painting_trandoshan_m.iff	Painting: Warrior's Honor
 item_schematic_hide_rack_s01	Schematic: Animal Hide Rack Style 1 
 item_schematic_hide_rack_s02	Schematic: Animal Hide Rack Style 2
 item_schematic_hide_rack_s03	Schematic: Animal Hide Rack Style 3
