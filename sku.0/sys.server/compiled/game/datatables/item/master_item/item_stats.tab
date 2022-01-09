@@ -2121,14 +2121,14 @@ item_jedi_robe_light_04_03			int:armor.general_protection_clothing=5000,int:item
 item_jedi_robe_light_04_04	constitution_modified=250,agility_modified=250,strength_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
 item_jedi_robe_light_04_05	constitution_modified=250,agility_modified=250,strength_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001								
 item_jedi_robe_light_04_06	constitution_modified=250,agility_modified=250,strength_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
-item_jedi_robe_light_04_07	constitution_modified=325,agility_modified=325,strength_modified=325		int:armor.general_protection_clothing=12500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
+item_jedi_robe_light_04_07	constitution_modified=450,agility_modified=425,luck_modified=425,strength_modified=400,combat_parry=15,combat_dodge=12,combat_evasion_chance=6,combat_critical_hit_reduction=24,expertise_glancing_blow_ranged=6,expertise_glancing_blow_melee=6 		int:armor.general_protection_clothing=12500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
 item_jedi_robe_dark_04_01			int:armor.general_protection_clothing=5000,int:item.set.set_id=90001								
 item_jedi_robe_dark_04_02			int:armor.general_protection_clothing=5000,int:item.set.set_id=90001								
 item_jedi_robe_dark_04_03			int:armor.general_protection_clothing=5000,int:item.set.set_id=90001								
 item_jedi_robe_dark_04_04	constitution_modified=250,luck_modified=250,precision_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001		proc_old_dark_jedi_gift					appearance/pt_heal.prt	
 item_jedi_robe_dark_04_05	constitution_modified=250,agility_modified=250,strength_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001								
 item_jedi_robe_dark_04_06	constitution_modified=250,agility_modified=250,strength_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
-item_jedi_robe_dark_04_07	constitution_modified=325,agility_modified=325,strength_modified=325		int:armor.general_protection_clothing=12500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
+item_jedi_robe_dark_04_07	constitution_modified=400,luck_modified=425,precision_modified=425,strength_modified=450,expertise_critical_niche_all=6,exotic_parry_reduction=15,exotic_dodge_reduction=12,expertise_damage_line_fs_dm=12		int:armor.general_protection_clothing=12500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
 item_junk_imitation_pearl_01_01											
 item_junk_imitation_pearl_01_02											
 item_deed_landspeeder_x38_02_01			string:vehicle_attribs.object_ref=xp38								
