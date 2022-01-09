@@ -2120,13 +2120,15 @@ item_jedi_robe_light_04_02			int:armor.general_protection_clothing=5000,int:item
 item_jedi_robe_light_04_03			int:armor.general_protection_clothing=5000,int:item.set.set_id=90001								
 item_jedi_robe_light_04_04	constitution_modified=250,agility_modified=250,strength_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
 item_jedi_robe_light_04_05	constitution_modified=250,agility_modified=250,strength_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001								
-item_jedi_robe_light_04_06	constitution_modified=325,agility_modified=325,strength_modified=325		int:armor.general_protection_clothing=12500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
+item_jedi_robe_light_04_06	constitution_modified=250,agility_modified=250,strength_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
+item_jedi_robe_light_04_07	constitution_modified=325,agility_modified=325,strength_modified=325		int:armor.general_protection_clothing=12500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
 item_jedi_robe_dark_04_01			int:armor.general_protection_clothing=5000,int:item.set.set_id=90001								
 item_jedi_robe_dark_04_02			int:armor.general_protection_clothing=5000,int:item.set.set_id=90001								
 item_jedi_robe_dark_04_03			int:armor.general_protection_clothing=5000,int:item.set.set_id=90001								
 item_jedi_robe_dark_04_04	constitution_modified=250,luck_modified=250,precision_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001		proc_old_dark_jedi_gift					appearance/pt_heal.prt	
-item_jedi_robe_dark_04_05	constitution_modified=250,luck_modified=250,precision_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001								
-item_jedi_robe_dark_04_06	constitution_modified=325,agility_modified=325,strength_modified=325		int:armor.general_protection_clothing=12500,int:item.set.set_id=90001		proc_old_dark_jedi_gift					appearance/pt_heal.prt	
+item_jedi_robe_dark_04_05	constitution_modified=250,agility_modified=250,strength_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001								
+item_jedi_robe_dark_04_06	constitution_modified=250,agility_modified=250,strength_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
+item_jedi_robe_dark_04_07	constitution_modified=325,agility_modified=325,strength_modified=325		int:armor.general_protection_clothing=12500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
 item_junk_imitation_pearl_01_01											
 item_junk_imitation_pearl_01_02											
 item_deed_landspeeder_x38_02_01			string:vehicle_attribs.object_ref=xp38								
@@ -4841,7 +4843,6 @@ item_schematic_kashyyyk_bar_counter			string:loot_schematic.schematic=object/dra
 item_schematic_kashyyyk_bar_table			string:loot_schematic.schematic=object/draft_schematic/furniture/furniture_kash_bar_table_sm_s01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase2_novice								
 item_schematic_kashyyyk_bar_shelves			string:loot_schematic.schematic=object/draft_schematic/furniture/furniture_kash_bar_shelf_s01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase2_novice
 item_heroic_token_mustafar_01_01
-item_jedi_robe_light_04_06 constitution_modified=250,agility_modified=250,strength_modified=250 int:armor.general_protection_clothing=6500,int:item.set.set_id=90001 proc_old_light_jedi_gift appearance/pt_heal.prt
 item_tusken_isolationist_robe_01_01											
 item_tusken_isolationist_robe_01_02											
 item_tusken_isolationist_helmet_01_01											
