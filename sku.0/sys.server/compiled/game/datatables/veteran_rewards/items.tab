@@ -14,8 +14,8 @@ grievous_wheel_bike	veteran_new:grievous_wheel_bike	item_deed_grievous_wheel_bik
 item_level90_boost	veteran_new:item_level90_boost	item_level90_boost	0	0		1		
 heroic_biolink_set	veteran_new:heroic_biolink_set	heroic_biolink_set	0	0		1		
 vet_stipend_scroll	veteran_new:vet_stipend_scroll	vet_stipend_scroll	0	1		0		
-pilotequipment1	veteran_new:item_starter_pilot_equipment_01_01	item_starter_pilot_equipment_01_01	0			1		
-pilotequipment2	veteran_new:item_starter_pilot_equipment_01_02	item_starter_pilot_equipment_01_02	0			1		
-pilotequipment3	veteran_new:item_starter_pilot_equipment_01_03	item_starter_pilot_equipment_01_03	0			1		
-pilotequipment4	veteran_new:item_starter_pilot_equipment_01_04	item_starter_pilot_equipment_01_04	0			1		
-pilotequipment5	veteran_new:item_starter_pilot_equipment_01_05	item_starter_pilot_equipment_01_05	0			1		
+pilotequipment1	veteran_new:item_starter_pilot_equipment_01_01	item_starter_pilot_equipment_01_01	0	0		1		
+pilotequipment2	veteran_new:item_starter_pilot_equipment_01_02	item_starter_pilot_equipment_01_02	0	0		1		
+pilotequipment3	veteran_new:item_starter_pilot_equipment_01_03	item_starter_pilot_equipment_01_03	0	0		1		
+pilotequipment4	veteran_new:item_starter_pilot_equipment_01_04	item_starter_pilot_equipment_01_04	0	0		1		
+pilotequipment5	veteran_new:item_starter_pilot_equipment_01_05	item_starter_pilot_equipment_01_05	0	0		1		
