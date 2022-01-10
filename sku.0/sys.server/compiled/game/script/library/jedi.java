@@ -140,7 +140,7 @@ public class jedi extends script.base_script
             "bdg_exp_ror_imp_hyperdrive_fac"
         };
         
-        Vector<String> assignedPOIs = new Vector<>(25);
+        List<String> assignedPOIs = new ArrayList<>(25);
         
         for (int i = 0; i < 25; i++) {
             int rand = new Random().nextInt(pois.length);
@@ -2284,7 +2284,7 @@ public class jedi extends script.base_script
         if (getObjIdObjVar(player, ELDER_POI_OBJVAR) != null) {
             return 0;
         }
-        String[] pois = getStringVectorObjVar(player, ELDER_POI_OBJVAR);
+        String[] pois = getStringArrayObjVar(player, ELDER_POI_OBJVAR);
         int pois = 25;
         if (pois != null) {
             for (String poi : pois) {
@@ -2297,8 +2297,8 @@ public class jedi extends script.base_script
     }
     
     public static boolean needsPOI(obj_id player, String poi) {
-        String[] pois = getStringVectorObjVar(player, ELDER_POI_OBJVAR);
-        return pois != null && Vector(pois).contains(poi);
+        String[] pois = getStringArrayObjVar(player, ELDER_POI_OBJVAR);
+        return pois != null && Arrays.asList(pois).contains(poi);
     }
     
     public static boolean isForceSensitive(obj_id player) {
