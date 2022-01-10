@@ -82,7 +82,7 @@ public class pilot_starter_equipment_vendor extends script.base_script {
             prose_package pp = new prose_package();
             pp = prose.setStringId(pp, new string_id(c_stringFile, "s_1"));
             pp.target.set(player);
-            npcStartConversation(player, self, "pilot_starter_equipment_vendor", null, pp, new string_id[]{new string_id(c_stringFile, "s_2"), new string_id(c_stringFile, "s_4"), new string_id(c_stringFile, "s_6")});
+            npcStartConversation(player, self, "pilot_starter_equipment_vendor", null, pp, new string_id[]{new string_id(c_stringFile, "s_2"), new string_id(c_stringFile, "s_4")});
             return SCRIPT_CONTINUE;
         }
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
