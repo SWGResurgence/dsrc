@@ -4,6 +4,5 @@
 @class object_template 8
 
 sharedTemplate = "object/tangible/veteran_reward/shared_resource_supply_crate.iff"
-scripts = ["systems.veteran_reward.resource_supply_generator"]
 objvars = []
 persistByDefault = true
