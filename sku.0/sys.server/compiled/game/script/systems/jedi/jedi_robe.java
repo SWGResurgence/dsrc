@@ -20,22 +20,23 @@ public class jedi_robe extends script.base_script {
     public int OnInitialize(obj_id self) throws InterruptedException {
         String templateName = getTemplateName(self);
         if (templateName.endsWith("robe_jedi_light_s04.iff") || templateName.endsWith("robe_jedi_dark_s04.iff")) {
-            obj_id owner = GetObjIdObjVar(self, VAR_OWNER);
+            obj_id owner = getObjIdObjVar(self, VAR_OWNER);
             if (robeIsInvalid(owner)) {
-                destroy(self);
+                destroyObject(self);
                 return SCRIPT_CONTINUE;
             }
-        } else if (templateName.endsWith("robe_jedi_light_s05.iff") || templateName.endsWith.("robe_jedi_dark_s05.iff")) {
+        } else if (templateName.endsWith("robe_jedi_light_s05.iff") || templateName.endsWith("robe_jedi_dark_s05.iff")) {
             /// TODO: Implement when council ranks are in
         }
         return SCRIPT_CONTINUE;
     }
-    private boolean robeIsInvalid(obj_id owner) {
+    private boolean robeIsInvalid(obj_id owner) throws InterruptedException {
         /// TODO: Check if player is 
-        return getLevel(owner) < 90
+         return isGod(owner)
+            || (getLevel(owner) < 90
             || pvpGetCurrentGcwRank(owner) < 15
             || !utils.isProfession(owner, utils.FORCE_SENSITIVE)
-            || force_rank.getCouncilAffiliation(player) == -1
-            || force_rank.getForceRank(player) == -1;
+            || force_rank.getCouncilAffiliation(owner) == -1
+            || force_rank.getForceRank(owner) == -1);
     }
 }
