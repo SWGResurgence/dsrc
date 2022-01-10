@@ -58,7 +58,7 @@ public class elder_robe_npc extends script.conversation.base.conversation_base {
                 break;
             case "s_18":
                 playMusic(player, "sound/music_become_light_jedi.snd");
-                obj_id robe = static_item.createNewItemFunction(factions.getFactionFlag(player) == factions.FACTION_FLAG_IMPERIAL ? "item_jedi_robe_dark_04_04" : "item_jedi_robe_light_04_04", player);
+                obj_id robe = static_item.createNewItemFunction(factions.getFactionFlag(player) == factions.FACTION_FLAG_IMPERIAL ? "item_jedi_robe_dark_04_07" : "item_jedi_robe_light_04_07", player);
                 showLootBox(player, new obj_id[]{ robe });
                 setObjVar(player, jedi.ELDER_POI_OBJVAR, robe);
                 npcEndConversationWithMessage(player, new string_id(SCRIPT, "s_19"));
