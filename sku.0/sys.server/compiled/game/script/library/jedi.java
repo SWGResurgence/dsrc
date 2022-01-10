@@ -81,6 +81,7 @@ public class jedi extends script.base_script
     public static final string_id SID_WILL_ATTEMPT_NEXT_TIME = new string_id("jedi_spam", "will_attempt_next_time");
     public static final string_id SID_ALL_PEARLS_RESTORED = new string_id("jedi_spam", "all_pearls_restored");
     public static final string_id SID_LOST_JEDI_XP = new string_id("jedi_spam", "lost_jedi_xp");
+    public static final String ELDER_POI_OBJVAR = "elder_poi";
     public static final String[] JEDI_ENEMY_FACTIONS = 
     {
         factions.FACTION_IMPERIAL
@@ -89,6 +90,68 @@ public class jedi extends script.base_script
     {
         factions.FACTION_NEUTRAL
     };
+    
+    public static void setAssignedPOIs(obj_id player) {
+        String[] pois = {
+            "exp_tat_bens_hut",
+            "exp_yav_temple_exar_kun",
+            "exp_dan_jedi_temple",
+            "exp_tat_tusken_pool",
+            "exp_tat_krayt_skeleton",
+            "exp_tat_sarlacc_pit",
+            "exp_tat_krayt_graveyard",
+            "exp_dat_sarlacc",
+            "exp_tat_escape_pod",
+            "exp_tat_lars_homestead",
+            "exp_nab_gungan_sacred_place",
+            "bdg_exp_nab_theed_falls_bottom",
+            "bdg_exp_nab_deeja_falls_top",
+            "bdg_exp_nab_amidalas_sandy_beach",
+            "exp_cor_agrilat_swamp",
+            "bdg_exp_cor_rebel_hideout",
+            "bdg_exp_cor_rogue_corsec_base",
+            "bdg_exp_cor_tyrena_theater",
+            "bdg_exp_cor_bela_vistal_fountain",
+            "exp_yav_temple_woolamander",
+            "exp_yav_temple_blueleaf",
+            "exp_lok_volcano",
+            "bdg_exp_lok_imp_outpost",
+            "bdg_exp_lok_kimogila_skeleton",
+            "exp_dat_tarpit",
+            "exp_dat_escape_pod",
+            "exp_dat_misty_falls_1",
+            "exp_dat_misty_falls_2",
+            "bdg_exp_dat_crashed_ship",
+            "bdg_exp_dat_imp_prison",
+            "exp_dan_rebel_base",
+            "bdg_exp_dan_dantari_village1",
+            "bdg_exp_dan_dantari_village2",
+            "bdg_exp_end_ewok_tree_village",
+            "bdg_exp_end_ewok_lake_village",
+            "bdg_exp_end_dulok_village",
+            "bdg_exp_end_imp_outpost",
+            "bdg_exp_tal_creature_village",
+            "bdg_exp_tal_imp_base",
+            "bdg_exp_tal_imp_vs_reb_battle",
+            "bdg_exp_tal_aqualish_cave",
+            "bdg_exp_ror_kobala_spice_mine",
+            "bdg_exp_ror_rebel_outpost",
+            "bdg_exp_ror_imp_camp",
+            "bdg_exp_ror_imp_hyperdrive_fac"
+        };
+        
+        List<String> assignedPOIs = new ArrayList<>(25);
+        
+        for (int i = 0; i < 25; i++) {
+            int rand = new Random().nextInt(pois.length);
+            while (assignedPOIs.contains(pois[rand])) {
+                rand = new Random().nextInt(pois.length);
+            }
+            assignedPOIs.add(pois[rand]);
+        }
+        setObjVar(player, jedi.ELDER_POI_OBJVAR, assignedPOIs.toArray(new String[assignedPOIs.size()]));
+    }
+    
     public static final float ENEMY_VISIBILITY_MULTIPLIER = 1.0f;
     public static final float NEUTRAL_VISIBILITY_MULTIPLIER = 0.5f;
     public static int getJediActionVisibilityValue(obj_id objPlayer, int intActionVisibility, int intActionRange) throws InterruptedException
@@ -2214,58 +2277,48 @@ public class jedi extends script.base_script
             }
         }
     }
-    public static boolean isForceSensitive(obj_id player) throws InterruptedException
-    {
+    
+    // BEGIN ELDER JEDI POI SYSTEM \\
+    
+    public static int getNumberOfPOIsLeft(obj_id player) {
+        if (getObjIdObjVar(player, ELDER_POI_OBJVAR) != null) {
+            return 0;
+        }
+        String[] pois = getStringArrayObjVar(player, ELDER_POI_OBJVAR);
+        int pois = 25
+        if (pois != null) {
+            for (String poi : pois) {
+                if (badge.hasBadge(player, poi)) {
+                    poisLeft--;
+                }
+            }
+        }
+        return poisLeft;
+    }
+    
+    public static boolean needsPOI(obj_id player, String poi) {
+        String[] pois = getStringArrayObjVar(player, ELDER_POI_OBJVAR);
+        return pois != null && Arrays.asList(pois).contains(poi);
+    }
+    
+    public static boolean isForceSensitive(obj_id player) {
         String classTemplate = getSkillTemplate(player);
-        if (classTemplate != null && classTemplate.startsWith("force"))
-        {
-            return true;
-        }
-        return false;
+        return (classTemplate != null && classTemplate.startsWith("force"));
     }
-    public static boolean isForceSensitiveLevelRequired(obj_id player, int requiredLevel) throws InterruptedException
-    {
-        int playerLevel = getLevel(player);
-        if (isForceSensitive(player) && playerLevel >= requiredLevel)
-        {
-            return true;
-        }
-        return false;
+    
+    public static boolean isForceSensitiveLevelRequired(obj_id player, int requiredLevel) {
+        return (isForceSensitive(player) && getLevel(player) >= requiredLevel);
     }
-    public static boolean hasAnyUltraCloak(obj_id player) throws InterruptedException
-    {
-        if (utils.playerHasStaticItemInBankOrInventory(player, JEDI_CLOAK_LIGHT_HOOD_UP))
-        {
-            return true;
-        }
-        if (utils.playerHasStaticItemInBankOrInventory(player, JEDI_CLOAK_DARK_HOOD_UP))
-        {
-            return true;
-        }
-        if (utils.playerHasStaticItemInBankOrInventory(player, JEDI_CLOAK_LIGHT_HOOD_DOWN))
-        {
-            return true;
-        }
-        if (utils.playerHasStaticItemInBankOrInventory(player, JEDI_CLOAK_DARK_HOOD_DOWN))
-        {
-            return true;
-        }
-        if (utils.playerHasStaticItemInAppearanceInventory(player, JEDI_CLOAK_LIGHT_HOOD_UP))
-        {
-            return true;
-        }
-        if (utils.playerHasStaticItemInAppearanceInventory(player, JEDI_CLOAK_DARK_HOOD_UP))
-        {
-            return true;
-        }
-        if (utils.playerHasStaticItemInAppearanceInventory(player, JEDI_CLOAK_LIGHT_HOOD_DOWN))
-        {
-            return true;
-        }
-        if (utils.playerHasStaticItemInAppearanceInventory(player, JEDI_CLOAK_DARK_HOOD_DOWN))
-        {
-            return true;
-        }
-        return false;
+    
+    public static boolean hasAnyUltraCloak(obj_id player) {
+        return (utils.playerHasStaticItemInBankOrInventory(player, JEDI_CLOAK_LIGHT_HOOD_UP) || utils.playerHasStaticItemInBankOrInventory(player, JEDI_CLOAK_DARK_HOOD_UP) || utils.playerHasStaticItemInBankOrInventory(player, JEDI_CLOAK_LIGHT_HOOD_DOWN) || utils.playerHasStaticItemInBankOrInventory(player, JEDI_CLOAK_DARK_HOOD_DOWN) || utils.playerHasStaticItemInAppearanceInventory(player, JEDI_CLOAK_LIGHT_HOOD_UP) || utils.playerHasStaticItemInAppearanceInventory(player, JEDI_CLOAK_DARK_HOOD_UP) || utils.playerHasStaticItemInAppearanceInventory(player, JEDI_CLOAK_LIGHT_HOOD_DOWN) || utils.playerHasStaticItemInAppearanceInventory(player, JEDI_CLOAK_DARK_HOOD_DOWN));
     }
+    
+    public static boolean hasElderRobe(obj_id player) {
+        obj_id elderRobe = getObjIdObjVar(player, ELDER_ROBE_OBJVAR);
+        return isValidId(elderRobe);
+    }
+    
+    // END ELDER JEDI POI SYSTEM \\
+    
 }
