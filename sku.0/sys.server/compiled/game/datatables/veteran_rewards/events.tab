@@ -13,8 +13,8 @@ grievous_wheel_bike	grievous_wheel_bike			0	0	0	0	0	0	0		0	veteran_new:grievous_
 item_level90_boost	item_level90_boost			0	0	0	0	0	0	0		1	veteran_new:item_level90_boost	veteran_new:choice_description									
 heroic_biolink_set	heroic_biolink_set			0	0	0	0	0	0	0		0	veteran_new:heroic_biolink_set	veteran_new:choice_description									
 vet_stipend_scroll	vet_stipend_scroll			0	0	0	0	0	0	0		1	veteran_new:vet_stipend_scroll	veteran_new:choice_description									
-pilotequipment1	item_starter_pilot_equipment_01_01			0	0	0	0	0	0	0		1	veteran_new:item_starter_pilot_equipment_01_01	veteran_new:choice_description	
-pilotequipment2	item_starter_pilot_equipment_01_02			0	0	0	0	0	0	0		1	veteran_new:item_starter_pilot_equipment_01_02	veteran_new:choice_description	
-pilotequipment3	item_starter_pilot_equipment_01_03			0	0	0	0	0	0	0		1	veteran_new:item_starter_pilot_equipment_01_03	veteran_new:choice_description	
-pilotequipment4	item_starter_pilot_equipment_01_04			0	0	0	0	0	0	0		1	veteran_new:item_starter_pilot_equipment_01_04	veteran_new:choice_description	
-pilotequipment5	item_starter_pilot_equipment_01_05			0	0	0	0	0	0	0		1	veteran_new:item_starter_pilot_equipment_01_05	veteran_new:choice_description	
+pilotequipment1	pilotequipment1			0	0	0	0	0	0	0		1	veteran_new:pilotequipment1	veteran_new:choice_description	
+pilotequipment2	pilotequipment2			0	0	0	0	0	0	0		1	veteran_new:pilotequipment2	veteran_new:choice_description	
+pilotequipment3	pilotequipment3			0	0	0	0	0	0	0		1	veteran_new:pilotequipment3	veteran_new:choice_description	
+pilotequipment4	pilotequipment4			0	0	0	0	0	0	0		1	veteran_new:pilotequipment4	veteran_new:choice_description	
+pilotequipment5	pilotequipment5			0	0	0	0	0	0	0		1	veteran_new:pilotequipment5	veteran_new:choice_description	
