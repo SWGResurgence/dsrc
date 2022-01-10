@@ -80,7 +80,7 @@ public class pilot_starter_equipment_vendor extends script.base_script {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player)) {
             return SCRIPT_OVERRIDE;
         }
-        if (pilot_starter_equipment_condition__defaultCondition(player, self)) {
+        if (pilot_starter_equipment_vendor_condition__defaultCondition(player, self)) {
             prose_package pp = new prose_package();
             pp = prose.setStringId(pp, new string_id(c_stringFile, "s_1"));
             pp.target.set(player);
@@ -95,7 +95,7 @@ public class pilot_starter_equipment_vendor extends script.base_script {
         if (!conversationId.equals("pilot_starter_equipment_vendor")) {
             return SCRIPT_CONTINUE;
         }
-        if (pilot_starter_equipment_handleBranch1(self, player, response) == SCRIPT_CONTINUE) {
+        if (pilot_starter_equipment_vendor_handleBranch1(self, player, response) == SCRIPT_CONTINUE) {
             return SCRIPT_CONTINUE;
         }
         chat.chat(self, "Error:  Fell through all branches and responses for OnNpcConversationResponse.");
