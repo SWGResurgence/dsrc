@@ -1,18 +1,8 @@
 package script.library;
 
 import script.*;
-import script.base_class.*;
-import script.base_class.attacker_results;
-import script.base_class.defender_results;
-import static script.base_class.setObjVar;
-import script.combat_engine.*;
 import script.combat_engine.hit_result;
 import script.combat_engine.weapon_data;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 
 import java.util.Vector;
 
