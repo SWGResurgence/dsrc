@@ -2285,7 +2285,7 @@ public class jedi extends script.base_script
             return 0;
         }
         String[] pois = getStringArrayObjVar(player, ELDER_POI_OBJVAR);
-        int pois = 25
+        int pois = 25;
         if (pois != null) {
             for (String poi : pois) {
                 if (badge.hasBadge(player, poi)) {
