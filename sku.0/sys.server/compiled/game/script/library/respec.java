@@ -1107,7 +1107,7 @@ public class respec extends script.base_script
             return false;
         }
 
-        int timeTillNextDecay = getCalendarTime() + secondsUntilNextMonthlyTime(1, 10, 0, 0);
+        int timeTillNextDecay = getCalendarTime() + secondsUntilNextWeeklyTime(1, 0, 0, 0);
         setObjVar(player, OBJVAR_RESPEC_DECAY_TIME, timeTillNextDecay);
         return true;
     }
