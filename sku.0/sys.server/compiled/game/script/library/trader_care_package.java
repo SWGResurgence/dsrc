@@ -22,8 +22,9 @@ public class trader_care_package extends script.base_script {
 	public static obj_id[] grantTraderCarePackage(obj_id player) throws InterruptedException {
 		obj_id pInv = utils.getInventoryContainer(player);
 		HashSet theSet = new HashSet();
-		
-		theSet.add(static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 500));
+    if (utils.isProfession(player, utils.TRADER)) {
+        theSet.add(static_item.createNewItemFunction("trader_care_package", pInv));
+    }
 		
 		obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
