@@ -24,7 +24,8 @@ sharedTemplate = "object/tangible/deed/factory_deed/shared_factory_clothing_deed
 
 objvars = +[
 	"player_structure.deed.template" = "object/installation/manufacture/clothing_factory.iff",
-	"player_structure.deed.buildtime" = 90]
+	"player_structure.deed.buildtime" = 90,
+  "skillmod.bonus.factory_speed" = 50]
 
 scripts = +[
 	"item.structure_deed.player_structure_deed"]
