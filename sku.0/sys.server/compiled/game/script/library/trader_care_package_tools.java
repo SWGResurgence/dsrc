@@ -23,11 +23,18 @@ public class trader_care_package_tools extends script.base_script {
 		obj_id pInv = utils.getInventoryContainer(player);
 		HashSet theSet = new HashSet();
 		
-		theSet.add(static_item.createNewItemFunction("item_clothing_tool_01_01", pInv, 2));
-    theSet.add(static_item.createNewItemFunction("item_food_tool_01_01", pInv, 2));
-    theSet.add(static_item.createNewItemFunction("item_space_tool_01_01", pInv, 2));
-    theSet.add(static_item.createNewItemFunction("item_structure_tool_01_01", pInv, 4));
-    theSet.add(static_item.createNewItemFunction("item_weapon_tool_01_01", pInv, 2));
+		theSet.add(static_item.createNewItemFunction("item_clothing_tool_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_clothing_tool_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_food_tool_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_food_tool_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_space_tool_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_space_tool_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_structure_tool_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_structure_tool_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_structure_tool_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_structure_tool_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_weapon_tool_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_weapon_tool_01_01", pInv));
 		
 		obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);

@@ -12,7 +12,7 @@ public class trader_care_package_harvesters extends script.base_script {
 	}
 	public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException {
 		if (item == menu_info_types.ITEM_USE) {
-			sendSystemMessage(player, new string_id(STF_FILE, "redeemped_care_package"));
+			sendSystemMessage(player, new string_id(STF_FILE, "redeemed_care_package"));
             obj_id[] allTheArmor = grantTraderCarePackageHarvesters(player);
             destroyObject(self);
             return SCRIPT_CONTINUE;
@@ -23,22 +23,35 @@ public class trader_care_package_harvesters extends script.base_script {
 		obj_id pInv = utils.getInventoryContainer(player);
 		HashSet theSet = new HashSet();
 		
-		theSet.add(static_item.createNewItemFunction("item_mineral_harvester_personal_deed_01_01", pInv, 1));
-    theSet.add(static_item.createNewItemFunction("item_mineral_harvester_personal_deed_01_02", pInv, 2));
-    theSet.add(static_item.createNewItemFunction("item_mineral_harvester_heavy_deed_01_01", pInv, 1));
-    theSet.add(static_item.createNewItemFunction("item_moisture_harvester_personal_deed_01_01", pInv, 3));
-    theSet.add(static_item.createNewItemFunction("item_moisture_harvester_medium_deed_01_01", pInv, 2));
-    theSet.add(static_item.createNewItemFunction("item_moisture_harvester_heavy_deed_01_01", pInv, 1));
-    theSet.add(static_item.createNewItemFunction("item_liquid_harvester_personal_deed_01_01", pInv, 3));
-    theSet.add(static_item.createNewItemFunction("item_liquid_harvester_medium_deed_01_01", pInv, 2));
-    theSet.add(static_item.createNewItemFunction("item_liquid_harvester_heavy_deed_01_01", pInv, 1));
-    theSet.add(static_item.createNewItemFunction("item_gas_harvester_personal_deed_01_01", pInv, 3));
-    theSet.add(static_item.createNewItemFunction("item_gas_harvester_medium_deed_01_01", pInv, 2));
-    theSet.add(static_item.createNewItemFunction("item_gas_harvester_heavy_deed_01_01", pInv, 1));
-    theSet.add(static_item.createNewItemFunction("item_flora_harvester_personal_deed_01_01", pInv, 3));
-    theSet.add(static_item.createNewItemFunction("item_flora_harvester_medium_deed_01_01", pInv, 2));
-    theSet.add(static_item.createNewItemFunction("item_flora_harvester_heavy_deed_01_01", pInv, 1));
-    theSet.add(static_item.createNewItemFunction("item_creature_harvester_deed_01_01", pInv, 1));
+		theSet.add(static_item.createNewItemFunction("item_mineral_harvester_personal_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_mineral_harvester_personal_deed_01_02", pInv));
+    theSet.add(static_item.createNewItemFunction("item_mineral_harvester_personal_deed_01_02", pInv));
+    theSet.add(static_item.createNewItemFunction("item_mineral_harvester_heavy_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_moisture_harvester_personal_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_moisture_harvester_personal_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_moisture_harvester_personal_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_moisture_harvester_medium_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_moisture_harvester_medium_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_moisture_harvester_heavy_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_liquid_harvester_personal_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_liquid_harvester_personal_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_liquid_harvester_personal_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_liquid_harvester_medium_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_liquid_harvester_medium_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_liquid_harvester_heavy_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_gas_harvester_personal_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_gas_harvester_personal_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_gas_harvester_personal_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_gas_harvester_medium_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_gas_harvester_medium_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_gas_harvester_heavy_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_flora_harvester_personal_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_flora_harvester_personal_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_flora_harvester_personal_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_flora_harvester_medium_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_flora_harvester_medium_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_flora_harvester_heavy_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_creature_harvester_deed_01_01", pInv));
 		
 		obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);

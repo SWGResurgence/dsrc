@@ -24,9 +24,15 @@ public class trader_care_package_factories extends script.base_script {
 		HashSet theSet = new HashSet();
 		
 		theSet.add(static_item.createNewItemFunction("item_clothing_factory_deed_01_01", pInv));
-    theSet.add(static_item.createNewItemFunction("item_food_factory_deed_01_01", pInv, 2));
-    theSet.add(static_item.createNewItemFunction("item_item_factory_deed_01_01", pInv, 2));
-    theSet.add(static_item.createNewItemFunction("item_structure_factory_deed_01_01", pInv, 4));
+    theSet.add(static_item.createNewItemFunction("item_clothing_factory_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_food_factory_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_food_factory_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_item_factory_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_item_factory_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_structure_factory_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_structure_factory_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_structure_factory_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_structure_factory_deed_01_01", pInv));
 		
 		obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);

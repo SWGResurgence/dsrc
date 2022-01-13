@@ -12,7 +12,7 @@ public class trader_care_package_generators extends script.base_script {
 	}
 	public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException {
 		if (item == menu_info_types.ITEM_USE) {
-			sendSystemMessage(player, new string_id(STF_FILE, "redeemped_care_package"));
+			sendSystemMessage(player, new string_id(STF_FILE, "redeemed_care_package"));
             obj_id[] allTheArmor = grantTraderCarePackageGenerators(player);
             destroyObject(self);
             return SCRIPT_CONTINUE;
@@ -23,11 +23,18 @@ public class trader_care_package_generators extends script.base_script {
 		obj_id pInv = utils.getInventoryContainer(player);
 		HashSet theSet = new HashSet();
 		
-		theSet.add(static_item.createNewItemFunction("item_power_generator_wind_deed_01_01", pInv, 5));
-    theSet.add(static_item.createNewItemFunction("item_power_generator_solar_deed_01_01", pInv, 3));
-    theSet.add(static_item.createNewItemFunction("item_power_generator_photo_bio_deed_01_01", pInv, 2));
-    theSet.add(static_item.createNewItemFunction("item_power_generator_geothermal_deed_01_01", pInv, 1));
-    theSet.add(static_item.createNewItemFunction("item_power_generator_fusion_deed_01_01", pInv, 1));
+		theSet.add(static_item.createNewItemFunction("item_power_generator_wind_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_power_generator_wind_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_power_generator_wind_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_power_generator_wind_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_power_generator_wind_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_power_generator_solar_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_power_generator_solar_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_power_generator_solar_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_power_generator_photo_bio_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_power_generator_photo_bio_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_power_generator_geothermal_deed_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_power_generator_fusion_deed_01_01", pInv));
 		
 		obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
