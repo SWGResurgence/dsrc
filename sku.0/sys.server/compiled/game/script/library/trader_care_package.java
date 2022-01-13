@@ -22,13 +22,13 @@ public class trader_care_package extends script.base_script {
 	public static obj_id[] grantTraderCarePackage(obj_id player) throws InterruptedException {
 		obj_id pInv = utils.getInventoryContainer(player);
 		HashSet theSet = new HashSet();
-    if (utils.isProfession(player, utils.TRADER)) {
-        theSet.add(static_item.createNewItemFunction("item_trader_care_package_generators_01_01", pInv));
-        theSet.add(static_item.createNewItemFunction("item_trader_care_package_harvesters_01_01", pInv));
-        theSet.add(static_item.createNewItemFunction("item_trader_care_package_Factories_01_01", pInv));
-        theSet.add(static_item.createNewItemFunction("item_trader_care_package_survey_devices_01_01", pInv));
-        theSet.add(static_item.createNewItemFunction("item_trader_care_package_tools_01_01", pInv));
-        theSet.add(static_item.createNewItemFunction("item_trader_care_package_stations_01_01", pInv));
+
+    theSet.add(static_item.createNewItemFunction("item_trader_care_package_generators_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_trader_care_package_harvesters_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_trader_care_package_Factories_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_trader_care_package_survey_devices_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_trader_care_package_tools_01_01", pInv));
+    theSet.add(static_item.createNewItemFunction("item_trader_care_package_stations_01_01", pInv));
     }
 		
 		obj_id[] items = new obj_id[theSet.size()];
