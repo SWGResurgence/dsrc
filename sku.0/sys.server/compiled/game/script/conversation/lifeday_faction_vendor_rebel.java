@@ -3,17 +3,14 @@ package script.conversation;
 import script.*;
 import script.library.*;
 
-public class rebel_life_day_vendor extends script.base_script
+public class lifeday_faction_vendor_rebel extends script.base_script
 {
-    public rebel_life_day_vendor()
-    {
-    }
-    public static String c_stringFile = "conversation/rebel_life_day_vendor";
-    public boolean rebel_life_day_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
+    public static String c_stringFile = "conversation/lifeday_faction_vendor_rebel";
+    public boolean lifeday_faction_vendor_rebel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
-    public boolean rebel_life_day_vendor_condition_alreadyWorking(obj_id player, obj_id npc) throws InterruptedException
+    public boolean lifeday_faction_vendor_rebel_condition_alreadyWorking(obj_id player, obj_id npc) throws InterruptedException
     {
         int lifeDayBuff = buff.getBuffOnTargetFromGroup(player, "lifeday_tracker");
         if (lifeDayBuff == 0)
@@ -22,7 +19,7 @@ public class rebel_life_day_vendor extends script.base_script
         }
         return false;
     }
-    public boolean rebel_life_day_vendor_condition_lockedOut(obj_id player, obj_id npc) throws InterruptedException
+    public boolean lifeday_faction_vendor_rebel_condition_lockedOut(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "lifeday.locked_out"))
         {
@@ -30,11 +27,11 @@ public class rebel_life_day_vendor extends script.base_script
         }
         return false;
     }
-    public boolean rebel_life_day_vendor_condition_godMode(obj_id player, obj_id npc) throws InterruptedException
+    public boolean lifeday_faction_vendor_rebel_condition_godMode(obj_id player, obj_id npc) throws InterruptedException
     {
         return (isGod(player));
     }
-    public boolean rebel_life_day_vendor_condition_scoreBoardNotEmpty(obj_id player, obj_id npc) throws InterruptedException
+    public boolean lifeday_faction_vendor_rebel_condition_scoreBoardNotEmpty(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
         if (!isIdValid(tatooine))
@@ -56,7 +53,7 @@ public class rebel_life_day_vendor extends script.base_script
         }
         return true;
     }
-    public boolean rebel_life_day_vendor_condition_alreadyWorking_2(obj_id player, obj_id npc) throws InterruptedException
+    public boolean lifeday_faction_vendor_rebel_condition_alreadyWorking_2(obj_id player, obj_id npc) throws InterruptedException
     {
         int lifeDayBuff = buff.getBuffOnTargetFromGroup(player, "lifeday");
         if (lifeDayBuff == 0)
@@ -65,7 +62,7 @@ public class rebel_life_day_vendor extends script.base_script
         }
         return true;
     }
-    public boolean rebel_life_day_vendor_condition_imperialPlayer(obj_id player, obj_id npc) throws InterruptedException
+    public boolean lifeday_faction_vendor_rebel_condition_imperialPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (factions.isImperial(player))
         {
@@ -91,7 +88,7 @@ public class rebel_life_day_vendor extends script.base_script
         }
         return false;
     }
-    public boolean rebel_life_day_vendor_condition_neutral(obj_id player, obj_id npc) throws InterruptedException
+    public boolean lifeday_faction_vendor_rebel_condition_neutral(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!factions.isRebel(player))
         {
@@ -99,14 +96,14 @@ public class rebel_life_day_vendor extends script.base_script
         }
         return false;
     }
-    public void rebel_life_day_vendor_action_showTokenVendorUI(obj_id player, obj_id npc) throws InterruptedException
+    public void lifeday_faction_vendor_rebel_action_showTokenVendorUI(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary d = new dictionary();
         d.put("player", player);
         messageTo(npc, "showInventorySUI", d, 0, false);
         return;
     }
-    public void rebel_life_day_vendor_action_addCasualBuff(obj_id player, obj_id npc) throws InterruptedException
+    public void lifeday_faction_vendor_rebel_action_addCasualBuff(obj_id player, obj_id npc) throws InterruptedException
     {
         int lifeDayBuff = buff.getBuffOnTargetFromGroup(player, "lifeday_tracker");
         if (lifeDayBuff == 0)
@@ -123,7 +120,7 @@ public class rebel_life_day_vendor extends script.base_script
         playMusic(player, "sound/lifeday_wookiee_greeting1.snd");
         return;
     }
-    public void rebel_life_day_vendor_action_addCompetitiveBuff(obj_id player, obj_id npc) throws InterruptedException
+    public void lifeday_faction_vendor_rebel_action_addCompetitiveBuff(obj_id player, obj_id npc) throws InterruptedException
     {
         int lifeDayBuff = buff.getBuffOnTargetFromGroup(player, "lifeday_tracker");
         if (lifeDayBuff == 0)
@@ -140,7 +137,7 @@ public class rebel_life_day_vendor extends script.base_script
         playMusic(player, "sound/lifeday_wookiee_greeting1.snd");
         return;
     }
-    public void rebel_life_day_vendor_action_barkLeaders(obj_id player, obj_id npc) throws InterruptedException
+    public void lifeday_faction_vendor_rebel_action_barkLeaders(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!buff.hasBuff(npc, "event_lifeday_no_bark"))
         {
@@ -185,7 +182,7 @@ public class rebel_life_day_vendor extends script.base_script
             }
         }
     }
-    public void rebel_life_day_vendor_action_barkLeardersSilent(obj_id player, obj_id npc) throws InterruptedException
+    public void lifeday_faction_vendor_rebel_action_barkLeardersSilent(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
         if (!isIdValid(tatooine))
@@ -227,45 +224,45 @@ public class rebel_life_day_vendor extends script.base_script
             }
         }
     }
-    public int rebel_life_day_vendor_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
+    public int lifeday_faction_vendor_rebel_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_36"))
         {
             doAnimationAction(player, "nod");
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod");
-                rebel_life_day_vendor_action_showTokenVendorUI(player, npc);
+                lifeday_faction_vendor_rebel_action_showTokenVendorUI(player, npc);
                 string_id message = new string_id(c_stringFile, "s_95");
-                utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         if (response.equals("s_42"))
         {
-            rebel_life_day_vendor_action_barkLeardersSilent(player, npc);
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            lifeday_faction_vendor_rebel_action_barkLeardersSilent(player, npc);
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 string_id message = new string_id(c_stringFile, "s_44");
-                utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_DEFAULT;
     }
-    public int rebel_life_day_vendor_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
+    public int lifeday_faction_vendor_rebel_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_102"))
         {
             doAnimationAction(player, "nod");
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod");
-                rebel_life_day_vendor_action_showTokenVendorUI(player, npc);
+                lifeday_faction_vendor_rebel_action_showTokenVendorUI(player, npc);
                 string_id message = new string_id(c_stringFile, "s_95");
-                utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
@@ -273,11 +270,11 @@ public class rebel_life_day_vendor extends script.base_script
         if (response.equals("s_103"))
         {
             doAnimationAction(player, "nod");
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod_head_once");
                 string_id message = new string_id(c_stringFile, "s_104");
-                utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
@@ -288,44 +285,44 @@ public class rebel_life_day_vendor extends script.base_script
         }
         if (response.equals("s_29"))
         {
-            rebel_life_day_vendor_action_barkLeardersSilent(player, npc);
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            lifeday_faction_vendor_rebel_action_barkLeardersSilent(player, npc);
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 string_id message = new string_id(c_stringFile, "s_30");
-                utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_DEFAULT;
     }
-    public int rebel_life_day_vendor_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
+    public int lifeday_faction_vendor_rebel_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
         {
             doAnimationAction(player, "nod");
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod_head_multiple");
                 string_id message = new string_id(c_stringFile, "s_91");
                 int numberOfResponses = 0;
                 boolean hasResponse = false;
                 boolean hasResponse0 = false;
-                if (rebel_life_day_vendor_condition_alreadyWorking(player, npc))
+                if (lifeday_faction_vendor_rebel_condition_alreadyWorking(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse0 = true;
                 }
                 boolean hasResponse1 = false;
-                if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+                if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse1 = true;
                 }
                 boolean hasResponse2 = false;
-                if (rebel_life_day_vendor_condition_scoreBoardNotEmpty(player, npc))
+                if (lifeday_faction_vendor_rebel_condition_scoreBoardNotEmpty(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
@@ -347,7 +344,7 @@ public class rebel_life_day_vendor extends script.base_script
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_38");
                     }
-                    utils.setScriptVar(player, "conversation.rebel_life_day_vendor.branchId", 11);
+                    utils.setScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId", 11);
                     prose_package pp = new prose_package();
                     pp.stringId = message;
                     pp.actor.set(player);
@@ -357,7 +354,7 @@ public class rebel_life_day_vendor extends script.base_script
                 }
                 else 
                 {
-                    utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                    utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                     prose_package pp = new prose_package();
                     pp.stringId = message;
                     pp.actor.set(player);
@@ -370,66 +367,66 @@ public class rebel_life_day_vendor extends script.base_script
         if (response.equals("s_87"))
         {
             doAnimationAction(player, "shake_head_no");
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod_head_once");
                 string_id message = new string_id(c_stringFile, "s_89");
-                utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         if (response.equals("s_93"))
         {
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod");
-                rebel_life_day_vendor_action_showTokenVendorUI(player, npc);
+                lifeday_faction_vendor_rebel_action_showTokenVendorUI(player, npc);
                 string_id message = new string_id(c_stringFile, "s_95");
-                utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         if (response.equals("s_40"))
         {
-            rebel_life_day_vendor_action_barkLeardersSilent(player, npc);
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            lifeday_faction_vendor_rebel_action_barkLeardersSilent(player, npc);
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 string_id message = new string_id(c_stringFile, "s_43");
-                utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_DEFAULT;
     }
-    public int rebel_life_day_vendor_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
+    public int lifeday_faction_vendor_rebel_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
         {
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod");
                 string_id message = new string_id(c_stringFile, "s_70");
                 int numberOfResponses = 0;
                 boolean hasResponse = false;
                 boolean hasResponse0 = false;
-                if (rebel_life_day_vendor_condition_alreadyWorking(player, npc))
+                if (lifeday_faction_vendor_rebel_condition_alreadyWorking(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse0 = true;
                 }
                 boolean hasResponse1 = false;
-                if (rebel_life_day_vendor_condition_alreadyWorking(player, npc))
+                if (lifeday_faction_vendor_rebel_condition_alreadyWorking(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse1 = true;
                 }
                 boolean hasResponse2 = false;
-                if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+                if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
@@ -451,13 +448,13 @@ public class rebel_life_day_vendor extends script.base_script
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_75");
                     }
-                    utils.setScriptVar(player, "conversation.rebel_life_day_vendor.branchId", 12);
+                    utils.setScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId", 12);
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
                 else 
                 {
-                    utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                    utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                     npcEndConversationWithMessage(player, message);
                 }
                 return SCRIPT_CONTINUE;
@@ -465,55 +462,55 @@ public class rebel_life_day_vendor extends script.base_script
         }
         if (response.equals("s_62"))
         {
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod");
-                rebel_life_day_vendor_action_showTokenVendorUI(player, npc);
+                lifeday_faction_vendor_rebel_action_showTokenVendorUI(player, npc);
                 string_id message = new string_id(c_stringFile, "s_95");
-                utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         if (response.equals("s_38"))
         {
-            rebel_life_day_vendor_action_barkLeardersSilent(player, npc);
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            lifeday_faction_vendor_rebel_action_barkLeardersSilent(player, npc);
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 string_id message = new string_id(c_stringFile, "s_41");
-                utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_DEFAULT;
     }
-    public int rebel_life_day_vendor_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
+    public int lifeday_faction_vendor_rebel_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
         {
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod");
                 string_id message = new string_id(c_stringFile, "s_70");
                 int numberOfResponses = 0;
                 boolean hasResponse = false;
                 boolean hasResponse0 = false;
-                if (rebel_life_day_vendor_condition_alreadyWorking(player, npc))
+                if (lifeday_faction_vendor_rebel_condition_alreadyWorking(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse0 = true;
                 }
                 boolean hasResponse1 = false;
-                if (rebel_life_day_vendor_condition_alreadyWorking(player, npc))
+                if (lifeday_faction_vendor_rebel_condition_alreadyWorking(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse1 = true;
                 }
                 boolean hasResponse2 = false;
-                if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+                if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
@@ -535,13 +532,13 @@ public class rebel_life_day_vendor extends script.base_script
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_75");
                     }
-                    utils.setScriptVar(player, "conversation.rebel_life_day_vendor.branchId", 12);
+                    utils.setScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId", 12);
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
                 else 
                 {
-                    utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                    utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                     npcEndConversationWithMessage(player, message);
                 }
                 return SCRIPT_CONTINUE;
@@ -549,40 +546,40 @@ public class rebel_life_day_vendor extends script.base_script
         }
         if (response.equals("s_62"))
         {
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod");
-                rebel_life_day_vendor_action_showTokenVendorUI(player, npc);
+                lifeday_faction_vendor_rebel_action_showTokenVendorUI(player, npc);
                 string_id message = new string_id(c_stringFile, "s_95");
-                utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         if (response.equals("s_38"))
         {
-            rebel_life_day_vendor_action_barkLeardersSilent(player, npc);
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            lifeday_faction_vendor_rebel_action_barkLeardersSilent(player, npc);
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 string_id message = new string_id(c_stringFile, "s_41");
-                utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_DEFAULT;
     }
-    public int rebel_life_day_vendor_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
+    public int lifeday_faction_vendor_rebel_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
         {
             doAnimationAction(player, "pound_fist_palm");
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "celebrate1");
-                rebel_life_day_vendor_action_addCompetitiveBuff(player, npc);
+                lifeday_faction_vendor_rebel_action_addCompetitiveBuff(player, npc);
                 string_id message = new string_id(c_stringFile, "s_77");
-                utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
@@ -594,12 +591,12 @@ public class rebel_life_day_vendor extends script.base_script
         if (response.equals("s_73"))
         {
             doAnimationAction(player, "rub_chin_thoughtful");
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod");
-                rebel_life_day_vendor_action_addCasualBuff(player, npc);
+                lifeday_faction_vendor_rebel_action_addCasualBuff(player, npc);
                 string_id message = new string_id(c_stringFile, "s_79");
-                utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
@@ -611,11 +608,11 @@ public class rebel_life_day_vendor extends script.base_script
         if (response.equals("s_75"))
         {
             doAnimationAction(player, "shake_head_no");
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod");
                 string_id message = new string_id(c_stringFile, "s_81");
-                utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
@@ -626,7 +623,7 @@ public class rebel_life_day_vendor extends script.base_script
     {
         if ((!isTangible(self)) || (isPlayer(self)))
         {
-            detachScript(self, "conversation.rebel_life_day_vendor");
+            detachScript(self, "conversation.lifeday_faction_vendor_rebel");
         }
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
@@ -647,7 +644,7 @@ public class rebel_life_day_vendor extends script.base_script
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
-        detachScript(self, "conversation.rebel_life_day_vendor");
+        detachScript(self, "conversation.lifeday_faction_vendor_rebel");
         return SCRIPT_CONTINUE;
     }
     public int OnDetach(obj_id self) throws InterruptedException
@@ -668,30 +665,30 @@ public class rebel_life_day_vendor extends script.base_script
         {
             return SCRIPT_OVERRIDE;
         }
-        if (rebel_life_day_vendor_condition_imperialPlayer(player, npc))
+        if (lifeday_faction_vendor_rebel_condition_imperialPlayer(player, npc))
         {
             doAnimationAction(npc, "scare");
             string_id message = new string_id(c_stringFile, "s_50");
             chat.chat(npc, player, message);
             return SCRIPT_CONTINUE;
         }
-        if (rebel_life_day_vendor_condition_alreadyWorking_2(player, npc))
+        if (lifeday_faction_vendor_rebel_condition_alreadyWorking_2(player, npc))
         {
             doAnimationAction(npc, "greet");
             doAnimationAction(player, "greet");
-            rebel_life_day_vendor_action_barkLeaders(player, npc);
+            lifeday_faction_vendor_rebel_action_barkLeaders(player, npc);
             string_id message = new string_id(c_stringFile, "s_34");
             int numberOfResponses = 0;
             boolean hasResponse = false;
             boolean hasResponse0 = false;
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse0 = true;
             }
             boolean hasResponse1 = false;
-            if (rebel_life_day_vendor_condition_scoreBoardNotEmpty(player, npc))
+            if (lifeday_faction_vendor_rebel_condition_scoreBoardNotEmpty(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
@@ -709,12 +706,12 @@ public class rebel_life_day_vendor extends script.base_script
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_42");
                 }
-                utils.setScriptVar(player, "conversation.rebel_life_day_vendor.branchId", 2);
+                utils.setScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId", 2);
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
                 pp.target.set(npc);
-                npcStartConversation(player, npc, "rebel_life_day_vendor", null, pp, responses);
+                npcStartConversation(player, npc, "lifeday_faction_vendor_rebel", null, pp, responses);
             }
             else 
             {
@@ -726,30 +723,30 @@ public class rebel_life_day_vendor extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (rebel_life_day_vendor_condition_lockedOut(player, npc))
+        if (lifeday_faction_vendor_rebel_condition_lockedOut(player, npc))
         {
             doAnimationAction(npc, "greet");
             doAnimationAction(player, "greet");
-            rebel_life_day_vendor_action_barkLeaders(player, npc);
+            lifeday_faction_vendor_rebel_action_barkLeaders(player, npc);
             string_id message = new string_id(c_stringFile, "s_101");
             int numberOfResponses = 0;
             boolean hasResponse = false;
             boolean hasResponse0 = false;
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse0 = true;
             }
             boolean hasResponse1 = false;
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse1 = true;
             }
             boolean hasResponse2 = false;
-            if (rebel_life_day_vendor_condition_scoreBoardNotEmpty(player, npc))
+            if (lifeday_faction_vendor_rebel_condition_scoreBoardNotEmpty(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
@@ -771,12 +768,12 @@ public class rebel_life_day_vendor extends script.base_script
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_29");
                 }
-                utils.setScriptVar(player, "conversation.rebel_life_day_vendor.branchId", 4);
+                utils.setScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId", 4);
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
                 pp.target.set(npc);
-                npcStartConversation(player, npc, "rebel_life_day_vendor", null, pp, responses);
+                npcStartConversation(player, npc, "lifeday_faction_vendor_rebel", null, pp, responses);
             }
             else 
             {
@@ -788,37 +785,37 @@ public class rebel_life_day_vendor extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (rebel_life_day_vendor_condition_neutral(player, npc))
+        if (lifeday_faction_vendor_rebel_condition_neutral(player, npc))
         {
             doAnimationAction(npc, "greet");
             doAnimationAction(player, "greet");
-            rebel_life_day_vendor_action_barkLeaders(player, npc);
+            lifeday_faction_vendor_rebel_action_barkLeaders(player, npc);
             string_id message = new string_id(c_stringFile, "s_83");
             int numberOfResponses = 0;
             boolean hasResponse = false;
             boolean hasResponse0 = false;
-            if (rebel_life_day_vendor_condition_alreadyWorking(player, npc))
+            if (lifeday_faction_vendor_rebel_condition_alreadyWorking(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse0 = true;
             }
             boolean hasResponse1 = false;
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse1 = true;
             }
             boolean hasResponse2 = false;
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse2 = true;
             }
             boolean hasResponse3 = false;
-            if (rebel_life_day_vendor_condition_scoreBoardNotEmpty(player, npc))
+            if (lifeday_faction_vendor_rebel_condition_scoreBoardNotEmpty(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
@@ -844,12 +841,12 @@ public class rebel_life_day_vendor extends script.base_script
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_40");
                 }
-                utils.setScriptVar(player, "conversation.rebel_life_day_vendor.branchId", 7);
+                utils.setScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId", 7);
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
                 pp.target.set(npc);
-                npcStartConversation(player, npc, "rebel_life_day_vendor", null, pp, responses);
+                npcStartConversation(player, npc, "lifeday_faction_vendor_rebel", null, pp, responses);
             }
             else 
             {
@@ -861,30 +858,30 @@ public class rebel_life_day_vendor extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+        if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
         {
             doAnimationAction(npc, "greet");
             doAnimationAction(player, "greet");
-            rebel_life_day_vendor_action_barkLeaders(player, npc);
+            lifeday_faction_vendor_rebel_action_barkLeaders(player, npc);
             string_id message = new string_id(c_stringFile, "s_58");
             int numberOfResponses = 0;
             boolean hasResponse = false;
             boolean hasResponse0 = false;
-            if (rebel_life_day_vendor_condition_alreadyWorking(player, npc))
+            if (lifeday_faction_vendor_rebel_condition_alreadyWorking(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse0 = true;
             }
             boolean hasResponse1 = false;
-            if (rebel_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_rebel_condition__defaultCondition(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse1 = true;
             }
             boolean hasResponse2 = false;
-            if (rebel_life_day_vendor_condition_scoreBoardNotEmpty(player, npc))
+            if (lifeday_faction_vendor_rebel_condition_scoreBoardNotEmpty(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
@@ -906,12 +903,12 @@ public class rebel_life_day_vendor extends script.base_script
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_38");
                 }
-                utils.setScriptVar(player, "conversation.rebel_life_day_vendor.branchId", 11);
+                utils.setScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId", 11);
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
                 pp.target.set(npc);
-                npcStartConversation(player, npc, "rebel_life_day_vendor", null, pp, responses);
+                npcStartConversation(player, npc, "lifeday_faction_vendor_rebel", null, pp, responses);
             }
             else 
             {
@@ -928,38 +925,38 @@ public class rebel_life_day_vendor extends script.base_script
     }
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
-        if (!conversationId.equals("rebel_life_day_vendor"))
+        if (!conversationId.equals("lifeday_faction_vendor_rebel"))
         {
             return SCRIPT_CONTINUE;
         }
         obj_id npc = self;
-        int branchId = utils.getIntScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
-        if (branchId == 2 && rebel_life_day_vendor_handleBranch2(player, npc, response) == SCRIPT_CONTINUE)
+        int branchId = utils.getIntScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
+        if (branchId == 2 && lifeday_faction_vendor_rebel_handleBranch2(player, npc, response) == SCRIPT_CONTINUE)
         {
             return SCRIPT_CONTINUE;
         }
-        if (branchId == 4 && rebel_life_day_vendor_handleBranch4(player, npc, response) == SCRIPT_CONTINUE)
+        if (branchId == 4 && lifeday_faction_vendor_rebel_handleBranch4(player, npc, response) == SCRIPT_CONTINUE)
         {
             return SCRIPT_CONTINUE;
         }
-        if (branchId == 7 && rebel_life_day_vendor_handleBranch7(player, npc, response) == SCRIPT_CONTINUE)
+        if (branchId == 7 && lifeday_faction_vendor_rebel_handleBranch7(player, npc, response) == SCRIPT_CONTINUE)
         {
             return SCRIPT_CONTINUE;
         }
-        if (branchId == 8 && rebel_life_day_vendor_handleBranch8(player, npc, response) == SCRIPT_CONTINUE)
+        if (branchId == 8 && lifeday_faction_vendor_rebel_handleBranch8(player, npc, response) == SCRIPT_CONTINUE)
         {
             return SCRIPT_CONTINUE;
         }
-        if (branchId == 11 && rebel_life_day_vendor_handleBranch11(player, npc, response) == SCRIPT_CONTINUE)
+        if (branchId == 11 && lifeday_faction_vendor_rebel_handleBranch11(player, npc, response) == SCRIPT_CONTINUE)
         {
             return SCRIPT_CONTINUE;
         }
-        if (branchId == 12 && rebel_life_day_vendor_handleBranch12(player, npc, response) == SCRIPT_CONTINUE)
+        if (branchId == 12 && lifeday_faction_vendor_rebel_handleBranch12(player, npc, response) == SCRIPT_CONTINUE)
         {
             return SCRIPT_CONTINUE;
         }
         chat.chat(npc, "Error:  Fell through all branches and responses for OnNpcConversationResponse.");
-        utils.removeScriptVar(player, "conversation.rebel_life_day_vendor.branchId");
+        utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_rebel.branchId");
         return SCRIPT_CONTINUE;
     }
 }

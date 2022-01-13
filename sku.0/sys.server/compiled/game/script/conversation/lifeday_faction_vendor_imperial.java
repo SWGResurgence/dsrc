@@ -3,17 +3,17 @@ package script.conversation;
 import script.*;
 import script.library.*;
 
-public class imperial_life_day_vendor extends script.base_script
+public class lifeday_faction_vendor_imperial extends script.base_script
 {
-    public imperial_life_day_vendor()
+    public lifeday_faction_vendor_imperial()
     {
     }
-    public static String c_stringFile = "conversation/imperial_life_day_vendor";
-    public boolean imperial_life_day_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
+    public static String c_stringFile = "conversation/lifeday_faction_vendor_imperial";
+    public boolean lifeday_faction_vendor_imperial_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
     }
-    public boolean imperial_life_day_vendor_condition_alreadyWorking(obj_id player, obj_id npc) throws InterruptedException
+    public boolean lifeday_faction_vendor_imperial_condition_alreadyWorking(obj_id player, obj_id npc) throws InterruptedException
     {
         int lifeDayBuff = buff.getBuffOnTargetFromGroup(player, "lifeday_tracker");
         if (lifeDayBuff == 0)
@@ -22,7 +22,7 @@ public class imperial_life_day_vendor extends script.base_script
         }
         return false;
     }
-    public boolean imperial_life_day_vendor_condition_lockedOut(obj_id player, obj_id npc) throws InterruptedException
+    public boolean lifeday_faction_vendor_imperial_condition_lockedOut(obj_id player, obj_id npc) throws InterruptedException
     {
         if (hasObjVar(player, "lifeday.locked_out"))
         {
@@ -30,11 +30,11 @@ public class imperial_life_day_vendor extends script.base_script
         }
         return false;
     }
-    public boolean imperial_life_day_vendor_condition_godMode(obj_id player, obj_id npc) throws InterruptedException
+    public boolean lifeday_faction_vendor_imperial_condition_godMode(obj_id player, obj_id npc) throws InterruptedException
     {
         return (isGod(player));
     }
-    public boolean imperial_life_day_vendor_condition_scoreBoardNotEmpty(obj_id player, obj_id npc) throws InterruptedException
+    public boolean lifeday_faction_vendor_imperial_condition_scoreBoardNotEmpty(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
         if (!isIdValid(tatooine))
@@ -56,7 +56,7 @@ public class imperial_life_day_vendor extends script.base_script
         }
         return true;
     }
-    public boolean imperial_life_day_vendor_condition_alreadyWorking_2(obj_id player, obj_id npc) throws InterruptedException
+    public boolean lifeday_faction_vendor_imperial_condition_alreadyWorking_2(obj_id player, obj_id npc) throws InterruptedException
     {
         int lifeDayBuff = buff.getBuffOnTargetFromGroup(player, "lifeday");
         if (lifeDayBuff == 0)
@@ -65,7 +65,7 @@ public class imperial_life_day_vendor extends script.base_script
         }
         return true;
     }
-    public boolean imperial_life_day_vendor_condition_rebelPlayer(obj_id player, obj_id npc) throws InterruptedException
+    public boolean lifeday_faction_vendor_imperial_condition_rebelPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
         if (factions.isRebel(player))
         {
@@ -91,7 +91,7 @@ public class imperial_life_day_vendor extends script.base_script
         }
         return false;
     }
-    public boolean imperial_life_day_vendor_condition_neutral(obj_id player, obj_id npc) throws InterruptedException
+    public boolean lifeday_faction_vendor_imperial_condition_neutral(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!factions.isImperial(player))
         {
@@ -99,7 +99,7 @@ public class imperial_life_day_vendor extends script.base_script
         }
         return false;
     }
-    public boolean imperial_life_day_vendor_condition_wookiee(obj_id player, obj_id npc) throws InterruptedException
+    public boolean lifeday_faction_vendor_imperial_condition_wookiee(obj_id player, obj_id npc) throws InterruptedException
     {
         int species = getSpecies(player);
         if (species == SPECIES_WOOKIEE)
@@ -108,14 +108,14 @@ public class imperial_life_day_vendor extends script.base_script
         }
         return false;
     }
-    public void imperial_life_day_vendor_action_showTokenVendorUI(obj_id player, obj_id npc) throws InterruptedException
+    public void lifeday_faction_vendor_imperial_action_showTokenVendorUI(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary d = new dictionary();
         d.put("player", player);
         messageTo(npc, "showInventorySUI", d, 0, false);
         return;
     }
-    public void imperial_life_day_vendor_action_addCasualBuff(obj_id player, obj_id npc) throws InterruptedException
+    public void lifeday_faction_vendor_imperial_action_addCasualBuff(obj_id player, obj_id npc) throws InterruptedException
     {
         int lifeDayBuff = buff.getBuffOnTargetFromGroup(player, "lifeday_tracker");
         if (lifeDayBuff == 0)
@@ -131,7 +131,7 @@ public class imperial_life_day_vendor extends script.base_script
         }
         return;
     }
-    public void imperial_life_day_vendor_action_addCompetitiveBuff(obj_id player, obj_id npc) throws InterruptedException
+    public void lifeday_faction_vendor_imperial_action_addCompetitiveBuff(obj_id player, obj_id npc) throws InterruptedException
     {
         int lifeDayBuff = buff.getBuffOnTargetFromGroup(player, "lifeday_tracker");
         if (lifeDayBuff == 0)
@@ -147,7 +147,7 @@ public class imperial_life_day_vendor extends script.base_script
         }
         return;
     }
-    public void imperial_life_day_vendor_action_barkLeaders(obj_id player, obj_id npc) throws InterruptedException
+    public void lifeday_faction_vendor_imperial_action_barkLeaders(obj_id player, obj_id npc) throws InterruptedException
     {
         if (!buff.hasBuff(npc, "event_lifeday_no_bark"))
         {
@@ -192,7 +192,7 @@ public class imperial_life_day_vendor extends script.base_script
             }
         }
     }
-    public void imperial_life_day_vendor_action_barkLeadersSilent(obj_id player, obj_id npc) throws InterruptedException
+    public void lifeday_faction_vendor_imperial_action_barkLeadersSilent(obj_id player, obj_id npc) throws InterruptedException
     {
         obj_id tatooine = getPlanetByName("tatooine");
         if (!isIdValid(tatooine))
@@ -234,43 +234,43 @@ public class imperial_life_day_vendor extends script.base_script
             }
         }
     }
-    public int imperial_life_day_vendor_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
+    public int lifeday_faction_vendor_imperial_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_45"))
         {
             doAnimationAction(player, "shrug_shoulders");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
-                imperial_life_day_vendor_action_showTokenVendorUI(player, npc);
+                lifeday_faction_vendor_imperial_action_showTokenVendorUI(player, npc);
                 string_id message = new string_id(c_stringFile, "s_95");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         if (response.equals("s_52"))
         {
-            imperial_life_day_vendor_action_barkLeadersSilent(player, npc);
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            lifeday_faction_vendor_imperial_action_barkLeadersSilent(player, npc);
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 string_id message = new string_id(c_stringFile, "s_54");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_DEFAULT;
     }
-    public int imperial_life_day_vendor_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
+    public int lifeday_faction_vendor_imperial_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_102"))
         {
             doAnimationAction(player, "shrug_shoulders");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
-                imperial_life_day_vendor_action_showTokenVendorUI(player, npc);
+                lifeday_faction_vendor_imperial_action_showTokenVendorUI(player, npc);
                 string_id message = new string_id(c_stringFile, "s_95");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
@@ -278,11 +278,11 @@ public class imperial_life_day_vendor extends script.base_script
         if (response.equals("s_103"))
         {
             doAnimationAction(player, "rub_chin_thoughtful");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "salute2");
                 string_id message = new string_id(c_stringFile, "s_104");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
@@ -293,37 +293,37 @@ public class imperial_life_day_vendor extends script.base_script
         }
         if (response.equals("s_34"))
         {
-            imperial_life_day_vendor_action_barkLeadersSilent(player, npc);
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            lifeday_faction_vendor_imperial_action_barkLeadersSilent(player, npc);
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 string_id message = new string_id(c_stringFile, "s_35");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_DEFAULT;
     }
-    public int imperial_life_day_vendor_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
+    public int lifeday_faction_vendor_imperial_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_97"))
         {
             doAnimationAction(player, "backhand_threaten");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "slow_down");
                 string_id message = new string_id(c_stringFile, "s_100");
                 int numberOfResponses = 0;
                 boolean hasResponse = false;
                 boolean hasResponse0 = false;
-                if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+                if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse0 = true;
                 }
                 boolean hasResponse1 = false;
-                if (imperial_life_day_vendor_condition_scoreBoardNotEmpty(player, npc))
+                if (lifeday_faction_vendor_imperial_condition_scoreBoardNotEmpty(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
@@ -341,7 +341,7 @@ public class imperial_life_day_vendor extends script.base_script
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_49");
                     }
-                    utils.setScriptVar(player, "conversation.imperial_life_day_vendor.branchId", 8);
+                    utils.setScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId", 8);
                     prose_package pp = new prose_package();
                     pp.stringId = message;
                     pp.actor.set(player);
@@ -351,7 +351,7 @@ public class imperial_life_day_vendor extends script.base_script
                 }
                 else 
                 {
-                    utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                    utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                     prose_package pp = new prose_package();
                     pp.stringId = message;
                     pp.actor.set(player);
@@ -364,11 +364,11 @@ public class imperial_life_day_vendor extends script.base_script
         if (response.equals("s_98"))
         {
             doAnimationAction(player, "dismiss");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "implore");
                 string_id message = new string_id(c_stringFile, "s_99");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
@@ -379,38 +379,38 @@ public class imperial_life_day_vendor extends script.base_script
         }
         return SCRIPT_DEFAULT;
     }
-    public int imperial_life_day_vendor_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
+    public int lifeday_faction_vendor_imperial_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_38"))
         {
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 string_id message = new string_id(c_stringFile, "s_39");
                 int numberOfResponses = 0;
                 boolean hasResponse = false;
                 boolean hasResponse0 = false;
-                if (imperial_life_day_vendor_condition_alreadyWorking(player, npc))
+                if (lifeday_faction_vendor_imperial_condition_alreadyWorking(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse0 = true;
                 }
                 boolean hasResponse1 = false;
-                if (imperial_life_day_vendor_condition_alreadyWorking(player, npc))
+                if (lifeday_faction_vendor_imperial_condition_alreadyWorking(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse1 = true;
                 }
                 boolean hasResponse2 = false;
-                if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+                if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse2 = true;
                 }
                 boolean hasResponse3 = false;
-                if (imperial_life_day_vendor_condition_scoreBoardNotEmpty(player, npc))
+                if (lifeday_faction_vendor_imperial_condition_scoreBoardNotEmpty(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
@@ -436,13 +436,13 @@ public class imperial_life_day_vendor extends script.base_script
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
                     }
-                    utils.setScriptVar(player, "conversation.imperial_life_day_vendor.branchId", 17);
+                    utils.setScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId", 17);
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
                 else 
                 {
-                    utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                    utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                     npcEndConversationWithMessage(player, message);
                 }
                 return SCRIPT_CONTINUE;
@@ -450,28 +450,28 @@ public class imperial_life_day_vendor extends script.base_script
         }
         if (response.equals("s_49"))
         {
-            imperial_life_day_vendor_action_barkLeadersSilent(player, npc);
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            lifeday_faction_vendor_imperial_action_barkLeadersSilent(player, npc);
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 string_id message = new string_id(c_stringFile, "s_53");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_DEFAULT;
     }
-    public int imperial_life_day_vendor_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
+    public int lifeday_faction_vendor_imperial_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
         {
             doAnimationAction(player, "salute2");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "salute2");
-                imperial_life_day_vendor_action_addCompetitiveBuff(player, npc);
+                lifeday_faction_vendor_imperial_action_addCompetitiveBuff(player, npc);
                 string_id message = new string_id(c_stringFile, "s_77");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
@@ -483,12 +483,12 @@ public class imperial_life_day_vendor extends script.base_script
         if (response.equals("s_73"))
         {
             doAnimationAction(player, "rub_chin_thoughtful");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod");
-                imperial_life_day_vendor_action_addCasualBuff(player, npc);
+                lifeday_faction_vendor_imperial_action_addCasualBuff(player, npc);
                 string_id message = new string_id(c_stringFile, "s_79");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
@@ -500,11 +500,11 @@ public class imperial_life_day_vendor extends script.base_script
         if (response.equals("s_75"))
         {
             doAnimationAction(player, "shake_head_no");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod");
                 string_id message = new string_id(c_stringFile, "s_81");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
@@ -515,51 +515,51 @@ public class imperial_life_day_vendor extends script.base_script
         }
         if (response.equals("s_47"))
         {
-            imperial_life_day_vendor_action_barkLeadersSilent(player, npc);
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            lifeday_faction_vendor_imperial_action_barkLeadersSilent(player, npc);
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 string_id message = new string_id(c_stringFile, "s_51");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_DEFAULT;
     }
-    public int imperial_life_day_vendor_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
+    public int lifeday_faction_vendor_imperial_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_85"))
         {
             doAnimationAction(player, "shrug_shoulders");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod_head_multiple");
                 string_id message = new string_id(c_stringFile, "s_91");
                 int numberOfResponses = 0;
                 boolean hasResponse = false;
                 boolean hasResponse0 = false;
-                if (imperial_life_day_vendor_condition_alreadyWorking(player, npc))
+                if (lifeday_faction_vendor_imperial_condition_alreadyWorking(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse0 = true;
                 }
                 boolean hasResponse1 = false;
-                if (imperial_life_day_vendor_condition_alreadyWorking(player, npc))
+                if (lifeday_faction_vendor_imperial_condition_alreadyWorking(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse1 = true;
                 }
                 boolean hasResponse2 = false;
-                if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+                if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse2 = true;
                 }
                 boolean hasResponse3 = false;
-                if (imperial_life_day_vendor_condition_scoreBoardNotEmpty(player, npc))
+                if (lifeday_faction_vendor_imperial_condition_scoreBoardNotEmpty(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
@@ -585,7 +585,7 @@ public class imperial_life_day_vendor extends script.base_script
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
                     }
-                    utils.setScriptVar(player, "conversation.imperial_life_day_vendor.branchId", 17);
+                    utils.setScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId", 17);
                     prose_package pp = new prose_package();
                     pp.stringId = message;
                     pp.actor.set(player);
@@ -595,7 +595,7 @@ public class imperial_life_day_vendor extends script.base_script
                 }
                 else 
                 {
-                    utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                    utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                     prose_package pp = new prose_package();
                     pp.stringId = message;
                     pp.actor.set(player);
@@ -608,11 +608,11 @@ public class imperial_life_day_vendor extends script.base_script
         if (response.equals("s_87"))
         {
             doAnimationAction(player, "shake_head_no");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod_head_multiple");
                 string_id message = new string_id(c_stringFile, "s_89");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
@@ -620,39 +620,39 @@ public class imperial_life_day_vendor extends script.base_script
         if (response.equals("s_93"))
         {
             doAnimationAction(player, "shake_head_no");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
-                imperial_life_day_vendor_action_showTokenVendorUI(player, npc);
+                lifeday_faction_vendor_imperial_action_showTokenVendorUI(player, npc);
                 string_id message = new string_id(c_stringFile, "s_95");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         if (response.equals("s_56"))
         {
-            imperial_life_day_vendor_action_barkLeadersSilent(player, npc);
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            lifeday_faction_vendor_imperial_action_barkLeadersSilent(player, npc);
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 string_id message = new string_id(c_stringFile, "s_59");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_DEFAULT;
     }
-    public int imperial_life_day_vendor_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
+    public int lifeday_faction_vendor_imperial_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
         {
             doAnimationAction(player, "salute2");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "salute2");
-                imperial_life_day_vendor_action_addCompetitiveBuff(player, npc);
+                lifeday_faction_vendor_imperial_action_addCompetitiveBuff(player, npc);
                 string_id message = new string_id(c_stringFile, "s_77");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
@@ -664,12 +664,12 @@ public class imperial_life_day_vendor extends script.base_script
         if (response.equals("s_73"))
         {
             doAnimationAction(player, "rub_chin_thoughtful");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod");
-                imperial_life_day_vendor_action_addCasualBuff(player, npc);
+                lifeday_faction_vendor_imperial_action_addCasualBuff(player, npc);
                 string_id message = new string_id(c_stringFile, "s_79");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
@@ -681,11 +681,11 @@ public class imperial_life_day_vendor extends script.base_script
         if (response.equals("s_75"))
         {
             doAnimationAction(player, "shake_head_no");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod");
                 string_id message = new string_id(c_stringFile, "s_81");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
@@ -696,50 +696,50 @@ public class imperial_life_day_vendor extends script.base_script
         }
         if (response.equals("s_47"))
         {
-            imperial_life_day_vendor_action_barkLeadersSilent(player, npc);
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            lifeday_faction_vendor_imperial_action_barkLeadersSilent(player, npc);
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 string_id message = new string_id(c_stringFile, "s_51");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_DEFAULT;
     }
-    public int imperial_life_day_vendor_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
+    public int lifeday_faction_vendor_imperial_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_60"))
         {
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "pound_fist_palm");
                 string_id message = new string_id(c_stringFile, "s_70");
                 int numberOfResponses = 0;
                 boolean hasResponse = false;
                 boolean hasResponse0 = false;
-                if (imperial_life_day_vendor_condition_alreadyWorking(player, npc))
+                if (lifeday_faction_vendor_imperial_condition_alreadyWorking(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse0 = true;
                 }
                 boolean hasResponse1 = false;
-                if (imperial_life_day_vendor_condition_alreadyWorking(player, npc))
+                if (lifeday_faction_vendor_imperial_condition_alreadyWorking(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse1 = true;
                 }
                 boolean hasResponse2 = false;
-                if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+                if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse2 = true;
                 }
                 boolean hasResponse3 = false;
-                if (imperial_life_day_vendor_condition_scoreBoardNotEmpty(player, npc))
+                if (lifeday_faction_vendor_imperial_condition_scoreBoardNotEmpty(player, npc))
                 {
                     ++numberOfResponses;
                     hasResponse = true;
@@ -765,13 +765,13 @@ public class imperial_life_day_vendor extends script.base_script
                     {
                         responses[responseIndex++] = new string_id(c_stringFile, "s_47");
                     }
-                    utils.setScriptVar(player, "conversation.imperial_life_day_vendor.branchId", 17);
+                    utils.setScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId", 17);
                     npcSpeak(player, message);
                     npcSetConversationResponses(player, responses);
                 }
                 else 
                 {
-                    utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                    utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                     npcEndConversationWithMessage(player, message);
                 }
                 return SCRIPT_CONTINUE;
@@ -779,39 +779,39 @@ public class imperial_life_day_vendor extends script.base_script
         }
         if (response.equals("s_62"))
         {
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
-                imperial_life_day_vendor_action_showTokenVendorUI(player, npc);
+                lifeday_faction_vendor_imperial_action_showTokenVendorUI(player, npc);
                 string_id message = new string_id(c_stringFile, "s_95");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         if (response.equals("s_63"))
         {
-            imperial_life_day_vendor_action_barkLeadersSilent(player, npc);
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            lifeday_faction_vendor_imperial_action_barkLeadersSilent(player, npc);
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 string_id message = new string_id(c_stringFile, "s_65");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
         }
         return SCRIPT_DEFAULT;
     }
-    public int imperial_life_day_vendor_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
+    public int lifeday_faction_vendor_imperial_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
         if (response.equals("s_71"))
         {
             doAnimationAction(player, "salute2");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "salute2");
-                imperial_life_day_vendor_action_addCompetitiveBuff(player, npc);
+                lifeday_faction_vendor_imperial_action_addCompetitiveBuff(player, npc);
                 string_id message = new string_id(c_stringFile, "s_77");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
@@ -823,12 +823,12 @@ public class imperial_life_day_vendor extends script.base_script
         if (response.equals("s_73"))
         {
             doAnimationAction(player, "rub_chin_thoughtful");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod");
-                imperial_life_day_vendor_action_addCasualBuff(player, npc);
+                lifeday_faction_vendor_imperial_action_addCasualBuff(player, npc);
                 string_id message = new string_id(c_stringFile, "s_79");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
@@ -840,11 +840,11 @@ public class imperial_life_day_vendor extends script.base_script
         if (response.equals("s_75"))
         {
             doAnimationAction(player, "shake_head_no");
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 doAnimationAction(npc, "nod");
                 string_id message = new string_id(c_stringFile, "s_81");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
@@ -855,11 +855,11 @@ public class imperial_life_day_vendor extends script.base_script
         }
         if (response.equals("s_47"))
         {
-            imperial_life_day_vendor_action_barkLeadersSilent(player, npc);
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            lifeday_faction_vendor_imperial_action_barkLeadersSilent(player, npc);
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 string_id message = new string_id(c_stringFile, "s_51");
-                utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+                utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
                 npcEndConversationWithMessage(player, message);
                 return SCRIPT_CONTINUE;
             }
@@ -870,7 +870,7 @@ public class imperial_life_day_vendor extends script.base_script
     {
         if ((!isTangible(self)) || (isPlayer(self)))
         {
-            detachScript(self, "conversation.imperial_life_day_vendor");
+            detachScript(self, "conversation.lifeday_faction_vendor_imperial");
         }
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
@@ -891,7 +891,7 @@ public class imperial_life_day_vendor extends script.base_script
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         clearCondition(self, CONDITION_CONVERSABLE);
-        detachScript(self, "conversation.imperial_life_day_vendor");
+        detachScript(self, "conversation.lifeday_faction_vendor_imperial");
         return SCRIPT_CONTINUE;
     }
     public int OnDetach(obj_id self) throws InterruptedException
@@ -912,30 +912,30 @@ public class imperial_life_day_vendor extends script.base_script
         {
             return SCRIPT_OVERRIDE;
         }
-        if (imperial_life_day_vendor_condition_rebelPlayer(player, npc))
+        if (lifeday_faction_vendor_imperial_condition_rebelPlayer(player, npc))
         {
             doAnimationAction(npc, "rub_chin_thoughtful");
             string_id message = new string_id(c_stringFile, "s_50");
             chat.chat(npc, player, message);
             return SCRIPT_CONTINUE;
         }
-        if (imperial_life_day_vendor_condition_alreadyWorking_2(player, npc))
+        if (lifeday_faction_vendor_imperial_condition_alreadyWorking_2(player, npc))
         {
             doAnimationAction(npc, "nod");
             doAnimationAction(player, "greet");
-            imperial_life_day_vendor_action_barkLeaders(player, npc);
+            lifeday_faction_vendor_imperial_action_barkLeaders(player, npc);
             string_id message = new string_id(c_stringFile, "s_43");
             int numberOfResponses = 0;
             boolean hasResponse = false;
             boolean hasResponse0 = false;
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse0 = true;
             }
             boolean hasResponse1 = false;
-            if (imperial_life_day_vendor_condition_scoreBoardNotEmpty(player, npc))
+            if (lifeday_faction_vendor_imperial_condition_scoreBoardNotEmpty(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
@@ -953,12 +953,12 @@ public class imperial_life_day_vendor extends script.base_script
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_52");
                 }
-                utils.setScriptVar(player, "conversation.imperial_life_day_vendor.branchId", 2);
+                utils.setScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId", 2);
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
                 pp.target.set(npc);
-                npcStartConversation(player, npc, "imperial_life_day_vendor", null, pp, responses);
+                npcStartConversation(player, npc, "lifeday_faction_vendor_imperial", null, pp, responses);
             }
             else 
             {
@@ -970,30 +970,30 @@ public class imperial_life_day_vendor extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (imperial_life_day_vendor_condition_lockedOut(player, npc))
+        if (lifeday_faction_vendor_imperial_condition_lockedOut(player, npc))
         {
             doAnimationAction(npc, "salute2");
             doAnimationAction(player, "salute2");
-            imperial_life_day_vendor_action_barkLeaders(player, npc);
+            lifeday_faction_vendor_imperial_action_barkLeaders(player, npc);
             string_id message = new string_id(c_stringFile, "s_101");
             int numberOfResponses = 0;
             boolean hasResponse = false;
             boolean hasResponse0 = false;
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse0 = true;
             }
             boolean hasResponse1 = false;
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse1 = true;
             }
             boolean hasResponse2 = false;
-            if (imperial_life_day_vendor_condition_scoreBoardNotEmpty(player, npc))
+            if (lifeday_faction_vendor_imperial_condition_scoreBoardNotEmpty(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
@@ -1015,12 +1015,12 @@ public class imperial_life_day_vendor extends script.base_script
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_34");
                 }
-                utils.setScriptVar(player, "conversation.imperial_life_day_vendor.branchId", 4);
+                utils.setScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId", 4);
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
                 pp.target.set(npc);
-                npcStartConversation(player, npc, "imperial_life_day_vendor", null, pp, responses);
+                npcStartConversation(player, npc, "lifeday_faction_vendor_imperial", null, pp, responses);
             }
             else 
             {
@@ -1032,22 +1032,22 @@ public class imperial_life_day_vendor extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (imperial_life_day_vendor_condition_wookiee(player, npc))
+        if (lifeday_faction_vendor_imperial_condition_wookiee(player, npc))
         {
             doAnimationAction(npc, "sweat");
-            imperial_life_day_vendor_action_barkLeaders(player, npc);
+            lifeday_faction_vendor_imperial_action_barkLeaders(player, npc);
             string_id message = new string_id(c_stringFile, "s_96");
             int numberOfResponses = 0;
             boolean hasResponse = false;
             boolean hasResponse0 = false;
-            if (imperial_life_day_vendor_condition_alreadyWorking(player, npc))
+            if (lifeday_faction_vendor_imperial_condition_alreadyWorking(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse0 = true;
             }
             boolean hasResponse1 = false;
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
@@ -1065,8 +1065,8 @@ public class imperial_life_day_vendor extends script.base_script
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_98");
                 }
-                utils.setScriptVar(player, "conversation.imperial_life_day_vendor.branchId", 7);
-                npcStartConversation(player, npc, "imperial_life_day_vendor", message, responses);
+                utils.setScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId", 7);
+                npcStartConversation(player, npc, "lifeday_faction_vendor_imperial", message, responses);
             }
             else 
             {
@@ -1074,37 +1074,37 @@ public class imperial_life_day_vendor extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (imperial_life_day_vendor_condition_neutral(player, npc))
+        if (lifeday_faction_vendor_imperial_condition_neutral(player, npc))
         {
             doAnimationAction(npc, "salute2");
             doAnimationAction(player, "nod_head_once");
-            imperial_life_day_vendor_action_barkLeaders(player, npc);
+            lifeday_faction_vendor_imperial_action_barkLeaders(player, npc);
             string_id message = new string_id(c_stringFile, "s_83");
             int numberOfResponses = 0;
             boolean hasResponse = false;
             boolean hasResponse0 = false;
-            if (imperial_life_day_vendor_condition_alreadyWorking(player, npc))
+            if (lifeday_faction_vendor_imperial_condition_alreadyWorking(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse0 = true;
             }
             boolean hasResponse1 = false;
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse1 = true;
             }
             boolean hasResponse2 = false;
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse2 = true;
             }
             boolean hasResponse3 = false;
-            if (imperial_life_day_vendor_condition_scoreBoardNotEmpty(player, npc))
+            if (lifeday_faction_vendor_imperial_condition_scoreBoardNotEmpty(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
@@ -1130,12 +1130,12 @@ public class imperial_life_day_vendor extends script.base_script
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_56");
                 }
-                utils.setScriptVar(player, "conversation.imperial_life_day_vendor.branchId", 12);
+                utils.setScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId", 12);
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
                 pp.target.set(npc);
-                npcStartConversation(player, npc, "imperial_life_day_vendor", null, pp, responses);
+                npcStartConversation(player, npc, "lifeday_faction_vendor_imperial", null, pp, responses);
             }
             else 
             {
@@ -1147,30 +1147,30 @@ public class imperial_life_day_vendor extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+        if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
         {
             doAnimationAction(npc, "salute2");
             doAnimationAction(player, "salute2");
-            imperial_life_day_vendor_action_barkLeaders(player, npc);
+            lifeday_faction_vendor_imperial_action_barkLeaders(player, npc);
             string_id message = new string_id(c_stringFile, "s_58");
             int numberOfResponses = 0;
             boolean hasResponse = false;
             boolean hasResponse0 = false;
-            if (imperial_life_day_vendor_condition_alreadyWorking(player, npc))
+            if (lifeday_faction_vendor_imperial_condition_alreadyWorking(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse0 = true;
             }
             boolean hasResponse1 = false;
-            if (imperial_life_day_vendor_condition__defaultCondition(player, npc))
+            if (lifeday_faction_vendor_imperial_condition__defaultCondition(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
                 hasResponse1 = true;
             }
             boolean hasResponse2 = false;
-            if (imperial_life_day_vendor_condition_scoreBoardNotEmpty(player, npc))
+            if (lifeday_faction_vendor_imperial_condition_scoreBoardNotEmpty(player, npc))
             {
                 ++numberOfResponses;
                 hasResponse = true;
@@ -1192,12 +1192,12 @@ public class imperial_life_day_vendor extends script.base_script
                 {
                     responses[responseIndex++] = new string_id(c_stringFile, "s_63");
                 }
-                utils.setScriptVar(player, "conversation.imperial_life_day_vendor.branchId", 16);
+                utils.setScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId", 16);
                 prose_package pp = new prose_package();
                 pp.stringId = message;
                 pp.actor.set(player);
                 pp.target.set(npc);
-                npcStartConversation(player, npc, "imperial_life_day_vendor", null, pp, responses);
+                npcStartConversation(player, npc, "lifeday_faction_vendor_imperial", null, pp, responses);
             }
             else 
             {
@@ -1214,50 +1214,50 @@ public class imperial_life_day_vendor extends script.base_script
     }
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
-        if (!conversationId.equals("imperial_life_day_vendor"))
+        if (!conversationId.equals("lifeday_faction_vendor_imperial"))
         {
             return SCRIPT_CONTINUE;
         }
         obj_id npc = self;
-        int branchId = utils.getIntScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
-        if (branchId == 2 && imperial_life_day_vendor_handleBranch2(player, npc, response) == SCRIPT_CONTINUE)
+        int branchId = utils.getIntScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
+        if (branchId == 2 && lifeday_faction_vendor_imperial_handleBranch2(player, npc, response) == SCRIPT_CONTINUE)
         {
             return SCRIPT_CONTINUE;
         }
-        if (branchId == 4 && imperial_life_day_vendor_handleBranch4(player, npc, response) == SCRIPT_CONTINUE)
+        if (branchId == 4 && lifeday_faction_vendor_imperial_handleBranch4(player, npc, response) == SCRIPT_CONTINUE)
         {
             return SCRIPT_CONTINUE;
         }
-        if (branchId == 7 && imperial_life_day_vendor_handleBranch7(player, npc, response) == SCRIPT_CONTINUE)
+        if (branchId == 7 && lifeday_faction_vendor_imperial_handleBranch7(player, npc, response) == SCRIPT_CONTINUE)
         {
             return SCRIPT_CONTINUE;
         }
-        if (branchId == 8 && imperial_life_day_vendor_handleBranch8(player, npc, response) == SCRIPT_CONTINUE)
+        if (branchId == 8 && lifeday_faction_vendor_imperial_handleBranch8(player, npc, response) == SCRIPT_CONTINUE)
         {
             return SCRIPT_CONTINUE;
         }
-        if (branchId == 9 && imperial_life_day_vendor_handleBranch9(player, npc, response) == SCRIPT_CONTINUE)
+        if (branchId == 9 && lifeday_faction_vendor_imperial_handleBranch9(player, npc, response) == SCRIPT_CONTINUE)
         {
             return SCRIPT_CONTINUE;
         }
-        if (branchId == 12 && imperial_life_day_vendor_handleBranch12(player, npc, response) == SCRIPT_CONTINUE)
+        if (branchId == 12 && lifeday_faction_vendor_imperial_handleBranch12(player, npc, response) == SCRIPT_CONTINUE)
         {
             return SCRIPT_CONTINUE;
         }
-        if (branchId == 13 && imperial_life_day_vendor_handleBranch13(player, npc, response) == SCRIPT_CONTINUE)
+        if (branchId == 13 && lifeday_faction_vendor_imperial_handleBranch13(player, npc, response) == SCRIPT_CONTINUE)
         {
             return SCRIPT_CONTINUE;
         }
-        if (branchId == 16 && imperial_life_day_vendor_handleBranch16(player, npc, response) == SCRIPT_CONTINUE)
+        if (branchId == 16 && lifeday_faction_vendor_imperial_handleBranch16(player, npc, response) == SCRIPT_CONTINUE)
         {
             return SCRIPT_CONTINUE;
         }
-        if (branchId == 17 && imperial_life_day_vendor_handleBranch17(player, npc, response) == SCRIPT_CONTINUE)
+        if (branchId == 17 && lifeday_faction_vendor_imperial_handleBranch17(player, npc, response) == SCRIPT_CONTINUE)
         {
             return SCRIPT_CONTINUE;
         }
         chat.chat(npc, "Error:  Fell through all branches and responses for OnNpcConversationResponse.");
-        utils.removeScriptVar(player, "conversation.imperial_life_day_vendor.branchId");
+        utils.removeScriptVar(player, "conversation.lifeday_faction_vendor_imperial.branchId");
         return SCRIPT_CONTINUE;
     }
 }
