@@ -13,7 +13,7 @@ public class vendor extends script.base_script
     public static final String OBJECT_FOR_SALE_DEFAULT_SCRIPT = "npc.vendor.object_for_sale";
     public static final String OBJECT_FOR_SALE_CASH_COST = "item.object_for_sale.cash_cost";
     public static final String OBJECT_FOR_SALE_TOKEN_COST = "item.object_for_sale.token_cost";
-    public static final String OBJECT_FOR_SALE_LIMIT = "item.object_for_sale.limit";
+	public static final String OBJECT_FOR_SALE_LIMIT = "item.object_for_sale.limit";
     public static final String VENDOR_CONTAINER_LIST_OBJVAR = "item.vendor.container_list";
     public static final String VENDOR_TOKEN_TYPE = "item.token.type";
     public static final int IMPERIAL = 10;
@@ -176,11 +176,11 @@ public class vendor extends script.base_script
         {
             profession = REBEL;
         }
-        /*if (!hasObjVar(self, VENDOR_CONTAINER_LIST_OBJVAR))
+        if (!hasObjVar(self, VENDOR_CONTAINER_LIST_OBJVAR))
         {
             sendSystemMessage(player, new string_id("set_bonus", "vendor_not_qualified"));
             return SCRIPT_CONTINUE;
-        }*/
+        }
         obj_id[] containerList = getObjIdArrayObjVar(self, VENDOR_CONTAINER_LIST_OBJVAR);
         obj_id container = null;
         if (isIdValid(containerList[profession]) && exists(containerList[profession]))
@@ -196,11 +196,11 @@ public class vendor extends script.base_script
                 container = containerList[profession];
             }
         }
-        /*if (!isIdValid(container) || !exists(container))
+        if (!isIdValid(container) || !exists(container))
         {
             sendSystemMessage(player, new string_id("set_bonus", "vendor_not_qualified"));
             return SCRIPT_CONTINUE;
-        }*/
+        }
         queueCommand(player, (1880585606), container, "", COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
@@ -209,11 +209,11 @@ public class vendor extends script.base_script
         obj_id player = params.getObjId("player");
         obj_id[] containerList = getObjIdArrayObjVar(self, VENDOR_CONTAINER_LIST_OBJVAR);
         obj_id container = containerList[0];
-        /*if (!isIdValid(container) || !exists(container))
+        if (!isIdValid(container) || !exists(container))
         {
             sendSystemMessage(player, new string_id("set_bonus", "vendor_not_qualified"));
             return SCRIPT_CONTINUE;
-        }*/
+        }
         queueCommand(player, (1880585606), container, "", COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
