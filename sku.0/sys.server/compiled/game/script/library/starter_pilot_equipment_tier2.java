@@ -22,7 +22,8 @@ public class starter_pilot_equipment_tier2 extends script.base_script {
         obj_id pInv = utils.getInventoryContainer(player);
         HashSet theSet = new HashSet();
         
-        theSet.add(static_item.createNewItemFunction("item_corellian_reinforced_light_durasteel_01_01", pInv, 2));
+        theSet.add(static_item.createNewItemFunction("item_corellian_reinforced_light_durasteel_01_01", pInv));
+        theSet.add(static_item.createNewItemFunction("item_corellian_reinforced_light_durasteel_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_cygnus_flashboost4_boosters_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_cygnus_hd7_engine_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_incom_mark2_reactor_01_01", pInv));

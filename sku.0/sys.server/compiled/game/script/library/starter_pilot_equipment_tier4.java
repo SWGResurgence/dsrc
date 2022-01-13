@@ -22,14 +22,16 @@ public class starter_pilot_equipment_tier4 extends script.base_script {
         obj_id pInv = utils.getInventoryContainer(player);
         HashSet theSet = new HashSet();
         
-        theSet.add(static_item.createNewItemFunction("item_koensayr_thick_advanced_durasteel_01_01", pInv, 2));
+        theSet.add(static_item.createNewItemFunction("item_koensayr_thick_advanced_durasteel_01_01", pInv));
+        theSet.add(static_item.createNewItemFunction("item_koensayr_thick_advanced_durasteel_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_corellian_advanced_thrust_enhancer_boosters_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_kse_mk4_capacitor_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_hk_mk3_droid_interface_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_kuat_f31_engine_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_mandal_dxr5_reactor_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_koensayr_deflector_m6_01_01", pInv));
-        theSet.add(static_item.createNewItemFunction("item_seinar_ls1_blaster_01_01", pInv, 2));
+        theSet.add(static_item.createNewItemFunction("item_seinar_ls1_blaster_01_01", pInv));
+        theSet.add(static_item.createNewItemFunction("item_seinar_ls1_blaster_01_01", pInv));
         
         obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);

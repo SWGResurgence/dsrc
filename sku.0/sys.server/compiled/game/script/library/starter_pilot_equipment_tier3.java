@@ -22,14 +22,16 @@ public class starter_pilot_equipment_tier3 extends script.base_script {
         obj_id pInv = utils.getInventoryContainer(player);
         HashSet theSet = new HashSet();
         
-        theSet.add(static_item.createNewItemFunction("item_kuat_systems_engineering_modified_heavy_durasteel", pInv, 2));
+        theSet.add(static_item.createNewItemFunction("item_kuat_systems_engineering_modified_heavy_durasteel", pInv));
+        theSet.add(static_item.createNewItemFunction("item_kuat_systems_engineering_modified_heavy_durasteel", pInv));
         theSet.add(static_item.createNewItemFunction("item_incom_intimidator_mk3_boosters_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_rendili_imperator_droid_interface_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_kse_mk3_capacitor_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_sfs_imperial_engine_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_sorosuub_fusion_reactor_01_01", pInv));
         theSet.add(static_item.createNewItemFunction("item_kse_mk4_shields_01_01", pInv));
-        theSet.add(static_item.createNewItemFunction("item_hk_scorcher_01_01", pInv, 2));
+        theSet.add(static_item.createNewItemFunction("item_hk_scorcher_01_01", pInv));
+        theSet.add(static_item.createNewItemFunction("item_hk_scorcher_01_01", pInv));
 
         obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
