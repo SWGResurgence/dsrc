@@ -35,6 +35,7 @@ public class trader_care_package_generators extends script.base_script {
     theSet.add(static_item.createNewItemFunction("item_power_generator_photo_bio_deed_01_01", pInv));
     theSet.add(static_item.createNewItemFunction("item_power_generator_geothermal_deed_01_01", pInv));
     theSet.add(static_item.createNewItemFunction("item_power_generator_fusion_deed_01_01", pInv));
+    item_power_generator_fusion_deed_01_01
 		
 		obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
