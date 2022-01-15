@@ -1,0 +1,20 @@
+// 
+
+@base object/weapon/melee/base/shared_base_melee.iff
+
+@class weapon_object_template 4
+
+@class tangible_object_template 6
+
+@class object_template 5
+
+
+objectName = "weapon_name"  "knuckler_wod"
+
+detailedDescription = "weapon_detail"  "knuckler_wod"
+
+lookAtText = "weapon_lookat"  "knuckler_wod"
+
+appearanceFilename = "appearance/wp_sp_massassi_knuckler_lb.apt"
+
+clientDataFile = "clientdata/weapon/client_melee_knuckler.cdf"

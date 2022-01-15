@@ -12,8 +12,8 @@ public class respec extends script.base_script
     public static final int RESPEC_PRICE_MULTIPLIER = 10000;
     public static final int[] RESPEC_COST = new int[]
     {
-        0,				// Free
-        25000,			// 25K
+    0,				  // Free
+    25000,			// 25K
 		50000,			// 50K				
 		100000,			// 100K
 		150000,			// 150K
@@ -28,7 +28,7 @@ public class respec extends script.base_script
 		25000000,		// 25MIL
 		50000000,		// 50MIL
 		75000000,		// 75MIL
-		100000000,		// 100MIL
+		100000000,	// 100MIL
 		
     };
     public static final String OBJVAR_RESPEC_TOKEN = "respecToken.token";
@@ -971,11 +971,7 @@ public class respec extends script.base_script
     {
         String skillTemplate = getSkillTemplate(player);
         String profession = skill.getProfessionName(skillTemplate);
-        if (profession == null || skillTemplate == null)
-        {
-            return false;
-        }
-        if (profession.equals("") || skillTemplate.equals(""))
+        if (profession == null || profession.isEmpty() || skillTemplate == null || skillTemplate.isEmpty())
         {
             return false;
         }
@@ -1011,11 +1007,7 @@ public class respec extends script.base_script
     {
         String skillTemplate = getSkillTemplate(player);
         String profession = skill.getProfessionName(skillTemplate);
-        if (profession == null || skillTemplate == null)
-        {
-            return -1;
-        }
-        if (profession.equals("") || skillTemplate.equals(""))
+        if (profession == null || profession.isEmpty() || skillTemplate == null || skillTemplate.isEmpty())
         {
             return -1;
         }
@@ -1115,7 +1107,7 @@ public class respec extends script.base_script
             return false;
         }
 
-        int timeTillNextDecay = getCalendarTime() + secondsUntilNextMonthlyTime(1, 10, 0, 0);
+        int timeTillNextDecay = getCalendarTime() + secondsUntilNextWeeklyTime(1, 0, 0, 0);
         setObjVar(player, OBJVAR_RESPEC_DECAY_TIME, timeTillNextDecay);
         return true;
     }

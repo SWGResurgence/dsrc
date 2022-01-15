@@ -56,36 +56,36 @@ object/building/player/player_house_tatooine_medium_style_01.iff	object/building
 																							object/tangible/terminal/terminal_player_structure.iff	6.94	1.06	7.98	foyer	180	
 object/building/player/player_house_tatooine_large_style_01.iff	object/building/player/construction/construction_player_house_tatooine_large_style_01.iff			1									13	5	7200	2500	1					4							
 																							object/tangible/terminal/terminal_player_structure.iff	8.16	1.06	11.24	public	180	
-object/installation/manufacture/clothing_factory.iff	object/installation/base/construction_installation_base.iff												125	6	1000	2500		50				4							
-object/installation/manufacture/food_factory.iff	object/installation/base/construction_installation_base.iff												125	6	1000	2500		50				4							
-object/installation/manufacture/weapon_factory.iff	object/installation/base/construction_installation_base.iff												125	6	1000	2500		50				4							
-object/installation/manufacture/structure_factory.iff	object/installation/base/construction_installation_base.iff			1									125	6	1000	2500		50				4							
-object/installation/generators/power_generator_fusion_style_1.iff	object/installation/base/construction_installation_base.iff			-1									15	6	1000	3000		0				4							
-object/installation/generators/power_generator_photo_bio_style_1.iff	object/installation/base/construction_installation_base.iff			-1									15	6	1000	3000		0				4							
-object/installation/generators/power_generator_solar_style_1.iff	object/installation/base/construction_installation_base.iff			-1									15	6	1000	3000		0				4							
-object/installation/generators/power_generator_geothermal_style_1.iff	object/installation/base/construction_installation_base.iff			-1									15	6	1000	3000		0				4							
-object/installation/generators/power_generator_wind_style_1.iff	object/installation/base/construction_installation_base.iff			-1									15	6	1000	3000		0				4							
-object/installation/mining_gas/mining_gas_harvester_style_1.iff	object/installation/base/construction_installation_base.iff			-1									8	6	1000	1500		25				4							
-object/installation/mining_gas/mining_gas_harvester_style_2.iff	object/installation/base/construction_installation_base.iff			-1									15	6	1000	3000		50				4							
-object/installation/mining_gas/mining_gas_harvester_style_3.iff	object/installation/base/construction_installation_base.iff			-1									23	6	1000	4500		75				4							
-object/installation/mining_gas/mining_gas_harvester_style_4.iff	object/installation/base/construction_installation_base.iff			-3									63	6	1000	12375		206				4							
-object/installation/mining_liquid/mining_liquid_harvester_style_1.iff	object/installation/base/construction_installation_base.iff			-1									8	6	1000	1500		25				4							
-object/installation/mining_liquid/mining_liquid_harvester_style_2.iff	object/installation/base/construction_installation_base.iff			-1									15	6	1000	3000		50				4							
-object/installation/mining_liquid/mining_liquid_harvester_style_3.iff	object/installation/base/construction_installation_base.iff			-1									23	6	1000	4500		75				4							
-object/installation/mining_liquid/mining_liquid_harvester_style_4.iff	object/installation/base/construction_installation_base.iff			-3									63	6	1000	12375		206				4							
-object/installation/mining_liquid/mining_liquid_moisture_harvester.iff	object/installation/base/construction_installation_base.iff			-1									8	6	1000	1500		25				4							
-object/installation/mining_liquid/mining_liquid_moisture_harvester_medium.iff	object/installation/base/construction_installation_base.iff			-1									15	6	1000	3000		50				4							
-object/installation/mining_liquid/mining_liquid_moisture_harvester_heavy.iff	object/installation/base/construction_installation_base.iff			-1									23	6	1000	4500		75				4							
-object/installation/mining_liquid/mining_liquid_moisture_harvester_elite.iff	object/installation/base/construction_installation_base.iff			-3									63	6	1000	12375		206				4							
-object/installation/mining_ore/mining_ore_harvester_style_1.iff	object/installation/base/construction_installation_base.iff			-1									8	6	1000	1500		25		20		4							
-object/installation/mining_ore/mining_ore_harvester_style_2.iff	object/installation/mining_ore/construction/construction_mining_ore_harvester_style_2.iff			-1									15	6	1000	3000		50				4							
-object/installation/mining_ore/mining_ore_harvester_heavy.iff	object/installation/mining_ore/construction/construction_mining_ore_harvester_style_heavy.iff			-1									23	6	1000	4500		75		10		4							
-object/installation/mining_ore/mining_ore_harvester_elite.iff	object/installation/mining_ore/construction/construction_mining_ore_harvester_style_heavy.iff			-3									63	6	1000	12375		206				4							
-object/installation/mining_organic/mining_organic_creature_farm.iff	object/installation/base/construction_installation_base.iff			1									13	6	1000	2500		50				4							
-object/installation/mining_organic/mining_organic_flora_farm.iff	object/installation/base/construction_installation_base.iff			-1									8	6	1000	1500		25				4							
-object/installation/mining_organic/mining_organic_flora_farm_medium.iff	object/installation/base/construction_installation_base.iff			-1									15	6	1000	3000		50				4							
-object/installation/mining_organic/mining_organic_flora_farm_heavy.iff	object/installation/base/construction_installation_base.iff			-1									23	6	1000	4500		75				4							
-object/installation/mining_organic/mining_organic_flora_farm_elite.iff	object/installation/base/construction_installation_base.iff			-3									63	6	1000	12375		206				4							
+object/installation/manufacture/clothing_factory.iff	object/installation/base/construction_installation_base.iff												62	6	1000	2500		25	factory_speed	50		4							
+object/installation/manufacture/food_factory.iff	object/installation/base/construction_installation_base.iff												62	6	1000	2500		25	factory_speed	50		4							
+object/installation/manufacture/weapon_factory.iff	object/installation/base/construction_installation_base.iff												62	6	1000	2500		25	factory_speed	50		4							
+object/installation/manufacture/structure_factory.iff	object/installation/base/construction_installation_base.iff			1									62	6	1000	2500		25	factory_speed	50		4							
+object/installation/generators/power_generator_fusion_style_1.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		0				4							
+object/installation/generators/power_generator_photo_bio_style_1.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		0				4							
+object/installation/generators/power_generator_solar_style_1.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		0				4							
+object/installation/generators/power_generator_geothermal_style_1.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		0				4							
+object/installation/generators/power_generator_wind_style_1.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		0				4							
+object/installation/mining_gas/mining_gas_harvester_style_1.iff	object/installation/base/construction_installation_base.iff			-1									4	6	1000	1500		10				4							
+object/installation/mining_gas/mining_gas_harvester_style_2.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		25				4							
+object/installation/mining_gas/mining_gas_harvester_style_3.iff	object/installation/base/construction_installation_base.iff			-1									11	6	1000	4500		38				4							
+object/installation/mining_gas/mining_gas_harvester_style_4.iff	object/installation/base/construction_installation_base.iff			-2									31	6	1000	12375		103				4							
+object/installation/mining_liquid/mining_liquid_harvester_style_1.iff	object/installation/base/construction_installation_base.iff			-1									4	6	1000	1500		10				4							
+object/installation/mining_liquid/mining_liquid_harvester_style_2.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		25				4							
+object/installation/mining_liquid/mining_liquid_harvester_style_3.iff	object/installation/base/construction_installation_base.iff			-1									11	6	1000	4500		38				4							
+object/installation/mining_liquid/mining_liquid_harvester_style_4.iff	object/installation/base/construction_installation_base.iff			-2									31	6	1000	12375		103				4							
+object/installation/mining_liquid/mining_liquid_moisture_harvester.iff	object/installation/base/construction_installation_base.iff			-1									4	6	1000	1500		10				4							
+object/installation/mining_liquid/mining_liquid_moisture_harvester_medium.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		25				4							
+object/installation/mining_liquid/mining_liquid_moisture_harvester_heavy.iff	object/installation/base/construction_installation_base.iff			-1									11	6	1000	4500		38				4							
+object/installation/mining_liquid/mining_liquid_moisture_harvester_elite.iff	object/installation/base/construction_installation_base.iff			-2									31	6	1000	12375		103				4							
+object/installation/mining_ore/mining_ore_harvester_style_1.iff	object/installation/base/construction_installation_base.iff			-1									4	6	1000	1500		10		20		4							
+object/installation/mining_ore/mining_ore_harvester_style_2.iff	object/installation/mining_ore/construction/construction_mining_ore_harvester_style_2.iff			-1									7	6	1000	3000		25				4							
+object/installation/mining_ore/mining_ore_harvester_heavy.iff	object/installation/mining_ore/construction/construction_mining_ore_harvester_style_heavy.iff			-1									11	6	1000	4500		38		10		4							
+object/installation/mining_ore/mining_ore_harvester_elite.iff	object/installation/mining_ore/construction/construction_mining_ore_harvester_style_heavy.iff			-2									31	6	1000	12375		103				4							
+object/installation/mining_organic/mining_organic_creature_farm.iff	object/installation/base/construction_installation_base.iff			1									6	6	1000	2500		10				4							
+object/installation/mining_organic/mining_organic_flora_farm.iff	object/installation/base/construction_installation_base.iff			-1									4	6	1000	1500		10				4							
+object/installation/mining_organic/mining_organic_flora_farm_medium.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		25				4							
+object/installation/mining_organic/mining_organic_flora_farm_heavy.iff	object/installation/base/construction_installation_base.iff			-1									11	6	1000	4500		38				4							
+object/installation/mining_organic/mining_organic_flora_farm_elite.iff	object/installation/base/construction_installation_base.iff			-2									31	6	1000	12375		103				4							
 object/building/player/player_guildhall_corellia_style_01.iff	object/building/player/construction/construction_player_house_tatooine_large_style_01.iff			4									25	5	7200	5000	1					4							
 																							object/tangible/terminal/terminal_player_structure.iff	17.88	2.25	10.45	closeta	90	
 object/building/player/player_guildhall_generic_style_01.iff	object/building/player/construction/construction_player_house_tatooine_large_style_01.iff			4									25	5	7200	5000	1					4							

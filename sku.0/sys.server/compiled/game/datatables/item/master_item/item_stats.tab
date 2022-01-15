@@ -1104,7 +1104,6 @@ item_color_crystal_02_09			int:jedi.crystal.stats.color=9,int:jedi.crystal.stats
 item_color_crystal_02_10			int:jedi.crystal.stats.color=10,int:jedi.crystal.stats.level=-1	index_color_1=10							
 item_color_crystal_02_11			int:jedi.crystal.stats.color=11,int:jedi.crystal.stats.level=-1	index_color_1=11							
 item_color_crystal_02_12			int:jedi.crystal.stats.color=12,int:jedi.crystal.stats.level=-1	index_color_1=12							
-item_crystal_allyas_exile_01			int:jedi.crystal.stats.color=12,int:jedi.crystal.stats.level=-1	index_color_1=0							
 item_color_crystal_02_13			int:jedi.crystal.stats.color=13,int:jedi.crystal.stats.level=-1	index_color_1=13							
 item_color_crystal_02_14			int:jedi.crystal.stats.color=14,int:jedi.crystal.stats.level=-1	index_color_1=14							
 item_color_crystal_02_15			int:jedi.crystal.stats.color=15,int:jedi.crystal.stats.level=-1	index_color_1=15							
@@ -1120,13 +1119,13 @@ item_color_crystal_02_24			int:jedi.crystal.stats.color=24,int:jedi.crystal.stat
 item_color_crystal_02_25			int:jedi.crystal.stats.color=25,int:jedi.crystal.stats.level=-1	index_color_1=25							
 item_color_crystal_02_26			int:jedi.crystal.stats.color=26,int:jedi.crystal.stats.level=-1	index_color_1=26							
 item_color_crystal_02_27			int:jedi.crystal.stats.color=27,int:jedi.crystal.stats.level=-1	index_color_1=27							
-item_crystal_allyas_redemption_01			int:jedi.crystal.stats.color=27,int:jedi.crystal.stats.level=-1	index_color_1=27
 item_color_crystal_02_28			int:jedi.crystal.stats.color=28,int:jedi.crystal.stats.level=-1	index_color_1=28							
 item_color_crystal_02_29			int:jedi.crystal.stats.color=29,int:jedi.crystal.stats.level=-1	index_color_1=29							
 item_color_crystal_02_30			int:jedi.crystal.stats.color=30,int:jedi.crystal.stats.level=-1	index_color_1=30							
-item_crystal_tyranus_cunning_01			int:jedi.crystal.stats.color=32,int:jedi.crystal.stats.level=-1	index_color_1=1							
-item_crystal_mauls_vengeance_01			int:jedi.crystal.stats.color=33,int:jedi.crystal.stats.level=-1	index_color_1=33							
-item_crystal_quigons_devotion_01			int:jedi.crystal.stats.color=34,int:jedi.crystal.stats.level=-1	index_color_1=34							
+item_color_crystal_02_32			int:jedi.crystal.stats.color=32,int:jedi.crystal.stats.level=-1	index_color_1=32							
+item_color_crystal_02_33			int:jedi.crystal.stats.color=33,int:jedi.crystal.stats.level=-1	index_color_1=33							
+item_color_crystal_02_34			int:jedi.crystal.stats.color=34,int:jedi.crystal.stats.level=-1	index_color_1=34							
+item_color_crystal_02_35			int:jedi.crystal.stats.color=35,int:jedi.crystal.stats.level=-1	index_color_1=35						
 item_power_crystal_04_01			int:jedi.crystal.stats.min_dmg=1,int:jedi.crystal.stats.max_dmg=2,int:jedi.crystal.stats.quality=0,int:jedi.crystal.stats.level=-1	index_color_1=31							
 item_power_crystal_04_02			int:jedi.crystal.stats.min_dmg=2,int:jedi.crystal.stats.max_dmg=3,int:jedi.crystal.stats.quality=0,int:jedi.crystal.stats.level=-1	index_color_1=31							
 item_power_crystal_04_03			int:jedi.crystal.stats.min_dmg=3,int:jedi.crystal.stats.max_dmg=4,int:jedi.crystal.stats.quality=1,int:jedi.crystal.stats.level=-1	index_color_1=31							
@@ -2121,11 +2120,15 @@ item_jedi_robe_light_04_02			int:armor.general_protection_clothing=5000,int:item
 item_jedi_robe_light_04_03			int:armor.general_protection_clothing=5000,int:item.set.set_id=90001								
 item_jedi_robe_light_04_04	constitution_modified=250,agility_modified=250,strength_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
 item_jedi_robe_light_04_05	constitution_modified=250,agility_modified=250,strength_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001								
+item_jedi_robe_light_04_06	constitution_modified=250,agility_modified=250,strength_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
+item_jedi_robe_light_04_07	constitution_modified=450,agility_modified=425,luck_modified=425,strength_modified=400,combat_parry=15,combat_dodge=12,combat_evasion_chance=6,combat_critical_hit_reduction=24,expertise_glancing_blow_ranged=6,expertise_glancing_blow_melee=6 		int:armor.general_protection_clothing=12500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
 item_jedi_robe_dark_04_01			int:armor.general_protection_clothing=5000,int:item.set.set_id=90001								
 item_jedi_robe_dark_04_02			int:armor.general_protection_clothing=5000,int:item.set.set_id=90001								
 item_jedi_robe_dark_04_03			int:armor.general_protection_clothing=5000,int:item.set.set_id=90001								
 item_jedi_robe_dark_04_04	constitution_modified=250,luck_modified=250,precision_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001		proc_old_dark_jedi_gift					appearance/pt_heal.prt	
-item_jedi_robe_dark_04_05	constitution_modified=250,luck_modified=250,precision_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001								
+item_jedi_robe_dark_04_05	constitution_modified=250,agility_modified=250,strength_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001								
+item_jedi_robe_dark_04_06	constitution_modified=250,agility_modified=250,strength_modified=250		int:armor.general_protection_clothing=6500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
+item_jedi_robe_dark_04_07	constitution_modified=400,luck_modified=425,precision_modified=425,strength_modified=450,expertise_critical_niche_all=6,exotic_parry_reduction=15,exotic_dodge_reduction=12,expertise_damage_line_fs_dm=12		int:armor.general_protection_clothing=12500,int:item.set.set_id=90001		proc_old_light_jedi_gift					appearance/pt_heal.prt	
 item_junk_imitation_pearl_01_01											
 item_junk_imitation_pearl_01_02											
 item_deed_landspeeder_x38_02_01			string:vehicle_attribs.object_ref=xp38								
@@ -4840,3 +4843,142 @@ item_schematic_kashyyyk_bar_counter			string:loot_schematic.schematic=object/dra
 item_schematic_kashyyyk_bar_table			string:loot_schematic.schematic=object/draft_schematic/furniture/furniture_kash_bar_table_sm_s01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase2_novice								
 item_schematic_kashyyyk_bar_shelves			string:loot_schematic.schematic=object/draft_schematic/furniture/furniture_kash_bar_shelf_s01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase2_novice
 item_heroic_token_mustafar_01_01
+item_tusken_isolationist_robe_01_01											
+item_tusken_isolationist_robe_01_02											
+item_tusken_isolationist_helmet_01_01											
+item_tusken_isolationist_boots_01_01											
+item_tusken_isolationist_gloves_01_01											
+item_tusken_isolationist_bandolier_01_01											
+item_tusken_isolationist_bandolier_01_02											
+item_tusken_isolationist_bandolier_01_03											
+item_content_decorative_krayt_claw_01_01											
+col_orange_rnd_cut_gem_style1_02_01			string:collection.slotName=col_round_orange_cut_gem_01:round_orange_gem_style1_01	index_color_1=7							
+col_orange_rnd_cut_gem_style1_02_02			string:collection.slotName=col_round_orange_cut_gem_01:round_orange_gem_style1_02	index_color_1=7							
+col_orange_rnd_cut_gem_style1_02_03			string:collection.slotName=col_round_orange_cut_gem_01:round_orange_gem_style1_03	index_color_1=7							
+col_orange_rnd_cut_gem_style1_02_04			string:collection.slotName=col_round_orange_cut_gem_01:round_orange_gem_style1_04	index_color_1=7							
+col_orange_rnd_cut_gem_style1_02_05			string:collection.slotName=col_round_orange_cut_gem_01:round_orange_gem_style1_05	index_color_1=7							
+col_orange_rnd_cut_gem_style1_02_06			string:collection.slotName=col_round_orange_cut_gem_01:round_orange_gem_style1_06	index_color_1=7							
+col_orange_rnd_cut_gem_style1_02_07			string:collection.slotName=col_round_orange_cut_gem_01:round_orange_gem_style1_07	index_color_1=7							
+col_orange_rnd_cut_gem_style1_02_08			string:collection.slotName=col_round_orange_cut_gem_01:round_orange_gem_style1_08	index_color_1=7							
+col_orange_rnd_cut_gem_style1_02_09			string:collection.slotName=col_round_orange_cut_gem_01:round_orange_gem_style1_09	index_color_1=7							
+col_orange_rnd_cut_gem_style1_02_10			string:collection.slotName=col_round_orange_cut_gem_01:round_orange_gem_style1_10	index_color_1=7							
+item_lesser_krayt_pearl											
+item_tusken_dawn_painting_01_01											
+item_the_trickster_painting											
+item_limited_use_schematic_orange_gem_01_01			string:loot_schematic.schematic=object/draft_schematic/furniture/furniture_light_gem_orange.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase2_master	
+item_schematic_wod_pro_tree_01			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_tree_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_tree_02			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_tree_02.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_tree_03			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_tree_03.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_tree_04			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_tree_04.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_tree_05			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_tree_05.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_tree_06			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_tree_06.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_tree_07			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_tree_07.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_tree_08			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_tree_08.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_ns_tree_01			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_ns_tree_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_ns_tree_02			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_ns_tree_02.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_ns_tree_03			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_ns_tree_03.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_ns_tree_04			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_ns_tree_04.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_ns_tree_05			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_ns_tree_05.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_ns_tree_06			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_ns_tree_06.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_ns_tree_07			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_ns_tree_07.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_ns_tree_08			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_ns_tree_08.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_sm_tree_01			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_sm_tree_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_sm_tree_02			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_sm_tree_02.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_sm_tree_03			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_sm_tree_03.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_sm_tree_04			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_sm_tree_04.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_sm_tree_05			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_sm_tree_05.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_sm_tree_06			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_sm_tree_06.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_sm_tree_07			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_sm_tree_07.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_pro_sm_tree_08			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_pro_sm_tree_08.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_potted_plant_01			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_potted_plant_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_potted_plant_02			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_potted_plant_02.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_potted_plant_03			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_potted_plant_03.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_potted_plant_04			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_potted_plant_04.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_potted_plant_05			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_potted_plant_05.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_potted_plant_06			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_potted_plant_06.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_potted_plant_07			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_potted_plant_07.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_potted_plant_08			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_potted_plant_08.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_potted_plant_09			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_potted_plant_09.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_ns_potted_plant_01			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_ns_potted_plant_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_ns_potted_plant_02			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_ns_potted_plant_02.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_ns_potted_plant_03			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_ns_potted_plant_03.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_ns_potted_plant_04			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_ns_potted_plant_04.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_ns_potted_plant_05			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_ns_potted_plant_05.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_ns_potted_plant_06			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_ns_potted_plant_06.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_ns_potted_plant_07			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_ns_potted_plant_07.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_ns_potted_plant_08			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_ns_potted_plant_08.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_ns_potted_plant_09			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_ns_potted_plant_09.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_sm_potted_plant_01			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_sm_potted_plant_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_sm_potted_plant_02			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_sm_potted_plant_02.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_sm_potted_plant_03			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_sm_potted_plant_03.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_sm_potted_plant_04			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_sm_potted_plant_04.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_sm_potted_plant_05			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_sm_potted_plant_05.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_sm_potted_plant_06			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_sm_potted_plant_06.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_sm_potted_plant_07			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_sm_potted_plant_07.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_sm_potted_plant_08			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_sm_potted_plant_08.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_schematic_wod_sm_potted_plant_09			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_sm_potted_plant_09.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_wod_pro_herb_reward_jar											
+item_wod_pro_ns_herb_reward_jar											
+item_wod_pro_sm_herb_reward_jar											
+item_painting_wod_scene_01											
+item_painting_wod_scene_02											
+item_painting_wod_scene_03											
+item_painting_wod_scene_04											
+item_painting_wod_sm_01											
+item_painting_wod_sm_02											
+item_painting_wod_ns_01											
+item_painting_wod_ns_02											
+item_painting_wod_outcast											
+item_wod_mutated_rancor_toy											
+item_wod_malkloc_toy											
+item_wod_gaping_spider_toy											
+item_wod_reptilian_flyer_toy											
+item_wod_shear_mite_toy											
+item_wod_token_1											
+item_wod_token_2											
+item_wod_token_3											
+item_wod_token_4											
+item_wod_token_5											
+item_wod_token_6											
+item_wod_token_temp											
+item_schematic_wod_sm_mask_01			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_hat_singing_mtn_mask_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_herb_reward_jar											
+item_wod_crafting_holocron_01	crafting_critical_success_bonus=1		float:crafting_components.crafting_critical_success_bonus=1.0								
+item_wod_ns_boots			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_boots_nightsister_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_ns_shroud			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_dress_nightsister_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_ns_pest_leggings			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_pants_nightsister_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_ns_scou_leggings			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_pants_nightsister_02.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_ns_wrap			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_shirt_nightsister_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_ns_mantle			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_shirt_nightsister_02.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_ns_havoc			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_shirt_nightsister_03.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_ns_hood			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_hat_nightsister_s01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_ns_tarn_shroud			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_hat_nightsister_s03.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_ns_salve			int:healing.power=5000,int:healing.combat_level_required=80
+item_wod_ns_fruit					gcw_stim_detect_hidden_01	wod_dath_buffs	1800	80
+item_wod_ns_root					of_stimulator_1	wod_dath_buffs	1800	80
+item_wod_ns_gourd					burstRun	wod_dath_buffs	1800	80
+item_wod_ns_schematic_crafting			string:loot_schematic.schematic=object/draft_schematic/droid/cyborg_crafting_interface.iff,int:loot_schematic.uses=1
+item_wod_ns_schematic_maiden			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_witch_banner_s01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_ns_schematic_mother			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_witch_banner_s02.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_ns_schematic_crone			string:loot_schematic.schematic=object/draft_schematic/furniture/wod_witch_banner_s03.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_ns_schematic_tower			string:loot_schematic.schematic=object/draft_schematic/furniture/city/wod_tower.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_wod_ns_schematic_gate			string:loot_schematic.schematic=object/draft_schematic/furniture/city/wod_ns_gate.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_wod_ns_schematic_hut			string:loot_schematic.schematic=object/draft_schematic/structure/wod_ns_hut.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_wod_ns_schematic_fence			string:loot_schematic.schematic=object/draft_schematic/furniture/city/wod_ns_wall.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_wod_ns_sign_hanging	special_sign_wod_hanging_sign=1		string:static_item=item_wod_ns_sign_hanging								
+item_wod_ns_sign_standing	special_sign_wod_standing_sign=1		string:static_item=item_wod_ns_sign_standing								
+item_wod_ns_herb_reward_jar											
+item_wod_smc_boots			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_boots_singing_mtn_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_smc_wrap			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_shirt_singing_mtn_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_smc_shroud			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_shirt_singing_mtn_02.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_smc_mantle			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_shirt_singing_mtn_03.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_smc_skirt_1			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_skirt_singing_mtn_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_smc_skirt_2			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_skirt_singing_mtn_02.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_smc_skirt_3			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_skirt_singing_mtn_03.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_smc_guard			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_hat_singing_mtn_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_smc_hood			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_hat_singing_mtn_02.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase1_novice								
+item_wod_smc_schematic_stones			string:loot_schematic.schematic=object/draft_schematic/furniture/city/wod_floating_stones_city.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_wod_smc_schematic_tril			string:loot_schematic.schematic=object/draft_schematic/furniture/city/wod_trilithon.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_wod_smc_schematic_hut			string:loot_schematic.schematic=object/draft_schematic/structure/wod_sm_hut.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_wod_smc_schematic_wall			string:loot_schematic.schematic=object/draft_schematic/furniture/city/wod_sm_wall.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice								
+item_wod_smc_herb_reward_jar											

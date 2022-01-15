@@ -56,7 +56,8 @@ public class terminal_frs_voting extends script.base_script
         int rank = force_rank.getForceRank(player);
         if (rank == -1)
         {
-            sendSystemMessage(player, new string_id(force_rank.STF_FILE, "insufficient_rank_vote"));
+            LOG("force_rank", "terminal_frs_voting.OnObjectMenuRequest -- " + player + " has an invalid force rank value.");
+            //sendSystemMessage(player, new string_id(force_rank.STF_FILE, "insufficient_rank_vote"));
             return SCRIPT_CONTINUE;
         }
         int council = force_rank.getCouncilAffiliation(player);

@@ -10,7 +10,9 @@ object/tangible/veteran_reward/data_terminal_s1.iff	3		A Holonet Tracking Consol
 object/tangible/veteran_reward/respec_voucher_deed.iff	78		A Respec Voucher
 object/tangible/veteran_reward/data_terminal_s2.iff	3		A Sample Readout Console
 item_vet_reward_75month_houseplant_02	75		An Exotic Plant
+item_creature_harvester_deed_01_01	500		Automated Creature Harvester
 object/tangible/veteran_reward/one_year_anniversary/painting_01.iff	3	1	Cast Wing in Flight
+item_respec_token_01_01	100	1	Character Respec Device
 object/tangible/veteran_reward/city_flag_kit.iff	54		City Banner Kit
 st_cn_vet_reward_dark_jedi_boss	57		Dark Jedi Forcemaster Storyteller Token
 item_vet_reward_72month_darth_maul	72		Darth Maul Statue
@@ -19,6 +21,7 @@ object/tangible/veteran_reward/frn_tech_console_sectional_c.iff	12		Database Inp
 item_vet_66_month_jedi_temple_burning	66		Death - Destroyed Jedi Temple Miniature
 object/tangible/veteran_reward/frn_vet_holo_deathstar.iff	24		Death Star Hologram
 object/tangible/veteran_reward/frn_vet_houseplant.iff	9		Decorative Houseplant
+object/tangible/deed/harvester_deed/creature_harvester_deed.iff	500		Deed for: Automated Creature Farm
 object/tangible/veteran_reward/one_year_anniversary/painting_10.iff	3	1	Dusk in Kachirho
 object/tangible/veteran_reward/frn_vet_emp_chair.iff	30		Emperor's Chair
 object/tangible/veteran_reward/one_year_anniversary/painting_09.iff	3	1	Emperor's Eyes

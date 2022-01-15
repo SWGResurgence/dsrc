@@ -1,0 +1,16 @@
+@base  object/weapon/ranged/carbine/base/shared_carbine_base.iff 
+
+@class weapon_object_template 4
+
+weaponEffect = "projectile_rifle"
+weaponEffectIndex = 1
+
+@class tangible_object_template 3
+
+@class object_template 3
+
+objectName = "weapon_name" "carbine_tusken_slugthrower"
+detailedDescription = "weapon_detail" "carbine_tusken_slugthrower"
+lookAtText = "weapon_lookat" "carbine_tusken_slugthrower"
+
+appearanceFilename = "appearance/wp_carbine_tusken_carbine_s01.apt"
