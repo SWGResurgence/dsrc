@@ -815,7 +815,7 @@ co_base_of_operations	base_of_operations			34	command.co_general_base_of_operati
 co_mirror_armor	mirror_armor			34	command.co_path_mirror_armor	120	radar_invis	0		0		0		0		0	STATE_NONE	none	clienteffect/commando_mirror_armor.cef		1	0		1	1	1	0	1	1	0	1	1	1
 co_riddle_armor	playerArmorReduce			50	command.co_riddle_armor	15	expertise_riddle_armor	0		0		0		0		0	STATE_NONE	none	appearance/pt_cmndo_riddle_armor.prt		1	1		1	1	1	0	1	1	0	1	1	1
 co_armor_cracker	playerArmorReduce			50	command.co_armor_cracker	15	expertise_riddle_armor	0		0		0		0		0	STATE_NONE	none	appearance/pt_cmndo_riddle_armor.prt		1	1		1	1	1	0	1	1	0	1	1	1
-co_stand_fast	co_stand_fast			100	command.co_stand_fast	12	expertise_damage_decrease_percentage												appearance/pt_co_stand_fast.prt						
+co_stand_fast	co_stand_fast			100	command.co_stand_fast	12	expertise_damage_decrease_percentage												appearance/pt_co_stand_fast.prt														
 forceThrow	forceThrowHandler			3	command.forceThrow	15	forceThrow	0		0		0		0		0	STATE_NONE	none			0	1		0	1	1	0	1	1	0	1	1	1
 fs_force_throw_1	forceThrowSnare	snare		4	command.forceThrow	15	movement	60		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 fs_force_throw_2	forceThrowSnare	snare		5	command.forceThrow	15	movement	65		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
@@ -1992,3 +1992,4 @@ event_halloween_costume_skeleton1	shapechange	halloween_shapechange		1	buffs.cos
 costume_hutt_female	shapechange	halloween_shapechange		1	buffs.costume	1800	movement	0	event_halloween_costume	3		0		0		0	STATE_NONE	none			1	0		0	1	1	1	1	1	0	1	1	1
 gcw_rocket_turret	gcw_mini_turret			1		1	gcw_mini_turret	1		0		0		0		0	STATE_NONE	none			0	0		1	1	1	0	1	1	0	1	1	1
 tusken_ritual_1	tusken_ritual_1			100	command.of_deadeye_debuff	30	healing_health	8500		0		0		0		0	STATE_NONE	none	clienteffect/off_last_words.cef		1	0		1	1	1	0	1	1	0	1	1	1
+trader_advanced_buff	genBuff_4			50	buffs.genericBuff	7200	expertise_resource_sampling_increase	100	expertise_resource_quality_increase	50		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
