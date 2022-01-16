@@ -56,10 +56,10 @@ object/building/player/player_house_tatooine_medium_style_01.iff	object/building
 																							object/tangible/terminal/terminal_player_structure.iff	6.94	1.06	7.98	foyer	180	
 object/building/player/player_house_tatooine_large_style_01.iff	object/building/player/construction/construction_player_house_tatooine_large_style_01.iff			1									13	5	7200	2500	1					4							
 																							object/tangible/terminal/terminal_player_structure.iff	8.16	1.06	11.24	public	180	
-object/installation/manufacture/clothing_factory.iff	object/installation/base/construction_installation_base.iff												62	6	1000	2500		25	factory_speed	50		4							
-object/installation/manufacture/food_factory.iff	object/installation/base/construction_installation_base.iff												62	6	1000	2500		25	factory_speed	50		4							
-object/installation/manufacture/weapon_factory.iff	object/installation/base/construction_installation_base.iff												62	6	1000	2500		25	factory_speed	50		4							
-object/installation/manufacture/structure_factory.iff	object/installation/base/construction_installation_base.iff			1									62	6	1000	2500		25	factory_speed	50		4							
+object/installation/manufacture/clothing_factory.iff	object/installation/base/construction_installation_base.iff												62	6	1000	2500		25				4							
+object/installation/manufacture/food_factory.iff	object/installation/base/construction_installation_base.iff												62	6	1000	2500		25				4							
+object/installation/manufacture/weapon_factory.iff	object/installation/base/construction_installation_base.iff												62	6	1000	2500		25				4							
+object/installation/manufacture/structure_factory.iff	object/installation/base/construction_installation_base.iff			1									62	6	1000	2500		25				4							
 object/installation/generators/power_generator_fusion_style_1.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		0				4							
 object/installation/generators/power_generator_photo_bio_style_1.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		0				4							
 object/installation/generators/power_generator_solar_style_1.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		0				4							
