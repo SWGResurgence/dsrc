@@ -3,7 +3,7 @@
 
 @class object_template 8
 
-sharedTemplate = "object/tangible/loot/generic_usable/shared_trader_advanced_buff.iff"
+sharedTemplate = "object/tangible/veteran_reward/shared_trader_advanced_buff.iff"
 scripts = []
 objvars = []
 persistByDefault = true
