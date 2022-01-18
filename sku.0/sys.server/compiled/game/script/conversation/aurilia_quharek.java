@@ -9,14 +9,10 @@ import script.string_id;
 
 public class aurilia_quharek extends script.conversation.base.conversation_base
 {
-    public String conversation = "conversation.aurilia_quharek";
-    public static String c_stringFile = "conversation/aurilia_quharek";
-
+    public static final SCRIPT = "aurilia_quharek";
     public aurilia_quharek()
     {
-        super.scriptName = "aurilia_quharek";
-        super.conversation = conversation;
-        super.c_stringFile = c_stringFile;
+        super(SCRIPT);
     }
     private boolean aurilia_quharek_condition__defaultCondition() throws InterruptedException
     {

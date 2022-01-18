@@ -9,11 +9,11 @@ public class aurilia_mellichae extends script.conversation.base.conversation_bas
 {
     public static final String c_stringFile = "conversation/aurilia_mellichae";
     public static final String conversation = "conversation.aurilia_mellichae";
-    public static final String scriptName = "aurilia_mellichae";
+    public static final String SCRIPT = "aurilia_mellichae";
 
     public aurilia_mellichae()
     {
-        super(c_stringFile, conversation, scriptName);
+        super(SCRIPT);
     }
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {

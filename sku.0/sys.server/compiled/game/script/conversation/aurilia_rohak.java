@@ -7,14 +7,11 @@ import script.string_id;
 
 public class aurilia_rohak extends script.conversation.base.conversation_base
 {
-    public String conversation = "conversation.aurilia_rohak";
-    public String c_stringFile = "conversation/aurilia_rohak";
+    public static final SCRIPT = "aurilia_rohak";
     
     public aurilia_rohak()
     {
-        super.scriptName = "aurilia_rohak";
-        super.conversation = conversation;
-        super.c_stringFile = c_stringFile;
+        super(SCRIPT);
     }
     private boolean aurilia_rohak_condition_axkva_min_intro_01(obj_id player) throws InterruptedException
     {

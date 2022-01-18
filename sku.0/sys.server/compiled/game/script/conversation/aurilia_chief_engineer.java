@@ -9,14 +9,11 @@ import script.string_id;
 
 public class aurilia_chief_engineer extends script.conversation.base.conversation_base
 {
-    public String conversation = "conversation.aurilia_chief_engineer";
-    public String c_stringFile = "conversation/aurilia_chief_engineer";
+    public static final String SCRIPT = "aurilia_chief_engineer";
 
     public aurilia_chief_engineer()
     {
-        super.scriptName = "aurilia_chief_engineer";
-        super.conversation = conversation;
-        super.c_stringFile = c_stringFile;
+        super(SCRIPT);
     }
     private boolean aurilia_chief_engineer_condition_axkva_min_intro_01(obj_id player, obj_id npc) throws InterruptedException
     {

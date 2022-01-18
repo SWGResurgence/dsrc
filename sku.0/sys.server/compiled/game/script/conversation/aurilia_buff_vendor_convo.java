@@ -8,14 +8,11 @@ import script.string_id;
 
 public class aurilia_buff_vendor_convo extends script.conversation.base.conversation_base
 {
-    public String conversation = "conversation.aurilia_buff_vendor_convo";
-    public String c_stringFile = "conversation/aurilia_buff_vendor_convo";
+    public static final String SCRIPT = "aurilia_buff_vendor_convo";
 
     public aurilia_buff_vendor_convo()
     {
-        super.scriptName = "aurilia_buff_vendor_convo";
-        super.conversation = conversation;
-        super.c_stringFile = c_stringFile;
+        super(SCRIPT);
     }
     private void aurilia_buff_vendor_convo_action_showTokenVendorUI(obj_id player, obj_id npc) throws InterruptedException
     {

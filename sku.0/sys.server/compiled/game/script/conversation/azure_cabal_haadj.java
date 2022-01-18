@@ -9,14 +9,11 @@ import script.string_id;
 
 public class azure_cabal_haadj extends script.conversation.base.conversation_base
 {
-    public String conversation = "conversation.azure_cabal_haadj";
-    public String c_stringFile = "conversation/azure_cabal_haadj";
+    public static final String SCRIPT = "azure_cabal_haadj";
 
     public azure_cabal_haadj()
     {
-        super.scriptName = "azure_cabal_haadj";
-        super.conversation = conversation;
-        super.c_stringFile = c_stringFile;
+        super(SCRIPT);
     }
 
     private boolean azure_cabal_haadj_condition_onAssignment_30ENF_Q1B(obj_id player) throws InterruptedException
