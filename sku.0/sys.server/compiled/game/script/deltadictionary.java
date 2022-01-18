@@ -45,10 +45,10 @@ public final class deltadictionary
 		}
 
 		potentiallyDirty.add(key);
-		if (value instanceof Vector)
+		if (value instanceof List)
 		{
 			// save value as an array instead
-			Vector v = (Vector)value;
+			List v = new ArrayList<>(value);
 			if (v.isEmpty())
 			{
 				System.err.println("WARNING: deltadictionary.put passed empty vector value");
@@ -259,18 +259,18 @@ public final class deltadictionary
 	/**
 	 * Gets a value from the dictionary.
 	 */
-	public Vector getResizeableIntArray(Object key)
+	public List getResizeableIntArray(Object key)
 	{
 		Object value = currentValue.get(key);
 		if (value != null)
 		{
 			potentiallyDirty.add(key);
 			int[] array = (int[])value;
-			Vector resizeableArray = new Vector(array.length + 10);
-			for (int i1 : array) resizeableArray.add(i1);
-			return resizeableArray;
+			List<Integer> resizeableArray = new ArrayList<>(array.length + 10);
+			for (int i = 0; i < array.length; i++)
+				resizeableArray.add(array[i]);
 		}
-		return new Vector();
+		return new ArrayList();
 	}	// getIntArray()
 
 	/**
@@ -321,15 +321,15 @@ public final class deltadictionary
 	/**
 	 * Gets a value from the dictionary.
 	 */
-	public Vector getResizeableFloatArray(Object key)
+	public List getResizeableFloatArray(Object key)
 	{
 		Object value = currentValue.get(key);
 		if (value != null)
 		{
 			potentiallyDirty.add(key);
 			float[] array = (float[])value;
-			Vector resizeableArray = new Vector(array.length + 10);
-			for (float v : array) resizeableArray.add(v);
+			List<Float> resizeableArray = new ArrayList<>(Arrays.asList(array));
+			for (int i = 0; i < array.length; i++)
 			return resizeableArray;
 		}
 		return null;
@@ -485,13 +485,13 @@ public final class deltadictionary
 	/**
 	 * Get a location array from a dictionary
 	 */
-	public Vector getResizeableLocationArray(Object key)
+	public List getResizeableLocationArray(Object key)
 	{
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
 		if (value != null)
-			return new Vector(Arrays.asList((location[])value));
-		return new Vector();
+			return Arrays.asList((location[])value);
+		return null;
 	}
 
 	public region getRegion(Object key)
@@ -594,14 +594,19 @@ public final class deltadictionary
 	/**
 	 * Get an obj_id array from a dictionary
 	 */
-	public Vector getResizeableObjIdArray(Object key)
+	public List getResizeableObjIdArray(Object key)
 	{
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
-		if (value != null)
-			return new Vector(Arrays.asList((obj_id[])value));
-		return new Vector();
-	}
+    List<obj_id> list = new ArrayList<>();
+		if (value != null) {
+        if (value instanceof ArrayList)
+            list = (ArrayList)value;
+			else
+				list = new ArrayList<>(Arrays.asList((obj_id[])value));
+    }
+    return list;
+  }
 
 	/**
 	 * Get a transform from a dictionary
@@ -627,12 +632,12 @@ public final class deltadictionary
 	/**
 	 * Get a transform array from a dictionary
 	 */
-	public Vector getResizeableTransformArray(Object key)
+	public List getResizeableTransformArray(Object key)
 	{
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
 		if (value != null)
-			return new Vector(Arrays.asList((transform[])value));
+			return Arrays.asList((transform[])value);
 		return null;
 	}
 
@@ -662,12 +667,12 @@ public final class deltadictionary
 	/**
 	 * Get a vector array from a dictionary
 	 */
-	public Vector getResizeableVectorArray(Object key)
+	public List getResizeableVectorArray(Object key)
 	{
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
 		if (value != null)
-			return new Vector(Arrays.asList((vector[])value));
+			return Arrays.asList((vector[])value);
 		return null;
 	}
 
