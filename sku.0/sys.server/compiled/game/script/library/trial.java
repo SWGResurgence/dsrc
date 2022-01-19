@@ -2535,7 +2535,7 @@ public class trial extends script.base_script
                 continue;
             }
             itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.equals("")) {
+            if (itemName != null && !itemName.isEmpty()) {
                 if (itemName.equals(tokenName)) {
                     if (getCount(inventoryContent) > 1) {
                         if (getCount(inventoryContent) > tokensOwed) {
@@ -2552,28 +2552,7 @@ public class trial extends script.base_script
                 }
                 if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01")) {
                     foundTokenHolderBox = true;
-                    int vTokens = 0;
-                    if (hasObjVar(inventoryContent, "item.set.tokens_held")) {
-                        int[] virtualTokens = getIntArrayObjVar(inventoryContent, "item.set.tokens_held");
-                        int t = -1;
-                        for (int k = 0; k < HEROIC_TOKENS.length; k++) {
-                            if (HEROIC_TOKENS[k].equals(tokenName)) {
-                                t = k;
-                                vTokens = virtualTokens[t];
-                            }
-                        }
-                        if (t > -1) {
-                            if (vTokens > tokensOwed) {
-                                vTokens = vTokens - tokensOwed;
-                                virtualTokens[t] = vTokens;
-                                tokensOwed = 0;
-                            } else {
-                                tokensOwed = tokensOwed - vTokens;
-                                virtualTokens[t] = 0;
-                            }
-                            setObjVar(inventoryContent, "item.set.tokens_held", virtualTokens);
-                        }
-                    }
+                    tokensOwed -= withdrawTokensFromBox(inventoryContent, tokenName, tokensOwned);
                 }
             }
         }
@@ -2581,9 +2560,7 @@ public class trial extends script.base_script
     }
     public static int getSpaceDutyTokenPrice(int level) throws InterruptedException
     {
-        int price = level * 5;
-        price = price + 50;
-        return price;
+        return (level *5) + 50;
     }
     public static int getTokenTotal(obj_id player, String token) throws InterruptedException
     {
@@ -2592,42 +2569,72 @@ public class trial extends script.base_script
         {
             return 0;
         }
-        obj_id[] inventoryContents = getInventoryAndEquipment(player);
-        if (inventoryContents == null || inventoryContents.length <= 0)
-        {
-            return 0;
+        obj_id tokenBox = getTokenBox(player);
+        if (tokenBox != null) {
+            return getTokenAmountInBox(tokenBox, token);
         }
-        boolean foundTokenHolderBox = false;
+        return tokenCount;
+    }
+    public static obj_id getTokenBox(obj_id player) {
+        obj_id[] inventoryContents = getInventoryAndEquipment(player);
         String itemName;
         for (obj_id inventoryContent : inventoryContents) {
             if (!isIdValid(inventoryContent) || !exists(inventoryContent)) {
                 continue;
             }
             itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.equals("")) {
+            if (itemName != null && !itemName.isEmpty()) {
                 if (itemName.equals(token)) {
                     if (getCount(inventoryContent) > 1) {
-                        tokenCount = tokenCount + getCount(inventoryContent);
+                        tokenCount += getCount(inventoryContent);
                     } else {
                         tokenCount++;
                     }
                 }
-                if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01")) {
-                    foundTokenHolderBox = true;
-                    trial.verifyBox(inventoryContent);
-                    int t = 0;
-                    if (hasObjVar(inventoryContent, "item.set.tokens_held")) {
-                        int[] virtualTokenArray = getIntArrayObjVar(inventoryContent, "item.set.tokens_held");
-                        for (int k = 0; k < trial.HEROIC_TOKENS.length; k++) {
-                            if (trial.HEROIC_TOKENS[k].equals(token)) {
-                                t = k;
-                            }
-                        }
-                        tokenCount = tokenCount + virtualTokenArray[t];
-                    }
+                if (itemName.equals("item_heroic_token_box_01_01")) {
+                    return inventoryContent;
+                    tokenCount += getTokenAmountInBox(inventoryContent, token);
                 }
             }
         }
-        return tokenCount;
+        return null;
     }
+    public static int getTokenAmountInBox(obj_id box, String token) {
+        verifyBox(box);
+        int t = 0;
+        if (hasObjVar(box, "item.set.tokens_held")) {
+            int[] virtualTokenArray = getIntArrayObjVar(box, "item.set.tokens_held");
+            for (int k = 0; k < trial.HEROIC_TOKENS.length; k++) {
+                if (trial.HEROIC_TOKENS[k].equals(token)) {
+                    t = k;
+                }
+            }
+            return virtualTokenArray[t];
+        }
+         return 0;
+    }
+    public static int withdrawTokensFromBox(obj_id box, String token, int amount) {
+        int vTokens = 0;
+        if (hasObjVar(box, "item.set.tokens_held")) {
+            int[] virtualTokens = getIntArrayObjVar(box, "item.set.tokens_held");
+            int t = -1;
+            for (int k = 0; k < HEROIC_TOKENS.length; k++) {
+                if (HEROIC_TOKENS[k].equals(token)) {
+                    t = k;
+                    vTokens = virtualTokens[t];
+                }
+            }
+            if (t > -1) {
+                if (vTokens > tokensOwed) {
+                    vTokens -= amount;
+                    virtualTokens[t] = vTokens;
+                    amount = 0;
+                } else {
+                    amount -= vTokens;
+                    virtualTokens[t] = 0;
+                }
+                setObjVar(box, "item.set.tokens_held", virtualTokens);
+            }
+        }
+        return amount;
 }
