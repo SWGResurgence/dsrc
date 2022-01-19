@@ -2552,11 +2552,12 @@ public class trial extends script.base_script
                 }
                 if (!foundTokenHolderBox && itemName.equals("item_heroic_token_box_01_01")) {
                     foundTokenHolderBox = true;
-                    tokensOwed -= withdrawTokensFromBox(inventoryContent, tokenName, tokensOwned);
+                    withdrawTokensFromBox(inventoryContent, tokenName, tokensOwed);
+                    return true;
                 }
             }
         }
-        return tokensOwed == 0;
+        return false;
     }
     public static int getSpaceDutyTokenPrice(int level) throws InterruptedException
     {
@@ -2605,7 +2606,7 @@ public class trial extends script.base_script
         }
          return 0;
     }
-    public static int withdrawTokensFromBox(obj_id box, String token, int amount) {
+    public static void withdrawTokensFromBox(obj_id box, String token, int amount) {
         int vTokens = 0;
         if (hasObjVar(box, "item.set.tokens_held")) {
             int[] virtualTokens = getIntArrayObjVar(box, "item.set.tokens_held");
@@ -2620,7 +2621,6 @@ public class trial extends script.base_script
                 if (vTokens > amount) {
                     vTokens -= amount;
                     virtualTokens[t] = vTokens;
-                    amount = 0;
                 } else {
                     amount -= vTokens;
                     virtualTokens[t] = 0;
@@ -2628,5 +2628,4 @@ public class trial extends script.base_script
                 setObjVar(box, "item.set.tokens_held", virtualTokens);
             }
         }
-        return amount;
 }
