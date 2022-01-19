@@ -77,8 +77,6 @@ public class heroic_token_box extends script.base_script
             String title = "Heroic Token Box";
             String prompt = "Please select the token that you would like to withdraw.";
             int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, TOKEN_OPTIONS, "handleOptionSelect", true, false);
-            //closeOldWindow(player);
-            //setWindowPid(player, pid);
         }
         return SCRIPT_CONTINUE;
     }
@@ -105,9 +103,12 @@ public class heroic_token_box extends script.base_script
         if (amount < 1 || amount > trial.getTokenAmountInBox(tokenBox, tokenType)) {
             sendSystemMessageTestingOnly(player, "Sorry, but that is an invalid amount.");
         } else {
-            trial.withdrawTokensFromBox(tokenBox, tokenType, amount);
-            static_item.createNewItemFunction(tokenType, self, amount);
-            sendSystemMessageTestingOnly(player, "Success: " + amount + " " + TOKEN_OPTIONS[selectedRow] + " tokens have been transferred from your token box to your inventory.");
+            if (getVolumeFree(player) > 0) {
+                trial.withdrawTokensFromBox(tokenBox, tokenType, amount);
+                static_item.createNewItemFunction(tokenType, player, amount);
+            } else {
+                sendSystemMessageTestingOnly(player, "Please make space in your inventory.");
+            }
         }
         return SCRIPT_CONTINUE;
     }
