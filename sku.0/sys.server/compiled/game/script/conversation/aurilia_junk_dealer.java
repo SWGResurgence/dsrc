@@ -10,10 +10,13 @@ import script.string_id;
 
 public class aurilia_junk_dealer extends script.conversation.base.conversation_base
 {
-    public static final String SCRIPT = "aurilia_junk_dealer";
+    public String conversation = "conversation.aurilia_junk_dealer";
+    public String c_stringFile = "conversation/aurilia_junk_dealer";
     public aurilia_junk_dealer()
     {
-        super(SCRIPT);
+        super.scriptName = "aurilia_junk_dealer";
+        super.conversation = conversation;
+        super.c_stringFile = c_stringFile;
     }
     private boolean aurilia_junk_dealer_condition_check_inv(obj_id player, obj_id npc) throws InterruptedException
     {

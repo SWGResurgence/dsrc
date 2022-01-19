@@ -9,11 +9,14 @@ import script.string_id;
 
 public class aurilia_sarguillo extends script.conversation.base.conversation_base
 {
-    public static final String SCRIPT = "aurilia_sarguillo";
+    public String conversation = "conversation.aurilia_sarguillo";
+    public String c_stringFile = "conversation/aurilia_sarguillo";
 
     public aurilia_sarguillo()
     {
-        super(SCRIPT);
+        super.scriptName = "aurilia_sarguillo";
+        super.conversation = conversation;
+        super.c_stringFile = c_stringFile;
     }
     private boolean aurilia_sarguillo_condition_axkva_min_intro_01(obj_id player) throws InterruptedException
     {

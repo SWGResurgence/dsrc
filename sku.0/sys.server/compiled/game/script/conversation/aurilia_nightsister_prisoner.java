@@ -9,10 +9,13 @@ import script.string_id;
 
 public class aurilia_nightsister_prisoner extends script.conversation.base.conversation_base
 {
-    public static final String SCRIPT = "aurilia_nightsister_prisoner";
+    public String conversation = "conversation.aurilia_nightsister_prisoner";
+    public String c_stringFile = "conversation/aurilia_nightsister_prisoner";
     public aurilia_nightsister_prisoner()
     {
-        super(SCRIPT);
+        super.scriptName = "aurilia_nightsister_prisoner";
+        super.conversation = conversation;
+        super.c_stringFile = c_stringFile;
     }
     private boolean aurilia_nightsister_prisoner_condition_onAxkvaMinQuest(obj_id player) throws InterruptedException
     {

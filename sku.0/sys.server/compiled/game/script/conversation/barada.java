@@ -9,11 +9,14 @@ import script.string_id;
 
 public class barada extends script.conversation.base.conversation_base
 {
-    public static final String scriptName = "barada";
+    public String conversation = "conversation.barada";
+    public String c_stringFile = "conversation/barada";
 
     public barada()
     {
-        super(scriptName);
+        super.scriptName = "barada";
+        super.conversation = conversation;
+        super.c_stringFile = c_stringFile;
     }
     private boolean barada_condition_completedBarada(obj_id player) throws InterruptedException
     {
