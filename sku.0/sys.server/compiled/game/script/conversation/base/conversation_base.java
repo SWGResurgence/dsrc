@@ -21,18 +21,18 @@ public class conversation_base extends script.base_script {
 
     public int OnInitialize(obj_id npc) {
         if (!isTangible(npc) || isPlayer(npc)) {
-            detachScript(npc, conversation);
+            detachScript(self, conversation);
         }
         setCondition(npc, CONDITION_CONVERSABLE);
         this.npc = npc;
         return SCRIPT_CONTINUE;
     }
 
-    public int OnObjectMenuRequest(menu_info menuInfo) {
+    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) {
         int menu = menuInfo.addRootMenu(menu_info_types.CONVERSE_START, null);
         menu_info_data menuInfoData = menuInfo.getMenuItemById(menu);
        menuInfoData.setServerNotify(false);
-        setCondition(npc, CONDITION_CONVERSABLE);
+        setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
 
@@ -45,27 +45,20 @@ public class conversation_base extends script.base_script {
     public boolean npcStartConversation(string_id greetingId, prose_package greetingProse, string_id[] responses) {
         Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
-        return npcStartConversation(greetingId, greetingProse, objects);
+        return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
 
-    public int OnStartNpcConversation(String index, obj_id target, List<String> responses) {
+    public int OnStartNpcConversation(String index) {
         if (!ai_lib.isInCombat(npc) && !ai_lib.isInCombat(player)) {
-            prose_package pp = new prose_package();
-            pp = prose.setStringId(pp, new string_id(c_stringFile, index));
-            if (target != null) {
-                pp.target.set(target);
-            }
-            npcStartConversation(player, self, scriptName, null, pp, convertToStringIds(responses));
+            chat.chat(self, new string_id(c_stringFile, index));
         }
         return SCRIPT_CONTINUE;
     }
 
-   public string_id[] convertToStringIds(List<String> strings) {
-        string_id[] arr = new string_id[strings.size()];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = new string_id(c_stringFile, strings.get(i));
-        }
-        return arr;
+   public int OnStartNpcConversation(String index, String animation) {
+        doAnimationAction(self, animation);
+        OnStartNpcConversation(index);
+        return SCRIPT_CONTINUE;
     }
 
     public int OnNpcConversationResponse(String conversationId, string_id response) {
@@ -74,7 +67,7 @@ public class conversation_base extends script.base_script {
         return SCRIPT_CONTINUE;
     }
 
-    protected int craft_response(List<String> responseStrings, int branchId) {
+    protected int craft_response(String[] responseStrings, int branchId) {
         string_id message = new string_id(c_stringFile, responseStrings[0]);
         string_id responses[] = new string_id[responseStrings.length];
         for (int i = 1; i < responseStrings.length; i++) {
@@ -109,8 +102,8 @@ public class conversation_base extends script.base_script {
         return SCRIPT_CONTINUE;
     }
 
-    protected int craft_response_prose(List<String> responseStrings, int branchId, String name) {
-        string_id message = new string_id(c_stringFile, responseStrings.get(0));
+    protected int craft_response_prose(String[] responseStrings, int branchId, String name) {
+        string_id message = new string_id(c_stringFile, responseStrings[0]);
         string_id responses[] = new string_id[responseStrings.length];
         for (int i = 1; i < responseStrings.length; i++){
             responses[i] = new string_id(c_stringFile, responseStrings[i]);

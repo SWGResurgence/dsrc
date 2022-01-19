@@ -3,12 +3,15 @@ package script.conversation;
 import script.library.*;
 import script.*;
 
-public class trehla_keelo extends script.conversation.base.conversation_base
+public class trehla_keelo extends script.base_script
 {
-    private static final String SCRIPT = "trehla_keelo";
-
-    public trehla_keelo() {
-        super(SCRIPT);
+    public trehla_keelo()
+    {
+    }
+    public static String c_stringFile = "conversation/trehla_keelo";
+    public boolean trehla_keelo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
+    {
+        return true;
     }
     public boolean trehla_keelo_condition_questActiveOrComplete(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -294,35 +297,60 @@ public class trehla_keelo extends script.conversation.base.conversation_base
     }
     public int trehla_keelo_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
-        if (response.equals("s_305"))//here
+        if (response.equals("s_305"))
         {
             doAnimationAction(player, "shrug_hands");
-            doAnimationAction(npc, "point_forward");
-            string_id message = new string_id(c_stringFile, "s_307");
-            List<String> responses = new ArrayList<>();
-            if (trehla_keelo_condition_playerDidNewTutorial(player, npc))
+            if (trehla_keelo_condition__defaultCondition(player, npc))
             {
-                responses.add("s_317");
-            } else {
-                responses.add("s_309");
+                doAnimationAction(npc, "point_forward");
+                string_id message = new string_id(c_stringFile, "s_307");
+                int numberOfResponses = 0;
+                boolean hasResponse = false;
+                boolean hasResponse0 = false;
+                if (!trehla_keelo_condition_playerDidNewTutorial(player, npc))
+                {
+                    ++numberOfResponses;
+                    hasResponse = true;
+                    hasResponse0 = true;
+                }
+                boolean hasResponse1 = false;
+                if (trehla_keelo_condition_playerDidNewTutorial(player, npc))
+                {
+                    ++numberOfResponses;
+                    hasResponse = true;
+                    hasResponse1 = true;
+                }
+                if (hasResponse)
+                {
+                    int responseIndex = 0;
+                    string_id responses[] = new string_id[numberOfResponses];
+                    if (hasResponse0)
+                    {
+                        responses[responseIndex++] = new string_id(c_stringFile, "s_309");
+                    }
+                    if (hasResponse1)
+                    {
+                        responses[responseIndex++] = new string_id(c_stringFile, "s_317");
+                    }
+                    utils.setScriptVar(player, "conversation.trehla_keelo.branchId", 2);
+                    prose_package pp = new prose_package();
+                    pp.stringId = message;
+                    pp.actor.set(player);
+                    pp.target.set(npc);
+                    npcSpeak(player, pp);
+                    npcSetConversationResponses(player, responses);
+                }
+                else 
+                {
+                    utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
+                    prose_package pp = new prose_package();
+                    pp.stringId = message;
+                    pp.actor.set(player);
+                    pp.target.set(npc);
+                    npcEndConversationWithMessage(player, pp);
+                }
+                return SCRIPT_CONTINUE;
             }
-            prose_package pp = new prose_package();
-            pp.stringId = message;
-            pp.actor.set(player);
-            pp.target.set(npc);
-
-            if (responses.size() > 1)
-            {
-                utils.setScriptVar(player, "conversation.trehla_keelo.branchId", 2);
-                npcSpeak(player, pp);
-                npcSetConversationResponses(player, responses);
-            }
-            else 
-            {
-                utils.removeScriptVar(player, "conversation.trehla_keelo.branchId");
-                npcEndConversationWithMessage(player, pp);
-            }
-            return SCRIPT_CONTINUE;
         }
         return SCRIPT_DEFAULT;
     }
