@@ -279,9 +279,9 @@ public class trial extends script.base_script
     "item_event_lifeday_imperial_token",				//#21   Token: Imperial Life Day
 		"item_event_halloween_coin",						    //#22   Coin: Galactic Moon Festival
 		"item_event_loveday_chak_heart",					  //#23   Token: Love Day Chak Heart
-		"item_pgc_token_01",								        //#24   Token: 
-    "item_pgc_token_02",								        //#25   Token:
-    "item_pgc_token_03",								        //#26   Token:
+		"item_pgc_token_01",								        //#24   Token: Copper
+    "item_pgc_token_02",								        //#25   Token: Silver
+    "item_pgc_token_03",								        //#26   Token: Gold
 		"item_meatlump_lump_01_01",							    //#27   Lump: Meatlump
 		"item_nova_orion_space_resource_01_01",			//#28   Token: Midlithe Crystals
     "item_wod_token_1",                         //#29   Token: Witches of Dathomir
