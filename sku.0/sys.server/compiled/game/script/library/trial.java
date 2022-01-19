@@ -2628,4 +2628,5 @@ public class trial extends script.base_script
                 setObjVar(box, "item.set.tokens_held", virtualTokens);
             }
         }
+    }
 }
