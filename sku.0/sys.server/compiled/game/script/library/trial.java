@@ -2584,22 +2584,14 @@ public class trial extends script.base_script
             }
             itemName = getStaticItemName(inventoryContent);
             if (itemName != null && !itemName.isEmpty()) {
-                if (itemName.equals(token)) {
-                    if (getCount(inventoryContent) > 1) {
-                        tokenCount += getCount(inventoryContent);
-                    } else {
-                        tokenCount++;
-                    }
-                }
                 if (itemName.equals("item_heroic_token_box_01_01")) {
                     return inventoryContent;
-                    tokenCount += getTokenAmountInBox(inventoryContent, token);
                 }
             }
         }
         return null;
     }
-    public static int getTokenAmountInBox(obj_id box, String token) {
+    public static int getTokenAmountInBox(obj_id box, String token) throws InterruptedException {
         verifyBox(box);
         int t = 0;
         if (hasObjVar(box, "item.set.tokens_held")) {
@@ -2625,7 +2617,7 @@ public class trial extends script.base_script
                 }
             }
             if (t > -1) {
-                if (vTokens > tokensOwed) {
+                if (vTokens > amount) {
                     vTokens -= amount;
                     virtualTokens[t] = vTokens;
                     amount = 0;

@@ -5,13 +5,19 @@ import script.library.utils;
 import script.obj_id;
 import script.string_id;
 
+import script.dictionary;
+import script.menu_info;
+import script.menu_info_types;
+import script.library.static_item;
+import script.library.sui;
+
 public class heroic_token_box extends script.base_script
 {
     private static final string_id MNU_WITHDRAW = new string_id("token_box", "withdraw");
     private static final String[] TOKEN_OPTIONS = {
         "Veteran Reward"
     };
-    private static final int TOKENS = {
+    private static final int[] TOKENS = {
         8
     };    
     public int OnAttach(obj_id self) throws InterruptedException
@@ -71,12 +77,12 @@ public class heroic_token_box extends script.base_script
             String title = "Heroic Token Box";
             String prompt = "Please select the token that you would like to withdraw.";
             int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, TOKEN_OPTIONS, "handleOptionSelect", true, false);
-            closeOldWindow(player);
-            setWindowPid(player, pid);
+            //closeOldWindow(player);
+            //setWindowPid(player, pid);
         }
         return SCRIPT_CONTINUE;
     }
-    public int handleOptionSelect(obj_id self, dictionary params) {
+    public int handleOptionSelect(obj_id self, dictionary params) throws InterruptedException {
         int bp = sui.getIntButtonPressed(params);
         if (bp == sui.BP_CANCEL) {
             return SCRIPT_CONTINUE;
@@ -87,21 +93,21 @@ public class heroic_token_box extends script.base_script
         setObjVar(self, "tokenType", idx);
         String title = "Heroic Token Box";
         String prompt = "Please select how many tokens you want to withdraw from your Token Box.";
-        sui.filteredInputbox(self, player, prompt, title, "handleQuantitySelect", "");
+        sui.filteredInputbox(self, sui.getPlayerId(params), prompt, title, "handleQuantitySelect", "");
+        return SCRIPT_CONTINUE;
     }
-    public int handleQuantitySelect(obj_id self, dictionary params) {
-        obj_id player = getContainingObject(self);
+    public int handleQuantitySelect(obj_id self, dictionary params) throws InterruptedException {
+        obj_id player = utils.getContainingPlayer(self);
         obj_id tokenBox = trial.getTokenBox(player);
         int amount = Integer.parseInt(sui.getInputBoxText(params));
-        int totalTokens = trial.getTokenTotal();
-        int selectedRow = getIntObjVar(self, tokenType);
-        String tokenType = trials.HEROIC_TOKENS[TOKENS[tokenType]];
+        int selectedRow = getIntObjVar(self, "tokenType");
+        String tokenType = trial.HEROIC_TOKENS[TOKENS[selectedRow]];
         if (amount < 1 || amount > trial.getTokenAmountInBox(tokenBox, tokenType)) {
             sendSystemMessageTestingOnly(player, "Sorry, but that is an invalid amount.");
         } else {
             trial.withdrawTokensFromBox(tokenBox, tokenType, amount);
             static_item.createNewItemFunction(tokenType, self, amount);
-            sendSystemMessageTestingOnly(player, "Success: " + amount + " " + TOKEN_OPTIONS[selectedRow] " tokens have been transferred from your token box to your inventory.");
+            sendSystemMessageTestingOnly(player, "Success: " + amount + " " + TOKEN_OPTIONS[selectedRow] + " tokens have been transferred from your token box to your inventory.");
         }
         return SCRIPT_CONTINUE;
     }
