@@ -103,7 +103,8 @@ public class heroic_token_box extends script.base_script
         if (amount < 1 || amount > trial.getTokenAmountInBox(tokenBox, tokenType)) {
             sendSystemMessageTestingOnly(player, "Sorry, but that is an invalid amount.");
         } else {
-            if (getVolumeFree(player) > 0) {
+            obj_id inv = getObjectInSlot(player, "inventory");
+            if (getVolumeFree(inv) > 0) {
                 trial.withdrawTokensFromBox(tokenBox, tokenType, amount);
                 static_item.createNewItemFunction(tokenType, player, amount);
             } else {
