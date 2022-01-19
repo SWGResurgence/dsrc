@@ -7,21 +7,15 @@ import script.*;
 
 public class conversation_base extends script.base_script
 {
-	private String c_stringFile;
-	private String conversation;
-	private String scriptName;
-
-	private obj_id npc;
-	private obj_id player;
-
-	public conversation_base(String c_stringFile, String scriptName, String conversation) {
-      this.c_stringFile = c_stringFile;
-      this.scriptName = scriptName;
-      this.conversation = conversation;
-  }
+	public String c_stringFile = "";
+	public String scriptName = "";
+	public String conversation = "";
+	public conversation_base()
+	{
+	}
 	public int OnInitialize(obj_id self) throws InterruptedException
 	{
-		if (!isTangible(self) || isPlayer(self))
+		if ((!isTangible(self)) || (isPlayer(self)))
 		{
 			detachScript(self, conversation);
 		}
@@ -53,19 +47,13 @@ public class conversation_base extends script.base_script
 		System.arraycopy(responses, 0, objects, 0, responses.length);
 		return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
 	}
-	public int OnStartNpcConversation(String index) throws InterruptedException
+	public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
 	{
 		if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
 		{
 			return SCRIPT_OVERRIDE;
 		}
-		chat.chat(self, new string_id(c_stringFile, index));
-		return SCRIPT_CONTINUE;
-	}
-	public int OnStartNpcConversation(String index, String animation) throws InterruptedException
-	{
-		doAnimationAction(self, animation);
-		OnStartNpcConversation(index);
+		chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
 		return SCRIPT_CONTINUE;
 	}
 	public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
@@ -137,9 +125,4 @@ public class conversation_base extends script.base_script
 		}
 		return SCRIPT_CONTINUE;
 	}
-  
-  public void setObjects(obj_id npc, obj_id player) {
-      this.npc = npc;
-      this.player = player;
-  }
 }
