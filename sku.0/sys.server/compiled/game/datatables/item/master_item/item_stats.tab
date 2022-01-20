@@ -4983,4 +4983,3 @@ item_wod_smc_schematic_hut			"string:loot_schematic.schematic=object/draft_schem
 item_wod_smc_schematic_wall			"string:loot_schematic.schematic=object/draft_schematic/furniture/city/wod_sm_wall.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice"								
 item_wod_smc_herb_reward_jar											
 item_trader_advanced_buff_01_01					trader_advanced_buff	long_reuse_4	900			appearance/pt_heal.prt	
-item_yt2400_hologram											
