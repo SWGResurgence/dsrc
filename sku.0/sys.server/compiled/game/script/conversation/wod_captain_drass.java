@@ -22,9 +22,9 @@ import script.*;
 
 public class wod_captain_drass extends script.base_script
 {
-	public wod_captain_drass()
-	{
-	}
+	public wod_captain_drass()
+	{
+	}
 // ======================================================================
 // Script Constants
 // ======================================================================
