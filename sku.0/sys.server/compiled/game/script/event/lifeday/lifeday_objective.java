@@ -54,8 +54,10 @@ public class lifeday_objective extends script.base_script
     private static final float MIN_DESTROY_TIME = 60;
     private static final float MAX_DESTROY_TIME = 180;
     private static final int COUNTDOWN_TIMER = 3;
-    private static final int NON_DECLARED_TOKENS = 5;
-    private static final int DECLARED_TOKENS = 15;
+    private static final int NON_DECLARED_TOKENS = utils.getIntConfigSetting("GameServer", "lifedayNonDeclaredBonus");
+    private static final int DECLARED_TOKENS = utils.getIntConfigSetting("GameServer","lifedayDeclaredBonus");
+    //private static final int NON_DECLARED_TOKENS = 5;
+    //private static final int DECLARED_TOKENS = 15;
     private static final int REBEL = 1;
     private static final int IMPERIAL = 2;
     private static final int DAILY_COUNTER_LIMIT = 9;
