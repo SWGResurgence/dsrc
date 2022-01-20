@@ -1,10 +1,7 @@
 @base object/draft_schematic/structure/base_structure_schematic.iff
 @class draft_schematic_object_template 7
-//
-// skills used: inventor/basic general component design
-//
 
-itemsPerContainer = 2
+itemsPerContainer = 0
 craftedObjectTemplate = "object/tangible/deed/harvester_deed/creature_harvester_deed.iff"
 
 slots = [
@@ -12,7 +9,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "load_bearing_frame",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "load_bearing_frame", ingredient="metal", count=5500]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "load_bearing_frame", ingredient="metal", count=550]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -20,7 +17,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "body_shell_and_casing",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "body_shell_and_casing", ingredient="steel", count=250]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "body_shell_and_casing", ingredient="steel", count=25]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -28,7 +25,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "structure_foundation",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "structure_foundation", ingredient="ore", count=350]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "structure_foundation", ingredient="ore", count=35]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -36,7 +33,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "creature_handling_mechanism",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "plant_handling_mechanism", ingredient="metal", count=100]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "plant_handling_mechanism", ingredient="metal", count=10]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -52,7 +49,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "boreing_mechanism_buffers_and_bushings",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "boreing_mechanism_buffers_and_bushings", ingredient="chemical", count=350]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "boreing_mechanism_buffers_and_bushings", ingredient="chemical", count=35]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
