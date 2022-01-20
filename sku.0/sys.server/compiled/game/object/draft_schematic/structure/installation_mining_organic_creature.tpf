@@ -4,7 +4,7 @@
 // skills used: inventor/basic general component design
 //
 
-itemsPerContainer = 1
+itemsPerContainer = 2
 craftedObjectTemplate = "object/tangible/deed/harvester_deed/creature_harvester_deed.iff"
 
 slots = [
@@ -85,10 +85,7 @@ skillCommands = ["unskilled"]
 
 manufactureScripts = [ "systems.crafting.structure.specific_item.crafting_structure_harvester_installation" ]
 
-
 @class intangible_object_template 0
-
-
 @class object_template 5
 
 complexity = 25
