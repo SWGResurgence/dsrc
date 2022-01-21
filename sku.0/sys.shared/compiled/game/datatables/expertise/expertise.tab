@@ -879,13 +879,13 @@ expertise_trader_penetration_4	29	4	5	4	expertise_trader_penetration_3		trader
 expertise_trader_lethal_strikes_1	29	4	7	1	expertise_trader_melee_accuracy_4		trader
 expertise_trader_lethal_strikes_2	29	4	7	2	expertise_trader_lethal_strikes_1		trader
 expertise_trader_lethal_strikes_3	29	4	7	3	expertise_trader_lethal_strikes_2		trader
+expertise_trader_miracle_1	29	5	1	1	expertise_trader_deflective_armor_4		trader
 expertise_trader_advanced_personnel_1	29	5	2	1			trader
 expertise_trader_advanced_personnel_2	29	5	2	2	expertise_trader_advanced_personnel_1		trader
 expertise_trader_advanced_personnel_3	29	5	2	3	expertise_trader_advanced_personnel_2		trader
 expertise_trader_advanced_personnel_4	29	5	2	4	expertise_trader_advanced_personnel_3		trader
 expertise_trader_deconstruction_techniques_1	29	5	6	1			trader
 expertise_trader_deconstruction_techniques_2	29	5	6	2	expertise_trader_deconstruction_techniques_1		trader
-expertise_trader_miracle_1	29	6	1	1	expertise_trader_deflective_armor_4		trader
 expertise_domestic_tailor_dexterity_1	25	1	1	1			trader_dom
 expertise_domestic_tailor_dexterity_2	25	1	1	2			trader_dom
 expertise_domestic_tailor_dexterity_3	25	1	1	3			trader_dom
