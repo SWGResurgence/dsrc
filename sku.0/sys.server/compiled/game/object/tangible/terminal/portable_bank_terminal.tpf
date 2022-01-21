@@ -5,4 +5,4 @@
 
 sharedTemplate = "object/tangible/terminal/shared_portable_terminal_bank.iff"
 
-script = +["terminal.bank","planet_map.map_loc"]
+scripts = +["terminal.bank","planet_map.map_loc"]

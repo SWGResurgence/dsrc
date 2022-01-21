@@ -5,7 +5,7 @@
 
 objectName = "terminal_name" "portable_bank_terminal"
 detailedDescription = "terminal_detail" "portable_bank_terminal"
-lookAtText = terminal_lookat" "portable_bank_terminal"
+lookAtText = "terminal_lookat" "portable_bank_terminal"
 
 snapToTerrain = false
 
