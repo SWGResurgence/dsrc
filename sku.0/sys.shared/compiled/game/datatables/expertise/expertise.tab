@@ -801,49 +801,116 @@ expertise_en_uprising_2	22	5	2	2			entertainer
 expertise_en_annulling_1	22	5	4	1			entertainer
 expertise_en_annulling_2	22	5	4	2			entertainer
 expertise_en_annulling_3	22	5	4	3			entertainer
-expertise_trader_business_accounting_1	29	1	1	1			trader
-expertise_trader_business_accounting_2	29	1	1	2			trader
-expertise_trader_business_accounting_3	29	1	1	3			trader
-expertise_trader_business_accounting_4	29	1	1	4			trader
-expertise_trader_sampling_collection_1	29	1	7	1			trader
-expertise_trader_sampling_collection_2	29	1	7	2			trader
-expertise_trader_sampling_collection_3	29	1	7	3			trader
-expertise_trader_sampling_collection_4	29	1	7	4			trader
-expertise_trader_warehousing_1	29	2	1	1			trader
-expertise_trader_warehousing_2	29	2	1	2			trader
-expertise_trader_warehousing_3	29	2	1	3			trader
-expertise_trader_warehousing_4	29	2	1	4			trader
-expertise_trader_harvester_storage_1	29	2	5	1			trader
-expertise_trader_harvester_storage_2	29	2	5	2			trader
-expertise_trader_harvester_storage_3	29	2	5	3			trader
-expertise_trader_harvester_storage_4	29	2	5	4			trader
-expertise_trader_sampling_efficiency_1	29	2	7	1			trader
-expertise_trader_sampling_efficiency_2	29	2	7	2			trader
-expertise_trader_sampling_efficiency_3	29	2	7	3			trader
-expertise_trader_personnel_management_1	29	3	1	1			trader
-expertise_trader_personnel_management_2	29	3	1	2			trader
-expertise_trader_factory_maintenance_1	29	3	3	1			trader
-expertise_trader_factory_maintenance_2	29	3	3	2			trader
-expertise_trader_factory_maintenance_3	29	3	3	3			trader
-expertise_trader_factory_maintenance_4	29	3	3	4			trader
-expertise_trader_harvester_maintenance_1	29	3	5	1			trader
-expertise_trader_harvester_maintenance_2	29	3	5	2			trader
-expertise_trader_harvester_maintenance_3	29	3	5	3			trader
-expertise_trader_harvester_maintenance_4	29	3	5	4			trader
-expertise_trader_factory_energy_1	29	4	3	1			trader
-expertise_trader_factory_energy_2	29	4	3	2			trader
-expertise_trader_factory_energy_3	29	4	3	3			trader
-expertise_trader_factory_energy_4	29	4	3	4			trader
-expertise_trader_harvester_energy_1	29	4	5	1			trader
-expertise_trader_harvester_energy_2	29	4	5	2			trader
-expertise_trader_harvester_energy_3	29	4	5	3			trader
-expertise_trader_harvester_energy_4	29	4	5	4			trader
-expertise_trader_reverse_engineering_1	29	4	7	1			trader
-expertise_trader_reverse_engineering_2	29	4	7	2			trader
-expertise_trader_factory_production_1	29	5	3	1			trader
-expertise_trader_factory_production_2	29	5	3	2			trader
-expertise_trader_harvester_collection_1	29	5	5	1			trader
-expertise_trader_harvester_collection_2	29	5	5	2			trader
+expertise_trader_enhanced_health_1	29	1	1	1			trader
+expertise_trader_enhanced_health_2	29	1	1	2	expertise_trader_enhanced_health_1		trader
+expertise_trader_enhanced_health_3	29	1	1	3	expertise_trader_enhanced_health_2		trader
+expertise_trader_enhanced_health_4	29	1	1	4	expertise_trader_enhanced_health_3		trader
+expertise_trader_enhanced_agility_1	29	1	3	1			trader
+expertise_trader_enhanced_agility_2	29	1	3	2	expertise_trader_enhanced_agility_1		trader
+expertise_trader_enhanced_agility_3	29	1	3	3	expertise_trader_enhanced_agility_2		trader
+expertise_trader_enhanced_agility_4	29	1	3	4	expertise_trader_enhanced_agility_3		trader
+expertise_trader_artisan_dexterity_1	29	1	4	1			trader
+expertise_trader_artisan_dexterity_2	29	1	4	2	expertise_trader_artisan_dexterity_1		trader
+expertise_trader_artisan_dexterity_3	29	1	4	3	expertise_trader_artisan_dexterity_2		trader
+expertise_trader_artisan_dexterity_4	29	1	4	4	expertise_trader_artisan_dexterity_3		trader
+expertise_trader_enhanced_precision_1	29	1	5	1			trader
+expertise_trader_enhanced_precision_2	29	1	5	2	expertise_trader_enhanced_precision_1		trader
+expertise_trader_enhanced_precision_3	29	1	5	3	expertise_trader_enhanced_precision_2		trader
+expertise_trader_enhanced_precision_4	29	1	5	4	expertise_trader_enhanced_precision_3		trader
+expertise_trader_enhanced_strength_1	29	1	7	1			trader
+expertise_trader_enhanced_strength_2	29	1	7	2	expertise_trader_enhanced_strength_1		trader
+expertise_trader_enhanced_strength_3	29	1	7	3	expertise_trader_enhanced_strength_2		trader
+expertise_trader_enhanced_strength_4	29	1	7	4	expertise_trader_enhanced_strength_3		trader
+expertise_trader_reinforced_armor_1	29	2	1	1			trader
+expertise_trader_reinforced_armor_2	29	2	1	2	expertise_trader_reinforced_armor_1		trader
+expertise_trader_reinforced_armor_3	29	2	1	3	expertise_trader_reinforced_armor_2		trader
+expertise_trader_reinforced_armor_4	29	2	1	4	expertise_trader_reinforced_armor_3		trader
+expertise_trader_enhance_block_1	29	2	3	1			trader
+expertise_trader_enhance_block_2	29	2	3	2	expertise_trader_enhance_block_1		trader
+expertise_trader_enhance_block_3	29	2	3	3	expertise_trader_enhance_block_2		trader
+expertise_trader_enhance_block_4	29	2	3	4	expertise_trader_enhance_block_3		trader
+expertise_trader_artisan_hypothesis_1	29	2	4	1	expertise_trader_artisan_dexterity_4		trader
+expertise_trader_artisan_hypothesis_2	29	2	4	2	expertise_trader_artisan_hypothesis_1		trader
+expertise_trader_artisan_hypothesis_3	29	2	4	3	expertise_trader_artisan_hypothesis_2		trader
+expertise_trader_artisan_hypothesis_4	29	2	4	4	expertise_trader_artisan_hypothesis_3		trader
+expertise_trade_sidearm_training_1	29	2	5	1			trader
+expertise_trade_sidearm_training_2	29	2	5	2	expertise_trade_sidearm_training_1		trader
+expertise_trade_sidearm_training_3	29	2	5	3	expertise_trade_sidearm_training_2		trader
+expertise_trade_sidearm_training_4	29	2	5	4	expertise_trade_sidearm_training_3		trader
+expertise_trade_sampling_efficiency_1	29	2	6	1			trader
+expertise_trade_sampling_efficiency_2	29	2	6	2	expertise_trade_sampling_efficiency_1		trader
+expertise_trade_sampling_efficiency_3	29	2	6	3	expertise_trade_sampling_efficiency_2		trader
+expertise_trade_sampling_efficiency_4	29	2	6	4	expertise_trade_sampling_efficiency_3		trader
+expertise_trade_melee_accuracy_1	29	2	7	1			trader
+expertise_trade_melee_accuracy_2	29	2	7	2	expertise_trade_melee_accuracy_1		trader
+expertise_trade_melee_accuracy_3	29	2	7	3	expertise_trade_melee_accuracy_2		trader
+expertise_trade_melee_accuracy_4	29	2	7	4	expertise_trade_melee_accuracy_3		trader
+expertise_trade_hitech_armor_1	29	3	1	1	expertise_trade_reinforced_armor_4		trader
+expertise_trade_hitech_armor_2	29	3	1	2	expertise_trade_hitech_armor_1		trader
+expertise_trade_hitech_armor_3	29	3	1	3	expertise_trade_hitech_armor_2		trader
+expertise_trade_hitech_armor_4	29	3	1	4	expertise_trade_hitech_armor_3		trader
+expertise_trader_factory_efficiency_1	29	3	2	1			trader
+expertise_trader_factory_efficiency_2	29	3	2	2	expertise_trader_factory_efficiency_1		trader
+expertise_trader_factory_efficiency_3	29	3	2	3	expertise_trader_factory_efficiency_2		trader
+expertise_trader_factory_efficiency_4	29	3	2	4	expertise_trader_factory_efficiency_3		trader
+expertise_trader_enhance_evasion_1	29	3	3	1	expertise_trader_enhance_block_4		trader
+expertise_trader_enhance_evasion_2	29	3	3	2	expertise_trader_enhance_evasion_1		trader
+expertise_trader_enhance_evasion_3	29	3	3	3	expertise_trader_enhance_evasion_2		trader
+expertise_trader_enhance_evasion_4	29	3	3	4	expertise_trader_enhance_evasion_3		trader
+expertise_trader_dire_strikes_1	29	3	5	1	expertise_trade_sidearm_training_4		trader
+expertise_trader_dire_strikes_2	29	3	5	2	expertise_trader_dire_strikes_1		trader
+expertise_trader_harvester_efficiency_1	29	3	6	1	expertise_trade_sampling_efficiency_4		trader
+expertise_trader_harvester_efficiency_2	29	3	6	2	expertise_trader_harvester_efficiency_1		trader
+expertise_trader_harvester_efficiency_3	29	3	6	3	expertise_trader_harvester_efficiency_2		trader
+expertise_trader_harvester_efficiency_4	29	3	6	4	expertise_trader_harvester_efficiency_3		trader
+expertise_trader_deflective_armor_1	29	4	1	1	expertise_trade_hitech_armor_4		trader
+expertise_trader_deflective_armor_2	29	4	1	2	expertise_trader_deflective_armor_1		trader
+expertise_trader_deflective_armor_3	29	4	1	3	expertise_trader_deflective_armor_2		trader
+expertise_trader_deflective_armor_4	29	4	1	4	expertise_trader_deflective_armor_3		trader
+expertise_trader_enhance_dodge_1	29	4	3	1	expertise_trader_enhance_evasion_4		trader
+expertise_trader_enhance_dodge_2	29	4	3	2	expertise_trader_enhance_dodge_1		trader
+expertise_trader_enhance_dodge_3	29	4	3	3	expertise_trader_enhance_dodge_2		trader
+expertise_trader_enhance_dodge_4	29	4	3	4	expertise_trader_enhance_dodge_3		trader
+expertise_trader_artisan_adv_theory_1	29	4	4	1	expertise_trader_artisan_hypothesis_4		trader
+expertise_trader_penetration_1	29	4	5	1	expertise_trader_dire_strikes_4		trader
+expertise_trader_penetration_2	29	4	5	2	expertise_trader_penetration_1		trader
+expertise_trader_penetration_3	29	4	5	3	expertise_trader_penetration_2		trader
+expertise_trader_penetration_4	29	4	5	4	expertise_trader_penetration_3		trader
+expertise_trader_lethal_strikes_1	29	4	7	1	expertise_trade_melee_accuracy_4		trader
+expertise_trader_lethal_strikes_2	29	4	7	2	expertise_trader_lethal_strikes_1		trader
+expertise_trader_lethal_strikes_3	29	4	7	3	expertise_trader_lethal_strikes_2		trader
+expertise_trader_advanced_personnel_1	29	5	2	1			trader
+expertise_trader_advanced_personnel_2	29	5	2	2	expertise_trader_advanced_personnel_1		trader
+expertise_trader_advanced_personnel_3	29	5	2	3	expertise_trader_advanced_personnel_2		trader
+expertise_trader_advanced_personnel_4	29	5	2	4	expertise_trader_advanced_personnel_3		trader
+expertise_trader_deconstruction_techniques_1	29	5	6	1			trader
+expertise_trader_deconstruction_techniques_2	29	5	6	2	expertise_trader_deconstruction_techniques_1		trader
+expertise_trader_miracle_1	29	6	1	1	expertise_trader_deflective_armor_4		trader
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
 expertise_domestic_tailor_dexterity_1	25	1	1	1			trader_dom
 expertise_domestic_tailor_dexterity_2	25	1	1	2			trader_dom
 expertise_domestic_tailor_dexterity_3	25	1	1	3			trader_dom
