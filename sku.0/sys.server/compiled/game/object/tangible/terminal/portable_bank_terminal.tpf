@@ -3,6 +3,6 @@
 @class tangible_object_template 0
 @class object_template 2
 
-sharedTemplate = "object/tangible/terminal/shared_portable_terminal_bank.iff"
+sharedTemplate = "object/tangible/terminal/shared_portable_bank_terminal.iff"
 
 scripts = +["terminal.bank","planet_map.map_loc"]
