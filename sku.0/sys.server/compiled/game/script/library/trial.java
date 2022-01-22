@@ -2565,14 +2565,14 @@ public class trial extends script.base_script
     }
     public static int getTokenTotal(obj_id player, String token) throws InterruptedException
     {
-        int tokenCount = 0;
         if (!isIdValid(player) || !exists(player) || token == null || token.length() <= 0)
         {
             return 0;
         }
+        int tokenCount = getTokenAmountInInventory(token);
         obj_id tokenBox = getTokenBox(player);
         if (tokenBox != null) {
-            return getTokenAmountInBox(tokenBox, token);
+            tokenCount += getTokenAmountInBox(tokenBox, token);
         }
         return tokenCount;
     }
@@ -2605,6 +2605,16 @@ public class trial extends script.base_script
             return virtualTokenArray[t];
         }
          return 0;
+    }
+    public static int getTokenAmountInInventory(obj_id, String token) {
+        obj_id inventory = utils.getInventoryContainer(player);
+        obj_id[] inventoryContents = getContents(inventory);
+        for (obj_id object : inventoryContents) {
+            if (object != null && getStaticItemName(object).equals(token)) {
+                return getCount(object);
+            }
+        }
+        return 0;
     }
     public static void withdrawTokensFromBox(obj_id box, String token, int amount) {
         int vTokens = 0;
