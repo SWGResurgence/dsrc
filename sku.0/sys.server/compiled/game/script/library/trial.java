@@ -2606,7 +2606,7 @@ public class trial extends script.base_script
         }
          return 0;
     }
-    public static int getTokenAmountInInventory(obj_id, String token) {
+    public static int getTokenAmountInInventory(obj_id player, String token) {
         obj_id inventory = utils.getInventoryContainer(player);
         obj_id[] inventoryContents = getContents(inventory);
         for (obj_id object : inventoryContents) {
