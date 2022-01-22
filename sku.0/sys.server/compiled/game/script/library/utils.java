@@ -7227,7 +7227,7 @@ public class utils extends script.base_script
                 continue;
             }
             itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && itemName.equals(staticName) {
+            if (itemName != null && itemName.equals(staticName)) {
                 return inventoryContent;
             }
         }
