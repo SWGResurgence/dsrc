@@ -164,7 +164,7 @@ public class heroic_token_box extends script.base_script
     }
     public int handleQuantitySelect(obj_id self, dictionary params) throws InterruptedException {
         obj_id player = utils.getContainingPlayer(self);
-        obj_id tokenBox = trial.getTokenBox(player);
+        obj_id tokenBox = utils.getObjectInInventory(player, "item_token_box_01_01");
         int amount = Integer.parseInt(sui.getInputBoxText(params));
         int selectedRow = getIntObjVar(self, "tokenType");
         String tokenType = trial.HEROIC_TOKENS[TOKENS[selectedRow]];
