@@ -2203,7 +2203,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
     }
     public int imperial_empire_day_major_tantor_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
-        if (response.equals("s_74"))
+        if (response.equals("s_72"))
         {
             if (imperial_empire_day_major_tantor_condition__defaultCondition(player, npc))
             {
@@ -4746,7 +4746,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
         {
             doAnimationAction(npc, "salute2");
             doAnimationAction(player, "salute2");
-            string_id message = new string_id(c_stringFile, "s_72");
+            string_id message = new string_id(c_stringFile, "s_70");
             int numberOfResponses = 0;
             boolean hasResponse = false;
             boolean hasResponse0 = false;
@@ -4762,7 +4762,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 string_id responses[] = new string_id[numberOfResponses];
                 if (hasResponse0)
                 {
-                    responses[responseIndex++] = new string_id(c_stringFile, "s_74");
+                    responses[responseIndex++] = new string_id(c_stringFile, "s_72");
                 }
                 utils.setScriptVar(player, "conversation.imperial_empire_day_major_tantor.branchId", 35);
                 prose_package pp = new prose_package();

@@ -2368,7 +2368,7 @@ public class imperial_empire_day_kaythree extends script.base_script
         {
             if (imperial_empire_day_kaythree_condition_isDomesticsTrader(player, npc))
             {
-                imperial_empire_day_kaythree_action_grantDomesticsMissionThree(player, npc);
+                imperial_empire_day_kaythree_action_grantDomesticsMissionSix(player, npc);
                 string_id message = new string_id(c_stringFile, "s_242");
                 utils.removeScriptVar(player, "conversation.imperial_empire_day_kaythree.branchId");
                 prose_package pp = new prose_package();
