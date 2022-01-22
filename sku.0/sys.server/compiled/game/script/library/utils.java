@@ -7219,6 +7219,20 @@ public class utils extends script.base_script
         }
         return intNumCreatures;
     }
+    public static obj_id getObjectInInventory(obj_id player, String staticName) {
+        obj_id[] inventoryContents = getInventoryAndEquipment(player);
+        String itemName;
+        for (obj_id inventoryContent : inventoryContents) {
+            if (!isIdValid(inventoryContent) || !exists(inventoryContent)) {
+                continue;
+            }
+            itemName = getStaticItemName(inventoryContent);
+            if (itemName != null && itemName.equals(staticName) {
+                return inventoryContent;
+            }
+        }
+        return null;
+	}
     public static boolean inDebugMode() throws InterruptedException {
         return (utils.getIntConfigSetting("GameServer", "debugMode") == 1);
     }
