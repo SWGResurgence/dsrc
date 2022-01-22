@@ -5,7 +5,7 @@
 // skills used: inventor/basic general component design
 //
 
-itemsPerContainer = 25
+itemsPerContainer = 1000
 craftedObjectTemplate = "object/tangible/food/crafted/additive/additive_heavy.iff"
 
 slots = [
@@ -13,7 +13,7 @@ slots = [
 	optional=false,
 	name = "craft_food_ingredients_n" "suspension_agent",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_food_ingredients_n" "suspension_agent", ingredient="water", count=20]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_food_ingredients_n" "suspension_agent", ingredient="water", count=10]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 1,
 	appearance = "" ],

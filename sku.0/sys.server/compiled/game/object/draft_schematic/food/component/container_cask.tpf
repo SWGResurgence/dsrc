@@ -4,14 +4,14 @@
 // skills used: inventor/basic general component design
 //
 
-itemsPerContainer = 25
+itemsPerContainer = 1000
 craftedObjectTemplate = "object/tangible/component/food/container_cask.iff"
 slots = [
 	[
 	optional=false,
 	name = "craft_food_ingredients_n" "crystal",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_food_ingredients_n" "crystal", ingredient="gemstone_crystalline", count=150]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_food_ingredients_n" "crystal", ingredient="gemstone_crystalline", count=15]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -19,7 +19,7 @@ slots = [
 	optional=false,
 	name = "craft_food_ingredients_n" "cask_trim",
 	options = [
-		[ingredientType=IT_template, ingredients = [[name="craft_food_ingredients_n" "cask_trim", ingredient="object/tangible/component/clothing/trim.iff", count=2]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_template, ingredients = [[name="craft_food_ingredients_n" "cask_trim", ingredient="object/tangible/component/clothing/trim.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ]]

@@ -9,14 +9,14 @@
 
 @class draft_schematic_object_template 7
 
-itemsPerContainer = 25
+itemsPerContainer = 1000
 craftedObjectTemplate = "object/tangible/food/crafted/dessert_tranna_nougat_cream.iff"
 slots = [
 	[
 	optional = false,
 	name = "craft_food_ingredients_n" "carbosyrup",
 	options = [
-		[ingredientType=IT_template, ingredients = [[name="craft_food_ingredients_n" "carbosyrup", ingredient="object/tangible/component/food/ingredient_carbosyrup.iff", count=2]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_template, ingredients = [[name="craft_food_ingredients_n" "carbosyrup", ingredient="object/tangible/component/food/ingredient_carbosyrup.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -24,7 +24,7 @@ slots = [
 	optional = false,
 	name = "craft_food_ingredients_n" "dough",
 	options = [
-		[ingredientType=IT_template, ingredients = [[name="craft_food_ingredients_n" "dough", ingredient="object/tangible/component/food/ingredient_ball_of_dough.iff", count=2]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_template, ingredients = [[name="craft_food_ingredients_n" "dough", ingredient="object/tangible/component/food/ingredient_ball_of_dough.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
