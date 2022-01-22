@@ -9,14 +9,14 @@
 
 @class draft_schematic_object_template 7
 
-itemsPerContainer = 25
+itemsPerContainer = 1000
 craftedObjectTemplate = "object/tangible/component/genetic_engineering/centrifuge_burst_piston.iff"
 slots = [
 	[
 	optional = false,
 	name = "craft_item_ingredients_n" "centrifuge_burst_piston_a",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "centrifuge_burst_piston_a", ingredient="steel", count=575]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "centrifuge_burst_piston_a", ingredient="steel", count=57]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -24,7 +24,7 @@ slots = [
 	optional = false,
 	name = "craft_item_ingredients_n" "centrifuge_burst_piston_b",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "centrifuge_burst_piston_b", ingredient="iron", count=575]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "centrifuge_burst_piston_b", ingredient="iron", count=57]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -32,7 +32,7 @@ slots = [
 	optional = false,
 	name = "craft_item_ingredients_n" "centrifuge_burst_piston_c",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "centrifuge_burst_piston_c", ingredient="gas", count=100]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "centrifuge_burst_piston_c", ingredient="gas", count=10]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ]]

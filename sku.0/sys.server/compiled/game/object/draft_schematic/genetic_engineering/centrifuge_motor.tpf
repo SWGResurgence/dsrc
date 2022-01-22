@@ -9,14 +9,14 @@
 
 @class draft_schematic_object_template 7
 
-itemsPerContainer = 25
+itemsPerContainer = 1000
 craftedObjectTemplate = "object/tangible/component/genetic_engineering/centrifuge_motor.iff"
 slots = [
 	[
 	optional = false,
 	name = "craft_item_ingredients_n" "centrifuge_motor_a",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "centrifuge_motor_a", ingredient="steel", count=400]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "centrifuge_motor_a", ingredient="steel", count=40]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -24,7 +24,7 @@ slots = [
 	optional = false,
 	name = "craft_item_ingredients_n" "centrifuge_motor_b",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "centrifuge_motor_b", ingredient="copper", count=750]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "centrifuge_motor_b", ingredient="copper", count=75]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -32,7 +32,7 @@ slots = [
 	optional = false,
 	name = "craft_item_ingredients_n" "centrifuge_motor_c",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "centrifuge_motor_c", ingredient="ore", count=350]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "centrifuge_motor_c", ingredient="ore", count=35]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -40,7 +40,7 @@ slots = [
 	optional = false,
 	name = "craft_item_ingredients_n" "centrifuge_motor_d",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "centrifuge_motor_d", ingredient="gas_inert", count=500]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "centrifuge_motor_d", ingredient="gas_inert", count=50]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
