@@ -16,7 +16,7 @@ slots = [
 	optional = false,
 	name = "craft_droid_ingredients_n" "primary_frame",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_droid_ingredients_n" "primary_frame", ingredient="steel", count=30]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_droid_ingredients_n" "primary_frame", ingredient="steel", count=3]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -24,7 +24,7 @@ slots = [
 	optional = false,
 	name = "craft_droid_ingredients_n" "body_shell",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_droid_ingredients_n" "body_shell", ingredient="chemical", count=20]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_droid_ingredients_n" "body_shell", ingredient="chemical", count=2]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -32,7 +32,7 @@ slots = [
 	optional = false,
 	name = "craft_droid_ingredients_n" "shielding_and_insulation",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_droid_ingredients_n" "shielding_and_insulation", ingredient="ore_extrusive", count=25]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_droid_ingredients_n" "shielding_and_insulation", ingredient="ore_extrusive", count=2]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -78,3 +78,4 @@ manufactureScripts = [ "systems.crafting.item.specific_item.crafting_station_ite
 complexity = 25
 sharedTemplate = "object/draft_schematic/item/shared_item_war_intel_datapad.iff"
 volume = 1
+
