@@ -2460,13 +2460,13 @@ expertise_trader_penetration_4	expertise_trader_penetration_3																			
 expertise_trader_lethal_strikes_1	expertise_trader_melee_accuracy_4									expertise_trader_melee_accuracy_4												"expertise_undiminished_critical_melee=1,expertise_range_bonus_melee=1"				
 expertise_trader_lethal_strikes_2	expertise_trader_lethal_strikes_1																					expertise_undiminished_critical_melee=1				
 expertise_trader_lethal_strikes_3	expertise_trader_lethal_strikes_2																					expertise_undiminished_critical_melee=1				
+expertise_trader_miracle_1	expertise_trader_deflective_armor_4									expertise_trader_deflective_armor_4											trader_limited_shields_1					
 expertise_trader_advanced_personnel_1	expertise																					"expertise_vendor_cost_decrease=5,vendor_item_limit=100,manage_vendor=1"				
 expertise_trader_advanced_personnel_2	expertise_trader_advanced_personnel_1																					"expertise_vendor_cost_decrease=5,vendor_item_limit=100,manage_vendor=2"				
 expertise_trader_advanced_personnel_3	expertise_trader_advanced_personnel_2																					"expertise_vendor_cost_decrease=15,vendor_item_limit=150,manage_vendor=2"				
 expertise_trader_advanced_personnel_4	expertise_trader_advanced_personnel_3																					"expertise_vendor_cost_decrease=25,vendor_item_limit=150,manage_vendor=5"				
 expertise_trader_deconstruction_techniques_1																						expertise_reverse_engineering_bonus=25				
 expertise_trader_deconstruction_techniques_2	expertise_trader_deconstruction_techniques_1																					expertise_reverse_engineering_bonus=50				
-expertise_trader_miracle_1	expertise_trader_deflective_armor_4									expertise_trader_deflective_armor_4											trader_limited_shields_1					
 expertise_domestic_tailor_dexterity_1	expertise																					clothing_assembly=5				
 expertise_domestic_tailor_dexterity_2	expertise_domestic_tailor_dexterity_1																					clothing_assembly=5				
 expertise_domestic_tailor_dexterity_3	expertise_domestic_tailor_dexterity_2																					clothing_assembly=5				
