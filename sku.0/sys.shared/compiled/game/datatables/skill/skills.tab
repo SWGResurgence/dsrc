@@ -2453,7 +2453,7 @@ expertise_trader_enhance_dodge_2	expertise_trader_enhance_dodge_1															
 expertise_trader_enhance_dodge_3	expertise_trader_enhance_dodge_2																					"combat_dodge=1,expertise_critical_hit_reduction=10,expertise_glancing_blow_all=1,expertise_glancing_blow_melee=1,expertise_glancing_blow_ranged=1"				
 expertise_trader_enhance_dodge_4	expertise_trader_enhance_dodge_3																					"combat_dodge=1,expertise_critical_hit_reduction=10,expertise_glancing_blow_all=1,expertise_glancing_blow_melee=1,expertise_glancing_blow_ranged=1"				
 expertise_trader_artisan_adv_theory_1	expertise_trader_artisan_hypothesis_4									expertise_trader_artisan_hypothesis_4												general_experimentation=10				
-expertise_trader_penetration_1	expertise_trader_dire_strikes_4									expertise_trader_dire_strikes_4												"combat_strikethrough_chance=1,combat_evasion_value=10"				
+expertise_trader_penetration_1	expertise_trader_dire_strikes_2									expertise_trader_dire_strikes_2												"combat_strikethrough_chance=1,combat_evasion_value=10"				
 expertise_trader_penetration_2	expertise_trader_penetration_1																					"combat_strikethrough_chance=1,combat_evasion_value=10"				
 expertise_trader_penetration_3	expertise_trader_penetration_2																					"combat_strikethrough_chance=1,combat_evasion_value=10"				
 expertise_trader_penetration_4	expertise_trader_penetration_3																					"combat_strikethrough_chance=1,combat_evasion_value=10"				
