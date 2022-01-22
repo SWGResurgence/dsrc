@@ -28,7 +28,7 @@ public class utils extends script.base_script
     public static final String TIP_OUT_THACK = TIP + ".tip_out_timeHack";
     //public static final String TRIAL_STRUCTURE = FREE_TRIAL + ".trial_structure";
     public static final int TIP_NUM_MAX = 25;
-    public static final int TIP_AMT_MAX = 1000000;
+    public static final int TIP_AMT_MAX = 10000000;
     public static final String NO_TRADE_SCRIPT = "item.special.nomove";
     public static final String CTS_OBJVAR_HISTORY = "ctsRetroHistory";
     public static final int BIT_LIST_SIZE = 32;
