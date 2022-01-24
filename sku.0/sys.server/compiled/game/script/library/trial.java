@@ -1,12 +1,13 @@
 package script.library;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import script.dictionary;
 import script.location;
 import script.obj_id;
 import script.string_id;
-
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Vector;
 
 public class trial extends script.base_script
