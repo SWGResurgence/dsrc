@@ -58,11 +58,11 @@ weapon_appearance_carbine_e11_mk2	object/weapon/ranged/carbine/carbine_e11_mark2
 weapon_appearance_carbine_e5	object/weapon/ranged/carbine/carbine_e5.iff	profession_wheel	
 weapon_appearance_carbine_e5_legendary	object/weapon/ranged/carbine/carbine_e5_legend.iff
 weapon_appearance_carbine_ee3_bounty	object/weapon/ranged/carbine/carbine_bounty_ee3.iff		12
-weapon_appearance_carbine_gcw_charric	object/weapon/ranged/carbine/carbine_charric.iff		1
+weapon_appearance_carbine_gcw_charric	object/weapon/ranged/carbine/carbine_charric.iff		5
 weapon_appearance_carbine_geo	object/weapon/ranged/carbine/carbine_geo.iff		
-weapon_appearance_carbine_heroic_sd	object/weapon/ranged/carbine/carbine_heroic_sd.iff		
+weapon_appearance_carbine_heroic_sd	object/weapon/ranged/carbine/carbine_heroic_sd.iff		5
 weapon_appearance_carbine_kun_massassi	object/weapon/ranged/carbine/carbine_kun_massassi.iff		5
-weapon_appearance_carbine_mandalorian	object/weapon/ranged/carbine/carbine_mandalorian.iff		
+weapon_appearance_carbine_mandalorian	object/weapon/ranged/carbine/carbine_mandalorian.iff		5
 weapon_appearance_carbine_ngant_pvp	object/weapon/ranged/carbine/carbine_pvp_ngant.iff		5
 weapon_appearance_carbine_nym_slugthrower	object/weapon/ranged/carbine/carbine_nym_slugthrower.iff		
 weapon_appearance_carbine_proton	object/weapon/ranged/carbine/carbine_proton.iff		
@@ -74,7 +74,7 @@ weapon_appearance_carbine_underslung	object/weapon/ranged/carbine/carbine_unders
 weapon_appearance_carbine_wookiee_bowcaster	object/weapon/ranged/carbine/ep3/carbine_wookiee_bowcaster.iff		
 weapon_appearance_cleaver	object/weapon/melee/2h_sword/2h_sword_cleaver.iff	profession_wheel	
 weapon_appearance_executioners_hack	object/weapon/melee/2h_sword/2h_sword_blacksun_hack.iff		
-weapon_appearance_gaderiffi_elite	object/weapon/melee/baton/baton_gaderiffi_elite.iff		
+weapon_appearance_gaderiffi_elite	object/weapon/melee/baton/baton_gaderiffi_elite.iff		1
 weapon_appearance_heavy_acid_beam	object/weapon/ranged/heavy/heavy_acid_beam.iff		
 weapon_appearance_heavy_avatar_acid_beam	object/weapon/ranged/heavy/heavy_avatar_acid_beam.iff		
 weapon_appearance_heavy_carbonite_rifle	object/weapon/ranged/heavy/heavy_carbonite_rifle.iff		
@@ -106,7 +106,7 @@ weapon_appearance_lance_energy_legendary	object/weapon/melee/polearm/lance_night
 weapon_appearance_lance_cryo	object/weapon/melee/polearm/lance_cryo.iff	profession_wheel
 weapon_appearance_lance_kaminoan	object/weapon/melee/polearm/lance_kaminoan.iff	
 weapon_appearance_lance_massassi	object/weapon/melee/polearm/lance_massassi.iff	
-weapon_appearance_lance_nightsister	object/weapon/melee/polearm/lance_nightsister.iff	
+weapon_appearance_lance_nightsister	object/weapon/melee/polearm/lance_nightsister.iff		1
 weapon_appearance_lance_obsidian	object/weapon/melee/polearm/som_lance_obsidian.iff	
 weapon_appearance_lance_shock	object/weapon/melee/polearm/lance_shock.iff	
 weapon_appearance_lance_trando	object/weapon/melee/polearm/ep3/lance_trando.iff	
@@ -166,7 +166,7 @@ weapon_appearance_pistol_blaster_short_range_combat	object/weapon/ranged/pistol/
 weapon_appearance_pistol_dd6	object/weapon/ranged/pistol/pistol_dd6.iff		
 weapon_appearance_pistol_de_10	object/weapon/ranged/pistol/pistol_de_10.iff		
 weapon_appearance_pistol_deathhammer_needle	object/weapon/ranged/pistol/pistol_deathhammer.iff	profession_wheel	
-weapon_appearance_pistol_dh_18a	object/weapon/ranged/pistol/pistol_dh18a_gcw.iff		1
+weapon_appearance_pistol_dh_18a	object/weapon/ranged/pistol/pistol_dh18a_gcw.iff		
 weapon_appearance_pistol_disrupter	object/weapon/ranged/pistol/som_disruptor_pistol.iff		
 weapon_appearance_pistol_disrupter_dx2	object/weapon/ranged/pistol/pistol_dx2.iff	profession_wheel	
 weapon_appearance_pistol_dl44_metal_light	object/weapon/ranged/pistol/pistol_dl44_metal_light.iff	profession_wheel
@@ -200,10 +200,10 @@ weapon_appearance_pistol_westar_pvp	object/weapon/ranged/pistol/pistol_westar_34
 weapon_appearance_pistol_wookiee	object/weapon/ranged/pistol/ep3/pistol_wookiee.iff	
 weapon_appearance_pistol_wookiee_bowcaster	object/weapon/ranged/pistol/ep3/pistol_wookiee_bowcaster.iff	
 weapon_appearance_polearm_electric	object/weapon/melee/polearm/polearm_lance_electric_polearm.iff	profession_wheel
-weapon_appearance_polearm_gcw_gand_shockprod	object/weapon/melee/polearm/lance_gcw_gand_shockprod.iff	
-weapon_appearance_polearm_heroic_sd	object/weapon/melee/polearm/polearm_heroic_sd.iff	
+weapon_appearance_polearm_gcw_gand_shockprod	object/weapon/melee/polearm/lance_gcw_gand_shockprod.iff		1
+weapon_appearance_polearm_heroic_sd	object/weapon/melee/polearm/polearm_heroic_sd.iff		1
 weapon_appearance_polearm_kashyyk_bladestick	object/weapon/melee/polearm/lance_kashyyk.iff		
-weapon_appearance_polearm_magnaguard_pvp	object/weapon/melee/polearm/lance_staff_magna_guard.iff		
+weapon_appearance_polearm_magnaguard_pvp	object/weapon/melee/polearm/lance_staff_magna_guard.iff		1
 weapon_appearance_poleaxe_vibro	object/weapon/melee/polearm/polearm_vibro_axe.iff	profession_wheel	
 weapon_appearance_punch_dagger	object/weapon/melee/special/punch_dagger.iff		3
 weapon_appearance_quest_battleaxe	object/weapon/melee/2h_sword/quest_2h_sword_battleaxe.iff		
@@ -240,7 +240,7 @@ weapon_appearance_rifle_faux_bowcaster	object/weapon/ranged/rifle/rifle_faux_bow
 weapon_appearance_rifle_flame_thrower	object/weapon/ranged/rifle/rifle_flame_thrower.iff	profession_wheel
 weapon_appearance_rifle_flame_thrower_light	object/weapon/ranged/rifle/rifle_flame_thrower_light.iff	profession_wheel
 weapon_appearance_rifle_geo_drill	object/weapon/ranged/rifle/rifle_geo_drill.iff	
-weapon_appearance_rifle_jinkins_j1	object/weapon/ranged/rifle/jinkins_j1_rifle.iff		1
+weapon_appearance_rifle_jinkins_j1	object/weapon/ranged/rifle/jinkins_j1_rifle.iff		
 weapon_appearance_rifle_laser_light	object/weapon/ranged/rifle/rifle_laser_light.iff	
 weapon_appearance_rifle_ld1	object/weapon/ranged/rifle/rifle_ld1.iff	
 weapon_appearance_rifle_legendary_t21	object/weapon/ranged/rifle/rifle_t21_legendary.iff
@@ -268,7 +268,7 @@ weapon_appearance_rifle_sonic_sg82	object/weapon/ranged/rifle/rifle_sg82.iff	pro
 weapon_appearance_rifle_spray_stick_stohli	object/weapon/ranged/rifle/rifle_spraystick.iff	profession_wheel
 weapon_appearance_rifle_t21	object/weapon/ranged/rifle/rifle_t21.iff	profession_wheel
 weapon_appearance_rifle_tangle_gun7	object/weapon/ranged/pistol/pistol_tangle.iff	profession_wheel
-weapon_appearance_rifle_tc22	object/weapon/ranged/rifle/rifle_tc22_blaster.iff		1
+weapon_appearance_rifle_tc22	object/weapon/ranged/rifle/rifle_tc22_blaster.iff		
 weapon_appearance_rifle_tenloss_disrupter	object/weapon/ranged/rifle/rifle_tenloss_dxr6_disruptor_loot.iff		
 weapon_appearance_rifle_trando_hunter	object/weapon/ranged/rifle/ep3/rifle_trando_hunter.iff		
 weapon_appearance_rifle_trando_hunter_crafted	object/weapon/ranged/rifle/ep3/rifle_trando_hunter_crafted.iff		
@@ -286,14 +286,14 @@ weapon_appearance_sword_bandit	object/weapon/melee/sword/som_sword_mustafar_band
 weapon_appearance_sword_curved	object/weapon/melee/sword/sword_02.iff	profession_wheel	
 weapon_appearance_sword_curved_nyax	object/weapon/melee/sword/sword_curved_nyax.iff		
 weapon_appearance_sword_junti_mace	object/weapon/melee/sword/sword_mace_junti.iff		
-weapon_appearance_sword_mandalorian	object/weapon/melee/sword/sword_mandalorian.iff		
+weapon_appearance_sword_mandalorian	object/weapon/melee/sword/sword_mandalorian.iff		1
 weapon_appearance_sword_marauder	object/weapon/melee/sword/sword_marauder.iff		
 weapon_appearance_sword_massassi	object/weapon/melee/sword/sword_massassi.iff		
 weapon_appearance_sword_nyax	object/weapon/melee/sword/sword_nyax.iff		
 weapon_appearance_sword_obsidian	object/weapon/melee/sword/som_sword_obsidian.iff		
 weapon_appearance_sword_pvp_bf	object/weapon/melee/sword/sword_pvp_bf_01.iff		1
 weapon_appearance_sword_rantok	object/weapon/melee/sword/sword_rantok.iff		
-weapon_appearance_sword_rebel	object/weapon/melee/sword/sword_rebel.iff		
+weapon_appearance_sword_rebel	object/weapon/melee/sword/sword_rebel.iff		1
 weapon_appearance_sword_rsf	object/weapon/melee/sword/sword_rsf.iff	profession_wheel	
 weapon_appearance_sword_ryyk_blade	object/weapon/melee/sword/sword_blade_ryyk.iff	profession_wheel	
 weapon_appearance_sword_wookiee	object/weapon/melee/sword/ep3/sword_wookiee.iff		
@@ -320,3 +320,16 @@ weapon_appearance_wod_2h_sword	object/weapon/melee/2h_sword/2h_sword_wod.iff		1
 weapon_appearance_wod_1h_scyth	object/weapon/melee/sword/sword_wod_scyth.iff		1
 weapon_appearance_wod_polearm	object/weapon/melee/polearm/lance_wod_twin_blade.iff		1
 weapon_appearance_wod_war_fan	object/weapon/melee/special/wod_war_fan.iff		1
+weapon_appearance_pistol_legendary_crimson_nova	object/weapon/ranged/pistol/pistol_pvp.iff		
+weapon_appearance_pistol_exceptional_rebel_dl44	object/weapon/ranged/pistol/pistol_exceptional_rebel_dl44.iff		
+weapon_appearance_carbine_legendary_starlight	object/weapon/ranged/carbine/carbine_pvp.iff		5
+weapon_appearance_carbine_exceptional_imperial_e11	object/weapon/ranged/rifle/carbine_exceptional_imperial_e11.iff		
+weapon_appearance_rifle_legendary_vortex	object/weapon/ranged/rifle/rifle_pvp.iff		
+weapon_appearance_carbine_exceptional_imperial_e11	object/weapon/ranged/carbine/carbine_exceptional_imperial_e11.iff		5
+weapon_appearance_heavy_legendary_reaper_cannon	object/weapon/ranged/heavy/heavy_pvp.iff		-50
+weapon_appearance_rifle_e11_mark2	object/weapon/ranged/rifle/rifle_e11_mark2.iff		
+weapon_appearance_pistol_imperial	object/weapon/ranged/pistol/pistol_imperial.iff	
+weapon_appearance_wod_1h_sword	object/weapon/melee/sword/sword_wod.iff		1
+weapon_appearance_wod_2h_scyth	object/weapon/melee/2h_sword/2h_sword_wod_scyth.iff		1
+weapon_appearance_wod_bladestick	object/weapon/melee/polearm/lance_wod_bladestick.iff		1
+weapon_appearance_wod_knuckler	object/weapon/melee/special/wod_knuckler.iff		1

@@ -88,7 +88,7 @@ public class heroic_token extends script.base_script
     public void updateTokenBox(int myId, obj_id tokenBox, obj_id self, obj_id player, int amount) throws InterruptedException
     {
         int[] currentHeroicTokens = getIntArrayObjVar(tokenBox, "item.set.tokens_held");
-        if (currentHeroicTokens != null && currentHeroicTokens.length == trial.NUM_HEROIC_TOKEN_TYPES)
+        if (currentHeroicTokens != null && currentHeroicTokens.length == trial.HEROIC_TOKENS.length)
         {
             updateTokenCount(currentHeroicTokens, myId, self, tokenBox, player, amount);
         }
@@ -96,7 +96,7 @@ public class heroic_token extends script.base_script
         {
             trial.verifyBox(self);
             currentHeroicTokens = getIntArrayObjVar(tokenBox, "item.set.tokens_held");
-            if (currentHeroicTokens != null && currentHeroicTokens.length == trial.NUM_HEROIC_TOKEN_TYPES)
+            if (currentHeroicTokens != null && currentHeroicTokens.length == trial.HEROIC_TOKENS.length)
             {
                 updateTokenCount(currentHeroicTokens, myId, self, tokenBox, player, amount);
             }

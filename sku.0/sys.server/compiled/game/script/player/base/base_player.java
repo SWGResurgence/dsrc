@@ -10625,6 +10625,8 @@ public class base_player extends script.base_script
         String armor = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardArmor);
         int armorCount = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardCountArmor);
         int armorQuality = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardQuality);
+        String[] inclusiveLootNames = new String[6];
+        int[] inclusiveLootCounts = new int[6];
         String[] inclusiveLootNames = new String[3];
         int[] inclusiveLootCounts = new int[3];
         inclusiveLootNames[0] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName);
@@ -10633,6 +10635,12 @@ public class base_player extends script.base_script
         inclusiveLootCounts[1] = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootCount2);
         inclusiveLootNames[2] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName3);
         inclusiveLootCounts[2] = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootCount3);
+        inclusiveLootNames[3] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName4);
+        inclusiveLootCounts[3] = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootCount4);
+        inclusiveLootNames[4] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName5);
+        inclusiveLootCounts[4] = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootCount5);
+        inclusiveLootNames[5] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName6);
+        inclusiveLootCounts[5] = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootCount6);
         String[] exclusiveLootNames = new String[10];
         int[] exclusiveLootCounts = new int[10];
         exclusiveLootNames[0] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardExclusiveLootName);

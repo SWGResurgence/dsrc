@@ -3807,7 +3807,7 @@ item_tcg_loot_reward_series1_naboo_jacket
 item_tcg_loot_reward_series6_snow_jacket											
 item_tcg_loot_reward_series1_glowing_red_eyes											
 item_tcg_loot_reward_series1_glowing_blue_eyes											
-item_tcg_loot_reward_series1_black_corset_dress											
+item_tcg_loot_reward_series1_black_corset_dress				index_color_1=6,index_color_2=6																		
 item_tcg_promotion_booster_01_01			int:featureID=5251								
 item_tcg_promotion_starter_01_01			int:featureID=10001								
 item_tcg_promotion_card_01_01			int:featureID=5252								
@@ -4986,3 +4986,24 @@ item_wod_smc_schematic_hut			"string:loot_schematic.schematic=object/draft_schem
 item_wod_smc_schematic_wall			"string:loot_schematic.schematic=object/draft_schematic/furniture/city/wod_sm_wall.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase1_novice"								
 item_wod_smc_herb_reward_jar											
 item_trader_advanced_buff_01_01					trader_advanced_buff	long_reuse_4	900			appearance/pt_heal.prt	
+item_alluring_performance_painting											
+item_entertainer_token_01_01											
+item_feared_painting											
+item_fighter_painting											
+item_schematic_corset_dress			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_dress_corset_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase4_master								
+item_ent_book_xp_bonus_01_01					ent_book_xp_bonus_1	ent_book_buff	180				
+item_ent_book_bm_xp_bonus_01_01					ent_book_bm_xp_bonus_1	ent_book_buff	180				
+item_ent_book_gcw_bonus_01_01					ent_book_gcw_bonus_1	ent_book_buff	180				
+item_band_set_entertainer_utility_b_01_01	expertise_en_inspire_pulse_duration_increase=1,expertise_en_inspire_buff_duration_increase=6		int:item.set.set_id=170001								
+item_bracelet_l_set_entertainer_utility_b_01_01	expertise_en_inspire_pulse_duration_increase=1,expertise_en_inspire_buff_duration_increase=6		int:item.set.set_id=170001								
+item_bracelet_r_set_entertainer_utility_b_01_01	expertise_en_inspire_pulse_duration_increase=1,expertise_en_inspire_buff_duration_increase=6		int:item.set.set_id=170001								
+item_necklace_set_entertainer_utility_b_01_01	expertise_en_inspire_pulse_duration_increase=1,expertise_en_inspire_buff_duration_increase=6		int:item.set.set_id=170001								
+item_ring_set_entertainer_utility_b_01_01	expertise_en_inspire_pulse_duration_increase=1,expertise_en_inspire_buff_duration_increase=6		int:item.set.set_id=170001								
+item_ent_bearded_jax_familiar			string:creatureName=vr_bearded_jax								
+item_schematic_hat_navy_trooper_01_01			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_hat_navy_trooper.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase4_master								
+item_schematic_hat_rebel_spec_ops_01_01			string:loot_schematic.schematic=object/draft_schematic/clothing/clothing_hat_rebel_spec_ops_01.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_domestics_phase4_master								
+item_potted_plant_midrana_01_01											
+item_corsec_flightsuit											
+item_tie_fighter_181st_flightsuit_01			string:faction_recruiter.faction=Imperial								
+item_tie_fighter_181st_flightsuit_02			string:faction_recruiter.faction=Imperial								
+item_senate_guard_hologram											

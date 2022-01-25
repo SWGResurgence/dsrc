@@ -1997,3 +1997,16 @@ trader_limited_shields_charged_handler	bh_shields_handler			10		1	bh_shields_han
 trader_limited_shields	bh_shields			10	command.bh_shields	30	combat_divide_damage_taken	1	bh_shields_charged_handler	0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	50	1	0	1	1	1
 trader_limited_shields_block	bh_shields	bh_shields	bh_shields	15		5		0		0		0		0		0	STATE_NONE	none			0	0		1	1	1	0	1	1	0	1	1	1
 trader_limited_shields_charged	bh_shields_recourse			10	command.bh_deflection	15	combat_multiply_damage_dealt	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	50	1	0	1	1	1
+ent_book_xp_bonus_1	ent_book_buff			1	buffs.tcg_series1_lepese_dictionary	7200	xp_bonus_general	20											appearance/pt_entertainer_special_6.prt						0
+ent_book_bm_xp_bonus_1	ent_book_buff			1	buffs.tcg_series1_lepese_dictionary	7200	bm_xp_mod_boost	20											appearance/pt_entertainer_special_6.prt						0
+ent_book_gcw_bonus_1	ent_book_buff			1	buffs.tcg_series1_lepese_dictionary	7200	tcg_gcw_bonus	10											appearance/pt_entertainer_special_6.prt						0
+set_bonus_entertainer_utility_b_1	setBonusEntertainer			1	command.powerBoost	-1	expertise_en_inspire_pulse_duration_increase	3	expertise_en_inspire_buff_duration_increase	15															0	0
+set_bonus_entertainer_utility_b_2	setBonusEntertainer			1	command.powerBoost	-1	expertise_en_inspire_pulse_duration_increase	4	expertise_en_inspire_buff_duration_increase	20															0	0
+set_bonus_entertainer_utility_b_3	setBonusEntertainer			1	command.powerBoost	-1	expertise_en_inspire_pulse_duration_increase	6	expertise_en_inspire_buff_duration_increase	30	ent_lasting_performance														0	0
+ent_lasting_performance_1	ent_lasting_performance_1			1	command.changeMusic	7200	movement	5	constitution_modified	75	expertise_action_all	2							appearance/pt_entertainer_lasting_performance.prt							
+tok_ent_invis_buff_tracker_0	collection_ent_token			1	buffs.smuggled	900		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
+tok_ent_invis_buff_tracker_1	collection_ent_token			1	buffs.smuggled	1800		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
+tok_ent_invis_buff_tracker_2	collection_ent_token			1	buffs.smuggled	2400		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
+tok_ent_invis_buff_tracker_3	collection_ent_token			1	buffs.smuggled	3000		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
+tok_ent_invis_buff_tracker_4	collection_ent_token			1	buffs.smuggled	3600		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
+ent_jax_familiar	vr_familiar			4	buffs.genericBuff	-1	expertise_en_inspire_pulse_duration_increase	2																	0

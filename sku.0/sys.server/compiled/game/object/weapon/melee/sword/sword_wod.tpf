@@ -6,5 +6,5 @@
 
 @class object_template 10
 
-sharedTemplate = "object/weapon/melee/sword/shared_sword_wod_sword.iff"
+sharedTemplate = "object/weapon/melee/sword/shared_sword_wod.iff"
 

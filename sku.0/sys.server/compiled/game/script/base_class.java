@@ -22288,6 +22288,18 @@ public class base_class
     {
         return _getPlayerStationId(getLongWithNull(player));
     }
+    
+    /**
+     * Check if two characters belong to the same account
+     *
+     * @param player1
+     * @param player2
+     * @return true or false
+     */
+     
+     public static boolean charactersAreSamePlayer(obj_id player1, obj_id player2) {
+        return getPlayerStationId(player1) == getPlayerStationId(player2);
+     }
 
     /**
     * Returns info on how long a player has been playing the game.

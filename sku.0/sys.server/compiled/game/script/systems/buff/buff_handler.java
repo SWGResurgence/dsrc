@@ -1953,6 +1953,9 @@ public class buff_handler extends script.base_script
                         break;
                 }
             }
+            if (!buff.hasBuff(self, "tok_ent_invis_buff_tracker_") || (isGod(self))) {
+                collection.entertainerToken(self, bufferId, duration);
+            }
             if (!buff.hasBuff(self, "col_ent_invis_buff_tracker"))
             {
                 collection.entertainerBuffCollection(self, bufferId, duration);

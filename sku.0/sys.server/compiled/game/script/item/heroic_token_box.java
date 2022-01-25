@@ -49,7 +49,8 @@ public class heroic_token_box extends script.base_script
         "Rancor Teeth",
         "Whuffa Leather",
         "Rare Dried Herb",
-        "Spell Weaver Crystal"
+        "Spell Weaver Crystal",
+        "Entertainer Token of Achievement"
     };
     private static final int[] TOKENS = {
         0,
@@ -86,7 +87,8 @@ public class heroic_token_box extends script.base_script
         31,
         32,
         33,
-        34
+        34,
+        35
     };    
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -124,7 +126,7 @@ public class heroic_token_box extends script.base_script
             return SCRIPT_CONTINUE;
         }
         int[] tokenTypes = getIntArrayObjVar(self, "item.set.tokens_held");
-        if (tokenTypes.length == trial.NUM_HEROIC_TOKEN_TYPES)
+        if (tokenTypes.length == trial.HEROIC_TOKENS.length)
         {
             for (int i = 0; i < tokenTypes.length; i++)
             {

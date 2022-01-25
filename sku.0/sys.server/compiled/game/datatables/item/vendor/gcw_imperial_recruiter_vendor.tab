@@ -1,14 +1,15 @@
 item	cash	token15	class	script	note
 s[none]	i[0]	i[0]	i[0]	s	c
-weapon_gcw_dh18a_pistol_03_01		1000			
+weapon_gcw_dh18a_pistol_03_01		2500			
 item_schematic_pvp_gcw_saber_1h_gen4		1000			
 item_schematic_pvp_gcw_saber_2h_gen4		1000			
 item_restuss_schematic_saber_04_01		5000			
-weapon_gcw_tc22_rifle_03_01		1000			
+weapon_gcw_tc22_rifle_03_01		2500			
+weapon_gcw_rifle_e11_mark2_03_01		2500			
 weapon_gcw_heavy_pulse_cannon_03_01		1000			
 weapon_heavy_cr2_04_01		10000			
-weapon_gcw_lance_03_01		1000			
-weapon_gcw_carbine_charric_03_01		1000			
+weapon_gcw_lance_03_01		2500			
+weapon_gcw_carbine_charric_03_01		2500			
 item_gcw_imperial_galactic_marine_belt		300			
 armor_gcw_imperial_galactic_marine_bicep_l		300			
 armor_gcw_imperial_galactic_marine_bicep_r		300			
@@ -71,3 +72,4 @@ item_schematic_prop_ribbon_01_06		100
 item_gcw_atst_familiar		5000
 item_schematic_armor_marine_backpack_01_01		4000
 item_schematic_hat_imperial_gunner_01_01		1500
+item_schematic_hat_navy_trooper_01_01		2000

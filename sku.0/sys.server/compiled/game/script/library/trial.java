@@ -290,6 +290,7 @@ public class trial extends script.base_script
     "item_wod_token_4",                         //#32   Token: Witches of Dathomir
     "item_wod_token_5",                         //#33   Token: Witches of Dathomir
     "item_token_apotheosis_01_01"               //#34   Token: Apotheosis of Resurgence 
+    "item_entertainer_token_01_01"              //#35   Token: Entertainer of Achievment
     
     };
     public static final int NUM_HEROIC_TOKEN_TYPES = HEROIC_TOKENS.length;
@@ -304,8 +305,8 @@ public class trial extends script.base_script
     public static final String TOKEN_BOX = "item_heroic_token_box_01_01";
     public static void initializeBox(obj_id self) throws InterruptedException
     {
-        int[] tokenTypes = new int[trial.NUM_HEROIC_TOKEN_TYPES];
-        for (int i = 0; i < trial.NUM_HEROIC_TOKEN_TYPES; i++)
+        int[] tokenTypes = new int[HEROIC_TOKENS.length];
+        for (int i = 0; i < HEROIC_TOKENS.length; i++)
         {
             tokenTypes[i] = 0;
         }
@@ -318,10 +319,10 @@ public class trial extends script.base_script
         {
             initializeBox(self);
         }
-        else if (tokenTypes.length < trial.NUM_HEROIC_TOKEN_TYPES)
+        else if (tokenTypes.length < HEROIC_TOKENS.length)
         {
-            int[] newTokenTypes = new int[trial.NUM_HEROIC_TOKEN_TYPES];
-            for (int i = 0; i < trial.NUM_HEROIC_TOKEN_TYPES; i++)
+            int[] newTokenTypes = new int[HEROIC_TOKENS.length];
+            for (int i = 0; i < HEROIC_TOKENS.length; i++)
             {
                 newTokenTypes[i] = 0;
             }
