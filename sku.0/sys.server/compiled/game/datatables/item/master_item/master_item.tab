@@ -8859,3 +8859,4 @@ weapon_sword_2h_wod_04_02	object/weapon/melee/2h_sword/2h_sword_wod_scyth.iff	we
 weapon_polearm_wod_04_02	object/weapon/melee/polearm/lance_wod_bladestick.iff	weapon		85				6	1000			1	Witches Bladestick		
 weapon_knuckler_wod_04_01	object/weapon/melee/special/wod_knuckler.iff	weapon		85				6	1000				Witches Knuckler		
 item_senate_guard_hologram	object/tangible/furniture/decorative/frn_holo_senate_guard.iff	item						1	100			1	Senate Guard Hologram	This is a holographic image of a Senate Guardsman. Hologram platforms like this are used as decoration throughout the galaxy.
+item_placeholder_item_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff							1	34	object.autostack		1	Decayed Tooth	A tooth rotten with decay.	
