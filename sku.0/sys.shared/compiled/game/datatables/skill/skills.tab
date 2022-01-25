@@ -2382,57 +2382,84 @@ expertise_en_uprising_2	expertise_en_uprising_1																					expertise_cr
 expertise_en_annulling_1	expertise_en_void_dance_1									expertise_en_void_dance_1												expertise_buff_en_void_dance_buff=5				
 expertise_en_annulling_2	expertise_en_annulling_1																					expertise_buff_en_void_dance_buff=5				
 expertise_en_annulling_3	expertise_en_annulling_2																					expertise_buff_en_void_dance_buff=5				
-expertise_trader_enhanced_health_1	expertise																					"constitution_modified=200,stamina_modified=100"				
-expertise_trader_enhanced_health_2	expertise_trader_enhanced_health_1																					"constitution_modified=200,stamina_modified=100"				
-expertise_trader_enhanced_agility_1	expertise																					agility_modified=20				
-expertise_trader_enhanced_agility_2	expertise_trader_enhanced_agility_1																					agility_modified=20				
-expertise_trader_artisan_dexterity_1	expertise																					general_assembly=10				
-expertise_trader_artisan_dexterity_2	expertise_trader_artisan_dexterity_1																					general_assembly=10				
-expertise_trader_artisan_dexterity_3	expertise_trader_artisan_dexterity_2																					general_assembly=10				
-expertise_trader_artisan_dexterity_4	expertise_trader_artisan_dexterity_3																					general_assembly=10				
-expertise_trader_enhanced_precision_1	expertise																					precision_modified=20				
-expertise_trader_enhanced_precision_2	expertise_trader_enhanced_precision_1																					precision_modified=20				
-expertise_trader_enhanced_strength_1	expertise																					strength_modified=20				
-expertise_trader_enhanced_strength_2	expertise_trader_enhanced_strength_1																					strength_modified=20				
-expertise_trader_reinforced_armor_1	expertise																					expertise_innate_protection_all=400				
-expertise_trader_reinforced_armor_2	expertise_trader_reinforced_armor_1																					expertise_innate_protection_all=400				
-expertise_trader_enhance_block_1	expertise																					"combat_block_chance=2,combat_block_value=20"				
-expertise_trader_enhance_block_2	expertise_trader_enhance_block_1																					"combat_block_chance=2,combat_block_value=20"				
+expertise_trader_enhanced_health_1	expertise																					"constitution_modified=100,stamina_modified=50"				
+expertise_trader_enhanced_health_2	expertise_trader_enhanced_health_1																					"constitution_modified=100,stamina_modified=50"				
+expertise_trader_enhanced_health_3	expertise_trader_enhanced_health_2																					"constitution_modified=100,stamina_modified=50"				
+expertise_trader_enhanced_health_4	expertise_trader_enhanced_health_3																					"constitution_modified=100,stamina_modified=50"				
+expertise_trader_enhanced_agility_1	expertise																					agility_modified=10				
+expertise_trader_enhanced_agility_2	expertise_trader_enhanced_agility_1																					agility_modified=10				
+expertise_trader_enhanced_agility_3	expertise_trader_enhanced_agility_2																					agility_modified=10				
+expertise_trader_enhanced_agility_4	expertise_trader_enhanced_agility_3																					agility_modified=10				
+expertise_trader_artisan_dexterity_1	expertise																					general_assembly=5				
+expertise_trader_artisan_dexterity_2	expertise_trader_artisan_dexterity_1																					general_assembly=5				
+expertise_trader_artisan_dexterity_3	expertise_trader_artisan_dexterity_2																					general_assembly=5				
+expertise_trader_artisan_dexterity_4	expertise_trader_artisan_dexterity_3																					general_assembly=5				
+expertise_trader_enhanced_precision_1	expertise																					precision_modified=10				
+expertise_trader_enhanced_precision_2	expertise_trader_enhanced_precision_1																					precision_modified=10				
+expertise_trader_enhanced_precision_3	expertise_trader_enhanced_precision_2																					precision_modified=10				
+expertise_trader_enhanced_precision_4	expertise_trader_enhanced_precision_3																					precision_modified=10				
+expertise_trader_enhanced_strength_1	expertise																					strength_modified=10				
+expertise_trader_enhanced_strength_2	expertise_trader_enhanced_strength_1																					strength_modified=10				
+expertise_trader_enhanced_strength_3	expertise_trader_enhanced_strength_2																					strength_modified=10				
+expertise_trader_enhanced_strength_4	expertise_trader_enhanced_strength_3																					strength_modified=10				
+expertise_trader_reinforced_armor_1	expertise																					expertise_innate_protection_all=200				
+expertise_trader_reinforced_armor_2	expertise_trader_reinforced_armor_1																					expertise_innate_protection_all=200				
+expertise_trader_reinforced_armor_3	expertise_trader_reinforced_armor_2																					expertise_innate_protection_all=200				
+expertise_trader_reinforced_armor_4	expertise_trader_reinforced_armor_3																					expertise_innate_protection_all=200				
+expertise_trader_enhance_block_1	expertise																					"combat_block_chance=1,combat_block_value=10"				
+expertise_trader_enhance_block_2	expertise_trader_enhance_block_1																					"combat_block_chance=1,combat_block_value=10"				
+expertise_trader_enhance_block_3	expertise_trader_enhance_block_2																					"combat_block_chance=1,combat_block_value=10"				
+expertise_trader_enhance_block_4	expertise_trader_enhance_block_3																					"combat_block_chance=1,combat_block_value=10"				
 expertise_trader_artisan_hypothesis_1	expertise									expertise_trader_artisan_dexterity_4												expertise_experimentation_increase_artisan=3				
 expertise_trader_artisan_hypothesis_2	expertise_trader_artisan_hypothesis_1																					expertise_experimentation_increase_artisan=3				
 expertise_trader_artisan_hypothesis_3	expertise_trader_artisan_hypothesis_2																					expertise_experimentation_increase_artisan=3				
 expertise_trader_artisan_hypothesis_4	expertise_trader_artisan_hypothesis_3																					expertise_experimentation_increase_artisan=3				
-expertise_trader_sidearm_training_1	expertise																					expertise_damage_weapon_2=2				
-expertise_trader_sidearm_training_2	expertise_trader_sidearm_training_1																					expertise_damage_weapon_2=2				
+expertise_trader_sidearm_training_1	expertise																					expertise_damage_weapon_2=1				
+expertise_trader_sidearm_training_2	expertise_trader_sidearm_training_1																					expertise_damage_weapon_2=1				
+expertise_trader_sidearm_training_3	expertise_trader_sidearm_training_2																					expertise_damage_weapon_2=1				
+expertise_trader_sidearm_training_4	expertise_trader_sidearm_training_3																					expertise_damage_weapon_2=1				
 expertise_trader_sampling_extraction_1	expertise																					"expertise_resource_sampling_increase=25,expertise_resource_sampling_time_decrease=5"				
 expertise_trader_sampling_extraction_2	expertise_trader_sampling_extraction_1																					"expertise_resource_sampling_increase=25,expertise_resource_sampling_time_decrease=5"				
 expertise_trader_sampling_extraction_3	expertise_trader_sampling_extraction_2																					"expertise_resource_sampling_increase=25,expertise_resource_sampling_time_decrease=5"				
 expertise_trader_sampling_extraction_4	expertise_trader_sampling_extraction_3																					"expertise_resource_sampling_increase=25,expertise_resource_sampling_time_decrease=5"				
-expertise_trader_melee_accuracy_1	expertise																					expertise_damage_melee=2				
-expertise_trader_melee_accuracy_2	expertise_trader_melee_accuracy_1																					expertise_damage_melee=2				
-expertise_trader_hitech_armor_1	expertise_trader_reinforced_armor_4									expertise_trader_reinforced_armor_4												expertise_innate_protection_all=400				
-expertise_trader_hitech_armor_2	expertise_trader_hitech_armor_1																					expertise_innate_protection_all=400				
+expertise_trader_melee_accuracy_1	expertise																					expertise_damage_melee=1				
+expertise_trader_melee_accuracy_2	expertise_trader_melee_accuracy_1																					expertise_damage_melee=1				
+expertise_trader_melee_accuracy_3	expertise_trader_melee_accuracy_2																					expertise_damage_melee=1				
+expertise_trader_melee_accuracy_4	expertise_trader_melee_accuracy_3																					expertise_damage_melee=1				
+expertise_trader_hitech_armor_1	expertise_trader_reinforced_armor_4									expertise_trader_reinforced_armor_4												expertise_innate_protection_all=200				
+expertise_trader_hitech_armor_2	expertise_trader_hitech_armor_1																					expertise_innate_protection_all=200				
+expertise_trader_hitech_armor_3	expertise_trader_hitech_armor_2																					expertise_innate_protection_all=200				
+expertise_trader_hitech_armor_4	expertise_trader_hitech_armor_3																					expertise_innate_protection_all=200				
 expertise_trader_factory_efficiency_1	expertise																					"expertise_factory_maintenance_decrease=10,expertise_factory_energy_decrease=5,factory_speed=5"				
 expertise_trader_factory_efficiency_2	expertise_trader_factory_efficiency_1																					"expertise_factory_maintenance_decrease=5,expertise_factory_energy_decrease=5,factory_speed=5"				
 expertise_trader_factory_efficiency_3	expertise_trader_factory_efficiency_2																					"expertise_factory_maintenance_decrease=5,expertise_factory_energy_decrease=5"				
 expertise_trader_factory_efficiency_4	expertise_trader_factory_efficiency_3																					"expertise_factory_maintenance_decrease=10,expertise_factory_energy_decrease=5"				
-expertise_trader_enhance_evasion_1	expertise_trader_enhance_block_4									expertise_trader_enhance_block_4												"expertise_evasion_chance=2,expertise_evasion_value=20"				
-expertise_trader_enhance_evasion_2	expertise_trader_enhance_evasion_1																					"expertise_evasion_chance=2,expertise_evasion_value=20"				
+expertise_trader_enhance_evasion_1	expertise_trader_enhance_block_4									expertise_trader_enhance_block_4												"expertise_evasion_chance=1,expertise_evasion_value=10"				
+expertise_trader_enhance_evasion_2	expertise_trader_enhance_evasion_1																					"expertise_evasion_chance=1,expertise_evasion_value=10"				
+expertise_trader_enhance_evasion_3	expertise_trader_enhance_evasion_2																					"expertise_evasion_chance=1,expertise_evasion_value=10"				
+expertise_trader_enhance_evasion_4	expertise_trader_enhance_evasion_3																					"expertise_evasion_chance=1,expertise_evasion_value=10"				
 expertise_trader_dire_strikes_1	expertise_trader_sidearm_training_4									expertise_trader_sidearm_training_4												"expertise_critical_niche_all=2,expertise_range_bonus_carbine=1,expertise_range_bonus_pistol=1,expertise_range_bonus_rifle=1"				
 expertise_trader_dire_strikes_2	expertise_trader_dire_strikes_1																					expertise_critical_niche_all=2				
 expertise_trader_harvester_efficiency_1	expertise_trader_sampling_extraction_4									expertise_trader_sampling_extraction_4												"expertise_havester_storage_increase=3,expertise_harvester_maintenance_decrease=4,expertise_harvester_energy_decrease=5,expertise_harvester_collection_increase=20"				
 expertise_trader_harvester_efficiency_2	expertise_trader_harvester_efficiency_1																					"expertise_havester_storage_increase=3,expertise_harvester_maintenance_decrease=4,expertise_harvester_energy_decrease=5,expertise_harvester_collection_increase=10"				
 expertise_trader_harvester_efficiency_3	expertise_trader_harvester_efficiency_2																					"expertise_havester_storage_increase=3,expertise_harvester_maintenance_decrease=4,expertise_harvester_energy_decrease=5"				
 expertise_trader_harvester_efficiency_4	expertise_trader_harvester_efficiency_3																					"expertise_havester_storage_increase=3,expertise_harvester_maintenance_decrease=4,expertise_harvester_energy_decrease=5"				
-expertise_trader_deflective_armor_1	expertise_trader_hitech_armor_4									expertise_trader_hitech_armor_4												damage_decrease_percentage=2				
-expertise_trader_deflective_armor_2	expertise_trader_deflective_armor_1																					damage_decrease_percentage=2				
-expertise_trader_enhance_dodge_1	expertise_trader_enhance_evasion_4									expertise_trader_enhance_evasion_4												"combat_dodge=2,expertise_critical_hit_reduction=20,expertise_glancing_blow_all=2,expertise_glancing_blow_melee=2,expertise_glancing_blow_ranged=2"				
-expertise_trader_enhance_dodge_2	expertise_trader_enhance_dodge_1																					"combat_dodge=2,expertise_critical_hit_reduction=20,expertise_glancing_blow_all=2,expertise_glancing_blow_melee=2,expertise_glancing_blow_ranged=2"				
+expertise_trader_deflective_armor_1	expertise_trader_hitech_armor_4									expertise_trader_hitech_armor_4												damage_decrease_percentage=1				
+expertise_trader_deflective_armor_2	expertise_trader_deflective_armor_1																					damage_decrease_percentage=1				
+expertise_trader_deflective_armor_3	expertise_trader_deflective_armor_2																					damage_decrease_percentage=1				
+expertise_trader_deflective_armor_4	expertise_trader_deflective_armor_3																					damage_decrease_percentage=1				
+expertise_trader_enhance_dodge_1	expertise_trader_enhance_evasion_4									expertise_trader_enhance_evasion_4												"combat_dodge=1,expertise_critical_hit_reduction=10,expertise_glancing_blow_all=1,expertise_glancing_blow_melee=1,expertise_glancing_blow_ranged=1"				
+expertise_trader_enhance_dodge_2	expertise_trader_enhance_dodge_1																					"combat_dodge=1,expertise_critical_hit_reduction=10,expertise_glancing_blow_all=1,expertise_glancing_blow_melee=1,expertise_glancing_blow_ranged=1"				
+expertise_trader_enhance_dodge_3	expertise_trader_enhance_dodge_2																					"combat_dodge=1,expertise_critical_hit_reduction=10,expertise_glancing_blow_all=1,expertise_glancing_blow_melee=1,expertise_glancing_blow_ranged=1"				
+expertise_trader_enhance_dodge_4	expertise_trader_enhance_dodge_3																					"combat_dodge=1,expertise_critical_hit_reduction=10,expertise_glancing_blow_all=1,expertise_glancing_blow_melee=1,expertise_glancing_blow_ranged=1"				
 expertise_trader_artisan_adv_theory_1	expertise_trader_artisan_hypothesis_4									expertise_trader_artisan_hypothesis_4												general_experimentation=10				
-expertise_trader_penetration_1	expertise_trader_dire_strikes_2									expertise_trader_dire_strikes_2												"combat_strikethrough_chance=2,combat_strikethrough_value=20"				
-expertise_trader_penetration_2	expertise_trader_penetration_1																					"combat_strikethrough_chance=2,combat_strikethrough_value=20"				
+expertise_trader_penetration_1	expertise_trader_dire_strikes_2									expertise_trader_dire_strikes_2												"combat_strikethrough_chance=1,combat_evasion_value=10"				
+expertise_trader_penetration_2	expertise_trader_penetration_1																					"combat_strikethrough_chance=1,combat_evasion_value=10"				
+expertise_trader_penetration_3	expertise_trader_penetration_2																					"combat_strikethrough_chance=1,combat_evasion_value=10"				
+expertise_trader_penetration_4	expertise_trader_penetration_3																					"combat_strikethrough_chance=1,combat_evasion_value=10"				
 expertise_trader_lethal_strikes_1	expertise_trader_melee_accuracy_4									expertise_trader_melee_accuracy_4												"expertise_undiminished_critical_melee=1,expertise_range_bonus_melee=1"				
-expertise_trader_lethal_strikes_2	expertise_trader_lethal_strikes_1																					expertise_undiminished_critical_melee=2				
+expertise_trader_lethal_strikes_2	expertise_trader_lethal_strikes_1																					expertise_undiminished_critical_melee=1				
+expertise_trader_lethal_strikes_3	expertise_trader_lethal_strikes_2																					expertise_undiminished_critical_melee=1				
 expertise_trader_miracle_1	expertise_trader_deflective_armor_4									expertise_trader_deflective_armor_4											bh_shields_1					
 expertise_trader_advanced_personnel_1	expertise																					"expertise_vendor_cost_decrease=5,vendor_item_limit=100,manage_vendor=1"				
 expertise_trader_advanced_personnel_2	expertise_trader_advanced_personnel_1																					"expertise_vendor_cost_decrease=5,vendor_item_limit=100,manage_vendor=2"				
