@@ -164,12 +164,18 @@ public class heroic_token_box extends script.base_script
     }
     public int handleQuantitySelect(obj_id self, dictionary params) throws InterruptedException {
         obj_id player = utils.getContainingPlayer(self);
-        obj_id tokenBox = utils.getObjectInInventory(player, "item_token_box_01_01");
-        int amount = Integer.parseInt(sui.getInputBoxText(params));
+        obj_id tokenBox = utils.getObjectInInventory(player, trial.TOKEN_BOX);
+        
+        String input = sui.getInputBoxText(params);
+        if (input == null || input.isEmpty()) {
+            return SCRIPT_CONTINUE;
+        }
+        int amount = Integer.parseInt(input);
         int selectedRow = getIntObjVar(self, "tokenType");
         String tokenType = trial.HEROIC_TOKENS[TOKENS[selectedRow]];
-        if (amount < 1 || amount > trial.getTokenAmountInBox(tokenBox, tokenType)) {
-            sendSystemMessageTestingOnly(player, "Sorry, but that is an invalid amount.");
+        int tokensInBox = trial.getTokenAmountInBox(tokenBox, tokenType);
+        if (amount < 1 || amount > tokensInBox) {
+            sendSystemMessageTestingOnly(player, "You cannot withdraw " + amount + " tokens, you only have " + tokensInBox + " in your token box.");
         } else {
             obj_id inv = getObjectInSlot(player, "inventory");
             if (getVolumeFree(inv) > 0) {
