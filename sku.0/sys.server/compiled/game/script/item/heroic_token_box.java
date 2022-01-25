@@ -136,7 +136,7 @@ public class heroic_token_box extends script.base_script
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException {
         if (utils.isNestedWithin(self, player)) {
-            int mnuColor = mi.addRootMenu(menu_info_types.SERVER_MENU1, MNU_WITHDRAW);
+            mi.addRootMenu(menu_info_types.SERVER_MENU1, MNU_WITHDRAW);
         }
         return SCRIPT_CONTINUE;
     }
