@@ -15,7 +15,7 @@ public class mission_base extends script.base_script
     public static final String MISSION_INCOMPLETE_PERSISTENT_MESSAGE = "incomplete";
     public static final String MISSION_TIMED_OUT_PERSISTENT_MESSAGE = "timed_out";
     public static final String GENERIC_MISSION_MESSAGE_STRING_FILE = "mission/mission_generic";
-    public static final int MAX_MISSIONS = 2;
+    public static final int MAX_MISSIONS = 5;
     public static final String BOUNTY_MISSION_LISTENERS = "mission.objBountyListeners";
     public static final int BOUNTY_DIFFICULTY_BASIC = 1;
     public static final int BOUNTY_DIFFICULTY_ADVANCED = 2;
