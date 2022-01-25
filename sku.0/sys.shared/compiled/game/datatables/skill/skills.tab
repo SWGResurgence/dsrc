@@ -2418,10 +2418,10 @@ expertise_trader_sidearm_training_1	expertise																					expertise_dama
 expertise_trader_sidearm_training_2	expertise_trader_sidearm_training_1																					expertise_damage_weapon_2=1				
 expertise_trader_sidearm_training_3	expertise_trader_sidearm_training_2																					expertise_damage_weapon_2=1				
 expertise_trader_sidearm_training_4	expertise_trader_sidearm_training_3																					expertise_damage_weapon_2=1				
-expertise_trader_sampling_extraction_1	expertise																					"expertise_resource_sampling_increase=25,expertise_resource_sampling_time_decrease=5"				
-expertise_trader_sampling_extraction_2	expertise_trader_sampling_extraction_1																					"expertise_resource_sampling_increase=25,expertise_resource_sampling_time_decrease=5"				
-expertise_trader_sampling_extraction_3	expertise_trader_sampling_extraction_2																					"expertise_resource_sampling_increase=25,expertise_resource_sampling_time_decrease=5"				
-expertise_trader_sampling_extraction_4	expertise_trader_sampling_extraction_3																					"expertise_resource_sampling_increase=25,expertise_resource_sampling_time_decrease=5"				
+expertise_trader_sampling_efficiency_1	expertise																					"expertise_resource_sampling_increase=25,expertise_resource_sampling_time_decrease=5"				
+expertise_trader_sampling_efficiency_2	expertise_trader_sampling_efficiency_1																					"expertise_resource_sampling_increase=25,expertise_resource_sampling_time_decrease=5"				
+expertise_trader_sampling_efficiency_3	expertise_trader_sampling_efficiency_2																					"expertise_resource_sampling_increase=25,expertise_resource_sampling_time_decrease=5"				
+expertise_trader_sampling_efficiency_4	expertise_trader_sampling_efficiency_3																					"expertise_resource_sampling_increase=25,expertise_resource_sampling_time_decrease=5"				
 expertise_trader_melee_accuracy_1	expertise																					expertise_damage_melee=1				
 expertise_trader_melee_accuracy_2	expertise_trader_melee_accuracy_1																					expertise_damage_melee=1				
 expertise_trader_melee_accuracy_3	expertise_trader_melee_accuracy_2																					expertise_damage_melee=1				

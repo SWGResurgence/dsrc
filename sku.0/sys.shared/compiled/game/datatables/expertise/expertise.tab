@@ -837,10 +837,10 @@ expertise_trader_sidearm_training_1	29	2	5	1			trader
 expertise_trader_sidearm_training_2	29	2	5	2	expertise_trader_sidearm_training_1		trader
 expertise_trader_sidearm_training_3	29	2	5	3	expertise_trader_sidearm_training_2		trader
 expertise_trader_sidearm_training_4	29	2	5	4	expertise_trader_sidearm_training_3		trader
-expertise_trader_sampling_extraction_1	29	2	6	1			trader
-expertise_trader_sampling_extraction_2	29	2	6	2	expertise_trader_sampling_extraction_1		trader
-expertise_trader_sampling_extraction_3	29	2	6	3	expertise_trader_sampling_extraction_2		trader
-expertise_trader_sampling_extraction_4	29	2	6	4	expertise_trader_sampling_extraction_3		trader
+expertise_trader_sampling_efficiency_1	29	2	6	1			trader
+expertise_trader_sampling_efficiency_2	29	2	6	2	expertise_trader_sampling_efficiency_1		trader
+expertise_trader_sampling_efficiency_3	29	2	6	3	expertise_trader_sampling_efficiency_2		trader
+expertise_trader_sampling_efficiency_4	29	2	6	4	expertise_trader_sampling_efficiency_3		trader
 expertise_trader_melee_accuracy_1	29	2	7	1			trader
 expertise_trader_melee_accuracy_2	29	2	7	2	expertise_trader_melee_accuracy_1		trader
 expertise_trader_melee_accuracy_3	29	2	7	3	expertise_trader_melee_accuracy_2		trader
