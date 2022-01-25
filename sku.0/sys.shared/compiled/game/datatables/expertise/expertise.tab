@@ -859,7 +859,7 @@ expertise_trader_enhance_evasion_3	29	3	3	3	expertise_trader_enhance_evasion_2		
 expertise_trader_enhance_evasion_4	29	3	3	4	expertise_trader_enhance_evasion_3		trader
 expertise_trader_dire_strikes_1	29	3	5	1	expertise_trader_sidearm_training_4		trader
 expertise_trader_dire_strikes_2	29	3	5	2	expertise_trader_dire_strikes_1		trader
-expertise_trader_harvester_efficiency_1	29	3	6	1	expertise_trader_sampling_extraction_4		trader
+expertise_trader_harvester_efficiency_1	29	3	6	1	expertise_trader_sampling_efficiency_4		trader
 expertise_trader_harvester_efficiency_2	29	3	6	2	expertise_trader_harvester_efficiency_1		trader
 expertise_trader_harvester_efficiency_3	29	3	6	3	expertise_trader_harvester_efficiency_2		trader
 expertise_trader_harvester_efficiency_4	29	3	6	4	expertise_trader_harvester_efficiency_3		trader
