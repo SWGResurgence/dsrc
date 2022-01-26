@@ -1,5 +1,6 @@
 package script.structure.municipal;
 
+import script.library.buff;
 import script.library.player_structure;
 import script.library.structure;
 import script.library.utils;
