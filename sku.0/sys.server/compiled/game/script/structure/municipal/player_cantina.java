@@ -5,7 +5,7 @@ import script.library.create;
 import script.location;
 import script.obj_id;
 
-public class cantina extends script.base_script {
+public class player_cantina extends script.base_script {
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException {
         if (isPlayer(item) && utils.isProfession(item, utils.ENTERTAINER)) {
             buff.applyBuff(item, "entertainer_buff");
