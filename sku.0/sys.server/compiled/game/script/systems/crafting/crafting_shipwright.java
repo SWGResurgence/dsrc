@@ -3,7 +3,7 @@ package script.systems.crafting;
 import script.library.craftinglib;
 import script.obj_id;
 
-public class crafting_structure extends script.base_script {
+public class crafting_shipwright extends script.base_script {
     public static final String OBJVAR_CRAFTING_TYPE = "crafting.type";
     public static final String INVISIBLE_CRAFTING_STATION_TEMPLATE = "object/tangible/crafting/station/inivisible_crafting_station.iff";
     public static final String HANGER_PATH = "player_house_hanger";
