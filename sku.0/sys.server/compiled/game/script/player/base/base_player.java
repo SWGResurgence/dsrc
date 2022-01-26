@@ -10625,10 +10625,10 @@ public class base_player extends script.base_script
         String armor = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardArmor);
         int armorCount = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardCountArmor);
         int armorQuality = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardQuality);
-        //String[] inclusiveLootNames = new String[6];
-        //int[] inclusiveLootCounts = new int[6];
-        String[] inclusiveLootNames = new String[3];
-        int[] inclusiveLootCounts = new int[3];
+        String[] inclusiveLootNames = new String[6];
+        int[] inclusiveLootCounts = new int[6];
+        //String[] inclusiveLootNames = new String[3];
+        //int[] inclusiveLootCounts = new int[3];
         inclusiveLootNames[0] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName);
         inclusiveLootCounts[0] = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootCount);
         inclusiveLootNames[1] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName2);
