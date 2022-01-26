@@ -3807,7 +3807,7 @@ item_tcg_loot_reward_series1_naboo_jacket
 item_tcg_loot_reward_series6_snow_jacket											
 item_tcg_loot_reward_series1_glowing_red_eyes											
 item_tcg_loot_reward_series1_glowing_blue_eyes											
-item_tcg_loot_reward_series1_black_corset_dress				index_color_1=6,index_color_2=6																		
+item_tcg_loot_reward_series1_black_corset_dress				index_color_1=6,index_color_2=6							
 item_tcg_promotion_booster_01_01			int:featureID=5251								
 item_tcg_promotion_starter_01_01			int:featureID=10001								
 item_tcg_promotion_card_01_01			int:featureID=5252								
