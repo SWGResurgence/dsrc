@@ -13,4 +13,4 @@ sharedTemplate = "object/building/player/shared_player_house_hangar.iff"
 
 objvars =+["tcg.static_item_deed"="item_tcg_loot_reward_series5_player_house_hangar", "structure.capacity_override"=350]
 
-scripts = ["systems.crafting.crafting_shipwright"]
+scripts = ["structure.municipal.hanger"]
