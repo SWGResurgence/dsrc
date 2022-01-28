@@ -813,6 +813,7 @@ expertise_trader_personnel_management_1	29	3	1	1			trader
 expertise_trader_personnel_management_2	29	3	1	2			trader
 expertise_trader_factory_maintenance_1	29	3	3	1			trader
 expertise_trader_factory_maintenance_2	29	3	3	2			trader
+expertise_trader_harvester_maintenance_1	29	3	5	1			trader
 expertise_trader_factory_energy_1	29	4	3	1			trader
 expertise_trader_factory_energy_2	29	4	3	2			trader
 expertise_trader_harvester_energy_1	29	4	5	1			trader
