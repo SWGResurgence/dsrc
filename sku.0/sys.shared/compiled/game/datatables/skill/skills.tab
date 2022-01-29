@@ -2411,6 +2411,7 @@ expertise_domestic_artisan_hypothesis_2	expertise_domestic_artisan_hypothesis_1	
 expertise_domestic_chef_insight_1	expertise																					expertise_complexity_decrease_chef=2				
 expertise_domestic_tailor_hypothesis_1	expertise_domestic_tailor_dexterity_1									expertise_domestic_tailor_dexterity_1												expertise_experimentation_increase_tailor=12				
 expertise_domestic_resource_processing_1	expertise																					expertise_resource_quality_increase=2				
+expertise_domestic_resource_processing_2	expertise_domestic_resource_processing_1									expertise_domestic_resource_processing_1												expertise_resource_quality_increase=4				
 expertise_domestic_chef_hypothesis_1	expertise_domestic_chef_dexterity_1									expertise_domestic_chef_dexterity_1												expertise_experimentation_increase_chef=12				
 expertise_domestic_tailor_keen_understanding_1	expertise_domestic_tailor_insight_1									expertise_domestic_tailor_insight_1												expertise_complexity_decrease_tailor=4				
 expertise_domestic_resource_refinement_1	expertise_domestic_resource_processing_1									expertise_domestic_resource_processing_1												expertise_resource_quality_increase=2				
@@ -2432,6 +2433,7 @@ expertise_structure_artisan_hypothesis_2	expertise_structure_artisan_hypothesis_
 expertise_structure_shipwright_insight_1	expertise																					expertise_complexity_decrease_shipwright=2				
 expertise_structure_architect_hypothesis_1	expertise_structure_architect_dexterity_1									expertise_structure_architect_dexterity_1												expertise_experimentation_increase_architect=12				
 expertise_structure_resource_processing_1	expertise																					expertise_resource_quality_increase=2				
+expertise_structure_resource_processing_2	expertise_structure_resource_processing_1									expertise_structure_resource_processing_1												expertise_resource_quality_increase=4				
 expertise_structure_shipwright_hypothesis_1	expertise_structure_shipwright_dexterity_1									expertise_structure_shipwright_dexterity_1												expertise_experimentation_increase_shipwright=12				
 expertise_structure_architect_keen_understanding_1	expertise_structure_architect_insight_1									expertise_structure_architect_insight_1												expertise_complexity_decrease_architect=4				
 expertise_structure_resource_refinement_1	expertise_structure_resource_processing_1									expertise_structure_resource_processing_1												expertise_resource_quality_increase=2				
@@ -2453,6 +2455,7 @@ expertise_munition_artisan_hypothesis_2	expertise_munition_artisan_hypothesis_1	
 expertise_munition_armorsmith_insight_1	expertise																					expertise_complexity_decrease_armorsmith=2				
 expertise_munition_weaponsmith_hypothesis_1	expertise_munition_weaponsmith_dexterity_1									expertise_munition_weaponsmith_dexterity_1												expertise_experimentation_increase_weaponsmith=12				
 expertise_munition_resource_processing_1	expertise																					expertise_resource_quality_increase=2				
+expertise_munition_resource_processing_2	expertise_munition_resource_processing_1									expertise_munition_resource_processing_1												expertise_resource_quality_increase=4				
 expertise_munition_armorsmith_hypothesis_1	expertise_munition_armorsmith_dexterity_1									expertise_munition_armorsmith_dexterity_1												expertise_experimentation_increase_armorsmith=12				
 expertise_munition_weaponsmith_keen_understanding_1	expertise_munition_weaponsmith_insight_1									expertise_munition_weaponsmith_insight_1												expertise_complexity_decrease_weaponsmith=4				
 expertise_munition_resource_refinement_1	expertise_munition_resource_processing_1									expertise_munition_resource_processing_1												expertise_resource_quality_increase=2				
@@ -2476,6 +2479,7 @@ expertise_engineering_sticky_fuel_1	expertise_engineering_flame_jet_1									ex
 expertise_engineering_varied_voltage_1	expertise_engineering_electrical_shock_1									expertise_engineering_electrical_shock_1												expertise_engineering_varied_voltage=2				
 expertise_engineering_droid_hypothesis_1	expertise_engineering_droid_dexterity_1									expertise_engineering_droid_dexterity_1												expertise_experimentation_increase_droid=12				
 expertise_engineering_resource_processing_1	expertise																					expertise_resource_quality_increase=2				
+expertise_engineering_resource_processing_2	expertise_engineering_resource_processing_1									expertise_engineering_resource_processing_1												expertise_resource_quality_increase=4				
 expertise_engineering_droideka_shield_1	expertise																						craftExpertiseDroidekaShieldModule			
 expertise_engineering_torturous_needle_1	expertise																						craftExpertiseTorturousNeedleModule			
 expertise_engineering_droid_keen_understanding_1	expertise_engineering_droid_insight_1									expertise_engineering_droid_insight_1												expertise_complexity_decrease_droid=4				
