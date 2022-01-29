@@ -50,7 +50,8 @@ public class heroic_token_box extends script.base_script
         "Whuffa Leather",
         "Rare Dried Herb",
         "Spell Weaver Crystal",
-        "Entertainer Token of Achievement"
+        "Entertainer Token of Achievement,"
+        "Teasure Reward Token"
     };
     private static final int[] TOKENS = {
         0,
@@ -88,7 +89,8 @@ public class heroic_token_box extends script.base_script
         32,
         33,
         34,
-        35
+        35,
+        36
     };    
     public int OnAttach(obj_id self) throws InterruptedException
     {

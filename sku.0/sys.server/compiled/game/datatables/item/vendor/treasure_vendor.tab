@@ -1,0 +1,3 @@
+item	cash	token36	class	script	note
+s[none]	i[0]	i[0]	i[0]	s	c
+item_treasure_map_bonus_consumable_04_01		500	0		"See library.utils for the int value of the classes. 0 is ""all"" but will only show if there are no items for the opener's class."
