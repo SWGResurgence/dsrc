@@ -4,7 +4,7 @@
 @class tangible_object_template 0
 @class object_template 0
 
-sharedTemplate = "object/mobile/shared_treasure_vendor.iff"
+sharedTemplate = "object/mobile/shared_dressed_rsf_palace_guard.iff"
 contents = [
 					[slotName = "inventory",
 					equipObject = true,
