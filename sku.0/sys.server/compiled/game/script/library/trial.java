@@ -290,7 +290,7 @@ public class trial extends script.base_script
     "item_wod_token_4",                         //#32   Token: Witches of Dathomir
     "item_wod_token_5",                         //#33   Token: Witches of Dathomir
     "item_token_apotheosis_01_01",              //#34   Token: Apotheosis of Resurgence 
-    "item_entertainer_token_01_01"              //#35   Token: Entertainer of Achievment
+    "item_entertainer_token_01_01",             //#35   Token: Entertainer of Achievment
     "item_treasure_reward_token_01_01"          //#36   Token: Treasure Loot
     
     };
