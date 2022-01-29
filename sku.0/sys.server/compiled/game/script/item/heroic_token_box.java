@@ -50,8 +50,8 @@ public class heroic_token_box extends script.base_script
         "Whuffa Leather",
         "Rare Dried Herb",
         "Spell Weaver Crystal",
-        "Entertainer Token of Achievement,"
-        "Teasure Reward Token"
+        "Entertainer Token of Achievement",
+        "Teasure Token of Achievement"
     };
     private static final int[] TOKENS = {
         0,
