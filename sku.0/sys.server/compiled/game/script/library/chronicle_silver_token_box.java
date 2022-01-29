@@ -22,7 +22,8 @@ public class chronicle_silver_token_box extends script.base_script {
 	public static obj_id[] grantSilverTokens(obj_id player) throws InterruptedException {
 		obj_id pInv = utils.getInventoryContainer(player);
 		HashSet theSet = new HashSet();
-		theSet.add(static_item.createNewItemFunction("item_pgc_token_02", pInv, 1000));
+		theSet.add(static_item.createNewItemFunction("item_pgc_token_02", pInv, 500));
+    theSet.add(static_item.createNewItemFunction("item_pgc_token_02", pInv, 500));
 		obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
         showLootBox(player, items);
