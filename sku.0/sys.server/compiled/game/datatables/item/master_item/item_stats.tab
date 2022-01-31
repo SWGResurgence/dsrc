@@ -5008,3 +5008,5 @@ item_tie_fighter_181st_flightsuit_02			string:faction_recruiter.faction=Imperial
 item_senate_guard_hologram											
 item_heroic_token_black_sun_01_01				index_color_1=38							
 item_treasure_reward_token_01_01				index_color_1=36							
+item_shipwright_crafting_datadisk_01_01					starship_crafting_datadisk_1	long_reuse_4	1800			appearance/pt_heal.prt	
+item_shipwright_crafting_datadisk_01_02					starship_crafting_datadisk_2	long_reuse_4	1800			appearance/pt_heal.prt	
