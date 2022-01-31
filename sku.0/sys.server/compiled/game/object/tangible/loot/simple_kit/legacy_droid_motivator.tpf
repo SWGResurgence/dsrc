@@ -3,5 +3,6 @@
 @class tangible_object_template 2
 @class object_template 5
 
-
 sharedTemplate = "object/tangible/loot/simple_kit/shared_legacy_droid_motivator.iff"
+
+scripts = +["object.autostack"]

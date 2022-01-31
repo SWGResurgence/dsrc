@@ -5,4 +5,4 @@
 
 sharedTemplate = "object/tangible/loot/simple_kit/shared_legacy_droid_head.iff"
 
-scripts =+ ["item.special.nomove"]
+scripts =+ ["item.special.nomove", "object.autostack"]
