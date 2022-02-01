@@ -5128,7 +5128,7 @@ public class terminal_character_builder extends script.base_script
             case 7: //Other Tokens
                 static_item.createNewItemFunction("item_meatlump_lump_01_01", pInv, 25);
                 break;
-            case 8  //Witches of Dathomir Tokens
+            case 8: //Witches of Dathomir Tokens
                 static_item.createNewItemFunction("item_wod_token_1", pInv, 25);
                 static_item.createNewItemFunction("item_wod_token_2", pInv, 25);
                 static_item.createNewItemFunction("item_wod_token_3", pInv, 25);
