@@ -3,7 +3,7 @@ package script.library;
 import script.*;
 import java.util.HashSet;
 
-public class gcw_tower_barricade_tool_resources extends script.base_script {
+public class gcw_invasion_tower_tool_resources extends script.base_script {
 	
 	public static final String STF_FILE = "npe";
 	public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException {
