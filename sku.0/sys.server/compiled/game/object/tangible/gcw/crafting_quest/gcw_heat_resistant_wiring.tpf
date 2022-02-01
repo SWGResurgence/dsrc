@@ -5,5 +5,4 @@
 
 sharedTemplate = "object/tangible/gcw/crafting_quest/shared_gcw_heat_resistant_wiring.iff"
 
-scripts = +["systems.crafting.item.item_component_attribute""]
-objvars = +[""]
+scripts = +["systems.crafting.item.item_component_attribute"]

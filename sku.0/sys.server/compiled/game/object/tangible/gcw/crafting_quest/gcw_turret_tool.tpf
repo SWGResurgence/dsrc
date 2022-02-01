@@ -6,4 +6,3 @@
 sharedTemplate = "object/tangible/gcw/crafting_quest/shared_gcw_turret_tool.iff"
 
 scripts = +["systems.crafting.item.crafting_gcw_tools"]
-objvars = +[""]

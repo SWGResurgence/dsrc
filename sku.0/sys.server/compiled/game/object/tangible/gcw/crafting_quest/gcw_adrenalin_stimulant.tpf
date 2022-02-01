@@ -6,6 +6,3 @@
 sharedTemplate = "object/tangible/gcw/crafting_quest/shared_gcw_adrenalin_stimulant.iff"
 
 scripts = +["systems.crafting.item.item_component_attribute"]
-
-objvars = +[""]
-

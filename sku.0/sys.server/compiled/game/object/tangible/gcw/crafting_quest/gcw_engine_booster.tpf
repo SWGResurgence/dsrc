@@ -6,5 +6,3 @@
 sharedTemplate = "object/tangible/gcw/crafting_quest/shared_gcw_engine_booster.iff"
 
 scripts = +["systems.crafting.item.item_component_attribute"]
-
-objvars = +[""]

@@ -6,4 +6,3 @@
 sharedTemplate = "object/tangible/gcw/crafting_quest/shared_gcw_high_performance_circuit_board.iff"
 
 scripts = +["systems.crafting.item.item_component_attribute"]
-objvars = +[""]
