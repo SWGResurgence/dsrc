@@ -1,3 +1,7 @@
-server_template_crc	cell_index	px	py	pz	qw	qx	qy	qz	scripts	objvars
-h	i	f	f	f	f	f	f	f	s	p
-object/building/kashyyyk/thm_kash_rodian_bannerpole_s01.iff	0	0	195	0	0	0	0	0		
+objid	container	server_template_crc	cell_index	px	py	pz	qw	qx	qy	qz	scripts	objvars
+i	i	h	i	f	f	f	f	f	f	f	s	p
+0	0	object/building/kashyyyk/thm_kash_rodian_bannerpole_s01.iff	195	0	0	0	0	0	0	0		
+-2147483648	0	object/tangible/ground_spawning/area_spawner.iff	0	1424.0206	3	437.8203	0.9392624	0	-0.34319976	0	systems.spawning.spawner_area	buildoutObjectId|0|-2147483648|fltMaxSpawnTime|2|1.000000|fltMinSpawnTime|2|0.100000|fltRadius|2|1.000000|intDefaultBehavior|0|3|intGoodLocationSpawner|0|0|intSpawnCount|0|1|registerWithController|0|1|strName|4|treasure_collections_vendor|strSpawnerType|4|area|strSpawns|4|treasure_collections_vendor|$|
+-4776171218	0	object/tangible/ground_spawning/area_spawner.iff	0	1421.0801	3	438.01294	0.97388446	0	-0.2270441	0	systems.spawning.spawner_area	buildoutObjectId|0|-4776171218|fltMaxSpawnTime|2|1.000000|fltMinSpawnTime|2|0.100000|fltRadius|2|1.000000|intDefaultBehavior|0|3|intGoodLocationSpawner|0|0|intSpawnCount|0|1|registerWithController|0|1|strName|4|treasure_kits_vendor|strSpawnerType|4|area|strSpawns|4|treasure_kits_vendor|$|
+-4776172314	0	object/tangible/ground_spawning/area_spawner.iff	0	1418.683	3	436.3086	0.925548	0	-0.37863034	0	systems.spawning.spawner_area	buildoutObjectId|0|-4776172314|fltMaxSpawnTime|2|1.000000|fltMinSpawnTime|2|0.100000|fltRadius|2|1.000000|intDefaultBehavior|0|3|intGoodLocationSpawner|0|0|intSpawnCount|0|1|registerWithController|0|1|strName|4|treasure_rareloot_vendor|strSpawnerType|4|area|strSpawns|4|treasure_rareloot_vendor|$|
+-4776173227	0	object/tangible/ground_spawning/area_spawner.iff	0	1417.6284	3	433.24097	0.928312	0	-0.37180224	0	systems.spawning.spawner_area	buildoutObjectId|0|-4776173227|fltMaxSpawnTime|2|1.000000|fltMinSpawnTime|2|0.100000|fltRadius|2|1.000000|intDefaultBehavior|0|3|intGoodLocationSpawner|0|0|intSpawnCount|0|1|registerWithController|0|1|strName|4|treasure_schematics_vendor|strSpawnerType|4|area|strSpawns|4|treasure_schematics_vendor|$|
