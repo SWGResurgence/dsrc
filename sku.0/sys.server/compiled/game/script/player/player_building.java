@@ -957,18 +957,15 @@ public class player_building extends script.base_script
                     }
                 }
             }
-            if(!isGod(self)) // fix for allowing moving static items indoors UP/DOWN in god mode
+            if (!utils.hasScriptVar(target, "vertical.min_height") || !utils.hasScriptVar(target, "vertical.max_height"))
             {
-                if (!utils.hasScriptVar(target, "vertical.min_height") || !utils.hasScriptVar(target, "vertical.max_height"))
-                {
-                    sendSystemMessage(self, new string_id(STF, "error_move_item"));
-                    return SCRIPT_CONTINUE;
-                }
-                if (new_y < utils.getFloatScriptVar(target, "vertical.min_height") || new_y > utils.getFloatScriptVar(target, "vertical.max_height"))
-                {
-                    sendSystemMessage(self, new string_id(STF, "not_valid_location"));
-                    return SCRIPT_CONTINUE;
-                }
+                sendSystemMessage(self, new string_id(STF, "error_move_item"));
+                return SCRIPT_CONTINUE;
+            }
+            if (new_y < utils.getFloatScriptVar(target, "vertical.min_height") || new_y > utils.getFloatScriptVar(target, "vertical.max_height"))
+            {
+                sendSystemMessage(self, new string_id(STF, "not_valid_location"));
+                return SCRIPT_CONTINUE;
             }
         }
         else if (target != intendedTarget)
