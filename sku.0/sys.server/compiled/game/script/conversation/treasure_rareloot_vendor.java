@@ -11,14 +11,14 @@ import script.library.factions;
 import script.library.prose;
 import script.library.utils;
 
-public class treasure_vendor extends script.base_script {
+public class treasure_rareloot_vendor extends script.base_script {
     public static final String c_stringFile = "conversation/treasure_vendor";
 
-    public boolean treasure_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException {
+    public boolean treasure_rareloot_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException {
         return true;
     }
 
-    public void treasure_vendor_action_showTokenVendorUI(obj_id player, obj_id npc) throws InterruptedException {
+    public void treasure_rareloot_vendor_action_showTokenVendorUI(obj_id player, obj_id npc) throws InterruptedException {
         dictionary d = new dictionary();
         d.put("player", player);
         messageTo(npc, "showInventorySUI", d, 0, false);
@@ -27,7 +27,7 @@ public class treasure_vendor extends script.base_script {
     public int OnInitialize(obj_id self) throws InterruptedException {
         if (!isTangible(self) || isPlayer(self))
         {
-            detachScript(self, "conversation.treasure_vendor");
+            detachScript(self, "conversation.treasure_rareloot_vendor");
         }
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
@@ -48,7 +48,7 @@ public class treasure_vendor extends script.base_script {
 
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException {
         clearCondition(self, CONDITION_CONVERSABLE);
-        detachScript(self, "conversation.treasure_vendor");
+        detachScript(self, "conversation.treasure_rareloot_vendor");
         return SCRIPT_CONTINUE;
     }
 
@@ -63,9 +63,9 @@ public class treasure_vendor extends script.base_script {
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
 
-    public int treasure_vendor_handleBranch1(obj_id self, obj_id player, string_id response) throws InterruptedException {
+    public int treasure_rareloot_vendor_handleBranch1(obj_id self, obj_id player, string_id response) throws InterruptedException {
         if (response.equals("s_2")) {
-            treasure_vendor_action_showTokenVendorUI(player, self);
+            treasure_rareloot_vendor_action_showTokenVendorUI(player, self);
             chat.chat(self, player, new string_id(c_stringFile, "s_3"));
         } else if (response.equals("s_4")) {
             chat.chat(self, player, new string_id(c_stringFile, "s_5"));
@@ -80,11 +80,11 @@ public class treasure_vendor extends script.base_script {
         if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player)) {
             return SCRIPT_OVERRIDE;
         }
-        if (treasure_vendor_condition__defaultCondition(player, self)) {
+        if (treasure_rareloot_vendor_condition__defaultCondition(player, self)) {
             prose_package pp = new prose_package();
             pp = prose.setStringId(pp, new string_id(c_stringFile, "s_1"));
             pp.target.set(player);
-            npcStartConversation(player, self, "treasure_vendor", null, pp, new string_id[]{new string_id(c_stringFile, "s_2"), new string_id(c_stringFile, "s_4"), new string_id(c_stringFile, "s_6")});
+            npcStartConversation(player, self, "treasure_rareloot_vendor", null, pp, new string_id[]{new string_id(c_stringFile, "s_2"), new string_id(c_stringFile, "s_4"), new string_id(c_stringFile, "s_6")});
             return SCRIPT_CONTINUE;
         }
         chat.chat(self, "Error:  All conditions for OnStartNpcConversation were false.");
@@ -92,14 +92,14 @@ public class treasure_vendor extends script.base_script {
     }
 
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException {
-        if (!conversationId.equals("treasure_vendor")) {
+        if (!conversationId.equals("treasure_rareloot_vendor")) {
             return SCRIPT_CONTINUE;
         }
-        if (treasure_vendor_handleBranch1(self, player, response) == SCRIPT_CONTINUE) {
+        if (treasure_rareloot_vendor_handleBranch1(self, player, response) == SCRIPT_CONTINUE) {
             return SCRIPT_CONTINUE;
         }
         chat.chat(self, "Error:  Fell through all branches and responses for OnNpcConversationResponse.");
-        utils.removeScriptVar(player, "conversation.treasure_vendor.branchId");
+        utils.removeScriptVar(player, "conversation.treasure_rareloot_vendor.branchId");
         return SCRIPT_CONTINUE;
     }
 }
