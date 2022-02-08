@@ -2,8 +2,6 @@ package script.library;
 
 import script.*;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Vector;
 
 public class groundquests extends script.base_script
@@ -456,11 +454,18 @@ public class groundquests extends script.base_script
         {
             return true;
         }
-        final String[] regions = Arrays.stream(getRegionsAtPoint(getLocation(player)))
-                .map(region::getName)
-                .toArray(String[]::new);
-        final String[] options = requiredRegion.split(",");
-        return !Collections.disjoint(Arrays.asList(regions), Arrays.asList(options));
+        location here = getLocation(player);
+        region[] regions = getRegionsAtPoint(here);
+        if (regions != null)
+        {
+            for (region region : regions) {
+                String regionWeAreIn = region.getName();
+                if (regionWeAreIn.equals(requiredRegion)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     public static void sendSignal(obj_id player, String signalName) throws InterruptedException
     {
