@@ -1,0 +1,68 @@
+item	cash	token36	limit	class	script	note
+s[none]	i[0]	i[0]	i[0]	i[0]	s	c
+col_treasure_hunter_dolovite_mask_02_01		1				A Dolovite Mask
+col_treasure_hunter_hendanyn_mask_02_01		1				A Hendanyn Death Mask
+col_lightsaber_1h_01_03		1				A Jedi Relic
+col_treasure_hunter_mandalore_mask_02_01		1				A Mandalorian Mask
+col_treasure_hunter_sith_mask_02_01		1				A Sith Mask
+col_treasure_hunter_oval_gem_02_01		1				A rare red oval gem
+col_treasure_hunter_trilliant_gem_02_01		1				A rare red trilliant gem
+col_treasure_hunter_oval_gem_02_02		1				A rare green oval gem
+col_treasure_hunter_trilliant_gem_02_02		1				A rare green trilliant gem
+col_treasure_hunter_oval_gem_02_03		1				A rare blue oval gem
+col_treasure_hunter_trilliant_gem_02_03		1				A rare blue trilliant gem
+col_treasure_hunter_oval_gem_02_04		1				A rare yellow oval gem
+col_treasure_hunter_trilliant_gem_02_04		1				A rare yellow triliant gem
+col_treasure_hunter_antique_melee_02_01		1				An antique melee weapon
+col_treasure_hunter_antique_pistol_02_01		1				An antique pistol
+col_treasure_hunter_antique_carbine_02_01		1				An antique carbine
+col_treasure_hunter_antique_rifle_02_01		1				An antique rifle
+col_dooku_datadisk_02_04		1				Dooku's Story - Data disk 4/5
+col_dooku_datadisk_02_05		1				Dooku's Story - Data disk 5/5
+col_green_sq_cut_gem_style1_02_01		1				Green Pikach
+col_green_sq_cut_gem_style1_02_02		1				Green Artusian
+col_green_sq_cut_gem_style1_02_03		1				Green Bal'ta'ran
+col_green_sq_cut_gem_style1_02_04		1				Green Bondar
+col_green_sq_cut_gem_style1_02_05		1				Green Chrysopaz
+col_green_sq_cut_gem_style1_02_06		1				Green Durindfire
+col_green_sq_cut_gem_style1_02_07		1				Green Vertex
+col_green_sq_cut_gem_style1_02_08		1				Green Dragite
+col_green_sq_cut_gem_style1_02_09		1				Green Firefacet
+col_green_sq_cut_gem_style1_02_10		1				Green Jenruax
+item_collection_housing_improvement_02_06		3				Housing Improvement: Shelving Techniques 6/10
+item_collection_housing_improvement_02_10		3				Housing Improvement: Shelving Techniques 10/10
+item_collection_housing_improvement_03_05		3				Housing Improvement: Craftsman Tools 5/10
+item_collection_housing_improvement_03_09		3				Housing Improvement: Craftsman Tools 9/10
+item_collection_housing_improvement_04_04		3				Housing Improvement: Cabinetry Techniques 4/10
+item_collection_housing_improvement_04_08		3				Housing Improvement: Cabinetry Techniques 8/10
+item_collection_housing_improvement_05_03		3				Housing Improvement: Storage Techniques 3/10
+item_collection_housing_improvement_05_07		3				Housing Improvement: Storage Techniques 7/10
+col_purple_rnd_cut_gem_style1_02_01		1				Purple Pikach
+col_purple_rnd_cut_gem_style1_02_02		1				Purple Artusian
+col_purple_rnd_cut_gem_style1_02_03		1				Purple Bal'ta'ran
+col_purple_rnd_cut_gem_style1_02_04		1				Purple Bondar
+col_purple_rnd_cut_gem_style1_02_05		1				Purple Chrysopaz
+col_purple_rnd_cut_gem_style1_02_06		1				Purple Durindfire
+col_purple_rnd_cut_gem_style1_02_07		1				Purple Vertex
+col_purple_rnd_cut_gem_style1_02_08		1				Purple Dragite
+col_purple_rnd_cut_gem_style1_02_09		1				Purple Firefacet
+col_purple_rnd_cut_gem_style1_02_10		1				Purple Jenruax
+col_red_rnd_cut_gem_style1_02_01		1				Red Pikach
+col_red_rnd_cut_gem_style1_02_02		1				Red Artusian
+col_red_rnd_cut_gem_style1_02_03		1				Red Bal'ta'ran
+col_red_rnd_cut_gem_style1_02_04		1				Red Bondar
+col_red_rnd_cut_gem_style1_02_05		1				Red Chrysopaz
+col_red_rnd_cut_gem_style1_02_06		1				Red Durindfire
+col_red_rnd_cut_gem_style1_02_07		1				Red Vertex
+col_red_rnd_cut_gem_style1_02_08		1				Red Dragite
+col_red_rnd_cut_gem_style1_02_09		1				Red Firefacet
+col_red_rnd_cut_gem_style1_02_10		1				Red Jenruax
+item_collection_jedi_holocron_02_04		5				Strange Jedi Meditative Holocron 4/5
+item_collection_sith_holocron_02_04		5				Strange Sith Meditative Holocron 4/5
+item_collection_jedi_holocron_01_04		25				Strange Jedi Waistpack Holocron 4/5
+item_collection_sith_holocron_01_04		50				Strange Sith Waistpack Holocron 4/5
+col_shattered_shard_unknown_02_01		1				Unknown Crystal Fragment 1/10
+col_shattered_shard_unknown_02_03		1				Unknown Crystal Fragment 3/10
+col_shattered_shard_unknown_02_05		1				Unknown Crystal Fragment 5/10
+col_shattered_shard_unknown_02_06		1				Unknown Crystal Fragment 6/10
+col_shattered_shard_unknown_02_09		1				Unknown Crystal Fragment 9/10

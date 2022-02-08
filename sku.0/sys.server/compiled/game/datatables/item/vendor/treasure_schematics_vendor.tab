@@ -1,0 +1,51 @@
+item	cash	token36	limit	class	script	note
+s[none]	i[0]	i[0]	i[0]	i[0]	s	c
+object/tangible/loot/loot_schematic/agitator_motor_schematic.iff		1				Agitator Motor
+object/tangible/loot/loot_schematic/assorted_fruit_schematic.iff		1				Assorted Fruit Draft Schematic
+item_treasure_map_bar_piece_straight_s2_schematic		2				Bar Counter Large Schematic
+item_treasure_map_bar_counter_s1_schematic		2				Bar Counter Schematic
+item_treasure_map_bar_piece_curve_s1_schematic		2				Bar Corner Piece 1 Schematic
+item_treasure_map_bar_piece_curve_s2_schematic		2				Bar Corner Piece 2 Schematic
+item_treasure_map_bar_piece_straight_s1_schematic		2				Bar Corner Piece 3 Schematic
+object/tangible/loot/loot_schematic/couch_blue_schematic.iff		1				Blue Couch Draft Schematic
+object/tangible/loot/loot_schematic/bubble_tank_schematic.iff		1				Bubble Tank Draft Schematic
+object/tangible/loot/loot_schematic/campfire_schematic.iff		1				Campfire Draft Schematic
+object/tangible/loot/loot_schematic/cantina_chair_schematic.iff		1				Cantina Chair Draft Schematic
+object/tangible/loot/loot_schematic/bowl_carved_schematic.iff		1				Carved Bowl Draft Schematic
+object/tangible/loot/loot_schematic/chemical_recycler_schematic.iff		1				Chemical Recycler Schematic
+object/tangible/loot/loot_schematic/basket_closed_schematic.iff		1				Closed Basket Draft Schematic
+object/tangible/loot/loot_schematic/creature_recycler_schematic.iff		1				Creature Recycler Schematic
+object/tangible/loot/loot_schematic/diagnostic_screen_schematic.iff		1				Diagnostic Screen Draft Schematic
+object/tangible/loot/loot_schematic/stuffed_fish_schematic.iff		1				Display Fish Draft Schematic
+object/tangible/loot/loot_schematic/pitcher_full_schematic.iff		1				Drinking Pitcher Draft Schematic
+object/tangible/loot/loot_schematic/droid_body_schematic.iff		1				Droid Body Draft Schematic
+object/tangible/loot/loot_schematic/droid_head_schematic.iff		1				Droid Head Draft Schematic
+object/tangible/loot/loot_schematic/cabinet_elegant_schematic.iff		1				Elegant Cabinet Draft Schematic
+object/tangible/loot/loot_schematic/bottle_fat_schematic.iff		1				Fat Bottle Draft Schematic
+object/tangible/loot/loot_schematic/flora_recycler_schematic.iff		1				Flora Recycler Schematic
+object/tangible/loot/loot_schematic/gambling_table_schematic.iff		1				Gaming Table Draft Schematic
+object/tangible/loot/loot_schematic/metal_recycler_schematic.iff		1				Metal Recycler Schematic
+object/tangible/loot/loot_schematic/microphone_s01_schematic.iff		1				Microphone Draft Schematic
+object/tangible/loot/loot_schematic/table_coffee_modern_schematic.iff		1				Modern Coffee Table Draft Schematic
+object/tangible/loot/loot_schematic/ore_recycler_schematic.iff		1				Ore Recycler Schematic
+object/tangible/loot/loot_schematic/park_bench_schematic.iff		1				Park Bench Draft Schematic
+object/tangible/loot/loot_schematic/bottle_pear_schematic.iff		1				Pear-shopped Bottle Draft Schematic
+object/tangible/loot/loot_schematic/bowl_plain_schematic.iff		1				Plaine Bow Draft Schematic
+object/tangible/loot/loot_schematic/professors_desk_schematic.iff		1				Professor's Desk Draft Schematic
+object/tangible/loot/loot_schematic/radar_screen_schematic.iff		1				Radar Screen Draft Schematic
+object/tangible/loot/loot_schematic/radio_schematic.iff		1				Radio Draft Schematic
+object/tangible/loot/quest/2h_sword_scythe_schematic.iff		1				Scyth Blade Schematic
+object/tangible/loot/loot_schematic/slave_brazier_schematic.iff		1				Slaver Brazier Draft Schematic
+item_treasure_map_bonus_consumable_04_03		1				Small flask of Nerfmilk
+object/tangible/loot/loot_schematic/spear_rack_schematic.iff		1				Spear Rack Draft Schematic
+object/tangible/loot/loot_schematic/stove_schematic.iff		1				Stove Draft Schematic
+object/tangible/loot/loot_schematic/streetlamp_schematic.iff		1				Streetlamp Draft Schematic
+object/tangible/loot/loot_schematic/bottle_tall_schematic.iff		1				Tall Bottle Draft Schematic
+object/tangible/loot/loot_schematic/tanning_hide_s01_schematic.iff		1				Tanning Hide Draft Schematic
+object/tangible/loot/loot_schematic/tanning_hide_s02_schematic.iff		1				Tanning Hide Draft Schematic
+object/tangible/loot/loot_schematic/tatooine_tapestry_schematic.iff		1				Tatooine Tapestry Draft Schematic
+object/tangible/loot/loot_schematic/technical_console_s01_schematic.iff		1				Technical Console Draft Schematic
+object/tangible/loot/loot_schematic/technical_console_s02_schematic.iff		1				Technical Console Draft Schematic
+object/tangible/loot/loot_schematic/throwpillow_schematic.iff		1				Throwpillow Draft Schematic
+object/tangible/loot/loot_schematic/tumble_blender_schematic.iff		1				Tumble Blender
+object/tangible/loot/loot_schematic/utensils_schematic.iff		1				Utensils Draft Schematic
