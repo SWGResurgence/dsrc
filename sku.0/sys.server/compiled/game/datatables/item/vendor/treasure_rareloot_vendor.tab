@@ -1,2 +1,39 @@
 item	cash	token36	limit	class	script	note
 s[none]	i[0]	i[0]	i[0]	i[0]	s	c
+item_treasure_map_bracelet_r_absorb_04_01		1				Adventurer Hiker & Hunter Counter-Toxin Wristband Prototype IV (Right)
+item_treasure_map_bracelet_r_resist_04_01		1				Adventurer Hiker & Hunter Toxin Resistant Wristband Prototype IV (Right)
+item_krayt_pearl_04_19		20				Ancient Krayt Dragon Pearl
+item_krayt_pearl_04_20		25				Ancient Krayt Dragon Pearl
+object/tangible/furniture/terminal/terminal_serving_droid.iff		5				Astromech Serving Droid Terminal
+item_treasure_map_bracelet_r_bh_04_02		2				BlasTech WrisTek - Wrist Assault Booster Zulu (Right)
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_belt.iff		1				Bounty Hunter Belt
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_bicep_l.iff		1				Bounty Hunter Bicep Armor
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_bicep_r.iff		1				Bounty Hunter Bicep Armor
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_bracer_l.iff		1				Bounty Hunter Bracer Armor
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_bracer_r.iff		1				Bounty Hunter Bracer Armor
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_boots.iff		1				Bounty Hunter Boots
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_chest_plate.iff		1				Bounty Hunter Chest Plate
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_gloves.iff		1				Bounty Hunter Gloves
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_helmet.iff		1				Bounty Hunter Helmet
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_leggings.iff		1				Bounty Hunter Leg Armor
+item_treasure_map_bracelet_r_entertainer_inspiration_pulse_04_01		2				Bracelet of Inspired Status (Right)
+item_treasure_map_bonus_consumable_04_01		5				Flask of Elba Water
+item_treasure_map_bonus_consumable_04_02		5				Flask of Naris-bud Tea
+item_treasure_map_bracelet_r_counter_insurgent_04_01		2				Idellian Arrays PLFS-4000 Insurgent Scanner Wrist Module (Right)
+item_treasure_map_bracelet_r_fs_04_01		5				Jedi Knight's Wristguard (Right)
+item_krayt_pearl_04_17		5				Krayt Dragon Pearl
+item_krayt_pearl_04_18		10				Krayt Dragon Pearl
+item_treasure_map_81_90		1			object.autostack	Mysterious Data Disk
+item_treasuremap_container_01_01		3				Mysterious Data Disk Box
+item_treasuremap_container_01_02		6				Mysterious Data Disk Box
+item_treasuremap_container_01_03		9				Mysterious Data Disk Box
+item_treasuremap_container_01_04		12				Mysterious Data Disk Box
+item_power_crystal_04_21		15				Power Crystal
+item_treasure_map_bonus_buff_04_06		100				Rare Ankarres Sapphire
+item_treasure_map_bonus_buff_04_04		100				Rare Corusca Gem
+item_treasure_map_bonus_buff_04_02		100				Rare Nova Crystal
+item_treasure_map_bonus_buff_04_03		100				Rare Power Gem
+item_treasure_map_bonus_buff_04_01		100				Rare Rol Stone
+item_treasure_map_bonus_buff_04_05		100				Rare Sasho Gem
+item_treasure_map_backpack_schematic_04_01		5				Schematic for Ayelixe/Krongbing Textiles Survival Backpack
+item_treasure_map_backpack_schematic_04_02		10				Schematic for Ayelixe/Krongbing Textiles Survival Backpack V2
