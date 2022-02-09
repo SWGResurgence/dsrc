@@ -1,10 +1,7 @@
 @base object/draft_schematic/structure/base_structure_schematic.iff
 @class draft_schematic_object_template 7
-//
-// skills used: inventor/basic general component design
-//
 
-itemsPerContainer = 1
+itemsPerContainer = 1000
 craftedObjectTemplate = "object/tangible/deed/factory_deed/item_factory_deed.iff"
 
 slots = [
@@ -12,7 +9,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "load_bearing_frame_and_reinforcement",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "load_bearing_frame_and_reinforcement", ingredient="steel", count=300]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "load_bearing_frame_and_reinforcement", ingredient="steel", count=30]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -20,7 +17,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "body_shell_and_casing",
 	options = [
-		[ingredientType=IT_templateGeneric, ingredients = [[name="craft_structure_ingredients_n" "body_shell_and_casing", ingredient="object/tangible/component/structure/wall_module.iff", count=3]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_templateGeneric, ingredients = [[name="craft_structure_ingredients_n" "body_shell_and_casing", ingredient="object/tangible/component/structure/wall_module.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -28,7 +25,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "structure_foundation",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "structure_foundation", ingredient="ore", count=250]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "structure_foundation", ingredient="ore", count=25]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -36,7 +33,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "thermal_noise_and_charge_proof_shielding",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "thermal_noise_and_charge_proof_shielding", ingredient="ore", count=400]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "thermal_noise_and_charge_proof_shielding", ingredient="ore", count=40]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -70,8 +67,6 @@ skillCommands = ["unskilled"]
 manufactureScripts = [ "systems.crafting.structure.specific_item.crafting_structure_harvester_installation" ]
 
 @class intangible_object_template 0
-
-
 @class object_template 5
 
 complexity = 15

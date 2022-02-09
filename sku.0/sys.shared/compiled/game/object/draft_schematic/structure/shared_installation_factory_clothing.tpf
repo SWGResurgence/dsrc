@@ -5,8 +5,8 @@ attributes = [
 	[name = "crafting" "complexity", experiment = "" "", value = 18..18],
 	[name = "crafting" "xp", experiment = "" "", value = 1900..1900],
 	[name = "crafting" "extractRate", experiment = "" "", value = 0..0],
-	[name = "crafting" "buildRate", experiment = "crafting" "expEffeciency", value = 5..12],
-	[name = "crafting" "hopperSize", experiment = "crafting" "expStorage", value = 1500..4000],
+	[name = "crafting" "buildRate", experiment = "crafting" "expEffeciency", value = 10..24],
+	[name = "crafting" "hopperSize", experiment = "crafting" "expStorage", value = 3000..8000],
 	[name = "crafting" "hitPoints", experiment = "crafting" "expDurability", value = 5000..7000]]
 
 slots = [
@@ -17,12 +17,10 @@ slots = [
 	[name = "craft_structure_ingredients_n" "power_supply_unit", hardpoint = ""],
 	[name = "craft_structure_ingredients_n" "ouput_storage_unit", hardpoint = ""],
 	[name = "craft_structure_ingredients_n" "semi_automated_assembly_mechanism", hardpoint = ""]]
-//	[name = "craft_structure_ingredients_n" "armor_protection", hardpoint = ""]]
 
 craftedSharedTemplate="object/tangible/deed/factory_deed/shared_factory_clothing_deed.iff"
 
 @class intangible_object_template 0
-
 @class object_template 5
 
 snapToTerrain = false
@@ -32,5 +30,3 @@ slotDescriptorFilename = ""
 arrangementDescriptorFilename = "abstract/slot/arrangement/arrangement_datapad.iff"
 portalLayoutFilename = ""
 clientDataFile = ""
-
-

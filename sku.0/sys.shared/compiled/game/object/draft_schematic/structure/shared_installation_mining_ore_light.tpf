@@ -4,8 +4,8 @@
 attributes = [
 	[name = "crafting" "complexity", experiment = "" "", value = 13..13],
 	[name = "crafting" "xp", experiment = "" "", value = 425..425],
-	[name = "crafting" "extractRate", experiment = "crafting" "expEffeciency", value = 1..5],
-	[name = "crafting" "hopperSize", experiment = "crafting" "expStorage", value = 25000..50000],
+	[name = "crafting" "extractRate", experiment = "crafting" "expEffeciency", value = 2..10],
+	[name = "crafting" "hopperSize", experiment = "crafting" "expStorage", value = 50000..100000],
 	[name = "crafting" "hitPoints", experiment = "" "", value = 1000..1000]]
 
 slots = [
@@ -18,7 +18,6 @@ slots = [
 craftedSharedTemplate="object/tangible/deed/harvester_deed/shared_harvester_ore_s1_deed.iff"
 
 @class intangible_object_template 0
-
 @class object_template 5
 
 snapToTerrain = false
@@ -28,5 +27,3 @@ slotDescriptorFilename = ""
 arrangementDescriptorFilename = "abstract/slot/arrangement/arrangement_datapad.iff"
 portalLayoutFilename = ""
 clientDataFile = ""
-
-

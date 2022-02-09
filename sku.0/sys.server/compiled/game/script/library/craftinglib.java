@@ -1769,7 +1769,7 @@ public class craftinglib extends script.base_script
         }
         if (craftingType == STATION_TYPE_SPACE)
         {
-            return "space_station";
+            return "space_station, tcg_hanger_station";
         }
         if (craftingType == STATION_TYPE_FOOD_AND_STRUCTURE)
         {

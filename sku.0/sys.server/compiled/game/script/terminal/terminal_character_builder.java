@@ -48,7 +48,7 @@ public class terminal_character_builder extends script.base_script
     public static final String RLS_EFFECT = "appearance/pt_blackhole_01.prt";
     public static final String RLS_SOUND = "sound/item_ding.snd";
     public static final String[] CHARACTER_BUILDER_OPTIONS = {
-        "SWG Source Testing",
+        "Resurgence Testing",
         "Weapons",
         "Armor",
         "Skills",
@@ -99,17 +99,18 @@ public class terminal_character_builder extends script.base_script
 	"class_chronicles_master"
     };
     public static final String[] DEV_TESTING_OPTIONS = {
-        "Halloween tokens",
-        "Lifeday rebel tokens",
-        "Lifeday imperial tokens",
-        "Loveday hearts",
-        "Empire day imperial tokens",
-        "Empire day rebel tokens",
         "Heroic Box of Achievements",
-        "Tusken, Axkva Min, Echo Base, IG-88 Tokens",
-        "Exar Kun, Black Sun, Marauder, Space Duty Tokens",
-        "Holoshrouds for costume testing",
-		"Duel Recording Terminal Schematic"
+        "New Items & Objects",
+        "New Schematics",
+        "Tokens: Chronicles",
+        "Tokens: Events",
+        "Tokens: GCW",
+        "Tokens: Heroics",
+        "Tokens: Others",
+        "Tokens: Witches of Dathomir",
+        "Tokens: Space",
+        "Tokens: Special Rewards",
+        "Veteran Rewards"
     };
     public static final String[] RESOURCE_TYPES = {
         "Creature Resources",
@@ -5059,46 +5060,107 @@ public class terminal_character_builder extends script.base_script
         obj_id pInv = utils.getInventoryContainer(player);
         switch (idx)
         {
-            case 0:
-                static_item.createNewItemFunction("item_event_halloween_coin", pInv, 500);
-                break;
-            case 1:
-                static_item.createNewItemFunction("item_event_lifeday_rebel_token", pInv, 500);
-                break;
-            case 2:
-                static_item.createNewItemFunction("item_event_lifeday_imperial_token", pInv, 500);
-                break;
-            case 3:
-                static_item.createNewItemFunction("item_event_loveday_chak_heart", pInv, 100);
-                break;
-            case 4:
-                static_item.createNewItemFunction("item_empire_day_imperial_token", pInv, 25);
-                break;
-            case 5:
-                static_item.createNewItemFunction("item_empire_day_rebel_token", pInv, 25);
-                break;
-            case 6:
+            case 0:  //Heroic Token Box
                 static_item.createNewItemFunction("item_heroic_token_box_01_01", pInv);
                 break;
-            case 7:
-                static_item.createNewItemFunction("item_heroic_token_tusken_01_01", pInv, 25);
+            case 1:  //New Items & Objects
+                static_item.createNewItemFunction("item_shipwright_crafting_datadisk_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_shipwright_crafting_datadisk_01_02", pInv, 25);
+                static_item.createNewItemFunction("item_pgc_copper_token_box_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_pgc_silver_token_box_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_pgc_gold_token_box_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_senate_guard_hologram", pInv, 25);
+                static_item.createNewItemFunction("weapon_gcw_rifle_e11_mark2_03_01", pInv, 25);
+                static_item.createNewItemFunction("item_ent_bearded_jax_familiar", pInv, 25);
+                static_item.createNewItemFunction("item_ent_book_xp_bonus_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_ent_book_bm_xp_bonus_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_ent_book_gcw_bonus_01_01", pInv, 25);
+                static_item.createNewItemFunction("weapon_eweb_prototype_blaster_rifle", pInv, 25);
+                static_item.createNewItemFunction("weapon_a280h_blaster_rifle", pInv, 25);
+                static_item.createNewItemFunction("weapon_a280c_blaster_rifle", pInv, 25);
+                static_item.createNewItemFunction("item_trader_advanced_buff_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_inorganic_survey_tool_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_organic_survey_tool_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_creature_harvester_deed_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_ent_book_xp_bonus_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_ent_book_bm_xp_bonus_01_01", pInv, 25);
+                break;
+            case 2:  //New Schematics
+                static_item.createNewItemFunction("item_schematic_hat_rebel_spec_ops_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_schematic_hat_navy_trooper_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_creature_harvester_deed_schematic_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_schematic_portable_bazaar_terminal", pInv, 25);
+                static_item.createNewItemFunction("item_schematic_portable_space_terminal", pInv, 25);
+                static_item.createNewItemFunction("item_pgc_gold_token_box_01_01", pInv, 25);
+                break;
+            case 3:  //Chronicle Tokens
+                static_item.createNewItemFunction("item_pgc_token_01", pInv, 25);
+                static_item.createNewItemFunction("item_pgc_token_02", pInv, 25);
+                static_item.createNewItemFunction("item_pgc_token_03", pInv, 25);
+                break;
+            case 4:  //Event Tokens
+                static_item.createNewItemFunction("item_empire_day_imperial_token", pInv, 25);
+                static_item.createNewItemFunction("item_empire_day_rebel_token", pInv, 25);
+                static_item.createNewItemFunction("item_event_lifeday_rebel_token", pInv, 25);
+                static_item.createNewItemFunction("item_event_lifeday_imperial_token", pInv, 25);
+                static_item.createNewItemFunction("item_event_halloween_coin", pInv, 25);
+                static_item.createNewItemFunction("item_event_loveday_chak_heart", pInv, 25);
+                static_item.createNewItemFunction("item_token_apotheosis_01_01", pInv, 25);
+                break;
+            case 5:  //GCW Tokens
+                static_item.createNewItemFunction("item_battlefield_rebel_token", pInv, 25);
+                static_item.createNewItemFunction("item_battlefield_imperial_token", pInv, 25);
+                static_item.createNewItemFunction("item_gcw_rebel_token", pInv, 25);
+                static_item.createNewItemFunction("item_gcw_imperial_token", pInv, 25);
+                static_item.createNewItemFunction("item_restuss_imperial_commendation_02_01", pInv, 25);
+                static_item.createNewItemFunction("item_restuss_rebel_commendation_02_01", pInv, 25);
+                break;
+            case 6:  //Heroic Tokens
                 static_item.createNewItemFunction("item_heroic_token_axkva_01_01", pInv, 25);
-                static_item.createNewItemFunction("item_heroic_token_echo_base_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_heroic_token_tusken_01_01", pInv, 25);
                 static_item.createNewItemFunction("item_heroic_token_ig88_01_01", pInv, 25);
-                break;
-            case 8:
-                static_item.createNewItemFunction("item_heroic_token_exar_01_01", pInv, 25);
                 static_item.createNewItemFunction("item_heroic_token_black_sun_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_heroic_token_exar_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_heroic_token_echo_base_01_01", pInv, 25);
                 static_item.createNewItemFunction("item_heroic_token_marauder_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_heroic_token_mustafar_01_01", pInv, 25);
+                break;
+            case 7: //Other Tokens
+                static_item.createNewItemFunction("item_meatlump_lump_01_01", pInv, 25);
+                break;
+            case 8: //Witches of Dathomir Tokens
+                static_item.createNewItemFunction("item_wod_token_1", pInv, 25);
+                static_item.createNewItemFunction("item_wod_token_2", pInv, 25);
+                static_item.createNewItemFunction("item_wod_token_3", pInv, 25);
+                static_item.createNewItemFunction("item_wod_token_4", pInv, 25);
+                static_item.createNewItemFunction("item_wod_token_5", pInv, 25);
+                static_item.createNewItemFunction("item_wod_token_6", pInv, 25);
+                break;
+            case 9:  //Space Tokens
                 static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_imperial_station_token_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_rebel_station_token_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_nova_orion_space_resource_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_empire_day_rebel_token", pInv, 25);
+                static_item.createNewItemFunction("item_empire_day_rebel_token", pInv, 25);
+                static_item.createNewItemFunction("item_empire_day_rebel_token", pInv, 25);
                 break;
-            case 9:
-                static_item.createNewItemFunction("item_costume_kit_holiday", pInv, 25);
-                static_item.createNewItemFunction("item_costume_kit", pInv, 25);
+            case 10: //Special Reward Tokens
+                static_item.createNewItemFunction("item_vet_reward_token_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_entertainer_token_01_01", pInv, 25);
+                static_item.createNewItemFunction("item_treasure_reward_token_01_01", pInv, 25);
                 break;
-			case 10:
-				static_item.createNewItemFunction("item_schematic_duel_recording_terminal", pInv);
-				break;
+            case 11: //Veteran Rewards
+                static_item.createNewItemFunction("trader_care_package", pInv);
+                static_item.createNewItemFunction("pilotequipment1", pInv);
+                static_item.createNewItemFunction("pilotequipment2", pInv);
+                static_item.createNewItemFunction("pilotequipment3", pInv);
+                static_item.createNewItemFunction("pilotequipment4", pInv);
+                static_item.createNewItemFunction("pilotequipment5", pInv);
+                static_item.createNewItemFunction("heroic_biolink_set", pInv);
+                static_item.createNewItemFunction("item_level90_boost", pInv);
+                static_item.createNewItemFunction("vet_stipend_scroll", pInv);
+                break;
                 default:
                 cleanScriptVars(player);
                 break;

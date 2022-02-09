@@ -1,4 +1,4 @@
-// This file ws written by the template editor @ 9:47:45 AM -  Sun Aug 4 2002
+// 
 
 @base object/weapon/ranged/pistol/base/shared_pistol_base.iff
 
@@ -9,9 +9,8 @@ weaponEffectIndex = 8
 
 @class object_template 3
 
-objectName = "item_n" "pistol_pvp_n"
-detailedDescription = "item_n" "pistol_pvp_d"
-lookAtText = "weapon_lookat" "pistol_dh17"
+objectName = "weapon_name" "pistol_legendary_crimson_nova"
+detailedDescription = "weapon_detail" "pistol_legendary_crimson_nova"
 
 appearanceFilename = "appearance/wp_pistol_rebel_sku7.apt"
 

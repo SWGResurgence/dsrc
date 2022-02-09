@@ -1,0 +1,204 @@
+item	cash	token36	limit	class	script	note
+s[none]	i[0]	i[0]	i[0]	i[0]	s	c
+col_treasure_hunter_dolovite_mask_02_01		1				A Dolovite Mask
+col_treasure_hunter_hendanyn_mask_02_01		1				A Hendanyn Death Mask
+col_lightsaber_1h_01_03		1				A Jedi Relic
+col_treasure_hunter_mandalore_mask_02_01		1				A Mandalorian Mask
+col_treasure_hunter_sith_mask_02_01		1				A Sith Mask
+col_treasure_hunter_oval_gem_02_01		1				A rare red oval gem
+col_treasure_hunter_trilliant_gem_02_01		1				A rare red trilliant gem
+col_treasure_hunter_oval_gem_02_02		1				A rare green oval gem
+col_treasure_hunter_trilliant_gem_02_02		1				A rare green trilliant gem
+col_treasure_hunter_oval_gem_02_03		1				A rare blue oval gem
+col_treasure_hunter_trilliant_gem_02_03		1				A rare blue trilliant gem
+col_treasure_hunter_oval_gem_02_04		1				A rare yellow oval gem
+col_treasure_hunter_trilliant_gem_02_04		1				A rare yellow triliant gem
+item_treasure_map_bracelet_r_absorb_04_01		1				Adventurer Hiker & Hunter Counter-Toxin Wristband Prototype IV (Right)
+item_treasure_map_bracelet_r_resist_04_01		1				Adventurer Hiker & Hunter Toxin Resistant Wristband Prototype IV (Right)
+object/tangible/loot/loot_schematic/agitator_motor_schematic.iff		1				Agitator Motor
+col_treasure_hunter_antique_melee_02_01		1				An antique melee weapon
+col_treasure_hunter_antique_pistol_02_01		1				An antique pistol
+col_treasure_hunter_antique_carbine_02_01		1				An antique carbine
+col_treasure_hunter_antique_rifle_02_01		1				An antique rifle
+item_krayt_pearl_04_19		20				Ancient Krayt Dragon Pearl
+item_krayt_pearl_04_20		25				Ancient Krayt Dragon Pearl
+object/tangible/loot/loot_schematic/assorted_fruit_schematic.iff		1				Assorted Fruit Draft Schematic
+object/tangible/furniture/terminal/terminal_serving_droid.iff		5				Astromech Serving Droid Terminal
+item_treasure_map_bar_piece_straight_s2_schematic		2				Bar Counter Large Schematic
+item_treasure_map_bar_counter_s1_schematic		2				Bar Counter Schematic
+item_treasure_map_bar_piece_curve_s1_schematic		2				Bar Corner Piece 1 Schematic
+item_treasure_map_bar_piece_curve_s2_schematic		2				Bar Corner Piece 2 Schematic
+item_treasure_map_bar_piece_straight_s1_schematic		2				Bar Corner Piece 3 Schematic
+item_treasure_map_bracelet_r_bh_04_02		2				BlasTech WrisTek - Wrist Assault Booster Zulu (Right)
+object/tangible/loot/loot_schematic/couch_blue_schematic.iff		1				Blue Couch Draft Schematic
+object/tangible/loot/collectible/collectible_parts/blue_rug_adhesive.iff		1				Blue Rug Adhesive
+object/tangible/loot/collectible/collectible_parts/blue_rug_dye.iff		1				Blue Rug Dye
+object/tangible/loot/collectible/collectible_parts/blue_rug_patches.iff		1				Blue Rug Patches
+object/tangible/loot/collectible/collectible_parts/blue_rug_thread_01.iff		1				Blue Rug Thread - First Section
+object/tangible/loot/collectible/collectible_parts/blue_rug_thread_02.iff		1				Blue Rug Thread - Second Section
+object/tangible/loot/collectible/collectible_parts/blue_rug_thread_03.iff		1				Blue Rug Thread - Third Section
+object/tangible/loot/collectible/collectible_parts/blue_rug_thread_04.iff		1				Blue Rug Thread - Fourth Section
+object/tangible/loot/collectible/collectible_parts/blue_rug_thread_05.iff		1				Blue Rug Thread - Fifth Section
+object/tangible/loot/collectible/collectible_parts/blue_rug_thread_06.iff		1				Blue Rug Thread - Sixth Section
+object/tangible/loot/collectible/collectible_parts/blue_rug_thread_07.iff		1				Blue Rug Thread - Seventh Section
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_belt.iff		1				Bounty Hunter Belt
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_bicep_l.iff		1				Bounty Hunter Bicep Armor
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_bicep_r.iff		1				Bounty Hunter Bicep Armor
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_bracer_l.iff		1				Bounty Hunter Bracer Armor
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_bracer_r.iff		1				Bounty Hunter Bracer Armor
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_boots.iff		1				Bounty Hunter Boots
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_chest_plate.iff		1				Bounty Hunter Chest Plate
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_gloves.iff		1				Bounty Hunter Gloves
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_helmet.iff		1				Bounty Hunter Helmet
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_leggings.iff		1				Bounty Hunter Leg Armor
+object/tangible/loot/loot_schematic/bubble_tank_schematic.iff		1				Bubble Tank Draft Schematic
+item_treasure_map_bracelet_r_entertainer_inspiration_pulse_04_01		2				Bracelet of Inspired Status (Right)
+object/tangible/loot/loot_schematic/campfire_schematic.iff		1				Campfire Draft Schematic
+object/tangible/loot/loot_schematic/cantina_chair_schematic.iff		1				Cantina Chair Draft Schematic
+object/tangible/loot/loot_schematic/bowl_carved_schematic.iff		1				Carved Bowl Draft Schematic
+object/tangible/loot/loot_schematic/chemical_recycler_schematic.iff		1				Chemical Recycler Schematic
+object/tangible/loot/loot_schematic/basket_closed_schematic.iff		1				Closed Basket Draft Schematic
+object/tangible/loot/loot_schematic/creature_recycler_schematic.iff		1				Creature Recycler Schematic
+object/tangible/loot/loot_schematic/diagnostic_screen_schematic.iff		1				Diagnostic Screen Draft Schematic
+object/tangible/loot/loot_schematic/stuffed_fish_schematic.iff		1				Display Fish Draft Schematic
+col_dooku_datadisk_02_04		1				Dooku's Story - Data disk 4/5
+col_dooku_datadisk_02_05		1				Dooku's Story - Data disk 5/5
+object/tangible/loot/loot_schematic/pitcher_full_schematic.iff		1				Drinking Pitcher Draft Schematic
+object/tangible/loot/loot_schematic/droid_body_schematic.iff		1				Droid Body Draft Schematic
+object/tangible/loot/loot_schematic/droid_head_schematic.iff		1				Droid Head Draft Schematic
+object/tangible/loot/loot_schematic/cabinet_elegant_schematic.iff		1				Elegant Cabinet Draft Schematic
+object/tangible/loot/loot_schematic/bottle_fat_schematic.iff		1				Fat Bottle Draft Schematic
+item_treasure_map_bonus_consumable_04_01		5				Flask of Elba Water
+item_treasure_map_bonus_consumable_04_02		5				Flask of Naris-bud Tea
+object/tangible/loot/loot_schematic/flora_recycler_schematic.iff		1				Flora Recycler Schematic
+object/tangible/loot/loot_schematic/gambling_table_schematic.iff		1				Gaming Table Draft Schematic
+object/tangible/loot/collectible/collectible_parts/light_table_adhesive.iff		1				Glass Top Table Adhesive
+object/tangible/loot/collectible/collectible_parts/light_table_glasstop_01.iff		1				Glass Top Table - Large Glass Top
+object/tangible/loot/collectible/collectible_parts/light_table_glasstop_02.iff		1				Glass Top Table - Small Glass Top
+object/tangible/loot/collectible/collectible_parts/light_table_structure_01.iff		1				Glass Top Table Base - First Section
+object/tangible/loot/collectible/collectible_parts/light_table_structure_02.iff		1				Glass Top Table Base - Second Section
+object/tangible/loot/collectible/collectible_parts/light_table_structure_03.iff		1				Glass Top Table Base - Third Section
+object/tangible/loot/collectible/collectible_parts/light_table_structure_04.iff		1				Glass Top Table Base - Fourth Section
+object/tangible/loot/collectible/collectible_parts/light_table_structure_05.iff		1				Glass Top Table Base - Fifth Section
+object/tangible/loot/collectible/collectible_parts/light_table_structure_06.iff		1				Glass Top Table Base - Sixth Section
+object/tangible/loot/collectible/collectible_parts/light_table_structure_07.iff		1				Glass Top Table Base - Seventh Section
+object/tangible/loot/collectible/collectible_parts/gong_adhesive.iff		1				Gong Adhesive
+object/tangible/loot/collectible/collectible_parts/gong_skin_back.iff		1				Gong Skin - Back Section
+object/tangible/loot/collectible/collectible_parts/gong_skin_front.iff		1				Gong Skin - Front Section
+object/tangible/loot/collectible/collectible_parts/gong_structure_01.iff		1				Gong Structure - First Section
+object/tangible/loot/collectible/collectible_parts/gong_structure_02.iff		1				Gong Structure - Second Section
+object/tangible/loot/collectible/collectible_parts/gong_structure_03.iff		1				Gong Structure - Third Section
+object/tangible/loot/collectible/collectible_parts/gong_structure_04.iff		1				Gong Structure - Fourth Section
+object/tangible/loot/collectible/collectible_parts/gong_structure_05.iff		1				Gong Structure - Fifth Section
+object/tangible/loot/collectible/collectible_parts/gong_structure_06.iff		1				Gong Structure - Sixth Section
+object/tangible/loot/collectible/collectible_parts/gong_structure_07.iff		1				Gong Structure - Seventh Section
+col_green_sq_cut_gem_style1_02_01		1				Green Pikach
+col_green_sq_cut_gem_style1_02_02		1				Green Artusian
+col_green_sq_cut_gem_style1_02_03		1				Green Bal'ta'ran
+col_green_sq_cut_gem_style1_02_04		1				Green Bondar
+col_green_sq_cut_gem_style1_02_05		1				Green Chrysopaz
+col_green_sq_cut_gem_style1_02_06		1				Green Durindfire
+col_green_sq_cut_gem_style1_02_07		1				Green Vertex
+col_green_sq_cut_gem_style1_02_08		1				Green Dragite
+col_green_sq_cut_gem_style1_02_09		1				Green Firefacet
+col_green_sq_cut_gem_style1_02_10		1				Green Jenruax
+item_collection_housing_improvement_02_06		3				Housing Improvement: Shelving Techniques 6/10
+item_collection_housing_improvement_02_10		3				Housing Improvement: Shelving Techniques 10/10
+item_collection_housing_improvement_03_05		3				Housing Improvement: Craftsman Tools 5/10
+item_collection_housing_improvement_03_09		3				Housing Improvement: Craftsman Tools 9/10
+item_collection_housing_improvement_04_04		3				Housing Improvement: Cabinetry Techniques 4/10
+item_collection_housing_improvement_04_08		3				Housing Improvement: Cabinetry Techniques 8/10
+item_collection_housing_improvement_05_03		3				Housing Improvement: Storage Techniques 3/10
+item_collection_housing_improvement_05_07		3				Housing Improvement: Storage Techniques 7/10
+item_treasure_map_bracelet_r_counter_insurgent_04_01		2				Idellian Arrays PLFS-4000 Insurgent Scanner Wrist Module (Right)
+item_treasure_map_bracelet_r_fs_04_01		5				Jedi Knight's Wristguard (Right)
+item_krayt_pearl_04_17		5				Krayt Dragon Pearl
+item_krayt_pearl_04_18		10				Krayt Dragon Pearl
+object/tangible/loot/loot_schematic/metal_recycler_schematic.iff		1				Metal Recycler Schematic
+object/tangible/loot/loot_schematic/microphone_s01_schematic.iff		1				Microphone Draft Schematic
+object/tangible/loot/loot_schematic/table_coffee_modern_schematic.iff		1				Modern Coffee Table Draft Schematic
+item_treasure_map_81_90		1			object.autostack	Mysterious Data Disk
+item_treasuremap_container_01_01		3				Mysterious Data Disk Box
+item_treasuremap_container_01_02		6				Mysterious Data Disk Box
+item_treasuremap_container_01_03		9				Mysterious Data Disk Box
+item_treasuremap_container_01_04		12				Mysterious Data Disk Box
+object/tangible/loot/collectible/collectible_parts/sculpture_structure_01.iff		1				Nabooian Sculpture Base - First Section
+object/tangible/loot/collectible/collectible_parts/sculpture_structure_02.iff		1				Nabooian Sculpture Base - Second Section
+object/tangible/loot/collectible/collectible_parts/sculpture_structure_03.iff		1				Nabooian Sculpture Base - Third Section
+object/tangible/loot/collectible/collectible_parts/sculpture_structure_04.iff		1				Nabooian Sculpture Base - Fourth Section
+object/tangible/loot/collectible/collectible_parts/sculpture_structure_05.iff		1				Nabooian Sculpture Base - Fifth Section
+object/tangible/loot/collectible/collectible_parts/sculpture_structure_06.iff		1				Nabooian Sculpture Base - Sixth Section
+object/tangible/loot/collectible/collectible_parts/sculpture_structure_07.iff		1				Nabooian Sculpture Base - Seventh Section
+object/tangible/loot/collectible/collectible_parts/sculpture_adhesive.iff		1				Nabooian Sculpture Adhesive
+object/tangible/loot/collectible/collectible_parts/sculpture_goldinlay_01.iff		1				Nabooian Sculpture Gold Plating - First Coating
+object/tangible/loot/collectible/collectible_parts/sculpture_goldinlay_02.iff		1				Nabooian Sculpture Gold Plating - Second Coating
+object/tangible/loot/collectible/collectible_parts/orange_rug_adhesive.iff		1				Orange Rug Adhesive
+object/tangible/loot/collectible/collectible_parts/orange_rug_dye.iff		1				Orange Rug Dye
+object/tangible/loot/collectible/collectible_parts/orange_rug_patches.iff		1				Orange Rug Patches
+object/tangible/loot/collectible/collectible_parts/orange_rug_thread_01.iff		1				Orange Rug Thread - First Section
+object/tangible/loot/collectible/collectible_parts/orange_rug_thread_02.iff		1				Orange Rug Thread - Second Section
+object/tangible/loot/collectible/collectible_parts/orange_rug_thread_03.iff		1				Orange Rug Thread - Third Section
+object/tangible/loot/collectible/collectible_parts/orange_rug_thread_04.iff		1				Orange Rug Thread - Fourth Section
+object/tangible/loot/collectible/collectible_parts/orange_rug_thread_05.iff		1				Orange Rug Thread - Fifth Section
+object/tangible/loot/collectible/collectible_parts/orange_rug_thread_06.iff		1				Orange Rug Thread - Sixth Section
+object/tangible/loot/collectible/collectible_parts/orange_rug_thread_07.iff		1				Orange Rug Thread - Seventh Section
+object/tangible/loot/loot_schematic/ore_recycler_schematic.iff		1				Ore Recycler Schematic
+object/tangible/loot/loot_schematic/park_bench_schematic.iff		1				Park Bench Draft Schematic
+object/tangible/loot/loot_schematic/bottle_pear_schematic.iff		1				Pear-shopped Bottle Draft Schematic
+object/tangible/loot/loot_schematic/bowl_plain_schematic.iff		1				Plaine Bow Draft Schematic
+item_power_crystal_04_21		15				Power Crystal
+object/tangible/loot/loot_schematic/professors_desk_schematic.iff		1				Professor's Desk Draft Schematic
+col_purple_rnd_cut_gem_style1_02_01		1				Purple Pikach
+col_purple_rnd_cut_gem_style1_02_02		1				Purple Artusian
+col_purple_rnd_cut_gem_style1_02_03		1				Purple Bal'ta'ran
+col_purple_rnd_cut_gem_style1_02_04		1				Purple Bondar
+col_purple_rnd_cut_gem_style1_02_05		1				Purple Chrysopaz
+col_purple_rnd_cut_gem_style1_02_06		1				Purple Durindfire
+col_purple_rnd_cut_gem_style1_02_07		1				Purple Vertex
+col_purple_rnd_cut_gem_style1_02_08		1				Purple Dragite
+col_purple_rnd_cut_gem_style1_02_09		1				Purple Firefacet
+col_purple_rnd_cut_gem_style1_02_10		1				Purple Jenruax
+object/tangible/loot/loot_schematic/radar_screen_schematic.iff		1				Radar Screen Draft Schematic
+object/tangible/loot/loot_schematic/radio_schematic.iff		1				Radio Draft Schematic
+item_treasure_map_bonus_buff_04_06		100				Rare Ankarres Sapphire
+item_treasure_map_bonus_buff_04_04		100				Rare Corusca Gem
+item_treasure_map_bonus_buff_04_02		100				Rare Nova Crystal
+item_treasure_map_bonus_buff_04_03		100				Rare Power Gem
+item_treasure_map_bonus_buff_04_01		100				Rare Rol Stone
+item_treasure_map_bonus_buff_04_05		100				Rare Sasho Gem
+col_red_rnd_cut_gem_style1_02_01		1				Red Pikach
+col_red_rnd_cut_gem_style1_02_02		1				Red Artusian
+col_red_rnd_cut_gem_style1_02_03		1				Red Bal'ta'ran
+col_red_rnd_cut_gem_style1_02_04		1				Red Bondar
+col_red_rnd_cut_gem_style1_02_05		1				Red Chrysopaz
+col_red_rnd_cut_gem_style1_02_06		1				Red Durindfire
+col_red_rnd_cut_gem_style1_02_07		1				Red Vertex
+col_red_rnd_cut_gem_style1_02_08		1				Red Dragite
+col_red_rnd_cut_gem_style1_02_09		1				Red Firefacet
+col_red_rnd_cut_gem_style1_02_10		1				Red Jenruax
+item_treasure_map_backpack_schematic_04_01		5				Schematic for Ayelixe/Krongbing Textiles Survival Backpack
+item_treasure_map_backpack_schematic_04_02		10				Schematic for Ayelixe/Krongbing Textiles Survival Backpack V2
+object/tangible/loot/quest/2h_sword_scythe_schematic.iff		1				Scyth Blade Schematic
+object/tangible/loot/loot_schematic/slave_brazier_schematic.iff		1				Slaver Brazier Draft Schematic
+item_treasure_map_bonus_consumable_04_03		1				Small flask of Nerfmilk
+object/tangible/loot/loot_schematic/spear_rack_schematic.iff		1				Spear Rack Draft Schematic
+object/tangible/loot/loot_schematic/stove_schematic.iff		1				Stove Draft Schematic
+item_collection_jedi_holocron_02_04		5				Strange Jedi Meditative Holocron 4/5
+item_collection_sith_holocron_02_04		5				Strange Sith Meditative Holocron 4/5
+item_collection_jedi_holocron_01_04		25				Strange Jedi Waistpack Holocron 4/5
+item_collection_sith_holocron_01_04		50				Strange Sith Waistpack Holocron 4/5
+object/tangible/loot/loot_schematic/streetlamp_schematic.iff		1				Streetlamp Draft Schematic
+object/tangible/loot/loot_schematic/bottle_tall_schematic.iff		1				Tall Bottle Draft Schematic
+object/tangible/loot/loot_schematic/tanning_hide_s01_schematic.iff		1				Tanning Hide Draft Schematic
+object/tangible/loot/loot_schematic/tanning_hide_s02_schematic.iff		1				Tanning Hide Draft Schematic
+object/tangible/loot/loot_schematic/tatooine_tapestry_schematic.iff		1				Tatooine Tapestry Draft Schematic
+object/tangible/loot/loot_schematic/technical_console_s01_schematic.iff		1				Technical Console Draft Schematic
+object/tangible/loot/loot_schematic/technical_console_s02_schematic.iff		1				Technical Console Draft Schematic
+object/tangible/loot/loot_schematic/throwpillow_schematic.iff		1				Throwpillow Draft Schematic
+object/tangible/loot/loot_schematic/tumble_blender_schematic.iff		1				Tumble Blender
+col_shattered_shard_unknown_02_01		1				Unknown Crystal Fragment 1/10
+col_shattered_shard_unknown_02_03		1				Unknown Crystal Fragment 3/10
+col_shattered_shard_unknown_02_05		1				Unknown Crystal Fragment 5/10
+col_shattered_shard_unknown_02_06		1				Unknown Crystal Fragment 6/10
+col_shattered_shard_unknown_02_09		1				Unknown Crystal Fragment 9/10
+object/tangible/loot/loot_schematic/utensils_schematic.iff		1				Utensils Draft Schematic

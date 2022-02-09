@@ -1,0 +1,17 @@
+// 
+
+@base object/weapon/ranged/pistol/base/shared_pistol_base.iff
+
+@class weapon_object_template 4
+weaponEffectIndex = 8
+
+@class tangible_object_template 3
+
+@class object_template 3
+
+objectName = "weapon_name" "pistol_exceptional_rebel_dl44"
+detailedDescription = "weapon_detail" "pistol_exceptional_rebel_dl44"
+
+appearanceFilename = "appearance/wp_pistol_dl44_combined.apt"
+
+portalLayoutFilename = ""

@@ -5,3 +5,4 @@
 
 sharedTemplate = "object/tangible/loot/simple_kit/shared_wiring.iff"
 
+scripts = +["object.autostack"]

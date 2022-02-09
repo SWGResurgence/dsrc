@@ -8,5 +8,9 @@
 
 @class object_template 5
 
+scripts = +["structure.municipal.cantina"]
+
+objvars = +["healing.canhealshock"=1]
+moveFlags = [ MF_gm ]
 
 sharedTemplate = "object/building/corellia/shared_ply_corl_house_m_s01_fp1.iff"

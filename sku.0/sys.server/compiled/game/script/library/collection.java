@@ -38,6 +38,7 @@ public class collection extends script.base_script
     public static final int MAXLOOP = 7;
     public static final int REQUIRED_TIME_LAPSE = 21600;
     public static final int CONST_ROLL_CHANCE = 50;
+    public static final byte ENT_TOKEN_ROLL_CHANCE = 40;
     public static final int CONST_RESOURCE_ROLL = 4;
     public static final String PRISTINE_MEAT = "col_pristine_meat_02_01";
     public static final String PRISTINE_HIDE = "col_pristine_hide_02_01";
@@ -899,6 +900,51 @@ public class collection extends script.base_script
         }
         else 
         {
+            sendSystemMessage(bufferId, new string_id("collection", "time_too_short"));
+            return false;
+        }
+    }
+    public static boolean entertainerToken(obj_id buffedPlayerId, obj_id bufferId, float duration) throws InterruptedException
+	{
+        obj_id structure = getTopMostContainer(bufferId);
+        if (!isIdValid(buffedPlayerId) || !isIdValid(bufferId)) {
+            return false;
+        }
+        if ((getLevel(bufferId) < 85) || (getLevel(buffedPlayerId) < 85)){
+            return false;
+        }
+        if (!hasObjVar(structure, "intSpawnBartender")){
+            return false;
+        }
+        if (charactersAreSamePlayer(buffedPlayerId, bufferId)){
+            sendSystemMessageTestingOnly(bufferId, "You will not get a token from yourself.");
+            return false;
+        }
+        String buffedPlayerTemplate = getSkillTemplate(buffedPlayerId);
+        if (buffedPlayerTemplate.startsWith("trader")) {
+            buffedPlayerTemplate = "prof_trader";
+        }
+        if (buffedPlayerTemplate.startsWith("entertainer")) {
+            return false;
+        }
+        int enttokenChance = rand(1, 100);
+        int debuffTracker = rand(1,5);
+        if(isGod(bufferId)){
+            enttokenChance = 100;
+        }
+        if (enttokenChance < ENT_TOKEN_ROLL_CHANCE) {
+            buff.applyBuff(buffedPlayerId, "tok_ent_invis_buff_tracker_"+debuffTracker);
+            return false;
+        }
+        if (duration >= 7200.00) {
+            buff.applyBuff(buffedPlayerId, "tok_ent_invis_buff_tracker_"+debuffTracker);
+            //if(isGod(bufferId)){
+              //  sendSystemMessageTestingOnly(bufferId, "You have recieved buff version " + "tok_ent_invis_buff_tracker_"+debuffTracker);
+            //}
+            static_item.createNewItemFunction("item_entertainer_token_01_01", bufferId, 1-1);
+            sendSystemMessageTestingOnly(bufferId, "You have received a token in appreciation for your performance.");
+            return true;
+        } else {
             sendSystemMessage(bufferId, new string_id("collection", "time_too_short"));
             return false;
         }

@@ -5,4 +5,4 @@
 
 sharedTemplate = "object/tangible/loot/simple_kit/shared_viewscreen_printer.iff"
 
-scripts =+ ["item.loot_kits.simple_kit_scripts.viewscreen_printer", "item.loot_kits.simple_kit"]
+scripts =+ ["item.loot_kits.simple_kit_scripts.viewscreen_printer", "item.loot_kits.simple_kit", "object.autostack"]

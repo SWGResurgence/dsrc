@@ -594,7 +594,7 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -97510790	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	356.304	2	1357.38	1	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|rebel_patrol_8_10050445_9|registerWithController|0|1|$|
 -91682318	0	object/static/structure/general/streetlamp_medium_green_style_01_on.iff	0	162.13	57.1495	652.9	1	0	0	0		$|
 -88065580	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	220.863	49.4398	670.138	1	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|selonian_smuggler_10055482_10|registerWithController|0|1|$|
--85030753	0	object/static/worldbuilding/terminal/floor_spaceterminal_01.iff	0	691.878	24.4345	1335.8	2.73955e-007	0	1	0		$|
+-85030753	0	object/static/worldbuilding/terminal/floor_spaceterminal_01.iff	0	691.878	24.4345	1335.8	2.74E-07	0	1	0		$|
 -82169107	0	object/static/structure/military/military_wall_strong_imperial_32_style_01.iff	0	195.113	49.2899	690.553	0.999388	0	0.0349928	0		$|
 -76708123	0	object/static/vehicle/static_speeder_bike.iff	0	101.471	69.5072	656.071	0.411756	0.0161927	0.896671	-0.161793		$|
 -72440813	0	object/tangible/quest/talus_selonian_hide_container_01.iff	0	164.968	50.0276	675.25	0.947651	0	-0.319309	0	quest.task.ground.retrieve_item_on_item	$|
@@ -627,3 +627,4 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -1083723547	0	object/static/structure/general/all_foodcart_s01.iff	0	282.79	2	1185.1	0.707387	0	0.706827	0		$|
 -1640506863	0	object/tangible/ground_spawning/area_spawner.iff	0	283.073	2	1187.15	0.0699212	0	0.997552	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|2.000000|fltMinSpawnTime|2|1.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|amyva_ice_cream|strSpawnerType|4|area|strSpawns|4|amyva_vanew_ice_cream|$|
 -1293866354	0	object/tangible/planet_map_location/city.iff	0	383.662	2	1269.17	-0.165038	0	0.696135	0		$|
+-4925791778	0	object/tangible/ground_spawning/area_spawner.iff	0	277.19482	2	1279.3169	-0.038437515	0	0.9992611	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|1.000000|fltMinSpawnTime|2|0.100000|fltRadius|2|3.000000|intDefaultBehavior|0|0|intGoodLocationSpawner|0|0|intSpawnCount|0|6|intSpawnSystem|0|1|registerWithController|0|1|strName|4|talus_junkloot_three|strSpawnerType|4|area|strSpawns|4|sleemo_delinquent|$|

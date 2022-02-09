@@ -9,14 +9,14 @@
 
 @class draft_schematic_object_template 7
 
-itemsPerContainer = 10
+itemsPerContainer = 1000
 craftedObjectTemplate = "object/tangible/deed/camp_deed/camp_elite_deed.iff"
 slots = [
 	[
 	optional = false,
 	name = "craft_item_ingredients_n" "shelter_panels",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "shelter_panels", ingredient="metal_nonferrous", count=250]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "shelter_panels", ingredient="metal_nonferrous", count=25]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -24,7 +24,7 @@ slots = [
 	optional = false,
 	name = "craft_item_ingredients_n" "shelter_structure",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "shelter_structure", ingredient="aluminum", count=150]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "shelter_structure", ingredient="aluminum", count=15]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -32,7 +32,7 @@ slots = [
 	optional = false,
 	name = "craft_item_ingredients_n" "secondary_shelter",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "secondary_shelter", ingredient="metal", count=250]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "secondary_shelter", ingredient="metal", count=25]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -40,7 +40,7 @@ slots = [
 	optional = false,
 	name = "craft_item_ingredients_n" "canopy",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "canopy", ingredient="hide", count=200]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "canopy", ingredient="hide", count=2]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -88,7 +88,6 @@ skillCommands = ["unskilled"]
 manufactureScripts = [ "systems.crafting.camp.crafting_camp" ]
 
 @class intangible_object_template 1
-
 @class object_template 8
 
 complexity = 15

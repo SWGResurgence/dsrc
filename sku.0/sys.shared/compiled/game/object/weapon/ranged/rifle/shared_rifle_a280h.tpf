@@ -1,0 +1,18 @@
+// 
+
+@base object/weapon/ranged/rifle/base/shared_rifle_base.iff
+
+@class weapon_object_template 4
+weaponEffectIndex = 7
+
+@class tangible_object_template 3
+
+@class object_template 3
+
+objectName = "weapon_name" "rifle_a280h"
+detailedDescription = "weapon_name" "rifle_a280h"
+lookAtText = "weapon_lookat" "rifle_a280h"
+
+appearanceFilename = "appearance/wp_rifle_a280h.apt"
+
+portalLayoutFilename = ""

@@ -11,7 +11,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "storage_unit_frame",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "storage_unit_frame", ingredient="steel", count=50]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "storage_unit_frame", ingredient="steel", count=5]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -19,7 +19,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "storage_unit",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "storage_unit", ingredient="metal", count=200]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "storage_unit", ingredient="metal", count=20]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ]]
@@ -27,10 +27,7 @@ skillCommands = ["unskilled"]
 
 manufactureScripts = [ "systems.crafting.structure.specific_item.crafting_structure_component" ]
 
-
 @class intangible_object_template 0
-
-
 @class object_template 5
 
 complexity = 5

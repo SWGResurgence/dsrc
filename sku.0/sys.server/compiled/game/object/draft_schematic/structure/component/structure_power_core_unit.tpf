@@ -1,17 +1,14 @@
 @base object/draft_schematic/structure/base_structure_schematic.iff
 @class draft_schematic_object_template 7
-//
-// skills used: inventor/basic general component design
-//
 
-itemsPerContainer = 50
+itemsPerContainer = 1000
 craftedObjectTemplate = "object/tangible/component/structure/power_core_unit.iff"
 slots = [
 	[
 	optional=false,
 	name = "craft_structure_ingredients_n" "sub_assembly_frame",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "sub_assembly_frame", ingredient="steel", count=75]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "sub_assembly_frame", ingredient="steel", count=7]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -19,7 +16,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "micro_turbine_and_charge_accumulator",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "micro_turbine_and_charge_accumulator", ingredient="metal_nonferrous", count=450]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "micro_turbine_and_charge_accumulator", ingredient="metal_nonferrous", count=45]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -27,7 +24,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "shock_and_vibration_isolation_assembly",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "shock_and_vibration_isolation_assembly", ingredient="ore_carbonate", count=280]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "shock_and_vibration_isolation_assembly", ingredient="ore_carbonate", count=28]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -35,7 +32,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "thermal_insulator_and_charge_leakage_preventor",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "thermal_insulator_and_charge_leakage_preventor", ingredient="ore", count=120]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "thermal_insulator_and_charge_leakage_preventor", ingredient="ore", count=12]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -68,8 +65,6 @@ skillCommands = ["unskilled"]
 manufactureScripts = [ "systems.crafting.structure.specific_item.crafting_structure_component" ]
 
 @class intangible_object_template 0
-
-
 @class object_template 5
 
 complexity = 18

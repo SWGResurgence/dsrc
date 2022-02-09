@@ -10,6 +10,8 @@ sharedTemplate = "object/building/player/city/shared_cantina_tatooine.iff"
 
 objvars =+["healing.canhealshock"=1, "safeLogout"=1]
 
+scripts = ["structure.municipal.cantina"]
+
 updateRanges[UR_near] = 0
 
 updateRanges[UR_normal] = 0

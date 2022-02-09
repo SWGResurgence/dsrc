@@ -1,4 +1,4 @@
-// cbarnes 032703
+// 
 
 @base object/weapon/ranged/heavy/base/shared_heavy_weapon_base.iff
 
@@ -8,9 +8,7 @@
 
 @class object_template 8
 
-objectName = "item_n" "heavy_pvp_n"
-detailedDescription = "item_n" "heavy_pvp_d"
-gameObjectType = GOT_weapon_ranged_rifle
+objectName = "weapon_name" "heavy_legendary_reaper_cannon"
+detailedDescription = "weapon_detail" "heavy_legendary_reaper_cannon"
+gameObjectType = GOT_weapon_heavy_special
 appearanceFilename = "appearance/wp_carbine_imperial_heavy.apt"
-
-

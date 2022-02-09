@@ -12474,4 +12474,23 @@ public class combat_actions extends script.systems.combat.combat_base {
         }
         return SCRIPT_CONTINUE;
     }
+    public int ent_lasting_performance(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        if (!isIdValid(target) || !pvpCanHelp(self, target) || vehicle.isVehicle(target) || isDead(target))
+        {
+            target = self;
+        }
+        if (!buff.canApplyBuff(target, "ent_lasting_performance_1"))
+        {
+            sendSystemMessage(self, new string_id("spam", "buff_wont_stack"));
+            sendCombatSpamMessage(self, new string_id("spam", "buff_wont_stack"), COMBAT_RESULT_GENERIC);
+            return SCRIPT_OVERRIDE;
+        }
+        boolean performed_buff = performMedicGroupBuff(self, target, "ent_lasting_performance", params);
+        if (!performed_buff)
+        {
+            return SCRIPT_OVERRIDE;
+        }
+        return SCRIPT_CONTINUE;
+    }
 }

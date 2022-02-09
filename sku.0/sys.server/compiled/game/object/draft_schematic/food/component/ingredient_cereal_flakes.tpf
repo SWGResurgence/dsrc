@@ -9,14 +9,14 @@
 
 @class draft_schematic_object_template 7
 
-itemsPerContainer = 25
+itemsPerContainer = 1000
 craftedObjectTemplate = "object/tangible/component/food/ingredient_cereal_flakes.iff"
 slots = [
 	[
 	optional = false,
 	name = "craft_food_ingredients_n" "cereal_concentrate",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_food_ingredients_n" "cereal_concentrate", ingredient="cereal", count=200]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_food_ingredients_n" "cereal_concentrate", ingredient="cereal", count=10]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -24,7 +24,7 @@ slots = [
 	optional = false,
 	name = "craft_food_ingredients_n" "water",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_food_ingredients_n" "water", ingredient="water", count=50]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_food_ingredients_n" "water", ingredient="water", count=25]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ]]

@@ -11,5 +11,3 @@ objectName = "" "tcg_wearable_black_corset_dress"
 detailedDescription = "" "tcg_wearable_black_corset_dress"
 
 appearanceFilename = "appearance/dress_tcg_s01_f.sat"
-
-clientDataFile = "clientdata/index/client_shared_index_1_and_2_6.cdf"

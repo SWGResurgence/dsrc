@@ -18,18 +18,18 @@ testColdSnare1	snare			1	buffs.genericDebuff	30	movement	30	health	-100	constitu
 testColdSnare2	snare			2	buffs.genericDebuff	60	movement	50	health	-250	constitution	-250		0		0	STATE_DIZZY	none			1	1		1	1	1	0	1	1	0	1	1	1
 testLongBuff	long			1	buffs.genericBuff	43200	health	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 frogBuff	frog	health		4	buffs.genericBuff	10800	healthPercent	50	constitutionPercent	75		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-bactaInfusion	healOverTime			1	command.bactaInfusion	24		0		0		0		0		0	STATE_NONE	handleClearBuffEffect	appearance/pt_heal_over_time.prt		1	0		0	1	0	0	1	1	0	1	1	1
-bactaInfusion_1	healOverTime			2	command.bactaInfusion	32		0		0		0		0		0	STATE_NONE	handleClearBuffEffect	appearance/pt_heal_over_time_1.prt		1	0		0	1	0	0	1	1	0	1	1	1
-bactaInfusion_2	healOverTime			3	command.bactaInfusion	40		0		0		0		0		0	STATE_NONE	handleClearBuffEffect	appearance/pt_heal_over_time_2.prt		1	0		0	1	0	0	1	1	0	1	1	1
-nutrientInjection	doctorHealth	health		1	command.nutrientInjection	1200	healthPercent	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-nutrientInjection_1	doctorHealth	health		2	command.nutrientInjection	2400	healthPercent	10	constitutionPercent	5		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-nutrientInjection_2	doctorHealth	health		3	command.nutrientInjection	2700	healthPercent	10	constitutionPercent	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-adrenalBoost	doctorHaste	haste		2	command.adrenalBoost	1200	combat_haste	15		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-adrenalBoost_1	doctorHaste	haste		4	command.adrenalBoost	2400	combat_haste	25		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-endorphineInjection	doctorStamina	stamina		1	command.endorphineInjection	1200	staminaPercent	5		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-endorphineInjection_1	doctorStamina	stamina		2	command.endorphineInjection	2400	staminaPercent	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-serotoninInjection	doctorWillpower	willpower		1	command.serotoninInjection	1200	willpowerPercent	5		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-serotoninInjection_1	doctorWillpower	willpower		2	command.serotoninInjection	2400	willpowerPercent	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+bactaInfusion	healOverTime			1	command.bactaInfusion	24		0		0		0		0		0	STATE_NONE	handleClearBuffEffect	appearance/pt_heal_over_time.prt		1	0		0	0	0	0	1	1	0	1	1	1
+bactaInfusion_1	healOverTime			2	command.bactaInfusion	32		0		0		0		0		0	STATE_NONE	handleClearBuffEffect	appearance/pt_heal_over_time_1.prt		1	0		0	0	0	0	1	1	0	1	1	1
+bactaInfusion_2	healOverTime			3	command.bactaInfusion	40		0		0		0		0		0	STATE_NONE	handleClearBuffEffect	appearance/pt_heal_over_time_2.prt		1	0		0	0	0	0	1	1	0	1	1	1
+nutrientInjection	doctorHealth	health		1	command.nutrientInjection	1200	healthPercent	10		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+nutrientInjection_1	doctorHealth	health		2	command.nutrientInjection	2400	healthPercent	10	constitutionPercent	5		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+nutrientInjection_2	doctorHealth	health		3	command.nutrientInjection	2700	healthPercent	10	constitutionPercent	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+adrenalBoost	doctorHaste	haste		2	command.adrenalBoost	1200	combat_haste	15		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+adrenalBoost_1	doctorHaste	haste		4	command.adrenalBoost	2400	combat_haste	25		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+endorphineInjection	doctorStamina	stamina		1	command.endorphineInjection	1200	staminaPercent	5		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+endorphineInjection_1	doctorStamina	stamina		2	command.endorphineInjection	2400	staminaPercent	10		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+serotoninInjection	doctorWillpower	willpower		1	command.serotoninInjection	1200	willpowerPercent	5		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+serotoninInjection_1	doctorWillpower	willpower		2	command.serotoninInjection	2400	willpowerPercent	10		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 hemorrhage	cmStamina			1	command.hemorrhage	120	staminaPercent	-25		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 hemorrhage_1	cmStamina			2	command.hemorrhage	240	staminaPercent	-50		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 traumatize	cmWillpower			1	command.traumatize	120	willpowerPercent	-25		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
@@ -115,114 +115,114 @@ onfire	onfire			1	state.onFire	-1		0		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	
 acid	acid			1	state.acid	-1		0		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 energy	energy			1	state.energy	-1		0		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 healOverTime	healOverTime			1	command.me_hot	-1		0		0		0		0		0	STATE_NONE	none			1	0		0	1	0	0	1	1	0	1	1	1
-armorHinderanceMove	armorMove			1	buffs.armorHinderance	1		0		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
-armorHinderanceAccuracy	armorAcc			1	buffs.armorHinderance	1		0		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
-armorHinderanceFireRate	armorRof			1	buffs.armorHinderance	1		0		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
-weaponHinderance	weapon			1	buffs.weaponHinderance	-1	movement	0		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
-dessert_bofa_treat	food			1	buffs.foodDessert	2700	strength_modified	5	constitution_modified	5		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_travel_biscuits	food			1	buffs.foodMeal	2700	agility_modified	20	movement	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_spiced_tea	food			1	buffs.foodBeverage	2700	precision_modified	10	constitution_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_blob_candy	food			1	buffs.foodDessert	2700	stamina_modified	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_exo_protein_wafers	food			1	buffs.foodMeal	2700	stamina_modified	5	luck_modified	5		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_aitha	food			1	buffs.foodBeverage	2700	luck_modified	35		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_crispic	food			1	buffs.foodMeal	2700	precision_modified	20	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_caf	food			1	buffs.foodBeverage	2700	strength_modified	10	constitution_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_pkneb	food			1	buffs.foodDessert	2700	strength_modified	5	precision_modified	3		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_kanali_wafers	food			1	buffs.foodMeal	2700	constitution_modified	20		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_ruby_bliel	food			1	buffs.foodBeverage	2700	agility_modified	5	stamina_modified	5		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_jawa_beer	food			1	buffs.foodBeverage	2700	agility_modified	5	luck_modified	3		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_starshine_surprise	food			1	buffs.foodBeverage	2700	milk_quantity_modified	1	milk_exceptional_modified	5	milk_stun_modified	25		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_teltier_noodles	food			1	buffs.foodMeal	2700	luck_modified	15	constitution_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_air_cake	food			1	buffs.foodDessert	2700	strength_modified	10	precision_modified	5		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_almond_kwevvu_crisp_munchies	food			1	buffs.foodDessert	2700	agility_modified	10	stamina_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_blap_biscuit	food			1	buffs.foodDessert	2700	luck_modified	30	stamina_modified	20		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_synthsteak	food			1	buffs.foodMeat	2700	luck_modified	30	constitution_modified	20		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_cho_nor_hoola	food			1	buffs.foodMeal	2700	luck_modified	45		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_blood_chowder	food			1	buffs.foodMeal	2700	constitution_modified	40	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_veghash	food			1	buffs.foodVegetable	2700	creature_harvesting	15		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_karkan_ribenes	food			1	buffs.foodMeat	2700	agility_modified	40		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_trimpian	food			1	buffs.foodMeal	2700	expertise_healing_all	5	constitution_modified	40		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_ormachek	food			1	buffs.foodMeal	2700	precision_modified	50	stamina_modified	30		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_havla	food			1	buffs.foodVegetable	2700	strength_modified	50	stamina_modified	40		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_gruuvan_shaal	food			1	buffs.foodMeal	2700	precision_modified	80		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_scrimpi	food			1	buffs.foodMeat	2700	expertise_healing_all	5	stamina_modified	40		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_ahrisa	food			1	buffs.foodMeal	2700	absorption_poison	10	resistance_poison	3		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_rakririan_burnout_sauce	food			1	buffs.foodMeal	2700	strength_modified	80	precision_modified	40		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_vegeparsine	food			1	buffs.foodVegetable	2700	agility_modified	80	constitution_modified	40		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_bivoli_tempari	food			1	buffs.foodMeal	2700	stamina_modified	80	constitution_modified	40		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_terratta	food			1	buffs.foodVegetable	2700	constitution_modified	80	stamina_modified	40		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_pastebread	food			1	buffs.foodDessert	2700	agility_modified	20	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_won_won	food			1	buffs.foodDessert	2700	agility_modified	10	constitution_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_chandad	food			1	buffs.foodDessert	2700	surveying	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_pyollian_cake	food			1	buffs.foodDessert	2700	script_var	7		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_dweezel	food			1	buffs.foodDessert	2700	stamina_modified	40		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_felbar	food			1	buffs.foodDessert	2700	luck_modified	45		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_citros_snow_cake	food			1	buffs.foodDessert	2700	luck_modified	50	stamina_modified	30		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_pikatta_pie	food			1	buffs.foodDessert	2700	constitution_modified	60	precision_modified	20		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_gorrnar	food			1	buffs.foodDessert	2700	stamina_modified	50	constitution_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_kiwik_clusjo_swirl	food			1	buffs.foodDessert	2700	agility_modified	30	constitution_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_cavaellin_creams	food			1	buffs.foodDessert	2700	resistance_incapacitation	2		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_vagnerian_canape	food			1	buffs.foodDessert	2700	agility_modified	70	stamina_modified	15	constitution_modified	15		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_sweesonberry_rolls	food			1	buffs.foodDessert	2700	luck_modified	50	constitution_modified	30		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_smugglers_delight	food			1	buffs.foodDessert	2700	resistance_spice_downer	2		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_gralinyn_juice	food			1	buffs.foodBeverage	2700	stamina_modified	40		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_deuterium_pyro	food			1	buffs.foodBeverage	2700	precision_modified	30	stamina_modified	20		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_corellian_ale	food			1	buffs.foodBeverage	2700	strength_modified	30	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_blue_milk	food			1	buffs.foodBeverage	2700	stamina_modified	10	constitution_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_durindfire	food			1	buffs.foodBeverage	2700	stamina_modified	30	constitution_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_veronian_berry_wine	food			1	buffs.foodBeverage	2700	absorption_bleeding	10	resistance_bleeding	3		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_ithorian_mist	food			1	buffs.foodBeverage	2700	absorption_fire	10	resistance_fire	3		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_corellian_brandy	food			1	buffs.foodBeverage	2700	strength_modified	30	constitution_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_tssolok	food			1	buffs.foodBeverage	2700	precision_modified	50	constitution_modified	30		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_vasarian_brandy	food			1	buffs.foodBeverage	2700	strength_modified	50	constitution_modified	40		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_accarragm	food			1	buffs.foodBeverage	2700	agility_modified	80	movement	27		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_garrmorl	food			1	buffs.foodBeverage	2700	constitution_modified	40	strength_modified	15	precision_modified	15		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_vayerbok	food			1	buffs.foodBeverage	2700	agility_modified	80	stamina_modified	40		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_bespin_port	food			1	buffs.foodBeverage	2700	script_var	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_elshandruu_pica_thundercloud	food			1	buffs.foodBeverage	2700	agility_modified	70	constitution_modified	15	stamina_modified	15		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_breath_of_heaven	food			1	buffs.foodBeverage	2700	constitution_modified	80	expertise_dodge	3		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_flameout	food			1	buffs.foodBeverage	2700	agility_modified	80	expertise_strikethrough_chance	3	combat_strikethrough_value	30		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_mandalorian_wine	food			1	buffs.foodBeverage	2700	strength_modified	80	constitution_modified	40		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_thakitillo	food			1	buffs.foodMeal	2700	stamina_modified	80	expertise_parry	3		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_vercupti_of_agazza_boleruuee	food			1	buffs.foodMeal	2700	precision_modified	80	expertise_evasion_chance	3	combat_evasion_value	30		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_deneelian_fizz_pudding	food			1	buffs.foodDessert	2700	luck_modified	80	expertise_block_chance	3	combat_block_value	30		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_luilris_mushroom_pie	food			1	buffs.foodDessert	2700	constitution_modified	100	stamina_modified	100		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_warrl_surprise	food			1	buffs.foodBeverage	900	agility_modified	55	strength_modified	20	constitution_modified	20		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-tasty_beverage	food			1	buffs.foodBeverage	120	constitution_modified	5	agility_modified	5	stamina_modified	5	luck_modified	5		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-shadowpaw	spice			1	buffs.spiceAction	3600	agility_modified	-25	stamina_modified	50		0		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-shadowpaw_01	spice			1	buffs.spiceAction	3600	agility_modified	-25	stamina_modified	50		0		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-scramjet	spice			1	buffs.spiceHealth	3600	agility_modified	50	stamina_modified	-12	luck_modified	-12		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-scramjet_01	spice			1	buffs.spiceHealth	3600	agility_modified	50	stamina_modified	-12	luck_modified	-12		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-grey_gabaki	spice			1	buffs.spiceMind	3600	constitution_modified	-25	luck_modified	50		0		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-grey_gabaki_01	spice			1	buffs.spiceMind	3600	constitution_modified	-25	luck_modified	50		0		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-sweetblossom	spice			2	buffs.spiceHealth	3600	constitution_modified	25	agility_modified	50	stamina_modified	-25	luck_modified	-25		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-sweetblossom_01	spice			2	buffs.spiceHealth	3600	constitution_modified	-25	agility_modified	50	stamina_modified	-25	luck_modified	25		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-giggledust	spice			2	buffs.spiceAction	3600	stamina_modified	50	luck_modified	-25		0		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-giggledust_01	spice			2	buffs.spiceAction	3600	stamina_modified	50	luck_modified	-25		0		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-yarrock	spice			2	buffs.spiceMind	3600	constitution_modified	25	agility_modified	-30	luck_modified	50		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-yarrock_01	spice			2	buffs.spiceMind	3600	constitution_modified	25	agility_modified	-25	luck_modified	75		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-sedative_h4b	spice			2	buffs.spiceHealth	3600	agility_modified	50	stamina_modified	-30	luck_modified	25		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-sedative_h4b_01	spice			2	buffs.spiceHealth	3600	strength_modified	50	stamina_modified	-30	luck_modified	25		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-pyrepenol	spice			2	buffs.spiceHealth	3600	constitution_modified	50	agility_modified	25	luck_modified	-30		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-pyrepenol_01	spice			2	buffs.spiceHealth	3600	constitution_modified	50	agility_modified	25	luck_modified	-30		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-droid_lube	spice			2	buffs.spiceAction	3600	constitution_modified	50	agility_modified	-30	stamina_modified	25		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-droid_lube_01	spice			2	buffs.spiceAction	3600	constitution_modified	50	agility_modified	-30	stamina_modified	25		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-thruster_head	spice			3	buffs.spicePill	3600	constitution_modified	-15	agility_modified	25	stamina_modified	-15	luck_modified	50		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-thruster_head_01	spice			3	buffs.spicePill	3600	constitution_modified	-15	agility_modified	25	stamina_modified	-15	luck_modified	75		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-gunjack	spice			3	buffs.spicePill	3600	constitution_modified	25	agility_modified	25	stamina_modified	-50	luck_modified	50		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-gunjack_01	spice			3	buffs.spicePill	3600	constitution_modified	25	agility_modified	25	precision_modified	-50	luck_modified	50		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-crash_n_burn	spice			3	buffs.spicePill	3600	constitution_modified	-50	agility_modified	50	stamina_modified	25	luck_modified	25		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-crash_n_burn_01	spice			3	buffs.spicePill	3600	strength_modified	-50	agility_modified	75	stamina_modified	25	luck_modified	75		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-neutron_pixey	spice			4	buffs.spiceNeedle	3600	constitution_modified	50	agility_modified	50	stamina_modified	50	luck_modified	-50		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-neutron_pixey_01	spice			4	buffs.spiceNeedle	3600	constitution_modified	60	agility_modified	60	stamina_modified	60	luck_modified	-50		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-muon_gold	spice			4	buffs.spiceNeedle	3600	constitution_modified	50	agility_modified	50	stamina_modified	-50	luck_modified	50		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-muon_gold_01	spice			4	buffs.spiceNeedle	3600	constitution_modified	60	agility_modified	60	precision_modified	-50	luck_modified	60		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-booster_blue	spice			4	buffs.spiceNeedle	3600	constitution_modified	50	agility_modified	-50	stamina_modified	50	luck_modified	50		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-booster_blue_01	spice			4	buffs.spiceNeedle	3600	constitution_modified	60	agility_modified	-25	stamina_modified	60	luck_modified	60		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-kwi_boost	spice			4	buffs.spicePill	3600	constitution_modified	-50	agility_modified	50	stamina_modified	50	luck_modified	50		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-kwi_boost_01	spice			4	buffs.spicePill	3600	constitution_modified	-50	agility_modified	50	stamina_modified	50	luck_modified	50		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
-kliknik_boost	spice			4	buffs.spicePill	3600	constitution_modified	10	agility_modified	20	stamina_modified	20	luck_modified	10		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	1	1	0	1	1	0	1	1	1
-kliknik_boost_01	spice			4	buffs.spicePill	3600	constitution_modified	10	agility_modified	20	stamina_modified	20	luck_modified	10		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	1	1	0	1	1	0	1	1	1
+armorHinderanceMove	armorMove			1	buffs.armorHinderance	1		0		0		0		0		0	STATE_NONE	none			1	1		0	0	1	0	1	1	0	1	1	1
+armorHinderanceAccuracy	armorAcc			1	buffs.armorHinderance	1		0		0		0		0		0	STATE_NONE	none			1	1		0	0	1	0	1	1	0	1	1	1
+armorHinderanceFireRate	armorRof			1	buffs.armorHinderance	1		0		0		0		0		0	STATE_NONE	none			1	1		0	0	1	0	1	1	0	1	1	1
+weaponHinderance	weapon			1	buffs.weaponHinderance	-1	movement	0		0		0		0		0	STATE_NONE	none			1	1		0	0	1	0	1	1	0	1	1	1
+dessert_bofa_treat	food			1	buffs.foodDessert	2700	strength_modified	5	constitution_modified	5		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_travel_biscuits	food			1	buffs.foodMeal	2700	agility_modified	20	movement	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_spiced_tea	food			1	buffs.foodBeverage	2700	precision_modified	10	constitution_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_blob_candy	food			1	buffs.foodDessert	2700	stamina_modified	10		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_exo_protein_wafers	food			1	buffs.foodMeal	2700	stamina_modified	5	luck_modified	5		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_aitha	food			1	buffs.foodBeverage	2700	luck_modified	35		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_crispic	food			1	buffs.foodMeal	2700	precision_modified	20	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_caf	food			1	buffs.foodBeverage	2700	strength_modified	10	constitution_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_pkneb	food			1	buffs.foodDessert	2700	strength_modified	5	precision_modified	3		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_kanali_wafers	food			1	buffs.foodMeal	2700	constitution_modified	20		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_ruby_bliel	food			1	buffs.foodBeverage	2700	agility_modified	5	stamina_modified	5		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_jawa_beer	food			1	buffs.foodBeverage	2700	agility_modified	5	luck_modified	3		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_starshine_surprise	food			1	buffs.foodBeverage	2700	milk_quantity_modified	1	milk_exceptional_modified	5	milk_stun_modified	25		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_teltier_noodles	food			1	buffs.foodMeal	2700	luck_modified	15	constitution_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_air_cake	food			1	buffs.foodDessert	2700	strength_modified	10	precision_modified	5		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_almond_kwevvu_crisp_munchies	food			1	buffs.foodDessert	2700	agility_modified	10	stamina_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_blap_biscuit	food			1	buffs.foodDessert	2700	luck_modified	30	stamina_modified	20		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_synthsteak	food			1	buffs.foodMeat	2700	luck_modified	30	constitution_modified	20		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_cho_nor_hoola	food			1	buffs.foodMeal	2700	luck_modified	45		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_blood_chowder	food			1	buffs.foodMeal	2700	constitution_modified	40	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_veghash	food			1	buffs.foodVegetable	2700	creature_harvesting	15		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_karkan_ribenes	food			1	buffs.foodMeat	2700	agility_modified	40		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_trimpian	food			1	buffs.foodMeal	2700	expertise_healing_all	5	constitution_modified	40		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_ormachek	food			1	buffs.foodMeal	2700	precision_modified	50	stamina_modified	30		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_havla	food			1	buffs.foodVegetable	2700	strength_modified	50	stamina_modified	40		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_gruuvan_shaal	food			1	buffs.foodMeal	2700	precision_modified	80		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_scrimpi	food			1	buffs.foodMeat	2700	expertise_healing_all	5	stamina_modified	40		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_ahrisa	food			1	buffs.foodMeal	2700	absorption_poison	10	resistance_poison	3		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_rakririan_burnout_sauce	food			1	buffs.foodMeal	2700	strength_modified	80	precision_modified	40		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_vegeparsine	food			1	buffs.foodVegetable	2700	agility_modified	80	constitution_modified	40		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_bivoli_tempari	food			1	buffs.foodMeal	2700	stamina_modified	80	constitution_modified	40		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_terratta	food			1	buffs.foodVegetable	2700	constitution_modified	80	stamina_modified	40		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_pastebread	food			1	buffs.foodDessert	2700	agility_modified	20	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_won_won	food			1	buffs.foodDessert	2700	agility_modified	10	constitution_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_chandad	food			1	buffs.foodDessert	2700	surveying	10		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_pyollian_cake	food			1	buffs.foodDessert	2700	script_var	7		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_dweezel	food			1	buffs.foodDessert	2700	stamina_modified	40		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_felbar	food			1	buffs.foodDessert	2700	luck_modified	45		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_citros_snow_cake	food			1	buffs.foodDessert	2700	luck_modified	50	stamina_modified	30		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_pikatta_pie	food			1	buffs.foodDessert	2700	constitution_modified	60	precision_modified	20		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_gorrnar	food			1	buffs.foodDessert	2700	stamina_modified	50	constitution_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_kiwik_clusjo_swirl	food			1	buffs.foodDessert	2700	agility_modified	30	constitution_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_cavaellin_creams	food			1	buffs.foodDessert	2700	resistance_incapacitation	2		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_vagnerian_canape	food			1	buffs.foodDessert	2700	agility_modified	70	stamina_modified	15	constitution_modified	15		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_sweesonberry_rolls	food			1	buffs.foodDessert	2700	luck_modified	50	constitution_modified	30		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_smugglers_delight	food			1	buffs.foodDessert	2700	resistance_spice_downer	2		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_gralinyn_juice	food			1	buffs.foodBeverage	2700	stamina_modified	40		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_deuterium_pyro	food			1	buffs.foodBeverage	2700	precision_modified	30	stamina_modified	20		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_corellian_ale	food			1	buffs.foodBeverage	2700	strength_modified	30	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_blue_milk	food			1	buffs.foodBeverage	2700	stamina_modified	10	constitution_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_durindfire	food			1	buffs.foodBeverage	2700	stamina_modified	30	constitution_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_veronian_berry_wine	food			1	buffs.foodBeverage	2700	absorption_bleeding	10	resistance_bleeding	3		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_ithorian_mist	food			1	buffs.foodBeverage	2700	absorption_fire	10	resistance_fire	3		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_corellian_brandy	food			1	buffs.foodBeverage	2700	strength_modified	30	constitution_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_tssolok	food			1	buffs.foodBeverage	2700	precision_modified	50	constitution_modified	30		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_vasarian_brandy	food			1	buffs.foodBeverage	2700	strength_modified	50	constitution_modified	40		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_accarragm	food			1	buffs.foodBeverage	2700	agility_modified	80	movement	27		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_garrmorl	food			1	buffs.foodBeverage	2700	constitution_modified	40	strength_modified	15	precision_modified	15		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_vayerbok	food			1	buffs.foodBeverage	2700	agility_modified	80	stamina_modified	40		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_bespin_port	food			1	buffs.foodBeverage	2700	script_var	10		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_elshandruu_pica_thundercloud	food			1	buffs.foodBeverage	2700	agility_modified	70	constitution_modified	15	stamina_modified	15		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_breath_of_heaven	food			1	buffs.foodBeverage	2700	constitution_modified	80	expertise_dodge	3		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_flameout	food			1	buffs.foodBeverage	2700	agility_modified	80	expertise_strikethrough_chance	3	combat_strikethrough_value	30		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_mandalorian_wine	food			1	buffs.foodBeverage	2700	strength_modified	80	constitution_modified	40		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_thakitillo	food			1	buffs.foodMeal	2700	stamina_modified	80	expertise_parry	3		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_vercupti_of_agazza_boleruuee	food			1	buffs.foodMeal	2700	precision_modified	80	expertise_evasion_chance	3	combat_evasion_value	30		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_deneelian_fizz_pudding	food			1	buffs.foodDessert	2700	luck_modified	80	expertise_block_chance	3	combat_block_value	30		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_luilris_mushroom_pie	food			1	buffs.foodDessert	2700	constitution_modified	100	stamina_modified	100		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_warrl_surprise	food			1	buffs.foodBeverage	900	agility_modified	55	strength_modified	20	constitution_modified	20		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+tasty_beverage	food			1	buffs.foodBeverage	120	constitution_modified	5	agility_modified	5	stamina_modified	5	luck_modified	5		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+shadowpaw	spice			1	buffs.spiceAction	3600	agility_modified	-25	stamina_modified	50		0		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+shadowpaw_01	spice			1	buffs.spiceAction	3600	agility_modified	-25	stamina_modified	50		0		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+scramjet	spice			1	buffs.spiceHealth	3600	agility_modified	50	stamina_modified	-12	luck_modified	-12		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+scramjet_01	spice			1	buffs.spiceHealth	3600	agility_modified	50	stamina_modified	-12	luck_modified	-12		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+grey_gabaki	spice			1	buffs.spiceMind	3600	constitution_modified	-25	luck_modified	50		0		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+grey_gabaki_01	spice			1	buffs.spiceMind	3600	constitution_modified	-25	luck_modified	50		0		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+sweetblossom	spice			2	buffs.spiceHealth	3600	constitution_modified	25	agility_modified	50	stamina_modified	-25	luck_modified	-25		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+sweetblossom_01	spice			2	buffs.spiceHealth	3600	constitution_modified	-25	agility_modified	50	stamina_modified	-25	luck_modified	25		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+giggledust	spice			2	buffs.spiceAction	3600	stamina_modified	50	luck_modified	-25		0		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+giggledust_01	spice			2	buffs.spiceAction	3600	stamina_modified	50	luck_modified	-25		0		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+yarrock	spice			2	buffs.spiceMind	3600	constitution_modified	25	agility_modified	-30	luck_modified	50		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+yarrock_01	spice			2	buffs.spiceMind	3600	constitution_modified	25	agility_modified	-25	luck_modified	75		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+sedative_h4b	spice			2	buffs.spiceHealth	3600	agility_modified	50	stamina_modified	-30	luck_modified	25		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+sedative_h4b_01	spice			2	buffs.spiceHealth	3600	strength_modified	50	stamina_modified	-30	luck_modified	25		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+pyrepenol	spice			2	buffs.spiceHealth	3600	constitution_modified	50	agility_modified	25	luck_modified	-30		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+pyrepenol_01	spice			2	buffs.spiceHealth	3600	constitution_modified	50	agility_modified	25	luck_modified	-30		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+droid_lube	spice			2	buffs.spiceAction	3600	constitution_modified	50	agility_modified	-30	stamina_modified	25		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+droid_lube_01	spice			2	buffs.spiceAction	3600	constitution_modified	50	agility_modified	-30	stamina_modified	25		0		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+thruster_head	spice			3	buffs.spicePill	3600	constitution_modified	-15	agility_modified	25	stamina_modified	-15	luck_modified	50		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+thruster_head_01	spice			3	buffs.spicePill	3600	constitution_modified	-15	agility_modified	25	stamina_modified	-15	luck_modified	75		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+gunjack	spice			3	buffs.spicePill	3600	constitution_modified	25	agility_modified	25	stamina_modified	-50	luck_modified	50		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+gunjack_01	spice			3	buffs.spicePill	3600	constitution_modified	25	agility_modified	25	precision_modified	-50	luck_modified	50		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+crash_n_burn	spice			3	buffs.spicePill	3600	constitution_modified	-50	agility_modified	50	stamina_modified	25	luck_modified	25		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+crash_n_burn_01	spice			3	buffs.spicePill	3600	strength_modified	-50	agility_modified	75	stamina_modified	25	luck_modified	75		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+neutron_pixey	spice			4	buffs.spiceNeedle	3600	constitution_modified	50	agility_modified	50	stamina_modified	50	luck_modified	-50		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+neutron_pixey_01	spice			4	buffs.spiceNeedle	3600	constitution_modified	60	agility_modified	60	stamina_modified	60	luck_modified	-50		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+muon_gold	spice			4	buffs.spiceNeedle	3600	constitution_modified	50	agility_modified	50	stamina_modified	-50	luck_modified	50		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+muon_gold_01	spice			4	buffs.spiceNeedle	3600	constitution_modified	60	agility_modified	60	precision_modified	-50	luck_modified	60		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+booster_blue	spice			4	buffs.spiceNeedle	3600	constitution_modified	50	agility_modified	-50	stamina_modified	50	luck_modified	50		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+booster_blue_01	spice			4	buffs.spiceNeedle	3600	constitution_modified	60	agility_modified	-25	stamina_modified	60	luck_modified	60		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+kwi_boost	spice			4	buffs.spicePill	3600	constitution_modified	-50	agility_modified	50	stamina_modified	50	luck_modified	50		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+kwi_boost_01	spice			4	buffs.spicePill	3600	constitution_modified	-50	agility_modified	50	stamina_modified	50	luck_modified	50		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
+kliknik_boost	spice			4	buffs.spicePill	3600	constitution_modified	10	agility_modified	20	stamina_modified	20	luck_modified	10		0	STATE_NONE	handleSpiceDownerEffect			1	0		1	0	1	0	1	1	0	1	1	1
+kliknik_boost_01	spice			4	buffs.spicePill	3600	constitution_modified	10	agility_modified	20	stamina_modified	20	luck_modified	10		0	STATE_NONE	handleSpiceDownerEffect			1	0		0	0	1	0	1	1	0	1	1	1
 spice_downer	spiceDowner			1	buffs.spiceDowner	15	constitution_modified	-50	agility_modified	-50	stamina_modified	-50	luck_modified	-50		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 forceWeaken	forceWeaken	snare		1	jedi.forceWeaken	10	movement	0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 forceWeaken_1	forceWeaken	snare		2	jedi.forceWeaken	20	movement	0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
@@ -271,24 +271,24 @@ forceChoke	forceChoke			1	jedi.forceChoke	-1		0		0		0		0		0	STATE_NONE	none			1	
 innate_regeneration	innateHealthRegen	innateActionRegen		1	command.regeneration	300	constitutionPercent	20	staminaPercent	20		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 innate_wookiee_roar	innateWookieeRoar			1	command.wookieeRoar	300	private_accuracy_bonus	40	private_melee_dmg_bonus	40	private_defense_penalty	40		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 innate_vitalize	innateVitalize			1	command.vitalize	300	healthPercent	20	staminaPercent	-20	willpowerPercent	-20		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-newbie_bread	food			0	buffs.foodMeal	300	agility_modified	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-newbie_meat	food			0	buffs.foodMeat	300	agility_modified	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-newbie_melon	food			0	buffs.foodVegetable	300	stamina_modified	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-newbie_nectar	food			0	buffs.foodBeverage	300	luck_modified	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_berries	food			0	buffs.foodMeal	300	stamina_modified	10	luck_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_bugs	food			0	buffs.foodMeal	300	agility_modified	10	stamina_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fungus	food			0	buffs.foodMeal	300	agility_modified	10	luck_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_funk	food			0	buffs.foodMeal	300	constitution_modified	10	stamina_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_livers	food			0	buffs.foodMeal	300	constitution_modified	10	agility_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fruit_1	food			0	buffs.foodVegetable	300	stamina_modified	10	luck_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fruit_2	food			0	buffs.foodVegetable	300	agility_modified	10	stamina_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fruit_3	food			0	buffs.foodVegetable	300	agility_modified	10	luck_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fruit_4	food			0	buffs.foodVegetable	300	constitution_modified	10	stamina_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fruit_5	food			0	buffs.foodVegetable	300	constitution_modified	10	luck_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_vegetable_2	food			0	buffs.foodVegetable	300	constitution_modified	10	stamina_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_vegetable_3	food			0	buffs.foodVegetable	300	constitution_modified	10	agility_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_vegetable_4	food			0	buffs.foodVegetable	300	stamina_modified	10	luck_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_vegetable_5	food			0	buffs.foodVegetable	300	agility_modified	10	stamina_modified	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+newbie_bread	food			0	buffs.foodMeal	300	agility_modified	10		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+newbie_meat	food			0	buffs.foodMeat	300	agility_modified	10		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+newbie_melon	food			0	buffs.foodVegetable	300	stamina_modified	10		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+newbie_nectar	food			0	buffs.foodBeverage	300	luck_modified	10		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_berries	food			0	buffs.foodMeal	300	stamina_modified	10	luck_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_bugs	food			0	buffs.foodMeal	300	agility_modified	10	stamina_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fungus	food			0	buffs.foodMeal	300	agility_modified	10	luck_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_funk	food			0	buffs.foodMeal	300	constitution_modified	10	stamina_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_livers	food			0	buffs.foodMeal	300	constitution_modified	10	agility_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fruit_1	food			0	buffs.foodVegetable	300	stamina_modified	10	luck_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fruit_2	food			0	buffs.foodVegetable	300	agility_modified	10	stamina_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fruit_3	food			0	buffs.foodVegetable	300	agility_modified	10	luck_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fruit_4	food			0	buffs.foodVegetable	300	constitution_modified	10	stamina_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fruit_5	food			0	buffs.foodVegetable	300	constitution_modified	10	luck_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_vegetable_2	food			0	buffs.foodVegetable	300	constitution_modified	10	stamina_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_vegetable_3	food			0	buffs.foodVegetable	300	constitution_modified	10	agility_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_vegetable_4	food			0	buffs.foodVegetable	300	stamina_modified	10	luck_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_vegetable_5	food			0	buffs.foodVegetable	300	agility_modified	10	stamina_modified	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 enragePet	enragePet			1	command.enragepets	60	private_melee_dmg_bonus	25	private_defense_penalty	40		0		0		0	STATE_BERSERK	none			1	0		0	1	1	0	1	1	0	1	1	1
 emboldenPet	emboldenPet			1	command.emboldenpets	300	healthPercent	15		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 perform_inspire_1	performance			1	buffs.genericBuff	300	script_var	0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
@@ -322,23 +322,23 @@ fs_2h_acc	fs2Hand			1	buffs.spiceMind	300	twohandmelee_accuracy	10		0		0		0		0	S
 fs_2h_spd	fs2Hand			1	buffs.spiceAction	300	twohandmelee_speed	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 fs_unarmed_acc	fsUnarmed			1	buffs.spiceMind	300	unarmed_accuracy	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 fs_unarmed_spd	fsUnarmed			1	buffs.spiceAction	300	unarmed_speed	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-general_inspiration	inspiration			1	command.inspire	300	xp_bonus_general	10	faction_bonus	10		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-artisan_inspiration	inspiration			1	command.inspire	300	xp_bonus_artisan	12	craft_bonus_artisan	529437		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-entertainer_inspiration	inspiration			1	command.inspire	300	xp_bonus_entertainer	12	instrument_bonus	1	prop_bonus	1		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-scout_inspiration	inspiration			1	command.inspire	300	xp_bonus_scout	12		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-chef_inspiration	inspiration			1	command.inspire	300	xp_bonus_chef	15	craft_bonus_chef	4		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-tailor_inspiration	inspiration			1	command.inspire	300	xp_bonus_tailor	15	craft_bonus_tailor	8		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-bioengineer_inspiration	inspiration			1	command.inspire	300	xp_bonus_bioengineer	15	craft_bonus_bioengineer	8192		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-merchant_inspiration	inspiration			1	command.inspire	300	xp_bonus_merchant	15	hiring	20		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-imagedesigner_inspiration	inspiration			1	command.inspire	300	xp_bonus_imagedesigner	15	holoemote_bonus	50		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-musician_inspiration	inspiration			1	command.inspire	300	xp_bonus_musician	15	instrument_bonus	1		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-ranger_inspiration	inspiration			1	command.inspire	300	xp_bonus_ranger	15		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-architect_inspiration	inspiration			1	command.inspire	300	xp_bonus_architect	15	craft_bonus_architect	1536		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-droidengineer_inspiration	inspiration			1	command.inspire	300	xp_bonus_droidengineer	15	craft_bonus_droidengineer	32		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-weaponsmith_inspiration	inspiration			1	command.inspire	300	xp_bonus_weaponsmith	15	craft_bonus_weaponsmith	2049		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-shipwright_inspiration	inspiration			1	command.inspire	300	xp_bonus_shipwright	15	craft_bonus_shipwright	393216		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-armorsmith_inspiration	inspiration			1	command.inspire	300	xp_bonus_armorsmith	15	craft_bonus_armorsmith	2		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-dancer_inspiration	inspiration			1	command.inspire	300	xp_bonus_dancer	15	prop_bonus	1		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+general_inspiration	inspiration			1	command.inspire	300	xp_bonus_general	10	faction_bonus	10		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+artisan_inspiration	inspiration			1	command.inspire	300	xp_bonus_artisan	12	craft_bonus_artisan	529437		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+entertainer_inspiration	inspiration			1	command.inspire	300	xp_bonus_entertainer	12	instrument_bonus	1	prop_bonus	1		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+scout_inspiration	inspiration			1	command.inspire	300	xp_bonus_scout	12		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+chef_inspiration	inspiration			1	command.inspire	300	xp_bonus_chef	15	craft_bonus_chef	4		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+tailor_inspiration	inspiration			1	command.inspire	300	xp_bonus_tailor	15	craft_bonus_tailor	8		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+bioengineer_inspiration	inspiration			1	command.inspire	300	xp_bonus_bioengineer	15	craft_bonus_bioengineer	8192		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+merchant_inspiration	inspiration			1	command.inspire	300	xp_bonus_merchant	15	hiring	20		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+imagedesigner_inspiration	inspiration			1	command.inspire	300	xp_bonus_imagedesigner	15	holoemote_bonus	50		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+musician_inspiration	inspiration			1	command.inspire	300	xp_bonus_musician	15	instrument_bonus	1		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+ranger_inspiration	inspiration			1	command.inspire	300	xp_bonus_ranger	15		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+architect_inspiration	inspiration			1	command.inspire	300	xp_bonus_architect	15	craft_bonus_architect	1536		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+droidengineer_inspiration	inspiration			1	command.inspire	300	xp_bonus_droidengineer	15	craft_bonus_droidengineer	32		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+weaponsmith_inspiration	inspiration			1	command.inspire	300	xp_bonus_weaponsmith	15	craft_bonus_weaponsmith	2049		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+shipwright_inspiration	inspiration			1	command.inspire	300	xp_bonus_shipwright	15	craft_bonus_shipwright	393216		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+armorsmith_inspiration	inspiration			1	command.inspire	300	xp_bonus_armorsmith	15	craft_bonus_armorsmith	2		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+dancer_inspiration	inspiration			1	command.inspire	300	xp_bonus_dancer	15	prop_bonus	1		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 petRunSpeed_1	petRunSpeed			1	command.petRunSpeed	-1	movement	0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 petRunSpeed_2	petRunSpeed			2	command.petRunSpeed	-1	movement	0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 petRunSpeed_3	petRunSpeed			3	command.petRunSpeed	-1	movement	0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
@@ -358,7 +358,7 @@ petPinAttack_1	petPin	mez		2	command.petPinAttack	30	delay_attack	0	movement	0		
 petPinning	pinning			1	command.petPinAttack	20	script_var	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 petDefenseBreakAttack	petDefenseBreak			1	command.petDefenseBreakAttack	15	script_var	-100		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 petDefenseBreakAttack_1	petDefenseBreak			2	command.petDefenseBreakAttack	30	script_var	-250		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-toxic_dissolution	food			6	buffs.foodBeverage	60	script_var	-15		0		0		0		0	STATE_NONE	none			1	1	ScriptVar:MitigateDmg	1	1	1	0	1	1	0	1	1	1
+toxic_dissolution	food			6	buffs.foodBeverage	60	script_var	-15		0		0		0		0	STATE_NONE	none			1	1	ScriptVar:MitigateDmg	1	0	1	0	1	1	0	1	1	1
 corrosion	armorBreak			6	command.armorBreak	60	private_armor_break	40		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 obfuscation	accuracyDebuff			6	buffs.spiceMind	60	ranged_accuracy	-200	melee_accuracy	-200		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 confusion	defenseDebuff			6	buffs.spiceAction	60	ranged_defense	-200	melee_defense	-200		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
@@ -377,7 +377,7 @@ boss_slow_immunity	cmSlow	warcry		10	command.warcry	-1	combat_slow	1		0		0		0		0
 biological_suppression	healthDebuff	actionDebuff	mindDebuff	10	command.vitalize	180	healthPercent	-50	staminaPercent	-50	willpowerPercent	-50		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 crystal_buff	som_crystal_buff			6	command.centerOfBeing	500	expertise_healing_all	100	health	90000	expertise_damage_all	350	combat_divide_damage_taken	85	expertise_glancing_blow_all	100	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 crystal_buff_drained	som_drained_crystal			6	command.centerOfBeing	1800	expertise_critical_niche_all	5	expertise_damage_all	10	expertise_glancing_blow_all	5	constitution_modified	75	luck_modified	50	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-hunted	defenseDebuff			6	buffs.spiceAction	60	ranged_defense	-200	melee_defense	-200		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
+hunted	defenseDebuff			6	buffs.spiceAction	60	ranged_defense	-200	melee_defense	-200		0		0		0	STATE_NONE	none			1	1		1	0	1	0	1	1	0	1	1	1
 guardian_taint	mobSlow			6	command.thyroidRupture	60	glancing_blow_vulnerable	35		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 player_armor_break_immunity	armorBreak		nullification	10	command.armorBreak	20	private_armor_break	0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 player_snare_immunity	snare		nullification	10	command.kneecapShot	20	movement	0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -408,38 +408,38 @@ holocron_5	holobuff			5	jedi.forceCloak	900	willpower	150		0		0		0		0	STATE_NONE
 holocron_6	holobuff			6	jedi.forceCloak	900	constitution	150		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 holocron_7	holobuff			7	jedi.forceCloak	900	resistance_fire	30	absorption_fire	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 holocron_8	holobuff			8	jedi.forceCloak	35	constitutionPercent	75	staminaPercent	50		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-proc_fire_attack	procBuff			5	buffs.genericBuff	180	proc_buff	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-proc_fire_attack_1	procBuff			1	buffs.genericBuff	180	proc_buff	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-npeHealthBuff	doctorHealth			1	buffs.genericBuff	180	constitution_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-npeStaminaBuff	doctorStamina			1	buffs.genericBuff	180	stamina_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-npeDefenseBuff	genDefenseBonus			1	buffs.genericBuff	180	agility_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-npeMeleeAccuracy	genAccuracy			1	buffs.genericBuff	900	strength_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-npeRngAccuracy	genAccuracy			1	buffs.genericBuff	900	precision_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_meat_jerky	food			1	buffs.foodMeal	900	constitution_modified	3		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-trivialRngAcc	genAccuracy			1	buffs.genericBuff	-1	precision_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialMeleeAcc	genAccuracy			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialComboRngSpeed	genRngSpeed			1	buffs.genericBuff	-1	precision_modified	1	strength	1		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialComboMeleeSpeed	genMeleeSpeed			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialSlopeMove	genSlopeMove			1	buffs.genericBuff	-1	slope_move	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialUnarmedDamage	genUnarmedDamage			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialMeleeDefense	genMeleeDefense			1	buffs.genericBuff	-1	agility_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialRangedDefense	genRngDefense			1	buffs.genericBuff	-1	agility_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialComboResist	genDotResist			1	buffs.genericBuff	-1	resistance_poison	1	resistance_disease	1	resistance_bleeding	1	resistance_fire	1		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialHealEfficiency	genHealEfficiency			1	buffs.genericBuff	-1	healing_efficiency	1		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialPistolAccuracy	genAccuracy			1	buffs.genericBuff	-1	precision_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialCarbineAccuracy	genAccuracy			1	buffs.genericBuff	-1	precision_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialRifleAccuracy	genAccuracy			1	buffs.genericBuff	-1	precision_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialUnarmedAccuracy	genAccuracy			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialPolearmAccuracy	genAccuracy			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivial2hAccuracy	genAccuracy			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivial1hAccuracy	genAccuracy			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialPistolSpeed	genRngSpeed			1	buffs.genericBuff	-1	precision_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialCarbineSpeed	genRngSpeed			1	buffs.genericBuff	-1	precision_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialRifleSpeed	genRngSpeed			1	buffs.genericBuff	-1	precision_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialUnarmedSpeed	genMeleeSpeed			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivialPolearmSpeed	genMeleeSpeed			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivial2hSpeed	genMeleeSpeed			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-trivial1hSpeed	genMeleeSpeed			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+proc_fire_attack	procBuff			5	buffs.genericBuff	180	proc_buff	1		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+proc_fire_attack_1	procBuff			1	buffs.genericBuff	180	proc_buff	1		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+npeHealthBuff	doctorHealth			1	buffs.genericBuff	180	constitution_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+npeStaminaBuff	doctorStamina			1	buffs.genericBuff	180	stamina_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+npeDefenseBuff	genDefenseBonus			1	buffs.genericBuff	180	agility_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+npeMeleeAccuracy	genAccuracy			1	buffs.genericBuff	900	strength_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+npeRngAccuracy	genAccuracy			1	buffs.genericBuff	900	precision_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_meat_jerky	food			1	buffs.foodMeal	900	constitution_modified	3		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+trivialRngAcc	genAccuracy			1	buffs.genericBuff	-1	precision_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialMeleeAcc	genAccuracy			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialComboRngSpeed	genRngSpeed			1	buffs.genericBuff	-1	precision_modified	1	strength	1		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialComboMeleeSpeed	genMeleeSpeed			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialSlopeMove	genSlopeMove			1	buffs.genericBuff	-1	slope_move	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialUnarmedDamage	genUnarmedDamage			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialMeleeDefense	genMeleeDefense			1	buffs.genericBuff	-1	agility_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialRangedDefense	genRngDefense			1	buffs.genericBuff	-1	agility_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialComboResist	genDotResist			1	buffs.genericBuff	-1	resistance_poison	1	resistance_disease	1	resistance_bleeding	1	resistance_fire	1		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialHealEfficiency	genHealEfficiency			1	buffs.genericBuff	-1	healing_efficiency	1		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialPistolAccuracy	genAccuracy			1	buffs.genericBuff	-1	precision_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialCarbineAccuracy	genAccuracy			1	buffs.genericBuff	-1	precision_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialRifleAccuracy	genAccuracy			1	buffs.genericBuff	-1	precision_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialUnarmedAccuracy	genAccuracy			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialPolearmAccuracy	genAccuracy			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivial2hAccuracy	genAccuracy			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivial1hAccuracy	genAccuracy			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialPistolSpeed	genRngSpeed			1	buffs.genericBuff	-1	precision_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialCarbineSpeed	genRngSpeed			1	buffs.genericBuff	-1	precision_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialRifleSpeed	genRngSpeed			1	buffs.genericBuff	-1	precision_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialUnarmedSpeed	genMeleeSpeed			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivialPolearmSpeed	genMeleeSpeed			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivial2hSpeed	genMeleeSpeed			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+trivial1hSpeed	genMeleeSpeed			1	buffs.genericBuff	-1	strength_modified	3		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 sl_group_run	slGroupBuff			1	command.formUp	1800	group	0	movement	0	slope_move	50		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 sl_group_acc	slGroupBuff			1	command.steadyAim	1800	group	0	private_accuracy_bonus	150		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 sl_group_def	slGroupBuff			1	command.tactics	1800	group	0	private_defense_bonus	150		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -456,14 +456,14 @@ sl_dec_taunt	tauntBuff			2	command.combatFeint	600	private_taunt_bonus	-50		0		0
 sl_inc_dmg	dmgBuff			2	command.highYield	600	combat_multiply_damage_dealt	25		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 sl_inc_armor	armorBuff			2	command.powerBoost	600	private_armor_bonus	1200		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 calledShot	calledShot			1	command.calledShot	30		0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
-roadmapFsClicky	genBuff_4			50	buffs.genericBuff	30	strength_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-roadmapBhClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-roadmapCommandoClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-roadmapOfficerClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-roadmapMedicClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-roadmapSpyClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-roadmapSmugglerClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-roadmapEntertainerClicky	genBuff_4			50	buffs.genericBuff	120	healing_music_wound	25	healing_dance_wound	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+roadmapFsClicky	genBuff_4			50	buffs.genericBuff	30	strength_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+roadmapBhClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+roadmapCommandoClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+roadmapOfficerClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+roadmapMedicClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+roadmapSpyClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+roadmapSmugglerClicky	genBuff_4			50	buffs.genericBuff	30	precision_modified	125	stamina_modified	125		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+roadmapEntertainerClicky	genBuff_4			50	buffs.genericBuff	120	healing_music_wound	25	healing_dance_wound	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 towMeleeDs_1	genBuff_4			20	command.powerBoost	30	private_melee_dmg_shield	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towMeleeDs_2	genBuff_4			25	command.powerBoost	30	private_melee_dmg_shield	25		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towMeleeDs_3	genBuff_4			30	command.powerBoost	30	private_melee_dmg_shield	35		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -572,20 +572,20 @@ roadmapDefenseFinal	genBuff_1			80	command.inspire	-1	constitution_modified	100	
 roadmapMedicFinal	genBuff_1			80	command.inspire	-1	constitution_modified	60	agility_modified	60	precision_modified	60		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 roadmapEntertainerFinal	genBuff_1			80	command.inspire	-1	constitution_modified	80	agility_modified	80	precision_modified	80		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 roadmapTraderFinal	genBuff_1			80	command.inspire	-1	constitution_modified	100	agility_modified	100	precision_modified	100		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-npeVisualAcuity	genBuff_4			5	buffs.genericBuff	60	precision_modified	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-npeManualAcuity	genBuff_4			5	buffs.genericBuff	60	strength_modified	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-npeHealEff	genBuff_4			5	buffs.genericBuff	60	healing_efficiency	10		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_simple_tea	food			3	buffs.foodBeverage	900	stamina_modified	3		0		0		0		0	STATE_NONE	none			1	0	AttributeModifier	1	1	1	0	1	1	0	1	1	1
-npeHealthLongDuration	genBuff_3			3	buffs.spiceMind	900	constitution_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-npeStaminaLongDuration	genBuff_3			3	buffs.spiceAction	900	stamina_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-npeWillLongDuration	genBuff_3			3	buffs.spiceMind	900	agility_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-npeRngSpeedLongDuration	genBuff_4			4	buffs.spiceAction	900	precision_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-npeMeleeSpeedLongDuration	genBuff_4			3	buffs.spiceAction	900	strength_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-npeComboAccLongDuration	genBuff_4			3	buffs.genericBuff	900	precision_modified	5	strength_modified	5		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+npeVisualAcuity	genBuff_4			5	buffs.genericBuff	60	precision_modified	10		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+npeManualAcuity	genBuff_4			5	buffs.genericBuff	60	strength_modified	10		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+npeHealEff	genBuff_4			5	buffs.genericBuff	60	healing_efficiency	10		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_simple_tea	food			3	buffs.foodBeverage	900	stamina_modified	3		0		0		0		0	STATE_NONE	none			1	0	AttributeModifier	1	0	1	0	1	1	0	1	1	1
+npeHealthLongDuration	genBuff_3			3	buffs.spiceMind	900	constitution_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+npeStaminaLongDuration	genBuff_3			3	buffs.spiceAction	900	stamina_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+npeWillLongDuration	genBuff_3			3	buffs.spiceMind	900	agility_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+npeRngSpeedLongDuration	genBuff_4			4	buffs.spiceAction	900	precision_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+npeMeleeSpeedLongDuration	genBuff_4			3	buffs.spiceAction	900	strength_modified	5		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+npeComboAccLongDuration	genBuff_4			3	buffs.genericBuff	900	precision_modified	5	strength_modified	5		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 towHealthMinor	genBuff_3			19	command.regeneration	300	constitution_modified	30		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towCrystalOffenseBurst	genBuff_3			60	command.detonateDroid	1800	constitution_modified	120	precision_modified	120	strength_modified	120		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towCrystalDefenseBurst	genBuff_3			60	command.powerBoost	1800	constitution_modified	120	agility_modified	120		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-towCrystalDotImmunity	genBuff_4			60	buffs.spiceHealth	1800	expertise_dot_absorption_all	50	dot_resist_all	50		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+towCrystalDotImmunity	genBuff_4			60	buffs.spiceHealth	1800	expertise_dot_absorption_all	50	dot_resist_all	50		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 towHelmetAccuracy	genBuff_1			90	command.aim	-1	precision_modified	20	strength_modified	20		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 towGlovesHealEff	genBuff_1			90	command.sampledna	-1	agility_modified	20	stamina_modified	20		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 towCrystalUberCombat	towCrystal	haste		60	command.dazzle	1800	constitution_modified	200	stamina_modified	200	precision_modified	200	strength_modified	200		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -611,11 +611,11 @@ incognito	incognito			1	command.incognito	-1		0	invis	0		0		0		0	STATE_NONE	none
 startled	stealthFailure			1	command.traumatize	20	movement	30	combat_slow	30		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 caltropSnare	caltropSnare	snare		3	command.crippleAttack	15	movement	25		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 flashBang	flashBang			3	command.startleShot	10	precision_modified	-100	strength_modified	-100		0		0		0	STATE_BLINDED	none			1	1		1	1	1	0	1	1	0	1	1	1
-towArmorAssembly	genBuff_4			80	buffs.genericBuff	-1	armor_assembly	10		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-towWeaponAssembly	genBuff_4			80	buffs.genericBuff	-1	weapon_assembly	10		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-towDroidAssembly	genBuff_4			80	buffs.genericBuff	-1	droid_assembly	10		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-towMedAssembly	genBuff_4			80	buffs.genericBuff	-1	medicine_assembly	10		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-towFoodAssembly	genBuff_4			80	buffs.genericBuff	-1	food_assembly	10		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+towArmorAssembly	genBuff_4			80	buffs.genericBuff	-1	armor_assembly	10		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+towWeaponAssembly	genBuff_4			80	buffs.genericBuff	-1	weapon_assembly	10		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+towDroidAssembly	genBuff_4			80	buffs.genericBuff	-1	droid_assembly	10		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+towMedAssembly	genBuff_4			80	buffs.genericBuff	-1	medicine_assembly	10		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+towFoodAssembly	genBuff_4			80	buffs.genericBuff	-1	food_assembly	10		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 towFacGuardDefenseItem	genBuff_4			58	command.powerBoost	20	agility_modified	160		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towForemanCoolingItem	genBuff_4			58	command.countertoxinSpray	30	luck_modified	160		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towForemanBurstRun	burstrun	escape		1	command.burstRun	60	movement	0		0		0		0		0	STATE_NONE	removeBurstRun			1	0		1	1	1	0	1	1	0	1	1	1
@@ -661,7 +661,7 @@ insidiousMalady_1	malady			2	command.vitalize	15	healthPercent	-15		0		0		0		0	S
 insidiousMalady_2	malady			3	command.vitalize	15	healthPercent	-20		0		0		0		0	STATE_NONE	maladyRecourse_2			1	1		1	1	1	0	1	1	0	1	1	1
 insidiousMalady_3	malady			4	command.vitalize	20	healthPercent	-25		0		0		0		0	STATE_NONE	maladyRecourse_3			1	1		1	1	1	0	1	1	0	1	1	1
 insidiousMalady_4	malady			5	command.vitalize	25	healthPercent	-30		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
-euphoria	euphoria			1	buffs.genericBuff	45	staminaPercent	4000	willpowerPercent	4000	jedi_force_power_regen	300		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+euphoria	euphoria			1	buffs.genericBuff	45	staminaPercent	4000	willpowerPercent	4000	jedi_force_power_regen	300		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 sher_kar_rage	skRage			1	command.powerBoost	15	combat_multiply_damage_dealt	100		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 cloakOfLava	armorBreak			8	command.powerBoost	45	private_melee_dmg_shield	100	private_damage_shield	100	private_armor_bonus	6000		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 seethingAnger	cmSlow	root	snare	1	command.powerBoost	10	combat_multiply_damage_dealt	30		0		0		0		0	STATE_NONE	seetingAngerRecourse			1	0		0	1	1	0	1	1	0	1	1	1
@@ -669,7 +669,7 @@ seethingAnger_1	cmSlow	root	snare	1	command.powerBoost	10	combat_multiply_damage
 seethingAnger_2	cmSlow	root	snare	1	command.powerBoost	10	combat_multiply_damage_dealt	80		0		0		0		0	STATE_NONE	seetingAngerRecourse_2			1	0		0	1	1	0	1	1	0	1	1	1
 seethingAnger_3	cmSlow	root	snare	1	command.powerBoost	10	combat_multiply_damage_dealt	200		0		0		0		0	STATE_NONE	seetingAngerRecourse_3			1	0		0	1	1	0	1	1	0	1	1	1
 seethingAnger_4	cmSlow	root	snare	1	command.powerBoost	60	combat_multiply_damage_dealt	1000		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-drink_rancoraid	cmSnare			3	buffs.foodBeverage	180	movement_resist_snare	3		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+drink_rancoraid	cmSnare			3	buffs.foodBeverage	180	movement_resist_snare	3		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 decrepitStrike	cmSlow			4	command.thyroidRupture	30	combat_slow	80		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 sk_shockWave	mez			1	command.concussionShot	2	delay_attack	0	movement	0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 contentWornRngDef_1	genBuff_4			74	command.powerBoost	-1	agility_modified	15		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
@@ -906,11 +906,11 @@ sp_cc_dot	snare			55	command.sp_cc_dot	10	movement	0		0		0		0		0	STATE_NONE	none
 sp_assassins_mark_reac_proc	sp_reac_proc			56	command.sp_assassins_mark	45	reac_buff	0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 me_buff_health	medicConstitution			31	command.me_buff_health	600	constitution_modified	80		0		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		1	1	1	0	1	1	0	1	1	1
 fs_dm_cc_crit	snare			35	command.fs_dm_cc_crit	8	movement	0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
-dish_rations	food			5	buffs.foodMeal	3600	agility_modified	15		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_jaar	food			3	buffs.foodBeverage	3600	agility_modified	5	constitution_modified	5		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dish_dustcrepe	food			3	buffs.foodMeal	3600	luck_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-dessert_parwan_nutricake	food			15	buffs.foodDessert	3600	constitution_modified	70	expertise_healing_all	4		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-drink_tilla_tiil	food			20	buffs.foodBeverage	3600	stamina_modified	80	precision_modified	40		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+dish_rations	food			5	buffs.foodMeal	3600	agility_modified	15		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_jaar	food			3	buffs.foodBeverage	3600	agility_modified	5	constitution_modified	5		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dish_dustcrepe	food			3	buffs.foodMeal	3600	luck_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+dessert_parwan_nutricake	food			15	buffs.foodDessert	3600	constitution_modified	70	expertise_healing_all	4		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+drink_tilla_tiil	food			20	buffs.foodBeverage	3600	stamina_modified	80	precision_modified	40		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 invis_sp_diversion_stealth	invisibility			6	command.sp_without_a_trace	10	invis	0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 invis_sp_buff_invis_notrace_1	invisibility			6	command.sp_without_a_trace	-1	invis	0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 invis_sp_buff_invis_1	invisibility			5	command.sp_buff_invis	-1	invis	0	movement	0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
@@ -985,36 +985,36 @@ detectHiddenConsumable40	detectHidden			40	command.detectHiddenBuff	2700	detect_
 detectHiddenConsumable65	detectHidden			65	command.detectHiddenBuff	2700	detect_hidden	65		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 detectHiddenConsumable100	detectHidden			100	command.detectHiddenBuff	2700	detect_hidden	100		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 invis_sm_buff_invis_1	invisibility			5	command.camouflageSelf	30	invis	0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-pub28MeatPie	food			25	buffs.foodMeal	1200	constitution_modified	70		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+pub28MeatPie	food			25	buffs.foodMeal	1200	constitution_modified	70		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 cloning_sickness	testCloneSickDoNotUse			50	jedi.forceWeaken	300	healthPercent	-75	actionPercent	-75		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
-roadmapTraderClicky	genBuff_4			50	buffs.genericBuff	120	general_experimentation	25	general_assembly	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+roadmapTraderClicky	genBuff_4			50	buffs.genericBuff	120	general_experimentation	25	general_assembly	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 restuss_rebel_general_speech	inspiration			100	command.inspire	2400	precision_modified	40	constitution_modified	40		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-roadmapTraderClicky	genBuff_4			50	buffs.genericBuff	120	general_experimentation	25	general_assembly	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+roadmapTraderClicky	genBuff_4			50	buffs.genericBuff	120	general_experimentation	25	general_assembly	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 sarlaccSnare	sarlacc			1	command.thyroidRupture	300	movement	0	agility_modified	-100	precision_modified	-100	strength_modified	-100	luck_modified	-100	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_1	vr_familiar			1	buffs.genericBuff	-1	precision_modified	5	strength_modified	5	luck_modified	5		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_2	vr_familiar			2	buffs.genericBuff	-1	precision_modified	10	strength_modified	10	luck_modified	10		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_3	vr_familiar			3	buffs.genericBuff	-1	precision_modified	15	strength_modified	15	luck_modified	15		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_4	vr_familiar			4	buffs.genericBuff	-1	precision_modified	20	strength_modified	20	luck_modified	20		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_5	vr_familiar			5	buffs.genericBuff	-1	precision_modified	25	strength_modified	25	luck_modified	25		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_6	vr_familiar			6	buffs.genericBuff	-1	precision_modified	20	strength_modified	20	luck_modified	30		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_7	vr_familiar			7	buffs.genericBuff	-1	precision_modified	35	strength_modified	35	luck_modified	35		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_accuracy_8	vr_familiar			8	buffs.genericBuff	-1	precision_modified	100	strength_modified	100	luck_modified	100		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_1	vr_familiar			1	buffs.genericBuff	-1	constitution_modified	5	stamina_modified	5	agility_modified	5		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_2	vr_familiar			2	buffs.genericBuff	-1	constitution_modified	10	stamina_modified	10	agility_modified	10		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_3	vr_familiar			3	buffs.genericBuff	-1	constitution_modified	15	stamina_modified	15	agility_modified	15		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_4	vr_familiar			4	buffs.genericBuff	-1	constitution_modified	20	stamina_modified	20	agility_modified	20		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_5	vr_familiar			5	buffs.genericBuff	-1	constitution_modified	25	stamina_modified	25	agility_modified	25		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_6	vr_familiar			6	buffs.genericBuff	-1	constitution_modified	30	stamina_modified	30	agility_modified	30		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_7	vr_familiar			7	buffs.genericBuff	-1	constitution_modified	35	stamina_modified	35	agility_modified	35		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_health_8	vr_familiar			8	buffs.genericBuff	-1	constitution_modified	100	stamina_modified	100	agility_modified	100		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_1	vr_familiar			1	buffs.genericBuff	-1	agility_modified	5	constitution_modified	5	luck_modified	5		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_2	vr_familiar			2	buffs.genericBuff	-1	agility_modified	10	constitution_modified	10	luck_modified	10		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_3	vr_familiar			3	buffs.genericBuff	-1	agility_modified	15	constitution_modified	15	luck_modified	15		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_4	vr_familiar			4	buffs.genericBuff	-1	agility_modified	20	constitution_modified	20	luck_modified	20		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_5	vr_familiar			5	buffs.genericBuff	-1	agility_modified	25	constitution_modified	25	luck_modified	25		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_6	vr_familiar			6	buffs.genericBuff	-1	agility_modified	30	constitution_modified	30	luck_modified	30		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_7	vr_familiar			7	buffs.genericBuff	-1	agility_modified	35	constitution_modified	35	luck_modified	35		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-vr_familiar_defense_8	vr_familiar			8	buffs.genericBuff	-1	agility_modified	40	constitution_modified	100	luck_modified	100		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_1	vr_familiar			1	buffs.genericBuff	-1	precision_modified	5	strength_modified	5	luck_modified	5		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_2	vr_familiar			2	buffs.genericBuff	-1	precision_modified	10	strength_modified	10	luck_modified	10		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_3	vr_familiar			3	buffs.genericBuff	-1	precision_modified	15	strength_modified	15	luck_modified	15		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_4	vr_familiar			4	buffs.genericBuff	-1	precision_modified	20	strength_modified	20	luck_modified	20		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_5	vr_familiar			5	buffs.genericBuff	-1	precision_modified	25	strength_modified	25	luck_modified	25		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_6	vr_familiar			6	buffs.genericBuff	-1	precision_modified	20	strength_modified	20	luck_modified	30		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_7	vr_familiar			7	buffs.genericBuff	-1	precision_modified	35	strength_modified	35	luck_modified	35		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_accuracy_8	vr_familiar			8	buffs.genericBuff	-1	precision_modified	100	strength_modified	100	luck_modified	100		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_health_1	vr_familiar			1	buffs.genericBuff	-1	constitution_modified	5	stamina_modified	5	agility_modified	5		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_health_2	vr_familiar			2	buffs.genericBuff	-1	constitution_modified	10	stamina_modified	10	agility_modified	10		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_health_3	vr_familiar			3	buffs.genericBuff	-1	constitution_modified	15	stamina_modified	15	agility_modified	15		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_health_4	vr_familiar			4	buffs.genericBuff	-1	constitution_modified	20	stamina_modified	20	agility_modified	20		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_health_5	vr_familiar			5	buffs.genericBuff	-1	constitution_modified	25	stamina_modified	25	agility_modified	25		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_health_6	vr_familiar			6	buffs.genericBuff	-1	constitution_modified	30	stamina_modified	30	agility_modified	30		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_health_7	vr_familiar			7	buffs.genericBuff	-1	constitution_modified	35	stamina_modified	35	agility_modified	35		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_health_8	vr_familiar			8	buffs.genericBuff	-1	constitution_modified	100	stamina_modified	100	agility_modified	100		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_defense_1	vr_familiar			1	buffs.genericBuff	-1	agility_modified	5	constitution_modified	5	luck_modified	5		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_defense_2	vr_familiar			2	buffs.genericBuff	-1	agility_modified	10	constitution_modified	10	luck_modified	10		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_defense_3	vr_familiar			3	buffs.genericBuff	-1	agility_modified	15	constitution_modified	15	luck_modified	15		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_defense_4	vr_familiar			4	buffs.genericBuff	-1	agility_modified	20	constitution_modified	20	luck_modified	20		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_defense_5	vr_familiar			5	buffs.genericBuff	-1	agility_modified	25	constitution_modified	25	luck_modified	25		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_defense_6	vr_familiar			6	buffs.genericBuff	-1	agility_modified	30	constitution_modified	30	luck_modified	30		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_defense_7	vr_familiar			7	buffs.genericBuff	-1	agility_modified	35	constitution_modified	35	luck_modified	35		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_defense_8	vr_familiar			8	buffs.genericBuff	-1	agility_modified	40	constitution_modified	100	luck_modified	100		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 criticalColdEffect	criticalEffect			10	buffs.cryobanSnare	15	combat_multiply_damage_taken	10		0		0		0		0	STATE_NONE	applyCritImmunityBuff			1	1		1	1	1	0	1	1	0	1	1	1
 criticalAcidEffect	criticalEffect			10	command.concussionShot	3	critical_hit_vulnerable	75		0		0		0		0	STATE_NONE	applyCritImmunityBuff			1	1		1	1	1	0	1	1	0	1	1	1
 criticalElectricEffect	criticalEffect			10	command.shock	6	glancing_blow_vulnerable	75		0		0		0		0	STATE_NONE	applyCritImmunityBuff			1	1		1	1	1	0	1	1	0	1	1	1
@@ -1049,13 +1049,13 @@ proc_gcw_base_damage_b	gcwProcBuff			92	command.detonateDroid	180	proc_buff	1		0
 proc_gcw_base_damage_c	gcwProcBuff			93	command.detonateDroid	180	proc_buff	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 proc_gcw_base_damage_d	gcwProcBuff			94	command.detonateDroid	180	proc_buff	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 proc_gcw_base_damage_e	gcwProcBuff			95	command.detonateDroid	180	proc_buff	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-banner_buff_commando	banner_com			1	Roadmap.commando	1800	proc_buff	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-banner_buff_smuggler	banner_smug			1	Roadmap.smuggler	1800	luck_modified	100		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-banner_buff_medic	banner_med			1	Roadmap.medic	1800	constitution_modified	100		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-banner_buff_officer	banner_off			1	Roadmap.officer	1800	precision_modified	100		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-banner_buff_spy	banner_spy			1	Roadmap.spy	1800	agility_modified	100		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-banner_buff_bounty_hunter	banner_bh			1	Roadmap.bounty_hunter	1800	expertise_critical_niche_all	5		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-banner_buff_force_sensitive	banner_jedi			1	Roadmap.force_sensitive	1800	strength_modified	100		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+banner_buff_commando	banner_com			1	Roadmap.commando	1800	proc_buff	1		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+banner_buff_smuggler	banner_smug			1	Roadmap.smuggler	1800	luck_modified	100		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+banner_buff_medic	banner_med			1	Roadmap.medic	1800	constitution_modified	100		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+banner_buff_officer	banner_off			1	Roadmap.officer	1800	precision_modified	100		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+banner_buff_spy	banner_spy			1	Roadmap.spy	1800	agility_modified	100		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+banner_buff_bounty_hunter	banner_bh			1	Roadmap.bounty_hunter	1800	expertise_critical_niche_all	5		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+banner_buff_force_sensitive	banner_jedi			1	Roadmap.force_sensitive	1800	strength_modified	100		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 gcw_base_damage_shield_a	gcw_damage_shield			1	command.duelistStance	30	reac_buff	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_damage_shield_b	gcw_damage_shield			2	command.duelistStance	30	reac_buff	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_damage_shield_c	gcw_damage_shield			3	command.duelistStance	30	reac_buff	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -1140,14 +1140,14 @@ of_tactical_drop_3	genBuff_3			48	command.powerBoost	3600	constitution_modified	
 of_tactical_drop_4	genBuff_3			62	command.powerBoost	3600	constitution_modified	75	expertise_critical_niche_all	5	expertise_dodge	3	expertise_action_all	5		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 of_tactical_drop_5	genBuff_3			76	command.powerBoost	3600	constitution_modified	75	expertise_critical_niche_all	5	expertise_dodge	4	expertise_action_all	5	expertise_damage_all	5	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 of_tactical_drop_6	genBuff_3			90	command.powerBoost	3600	constitution_modified	100	expertise_critical_niche_all	7	expertise_dodge	5	expertise_action_all	7	expertise_damage_all	7	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-pvp_retaliation_ability	pvpOffensive			100	command.command_pvp_retaliation_ability	120	reac_buff	1		0		0		0		0	STATE_NONE	none	appearance/pt_officer_focus_fire.prt		1	0		1	1	1	0	1	1	0	1	1	1
-pvp_retaliation_rebel_ability	pvpOffensive			100	command.command_pvp_retaliation_rebel_ability	120	reac_buff	1		0		0		0		0	STATE_NONE	none	appearance/pt_officer_focus_fire.prt		1	0		1	1	1	0	1	1	0	1	1	1
-pvp_adrenaline_ability	pvp_adrenaline_ability			90	command.command_pvp_adrenaline_ability	120	reac_buff	1		0		0		0		0	STATE_NONE	none	appearance/pt_officer_tactics.prt		1	0		1	1	1	0	1	1	0	1	1	1
-pvp_adrenaline_rebel_ability	pvp_adrenaline_rebel_ability			90	command.command_pvp_adrenaline_rebel_ability	120	reac_buff	1		0		0		0		0	STATE_NONE	none	appearance/pt_officer_tactics.prt		1	0		1	1	1	0	1	1	0	1	1	1
-pvp_unstoppable_ability	pvp_unstoppable_ability			95	command.command_pvp_unstoppable_ability	120	reac_buff	1		0		0		0		0	STATE_NONE	none	appearance/pt_heal_over_time_2.prt		1	0		1	1	1	0	1	1	0	1	1	1
-pvp_unstoppable_rebel_ability	pvp_unstoppable_rebel_ability			95	command.command_pvp_unstoppable_rebel_ability	120	reac_buff	1		0		0		0		0	STATE_NONE	none	appearance/pt_heal_over_time_2.prt		1	0		1	1	1	0	1	1	0	1	1	1
-pvp_last_man_ability	pvp_last_man_ability			98	command.command_pvp_last_man_ability	300	avoid_incap_heal	7500		0		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		1	1	1	0	1	1	0	1	1	1
-pvp_last_man_rebel_ability	pvp_last_man_rebel_ability			98	command.command_pvp_last_man_rebel_ability	300	avoid_incap_heal	7500		0		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		1	1	1	0	1	1	0	1	1	1
+pvp_retaliation_ability	pvpOffensive			100	command.command_pvp_retaliation_ability	120	reac_buff	1		0		0		0		0	STATE_NONE	none	appearance/pt_officer_focus_fire.prt		1	0		1	0	1	0	1	1	0	1	1	1
+pvp_retaliation_rebel_ability	pvpOffensive			100	command.command_pvp_retaliation_rebel_ability	120	reac_buff	1		0		0		0		0	STATE_NONE	none	appearance/pt_officer_focus_fire.prt		1	0		1	0	1	0	1	1	0	1	1	1
+pvp_adrenaline_ability	pvp_adrenaline_ability			90	command.command_pvp_adrenaline_ability	120	reac_buff	1		0		0		0		0	STATE_NONE	none	appearance/pt_officer_tactics.prt		1	0		1	0	1	0	1	1	0	1	1	1
+pvp_adrenaline_rebel_ability	pvp_adrenaline_rebel_ability			90	command.command_pvp_adrenaline_rebel_ability	120	reac_buff	1		0		0		0		0	STATE_NONE	none	appearance/pt_officer_tactics.prt		1	0		1	0	1	0	1	1	0	1	1	1
+pvp_unstoppable_ability	pvp_unstoppable_ability			95	command.command_pvp_unstoppable_ability	120	reac_buff	1		0		0		0		0	STATE_NONE	none	appearance/pt_heal_over_time_2.prt		1	0		1	0	1	0	1	1	0	1	1	1
+pvp_unstoppable_rebel_ability	pvp_unstoppable_rebel_ability			95	command.command_pvp_unstoppable_rebel_ability	120	reac_buff	1		0		0		0		0	STATE_NONE	none	appearance/pt_heal_over_time_2.prt		1	0		1	0	1	0	1	1	0	1	1	1
+pvp_last_man_ability	pvp_last_man_ability			98	command.command_pvp_last_man_ability	300	avoid_incap_heal	7500		0		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		1	0	1	0	1	1	0	1	1	1
+pvp_last_man_rebel_ability	pvp_last_man_rebel_ability			98	command.command_pvp_last_man_rebel_ability	300	avoid_incap_heal	7500		0		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		1	0	1	0	1	1	0	1	1	1
 vehicle_at_rt	vehicle			1	command.bh_armor_duelist	-1	expertise_glancing_blow_ranged	20		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 vehicle_pvp_barc_rebel	vehicle			1	command.bh_armor_duelist	-1	expertise_glancing_blow_ranged	35		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 vehicle_pvp_barc_imperial	vehicle			1	command.bh_armor_duelist	-1	expertise_glancing_blow_ranged	35		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
@@ -1159,26 +1159,26 @@ vehicle_3	vehicle			1	command.detonateDroid	-1	expertise_glancing_blow_ranged	60
 vehicle_4	vehicle			1	command.detonateDroid	-1	expertise_glancing_blow_ranged	80		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 vehicle_5	vehicle			1	command.detonateDroid	-1	expertise_glancing_blow_ranged	90		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 exclude_self_exclusive_proxy_of_last_words	deadOfficersFTW			90	command.of_last_words	1	exclude_self	0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-shmiGraveBuff	genBuff_4			100	buffs.genericBuff	3600	strength_modified	60	stamina_modified	60	agility_modified	60	precision_modified	60	luck_modified	60	STATE_NONE	none	clienteffect/bh_shields_effect.cef		1	0		1	1	1	0	1	1	0	1	1	1
+shmiGraveBuff	genBuff_4			100	buffs.genericBuff	3600	strength_modified	60	stamina_modified	60	agility_modified	60	precision_modified	60	luck_modified	60	STATE_NONE	none	clienteffect/bh_shields_effect.cef		1	0		1	0	1	0	1	1	0	1	1	1
 sr88_mine	mine			5	buffs.cryobanSnare	30	movement	0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_health_0	medicConstitution			14	command.me_buff_health	600	constitution_modified	35		0		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_health_2	medicConstitution			76	command.me_buff_health	600	constitution_modified	250		0		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_action_1	medicAction			18	command.me_enhance_action	600	stamina_modified	35		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_action.cef		1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_action_2	medicAction			48	command.me_enhance_action	600	stamina_modified	80		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_action.cef		1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_action_3	medicAction			76	command.me_enhance_action	600	stamina_modified	250		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_action.cef		1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_strength_1	medicStrength			10	command.me_enhance_strength	600	strength_modified	15		0		0		0		0	STATE_NONE	none	appearance/pt_medic_enhance_strength.prt		1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_strength_2	medicStrength			34	command.me_enhance_strength	600	strength_modified	45		0		0		0		0	STATE_NONE	none	appearance/pt_medic_enhance_strength.prt		1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_strength_3	medicStrength			62	command.me_enhance_strength	600	strength_modified	80		0		0		0		0	STATE_NONE	none	appearance/pt_medic_enhance_strength.prt		1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_agility_1	medicAgility			10	command.me_enhance_agility	600	agility_modified	15		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_agility.cef		1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_agility_2	medicAgility			34	command.me_enhance_agility	600	agility_modified	45		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_agility.cef		1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_agility_3	medicAgility			62	command.me_enhance_agility	600	agility_modified	80		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_agility.cef		1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_precision_1	medicPrecision			10	command.me_enhance_precision	600	precision_modified	15		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_precision.cef		1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_precision_2	medicPrecision			34	command.me_enhance_precision	600	precision_modified	45		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_precision.cef		1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_precision_3	medicPrecision			62	command.me_enhance_precision	600	precision_modified	80		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_precision.cef		1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_melee_gb_1	medicBlock			34	command.me_enhance_block	600	expertise_block_chance	10	combat_block_value	200		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_block.cef		1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_ranged_gb_1	medicDodge			34	command.me_enhance_dodge	600	expertise_dodge	5		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_dodge.cef		1	0		1	1	1	0	1	1	0	1	1	1
-me_serotonin_boost_1	medicCancelDebuff			26	command.me_serotonin_boost	3	debuff_purge	1		0		0		0		0	STATE_NONE	none	clienteffect/medic_serotonin_boost.cef		1	0		1	1	1	0	1	1	0	1	1	1
-me_cure_affliction_1	medicCancelBuff			26	command.me_cure_affliction	6	dot_reduction_all	5	dot_resist_all	100		0		0		0	STATE_NONE	none	clienteffect/medic_cure_affliction.cef		1	0		1	1	1	0	1	1	0	1	1	1
+me_buff_health_0	medicConstitution			14	command.me_buff_health	600	constitution_modified	35		0		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_health_2	medicConstitution			76	command.me_buff_health	600	constitution_modified	250		0		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_action_1	medicAction			18	command.me_enhance_action	600	stamina_modified	35		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_action.cef		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_action_2	medicAction			48	command.me_enhance_action	600	stamina_modified	80		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_action.cef		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_action_3	medicAction			76	command.me_enhance_action	600	stamina_modified	250		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_action.cef		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_strength_1	medicStrength			10	command.me_enhance_strength	600	strength_modified	15		0		0		0		0	STATE_NONE	none	appearance/pt_medic_enhance_strength.prt		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_strength_2	medicStrength			34	command.me_enhance_strength	600	strength_modified	45		0		0		0		0	STATE_NONE	none	appearance/pt_medic_enhance_strength.prt		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_strength_3	medicStrength			62	command.me_enhance_strength	600	strength_modified	80		0		0		0		0	STATE_NONE	none	appearance/pt_medic_enhance_strength.prt		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_agility_1	medicAgility			10	command.me_enhance_agility	600	agility_modified	15		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_agility.cef		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_agility_2	medicAgility			34	command.me_enhance_agility	600	agility_modified	45		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_agility.cef		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_agility_3	medicAgility			62	command.me_enhance_agility	600	agility_modified	80		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_agility.cef		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_precision_1	medicPrecision			10	command.me_enhance_precision	600	precision_modified	15		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_precision.cef		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_precision_2	medicPrecision			34	command.me_enhance_precision	600	precision_modified	45		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_precision.cef		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_precision_3	medicPrecision			62	command.me_enhance_precision	600	precision_modified	80		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_precision.cef		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_melee_gb_1	medicBlock			34	command.me_enhance_block	600	expertise_block_chance	10	combat_block_value	200		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_block.cef		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_ranged_gb_1	medicDodge			34	command.me_enhance_dodge	600	expertise_dodge	5		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_dodge.cef		1	0		1	0	1	0	1	1	0	1	1	1
+me_serotonin_boost_1	medicCancelDebuff			26	command.me_serotonin_boost	3	debuff_purge	1		0		0		0		0	STATE_NONE	none	clienteffect/medic_serotonin_boost.cef		1	0		1	0	1	0	1	1	0	1	1	1
+me_cure_affliction_1	medicCancelBuff			26	command.me_cure_affliction	6	dot_reduction_all	5	dot_resist_all	100		0		0		0	STATE_NONE	none	clienteffect/medic_cure_affliction.cef		1	0		1	0	1	0	1	1	0	1	1	1
 me_bacta_resistance_1	healingDebuff			21	command.me_bacta_resistance	18	expertise_healing_reduction	40		0		0		0		0	STATE_NONE	none	clienteffect/medic_bacta_resistance.cef		1	1		1	1	1	0	1	1	0	1	1	1
 me_induce_insanity_1	medicSpecialLock			34	command.me_induce_insanity	15	weapon_lock	1		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 me_electrolyte_drain_1	snare			26	command.me_electrolyte_drain	15	movement	0		0		0		0		0	STATE_NONE	none	clienteffect/medic_electrolyte_drain.cef		1	1		1	1	1	0	1	1	0	1	1	1
@@ -1287,32 +1287,32 @@ bm_beast_steroid	bm_beast_xp_buff			1	command.bm_deflective_hide	900	bm_beast_xp
 bm_goo	bm_goo			1	command.bm_goo	4	expertise_action_all	-20		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 bm_kick	bm_kick			1	command.bm_kick	2	movement	0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 event_dance_party	dance_party			1	command.en_thrill	6	dance_party	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_glancing	test_combat			1	buffs.foodBeverage	120	combat_glancing	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_critical_hit_reduction	test_combat			1	buffs.foodBeverage	120	combat_critical_hit_reduction	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_dodge	test_combat			1	buffs.foodBeverage	120	combat_dodge	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_parry	test_combat			1	buffs.foodBeverage	120	combat_parry	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_block_chance	test_combat			1	buffs.foodBeverage	120	combat_block_chance	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_block_value	test_combat			1	buffs.foodBeverage	120	combat_block_value	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_evasion_chance	test_combat			1	buffs.foodBeverage	120	combat_evasion_chance	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_evasion_value	test_combat			1	buffs.foodBeverage	120	combat_evasion_value	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_critical_hit	test_combat			1	buffs.foodBeverage	120	combat_critical_hit	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_strikethrough_chance	test_combat			1	buffs.foodBeverage	120	combat_strikethrough_chance	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_strikethrough_value	test_combat			1	buffs.foodBeverage	120	combat_strikethrough_value	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_ranged_attack_avoidance	test_combat			1	buffs.foodBeverage	120	combat_ranged_attack_avoidance	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_ranged_attack_vulnerability	test_combat			1	buffs.foodBeverage	120	combat_ranged_attack_vulnerability	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_melee_attack_avoidance	test_combat			1	buffs.foodBeverage	120	combat_melee_attack_avoidance	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_melee_attack_vulnerability	test_combat			1	buffs.foodBeverage	120	combat_melee_attack_vulnerability	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_ranged_attack_miss	test_combat			1	buffs.foodBeverage	120	combat_ranged_attack_miss	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_ranged_attack_miss_reduction	test_combat			1	buffs.foodBeverage	120	combat_ranged_attack_miss_reduction	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_melee_attack_miss	test_combat			1	buffs.foodBeverage	120	combat_melee_attack_miss	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_melee_attack_miss_reduction	test_combat			1	buffs.foodBeverage	120	combat_melee_attack_miss_reduction	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_all_attack_miss	test_combat			1	buffs.foodBeverage	120	combat_all_attack_miss	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_all_attack_miss_reduction	test_combat			1	buffs.foodBeverage	120	combat_all_attack_miss_reduction	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_all_attack_avoidance	test_combat			1	buffs.foodBeverage	120	combat_all_attack_avoidance	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_all_attack_miss_vulnerability	test_combat			1	buffs.foodBeverage	120	combat_all_attack_miss_vulnerability	1000		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-event_run_speed	event_run_speed			1	buffs.foodBeverage	3000	movement	25		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-event_vitality_boost	event_vitality_boost			1	buffs.foodBeverage	3000	expertise_damage_all	3	expertise_action_all	3		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-combat_glancing_blow_reduction	combat_glancing_reduction			1	buffs.foodBeverage	120	combat_glancing_blow_reduction	100		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+combat_glancing	test_combat			1	buffs.foodBeverage	120	combat_glancing	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_critical_hit_reduction	test_combat			1	buffs.foodBeverage	120	combat_critical_hit_reduction	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_dodge	test_combat			1	buffs.foodBeverage	120	combat_dodge	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_parry	test_combat			1	buffs.foodBeverage	120	combat_parry	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_block_chance	test_combat			1	buffs.foodBeverage	120	combat_block_chance	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_block_value	test_combat			1	buffs.foodBeverage	120	combat_block_value	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_evasion_chance	test_combat			1	buffs.foodBeverage	120	combat_evasion_chance	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_evasion_value	test_combat			1	buffs.foodBeverage	120	combat_evasion_value	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_critical_hit	test_combat			1	buffs.foodBeverage	120	combat_critical_hit	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_strikethrough_chance	test_combat			1	buffs.foodBeverage	120	combat_strikethrough_chance	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_strikethrough_value	test_combat			1	buffs.foodBeverage	120	combat_strikethrough_value	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_ranged_attack_avoidance	test_combat			1	buffs.foodBeverage	120	combat_ranged_attack_avoidance	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_ranged_attack_vulnerability	test_combat			1	buffs.foodBeverage	120	combat_ranged_attack_vulnerability	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_melee_attack_avoidance	test_combat			1	buffs.foodBeverage	120	combat_melee_attack_avoidance	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_melee_attack_vulnerability	test_combat			1	buffs.foodBeverage	120	combat_melee_attack_vulnerability	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_ranged_attack_miss	test_combat			1	buffs.foodBeverage	120	combat_ranged_attack_miss	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_ranged_attack_miss_reduction	test_combat			1	buffs.foodBeverage	120	combat_ranged_attack_miss_reduction	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_melee_attack_miss	test_combat			1	buffs.foodBeverage	120	combat_melee_attack_miss	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_melee_attack_miss_reduction	test_combat			1	buffs.foodBeverage	120	combat_melee_attack_miss_reduction	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_all_attack_miss	test_combat			1	buffs.foodBeverage	120	combat_all_attack_miss	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_all_attack_miss_reduction	test_combat			1	buffs.foodBeverage	120	combat_all_attack_miss_reduction	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_all_attack_avoidance	test_combat			1	buffs.foodBeverage	120	combat_all_attack_avoidance	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_all_attack_miss_vulnerability	test_combat			1	buffs.foodBeverage	120	combat_all_attack_miss_vulnerability	1000		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+event_run_speed	event_run_speed			1	buffs.foodBeverage	3000	movement	25		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+event_vitality_boost	event_vitality_boost			1	buffs.foodBeverage	3000	expertise_damage_all	3	expertise_action_all	3		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+combat_glancing_blow_reduction	combat_glancing_reduction			1	buffs.foodBeverage	120	combat_glancing_blow_reduction	100		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 bm_helper_monkey_jedi	bm_player_buff			1	command.bm_helper_monkey_domestic	900	bm_beast_family_monkey	0	jedi_saber_experimentation	10	jedi_saber_assembly	10		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 heal_diminishing_returns_1	healingDR			1	command.heal_dr_none	30		0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 heal_diminishing_returns_2	healingDR			1	command.heal_dr_light	30		0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -1329,9 +1329,9 @@ beshDuality	aurekBesh			1	command.detonateDroid	22		0		0		0		0		0	STATE_NONE	bes
 aurek_besh_imbalance	aurek_besh_imbalance			1	command.powerBoost	-1		0		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 treasure_bonus_combat_critical_hit	treasure_buff			1	command.fs_dm_cc_crit	1800	expertise_critical_niche_all	3	healthPercent	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 treasure_bonus_combat_strikethrough_chance	treasure_buff			1	command.armorBreak	1800	expertise_strikethrough_chance	3	healing_action	1000		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-treasure_bonus_combat_dodge	treasure_buff			1	command.me_enhance_dodge	1800	expertise_dodge	3	debuff_purge	1		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-treasure_bonus_combat_block_chance	treasure_buff			1	command.me_enhance_block	1800	expertise_block_chance	3		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-treasure_bonus_combat_evasion_chance	treasure_buff			1	command.me_evasion	1800	expertise_evasion_chance	3		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+treasure_bonus_combat_dodge	treasure_buff			1	command.me_enhance_dodge	1800	expertise_dodge	3	debuff_purge	1		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+treasure_bonus_combat_block_chance	treasure_buff			1	command.me_enhance_block	1800	expertise_block_chance	3		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+treasure_bonus_combat_evasion_chance	treasure_buff			1	command.me_evasion	1800	expertise_evasion_chance	3		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 treasure_bonus_snare_immunity	treasure_buff			1	command.sm_path_lucky_break	10	movement	0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 treasure_bonus_combat_critical_hit_reduction	treasure_buff			1	command.vitalize	1800	combat_critical_hit_reduction	30	precision_modified	20		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 treasure_bonus_combat_parry	treasure_buff			1	command.parryRiposte	1800	expertise_parry	3	strength_modified	20		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -1454,7 +1454,7 @@ me_ae_rez_debuff	super_rez_debuff			1	command.hemorrhage	15	stamina_modified	-10
 suin_healing_debuff	healingRedux			0	jedi.forceWeaken	4	expertise_healing_reduction	50		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 tusken_bane	tusken_bane			6	command.centerOfBeing	300	expertise_critical_niche_all	5	expertise_damage_all	10	expertise_dodge	5	expertise_strikethrough_chance	5	expertise_block_chance	5	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tusken_endurance	gcw_critical_heal			5	command.powerBoost	300	avoid_incap_heal	7500		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-tusken_unity	tusken_unity			1	command.co_general_base_of_operations	-1		0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+tusken_unity	tusken_unity			1	command.co_general_base_of_operations	-1		0		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 king_head_crack	tusken_king_crack			1	jedi.forceWeaken	6	expertise_healing_reduction	50		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 king_rend	tusken_king_rend			50	command.co_riddle_armor	15	private_armor_bonus	-2000		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 king_sandstorm	king_sandstorm			1	command.bm_wing_buffet	12	glancing_blow_vulnerable	35		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
@@ -1473,10 +1473,10 @@ col_sd_invis_buff_tracker	collection_sd			1	buffs.smuggled	21600		0		0		0		0		0	
 nova_orion_rank6_lucky_salvage	nova_orion			1	command.sm_path_fake_goods	7200		0		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 no_break_invis	invisibility_no_break			4	command.stealth	1	no_break_invis	0		0		0		0		0	STATE_NONE	none			0	0		0	1	1	0	1	1	0	1	1	1
 sp_action_regen	sp_action_regen			1	command.sp_action_regen	15	action_regen	0	movement	2		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-event_ewok_berry	event_run_speed	exp_buff		1	buffs.ewokBerry	3000	movement	5	xp_bonus_general	2		0		0		0	STATE_NONE	none	appearance/pt_love_day_food_buff.prt		1	0		1	1	1	0	1	1	0	1	1	1
-event_ewok_drink	event_vitality_boost			1	buffs.ewokDrink	3000	expertise_damage_all	4	expertise_action_all	2		0		0		0	STATE_NONE	none	appearance/pt_love_day_food_buff.prt		1	0		1	1	1	0	1	1	0	1	1	1
-creature_milking_buff	milkBuff			1	command.creature_milking_buff	3600	milk_exceptional_modified	5	milk_stun_modified	25		0		0		0	STATE_NONE	none	clienteffect/off_last_words.cef		1	0		1	1	1	0	1	1	0	1	1	1
-lair_egg_buff	eggBuff			1	command.lair_egg_buff	60		0		0		0		0		0	STATE_NONE	none	clienteffect/off_last_words.cef		1	0		1	1	1	0	1	1	0	1	1	1
+event_ewok_berry	event_run_speed	exp_buff		1	buffs.ewokBerry	3000	movement	5	xp_bonus_general	2		0		0		0	STATE_NONE	none	appearance/pt_love_day_food_buff.prt		1	0		1	0	1	0	1	1	0	1	1	1
+event_ewok_drink	event_vitality_boost			1	buffs.ewokDrink	3000	expertise_damage_all	4	expertise_action_all	2		0		0		0	STATE_NONE	none	appearance/pt_love_day_food_buff.prt		1	0		1	0	1	0	1	1	0	1	1	1
+creature_milking_buff	milkBuff			1	command.creature_milking_buff	3600	milk_exceptional_modified	5	milk_stun_modified	25		0		0		0	STATE_NONE	none	clienteffect/off_last_words.cef		1	0		1	0	1	0	1	1	0	1	1	1
+lair_egg_buff	eggBuff			1	command.lair_egg_buff	60		0		0		0		0		0	STATE_NONE	none	clienteffect/off_last_words.cef		1	0		1	0	1	0	1	1	0	1	1	1
 kun_one_sacrifice	kun_sac			1	command.bm_enrage	30	damage_dealt_mod	1.25	reac_buff	1		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 kun_two_sacrifice	kun_sac			1	command.bm_enrage	30	damage_dealt_mod	1.5	reac_buff	1		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 kun_three_sacrifice	kun_sac			1	command.bm_enrage	30	damage_dealt_mod	1.75	reac_buff	1		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
@@ -1560,7 +1560,7 @@ kun_chaos_debuff_9	kun_chaos_debuff			1	command.powerBoost	120	reduce_damage_dea
 kun_chaos_debuff_10	kun_chaos_debuff			1	command.powerBoost	120	reduce_damage_dealt_to_kun_chaos	100	increase_damage_taken_from_kun_chaos	100	reduce_damage_taken_from_kun_order	100	increase_damage_dealt_to_kun_order	100		0	STATE_NONE	none	appearance/pt_mote_orange.prt		1	1		0	1	1	0	1	1	0	1	1	1
 kun_order_set	kun_alignment			1	buffs.genericDebuff	-1	setSpecialType_kun_order	0	reac_buff	1		0		0		0	STATE_NONE	none			0	0		0	1	1	0	1	1	0	1	1	1
 kun_chaos_set	kun_alignment			1	command.powerBoost	-1	setSpecialType_kun_chaos	0	reac_buff	1		0		0		0	STATE_NONE	none			0	0		0	1	1	0	1	1	0	1	1	1
-kun_twin_bonus	kun_twin_bonus			1	command.bh_shields	-1	combat_divide_damage_taken	50	combat_multiply_damage_dealt	50		0		0		0	STATE_NONE	none	appearance/pt_psg_on_mark_3.prt		1	0		0	1	1	0	1	1	0	1	1	1
+kun_twin_bonus	kun_twin_bonus			1	command.bh_shields	-1	combat_divide_damage_taken	50	combat_multiply_damage_dealt	50		0		0		0	STATE_NONE	none	appearance/pt_psg_on_mark_3.prt		1	0		0	0	1	0	1	1	0	1	1	1
 kun_twin_ranged_shield	ranged_sheild			1	command.me_enhance_agility	-1	combat_ranged_attack_avoidance	1000	expertise_evasion_chance	100	combat_evasion_value	-1		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 kun_wrath_ward_acid	kw_a			1	state.acid	10	dt_vulnerability_acid	0.1		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 kun_wrath_ward_heat	kw_h			1	state.onFire	10	dt_vulnerability_heat	0.1		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
@@ -1674,34 +1674,34 @@ co_killing_spree	co_killing_spree			1	command.co_killing_spree	15	expertise_co_k
 co_empowered_attack	co_empowered_attack			1	command.co_empowered_attack	15	expertise_damage_weapon_0	10	expertise_damage_weapon_1	10	expertise_damage_weapon_2	10		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 co_first_aid_training	co_first_aid_training			1	command.co_first_aid_training	900	expertise_healing_all	20		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 co_double_time	co_double_time			1	command.co_double_time	20	movement	0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_berries_mid	food			0	buffs.foodMeal	300	stamina_modified	15	luck_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_bugs_mid	food			0	buffs.foodMeal	300	agility_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fungus_mid	food			0	buffs.foodMeal	300	agility_modified	15	luck_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_funk_mid	food			0	buffs.foodMeal	300	constitution_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_livers_mid	food			0	buffs.foodMeal	300	constitution_modified	15	agility_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fruit_1_mid	food			0	buffs.foodVegetable	300	stamina_modified	15	luck_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fruit_2_mid	food			0	buffs.foodVegetable	300	agility_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fruit_3_mid	food			0	buffs.foodVegetable	300	agility_modified	15	luck_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fruit_4_mid	food			0	buffs.foodVegetable	300	constitution_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fruit_5_mid	food			0	buffs.foodVegetable	300	constitution_modified	15	luck_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_vegetable_2_mid	food			0	buffs.foodVegetable	300	constitution_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_vegetable_3_mid	food			0	buffs.foodVegetable	300	constitution_modified	15	agility_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_vegetable_4_mid	food			0	buffs.foodVegetable	300	stamina_modified	15	luck_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_vegetable_5_mid	food			0	buffs.foodVegetable	300	agility_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_berries_high	food			0	buffs.foodMeal	300	stamina_modified	25	luck_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_bugs_high	food			0	buffs.foodMeal	300	agility_modified	25	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fungus_high	food			0	buffs.foodMeal	300	agility_modified	25	luck_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_funk_high	food			0	buffs.foodMeal	300	constitution_modified	25	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_livers_high	food			0	buffs.foodMeal	300	constitution_modified	25	agility_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fruit_1_high	food			0	buffs.foodVegetable	300	stamina_modified	25	luck_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fruit_2_high	food			0	buffs.foodVegetable	300	agility_modified	25	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fruit_3_high	food			0	buffs.foodVegetable	300	agility_modified	25	luck_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fruit_4_high	food			0	buffs.foodVegetable	300	constitution_modified	25	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_fruit_5_high	food			0	buffs.foodVegetable	300	constitution_modified	25	luck_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_vegetable_2_high	food			0	buffs.foodVegetable	300	constitution_modified	25	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_vegetable_3_high	food			0	buffs.foodVegetable	300	constitution_modified	25	agility_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_vegetable_4_high	food			0	buffs.foodVegetable	300	stamina_modified	25	luck_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-foraged_vegetable_5_high	food			0	buffs.foodVegetable	300	agility_modified	25	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+foraged_berries_mid	food			0	buffs.foodMeal	300	stamina_modified	15	luck_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_bugs_mid	food			0	buffs.foodMeal	300	agility_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fungus_mid	food			0	buffs.foodMeal	300	agility_modified	15	luck_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_funk_mid	food			0	buffs.foodMeal	300	constitution_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_livers_mid	food			0	buffs.foodMeal	300	constitution_modified	15	agility_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fruit_1_mid	food			0	buffs.foodVegetable	300	stamina_modified	15	luck_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fruit_2_mid	food			0	buffs.foodVegetable	300	agility_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fruit_3_mid	food			0	buffs.foodVegetable	300	agility_modified	15	luck_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fruit_4_mid	food			0	buffs.foodVegetable	300	constitution_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fruit_5_mid	food			0	buffs.foodVegetable	300	constitution_modified	15	luck_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_vegetable_2_mid	food			0	buffs.foodVegetable	300	constitution_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_vegetable_3_mid	food			0	buffs.foodVegetable	300	constitution_modified	15	agility_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_vegetable_4_mid	food			0	buffs.foodVegetable	300	stamina_modified	15	luck_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_vegetable_5_mid	food			0	buffs.foodVegetable	300	agility_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_berries_high	food			0	buffs.foodMeal	300	stamina_modified	25	luck_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_bugs_high	food			0	buffs.foodMeal	300	agility_modified	25	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fungus_high	food			0	buffs.foodMeal	300	agility_modified	25	luck_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_funk_high	food			0	buffs.foodMeal	300	constitution_modified	25	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_livers_high	food			0	buffs.foodMeal	300	constitution_modified	25	agility_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fruit_1_high	food			0	buffs.foodVegetable	300	stamina_modified	25	luck_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fruit_2_high	food			0	buffs.foodVegetable	300	agility_modified	25	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fruit_3_high	food			0	buffs.foodVegetable	300	agility_modified	25	luck_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fruit_4_high	food			0	buffs.foodVegetable	300	constitution_modified	25	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_fruit_5_high	food			0	buffs.foodVegetable	300	constitution_modified	25	luck_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_vegetable_2_high	food			0	buffs.foodVegetable	300	constitution_modified	25	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_vegetable_3_high	food			0	buffs.foodVegetable	300	constitution_modified	25	agility_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_vegetable_4_high	food			0	buffs.foodVegetable	300	stamina_modified	25	luck_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
+foraged_vegetable_5_high	food			0	buffs.foodVegetable	300	agility_modified	25	stamina_modified	25		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 of_pistol_bleed_1	of_bleed			2	dot.officerBleed	7	dot_bleed	60	dot	0		0		0		0	STATE_BLEEDING	none			1	1		1	1	1	0	1	1	0	1	1	1
 fs_hermetic_touch	fs_hermetic_touch			1	command.fs_hermetic_touch	10	dot_reduction_all	5	dot_resist_all	100		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		0	1	1	0	1	1	0	1	1	1
 safe_puzzle_downer	safePuzzleDowner			1	buffs.meatlumpSafeDebuff	45	constitution_modified	-50	agility_modified	-50	stamina_modified	-50		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
@@ -1721,10 +1721,10 @@ mtp_meatlump_angry	angry_meatlump			1	buffs.mtp_meatlump_angry	-1	mtp_meatlump_a
 mtp_meatlump_happy	angry_meatlump			2	buffs.mtp_meatlump_happy	30	mtp_meatlump_happy	0		0		0		0		0	STATE_NONE	none			1	0		0	1	0	0	1	1	0	1	1	1
 mtp_meatlump_kiss_buff	meatlump_kiss			1	buffs.mtp_meatlump_kiss_buff	3600	luck_modified	100		0		0		0		0	STATE_NONE	none	appearance/pt_love_day_food_buff.prt		1	0		0	1	0	1	1	1	0	1	1	0
 mtp_meatlump_kiss_debuff	meatlump_kiss			1	buffs.mtp_meatlump_kiss_debuff	3600	luck_modified	-100		0		0		0		0	STATE_NONE	none	appearance/pt_love_day_food_buff.prt		1	1		0	1	0	1	1	1	0	1	1	0
-event_rebel_drink	event_run_speed	exp_buff		1	buffs.rebelDrink	3000	movement	5	xp_bonus_general	2		0		0		0	STATE_NONE	none	appearance/pt_rebel_symbol.prt		1	0		1	1	1	0	1	1	0	1	1	1
-event_rebel_candy	event_vitality_boost			1	buffs.rebelCandy	3000	expertise_damage_all	4	expertise_action_all	2		0		0		0	STATE_NONE	none	appearance/pt_rebel_symbol.prt		1	0		1	1	1	0	1	1	0	1	1	1
-event_imperial_cookies	event_run_speed	exp_buff		1	buffs.imperialCookies	3000	movement	5	xp_bonus_general	2		0		0		0	STATE_NONE	none	appearance/pt_imperial_symbol.prt		1	0		1	1	1	0	1	1	0	1	1	1
-event_imperial_chocolate	event_vitality_boost			1	buffs.imperialChocolate	3000	expertise_damage_all	4	expertise_action_all	2		0		0		0	STATE_NONE	none	appearance/pt_imperial_symbol.prt		1	0		1	1	1	0	1	1	0	1	1	1
+event_rebel_drink	event_run_speed	exp_buff		1	buffs.rebelDrink	3000	movement	5	xp_bonus_general	2		0		0		0	STATE_NONE	none	appearance/pt_rebel_symbol.prt		1	0		1	0	1	0	1	1	0	1	1	1
+event_rebel_candy	event_vitality_boost			1	buffs.rebelCandy	3000	expertise_damage_all	4	expertise_action_all	2		0		0		0	STATE_NONE	none	appearance/pt_rebel_symbol.prt		1	0		1	0	1	0	1	1	0	1	1	1
+event_imperial_cookies	event_run_speed	exp_buff		1	buffs.imperialCookies	3000	movement	5	xp_bonus_general	2		0		0		0	STATE_NONE	none	appearance/pt_imperial_symbol.prt		1	0		1	0	1	0	1	1	0	1	1	1
+event_imperial_chocolate	event_vitality_boost			1	buffs.imperialChocolate	3000	expertise_damage_all	4	expertise_action_all	2		0		0		0	STATE_NONE	none	appearance/pt_imperial_symbol.prt		1	0		1	0	1	0	1	1	0	1	1	1
 mtp_already_ate	invisible_mtp_buff			1		900		0		0		0		0		0	STATE_NONE	none			0	1		0	0	0	1	1	1	0	1	1	1
 mtp_meatlump_lump_buff	meatlump_food			1	buffs.mtp_meatlump_grill_item_buff	900	constitution_modified	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 mtp_crafted_meatlump_lump_buff	meatlump_food			1	buffs.mtp_meatlump_grill_item_buff	900	constitution_modified	2		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -1993,3 +1993,23 @@ costume_hutt_female	shapechange	halloween_shapechange		1	buffs.costume	1800	move
 gcw_rocket_turret	gcw_mini_turret			1		1	gcw_mini_turret	1		0		0		0		0	STATE_NONE	none			0	0		1	1	1	0	1	1	0	1	1	1
 tusken_ritual_1	tusken_ritual_1			100	command.of_deadeye_debuff	30	healing_health	8500		0		0		0		0	STATE_NONE	none	clienteffect/off_last_words.cef		1	0		1	1	1	0	1	1	0	1	1	1
 trader_advanced_buff	genBuff_4			50	buffs.genericBuff	7200	expertise_resource_sampling_increase	100	expertise_resource_quality_increase	50		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+trader_limited_shields_charged_handler	bh_shields_handler			10		1	bh_shields_handler	0		0		0		0		0	STATE_NONE	none	clienteffect/bh_shields_effect.cef		0	0		0	1	0	0	1	1	0	1	1	1
+trader_limited_shields	bh_shields			10	command.bh_shields	30	combat_divide_damage_taken	1	bh_shields_charged_handler	0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	50	1	0	1	1	1
+trader_limited_shields_block	bh_shields	bh_shields	bh_shields	15		5		0		0		0		0		0	STATE_NONE	none			0	0		1	1	1	0	1	1	0	1	1	1
+trader_limited_shields_charged	bh_shields_recourse			10	command.bh_deflection	15	combat_multiply_damage_dealt	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	50	1	0	1	1	1
+ent_book_xp_bonus_1	ent_book_buff			1	buffs.tcg_series1_lepese_dictionary	7200	xp_bonus_general	20											appearance/pt_entertainer_special_6.prt						0								
+ent_book_bm_xp_bonus_1	ent_book_buff			1	buffs.tcg_series1_lepese_dictionary	7200	bm_xp_mod_boost	20											appearance/pt_entertainer_special_6.prt						0								
+ent_book_gcw_bonus_1	ent_book_buff			1	buffs.tcg_series1_lepese_dictionary	7200	tcg_gcw_bonus	10											appearance/pt_entertainer_special_6.prt						0								
+set_bonus_entertainer_utility_b_1	setBonusEntertainer			1	command.powerBoost	-1	expertise_en_inspire_pulse_duration_increase	3	expertise_en_inspire_buff_duration_increase	15															0	0							
+set_bonus_entertainer_utility_b_2	setBonusEntertainer			1	command.powerBoost	-1	expertise_en_inspire_pulse_duration_increase	4	expertise_en_inspire_buff_duration_increase	20															0	0							
+set_bonus_entertainer_utility_b_3	setBonusEntertainer			1	command.powerBoost	-1	expertise_en_inspire_pulse_duration_increase	6	expertise_en_inspire_buff_duration_increase	30	ent_lasting_performance														0	0							
+ent_lasting_performance_1	ent_lasting_performance_1			1	command.changeMusic	7200	movement	5	constitution_modified	75	expertise_action_all	2							appearance/pt_entertainer_lasting_performance.prt														
+tok_ent_invis_buff_tracker_0	collection_ent_token			1	buffs.smuggled	900		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
+tok_ent_invis_buff_tracker_1	collection_ent_token			1	buffs.smuggled	1800		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
+tok_ent_invis_buff_tracker_2	collection_ent_token			1	buffs.smuggled	2400		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
+tok_ent_invis_buff_tracker_3	collection_ent_token			1	buffs.smuggled	3000		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
+tok_ent_invis_buff_tracker_4	collection_ent_token			1	buffs.smuggled	3600		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
+ent_jax_familiar	vr_familiar			4	buffs.genericBuff	-1	expertise_en_inspire_pulse_duration_increase	2																	0								
+hospital_buff	hospital_buff			1	command.bactaInfusion	-1	expertise_buff_duration_line_me_enhance	7200																									
+bm_helper_monkey_domestic	bm_player_buff	tcg_diner_station		1	command.bm_helper_monkey_domestic	900		0	clothing_experimentation	2	clothing_assembly	5	food_assembly	5	food_experimentation	6	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+entertainer_buff	entertainer_buff			1	command.powerBoost	-1	expertise_en_inspire_base_point_increase	10	expertise_en_inspire_pulse_duration_increase	5	expertise_en_inspire_buff_duration_increase	60																					

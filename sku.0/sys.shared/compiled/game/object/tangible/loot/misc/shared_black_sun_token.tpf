@@ -22,3 +22,5 @@ detailedDescription = "item_d"  "default"
 appearanceFilename = "appearance/blacksun_token.apt"
 
 gameObjectType = GOT_misc_item_usable
+
+clientDataFile = "clientdata/index/client_shared_index_1_38.cdf"

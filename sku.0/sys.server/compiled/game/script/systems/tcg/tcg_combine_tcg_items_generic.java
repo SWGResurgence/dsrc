@@ -18,6 +18,19 @@ public class tcg_combine_tcg_items_generic extends script.base_script
     public static final String COMBINE = "combine";
     public static final String OBJVAR_COMBINE_ITEM = "tcg.combineItemTemplatePattern";
     public static final int NUM_COMBINE_ITEMS = 4;
+    public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
+    {
+        int idx = utils.getValidAttributeIndex(names);
+        if (idx == -1) {
+            return SCRIPT_CONTINUE;
+        }
+        if (hasObjVar(self, COMBINE)) {
+            names[idx] = "can_be_combined";
+            attribs[idx] = getStringObjVar(self, COMBINE);
+            idx++;
+        }
+        return SCRIPT_CONTINUE;
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         blog("combine: OnObjectMenuRequest - Init");

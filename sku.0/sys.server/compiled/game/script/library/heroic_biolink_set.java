@@ -150,7 +150,7 @@ public class heroic_biolink_set extends base_script {
             root = "set_officer_utility_a_01_01";
         }
         if (num == 16){
-            root = "smuggler_utility_b_01_01";
+            root = "set_smuggler_utility_b_01_01";
         }
         if (num == 17){
             root = "set_smuggler_utility_a_01_01";
