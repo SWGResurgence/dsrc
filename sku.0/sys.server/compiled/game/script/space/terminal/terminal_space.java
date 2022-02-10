@@ -31,7 +31,7 @@ import script.library.event_perk;
 public class terminal_space extends script.terminal.base.base_terminal {
     public static final float TERMINAL_USE_DISTANCE = 8.0f;
     public static final string_id SID_LAUNCH_SHIP = new string_id("space/space_terminal", "launch_ship");
-    public static final string_id SID_MUSTAFAR = new string_id("space/space_terminal", "mustafar_exception");
+    //public static final string_id SID_MUSTAFAR = new string_id("space/space_terminal", "mustafar_exception");
     public static final string_id SID_NOT_IN_COMBAT = new string_id("travel", "not_in_combat");
     public static final String LAUNCH_LOCATIONS = "datatables/space_zones/launch_locations.iff";
 
