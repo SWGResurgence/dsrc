@@ -60,7 +60,6 @@ object/building/mustafar/structures/must_new_mining_facility.iff	50	-31	145	WORL
 									object/tangible/terminal/terminal_travel.iff	61	-30.7	130	WORLD_DELTA	180	1	0	0
 									object/tangible/travel/ticket_collector/ticket_collector.iff	45	-30.7	152	WORLD_DELTA	-90	0	0	1
 									object/creature/npc/theme_park/player_transport.iff	55	-32	160	WORLD_DELTA	90	0	1	0
-									object/tangible/terminal/terminal_space.iff	59	-30.7	130	WORLD_DELTA	180	1	0	0
 object/building/naboo/rori_restuss_starport.iff	20.34	0	17.76	WORLD_DELTA	300	60	0	1									
 									object/tangible/terminal/terminal_travel.iff	-3.12	0	-17.57	r1	-90	1	0	0
 									object/creature/npc/theme_park/player_transport.iff	0	-9	0	WORLD_DELTA	-90	0	1	0

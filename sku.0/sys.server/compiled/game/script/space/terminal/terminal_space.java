@@ -42,31 +42,24 @@ public class terminal_space extends script.terminal.base.base_terminal {
     public int OnPreloadComplete(obj_id self) throws InterruptedException {
         String strName = "mos_eisley";
         dictionary dctTeleportInfo = null;
-        if (getTemplateName(self).equals("object/tangible/terminal/portable_space_terminal.iff")) {
-            dctTeleportInfo = dataTableGetRow(LAUNCH_LOCATIONS, strName);
-        } else {
-            location locTest = getLocation(self);
-            region[] rgnCities = getRegionsWithGeographicalAtPoint(locTest, regions.GEO_CITY);
-            if (rgnCities == null || rgnCities.length == 0) {
-                setName(self, "BUSTED TERMINAL! PUT ME IN A CITY!");
-            } else {
-                for (int i = 0; i < rgnCities.length; i++) {
-                    region rgnTest = rgnCities[i];
-                    strName = rgnTest.getName();
-                    if (strName.startsWith("@")) {
-                        string_id strTest = utils.unpackString(strName);
-                        strName = strTest.getAsciiId();
-                        dctTeleportInfo = dataTableGetRow(LAUNCH_LOCATIONS, strName);
-                        if (dctTeleportInfo != null) {
-                            break;
-                        }
+        location locTest = getLocation(self);
+        region[] rgnCities = getRegionsWithGeographicalAtPoint(locTest, regions.GEO_CITY);
+        if (rgnCities != null && rgnCities.length > 0) {
+            for (int i = 0; i < rgnCities.length; i++) {
+                region rgnTest = rgnCities[i];
+                strName = rgnTest.getName();
+                if (strName.startsWith("@")) {
+                    string_id strTest = utils.unpackString(strName);
+                    strName = strTest.getAsciiId();
+                    dctTeleportInfo = dataTableGetRow(LAUNCH_LOCATIONS, strName);
+                    if (dctTeleportInfo != null) {
+                        break;
                     }
                 }
             }
         }
         if (dctTeleportInfo == null) {
-            setName(self, "NO ENTRY FOR " + strName + " in teleport datable. Busted terminal");
-            return SCRIPT_CONTINUE;
+            dctTeleportInfo = dataTableGetRow(LAUNCH_LOCATIONS, strName);
         }
         utils.setScriptVar(self, "space.loc.space", new location(dctTeleportInfo.getFloat("spaceX"), dctTeleportInfo.getFloat("spaceY"), dctTeleportInfo.getFloat("spaceZ"), dctTeleportInfo.getString("spaceScene")));
         utils.setScriptVar(self, "space.locationName", "w" + dctTeleportInfo.getInt("spaceLocationIndex"));
