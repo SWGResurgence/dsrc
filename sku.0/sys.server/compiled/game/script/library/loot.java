@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class loot extends script.base_script
 {
-    public loot()
-    {
-    }
     public static final int COL_LOOT_MULTIPLIER_ON = 1;
     public static final String TBL_CREATURES = "datatables/mob/creatures.iff";
     public static final String TBL_COMPONENT_DATA = "datatables/loot/component_data.iff";
@@ -1542,6 +1539,21 @@ public class loot extends script.base_script
     {
         return addCollectionLoot(target, false, null);
     }
+    
+    // BEGIN ENZYME LOOT TOGGLE \\
+    
+    public static boolean hasToggledEnzymeLootOff(obj_id player) {
+        return hasObjVar(player, ENZYME_LOOT_TOGGLE_OBJVAR);
+    }
+    public static void disableEnzymeLoot(obj_id player) {
+        setObjVar(player, ENZYME_LOOT_TOGGLE_OBJVAR, true);
+    }
+    public static void enableEnzymeLoot(obj_id player) {
+        removeObjVar(player, ENZYME_LOOT_TOGGLE_OBJVAR);
+    }
+    
+    // END ENZYME LOOT TOGGLE \\
+    
     public static boolean addCollectionLoot(obj_id target, boolean theftBool, obj_id thief) throws InterruptedException
     {
         String creatureName = ai_lib.getCreatureName(target);
