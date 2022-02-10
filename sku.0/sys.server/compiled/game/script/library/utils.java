@@ -2266,7 +2266,7 @@ public class utils extends script.base_script
     }
     public static string_id unpackString(String strId) throws InterruptedException
     {
-        if (strId == null || strId.equals(""))
+        if (strId == null || strId.isEmpty())
         {
             return null;
         }

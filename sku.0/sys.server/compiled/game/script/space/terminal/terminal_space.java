@@ -43,7 +43,7 @@ public class terminal_space extends script.terminal.base.base_terminal {
     public int OnPreloadComplete(obj_id self) throws InterruptedException {
         String strName = "mos_eisley";
         dictionary dctTeleportInfo = null;
-        if (hasObjVar(self, "portable")) {
+        if (getTemplateName(self).equals("object/tangible/terminal/portable_space_terminal.iff")) {
             dctTeleportInfo = dataTableGetRow(LAUNCH_LOCATIONS, strName);
         } else {
             location locTest = getLocation(self);

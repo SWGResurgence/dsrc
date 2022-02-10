@@ -6,5 +6,3 @@
 sharedTemplate = "object/tangible/terminal/shared_portable_space_terminal.iff"
 
 scripts = +["space.terminal.terminal_space"]
-
-objvars = +["portable" = 1];
