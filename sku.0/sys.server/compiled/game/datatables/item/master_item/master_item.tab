@@ -3972,7 +3972,7 @@ item_treasure_map_41_50	object/tangible/treasure_map/treasure_map_base.iff						
 item_treasure_map_51_60	object/tangible/treasure_map/treasure_map_base.iff											1	Mysterious Data Disk (Jedi Knight's body)	A map to a Jedi Knight's body.	
 item_treasure_map_61_70	object/tangible/treasure_map/treasure_map_base.iff											1	Mysterious Data Disk (Jedi Artifacts)	A map to Jedi Artifacts.	
 item_treasure_map_71_80	object/tangible/treasure_map/treasure_map_base.iff											1	Mysterious Data Disk (Cursed Item)	A map to a cursed item.	
-item_treasure_map_81_90	object/tangible/treasure_map/treasure_map_base.iff									object.autostack		1	Mysterious Data Disk (Mysterious Container)	A map to a mysterious container.	
+item_treasure_map_81_90	object/tangible/treasure_map/treasure_map_base.iff											1	Mysterious Data Disk (Mysterious Container)	A map to a mysterious container.	
 st_th_flat_small_01_01	object/tangible/jedi/jedi_holocron_generic.iff	storyteller						1				0	Flatening Layer 10m	This item will flaten a piece of the game world in a 20 meter radius.	
 st_th_flat_medium_01_01	object/tangible/jedi/jedi_holocron_generic.iff	storyteller						1				0	Flatening Layer 25m	This item will flaten a piece of the game world in a 20 meter radius.	
 st_th_flat_large_01_01	object/tangible/jedi/jedi_holocron_generic.iff	storyteller						1				0	Flatening Layer 50m	This item will flaten a piece of the game world in a 20 meter radius.	
