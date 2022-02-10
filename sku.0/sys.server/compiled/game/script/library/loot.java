@@ -13,6 +13,7 @@ public class loot extends script.base_script
     public static final String VAR_DENY_LOOT = "denyLoot";
     public static final String VAR_LOOT_QUALITY = "loot.loot_quality";
     public static final String CHRONICLES_LOOT_TOGGLE_OBJVAR = "chroniclesLoot_toggledOff";
+    public static final String ENZYME_LOOT_TOGGLE_OBJVAR = "enzymeLoot_toggledOff";
     public static final String TBL_EXCLUSION = "datatables/loot/exclusion.iff";
     public static final String COL_TEMPLATE = "TEMPLATE";
     public static final String COL_EXCLUDE = "EXCLUDE";
