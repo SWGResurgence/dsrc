@@ -42,12 +42,12 @@ public class terminal_space extends script.terminal.base.base_terminal {
 
     public int OnPreloadComplete(obj_id self) throws InterruptedException {
         String strName = "mos_eisley";
+        dictionary dctTeleportInfo = null;
         if (hasObjvar(self, "portable")) {
             dctTeleportInfo = dataTableGetRow(LAUNCH_LOCATIONS, strName);
         } else {
             location locTest = getLocation(self);
             region[] rgnCities = getRegionsWithGeographicalAtPoint(locTest, regions.GEO_CITY);
-            dictionary dctTeleportInfo = null;
             if (rgnCities == null || rgnCities.length == 0) {
                 setName(self, "BUSTED TERMINAL! PUT ME IN A CITY!");
             } else {
