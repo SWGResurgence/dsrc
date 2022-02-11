@@ -41,7 +41,7 @@ public class heroic_prequest_bypass extends script.conversation.base.conversatio
         String[] completedPrequests = getCompletedPrequests(player);
         player.setScriptVar("prequests", completedPrequests);
         if (getLevel(player) >= 85 && completedPrequests.length > 0) {
-            OnStartNpcConversation(SCRIPT, "s_1", new String[]{"s_2"}, player, self);
+            nStartNpcConversation(SCRIPT, "s_1", new String[]{"s_2"}, player, self);
         } else {
             chat.chat(self, player, new string_id(SCRIPT, "s_10"));
         }
