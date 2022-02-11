@@ -45,7 +45,6 @@ public class heroic_prequest_bypass extends script.conversation.base.conversatio
         } else {
             chat.chat(self, player, new string_id(SCRIPT, "s_10"));
         }
-        return null;
     }
     
     public static final OnNpcConversationResponse(obj_id self, String conversationName, obj_id player, string_id response) throws InterruptedException {
@@ -76,7 +75,6 @@ public class heroic_prequest_bypass extends script.conversation.base.conversatio
                 npcEndConversationWithMessage(player, new string_id(SCRIPT, "s_9"));
                 break;
         }
-        return null;
     }
     
     private static obj_id getAltInGroup(obj_id player) throws InterruptedException {
