@@ -47,7 +47,7 @@ public class heroic_prequest_bypass extends script.conversation.base.conversatio
         }
     }
     
-    public static final OnNpcConversationResponse(obj_id self, String conversationName, obj_id player, string_id response) {
+    public static final OnNpcConversationResponse(obj_id self, String conversationName, obj_id player, string_id response) throws InterruptedException {
         switch (response.getAsciiId()) {
             case "s_2":
                 setupResponses(SCRIPT, "s_3", "s_4", player);
