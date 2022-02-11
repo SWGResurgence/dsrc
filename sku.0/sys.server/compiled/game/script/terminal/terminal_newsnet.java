@@ -1,7 +1,6 @@
 package script.terminal;
 
 import script.*;
-import gcw.*;
 
 public class terminal_newsnet extends script.base_script {
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException {
