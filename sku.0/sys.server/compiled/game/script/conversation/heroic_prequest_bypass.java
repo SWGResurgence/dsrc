@@ -37,7 +37,7 @@ public class heroic_prequest_bypass extends script.conversation.base.conversatio
         "heroic_star_destroyer"
     };
     
-    public static final OnStartNpcConversation(obj_id self, obj_id player) {
+    public void OnStartNpcConversation(obj_id self, obj_id player) {
         String[] completedPrequests = getCompletedPrequests(player);
         player.setScriptVar("prequests", completedPrequests);
         if (getLevel(player) >= 85 && completedPrequests.length > 0) {
@@ -48,7 +48,7 @@ public class heroic_prequest_bypass extends script.conversation.base.conversatio
         return null;
     }
     
-    public static final OnNpcConversationResponse(obj_id self, String conversationName, obj_id player, string_id response) throws InterruptedException {
+    public void OnNpcConversationResponse(obj_id self, String conversationName, obj_id player, string_id response) throws InterruptedException {
         switch (response.getAsciiId()) {
             case "s_2":
                 setupResponses(SCRIPT, "s_3", "s_4", player);
