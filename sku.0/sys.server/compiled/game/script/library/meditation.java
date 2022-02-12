@@ -6,9 +6,6 @@ import script.string_id;
 
 public class meditation extends script.base_script
 {
-    public meditation()
-    {
-    }
     public static final float TIME_TICK = 5.0f;
     public static final float DELAY_MIN = 3.0f;
     public static final float DELAY_MAX = 7.0f;
@@ -65,7 +62,6 @@ public class meditation extends script.base_script
         setState(player, STATE_MEDITATE, true);
         chat.setTempAnimationMood(player, "meditating");
         messageTo(player, HANDLER_MEDITATION_TICK, trial.getSessionDict(player, meditation.HANDLER_MEDITATION_TICK), TIME_TICK, false);
-        sendSystemMessage(player, SID_MED_BEGIN);
         return true;
     }
     public static void endMeditation(obj_id player, boolean verbose) throws InterruptedException
@@ -78,10 +74,6 @@ public class meditation extends script.base_script
         chat.resetTempAnimationMood(player);
         utils.removeScriptVar(player, VAR_MEDITATION_BASE);
         trial.bumpSession(player, meditation.HANDLER_MEDITATION_TICK);
-        if (verbose)
-        {
-            sendSystemMessage(player, SID_MED_END);
-        }
     }
     public static void endMeditation(obj_id player) throws InterruptedException
     {
@@ -89,15 +81,7 @@ public class meditation extends script.base_script
     }
     public static boolean isMeditating(obj_id player) throws InterruptedException
     {
-        if (!isIdValid(player))
-        {
-            return false;
-        }
-        if (getState(player, STATE_MEDITATE) == 1)
-        {
-            return true;
-        }
-        return false;
+        return isIdValid(player) && getState(player, STATE_MEDITATE) == 1;
     }
     public static float trance(obj_id player) throws InterruptedException
     {
@@ -259,12 +243,10 @@ public class meditation extends script.base_script
         }
         if (!isMeditating(player))
         {
-            sendSystemMessage(player, SID_MUST_BE_MEDITATING);
             return false;
         }
         if (hasObjVar(player, VAR_POWERBOOST_ACTIVE))
         {
-            sendSystemMessage(player, SID_POWERBOOST_ACTIVE);
             return false;
         }
         int now = getGameTime();
@@ -294,7 +276,6 @@ public class meditation extends script.base_script
         messageTo(player, HANDLER_POWERBOOST_WANE, d, wane_time, false);
         messageTo(player, HANDLER_POWERBOOST_END, d, expire_time, true);
         messageTo(player, "handlePowerBoostLog", null, POWERBOOST_RAMP * 2, false);
-        sendSystemMessage(player, SID_POWERBOOST_BEGIN);
         return true;
     }
 }

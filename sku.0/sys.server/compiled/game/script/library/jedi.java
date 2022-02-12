@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class jedi extends script.base_script
 {
-    public jedi()
-    {
-    }
     public static final String JEDI_ACTIONS_FILE = "datatables/jedi/jedi_actions.iff";
     public static final String JEDI_RANK_DATA = "datatables/jedi/jedi_rank_data.iff";
     public static final String JEDI_CRYSTAL_COLOR_TABLE = "datatables/jedi/crystal_color_damage.iff";
@@ -1755,9 +1752,9 @@ public class jedi extends script.base_script
             if (getCityAtLocation(testloc, 0) > 0) {
                 continue;
             }
-            mapLocations = utils.addElement(mapLocations, rawMapLocation);
+            mapLocations.add(rawMapLocations);
         }
-        if ((mapLocations == null) || (mapLocations.size() == 0))
+        if (mapLocations == null || mapLocations.size() == 0)
         {
             locTest = getLocation(self);
             LOG("DESIGNER_FATAL", "JEDI : For planet " + locTest.area + ", primary category : " + strPrimaryCategory + " and secondary category " + strSecondaryCategory + " No planetary map location was found");
@@ -1770,7 +1767,6 @@ public class jedi extends script.base_script
         locTest.z = ((map_location)mapLocations.get(intRoll)).getY();
         locTest.area = locHome.area;
         setObjVar(self, "jedi.locTrainerLocation", locTest);
-        return;
     }
     public static void clickyCombatPearlFix(obj_id item) throws InterruptedException
     {

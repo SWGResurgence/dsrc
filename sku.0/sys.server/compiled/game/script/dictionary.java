@@ -562,7 +562,7 @@ public class dictionary implements Serializable
 		return null;
 	}	// getIntArray()
 
-	public Vector getResizeableIntArray(Object key)
+	public List getResizeableIntArray(Object key)
 	{
 		int[] array = getIntArray(key);
 		if (array != null)
@@ -1007,11 +1007,16 @@ public class dictionary implements Serializable
 		return null;
 	}
 
-	public Vector getResizeableObjIdArray(Object key)
+	public List getResizeableObjIdArray(Object key)
 	{
 		obj_id[] array = getObjIdArray(key);
-		if (array != null)
-			return new Vector(Arrays.asList(array));
+		if (array != null) {
+			List objIdList = new ArrayList<obj_id>();
+			for (obj_id objId : array) {
+				objIdList.add(objId);
+			}
+			return objIdList;
+		}
 		return null;
 	}
 

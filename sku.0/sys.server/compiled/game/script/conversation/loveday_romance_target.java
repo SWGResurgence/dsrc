@@ -3,14 +3,12 @@ package script.conversation;
 import script.library.*;
 import script.*;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class loveday_romance_target extends script.base_script
 {
-    public loveday_romance_target()
-    {
-    }
-    public static String c_stringFile = "conversation/loveday_romance_target";
+    public static final String c_stringFile = "conversation/loveday_romance_target";
     public boolean loveday_romance_target_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
@@ -107,7 +105,7 @@ public class loveday_romance_target extends script.base_script
     public String loveday_romance_target_tokenTO_trait_00(obj_id player, obj_id npc) throws InterruptedException
     {
         String file = "event/love_day";
-        Vector randomOrder = utils.getResizeableIntArrayScriptVar(player, "traits_randomOrder");
+        List randomOrder = utils.getResizeableIntArrayScriptVar(player, "traits_randomOrder");
         String traitObjVar = "playingCupid.trait_0" + (Integer) randomOrder.get(0);
         String message = getString(new string_id(file, "trait_" + getStringObjVar(npc, traitObjVar)));
         return message;
@@ -115,7 +113,7 @@ public class loveday_romance_target extends script.base_script
     public String loveday_romance_target_tokenTO_trait_04(obj_id player, obj_id npc) throws InterruptedException
     {
         String file = "event/love_day";
-        Vector randomOrder = utils.getResizeableIntArrayScriptVar(player, "traits_randomOrder");
+        List randomOrder = utils.getResizeableIntArrayScriptVar(player, "traits_randomOrder");
         String traitObjVar = "playingCupid.trait_0" + (Integer) randomOrder.get(4);
         String message = getString(new string_id(file, "trait_" + getStringObjVar(npc, traitObjVar)));
         return message;
@@ -123,7 +121,7 @@ public class loveday_romance_target extends script.base_script
     public String loveday_romance_target_tokenTO_trait_03(obj_id player, obj_id npc) throws InterruptedException
     {
         String file = "event/love_day";
-        Vector randomOrder = utils.getResizeableIntArrayScriptVar(player, "traits_randomOrder");
+        List randomOrder = utils.getResizeableIntArrayScriptVar(player, "traits_randomOrder");
         String traitObjVar = "playingCupid.trait_0" + (Integer) randomOrder.get(3);
         String message = getString(new string_id(file, "trait_" + getStringObjVar(npc, traitObjVar)));
         return message;
@@ -131,7 +129,7 @@ public class loveday_romance_target extends script.base_script
     public String loveday_romance_target_tokenTO_trait_02(obj_id player, obj_id npc) throws InterruptedException
     {
         String file = "event/love_day";
-        Vector randomOrder = utils.getResizeableIntArrayScriptVar(player, "traits_randomOrder");
+        List randomOrder = utils.getResizeableIntArrayScriptVar(player, "traits_randomOrder");
         String traitObjVar = "playingCupid.trait_0" + (Integer) randomOrder.get(2);
         String message = getString(new string_id(file, "trait_" + getStringObjVar(npc, traitObjVar)));
         return message;
@@ -139,7 +137,7 @@ public class loveday_romance_target extends script.base_script
     public String loveday_romance_target_tokenTO_trait_01(obj_id player, obj_id npc) throws InterruptedException
     {
         String file = "event/love_day";
-        Vector randomOrder = utils.getResizeableIntArrayScriptVar(player, "traits_randomOrder");
+        List randomOrder = utils.getResizeableIntArrayScriptVar(player, "traits_randomOrder");
         String traitObjVar = "playingCupid.trait_0" + (Integer) randomOrder.get(1);
         String message = getString(new string_id(file, "trait_" + getStringObjVar(npc, traitObjVar)));
         return message;
@@ -1300,19 +1298,17 @@ public class loveday_romance_target extends script.base_script
         menuInfoData.setServerNotify(false);
         setCondition(self, CONDITION_CONVERSABLE);
         faceTo(self, player);
-        Vector traitIndexes = new Vector();
-        traitIndexes.setSize(0);
+        List traitIndexes = new ArrayList<Integer>();
         for (int j = 1; j <= 5; j++)
         {
-            utils.addElement(traitIndexes, j);
+            traitIndexes.add(j);
         }
-        Vector randomOrder = new Vector();
-        randomOrder.setSize(0);
+        List randomOrder = new ArrayList<Integer>();
         for (int i = 0; i < 5; i++)
         {
             int index = rand(0, traitIndexes.size() - 1);
-            utils.addElement(randomOrder, ((Integer)traitIndexes.get(index)).intValue());
-            utils.removeElementAt(traitIndexes, index);
+            randomOrder.add(((Integer)traitIndexes.get(index)).intValue());
+            traitIndexes.remove(index);
         }
         utils.setScriptVar(player, "traits_randomOrder", randomOrder);
         return SCRIPT_CONTINUE;

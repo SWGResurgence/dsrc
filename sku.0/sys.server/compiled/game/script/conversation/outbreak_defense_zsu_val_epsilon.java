@@ -6,13 +6,11 @@ import script.library.chat;
 import script.library.groundquests;
 import script.library.utils;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class outbreak_defense_zsu_val_epsilon extends script.base_script
 {
-    public outbreak_defense_zsu_val_epsilon()
-    {
-    }
     public static String c_stringFile = "conversation/outbreak_defense_zsu_val_epsilon";
     public boolean outbreak_defense_zsu_val_epsilon_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -378,7 +376,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
             CustomerServiceLog("outbreak_themepark", "camp_defense.findGuardPosts() the npc, " + self + " failed to find any valid guard post objects within 100 of " + getLocation(self));
             return SCRIPT_CONTINUE;
         }
-        Vector guardPostsFound = null;
+        List guardPostsFound = new ArrayList<obj_id>();
         for (obj_id obj_id : guardPostList) {
             String spawnerQuestNameMatch = getStringObjVar(obj_id, "questObject");
             if (spawnerQuestNameMatch == null || spawnerQuestNameMatch.length() <= 0) {
@@ -389,7 +387,7 @@ public class outbreak_defense_zsu_val_epsilon extends script.base_script
                 continue;
             }
             CustomerServiceLog("outbreak_themepark", "camp_defense.findGuardPosts() the npc, " + self + " found a guard post object. Adding the object to the list. Guard Post: " + obj_id);
-            utils.addElement(guardPostsFound, obj_id);
+            guardPostsFound.add(obj_id);
         }
         CustomerServiceLog("outbreak_themepark", "camp_defense.findGuardPosts() the npc, " + self + " loop for all the available guard posts has finished. Length of list: " + guardPostList.length);
         if (guardPostList.length <= 0)
