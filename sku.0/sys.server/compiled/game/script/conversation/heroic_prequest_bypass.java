@@ -1,5 +1,8 @@
 package script.conversation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import script.library.chat;
 import script.library.groundquests;
 import script.library.instance;
@@ -92,6 +95,7 @@ public class heroic_prequest_bypass extends script.conversation.base.conversatio
     
     private static String[] getCompletedPrequests(obj_id player) throws InterruptedException {
         obj_id altInGroup = getAltInGroup(player);
+        List<String> questsToComplete = new ArrayList<>();
         if (altInGroup != null) {
             for (String quest : QUESTS) {
                 if (groundquests.hasCompletedQuest(altInGroup, quest) && !groundquests.hasCompletedQuest(player, quest)) {
