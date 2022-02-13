@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class storyteller_commands extends script.base_script
 {
-    public storyteller_commands()
-    {
-    }
     public static final string_id SID_STORYTELLER_HELP = new string_id("storyteller", "storyteller_help");
     public static final string_id SID_STORYTELLER_TITLE = new string_id("storyteller", "storyteller_title");
     public static final string_id SID_STORYTELLER_MENU_CMDS = new string_id("storyteller", "storyteller_menu_commands");
@@ -99,7 +96,7 @@ public class storyteller_commands extends script.base_script
         storytellerHelpTypes.setSize(0);
         for (string_id sid_storyteller_help_option : sid_storyteller_help_options) {
             String tokenType = utils.packStringId(sid_storyteller_help_option);
-            storytellerHelpTypes = utils.addElement(storytellerHelpTypes, tokenType);
+            storytellerHelpTypes.add(tokenType);
         }
         String[] _storytellerHelpTypes = new String[0];
         if (storytellerHelpTypes != null)
@@ -851,17 +848,17 @@ public class storyteller_commands extends script.base_script
             for (obj_id storytellerObject : storytellerObjects) {
                 if (isIdValid(storytellerObject)) {
                     if (storytellerName.equals(INCLUDE_ALL_STORYTELLERS)) {
-                        utils.addElement(elligibleObjects, storytellerObject);
+                        elligibleObjects.add(storytellerObject);
                     } else {
                         obj_id storytellerObjectOwner = getObjIdObjVar(storytellerObject, "storytellerid");
                         String storytellerObjectOwnerName = getStringObjVar(storytellerObject, "storytellerName");
                         if (isIdValid(storytellerId)) {
                             if (isIdValid(storytellerObjectOwner) && storytellerId == storytellerObjectOwner) {
-                                utils.addElement(elligibleObjects, storytellerObject);
+                                elligibleObjects.add(storytellerObject);
                             }
                         } else {
                             if (storytellerObjectOwnerName.length() > 0 && storytellerName.equals(storytellerObjectOwnerName.toLowerCase())) {
-                                utils.addElement(elligibleObjects, storytellerObject);
+                                elligibleObjects.add(storytellerObject);
                             }
                         }
                     }

@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class camp_defense_spawner extends script.base_script
 {
-    public camp_defense_spawner()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_trigger";
     public static final String CLIENT_EFFECT = "appearance/pt_smoke_puff.prt";
@@ -224,20 +221,20 @@ public class camp_defense_spawner extends script.base_script
         if (!utils.hasScriptVar(player, ENEMY_LIST))
         {
             Vector enemies = null;
-            enemies = utils.addElement(enemies, mob);
+            enemies.add(mob);
             utils.setScriptVar(player, ENEMY_LIST, enemies);
         }
         else 
         {
             Vector enemyVector = null;
             obj_id[] enemyArray = utils.getObjIdArrayScriptVar(player, ENEMY_LIST);
-            Vector enemies = utils.concatArrays(enemyVector, enemyArray);
+            List enemies = utils.concatArrays(enemyVector, enemyArray);
             if (enemies == null || enemies.size() <= 0)
             {
                 CustomerServiceLog("outbreak_themepark", "camp_defense_spawner.spawnDynamicEnemy() could not retrieve data from the current enemy list on the spawner: " + self);
                 return SCRIPT_CONTINUE;
             }
-            enemies = utils.addElement(enemies, mob);
+            enemies.add(mob);
             utils.setScriptVar(player, ENEMY_LIST, enemies);
         }
         return SCRIPT_CONTINUE;
@@ -269,7 +266,7 @@ public class camp_defense_spawner extends script.base_script
             if (!(getStringObjVar(obj_id, PATHNODE_OBJVAR)).equals(questName)) {
                 continue;
             }
-            utils.addElement(nodePtLocs, getLocation(obj_id));
+            nodePtLocs.add(getLocation(pathNodeList, obj_id));
         }
         CustomerServiceLog("outbreak_themepark", "camp_defense_spawner.findPathNodes() nodePtLocs.length: " + nodePtLocs.size());
         if (nodePtLocs == null || nodePtLocs.size() <= 0)

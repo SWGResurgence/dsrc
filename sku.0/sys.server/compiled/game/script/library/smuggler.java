@@ -131,7 +131,7 @@ public class smuggler extends script.base_script
                 } else {
                     if (!isCrafted(content)) {
                         String template = getTemplateName(content);
-                        if (template != null && !template.isEmpty())) {
+                        if (template != null && !template.isEmpty()) {
                             if (dataTableGetInt(TBL, template, "price") > 0) {
                                 junk.add(content);
                             }

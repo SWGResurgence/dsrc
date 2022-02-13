@@ -148,7 +148,7 @@ public class instance extends script.base_script
         for (obj_id allPlayer : allPlayers) {
             for (obj_id listPlayer : listPlayers) {
                 if (allPlayer == listPlayer) {
-                    utils.addElement(validPlayers, allPlayer);
+                    validPlayers.add(allPlayers, allPlayer);
                 }
             }
         }
@@ -754,7 +754,7 @@ public class instance extends script.base_script
                 dictionary data = getLockoutData(player, instanceName);
                 if (data != null)
                 {
-                    utils.addElement(instanceData, data);
+                    instanceData.add(data);
                 }
             }
         }

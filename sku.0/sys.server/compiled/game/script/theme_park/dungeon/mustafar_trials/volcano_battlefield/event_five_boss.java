@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class event_five_boss extends script.base_script
 {
-    public event_five_boss()
-    {
-    }
     public static final String GUARD = "som_volcano_five_septipod";
     public static final String MIDGUARD = "som_volcano_five_midguard";
     public static final int SWITCH_RECAST = 18;
@@ -293,7 +290,7 @@ public class event_five_boss extends script.base_script
         validLoc.setSize(0);
         for (obj_id object : objects) {
             if (hasObjVar(object, type)) {
-                utils.addElement(validLoc, getLocation(object));
+                validLoc.add(getLocation(object));
             }
         }
         if (validLoc == null || validLoc.size() == 0)

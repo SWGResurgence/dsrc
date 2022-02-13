@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class master_city_object extends script.base_script
 {
-    public master_city_object()
-    {
-    }
     public static final int CITY_PROCESS_INTERVAL = 60 * 60;
     public static final int CITY_UPDATE_INTERVAL = 60 * 60 * 24 * 7;
     public static final string_id ELECTION_INCUMBENT_WIN_SUBJECT = new string_id("city/city", "election_incumbent_win_subject");
@@ -189,8 +186,8 @@ public class master_city_object extends script.base_script
                     }
                 }
                 if (!found) {
-                    utils.addElement(vote_ids, vote);
-                    utils.addElement(vote_counts, 1);
+                    utils.add(vote_ids, vote);
+                    utils.add(vote_counts, 1);
                 }
             } else {
                 CustomerServiceLog("player_city", "Election Cycle for City: " + city_name + " (" + city_id + "/" + cityHall + ").  Citizen: (" + citizen2 + ") has 'Voted for/allegience to' an Invalid ID(" + vote + ")  This vote won't count.");

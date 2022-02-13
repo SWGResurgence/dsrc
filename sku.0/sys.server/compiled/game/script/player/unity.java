@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class unity extends script.base_script
 {
-    public unity()
-    {
-    }
     public static final string_id SID_SUI_PROPOSE_PROMPT = new string_id("unity", "sui_propose_prompt");
     public static final string_id SID_SUI_RING_SPEC = new string_id("unity", "sui_ring_spec");
     public static final string_id SID_SUI_RING_EQUIP = new string_id("unity", "sui_ring_equip");
@@ -124,7 +121,7 @@ public class unity extends script.base_script
             prose_package ppSpec = prose.getPackage(SID_SUI_RING_EQUIP);
             prose.setTT(ppSpec, getNameStringId(ring));
             entry = " \0" + packOutOfBandProsePackage(null, ppSpec);
-            entries = utils.addElement(entries, entry);
+            entries.add(entry);
         }
         String prompt = "@" + marriage.STF + ":ring_prompt";
         String title = "@" + marriage.STF + ":ring_title";

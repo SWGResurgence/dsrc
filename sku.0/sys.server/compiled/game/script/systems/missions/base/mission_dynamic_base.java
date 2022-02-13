@@ -4,12 +4,11 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class mission_dynamic_base extends script.systems.missions.base.mission_base
 {
-    public mission_dynamic_base()
-    {
-    }
     public static final float MIN_DESTROY_DISTANCE = 350.0f;
     public static final int FACTION_DELIVER_REWARD_VALUE = 150;
     public static final int FACTION_REWARD_VALUE = 100;
@@ -791,11 +790,11 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         }
         LIVE_LOG("bh_jedi_mission", "mission_dynamic_base.createJediBountyMission: found " + objJedis.length + " qualifying PvP Bounties");
         int intRoll = -1;
-        Vector jediList = new Vector();
-        Vector jediIdx = new Vector();
+        List jediList = new ArrayList<>();
+        List jediIdx = new ArrayList<>();
         for (int i = 0; i < objJedis.length; i++)
         {
-            jediIdx = utils.addElement(jediIdx, i);
+            jediIdx.add(i);
         }
         jediList = utils.concatArrays(jediList, objJedis);
         obj_id[] SamePlanetObjId = new obj_id[jediList.size()];
@@ -806,26 +805,26 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             intRoll = rand(0, jediList.size() - 1);
             if (!isIdValid(((obj_id)jediList.get(intRoll))) || !boolOnline[(Integer) (jediIdx.get(intRoll))])
             {
-                jediList = utils.removeElementAt(jediList, intRoll);
-                jediIdx = utils.removeElementAt(jediIdx, intRoll);
+                jediList.remove(intRoll);
+                jediIdx.remove(intRoll);
             }
             else if ((((obj_id)jediList.get(intRoll)) == bountyHunterId) || ((intFaction != 0) && (jediFaction[(Integer) (jediIdx.get(intRoll))] != intFaction)))
             {
-                jediList = utils.removeElementAt(jediList, intRoll);
-                jediIdx = utils.removeElementAt(jediIdx, intRoll);
+                jediList.remove(intRoll);
+                jediIdx.remove(intRoll);
             }
             else if (flag == missions.BOUNTY_FLAG_SMUGGLER && ((smugglerFlags == null) || (smugglerFlags.length < ((Integer) (jediIdx.get(intRoll)) + 1)) || (smugglerFlags[(Integer) (jediIdx.get(intRoll))] != 1)))
             {
-                jediList = utils.removeElementAt(jediList, intRoll);
-                jediIdx = utils.removeElementAt(jediIdx, intRoll);
+                jediList.remove(intRoll);
+                jediIdx.remove(intRoll);
             }
             else if (jediPlanet[(Integer) (jediIdx.get(intRoll))].equals(bountyHunterLocation.area))
             {
                 SamePlanetObjId[SamePlanetCounter] = ((obj_id)jediList.get(intRoll));
                 SamePlanetInt[SamePlanetCounter] = (Integer) jediIdx.get(intRoll);
                 ++SamePlanetCounter;
-                jediList = utils.removeElementAt(jediList, intRoll);
-                jediIdx = utils.removeElementAt(jediIdx, intRoll);
+                jediList.remove(intRoll);
+                jediIdx.remove(intRoll);
             }
             else 
             {
@@ -1444,7 +1443,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         okRows.setSize(0);
         if (intOverrideMissionIndex >= 0)
         {
-            okRows = utils.addElement(okRows, intOverrideMissionIndex);
+            okRows.add(intOverrideMissionIndex);
         }
         else 
         {
@@ -1452,7 +1451,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             {
                 if ((intMinDifficulty[j] <= intDifficulty) && (intMaxDifficulty[j] >= intDifficulty))
                 {
-                    okRows = utils.addElement(okRows, j);
+                    okRows.add(j);
                 }
             }
         }
@@ -1865,7 +1864,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             {
                 if (((obj_id)objSpawnedTemplates.get(intI)) == objTemplate)
                 {
-                    objSpawnedTemplates = utils.removeElementAt(objSpawnedTemplates, intI);
+                    objSpawnedTemplates.remove(intI);
                     return;
                 }
                 intI = intI + 1;
@@ -1989,7 +1988,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         deltadictionary dctMissionInformation = objPlanetObject.getScriptVars();
         String strArrayName = strPlanetName + "_" + strInformantLevel;
         Vector objInformants = dctMissionInformation.getResizeableObjIdArray(strArrayName);
-        objInformants = utils.addElement(objInformants, objInformant);
+        objInformants.add(objInformant);
         dctMissionInformation.put(strArrayName, objInformants);
         return;
     }
@@ -2009,8 +2008,8 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             int intIndex = utils.getElementPositionInArray(objInformants, objInformant);
             if (intIndex != -1)
             {
-                objInformants = utils.removeElementAt(objInformants, intIndex);
-                strInformantNames = utils.removeElementAt(strInformantNames, intIndex);
+                objInformants.remove(intIndex);
+                strInformantNames.remove(intIndex);
             }
             dctMissionInformation.put(strArrayName, objInformants);
         }
@@ -3080,7 +3079,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             map_location[] locTargets = getPlanetaryMapLocations(ENTERTAINER_TARGET_CATEGORY[intI], "");
             if (locTargets != null && locTargets.length > 0)
             {
-                strCategories = utils.addElement(strCategories, ENTERTAINER_TARGET_CATEGORY[intI]);
+                strCategories.add(ENTERTAINER_TARGET_CATEGORY[intI]);
             }
         }
         if (strCategories.size() == 0)
@@ -3148,7 +3147,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
             String strComponent = dctCraftingStats.getString(strLookupName);
             if (!strComponent.equals(""))
             {
-                strComponents = utils.addElement(strComponents, strComponent);
+                strComponents.add(strComponent);
             }
             intI = intI + 1;
         }

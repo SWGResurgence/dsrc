@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class terminal_hangar_structure extends script.base_script
 {
-    public terminal_hangar_structure()
-    {
-    }
     public static final String PID_NAME = "hangar";
     public static final String SCRIPT_VAR_SCD_LIST = "hangar.scds";
     public static final String SCRIPT_VAR_RESTORING_SHIP = "hangar.restoring";
@@ -181,7 +178,7 @@ public class terminal_hangar_structure extends script.base_script
             for (obj_id storedShip : shipsStored) {
                 if (isIdValid(storedShip)) {
                     if (!hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE)) {
-                        utils.addElement(storedShipNames, getEncodedName(storedShip));
+                        storedShipNames.add(getEncodedName(storedShip));
                     }
                 }
             }
@@ -219,7 +216,7 @@ public class terminal_hangar_structure extends script.base_script
         for (obj_id storedShip : shipControlDevices) {
             if (isIdValid(storedShip)) {
                 if (!hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE)) {
-                    utils.addElement(hangarStoredShips, storedShip);
+                    hangarStoredShips.add(storedShip);
                 }
             }
         }
@@ -264,7 +261,7 @@ public class terminal_hangar_structure extends script.base_script
             for (obj_id storedShip : shipsInHangar) {
                 if (isIdValid(storedShip)) {
                     if (!hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE)) {
-                        utils.addElement(hangarStoredShips, storedShip);
+                        hangarStoredShips.add(storedShip);
                     }
                 }
             }
@@ -315,7 +312,7 @@ public class terminal_hangar_structure extends script.base_script
         for (obj_id storedShip : shipControlDevices) {
             if (isIdValid(storedShip)) {
                 if (!hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE)) {
-                    utils.addElement(hangarStoredShips, storedShip);
+                    hangarStoredShips.add(storedShip);
                 }
             }
         }

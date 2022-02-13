@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
-    public mediator()
-    {
-    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final int PROGRESS_NONE = 0;
     public static final int ANSWERED_YES = 1;
@@ -80,11 +77,11 @@ public class mediator extends script.poi.base.scenario_actor
                 return SCRIPT_CONTINUE;
             }
             String msg_id = "m_greet";
-            responses = utils.addElement(responses, new string_id(convo, "response_yes"));
+            responses.add( new string_id(convo, "response_yes"));
             switch (progress)
             {
                 case PROGRESS_NONE:
-                responses = utils.addElement(responses, new string_id(convo, "response_no"));
+                responses.add( new string_id(convo, "response_no"));
                 break;
                 case ANSWERED_YES:
                 scenario.say(self, convo, "m_willing");
@@ -93,7 +90,7 @@ public class mediator extends script.poi.base.scenario_actor
                 return SCRIPT_CONTINUE;
                 case ANSWERED_NO:
                 msg_id = "m_rejected";
-                responses = utils.addElement(responses, new string_id(convo, "response_no_again"));
+                responses.add( new string_id(convo, "response_no_again"));
                 break;
                 case ANSWERED_NO_AGAIN:
                 scenario.say(self, convo, "m_enraged");

@@ -4,13 +4,11 @@ import script.dictionary;
 import script.library.utils;
 import script.obj_id;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class make_them_sit extends script.base_script
 {
-    public make_them_sit()
-    {
-    }
     public int doSpawnEvent(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "handleAreaSpawnerHaveThemSit", null, 2, false);
@@ -18,8 +16,7 @@ public class make_them_sit extends script.base_script
     }
     public int handleAreaSpawnerHaveThemSit(obj_id self, dictionary params) throws InterruptedException
     {
-        Vector debugSpawnList = new Vector();
-        debugSpawnList.setSize(0);
+        List debugSpawnList = new ArrayList<obj_id>();
         if (utils.hasScriptVar(self, "debugSpawnList"))
         {
             debugSpawnList = utils.getResizeableObjIdArrayScriptVar(self, "debugSpawnList");

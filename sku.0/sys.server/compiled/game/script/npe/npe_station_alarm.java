@@ -4,7 +4,8 @@ import script.dictionary;
 import script.library.utils;
 import script.obj_id;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class npe_station_alarm extends script.base_script
 {
@@ -25,13 +26,12 @@ public class npe_station_alarm extends script.base_script
     {
         obj_id building = getTopMostContainer(self);
         LOG("npe_alarm", "on attach fired, and building is " + building);
-        Vector objAlarms = new Vector();
-        objAlarms.setSize(0);
+        List objAlarms = new ArrayList<obj_id>();
         if (utils.hasScriptVar(building, "objAlarms"))
         {
             objAlarms = utils.getResizeableObjIdArrayScriptVar(building, "objAlarms");
         }
-        objAlarms = utils.addElement(objAlarms, self);
+        objAlarms.add(self);
         utils.setScriptVar(building, "objAlarms", objAlarms);
         return SCRIPT_CONTINUE;
     }

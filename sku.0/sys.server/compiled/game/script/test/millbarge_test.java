@@ -6,13 +6,10 @@ import script.library.house_pet;
 import script.library.utils;
 import script.obj_id;
 
-import java.util.Vector;
+import java.util.List;
 
 public class millbarge_test extends script.base_script
 {
-    public millbarge_test()
-    {
-    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
@@ -105,7 +102,7 @@ public class millbarge_test extends script.base_script
             }
             if (command.equalsIgnoreCase("breakspawner"))
             {
-                Vector spawnedList = utils.getResizeableObjIdArrayScriptVar(myTarget, "myCreations");
+                List spawnedList = utils.getResizeableObjIdArrayScriptVar(myTarget, "myCreations");
                 obj_id brokenId = obj_id.NULL_ID;
                 for (int i = 0; i < spawnedList.size(); i++)
                 {

@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class storyteller extends script.base_script
 {
-    public storyteller()
-    {
-    }
     public static final String STORYTELLER_DATATABLE = "datatables/item/master_item/storyteller_item.iff";
     public static final String STATIC_ITEM_DATATABLE = "datatables/item/master_item/master_item.iff";
     public static final String THEATER_MODE = "theater_mode";
@@ -830,7 +827,7 @@ public class storyteller extends script.base_script
             if (isExcludedToken) {
                 continue;
             }
-            utils.addElement(validStorytellerObjects, object);
+            validStorytellerObjects.add(object);
         }
         if (validStorytellerObjects == null || validStorytellerObjects.size() < 1)
         {
@@ -900,10 +897,10 @@ public class storyteller extends script.base_script
             if (hasObjVar(validStoryObject, storyteller.EFFECT_ACTIVE_OBJVAR) && hasObjVar(validStoryObject, storyteller.EFFECT_TOKEN_NAME)) {
                 effect = getStringObjVar(validStoryObject, storyteller.EFFECT_TOKEN_NAME);
                 String effectEntry = buildBlueprintObjectData(storyteller.BLUEPRINT_TOKEN_NEEDED, effect, 0.0f, 0.0f, 0.0f, 0.0f, 0, 0, "none");
-                utils.addElement(blueprintString, effectEntry);
+                blueprintString.add(effectEntry);
             }
             String newEntry = buildBlueprintObjectData(storyteller.BLUEPRINT_TOKEN_NEEDED, tokenName, locX, locY, locZ, playerYaw - objYaw, combatLevel, difficulty, effect);
-            utils.addElement(blueprintString, newEntry);
+            blueprintString.add(newEntry);
             if (blueprintString.size() >= BLUEPRINT_MAX_NUM_OBJECTS) {
                 break;
             }
@@ -1308,7 +1305,7 @@ public class storyteller extends script.base_script
         String tokenType;
         for (String sid_storytellerTokenType : sid_storytellerTokenTypes) {
             tokenType = utils.packStringId(new string_id("storyteller", sid_storytellerTokenType));
-            storytellerTokenTypes = utils.addElement(storytellerTokenTypes, tokenType);
+            storytellerTokenTypes.add(tokenType);
         }
         String[] _storytellerTokenTypes = new String[0];
         if (storytellerTokenTypes != null)
@@ -1353,7 +1350,7 @@ public class storyteller extends script.base_script
                     int cost = row.getInt("cost");
                     if (cost > 0)
                     {
-                        tokenReferences = utils.addElement(tokenReferences, token_reference);
+                        tokenReferences.add(token_reference);
                     }
                 }
             }

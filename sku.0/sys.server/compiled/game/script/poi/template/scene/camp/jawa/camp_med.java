@@ -26,14 +26,14 @@ public class camp_med extends script.poi.template.scene.camp.jawa.base
             {
                 String[] tpfArray = dataTableGetStringColumn(TBL, n);
                 Vector tpf = new Vector(Arrays.asList(tpfArray));
-                if ((tpf == null) || (tpf.size() == 0))
+                if (tpf == null || tpf.size() == 0)
                 {
                     destroyObject(self);
                     return SCRIPT_CONTINUE;
                 }
                 if (n == COL_MAX - 1)
                 {
-                    tpf = utils.removeElementAt(tpf, 0);
+                    tpf.remove(0);
                 }
                 int cnt = rand(4, 7) - n;
                 for (int i = 0; i < cnt; i++)
@@ -55,13 +55,10 @@ public class camp_med extends script.poi.template.scene.camp.jawa.base
                         }
                         here.y = getHeightAtLocation(here.x, here.z);
                         obj_id child = createObject(template, here);
-                        if ((child == null) || (child == obj_id.NULL_ID))
-                        {
-                        }
-                        else 
+                        if (child != null && child != obj_id.NULL_ID)
                         {
                             setYaw(child, rand(-180, 180));
-                            children = utils.addElement(children, child);
+                            children.add(child);
                         }
                     }
                 }

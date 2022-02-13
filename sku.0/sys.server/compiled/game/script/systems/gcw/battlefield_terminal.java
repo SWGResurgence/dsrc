@@ -4,12 +4,11 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class battlefield_terminal extends script.base_script
 {
-    public battlefield_terminal()
-    {
-    }
     public static final int NO_CONTROL = factions.FACTION_FLAG_UNKNOWN;
     public static final int IMPERIAL_CONTROL = factions.FACTION_FLAG_IMPERIAL;
     public static final int REBEL_CONTROL = factions.FACTION_FLAG_REBEL;
@@ -594,7 +593,7 @@ public class battlefield_terminal extends script.base_script
         }
         attachScript(newObject, "theme_park.restuss_event.restuss_clientfx_controller");
     }
-    public void playEffectAtLoc(String effect, location loc, Vector playerList) throws InterruptedException
+    public void playEffectAtLoc(String effect, location loc, List playerList) throws InterruptedException
     {
         if (loc == null)
         {
@@ -642,7 +641,7 @@ public class battlefield_terminal extends script.base_script
         {
             return;
         }
-        Vector playerList = utils.getResizeableObjIdBatchScriptVar(controller, pvp.BATTLEFIELD_ACTIVE_PLAYERS);
+        List playerList = utils.getResizeableObjIdBatchScriptVar(controller, pvp.BATTLEFIELD_ACTIVE_PLAYERS);
         for (int i = 0; i < numRows; i++)
         {
             dictionary row = dataTableGetRow(buildingTable, i);
@@ -701,7 +700,7 @@ public class battlefield_terminal extends script.base_script
             blog(self, "Battlefield Terminal is invalid at " + loc);
             return SCRIPT_CONTINUE;
         }
-        Vector playerList = utils.getResizeableObjIdBatchScriptVar(controller, pvp.BATTLEFIELD_ACTIVE_PLAYERS);
+        List playerList = utils.getResizeableObjIdBatchScriptVar(controller, pvp.BATTLEFIELD_ACTIVE_PLAYERS);
         playEffectAtLoc("pt_electricity_battlefield_terminal.prt", loc, playerList);
         int mitigation = utils.getIntScriptVar(self, "battlefield.terminal_mitigation");
         if (mitigation <= 0)
@@ -724,7 +723,7 @@ public class battlefield_terminal extends script.base_script
             blog(self, "Battlefield Terminal is invalid at " + loc);
             return SCRIPT_CONTINUE;
         }
-        Vector playerList = utils.getResizeableObjIdBatchScriptVar(controller, pvp.BATTLEFIELD_ACTIVE_PLAYERS);
+        List playerList = utils.getResizeableObjIdBatchScriptVar(controller, pvp.BATTLEFIELD_ACTIVE_PLAYERS);
         playEffectAtLoc("pt_smoke_large_battlefield.prt", loc, playerList);
         int mitigation = utils.getIntScriptVar(self, "battlefield.terminal_mitigation");
         if (mitigation <= 0)

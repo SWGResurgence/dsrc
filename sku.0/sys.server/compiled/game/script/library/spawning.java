@@ -4,13 +4,12 @@ import script.dictionary;
 import script.location;
 import script.obj_id;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 public class spawning extends script.base_script
 {
-    public spawning()
-    {
-    }
     public static void activateSpawnerHack(obj_id objPlayer) throws InterruptedException
     {
         obj_id[] objSpawners = getAllObjectsWithObjVar(getLocation(objPlayer), 24000, "intSpawnSystem");
@@ -63,16 +62,13 @@ public class spawning extends script.base_script
     }
     public static void addToSpawnDebugList(obj_id self, obj_id spawned) throws InterruptedException
     {
-        if(!utils.inDebugMode()) return;
-        Vector debugSpawnList;
+        List debugSpawnList = new ArrayList<obj_id>();
         if (utils.hasScriptVar(self, "debugSpawnList"))
-        {
-            debugSpawnList = utils.getResizeableObjIdArrayScriptVar(self, "debugSpawnList");
-            debugSpawnList = utils.addElement(debugSpawnList, spawned);
-        } else {
-            debugSpawnList = utils.addElement(new Vector(), spawned);
-        }
-        utils.setScriptVar(self, "debugSpawnList", debugSpawnList);
+         {
+             debugSpawnList = utils.getResizeableObjIdArrayScriptVar(self, "debugSpawnList");
+         }
+         debugSpawnList.add(spawned);
+         utils.setScriptVar(self, "debugSpawnList", debugSpawnList);
     }
     public static Vector getAllObjectsWithObjVar(location locTest, String strObjVarName) throws InterruptedException
     {
@@ -84,10 +80,10 @@ public class spawning extends script.base_script
     {
         if (hasObjVar(objParent, strObjVarName))
         {
-            objArray = utils.addElement(objArray, objParent);
+            objArray.add(objParent);
         }
         obj_id[] objContents = getContents(objParent);
-        if ((objContents != null) && (objContents.length > 0))
+        if (objContents != null && objContents.length > 0)
         {
             for (obj_id objContent : objContents) {
                 getObjectsWithObjVar(objContent, strObjVarName, objArray);
@@ -105,7 +101,7 @@ public class spawning extends script.base_script
             objTestContents = getContents(objCell);
             if ((objTestContents != null) && (objTestContents.length > 0)) {
                 for (obj_id objTestContent : objTestContents) {
-                    objContents = utils.addElement(objContents, objTestContent);
+                    objContents.add(objTestContent);
                 }
             }
         }
@@ -132,7 +128,7 @@ public class spawning extends script.base_script
             count = 0;
         }
         utils.setScriptVar(spawner, "count", count);
-        Vector spawnedList = utils.getResizeableObjIdArrayScriptVar(spawner, "myCreations");
+        List spawnedList = utils.getResizeableObjIdArrayScriptVar(spawner, "myCreations");
         for (int i = 0; i < spawnedList.size(); i++)
         {
             if (spawnedList.get(i) == deadGuy)

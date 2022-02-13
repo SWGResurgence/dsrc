@@ -7,12 +7,11 @@ import script.obj_id;
 import script.region;
 
 import java.util.Vector;
+import java.util.ArrayList
+import java.util.List;
 
 public class player_battlefield extends script.base_script
 {
-    public player_battlefield()
-    {
-    }
     public static final String VAR_PLACED_STRUCTURE = "battlefield.placed_structure";
     public int OnInitialize(obj_id self) throws InterruptedException
     {
@@ -490,7 +489,7 @@ public class player_battlefield extends script.base_script
             String[] factions_allowed = battlefield.getFactionsAllowed(bf);
             for (String s : factions_allowed) {
                 obj_id[] faction_team = battlefield.getFactionTeam(bf, s);
-                num_factions = utils.addElement(num_factions, s + " Team: " + faction_team.length);
+                num_factions.add(factions_allowed, s + " Team: " + faction_team.length);
             }
         }
         else 
@@ -519,18 +518,17 @@ public class player_battlefield extends script.base_script
         {
             time_message = "0 seconds.";
         }
-        Vector dsrc = new Vector();
-        dsrc.setSize(0);
-        dsrc = utils.addElement(dsrc, "Battlefield Name: " + name);
-        dsrc = utils.addElement(dsrc, "Battlefield Type: " + pvp_type_str);
-        dsrc = utils.addElement(dsrc, "Objective: " + game_type);
+        List dsrc = new ArrayList<String>();
+        dsrc.add("Battlefield Name: " + name);
+        dsrc.add("Battlefield Type: " + pvp_type_str);
+        dsrc.add("Objective: " + game_type);
         if (time == -9999)
         {
-            dsrc = utils.addElement(dsrc, "Status: " + status);
+            dsrc.add("Status: " + status);
         }
         else 
         {
-            dsrc = utils.addElement(dsrc, "Status: " + status + " (" + time_starting + " " + time_message + ")");
+            dsrc.add("Status: " + status + " (" + time_starting + " " + time_message + ")");
         }
         dsrc = utils.concatArrays(dsrc, num_factions);
         int pid = sui.listbox(self, self, "Battlefield Status", sui.REFRESH_CANCEL, "Battlefield Status", dsrc, "msgBattlefieldStatus");

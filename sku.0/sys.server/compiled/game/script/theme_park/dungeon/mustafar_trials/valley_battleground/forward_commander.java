@@ -12,9 +12,6 @@ import java.util.Vector;
 
 public class forward_commander extends script.base_script
 {
-    public forward_commander()
-    {
-    }
     public static final String SQUAD_MEMBER = "som_battlefield_elite_guard";
     public static final boolean LOGGING = false;
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
@@ -87,7 +84,7 @@ public class forward_commander extends script.base_script
             for (obj_id object : objects) {
                 if (hasObjVar(object, "wp_name")) {
                     if (s.equals(getStringObjVar(object, "wp_name"))) {
-                        utils.addElement(waypoints, getLocation(object));
+                        waypoints.add(getLocation(object));
                     }
                 }
             }

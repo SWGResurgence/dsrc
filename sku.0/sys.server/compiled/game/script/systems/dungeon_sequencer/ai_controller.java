@@ -7,12 +7,11 @@ import script.obj_id;
 import script.string_id;
 
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ai_controller extends script.base_script
 {
-    public ai_controller()
-    {
-    }
     public static final String PATH = "patrol_path";
     public static final String MOVETO = "moveTo";
     public static final boolean LOGGING = true;
@@ -238,7 +237,7 @@ public class ai_controller extends script.base_script
         }
         if (utils.hasScriptVar(self, restuss_event.TRIG_CUSTOMSIGNAL))
         {
-            Vector customTrigger = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_CUSTOMSIGNAL);
+            List customTrigger = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_CUSTOMSIGNAL);
             if (customTrigger != null && customTrigger.size() > 0)
             {
                 for (Object o : customTrigger) {
@@ -264,7 +263,7 @@ public class ai_controller extends script.base_script
     {
         if (utils.hasScriptVar(self, restuss_event.TRIG_ONDEATH))
         {
-            Vector deathTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ONDEATH);
+            List deathTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ONDEATH);
             if (deathTriggers != null && deathTriggers.size() > 0)
             {
                 for (Object deathTrigger : deathTriggers) {
@@ -288,7 +287,7 @@ public class ai_controller extends script.base_script
         resetSequenceMovement();
         if (utils.hasScriptVar(self, restuss_event.TRIG_ENTERCOMBAT))
         {
-            Vector combatTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ENTERCOMBAT);
+            List combatTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ENTERCOMBAT);
             if (combatTriggers != null && combatTriggers.size() > 0)
             {
                 for (Object combatTrigger : combatTriggers) {
@@ -307,7 +306,7 @@ public class ai_controller extends script.base_script
         resetSequenceMovement();
         if (utils.hasScriptVar(self, restuss_event.TRIG_EXITCOMBAT))
         {
-            Vector combatTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_EXITCOMBAT);
+            List combatTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_EXITCOMBAT);
             if (combatTriggers != null && combatTriggers.size() > 0)
             {
                 for (Object combatTrigger : combatTriggers) {
@@ -326,7 +325,7 @@ public class ai_controller extends script.base_script
         }
         if (utils.hasScriptVar(self, restuss_event.TRIG_ARRIVELOCATION))
         {
-            Vector arriveTrigger = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ARRIVELOCATION);
+            List arriveTrigger = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ARRIVELOCATION);
             if (arriveTrigger != null && arriveTrigger.size() > 0)
             {
                 for (Object o : arriveTrigger) {
@@ -470,8 +469,7 @@ public class ai_controller extends script.base_script
                 }
                 break;
             case "spawn_id":
-                Vector children = new Vector();
-                children.setSize(0);
+                List children = new ArrayList<obj_id>();
                 if (utils.hasResizeableObjIdBatchScriptVar(trial.getParent(self), trial.PROT_CHILD_ARRAY)) {
                     children = utils.getResizeableObjIdBatchScriptVar(trial.getParent(self), trial.PROT_CHILD_ARRAY);
                 }

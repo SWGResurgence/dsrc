@@ -170,7 +170,7 @@ public class guard_spawner extends script.base_script
         {
             Vector myCreations = new Vector();
             myCreations.setSize(0);
-            utils.addElement(myCreations, npc);
+            myCreations.add(npc);
             setObjVar(self, "myCreations", myCreations);
         }
         else 

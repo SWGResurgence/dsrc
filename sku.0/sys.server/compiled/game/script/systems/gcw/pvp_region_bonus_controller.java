@@ -8,12 +8,11 @@ import script.library.utils;
 import script.obj_id;
 
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class pvp_region_bonus_controller extends script.base_script
 {
-    public pvp_region_bonus_controller()
-    {
-    }
     public static final float CYCLE_HEARTBEAT = 30.0f;
     public static final float CYCLE_MAX_RUN = 600.0f;
     public static final String PVP_AREA_RECORD = "gcw_pvp_region.activity_list";
@@ -98,8 +97,7 @@ public class pvp_region_bonus_controller extends script.base_script
     public int diedInPvpRegion(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
-        Vector recordList = new Vector();
-        recordList.setSize(0);
+        List recordList = new ArrayList<String>();
         if (utils.hasResizeableStringBatchScriptVar(self, PVP_AREA_RECORD))
         {
             recordList = utils.getResizeableStringBatchScriptVar(self, PVP_AREA_RECORD);
@@ -146,7 +144,7 @@ public class pvp_region_bonus_controller extends script.base_script
         }
         return deathCount;
     }
-    public Vector addPlayerToList(obj_id player, Vector recordList, int uniqueHits, int deaths) throws InterruptedException
+    public List addPlayerToList(obj_id player, List recordList, int uniqueHits, int deaths) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player) || !isPlayer(player) || recordList == null)
         {
@@ -161,11 +159,11 @@ public class pvp_region_bonus_controller extends script.base_script
         }
         doLogging("xx", "Player is " + faction);
         String newEntry = "" + player + "-" + faction + "-" + uniqueHits + "-" + deaths;
-        utils.addElement(recordList, newEntry);
+        recordList.add(newEntry);
         doLogging("xx", "Adding element to array: " + newEntry);
         return recordList;
     }
-    public String getPlayerDataFromList(obj_id player, Vector recordList) throws InterruptedException
+    public String getPlayerDataFromList(obj_id player, List recordList) throws InterruptedException
     {
         String listEntry = null;
         if (recordList.size() == 0)
@@ -181,7 +179,7 @@ public class pvp_region_bonus_controller extends script.base_script
         }
         return listEntry;
     }
-    public int getPositionInArrayByPlayer(obj_id player, Vector recordList) throws InterruptedException
+    public int getPositionInArrayByPlayer(obj_id player, List recordList) throws InterruptedException
     {
         if (recordList.size() == 0)
         {
@@ -210,7 +208,7 @@ public class pvp_region_bonus_controller extends script.base_script
         recordList.set(playerData, updatedData);
         return recordList;
     }
-    public Vector incrementDeathsByPlayer(obj_id player, Vector recordList) throws InterruptedException
+    public List incrementDeathsByPlayer(obj_id player, List recordList) throws InterruptedException
     {
         int playerData = getPositionInArrayByPlayer(player, recordList);
         String[] parse = split(((String)recordList.get(playerData)), '-');

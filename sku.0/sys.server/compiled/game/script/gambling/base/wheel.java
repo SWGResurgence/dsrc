@@ -3,13 +3,11 @@ package script.gambling.base;
 import script.*;
 import script.library.*;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class wheel extends script.gambling.base.default_interface
 {
-    public wheel()
-    {
-    }
     private static final int TIMER_BETTING = 120;
     public int OnInitialize(obj_id self) throws InterruptedException
     {
@@ -48,12 +46,12 @@ public class wheel extends script.gambling.base.default_interface
             {
                 sendSystemMessage(player, gambling.SID_PLACE_BETS);
             }
-            Vector gamePlayers = getResizeableObjIdArrayObjVar(self, gambling.VAR_GAME_PLAYERS_IDS);
+            List gamePlayers = getResizeableObjIdArrayObjVar(self, gambling.VAR_GAME_PLAYERS_IDS);
             if (gamePlayers != null && gamePlayers.size() > 0)
             {
                 if (utils.getElementPositionInArray(gamePlayers, player) == -1)
                 {
-                    gamePlayers = utils.addElement(gamePlayers, player);
+                    gamePlayers.add(player);
                     setObjVar(self, gambling.VAR_GAME_PLAYERS_IDS, gamePlayers);
                     showBetUi(self, player);
                 }
@@ -237,8 +235,7 @@ public class wheel extends script.gambling.base.default_interface
         prompt += "Bank : " + getBankBalance(player) + "\n";
         prompt += "Total: " + getTotalMoney(player) + "\n";
         prompt += "\nNOTE: if you leave the table after placing a bet, all of your outstanding bets will be forfeit.";
-        Vector entries = new Vector();
-        entries.setSize(0);
+        List entries = new ArrayList<String>();
         int total = 0;
         int playerIdx = gambling.getGamePlayerIndex(self, player);
         if (playerIdx == -1)
@@ -266,14 +263,14 @@ public class wheel extends script.gambling.base.default_interface
                         entry += " ";
                     }
                     entry += Integer.toString(val);
-                    entries = utils.addElement(entries, entry);
+                    entries.add(entry);
                     total += val;
                 }
                 entries = utils.alphabetizeStringArray(entries);
-                entries = utils.addElement(entries, " ");
+                entries.add(" ");
             }
         }
-        entries = utils.addElement(entries, "Total Bet : " + total);
+        entries.add("Total Bet : " + total);
         int pid = sui.listbox(self, player, prompt, sui.REFRESH_LEAVE_GAME, title, entries, "handleBetUi");
         if (pid == -1)
         {

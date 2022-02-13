@@ -1,7 +1,22 @@
 package script;
 
-import java.io.*;
-import java.util.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.ObjectStreamException;
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import script.dictionary;
 
 public final class deltadictionary
 {
@@ -45,10 +60,10 @@ public final class deltadictionary
 		}
 
 		potentiallyDirty.add(key);
-		if (value instanceof Vector)
+		if (value instanceof List)
 		{
 			// save value as an array instead
-			Vector v = (Vector)value;
+			List v = new ArrayList<>(value);
 			if (v.isEmpty())
 			{
 				System.err.println("WARNING: deltadictionary.put passed empty vector value");
@@ -66,49 +81,49 @@ public final class deltadictionary
 			{
 				int[] newValue = new int[v.size()];
 				for ( int i = 0; i < newValue.length; ++i )
-					newValue[i] = (Integer) v.get(i);
+					newValue[i] = ((Integer)v.get(i)).intValue();
 				value = newValue;
 			}
 			else if (test instanceof Long)
 			{
 				long[] newValue = new long[v.size()];
 				for ( int i = 0; i < newValue.length; ++i )
-					newValue[i] = (Long) v.get(i);
+					newValue[i] = ((Long)v.get(i)).longValue();
 				value = newValue;
 			}
 			else if (test instanceof Float)
 			{
 				float[] newValue = new float[v.size()];
 				for ( int i = 0; i < newValue.length; ++i )
-					newValue[i] = (Float) v.get(i);
+					newValue[i] = ((Float)v.get(i)).floatValue();
 				value = newValue;
 			}
 			else if (test instanceof Double)
 			{
 				double[] newValue = new double[v.size()];
 				for ( int i = 0; i < newValue.length; ++i )
-					newValue[i] = (Double) v.get(i);
+					newValue[i] = ((Double)v.get(i)).doubleValue();
 				value = newValue;
 			}
 			else if (test instanceof Boolean)
 			{
 				boolean[] newValue = new boolean[v.size()];
 				for ( int i = 0; i < newValue.length; ++i )
-					newValue[i] = (Boolean) v.get(i);
+					newValue[i] = ((Boolean)v.get(i)).booleanValue();
 				value = newValue;
 			}
 			else if (test instanceof Character)
 			{
 				char[] newValue = new char[v.size()];
 				for ( int i = 0; i < newValue.length; ++i )
-					newValue[i] = (Character) v.get(i);
+					newValue[i] = ((Character)v.get(i)).charValue();
 				value = newValue;
 			}
 			else if (test instanceof Byte)
 			{
 				byte[] newValue = new byte[v.size()];
 				for ( int i = 0; i < newValue.length; ++i )
-					newValue[i] = (Byte) v.get(i);
+					newValue[i] = ((Byte)v.get(i)).byteValue();
 				value = newValue;
 			}
 			else if (test instanceof String)
@@ -163,7 +178,7 @@ public final class deltadictionary
 	public Object put(Object key, int value)
 	{
 		potentiallyDirty.add(key);
-		return currentValue.put(key, Integer.valueOf(value));
+		return currentValue.put(key, new Integer(value));
 	}	// put(Object, int)
 
 	/**
@@ -172,7 +187,7 @@ public final class deltadictionary
 	public Object put(Object key, long value)
 	{
 		potentiallyDirty.add(key);
-		return currentValue.put(key, Long.valueOf(value));
+		return currentValue.put(key, new Long(value));
 	}	// put(Object, long)
 
 	/**
@@ -181,7 +196,7 @@ public final class deltadictionary
 	public Object put(Object key, float value)
 	{
 		potentiallyDirty.add(key);
-		return currentValue.put(key, Float.valueOf(value));
+		return currentValue.put(key, new Float(value));
 	}	// put(Object, float)
 
 	/**
@@ -190,7 +205,7 @@ public final class deltadictionary
 	public Object put(Object key, double value)
 	{
 		potentiallyDirty.add(key);
-		return currentValue.put(key, Double.valueOf(value));
+		return currentValue.put(key, new Double(value));
 	}	// put(Object, double)
 
 	/**
@@ -199,7 +214,7 @@ public final class deltadictionary
 	public Object put(Object key, boolean value)
 	{
 		potentiallyDirty.add(key);
-		return currentValue.put(key, Boolean.valueOf(value));
+		return currentValue.put(key, new Boolean(value));
 	}	// put(Object, boolean)
 
 	/**
@@ -208,7 +223,7 @@ public final class deltadictionary
 	public Object put(Object key, char value)
 	{
 		potentiallyDirty.add(key);
-		return currentValue.put(key, Character.valueOf(value));
+		return currentValue.put(key, new Character(value));
 	}	// put(Object, char)
 
 	/**
@@ -217,7 +232,7 @@ public final class deltadictionary
 	public Object put(Object key, byte value)
 	{
 		potentiallyDirty.add(key);
-		return currentValue.put(key, Byte.valueOf(value));
+		return currentValue.put(key, new Byte(value));
 	}	// put(Object, byte)
 
 	/**
@@ -226,7 +241,7 @@ public final class deltadictionary
 	public Object put(Object key, String value)
 	{
 		potentiallyDirty.add(key);
-		return currentValue.put(key, value);
+		return currentValue.put(key, new String(value));
 	}	// put(Object, String)
 
 	public Object getObject(Object key)
@@ -242,7 +257,7 @@ public final class deltadictionary
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
 		if (value != null && value instanceof Integer)
-			return (Integer) value;
+			return ((Integer)value).intValue();
 		return 0;
 	}	// getInt()
 
@@ -259,18 +274,19 @@ public final class deltadictionary
 	/**
 	 * Gets a value from the dictionary.
 	 */
-	public Vector getResizeableIntArray(Object key)
+	public List getResizeableIntArray(Object key)
 	{
 		Object value = currentValue.get(key);
 		if (value != null)
 		{
 			potentiallyDirty.add(key);
 			int[] array = (int[])value;
-			Vector resizeableArray = new Vector(array.length + 10);
-			for (int i1 : array) resizeableArray.add(i1);
+			List<Integer> resizeableArray = new ArrayList<>(array.length + 10);
+			for (int i = 0; i < array.length; i++)
+				resizeableArray.add(array[i]);
 			return resizeableArray;
 		}
-		return new Vector();
+		return new ArrayList();
 	}	// getIntArray()
 
 	/**
@@ -281,7 +297,7 @@ public final class deltadictionary
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
 		if (value != null && value instanceof Long)
-			return (Long) value;
+			return ((Long)value).longValue();
 		return 0;
 	}	// getLong()
 
@@ -303,7 +319,7 @@ public final class deltadictionary
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
 		if (value != null && value instanceof Float)
-			return (Float) value;
+			return ((Float)value).floatValue();
 		return 0;
 	}	// getFloat()
 
@@ -321,15 +337,16 @@ public final class deltadictionary
 	/**
 	 * Gets a value from the dictionary.
 	 */
-	public Vector getResizeableFloatArray(Object key)
+	public List getResizeableFloatArray(Object key)
 	{
 		Object value = currentValue.get(key);
 		if (value != null)
 		{
 			potentiallyDirty.add(key);
 			float[] array = (float[])value;
-			Vector resizeableArray = new Vector(array.length + 10);
-			for (float v : array) resizeableArray.add(v);
+			List<Float> resizeableArray = new ArrayList<>(Arrays.asList(array));
+			for (int i = 0; i < array.length; i++)
+				resizeableArray.add(new Float(array[i]));
 			return resizeableArray;
 		}
 		return null;
@@ -343,7 +360,7 @@ public final class deltadictionary
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
 		if (value != null && value instanceof Double)
-			return (Double) value;
+			return ((Double)value).doubleValue();
 		return 0;
 	}	// getDouble()
 
@@ -365,7 +382,7 @@ public final class deltadictionary
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
 		if (value != null && value instanceof Boolean)
-			return (Boolean) value;
+			return ((Boolean)value).booleanValue();
 		return false;
 	}	// getBoolean()
 
@@ -387,7 +404,7 @@ public final class deltadictionary
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
 		if (value != null && value instanceof Character)
-			return (Character) value;
+			return ((Character)value).charValue();
 		return 0;
 	}	// getChar()
 
@@ -409,7 +426,7 @@ public final class deltadictionary
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
 		if (value != null && value instanceof Byte)
-			return (Byte) value;
+			return ((Byte)value).byteValue();
 		return 0;
 	}	// getByte()
 
@@ -485,13 +502,13 @@ public final class deltadictionary
 	/**
 	 * Get a location array from a dictionary
 	 */
-	public Vector getResizeableLocationArray(Object key)
+	public List getResizeableLocationArray(Object key)
 	{
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
 		if (value != null)
-			return new Vector(Arrays.asList((location[])value));
-		return new Vector();
+			return Arrays.asList((location[])value);
+		return null;
 	}
 
 	public region getRegion(Object key)
@@ -560,13 +577,16 @@ public final class deltadictionary
 	/**
 	 * Get a string array from a dictionary
 	 */
-	public Vector getResizeableStringArray(Object key)
+	public List getResizeableStringArray(Object key)
 	{
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
-		if (value != null)
-			return new Vector(Arrays.asList((String[])value));
-		return new Vector();
+		if (value != null) {
+			if (value instanceof ArrayList)
+				return new List((ArrayList)value);
+			return new List(Arrays.asList((String[])value));
+		}
+		return new List();
 	}
 
 	/**
@@ -594,13 +614,18 @@ public final class deltadictionary
 	/**
 	 * Get an obj_id array from a dictionary
 	 */
-	public Vector getResizeableObjIdArray(Object key)
+	public List getResizeableObjIdArray(Object key)
 	{
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
-		if (value != null)
-			return new Vector(Arrays.asList((obj_id[])value));
-		return new Vector();
+		List<obj_id> list = new ArrayList<>();
+		if (value != null) {
+			if (value instanceof ArrayList)
+				list = (ArrayList)value;
+			else
+				list = new ArrayList<>(Arrays.asList((obj_id[])value));
+		}
+		return list;
 	}
 
 	/**
@@ -627,12 +652,12 @@ public final class deltadictionary
 	/**
 	 * Get a transform array from a dictionary
 	 */
-	public Vector getResizeableTransformArray(Object key)
+	public List getResizeableTransformArray(Object key)
 	{
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
 		if (value != null)
-			return new Vector(Arrays.asList((transform[])value));
+			return Arrays.asList((transform[])value);
 		return null;
 	}
 
@@ -662,12 +687,12 @@ public final class deltadictionary
 	/**
 	 * Get a vector array from a dictionary
 	 */
-	public Vector getResizeableVectorArray(Object key)
+	public List getResizeableVectorArray(Object key)
 	{
 		Object value = currentValue.get(key);
 		potentiallyDirty.add(key);
 		if (value != null)
-			return new Vector(Arrays.asList((vector[])value));
+			return Arrays.asList((vector[])value);
 		return null;
 	}
 

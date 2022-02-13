@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class customization_kit extends script.base_script
 {
-    public customization_kit()
-    {
-    }
     public static final string_id MNU_COLOR = new string_id("sui", "set_color");
     public static final string_id MNU_COLOR_ONE = new string_id("sui", "color_ship_one");
     public static final string_id MNU_COLOR_TWO = new string_id("sui", "color_ship_two");
@@ -75,14 +72,14 @@ public class customization_kit extends script.base_script
             for (obj_id shipControlDevice : shipControlDevices) {
                 obj_id objShip = space_transition.getShipFromShipControlDevice(shipControlDevice);
                 if (space_utils.isShipPaintable(objShip)) {
-                    validControlDevices = utils.addElement(validControlDevices, shipControlDevice);
+                    validControlDevices.add(shipControlDevices, shipControlDevice);
                 }
             }
             String entries[] = new String[validControlDevices.size()];
             for (int i = 0; i < validControlDevices.size(); i++)
             {
                 entries[i] = getAssignedName(((obj_id)validControlDevices.get(i)));
-                if (entries[i] == null || entries[i].equals(""))
+                if (entries[i] == null || entries[i].isEmpty())
                 {
                     entries[i] = "@" + getName(((obj_id)validControlDevices.get(i)));
                 }
@@ -132,14 +129,14 @@ public class customization_kit extends script.base_script
             for (obj_id shipControlDevice : shipControlDevices) {
                 obj_id objShip = space_transition.getShipFromShipControlDevice(shipControlDevice);
                 if (space_utils.isShipPaintable(objShip)) {
-                    validControlDevices = utils.addElement(validControlDevices, shipControlDevice);
+                     validControlDevices.add(shipControlDevices, shipControlDevice);
                 }
             }
             String entries[] = new String[validControlDevices.size()];
             for (int i = 0; i < validControlDevices.size(); i++)
             {
                 entries[i] = getAssignedName(((obj_id)validControlDevices.get(i)));
-                if (entries[i] == null || entries[i].equals(""))
+                if (entries[i] == null || entries[i].isEmpty())
                 {
                     entries[i] = "@" + getName(((obj_id)validControlDevices.get(i)));
                 }

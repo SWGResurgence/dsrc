@@ -7,12 +7,11 @@ import script.library.sui;
 import script.library.utils;
 
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class terminal_resource extends script.terminal.base.terminal_add_use
 {
-    public terminal_resource()
-    {
-    }
     public static final int AMT = 100000;
     public static final String[] RESOURCE_BASE_TYPES = 
     {
@@ -253,8 +252,7 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
     }
     public String[] buildAllAvailableResourceTree(String topParent) throws InterruptedException
     {
-        Vector allResources = new Vector();
-        allResources.setSize(0);
+        List allResources = new ArrayList<resource_density>();
         for (int i = 1; i < (RESOURCE_PLANETS.length - 1); i++)
         {
             resource_density[] resources = requestResourceList(new location(0, 0, 0, RESOURCE_PLANETS[i]), 0.0f, 1.0f, topParent);

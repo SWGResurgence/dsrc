@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class master extends script.theme_park.poi.base
 {
-    public master()
-    {
-    }
     public static final String SCENARIO_NAME = "deliverance";
     public static final String BASE_PATH = "poi." + SCENARIO_NAME;
     public static final String SCRIPT_MASTER = BASE_PATH + ".master";
@@ -179,7 +176,7 @@ public class master extends script.theme_park.poi.base
             {
                 attachScript(antagonist, SCRIPT_ANTAGONIST);
                 setObjVar(antagonist, scenario.VAR_MY_NAME, myName);
-                antagonists = utils.addElement(antagonists, antagonist);
+                antagonists.add(antagonist);
             }
         }
         if ((antagonists == null) || (antagonists.size() == 0))
@@ -260,7 +257,7 @@ public class master extends script.theme_park.poi.base
         obj_id actor = params.getObjId(scenario.DICT_OBJID);
         String name = params.getString(scenario.DICT_NAME);
         Vector dead = getResizeableStringArrayObjVar(self, scenario.VAR_SCENARIO_DEAD);
-        dead = utils.addElement(dead, name);
+        dead.add(name);
         setObjVar(self, scenario.VAR_SCENARIO_DEAD, dead);
         return SCRIPT_CONTINUE;
     }

@@ -11,9 +11,6 @@ import java.util.Vector;
 
 public class imperial_relay_station extends script.base_script
 {
-    public imperial_relay_station()
-    {
-    }
     public static final String[] TEMPLATE_LIST = 
     {
         "object/building/poi/generic_flatten_medium.iff",
@@ -140,7 +137,7 @@ public class imperial_relay_station extends script.base_script
             {
                 objectList = new Vector();
             }
-            utils.addElement(objectList, newObject);
+            objectList.add(newObject);
             if (objectList.size() > 0)
             {
                 setObjVar(self, "coa2.rebel.obj_list", objectList);

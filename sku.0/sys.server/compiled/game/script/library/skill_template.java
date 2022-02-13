@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class skill_template extends script.base_script
 {
-    public skill_template()
-    {
-    }
     public static final float NON_TEMPLATE_XP_RATIO = 1.0f;
     public static final float QUEST_XP_RATIO = 1.0f;
     public static final String NO_TEMPLATE_STARTING = "new_character_no_skill";
@@ -242,7 +239,7 @@ public class skill_template extends script.base_script
                 LOG("roadmap", "ERROR - Could not create roadmap item (" + item + ")");
                 success = false;
             } else {
-                utils.addElement(allNewObjectsResizable, newItem);
+                allNewObjectsResizable.add(newItem);
             }
         }
         string_id itemDesc = utils.unpackString(getRoadmapItemDesc(skillTemplate, skillName));

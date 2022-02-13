@@ -7,12 +7,11 @@ import script.obj_id;
 import script.string_id;
 
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class enclave_data_handler extends script.base_script
 {
-    public enclave_data_handler()
-    {
-    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, force_rank.SCRIPT_DATA_HANDLER);
@@ -79,7 +78,7 @@ public class enclave_data_handler extends script.base_script
                 {
                     for (int i = 1; i < 12; i++)
                     {
-                        Vector rank_list = force_rank.getRankMembersFromDictionary(enclave_data[0], i);
+                        List rank_list = force_rank.getRankMembersFromDictionary(enclave_data[0], i);
                         LOG("force_rank", "rank_list (" + i + ") ->" + rank_list.size());
                         if (rank_list != null)
                         {
@@ -89,7 +88,7 @@ public class enclave_data_handler extends script.base_script
                 }
                 else 
                 {
-                    Vector rank_list = force_rank.getRankMembersFromDictionary(enclave_data[0], params);
+                    List rank_list = force_rank.getRankMembersFromDictionary(enclave_data[0], params);
                     if (rank_list != null)
                     {
                         d.put("rank_list", rank_list);
@@ -116,8 +115,8 @@ public class enclave_data_handler extends script.base_script
                         int rating = enclave_data[0].getInt(key_rating);
                         if (name != null && name.length() > 0 && !name.equals(force_rank.EMPTY_SLOT) && rating > 0)
                         {
-                            board_names = utils.addElement(board_names, name);
-                            board_ratings = utils.addElement(board_ratings, rating);
+                            board_names.add(name);
+                            board_ratings.add(rating);
                         }
                     }
                 }
@@ -145,13 +144,12 @@ public class enclave_data_handler extends script.base_script
                 }
                 String player_name = getFirstName(self);
                 dictionary update_data = new dictionary();
-                Vector current_rank = new Vector();
-                current_rank.setSize(0);
+                List current_rank = new ArrayList<obj_id>();
                 if (params > 0)
                 {
                     current_rank = force_rank.getRankMembersFromDictionary(enclave_data[0], params);
                 }
-                Vector next_rank = force_rank.getRankMembersFromDictionary(enclave_data[0], params + 1);
+                List next_rank = force_rank.getRankMembersFromDictionary(enclave_data[0], params + 1);
                 if (current_rank == null || next_rank == null)
                 {
                     LOG("force_rank", "enclave_data_handler.OnClusterWideDataResponse -- promotion failed due to bad rank lists (" + current_rank + "/" + next_rank + ")");
@@ -249,15 +247,15 @@ public class enclave_data_handler extends script.base_script
                 }
                 String player_name = getFirstName(self);
                 dictionary update_data = new dictionary();
-                Vector current_rank = force_rank.getRankMembersFromDictionary(enclave_data[0], player_rank);
-                Vector next_rank;
+                List current_rank = force_rank.getRankMembersFromDictionary(enclave_data[0], player_rank);
+                List next_rank;
                 if (params > 0)
                 {
                     next_rank = force_rank.getRankMembersFromDictionary(enclave_data[0], params);
                 }
                 else 
                 {
-                    next_rank = new Vector();
+                    next_rank = new ArrayList<obj_id>();
                 }
                 if (current_rank == null || next_rank == null)
                 {
@@ -355,15 +353,15 @@ public class enclave_data_handler extends script.base_script
                     releaseClusterWideDataLock(manage_name, lock_key);
                     return SCRIPT_OVERRIDE;
                 }
-                Vector current_rank = force_rank.getRankMembersFromDictionary(enclave_data[0], player_rank);
-                Vector next_rank;
+                List current_rank = force_rank.getRankMembersFromDictionary(enclave_data[0], player_rank);
+                List next_rank;
                 if (params > 0)
                 {
                     next_rank = force_rank.getRankMembersFromDictionary(enclave_data[0], params);
                 }
                 else 
                 {
-                    next_rank = new Vector();
+                    next_rank = new ArrayList<obj_id>();
                 }
                 if (current_rank == null || next_rank == null)
                 {
@@ -491,7 +489,7 @@ public class enclave_data_handler extends script.base_script
                 String player_name = getFirstName(self);
                 int rank = force_rank.getForceRank(self);
                 dictionary update_data = new dictionary();
-                Vector rank_list = force_rank.getRankMembersFromDictionary(enclave_data[0], rank);
+                List rank_list = force_rank.getRankMembersFromDictionary(enclave_data[0], rank);
                 if (rank_list == null)
                 {
                     LOG("force_rank", "enclave_data_handler.OnClusterWideDataResponse -- rename failed due to unable to find list for rank " + rank + ". Player is " + self);

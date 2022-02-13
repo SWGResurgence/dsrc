@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class slicing extends script.base_script
 {
-    public slicing()
-    {
-    }
     public static final string_id SID_SLICING_UNDERWAY = new string_id("slicing/slicing", "slicing_underway");
     public static final string_id SID_ALREADY_SLICING = new string_id("slicing/slicing", "already_slicing");
     public static final string_id SID_ALREADY_SLICED = new string_id("slicing/slicing", "already_sliced");
@@ -127,7 +124,7 @@ public class slicing extends script.base_script
             int req = dataTableGetInt(table, i, "SKILL_REQ");
             if (skillMod >= req)
             {
-                categories = utils.addElement(categories, "@slicing/slicing_" + query + ":" + is_this_cat);
+                categories.add("@slicing/slicing_" + query + ":" + is_this_cat);
             }
         }
         if (categories.size() == 0)
@@ -198,7 +195,7 @@ public class slicing extends script.base_script
                         color_prefix = "\\#FFFFFF";
                         status_suffix = "-- Already applied.";
                     }
-                    slices = utils.addElement(slices, "@slicing/slicing_" + query + ":" + slice + " " + color_prefix + status_suffix);
+                    slices.add("@slicing/slicing_" + query + ":" + slice + " " + color_prefix + status_suffix);
                     utils.setScriptVar(player, "slicing." + type, i);
                     type++;
                 }

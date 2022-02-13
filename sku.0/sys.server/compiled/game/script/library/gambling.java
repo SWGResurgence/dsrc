@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class gambling extends script.base_script
 {
-    public gambling()
-    {
-    }
     public static final String SCRIPTVAR_GAMBLING = "isGambling";
     public static final String VAR_GAMBLE_BASE = "gambling";
     public static final String VAR_PREDEFINED_TYPE = VAR_GAMBLE_BASE + ".predefined";
@@ -118,7 +115,7 @@ public class gambling extends script.base_script
                 }
             }
         }
-        players = utils.addElement(players, player);
+        players.add(player);
         if (players == null || players.size() == 0)
         {
             return;
@@ -169,7 +166,7 @@ public class gambling extends script.base_script
         {
             return;
         }
-        players = utils.removeElementAt(players, idx);
+        players.remove(idx);
         if (players == null || players.size() == 0)
         {
             removeObjVar(table, VAR_TABLE_PLAYERS);
@@ -291,7 +288,7 @@ public class gambling extends script.base_script
                             for (String s2 : opt) {
                                 for (String s1 : opt) {
                                     for (String s : opt) {
-                                        perms = utils.addElement(perms, s2 + s1 + s);
+                                        perms.add(opt, s2 + s1 + s);
                                     }
                                 }
                             }
@@ -358,7 +355,7 @@ public class gambling extends script.base_script
         {
             for (int x = 0; x < virtualStops[i]; x++)
             {
-                reelOdds = utils.addElement(reelOdds, i + 1);
+                reelOdds.add(i + 1);
             }
         }
         return reelOdds;

@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class space_create extends script.base_script
 {
-    public space_create()
-    {
-    }
     public static final int MAX_SQUAD_SIZE = 10;
     public static final String SHIP_DATATABLE = "datatables/space_mobile/space_mobile.iff";
     public static final String SHIP_DIRECTORY = "object/ship/";
@@ -45,7 +42,7 @@ public class space_create extends script.base_script
         {
             objShip = createObject(strShip, locTransform, objCell);
         }
-        if (!isIdValid(objShip))
+        if (isIdValid(objShip))
         {
             return null;
         }

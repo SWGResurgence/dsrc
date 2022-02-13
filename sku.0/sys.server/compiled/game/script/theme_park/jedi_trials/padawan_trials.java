@@ -992,7 +992,7 @@ public class padawan_trials extends script.base_script
             String entryString = entries[i];
             if (entryString.equals(targetString))
             {
-                utils.addElement(rows, i);
+                rows.add(i);
             }
         }
         int[] _rows = new int[0];

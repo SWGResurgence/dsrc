@@ -194,11 +194,11 @@ public class combat_ship_boss extends script.base_script
         targetList.setSize(0);
         if (targetType == 0)
         {
-            utils.addElement(targetList, self);
+            targetList.add(self);
         }
         if (targetType == 1)
         {
-            utils.addElement(targetList, ship_ai.unitGetPrimaryAttackTarget(self));
+            targetList.add(ship_ai.unitGetPrimaryAttackTarget(self));
         }
         if (targetType == 2)
         {
@@ -207,7 +207,7 @@ public class combat_ship_boss extends script.base_script
             {
                 return;
             }
-            utils.addElement(targetList, hateList[rand(0, hateList.length - 1)]);
+            targetList.add(hateList[rand(0, hateList.length - 1)]);
         }
         if (targetType == 3)
         {
@@ -220,7 +220,7 @@ public class combat_ship_boss extends script.base_script
                 if (!isIdValid(obj_id) || !exists(obj_id) || !space_utils.isShip(obj_id)) {
                     return;
                 }
-                utils.addElement(targetList, obj_id);
+                targetList.add(hateList, obj_id);
             }
         }
         if (targetList == null || targetList.size() <= 0)

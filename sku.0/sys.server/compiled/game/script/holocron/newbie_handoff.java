@@ -7,11 +7,11 @@ import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class newbie_handoff extends script.base_script
 {
-    public newbie_handoff()
-    {
-    }
     private static final int MAX_DESTROY_TARGETS = 10;
     private static final int MAX_SEARCH_RANGE = 500;
     public static final String STF_PLANET_MAP_CAT = "map_loc_cat_n";
@@ -78,7 +78,7 @@ public class newbie_handoff extends script.base_script
         {
             arg = text;
         }
-        if (arg == null || arg.equals(""))
+        if (arg == null || arg.isEmpty())
         {
             return SCRIPT_CONTINUE;
         }
@@ -791,8 +791,8 @@ public class newbie_handoff extends script.base_script
         }
         else 
         {
-            Vector waypointIds = getResizeableObjIdArrayObjVar(self, "newbie_handoff.waypoint.idList");
-            Vector waypointNames = getResizeableStringArrayObjVar(self, "newbie_handoff.waypoint.nameList");
+            List waypointIds = getResizeableObjIdArrayObjVar(self, "newbie_handoff.waypoint.idList");
+            List waypointNames = getResizeableStringArrayObjVar(self, "newbie_handoff.waypoint.nameList");
             int idx = findWaypointIndex(waypointIds, waypoint);
             if (idx != -1)
             {
@@ -837,10 +837,10 @@ public class newbie_handoff extends script.base_script
             LOG("newbie_handoff", "	Removing waypoint data.");
             if (index != -1)
             {
-                Vector waypointIds = getResizeableObjIdArrayObjVar(self, "newbie_handoff.waypoint.idList");
-                Vector waypointNames = getResizeableStringArrayObjVar(self, "newbie_handoff.waypoint.nameList");
-                waypointIds = utils.removeElementAt(waypointIds, index);
-                waypointNames = utils.removeElementAt(waypointNames, index);
+                List waypointIds = getResizeableObjIdArrayObjVar(self, "newbie_handoff.waypoint.idList");
+                List waypointNames = getResizeableStringArrayObjVar(self, "newbie_handoff.waypoint.nameList");
+                waypointIds.remove(index);
+                waypointNames.remove(index);
                 if (waypointIds.size() > 0 && waypointNames.size() > 0)
                 {
                     setObjVar(self, "newbie_handoff.waypoint.idList", waypointIds);
@@ -870,17 +870,15 @@ public class newbie_handoff extends script.base_script
         addLocationTarget(name, loc, radius);
         setWaypointActive(waypoint, true);
         setObjVar(player, "newbie_handoff." + name + ".waypoint", waypoint);
-        Vector waypointIds = new Vector();
-        waypointIds.setSize(0);
-        Vector waypointNames = new Vector();
-        waypointNames.setSize(0);
+        List waypointIds = new ArrayList<obj_id>();
+        List waypointNames = new ArrayList<String>();
         if (hasObjVar(player, "newbie_handoff.waypoint.idList"))
         {
             waypointIds = getResizeableObjIdArrayObjVar(player, "newbie_handoff.waypoint.idList");
             waypointNames = getResizeableStringArrayObjVar(player, "newbie_handoff.waypoint.nameList");
         }
-        waypointIds = utils.addElement(waypointIds, waypoint);
-        waypointNames = utils.addElement(waypointNames, name);
+        waypointIds.add(waypoint);
+        waypointNames.add(name);
         if (waypointIds.size() > 0 && waypointNames.size() > 0)
         {
             setObjVar(player, "newbie_handoff.waypoint.idList", waypointIds);

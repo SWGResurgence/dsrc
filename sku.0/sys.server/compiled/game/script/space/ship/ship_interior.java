@@ -4,12 +4,10 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
+import java.util.List;
 
 public class ship_interior extends script.base_script
 {
-    public ship_interior()
-    {
-    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
@@ -62,23 +60,23 @@ public class ship_interior extends script.base_script
                 {
                     if (!strLocationList[intI].equals(""))
                     {
-                        Vector tranList = utils.getResizeableTransformArrayScriptVar(self, strLocationList[intI]);
-                        Vector objCells = utils.getResizeableObjIdArrayScriptVar(self, strLocationList[intI] + "Cells");
+                        List tranList = utils.getResizeableTransformArrayScriptVar(self, strLocationList[intI]);
+                        List objCells = utils.getResizeableObjIdArrayScriptVar(self, strLocationList[intI] + "Cells");
                         if ((tranList == null) || (tranList.size() == 0))
                         {
                             Vector tranTestList = new Vector();
                             tranTestList.setSize(0);
                             Vector objTestCells = new Vector();
                             objTestCells.setSize(0);
-                            tranTestList = utils.addElement(tranTestList, tr);
-                            objTestCells = utils.addElement(objTestCells, objCell);
+                            tranTestList.add(tr);
+                            objTestCells.add(objCell);
                             utils.setScriptVar(self, strLocationList[intI], tranTestList);
                             utils.setScriptVar(self, strLocationList[intI] + "Cells", objTestCells);
                         }
                         else 
                         {
-                            objCells = utils.addElement(objCells, objCell);
-                            tranList = utils.addElement(tranList, tr);
+                            objCells.add(objCell);
+                            tranList.add(tr);
                             utils.setScriptVar(self, strLocationList[intI], tranList);
                             utils.setScriptVar(self, strLocationList[intI] + "Cells", objCells);
                         }

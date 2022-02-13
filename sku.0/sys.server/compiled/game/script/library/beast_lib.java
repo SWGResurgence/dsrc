@@ -886,7 +886,7 @@ public class beast_lib extends script.base_script
         obj_id[] dataItems = getContents(datapad);
         for (obj_id dataItem : dataItems) {
             if (beast_lib.isValidBCD(dataItem)) {
-                datapadBCDs = utils.addElement(datapadBCDs, dataItem);
+                datapadBCDs.add(dataItems);
             }
         }
         obj_id[] _datapadBCDs = new obj_id[0];
@@ -2965,7 +2965,7 @@ public class beast_lib extends script.base_script
         }
         else 
         {
-            utils.addElement(abilityCrcList, newSkillCrc);
+            abilityCrcList.add(newSkillCrc);
             if (notify)
             {
                 sendCreatureAbilitySkillLearnSpam(player, newSkill);
@@ -3531,7 +3531,7 @@ public class beast_lib extends script.base_script
     public static void addToExtractionList(obj_id player, obj_id corpse) throws InterruptedException
     {
         Vector extractionList = getExtractionList(corpse);
-        utils.addElement(extractionList, player);
+        extractionList.add(player);
         setObjVar(corpse, EXTRACTION_LIST, extractionList);
     }
     public static float distributedRand(float min, float max, int level) throws InterruptedException
@@ -3980,9 +3980,9 @@ public class beast_lib extends script.base_script
                 for (int i = 1; i < 15; i++)
                 {
                     String ability = dataTableGetString("datatables/ai/ai_combat_profiles.iff", special_list, "action" + i);
-                    if (ability != null && !ability.equals("") && actionList.indexOf(ability) == -1)
+                    if (ability != null && !ability.isEmpty() && actionList.indexOf(ability) == -1)
                     {
-                        utils.addElement(actionList, ability);
+                        actionList.add(ability);
                     }
                 }
                 if (actionList.size() > 0)

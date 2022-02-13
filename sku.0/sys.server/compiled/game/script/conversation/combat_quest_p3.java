@@ -4,12 +4,11 @@ import script.library.*;
 import script.*;
 
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class combat_quest_p3 extends script.base_script
 {
-    public combat_quest_p3()
-    {
-    }
     public static String c_stringFile = "conversation/combat_quest_p3";
     public boolean combat_quest_p3_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -75,7 +74,7 @@ public class combat_quest_p3 extends script.base_script
     }
     public void combat_quest_p3_action_giveRemote(obj_id player, obj_id npc) throws InterruptedException
     {
-        Vector phaseNames = new Vector();
+        List phaseNames = new ArrayList<String>();
         obj_id villageMaster = getObjIdObjVar(npc, fs_dyn_village.OBJVAR_MY_MASTER_OBJECT);
         if (hasObjVar(villageMaster, fs_counterstrike.OBJVAR_PHASE_CAMP_NAMES))
         {
@@ -117,7 +116,7 @@ public class combat_quest_p3 extends script.base_script
     }
     public void combat_quest_p3_action_giveWaypoint(obj_id player, obj_id npc) throws InterruptedException
     {
-        Vector phaseLocs = new Vector();
+        List phaseLocs = new ArrayList<location>();
         obj_id villageMaster = getObjIdObjVar(npc, fs_dyn_village.OBJVAR_MY_MASTER_OBJECT);
         if (utils.hasScriptVar(villageMaster, fs_counterstrike.OBJVAR_CREATED_CAMP_LOCS))
         {

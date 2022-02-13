@@ -3,13 +3,11 @@ package script.event.emperorsday;
 import script.*;
 import script.library.*;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class yoda_fountain extends script.base_script
 {
-    public yoda_fountain()
-    {
-    }
     public static final String MUSIC_BATTLE_HEROES = "object/soundobject/soundobject_battle_heroes.iff";
     public static final String MUSIC_HAN_LEIA = "object/soundobject/soundobject_empire_day_romance_b.iff";
     public static final String EMP_DAY = "event/emperors_day";
@@ -147,7 +145,7 @@ public class yoda_fountain extends script.base_script
         }
         if (utils.hasScriptVar(self, "leia"))
         {
-            Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "leia");
+            List npc = utils.getResizeableObjIdArrayScriptVar(self, "leia");
             for (Object aNpc : npc) {
                 if (isIdValid(((obj_id) aNpc)) && exists(((obj_id) aNpc))) {
                     destroyObject(((obj_id) aNpc));
@@ -157,7 +155,7 @@ public class yoda_fountain extends script.base_script
         }
         if (utils.hasScriptVar(self, "solo"))
         {
-            Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "solo");
+            List npc = utils.getResizeableObjIdArrayScriptVar(self, "solo");
             for (Object aNpc : npc) {
                 if (isIdValid(((obj_id) aNpc)) && exists(((obj_id) aNpc))) {
                     destroyObject(((obj_id) aNpc));
@@ -167,7 +165,7 @@ public class yoda_fountain extends script.base_script
         }
         if (utils.hasScriptVar(self, "chewbacca"))
         {
-            Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "chewbacca");
+            List npc = utils.getResizeableObjIdArrayScriptVar(self, "chewbacca");
             for (Object aNpc : npc) {
                 if (isIdValid(((obj_id) aNpc)) && exists(((obj_id) aNpc))) {
                     destroyObject(((obj_id) aNpc));
@@ -235,13 +233,12 @@ public class yoda_fountain extends script.base_script
     {
         String npcType = params.getString("type");
         obj_id npc = params.getObjId("npcObjId");
-        Vector npcs = new Vector();
-        npcs.setSize(0);
+        List npcs = new ArrayList<obj_id>();
         if (utils.hasScriptVar(self, npcType))
         {
             npcs = utils.getResizeableObjIdArrayScriptVar(self, npcType);
         }
-        utils.addElement(npcs, npc);
+        npcs.add(npc);
         utils.setScriptVar(self, npcType, npcs);
         return SCRIPT_CONTINUE;
     }
@@ -470,7 +467,7 @@ public class yoda_fountain extends script.base_script
     {
         if (utils.hasScriptVar(self, "soldier"))
         {
-            Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "soldier");
+            List npc = utils.getResizeableObjIdArrayScriptVar(self, "soldier");
             for (Object aNpc : npc) {
                 if (isIdValid(((obj_id) aNpc)) && exists(((obj_id) aNpc))) {
                     if (isValidId(getObjectInSlot(((obj_id) aNpc), "hold_r"))) {
@@ -575,14 +572,13 @@ public class yoda_fountain extends script.base_script
             messageTo(self, "leiaLeaving", null, 15.0f, false);
             return SCRIPT_CONTINUE;
         }
-        Vector rebelPlayers = new Vector();
-        rebelPlayers.setSize(0);
+        List rebelPlayers = new ArrayList<obj_id>();
         for (obj_id aPlayersInRange : playersInRange) {
             if (!isIdValid(aPlayersInRange) || !exists(aPlayersInRange)) {
                 continue;
             }
             if (holiday.isEmpireDayPlayerEligible(aPlayersInRange, holiday.REBEL_PLAYER)) {
-                utils.addElement(rebelPlayers, aPlayersInRange);
+                rebelPlayers.add(aPlayersInRange);
             }
         }
         if (rebelPlayers.size() <= 0)
@@ -694,7 +690,7 @@ public class yoda_fountain extends script.base_script
         }
         if (utils.hasScriptVar(self, "soldier"))
         {
-            Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "soldier");
+            List npc = utils.getResizeableObjIdArrayScriptVar(self, "soldier");
             for (Object aNpc : npc) {
                 if (isIdValid(((obj_id) aNpc)) && exists(((obj_id) aNpc))) {
                     doAnimationAction(((obj_id) aNpc), "celebrate");
@@ -803,12 +799,11 @@ public class yoda_fountain extends script.base_script
             return SCRIPT_CONTINUE;
         }
         CustomerServiceLog("holidayEvent", "yoda_fountain.waitingHalf: Missing player data attained.");
-        Vector miaList = new Vector();
-        miaList.setSize(0);
+        List miaList = new ArrayList<obj_id>();
         for (int i = 0; i < allMissingPlayers.getNumItems(); i++)
         {
             obj_var playerPlace = allMissingPlayers.getObjVar(i);
-            utils.addElement(miaList, playerPlace.getObjIdData());
+            miaList.add(playerPlace.getObjIdData());
         }
         if (miaList.size() <= 0)
         {
@@ -923,12 +918,11 @@ public class yoda_fountain extends script.base_script
         int latestMiaListLen = allMissingPlayers.getNumItems();
         if (latestMiaListLen != oldMiaList.length)
         {
-            Vector lastestMiaList = new Vector();
-            lastestMiaList.setSize(0);
+            List lastestMiaList = new ArrayList<obj_id>();
             for (int i = 0; i < latestMiaListLen; i++)
             {
                 obj_var playerPlace = allMissingPlayers.getObjVar(i);
-                utils.addElement(lastestMiaList, playerPlace.getObjIdData());
+                lastestMiaList.add(playerPlace.getObjIdData());
             }
             if (lastestMiaList.size() <= 0)
             {
@@ -1009,13 +1003,12 @@ public class yoda_fountain extends script.base_script
         here.z = statue.z - 30;
         location there = utils.getRandomLocationInRing(here, 0, 10);
         int tableLength = dataTableGetNumRows(firework.TBL_FX);
-        Vector nonFactionalTemplates = new Vector();
-        nonFactionalTemplates.setSize(0);
+        List nonFactionalTemplates = new ArrayList<obj_id>();
         for (int i = 0; i < tableLength - 1; i++)
         {
             if (dataTableGetInt(firework.TBL_FX, i, "factional") == 0)
             {
-                utils.addElement(nonFactionalTemplates, dataTableGetString(firework.TBL_FX, i, "template"));
+                nonFactionalTemplates.add(dataTableGetString(firework.TBL_FX, i, "template"));
             }
         }
         if (nonFactionalTemplates.size() <= 0)
@@ -1049,7 +1042,7 @@ public class yoda_fountain extends script.base_script
     {
         if (utils.hasScriptVar(self, "soldier"))
         {
-            Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "soldier");
+            List npc = utils.getResizeableObjIdArrayScriptVar(self, "soldier");
             for (Object aNpc : npc) {
                 if (isIdValid(((obj_id) aNpc)) && exists(((obj_id) aNpc))) {
                     if (isValidId(getObjectInSlot(((obj_id) aNpc), "hold_r"))) {

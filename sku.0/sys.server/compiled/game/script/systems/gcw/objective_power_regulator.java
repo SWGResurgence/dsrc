@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class objective_power_regulator extends script.faction_perk.hq.objective_object
 {
-    public objective_power_regulator()
-    {
-    }
     public static final string_id MNU_SET_OVERLOAD = new string_id("hq", "mnu_set_overload");
     public static final int NUM_SWITCHES = 7;
     public static final String VAR_SWITCH_BASE = "hq.objective.switch";
@@ -126,7 +123,7 @@ public class objective_power_regulator extends script.faction_perk.hq.objective_
             {
                 entry += "OFF";
             }
-            entries = utils.addElement(entries, entry);
+            entries.add(entry);
         }
         String prompt = "To successfully align the power flow to overload, you must activate all the flow regulators to ON.\n\n";
         prompt += "Select the switch to toggle...";

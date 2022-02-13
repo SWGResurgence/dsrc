@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class antagonist extends script.theme_park.poi.base
 {
-    public antagonist()
-    {
-    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String VAR_RESET_TIMER = scenario.VAR_SCENARIO_BASE + ".resetTimer";
     public static final String HANDLER_TIMER = "handleTimer";
@@ -196,9 +193,9 @@ public class antagonist extends script.theme_park.poi.base
                 case 1:
                 case 3:
                 LOG("poiDeliverance", "comparing factions...");
-                responses = utils.addElement(responses, new string_id(convo, "response_yes"));
-                responses = utils.addElement(responses, new string_id(convo, "response_no"));
-                responses = utils.addElement(responses, new string_id(convo, "response_maybe"));
+                responses.add(new string_id(convo, "response_yes"));
+                responses.add(new string_id(convo, "response_no"));
+                responses.add(new string_id(convo, "response_maybe"));
                 break;
                 case 2:
                 scenario.say(self, convo, "a_greet_mad");

@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
-    public mediator()
-    {
-    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiTwoLiars Mediator";
     public static final int CONV_GREET = 0;
@@ -68,7 +65,7 @@ public class mediator extends script.poi.base.scenario_actor
             break;
             case CONV_LOOKING:
             msg = new string_id(convo, "m_chatter_" + s_index);
-            responses = utils.addElement(responses, new string_id(convo, "r_m_chatter_knowabouttheft"));
+            responses.add(new string_id(convo, "r_m_chatter_knowabouttheft"));
             npcStartConversation(speaker, self, convo, msg, responses);
             break;
         }

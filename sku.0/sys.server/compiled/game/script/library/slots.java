@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class slots extends script.base_script
 {
-    public slots()
-    {
-    }
     public static final String BACK = "back";
     public static final String BICEP_L = "bicep_l";
     public static final String BICEP_R = "bicep_r";
@@ -81,7 +78,7 @@ public class slots extends script.base_script
         for (String name : slots) {
             item = getObjectInSlot(target, name);
             if (isIdValid(item)) {
-                ret = utils.addElement(ret, name);
+                ret.add(name);
             }
         }
         if ((ret == null) || (ret.size() == 0))

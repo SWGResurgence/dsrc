@@ -132,14 +132,14 @@ public class consume_relic_booster_pack extends script.base_script
                     if (!row_lootCategory.contains("no_loot"))
                     {
                         String token_reference = row.getString("name");
-                        relicReferences = utils.addElement(relicReferences, token_reference);
+                        relicReferences.add(token_reference);
                         if (relicFilter.length() > 0)
                         {
                             String[] relicLootCategories = split(row_lootCategory, ',');
                             boolean no_loot = false;
                             for (String relicCategory : relicLootCategories) {
                                 if (relicCategory.equals(relicFilter)) {
-                                    filteredRelicReferences = utils.addElement(filteredRelicReferences, token_reference);
+                                    filteredRelicReferences.add(token_reference);
                                 }
                             }
                         }

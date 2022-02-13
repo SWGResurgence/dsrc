@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class door_lock extends script.base_script
 {
-    public door_lock()
-    {
-    }
     public static final String MSGS = "dungeon/geonosian_madbio";
     public static final String VAR_ACCESS_LIST = "access";
     public int OnInitialize(obj_id self) throws InterruptedException
@@ -73,7 +70,7 @@ public class door_lock extends script.base_script
         }
         if (!utils.isElementInArray(permList, player))
         {
-            permList = utils.addElement(permList, player);
+            permList.add(player);
             utils.setResizeableBatchObjVar(room, VAR_ACCESS_LIST, permList);
         }
         String roomName = getName(room);

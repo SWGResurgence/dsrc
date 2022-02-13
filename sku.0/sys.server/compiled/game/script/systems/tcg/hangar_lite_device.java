@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class hangar_lite_device extends script.base_script
 {
-    public hangar_lite_device()
-    {
-    }
     public static final String PID_NAME = "hangar_lite";
     public static final String SCRIPT_VAR_SCD_LIST = "hangar_lite.scds";
     public static final String SCRIPT_VAR_RESTORING_SHIP = "hangar_lite.restoring";
@@ -77,7 +74,7 @@ public class hangar_lite_device extends script.base_script
             for (obj_id storedShip : shipsStored) {
                 if (isIdValid(storedShip)) {
                     if (hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE)) {
-                        utils.addElement(storedShipNames, getEncodedName(storedShip));
+                        storedShipNames.add(getEncodedName(storedShip));
                     }
                 }
             }
@@ -470,7 +467,7 @@ public class hangar_lite_device extends script.base_script
             for (obj_id storedShip : shipsInHangar) {
                 if (isIdValid(storedShip)) {
                     if (hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE)) {
-                        utils.addElement(hangarLiteStoredShips, storedShip);
+                        hangarLiteStoredShips.add(storedShip);
                     }
                 }
             }
@@ -521,7 +518,7 @@ public class hangar_lite_device extends script.base_script
         for (obj_id storedShip : shipControlDevices) {
             if (isIdValid(storedShip)) {
                 if (hasObjVar(storedShip, player_structure.OBJVAR_STORED_HANGAR_LITE)) {
-                    utils.addElement(hangarLiteStoredShips, storedShip);
+                    hangarLiteStoredShips.add(storedShip);
                 }
             }
         }

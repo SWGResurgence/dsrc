@@ -9,12 +9,10 @@ import script.location;
 import script.obj_id;
 
 import java.util.Vector;
+import java.util.List;
 
 public class encounter_multi extends script.base_script
 {
-    public encounter_multi()
-    {
-    }
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         if (quests.isMyQuest(questRow, "quest.task.encounter_multi"))
@@ -96,7 +94,7 @@ public class encounter_multi extends script.base_script
     }
     public int OnLogout(obj_id self) throws InterruptedException
     {
-        Vector spawnedCreatures = utils.getResizeableObjIdArrayScriptVar(self, "encounter_multi_creatures");
+        List spawnedCreatures = utils.getResizeableObjIdArrayScriptVar(self, "encounter_multi_creatures");
         if (spawnedCreatures != null)
         {
             int iter = 0;
@@ -139,7 +137,7 @@ public class encounter_multi extends script.base_script
                                     obj_id creature = create.createCreature(spawnEntry, l, true);
                                     if (isIdValid(creature))
                                     {
-                                        Vector spawnedCreatures = utils.getResizeableObjIdArrayScriptVar(self, "encounter_multi_creatures");
+                                        List spawnedCreatures = utils.getResizeableObjIdArrayScriptVar(self, "encounter_multi_creatures");
                                         if (spawnedCreatures == null)
                                         {
                                             spawnedCreatures = new Vector();

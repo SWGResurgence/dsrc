@@ -106,7 +106,7 @@ public class mining_droid extends script.base_script
         for (obj_id object : objects) {
             if (hasObjVar(object, "wp_name")) {
                 if ((getStringObjVar(object, "wp_name")).startsWith("droid")) {
-                    utils.addElement(waypoints, getLocation(object));
+                    waypoints.add(getLocation(object));
                 }
             }
         }

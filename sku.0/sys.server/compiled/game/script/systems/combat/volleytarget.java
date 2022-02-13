@@ -6,13 +6,10 @@ import script.library.utils;
 import script.obj_id;
 import script.transform;
 
-import java.util.Vector;
+import java.util.List;
 
 public class volleytarget extends script.base_script
 {
-    public volleytarget()
-    {
-    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id[] me = new obj_id[]
@@ -30,7 +27,7 @@ public class volleytarget extends script.base_script
     public void notifyVolleyTargetDone() throws InterruptedException
     {
         obj_id self = getSelf();
-        Vector groups = utils.getResizeableObjIdBatchScriptVar(self, combat.VAR_VOLLEY_GROUPS);
+        List groups = utils.getResizeableObjIdBatchScriptVar(self, combat.VAR_VOLLEY_GROUPS);
         utils.removeScriptVar(self, combat.VAR_VOLLEY_GROUPS);
         for (Object group : groups) {
             notifyVolleyTargetDone((obj_id) group);
@@ -73,7 +70,7 @@ public class volleytarget extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        Vector groups = new Vector();
+        List groups = null;
         if (utils.hasScriptVar(self, combat.VAR_VOLLEY_GROUPS))
         {
             groups = utils.getResizeableObjIdBatchScriptVar(self, combat.VAR_VOLLEY_GROUPS);
@@ -93,7 +90,7 @@ public class volleytarget extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        Vector groups = new Vector();
+        List groups = null;
         if (utils.hasScriptVar(self, combat.VAR_VOLLEY_GROUPS))
         {
             groups = utils.getResizeableObjIdBatchScriptVar(self, combat.VAR_VOLLEY_GROUPS);

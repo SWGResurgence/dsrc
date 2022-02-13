@@ -12,9 +12,6 @@ import java.util.Vector;
 
 public class wave_spawner extends script.base_script
 {
-    public wave_spawner()
-    {
-    }
     public static final String STAGE = "currentStage";
     public static final String DATA_TABLE = "wave_spawner.data_table";
     public static final String START_DELAY = "wave_spawner.start_delay";
@@ -236,7 +233,7 @@ public class wave_spawner extends script.base_script
         {
             wp = utils.getResizeableObjIdArrayScriptVar(controller, restuss_event.MASTER_PATROL_ARRAY);
         }
-        utils.addElement(wp, waypointObject);
+        wp.add(waypointObject);
         setName(waypointObject, getStringObjVar(waypointObject, "wp_name"));
         utils.setScriptVar(controller, restuss_event.MASTER_PATROL_ARRAY, wp);
     }

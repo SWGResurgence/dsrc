@@ -11,9 +11,6 @@ import java.util.Vector;
 
 public class rebel_lyda extends script.base_script
 {
-    public rebel_lyda()
-    {
-    }
     public static final String[] TEMPLATE_LIST = 
     {
         "object/building/poi/generic_flatten_small.iff",
@@ -119,7 +116,7 @@ public class rebel_lyda extends script.base_script
             {
                 objectList = new Vector();
             }
-            utils.addElement(objectList, newObject);
+            objectList.add(newObject);
             if (objectList.size() > 0)
             {
                 setObjVar(self, "coa2.rebel.obj_list", objectList);

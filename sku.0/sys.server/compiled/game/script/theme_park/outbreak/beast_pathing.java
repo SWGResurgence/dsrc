@@ -7,12 +7,10 @@ import script.obj_id;
 import script.string_id;
 
 import java.util.Vector;
+import java.util.List;
 
 public class beast_pathing extends script.base_script
 {
-    public beast_pathing()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_pathing";
     public static final String PATHING_NODE = "pathing_node";
@@ -463,15 +461,15 @@ public class beast_pathing extends script.base_script
             if (!utils.hasScriptVar(self, ENEMY_LIST))
             {
                 Vector enemies = null;
-                enemies = utils.addElement(enemies, mob);
+                enemies.add(mob);
                 utils.setScriptVar(self, ENEMY_LIST, enemies);
             }
             else 
             {
-                Vector enemyVector = null;
+                List enemyVector = null;
                 obj_id[] enemyArray = utils.getObjIdArrayScriptVar(self, ENEMY_LIST);
-                Vector enemies = utils.concatArrays(enemyVector, enemyArray);
-                enemies = utils.addElement(enemies, mob);
+                List enemies = utils.concatArrays(enemyVector, enemyArray);
+                enemies.add(mob);
                 utils.setScriptVar(self, ENEMY_LIST, enemies);
             }
         }

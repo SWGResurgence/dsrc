@@ -10819,8 +10819,10 @@ public class terminal_character_builder extends script.base_script
     public void launch(obj_id player, obj_id ship, obj_id[] membersApprovedByShipOwner, location warpLocation, location groundLoc) throws InterruptedException
     {
         space_transition.clearOvertStatus(ship);
-        Vector groupMembersToWarp = utils.addElement(null, player);
-        Vector groupMemberStartIndex = utils.addElement(null, 0);
+        Vector groupMembersToWarp = new Vector();
+        groupMembersToWarp.add(player);
+        Vector groupMembersStartIndex = new Vector();
+        groupMembersStartIndex.add(0);
         utils.setScriptVar(player, "strLaunchPointName", "launching");
         Vector shipStartLocations = space_transition.getShipStartLocations(ship);
         if (shipStartLocations != null && shipStartLocations.size() > 0)
@@ -10837,8 +10839,8 @@ public class terminal_character_builder extends script.base_script
                         if (groupMember != player && exists(groupMember) && getLocation(groupMember).cell == playerLoc.cell && groupMemberApproved(membersApprovedByShipOwner, groupMember)) {
                             startIndex = getNextStartIndex(shipStartLocations, startIndex);
                             if (startIndex <= shipStartLocations.size()) {
-                                groupMembersToWarp = utils.addElement(groupMembersToWarp, groupMember);
-                                groupMemberStartIndex = utils.addElement(groupMemberStartIndex, startIndex);
+                                groupMembersToWarp.add(groupMembers);
+                                groupMembersStartIndex.add(startIndex);
                             } else {
                                 string_id strSpam = new string_id("space/space_interaction", "no_space_expansion");
                                 sendSystemMessage(groupMember, strSpam);
@@ -10850,7 +10852,7 @@ public class terminal_character_builder extends script.base_script
         }
         for (int i = 0; i < groupMembersToWarp.size(); ++i)
         {
-            space_transition.setLaunchInfo(((obj_id)groupMembersToWarp.get(i)), ship, (Integer) groupMemberStartIndex.get(i), groundLoc);
+            space_transition.setLaunchInfo(((obj_id)groupMembersToWarp.get(i)), ship, ((Integer)groupMembersStartIndex.get(i)).intValue(), groundLoc);
             warpPlayer(((obj_id)groupMembersToWarp.get(i)), warpLocation.area, warpLocation.x, warpLocation.y, warpLocation.z, null, warpLocation.x, warpLocation.y, warpLocation.z);
         }
     }

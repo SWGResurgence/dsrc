@@ -11,9 +11,6 @@ import java.util.Vector;
 
 public class quest_armorsmith extends script.base_script
 {
-    public quest_armorsmith()
-    {
-    }
     public static final String SCRIPT_QUEST_ARMORSMITH = "npc.static_quest.quest_armorsmith";
     public static final String DATATABLE_ARMORSMITH_ITEMS = "datatables/npc/static_quest/armorsmith.iff";
     public static final int QUEST_COST = 50000;
@@ -355,40 +352,40 @@ public class quest_armorsmith extends script.base_script
         switch (progress)
         {
             case 1:
-            responses = utils.addElement(responses, SID_YES_TO_QUEST_1_START);
-            responses = utils.addElement(responses, SID_NO_TO_QUEST_1_START);
+            responses.add(SID_YES_TO_QUEST_1_START);
+            responses.add(SID_NO_TO_QUEST_1_START);
             break;
             case 2:
-            responses = utils.addElement(responses, SID_YES);
+            responses.add(SID_YES);
             break;
             case 3:
             if (verifyQuestItem(player) != null)
             {
-                responses = utils.addElement(responses, SID_YES_TO_QUEST_2_QUERY);
+                responses.add(SID_YES_TO_QUEST_2_QUERY);
             }
-            responses = utils.addElement(responses, SID_NO_TO_QUEST_2_QUERY);
+            responses.add(SID_NO_TO_QUEST_2_QUERY);
             break;
             case 4:
-            responses = utils.addElement(responses, SID_YES_TO_QUEST_3_START);
-            responses = utils.addElement(responses, SID_NO_TO_QUEST_3_START);
+            responses.add(SID_YES_TO_QUEST_3_START);
+            responses.add(SID_NO_TO_QUEST_3_START);
             break;
             case 5:
             if (verifyQuestItem(player) != null)
             {
-                responses = utils.addElement(responses, SID_YES_TO_QUEST_4_QUERY);
+                responses.add(SID_YES_TO_QUEST_4_QUERY);
             }
-            responses = utils.addElement(responses, SID_NO_TO_QUEST_4_QUERY);
+            responses.add(SID_NO_TO_QUEST_4_QUERY);
             break;
             case 6:
-            responses = utils.addElement(responses, SID_YES_TO_QUEST_5_START);
-            responses = utils.addElement(responses, SID_NO_TO_QUEST_5_START);
+            responses.add(SID_YES_TO_QUEST_5_START);
+            responses.add(SID_NO_TO_QUEST_5_START);
             break;
             case 7:
             if (verifyQuestItem(player) != null)
             {
-                responses = utils.addElement(responses, SID_YES_TO_QUEST_6_QUERY);
+                responses.add(SID_YES_TO_QUEST_6_QUERY);
             }
-            responses = utils.addElement(responses, SID_NO_TO_QUEST_6_QUERY);
+            responses.add(SID_NO_TO_QUEST_6_QUERY);
             break;
             default:
         }

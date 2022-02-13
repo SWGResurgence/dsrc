@@ -214,14 +214,14 @@ public class locked_container extends script.base_script
             if (guildsWithAccess != null && guildsWithAccess.length > 0)
             {
                 for (int guildsWithAccess1 : guildsWithAccess) {
-                    utils.addElement(accessList, "Guild: " + guildGetName(guildsWithAccess1));
+                    accessList.add("Guild: " + guildGetName(guildsWithAccess));
                 }
             }
             if (accessors != null && accessors.length > 0)
             {
                 for (obj_id accessor : accessors) {
                     if (isIdValid(accessor)) {
-                        utils.addElement(accessList, "" + getPlayerFullName(accessor));
+                        accessList.add("" + getPlayerFullName(accessors));
                     }
                 }
             }

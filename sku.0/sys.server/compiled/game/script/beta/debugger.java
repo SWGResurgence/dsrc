@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class debugger extends script.base_script
 {
-    public debugger()
-    {
-    }
     public static final String DEBUG_EMOTE_TARGET = "debug.emote_target";
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
@@ -226,7 +223,7 @@ public class debugger extends script.base_script
                 {
                     String var = (String)keys.nextElement();
                     int idx = d.getInt(var);
-                    entries = utils.addElement(entries, var + " -> " + idx);
+                    entries.add(var + " -> " + idx);
                 }
             }
             if (entries == null || entries.size() == 0)
@@ -1933,7 +1930,7 @@ public class debugger extends script.base_script
                 sendSystemMessageTestingOnly(self, "unable create structure sign for template: " + template);
             }
         }
-        tpf = utils.removeElementAt(tpf, 0);
+        tpf.remove(0);
         if (tpf != null && tpf.size() == 0)
         {
             params.put("template", tpf);

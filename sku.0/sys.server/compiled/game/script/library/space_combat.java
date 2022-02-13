@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class space_combat extends script.base_script
 {
-    public space_combat()
-    {
-    }
     public static final float SPACE_DEATH_DELAY = 10.0f;
     public static final int CHASSIS = 1;
     public static final int COMPONENT = 2;
@@ -71,8 +68,8 @@ public class space_combat extends script.base_script
         int intIndex = utils.getElementPositionInArray(objAttackers, objAttacker);
         if (intIndex < 0)
         {
-            objAttackers = utils.addElement(objAttackers, objAttacker);
-            intDamageDone = utils.addElement(intDamageDone, intDamage);
+            objAttackers.add(objAttacker);
+            intDamageDone.add(intDamage);
             utils.setLocalVar(objDefender, "damage.objAttackers", objAttackers);
             utils.setLocalVar(objDefender, "damage.intDamageDone", intDamageDone);
         }
@@ -521,8 +518,8 @@ public class space_combat extends script.base_script
                 fltGroupDamage = utils.getResizeableFloatArrayLocalVar(objDefender, "combat.groups." + objGroup + ".fltDamage");
                 if (intIndex < 0)
                 {
-                    objGroupMembers = utils.addElement(objGroupMembers, objAttacker);
-                    fltGroupDamage = utils.addElement(fltGroupDamage, fltDamage);
+                    objGroupMembers.add(objAttacker);
+                    fltGroupDamage.add(fltDamage);
                     utils.setLocalVar(objDefender, "combat.groups." + objGroup, objGroupMembers);
                     utils.setLocalVar(objDefender, "combat.groups." + objGroup + ".fltDamage", fltGroupDamage);
                 }
@@ -537,17 +534,17 @@ public class space_combat extends script.base_script
         {
             if (isIdValid(objGroup))
             {
-                objAttackers = utils.addElement(objAttackers, objGroup);
-                fltDamageTracked = utils.addElement(fltDamageTracked, fltDamage);
+                objAttackers.add(objGroup);
+                fltDamageTracked.add(fltDamage);
                 Vector objGroupMembers = new Vector();
                 objGroupMembers.setSize(0);
-                objGroupMembers = utils.addElement(objGroupMembers, objAttacker);
-                fltGroupDamage = utils.addElement(fltGroupDamage, fltDamage);
+                objGroupMembers.add(objAttacker);
+                fltGroupDamage.add(fltDamage);
                 utils.setLocalVar(objDefender, "combat.groups." + objGroup, objGroupMembers);
                 utils.setLocalVar(objDefender, "combat.groups." + objGroup + ".fltDamage", fltGroupDamage);
             }
-            objAttackers = utils.addElement(objAttackers, objAttacker);
-            fltDamageTracked = utils.addElement(fltDamageTracked, fltDamage);
+            objAttackers.add(objAttacker);
+            fltDamageTracked.add(fltDamage);
         }
         utils.setLocalVar(objDefender, "combat.objAttackers", objAttackers);
         utils.setLocalVar(objDefender, "combat.fltDamageTracked", fltDamageTracked);
@@ -1069,7 +1066,7 @@ public class space_combat extends script.base_script
         {
             objWinners = getResizeableObjIdArrayObjVar(objContainer, "objLooters");
         }
-        objWinners = utils.addElement(objWinners, objWinner);
+        objWinners.add(objWinner);
         setObjVar(objContainer, "objLooters", objWinners);
     }
     public static void notifyAttacker(obj_id objAttacker, obj_id objDefender, float fltPercentage) throws InterruptedException
@@ -1158,8 +1155,8 @@ public class space_combat extends script.base_script
                     obj_id[] objGroupMembers = utils.getObjIdArrayLocalVar(objDefender, "combat.groups." + objTrackedAttackers[intI]);
                     for (obj_id objGroupMember : objGroupMembers) {
                         if (objGroupMember.isLoaded() && objGroupMember.isAuthoritative()) {
-                            objAttackers = utils.addElement(objAttackers, objGroupMember);
-                            fltPercentages = utils.addElement(fltPercentages, fltPercentage);
+                            objAttackers.add(objGroupMembers, objGroupMember);
+                            fltPercentages.add(fltPercentage);
                         }
                     }
                 }
@@ -1167,8 +1164,8 @@ public class space_combat extends script.base_script
                 {
                     if (objTrackedAttackers[intI].isLoaded() && objTrackedAttackers[intI].isAuthoritative())
                     {
-                        objAttackers = utils.addElement(objAttackers, objTrackedAttackers[intI]);
-                        fltPercentages = utils.addElement(fltPercentages, fltPercentage);
+                        objAttackers.add(objTrackedAttackers[intI]);
+                        fltPercentages.add(fltPercentage);
                     }
                 }
             }
@@ -2328,7 +2325,7 @@ public class space_combat extends script.base_script
                 int intCrc = getShipComponentCrc(objShip, intI);
                 if ((getShipComponentDescriptorWeaponIsMissile(intCrc)) && (!getShipComponentDescriptorWeaponIsCountermeasure(intCrc)))
                 {
-                    intWeapons = utils.addElement(intWeapons, intI);
+                    intWeapons.add(intI);
                 }
             }
         }
@@ -3766,8 +3763,8 @@ public class space_combat extends script.base_script
             if ((isShipSlotInstalled(objDefender, intRawSlot)) && (intRawSlot != ship_chassis_slot_type.SCST_armor_0) && (intRawSlot != ship_chassis_slot_type.SCST_armor_1)) {
                 String strSlotName = space_crafting.getComponentSlotNameString(intRawSlot);
                 strSlotName = strSlotName + "_hitweight";
-                intWeightings = utils.addElement(intWeightings, dctRow.getInt(strSlotName));
-                intSlots = utils.addElement(intSlots, intRawSlot);
+                intWeightings.add(dctRow.getInt(strSlotName));
+                intSlots.add(intRawSlots[intI]);
             }
         }
         if (intWeightings.size() == 0)

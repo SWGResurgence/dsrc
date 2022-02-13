@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class loader extends script.base_script
 {
-    public loader()
-    {
-    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, factions.FACTION))
@@ -125,7 +122,7 @@ public class loader extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        locs.removeElementAt(0);
+        locs.remove(0);
         if (locs.size() == 0)
         {
             params.remove("locs");

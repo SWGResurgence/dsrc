@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class restuss_clientfx_controller extends script.base_script
 {
-    public restuss_clientfx_controller()
-    {
-    }
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -103,15 +100,15 @@ public class restuss_clientfx_controller extends script.base_script
                         if (!faction.equals("")) {
                             if (faction.equals("imperial")) {
                                 if (factions.isImperial(target) && !factions.isOnLeave(target)) {
-                                    utils.addElement(validatedTargets, target);
+                                    validatedTargets.add(targets);
                                 }
                             } else if (faction.equals("rebel")) {
                                 if (factions.isRebel(target) && !factions.isOnLeave(target)) {
-                                    utils.addElement(validatedTargets, target);
+                                    validatedTargets.add(targets);
                                 }
                             }
                         } else {
-                            utils.addElement(validatedTargets, target);
+                            validatedTargets.add(targets);
                         }
                     }
                 }
@@ -121,10 +118,10 @@ public class restuss_clientfx_controller extends script.base_script
                             String creature = getStringObjVar(target, "ai.creatureBaseName");
                             String socialGroup = dataTableGetString("datatables/mob/creatures.iff", creature, "socialGroup");
                             if (faction.equals(socialGroup)) {
-                                utils.addElement(validatedTargets, target);
+                                validatedTargets.add(targets);
                             }
                         } else {
-                            utils.addElement(validatedTargets, target);
+                             validatedTargets.add(targets);
                         }
                     }
                 }

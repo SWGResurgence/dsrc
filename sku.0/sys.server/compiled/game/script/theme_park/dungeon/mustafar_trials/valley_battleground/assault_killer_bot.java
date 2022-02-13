@@ -11,9 +11,6 @@ import java.util.Vector;
 
 public class assault_killer_bot extends script.base_script
 {
-    public assault_killer_bot()
-    {
-    }
     public static final boolean LOGGING = false;
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
@@ -61,7 +58,7 @@ public class assault_killer_bot extends script.base_script
             for (obj_id object : objects) {
                 if (hasObjVar(object, "wp_name")) {
                     if (s.equals(getStringObjVar(object, "wp_name"))) {
-                        utils.addElement(waypoints, getLocation(object));
+                        waypoints.add(getLocation(object));
                     }
                 }
             }

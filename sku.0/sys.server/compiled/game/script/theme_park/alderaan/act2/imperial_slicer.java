@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class imperial_slicer extends script.base_script
 {
-    public imperial_slicer()
-    {
-    }
     public static final String[] TEMPLATE_LIST = 
     {
         "coa2_imperial_slicer_gang",
@@ -77,7 +74,7 @@ public class imperial_slicer extends script.base_script
             {
                 objectList = new Vector();
             }
-            utils.addElement(objectList, newObject);
+            objectList.add(newObject);
             if (objectList.size() > 0)
             {
                 setObjVar(self, "coa2.imperial.obj_list", objectList);

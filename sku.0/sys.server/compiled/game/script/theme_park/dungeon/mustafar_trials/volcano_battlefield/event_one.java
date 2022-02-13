@@ -12,9 +12,6 @@ import java.util.Vector;
 
 public class event_one extends script.base_script
 {
-    public event_one()
-    {
-    }
     public static final String boss = "som_volcano_one_taskmaster";
     public static final String guard = "som_volcano_one_sustainer";
     public static final boolean doLogging = false;
@@ -151,7 +148,7 @@ public class event_one extends script.base_script
         activeGuards.setSize(0);
         for (obj_id guard1 : guards) {
             if (exists(guard1)) {
-                utils.addElement(activeGuards, guard1);
+                activeGuards.add(guard1);
             }
         }
         if (activeGuards == null || activeGuards.size() == 0)
@@ -172,7 +169,7 @@ public class event_one extends script.base_script
             {
                 for (Object activeGuard : activeGuards) {
                     if (((obj_id) activeGuard) != attacker) {
-                        utils.addElement(nonAttackerGuards, ((obj_id) activeGuard));
+                        nonAttackerGuards.add(((obj_id)activeGuard.get));
                     }
                 }
             }

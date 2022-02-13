@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class space_dungeon extends script.base_script
 {
-    public space_dungeon()
-    {
-    }
     public static final String TEMPLATE_TICKET = "object/tangible/travel/travel_ticket/dungeon_ticket.iff";
     public static final String TRAVEL_DUNGEON = "item.travel_ticket.travel_space_dungeon";
     public static final String PLAYER_TRAVEL_DUNGEON = "item.travel_ticket.travel_player_space_dungeon";
@@ -451,7 +448,7 @@ public class space_dungeon extends script.base_script
                         if (ticket_planet != null && ticket_planet.equals(collector_planet)) {
                             String ticket_dungeon = getTicketDungeonName(inv_content);
                             if (ticket_dungeon != null && ticket_dungeon.equals(collector_dungeon)) {
-                                utils.addElement(valid_tickets, inv_content);
+                                valid_tickets.add(inv_contents, inv_content);
                             }
                         }
                     }
@@ -1241,7 +1238,7 @@ public class space_dungeon extends script.base_script
                         }
                         removeObjVar(passenger, VAR_PILOT_ID);
                         removeObjVar(passenger, VAR_SESSION_ID);
-                        passengersToLaunch = utils.addElement(passengersToLaunch, passenger);
+                        passengersToLaunch.add(passenger);
                     }
                 }
             }
@@ -1635,7 +1632,7 @@ public class space_dungeon extends script.base_script
             for (obj_id player : players) {
                 if (hasObjVar(player, INSTANCE_ID)) {
                     if (getObjIdObjVar(player, INSTANCE_ID) == controller) {
-                        playersInInstance = utils.addElement(playersInInstance, player);
+                        playersInInstance.add(players, player);
                     }
                 }
             }
@@ -1877,7 +1874,7 @@ public class space_dungeon extends script.base_script
         String[] validDungeons = dataTableGetStringColumn(space_dungeon_data.DUNGEON_DATATABLE, 0);
         for (String validDungeon : validDungeons) {
             if (hasObjVar(player, LIST_DUNGEON_LOCKOUT + validDungeon)) {
-                utils.addElement(dungeonLocks, validDungeon);
+                dungeonLocks.add(validDungeons, validDungeon);
             }
         }
         if (dungeonLocks == null || dungeonLocks.size() == 0)
@@ -1954,7 +1951,7 @@ public class space_dungeon extends script.base_script
         lockedPlayers.setSize(0);
         for (obj_id player : players) {
             if (!validateInstanceTimerForPlayer(player, dungeonName)) {
-                utils.addElement(lockedPlayers, player);
+                lockedPlayers.add(players, player);
             }
         }
         if (lockedPlayers == null || lockedPlayers.size() == 0)
@@ -1975,7 +1972,7 @@ public class space_dungeon extends script.base_script
         hasDungeons.setSize(0);
         for (String allDungeon : allDungeons) {
             if (hasObjVar(player, LIST_DUNGEON_LOCKOUT + allDungeon)) {
-                utils.addElement(hasDungeons, allDungeon);
+                hasDungeons.add(allDungeons, allDungeon);
             }
         }
         if (hasDungeons == null || hasDungeons.size() == 0)

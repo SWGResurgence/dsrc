@@ -4,12 +4,11 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class new_player extends script.base_script
 {
-    public new_player()
-    {
-    }
     public static final int PERIODIC_CHECK_DELAY = 30 * 60;
     public static final int PERIODIC_CHECK_CAP = 3 * 60 * 60;
     public static final int ACCOUNT_AGE_CAP = 30;
@@ -1917,15 +1916,14 @@ public class new_player extends script.base_script
                     {
                         if (listener != self)
                         {
-                            Vector listenerList = new Vector();
-                            listenerList.setSize(0);
+                            List listenerList = new ArrayList<obj_id>();
                             if (hasObjVar(self, "new_player.temp.entertainer_listeners"))
                             {
                                 listenerList = getResizeableObjIdArrayObjVar(self, "new_player.temp.entertainer_listeners");
                             }
                             if (!utils.isElementInArray(listenerList, listener))
                             {
-                                listenerList = utils.addElement(listenerList, listener);
+                                listenerList.add(listener);
                             }
                             int numListeners = listenerList.size();
                             if (numListeners > 0)
@@ -1946,15 +1944,14 @@ public class new_player extends script.base_script
                     {
                         if (watcher != self)
                         {
-                            Vector watcherList = new Vector();
-                            watcherList.setSize(0);
+                            List watcherList = new ArrayList<obj_id>();
                             if (hasObjVar(self, "new_player.temp.entertainer_watchers"))
                             {
                                 watcherList = getResizeableObjIdArrayObjVar(self, "new_player.temp.entertainer_watchers");
                             }
                             if (!utils.isElementInArray(watcherList, watcher))
                             {
-                                watcherList = utils.addElement(watcherList, watcher);
+                                watcherList.add(watcher);
                             }
                             int numWatchers = watcherList.size();
                             if (numWatchers > 0)
@@ -2127,15 +2124,14 @@ public class new_player extends script.base_script
                     {
                         if (target != self)
                         {
-                            Vector patientList = new Vector();
-                            patientList.setSize(0);
+                            List patientList = new ArrayList<obj_id>();
                             if (hasObjVar(self, "new_player.temp.medic"))
                             {
                                 patientList = getResizeableObjIdArrayObjVar(self, "new_player.temp.medic");
                             }
                             if (!utils.isElementInArray(patientList, target))
                             {
-                                patientList = utils.addElement(patientList, target);
+                                patientList.add(target);
                             }
                             int numPatients = patientList.size();
                             if (numPatients > 0)
@@ -3120,27 +3116,27 @@ public class new_player extends script.base_script
         tempList.setSize(numQuests);
         if (hasObjVar(player, BRAWLER_QUEST_OBJVAR))
         {
-            tempList = utils.addElement(tempList, "Brawler");
+            tempList.add("Brawler");
         }
         if (hasObjVar(player, MARKSMAN_QUEST_OBJVAR))
         {
-            tempList = utils.addElement(tempList, "Marksman");
+            tempList.add("Marksman");
         }
         if (hasObjVar(player, SCOUT_QUEST_OBJVAR))
         {
-            tempList = utils.addElement(tempList, "Scout");
+            tempList.add("Scout");
         }
         if (hasObjVar(player, ARTISAN_QUEST_OBJVAR))
         {
-            tempList = utils.addElement(tempList, "Artisan");
+            tempList.add("Artisan");
         }
         if (hasObjVar(player, MEDIC_QUEST_OBJVAR))
         {
-            tempList = utils.addElement(tempList, "Medic");
+            tempList.add("Medic");
         }
         if (hasObjVar(player, ENTERTAINER_QUEST_OBJVAR))
         {
-            tempList = utils.addElement(tempList, "Entertainer");
+            tempList.add("Entertainer");
         }
         if (tempList != null || tempList.size() > 0)
         {

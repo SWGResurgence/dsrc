@@ -11,9 +11,6 @@ import java.util.Vector;
 
 public class grievous_encounter_lock extends script.base_script
 {
-    public grievous_encounter_lock()
-    {
-    }
     public static final String start_cell = "hall55";
     public static final String entry_cell = "hall56";
     public static final String exit_cell = "hall59";
@@ -71,7 +68,7 @@ public class grievous_encounter_lock extends script.base_script
             if (cellContents != null && cellContents.length > 0) {
                 for (obj_id cellContent : cellContents) {
                     if (isPlayer(cellContent)) {
-                        players = utils.addElement(players, cellContent);
+                        players.add(cellContent);
                     }
                 }
             }
@@ -106,7 +103,7 @@ public class grievous_encounter_lock extends script.base_script
                 for (obj_id content : contents) {
                     if (isPlayer(content) && hasScript(content, "theme_park.dungeon.myyydril.grievous_player")) {
                         if (validatePlayerSessionId(content, dungeon)) {
-                            eventPlayers = utils.addElement(eventPlayers, content);
+                            eventPlayers.add(content);
                         }
                     }
                 }

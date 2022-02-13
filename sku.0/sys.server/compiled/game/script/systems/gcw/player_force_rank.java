@@ -7,12 +7,11 @@ import script.prose_package;
 import script.string_id;
 
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class player_force_rank extends script.base_script
 {
-    public player_force_rank()
-    {
-    }
     public static final String SCRIPT_VAR_SUI_PID = "force_rank.vote_sui";
     public static final String SCRIPT_VAR_TERMINAL = "force_rank.vote_terminal";
     public static final String SCRIPT_VAR_PETITIONERS = "force_rank.vote_petitioners";
@@ -744,8 +743,7 @@ public class player_force_rank extends script.base_script
             sendSystemMessage(self, new string_id(force_rank.STF_FILE, "cant_vote_for_rank"));
             return SCRIPT_CONTINUE;
         }
-        Vector players_voted = new Vector();
-        players_voted.setSize(0);
+        List players_voted = new ArrayList<String>();
         if (hasObjVar(terminal, force_rank.BATCH_VAR_VOTERS))
         {
             players_voted = utils.getResizeableStringBatchObjVar(terminal, force_rank.BATCH_VAR_VOTERS);
@@ -840,8 +838,7 @@ public class player_force_rank extends script.base_script
             sendSystemMessage(self, new string_id(force_rank.STF_FILE, "cant_vote_for_rank"));
             return SCRIPT_CONTINUE;
         }
-        Vector players_voted = new Vector();
-        players_voted.setSize(0);
+        List players_voted = new ArrayList<String>();
         if (hasObjVar(terminal, force_rank.BATCH_VAR_VOTERS + rank))
         {
             players_voted = utils.getResizeableStringBatchObjVar(terminal, force_rank.BATCH_VAR_VOTERS + rank);
@@ -917,7 +914,7 @@ public class player_force_rank extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String obj_var_name = force_rank.VAR_VOTING_BASE + (row_selected + 1) + ".winner";
-        Vector winners = getResizeableStringArrayObjVar(enclave, obj_var_name);
+        List winners = getResizeableStringArrayObjVar(enclave, obj_var_name);
         int idx = winners.indexOf(getFirstName(self));
         if (winners == null || idx == -1)
         {
@@ -1037,7 +1034,7 @@ public class player_force_rank extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String obj_var_name = force_rank.VAR_VOTING_BASE + (row_selected + 1) + ".petition";
-        Vector petitioners = getResizeableStringArrayObjVar(enclave, obj_var_name);
+        List petitioners = getResizeableStringArrayObjVar(enclave, obj_var_name);
         if (petitioners == null)
         {
             petitioners = new Vector();
@@ -1346,8 +1343,7 @@ public class player_force_rank extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String challenge_selected = names[row_selected];
-        Vector players_voted = new Vector();
-        players_voted.setSize(0);
+        List players_voted = new ArrayList<String>();
         if (hasObjVar(terminal, force_rank.BATCH_VAR_VOTERS + "." + challenge_selected))
         {
             players_voted = utils.getResizeableStringBatchObjVar(terminal, force_rank.BATCH_VAR_VOTERS + "." + challenge_selected);
@@ -1412,8 +1408,7 @@ public class player_force_rank extends script.base_script
             sendSystemMessage(self, new string_id(force_rank.STF_FILE, "vote_failed"));
             return SCRIPT_CONTINUE;
         }
-        Vector players_voted = new Vector();
-        players_voted.setSize(0);
+        List players_voted = new ArrayList<String>();
         if (hasObjVar(terminal, force_rank.BATCH_VAR_VOTERS + "." + challenge_selected))
         {
             players_voted = utils.getResizeableStringBatchObjVar(terminal, force_rank.BATCH_VAR_VOTERS + "." + challenge_selected);

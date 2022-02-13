@@ -6,12 +6,10 @@ import script.location;
 import script.obj_id;
 
 import java.util.Vector;
+import java.util.List;
 
 public class han_solo_experience_manager extends script.base_script
 {
-    public han_solo_experience_manager()
-    {
-    }
     public static final String STF = "npe/han_solo_experience";
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -68,7 +66,7 @@ public class han_solo_experience_manager extends script.base_script
         utils.setScriptVar(self, "objArrayCrates", crates);
         if (utils.hasScriptVar(self, "objAlarms"))
         {
-            Vector alarms = utils.getResizeableObjIdArrayScriptVar(self, "objAlarms");
+            List alarms = utils.getResizeableObjIdArrayScriptVar(self, "objAlarms");
             for (Object alarm : alarms) {
                 if (isIdValid(((obj_id) alarm))) {
                     setCondition(((obj_id) alarm), CONDITION_ON);
@@ -505,7 +503,7 @@ public class han_solo_experience_manager extends script.base_script
             obj_id[] objTestContents = getContents(objCell);
             if ((objTestContents != null) && (objTestContents.length > 0)) {
                 for (obj_id objTestContent : objTestContents) {
-                    objContents = utils.addElement(objContents, objTestContent);
+                    objContents.add(objTestContents, objTestContent);
                 }
             }
         }

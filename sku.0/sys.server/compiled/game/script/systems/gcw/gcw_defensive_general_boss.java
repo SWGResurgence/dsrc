@@ -8,11 +8,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Vector;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class gcw_defensive_general_boss extends script.base_script
 {
-    public gcw_defensive_general_boss()
-    {
-    }
     public static final boolean LOGGING_ON = false;
     public static final int MAX_HIT_POINTS = 1000000;
     public static final int MAX_GENERAL_BUFF_STACK = 100;
@@ -30,13 +30,12 @@ public class gcw_defensive_general_boss extends script.base_script
     }
     public int OnHateTargetAdded(obj_id self, obj_id target) throws InterruptedException
     {
-        Vector allPlayersHatedList = new Vector();
-        allPlayersHatedList.setSize(0);
+        List allPlayersHatedList = new ArrayList<obj_id>();
         if (utils.hasScriptVar(self, "allPlayersEverHated"))
         {
             allPlayersHatedList = utils.getResizeableObjIdArrayScriptVar(self, "allPlayersEverHated");
         }
-        utils.addElement(allPlayersHatedList, target);
+        allPlayersHatedList.add(target);
         utils.setScriptVar(self, "allPlayersEverHated", allPlayersHatedList);
         trial.addNonInstanceFactionParticipant(target, self);
         return SCRIPT_CONTINUE;
@@ -44,7 +43,7 @@ public class gcw_defensive_general_boss extends script.base_script
     public int OnAboutToBeIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id[] attackerList = utils.getObjIdBatchScriptVar(self, "creditForKills.attackerList.attackers");
-        Vector allPlayersHatedList = utils.getResizeableObjIdArrayScriptVar(self, "allPlayersEverHated");
+        List allPlayersHatedList = utils.getResizeableObjIdArrayScriptVar(self, "allPlayersEverHated");
         if ((allPlayersHatedList == null || allPlayersHatedList.size() <= 0) && (attackerList == null || attackerList.length <= 0))
         {
             return SCRIPT_CONTINUE;

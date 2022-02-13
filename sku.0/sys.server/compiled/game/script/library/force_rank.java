@@ -5,13 +5,11 @@ import script.combat_engine.hit_result;
 import script.combat_engine.weapon_data;
 
 import java.util.Arrays;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class force_rank extends script.base_script
 {
-    public force_rank()
-    {
-    }
     public static final String FRS_DATATABLE = "datatables/pvp/force_rank.iff";
     public static final String FRS_DARK_DATATABLE = "datatables/pvp/force_rank_dark.iff";
     public static final String JEDI_TERMINAL_DATATABLE = "datatables/pvp/jedi_enclave_terminals.iff";
@@ -236,7 +234,7 @@ public class force_rank extends script.base_script
         boolean in_rank = false;
         for (int i = 1; i < 12; i++)
         {
-            Vector rank_list = getPlayersInForceRankResizeable(enclave, i);
+            List rank_list = getPlayersInForceRankResizeable(enclave, i);
             if (rank_list != null)
             {
                 if (rank_list.indexOf(player_name) != -1)
@@ -630,8 +628,7 @@ public class force_rank extends script.base_script
                             votes = getRankPetitionerVotes(enclave, rank);
                             if (top_votes != null)
                             {
-                                Vector winners = new Vector();
-                                winners.setSize(0);
+                                List winners = new ArrayList<obj_id>();
                                 for (int top_vote : top_votes) {
                                     int vote_idx = utils.getElementPositionInArray(votes, top_vote);
                                     winners.add(petitioners[vote_idx]);
@@ -872,7 +869,7 @@ public class force_rank extends script.base_script
             LOG("force_rank", "force_rank.checkMissedVotes -- can't find the voting terminal for enclave " + enclave);
             return false;
         }
-        Vector voters = utils.getResizeableStringBatchObjVar(terminal, BATCH_VAR_VOTERS + rank);
+        List voters = utils.getResizeableStringBatchObjVar(terminal, BATCH_VAR_VOTERS + rank);
         for (int vote_rank = 1; vote_rank < 12; vote_rank++)
         {
             if (getVoteWeight(vote_rank, rank) > 0)
@@ -1086,8 +1083,7 @@ public class force_rank extends script.base_script
             LOG("force_rank", "force_rank.getChallengeVoteList -- terminal is invalid.");
             return null;
         }
-        Vector names = new Vector();
-        names.setSize(0);
+        List names = new ArrayList<obj_id>();
         obj_var_list vote_list = getObjVarList(terminal, VAR_CHAL_VOTING_BASE);
         if (vote_list == null)
         {
@@ -1159,7 +1155,7 @@ public class force_rank extends script.base_script
             return null;
         }
     }
-    public static Vector getRankPetitionersResizeable(obj_id enclave, int rank) throws InterruptedException
+    public static List getRankPetitionersResizeable(obj_id enclave, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
         {
@@ -1203,7 +1199,7 @@ public class force_rank extends script.base_script
             return null;
         }
     }
-    public static Vector getRankPetitionerVotesResizeable(obj_id enclave, int rank) throws InterruptedException
+    public static List getRankPetitionerVotesResizeable(obj_id enclave, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
         {
@@ -1528,7 +1524,7 @@ public class force_rank extends script.base_script
         }
         for (int i = 1; i < 12; i++)
         {
-            Vector rank_list = getPlayersInForceRankResizeable(enclave, i);
+            List rank_list = getPlayersInForceRankResizeable(enclave, i);
             if (rank_list != null)
             {
                 int idx = rank_list.indexOf(player_name);
@@ -1773,8 +1769,8 @@ public class force_rank extends script.base_script
         {
             return;
         }
-        Vector petitioners = getRankPetitionersResizeable(enclave, playerRank + 1);
-        Vector votes = getRankPetitionerVotesResizeable(enclave, playerRank + 1);
+        List petitioners = getRankPetitionersResizeable(enclave, playerRank + 1);
+        List votes = getRankPetitionerVotesResizeable(enclave, playerRank + 1);
         if (votes.size() != petitioners.size())
         {
             trace.log("force_rank", "force_rank::getVotesForPlayer: -> Votes.length != petitioners.length.  Returning zero votes for player " + utils.getRealPlayerFirstName(player), player, trace.TL_ERROR_LOG | trace.TL_DEBUG);
@@ -1786,8 +1782,8 @@ public class force_rank extends script.base_script
         {
             if (numVotes < 1)
             {
-                utils.removeElementAt(petitioners, idx);
-                utils.removeElementAt(votes, idx);
+                petitioners.remove(idx);
+                votes.remove(idx);
             }
             else 
             {
@@ -1796,16 +1792,16 @@ public class force_rank extends script.base_script
         }
         else if (numVotes > 0)
         {
-            utils.addElement(petitioners, playerName);
-            utils.addElement(votes, numVotes);
+            petitioners.remove(playerName);
+            votes.remove(numVotes);
         }
         setObjVar(enclave, VAR_VOTING_BASE + (playerRank + 1) + ".petition", petitioners);
         setObjVar(enclave, VAR_VOTING_BASE + (playerRank + 1) + ".votes", votes);
         return;
     }
-    public static Vector getAllPlayerNamesInForceRank(obj_id enclave) throws InterruptedException
+    public static List getAllPlayerNamesInForceRank(obj_id enclave) throws InterruptedException
     {
-        Vector allNames = new Vector();
+        List allNames = new ArrayList<obj_id>();
         for (int h = 1; h < 12; h++)
         {
             String[] players = getPlayersInForceRank(enclave, h);
@@ -1819,8 +1815,7 @@ public class force_rank extends script.base_script
     }
     public static obj_id[] getAllPlayersInForceRank(obj_id enclave, int rank) throws InterruptedException
     {
-        Vector playerIds = new Vector();
-        playerIds.setSize(0);
+        List playerIds = new ArrayList<obj_id>();
         obj_id player = null;
         if (rank >= 0)
         {
@@ -1838,7 +1833,7 @@ public class force_rank extends script.base_script
             for (String player1 : players) {
                 player = getPlayerIdFromFirstName(player1);
                 if (player != null && isIdValid(player)) {
-                    utils.addElement(playerIds, player);
+                    playerIds.add(player);
                 }
             }
         }
@@ -1854,7 +1849,7 @@ public class force_rank extends script.base_script
                 for (String player1 : players) {
                     player = getPlayerIdFromFirstName(player1);
                     if (player != null && isIdValid(player)) {
-                        utils.addElement(playerIds, player);
+                        playerIds.add(player);
                     }
                 }
             }
@@ -1952,11 +1947,10 @@ public class force_rank extends script.base_script
         if (hasObjVar(enclave, objvar_name))
         {
             String[] rank_list = getStringArrayObjVar(enclave, objvar_name);
-            Vector final_list = new Vector();
-            final_list.setSize(0);
+            List final_list = new ArrayList<obj_id>();
             for (String s : rank_list) {
                 if (s != null && s.length() > 0 && !s.equals(EMPTY_SLOT)) {
-                    final_list = utils.addElement(final_list, s);
+                    final_list.add(rank_list);
                 }
             }
             if (final_list.size() > 0)
@@ -1979,7 +1973,7 @@ public class force_rank extends script.base_script
             return null;
         }
     }
-    public static Vector getPlayersInForceRankResizeable(obj_id enclave, int rank) throws InterruptedException
+    public static List getPlayersInForceRankResizeable(obj_id enclave, int rank) throws InterruptedException
     {
         if (!isIdValid(enclave))
         {
@@ -1989,13 +1983,13 @@ public class force_rank extends script.base_script
         String objvar_name = VAR_RANK_BASE + rank;
         if (hasObjVar(enclave, objvar_name))
         {
-            Vector rank_list = getResizeableStringArrayObjVar(enclave, objvar_name);
+            List rank_list = getResizeableStringArrayObjVar(enclave, objvar_name);
             if (rank_list != null)
             {
                 int idx = rank_list.indexOf(EMPTY_SLOT);
                 while (idx > -1)
                 {
-                    rank_list.removeElementAt(idx);
+                    rank_list.remove(idx);
                     idx = rank_list.indexOf(EMPTY_SLOT);
                 }
             }
@@ -2074,7 +2068,7 @@ public class force_rank extends script.base_script
         _updateForceRankData(source, council, 6, "None", handler, false);
         return true;
     }
-    public static Vector getRankMembersFromDictionary(dictionary enclave_data, int rank) throws InterruptedException
+    public static List getRankMembersFromDictionary(dictionary enclave_data, int rank) throws InterruptedException
     {
         if (enclave_data == null)
         {
@@ -2088,8 +2082,7 @@ public class force_rank extends script.base_script
         }
         String key_name = VAR_RANK_BASE + rank + "-";
         int slots = MAX_RANK_SLOTS;
-        Vector rank_list = new Vector();
-        rank_list.setSize(0);
+        List rank_list = new ArrayList<obj_id>();
         for (int i = 0; i < slots; i++)
         {
             if (enclave_data.containsKey(key_name + i))
@@ -2097,7 +2090,7 @@ public class force_rank extends script.base_script
                 String name = enclave_data.getString(key_name + i);
                 if (name != null && name.length() > 0)
                 {
-                    rank_list = utils.addElement(rank_list, name);
+                    rank_list.add(name);
                 }
             }
         }
@@ -2117,11 +2110,10 @@ public class force_rank extends script.base_script
             {
                 return null;
             }
-            Vector final_list = new Vector();
-            final_list.setSize(0);
+            List final_list = new ArrayList<String>();
             for (String name : names) {
                 if (name != null && name.length() > 0 && !name.equals(EMPTY_SLOT)) {
-                    final_list = utils.addElement(final_list, name);
+                    final_list.add(names);
                 }
             }
             if (final_list.size() > 0)
@@ -2158,11 +2150,10 @@ public class force_rank extends script.base_script
             {
                 return null;
             }
-            Vector final_list = new Vector();
-            final_list.setSize(0);
+            List final_list = new ArrayList<Integer>();
             for (int rating : ratings) {
                 if (rating > 0) {
-                    final_list = utils.addElement(final_list, rating);
+                    final_list.add(ratings);
                 }
             }
             if (final_list.size() > 0)
@@ -2200,7 +2191,7 @@ public class force_rank extends script.base_script
             LOG("force_rank", "force_rank.getPvpRatingForPlayer -- player_name is null.");
             return -1;
         }
-        Vector pvp_board_names = utils.getResizeableStringBatchObjVar(enclave, BATCH_VAR_PVPBOARD_NAME);
+        List pvp_board_names = utils.getResizeableStringBatchObjVar(enclave, BATCH_VAR_PVPBOARD_NAME);
         return pvp_board_names.indexOf(player_name);
     }
     public static boolean getPvpBoardRatings(obj_id source, int council, String handler) throws InterruptedException
@@ -2245,10 +2236,8 @@ public class force_rank extends script.base_script
             LOG("force_rank", "force_rank.adjustPvpBoardRankings -- enclave_data is null.");
             return null;
         }
-        Vector board_names = new Vector();
-        board_names.setSize(0);
-        Vector board_ratings = new Vector();
-        board_ratings.setSize(0);
+        List board_names = new ArrayList<String>(PVP_BOARD_SIZE);
+        List board_ratings = new ArrayList<Integer>(PVP_BOARD_SIZE);
         for (int i = 0; i < PVP_BOARD_SIZE; i++)
         {
             String key_name = BATCH_VAR_PVPBOARD_NAME + i;
@@ -2259,8 +2248,8 @@ public class force_rank extends script.base_script
                 int rating = enclave_data.getInt(key_rating);
                 if (name != null && name.length() > 0 && !name.equals(EMPTY_SLOT) && rating > 0)
                 {
-                    board_names = utils.addElement(board_names, name);
-                    board_ratings = utils.addElement(board_ratings, rating);
+                    board_names.add(name);
+                    board_ratings.add(rating);
                 }
             }
         }
@@ -2312,11 +2301,6 @@ public class force_rank extends script.base_script
             }
             board_names.add(new_board_idx, utils.getRealPlayerFirstName(player));
             board_ratings.add(new_board_idx, player_rating);
-        }
-        if (board_names.size() > PVP_BOARD_SIZE)
-        {
-            board_names.setSize(PVP_BOARD_SIZE);
-            board_ratings.setSize(PVP_BOARD_SIZE);
         }
         for (int i = 0; i < board_names.size(); i++)
         {
@@ -2467,7 +2451,7 @@ public class force_rank extends script.base_script
         Object[] ranks = new Object[11];
         for (int i = 0; i < ranks.length; i++)
         {
-            ranks[i] = new Vector();
+            ranks[i] = new ArrayList<>();
         }
         String[] pvp_board_name = new String[PVP_BOARD_SIZE];
         Arrays.fill(pvp_board_name, EMPTY_SLOT);
@@ -2503,7 +2487,7 @@ public class force_rank extends script.base_script
                     {
                         continue;
                     }
-                    Vector edit_list = (Vector)(ranks[rank - 1]);
+                    List edit_list = (List)(ranks[rank - 1]);
                     edit_list.add(enclave_data.getString(key_name));
                 }
                 if (key_name.startsWith(BATCH_VAR_PVPBOARD_NAME))
@@ -2527,7 +2511,7 @@ public class force_rank extends script.base_script
         for (int i = 0; i < ranks.length; i++)
         {
             Object obj_list = ranks[i];
-            Vector vec_list = (Vector)obj_list;
+            List vec_list = (List)obj_list;
             String[] rank_list = new String[vec_list.size()];
             vec_list.toArray(rank_list);
             setObjVar(enclave, VAR_RANK_BASE + (i + 1), rank_list);
@@ -2610,7 +2594,7 @@ public class force_rank extends script.base_script
             LOG("force_rank", "force_rank.removeEntryFromRankList -- invalid max slot data from " + rank);
             return null;
         }
-        Vector rank_list = getRankMembersFromDictionary(enclave_data, rank);
+        List rank_list = getRankMembersFromDictionary(enclave_data, rank);
         if (rank_list != null)
         {
             int slots_to_remove = rank_list.size() - max_slots;
@@ -2971,10 +2955,8 @@ public class force_rank extends script.base_script
             totalDarkJediDeathContrib += contributions[s];
             s++;
         }
-        Vector suddenDeathWinners = new Vector();
-        suddenDeathWinners.setSize(0);
-        Vector suddenDeathContribs = new Vector();
-        suddenDeathContribs.setSize(0);
+        List suddenDeathWinners = new ArrayList<obj_id>();
+        List suddenDeathContribs = new ArrayList<obj_id>();
         boolean suddenDeath = false;
         boolean demoteToZero = false;
         obj_id curPlayer = null;
@@ -2991,8 +2973,8 @@ public class force_rank extends script.base_script
                 if (bothArePartOfSameSuddenDeathRank(victim, curPlayer, darkEnclave, suddenDeathData))
                 {
                     suddenDeath = true;
-                    utils.addElement(suddenDeathWinners, curPlayer);
-                    utils.addElement(suddenDeathContribs, contributions[i]);
+                    suddenDeathWinners.add(curPlayer);
+                    suddenDeathContribs.add(contributions[i]);
                     totSDContribs += contributions[i];
                 }
             }
@@ -3147,15 +3129,14 @@ public class force_rank extends script.base_script
         }
         return;
     }
-    public static Vector playerNamesToIds(String[] playerNames) throws InterruptedException
+    public static List playerNamesToIds(String[] playerNames) throws InterruptedException
     {
-        Vector players = new Vector();
-        players.setSize(0);
+        List players = new ArrayList<obj_id>();
         obj_id player = null;
         for (String playerName : playerNames) {
             player = getPlayerIdFromFirstName(playerName);
             if (isIdValid(player) && player != null) {
-                utils.addElement(players, player);
+                players.add(player);
             }
         }
         return players;
@@ -3386,7 +3367,7 @@ public class force_rank extends script.base_script
         }
         return;
     }
-    public static dictionary packageActionData(Vector initz, Vector victz, Vector startz) throws InterruptedException
+    public static dictionary packageActionData(List initz, List victz, List startz) throws InterruptedException
     {
         dictionary d = new dictionary();
         if (initz == null || initz.size() < 1 || victz == null || victz.size() < 1 || startz == null || startz.size() < 1)
@@ -3449,20 +3430,17 @@ public class force_rank extends script.base_script
             trace.log("force_rank", "force_rank::getAndValidatePvPActionData -> darkEnclave ID not valid.", darkEnclave, trace.TL_ERROR_LOG | trace.TL_DEBUG);
             return null;
         }
-        Vector initiatorz = new Vector();
-        initiatorz.setSize(0);
+        List initiatorz = new ArrayList<obj_id>();
         if (hasObjVar(darkEnclave, pvpAction + VAR_INITIATORS))
         {
             initiatorz = getResizeableObjIdArrayObjVar(darkEnclave, pvpAction + VAR_INITIATORS);
         }
-        Vector victimz = new Vector();
-        victimz.setSize(0);
+        List victimz = new ArrayList<obj_id>();
         if (hasObjVar(darkEnclave, pvpAction + VAR_VICTIMS))
         {
             victimz = getResizeableObjIdArrayObjVar(darkEnclave, pvpAction + VAR_VICTIMS);
         }
-        Vector timez = new Vector();
-        timez.setSize(0);
+        List timez = new ArrayList<Integer>();
         if (hasObjVar(darkEnclave, pvpAction + VAR_START_TIMESTAMPS))
         {
             timez = getResizeableIntArrayObjVar(darkEnclave, pvpAction + VAR_START_TIMESTAMPS);
@@ -3501,12 +3479,9 @@ public class force_rank extends script.base_script
     }
     public static void deleteExpiredPvPActions(obj_id darkEnclave) throws InterruptedException
     {
-        Vector initiatorz = new Vector();
-        initiatorz.setSize(0);
-        Vector victimz = new Vector();
-        victimz.setSize(0);
-        Vector timez = new Vector();
-        timez.setSize(0);
+        List initiatorz = new ArrayList<obj_id>();
+        List victimz = new ArrayList<obj_id>();
+        List timez = new ArrayList<Integer>();
         String[] actions = 
         {
             ACTION_VENDETTA,
@@ -3531,9 +3506,9 @@ public class force_rank extends script.base_script
             int x = 0;
             while (x < timez.size()) {
                 if (now - (Integer) timez.get(x) >= durations[x]) {
-                    utils.removeElementAt(timez, x);
-                    utils.removeElementAt(victimz, x);
-                    utils.removeElementAt(initiatorz, x);
+                    timez.remove(x);
+                    victimz.remove(x);
+                    initiatorz.remove(x);
                 } else {
                     x++;
                 }
@@ -3548,11 +3523,9 @@ public class force_rank extends script.base_script
     }
     public static void demoteDeadPlayerToRankZero(obj_id player, obj_id darkEnclave) throws InterruptedException
     {
-        Vector peaceTarget = new Vector();
-        peaceTarget.setSize(0);
+        List peaceTarget = new ArrayList<obj_id>();
         peaceTarget.add(player);
-        Vector recips = new Vector();
-        recips.setSize(0);
+        List peaceTarget = new ArrayList<obj_id>();
         utils.concatArrays(recips, getAllPlayersInForceRank(darkEnclave, -1));
         demoteForceRank(darkEnclave, utils.getRealPlayerFirstName(player), 0);
         notifyPlayerOfPvPActionEnd(null, ACTION_BANISHMENT, peaceTarget, recips, false);
@@ -3582,14 +3555,11 @@ public class force_rank extends script.base_script
             trace.log("force_rank", "force_rank::_clearPvPActionDataForPlayer: -> Method called but no " + pvpAction + " actions to clear for " + utils.getRealPlayerFirstName(player), player, trace.TL_WARNING | trace.TL_DEBUG);
             return false;
         }
-        Vector inits = new Vector();
-        inits.setSize(0);
+        List inits = new ArrayList<obj_id>();
         utils.concatArrays(inits, data.getObjIdArray("initiators"));
-        Vector victs = new Vector();
-        victs.setSize(0);
+        List victs = new ArrayList<obj_id>();
         utils.concatArrays(victs, data.getObjIdArray("victims"));
-        Vector startTms = new Vector();
-        startTms.setSize(0);
+        List startTms = new ArrayList<Integer>();
         utils.concatArrays(startTms, data.getIntArray("times"));
         for (String whichList : whichLists) {
             int idx = -1;
@@ -3602,9 +3572,9 @@ public class force_rank extends script.base_script
                 continue;
             }
             while (idx > -1) {
-                inits = utils.removeElementAt(inits, idx);
-                victs = utils.removeElementAt(victs, idx);
-                startTms = utils.removeElementAt(startTms, idx);
+                inits.remove(idx);
+                victs.remove(idx);
+                startTms.remove(idx);
                 if (whichList.equals(VAR_INITIATORS)) {
                     idx = utils.getElementPositionInArray(inits, player);
                 } else {
@@ -3618,11 +3588,9 @@ public class force_rank extends script.base_script
     }
     public static boolean isPartOfSameVendetta(obj_id player1, obj_id player2, dictionary vendettaData) throws InterruptedException
     {
-        Vector initiatorz = new Vector();
-        initiatorz.setSize(0);
+        List initiatorz = new ArrayList<obj_id>();
         utils.concatArrays(initiatorz, vendettaData.getObjIdArray("initiators"));
-        Vector victimz = new Vector();
-        victimz.setSize(0);
+        List victimz = new ArrayList<obj_id>();
         utils.concatArrays(victimz, vendettaData.getObjIdArray("victims"));
         int idx = initiatorz.indexOf(player1);
         while (idx > -1)
@@ -3632,7 +3600,7 @@ public class force_rank extends script.base_script
                 trace.log("force_rating", "force_rank::isPartOfSameVendetta: -> " + utils.getRealPlayerFirstName(player1) + " is same vendetta as " + utils.getRealPlayerFirstName(player2), player1, trace.TL_DEBUG);
                 return true;
             }
-            idx = initiatorz.indexOf(player1, idx + 1);
+            idx = initiatorz.indexOf(player1);
         }
         idx = victimz.indexOf(player1);
         while (idx > -1)
@@ -3642,7 +3610,7 @@ public class force_rank extends script.base_script
                 trace.log("force_rating", "force_rank::isPartOfSameVendetta: -> " + utils.getRealPlayerFirstName(player1) + " is same vendetta as " + utils.getRealPlayerFirstName(player2), player1, trace.TL_DEBUG);
                 return true;
             }
-            idx = victimz.indexOf(player1, idx + 1);
+            idx = victimz.indexOf(player1);
         }
         return false;
     }
@@ -3696,18 +3664,15 @@ public class force_rank extends script.base_script
             trace.log("force_rank", "force_rank::_initiateCouncilPurge: -> Council purge not done as there are no Council members to purge.", purger, trace.TL_WARNING | trace.TL_DEBUG);
             return true;
         }
-        Vector victimz = new Vector();
-        victimz.setSize(0);
-        Vector initiatorz = new Vector();
-        initiatorz.setSize(0);
-        Vector timez = new Vector();
-        timez.setSize(0);
+        List victimz = new ArrayList<obj_id>();
+        List initiatorz = new ArrayList<obj_id>();
+        List timez = new ArrayList<Integer>();
         int time = getGameTime();
         for (obj_id member : members) {
             if (member != null) {
-                utils.addElement(victimz, member);
-                utils.addElement(initiatorz, purger);
-                utils.addElement(timez, time);
+                victimz.add(members[i]);
+                initiatorz.add(purger);
+                timez.add(time);
             }
         }
         if (victimz.size() > 0)
@@ -3715,13 +3680,12 @@ public class force_rank extends script.base_script
             dictionary data = packageActionData(initiatorz, victimz, timez);
             setPvPActionData(data, ACTION_PURGE_COUNCIL, darkEnclave);
         }
-        Vector recips = new Vector();
-        recips.setSize(0);
+        List recips = new ArrayList<obj_id>();
         utils.concatArrays(recips, getAllPlayersInForceRank(darkEnclave, -1));
         notifyPlayerOfPvPActionStart(purger, ACTION_PURGE_COUNCIL, victimz, recips, darkEnclave);
         return true;
     }
-    public static boolean startPvPAction(obj_id initiator, Vector allVictims, String pvpAction, obj_id darkEnclave) throws InterruptedException
+    public static boolean startPvPAction(obj_id initiator, List allVictims, String pvpAction, obj_id darkEnclave) throws InterruptedException
     {
         trace.log("force_rank", "force_rank::startPvPAction: -> " + pvpAction + " started by " + initiator, initiator, trace.TL_CS_LOG | trace.TL_DEBUG);
         if (pvpAction.equals(ACTION_PURGE_COUNCIL))
@@ -3733,12 +3697,9 @@ public class force_rank extends script.base_script
         {
             return false;
         }
-        Vector initiatorz = new Vector();
-        initiatorz.setSize(0);
-        Vector victimz = new Vector();
-        victimz.setSize(0);
-        Vector timez = new Vector();
-        timez.setSize(0);
+        List initiatorz = new ArrayList<obj_id>();
+        List victimz = new ArrayList<obj_id>();
+        List timez = new ArrayList<obj_id>();
         int time = getGameTime();
         if (data != null)
         {
@@ -3748,8 +3709,8 @@ public class force_rank extends script.base_script
         }
         for (int i = 0; i < allVictims.size(); i++)
         {
-            utils.addElement(initiatorz, initiator);
-            utils.addElement(timez, time);
+            initiatorz.add(initiator);
+            timez.add(time);
         }
         utils.concatArrays(victimz, allVictims);
         dictionary newData = packageActionData(initiatorz, victimz, timez);
@@ -3759,8 +3720,7 @@ public class force_rank extends script.base_script
             victimList += "" + ((obj_id) allVictim) + ",";
         }
         trace.log("force_rank", "Dark Jedi PvP Action Started: " + pvpAction + ".  Initiator: " + initiator + ", Victims: " + victimList, null, trace.TL_CS_LOG | trace.TL_DEBUG);
-        Vector recips = new Vector();
-        recips.setSize(0);
+        List recips = new ArrayList<obj_id>();
         switch (pvpAction) {
             case ACTION_VENDETTA:
                 recips.add(initiator);
@@ -3776,7 +3736,7 @@ public class force_rank extends script.base_script
         notifyPlayerOfPvPActionStart(initiator, pvpAction, allVictims, recips, darkEnclave);
         return true;
     }
-    public static void notifyPlayerOfPvPActionStart(obj_id theInitiator, String pvpAction, Vector actionTargets, Vector msgRecipients, obj_id darkEnclave) throws InterruptedException
+    public static void notifyPlayerOfPvPActionStart(obj_id theInitiator, String pvpAction, List actionTargets, List msgRecipients, obj_id darkEnclave) throws InterruptedException
     {
         if (msgRecipients == null || msgRecipients.size() < 1)
         {
@@ -3793,7 +3753,7 @@ public class force_rank extends script.base_script
         }
         return;
     }
-    public static void notifyPlayerOfPvPActionEnd(obj_id killer, String pvpAction, Vector peaceTargets, Vector msgRecipients, boolean actionTimedOut) throws InterruptedException
+    public static void notifyPlayerOfPvPActionEnd(obj_id killer, String pvpAction, List peaceTargets, List msgRecipients, boolean actionTimedOut) throws InterruptedException
     {
         if (msgRecipients == null || msgRecipients.size() < 1 || peaceTargets == null || peaceTargets.size() < 1)
         {
@@ -3815,25 +3775,22 @@ public class force_rank extends script.base_script
     }
     public static obj_id[] getMyVendettaEnemies(dictionary vendettaData, obj_id player) throws InterruptedException
     {
-        Vector initiatorz = new Vector();
-        initiatorz.setSize(0);
-        Vector victimz = new Vector();
-        victimz.setSize(0);
-        Vector vEnemies = new Vector();
-        vEnemies.setSize(0);
+        List initiatorz = new ArrayList<obj_id>();
+        List victimz = new ArrayList<obj_id>();
+        List vEnemies = new ArrayList<obj_id>();
         utils.concatArrays(initiatorz, vendettaData.getObjIdArray("initiators"));
         utils.concatArrays(victimz, vendettaData.getObjIdArray("victims"));
         int idx = initiatorz.indexOf(player);
         while (idx > -1)
         {
-            utils.addElement(vEnemies, ((obj_id)victimz.get(idx)));
-            idx = initiatorz.indexOf(player, idx + 1);
+            vEnemies.add(((obj_id)victimz.get(idx)));
+            idx = initiatorz.indexOf(player);
         }
         idx = victimz.indexOf(player);
         while (idx > -1)
         {
-            utils.addElement(vEnemies, ((obj_id)initiatorz.get(idx)));
-            idx = victimz.indexOf(player, idx + 1);
+            vEnemies.add(((obj_id)initiatorz.get(idx)));
+            idx = victimz.indexOf(player);
         }
         trace.log("force_rating", "force_rank::getMyVendettaEnemies: -> " + utils.getRealPlayerFirstName(player) + " has " + vEnemies.size() + " vendettas.", player, trace.TL_DEBUG);
         obj_id[] _vEnemies = new obj_id[0];
@@ -3846,10 +3803,8 @@ public class force_rank extends script.base_script
     }
     public static obj_id[] getMySuddenDeathEnemies(dictionary suddenDeathData, obj_id player, obj_id darkEnclave) throws InterruptedException
     {
-        Vector candidateVictims = new Vector();
-        candidateVictims.setSize(0);
-        Vector enemies = new Vector();
-        enemies.setSize(0);
+        List candidateVictims = new ArrayList<obj_id>();
+        List enemies = new ArrayList<obj_id>();
         if (!isPvPActionVictim(player, suddenDeathData))
         {
             obj_id[] _enemies = new obj_id[0];
@@ -3868,7 +3823,7 @@ public class force_rank extends script.base_script
         }
         for (Object candidateVictim : candidateVictims) {
             if ((((obj_id) candidateVictim) != player) && (getForceRank(darkEnclave, utils.getRealPlayerFirstName(((obj_id) candidateVictim))) == playerRank)) {
-                utils.addElement(enemies, ((obj_id) candidateVictim));
+                enemies.add(((obj_id)candidateVictims.get));
             }
         }
         obj_id[] _enemies = new obj_id[0];
@@ -3916,8 +3871,7 @@ public class force_rank extends script.base_script
     }
     public static obj_id[] getCurrentDarkJediEnemies(obj_id player, obj_id enclave) throws InterruptedException
     {
-        Vector enemies = new Vector();
-        enemies.setSize(0);
+        List enemies = new ArrayList();
         dictionary banishmentData = getAndValidatePvPActionData(ACTION_BANISHMENT, enclave);
         dictionary purgeData = getAndValidatePvPActionData(ACTION_PURGE_COUNCIL, enclave);
         if ((purgeData != null && isPvPActionVictim(player, purgeData)) || (banishmentData != null && isPvPActionVictim(player, banishmentData)))

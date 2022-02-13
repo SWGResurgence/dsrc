@@ -3,13 +3,11 @@ package script.library;
 import script.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
 
 public class marriage extends script.base_script
 {
-    public marriage()
-    {
-    }
     public static final float PROPOSAL_RANGE = 5.0f;
     public static final float PROPOSAL_TIME = 120.0f;
     public static final String SCRIPT_RING_BASE = "item.ring.base";
@@ -211,7 +209,7 @@ public class marriage extends script.base_script
         {
             vInv = new Vector(Arrays.asList(invRings));
         }
-        Vector rings = utils.concatArrays(vEq, vInv);
+        List rings = utils.concatArrays(vEq, vInv);
         if (rings == null || rings.size() == 0)
         {
             return null;

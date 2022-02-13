@@ -4,12 +4,11 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class wave_event_controller_npc extends script.base_script
 {
-    public wave_event_controller_npc()
-    {
-    }
     public static final String dataTableWaveEventPrimaryTargetPre = "PRIMARY_TARGET_WAVE_";
     public static final String dataTableWaveEventGuardPre = "GUARDS_SPAWNED_WAVE_";
     public static final String dataTableWaveEventNumGuardsPre = "NUM_GUARDS_WAVE_";
@@ -190,9 +189,8 @@ public class wave_event_controller_npc extends script.base_script
                         utils.setScriptVar(spawnedPrimaryTarget, "waveEventUtterance", utterance);
                     }
                     attachScript(spawnedPrimaryTarget, "quest.task.ground.wave_event_on_creature");
-                    Vector waveEventChildrenList = new Vector();
-                    waveEventChildrenList.setSize(0);
-                    utils.addElement(waveEventChildrenList, spawnedPrimaryTarget);
+                    List waveEventChildrenList = new ArrayList<obj_id>();
+                    waveEventChildrenList.add(spawnedPrimaryTarget);
                     utils.setScriptVar(self, CHILDRENLIST_SCRIPT_VAR, waveEventChildrenList);
                     String dataTableWaveEventGuard = dataTableWaveEventGuardPre + wave;
                     String waveEventGuard = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableWaveEventGuard);
@@ -230,7 +228,7 @@ public class wave_event_controller_npc extends script.base_script
                                 waveEventChildrenList = utils.getResizeableObjIdArrayScriptVar(self, CHILDRENLIST_SCRIPT_VAR);
                                 if (waveEventChildrenList != null)
                                 {
-                                    utils.addElement(waveEventChildrenList, spawnedGuard);
+                                    waveEventChildrenList.add(spawnedGuard);
                                     if (waveEventChildrenList != null && waveEventChildrenList.size() > 0)
                                     {
                                         utils.setScriptVar(self, CHILDRENLIST_SCRIPT_VAR, waveEventChildrenList);
@@ -269,13 +267,13 @@ public class wave_event_controller_npc extends script.base_script
                 obj_id child = params.getObjId("waveEventChild");
                 if (utils.hasScriptVar(self, CHILDRENLIST_SCRIPT_VAR))
                 {
-                    Vector waveEventChildrenList = utils.getResizeableObjIdArrayScriptVar(self, CHILDRENLIST_SCRIPT_VAR);
+                    List waveEventChildrenList = utils.getResizeableObjIdArrayScriptVar(self, CHILDRENLIST_SCRIPT_VAR);
                     
                     if (waveEventChildrenList != null)
                     {
                         if (waveEventChildrenList.contains(child))
                         {
-                            waveEventChildrenList.removeElement(child);
+                            waveEventChildrenList.remove(child);
                         }
                         if (waveEventChildrenList.size() > 0)
                         {
@@ -308,7 +306,7 @@ public class wave_event_controller_npc extends script.base_script
         if (isGod(player))
         {
             sendSystemMessage(player, "Spouting waveEventChildrenList scriptvar value...", "");
-            Vector testList = utils.getResizeableObjIdArrayScriptVar(self, CHILDRENLIST_SCRIPT_VAR);
+            List testList = utils.getResizeableObjIdArrayScriptVar(self, CHILDRENLIST_SCRIPT_VAR);
             if (testList != null)
             {
                 for (int j = 0; j < testList.size(); j++)

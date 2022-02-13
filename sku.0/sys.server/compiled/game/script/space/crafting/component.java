@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class component extends script.base_script
 {
-    public component()
-    {
-    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String template = getTemplateName(self);
@@ -70,7 +67,7 @@ public class component extends script.base_script
             {
                 Vector objNewKits = new Vector();
                 objNewKits.setSize(1);
-                objNewKits = utils.addElement(objNewKits, ((obj_id)objKits.get(0)));
+                objNewKits.add(((obj_id)objKits.get(0)));
                 space_crafting.repairComponentInInventory(self, objKits, objPlayer);
             }
         }
@@ -81,7 +78,7 @@ public class component extends script.base_script
         blog("component_fix", "INIT - OnAboutToBeTransferred Test check");
         String template = getTemplateName(self);
         blog("component_fix", "INIT - OnAboutToBeTransferred template: " + template);
-        if (template == null || template.equals(""))
+        if (template == null || template.isEmpty())
         {
             return SCRIPT_CONTINUE;
         }

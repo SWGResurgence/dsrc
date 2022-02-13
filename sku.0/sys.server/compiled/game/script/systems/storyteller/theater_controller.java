@@ -13,9 +13,6 @@ import java.util.Vector;
 
 public class theater_controller extends script.base_script
 {
-    public theater_controller()
-    {
-    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isInBuildoutMode(self))
@@ -58,7 +55,7 @@ public class theater_controller extends script.base_script
             if (interiorObjects != null && interiorObjects.length > 0)
             {
                 for (obj_id interiorObject : interiorObjects) {
-                    utils.addElement(allObjects, interiorObject);
+                    allObjects.add(interiorObjects, interiorObject);
                 }
             }
         }
@@ -67,7 +64,7 @@ public class theater_controller extends script.base_script
         if (objectsInRange != null && objectsInRange.length > 0)
         {
             for (obj_id obj_id : objectsInRange) {
-                utils.addElement(allObjects, obj_id);
+                allObjects.add(objectsInRange, obj_id);
             }
         }
         obj_id[] filteredList = getStorytellerObjectsFromArray(allObjects);
@@ -104,7 +101,7 @@ public class theater_controller extends script.base_script
             if (row == -1) {
                 continue;
             }
-            utils.addElement(filteredList, ((obj_id) allObject));
+            filteredList.add(((obj_id)allObjects.get, allObject));
         }
         obj_id[] _filteredList = new obj_id[0];
         if (filteredList != null)

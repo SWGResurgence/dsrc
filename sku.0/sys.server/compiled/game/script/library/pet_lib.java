@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class pet_lib extends script.base_script
 {
-    public pet_lib()
-    {
-    }
     public static final int CUSTOMIZATION_COUNT = 2000;
     public static final int MAX_NUMBER_OF_FRIENDS = 5;
     public static final int MAX_WAYPOINTS = 10;
@@ -822,104 +819,104 @@ public class pet_lib extends script.base_script
         Vector commandIndexList = new Vector();
         commandIndexList.setSize(0);
         obj_var_list commandList = getObjVarList(pcd, "ai.pet.command");
-        commandIndexList = utils.addElement(commandIndexList, 0);
-        commandNameList = utils.addElement(commandNameList, createLearnCommandListHeader(new string_id("obj_attr_n", "pet_command")));
+        commandIndexList.add(0);
+        commandNameList.add(createLearnCommandListHeader(new string_id("obj_attr_n", "pet_command")));
         
         {
-            commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_RELEASE);
-            commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_release"), getCommandString(commandList, COMMAND_RELEASE)));
+            commandIndexList.add(menu_info_types.PET_RELEASE);
+            commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_release"), getCommandString(commandList, COMMAND_RELEASE)));
             if (hasSkill(master, "outdoors_creaturehandler_master"))
             {
-                commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_TRANSFER);
-                commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_transfer"), getCommandString(commandList, COMMAND_TRANSFER)));
+                commandIndexList.add(menu_info_types.PET_TRANSFER);
+                commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_transfer"), getCommandString(commandList, COMMAND_TRANSFER)));
             }
             if (pet_lib.isCreaturePet(pet))
             {
                 if (empathySkillMod >= 30)
                 {
-                    commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_TRICK_2);
-                    commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_trick_2"), getCommandString(commandList, COMMAND_TRICK_2)));
+                    commandIndexList.add(menu_info_types.PET_TRICK_2);
+                    commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_trick_2"), getCommandString(commandList, COMMAND_TRICK_2)));
                 }
                 if (empathySkillMod >= 10)
                 {
-                    commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_TRICK_1);
-                    commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_trick_1"), getCommandString(commandList, COMMAND_TRICK_1)));
+                    commandIndexList.add(menu_info_types.PET_TRICK_1);
+                    commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_trick_1"), getCommandString(commandList, COMMAND_TRICK_1)));
                 }
             }
             else if (ai_lib.aiGetSpecies(pet) == 215)
             {
-                commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_TRICK_1);
-                commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_recharge_other"), getCommandString(commandList, COMMAND_TRICK_1)));
+                commandIndexList.add(menu_info_types.PET_TRICK_1);
+                commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_recharge_other"), getCommandString(commandList, COMMAND_TRICK_1)));
             }
             else if (ai_lib.aiGetSpecies(pet) == 212)
             {
-                commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_TRICK_1);
-                commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_solicit_tip"), getCommandString(commandList, COMMAND_TRICK_1)));
+                commandIndexList.add(menu_info_types.PET_TRICK_1);
+                commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_solicit_tip"), getCommandString(commandList, COMMAND_TRICK_1)));
             }
             if (!pet_lib.isCreaturePet(pet) && pet_lib.isRepairDroid(pet))
             {
-                commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_TRICK_2);
-                commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_repair_other"), getCommandString(commandList, COMMAND_TRICK_2)));
+                commandIndexList.add(menu_info_types.PET_TRICK_2);
+                commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_repair_other"), getCommandString(commandList, COMMAND_TRICK_2)));
             }
             if (manageSkillMod >= 10)
             {
-                commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_GROUP);
-                commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_group"), getCommandString(commandList, COMMAND_GROUP)));
+                commandIndexList.add(menu_info_types.PET_GROUP);
+                commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_group"), getCommandString(commandList, COMMAND_GROUP)));
             }
             if (trainingSkillMod >= 30)
             {
-                commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_CLEAR_PATROL_POINTS);
-                commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_clear_patrol_points"), getCommandString(commandList, COMMAND_CLEAR_PATROL_POINTS)));
-                commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_GET_PATROL_POINT);
-                commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_get_patrol_point"), getCommandString(commandList, COMMAND_SET_PATROL_POINT)));
-                commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_PATROL);
-                commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_patrol"), getCommandString(commandList, COMMAND_PATROL)));
+                commandIndexList.add(menu_info_types.PET_CLEAR_PATROL_POINTS);
+                commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_clear_patrol_points"), getCommandString(commandList, COMMAND_CLEAR_PATROL_POINTS)));
+                commandIndexList.add(menu_info_types.PET_GET_PATROL_POINT);
+                commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_get_patrol_point"), getCommandString(commandList, COMMAND_SET_PATROL_POINT)));
+                commandIndexList.add(menu_info_types.PET_PATROL);
+                commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_patrol"), getCommandString(commandList, COMMAND_PATROL)));
             }
             if (trainingSkillMod >= 40)
             {
-                commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_ASSUME_FORMATION_1);
-                commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_assume_formation_1"), getCommandString(commandList, COMMAND_ASSUME_FORMATION_1)));
-                commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_ASSUME_FORMATION_2);
-                commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_assume_formation_2"), getCommandString(commandList, COMMAND_ASSUME_FORMATION_2)));
+                commandIndexList.add(menu_info_types.PET_ASSUME_FORMATION_1);
+                commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_assume_formation_1"), getCommandString(commandList, COMMAND_ASSUME_FORMATION_1)));
+                commandIndexList.add(menu_info_types.PET_ASSUME_FORMATION_2);
+                commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_assume_formation_2"), getCommandString(commandList, COMMAND_ASSUME_FORMATION_2)));
             }
             if (manageSkillMod >= 30)
             {
-                commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_FRIEND);
-                commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_friend"), getCommandString(commandList, COMMAND_FRIEND)));
+                commandIndexList.add(menu_info_types.PET_FRIEND);
+                commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_friend"), getCommandString(commandList, COMMAND_FRIEND)));
             }
             if (!pet_lib.isDroidPet(pet) || pet_lib.isCombatDroid(pet))
             {
                 if (trainingSkillMod >= 20)
                 {
-                    commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_GUARD);
-                    commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_guard"), getCommandString(commandList, COMMAND_GUARD)));
+                    commandIndexList.add(menu_info_types.PET_GUARD);
+                    commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_guard"), getCommandString(commandList, COMMAND_GUARD)));
                 }
-                commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_ATTACK);
-                commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_attack"), getCommandString(commandList, COMMAND_ATTACK)));
+                commandIndexList.add(menu_info_types.PET_ATTACK);
+                commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_attack"), getCommandString(commandList, COMMAND_ATTACK)));
             }
             if (trainingSkillMod >= 10)
             {
-                commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_STAY);
-                commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_stay"), getCommandString(commandList, COMMAND_STAY)));
+                commandIndexList.add(menu_info_types.PET_STAY);
+                commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_stay"), getCommandString(commandList, COMMAND_STAY)));
             }
             if (manageSkillMod >= 20)
             {
-                commandIndexList = utils.addElement(commandIndexList, menu_info_types.DICE_ROLL);
-                commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_follow_other"), getCommandString(commandList, COMMAND_FOLLOW_OTHER)));
+                commandIndexList.add(menu_info_types.DICE_ROLL);
+                commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_follow_other"), getCommandString(commandList, COMMAND_FOLLOW_OTHER)));
             }
-            commandIndexList = utils.addElement(commandIndexList, menu_info_types.PET_FOLLOW);
-            commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_follow"), getCommandString(commandList, COMMAND_FOLLOW)));
-            if (getMountsEnabled() && (!hasObjVar(pcd, "ai.pet.trainedMount")))
+            commandIndexList.add(menu_info_types.PET_FOLLOW);
+            commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_follow"), getCommandString(commandList, COMMAND_FOLLOW)));
+            if (getMountsEnabled() && !hasObjVar(pcd, "ai.pet.trainedMount"))
             {
                 if (pet_lib.canTrainAsMount(pet, master))
                 {
-                    commandIndexList = utils.addElement(commandIndexList, menu_info_types.SERVER_PET_TRAIN_MOUNT);
-                    commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id(MENU_FILE, "menu_train_mount"), " "));
+                    commandIndexList.add(menu_info_types.SERVER_PET_TRAIN_MOUNT);
+                    commandNameList.add(createLearnCommandListEntry(new string_id(MENU_FILE, "menu_train_mount"), " "));
                 }
             }
         }
-        commandIndexList = utils.addElement(commandIndexList, 0);
-        commandNameList = utils.addElement(commandNameList, createLearnCommandListHeader(new string_id("obj_attr_n", "pet_ability")));
+        commandIndexList.add(0);
+        commandNameList.add(createLearnCommandListHeader(new string_id("obj_attr_n", "pet_ability")));
         
         {
             int[] abilityList = getIntArrayObjVar(pcd, "ai.petAbility.abilityList");
@@ -933,8 +930,8 @@ public class pet_lib extends script.base_script
                     int type = dataTableGetInt(PET_ABILITY_TABLE, row, "type");
                     if (type == PET_ABILITY_TRIGGERED || type == PET_ABILITY_ACTION) {
                         String abilityName = dataTableGetString(PET_ABILITY_TABLE, row, "abilityName");
-                        commandIndexList = utils.addElement(commandIndexList, i1);
-                        commandNameList = utils.addElement(commandNameList, createLearnCommandListEntry(new string_id("pet/pet_ability", abilityName), getCommandString(commandList, i1)));
+                        commandIndexList.add(abilityList, i1);
+                        commandNameList.add(createLearnCommandListEntry(new string_id("pet/pet_ability", abilityName), getCommandString(commandList, abilityList, i1)));
                     }
                 }
             }
@@ -1305,14 +1302,14 @@ public class pet_lib extends script.base_script
         int indexNum = utils.getElementPositionInArray(friendList, target);
         if (indexNum != -1)
         {
-            utils.removeElementAt(friendList, indexNum);
+            friendList.remove(indexNum);
             return;
         }
         if (friendList.size() > MAX_NUMBER_OF_FRIENDS)
         {
-            utils.removeElementAt(friendList, 0);
+            friendList.remove(0);
         }
-        friendList = utils.addElement(friendList, target);
+        friendList.add(target);
         setObjVar(pet, "ai.pet.friendList", friendList);
     }
     public static boolean isFriend(obj_id pet, obj_id target) throws InterruptedException
@@ -1804,8 +1801,8 @@ public class pet_lib extends script.base_script
                     int indexNum = utils.getElementPositionInArray(nameList, name);
                     if (indexNum == -1)
                     {
-                        nameList = utils.addElement(nameList, name);
-                        nameCount = utils.addElement(nameCount, 0);
+                        nameList.add(name);
+                        nameCount.add(0);
                     }
                     else 
                     {
@@ -5117,7 +5114,7 @@ public class pet_lib extends script.base_script
         }
         for (ranged_int_custom_var ranged_int_custom_var : ricv) {
             if (ranged_int_custom_var.isPalColor()) {
-                pcv = utils.addElement(pcv, (palcolor_custom_var) ranged_int_custom_var);
+                pcv.add((palcolor_custom_var)ricv, ranged_int_custom_var);
             }
         }
         if (pcv == null || pcv.size() == 0)
@@ -5346,7 +5343,7 @@ public class pet_lib extends script.base_script
             int result = (int)((raw_effects % StrictMath.pow(10, i)) / StrictMath.pow(10, i - 1));
             if (result >= 1)
             {
-                available_effects = utils.addElement(available_effects, LIGHTING_EFFECTS[i - 1]);
+                available_effects.add(LIGHTING_EFFECTS[i - 1]);
             }
             i++;
         }
@@ -5752,7 +5749,7 @@ public class pet_lib extends script.base_script
                 if (utils.hasScriptVar(objCallable, DROID_HARVEST_ARRAY)) {
                     toHarvest = utils.getResizeableObjIdArrayScriptVar(objCallable, DROID_HARVEST_ARRAY);
                 }
-                utils.addElement(toHarvest, target);
+                toHarvest.add(target);
                 utils.setScriptVar(objCallable, DROID_HARVEST_ARRAY, toHarvest);
                 messageTo(objCallable, "runHarvestRoutine", null, 1.0f, false);
             }
@@ -5818,7 +5815,7 @@ public class pet_lib extends script.base_script
         resizedContents.setSize(0);
         for (obj_id dPadContent : dPadContents) {
             if (isPetType(dPadContent, type)) {
-                utils.addElement(resizedContents, dPadContent);
+                resizedContents.add(dPadContents, dPadContent);
             }
         }
         obj_id[] pcdsForType = new obj_id[resizedContents.size()];

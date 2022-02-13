@@ -6,13 +6,10 @@ import script.map_location;
 import script.obj_id;
 import script.string_id;
 
-import java.util.Vector;
+import java.util.List;
 
 public class register extends script.base_script
 {
-    public register()
-    {
-    }
     public static final string_id SID_CANNOT_REGISTER_BAD_LOC = new string_id("register", "cannot_register_bad_loc");
     public static final string_id SID_CANNOT_REGISTER_NO_SUPPORT = new string_id("register", "cannot_register_no_support");
     public static final string_id SID_CANNOT_REGISTER_NOT_NEUTRAL = new string_id("register", "cannot_register_not_neutral");
@@ -65,7 +62,7 @@ public class register extends script.base_script
         }
         if (isIdValid(updateTarget))
         {
-            Vector registrants = utils.getResizeableObjIdBatchScriptVar(updateTarget, "registrants");
+            List registrants = utils.getResizeableObjIdBatchScriptVar(updateTarget, "registrants");
             if (registrants != null && registrants.size() > 0)
             {
                 if (utils.getElementPositionInArray(registrants, self) > -1)
@@ -80,7 +77,7 @@ public class register extends script.base_script
                 {
                     attachScript(updateTarget, "planet_map.active_registered");
                 }
-                registrants = utils.addElement(registrants, self);
+                registrants.add(self);
                 utils.setBatchScriptVar(updateTarget, "registrants", registrants);
                 sendSystemMessage(self, SID_SUCCESS_REGISTER);
                 utils.setScriptVar(self, "registerWithLocation", updateTarget);

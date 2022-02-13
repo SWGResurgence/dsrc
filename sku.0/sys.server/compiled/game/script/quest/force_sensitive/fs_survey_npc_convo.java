@@ -6,12 +6,10 @@ import script.obj_id;
 import script.string_id;
 
 import java.util.Vector;
+import java.util.List;
 
 public class fs_survey_npc_convo extends script.base_script
 {
-    public fs_survey_npc_convo()
-    {
-    }
     public static final String CONVO = "quest/force_sensitive/fs_survey";
     public static final String table = "datatables/quest/force_sensitive/fs_survey_quest_types.iff";
     public int OnInitialize(obj_id self) throws InterruptedException
@@ -159,12 +157,12 @@ public class fs_survey_npc_convo extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            Vector questCrafter = utils.getResizeableObjIdBatchObjVar(master, "quest.survey.giver");
-            Vector crafterGivers = utils.getResizeableIntBatchObjVar(master, "quest.survey.count");
+            List questCrafter = utils.getResizeableObjIdBatchObjVar(master, "quest.survey.giver");
+            List crafterGivers = utils.getResizeableIntBatchObjVar(master, "quest.survey.count");
             if (!utils.isElementInArray(questCrafter, player))
             {
-                questCrafter = utils.addElement(questCrafter, player);
-                crafterGivers = utils.addElement(crafterGivers, 0);
+                questCrafter.add(player);
+                crafterGivers.add(0);
                 utils.setResizeableBatchObjVar(master, "quest.survey.giver", questCrafter);
                 utils.setResizeableBatchObjVar(master, "quest.survey.count", crafterGivers);
             }

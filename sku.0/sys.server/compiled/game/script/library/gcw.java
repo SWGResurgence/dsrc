@@ -3,12 +3,11 @@ package script.library;
 import script.*;
 
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class gcw extends script.base_script
 {
-    public gcw()
-    {
-    }
     public static final int GCW_UPDATE_PULSE = 300;
     public static final float DECAY_PER_UPDATE = 0.02f;
     public static final String SCRIPTVAR_SCAN_INTEREST = "scan.interest";
@@ -971,7 +970,7 @@ public class gcw extends script.base_script
     {
         utils.removeBatchScriptVar(player, LIST_CREDIT_FOR_KILLS);
     }
-    public static int findAttackerInArray(Vector attackList, obj_id attacker) throws InterruptedException
+    public static int findAttackerInArray(List attackList, obj_id attacker) throws InterruptedException
     {
         if (attackList == null || attackList.size() == 0)
         {
@@ -988,7 +987,7 @@ public class gcw extends script.base_script
         }
         return -1;
     }
-    public static int getDamageFromAttacker(Vector attackList, obj_id attacker) throws InterruptedException
+    public static int getDamageFromAttacker(List attackList, obj_id attacker) throws InterruptedException
     {
         if (attackList == null || attackList.size() == 0)
         {
@@ -1035,7 +1034,7 @@ public class gcw extends script.base_script
                     incrementKillMeter(obj_id, 1);
                 }
             }
-            Vector attackerList = utils.getResizeableStringBatchScriptVar(player, gcw.LIST_CREDIT_FOR_KILLS);
+            List attackerList = utils.getResizeableStringBatchScriptVar(player, gcw.LIST_CREDIT_FOR_KILLS);
             if (attackerList == null || attackerList.size() == 0)
             {
                 return false;
@@ -1057,7 +1056,7 @@ public class gcw extends script.base_script
             utils.removeBatchScriptVar(player, gcw.LIST_CREDIT_FOR_KILLS);
             return true;
         }
-        Vector attackerList = utils.getResizeableStringBatchScriptVar(player, gcw.LIST_CREDIT_FOR_KILLS);
+        List attackerList = utils.getResizeableStringBatchScriptVar(player, gcw.LIST_CREDIT_FOR_KILLS);
         if (attackerList == null || attackerList.size() == 0)
         {
             return false;
@@ -1145,8 +1144,7 @@ public class gcw extends script.base_script
     }
     public static int addToDailyGcwPointAllotment(obj_id victim, obj_id killer, int gcwPoint) throws InterruptedException
     {
-        Vector dailyKills = new Vector();
-        dailyKills.setSize(0);
+        List dailyKills = new ArrayList<String>();
         if (utils.hasResizeableStringBatchObjVar(victim, LIST_DAILY_KILL_VALUES))
         {
             dailyKills = utils.getResizeableStringBatchObjVar(victim, LIST_DAILY_KILL_VALUES);
@@ -1163,7 +1161,7 @@ public class gcw extends script.base_script
                 gcwPoint = maxInterval;
             }
             String newEntry = packKillerDailyPoints(killer, 1, getGameTime());
-            utils.addElement(dailyKills, newEntry);
+            dailyKills.add(newEntry);
         }
         else
         {
@@ -1199,7 +1197,7 @@ public class gcw extends script.base_script
         {
             return;
         }
-        Vector dailyList = utils.getResizeableStringBatchObjVar(player, LIST_DAILY_KILL_VALUES);
+        List dailyList = utils.getResizeableStringBatchObjVar(player, LIST_DAILY_KILL_VALUES);
         utils.removeBatchObjVar(player, LIST_DAILY_KILL_VALUES);
         int dayPast = getGameTime() - 86400;
         for (int i = 0; i < dailyList.size(); i++)
@@ -1208,7 +1206,7 @@ public class gcw extends script.base_script
             int timeHack = utils.stringToInt(parse[2]);
             if (dayPast > timeHack)
             {
-                utils.removeElementAt(dailyList, i);
+                dailyList.remove(i);
             }
         }
         utils.setResizeableBatchObjVar(player, LIST_DAILY_KILL_VALUES, dailyList);
@@ -1607,14 +1605,14 @@ public class gcw extends script.base_script
         for (obj_id attacker : attackers) {
             if (factions.isImperial(defender)) {
                 if (factions.isRebel(attacker) && validateSpaceTier(defender, attacker)) {
-                    utils.addElement(validAttackers, attacker);
+                    validAttackers.add(attackers, attacker);
                 } else {
                     LOG("doLogging", "Faction or tier error");
                 }
             }
             if (factions.isRebel(defender)) {
                 if (factions.isImperial(attacker) && validateSpaceTier(defender, attacker)) {
-                    utils.addElement(validAttackers, attacker);
+                    validAttackers.add(attackers, attacker);
                 } else {
                     LOG("doLogging", "Faction or tier error");
                 }
@@ -1693,10 +1691,10 @@ public class gcw extends script.base_script
                         continue;
                     }
                     if (baseFac.equals("Rebel") && playerFac.equals("Imperial")) {
-                        utils.addElement(filteredList, interiorPlayer);
+                        filteredList.add(interiorPlayers, interiorPlayer);
                     }
                     if (baseFac.equals("Imperial") && playerFac.equals("Rebel")) {
-                        utils.addElement(filteredList, interiorPlayer);
+                        filteredList.add(interiorPlayers, interiorPlayer);
                     }
                 }
             }
@@ -1712,19 +1710,19 @@ public class gcw extends script.base_script
                     if (baseFac.equals("Rebel") && playerFac.equals("Imperial")) {
                         if (filteredList.size() > 0) {
                             if (utils.getElementPositionInArray(filteredList, exteriorPlayer) == -1) {
-                                utils.addElement(filteredList, exteriorPlayer);
+                                filteredList.add(exteriorPlayers, exteriorPlayer);
                             }
                         } else {
-                            utils.addElement(filteredList, exteriorPlayer);
+                            filteredList.add(exteriorPlayers, exteriorPlayer);
                         }
                     }
                     if (baseFac.equals("Imperial") && playerFac.equals("Rebel")) {
                         if (filteredList.size() > 0) {
                             if (utils.getElementPositionInArray(filteredList, exteriorPlayer) == -1) {
-                                utils.addElement(filteredList, exteriorPlayer);
+                                filteredList.add(exteriorPlayers, exteriorPlayer);
                             }
                         } else {
-                            utils.addElement(filteredList, exteriorPlayer);
+                            filteredList.add(exteriorPlayers, exteriorPlayer);
                         }
                     }
                 }
@@ -2444,7 +2442,7 @@ public class gcw extends script.base_script
         }
         return null;
     }
-    public static boolean awardGcwInvasionParticipants(Vector participantList, int factionFlag, int gcwTokenAmt, int gcwPointAmt, dictionary finalAnnouncementParams) throws InterruptedException
+    public static boolean awardGcwInvasionParticipants(List participantList, int factionFlag, int gcwTokenAmt, int gcwPointAmt, dictionary finalAnnouncementParams) throws InterruptedException
     {
         if (participantList == null || participantList.size() <= 0)
         {

@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class locked extends script.base_script
 {
-    public locked()
-    {
-    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         permissionsMakePrivate(self);
@@ -83,7 +80,7 @@ public class locked extends script.base_script
         }
         if (!utils.isElementInArray(permList, player))
         {
-            permList = utils.addElement(permList, player);
+            permList.add(player);
             utils.setResizeableBatchObjVar(room, "access", permList);
         }
         sendDirtyCellPermissionsUpdate(room, player, true);

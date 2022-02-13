@@ -455,27 +455,27 @@ public class helper_droid extends script.base_script
         tempList.setSize(numQuests);
         if (hasObjVar(player, BRAWLER_QUEST_OBJVAR))
         {
-            tempList = utils.addElement(tempList, "Brawler");
+            tempList.add("Brawler");
         }
         if (hasObjVar(player, MARKSMAN_QUEST_OBJVAR))
         {
-            tempList = utils.addElement(tempList, "Marksman");
+            tempList.add("Marksman");
         }
         if (hasObjVar(player, SCOUT_QUEST_OBJVAR))
         {
-            tempList = utils.addElement(tempList, "Scout");
+            tempList.add("Scout");
         }
         if (hasObjVar(player, ARTISAN_QUEST_OBJVAR))
         {
-            tempList = utils.addElement(tempList, "Artisan");
+            tempList.add("Artisan");
         }
         if (hasObjVar(player, MEDIC_QUEST_OBJVAR))
         {
-            tempList = utils.addElement(tempList, "Medic");
+            tempList.add("Medic");
         }
         if (hasObjVar(player, ENTERTAINER_QUEST_OBJVAR))
         {
-            tempList = utils.addElement(tempList, "Entertainer");
+            tempList.add("Entertainer");
         }
         if (tempList != null || tempList.size() > 0)
         {

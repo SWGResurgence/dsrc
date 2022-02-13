@@ -13,9 +13,6 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
-    public mediator()
-    {
-    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String VAR_EN_ROUTE = scenario.VAR_SCENARIO_BASE + ".enRoute";
     public static final String HANDLER_TIMER = "handleTimer";
@@ -128,8 +125,8 @@ public class mediator extends script.poi.base.scenario_actor
             {
                 case 0:
                 case 4:
-                responses = utils.addElement(responses, new string_id(convo, "response_yes"));
-                responses = utils.addElement(responses, new string_id(convo, "response_no"));
+                responses.add(new string_id(convo, "response_yes"));
+                responses.add(new string_id(convo, "response_no"));
                 break;
                 case 3:
                 case 6:

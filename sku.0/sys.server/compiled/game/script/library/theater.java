@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class theater extends script.base_script
 {
-    public theater()
-    {
-    }
     public static final float BASE_ITEM_AREA = 3.0f;
     public static final int PERSIST_TIME = 604800;
     public static final String DICT_MASTER = "master";
@@ -191,25 +188,22 @@ public class theater extends script.base_script
                                 spawnLoc.y = getHeightAtLocation(spawnLoc.x, spawnLoc.z);
                             }
                             float fltNewSize = getDistance(myLoc, spawnLoc);
-                            if (fltNewSize > fltSize)
-							{
-								fltSize = fltNewSize;
-							}
+                            if (fltNewSize > fltSize) {
+                                fltSize = fltNewSize;
+                            }
                             child = createObject(tpf, spawnLoc);
-                            if ((child != null) && (child != obj_id.NULL_ID)) {
-								setYaw(child, rand(-180, 180));
-								children = utils.addElement(children, child);
-								if (!faction.equals(""))
-								{
-									factions.setFaction(child, faction);
-								}
-								switch (persistFlag)
-								{
-									case PERSIST_ALL:
-									break;
-								}
-								setObjVar(child, VAR_PARENT, target);
-							}
+                            if (child != null && child != obj_id.NULL_ID) {
+                                setYaw(child, rand(-180, 180));
+                                children.add(child);
+                                if (!faction.equals("")) {
+                                    factions.setFaction(child, faction);
+                                }
+                                switch (persistFlag) {
+                                    case PERSIST_ALL:
+                                        break;
+                                }
+                                setObjVar(child, VAR_PARENT, target);
+                            }
                         }
                     }
                 }
@@ -303,20 +297,20 @@ public class theater extends script.base_script
             if (isIdValid(child)) {
                 switch (tpf) {
                     case "object/tangible/poi/theater/poi_mob_spawner.iff":
-                        objMobSpawners = utils.addElement(objMobSpawners, child);
+                        objMobSpawners.add(child);
                         break;
                     case "object/tangible/poi/theater/poi_objective_spawner.iff":
-                        objObjectiveSpawners = utils.addElement(objObjectiveSpawners, child);
+                        objObjectiveSpawners.add(child);
                         break;
                     case "object/path_waypoint/path_waypoint.iff":
-                        objWaypoints = utils.addElement(objWaypoints, child);
+                        objWaypoints.add(child);
                         break;
                     case "object/tangible/poi/theater/poi_mob_spawner_large.iff":
-                        objLargeMobSpawners = utils.addElement(objLargeMobSpawners, child);
+                        objLargeMobSpawners.add(child);
                         break;
                 }
                 setYaw(child, yaw + tYaw);
-                children = utils.addElement(children, child);
+                children.add(child);
                 if (!faction.equals(""))
                 {
                     factions.setFaction(child, faction);
@@ -417,8 +411,8 @@ public class theater extends script.base_script
                         here = player_structure.transformDeltaWorldCoord(here, dx, dz, tYaw);
                         child = createObject(tpf, here);
                         if (isIdValid(child)) {
-                            objMobSpawners = utils.addElement(objMobSpawners, child);
-                            children = utils.addElement(children, child);
+                            objMobSpawners.add(child);
+                            children.add(child);
                         }
                         break;
                     }
@@ -429,8 +423,8 @@ public class theater extends script.base_script
                         here = player_structure.transformDeltaWorldCoord(here, dx, dz, tYaw);
                         child = createObject(tpf, here);
                         if (isIdValid(child)) {
-                            objObjectiveSpawners = utils.addElement(objObjectiveSpawners, child);
-                            children = utils.addElement(children, child);
+                            objObjectiveSpawners.add(child);
+                            children.add(child);
                         }
                         break;
                     }
@@ -441,8 +435,8 @@ public class theater extends script.base_script
                         here = player_structure.transformDeltaWorldCoord(here, dx, dz, tYaw);
                         child = createObject(tpf, here);
                         if (isIdValid(child)) {
-                            objWaypoints = utils.addElement(objWaypoints, child);
-                            children = utils.addElement(children, child);
+                            objWaypoints.add(child);
+                            children.add(child);
                         }
                         break;
                     }
@@ -453,8 +447,8 @@ public class theater extends script.base_script
                         here = player_structure.transformDeltaWorldCoord(here, dx, dz, tYaw);
                         child = createObject(tpf, here);
                         if (isIdValid(child)) {
-                            objLargeMobSpawners = utils.addElement(objLargeMobSpawners, child);
-                            children = utils.addElement(children, child);
+                            objLargeMobSpawners.add(child);
+                            children.add(child);
                         }
                         break;
                     }
@@ -470,7 +464,7 @@ public class theater extends script.base_script
                             if (isIdValid(child)) {
                                 setYaw(child, yaw + tYaw);
                                 setObjVar(child, VAR_PARENT, target);
-                                children = utils.addElement(children, child);
+                                children.add(child);
                             }
                         }
                         break;
@@ -547,7 +541,7 @@ public class theater extends script.base_script
                     debugSpeakMsg(target, "a child " + child);
                     if ((child != null) && (child != obj_id.NULL_ID)) {
                         setYaw(child, yaw + tYaw);
-                        children = utils.addElement(children, child);
+                        children.add(child);
                         if (!faction.equals(""))
                         {
                             factions.setFaction(child, faction);

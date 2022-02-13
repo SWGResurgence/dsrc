@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class npc_vendor extends script.base_script
 {
-    public npc_vendor()
-    {
-    }
     public static final String LOGGING_CATEGORY = "vendor";
     public static final boolean LOGGING_ON = false;
     public static final string_id SID_ITEM_DROP = new string_id("ui_radial", "item_drop");
@@ -300,11 +297,11 @@ public class npc_vendor extends script.base_script
         String[] rawStrCats = dataTableGetStringColumnNoDefaults(TBL_VENDOR_STRCATS, 0);
         Vector strcats = null;
         for (String rawStrCat : rawStrCats) {
-            strcats = utils.addElement(strcats, "@player_structure:subcat_" + rawStrCat);
+            strcats.add("@player_structure:subcat_" + rawStrCats);
         }
         if (utils.isProfession(player, utils.TRADER))
         {
-            strcats = utils.addElement(strcats, "@player_structure:custom");
+            strcats.add("@player_structure:custom");
         }
         sui.listbox(self, player, "@player_structure:vendor_strcats_d", sui.OK_CANCEL, "@player_structure:vendor_strcats_t", strcats, "handleVendorStrCatSelect", true);
         return SCRIPT_CONTINUE;
@@ -326,7 +323,7 @@ public class npc_vendor extends script.base_script
         Vector rawStrCats = new Vector(Arrays.asList(rawStrCatsArray));
         if (utils.isProfession(player, utils.TRADER))
         {
-            rawStrCats = utils.addElement(rawStrCats, "custom");
+            rawStrCats.add("custom");
         }
         setObjVar(self, "vendor.barkStrCat", ((String)rawStrCats.get(idx)));
         if (((String)rawStrCats.get(idx)).equals("custom"))

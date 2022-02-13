@@ -2,13 +2,11 @@ package script.library;
 
 import script.*;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class firework extends script.base_script
 {
-    public firework()
-    {
-    }
     public static final int SHOW_EVENT_MAX = 20;
     public static final float SHOW_DELAY_MIN = 1.0f;
     public static final float SHOW_DELAY_MAX = 10.0f;
@@ -69,8 +67,8 @@ public class firework extends script.base_script
         {
             return;
         }
-        Vector show_fx = getResizeableStringArrayObjVar(show, VAR_SHOW_FX);
-        Vector show_delay = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
+        List show_fx = getResizeableStringArrayObjVar(show, VAR_SHOW_FX);
+        List show_delay = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
         if (show_fx == null || show_fx.size() == 0 || show_delay == null || show_delay.size() == 0)
         {
             return;
@@ -109,10 +107,10 @@ public class firework extends script.base_script
             return false;
         }
         String fw_fx = getStringObjVar(firework, VAR_FIREWORK_FX);
-        Vector show_fx = getResizeableStringArrayObjVar(show, VAR_SHOW_FX);
-        show_fx = utils.addElement(show_fx, fw_fx);
-        Vector show_delay = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
-        show_delay = utils.addElement(show_delay, SHOW_DELAY_MIN);
+        List show_fx = getResizeableStringArrayObjVar(show, VAR_SHOW_FX);
+        show_fx.add(fw_fx);
+        List show_delay = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
+        show_delay.add(SHOW_DELAY_MIN);
         boolean litmus = true;
         litmus &= setObjVar(show, VAR_SHOW_FX, show_fx);
         litmus &= setObjVar(show, VAR_SHOW_DELAY, show_delay);
@@ -134,8 +132,8 @@ public class firework extends script.base_script
             sendSystemMessage(target, SID_NO_SHOWS_TO_REMOVE);
             return;
         }
-        Vector show_fx = getResizeableStringArrayObjVar(show, VAR_SHOW_FX);
-        Vector show_delay = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
+        List show_fx = getResizeableStringArrayObjVar(show, VAR_SHOW_FX);
+        List show_delay = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
         if (show_fx == null || show_fx.size() == 0 || show_delay == null || show_delay.size() == 0)
         {
             return;
@@ -148,8 +146,8 @@ public class firework extends script.base_script
         {
             return;
         }
-        show_fx = utils.removeElementAt(show_fx, idx);
-        show_delay = utils.removeElementAt(show_delay, idx);
+        show_fx.remove(idx);
+        show_delay.remove(idx);
         if (show_fx.size() != show_delay.size())
         {
             return;
@@ -169,7 +167,7 @@ public class firework extends script.base_script
             sendSystemMessage(target, SID_NO_SHOWS_TO_MODIFY);
             return;
         }
-        Vector show_delay = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
+        List show_delay = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
         if (show_delay == null || show_delay.size() == 0)
         {
             return;
@@ -201,7 +199,7 @@ public class firework extends script.base_script
             return;
         }
         cleanupSUIScriptVars(show);
-        Vector entries = getShowListEntries(show);
+        List entries = getShowListEntries(show);
         if (entries == null || entries.size() == 0)
         {
             sendSystemMessage(player, SID_NO_SHOWS_TO_DISPLAY);
@@ -227,7 +225,7 @@ public class firework extends script.base_script
             return;
         }
         cleanupSUIScriptVars(show);
-        Vector entries = getShowListEntries(show);
+        List entries = getShowListEntries(show);
         if (entries == null || entries.size() == 0)
         {
             sendSystemMessage(player, SID_NO_SHOWS_TO_DISPLAY);
@@ -253,7 +251,7 @@ public class firework extends script.base_script
             return;
         }
         cleanupSUIScriptVars(show);
-        Vector entries = getShowListEntries(show);
+        List entries = getShowListEntries(show);
         if (entries == null || entries.size() < 0)
         {
             sendSystemMessage(player, SID_NO_NEED_TO_REORDER);
@@ -279,7 +277,7 @@ public class firework extends script.base_script
             return;
         }
         cleanupSUIScriptVars(show);
-        Vector entries = getShowListEntries(show);
+        List entries = getShowListEntries(show);
         if (entries == null || entries.size() == 0)
         {
             sendSystemMessage(player, SID_NO_SHOWS_TO_MODIFY);
@@ -305,7 +303,7 @@ public class firework extends script.base_script
             return;
         }
         cleanupSUIScriptVars(show);
-        Vector delays = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
+        List delays = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
         if (delays == null || delays.size() == 0 || idx >= delays.size())
         {
             return;
@@ -350,10 +348,10 @@ public class firework extends script.base_script
             removeSUIScriptVars(show);
         }
     }
-    public static Vector getShowListEntries(obj_id show) throws InterruptedException
+    public static List getShowListEntries(obj_id show) throws InterruptedException
     {
-        Vector show_fx = getResizeableStringArrayObjVar(show, VAR_SHOW_FX);
-        Vector show_delay = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
+        List show_fx = getResizeableStringArrayObjVar(show, VAR_SHOW_FX);
+        List show_delay = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
         if (show_fx == null || show_fx.size() == 0 || show_delay == null || show_delay.size() == 0)
         {
             return null;
@@ -363,13 +361,12 @@ public class firework extends script.base_script
             return null;
         }
         float time = 0;
-        Vector entries = new Vector();
-        entries.setSize(0);
+        List entries = new ArrayList<obj_id>();
         for (int i = 0; i < show_fx.size(); i++)
         {
             time += (Float) show_delay.get(i);
             String sTime = utils.formatTime(time);
-            entries = utils.addElement(entries, "(" + sTime + "s) " + getString(new string_id("firework_n", ((String)show_fx.get(i)))));
+            entries.add("(" + sTime + "s) " + getString(new string_id("firework_n", ((String)show_fx.get(i)))));
         }
         if (entries == null || entries.size() == 0)
         {
@@ -388,8 +385,8 @@ public class firework extends script.base_script
             sendSystemMessage(player, new string_id(STF, "cannot_reorder"));
             return;
         }
-        Vector show_fx = getResizeableStringArrayObjVar(show, VAR_SHOW_FX);
-        Vector show_delay = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
+        List show_fx = getResizeableStringArrayObjVar(show, VAR_SHOW_FX);
+        List show_delay = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
         if (show_fx == null || show_fx.size() == 0 || show_delay == null || show_delay.size() == 0)
         {
             return;
@@ -421,7 +418,7 @@ public class firework extends script.base_script
         {
             delay = SHOW_DELAY_MAX;
         }
-        Vector delays = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
+        List delays = getResizeableFloatArrayObjVar(show, VAR_SHOW_DELAY);
         if (delays == null || delays.size() == 0 || idx >= delays.size())
         {
             return;

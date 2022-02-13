@@ -11,9 +11,6 @@ import java.util.Vector;
 
 public class qabadge extends script.base_script
 {
-    public qabadge()
-    {
-    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -38,14 +35,14 @@ public class qabadge extends script.base_script
             if ((toLower(text)).equals("qabadges"))
             {
                 Vector vectorMenuArray = new Vector();
-                vectorMenuArray.addElement("*Add All Badges*");
-                vectorMenuArray.addElement("*Remove All Badges*");
+                vectorMenuArray.add("*Add All Badges*");
+                vectorMenuArray.add("*Remove All Badges*");
                 String[] badgePages = getAllCollectionPagesInBook("badge_book");
                 if ((badgePages != null) && (badgePages.length > 0))
                 {
                     for (String badgePage : badgePages) {
                         if (!badgePage.equals("bdg_accumulation")) {
-                            vectorMenuArray.addElement(badgePage);
+                            vectorMenuArray.add(badgePages);
                         }
                     }
                 }

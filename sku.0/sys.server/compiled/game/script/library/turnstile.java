@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class turnstile extends script.base_script
 {
-    public turnstile()
-    {
-    }
     public static final int TURNSTILE_DEFAULT_FEE = 5;
     public static final int TURNSTILE_DEFAULT_TIME = 0;
     public static final int TURNSTILE_DEFAULT_GRACE = 30;
@@ -149,12 +146,12 @@ public class turnstile extends script.base_script
             }
         }
         debugServerConsoleMsg(building, "turnstile.addPatron: adding player to new patron list");
-        patrons = utils.addElement(patrons, player);
+        patrons.add(player);
         debugServerConsoleMsg(building, "turnstile.addPatron: adding timestamp for new patron");
         int timedelta = TURNSTILE_DEFAULT_GRACE + getIntObjVar(building, VAR_TURNSTILE_TIME);
         int endTime = getGameTime() + timedelta;
         debugServerConsoleMsg(building, "turnstile.addPatron: end time = " + endTime);
-        timestamps = utils.addElement(timestamps, endTime);
+        timestamps.add(endTime);
         dictionary params = new dictionary();
         params.put("building", building);
         messageTo(player, "turnstileExpire", params, timedelta, false);
@@ -168,7 +165,7 @@ public class turnstile extends script.base_script
     }
     public static boolean removePatron(obj_id building, obj_id player) throws InterruptedException
     {
-        if ((building == null) || (player == null))
+        if (building == null || player == null)
         {
             return false;
         }
@@ -183,8 +180,8 @@ public class turnstile extends script.base_script
         {
             return false;
         }
-        patrons = utils.removeElementAt(patrons, arrayPosition);
-        timestamps = utils.removeElementAt(timestamps, arrayPosition);
+        patrons.remove(arrayPosition);
+        timestamps.remove(arrayPosition);
         if (patrons == null || patrons.size() == 0)
         {
             removeObjVar(building, VAR_TURNSTILE_PATRON_IDS);
@@ -205,7 +202,7 @@ public class turnstile extends script.base_script
     }
     public static boolean isPatron(obj_id building, obj_id player) throws InterruptedException
     {
-        if ((building == null) || (player == null))
+        if (building == null || player == null)
         {
             return false;
         }
@@ -266,7 +263,7 @@ public class turnstile extends script.base_script
         {
             if (timestamps[i] < getGameTime())
             {
-                expired = utils.addElement(expired, patrons[i]);
+                expired.add(patrons);
             }
         }
         for (Object anExpired : expired) {
@@ -276,7 +273,7 @@ public class turnstile extends script.base_script
     }
     public static boolean expirePatron(obj_id building, obj_id player) throws InterruptedException
     {
-        if ((building == null) || (player == null))
+        if (building == null || player == null)
         {
             return false;
         }
@@ -294,8 +291,8 @@ public class turnstile extends script.base_script
         }
         Vector patrons = getResizeableObjIdArrayObjVar(building, VAR_TURNSTILE_PATRON_IDS);
         Vector timestamps = getResizeableIntArrayObjVar(building, VAR_TURNSTILE_PATRON_STAMPS);
-        patrons = utils.addElement(patrons, player);
-        timestamps = utils.addElement(timestamps, getGameTime() - 60);
+        patrons.add(player);
+        timestamps.add(getGameTime() - 60);
         if (patrons.size() > 0 && timestamps.size() > 0)
         {
             setObjVar(building, VAR_TURNSTILE_PATRON_IDS, patrons);

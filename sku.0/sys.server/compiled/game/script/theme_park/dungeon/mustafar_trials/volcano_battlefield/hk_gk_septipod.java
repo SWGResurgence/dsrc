@@ -12,9 +12,6 @@ import java.util.Vector;
 
 public class hk_gk_septipod extends script.base_script
 {
-    public hk_gk_septipod()
-    {
-    }
     public static final boolean LOGGING = false;
     public static final int BUFF_STRIP_RECAST = 16;
     public static final string_id REMOVED_BUFF = new string_id("mustafar/volcano_battlefield", "buff_removed");
@@ -89,7 +86,7 @@ public class hk_gk_septipod extends script.base_script
             nonDebuff.setSize(0);
             for (int b : buffs) {
                 if (!buff.isDebuff(b)) {
-                    utils.addElement(nonDebuff, b);
+                    nonDebuff.add(buff, b);
                 }
             }
             if (nonDebuff == null || nonDebuff.size() == 0)

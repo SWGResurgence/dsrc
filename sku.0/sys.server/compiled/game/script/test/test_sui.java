@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class test_sui extends script.base_script
 {
-    public test_sui()
-    {
-    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {
@@ -59,7 +56,7 @@ public class test_sui extends script.base_script
                 Vector d = new Vector();
                 d.setSize(0);
                 for (int i = 0; i < sui.MAX_ARRAY_SIZE * 2; i++) {
-                    d = utils.addElement(d, "test_" + i);
+                    d.add("test_" + i);
                 }
                 sui.listbox(self, "test test test", d, "handleListBox");
                 break;

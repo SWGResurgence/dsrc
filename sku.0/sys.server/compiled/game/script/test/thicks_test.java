@@ -5,12 +5,10 @@ import script.combat_engine.combat_data;
 import script.library.*;
 
 import java.util.Vector;
+import java.util.List;
 
 public class thicks_test extends script.base_script
 {
-    public thicks_test()
-    {
-    }
     public static String[] OPTIONS = 
     {
         "listScripts",
@@ -1406,7 +1404,7 @@ public class thicks_test extends script.base_script
                     indexList.setSize(0);
                     for (String s : nameList) {
                         if (s.contains(parse[3])) {
-                            utils.addElement(indexList, s);
+                            indexList.add(nameList, s);
                         }
                     }
                     if (indexList == null || indexList.size() == 0)
@@ -2221,7 +2219,7 @@ public class thicks_test extends script.base_script
                     matchFound = true;
                 }
                 if (matchFound) {
-                    utils.addElement(matchingStaticItems, staticItemName);
+                    matchingStaticItems.add(staticItemName);
                     output += index + " - " + staticItemName + " \n";
                     ++index;
                 }
@@ -2249,7 +2247,7 @@ public class thicks_test extends script.base_script
         int staticItemIndex = utils.stringToInt(staticItemString);
         if (staticItemIndex > -1 && utils.hasScriptVar(self, "idiot_matchingStaticItems"))
         {
-            Vector matchingStaticItems = utils.getResizeableStringArrayScriptVar(self, "idiot_matchingStaticItems");
+            List matchingStaticItems = utils.getResizeableStringArrayScriptVar(self, "idiot_matchingStaticItems");
             if (matchingStaticItems != null && matchingStaticItems.size() > 0)
             {
                 if (staticItemIndex >= 0 && staticItemIndex < matchingStaticItems.size())
@@ -2295,7 +2293,7 @@ public class thicks_test extends script.base_script
     {
         if (utils.hasScriptVar(self, "idiot_matchingStaticItems"))
         {
-            Vector matchingStaticItems = utils.getResizeableStringArrayScriptVar(self, "idiot_matchingStaticItems");
+            List matchingStaticItems = utils.getResizeableStringArrayScriptVar(self, "idiot_matchingStaticItems");
             String output = "\n";
             if (matchingStaticItems != null && matchingStaticItems.size() > 0)
             {

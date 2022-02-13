@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class master extends script.theme_park.poi.base
 {
-    public master()
-    {
-    }
     public static final String SCENARIO_NAME = "prisonbreak";
     public static final String LOG_NAME = "poiPrisonBreak Master";
     public static final String SCENARIO_THEATER = "object/building/poi//tatooine_prison_break.iff";
@@ -453,7 +450,7 @@ public class master extends script.theme_park.poi.base
             deadlist = scenario.VAR_SCENARIO_DEAD_MEDIATOR;
         }
         Vector dead = getResizeableStringArrayObjVar(self, deadlist);
-        dead = utils.addElement(dead, name);
+        dead.add(name);
         if (dead.size() > 0)
         {
             setObjVar(self, deadlist, dead);

@@ -7,12 +7,10 @@ import script.location;
 import script.obj_id;
 
 import java.util.Vector;
+import java.util.List;
 
 public class gcw_city extends script.base_script
 {
-    public gcw_city()
-    {
-    }
     public static final location KEREN_ANNOUNCEMENT_ORIGIN = new location(1616, 24, 2705, "naboo", null);
     public static final location BESTINE_ANNOUNCEMENT_ORIGIN = new location(-1097, 12, -3583, "tatooine", null);
     public static final location DEARIC_ANNOUNCEMENT_ORIGIN = new location(435, 6, -2966, "talus", null);
@@ -102,10 +100,8 @@ public class gcw_city extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
 
-                Vector loserDefenseParticipants = new Vector();
-                loserDefenseParticipants.setSize(0);
-                Vector winnerOffenseParticipants = new Vector();
-                winnerOffenseParticipants.setSize(0);
+                List loserDefenseParticipants = null;
+                List winnerOffenseParticipants = null;
 
                 int loserFactionFlag = factions.FACTION_FLAG_UNKNOWN;
                 int winnerFactionFlag = factions.FACTION_FLAG_UNKNOWN;
@@ -719,8 +715,8 @@ public class gcw_city extends script.base_script
             webster.put("rebel_announcement", "gcw_announcement_man_defenses_rebel_");
             CustomerServiceLog("gcw_city_invasion", "gcw_city.endConstruction: Construction Phase over. Rebels are defending city: " + cityName + " from Imperial forces.");
         }
-        Vector rebelParticipants = trial.getNonInstanceFactionParticipants(self, factions.FACTION_FLAG_REBEL);
-        Vector imperialParticipants = trial.getNonInstanceFactionParticipants(self, factions.FACTION_FLAG_IMPERIAL);
+        List rebelParticipants = trial.getNonInstanceFactionParticipants(self, factions.FACTION_FLAG_REBEL);
+        List imperialParticipants = trial.getNonInstanceFactionParticipants(self, factions.FACTION_FLAG_IMPERIAL);
         gcw.awardGcwInvasionParticipants(rebelParticipants, factions.FACTION_FLAG_REBEL, gcw.GCW_TOKENS_CONSTRUCTION_PHASE, gcw.GCW_POINTS_CONSTRUCTION_PHASE, null);
         gcw.awardGcwInvasionParticipants(imperialParticipants, factions.FACTION_FLAG_IMPERIAL, gcw.GCW_TOKENS_CONSTRUCTION_PHASE, gcw.GCW_POINTS_CONSTRUCTION_PHASE, null);
         webster.put("neutral_announcement", "gcw_announcement_man_defenses_neutral_");
@@ -850,10 +846,8 @@ public class gcw_city extends script.base_script
         webster.put("string_file", "gcw");
         webster.put("planetName", planetName);
         webster.put("cityName", cityName);
-        Vector loserDefenseParticipants = new Vector();
-        loserDefenseParticipants.setSize(0);
-        Vector winnerOffenseParticipants = new Vector();
-        winnerOffenseParticipants.setSize(0);
+        List loserDefenseParticipants = null;
+        List winnerOffenseParticipants = null;
         int loserFactionFlag = factions.FACTION_FLAG_UNKNOWN;
         int winnerFactionFlag = factions.FACTION_FLAG_UNKNOWN;
         if (faction == factions.FACTION_FLAG_IMPERIAL)
@@ -965,10 +959,8 @@ public class gcw_city extends script.base_script
         webster.put("string_file", "gcw");
         webster.put("planetName", planetName);
         webster.put("cityName", cityName);
-        Vector loserDefenseParticipants = new Vector();
-        loserDefenseParticipants.setSize(0);
-        Vector winnerOffenseParticipants = new Vector();
-        winnerOffenseParticipants.setSize(0);
+        List loserDefenseParticipants = null;
+        List winnerOffenseParticipants = null;
         int loserFactionFlag = factions.FACTION_FLAG_UNKNOWN;
         int winnerFactionFlag = factions.FACTION_FLAG_UNKNOWN;
         if (faction == factions.FACTION_FLAG_IMPERIAL)

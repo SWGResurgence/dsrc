@@ -4,12 +4,10 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
+import java.util.List;
 
 public class interplanetary_survey extends script.base_script
 {
-    public interplanetary_survey()
-    {
-    }
     public static final String STF_FILE = "pet/droid_modules";
     public static final string_id SID_PLANET_TITLE = new string_id(STF_FILE, "survey_planet_title");
     public static final string_id SID_PLANET_PROMPT = new string_id(STF_FILE, "survey_planet_prompt");
@@ -149,8 +147,8 @@ public class interplanetary_survey extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String planet = utils.getStringScriptVar(self, "planet");
-        Vector surveyResourceList = utils.getResizeableStringArrayScriptVar(self, "surveyResource");
-        Vector surveyToolList = utils.getResizeableObjIdArrayScriptVar(self, "surveyToolId");
+        List surveyResourceList = utils.getResizeableStringArrayScriptVar(self, "surveyResource");
+        List surveyToolList = utils.getResizeableObjIdArrayScriptVar(self, "surveyToolId");
         obj_id[] resourceIdList = getAvailablePlanetResources(planet, (String)surveyResourceList.get(idx));
         int time = getSurveyTime();
         if (isGod(player))

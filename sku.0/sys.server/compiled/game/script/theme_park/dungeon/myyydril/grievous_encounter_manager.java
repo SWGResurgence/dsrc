@@ -12,9 +12,6 @@ import java.util.Vector;
 
 public class grievous_encounter_manager extends script.base_script
 {
-    public grievous_encounter_manager()
-    {
-    }
     public static final string_id START = new string_id("dungeon/myyydril", "start");
     public static final string_id STOP = new string_id("dungeon/myyydril", "stop");
     public int OnAttach(obj_id self) throws InterruptedException
@@ -224,7 +221,7 @@ public class grievous_encounter_manager extends script.base_script
                 for (obj_id content : contents) {
                     if (isPlayer(content) && hasScript(content, "theme_park.dungeon.myyydril.grievous_player")) {
                         if (validatePlayerSessionId(content, dungeon)) {
-                            eventPlayers = utils.addElement(eventPlayers, content);
+                            eventPlayers.add(content);
                         }
                     }
                 }

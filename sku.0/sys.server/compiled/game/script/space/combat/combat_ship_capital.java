@@ -4,12 +4,10 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
+import java.util.List;
 
 public class combat_ship_capital extends script.space.combat.combat_space_base
 {
-    public combat_ship_capital()
-    {
-    }
     public static final string_id SID_TARGET_DISABLED = new string_id("space/quest", "target_disabled2");
     public static final int MAXIMUM_DAMAGE_PHASES = 9;
 
@@ -180,7 +178,7 @@ public class combat_ship_capital extends script.space.combat.combat_space_base
         int intSlot = params.getInt("intSlot");
         setShipSlotTargetable(self, intSlot, false);
 
-        Vector intDamagePhaseComponents = utils.getResizeableIntArrayScriptVar(self, "intDamagePhaseComponents");
+        List intDamagePhaseComponents = utils.getResizeableIntArrayScriptVar(self, "intDamagePhaseComponents");
 
         int dpcSize = intDamagePhaseComponents.size();
         LOG("space","Ship (" + getName(self) + " has " + dpcSize + " component(s) remaining this phase:");
@@ -190,7 +188,7 @@ public class combat_ship_capital extends script.space.combat.combat_space_base
             LOG("space","-- Component in slot " + slot + ": " + getShipComponentName(self, slot) + " has " + getShipComponentHitpointsCurrent(self, slot) + "/" + getShipComponentHitpointsMaximum(self, slot) + " hitpoints.");
             // remove component from being tracked for this phase if it's disabled - also checks for other disabled components.
             if(isShipComponentDisabled(self, slot)){
-                intDamagePhaseComponents = utils.removeElementAt(intDamagePhaseComponents, i);
+                intDamagePhaseComponents.remove(i);
                 dpcSize--;
             }
         }

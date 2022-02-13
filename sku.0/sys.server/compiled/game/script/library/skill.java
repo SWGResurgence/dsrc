@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class skill extends script.base_script
 {
-    public skill()
-    {
-    }
     public static final String DELIM_RANGE = "..";
     public static final String SCRIPTVAR_SKILLS = "trainer.skills";
     public static final String SCRIPTVAR_JEDI_SKILLS = "trainer.jedi_skills";
@@ -286,7 +283,7 @@ public class skill extends script.base_script
                 for (String aTmp : tmp) {
                     int pos = utils.getElementPositionInArray(ret, aTmp);
                     if (pos == -1) {
-                        ret = utils.addElement(ret, aTmp);
+                        ret.add(aTmp);
                     }
                 }
             }
@@ -482,10 +479,10 @@ public class skill extends script.base_script
                 }
             }
             if (qualifies) {
-                qualifiedSkills = utils.addElement(qualifiedSkills, teachableSkill);
+                qualifiedSkills.add(teachableSkill);
             }
         }
-        if ((qualifiedSkills != null) && (qualifiedSkills.size() > 0))
+        if (qualifiedSkills != null && qualifiedSkills.size() > 0)
         {
             String[] _qualifiedSkills = new String[qualifiedSkills.size()];
             qualifiedSkills.toArray(_qualifiedSkills);
@@ -513,10 +510,10 @@ public class skill extends script.base_script
         delta.setSize(0);
         for (String teacherSkill : teacherSkills) {
             if (utils.getElementPositionInArray(targetSkills, teacherSkill) == -1) {
-                delta = utils.addElement(delta, teacherSkill);
+                delta.add(teacherSkill);
             }
         }
-        if ((delta != null) && (delta.size() != 0))
+        if (delta != null && delta.size() != 0)
         {
             String[] _delta = new String[delta.size()];
             delta.toArray(_delta);
@@ -559,7 +556,7 @@ public class skill extends script.base_script
         delta.setSize(0);
         for (String teacherSkill : teacherSkills) {
             if (utils.getElementPositionInArray(targetSkills, teacherSkill) == -1) {
-                delta = utils.addElement(delta, teacherSkill);
+                delta.add(teacherSkill);
             }
         }
         if ((delta != null) && (delta.size() != 0))
@@ -698,7 +695,7 @@ public class skill extends script.base_script
         LOG("jedi", "checking for " + strSkill + " intIndex is " + intElement);
         if (intElement != -1)
         {
-            strSkillsNeeded = utils.removeElementAt(strSkillsNeeded, intElement);
+            strSkillsNeeded.remove(intElement);
         }
         updateJediSkillRequirements(objPlayer, strSkillsNeeded);
     }

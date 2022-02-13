@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class herald_dealer extends script.base_script
 {
-    public herald_dealer()
-    {
-    }
     public static final String TBL = "datatables/npc/relic_dealer/relic_geonosian_bio_bunker.iff";
     public static final String SCRIPTVAR_JUNK_SUI = "relicdealer.biogenic.sui";
     public static final String SCRIPTVAR_JUNK_IDS = "relicdealer.biogenic.ids";
@@ -51,11 +48,11 @@ public class herald_dealer extends script.base_script
                 String template = getTemplateName(content);
                 if ((template != null) && (!template.equals(""))) {
                     if (dataTableGetInt(TBL, template, "price") >= 0) {
-                        junk = utils.addElement(junk, content);
+                        junk.add(contents, content);
                     }
                 }
             }
-            if ((junk != null) && (junk.size() > 0))
+            if (junk != null && junk.size() > 0)
             {
                 return utils.toStaticObjIdArray(junk);
             }
@@ -248,7 +245,7 @@ public class herald_dealer extends script.base_script
             int total = 0;
             for (Object o : junk) {
                 if (utils.hasScriptVar(((obj_id) o), SCRIPTVAR_SOLD)) {
-                    toRemove = utils.addElement(toRemove, ((obj_id) o));
+                    toRemove.add(((obj_id)junk.get, o));
                 } else {
                     String template = getTemplateName(((obj_id) o));
                     int price = dataTableGetInt(TBL, template, "price");

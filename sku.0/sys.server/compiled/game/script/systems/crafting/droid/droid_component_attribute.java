@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class droid_component_attribute extends script.base_script
 {
-    public droid_component_attribute()
-    {
-    }
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -302,7 +299,7 @@ public class droid_component_attribute extends script.base_script
                     int result = (int)((raw_effects % StrictMath.pow(10, i)) / StrictMath.pow(10, i - 1));
                     if (result >= 1)
                     {
-                        available_effects = utils.addElement(available_effects, pet_lib.LIGHTING_EFFECTS[i - 1]);
+                        available_effects.add(pet_lib.LIGHTING_EFFECTS[i - 1]);
                     }
                     i++;
                 }

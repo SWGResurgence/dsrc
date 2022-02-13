@@ -2,13 +2,11 @@ package script.library;
 
 import script.*;
 
+import java.util.List;
 import java.util.Vector;
 
 public class space_crafting extends script.base_script
 {
-    public space_crafting()
-    {
-    }
     public static final int CHASSIS = space_combat.SHIP;
     public static final int HULL = -1;
     public static final int LIFE_SUPPORT = -2;
@@ -833,7 +831,7 @@ public class space_crafting extends script.base_script
             if (hasObjVar(objContent, "strKitType")) {
                 String strKitType = getStringObjVar(objContent, "strKitType");
                 if ((strKitType.equals(strComponent)) || (strKitType.equals("all_purpose"))) {
-                    objKits = utils.addElement(objKits, objContent);
+                    objKits.add(objContents);
                 }
             }
         }
@@ -874,7 +872,7 @@ public class space_crafting extends script.base_script
                     prose_package ppRepairInfo = prose.getPackage(strSpam, (int)fltRemainingRepairPoints);
                     sendSystemMessageProse(objPlayer, ppRepairInfo);
                     destroyObject(objRepairKit);
-                    objRepairKits = utils.removeElementAt(objRepairKits, 0);
+                    objRepairKits.remove(0);
                     if (objRepairKits.size() > 0)
                     {
                         repairComponentOnShip(intSlot, objRepairKits, objPlayer, objShip);
@@ -925,7 +923,7 @@ public class space_crafting extends script.base_script
             destroyObject(objRepairKit);
             space_utils.setComponentDisabled(objShip, intSlot, false);
             space_combat.recalculateEfficiency(intSlot, objShip);
-            objRepairKits = utils.removeElementAt(objRepairKits, 0);
+            objRepairKits.remove(0);
             if (objRepairKits.size() > 0)
             {
                 repairComponentOnShip(intSlot, objRepairKits, objPlayer, objShip);
@@ -963,7 +961,7 @@ public class space_crafting extends script.base_script
             destroyObject(objRepairKit);
             space_utils.setComponentDisabled(objShip, intSlot, false);
             space_combat.recalculateEfficiency(intSlot, objShip);
-            objRepairKits = utils.removeElementAt(objRepairKits, 0);
+            objRepairKits.remove(0);
             if (objRepairKits.size() > 0)
             {
                 repairComponentOnShip(intSlot, objRepairKits, objPlayer, objShip);
@@ -1022,7 +1020,7 @@ public class space_crafting extends script.base_script
             string_id strSpam = new string_id("space/space_interaction", "repaired_x_component_damage_destroy_kit");
             prose_package ppRepairInfo = prose.getPackage(strSpam, getEncodedName(objComponent), (int)fltRemainingRepairPoints);
             sendSystemMessageProse(objPlayer, ppRepairInfo);
-            objRepairKits = utils.removeElementAt(objRepairKits, 0);
+            objRepairKits.remove(0);
             destroyObject(objRepairKit);
             repairComponentInInventory(objComponent, objRepairKits, objPlayer);
             return true;
@@ -1046,7 +1044,7 @@ public class space_crafting extends script.base_script
             string_id strSpam = new string_id("space/space_interaction", "repaired_x_armor_component_damage_destroy_kit");
             prose_package ppRepairInfo = prose.getPackage(strSpam, getEncodedName(objComponent), (int)fltRemainingRepairPoints);
             sendSystemMessageProse(objPlayer, ppRepairInfo);
-            objRepairKits = utils.removeElementAt(objRepairKits, 0);
+            objRepairKits.remove(0);
             destroyObject(objRepairKit);
             repairComponentInInventory(objComponent, objRepairKits, objPlayer);
             return true;
@@ -1086,7 +1084,7 @@ public class space_crafting extends script.base_script
         objCommands.setSize(0);
         for (obj_id objContent : objContents) {
             if (hasObjVar(objContent, "strDroidCommand")) {
-                objCommands = utils.addElement(objCommands, objContent);
+                objCommands.add(objContents);
             }
         }
         if (objCommands.size() > 0)
@@ -1411,7 +1409,7 @@ public class space_crafting extends script.base_script
         intInstalledSlots.setSize(0);
         for (int intRawSlot : intRawSlots) {
             if (isShipSlotInstalled(objShip, intRawSlot)) {
-                intInstalledSlots = utils.addElement(intInstalledSlots, intRawSlot);
+                intInstalledSlots.add(intRawSlots);
             }
         }
         int[] _intInstalledSlots = new int[0];
@@ -1588,7 +1586,7 @@ public class space_crafting extends script.base_script
             {
                 locBrokenComponents = getResizeableLocationArrayObjVar(objShip, "locBrokenComponents");
             }
-            locBrokenComponents = utils.addElement(locBrokenComponents, locTest);
+            locBrokenComponents.add(locTest);
             setObjVar(objShip, "locBrokenComponents", locBrokenComponents);
         }
         setInvulnerableHitpoints(objPanel, 1);
@@ -1628,7 +1626,7 @@ public class space_crafting extends script.base_script
         }
         Vector locBrokenComponents = getResizeableLocationArrayObjVar(objShip, "locBrokenComponents");
         int intIndex = utils.getElementPositionInArray(locBrokenComponents, locTest);
-        locBrokenComponents = utils.removeElementAt(locBrokenComponents, intIndex);
+        locBrokenComponents.remove(intIndex);
         if (locBrokenComponents != null && locBrokenComponents.size() > 0)
         {
             setObjVar(objShip, "locBrokenComponents", locBrokenComponents);
@@ -1695,7 +1693,7 @@ public class space_crafting extends script.base_script
             {
                 locBrokenComponents = getResizeableLocationArrayObjVar(objShip, "locBrokenComponents");
             }
-            locBrokenComponents = utils.addElement(locBrokenComponents, locTest);
+            locBrokenComponents.add(locTest);
             LOG("space", "locBrokenComponetns is a resizeable array of length " + locBrokenComponents.size());
             setObjVar(objShip, "locBrokenComponents", locBrokenComponents);
         }
@@ -1742,7 +1740,7 @@ public class space_crafting extends script.base_script
         }
         if (intIndex > -1)
         {
-            locBrokenComponents = utils.removeElementAt(locBrokenComponents, intIndex);
+            locBrokenComponents.remove(intIndex);
             LOG("space", "fixPlasmaConduit() Removing " + intIndex + " locBrokenComponents.length is " + locBrokenComponents.size());
         }
         if (locBrokenComponents != null && locBrokenComponents.size() > 0)
@@ -1824,7 +1822,7 @@ public class space_crafting extends script.base_script
         intSlots.setSize(0);
         for (int intRawSlot : intRawSlots) {
             if (isShipSlotInstalled(objShip, intRawSlot)) {
-                intSlots = utils.addElement(intSlots, intRawSlot);
+                intSlots.add(intRawSlots);
             }
         }
         return intSlots;
@@ -2037,8 +2035,8 @@ public class space_crafting extends script.base_script
                 prose.setTO(ppTest, getEncodedName(objContent));
                 prose.setDI(ppTest, intValue);
                 prose.setStringId(ppTest, strSpam);
-                objLoot = utils.addElement(objLoot, objContent);
-                ppEntries = utils.addElement(ppEntries, ppTest);
+                objLoot.add(objContents);
+                ppEntries.add(ppTest);
             }
         }
         if (ppEntries != null && ppEntries.size() > 0)
@@ -2250,7 +2248,7 @@ public class space_crafting extends script.base_script
         LOG("space", "FIXING ALL PLASMA CONDUITS");
         if (utils.hasScriptVar(objShip, "objPlasmaConduits"))
         {
-            Vector objPlasmaConduits = utils.getResizeableObjIdArrayScriptVar(objShip, "objPlasmaConduits");
+            List objPlasmaConduits = utils.getResizeableObjIdArrayScriptVar(objShip, "objPlasmaConduits");
             for (int intI = 0; intI < objPlasmaConduits.size(); intI++)
             {
                 LOG("space", "Plasma conduit [" + intI + "]");

@@ -6,13 +6,10 @@ import script.obj_id;
 import script.prose_package;
 import script.string_id;
 
-import java.util.Vector;
+import java.util.List;
 
 public class table extends script.gambling.base.default_interface
 {
-    public table()
-    {
-    }
     private static final int TIMER_BETTING = 60;
     protected static final String SCRIPT_VAR_GAME_ACTIVE = "gambling.game.active";
     public int OnInitialize(obj_id self) throws InterruptedException
@@ -57,12 +54,12 @@ public class table extends script.gambling.base.default_interface
                 {
                     sendSystemMessage(player, gambling.SID_PLACE_BETS);
                 }
-                Vector gamePlayers = getResizeableObjIdArrayObjVar(self, gambling.VAR_GAME_PLAYERS_IDS);
+                List gamePlayers = getResizeableObjIdArrayObjVar(self, gambling.VAR_GAME_PLAYERS_IDS);
                 if (gamePlayers != null && gamePlayers.size() > 0)
                 {
                     if (utils.getElementPositionInArray(gamePlayers, player) == -1)
                     {
-                        gamePlayers = utils.addElement(gamePlayers, player);
+                        gamePlayers.add(player);
                         setObjVar(self, gambling.VAR_GAME_PLAYERS_IDS, gamePlayers);
                     }
                 }

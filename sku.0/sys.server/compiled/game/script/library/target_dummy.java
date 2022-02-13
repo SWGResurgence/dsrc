@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class target_dummy extends script.base_script
 {
-    public target_dummy()
-    {
-    }
     public static final String TERMINAL_LOGGING = "target_creature";
     public static final boolean LOGGING_ON = true;
     public static final String OWNER_OBJVAR = "targetDummyOwner";
@@ -791,7 +788,7 @@ public class target_dummy extends script.base_script
                     attackType = data[2];
                     if (!attackType.equals(LAST_ATTACK_TIME_VAR))
                     {
-                        utils.addElement(attackTypes, attackType);
+                        attackTypes.add(attackType);
                     }
                 }
             }
@@ -912,7 +909,7 @@ public class target_dummy extends script.base_script
                         attackType = data[2];
                         if (!attackType.equals(LAST_ATTACK_TIME_VAR))
                         {
-                            utils.addElement(attackTypes, attackType);
+                            attackTypes.add(attackType);
                         }
                     }
                 }

@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class pgc_quests extends script.base_script
 {
-    public pgc_quests()
-    {
-    }
     public static final int CHRONICLE_HOLOCRON_VERSION = 0;
     public static final int CHRONICLE_CREATION_XP_BASE = 99;
     public static final int CHRONICLE_SHARED_XP_BASE = 4;
@@ -556,7 +553,7 @@ public class pgc_quests extends script.base_script
                         for (obj_id questObject : questObjects) {
                             if (isIdValid(questObject)) {
                                 if (isPgcQuestObject(questObject)) {
-                                    utils.addElement(dynamicQuestHolocronList, questObject);
+                                    dynamicQuestHolocronList.add(questObject);
                                 }
                             }
                         }
@@ -1204,7 +1201,7 @@ public class pgc_quests extends script.base_script
                     if (!isIdValid(newItem)) {
                         LOG("roadmap", "ERROR - Could not create roadmap item (" + item + ")");
                     } else {
-                        utils.addElement(allNewObjectsResizable, newItem);
+                        allNewObjectsResizable.add(newItem);
                         String newItemName = "";
                         if (static_item.isStaticItem(newItem)) {
                             newItemName = getStaticItemName(newItem);

@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class junk_compactor extends script.base_script
 {
-    public junk_compactor()
-    {
-    }
     public static final String TBL = "datatables/npc/junk_dealer/ep3_myyydril_compactor.iff";
     public static final String SCRIPTVAR_JUNK_SUI = "relicdealer.biogenic.sui";
     public static final String SCRIPTVAR_JUNK_IDS = "relicdealer.biogenic.ids";
@@ -52,12 +49,12 @@ public class junk_compactor extends script.base_script
                     String template = getTemplateName(content);
                     if ((template != null) && (!template.equals(""))) {
                         if (dataTableGetInt(TBL, template, "price") >= 0) {
-                            junk = utils.addElement(junk, content);
+                            junk.add(content);
                         }
                     }
                 }
             }
-            if ((junk != null) && (junk.size() > 0))
+            if (junk != null && junk.size() > 0)
             {
                 return utils.toStaticObjIdArray(junk);
             }
@@ -250,7 +247,7 @@ public class junk_compactor extends script.base_script
             int total = 0;
             for (Object o : junk) {
                 if (utils.hasScriptVar(((obj_id) o), SCRIPTVAR_SOLD)) {
-                    toRemove = utils.addElement(toRemove, ((obj_id) o));
+                    toRemove.add(((obj_id)junk.get o));
                 } else {
                     String template = getTemplateName(((obj_id) o));
                     int price = dataTableGetInt(TBL, template, "price");

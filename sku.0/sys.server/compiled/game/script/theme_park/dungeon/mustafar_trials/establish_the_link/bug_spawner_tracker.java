@@ -11,9 +11,6 @@ import java.util.Vector;
 
 public class bug_spawner_tracker extends script.base_script
 {
-    public bug_spawner_tracker()
-    {
-    }
     public static final String PATH_MAX = "pathMax";
     public static final boolean LOGGING = false;
     public int OnDestroy(obj_id self) throws InterruptedException
@@ -52,7 +49,7 @@ public class bug_spawner_tracker extends script.base_script
         waypoints.setSize(0);
         for (obj_id content : contents) {
             if (utils.hasScriptVar(content, trial.WP_NAME)) {
-                utils.addElement(waypoints, getLocation(content));
+                waypoints.add(getLocation(contents));
             }
         }
         if (waypoints == null)

@@ -4,13 +4,11 @@ import script.dictionary;
 import script.library.utils;
 import script.obj_id;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class museum_event_master extends script.base_script
 {
-    public museum_event_master()
-    {
-    }
     public static final String DATATABLE_NAME = "datatables/city/bestine/bestine_museum_event.iff";
 
     public int OnAttach(obj_id self) throws InterruptedException
@@ -106,12 +104,12 @@ public class museum_event_master extends script.base_script
     public void pickArtistsForEvent(obj_id self) throws InterruptedException
     {
         String[] strArtists = dataTableGetStringColumnNoDefaults(DATATABLE_NAME, "artistNpc");
-        Vector vectArtists = new Vector();
+        List vectArtists = new ArrayList<String>();
         for (String temp : strArtists) {
-            vectArtists = utils.addElement(vectArtists, temp);
+            vectArtists.add(temp);
         }
 
-        Vector previousArtworkIndexes = new Vector();
+        List previousArtworkIndexes = new ArrayList<Integer>();
 
         if (hasObjVar(self, "bestine.previousArtworkIndexes"))
         {
@@ -154,7 +152,7 @@ public class museum_event_master extends script.base_script
                 setObjVar(self, entryObjVar, artistName);
                 setObjVar(self, indexObjVar, artworkNum);
             }
-            vectArtists = utils.removeElementAt(vectArtists, vectRow);
+            vectArtists.remove(vectRow);
         }
     }
 }

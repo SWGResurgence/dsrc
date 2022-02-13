@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class player_jedi_conversion extends script.base_script
 {
-    public player_jedi_conversion()
-    {
-    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         convertOldJedi(self);
@@ -70,7 +67,7 @@ public class player_jedi_conversion extends script.base_script
                 {
                     addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
                     setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, "@skl_n:" + nameList[i]);
-                    skillList = utils.addElement(skillList, skill);
+                    skillList.add(skill);
                 }
                 else 
                 {
@@ -293,7 +290,7 @@ public class player_jedi_conversion extends script.base_script
                                 {
                                     addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
                                     setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, "@skl_n:" + nameList[i]);
-                                    skillList = utils.addElement(skillList, skill);
+                                    skillList.add(skill);
                                 }
                             }
                         }
@@ -304,7 +301,7 @@ public class player_jedi_conversion extends script.base_script
                         {
                             addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
                             setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, "@skl_n:" + nameList[i]);
-                            skillList = utils.addElement(skillList, skill);
+                            skillList.add(skill);
                         }
                     }
                     else 
@@ -470,7 +467,7 @@ public class player_jedi_conversion extends script.base_script
                 String skill = nameList[i];
                 addSUIDataItem(pid, sui.LISTBOX_DATASOURCE, "" + i);
                 setSUIProperty(pid, sui.LISTBOX_DATASOURCE + "." + i, sui.PROP_TEXT, "@skl_n:" + nameList[i]);
-                skillList = utils.addElement(skillList, skill);
+                skillList.add(skill);
             }
         }
         utils.setScriptVar(self, "skill_list", skillList);
@@ -498,9 +495,8 @@ public class player_jedi_conversion extends script.base_script
         while (skills.hasMoreTokens())
         {
             String skillName = skills.nextToken();
-            if (skillName != null && !skillName.equals(""))
-            {
-                masterSkillList = utils.addElement(masterSkillList, skillName);
+            if (skillName != null && !skillName.isEmpty()) {
+                masterSkillList.add(skillName);
             }
         }
         String[] _masterSkillList = new String[0];
@@ -521,14 +517,14 @@ public class player_jedi_conversion extends script.base_script
         Vector skillList = new Vector();
         skillList.setSize(0);
         for (String s1 : masterSkillList) {
-            skillList = utils.addElement(skillList, s1);
+            skillList.add(masterSkillList, s1);
             String[] tmp = skill.getAllRequiredSkills(s1);
             if ((tmp == null) || (tmp.length == 0)) {
             } else {
                 for (String s : tmp) {
                     int pos = utils.getElementPositionInArray(skillList, s);
                     if (pos == -1) {
-                        skillList = utils.addElement(skillList, s);
+                        skillList.add(tmp, s);
                     }
                 }
             }
@@ -558,7 +554,7 @@ public class player_jedi_conversion extends script.base_script
                 int cost = 0;
                 int pointsToSpend = getIntObjVar(player, "jedi.nonJediPoints");
                 if (cost <= pointsToSpend) {
-                    skillList = utils.addElement(skillList, s);
+                    skillList.add(learnableSkillList, s);
                 }
             }
         }
@@ -572,7 +568,7 @@ public class player_jedi_conversion extends script.base_script
     }
     public int regularSkillSelection(obj_id self, dictionary params) throws InterruptedException
     {
-        if ((params == null) || (params.isEmpty()))
+        if (params == null || params.isEmpty())
         {
             return SCRIPT_CONTINUE;
         }
@@ -583,14 +579,14 @@ public class player_jedi_conversion extends script.base_script
         switch (bp)
         {
             case sui.BP_REVERT:
-            revokeRegularSkill(player);
-            return SCRIPT_CONTINUE;
+                revokeRegularSkill(player);
+                return SCRIPT_CONTINUE;
             case sui.BP_OK:
-            addRegularSkillBox(self, player, idx);
-            return SCRIPT_CONTINUE;
+                addRegularSkillBox(self, player, idx);
+                return SCRIPT_CONTINUE;
             case sui.BP_CANCEL:
-            regularSkillSui(self, self, 1);
-            return SCRIPT_CONTINUE;
+                regularSkillSui(self, self, 1);
+                return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }

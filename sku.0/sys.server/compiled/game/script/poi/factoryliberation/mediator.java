@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
-    public mediator()
-    {
-    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiFactoryLiberation Mediator";
     public static final int CONV_GREET = 0;
@@ -127,16 +124,16 @@ public class mediator extends script.poi.base.scenario_actor
         {
             case CONV_GREET:
             msg = new string_id(convo, "m_greet_0");
-            responses = utils.addElement(responses, new string_id(convo, "r_m_greet_yeshelp"));
-            responses = utils.addElement(responses, new string_id(convo, "r_m_greet_nohelp"));
+            responses.add(new string_id(convo, "r_m_greet_yeshelp"));
+            responses.add(new string_id(convo, "r_m_greet_nohelp"));
             npcStartConversation(speaker, self, convo, msg, responses);
             scenario.setPlayerProgress(speaker, CONV_CONSULTMEDIATOR);
             break;
             case CONV_INSULT:
             case CONV_MAYBEHELP:
             msg = new string_id(convo, "m_greet_1");
-            responses = utils.addElement(responses, new string_id(convo, "r_m_greet_yeshelp"));
-            responses = utils.addElement(responses, new string_id(convo, "r_m_greet_nohelp"));
+            responses.add(new string_id(convo, "r_m_greet_yeshelp"));
+            responses.add(new string_id(convo, "r_m_greet_nohelp"));
             npcStartConversation(speaker, self, convo, msg, responses);
             scenario.setPlayerProgress(speaker, CONV_CONSULTMEDIATOR);
             break;

@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class battlefield extends script.base_script
 {
-    public battlefield()
-    {
-    }
     public static final String BATTLEFIELD_DATATABLE = "datatables/battlefield/battlefield.iff";
     public static final String BATTLEFIELD_MARKER_DATATABLE = "datatables/battlefield/marker.iff";
     public static final String BUILDABLE_STRUCTURE_DATATABLE = "datatables/battlefield/buildable_structure.iff";
@@ -341,27 +338,27 @@ public class battlefield extends script.base_script
         LOG("LOG_CHANNEL", "imperial ->" + imperial + " rebel ->" + rebel);
         if (imperial == 1)
         {
-            factions_allowed = utils.addElement(factions_allowed, factions.FACTION_IMPERIAL);
+            factions_allowed.add(factions.FACTION_IMPERIAL);
         }
         else if (imperial == 2)
         {
-            factions_ai = utils.addElement(factions_ai, factions.FACTION_IMPERIAL);
+            factions_ai.add(factions.FACTION_IMPERIAL);
         }
         if (rebel == 1)
         {
-            factions_allowed = utils.addElement(factions_allowed, factions.FACTION_REBEL);
+            factions_allowed.add(factions.FACTION_REBEL);
         }
         else if (rebel == 2)
         {
-            factions_ai = utils.addElement(factions_ai, factions.FACTION_REBEL);
+            factions_ai.add(factions.FACTION_REBEL);
         }
         if (hutt == 1)
         {
-            factions_allowed = utils.addElement(factions_allowed, factions.FACTION_HUTT);
+            factions_allowed.add(factions.FACTION_HUTT);
         }
         else if (hutt == 2)
         {
-            factions_ai = utils.addElement(factions_ai, factions.FACTION_HUTT);
+            factions_ai.add(factions.FACTION_HUTT);
         }
         if (factions_allowed.size() > 0)
         {
@@ -408,7 +405,7 @@ public class battlefield extends script.base_script
             location loc = new location(x, y, z, getCurrentSceneName());
             obj_id marker = createObject(BATTLEFIELD_MARKER, loc);
             persistObject(marker);
-            markers = utils.addElement(markers, marker);
+            markers.add(marker);
         }
         obj_id master_object = getMasterObjectFromRegion(r);
         if (markers.size() > 0)
@@ -679,7 +676,7 @@ public class battlefield extends script.base_script
                 } else {
                     size = 0;
                 }
-                factions_allowed_sizes = utils.addElement(factions_allowed_sizes, size);
+                factions_allowed_sizes.add(size);
                 if (s.equals(faction)) {
                     faction_size = size;
                 }
@@ -1069,7 +1066,7 @@ public class battlefield extends script.base_script
         {
             waypoint_list = getResizeableObjIdArrayObjVar(player, VAR_WAYPOINTS);
         }
-        waypoint_list = utils.addElement(waypoint_list, waypoint);
+        waypoint_list.add(waypoint);
         if (waypoint_list.size() > 0)
         {
             setObjVar(player, VAR_WAYPOINTS, waypoint_list);
@@ -1093,7 +1090,7 @@ public class battlefield extends script.base_script
             int idx = utils.getElementPositionInArray(waypoint_list, waypoint);
             if (idx != -1)
             {
-                waypoint_list = utils.removeElementAt(waypoint_list, idx);
+                waypoint_list.remove(idx);
                 if (waypoint_list.size() < 1)
                 {
                     removeObjVar(player, VAR_WAYPOINTS);
@@ -1396,7 +1393,7 @@ public class battlefield extends script.base_script
                 if (structure_faction.equals(faction) || structure_faction.equals("ALL") || faction.equals("ANY"))
                 {
                     String structure_name = row.getString(DATATABLE_COL_BUILDING_NAME);
-                    buildable_objects = utils.addElement(buildable_objects, structure_name);
+                    buildable_objects.add(structure_name);
                 }
             }
         }
@@ -1617,7 +1614,7 @@ public class battlefield extends script.base_script
                 String player_faction = getPlayerTeamFaction(player);
                 if (player_faction != null) {
                     if (player_faction.equals(faction)) {
-                        faction_team = utils.addElement(faction_team, player);
+                        faction_team.add(players);
                     }
                 }
             }
@@ -1841,7 +1838,7 @@ public class battlefield extends script.base_script
         {
             for (obj_id item : items) {
                 if (hasObjVar(item, VAR_GAME_CRITICAL)) {
-                    critical_items = utils.addElement(critical_items, item);
+                    critical_items.add(items);
                 }
             }
         }
@@ -1875,7 +1872,7 @@ public class battlefield extends script.base_script
         {
             for (obj_id item : items) {
                 if (isPlayer(item)) {
-                    players = utils.addElement(players, item);
+                    players.add(items);
                 } else if (player_structure.isBuilding(item)) {
                     obj_id[] player_building = player_structure.getPlayersInBuilding(item);
                     if (player_building != null) {
@@ -1913,7 +1910,7 @@ public class battlefield extends script.base_script
                 LOG("LOG_CHANNEL", "battlefield::getPlayersOnBattlefield -- players[" + i + "] ->" + players[i]);
                 if (players[i].isLoaded())
                 {
-                    loaded_players = utils.addElement(loaded_players, players[i]);
+                    loaded_players.add(players[i]);
                 }
             }
             if (loaded_players.size() < 0)
@@ -2066,10 +2063,10 @@ public class battlefield extends script.base_script
             }
             else 
             {
-                spawn_template = utils.addElement(spawn_template, row.getString(DATATABLE_COL_SPAWNER_TEMPLATE));
-                min_number = utils.addElement(min_number, row.getInt(DATATABLE_COL_SPAWNER_MIN_NUMBER));
-                max_number = utils.addElement(max_number, row.getInt(DATATABLE_COL_SPAWNER_MAX_NUMBER));
-                weight = utils.addElement(weight, row.getInt(DATATABLE_COL_SPAWNER_WEIGHT));
+                spawn_template.add(row.getString(DATATABLE_COL_SPAWNER_TEMPLATE));
+                min_number.add(row.getInt(DATATABLE_COL_SPAWNER_MIN_NUMBER));
+                max_number.add(row.getInt(DATATABLE_COL_SPAWNER_MAX_NUMBER));
+                weight.add(row.getInt(DATATABLE_COL_SPAWNER_WEIGHT));
             }
         }
         dictionary spawn_data = new dictionary();
@@ -2162,7 +2159,7 @@ public class battlefield extends script.base_script
                 location spawn_loc = utils.getRandomAwayLocation(spawner_loc, 5.0f, 10.0f);
                 obj_id mob = addBattlefieldMob(master_object, template, spawn_loc, faction);
                 wander(mob);
-                spawned_mobs = utils.addElement(spawned_mobs, mob);
+                spawned_mobs.add(mob);
                 setObjVar(mob, battlefield.VAR_CONSTRUCTED, 1);
                 setObjVar(mob, VAR_SPAWNED_BY, spawner);
                 setObjVar(mob, VAR_SPAWNED_BATTLEFIELD, master_object);
@@ -2327,7 +2324,7 @@ public class battlefield extends script.base_script
         }
         else 
         {
-            players = utils.addElement(players, player);
+            players.add(player);
             removeObjVar(master_object, VAR_PLAYERS_IN_BATTLEFIELD);
             utils.setResizeableBatchObjVar(master_object, VAR_PLAYERS_IN_BATTLEFIELD, players);
         }
@@ -2355,7 +2352,7 @@ public class battlefield extends script.base_script
         }
         else 
         {
-            players = utils.removeElementAt(players, idx);
+            players.remove(idx);
             removeObjVar(master_object, VAR_PLAYERS_IN_BATTLEFIELD);
             utils.setResizeableBatchObjVar(master_object, VAR_PLAYERS_IN_BATTLEFIELD, players);
             return true;
@@ -2385,7 +2382,7 @@ public class battlefield extends script.base_script
         int part_idx = utils.getElementPositionInArray(participants, player);
         if (part_idx == -1)
         {
-            participants = utils.addElement(participants, player);
+            participants.add(player);
         }
         String[] factions_allowed = getStringArrayObjVar(master_object, VAR_FACTIONS_ALLOWED);
         int idx = utils.getElementPositionInArray(factions_allowed, faction);
@@ -2631,7 +2628,7 @@ public class battlefield extends script.base_script
             }
             else 
             {
-                ai_factions = utils.removeElementAt(ai_factions, idx);
+                ai_factions.remove(idx);
                 if (ai_factions.size() > 0)
                 {
                     setObjVar(master_object, VAR_FACTIONS_AI_REMAINING, ai_factions);
@@ -2660,7 +2657,7 @@ public class battlefield extends script.base_script
         else 
         {
             LOG("LOG_CHANNEL", "battlefield.eliminateFaction -- eliminate player faction " + faction);
-            factions_remaining = utils.removeElementAt(factions_remaining, idx);
+            factions_remaining.remove(idx);
             if (factions_remaining.size() > 0)
             {
                 setObjVar(master_object, VAR_FACTIONS_REMAINING, factions_remaining);

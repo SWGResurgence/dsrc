@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class township extends script.base_script
 {
-    public township()
-    {
-    }
     public static final int MIN_LEVEL = 70;
     public static final int TRAVEL_COST = 2500;
     public static final int RANK_TWO_AMOUNT = 200;
@@ -89,8 +86,8 @@ public class township extends script.base_script
                 }
             }
             if (!foundAlready) {
-                utils.addElement(localizedGroups, "@nexus:" + subGroup);
-                utils.addElement(resizeGroups, subGroup);
+                localizedGroups.add("@nexus:" + subGroup);
+                resizeGroups.add(subGroup);
             }
         }
         utils.setScriptVar(player, GROUPS_SCRIPT_VAR, resizeGroups);
@@ -142,13 +139,13 @@ public class township extends script.base_script
             {
                 if (transition.hasPermissionForZone(player, locations[i], "initialRequiredFlag"))
                 {
-                    utils.addElement(resizeLocations, locations[i]);
-                    utils.addElement(localizedLocations, "@nexus:" + locations[i]);
+                    resizeLocations.add(locations[i]);
+                    localizedLocations.add("@nexus:" + locations[i]);
                 }
                 else 
                 {
-                    utils.addElement(resizeLocations, locations[i]);
-                    utils.addElement(localizedLocations, "@nexus:" + locations[i] + "_no_perm");
+                    resizeLocations.add(locations[i]);
+                    localizedLocations.add("@nexus:" + locations[i] + "_no_perm");
                 }
             }
         }

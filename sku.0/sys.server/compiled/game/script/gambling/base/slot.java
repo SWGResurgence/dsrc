@@ -5,12 +5,10 @@ import script.library.*;
 import script.obj_id;
 
 import java.util.Vector;
+import java.util.List;
 
 public class slot extends script.gambling.base.default_interface
 {
-    public slot()
-    {
-    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         int slotBalance = getBankBalance(self);
@@ -237,20 +235,20 @@ public class slot extends script.gambling.base.default_interface
                     results[idx] = 0;
                     break;
                 case 1:
-                    Vector reelOdds = utils.getResizeableIntBatchScriptVar(self, gambling.VAR_REEL_ODDS);
+                    List reelOdds = utils.getResizeableIntBatchScriptVar(self, gambling.VAR_REEL_ODDS);
                     if (reelOdds == null || reelOdds.size() == 0)
                     {
                         reelOdds = gambling.calculateReelOdds(self);
                         utils.setBatchScriptVar(self, gambling.VAR_REEL_ODDS, reelOdds);
                     }
                     int tmpIdx = rand(0, reelOdds.size() - 1);
-                    results[idx] = (Integer) (reelOdds.elementAt(tmpIdx));
+                    results[idx] = (Integer) (reelOdds.get(tmpIdx));
                     break;
             }
         }
         else 
         {
-            Vector reelOdds = utils.getResizeableIntBatchScriptVar(self, gambling.VAR_REEL_ODDS);
+            List reelOdds = utils.getResizeableIntBatchScriptVar(self, gambling.VAR_REEL_ODDS);
             if (reelOdds == null || reelOdds.size() == 0)
             {
                 results[idx] = 0;
@@ -260,7 +258,7 @@ public class slot extends script.gambling.base.default_interface
                 if (idx == 0)
                 {
                     int tmpIdx = rand(0, reelOdds.size() - 1);
-                    results[0] = (Integer) (reelOdds.elementAt(tmpIdx));
+                    results[0] = (Integer) (reelOdds.get(tmpIdx));
                 }
                 else 
                 {
@@ -409,19 +407,19 @@ public class slot extends script.gambling.base.default_interface
         int playerCash = getCashBalance(player);
         int playerBank = getBankBalance(player);
         int playerTotal = getTotalMoney(player);
-        entries = utils.addElement(entries, "Current Bet: " + slotBalance);
+        entries.add("Current Bet: " + slotBalance);
         int max = getIntObjVar(self, gambling.VAR_TABLE_BET_MAX);
         if (max < 1)
         {
-            entries = utils.addElement(entries, "Max Bet:      " + playerTotal);
+            entries.add("Max Bet:      " + playerTotal);
         }
         else 
         {
-            entries = utils.addElement(entries, "Max Bet:      " + max);
+            entries.add("Max Bet:      " + max);
         }
-        entries = utils.addElement(entries, "Cash Balance: " + playerCash);
-        entries = utils.addElement(entries, "Bank Balance: " + playerBank);
-        entries = utils.addElement(entries, "Total Money : " + playerTotal);
+        entries.add("Cash Balance: " + playerCash);
+        entries.add("Bank Balance: " + playerBank);
+        entries.add("Total Money : " + playerTotal);
         int pid = -1;
         if (slotBalance > 0)
         {
@@ -504,7 +502,7 @@ public class slot extends script.gambling.base.default_interface
         entries.setSize(0);
         for (int i = 0; i < schedule.length; i++)
         {
-            entries = utils.addElement(entries, schedule[i] + " -> base:" + payout_base[i] + " max:" + payout_max[i]);
+            entries.add(schedule[i] + " -> base:" + payout_base[i] + " max:" + payout_max[i]);
         }
         if (entries == null || entries.size() == 0)
         {

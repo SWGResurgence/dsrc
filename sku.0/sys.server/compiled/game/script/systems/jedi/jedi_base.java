@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class jedi_base extends script.base_script
 {
-    public jedi_base()
-    {
-    }
     public static final int DAMAGE = 0;
     public static final int WOUNDS = 1;
     public static final int BATTLE_FATIGUE = NUM_ATTRIBUTES;
@@ -533,9 +530,9 @@ public class jedi_base extends script.base_script
             if (getCityAtLocation(testloc, 0) > 0) {
                 continue;
             }
-            mapLocations = utils.addElement(mapLocations, rawMapLocation);
+            mapLocations.add(rawMapLocations, rawMapLocation);
         }
-        if ((mapLocations == null) || (mapLocations.size() == 0))
+        if (mapLocations == null || mapLocations.size() == 0)
         {
             removeObjVar(self, "jedi.locTrainerLocation");
             return;
@@ -550,7 +547,7 @@ public class jedi_base extends script.base_script
             locNewLocation.z = ((map_location) mapLocation).getY();
             float fltDistance = getDistance(locTest, locNewLocation);
             if (fltDistance > 128) {
-                locNewLocations = utils.addElement(locNewLocations, locNewLocation);
+                locNewLocations.add(locNewLocation);
             }
         }
         if (locNewLocations.size() < 1)

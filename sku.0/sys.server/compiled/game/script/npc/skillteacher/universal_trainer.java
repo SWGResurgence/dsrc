@@ -4,13 +4,11 @@ import script.library.skill;
 import script.library.utils;
 import script.obj_id;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class universal_trainer extends script.base_script
 {
-    public universal_trainer()
-    {
-    }
     public static final String skill_table = "datatables/npc_customization/skill_table.iff";
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -18,8 +16,7 @@ public class universal_trainer extends script.base_script
         obj_id boots = createObject("object/tangible/wearables/boots/boots_s03.iff", self, "");
         obj_id shirt = createObject("object/tangible/wearables/shirt/shirt_s15.iff", self, "");
         String tbl_trainer_skills = "datatables/npc_customization/skill_table.iff";
-        Vector allSkills = new Vector();
-        allSkills.setSize(0);
+        List allSkills = new ArrayList<String>();
         int numCols = dataTableGetNumColumns(tbl_trainer_skills);
         if (numCols < 1)
         {

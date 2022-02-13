@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class xp extends script.base_script
 {
-    public xp()
-    {
-    }
     public static final float COMBAT_GENERAL_EXCHANGE_RATE = 0.10f;
     public static final float JEDI_GENERAL_EXCHANGE_RATE = 0.18f;
     public static final float SOCIAL_ENTERTAINER_EXCHANGE_RATE = 1.0f;
@@ -667,13 +664,13 @@ public class xp extends script.base_script
             {
                 if (utils.getElementPositionInArray(attackerList, attacker) == -1)
                 {
-                    attackerList = utils.addElement(attackerList, attacker);
+                    attackerList.add(attacker);
                     utils.setBatchScriptVar(target, VAR_ATTACKER_LIST + ".attackers", attackerList);
                 }
             }
             else 
             {
-                attackerList = utils.addElement(attackerList, attacker);
+                attackerList.add(attacker);
                 utils.setBatchScriptVar(target, VAR_ATTACKER_LIST + ".attackers", attackerList);
             }
             String basePath = VAR_ATTACKER_LIST + "." + attacker;
@@ -687,13 +684,13 @@ public class xp extends script.base_script
             {
                 if (utils.getElementPositionInArray(xpTypes, xp_type) == -1)
                 {
-                    xpTypes = utils.addElement(xpTypes, xp_type);
+                    xpTypes.add(xp_type);
                     utils.setBatchScriptVar(target, xpListPath, xpTypes);
                 }
             }
             else 
             {
-                xpTypes = utils.addElement(xpTypes, xp_type);
+                xpTypes.add(xp_type);
                 utils.setBatchScriptVar(target, xpListPath, xpTypes);
             }
             String xpTypePath = xpListBasePath + "." + xp_type;
@@ -717,7 +714,7 @@ public class xp extends script.base_script
         {
             return;
         }
-        attackerList = utils.removeElementAt(attackerList, idx);
+        attackerList.remove(idx);
         if (attackerList == null || attackerList.size() == 0)
         {
             return;
@@ -799,7 +796,7 @@ public class xp extends script.base_script
                 tmpId = utils.stringToObjId(key);
                 if (isIdValid(tmpId))
                 {
-                    primaryKillers = utils.addElement(primaryKillers, tmpId);
+                    primaryKillers.add(tmpId);
                     if (!group.isGroupObject(tmpId))
                     {
                         incrementKillMeter(tmpId, 1);
@@ -865,17 +862,17 @@ public class xp extends script.base_script
                 for (obj_id groupMember : groupMembers) {
                     if (isIdValid(groupMember) && exists(groupMember)) {
                         if (pet_lib.isPet(groupMember)) {
-                            utils.addElement(players, getMaster(groupMember));
+                            players.add(getMaster(groupMember));
                         } else {
-                            utils.addElement(players, groupMember);
+                            players.add(groupMember);
                         }
                     }
                 }
             } else {
                 if (pet_lib.isPet(aKillerList)) {
-                    utils.addElement(players, getMaster(aKillerList));
+                    players.add(getMaster(aKillerList));
                 } else {
-                    utils.addElement(players, aKillerList);
+                    players.add(aKillerList);
                 }
             }
         }
@@ -1097,7 +1094,7 @@ public class xp extends script.base_script
                     if ((beast_lib.isBeast(killer) || pet_lib.isPet(killer)) && !ai_lib.aiIsDead(killer) && isIdValid(master))
                     {
                         xpTotal = getRawCombatXP(master, target);
-                        ret = utils.addElement(ret, killerVar);
+                        ret.add(killerVar);
                         if (!utils.isObjIdInArray(allKillers, master) && utils.isObjIdInArray(allKillers, killer))
                         {
                             grantCombatStyleXp(master, COMBAT_GENERAL, xpTotal);
@@ -1119,7 +1116,7 @@ public class xp extends script.base_script
                         {
                             factions.adjustSocialStanding(killer, faction, -levelAmount);
                         }
-                        ret = utils.addElement(ret, killerVar);
+                        ret.add(killerVar);
                     }
                 }
                 utils.removeScriptVar(killer, "combat.xp.groupBonus");
@@ -1542,9 +1539,9 @@ public class xp extends script.base_script
                 return null;
             }
             for (String type : colXpType) {
-                if (type != null && !type.equals("") && !type.equals("unobtainable") && !type.equals("jedi")) {
+                if (type != null && !type.isEmpty() && !type.equals("unobtainable") && !type.equals("jedi")) {
                     if (utils.getElementPositionInArray(xpTypes, type) == -1) {
-                        xpTypes = utils.addElement(xpTypes, type);
+                        xpTypes.add(type);
                     }
                 }
             }
@@ -1609,7 +1606,7 @@ public class xp extends script.base_script
         obj_id alphaObjId = utils.stringToObjId(alpha.getName());
         if (killers.length == 1)
         {
-            tempArray = utils.addElement(tempArray, alphaObjId);
+            tempArray.add(alphaObjId);
         }
         else 
         {
@@ -1619,7 +1616,7 @@ public class xp extends script.base_script
             int omegaValue = omega.getIntData();
             if (alphaValue > omegaValue)
             {
-                tempArray = utils.addElement(tempArray, alphaObjId);
+                tempArray.add(alphaObjId)
                 obj_var next;
                 for (int a = 1; a < killers.length; a++)
                 {
@@ -1627,7 +1624,7 @@ public class xp extends script.base_script
                     int nextValue = next.getIntData();
                     if (nextValue == alphaValue)
                     {
-                        tempArray = utils.addElement(tempArray, utils.stringToObjId(next.getName()));
+                        tempArray.add(utils.stringToObjId(next.getName()));
                     }
                     else 
                     {
@@ -1637,7 +1634,7 @@ public class xp extends script.base_script
             }
             else if (alphaValue < omegaValue)
             {
-                tempArray = utils.addElement(tempArray, omegaObjId);
+                tempArray.add(omegaObjId);
                 obj_var next;
                 for (int om = (killers.length - 2); om >= 0; om--)
                 {
@@ -1645,7 +1642,7 @@ public class xp extends script.base_script
                     int nextValue = next.getIntData();
                     if (nextValue == omegaValue)
                     {
-                        tempArray = utils.addElement(tempArray, utils.stringToObjId(next.getName()));
+                        tempArray.add(utils.stringToObjId(next.getName()));
                     }
                     else 
                     {

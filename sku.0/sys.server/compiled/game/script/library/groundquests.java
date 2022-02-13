@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class groundquests extends script.base_script
 {
-    public groundquests()
-    {
-    }
     public static final String DISABLED_QUEST_TABLE = "datatables/quest/ground/disabled.iff";
     public static final String DISABLED_QUEST_COLUMN = "disabled_quests";
     public static final String questBaseObjVar = "quest";
@@ -702,7 +699,7 @@ public class groundquests extends script.base_script
                                 obj_var ov2 = taskList.getObjVar(j);
                                 String taskName = ov2.getName();
                                 int taskId = utils.stringToInt(taskName);
-                                utils.addElement(tasks, taskId);
+                                tasks.add(taskId);
                             }
                             dict.put(Integer.toString(questCrc), tasks);
                         }
@@ -1108,7 +1105,7 @@ public class groundquests extends script.base_script
                     obj_id lootItem = static_item.createNewItemFunction(grantGcwRebReward, playerInv);
                     if (i == 0)
                     {
-                        utils.addElement(lootItemsResizeable, lootItem);
+                        lootItemsResizeable.add(lootItem);
                         if (grantGcwRebRewardCount == 1)
                         {
                             sendPlacedInInventorySystemMessage(player, lootItem);
@@ -1146,7 +1143,7 @@ public class groundquests extends script.base_script
                     obj_id lootItem = static_item.createNewItemFunction(grantGcwImpReward, playerInv);
                     if (i == 0)
                     {
-                        utils.addElement(lootItemsResizeable, lootItem);
+                        lootItemsResizeable.add(lootItem);
                         if (grantGcwImpRewardCount == 1)
                         {
                             sendPlacedInInventorySystemMessage(player, lootItem);
@@ -1209,7 +1206,7 @@ public class groundquests extends script.base_script
                         obj_id lootItem = static_item.createNewItemFunction(inclusiveLootNames[j], player);
                         if (i == 0)
                         {
-                            utils.addElement(lootItemsResizeable, lootItem);
+                            lootItemsResizeable.add(lootItem);
                         }
                         CustomerServiceLog("QUEST_REWARD", player + " received reward " + inclusiveLootNames[j] + " (" + lootItem + ")");
                         if (giveInclusiveItemInventoryMessage)
@@ -1239,7 +1236,7 @@ public class groundquests extends script.base_script
                     obj_id lootItem = static_item.createNewItemFunction(exclusiveLootChoiceName, player);
                     if (i == 0)
                     {
-                        utils.addElement(lootItemsResizeable, lootItem);
+                        lootItemsResizeable.add(lootItem);
                     }
                     CustomerServiceLog("QUEST_REWARD", player + " received reward " + exclusiveLootChoiceName + " (" + lootItem + ")");
                     if (giveExclusiveItemInventoryMessage)
@@ -1724,7 +1721,7 @@ public class groundquests extends script.base_script
                 if (isIdValid(groupMember) && groupMember.isLoaded() && isPlayer(groupMember)) {
                     location groupieLoc = getWorldLocation(groupMember);
                     if (getDistance(controllerLoc, groupieLoc) <= range) {
-                        utils.addElement(groupMembersInRange, groupMember);
+                        groupMembersInRange.add(groupMember);
                     }
                 }
             }

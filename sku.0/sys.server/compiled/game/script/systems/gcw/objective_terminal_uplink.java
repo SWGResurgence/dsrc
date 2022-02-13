@@ -4,12 +4,10 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
+import java.util.List;
 
 public class objective_terminal_uplink extends script.faction_perk.hq.objective_object
 {
-    public objective_terminal_uplink()
-    {
-    }
     public static final string_id MNU_JAM = new string_id("hq", "mnu_jam");
     public static final String VAR_FREQ = "hq.objective.freq";
     public static final int STAGE_NONE = 0;
@@ -118,11 +116,11 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
             utils.removeScriptVar(self, scriptvar_pid);
         }
         int stage = utils.getIntScriptVar(self, scriptvar_stage);
-        Vector opt = utils.getResizeableIntArrayScriptVar(self, scriptvar_opt);
+        List opt = utils.getResizeableIntArrayScriptVar(self, scriptvar_opt);
         if (stage == STAGE_NONE || opt == null || opt.size() == 0)
         {
             stage = STAGE_BAND;
-            opt = opt = utils.concatArrays(null, getFreshArray());
+            opt = utils.concatArrays(null, getFreshArray());
         }
         else 
         {
@@ -154,7 +152,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
                     break;
             }
             entry += Integer.toString((Integer) o + 1);
-            entries = utils.addElement(entries, entry);
+            entries.add(entry);
         }
         int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, entries, "handleJammingGame");
         if (pid > -1)
@@ -191,7 +189,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
         String scriptvar_stage = scriptvar + ".stage";
         utils.removeScriptVar(self, scriptvar_pid);
         int stage = utils.getIntScriptVar(self, scriptvar_stage);
-        Vector opt = utils.getResizeableIntArrayScriptVar(self, scriptvar_opt);
+        List opt = utils.getResizeableIntArrayScriptVar(self, scriptvar_opt);
         if (stage == STAGE_NONE || opt == null || opt.size() == 0)
         {
             return SCRIPT_CONTINUE;
@@ -275,7 +273,7 @@ public class objective_terminal_uplink extends script.faction_perk.hq.objective_
                 float multiplier = (100 - speedmod) / 100.0f;
                 delay *= multiplier;
             }
-            utils.removeElementAt(opt, idx);
+            opt.remove(idx);
         }
         utils.setScriptVar(self, scriptvar_opt, opt);
         utils.setScriptVar(self, scriptvar_stage, stage);

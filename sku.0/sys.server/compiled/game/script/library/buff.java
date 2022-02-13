@@ -5,7 +5,8 @@ import script.combat_engine.buff_data;
 import script.deltadictionary;
 import script.obj_id;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class buff extends script.base_script
 {
@@ -327,7 +328,7 @@ public class buff extends script.base_script
     {
         return removeBuff(target, getStringCrc(name.toLowerCase()));
     }
-    public static boolean removeBuffs(obj_id target, Vector names) throws InterruptedException
+    public static boolean removeBuffs(obj_id target, List names) throws InterruptedException
     {
         boolean success = true;
         for (Object name : names) {
@@ -450,8 +451,7 @@ public class buff extends script.base_script
         {
             return null;
         }
-        Vector matchedBuffs = new Vector();
-        matchedBuffs.setSize(0);
+        List matchedBuffs = new ArrayList<Integer>();
         buff_data bdata;
         String tempEffect;
         for (int b : buffs) {
@@ -461,7 +461,7 @@ public class buff extends script.base_script
             boolean matched = false;
             while (!matched && j < 6 && tempEffect != null && tempEffect.length() > 0) {
                 if (tempEffect.equals(effect)) {
-                    utils.addElement(matchedBuffs, b);
+                    matchedBuffs.add(b);
                     matched = true;
                 }
                 j++;
@@ -721,21 +721,19 @@ public class buff extends script.base_script
         {
             return null;
         }
-        Vector allGroupBuffs = new Vector();
-        allGroupBuffs.setSize(0);
+        List allGroupBuffs = new ArrayList<Integer>();
         String tempGroupName;
         for (int b : buffs) {
             tempGroupName = getStringGroupTwo(b);
             if (tempGroupName.startsWith(groupName)) {
-                utils.addElement(allGroupBuffs, b);
+                allGroupBuffs.add(b);
             }
         }
         int[] _allGroupBuffs = new int[0];
         _allGroupBuffs = new int[allGroupBuffs.size()];
-        for (int _i = 0; _i < allGroupBuffs.size(); ++_i)
-		{
-			_allGroupBuffs[_i] = (Integer) allGroupBuffs.get(_i);
-		}
+        for (int _i = 0; _i < allGroupBuffs.size(); ++_i) {
+            _allGroupBuffs[_i] = (Integer) allGroupBuffs.get(_i);
+        }
         return _allGroupBuffs;
     }
     public static int getPriority(String name) throws InterruptedException
@@ -1107,13 +1105,12 @@ public class buff extends script.base_script
         {
             return null;
         }
-        Vector buffList = new Vector();
-        buffList.setSize(0);
+        List buffList = new ArrayList<Integer>();
         obj_id owner;
         for (int aBuffCrcList : buffCrcList) {
             owner = utils.getObjIdScriptVar(target, "groupBuff." + aBuffCrcList);
             if (isIdValid(owner) && owner == target && isGroupBuff(aBuffCrcList)) {
-                buffList = utils.addElement(buffList, aBuffCrcList);
+                buffList.add(aBuffCrcList);
             }
         }
         int[] _buffList = new int[0];
@@ -1138,14 +1135,13 @@ public class buff extends script.base_script
         {
             return null;
         }
-        Vector buffList = new Vector();
-        buffList.setSize(0);
+        List buffList = new ArrayList<Integer>();
         obj_id owner;
 
         for (int aBuffCrcList : buffCrcList) {
             owner = utils.getObjIdScriptVar(target, "groupBuff." + aBuffCrcList);
             if (isIdValid(owner) && owner != target && isGroupBuff(aBuffCrcList)) {
-                buffList = utils.addElement(buffList, aBuffCrcList);
+                buffList.add(aBuffCrcList);
             }
         }
         int[] _buffList = new int[0];
@@ -1346,8 +1342,7 @@ public class buff extends script.base_script
     public static int[] getAllDotBuffsOfType(obj_id target, String type) throws InterruptedException
     {
         int[] allDotBuffs = getAllBuffsByEffect(target, "dot");
-        Vector allDotBuffsOfType = new Vector();
-        allDotBuffsOfType.setSize(0);
+        List allDotBuffsOfType = new ArrayList<Integer>();
         if (allDotBuffs == null || allDotBuffs.length <= 0)
         {
             return null;
@@ -1356,15 +1351,14 @@ public class buff extends script.base_script
         for (int allDotBuff : allDotBuffs) {
             param1 = getEffectParam(allDotBuff, 1);
             if (param1.equals(type)) {
-                utils.addElement(allDotBuffsOfType, allDotBuff);
+                allDotBuffsOfType.add(allDotBuff);
             }
         }
         int[] _allDotBuffsOfType = new int[0];
         _allDotBuffsOfType = new int[allDotBuffsOfType.size()];
-        for (int _i = 0; _i < allDotBuffsOfType.size(); ++_i)
-		{
-			_allDotBuffsOfType[_i] = (Integer) allDotBuffsOfType.get(_i);
-		}
+        for (int _i = 0; _i < allDotBuffsOfType.size(); ++_i) {
+            _allDotBuffsOfType[_i] = (Integer) allDotBuffsOfType.get(_i);
+        }
         return _allDotBuffsOfType;
     }
     public static boolean performBuffDotImmunity(obj_id target, String dotType) throws InterruptedException
@@ -1475,8 +1469,7 @@ public class buff extends script.base_script
     }
     public static void partyBuff(obj_id caster, String buffName) throws InterruptedException
     {
-        Vector toBuff = new Vector();
-        toBuff.setSize(0);
+        List toBuff = new ArrayList<obj_id>();
         obj_id myBeast = beast_lib.getBeastOnPlayer(caster);
         obj_id groupId = getGroupObject(caster);
         if (isIdValid(myBeast) && exists(myBeast))

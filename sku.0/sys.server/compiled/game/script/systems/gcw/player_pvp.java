@@ -6,6 +6,9 @@ import script.library.*;
 import java.util.Objects;
 import java.util.Vector;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class player_pvp extends script.base_script
 {
     public static final String VAR_PVP_LAST_UPDATE = "pvp_tracker.lastupdate";
@@ -653,7 +656,7 @@ public class player_pvp extends script.base_script
         {
             return;
         }
-        Vector battlefieldPlayers = pvp.bfActiveGetStatistics(controller);
+        List battlefieldPlayers = pvp.bfActiveGetStatistics(controller);
         if (battlefieldPlayers == null || battlefieldPlayers.size() < 1)
         {
             return;
@@ -738,7 +741,7 @@ public class player_pvp extends script.base_script
         {
             return;
         }
-        Vector battlefieldPlayers = pvp.bfActiveGetStatistics(controller);
+        List battlefieldPlayers = pvp.bfActiveGetStatistics(controller);
         if (battlefieldPlayers == null || battlefieldPlayers.size() < 1)
         {
             return;
@@ -1276,8 +1279,7 @@ public class player_pvp extends script.base_script
         for (int i1 : damage) {
             combinedDamage += i1;
         }
-        Vector attackList = new Vector();
-        attackList.setSize(0);
+        List attackList = new ArrayList<String>();
         if (utils.hasResizeableStringBatchScriptVar(self, gcw.LIST_CREDIT_FOR_KILLS))
         {
             attackList = utils.getResizeableStringBatchScriptVar(self, gcw.LIST_CREDIT_FOR_KILLS);
@@ -1290,7 +1292,7 @@ public class player_pvp extends script.base_script
         {
             damageUpdate = gcw.packAttackerDamage(attacker, combinedDamage);
             doLogging("OnCreatureDamaged", "New entry string: " + damageUpdate);
-            utils.addElement(attackList, damageUpdate);
+            attackList.add(damageUpdate);
         }
         else 
         {

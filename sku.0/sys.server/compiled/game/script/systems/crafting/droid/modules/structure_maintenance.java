@@ -4,12 +4,10 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
+import java.util.List;
 
 public class structure_maintenance extends script.base_script
 {
-    public structure_maintenance()
-    {
-    }
     public static final String STF_FILE = "pet/droid_modules";
     public static final string_id SID_ROOT_MAINT = new string_id(STF_FILE, "struct_maint_root");
     public static final string_id SID_STRUCT_MAINT = new string_id(STF_FILE, "struct_maint_perform");
@@ -340,9 +338,9 @@ public class structure_maintenance extends script.base_script
                     name += structLoc.area;
                     name += " (" + (int)structLoc.x;
                     name += "," + (int)structLoc.z + ")";
-                    nameList = utils.addElement(nameList, name);
-                    idList = utils.addElement(idList, struct_list[i]);
-                    locList = utils.addElement(locList, loc_list[i]);
+                    nameList.add(name);
+                    idList.add(struct_list[i]);
+                    locList.add(loc_list[i]);
                 }
             }
         }
@@ -386,10 +384,10 @@ public class structure_maintenance extends script.base_script
     public String getCurrentMaintList() throws InterruptedException
     {
         obj_id self = getSelf();
-        Vector maintListNames = utils.getResizeableStringArrayScriptVar(self, "maintList.name");
-        Vector maintListIds = utils.getResizeableObjIdArrayScriptVar(self, "maintList.id");
-        Vector maintListLocs = utils.getResizeableLocationArrayScriptVar(self, "maintList.loc");
-        Vector maintListAmounts = utils.getResizeableIntArrayScriptVar(self, "maintList.amount");
+        List maintListNames = utils.getResizeableStringArrayScriptVar(self, "maintList.name");
+        List maintListIds = utils.getResizeableObjIdArrayScriptVar(self, "maintList.id");
+        List maintListLocs = utils.getResizeableLocationArrayScriptVar(self, "maintList.loc");
+        List maintListAmounts = utils.getResizeableIntArrayScriptVar(self, "maintList.amount");
         String maintList = "";
         if (maintListNames != null && maintListNames.size() > 0)
         {
@@ -413,7 +411,7 @@ public class structure_maintenance extends script.base_script
     public int currentMaintListCount() throws InterruptedException
     {
         obj_id self = getSelf();
-        Vector maintListNames = utils.getResizeableStringArrayScriptVar(self, "maintList.name");
+        List maintListNames = utils.getResizeableStringArrayScriptVar(self, "maintList.name");
         if (maintListNames == null)
         {
             return 0;
@@ -423,7 +421,7 @@ public class structure_maintenance extends script.base_script
     public boolean isInMaintList(obj_id structure) throws InterruptedException
     {
         obj_id self = getSelf();
-        Vector maintListIds = utils.getResizeableObjIdArrayScriptVar(self, "maintList.id");
+        List maintListIds = utils.getResizeableObjIdArrayScriptVar(self, "maintList.id");
         if (maintListIds == null || maintListIds.size() == 0)
         {
             return false;
@@ -437,7 +435,7 @@ public class structure_maintenance extends script.base_script
     }
     public int handleMaintenanceListDialog(obj_id self, dictionary params) throws InterruptedException
     {
-        if ((params == null) || (params.isEmpty()))
+        if (params == null || params.isEmpty())
         {
             return SCRIPT_CONTINUE;
         }
@@ -466,19 +464,19 @@ public class structure_maintenance extends script.base_script
             displayMaintenanceList();
             return;
         }
-        Vector idList = utils.getResizeableObjIdArrayScriptVar(self, "idList");
-        Vector nameList = utils.getResizeableStringArrayScriptVar(self, "nameList");
-        Vector locList = utils.getResizeableLocationArrayScriptVar(self, "locList");
+        List idList = utils.getResizeableObjIdArrayScriptVar(self, "idList");
+        List nameList = utils.getResizeableStringArrayScriptVar(self, "nameList");
+        List locList = utils.getResizeableLocationArrayScriptVar(self, "locList");
         if (idx >= idList.size())
         {
             sendSystemMessage(player, SID_DATA_ERROR);
             displayMaintenanceList();
             return;
         }
-        Vector maintListNames = utils.getResizeableStringArrayScriptVar(self, "maintList.name");
-        Vector maintListIds = utils.getResizeableObjIdArrayScriptVar(self, "maintList.id");
-        Vector maintListLocs = utils.getResizeableLocationArrayScriptVar(self, "maintList.loc");
-        Vector maintListAmounts = utils.getResizeableIntArrayScriptVar(self, "maintList.amount");
+        List maintListNames = utils.getResizeableStringArrayScriptVar(self, "maintList.name");
+        List maintListIds = utils.getResizeableObjIdArrayScriptVar(self, "maintList.id");
+        List maintListLocs = utils.getResizeableLocationArrayScriptVar(self, "maintList.loc");
+        List maintListAmounts = utils.getResizeableIntArrayScriptVar(self, "maintList.amount");
         if (maintListNames == null)
         {
             maintListNames = new Vector();
@@ -486,10 +484,10 @@ public class structure_maintenance extends script.base_script
             maintListLocs = new Vector();
             maintListAmounts = new Vector();
         }
-        maintListNames = utils.addElement(maintListNames, ((String)nameList.get(idx)));
-        maintListIds = utils.addElement(maintListIds, ((obj_id)idList.get(idx)));
-        maintListLocs = utils.addElement(maintListLocs, ((location)locList.get(idx)));
-        maintListAmounts = utils.addElement(maintListAmounts, -1);
+        maintListNames.add(((String)nameList.get(idx)));
+        maintListIds.add(((obj_id)idList.get(idx)));
+        maintListLocs.add(((location)locList.get(idx)));
+        maintListAmounts.add(-1);
         utils.setScriptVar(self, "maintList.name", maintListNames);
         utils.setScriptVar(self, "maintList.id", maintListIds);
         utils.setScriptVar(self, "maintList.loc", maintListLocs);
@@ -561,7 +559,7 @@ public class structure_maintenance extends script.base_script
                 sendSystemMessage(player, SID_INVALID_AMOUNT);
                 return SCRIPT_CONTINUE;
             }
-            Vector maintListAmounts = utils.getResizeableIntArrayScriptVar(self, "maintList.amount");
+            List maintListAmounts = utils.getResizeableIntArrayScriptVar(self, "maintList.amount");
             maintListAmounts.set(maintListAmounts.size() - 1, amount);
             utils.setScriptVar(self, "maintList.amount", maintListAmounts);
             if (!validateMaintenanceCost(player, amount))
@@ -679,18 +677,18 @@ public class structure_maintenance extends script.base_script
     public void removeLastStruct() throws InterruptedException
     {
         obj_id self = getSelf();
-        Vector maintListNames = utils.getResizeableStringArrayScriptVar(self, "maintList.name");
-        Vector maintListIds = utils.getResizeableObjIdArrayScriptVar(self, "maintList.id");
-        Vector maintListLocs = utils.getResizeableLocationArrayScriptVar(self, "maintList.loc");
-        Vector maintListAmounts = utils.getResizeableIntArrayScriptVar(self, "maintList.amount");
+        List maintListNames = utils.getResizeableStringArrayScriptVar(self, "maintList.name");
+        List maintListIds = utils.getResizeableObjIdArrayScriptVar(self, "maintList.id");
+        List maintListLocs = utils.getResizeableLocationArrayScriptVar(self, "maintList.loc");
+        List maintListAmounts = utils.getResizeableIntArrayScriptVar(self, "maintList.amount");
         if (maintListNames == null || maintListNames.size() == 0)
         {
             return;
         }
-        maintListNames = utils.removeElementAt(maintListNames, maintListNames.size() - 1);
-        maintListIds = utils.removeElementAt(maintListIds, maintListIds.size() - 1);
-        maintListLocs = utils.removeElementAt(maintListLocs, maintListLocs.size() - 1);
-        maintListAmounts = utils.removeElementAt(maintListAmounts, maintListAmounts.size() - 1);
+        maintListNames.remove(maintListNames.size() - 1);
+        maintListIds.remove(maintListIds.size() - 1);
+        maintListLocs.remove(maintListLocs.size() - 1);
+        maintListAmounts.remove(maintListAmounts.size() - 1);
         if (maintListNames.size() == 0)
         {
             utils.removeScriptVar(self, "maintList.name");
@@ -708,9 +706,9 @@ public class structure_maintenance extends script.base_script
     }
     public void startMaintenanceRun(obj_id self, obj_id player) throws InterruptedException
     {
-        Vector maintListIds = utils.getResizeableObjIdArrayScriptVar(self, "maintList.id");
-        Vector maintListLocs = utils.getResizeableLocationArrayScriptVar(self, "maintList.loc");
-        Vector maintListAmounts = utils.getResizeableIntArrayScriptVar(self, "maintList.amount");
+        List maintListIds = utils.getResizeableObjIdArrayScriptVar(self, "maintList.id");
+        List maintListLocs = utils.getResizeableLocationArrayScriptVar(self, "maintList.loc");
+        List maintListAmounts = utils.getResizeableIntArrayScriptVar(self, "maintList.amount");
         if (maintListIds == null || maintListIds.size() == 0)
         {
             sendSystemMessage(player, SID_EMPTY_MAINT_RUN);
@@ -793,7 +791,7 @@ public class structure_maintenance extends script.base_script
             name += structLoc.area;
             name += " (" + (int)structLoc.x;
             name += "," + (int)structLoc.z + ")";
-            nameList = utils.addElement(nameList, name);
+            nameList.add(name);
         }
         String title = utils.packStringId(SID_DROID_EDIT_MAINT_LIST_TITLE);
         String prompt = utils.packStringId(SID_DROID_EDIT_MAINT_LIST_PROMPT);

@@ -8,12 +8,10 @@ import script.location;
 import script.obj_id;
 
 import java.util.Vector;
+import java.util.List;
 
 public class meatlump_act1_spawner extends script.base_script
 {
-    public meatlump_act1_spawner()
-    {
-    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "tempStartUpMarker"))
@@ -34,7 +32,7 @@ public class meatlump_act1_spawner extends script.base_script
         {
             if (utils.hasScriptVar(self, "myCreations"))
             {
-                Vector theList = utils.getResizeableObjIdArrayScriptVar(self, "myCreations");
+                List theList = utils.getResizeableObjIdArrayScriptVar(self, "myCreations");
                 for (Object o : theList) {
                     destroyObject(((obj_id) o));
                 }
@@ -58,7 +56,7 @@ public class meatlump_act1_spawner extends script.base_script
     {
         if (utils.hasScriptVar(self, "myCreations"))
         {
-            Vector theList = utils.getResizeableObjIdArrayScriptVar(self, "myCreations");
+            List theList = utils.getResizeableObjIdArrayScriptVar(self, "myCreations");
             if (theList == null || theList.size() < 1)
             {
                 utils.removeScriptVar(self, "myCreations");
@@ -79,7 +77,7 @@ public class meatlump_act1_spawner extends script.base_script
         setYaw(meatlump1, meatlumpYaw1);
         setObjVar(meatlump1, "objParent", self);
         attachScript(meatlump1, "theme_park.corellia.content.meatlump_act1_spawned_tracker");
-        utils.addElement(myCreations, meatlump1);
+        myCreations.add(meatlump1);
         location meatlumpLoc2 = new location(spawnerLoc.x, spawnerLoc.y, spawnerLoc.z + 2, "corellia", obj_id.NULL_ID);
         obj_id meatlump2 = create.object(meatlump, meatlumpLoc2);
         ai_lib.setDefaultCalmBehavior(meatlump2, ai_lib.BEHAVIOR_SENTINEL);
@@ -87,7 +85,7 @@ public class meatlump_act1_spawner extends script.base_script
         setYaw(meatlump2, meatlumpYaw2);
         setObjVar(meatlump2, "objParent", self);
         attachScript(meatlump2, "theme_park.corellia.content.meatlump_act1_spawned_tracker");
-        utils.addElement(myCreations, meatlump2);
+        myCreations.add(meatlump2);
         location meatlumpLoc3 = new location(spawnerLoc.x + 2, spawnerLoc.y, spawnerLoc.z, "corellia", obj_id.NULL_ID);
         obj_id meatlump3 = create.object(meatlump, meatlumpLoc3);
         ai_lib.setDefaultCalmBehavior(meatlump3, ai_lib.BEHAVIOR_SENTINEL);
@@ -95,7 +93,7 @@ public class meatlump_act1_spawner extends script.base_script
         setYaw(meatlump3, meatlumpYaw3);
         setObjVar(meatlump3, "objParent", self);
         attachScript(meatlump3, "theme_park.corellia.content.meatlump_act1_spawned_tracker");
-        utils.addElement(myCreations, meatlump3);
+        myCreations.add(meatlump3);
         if (myCreations != null && myCreations.size() > 0)
         {
             utils.setScriptVar(self, "myCreations", myCreations);
@@ -118,7 +116,7 @@ public class meatlump_act1_spawner extends script.base_script
         setYaw(merkie, merkieYaw);
         setObjVar(merkie, "objParent", self);
         attachScript(merkie, "theme_park.corellia.content.meatlump_act1_spawned_tracker");
-        utils.addElement(myCreations, merkie);
+        myCreations.add(merkie);
         if (myCreations != null && myCreations.size() > 0)
         {
             utils.setScriptVar(self, "myCreations", myCreations);
@@ -135,7 +133,7 @@ public class meatlump_act1_spawner extends script.base_script
         String deadType = params.getString("deadType");
         if (isIdValid(deadNpc))
         {
-            Vector meatlumpList = utils.getResizeableObjIdArrayScriptVar(self, "myCreations");
+            List meatlumpList = utils.getResizeableObjIdArrayScriptVar(self, "myCreations");
             if (meatlumpList != null && meatlumpList.size() > 0)
             {
                 if (meatlumpList.contains(deadNpc))

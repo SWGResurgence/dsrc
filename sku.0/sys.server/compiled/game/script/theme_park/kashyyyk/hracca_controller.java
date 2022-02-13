@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class hracca_controller extends script.base_script
 {
-    public hracca_controller()
-    {
-    }
     public static final int CHISS_FOG_ON = 0;
     public static final int CHISS_FOG_OFF = 1;
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
@@ -22,7 +19,7 @@ public class hracca_controller extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String questName = getStringObjVar(self, space_dungeon.VAR_QUEST_TYPE);
-        if (questName == null || questName.equals("") || questName.equals("none"))
+        if (questName == null || questName.isEmpty() || questName.equals("none"))
         {
             return SCRIPT_CONTINUE;
         }
@@ -47,7 +44,7 @@ public class hracca_controller extends script.base_script
             {
                 Vector chissPoachers = new Vector();
                 chissPoachers.setSize(0);
-                utils.addElement(chissPoachers, chissPoacher);
+                chissPoachers.add(chissPoacher);
                 if (chissPoachers != null && chissPoachers.size() > 0)
                 {
                     setObjVar(self, "chissPoacherList", chissPoachers);

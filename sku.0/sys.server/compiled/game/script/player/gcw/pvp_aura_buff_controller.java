@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class pvp_aura_buff_controller extends script.base_script
 {
-    public pvp_aura_buff_controller()
-    {
-    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (factions.isRebel(self))
@@ -71,7 +68,7 @@ public class pvp_aura_buff_controller extends script.base_script
                     case 0:
                         if (factions.isRebel(player)) {
                             if (!stealth.hasInvisibleBuff(player)) {
-                                utils.addElement(filteredPlayers, player);
+                                filteredPlayers.add(players);
                             }
                             break;
                         }
@@ -79,7 +76,7 @@ public class pvp_aura_buff_controller extends script.base_script
                     case 1:
                         if (factions.isImperial(player)) {
                             if (!stealth.hasInvisibleBuff(player)) {
-                                utils.addElement(filteredPlayers, player);
+                                filteredPlayers.add(players);
                             }
                         }
                         break;

@@ -190,7 +190,7 @@ public class collection extends script.base_script
                 {
                     return false;
                 }
-                utils.addElement(allNewObjectsResizable, itemId);
+                allNewObjectsResizable.add(itemId);
                 if (itemIncrement > 1 && hasScript(itemId, AUTO_STACK_SCRIPT))
                 {
                     setCount(itemId, itemIncrement);
@@ -203,7 +203,7 @@ public class collection extends script.base_script
                 {
                     return false;
                 }
-                utils.addElement(allNewObjectsResizable, itemId);
+                allNewObjectsResizable.add(itemId);
                 if (itemIncrement > 1 && hasScript(itemId, AUTO_STACK_SCRIPT))
                 {
                     setCount(itemId, itemIncrement);
@@ -217,13 +217,13 @@ public class collection extends script.base_script
                         if (!isValidId(itemId)) {
                             return false;
                         }
-                        utils.addElement(allNewObjectsResizable, itemId);
+                        allNewObjectsResizable.add(itemId);
                     } else {
                         itemId = createTemplateItemWithMessage(player, item1, collectionName, pp);
                         if (!isValidId(itemId)) {
                             return false;
                         }
-                        utils.addElement(allNewObjectsResizable, itemId);
+                        allNewObjectsResizable.add(itemId);
                     }
                     if (itemIncrement > 1 && hasScript(itemId, AUTO_STACK_SCRIPT)) {
                         setCount(itemId, itemIncrement);

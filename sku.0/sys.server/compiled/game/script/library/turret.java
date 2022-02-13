@@ -4,13 +4,11 @@ import script.location;
 import script.obj_id;
 import script.region;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class turret extends script.base_script
 {
-    public turret()
-    {
-    }
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public static final float ALERT_VOLUME_SIZE = 120.0f;
     public static final float FACTION_TURRET_RANGE = 96.0f;
@@ -221,17 +219,18 @@ public class turret extends script.base_script
         }
         if (!utils.hasScriptVar(turret, SCRIPTVAR_TARGETS))
         {
-            Vector targets = utils.addElement(null, target);
+            List targets = new ArrayList<obj_id>();
+            targets.add(target);
             utils.setBatchScriptVar(turret, SCRIPTVAR_TARGETS, targets);
         }
         else 
         {
-            Vector targets = utils.getResizeableObjIdBatchScriptVar(turret, SCRIPTVAR_TARGETS);
+            List targets = utils.getResizeableObjIdBatchScriptVar(turret, SCRIPTVAR_TARGETS);
             if (targets != null && targets.size() > 0)
             {
                 if (!utils.isElementInArray(targets, target))
                 {
-                    targets = utils.addElement(targets, target);
+                    targets.add(target);
                     utils.setBatchScriptVar(turret, SCRIPTVAR_TARGETS, targets);
                 }
             }
@@ -244,14 +243,14 @@ public class turret extends script.base_script
     }
     public static void addTargets(obj_id turret, obj_id[] target) throws InterruptedException
     {
-        if (!isIdValid(turret) || (target == null) || (target.length == 0))
+        if (!isIdValid(turret) || target == null || target.length == 0)
         {
             return;
         }
-        Vector targets = utils.getResizeableObjIdBatchScriptVar(turret, SCRIPTVAR_TARGETS);
+        List targets = utils.getResizeableObjIdBatchScriptVar(turret, SCRIPTVAR_TARGETS);
         for (obj_id aTarget : target) {
             if (isValidTarget(turret, aTarget) && !utils.isElementInArray(targets, target)) {
-                targets = utils.addElement(targets, aTarget);
+                targets.add(aTarget);
             }
         }
         if ((targets != null) && (targets.size() > 0))
@@ -274,8 +273,8 @@ public class turret extends script.base_script
         {
             return;
         }
-        Vector targets = utils.getResizeableObjIdBatchScriptVar(turret, SCRIPTVAR_TARGETS);
-        if ((targets == null) || (targets.size() == 0))
+        List targets = utils.getResizeableObjIdBatchScriptVar(turret, SCRIPTVAR_TARGETS);
+        if (targets == null || targets.size() == 0)
         {
             return;
         }
@@ -290,8 +289,8 @@ public class turret extends script.base_script
                     disengage(turret);
                 }
             }
-            targets = utils.removeElementAt(targets, idx);
-            if ((targets == null) || (targets.size() == 0))
+            targets.remove(idx);
+            if (targets == null || targets.size() == 0)
             {
                 utils.removeBatchScriptVar(turret, SCRIPTVAR_TARGETS);
                 return;

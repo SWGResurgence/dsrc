@@ -7,12 +7,10 @@ import script.library.groundquests;
 import script.library.utils;
 
 import java.util.Vector;
+import java.util.List;
 
 public class npe_spy_terminal extends script.base_script
 {
-    public npe_spy_terminal()
-    {
-    }
     public static final string_id SID_MNU_HAX = new string_id("npe", "hax");
     public static final string_id SID_MNU_PART = new string_id("npe", "part");
     public static final string_id SID_MNU_SPLICE = new string_id("npe", "splice");
@@ -103,12 +101,11 @@ public class npe_spy_terminal extends script.base_script
         create.object(toSpawn, me);
         me.y = me.y + 1;
         create.object(toSpawn, me);
-        return;
     }
     public void doWarning(obj_id self) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
-        Vector alarms = utils.getResizeableObjIdArrayScriptVar(building, "objAlarms");
+        List alarms = utils.getResizeableObjIdArrayScriptVar(building, "objAlarms");
         for (Object alarm : alarms) {
             if (isIdValid(((obj_id) alarm))) {
                 setCondition(((obj_id) alarm), CONDITION_ON);
@@ -119,7 +116,7 @@ public class npe_spy_terminal extends script.base_script
     public int turnAlarmsOff(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);
-        Vector alarms = utils.getResizeableObjIdArrayScriptVar(building, "objAlarms");
+        List alarms = utils.getResizeableObjIdArrayScriptVar(building, "objAlarms");
         for (Object alarm : alarms) {
             if (isIdValid(((obj_id) alarm))) {
                 clearCondition(((obj_id) alarm), CONDITION_ON);

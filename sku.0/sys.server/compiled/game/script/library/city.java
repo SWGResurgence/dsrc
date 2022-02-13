@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class city extends script.base_script
 {
-    public city()
-    {
-    }
     public static final int CITY_VERSION = 4;
     public static final String RANK_TABLE = "datatables/city/city_rank.iff";
     public static final String RANK_RADIUS = "RADIUS";
@@ -1874,7 +1871,7 @@ public class city extends script.base_script
             if (!hasMayorProtectionFlag(citizen, city_id)) {
                 continue;
             } else {
-                utils.addElement(safeHouseCitizens, citizen);
+                safeHouseCitizens.add(citizens);
             }
         }
         obj_id[] returnArray = utils.toStaticObjIdArray(safeHouseCitizens);

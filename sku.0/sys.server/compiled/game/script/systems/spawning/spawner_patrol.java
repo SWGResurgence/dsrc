@@ -12,9 +12,6 @@ import java.util.Vector;
 
 public class spawner_patrol extends script.base_script
 {
-    public spawner_patrol()
-    {
-    }
     public static final int LOCATION_SEARCH_RADIUS = 1000;
     public int OnInitialize(obj_id self) throws InterruptedException
     {
@@ -101,7 +98,7 @@ public class spawner_patrol extends script.base_script
         Vector goodSpawns = new Vector();
         for (int i = 0; i < fltSizes.length; ++i)
         {
-            goodSpawns.addElement(i);
+            goodSpawns.add(i);
         }
         int spawnCount = 0;
         while (spawnCount < maxSpawns)
@@ -117,7 +114,7 @@ public class spawner_patrol extends script.base_script
             else 
             {
                 LOG("spawning", "Unable to create creature " + spawn + ".  Check data.");
-                utils.removeElementAt(goodSpawns, roll);
+                goodSpawns.remove(roll);
                 if (goodSpawns.size() == 0)
                 {
                     LOG("spawning", "All entries in table " + strFileName + " are bad!!!");
@@ -298,7 +295,7 @@ public class spawner_patrol extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        patrolPointLocation = utils.addElement(patrolPointLocation, getLocation(getSelf()));
+        patrolPointLocation.add(getLocation(getSelf()));
         boolean isInInstance = false;
         obj_id dungeonController = obj_id.NULL_ID;
         if (hasObjVar(self, "dungeonController"))
@@ -320,11 +317,11 @@ public class spawner_patrol extends script.base_script
                         if (isInInstance) {
                             if (getObjIdObjVar(object, "dungeonController") == dungeonController) {
                                 setName(object, getStringObjVar(object, "pointName"));
-                                patrolPointLocation = utils.addElement(patrolPointLocation, getLocation(object));
+                                patrolPointLocation.add(getLocation(object));
                             }
                         } else {
                             setName(object, getStringObjVar(object, "pointName"));
-                            patrolPointLocation = utils.addElement(patrolPointLocation, getLocation(object));
+                            patrolPointLocation.add(getLocation(object));
                         }
                     }
                 }

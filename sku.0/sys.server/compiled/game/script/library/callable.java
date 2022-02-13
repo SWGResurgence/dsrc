@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class callable extends script.base_script
 {
-    public callable()
-    {
-    }
     public static final int CALLABLE_TYPE_UNKNOWN = -1;
     public static final int CALLABLE_TYPE_COMBAT_OTHER = 0;
     public static final int CALLABLE_TYPE_COMBAT_PET = 1;
@@ -144,7 +141,7 @@ public class callable extends script.base_script
         for (int callableType : callableTypes) {
             obj_id objCallable = getCallable(master, callableType);
             if (isIdValid(objCallable) && exists(objCallable)) {
-                callables = utils.addElement(callables, objCallable);
+                callables.add(objCallable);
             }
         }
         obj_id[] _callables = new obj_id[0];
@@ -167,7 +164,7 @@ public class callable extends script.base_script
         obj_id[] dataItems = getContents(datapad);
         for (obj_id dataItem : dataItems) {
             if (getControlDeviceType(dataItem) == callableType) {
-                callables = utils.addElement(callables, dataItem);
+                callables.add(dataItems);
             }
         }
         obj_id[] _callables = new obj_id[0];

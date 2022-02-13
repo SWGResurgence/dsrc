@@ -6,12 +6,10 @@ import script.library.prose;
 import script.library.utils;
 
 import java.util.Vector;
+import java.util.List;
 
 public class control_performance extends script.base_script
 {
-    public control_performance()
-    {
-    }
     public static final String PERFORMANCE_DATATABLE = "datatables/performance/performance.iff";
     public static final String SEATING_DATATABLE = "datatables/quest/crowd_pleaser/theater_seat.iff";
     public static final String PLAYER_PERFORMANCE_SCRIPT = "quest.crowd_pleaser.player_performance";
@@ -343,7 +341,7 @@ public class control_performance extends script.base_script
         int rows = dataTableGetNumRows(SEATING_DATATABLE);
         int number = params.getInt("number");
         String type = params.getString("type");
-        Vector occupied = utils.getResizeableIntArrayScriptVar(self, OCCUPIED_OBJVAR);
+        List occupied = utils.getResizeableIntArrayScriptVar(self, OCCUPIED_OBJVAR);
         if (occupied == null)
         {
             occupied = new Vector();
@@ -371,7 +369,7 @@ public class control_performance extends script.base_script
                 dictionary webster = new dictionary();
                 webster.put("control", self);
                 messageTo(member, "handleSetup", webster, 1.0f, false);
-                occupied = utils.addElement(occupied, r);
+                occupied.add(r);
             }
         }
         number -= SPAWN_LUMP;
@@ -393,7 +391,7 @@ public class control_performance extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
-    public boolean isOccupied(int seat, Vector list) throws InterruptedException
+    public boolean isOccupied(int seat, List list) throws InterruptedException
     {
         if (list == null || list.size() == 0)
         {

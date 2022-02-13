@@ -13,9 +13,6 @@ import java.util.Vector;
 
 public class qa_resource_reward extends script.base_script
 {
-    public qa_resource_reward()
-    {
-    }
     public static final int RESOURCE_AMOUNT = 100000;
     public static final String ROOT_RESOURCE_CLASS = "resource";
     public static final String ROOT_ORGANIC_CLASS = "organic";
@@ -232,7 +229,7 @@ public class qa_resource_reward extends script.base_script
             removePlayer(player, "");
             return;
         }
-        attribStrings = utils.addElement(attribStrings, "@" + SID_RESOURCE_NAME + " = " + getResourceName(resource));
+        attribStrings.add("@" + SID_RESOURCE_NAME + " = " + getResourceName(resource));
         for (resource_attribute resourceAttrib : resourceAttribs) {
             string_id temp = new string_id("obj_attr_n", resourceAttrib.getName());
             attribStrings = utils.addElement(attribStrings, "@" + temp + " = " + resourceAttrib.getValue());
@@ -379,7 +376,7 @@ public class qa_resource_reward extends script.base_script
         Vector tempResourceClassTwo = null;
         for (String tempResourceClass1 : tempResourceClass) {
             if (!tempResourceClass1.equals("energy") && !tempResourceClass1.equals("space_resource")) {
-                tempResourceClassTwo = utils.addElement(tempResourceClassTwo, tempResourceClass1);
+                tempResourceClassTwo.add(tempResourceClass, tempResourceClass1);
             }
         }
         resourceClasses = new String[tempResourceClassTwo.size()];

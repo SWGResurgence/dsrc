@@ -92,7 +92,7 @@ public class encounter extends script.quest.task.ground.base_task
                     groundquests.questOutputDebugInfo(self, questCrc, taskId, taskType, "OnTaskActivated", "Spawned " + creature + " at [" + l.x + ", " + l.y + ", " + l.z + "] to attack " + self);
                     startCombat(creature, self);
                 }
-                utils.addElement(spawnList, creature);
+                spawnList.add(creature);
             }
         }
         setObjVar(self, baseObjVar + dot + objvarSpawnList, spawnList);
@@ -121,7 +121,7 @@ public class encounter extends script.quest.task.ground.base_task
                             newSpawnListResizable.setSize(0);
                             for (obj_id obj_id : spawnList) {
                                 if (obj_id != spawn) {
-                                    utils.addElement(newSpawnListResizable, obj_id);
+                                    newSpawnListResizable.add(spawnList, obj_id);
                                 }
                             }
                             obj_id[] newSpawnList = new obj_id[0];

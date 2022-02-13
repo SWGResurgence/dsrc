@@ -12,9 +12,6 @@ import java.util.Vector;
 
 public class dynamic_region_master extends script.base_script
 {
-    public dynamic_region_master()
-    {
-    }
     public static final String BIRTH = "dynamic_region.birth";
     public static final String PLANET = "dynamic_region.planet";
     public static final String NAME = "dynamic_region.name";
@@ -124,7 +121,7 @@ public class dynamic_region_master extends script.base_script
             creatureLoc.y = y + cy;
             creatureLoc.z = z + cz;
             obj_id newCreature = create.object(templateName, creatureLoc);
-            utils.addElement(creatureList, newCreature);
+            creatureList.add(newCreature);
         }
         setObjVar(self, CREATURE_LIST, creatureList);
         return SCRIPT_CONTINUE;

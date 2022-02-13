@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class event_four_boss extends script.base_script
 {
-    public event_four_boss()
-    {
-    }
     public static final String GUARD = "som_volcano_four_lava_beetle";
     public static final int BEETLE_RESPAWN = 31;
     public static final int POISON_RECAST = 35;
@@ -147,7 +144,7 @@ public class event_four_boss extends script.base_script
         validLoc.setSize(0);
         for (obj_id object : objects) {
             if (hasObjVar(object, "event_5_spawn_point")) {
-                utils.addElement(validLoc, getLocation(object));
+                validLoc.add(getLocation(object));
             }
         }
         if (validLoc == null || validLoc.size() == 0)

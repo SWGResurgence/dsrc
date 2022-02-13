@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class scheduled_drop extends script.base_script
 {
-    public scheduled_drop()
-    {
-    }
 
     /**
      * *******************************************************************************************
@@ -158,7 +155,7 @@ public class scheduled_drop extends script.base_script
                     cardEntry.put("promotionList", allPromotionLists[k]);
                     cardEntry.put("promotionItem", allItems[k]);
                     cardEntry.put("promotionWeight", allWeights[k]);
-                    allStaticItems = utils.addElement(allStaticItems, cardEntry);
+                    allStaticItems.add(cardEntry);
                 }
             }
         }
@@ -212,7 +209,7 @@ public class scheduled_drop extends script.base_script
             int endDate = getCalendarTime(endYear, endMonth, endDay, endHour, endMinute, endSecond);
             testingSpam(self, "Scheduled Promotion: " + currentPromotion.getString(DATATABLE_SCHEDULE_PROMO_NAME) + " Start: " + startDate + " End: " + endDate);
             if (startDate <= currentDate && endDate >= currentDate) {
-                scheduledPromotions = utils.addElement(scheduledPromotions, currentPromotion.getString(DATATABLE_SCHEDULE_PROMO_NAME));
+                scheduledPromotions.add(currentPromotion.getString(DATATABLE_SCHEDULE_PROMO_NAME));
             }
         }
         String[] _scheduledPromotions = new String[0];
@@ -246,7 +243,7 @@ public class scheduled_drop extends script.base_script
                     tempPromotion = new dictionary();
                     tempPromotion.put("promotion", promotions[i]);
                     tempPromotion.put("promotionMaxDrops", modifyPromotionCountByServer(allDrops[k]));
-                    promotionsWithDrops = utils.addElement(promotionsWithDrops, tempPromotion);
+                    promotionsWithDrops.add(tempPromotion);
                 }
             }
         }
@@ -351,7 +348,7 @@ public class scheduled_drop extends script.base_script
         for (String promotionName : promotionNames) {
             int countLeft = getIntObjVar(planet, "tcg." + promotionName + ".count");
             if (countLeft > 0 || countLeft == -1) {
-                validatedPromotions = utils.addElement(validatedPromotions, promotionName);
+                validatedPromotions.add(promotionName);
             }
         }
         String[] _validatedPromotions = new String[0];

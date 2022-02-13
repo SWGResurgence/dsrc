@@ -9,12 +9,10 @@ import script.obj_id;
 import script.string_id;
 
 import java.util.Vector;
+import java.util.List;
 
 public class fs_outpost_master extends script.base_script
 {
-    public fs_outpost_master()
-    {
-    }
     public void requestRegistration(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, fs_dyn_village.OBJVAR_MY_MASTER_OBJECT) || !hasObjVar(self, fs_counterstrike.OBJVAR_CAMP_NAME))
@@ -85,7 +83,7 @@ public class fs_outpost_master extends script.base_script
     public int msgSelfDestruct(obj_id self, dictionary params) throws InterruptedException
     {
         trace.log("fs_quest", "fs_outpost_master::OnInit:- > Got self destruct message. *** DESTROYING *** camp.");
-        Vector existingDroids = new Vector();
+        List existingDroids = new Vector();
         if (hasObjVar(self, fs_counterstrike.OBJVAR_CAMP_DROIDS))
         {
             existingDroids = utils.getResizeableObjIdBatchObjVar(self, fs_counterstrike.OBJVAR_CAMP_DROIDS);

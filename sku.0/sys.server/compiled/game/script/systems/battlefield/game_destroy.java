@@ -12,9 +12,6 @@ import java.util.Vector;
 
 public class game_destroy extends script.base_script
 {
-    public game_destroy()
-    {
-    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield.game_destroy::OnAttach -- " + self);
@@ -69,7 +66,7 @@ public class game_destroy extends script.base_script
             for (obj_id crit_obj : crit_objs) {
                 int obj_faction_id = pvpBattlefieldGetFaction(crit_obj, bf);
                 if (obj_faction_id == all_faction_id) {
-                    faction_list = utils.addElement(faction_list, crit_obj);
+                    faction_list.add(crit_objs, crit_obj);
                     String obj_name = all_faction + " Power Generator #" + faction_list.size();
                     setName(crit_obj, obj_name);
                 }
@@ -179,32 +176,32 @@ public class game_destroy extends script.base_script
         String[] factions_remaining = battlefield.getAllFactionsRemaining(self);
         if (factions_remaining != null)
         {
-            dsrc = utils.addElement(dsrc, "Objectives Remaining");
+            dsrc.add("Objectives Remaining");
             for (String s : factions_remaining) {
                 String objVar_name = battlefield.VAR_GAME + "." + s + "_destroy";
                 obj_id[] destroy_objs = getObjIdArrayObjVar(self, objVar_name);
                 if (destroy_objs != null) {
-                    dsrc = utils.addElement(dsrc, "   " + s);
+                    dsrc.add("   " + factions_remaining, "   " + s);
                     for (obj_id destroy_obj : destroy_objs) {
                         float hitpoints = getHitpoints(destroy_obj);
                         float maxHitpoints = getMaxHitpoints(destroy_obj);
                         int percent = (int) ((hitpoints / maxHitpoints) * 100.0f);
                         String name = getName(destroy_obj);
-                        dsrc = utils.addElement(dsrc, "      " + name + " at " + percent + "%");
+                        dsrc.add("      " + name + " at " + percent + "%");
                     }
                 }
             }
         }
-        dsrc = utils.addElement(dsrc, "Kills/Deaths");
+        dsrc.add("Kills/Deaths");
         String[] factions_allowed = battlefield.getAllFactionsAllowed(self);
         if (factions_allowed != null)
         {
             for (String s : factions_allowed) {
-                dsrc = utils.addElement(dsrc, "   " + s);
+                dsrc.add("   " + factions_allowed, "   " + s);
                 int kills = battlefield.getFactionKills(self, s);
                 int deaths = battlefield.getFactionDeaths(self, s);
-                dsrc = utils.addElement(dsrc, "      " + "Kills: " + kills);
-                dsrc = utils.addElement(dsrc, "      " + "Deaths: " + deaths);
+                dsrc.add("      " + "Kills: " + kills);
+                dsrc.add("      " + "Deaths: " + deaths);
             }
         }
         sui.listbox(player, "Battlefield Statistics", "Objective: Destroy", dsrc);

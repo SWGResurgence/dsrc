@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class spawn_base extends script.base_script
 {
-    public spawn_base()
-    {
-    }
     public static final int SPAWN_HEARBEAT_SPAWN_EVENT = 5;
     public static final int SPAWN_PLAYER_DELAY_MIN = 30;
     public static final int SPAWN_PLAYER_DELAY_MAX = 60;
@@ -129,7 +126,7 @@ public class spawn_base extends script.base_script
                 {
                     continue;
                 }
-                validTemplateIndices = utils.addElement(validTemplateIndices, i);
+                validTemplateIndices.add(i);
             }
         }
         int[] _validTemplateIndices = new int[0];

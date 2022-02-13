@@ -7,6 +7,7 @@ import script.library.*;
 
 import java.util.Arrays;
 import java.util.Vector;
+import java.util.List;
 
 public class combat_actions extends script.systems.combat.combat_base {
     public static String DEFAULT_EGG = "object/tangible/gravestone/gravestone05.tpf";
@@ -10331,7 +10332,7 @@ public class combat_actions extends script.systems.combat.combat_base {
         if (defenders != null && defenders.length > 0) {
             for (obj_id defender : defenders) {
                 if (isIdValid(defender) && !isDead(defender) && isPlayer(defender)) {
-                    filteredDefenders = utils.addElement(filteredDefenders, defender);
+                    filteredDefenders.add(defenders, defender);
                 }
             }
         }
@@ -10355,7 +10356,7 @@ public class combat_actions extends script.systems.combat.combat_base {
         if (defenders != null && defenders.length > 0) {
             for (obj_id defender : defenders) {
                 if (isIdValid(defender) && !isDead(defender) && isPlayer(defender)) {
-                    filteredDefenders = utils.addElement(filteredDefenders, defender);
+                    filteredDefenders.add(defenders, defender);
                 }
             }
         }
@@ -10473,7 +10474,7 @@ public class combat_actions extends script.systems.combat.combat_base {
 
     public int lelli_mine(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
         obj_id[] hateList = getHateList(self);
-        Vector vectorList = new Vector(Arrays.asList(hateList));
+        List vectorList = Arrays.asList(hateList);
         vectorList = utils.shuffleArray(vectorList);
         for (int i = 0; i < hateList.length && i < 4; i++) {
             combatStandardAction("lelli_mine", self, hateList[i], params, "", "");

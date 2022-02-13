@@ -5,13 +5,11 @@ import script.location;
 import script.obj_id;
 import script.string_id;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class jedi_trials extends script.base_script
 {
-    public jedi_trials()
-    {
-    }
     public static final String PADAWAN_TRIALS_DATATABLE = "datatables/jedi_trials/padawan_trials.iff";
     public static final String KNIGHT_TRIALS_DATATABLE = "datatables/jedi_trials/knight_trials.iff";
     public static final String FORCE_SHRINES_DATATABLE = "datatables/jedi_trials/force_shrine_loc.iff";
@@ -483,8 +481,7 @@ public class jedi_trials extends script.base_script
         {
             questList[q] = -1;
         }
-        Vector unusedRows = new Vector();
-        unusedRows.setSize(0);
+        List unusedRows = new ArrayList<Integer>();
         for (int datatableRow = 0; datatableRow < numTrials; datatableRow++)
         {
             int questNum = dataTableGetInt(datatable, datatableRow, "trialNum");
@@ -494,7 +491,7 @@ public class jedi_trials extends script.base_script
             }
             else 
             {
-                utils.addElement(unusedRows, datatableRow);
+                unusedRows.add(datatableRow);
             }
         }
         for (int questNum = 0; questNum < numTrials; questNum++)
@@ -505,7 +502,7 @@ public class jedi_trials extends script.base_script
                 int index = rand(0, (unusedRows.size() - 1));
                 int datatableRow = (Integer) unusedRows.get(index);
                 questList[questNum] = datatableRow;
-                utils.removeElementAt(unusedRows, index);
+                unusedRows.remove(index);
             }
         }
         return questList;

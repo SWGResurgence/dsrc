@@ -9,11 +9,10 @@ import script.obj_id;
 
 import java.util.Vector;
 
+import java.util.List;
+
 public class quest_spawner extends script.base_script
 {
-    public quest_spawner()
-    {
-    }
     public static final String SCRIPT_CREATURE = "quest.util.quest_creature";
     public static final String VAR_SPAWNER_MAX_POPULATION = "quest_spawner.max_pop";
     public static final String VAR_SPAWNER_MAX = "quest_spawner.max_spawn";
@@ -71,7 +70,7 @@ public class quest_spawner extends script.base_script
             obj_id parent = getObjIdObjVar(self, "quest_spawner.parent");
             if (hasObjVar(parent, "attack_spawners"))
             {
-                Vector spawners = getResizeableObjIdArrayObjVar(parent, "attack_spawners");
+                List spawners = getResizeableObjIdArrayObjVar(parent, "attack_spawners");
                 spawners.remove(self);
                 if (spawners.size() > 0)
                 {
@@ -119,17 +118,17 @@ public class quest_spawner extends script.base_script
             }
             else 
             {
-                spawn_template = utils.addElement(spawn_template, row.getString("spawn_template"));
-                min_number = utils.addElement(min_number, row.getInt("min_number"));
-                max_number = utils.addElement(max_number, row.getInt("max_number"));
-                weight = utils.addElement(weight, row.getInt("weight"));
+                spawn_template.add(row.getString("spawn_template"));
+                min_number.add(row.getInt("min_number"));
+                max_number.add(row.getInt("max_number"));
+                weight.add(row.getInt("weight"));
                 if (row.getString("script") != null)
                 {
-                    script = utils.addElement(script, row.getString("script"));
+                    script.add(row.getString("script"));
                 }
                 else 
                 {
-                    script = utils.addElement(script, "none");
+                    script.add("none");
                 }
             }
         }

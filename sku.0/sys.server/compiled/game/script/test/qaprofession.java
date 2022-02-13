@@ -13,9 +13,6 @@ import java.util.Vector;
 
 public class qaprofession extends script.base_script
 {
-    public qaprofession()
-    {
-    }
     public static final String SCRIPTVAR = "qaprofession";
     public static final String SKILL_TEMPLATE = "datatables/skill_template/skill_template.iff";
     public static final String SKILL_TABLE = "datatables/skill/skills.iff";
@@ -486,11 +483,11 @@ public class qaprofession extends script.base_script
                             {
                                 if (professionCodeSelection.startsWith("entertainer"))
                                 {
-                                    utils.addElement(professionCombatLevelMenuResized, theProfessionSkillMenu[i] + " - Level " + HARD_CODED_LEVELS[i]);
+                                    professionCombatLevelMenuResized.add(theProfessionSkillMenu[i] + " - Level " + HARD_CODED_LEVELS[i]);
                                 }
                                 else 
                                 {
-                                    utils.addElement(professionCombatLevelMenuResized, theProfessionSkillMenu[i] + " - Combat Level " + HARD_CODED_LEVELS[i]);
+                                    professionCombatLevelMenuResized.add(theProfessionSkillMenu[i] + " - Combat Level " + HARD_CODED_LEVELS[i]);
                                 }
                             }
                         }
@@ -498,7 +495,7 @@ public class qaprofession extends script.base_script
                         {
                             for (int i = 0; i < HARD_CODED_LEVELS.length; i++)
                             {
-                                utils.addElement(professionCombatLevelMenuResized, theProfessionSkillMenu[i]);
+                                professionCombatLevelMenuResized.add(theProfessionSkillMenu[i]);
                             }
                         }
                         String[] professionCombatLevelMenu = new String[professionCombatLevelMenuResized.size()];

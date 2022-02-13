@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class objective_terminal_override extends script.faction_perk.hq.objective_object
 {
-    public objective_terminal_override()
-    {
-    }
     private static final string_id MNU_DNA = new string_id("hq", "mnu_dna");
     private static final string_id NO_TAMPER = new string_id("faction/faction_hq/faction_hq_response", "no_tamper");
     private static final string_id FAIL_SAFE_ALREADY_OVERRIDDEN = new string_id("faction/faction_hq/faction_hq_response", "fail_safe_already_overridden");
@@ -192,7 +189,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
         {
             if (locks[i] == 0)
             {
-                entries = utils.addElement(entries, dna[i]);
+                entries.add(dna[i]);
                 dnaString = dnaString + dna[i];
             }
             else 
@@ -200,7 +197,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
                 numLocks++;
                 for (String PAIR : PAIRS) {
                     if (PAIR.startsWith(dna[i])) {
-                        entries = utils.addElement(entries, "\\#00FF00" + PAIR + " \\#.");
+                        entries.add("\\#00FF00" + PAIR + " \\#.");
                         dnaString = dnaString + "\\#00FF00" + dna[i] + "\\#.";
                         break;
                     }

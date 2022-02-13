@@ -12,9 +12,6 @@ import java.util.Vector;
 
 public class camp_grand extends script.poi.template.scene.camp.jawa.base
 {
-    public camp_grand()
-    {
-    }
     public static final int COL_MAX = 4;
     public int handleTheaterSetup(obj_id self, dictionary params) throws InterruptedException
     {
@@ -43,7 +40,7 @@ public class camp_grand extends script.poi.template.scene.camp.jawa.base
                 }
                 if (n == COL_MAX - 1)
                 {
-                    tpf = utils.removeElementAt(tpf, 0);
+                    tpf.remove(0);
                 }
                 int cnt = rand(5, 8) - n;
                 for (int i = 0; i < cnt; i++)
@@ -75,7 +72,7 @@ public class camp_grand extends script.poi.template.scene.camp.jawa.base
                         else 
                         {
                             setYaw(child, rand(-180, 180));
-                            children = utils.addElement(children, child);
+                            children.add(child);
                         }
                     }
                 }

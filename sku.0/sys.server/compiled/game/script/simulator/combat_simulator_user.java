@@ -10,12 +10,11 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.StringTokenizer;
 import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class combat_simulator_user extends script.base_script
 {
-    public combat_simulator_user()
-    {
-    }
     public static final String COMBAT_MASTER_SCRIPT = "simulator.combat_simulator_master";
     public static final String[] COMBAT_SIMULATOR_MAIN_OPTIONS = 
     {
@@ -560,7 +559,7 @@ public class combat_simulator_user extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String professionToAdd = (currentProfessionIndex + " " + idx);
-        Vector professions = new Vector();
+        List professions = new ArrayList<obj_id>();
         if (utils.hasScriptVar(self, "combat_simulator." + actor + ".professions"))
         {
             professions = utils.getResizeableStringArrayScriptVar(self, "combat_simulator." + actor + ".professions");
@@ -764,7 +763,7 @@ public class combat_simulator_user extends script.base_script
         }
         if (selectedArmor.endsWith(".iff"))
         {
-            Vector armorPieces = new Vector();
+            List armorPieces = new ArrayList<String>();
             if (utils.hasScriptVar(self, "combat_simulator." + actor + ".armor"))
             {
                 armorPieces = utils.getResizeableStringArrayScriptVar(self, "combat_simulator." + actor + ".armor");
@@ -834,7 +833,7 @@ public class combat_simulator_user extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String buffToAdd = COMBAT_SIMULATOR_ACTOR_ATTRIBUTES[idx];
-        Vector buffs = new Vector();
+        List buffs = new ArrayList<String>();
         if (utils.hasScriptVar(self, "combat_simulator." + actor + ".buffs"))
         {
             buffs = utils.getResizeableStringArrayScriptVar(self, "combat_simulator." + actor + ".buffs");
@@ -948,7 +947,7 @@ public class combat_simulator_user extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String woundToAdd = wound + " " + label;
-        Vector wounds = new Vector();
+        List wounds = new ArrayList<String>();
         if (utils.hasScriptVar(self, "combat_simulator." + actor + ".wounds"))
         {
             wounds = utils.getResizeableStringArrayScriptVar(self, "combat_simulator." + actor + ".wounds");
@@ -1037,7 +1036,7 @@ public class combat_simulator_user extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String commandToAdd = validCommands[idx];
-        Vector commands = new Vector();
+        List commands = new ArrayList<String>();
         if (utils.hasScriptVar(self, "combat_simulator." + actor + ".commands"))
         {
             commands = utils.getResizeableStringArrayScriptVar(self, "combat_simulator." + actor + ".commands");

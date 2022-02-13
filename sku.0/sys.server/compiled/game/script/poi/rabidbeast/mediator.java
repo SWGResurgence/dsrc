@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
-    public mediator()
-    {
-    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiRabidBeast Mediator";
     public static final int CONV_GREET = 0;
@@ -125,7 +122,7 @@ public class mediator extends script.poi.base.scenario_actor
             return SCRIPT_CONTINUE;
         }
         msg = new string_id(convo, "m_greet");
-        responses = utils.addElement(responses, new string_id(convo, "r_m_greet"));
+        responses.add(new string_id(convo, "r_m_greet"));
         npcStartConversation(speaker, self, convo, msg, responses);
         return SCRIPT_CONTINUE;
     }
@@ -158,13 +155,13 @@ public class mediator extends script.poi.base.scenario_actor
         switch (aId) {
             case "r_m_greet":
                 npcSpeak(speaker, new string_id(convo, "m_studying"));
-                responses = utils.addElement(responses, new string_id(convo, "r_m_studying"));
+                responses.add(new string_id(convo, "r_m_studying"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_m_studying":
                 npcSpeak(speaker, new string_id(convo, "m_thebeast"));
-                responses = utils.addElement(responses, new string_id(convo, "r_m_thebeast_help"));
-                responses = utils.addElement(responses, new string_id(convo, "r_m_thebeast_nohelp"));
+                responses.add(new string_id(convo, "r_m_thebeast_help"));
+                responses.add(new string_id(convo, "r_m_thebeast_nohelp"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_m_thebeast_help": {

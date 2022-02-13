@@ -11,9 +11,6 @@ import java.util.Vector;
 
 public class qa extends script.base_script
 {
-    public qa()
-    {
-    }
     public static final String[] QATOOL_MAIN_MENU = dataTableGetStringColumn("datatables/test/qa_tool_menu.iff", "main_tool");
     public static final String QATOOL_TITLE = "QA Tools";
     public static final String QATOOL_PROMPT = "Choose the tool you want to use";
@@ -353,7 +350,7 @@ public class qa extends script.base_script
         Vector theVectorData = new Vector();
         for (String menu1 : menu) {
             if (!menu1.equals("")) {
-                theVectorData.addElement(menu1);
+                theVectorData.add(menu, menu1);
             }
         }
         String[] menuArray = new String[theVectorData.size()];

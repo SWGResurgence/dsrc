@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class dot extends script.base_script
 {
-    public dot()
-    {
-    }
     public static final String DOT_BLEEDING = "bleeding";
     public static final String DOT_POISON = "poison";
     public static final String DOT_DISEASE = "disease";
@@ -1330,7 +1327,7 @@ public class dot extends script.base_script
                 String scriptVarName = VAR_DOT_ROOT + dot + VAR_TYPE;
                 String scriptVarValue = utils.getStringScriptVar(target, scriptVarName);
                 if ((scriptVarValue != null) && scriptVarValue.equals(type)) {
-                    dots_found.addElement(dot);
+                    dots_found.addElement(dot, dots);
                 }
             }
         }
@@ -1362,7 +1359,7 @@ public class dot extends script.base_script
             for (String dot : dots) {
                 obj_id who = getDotAttacker(target, dot);
                 if (isIdValid(who) && owner == who) {
-                    dots_found.addElement(dot);
+                    dots_found.addElement(dot, dots);
                 }
             }
         }

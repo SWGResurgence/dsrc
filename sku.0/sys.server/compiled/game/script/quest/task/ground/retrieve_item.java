@@ -12,9 +12,6 @@ import java.util.Vector;
 
 public class retrieve_item extends script.quest.task.ground.base_task
 {
-    public retrieve_item()
-    {
-    }
     public static final String dataTableColumnServerTemplate = "SERVER_TEMPLATE";
     public static final String dataTableColumnNumRequired = "NUM_REQUIRED";
     public static final String dataTableColumnDropPercent = "DROP_PERCENT";
@@ -62,10 +59,10 @@ public class retrieve_item extends script.quest.task.ground.base_task
                         if (hasObjVar(self, objvarRetrievedFull)) {
                             obj_id[] itemsAlreadyRetrieved = getObjIdArrayObjVar(self, objvarRetrievedFull);
                             for (obj_id obj_id : itemsAlreadyRetrieved) {
-                                utils.addElement(retrievedItemsResizable, obj_id);
+                                retrievedItemsResizable.add(itemsAlreadyRetrieved, obj_id);
                             }
                         }
-                        utils.addElement(retrievedItemsResizable, source);
+                        retrievedItemsResizable.add(source);
                         setObjVar(self, objvarRetrievedFull, retrievedItemsResizable);
                         int dropPercent = groundquests.getTaskIntDataEntry(questCrc, taskId, dataTableColumnDropPercent);
                         int roll = rand(1, 100);

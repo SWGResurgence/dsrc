@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class mission_object extends script.systems.missions.base.mission_dynamic_base
 {
-    public mission_object()
-    {
-    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("mission_spam", "Mission data is live, obj_id is " + self);
@@ -80,7 +77,7 @@ public class mission_object extends script.systems.missions.base.mission_dynamic
         LOG("missions", "Got message");
         obj_id objObject = params.getObjId("objObject");
         Vector objObjects = getResizeableObjIdArrayObjVar(self, "objObjects");
-        objObjects = utils.addElement(objObjects, objObject);
+        objObjects.add(objObject);
         if (objObjects != null && objObjects.size() > 0)
         {
             setObjVar(self, "objObjects", objObjects);

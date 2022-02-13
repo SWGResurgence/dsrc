@@ -389,12 +389,12 @@ public class loot extends script.base_script
                 for (obj_id item : contents) {
                     if (isFactionalDataItem(item)) {
                         if (faction.equals("")) {
-                            ret = utils.addElement(ret, item);
+                            ret.add(item);
                         } else {
                             String ifac = getStringObjVar(item, DATA_ITEM_FACTION);
                             if (ifac != null) {
                                 if (ifac.equals(faction)) {
-                                    ret = utils.addElement(ret, item);
+                                    ret.add(item);
                                 }
                             }
                         }
@@ -1388,7 +1388,7 @@ public class loot extends script.base_script
                 chronicleLootCategories.setSize(0);
                 for (String rawChronicleLootCategory : rawChronicleLootCategories) {
                     if (!rawChronicleLootCategory.equals("rare")) {
-                        utils.addElement(chronicleLootCategories, rawChronicleLootCategory);
+                        chronicleLootCategories.add(rawChronicleLootCategory);
                     }
                 }
                 int lootOptions = chronicleLootCategories.size();
@@ -1459,7 +1459,7 @@ public class loot extends script.base_script
                 String[] relicLootCategories = split(row_lootCategory, ',');
                 for (String relicCategory : relicLootCategories) {
                     if (relicCategory.equals(lootCategoryChoice)) {
-                        tokenReferences = utils.addElement(tokenReferences, row.getString("name"));
+                        tokenReferences.add(token_reference, row.getString("name"));
                     }
                 }
             }
@@ -1640,7 +1640,7 @@ public class loot extends script.base_script
         for (String lootColumn : allLootColumns) {
             if (lootColumn.startsWith(toLower(faction))) {
                 blog("getFactionalCollectionItem - found a column I am adding to col list");
-                utils.addElement(factionCols, lootColumn);
+                factionCols.add(lootColumn);
             }
         }
         blog("getFactionalCollectionItem - factionCols.length: " + factionCols.size());
@@ -1711,7 +1711,7 @@ public class loot extends script.base_script
         for (String lootColumn : allLootColumns) {
             if (lootColumn.startsWith(toLower(faction))) {
                 blog("getFactionalCollectionItem - found a column I wanted: ");
-                utils.addElement(pvpCols, lootColumn);
+                pvpCols.add(lootColumn);
             }
         }
         if (pvpCols.size() <= 0)
@@ -1819,7 +1819,7 @@ public class loot extends script.base_script
         }
         Vector items = new Vector();
         items.setSize(0);
-        utils.addElement(items, itemId);
+        items.add(itemId);
         blog("grantFactionalCollectible - SUCCESS, creating item in inventory.");
         prose_package pp = new prose_package();
         prose.setStringId(pp, SID_REWARD_ITEM);
@@ -1893,7 +1893,7 @@ public class loot extends script.base_script
             {
                 return false;
             }
-            utils.addElement(items, lumpsReceived);
+            items.add(lumpsReceived);
         }
         int lootItemAmount = rand(1, 3);
         if (rand(0, 100) > 99)
@@ -1940,7 +1940,7 @@ public class loot extends script.base_script
             {
                 return false;
             }
-            utils.addElement(items, lootItem);
+            items.add(lootItem);
             blog("giveMeatlumpPuzzleLoot - createLootItem success");
         }
         blog("giveMeatlumpPuzzleLoot - items.size(): " + items.size());
@@ -2234,17 +2234,17 @@ public class loot extends script.base_script
         forage_blog("getRandomRareForagedLoot:treasureMapChance: " + treasureMapChance);
         Vector rareItemList = new Vector();
         rareItemList.setSize(0);
-        utils.addElement(rareItemList, ENZYME);
-        utils.addElement(rareItemList, WORM);
-        utils.addElement(rareItemList, TREASURE);
-        utils.addElement(rareItemList, COMPONENT);
+        rareItemList.add(ENZYME);
+        rareItemList.add(WORM);
+        rareItemList.add(TREASURE);
+        rareItemList.add(COMPONENT);
         forage_blog("getRandomRareForagedLoot:treasureMapChance: " + treasureMapChance);
         if (enzymeChance > 0)
         {
             int division = enzymeChance / RARE_COMPONENT_DIVISOR;
             for (int i = 0; i < division; ++i)
             {
-                utils.addElement(rareItemList, ENZYME);
+                rareItemList.add(ENZYME);
             }
         }
         if (wormChance > 0)
@@ -2252,7 +2252,7 @@ public class loot extends script.base_script
             int division = wormChance / RARE_COMPONENT_DIVISOR;
             for (int i = 0; i < division; ++i)
             {
-                utils.addElement(rareItemList, WORM);
+                rareItemList.add(WORM);
             }
         }
         if (treasureMapChance > 0)
@@ -2260,7 +2260,7 @@ public class loot extends script.base_script
             int division = treasureMapChance / SUPER_RARE_COMPONENT_DIVISOR;
             for (int i = 0; i < division; ++i)
             {
-                utils.addElement(rareItemList, TREASURE);
+                rareItemList.add(TREASURE);
             }
         }
         if (componentChance > 0)
@@ -2268,7 +2268,7 @@ public class loot extends script.base_script
             int division = componentChance / RARE_COMPONENT_DIVISOR;
             for (int i = 0; i < division; ++i)
             {
-                utils.addElement(rareItemList, COMPONENT);
+                rareItemList.add(COMPONENT);
             }
         }
         int listSize = rareItemList.size();
@@ -2422,7 +2422,7 @@ public class loot extends script.base_script
                 utils.addElement(newListOfLocs, loc);
             }
         }
-        utils.addElement(newListOfLocs, curLoc);
+        newListOfLocs.add(curLoc);
         utils.setScriptVar(self, "forage.listOfAlreadyForagedLocs", newListOfLocs);
         utils.setScriptVar(self, "forage.lastLocation", curLoc);
         return true;

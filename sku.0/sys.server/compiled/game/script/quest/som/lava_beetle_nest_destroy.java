@@ -294,7 +294,7 @@ public class lava_beetle_nest_destroy extends script.base_script
         {
             for (obj_id player : players) {
                 if (isPlayer(player) && isIdValid(player) && exists(player) && !isIncapacitated(player)) {
-                    utils.addElement(targets, player);
+                    targets.add(players, player);
                 }
             }
         }

@@ -11,9 +11,6 @@ import java.util.Vector;
 
 public class shared_flora_warehouse extends script.base_script
 {
-    public shared_flora_warehouse()
-    {
-    }
     public static final String[] TEMPLATE_LIST = 
     {
         "object/building/poi/generic_flatten_medium.iff",
@@ -131,7 +128,7 @@ public class shared_flora_warehouse extends script.base_script
             {
                 objectList = new Vector();
             }
-            utils.addElement(objectList, newObject);
+            objectList.add(newObject);
             if (objectList.size() > 0)
             {
                 setObjVar(self, "coa3.shared.obj_list", objectList);

@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class stimpack_dispensor extends script.base_script
 {
-    public stimpack_dispensor()
-    {
-    }
     public static final String STF_FILE = "pet/droid_modules";
     public static final String SCRIPT_VAR_STIMPACK_LIST = "droid_module.stimpack_list";
     public static final String SCRIPT_VAR_STIMPACK_DROID = "droid_module.stimpack_droid";
@@ -100,11 +97,11 @@ public class stimpack_dispensor extends script.base_script
             {
                 for (obj_id item1 : items) {
                     if ((getTemplateName(item1)).equals("object/tangible/medicine/instant_stimpack/stimpack_a.iff")) {
-                        stim_a = utils.addElement(stim_a, item1);
+                        stim_a.add(items, item1);
                         int power = getIntObjVar(item1, "healing.power");
                         int charges = getCount(item1);
                         String text = "Power :" + power + "   Charges :" + charges;
-                        dsrc = utils.addElement(dsrc, text);
+                        dsrc.add(text);
                     }
                 }
             }

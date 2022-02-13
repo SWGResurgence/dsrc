@@ -2145,21 +2145,21 @@ public class factions extends script.base_script
                     String configSetting = getConfigSetting("GameServer", "enableCovertImperialMercenary");
                     if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
                     {
-                        choicesDisplay.addElement("I want to help the Imperials as a Combatant.");
-                        choicesInternal.addElement("covert_imperial_mercenary_begin");
+                        choicesDisplay.add("I want to help the Imperials as a Combatant.");
+                        choicesInternal.add("covert_imperial_mercenary_begin");
                     }
-                    choicesDisplay.addElement("I want to stop being a Special Forces Imperial helper.");
-                    choicesInternal.addElement("overt_imperial_mercenary_end");
+                    choicesDisplay.add("I want to stop being a Special Forces Imperial helper.");
+                    choicesInternal.add("overt_imperial_mercenary_end");
                 }
                 else 
                 {
-                    choicesDisplay.addElement("I want to stop being a Combatant Imperial helper.");
-                    choicesInternal.addElement("covert_imperial_mercenary_end");
+                    choicesDisplay.add("I want to stop being a Combatant Imperial helper.");
+                    choicesInternal.add("covert_imperial_mercenary_end");
                     String configSetting = getConfigSetting("GameServer", "enableOvertImperialMercenary");
                     if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
                     {
-                        choicesDisplay.addElement("I want to help the Imperials as a Special Forces.");
-                        choicesInternal.addElement("overt_imperial_mercenary_begin");
+                        choicesDisplay.add("I want to help the Imperials as a Special Forces.");
+                        choicesInternal.add("overt_imperial_mercenary_begin");
                     }
                 }
                 int pid = sui.listbox(player, player, "What would you like to do?", sui.OK_CANCEL, "Factional Helper", choicesDisplay, "handleFactionalHelperChoice", true, false);
@@ -2176,21 +2176,21 @@ public class factions extends script.base_script
                     String configSetting = getConfigSetting("GameServer", "enableCovertRebelMercenary");
                     if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
                     {
-                        choicesDisplay.addElement("I want to help the Rebels as a Combatant.");
-                        choicesInternal.addElement("covert_rebel_mercenary_begin");
+                        choicesDisplay.add("I want to help the Rebels as a Combatant.");
+                        choicesInternal.add("covert_rebel_mercenary_begin");
                     }
-                    choicesDisplay.addElement("I want to stop being a Special Forces Rebel helper.");
-                    choicesInternal.addElement("overt_rebel_mercenary_end");
+                    choicesDisplay.add("I want to stop being a Special Forces Rebel helper.");
+                    choicesInternal.add("overt_rebel_mercenary_end");
                 }
                 else 
                 {
-                    choicesDisplay.addElement("I want to stop being a Combatant Rebel helper.");
-                    choicesInternal.addElement("covert_rebel_mercenary_end");
+                    choicesDisplay.add("I want to stop being a Combatant Rebel helper.");
+                    choicesInternal.add("covert_rebel_mercenary_end");
                     String configSetting = getConfigSetting("GameServer", "enableOvertRebelMercenary");
                     if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
                     {
-                        choicesDisplay.addElement("I want to help the Rebels as a Special Forces.");
-                        choicesInternal.addElement("overt_rebel_mercenary_begin");
+                        choicesDisplay.add("I want to help the Rebels as a Special Forces.");
+                        choicesInternal.add("overt_rebel_mercenary_begin");
                     }
                 }
                 int pid = sui.listbox(player, player, "What would you like to do?", sui.OK_CANCEL, "Factional Helper", choicesDisplay, "handleFactionalHelperChoice", true, false);
@@ -2226,14 +2226,14 @@ public class factions extends script.base_script
             String configSetting = getConfigSetting("GameServer", "enableCovertImperialMercenary");
             if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
             {
-                choicesDisplay.addElement("I want to help the Imperials as a Combatant.");
-                choicesInternal.addElement("covert_imperial_mercenary_begin");
+                choicesDisplay.add("I want to help the Imperials as a Combatant.");
+                choicesInternal.add("covert_imperial_mercenary_begin");
             }
             configSetting = getConfigSetting("GameServer", "enableOvertImperialMercenary");
             if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
             {
-                choicesDisplay.addElement("I want to help the Imperials as a Special Forces.");
-                choicesInternal.addElement("overt_imperial_mercenary_begin");
+                choicesDisplay.add("I want to help the Imperials as a Special Forces.");
+                choicesInternal.add("overt_imperial_mercenary_begin");
             }
         }
         if (secondsUntilCanHelpRebel <= 0)
@@ -2241,14 +2241,14 @@ public class factions extends script.base_script
             String configSetting = getConfigSetting("GameServer", "enableCovertRebelMercenary");
             if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
             {
-                choicesDisplay.addElement("I want to help the Rebels as a Combatant.");
-                choicesInternal.addElement("covert_rebel_mercenary_begin");
+                choicesDisplay.add("I want to help the Rebels as a Combatant.");
+                choicesInternal.add("covert_rebel_mercenary_begin");
             }
             configSetting = getConfigSetting("GameServer", "enableOvertRebelMercenary");
             if ((configSetting != null) && (configSetting.length() > 0) && !(configSetting.toLowerCase()).equals("false") && !configSetting.equals("0"))
             {
-                choicesDisplay.addElement("I want to help the Rebels as a Special Forces.");
-                choicesInternal.addElement("overt_rebel_mercenary_begin");
+                choicesDisplay.add("I want to help the Rebels as a Special Forces.");
+                choicesInternal.add("overt_rebel_mercenary_begin");
             }
         }
         if (choicesDisplay.size() <= 0)

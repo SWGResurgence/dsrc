@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class consume_fragment extends script.base_script
 {
-    public consume_fragment()
-    {
-    }
     public static final String PID_NAME = "chronicleFragmentReconstruct";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
@@ -110,7 +107,7 @@ public class consume_fragment extends script.base_script
                     if (!row_lootCategory.contains("no_loot"))
                     {
                         String token_reference = row.getString("name");
-                        relicReferences = utils.addElement(relicReferences, token_reference);
+                        relicReferences.add(token_reference);
                     }
                 }
             }

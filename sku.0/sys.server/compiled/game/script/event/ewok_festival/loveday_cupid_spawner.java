@@ -8,13 +8,11 @@ import script.library.utils;
 import script.location;
 import script.obj_id;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class loveday_cupid_spawner extends script.base_script
 {
-    public loveday_cupid_spawner()
-    {
-    }
     public static final int CUPID_APPEARANCE_LENGTH = 900;
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -60,8 +58,7 @@ public class loveday_cupid_spawner extends script.base_script
         if (hasObjVar(self, holiday.LOVEDAY_CUPID_SPAWNER_CITY_VAR))
         {
             String lovedayLoc = getStringObjVar(self, holiday.LOVEDAY_CUPID_SPAWNER_CITY_VAR);
-            Vector theSpawned = new Vector();
-            theSpawned.setSize(0);
+            List theSpawned = new ArrayList<obj_id>();
             location here = getLocation(self);
             if (!utils.hasScriptVar(self, "cupidSpawned"))
             {
@@ -70,7 +67,7 @@ public class loveday_cupid_spawner extends script.base_script
                 {
                     ai_lib.setDefaultCalmBehavior(herald, ai_lib.BEHAVIOR_SENTINEL);
                     setYaw(herald, getYaw(self));
-                    utils.addElement(theSpawned, herald);
+                    theSpawned.add(herald);
                 }
                 if (params != null && !params.isEmpty())
                 {
@@ -91,7 +88,7 @@ public class loveday_cupid_spawner extends script.base_script
                         {
                             ai_lib.setDefaultCalmBehavior(cupid, ai_lib.BEHAVIOR_SENTINEL);
                             setYaw(cupid, yaw);
-                            utils.addElement(theSpawned, cupid);
+                            theSpawned.add(cupid);
                         }
                     }
                 }
@@ -108,7 +105,7 @@ public class loveday_cupid_spawner extends script.base_script
     {
         if (utils.hasScriptVar(self, "cupidSpawned"))
         {
-            Vector theSpawned = utils.getResizeableObjIdArrayScriptVar(self, "cupidSpawned");
+            List theSpawned = utils.getResizeableObjIdArrayScriptVar(self, "cupidSpawned");
             if (theSpawned != null && theSpawned.size() > 0)
             {
                 obj_id spawnedNpc;

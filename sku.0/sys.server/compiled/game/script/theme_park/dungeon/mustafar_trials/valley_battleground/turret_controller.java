@@ -275,7 +275,7 @@ public class turret_controller extends script.base_script
             if (!isPlayer(target)) {
                 if (!isDead(target)) {
                     if (canSee(turret, target)) {
-                        utils.addElement(validTargets, target);
+                        validTargets.add(target);
                     }
                 }
             }

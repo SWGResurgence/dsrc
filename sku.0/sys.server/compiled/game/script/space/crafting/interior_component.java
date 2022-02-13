@@ -6,12 +6,10 @@ import script.library.space_transition;
 import script.library.utils;
 
 import java.util.Vector;
+import java.util.List;
 
 public class interior_component extends script.base_script
 {
-    public interior_component()
-    {
-    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("space", "ONATTACH GOING OFF ON INTERIOR COMPONETNES");
@@ -67,8 +65,8 @@ public class interior_component extends script.base_script
                 LOG("space", "plasma conduit");
                 if (utils.hasScriptVar(objShip, "objPlasmaConduits"))
                 {
-                    Vector objPlasmaConduits = utils.getResizeableObjIdArrayScriptVar(objShip, "objPlasmaConduits");
-                    objPlasmaConduits = utils.addElement(objPlasmaConduits, self);
+                    List objPlasmaConduits = utils.getResizeableObjIdArrayScriptVar(objShip, "objPlasmaConduits");
+                    objPlasmaConduits.add(self);
                     utils.setScriptVar(objShip, "objPlasmaConduits", objPlasmaConduits);
                     LOG("space", "plasma already has a conduit");
                 }
@@ -77,7 +75,7 @@ public class interior_component extends script.base_script
                     LOG("space", "no conduits ");
                     Vector objPlasmaConduits = new Vector();
                     objPlasmaConduits.setSize(0);
-                    objPlasmaConduits = utils.addElement(objPlasmaConduits, self);
+                    objPlasmaConduits.add(self);
                     utils.setScriptVar(objShip, "objPlasmaConduits", objPlasmaConduits);
                 }
                 String strConduitSlot = dctInfo.getString("strConduitSlot");
@@ -102,8 +100,8 @@ public class interior_component extends script.base_script
                 LOG("space", "plasma objHullPanels");
                 if (utils.hasScriptVar(objShip, "objHullPanels"))
                 {
-                    Vector objHullPanels = utils.getResizeableObjIdArrayScriptVar(objShip, "objHullPanels");
-                    objHullPanels = utils.addElement(objHullPanels, self);
+                    List objHullPanels = utils.getResizeableObjIdArrayScriptVar(objShip, "objHullPanels");
+                    objHullPanels.add(self);
                     utils.setScriptVar(objShip, "objHullPanels", objHullPanels);
                     LOG("space", "plasma already has a conduit");
                 }
@@ -112,7 +110,7 @@ public class interior_component extends script.base_script
                     LOG("space", "no objHullPanels ");
                     Vector objHullPanels = new Vector();
                     objHullPanels.setSize(0);
-                    objHullPanels = utils.addElement(objHullPanels, self);
+                    objHullPanels.add(self);
                     utils.setScriptVar(objShip, "objHullPanels", objHullPanels);
                 }
                 location locTest = getLocation(self);

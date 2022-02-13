@@ -144,7 +144,7 @@ public class dynamic_convo extends script.base_script
                     continue;
                 }
                 string_id response = new string_id(entry.getString("convoFile"), entry.getString("convoText"));
-                dialogResponse = utils.addElement(dialogResponse, response);
+                dialogResponse.add(response);
                 LOG("dynamic_convo", "Added response '" + entry.getString("convoEntry") + "' to dialog.");
             }
         }
@@ -342,7 +342,7 @@ public class dynamic_convo extends script.base_script
                     continue;
                 }
                 string_id response = new string_id(entry.getString("convoFile"), entry.getString("convoText"));
-                dialogResponse = utils.addElement(dialogResponse, response);
+                dialogResponse.add(response);
             }
         }
         npcSpeak(player, branchDialog);

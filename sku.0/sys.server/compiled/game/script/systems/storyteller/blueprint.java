@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class blueprint extends script.base_script
 {
-    public blueprint()
-    {
-    }
     public static final int MENU_BLUEPRINT_DEPLOY = menu_info_types.ITEM_USE;
     public static final int MENU_BLUEPRINT_OPTIONS = menu_info_types.SERVER_MENU5;
     public static final int MENU_BLUEPRINT_LOAD = menu_info_types.ITEM_OPEN;
@@ -540,13 +537,13 @@ public class blueprint extends script.base_script
                         numTokensLoaded.set(position, (Integer) numTokensLoaded.get(position) + 1);
                     }
                 } else {
-                    utils.addElement(tokensNeeded, tokenStaticName);
-                    utils.addElement(numTokensNeeded, 1);
+                    tokensNeeded.add(tokenStaticName);
+                    numTokensNeeded.add(1);
                     int numLoaded = 0;
                     if (storyteller.isBlueprintTokenLoaded(objectData)) {
                         numLoaded = 1;
                     }
-                    utils.addElement(numTokensLoaded, numLoaded);
+                    numTokensLoaded.add(numLoaded);
                 }
             }
         }

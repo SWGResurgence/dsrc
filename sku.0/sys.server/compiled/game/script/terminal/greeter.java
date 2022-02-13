@@ -3,13 +3,8 @@ package script.terminal;
 import script.*;
 import script.library.*;
 
-import java.util.Vector;
-
 public class greeter extends script.terminal.base.base_terminal
 {
-    public greeter()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "greeter";
     public static final string_id SID_GREETER_STATUS = new string_id("player_structure", "greeter_status");
@@ -1947,8 +1942,8 @@ public class greeter extends script.terminal.base.base_terminal
             greeterAnimCategoriesStrings.setSize(0);
             for (String greeterAnimCategory : greeterAnimCategories) {
                 if (greeterAnimCategory.startsWith("greeter_")) {
-                    utils.addElement(greeterAnimCategoriesRaw, greeterAnimCategory);
-                    utils.addElement(greeterAnimCategoriesStrings, "@player_structure:" + greeterAnimCategory);
+                    greeterAnimCategoriesRaw.add(greeterAnimCategories);
+                    greeterAnimCategoriesStrings.add("@player_structure:" + greeterAnimCategories);
                 }
             }
             if (greeterAnimCategoriesRaw.isEmpty() || greeterAnimCategoriesStrings.isEmpty())
@@ -2227,7 +2222,7 @@ public class greeter extends script.terminal.base.base_terminal
             removeObjVar(ownerId, vendor_lib.GREETER_NOT_INIT_OBJVAR);
         }
         String ownerName = getName(ownerId);
-        if (ownerName == null || ownerName.equals(""))
+        if (ownerName == null || ownerName.isEmpty())
         {
             blog("terminal.greeter:destroyGreeter: Greeter Destroy could not find owner name with the owner oid. Destroy object NOW!");
             CustomerServiceLog("vendor", "terminal.greeter:destroyGreeter: Greeter Destroy could not find the owner name with the owner oid: " + ownerId + " for object: " + self + " Destroy object NOW!");

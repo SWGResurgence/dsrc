@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class performance extends script.base_script
 {
-    public performance()
-    {
-    }
     public static final String DATATABLE_PERFORMANCE = "datatables/performance/performance.iff";
     public static final String DATATABLE_COL_HEAL_WOUND = "healMindWound";
     public static final String DATATABLE_COL_HEAL_SHOCK = "healShockWound";
@@ -751,7 +748,7 @@ public class performance extends script.base_script
             if (!isPlayer(member) || getDistance(who, member) > 64 || isIncapacitated(member) || isDead(member) || !utils.isProfession(member, utils.ENTERTAINER)) {
                 continue;
             }
-            utils.addElement(validatedMembers, member);
+            validatedMembers.add(members, member);
         }
         obj_id[] _validatedMembers = new obj_id[0];
         if (validatedMembers != null)
@@ -2729,7 +2726,7 @@ public class performance extends script.base_script
                         if (!utils.isElementInArray(audience, obj_id)) {
                             if (isIdValid(obj_id)) {
                                 if (!checkDenyService(band_members[i], obj_id)) {
-                                    utils.addElement(audience, obj_id);
+                                    audience.add(member_audience, obj_id);
                                 }
                             }
                         }
@@ -2773,7 +2770,7 @@ public class performance extends script.base_script
         {
             denyServiceList = new Vector();
         }
-        utils.addElement(denyServiceList, target);
+        denyServiceList.add(target);
         utils.setBatchScriptVar(player, "performance.denyService", denyServiceList);
         performanceMessageToSelf(player, target, SID_DENY_SERVICE_ADD_SELF);
         performanceMessageToPerson(target, player, target, SID_DENY_SERVICE_ADD_OTHER);
@@ -2840,7 +2837,7 @@ public class performance extends script.base_script
                 if (canPerformSong(actor, i + 1))
                 {
                     name = (name.substring(0, 1)).toUpperCase() + (name.substring(1)).toLowerCase();
-                    available_music = utils.addElement(available_music, name);
+                    available_music.add(name);
                 }
             }
         }
@@ -2881,7 +2878,7 @@ public class performance extends script.base_script
                 if (canPerformDance(actor, i + 1))
                 {
                     name = (name.substring(0, 1)).toUpperCase() + (name.substring(1)).toLowerCase();
-                    available_dances = utils.addElement(available_dances, name);
+                    available_dances.add(name);
                 }
             }
         }
@@ -2928,7 +2925,7 @@ public class performance extends script.base_script
                 if (canPerformJuggle(actor, i + 1))
                 {
                     name = (name.substring(0, 1)).toUpperCase() + (name.substring(1)).toLowerCase();
-                    available_juggles = utils.addElement(available_juggles, name);
+                    available_juggles.add(name);
                 }
             }
         }
@@ -3233,8 +3230,8 @@ public class performance extends script.base_script
         Vector dsrc = new Vector();
         Vector list = new Vector();
         for (String s1 : INSPIRATION_BUFF_ENTERTAINER) {
-            dsrc.addElement("@performance:" + s1);
-            list.addElement(s1);
+            dsrc.add("@performance:" + INSPIRATION_BUFF_ENTERTAINER + s1);
+            list.add(INSPIRATION_BUFF_ENTERTAINER(s1);
         }
         String type = "";
         if (hasScript(self, DANCE_HEARTBEAT_SCRIPT))
@@ -3246,8 +3243,8 @@ public class performance extends script.base_script
                 return;
             }
             for (String s : INSPIRATION_BUFF_DANCER) {
-                dsrc.addElement("@performance:" + s);
-                list.addElement(s);
+                dsrc.add("@performance:" + INSPIRATION_BUFF_DANCER + s);
+                list.add(INSPIRATION_BUFF_DANCER(s));
             }
         }
         else if (hasScript(self, MUSIC_HEARTBEAT_SCRIPT))
@@ -3259,8 +3256,8 @@ public class performance extends script.base_script
                 return;
             }
             for (String s : INSPIRATION_BUFF_MUSICIAN) {
-                dsrc.addElement("@performance:" + s);
-                list.addElement(s);
+                dsrc.add("@performance:" + INSPIRATION_BUFF_MUSICIAN + s);
+                list.add(INSPIRATION_BUFF_MUSICIAN(s));
             }
         }
         else 

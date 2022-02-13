@@ -7,12 +7,11 @@ import script.obj_id;
 import script.string_id;
 
 import java.util.Vector;
+import java.util.ArrayList
+import java.util.List;
 
 public class sequence_controller extends script.base_script
 {
-    public sequence_controller()
-    {
-    }
     public static final String[] TRIGGER_DATA_TYPES = 
     {
         "name",
@@ -105,8 +104,7 @@ public class sequence_controller extends script.base_script
     {
         Vector trigger_key = new Vector();
         trigger_key.setSize(0);
-        Vector key_list = new Vector();
-        key_list.setSize(0);
+        List key_list = new ArrayList<String>();
         for (int i = 0; i < triggerId.length; i++)
         {
             key_list.clear();
@@ -300,7 +298,7 @@ public class sequence_controller extends script.base_script
         {
             return null;
         }
-        Vector keyList = spawnList.getResizeableStringArray(trial.PROT_CHILD_KEY_LIST);
+        List keyList = spawnList.getResizeableStringArray(trial.PROT_CHILD_KEY_LIST);
         Vector allChildren = new Vector();
         allChildren.setSize(0);
         if (keyList == null || keyList.size() == 0)
@@ -308,7 +306,7 @@ public class sequence_controller extends script.base_script
             return null;
         }
         for (Object o : keyList) {
-            Vector thisList = spawnList.getResizeableObjIdArray(((String) o));
+            List thisList = spawnList.getResizeableObjIdArray(((String) o));
             if (thisList == null || thisList.size() == 0) {
                 continue;
             }
@@ -329,12 +327,12 @@ public class sequence_controller extends script.base_script
         {
             return;
         }
-        Vector keyList = spawnList.getResizeableStringArray(trial.PROT_CHILD_KEY_LIST);
+        List keyList = spawnList.getResizeableStringArray(trial.PROT_CHILD_KEY_LIST);
         if (!spawnList.containsKey(spawn_id))
         {
             return;
         }
-        Vector thisList = spawnList.getResizeableObjIdArray(spawn_id);
+        List thisList = spawnList.getResizeableObjIdArray(spawn_id);
         if (thisList != null && thisList.contains(object))
         {
             thisList.remove(object);
@@ -1085,45 +1083,42 @@ public class sequence_controller extends script.base_script
     public void storeDeathTrigger(obj_id object, String event) throws InterruptedException
     {
         String[] parse = split(event, ':');
-        Vector OnDeathTrig = new Vector();
-        OnDeathTrig.setSize(0);
+        List OnDeathTrig = new ArrayList<String>();
         if (utils.hasScriptVar(object, restuss_event.TRIG_ONDEATH))
         {
             OnDeathTrig = utils.getResizeableStringArrayScriptVar(object, restuss_event.TRIG_ONDEATH);
             utils.removeScriptVar(object, restuss_event.TRIG_ONDEATH);
         }
-        utils.addElement(OnDeathTrig, event.substring(8, event.length()));
+        OnDeathTrig.add(event.substring(8, event.length()));
         utils.setScriptVar(object, restuss_event.TRIG_ONDEATH, OnDeathTrig);
     }
     public void storeEnterCombatTrigger(obj_id object, String event) throws InterruptedException
     {
         String[] parse = split(event, ':');
-        Vector OnEnterCombatTrig = new Vector();
-        OnEnterCombatTrig.setSize(0);
+        List OnEnterCombatTrig = new ArrayList<String>();
         if (utils.hasScriptVar(object, restuss_event.TRIG_ENTERCOMBAT))
         {
             OnEnterCombatTrig = utils.getResizeableStringArrayScriptVar(object, restuss_event.TRIG_ENTERCOMBAT);
             utils.removeScriptVar(object, restuss_event.TRIG_ENTERCOMBAT);
         }
-        utils.addElement(OnEnterCombatTrig, event.substring(14, event.length()));
+        OnEnterCombatTrig.add(event.substring(14, event.length()));
         utils.setScriptVar(object, restuss_event.TRIG_ENTERCOMBAT, OnEnterCombatTrig);
     }
     public void storeExitCombatTrigger(obj_id object, String event) throws InterruptedException
     {
         String[] parse = split(event, ':');
-        Vector OnExitCombatTrig = new Vector();
-        OnExitCombatTrig.setSize(0);
+        List OnExitCombatTrig = new ArrayList<String>();
         if (utils.hasScriptVar(object, restuss_event.TRIG_EXITCOMBAT))
         {
             OnExitCombatTrig = utils.getResizeableStringArrayScriptVar(object, restuss_event.TRIG_EXITCOMBAT);
             utils.removeScriptVar(object, restuss_event.TRIG_EXITCOMBAT);
         }
-        utils.addElement(OnExitCombatTrig, event.substring(13, event.length()));
+        OnExitCombatTrig.add(event.substring(13, event.length()));
         utils.setScriptVar(object, restuss_event.TRIG_EXITCOMBAT, OnExitCombatTrig);
     }
     public void storeArrivedLocationTrigger(obj_id object, String event) throws InterruptedException
     {
-        if (!isIdValid(object) || event.equals(""))
+        if (!isIdValid(object) || event.isEmpty())
         {
             doLogging("storeArrivedLocationTrigger", "object was null or event was blank");
             return;
@@ -1160,27 +1155,25 @@ public class sequence_controller extends script.base_script
         {
             constructedTrigger += ":" + parse[i];
         }
-        Vector OnArriveLocTrig = new Vector();
-        OnArriveLocTrig.setSize(0);
+        List OnArriveLocTrig = new ArrayList<String>();
         if (utils.hasScriptVar(object, restuss_event.TRIG_ARRIVELOCATION))
         {
             OnArriveLocTrig = utils.getResizeableStringArrayScriptVar(object, restuss_event.TRIG_ARRIVELOCATION);
             utils.removeScriptVar(object, restuss_event.TRIG_ARRIVELOCATION);
         }
-        utils.addElement(OnArriveLocTrig, constructedTrigger.substring(1, constructedTrigger.length()) + ":" + pointName);
+        OnArriveLocTrig.add(constructedTrigger.substring(1, constructedTrigger.length()) + ":" + pointName);
         utils.setScriptVar(object, restuss_event.TRIG_ARRIVELOCATION, OnArriveLocTrig);
     }
     public void storeCustomSignal(obj_id object, String event) throws InterruptedException
     {
         String[] parse = split(event, ':');
-        Vector customSignal = new Vector();
-        customSignal.setSize(0);
+        List customSignal = new ArrayList<String>();
         if (utils.hasScriptVar(object, restuss_event.TRIG_CUSTOMSIGNAL))
         {
             customSignal = utils.getResizeableStringArrayScriptVar(object, restuss_event.TRIG_CUSTOMSIGNAL);
             utils.removeScriptVar(object, restuss_event.TRIG_CUSTOMSIGNAL);
         }
-        utils.addElement(customSignal, event.substring(13, event.length()));
+        customSignal.add(event.substring(13, event.length()));
         utils.setScriptVar(object, restuss_event.TRIG_CUSTOMSIGNAL, customSignal);
     }
     public void doDeleteSpawn(String deleteString) throws InterruptedException
@@ -1238,10 +1231,8 @@ public class sequence_controller extends script.base_script
     public void storeSpawnedChild(obj_id self, obj_id child, String spawn_id) throws InterruptedException
     {
         dictionary childArray = utils.getDictionaryScriptVar(self, trial.PROT_CHILD_ARRAY);
-        Vector thisList = new Vector();
-        thisList.setSize(0);
-        Vector all_spawn_id = new Vector();
-        all_spawn_id.setSize(0);
+        List thisList = new ArrayList<obj_id>();
+        List all_spawn_id = new ArrayList<String>();
         if (childArray.containsKey(spawn_id))
         {
             thisList = childArray.getResizeableObjIdArray(spawn_id);
@@ -1261,8 +1252,7 @@ public class sequence_controller extends script.base_script
     }
     public void sendDelayedSpawnActors(String triggerId) throws InterruptedException
     {
-        Vector sentIds = new Vector();
-        sentIds.setSize(0);
+        List sentIds = new ArrayList<String>();
         if (utils.hasScriptVar(getSelf(), ABSOLUTE_TIMER))
         {
             sentIds = utils.getResizeableStringArrayScriptVar(getSelf(), ABSOLUTE_TIMER);
@@ -1299,8 +1289,7 @@ public class sequence_controller extends script.base_script
         {
             return;
         }
-        Vector masterList = new Vector();
-        masterList.setSize(0);
+        List masterList = new ArrayList<String>();
         if (utils.hasScriptVar(self, WFC_MASTER))
         {
             masterList = utils.getResizeableStringArrayScriptVar(self, WFC_MASTER);
@@ -1308,7 +1297,7 @@ public class sequence_controller extends script.base_script
         }
         if (!masterList.contains(object.substring(16, object.length())))
         {
-            utils.addElement(masterList, object.substring(16, object.length()));
+            masterList.add(object.substring(16, object.length()));
         }
         utils.setScriptVar(self, WFC_MASTER, masterList);
         for (int i = 0; i < tasks.length; i++)
@@ -1335,7 +1324,7 @@ public class sequence_controller extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        Vector masterList = utils.getResizeableStringArrayScriptVar(self, WFC_MASTER);
+        List masterList = utils.getResizeableStringArrayScriptVar(self, WFC_MASTER);
         for (Object o : masterList) {
             handleCheckForComplete(((String) o), signal);
         }
@@ -1343,7 +1332,7 @@ public class sequence_controller extends script.base_script
     }
     public void completeTaskId(String signal) throws InterruptedException
     {
-        Vector masterList = utils.getResizeableStringArrayScriptVar(getSelf(), WFC_MASTER);
+        List masterList = utils.getResizeableStringArrayScriptVar(getSelf(), WFC_MASTER);
         for (Object o : masterList) {
             handleCheckForComplete(((String) o), signal);
         }
@@ -1383,7 +1372,7 @@ public class sequence_controller extends script.base_script
             dict.put("triggerType", triggerType);
             dict.put("triggerName", triggerName);
             messageTo(getSelf(), "triggerFired", dict, 0.0f, false);
-            Vector vectorList = utils.getResizeableStringArrayScriptVar(getSelf(), WFC_MASTER);
+            List vectorList = utils.getResizeableStringArrayScriptVar(getSelf(), WFC_MASTER);
             vectorList.remove(masterList);
             if (vectorList == null || vectorList.size() == 0)
             {

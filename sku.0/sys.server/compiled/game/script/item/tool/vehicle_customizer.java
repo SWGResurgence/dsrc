@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class vehicle_customizer extends script.base_script
 {
-    public vehicle_customizer()
-    {
-    }
     public static final String SCRIPTVAR_PID = "vehicletool.pid";
     public static final String SCRIPTVAR_PLAYER = "vehicletool.player";
     public static final String SCRIPTVAR_TARGET = "vehicletool.target";
@@ -106,8 +103,8 @@ public class vehicle_customizer extends script.base_script
                 String var = row.getString(key);
                 if (var != null && !var.equals("") && !var.equals("none"))
                 {
-                    entries = utils.addElement(entries, "@" + STF + ":opt_color_" + toLower(key));
-                    opt = utils.addElement(opt, var);
+                    entries.add("@" + STF + ":opt_color_" + toLower(key));
+                    opt.add(var);
                 }
             }
         }
