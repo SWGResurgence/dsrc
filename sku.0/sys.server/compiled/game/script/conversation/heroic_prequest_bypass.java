@@ -1,17 +1,25 @@
 package script.conversation;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import script.library.chat;
-import script.library.groundquests;
-import script.library.instance;
+import script.*;
+import script.base_class.*;
+import script.base_script;
 
 import script.obj_id;
 import script.string_id;
 
-public class heroic_prequest_bypass extends script.conversation.base.conversation_base {
-    private static final String SCRIPT = "conversation/heroic_prequest_bypass";
+import script.library.ai_lib;
+import script.library.chat;
+import script.library.conversation;
+import script.library.factions;
+import script.library.groundquests;
+import script.library.instance;
+import script.library.prose;
+import script.library.utils;
+
+import java.util.Vector;
+
+public class heroic_prequest_bypass extends script.base_script {
+    public static final String c_stringFile = "conversation/heroic_prequest_bypass";
     private static final String[] QUESTS = {
         "axkva_min_intro",
         "exar_kun_intro_01",
@@ -95,7 +103,7 @@ public class heroic_prequest_bypass extends script.conversation.base.conversatio
     
     private static String[] getCompletedPrequests(obj_id player) throws InterruptedException {
         obj_id altInGroup = getAltInGroup(player);
-        List<String> questsToComplete = new ArrayList<>();
+        Vector questsToComplete = new Vector();
         if (altInGroup != null) {
             for (String quest : QUESTS) {
                 if (groundquests.hasCompletedQuest(altInGroup, quest) && !groundquests.hasCompletedQuest(player, quest)) {
