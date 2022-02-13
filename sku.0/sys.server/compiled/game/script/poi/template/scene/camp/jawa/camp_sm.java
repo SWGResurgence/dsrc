@@ -12,6 +12,9 @@ import java.util.Vector;
 
 public class camp_sm extends script.poi.template.scene.camp.jawa.base
 {
+    public camp_sm()
+    {
+    }
     public static final int COL_MAX = 1;
     public int handleTheaterSetup(obj_id self, dictionary params) throws InterruptedException
     {
@@ -30,7 +33,7 @@ public class camp_sm extends script.poi.template.scene.camp.jawa.base
                 }
                 if (n == COL_MAX - 1)
                 {
-                    tpf.remove(0);
+                    tpf = utils.removeElementAt(tpf, 0);
                 }
                 int cnt = rand(4, 7) - n;
                 for (int i = 0; i < cnt; i++)
@@ -52,15 +55,21 @@ public class camp_sm extends script.poi.template.scene.camp.jawa.base
                         }
                         here.y = getHeightAtLocation(here.x, here.z);
                         obj_id child = createObject(template, here);
-                        if (child != null && child != obj_id.NULL_ID)
+                        if ((child == null) || (child == obj_id.NULL_ID))
+                        {
+                        }
+                        else 
                         {
                             setYaw(child, rand(-180, 180));
-                            children.add(child);
+                            children = utils.addElement(children, child);
                         }
                     }
                 }
             }
-            if (children != null && children.size() != 0)
+            if ((children == null) || (children.size() == 0))
+            {
+            }
+            else 
             {
                 setObjVar(self, theater.VAR_CHILDREN, children);
             }

@@ -2,8 +2,14 @@ package script.library;
 
 import script.obj_id;
 
+import java.util.Arrays;
+import java.util.Vector;
+
 public class magic_item extends script.base_script
 {
+    public magic_item()
+    {
+    }
     public static final float PT_DELTA = 0.15f;
     public static final String TBL_COST = "datatables/magic_item/mod_cost.iff";
     public static final String COL_MAX = "MAX";
@@ -116,7 +122,7 @@ public class magic_item extends script.base_script
         pts.setSize(0);
         if (numMods == 1)
         {
-            pts.add(100);
+            pts = utils.addElement(pts, 100);
             spent = 100;
             LOG("magic_item", "pts[0] = 100");
         }
@@ -144,10 +150,10 @@ public class magic_item extends script.base_script
                 }
                 spent += wt;
                 LOG("magic_item", "pts[" + i + "] = " + wt);
-                pts.add(wt);
+                pts = utils.addElement(pts, wt);
             }
         }
-        if (pts != null && pts.size() > 0)
+        if ((pts != null) && (pts.size() > 0))
         {
             LOG("magic_item", "pts.length = " + pts.size());
             boolean litmus = true;
@@ -159,7 +165,7 @@ public class magic_item extends script.base_script
                 int idx = rand(0, mods.size() - 1);
                 LOG("magic_item", "idx = " + idx);
                 String myMod = ((String)mods.get(idx));
-                if (myMod != null && !myMod.isEmpty())
+                if ((myMod != null) && (!myMod.equals("")))
                 {
                     LOG("magic_item", "attempting to apply mod: " + myMod);
                     boolean applyNegative = false;
@@ -199,8 +205,8 @@ public class magic_item extends script.base_script
                         }
                     }
                 }
-                mods.remove(idx);
-                if (mods == null || mods.size() == 0)
+                mods = utils.removeElementAt(mods, idx);
+                if ((mods == null) || (mods.size() == 0))
                 {
                     LOG("magic_item", "ran out of mods... breaking out...");
                     break;
@@ -329,7 +335,7 @@ public class magic_item extends script.base_script
         pts.setSize(0);
         if (numMods == 1)
         {
-            pts.add(100);
+            pts = utils.addElement(pts, 100);
             spent = 100;
             LOG("magic_item", "pts[0] = 100");
         }
@@ -357,10 +363,10 @@ public class magic_item extends script.base_script
                 }
                 spent += wt;
                 LOG("magic_item", "pts[" + i + "] = " + wt);
-                pts.add(wt);
+                pts = utils.addElement(pts, wt);
             }
         }
-        if (pts != null && pts.size() > 0)
+        if ((pts != null) && (pts.size() > 0))
         {
             LOG("magic_item", "pts.length = " + pts.size());
             boolean litmus = true;
@@ -372,7 +378,7 @@ public class magic_item extends script.base_script
                 int idx = rand(0, mods.size() - 1);
                 LOG("magic_item", "idx = " + idx);
                 String myMod = (String)mods.elementAt(idx);
-                if (myMod != null && !myMod.isEmpty())
+                if ((myMod != null) && (!myMod.equals("")))
                 {
                     LOG("magic_item", "attempting to apply mod: " + myMod);
                     int tmp = (Integer) pts.get(i);
@@ -403,8 +409,8 @@ public class magic_item extends script.base_script
                         }
                     }
                 }
-                mods.remove(idx);
-                if (mods == null || mods.size() == 0)
+                mods.removeElementAt(idx);
+                if ((mods == null) || (mods.size() == 0))
                 {
                     LOG("magic_item", "ran out of mods... breaking out...");
                     break;
@@ -424,7 +430,7 @@ public class magic_item extends script.base_script
     }
     public static String[] getGemMods(String gemType) throws InterruptedException
     {
-        if (gemType == null || gemType.isEmpty())
+        if (gemType == null || gemType.equals(""))
         {
             return null;
         }
@@ -443,7 +449,7 @@ public class magic_item extends script.base_script
             armorMods.setSize(0);
             for (String allMod : allMods) {
                 if (dataTableGetInt(TBL_COST, allMod, "ARMOR_ATTACHMENT_MODS") != 0) {
-                    armorMods.add(allMods);
+                    armorMods = utils.addElement(armorMods, allMod);
                 }
             }
             if (armorMods != null && armorMods.size() > 0)

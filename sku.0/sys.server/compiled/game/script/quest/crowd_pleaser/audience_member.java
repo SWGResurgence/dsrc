@@ -115,7 +115,7 @@ public class audience_member extends script.base_script
                         if (utils.hasScriptVar(control, RATING_OBJVAR + "." + musicName)) {
                             int rating = utils.getIntScriptVar(control, RATING_OBJVAR + "." + musicName);
                             if (rating > 0) {
-                                choices.add(MUSIC_NAMES);
+                                choices = utils.addElement(choices, musicName);
                             }
                         }
                     }
@@ -139,7 +139,7 @@ public class audience_member extends script.base_script
                             int rating = utils.getIntScriptVar(control, RATING_OBJVAR + "." + DANCE_NAMES[i]);
                             if (rating > 0)
                             {
-                                choices.add(DANCE_NAMES);
+                                choices = utils.addElement(choices, DANCE_NAMES[i]);
                             }
                         }
                     }
@@ -164,7 +164,7 @@ public class audience_member extends script.base_script
                         int rating = utils.getIntScriptVar(control, RATING_OBJVAR + "." + i);
                         if (rating > 0)
                         {
-                            choices.add(Integer.toString);
+                            choices = utils.addElement(choices, Integer.toString(i));
                         }
                     }
                 }
@@ -190,7 +190,7 @@ public class audience_member extends script.base_script
                         if (utils.hasScriptVar(control, RATING_OBJVAR + "." + musicName)) {
                             int rating = utils.getIntScriptVar(control, RATING_OBJVAR + "." + musicName);
                             if (rating < 0) {
-                                choices.add(MUSIC_NAMES);
+                                choices = utils.addElement(choices, musicName);
                             }
                         }
                     }
@@ -214,7 +214,7 @@ public class audience_member extends script.base_script
                             int rating = utils.getIntScriptVar(control, RATING_OBJVAR + "." + DANCE_NAMES[i]);
                             if (rating < 0)
                             {
-                                choices.add(DANCE_NAMES[i]);
+                                choices = utils.addElement(choices, DANCE_NAMES[i]);
                             }
                         }
                     }
@@ -239,7 +239,7 @@ public class audience_member extends script.base_script
                         int rating = utils.getIntScriptVar(control, RATING_OBJVAR + "." + i);
                         if (rating < 0)
                         {
-                            choices.add(Integer.toString(i));
+                            choices = utils.addElement(choices, Integer.toString(i));
                         }
                     }
                 }

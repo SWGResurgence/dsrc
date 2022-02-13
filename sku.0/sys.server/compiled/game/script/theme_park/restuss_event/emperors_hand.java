@@ -4,11 +4,12 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
-import java.util.ArrayList;
-import java.util.List;
 
 public class emperors_hand extends script.base_script
 {
+    public emperors_hand()
+    {
+    }
     public static final String VOLUME_NAME = "aggressive_area";
     public static final string_id FOUND_JEDI = new string_id("restuss_event/object", "jedi_located");
     public int OnAttach(obj_id self) throws InterruptedException

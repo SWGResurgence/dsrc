@@ -8,6 +8,9 @@ import java.util.Vector;
 
 public class dungeon_spawner_parent extends script.base_script
 {
+    public dungeon_spawner_parent()
+    {
+    }
     public static final float SPAWN_DELAY = 1.0f;
     public int OnInitialize(obj_id self) throws InterruptedException
     {
@@ -195,11 +198,11 @@ public class dungeon_spawner_parent extends script.base_script
             if (objContents != null) {
                 for (obj_id objContent : objContents) {
                     if (hasObjVar(objContent, "type")) {
-                        objSpawners.add(objContents);
+                        objSpawners = utils.addElement(objSpawners, objContent);
                     }
                 }
             } else {
-                objSpawners.add(objObjects);
+                objSpawners = utils.addElement(objSpawners, objObject);
             }
         }
         obj_id[] _objSpawners = new obj_id[0];

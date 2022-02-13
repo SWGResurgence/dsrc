@@ -3,11 +3,13 @@ package script.city.bestine;
 import script.*;
 import script.library.utils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class museum_event_grandparent extends script.base_script
 {
+    public museum_event_grandparent()
+    {
+    }
     public static final String MASTER_OBJECT_TEMPLATE = "object/tangible/poi/tatooine/bestine/bestine_museum_event_master_object.iff";
     public static final String VARNAME_MUSEUM_STATUS = "strMuseumEventStatus";
     public static final String VARNAME_MUSEUM_WINNER = "strMuseumEventWinner";
@@ -232,7 +234,7 @@ public class museum_event_grandparent extends script.base_script
         {
             if (!strMuseumEventWinner.equals("none"))
             {
-                List previousArtworkIndexes = new ArrayList<Integer>();
+                Vector previousArtworkIndexes = new Vector();
                 if (hasObjVar(masterObjectId, "bestine.previousArtworkIndexes"))
                 {
                     previousArtworkIndexes = utils.getResizeableIntBatchObjVar(masterObjectId, "bestine.previousArtworkIndexes");
@@ -240,7 +242,7 @@ public class museum_event_grandparent extends script.base_script
                 String[] strArtists = dataTableGetStringColumnNoDefaults(DATATABLE_NAME, "artistNpc");
                 int artistRow = utils.getElementPositionInArray(strArtists, strMuseumEventWinner);
                 int artistIndex = (artistRow * 100) + intMuseumEventWinnerArtworkIndex;
-                previousArtworkIndexes.add(artistIndex);
+                previousArtworkIndexes = utils.addElement(previousArtworkIndexes, artistIndex);
                 utils.setResizeableBatchObjVar(masterObjectId, "bestine.previousArtworkIndexes", previousArtworkIndexes);
             }
         }

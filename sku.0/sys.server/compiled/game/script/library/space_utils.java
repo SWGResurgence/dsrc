@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class space_utils extends script.base_script
 {
+    public space_utils()
+    {
+    }
     public static final int POB_LOOT_BOX_CAPACITY = 75;
     public static final string_id SID_NO_SHIP_CERTIFICATION = new string_id("space/space_interaction", "no_ship_certification");
     public static final string_id SID_NO_WORKING_SHIP = new string_id("space/space_interaction", "no_working_ship");
@@ -646,7 +649,7 @@ public class space_utils extends script.base_script
                     obj_id gunner = getObjectInSlot(objShip, SHIP_GUNNER_SLOT_NAMES[i]);
                     if (isIdValid(gunner))
                     {
-                        gunners.add(gunner);
+                        gunners = utils.addElement(gunners, gunner);
                     }
                 }
                 return gunners;
@@ -659,7 +662,7 @@ public class space_utils extends script.base_script
                             for (String POB_SHIP_GUNNER_SLOT_NAME : POB_SHIP_GUNNER_SLOT_NAMES) {
                                 obj_id gunner = getObjectInSlot(cellContent, POB_SHIP_GUNNER_SLOT_NAME);
                                 if (isIdValid(gunner)) {
-                                    gunners.add(gunner);
+                                    gunners = utils.addElement(gunners, gunner);
                                 }
                             }
                         }
@@ -687,7 +690,7 @@ public class space_utils extends script.base_script
         {
             if (utils.getElementPositionInArray(crew, pilot) == -1)
             {
-                crew.add(pilot);
+                utils.addElement(crew, pilot);
             }
         }
         obj_id opps = getOperationsOfficer(ship);
@@ -695,7 +698,7 @@ public class space_utils extends script.base_script
         {
             if (utils.getElementPositionInArray(crew, opps) == -1)
             {
-                crew.add(opps);
+                utils.addElement(crew, opps);
             }
         }
         Vector passengers = getPassengers(ship);
@@ -703,7 +706,7 @@ public class space_utils extends script.base_script
         {
             for (Object passenger : passengers) {
                 if (utils.getElementPositionInArray(crew, passenger) == -1) {
-                    crew.add(((obj_id)passengers.get, passenger.get));
+                    utils.addElement(crew, passenger);
                 }
             }
         }
@@ -727,7 +730,7 @@ public class space_utils extends script.base_script
                 if (objInteriorContents != null && objInteriorContents.length > 0) {
                     for (obj_id objInteriorContent : objInteriorContents) {
                         if (isPlayer(objInteriorContent)) {
-                            objPassengers.add(objInteriorContents, objInteriorContent);
+                            objPassengers = utils.addElement(objPassengers, objInteriorContent);
                         }
                     }
                 }
@@ -774,12 +777,12 @@ public class space_utils extends script.base_script
             obj_id objOfficer = getPilotId(objShip);
             if (isIdValid(objOfficer))
             {
-                objOfficers.add(objOfficer);
+                objOfficers = utils.addElement(objOfficers, objOfficer);
             }
             objOfficer = getOperationsOfficer(objShip);
             if (isIdValid(objOfficer))
             {
-                objOfficers.add(objOfficer);
+                objOfficers = utils.addElement(objOfficers, objOfficer);
             }
             return objOfficers;
         }
@@ -787,7 +790,7 @@ public class space_utils extends script.base_script
         {
             Vector objTest = new Vector();
             objTest.setSize(0);
-            objTest.add(getPilotId(objShip));
+            objTest = utils.addElement(objTest, getPilotId(objShip));
             return objTest;
         }
     }

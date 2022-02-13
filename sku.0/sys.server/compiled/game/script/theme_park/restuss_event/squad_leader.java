@@ -6,10 +6,12 @@ import script.location;
 import script.obj_id;
 
 import java.util.Vector;
-import java.util.List;
 
 public class squad_leader extends script.base_script
 {
+    public squad_leader()
+    {
+    }
     public static final boolean LOGGING = true;
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -78,7 +80,7 @@ public class squad_leader extends script.base_script
     }
     public void findWayPoints(obj_id self) throws InterruptedException
     {
-        List wayPoints = utils.getResizeableObjIdArrayScriptVar(self, restuss_event.MASTER_PATROL_ARRAY);
+        Vector wayPoints = utils.getResizeableObjIdArrayScriptVar(self, restuss_event.MASTER_PATROL_ARRAY);
         if (wayPoints == null || wayPoints.size() == 0)
         {
             doLogging("findWayPoints", "Waypoint list was empty, exiting");
@@ -110,7 +112,7 @@ public class squad_leader extends script.base_script
             for (Object wayPoint : wayPoints) {
                 if (hasObjVar(((obj_id) wayPoint), "wp_name")) {
                     if (s.equals(getStringObjVar(((obj_id) wayPoint), "wp_name"))) {
-                        myPath.add(getLocation(((obj_id)wayPoints.get)));
+                        utils.addElement(myPath, getLocation(((obj_id) wayPoint)));
                     }
                 }
             }

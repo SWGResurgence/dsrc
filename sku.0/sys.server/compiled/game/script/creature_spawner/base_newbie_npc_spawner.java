@@ -6,7 +6,6 @@ import script.location;
 import script.obj_id;
 
 import java.util.Vector;
-import java.util.
 
 public class base_newbie_npc_spawner extends script.base_script
 {
@@ -43,7 +42,7 @@ public class base_newbie_npc_spawner extends script.base_script
 		location goodLoc;
 		obj_id spawned;
 		Vector myCreations;
-		List theList;
+		Vector theList;
 		while (count < maxPop)
 		{
 			if(newbie) LOG("NewbieSpawn", "spawning #" + count);
@@ -59,7 +58,7 @@ public class base_newbie_npc_spawner extends script.base_script
 			{
 				myCreations = new Vector();
 				myCreations.setSize(0);
-				myCreations.add(spawned);
+				utils.addElement(myCreations, spawned);
 				utils.setScriptVar(self, "myCreations", myCreations);
 			}
 			else

@@ -12,6 +12,9 @@ import java.util.Vector;
 
 public class game_assault extends script.base_script
 {
+    public game_assault()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield.game_assault::OnAttach");
@@ -62,7 +65,7 @@ public class game_assault extends script.base_script
             for (obj_id crit_obj : crit_objs) {
                 int obj_faction_id = pvpBattlefieldGetFaction(crit_obj, bf);
                 if (obj_faction_id == ai_faction_id) {
-                    faction_list.add(crit_objs, crit_obj);
+                    faction_list = utils.addElement(faction_list, crit_obj);
                     String obj_name = ai_faction + " Power Generator #" + faction_list.size();
                     setName(crit_obj, obj_name);
                 }
@@ -166,30 +169,30 @@ public class game_assault extends script.base_script
         String[] factions_remaining = battlefield.getAIFactionsRemaining(self);
         if (factions_remaining != null)
         {
-            dsrc.add("Objectives Remaining");
+            dsrc = utils.addElement(dsrc, "Objectives Remaining");
             for (String s : factions_remaining) {
                 String objVar_name = battlefield.VAR_GAME + "." + s + "_destroy";
                 obj_id[] destroy_objs = getObjIdArrayObjVar(self, objVar_name);
                 if (destroy_objs != null) {
-                    dsrc.add("   " + factions_remaining, "   " + s);
+                    dsrc = utils.addElement(dsrc, "   " + s);
                     for (obj_id destroy_obj : destroy_objs) {
                         float hitpoints = getHitpoints(destroy_obj);
                         float maxHitpoints = getMaxHitpoints(destroy_obj);
                         int percent = (int) ((hitpoints / maxHitpoints) * 100.0f);
                         String name = getName(destroy_obj);
-                        dsrc.add("      " + name + " at " + percent + "%");
+                        dsrc = utils.addElement(dsrc, "      " + name + " at " + percent + "%");
                     }
                 }
             }
         }
-        dsrc.add("Kills/Deaths");
+        dsrc = utils.addElement(dsrc, "Kills/Deaths");
         String[] factions_allowed = battlefield.getAllFactionsAllowed(self);
         for (String s : factions_allowed) {
-            dsrc.add("   " + factions_allowed, "   " + s);
+            dsrc = utils.addElement(dsrc, "   " + s);
             int kills = battlefield.getFactionKills(self, s);
             int deaths = battlefield.getFactionDeaths(self, s);
-            dsrc.add("      " + "Kills: " + kills);
-            dsrc.add("      " + "Deaths: " + deaths);
+            dsrc = utils.addElement(dsrc, "      " + "Kills: " + kills);
+            dsrc = utils.addElement(dsrc, "      " + "Deaths: " + deaths);
         }
         sui.listbox(player, "Battlefield Statistics", "Objective: Assault", dsrc);
         return SCRIPT_CONTINUE;

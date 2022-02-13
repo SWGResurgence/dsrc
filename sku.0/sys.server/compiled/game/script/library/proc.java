@@ -4,11 +4,13 @@ import script.*;
 import script.combat_engine.combat_data;
 import script.combat_engine.weapon_data;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class proc extends script.base_script
 {
+    public proc()
+    {
+    }
     public static final String CYBERNETICS_TABLE = "datatables/cybernetic/cybernetic.iff";
     public static final String PROC_TABLE = "datatables/proc/proc.iff";
     public static final String REAC_BASE = "reactive_proc.";
@@ -22,7 +24,7 @@ public class proc extends script.base_script
         prose_package pp = new prose_package();
         if (actionData != null)
         {
-            if (actionData.params != null && !actionData.params.isEmpty())
+            if (actionData.params != null && !actionData.params.equals(""))
             {
                 params = actionData.params;
             }
@@ -42,7 +44,7 @@ public class proc extends script.base_script
             {
                 return;
             }
-            List procEffects = utils.getResizeableStringArrayScriptVar(attacker, "currentProcList");
+            Vector procEffects = utils.getResizeableStringArrayScriptVar(attacker, "currentProcList");
             if (procEffects != null && procEffects.size() > 0)
             {
                 dictionary parms;
@@ -107,7 +109,7 @@ public class proc extends script.base_script
         }
         if (utils.hasScriptVar(defender, "currentReacList"))
         {
-            List reacEffects = utils.getResizeableStringArrayScriptVar(defender, "currentReacList");
+            Vector reacEffects = utils.getResizeableStringArrayScriptVar(defender, "currentReacList");
             if (reacEffects != null && reacEffects.size() > 0)
             {
                 dictionary reacParms;
@@ -162,17 +164,18 @@ public class proc extends script.base_script
     }
     public static void buildCurrentProcList(obj_id player) throws InterruptedException
     {
-        List currentProcList = new ArrayList<String>();
+        Vector currentProcList = new Vector();
+        currentProcList.setSize(0);
         obj_id weapon = getCurrentWeapon(player);
         if (static_item.isStaticItem(weapon))
         {
             dictionary itemData = static_item.getStaticItemWeaponDictionary(weapon);
             String procEffect = itemData.getString("proc_effect");
-            if (procEffect != null && !procEffect.isEmpty())
+            if (procEffect != null && !procEffect.equals(""))
             {
                 String[] weaponProcEffects = split(procEffect, ',');
                 for (String weaponProcEffect : weaponProcEffects) {
-                    currentProcList.add(weaponProcEffect);
+                    currentProcList.addElement(weaponProcEffect);
                 }
             }
         }
@@ -182,7 +185,7 @@ public class proc extends script.base_script
             {
                 String[] weaponProcEffects = getStringArrayObjVar(weapon, "procEffect");
                 for (String weaponProcEffect : weaponProcEffects) {
-                    currentProcList.add(weaponProcEffect);
+                    currentProcList.addElement(weaponProcEffect);
                 }
             }
         }
@@ -190,7 +193,7 @@ public class proc extends script.base_script
         {
             String[] buffProcEffects = utils.getStringArrayScriptVar(player, "procBuffEffects");
             for (String buffProcEffect : buffProcEffects) {
-                currentProcList.add(buffProcEffect);
+                currentProcList.addElement(buffProcEffect);
             }
         }
         if (utils.hasScriptVar(player, "cyberneticItems"))
@@ -199,26 +202,27 @@ public class proc extends script.base_script
             String procString = null;
             for (String installedCybernetic : installedCybernetics) {
                 procString = dataTableGetString(CYBERNETICS_TABLE, installedCybernetic, "procEffectString");
-                if (procString != null && !procString.isEmpty()) {
-                    currentProcList.add(procString);
+                if (procString != null && !procString.equals("")) {
+                    currentProcList.addElement(procString);
                 }
             }
         }
         if (utils.hasScriptVar(player, "expertiseProcReacList"))
         {
-            List expertiseList = utils.getResizeableStringArrayScriptVar(player, "expertiseProcReacList");
+            Vector expertiseList = utils.getResizeableStringArrayScriptVar(player, "expertiseProcReacList");
             for (Object anExpertiseList : expertiseList) {
                 if (((String) anExpertiseList).endsWith("_proc")) {
-                    currentProcList.add(anExpertiseList);
+                    currentProcList.addElement(anExpertiseList);
                 }
             }
         }
         if (currentProcList.size() > 0)
         {
-            List tempProcList = new ArrayList<String>();
+            Vector tempProcList = new Vector();
+            tempProcList.setSize(0);
             for (Object aCurrentProcList : currentProcList) {
                 if (!tempProcList.contains(aCurrentProcList)) {
-                    tempProcList.add(aCurrentProcList);
+                    tempProcList.addElement(aCurrentProcList);
                 }
             }
             utils.setScriptVar(player, "currentProcList", tempProcList);
@@ -230,7 +234,8 @@ public class proc extends script.base_script
     }
     public static void buildCurrentReacList(obj_id player) throws InterruptedException
     {
-        List currentReacList = new ArrayList<String>();
+        Vector currentReacList = new Vector();
+        currentReacList.setSize(0);
         final String strWear[] = 
         {
             "chest2",
@@ -268,7 +273,7 @@ public class proc extends script.base_script
                         reacEffect = wearableData.getString("reactive_effect");
                         if (reacEffect != null && !reacEffect.equals("")) {
                             for (String wearableReacEffect : split(reacEffect, ',')) {
-                                currentReacList.add(wearableReacEffect);
+                                currentReacList.addElement(wearableReacEffect);
                             }
                         }
                     }
@@ -279,7 +284,7 @@ public class proc extends script.base_script
         {
             String[] buffReacEffects = utils.getStringArrayScriptVar(player, "reacBuffEffects");
             for (String buffReacEffect : buffReacEffects) {
-                currentReacList.add(buffReacEffect);
+                currentReacList.addElement(buffReacEffect);
             }
         }
         if (utils.hasScriptVar(player, "cyberneticItems"))
@@ -289,17 +294,17 @@ public class proc extends script.base_script
             for (String installedCybernetic : installedCybernetics) {
                 reacString = dataTableGetString(CYBERNETICS_TABLE, installedCybernetic, "reacEffectString");
                 if (reacString != null && !reacString.equals("")) {
-                    currentReacList.add(reacString);
+                    currentReacList.addElement(reacString);
                 }
                 reacString = null;
             }
         }
         if (utils.hasScriptVar(player, "expertiseProcReacList"))
         {
-            List expertiseList = utils.getResizeableStringArrayScriptVar(player, "expertiseProcReacList");
+            Vector expertiseList = utils.getResizeableStringArrayScriptVar(player, "expertiseProcReacList");
             for (Object anExpertiseList : expertiseList) {
                 if (((String) anExpertiseList).endsWith("_reac")) {
-                    currentReacList.add(anExpertiseList);
+                    currentReacList.addElement(anExpertiseList);
                 }
             }
         }

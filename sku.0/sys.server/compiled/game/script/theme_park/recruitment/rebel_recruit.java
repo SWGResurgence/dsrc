@@ -8,6 +8,9 @@ import java.util.Vector;
 
 public class rebel_recruit extends script.theme_park.recruitment.base.base_recruiter
 {
+    public rebel_recruit()
+    {
+    }
     public static final String CONVO = "recruiting/rebel_recruit";
     public int OnInitialize(obj_id self) throws InterruptedException
     {
@@ -51,25 +54,25 @@ public class rebel_recruit extends script.theme_park.recruitment.base.base_recru
             if (faction.equals(factions.FACTION_REBEL))
             {
                 greeting = new string_id(CONVO, "rr13");
-                response.add(new string_id(CONVO, "rr14"));
+                response = utils.addElement(response, new string_id(CONVO, "rr14"));
             }
             else if (faction.equals(factions.FACTION_IMPERIAL))
             {
                 greeting = new string_id(CONVO, "rr16");
-                response.add(new string_id(CONVO, "rr17"));
+                response = utils.addElement(response, new string_id(CONVO, "rr17"));
             }
         }
         else 
         {
             greeting = new string_id(CONVO, "rr1");
-            response.add(new string_id(CONVO, "rr2"));
-            response.add(new string_id(CONVO, "rr3"));
+            response = utils.addElement(response, new string_id(CONVO, "rr2"));
+            response = utils.addElement(response, new string_id(CONVO, "rr3"));
         }
         if (addRedeemOption)
         {
-            response.add(new string_id(DATA_ITEM_CONVO, "redeem"));
+            response = utils.addElement(response, new string_id(DATA_ITEM_CONVO, "redeem"));
         }
-        if (response == null || response.size() == 0)
+        if ((response == null) || (response.size() == 0))
         {
             return SCRIPT_OVERRIDE;
         }

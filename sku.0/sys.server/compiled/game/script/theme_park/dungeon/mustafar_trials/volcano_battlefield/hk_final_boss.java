@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class hk_final_boss extends script.base_script
 {
+    public hk_final_boss()
+    {
+    }
     public static final String GUARD = "som_volcano_final_risen_sustainer";
     public static final String KUBAZA = "som_volcano_final_lava_beetle";
     public static final String AKBOT = "som_volcano_final_walker";
@@ -260,7 +263,7 @@ public class hk_final_boss extends script.base_script
         validLoc.setSize(0);
         for (obj_id object : objects) {
             if (hasObjVar(object, type)) {
-                validLoc.add(getLocation(object));
+                utils.addElement(validLoc, getLocation(object));
             }
         }
         if (validLoc == null || validLoc.size() == 0)

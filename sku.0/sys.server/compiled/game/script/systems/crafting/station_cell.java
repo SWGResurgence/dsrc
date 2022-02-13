@@ -6,20 +6,22 @@ import script.library.utils;
 import script.obj_id;
 
 import java.util.Vector;
-import java.util.List;
 
 public class station_cell extends script.base_script
 {
+    public station_cell()
+    {
+    }
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (getGameObjectType(item) == GOT_misc_crafting_station)
         {
             if (utils.hasScriptVar(self, craftinglib.SCRIPTVAR_CELL_STATIONS))
             {
-                List stations = utils.getResizeableObjIdArrayScriptVar(self, craftinglib.SCRIPTVAR_CELL_STATIONS);
+                Vector stations = utils.getResizeableObjIdArrayScriptVar(self, craftinglib.SCRIPTVAR_CELL_STATIONS);
                 if (!utils.isElementInArray(stations, item))
                 {
-                    stations.add(item);
+                    stations = utils.addElement(stations, item);
                     utils.setScriptVar(self, craftinglib.SCRIPTVAR_CELL_STATIONS, stations);
                 }
             }
@@ -27,7 +29,7 @@ public class station_cell extends script.base_script
             {
                 Vector stations = new Vector();
                 stations.setSize(0);
-                stations.add(item);
+                stations = utils.addElement(stations, item);
                 utils.setScriptVar(self, craftinglib.SCRIPTVAR_CELL_STATIONS, stations);
             }
             int craftingType = getIntObjVar(item, craftinglib.OBJVAR_CRAFTING_TYPE);
@@ -102,7 +104,7 @@ public class station_cell extends script.base_script
                 {
                     return SCRIPT_CONTINUE;
                 }
-                List stations = utils.getResizeableObjIdArrayScriptVar(self, craftinglib.SCRIPTVAR_CELL_STATIONS);
+                Vector stations = utils.getResizeableObjIdArrayScriptVar(self, craftinglib.SCRIPTVAR_CELL_STATIONS);
                 obj_id secondStationId = obj_id.NULL_ID;
                 if (stations != null && stations.size() > 0)
                 {

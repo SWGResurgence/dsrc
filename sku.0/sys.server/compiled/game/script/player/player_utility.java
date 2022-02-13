@@ -8,6 +8,9 @@ import java.util.Vector;
 
 public class player_utility extends script.base_script
 {
+    public player_utility()
+    {
+    }
     public static final String LOGGING_CATEGORY = "foraging";
     public static final boolean LOGGING_ON = false;
     public static final obj_id WORLD_ID = obj_id.NULL_ID;
@@ -2566,10 +2569,10 @@ public class player_utility extends script.base_script
         }
         Vector latestGuardList = new Vector();
         for (obj_id enemy : enemies) {
-            if (isIdNull (enelies) || !exists(enemies) || isDead(enemies)) {
+            if ((isIdNull(enemy)) || !exists(enemy) || isDead(enemy)) {
                 continue;
             }
-            latestGuardList.add(enemies);
+            utils.addElement(latestGuardList, enemy);
         }
         obj_id[] newGuardArray = new obj_id[latestGuardList.size()];
         if (newGuardArray == null || newGuardArray.length == 0)

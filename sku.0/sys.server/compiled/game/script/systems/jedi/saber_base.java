@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class saber_base extends script.base_script
 {
+    public saber_base()
+    {
+    }
     public static final string_id SID_NO_PARTS_TO_RECOVER = new string_id("jedi_spam", "no_parts_to_recover");
     public int OnInitialize(obj_id self) throws InterruptedException
     {
@@ -130,7 +133,7 @@ public class saber_base extends script.base_script
         {
             if (generationList[i] == generation)
             {
-                saberList.add(dataTableGetRow("datatables/jedi/saber_conversion.iff", i));
+                saberList = utils.addElement(saberList, dataTableGetRow("datatables/jedi/saber_conversion.iff", i));
             }
         }
         int idx = -1;

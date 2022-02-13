@@ -260,8 +260,8 @@ public class intellect_spawner extends script.base_script
         while (size > 0)
         {
             int i = rand(0, (size - 1));
-            newList.add(list.get(i));
-            list.remove(i);
+            newList = utils.addElement(newList, list.get(i));
+            list = utils.removeElementAt(list, i);
             size--;
         }
         if (newList == null || newList.size() == 0)

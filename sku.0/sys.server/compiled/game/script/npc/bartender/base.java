@@ -476,8 +476,8 @@ public class base extends script.base_script
                                 int cost = d.getInt("price");
                                 if (cost > 0)
                                 {
-                                    entries.add("[" + cost + "] " + name);
-                                    opt.add(encodedName);
+                                    entries = utils.addElement(entries, "[" + cost + "] " + name);
+                                    opt = utils.addElement(opt, encodedName);
                                 }
                             }
                         }

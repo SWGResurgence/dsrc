@@ -3,11 +3,12 @@ package script.library;
 import script.*;
 
 import java.util.Vector;
-import java.util.ArrayList;
-import java.util.List;
 
 public class space_transition extends script.base_script
 {
+    public space_transition()
+    {
+    }
     public static final boolean debugSpaceTransition = true;
     public static final String DATATABLE_SHIP_START_LOCATIONS = "datatables/ship/ship_start_locations.iff";
     public static final String COLUMN_TEMPLATE = "template";
@@ -59,7 +60,7 @@ public class space_transition extends script.base_script
                 if (!isIdValid(shipContainer))
                 {
                     LOG("space", "shipContainer is " + shipContainer);
-                    List startLocations = getShipStartLocations(launchedShip);
+                    Vector startLocations = getShipStartLocations(launchedShip);
                     if (startLocations != null && startLocations.size() > 0)
                     {
                         if (launchedShipStartIndex < 0)
@@ -408,16 +409,15 @@ public class space_transition extends script.base_script
         }
         return null;
     }
-    public static List getContainedPlayers(obj_id obj) throws InterruptedException
+    public static Vector getContainedPlayers(obj_id obj) throws InterruptedException
     {
         return getContainedPlayers(obj, null);
     }
-    public static List getContainedPlayers(obj_id obj, List players) throws InterruptedException
+    public static Vector getContainedPlayers(obj_id obj, Vector players) throws InterruptedException
     {
         if (isPlayer(obj))
         {
-            players.add(obj);
-            return players;
+            return utils.addElement(players, obj);
         }
         obj_id[] contents = getContents(obj);
         if (contents != null)
@@ -447,7 +447,7 @@ public class space_transition extends script.base_script
         {
             LIVE_LOG("TeleportFixup", "packShip, ship=" + ship + ", template=" + getTemplateName(ship) + ", pilot=" + pilot + ", teleportFixup=" + teleportFixup + ", inSpace=" + inSpace + ", owner=" + owner);
         }
-        List players = getContainedPlayers(ship, null);
+        Vector players = getContainedPlayers(ship, null);
         if (players != null)
         {
             for (Object player1 : players) {
@@ -536,7 +536,7 @@ public class space_transition extends script.base_script
             obj_id[] contents = getContents(cell);
             if (contents != null && contents.length > 0) {
                 for (obj_id content : contents) {
-                    objects.add(contents);
+                    utils.addElement(objects, content);
                 }
             }
         }
@@ -923,9 +923,9 @@ public class space_transition extends script.base_script
         }
         return true;
     }
-    public static List getShipStartLocations(obj_id ship) throws InterruptedException
+    public static Vector getShipStartLocations(obj_id ship) throws InterruptedException
     {
-        List startLocations = null;
+        Vector startLocations = null;
         String shipTemplateName = getTemplateName(ship);
         String[] templateNames = dataTableGetStringColumn(DATATABLE_SHIP_START_LOCATIONS, COLUMN_TEMPLATE);
         if (templateNames != null)
@@ -948,7 +948,7 @@ public class space_transition extends script.base_script
                         int slot = utils.stringToInt(slotName.substring(11));
                         if (slot > 0 && isShipSlotInstalled(ship, slot + ship_chassis_slot_type.SCST_weapon_0))
                         {
-                            startLocations.add(new location(0.f, 0.f, 0.f, slotName, null));
+                            startLocations = utils.addElement(startLocations, new location(0.0f, 0.0f, 0.0f, slotName, null));
                         }
                         else
                         {
@@ -964,7 +964,7 @@ public class space_transition extends script.base_script
                             float x = dataTableGetFloat(DATATABLE_SHIP_START_LOCATIONS, rowIndex, COLUMN_X);
                             float y = dataTableGetFloat(DATATABLE_SHIP_START_LOCATIONS, rowIndex, COLUMN_Y);
                             float z = dataTableGetFloat(DATATABLE_SHIP_START_LOCATIONS, rowIndex, COLUMN_Z);
-                            startLocations.add(new location(x, y, z, getCurrentSceneName(), cell));
+                            startLocations = utils.addElement(startLocations, new location(x, y, z, getCurrentSceneName(), cell));
                         }
                     }
                     ++rowIndex;
@@ -1131,7 +1131,7 @@ public class space_transition extends script.base_script
             }
         }
     }
-    public static int getNextStartIndex(List shipStartLocations, int lastStartIndex) throws InterruptedException
+    public static int getNextStartIndex(Vector shipStartLocations, int lastStartIndex) throws InterruptedException
     {
         int startIndex = lastStartIndex + 1;
         if (startIndex > shipStartLocations.size())
@@ -1148,11 +1148,9 @@ public class space_transition extends script.base_script
     }
     public static void launch(obj_id player, obj_id ship, obj_id[] passengers, location warpLocation, location groundLoc) throws InterruptedException
     {
-        List passengersToWarp = new ArrayList<obj_id>();
-        passengersToWarp.add(player);
-        List passengerStartIndexes = new ArrayList<Integer>();
-        passengerStartIndexes.add(0);
-        List shipStartLocations = getShipStartLocations(ship);
+        Vector passengersToWarp = utils.addElement(null, player);
+        Vector passengerStartIndexes = utils.addElement(null, 0);
+        Vector shipStartLocations = space_transition.getShipStartLocations(ship);
         if (null != passengers)
         {
             if (shipStartLocations != null && shipStartLocations.size() > 0)
@@ -1164,8 +1162,8 @@ public class space_transition extends script.base_script
                         if (features.isSpaceEdition(passenger)) {
                             startIndex = space_transition.getNextStartIndex(shipStartLocations, startIndex);
                             if (startIndex <= shipStartLocations.size()) {
-                                entries.add("[" + cost + "] " + name);
-                                    opt.add(encodedName);
+                                passengersToWarp = utils.addElement(passengersToWarp, passenger);
+                                passengerStartIndexes = utils.addElement(passengerStartIndexes, startIndex);
                             }
                         } else {
                             string_id strSpam = new string_id("space/space_interaction", "no_space_expansion");

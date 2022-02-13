@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class camp_controlpanel extends script.base_script
 {
+    public camp_controlpanel()
+    {
+    }
     public static final float FIELD_COST_MULTIPLER = 1.15f;
     public static final string_id SID_MNU_DISBAND = new string_id("camp", "mnu_disband");
     public static final string_id SID_MNU_STATUS = new string_id("camp", "mnu_status");
@@ -148,25 +151,25 @@ public class camp_controlpanel extends script.base_script
         dsrc.setSize(0);
         prose_package ppCampOwner = prose.getPackage(SID_SUI_CAMP_STATUS_OWNER);
         prose.setTT(ppCampOwner, owner);
-        dsrc.add(" \0" + packOutOfBandProsePackage(null, ppCampOwner));
+        dsrc = utils.addElement(dsrc, " \0" + packOutOfBandProsePackage(null, ppCampOwner));
         int createTime = getIntObjVar(master, "camp.createTime");
         int curTime = getGameTime();
         String timestring = player_structure.assembleTimeRemaining(player_structure.convertSecondsTime(curTime - createTime));
         prose_package ppUptime = prose.getPackage(SID_SUI_CAMP_STATUS_UPTIME);
         prose.setTT(ppUptime, timestring);
-        dsrc.add(" \0" + packOutOfBandProsePackage(null, ppUptime));
+        dsrc = utils.addElement(dsrc, " \0" + packOutOfBandProsePackage(null, ppUptime));
         int count = getIntObjVar(master, "visitor_count");
         prose_package ppTotVis = prose.getPackage(SID_SUI_CAMP_STATUS_TOT_VIS);
         prose.setDI(ppTotVis, count);
-        dsrc.add(" \0" + packOutOfBandProsePackage(null, ppTotVis));
+        dsrc = utils.addElement(dsrc, " \0" + packOutOfBandProsePackage(null, ppTotVis));
         count = getIntObjVar(master, "occ_count");
         prose_package ppCurVis = prose.getPackage(SID_SUI_CAMP_STATUS_CUR_VIS);
         prose.setDI(ppCurVis, count);
-        dsrc.add(" \0" + packOutOfBandProsePackage(null, ppCurVis));
+        dsrc = utils.addElement(dsrc, " \0" + packOutOfBandProsePackage(null, ppCurVis));
         float healrate = camping.getCampHealModifier(master);
         prose_package ppHealMod = prose.getPackage(SID_SUI_CAMP_STATUS_HEAL);
         prose.setDF(ppHealMod, healrate);
-        dsrc.add(" \0" + packOutOfBandProsePackage(null, ppHealMod));
+        dsrc = utils.addElement(dsrc, " \0" + packOutOfBandProsePackage(null, ppHealMod));
         sui.listbox(player, utils.packStringId(SID_SUI_CAMP_STATUS_PROMPT), utils.packStringId(SID_SUI_CAMP_STATUS_TITLE), sui.OK_CANCEL, dsrc);
     }
     public void sendWaypoint(obj_id self, obj_id player) throws InterruptedException

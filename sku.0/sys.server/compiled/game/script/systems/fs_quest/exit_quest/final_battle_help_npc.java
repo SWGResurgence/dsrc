@@ -4,11 +4,13 @@ import script.library.utils;
 import script.location;
 import script.obj_id;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class final_battle_help_npc extends script.base_script
 {
+    public final_battle_help_npc()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id spawner = getObjIdObjVar(self, "quest_spawner.spawned_by");
@@ -27,7 +29,7 @@ public class final_battle_help_npc extends script.base_script
                 final float minDelay = 3.0f;
                 final float maxDelay = 8.0f;
                 loiterLocation(self, anchorLocation, minDistance, maxDistance, minDelay, maxDelay);
-                List existingNPCs = new ArrayList<obj_id>();
+                Vector existingNPCs = new Vector();
                 if (hasObjVar(theater_object, "fs_quest.final_battle_npcs"))
                 {
                     existingNPCs = utils.getResizeableObjIdBatchObjVar(theater_object, "fs_quest.final_battle_npcs");

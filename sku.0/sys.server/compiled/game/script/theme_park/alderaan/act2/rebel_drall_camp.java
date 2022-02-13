@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class rebel_drall_camp extends script.base_script
 {
+    public rebel_drall_camp()
+    {
+    }
     public static final String IMPERIAL_SHARED_STF = "theme_park/alderaan/act2/shared_imperial_missions";
     public static final string_id MISSION_COMPLETE = new string_id(IMPERIAL_SHARED_STF, "mission_complete");
     public static final String[] TEMPLATE_LIST = 
@@ -194,7 +197,7 @@ public class rebel_drall_camp extends script.base_script
             {
                 objectList = new Vector();
             }
-            objectList.add(newObject);
+            utils.addElement(objectList, newObject);
             if (objectList.size() > 0)
             {
                 setObjVar(self, "coa2.imperial.obj_list", objectList);

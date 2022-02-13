@@ -9,7 +9,6 @@ import script.library.utils;
 
 import java.io.File;
 import java.util.*;
-import java.util.List;
 
 public class base_class
 {
@@ -1831,7 +1830,7 @@ public class base_class
      * @param name      the objvar name to search for
      * @return the integer array, or null if not found
      */
-    public static L getResizeableIntArrayObjVar(obj_id object, String name)
+    public static Vector getResizeableIntArrayObjVar(obj_id object, String name)
     {
         int[] array = getIntArrayObjVar(object, name);
         if (array != null)
@@ -1842,7 +1841,7 @@ public class base_class
                 newArray[i] = new Integer(array[i]);
             return new Vector(Arrays.asList(newArray));
             */
-           return Arrays.asList(array);
+            return new Vector(Arrays.asList(array));
         }
         return null;
     }
@@ -1874,7 +1873,7 @@ public class base_class
      * @param name      the objvar name to search for
      * @return the float array, or null if not found
      */
-    public static List getResizeableFloatArrayObjVar(obj_id object, String name)
+    public static Vector getResizeableFloatArrayObjVar(obj_id object, String name)
     {
         float[] array = getFloatArrayObjVar(object, name);
         if (array != null)
@@ -1885,7 +1884,7 @@ public class base_class
                 newArray[i] = new Float(array[i]);
             return new Vector(Arrays.asList(newArray));
             */
-            return Arrays.asList(array);
+            return new Vector(Arrays.asList(array));
         }
         return null;
     }
@@ -1917,11 +1916,11 @@ public class base_class
      * @param name      the objvar name to search for
      * @return the string array, or null if not found
      */
-    public static List getResizeableStringArrayObjVar(obj_id object, String name)
+    public static Vector getResizeableStringArrayObjVar(obj_id object, String name)
     {
         String[] array = getStringArrayObjVar(object, name);
         if (array != null)
-            return Arrays.asList(array);
+            return new Vector(Arrays.asList(array));
         return null;
     }
     /**
@@ -1960,11 +1959,11 @@ public class base_class
      * @param name      the objvar name to search for
      * @return the obj_id array, or null if not found
      */
-    public static List getResizeableObjIdArrayObjVar(obj_id object, String name)
+    public static Vector getResizeableObjIdArrayObjVar(obj_id object, String name)
     {
         obj_id[] array = getObjIdArrayObjVar(object, name);
         if (array != null)
-            return Arrays.asList(array);
+            return new Vector(Arrays.asList(array));
         return null;
     }
     /**
@@ -1995,11 +1994,11 @@ public class base_class
      * @param name      the objvar name to search for
      * @return the location array, or null if not found
      */
-    public static List getResizeableLocationArrayObjVar(obj_id object, String name)
+    public static Vector getResizeableLocationArrayObjVar(obj_id object, String name)
     {
         location[] array = getLocationArrayObjVar(object, name);
         if (array != null)
-            return Arrays.asList(array);
+            return new Vector(Arrays.asList(array));
         return null;
     }
     /**
@@ -2350,7 +2349,7 @@ public class base_class
      * @return true on success, false on fail
      */
     private static native boolean _setObjVar(long object, String name, vector data);
-    public static boolean setObjVar(obj_id object, String name, List data)
+    public static boolean setObjVar(obj_id object, String name, vector data)
     {
         return _setObjVar(getLongWithNull(object), name, data);
     }
@@ -2508,7 +2507,7 @@ public class base_class
      * @param data      the obj_var value
      * @return true on success, false on fail
      */
-    public static boolean setObjVar(obj_id object, String name, List data, Object dataType)
+    public static boolean setObjVar(obj_id object, String name, Vector data, Object dataType)
     {
         // if we can't determine the class of the elements in data, we have to exit with an error
         if (data == null)
@@ -7097,11 +7096,11 @@ public class base_class
      *
      *      @return A list of objects the container contains.  It will be empty for non-containers.
     */
-    public static List getResizeableContents(obj_id container)
+    public static Vector getResizeableContents(obj_id container)
     {
         obj_id[] contents = getContents(container);
         if (contents != null)
-            return Arrays.asList(contents);
+            return new Vector(Arrays.asList(contents));
         return null;
     }
 
@@ -12556,7 +12555,7 @@ public class base_class
             public int    clientEffectId = 0;           // deferred effect to play on an attacker.  Lookup done in client data table.
             public int    actionName = 0;               // crc of the name of the special action used for this attack
             public boolean useLocation = false;			// if true, this is a location-based attack, and targetLocation is valid
-            public float[] targetLocation;				// the world-space location being targetted.
+            public vector targetLocation;				// the world-space location being targetted.
             public obj_id targetCell;                   // the cell of the location being targetted.
 
             public static final int TRAIL_LFOOT  = 1;
@@ -13351,7 +13350,7 @@ public class base_class
      * @param greeting      the greeting the NPC will give to the player.  It will attempt to localize on the server, and if that fails, the client will try.  May be null.
      * @param responses     the initial responses available to the player.
      */
-    public static boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greeting, List responses)
+    public static boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greeting, Vector responses)
     {
         return _npcStartConversation (player, npc, convoName, greeting, null, responses.toArray());
     }
@@ -13408,7 +13407,7 @@ public class base_class
      * @param responses     the initial responses available to the player.
      * @param appearanceOverrideServerTemplate  an optional parameter holding the name of a template to use an the appearance in any UI window when representing the "talker"
      */
-    public static boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greeting, List responses, String appearanceOverrideServerTemplate)
+    public static boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greeting, Vector responses, String appearanceOverrideServerTemplate)
     {
         return _npcStartConversationWithOverrideAppearance (player, npc, convoName, greeting, null, responses.toArray(), appearanceOverrideServerTemplate);
     }
@@ -13530,7 +13529,7 @@ public class base_class
      * @param player        the player
      * @param responses     the responses available to the player
      */
-    public static boolean npcSetConversationResponses(obj_id player, List responses)
+    public static boolean npcSetConversationResponses(obj_id player, Vector responses)
     {
         if (responses == null)
             return false;

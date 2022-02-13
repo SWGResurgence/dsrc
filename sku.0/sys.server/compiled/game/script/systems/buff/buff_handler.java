@@ -6,8 +6,6 @@ import script.combat_engine.combat_data;
 import script.library.*;
 
 import java.util.Vector;
-import java.util.ArrayList;
-import java.util.List;
 
 public class buff_handler extends script.base_script
 {
@@ -557,10 +555,10 @@ public class buff_handler extends script.base_script
         }
         else 
         {
-            List procBuffEffects = utils.getResizeableStringArrayScriptVar(self, "procBuffEffects");
+            Vector procBuffEffects = utils.getResizeableStringArrayScriptVar(self, "procBuffEffects");
             if (utils.getElementPositionInArray(procBuffEffects, effectName) == -1)
             {
-                procBuffEffects.add(effectName);
+                procBuffEffects.addElement(effectName);
                 utils.setScriptVar(self, "procBuffEffects", procBuffEffects);
             }
         }
@@ -572,8 +570,8 @@ public class buff_handler extends script.base_script
         effectName = effectName.substring(0, (effectName.lastIndexOf("_")));
         if (utils.hasScriptVar(self, "procBuffEffects"))
         {
-            List procBuffEffects = utils.getResizeableStringArrayScriptVar(self, "procBuffEffects");
-            procBuffEffects.remove(effectName);
+            Vector procBuffEffects = utils.getResizeableStringArrayScriptVar(self, "procBuffEffects");
+            procBuffEffects.removeElement(effectName);
             if (procBuffEffects.size() < 1)
             {
                 utils.removeScriptVar(self, "procBuffEffects");
@@ -598,10 +596,10 @@ public class buff_handler extends script.base_script
         }
         else 
         {
-            List reacBuffEffects = utils.getResizeableStringArrayScriptVar(self, "reacBuffEffects");
+            Vector reacBuffEffects = utils.getResizeableStringArrayScriptVar(self, "reacBuffEffects");
             if (utils.getElementPositionInArray(reacBuffEffects, effectName) == -1)
             {
-                reacBuffEffects.add(effectName);
+                reacBuffEffects.addElement(effectName);
                 utils.setScriptVar(self, "reacBuffEffects", reacBuffEffects);
             }
         }
@@ -613,8 +611,8 @@ public class buff_handler extends script.base_script
         effectName = effectName.substring(0, (effectName.lastIndexOf("_")));
         if (utils.hasScriptVar(self, "reacBuffEffects"))
         {
-            List reacBuffEffects = utils.getResizeableStringArrayScriptVar(self, "reacBuffEffects");
-            reacBuffEffects.remove(effectName);
+            Vector reacBuffEffects = utils.getResizeableStringArrayScriptVar(self, "reacBuffEffects");
+            reacBuffEffects.removeElement(effectName);
             if (reacBuffEffects.size() < 1)
             {
                 utils.removeScriptVar(self, "reacBuffEffects");
@@ -1017,19 +1015,19 @@ public class buff_handler extends script.base_script
     }
     public int critOnceAddBuffHandler(obj_id self, String effectName, String subtype, float duration, float value, String buffName, obj_id caster) throws InterruptedException
     {
-        List effectNames = new ArrayList<String>();
+        Vector effectNames = new Vector();
         effectName = effectName.substring(0, (effectName.lastIndexOf("_")));
         if (utils.hasScriptVar(self, "critRemoveBuffNames"))
         {
             effectNames = utils.getResizeableStringArrayScriptVar(self, "critRemoveBuffNames");
         }
-        effectNames.add(effectName);
+        utils.addElement(effectNames, effectName);
         utils.setScriptVar(self, "critRemoveBuffNames", effectNames);
         return SCRIPT_CONTINUE;
     }
     public int critOnceRemoveBuffHandler(obj_id self, String effectName, String subtype, float duration, float value, String buffName, obj_id caster) throws InterruptedException
     {
-        List effectNames = new ArrayList<String>();
+        Vector effectNames = new Vector();
         effectName = effectName.substring(0, (effectName.lastIndexOf("_")));
         if (utils.hasScriptVar(self, "critRemoveBuffNames"))
         {
@@ -1040,7 +1038,7 @@ public class buff_handler extends script.base_script
         {
             if (((String)effectNames.get(i)).equals(effectName))
             {
-                effectNames.remove(i);
+                utils.removeElementAt(effectNames, i);
             }
             else 
             {
@@ -3512,7 +3510,8 @@ public class buff_handler extends script.base_script
     }
     public int onAttackRemoveAddBuffHandler(obj_id self, String effectName, String subtype, float duration, float value, String buffName, obj_id caster) throws InterruptedException
     {
-        List removeBuffs = new ArrayList<String>();
+        Vector removeBuffs = new Vector();
+        removeBuffs.setSize(0);
         if (utils.hasScriptVar(self, buff.ON_ATTACK_REMOVE))
         {
             removeBuffs = utils.getResizeableStringArrayScriptVar(self, buff.ON_ATTACK_REMOVE);
@@ -3530,7 +3529,8 @@ public class buff_handler extends script.base_script
     }
     public int onAttackRemoveRemoveBuffHandler(obj_id self, String effectName, String subtype, float duration, float value, String buffName, obj_id caster) throws InterruptedException
     {
-        List removeBuffs = new ArrayList<String>();
+        Vector removeBuffs = new Vector();
+        removeBuffs.setSize(0);
         if (utils.hasScriptVar(self, buff.ON_ATTACK_REMOVE))
         {
             removeBuffs = utils.getResizeableStringArrayScriptVar(self, buff.ON_ATTACK_REMOVE);

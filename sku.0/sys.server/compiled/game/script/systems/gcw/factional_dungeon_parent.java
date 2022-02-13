@@ -11,6 +11,9 @@ import java.util.Vector;
 
 public class factional_dungeon_parent extends script.base_script
 {
+    public factional_dungeon_parent()
+    {
+    }
     public static final int OBJECTIVE_RESPAWN_TIME = 28800;
     public static final String IMPERIAL_TO_REBEL_FILENAME = "datatables/poi/imperial_rebel_lookup/imperial_to_rebel.iff";
     public static final String REBEL_TO_IMPERIAL_FILENAME = "datatables/poi/imperial_rebel_lookup/rebel_to_imperial.iff";
@@ -38,10 +41,10 @@ public class factional_dungeon_parent extends script.base_script
                 if (hasObjVar(self, "intCompleted")) {
                     destroyObject(objSpawner);
                 } else {
-                    objTerminals.add(objSpawners, objSpawner);
-                    strTerminals.add(getTemplateName(objSpawners));
-                    locTerminals.add(getLocation(objSpawners));
-                    fltYaw.add(getYaw(objSpawners, objSpawner));
+                    objTerminals = utils.addElement(objTerminals, objSpawner);
+                    strTerminals = utils.addElement(strTerminals, getTemplateName(objSpawner));
+                    locTerminals = utils.addElement(locTerminals, getLocation(objSpawner));
+                    fltYaw = utils.addElement(fltYaw, getYaw(objSpawner));
                     removeObjVar(objSpawner, "hq");
                     setObjVar(objSpawner, "objParent", self);
                     factions.setFaction(objSpawner, strFaction, false);
@@ -146,7 +149,7 @@ public class factional_dungeon_parent extends script.base_script
         for (int intI = 0; intI < locSpawners.length; intI++)
         {
             obj_id objTerminal = createObject(strTerminals[intI], locSpawners[intI]);
-            objTerminals.add(objTerminal);
+            objTerminals = utils.addElement(objTerminals, objTerminal);
             setObjVar(objTerminal, "objParent", self);
             setYaw(objTerminal, fltYaw[intI]);
             persistObject(objTerminal);
@@ -168,11 +171,11 @@ public class factional_dungeon_parent extends script.base_script
             if (objContents != null) {
                 for (obj_id objContent : objContents) {
                     if (hasObjVar(objContent, "type")) {
-                        objSpawners.add(objContents, objContent);
+                        objSpawners = utils.addElement(objSpawners, objContent);
                     }
                 }
             } else {
-                objSpawners.add(objObjects, objObject);
+                objSpawners = utils.addElement(objSpawners, objObject);
             }
         }
         obj_id[] _objSpawners = new obj_id[0];
@@ -192,7 +195,7 @@ public class factional_dungeon_parent extends script.base_script
         String strRebel = factions.FACTION_REBEL;
         String strImperial = factions.FACTION_IMPERIAL;
         String strType = getStringObjVar(objSpawner, "type");
-        if (strType == null || strType.isEmpty())
+        if (strType == null || strType.equals(""))
         {
             return;
         }

@@ -12,6 +12,9 @@ import java.util.Vector;
 
 public class droid_squad_leader extends script.base_script
 {
+    public droid_squad_leader()
+    {
+    }
     public static final String SQUAD_MEMBER = "som_battlefield_droid_soldier";
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
@@ -84,7 +87,7 @@ public class droid_squad_leader extends script.base_script
             for (obj_id object : objects) {
                 if (hasObjVar(object, "wp_name")) {
                     if (s.equals(getStringObjVar(object, "wp_name"))) {
-                        waypoints.add(getLocation(object));
+                        utils.addElement(waypoints, getLocation(object));
                     }
                 }
             }

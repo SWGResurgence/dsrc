@@ -68,7 +68,7 @@ class sort {
      *	http://kepler.covenant.edu/~renkema/java/
      * the original sorted arrays of integers.
      */
-    public static void sort(List v)
+    public static void sort(Vector v)
 	throws IllegalArgumentException
     {
 	int distance = v.size() / 2;	   //  Split array into segments
@@ -89,14 +89,17 @@ class sort {
      * @param distance	the distance to sort within
      * @param segment	the segment to sort
      */
-    private static void segmentedInsertionSort(List v, int distance, int segment) throws IllegalArgumentException {
+    private static void segmentedInsertionSort(Vector v, int distance,
+						int segment)
+	    throws IllegalArgumentException
+    {
 	int j;
 
 	for (int i = segment + distance; i < v.size(); i += distance) {
 	    j = i;	// start at the current processing position
 	    while (j >= distance) {
-		Comparable a = (Comparable) v.get(j);
-		Comparable b = (Comparable) v.get(j - distance);
+		Comparable a = (Comparable) v.elementAt(j);
+		Comparable b = (Comparable) v.elementAt(j - distance);
 		if (a.compareTo(b) <= 0) {
 		    swap(v, j, j - distance);
 		    j -= distance;
@@ -113,11 +116,11 @@ class sort {
      * @param i		the first element to swap
      * @param j		the second element to swap
      */
-    private static void swap(List v, int i, int j) {
+    private static void swap(Vector v, int i, int j) {
        Object temp;
-       temp = v.get(i);
-       v.set(i, v.get(j));
-       v.set(j, temp);
+       temp = v.elementAt(i);
+       v.setElementAt(v.elementAt(j), i);
+       v.setElementAt(temp, j);
     }
 
     /**

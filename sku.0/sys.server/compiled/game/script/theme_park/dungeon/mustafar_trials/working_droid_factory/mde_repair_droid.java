@@ -12,6 +12,9 @@ import java.util.Vector;
 
 public class mde_repair_droid extends script.base_script
 {
+    public mde_repair_droid()
+    {
+    }
     public static final String ASSASSIN_TEMPLATE = "ig_assassin_droid.iff";
     public static final String ASSASSIN_RESPAWN = "som_working_assassin_droid";
     public static final String COMBAT_TEMPLATE = "blastromech.iff";
@@ -89,7 +92,7 @@ public class mde_repair_droid extends script.base_script
             if (template.contains(ASSASSIN_TEMPLATE) || template.contains(COMBAT_TEMPLATE)) {
                 if (!utils.hasScriptVar(object, "taken") && !utils.hasScriptVar(object, trial.WORKING_MDE_REVIVED)) {
                     if (isDead(object)) {
-                        corpses.add(object);
+                        utils.addElement(corpses, object);
                     }
                 }
             }

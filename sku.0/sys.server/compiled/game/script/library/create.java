@@ -1034,9 +1034,9 @@ public class create extends script.base_script
             destroyMessageDelays = getResizeableFloatArrayObjVar(creature, "destroyMessageList.delays");
             destroyMessageRecipients = getResizeableObjIdArrayObjVar(creature, "destroyMessageList.recipients");
         }
-        destroyMessageNames.add(handlerName);
-        destroyMessageDelays.add(delay);
-        destroyMessageRecipients.add(recipient);
+        destroyMessageNames = utils.addElement(destroyMessageNames, handlerName);
+        destroyMessageDelays = utils.addElement(destroyMessageDelays, delay);
+        destroyMessageRecipients = utils.addElement(destroyMessageRecipients, recipient);
         if (((destroyMessageNames != null) && (destroyMessageNames.size() > 0)) && ((destroyMessageDelays != null) && (destroyMessageDelays.size() > 0)) && ((destroyMessageRecipients != null) && (destroyMessageRecipients.size() > 0)))
         {
             setObjVar(creature, "destroyMessageList.handlerNames", destroyMessageNames);

@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class ballot_box extends script.base_script
 {
+    public ballot_box()
+    {
+    }
     public static final int BALLOT_TEXT_MAX_LENGTH = 120;
     public static final int BALLOT_TITLE_MAX_LENGTH = 32;
     public static final int BALLOT_ITEM_MAX_LENGTH = 64;
@@ -492,7 +495,7 @@ public class ballot_box extends script.base_script
             setObjVar(self, VAR_VOTE_TALLY, voteCounts);
         }
         Vector participants = getResizeableObjIdArrayObjVar(self, VAR_PARTICIPANTS);
-        participants.add(sui.getPlayerId(params));
+        participants = utils.addElement(participants, sui.getPlayerId(params));
         if (participants.size() > 0)
         {
             setObjVar(self, VAR_PARTICIPANTS, participants);
@@ -532,7 +535,7 @@ public class ballot_box extends script.base_script
                 editBallot(player, self);
                 return SCRIPT_CONTINUE;
             }
-            options.add(itemToAdd);
+            options = utils.addElement(options, itemToAdd);
             if (options.size() > 0)
             {
                 setObjVar(self, VAR_BALLOT_OPTIONS, options);
@@ -573,7 +576,7 @@ public class ballot_box extends script.base_script
             return SCRIPT_CONTINUE;
         }
         Vector items = getResizeableStringArrayObjVar(self, VAR_BALLOT_OPTIONS);
-        items.remove(listItem);
+        items = utils.removeElementAt(items, listItem);
         if (items.size() == 0)
         {
             setObjVar(self, VAR_BALLOT_OPTIONS, DEFAULT_BALLOT_OPTIONS);

@@ -6,6 +6,9 @@ import java.util.Vector;
 
 public class planetary_map extends script.base_script
 {
+    public planetary_map()
+    {
+    }
     public static final byte NO_FLAG = 0;
     public static final float MAX_CLUMP_DISTANCE = 32.0f;
     public static final String TBL = "datatables/planet_map/map_locations.iff";
@@ -399,12 +402,12 @@ public class planetary_map extends script.base_script
             if ((subs != null) && (subs.length > 0)) {
                 LOG("find", "showFindSui: cat = " + cat + " sub count = " + subs.length);
                 for (String sub : subs) {
-                    entries.add(getString(new string_id("map_loc_cat_n", cat)) + ": " + getString(new string_id("map_loc_cat_n", sub)));
-                    params.add(sub);
+                    entries = utils.addElement(entries, getString(new string_id("map_loc_cat_n", cat)) + ": " + getString(new string_id("map_loc_cat_n", sub)));
+                    params = utils.addElement(params, sub);
                 }
             } else {
-                entries.add("@map_loc_cat_n:" + cat);
-                params.add(cat);
+                entries = utils.addElement(entries, "@map_loc_cat_n:" + cat);
+                params = utils.addElement(params, cat);
             }
         }
         if ((entries != null) && (entries.size() > 0))
@@ -445,7 +448,7 @@ public class planetary_map extends script.base_script
         unique.setSize(0);
         for (String cat : cats) {
             if (utils.getElementPositionInArray(unique, cat) == -1) {
-                unique.add(cat);
+                unique = utils.addElement(unique, cat);
             }
         }
         if ((unique == null) || (unique.size() == 0))

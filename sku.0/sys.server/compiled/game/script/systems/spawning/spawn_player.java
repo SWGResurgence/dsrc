@@ -4,11 +4,12 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
-import java.util.ArrayList;
-import java.util.List;
 
 public class spawn_player extends script.systems.spawning.spawn_base
 {
+    public spawn_player()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "spawning.verboseMode");
@@ -819,7 +820,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         utils.setScriptVar(self, "strPatrolPathType", patrolType);
         Vector patrolPoints = new Vector();
         patrolPoints.setSize(0);
-        patrolPoints.add(createObject("object/tangible/ground_spawning/patrol_spawner.iff", getLocation(self)));
+        patrolPoints = utils.addElement(patrolPoints, createObject("object/tangible/ground_spawning/patrol_spawner.iff", getLocation(self)));
         utils.setScriptVar(self, "objPatrolPoints", patrolPoints);
         String title = "Place Patrol Waypoint";
         String prompt = "Choose WAYPOINT to set a new waypoint or END to write path to the spawner";
@@ -832,7 +833,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
     public int handlePlaceNewPatrolPoint(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
-        List waypointArray = utils.getResizeableObjIdArrayScriptVar(self, "objPatrolPoints");
+        Vector waypointArray = utils.getResizeableObjIdArrayScriptVar(self, "objPatrolPoints");
         obj_id patrolPoint;
         for (int q = 0; q < waypointArray.size(); q++)
         {
@@ -848,7 +849,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
                 return SCRIPT_CONTINUE;
             }
             patrolPoint = createObject("object/tangible/ground_spawning/patrol_waypoint.iff", getLocation(self));
-            waypointArray.add(patrolPoint);
+            waypointArray = utils.addElement(waypointArray, patrolPoint);
             utils.setScriptVar(self, "objPatrolPoints", waypointArray);
             if (waypointArray == null || waypointArray.size() < 2)
             {
@@ -862,7 +863,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         {
             doLogging("handlePlaceNewPatrolPoint", "WAYPOINT button pressed");
             patrolPoint = createObject("object/tangible/ground_spawning/patrol_waypoint.iff", getLocation(self));
-            waypointArray.add(patrolPoint);
+            waypointArray = utils.addElement(waypointArray, patrolPoint);
             utils.setScriptVar(self, "objPatrolPoints", waypointArray);
             String title = "Place Patrol Waypoint";
             String prompt = "Choose WAYPOINT to set a new waypoint or END to write path to the spawner";
@@ -933,7 +934,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         utils.removeScriptVar(self, "strPatrolPathType");
         if (boolDestroySpawners)
         {
-            List objPatrolPoints = utils.getResizeableObjIdArrayScriptVar(self, "objPatrolPoints");
+            Vector objPatrolPoints = utils.getResizeableObjIdArrayScriptVar(self, "objPatrolPoints");
             if (objPatrolPoints != null)
             {
                 for (Object objPatrolPoint : objPatrolPoints) {
@@ -947,7 +948,8 @@ public class spawn_player extends script.systems.spawning.spawn_base
     {
         sendSystemMessageTestingOnly(self, "Writing spawner");
         String strSpawnerType = utils.getStringScriptVar(self, "strType");
-        List patrolPoints = new ArrayList<obj_id>();
+        Vector patrolPoints = new Vector();
+        patrolPoints.setSize(0);
         obj_id objSpawner;
         if (strSpawnerType.equals("area") || strSpawnerType.equals("location"))
         {

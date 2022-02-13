@@ -2,8 +2,7 @@ package script.library;
 
 import script.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class pvp extends script.base_script
 {
@@ -606,18 +605,18 @@ public class pvp extends script.base_script
             double tally = utils.getIntScriptVar(target, VAR_TOTAL_DAMAGE_TALLY);
             tally += dam;
             utils.setScriptVar(target, VAR_TOTAL_DAMAGE_TALLY, (int)tally);
-            List attackerList = utils.getResizeableObjIdBatchScriptVar(target, VAR_ATTACKER_LIST);
+            Vector attackerList = utils.getResizeableObjIdBatchScriptVar(target, VAR_ATTACKER_LIST);
             if (attackerList != null && attackerList.size() > 0)
             {
                 if (utils.getElementPositionInArray(attackerList, attackr) == -1)
                 {
-                    attackerList.add(attackr);
+                    attackerList = utils.addElement(attackerList, attackr);
                     utils.setBatchScriptVar(target, VAR_ATTACKER_LIST, attackerList);
                 }
             }
             else 
             {
-                attackerList.add(attackr);
+                attackerList = utils.addElement(attackerList, attackr);
                 utils.setBatchScriptVar(target, VAR_ATTACKER_LIST, attackerList);
             }
             String damPath = VAR_ATTACKER_LIST + "." + attackr + ".damage";
@@ -644,15 +643,15 @@ public class pvp extends script.base_script
     }
     public static void registerPlayerKill(obj_id attacker, obj_id victim) throws InterruptedException
     {
-        List victimList = utils.getResizeableObjIdBatchObjVar(attacker, VAR_PVP_LAST_KILLS);
+        Vector victimList = utils.getResizeableObjIdBatchObjVar(attacker, VAR_PVP_LAST_KILLS);
         if (victimList != null && victimList.size() > 0)
         {
             if (utils.getElementPositionInArray(victimList, victim) == -1)
             {
-                victimList.add(victim);
+                victimList = utils.addElement(victimList, victim);
                 while (victimList.size() > XP_FARMING_TRACKING_SLOTS)
                 {
-                    victimList.remove(0);
+                    victimList = utils.removeElementAt(victimList, 0);
                 }
                 utils.setResizeableBatchObjVar(attacker, VAR_PVP_LAST_KILLS, victimList);
                 trace.log(PVP_CS_LOG, "Adding " + utils.getRealPlayerFirstName(victim) + "(" + victim + ") to last-50-victim-list of %TU", attacker, trace.TL_CS_LOG);
@@ -664,10 +663,10 @@ public class pvp extends script.base_script
         }
         else 
         {
-            victimList.add(victim);
+            victimList = utils.addElement(victimList, victim);
             while (victimList.size() > XP_FARMING_TRACKING_SLOTS)
             {
-                victimList.remove(0);
+                victimList = utils.removeElementAt(victimList, 0);
             }
             utils.setResizeableBatchObjVar(attacker, VAR_PVP_LAST_KILLS, victimList);
         }
@@ -866,7 +865,8 @@ public class pvp extends script.base_script
     }
     public static void bfActivePlayersAnnounce(obj_id controller, string_id announcement) throws InterruptedException
     {
-        List players = new ArrayList<obj_id>();
+        Vector players = new Vector();
+        players.setSize(0);
         if (utils.hasResizeableObjIdBatchScriptVar(controller, BATTLEFIELD_ACTIVE_PLAYERS))
         {
             players = utils.getResizeableObjIdBatchScriptVar(controller, BATTLEFIELD_ACTIVE_PLAYERS);
@@ -883,7 +883,8 @@ public class pvp extends script.base_script
     }
     public static void bfMessagePlayers(obj_id controller, String faction, String message, dictionary params) throws InterruptedException
     {
-        List players = new ArrayList<obj_id>();
+        Vector players = new Vector();
+        players.setSize(0);
         if (utils.hasResizeableStringBatchScriptVar(controller, faction))
         {
             players = utils.getResizeableStringBatchScriptVar(controller, faction);
@@ -911,7 +912,8 @@ public class pvp extends script.base_script
     }
     public static void bfMessagePlayersOnBattlefield(obj_id controller, String faction, String message, dictionary params) throws InterruptedException
     {
-        List players = new ArrayList<obj_id>();
+        Vector players = new Vector();
+        players.setSize(0);
         if (utils.hasResizeableStringBatchScriptVar(controller, faction))
         {
             players = utils.getResizeableStringBatchScriptVar(controller, faction);
@@ -937,13 +939,14 @@ public class pvp extends script.base_script
             }
         }
     }
-    public static List bfActiveAppendStatistics(obj_id controller, String scriptVar, List battlefieldTeams) throws InterruptedException
+    public static Vector bfActiveAppendStatistics(obj_id controller, String scriptVar, Vector battlefieldTeams) throws InterruptedException
     {
         if (!isIdValid(controller) || !exists(controller))
         {
             return null;
         }
-        List activelTeam = new ArrayList<String>();
+        Vector activelTeam = new Vector();
+        activelTeam.setSize(0);
         if (utils.hasResizeableStringBatchScriptVar(controller, scriptVar))
         {
             activelTeam = utils.getResizeableStringBatchScriptVar(controller, scriptVar);
@@ -975,7 +978,7 @@ public class pvp extends script.base_script
                 member.put("healing", utils.stringToInt(activeMember[6]));
                 member.put("captures", utils.stringToInt(activeMember[7]));
                 member.put("assists", utils.stringToInt(activeMember[8]));
-                battlefieldTeams.add(member);
+                utils.addElement(battlefieldTeams, member);
                 count++;
             }
             if (battlefieldTeams.size() > 0)
@@ -985,18 +988,18 @@ public class pvp extends script.base_script
         }
         return battlefieldTeams;
     }
-    public static List bfActiveGetStatistics(obj_id controller) throws InterruptedException
+    public static Vector bfActiveGetStatistics(obj_id controller) throws InterruptedException
     {
         if (!isIdValid(controller) || !exists(controller))
         {
             return null;
         }
-        List battlefieldTeams = new ArrayList<String>();
+        Vector battlefieldTeams = new Vector();
         battlefieldTeams = bfActiveAppendStatistics(controller, BATTLEFIELD_ACTIVE_REBEL_PLAYERS, battlefieldTeams);
         battlefieldTeams = bfActiveAppendStatistics(controller, BATTLEFIELD_ACTIVE_IMPERIAL_PLAYERS, battlefieldTeams);
         return battlefieldTeams;
     }
-    public static String[][] bfStatisticsToArray(List battlefieldPlayers, boolean colored) throws InterruptedException
+    public static String[][] bfStatisticsToArray(Vector battlefieldPlayers, boolean colored) throws InterruptedException
     {
         if (battlefieldPlayers == null || battlefieldPlayers.size() < 1)
         {
@@ -1168,7 +1171,8 @@ public class pvp extends script.base_script
         {
             return false;
         }
-        List terminals = new ArrayList<obj_id>();
+        Vector terminals = new Vector();
+        terminals.setSize(0);
         if (utils.hasResizeableObjIdBatchScriptVar(controller, "battlefield.terminals"))
         {
             terminals = utils.getResizeableObjIdBatchScriptVar(controller, "battlefield.terminals");
@@ -1213,7 +1217,7 @@ public class pvp extends script.base_script
         }
         if (terminals == null || terminals.size() < 1)
         {
-            terminals.add(terminal);
+            utils.addElement(terminals, terminal);
             utils.setBatchScriptVar(controller, "battlefield.terminals", terminals);
             return;
         }
@@ -1225,16 +1229,17 @@ public class pvp extends script.base_script
                 return;
             }
         }
-        terminals.add(terminal);
+        utils.addElement(terminals, terminal);
         utils.setBatchScriptVar(controller, "battlefield.terminals", terminals);
     }
-    public static List bfTerminalsGetRegistered(obj_id controller) throws InterruptedException
+    public static Vector bfTerminalsGetRegistered(obj_id controller) throws InterruptedException
     {
         if (!isIdValid(controller) || !exists(controller))
         {
             return null;
         }
-        List terminals = new ArrayList<obj_id>();
+        Vector terminals = new Vector();
+        terminals.setSize(0);
         if (utils.hasResizeableObjIdBatchScriptVar(controller, "battlefield.terminals"))
         {
             terminals = utils.getResizeableObjIdBatchScriptVar(controller, "battlefield.terminals");
@@ -1247,7 +1252,8 @@ public class pvp extends script.base_script
         {
             return false;
         }
-        List terminals = new ArrayList<obj_id>();
+        Vector terminals = new Vector();
+        terminals.setSize(0);
         if (utils.hasResizeableObjIdBatchScriptVar(controller, "battlefield.terminals"))
         {
             terminals = utils.getResizeableObjIdBatchScriptVar(controller, "battlefield.terminals");

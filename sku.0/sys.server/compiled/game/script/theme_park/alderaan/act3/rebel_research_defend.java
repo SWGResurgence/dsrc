@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class rebel_research_defend extends script.base_script
 {
+    public rebel_research_defend()
+    {
+    }
     public static final String[] TEMPLATE_LIST = 
     {
         "object/building/poi/generic_flatten_medium.iff",
@@ -123,7 +126,7 @@ public class rebel_research_defend extends script.base_script
             {
                 objectList = new Vector();
             }
-            objectList.add(newObject);
+            utils.addElement(objectList, newObject);
             if (objectList.size() > 0)
             {
                 setObjVar(self, "coa3.rebel.obj_list", objectList);
@@ -318,7 +321,7 @@ public class rebel_research_defend extends script.base_script
                 {
                     setObjVar(newEnemy, "coa3.rebel.facility", self);
                     setObjVar(newEnemy, "coa3.rebel.playerId", player);
-                    enemyList.add(newEnemy);
+                    utils.addElement(enemyList, newEnemy);
                 }
             }
         }
@@ -332,7 +335,7 @@ public class rebel_research_defend extends script.base_script
                 {
                     setObjVar(newEnemy, "coa3.rebel.facility", self);
                     setObjVar(newEnemy, "coa3.rebel.playerId", player);
-                    enemyList.add(newEnemy);
+                    utils.addElement(enemyList, newEnemy);
                 }
             }
         }

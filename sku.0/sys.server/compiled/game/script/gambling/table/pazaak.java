@@ -7,8 +7,6 @@ import script.prose_package;
 import script.string_id;
 
 import java.util.Vector;
-import java.util.ArrayList;
-import java.util.List;
 
 public class pazaak extends script.gambling.base.table
 {
@@ -433,7 +431,8 @@ public class pazaak extends script.gambling.base.table
         prompt += "Bank : " + getBankBalance(player) + "\n";
         prompt += "Total: " + getTotalMoney(player) + "\n";
         prompt += "\nNOTE: if you leave the table after placing a bet, all of your outstanding bets will be forfeit.";
-        List entries = new ArrayList<String>();
+        Vector entries = new Vector();
+        entries.setSize(0);
         int total = 0;
         if (utils.hasScriptVar(self, SCRIPT_VAR_TURN))
         {
@@ -442,11 +441,11 @@ public class pazaak extends script.gambling.base.table
             {
                 if (turn_player == player)
                 {
-                    entries.add( "It is your turn.");
+                    entries = utils.addElement(entries, "It is your turn.");
                 }
                 else 
                 {
-                    entries.add("It is " + getFirstName(turn_player) + "'s turn.");
+                    entries = utils.addElement(entries, "It is " + getFirstName(turn_player) + "'s turn.");
                 }
             }
         }
@@ -461,16 +460,16 @@ public class pazaak extends script.gambling.base.table
                     if (hand != null) {
                         if (bet_player == player) {
                             if (active) {
-                                entries.add("Your Hand: " + displayPazaakCards(hand));
+                                entries = utils.addElement(entries, "Your Hand: " + displayPazaakCards(hand));
                             } else {
-                                entries.add("Your Hand: Standing");
+                                entries = utils.addElement(entries, "Your Hand: Standing");
                             }
                         } else {
                             if (active) {
                                 int hand_size = getPazaakHand(self, bet_player).length;
-                                entries.add(getFirstName(bet_players) + "'s Hand: " + hand_size + " cards");
+                                entries = utils.addElement(entries, getFirstName(bet_player) + "'s Hand: " + hand_size + " cards");
                             } else {
-                                entries.add(getFirstName(bet_players) + "'s Hand: Standing");
+                                entries = utils.addElement(entries, getFirstName(bet_player) + "'s Hand: Standing");
                             }
                         }
                     }
@@ -479,15 +478,15 @@ public class pazaak extends script.gambling.base.table
                     if (board != null) {
                         if (bet_player == player) {
                             if (board_total <= -99 || (board_total > 20 && !active)) {
-                               entries.add("Your Board: Out");
+                                entries = utils.addElement(entries, "Your Board: Out");
                             } else {
-                                entries.add("Your Board: " + displayPazaakCards(board) + " (Total: " + board_total + ")");
+                                entries = utils.addElement(entries, "Your Board: " + displayPazaakCards(board) + " (Total: " + board_total + ")");
                             }
                         } else {
                             if (board_total <= -99 || (board_total > 20 && !active)) {
-                                entries.add(getFirstName(bet_players) + "'s Board: Out");
+                                entries = utils.addElement(entries, getFirstName(bet_player) + "'s Board: Out");
                             } else {
-                                entries.add(getFirstName(bet_players) + "'s Board: " + displayPazaakCards(board) + " (Total: " + board_total + ")");
+                                entries = utils.addElement(entries, getFirstName(bet_player) + "'s Board: " + displayPazaakCards(board) + " (Total: " + board_total + ")");
                             }
                         }
                     }
@@ -510,7 +509,7 @@ public class pazaak extends script.gambling.base.table
                         {
                             entry = getFirstName(bet_players[i]) + "'s bet : " + amt;
                         }
-                        entries.add(entry);
+                        entries = utils.addElement(entries, entry);
                         total += amt;
                     }
                     else 
@@ -523,15 +522,15 @@ public class pazaak extends script.gambling.base.table
                         {
                             entry = getFirstName(bet_players[i]) + " : 0";
                         }
-                        entries.add(entry);
+                        entries = utils.addElement(entries, entry);
                     }
                 }
                 entries = utils.alphabetizeStringArray(entries);
-                entries.add(" ");
+                entries = utils.addElement(entries, " ");
             }
         }
         int table_pot = utils.getIntScriptVar(self, SCRIPT_VAR_POT_TOTAL);
-        entries.add("Total Bet : " + table_pot);
+        entries = utils.addElement(entries, "Total Bet : " + table_pot);
         int pid = sui.listbox(self, player, prompt, sui.REFRESH_LEAVE_GAME, title, entries, "handleBetUi");
         if (pid == -1)
         {
@@ -794,7 +793,7 @@ public class pazaak extends script.gambling.base.table
         {
             return true;
         }
-        List active_players = utils.getResizeableObjIdArrayScriptVar(table, SCRIPT_VAR_ACTIVE_PLAYERS);
+        Vector active_players = utils.getResizeableObjIdArrayScriptVar(table, SCRIPT_VAR_ACTIVE_PLAYERS);
         if (active_players != null)
         {
             int idx = utils.getElementPositionInArray(active_players, player);
@@ -804,7 +803,7 @@ public class pazaak extends script.gambling.base.table
             }
             else 
             {
-                active_players.remove(idx);
+                active_players.removeElementAt(idx);
                 obj_id[] array = new obj_id[active_players.size()];
                 active_players.toArray(array);
                 utils.setScriptVar(table, SCRIPT_VAR_ACTIVE_PLAYERS, array);
@@ -858,7 +857,7 @@ public class pazaak extends script.gambling.base.table
                         int amt = getIntObjVar(table, betVar);
                         if (amt > 0)
                         {
-                            bets.add(amt);
+                            bets = utils.addElement(bets, amt);
                         }
                     }
                 }
@@ -892,7 +891,7 @@ public class pazaak extends script.gambling.base.table
         Vector default_deck = new Vector();
         default_deck.setSize(0);
         for (int i1 : DEFAULT_SIDE_DECK) {
-            default_deck.add(DEFAULT_SIDE_DECK, i1);
+            default_deck = utils.addElement(default_deck, i1);
         }
         int[] hand = new int[4];
         for (int i = 0; i < 4; i++)
@@ -904,7 +903,7 @@ public class pazaak extends script.gambling.base.table
             int rand_idx = rand(0, default_deck.size() - 1);
             int card = (Integer) default_deck.get(rand_idx);
             hand[i] = card;
-            default_deck.remove(rand_idx);
+            default_deck.removeElementAt(rand_idx);
         }
         int player_idx = gambling.getGamePlayerIndex(table, player);
         if (player_idx > -1)
@@ -924,7 +923,8 @@ public class pazaak extends script.gambling.base.table
         {
             return -1;
         }
-        List deck = new ArrayList<Integer>();
+        Vector deck = new Vector();
+        deck.setSize(0);
         if (utils.hasScriptVar(table, SCRIPT_VAR_DECK))
         {
             deck = utils.getResizeableIntArrayScriptVar(table, SCRIPT_VAR_DECK);
@@ -932,7 +932,7 @@ public class pazaak extends script.gambling.base.table
         else 
         {
             for (int i1 : PLAY_DECK) {
-                deck.add(PLAY_DECK, i1);
+                deck = utils.addElement(deck, i1);
             }
         }
         if (deck == null || deck.size() < 1)
@@ -941,7 +941,7 @@ public class pazaak extends script.gambling.base.table
         }
         int rand_idx = rand(0, deck.size() - 1);
         int card = (Integer) deck.get(rand_idx);
-        deck.remove(rand_idx);
+        deck.removeElementAt(rand_idx);
         utils.setScriptVar(table, SCRIPT_VAR_DECK, deck);
         return card;
     }
@@ -1077,12 +1077,12 @@ public class pazaak extends script.gambling.base.table
         for (int card : cards) {
             if (card >= 0) {
                 if (card / 100 > 0) {
-                    cards_str.add("+/- " + cards, "+/- " + card / 100);
+                    utils.addElement(cards_str, "+/- " + card / 100);
                 } else {
-                    cards_str.add("+" + cards, "+" + card);
+                    utils.addElement(cards_str, "+" + card);
                 }
             } else {
-                cards_str.add(Integer.toString(cards));
+                utils.addElement(cards_str, Integer.toString(card));
             }
         }
         String[] card_array = new String[cards_str.size()];
@@ -1111,8 +1111,8 @@ public class pazaak extends script.gambling.base.table
         {
             return false;
         }
-        List new_hand = utils.getResizeableIntArrayScriptVar(table, objvar_name);
-        new_hand.remove(card_idx);
+        Vector new_hand = utils.getResizeableIntArrayScriptVar(table, objvar_name);
+        new_hand.removeElementAt(card_idx);
         utils.setScriptVar(table, objvar_name, new_hand);
         addToPazaakBoard(table, player, card);
         return true;
@@ -1129,12 +1129,13 @@ public class pazaak extends script.gambling.base.table
         }
         int player_idx = gambling.getGamePlayerIndex(table, player);
         String objvar_name = SCRIPT_VAR_BOARD + "." + player_idx;
-        List boards = new ArrayList<Integer>();
+        Vector boards = new Vector();
+        boards.setSize(0);
         if (utils.hasScriptVar(table, objvar_name))
         {
             boards = utils.getResizeableIntArrayScriptVar(table, objvar_name);
         }
-        boards.add(card);
+        boards = utils.addElement(boards, card);
         utils.setScriptVar(table, objvar_name, boards);
         return true;
     }

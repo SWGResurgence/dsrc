@@ -73,11 +73,11 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
         {
             for (obj_id equippedItem : equippedItems) {
                 String name = getStaticItemName(equippedItem);
-                if (name == null || name.isEmpty()) {
+                if (name == null || name.equals("")) {
                     continue;
                 }
                 if (name.startsWith("armor_pvp_spec_ops_rebel")) {
-                    wornItems.add(equippedItems);
+                    wornItems.addElement(equippedItem);
                 }
             }
         }
@@ -86,11 +86,11 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
         {
             for (obj_id invItem : invItems) {
                 String name = getStaticItemName(invItem);
-                if (name == null || name.isEmpty()) {
+                if (name == null || name.equals("")) {
                     continue;
                 }
                 if (name.startsWith("armor_pvp_spec_ops_rebel")) {
-                    items.add(invItems);
+                    items.addElement(invItem);
                 }
             }
         }
@@ -108,18 +108,18 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
             for (Object wornItem : wornItems) {
                 obj_id piece = (obj_id) wornItem;
                 utils.setScriptVar(piece, "rebpvp_worn", 1);
-                armor.add(piece);
+                armor.addElement(piece);
                 String name = "@" + getName(piece) + "  ( @tool/customizer:rebpvp_worn )";
-                armorNames.add(name);
+                armorNames.addElement(name);
             }
         }
         if (!items.isEmpty())
         {
             for (Object item : items) {
                 obj_id piece = (obj_id) item;
-                armor.add(piece);
+                armor.addElement(piece);
                 String name = "@" + getName(piece);
-                armorNames.add(name);
+                armorNames.addElement(name);
             }
         }
         int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, armorNames, "handleArmorSelection", true, false);

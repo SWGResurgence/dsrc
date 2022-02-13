@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class wait_for_tasks extends script.quest.task.ground.base_task
 {
+    public wait_for_tasks()
+    {
+    }
     public static final String dataTableQuestNamePre = "TASK_QUEST_NAME_";
     public static final String dataTableTaskNamePre = "TASK_TASK_NAME_";
     public static final String dataTableDisplayStringIdPre = "TASK_DISPLAY_STRING_";
@@ -46,10 +49,10 @@ public class wait_for_tasks extends script.quest.task.ground.base_task
                     String displayStringId = groundquests.getTaskStringDataEntry(questCrc, taskId, dataTableDisplayStringId);
                     int taskQuestCrc = groundquests.getQuestIdFromString(questName);
                     int taskTaskId = groundquests.getTaskId(taskQuestCrc, taskName);
-                    questCrcsListResizable.add(taskQuestCrc);
-                    taskIdsListResizable.add(taskTaskId);
-                    taskIndexesListResizable.add(waitForTaskIndex);
-                    completedListResizable.add(0);
+                    utils.addElement(questCrcsListResizable, taskQuestCrc);
+                    utils.addElement(taskIdsListResizable, taskTaskId);
+                    utils.addElement(taskIndexesListResizable, waitForTaskIndex);
+                    utils.addElement(completedListResizable, 0);
                     ++waitForTaskIndex;
                     if (displayStringId != null && displayStringId.length() > 0)
                     {
@@ -209,13 +212,13 @@ public class wait_for_tasks extends script.quest.task.ground.base_task
                                 Vector completedListResizable = new Vector();
                                 completedListResizable.setSize(0);
                                 for (int l = 0; l < questCrcsList.length; ++l) {
-                                    questCrcsListResizable.add(questCrcsList[l]);
-                                    taskIdsListResizable.add(taskIdsList[l]);
-                                    taskIndexesListResizable.add(taskIndexesList[l]);
+                                    utils.addElement(questCrcsListResizable, questCrcsList[l]);
+                                    utils.addElement(taskIdsListResizable, taskIdsList[l]);
+                                    utils.addElement(taskIndexesListResizable, taskIndexesList[l]);
                                     if (l == i) {
-                                        completedListResizable.add(1);
+                                        utils.addElement(completedListResizable, 1);
                                     } else {
-                                        completedListResizable.add(completedList[l]);
+                                        utils.addElement(completedListResizable, completedList[l]);
                                     }
                                 }
                                 boolean allTasksComplete = true;

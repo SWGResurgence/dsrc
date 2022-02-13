@@ -5,11 +5,13 @@ import script.library.firework;
 import script.library.sui;
 import script.library.utils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class show extends script.base_script
 {
+    public show()
+    {
+    }
     public static final string_id MNU_LAUNCH = new string_id(firework.STF, "mnu_launch");
     public static final string_id MNU_SHOW_DATA = new string_id(firework.STF, "mnu_show_data");
     public static final string_id MNU_ADD_EVENT = new string_id(firework.STF, "mnu_add_event");
@@ -20,14 +22,14 @@ public class show extends script.base_script
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         int eventCount = getCount(self);
-        List show_fx = getResizeableStringArrayObjVar(self, firework.VAR_SHOW_FX);
+        Vector show_fx = getResizeableStringArrayObjVar(self, firework.VAR_SHOW_FX);
         if(show_fx == null || (eventCount > 0 && show_fx.size() != eventCount))
         {
             setCount(self, 0);
             removeObjVar(self, firework.VAR_SHOW_FX);
             return SCRIPT_CONTINUE;
         }
-        List show_delay = getResizeableFloatArrayObjVar(self, firework.VAR_SHOW_DELAY);
+        Vector show_delay = getResizeableFloatArrayObjVar(self, firework.VAR_SHOW_DELAY);
         if (show_delay == null || show_delay.size() == 0)
         {
             return SCRIPT_CONTINUE;
@@ -122,12 +124,14 @@ public class show extends script.base_script
                 obj_id[] tmpFireworks = utils.getContainedGOTObjects(inv, GOT_misc_firework, true, false);
                 if (tmpFireworks != null)
                 {
-                    List fireworks = new ArrayList<obj_id>();
-                    List entries = new ArrayList<obj_id>();
+                    Vector fireworks = new Vector();
+                    fireworks.setSize(0);
+                    Vector entries = new Vector();
+                    entries.setSize(0);
                     for (obj_id tmpFirework : tmpFireworks) {
                         if (hasObjVar(tmpFirework, firework.VAR_FIREWORK_FX)) {
-                            fireworks.add(tmpFireworks);
-                            entries.add(utils.getStringName(tmpFireworks) + " (" + getCount(tmpFireworks) + ")");
+                            fireworks = utils.addElement(fireworks, tmpFirework);
+                            entries = utils.addElement(entries, utils.getStringName(tmpFirework) + " (" + getCount(tmpFirework) + ")");
                         }
                     }
                     if (entries != null && fireworks != null && entries.size() == fireworks.size())
@@ -287,10 +291,10 @@ public class show extends script.base_script
         String[] fxs = dataTableGetStringColumn(firework.TBL_FX, "name");
         if (fxs != null && fxs.length > 0)
         {
-            List show_fx = getResizeableStringArrayObjVar(show, firework.VAR_SHOW_FX);
-            List show_delay = getResizeableFloatArrayObjVar(show, firework.VAR_SHOW_DELAY);
-            show_fx.add(fxs[rand(0, fxs.length - 1)]);
-            show_delay.add(0.1f);
+            Vector show_fx = getResizeableStringArrayObjVar(show, firework.VAR_SHOW_FX);
+            Vector show_delay = getResizeableFloatArrayObjVar(show, firework.VAR_SHOW_DELAY);
+            show_fx = utils.addElement(show_fx, fxs[rand(0, fxs.length - 1)]);
+            show_delay = utils.addElement(show_delay, 0.1f);
             if (show_fx == null || show_fx.size() == 0 || show_delay == null || show_delay.size() == 0)
             {
                 return;

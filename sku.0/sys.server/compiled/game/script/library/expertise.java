@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class expertise extends script.base_script
 {
+    public expertise()
+    {
+    }
     public static final String JEDI_AUTO_ALLOCATION_TABLE = "datatables/expertise/autoallocation_jedi.iff";
     public static final string_id SID_SUI_EXPERTISE_INTRODUCTION_TITLE = new string_id("expertise_d", "sui_expertise_introduction_title");
     public static final string_id SID_SUI_EXPERTISE_INTRODUCTION_BODY = new string_id("expertise_d", "sui_expertise_introduction_body");
@@ -17,7 +20,7 @@ public class expertise extends script.base_script
         expertiseProcReacList.setSize(0);
         for (String s : skillModList) {
             if ((s.startsWith("expertise_") || s.startsWith("kill_meter_")) && (s.endsWith("_proc") || s.endsWith("_reac"))) {
-                expertiseProcReacList.add(skillModList);
+                expertiseProcReacList.addElement(s);
             }
         }
         if (expertiseProcReacList.size() > 0)
@@ -88,7 +91,7 @@ public class expertise extends script.base_script
         {
             for (String s : skillList) {
                 if (s.startsWith("expertise_")) {
-                    resizeExpertiseAllocated.add(skillList);
+                    resizeExpertiseAllocated = utils.addElement(resizeExpertiseAllocated, s);
                 }
             }
         }

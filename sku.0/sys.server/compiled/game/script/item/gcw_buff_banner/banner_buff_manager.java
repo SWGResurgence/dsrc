@@ -7,11 +7,13 @@ import script.library.trial;
 import script.library.utils;
 import script.obj_id;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class banner_buff_manager extends script.base_script
 {
+    public banner_buff_manager()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         trial.cleanupObject(self);
@@ -33,30 +35,31 @@ public class banner_buff_manager extends script.base_script
         switch (utils.getPlayerProfession(player))
         {
             case utils.COMMANDO:
-                return "banner_buff_commando";
+            return "banner_buff_commando";
             case utils.SMUGGLER:
-                return "banner_buff_smuggler";
+            return "banner_buff_smuggler";
             case utils.MEDIC:
-                return "banner_buff_medic";
+            return "banner_buff_medic";
             case utils.OFFICER:
-                return "banner_buff_officer";
+            return "banner_buff_officer";
             case utils.SPY:
-                return "banner_buff_spy";
+            return "banner_buff_spy";
             case utils.BOUNTY_HUNTER:
-                return "banner_buff_bounty_hunter";
+            return "banner_buff_bounty_hunter";
             case utils.FORCE_SENSITIVE:
-                return "banner_buff_force_sensitive";
+            return "banner_buff_force_sensitive";
             case utils.TRADER:
-                return "banner_buff_trader";
+            return "banner_buff_trader";
             case utils.ENTERTAINER:
-                return "banner_buff_entertainer";
+            return "banner_buff_entertainer";
         }
         return null;
     }
     public int buffPlayers(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getValidPlayersInRadius(self, 30.0f);
-        List filteredPlayers = new ArrayList<obj_id>();
+        Vector filteredPlayers = new Vector();
+        filteredPlayers.setSize(0);
         boolean applyBuff = true;
         int faction = -1;
         if (!hasObjVar(self, "parent.faction"))
@@ -75,17 +78,18 @@ public class banner_buff_manager extends script.base_script
         {
             for (obj_id player : players) {
                 switch (faction) {
-                    if (factions.isRebel(players)) {
-                        filteredPlayers.add(players);
-                    }
-                    break;
-                case 1:
-                    if (factions.isImperial(players)) {
-                        filteredPlayers.add(players);
-                    }
-                    break;
-                default;
-                    break;
+                    case 0:
+                        if (factions.isRebel(player)) {
+                            utils.addElement(filteredPlayers, player);
+                        }
+                        break;
+                    case 1:
+                        if (factions.isImperial(player)) {
+                            utils.addElement(filteredPlayers, player);
+                        }
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -97,6 +101,7 @@ public class banner_buff_manager extends script.base_script
         {
             players = new obj_id[filteredPlayers.size()];
             filteredPlayers.toArray(players);
+
         }
         String buffToApply = getBannerBuff(self);
         if (buffToApply == null)

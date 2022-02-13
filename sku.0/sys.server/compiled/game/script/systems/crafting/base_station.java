@@ -8,10 +8,12 @@ import script.menu_info_types;
 import script.obj_id;
 
 import java.util.Vector;
-import java.util.List;
 
 public class base_station extends script.base_script
 {
+    public base_station()
+    {
+    }
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (transferer == obj_id.NULL_ID || transferer == srcContainer)
@@ -77,10 +79,10 @@ public class base_station extends script.base_script
         }
         if (utils.hasScriptVar(cell, craftinglib.SCRIPTVAR_CELL_STATIONS))
         {
-            List stations = utils.getResizeableObjIdArrayScriptVar(cell, craftinglib.SCRIPTVAR_CELL_STATIONS);
+            Vector stations = utils.getResizeableObjIdArrayScriptVar(cell, craftinglib.SCRIPTVAR_CELL_STATIONS);
             if (!utils.isElementInArray(stations, self))
             {
-                stations.add(self);
+                stations = utils.addElement(stations, self);
                 utils.setScriptVar(cell, craftinglib.SCRIPTVAR_CELL_STATIONS, stations);
             }
         }
@@ -88,7 +90,7 @@ public class base_station extends script.base_script
         {
             Vector stations = new Vector();
             stations.setSize(0);
-            stations.add(self);
+            stations = utils.addElement(stations, self);
             utils.setScriptVar(cell, craftinglib.SCRIPTVAR_CELL_STATIONS, stations);
         }
         return SCRIPT_CONTINUE;
@@ -122,10 +124,10 @@ public class base_station extends script.base_script
         }
         if (utils.hasScriptVar(cell, craftinglib.SCRIPTVAR_CELL_STATIONS))
         {
-            List stations = utils.getResizeableObjIdArrayScriptVar(cell, craftinglib.SCRIPTVAR_CELL_STATIONS);
+            Vector stations = utils.getResizeableObjIdArrayScriptVar(cell, craftinglib.SCRIPTVAR_CELL_STATIONS);
             if (!utils.isElementInArray(stations, self))
             {
-                stations.add(self);
+                stations = utils.addElement(stations, self);
                 utils.setScriptVar(cell, craftinglib.SCRIPTVAR_CELL_STATIONS, stations);
             }
         }
@@ -133,7 +135,7 @@ public class base_station extends script.base_script
         {
             Vector stations = new Vector();
             stations.setSize(0);
-            stations.add(self);
+            stations = utils.addElement(stations, self);
             utils.setScriptVar(cell, craftinglib.SCRIPTVAR_CELL_STATIONS, stations);
         }
         if (isPlayer(transferer))

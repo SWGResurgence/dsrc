@@ -3,11 +3,13 @@ package script.faction_perk.hq;
 import script.*;
 import script.library.*;
 
-import java.util.List;
 import java.util.Vector;
 
 public class defense_manager extends script.base_script
 {
+    public defense_manager()
+    {
+    }
     private static final float RESOURCE_REPAIR_RATIO = 0.5f;
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -405,15 +407,15 @@ public class defense_manager extends script.base_script
             ai_lib.setPatrolPath(guard, params.getLocationArray("locs"));
             if (utils.hasScriptVar(self, "hq.spawn.security"))
             {
-                List securityTeam = utils.getResizeableObjIdArrayScriptVar(self, "hq.spawn.security");
-                securityTeam.add(guard);
+                Vector securityTeam = utils.getResizeableObjIdArrayScriptVar(self, "hq.spawn.security");
+                securityTeam = utils.addElement(securityTeam, guard);
                 utils.setScriptVar(self, "hq.spawn.security", securityTeam);
             }
             else 
             {
                 Vector securityTeam = new Vector();
                 securityTeam.setSize(0);
-                securityTeam.add(guard);
+                securityTeam = utils.addElement(securityTeam, guard);
                 utils.setScriptVar(self, "hq.spawn.security", securityTeam);
             }
         }

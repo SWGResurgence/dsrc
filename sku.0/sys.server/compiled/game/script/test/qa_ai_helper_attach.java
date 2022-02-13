@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class qa_ai_helper_attach extends script.base_script
 {
+    public qa_ai_helper_attach()
+    {
+    }
     public static final int ATTACK_OPTION = 0;
     public static final int PROGRAM_OPTION = 1;
     public static final int DIEINPLACE = 0;
@@ -1780,7 +1783,7 @@ public class qa_ai_helper_attach extends script.base_script
                 if (performance.canPerformDance(self, i + 1))
                 {
                     name = (name.substring(0, 1)).toUpperCase() + (name.substring(1)).toLowerCase();
-                    available_dances.add(name);
+                    available_dances = utils.addElement(available_dances, name);
                 }
             }
         }

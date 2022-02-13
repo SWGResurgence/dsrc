@@ -412,9 +412,9 @@ public class pclib extends script.base_script
         }
         else 
         {
-            consentTo.add(target);
+            consentTo = utils.addElement(consentTo, target);
             obj_id[] corpses = getObjIdArrayObjVar(player, VAR_CORPSE_ID);
-            if (corpses != null && corpses.length > 0)
+            if ((corpses != null) && (corpses.length > 0))
             {
                 corpse.grantCorpseConsent(corpses, target);
             }
@@ -456,7 +456,7 @@ public class pclib extends script.base_script
             int idx = utils.getElementPositionInArray(consentTo, target);
             if (idx > -1)
             {
-                consentTo.remove(idx);
+                consentTo = utils.removeElementAt(consentTo, idx);
                 if (consentTo.size() == 0)
                 {
                     removeObjVar(player, VAR_CONSENT_TO_BASE);
@@ -986,7 +986,7 @@ public class pclib extends script.base_script
         Vector killers = utils.getResizeableObjIdBatchObjVar(self, VAR_CORPSE_KILLER);
         if (killers != null && killers.size() > 0)
         {
-            killers.remove(killers.size() - 1);
+            killers = utils.removeElementAt(killers, killers.size() - 1);
         }
         if (killers == null || killers.size() == 0)
         {
@@ -1254,7 +1254,7 @@ public class pclib extends script.base_script
         }
         while ((c != obj_id.NULL_ID) && (c != null))
         {
-            containers.add(c);
+            containers = utils.addElement(containers, c);
             c = getContainedBy(c);
         }
         return utils.getElementPositionInArray(containers, player) > -1;

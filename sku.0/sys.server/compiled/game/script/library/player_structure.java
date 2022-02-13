@@ -526,7 +526,7 @@ public class player_structure extends script.base_script
                 if ((object != null) && (object != obj_id.NULL_ID))
                 {
                     setYaw(object, HEADING);
-                    base_object_list.add(object);
+                    base_object_list = utils.addElement(base_object_list, object);
                     object_set = true;
                 }
             }
@@ -1516,10 +1516,10 @@ public class player_structure extends script.base_script
             if (!isIdValid(utils.stringToObjId(entryItemString))) {
                 if ((entryItemString.toLowerCase()).contains("guild:")) {
                     if (findGuild(((entryItemString.substring(6)).toLowerCase()).trim()) > 0) {
-                        filteredEntryList.add(entryItemString);
+                        utils.addElement(filteredEntryList, entryItemString);
                     }
                 } else {
-                    filteredEntryList.add(entryItemString);
+                    utils.addElement(filteredEntryList, entryItemString);
                 }
             }
         }
@@ -1801,7 +1801,7 @@ public class player_structure extends script.base_script
         {
             for (obj_id object : objects) {
                 if (isIdValid(object) && isPlayer(object)) {
-                    players.add(object);
+                    players = utils.addElement(players, object);
                 }
             }
         }
@@ -1828,7 +1828,7 @@ public class player_structure extends script.base_script
         {
             for (obj_id item : items) {
                 if (isPlayer(item)) {
-                    players.add(item);
+                    players = utils.addElement(players, item);
                 }
             }
             if (players != null) {
@@ -4869,7 +4869,7 @@ public class player_structure extends script.base_script
                             thisStructure.setSize(0);
                             for (String struct : allStructures) {
                                 if (structureTemplate.equals(struct)) {
-                                    thisStructure.add(struct);
+                                    thisStructure = utils.addElement(thisStructure, struct);
                                 }
                             }
                         }
@@ -5088,7 +5088,7 @@ public class player_structure extends script.base_script
         {
             if (i < SIGN_NAMES.length)
             {
-                entries.add(utils.packStringId(SIGN_NAMES);
+                entries = utils.addElement(entries, utils.packStringId(SIGN_NAMES[i]));
             }
             else 
             {
@@ -5143,7 +5143,7 @@ public class player_structure extends script.base_script
         obj_id[] datapads = getContents(utils.getPlayerDatapad(player));
         for (obj_id datapad : datapads) {
             if (hasObjVar(datapad, "module_data.struct_maint")) {
-                droids.add(datapad);
+                droids = utils.addElement(droids, datapad);
             }
         }
         obj_id[] _droids = new obj_id[0];
@@ -6017,14 +6017,14 @@ public class player_structure extends script.base_script
                     totalNonGenericStorageIncrease = totalNonGenericStorageIncrease + nonGenericStorageObjvar.getIntData();
                     if (nonGenericStorageObjvarName != null && nonGenericStorageObjvarName.length() > 0)
                     {
-                        storageIncreaseTypes.add(nonGenericStorageObjvarName);
+                        storageIncreaseTypes = utils.addElement(storageIncreaseTypes, nonGenericStorageObjvarName);
                     }
                 }
             }
         }
         if (getTotalIncreasedStorageAmountStructure(structure) > totalNonGenericStorageIncrease)
         {
-            storageIncreaseTypes.add("item_storage_increase_05_03");
+            storageIncreaseTypes = utils.addElement(storageIncreaseTypes, "item_storage_increase_05_03");
         }
         String[] _storageIncreaseTypes = new String[0];
         if (storageIncreaseTypes != null)
@@ -6145,8 +6145,8 @@ public class player_structure extends script.base_script
                 continue;
             }
             blog("player_structure.getSpecialSignList: Found a skill mod I have: " + specialSignSkillMods[i]);
-            allSignTemplates.add(specialSignTemplates[i]);
-            allSignStrings.add("@" + specialSignNames[i]);
+            utils.addElement(allSignTemplates, specialSignTemplates[i]);
+            utils.addElement(allSignStrings, "@" + specialSignNames[i]);
         }
         if (allSignTemplates.size() <= 0)
         {
@@ -6488,7 +6488,7 @@ public class player_structure extends script.base_script
                         if (getContainerType(thing) != 0 && getGameObjectType(thing) != GOT_misc_factory_crate) {
                             addPlayerItemsFromContainerToList(thing, player, myItemsInBuilding);
                         }
-                        myItemsInBuilding.add(thing);
+                        utils.addElement(myItemsInBuilding, thing);
                     }
                 }
             }
@@ -6776,8 +6776,8 @@ public class player_structure extends script.base_script
                 }
             }
             if (toLower(name).contains(keyword)) {
-                keywordMatchedIds.add(thing);
-                keywordMatchedNames.add(name);
+                utils.addElement(keywordMatchedIds, thing);
+                utils.addElement(keywordMatchedNames, name);
                 ++numMatches;
             }
             if (numMatches >= 50) {

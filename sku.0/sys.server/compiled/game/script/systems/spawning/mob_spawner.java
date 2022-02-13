@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class mob_spawner extends script.base_script
 {
+    public mob_spawner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         requestPreloadCompleteTrigger(self);
@@ -53,7 +56,7 @@ public class mob_spawner extends script.base_script
             strScript = dctSpawnInfo.getString("strScript" + intI);
             if (!strScript.equals(""))
             {
-                strScripts.add(strScript);
+                strScripts = utils.addElement(strScripts, strScript);
             }
         }
         if (strScripts.size() > 0)

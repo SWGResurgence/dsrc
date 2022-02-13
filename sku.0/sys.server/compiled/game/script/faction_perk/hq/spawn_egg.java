@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class spawn_egg extends script.base_script
 {
+    public spawn_egg()
+    {
+    }
     private static final String VAR_SPAWN_PATHPOINTS = hq.VAR_SPAWN_BASE + ".pathPoints";
     private static final String VAR_SPAWN_FORMATION = hq.VAR_SPAWN_BASE + ".formation";
     private static final String VAR_CLEANING_UP = hq.VAR_SPAWN_BASE + ".cleaningUp";
@@ -57,7 +60,7 @@ public class spawn_egg extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        children.remove(oid);
+        children = utils.removeElement(children, oid);
         if (children != null && children.size() > 0)
         {
             int pos = 0;
@@ -104,7 +107,7 @@ public class spawn_egg extends script.base_script
             return SCRIPT_CONTINUE;
         }
         int original_count = getIntObjVar(self, hq.VAR_SPAWN_COUNT);
-        children.remove(oid);
+        children = utils.removeElement(children, oid);
         if (children == null || children.size() == 0 || original_count == 0 || children.size() < original_count / 4)
         {
             removeObjVar(self, hq.VAR_SPAWN_CHILDREN);
@@ -197,7 +200,7 @@ public class spawn_egg extends script.base_script
                 return null;
             }
             setObjVar(self, VAR_SPAWN_FORMATION, formation);
-            keys.remove(0);
+            keys = utils.removeElementAt(keys, 0);
             obj_id leader = null;
             float dtheta = 30;
             if (keys.size() > 1)
@@ -226,7 +229,7 @@ public class spawn_egg extends script.base_script
                 spawn = createSpawn(((String)keys.get(i)), spawnLoc);
                 if (isIdValid(spawn))
                 {
-                    spawns.add(spawn);
+                    spawns = utils.addElement(spawns, spawn);
                     if (isIdValid(leader))
                     {
                         ai_lib.followInFormation(spawn, leader, formation, i);
@@ -256,7 +259,7 @@ public class spawn_egg extends script.base_script
             obj_id spawn = createSpawn(spawnKey, spawnLoc);
             if (isIdValid(spawn))
             {
-                spawns.add(spawn);
+                spawns = utils.addElement(spawns, spawn);
                 setYaw(spawn, getFloatObjVar(self, hq.VAR_SPAWN_YAW));
                 if (getTopMostContainer(self) == self)
                 {
@@ -275,7 +278,7 @@ public class spawn_egg extends script.base_script
     }
     private obj_id createSpawn(String type, location there) throws InterruptedException
     {
-        if (type == null || type.isEmpty())
+        if (type == null || type.equals(""))
         {
             return null;
         }

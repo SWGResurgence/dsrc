@@ -3,11 +3,13 @@ package script.event.emperorsday;
 import script.*;
 import script.library.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class emperor_statue extends script.base_script
 {
+    public emperor_statue()
+    {
+    }
     public static final String MUSIC_IMPERIAL_MARCH = "object/soundobject/soundobject_imperial_march.iff";
     public static final String MUSIC_IMPERIAL_ATTACK = "object/soundobject/soundobject_imperial_attack.iff";
     public static final String EMP_DAY = "event/emperors_day";
@@ -130,7 +132,7 @@ public class emperor_statue extends script.base_script
         }
         if (utils.hasScriptVar(self, "vader"))
         {
-            List npc = utils.getResizeableObjIdArrayScriptVar(self, "vader");
+            Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "vader");
             for (Object aNpc : npc) {
                 if (isIdValid(((obj_id) aNpc)) && exists(((obj_id) aNpc))) {
                     destroyObject(((obj_id) aNpc));
@@ -140,7 +142,7 @@ public class emperor_statue extends script.base_script
         }
         if (utils.hasScriptVar(self, "dark_trooper"))
         {
-            List npc = utils.getResizeableObjIdArrayScriptVar(self, "dark_trooper");
+            Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "dark_trooper");
             for (Object aNpc : npc) {
                 if (isIdValid(((obj_id) aNpc)) && exists(((obj_id) aNpc))) {
                     destroyObject(((obj_id) aNpc));
@@ -213,12 +215,13 @@ public class emperor_statue extends script.base_script
     public int npcTypeList(obj_id self, dictionary params) throws InterruptedException
     {
         String npcType = params.getString("type");
-        List npcs = new ArrayList<obj_id>();
+        Vector npcs = new Vector();
+        npcs.setSize(0);
         if (utils.hasScriptVar(self, npcType))
         {
             npcs = utils.getResizeableObjIdArrayScriptVar(self, npcType);
         }
-        npcs.add(params.getObjId("npcObjId"));
+        utils.addElement(npcs, params.getObjId("npcObjId"));
         utils.setScriptVar(self, npcType, npcs);
         return SCRIPT_CONTINUE;
     }
@@ -355,16 +358,18 @@ public class emperor_statue extends script.base_script
     {
         location loc = getLocation(self);
         obj_id[] objects = getObjectsInRange(loc, holiday.OBJECT_NEAR_CHECK_RANGE_100M);
-        List squad1 = new ArrayList<obj_id>();
-        List squad2 = new ArrayList<obj_id>();
+        Vector squad1 = new Vector();
+        squad1.setSize(0);
+        Vector squad2 = new Vector();
+        squad2.setSize(0);
         obj_id pathPoint;
         for (obj_id object : objects) {
             if (isIdValid(object)) {
                 if (hasObjVar(object, "darkTroopers1")) {
-                    squad1.add(object);
+                    utils.addElement(squad1, object);
                 }
                 if (hasObjVar(object, "darkTroopers2")) {
-                    squad2.add(object);
+                    utils.addElement(squad2, object);
                 }
                 if (hasObjVar(object, "vader")) {
                     pathPoint = getObjIdObjVar(self, holiday.SPAWNER_PREFIX_OBJVAR + "vader_path");
@@ -441,12 +446,13 @@ public class emperor_statue extends script.base_script
         location here = (location)statue.clone();
         here.z = statue.z + 20;
         int tableLength = dataTableGetNumRows(firework.TBL_FX);
-        List nonFactionalTemplates = new ArrayList<obj_id>();
+        Vector nonFactionalTemplates = new Vector();
+        nonFactionalTemplates.setSize(0);
         for (int i = 0; i < tableLength - 1; i++)
         {
             if (dataTableGetInt(firework.TBL_FX, i, "factional") == 0)
             {
-                nonFactionalTemplates.add(dataTableGetString(firework.TBL_FX, i, "template"));
+                utils.addElement(nonFactionalTemplates, dataTableGetString(firework.TBL_FX, i, "template"));
             }
         }
         if (nonFactionalTemplates.size() <= 0)
@@ -482,7 +488,7 @@ public class emperor_statue extends script.base_script
         CustomerServiceLog("holidayEvent", "emperor_statue.vaderLeaving: messageHandler initialized.");
         if (utils.hasScriptVar(self, "stormtrooper_squadleader"))
         {
-            List npc = utils.getResizeableObjIdArrayScriptVar(self, "stormtrooper_squadleader");
+            Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "stormtrooper_squadleader");
             for (Object aNpc : npc) {
                 if (isIdValid(((obj_id) aNpc)) && exists(((obj_id) aNpc))) {
                     doAnimationAction(((obj_id) aNpc), "salute2");
@@ -506,7 +512,7 @@ public class emperor_statue extends script.base_script
         }
         if (utils.hasScriptVar(self, "dark_trooper"))
         {
-            List npc = utils.getResizeableObjIdArrayScriptVar(self, "dark_trooper");
+            Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "dark_trooper");
             for (Object aNpc : npc) {
                 if (isIdValid(((obj_id) aNpc)) && exists(((obj_id) aNpc))) {
                     if (hasObjVar(((obj_id) aNpc), "darkTroopers1")) {
@@ -523,15 +529,17 @@ public class emperor_statue extends script.base_script
     public int finalMarch(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] objects = getObjectsInRange(getLocation(self), holiday.OBJECT_NEAR_CHECK_RANGE_100M);
-        List squad1 = new ArrayList<obj_id>();
-        List squad2 = new ArrayList<obj_id>();
+        Vector squad1 = new Vector();
+        squad1.setSize(0);
+        Vector squad2 = new Vector();
+        squad2.setSize(0);
         for (obj_id object : objects) {
             if (isIdValid(object)) {
                 if (hasObjVar(object, "darkTroopers1")) {
-                    squad1.add(object);
+                    utils.addElement(squad1, object);
                 }
                 if (hasObjVar(object, "darkTroopers2")) {
-                    squad2.add(object);
+                    utils.addElement(squad2, object);
                 }
                 if (hasObjVar(object, "vader")) {
                     pathTo(object, getLocation(holiday.getEmpireDayWaypointObjectObjId(self, "spawnVader", holiday.OBJECT_NEAR_CHECK_RANGE_100M)));
@@ -591,7 +599,7 @@ public class emperor_statue extends script.base_script
         if (isIdValid(vader) || exists(vader))
         {
             CustomerServiceLog("holidayEvent", "emperor_statue.destroyParade: Destroying all parade NPCs that are vader.");
-            List npc = utils.getResizeableObjIdArrayScriptVar(self, "vader");
+            Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "vader");
             for (Object aNpc : npc) {
                 if (isIdValid(vader) && exists(vader)) {
                     destroyObject(((obj_id) aNpc));
@@ -603,7 +611,7 @@ public class emperor_statue extends script.base_script
         if (utils.hasScriptVar(self, "dark_trooper"))
         {
             CustomerServiceLog("holidayEvent", "emperor_statue.destroyParade: Destroying all parade NPCs that are dark troppers.");
-            List npc = utils.getResizeableObjIdArrayScriptVar(self, "dark_trooper");
+            Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "dark_trooper");
             for (Object aNpc : npc) {
                 if (isIdValid(((obj_id) aNpc)) && exists(((obj_id) aNpc))) {
                     destroyObject(((obj_id) aNpc));
@@ -633,7 +641,7 @@ public class emperor_statue extends script.base_script
     {
         if (utils.hasScriptVar(self, "stormtrooper_squadleader"))
         {
-            List npc = utils.getResizeableObjIdArrayScriptVar(self, "stormtrooper_squadleader");
+            Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "stormtrooper_squadleader");
             for (Object aNpc : npc) {
                 if (isIdValid(((obj_id) aNpc)) && exists(((obj_id) aNpc))) {
                     doAnimationAction(((obj_id) aNpc), "salute2");
@@ -649,17 +657,19 @@ public class emperor_statue extends script.base_script
         }
         if (utils.hasScriptVar(self, "dark_trooper"))
         {
-            List squad1 = new ArrayList<obj_id>();
-            List squad2 = new ArrayList<obj_id>();
-            List npc = utils.getResizeableObjIdArrayScriptVar(self, "dark_trooper");
+            Vector squad1 = new Vector();
+            squad1.setSize(0);
+            Vector squad2 = new Vector();
+            squad2.setSize(0);
+            Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "dark_trooper");
             for (Object aNpc : npc) {
                 if (isIdValid(((obj_id) aNpc)) && exists(((obj_id) aNpc))) {
                     setYaw(((obj_id) aNpc), 0.0f);
                     if (hasObjVar(((obj_id) aNpc), "darkTroopers1")) {
-                        squad1.add(aNpc);
+                        utils.addElement(squad1, aNpc);
                     }
                     if (hasObjVar(((obj_id) aNpc), "darkTroopers2")) {
-                        squad2.add(aNpc);
+                        utils.addElement(squad2, aNpc);
                     }
                 }
             }
@@ -754,13 +764,14 @@ public class emperor_statue extends script.base_script
                 messageTo(self, "vaderLeaving", null, 15.0f, false);
                 return SCRIPT_CONTINUE;
             }
-            List imperialPlayers = new ArrayList<obj_id>();
+            Vector imperialPlayers = new Vector();
+            imperialPlayers.setSize(0);
             for (obj_id aPlayersInRange : playersInRange) {
                 if (!isIdValid(aPlayersInRange) || !exists(aPlayersInRange)) {
                     continue;
                 }
                 if (holiday.isEmpireDayPlayerEligible(aPlayersInRange, holiday.IMPERIAL_PLAYER)) {
-                    imperialPlayers.add(aPlayersInRange);
+                    utils.addElement(imperialPlayers, aPlayersInRange);
                 }
             }
             if (imperialPlayers.size() <= 0)
@@ -935,11 +946,12 @@ public class emperor_statue extends script.base_script
                 setObjVar(vader, "alreadyLeaving", true);
                 return SCRIPT_CONTINUE;
             }
-            List miaList = new ArrayList<obj_id>();
+            Vector miaList = new Vector();
+            miaList.setSize(0);
             for (int i = 0; i < allMissingPlayers.getNumItems(); i++)
             {
                 obj_var playerPlace = allMissingPlayers.getObjVar(i);
-                miaList.add(playerPlace.getObjIdData());
+                utils.addElement(miaList, playerPlace.getObjIdData());
             }
             if (miaList.size() <= 0)
             {
@@ -1047,12 +1059,13 @@ public class emperor_statue extends script.base_script
             int latestMiaListLen = allMissingPlayers.getNumItems();
             if (latestMiaListLen != oldMiaList.length)
             {
-                List lastestMiaList = new ArrayList<obj_id>();
+                Vector lastestMiaList = new Vector();
+                lastestMiaList.setSize(0);
                 obj_var playerPlace;
                 for (int i = 0; i < latestMiaListLen; i++)
                 {
                     playerPlace = allMissingPlayers.getObjVar(i);
-                    lastestMiaList.add(playerPlace.getObjIdData());
+                    utils.addElement(lastestMiaList, playerPlace.getObjIdData());
                 }
                 if (lastestMiaList.size() <= 0)
                 {

@@ -527,7 +527,7 @@ public class fs_crafting1_player extends script.base_script
                         if (!isIdValid(crafter) || crafter != self) {
                             continue;
                         }
-                        tempData.add(COMPONENTS[i]);
+                        tempData = utils.addElement(tempData, COMPONENTS[i]);
                         break;
                     }
                 }
@@ -1215,9 +1215,9 @@ public class fs_crafting1_player extends script.base_script
         tempData.setSize(0);
         for (int i = 0; i < TEMPLATES.length; i++)
         {
-            if (analyzed[i] == 0 && utils.playerHasItemByTemplate(self, TEMPLATES[i]))
+            if ((analyzed[i] == 0) && (utils.playerHasItemByTemplate(self, TEMPLATES[i])))
             {
-                tempData.add(COMPONENTS[i]);
+                tempData = utils.addElement(tempData, COMPONENTS[i]);
             }
         }
         if (tempData.size() == 0)
@@ -1280,7 +1280,7 @@ public class fs_crafting1_player extends script.base_script
         {
             if (analyzed[i] == 1)
             {
-                tempData.add(COMPONENTS[i]);
+                tempData = utils.addElement(tempData, COMPONENTS[i]);
             }
         }
         if (tempData.size() == 0)

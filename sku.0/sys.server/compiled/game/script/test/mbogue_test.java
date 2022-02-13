@@ -127,7 +127,7 @@ public class mbogue_test extends script.base_script
                         Vector targetObjectIdList = new Vector();
                         while (tokenizer.hasMoreTokens())
                         {
-                            targetObjectIdList.add(obj_id.getObjId(java.lang.Long.parseLong(tokenizer.nextToken())));
+                            targetObjectIdList.addElement(obj_id.getObjId(java.lang.Long.parseLong(tokenizer.nextToken())));
                         }
                         if (targetObjectIdList.size() == 1)
                         {

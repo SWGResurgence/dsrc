@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class tcg extends script.base_script
 {
+    public tcg()
+    {
+    }
     public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "tcg_barn";
     public static final String RANCHHAND_CELL_SCRIPT = "systems.tcg.barn_cell";
@@ -115,8 +118,8 @@ public class tcg extends script.base_script
             for (obj_id bcd : initialBcdsList) {
                 beastName = beast_lib.getBCDBeastName(bcd);
                 if (beastName != null && beastName.length() > 0) {
-                    vectorBeastNames.add(toUpper(beastName, 0));
-                    vectorBcdsList.add(bcd);
+                    utils.addElement(vectorBeastNames, toUpper(beastName, 0));
+                    utils.addElement(vectorBcdsList, bcd);
                 }
             }
             if (vectorBeastNames.size() > 0 && vectorBcdsList.size() > 0)
@@ -199,8 +202,8 @@ public class tcg extends script.base_script
                     beastName = getStringObjVar(barn, "barnStorage." + bcdSlot + ".tempName");
                 }
                 if (beastName != null && beastName.length() > 0) {
-                    vectorBeastNames.add(toUpper(beastName, 0));
-                    vectorBcdsList.add(bcdSlot);
+                    utils.addElement(vectorBeastNames, toUpper(beastName, 0));
+                    utils.addElement(vectorBcdsList, bcdSlot);
                 }
             }
             if (vectorBeastNames.size() > 0 && vectorBcdsList.size() > 0)
@@ -247,8 +250,8 @@ public class tcg extends script.base_script
                     beastName = beastName + " [Stored]";
                 }
                 if (beastName.length() > 0) {
-                    vectorBeastNames.add(toUpper(beastName, 0));
-                    vectorBcdsList.add(bcdSlot);
+                    utils.addElement(vectorBeastNames, toUpper(beastName, 0));
+                    utils.addElement(vectorBcdsList, bcdSlot);
                 }
             }
             String prompt = "barn_beast_selection_display_prompt";

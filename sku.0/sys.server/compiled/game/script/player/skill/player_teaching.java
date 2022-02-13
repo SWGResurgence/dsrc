@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class player_teaching extends script.base_script
 {
+    public player_teaching()
+    {
+    }
     public static final String VAR_TEACHING = "teaching";
     public static final String VAR_VALID_SKILLS = "teaching.valid_skills";
     public static final String VAR_SKILL_TO_LEARN = "teaching.skill_to_learn";
@@ -272,7 +275,7 @@ public class player_teaching extends script.base_script
             int idx = utils.getElementPositionInArray(teacher_skills, qual_skill);
             if (idx != -1) {
                 if (!qual_skill.contains("novice") && !qual_skill.contains("force_sensitive")) {
-                    valid_skills.add(qual_skills);
+                    valid_skills = utils.addElement(valid_skills, qual_skill);
                 }
             }
         }

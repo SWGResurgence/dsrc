@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class dummy_treasure_drum extends script.base_script
 {
+    public dummy_treasure_drum()
+    {
+    }
     public static final String SCRIPT_TREASUREGUARD = "systems.treasure_map.base.treasure_guard";
     public static final String REAL_CHEST = "object/tangible/container/drum/treasure_drum.iff";
     public static final String SCRIPT_REAL_CHEST = "systems.treasure_map.base.treasure_drum";
@@ -187,7 +190,7 @@ public class dummy_treasure_drum extends script.base_script
                     faceTo(antagonist, player);
                     messageTo(antagonist, "barkAttack", params, 2, false);
                 }
-                guards.add(antagonist);
+                guards = utils.addElement(guards, antagonist);
             }
         }
         if (guards != null && guards.size() > 0)
@@ -219,7 +222,7 @@ public class dummy_treasure_drum extends script.base_script
             if ((isIdNull(guard)) || !exists(guard) || isDead(guard)) {
                 continue;
             }
-            latestGuardList.add(guards);
+            utils.addElement(latestGuardList, guard);
         }
         obj_id[] newGuardArray = new obj_id[latestGuardList.size()];
         if (newGuardArray == null || newGuardArray.length == 0)

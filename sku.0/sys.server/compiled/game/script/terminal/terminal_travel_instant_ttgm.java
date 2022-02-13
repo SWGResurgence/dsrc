@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class terminal_travel_instant_ttgm extends script.base_script
 {
+    public terminal_travel_instant_ttgm()
+    {
+    }
     public static final String PID_VAR = "teleportToGroupMember.pid";
     public static final String GROUP_NAMES_LIST_VAR = "teleportToGroupMember.groupieNames";
     public static final String TRAVEL_LOC_VAR = "teleportToGroupMember.groupieLoc";
@@ -99,7 +102,7 @@ public class terminal_travel_instant_ttgm extends script.base_script
                             {
                                 if (isPlayer(groupIds[i]))
                                 {
-                                    tempGroupieNames.add(groupieName);
+                                    utils.addElement(tempGroupieNames, groupieName);
                                 }
                             }
                         }

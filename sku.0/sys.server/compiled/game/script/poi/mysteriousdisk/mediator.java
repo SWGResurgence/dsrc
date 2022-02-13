@@ -12,6 +12,9 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
+    public mediator()
+    {
+    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiMysteriousDisk Mediator";
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
@@ -138,7 +141,7 @@ public class mediator extends script.poi.base.scenario_actor
         if (progress == CONV_GREET)
         {
             msg = new string_id(convo, "m_greet");
-            responses.add(new string_id(convo, "r_m_greet_who"));
+            responses = utils.addElement(responses, new string_id(convo, "r_m_greet_who"));
             npcStartConversation(speaker, self, convo, msg, responses);
         }
         else 

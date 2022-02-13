@@ -260,7 +260,7 @@ public class live_conversions extends script.base_script
                 newConsentTo.setSize(0);
                 for (obj_id consentTo1 : consentTo) {
                     if (isPlayer(consentTo1)) {
-                        newConsentTo.add(consentTo);
+                        newConsentTo = utils.addElement(newConsentTo, consentTo1);
                     }
                 }
                 if (newConsentTo.size() > 0)
@@ -283,7 +283,7 @@ public class live_conversions extends script.base_script
                 newConsentFrom.setSize(0);
                 for (obj_id obj_id : consentFrom) {
                     if (isPlayer(obj_id)) {
-                        newConsentFrom.add(consentFrom);
+                        newConsentFrom = utils.addElement(newConsentFrom, obj_id);
                     }
                 }
                 if (newConsentFrom.size() > 0)

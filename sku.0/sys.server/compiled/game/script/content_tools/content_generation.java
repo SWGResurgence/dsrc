@@ -4,11 +4,12 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
-import java.util.ArrayList;
-import java.util.List;
 
 public class content_generation extends script.base_script
 {
+    public content_generation()
+    {
+    }
     public static final float AUTOSAVE_DELAY = 300;
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -1470,7 +1471,8 @@ public class content_generation extends script.base_script
             sui.inputbox(self, self, "What are the spawned mob's default behavior? Allowed values are patrol, patrolNoRecycle and loiter", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyDefaultBehavior", null);
             return SCRIPT_CONTINUE;
         }
-        List strWaves = new ArrayList<String>();
+        Vector strWaves = new Vector();
+        strWaves.setSize(0);
         if (utils.hasScriptVar(self, "strWaves"))
         {
             strWaves = utils.getResizeableStringArrayScriptVar(self, "strWaves");
@@ -1481,7 +1483,7 @@ public class content_generation extends script.base_script
         }
         if (isValidWave(strWave))
         {
-            strWaves.add(strWave);
+            strWaves = utils.addElement(strWaves, strWave);
             strData = strData + strWave + "\n";
             utils.setScriptVar(self, "strWaves", strWaves);
             sui.inputbox(self, self, "wave of type " + strWave + " Added. Please add another wave or type done to finish\n. Current wave list is \n" + strData, sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyWaves", null);
@@ -1509,7 +1511,8 @@ public class content_generation extends script.base_script
             sui.inputbox(self, self, "What are these spawned mob's default behavior? Allowed values are patrol, patrolNoRecycle, patrolFixedCircle, patrolRandomPath and loiter", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyDefaultBehavior", null);
             return SCRIPT_CONTINUE;
         }
-        List strSpawns = new ArrayList<String>();
+        Vector strSpawns = new Vector();
+        strSpawns.setSize(0);
         if (utils.hasScriptVar(self, "strSpawns"))
         {
             strSpawns = utils.getResizeableStringArrayScriptVar(self, "strSpawns");
@@ -1520,7 +1523,7 @@ public class content_generation extends script.base_script
         }
         if (isValidMobString(strSpawnToAdd))
         {
-            strSpawns.add(strSpawnToAdd);
+            strSpawns = utils.addElement(strSpawns, strSpawnToAdd);
             strData = strData + strSpawnToAdd + "\n";
             utils.setScriptVar(self, "strSpawns", strSpawns);
             sui.inputbox(self, self, "Spawn of type " + strSpawnToAdd + " Added. Please add another spawn or type done to finish\n. Current spawn list is \n" + strData, sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifySpawns", null);
@@ -1849,7 +1852,7 @@ public class content_generation extends script.base_script
                 LOG("space", "comparing " + strRealName + " to " + strName + "_" + intI);
                 if (strRealName.equals(strName + "_" + intCount))
                 {
-                    objPoints.add(objObjects[intJ]);
+                    objPoints = utils.addElement(objPoints, objObjects[intJ]);
                     intJ = objObjects.length + 1;
                 }
             }
@@ -1894,8 +1897,8 @@ public class content_generation extends script.base_script
                 String strRawName = getRawPatrolPointName(strPatrolPointName);
                 int intIndex = utils.getElementPositionInArray(strNames, strRawName);
                 if (intIndex < 0) {
-                    strNames.add(strRawName);
-                    intCount.add(1);
+                    strNames = utils.addElement(strNames, strRawName);
+                    intCount = utils.addElement(intCount, 1);
                 } else {
                     intCount.set(intIndex, (Integer) intCount.get(intIndex) + 1);
                 }
@@ -1945,12 +1948,13 @@ public class content_generation extends script.base_script
         if (strString.equals("add"))
         {
             obj_id objPatrolPoint = createObject("object/tangible/space/content_infrastructure/basic_patrol_point.iff", getTransform_o2p(getPilotedShip(self)), null);
-            List objPatrolPoints = new ArrayList<obj_id>();
+            Vector objPatrolPoints = new Vector();
+            objPatrolPoints.setSize(0);
             if (utils.hasScriptVar(self, "objPatrolPoints"))
             {
                 objPatrolPoints = utils.getResizeableObjIdArrayScriptVar(self, "objPatrolPoints");
             }
-            objPatrolPoints.add(objPatrolPoint);
+            objPatrolPoints = utils.addElement(objPatrolPoints, objPatrolPoint);
             utils.setScriptVar(self, "objPatrolPoints", objPatrolPoints);
             sui.inputbox(self, self, "Point Added. Go to where you wish to place the next patrol point, face the proper direction, and enter 'add' into this box. When you are finished adding points, write 'done'", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "makePatrolPoint", null);
             return SCRIPT_CONTINUE;
@@ -2178,9 +2182,9 @@ public class content_generation extends script.base_script
                 for (int intI = 0; intI < objPatrolPoints.length; intI++)
                 {
                     String strTest = strPatrolPointName + "_" + (intI + 1);
-                    strPatrolPoints.add(strTest);
+                    strPatrolPoints = utils.addElement(strPatrolPoints, strTest);
                     setObjVar(objPatrolPoints[intI], "strName", strTest);
-                    trPatrolPoints.add(getTransform_o2p(objPatrolPoints[intI]));
+                    trPatrolPoints = utils.addElement(trPatrolPoints, getTransform_o2p(objPatrolPoints[intI]));
                 }
                 if (strPatrolPoints.size() > 0)
                 {
@@ -2382,7 +2386,7 @@ public class content_generation extends script.base_script
             obj_id[] objTestContents = getContents(objCell);
             if ((objTestContents != null) && (objTestContents.length > 0)) {
                 for (obj_id objTestContent : objTestContents) {
-                    objContents.add(objTestContents);
+                    objContents = utils.addElement(objContents, objTestContent);
                 }
             }
         }
@@ -2451,7 +2455,7 @@ public class content_generation extends script.base_script
             obj_id[] objTestContents = getContents(objCell);
             if ((objTestContents != null) && (objTestContents.length > 0)) {
                 for (obj_id objTestContent : objTestContents) {
-                    objContents.add(objTestContents);
+                    objContents = utils.addElement(objContents, objTestContent);
                 }
             }
         }

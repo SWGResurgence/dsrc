@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class texture_kit extends script.base_script
 {
+    public texture_kit()
+    {
+    }
     public static final String STF = "texture_kit";
     public static final string_id MNU_TEXTURE = new string_id("sui", "set_texture");
     public static final String BTN_TEXTURE = "@" + STF + ":btn_texture";
@@ -58,14 +61,14 @@ public class texture_kit extends script.base_script
             for (obj_id shipControlDevice : shipControlDevices) {
                 obj_id objShip = space_transition.getShipFromShipControlDevice(shipControlDevice);
                 if (space_utils.isShipTextureable(objShip)) {
-                    validControlDevices.add(shipControlDevices, shipControlDevice);
+                    validControlDevices = utils.addElement(validControlDevices, shipControlDevice);
                 }
             }
             String entries[] = new String[validControlDevices.size()];
             for (int i = 0; i < validControlDevices.size(); i++)
             {
                 entries[i] = getAssignedName(((obj_id)validControlDevices.get(i)));
-                if (entries[i] == null || entries[i].isEmpty())
+                if (entries[i] == null || entries[i].equals(""))
                 {
                     entries[i] = "@" + getName(((obj_id)validControlDevices.get(i)));
                 }

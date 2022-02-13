@@ -12,6 +12,9 @@ import java.util.Vector;
 
 public class bocctyyy_bet_spawner extends script.base_script
 {
+    public bocctyyy_bet_spawner()
+    {
+    }
     public int doBocctyyySpawnEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || !params.containsKey("questName"))
@@ -55,7 +58,7 @@ public class bocctyyy_bet_spawner extends script.base_script
         {
             Vector myCreations = new Vector();
             myCreations.setSize(0);
-            myCreations.add(npc);
+            utils.addElement(myCreations, npc);
             if (myCreations != null && myCreations.size() > 0)
             {
                 setObjVar(self, "myCreations", myCreations);

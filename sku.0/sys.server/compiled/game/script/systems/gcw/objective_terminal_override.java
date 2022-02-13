@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class objective_terminal_override extends script.faction_perk.hq.objective_object
 {
+    public objective_terminal_override()
+    {
+    }
     public static final string_id MNU_DNA = new string_id("hq", "mnu_dna");
     public static final int NUM_SEQUENCE = 23;
     public static final String VAR_DNA = "hq.objective.dna";
@@ -156,14 +159,14 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
         {
             if (locks[i] == 0)
             {
-                entries.add(dna[i]);
+                entries = utils.addElement(entries, dna[i]);
             }
             else 
             {
                 numLocks++;
                 for (String pair : PAIRS) {
                     if (pair.startsWith(dna[i])) {
-                        entries.add(PAIRS, pair);
+                        entries = utils.addElement(entries, pair);
                         break;
                     }
                 }
@@ -171,7 +174,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
         }
         String chain = utils.getStringScriptVar(self, scriptvar_chain);
         utils.removeScriptVar(self, scriptvar_chain);
-        if (chain == null || chain.isEmpty())
+        if (chain == null || chain.equals(""))
         {
             if (chain == null)
             {

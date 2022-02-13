@@ -375,7 +375,7 @@ public class vendor_lib extends script.base_script
         greeterColNames.setSize(0);
         for (String aPreParsedColList : preParsedColList) {
             if (aPreParsedColList.startsWith("greeter")) {
-                greeterColNames.add(aPreParsedColList);
+                greeterColNames = utils.addElement(greeterColNames, aPreParsedColList);
             }
         }
         if (greeterColNames.size() <= 0)

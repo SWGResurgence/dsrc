@@ -9,11 +9,12 @@ import script.location;
 import script.obj_id;
 
 import java.util.Vector;
-import java.util.ArrayList;
-import java.util.List;
 
 public class stage_two_controller extends script.base_script
 {
+    public stage_two_controller()
+    {
+    }
     public static final String STAGE = "currentStage";
     public static final String[] TRIGGER_DATA_TYPES = 
     {
@@ -254,12 +255,13 @@ public class stage_two_controller extends script.base_script
     }
     public void addToWaypointData(obj_id controller, obj_id waypointObject) throws InterruptedException
     {
-        List wp = new ArrayList<obj_id>();
+        Vector wp = new Vector();
+        wp.setSize(0);
         if (utils.hasScriptVar(controller, restuss_event.MASTER_PATROL_ARRAY))
         {
             wp = utils.getResizeableObjIdArrayScriptVar(controller, restuss_event.MASTER_PATROL_ARRAY);
         }
-        wp.add(waypointObject);
+        utils.addElement(wp, waypointObject);
         setName(waypointObject, getStringObjVar(waypointObject, "wp_name"));
         utils.setScriptVar(controller, restuss_event.MASTER_PATROL_ARRAY, wp);
     }
@@ -283,13 +285,13 @@ public class stage_two_controller extends script.base_script
             switch (type)
             {
                 case TYPE_AI:
-                    attachScript(subject, "theme_park.restuss_event.ai_controller");
-                    break;
+                attachScript(subject, "theme_park.restuss_event.ai_controller");
+                break;
                 case TYPE_TRIGGER:
-                    attachScript(subject, "theme_park.restuss_event.trigger_controller");
-                    break;
+                attachScript(subject, "theme_park.restuss_event.trigger_controller");
+                break;
                 case TYPE_EFFECT_MANAGER:
-                    attachScript(subject, "theme_park.restuss_event.restuss_clientfx_controller");
+                attachScript(subject, "theme_park.restuss_event.restuss_clientfx_controller");
             }
         }
         if (spawnScripts == null || spawnScripts.equals("none"))

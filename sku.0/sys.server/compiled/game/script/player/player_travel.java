@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class player_travel extends script.base_script
 {
+    public player_travel()
+    {
+    }
     public static final string_id SID_CANT_BOARD = new string_id("city/city", "city_cant_board");
     public static final string_id SID_CANT_BUY_TICKET = new string_id("city/city", "city_cant_purchase_ticket");
     public static final string_id SID_CITY_TICKET = new string_id("city/city", "city_ticket_pay");
@@ -848,8 +851,8 @@ public class player_travel extends script.base_script
                     prose.setTT(ppLoc, ticket_planet);
                     prose.setTO(ppLoc, ticket_point);
                     String loc = " \0" + packOutOfBandProsePackage(null, ppLoc);
-                    dsrc.add(loc);
-                    valid_tickets.add(inv_contents);
+                    dsrc = utils.addElement(dsrc, loc);
+                    valid_tickets = utils.addElement(valid_tickets, inv_content);
                 }
             }
             if (dsrc.size() < 1)

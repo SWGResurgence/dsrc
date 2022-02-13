@@ -3,10 +3,13 @@ package script.library;
 import script.obj_id;
 import script.string_id;
 
-import java.util.List;
+import java.util.Vector;
 
 public class furniture extends script.base_script
 {
+    public furniture()
+    {
+    }
     public static final String VAR_CHAIR_OCCUPIED_BASE = "occupied";
     public static final String VAR_CHAIR_OCCUPIED_IDS = "occupied.ids";
     public static final String VAR_CHAIR_OCCUPIED_LIMIT = "occupied.limit";
@@ -17,7 +20,7 @@ public class furniture extends script.base_script
     public static final string_id SID_SEAT_FULL = new string_id("error_message", "seat_full");
     public static boolean sit(obj_id player, obj_id chair) throws InterruptedException
     {
-        if (player == null || chair == null)
+        if ((player == null) || (chair == null))
         {
             return false;
         }
@@ -25,7 +28,7 @@ public class furniture extends script.base_script
         {
             return false;
         }
-        List occupants = getResizeableObjIdArrayObjVar(chair, VAR_CHAIR_OCCUPIED_IDS);
+        Vector occupants = getResizeableObjIdArrayObjVar(chair, VAR_CHAIR_OCCUPIED_IDS);
         int pos = 0;
         if ((occupants != null) && (occupants.size() != 0))
         {
@@ -38,7 +41,7 @@ public class furniture extends script.base_script
         }
         if (sitOnObject(player, chair, pos))
         {
-            occupants.add(player);
+            occupants = utils.addElement(occupants, player);
             setObjVar(chair, VAR_CHAIR_OCCUPIED_IDS, occupants);
             setObjVar(player, VAR_PLAYER_SEAT_ID, chair);
             attachScript(player, SCRIPT_PLAYER_SEATED);
@@ -60,8 +63,8 @@ public class furniture extends script.base_script
             return false;
         }
         obj_id chair = getObjIdObjVar(player, VAR_PLAYER_SEAT_ID);
-        List occupants = getResizeableObjIdArrayObjVar(chair, VAR_CHAIR_OCCUPIED_IDS);
-        occupants.remove(player);
+        Vector occupants = getResizeableObjIdArrayObjVar(chair, VAR_CHAIR_OCCUPIED_IDS);
+        occupants = utils.removeElement(occupants, player);
         if (occupants == null || occupants.size() == 0)
         {
             return false;

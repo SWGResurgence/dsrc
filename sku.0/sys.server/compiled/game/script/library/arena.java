@@ -5,11 +5,13 @@ import script.obj_id;
 import script.prose_package;
 import script.string_id;
 
-import java.util.List;
 import java.util.Vector;
 
 public class arena extends script.base_script
 {
+    public arena()
+    {
+    }
     public static final String VAR_ARENA_OPEN_FOR_CHALLENGES = "arena.isOpen";
     public static final String VAR_CHALLENGE_DATA = "arena.challengeData";
     public static final String VAR_ARENA_LAST_OPEN_TIME = "arena.lastChallengeStartTime";
@@ -87,7 +89,7 @@ public class arena extends script.base_script
         {
             utils.concatArrays(ranksA, utils.getIntBatchObjVar(terminal, VAR_CH_RANKS_WHO_ANSWERED));
         }
-        ranksA.add(rankA);
+        utils.addElement(ranksA, rankA);
         utils.setBatchObjVar(terminal, VAR_CH_RANKS_WHO_ANSWERED, ranksA.toArray());
         return;
     }
@@ -99,7 +101,7 @@ public class arena extends script.base_script
         {
             utils.concatArrays(ranksC, utils.getIntBatchObjVar(terminal, VAR_CH_RANKS_GOT_CHALLENGED));
         }
-        ranksC.add(rankC);
+        utils.addElement(ranksC, rankC);
         utils.setBatchObjVar(terminal, VAR_CH_RANKS_GOT_CHALLENGED, ranksC.toArray());
         return;
     }
@@ -115,7 +117,7 @@ public class arena extends script.base_script
         int[] challengedRanks = utils.getIntBatchObjVar(terminal, VAR_CHALLENGED_RANKS);
         for (int allRank : allRanks) {
             if (utils.getElementPositionInArray(challengedRanks, allRank) > -1) {
-                ranks.add(allRanks);
+                utils.addElement(ranks, allRank);
             }
         }
         return ranks;
@@ -180,7 +182,7 @@ public class arena extends script.base_script
                 return;
             }
             prose_package ppDemote = prose.getPackage(new string_id("pvp_rating", "ch_terminal_demote_rank_penalty"), rank);
-            List members = force_rank.getAllPlayerNamesInForceRank(enclave);
+            Vector members = force_rank.getAllPlayerNamesInForceRank(enclave);
             string_id subj = new string_id("pvp_rating", "ch_terminal_demote_subject");
             for (Object member : members) {
                 utils.sendMail(subj, ppDemote, (String) member, MAIL_FROM_ENCLAVE);
@@ -366,9 +368,9 @@ public class arena extends script.base_script
             {
                 trace.log("force_rank", "Dark arena challenge issued by %TU against rank #" + (Integer) ranks.get(i) + " has timed out.", ((obj_id)challengers.get(i)), trace.TL_CS_LOG);
                 notifyChallengeTimedOut(terminal, ((obj_id)challengers.get(i)), (Integer) ranks.get(i));
-                challengers.remove(i);
-                ranks.remove(i);
-                timeStamps.remove(i);
+                utils.removeElementAt(challengers, i);
+                utils.removeElementAt(ranks, i);
+                utils.removeElementAt(timeStamps, i);
                 removedAChallenger = true;
             }
             else 
@@ -570,7 +572,7 @@ public class arena extends script.base_script
         {
             if (ranks[i] == rank)
             {
-                players.add(challengers);
+                utils.addElement(players, challengers[i]);
             }
         }
         return players;
@@ -626,7 +628,7 @@ public class arena extends script.base_script
                 {
                     timeLeft = " ( " + timeRemaining / 60 + " minutes remaining on this challenge )";
                 }
-                players.add(utils.getRealPlayerFirstName(challengers[i]) + timeLeft);
+                utils.addElement(players, utils.getRealPlayerFirstName(challengers[i]) + timeLeft);
             }
         }
         return utils.toStaticStringArray(players);
@@ -674,9 +676,9 @@ public class arena extends script.base_script
             trace.log("force_rank", "arena::addChallengeIssueData: -> cannot allow " + getFirstName(challenger) + "(rank " + challengerRank + ") to challenge rank # " + getFirstName(challenger) + " (rank " + challengerRank + "), as they are attempting to challenge " + rank + ".", challenger, trace.TL_WARNING | trace.TL_DEBUG);
             return false;
         }
-        challengers.add(challenger);
-        ranks.add(rank);
-        timeStamps.add(getGameTime());
+        utils.addElement(challengers, challenger);
+        utils.addElement(ranks, rank);
+        utils.addElement(timeStamps, getGameTime());
         utils.setBatchObjVar(challengeTerminal, VAR_CHALLENGERS, challengers.toArray());
         utils.setBatchObjVar(challengeTerminal, VAR_CHALLENGED_RANKS, ranks.toArray());
         utils.setBatchObjVar(challengeTerminal, VAR_CHALLENGE_TIMES, timeStamps.toArray());
@@ -723,9 +725,9 @@ public class arena extends script.base_script
                 return false;
             }
         }
-        acceptedChallengers.add(challenger);
-        acceptedDefenders.add(defender);
-        acceptedChllngRanks.add(defenderRank);
+        utils.addElement(acceptedChallengers, challenger);
+        utils.addElement(acceptedDefenders, defender);
+        utils.addElement(acceptedChllngRanks, defenderRank);
         utils.setBatchObjVar(challengeTerminal, VAR_ACCEPTED_CHALLENGERS, acceptedChallengers.toArray());
         utils.setBatchObjVar(challengeTerminal, VAR_ACCEPTED_DEFENDERS, acceptedDefenders.toArray());
         utils.setBatchObjVar(challengeTerminal, VAR_ACCEPTED_CHALLENGE_RANKS, acceptedChllngRanks.toArray());
@@ -909,9 +911,9 @@ public class arena extends script.base_script
         trace.log("force_rank", "arena::duelistDied: -> " + utils.getRealPlayerFirstName(player) + " was defeated " + utils.getRealPlayerFirstName(opponent), null, trace.TL_CS_LOG | trace.TL_DEBUG);
         utils.removeScriptVar(player, VAR_I_AM_DUELING);
         utils.removeScriptVar(opponent, VAR_I_AM_DUELING);
-        acceptedChallengers.remove(idx);
-        acceptedDefenders.remove(idx);
-        acceptedChllngRanks.remove(idx);
+        utils.removeElementAt(acceptedChallengers, idx);
+        utils.removeElementAt(acceptedDefenders, idx);
+        utils.removeElementAt(acceptedChllngRanks, idx);
         if (acceptedChallengers.size() > 0)
         {
             utils.setBatchObjVar(challengeTerminal, VAR_ACCEPTED_CHALLENGERS, acceptedChallengers.toArray());
@@ -1030,9 +1032,9 @@ public class arena extends script.base_script
             sendSystemMessage(defender, new string_id("pvp_rating", "ch_terminal_challenge_wrong_rank"));
             return false;
         }
-        challengers.remove(idx);
-        ranksChallenged.remove(idx);
-        timeStamps.remove(idx);
+        utils.removeElementAt(challengers, idx);
+        utils.removeElementAt(ranksChallenged, idx);
+        utils.removeElementAt(timeStamps, idx);
         if (challengers.size() > 0)
         {
             utils.setBatchObjVar(terminal, VAR_CHALLENGERS, challengers.toArray());

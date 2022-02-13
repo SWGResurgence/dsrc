@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class locations extends script.base_script
 {
+    public locations()
+    {
+    }
     public static final float GOOD_LOCATION_SEARCH_SIZE = 200;
     public static final String[] PLANETS = 
     {
@@ -215,7 +218,7 @@ public class locations extends script.base_script
                 LOG("locations", "strTestString is " + strTestString);
                 LOG("locations", "strPlanet is " + strPlanet);
                 if (!strTestString.equals(strPlanet)) {
-                    strPlanets.add(strTestString);
+                    strPlanets = utils.addElement(strPlanets, strTestString);
                 }
             }
             String strNewPlanet = ((String)strPlanets.get(rand(0, strPlanets.size() - 1)));
@@ -241,7 +244,7 @@ public class locations extends script.base_script
                 String strNewName = rgnCities[intI].getName();
                 if (!strStartName.equals(strNewName))
                 {
-                    rgnNewCities.add(rgnCities[intI]);
+                    rgnNewCities = utils.addElement(rgnNewCities, rgnCities[intI]);
                 }
                 intI = intI + 1;
             }
@@ -276,7 +279,7 @@ public class locations extends script.base_script
             String strNewName = ((region)rgnCities.get(intI)).getName();
             if (strStartName.equals(strNewName))
             {
-                rgnCities.remove(intI);
+                rgnCities = utils.removeElementAt(rgnCities, intI);
                 intI = rgnCities.size() + 10;
             }
             intI = intI + 1;
@@ -539,7 +542,7 @@ public class locations extends script.base_script
             String strNewName = ((region)rgnGoodLocations.get(intI)).getName();
             if (strNewName.equals(strOldName))
             {
-                rgnGoodLocations.remove(intI);
+                rgnGoodLocations = utils.removeElementAt(rgnGoodLocations, intI);
                 intI = rgnGoodLocations.size() + 19;
             }
             intI = intI + 1;
@@ -586,7 +589,7 @@ public class locations extends script.base_script
             String strNewName = ((region)rgnGoodLocations.get(intI)).getName();
             if (strNewName.equals(strOldName))
             {
-                rgnGoodLocations.remove(intI);
+                rgnGoodLocations = utils.removeElementAt(rgnGoodLocations, intI);
                 intI = rgnGoodLocations.size() + 19;
             }
             intI = intI + 1;

@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class remote_encounter extends script.quest.task.ground.base_task
 {
+    public remote_encounter()
+    {
+    }
     public static final String taskType = "remote_encounter";
     public static final String dataTableColumnCreatureName = "CREATURE_NAME";
     public static final String dataTableColumnEncounterSceneName = "ENCOUNTER_SCENE_NAME";
@@ -292,10 +295,10 @@ public class remote_encounter extends script.quest.task.ground.base_task
             int difficulty = dataTableGetInt(dataTableSceneDifficulty, difficultyRow, "DIFFICULTY");
             if (creatorInSpace == inSpace)
             {
-                remoteCreatorsSpace.add(creator);
+                remoteCreatorsSpace = utils.addElement(remoteCreatorsSpace, creator);
                 if (difficulty >= minDifficulty && difficulty <= maxDifficulty)
                 {
-                    remoteCreatorsSpaceDifficulty.add(creator);
+                    remoteCreatorsSpaceDifficulty = utils.addElement(remoteCreatorsSpaceDifficulty, creator);
                 }
             }
         }

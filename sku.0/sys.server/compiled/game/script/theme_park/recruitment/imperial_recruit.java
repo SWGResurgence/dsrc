@@ -8,22 +8,34 @@ import java.util.Vector;
 
 public class imperial_recruit extends script.theme_park.recruitment.base.base_recruiter
 {
+    public imperial_recruit()
+    {
+    }
     public static final String CONVO = "recruiting/imperial_recruit";
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-	obj_id suit = createObject("object/tangible/wearables/bodysuit/bodysuit_tie_fighter.iff", self, "");
-        obj_id boots = createObject("object/tangible/wearables/boots/boots_s03.iff", self, "");
-        hue.hueObject(self);
-        pvpSetAlignedFaction(self, (-615855020));
-        pvpMakeDeclared(self);
-        String hair_table = "datatables/tangible/wearable/hair/hair_human_male.iff";
-        int numHair = dataTableGetNumRows(hair_table);
-        numHair = numHair - 1;
-        numHair = rand(1, numHair);
-        String hair = dataTableGetString(hair_table, numHair, 1);
-        obj_id hairStyle = createObject(hair, self, "");
-        hue.hueObject(hairStyle);
-        setObjVar(self, "dressed", 1);
+	// TODO: wtf is the empty if, and the scope brackets for below?
+	// also couldn't this ranodmizing crap be made a function for all classes to consume instead?
+	if (!hasObjVar(self, "dressed"))
+        {
+
+	}
+
+	{
+            obj_id suit = createObject("object/tangible/wearables/bodysuit/bodysuit_tie_fighter.iff", self, "");
+            obj_id boots = createObject("object/tangible/wearables/boots/boots_s03.iff", self, "");
+            hue.hueObject(self);
+            pvpSetAlignedFaction(self, (-615855020));
+            pvpMakeDeclared(self);
+            String hair_table = "datatables/tangible/wearable/hair/hair_human_male.iff";
+            int numHair = dataTableGetNumRows(hair_table);
+            numHair = numHair - 1;
+            numHair = rand(1, numHair);
+            String hair = dataTableGetString(hair_table, numHair, 1);
+            obj_id hairStyle = createObject(hair, self, "");
+            hue.hueObject(hairStyle);
+            setObjVar(self, "dressed", 1);
+        }
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
@@ -43,25 +55,25 @@ public class imperial_recruit extends script.theme_park.recruitment.base.base_re
             if (faction.equals(factions.FACTION_REBEL))
             {
                 greeting = new string_id(CONVO, "ir16");
-                response.add(new string_id(CONVO, "ir17"));
+                response = utils.addElement(response, new string_id(CONVO, "ir17"));
             }
             else if (faction.equals(factions.FACTION_IMPERIAL))
             {
                 greeting = new string_id(CONVO, "ir13");
-                response.add(new string_id(CONVO, "ir14"));
+                response = utils.addElement(response, new string_id(CONVO, "ir14"));
             }
         }
         else 
         {
             greeting = new string_id(CONVO, "ir1");
-            response.add(new string_id(CONVO, "ir2"));
-            response.add(new string_id(CONVO, "ir3"));
+            response = utils.addElement(response, new string_id(CONVO, "ir2"));
+            response = utils.addElement(response, new string_id(CONVO, "ir3"));
         }
         if (addRedeemOption)
         {
-            response.add(new string_id(DATA_ITEM_CONVO, "redeem"));
+            response = utils.addElement(response, new string_id(DATA_ITEM_CONVO, "redeem"));
         }
-        if (response == null || response.size() == 0)
+        if ((response == null) || (response.size() == 0))
         {
             return SCRIPT_OVERRIDE;
         }

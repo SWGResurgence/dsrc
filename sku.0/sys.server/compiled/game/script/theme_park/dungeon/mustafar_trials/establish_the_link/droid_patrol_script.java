@@ -13,6 +13,9 @@ import java.util.Vector;
 
 public class droid_patrol_script extends script.base_script
 {
+    public droid_patrol_script()
+    {
+    }
     public static final string_id[] DROID_RESPONSE = 
     {
         new string_id(trial.UPLINK_STF, "oww"),
@@ -87,7 +90,7 @@ public class droid_patrol_script extends script.base_script
             if (utils.hasScriptVar(content, trial.WP_NAME)) {
                 for (String s : pathList) {
                     if (s.equals(utils.getStringScriptVar(content, trial.WP_NAME))) {
-                        waypoints.add(getLocation(content));
+                        utils.addElement(waypoints, getLocation(content));
                     }
                 }
             }

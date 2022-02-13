@@ -139,7 +139,7 @@ public class aurek_besh extends script.base_script
         beshPlayers.setSize(0);
         for (obj_id player : players) {
             if (buff.hasBuff(player, "beshDuality")) {
-                beshPlayers.add(player);
+                utils.addElement(beshPlayers, player);
             }
         }
         if (beshPlayers == null || beshPlayers.size() == 0)
@@ -177,7 +177,7 @@ public class aurek_besh extends script.base_script
         aurekPlayers.setSize(0);
         for (obj_id player : players) {
             if (buff.hasBuff(player, "aurekDuality")) {
-                aurekPlayers.add(player);
+                utils.addElement(aurekPlayers, player);
             }
         }
         if (aurekPlayers == null || aurekPlayers.size() == 0)

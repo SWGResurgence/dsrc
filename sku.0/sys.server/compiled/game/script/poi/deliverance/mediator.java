@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class mediator extends script.theme_park.poi.base
 {
+    public mediator()
+    {
+    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String VAR_RUNNING_SCENARIO = "running_scenario";
     public static final String HANDLER_TIMER = "handleTimer";
@@ -85,9 +88,9 @@ public class mediator extends script.theme_park.poi.base
         {
             case 0:
             msg = new string_id(convo, "m_greet");
-            responses.add(new string_id(convo, "response_yes"));
-            responses.add(new string_id(convo, "response_no"));
-            responses.add(new string_id(convo, "response_maybe"));
+            responses = utils.addElement(responses, new string_id(convo, "response_yes"));
+            responses = utils.addElement(responses, new string_id(convo, "response_no"));
+            responses = utils.addElement(responses, new string_id(convo, "response_maybe"));
             scenario.setPlayerProgress(speaker, 1);
             break;
             case 1:

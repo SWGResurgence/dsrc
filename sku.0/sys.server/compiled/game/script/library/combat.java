@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class combat extends script.base_script
 {
+    public combat()
+    {
+    }
     public static final float IN_COMBAT_REGEN_MULT = 1.0f;
     public static final float OUT_COMBAT_REGEN_MULT = 4.0f;
     public static final int PLAYER_COMBAT_BASE_DAMAGE = 60;
@@ -3517,7 +3520,7 @@ public class combat extends script.base_script
         for (obj_id potentialTarget : potentialTargets) {
             if (isIdValid(potentialTarget) && exists(potentialTarget) && canSee(self, potentialTarget) && !stealth.hasInvisibleBuff(potentialTarget) && getMaster(potentialTarget) == null && !isDead(potentialTarget)) {
                 if (getDistance(self, potentialTarget) < max_range) {
-                    validTargets.add(potentialTargets, potentialTarget);
+                    utils.addElement(validTargets, potentialTarget);
                 }
             }
         }

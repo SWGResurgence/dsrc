@@ -7,6 +7,9 @@ import script.obj_id;
 
 public class cleanup extends script.base_script
 {
+    public cleanup()
+    {
+    }
     public int OnRecapacitated(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, meditation.VAR_FORCE_OF_WILL_ACTIVE))
@@ -31,6 +34,7 @@ public class cleanup extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
+        sendSystemMessage(self, meditation.SID_POWERBOOST_WANE);
         return SCRIPT_CONTINUE;
     }
     public int handlePowerBoostEnd(obj_id self, dictionary params) throws InterruptedException
@@ -45,6 +49,7 @@ public class cleanup extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
+        sendSystemMessage(self, meditation.SID_POWERBOOST_END);
         removeObjVar(self, meditation.VAR_POWERBOOST_ACTIVE);
         return SCRIPT_CONTINUE;
     }

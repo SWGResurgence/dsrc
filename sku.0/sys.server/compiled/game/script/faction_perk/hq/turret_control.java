@@ -3,11 +3,13 @@ package script.faction_perk.hq;
 import script.*;
 import script.library.*;
 
-import java.util.List;
 import java.util.Vector;
 
 public class turret_control extends script.terminal.base.base_terminal
 {
+    public turret_control()
+    {
+    }
     private static final String BTN_ATTACK = "@" + "hq" + ":btn_attack";
     private static final string_id MNU_TURRET_CONTROL = new string_id("hq", "mnu_turret_control");
     private static final string_id ATTACK_TARGETS = new string_id("hq", "attack_targets");
@@ -352,7 +354,7 @@ public class turret_control extends script.terminal.base.base_terminal
         obj_id ctarget = utils.getObjIdScriptVar(cturret, turret.SCRIPTVAR_ENGAGED);
         String cTarName = getEncodedName(ctarget);
         String turNam = getEncodedName(cturret);
-        List targets = utils.getResizeableObjIdBatchScriptVar(cturret, turret.SCRIPTVAR_TARGETS);
+        Vector targets = utils.getResizeableObjIdBatchScriptVar(cturret, turret.SCRIPTVAR_TARGETS);
         int cur_hp = 0;
         obj_id target;
         String tarName;
@@ -360,7 +362,7 @@ public class turret_control extends script.terminal.base.base_terminal
             target = ((obj_id) target1);
             tarName = getEncodedName(target);
             cur_hp = getAttrib(target, 0);
-            entries.add(tarName + "     - " + " " + localize(TARGET_HEALTH) + " [" + cur_hp + "]");
+            entries = utils.addElement(entries, tarName + "     - " + " " + localize(TARGET_HEALTH) + " [" + cur_hp + "]");
         }
         String title = utils.packStringId(CONTROL_TITLE);
         String prompt = utils.packStringId(TURRET_CONTROL) + " " + turNam + " [" + tur_hp + "/" + max_hp + "]\n\n" + utils.packStringId(CURRENT_TARGET) + " " + cTarName + " " + utils.packStringId(TARGET_HEALTH) + " " + " [" + cur_hp + "]";

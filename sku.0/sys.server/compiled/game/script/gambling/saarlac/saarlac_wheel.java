@@ -4,11 +4,12 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
-import java.util.ArrayList;
-import java.util.List;
 
 public class saarlac_wheel extends script.gambling.base.wheel
 {
+    public saarlac_wheel()
+    {
+    }
     public static final String[] WHEEL_OUTCOMES = 
     {
         "Bestine",
@@ -709,7 +710,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         }
         return null;
     }
-    private List getPlayerBetIndices(obj_id table, int player_index) throws InterruptedException
+    private Vector getPlayerBetIndices(obj_id table, int player_index) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "getPlayerBetIndicies -- table ->" + table + " player_index ->" + player_index);
         if (!isIdValid(table))
@@ -723,14 +724,16 @@ public class saarlac_wheel extends script.gambling.base.wheel
         String[] bets = getPlayerBets(table, player_index);
         if (bets != null)
         {
-            List bet_idx = new ArrayList<String>();
-            List push_bet_idx = new ArrayList<String>();
+            Vector bet_idx = new Vector();
+            bet_idx.setSize(0);
+            Vector push_bet_idx = new Vector();
+            push_bet_idx.setSize(0);
             for (String bet1 : bets) {
                 int bet = wheelNameToIndex(bet1);
                 if (bet <= 14) {
-                    bet_idx.add(bet);
+                    utils.addElement(bet_idx, bet);
                 } else {
-                    push_bet_idx.add(bet);
+                    utils.addElement(push_bet_idx, bet);
                 }
             }
             if (bet_idx.size() > 1)
@@ -935,7 +938,7 @@ public class saarlac_wheel extends script.gambling.base.wheel
         obj_id[] player_ids = getObjIdArrayObjVar(table, gambling.VAR_GAME_PLAYERS_IDS);
         if (player_ids != null)
         {
-            List bets;
+            Vector bets;
             for (obj_id player_id : player_ids) {
                 bets = getPlayerBetIndices(table, gambling.getGamePlayerIndex(table, player_id));
                 if (bets != null) {
@@ -1545,7 +1548,8 @@ public class saarlac_wheel extends script.gambling.base.wheel
         prompt += "Oasis         : " + getOasisPool(self) + "\n";
         prompt += "Saarlac Pit   : " + getSaarlacPool(self) + "\n";
         prompt += "\nNOTE: if you leave the table after placing a bet, all of your outstanding bets will be forfeit.";
-        List entries = new ArrayList<String>();
+        Vector entries = new Vector();
+        entries.setSize(0);
         int total = 0;
         int playerIdx = gambling.getGamePlayerIndex(self, player);
         if (playerIdx == -1)
@@ -1573,14 +1577,14 @@ public class saarlac_wheel extends script.gambling.base.wheel
                         entry += " ";
                     }
                     entry += Integer.toString(val);
-                    entries.add(entry);
+                    entries = utils.addElement(entries, entry);
                     total += val;
                 }
                 entries = utils.alphabetizeStringArray(entries);
-                entries.add(" ");
+                entries = utils.addElement(entries, " ");
             }
         }
-        entries.add("Total Bet : " + total);
+        entries = utils.addElement(entries, "Total Bet : " + total);
         int pid = sui.listbox(self, player, prompt, sui.REFRESH_LEAVE_GAME, title, entries, "handleBetUi");
         if (pid == -1)
         {

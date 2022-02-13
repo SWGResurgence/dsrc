@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class guild extends script.base_script
 {
+    public guild()
+    {
+    }
     public static final int GUILD_PERMISSIONS_NONE = 0;
     public static final int GUILD_PERMISSION_MEMBER = (1 << 0);
     public static final int GUILD_PERMISSION_SPONSOR = (1 << 1);
@@ -1604,7 +1607,7 @@ public class guild extends script.base_script
             obj_id memberId = findMemberIdByName(guildId, rawMemberNames[i], true, true);
             if (hasGuildPermission(guildId, memberId, permission))
             {
-                filteredNamesAndTitles.add(rawNamesAndTitles[i]);
+                filteredNamesAndTitles = utils.addElement(filteredNamesAndTitles, rawNamesAndTitles[i]);
             }
         }
         String[] finalList = new String[filteredNamesAndTitles.size()];
@@ -1619,7 +1622,7 @@ public class guild extends script.base_script
         filteredNamesAndTitles.setSize(0);
         for (obj_id member : members) {
             if (memberHasTitle(guildId, member, title)) {
-                filteredNamesAndTitles.add(guildGetMemberName(guildId, members));
+                filteredNamesAndTitles = utils.addElement(filteredNamesAndTitles, guildGetMemberName(guildId, member));
             }
         }
         String[] finalList = new String[filteredNamesAndTitles.size()];
@@ -1634,7 +1637,7 @@ public class guild extends script.base_script
         filteredNamesAndTitles.setSize(0);
         for (String memberName : memberNames) {
             if ((toLower(memberName)).contains(toLower(name))) {
-                filteredNamesAndTitles.add(memberNames);
+                filteredNamesAndTitles = utils.addElement(filteredNamesAndTitles, memberName);
             }
         }
         String[] finalList = new String[filteredNamesAndTitles.size()];
@@ -1818,7 +1821,7 @@ public class guild extends script.base_script
         candidates.setSize(0);
         for (obj_id memberId : memberIds) {
             if (isCandidate(guildId, memberId)) {
-                candidates.add(memberIds);
+                utils.addElement(candidates, memberId);
             }
         }
         obj_id[] _candidates = new obj_id[0];

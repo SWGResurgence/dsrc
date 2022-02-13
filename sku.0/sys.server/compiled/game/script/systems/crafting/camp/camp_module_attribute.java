@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class camp_module_attribute extends script.base_script
 {
+    public camp_module_attribute()
+    {
+    }
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -267,7 +270,7 @@ public class camp_module_attribute extends script.base_script
                     int result = (int)((raw_effects % StrictMath.pow(10, i)) / StrictMath.pow(10, i - 1));
                     if (result >= 1)
                     {
-                        available_effects.add(pet_lib.LIGHTING_EFFECTS[i - 1]);
+                        available_effects = utils.addElement(available_effects, pet_lib.LIGHTING_EFFECTS[i - 1]);
                     }
                     i++;
                 }

@@ -315,10 +315,10 @@ public class resource extends script.base_script
             cleanup();
             return;
         }
-        attribStrings.add("@" + SID_RESOURCE_NAME + " = " + getResourceName(resource));
+        attribStrings = utils.addElement(attribStrings, "@" + SID_RESOURCE_NAME + " = " + getResourceName(resource));
         for (resource_attribute resourceAttrib : resourceAttribs) {
             string_id temp = new string_id("obj_attr_n", resourceAttrib.getName());
-            attribStrings.add("@" + temp + " = " + resourceAttribs.getValue());
+            attribStrings = utils.addElement(attribStrings, "@" + temp + " = " + resourceAttrib.getValue());
         }
         int pid = sui.listbox(self, player, "@" + SID_CONFIRM_RESOURCE_SELECTION, sui.OK_CANCEL, "@" + SID_RESOURCE_TITLE, attribStrings, "handleChooseResourceTypeStats", false, false);
         if (pid >= 0)
@@ -461,7 +461,7 @@ public class resource extends script.base_script
         Vector tempResourceClassTwo = null;
         for (String tempResourceClass1 : tempResourceClass) {
             if (!tempResourceClass1.equals("energy") && !tempResourceClass1.equals("space_resource")) {
-                tempResourceClassTwo.add(tempResourceClass);
+                tempResourceClassTwo = utils.addElement(tempResourceClassTwo, tempResourceClass1);
             }
         }
         resourceClasses = new String[tempResourceClassTwo.size()];

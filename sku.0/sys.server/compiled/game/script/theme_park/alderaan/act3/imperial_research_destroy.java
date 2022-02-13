@@ -11,6 +11,9 @@ import java.util.Vector;
 
 public class imperial_research_destroy extends script.base_script
 {
+    public imperial_research_destroy()
+    {
+    }
     public static final String[] TEMPLATE_LIST = 
     {
         "object/building/poi/generic_flatten_medium.iff",
@@ -113,7 +116,7 @@ public class imperial_research_destroy extends script.base_script
             {
                 objectList = new Vector();
             }
-            objectList.add(newObject);
+            utils.addElement(objectList, newObject);
             if (objectList.size() > 0)
             {
                 setObjVar(self, "coa3.imperial.obj_list", objectList);

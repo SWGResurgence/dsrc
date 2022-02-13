@@ -5,11 +5,12 @@ import script.obj_id;
 import script.obj_var_list;
 
 import java.util.Vector;
-import java.util.ArrayList;
-import java.util.List;
 
 public class wait_for_tasks extends script.base_script
 {
+    public wait_for_tasks()
+    {
+    }
     public int OnForceSensitiveQuestCompleted(obj_id self, String questName, boolean succeeded) throws InterruptedException
     {
         if (quests.isMyQuest(quests.getQuestId(questName), "quest.task.wait_for_tasks"))
@@ -20,7 +21,7 @@ public class wait_for_tasks extends script.base_script
         String objvarName = "quest.wait_for_tasks";
         if (quests.safeHasObjVar(self, objvarName))
         {
-            List waiting = getResizeableStringArrayObjVar(self, objvarName);
+            Vector waiting = getResizeableStringArrayObjVar(self, objvarName);
             if (waiting != null && waiting.size() > 0)
             {
                 int iter = 0;
@@ -32,7 +33,7 @@ public class wait_for_tasks extends script.base_script
                         String waitingObjVarName = "quest." + waitingTaskName + ".target";
                         if (hasObjVar(self, waitingObjVarName))
                         {
-                            List tasks = getResizeableStringArrayObjVar(self, waitingObjVarName);
+                            Vector tasks = getResizeableStringArrayObjVar(self, waitingObjVarName);
                             if (tasks != null && tasks.size() > 0)
                             {
                                 if (tasks.contains(questName))
@@ -98,7 +99,7 @@ public class wait_for_tasks extends script.base_script
                     }
                     else 
                     {
-                        waiting.remove(iter);
+                        waiting.removeElementAt(iter);
                         LOG("newquests", "wait_for_tasks: OnForceSensitiveQuestCompleted() - ERROR: a null entry was in the task list");
                     }
                 }
@@ -147,19 +148,19 @@ public class wait_for_tasks extends script.base_script
             {
                 LOG("newquests", "wait_for_tasks: OnQuestActivated - failed to set " + objvarName);
             }
-            List waiting = null;
+            Vector waiting = null;
             objvarName = "quest.wait_for_tasks";
             if (hasObjVar(self, objvarName))
             {
                 waiting = getResizeableStringArrayObjVar(self, objvarName);
                 if (waiting == null)
                 {
-                    waiting = new ArrayList<String>();
+                    waiting = new Vector();
                 }
             }
             else 
             {
-                waiting = new ArrayList<String>();
+                waiting = new Vector();
             }
             if (!waiting.contains(questName))
             {

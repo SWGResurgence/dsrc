@@ -13,6 +13,9 @@ import java.util.Vector;
 
 public class qawearables extends script.base_script
 {
+    public qawearables()
+    {
+    }
     public static final String DATATABLE_LOCATION = "datatables/test/qa_wearables.iff";
     public String[] populateArray(obj_id player, String datatableName, String choice, String column1, String column2, boolean filtered, boolean allFunction) throws InterruptedException
     {
@@ -38,7 +41,7 @@ public class qawearables extends script.base_script
             {
                 if (firstColumnArray[y].equals(choice))
                 {
-                    rowNumVector.add((new Integer(y)));
+                    rowNumVector.addElement(y);
                     listCounter++;
                 }
             }
@@ -48,10 +51,10 @@ public class qawearables extends script.base_script
         if (!filtered)
         {
             String previousString = secondColumnArray[rowNumArray[0]];
-            wearablesListVector.add((previousString);
+            wearablesListVector.addElement(previousString);
             for (Integer integer : rowNumArray) {
                 if (!secondColumnArray[integer].equals(previousString)) {
-                    wearablesListVector.add((secondColumnArray[rowNumArray[integer]));
+                    wearablesListVector.addElement(secondColumnArray[integer]);
                     previousString = secondColumnArray[integer];
                 }
             }
@@ -59,11 +62,14 @@ public class qawearables extends script.base_script
         else 
         {
             for (Integer integer : rowNumArray) {
-                wearablesListVector.add((secondColumnArray[rowNumArray[integer] + " Ref.# " + integer);
+                wearablesListVector.addElement(secondColumnArray[integer] + " Ref.# " + integer);
             }
-            if (allFunction)
+            if (!allFunction)
             {
-            wearablesListVector.add(("All Items Displayed");
+            }
+            else 
+            {
+                wearablesListVector.addElement("All Items Displayed");
             }
         }
         String[] wearablesArray = (String[])wearablesListVector.toArray(new String[wearablesListVector.size()]);

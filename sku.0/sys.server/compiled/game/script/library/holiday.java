@@ -2,11 +2,13 @@ package script.library;
 
 import script.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class holiday extends script.base_script
 {
+    public holiday()
+    {
+    }
     public static final String PLANET_VAR_EVENT_PREFIX = "event";
     public static final String PLANET_VAR_SCORE = ".score";
     public static final String PLANET_VAR_EMPIRE_DAY = ".empire_day";
@@ -641,7 +643,7 @@ public class holiday extends script.base_script
         }
         return false;
     }
-    public static obj_id[] getEmpireDayWinningPlayers(obj_id holidayObject, List eligiblePlayers) throws InterruptedException
+    public static obj_id[] getEmpireDayWinningPlayers(obj_id holidayObject, Vector eligiblePlayers) throws InterruptedException
     {
         CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: init");
         if (!isIdValid(holidayObject) || !exists(holidayObject))
@@ -681,7 +683,8 @@ public class holiday extends script.base_script
             return _eligiblePlayers;
         }
         CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: creating lists of players and winners.");
-        List winningPlayers = new ArrayList<obj_id>();
+        Vector winningPlayers = new Vector();
+        winningPlayers.setSize(0);
         CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: originalListSize: " + originalListSize);
         for (int i = 0; i < maxEmpireDayWinners; i++)
         {

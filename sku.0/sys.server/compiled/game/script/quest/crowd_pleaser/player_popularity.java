@@ -8,11 +8,12 @@ import script.prose_package;
 import script.string_id;
 
 import java.util.Vector;
-import java.util.ArrayList;
-import java.util.List;
 
 public class player_popularity extends script.base_script
 {
+    public player_popularity()
+    {
+    }
     public static final String SCRIPT_NAME = "quest.crowd_pleaser.player_popularity";
     public static final String QUEST_COMPLETE_OBJVAR = "quest.crowd_pleaser.complete";
     public static final String STATUS_OBJVAR = "quest.crowd_pleaser.status";
@@ -47,7 +48,8 @@ public class player_popularity extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        List entertained = new ArrayList<obj_id>();
+        Vector entertained = new Vector();
+        entertained.setSize(0);
         if (hasObjVar(self, ENTERTAINED_OBJVAR))
         {
             entertained = utils.getResizeableObjIdBatchObjVar(self, ENTERTAINED_OBJVAR);
@@ -57,7 +59,7 @@ public class player_popularity extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        entertained.add(player);
+        entertained = utils.addElement(entertained, player);
         int number = getIntObjVar(self, NUMBER_OBJVAR);
         int level = getIntObjVar(self, LEVEL_OBJVAR);
         if (entertained.size() >= number)
@@ -67,17 +69,17 @@ public class player_popularity extends script.base_script
             switch (level)
             {
                 case 1:
-                    sendSystemMessage(self, POPULARITY_1_COMPLETE);
-                    status = 6;
-                    break;
+                sendSystemMessage(self, POPULARITY_1_COMPLETE);
+                status = 6;
+                break;
                 case 2:
-                    sendSystemMessage(self, POPULARITY_2_COMPLETE);
-                    status = 12;
-                    break;
+                sendSystemMessage(self, POPULARITY_2_COMPLETE);
+                status = 12;
+                break;
                 case 3:
-                    sendSystemMessage(self, POPULARITY_3_COMPLETE);
-                    status = 18;
-                    break;
+                sendSystemMessage(self, POPULARITY_3_COMPLETE);
+                status = 18;
+                break;
             }
             setObjVar(self, STATUS_OBJVAR, status);
             detachScript(self, SCRIPT_NAME);

@@ -4,10 +4,12 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
-import java.util.List;
 
 public class zone_transition extends script.base_script
 {
+    public zone_transition()
+    {
+    }
     public static final float distanceMax = 6.0f;
     public static final String dataTable = "datatables/travel/zone_transition.iff";
     public static final String STF = "travel/zone_transition";
@@ -67,8 +69,8 @@ public class zone_transition extends script.base_script
         String destination = dataTableGetString(dataTable, transit, "destination");
         String[] parse = split(destination, ':');
         for (dictionary dungeon : data) {
-            building_ids.add(dungeon.getObjId("building_id"));
-            zone_population.add(dungeon.getInt("population"));
+            building_ids = utils.addElement(building_ids, dungeon.getObjId("building_id"));
+            zone_population = utils.addElement(zone_population, dungeon.getInt("population"));
         }
         if (parse.length < 1 || data.length < 1)
         {
@@ -146,7 +148,7 @@ public class zone_transition extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String[] parsed_list = utils.getStringArrayScriptVar(player, "zoneTransition");
-        List building_ids = utils.getResizeableObjIdArrayScriptVar(player, "building_ids");
+        Vector building_ids = utils.getResizeableObjIdArrayScriptVar(player, "building_ids");
         String world = parsed_list[2];
         String cell = parsed_list[3];
         float locX = utils.stringToFloat(parsed_list[4]);

@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class bunker_controller extends script.base_script
 {
+    public bunker_controller()
+    {
+    }
     public static final String DATATABLE = "datatables/dungeon/trando_slave_camp/camp_command_bunker.iff";
     public static final String[] CELL_NAMES = 
     {
@@ -97,7 +100,7 @@ public class bunker_controller extends script.base_script
         Vector resizeableCellId = new Vector();
         resizeableCellId.setSize(0);
         for (String cellName : CELL_NAMES) {
-            resizeableCellId.add(getCellId(bunker, CELL_NAMES));
+            utils.addElement(resizeableCellId, getCellId(bunker, cellName));
         }
         obj_id[] _resizeableCellId = new obj_id[0];
         if (resizeableCellId != null)
@@ -158,7 +161,7 @@ public class bunker_controller extends script.base_script
                 spawnObject = createObjectInCell(object, bunker, cellName, spawnLoc);
                 if (isIdValid(spawnObject))
                 {
-                    resizeableTerminalId.add(spawnObject);
+                    utils.addElement(resizeableTerminalId, spawnObject);
                 }
             }
             else 

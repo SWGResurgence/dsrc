@@ -4,11 +4,13 @@ import script.dictionary;
 import script.location;
 import script.obj_id;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class advanced_turret extends script.base_script
 {
+    public advanced_turret()
+    {
+    }
     public static final String ALERT_VOLUME_NAME = "turretAggroVolume";
     public static final float DEFAULT_TURRET_RANGE = 64.0f;
     public static final float RANGE_TOO_CLOSE = 10.0f;
@@ -359,10 +361,10 @@ public class advanced_turret extends script.base_script
             doLogging("addTarget", getName(target) + "/" + target + " was invalid");
             return;
         }
-        List targets = null;;
+        Vector targets = null;
         if (!utils.hasScriptVar(turret, TARGETS))
         {
-            targets = new ArrayList<>();
+            targets = new Vector();
         }
         else 
         {
@@ -383,10 +385,10 @@ public class advanced_turret extends script.base_script
     }
     public static void addTargets(obj_id turret, obj_id[] newTargets) throws InterruptedException
     {
-        List targets = null;
+        Vector targets = null;
         if (!utils.hasScriptVar(turret, TARGETS))
         {
-            targets = new ArrayList<>();
+            targets = new Vector();
         }
         else 
         {
@@ -419,7 +421,7 @@ public class advanced_turret extends script.base_script
         {
             return;
         }
-        List targets = utils.getResizeableObjIdBatchScriptVar(turret, TARGETS);
+        Vector targets = utils.getResizeableObjIdBatchScriptVar(turret, TARGETS);
         obj_id engageTarget = utils.getObjIdScriptVar(turret, IS_ENGAGED);
         int idx = targets.indexOf(target);
         if (idx > -1)
@@ -511,8 +513,8 @@ public class advanced_turret extends script.base_script
         {
             return null;
         }
-        List targets = utils.getResizeableObjIdBatchScriptVar(turret, TARGETS);
-        if (targets == null || targets.size() == 0)
+        Vector targets = utils.getResizeableObjIdBatchScriptVar(turret, TARGETS);
+        if ((targets == null) || (targets.size() == 0))
         {
             doLogging("getGoodTurretTarget", "I had no target batchvar so I am returning null");
             return null;
@@ -527,7 +529,7 @@ public class advanced_turret extends script.base_script
             target = (obj_id)targets.get(rand(0, targets.size() - 1));
             if (!isValidTarget(turret, target) || isDead(target) || isIncapacitated(target) || !canSee(turret, target) || vehicle.isVehicle(target) || stealth.hasInvisibleBuff(target))
             {
-                targets.remove(target);
+                targets.removeElement(target);
                 target = null;
                 continue;
             }

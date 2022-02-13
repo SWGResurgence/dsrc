@@ -4,11 +4,13 @@ import script.library.*;
 import script.location;
 import script.obj_id;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class props extends script.base_script
 {
+    public props()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id container = getLocation(self).cell;
@@ -112,16 +114,16 @@ public class props extends script.base_script
         if (isIdValid(cell) && !checkArray(cell) && checkLocation(cell))
         {
             String template = getTemplate();
-            List objectList = new ArrayList<obj_id>();
+            Vector objectList = new Vector();
             obj_id topContainer = getTopMostContainer(cell);
             if (utils.hasScriptVar(topContainer, template))
             {
-                List list = utils.getResizeableObjIdArrayScriptVar(topContainer, template);
+                Vector list = utils.getResizeableObjIdArrayScriptVar(topContainer, template);
                 for (Object o : list) {
-                    objectList.add((obj_id)list.get);
+                    objectList.addElement(((obj_id) o));
                 }
             }
-            objectList.add(self);
+            objectList.addElement(self);
             utils.setScriptVar(topContainer, template, objectList);
             return true;
         }
@@ -134,12 +136,12 @@ public class props extends script.base_script
         String template = getTemplate();
         if (isIdValid(topContainer) && utils.hasScriptVar(topContainer, template))
         {
-            List objectList = utils.getResizeableObjIdArrayScriptVar(topContainer, template);
+            Vector objectList = utils.getResizeableObjIdArrayScriptVar(topContainer, template);
             for (int i = 0; i < objectList.size(); i++)
             {
                 if (((obj_id)objectList.get(i)).equals(self))
                 {
-                    objectList.remove(self);
+                    objectList.removeElement(self);
                     if (objectList.size() > 0)
                     {
                         utils.setScriptVar(topContainer, template, objectList);
@@ -161,7 +163,7 @@ public class props extends script.base_script
         String item = getTemplate();
         if (isIdValid(topContainer) && utils.hasScriptVar(topContainer, item))
         {
-            List objectList = utils.getResizeableObjIdArrayScriptVar(topContainer, item);
+            Vector objectList = utils.getResizeableObjIdArrayScriptVar(topContainer, item);
             for (Object o : objectList) {
                 if (((obj_id) o) == self) {
                     return true;

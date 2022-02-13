@@ -372,7 +372,7 @@ public class player_building extends script.base_script
             {
                 if (hiringMod >= hiringRequirement)
                 {
-                    vendorTypes.add(possibleVendorTypes[i]);
+                    vendorTypes = utils.addElement(vendorTypes, possibleVendorTypes[i]);
                 }
                 hiringRequirement += 10;
             }
@@ -1607,11 +1607,11 @@ public class player_building extends script.base_script
         Vector tempList = new Vector();
         tempList.setSize(0);
         String resourceName = utils.getStringScriptVar(self, "powerIncubator.resourceName");
-        if (resourceName != null && !resourceName.isEmpty())
+        if (resourceName != null && !resourceName.equals(""))
         {
-            tempList.add(resourceName);
+            tempList.addElement(resourceName);
         }
-        if (contents == null || contents.length == 0 || tempList.size() == 0)
+        if ((contents == null) || (contents.length == 0) || (tempList.size() == 0))
         {
             return SCRIPT_CONTINUE;
         }
@@ -1918,7 +1918,7 @@ public class player_building extends script.base_script
                     int idx = utils.getElementPositionInArray(dsrc, player_name);
                     if (idx == -1) {
                         LOG("LOG_CHANNEL", "   ...Adding " + player_name);
-                        player_names.add(player_name);
+                        player_names = utils.addElement(player_names, player_name);
                     }
                 }
             }
@@ -2051,12 +2051,12 @@ public class player_building extends script.base_script
         {
             owner_name = toUpper(owner_name, 0);
             string_id owner_prompt_text = new string_id(STF, "owner_prompt");
-            dsrc.add(getString(owner_prompt_text) + owner_name);
+            dsrc = utils.addElement(dsrc, getString(owner_prompt_text) + owner_name);
         }
         if (player_structure.isResidence(structure, self))
         {
             string_id residency_declaration = new string_id(STF, "declared_residency");
-            dsrc.add(getString(residency_declaration));
+            dsrc = utils.addElement(dsrc, getString(residency_declaration));
         }
         int civic_var = 0;
         int m_rate = 0;
@@ -2066,12 +2066,12 @@ public class player_building extends script.base_script
             if (permissionsIsPublic(structure))
             {
                 string_id public_structure = new string_id(STF, "structure_public");
-                dsrc.add(getString(public_structure));
+                dsrc = utils.addElement(dsrc, getString(public_structure));
             }
             else 
             {
                 string_id private_structure = new string_id(STF, "structure_private");
-                dsrc.add(getString(private_structure));
+                dsrc = utils.addElement(dsrc, getString(private_structure));
             }
             int condition = player_structure.getStructureCondition(structure);
             int max_condition = player_structure.getMaxCondition(structure);
@@ -2079,7 +2079,7 @@ public class player_building extends script.base_script
             if (perc_condition == 100)
             {
                 string_id condition_prompt_text = new string_id(STF, "condition_prompt");
-                dsrc.add(getString(condition_prompt_text) + perc_condition + "%");
+                dsrc = utils.addElement(dsrc, getString(condition_prompt_text) + perc_condition + "%");
             }
             else 
             {
@@ -2089,11 +2089,11 @@ public class player_building extends script.base_script
                 string_id credits_to_repair_suffix = new string_id(STF, "credits_to_repair");
                 if (!buildingTemplateName.contains("object/building/faction_perk/hq/"))
                 {
-                    dsrc.add(getString(condition_prompt_text_damaged) + perc_condition + "%" + "   (" + total_cost + getString(credits_to_repair_suffix));
+                    dsrc = utils.addElement(dsrc, getString(condition_prompt_text_damaged) + perc_condition + "%" + "   (" + total_cost + getString(credits_to_repair_suffix));
                 }
                 else 
                 {
-                    dsrc.add(getString(condition_prompt_text_damaged) + perc_condition + "%");
+                    dsrc = utils.addElement(dsrc, getString(condition_prompt_text_damaged) + perc_condition + "%");
                 }
             }
             int m_pool = player_structure.getMaintenancePool(structure);
@@ -2110,14 +2110,14 @@ public class player_building extends script.base_script
                 if (player_structure.isGuildHall(structure))
                 {
                     string_id treasury_prompt_text = new string_id(STF, "treasury_prompt");
-                    dsrc.add(getString(treasury_prompt_text) + m_pool + "   (" + time_str + ")");
+                    dsrc = utils.addElement(dsrc, getString(treasury_prompt_text) + m_pool + "   (" + time_str + ")");
                 }
                 else 
                 {
                     if (!buildingTemplateName.contains("object/building/faction_perk/hq/"))
                     {
                         string_id maintenance_prompt_text = new string_id(STF, "maintenance_pool_prompt");
-                        dsrc.add(getString(maintenance_prompt_text) + m_pool + "   (" + time_str + ")");
+                        dsrc = utils.addElement(dsrc, getString(maintenance_prompt_text) + m_pool + "   (" + time_str + ")");
                     }
                 }
             }
@@ -2126,14 +2126,14 @@ public class player_building extends script.base_script
                 if (player_structure.isGuildHall(structure))
                 {
                     string_id treasury_empty_text = new string_id(STF, "treasury_prompt");
-                    dsrc.add(getString(treasury_empty_text) + m_pool);
+                    dsrc = utils.addElement(dsrc, getString(treasury_empty_text) + m_pool);
                 }
                 else 
                 {
                     if (!buildingTemplateName.contains("object/building/faction_perk/hq/"))
                     {
                         string_id maintenance_empty_text = new string_id(STF, "maintenance_pool_prompt");
-                        dsrc.add(getString(maintenance_empty_text) + m_pool);
+                        dsrc = utils.addElement(dsrc, getString(maintenance_empty_text) + m_pool);
                     }
                 }
             }
@@ -2149,13 +2149,13 @@ public class player_building extends script.base_script
             if (m_rate == m_rate_base)
             {
                 string_id maintenance_rate_text = new string_id(STF, "maintenance_rate_prompt");
-                dsrc.add(getString(maintenance_rate_text) + Integer.toString(hourly_m_rate) + " cr/hr");
+                dsrc = utils.addElement(dsrc, getString(maintenance_rate_text) + Integer.toString(hourly_m_rate) + " cr/hr");
             }
             else 
             {
                 int hourly_m_rate_base = m_rate_base * (3600 / player_structure.getMaintenanceHeartbeat());
                 string_id maintenance_rate_mod_text = new string_id(STF, "maintenance_rate_prompt");
-                dsrc.add(getString(maintenance_rate_mod_text) + Integer.toString(hourly_m_rate) + " cr/hr (" + hourly_m_rate_base + ")");
+                dsrc = utils.addElement(dsrc, getString(maintenance_rate_mod_text) + Integer.toString(hourly_m_rate) + " cr/hr (" + hourly_m_rate_base + ")");
             }
         }
         if (!buildingTemplateName.contains("object/building/faction_perk/hq/"))
@@ -2164,7 +2164,7 @@ public class player_building extends script.base_script
             if (property_tax > 0)
             {
                 string_id maintenance_rate_mod_text = new string_id(STF, "property_tax_rate_prompt");
-                dsrc.add(getString(maintenance_rate_mod_text) + property_tax + "%");
+                dsrc = utils.addElement(dsrc, getString(maintenance_rate_mod_text) + property_tax + "%");
             }
         }
         if (player_structure.isHarvester(structure) || player_structure.isFactory(structure))
@@ -2176,16 +2176,16 @@ public class player_building extends script.base_script
             {
                 String p_time_string = utils.assembleTimeRemainToUse(p_time, false);
                 string_id power_reserve_empty_text = new string_id(STF, "power_reserve_prompt");
-                dsrc.add(getString(power_reserve_empty_text) + (int)p_pool + "   (" + p_time_string + ")");
+                dsrc = utils.addElement(dsrc, getString(power_reserve_empty_text) + (int)p_pool + "   (" + p_time_string + ")");
             }
             else 
             {
                 string_id power_reserve_text = new string_id(STF, "power_reserve_prompt");
-                dsrc.add(getString(power_reserve_text) + (int)p_pool);
+                dsrc = utils.addElement(dsrc, getString(power_reserve_text) + (int)p_pool);
             }
             string_id power_consumption_text = new string_id(STF, "power_consumption_prompt");
             string_id units_per_hour_text = new string_id(STF, "units_per_hour");
-            dsrc.add(getString(power_consumption_text) + Integer.toString((int)p_rate) + getString(units_per_hour_text));
+            dsrc = utils.addElement(dsrc, getString(power_consumption_text) + Integer.toString((int)p_rate) + getString(units_per_hour_text));
         }
         if (sGot == GOT_building_factional && hasObjVar(structure, hq.VAR_HQ_BASE))
         {
@@ -2194,7 +2194,7 @@ public class player_building extends script.base_script
                 int now = getGameTime();
                 string_id resource_reserves_text = new string_id(STF, "resource_reserves_prompt");
                 string_id units_suffix_text = new string_id(STF, "units_suffix");
-                dsrc.add(getString(resource_reserves_text) + getIntObjVar(structure, hq.VAR_HQ_RESOURCE_CNT) + getString(units_suffix_text));
+                dsrc = utils.addElement(dsrc, getString(resource_reserves_text) + getIntObjVar(structure, hq.VAR_HQ_RESOURCE_CNT) + getString(units_suffix_text));
                 if (hasObjVar(structure, player_structure.VAR_LAST_MAINTANENCE))
                 {
                     int stamp = getIntObjVar(structure, player_structure.VAR_LAST_MAINTANENCE);
@@ -2204,7 +2204,7 @@ public class player_building extends script.base_script
                         int[] mTime = player_structure.convertSecondsTime(maint_delta);
                         String m_time_string = player_structure.assembleTimeRemaining(mTime);
                         string_id repair_cycle_text = new string_id(STF, "next_repair_cycle");
-                        dsrc.add(getString(repair_cycle_text) + m_time_string);
+                        dsrc = utils.addElement(dsrc, getString(repair_cycle_text) + m_time_string);
                     }
                 }
                 if (hasObjVar(structure, hq.VAR_OBJECTIVE_STAMP))
@@ -2219,7 +2219,7 @@ public class player_building extends script.base_script
                         int[] oTime = player_structure.convertSecondsTime(objective_delta);
                         String o_time_string = player_structure.assembleTimeRemaining(oTime);
                         string_id vulnerability_text = new string_id(STF, "next_vulnerability_prompt");
-                        dsrc.add(getString(vulnerability_text) + o_time_string);
+                        dsrc = utils.addElement(dsrc, getString(vulnerability_text) + o_time_string);
                     }
                 }
             }
@@ -2228,20 +2228,20 @@ public class player_building extends script.base_script
         {
             int numItems = player_structure.getStructureNumItems(structure);
             string_id building_items_text = new string_id(STF, "items_in_building_prompt");
-            dsrc.add(getString(building_items_text) + numItems);
+            dsrc = utils.addElement(dsrc, getString(building_items_text) + numItems);
             int itemLimit = getPobBaseItemLimit(structure);
             if (hasObjVar(structure, "structureChange.storageIncrease"))
             {
                 int storageIncrease = getIntObjVar(structure, "structureChange.storageIncrease");
                 itemLimit += storageIncrease;
             }
-            dsrc.add("@player_structure:total_house_storage" + " " + itemLimit);
+            dsrc = utils.addElement(dsrc, "@player_structure:total_house_storage" + " " + itemLimit);
         }
         if (hasObjVar(structure, "structureChange.storageIncrease"))
         {
             int storageIncrease = getIntObjVar(structure, "structureChange.storageIncrease");
             string_id storage_increase = new string_id(STF, "structure_storage_increase");
-            dsrc.add(getString(storage_increase) + storageIncrease);
+            dsrc = utils.addElement(dsrc, getString(storage_increase) + storageIncrease);
         }
         String prompt = "";
         String structure_name = player_structure.getStructureName(structure);
@@ -3034,7 +3034,7 @@ public class player_building extends script.base_script
             {
                 string_id redeed_alert_text = new string_id(STF, "can_redeed_alert");
                 string_id redeed_yes_alert_text = new string_id(STF, "can_redeed_yes_suffix");
-                entries.add(getString(redeed_alert_text) + "\\" + colors_hex.LIMEGREEN + getString(redeed_yes_alert_text));
+                entries = utils.addElement(entries, getString(redeed_alert_text) + "\\" + colors_hex.LIMEGREEN + getString(redeed_yes_alert_text));
                 int max_condition = player_structure.getMaxCondition(structure);
                 int condition = player_structure.getStructureCondition(structure);
                 String conditionColor = colors_hex.LIMEGREEN;
@@ -3044,7 +3044,7 @@ public class player_building extends script.base_script
                     willRedeed = false;
                 }
                 string_id redeed_condition_text = new string_id(STF, "redeed_condition");
-                entries.add(" - " + getString(redeed_condition_text) + "\\" + conditionColor + condition + "/" + max_condition);
+                entries = utils.addElement(entries, " - " + getString(redeed_condition_text) + "\\" + conditionColor + condition + "/" + max_condition);
                 int pool = player_structure.getMaintenancePool(structure);
                 int reclaim_pool = player_structure.getRedeedCost(structure);
                 String maintColor = colors_hex.LIMEGREEN;
@@ -3054,13 +3054,13 @@ public class player_building extends script.base_script
                     willRedeed = false;
                 }
                 string_id redeed_maintenance_text = new string_id(STF, "redeed_maintenance");
-                entries.add(" - " + getString(redeed_maintenance_text) + "\\" + maintColor + pool + "/" + reclaim_pool);
+                entries = utils.addElement(entries, " - " + getString(redeed_maintenance_text) + "\\" + maintColor + pool + "/" + reclaim_pool);
             }
             else 
             {
                 string_id redeed_alert_text = new string_id(STF, "can_redeed_alert");
                 string_id redeed_no_alert_text = new string_id(STF, "can_redeed_no_suffix");
-                entries.add(getString(redeed_alert_text) + "\\" + colors_hex.TOMATO + getString(redeed_no_alert_text));
+                entries = utils.addElement(entries, getString(redeed_alert_text) + "\\" + colors_hex.TOMATO + getString(redeed_no_alert_text));
                 willRedeed = false;
             }
             if (willRedeed)
@@ -3917,7 +3917,7 @@ public class player_building extends script.base_script
             vendorTypes.setSize(0);
                 for (String rawTerminalType : rawTerminalTypes) {
                     if (hiringMod >= test) {
-                        vendorTypes.add("@player_structure:terminal_" + rawTerminalTypes);
+                        vendorTypes = utils.addElement(vendorTypes, "@player_structure:terminal_" + rawTerminalType);
                     }
                     test += 20;
                 }
@@ -3930,7 +3930,7 @@ public class player_building extends script.base_script
             Vector droidTypes = null;
                 for (String rawDroidType : rawDroidTypes) {
                     if (hiringMod >= dtest) {
-                        droidTypes.add("@player_structure:droid_" + rawDroidTypes);
+                        droidTypes = utils.addElement(droidTypes, "@player_structure:droid_" + rawDroidType);
                     }
                     dtest += 20;
                 }
@@ -3962,8 +3962,8 @@ public class player_building extends script.base_script
                         break;
                     }
                     for (String s : rawRaceTypesHiLvl) {
-                        localizedRaceTypes.add("@player_structure:race_" + rawRaceTypesHiLvl + s);
-                        modifiedRawRaceTypes.add(rawRaceTypesHiLvl, s);
+                        utils.addElement(localizedRaceTypes, "@player_structure:race_" + s);
+                        utils.addElement(modifiedRawRaceTypes, s);
                     }
                     utils.setScriptVar(self, "vendor.checkGender", 1);
                 }
@@ -3975,15 +3975,15 @@ public class player_building extends script.base_script
                         break;
                     }
                     for (String s : rawRaceTypesLowLvl) {
-                        localizedRaceTypes.add("@player_structure:race_" + rawRaceTypesLowLvl + s);
-                        modifiedRawRaceTypes.add(rawRaceTypesLowLvl, s);
+                        utils.addElement(localizedRaceTypes, "@player_structure:race_" + s);
+                        utils.addElement(modifiedRawRaceTypes, s);
                     }
                 }
                 if (allSpecialVendors != null)
                 {
                     for (String allSpecialVendor : allSpecialVendors) {
-                        localizedRaceTypes.add("@player_structure:race_" + allSpecialVendors);
-                        modifiedRawRaceTypes.add(allSpecialVendors);
+                        utils.addElement(localizedRaceTypes, "@player_structure:race_" + allSpecialVendor);
+                        utils.addElement(modifiedRawRaceTypes, allSpecialVendor);
                     }
                     utils.setScriptVar(self, "vendor.checkGender", 1);
                 }
@@ -4002,8 +4002,7 @@ public class player_building extends script.base_script
             defaultVendorTypes.setSize(0);
                 for (String defaultTerminalType : defaultTerminalTypes) {
                     if (hiringMod >= hireVar) {
-                        defaultVendorTypes.add("@player_structure:terminal_" + defaultTerminalTypes);
-                        vendorTypes = defaultVendorTypes;
+                        vendorTypes = utils.addElement(defaultVendorTypes, "@player_structure:terminal_" + defaultTerminalType);
                     }
                     hireVar += 20;
                 }
@@ -5577,8 +5576,8 @@ public class player_building extends script.base_script
             if (requiredHireMod[i] <= hireMod)
             {
                 blog("player_building.getSpecialVendors: " + specialVendorNames[i] + " had a hire mod of: " + requiredHireMod[i] + " and was added to list");
-                allSpecialVendorsOfPlayerHireMod.add(specialVendorNames[i]);
-                allSpecialVendorsMods.add(specialVendorSkillMod[i]);
+                utils.addElement(allSpecialVendorsOfPlayerHireMod, specialVendorNames[i]);
+                utils.addElement(allSpecialVendorsMods, specialVendorSkillMod[i]);
                 blog("player_building.getSpecialVendors: " + specialVendorNames[i] + " has a skill mod: " + specialVendorSkillMod[i]);
             }
         }
@@ -5611,7 +5610,7 @@ public class player_building extends script.base_script
                 continue;
             }
             blog("player_building.getSpecialVendors: Found a skill mod I have: " + vendorMods[b]);
-            allSpecialVendors.add(vendorNames[b]);
+            utils.addElement(allSpecialVendors, vendorNames[b]);
         }
         blog("player_building.getSpecialVendors: allSpecialVendors.size(): " + allSpecialVendors.size());
         String[] _allSpecialVendors = new String[0];

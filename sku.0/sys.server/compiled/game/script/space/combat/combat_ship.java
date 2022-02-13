@@ -4,10 +4,12 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
-import java.util.List;
 
 public class combat_ship extends script.base_script
 {
+    public combat_ship()
+    {
+    }
     public static final float BROKEN_COMPONENT_DEFAULT_MASS = 50000.0f;
     public static final float SPACE_YACHT_COMPONENT_DEFAULT_MASS = 0.0f;
     public static final string_id SID_TARGET_DISABLED = new string_id("space/quest", "target_disabled2");
@@ -298,7 +300,7 @@ public class combat_ship extends script.base_script
     }
     public int killSpacePlayer(obj_id self, dictionary params) throws InterruptedException
     {
-        List objPlayers = space_transition.getContainedPlayers(self, null);
+        Vector objPlayers = space_transition.getContainedPlayers(self, null);
         if (objPlayers != null)
         {
             for (Object objPlayer : objPlayers) {
@@ -930,7 +932,7 @@ public class combat_ship extends script.base_script
     }
     public int componentsStunned(obj_id self, dictionary params) throws InterruptedException
     {
-        List stunnedComponents = params.getResizeableIntArray("stunned_components");
+        Vector stunnedComponents = params.getResizeableIntArray("stunned_components");
         int stunDuration = params.getInt("stun_loops");
         obj_id pilot = null;
         String cefPlayBackHardpoint = space_combat.targetHardpointForCefPlayback(self);

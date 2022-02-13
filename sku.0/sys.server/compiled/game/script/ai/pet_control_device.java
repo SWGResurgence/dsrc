@@ -3,8 +3,7 @@ package script.ai;
 import script.*;
 import script.library.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class pet_control_device extends script.base_script
 {
@@ -1998,10 +1997,12 @@ public class pet_control_device extends script.base_script
         {
             return;
         }
-        List commandList = new ArrayList<String>();
-        commandList.add(pet_lib.createLearnCommandListHeader(new string_id("obj_attr_n", "pet_command")));
-        List abilityList = new ArrayList<String>();
-        abilityList.add(pet_lib.createLearnCommandListHeader(new string_id("obj_attr_n", "pet_ability")));
+        Vector commandList = new Vector();
+        commandList.setSize(0);
+        commandList = utils.addElement(commandList, pet_lib.createLearnCommandListHeader(new string_id("obj_attr_n", "pet_command")));
+        Vector abilityList = new Vector();
+        abilityList.setSize(0);
+        abilityList = utils.addElement(abilityList, pet_lib.createLearnCommandListHeader(new string_id("obj_attr_n", "pet_ability")));
         obj_var_list petCommandList = getObjVarList(petControlDevice, "ai.pet.command");
         if (petCommandList != null && petCommandList.getNumItems() > 0)
         {
@@ -2014,7 +2015,7 @@ public class pet_control_device extends script.base_script
                 if (commandNum >= pet_lib.COMMAND_FOLLOW && commandNum < pet_lib.NUM_COMMANDS)
                 {
                     String display = pet_lib.createLearnCommandListEntry(new string_id("obj_attr_n", "pet_command_" + command), " -  " + ov.getStringData());
-                    abilityList.add(display);
+                    commandList = utils.addElement(commandList, display);
                 }
                 else 
                 {
@@ -2022,7 +2023,7 @@ public class pet_control_device extends script.base_script
                     abilityList = utils.addElement(abilityList, display);
                 }
             }
-            List displayList = utils.concatArrays(commandList, abilityList);
+            Vector displayList = utils.concatArrays(commandList, abilityList);
             sui.listbox(player, player, "", displayList);
         }
     }

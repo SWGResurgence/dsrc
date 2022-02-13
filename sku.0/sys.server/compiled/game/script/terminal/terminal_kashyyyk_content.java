@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class terminal_kashyyyk_content extends script.base_script
 {
+    public terminal_kashyyyk_content()
+    {
+    }
     public static final int CASH_AMOUNT = 50000;
     public static final int AMT = 100000;
     public static final int FACTION_AMT = 250000;
@@ -2241,10 +2244,8 @@ public class terminal_kashyyyk_content extends script.base_script
     public void launch(obj_id player, obj_id ship, obj_id[] membersApprovedByShipOwner, location warpLocation, location groundLoc) throws InterruptedException
     {
         space_transition.clearOvertStatus(ship);
-        Vector groupMembersToWarp = new Vector();
-        groupMembersToWarp.add(player);
-        Vector groupMemberStartIndex = new Vector();
-        groupMemberStartIndex.add(0);
+        Vector groupMembersToWarp = utils.addElement(null, player);
+        Vector groupMemberStartIndex = utils.addElement(null, 0);
         utils.setScriptVar(player, "strLaunchPointName", "launching");
         Vector shipStartLocations = space_transition.getShipStartLocations(ship);
         if (shipStartLocations != null && shipStartLocations.size() > 0)
@@ -2261,8 +2262,8 @@ public class terminal_kashyyyk_content extends script.base_script
                         if (groupMember != player && exists(groupMember) && getLocation(groupMember).cell == playerLoc.cell && groupMemberApproved(membersApprovedByShipOwner, groupMember)) {
                             startIndex = getNextStartIndex(shipStartLocations, startIndex);
                             if (startIndex <= shipStartLocations.size()) {
-                                groupMembersToWarp.add(groupMembers);
-                                groupMemberStartIndex.add(startIndex);
+                                groupMembersToWarp = utils.addElement(groupMembersToWarp, groupMember);
+                                groupMemberStartIndex = utils.addElement(groupMemberStartIndex, startIndex);
                             } else {
                                 string_id strSpam = new string_id("space/space_interaction", "no_space_expansion");
                                 sendSystemMessage(groupMember, strSpam);

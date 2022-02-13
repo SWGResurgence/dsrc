@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class player_dispenser extends script.base_script
 {
+    public player_dispenser()
+    {
+    }
     public static final String VAR_DATATABLE = "dispenser.datatable";
     public static final string_id SID_INVALID_SELECTION = new string_id("dispenser", "invalid_selection");
     public static final string_id SID_PURCHASE_COMPLETE = new string_id("dispenser", "purchase_complete");
@@ -98,7 +101,7 @@ public class player_dispenser extends script.base_script
             for (int i = 0; i < 3; i++)
             {
                 tmp = utils.createHealDamageAttribMod(i * 3, value);
-                am.add(tmp);
+                am = utils.addElement(am, tmp);
             }
         }
         else 
@@ -111,7 +114,7 @@ public class player_dispenser extends script.base_script
             }
             attrib_mod tmp = new attrib_mod(0, 0, 0.0f, 0.0f, 0.0f);
             tmp = utils.createHealWoundAttribMod(attrib_type, value);
-            am.add(tmp);
+            am = utils.addElement(am, tmp);
         }
         setObjVar(medicine, consumable.VAR_CONSUMABLE_MODS, am);
         setObjVar(medicine, consumable.VAR_CONSUMABLE_MEDICINE, true);

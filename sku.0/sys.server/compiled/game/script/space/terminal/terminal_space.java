@@ -28,9 +28,6 @@ import script.library.vehicle;
 import script.library.buff;
 import script.library.event_perk;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class terminal_space extends script.terminal.base.base_terminal {
     public static final float TERMINAL_USE_DISTANCE = 8.0f;
     public static final string_id SID_LAUNCH_SHIP = new string_id("space/space_terminal", "launch_ship");
@@ -193,11 +190,9 @@ public class terminal_space extends script.terminal.base.base_terminal {
             callable.storeCallables(player);
         }
         LOG("space", "doStarportToStarportLaunch");
-        List groupMembersToWarp = new ArrayList<obj_id>();
-        groupMembersToWarp.add(player);
-        List groupMemberStartIndex = new ArrayList<Integer>();
-        groupMemberStartIndex.add(0);
-        List shipStartLocations = space_transition.getShipStartLocations(ship);
+        Vector groupMembersToWarp = utils.addElement(null, player);
+        Vector groupMemberStartIndex = utils.addElement(null, 0);
+        Vector shipStartLocations = space_transition.getShipStartLocations(ship);
         boolean callableInGroup = false;
         if (shipStartLocations != null && shipStartLocations.size() > 0) {
             int startIndex = 0;
@@ -206,8 +201,8 @@ public class terminal_space extends script.terminal.base.base_terminal {
                     if (membersApprovedByShipOwner[i] != player && exists(membersApprovedByShipOwner[i]) && getLocation(membersApprovedByShipOwner[i]).cell == getLocation(player).cell) {
                         startIndex = space_transition.getNextStartIndex(shipStartLocations, startIndex);
                         if (startIndex <= shipStartLocations.size()) {
-                            groupMembersToWarp.add(membersApprovedByShipOwner[i]);
-                            groupMemberStartIndex.add(startIndex);
+                            groupMembersToWarp = utils.addElement(groupMembersToWarp, membersApprovedByShipOwner[i]);
+                            groupMemberStartIndex = utils.addElement(groupMemberStartIndex, startIndex);
                         }
                         if (callable.hasAnyCallable(membersApprovedByShipOwner[i])) {
                             callable.storeCallables(membersApprovedByShipOwner[i]);
@@ -233,12 +228,10 @@ public class terminal_space extends script.terminal.base.base_terminal {
             sendSystemMessage(player, event_perk.SHAPECHANGE_SPACE);
         }
         space_transition.clearOvertStatus(ship);
-        List groupMembersToWarp = new ArrayList<obj_id>();
-        groupMembersToWarp.add(player);
-        List groupMemberStartIndex = new ArrayList<Integer>();
-        groupMemberStartIndex.add(0);
+        Vector groupMembersToWarp = utils.addElement(null, player);
+        Vector groupMemberStartIndex = utils.addElement(null, 0);
         utils.setScriptVar(player, "strLaunchPointName", "launching");
-        List shipStartLocations = space_transition.getShipStartLocations(ship);
+        Vector shipStartLocations = space_transition.getShipStartLocations(ship);
         if (shipStartLocations != null && shipStartLocations.size() > 0) {
             int startIndex = 0;
             location playerLoc = getLocation(player);
@@ -247,8 +240,8 @@ public class terminal_space extends script.terminal.base.base_terminal {
                     if (membersApprovedByShipOwner[i] != player && exists(membersApprovedByShipOwner[i]) && getLocation(membersApprovedByShipOwner[i]).cell == playerLoc.cell) {
                         startIndex = space_transition.getNextStartIndex(shipStartLocations, startIndex);
                         if (startIndex <= shipStartLocations.size()) {
-                            groupMembersToWarp.add(membersApprovedByShipOwner[i]);
-                            groupMemberStartIndex.add(startIndex);
+                            groupMembersToWarp = utils.addElement(groupMembersToWarp, membersApprovedByShipOwner[i]);
+                            groupMemberStartIndex = utils.addElement(groupMemberStartIndex, startIndex);
                         }
                     }
                 }

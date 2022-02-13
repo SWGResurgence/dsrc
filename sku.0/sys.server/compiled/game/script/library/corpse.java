@@ -6,6 +6,9 @@ import java.util.Vector;
 
 public class corpse extends script.base_script
 {
+    public corpse()
+    {
+    }
     public static final String SCRIPT_PLAYER_CORPSE = "corpse.player_corpse";
     public static final String SCRIPT_AI_CORPSE = "corpse.ai_corpse";
     public static final String SCRIPT_AI_CORPSE_INVENTORY = "corpse.ai_corpse_inventory";
@@ -280,7 +283,7 @@ public class corpse extends script.base_script
         moved.setSize(0);
         for (obj_id corps : corpses) {
             if (dragPlayerCorpse(player, corps, false)) {
-                moved.add(corpses, corps);
+                moved = utils.addElement(moved, corps);
             }
         }
         if ((moved == null) || (moved.size() == 0))
@@ -311,7 +314,7 @@ public class corpse extends script.base_script
         for (obj_id obj_id : stuff) {
             if (isPlayerCorpse(obj_id)) {
                 if (canDragPlayerCorpse(player, obj_id, true)) {
-                    corpses.add(stuff, obj_id);
+                    corpses = utils.addElement(corpses, obj_id);
                 }
             }
         }
@@ -618,7 +621,7 @@ public class corpse extends script.base_script
         validContents.setSize(0);
         for (obj_id corpseContent : corpseContents) {
             if (!utils.hasScriptVar(corpseContent, "isCreatureWeapon")) {
-                validContents.add(corpseContents, corpseContent);
+                utils.addElement(validContents, corpseContent);
             } else {
                 trial.cleanupObject(corpseContent);
             }

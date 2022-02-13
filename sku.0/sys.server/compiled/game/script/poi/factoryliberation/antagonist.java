@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class antagonist extends script.poi.base.scenario_actor
 {
+    public antagonist()
+    {
+    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiFactoryLiberation Antagonist";
     public static final int CONV_GREET = 0;
@@ -59,8 +62,8 @@ public class antagonist extends script.poi.base.scenario_actor
         {
             case CONV_GREET:
             msg = new string_id(convo, "a_greet");
-            responses.add(new string_id(convo, "r_greet_maybehelp"));
-            responses.add(new string_id(convo, "r_greet_insult"));
+            responses = utils.addElement(responses, new string_id(convo, "r_greet_maybehelp"));
+            responses = utils.addElement(responses, new string_id(convo, "r_greet_insult"));
             npcStartConversation(speaker, self, convo, msg, responses);
             scenario.setPlayerProgress(speaker, 1);
             break;

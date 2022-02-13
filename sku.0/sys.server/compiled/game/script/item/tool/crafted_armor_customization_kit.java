@@ -106,7 +106,7 @@ public class crafted_armor_customization_kit extends script.base_script
                     } else if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_belt")) {
                         continue;
                     }
-                    items.add(invItems);
+                    items.addElement(invItem);
                 }
             }
         }
@@ -132,9 +132,9 @@ public class crafted_armor_customization_kit extends script.base_script
                 } else if (static_item.isStaticItem(piece)) {
                     continue;
                 }
-                armor.add(piece);
+                armor.addElement(piece);
                 String name = getName(piece);
-                armorNames.add(name);
+                armorNames.addElement(name);
             }
         }
         if (!armor.isEmpty())

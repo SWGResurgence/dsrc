@@ -320,7 +320,7 @@ public class faction_recruiter extends script.base_script
         String faction = factions.getFactionNameByHashCode(faction_id);
         if (pvpGetAlignedFaction(player) == pvpGetAlignedFaction(npc) && hasObjVar(player, factions.VAR_RESIGNING))
         {
-            responses.add(SID_RESCIND_RESIGNATION);
+            responses = utils.addElement(null, SID_RESCIND_RESIGNATION);
             string_id[] _responses = new string_id[0];
             if (responses != null)
             {
@@ -336,74 +336,74 @@ public class faction_recruiter extends script.base_script
         switch (progress)
         {
             case 1:
-            responses.add(SID_JOIN_FACTION);
+            responses = utils.addElement(responses, SID_JOIN_FACTION);
             break;
             case 3:
-            responses.add(SID_PROMOTION);
+            responses = utils.addElement(responses, SID_PROMOTION);
             if (pvp_type == PVPTYPE_COVERT)
             {
-                responses.add(SID_GO_DECLARED);
+                responses = utils.addElement(responses, SID_GO_DECLARED);
             }
             else if (pvp_type == PVPTYPE_DECLARED)
             {
                 if (!hasObjVar(player, VAR_GOING_COVERT))
                 {
-                    responses.add(SID_GO_COVERT);
+                    responses = utils.addElement(responses, SID_GO_COVERT);
                 }
-                responses.add(SID_HIRELINGS);
+                responses = utils.addElement(responses, SID_HIRELINGS);
             }
-            responses.add(SID_PURCHASE_ITEMS);
-            responses.add(SID_SKILL_TRAINING);
-            responses.add(SID_RESIGN_FROM_FACTION);
+            responses = utils.addElement(responses, SID_PURCHASE_ITEMS);
+            responses = utils.addElement(responses, SID_SKILL_TRAINING);
+            responses = utils.addElement(responses, SID_RESIGN_FROM_FACTION);
             break;
             case 4:
-            responses.add(SID_YES_TO_JOIN);
-            responses.add(SID_NO_TO_JOIN);
+            responses = utils.addElement(responses, SID_YES_TO_JOIN);
+            responses = utils.addElement(responses, SID_NO_TO_JOIN);
             break;
             case 5:
-            responses.add(SID_YES_TO_SEE_OPTIONS);
-            responses.add(SID_NO_TO_SEE_OPTIONS);
+            responses = utils.addElement(responses, SID_YES_TO_SEE_OPTIONS);
+            responses = utils.addElement(responses, SID_NO_TO_SEE_OPTIONS);
             break;
             case 6:
-            responses.add(SID_YES_TO_RESIGN);
-            responses.add(SID_NO_TO_RESIGN);
+            responses = utils.addElement(responses, SID_YES_TO_RESIGN);
+            responses = utils.addElement(responses, SID_NO_TO_RESIGN);
             break;
             case 7:
-            responses.add(SID_YES_TO_GO_DECLARED);
-            responses.add(SID_NO_TO_GO_DECLARED);
+            responses = utils.addElement(responses, SID_YES_TO_GO_DECLARED);
+            responses = utils.addElement(responses, SID_NO_TO_GO_DECLARED);
             break;
             case 8:
-            responses.add(SID_YES_TO_GO_COVERT);
-            responses.add(SID_NO_TO_GO_COVERT);
+            responses = utils.addElement(responses, SID_YES_TO_GO_COVERT);
+            responses = utils.addElement(responses, SID_NO_TO_GO_COVERT);
             break;
             case 9:
-            responses.add(SID_PURCHASE_FURNITURE);
-            responses.add(SID_PURCHASE_WEAPONS_ARMOR);
-            responses.add(SID_PURCHASE_SCHEMATICS);
+            responses = utils.addElement(responses, SID_PURCHASE_FURNITURE);
+            responses = utils.addElement(responses, SID_PURCHASE_WEAPONS_ARMOR);
+            responses = utils.addElement(responses, SID_PURCHASE_SCHEMATICS);
             if (pvp_type == PVPTYPE_DECLARED)
             {
-                responses.add(SID_PURCHASE_INSTALLATION);
+                responses = utils.addElement(responses, SID_PURCHASE_INSTALLATION);
                 if (!(toLower(faction)).equals("rebel"))
                 {
-                    responses.add(SID_PURCHASE_UNIFORMS);
+                    responses = utils.addElement(responses, SID_PURCHASE_UNIFORMS);
                 }
             }
             break;
             case 10:
-            responses.add(SID_YES_TO_PROMOTION);
-            responses.add(SID_NO_TO_PROMOTION);
+            responses = utils.addElement(responses, SID_YES_TO_PROMOTION);
+            responses = utils.addElement(responses, SID_NO_TO_PROMOTION);
             break;
             default:
-            responses.add(SID_NOTHING);
+            responses = utils.addElement(responses, SID_NOTHING);
             break;
         }
         if (hasSkill(player, "class_smuggler_phase3_novice"))
         {
-            responses.add(SID_SELL_SECRETS);
+            responses = utils.addElement(responses, SID_SELL_SECRETS);
         }
         if (hasSkill(player, "class_smuggler_phase4_novice"))
         {
-            responses.add(SID_BUY_FACTION);
+            responses = utils.addElement(responses, SID_BUY_FACTION);
         }
         string_id[] _responses = new string_id[0];
         if (responses != null)
@@ -499,7 +499,7 @@ public class faction_recruiter extends script.base_script
         Vector names = new Vector();
         names.setSize(0);
         for (String xp_type : xp_types) {
-            names.add("@exp_n:" + xp_types, "@exp_n:" + xp_type);
+            names = utils.addElement(names, "@exp_n:" + xp_type);
         }
         if (names == null || names.size() == 0)
         {

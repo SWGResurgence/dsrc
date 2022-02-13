@@ -6,11 +6,13 @@ import script.library.prose;
 import script.library.sui;
 import script.library.utils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class doc_bag extends script.base_script
 {
+    public doc_bag()
+    {
+    }
     public static final string_id SID_EXAMINE_MEDS = new string_id("doctor_bag", "examine_meds");
     public static final string_id SID_REMOVE_MEDS = new string_id("doctor_bag", "remove_meds");
     public static final string_id SID_NOTHING_IN_BAG = new string_id("doctor_bag", "nothing_in_bag");
@@ -54,7 +56,8 @@ public class doc_bag extends script.base_script
         }
         int j = 0;
         prose_package[] med_names = new prose_package[count];
-        List med_index = new ArrayList<Integer>();
+        Vector med_index = new Vector();
+        med_index.setSize(0);
         for (int i = 0; i < doctor_bag.MAX_MEDS; i++)
         {
             if (hasObjVar(self, "meds." + i + ".name"))
@@ -71,7 +74,7 @@ public class doc_bag extends script.base_script
                 }
                 prose_package pp = prose.getPackage(SID_MED_ENTRY, med_name, med_label, getIntObjVar(self, "meds." + i + ".count"));
                 med_names[j++] = pp;
-                med_index.add(i);
+                med_index = utils.addElement(med_index, i);
             }
         }
         if (med_names.length == 0)
@@ -112,7 +115,8 @@ public class doc_bag extends script.base_script
         }
         int j = 0;
         prose_package[] med_names = new prose_package[count];
-        List med_index = new ArrayList<Integer>();
+        Vector med_index = new Vector();
+        med_index.setSize(0);
         for (int i = 0; i < doctor_bag.MAX_MEDS; i++)
         {
             if (hasObjVar(self, "meds." + i + ".name"))
@@ -129,7 +133,7 @@ public class doc_bag extends script.base_script
                 }
                 prose_package pp = prose.getPackage(SID_MED_ENTRY, med_name, med_label, getIntObjVar(self, "meds." + i + ".count"));
                 med_names[j++] = pp;
-                med_index.add(i);
+                med_index = utils.addElement(med_index, i);
             }
         }
         if (med_names.length == 0)
@@ -205,7 +209,8 @@ public class doc_bag extends script.base_script
         }
         int j = 0;
         prose_package[] med_names = new prose_package[count];
-        List med_index = new ArrayList<Integer>();
+        Vector med_index = new Vector();
+        med_index.setSize(0);
         for (int i = 0; i < doctor_bag.MAX_MEDS; i++)
         {
             if (hasObjVar(self, "meds." + i + ".name"))
@@ -217,7 +222,7 @@ public class doc_bag extends script.base_script
                 }
                 prose_package pp = prose.getPackage(SID_MED_ENTRY, med_name, getIntObjVar(self, "meds." + i + ".count"));
                 med_names[j++] = pp;
-                med_index.add(i);
+                med_index = utils.addElement(med_index, i);
             }
         }
         if (med_names.length == 0)

@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class ai_lib extends script.base_script
 {
+    public ai_lib()
+    {
+    }
     public static final float PLAYER_RUN_SPEED = 8.0f;
     public static final float AI_MAX_MOVEMENT_SPEED = PLAYER_RUN_SPEED;
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
@@ -1487,7 +1490,7 @@ public class ai_lib extends script.base_script
         for (obj_id creature : creatures) {
             creatureSocialGroup = getSocialGroup(creature);
             if (creatureSocialGroup != null && creatureSocialGroup.equals(socialGroup)) {
-                linkedCreatures.add(creature);
+                utils.addElement(linkedCreatures, creature);
             }
         }
         if (linkedCreatures.size() == 0)

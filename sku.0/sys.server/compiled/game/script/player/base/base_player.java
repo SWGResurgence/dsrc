@@ -6,7 +6,6 @@ import script.library.*;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
-import java.util.List;
 
 import script.cureward.cureward;
 
@@ -1131,7 +1130,7 @@ public class base_player extends script.base_script
             obj_id[] missions = getMissionObjects(self);
             Vector missionLocation = new Vector();
             missionLocation.setSize(0);
-            if (missions != null && missions.length > 0)
+            if ((missions != null) && (missions.length > 0))
             {
                 int missionIndex = 0;
                 for (missionIndex = 0; missionIndex < missions.length; ++missionIndex)
@@ -1140,7 +1139,7 @@ public class base_player extends script.base_script
                     {
                         if (getMissionStatus(missions[missionIndex]) > 0)
                         {
-                            missionLocation.add(getMissionStartLocation(missions[missionIndex]));
+                            utils.addElement(missionLocation, getMissionStartLocation(missions[missionIndex]));
                         }
                     }
                 }
@@ -1547,7 +1546,7 @@ public class base_player extends script.base_script
                     String missionType = getMissionType(objMission);
                     if (missionType.equals("bounty")) {
                         if (hasObjVar(objMission, "objTarget")) {
-                            playerBountyMissionTargetId.add(getObjIdObjVar(objMissions, "objTarget"));
+                            playerBountyMissionTargetId = utils.addElement(playerBountyMissionTargetId, getObjIdObjVar(objMission, "objTarget"));
                         }
                     }
                 }
@@ -2523,10 +2522,10 @@ public class base_player extends script.base_script
         {
             corpse.revokeCorpseConsent(corpses, consented);
         }
-        List consentToList = getResizeableObjIdArrayObjVar(self, pclib.VAR_CONSENT_TO_ID);
+        Vector consentToList = getResizeableObjIdArrayObjVar(self, pclib.VAR_CONSENT_TO_ID);
         if (consentToList != null)
         {
-            consentToList.remove(consented);
+            consentToList = utils.removeElement(consentToList, consented);
             if ((consentToList == null) || (consentToList.size() == 0))
             {
                 removeObjVar(self, pclib.VAR_CONSENT_TO_ID);
@@ -2539,7 +2538,7 @@ public class base_player extends script.base_script
     public int handleReceivedConsent(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id consenter = params.getObjId(pclib.DICT_CONSENTER_ID);
-        List consentFrom = getResizeableObjIdArrayObjVar(self, pclib.VAR_CONSENT_FROM_ID);
+        Vector consentFrom = getResizeableObjIdArrayObjVar(self, pclib.VAR_CONSENT_FROM_ID);
         if (consentFrom == null)
         {
             Vector newConsentFrom = new Vector();
@@ -2553,7 +2552,7 @@ public class base_player extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        consentFrom.add(consenter);
+        consentFrom = utils.addElement(consentFrom, consenter);
         setObjVar(self, pclib.VAR_CONSENT_FROM_ID, consentFrom);
         prose_package pp = prose.getPackage(PROSE_GOT_CONSENT, getPlayerFullName(consenter));
         sendSystemMessageProse(self, pp);
@@ -2562,7 +2561,7 @@ public class base_player extends script.base_script
     public int handleReceivedUnconsent(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id consenter = params.getObjId(pclib.DICT_CONSENTER_ID);
-        List consentFrom = getResizeableObjIdArrayObjVar(self, pclib.VAR_CONSENT_FROM_ID);
+        Vector consentFrom = getResizeableObjIdArrayObjVar(self, pclib.VAR_CONSENT_FROM_ID);
         if (consentFrom != null)
         {
             int idx = utils.getElementPositionInArray(consentFrom, consenter);
@@ -2682,9 +2681,9 @@ public class base_player extends script.base_script
         obj_id corpseId = params.getObjId(corpse.DICT_CORPSE_ID);
         obj_id waypoint = params.getObjId(corpse.DICT_CORPSE_WAYPOINT);
         destroyWaypointInDatapad(waypoint, self);
-        List corpses = utils.getResizeableObjIdBatchObjVar(self, pclib.VAR_CORPSE_ID);
-        List killers = utils.getResizeableObjIdBatchObjVar(self, pclib.VAR_CORPSE_KILLER);
-        List stamps = utils.getResizeableIntBatchObjVar(self, pclib.VAR_CORPSE_STAMP);
+        Vector corpses = utils.getResizeableObjIdBatchObjVar(self, pclib.VAR_CORPSE_ID);
+        Vector killers = utils.getResizeableObjIdBatchObjVar(self, pclib.VAR_CORPSE_KILLER);
+        Vector stamps = utils.getResizeableIntBatchObjVar(self, pclib.VAR_CORPSE_STAMP);
         if ((corpses == null) || (killers == null))
         {
             return SCRIPT_OVERRIDE;
@@ -2692,9 +2691,9 @@ public class base_player extends script.base_script
         int idx = utils.getElementPositionInArray(corpses, corpseId);
         if (idx > -1)
         {
-            corpses.remove(idx);
-            killers.remove(idx);
-            stamps.remove(idx);
+            corpses = utils.removeElementAt(corpses, idx);
+            killers = utils.removeElementAt(killers, idx);
+            stamps = utils.removeElementAt(stamps, idx);
             if ((corpses == null) || (corpses.size() == 0))
             {
                 removeObjVar(self, pclib.VAR_CORPSE_BASE);
@@ -2930,16 +2929,16 @@ public class base_player extends script.base_script
                         spawnLoc = null;
                     }
                     bindName += " @base_player:clone_location_registered_select_end";
-                    options.add(bindName);
-                    cloneLocs.add(bindLoc);
-                    spawnLocs.add(spawnLoc);
+                    options = utils.addElement(options, bindName);
+                    cloneLocs = utils.addElement(cloneLocs, bindLoc);
+                    spawnLocs = utils.addElement(spawnLocs, spawnLoc);
                     if (pvp.isPvpDeath(self) || isNewbieDeath)
                     {
-                        damage.add(0);
+                        damage = utils.addElement(damage, 0);
                     }
                     else 
                     {
-                        damage.add(cloninglib.CLONE_DAMAGE_LOW);
+                        damage = utils.addElement(damage, cloninglib.CLONE_DAMAGE_LOW);
                     }
                     isBindListed = true;
                 }
@@ -2984,9 +2983,9 @@ public class base_player extends script.base_script
                                 }
                             }
                         }
-                        options.add(cloneName);
-                        cloneLocs.add(cloneLoc);
-                        spawnLocs.add(spawnLoc);
+                        options = utils.addElement(options, cloneName);
+                        cloneLocs = utils.addElement(cloneLocs, cloneLoc);
+                        spawnLocs = utils.addElement(spawnLocs, spawnLoc);
                     }
                 }
             }
@@ -4305,7 +4304,7 @@ public class base_player extends script.base_script
                     Vector consentToName = new Vector();
                     consentToName.setSize(0);
                     for (obj_id consentTo1 : consentTo) {
-                        consentToName.add(getPlayerFullName(consentTo);
+                        consentToName = utils.addElement(consentToName, getPlayerFullName(consentTo1));
                     }
                     sui.listbox(self, self, "@" + SID_UNCONSENT_LISTBOX_PROMPT, sui.OK_CANCEL, "@" + SID_UNCONSENT_LISTBOX_TITLE, consentToName, HANDLER_UNCONSENT_MENU);
                     return SCRIPT_CONTINUE;
@@ -4370,7 +4369,7 @@ public class base_player extends script.base_script
                     Vector consentFromName = new Vector();
                     consentFromName.setSize(0);
                     for (obj_id obj_id : consentFrom) {
-                        consentFromName.add(getPlayerFullName(consentFrom);
+                        consentFromName = utils.addElement(consentFromName, getPlayerFullName(obj_id));
                     }
                     sui.listbox(self, "@" + SID_CONSENT_FROM_LISTBOX_PROMPT, "@" + SID_CONSENT_FROM_LISTBOX_TITLE, consentFromName);
                     return SCRIPT_CONTINUE;
@@ -4986,12 +4985,12 @@ public class base_player extends script.base_script
                     }
                     if (wpColor == null)
                     {
-                        parsedParams.add(token);
+                        utils.addElement(parsedParams, token);
                     }
                 }
                 else 
                 {
-                    parsedParams.add(token);
+                    utils.addElement(parsedParams, token);
                 }
             }
         }
@@ -5306,7 +5305,7 @@ public class base_player extends script.base_script
                 {
                     for (int i = 0; i < utils.WAYPOINT_COLORS.length; ++i)
                     {
-                        if (token.toLowerCase().equals(utils.WAYPOINT_COLORS))
+                        if ((token.toLowerCase()).equals(utils.WAYPOINT_COLORS[i]))
                         {
                             wpColor = utils.WAYPOINT_COLORS[i];
                             break;
@@ -5319,12 +5318,12 @@ public class base_player extends script.base_script
                 }
                 else 
                 {
-                    parsedParams.add(token);
+                    utils.addElement(parsedParams, token);
                 }
             }
         }
         location spot = null;
-        if (parsedParams == null || parsedParams.size() <= 0) {
+        if (parsedParams == null || (parsedParams.size() <= 0))
         {
             if (!isIdValid(target))
             {
@@ -5904,8 +5903,8 @@ public class base_player extends script.base_script
                     int curt = getGameTime();
                     if (curt - zoning_time_array[i] < 24 * 60 * 60)
                     {
-                        ids.remove(i);
-                        times.remove(i);
+                        ids.removeElementAt(i);
+                        times.removeElementAt(i);
                         sendSystemMessage(player, SID_ST_RIGHTS_REVOKED);
                         sendSystemMessage(target, SID_ST_RIGHTS_REVOKED_OTHER);
                         int[] stampIdsArray = new int[0];
@@ -5932,8 +5931,8 @@ public class base_player extends script.base_script
                     }
                     else 
                     {
-                        ids.remove(i);
-                        times.remove(i);
+                        ids.removeElementAt(i);
+                        times.removeElementAt(i);
                         int[] stampIdsArray = new int[0];
                         if (ids != null)
                         {
@@ -5962,8 +5961,8 @@ public class base_player extends script.base_script
             sendSystemMessageProse(target, pp);
             pp = prose.getPackage(SID_ST_RIGHTS_GRANTED_SELF, getName(target));
             sendSystemMessageProse(player, pp);
-            ids.add(city_id);
-            times.add(getGameTime());
+            utils.addElement(ids, city_id);
+            utils.addElement(times, getGameTime());
             int[] stampIdsArray = new int[0];
             if (ids != null)
             {
@@ -6361,9 +6360,9 @@ public class base_player extends script.base_script
                         }
                     }
                     if (!found) {
-                        vote_ids.add(vote);
-                        vote_counts.add(1);
-                        vote_names.add(cityGetCitizenName(city_id, citizens[i]));
+                        utils.addElement(vote_ids, vote);
+                        utils.addElement(vote_counts, 1);
+                        utils.addElement(vote_names, cityGetCitizenName(city_id, citizen));
                     }
                 }
             }
@@ -6412,8 +6411,8 @@ public class base_player extends script.base_script
             boolean found = false;
             obj_id vote = cityGetCitizenAllegiance(city_id, citizen);
             if (vote == runner) {
-                vote_ids.add(citizens;
-                vote_names.add(cityGetCitizenName(city_id, citizens));
+                utils.addElement(vote_ids, citizen);
+                utils.addElement(vote_names, cityGetCitizenName(city_id, citizen));
             }
         }
         String[] voteInfo = new String[vote_names.size()];
@@ -9199,7 +9198,7 @@ public class base_player extends script.base_script
                                 if (utils.hasScript(unpackedItem, "space.ship_control_device.ship_control_device")) {
                                     obj_id ship = space_transition.getShipFromShipControlDevice(unpackedItem);
                                     if (isIdValid(ship) && utils.hasLocalVar(ship, "droid_control_device")) {
-                                        shipsWithDroidControlDevice.add(ship);
+                                        utils.addElement(shipsWithDroidControlDevice, ship);
                                     }
                                 }
                             }
@@ -9307,7 +9306,7 @@ public class base_player extends script.base_script
                                 if (utils.hasScript(unpackedItem, "space.ship_control_device.ship_control_device")) {
                                     obj_id ship = space_transition.getShipFromShipControlDevice(unpackedItem);
                                     if (isIdValid(ship) && utils.hasLocalVar(ship, "droid_control_device")) {
-                                        shipsWithDroidControlDevice.add(ship);
+                                        utils.addElement(shipsWithDroidControlDevice, ship);
                                     }
                                 }
                             }
@@ -10733,55 +10732,55 @@ public class base_player extends script.base_script
             objectsToTellClientAbout.setSize(0);
             String item = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName);
             if (item != null) {
-                objectsToTellClientAbout.add(item);
+                utils.addElement(objectsToTellClientAbout, item);
             }
             item = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName2);
             if (item != null) {
-                objectsToTellClientAbout.add(item);
+                utils.addElement(objectsToTellClientAbout, item);
             }
             item = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName3);
             if (item != null) {
-                objectsToTellClientAbout.add(item);
+                utils.addElement(objectsToTellClientAbout, item);
             }
             item = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardExclusiveLootName);
             if (item != null) {
-                objectsToTellClientAbout.add(item);
+                utils.addElement(objectsToTellClientAbout, item);
             }
             item = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardExclusiveLootName2);
             if (item != null) {
-                objectsToTellClientAbout.add(item);
+                utils.addElement(objectsToTellClientAbout, item);
             }
             item = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardExclusiveLootName3);
             if (item != null) {
-                objectsToTellClientAbout.add(item);
+                utils.addElement(objectsToTellClientAbout, item);
             }
             item = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardExclusiveLootName4);
             if (item != null) {
-                objectsToTellClientAbout.add(item);
+                utils.addElement(objectsToTellClientAbout, item);
             }
             item = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardExclusiveLootName5);
             if (item != null) {
-                objectsToTellClientAbout.add(item);
+                utils.addElement(objectsToTellClientAbout, item);
             }
             item = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardExclusiveLootName6);
             if (item != null) {
-                objectsToTellClientAbout.add(item);
+                utils.addElement(objectsToTellClientAbout, item);
             }
             item = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardExclusiveLootName7);
             if (item != null) {
-                objectsToTellClientAbout.add(item);
+                utils.addElement(objectsToTellClientAbout, item);
             }
             item = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardExclusiveLootName8);
             if (item != null) {
-                objectsToTellClientAbout.add(item);
+                utils.addElement(objectsToTellClientAbout, item);
             }
             item = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardExclusiveLootName9);
             if (item != null) {
-                objectsToTellClientAbout.add(item);
+                utils.addElement(objectsToTellClientAbout, item);
             }
             item = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardExclusiveLootName10);
             if (item != null) {
-                objectsToTellClientAbout.add(item);
+                utils.addElement(objectsToTellClientAbout, item);
             }
             for (Object o : objectsToTellClientAbout) {
                 String itemName = ((String) o);
@@ -11909,7 +11908,7 @@ public class base_player extends script.base_script
     }
     public int cmdMeditateFail(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        //sendSystemMessage(self, meditation.SID_MED_FAIL);
+        sendSystemMessage(self, meditation.SID_MED_FAIL);
         return SCRIPT_CONTINUE;
     }
     public int handleMeditationTick(obj_id self, dictionary params) throws InterruptedException

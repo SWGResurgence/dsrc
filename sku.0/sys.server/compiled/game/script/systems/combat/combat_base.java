@@ -5,11 +5,13 @@ import script.combat_engine.*;
 import script.library.*;
 
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class combat_base extends script.base_script
 {
+    public combat_base()
+    {
+    }
     public static final float MAX_THROWING_DISTANCE = 30;
     public static final float PVP_DAMAGE_REDUCTION_VALUE = 0.75f;
     public static final float UNIVERSAL_ACTION_COST_MULTIPLIER = 1.0f;
@@ -253,7 +255,7 @@ public class combat_base extends script.base_script
                     atkRslt.actionName = getStringCrc(toLower(actionName));
                     atkRslt.useLocation = true;
                     if(targetLoc != null && isValidLocation(targetLoc)) {
-                        atkRslt.targetLocation = new float[]{targetLoc.x, targetLoc.y, targetLoc.z};
+                        atkRslt.targetLocation = new vector(targetLoc.x, targetLoc.y, targetLoc.z);
                         atkRslt.targetCell = targetLoc.cell;
                     }
                     else {
@@ -261,7 +263,7 @@ public class combat_base extends script.base_script
                         if(!isValidLocation(tl)){
                             LOG("combat","Could not identify the target's (" + target + ":" + getPlayerFullName(target) + ") location (" + targetLoc + ") to attack it.");
                         }
-                        atkRslt.targetLocation = new float[]{tl.x, tl.y, tl.z};
+                        atkRslt.targetLocation = new vector(tl.x, tl.y, tl.z);
                         atkRslt.targetCell = tl.cell;
                     }
                     atkRslt.endPosture = (combat.isMeleeWeapon(weaponData.id) || combat.isLightsaberWeapon(weaponData.id)) ? POSTURE_UPRIGHT : getPosture(self);
@@ -429,7 +431,7 @@ public class combat_base extends script.base_script
             atkRslt.weapon = weaponData.id;
             atkRslt.actionName = getStringCrc(toLower(actionName));
             atkRslt.useLocation = true;
-            atkRslt.targetLocation = new float[]{targetLoc.x, targetLoc.y, targetLoc.z};
+            atkRslt.targetLocation = new vector(targetLoc.x, targetLoc.y, targetLoc.z);
             atkRslt.targetCell = targetLoc.cell;
             atkRslt.endPosture = (combat.isMeleeWeapon(weaponData.id) || combat.isLightsaberWeapon(weaponData.id)) ? POSTURE_UPRIGHT : getPosture(self);
             String anim = actionData.animDefault;
@@ -1000,11 +1002,12 @@ public class combat_base extends script.base_script
         {
             obj_id[] potentialTargets = getHateList(self);
             float max_range = 64.0f;
-            List validTargets = new ArrayList<obj_id>();
+            Vector validTargets = new Vector();
+            validTargets.setSize(0);
             for (obj_id potentialTarget : potentialTargets) {
                 if (potentialTarget != target && combat.cachedCanSee(self, potentialTarget) && !isDead(potentialTarget)) {
                     if (getDistance(self, potentialTarget) < max_range) {
-                        validTargets.add(potentialTargets);
+                        utils.addElement(validTargets, potentialTarget);
                     }
                 }
             }
@@ -1026,11 +1029,12 @@ public class combat_base extends script.base_script
             float width = actionData.coneWidth;
             float max_range = length;
             obj_id[] potentialTargets = getHateList(self);
-            List validTargets = new ArrayList<obj_id>();
+            Vector validTargets = new Vector();
+            validTargets.setSize(0);
             for (obj_id potentialTarget : potentialTargets) {
                 if (potentialTarget != target && combat.cachedCanSee(self, potentialTarget) && !isDead(potentialTarget)) {
                     if (getDistance(self, potentialTarget) < max_range) {
-                        validTargets.add(potentialTargets);
+                        utils.addElement(validTargets, potentialTarget);
                     }
                 }
             }
@@ -1049,11 +1053,12 @@ public class combat_base extends script.base_script
             float width = actionData.coneWidth;
             float max_range = 64.0f;
             obj_id[] potentialTargets = getHateList(self);
-            List validTargets = new ArrayList<obj_id>();
+            Vector validTargets = new Vector();
+            validTargets.setSize(0);
             for (obj_id potentialTarget : potentialTargets) {
                 if (potentialTarget != target && combat.cachedCanSee(self, potentialTarget)) {
                     if (getDistance(self, potentialTarget) < max_range) {
-                        validTargets.add(potentialTargets);
+                        utils.addElement(validTargets, potentialTarget);
                     }
                 }
             }
@@ -1071,12 +1076,13 @@ public class combat_base extends script.base_script
         else if (attackType == combat.HATE_LIST)
         {
             obj_id[] hateTargets = getHateList(self);
-            List validTargets = new ArrayList<obj_id>();
+            Vector validTargets = new Vector();
+            validTargets.setSize(0);
             int max_range = 90;
             for (obj_id hateTarget : hateTargets) {
                 if (hateTarget != target && canSee(self, hateTarget)) {
                     if (getDistance(self, hateTarget) < max_range) {
-                        validTargets.add(hateTargets);
+                        utils.addElement(validTargets, hateTarget);
                     }
                 }
             }
@@ -1099,7 +1105,7 @@ public class combat_base extends script.base_script
             else 
             {
                 obj_id[] randomTargets = new obj_id[max_targets];
-                List targetList = new List(Arrays.asList((obj_id[])hateTargets.clone()));
+                Vector targetList = new Vector(Arrays.asList((obj_id[])hateTargets.clone()));
                 targetList = utils.shuffleArray(targetList);
                 if (max_targets > hateTargets.length)
                 {
@@ -1531,7 +1537,7 @@ public class combat_base extends script.base_script
         if (criticalHit && utils.hasScriptVar(attackerData.id, "critRemoveBuffNames") && actionData.commandType != combat.LEFT_CLICK_DEFAULT)
         {
             utils.removeScriptVar(attackerData.id, "nextCritHit");
-            List buffNames = utils.getResizeableStringArrayScriptVar(attackerData.id, "critRemoveBuffNames");
+            Vector buffNames = utils.getResizeableStringArrayScriptVar(attackerData.id, "critRemoveBuffNames");
             buff.removeBuffs(attackerData.id, buffNames);
         }
         if (seriesStrikethrough)
@@ -1552,7 +1558,7 @@ public class combat_base extends script.base_script
         }
         if (utils.hasScriptVar(attackerData.id, buff.ON_ATTACK_REMOVE) && actionData.commandType != combat.LEFT_CLICK_DEFAULT)
         {
-            List buffList = utils.getResizeableStringArrayScriptVar(attackerData.id, buff.ON_ATTACK_REMOVE);
+            Vector buffList = utils.getResizeableStringArrayScriptVar(attackerData.id, buff.ON_ATTACK_REMOVE);
             for (Object o : buffList) {
                 if (buff.hasBuff(attackerData.id, ((String) o))) {
                     buff.removeBuff(attackerData.id, ((String) o));
@@ -2597,16 +2603,18 @@ public class combat_base extends script.base_script
     }
     public void sortDefendersByPlayer(obj_id[] defenders) throws InterruptedException
     {
-        List playerList = new ArrayList<obj_id>();
-        List objectList = new ArrayList<obj_id>();
+        Vector playerList = new Vector();
+        playerList.setSize(0);
+        Vector objectList = new Vector();
+        objectList.setSize(0);
         for (obj_id defender : defenders) {
             if (isPlayer(defender)) {
-                playerList.add(defenders);
+                utils.addElement(playerList, defender);
             } else {
-                objectList.add(defenders);
+                utils.addElement(objectList, defender);
             }
         }
-        if (playerList.size() + objectList.size() == defenders.length)
+        if ((playerList.size() + objectList.size()) == defenders.length)
         {
             obj_id[] tempPlayerList = new obj_id[0];
             if (playerList != null)
@@ -2625,7 +2633,8 @@ public class combat_base extends script.base_script
     }
     public obj_id[] validateDefenders(obj_id attacker, obj_id target, obj_id[] defenders, obj_id source, int maxDefenders, int validTargetType, boolean isOffensiveAction, obj_id losSourceObj, boolean isHeavyWeapon, boolean isSpecialAttack, boolean ignoreLOS, int pvpOnly, combat_data actionData) throws InterruptedException
     {
-        List validDefenders = new ArrayList<obj_id>();
+        Vector validDefenders = new Vector();
+        validDefenders.setSize(0);
         if (defenders == null || defenders.length == 0)
         {
             obj_id[] _validDefenders = new obj_id[0];
@@ -2653,7 +2662,7 @@ public class combat_base extends script.base_script
                 }
                 if (!isOffensiveAction || pvpCanAttack(pvpAttacker, pvpTarget))
                 {
-                    validDefenders.add(target);
+                    validDefenders = utils.addElement(validDefenders, target);
                 }
             }
             else 
@@ -2753,7 +2762,7 @@ public class combat_base extends script.base_script
                 continue;
             }
             combat.combatLog(attacker, defender, "validateDefenders", "Valid Target - Adding Defender: " + defender);
-            validDefenders.add(defenders);
+            validDefenders = utils.addElement(validDefenders, defender);
             if (validDefenders.size() == maxDefenders) {
                 break;
             }

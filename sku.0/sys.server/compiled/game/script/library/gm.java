@@ -6,6 +6,9 @@ import java.util.*;
 
 public class gm extends script.base_script
 {
+    public gm()
+    {
+    }
     public static final String SCRIPT_CMD = "gm.cmd";
     public static final String SCRIPT_HANDLER = "gm.handler";
     public static final String KEYWORD_SELF = "-self";
@@ -241,8 +244,8 @@ public class gm extends script.base_script
         {
             String key = (String)keys.nextElement();
             int val = palColData.getInt(key);
-            entries.add(key + " (value: " + val + ")");
-            dta.add(key);
+            entries = utils.addElement(entries, key + " (value: " + val + ")");
+            dta = utils.addElement(dta, key);
         }
         if (entries != null && entries.size() > 0)
         {
@@ -310,11 +313,11 @@ public class gm extends script.base_script
         Vector entries = new Vector();
         entries.setSize(0);
         int cash = getCashBalance(target);
-        entries.add("Cash: " + cash);
+        entries = utils.addElement(entries, "Cash: " + cash);
         int bank = getBankBalance(target);
-        entries.add("Bank: " + bank);
+        entries = utils.addElement(entries, "Bank: " + bank);
         int total = getTotalMoney(target);
-        entries.add("Total: " + total);
+        entries = utils.addElement(entries, "Total: " + total);
         if (entries != null && entries.size() > 0)
         {
             int pid = sui.listbox(player, prompt, title, entries, "cleanupMoneyStatus");
@@ -443,24 +446,24 @@ public class gm extends script.base_script
         {
             factionName = factions.getFactionNameByHashCode(pvpGetAlignedFaction(target));
         }
-        entries.add("FACTION: " + factionName);
-        entries.add("DECLARED?: " + factions.isDeclared(target));
+        entries = utils.addElement(entries, "FACTION: " + factionName);
+        entries = utils.addElement(entries, "DECLARED?: " + factions.isDeclared(target));
         if (isPlayer(target))
         {
-            entries.add("RANK: " + pvpGetCurrentGcwRank(target));
+            entries = utils.addElement(entries, "RANK: " + pvpGetCurrentGcwRank(target));
         }
         String[] enemyFlags = pvpGetEnemyFlags(target);
         if (enemyFlags == null || enemyFlags.length == 0)
         {
-            entries.add("ENEMY FLAGS: none");
+            entries = utils.addElement(entries, "ENEMY FLAGS: none");
         }
         else 
         {
-            entries.add("ENEMY FLAGS:");
+            entries = utils.addElement(entries, "ENEMY FLAGS:");
             for (String enemyFlag : enemyFlags) {
                 String[] efData = split(enemyFlag, ' ');
                 String efaction = factions.getFactionNameByHashCode(utils.stringToInt(efData[1]));
-                entries.add(" - id:" + efData[0] + " f:" + efaction + " expires: " + efData[2]);
+                entries = utils.addElement(entries, " - id:" + efData[0] + " f:" + efaction + " expires: " + efData[2]);
             }
         }
         boolean hasStandings = false;
@@ -472,13 +475,13 @@ public class gm extends script.base_script
                 int numItems = ovl.getNumItems();
                 if (numItems > 0)
                 {
-                    entries.add("FACTION STANDINGS:");
+                    entries = utils.addElement(entries, "FACTION STANDINGS:");
                     for (int i = 0; i < numItems; i++)
                     {
                         obj_var ov = ovl.getObjVar(i);
                         String fname = ov.getName();
                         float val = ov.getFloatData();
-                        entries.add(" - " + fname + ": " + val);
+                        entries = utils.addElement(entries, " - " + fname + ": " + val);
                         hasStandings = true;
                     }
                 }
@@ -486,7 +489,7 @@ public class gm extends script.base_script
         }
         if (!hasStandings)
         {
-            entries.add("FACTION STANDINGS: none");
+            entries = utils.addElement(entries, "FACTION STANDINGS: none");
         }
         int pid = sui.listbox(player, player, prompt, sui.OK_ONLY, title, entries, "cleanupShowFaction");
         if (pid > -1)
@@ -531,7 +534,7 @@ public class gm extends script.base_script
             {
                 stateEntry += "* OFF *";
             }
-            stateList.add(stateEntry);
+            stateList = utils.addElement(stateList, stateEntry);
         }
         String[] _stateList = new String[0];
         if (stateList != null)

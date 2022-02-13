@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
+    public mediator()
+    {
+    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiPrisonBreak Mediator";
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
@@ -143,36 +146,36 @@ public class mediator extends script.poi.base.scenario_actor
             case CONV_NOHELP:
             case CONV_MAYBEHELP:
             msg = new string_id(convo, "m_greet");
-            responses.add(new string_id(convo, "r_m_greet_whatprisoners"));
+            responses = utils.addElement(responses, new string_id(convo, "r_m_greet_whatprisoners"));
             npcStartConversation(speaker, self, convo, msg, responses);
             break;
             case CONV_TALKMEDIATOR:
             msg = new string_id(convo, "m_busy");
-            responses.add(new string_id(convo, "r_anywork"));
+            responses = utils.addElement(responses, new string_id(convo, "r_anywork"));
             npcStartConversation(speaker, self, convo, msg, responses);
             break;
             case CONV_CHECKGUARD:
             msg = new string_id(convo, "m_didyoucheck");
-            responses.add(new string_id(convo, "r_noillcheck"));
+            responses = utils.addElement(responses, new string_id(convo, "r_noillcheck"));
             npcStartConversation(speaker, self, convo, msg, responses);
             break;
             case CONV_GUARDPEEING:
             case CONV_GUARDHOLDINGIT:
             msg = new string_id(convo, "m_didyoucheck");
-            responses.add(new string_id(convo, "r_hesdoingfine"));
+            responses = utils.addElement(responses, new string_id(convo, "r_hesdoingfine"));
             if (progress == CONV_GUARDPEEING)
             {
-                responses.add(new string_id(convo, "r_hesonbreak"));
+                responses = utils.addElement(responses, new string_id(convo, "r_hesonbreak"));
             }
             else if (progress == CONV_GUARDHOLDINGIT)
             {
-                responses.add(new string_id(convo, "r_heneedsabreak"));
+                responses = utils.addElement(responses, new string_id(convo, "r_heneedsabreak"));
             }
             npcStartConversation(speaker, self, convo, msg, responses);
             break;
             case CONV_YESHELP:
             msg = new string_id(convo, "m_busy");
-            responses.add(new string_id(convo, "r_prisonersplanning"));
+            responses = utils.addElement(responses, new string_id(convo, "r_prisonersplanning"));
             npcStartConversation(speaker, self, convo, msg, responses);
             break;
             default:
@@ -205,14 +208,14 @@ public class mediator extends script.poi.base.scenario_actor
             case CONV_CHECKGUARD:
             idx = rand(1, 4);
             msg = new string_id(convo, "m_minion_guard_" + idx);
-            responses.add(new string_id(convo, "r_toldtocheckyou"));
+            responses = utils.addElement(responses, new string_id(convo, "r_toldtocheckyou"));
             npcStartConversation(speaker, self, convo, msg, responses);
             break;
             case CONV_YESHELP:
             case CONV_SABOTAGEPLAN:
             idx = rand(1, 4);
             msg = new string_id(convo, "m_minion_guard_" + idx);
-            responses.add(new string_id(convo, "r_whatshappening"));
+            responses = utils.addElement(responses, new string_id(convo, "r_whatshappening"));
             npcStartConversation(speaker, self, convo, msg, responses);
             break;
             default:
@@ -307,13 +310,13 @@ public class mediator extends script.poi.base.scenario_actor
             switch (aId) {
                 case "r_toldtocheckyou":
                     npcSpeak(speaker, new string_id(convo, "m_guard_allsquiet"));
-                    responses.add(new string_id(convo, "r_gotellmaster"));
+                    responses = utils.addElement(responses, new string_id(convo, "r_gotellmaster"));
                     npcSetConversationResponses(speaker, responses);
                     break;
                 case "r_gotellmaster":
                     npcSpeak(speaker, new string_id(convo, "m_guard_needtopee"));
-                    responses.add(new string_id(convo, "r_pee_goodidea"));
-                    responses.add(new string_id(convo, "r_pee_badidea"));
+                    responses = utils.addElement(responses, new string_id(convo, "r_pee_goodidea"));
+                    responses = utils.addElement(responses, new string_id(convo, "r_pee_badidea"));
                     npcSetConversationResponses(speaker, responses);
                     break;
                 case "r_pee_goodidea":
@@ -334,8 +337,8 @@ public class mediator extends script.poi.base.scenario_actor
                     break;
                 case "r_whatshappening":
                     npcSpeak(speaker, new string_id(convo, "m_guard_needtopee"));
-                    responses.add(new string_id(convo, "r_pee_goodidea"));
-                    responses.add(new string_id(convo, "r_pee_badidea"));
+                    responses = utils.addElement(responses, new string_id(convo, "r_pee_goodidea"));
+                    responses = utils.addElement(responses, new string_id(convo, "r_pee_badidea"));
                     npcSetConversationResponses(speaker, responses);
                     break;
             }
@@ -346,20 +349,20 @@ public class mediator extends script.poi.base.scenario_actor
                 case "r_m_greet_whatprisoners":
                     scenario.setPlayerProgress(speaker, CONV_TALKMEDIATOR);
                     npcSpeak(speaker, new string_id(convo, "m_tellprisoners"));
-                    responses.add(new string_id(convo, "r_tp_whynotkillthem"));
-                    responses.add(new string_id(convo, "r_tp_bettermovethem"));
+                    responses = utils.addElement(responses, new string_id(convo, "r_tp_whynotkillthem"));
+                    responses = utils.addElement(responses, new string_id(convo, "r_tp_bettermovethem"));
                     npcSetConversationResponses(speaker, responses);
                     break;
                 case "r_tp_whynotkillthem":
                     npcSpeak(speaker, new string_id(convo, "m_nokillthem"));
                     scenario.setPlayerProgress(speaker, CONV_TALKMEDIATOR);
-                    responses.add(new string_id(convo, "r_anywork"));
+                    responses = utils.addElement(responses, new string_id(convo, "r_anywork"));
                     npcSetConversationResponses(speaker, responses);
                     break;
                 case "r_tp_bettermovethem":
                     npcSpeak(speaker, new string_id(convo, "m_cantmovethem"));
                     scenario.setPlayerProgress(speaker, CONV_TALKMEDIATOR);
-                    responses.add(new string_id(convo, "r_anywork"));
+                    responses = utils.addElement(responses, new string_id(convo, "r_anywork"));
                     npcSetConversationResponses(speaker, responses);
                     break;
                 case "r_anywork":
@@ -381,13 +384,13 @@ public class mediator extends script.poi.base.scenario_actor
                 case "r_prisonersplanning":
                     npcSpeak(speaker, new string_id(convo, "m_whatbreakout"));
                     scenario.setPlayerProgress(speaker, CONV_TALKMEDIATOR);
-                    responses.add(new string_id(convo, "r_prisonershavebomb"));
+                    responses = utils.addElement(responses, new string_id(convo, "r_prisonershavebomb"));
                     npcSetConversationResponses(speaker, responses);
                     break;
                 case "r_prisonershavebomb":
                     npcSpeak(speaker, new string_id(convo, "m_abomb"));
                     scenario.setPlayerProgress(speaker, CONV_TALKMEDIATOR);
-                    responses.add(new string_id(convo, "r_distractanyway"));
+                    responses = utils.addElement(responses, new string_id(convo, "r_distractanyway"));
                     npcSetConversationResponses(speaker, responses);
                     break;
                 case "r_distractanyway":

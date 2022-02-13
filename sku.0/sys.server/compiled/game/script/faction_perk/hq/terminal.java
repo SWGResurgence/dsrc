@@ -8,6 +8,9 @@ import java.util.Vector;
 
 public class terminal extends script.terminal.base.base_terminal
 {
+    public terminal()
+    {
+    }
     private static final string_id MNU_DONATE = new string_id("hq", "mnu_donate");
     private static final string_id MNU_DONATE_MONEY = new string_id("hq", "mnu_donate_money");
     public static final string_id MNU_DONATE_RESOURCE = new string_id("hq", "mnu_donate_resource");
@@ -924,7 +927,7 @@ public class terminal extends script.terminal.base.base_terminal
         entries.setSize(0);
         for (obj_id crate : crates) {
             if (isIdValid(crate)) {
-                entries.add(getString(getNameStringId(crate)) + " [" + getResourceContainerQuantity(crate) + "]");
+                entries = utils.addElement(entries, getString(getNameStringId(crate)) + " [" + getResourceContainerQuantity(crate) + "]");
             }
         }
         String title = utils.packStringId(new string_id(STRING_FILE_LOC, "terminal_response20"));
@@ -980,8 +983,8 @@ public class terminal extends script.terminal.base.base_terminal
                     LOG("hq", " //***// showDeedDonationUI ... deed item# " + i + " has 'perkDeedType' objvar  of: " + deedType);
                     if (utils.getElementPositionInArray(ACCEPTED_DEED_TYPES, deedType) > -1)
                     {
-                        opt.add(deed);
-                        entries.add(getEncodedName(deed));
+                        opt = utils.addElement(opt, deed);
+                        entries = utils.addElement(entries, getEncodedName(deed));
                     }
                 }
             }
@@ -1039,8 +1042,8 @@ public class terminal extends script.terminal.base.base_terminal
         {
             ov = ovl.getObjVar(i);
             ovName = ov.getName();
-            entries.add(toUpper(ovName));
-            opt.add(obj_id.NULL_ID);
+            entries = utils.addElement(entries, toUpper(ovName));
+            opt = utils.addElement(opt, obj_id.NULL_ID);
             data = ov.getObjIdArrayData();
             if (data != null && data.length > 0)
             {
@@ -1051,18 +1054,18 @@ public class terminal extends script.terminal.base.base_terminal
                         int max_hp = getMaxHitpoints(aData);
                         int cur_hp = getHitpoints(aData);
                         if (hasScript(aData, "faction_perk.minefield.advanced_minefield")) {
-                            entries.add("- " + hq.getTotalMines(structure) + "/" + hq.getMaxMines(structure) + " mines");
+                            entries = utils.addElement(entries, "- " + hq.getTotalMines(structure) + "/" + hq.getMaxMines(structure) + " mines");
                         } else {
-                            entries.add("- " + sName + " [" + cur_hp + "/" + max_hp + "]");
+                            entries = utils.addElement(entries, "- " + sName + " [" + cur_hp + "/" + max_hp + "]");
                         }
-                        opt.add(aData);
+                        opt = utils.addElement(opt, aData);
                         validCount++;
                     }
                 }
                 if (validCount == 0)
                 {
-                    entries.add("- none");
-                    opt.add(obj_id.NULL_ID);
+                    entries = utils.addElement(entries, "- none");
+                    opt = utils.addElement(opt, obj_id.NULL_ID);
                 }
             }
         }

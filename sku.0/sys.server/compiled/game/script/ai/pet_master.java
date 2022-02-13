@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class pet_master extends script.base_script
 {
+    public pet_master()
+    {
+    }
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String STF_FILE = "pet/droid_modules";
     public static final string_id SID_SYS_EMBOLDEN = new string_id("pet/pet_menu", "sys_embolden");
@@ -179,7 +182,7 @@ public class pet_master extends script.base_script
         }
         dictionary abilityData = dataTableGetRow(pet_lib.PET_ABILITY_TABLE, row);
         String prereq = abilityData.getString("prereq");
-        if (prereq == null || prereq.isEmpty())
+        if (prereq == null || prereq.equals(""))
         {
             return true;
         }
@@ -213,10 +216,10 @@ public class pet_master extends script.base_script
             {
                 break;
             }
-            prereqList.add(prereqCrc);
+            prereqList = utils.addElement(prereqList, prereqCrc);
             abilityData = dataTableGetRow(pet_lib.PET_ABILITY_TABLE, row);
             prereq = abilityData.getString("prereq");
-            if (prereq == null || prereq.isEmpty())
+            if (prereq == null || prereq.equals(""))
             {
                 break;
             }

@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class newbie_medicine extends script.base_script
 {
+    public newbie_medicine()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, consumable.VAR_CONSUMABLE_BASE))
@@ -43,7 +46,7 @@ public class newbie_medicine extends script.base_script
             for (int i = 0; i < 3; i++)
             {
                 tmp = utils.createHealDamageAttribMod(i * 3, 50);
-                am.add(tmp);
+                am = utils.addElement(am, tmp);
             }
         }
         else 
@@ -56,7 +59,7 @@ public class newbie_medicine extends script.base_script
             }
             attrib_mod tmp = new attrib_mod(0, 0, 0.0f, 0.0f, 0.0f);
             tmp = utils.createHealWoundAttribMod(attrib_type, 10);
-            am.add(tmp);
+            am = utils.addElement(am, tmp);
         }
         setObjVar(self, consumable.VAR_CONSUMABLE_MODS, am);
         setObjVar(self, consumable.VAR_CONSUMABLE_MEDICINE, true);

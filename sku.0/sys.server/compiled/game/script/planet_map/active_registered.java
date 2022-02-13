@@ -7,10 +7,12 @@ import script.obj_id;
 import script.string_id;
 
 import java.util.Vector;
-import java.util.List;
 
 public class active_registered extends script.base_script
 {
+    public active_registered()
+    {
+    }
     public static final string_id SID_LOCATION_REGISTRATION_CANCELLED = new string_id("travel", "location_registration_cancelled");
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
@@ -45,13 +47,13 @@ public class active_registered extends script.base_script
         {
             return;
         }
-        List registrants = utils.getResizeableObjIdBatchScriptVar(self, "registrants");
+        Vector registrants = utils.getResizeableObjIdBatchScriptVar(self, "registrants");
         if (registrants != null && registrants.size() > 0)
         {
             int idx = utils.getElementPositionInArray(registrants, item);
             if (idx > -1)
             {
-                registrants.remove(idx);
+                registrants = utils.removeElementAt(registrants, idx);
                 if (registrants == null || registrants.size() == 0)
                 {
                     utils.removeBatchScriptVar(self, "registrants");

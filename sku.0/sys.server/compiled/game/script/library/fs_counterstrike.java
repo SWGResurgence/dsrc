@@ -5,11 +5,13 @@ import script.location;
 import script.obj_id;
 import script.string_id;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class fs_counterstrike extends script.base_script
 {
+    public fs_counterstrike()
+    {
+    }
     public static final String MOUSE_DROID_NAME_ID = "name_mdroid_";
     public static final String SHIELD_TR_VOLUME = "fs_camp.tr_volume";
     public static final String CAMP_DOOR_TEMPLATE = "object/installation/battlefield/destructible/bfield_base_gate_impl.iff";
@@ -236,11 +238,11 @@ public class fs_counterstrike extends script.base_script
         }
         return percentDecay;
     }
-    public static List getAllCampHintsFromDT() throws InterruptedException
+    public static Vector getAllCampHintsFromDT() throws InterruptedException
     {
         int numRows = dataTableGetNumRows(DT_TABLE_NAME);
-        List locs = new ArrayList<location>();
-        List names = new ArrayList<String>();
+        Vector locs = new Vector();
+        Vector names = new Vector();
         dictionary curRow = null;
         location loc = null;
         for (int i = 0; i < numRows; i++)
@@ -255,7 +257,7 @@ public class fs_counterstrike extends script.base_script
             loc = new location(curRow.getFloat("locs_x"), curRow.getFloat("locs_y"), curRow.getFloat("locs_z"));
             locs.add(loc);
         }
-        List rslt = new ArrayList<List>();
+        Vector rslt = new Vector();
         rslt.add(locs);
         rslt.add(names);
         return rslt;
@@ -277,8 +279,8 @@ public class fs_counterstrike extends script.base_script
     public static void pickAndWriteCycleNamesAndLocs(obj_id villageMaster) throws InterruptedException
     {
         trace.log(fs_dyn_village.LOG_CHAN, "Updating location hints and names used for this cycle.");
-        List phaseNames = new ArrayList<String>();
-        List phaseLocs = new ArrayList<location>();
+        Vector phaseNames = new Vector();
+        Vector phaseLocs = new Vector();
         if (hasObjVar(villageMaster, OBJVAR_PHASE_CAMP_NAMES))
         {
             phaseNames = getResizeableStringArrayObjVar(villageMaster, OBJVAR_PHASE_CAMP_NAMES);
@@ -295,17 +297,17 @@ public class fs_counterstrike extends script.base_script
         int maxCamps = getMaxCampsPerCycle();
         while (phaseNames.size() > maxCamps)
         {
-            phaseNames.remove(0);
-            phaseLocs.remove(0);
+            phaseNames.removeElementAt(0);
+            phaseLocs.removeElementAt(0);
         }
-        List campsDat = getAllCampHintsFromDT();
+        Vector campsDat = getAllCampHintsFromDT();
         if (campsDat.size() != 2)
         {
             trace.log(fs_dyn_village.LOG_CHAN, "fs_counterstrike::pickAndWriteCycleNamesAndLocs: -> getAllCampHints returned badly structured data. Camps not determine camp info for this cycle.", null, trace.TL_ERROR_LOG);
             return;
         }
-        List locs = (ArrayList)campsDat.get(0);
-        List names = (ArrayList)campsDat.get(1);
+        Vector locs = (Vector)campsDat.get(0);
+        Vector names = (Vector)campsDat.get(1);
         trace.log(fs_dyn_village.LOG_CHAN, "DT has " + locs.size() + " locs and " + names.size() + " names.");
         int idx = -1;
         for (int i = 0; i < phaseNames.size(); i++)
@@ -313,12 +315,12 @@ public class fs_counterstrike extends script.base_script
             idx = names.indexOf(phaseNames.get(i));
             if (idx > -1)
             {
-                names.remove(idx);
+                names.removeElementAt(idx);
             }
             idx = locs.indexOf(phaseLocs.get(i));
             if (idx > -1)
             {
-                locs.remove(idx);
+                locs.removeElementAt(idx);
             }
         }
         for (int x = 0; phaseNames.size() < maxCamps && names.size() > 0; x++)
@@ -326,12 +328,12 @@ public class fs_counterstrike extends script.base_script
             idx = rand(0, locs.size() - 1);
             phaseLocs.add(locs.get(idx));
             trace.log(fs_dyn_village.LOG_CHAN, "Camp LOC " + phaseLocs.size() + " for this cycle is " + (locs.get(idx)).toString());
-            locs.remove(idx);
+            locs.removeElementAt(idx);
             reseed(getGameTime() + idx + 222);
             idx = rand(0, names.size() - 1);
             phaseNames.add(names.get(idx));
             trace.log(fs_dyn_village.LOG_CHAN, "Camp NAME " + phaseNames.size() + " for this cycle is " + (names.get(idx)).toString());
-            names.remove(idx);
+            names.removeElementAt(idx);
             reseed(getGameTime() + idx + 777);
         }
         trace.log(fs_dyn_village.LOG_CHAN, "_picknames: phaseNames.size()=" + phaseNames.size() + ", phaseLocs.size()=" + phaseLocs.size());
@@ -349,8 +351,8 @@ public class fs_counterstrike extends script.base_script
     public static void _createEnemyCamps(obj_id villageMaster) throws InterruptedException
     {
         trace.log(fs_dyn_village.LOG_CHAN, "Creating Enemy Camps from hint data.");
-        List phaseLocs = new ArrayList<location>();
-        List phaseNames = new ArrayList<String>();
+        Vector phaseLocs = new Vector();
+        Vector phaseNames = new Vector();
         if (hasObjVar(villageMaster, OBJVAR_PHASE_CAMP_NAMES))
         {
             phaseNames = getResizeableStringArrayObjVar(villageMaster, OBJVAR_PHASE_CAMP_NAMES);
@@ -385,7 +387,7 @@ public class fs_counterstrike extends script.base_script
             trace.log(fs_dyn_village.LOG_CHAN, "fs_counterstrike::setLocForCamp: -> villageMaster is invalid or doesn't exist. location not set for campId " + campId + ".", villageMaster, trace.TL_ERROR_LOG);
             return rslt;
         }
-        List names = new ArrayList<String>();
+        Vector names = new Vector();
         if (hasObjVar(villageMaster, OBJVAR_PHASE_CAMP_NAMES))
         {
             names = getResizeableStringArrayObjVar(villageMaster, OBJVAR_PHASE_CAMP_NAMES);
@@ -910,7 +912,7 @@ public class fs_counterstrike extends script.base_script
     public static void spawnSurveillanceDroids(obj_id campMaster) throws InterruptedException
     {
         location here = getLocation(campMaster);
-        List existingDroids = new ArrayList<obj_id>();
+        Vector existingDroids = new Vector();
         if (hasObjVar(campMaster, OBJVAR_CAMP_DROIDS))
         {
             existingDroids = utils.getResizeableObjIdBatchObjVar(campMaster, OBJVAR_CAMP_DROIDS);
@@ -918,7 +920,7 @@ public class fs_counterstrike extends script.base_script
         for (Object existingDroid : existingDroids) {
             messageTo((obj_id) existingDroid, "msgSilentSelfDestruct", null, 0.0f, false);
         }
-        List newDroids = new ArrayList<obj_id>();
+        Vector newDroids = new Vector();
         obj_id curDroid = null;
         for (int i = 0; i < MAX_DROIDS_FOR_CAMP; i++)
         {
@@ -950,7 +952,7 @@ public class fs_counterstrike extends script.base_script
     }
     public static void droidDied(obj_id campMaster, obj_id deadDroid) throws InterruptedException
     {
-        List existingDroids = new ArrayList<obj_id>();
+        Vector existingDroids = new Vector();
         if (hasObjVar(campMaster, OBJVAR_CAMP_DROIDS))
         {
             existingDroids = utils.getResizeableObjIdBatchObjVar(campMaster, OBJVAR_CAMP_DROIDS);
@@ -958,7 +960,7 @@ public class fs_counterstrike extends script.base_script
         int idx = existingDroids.indexOf(deadDroid);
         if (idx > -1)
         {
-            existingDroids.remove(idx);
+            existingDroids.removeElementAt(idx);
         }
         obj_id newDroid = _createSingleDroid(campMaster, getLocation(campMaster));
         if (isIdValid(newDroid))
@@ -966,6 +968,7 @@ public class fs_counterstrike extends script.base_script
             existingDroids.add(newDroid);
         }
         utils.setResizeableBatchObjVar(campMaster, OBJVAR_CAMP_DROIDS, existingDroids);
+        return;
     }
     public static void registerCampObjIds(obj_id campMaster) throws InterruptedException
     {
@@ -1034,6 +1037,7 @@ public class fs_counterstrike extends script.base_script
                     break;
             }
         }
+        return;
     }
     public static void setupCamp(obj_id campMaster, boolean registerLocs) throws InterruptedException
     {
@@ -1052,6 +1056,7 @@ public class fs_counterstrike extends script.base_script
         }
         erectShield();
         spawnSurveillanceDroids(campMaster);
+        return;
     }
     public static obj_id getMyOutpostId(obj_id outpostObject) throws InterruptedException
     {

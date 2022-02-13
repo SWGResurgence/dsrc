@@ -6,8 +6,13 @@ import script.library.prose;
 import script.library.sui;
 import script.library.utils;
 
+import java.util.Vector;
+
 public class city_vote extends script.terminal.base.base_terminal
 {
+    public city_vote()
+    {
+    }
     public static final string_id SID_MAYORAL_RACE = new string_id("city/city", "mayoral_race");
     public static final string_id SID_MAYORAL_STANDINGS = new string_id("city/city", "mayoral_standings");
     public static final string_id SID_MAYORAL_VOTE = new string_id("city/city", "mayoral_vote");
@@ -182,8 +187,8 @@ public class city_vote extends script.terminal.base.base_terminal
                 }
             }
             if (found == 0) {
-                vote_ids.add(vote);
-                vote_counts.add(1);
+                utils.addElement(vote_ids, vote);
+                utils.addElement(vote_counts, 1);
             }
         }
         cleanCandidates(self, player);

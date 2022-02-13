@@ -6,10 +6,13 @@ import script.library.utils;
 import script.obj_id;
 import script.string_id;
 
-import java.util.List;
+import java.util.Vector;
 
 public class spacestation extends script.base_script
 {
+    public spacestation()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         requestPreloadCompleteTrigger(self);
@@ -47,17 +50,17 @@ public class spacestation extends script.base_script
     public void registerStationWithManager(obj_id objManager, obj_id objStation) throws InterruptedException
     {
         LOG("space", "Registering with " + objManager);
-        List objSpaceStations = utils.getResizeableObjIdArrayScriptVar(objManager, "objSpaceStations");
-        if (objSpaceStations == null || objSpaceStations.size() == 0)
+        Vector objSpaceStations = utils.getResizeableObjIdArrayScriptVar(objManager, "objSpaceStations");
+        if ((objSpaceStations == null) || (objSpaceStations.size() == 0))
         {
-            objSpaceStations.add(objStation);
+            objSpaceStations = utils.addElement(objSpaceStations, objStation);
         }
         else 
         {
             int intIndex = utils.getElementPositionInArray(objSpaceStations, objStation);
             if (intIndex < 0)
             {
-                objSpaceStations.add(objStation);
+                objSpaceStations = utils.addElement(objSpaceStations, objStation);
             }
         }
         utils.setScriptVar(objManager, "objSpaceStations", objSpaceStations);

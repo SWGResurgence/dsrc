@@ -4,11 +4,12 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
-import java.util.ArrayList;
-import java.util.List;
 
 public class demoer extends script.base_script
 {
+    public demoer()
+    {
+    }
     public static final String[] MANDALORIAN_ARMOR = 
     {
         "object/tangible/wearables/armor/mandalorian/armor_mandalorian_bracer_l.iff",
@@ -846,12 +847,10 @@ public class demoer extends script.base_script
     public void launch(obj_id player, obj_id ship, obj_id[] membersApprovedByShipOwner, location warpLocation, location groundLoc) throws InterruptedException
     {
         space_transition.clearOvertStatus(ship);
-        List groupMembersToWarp = new ArrayList<obj_id>();
-        groupMembersToWarp.add(player);
-        List groupMemberStartIndex = new ArrayList<Integer>();
-        groupMemberStartIndex.add(0);
+        Vector groupMembersToWarp = utils.addElement(null, player);
+        Vector groupMemberStartIndex = utils.addElement(null, 0);
         utils.setScriptVar(player, "strLaunchPointName", "launching");
-        List shipStartLocations = space_transition.getShipStartLocations(ship);
+        Vector shipStartLocations = space_transition.getShipStartLocations(ship);
         if (shipStartLocations != null && shipStartLocations.size() > 0)
         {
             int startIndex = 0;

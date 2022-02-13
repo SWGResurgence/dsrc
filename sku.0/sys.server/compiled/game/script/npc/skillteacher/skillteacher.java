@@ -4,10 +4,12 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
-import java.util.List;
 
 public class skillteacher extends script.base_script
 {
+    public skillteacher()
+    {
+    }
     public static final String VAR_SKILL_TEMPLATE = "npcSkillTemplate";
     public static final String CONVONAME = "skill_teacher";
     public static final String CONVOFILE = "skill_teacher";
@@ -361,7 +363,7 @@ public class skillteacher extends script.base_script
         }
         else 
         {
-            List opt = utils.concatArrays(null, OPT_DEFAULT);
+            Vector opt = utils.concatArrays(null, OPT_DEFAULT);
             String[] skills = null;
             string_id msg = new string_id(convo, "msg2_1");
             switch (response) {
@@ -403,7 +405,7 @@ public class skillteacher extends script.base_script
                     utils.removeScriptVar(speaker, self.toString());
                     break;
             }
-            if (checkArray && (skills == null || skills.length == 0))
+            if ((checkArray) && ((skills == null) || (skills.length == 0)))
             {
                 msg = new string_id(convo, "error_empty_category");
             }
@@ -414,18 +416,18 @@ public class skillteacher extends script.base_script
             {
                 opt.clear();
                 for (String skill : skills) {
-                    opt.add(new string_id(SKILL_N, skills));
+                    opt = utils.addElement(opt, new string_id(SKILL_N, skill));
                 }
-                opt.add(new string_id(CONVOFILE, "back"));
+                opt = utils.addElement(opt, new string_id(CONVOFILE, "back"));
             }
             npcSpeak(speaker, msg);
-            npcSetConversationResponses(speaker, opt.toArray(new string_id[opt.size()]));
+            npcSetConversationResponses(speaker, opt);
             return SCRIPT_CONTINUE;
         }
     }
     public int attemptedPayment(obj_id self, dictionary params) throws InterruptedException
     {
-        if (params == null || params.isEmpty())
+        if ((params == null) || (params.isEmpty()))
         {
             return SCRIPT_CONTINUE;
         }
@@ -435,7 +437,7 @@ public class skillteacher extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id player = params.getObjId(money.DICT_PLAYER_ID);
-        if (!isIdValid(player) || !isPlayer(player))
+        if (!isIdValid(player) || (!isPlayer(player)))
         {
             return SCRIPT_CONTINUE;
         }
@@ -504,24 +506,24 @@ public class skillteacher extends script.base_script
         }
         Vector ret = new Vector();
         ret.setSize(0);
-        ret.add("REQUIRED SKILLS");
+        ret = utils.addElement(ret, "REQUIRED SKILLS");
         String[] skillReqs = getSkillPrerequisiteSkills(skillName);
         if (skillReqs == null)
         {
-            ret.add(" none");
+            ret = utils.addElement(ret, " none");
         }
         else 
         {
             for (String skillReq : skillReqs) {
                 String sName = getString(new string_id("skl_n", skillReq));
-                ret.add(" " + sName);
+                ret = utils.addElement(ret, " " + sName);
             }
         }
-        ret.add("XP COSTS");
+        ret = utils.addElement(ret, "XP COSTS");
         dictionary xpReqs = getSkillPrerequisiteExperience(skillName);
         if ((xpReqs == null) || (xpReqs.isEmpty()))
         {
-            ret.add(" none");
+            ret = utils.addElement(ret, " none");
         }
         else 
         {
@@ -530,7 +532,7 @@ public class skillteacher extends script.base_script
             {
                 String xpType = (String)xp.nextElement();
                 String sXp = getString(new string_id("exp_n", xpType));
-                ret.add(" " + sXp + " = " + xpReqs.getInt(xpType));
+                ret = utils.addElement(ret, " " + sXp + " = " + xpReqs.getInt(xpType));
             }
         }
         String[] _ret = new String[0];
@@ -578,7 +580,7 @@ public class skillteacher extends script.base_script
                 Vector entries = new Vector();
                 entries.setSize(0);
                 for (String lowSkill : lowSkills) {
-                    entries.add("@skl_n:" + lowSkills);
+                    entries = utils.addElement(entries, "@skl_n:" + lowSkill);
                 }
                 if (entries != null && entries.size() > 0)
                 {

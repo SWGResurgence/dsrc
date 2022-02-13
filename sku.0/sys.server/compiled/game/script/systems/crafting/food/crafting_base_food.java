@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class crafting_base_food extends script.systems.crafting.crafting_base
 {
+    public crafting_base_food()
+    {
+    }
     public static final String VERSION = "v1.00.00";
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
@@ -111,27 +114,27 @@ public class crafting_base_food extends script.systems.crafting.crafting_base
         }
         Vector am = new Vector();
         am.setSize(0);
-        if (health_e != 0 && health_dur != 0)
+        if ((health_e != 0) && (health_dur != 0))
         {
             attrib_mod new_am = new attrib_mod(HEALTH, health_e, health_dur, 0.0f, 0.0f);
-            am.add(new_am);
+            am = utils.addElement(am, new_am);
         }
-        if (con_e != 0 && con_dur != 0)
+        if ((con_e != 0) && (con_dur != 0))
         {
             attrib_mod new_am = new attrib_mod(CONSTITUTION, con_e, con_dur, 0.0f, 0.0f);
-            am.add(new_am);
+            am = utils.addElement(am, new_am);
         }
-        if (action_e != 0 && action_dur != 0)
+        if ((action_e != 0) && (action_dur != 0))
         {
             attrib_mod new_am = new attrib_mod(ACTION, action_e, action_dur, 0.0f, 0.0f);
-            am.add(new_am);
+            am = utils.addElement(am, new_am);
         }
-        if (stam_e != 0 && stam_dur != 0)
+        if ((stam_e != 0) && (stam_dur != 0))
         {
             attrib_mod new_am = new attrib_mod(STAMINA, stam_e, stam_dur, 0.0f, 0.0f);
-            am.add(new_am);
+            am = utils.addElement(am, new_am);
         }
-        if (am != null && am.size() > 0)
+        if ((am != null) && (am.size() > 0))
         {
             setObjVar(prototype, consumable.VAR_CONSUMABLE_MODS, am);
         }

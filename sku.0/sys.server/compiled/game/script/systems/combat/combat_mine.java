@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class combat_mine extends script.base_script
 {
+    public combat_mine()
+    {
+    }
     public static final String detonateVolName = "landMineDetonationRadius";
     public static final String mineDataTable = "datatables/combat/npc_landmines.iff";
     public static final String flagPlayer = "targetFlag.playerAndPet";
@@ -202,7 +205,7 @@ public class combat_mine extends script.base_script
         for (obj_id object : objects) {
             if (isValidTargetTypeByMineFlag(object)) {
                 if (!isIncapacitated(object) && !isDead(object)) {
-                    targetsInRadius.add(objects, object);
+                    targetsInRadius = utils.addElement(targetsInRadius, object);
                     doLogging("getTargetsInBlastRadius", "Target(" + getName(object) + "/" + object + ") added to targetsInRadius array");
                 }
             }

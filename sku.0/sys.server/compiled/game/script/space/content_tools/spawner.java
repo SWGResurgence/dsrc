@@ -45,7 +45,7 @@ public class spawner extends script.base_script
                         String strName = getStringObjVar(objTestObjects[intJ], "strName");
                         String strTest = strPatrolPoint;
                         if (strName.equals(strTest)) {
-                            trPatrolPoints.add(getTransform_o2w(objTestObjects[intJ]));
+                            trPatrolPoints = utils.addElement(trPatrolPoints, getTransform_o2w(objTestObjects[intJ]));
                             intJ = objTestObjects.length + 10;
                         }
                     }
@@ -723,7 +723,7 @@ public class spawner extends script.base_script
             for (int intI = 0; intI < objPatrolPoints.length; intI++)
             {
                 String strTest = strPatrolPointName + "_" + (intI + 1);
-                strPatrolPoints.add(strTest);
+                strPatrolPoints = utils.addElement(strPatrolPoints, strTest);
                 setObjVar(objPatrolPoints[intI], "strName", strTest);
             }
             if (strPatrolPoints.size() > 0)

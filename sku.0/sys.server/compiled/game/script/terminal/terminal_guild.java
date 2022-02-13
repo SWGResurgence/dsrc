@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class terminal_guild extends script.terminal.base.base_terminal
 {
+    public terminal_guild()
+    {
+    }
     public static final string_id SID_GUILDS_LIST = new string_id("guild", "menu_list_of_guilds");
     public static final string_id SID_GUILD_WAR_LIST = new string_id("guild", "menu_list_of_guild_wars");
     public static final string_id SID_GUILD_WAR_LIST_ACTIVE = new string_id("guild", "menu_list_of_guild_wars_active");
@@ -954,7 +957,7 @@ public class terminal_guild extends script.terminal.base.base_terminal
         validatedIds.setSize(0);
         for (int guildId : guildIds) {
             if (guildGetCountMembersOnly(guildId) > 4) {
-                validatedIds.add(guildIds);
+                utils.addElement(validatedIds, guildId);
             }
         }
         if (validatedIds == null || validatedIds.size() < 1)

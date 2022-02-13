@@ -3,7 +3,7 @@ package script.ai;
 import script.*;
 import script.library.*;
 
-import java.util.List;
+import java.util.Vector;
 
 public class pet extends script.base_script
 {
@@ -22,6 +22,8 @@ public class pet extends script.base_script
     public static final String CAN_BARK = "module.can_bark";
     public static final float BARK_RANGE = 20.0f;
     public static final float BARK_DELAY = 60.0f;
+    public static final int FALSE = 0;
+    public static final int TRUE = 1;
     public static final string_id SID_HELPER_DEFAULT_REMINDER = new string_id(MENU_FILE, "helper_default_reminder");
     public static final string_id SID_MUST_DISMOUNT = new string_id("pet/pet_menu", "must_dismount");
     public static final string_id PCOLOR = new string_id("sui", "set_primary_color");
@@ -847,11 +849,11 @@ public class pet extends script.base_script
             }
             if (!utils.hasScriptVar(self, CAN_BARK))
             {
-                utils.setScriptVar(self, CAN_BARK, 1);
+                utils.setScriptVar(self, CAN_BARK, TRUE);
             }
-            if (utils.getIntScriptVar(self, CAN_BARK) == 1)
+            if (TRUE == utils.getIntScriptVar(self, CAN_BARK))
             {
-                utils.setScriptVar(self, CAN_BARK, 0);
+                utils.setScriptVar(self, CAN_BARK, FALSE);
                 messageTo(self, "msgMerchantBark", null, 1.0f, false);
             }
         }
@@ -1654,7 +1656,7 @@ public class pet extends script.base_script
         }
         obj_id player = sui.getPlayerId(params);
         obj_id pet = utils.getObjIdScriptVar(self, "ai.learnCommand.pet");
-        List commandIndexList = utils.getResizeableIntArrayScriptVar(pet, "ai.learnCommand.commandIndexList");
+        Vector commandIndexList = utils.getResizeableIntArrayScriptVar(pet, "ai.learnCommand.commandIndexList");
         int bp = sui.getIntButtonPressed(params);
         int idx = sui.getListboxSelectedRow(params);
         switch (bp)
@@ -1681,7 +1683,7 @@ public class pet extends script.base_script
     }
     public int handleLearnCommandUpdate(obj_id self, dictionary params) throws InterruptedException
     {
-        if (params == null || params.isEmpty())
+        if ((params == null) || (params.isEmpty()))
         {
             utils.removeScriptVarTree(self, "ai.learnCommand");
             return SCRIPT_CONTINUE;
@@ -1689,7 +1691,7 @@ public class pet extends script.base_script
         obj_id pet = utils.getObjIdScriptVar(self, "ai.learnCommand.pet");
         int pid = utils.getIntScriptVar(self, "ai.learnCommand.pid");
         int idx = sui.getListboxSelectedRow(params);
-        List commandIndexList = utils.getResizeableIntArrayScriptVar(pet, "ai.learnCommand.commandIndexList");
+        Vector commandIndexList = utils.getResizeableIntArrayScriptVar(pet, "ai.learnCommand.commandIndexList");
         if (idx == -1)
         {
             return SCRIPT_CONTINUE;

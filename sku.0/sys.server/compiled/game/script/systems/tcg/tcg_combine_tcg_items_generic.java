@@ -8,6 +8,9 @@ import java.util.Vector;
 
 public class tcg_combine_tcg_items_generic extends script.base_script
 {
+    public tcg_combine_tcg_items_generic()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "combine";
     public static final String OBJVAR_SET_NAME = "tcg.setName";
@@ -119,7 +122,7 @@ public class tcg_combine_tcg_items_generic extends script.base_script
         combinableObjects.setSize(0);
         for (obj_id possibleMatch : allPossibleMatches) {
             if (hasObjVar(possibleMatch, COMBINE) && (getStringObjVar(possibleMatch, COMBINE)).startsWith("true")) {
-                combinableObjects.add(allPossibleMatches);
+                utils.addElement(combinableObjects, possibleMatch);
             }
         }
         blog("combine: getListOfCombinableObjects - List size is " + combinableObjects.size());
@@ -181,7 +184,7 @@ public class tcg_combine_tcg_items_generic extends script.base_script
                     if (getTemplateName(potentialItem).equals(templates[k])) {
                         // user has the item
                         items[k] = true;
-                        toBeCombinedList.add(combinableObjects);
+                        utils.addElement(toBeCombinedList, potentialItem);
                         CustomerServiceLog("tcg", setName + " Combination - Player: " + owner + " " + getPlayerName(owner) + " has object #" + (i + 1) + " (" + potentialItem + ")in inventory");
                         break;
                     }

@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class battlefield_region extends script.base_script
 {
+    public battlefield_region()
+    {
+    }
     public static final string_id SID_BATTLEFIELD_STATUS = new string_id("battlefield", "status");
     public static final string_id SID_GAME_STATUS = new string_id("battlefield", "game_status");
     public static final String VAR_TIME_WARNING_LEVEL = "battlefield.game.time_warning_level";
@@ -443,42 +446,42 @@ public class battlefield_region extends script.base_script
         dsrc.setSize(0);
         if (!hasObjVar(self, battlefield.VAR_STAT_ROOT))
         {
-            dsrc.add("No previous battle data available.");
+            dsrc = utils.addElement(dsrc, "No previous battle data available.");
         }
         else 
         {
             String type = getStringObjVar(self, battlefield.VAR_STAT_TYPE);
             if (type == null)
             {
-                dsrc.add("No previous battle data available.");
+                dsrc = utils.addElement(dsrc, "No previous battle data available.");
             }
             else if (type.equals("Destroy"))
             {
                 int total_time = getIntObjVar(self, battlefield.VAR_STAT_TIME);
                 int[] convert_time = player_structure.convertSecondsTime(total_time);
                 String time_str = player_structure.assembleTimeRemaining(convert_time);
-                dsrc.add("Total Time: " + time_str);
+                dsrc = utils.addElement(dsrc, "Total Time: " + time_str);
                 String winner = getStringObjVar(self, battlefield.VAR_STAT_WINNER);
                 if (winner != null && !winner.equals("NONE"))
                 {
-                    dsrc.add("Winning Faction: " + winner);
+                    dsrc = utils.addElement(dsrc, "Winning Faction: " + winner);
                 }
                 else 
                 {
-                    dsrc.add("Winning Faction: None");
+                    dsrc = utils.addElement(dsrc, "Winning Faction: None");
                 }
                 obj_id[] participants = battlefield.getParticipantsOnBattlefield(self);
-                dsrc.add("Number of Participants: " + participants.length);
-                dsrc.add("Kills/Deaths");
+                dsrc = utils.addElement(dsrc, "Number of Participants: " + participants.length);
+                dsrc = utils.addElement(dsrc, "Kills/Deaths");
                 String[] factions_allowed = battlefield.getAllFactionsAllowed(self);
                 if (factions_allowed != null)
                 {
                     for (String s : factions_allowed) {
-                        dsrc.add("   " + factions_allowed, "   " + s);
+                        dsrc = utils.addElement(dsrc, "   " + s);
                         int kills = getIntObjVar(self, battlefield.VAR_STAT_KILLS + s);
                         int deaths = getIntObjVar(self, battlefield.VAR_STAT_DEATHS + s);
-                        dsrc.add("      " + "Kills: " + kills);
-                        dsrc.add("      " + "Deaths: " + deaths);
+                        dsrc = utils.addElement(dsrc, "      " + "Kills: " + kills);
+                        dsrc = utils.addElement(dsrc, "      " + "Deaths: " + deaths);
                     }
                 }
             }
@@ -487,35 +490,35 @@ public class battlefield_region extends script.base_script
                 int total_time = getIntObjVar(self, battlefield.VAR_STAT_TIME);
                 int[] convert_time = player_structure.convertSecondsTime(total_time);
                 String time_str = player_structure.assembleTimeRemaining(convert_time);
-                dsrc.add("Total Time: " + time_str);
+                dsrc = utils.addElement(dsrc, "Total Time: " + time_str);
                 String winner = getStringObjVar(self, battlefield.VAR_STAT_WINNER);
                 String[] player_faction = battlefield.getFactionsAllowed(self);
                 if (winner != null && !winner.equals("AI"))
                 {
-                    dsrc.add("Result: " + player_faction[0] + " win");
+                    dsrc = utils.addElement(dsrc, "Result: " + player_faction[0] + " win");
                 }
                 else 
                 {
-                    dsrc.add("Result: " + player_faction[0] + " loss");
+                    dsrc = utils.addElement(dsrc, "Result: " + player_faction[0] + " loss");
                 }
                 obj_id[] participants = battlefield.getParticipantsOnBattlefield(self);
-                dsrc.add("Number of participants: " + participants.length);
-                dsrc.add("Kills/Deaths");
+                dsrc = utils.addElement(dsrc, "Number of participants: " + participants.length);
+                dsrc = utils.addElement(dsrc, "Kills/Deaths");
                 String[] factions_allowed = battlefield.getAllFactionsAllowed(self);
                 if (factions_allowed != null)
                 {
                     for (String s : factions_allowed) {
-                        dsrc.add("   " + factions_allowed, "   " + s);
+                        dsrc = utils.addElement(dsrc, "   " + s);
                         int kills = getIntObjVar(self, battlefield.VAR_STAT_KILLS + s);
                         int deaths = getIntObjVar(self, battlefield.VAR_STAT_DEATHS + s);
-                        dsrc.add("      " + "Kills: " + kills);
-                        dsrc.add("      " + "Deaths: " + deaths);
+                        dsrc = utils.addElement(dsrc, "      " + "Kills: " + kills);
+                        dsrc = utils.addElement(dsrc, "      " + "Deaths: " + deaths);
                     }
                 }
             }
             else 
             {
-                dsrc.add("No previous battle data available.");
+                dsrc = utils.addElement(dsrc, "No previous battle data available.");
             }
         }
         sui.listbox(player, "Previous Battle Statistics", "Objective: Destroy", dsrc);

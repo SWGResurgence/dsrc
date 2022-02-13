@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class imperial_informant extends script.base_script
 {
+    public imperial_informant()
+    {
+    }
     public static final String IMPERIAL_STF = "theme_park/alderaan/act2/imperial_missions";
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -33,9 +36,9 @@ public class imperial_informant extends script.base_script
         {
             openDialog = new string_id(IMPERIAL_STF, "m1_informant");
             string_id response = new string_id(IMPERIAL_STF, "m1_informant_report");
-            dialogResponse.add(response);
+            dialogResponse = utils.addElement(dialogResponse, response);
             response = new string_id(IMPERIAL_STF, "m1_informant_reprimand");
-            dialogResponse.add(response);
+            dialogResponse = utils.addElement(dialogResponse, response);
         }
         else 
         {

@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class simple_kit extends script.base_script
 {
+    public simple_kit()
+    {
+    }
     public static final String STF = "loot_kit";
     public static final string_id INCORRECT_ITEM = new string_id(STF, "incorrect_item");
     public static final string_id ALREADY_CONTAINS = new string_id(STF, "already_contains");
@@ -287,7 +290,7 @@ public class simple_kit extends script.base_script
             return;
         }
         int numItems = needs.size();
-        needs.remove(x);
+        needs = utils.removeElementAt(needs, x);
         if (needs.size() > 0)
         {
             setObjVar(self, "needs", needs);
@@ -356,7 +359,7 @@ public class simple_kit extends script.base_script
         for (Object o : overview) {
             String thisItem = ((String) o);
             if (itemTemplate.equals(thisItem) && itemsNeeded.indexOf(thisItem) < 0) {
-                itemsNeeded.add(thisItem);
+                itemsNeeded = utils.addElement(itemsNeeded, thisItem);
             }
         }
         setObjVar(self, "needs", itemsNeeded);

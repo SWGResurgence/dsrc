@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class antagonist extends script.poi.base.scenario_actor
 {
+    public antagonist()
+    {
+    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiPrisonBreak Antagonist";
     public static final int CONV_GREET = 0;
@@ -76,14 +79,14 @@ public class antagonist extends script.poi.base.scenario_actor
         {
             case CONV_GREET:
             msg = new string_id(convo, "a_greet");
-            responses.add(new string_id(convo, "r_greet_tellstory"));
+            responses = utils.addElement(responses, new string_id(convo, "r_greet_tellstory"));
             npcStartConversation(speaker, self, convo, msg, responses);
             scenario.setPlayerProgress(speaker, CONV_MAYBEHELP);
             break;
             case CONV_MAYBEHELP:
             msg = new string_id(convo, "a_couldusehelp");
-            responses.add(new string_id(convo, "r_couldusehelp_yeshelp"));
-            responses.add(new string_id(convo, "r_couldusehelp_nohelp"));
+            responses = utils.addElement(responses, new string_id(convo, "r_couldusehelp_yeshelp"));
+            responses = utils.addElement(responses, new string_id(convo, "r_couldusehelp_nohelp"));
             npcStartConversation(speaker, self, convo, msg, responses);
             break;
             case CONV_INSULT:
@@ -147,14 +150,14 @@ public class antagonist extends script.poi.base.scenario_actor
         switch (aId) {
             case "r_greet_tellstory":
                 npcSpeak(speaker, new string_id(convo, "a_mystory"));
-                responses.add(new string_id(convo, "r_mystory_howhorrible"));
-                responses.add(new string_id(convo, "r_mystory_looklikefarmers"));
+                responses = utils.addElement(responses, new string_id(convo, "r_mystory_howhorrible"));
+                responses = utils.addElement(responses, new string_id(convo, "r_mystory_looklikefarmers"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_mystory_howhorrible":
                 npcSpeak(speaker, new string_id(convo, "a_couldusehelp_horrible"));
-                responses.add(new string_id(convo, "r_couldusehelp_yeshelp"));
-                responses.add(new string_id(convo, "r_couldusehelp_nohelp"));
+                responses = utils.addElement(responses, new string_id(convo, "r_couldusehelp_yeshelp"));
+                responses = utils.addElement(responses, new string_id(convo, "r_couldusehelp_nohelp"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_mystory_looklikefarmers":

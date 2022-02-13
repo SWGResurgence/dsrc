@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class master extends script.theme_park.poi.base
 {
+    public master()
+    {
+    }
     public static final String SCENARIO_NAME = "family_feud";
     public static final String BASE_PATH = "poi." + SCENARIO_NAME;
     public static final String SCRIPT_MASTER = BASE_PATH + ".master";
@@ -149,7 +152,7 @@ public class master extends script.theme_park.poi.base
         obj_id actor = params.getObjId(scenario.DICT_OBJID);
         String name = params.getString(scenario.DICT_NAME);
         Vector dead = getResizeableStringArrayObjVar(self, scenario.VAR_SCENARIO_DEAD);
-        dead.add(name);
+        dead = utils.addElement(dead, name);
         setObjVar(self, scenario.VAR_SCENARIO_DEAD, dead);
         int cnt = 10;
         obj_id[] victors = new obj_id[0];

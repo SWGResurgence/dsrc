@@ -5,11 +5,13 @@ import script.library.*;
 
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class terminal_city extends script.base_script
 {
+    public terminal_city()
+    {
+    }
     public static final String STF = "city/city";
     public static final string_id SID_CITY_HACKS = new string_id(STF, "city_hacks");
     public static final string_id SID_CITY_FORCE_UPDATE = new string_id(STF, "force_update");
@@ -868,8 +870,10 @@ public class terminal_city extends script.base_script
     }
     public void modifyStructureList(obj_id player, obj_id self, int city_id) throws InterruptedException
     {
-        List list_structures = new ArrayList<obj_id>();
-        List list_strings = new ArrayList<String>();
+        Vector list_structures = new Vector();
+        list_structures.setSize(0);
+        Vector list_strings = new Vector();
+        list_strings.setSize(0);
         obj_id[] structures = cityGetStructureIds(city_id);
         for (obj_id structure : structures) {
             if (city.isMissionTerminal(city_id, structure)) {
@@ -877,22 +881,22 @@ public class terminal_city extends script.base_script
                 String str = "Mission Terminal: ";
                 str += Objects.requireNonNullElse(name, "\\#FF0000Unloaded or Bad Entry\\");
                 str += " (" + structure + ")";
-                list_structures.add(structures);
-                list_strings.add(str);
+                list_structures = utils.addElement(list_structures, structure);
+                list_strings = utils.addElement(list_strings, str);
             } else if (city.isSkillTrainer(city_id, structure)) {
                 String name = localize(getNameStringId(structure));
                 String str = "Skill Trainer: ";
                 str += Objects.requireNonNullElse(name, "\\#FF0000Unloaded or Bad Entry\\");
                 str += " (" + structure + ")";
-                list_structures.add(structures);
-                list_strings.add(str);
+                list_structures = utils.addElement(list_structures, structure);
+                list_strings = utils.addElement(list_strings, str);
             } else if (city.isDecoration(city_id, structure)) {
                 String name = localize(getNameStringId(structure));
                 String str = "Decoration: ";
                 str += Objects.requireNonNullElse(name, "\\#FF0000Unloaded or Bad Entry\\");
                 str += " (" + structure + ")";
-                list_structures.add(structures);
-                list_strings.add(str);
+                list_structures = utils.addElement(list_structures, structure);
+                list_strings = utils.addElement(list_strings, str);
             }
         }
         if (list_strings.size() == 0)
@@ -917,7 +921,7 @@ public class terminal_city extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        List list_strings = utils.getResizeableStringArrayScriptVar(self, "list_strings");
+        Vector list_strings = utils.getResizeableStringArrayScriptVar(self, "list_strings");
         utils.setScriptVar(self, "list_idx", idx);
         string_id destroy_prefix = new string_id(STF, "destroy_prefix");
         string_id destroy_suffix = new string_id(STF, "destroy_suffix");
@@ -936,8 +940,8 @@ public class terminal_city extends script.base_script
         obj_id structure = getTopMostContainer(self);
         int city_id = findCityByCityHall(structure);
         int idx = utils.getIntScriptVar(self, "list_idx");
-        List list_strings = utils.getResizeableStringArrayScriptVar(self, "list_strings");
-        List list_structures = utils.getResizeableObjIdArrayScriptVar(self, "list_structures");
+        Vector list_strings = utils.getResizeableStringArrayScriptVar(self, "list_strings");
+        Vector list_structures = utils.getResizeableObjIdArrayScriptVar(self, "list_structures");
         String name = ((String)list_strings.get(idx));
         messageTo(((obj_id)list_structures.get(idx)), "requestDestroy", null, 0.0f, true);
         cityRemoveStructure(city_id, ((obj_id)list_structures.get(idx)));
@@ -1429,13 +1433,15 @@ public class terminal_city extends script.base_script
             return;
         }
         obj_id[] structures = cityGetStructureIds(city_id);
-        List loadedStructures = new ArrayList<obj_id>();
-        List unloadedStructures = new ArrayList<obj_id>();
+        Vector loadedStructures = new Vector();
+        loadedStructures.setSize(0);
+        Vector unloadedStructures = new Vector();
+        unloadedStructures.setSize(0);
         for (obj_id structure : structures) {
             if (structure.isLoaded()) {
-                loadedStructures.add(structures);
+                utils.addElement(loadedStructures, structure);
             } else {
-                unloadedStructures.add(structures);
+                utils.addElement(unloadedStructures, structure);
             }
         }
         obj_id[] loadedStructuresStaticArray = utils.toStaticObjIdArray(loadedStructures);
@@ -1472,16 +1478,19 @@ public class terminal_city extends script.base_script
                 loadedStructures[i] = null;
             }
         }
-        List loadedStructuresFinal = new ArrayList<obj_id>();
-        List structuresLocationFinal = new ArrayList<location>();
-        List structuresNameFinal = new ArrayList<String>();
+        Vector loadedStructuresFinal = new Vector();
+        loadedStructuresFinal.setSize(0);
+        Vector structuresLocationFinal = new Vector();
+        structuresLocationFinal.setSize(0);
+        Vector structuresNameFinal = new Vector();
+        structuresNameFinal.setSize(0);
         for (int j = 0; j < loadedStructures.length; j++)
         {
             if (loadedStructures[j] != null)
             {
-                loadedStructuresFinal.add(loadedStructures[j]);
-                structuresLocationFinal.add(structuresLocation[j]);
-                structuresNameFinal.add(structuresName[j]);
+                utils.addElement(loadedStructuresFinal, loadedStructures[j]);
+                utils.addElement(structuresLocationFinal, structuresLocation[j]);
+                utils.addElement(structuresNameFinal, structuresName[j]);
             }
         }
         obj_id[] structuresIdStaticArray = utils.toStaticObjIdArray(loadedStructuresFinal);
@@ -1680,12 +1689,12 @@ public class terminal_city extends script.base_script
         obj_id[] structureIds = utils.getObjIdArrayScriptVar(city_terminal, "loadedStructuresIds");
         String[] structureNames = utils.getStringArrayScriptVar(city_terminal, "loadedStructuresNames");
         location[] structureLocs = utils.getLocationArrayScriptVar(city_terminal, "loadedStructuresLocations");
-        List resizeableloadedStructuresIds = Arrays.asList(structureIds);
-        List resizeableloadedStructuresNames = Arrays.asList(structureNames);
-        List resizeableloadedStructuresLocations = Arrays.asList(structureLocs);
-        resizeableloadedStructuresIds.add(newObjectId);
-        resizeableloadedStructuresNames.add(newObjectName);
-        resizeableloadedStructuresLocations.add(newObjectLocation);
+        Vector resizeableloadedStructuresIds = new Vector(Arrays.asList(structureIds));
+        Vector resizeableloadedStructuresNames = new Vector(Arrays.asList(structureNames));
+        Vector resizeableloadedStructuresLocations = new Vector(Arrays.asList(structureLocs));
+        utils.addElement(resizeableloadedStructuresIds, newObjectId);
+        utils.addElement(resizeableloadedStructuresNames, newObjectName);
+        utils.addElement(resizeableloadedStructuresLocations, newObjectLocation);
         obj_id[] loadedStructuresIds = utils.toStaticObjIdArray(resizeableloadedStructuresIds);
         String[] loadedStructuresNames = utils.toStaticStringArray(resizeableloadedStructuresNames);
         location[] loadedStructuresLocations = utils.toStaticLocationArray(resizeableloadedStructuresLocations);
@@ -1754,77 +1763,78 @@ public class terminal_city extends script.base_script
             next_pop_req = dataTableGetInt(city.RANK_TABLE, city_rank, city.RANK_POPULATION);
         }
         int cur_pop_req = dataTableGetInt(city.RANK_TABLE, city_rank - 1, city.RANK_POPULATION);
-        List rankInfo = new ArrayList<obj_id>();
+        Vector rankInfo = new Vector();
+        rankInfo.setSize(0);
         string_id city_rank_prompt = new string_id(STF, "city_rank_prompt");
         string_id city_pop_prompt = new string_id(STF, "city_pop_prompt");
         string_id total_citizens = new string_id(STF, "citizens");
-        rankInfo.add(getString(city_rank_prompt) + rank_string + " (" + city_rank + ")");
-        rankInfo.add(getString(city_pop_prompt) + citizens.length + getString(total_citizens));
+        rankInfo = utils.addElement(rankInfo, getString(city_rank_prompt) + rank_string + " (" + city_rank + ")");
+        rankInfo = utils.addElement(rankInfo, getString(city_pop_prompt) + citizens.length + getString(total_citizens));
         if (citizens.length < cur_pop_req)
         {
             string_id pop_req_rank_current_green = new string_id(STF, "pop_req_current_rank");
             string_id prev_rank_citizens = new string_id(STF, "citizens");
-            rankInfo.add("\\#FF0000" + getString(pop_req_rank_current_green) + cur_pop_req + getString(prev_rank_citizens) + "\\");
+            rankInfo = utils.addElement(rankInfo, "\\#FF0000" + getString(pop_req_rank_current_green) + cur_pop_req + getString(prev_rank_citizens) + "\\");
         }
         else 
         {
             string_id pop_req_rank_current = new string_id(STF, "pop_req_current_rank");
             string_id prev_rank_citizens = new string_id(STF, "citizens");
-            rankInfo.add(getString(pop_req_rank_current) + cur_pop_req + getString(prev_rank_citizens));
+            rankInfo = utils.addElement(rankInfo, getString(pop_req_rank_current) + cur_pop_req + getString(prev_rank_citizens));
         }
         if (next_pop_req == -1)
         {
             string_id max_rank_achieved = new string_id(STF, "max_rank_achieved");
-            rankInfo.add(getString(max_rank_achieved));
+            rankInfo = utils.addElement(rankInfo, getString(max_rank_achieved));
         }
         else 
         {
             string_id pop_req_rank_next = new string_id(STF, "pop_req_next_rank");
             string_id next_rank_citizens = new string_id(STF, "citizens");
-            rankInfo.add(getString(pop_req_rank_next) + next_pop_req + getString(next_rank_citizens));
+            rankInfo = utils.addElement(rankInfo, getString(pop_req_rank_next) + next_pop_req + getString(next_rank_citizens));
         }
         string_id max_structures = new string_id(STF, "max_structures");
-        rankInfo.add(getString(max_structures) + city.getMaxCivicCount(city_id));
+        rankInfo = utils.addElement(rankInfo, getString(max_structures) + city.getMaxCivicCount(city_id));
         string_id max_decorations = new string_id(STF, "max_decorations");
-        rankInfo.add(getString(max_decorations) + city.getMaxDecorationCount(city_id));
+        rankInfo = utils.addElement(rankInfo, getString(max_decorations) + city.getMaxDecorationCount(city_id));
         string_id max_terminals = new string_id(STF, "max_terminals");
-        rankInfo.add(getString(max_terminals) + city.getMaxMTCount(city_id));
+        rankInfo = utils.addElement(rankInfo, getString(max_terminals) + city.getMaxMTCount(city_id));
         string_id max_trainers = new string_id(STF, "max_trainers");
-        rankInfo.add(getString(max_trainers) + city.getMaxTrainerCount(city_id));
+        rankInfo = utils.addElement(rankInfo, getString(max_trainers) + city.getMaxTrainerCount(city_id));
         string_id enabled_structures = new string_id(STF, "rank_enabled_structures");
-        rankInfo.add("\\#00FF00" + getString(enabled_structures) + "\\");
+        rankInfo = utils.addElement(rankInfo, "\\#00FF00" + getString(enabled_structures) + "\\");
         int i = 7;
         if (city_rank >= 1)
         {
             string_id sm_garden = new string_id(STF, "small_garden");
-            rankInfo.add(getString(sm_garden));
+            rankInfo = utils.addElement(rankInfo, getString(sm_garden));
         }
         if (city_rank >= 2)
         {
             string_id bank = new string_id(STF, "bank");
-            rankInfo.add(getString(bank));
+            rankInfo = utils.addElement(rankInfo, getString(bank));
             string_id cantina = new string_id(STF, "cantina");
-            rankInfo.add(getString(cantina));
+            rankInfo = utils.addElement(rankInfo, getString(cantina));
             string_id med_garden = new string_id(STF, "medium_garden");
-            rankInfo.add(getString(med_garden));
+            rankInfo = utils.addElement(rankInfo, getString(med_garden));
             string_id garage = new string_id(STF, "garage");
-            rankInfo.add(getString(garage));
+            rankInfo = utils.addElement(rankInfo, getString(garage));
         }
         if (city_rank >= 3)
         {
             string_id cloning = new string_id(STF, "cloning_facility");
-            rankInfo.add(getString(cloning));
+            rankInfo = utils.addElement(rankInfo, getString(cloning));
             string_id hospital = new string_id(STF, "hospital");
-            rankInfo.add(getString(hospital));
+            rankInfo = utils.addElement(rankInfo, getString(hospital));
             string_id lg_garden = new string_id(STF, "large_garden");
-            rankInfo.add(getString(lg_garden));
+            rankInfo = utils.addElement(rankInfo, getString(lg_garden));
         }
         if (city_rank >= 4)
         {
             string_id theater = new string_id(STF, "theater");
-            rankInfo.add(getString(theater));
+            rankInfo = utils.addElement(rankInfo, getString(theater));
             string_id shuttleport = new string_id(STF, "shuttleport");
-            rankInfo.add(getString(shuttleport));
+            rankInfo = utils.addElement(rankInfo, getString(shuttleport));
         }
         sui.listbox(self, player, "@city/city:rank_info_d", sui.OK_CANCEL, "@city/city:rank_info_t", rankInfo, "handleRankInfo", true);
         obj_id city_master = getMasterCityObject();
@@ -1982,12 +1992,13 @@ public class terminal_city extends script.base_script
             return;
         }
         obj_id[] citizens = cityGetCitizenIds(city_id);
-        List militiaMembers = new ArrayList<String>();
-        militiaMembers.add("Add Militia Member");
+        Vector militiaMembers = new Vector();
+        militiaMembers.setSize(0);
+        militiaMembers = utils.addElement(militiaMembers, "Add Militia Member");
         for (obj_id citizen : citizens) {
             if (city.hasMilitiaFlag(citizen, city_id)) {
                 String name = cityGetCitizenName(city_id, citizen);
-                militiaMembers.add(name);
+                militiaMembers = utils.addElement(militiaMembers, name);
             }
         }
         sui.listbox(self, player, "@city/city:militia_d", sui.OK_CANCEL, "@city/city:militia_t", militiaMembers, "handleRemoveMilitia", true);
@@ -2020,13 +2031,14 @@ public class terminal_city extends script.base_script
             int j = 0;
             String removeName = null;
             obj_id[] citizens = cityGetCitizenIds(city_id);
-            List militiaMembers = new ArrayList<String>();
-            militiaMembers.add("Add Militia Member");
+            Vector militiaMembers = new Vector();
+            militiaMembers.setSize(0);
+            militiaMembers = utils.addElement(militiaMembers, "Add Militia Member");
             for (obj_id citizen : citizens) {
                 if (city.hasMilitiaFlag(citizen, city_id)) {
                     j++;
                     String name = cityGetCitizenName(city_id, citizen);
-                    militiaMembers.add(name);
+                    militiaMembers = utils.addElement(militiaMembers, name);
                     if (j == idx) {
                         utils.setScriptVar(self, "removal.temp", citizen);
                         removeName = name;
@@ -2523,12 +2535,13 @@ public class terminal_city extends script.base_script
         }
         String[] listSpecs = dataTableGetStringColumn(CITY_SPECS, "SPECIALIZATION");
         int[] specCosts = dataTableGetIntColumn(CITY_SPECS, "COST");
-        List knownSpecs = new ArrayList<String>();
+        Vector knownSpecs = new Vector();
+        knownSpecs.setSize(0);
         for (int i = 0; i < listSpecs.length; i++)
         {
-            if (i == 0 || hasCommand(player, listSpecs[i]))
+            if ((i == 0) || hasCommand(player, listSpecs[i]))
             {
-                knownSpecs.add(localize(new string_id(STF, listSpecs[i])) + " (Cost: " + specCosts[i] + ")");
+                utils.addElement(knownSpecs, localize(new string_id(STF, listSpecs[i])) + " (Cost: " + specCosts[i] + ")");
             }
         }
         if (knownSpecs.size() == 0)
@@ -2556,12 +2569,13 @@ public class terminal_city extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String[] listSpecs = dataTableGetStringColumn(CITY_SPECS, "SPECIALIZATION");
-        List knownSpecs = new ArrayList<String>();
+        Vector knownSpecs = new Vector();
+        knownSpecs.setSize(0);
         for (int i = 0; i < listSpecs.length; i++)
         {
-            if (i == 0 || hasCommand(player, listSpecs[i]))
+            if ((i == 0) || hasCommand(player, listSpecs[i]))
             {
-                knownSpecs.add(listSpecs[i]);
+                utils.addElement(knownSpecs, listSpecs[i]);
             }
         }
         utils.setScriptVar(self, "spec", idx);
@@ -2582,12 +2596,13 @@ public class terminal_city extends script.base_script
         }
         int spec = utils.getIntScriptVar(self, "spec");
         String[] listSpecs = dataTableGetStringColumn(CITY_SPECS, "SPECIALIZATION");
-        List knownSpecs = new ArrayList<String>();
+        Vector knownSpecs = new Vector();
+        knownSpecs.setSize(0);
         for (int i = 0; i < listSpecs.length; i++)
         {
-            if (i == 0 || hasCommand(player, listSpecs[i]))
+            if ((i == 0) || hasCommand(player, listSpecs[i]))
             {
-                knownSpecs.add(listSpecs[i]);
+                utils.addElement(knownSpecs, listSpecs[i]);
             }
         }
         obj_id structure = getTopMostContainer(self);

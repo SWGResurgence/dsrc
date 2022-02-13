@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class mission_player extends script.systems.missions.base.mission_player_base
 {
+    public mission_player()
+    {
+    }
     public static final String[] OPS_APPEARANCES = 
     {
         "object/mobile/dressed_rebel_trooper_human_female_01.iff",
@@ -910,8 +913,8 @@ public class mission_player extends script.systems.missions.base.mission_player_
                 return SCRIPT_CONTINUE;
             }
         }
-        objListeners.add(objListener);
-        if (objListeners != null && objListeners.size() > 0)
+        objListeners = utils.addElement(objListeners, objListener);
+        if ((objListeners != null) && (objListeners.size() > 0))
         {
             setObjVar(self, strObjVar, objListeners);
         }
@@ -944,7 +947,7 @@ public class mission_player extends script.systems.missions.base.mission_player_
         {
             if (((obj_id)objListeners.get(intI)) == objListener)
             {
-                objListeners.remove(objListener);
+                objListeners = utils.removeElement(objListeners, objListener);
                 setObjVar(self, strObjVar, objListeners);
                 return SCRIPT_CONTINUE;
             }

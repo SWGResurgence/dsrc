@@ -11,6 +11,9 @@ import java.util.Vector;
 
 public class soldier_spawner extends script.base_script
 {
+    public soldier_spawner()
+    {
+    }
     public static final String BUG_COUNT = "spawning.bugCount";
     public static final int BUG_MAX = 3;
     public static final String SOLDIER = "som_link_lava_beetle_soldier";
@@ -33,7 +36,7 @@ public class soldier_spawner extends script.base_script
         waypoints.setSize(0);
         for (obj_id content : contents) {
             if (utils.hasScriptVar(content, trial.WP_NAME)) {
-                waypoints.add(getLocation(contents));
+                utils.addElement(waypoints, getLocation(content));
             }
         }
         if (waypoints == null)

@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class setup extends script.base_script
 {
+    public setup()
+    {
+    }
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);
@@ -44,7 +47,7 @@ public class setup extends script.base_script
         }
         if (!utils.isElementInArray(permList, player))
         {
-            permList.add(player);
+            permList = utils.addElement(permList, player);
             utils.setResizeableBatchObjVar(top, "current_players", permList);
         }
         return SCRIPT_CONTINUE;

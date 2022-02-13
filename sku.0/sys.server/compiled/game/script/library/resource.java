@@ -219,7 +219,7 @@ public class resource extends script.base_script
                     }
                     addResourceToContainer(crate, resourceId, containerAmount, playerId);
                     total -= containerAmount;
-                    ret.add(crate);
+                    ret = utils.addElement(ret, crate);
                 }
             }
         }
@@ -358,9 +358,9 @@ public class resource extends script.base_script
                 break;
             }
             res += (res_max - res_min) / 5.0;
-            ranges.add(range);
-            resolutions.add((int)res);
-            options.add("" + range + "m x " + ((int)res) + "pts");
+            ranges = utils.addElement(ranges, range);
+            resolutions = utils.addElement(resolutions, (int)res);
+            options = utils.addElement(options, "" + range + "m x " + ((int)res) + "pts");
             count++;
         }
         if (ranges.size() == 0 || resolutions.size() == 0)
@@ -678,49 +678,49 @@ public class resource extends script.base_script
         Vector dsrc = new Vector();
         dsrc.setSize(0);
 
-        dsrc.add(utils.packStringId(SID_SUI_SURVEY_TOOL_PROPERTIES_RESOURCE_HEADER));
+        dsrc = utils.addElement(dsrc, utils.packStringId(SID_SUI_SURVEY_TOOL_PROPERTIES_RESOURCE_HEADER));
 
         prose_package ppResource = prose.getPackage(SID_SUI_SURVEY_TOOL_PROPERTIES_RESOURCE);
         prose.setTO(ppResource, getStringObjVar(tool, resource.VAR_SURVEY_CLASS));
-        dsrc.add(" \0" + packOutOfBandProsePackage(null, ppResource));
-        dsrc.add(" ");
+        dsrc = utils.addElement(dsrc, " \0" + packOutOfBandProsePackage(null, ppResource));
+        dsrc = utils.addElement(dsrc, " ");
 
         int res_min = getIntObjVar(tool, resource.VAR_SURVEY_RESOLUTION_MIN);
         int res_max = getIntObjVar(tool, resource.VAR_SURVEY_RESOLUTION_MAX);
         int res_val = getIntObjVar(tool, resource.VAR_SURVEY_RESOLUTION_VALUE);
-        dsrc.add(utils.packStringId(SID_SUI_SURVEY_TOOL_PROPERTIES_RESOLUTION));
+        dsrc = utils.addElement(dsrc, utils.packStringId(SID_SUI_SURVEY_TOOL_PROPERTIES_RESOLUTION));
 
         prose_package ppResMin = prose.getPackage(SID_SUI_SURVEY_TOOL_PROPERTIES_RESOLUTION_MIN);
         prose.setDI(ppResMin, res_min);
-        dsrc.add(" \0" + packOutOfBandProsePackage(null, ppResMin));
+        dsrc = utils.addElement(dsrc, " \0" + packOutOfBandProsePackage(null, ppResMin));
 
         prose_package ppResMax = prose.getPackage(SID_SUI_SURVEY_TOOL_PROPERTIES_RESOLUTION_MAX);
         prose.setDI(ppResMax, res_max);
-        dsrc.add(" \0" + packOutOfBandProsePackage(null, ppResMax));
+        dsrc = utils.addElement(dsrc, " \0" + packOutOfBandProsePackage(null, ppResMax));
 
         prose_package ppResVal = prose.getPackage(SID_SUI_SURVEY_TOOL_PROPERTIES_RESOLUTION_VAL);
         prose.setDI(ppResVal, res_val);
-        dsrc.add(" \0" + packOutOfBandProsePackage(null, ppResVal));
-        dsrc.add(" ");
+        dsrc = utils.addElement(dsrc, " \0" + packOutOfBandProsePackage(null, ppResVal));
+        dsrc = utils.addElement(dsrc, " ");
 
         int range_min = getIntObjVar(tool, resource.VAR_SURVEY_RANGE_MIN);
         int range_max = getIntObjVar(tool, resource.VAR_SURVEY_RANGE_MAX);
         int range_val = getIntObjVar(tool, resource.VAR_SURVEY_RANGE_VALUE);
 
-        dsrc.add(utils.packStringId(SID_SUI_SURVEY_TOOL_PROPERTIES_RANGE));
+        dsrc = utils.addElement(dsrc, utils.packStringId(SID_SUI_SURVEY_TOOL_PROPERTIES_RANGE));
         prose_package ppRangeMin = prose.getPackage(SID_SUI_SURVEY_TOOL_PROPERTIES_RANGE_MIN);
         prose.setDI(ppRangeMin, range_min);
 
-        dsrc.add( " \0" + packOutOfBandProsePackage(null, ppRangeMin));
+        dsrc = utils.addElement(dsrc, " \0" + packOutOfBandProsePackage(null, ppRangeMin));
         prose_package ppRangeMax = prose.getPackage(SID_SUI_SURVEY_TOOL_PROPERTIES_RANGE_MAX);
         prose.setDI(ppRangeMax, range_max);
 
-        dsrc.add(" \0" + packOutOfBandProsePackage(null, ppRangeMax));
+        dsrc = utils.addElement(dsrc, " \0" + packOutOfBandProsePackage(null, ppRangeMax));
         prose_package ppRangeVal = prose.getPackage(SID_SUI_SURVEY_TOOL_PROPERTIES_RANGE_VAL);
         prose.setDI(ppRangeVal, range_val);
 
-        dsrc.add(" \0" + packOutOfBandProsePackage(null, ppRangeVal));
-        if (dsrc != null && dsrc.size() > 0)
+        dsrc = utils.addElement(dsrc, " \0" + packOutOfBandProsePackage(null, ppRangeVal));
+        if ((dsrc != null) && (dsrc.size() > 0))
         {
             String title = utils.packStringId(SID_SUI_SURVEY_TOOL_PROPERTIES_TITLE);
             String header = utils.packStringId(SID_SUI_SURVEY_TOOL_PROPERTIES_HEADER);
@@ -1033,7 +1033,7 @@ public class resource extends script.base_script
                     if (isIdValid(resourceType)) {
                         if (isResourceDerivedFrom(resourceType, "energy_renewable_site_limited_geothermal")) {
                             if (tempListUniqueList.size() == 0) {
-                                tempListUniqueList.add(resourceType);
+                                tempListUniqueList.addElement(resourceType);
                                 resourceName = getResourceName(resourceType);
                                 resourceQuality = getResourceAttribute(resourceType, "res_quality");
                             }

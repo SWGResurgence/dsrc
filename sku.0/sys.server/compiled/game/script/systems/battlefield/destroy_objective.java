@@ -8,10 +8,13 @@ import script.obj_id;
 import script.region;
 import script.string_id;
 
-import java.util.List;
+import java.util.Vector;
 
 public class destroy_objective extends script.base_script
 {
+    public destroy_objective()
+    {
+    }
     public static final String VAR_WARNING_LEVEL = "battlefield.warning_level";
     public static final String VAR_FACTION = "battlefield.faction";
     public static final string_id SID_REPAIR_STRUCTURE = new string_id("battlefield", "repair_structure");
@@ -94,7 +97,7 @@ public class destroy_objective extends script.base_script
         int faction_id = getIntObjVar(self, VAR_FACTION);
         String faction = factions.getFactionNameByHashCode(faction_id);
         String objVar_name = battlefield.VAR_GAME + "." + faction + "_destroy";
-        List destroy_objs = getResizeableObjIdArrayObjVar(master_object, objVar_name);
+        Vector destroy_objs = getResizeableObjIdArrayObjVar(master_object, objVar_name);
         if (destroy_objs == null)
         {
             LOG("LOG_CHANNEL", "destroy_objective::OnObjectDisabled -- destroy_objs is null");
@@ -115,7 +118,7 @@ public class destroy_objective extends script.base_script
             }
             else 
             {
-                destroy_objs.remove(idx);
+                destroy_objs = utils.removeElementAt(destroy_objs, idx);
                 setObjVar(master_object, objVar_name, destroy_objs);
             }
         }

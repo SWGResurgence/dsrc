@@ -80,8 +80,8 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
         while (size > 0)
         {
             int i = rand(0, (size - 1));
-            newLiars.add(liars.get(i));
-            liars.remove(i);
+            newLiars = utils.addElement(newLiars, liars.get(i));
+            liars = utils.removeElementAt(liars, i);
             size--;
         }
         if (newLiars == null || newLiars.size() == 0)

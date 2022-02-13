@@ -12,6 +12,9 @@ import java.util.Vector;
 
 public class demolition_pack extends script.base_script
 {
+    public demolition_pack()
+    {
+    }
     public static final String DATA_TABLE = "datatables/combat/npc_landmines.iff";
     public static final String STF = "npc_landmines";
     public static final string_id SHOW_PAGE_TEXT = new string_id(STF, "charge_page_text");
@@ -71,7 +74,7 @@ public class demolition_pack extends script.base_script
         for (obj_id object : objects) {
             if (isPlayer(object) || isMob(object)) {
                 if (!isIncapacitated(object) && !isDead(object)) {
-                    targetsInRadius.add(objects, object);
+                    targetsInRadius = utils.addElement(targetsInRadius, object);
                 }
             }
         }

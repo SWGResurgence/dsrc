@@ -101,7 +101,7 @@ public class battlefield_spawner extends script.base_script
                             strTest += intCheck;
                             if (strName.equals(strTest))
                             {
-                                trPatrolPoints.add(getTransform_o2w(objTestObjects[intJ]));
+                                trPatrolPoints = utils.addElement(trPatrolPoints, getTransform_o2w(objTestObjects[intJ]));
                                 intJ = objTestObjects.length + 10;
                             }
                         }

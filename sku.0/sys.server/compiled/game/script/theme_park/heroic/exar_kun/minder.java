@@ -11,6 +11,9 @@ import java.util.Vector;
 
 public class minder extends script.base_script
 {
+    public minder()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setupSquad", null, 1.0f, false);
@@ -82,26 +85,26 @@ public class minder extends script.base_script
         final int SK_BOSS = 2;
         if (isIdValid(vinrith) && exists(vinrith) && !isDead(vinrith))
         {
-            randomAdd.add(GB_BOSS);
+            utils.addElement(randomAdd, GB_BOSS);
         }
         if (isIdValid(luresh) && exists(luresh) && !isDead(luresh))
         {
-            randomAdd.add(SK_BOSS);
+            utils.addElement(randomAdd, SK_BOSS);
         }
         int result = (Integer) randomAdd.get(rand(0, randomAdd.size() - 1));
         dictionary dict = trial.getSessionDict(trial.getTop(self));
         switch (result)
         {
             case GB_BOSS:
-                dict.put("triggerType", "triggerId");
-                dict.put("triggerName", "summon_bats");
-                messageTo(trial.getTop(self), "triggerFired", dict, 0.0f, false);
-                break;
+            dict.put("triggerType", "triggerId");
+            dict.put("triggerName", "summon_bats");
+            messageTo(trial.getTop(self), "triggerFired", dict, 0.0f, false);
+            break;
             case SK_BOSS:
-                dict.put("triggerType", "triggerId");
-                dict.put("triggerName", "summon_monkey");
-                messageTo(trial.getTop(self), "triggerFired", dict, 0.0f, false);
-                break;
+            dict.put("triggerType", "triggerId");
+            dict.put("triggerName", "summon_monkey");
+            messageTo(trial.getTop(self), "triggerFired", dict, 0.0f, false);
+            break;
         }
         messageTo(self, "summon_adds", null, 30.0f, false);
         return SCRIPT_CONTINUE;

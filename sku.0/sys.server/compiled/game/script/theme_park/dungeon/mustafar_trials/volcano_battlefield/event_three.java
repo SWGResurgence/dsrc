@@ -12,6 +12,9 @@ import java.util.Vector;
 
 public class event_three extends script.base_script
 {
+    public event_three()
+    {
+    }
     public static final String boss = "som_volcano_three_forward_commander";
     public static final String GUARD = "som_volcano_three_hk77";
     public static final String risen = "som_volcano_three_risen_commander";
@@ -264,7 +267,7 @@ public class event_three extends script.base_script
         liveBoss.setSize(0);
         for (obj_id boss1 : boss) {
             if (!isDead(boss1)) {
-                liveBoss.add(boss1);
+                utils.addElement(liveBoss, boss1);
             }
         }
         if (liveBoss == null || liveBoss.size() == 0)
@@ -323,7 +326,7 @@ public class event_three extends script.base_script
         bossList.setSize(0);
         for (obj_id boss1 : boss) {
             if (!isDead(boss1)) {
-                bossList.add(boss1);
+                utils.addElement(bossList, boss1);
             }
         }
         if (bossList != null && bossList.size() > 0 && corpseList != null && corpseList.length > 0)
@@ -334,6 +337,7 @@ public class event_three extends script.base_script
                 {
                     boss = new obj_id[bossList.size()];
                     bossList.toArray(boss);
+
                 }
                 performRez(self, boss, corpseList);
                 return;

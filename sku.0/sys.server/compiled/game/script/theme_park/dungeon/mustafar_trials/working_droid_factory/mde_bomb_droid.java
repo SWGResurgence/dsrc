@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class mde_bomb_droid extends script.base_script
 {
+    public mde_bomb_droid()
+    {
+    }
     public static final int DROID_DAMAGE = 500;
     public static final boolean LOGGING = false;
     public int OnDestroy(obj_id self) throws InterruptedException
@@ -60,7 +63,7 @@ public class mde_bomb_droid extends script.base_script
         valid.setSize(0);
         for (obj_id player : players) {
             if (!isDead(player)) {
-                valid.add(player);
+                utils.addElement(valid, player);
             }
         }
         if (valid == null || valid.size() == 0)

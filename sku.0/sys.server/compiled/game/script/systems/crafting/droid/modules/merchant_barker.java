@@ -6,6 +6,9 @@ import script.library.*;
 
 public class merchant_barker extends script.base_script
 {
+    public merchant_barker()
+    {
+    }
     public static final String STF_FILE = "pet/droid_modules";
     public static final String SCRIPT_VAR_BARKING_ON = "module.barking_on";
     public static final String SCRIPT_VAR_RECORDING_ON = "module.recording_on";
@@ -239,7 +242,7 @@ public class merchant_barker extends script.base_script
                 if (message != null)
                 {
                     chat.chat(self, message);
-                    utils.setScriptVar(self, pet.CAN_BARK, false);
+                    utils.setScriptVar(self, pet.CAN_BARK, pet.FALSE);
                     messageTo(self, "msgResetCanBark", null, pet.BARK_DELAY, false);
                 }
             }
@@ -248,7 +251,7 @@ public class merchant_barker extends script.base_script
     }
     public int msgResetCanBark(obj_id self, dictionary params) throws InterruptedException
     {
-        utils.setScriptVar(self, pet.CAN_BARK, true);
+        utils.setScriptVar(self, pet.CAN_BARK, pet.TRUE);
         return SCRIPT_CONTINUE;
     }
     public int msgDroidWaypointSelected(obj_id self, dictionary params) throws InterruptedException

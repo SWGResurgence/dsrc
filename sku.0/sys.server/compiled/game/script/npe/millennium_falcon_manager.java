@@ -433,7 +433,7 @@ public class millennium_falcon_manager extends script.base_script
             obj_id[] objTestContents = getContents(objCell);
             if ((objTestContents != null) && (objTestContents.length > 0)) {
                 for (obj_id objTestContent : objTestContents) {
-                    objContents.add(objTestContents, objTestContent);
+                    objContents = utils.addElement(objContents, objTestContent);
                 }
             }
         }

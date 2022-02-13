@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class metrics extends script.base_script
 {
+    public metrics()
+    {
+    }
     public static final String CONFIG_BUFF_METRICS = "logBuffMetrics";
     public static final String CONFIG_WEAPON_METRICS = "logWeaponMetrics";
     public static final String CONFIG_ARMOR_METRICS = "logArmorMetrics";
@@ -229,7 +232,7 @@ public class metrics extends script.base_script
         for (String wornSlot : wornSlots) {
             obj_id item = getObjectInSlot(player, wornSlot);
             if (isIdValid(item) && !utils.isElementInArray(inv, item)) {
-                inv.add(item);
+                inv = utils.addElement(inv, item);
             }
         }
         obj_id[] _inv = new obj_id[0];

@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class crafted_armor_recolor_kit extends script.base_script
 {
+    public crafted_armor_recolor_kit()
+    {
+    }
     public static final boolean BLOGGING_ON = true;
     public static final String BLOGGING_CATEGORY = "armor_recolor";
     public static final String PROP_SELECTEDINDEX = "SelectedIndex";
@@ -89,7 +92,7 @@ public class crafted_armor_recolor_kit extends script.base_script
         {
             for (obj_id equippedItem : equippedItems) {
                 if ((getTemplateName(equippedItem)).startsWith("object/tangible/wearables/armor/")) {
-                    wornItems.add(equippedItems);
+                    wornItems.addElement(equippedItem);
                 }
             }
         }
@@ -99,7 +102,7 @@ public class crafted_armor_recolor_kit extends script.base_script
         {
             for (obj_id invItem : invItems) {
                 if ((getTemplateName(invItem)).startsWith("object/tangible/wearables/armor/")) {
-                    items.add(invItems);
+                    items.addElement(invItem);
                 }
             }
         }
@@ -118,18 +121,18 @@ public class crafted_armor_recolor_kit extends script.base_script
         {
             for (Object wornItem : wornItems) {
                 obj_id piece = (obj_id) wornItem;
-                armor.add(piece);
+                armor.addElement(piece);
                 String name = getName(piece) + "  ( currently worn )";
-                armorNames.add(name);
+                armorNames.addElement(name);
             }
         }
         if (!items.isEmpty())
         {
             for (Object item : items) {
                 obj_id piece = (obj_id) item;
-                armor.add(piece);
+                armor.addElement(piece);
                 String name = getName(piece);
-                armorNames.add(name);
+                armorNames.addElement(name);
             }
         }
         int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, armorNames, "handleArmorSelection", true, false);
@@ -180,7 +183,7 @@ public class crafted_armor_recolor_kit extends script.base_script
             if (customizationVar.startsWith("/")) {
                 customizationVar = customizationVar.substring(1);
             }
-            indexName.add(customizationVar);
+            utils.addElement(indexName, customizationVar);
         }
         if (indexName == null || indexName.size() < 0)
         {

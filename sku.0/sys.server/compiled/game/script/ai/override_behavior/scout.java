@@ -7,11 +7,13 @@ import script.obj_id;
 import script.string_id;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Vector;
 
 public class scout extends script.base_script
 {
+    public scout()
+    {
+    }
     public static final String SCRIPTVAR_SCOUT_TARGET = "behavior.scout.target";
     public static final String SCRIPTVAR_SCANNED = "behavior.scout.scanned";
     public static final String SCRIPTVAR_SCAN_STATUS = "behavior.scout.scan_status";
@@ -150,7 +152,7 @@ public class scout extends script.base_script
     {
         if (!utils.hasScriptVar(self, SCRIPTVAR_SCAN_STATUS))
         {
-            List scanned = utils.getResizeableObjIdArrayScriptVar(self, SCRIPTVAR_SCANNED);
+            Vector scanned = utils.getResizeableObjIdArrayScriptVar(self, SCRIPTVAR_SCANNED);
             if (scanned != null && scanned.size() > 0)
             {
                 if (utils.getElementPositionInArray(scanned, target) > -1)
@@ -215,8 +217,8 @@ public class scout extends script.base_script
             }
         }
         float rating = gcw.scan(self, target);
-        List scanned = utils.getResizeableObjIdArrayScriptVar(self, SCRIPTVAR_SCANNED);
-        scanned.add(target);
+        Vector scanned = utils.getResizeableObjIdArrayScriptVar(self, SCRIPTVAR_SCANNED);
+        scanned = utils.addElement(scanned, target);
         if (scanned != null && scanned.size() > 0)
         {
             utils.setScriptVar(self, SCRIPTVAR_SCANNED, scanned);
@@ -277,9 +279,8 @@ public class scout extends script.base_script
             return;
         }
         utils.removeScriptVar(self, SCRIPTVAR_ATTACKED);
-        List scanned = utils.getResizeableObjIdArrayScriptVar(self, SCRIPTVAR_SCANNED);
-        List unscanned = Arrays.asList(players);
-        unscanned.remove(scanned);
+        Vector scanned = utils.getResizeableObjIdArrayScriptVar(self, SCRIPTVAR_SCANNED);
+        Vector unscanned = utils.removeElements(new Vector(Arrays.asList(players)), scanned);
         if (unscanned != null && unscanned.size() > 0)
         {
             obj_id target = ((obj_id)unscanned.get(rand(0, unscanned.size() - 1)));

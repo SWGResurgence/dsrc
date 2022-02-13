@@ -3,11 +3,13 @@ package script.library;
 import script.*;
 
 import java.util.StringTokenizer;
-import java.util.List;
 import java.util.Vector;
 
 public class hq extends script.base_script
 {
+    public hq()
+    {
+    }
     public static final float VULNERABILITY_CYCLE = 172800.0f;
     public static final float VULNERABILITY_LENGTH = 10800.0f;
     public static final String SCRIPT_CLONING_OVERRIDE = "faction_perk.hq.terminal_cloning_override";
@@ -150,7 +152,7 @@ public class hq extends script.base_script
     public static obj_id[] spawnInterior(obj_id hq, String tbl) throws InterruptedException
     {
         LOG("hq", "spawnInterior entered...");
-        if (!isIdValid(hq) || tbl == null || tbl.isEmpty())
+        if (!isIdValid(hq) || tbl == null || tbl.equals(""))
         {
             return null;
         }
@@ -161,7 +163,7 @@ public class hq extends script.base_script
             spawns.setSize(0);
             location here = getLocation(hq);
             String myFac = factions.getFaction(hq);
-            if (myFac == null || myFac.isEmpty())
+            if (myFac == null || myFac.equals(""))
             {
                 return null;
             }
@@ -224,7 +226,7 @@ public class hq extends script.base_script
                         }
                         if (isIdValid(spawn))
                         {
-                            spawns.add(spawn);
+                            spawns = utils.addElement(spawns, spawn);
                         }
                     }
                     else 
@@ -326,7 +328,7 @@ public class hq extends script.base_script
                                     setObjVar(spawn, VAR_SPAWN_PARENT, hq);
                                     factions.setFaction(spawn, myFac);
                                     messageTo(spawn, "handleSpawnRequest", null, rand(1, 5), false);
-                                    spawns.add(spawn);
+                                    spawns = utils.addElement(spawns, spawn);
                                 }
                             }
                         }
@@ -553,7 +555,7 @@ public class hq extends script.base_script
         opt.setSize(0);
         for (int i = 0; i < numRows; i++)
         {
-            opt.add(i);
+            opt = utils.addElement(opt, i);
         }
         location here = getLocation(hq);
         float yaw = getYaw(hq);
@@ -562,7 +564,7 @@ public class hq extends script.base_script
         for (String s : OBJECTIVE_TEMPLATE) {
             int idx = rand(0, opt.size() - 1);
             int rowIdx = (Integer) opt.get(idx);
-            opt.remove(idx);
+            opt = utils.removeElementAt(opt, idx);
             dictionary row = dataTableGetRow(tbl, rowIdx);
             String cellName = row.getString("CELL");
             float dx = row.getFloat("X");
@@ -570,12 +572,12 @@ public class hq extends script.base_script
             float dz = row.getFloat("Z");
             float dyaw = row.getFloat("YAW");
             obj_id objective = null;
-            if (cellName == null || cellName.isEmpty() || cellName.equals("WORLD_DELTA")) {
+            if (cellName == null || cellName.equals("") || cellName.equals("WORLD_DELTA")) {
                 location there = player_structure.transformDeltaWorldCoord(here, dx, dz, yaw);
                 objective = createObject(s, there);
                 if (isIdValid(objective)) {
                     setYaw(objective, yaw + dyaw);
-                    objectives.add(objective);
+                    utils.addElement(objectives, objective);
                 }
             } else {
                 obj_id cellId = getCellId(hq, cellName);
@@ -584,7 +586,7 @@ public class hq extends script.base_script
                     objective = createObjectInCell(s, hq, cellName, iSpot);
                     if (isIdValid(objective)) {
                         setYaw(objective, dyaw);
-                        objectives.add(objective);
+                        utils.addElement(objectives, objective);
                     }
                 }
             }
@@ -731,8 +733,8 @@ public class hq extends script.base_script
     {
         if (canDisableObjective(hq, objective))
         {
-            List disabled = getResizeableObjIdArrayObjVar(hq, VAR_OBJECTIVE_DISABLED);
-            disabled.add(objective);
+            Vector disabled = getResizeableObjIdArrayObjVar(hq, VAR_OBJECTIVE_DISABLED);
+            disabled = utils.addElement(disabled, objective);
             setObjVar(hq, VAR_OBJECTIVE_DISABLED, disabled);
             setObjVar(objective, VAR_IS_DISABLED, true);
             messageTo(objective, "handleObjectiveDisabled", null, 1, false);
@@ -1082,11 +1084,11 @@ public class hq extends script.base_script
                         {
                             if (alarmType.contains("hack"))
                             {
-                                hackAlarms.add(alarmUnit);
+                                utils.addElement(hackAlarms, alarmUnit);
                             }
                             else if (alarmType.contains("destruct"))
                             {
-                                destructAlarms.add(alarmUnit);
+                                utils.addElement(destructAlarms, alarmUnit);
                             }
                             else 
                             {
@@ -1111,7 +1113,7 @@ public class hq extends script.base_script
     {
         if (hasObjVar(hq, "hq.alarm.hack"))
         {
-            List hackAlarmList = getResizeableObjIdArrayObjVar(hq, "hq.alarm.hack");
+            Vector hackAlarmList = getResizeableObjIdArrayObjVar(hq, "hq.alarm.hack");
             for (Object o : hackAlarmList) {
                 if (activate == true) {
                     setCondition(((obj_id) o), CONDITION_ON);
@@ -1127,7 +1129,7 @@ public class hq extends script.base_script
     {
         if (hasObjVar(hq, "hq.alarm.destruct"))
         {
-            List destructAlarmList = getResizeableObjIdArrayObjVar(hq, "hq.alarm.destruct");
+            Vector destructAlarmList = getResizeableObjIdArrayObjVar(hq, "hq.alarm.destruct");
             for (Object o : destructAlarmList) {
                 if (activate == true) {
                     setCondition(((obj_id) o), CONDITION_ON);
@@ -1143,7 +1145,7 @@ public class hq extends script.base_script
     {
         if (hasObjVar(hq, "hq.alarm.hack"))
         {
-            List hackAlarms = getResizeableObjIdArrayObjVar(hq, "hq.alarm.hack");
+            Vector hackAlarms = getResizeableObjIdArrayObjVar(hq, "hq.alarm.hack");
             if (hackAlarms.size() > 0)
             {
                 obj_id[] hackAlarmList = new obj_id[hackAlarms.size()];
@@ -1154,7 +1156,7 @@ public class hq extends script.base_script
         }
         if (hasObjVar(hq, "hq.alarm.destruct"))
         {
-            List destructAlarms = getResizeableObjIdArrayObjVar(hq, "hq.alarm.destruct");
+            Vector destructAlarms = getResizeableObjIdArrayObjVar(hq, "hq.alarm.destruct");
             if (destructAlarms.size() > 0)
             {
                 obj_id[] destructAlarmList = new obj_id[destructAlarms.size()];
@@ -1247,7 +1249,7 @@ public class hq extends script.base_script
     {
         if (utils.hasScriptVar(hq, "hq.spawn.security"))
         {
-            List securityTeam = utils.getResizeableObjIdArrayScriptVar(hq, "hq.spawn.security");
+            Vector securityTeam = utils.getResizeableObjIdArrayScriptVar(hq, "hq.spawn.security");
             if (securityTeam.size() > 0)
             {
                 obj_id[] securityDetail = new obj_id[securityTeam.size()];

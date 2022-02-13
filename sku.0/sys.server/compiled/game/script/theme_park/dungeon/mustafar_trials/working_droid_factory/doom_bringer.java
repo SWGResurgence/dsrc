@@ -11,6 +11,9 @@ import java.util.Vector;
 
 public class doom_bringer extends script.base_script
 {
+    public doom_bringer()
+    {
+    }
     public static final string_id SID_DOOM = new string_id("mob/creature_names", "som_working_doom_bringer");
     public static final string_id SID_HAND = new string_id("mob/creature_names", "som_working_hand_of_doom");
     public static final int HOD_CYCLE_DELAY = 15;
@@ -58,7 +61,7 @@ public class doom_bringer extends script.base_script
         activeHand.setSize(0);
         for (obj_id hand : hands) {
             trial.setActiveHand(hand, false);
-            activeHand.add(hand);
+            utils.addElement(activeHand, hand);
             utils.setScriptVar(hand, trial.WORKING_HOD_TARGET, target[0]);
         }
         for (int q = 0; q < 3; q++)
@@ -94,7 +97,7 @@ public class doom_bringer extends script.base_script
         hands.setSize(0);
         for (obj_id handObject : handObjects) {
             if (isIdValid(handObject) && !isDead(handObject)) {
-                hands.add(handObject);
+                utils.addElement(hands, handObject);
             }
         }
         if (hands == null || hands.size() == 0)
@@ -125,23 +128,23 @@ public class doom_bringer extends script.base_script
             newInactive.setSize(0);
             for (Object hand : hands) {
                 if (!isDead(((obj_id) hand)) && trial.isActiveHand(((obj_id) hand))) {
-                    oldActive.add(((obj_id)hands.get));
+                    utils.addElement(oldActive, ((obj_id) hand));
                 } else if (!isDead(((obj_id) hand))) {
-                    oldInactive.add(((obj_id)hands.get));
+                    utils.addElement(oldInactive, ((obj_id) hand));
                 }
             }
             for (int j = 0; j < oldInactive.size(); j++)
             {
                 messageTo(((obj_id)oldInactive.get(j)), "activate", null, 0, false);
                 trial.setActiveHand(((obj_id)oldInactive.get(j)), true);
-                newActive.add(((obj_id)oldInactive.get(j)));
+                utils.addElement(newActive, ((obj_id)oldInactive.get(j)));
                 if (j == oldActive.size() - 1 || j < oldActive.size() - 1)
                 {
                     messageTo(((obj_id)oldActive.get(j)), "deactivate", null, 0, false);
                     trial.setActiveHand(((obj_id)oldActive.get(j)), false);
                     trial.setPrimaryHand(((obj_id)oldActive.get(j)), false);
                     setName(((obj_id)oldActive.get(j)), SID_HAND);
-                    newInactive.add(((obj_id)oldActive.get(j)));
+                    utils.addElement(newInactive, ((obj_id)oldActive.get(j)));
                 }
             }
             Vector nonLeaders = new Vector();
@@ -149,7 +152,7 @@ public class doom_bringer extends script.base_script
             obj_id oldLeader = obj_id.NULL_ID;
             for (Object o : newActive) {
                 if (!trial.isPrimaryHand(((obj_id) o))) {
-                    nonLeaders.add(((obj_id)newActive.get o));
+                    utils.addElement(nonLeaders, ((obj_id) o));
                 } else {
                     oldLeader = ((obj_id) o);
                 }
@@ -192,9 +195,9 @@ public class doom_bringer extends script.base_script
             inactiveHands.setSize(0);
             for (Object hand : hands) {
                 if (isIdValid(((obj_id) hand)) && !isDead(((obj_id) hand)) && trial.isActiveHand(((obj_id) hand))) {
-                    activeHands.add(((obj_id)hands.get));
+                    utils.addElement(activeHands, ((obj_id) hand));
                 } else if (isIdValid(((obj_id) hand)) && !isDead(((obj_id) hand))) {
-                    inactiveHands.add(((obj_id)hands.get));
+                    utils.addElement(inactiveHands, ((obj_id) hand));
                 }
             }
             if (activeHands.size() < 3)
@@ -208,7 +211,7 @@ public class doom_bringer extends script.base_script
                         {
                             messageTo(((obj_id)inactiveHands.get(r)), "activate", trial.getSessionDict(self), 0, false);
                             trial.setActiveHand(((obj_id)inactiveHands.get(r)), true);
-                           activeHands.add(((obj_id)inactiveHands.get(r)));
+                            utils.addElement(activeHands, ((obj_id)inactiveHands.get(r)));
                             r++;
                         }
                     }
@@ -225,7 +228,7 @@ public class doom_bringer extends script.base_script
             obj_id oldLeader = obj_id.NULL_ID;
             for (Object activeHand : activeHands) {
                 if (!trial.isPrimaryHand(((obj_id) activeHand))) {
-                    nonLeaders.add(((obj_id)activeHands.get));
+                    utils.addElement(nonLeaders, ((obj_id) activeHand));
                 } else {
                     oldLeader = ((obj_id) activeHand);
                 }

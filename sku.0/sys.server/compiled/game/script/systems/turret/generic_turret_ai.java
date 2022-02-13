@@ -11,10 +11,12 @@ import script.obj_id;
 import script.obj_var;
 
 import java.util.Vector;
-import java.util.List;
 
 public class generic_turret_ai extends script.systems.combat.combat_base_old
 {
+    public generic_turret_ai()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         turret.activateTurret(self);
@@ -254,17 +256,17 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         }
         if (utils.hasScriptVar(self, xp.VAR_ATTACKER_LIST))
         {
-            List attackerList = utils.getResizeableObjIdBatchScriptVar(self, xp.VAR_ATTACKER_LIST);
+            Vector attackerList = utils.getResizeableObjIdBatchScriptVar(self, xp.VAR_ATTACKER_LIST);
             if (attackerList != null && attackerList.size() > 0)
             {
                 obj_var[] ovs = new obj_var[attackerList.size()];
                 for (int i = 0; i < attackerList.size(); i++)
                 {
                     String scriptVarPath = xp.VAR_ATTACKER_LIST + "." + ((obj_id)attackerList.get(i)) + ".damage";
-                    ovs[i] = new obj_var((attackerList.get(i)).toString(), utils.getIntScriptVar(self, scriptVarPath));
+                    ovs[i] = new obj_var((attackerList.elementAt(i)).toString(), utils.getIntScriptVar(self, scriptVarPath));
                 }
                 ovs = list.quickSort(0, ovs.length - 1, ovs);
-                if (ovs != null && ovs.length > 0)
+                if ((ovs != null) && (ovs.length > 0))
                 {
                     for (obj_var ov : ovs) {
                         String ovName = ov.getName();
@@ -298,13 +300,13 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         toRemove.setSize(0);
         for (obj_id old_target : old_targets) {
             if (!turret.canGenericTurretAttackTarget(old_target) || getDistance(self, old_target) > turret.TURRET_RANGE) {
-                toRemove.add(old_targets);
+                toRemove = utils.addElement(toRemove, old_target);
             }
         }
         if (toRemove != null && toRemove.size() > 0)
         {
             Vector targets = new Vector();
-            targets.remove(toRemove);
+            targets = utils.removeElements(targets, toRemove);
             obj_id[] _targets = new obj_id[0];
             if (targets != null)
             {
@@ -325,7 +327,7 @@ public class generic_turret_ai extends script.systems.combat.combat_base_old
         newTargets.setSize(0);
         for (obj_id target : targets) {
             if (!ai_lib.isAiDead(target) && getDistance(self, target) <= turret.TURRET_RANGE) {
-                newTargets.add(targets);
+                newTargets = utils.addElement(newTargets, target);
             }
         }
         obj_id[] _newTargets = new obj_id[0];

@@ -4,10 +4,12 @@ import script.*;
 import script.library.*;
 
 import java.util.Vector;
-import java.util.List;
 
 public class harvest_module extends script.base_script
 {
+    public harvest_module()
+    {
+    }
     public static final String STF = "pet/droid_modules";
     public static final String AUTO_HARVEST = "droidAutoHarvest";
     public static final float MAX_HARVEST_DISTANCE = 256.0f;
@@ -205,7 +207,7 @@ public class harvest_module extends script.base_script
         }
         if (utils.hasScriptVar(self, pet_lib.DROID_HARVEST_ARRAY))
         {
-            List toHarvest = utils.getResizeableObjIdArrayScriptVar(self, pet_lib.DROID_HARVEST_ARRAY);
+            Vector toHarvest = utils.getResizeableObjIdArrayScriptVar(self, pet_lib.DROID_HARVEST_ARRAY);
             utils.removeScriptVar(self, pet_lib.DROID_HARVEST_ARRAY);
             if (toHarvest == null || toHarvest.size() == 0)
             {

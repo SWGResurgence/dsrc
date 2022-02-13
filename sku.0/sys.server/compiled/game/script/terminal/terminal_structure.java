@@ -3,8 +3,7 @@ package script.terminal;
 import script.*;
 import script.library.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class terminal_structure extends script.base_script
 {
@@ -829,14 +828,16 @@ public class terminal_structure extends script.base_script
             forceCloseSUIPage(pid);
         }
         blog("terminal_structure.getSpecialSignManagementMenu: validation completed, getting menu options");
-        List menuOptions = new ArrayList<String>();
-        List menuStrings = new ArrayList<String>();
+        Vector menuOptions = new Vector();
+        menuOptions.setSize(0);
+        Vector menuStrings = new Vector();
+        menuStrings.setSize(0);
         boolean replaceSign = false;
         boolean removeSign = false;
         if (hasObjVar(structure, player_structure.SPECIAL_SIGN))
         {
-            menuStrings.add("@player_structure:remove_current_sign");
-            menuOptions.add("remove");
+            utils.addElement(menuStrings, "@player_structure:remove_current_sign");
+            utils.addElement(menuOptions, "remove");
             removeSign = true;
         }
         if (player_structure.getSpecialSignList(player, structure))
@@ -845,8 +846,8 @@ public class terminal_structure extends script.base_script
             String[] signName = utils.getStringArrayScriptVar(player, player_structure.VAR_SPECIAL_SIGN_NAMES);
             if (signList != null && signList.length > 0 && signName != null && signName.length > 0)
             {
-                menuStrings.add("@player_structure:replace_current_sign");
-                menuOptions.add("replace");
+                utils.addElement(menuStrings, "@player_structure:replace_current_sign");
+                utils.addElement(menuOptions, "replace");
                 replaceSign = true;
             }
             if (replaceSign && !removeSign)

@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class cybernetic extends script.base_script
 {
+    public cybernetic()
+    {
+    }
     public static final String CYBORG_TABLE = "datatables/cybernetic/cybernetic.iff";
     public static final String CYBORG_LEGS = "object/tangible/wearables/cybernetic/s01/cybernetic_s01_legs.iff";
     public static final String CYBORG_LEFT_ARM = "object/tangible/wearables/cybernetic/s01/cybernetic_s01_arm_l.iff";
@@ -376,7 +379,7 @@ public class cybernetic extends script.base_script
         for (obj_id content : contents) {
             String templateName = getTemplateName(content);
             if (hasScript(content, "cybernetic.cybernetic_item") || templateName.contains("cybernetic")) {
-                cyberneticItems.add(contents, content);
+                cyberneticItems.addElement(content);
             }
         }
         if (cyberneticItems == null || cyberneticItems.size() < 1)
@@ -443,7 +446,7 @@ public class cybernetic extends script.base_script
         Vector newInstallList = new Vector();
         for (String installedCybernetic : installedCybernetics) {
             if (!installedCybernetic.equals(templateName)) {
-                newInstallList.add(installedCybernetics, installedCybernetic);
+                newInstallList.addElement(installedCybernetic);
             }
         }
         if (newInstallList == null || newInstallList.size() < 1)

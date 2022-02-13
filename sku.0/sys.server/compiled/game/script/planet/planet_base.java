@@ -8,7 +8,7 @@ import script.library.utils;
 import script.location;
 import script.obj_id;
 
-import java.util.List;
+import java.util.Vector;
 
 public class planet_base extends script.base_script
 {
@@ -84,22 +84,29 @@ public class planet_base extends script.base_script
         location facilityLoc = params.getLocation("loc");
         location facilityRespawn = params.getLocation("respawn");
         int cloneType = params.getInt("type");
-        List idList = utils.getResizeableObjIdArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_ID);
-        List nameList = utils.getResizeableStringArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_NAME);
-        List areaList = utils.getResizeableStringArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_AREA);
-        List areaIdList = utils.getResizeableObjIdArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_AREA_ID);
-        List locList = utils.getResizeableLocationArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_LOC);
-        List respawnList = utils.getResizeableLocationArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_RESPAWN);
-        List cloneTypeList = utils.getResizeableIntArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_TYPE);
+        Vector idList = utils.getResizeableObjIdArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_ID);
+        Vector nameList = utils.getResizeableStringArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_NAME);
+        Vector areaList = utils.getResizeableStringArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_AREA);
+        Vector areaIdList = utils.getResizeableObjIdArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_AREA_ID);
+        Vector locList = utils.getResizeableLocationArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_LOC);
+        Vector respawnList = utils.getResizeableLocationArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_RESPAWN);
+        Vector cloneTypeList = utils.getResizeableIntArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_TYPE);
         if (idList == null || areaList == null || areaIdList == null || locList == null || respawnList == null || cloneTypeList == null)
         {
-            idList.add(facilityId);
-            nameList.add(cloneName);
-            areaList.add(areaName);
-            areaIdList.add(areaId);
-            locList.add(facilityLoc);
-            respawnList.add(facilityRespawn);
-            cloneTypeList.add(cloneType);
+            if (idList != null)
+                idList.add(facilityId);
+            if (nameList != null)
+                nameList.add(cloneName);
+            if (areaList != null)
+                areaList.add(areaName);
+            if (areaIdList != null)
+                areaIdList.add(areaId);
+            if (locList != null)
+                locList.add(facilityLoc);
+            if (respawnList != null)
+                respawnList.add(facilityRespawn);
+            if (cloneTypeList != null)
+                cloneTypeList.add(cloneType);
         }
         else 
         {
@@ -115,13 +122,13 @@ public class planet_base extends script.base_script
             }
             else 
             {
-                idList.add(facilityId);
-                nameList.add(cloneName);
-                areaList.add(areaName);
-                areaIdList.add(areaId);
-                locList.add(facilityLoc);
-                respawnList.add(facilityRespawn);
-                cloneTypeList.add(cloneType);
+                idList = utils.addElement(idList, facilityId);
+                nameList = utils.addElement(nameList, cloneName);
+                areaList = utils.addElement(areaList, areaName);
+                areaIdList = utils.addElement(areaIdList, areaId);
+                locList = utils.addElement(locList, facilityLoc);
+                respawnList = utils.addElement(respawnList, facilityRespawn);
+                cloneTypeList = utils.addElement(cloneTypeList, cloneType);
             }
         }
         utils.setScriptVar(self, cloninglib.VAR_PLANET_CLONE_ID, idList);
@@ -136,25 +143,25 @@ public class planet_base extends script.base_script
     public int unregisterCloningFacility(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id facilityId = params.getObjId("id");
-        List idList = utils.getResizeableObjIdArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_ID);
-        List nameList = utils.getResizeableStringArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_NAME);
-        List areaList = utils.getResizeableStringArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_AREA);
-        List areaIdList = utils.getResizeableObjIdArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_AREA_ID);
-        List locList = utils.getResizeableLocationArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_LOC);
-        List respawnList = utils.getResizeableLocationArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_RESPAWN);
-        List cloneTypeList = utils.getResizeableIntArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_TYPE);
+        Vector idList = utils.getResizeableObjIdArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_ID);
+        Vector nameList = utils.getResizeableStringArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_NAME);
+        Vector areaList = utils.getResizeableStringArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_AREA);
+        Vector areaIdList = utils.getResizeableObjIdArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_AREA_ID);
+        Vector locList = utils.getResizeableLocationArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_LOC);
+        Vector respawnList = utils.getResizeableLocationArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_RESPAWN);
+        Vector cloneTypeList = utils.getResizeableIntArrayScriptVar(self, cloninglib.VAR_PLANET_CLONE_TYPE);
         if (idList != null && nameList != null && areaList != null && areaIdList != null && locList != null && respawnList != null && cloneTypeList != null)
         {
             int pos = utils.getElementPositionInArray(idList, facilityId);
             if (pos >= 0)
             {
-                idList.remove(pos);
-                nameList.remove(pos);
-                areaList.remove(pos);
-                areaIdList.remove(pos);
-                locList.remove(pos);
-                respawnList.remove(pos);
-                cloneTypeList.remove(pos);
+                idList = utils.removeElementAt(idList, pos);
+                nameList = utils.removeElementAt(nameList, pos);
+                areaList = utils.removeElementAt(areaList, pos);
+                areaIdList = utils.removeElementAt(areaIdList, pos);
+                locList = utils.removeElementAt(locList, pos);
+                respawnList = utils.removeElementAt(respawnList, pos);
+                cloneTypeList = utils.removeElementAt(cloneTypeList, pos);
                 utils.setScriptVar(self, cloninglib.VAR_PLANET_CLONE_ID, idList);
                 utils.setScriptVar(self, cloninglib.VAR_PLANET_CLONE_NAME, nameList);
                 utils.setScriptVar(self, cloninglib.VAR_PLANET_CLONE_AREA, areaList);

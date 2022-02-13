@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class gcw_camp extends script.base_script
 {
+    public gcw_camp()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "initializeAdvancedCamp", null, 30.0f, false);
@@ -147,7 +150,7 @@ public class gcw_camp extends script.base_script
         Vector children = getResizeableObjIdArrayObjVar(self, theater.VAR_CHILDREN);
         LOG("gcw_camp_functionality", "initializeAdvancedCamp - children.length: " + children.size());
         for (obj_id nodeObject : nodeObjects) {
-            children.add(nodeObjects, nodeObject);
+            children = utils.addElement(children, nodeObject);
         }
         setObjVar(self, theater.VAR_CHILDREN, children);
         return SCRIPT_CONTINUE;

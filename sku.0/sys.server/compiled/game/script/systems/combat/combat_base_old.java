@@ -11,6 +11,9 @@ import java.util.Vector;
 
 public class combat_base_old extends script.base_script
 {
+    public combat_base_old()
+    {
+    }
     public static final int CONE = 0;
     public static final int SINGLE_TARGET = 1;
     public static final int AREA = 2;
@@ -115,7 +118,7 @@ public class combat_base_old extends script.base_script
             if (attackerSocialGroup != null && attackerSocialGroup.equals(ai_lib.getSocialGroup(objDefender))) {
                 continue;
             }
-            objValidDefenders.add(objDefenders);
+            objValidDefenders = utils.addElement(objValidDefenders, objDefender);
         }
         obj_id[] _objValidDefenders = new obj_id[0];
         if (objValidDefenders != null)
@@ -2185,7 +2188,7 @@ public class combat_base_old extends script.base_script
     {
         Vector objTruncatedArray = new Vector();
         objTruncatedArray.setSize(0);
-        objTruncatedArray.add(objTarget);
+        objTruncatedArray = utils.addElement(objTruncatedArray, objTarget);
         for (int i = 0; i <= intLength; i++)
         {
             if (i == objArray.length)
@@ -2194,7 +2197,7 @@ public class combat_base_old extends script.base_script
             }
             if (objArray[i] != objTarget)
             {
-                objTruncatedArray.add(objArray[i]);
+                utils.addElement(objTruncatedArray, objArray[i]);
             }
         }
         obj_id[] _objTruncatedArray = new obj_id[0];
@@ -2296,7 +2299,7 @@ public class combat_base_old extends script.base_script
             int intEffect = dctCombatInfo.getInt(strEffect);
             if (intEffect != -1)
             {
-                intEffects.add(intEffect);
+                intEffects = utils.addElement(intEffects, intEffect);
             }
         }
         for (int intI = 0; intI < intEffects.size(); intI++)
@@ -2321,7 +2324,7 @@ public class combat_base_old extends script.base_script
         {
             String strTest = "fltEffectDuration" + (intI + 1);
             float fltDuration = dctCombatInfo.getFloat(strTest);
-            fltDurations.add(fltDuration);
+            fltDurations = utils.addElement(fltDurations, fltDuration);
         }
         float[] _fltDurations = new float[0];
         if (fltDurations != null)

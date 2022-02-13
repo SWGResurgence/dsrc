@@ -7,10 +7,12 @@ import script.obj_id;
 import script.string_id;
 
 import java.util.Vector;
-import java.util.List;
 
 public class wave_spawner_ai_controller extends script.base_script
 {
+    public wave_spawner_ai_controller()
+    {
+    }
     public static final boolean LOGGING = true;
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -90,7 +92,7 @@ public class wave_spawner_ai_controller extends script.base_script
     }
     public void findWayPoints(obj_id self) throws InterruptedException
     {
-        List wayPoints = utils.getResizeableObjIdArrayScriptVar(self, restuss_event.MASTER_PATROL_ARRAY);
+        Vector wayPoints = utils.getResizeableObjIdArrayScriptVar(self, restuss_event.MASTER_PATROL_ARRAY);
         if (wayPoints == null || wayPoints.size() == 0)
         {
             doLogging("findWayPoints", "Waypoint list was empty, exiting");
@@ -127,7 +129,7 @@ public class wave_spawner_ai_controller extends script.base_script
             for (Object wayPoint : wayPoints) {
                 if (hasObjVar(((obj_id) wayPoint), "wp_name")) {
                     if (s.equals(getStringObjVar(((obj_id) wayPoint), "wp_name"))) {
-                        myPath.add(getLocation(((obj_id)wayPoints.get)));
+                        utils.addElement(myPath, getLocation(((obj_id) wayPoint)));
                     }
                 }
             }
@@ -216,7 +218,7 @@ public class wave_spawner_ai_controller extends script.base_script
         }
         if (utils.hasScriptVar(self, restuss_event.TRIG_CUSTOMSIGNAL))
         {
-            List customTrigger = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_CUSTOMSIGNAL);
+            Vector customTrigger = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_CUSTOMSIGNAL);
             if (customTrigger != null && customTrigger.size() > 0)
             {
                 for (Object o : customTrigger) {
@@ -232,7 +234,7 @@ public class wave_spawner_ai_controller extends script.base_script
     {
         if (utils.hasScriptVar(self, restuss_event.TRIG_ONDEATH))
         {
-            List deathTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ONDEATH);
+            Vector deathTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ONDEATH);
             if (deathTriggers != null && deathTriggers.size() > 0)
             {
                 for (Object deathTrigger : deathTriggers) {
@@ -246,7 +248,7 @@ public class wave_spawner_ai_controller extends script.base_script
     {
         if (utils.hasScriptVar(self, restuss_event.TRIG_ENTERCOMBAT))
         {
-            List combatTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ENTERCOMBAT);
+            Vector combatTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ENTERCOMBAT);
             if (combatTriggers != null && combatTriggers.size() > 0)
             {
                 for (Object combatTrigger : combatTriggers) {
@@ -264,7 +266,7 @@ public class wave_spawner_ai_controller extends script.base_script
         }
         if (utils.hasScriptVar(self, restuss_event.TRIG_EXITCOMBAT))
         {
-            List combatTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_EXITCOMBAT);
+            Vector combatTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_EXITCOMBAT);
             if (combatTriggers != null && combatTriggers.size() > 0)
             {
                 for (Object combatTrigger : combatTriggers) {
@@ -278,7 +280,7 @@ public class wave_spawner_ai_controller extends script.base_script
     {
         if (utils.hasScriptVar(self, restuss_event.TRIG_ARRIVELOCATION))
         {
-            List moveTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ARRIVELOCATION);
+            Vector moveTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ARRIVELOCATION);
             if (moveTriggers != null && moveTriggers.size() > 0)
             {
                 for (Object moveTrigger : moveTriggers) {

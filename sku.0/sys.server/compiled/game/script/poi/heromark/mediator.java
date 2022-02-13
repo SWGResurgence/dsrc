@@ -8,6 +8,9 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
+    public mediator()
+    {
+    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiHeroMark Mediator";
     public static final int CONV_GREET = 0;
@@ -54,13 +57,13 @@ public class mediator extends script.poi.base.scenario_actor
             if (badge.hasBadge(speaker, "poi_prisonbreak") && badge.hasBadge(speaker, "poi_factoryliberation") && badge.hasBadge(speaker, "poi_rabidbeast") && badge.hasBadge(speaker, "poi_twoliars"))
             {
                 msg = new string_id(convo, "m_youareahero");
-                responses.add(new string_id(convo, "r_m_relatestory"));
+                responses = utils.addElement(responses, new string_id(convo, "r_m_relatestory"));
                 npcStartConversation(speaker, self, convo, msg, responses);
             }
             else 
             {
                 msg = new string_id(convo, "m_greet");
-                responses.add(new string_id(convo, "r_m_greet"));
+                responses = utils.addElement(responses, new string_id(convo, "r_m_greet"));
                 npcStartConversation(speaker, self, convo, msg, responses);
             }
         }
@@ -89,23 +92,23 @@ public class mediator extends script.poi.base.scenario_actor
         switch (aId) {
             case "r_m_greet":
                 npcSpeak(speaker, new string_id(convo, "m_herotalk1"));
-                responses.add(new string_id(convo, "r_m_herotalk1"));
+                responses = utils.addElement(responses, new string_id(convo, "r_m_herotalk1"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_m_herotalk1":
                 npcSpeak(speaker, new string_id(convo, "m_herotalk2"));
-                responses.add(new string_id(convo, "r_m_herotalk2"));
+                responses = utils.addElement(responses, new string_id(convo, "r_m_herotalk2"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_m_herotalk2":
                 npcSpeak(speaker, new string_id(convo, "m_herotalk3"));
-                responses.add(new string_id(convo, "r_m_herotalk3"));
+                responses = utils.addElement(responses, new string_id(convo, "r_m_herotalk3"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_m_herotalk3":
                 npcSpeak(speaker, new string_id(convo, "m_herotalk4"));
-                responses.add(new string_id(convo, "r_m_empirebad"));
-                responses.add(new string_id(convo, "r_m_empiregood"));
+                responses = utils.addElement(responses, new string_id(convo, "r_m_empirebad"));
+                responses = utils.addElement(responses, new string_id(convo, "r_m_empiregood"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_m_empiregood":
@@ -114,27 +117,27 @@ public class mediator extends script.poi.base.scenario_actor
                 break;
             case "r_m_empirebad":
                 npcSpeak(speaker, new string_id(convo, "m_herotalk6"));
-                responses.add(new string_id(convo, "r_m_herotalk6"));
+                responses = utils.addElement(responses, new string_id(convo, "r_m_herotalk6"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_m_herotalk6":
                 npcSpeak(speaker, new string_id(convo, "m_herotalk7"));
-                responses.add(new string_id(convo, "r_m_herotalk7"));
+                responses = utils.addElement(responses, new string_id(convo, "r_m_herotalk7"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_m_herotalk7":
                 npcSpeak(speaker, new string_id(convo, "m_herotalk8"));
-                responses.add(new string_id(convo, "r_m_herotalk8"));
+                responses = utils.addElement(responses, new string_id(convo, "r_m_herotalk8"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_m_herotalk8":
                 npcSpeak(speaker, new string_id(convo, "m_herotalk9"));
-                responses.add(new string_id(convo, "r_m_herotalk9"));
+                responses = utils.addElement(responses, new string_id(convo, "r_m_herotalk9"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_m_herotalk9":
                 npcSpeak(speaker, new string_id(convo, "m_herotalk10"));
-                responses.add(new string_id(convo, "r_m_herotalk10"));
+                responses = utils.addElement(responses, new string_id(convo, "r_m_herotalk10"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_m_herotalk10":

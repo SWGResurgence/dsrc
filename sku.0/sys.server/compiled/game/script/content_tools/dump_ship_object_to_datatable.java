@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class dump_ship_object_to_datatable extends script.base_script
 {
+    public dump_ship_object_to_datatable()
+    {
+    }
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         if (!isGod(self))
@@ -155,7 +158,7 @@ public class dump_ship_object_to_datatable extends script.base_script
             obj_id[] objTestContents = getContents(objCell);
             if ((objTestContents != null) && (objTestContents.length > 0)) {
                 for (obj_id objTestContent : objTestContents) {
-                    objContents.add(objTestContents);
+                    objContents = utils.addElement(objContents, objTestContent);
                 }
             }
         }

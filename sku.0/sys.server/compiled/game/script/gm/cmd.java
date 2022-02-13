@@ -6,10 +6,12 @@ import script.library.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 import java.util.Vector;
-import java.util.List;
 
 public class cmd extends script.base_script
 {
+    public cmd()
+    {
+    }
     private static final boolean VETERAN_REWARDS_ENABLED = utils.checkConfigFlag("GameServer", "enableVeteranRewards");
 
     public int cmdGetPlayerId(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
@@ -800,7 +802,7 @@ public class cmd extends script.base_script
             String stringname = getString(new string_id("skl_n", skill));
             if (stringname != null && !stringname.equalsIgnoreCase("")) {
                 String linedata = "(" + stringname + ") " + skill;
-                entries.add(linedata);
+                entries = utils.addElement(entries, linedata);
             }
         }
         String listTitle = "SKILL LISTING";
@@ -864,7 +866,7 @@ public class cmd extends script.base_script
             {
                 linedata += " t:" + stamps[i];
             }
-            entries.add(linedata);
+            entries = utils.addElement(entries, linedata);
         }
         if (killers != null && killers.length > 0)
         {
@@ -1227,7 +1229,7 @@ public class cmd extends script.base_script
                 String stringname = getString(new string_id("exp_n", xpType));
                 if (stringname != null && !stringname.equalsIgnoreCase("")) {
                     String linedata = "(" + stringname + ") " + xpType;
-                    entries.add(linedata);
+                    entries = utils.addElement(entries, linedata);
                 }
             }
             String listTitle = "XP TYPES";
@@ -2140,7 +2142,7 @@ public class cmd extends script.base_script
             if (st.hasMoreTokens())
             {
                 key = st.nextToken();
-                List campsDat = fs_counterstrike.getAllCampHintsFromDT();
+                Vector campsDat = fs_counterstrike.getAllCampHintsFromDT();
                 if (campsDat.size() != 2)
                 {
                     trace.log(fs_dyn_village.LOG_CHAN, "fs_counterstrike::pickAndWriteCycleNamesAndLocs: -> getAllCampHints returned badly structured data. Camps not determine camp info for this cycle.", null, trace.TL_ERROR_LOG);
@@ -2831,7 +2833,7 @@ public class cmd extends script.base_script
             sendSystemMessageTestingOnly(self, "Enemy camp information only available during phase 3. Current phase is " + curPhase + ".");
             return SCRIPT_CONTINUE;
         }
-        List campNames = new ArrayList<String>();
+        Vector campNames = new Vector();
         location[] campLocs = null;
         obj_id[] campIds = null;
         if (utils.hasScriptVar(target, fs_counterstrike.OBJVAR_CREATED_CAMP_IDS))

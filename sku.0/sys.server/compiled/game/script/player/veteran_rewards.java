@@ -192,10 +192,10 @@ public class veteran_rewards extends script.base_script
             if ((events != null) && (events.length > 0))
             {
                 Vector choices = new Vector();
-                choices.add(CHOICE_ASK_NEXT_LOGIN);
-                choices.add(CHOICE_ASK_ONE_DAY);
-                choices.add(CHOICE_ASK_ONE_WEEK);
-                choices.add("");
+                choices.addElement(CHOICE_ASK_NEXT_LOGIN);
+                choices.addElement(CHOICE_ASK_ONE_DAY);
+                choices.addElement(CHOICE_ASK_ONE_WEEK);
+                choices.addElement("");
                 boolean hasMore = false;
                 for (int i = 0; i < events.length; ++i)
                 {
@@ -203,11 +203,11 @@ public class veteran_rewards extends script.base_script
                     {
                         hasMore = true;
                         events[i] = events[i].substring(1);
-                        choices.add("@veteran_new:color_lime_green " + veteranGetEventAnnouncement(events[i]));
+                        choices.addElement("@veteran_new:color_lime_green " + veteranGetEventAnnouncement(events[i]));
                     }
                     else 
                     {
-                        choices.add("@veteran_new:empty_string " + veteranGetEventAnnouncement(events[i]));
+                        choices.addElement("@veteran_new:empty_string " + veteranGetEventAnnouncement(events[i]));
                     }
                 }
                 utils.setScriptVar(self, SCRIPTVAR_ALL_EVENTS, events);
@@ -609,12 +609,12 @@ public class veteran_rewards extends script.base_script
         if ((freeCtsClusters != null) && (freeCtsClusters.length > 0))
         {
             Vector choices = new Vector();
-            choices.add("I am not ready to transfer yet.  Remind me at my next login.");
-            choices.add("I am not ready to transfer yet.  Remind me tomorrow.");
-            choices.add("I am not ready to transfer yet.  Remind me in a week.");
-            choices.add("I am not ready to transfer yet.  Remind me in a month.");
-            choices.add("");
-            choices.add("I am ready to transfer now.");
+            choices.addElement("I am not ready to transfer yet.  Remind me at my next login.");
+            choices.addElement("I am not ready to transfer yet.  Remind me tomorrow.");
+            choices.addElement("I am not ready to transfer yet.  Remind me in a week.");
+            choices.addElement("I am not ready to transfer yet.  Remind me in a month.");
+            choices.addElement("");
+            choices.addElement("I am ready to transfer now.");
             String announcement = "This character is eligible for a Free Character Transfer to one of the following designated galaxy servers:";
             announcement += "\n\n";
             for (String freeCtsCluster : freeCtsClusters) {
@@ -769,7 +769,7 @@ public class veteran_rewards extends script.base_script
         }
         Vector choices = new Vector();
         for (String freeCtsCluster : freeCtsClusters) {
-            choices.add(freeCtsClusters, freeCtsCluster);
+            choices.addElement(freeCtsCluster);
         }
         String announcement = "";
         if ((messageHeader != null) && (messageHeader.length() > 0))
@@ -1121,7 +1121,7 @@ public class veteran_rewards extends script.base_script
         }
         Vector choices = new Vector();
         for (String ctsDestinationCluster : ctsDestinationClusters) {
-            choices.add(ctsDestinationClusters);
+            choices.addElement(ctsDestinationCluster);
         }
         String announcement = "";
         if ((messageHeader != null) && (messageHeader.length() > 0))

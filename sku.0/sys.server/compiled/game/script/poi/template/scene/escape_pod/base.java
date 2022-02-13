@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class base extends script.base_script
 {
+    public base()
+    {
+    }
     public static final String VAR_THEATER_BASE = "theater";
     public static final String VAR_CHILDREN = VAR_THEATER_BASE + ".children";
     public static final String VAR_BEEN_INITIALIZED = "beenInitialized";
@@ -80,7 +83,7 @@ public class base extends script.base_script
             else 
             {
                 randomizeDebris(door);
-                children.add(door);
+                children = utils.addElement(children, door);
             }
         }
         int roll = rand(1, MAX_DEBRIS);
@@ -98,7 +101,7 @@ public class base extends script.base_script
                 else 
                 {
                     randomizeDebris(debrisId);
-                    children.add(debrisId);
+                    children = utils.addElement(children, debrisId);
                 }
             }
         }
@@ -116,11 +119,11 @@ public class base extends script.base_script
                 else 
                 {
                     setYaw(debrisId, rand(0, 359));
-                    children.add(debrisId);
+                    children = utils.addElement(children, debrisId);
                 }
             }
         }
-        if (children == null || children.size() == 0)
+        if ((children == null) || (children.size() == 0))
         {
             debugSpeakMsg(self, "no children?!");
         }
@@ -133,7 +136,7 @@ public class base extends script.base_script
     }
     public boolean cleanupTheater(obj_id self) throws InterruptedException
     {
-        if (self == null || self == obj_id.NULL_ID)
+        if ((self == null) || (self == obj_id.NULL_ID))
         {
             self = getSelf();
         }

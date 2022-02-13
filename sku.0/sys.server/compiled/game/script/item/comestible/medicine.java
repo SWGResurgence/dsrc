@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class medicine extends script.base_script
 {
+    public medicine()
+    {
+    }
     public static final String SCRIPT_MEDICINE = "item.comestible.medicine";
     public static final String MSG_TARGET_NOT_PLAYER = "@error_message:target_not_player";
     public static final string_id SID_TARGET_NOT_CREATURE = new string_id("error_message", "target_not_creature");
@@ -287,18 +290,18 @@ public class medicine extends script.base_script
             attrib_mod[] am = getAttribModArrayObjVar(self, consumable.VAR_CONSUMABLE_MODS);
             Vector dsrc = new Vector();
             dsrc.setSize(0);
-            dsrc.add("MEDICINAL PROPERTIES");
-            if (am == null || am.length == 0)
+            dsrc = utils.addElement(null, "MEDICINAL PROPERTIES");
+            if ((am == null) || (am.length == 0))
             {
                 if (healing.isHealStateMedicine(self))
                 {
                     String heal_state = healing.getHealingState(self);
                     heal_state = (heal_state.substring(0, 1)).toUpperCase() + (heal_state.substring(1)).toLowerCase();
-                    dsrc.add("HEAL STATE: " + heal_state);
+                    dsrc = utils.addElement(dsrc, "HEAL STATE: " + heal_state);
                 }
                 else 
                 {
-                    dsrc.add(" None");
+                    dsrc = utils.addElement(dsrc, " None");
                 }
             }
             else 
@@ -308,32 +311,32 @@ public class medicine extends script.base_script
                     int val = attrib_mod.getValue();
                     float atk = attrib_mod.getAttack();
                     float dcy = attrib_mod.getDecay();
-                    switch ((int)(atk)) {
+                    switch ((int) (atk)) {
                         case (int) healing.AM_HEAL_WOUND:
-                            dsrc.add("  * HEAL WOUND: " + consumable.STAT_NAME[attrib] + " " + val);
+                            dsrc = utils.addElement(dsrc, "  * HEAL WOUND: " + consumable.STAT_NAME[attrib] + " " + val);
                             break;
                         case (int) healing.AM_HEAL_SHOCK:
-                            dsrc.add("  * HEAL SHOCK: " + val);
+                            dsrc = utils.addElement(dsrc, "  * HEAL SHOCK: " + val);
                             break;
-                        case (int)healing.VAR_BUFF_MOD_ATTACK:
-                            dsrc.add("  * ENHANCE: " + consumable.STAT_NAME[attrib] + " " + val);
-                            dsrc.add("  * DURATION: " + (int)am[i].getDuration());
+                        case (int) healing.VAR_BUFF_MOD_ATTACK:
+                            dsrc = utils.addElement(dsrc, "  * ENHANCE: " + consumable.STAT_NAME[attrib] + " " + val);
+                            dsrc = utils.addElement(dsrc, "  * DURATION: " + (int) attrib_mod.getDuration());
                             break;
-                        default;
-                            switch ((int)(dcy)) {
-                                case (int)MOD_POOL:
-                                    dsrc.add("  * HEAL DAMAGE: " + consumable.STAT_NAME[attrib] + " " + val);
+                        default:
+                            switch ((int) (dcy)) {
+                                case (int) MOD_POOL:
+                                    dsrc = utils.addElement(dsrc, "  * HEAL DAMAGE: " + consumable.STAT_NAME[attrib] + " " + val);
                                     break;
-                                case (int)MOD_ANTIDOTE:
-                                    dsrc.add("  * ANTIDOTE: " + consumable.STAT_NAME[attrib]);
+                                case (int) MOD_ANTIDOTE:
+                                    dsrc = utils.addElement(dsrc, "  * ANTIDOTE: " + consumable.STAT_NAME[attrib]);
                                     break;
-                        }
+                            }
                     }
                 }
             }
             if (hasObjVar(self, consumable.VAR_CONSUMABLE_CHARGES))
             {
-                dsrc.add("  * CHARGES: " + getIntObjVar(self, consumable.VAR_CONSUMABLE_CHARGES));
+                dsrc = utils.addElement(dsrc, "  * CHARGES: " + getIntObjVar(self, consumable.VAR_CONSUMABLE_CHARGES));
             }
         }
         else if (item == menu_info_types.SERVER_MENU2)

@@ -7,11 +7,12 @@ import script.library.utils;
 import script.obj_id;
 
 import java.util.Vector;
-import java.util.ArrayList;
-import java.util.List;
 
 public class final_battle_theater extends script.base_script
 {
+    public final_battle_theater()
+    {
+    }
     public int OnTheaterCreated(obj_id self, obj_id[] objects, obj_id player, obj_id creator) throws InterruptedException
     {
         setObjVar(self, "fs_quest.final_battle.player", player);
@@ -68,14 +69,14 @@ public class final_battle_theater extends script.base_script
         {
             destroyObject(second);
         }
-        List existingNPCs = new ArrayList<obj_id>();
+        Vector existingNPCs = new Vector();
         if (hasObjVar(self, "fs_quest.final_battle_npcs"))
         {
             existingNPCs = utils.getResizeableObjIdBatchObjVar(self, "fs_quest.final_battle_npcs");
             obj_id NPC = null;
             for (Object existingNPC : existingNPCs) {
                 NPC = (obj_id) existingNPC;
-                if (isIdValid(NPC) && exists(NPC)) {
+                if ((isIdValid(NPC)) && (exists(NPC))) {
                     destroyObject(NPC);
                 }
             }

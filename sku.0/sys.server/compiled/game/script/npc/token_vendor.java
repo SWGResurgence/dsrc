@@ -57,8 +57,8 @@ public class token_vendor extends script.base_script
             if (reqClass < 1 || utils.isProfession(player, reqClass))
             {
                 String itemName = getString(new string_id("static_item_n", item));
-                purchaseList.add(itemName);
-                itemIndexes.add(itemCount);
+                utils.addElement(purchaseList, itemName);
+                utils.addElement(itemIndexes, itemCount);
             }
             itemCount++;
         }

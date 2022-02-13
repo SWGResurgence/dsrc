@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class faction_perk extends script.base_script
 {
+    public faction_perk()
+    {
+    }
     public static final String TBL_PREJUDICE = "datatables/faction/prejudice.iff";
     public static final String TBL_PERK_INVENTORY_BASE = "datatables/npc/faction_recruiter/perk_inventory/";
     public static final String VAR_COVERT_DETECTOR = "covert_detector";
@@ -350,14 +353,14 @@ public class faction_perk extends script.base_script
                 String text = "@gcw_rank:" + toLower(playerGcwFaction) + "_rank" + i;
                 if (itemsPerRankList[i] > 0)
                 {
-                    rankList.add(text);
+                    rankList = utils.addElement(rankList, text);
                 }
                 else 
                 {
                     string_id contrastText_sid = new string_id("faction_recruiter", "rank_list_empty");
                     prose_package pp = prose.getPackage(contrastText_sid);
                     prose.setTO(pp, text);
-                    rankList.add("\0" + packOutOfBandProsePackage(null, pp));
+                    rankList = utils.addElement(rankList, "\0" + packOutOfBandProsePackage(null, pp));
                 }
             }
             if (rankList != null && rankList.size() > 0)
@@ -500,8 +503,8 @@ public class faction_perk extends script.base_script
                                 cost = (int)(fltCost);
                             }
                             cost *= systemMultiplier;
-                            items.add(row_name + " (Cost: " + cost + ")");
-                            templates.add(row_template);
+                            items = utils.addElement(items, row_name + " (Cost: " + cost + ")");
+                            templates = utils.addElement(templates, row_template);
                         }
                     }
                 }

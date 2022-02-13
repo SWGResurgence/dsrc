@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class quest_shuttle_comlink extends script.base_script
 {
+    public quest_shuttle_comlink()
+    {
+    }
     public static final boolean LOGGING_ON = false;
     public static final string_id CALL_SHIP = new string_id("meatlump/meatlump", "comlink_use");
     public static final string_id MUST_DISMOUNT = new string_id("quest/ground/util/quest_giver_object", "must_dismount");
@@ -275,7 +278,7 @@ public class quest_shuttle_comlink extends script.base_script
             {
                 messageTo(mob, "barkAttack", null, 2, false);
             }
-            ragtags.add(mob);
+            ragtags = utils.addElement(ragtags, mob);
         }
         blog("spawnEnemies - Successfully finished loop");
         if (ragtags != null && ragtags.size() > 0)

@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class healing extends script.base_script
 {
+    public healing()
+    {
+    }
     public static final int VAR_ITEM_REUSE_TIME = 20;
     public static final int ITEM_CHANNEL_HEAL_TICKS = 5;
     public static final String VAR_ENHANCER_EFFICIENCY = "healing.enhancement";
@@ -1153,8 +1156,8 @@ public class healing extends script.base_script
         {
             if ((Integer) delta.get(i) < 1)
             {
-                attribs.remove(i);
-                delta.remove(i);
+                attribs = utils.removeElementAt(attribs, i);
+                delta = utils.removeElementAt(delta, i);
                 i--;
             }
         }
@@ -3668,16 +3671,16 @@ public class healing extends script.base_script
             if (attrib_mod.getAttack() == AM_HEAL_WOUND) {
                 mod_value = (int) (attrib_mod.getValue() * multiplier);
                 tmp = utils.createHealWoundAttribMod(attrib_mod.getAttribute(), mod_value);
-                am_new.add(tmp);
+                am_new = utils.addElement(am_new, tmp);
             } else {
                 if (attrib_mod.getDecay() == MOD_POOL) {
                     mod_value = (int) (attrib_mod.getValue() * multiplier);
                     tmp = utils.createHealDamageAttribMod(attrib_mod.getAttribute(), mod_value);
-                    am_new.add(tmp);
+                    am_new = utils.addElement(am_new, tmp);
                 } else {
                     mod_value = (int) (attrib_mod.getValue() * multiplier);
                     tmp = new attrib_mod(attrib_mod.getAttribute(), mod_value, attrib_mod.getDuration(), VAR_BUFF_MOD_ATTACK, VAR_BUFF_MOD_DECAY);
-                    am_new.add(tmp);
+                    am_new = utils.addElement(am_new, tmp);
                 }
             }
         }
@@ -4545,11 +4548,11 @@ public class healing extends script.base_script
         for (obj_id object : objects) {
             if (!isPlayer(object)) {
                 if (pet_lib.isCreaturePet(object)) {
-                    healable_targets.add(objects, object);
+                    healable_targets = utils.addElement(healable_targets, object);
                 }
             } else {
                 if (factions.pvpDoAllowedHelpCheck(medic, object)) {
-                    healable_targets.add(objects, object);
+                    healable_targets = utils.addElement(healable_targets, object);
                 }
             }
         }
@@ -4582,7 +4585,7 @@ public class healing extends script.base_script
                 if (factions.pvpDoAllowedAttackCheck(medic, object)) {
                     if (!isIncapacitated(object) && !isDead(object)) {
                         if (!pet_lib.isVehiclePet(object) && !ai_lib.isAndroid(object) && ai_lib.aiGetNiche(object) != NICHE_DROID && ai_lib.aiGetNiche(object) != NICHE_VEHICLE && !vehicle.isDriveableVehicle(object)) {
-                            attackable_targets.add(objects, object);
+                            attackable_targets = utils.addElement(attackable_targets, object);
                         }
                     }
                 }

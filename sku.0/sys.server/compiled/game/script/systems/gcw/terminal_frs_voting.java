@@ -9,10 +9,12 @@ import script.obj_id;
 import script.string_id;
 
 import java.util.Vector;
-import java.util.List;
 
 public class terminal_frs_voting extends script.base_script
 {
+    public terminal_frs_voting()
+    {
+    }
     public static final String SCRIPT_VAR_SUI_PID = "force_rank.vote_sui";
     public static final String SCRIPT_VAR_TERMINAL = "force_rank.vote_terminal";
     public int OnInitialize(obj_id self) throws InterruptedException
@@ -116,7 +118,7 @@ public class terminal_frs_voting extends script.base_script
                 {
                     if (force_rank.getVoteWeight(player_rank, i + 1) > 0)
                     {
-                        List players_voted = utils.getResizeableStringBatchObjVar(self, force_rank.BATCH_VAR_VOTERS + (i + 1));
+                        Vector players_voted = utils.getResizeableStringBatchObjVar(self, force_rank.BATCH_VAR_VOTERS + (i + 1));
                         if (players_voted != null)
                         {
                             if (players_voted.indexOf(getFirstName(player)) == -1)

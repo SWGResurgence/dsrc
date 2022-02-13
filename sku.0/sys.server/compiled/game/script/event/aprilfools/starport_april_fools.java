@@ -12,6 +12,9 @@ import java.util.Vector;
 
 public class starport_april_fools extends script.base_script
 {
+    public starport_april_fools()
+    {
+    }
     public static final String CITY_OBJVAR = "aprilFools.city";
     public static final String LAST_SPAWN = "aprilFools.lastSpawn";
     public static final String CREATURE_LIST = "aprilFools.creatures";
@@ -96,7 +99,7 @@ public class starport_april_fools extends script.base_script
                     for (obj_id currentCreature : currentCreatures) {
                         if (isIdValid(currentCreature) && exists(currentCreature) && !isDead(currentCreature)) {
                             ++totalCreatures;
-                            creatureList.add(currentCreature);
+                            utils.addElement(creatureList, currentCreature);
                         }
                     }
                 }
@@ -119,7 +122,7 @@ public class starport_april_fools extends script.base_script
             {
                 currentLoc.x += (10 * j);
                 newCreature = create.object(templateName, currentLoc);
-                creatureList.add(newCreature);
+                utils.addElement(creatureList, newCreature);
             }
             setObjVar(self, CREATURE_LIST, creatureList);
             setObjVar(self, LAST_SPAWN, getCalendarTime());

@@ -11,6 +11,9 @@ import java.util.Vector;
 
 public class tcg_combine_tcg_items extends script.base_script
 {
+    public tcg_combine_tcg_items()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "combine";
     public static final String TEMPLATE_PATTERN = "object/tangible/tcg/series3/combine_object_";
@@ -96,7 +99,7 @@ public class tcg_combine_tcg_items extends script.base_script
         combinableObjects.setSize(0);
         for (obj_id allPossibleMatch : allPossibleMatches) {
             if (hasObjVar(allPossibleMatch, COMBINE) && (getStringObjVar(allPossibleMatch, COMBINE)).startsWith("true")) {
-                combinableObjects.add(allPossibleMatches);
+                utils.addElement(combinableObjects, allPossibleMatch);
             }
         }
         if (combinableObjects.size() < 4)
@@ -125,28 +128,28 @@ public class tcg_combine_tcg_items extends script.base_script
         toBeCombinedList.setSize(0);
         for (obj_id combinableObject : combinableObjects) {
             if (!jangoFound && (getTemplateName(combinableObject)).equals("object/tangible/tcg/series3/combine_object_jango_fett_memorial_statue.iff")) {
-                toBeCombinedList.add(combinableObjects);
+                utils.addElement(toBeCombinedList, combinableObject);
                 if (owner != utils.getContainingPlayer(combinableObject)) {
                     break;
                 }
                 jangoFound = true;
                 CustomerServiceLog("tcg", "Jet Pack Combination - Player: " + owner + " " + getPlayerName(owner) + " has Jango Fett object (" + combinableObject + ")in inventory");
             } else if (!bobaFound && (getTemplateName(combinableObject)).equals("object/tangible/tcg/series3/combine_object_boba_fett_statue.iff")) {
-                toBeCombinedList.add(combinableObjects);
+                utils.addElement(toBeCombinedList, combinableObject);
                 if (owner != utils.getContainingPlayer(combinableObject)) {
                     break;
                 }
                 bobaFound = true;
                 CustomerServiceLog("tcg", "Jet Pack Combination - Player: " + owner + " " + getPlayerName(owner) + " has Boba Fett object (" + combinableObject + ")in inventory");
             } else if (!bannerFound && (getTemplateName(combinableObject)).equals("object/tangible/tcg/series3/combine_object_mandalorian_skull_banner.iff")) {
-                toBeCombinedList.add(combinableObjects);
+                utils.addElement(toBeCombinedList, combinableObject);
                 if (owner != utils.getContainingPlayer(combinableObject)) {
                     break;
                 }
                 bannerFound = true;
                 CustomerServiceLog("tcg", "Jet Pack Combination - Player: " + owner + " " + getPlayerName(owner) + " has Madalorian Banner object (" + combinableObject + ")in inventory");
             } else if (!bluePrintFound && (getTemplateName(combinableObject)).equals("object/tangible/tcg/series3/combine_object_merr_sonn_jt12_jetpack_blueprints.iff")) {
-                toBeCombinedList.add(combinableObjects);
+                utils.addElement(toBeCombinedList, combinableObject);
                 if (owner != utils.getContainingPlayer(combinableObject)) {
                     break;
                 }

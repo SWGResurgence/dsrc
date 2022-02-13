@@ -11,6 +11,9 @@ import java.util.Vector;
 
 public class imperial_lrg extends script.base_script
 {
+    public imperial_lrg()
+    {
+    }
     public static final boolean IS_PERSISTED = true;
     public static final String SENTINEL_GUARD = "stormtrooper";
     public static final String[] SENTINEL = 
@@ -80,7 +83,7 @@ public class imperial_lrg extends script.base_script
     public boolean setupTheater(obj_id self) throws InterruptedException
     {
         LOG("imperial_lrg", "**************** SETUP: " + getGameTime() + " **************");
-        if (self == null || self == obj_id.NULL_ID)
+        if ((self == null) || (self == obj_id.NULL_ID))
         {
             self = getSelf();
         }
@@ -89,18 +92,23 @@ public class imperial_lrg extends script.base_script
         location myLoc = getLocation(self);
         for (String s1 : SENTINEL) {
             obj_id child = spawn(self, SENTINEL_GUARD, s1, ai_lib.BEHAVIOR_SENTINEL);
-            if (child != null && child != obj_id.NULL_ID) {
-                children.add(child);
+            if ((child == null) || (child == obj_id.NULL_ID)) {
+            } else {
+                children = utils.addElement(children, child);
                 ai_lib.setDefaultCalmBehavior(child, ai_lib.BEHAVIOR_SENTINEL);
             }
         }
         for (String s : PATROL) {
             obj_id child = spawn(self, PATROL_GUARD, s, ai_lib.BEHAVIOR_SENTINEL);
-            if (child != null && child != obj_id.NULL_ID) {
-            children.add(child);
+            if ((child == null) || (child == obj_id.NULL_ID)) {
+            } else {
+                children = utils.addElement(children, child);
             }
         }
-        if (children != null && children.size() != 0)
+        if ((children == null) || (children.size() == 0))
+        {
+        }
+        else 
         {
             setObjVar(self, theater.VAR_CHILDREN, children);
             return true;
@@ -109,12 +117,12 @@ public class imperial_lrg extends script.base_script
     }
     public boolean cleanupTheater(obj_id self) throws InterruptedException
     {
-        if (self == null || self == obj_id.NULL_ID)
+        if ((self == null) || (self == obj_id.NULL_ID))
         {
             self = getSelf();
         }
         obj_id[] children = getObjIdArrayObjVar(self, theater.VAR_CHILDREN);
-        if (children == null || children.length == 0)
+        if ((children == null) || (children.length == 0))
         {
             return false;
         }

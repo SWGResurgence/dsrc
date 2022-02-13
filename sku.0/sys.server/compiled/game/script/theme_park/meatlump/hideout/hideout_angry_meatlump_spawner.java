@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class hideout_angry_meatlump_spawner extends script.base_script
 {
+    public hideout_angry_meatlump_spawner()
+    {
+    }
     public static final String ELIGIBLE_OBJVAR = "angryMeatlumpsEligible";
     public static final String ANGRY_MEATLUMPS_LIST_SCRIPTVAR = "angryMeatlumpsList";
     public static final String HIDEOUT_ID_OBJVAR = "angryMeatlump.hideout";
@@ -38,8 +41,8 @@ public class hideout_angry_meatlump_spawner extends script.base_script
                 {
                     buff.applyBuff(chosenMeatlump, "mtp_meatlump_angry");
                     setObjVar(chosenMeatlump, HIDEOUT_ID_OBJVAR, self);
-                    angryMeatlumps.add(chosenMeatlump);
-                    eligibleMeatlumps.remove(chosenMeatlump);
+                    utils.addElement(angryMeatlumps, chosenMeatlump);
+                    utils.removeElement(eligibleMeatlumps, chosenMeatlump);
                 }
             }
         }
@@ -85,7 +88,7 @@ public class hideout_angry_meatlump_spawner extends script.base_script
             {
                 buff.applyBuff(chosenMeatlump, "mtp_meatlump_angry");
                 setObjVar(chosenMeatlump, HIDEOUT_ID_OBJVAR, self);
-                angryMeatlumps.add(chosenMeatlump);
+                utils.addElement(angryMeatlumps, chosenMeatlump);
             }
         }
         if (angryMeatlumps != null && angryMeatlumps.size() > 0)
@@ -112,7 +115,7 @@ public class hideout_angry_meatlump_spawner extends script.base_script
                         for (obj_id thing : cellContents) {
                             if (isMob(thing) && !isPlayer(thing)) {
                                 if (hasObjVar(thing, ELIGIBLE_OBJVAR) && !buff.hasBuff(thing, "mtp_meatlump_angry") && !buff.hasBuff(thing, "mtp_meatlump_happy")) {
-                                    eligibleMeatlumps.add(thing);
+                                    utils.addElement(eligibleMeatlumps, thing);
                                 }
                             }
                         }

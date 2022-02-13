@@ -8,6 +8,9 @@ import java.util.Vector;
 
 public class creature_combat extends script.systems.combat.combat_base
 {
+    public creature_combat()
+    {
+    }
     public static final float MIN_MOVEMENT_DURING_COMBAT = 0.015f;
     public static final float MAX_MOVEMENT_DURING_COMBAT = 0.05f;
     public static final float TOO_CLOSE_DISTANCE = 3.0f;
@@ -312,7 +315,7 @@ public class creature_combat extends script.systems.combat.combat_base
                 goodIds.setSize(0);
                 for (obj_id hater : haters) {
                     if (isIdValid(hater) && exists(hater)) {
-                        goodIds.add(haters);
+                        utils.addElement(goodIds, hater);
                     }
                 }
                 if (goodIds != null & goodIds.size() > 0)

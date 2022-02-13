@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class mtp_instance_enter extends script.base_script
 {
+    public mtp_instance_enter()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (getDistance(player, self) > 6.0f)
@@ -93,19 +96,19 @@ public class mtp_instance_enter extends script.base_script
         startingTriggers.setSize(0);
         if (groundquests.isTaskActive(player, "mtp_hideout_instance_kill_all_droids", "gotoInstance"))
         {
-            startingTriggers.add("mtp_kill_all_droids");
+            utils.addElement(startingTriggers, "mtp_kill_all_droids");
         }
         if (groundquests.isTaskActive(player, "mtp_hideout_instance_kill_specific_droids", "gotoInstance"))
         {
-            startingTriggers.add("mtp_kill_specific_droids");
+            utils.addElement(startingTriggers, "mtp_kill_specific_droids");
         }
         if (groundquests.isTaskActive(player, "mtp_hideout_instance_recover_supplies", "gotoInstance"))
         {
-            startingTriggers.add("mtp_recover_supplies");
+            utils.addElement(startingTriggers, "mtp_recover_supplies");
         }
         if (groundquests.isTaskActive(player, "mtp_hideout_instance_escort_trapped_meatlump", "gotoInstance"))
         {
-            startingTriggers.add("mtp_escort_trapped_meatlump");
+            utils.addElement(startingTriggers, "mtp_escort_trapped_meatlump");
         }
         return startingTriggers;
     }

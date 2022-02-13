@@ -6,10 +6,12 @@ import script.library.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.List;
 
 public class qatool extends script.base_script
 {
+    public qatool()
+    {
+    }
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String SPACE_MOBILE_TABLE = "datatables/space_mobile/space_mobile.iff";
     public static final String MASTER_ITEM_TABLE = "datatables/item/master_item/master_item.iff";
@@ -1469,14 +1471,14 @@ public class qatool extends script.base_script
         else if ((toLower(command)).equals("qabadge"))
         {
             Vector vectorMenuArray = new Vector();
-            vectorMenuArray.add("*Add All Badges*");
-            vectorMenuArray.add("*Remove All Badges*");
+            vectorMenuArray.addElement("*Add All Badges*");
+            vectorMenuArray.addElement("*Remove All Badges*");
             String[] badgePages = getAllCollectionPagesInBook("badge_book");
             if ((badgePages != null) && (badgePages.length > 0))
             {
                 for (String badgePage : badgePages) {
                     if (!badgePage.equals("bdg_accumulation")) {
-                        vectorMenuArray.add(badgePages);
+                        vectorMenuArray.addElement(badgePage);
                     }
                 }
             }
@@ -1881,8 +1883,8 @@ public class qatool extends script.base_script
             {
                 area = "";
             }
-            List idList = utils.getResizeableObjIdArrayScriptVar(planet, cloninglib.VAR_PLANET_CLONE_ID);
-            List nameList = utils.getResizeableStringArrayScriptVar(planet, cloninglib.VAR_PLANET_CLONE_NAME);
+            Vector idList = utils.getResizeableObjIdArrayScriptVar(planet, cloninglib.VAR_PLANET_CLONE_ID);
+            Vector nameList = utils.getResizeableStringArrayScriptVar(planet, cloninglib.VAR_PLANET_CLONE_NAME);
             if (idList.size() == nameList.size())
             {
                 idList.add(self);
@@ -2320,14 +2322,14 @@ public class qatool extends script.base_script
                 {
                     case BADGETOOL_MENUOPTION:
                     Vector vectorMenuArray = new Vector();
-                    vectorMenuArray.add("*Add All Badges*");
-                    vectorMenuArray.add("*Remove All Badges*");
+                    vectorMenuArray.addElement("*Add All Badges*");
+                    vectorMenuArray.addElement("*Remove All Badges*");
                     String[] badgePages = getAllCollectionPagesInBook("badge_book");
                     if ((badgePages != null) && (badgePages.length > 0))
                     {
                         for (String badgePage : badgePages) {
                             if (!badgePage.equals("bdg_accumulation")) {
-                                vectorMenuArray.add(badgePages);
+                                vectorMenuArray.addElement(badgePage);
                             }
                         }
                     }
@@ -2732,7 +2734,7 @@ public class qatool extends script.base_script
             allMobObj_IDs.setSize(0);
             for (obj_id allOID : allOIDs) {
                 if (isMob(allOID) && !isPlayer(allOID)) {
-                    allMobObj_IDs.add(allOIDs);
+                    utils.addElement(allMobObj_IDs, allOID);
                 }
             }
             obj_id[] _allMobObj_IDs = new obj_id[0];
@@ -2800,7 +2802,7 @@ public class qatool extends script.base_script
                     localizedString = getEncodedName(allMobOID);
                 }
                 if (searchString.equals("none")) {
-                    mobMenu.add(localizedString + "  ( " + allMobOIDs + " )");
+                    utils.addElement(mobMenu, localizedString + "  ( " + allMobOID + " )");
                 } else if (!searchString.equals("none") && searchString.length() > 2) {
                     String lowerCaseMobile = toLower(localizedString);
                     String lowerSearchString = toLower(searchString);
@@ -3332,7 +3334,7 @@ public class qatool extends script.base_script
                     {
                         Vector convertOidToString = new Vector();
                         for (obj_id allTemplateObjectsRadius1 : allTemplateObjectsRadius) {
-                            convertOidToString.add("" + allTemplateObjectsRadius1);
+                            utils.addElement(convertOidToString, "" + allTemplateObjectsRadius1);
                         }
                         if (convertOidToString.size() >= 1)
                         {
@@ -3365,7 +3367,7 @@ public class qatool extends script.base_script
             for (obj_id allObjOID : allObjOIDs) {
                 String encodeString = getEncodedName(allObjOID);
                 if (encodeString.length() > 0) {
-                    objMenu.add(encodeString + "  ( " + allObjOIDs + " )");
+                    utils.addElement(objMenu, encodeString + "  ( " + allObjOID + " )");
                 }
             }
             if (objMenu.size() > -1)
@@ -3564,7 +3566,7 @@ public class qatool extends script.base_script
                     {
                         if (itemSpawnStrListArray[x].indexOf(searchSpawnString) == 0)
                         {
-                            itemRowList.add("" + x);
+                            utils.addElement(itemRowList, "" + x);
                         }
                     }
                     if (itemRowList.size() > -1)
@@ -3574,7 +3576,7 @@ public class qatool extends script.base_script
                         String itemString = "";
                         for (String allItemRow : allItemRows) {
                             itemString = dataTableGetString(datatableName, utils.stringToInt(allItemRow), "name");
-                            itemSpawnStringList.add(itemString);
+                            utils.addElement(itemSpawnStringList, itemString);
                         }
                         if (itemSpawnStringList.size() > -1)
                         {
@@ -4082,14 +4084,14 @@ public class qatool extends script.base_script
         }
         final String ATTACK_TYPE = "combat_rangedspecialize_pistol";
         int damage = getMaxHealth(target) + 1;
-        List attackerList = utils.getResizeableObjIdBatchScriptVar(target, "creditForKills.attackerList.attackers");
-        attackerList.add(self);
+        Vector attackerList = utils.getResizeableObjIdBatchScriptVar(target, "creditForKills.attackerList.attackers");
+        attackerList = utils.addElement(attackerList, self);
         utils.setBatchScriptVar(target, "creditForKills.attackerList.attackers", attackerList);
         utils.setScriptVar(target, "creditForKills.attackerList." + self + ".damage", damage);
         utils.setScriptVar(target, "creditForKills.damageCount", 100);
         utils.setScriptVar(target, "creditForKills.damageTally", damage);
-        List types = utils.getResizeableObjIdBatchScriptVar(target, "creditForKills.attackerList." + self + ".xp.types");
-        types.add(ATTACK_TYPE);
+        Vector types = utils.getResizeableObjIdBatchScriptVar(target, "creditForKills.attackerList." + self + ".xp.types");
+        types = utils.addElement(types, ATTACK_TYPE);
         utils.setBatchScriptVar(target, "creditForKills.attackerList." + self + ".xp.types", types);
         utils.setScriptVar(target, "creditForKills.attackerList." + self + ".xp." + ATTACK_TYPE, damage);
         setHealth(target, -5000);

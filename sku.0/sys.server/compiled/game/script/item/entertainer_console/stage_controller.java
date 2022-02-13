@@ -4,11 +4,13 @@ import script.*;
 import script.library.*;
 
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class stage_controller extends script.terminal.base.base_terminal
 {
+    public stage_controller()
+    {
+    }
     public static final String[] PROP_TYPE = 
     {
         "Backdrop",
@@ -87,31 +89,31 @@ public class stage_controller extends script.terminal.base.base_terminal
             sendSystemMessage(player, SID_NO_PROPS);
             return;
         }
-        List propList = new ArrayList<String>();
-        List backdropList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.backdrop");
+        Vector propList = new Vector();
+        Vector backdropList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.backdrop");
         if (backdropList != null && backdropList.size() > 0)
         {
-            propList.add("Backdrop");
+            propList.addElement("Backdrop");
         }
-        List smokeList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.smoke");
+        Vector smokeList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.smoke");
         if (smokeList != null && smokeList.size() > 0)
         {
-            propList.add("Smoke");
+            propList.addElement("Smoke");
         }
-        List pyrotechnicList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.pyrotechnic");
+        Vector pyrotechnicList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.pyrotechnic");
         if (pyrotechnicList != null && pyrotechnicList.size() > 0)
         {
-            propList.add("Pyrotechnic");
+            propList.addElement("Pyrotechnic");
         }
-        List fogList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.fog");
+        Vector fogList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.fog");
         if (fogList != null && fogList.size() > 0)
         {
-            propList.add("Fog");
+            propList.addElement("Fog");
         }
-        List lightList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.light");
+        Vector lightList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.light");
         if (lightList != null && lightList.size() > 0)
         {
-            propList.add("Light");
+            propList.addElement("Light");
         }
         String[] propListArray = new String[propList.size()];
         propList.toArray(propListArray);
@@ -204,7 +206,7 @@ public class stage_controller extends script.terminal.base.base_terminal
         String propSelected = propMenuArray[idx];
         String propTemplate = toLower("entertainer_console." + propSelected);
         String methodName = "handle" + propSelected;
-        List objectList = utils.getResizeableObjIdArrayScriptVar(container, propTemplate);
+        Vector objectList = utils.getResizeableObjIdArrayScriptVar(container, propTemplate);
         String[] itemList = new String[objectList.size() + 1];
         itemList[0] = "All";
         int n = 0;
@@ -244,7 +246,7 @@ public class stage_controller extends script.terminal.base.base_terminal
         {
             return SCRIPT_CONTINUE;
         }
-        List backdropList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.backdrop");
+        Vector backdropList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.backdrop");
         int idx = sui.getListboxSelectedRow(params);
         if (idx >= 0 && idx < backdropList.size() + 1)
         {
@@ -286,7 +288,7 @@ public class stage_controller extends script.terminal.base.base_terminal
             startController(player);
             return SCRIPT_CONTINUE;
         }
-        List smokeObjectList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.smoke");
+        Vector smokeObjectList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.smoke");
         int idx = sui.getListboxSelectedRow(params);
         if (idx == 0)
         {
@@ -334,7 +336,7 @@ public class stage_controller extends script.terminal.base.base_terminal
             startController(player);
             return SCRIPT_CONTINUE;
         }
-        List pyroObjectList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.pyrotechnic");
+        Vector pyroObjectList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.pyrotechnic");
         int idx = sui.getListboxSelectedRow(params);
         if (idx == 0)
         {
@@ -382,7 +384,7 @@ public class stage_controller extends script.terminal.base.base_terminal
             startController(player);
             return SCRIPT_CONTINUE;
         }
-        List fogObjectList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.fog");
+        Vector fogObjectList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.fog");
         int idx = sui.getListboxSelectedRow(params);
         if (idx == 0)
         {
@@ -429,10 +431,10 @@ public class stage_controller extends script.terminal.base.base_terminal
             startController(player);
             return SCRIPT_CONTINUE;
         }
-        List lightList = utils.getResizeableObjIdArrayScriptVar(self, "item.entertainer_console.light");
+        Vector lightList = utils.getResizeableObjIdArrayScriptVar(self, "item.entertainer_console.light");
         int idx = sui.getListboxSelectedRow(params);
         boolean playEffect = playLightEffect(((obj_id)lightList.get(idx)));
-        List lightObjectList = utils.getResizeableObjIdArrayScriptVar(self, "item.entertainer_console.light");
+        Vector lightObjectList = utils.getResizeableObjIdArrayScriptVar(self, "item.entertainer_console.light");
         String[] lightItemList = new String[lightObjectList.size()];
         for (int i = 0; i < lightItemList.length; i++)
         {
@@ -464,7 +466,7 @@ public class stage_controller extends script.terminal.base.base_terminal
             startController(player);
             return SCRIPT_CONTINUE;
         }
-        List backdropList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.backdrop");
+        Vector backdropList = utils.getResizeableObjIdArrayScriptVar(container, "entertainer_console.backdrop");
         String backdropObjectString = "item_generated_backdrop_01_";
         int propSelection = 0;
         if (utils.hasScriptVar(self, "backdrop.backdropSet"))

@@ -13,6 +13,9 @@ import java.util.Vector;
 
 public class barracks extends script.base_script
 {
+    public barracks()
+    {
+    }
     public static final string_id SID_BUILD_REINFORCEMENT = new string_id("battlefield", "build_reinforcement");
     public static final string_id SID_BUILD_REINFORCEMENT_STATUS = new string_id("battlefield", "build_reinforcement_status");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
@@ -40,9 +43,9 @@ public class barracks extends script.base_script
             float cost = getFloatObjVar(self, battlefield.VAR_REINFORCEMENT_COST);
             Vector dsrc = new Vector();
             dsrc.setSize(0);
-            dsrc.add("Reinforcement Produced: " + reinforce_name);
-            dsrc.add("Faction Point Cost: " + cost);
-            dsrc.add("");
+            dsrc = utils.addElement(dsrc, "Reinforcement Produced: " + reinforce_name);
+            dsrc = utils.addElement(dsrc, "Faction Point Cost: " + cost);
+            dsrc = utils.addElement(dsrc, "");
             if (!battlefield.canBuildReinforcement(self))
             {
                 int time = getGameTime();
@@ -57,12 +60,12 @@ public class barracks extends script.base_script
                 {
                     int[] conv_time = player_structure.convertSecondsTime(time_remaining);
                     String time_str = player_structure.assembleTimeRemaining(conv_time);
-                    dsrc.add("Time until next reinforcement: " + time_str);
+                    dsrc = utils.addElement(dsrc, "Time until next reinforcement: " + time_str);
                 }
             }
             else 
             {
-                dsrc.add("Ready to issue more reinforcements.");
+                dsrc = utils.addElement(dsrc, "Ready to issue more reinforcements.");
             }
             sui.listbox(player, "Reinforcement Status", "Reinforcement Status", dsrc);
         }

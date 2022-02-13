@@ -7,11 +7,13 @@ import script.combat_engine.weapon_data;
 import script.*;
 import script.library.*;
 
-import java.util.List;
 import java.util.Vector;
 
 public class field extends script.systems.combat.combat_base_old
 {
+    public field()
+    {
+    }
     public static final String BLAST_PARTICLE_TEMPLATE = "object/static/particle/particle_sm_explosion.iff";
     public static final String WARNING_PARTICLE_TEMPLATE = "object/static/particle/particle_mine_warning.iff";
     public static final String VOL_MINEFIELD = "volMineField";
@@ -162,7 +164,7 @@ public class field extends script.systems.combat.combat_base_old
                     String containerName = getTemplateName(container);
                     if (!containerName.equals("object/factory/factory_crate_weapon.iff")) {
                         prose_package ppElement = prose.getPackage(SID_MINE_COUNT, mine, getCount(mine));
-                        entries.add(" \0" + packOutOfBandProsePackage(null, ppElement));
+                        entries = utils.addElement(entries, " \0" + packOutOfBandProsePackage(null, ppElement));
                     }
                 }
                 if (entries != null && entries.size() > 0)
@@ -302,7 +304,7 @@ public class field extends script.systems.combat.combat_base_old
         {
             if (!isPlayer(targets[i]) && ai_lib.isDead(targets[i]))
             {
-                toRemove.add(targets[i]);
+                toRemove = utils.addElement(toRemove, targets[i]);
             }
             else 
             {
@@ -431,25 +433,25 @@ public class field extends script.systems.combat.combat_base_old
         {
             return false;
         }
-        List targets = utils.getResizeableObjIdBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_IDS);
-        List locs = utils.getResizeableLocationBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_LOCS);
+        Vector targets = utils.getResizeableObjIdBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_IDS);
+        Vector locs = utils.getResizeableLocationBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_LOCS);
         if ((targets == null) || (targets.size() == 0) || (locs == null) || (locs.size() == 0))
         {
             targets = null;
             locs = null;
             messageTo(self, HANDLER_MINEFIELD_TICK, null, faction_perk.BASE_MINEFIELD_TICK, false);
         }
-        targets.add(target);
+        targets = utils.addElement(targets, target);
         location target_loc = getLocation(target);
         if (target_loc != null)
         {
-            locs.add(target_loc);
+            locs = utils.addElement(locs, target_loc);
         }
         else 
         {
             return false;
         }
-        if (targets == null || targets.size() == 0 || locs == null || locs.size() == 0)
+        if ((targets == null) || (targets.size() == 0) || (locs == null) || (locs.size() == 0))
         {
             return false;
         }
@@ -463,8 +465,8 @@ public class field extends script.systems.combat.combat_base_old
         {
             return false;
         }
-        List targets = utils.getResizeableObjIdBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_IDS);
-        List locs = utils.getResizeableLocationBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_LOCS);
+        Vector targets = utils.getResizeableObjIdBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_IDS);
+        Vector locs = utils.getResizeableLocationBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_LOCS);
         if ((targets == null) || (targets.size() == 0) || (locs == null) || (locs.size() == 0))
         {
             return false;
@@ -474,9 +476,9 @@ public class field extends script.systems.combat.combat_base_old
         {
             return false;
         }
-        targets.remove(idx);
-        locs.remove(idx);
-        if (targets == null || targets.size() == 0 || locs == null || locs.size() == 0)
+        targets = utils.removeElementAt(targets, idx);
+        locs = utils.removeElementAt(locs, idx);
+        if ((targets == null) || (targets.size() == 0) || (locs == null) || (locs.size() == 0))
         {
             utils.removeBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_IDS);
             utils.removeBatchScriptVar(self, faction_perk.VAR_MINEFIELD_TARGET_LOCS);
@@ -571,7 +573,7 @@ public class field extends script.systems.combat.combat_base_old
                         pclib.coupDeGrace(creature, minefield);
                     } else {
                         pvpSetFactionEnemyFlag(creature, fieldFac);
-                        combatTargets.add(creatures);
+                        combatTargets = utils.addElement(combatTargets, creature);
                     }
                 }
             }

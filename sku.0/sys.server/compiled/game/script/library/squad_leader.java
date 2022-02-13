@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class squad_leader extends script.base_script
 {
+    public squad_leader()
+    {
+    }
     public static final int MAX_SKILL_VALUE = 20;
     public static final int MIN_SKILL_VALUE = 0;
     public static final int MAX_GROUP_SIZE = 20;
@@ -146,7 +149,7 @@ public class squad_leader extends script.base_script
             if (!(isIdValid(groupMember) && exists(groupMember) && isPlayer(groupMember) && getDistance(self, groupMember) < 64.0f)) {
                 continue;
             }
-            validMembers.add(groupMember);
+            validMembers = utils.addElement(validMembers, groupMember);
         }
         obj_id[] _validMembers = new obj_id[0];
         if (validMembers != null)

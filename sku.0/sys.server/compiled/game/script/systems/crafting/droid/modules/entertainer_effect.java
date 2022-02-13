@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class entertainer_effect extends script.base_script
 {
+    public entertainer_effect()
+    {
+    }
     public static final String STF_FILE = "pet/droid_modules";
     public static final float EFFECT_RANGE = 30.0f;
     public static final String SCRIPT_VAR_EFFECTS_ON = "module_data.effects_on";
@@ -399,7 +402,7 @@ public class entertainer_effect extends script.base_script
             int result = (int)((raw_effects % StrictMath.pow(10, i)) / StrictMath.pow(10, i - 1));
             if (result >= 1)
             {
-                available_effects.add(pet_lib.LIGHTING_EFFECTS[i - 1]);
+                available_effects = utils.addElement(available_effects, pet_lib.LIGHTING_EFFECTS[i - 1]);
             }
             i++;
         }
@@ -409,7 +412,7 @@ public class entertainer_effect extends script.base_script
         }
         else 
         {
-            available_effects.add("empty_slot");
+            available_effects = utils.addElement(available_effects, "empty_slot");
             String[] _available_effects = new String[0];
             if (available_effects != null)
             {

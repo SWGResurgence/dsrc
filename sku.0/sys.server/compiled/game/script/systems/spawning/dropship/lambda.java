@@ -11,6 +11,9 @@ import java.util.Vector;
 
 public class lambda extends script.systems.spawning.dropship.base
 {
+    public lambda()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleAttachDelay", null, 2.0f, false);
@@ -49,7 +52,7 @@ public class lambda extends script.systems.spawning.dropship.base
                     if (isIdValid(thisSpawn) && !isIdValid(leader))
                     {
                         leader = thisSpawn;
-                        spawns.add(thisSpawn);
+                        spawns = utils.addElement(spawns, thisSpawn);
                         if (i > 0 && isIdValid(leader))
                         {
                             ai_lib.wander(thisSpawn);

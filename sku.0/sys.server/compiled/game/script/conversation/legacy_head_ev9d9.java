@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class legacy_head_ev9d9 extends script.base_script
 {
+    public legacy_head_ev9d9()
+    {
+    }
     public static String c_stringFile = "conversation/legacy_head_ev9d9";
     public boolean legacy_head_ev9d9_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -258,15 +261,15 @@ public class legacy_head_ev9d9 extends script.base_script
         }
         if (hasBolt_1 == false)
         {
-            boltsResizable.add(createObjectInInventoryAllowOverload("object/tangible/quest/legacy_head_pain1.iff", player));
+            utils.addElement(boltsResizable, createObjectInInventoryAllowOverload("object/tangible/quest/legacy_head_pain1.iff", player));
         }
         if (hasBolt_2 == false)
         {
-            boltsResizable.add(createObjectInInventoryAllowOverload("object/tangible/quest/legacy_head_pain2.iff", player));
+            utils.addElement(boltsResizable, createObjectInInventoryAllowOverload("object/tangible/quest/legacy_head_pain2.iff", player));
         }
         if (hasBolt_3 == false)
         {
-            boltsResizable.add(createObjectInInventoryAllowOverload("object/tangible/quest/legacy_head_pain3.iff", player));
+            utils.addElement(boltsResizable, createObjectInInventoryAllowOverload("object/tangible/quest/legacy_head_pain3.iff", player));
         }
         obj_id[] bolts = new obj_id[0];
         if (boltsResizable != null)

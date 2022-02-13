@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class antagonist extends script.poi.base.scenario_actor
 {
+    public antagonist()
+    {
+    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiTwoLiars Antagonist";
     public static final int CONV_GREET = 0;
@@ -53,13 +56,13 @@ public class antagonist extends script.poi.base.scenario_actor
         {
             case CONV_GREET:
             msg = new string_id(convo, "a_greet");
-            responses.add(new string_id(convo, "r_a_greet"));
+            responses = utils.addElement(responses, new string_id(convo, "r_a_greet"));
             npcStartConversation(speaker, self, convo, msg, responses);
             break;
             case CONV_LOOKING:
             msg = new string_id(convo, "a_whoisit");
-            responses.add(new string_id(convo, "r_a_ithinkso"));
-            responses.add(new string_id(convo, "r_a_whoisit"));
+            responses = utils.addElement(responses, new string_id(convo, "r_a_ithinkso"));
+            responses = utils.addElement(responses, new string_id(convo, "r_a_whoisit"));
             npcStartConversation(speaker, self, convo, msg, responses);
             break;
             case CONV_WIN:
@@ -103,32 +106,32 @@ public class antagonist extends script.poi.base.scenario_actor
         switch (aId) {
             case "r_a_greet":
                 npcSpeak(speaker, new string_id(convo, "a_lookingformark"));
-                responses.add(new string_id(convo, "r_a_lookingformark"));
+                responses = utils.addElement(responses, new string_id(convo, "r_a_lookingformark"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_a_lookingformark":
                 npcSpeak(speaker, new string_id(convo, "a_thatstheproblem"));
-                responses.add(new string_id(convo, "r_a_thatstheproblem"));
+                responses = utils.addElement(responses, new string_id(convo, "r_a_thatstheproblem"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_a_thatstheproblem":
                 npcSpeak(speaker, new string_id(convo, "a_clues"));
-                responses.add(new string_id(convo, "r_a_clues"));
+                responses = utils.addElement(responses, new string_id(convo, "r_a_clues"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_a_clues":
                 npcSpeak(speaker, new string_id(convo, "a_imnotdumb"));
-                responses.add(new string_id(convo, "r_a_imnotdumb"));
+                responses = utils.addElement(responses, new string_id(convo, "r_a_imnotdumb"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_a_imnotdumb":
                 npcSpeak(speaker, new string_id(convo, "a_questioned"));
-                responses.add(new string_id(convo, "r_a_questioned"));
+                responses = utils.addElement(responses, new string_id(convo, "r_a_questioned"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_a_questioned":
                 npcSpeak(speaker, new string_id(convo, "a_questioned2"));
-                responses.add(new string_id(convo, "r_a_questioned2"));
+                responses = utils.addElement(responses, new string_id(convo, "r_a_questioned2"));
                 npcSetConversationResponses(speaker, responses);
                 break;
             case "r_a_questioned2":

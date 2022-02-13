@@ -9,6 +9,9 @@ import java.util.Vector;
 
 public class structure extends script.base_script
 {
+    public structure()
+    {
+    }
     public static final String TEMPLATE_DEED = "object/intangible/deed/deed.iff";
     public static final String TEMPLATE_CELL = "object/cell/cell.iff";
     public static final String SLOT_GENERAL_INVENTORY = "";
@@ -245,7 +248,7 @@ public class structure extends script.base_script
                 }
                 for (obj_id content : contents) {
                     if ((getTemplateName(content)).equals(TEMPLATE_CELL)) {
-                        cells.add(content);
+                        cells = utils.addElement(cells, content);
                     }
                 }
                 break;
@@ -265,12 +268,12 @@ public class structure extends script.base_script
             if ((cellContents != null) && (cellContents.length != 0)) {
                 for (obj_id cellContent : cellContents) {
                     if (isPlayer(cellContent)) {
-                        players.add(cellContent);
+                        players = utils.addElement(players, cellContent);
                     }
                 }
             }
         }
-        if (players == null || players.size() == 0)
+        if ((players == null) || (players.size() == 0))
         {
             return null;
         }
@@ -283,7 +286,7 @@ public class structure extends script.base_script
     }
     public static boolean addStructureCoOwner(obj_id structure, obj_id owner, obj_id player) throws InterruptedException
     {
-        if (structure == null || owner == null || player == null)
+        if ((structure == null) || (owner == null) || (player == null))
         {
             return false;
         }
@@ -296,8 +299,8 @@ public class structure extends script.base_script
                 removeObjVar(structure, utils.VAR_COOWNERS);
                 return addStructureCoOwner(structure, owner, player);
             }
-            coowners.add(player);
-            if (coowners != null && coowners.size() > 0)
+            coowners = utils.addElement(coowners, player);
+            if ((coowners != null) && (coowners.size() > 0))
             {
                 setObjVar(structure, utils.VAR_COOWNERS, coowners);
                 return true;
@@ -461,12 +464,12 @@ public class structure extends script.base_script
                     {
                         LOG("structureTerminal", "rotating terminal to heading = " + HEADING);
                         setYaw(terminal_id, HEADING);
-                        terminals.add(terminal_id);
+                        terminals = utils.addElement(terminals, terminal_id);
                     }
                 }
             }
         }
-        if (terminals == null || terminals.size() == 0)
+        if ((terminals == null) || (terminals.size() == 0))
         {
             return null;
         }
@@ -746,8 +749,8 @@ public class structure extends script.base_script
         setYaw(egg, rand(0, 360));
         Vector eggs = getResizeableObjIdArrayObjVar(building, VAR_FILLER_SPAWN_CURRENT_EGG);
         Vector locs = getResizeableLocationArrayObjVar(building, VAR_FILLER_SPAWN_CURRENT_LOC);
-        eggs.add(egg);
-        locs.add(loc);
+        eggs = utils.addElement(eggs, egg);
+        locs = utils.addElement(locs, loc);
         if (eggs.size() > 0 && locs.size() > 0)
         {
             setObjVar(building, VAR_FILLER_SPAWN_CURRENT_EGG, eggs);
