@@ -46,7 +46,7 @@ public class heroic_prequest_bypass extends script.base_script {
     };
     
     public void OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException {
-        String[] completedPrequests = getCompletedPrequests(player);
+        String[] completedPrequests ] getCompletedPrequests(player);
         player.setScriptVar("prequests", completedPrequests);
         if (getLevel(player) >= 85 && completedPrequests.length > 0) {
             OnStartNpcConversation(SCRIPT, "s_1", String[]{"s_2"}, player, self);
