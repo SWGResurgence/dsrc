@@ -8,8 +8,8 @@ import script.obj_id;
 import script.string_id;
 
 public class heroic_prequest_bypass extends script.conversation.base.conversation_base {
-    private static final String SCRIPT = "conversation/heroic_prequest_bypass";
-    private static final String[] QUESTS = {
+    public static final String SCRIPT = "conversation/heroic_prequest_bypass";
+    public static final String[] QUESTS = {
         "axkva_min_intro",
         "exar_kun_intro_01",
         "exar_kun_intro_02",
@@ -21,7 +21,7 @@ public class heroic_prequest_bypass extends script.conversation.base.conversatio
         "star_destroyer_intro_neutral",
         "star_destroyer_intro_rebel"
     };
-    private static final String[] INSTANCES = {
+    public static final String[] INSTANCES = {
         "heroic_axkva_min",
         null,
         "heroic_exar_kun",
@@ -77,7 +77,7 @@ public class heroic_prequest_bypass extends script.conversation.base.conversatio
         }
     }
     
-    private static obj_id getAltInGroup(obj_id player) throws InterruptedException {
+    public static obj_id getAltInGroup(obj_id player) throws InterruptedException {
         obj_id groupObject = getGroupObject(player);
         if (groupObject != null) {
             obj_id[] groupMembers = getGroupMemberIds(groupObject);
@@ -93,7 +93,7 @@ public class heroic_prequest_bypass extends script.conversation.base.conversatio
         return null;
     }
     
-    private static String[] getCompletedPrequests(obj_id player) throws InterruptedException {
+    public static String[] getCompletedPrequests(obj_id player) throws InterruptedException {
         obj_id altInGroup = getAltInGroup(player);
         if (altInGroup != null) {
             for (String quest : QUESTS) {
