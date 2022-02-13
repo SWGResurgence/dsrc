@@ -7,9 +7,7 @@ import script.string_id;
 
 import java.util.Arrays;
 import java.util.Collections;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class trial extends script.base_script
 {
@@ -1092,14 +1090,15 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List eventPlayers = new ArrayList<obj_id>();
+        Vector eventPlayers = new Vector();
+        eventPlayers.setSize(0);
         obj_id[] contents;
         for (obj_id cellId : cellIds) {
             contents = getContents(cellId);
             if (contents != null && contents.length > 0) {
                 for (obj_id content : contents) {
                     if (isPlayer(content)) {
-                        eventPlayers.add(content);
+                        eventPlayers = utils.addElement(eventPlayers, content);
                     }
                 }
             }
@@ -1123,12 +1122,13 @@ public class trial extends script.base_script
     {
         obj_id[] players = getPlayersInDungeon(dungeon);
         obj_id[] pets = getObjectsInDungeonWithScript(dungeon, "ai.pet");
-        List validTargets = new ArrayList<obj_id>();
+        Vector validTargets = new Vector();
+        validTargets.setSize(0);
         if (players != null && players.length > 0)
         {
             for (obj_id player : players) {
                 if (!isIncapacitated(player) && !isDead(player)) {
-                    validTargets.add(player);
+                    utils.addElement(validTargets, player);
                 }
             }
         }
@@ -1136,7 +1136,7 @@ public class trial extends script.base_script
         {
             for (obj_id pet : pets) {
                 if (!isIncapacitated(pet) && !isDead(pet)) {
-                    validTargets.add(pet);
+                    utils.addElement(validTargets, pet);
                 }
             }
         }
@@ -1159,10 +1159,11 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List validTargets = new ArrayList<obj_id>();
+        Vector validTargets = new Vector();
+        validTargets.setSize(0);
         for (obj_id player : players) {
             if (!isIncapacitated(player) && !isDead(player) && !stealth.hasInvisibleBuff(player)) {
-                validTargets.add(players);
+                utils.addElement(validTargets, player);
             }
         }
         if (validTargets.size() == 0)
@@ -1181,13 +1182,14 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List players = new ArrayList<obj_id>();
+        Vector players = new Vector();
+        players.setSize(0);
         obj_id[] contents = getContents(cellId);
         if (contents != null && contents.length > 0)
         {
             for (obj_id content : contents) {
                 if (isPlayer(content)) {
-                    players.add(content);
+                    utils.addElement(players, content);
                 }
             }
         }
@@ -1202,7 +1204,7 @@ public class trial extends script.base_script
     public static obj_id[] getPlayersInCell(obj_id dungeon, obj_id cell) throws InterruptedException
     {
         String cellName = getCellName(cell);
-        if (cellName == null || cellName.isEmpty())
+        if (cellName == null || cellName.equals(""))
         {
             return null;
         }
@@ -1220,14 +1222,15 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List players = new ArrayList<obj_id>();
+        Vector players = new Vector();
+        players.setSize(0);
         obj_id[] contents;
         for (obj_id searchCell : searchCells) {
             contents = getContents(searchCell);
             if (contents != null && contents.length > 0) {
                 for (obj_id content : contents) {
                     if (isPlayer(content)) {
-                        players.add(content);
+                        utils.addElement(players, content);
                     }
                 }
             }
@@ -1247,7 +1250,7 @@ public class trial extends script.base_script
         {
             return null;
         }
-        if (script == null || script.isEmpty())
+        if (script == null || script.equals(""))
         {
             return null;
         }
@@ -1256,14 +1259,15 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List objectsWithScript = new ArrayList<obj_id>();
+        Vector objectsWithScript = new Vector();
+        objectsWithScript.setSize(0);
         obj_id[] contents;
         for (obj_id cell : cells) {
             contents = getContents(cell);
             if (contents != null && contents.length > 0) {
                 for (obj_id content : contents) {
                     if (hasScript(content, script)) {
-                        objectsWithScript.add(content);
+                        utils.addElement(objectsWithScript, content);
                     }
                 }
             }
@@ -1288,13 +1292,14 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List objects = new ArrayList<obj_id>();
+        Vector objects = new Vector();
+        objects.setSize(0);
         obj_id[] contents;
         for (obj_id cell : cells) {
             contents = getContents(cell);
             if (contents != null && contents.length > 0) {
                 for (obj_id content : contents) {
-                    objects.add(content);
+                    utils.addElement(objects, content);
                 }
             }
         }
@@ -1313,7 +1318,7 @@ public class trial extends script.base_script
         {
             return null;
         }
-        if (objvar == null || objvar.isEmpty())
+        if (objvar == null || objvar.equals(""))
         {
             return null;
         }
@@ -1322,14 +1327,15 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List objectsWithObjVar = new ArrayList<obj_id>();
+        Vector objectsWithObjVar = new Vector();
+        objectsWithObjVar.setSize(0);
         obj_id[] contents;
         for (obj_id cell : cells) {
             contents = getContents(cell);
             if (contents != null && contents.length > 0) {
                 for (obj_id content : contents) {
                     if (hasObjVar(content, objvar)) {
-                        objectsWithObjVar.add(content);
+                        utils.addElement(objectsWithObjVar, content);
                     }
                 }
             }
@@ -1349,7 +1355,7 @@ public class trial extends script.base_script
         {
             return null;
         }
-        if (objvar == null || objvar.isEmpty())
+        if (objvar == null || objvar.equals(""))
         {
             return null;
         }
@@ -1358,13 +1364,14 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List objectsWithObjVar = new ArrayList<obj_id>();
+        Vector objectsWithObjVar = new Vector();
+        objectsWithObjVar.setSize(0);
         obj_id[] contents = getContents(checkCell);
         if (contents != null && contents.length > 0)
         {
             for (obj_id content : contents) {
                 if (hasObjVar(content, objvar)) {
-                    objectsWithObjVar.add(content);
+                    utils.addElement(objectsWithObjVar, content);
                 }
             }
         }
@@ -1383,7 +1390,7 @@ public class trial extends script.base_script
         {
             return null;
         }
-        if (scriptVar == null || scriptVar.isEmpty())
+        if (scriptVar == null || scriptVar.equals(""))
         {
             return null;
         }
@@ -1392,14 +1399,15 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List objectsWithScriptVar = new ArrayList<obj_id>();
+        Vector objectsWithScriptVar = new Vector();
+        objectsWithScriptVar.setSize(0);
         obj_id[] contents;
         for (obj_id cell : cells) {
             contents = getContents(cell);
             if (contents != null && contents.length > 0) {
                 for (obj_id content : contents) {
                     if (utils.hasScriptVar(content, scriptVar)) {
-                        objectsWithScriptVar.add(content);
+                        utils.addElement(objectsWithScriptVar, content);
                     }
                 }
             }
@@ -1416,12 +1424,13 @@ public class trial extends script.base_script
     {
         obj_id[] pets = getNPCsInRange(center, range);
         obj_id[] players = getPlayerCreaturesInRange(center, range);
-        List targets = new ArrayList<obj_id>();
+        Vector targets = new Vector();
+        targets.setSize(0);
         if (pets != null && pets.length != 0)
         {
             for (obj_id pet : pets) {
                 if (isIdValid(pet) && exists(pet) && (hasScript(pet, "ai.pet") || beast_lib.isBeast(pet) && canSee(center, pet))) {
-                    targets.add(pet);
+                    utils.addElement(targets, pet);
                 }
             }
         }
@@ -1429,7 +1438,7 @@ public class trial extends script.base_script
         {
             for (obj_id player : players) {
                 if (isIdValid(player) && exists(player) && !isIncapacitated(player) && canSee(center, player)) {
-                    targets.add(player);
+                    utils.addElement(targets, player);
                 }
             }
         }
@@ -1446,12 +1455,13 @@ public class trial extends script.base_script
     {
         obj_id[] pets = getNPCsInRange(center, range);
         obj_id[] players = getPlayerCreaturesInRange(center, range);
-        List targets = new ArrayList<obj_id>();
+        Vector targets = new Vector();
+        targets.setSize(0);
         if (pets != null && pets.length != 0)
         {
             for (obj_id pet : pets) {
                 if (isIdValid(pet) && exists(pet) && (hasScript(pet, "ai.pet") || beast_lib.isBeast(pet))) {
-                    targets.add(pet);
+                    utils.addElement(targets, pet);
                 }
             }
         }
@@ -1459,7 +1469,7 @@ public class trial extends script.base_script
         {
             for (obj_id player : players) {
                 if (isIdValid(player) && exists(player) && !isIncapacitated(player)) {
-                    targets.add(player);
+                    utils.addElement(targets, player);
                 }
             }
         }
@@ -1476,12 +1486,13 @@ public class trial extends script.base_script
     {
         obj_id[] pets = getNPCsInCone(self, target, range, cone);
         obj_id[] players = getPlayerCreaturesInCone(self, target, range, cone);
-        List targets = new ArrayList<obj_id>();
+        Vector targets = new Vector();
+        targets.setSize(0);
         if (pets != null && pets.length != 0)
         {
             for (obj_id pet : pets) {
                 if (isIdValid(pet) && exists(pet) && hasScript(pet, "ai.pet")) {
-                    targets.add(pet);
+                    utils.addElement(targets, pet);
                 }
             }
         }
@@ -1489,7 +1500,7 @@ public class trial extends script.base_script
         {
             for (obj_id player : players) {
                 if (isIdValid(player) && exists(player) && !isIncapacitated(player)) {
-                    targets.add(player);
+                    utils.addElement(targets, player);
                 }
             }
         }
@@ -1505,12 +1516,13 @@ public class trial extends script.base_script
     public static obj_id[] getValidPlayersInRadius(obj_id self, float range) throws InterruptedException
     {
         obj_id[] players = getPlayerCreaturesInRange(self, range);
-        List targets = new ArrayList<obj_id>();
+        Vector targets = new Vector();
+        targets.setSize(0);
         if (players != null && players.length != 0)
         {
             for (obj_id player : players) {
                 if (isIdValid(player) && exists(player) && !isIncapacitated(player) && canSee(self, player)) {
-                    targets.add(player);
+                    utils.addElement(targets, player);
                 }
             }
         }
@@ -1675,13 +1687,14 @@ public class trial extends script.base_script
     }
     public static void addToChildArray(obj_id parent, obj_id child) throws InterruptedException
     {
-        List children = new ArrayList<obj_id>();
+        Vector children = new Vector();
+        children.setSize(0);
         if (utils.hasScriptVar(parent, ARRAY_CHILDREN))
         {
             children = utils.getResizeableObjIdArrayScriptVar(parent, ARRAY_CHILDREN);
             utils.removeScriptVar(parent, ARRAY_CHILDREN);
         }
-        children.add(child);
+        utils.addElement(children, child);
         utils.setScriptVar(parent, ARRAY_CHILDREN, children);
     }
     public static obj_id[] getChildArray(obj_id parent) throws InterruptedException
@@ -1690,7 +1703,7 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List tempArray = utils.getResizeableObjIdArrayScriptVar(parent, ARRAY_CHILDREN);
+        Vector tempArray = utils.getResizeableObjIdArrayScriptVar(parent, ARRAY_CHILDREN);
         obj_id[] _tempArray = new obj_id[0];
         if (tempArray != null)
         {
@@ -1736,14 +1749,15 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List objects = new ArrayList<obj_id>();
+        Vector objects = new Vector();
+        objects.setSize(0);
         obj_id[] contents;
         for (obj_id cell : cells) {
             contents = getContents(cell);
             if (contents != null && contents.length > 0) {
                 for (obj_id content : contents) {
                     if (isChild(parent, content)) {
-                        objects.add(content);
+                        utils.addElement(objects, content);
                     }
                 }
             }
@@ -1776,10 +1790,11 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List children = new ArrayList<obj_id>();
+        Vector children = new Vector();
+        children.setSize(0);
         for (obj_id object : objects) {
             if (isChild(parent, object)) {
-                children.add(object);
+                utils.addElement(children, object);
             }
         }
         if (children.size() == 0)
@@ -1792,7 +1807,7 @@ public class trial extends script.base_script
     }
     public static obj_id[] getObjectsInRangeWithScriptVar(obj_id baseObj, String scriptVar, float range) throws InterruptedException
     {
-        if (!isIdValid(baseObj) || scriptVar == null || scriptVar.isEmpty())
+        if (!isIdValid(baseObj) || scriptVar.equals(""))
         {
             return null;
         }
@@ -1800,7 +1815,7 @@ public class trial extends script.base_script
     }
     public static obj_id[] getObjectsInRangeWithScriptVar(location baseLoc, String scriptVar, float range) throws InterruptedException
     {
-        if (scriptVar == null || scriptVar.isEmpty())
+        if (scriptVar.equals(""))
         {
             return null;
         }
@@ -1809,11 +1824,11 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List withVar = new ArrayList<obj_id>();
+        Vector withVar = new Vector();
         withVar.setSize(0);
         for (obj_id object : objects) {
             if (utils.hasScriptVar(object, scriptVar)) {
-                withVar.add(object);
+                utils.addElement(withVar, object);
             }
         }
         if (withVar.size() == 0)
@@ -1909,10 +1924,11 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List tempObjects = new ArrayList<obj_id>();
+        Vector tempObjects = new Vector();
+        tempObjects.setSize(0);
         for (obj_id object : objects) {
             if (isTempObject(object)) {
-                tempObjects.add(object);
+                utils.addElement(tempObjects, object);
             }
         }
         if (tempObjects.size() == 0)
@@ -1953,7 +1969,7 @@ public class trial extends script.base_script
     public static int getNearestPatrolPointIndex(obj_id actor, String[] patrolPointList) throws InterruptedException
     {
         obj_id[] points = getAllObjectsWithObjVar(getLocation(actor), 2000.0f, "sequence_controller.patrolPointName");
-        List ppl = new ArrayList(Arrays.asList(patrolPointList));
+        Vector ppl = new Vector(Arrays.asList(patrolPointList));
         float distance = 2000.0f;
         int idx = 0;
         String testName;
@@ -1974,13 +1990,14 @@ public class trial extends script.base_script
     }
     public static location[] convertPatrolPointNameToLoc(obj_id actor, String[] patrolPointList) throws InterruptedException
     {
-        List locList = new ArrayList<obj_id>();
+        Vector locList = new Vector();
+        locList.setSize(0);
         obj_id[] points;
         for (String aPatrolPointList : patrolPointList) {
             points = getAllObjectsWithObjVar(getLocation(actor), 2000.0f, "sequence_controller.patrolPointName");
             for (obj_id point : points) {
                 if ((getStringObjVar(point, "sequence_controller.patrolPointName")).equals(aPatrolPointList) && trial.getParent(point) == trial.getParent(actor)) {
-                    locList.add(getLocation(point));
+                    utils.addElement(locList, getLocation(point));
                 }
             }
         }
@@ -1996,10 +2013,11 @@ public class trial extends script.base_script
     }
     public static obj_id[] getObjectsInListWithObjVar(obj_id[] list, String objvar) throws InterruptedException
     {
-        List targetObjects = new ArrayList<obj_id>();
+        Vector targetObjects = new Vector();
+        targetObjects.setSize(0);
         for (obj_id aList : list) {
             if (isIdValid(aList) && exists(aList) && hasObjVar(aList, objvar)) {
-                targetObjects.add(aList);
+                utils.addElement(targetObjects, aList);
             }
         }
         if (targetObjects.size() == 0)
@@ -2013,8 +2031,9 @@ public class trial extends script.base_script
     public static location[] shuffleByIndex(String type, location[] ppl, int idx) throws InterruptedException
     {
         location[] retarded = ppl.clone();
-        List oldPpl = new ArrayList(Arrays.asList(retarded));
-        List newPpl = new ArrayList<obj_id>();
+        Vector oldPpl = new Vector(Arrays.asList(retarded));
+        Vector newPpl = new Vector();
+        newPpl.setSize(0);
         if (type.equals("patrol"))
         {
             for (int i = idx; i < ppl.length; i++)
@@ -2024,7 +2043,7 @@ public class trial extends script.base_script
             }
             for (int q = 0; q < idx; q++)
             {
-                newPpl.add(oldPpl.get(q));
+                newPpl.addElement(oldPpl.get(q));
             }
         }
         if (type.equals("patrolOnce"))
@@ -2046,7 +2065,7 @@ public class trial extends script.base_script
         }
         if (type.equals("patrolRandom") || type.equals("patrolRandomOnce"))
         {
-            newPpl = new ArrayList<>(Arrays.asList(ppl));
+            newPpl = new Vector(Arrays.asList(ppl));
         }
         location[] _newPpl = new location[newPpl.size()];
         newPpl.toArray(_newPpl);
@@ -2055,13 +2074,14 @@ public class trial extends script.base_script
     public static obj_id[] getSpawnedChildren(obj_id object) throws InterruptedException
     {
         dictionary spawnList = utils.getDictionaryScriptVar(object, PROT_CHILD_ARRAY);
-        List keyList = spawnList.getResizeableStringArray(PROT_CHILD_KEY_LIST);
-        List allChildren = new ArrayList<obj_id>();
+        Vector keyList = spawnList.getResizeableStringArray(PROT_CHILD_KEY_LIST);
+        Vector allChildren = new Vector();
+        allChildren.setSize(0);
         if (keyList == null || keyList.size() == 0)
         {
             return null;
         }
-        List thisList;
+        Vector thisList;
         for (Object aKeyList : keyList) {
             thisList = spawnList.getResizeableObjIdArray(aKeyList);
             if (thisList == null || thisList.size() == 0) {
@@ -2080,7 +2100,7 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List thisList = spawnList.getResizeableObjIdArray(spawn_id);
+        Vector thisList = spawnList.getResizeableObjIdArray(spawn_id);
         obj_id[] returnList = new obj_id[0];
         if (thisList != null)
         {
@@ -2092,12 +2112,13 @@ public class trial extends script.base_script
     public static obj_id[] getObjectsInInstanceBySpawnId(obj_id baseObject, String[] idList) throws InterruptedException
     {
         dictionary spawnList = utils.getDictionaryScriptVar(trial.getParent(baseObject), PROT_CHILD_ARRAY);
-        List allSpawn = new ArrayList<obj_id>();
+        Vector allSpawn = new Vector();
+        allSpawn.setSize(0);
         for (String anIdList : idList) {
             if (!spawnList.containsKey(anIdList)) {
                 continue;
             }
-            List thisList = spawnList.getResizeableObjIdArray(anIdList);
+            Vector thisList = spawnList.getResizeableObjIdArray(anIdList);
             if (thisList == null || thisList.size() == 0) {
                 continue;
             }
@@ -2118,7 +2139,8 @@ public class trial extends script.base_script
         {
             return null;
         }
-        List allSpawns = new ArrayList<obj_id>();
+        Vector allSpawns = new Vector();
+        allSpawns.setSize(0);
         obj_id[] thisVector;
         for (String anIdList : idList) {
             thisVector = getObjectsInInstanceByObjVar(baseObject, anIdList);
@@ -2179,8 +2201,10 @@ public class trial extends script.base_script
     public static void storeSpawnedChild(obj_id self, obj_id child, String spawn_id) throws InterruptedException
     {
         dictionary childArray = utils.getDictionaryScriptVar(self, trial.PROT_CHILD_ARRAY);
-        List thisList = new ArrayList<obj_id>();
-        List all_spawn_id = new ArrayList<obj_id>();
+        Vector thisList = new Vector();
+        thisList.setSize(0);
+        Vector all_spawn_id = new Vector();
+        all_spawn_id.setSize(0);
         if (childArray.containsKey(spawn_id))
         {
             thisList = childArray.getResizeableObjIdArray(spawn_id);
@@ -2317,7 +2341,8 @@ public class trial extends script.base_script
             CustomerServiceLog("gcw_city_invasion", "trial.addNonInstanceFactionParticipant: Player: " + who + " did not have the faction affiliation needed to be added to a participant list.");
             return false;
         }
-        List sideParticipants = new ArrayList<obj_id>();
+        Vector sideParticipants = new Vector();
+        sideParticipants.setSize(0);
         if (utils.hasScriptVar(parent, participantScriptVar))
         {
             sideParticipants = utils.getResizeableObjIdArrayScriptVar(parent, participantScriptVar);
@@ -2327,7 +2352,7 @@ public class trial extends script.base_script
                 return false;
             }
         }
-        sideParticipants.add(who);
+        utils.addElement(sideParticipants, who);
         utils.setScriptVar(parent, participantScriptVar, sideParticipants);
         CustomerServiceLog("gcw_city_invasion", "trial.addNonInstanceFactionParticipant: Player: " + who + " has been added as a valid participant of the GCW city invasion for city object: " + parent);
         return true;
@@ -2366,7 +2391,8 @@ public class trial extends script.base_script
         {
             return false;
         }
-        List sideParticipants = new ArrayList<obj_id>();
+        Vector sideParticipants = new Vector();
+        sideParticipants.setSize(0);
         if (utils.hasScriptVar(parent, participantScriptVar))
         {
             sideParticipants = utils.getResizeableObjIdArrayScriptVar(parent, participantScriptVar);
@@ -2424,7 +2450,8 @@ public class trial extends script.base_script
         {
             return false;
         }
-        List sideParticipants = new ArrayList<obj_id>();
+        Vector sideParticipants = new Vector();
+        sideParticipants.setSize(0);
         if (utils.hasScriptVar(parent, participantScriptVar))
         {
             sideParticipants = utils.getResizeableObjIdArrayScriptVar(parent, participantScriptVar);
@@ -2444,7 +2471,7 @@ public class trial extends script.base_script
         }
         return false;
     }
-    public static List getNonInstanceFactionParticipants(obj_id sequencer, int faction) throws InterruptedException
+    public static Vector getNonInstanceFactionParticipants(obj_id sequencer, int faction) throws InterruptedException
     {
         if (!isIdValid(sequencer) || !exists(sequencer))
         {

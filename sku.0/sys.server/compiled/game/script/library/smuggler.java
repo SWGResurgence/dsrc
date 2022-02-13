@@ -2,11 +2,13 @@ package script.library;
 
 import script.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class smuggler extends script.base_script
 {
+    public smuggler()
+    {
+    }
     public static final String TBL = "datatables/npc/junk_dealer/junk_dealer.iff";
     public static final String SCRIPTVAR_JUNK_SUI = "relicdealer.biogenic.sui";
     public static final String SCRIPTVAR_JUNK_IDS = "relicdealer.biogenic.ids";
@@ -111,7 +113,8 @@ public class smuggler extends script.base_script
         obj_id[] contents = utils.getFilteredPlayerContents(player);
         if ((contents != null) && (contents.length > 0))
         {
-            List junk = new ArrayList<obj_id>();
+            Vector junk = new Vector();
+            junk.setSize(0);
             for (obj_id content : contents) {
                 if (!validateItemsBeingSold(player, content)) {
                     continue;
@@ -123,17 +126,17 @@ public class smuggler extends script.base_script
                     continue;
                 }
                 if (hasObjVar(content, "junkDealer.intPrice")) {
-                    junk.add(content);
+                    junk = utils.addElement(junk, content);
                 } else if (static_item.isStaticItem(content)) {
                     if (static_item.getStaticObjectValue(getStaticItemName(content)) > 0) {
-                        junk.add(content);
+                        junk = utils.addElement(junk, content);
                     }
                 } else {
                     if (!isCrafted(content)) {
                         String template = getTemplateName(content);
-                        if (template != null && !template.isEmpty())) {
+                        if ((template != null) && (!template.equals(""))) {
                             if (dataTableGetInt(TBL, template, "price") > 0) {
-                                junk.add(content);
+                                junk = utils.addElement(junk, content);
                             }
                         }
                     }

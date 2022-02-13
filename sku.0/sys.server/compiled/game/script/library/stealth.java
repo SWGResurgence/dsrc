@@ -3,8 +3,7 @@ package script.library;
 import script.combat_engine.combat_data;
 import script.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 public class stealth extends script.base_script
 {
@@ -727,7 +726,7 @@ public class stealth extends script.base_script
                     messageTo(myRemote, "trapDisarmed", null, 1, false);
                 }
             }
-            List target = new ArrayList<obj_id>();
+            Vector target = new Vector();
             target.add(player);
             doTrapDetonateEffect(trap, getIntObjVar(trap, TRAP_TYPE), target, PERCENT_EFFECT_MOD_DISARM_FAIL);
             sendSystemMessage(player, new string_id("spam", "fail_disarm"));
@@ -740,8 +739,8 @@ public class stealth extends script.base_script
     public static void detectCamouflage(obj_id player, boolean findMobiles, boolean findInanimate, float distance, float baseChanceToDetect) throws InterruptedException
     {
         obj_id[] stuff = getObjectsInRange(player, distance);
-        List detected;
-        List times;
+        Vector detected;
+        Vector times;
         int now = getGameTime();
         boolean foundSomething = false;
         obj_id target;
@@ -758,24 +757,18 @@ public class stealth extends script.base_script
             }
             else 
             {
-                List clients = new ArrayList<obj_id>();
-                clients.add(player);
+                Vector clients = new Vector();
+                clients = utils.addElement(clients, player);
                 dictionary revealList = getPassiveRevealList(player);
                 if (revealList != null)
                 {
-                    obj_id[] ids = revealList.getObjIdArray("id");
-                    if (ids != null && ids.length > 0)
+                    Vector ids = revealList.getResizeableObjIdArray("id");
+                    if ((ids != null) && (ids.size() != 0))
                     {
-                        for (obj_id object : ids) {
-                            clients.add(object);
-                        }
+                        clients = utils.concatArrays(clients, ids);
                     }
                 }
-                obj_id[] playerArr = new obj_id[clients.size()];
-                for (int i = 0; i < playerArr.length; i++) {
-                    playerArr[i] = (obj_id)clients.get(i);
-                }
-                playClientEffectLoc(playerArr, "appearance/pt_spy_expose_shadows.prt", getLocation(player), 0.0f);
+                playClientEffectLoc(utils.toStaticObjIdArray(clients), "appearance/pt_spy_expose_shadows.prt", getLocation(player), 0.0f);
             }
         }
         else 
@@ -805,10 +798,10 @@ public class stealth extends script.base_script
                 detected = utils.getResizeableStringBatchObjVar(target, DETECT_ATTEMPTS);
                 times = utils.getResizeableStringBatchObjVar(target, DETECT_TIMES);
                 if (detected == null) {
-                    detected = new ArrayList<obj_id>();
+                    detected = new Vector();
                 }
                 if (times == null) {
-                    times = new ArrayList<Integer>();
+                    times = new Vector();
                 }
                 if (detected.size() != times.size()) {
                     continue;
@@ -819,7 +812,7 @@ public class stealth extends script.base_script
                     if (when - now < PLAYER_DETECT_SAFETY_INTERVAL) {
                         continue;
                     }
-                    times.add(now, idx);
+                    times.setElementAt(now, idx);
                 } else {
                     detected.add(player);
                     times.add(now);
@@ -1077,7 +1070,7 @@ public class stealth extends script.base_script
             }
             return false;
         }
-        List targets = getTrapTargets(trap, trapType);
+        Vector targets = getTrapTargets(trap, trapType);
         if (validateTrapTarget(trap, target) && targets.indexOf(target) == -1)
         {
             targets.add(target);
@@ -1086,7 +1079,7 @@ public class stealth extends script.base_script
         doTrapDetonateEffect(trap, trapType, targets, 0, target);
         return true;
     }
-    public static List getTrapTargets(obj_id trap, int trapType) throws InterruptedException
+    public static Vector getTrapTargets(obj_id trap, int trapType) throws InterruptedException
     {
         obj_id[] targets = new obj_id[0];
         switch (trapType)
@@ -1104,7 +1097,7 @@ public class stealth extends script.base_script
                 targets = getCreaturesInRange(getLocation(trap), TRAP_KAMINODART_BLAST_RADIUS);
                 break;
         }
-        List finalTargets = new ArrayList<obj_id>();
+        Vector finalTargets = new Vector();
         obj_id filter = getBioProbeTarget(trap);
         for (obj_id target : targets) {
             if (!isIdValid(filter) || target == filter) {
@@ -1115,7 +1108,7 @@ public class stealth extends script.base_script
         }
         return finalTargets;
     }
-    public static void doTrapDetonateEffect(obj_id trap, int trapType, List targets, float percentMod, obj_id breacher) throws InterruptedException
+    public static void doTrapDetonateEffect(obj_id trap, int trapType, Vector targets, float percentMod, obj_id breacher) throws InterruptedException
     {
         if (targets.size() > 0)
         {
@@ -1126,7 +1119,7 @@ public class stealth extends script.base_script
                     obj_id owner = getOwner(trap);
                     if (!isIdValid(breacher))
                     {
-                        breacher = (obj_id)targets.get(0);
+                        breacher = (obj_id)targets.elementAt(0);
                         if (!isIdValid(breacher))
                         {
                             break;
@@ -1153,19 +1146,19 @@ public class stealth extends script.base_script
         }
         destroyObject(trap);
     }
-    public static void doTrapDetonateEffect(obj_id trap, int trapType, List targets) throws InterruptedException
+    public static void doTrapDetonateEffect(obj_id trap, int trapType, Vector targets) throws InterruptedException
     {
         doTrapDetonateEffect(trap, trapType, targets, 0);
     }
-    public static void doTrapDetonateEffect(obj_id trap, int trapType, List targets, float percentMod) throws InterruptedException
+    public static void doTrapDetonateEffect(obj_id trap, int trapType, Vector targets, float percentMod) throws InterruptedException
     {
         doTrapDetonateEffect(trap, trapType, targets, 0, null);
     }
-    public static void doKaminoDartDetonate(obj_id trap, List targets) throws InterruptedException
+    public static void doKaminoDartDetonate(obj_id trap, Vector targets) throws InterruptedException
     {
         doKaminoDartDetonate(trap, targets, 0);
     }
-    public static void doKaminoDartDetonate(obj_id trap, List targets, float percentMod) throws InterruptedException
+    public static void doKaminoDartDetonate(obj_id trap, Vector targets, float percentMod) throws InterruptedException
     {
         float trapPower = getIntObjVar(trap, TRAP_POWER);
         int potency = (int)(KAMINODART_MAX_POTENCY * (trapPower / 1000));
@@ -1185,6 +1178,7 @@ public class stealth extends script.base_script
         strength += strength * percentMod;
         obj_id curObj;
         prose_package pp = prose.getPackage(new string_id("spam", "kamino_trap_hit"));
+        //playClientEffectLoc(trap, "clienteffect/lair_damage_light.cef", getLocation(curObj), 0.0f);
         for (Object target : targets) {
             curObj = (obj_id) target;
             playClientEffectLoc(curObj, "clienteffect/lair_damage_light.cef", getLocation(curObj), 0.0f);
@@ -1198,11 +1192,11 @@ public class stealth extends script.base_script
             }
         }
     }
-    public static void doCaltropDetonate(obj_id trap, List targets) throws InterruptedException
+    public static void doCaltropDetonate(obj_id trap, Vector targets) throws InterruptedException
     {
         doCaltropDetonate(trap, targets, 0);
     }
-    public static void doCaltropDetonate(obj_id trap, List targets, float percentMod) throws InterruptedException
+    public static void doCaltropDetonate(obj_id trap, Vector targets, float percentMod) throws InterruptedException
     {
         float trapPower = getIntObjVar(trap, TRAP_POWER);
         float duration = CALTROP_MAX_DURATION * (trapPower / 1000);
@@ -1239,11 +1233,11 @@ public class stealth extends script.base_script
             }
         }
     }
-    public static void doFlashBangDetonate(obj_id trap, List targets) throws InterruptedException
+    public static void doFlashBangDetonate(obj_id trap, Vector targets) throws InterruptedException
     {
         doFlashBangDetonate(trap, targets, 0);
     }
-    public static void doFlashBangDetonate(obj_id trap, List targets, float percentMod) throws InterruptedException
+    public static void doFlashBangDetonate(obj_id trap, Vector targets, float percentMod) throws InterruptedException
     {
         float trapPower = getIntObjVar(trap, TRAP_POWER);
         float duration = FLASHBANG_MAX_DURATION * (trapPower / 1000);
@@ -1484,7 +1478,7 @@ public class stealth extends script.base_script
         {
             stealFlags |= STEAL_STEALING_TABLE;
         }
-        List types = new ArrayList<Byte>();
+        Vector types = new Vector();
         if (isFlagSet(stealFlags, STEAL_CREDITS))
         {
             types.add(STEAL_CREDITS);
@@ -1597,7 +1591,7 @@ public class stealth extends script.base_script
                         }
                         break;
                     case STEAL_TEMPLATE:
-                        List itms = getStealableTemplates(mark);
+                        Vector itms = getStealableTemplates(mark);
                         if (itms.size() < 1)
                         {
                             break;
@@ -1629,7 +1623,7 @@ public class stealth extends script.base_script
                         break;
                     case STEAL_MARKED_ITEMS:
                         obj_id[] stuff = utils.getFilteredPlayerContents(mark);
-                        List eligibleItems = new ArrayList<obj_id>();
+                        Vector eligibleItems = new Vector();
                             for (obj_id aStuff : stuff) {
                                 if (isItemStealable(aStuff)) {
                                     eligibleItems.add(aStuff);
@@ -1677,7 +1671,7 @@ public class stealth extends script.base_script
                 }
             }
             stealFlags &= ~flag;
-            types.remove(roll);
+            types.removeElementAt(roll);
         }
         if (!isPlayer(mark))
         {
@@ -1695,8 +1689,8 @@ public class stealth extends script.base_script
     }
     public static String getStealableTemplateFromTable(obj_id mark) throws InterruptedException
     {
-        List stuff = new ArrayList<String>();
-        List weights = new ArrayList<obj_id>();
+        Vector stuff = new Vector();
+        Vector weights = new Vector();
         String name = getCreatureName(mark);
         String table = "datatables/loot/stealing_loot.iff";
         int row = dataTableSearchColumnForInt(getStringCrc(name), "npc_type", table);
@@ -1759,11 +1753,11 @@ public class stealth extends script.base_script
     }
     public static void addStealableTemplate(obj_id mark, String template) throws InterruptedException
     {
-        List itms = getStealableTemplates(mark);
+        Vector itms = getStealableTemplates(mark);
         itms.add(template);
         utils.setResizeableBatchObjVar(mark, STEAL_TEMPLATE_ITEMS, itms);
     }
-    public static List getStealableTemplates(obj_id mark) throws InterruptedException
+    public static Vector getStealableTemplates(obj_id mark) throws InterruptedException
     {
         return utils.getResizeableStringBatchObjVar(mark, STEAL_TEMPLATE_ITEMS);
     }
@@ -1781,7 +1775,8 @@ public class stealth extends script.base_script
             return cash;
         }
         cash = rand(1, 10);
-        return cash *= level;
+        cash = cash * level;
+        return cash;
     }
     public static boolean canSteal(obj_id thief, obj_id mark) throws InterruptedException
     {

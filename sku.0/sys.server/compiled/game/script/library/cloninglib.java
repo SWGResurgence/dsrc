@@ -3,10 +3,12 @@ package script.library;
 import script.*;
 
 import java.util.Vector;
-import java.util.List;
 
 public class cloninglib extends script.base_script
 {
+    public cloninglib()
+    {
+    }
     public static final String SCRIPT_CLONING_FACILITY = "structure.municipal.cloning_facility";
     public static final String SCRVAR_CLONE_COUPON = "clone_coupon";
     public static final String DATATABLE_CLONE_SPAWN = "datatables/structure/municipal/cloning_facility_respawn.iff";
@@ -353,13 +355,13 @@ public class cloninglib extends script.base_script
         {
             area = "";
         }
-        List idList = utils.getResizeableObjIdArrayScriptVar(planet, VAR_PLANET_CLONE_ID);
-        List nameList = utils.getResizeableStringArrayScriptVar(planet, VAR_PLANET_CLONE_NAME);
-        List areaList = utils.getResizeableStringArrayScriptVar(planet, VAR_PLANET_CLONE_AREA);
-        List areaIdList = utils.getResizeableObjIdArrayScriptVar(planet, VAR_PLANET_CLONE_AREA_ID);
-        List locList = utils.getResizeableLocationArrayScriptVar(planet, VAR_PLANET_CLONE_LOC);
-        List respawnList = utils.getResizeableLocationArrayScriptVar(planet, VAR_PLANET_CLONE_RESPAWN);
-        List cloneTypeList = utils.getResizeableIntArrayScriptVar(planet, VAR_PLANET_CLONE_TYPE);
+        Vector idList = utils.getResizeableObjIdArrayScriptVar(planet, VAR_PLANET_CLONE_ID);
+        Vector nameList = utils.getResizeableStringArrayScriptVar(planet, VAR_PLANET_CLONE_NAME);
+        Vector areaList = utils.getResizeableStringArrayScriptVar(planet, VAR_PLANET_CLONE_AREA);
+        Vector areaIdList = utils.getResizeableObjIdArrayScriptVar(planet, VAR_PLANET_CLONE_AREA_ID);
+        Vector locList = utils.getResizeableLocationArrayScriptVar(planet, VAR_PLANET_CLONE_LOC);
+        Vector respawnList = utils.getResizeableLocationArrayScriptVar(planet, VAR_PLANET_CLONE_RESPAWN);
+        Vector cloneTypeList = utils.getResizeableIntArrayScriptVar(planet, VAR_PLANET_CLONE_TYPE);
         if (idList == null || nameList == null || areaList == null || areaIdList == null || locList == null || respawnList == null || cloneTypeList == null || idList.size() == 0 || nameList.size() == 0 || areaList.size() == 0 || areaIdList.size() == 0 || locList.size() == 0 || respawnList.size() == 0 || cloneTypeList.size() == 0)
         {
             sendSystemMessage(player, SID_NO_CLONING_FACILITIES);
@@ -654,7 +656,7 @@ public class cloninglib extends script.base_script
         for (obj_id obj_id : eq) {
             int damage = getItemDamageAmount(obj_id);
             if (damage > 0) {
-                repairList.add(obj_id);
+                repairList = utils.addElement(repairList, obj_id);
             }
         }
         obj_id[] _repairList = new obj_id[0];

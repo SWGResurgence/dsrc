@@ -7,6 +7,9 @@ import java.util.*;
 
 public class utils extends script.base_script
 {
+    public utils()
+    {
+    }
     public static final String VERSION = "v0.01.00";
     public static final String VAR_OWNER = "owner";
     public static final String VAR_COOWNERS = "coowners";
@@ -416,10 +419,10 @@ public class utils extends script.base_script
         }
         return false;
     }
-    public static boolean isElementInArray(List objIdArray, Object objTarget) throws InterruptedException {
+    public static boolean isElementInArray(Vector objIdArray, Object objTarget) throws InterruptedException {
         return !(objIdArray == null || objIdArray.isEmpty()) && objIdArray.contains(objTarget);
     }
-    public static int getElementPositionInArray(List array, Object element) throws InterruptedException {
+    public static int getElementPositionInArray(Vector array, Object element) throws InterruptedException
     {
         if (array == null)
         {
@@ -788,7 +791,7 @@ public class utils extends script.base_script
         text += " ]";
         return text;
     }
-    public static List removeElementAt(List array, int index) throws InterruptedException
+    public static Vector removeElementAt(Vector array, int index) throws InterruptedException
     {
         if (array == null)
         {
@@ -798,10 +801,10 @@ public class utils extends script.base_script
         {
             return array;
         }
-        array.remove(array.get(index));
+        array.removeElementAt(index);
         return array;
     }
-    public static List removeElement(List array, obj_id element) throws InterruptedException
+    public static Vector removeElement(Vector array, obj_id element) throws InterruptedException
     {
         if (array == null)
         {
@@ -811,10 +814,10 @@ public class utils extends script.base_script
         {
             return array;
         }
-        array.remove(element);
+        array.removeElement(element);
         return array;
     }
-    public static List removeElements(List array, obj_id[] elements) throws InterruptedException
+    public static Vector removeElements(Vector array, obj_id[] elements) throws InterruptedException
     {
         if (array == null)
         {
@@ -828,13 +831,13 @@ public class utils extends script.base_script
         array.removeAll(collection);
         return array;
     }
-    public static List removeElements(obj_id[] array, obj_id[] elements) throws InterruptedException
+    public static Vector removeElements(obj_id[] array, obj_id[] elements) throws InterruptedException
     {
         if (array == null)
         {
             return null;
         }
-        List ret = new ArrayList(Arrays.asList(array));
+        Vector ret = new Vector(Arrays.asList(array));
         if (elements == null || elements.length == 0)
         {
             return ret;
@@ -843,7 +846,7 @@ public class utils extends script.base_script
         ret.removeAll(collection);
         return ret;
     }
-    public static List removeElements(List array, List elements) throws InterruptedException
+    public static Vector removeElements(Vector array, Vector elements) throws InterruptedException
     {
         if (array == null)
         {
@@ -856,24 +859,60 @@ public class utils extends script.base_script
         array.removeAll(elements);
         return array;
     }
-    public static obj_id[] toStaticObjIdArray(List<obj_id> list) throws InterruptedException {
-        if (list == null || list.size() == 0)
+    public static Vector addElement(Vector array, Object element) throws InterruptedException
+    {
+        if (array == null)
+        {
+            return addElement(new Vector(), element);
+        }
+        if (element == null)
+        {
+            return array;
+        }
+        array.add(element);
+        return array;
+    }
+    public static Vector addElement(Vector array, boolean element) throws InterruptedException
+    {
+        return addElement(array, Boolean.valueOf(element));
+    }
+    public static Vector addElement(Vector array, int element) throws InterruptedException
+    {
+        return addElement(array, Integer.valueOf(element));
+    }
+    public static Vector addElement(Vector array, float element) throws InterruptedException
+    {
+        return addElement(array, Float.valueOf(element));
+    }
+    public static obj_id[] toStaticObjIdArray(Vector vector) throws InterruptedException
+    {
+        if (vector == null || vector.size() == 0)
         {
             return null;
         }
-        return list.toArray(new obj_id[list.size()]);
+        obj_id[] ret = new obj_id[vector.size()];
+        vector.toArray(ret);
+        return ret;
     }
-    public static String[] toStaticStringArray(List<String> list) throws InterruptedException {
-        if (list == null || list.size() == 0) {
+    public static String[] toStaticStringArray(Vector vector) throws InterruptedException
+    {
+        if (vector == null || vector.size() == 0)
+        {
             return null;
         }
-        return list.toArray(new String[list.size()]);
+        String[] ret = new String[vector.size()];
+        vector.toArray(ret);
+        return ret;
     }
-    public static location[] toStaticLocationArray(List<location> list) throws InterruptedException {
-        if (list == null || list.size() == 0) {
+    public static location[] toStaticLocationArray(Vector vector) throws InterruptedException
+    {
+        if (vector == null || vector.size() == 0)
+        {
             return null;
         }
-        return list.toArray(new location[list.size()]);
+        location[] ret = new location[vector.size()];
+        vector.toArray(ret);
+        return ret;
     }
     public static boolean[] messageTo(obj_id[] targets, String messageName, dictionary params, float time, boolean guaranteed) throws InterruptedException
     {
@@ -916,7 +955,7 @@ public class utils extends script.base_script
         System.arraycopy(array2, 0, toPass, array1.length, array2.length);
         return toPass;
     }
-    public static List concatArrays(List array1, List array2) throws InterruptedException
+    public static Vector concatArrays(Vector array1, Vector array2) throws InterruptedException
     {
         if (array1 == null)
         {
@@ -929,7 +968,7 @@ public class utils extends script.base_script
         array1.addAll(array2);
         return array1;
     }
-    public static List concatArrays(List array1, Object[] array2) throws InterruptedException
+    public static Vector concatArrays(Vector array1, Object[] array2) throws InterruptedException
     {
         if (array2 == null)
         {
@@ -937,12 +976,12 @@ public class utils extends script.base_script
         }
         if (array1 == null)
         {
-            array1 = new ArrayList<>(array2.length + 10);
+            array1 = new Vector(array2.length + 10);
         }
         array1.addAll(Arrays.asList(array2));
         return array1;
     }
-    public static List concatArrays(List array1, int[] array2) throws InterruptedException
+    public static Vector concatArrays(Vector array1, int[] array2) throws InterruptedException
     {
         if (array2 == null)
         {
@@ -955,7 +994,7 @@ public class utils extends script.base_script
         }
         return concatArrays(array1, toPass);
     }
-    public static List concatArrays(List array1, float[] array2) throws InterruptedException
+    public static Vector concatArrays(Vector array1, float[] array2) throws InterruptedException
     {
         if (array2 == null)
         {
@@ -968,7 +1007,7 @@ public class utils extends script.base_script
         }
         return concatArrays(array1, toPass);
     }
-    public static List concatArrays(List array1, boolean[] array2) throws InterruptedException
+    public static Vector concatArrays(Vector array1, boolean[] array2) throws InterruptedException
     {
         if (array2 == null)
         {
@@ -998,22 +1037,22 @@ public class utils extends script.base_script
     }
     public static boolean isSubset(obj_id[] array1, obj_id[] array2) throws InterruptedException
     {
-        if (array1 == null || array2 == null)
+        if ((array1 == null) || (array2 == null))
         {
             return false;
         }
-        List v1 = new ArrayList<>(Arrays.asList(array1));
-        List v2 = new ArrayList<>(Arrays.asList(array2));
+        Vector v1 = new Vector(Arrays.asList(array1));
+        Vector v2 = new Vector(Arrays.asList(array2));
         return v1.containsAll(v2);
     }
     public static boolean isSubset(String[] array1, String[] array2) throws InterruptedException
     {
-        if (array1 == null || array2 == null)
+        if ((array1 == null) || (array2 == null))
         {
             return false;
         }
-        List v1 = new ArrayList<>(Arrays.asList(array1));
-        List v2 = new ArrayList<>(Arrays.asList(array2));
+        Vector v1 = new Vector(Arrays.asList(array1));
+        Vector v2 = new Vector(Arrays.asList(array2));
         return v1.containsAll(v2);
     }
     public static boolean isSubset(string_id[] array1, string_id[] array2) throws InterruptedException
@@ -1022,8 +1061,8 @@ public class utils extends script.base_script
         {
             return false;
         }
-        List v1 = new ArrayList<>(Arrays.asList(array1));
-        List v2 = new ArrayList<>(Arrays.asList(array2));
+        Vector v1 = new Vector(Arrays.asList(array1));
+        Vector v2 = new Vector(Arrays.asList(array2));
         return v1.containsAll(v2);
     }
     public static boolean isSubset(region[] array1, region[] array2) throws InterruptedException
@@ -1032,8 +1071,8 @@ public class utils extends script.base_script
         {
             return false;
         }
-        List v1 = new ArrayList<>(Arrays.asList(array1));
-        List v2 = new ArrayList<>(Arrays.asList(array2));
+        Vector v1 = new Vector(Arrays.asList(array1));
+        Vector v2 = new Vector(Arrays.asList(array2));
         return v1.containsAll(v2);
     }
     public static boolean isSubset(location[] array1, location[] array2) throws InterruptedException
@@ -1042,8 +1081,8 @@ public class utils extends script.base_script
         {
             return false;
         }
-        List v1 = new ArrayList<>(Arrays.asList(array1));
-        List v2 = new ArrayList<>(Arrays.asList(array2));
+        Vector v1 = new Vector(Arrays.asList(array1));
+        Vector v2 = new Vector(Arrays.asList(array2));
         return v1.containsAll(v2);
     }
     public static boolean isSubset(attrib_mod[] array1, attrib_mod[] array2) throws InterruptedException
@@ -1052,8 +1091,8 @@ public class utils extends script.base_script
         {
             return false;
         }
-        List v1 = new ArrayList<>(Arrays.asList(array1));
-        List v2 = new ArrayList<>(Arrays.asList(array2));
+        Vector v1 = new Vector(Arrays.asList(array1));
+        Vector v2 = new Vector(Arrays.asList(array2));
         return v1.containsAll(v2);
     }
     public static String[] makeNameListFromPlayerObjIdList(obj_id[] players) throws InterruptedException
@@ -1062,10 +1101,11 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List nameList = new ArrayList<obj_id>();
+        Vector nameList = new Vector();
+        nameList.setSize(0);
         for (obj_id player : players) {
             if (isPlayer(player)) {
-                nameList.add(getName(player));
+                nameList = addElement(nameList, getName(player));
             }
         }
         if (nameList.size() == players.length)
@@ -1085,14 +1125,15 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List nameList = new ArrayList<obj_id>();
+        Vector nameList = new Vector();
+        nameList.setSize(0);
         String itemName;
 
         for (obj_id target : targets) {
             if (isIdValid(target)) {
                 itemName = getEncodedName(target);
                 if (itemName != null) {
-                    nameList.add(itemName);
+                    nameList = addElement(nameList, itemName);
                 }
             }
         }
@@ -1107,7 +1148,7 @@ public class utils extends script.base_script
             return null;
         }
     }
-    public static String[] makeNameList(List targets) throws InterruptedException
+    public static String[] makeNameList(Vector targets) throws InterruptedException
     {
         if (targets == null || targets.isEmpty())
         {
@@ -1142,8 +1183,9 @@ public class utils extends script.base_script
         }
         return getElementPositionInArray(coowners, player) > -1;
     }
-    public static obj_id[] getContents(obj_id container, boolean recurse, List excludedNodes) throws InterruptedException {
-        List contents = getResizeableContents(container, recurse, excludedNodes);
+    public static obj_id[] getContents(obj_id container, boolean recurse, Vector excludedNodes) throws InterruptedException
+    {
+        Vector contents = getResizeableContents(container, recurse, excludedNodes);
         obj_id[] _contents = new obj_id[0];
         if (contents != null)
         {
@@ -1154,7 +1196,7 @@ public class utils extends script.base_script
     }
     public static obj_id[] getContents(obj_id container, boolean recurse) throws InterruptedException
     {
-        List contents = getResizeableContents(container, recurse, null);
+        Vector contents = getResizeableContents(container, recurse, null);
         obj_id[] _contents = new obj_id[0];
         if (contents != null)
         {
@@ -1163,8 +1205,9 @@ public class utils extends script.base_script
         }
         return _contents;
     }
-    public static List getResizeableContents(obj_id container, boolean recurse, List excludedNodes) throws InterruptedException {
-        if (!isIdValid(container) || getContainerType(container) == 0) {
+    public static Vector getResizeableContents(obj_id container, boolean recurse, Vector excludedNodes) throws InterruptedException
+    {
+        if ((!isIdValid(container)) || (getContainerType(container) == 0))
         {
             return null;
         }
@@ -1174,13 +1217,13 @@ public class utils extends script.base_script
         }
         else 
         {
-            List contents = getResizeableContents(container);
+            Vector contents = getResizeableContents(container);
             if (contents == null)
             {
                 return null;
             }
             boolean exclude = true;
-            if (excludedNodes == null || excludedNodes.isEmpty())
+            if ((excludedNodes == null) || excludedNodes.isEmpty())
             {
                 exclude = false;
             }
@@ -1241,7 +1284,7 @@ public class utils extends script.base_script
         }
         return getContents(container);
     }
-    public static List getResizeableContents(obj_id container, boolean recurse) throws InterruptedException
+    public static Vector getResizeableContents(obj_id container, boolean recurse) throws InterruptedException
     {
         return getResizeableContents(container, recurse, null);
     }
@@ -1256,9 +1299,8 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List<obj_id> bankList = new ArrayList<>();
-        bankList.add(bank);
-        return getContents(player, true, bankList);
+        Vector toExclude = addElement(null, bank);
+        return getContents(player, true, toExclude);
     }
     public static obj_id[] getFilteredPlayerContents(obj_id player) throws InterruptedException
     {
@@ -1266,30 +1308,32 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List toExclude = null;
+        Vector toExclude = null;
         obj_id bank = getPlayerBank(player);
         if (isIdValid(bank))
         {
-            toExclude.add(bank);
+            toExclude = addElement(null, bank);
         }
         obj_id missionBag = getMissionBag(player);
         if (isIdValid(missionBag))
         {
-            toExclude.add(missionBag);
+            toExclude = addElement(toExclude, missionBag);
+        }
         obj_id datapad = getPlayerDatapad(player);
         if (isIdValid(datapad))
         {
-            toExclude.add(datapad);
+            toExclude = addElement(toExclude, datapad);
         }
         return getContents(player, true, toExclude);
     }
     public static obj_id[] getAllContentsOwnedByPlayer(obj_id container, obj_id player) throws InterruptedException
     {
-        if (!isIdValid(container) || container == obj_id.NULL_ID || !isIdValid(player))
+        if ((!isIdValid(container)) || (container == obj_id.NULL_ID) || (!isIdValid(player)))
         {
             return null;
         }
-        List ownedObjects = new ArrayList<obj_id>();
+        Vector ownedObjects = new Vector();
+        ownedObjects.setSize(0);
         obj_id[] allObjects = getContents(container, true);
         if (allObjects == null)
         {
@@ -1297,7 +1341,7 @@ public class utils extends script.base_script
         }
         for (obj_id allObject : allObjects) {
             if (getObjIdObjVar(allObject, VAR_OWNER) == player) {
-                ownedObjects.add(allObject);
+                ownedObjects = addElement(ownedObjects, allObject);
             }
         }
         if (ownedObjects.size() > 0)
@@ -1607,7 +1651,7 @@ public class utils extends script.base_script
     }
     public static obj_id[] getAllStaticItemsInPlayerInventory(obj_id player, String staticItem) throws InterruptedException
     {
-        List objectList = new ArrayList<obj_id>();
+        Vector objectList = new Vector();
         obj_id inventory = getInventoryContainer(player);
         if (isIdValid(inventory))
         {
@@ -1618,7 +1662,7 @@ public class utils extends script.base_script
                     if (content != null) {
                         if (static_item.isStaticItem(content)) {
                             if (getStaticItemName(content).equals(staticItem)) {
-                                objectList.add(content);
+                                objectList = addElement(objectList, content);
                             }
                         }
                     }
@@ -1756,7 +1800,7 @@ public class utils extends script.base_script
     }
     public static obj_id[] getAllItemsInContainerByTemplate(obj_id container, String template, boolean recurse, boolean allowEquipped) throws InterruptedException
     {
-        List objectList = new ArrayList<obj_id>();
+        Vector objectList = new Vector();
         if (isIdValid(container))
         {
             obj_id[] objContents = getContents(container, recurse);
@@ -1769,7 +1813,7 @@ public class utils extends script.base_script
                                 continue;
                             }
                         }
-                        objectList.add(objContent);
+                        objectList = addElement(objectList, objContent);
                     }
                 }
             }
@@ -1811,7 +1855,7 @@ public class utils extends script.base_script
     }
     public static obj_id[] getAllItemsInContainerByTemplateStartsWith(obj_id container, String template, boolean recurse) throws InterruptedException
     {
-        List objectList = new ArrayList<obj_id>();
+        Vector objectList = new Vector();
         if (isIdValid(container))
         {
             obj_id[] objContents = getContents(container, recurse);
@@ -1819,7 +1863,7 @@ public class utils extends script.base_script
             {
                 for (obj_id objContent : objContents) {
                     if (getTemplateName(objContent).startsWith(template)) {
-                        objectList.add(objContent);
+                        objectList = addElement(objectList, objContent);
                     }
                 }
             }
@@ -1837,7 +1881,7 @@ public class utils extends script.base_script
     }
     public static obj_id[] getAllItemsPlayerHasByTemplateInBankAndInventory(obj_id objPlayer, String strTemplate) throws InterruptedException
     {
-        List objectList = new ArrayList<obj_id>();
+        Vector objectList = new Vector();
         obj_id objInventory = getInventoryContainer(objPlayer);
         if (isIdValid(objInventory))
         {
@@ -1846,7 +1890,7 @@ public class utils extends script.base_script
             {
                 for (obj_id objContent : objContents) {
                     if (getTemplateName(objContent).equals(strTemplate)) {
-                        objectList.add(objContent);
+                        objectList = addElement(objectList, objContent);
                     }
                 }
             }
@@ -1859,7 +1903,7 @@ public class utils extends script.base_script
             {
                 for (obj_id objContent : objContents) {
                     if (getTemplateName(objContent).equals(strTemplate)) {
-                        objectList.add(objContent);
+                        objectList = addElement(objectList, objContent);
                     }
                 }
             }
@@ -1874,12 +1918,12 @@ public class utils extends script.base_script
     }
     public static obj_id[] getAllItemsInBankAndInventory(obj_id objPlayer) throws InterruptedException
     {
-        List objectList = new ArrayList<obj_id>();
+        Vector objectList = new Vector();
         obj_id[] objContents = getInventoryAndEquipment(objPlayer);
         if (objContents != null)
         {
             for (obj_id objContent : objContents) {
-                objectList.add(objContent);
+                objectList = addElement(objectList, objContent);
             }
         }
         obj_id objBank = getPlayerBank(objPlayer);
@@ -1889,7 +1933,7 @@ public class utils extends script.base_script
             if (objContents != null)
             {
                 for (obj_id objContent : objContents) {
-                    objectList.add(objContent);
+                    objectList = addElement(objectList, objContent);
                 }
             }
         }
@@ -2276,26 +2320,28 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List buildings = new ArrayList<obj_id>();
+        Vector buildings = new Vector();
+        buildings.setSize(0);
         for (obj_id item : items) {
             if (getCellNames(item) != null) {
-                buildings.add(item);
+                buildings = addElement(buildings, item);
             }
         }
-        if (buildings == null || buildings.size() == 0)
+        if ((buildings == null) || (buildings.size() == 0))
         {
             return null;
         }
         else 
         {
-            obj_id[] _buildings = new obj_id[buildings.size()];
+            obj_id[] _buildings = new obj_id[0];
+            _buildings = new obj_id[buildings.size()];
             buildings.toArray(_buildings);
             return _buildings;
         }
     }
     public static obj_id[] getContainedGOTObjects(obj_id container, int got, boolean recurse, boolean allowDerived) throws InterruptedException
     {
-        if (!isIdValid(container) || got < 0)
+        if (!isIdValid(container) || (got < 0))
         {
             return null;
         }
@@ -2304,24 +2350,25 @@ public class utils extends script.base_script
             return null;
         }
         obj_id[] contents = getContents(container, recurse);
-        if (contents == null || contents.length == 0)
+        if ((contents == null) || (contents.length == 0))
         {
             return null;
         }
-        List ret = new ArrayList<obj_id>();
+        Vector ret = new Vector();
+        ret.setSize(0);
         for (obj_id content : contents) {
             int myType = getGameObjectType(content);
             if (!allowDerived) {
                 if (myType == got) {
-                    ret.add(content);
+                    ret = addElement(ret, content);
                 }
             } else {
                 if (isGameObjectTypeOf(myType, got)) {
-                    ret.add(content);
+                    ret = addElement(ret, content);
                 }
             }
         }
-        if (ret == null || ret.size() == 0)
+        if ((ret == null) || (ret.size() == 0))
         {
             return null;
         }
@@ -2348,7 +2395,7 @@ public class utils extends script.base_script
         {
             return null;
         }
-        if (var == null || var.isEmpty())
+        if (var == null || var.equals(""))
         {
             return null;
         }
@@ -2357,17 +2404,19 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List ret = new ArrayList<obj_id>();
+        Vector ret = new Vector();
+        ret.setSize(0);
         for (obj_id content : contents) {
             if (hasObjVar(content, var)) {
-                ret.add(content);
+                ret = addElement(ret, content);
             }
         }
-        if (ret == null || ret.size() == 0)
+        if ((ret == null) || (ret.size() == 0))
         {
             return null;
         }
-        obj_id[] _ret = new obj_id[ret.size()];
+        obj_id[] _ret = new obj_id[0];
+        _ret = new obj_id[ret.size()];
         ret.toArray(_ret);
         return _ret;
     }
@@ -2385,7 +2434,7 @@ public class utils extends script.base_script
         {
             return null;
         }
-        if (script == null || script.isEmpty())
+        if (script == null || script.equals(""))
         {
             return null;
         }
@@ -2394,17 +2443,19 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List ret = new ArrayList<obj_id>();
+        Vector ret = new Vector();
+        ret.setSize(0);
         for (obj_id content : contents) {
             if (hasScript(content, script)) {
-                ret.add(content);
+                ret = addElement(ret, content);
             }
         }
-        if (ret == null || ret.size() == 0)
+        if ((ret == null) || (ret.size() == 0))
         {
             return null;
         }
-        obj_id[] _ret = new obj_id[ret.size()];
+        obj_id[] _ret = new obj_id[0];
+        _ret = new obj_id[ret.size()];
         ret.toArray(_ret);
         return _ret;
     }
@@ -2536,13 +2587,13 @@ public class utils extends script.base_script
     {
         messagePlayer(source, players, message, "none");
     }
-    public static boolean setLocalVar(obj_id target, String path, List val) throws InterruptedException
+    public static boolean setLocalVar(obj_id target, String path, Vector val) throws InterruptedException
     {
         if (!isIdValid(target))
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2624,7 +2675,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2637,7 +2688,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2650,7 +2701,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2663,7 +2714,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2676,7 +2727,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2689,7 +2740,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2702,7 +2753,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2715,7 +2766,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2728,7 +2779,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2741,7 +2792,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2754,7 +2805,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2767,7 +2818,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2780,7 +2831,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2793,7 +2844,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2806,7 +2857,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2819,7 +2870,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2832,7 +2883,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2849,7 +2900,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2908,55 +2959,55 @@ public class utils extends script.base_script
     {
         return target.getScriptDictionary().getObjIdArray(path);
     }
-    public static List getResizeableObjIdArrayLocalVar(obj_id target, String path) throws InterruptedException
+    public static Vector getResizeableObjIdArrayLocalVar(obj_id target, String path) throws InterruptedException
     {
         dictionary dd = target.getScriptDictionary();
         obj_id[] objArray = dd.getObjIdArray(path);
-        return new ArrayList<>(Arrays.asList(objArray));
+        return new Vector(Arrays.asList(objArray));
     }
-    public static List getResizeableLocationArrayLocalVar(obj_id target, String path) throws InterruptedException
+    public static Vector getResizeableLocationArrayLocalVar(obj_id target, String path) throws InterruptedException
     {
         dictionary dd = target.getScriptDictionary();
         location[] locArray = dd.getLocationArray(path);
-        return new ArrayList<>(Arrays.asList(locArray));
+        return new Vector(Arrays.asList(locArray));
     }
-    public static List getResizeableIntArrayLocalVar(obj_id target, String path) throws InterruptedException
+    public static Vector getResizeableIntArrayLocalVar(obj_id target, String path) throws InterruptedException
     {
         dictionary dd = target.getScriptDictionary();
         int[] intArray = dd.getIntArray(path);
-        List rszArray = new ArrayList<>(intArray.length + 1);
+        Vector rszArray = new Vector(intArray.length + 1);
         for (int anIntArray : intArray) {
             rszArray.add(anIntArray);
         }
         return rszArray;
     }
-    public static List getResizeableFloatArrayLocalVar(obj_id target, String path) throws InterruptedException
+    public static Vector getResizeableFloatArrayLocalVar(obj_id target, String path) throws InterruptedException
     {
         dictionary dd = target.getScriptDictionary();
         float[] fltArray = dd.getFloatArray(path);
-        List rszArray = new ArrayList<>(fltArray.length + 10);
+        Vector rszArray = new Vector(fltArray.length + 10);
         for (float aFltArray : fltArray) {
             rszArray.add(aFltArray);
         }
         return rszArray;
     }
-    public static List getResizeableStringArrayLocalVar(obj_id target, String path) throws InterruptedException
+    public static Vector getResizeableStringArrayLocalVar(obj_id target, String path) throws InterruptedException
     {
         dictionary dd = target.getScriptDictionary();
         String[] strArray = dd.getStringArray(path);
-        return new ArrayList<>(Arrays.asList((String[])strArray));
+        return new Vector(Arrays.asList((String[])strArray));
     }
-    public static List getResizeableTransformArrayLocalVar(obj_id target, String path) throws InterruptedException
+    public static Vector getResizeableTransformArrayLocalVar(obj_id target, String path) throws InterruptedException
     {
         dictionary dd = target.getScriptDictionary();
         transform[] trArray = dd.getTransformArray(path);
-        return new ArrayList<>(Arrays.asList(trArray));
+        return new Vector(Arrays.asList(trArray));
     }
-    public static List getResizeableListArrayLocalVar(obj_id target, String path) throws InterruptedException
+    public static Vector getResizeableVectorArrayLocalVar(obj_id target, String path) throws InterruptedException
     {
         dictionary dd = target.getScriptDictionary();
         vector[] vctArray = dd.getVectorArray(path);
-        return new ArrayList<>(Arrays.asList(vctArray));
+        return new Vector(Arrays.asList(vctArray));
     }
     public static string_id getStringIdLocalVar(obj_id target, String path) throws InterruptedException
     {
@@ -2976,7 +3027,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -2989,7 +3040,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3002,7 +3053,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3015,7 +3066,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3028,7 +3079,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3041,7 +3092,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3054,7 +3105,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3067,7 +3118,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3080,7 +3131,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3093,7 +3144,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3106,7 +3157,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3119,7 +3170,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3132,7 +3183,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3145,7 +3196,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3158,7 +3209,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3171,7 +3222,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3184,7 +3235,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3197,20 +3248,20 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
         target.getScriptVars().put(path, val);
         return true;
     }
-    public static boolean setScriptVar(obj_id target, String path, List val) throws InterruptedException
+    public static boolean setScriptVar(obj_id target, String path, vector val) throws InterruptedException
     {
         if (!isIdValid(target))
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3223,7 +3274,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3236,7 +3287,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3336,7 +3387,7 @@ public class utils extends script.base_script
         {
             return false;
         }
-        if (path == null || path.isEmpty())
+        if ((path == null) || (path.equals("")))
         {
             return false;
         }
@@ -3455,31 +3506,31 @@ public class utils extends script.base_script
     {
         return target.getScriptVars().getObjIdArray(path);
     }
-    public static List getResizeableObjIdArrayScriptVar(obj_id target, String path) throws InterruptedException
+    public static Vector getResizeableObjIdArrayScriptVar(obj_id target, String path) throws InterruptedException
     {
         return target.getScriptVars().getResizeableObjIdArray(path);
     }
-    public static List getResizeableLocationArrayScriptVar(obj_id target, String path) throws InterruptedException
+    public static Vector getResizeableLocationArrayScriptVar(obj_id target, String path) throws InterruptedException
     {
         return target.getScriptVars().getResizeableLocationArray(path);
     }
-    public static List getResizeableIntArrayScriptVar(obj_id target, String path) throws InterruptedException
+    public static Vector getResizeableIntArrayScriptVar(obj_id target, String path) throws InterruptedException
     {
         return target.getScriptVars().getResizeableIntArray(path);
     }
-    public static List getResizeableFloatArrayScriptVar(obj_id target, String path) throws InterruptedException
+    public static Vector getResizeableFloatArrayScriptVar(obj_id target, String path) throws InterruptedException
     {
         return target.getScriptVars().getResizeableFloatArray(path);
     }
-    public static List getResizeableStringArrayScriptVar(obj_id target, String path) throws InterruptedException
+    public static Vector getResizeableStringArrayScriptVar(obj_id target, String path) throws InterruptedException
     {
         return target.getScriptVars().getResizeableStringArray(path);
     }
-    public static List getResizeableTransformArrayScriptVar(obj_id target, String path) throws InterruptedException
+    public static Vector getResizeableTransformArrayScriptVar(obj_id target, String path) throws InterruptedException
     {
         return target.getScriptVars().getResizeableTransformArray(path);
     }
-    public static List getResizeableListArrayScriptVar(obj_id target, String path) throws InterruptedException
+    public static Vector getResizeableVectorArrayScriptVar(obj_id target, String path) throws InterruptedException
     {
         return target.getScriptVars().getResizeableVectorArray(path);
     }
@@ -3914,7 +3965,7 @@ public class utils extends script.base_script
         int BatchSize = 10;
         boolean litmus = true;
         int n = 0;
-        List toSet = new ArrayList<Object>();
+        Vector toSet = new Vector();
         for (Object anArray : array) {
             toSet.add(anArray);
             if (toSet.size() >= BatchSize) {
@@ -3962,7 +4013,7 @@ public class utils extends script.base_script
         int BatchSize = 10;
         boolean litmus = true;
         int n = 0;
-        List toSet = new ArrayList<Integer>();
+        Vector toSet = new Vector();
         for (int anArray : array) {
             toSet.add(anArray);
             if (toSet.size() >= BatchSize) {
@@ -3974,8 +4025,10 @@ public class utils extends script.base_script
         litmus &= setObjectArrayObjVar(target, base_path + "." + n, toSet);
         return litmus;
     }
-    public static boolean setResizeableBatchObjVar(obj_id target, String base_path, List list) throws InterruptedException {
-        if (!isIdValid(target) || base_path == null || base_path.isEmpty() || list == null || list.size() == 0) {
+    public static boolean setResizeableBatchObjVar(obj_id target, String base_path, Vector vector) throws InterruptedException
+    {
+        if (!isIdValid(target) || (base_path == null) || (base_path.equals("")) || (vector == null) || (vector.size() == 0))
+        {
             return false;
         }
 
@@ -3984,8 +4037,8 @@ public class utils extends script.base_script
         int BatchSize = 10;
         boolean litmus = true;
         int n = 0;
-        List toSet = new ArrayList<Object>();
-        for (Object aVector : list) {
+        Vector toSet = new Vector();
+        for (Object aVector : vector) {
             toSet.add(aVector);
             if (toSet.size() >= BatchSize) {
                 litmus &= setObjectArrayObjVar(target, base_path + "." + n, toSet);
@@ -3996,14 +4049,14 @@ public class utils extends script.base_script
         litmus &= setObjectArrayObjVar(target, base_path + "." + n, toSet);
         return litmus;
     }
-    public static boolean setObjectArrayObjVar(obj_id target, String path, List vec) throws InterruptedException
+    public static boolean setObjectArrayObjVar(obj_id target, String path, Vector vec) throws InterruptedException
     {
         if (!isIdValid(target) || (path == null) || (path.equals("")) || (vec == null) || (vec.size() == 0))
         {
             return false;
         }
         int size = vec.size();
-        Object test = vec.get(0);
+        Object test = vec.elementAt(0);
         if (test instanceof String)
         {
             return setObjVar(target, path, vec.toArray(new String[size]));
@@ -4041,7 +4094,8 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List ret = new ArrayList<obj_id>();
+        Vector ret = new Vector();
+        ret.setSize(0);
         obj_var_list ovl = getObjVarList(target, base_path);
         if ((ovl == null) || (ovl.getNumItems() == 0))
         {
@@ -4065,13 +4119,14 @@ public class utils extends script.base_script
         }
         return null;
     }
-    public static Life getResizeableStringBatchObjVar(obj_id target, String base_path) throws InterruptedException
+    public static Vector getResizeableStringBatchObjVar(obj_id target, String base_path) throws InterruptedException
     {
         if (!isIdValid(target) || (base_path == null) || (base_path.equals("")) || !hasObjVar(target, base_path))
         {
             return null;
         }
-        List ret = new ArrayList<obj_id>();
+        Vector ret = new Vector();
+        ret.setSize(0);
         obj_var_list ovl = getObjVarList(target, base_path);
         if ((ovl == null) || (ovl.getNumItems() == 0))
         {
@@ -4106,7 +4161,8 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List ret = new ArrayList<obj_id>();
+        Vector ret = new Vector();
+        ret.setSize(0);
         obj_var_list ovl = getObjVarList(target, base_path);
         if ((ovl == null) || (ovl.getNumItems() == 0))
         {
@@ -4121,7 +4177,7 @@ public class utils extends script.base_script
                 ret = concatArrays(ret, tmp);
             }
         }
-        if (ret != null && ret.size() > 0)
+        if ((ret != null) && (ret.size() > 0))
         {
             string_id[] _ret = new string_id[0];
             _ret = new string_id[ret.size()];
@@ -4136,7 +4192,7 @@ public class utils extends script.base_script
         {
             return null;
         }
-        if (base_path == null || base_path.isEmpty())
+        if ((base_path == null) || (base_path.equals("")))
         {
             return null;
         }
@@ -4144,7 +4200,8 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List ret = new ArrayList<obj_id>();
+        Vector ret = new Vector();
+        ret.setSize(0);
         obj_var_list ovl = getObjVarList(target, base_path);
         if ((ovl == null) || (ovl.getNumItems() == 0))
         {
@@ -4168,13 +4225,13 @@ public class utils extends script.base_script
         }
         return null;
     }
-    public static List getResizeableObjIdBatchObjVar(obj_id target, String base_path) throws InterruptedException
+    public static Vector getResizeableObjIdBatchObjVar(obj_id target, String base_path) throws InterruptedException
     {
         if (!isIdValid(target))
         {
             return null;
         }
-        if (base_path == null || base_path.isEmpty())
+        if ((base_path == null) || (base_path.equals("")))
         {
             return null;
         }
@@ -4182,7 +4239,8 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List ret = new ArrayList<obj_id>();
+        Vector ret = new Vector();
+        ret.setSize(0);
         obj_var_list ovl = getObjVarList(target, base_path);
         if ((ovl == null) || (ovl.getNumItems() == 0))
         {
@@ -4218,7 +4276,8 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List ret = new ArrayList<obj_id>();
+        Vector ret = new Vector();
+        ret.setSize(0);
         obj_var_list ovl = getObjVarList(target, base_path);
         if ((ovl == null) || (ovl.getNumItems() == 0))
         {
@@ -4245,7 +4304,7 @@ public class utils extends script.base_script
         }
         return null;
     }
-    public static List getResizeableIntBatchObjVar(obj_id target, String base_path) throws InterruptedException
+    public static Vector getResizeableIntBatchObjVar(obj_id target, String base_path) throws InterruptedException
     {
         if (!isIdValid(target))
         {
@@ -4259,7 +4318,8 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List ret = new ArrayList<>();
+        Vector ret = new Vector();
+        ret.setSize(0);
         obj_var_list ovl = getObjVarList(target, base_path);
         if ((ovl == null) || (ovl.getNumItems() == 0))
         {
@@ -4299,7 +4359,8 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List ret = new ArrayList<obj_id>();
+        Vector ret = new Vector();
+        ret.setSize(0);
         int numItems = ovl.getNumItems();
         attrib_mod[] tmp;
         for (int i = 0; i < numItems; i++)
@@ -4333,7 +4394,8 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List ret = new ArrayList<obj_id>();
+        Vector ret = new Vector();
+        ret.setSize(0);
         obj_var_list ovl = getObjVarList(target, base_path);
         if ((ovl == null) || (ovl.getNumItems() == 0))
         {
@@ -4394,27 +4456,27 @@ public class utils extends script.base_script
     {
         return getLocationBatchObjVar(target, base_path) != null;
     }
-    public static boolean setBatchScriptVar(obj_id target, String base_path, List array) throws InterruptedException
+    public static boolean setBatchScriptVar(obj_id target, String base_path, Vector array) throws InterruptedException
     {
         if (!isIdValid(target))
         {
             return false;
         }
-        if (base_path == null || base_path.isEmpty())
+        if ((base_path == null) || (base_path.equals("")))
         {
             return false;
         }
-        if (array == null || array.size() == 0)
+        if ((array == null) || (array.size() == 0))
         {
             return false;
         }
         deltadictionary dd = target.getScriptVars();
         int BatchSize = 10;
         int n = 0;
-        List toSet = new ArrayList<obj_id>();
+        Vector toSet = new Vector();
         for (int i = 0; i < array.size(); i++)
         {
-            toSet.add(array.get(i));
+            toSet.add(array.elementAt(i));
             if (toSet.size() >= BatchSize)
             {
                 dd.put(base_path + "." + n, toSet);
@@ -4432,47 +4494,47 @@ public class utils extends script.base_script
     }
     public static boolean setBatchScriptVar(obj_id target, String base_path, obj_id[] array) throws InterruptedException
     {
-        if (array == null || array.length == 0)
+        if ((array == null) || (array.length == 0))
         {
             return false;
         }
-        List vArray = new ArrayList(Arrays.asList(array));
+        Vector vArray = new Vector(Arrays.asList(array));
         return setBatchScriptVar(target, base_path, vArray);
     }
     public static boolean setBatchScriptVar(obj_id target, String base_path, String[] array) throws InterruptedException
     {
-        if (array == null || array.length == 0)
+        if ((array == null) || (array.length == 0))
         {
             return false;
         }
-        List vArray = new ArrayList(Arrays.asList(array));
+        Vector vArray = new Vector(Arrays.asList(array));
         return setBatchScriptVar(target, base_path, vArray);
     }
     public static boolean setBatchScriptVar(obj_id target, String base_path, string_id[] array) throws InterruptedException
     {
-        if (array == null || array.length == 0)
+        if ((array == null) || (array.length == 0))
         {
             return false;
         }
-        List vArray = new ArrayList(Arrays.asList(array));
+        Vector vArray = new Vector(Arrays.asList(array));
         return setBatchScriptVar(target, base_path, vArray);
     }
     public static boolean setBatchScriptVar(obj_id target, String base_path, location[] array) throws InterruptedException
     {
-        if (array == null || array.length == 0)
+        if ((array == null) || (array.length == 0))
         {
             return false;
         }
-        List vArray = new ArrayList(Arrays.asList(array));
+        Vector vArray = new Vector(Arrays.asList(array));
         return setBatchScriptVar(target, base_path, vArray);
     }
-    public static List getResizeableObjIdBatchScriptVar(obj_id target, String base_path) throws InterruptedException
+    public static Vector getResizeableObjIdBatchScriptVar(obj_id target, String base_path) throws InterruptedException
     {
         if (!isIdValid(target))
         {
             return null;
         }
-        if (base_path == null || base_path.isEmpty())
+        if ((base_path == null) || (base_path.equals("")))
         {
             return null;
         }
@@ -4481,91 +4543,12 @@ public class utils extends script.base_script
             return null;
         }
         int cnt = getIntScriptVar(target, base_path);
-        List ret = new ArrayList<obj_id>();
-        List tmp;
+        Vector ret = new Vector();
+        Vector tmp;
         for (int i = 0; i < cnt; i++)
         {
             tmp = target.getScriptVars().getResizeableObjIdArray(base_path + "." + i);
-            if (tmp != null && tmp.size() > 0)
-            {
-                ret.addAll(tmp);
-            }
-        }
-        if (ret.size() > 0)
-        {
-            return ret;
-        }
-        return null;
-    }
-    public static obj_id[] getObjIdBatchScriptVar(obj_id target, String base_path) throws InterruptedException
-    {
-        List ret = getResizeableObjIdBatchScriptVar(target, base_path);
-        if (ret != null && ret.size() > 0)
-        {
-            return toStaticObjIdArray(ret);
-        }
-        return null;
-    }
-    public static List getResizeableStringBatchScriptVar(obj_id target, String base_path) throws InterruptedException
-    {
-        if (!isIdValid(target))
-        {
-            return null;
-        }
-        if (base_path == null || base_path.isEmpty())
-        {
-            return null;
-        }
-        if (!hasScriptVar(target, base_path))
-        {
-            return null;
-        }
-        int cnt = getIntScriptVar(target, base_path);
-        List ret = new ArrayList<obj_id>();
-        for (int i = 0; i < cnt; i++)
-        {
-            List tmp = target.getScriptVars().getResizeableStringArray(base_path + "." + i);
-            if (tmp != null && tmp.size() > 0)
-            {
-                ret.addAll(tmp);
-            }
-        }
-        if (ret.size() > 0)
-        {
-            return ret;
-        }
-        return null;
-    }
-    public static String[] getStringBatchScriptVar(obj_id target, String base_path) throws InterruptedException
-    {
-        List ret = getResizeableStringBatchScriptVar(target, base_path);
-        if (ret != null && ret.size() > 0)
-        {
-            return toStaticStringArray(ret);
-        }
-        return null;
-    }
-    public static List getResizeableLocationBatchScriptVar(obj_id target, String base_path) throws InterruptedException
-    {
-        if (!isIdValid(target))
-        {
-            return null;
-        }
-        if (base_path == null || base_path.isEmpty())
-        {
-            return null;
-        }
-        if (!hasScriptVar(target, base_path))
-        {
-            return null;
-        }
-        int cnt = getIntScriptVar(target, base_path);
-        List ret = new ArrayList<obj_id>();
-        List tmp;
-        for (int i = 0; i < cnt; i++)
-        {
-            tmp = target.getScriptVars().getResizeableLocationArray(base_path + "." + i);
-            if (tmp != null && tmp.size() > 0)
+            if ((tmp != null) && (tmp.size() > 0))
             {
                 ret.addAll(tmp);
             }
@@ -4576,13 +4559,22 @@ public class utils extends script.base_script
         }
         return null;
     }
-    public static List getResizeableIntBatchScriptVar(obj_id target, String base_path) throws InterruptedException
+    public static obj_id[] getObjIdBatchScriptVar(obj_id target, String base_path) throws InterruptedException
+    {
+        Vector ret = getResizeableObjIdBatchScriptVar(target, base_path);
+        if ((ret != null) && (ret.size() > 0))
+        {
+            return toStaticObjIdArray(ret);
+        }
+        return null;
+    }
+    public static Vector getResizeableStringBatchScriptVar(obj_id target, String base_path) throws InterruptedException
     {
         if (!isIdValid(target))
         {
             return null;
         }
-        if (base_path == null || base_path.isEmpty())
+        if ((base_path == null) || (base_path.equals("")))
         {
             return null;
         }
@@ -4591,17 +4583,87 @@ public class utils extends script.base_script
             return null;
         }
         int cnt = getIntScriptVar(target, base_path);
-        List ret = new ArrayList<obj_id>();
-        List tmp;
+        Vector ret = new Vector();
         for (int i = 0; i < cnt; i++)
         {
-            tmp = target.getScriptVars().getResizeableIntArray(base_path + "." + i);
-            if (tmp != null && tmp.size() > 0)
+            Vector tmp = target.getScriptVars().getResizeableStringArray(base_path + "." + i);
+            if ((tmp != null) && (tmp.size() > 0))
             {
                 ret.addAll(tmp);
             }
         }
-        if (ret.size() > 0)
+        if ((ret.size() > 0))
+        {
+            return ret;
+        }
+        return null;
+    }
+    public static String[] getStringBatchScriptVar(obj_id target, String base_path) throws InterruptedException
+    {
+        Vector ret = getResizeableStringBatchScriptVar(target, base_path);
+        if ((ret != null) && (ret.size() > 0))
+        {
+            return toStaticStringArray(ret);
+        }
+        return null;
+    }
+    public static Vector getResizeableLocationBatchScriptVar(obj_id target, String base_path) throws InterruptedException
+    {
+        if (!isIdValid(target))
+        {
+            return null;
+        }
+        if ((base_path == null) || (base_path.equals("")))
+        {
+            return null;
+        }
+        if (!hasScriptVar(target, base_path))
+        {
+            return null;
+        }
+        int cnt = getIntScriptVar(target, base_path);
+        Vector ret = new Vector();
+        Vector tmp;
+        for (int i = 0; i < cnt; i++)
+        {
+            tmp = target.getScriptVars().getResizeableLocationArray(base_path + "." + i);
+            if ((tmp != null) && (tmp.size() > 0))
+            {
+                ret.addAll(tmp);
+            }
+        }
+        if ((ret.size() > 0))
+        {
+            return ret;
+        }
+        return null;
+    }
+    public static Vector getResizeableIntBatchScriptVar(obj_id target, String base_path) throws InterruptedException
+    {
+        if (!isIdValid(target))
+        {
+            return null;
+        }
+        if ((base_path == null) || (base_path.equals("")))
+        {
+            return null;
+        }
+        if (!hasScriptVar(target, base_path))
+        {
+            return null;
+        }
+        int cnt = getIntScriptVar(target, base_path);
+        Vector ret = new Vector();
+        Vector tmp;
+        for (int i = 0; i < cnt; i++)
+        {
+            tmp = target.getScriptVars().getResizeableIntArray(base_path + "." + i);
+            if ((tmp != null) && (tmp.size() > 0))
+            {
+                ret.addAll(tmp);
+            }
+        }
+        if ((ret.size() > 0))
         {
             return ret;
         }
@@ -4609,8 +4671,8 @@ public class utils extends script.base_script
     }
     public static location[] getLocationBatchScriptVar(obj_id target, String base_path) throws InterruptedException
     {
-        List ret = getResizeableLocationBatchScriptVar(target, base_path);
-        if (ret != null && ret.size() > 0)
+        Vector ret = getResizeableLocationBatchScriptVar(target, base_path);
+        if ((ret != null) && (ret.size() > 0))
         {
             return toStaticLocationArray(ret);
         }
@@ -4618,8 +4680,8 @@ public class utils extends script.base_script
     }
     public static int[] getIntBatchScriptVar(obj_id target, String base_path) throws InterruptedException
     {
-        List ret = getResizeableIntBatchScriptVar(target, base_path);
-        if (ret != null && ret.size() > 0)
+        Vector ret = getResizeableIntBatchScriptVar(target, base_path);
+        if ((ret != null) && (ret.size() > 0))
         {
             int[] _ret = new int[ret.size()];
             for (int _i = 0; _i < ret.size(); ++_i)
@@ -4636,7 +4698,7 @@ public class utils extends script.base_script
         {
             return;
         }
-        if (base_path == null || base_path.isEmpty())
+        if ((base_path == null) || (base_path.equals("")))
         {
             return;
         }
@@ -4976,18 +5038,18 @@ public class utils extends script.base_script
         msg.put("df", df);
         messageTo(msgTarget, "handleDelayedProseMessage", msg, delay, false);
     }
-    public static List alphabetizeStringArray(String[] array) throws InterruptedException
+    public static Vector alphabetizeStringArray(String[] array) throws InterruptedException
     {
-        if (array == null || array.length == 0)
+        if ((array == null) || (array.length == 0))
         {
             return null;
         }
-        List tmp = new ArrayList<obj_id>();
+        Vector tmp = new Vector();
         java.text.Collator myCol = java.text.Collator.getInstance();
         for (String anArray : array) {
             boolean inserted = false;
             for (int n = 0; n < tmp.size(); n++) {
-                if (myCol.compare(anArray, tmp.get(n)) < 0) {
+                if (myCol.compare(anArray, tmp.elementAt(n)) < 0) {
                     tmp.add(n, anArray);
                     inserted = true;
                     break;
@@ -5003,14 +5065,14 @@ public class utils extends script.base_script
         }
         return tmp;
     }
-    public static List alphabetizeStringArray(List array) throws InterruptedException
+    public static Vector alphabetizeStringArray(Vector array) throws InterruptedException
     {
-        if (array == null || array.size() == 0)
+        if ((array == null) || (array.size() == 0))
         {
             return null;
         }
         String[] toPass = toStaticStringArray(array);
-        if (toPass == null || toPass.length == 0)
+        if ((toPass == null) || (toPass.length == 0))
         {
             return null;
         }
@@ -5557,7 +5619,8 @@ public class utils extends script.base_script
             return null;
         }
         obj_id[] objects = getObjectsInRange(loc, radius);
-        List attackable_targets = new ArrayList<obj_id>();
+        Vector attackable_targets = new Vector();
+        attackable_targets.setSize(0);
         for (obj_id object : objects) {
             if (isMob(object)) {
                 if (pvpCanAttack(attacker, object)) {
@@ -5568,14 +5631,14 @@ public class utils extends script.base_script
                             }
                         }
                         if (canSee(attacker, object)) {
-                            attackable_targets.add(object);
+                            attackable_targets = utils.addElement(attackable_targets, object);
                         }
                     }
                 }
             } else if (ai_lib.isTurret(object)) {
                 if (pvpCanAttack(attacker, object)) {
                     if (canSee(attacker, object)) {
-                        attackable_targets.add(object);
+                        attackable_targets = utils.addElement(attackable_targets, object);
                     }
                 }
             }
@@ -5590,7 +5653,7 @@ public class utils extends script.base_script
     }
     public static obj_id getTrapDroidId(obj_id player) throws InterruptedException
     {
-        List data = getResizeableContents(getPlayerDatapad(player));
+        Vector data = getResizeableContents(getPlayerDatapad(player));
         if(data == null) return null;
         for (Object aData : data) {
             if (callable.hasCDCallable(((obj_id) aData)) && hasObjVar(((obj_id) aData), "module_data.trap_bonus")) {
@@ -5979,17 +6042,17 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List localMemberIdsList = new ArrayList<obj_id>();
+        Vector localMemberIdsVector = new Vector();
         for (obj_id groupMemberId : groupMemberIds) {
             if (isIdValid(groupMemberId) && exists(groupMemberId) && isPlayer(groupMemberId)) {
-                localMemberIdsList.add(groupMemberId);
+                localMemberIdsVector.addElement(groupMemberId);
             }
         }
-        if (localMemberIdsList == null || localMemberIdsList.size() < 1)
+        if (localMemberIdsVector == null || localMemberIdsVector.size() < 1)
         {
             return null;
         }
-        return (utils.toStaticObjIdArray(localMemberIdsList));
+        return (utils.toStaticObjIdArray(localMemberIdsVector));
     }
     public static boolean canSpeakWookiee(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -6530,10 +6593,11 @@ public class utils extends script.base_script
     }
     public static obj_id[] validateObjIdArray(obj_id[] objIds) throws InterruptedException
     {
-        List target = new ArrayList<obj_id>();
+        Vector target = new Vector();
+        target.setSize(0);
         for (obj_id objId : objIds) {
             if (isIdValid(objId) && exists(objId)) {
-                target.add(objId);
+                addElement(target, objId);
             }
         }
         objIds = new obj_id[target.size()];
@@ -6553,7 +6617,8 @@ public class utils extends script.base_script
         location lowerLeft = new location(x1, 0.0f, z1, scene);
         float hypotenuse = getDistance(centerLoc, lowerLeft);
         obj_id[] allPlayers = getAllPlayers(centerLoc, hypotenuse * 3.0f);
-        List playersInArea = new ArrayList<obj_id>();
+        Vector playersInArea = new Vector();
+        playersInArea.setSize(0);
         if (allPlayers == null || allPlayers.length == 0)
         {
             return null;
@@ -6565,7 +6630,7 @@ public class utils extends script.base_script
                 LOG("doLogging", "" + loc.x + " vs: " + x1 + ", " + x2 + " and " + loc.z + " vs: " + z1 + ", " + z2);
                 continue;
             }
-            playersInArea.add(allPlayer);
+            utils.addElement(playersInArea, allPlayer);
         }
         if (playersInArea.size() == 0)
         {
@@ -6611,7 +6676,8 @@ public class utils extends script.base_script
         location lowerLeft = new location(data.getFloat("x1"), 0.0f, data.getFloat("z1"), scene);
         float hypotenuse = getDistance(centerLoc, lowerLeft);
         obj_id[] allObjects = getObjectsInRange(centerLoc, hypotenuse * 3.0f);
-        List objectsInArea = new ArrayList<obj_id>();
+        Vector objectsInArea = new Vector();
+        objectsInArea.setSize(0);
         if (allObjects == null || allObjects.length == 0)
         {
             return null;
@@ -6636,14 +6702,14 @@ public class utils extends script.base_script
         objectsInArea.toArray(_objectsInArea);
         return _objectsInArea;
     }
-    public static List shuffleArray(List list) throws InterruptedException
+    public static Vector shuffleArray(Vector list) throws InterruptedException
     {
-        List newList = new ArrayList<obj_id>();
+        Vector newList = new Vector();
         for (int size = list.size(); size > 0; size--)
         {
             int i = rand(0, (size - 1));
-            newList.add(list.get(i));
-            list.remove(i);
+            newList = utils.addElement(newList, list.get(i));
+            list = utils.removeElementAt(list, i);
         }
         if (newList == null || newList.size() == 0)
         {
@@ -6742,7 +6808,8 @@ public class utils extends script.base_script
         {
             return null;
         }
-        List resizeList = new ArrayList<obj_id>();
+        Vector resizeList = new Vector();
+        resizeList.setSize(0);
         obj_id tempRider;
         for (int i = 1; i <= 25; ++i)
         {
@@ -6751,7 +6818,7 @@ public class utils extends script.base_script
             {
                 continue;
             }
-            resizeList.add(tempRider);
+            resizeList = addElement(resizeList, tempRider);
         }
         obj_id[] _resizeList = new obj_id[0];
         if (resizeList != null)
@@ -6939,7 +7006,7 @@ public class utils extends script.base_script
         }
         if (!abilities.isEmpty())
         {
-            List abilitiesCurrent = utils.getResizeableIntBatchObjVar(player, beast_lib.PLAYER_KNOWN_SKILLS_LIST);
+            Vector abilitiesCurrent = utils.getResizeableIntBatchObjVar(player, beast_lib.PLAYER_KNOWN_SKILLS_LIST);
             boolean updateRequired = false;
             if ((abilitiesCurrent == null) || (abilitiesCurrent.size() <= 0))
             {
