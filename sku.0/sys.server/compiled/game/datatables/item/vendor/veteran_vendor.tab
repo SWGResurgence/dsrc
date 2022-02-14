@@ -11,7 +11,7 @@ object/tangible/veteran_reward/respec_voucher_deed.iff	78		A Respec Voucher
 object/tangible/veteran_reward/data_terminal_s2.iff	3		A Sample Readout Console
 item_trader_advanced_buff_01_01	250	1	Advanced Superior Crafting Unit
 item_vet_reward_75month_houseplant_02	75		An Exotic Plant
-item_creature_harvester_deed_schematic_01_01	500		Automated Creature Harvester Schematic
+item_creature_harvester_deed_01_01	500		Automated Creature Harvester Deed
 object/tangible/veteran_reward/one_year_anniversary/painting_01.iff	3	1	Cast Wing in Flight
 item_respec_token_01_01	100	1	Character Respec Device
 object/tangible/veteran_reward/city_flag_kit.iff	54		City Banner Kit
