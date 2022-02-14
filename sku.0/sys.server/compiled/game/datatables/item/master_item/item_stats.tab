@@ -4553,7 +4553,7 @@ item_tcg_loot_reward_series7_deed_vip_bunker			"string:player_structure.deed.tem
 item_tcg_loot_reward_series7_purple_cape											
 item_tcg_loot_reward_series7_gold_cape											
 item_tcg_loot_reward_series7_handmade_sash											
-item_tcg_loot_reward_series7_embroidered_sash	luck_modified=150										
+item_tcg_loot_reward_series7_embroidered_sash	luck_modified=150,expertise_reverse_engineering_bonus=4										
 item_tcg_loot_reward_series7_tie_fighter_familiar			string:creatureName=tcg_tie_fighter_familiar								
 item_tcg_loot_reward_series7_xwing_fighter_familiar			string:creatureName=tcg_xwing_fighter_familiar								
 item_tcg_loot_reward_series7_hutt_fighter_familiar			string:creatureName=tcg_hutt_fighter_familiar								
