@@ -19,7 +19,7 @@ sharedTemplate = "object/tangible/bank/shared_character_bank.iff"
 
 scripts = [  ]
 
-volume = 100
+volume = 250
 
 visibleFlags = [ VF_gm ]
 
