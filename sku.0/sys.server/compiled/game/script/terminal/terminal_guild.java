@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class terminal_guild extends script.terminal.base.base_terminal
 {
-    public terminal_guild()
-    {
-    }
     public static final string_id SID_GUILDS_LIST = new string_id("guild", "menu_list_of_guilds");
     public static final string_id SID_GUILD_WAR_LIST = new string_id("guild", "menu_list_of_guild_wars");
     public static final string_id SID_GUILD_WAR_LIST_ACTIVE = new string_id("guild", "menu_list_of_guild_wars_active");
@@ -349,6 +346,12 @@ public class terminal_guild extends script.terminal.base.base_terminal
         sendDirtyObjectMenuNotification(self);
         if (item == menu_info_types.SERVER_MENU3)
         {
+            final int[] guildIds = getAllGuildIds();
+            if(guildIds == null || guildIds.length < 1)
+            {
+                sendSystemMessageTestingOnly(player, "There are currently no active guilds in the "+getClusterName()+" Galaxy.");
+                return SCRIPT_CONTINUE;
+            }
             dictionary guildsListParams = new dictionary();
             guildsListParams.put("player", player);
             messageTo(self, "showGuildsList", guildsListParams, 3.0f, false);
