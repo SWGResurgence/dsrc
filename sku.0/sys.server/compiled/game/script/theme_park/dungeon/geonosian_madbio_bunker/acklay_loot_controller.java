@@ -39,7 +39,7 @@ public class acklay_loot_controller extends script.base_script
             static_item.createNewItemFunction("item_scorpion_kliknik_dna", corpseInventory);
 		}
         if (x < 4){  // 3% Drop Chance
-            static_item.createNewItemFunction("item_tcg_loot_reward_series2_barn", corpseInventory);
+            static_item.createNewItemFunction("item_tcg_loot_reward_series4_geonosian_speeder_02_01", corpseInventory);
         }
         if (x < 2){  // 1% Drop Chance
             static_item.createNewItemFunction("item_tcg_loot_reward_series2_barn", corpseInventory);
