@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class faction_perk extends script.base_script
 {
+    public faction_perk()
+    {
+    }
     public static final String TBL_PREJUDICE = "datatables/faction/prejudice.iff";
     public static final String TBL_PERK_INVENTORY_BASE = "datatables/npc/faction_recruiter/perk_inventory/";
     public static final String VAR_COVERT_DETECTOR = "covert_detector";
@@ -83,14 +86,15 @@ public class faction_perk extends script.base_script
     public static final string_id SID_ALREADY_HAVE = new string_id("gcw", "comm_already_used");
     public static final string_id SID_TOO_LOW_LEVEL = new string_id("gcw", "player_too_low");
     public static final string_id SID_INDOORS = new string_id("gcw", "player_is_indoors");
-    /*private static final float BASE_MODIFIER_01_PVE = utils.getFloatConfigSetting("GameServer", "gcwFactionBase01PvEBonusAmount", 0.01f);
+    private static final float BASE_MODIFIER_01_PVE = utils.getFloatConfigSetting("GameServer", "gcwFactionBase01PvEBonusAmount", 0.01f);
     private static final float BASE_MODIFIER_01_PVP = utils.getFloatConfigSetting("GameServer", "gcwFactionBase01PvPBonusAmount", 0.02f);
     private static final float BASE_MODIFIER_02_PVE = utils.getFloatConfigSetting("GameServer", "gcwFactionBase02PvEBonusAmount", 0.03f);
     private static final float BASE_MODIFIER_02_PVP = utils.getFloatConfigSetting("GameServer", "gcwFactionBase02PvPBonusAmount", 0.05f);
     private static final float BASE_MODIFIER_03_PVE = utils.getFloatConfigSetting("GameServer", "gcwFactionBase03PvEBonusAmount", 0.06f);
     private static final float BASE_MODIFIER_03_PVP = utils.getFloatConfigSetting("GameServer", "gcwFactionBase03PvPBonusAmount", 0.08f);
     private static final float BASE_MODIFIER_04_PVE = utils.getFloatConfigSetting("GameServer", "gcwFactionBase04PvEBonusAmount", 0.10f);
-    private static final float BASE_MODIFIER_04_PVP = utils.getFloatConfigSetting("GameServer", "gcwFactionBase04PvPBonusAmount", 0.12f);*/
+    private static final float BASE_MODIFIER_04_PVP = utils.getFloatConfigSetting("GameServer", "gcwFactionBase04PvPBonusAmount", 0.12f);
+
     public static int prejudicePerkCost(obj_id player, String faction, int base_cost) throws InterruptedException
     {
         if (!isIdValid(player) || (faction == null) || (faction.equals("")) || (base_cost < 1))
@@ -162,6 +166,7 @@ public class faction_perk extends script.base_script
             sendSystemMessage(player, new string_id("gcw", "cannot_place_additional_base"));
             return false;
         }
+
         // GU 17.2 cannot place base in contested region your faction doesn't control at least 51%
         int impScore = gcw.getGcwImperialScorePercentile(gcw.getGcwRegion(player));
         if(pvpGetAlignedFaction(player) == FACTION_HASH_IMPERIAL) {
@@ -175,6 +180,7 @@ public class faction_perk extends script.base_script
                 return false;
             }
         }
+
         int used = getIntObjVar(player, player_structure.VAR_LOTS_USED);
         String fp_template = player_structure.getFootprintTemplate(template);
         if ((fp_template == null) || (fp_template.equals("")))
@@ -1071,6 +1077,7 @@ public class faction_perk extends script.base_script
         }
         return true;
     }
+
     /**
      * Wrapper for getRebel/ImperialFactionBases methods to pass faction hash
      */
@@ -1148,4 +1155,5 @@ public class faction_perk extends script.base_script
         }
         return 0.0f;
     }
+
 }
