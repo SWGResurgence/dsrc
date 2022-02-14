@@ -658,7 +658,6 @@ item_content_charged_health_02_02					contentChargedHealth_2	short_reuse_3	5
 item_content_charged_rng_def_02_02					contentChargedRngDefense_2	short_reuse_4	5				
 item_content_food_combo_acc_02_02					contentChargedComboAcc_2	short_reuse_4	5				
 item_content_jacket_rsf_02_01	constitution_modified=20										
-item_content_backpack_rsf_02_01			int:skillmod.bonus.slope_move=5								
 item_content_pants_ter_neg_02_01			int:skillmod.bonus.slope_move=5								
 item_content_jacket_corsec_02_01	constitution_modified=4										
 item_content_ring_ree_yees_02_01	constitution_modified=4										
@@ -4553,7 +4552,7 @@ item_tcg_loot_reward_series7_deed_vip_bunker			"string:player_structure.deed.tem
 item_tcg_loot_reward_series7_purple_cape											
 item_tcg_loot_reward_series7_gold_cape											
 item_tcg_loot_reward_series7_handmade_sash											
-item_tcg_loot_reward_series7_embroidered_sash	luck_modified=150,expertise_reverse_engineering_bonus=4										
+item_tcg_loot_reward_series7_embroidered_sash	"luck_modified=150,expertise_reverse_engineering_bonus=4"										
 item_tcg_loot_reward_series7_tie_fighter_familiar			string:creatureName=tcg_tie_fighter_familiar								
 item_tcg_loot_reward_series7_xwing_fighter_familiar			string:creatureName=tcg_xwing_fighter_familiar								
 item_tcg_loot_reward_series7_hutt_fighter_familiar			string:creatureName=tcg_hutt_fighter_familiar								
@@ -5012,6 +5011,6 @@ item_shipwright_crafting_datadisk_01_01					starship_crafting_datadisk_1	long_re
 item_shipwright_crafting_datadisk_01_02					starship_crafting_datadisk_1	long_reuse_4	1800			appearance/pt_heal.prt	
 item_schematic_portable_bazaar_terminal			"string:loot_schematic.schematic=object/draft_schematic/item/item_portable_bazaar_terminal.iff,int:loot_schematic.uses=2,string:loot_schematic.skill_req=class_structures_phase4_master"								
 item_schematic_portable_space_terminal			"string:loot_schematic.schematic=object/draft_schematic/item/item_portable_space_terminal.iff,int:loot_schematic.uses=2,string:loot_schematic.skill_req=class_structures_phase4_master"								
-item_nym_themepark_backpack_01_01	"agility_modified=25,camouflage=25,constitution_modified=25,luck_modified=25,precision_modified=25,stamina_modified=25,strength_modified=25"		
-armor_galactic_marine_backpack	"agility_modified=25,camouflage=25,constitution_modified=25,luck_modified=25,precision_modified=25,stamina_modified=25,strength_modified=25"		
-item_content_backpack_rsf_02_01	"agility_modified=25,camouflage=25,constitution_modified=25,luck_modified=25,precision_modified=25,stamina_modified=25,strength_modified=25"		
+item_nym_themepark_backpack_01_01	"agility_modified=25,camouflage=25,constitution_modified=25,luck_modified=25,precision_modified=25,stamina_modified=25,strength_modified=25"										
+armor_galactic_marine_backpack	"agility_modified=25,camouflage=25,constitution_modified=25,luck_modified=25,precision_modified=25,stamina_modified=25,strength_modified=25"										
+item_content_backpack_rsf_02_01	"agility_modified=25,camouflage=25,constitution_modified=25,luck_modified=25,precision_modified=25,stamina_modified=25,strength_modified=25"										
