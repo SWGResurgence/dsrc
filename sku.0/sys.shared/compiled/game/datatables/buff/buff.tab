@@ -1467,7 +1467,7 @@ grenadier_kinetic	krix_grenadier_kinetic			50	command.co_riddle_armor	15	experti
 krix_resonance	krix_resonance			50	command.ig88_droideka_electrify	5	krix_resonance	0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 sm_smuggled	smuggled			1	buffs.smuggled	3600	expertise_damage_all	7	combat_divide_damage_taken	6	constitution_modified	250		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 sm_smuggled_01	smuggled			1	buffs.forcedEntry	3600	expertise_damage_all	4	combat_divide_damage_taken	5	constitution_modified	250		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
-bm_helper_monkey_shipwright	bm_player_buff			1	command.bm_helper_monkey_domestic	900	bm_beast_family_monkey	0	chassis_experimentation	2	engine_experimentation	2	shields_experimentation	2	weapon_systems_experimentation	2	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+bm_helper_monkey_shipwright	bm_player_buff			1	command.bm_helper_monkey_domestic	900	bm_beast_family_monkey	0	chassis_experimentation	10	engine_experimentation	10	shields_experimentation	10	weapon_systems_experimentation	10	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 col_ent_invis_buff_tracker	collection_ent			1	buffs.smuggled	900		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
 col_sd_invis_buff_tracker	collection_sd			1	buffs.smuggled	21600		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
 nova_orion_rank6_lucky_salvage	nova_orion			1	command.sm_path_fake_goods	7200		0		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
