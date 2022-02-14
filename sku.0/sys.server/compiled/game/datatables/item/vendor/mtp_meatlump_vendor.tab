@@ -1,4 +1,4 @@
-item	cash	resourceAmount	class	script	note
+item	cash	token36	limit	class	script
 s[none]	i[0]	i[0]	i[0]	s	c
 item_meatlump_camp_light_schematic_02_01		55			
 item_meatlump_camp_light_schematic_02_02		55			
@@ -14,9 +14,9 @@ item_mtp_meatlump_king_reward		100
 mtp_meatlump_graffiti_reward_02_01		25			
 mtp_meatlump_graffiti_reward_02_02		25			
 mtp_meatlump_graffiti_reward_02_03		25			
-mtp_meatlump_graffiti_reward_02_04		25
-mtp_meatlump_graffiti_reward_02_05		25
-mtp_meatlump_graffiti_reward_02_06		25
-mtp_meatlump_graffiti_reward_02_07		25
+mtp_meatlump_graffiti_reward_02_04		25			
+mtp_meatlump_graffiti_reward_02_05		25			
+mtp_meatlump_graffiti_reward_02_06		25			
+mtp_meatlump_graffiti_reward_02_07		25			
 item_tcg_loot_reward_series1_greeter_meatlump		1000			
 item_tcg_loot_reward_series2_vendor_meatlump		1500			
