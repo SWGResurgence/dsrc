@@ -7,9 +7,6 @@ import script.*;
 
 public class ord_mantell_dungeon_terminal extends script.base_script
 {
-    public ord_mantell_dungeon_terminal()
-    {
-    }
     public static final string_id LAUNCH = new string_id("npe", "leave_dungeon");
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -28,6 +25,11 @@ public class ord_mantell_dungeon_terminal extends script.base_script
             {
                 string_id noCanFly = new string_id("npe", "gamma_travel_not_from_space");
                 sendSystemMessage(player, noCanFly);
+                return SCRIPT_CONTINUE;
+            }
+            if(!isPlanetEnabledForCluster("space_ord_mantell"))
+            {
+                sendSystemMessageTestingOnly(player, "Space travel is not available right now. Please use the Gamma Shuttle Droid to return to Tansarii Point Station.");
                 return SCRIPT_CONTINUE;
             }
             if (checkGod(player))
