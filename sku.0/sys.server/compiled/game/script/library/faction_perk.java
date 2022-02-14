@@ -83,14 +83,14 @@ public class faction_perk extends script.base_script
     public static final string_id SID_ALREADY_HAVE = new string_id("gcw", "comm_already_used");
     public static final string_id SID_TOO_LOW_LEVEL = new string_id("gcw", "player_too_low");
     public static final string_id SID_INDOORS = new string_id("gcw", "player_is_indoors");
-    private static final float BASE_MODIFIER_01_PVE = utils.getFloatConfigSetting("GameServer", "gcwFactionBase01PvEBonusAmount", 0.01f);
+    /*private static final float BASE_MODIFIER_01_PVE = utils.getFloatConfigSetting("GameServer", "gcwFactionBase01PvEBonusAmount", 0.01f);
     private static final float BASE_MODIFIER_01_PVP = utils.getFloatConfigSetting("GameServer", "gcwFactionBase01PvPBonusAmount", 0.02f);
     private static final float BASE_MODIFIER_02_PVE = utils.getFloatConfigSetting("GameServer", "gcwFactionBase02PvEBonusAmount", 0.03f);
     private static final float BASE_MODIFIER_02_PVP = utils.getFloatConfigSetting("GameServer", "gcwFactionBase02PvPBonusAmount", 0.05f);
     private static final float BASE_MODIFIER_03_PVE = utils.getFloatConfigSetting("GameServer", "gcwFactionBase03PvEBonusAmount", 0.06f);
     private static final float BASE_MODIFIER_03_PVP = utils.getFloatConfigSetting("GameServer", "gcwFactionBase03PvPBonusAmount", 0.08f);
     private static final float BASE_MODIFIER_04_PVE = utils.getFloatConfigSetting("GameServer", "gcwFactionBase04PvEBonusAmount", 0.10f);
-    private static final float BASE_MODIFIER_04_PVP = utils.getFloatConfigSetting("GameServer", "gcwFactionBase04PvPBonusAmount", 0.12f);
+    private static final float BASE_MODIFIER_04_PVP = utils.getFloatConfigSetting("GameServer", "gcwFactionBase04PvPBonusAmount", 0.12f);*/
     public static int prejudicePerkCost(obj_id player, String faction, int base_cost) throws InterruptedException
     {
         if (!isIdValid(player) || (faction == null) || (faction.equals("")) || (base_cost < 1))
