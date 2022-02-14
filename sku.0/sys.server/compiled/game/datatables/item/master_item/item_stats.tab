@@ -5013,3 +5013,4 @@ item_schematic_portable_bazaar_terminal			"string:loot_schematic.schematic=objec
 item_schematic_portable_space_terminal			"string:loot_schematic.schematic=object/draft_schematic/item/item_portable_space_terminal.iff,int:loot_schematic.uses=2,string:loot_schematic.skill_req=class_structures_phase4_master"								
 item_nym_themepark_backpack_01_01	"agility_modified=25,camouflage=25,constitution_modified=25,luck_modified=25,precision_modified=25,stamina_modified=25,strength_modified=25"										
 item_content_backpack_rsf_02_01	"agility_modified=25,camouflage=25,constitution_modified=25,luck_modified=25,precision_modified=25,stamina_modified=25,strength_modified=25"										
+item_creature_harvester_deed_schematic_01_01			"string:loot_schematic.schematic=object/draft_schematic/structure/installation_mining_organic_creature.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase4_master"								
