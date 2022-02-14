@@ -3,6 +3,7 @@ package script.player.base;
 import script.*;
 import script.library.*;
 
+import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
@@ -3394,13 +3395,7 @@ public class base_player extends script.base_script
         playClientEffectObj(self, "clienteffect/player_clone_compile.cef", self, null);
         if (!utils.hasScriptVar(self, "no_cloning_sickness") && !instance.isInInstanceArea(self))
         {
-            // GU 17.2 - scale down cloning sickness time for GCW Officers if they are
-            // currently on a planet their faction is winning >= 70%
-            int cloningSicknessTime = 600;
-            if(pvpGetCurrentGcwRank(self) > 6) {
-                cloningSicknessTime = gcw.getScaledValueFromControlScore(getLocation(self).area, pvpGetAlignedFaction(self), 600, 70, false, 2, -6);
-            }
-            buff.applyBuff(self, "cloning_sickness", cloningSicknessTime);
+            buff.applyBuff(self, "cloning_sickness");
         }
         else if (utils.hasScriptVar(self, "no_cloning_sickness"))
         {
