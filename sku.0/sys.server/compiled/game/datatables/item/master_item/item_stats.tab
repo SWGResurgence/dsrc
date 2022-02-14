@@ -2393,7 +2393,7 @@ item_treasure_map_bracelet_r_fs_03_01	"expertise_critical_line_fs_dm=3,expertise
 item_treasure_map_bracelet_r_fs_04_01	"expertise_critical_line_fs_dm=4,expertise_freeshot_fs_dm=4,expertise_damage_line_fs_dm=4,expertise_action_line_fs_dm=4"										
 item_treasure_map_bracelet_r_fs_02_02	"jedi_saber_assembly=3,jedi_saber_experimentation=5"										
 item_treasure_map_bracelet_r_fs_03_02	"jedi_saber_assembly=3,jedi_saber_experimentation=8"										
-item_treasure_map_bracelet_r_fs_04_02	"jedi_saber_assembly=3,jedi_saber_experimentation=10"										
+item_treasure_map_bracelet_r_fs_04_02	"jedi_saber_assembly=3,jedi_saber_experimentation=10,expertise_resource_quality_increase=5"										
 item_treasure_map_bracelet_r_co_01_01	"expertise_critical_line_co_dm=1,expertise_freeshot_co_dm=1,expertise_damage_line_co_dm=1,expertise_action_line_co_dm=1"										
 item_treasure_map_bracelet_r_co_02_01	"expertise_critical_line_co_dm=2,expertise_freeshot_co_dm=2,expertise_damage_line_co_dm=2,expertise_action_line_co_dm=2"										
 item_treasure_map_bracelet_r_co_03_01	"expertise_critical_line_co_dm=3,expertise_freeshot_co_dm=3,expertise_damage_line_co_dm=3,expertise_action_line_co_dm=3"										
