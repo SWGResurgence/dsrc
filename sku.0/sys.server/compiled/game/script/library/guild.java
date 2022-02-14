@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class guild extends script.base_script
 {
-    public guild()
-    {
-    }
     public static final int GUILD_PERMISSIONS_NONE = 0;
     public static final int GUILD_PERMISSION_MEMBER = (1 << 0);
     public static final int GUILD_PERMISSION_SPONSOR = (1 << 1);
@@ -235,6 +232,7 @@ public class guild extends script.base_script
     public static final int INTERFACE_GUILD_ELECTION = 5;
     public static final int INTERFACE_GUILD_WAR_PREFERENCES = 6;
     public static final String VAR_TIME_JOINED_CURRENT_GUILD = "guild.timeJoinedCurrentGuild";
+    public static final String VAR_LEADERBOARD_PERIOD_ON_JOIN = "guild.leaderboardPeriodOnJoin";
 
     public static String resolveGuildName(int guildId) throws InterruptedException
     {
@@ -425,6 +423,7 @@ public class guild extends script.base_script
     {
         GuildLog(guildId, "disbandForNotEnoughMembers", null, null, "");
         mailToGuild(guildId, GUILD_MAIL_DISBAND_SUBJECT, GUILD_MAIL_DISBAND_NOT_ENOUGH_MEMBERS_TEXT);
+        leaderboard.purgeEntityGcwLeaderboardHistory(guildId, false);
         disbandGuild(guildId);
     }
     public static void disband(int guildId, obj_id actor) throws InterruptedException
@@ -437,6 +436,7 @@ public class guild extends script.base_script
         {
             GuildLog(guildId, "disband", actor, null, "");
             mailToGuild(guildId, GUILD_MAIL_DISBAND_SUBJECT, GUILD_MAIL_DISBAND_TEXT, getName(actor));
+            leaderboard.purgeEntityGcwLeaderboardHistory(guildId, false);
             disbandGuild(guildId);
         }
     }
@@ -520,6 +520,7 @@ public class guild extends script.base_script
                 mailToGuild(guildId, GUILD_MAIL_ACCEPT_SUBJECT, GUILD_MAIL_ACCEPT_TEXT, getName(actor), memberName);
                 guildSetMemberPermissionAndAllegiance(guildId, memberId, GUILD_PERMISSION_MEMBER, guildGetLeader(guildId));
                 setObjVar(memberId, VAR_TIME_JOINED_CURRENT_GUILD, getGameTime());
+                setObjVar(memberId, VAR_LEADERBOARD_PERIOD_ON_JOIN, leaderboard.getCurrentLeaderboardPeriod());
                 mailToPerson(guildId, memberName, GUILD_MAIL_ACCEPT_TARGET_SUBJECT, GUILD_MAIL_ACCEPT_TARGET_TEXT, getName(actor), guildGetName(guildId));
                 messageTo(memberId, "onGuildCreateTerminalDataObject", null, 0, false);
             }
@@ -2589,5 +2590,12 @@ public class guild extends script.base_script
         {
             return false;
         }
+    }
+    /**
+     * Returns the Guild Chat channel name for the specified guild
+     * e.g. chatSendToRoom(guild.getChatChannelForGuild(guildId), "message", "");
+     */
+    public static String getChatChannelForGuild(int guildId) throws InterruptedException {
+        return getGameChatCode() + "." + getGalaxyName() + "." + "guild." + guildId + ".GuildChat";
     }
 }

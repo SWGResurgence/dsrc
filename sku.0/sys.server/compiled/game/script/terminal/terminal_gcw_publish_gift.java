@@ -58,6 +58,18 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             "TATOOINE"
         }
     };
+    public int OnInitialize(obj_id self) throws InterruptedException {
+        if(!hasScript(self, "systems.leaderboard.gcw_display_object")) {
+            attachScript(self, "systems.leaderboard.gcw_display_object");
+        }
+        return SCRIPT_CONTINUE;
+    }
+    public int OnAttach(obj_id self) throws InterruptedException {
+        if(!hasScript(self, "systems.leaderboard.gcw_display_object")) {
+            attachScript(self, "systems.leaderboard.gcw_display_object");
+        }
+        return SCRIPT_CONTINUE;
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data data = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -290,7 +302,9 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
                         utils.setLocalVar(playerObject, "gcwContributionTrackingColumn" + i, columnData[i]);
                     }
                 }
-                newPid = sui.tableColumnMajor(player, player, sui.OK_ONLY, "@" + SID_MENU_GCW_PERSONAL_CONTRIBUTION.toString(), "onGcwPersonalContributionTableDictionaryResponse", "@gcw:gcw_personal_contribution_sui_table_header", columnHeader, columnHeaderType, columnData, true);
+                final float bonusAmt = gcw.getGcwFactionBasesMultiplierForPlayerAtPoint(player);
+                final String bonusNum = "\n\nFactional Base Bonus available at this location: "+ (bonusAmt > 1 ? (bonusAmt-1)*100 : "0") +"%";
+                newPid = sui.tableColumnMajor(player, player, sui.OK_ONLY, "@" + SID_MENU_GCW_PERSONAL_CONTRIBUTION.toString(), "onGcwPersonalContributionTableDictionaryResponse", "@gcw:gcw_personal_contribution_sui_table_header" + bonusNum, columnHeader, columnHeaderType, columnData, true);
             }
             if (newPid > 0)
             {
