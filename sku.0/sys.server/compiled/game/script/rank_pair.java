@@ -76,5 +76,7 @@ public class rank_pair {
             data[i] = (float)temp[i];
         }
         return new rank_pair(players, data);
+        );
     }
+
 }
