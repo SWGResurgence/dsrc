@@ -2,7 +2,8 @@ package script.library;
 
 import script.*;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Vector;
 
 public class gcw extends script.base_script
 {
@@ -120,9 +121,7 @@ public class gcw extends script.base_script
         "space_pvp",
         "pve",
         "trading",
-        "entertaining",
-        "city_invasions",
-        "gcw2_space"
+        "entertaining"
     };
     public static final float COLLECTION_DAMAGE_RATIO_MIN = 0.41f;
     public static final String PVP_PUSHBACK_REGION = "pvp_pushback";
@@ -255,29 +254,6 @@ public class gcw extends script.base_script
     public static final String GCW_TUTORIAL_FLAG = "gcw_tutorial_flag.has_received_tutorial";
     public static final String COLOR_REBELS = "\\" + colors_hex.COLOR_REBELS;
     public static final String COLOR_IMPERIALS = "\\" + colors_hex.COLOR_IMPERIALS;
-    public static final boolean DEBUG_LEADERBOARD = true;
-    private static final float GCW_POINT_BONUS = utils.getFloatConfigSetting("GameServer", "gcwPointBonus", 1.0f);
-    private static final float GCW_TOKEN_BONUS = utils.getFloatConfigSetting("GameServer", "gcwTokenBonus", 1.0f);
-    private static final int GCW_CYCLE_INVASION_TIME = utils.getIntConfigSetting("GameServer", "gcwInvasionCycleTime", 3);
-    private static final int GCW_MAX_INVASION_CITY_RUNNING = utils.getIntConfigSetting("GameServer", "gcwInvasionCityMaximumRunning", 3);
-    private static final boolean DISABLE_GCW_BASE_POINT_MULTIPLIER = utils.checkConfigFlag("GameServer", "gcwFactionBaseDisableBonusMultipliers");
-    private static final float BASE_RANGE_01 = utils.getFloatConfigSetting("GameServer", "gcwFactionBase01BonusRadius", 750.0f);
-    private static final float BASE_RANGE_02 = utils.getFloatConfigSetting("GameServer", "gcwFactionBase02BonusRadius", 1000.0f);
-    private static final float BASE_RANGE_03 = utils.getFloatConfigSetting("GameServer", "gcwFactionBase03BonusRadius", 1250.0f);
-    private static final float BASE_RANGE_04 = utils.getFloatConfigSetting("GameServer", "gcwFactionBase04BonusRadius", 1500.0f);
-    private static final int PRESENCE_RANK_BONUS = utils.getIntConfigSetting("GameServer", "gcwFactionalPresenceGcwRankBonusPct", 10);
-    private static final int PRESENCE_LEVEL_BONUS = utils.getIntConfigSetting("GameServer", "gcwFactionalPresenceLevelPct", 10);
-    private static final int PRESENCE_MOUNT_PENALTY = utils.getIntConfigSetting("GameServer", "gcwFactionalPresenceMountedPct", 20);
-    private static final int PRESENCE_PLAYER_SCALED_BONUS = utils.getIntConfigSetting("GameServer", "gcwFactionalPresencePlayerBonusPct", 5);
-    private static final int PRESENCE_ALIGNED_CITY_BONUS = utils.getIntConfigSetting("GameServer", "gcwFactionalPresenceAlignedCityBonusPct", 100);
-    private static final int PRESENCE_CITY_RANK_BONUS = utils.getIntConfigSetting("GameServer", "gcwFactionalPresenceAlignedCityRankBonusPct", 10);
-    private static final int PRESENCE_CITY_AGE_BONUS = utils.getIntConfigSetting("GameServer", "gcwFactionalPresenceAlignedCityAgeBonusPct", 5);
-    private static final float LEADERBOARD_BONUS_GROUND_PVE = utils.getFloatConfigSetting("GameServer","leaderboardGcwGroundPvEBonus", 1.0f);
-    private static final float LEADERBOARD_BONUS_GROUND_PVP = utils.getFloatConfigSetting("GameServer","leaderboardGcwGroundPvPBonus", 1.0f);
-    private static final float LEADERBOARD_BONUS_SPACE_PVE = utils.getFloatConfigSetting("GameServer","leaderboardGcwSpacePvEBonus", 1.0f);
-    private static final float LEADERBOARD_BONUS_SPACE_PVP = utils.getFloatConfigSetting("GameServer","leaderboardGcwSpacePvPBonus", 1.0f);
-    private static final float LEADERBOARD_BONUS_BASE_BUST = utils.getFloatConfigSetting("GameServer","leaderboardGcwBaseBustingBonus", 1.0f);
-
     public static void assignScanInterests(obj_id npc) throws InterruptedException
     {
         if (!isIdValid(npc) || isPlayer(npc) || pet_lib.isPet(npc))
@@ -1299,8 +1275,11 @@ public class gcw extends script.base_script
         {
             return;
         }
-        pointValue *= getGcwFactionBasesMultiplierForPlayerAtPoint(attacker);
-        pointValue *= GCW_POINT_BONUS;
+        float multiplier = utils.stringToFloat(getConfigSetting("GameServer", "gcwPointBonus"));
+        if (multiplier > 1)
+        {
+            pointValue *= multiplier;
+        }
         pvpModifyCurrentGcwPoints(attacker, pointValue);
         prose_package pp = new prose_package();
         pp.target.set(getName(victim));
@@ -1318,7 +1297,6 @@ public class gcw extends script.base_script
         doGcwPointCsLogging(attacker, pointValue, pointType, information);
         gcwInvasionCreditForGCW(attacker, pointValue);
         grantGcwPointsToRegion(attacker, pointValue, pointType);
-        handleGcwLeaderboardUpdates(attacker, pointValue, pointType);
     }
     public static void doGcwPointCsLogging(obj_id player, int pointValue, int pointType, String information) throws InterruptedException
     {
@@ -1398,12 +1376,6 @@ public class gcw extends script.base_script
         if (!isIdValid(player) || pointValue < 0 || pointType < 0 || pointType >= GCW_POINT_TYPE_MAX)
         {
             return;
-        }
-        // GU 17.6 PvP Killer must be Factional Presence Eligible to Contribute to Region Score
-        if(pointType == GCW_POINT_TYPE_GROUND_PVP_REGION) {
-            if(!isFactionPresenceEligible(player)) {
-                return;
-            }
         }
         String category = getGcwCategory(pointType);
         String regionName = getGcwRegion(player);
@@ -1766,10 +1738,6 @@ public class gcw extends script.base_script
         {
             CustomerServiceLog("GCW_points_player_base_busting", "There are no valid players in the filtered list");
             return;
-        }
-        // GU 20 - Scale Points Earned for Base Busting when Total Players Involved > 8
-        if(filteredList.size() > 8) {
-            value = (value * 8) / filteredList.size();
         }
         for (Object o : filteredList) {
             grantModifiedGcwPoints(((obj_id) o), value, gcw.GCW_POINT_TYPE_BASE_BUSTING, template);
@@ -2487,7 +2455,11 @@ public class gcw extends script.base_script
         else {
             tokenStaticName = GCW_REBEL_TOKEN;
         }
-        gcwTokenAmt *= GCW_TOKEN_BONUS;
+        float multiplier = utils.stringToFloat(getConfigSetting("GameServer", "gcwTokenBonus"));
+        if (multiplier > 1)
+        {
+            gcwTokenAmt *= multiplier;
+        }
         for (Object o : participantList) {
             if (!isValidId(((obj_id) o)) || !exists(((obj_id) o))) {
                 CustomerServiceLog("gcw_city_invasion", "gcw.awardGcwInvasionParticipants: Player: " + ((obj_id) o) + " is NOT receiving " + gcwTokenAmt + " " + tokenStaticName + " tokens or " + gcwPointAmt + " " + factionFlag + " GCW points (GCW points only awarded to pure faction players, not factionalHelpers) because this player OID is invalid or doesn't exist. Probably due to the player exiting the battle field, traveling or moving to another server process (crossing server boundary).");
@@ -2498,7 +2470,6 @@ public class gcw extends script.base_script
                 continue;
             }
             grantUnmodifiedGcwPoints(((obj_id) o), gcwPointAmt);
-            //grantGcwLeaderboardPoints(((obj_id) o), gcwPointAmt, GCW_POINT_TYPE_CITY_INVASION);
             if (tokenStaticName == null || tokenStaticName.length() <= 0) {
                 CustomerServiceLog("gcw_city_invasion", "gcw.awardGcwInvasionParticipants: Player: " + ((obj_id) o) + " is NOT receiving " + gcwTokenAmt + " " + tokenStaticName + " tokens or " + gcwPointAmt + " " + factionFlag + " GCW points (GCW points only awarded to pure faction players, not factionalHelpers) because the token string name is INVALID. This is probably due to an edge case where the player changed their faction status to be neutral.");
                 continue;
@@ -2666,7 +2637,12 @@ public class gcw extends script.base_script
     }
     public static int gcwGetTimeToInvasion() throws InterruptedException
     {
-        int time = GCW_CYCLE_INVASION_TIME;
+        String timeConfig = getConfigSetting("GameServer", "gcwInvasionCycleTime");
+        if (timeConfig == null || timeConfig.length() <= 0)
+        {
+            return 3;
+        }
+        int time = utils.stringToInt(timeConfig);
         if (time > 6)
         {
             time = 6;
@@ -2679,7 +2655,13 @@ public class gcw extends script.base_script
     }
     public static int gcwGetInvasionMaximumRunning() throws InterruptedException
     {
-        return GCW_MAX_INVASION_CITY_RUNNING;
+        String maxConfig = getConfigSetting("GameServer", "gcwInvasionCityMaximumRunning");
+        int max = 3;
+        if (maxConfig == null || maxConfig.length() <= 0)
+        {
+            return max;
+        }
+        return utils.stringToInt(maxConfig);
     }
     public static boolean gcwIsInvasionCityOn(String city) throws InterruptedException
     {
@@ -2687,20 +2669,17 @@ public class gcw extends script.base_script
         {
             return false;
         }
-        if (city.equalsIgnoreCase("keren") || city.equalsIgnoreCase("bestine")) {
-            return utils.checkConfigFlag("GameServer", "gcwcity"+city);
-        }
-        else if (city.equalsIgnoreCase("dearic")) {
-            if(events.isEventActive(events.LIFEDAY)) { // do not run city invasions in Dearic if Life Day is on
-                return false;
-            } else {
-                return utils.checkConfigFlag("GameServer", "gcwcity"+city);
-            }
-        }
-        else {
-            WARNING("gcwIsInvasionCityOn() Got call to check invasion for city "+city+" but there is no logic accounting for it here.");
+        String cityConfig = getConfigSetting("GameServer", "gcwcity" + city);
+        if (cityConfig == null || (!cityConfig.equals("1") && !cityConfig.toLowerCase().equals("true")))
+        {
+            CustomerServiceLog("gcw_city_invasion", "gcw.gcwIsInvasionCityOn: GCW City: " + city + " is not configured to run a city invasion. Function returning False.");
             return false;
         }
+        if (city.equalsIgnoreCase("dearic") && utils.checkConfigFlag("GameServer", "lifeday")) {
+            CustomerServiceLog("gcw_city_invasion", "gcw.gcwIsInvasionCityOn: GCW City: " + city + " is not running because life day is turned on.");
+            return false;
+        }
+        return true;
     }
     public static int gcwGetNextInvasionHour(String cityName) throws InterruptedException
     {
@@ -2870,7 +2849,8 @@ public class gcw extends script.base_script
     {
         Vector<String> activeCities = new Vector<>();
         for (String cityName : INVASION_CITIES){
-            if (utils.checkConfigFlag("GameServer", "gcwcity" + cityName)) {
+            String value = getConfigSetting("GameServer", "gcwcity" + cityName);
+            if (value != null && (value.equals("1") || value.toLowerCase().equals("true"))) {
                 activeCities.add(cityName);
             }
         }
@@ -2988,343 +2968,5 @@ public class gcw extends script.base_script
         showSUIPage(page);
         flushSUIPage(page);
         return true;
-    }
-
-    /**
-     * GU 17.2 Addition:
-     * Determines how many factional bases are within the defined range of the player to
-     * award a multiplier to GCW Points and Factional Presence based on those values.
-     * These are configurable. But the defaults are:
-     * - Forward Outpost - 1%, 750m
-     * - SF Forward Outpost - 2%, 750m
-     * - Field Hospital - 3%, 1000m
-     * - SF Field Hospital - 5%, 1000m
-     * - Tactical Center - 6%, 1250m
-     * - SF Tactical Center - 8%, 1250m
-     * - Detachment Headquarters - 10%, 1500m
-     * - SF Detachment Headquarters - 12%, 1500m
-     */
-    public static float getGcwFactionBasesMultiplierForPlayerAtPoint(obj_id player) {
-        float multiplier = 1.0f;
-        if(DISABLE_GCW_BASE_POINT_MULTIPLIER) {
-            return multiplier;
-        }
-        String template;
-        location playerLoc = getLocation(player);
-        location baseLoc;
-        Vector<obj_id> bases = faction_perk.getFactionBasesForFaction(pvpGetAlignedFaction(player));
-        if(bases == null) {
-            return multiplier;
-        }
-        for (obj_id base : bases) {
-            template = getTemplateName(base);
-            baseLoc = getLocation(base);
-            if (baseLoc.area.equalsIgnoreCase(playerLoc.area)) {
-                if (template.contains("01")) {
-                    if (getDistance(playerLoc, baseLoc) <= BASE_RANGE_01) {
-                        multiplier += faction_perk.getBaseBonusValueByTemplate(getTemplateName(base));
-                    }
-                } else if (template.contains("02")) {
-                    if (getDistance(playerLoc, baseLoc) <= BASE_RANGE_02) {
-                        multiplier += faction_perk.getBaseBonusValueByTemplate(getTemplateName(base));
-                    }
-                } else if (template.contains("03")) {
-                    if (getDistance(playerLoc, baseLoc) <= BASE_RANGE_03) {
-                        multiplier += faction_perk.getBaseBonusValueByTemplate(getTemplateName(base));
-                    }
-                } else if (template.contains("04")) {
-                    if (getDistance(playerLoc, baseLoc) <= BASE_RANGE_04) {
-                        multiplier += faction_perk.getBaseBonusValueByTemplate(getTemplateName(base));
-                    }
-                }
-            }
-        }
-        return multiplier;
-    }
-
-    /**
-     * This method handles granting Factional Presence
-     * It was ported from the SRC to DSRC to allow ease of customization/advancement
-     * This is called in a 60-second loop in base_player the entire time a player is
-     * online, replicating how it was handled in the SRC (through LFG updater loop)
-     * See: player.live_conversions for when heartbeat/loops are called.
-     *
-     * Calculation:
-     * bonus = 100
-     * bonus += GCW Rank * GcwRankBonusPtc
-     * bonus += Up to 8 Players in Range who are Faction Presence Eligible * PlayerBonusPtc
-     * bonus *= Multiplier for Faction Bases in Range
-     * bonus += City Bonus for Same Faction Alignment
-     * bonus += City Rank * CityRankBonusPtc
-     * bonus += City Age in Years * CityAgeBonusPtc
-     * Final Value = PlayerLevel * LevelBonusPtc * bonus * mountPenalty / 1000000
-     */
-    public static void grantGcwFactionalPresenceScore(obj_id player) throws InterruptedException {
-        if(isFactionPresenceEligible(player)) {
-            final String region = getGcwRegion(player);
-            final location playerLoc = getLocation(player);
-            final int faction = pvpGetAlignedFaction(player);
-            int bonus = 100;
-            int mountPenalty = 100;
-
-            // Determine Bonus based on GCW Rank (1 - 12)
-            bonus += pvpGetCurrentGcwRank(player) * PRESENCE_RANK_BONUS;
-            // Determine Combat Level and City Bonus Eligibility
-            int cityBonus = 0;
-            int level = 1;
-            // -------------------- player is in space ----------------
-            if(isSpaceScene()) {
-                // determine combat level by using relative pilot skills
-                if(space_skill.isMasterPilot(player)) {
-                    level = 90;
-                } else if (space_skill.hasTier3Skills(player)) {
-                    level = 69;
-                } else if (space_skill.hasTier2Skills(player)) {
-                    level = 45;
-                } else if (space_skill.hasTier1Skills(player)) {
-                    level = 21;
-                }
-                // give city bonus if player's citizenship city is on the
-                // corresponding ground planet & is same faction as player
-                int citizenOfCity = getCitizenOfCityId(player);
-                if (citizenOfCity > 0) {
-                    String cityLoc = cityGetLocation(citizenOfCity).area;
-                    String spaceLoc;
-                    // handle planets w/o space zone matching
-                    if(cityLoc.equalsIgnoreCase("rori")) {
-                        spaceLoc = "space_naboo";
-                    } else if (cityLoc.equalsIgnoreCase("talus")) {
-                        spaceLoc = "space_corellia";
-                    } else {
-                        spaceLoc = "space_"+cityLoc;
-                    }
-                    if(spaceLoc.equalsIgnoreCase(getCurrentSceneName())) {
-                        cityBonus = citizenOfCity;
-                    }
-                }
-            }
-            // -------------------- player is on the ground ----------------
-            else {
-                level = getLevel(player); // use actual combat level
-                // give city bonus if player is standing in a city that is of the same
-                // factional alignment as the player
-                int cityAtLoc = getCityAtLocation(playerLoc, 0);
-                if (cityAtLoc > 0) {
-                    if(cityGetFaction(cityAtLoc) == faction) {
-                        cityBonus = cityAtLoc;
-                    }
-                }
-                // determine mount penalty
-                if(isIdValid(getMountId(player))) {
-                    mountPenalty = Math.min(Math.max(PRESENCE_MOUNT_PENALTY, 1), 100);
-                }
-                // scale up the bonus based on players in the area
-                obj_id[] players = getAllPlayers(playerLoc, 500.0f);
-                int playerBonus = 1;
-                for (obj_id p : players) {
-                    if(isFactionPresenceEligible(p)) {
-                        ++playerBonus;
-                    }
-                }
-                playerBonus = Math.min(playerBonus, 8);
-                bonus += playerBonus * PRESENCE_PLAYER_SCALED_BONUS;
-                // apply nearby factional bases bonus
-                bonus *= getGcwFactionBasesMultiplierForPlayerAtPoint(player);
-            }
-            // Handle City Bonuses
-            if(cityBonus > 0) {
-                if(pvpGetAlignedFaction(player) == cityGetFaction(cityBonus)) {
-                    // bonus just for having an aligned city
-                    bonus += PRESENCE_ALIGNED_CITY_BONUS;
-                    // bonus for each level of city rank
-                    bonus += city.getCityRank(cityBonus) * PRESENCE_CITY_RANK_BONUS;
-                    // bonus for each year of age your city is
-                    bonus += Math.max(0, (getCalendarTime() - Math.max(1041408000, cityGetCreationTime(cityBonus))) / 31536000 * PRESENCE_CITY_AGE_BONUS);
-                }
-            }
-            // Points Calculation
-            final int points = Math.max(1, level * PRESENCE_LEVEL_BONUS * Math.min(1000, bonus) * mountPenalty / 1000000);
-
-            // Update GCW Score
-            if(faction == FACTION_HASH_IMPERIAL) {
-                adjustGcwImperialScore("FactionalPresence", player, region, points);
-            } else if (faction == FACTION_HASH_REBEL) {
-                adjustGcwRebelScore("FactionalPresence", player, region, points);
-            }
-            
-            // Add Presence Points to Leaderboard Score as 50% of their total value
-            // e.g. Lvl 90 SF Imperial General without any other modifiers would contribute ~10 points per minute
-            final int pointsForLeaderboard = Math.max(1, (int)(points * 0.50f));
-            final int existingPoints = utils.getIntScriptVar(player, "leaderboard_factional_presence_tracking");
-            utils.setScriptVar(player, "leaderboard_factional_presence_tracking", (pointsForLeaderboard + existingPoints));
-
-            // Log the Points
-            LOG("factional_presence", "Player "+getPlayerName(player)+" ("+player+") added "+points+" of presence with bonus "+bonus+" to region "+region+" for faction "+faction);
-        }
-    }
-
-    /**
-     * The conditions a player must meet to contribute to the factional presence score.
-     * Also used for finding other "faction presence eligible" players in the region.
-     *
-     * Conditions:
-     * Player must be active (provided input in last 15 minutes, not including macros)
-     * Player must be Special Forces
-     * Player must be within a GCW Contested Region
-     * Player cannot be cloaked, incapacitated, or in a structure
-     */
-    public static boolean isFactionPresenceEligible(obj_id player) throws InterruptedException {
-        if(!isPlayerActive(player) || isDead(player) || isIncapacitated(player)) {
-            return false;
-        }
-        if(!factions.isDeclared(player) || structure.isInside(player) || !getCreatureCoverVisibility(player)) {
-            return false;
-        }
-        String region = getGcwRegion(player);
-        return region != null && !region.equalsIgnoreCase("");
-    }
-    /**
-     * Validates if a player can contribute to their city's GCW Leaderboard Score
-     * Present requirements are:
-     * Must be same faction as city, and
-     * Must not have joined during current period
-     */
-    public static boolean canContributeToGcwLeaderboardForCity(obj_id player) throws InterruptedException {
-        final int cityId = getCitizenOfCityId(player);
-        if(cityId > 0) {
-            if(cityGetFaction(cityId) != pvpGetAlignedFaction(player)) {
-                return false;
-            }
-            if(!hasObjVar(player, city.VAR_LEADERBOARD_PERIOD_ON_JOIN)) {
-                setObjVar(player, city.VAR_LEADERBOARD_PERIOD_ON_JOIN, leaderboard.getCurrentLeaderboardPeriod());
-                return false;
-            }
-            return getIntObjVar(player, city.VAR_LEADERBOARD_PERIOD_ON_JOIN) != leaderboard.getCurrentLeaderboardPeriod();
-        }
-        return false;
-    }
-
-    /**
-     * Validates if a player can contribute to their guild's GCW Leaderboard Score
-     * Present requirements are:
-     * Must be same faction as guild, and
-     * Must not have joined during current period
-     */
-    public static boolean canContributeToGcwLeaderboardForGuild(obj_id player) throws InterruptedException {
-        final int guildId = getGuildId(player);
-        if(guildId > 0) {
-            if(guildGetCurrentFaction(guildId) != pvpGetAlignedFaction(player)) {
-                return false;
-            }
-            if(!hasObjVar(player, guild.VAR_LEADERBOARD_PERIOD_ON_JOIN)) {
-                setObjVar(player, guild.VAR_LEADERBOARD_PERIOD_ON_JOIN, leaderboard.getCurrentLeaderboardPeriod());
-                return false;
-            }
-            return getIntObjVar(player, guild.VAR_LEADERBOARD_PERIOD_ON_JOIN) != leaderboard.getCurrentLeaderboardPeriod();
-        }
-        return false;
-    }
-
-    /**
-     * Called when a player does some point/presence earning activity that contributes to
-     * their leaderboard score to handle tracking and score tally updates.
-     *
-     * The pointType can be specified so you can apply a bonus % to certain activities, e.g.
-     * 10% leaderboard bonus to base busting versus just ground PvE.
-     *
-     * Note: GCW contributions are stored on the player. The leaderboard object just tracks
-     * who participated so it knows who to grab scores from when calculating winners and is
-     * responsible for tracking the history.
-     */
-    public static void handleGcwLeaderboardUpdates(obj_id player, int pointsEarned, int pointType) throws InterruptedException {
-        final int playerFaction = pvpGetAlignedFaction(player);
-        if(!hasObjVar(player, leaderboard.OBJVAR_LEADERBOARD_PLAYER_PERIOD)) { // first time
-            setObjVar(player, leaderboard.OBJVAR_LEADERBOARD_PLAYER_PERIOD, leaderboard.getCurrentLeaderboardPeriod());
-        }
-        final int leaderboardPeriodToPlayer = getIntObjVar(player, leaderboard.OBJVAR_LEADERBOARD_PLAYER_PERIOD);
-        final int leaderboardPeriodToSystem = leaderboard.getCurrentLeaderboardPeriod();
-        leaderboard.debugMsg("handleGcwLeaderboardUpdates called to grant "+pointsEarned+" points of type "+pointType+" to "+getPlayerName(player)+" ("+player+")");
-
-        // Apply Bonus Multipliers
-        switch (pointType) {
-            case GCW_POINT_TYPE_GROUND_PVE:
-                pointsEarned *= LEADERBOARD_BONUS_GROUND_PVE;
-                break;
-            case GCW_POINT_TYPE_GROUND_PVP:
-            case GCW_POINT_TYPE_GROUND_PVP_REGION:
-                pointsEarned *= LEADERBOARD_BONUS_GROUND_PVP;
-                break;
-            case GCW_POINT_TYPE_SPACE_PVE:
-                pointsEarned *= LEADERBOARD_BONUS_SPACE_PVE;
-                break;
-            case GCW_POINT_TYPE_SPACE_PVP:
-                pointsEarned *= LEADERBOARD_BONUS_SPACE_PVP;
-                break;
-            case GCW_POINT_TYPE_BASE_BUSTING:
-                pointsEarned *= LEADERBOARD_BONUS_BASE_BUST;
-                break;
-        }
-        float pointsFinal = (float)pointsEarned;
-
-        // If we've earned points, let's set them
-        if(pointsFinal > 0) {
-            // For Imperials
-            if (playerFaction == FACTION_HASH_IMPERIAL) {
-                // If you're missing the ObjVar or in the wrong period, we're resetting the period and your current points is your 1st value
-                if(!hasObjVar(player, leaderboard.OBJVAR_LEADERBOARD_PLAYER_SCORE_IMPERIAL) || leaderboardPeriodToPlayer != leaderboardPeriodToSystem) {
-                    setObjVar(player, leaderboard.OBJVAR_LEADERBOARD_PLAYER_SCORE_IMPERIAL, pointsFinal);
-                    setObjVar(player, leaderboard.OBJVAR_LEADERBOARD_PLAYER_PERIOD, leaderboard.getCurrentLeaderboardPeriod());
-                } else { // add to your existing value
-                    pointsFinal += getFloatObjVar(player, leaderboard.OBJVAR_LEADERBOARD_PLAYER_SCORE_IMPERIAL);
-                    setObjVar(player, leaderboard.OBJVAR_LEADERBOARD_PLAYER_SCORE_IMPERIAL, pointsFinal);
-                }
-                // Repeat the logic above for Guild/City
-                if(canContributeToGcwLeaderboardForCity(player)) {
-                    if(!hasObjVar(player, leaderboard.OBJVAR_LEADERBOARD_CITY_SCORE_IMPERIAL) || leaderboardPeriodToPlayer != leaderboardPeriodToSystem) {
-                        setObjVar(player, leaderboard.OBJVAR_LEADERBOARD_CITY_SCORE_IMPERIAL, pointsFinal);
-                    } else {
-                        pointsFinal += getFloatObjVar(player, leaderboard.OBJVAR_LEADERBOARD_CITY_SCORE_IMPERIAL);
-                        setObjVar(player, leaderboard.OBJVAR_LEADERBOARD_CITY_SCORE_IMPERIAL, pointsFinal);
-                    }
-                }
-                if (canContributeToGcwLeaderboardForGuild(player)) {
-                    if(!hasObjVar(player, leaderboard.OBJVAR_LEADERBOARD_GUILD_SCORE_IMPERIAL) || leaderboardPeriodToPlayer != leaderboardPeriodToSystem) {
-                        setObjVar(player, leaderboard.OBJVAR_LEADERBOARD_GUILD_SCORE_IMPERIAL, pointsFinal);
-                    } else {
-                        pointsFinal += getFloatObjVar(player, leaderboard.OBJVAR_LEADERBOARD_GUILD_SCORE_IMPERIAL);
-                        setObjVar(player, leaderboard.OBJVAR_LEADERBOARD_GUILD_SCORE_IMPERIAL, pointsFinal);
-                    }
-                }
-            }
-            // Same thing for Rebel Faction
-            else if (playerFaction == FACTION_HASH_REBEL) {
-                // If you're missing the ObjVar or in the wrong period, we're resetting the period and your current points is your 1st value
-                if(!hasObjVar(player, leaderboard.OBJVAR_LEADERBOARD_PLAYER_SCORE_REBEL) || leaderboardPeriodToPlayer != leaderboardPeriodToSystem) {
-                    setObjVar(player, leaderboard.OBJVAR_LEADERBOARD_PLAYER_SCORE_REBEL, pointsFinal);
-                    setObjVar(player, leaderboard.OBJVAR_LEADERBOARD_PLAYER_PERIOD, leaderboard.getCurrentLeaderboardPeriod());
-                } else { // add to your existing value
-                    pointsFinal += getFloatObjVar(player, leaderboard.OBJVAR_LEADERBOARD_PLAYER_SCORE_REBEL);
-                    setObjVar(player, leaderboard.OBJVAR_LEADERBOARD_PLAYER_SCORE_REBEL, pointsFinal);
-                }
-                // Repeat the logic above for Guild/City
-                if(canContributeToGcwLeaderboardForCity(player)) {
-                    if(!hasObjVar(player, leaderboard.OBJVAR_LEADERBOARD_CITY_SCORE_REBEL) || leaderboardPeriodToPlayer != leaderboardPeriodToSystem) {
-                        setObjVar(player, leaderboard.OBJVAR_LEADERBOARD_CITY_SCORE_REBEL, pointsFinal);
-                    } else {
-                        pointsFinal += getFloatObjVar(player, leaderboard.OBJVAR_LEADERBOARD_CITY_SCORE_REBEL);
-                        setObjVar(player, leaderboard.OBJVAR_LEADERBOARD_CITY_SCORE_REBEL, pointsFinal);
-                    }
-                }
-                if (canContributeToGcwLeaderboardForGuild(player)) {
-                    if(!hasObjVar(player, leaderboard.OBJVAR_LEADERBOARD_GUILD_SCORE_REBEL) || leaderboardPeriodToPlayer != leaderboardPeriodToSystem) {
-                        setObjVar(player, leaderboard.OBJVAR_LEADERBOARD_GUILD_SCORE_REBEL, pointsFinal);
-                    } else {
-                        pointsFinal += getFloatObjVar(player, leaderboard.OBJVAR_LEADERBOARD_GUILD_SCORE_REBEL);
-                        setObjVar(player, leaderboard.OBJVAR_LEADERBOARD_GUILD_SCORE_REBEL, pointsFinal);
-                    }
-                }
-            }
-            leaderboard.addLeaderboardParticipantToCurrentPeriod(player, leaderboard.LEADERBOARD_TYPE_GCW);
-        }
     }
 }
