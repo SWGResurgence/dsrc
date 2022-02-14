@@ -94,6 +94,7 @@ public class live_conversions extends script.base_script
         handleMailOptInRewards(player);
         startFactionalPresenceTrackingLoop(player);
         startFactionalPresenceReportingLoop(player);
+        handleGuildMotd(player);
     }
     public void runOncePerTravelConversions(obj_id player) throws InterruptedException
     {
@@ -374,6 +375,22 @@ public class live_conversions extends script.base_script
     public void endFactionalPresenceReportingLoops(obj_id player) throws InterruptedException {
         cancelRecurringMessageTo(player, "playerFactionalPresenceHeartbeat");
         cancelRecurringMessageTo(player, "playerFactionalPresenceReportingHeartbeat");
+    }
+    
+    /**
+     * Handles a Guild MOTD, if one is set
+     */
+    public void handleGuildMotd(obj_id player) throws InterruptedException
+    {
+        final int id = getGuildId(player);
+        if(id > 0)
+        {
+            if(hasObjVar(getMasterGuildObject(), String.format(guild.VAR_GUILD_MOTD, id)))
+            {
+                final String msg = getStringObjVar(getMasterGuildObject(), String.format(guild.VAR_GUILD_MOTD, id));
+                sendConsoleMessage(player, String.format("\\#FFFF00***[Guild Message]:\\#. %s", msg));
+            }
+        }
     }
     
     public int handleBirthDateCallBack(obj_id self, dictionary params) throws InterruptedException
