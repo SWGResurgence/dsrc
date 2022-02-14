@@ -35,11 +35,6 @@ public class live_conversions extends script.base_script
         runOncePerTravelConversions(self);
         return SCRIPT_CONTINUE;
     }
-    public int OnLogout(obj_id self) throws InterruptedException
-    {
-        endFactionalPresenceReportingLoops(self);
-        return SCRIPT_CONTINUE;
-    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         runOncePerSessionConversions(self);
@@ -92,9 +87,6 @@ public class live_conversions extends script.base_script
         addPlayerScripts(player);
         handleEsbAnniversaryGifts(player);
         handleMailOptInRewards(player);
-        startFactionalPresenceTrackingLoop(player);
-        startFactionalPresenceReportingLoop(player);
-        handleGuildMotd(player);
     }
     public void runOncePerTravelConversions(obj_id player) throws InterruptedException
     {
@@ -355,44 +347,6 @@ public class live_conversions extends script.base_script
             }
         }
     }
-    
-    /**
-     * Handles looper to start tracking factional presence
-     */
-    public void startFactionalPresenceTrackingLoop(obj_id player) throws InterruptedException {
-        recurringMessageTo(player, "playerFactionalPresenceHeartbeat", null, 60.0f);
-    }
-    
-    /**
-     * Handles looper for reporting factional presence to leaderboard
-     * Pulls ScriptVar store of factional presence every 12 minutes to reduce
-     * the amount of times we're running leaderboard queries
-     */
-    public void startFactionalPresenceReportingLoop(obj_id player) throws InterruptedException {
-        recurringMessageTo(player, "playerFactionalPresenceReportingHeartbeat", null, 720.0f);
-    }
-
-    public void endFactionalPresenceReportingLoops(obj_id player) throws InterruptedException {
-        cancelRecurringMessageTo(player, "playerFactionalPresenceHeartbeat");
-        cancelRecurringMessageTo(player, "playerFactionalPresenceReportingHeartbeat");
-    }
-    
-    /**
-     * Handles a Guild MOTD, if one is set
-     */
-    public void handleGuildMotd(obj_id player) throws InterruptedException
-    {
-        final int id = getGuildId(player);
-        if(id > 0)
-        {
-            if(hasObjVar(getMasterGuildObject(), String.format(guild.VAR_GUILD_MOTD, id)))
-            {
-                final String msg = getStringObjVar(getMasterGuildObject(), String.format(guild.VAR_GUILD_MOTD, id));
-                sendConsoleMessage(player, String.format("\\#FFFF00***[Guild Message]:\\#. %s", msg));
-            }
-        }
-    }
-    
     public int handleBirthDateCallBack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = self;

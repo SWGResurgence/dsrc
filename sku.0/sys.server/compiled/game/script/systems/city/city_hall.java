@@ -31,7 +31,6 @@ public class city_hall extends script.base_script
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         int city_id = findCityByCityHall(self);
-        leaderboard.purgeEntityGcwLeaderboardHistory(city_id, true);
         if (city.getCityRank(city_id) < 2)
         {
             city.removeTaxes(city_id);

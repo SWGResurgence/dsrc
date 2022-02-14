@@ -5,6 +5,9 @@ import script.library.*;
 
 public class player_faction extends script.base_script
 {
+    public player_faction()
+    {
+    }
     public static final string_id SID_ABORT_RESIGNATION = new string_id("faction_recruiter", "abort_resignation");
     public static final string_id SID_SUI_RESIG_COMPLETE_IN_5 = new string_id("faction_recruiter", "sui_resig_complete_in_5");
     public static final string_id SID_NOT_ALIGNED = new string_id("faction_recruiter", "not_aligned");
@@ -63,24 +66,14 @@ public class player_faction extends script.base_script
         {
             pp = prose.setStringId(pp, SID_OVERT_TO_COVERT);
             commPlayer(self, self, pp, recruiter);
-            if(isGod(self)) {
-                sendSystemMessageTestingOnly(self, "GOD MODE: Overriding your /pvp effect delay to immediate because you are in God Mode.");
-                factions.goCovertWithDelay(self, 1.0f);
-            } else {
-                factions.goCovertWithDelay(self, 300.0f);
-            }
+            factions.goCovertWithDelay(self, 300.0f);
             return SCRIPT_CONTINUE;
         }
         if (pvpGetType(self) == PVPTYPE_COVERT)
         {
             pp = prose.setStringId(pp, SID_COVERT_TO_OVERT);
             commPlayer(self, self, pp, recruiter);
-            if(isGod(self)) {
-                sendSystemMessageTestingOnly(self, "GOD MODE: Overriding your /pvp effect delay to immediate because you are in God Mode.");
-                factions.goOvertWithDelay(self, 1.0f);
-            } else {
-                factions.goOvertWithDelay(self, 30.0f);
-            }
+            factions.goOvertWithDelay(self, 30.0f);
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_OVERRIDE;

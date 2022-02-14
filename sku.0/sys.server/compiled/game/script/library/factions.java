@@ -864,7 +864,7 @@ public class factions extends script.base_script
         }
         return pvpGetType(target) == PVPTYPE_NEUTRAL;
     }
-    public static String getFactionNameByHashCode(int hashCode)
+    public static String getFactionNameByHashCode(int hashCode) throws InterruptedException
     {
         if (hashCode == 0)
         {
