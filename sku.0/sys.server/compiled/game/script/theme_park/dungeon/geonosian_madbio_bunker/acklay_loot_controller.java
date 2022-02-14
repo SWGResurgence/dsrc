@@ -38,9 +38,13 @@ public class acklay_loot_controller extends script.base_script
 		if (x < 11){  // 10% Drop Chance
             static_item.createNewItemFunction("item_scorpion_kliknik_dna", corpseInventory);
 		}
-        if (x < 6){  // 5% Drop Chance
+        if (x < 4){  // 3% Drop Chance
             static_item.createNewItemFunction("item_tcg_loot_reward_series2_barn", corpseInventory);
         }
+        if (x < 2){  // 1% Drop Chance
+            static_item.createNewItemFunction("item_tcg_loot_reward_series2_barn", corpseInventory);
+        }
+
         /* String myLoot1 = "object/tangible/ship/crafted/chassis/grievous_starfighter_reward_deed.iff";
         String myLoot2 = "object/tangible/wearables/cybernetic/s02/cybernetic_s02_arm_r.iff";
         createObject(myLoot1, corpseInventory, "");
