@@ -1,4 +1,4 @@
-package script.theme_park.dungeon.myyydril;
+package script.theme_park.dungeon.geonosian_madbio_bunker;
 
 import script.dictionary;
 import script.library.ai_lib;
