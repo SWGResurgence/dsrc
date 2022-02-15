@@ -155,7 +155,7 @@ public class loot extends script.base_script
                 return false;
             }
             if (hasObjVar(target, xp.VAR_TOP_GROUP)) {
-                obj_id killCredit - getObjIdObjVar(target, xp.VAR_TOP_GROUP);
+                obj_id killCredit = getObjIdObjVar(target, xp.VAR_TOP_GROUP);
                 if (group.isGroupObject(killCredit)) {
                     obj_id[] groupMembers = getGroupMemberIds(killCredit);
                     for (obj_id groupMember : groupMembers) {
