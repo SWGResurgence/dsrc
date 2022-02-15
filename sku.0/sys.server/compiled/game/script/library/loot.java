@@ -145,16 +145,33 @@ public class loot extends script.base_script
         int niche = ai_lib.aiGetNiche(mobType);
         if (niche == NICHE_MONSTER || niche == NICHE_HERBIVORE || niche == NICHE_CARNIVORE || niche == NICHE_PREDATOR)
         {
+            boolean hasChanceToDropEnzymeLoot = false;
             int[] hasResource = corpse.hasResource(mobType);
             if (hasResource != null && hasResource.length > 0)
             {
                 setObjVar(target, corpse.VAR_HAS_RESOURCE, hasResource);
             }
-            if (isInTutorialArea(target))
-            {
+            if (isInTutorialArea(target)) {
                 return false;
             }
-            hasLoot |= addBeastEnzymes(target);
+            if (hasObjVar(target, xp.VAR_TOP_GROUP)) {
+                obj_id killCredit - getObjIdObjVar(target, xp.VAR_TOP_GROUP);
+                if (group.isGroupObject(killCredit)) {
+                    obj_id[] groupMembers = getGroupMemberIds(killCredit);
+                    for (obj_id groupMember : groupMembers) {
+                        if (isPlayer(groupMember) && !loot.hasToggledEnzymeLootOff(groupMember)) {
+                            hasChanceToDropEnzymeLoot = true;
+                        }
+                    }
+                } else {
+                    if (isPlayer(killCredit) && !loot.hasToggledEnzymeLootOff(killCredit)) {
+                        hasChanceToDropEnzymeLoot = true;
+                    }
+                }
+            }
+            if (hasChanceToDropEnzymeLoot == true) {
+                hasLoot |= loot.addBeastEnzymes(target);
+            }
         }
         return hasLoot;
     }
