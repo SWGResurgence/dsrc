@@ -6,9 +6,11 @@ import java.util.Vector;
 
 public class city extends script.base_script
 {
-    public city()
-    {
-    }
+    public static final int CITY_SAFEHOUSE_TIER1 = utils.getIntConfigSetting("GameServer", "citySafeHouseTier1");
+    public static final int CITY_SAFEHOUSE_TIER2 = utils.getIntConfigSetting("GameServer", "citySafeHouseTier2");
+    public static final int CITY_SAFEHOUSE_TIER3 = utils.getIntConfigSetting("GameServer", "citySafeHouseTier3");
+    public static final int CITY_SAFEHOUSE_TIER4 = utils.getIntConfigSetting("GameServer", "citySafeHouseTier4");
+    public static final int CITY_SAFEHOUSE_TIER5 = utils.getIntConfigSetting("GameServer", "citySafeHouseTier5");
     public static final int CITY_VERSION = 4;
     public static final String RANK_TABLE = "datatables/city/city_rank.iff";
     public static final String RANK_RADIUS = "RADIUS";
@@ -1795,19 +1797,19 @@ public class city extends script.base_script
         switch (currentRank)
         {
             case 1:
-            safeCount = 1;
+            safeCount = CITY_SAFEHOUSE_TIER1;
             break;
             case 2:
-            safeCount = 2;
+            safeCount = CITY_SAFEHOUSE_TIER2;
             break;
             case 3:
-            safeCount = 3;
+            safeCount = CITY_SAFEHOUSE_TIER3;
             break;
             case 4:
-            safeCount = 6;
+            safeCount = CITY_SAFEHOUSE_TIER4;
             break;
             case 5:
-            safeCount = 8;
+            safeCount = CITY_SAFEHOUSE_TIER5;
             break;
             default:
             break;

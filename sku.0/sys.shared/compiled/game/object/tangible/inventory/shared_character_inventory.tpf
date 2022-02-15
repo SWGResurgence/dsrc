@@ -7,9 +7,7 @@
 structureFootprintFileName = ""
 @class object_template 5
 
-
 objectName = "item_n"  "inventory"
-
 detailedDescription = "item_n"  "inventory"
 
 lookAtText = ""  ""
@@ -18,22 +16,17 @@ snapToTerrain = true
 
 containerType = CT_volume
 
-containerVolumeLimit = 80
+containerVolumeLimit = 125
 
 tintPalette = "0"
 
 arrangementDescriptorFilename = "abstract/slot/arrangement/inventory_arrangement.iff"
 
 //collisionMaterialFlags = 0
-
 //collisionMaterialPassFlags = 0
-
 //collisionMaterialBlockFlags = 0
-
 //collisionActionFlags = 0
-
 //collisionActionPassFlags = 0
-
 //collisionActionBlockFlags = 0
 
 gameObjectType = GOT_misc_container

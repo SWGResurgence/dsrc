@@ -22,7 +22,16 @@ public class treasure_map_container_10 extends script.base_script {
 	public static obj_id[] grantTreasureMaps(obj_id player) throws InterruptedException {
 		obj_id pInv = utils.getInventoryContainer(player);
 		HashSet theSet = new HashSet();
-		theSet.add(static_item.createNewItemFunction("item_treasure_map_81_90", pInv, 10));
+		theSet.add(static_item.createNewItemFunction("item_treasure_map_81_90", pInv));
+    theSet.add(static_item.createNewItemFunction("item_treasure_map_81_90", pInv));
+    theSet.add(static_item.createNewItemFunction("item_treasure_map_81_90", pInv));
+    theSet.add(static_item.createNewItemFunction("item_treasure_map_81_90", pInv));
+    theSet.add(static_item.createNewItemFunction("item_treasure_map_81_90", pInv));
+    theSet.add(static_item.createNewItemFunction("item_treasure_map_81_90", pInv));
+    theSet.add(static_item.createNewItemFunction("item_treasure_map_81_90", pInv));
+    theSet.add(static_item.createNewItemFunction("item_treasure_map_81_90", pInv));
+    theSet.add(static_item.createNewItemFunction("item_treasure_map_81_90", pInv));
+    theSet.add(static_item.createNewItemFunction("item_treasure_map_81_90", pInv));
 		obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
         showLootBox(player, items);

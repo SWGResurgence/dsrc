@@ -294,7 +294,7 @@ col_magseal_container	0.1				col_reward_treasure_chest_02_01												A Magsea
 col_fried_icecream_activation				quest/chapter9_ice_cream													none
 col_resource_sample	0.2				item_collection_reward_cybernetic_arm_01_01												A cybernetic deconstruction arm and a small amount of XP
 col_pet_resource_sampling_01	0.2				item_beast_holocron_04_09												A Beast Mastery Special Ability and a Small Amount of XP
-col_resource_harvest_complete					"""item_beast_holocron_04_01,item_tcg_loot_reward_series2_diner"""												Beast Knowledge: Forage
+col_resource_harvest_complete					"item_beast_holocron_04_01,item_tcg_loot_reward_series2_diner"												Beast Knowledge: Forage
 col_jedi_npc_kill	0.3		bdg_col_jedi_npc_kill														Badge and a Large amount of XP
 col_imperial_kill	0.1				col_reward_rebel_gcw_1000_02_01												A small amount of XP and Bonus GCW points
 col_rebel_kill	0.1				col_reward_imperial_gcw_1000_02_01												A small amount of XP and Bonus GCW points

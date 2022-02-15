@@ -6,7 +6,7 @@ import script.library.static_item;
 import script.library.utils;
 import script.obj_id;
 
-public class acklay_loot_controller extends script.base_script
+public class nexu_death extends script.base_script
 {
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
@@ -35,20 +35,16 @@ public class acklay_loot_controller extends script.base_script
             return;
         }
         int x = rand(1, 100);
-		if (x < 11){  // 10% Drop Chance
-            static_item.createNewItemFunction("item_scorpion_kliknik_dna", corpseInventory);
-		}
-        if (x < 4){  // 3% Drop Chance
-            static_item.createNewItemFunction("item_tcg_loot_reward_series4_geonosian_speeder_02_01", corpseInventory);
+        if (x < 3){  // 2% Drop Chance: Auto Feeder
+            static_item.createNewItemFunction("item_tcg_loot_reward_series6_auto_feeder", corpseInventory);
+			if(x < 2){ // 1% Drop Chance: Geonosian Solar Sail
+				static_item.createNewItemFunction("item_tcg_loot_reward_series4_home_itv_02_01", corpseInventory);
+			}
         }
-        if (x < 2){  // 1% Drop Chance
-            static_item.createNewItemFunction("item_tcg_loot_reward_series2_barn", corpseInventory);
-        }
-
-        /* String myLoot1 = "object/tangible/ship/crafted/chassis/grievous_starfighter_reward_deed.iff";
+        /*String myLoot1 = "object/tangible/ship/crafted/chassis/grievous_starfighter_reward_deed.iff";
         String myLoot2 = "object/tangible/wearables/cybernetic/s02/cybernetic_s02_arm_r.iff";
         createObject(myLoot1, corpseInventory, "");
-        createObject(myLoot2, corpseInventory, ""); */
+        createObject(myLoot2, corpseInventory, "");*/
         return;
     }
 }

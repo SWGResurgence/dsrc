@@ -3039,15 +3039,15 @@ hobbies_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0					
 			smuggled_groups	5285	5292	25																		sound/music_acq_miner.snd	gray	0	0						0	0			
 	harvesting_resources			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_resource_harvest_hide		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_resource_hide_01	5354	5359	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_hide_01	5354	5359	15																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_resource_harvest_meat		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_resource_meat_01	5360	5365	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_meat_01	5360	5365	15																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_resource_harvest_bone		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_resource_bone_01	5366	5371	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_bone_01	5366	5371	15																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_resource_harvest_milk		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_resource_harvest_milk_01	5372	5380	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_harvest_milk_01	5372	5380	15																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_resource_harvest_egg		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_resource_harvest_egg_01	5408	5416	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_harvest_egg_01	5408	5416	15																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_resource_harvest_complete		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			col_resource_hide_complete	5569	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_resource_meat_complete	5570	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
