@@ -111,7 +111,8 @@ public class terminal_character_builder extends script.base_script
         "Tokens: Space",
         "Tokens: Special Rewards",
         "Veteran Rewards",
-        "Toggle Enzyme Looting"
+        "Toggle Enzyme Looting",
+        "RE Tool"
     };
     public static final String[] RESOURCE_TYPES = {
         "Creature Resources",
@@ -5170,6 +5171,10 @@ public class terminal_character_builder extends script.base_script
                     loot.disableEnzymeLoot(player);
                     sendSystemMessageTestingOnly(player, "Enzyme Looting Disabled");
                 }
+                break;
+            case 13: //Reverse Engineering Tool
+                createObject("object/tangible/container/loot/shared_reverse_engineer_tool.iff", pInv, "");
+                sendSystemMessageTestingOnly(player, "Reverse Engineering Tool Issued.");
                 break;
                 default:
                 cleanScriptVars(player);
