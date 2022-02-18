@@ -2398,7 +2398,7 @@ expertise_trader_harvester_maintenance_1	expertise_trader_harvester_storage_1			
 expertise_trader_factory_energy_1	expertise_trader_factory_maintenance_2									expertise_trader_factory_maintenance_2												expertise_factory_energy_decrease=20				
 expertise_trader_factory_energy_2	expertise_trader_factory_energy_1									expertise_trader_factory_energy_1												expertise_factory_energy_decrease=40				
 expertise_trader_harvester_energy_1	expertise_trader_harvester_maintenance_1									expertise_trader_harvester_maintenance_1												expertise_harvester_energy_decrease=20				
-expertise_trader_reverse_engineering_1	expertise																					expertise_reverse_engineering_bonus=75				
+expertise_trader_reverse_engineering_1	expertise																					expertise_reverse_engineering_bonus=15				
 expertise_trader_factory_production_1	expertise_trader_factory_energy_2									expertise_trader_factory_energy_2												factory_speed=10				
 expertise_trader_harvester_collection_1	expertise_trader_harvester_energy_1									expertise_trader_harvester_energy_1												expertise_harvester_collection_increase=30				
 expertise_domestic_tailor_dexterity_1	expertise																					clothing_assembly=20				
