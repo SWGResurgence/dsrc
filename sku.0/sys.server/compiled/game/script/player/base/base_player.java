@@ -12287,7 +12287,7 @@ public class base_player extends script.base_script
     
         // BEGIN ENZYME LOOT TOGGLE \\
     
-    public int cmdEnzymeLootToggle(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
+    public int cmdEnzymeLootToggle(obj_id self, obj_id target, String params, float defaultTime) {
         if (sui.hasPid(self, "enzymeLootToggle")) {
             int pid = sui.getPid(self, "enzymeLootToggle");
             forceCloseSUIPage(pid);
@@ -12313,7 +12313,7 @@ public class base_player extends script.base_script
         sui.setPid(self, pid, "enzymeLootToggle");
         return SCRIPT_CONTINUE;
     }
-    public int handleEnzymeLootToggleConfirmation(obj_id self, dictionary params) throws InterruptedException {
+    public int handleEnzymeLootToggleConfirmation(obj_id self, dictionary params) {
         if (params == null || params.isEmpty()) {
             return SCRIPT_CONTINUE;
         }

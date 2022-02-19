@@ -1560,13 +1560,13 @@ public class loot extends script.base_script
     
     // BEGIN ENZYME LOOT TOGGLE \\
     
-    public static boolean hasToggledEnzymeLootOff(obj_id player) throws InterruptedException {
+    public static boolean hasToggledEnzymeLootOff(obj_id player) {
         return hasObjVar(player, ENZYME_LOOT_TOGGLE_OBJVAR);
     }
-    public static void disableEnzymeLoot(obj_id player) throws InterruptedException {
+    public static void disableEnzymeLoot(obj_id player) {
         setObjVar(player, ENZYME_LOOT_TOGGLE_OBJVAR, true);
     }
-    public static void enableEnzymeLoot(obj_id player) throws InterruptedException {
+    public static void enableEnzymeLoot(obj_id player) {
         removeObjVar(player, ENZYME_LOOT_TOGGLE_OBJVAR);
     }
     
