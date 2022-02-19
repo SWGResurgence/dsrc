@@ -12314,7 +12314,7 @@ public class base_player extends script.base_script
         return SCRIPT_CONTINUE;
     }
     public int handleEnzymeLootToggleConfirmation(obj_id self, dictionary params) {
-        if (params == null || params.isEmpty()) {
+        if (params == null || params.isEmpty()0 {
             return SCRIPT_CONTINUE;
         }
         int bp = sui.getIntButtonPressed(params);
