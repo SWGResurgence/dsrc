@@ -110,9 +110,7 @@ public class terminal_character_builder extends script.base_script
         "Tokens: Witches of Dathomir",
         "Tokens: Space",
         "Tokens: Special Rewards",
-        "Veteran Rewards",
-        "Toggle Enzyme Looting",
-        "RE Tool"
+        "Veteran Rewards"
     };
     public static final String[] RESOURCE_TYPES = {
         "Creature Resources",
@@ -5162,19 +5160,6 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("heroic_biolink_set", pInv);
                 static_item.createNewItemFunction("item_level90_boost", pInv);
                 static_item.createNewItemFunction("vet_stipend_scroll", pInv);
-                break;
-            case 12: //Enzyme Loot Toggle
-                if (loot.hasToggledEnzymeLootOff(player)) {
-                    loot.enableEnzymeLoot(player);
-                    sendSystemMessageTestingOnly(player, "Enzyme Looting Enabled");
-                } else {
-                    loot.disableEnzymeLoot(player);
-                    sendSystemMessageTestingOnly(player, "Enzyme Looting Disabled");
-                }
-                break;
-            case 13: //Reverse Engineering Tool
-                createObject("object/tangible/container/loot/shared_reverse_engineer_tool.iff", pInv, "");
-                sendSystemMessageTestingOnly(player, "Reverse Engineering Tool Issued.");
                 break;
                 default:
                 cleanScriptVars(player);
