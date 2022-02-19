@@ -160,15 +160,6 @@ public class loot extends script.base_script
                 obj_id killCredit = getObjIdObjVar(target, xp.VAR_TOP_GROUP);
                 if (group.isGroupObject(killCredit)) {
                     obj_id[] groupMembers = getGroupMemberIds(killCredit);
-                    for (obj_id groupMember : groupMembers) {
-                        if (isPlayer(groupMember) && !loot.hasToggledEnzymeLootOff(groupMember)) {
-                            hasChanceToDropEnzymeLoot = true;
-                        }
-                    }
-                } else {
-                    if (isPlayer(killCredit) && !loot.hasToggledEnzymeLootOff(killCredit)) {
-                        hasChanceToDropEnzymeLoot = true;
-                    }
                 }
             }
             if (hasChanceToDropEnzymeLoot == true) {
