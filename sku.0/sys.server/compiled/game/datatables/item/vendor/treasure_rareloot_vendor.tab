@@ -2,8 +2,8 @@ item	cash	token36	limit	class	script	note
 s[none]	i[0]	i[0]	i[0]	i[0]	s	c
 item_treasure_map_bracelet_r_absorb_04_01		1				Adventurer Hiker & Hunter Counter-Toxin Wristband Prototype IV (Right)
 item_treasure_map_bracelet_r_resist_04_01		1				Adventurer Hiker & Hunter Toxin Resistant Wristband Prototype IV (Right)
-item_krayt_pearl_04_19		20				Ancient Krayt Dragon Pearl
-item_krayt_pearl_04_20		25				Ancient Krayt Dragon Pearl
+item_krayt_pearl_04_19		75				Ancient Krayt Dragon Pearl
+item_krayt_pearl_04_20		150				Ancient Krayt Dragon Pearl
 object/tangible/furniture/terminal/terminal_serving_droid.iff		5				Astromech Serving Droid Terminal
 item_treasure_map_bracelet_r_bh_04_02		2				BlasTech WrisTek - Wrist Assault Booster Zulu (Right)
 object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_belt.iff		1				Bounty Hunter Belt
@@ -24,7 +24,7 @@ item_treasure_map_bracelet_r_fs_04_02		5				Jedi Knight's Wristguard (Right)
 item_krayt_pearl_04_17		5				Krayt Dragon Pearl
 item_krayt_pearl_04_18		10				Krayt Dragon Pearl
 item_treasure_map_81_90		1				Mysterious Data Disk
-item_power_crystal_04_21		30				Power Crystal
+item_power_crystal_04_21		75				Power Crystal
 item_treasure_map_bonus_buff_04_06		100				Rare Ankarres Sapphire
 item_treasure_map_bonus_buff_04_04		100				Rare Corusca Gem
 item_treasure_map_bonus_buff_04_02		100				Rare Nova Crystal
