@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class loot extends script.base_script
 {
+    public loot()
+    {
+    }
     public static final int COL_LOOT_MULTIPLIER_ON = 1;
     public static final String TBL_CREATURES = "datatables/mob/creatures.iff";
     public static final String TBL_COMPONENT_DATA = "datatables/loot/component_data.iff";
@@ -151,25 +154,34 @@ public class loot extends script.base_script
             {
                 setObjVar(target, corpse.VAR_HAS_RESOURCE, hasResource);
             }
-            if (isInTutorialArea(target)) {
+            if (isInTutorialArea(target))
+            {
                 return false;
             }
-            if (hasObjVar(target, xp.VAR_TOP_GROUP)) {
+            if (hasObjVar(target, xp.VAR_TOP_GROUP))
+            {
                 obj_id killCredit = getObjIdObjVar(target, xp.VAR_TOP_GROUP);
-                if (group.isGroupObject(killCredit)) {
+                if (group.isGroupObject(killCredit))
+                {
                     obj_id[] groupMembers = getGroupMemberIds(killCredit);
-                    for (obj_id groupMember : groupMembers) {
-                        if (isPlayer(groupMember) && !loot.hasToggledEnzymeLootOff(groupMember)) {
+                    for (obj_id groupMember : groupMembers)
+                    {
+                        if (isPlayer(groupMember) && !loot.hasToggledEnzymeLootOff(groupMember))
+                        {
                             hasChanceToDropEnzymeLoot = true;
                         }
                     }
-                } else {
-                    if (isPlayer(killCredit) && !loot.hasToggledEnzymeLootOff(killCredit)) {
+                }
+                else
+                {
+                    if (isPlayer(killCredit) && !loot.hasToggledEnzymeLootOff(killCredit))
+                    {
                         hasChanceToDropEnzymeLoot = true;
                     }
                 }
             }
-            if (hasChanceToDropEnzymeLoot == true) {
+            if (hasChanceToDropEnzymeLoot == true)
+            {
                 hasLoot |= loot.addBeastEnzymes(target);
             }
         }
@@ -1560,13 +1572,16 @@ public class loot extends script.base_script
     
     // BEGIN ENZYME LOOT TOGGLE \\
     
-    public static boolean hasToggledEnzymeLootOff(obj_id player) throws InterruptedException {
+    public static boolean hasToggledEnzymeLootOff(obj_id player) throws InterruptedException
+    {
         return hasObjVar(player, ENZYME_LOOT_TOGGLE_OBJVAR);
     }
-    public static void disableEnzymeLoot(obj_id player) throws InterruptedException {
+    public static void disableEnzymeLoot(obj_id player) throws InterruptedException
+    {
         setObjVar(player, ENZYME_LOOT_TOGGLE_OBJVAR, true);
     }
-    public static void enableEnzymeLoot(obj_id player) throws InterruptedException {
+    public static void enableEnzymeLoot(obj_id player) throws InterruptedException
+    {
         removeObjVar(player, ENZYME_LOOT_TOGGLE_OBJVAR);
     }
     
