@@ -12289,7 +12289,7 @@ public class base_player extends script.base_script
     
     public int cmdEnzymeLootToggle(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (sui.hadPid(self, "enzymeLootToggle"))
+        if (sui.hasPid(self, "enzymeLootToggle"))
         {
             int pid = sui.getPid(self, "enzymeLootToggle");
             forceCloseSUIPage(pid);
