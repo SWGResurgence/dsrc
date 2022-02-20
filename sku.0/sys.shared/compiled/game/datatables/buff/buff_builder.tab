@@ -54,8 +54,6 @@ general_crafting_structure_experimentation	trade	structure_experimentation	7	2	1
 general_crafting_weapon_assembly	trade	weapon_assembly	5	2	1	harvest_faire  
 general_crafting_weapon_experimentation	trade	weapon_experimentation	7	2	1	harvest_faire  
 hand_sampling	trade	expertise_resource_sampling_increase	20	1	1	harvest_faire  
-harvest_faire	trade	expertise_harvester_collection_increase	20	1	1	harvest_faire  
-harvest_storage	trade	expertise_havester_storage_increase	20	1	1	harvest_faire  
 incubation_time_reduction	trade	incubation_time_reduction	5	2	2	harvest_faire  
 mutation_chance	trade	bm_mutation_chance_increase	5	2	2	harvest_faire  
 reverse_engineering_chance	trade	expertise_reverse_engineering_bonus	5	2	2	harvest_faire  
