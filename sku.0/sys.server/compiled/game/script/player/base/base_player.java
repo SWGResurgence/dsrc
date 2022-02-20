@@ -12253,7 +12253,7 @@ public class base_player extends script.base_script
             smuggler.flagJunkSaleSui(self, junkDealer);
         }
         return SCRIPT_CONTINUE;
-    }  
+    }
     public int setupLotteryListener(obj_id self, dictionary params) throws InterruptedException{
         listenToMessage(getObjIdObjVar(self, "lottery.broker"), "updateLotteryStatus");
         return SCRIPT_CONTINUE;
@@ -12285,10 +12285,12 @@ public class base_player extends script.base_script
         return SCRIPT_CONTINUE;
     }
     
-        // BEGIN ENZYME LOOT TOGGLE \\
+    // BEGIN ENZYME LOOT TOGGLE \\
     
-    public int cmdEnzymeLootToggle(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
-        if (sui.hasPid(self, "enzymeLootToggle")) {
+    public int cmdEnzymeLootToggle(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        if (sui.hasPid(self, "enzymeLootToggle"))
+        {
             int pid = sui.getPid(self, "enzymeLootToggle");
             forceCloseSUIPage(pid);
             sui.removePid(self, "enzymeLootToggle");
@@ -12296,7 +12298,8 @@ public class base_player extends script.base_script
         String okButton = "Disable Loot";
         String cancelButton = "Cancel";
         String currentStatus = "Enabled";
-        if (loot.hasToggledEnzymeLootOff(self)) {
+        if (loot.hasToggledEnzymeLootOff(self))
+        {
             okButton = "Enable Loot";
             currentStatus = "Disabled";
         }
@@ -12313,31 +12316,40 @@ public class base_player extends script.base_script
         sui.setPid(self, pid, "enzymeLootToggle");
         return SCRIPT_CONTINUE;
     }
-    public int handleEnzymeLootToggleConfirmation(obj_id self, dictionary params) throws InterruptedException {
-        if (params == null || params.isEmpty()) {
+    public int handleEnzymeLootToggleConfirmation(obj_id self, dictionary params) throws InterruptedException
+    {
+        if (params == null || params.isEmpty())
+        {
             return SCRIPT_CONTINUE;
         }
         int bp = sui.getIntButtonPressed(params);
-        if (bp == sui.BP_CANCEL) {
+        if (bp == sui.BP_CANCEL)
+        {
             return SCRIPT_CONTINUE;
         }
-        if (!sui.hasPid(self, "enzymeLootToggle")) {
+        if (!sui.hasPid(self, "enzymeLootToggle"))
+        {
             return SCRIPT_CONTINUE;
         }
         sui.removePid(self, "enzymeLootToggle");
         String message;
-        if (loot.hasToggledEnzymeLootOff(self)) {
+        if (loot.hasToggledEnzymeLootOff(self))
+        {
             loot.enableEnzymeLoot(self);
             message = "enzyme_loot_back_on";
-        } else {
+        }
+        else
+        {
             loot.disableEnzymeLoot(self);
             message = "enzyme_loot_now_off";
         }
-        if (message.length() > 0) {
+        if (message.length() > 0)
+        {
             sendSystemMessage(self, new string_id("base_player", message));
         }
         return SCRIPT_CONTINUE;
     }
     
     // END ENZYME LOOT TOGGLE \\
+    
 }

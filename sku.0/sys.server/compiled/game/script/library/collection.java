@@ -39,7 +39,7 @@ public class collection extends script.base_script
     public static final int REQUIRED_TIME_LAPSE = 21600;
     public static final int CONST_ROLL_CHANCE = 50;
     public static final byte ENT_TOKEN_ROLL_CHANCE = 40;
-    public static final int CONST_RESOURCE_ROLL = 4;
+    public static final int CONST_RESOURCE_ROLL = 4; // Exception Egg Drop Rate
     public static final String PRISTINE_MEAT = "col_pristine_meat_02_01";
     public static final String PRISTINE_HIDE = "col_pristine_hide_02_01";
     public static final String PRISTINE_BONE = "col_pristine_bone_02_01";

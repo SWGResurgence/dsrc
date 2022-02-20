@@ -5163,10 +5163,13 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("vet_stipend_scroll", pInv);
                 break;
             case 12: //Enzyme Loot Toggle
-                if (loot.hasToggledEnzymeLootOff(player)) {
+                if (loot.hasToggledEnzymeLootOff(player))
+                {
                     loot.enableEnzymeLoot(player);
                     sendSystemMessageTestingOnly(player, "Enzyme Looting Enabled");
-                } else {
+                }
+                else
+                {
                     loot.disableEnzymeLoot(player);
                     sendSystemMessageTestingOnly(player, "Enzyme Looting Disabled");
                 }
