@@ -110,7 +110,8 @@ public class terminal_character_builder extends script.base_script
         "Tokens: Witches of Dathomir",
         "Tokens: Space",
         "Tokens: Special Rewards",
-        "Veteran Rewards"
+        "Veteran Rewards",
+        "Toggle Enzyme Looting"
     };
     public static final String[] RESOURCE_TYPES = {
         "Creature Resources",
@@ -5160,6 +5161,18 @@ public class terminal_character_builder extends script.base_script
                 static_item.createNewItemFunction("heroic_biolink_set", pInv);
                 static_item.createNewItemFunction("item_level90_boost", pInv);
                 static_item.createNewItemFunction("vet_stipend_scroll", pInv);
+                break;
+            case 12: //Enzyme Loot Toggle
+                if (lootToggledEnzymeLootOff(player))
+                {
+                    loot.enableEnzymeLoot(player);
+                    sendSystemMessageTestingOnly(player, "Enzyme Looting Enabled");
+                }
+                else
+                {
+                    loot.disableEnzymeLoot(player);
+                    sendSystemMessageTestingOnly(player, "Enzyme Looting Disabled");
+                }
                 break;
                 default:
                 cleanScriptVars(player);

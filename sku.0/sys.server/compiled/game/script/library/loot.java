@@ -16,6 +16,7 @@ public class loot extends script.base_script
     public static final String VAR_DENY_LOOT = "denyLoot";
     public static final String VAR_LOOT_QUALITY = "loot.loot_quality";
     public static final String CHRONICLES_LOOT_TOGGLE_OBJVAR = "chroniclesLoot_toggledOff";
+    public static final String ENZYME_LOOT_TOGGLE_OBJVAR = "enzymeLoot_toggledOff";
     public static final String TBL_EXCLUSION = "datatables/loot/exclusion.iff";
     public static final String COL_TEMPLATE = "TEMPLATE";
     public static final String COL_EXCLUDE = "EXCLUDE";
@@ -147,6 +148,7 @@ public class loot extends script.base_script
         int niche = ai_lib.aiGetNiche(mobType);
         if (niche == NICHE_MONSTER || niche == NICHE_HERBIVORE || niche == NICHE_CARNIVORE || niche == NICHE_PREDATOR)
         {
+            boolean hasChanceToDropEnzymeLoot = false;
             int[] hasResource = corpse.hasResource(mobType);
             if (hasResource != null && hasResource.length > 0)
             {
@@ -156,7 +158,32 @@ public class loot extends script.base_script
             {
                 return false;
             }
-            hasLoot |= addBeastEnzymes(target);
+            if (hasObjVar(target, xp.VAR_TOP_GROUP))
+            {
+                obj_id killCredit - getObjIdObjVar(target, xp.VAR_TOP_GROUP);
+                if (group.isGroupObject(killCredit))
+                {
+                    obj_id[] groupMembers = getGroupMemberIds(killCredit);
+                    for (obj_id groupMember : groupMembers)
+                    {
+                        if (isPlayer(groupMember) && !loot.hasToggledEnzymeLootOff(groupMember))
+                        {
+                            hasChanceToDropEnzymeLoot = true;
+                        }
+                    }
+                }
+                else
+                {
+                    if (isPlayer(killCredit) && !loot.hasToggledEnzymeLootOff(killCredit))
+                    {
+                        hasChanceToDropEnzymeLoot = true;
+                    }
+                }
+            }
+            if (hasChanceToDropEnzymeLoot == true)
+            {
+                hasLoot |= loot.addBeastEnzymes(target);
+            }
         }
         return hasLoot;
     }
@@ -1542,6 +1569,24 @@ public class loot extends script.base_script
     {
         return addCollectionLoot(target, false, null);
     }
+    
+    // BEGIN ENZYME LOOT TOGGLE \\
+    
+    public static boolean hasToggledEnzymeLootOff(obj_id player) throws InterruptedException
+    {
+        return hasObjVar(player, ENZYME_LOOT_TOGGLE_OBJVAR);
+    }
+    public static void disableEnzymeLoot(obj_id player) throws InterruptedException
+    {
+        setObjVar(player, ENZYME_LOOT_TOGGLE_OBJVAR, true);
+    }
+    public static void enableEnzymeLoot(obj_id player) throws InterruptedException
+    {
+        removeObjVar(player, ENZYME_LOOT_TOGGLE_OBJVAR);
+    }
+    
+    // END ENZYME LOOT TOGGLE \\
+    
     public static boolean addCollectionLoot(obj_id target, boolean theftBool, obj_id thief) throws InterruptedException
     {
         String creatureName = ai_lib.getCreatureName(target);

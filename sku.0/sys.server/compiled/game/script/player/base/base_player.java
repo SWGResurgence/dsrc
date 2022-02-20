@@ -12284,4 +12284,72 @@ public class base_player extends script.base_script
         warpPlayer(self, loc.area, loc.x, loc.y, loc.z, loc.cell, 0, 0, 0, "noHandler", false);
         return SCRIPT_CONTINUE;
     }
+    
+    // BEGIN ENZYME LOOT TOGGLE \\
+    
+    public int cmdEnzymeLootToggle(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        if (sui.hadPid(self, "enzymeLootToggle"))
+        {
+            int pid = sui.getPid(self, "enzymeLootToggle");
+            forceCloseSUIPage(pid);
+            sui.removePid(self, "enzymeLootToggle");
+        }
+        String okButton = "Disable Loot";
+        String cancelButton = "Cancel";
+        String currentStatus = "Enabled";
+        if (loot.hasToggledEnzymeLootOff(self))
+        {
+            okButton = "Enable Loot";
+            currentStatus = "Disabled";
+        }
+        String title = "Enzyme Loot Toggle";
+        String textMsg = "Current Enzyme Loot Status: " + currentStatus;
+        textMsg += " /n /n Would you like to " + okButton + "?";
+        int pid = sui.createSUIPage(sui.SUI_MSGBOX, self, self, "handleEnzymeLootToggleConfirmation");
+        setSUIProperty(pid, sui.MSGBOX_TITLE, sui.PROP_TEXT, title);
+        setSUIProperty(pid, sui.MSGBOX_PROMPT, sui.PROP_TEXT, textMsg);
+        sui.msgboxButtonSetup(pid, sui.YES_NO);
+        setSUIProperty(pid, sui.MSGBOX_BTN_OK, sui.PROP_TEXT, okButton);
+        setSUIProperty(pid, sui.MSGBOX_BTN_CANCEL, sui.PROP_TEXT, cancelButton);
+        sui.showSUIPage(pid);
+        sui.setPid(self, pid, "enzymeLootToggle");
+        return SCRIPT_CONTINUE;
+    }
+    public int handleEnzymeLootToggleConfirmation(obj_id self, dictionary params) throws InterruptedException
+    {
+        if (params == null || params.isEmpty())
+        {
+            return SCRIPT_CONTINUE;
+        }
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_CANCEL)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (!sui.hasPid(self, "enzymeLootToggle"))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        sui.removePid(self, "enzymeLootToggle");
+        String message;
+        if (loot.hasToggledEnzymeLootOff(self))
+        {
+            loot.enableEnzymeLoot(self);
+            message = "enzyme_loot_back_on";
+        }
+        else
+        {
+            loot.disableEnzymeLoot(self);
+            message = "enzyme_loot_now_off";
+        }
+        if (message.length() > 0)
+        {
+            sendSystemMessage(self, new string_id("base_player", message));
+        }
+        return SCRIPT_CONTINUE;
+    }
+    
+    // END ENZYME LOOT TOGGLE \\
+    
 }
