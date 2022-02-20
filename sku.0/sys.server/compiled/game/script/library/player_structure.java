@@ -189,7 +189,7 @@ public class player_structure extends script.base_script
     public static final String SELFPOWERED_DEED_ELITE = "object/tangible/veteran_reward/harvester_elite.iff";
     public static final int MAX_BASE_COUNT = 3;
     public static final int HARVESTER_MAX_EXTRACTION_RATE = 88;
-    public static final int HARVESTER_MAX_HOPPER_SIZE = 200000;
+    public static final int HARVESTER_MAX_HOPPER_SIZE = 2000000;
     public static final int DESTROY_RESULT_SUCCESS = 0;
     public static final int DESTROY_RESULT_SUCCESS_SELFPOWERED = 1;
     public static final int DESTROY_RESULT_FAIL_COULD_NOT_CREATE_DEED = 2;
