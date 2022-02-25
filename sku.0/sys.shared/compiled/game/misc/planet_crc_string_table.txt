@@ -8,6 +8,7 @@ naboo
 endor
 rori
 lok
+dxun
 dungeon1
 space_env
 space_dantooine
