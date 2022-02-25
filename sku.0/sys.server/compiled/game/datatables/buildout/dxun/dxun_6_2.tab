@@ -1,0 +1,4 @@
+server_template_crc	cell_index	px	py	pz	qw	qx	qy	qz	scripts	objvars
+h	i	f	f	f	f	f	f	f	s	p
+object/tangible/ground_spawning/area_spawner.iff	0	0	0	0	0	0	0	0		
+object/tangible/ground_spawning/area_spawner.iff	0	0	0	0	0	0	0	0		

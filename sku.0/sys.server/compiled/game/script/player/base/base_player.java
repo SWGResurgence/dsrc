@@ -7,11 +7,10 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+import script.cureward.cureward;
+
 public class base_player extends script.base_script
 {
-    public base_player()
-    {
-    }
     public static final int TIME_DEATH = 5;
     public static final float RANGE_COUP_DE_GRACE = 3.0f;
     public static final String JEDI_CLOAK_TEMPLATE = "object/tangible/wearable/robe/robe_s05.iff";
@@ -69,8 +68,8 @@ public class base_player extends script.base_script
     public static final string_id PROSE_COIN_LOOT = new string_id("base_player", "prose_coin_loot");
     public static final string_id PROSE_COIN_LOOT_NO_TARGET = new string_id("base_player", "prose_coin_loot_no_target");
     public static final string_id PROSE_COIN_LOOT_FAILED = new string_id("error_message", "prose_coin_loot_fail");
-    public static final int LOGOUT_TIME = 30;
-    public static final int LOGOUT_COUNT_INTERVAL = 5;
+    public static final int LOGOUT_TIME = 10;
+    public static final int LOGOUT_COUNT_INTERVAL = 2;
     public static final string_id SID_SYS_SCENTMASK_NOSKILL = new string_id("skl_use", "sys_scentmask_noskill");
     public static final string_id SID_SYS_SCENTMASK_START = new string_id("skl_use", "sys_scentmask_start");
     public static final string_id SID_SYS_SCENTMASK_STOP = new string_id("skl_use", "sys_scentmask_stop");
@@ -208,6 +207,7 @@ public class base_player extends script.base_script
         "rori",
         "talus",
         "yavin4",
+        "dxun",
         "endor",
         "lok",
         "dantooine",
@@ -225,6 +225,7 @@ public class base_player extends script.base_script
         "rori",
         "talus",
         "yavin4",
+        "dxun",
         "endor",
         "lok",
         "dantooine",
@@ -1340,7 +1341,10 @@ public class base_player extends script.base_script
                 }
                 else 
                 {
-                    String strGalaxyMessage = "\\#FF0000" + "Welcome to Star Wars Galaxies" + "\\#FFFFFF";
+                    /*String strGalaxyMessage = "\\#FF0000" + "Welcome to SWG: Resurgence!" + "\r\n" + "\\#CC9900" + "If you encounter any bugs, please report them on our Mantis Bug Tracker, and thank you for participating in our testing phase!" + "\\#FFFFFF";
+                    sendConsoleMessage(self, strGalaxyMessage);*/
+                    
+                    String strGalaxyMessage = "\\#FF0000" + "Welcome to the Apotheosis of SWG: Resurgence!" + "\r\n" + "\\#4044BF" + "Just a reminder to keep checking the Bonuses that change periodically, which is available at:  https://swgresurgence.com/index.php?title=Server_Bonuses" + "\r\n" + "\\#CC9900" + "If you encounter any bugs please them on our Mantis Bug Tracker, and enjoy your time on Apotheosis!" + "\\#FFFFFF";
                     sendConsoleMessage(self, strGalaxyMessage);
                 }
                 boolean warden = isWarden(self);
@@ -1501,7 +1505,6 @@ public class base_player extends script.base_script
                 removeObjVar(self, "groupWaypoint");
             }
         }
-        veteran_deprecated.updateVeteranTime(self);
         if (hasObjVar(self, "renamePerformed"))
         {
             String old_name = getStringObjVar(self, "renamePerformed");
@@ -1630,12 +1633,7 @@ public class base_player extends script.base_script
         {
             badge.grantBadge(self, "bdg_kash_avatar_zssik");
         }
-        if (!utils.hasScriptVar(self, "performance.buildabuff.buffComponentKeys") && buff.hasBuff(self, "buildabuff_inspiration"))
-        {
-            buff.removeBuff(self, "buildabuff_inspiration");
-        }
-        if (getLocation(self).area == "dungeon1")
-        {
+		if (getLocation(self).area.equals("dungeon1")) {
             if (trial.getTop(self) == self)
             {
                 warpPlayer(self, "tatooine", 0, 0, 0, null, 0, 0, 0, null, false);
@@ -2074,7 +2072,7 @@ public class base_player extends script.base_script
         }
         dictionary racial_mods = null;
         String template = utils.getTemplateFilenameNoPath(self);
-        if (template != null && !template.equals(""))
+        if (template != null && !template.isEmpty())
         {
             if (template.endsWith(".iff"))
             {
@@ -9581,40 +9579,21 @@ public class base_player extends script.base_script
     }
     public int cmdGetVeteranRewardTime(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards")))
-        {
-            return SCRIPT_CONTINUE;
-        }
-        if (isGod(self))
-        {
-            if (!isIdValid(target))
-            {
-                target = self;
-            }
-            if (veteran_deprecated.checkVeteranTarget(target))
-            {
-                int veteranTime = getIntObjVar(target, veteran_deprecated.OBJVAR_TIME_ACTIVE);
-                prose_package pp = new prose_package();
-                pp.stringId = veteran_deprecated.SID_VETERAN_TIME_ACTIVE;
-                pp.target.id = target;
-                pp.digitInteger = veteranTime;
-                sendSystemMessageProse(self, pp);
-            }
-        }
-        else 
-        {
-            if (hasObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE))
-            {
-                int veteranTime = getIntObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE);
-                prose_package pp = new prose_package();
-                pp.stringId = veteran_deprecated.SID_VETERAN_SELF_TIME_ACTIVE;
-                pp.digitInteger = veteranTime;
-                sendSystemMessageProse(self, pp);
-            }
-            else 
-            {
-                sendSystemMessage(self, veteran_deprecated.SID_SYSTEM_INACTIVE);
-            }
+				obj_id tatooine = getPlanetByName("tatooine");
+        String objVar = "vetTokenCD_" + getPlayerStationId(self);
+		if (!hasObjVar(tatooine, objVar)) {
+			cureward.giveVeteranRewardToken(self, 500);
+			return SCRIPT_CONTINUE;
+		}
+        int timeLeft = getIntObjVar(tatooine, objVar) + 86400 - getCalendarTime();
+
+        if (timeLeft > 0) {
+            prose_package pp = new prose_package();
+            pp.stringId = new string_id("veteran", "time_left");
+            pp.digitInteger = timeLeft;
+            sendSystemMessageProse(self, pp);
+        } else {
+            cureward.giveVeteranRewardToken(self, (timeLeft / -86400) + 1);
         }
         return SCRIPT_CONTINUE;
     }
@@ -9622,11 +9601,6 @@ public class base_player extends script.base_script
     {
         if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards")))
         {
-            return SCRIPT_CONTINUE;
-        }
-        if (!isGod(self) && !hasObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE))
-        {
-            sendSystemMessage(self, veteran_deprecated.SID_SYSTEM_INACTIVE);
             return SCRIPT_CONTINUE;
         }
         int[] templateCrcs = dataTableGetIntColumn(veteran_deprecated.REWARDS_DATATABLE, veteran_deprecated.REWARDS_COLUMN_TEMPLATE);
@@ -10653,14 +10627,22 @@ public class base_player extends script.base_script
         String armor = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardArmor);
         int armorCount = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardCountArmor);
         int armorQuality = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardQuality);
-        String[] inclusiveLootNames = new String[3];
-        int[] inclusiveLootCounts = new int[3];
+        String[] inclusiveLootNames = new String[6];
+        int[] inclusiveLootCounts = new int[6];
+        //String[] inclusiveLootNames = new String[3];
+        //int[] inclusiveLootCounts = new int[3];
         inclusiveLootNames[0] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName);
         inclusiveLootCounts[0] = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootCount);
         inclusiveLootNames[1] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName2);
         inclusiveLootCounts[1] = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootCount2);
         inclusiveLootNames[2] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName3);
         inclusiveLootCounts[2] = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootCount3);
+        inclusiveLootNames[3] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName4);
+        inclusiveLootCounts[3] = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootCount4);
+        inclusiveLootNames[4] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName5);
+        inclusiveLootCounts[4] = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootCount5);
+        inclusiveLootNames[5] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootName6);
+        inclusiveLootCounts[5] = groundquests.getQuestIntDataEntry(questCrc, groundquests.dataTableColumnQuestRewardLootCount6);
         String[] exclusiveLootNames = new String[10];
         int[] exclusiveLootCounts = new int[10];
         exclusiveLootNames[0] = groundquests.getQuestStringDataEntry(questCrc, groundquests.dataTableColumnQuestRewardExclusiveLootName);
@@ -11329,17 +11311,6 @@ public class base_player extends script.base_script
             bounty_hunter.showSetBountySUI(self, killer);
             return SCRIPT_CONTINUE;
         }
-        if (amount > bounty_hunter.MAX_BOUNTY_SET)
-        {
-            sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_cap"));
-            amount = bounty_hunter.MAX_BOUNTY_SET;
-        }
-        if (amount < bounty_hunter.MIN_BOUNTY_SET)
-        {
-            sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_too_little"));
-            bounty_hunter.showSetBountySUI(self, killer);
-            return SCRIPT_CONTINUE;
-        }
         if (hasObjVar(killer, "bounty.amount"))
         {
             int bounty = getIntObjVar(killer, "bounty.amount");
@@ -11810,7 +11781,10 @@ public class base_player extends script.base_script
             }
             else 
             {
-                String strGalaxyMessage = "\\#FF0000" + "Welcome to Star Wars Galaxies" + "\\#FFFFFF";
+                /*String strGalaxyMessage = "\\#FF0000" + "Welcome to SWG: Resurgence!" + "\r\n" + "\\#CC9900" + "If you encounter any bugs, please report them on our Mantis Bug Tracker, and thank you for participating in our testing phase!" + "\\#FFFFFF";
+                sendConsoleMessage(self, strGalaxyMessage);*/
+                
+                String strGalaxyMessage = "\\#FF0000" + "Welcome to the Apotheosis of SWG: Resurgence!" + "\r\n" + "\\#4044BF" + "Just a reminder to keep checking the Bonuses that change periodically, which is available at:  https://swgresurgence.com/index.php?title=Server_Bonuses" + "\r\n" + "\\#CC9900" + "If you encounter any bugs please them on our Mantis Bug Tracker, and enjoy your time on Apotheosis!" + "\\#FFFFFF";
                 sendConsoleMessage(self, strGalaxyMessage);
             }
             boolean warden = isWarden(self);
@@ -12312,4 +12286,72 @@ public class base_player extends script.base_script
         warpPlayer(self, loc.area, loc.x, loc.y, loc.z, loc.cell, 0, 0, 0, "noHandler", false);
         return SCRIPT_CONTINUE;
     }
+    
+    // BEGIN ENZYME LOOT TOGGLE \\
+    
+    public int cmdEnzymeLootToggle(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        if (sui.hasPid(self, "enzymeLootToggle"))
+        {
+            int pid = sui.getPid(self, "enzymeLootToggle");
+            forceCloseSUIPage(pid);
+            sui.removePid(self, "enzymeLootToggle");
+        }
+        String okButton = "Disable Loot";
+        String cancelButton = "Cancel";
+        String currentStatus = "Enabled";
+        if (loot.hasToggledEnzymeLootOff(self))
+        {
+            okButton = "Enable Loot";
+            currentStatus = "Disabled";
+        }
+        String title = "Enzyme Loot Toggle";
+        String textMsg = "Current Enzyme Loot Status: " + currentStatus;
+        textMsg += " /n /n Would you like to " + okButton + "?";
+        int pid = sui.createSUIPage(sui.SUI_MSGBOX, self, self, "handleEnzymeLootToggleConfirmation");
+        setSUIProperty(pid, sui.MSGBOX_TITLE, sui.PROP_TEXT, title);
+        setSUIProperty(pid, sui.MSGBOX_PROMPT, sui.PROP_TEXT, textMsg);
+        sui.msgboxButtonSetup(pid, sui.YES_NO);
+        setSUIProperty(pid, sui.MSGBOX_BTN_OK, sui.PROP_TEXT, okButton);
+        setSUIProperty(pid, sui.MSGBOX_BTN_CANCEL, sui.PROP_TEXT, cancelButton);
+        sui.showSUIPage(pid);
+        sui.setPid(self, pid, "enzymeLootToggle");
+        return SCRIPT_CONTINUE;
+    }
+    public int handleEnzymeLootToggleConfirmation(obj_id self, dictionary params) throws InterruptedException
+    {
+        if (params == null || params.isEmpty())
+        {
+            return SCRIPT_CONTINUE;
+        }
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_CANCEL)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (!sui.hasPid(self, "enzymeLootToggle"))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        sui.removePid(self, "enzymeLootToggle");
+        String message;
+        if (loot.hasToggledEnzymeLootOff(self))
+        {
+            loot.enableEnzymeLoot(self);
+            message = "enzyme_loot_back_on";
+        }
+        else
+        {
+            loot.disableEnzymeLoot(self);
+            message = "enzyme_loot_now_off";
+        }
+        if (message.length() > 0)
+        {
+            sendSystemMessage(self, new string_id("base_player", message));
+        }
+        return SCRIPT_CONTINUE;
+    }
+    
+    // END ENZYME LOOT TOGGLE \\
+    
 }
