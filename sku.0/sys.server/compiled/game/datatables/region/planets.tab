@@ -2,6 +2,7 @@ planet	regionFile	minX	minZ	maxX	maxZ
 s	s	f	f	f	f
 corellia	datatables/region/region_corellia.iff	-8000	-8000	8000	8000
 dantooine	datatables/region/region_dantooine.iff	-8000	-8000	8000	8000
+dxun	datatables/region/region_dxun.iff	-8000	-8000	8000	8000
 dathomir	datatables/region/region_dathomir.iff	-8000	-8000	8000	8000
 endor	datatables/region/region_endor.iff	-8000	-8000	8000	8000
 lok	datatables/region/region_lok.iff	-8000	-8000	8000	8000

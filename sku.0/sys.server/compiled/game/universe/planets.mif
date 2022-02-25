@@ -8,6 +8,7 @@ FORM "PLTS"
 		Planet("corellia")
 		Planet("dantooine")
 		Planet("dathomir")
+    Planet("dxun")
 		Planet("endor")
 		Planet("lok")
 		Planet("naboo")
