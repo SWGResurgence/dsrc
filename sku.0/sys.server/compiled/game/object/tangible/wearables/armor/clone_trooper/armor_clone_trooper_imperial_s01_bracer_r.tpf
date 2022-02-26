@@ -9,4 +9,4 @@ armor = ""
 sharedTemplate = "object/tangible/wearables/armor/clone_trooper/shared_armor_clone_trooper_imperial_s01_bracer_r.iff"
 
 objvars =+ [ 
-		"modified_luck" = 30, "modified_precision" = 30, "modified_constitution" = 30]
+		"skillmod.bonus.modified_luck" = 30, "skillmod.bonus.modified_precision" = 30, "skillmod.bonus.modified_constitution" = 30]
