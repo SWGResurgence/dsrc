@@ -577,6 +577,10 @@ public class npe extends script.base_script
         if (utils.isProfession(player, utils.FORCE_SENSITIVE))
         {
             theSet.add(static_item.createNewItemFunction("item_npe_fs_robe_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_force_sensitive_shirt_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_force_sensitive_pants_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_force_sensitive_jacket_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_force_sensitive_boots_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_jedi_robe_light_04_01", pInv)); //Light Jedi Knight Robe
             theSet.add(static_item.createNewItemFunction("item_jedi_robe_dark_04_01", pInv)); //Dark Jedi Knight Robe
             theSet.add(static_item.createNewItemFunction("item_lightsaber_tool_01_01", pInv));
