@@ -70,7 +70,7 @@ public class regions extends script.base_script
     public static final int MISSION_DATHOMIR_TRADE_OUTPOST = 31;
     public static final int MISSION_DATHOMIR_SURVEY_OUTPOST = 32;
     public static final int MISSION_LOK_NYMS_STRONGHOLD = 33;
-    public static final int MISSION_ENDOR_CZERKA_OUTPOST = 34;
+    public static final int MISSION_DXUN_CZERKA_OUTPOST = 34;
     public static final int MISSION_MAX = 35;
     public static final int RD_NEWBIE = 0;
     public static final int RD_EASY = 1;
