@@ -3858,7 +3858,7 @@ public class base_player extends script.base_script
         obj_id target = params.getObjId("target");
         String targetName = params.getString("targetName");
         int amt = params.getInt("amt");
-        if (amt < 1 || amt > 1000000)
+        if (amt < 1 || amt > 10000000)
         {
             CustomerServiceLog("Trade", "  Tip -- Player: " + player + " " + playerName + " Target: " + target + " " + targetName + " -- Unable to refund escrow because the amount is invalid! Amt:" + amt);
             return SCRIPT_CONTINUE;
