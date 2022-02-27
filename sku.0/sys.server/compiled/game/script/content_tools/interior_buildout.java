@@ -1,7 +1,6 @@
 package script.content_tools;
 
 import script.dictionary;
-import script.library.space_flags;
 import script.library.utils;
 import script.obj_id;
 import script.transform;
@@ -14,7 +13,6 @@ public class interior_buildout extends script.base_script
     public interior_buildout()
     {
     }
-    
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
@@ -82,7 +80,7 @@ public class interior_buildout extends script.base_script
                             utils.setScriptVar(self, strLocationList[intI] + "Cells", objCells);
                         }
                     }
-                    if (space_flags.LIVE_SPACE_SERVER_MODE_OFF)
+                    if (!utils.checkConfigFlag("ScriptFlags", "liveSpaceServer"))
                     {
                         obj_id objTest = createObject(strTemplates[intI], tr, objCell);
                         if (!strObjVars[intI].equals(""))
