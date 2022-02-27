@@ -12,7 +12,7 @@ public class holiday_controller extends script.base_script
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "holiday_controller.OnInitialize planet initialized, holiday controller called.");
+        //CustomerServiceLog("holidayEvent", "holiday_controller.OnInitialize planet initialized, holiday controller called.");
         messageTo(self, "halloweenServerStart", null, 600.0f, false);
         messageTo(self, "lifedayServerStart", null, 610.0f, false);
         messageTo(self, "lovedayServerStart", null, 615.0f, false);
@@ -213,14 +213,14 @@ public class holiday_controller extends script.base_script
     }
     public int halloweenServerStart(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "holiday_controller.halloweenServerStart Halloween event handler called.");
+        //CustomerServiceLog("holidayEvent", "holiday_controller.halloweenServerStart Halloween event handler called.");
         String halloweenString = getCurrentUniverseWideEvents();
         int halloween = halloweenString.indexOf("halloween");
         String halloweenRunning = getConfigSetting("GameServer", "halloween");
-        CustomerServiceLog("holidayEvent", "holiday_controller.halloweenServerStart halloweenString: " + halloweenString + " halloween: " + halloween + " halloweenRunning: " + halloweenRunning);
+        //CustomerServiceLog("holidayEvent", "holiday_controller.halloweenServerStart halloweenString: " + halloweenString + " halloween: " + halloween + " halloweenRunning: " + halloweenRunning);
         if (halloweenRunning == null)
         {
-            CustomerServiceLog("holidayEvent", "holiday_controller.halloweenServerStart Halloween event is either not running or not in the server configs.");
+            //CustomerServiceLog("holidayEvent", "holiday_controller.halloweenServerStart Halloween event is either not running or not in the server configs.");
             if (halloween > -1)
             {
                 stopUniverseWideEvent("halloween");
@@ -232,11 +232,11 @@ public class holiday_controller extends script.base_script
             {
                 if (!startUniverseWideEvent("halloween"))
                 {
-                    CustomerServiceLog("holidayEvent", "holiday_controller.halloweenServerStart startUniverseWideEvent reports FAILURE to start universe wide event.");
+                    //CustomerServiceLog("holidayEvent", "holiday_controller.halloweenServerStart startUniverseWideEvent reports FAILURE to start universe wide event.");
                 }
                 else 
                 {
-                    CustomerServiceLog("holidayEvent", "holiday_controller.halloweenServerStart startUniverseWideEvent reports SUCCESS starting universe wide event.");
+                    //CustomerServiceLog("holidayEvent", "holiday_controller.halloweenServerStart startUniverseWideEvent reports SUCCESS starting universe wide event.");
                 }
             }
         }
@@ -244,14 +244,14 @@ public class holiday_controller extends script.base_script
     }
     public int lifedayServerStart(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "holiday_controller.lifedayServerStart Life Day event handler called.");
+        //CustomerServiceLog("holidayEvent", "holiday_controller.lifedayServerStart Life Day event handler called.");
         String lifedayString = getCurrentUniverseWideEvents();
         int lifeday = lifedayString.indexOf("lifeday");
         String lifedayRunning = getConfigSetting("GameServer", "lifeday");
-        CustomerServiceLog("holidayEvent", "holiday_controller.lifedayServerStart lifedayString: " + lifedayString + " lifeday: " + lifeday + " lifedayRunning: " + lifedayRunning);
+        //CustomerServiceLog("holidayEvent", "holiday_controller.lifedayServerStart lifedayString: " + lifedayString + " lifeday: " + lifeday + " lifedayRunning: " + lifedayRunning);
         if (lifedayRunning == null)
         {
-            CustomerServiceLog("holidayEvent", "holiday_controller.lifedayServerStart event is either not running or not in the server configs.");
+            //CustomerServiceLog("holidayEvent", "holiday_controller.lifedayServerStart event is either not running or not in the server configs.");
             if (lifeday > -1)
             {
                 stopUniverseWideEvent("lifeday");
@@ -263,11 +263,11 @@ public class holiday_controller extends script.base_script
             {
                 if (!startUniverseWideEvent("lifeday"))
                 {
-                    CustomerServiceLog("holidayEvent", "holiday_controller.lifedayServerStart startUniverseWideEvent reports FAILURE to start universe wide event.");
+                    //CustomerServiceLog("holidayEvent", "holiday_controller.lifedayServerStart startUniverseWideEvent reports FAILURE to start universe wide event.");
                 }
                 else 
                 {
-                    CustomerServiceLog("holidayEvent", "holiday_controller.lifedayServerStart startUniverseWideEvent reports SUCCESS starting universe wide event.");
+                    //CustomerServiceLog("holidayEvent", "holiday_controller.lifedayServerStart startUniverseWideEvent reports SUCCESS starting universe wide event.");
                 }
             }
         }
@@ -275,14 +275,14 @@ public class holiday_controller extends script.base_script
     }
     public int lovedayServerStart(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "holiday_controller.lovedayServerStart Love Day event handler called.");
+        //CustomerServiceLog("holidayEvent", "holiday_controller.lovedayServerStart Love Day event handler called.");
         String lovedayString = getCurrentUniverseWideEvents();
         int loveday = lovedayString.indexOf("loveday");
         String lovedayRunning = getConfigSetting("GameServer", "loveday");
-        CustomerServiceLog("holidayEvent", "holiday_controller.lovedayServerStart lovedayString: " + lovedayString + " loveday: " + loveday + " lovedayRunning: " + lovedayRunning);
+        //CustomerServiceLog("holidayEvent", "holiday_controller.lovedayServerStart lovedayString: " + lovedayString + " loveday: " + loveday + " lovedayRunning: " + lovedayRunning);
         if (lovedayRunning == null)
         {
-            CustomerServiceLog("holidayEvent", "holiday_controller.lovedayServerStart event is either not running or not in the server configs.");
+            //CustomerServiceLog("holidayEvent", "holiday_controller.lovedayServerStart event is either not running or not in the server configs.");
             if (loveday > -1)
             {
                 stopUniverseWideEvent("loveday");
@@ -294,11 +294,11 @@ public class holiday_controller extends script.base_script
             {
                 if (!startUniverseWideEvent("loveday"))
                 {
-                    CustomerServiceLog("holidayEvent", "holiday_controller.lovedayServerStart startUniverseWideEvent reports FAILURE to start universe wide event.");
+                    //CustomerServiceLog("holidayEvent", "holiday_controller.lovedayServerStart startUniverseWideEvent reports FAILURE to start universe wide event.");
                 }
                 else 
                 {
-                    CustomerServiceLog("holidayEvent", "holiday_controller.lovedayServerStart startUniverseWideEvent reports SUCCESS starting universe wide event.");
+                    //CustomerServiceLog("holidayEvent", "holiday_controller.lovedayServerStart startUniverseWideEvent reports SUCCESS starting universe wide event.");
                 }
             }
         }
@@ -306,14 +306,14 @@ public class holiday_controller extends script.base_script
     }
     public int empiredayServerStart(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "holiday_controller.empiredayServerStart Empire Day event handler called.");
+        //CustomerServiceLog("holidayEvent", "holiday_controller.empiredayServerStart Empire Day event handler called.");
         String empiredayString = getCurrentUniverseWideEvents();
         int empireday = empiredayString.indexOf("empireday_ceremony");
         String empiredayRunning = getConfigSetting("GameServer", "empireday_ceremony");
-        CustomerServiceLog("holidayEvent", "holiday_controller.empiredayServerStart empiredayString: " + empiredayString + " empireday: " + empireday + " empiredayRunning: " + empiredayRunning);
+        //CustomerServiceLog("holidayEvent", "holiday_controller.empiredayServerStart empiredayString: " + empiredayString + " empireday: " + empireday + " empiredayRunning: " + empiredayRunning);
         if (empiredayRunning == null)
         {
-            CustomerServiceLog("holidayEvent", "holiday_controller.empiredayServerStart event is either not running or not in the server configs.");
+            //CustomerServiceLog("holidayEvent", "holiday_controller.empiredayServerStart event is either not running or not in the server configs.");
             if (empireday > -1)
             {
                 stopUniverseWideEvent("empireday_ceremony");
@@ -321,16 +321,16 @@ public class holiday_controller extends script.base_script
         }
         else if (empiredayRunning.equals("true") || empiredayRunning.equals("1"))
         {
-            CustomerServiceLog("holidayEvent", "holiday_controller.empiredayServerStart event is starting.");
+            //CustomerServiceLog("holidayEvent", "holiday_controller.empiredayServerStart event is starting.");
             if (empireday < 0)
             {
                 if (!startUniverseWideEvent("empireday_ceremony"))
                 {
-                    CustomerServiceLog("holidayEvent", "holiday_controller.empiredayServerStart startUniverseWideEvent reports FAILURE to start universe wide event.");
+                    //CustomerServiceLog("holidayEvent", "holiday_controller.empiredayServerStart startUniverseWideEvent reports FAILURE to start universe wide event.");
                 }
                 else 
                 {
-                    CustomerServiceLog("holidayEvent", "holiday_controller.empiredayServerStart startUniverseWideEvent reports SUCCESS starting universe wide event.");
+                    //CustomerServiceLog("holidayEvent", "holiday_controller.empiredayServerStart startUniverseWideEvent reports SUCCESS starting universe wide event.");
                 }
             }
         }

@@ -446,7 +446,7 @@ public class buff_handler extends script.base_script
         int playerLevel = getLevel(self);
         if (playerLevel < 90)
         {
-            CustomerServiceLog("buff", "xpBonusGeneralAddBuff Buff used by player: " + self + " Name: " + getName(self) + " Player Level: " + playerLevel + " Effect: " + effectName + " subtype:" + subtype + " duration: " + duration + " value: " + value + " buffName: " + buffName + " caster: " + caster);
+            //CustomerServiceLog("buff", "xpBonusGeneralAddBuff Buff used by player: " + self + " Name: " + getName(self) + " Player Level: " + playerLevel + " Effect: " + effectName + " subtype:" + subtype + " duration: " + duration + " value: " + value + " buffName: " + buffName + " caster: " + caster);
             String[] xpArray = 
             {
                 "crafting",
@@ -460,13 +460,13 @@ public class buff_handler extends script.base_script
         }
         else if (subtype.equals("tcg_xp_buff"))
         {
-            CustomerServiceLog("buff", "xpBonusGeneralAddBuff Buff (TCG SPECIFIC BUFF OBJECT) used by player: " + self + " Name: " + getName(self) + " Player Level: " + playerLevel + ". Since player is 90th Lvl, this player receives a random collection object.");
+            //CustomerServiceLog("buff", "xpBonusGeneralAddBuff Buff (TCG SPECIFIC BUFF OBJECT) used by player: " + self + " Name: " + getName(self) + " Player Level: " + playerLevel + ". Since player is 90th Lvl, this player receives a random collection object.");
             obj_id collectionItem = collection.grantRandomCollectionItem(self, "datatables/loot/loot_items/collectible/magseal_loot.iff", "collections");
             if (!isValidId(collectionItem) || !exists(collectionItem))
             {
-                CustomerServiceLog("buff", "xpBonusGeneralAddBuff Buff (TCG SPECIFIC BUFF OBJECT) used by player: " + self + " Name: " + getName(self) + " Player Level: " + playerLevel + ". The collection system reports that a collectible object WAS NOT recieved by the player due to an internal error. Please notify SWG design.");
+                //CustomerServiceLog("buff", "xpBonusGeneralAddBuff Buff (TCG SPECIFIC BUFF OBJECT) used by player: " + self + " Name: " + getName(self) + " Player Level: " + playerLevel + ". The collection system reports that a collectible object WAS NOT recieved by the player due to an internal error. Please notify SWG design.");
             }
-            CustomerServiceLog("buff", "xpBonusGeneralAddBuff Buff (TCG SPECIFIC BUFF OBJECT) used by player: " + self + " Name: " + getName(self) + " Player Level: " + playerLevel + ". The collection system reports that the collectible object: " + getName(collectionItem) + " " + collectionItem + " was recieved by the player.");
+            //CustomerServiceLog("buff", "xpBonusGeneralAddBuff Buff (TCG SPECIFIC BUFF OBJECT) used by player: " + self + " Name: " + getName(self) + " Player Level: " + playerLevel + ". The collection system reports that the collectible object: " + getName(collectionItem) + " " + collectionItem + " was recieved by the player.");
             buff.removeBuff(self, buffName);
         }
         return SCRIPT_CONTINUE;
@@ -1680,15 +1680,15 @@ public class buff_handler extends script.base_script
         
         
         {
-            CustomerServiceLog("SuspectedCheaterChannel: ", "Entered BuildABuffAdd Handler, dumping info...");
-            CustomerServiceLog("SuspectedCheaterChannel: ", "BufferId: " + bufferId + " IsValid: " + isIdValid(bufferId) + " Exists: " + exists(bufferId) + " isInternalDecay: " + utils.hasScriptVar(self, "buffDecay"));
+            //CustomerServiceLog("SuspectedCheaterChannel: ", "Entered BuildABuffAdd Handler, dumping info...");
+            //CustomerServiceLog("SuspectedCheaterChannel: ", "BufferId: " + bufferId + " IsValid: " + isIdValid(bufferId) + " Exists: " + exists(bufferId) + " isInternalDecay: " + utils.hasScriptVar(self, "buffDecay"));
             for (int i = 0; i < buffComponentKeys.length; ++i)
             {
-                CustomerServiceLog("SuspectedCheaterChannel: ", "BuffComponentKey[" + i + "] = " + buffComponentKeys[i]);
+                //CustomerServiceLog("SuspectedCheaterChannel: ", "BuffComponentKey[" + i + "] = " + buffComponentKeys[i]);
             }
             for (int i = 0; i < buffComponentValues.length; ++i)
             {
-                CustomerServiceLog("SuspectedCheaterChannel: ", "BuffComponentValues[" + i + "] = " + buffComponentValues[i]);
+                //CustomerServiceLog("SuspectedCheaterChannel: ", "BuffComponentValues[" + i + "] = " + buffComponentValues[i]);
             }
         }
 
@@ -1699,7 +1699,7 @@ public class buff_handler extends script.base_script
             utils.removeScriptVar(self, "buffDecay");
         }
         
-        CustomerServiceLog("SuspectedCheaterChannel: ", "Internal Decay = " + internalDecay);
+        //CustomerServiceLog("SuspectedCheaterChannel: ", "Internal Decay = " + internalDecay);
 
         int improv = 0;
         if (isIdValid(bufferId) && exists(bufferId))
@@ -1743,7 +1743,7 @@ public class buff_handler extends script.base_script
             {
                 improvDance = utils.getIntScriptVar(self, "decayImprovDance");
                 
-                CustomerServiceLog("SuspectedCheaterChannel: ", "Using stored ImprovDance: " + improvDance);
+                //CustomerServiceLog("SuspectedCheaterChannel: ", "Using stored ImprovDance: " + improvDance);
 
             }
         }
@@ -1751,7 +1751,7 @@ public class buff_handler extends script.base_script
         {
             utils.setScriptVar(self, "decayImprovDance", improvDance);
             
-            CustomerServiceLog("SuspectedCheaterChannel: ", "Storing improvDance: " + improvDance);
+            //CustomerServiceLog("SuspectedCheaterChannel: ", "Storing improvDance: " + improvDance);
 
         }
         int actualPointsToSpend = 40;
@@ -1772,7 +1772,7 @@ public class buff_handler extends script.base_script
             if (attemptingToSpendPoints > actualPointsToSpend && internalDecay == false)
             {
                 sendSystemMessage(bufferId, "ERROR: Invalid data. Discrepancy logs generated.", null);
-                CustomerServiceLog("SuspectedCheaterChannel: ", "Player (" + getName(bufferId) + " : " + bufferId + ") has tried to spend more points on inspiration buffs then they have (" + attemptingToSpendPoints + ")! The buff failed.");
+                //CustomerServiceLog("SuspectedCheaterChannel: ", "Player (" + getName(bufferId) + " : " + bufferId + ") has tried to spend more points on inspiration buffs then they have (" + attemptingToSpendPoints + ")! The buff failed.");
                 return SCRIPT_CONTINUE;
             }
         }
@@ -1789,7 +1789,7 @@ public class buff_handler extends script.base_script
                 {
                     if (internalDecay == false)
                     {
-                        CustomerServiceLog("SuspectedCheaterChannel: ", "Player (" + getName(bufferId) + " : " + bufferId + ") has passed an out of bounds build-a-buff value (" + buffComponentValues[i] + ") which has a cap of (" + maxTimes + "). HAX!");
+                        //CustomerServiceLog("SuspectedCheaterChannel: ", "Player (" + getName(bufferId) + " : " + bufferId + ") has passed an out of bounds build-a-buff value (" + buffComponentValues[i] + ") which has a cap of (" + maxTimes + "). HAX!");
                         sendSystemMessage(bufferId, "ERROR: Capping invalid buff values. Discrepancy logs generated.", null);
                     }
                     buffComponentValues[i] = maxTimes;
@@ -1813,12 +1813,12 @@ public class buff_handler extends script.base_script
                                     if (utils.hasScriptVar(self, "decayAttribMod")) {
                                         attribModifier = utils.getFloatScriptVar(self, "decayAttribMod");
 
-                                        CustomerServiceLog("SuspectedCheaterChannel: ", "Using stored attribMod: " + attribModifier);
+                                        //CustomerServiceLog("SuspectedCheaterChannel: ", "Using stored attribMod: " + attribModifier);
 
                                     }
                                 } else {
 
-                                    CustomerServiceLog("SuspectedCheaterChannel: ", "Storing attribMod: " + attribModifier);
+                                    //CustomerServiceLog("SuspectedCheaterChannel: ", "Storing attribMod: " + attribModifier);
 
                                     utils.setScriptVar(self, "decayAttribMod", attribModifier);
                                 }
@@ -1856,7 +1856,7 @@ public class buff_handler extends script.base_script
 
 
                     {
-                        CustomerServiceLog("SuspectedCheaterChannel: ", "Adding Stat Modifier: " + "buildabuff_" + effect + " Value = " + buffValue + " Duration = " + duration);
+                        //CustomerServiceLog("SuspectedCheaterChannel: ", "Adding Stat Modifier: " + "buildabuff_" + effect + " Value = " + buffValue + " Duration = " + duration);
                     }
 
                     addSkillModModifier(self, "buildabuff_" + effect, effect, (int) buffValue, duration, false, true);
@@ -1892,7 +1892,7 @@ public class buff_handler extends script.base_script
 
 
                     {
-                        CustomerServiceLog("SuspectedCheaterChannel: ", "Adding Stat Modifier: " + "buildabuff_" + effect + " Value = " + buffValue + " Duration = " + duration);
+                        //CustomerServiceLog("SuspectedCheaterChannel: ", "Adding Stat Modifier: " + "buildabuff_" + effect + " Value = " + buffValue + " Duration = " + duration);
                     }
 
                     addSkillModModifier(self, "buildabuff_" + effect, effect, (int) buffValue, duration, false, true);
@@ -1944,7 +1944,7 @@ public class buff_handler extends script.base_script
                                 utils.setScriptVar(self, "buff.xpBonus.value", buffValue / 100.0f);
                                 break;
                             default: {
-                                CustomerServiceLog("SuspectedCheaterChannel: ", "Adding Stat Modifier: " + "buildabuff_" + effect + " Value = " + buffValue + " Duration = " + duration);
+                                //CustomerServiceLog("SuspectedCheaterChannel: ", "Adding Stat Modifier: " + "buildabuff_" + effect + " Value = " + buffValue + " Duration = " + duration);
                             }
 
                             addSkillModModifier(self, "buildabuff_" + effect, effect, (int) buffValue, duration, false, true);
@@ -4237,7 +4237,7 @@ public class buff_handler extends script.base_script
     }
     public int gcwBonusGeneralAddBuffHandler(obj_id self, String effectName, String subtype, float duration, float value, String buffName, obj_id caster) throws InterruptedException
     {
-        CustomerServiceLog("buff", "gcwBonusGeneral Buff used by player: " + self + " Name: " + getName(self) + " Effect: " + effectName + " subtype:" + subtype + " duration: " + duration + " value: " + value + " buffName: " + buffName + " caster: " + caster);
+        //CustomerServiceLog("buff", "gcwBonusGeneral Buff used by player: " + self + " Name: " + getName(self) + " Effect: " + effectName + " subtype:" + subtype + " duration: " + duration + " value: " + value + " buffName: " + buffName + " caster: " + caster);
         utils.setScriptVar(self, "buff.gcwBonusGeneral.value", value / 100);
         return SCRIPT_CONTINUE;
     }
@@ -4281,16 +4281,16 @@ public class buff_handler extends script.base_script
         holiday.setEventLockOutTimeStamp(self, holiday.EMPIRE_DAY_RECRUITMENT_TIMESTAMP);
         if (hasObjVar(self, holiday.EMPIRE_DAY_BUFF_TRACKER))
         {
-            CustomerServiceLog("holidayEvent", "buff_handler.empireDayImperialRecruitmentRemoveBuffHandler: Player: (" + self + ") is IMPERIAL and updating leader board because this is the second buff.");
+            //CustomerServiceLog("holidayEvent", "buff_handler.empireDayImperialRecruitmentRemoveBuffHandler: Player: (" + self + ") is IMPERIAL and updating leader board because this is the second buff.");
             if (!updateEmpireDayLeaderBoard(self, holiday.IMPERIAL_PLAYER))
             {
-                CustomerServiceLog("holidayEvent", "buff_handler.empireDayImperialRecruitmentRemoveBuffHandler: updateEmpireDayLeaderBoard reports that updating score for Player: (" + self + ") FAILED.");
+                //CustomerServiceLog("holidayEvent", "buff_handler.empireDayImperialRecruitmentRemoveBuffHandler: updateEmpireDayLeaderBoard reports that updating score for Player: (" + self + ") FAILED.");
             }
             removeObjVar(self, holiday.EMPIRE_DAY_BUFF_TRACKER);
         }
         else 
         {
-            CustomerServiceLog("holidayEvent", "buff_handler.empireDayImperialRecruitmentRemoveBuffHandler: Player: (" + self + ") is finishing their first buff. The leader board will not be updated.");
+            //CustomerServiceLog("holidayEvent", "buff_handler.empireDayImperialRecruitmentRemoveBuffHandler: Player: (" + self + ") is finishing their first buff. The leader board will not be updated.");
             setObjVar(self, holiday.EMPIRE_DAY_BUFF_TRACKER, true);
         }
         return SCRIPT_CONTINUE;
@@ -4311,16 +4311,16 @@ public class buff_handler extends script.base_script
         holiday.setEventLockOutTimeStamp(self, holiday.EMPIRE_DAY_RESISTANCE_TIMESTAMP);
         if (hasObjVar(self, holiday.EMPIRE_DAY_BUFF_TRACKER))
         {
-            CustomerServiceLog("holidayEvent", "buff_handler.empireDayRebelResistanceRemoveBuffHandler: Player: (" + self + ") is REBEL and updating leader board because this is the second buff.");
+            //CustomerServiceLog("holidayEvent", "buff_handler.empireDayRebelResistanceRemoveBuffHandler: Player: (" + self + ") is REBEL and updating leader board because this is the second buff.");
             if (!updateEmpireDayLeaderBoard(self, holiday.REBEL_PLAYER))
             {
-                CustomerServiceLog("holidayEvent", "buff_handler.empireDayRebelResistanceRemoveBuffHandler: updateEmpireDayLeaderBoard reports that updating score for Player: (" + self + ") FAILED.");
+                //CustomerServiceLog("holidayEvent", "buff_handler.empireDayRebelResistanceRemoveBuffHandler: updateEmpireDayLeaderBoard reports that updating score for Player: (" + self + ") FAILED.");
             }
             removeObjVar(self, holiday.EMPIRE_DAY_BUFF_TRACKER);
         }
         else 
         {
-            CustomerServiceLog("holidayEvent", "buff_handler.empireDayRebelResistanceRemoveBuffHandler: Player: (" + self + ") is finishing their first buff. The leader board will not be updated.");
+            //CustomerServiceLog("holidayEvent", "buff_handler.empireDayRebelResistanceRemoveBuffHandler: Player: (" + self + ") is finishing their first buff. The leader board will not be updated.");
             setObjVar(self, holiday.EMPIRE_DAY_BUFF_TRACKER, true);
         }
         return SCRIPT_CONTINUE;
@@ -4341,16 +4341,16 @@ public class buff_handler extends script.base_script
         holiday.setEventLockOutTimeStamp(self, holiday.EMPIRE_DAY_PROPAGANDA_TIMESTAMP);
         if (hasObjVar(self, holiday.EMPIRE_DAY_BUFF_TRACKER))
         {
-            CustomerServiceLog("holidayEvent", "buff_handler.empireDayImperialPropagandaRemoveBuffHandler: Player: (" + self + ") is IMPERIAL and updating leader board because this is the second buff.");
+            //CustomerServiceLog("holidayEvent", "buff_handler.empireDayImperialPropagandaRemoveBuffHandler: Player: (" + self + ") is IMPERIAL and updating leader board because this is the second buff.");
             if (!updateEmpireDayLeaderBoard(self, holiday.IMPERIAL_PLAYER))
             {
-                CustomerServiceLog("holidayEvent", "buff_handler.empireDayImperialPropagandaRemoveBuffHandler: updateEmpireDayLeaderBoard reports that updating score for Player: (" + self + ") FAILED.");
+                //CustomerServiceLog("holidayEvent", "buff_handler.empireDayImperialPropagandaRemoveBuffHandler: updateEmpireDayLeaderBoard reports that updating score for Player: (" + self + ") FAILED.");
             }
             removeObjVar(self, holiday.EMPIRE_DAY_BUFF_TRACKER);
         }
         else 
         {
-            CustomerServiceLog("holidayEvent", "buff_handler.empireDayImperialPropagandaRemoveBuffHandler: Player: (" + self + ") is finishing their first buff. The leader board will not be updated.");
+            //CustomerServiceLog("holidayEvent", "buff_handler.empireDayImperialPropagandaRemoveBuffHandler: Player: (" + self + ") is finishing their first buff. The leader board will not be updated.");
             setObjVar(self, holiday.EMPIRE_DAY_BUFF_TRACKER, true);
         }
         return SCRIPT_CONTINUE;
@@ -4371,16 +4371,16 @@ public class buff_handler extends script.base_script
         holiday.setEventLockOutTimeStamp(self, holiday.EMPIRE_DAY_VANDAL_TIMESTAMP);
         if (hasObjVar(self, holiday.EMPIRE_DAY_BUFF_TRACKER))
         {
-            CustomerServiceLog("holidayEvent", "buff_handler.empireDayRebelVandalRemoveBuffHandler: Player: (" + self + ") is REBEL updating leader board because this is the second buff.");
+            //CustomerServiceLog("holidayEvent", "buff_handler.empireDayRebelVandalRemoveBuffHandler: Player: (" + self + ") is REBEL updating leader board because this is the second buff.");
             if (!updateEmpireDayLeaderBoard(self, holiday.REBEL_PLAYER))
             {
-                CustomerServiceLog("holidayEvent", "buff_handler.empireDayRebelVandalRemoveBuffHandler: updateEmpireDayLeaderBoard reports that updating score for Player: (" + self + ") FAILED.");
+                //CustomerServiceLog("holidayEvent", "buff_handler.empireDayRebelVandalRemoveBuffHandler: updateEmpireDayLeaderBoard reports that updating score for Player: (" + self + ") FAILED.");
             }
             removeObjVar(self, holiday.EMPIRE_DAY_BUFF_TRACKER);
         }
         else 
         {
-            CustomerServiceLog("holidayEvent", "buff_handler.empireDayRebelVandalRemoveBuffHandler: Player: (" + self + ") is finishing their first buff. The leader board will not be updated.");
+            //CustomerServiceLog("holidayEvent", "buff_handler.empireDayRebelVandalRemoveBuffHandler: Player: (" + self + ") is finishing their first buff. The leader board will not be updated.");
             setObjVar(self, holiday.EMPIRE_DAY_BUFF_TRACKER, true);
         }
         return SCRIPT_CONTINUE;
@@ -4391,28 +4391,28 @@ public class buff_handler extends script.base_script
         {
             return false;
         }
-        CustomerServiceLog("holidayEvent", "buff_handler.updateEmpireDayLeaderBoard: Updating leaderboard with Player: " + player + " of faction: " + faction + "score");
+        //CustomerServiceLog("holidayEvent", "buff_handler.updateEmpireDayLeaderBoard: Updating leaderboard with Player: " + player + " of faction: " + faction + "score");
         if (!hasObjVar(player, holiday.PLAYER_EMPIRE_DAY_SCORE))
         {
-            CustomerServiceLog("holidayEvent", "buff_handler.updateEmpireDayLeaderBoard: Updating leaderboard with Player: " + player + " HAS NO SCORE. FAILING UPDATE");
+            //CustomerServiceLog("holidayEvent", "buff_handler.updateEmpireDayLeaderBoard: Updating leaderboard with Player: " + player + " HAS NO SCORE. FAILING UPDATE");
             return false;
         }
         int playerScore = getIntObjVar(player, holiday.PLAYER_EMPIRE_DAY_SCORE);
         if (playerScore <= 0)
         {
-            CustomerServiceLog("holidayEvent", "buff_handler.updateEmpireDayLeaderBoard: Updating leaderboard with Player: " + player + " HAS A CORRUPT SCORE. FAILING UPDATE");
+            //CustomerServiceLog("holidayEvent", "buff_handler.updateEmpireDayLeaderBoard: Updating leaderboard with Player: " + player + " HAS A CORRUPT SCORE. FAILING UPDATE");
             return false;
         }
         String playerName = getPlayerFullName(player);
         if (playerName == null || playerName.length() <= 0)
         {
-            CustomerServiceLog("holidayEvent", "buff_handler.updateEmpireDayLeaderBoard: Updating leaderboard with Player: " + player + " HAS AN INVALID NAME. FAILING UPDATE");
+            //CustomerServiceLog("holidayEvent", "buff_handler.updateEmpireDayLeaderBoard: Updating leaderboard with Player: " + player + " HAS AN INVALID NAME. FAILING UPDATE");
             return false;
         }
         obj_id tatooine = getPlanetByName("tatooine");
         if (!isIdValid(tatooine) || !exists(tatooine))
         {
-            CustomerServiceLog("holidayEvent", "buff_handler.updateEmpireDayLeaderBoard: Could not find Tatooine OID.");
+            //CustomerServiceLog("holidayEvent", "buff_handler.updateEmpireDayLeaderBoard: Could not find Tatooine OID.");
             return false;
         }
         int factionPassed = holiday.IMPERIAL_PLAYER;
@@ -4420,10 +4420,10 @@ public class buff_handler extends script.base_script
         {
             factionPassed = holiday.REBEL_PLAYER;
         }
-        CustomerServiceLog("holidayEvent", "buff_handler.updateEmpireDayLeaderBoard: FACTION PASSED: " + factionPassed);
+        //CustomerServiceLog("holidayEvent", "buff_handler.updateEmpireDayLeaderBoard: FACTION PASSED: " + factionPassed);
         if (!holiday.setEmpireDayLeaderScores(tatooine, player, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY + holiday.PLANET_VAR_SCORE, playerScore, playerName, factionPassed))
         {
-            CustomerServiceLog("holidayEvent", "buff_handler.updateEmpireDayLeaderBoard: Player: (" + player + ") " + playerName + " was unable to attain leader board data. Their score was: " + playerScore);
+            //CustomerServiceLog("holidayEvent", "buff_handler.updateEmpireDayLeaderBoard: Player: (" + player + ") " + playerName + " was unable to attain leader board data. Their score was: " + playerScore);
             return false;
         }
         return true;
