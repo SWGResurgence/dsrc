@@ -5,7 +5,7 @@ attributes = [
 	[name = "crafting" "complexity", experiment = "" "", value = 25..25],
 	[name = "crafting" "xp", experiment = "" "", value = 0..0],
 	[name = "crafting" "extractRate", experiment = "crafting" "expEffeciency", value = 30..70],
-	[name = "crafting" "hopperSize", experiment = "crafting" "expStorage", value = 30000..220000],
+	[name = "crafting" "hopperSize", experiment = "crafting" "expStorage", value = 30000..80000],
 	[name = "crafting" "hitPoints", experiment = "crafting" "expDurability", value = 5000..7000]]
 
 slots = [
@@ -18,7 +18,7 @@ slots = [
 	[name = "craft_structure_ingredients_n" "power_supply_unit", hardpoint = ""],
 	[name = "craft_structure_ingredients_n" "bio_storage_unit", hardpoint = ""],
 	[name = "craft_structure_ingredients_n" "resource_handling_system", hardpoint = ""]]
-	[name = "craft_structure_ingredients_n" "armor_protection", hardpoint = ""]]
+//	[name = "craft_structure_ingredients_n" "armor_protection", hardpoint = ""]]
 
 craftedSharedTemplate="object/tangible/deed/harvester_deed/shared_harvester_creature_deed.iff"
 
