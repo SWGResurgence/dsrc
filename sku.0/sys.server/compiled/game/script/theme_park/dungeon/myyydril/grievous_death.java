@@ -1,45 +1,34 @@
 package script.theme_park.dungeon.myyydril;
 
 import script.dictionary;
-import script.library.ai_lib;
-import script.library.static_item;
-import script.library.utils;
+import script.library.*;
+import script.location;
 import script.obj_id;
 
-public class grievous_death extends script.base_script
-{
-    public grievous_death()
-    {
-    }
-    public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
-    {
+public class grievous_death extends script.base_script {
+    public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException {
         obj_id corpseInventory = utils.getInventoryContainer(self);
-        if (corpseInventory == null)
-        {
+        if (corpseInventory == null) {
             return SCRIPT_CONTINUE;
         }
-        if (!isIdValid(self))
-        {
+        if (!isIdValid(self)) {
             return SCRIPT_CONTINUE;
         }
         createMyLoot(self);
         return SCRIPT_CONTINUE;
     }
-    public void createMyLoot(obj_id self) throws InterruptedException
-    {
+    public void createMyLoot(obj_id self) throws InterruptedException {
         obj_id corpseInventory = utils.getInventoryContainer(self);
-        if (corpseInventory == null)
-        {
+        if (corpseInventory == null) {
             return;
         }
         String mobType = ai_lib.getCreatureName(self);
-        if (mobType == null)
-        {
+        if (mobType == null) {
             return;
         }
         int x = rand(1, 100);
-        if (x < 15){  // 14% chance at dropping bonus loot (at least a Bane's Heart crystal)
-            static_item.createNewItemFunction("item_color_crystal_02_16", corpseInventory);
+        if (x < 15){  // 14% chance at dropping bonus loot (at least a Bane's Heart crystal) 
+           static_item.createNewItemFunction("item_color_crystal_02_16", corpseInventory);
 			if(x < 3){ // 2% chance to drop Grievous Gutsack
 				static_item.createNewItemFunction("item_tcg_loot_reward_series3_general_grievous_gutsack", corpseInventory);
 			}
