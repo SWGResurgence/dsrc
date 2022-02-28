@@ -1,8 +1,12 @@
 package script.theme_park.dungeon.myyydril;
 
 import script.dictionary;
+
 import script.library.*;
-import script.location;
+import script.library.ai_lib;
+import script.library.static_item;
+import script.library.utils;
+
 import script.obj_id;
 
 public class grievous_death extends script.base_script {
