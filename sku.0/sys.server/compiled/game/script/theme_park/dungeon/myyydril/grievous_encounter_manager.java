@@ -193,7 +193,7 @@ public class grievous_encounter_manager extends script.base_script
         setObjVar(self, "grievous_encounter.numMobs", num);
         if (num <= 0)
         {
-            obj_id[] players = getEventPlayersInDungeon(getTopMostContainer(self));
+            obj_id[] players = getPlayersInDungeon(getTopMostContainer(self));
             if (players != null && players.length > 0)
             {
                 for (obj_id player : players) {
@@ -207,9 +207,27 @@ public class grievous_encounter_manager extends script.base_script
             messageTo(self, "handleEndEncounter", params, 60.0f, false);
         }
         
+        // HEROIC SYSTEM BEGIN \\
+        
+        dictionary dict = new dictionary();
+        dict.put("tokenIndex", 38);
+        dict.put("tokenCount", 5);
+        utils.messageTo(players, "handleAwardToken", dict, 0, false);
+        obj_id group = getGroupObject(players[0]);
+        int calendarTime = getCalendarTime();
+        String realTime = getCalendarTimeStringLocal(calendarTime);
+        CustomerServiceLog("instance-necrosis", "N-K Necrosis Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
+        CustomerServiceLog("instance-necrosis", "Group (" + group + ") consists of: ");
+        for (int i = 0; i < players.length; ++i) {
+            String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
+            CustomerServiceLog("instance-necrosis", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
+        }
+        
+        // HEROIC SYSTEM END \\
+        
         return SCRIPT_CONTINUE;
     }
-    public obj_id[] getEventPlayersInDungeon(obj_id dungeon) throws InterruptedException
+    public obj_id[] getPlayersInDungeon(obj_id dungeon) throws InterruptedException
     {
         obj_id[] cellIds = getCellIds(dungeon);
         Vector eventPlayers = new Vector();
