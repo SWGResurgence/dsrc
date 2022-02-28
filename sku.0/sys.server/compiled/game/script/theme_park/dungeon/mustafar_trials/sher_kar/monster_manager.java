@@ -96,7 +96,7 @@ public static final boolean LOGGING = false;
         }
         return SCRIPT_CONTINUE;
     }
-	public int sherKarDied(obj_id self, obj_id players, dictionary params) throws InterruptedException {
+	public int sherKarDied(obj_id self, dictionary params) throws InterruptedException {
 		utils.sendSystemMessagePob(self, trial.MONSTER_SK_DEFEATED);
 		obj_id[] players = trial.getPlayersInDungeon(self);
 		badge.grantBadge(players, "bdg_must_kill_sher_kar");
