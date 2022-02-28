@@ -1,9 +1,7 @@
 package script.theme_park.dungeon.myyydril;
 
 import script.dictionary;
-import script.library.badge;
-import script.library.create;
-import script.library.utils;
+import library.*;
 import script.location;
 import script.obj_id;
 import script.string_id;
@@ -12,9 +10,6 @@ import java.util.Vector;
 
 public class grievous_encounter_manager extends script.base_script
 {
-    public grievous_encounter_manager()
-    {
-    }
     public static final string_id START = new string_id("dungeon/myyydril", "start");
     public static final string_id STOP = new string_id("dungeon/myyydril", "stop");
     public int OnAttach(obj_id self) throws InterruptedException
@@ -213,6 +208,25 @@ public class grievous_encounter_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+    
+    // HEROIC SYSTEM BEGIN \\
+    
+    dictionary dict = new dictionary();
+    dict.put("tokenIndex", 38);
+    dict.put("tokenCount", 5);
+    utils.messageTo(players, "handleAwardToken", dict, 0, false);
+    obj_id group = getGroupObject(players[0]);
+    int calendarTime = getCalendarTime();
+    String realTime = getCalendarTimeStringLocal(calendarTime);
+    CustomerServiceLog("instance-necrosis", "N-K Necrosis Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
+    CustomerServiceLog("instance-necrosis", "Group (" + group + ") consists of: ");
+    for (int i = 0; i < players.length; ++i) {
+        String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
+        CustomerServiceLog("instance-necrosis", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
+    }
+    
+    // HEROIC SYSTEM END \\
+    
     public obj_id[] getEventPlayersInDungeon(obj_id dungeon) throws InterruptedException
     {
         obj_id[] cellIds = getCellIds(dungeon);
