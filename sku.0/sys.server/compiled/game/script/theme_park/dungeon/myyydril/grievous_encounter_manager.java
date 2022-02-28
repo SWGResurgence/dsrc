@@ -2,9 +2,7 @@ package script.theme_park.dungeon.myyydril;
 
 import script.dictionary;
 import library.*;
-import script.location;
 import script.obj_id;
-import script.string_id;
 
 import java.util.Vector;
 
