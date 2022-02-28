@@ -15,43 +15,45 @@ public class heroic_token_box extends script.base_script
 {
     private static final string_id MNU_WITHDRAW = new string_id("token_box", "withdraw");
     private static final String[] TOKEN_OPTIONS = {
-        "Axkva Min Token of Heroism",
-        "Mos Espa Token of Heroism",
-        "Droid Factory Token of Heroism",
-        "Black Sun Token of Heroism",
-        "Exar Kun Token of Heroism",
-        "Echo Base Token of Heroism",
-        "Marauder Token of Heroism",
-        "Mustafar Token of Heroism",
-        "Veteran Reward Token",
-        "A Duty Mission Token",
-        "Rebel Battlefield Token",
-        "Imperial Battlefield Token",
-        "Imperial Station Battle Token",
-        "Rebel Station Battle Token",
-        "Rebel Alliance Galactic Civil War Token",
-        "Imperial Galactic Civil War Token",
-        "Imperial Restuss Commendation",
-        "Rebel Restuss Commendation",
-        "Empire Day Token",
-        "Remebrance Day Token",
-        "Rebel Alliance Propaganda Token",
-        "Imperial Propaganda Token",
-        "Galactic Moon Coin",
-        "Ewok Festival of Love Chak Heart",
-        "Copper Chronicles Token",
-        "Silver Chronicles Token",
-        "Gold Chronicles Token",
-        "Meatlump Lump",
-        "Midlithe Crystal",
-        "Dathomir Amber",
-        "Spider Silk",
-        "Rancor Teeth",
-        "Whuffa Leather",
-        "Rare Dried Herb",
-        "Spell Weaver Crystal",
-        "Entertainer Token of Achievement",
-        "Teasure Token of Achievement"
+        "Axkva Min Token of Heroism",               //#00
+        "Mos Espa Token of Heroism",                //#01
+        "Droid Factory Token of Heroism",           //#02
+        "Black Sun Token of Heroism",               //#03
+        "Exar Kun Token of Heroism",                //#04
+        "Echo Base Token of Heroism",               //#05
+        "Marauder Token of Heroism",                //#06
+        "Mustafar Token of Heroism",                //#07
+        "Veteran Reward Token",                     //#08
+        "A Duty Mission Token",                     //#09
+        "Rebel Battlefield Token",                  //#10
+        "Imperial Battlefield Token",               //#11
+        "Imperial Station Battle Token",            //#12
+        "Rebel Station Battle Token",               //#13
+        "Rebel Alliance Galactic Civil War Token",  //#14
+        "Imperial Galactic Civil War Token",        //#15
+        "Imperial Restuss Commendation",            //#16
+        "Rebel Restuss Commendation",               //#17
+        "Empire Day Token",                         //#18
+        "Remebrance Day Token",                     //#19
+        "Rebel Alliance Propaganda Token",          //#20
+        "Imperial Propaganda Token",                //#21
+        "Galactic Moon Coin",                       //#22
+        "Ewok Festival of Love Chak Heart",         //#23
+        "Copper Chronicles Token",                  //#24
+        "Silver Chronicles Token",                  //#25
+        "Gold Chronicles Token",                    //#26
+        "Meatlump Lump",                            //#27
+        "Midlithe Crystal",                         //#28
+        "Dathomir Amber",                           //#29
+        "Spider Silk",                              //#30
+        "Rancor Teeth",                             //#31  
+        "Whuffa Leather",                           //#32
+        "Rare Dried Herb",                          //#33
+        "Spell Weaver Crystal",                     //#34
+        "Resurgence Token of Achievement",          //#35
+        "Entertainer Token of Achievement",         //#36
+        "Teasure Token of Achievement",             //#37
+        "Kashyyyk Token of Freedom"                 //#38
     };
     private static final int[] TOKENS = {
         0,
@@ -90,7 +92,9 @@ public class heroic_token_box extends script.base_script
         33,
         34,
         35,
-        36
+        36,
+        37,
+        38
     };    
     public int OnAttach(obj_id self) throws InterruptedException
     {
