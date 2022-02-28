@@ -1120,6 +1120,42 @@ public class trial extends script.base_script
             return null;
         }
     }
+    public obj_id[] getEventPlayersInDungeon(obj_id dungeon) throws InterruptedException
+    {
+        obj_id[] cellIds = getCellIds(dungeon);
+        Vector eventPlayers = new Vector();
+        eventPlayers.setSize(0);
+        for (obj_id cellId : cellIds) {
+            obj_id[] contents = getContents(cellId);
+            if (contents != null && contents.length > 0) {
+                for (obj_id content : contents) {
+                    if (isPlayer(content) && hasScript(content, "theme_park.dungeon.myyydril.grievous_player")) {
+                        if (validatePlayerSessionId(content, dungeon)) {
+                            eventPlayers = utils.addElement(eventPlayers, content);
+                        }
+                    }
+                }
+            }
+        }
+        if (eventPlayers == null)
+        {
+            return null;
+        }
+        obj_id[] convertedArray = new obj_id[0];
+        if (eventPlayers != null)
+        {
+            convertedArray = new obj_id[eventPlayers.size()];
+            eventPlayers.toArray(convertedArray);
+        }
+        if (convertedArray.length > 0)
+        {
+            return convertedArray;
+        }
+        else 
+        {
+            return null;
+        }
+    }
     public static obj_id[] getValidTargetsInDungeon(obj_id dungeon) throws InterruptedException
     {
         obj_id[] players = getPlayersInDungeon(dungeon);

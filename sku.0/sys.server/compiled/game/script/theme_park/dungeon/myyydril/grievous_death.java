@@ -12,7 +12,7 @@ import script.obj_id;
 public class grievous_death extends script.base_script {
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException {
         obj_id corpseInventory = utils.getInventoryContainer(self);
-        obj_id[] players = trial.getPlayersInDungeon(self);
+        obj_id[] players = trial.getEventPlayersInDungeon(self);
         if (corpseInventory == null) {
             return SCRIPT_CONTINUE;
         }
