@@ -8,6 +8,7 @@ import script.obj_id;
 public class grievous_death extends script.base_script {
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException {
         obj_id corpseInventory = utils.getInventoryContainer(self);
+        obj_id[] players = trial.getPlayersInDungeon(self);
         if (corpseInventory == null) {
             return SCRIPT_CONTINUE;
         }
@@ -15,6 +16,24 @@ public class grievous_death extends script.base_script {
             return SCRIPT_CONTINUE;
         }
         createMyLoot(self);
+        
+        // HEROIC SYSTEM BEGIN \\
+        
+        dict.put("tokenIndex", 7);
+        dict.put("tokenCount", 2);
+        utils.messageTo(players, "handleAwardtoken", dict, 0, false);
+        obj_id group = getGroupObject(players[0]);
+        int calendarTime = getCalendarTime();
+        String realTime = getCalendarTimeStringLocal(calendarTime);
+        CustomerServiceLog("instance-necrosis", "N-K Necrosis Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
+        CustomerServiceLog("instance-necrosis", "Group (" + group + ") consists of: ");
+        for (int i = 0; i < players.length; ++i) {
+            String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
+            CustomerServiceLog("instance-necrosis", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
+        }
+        
+        // HEROIC SYSTEM END \\
+        
         return SCRIPT_CONTINUE;
     }
     public void createMyLoot(obj_id self) throws InterruptedException {
