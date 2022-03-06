@@ -9,7 +9,7 @@ public class terminal_newsnet extends script.base_script {
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException {
         if (item == menu_info_types.ITEM_USE) {
-            launchClientWebBrowser(player, "https://swgresurgence.com/wiki/index.php/Update_History");
+            launchClientWebBrowser(player, "https://topg.org/swg-private-servers/server-641110");
         }
         return SCRIPT_CONTINUE;
     }
