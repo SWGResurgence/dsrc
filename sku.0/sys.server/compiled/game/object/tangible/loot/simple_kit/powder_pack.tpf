@@ -5,4 +5,3 @@
 
 sharedTemplate = "object/tangible/loot/simple_kit/shared_powder_pack.iff"
 
-scripts = +["object.autostack"]
