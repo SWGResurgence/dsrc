@@ -1978,8 +1978,8 @@ of_pt_proxy_7	pt_proxy			62	command.of_deb_def	1	paint_target	7		0		0		0		0	STAT
 of_pt_proxy_8	pt_proxy			72	command.of_deb_def	1	paint_target	8		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 of_deadeye_debuff	deadeye_debuff			70	command.of_deadeye_debuff	15	action_burn	50	glancing_blow_vulnerable	30		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 of_emergency_shield	of_emergency_shield			80	command.of_emergency_shield	10	combat_divide_damage_taken	75	combat_divide_damage_dealt	75		0		0		0	STATE_NONE	none	clienteffect/of_em_shields.cef		1	0		1	1	1	0	1	1	0	1	1	1
-banner_buff_entertainer	banner_ent			1	Roadmap.entertainer	600	expertise_dodge	2	expertise_action_all	2	expertise_glancing_blow_all	2	expertise_critical_niche_all	2		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-banner_buff_trader	banner_trad			1	Roadmap.trader	600	luck_modified	250	expertise_reverse_engineering_bonus	5		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+banner_buff_entertainer	banner_ent			1	Roadmap.entertainer	1800	expertise_dodge	2	expertise_action_all	2	expertise_glancing_blow_all	2	expertise_critical_niche_all	2		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+banner_buff_trader	banner_trad			1	Roadmap.trader	1800	luck_modified	250		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 en_action_regen	en_action_regen			10	command.sm_general_elbow_grease	10	expertise_action_weapon_melee	60		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 set_bonus_trader_1	setBonusTrader			1	command.powerBoost	-1	stamina_modified	60		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 set_bonus_trader_2	setBonusTrader			1	command.powerBoost	-1	stamina_modified	90	agility_modified	90		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
