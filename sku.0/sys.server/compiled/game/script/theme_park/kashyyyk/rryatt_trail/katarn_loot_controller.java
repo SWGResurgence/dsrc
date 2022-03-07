@@ -6,7 +6,7 @@ import script.dictionary;
 import script.library.*;
 import script.library.ai_lib;
 import script.library.static_item;
-import script.utils;
+import script.library.utils;
 
 import script.obj_id;
 
