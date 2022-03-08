@@ -70,7 +70,7 @@ public class corellia_times_vendor extends script.base_script
         }
         if (corellia_times_vendor_condition_canPurchase(player, npc))
         {
-            corellia_times_vendor_action_showTokenVendorUI(player, npc);
+            corellia_times_vendor_action_showResourceVendorUI(player, npc);
             string_id message = new string_id(c_stringFile, "s_4");
             chat.chat(npc, player, message);
             return SCRIPT_CONTINUE;
