@@ -7,7 +7,7 @@ import script.library.utils;
 
 public class corellia_times_vendor extends script.base_script {
     public static String c_stringFile = "conversation/corellia_times_vendor";
-    public boolean corellia_times_vendor_condition_defaultCondition(obj_id player, obj_id npc) throws InterruptedException {
+    public boolean corellia_times_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException {
         return true;
     }
     public void corellia_times_vendor_action_showTokenVendorUI(obj_id player, obj_id npc) throws InterruptedException {
