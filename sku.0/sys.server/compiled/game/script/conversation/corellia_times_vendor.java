@@ -19,7 +19,7 @@ public class corellia_times_vendor extends script.base_script
     {
         return true;
     }
-    public void corellia_times_vendor_action_showResourceVendorUI(obj_id player, obj_id npc) throws InterruptedException
+    public void corellia_times_vendor_action_showTokenVendorUI(obj_id player, obj_id npc) throws InterruptedException
     {
         dictionary d = new dictionary();
         d.put("player", player);
