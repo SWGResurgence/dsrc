@@ -6,10 +6,7 @@ import script.library.chat;
 import script.library.utils;
 
 public class meatlump_vendor extends script.base_script {
-    public class meatlump_vendor() {
-    }
     public static String c_stringFile = "conversation/meatlump_vendor";
-    
     public boolean meatlump_vendor_condition_defaultCondition(obj_id player, obj_id npc) throws InterruptedException {
         return true;
     }
@@ -72,3 +69,5 @@ public class meatlump_vendor extends script.base_script {
         chat.chat(npc, "Error:  Fell through all branches and responses for OnNpcConversationResponse.");
         utils.removeScriptVar(player, "conversation.meatlump_vendor.branchId");
         return SCRIPT_CONTINUE;
+    }
+}

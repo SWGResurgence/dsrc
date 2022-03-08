@@ -6,14 +6,10 @@ import script.library.chat;
 import script.library.utils;
 
 public class corellia_times_vendor extends script.base_script {
-    public class corellia_times_vendor() {
-    }
     public static String c_stringFile = "conversation/corellia_times_vendor";
-    
     public boolean corellia_times_vendor_condition_defaultCondition(obj_id player, obj_id npc) throws InterruptedException {
         return true;
     }
-    
     public void corellia_times_vendor_action_showTokenVendorUI(obj_id player, obj_id npc) throws InterruptedException {
         dictionary d = new dictionary();
         d.put("player", player);
@@ -72,3 +68,5 @@ public class corellia_times_vendor extends script.base_script {
         chat.chat(npc, "Error:  Fell through all branches and responses for OnNpcConversationResponse.");
         utils.removeScriptVar(player, "conversation.corellia_times_vendor.branchId");
         return SCRIPT_CONTINUE;
+    }
+}

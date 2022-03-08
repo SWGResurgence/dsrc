@@ -6,10 +6,7 @@ import script.library.chat;
 import script.library.utils;
 
 public class loveday_vendor extends script.base_script {
-    public class loveday_vendor() {
-    }
     public static String c_stringFile = "conversation/loveday_vendor";
-    
     public boolean loveday_vendor_condition_defaultCondition(obj_id player, obj_id npc) throws InterruptedException {
         return true;
     }
@@ -72,3 +69,5 @@ public class loveday_vendor extends script.base_script {
         chat.chat(npc, "Error:  Fell through all branches and responses for OnNpcConversationResponse.");
         utils.removeScriptVar(player, "conversation.loveday_vendor.branchId");
         return SCRIPT_CONTINUE;
+    }
+}
