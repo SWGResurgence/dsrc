@@ -51,7 +51,7 @@ public class corellia_times_vendor extends script.base_script {
         if (ai_lib.isInCombat(npc) || ai_lib.isInCombat(player)) {
             return SCRIPT_CONTINUE;
         }
-        if (corellia_times_vendor_condition_defaultCondition(player, npc)) {
+        if (corellia_times_vendor_condition__defaultCondition(player, npc)) {
             corellia_times_vendor_action_showTokenVendorUI(player, npc);
             string_id message = new string_id(c_stringFile, "s_6");
             chat.chat(npc, player, message);
