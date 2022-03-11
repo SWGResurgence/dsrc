@@ -498,9 +498,6 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         String allBaseData = "";
         String treePrefix = ".hq_";
         dictionary baseDic = new dictionary();
-        int faction = 0;
-        String factionName = "";
-        location loc = new location();
         for (int i = 1; i < maxBasesOnPlanet; i++)
         {
             baseDic = utils.getDictionaryScriptVar(planetId, gcw.VAR_BASE_HACK_DICTIONARY + treePrefix + i);
@@ -514,20 +511,21 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
                 {
                     allBaseData += " BASE ID: " + baseDic.getObjId("id") + sui.newLine();
                 }
-                faction = baseDic.getInt("faction");
+                int faction = baseDic.getByte("faction");
+                String faction = "";
                 switch (faction)
                 {
                     case gcw.FACTION_REBEL:
-                    factionName = "REBEL";
-                    break;
+                        factionName = "REBEL";
+                        break;
                     case gcw.FACTION_IMPERIAL:
-                    factionName = "IMPERIAL";
-                    break;
+                        factionName = "IMPERIAL";
+                        break;
                     default:
-                    factionName = "ERROR";
-                    break;
+                        factionName = "ERROR";
+                        break;
                 }
-                loc = baseDic.getLocation("location");
+                location loc = baseDic.getLocation("location");
                 int x = (int)loc.x;
                 int y = (int)loc.y;
                 int z = (int)loc.z;
