@@ -7,9 +7,6 @@ import script.library.utils;
 
 public class terminal_gcw_publish_gift extends script.terminal.base.base_terminal
 {
-    public terminal_gcw_publish_gift()
-    {
-    }
     public static final String VAR_TERMINAL_STATUS = "gcw.static_base.terminal_status";
     public static final String VAR_BASE_STATUS = "gcw.static_base.base_status";
     public static final String BASE_BEING_CAPTURED = " TERMINAL STATUS: BEING CAPTURED\n";
