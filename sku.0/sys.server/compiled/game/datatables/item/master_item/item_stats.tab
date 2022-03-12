@@ -13,8 +13,8 @@ item_jedi_robe_04_01	"constitution_modified=50,precision_modified=80"		int:armor
 item_jedi_robe_04_02	"constitution_modified=50,strength_modified=80"		int:armor.general_protection_clothing=4500	index_color_1=3							
 item_jedi_robe_04_03	"constitution_modified=80,agility_modified=5,strength_modified=50,precision_modified=50"		int:armor.general_protection_clothing=5000	index_color_1=4							
 item_jedi_robe_04_04	"constitution_modified=80,agility_modified=5,luck_modified=50,precision_modified=50"		int:armor.general_protection_clothing=5000	index_color_1=3							
-item_jedi_robe_06_01	"constitution_modified=100,strength_modified=100,luck_modified=100,precision_modified=100"		"int:armor.general_protection_clothing=5600,int:item.set.set_id=90001"	index_color_1=4							
-item_jedi_robe_06_02	"constitution_modified=100,strength_modified=100,luck_modified=100,precision_modified=100"		"int:armor.general_protection_clothing=5600,int:item.set.set_id=90001"	index_color_1=3							
+item_jedi_robe_06_01	"constitution_modified=150,strength_modified=150,luck_modified=150,precision_modified=150,agility_modified=150,expertise_glancing_blow_melee=10,expertise_glancing_blow_ranged=10,expertise_glancing_blow_all=5"		"int:armor.general_protection_clothing=6875,int:item.set.set_id=90001"	index_color_1=4							
+item_jedi_robe_06_02	"constitution_modified=150,strength_modified=150,luck_modified=150,precision_modified=150,agility_modified=150,expertise_glancing_blow_melee=10,expertise_glancing_blow_ranged=10,expertise_glancing_blow_all=5"		"int:armor.general_protection_clothing=6875,int:item.set.set_id=90001"	index_color_1=3							
 item_datapad_01_01											
 item_tooth_01_01											
 item_tooth_01_02											
