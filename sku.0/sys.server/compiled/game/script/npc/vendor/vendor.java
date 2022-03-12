@@ -99,7 +99,7 @@ public class vendor extends script.base_script
                         }
                         setObjVar(objectForSale, OBJECT_FOR_SALE_CASH_COST, creditCost);
                         setObjVar(objectForSale, OBJECT_FOR_SALE_TOKEN_COST, tokenCost);
-						setObjVar(objectForSale, OBJECT_FOR_SALE_LIMIT, limit);
+                        setObjVar(objectForSale, OBJECT_FOR_SALE_LIMIT, limit);
                         if (hasObjVar(self, VENDOR_TOKEN_TYPE))
                         {
                             String tokenList = getStringObjVar(self, VENDOR_TOKEN_TYPE);
