@@ -2388,7 +2388,8 @@ expertise_trader_sampling_collection_1	expertise																					expertise_r
 expertise_trader_sampling_collection_2	expertise_trader_sampling_collection_1									expertise_trader_sampling_collection_1												expertise_resource_sampling_increase=200				
 expertise_trader_warehousing_1	expertise_trader_business_accounting_2									expertise_trader_business_accounting_2												vendor_item_limit=500				
 expertise_trader_warehousing_2	expertise_trader_warehousing_1									expertise_trader_warehousing_1												vendor_item_limit=1000				
-expertise_trader_harvester_storage_1	expertise																					expertise_havester_storage_increase=12				
+expertise_trader_harvester_storage_1	expertise																					expertise_havester_storage_increase=6				
+expertise_trader_harvester_storage_2	expertise_trader_harvester_storage_1																					expertise_havester_storage_increase=6				
 expertise_trader_sampling_efficiency_1	expertise_trader_sampling_collection_1									expertise_trader_sampling_collection_1												expertise_resource_sampling_time_decrease=30				
 expertise_trader_personnel_management_1	expertise_trader_warehousing_2									expertise_trader_warehousing_2												manage_vendor=2				
 expertise_trader_personnel_management_2	expertise_trader_personnel_management_1									expertise_trader_personnel_management_1												manage_vendor=5				

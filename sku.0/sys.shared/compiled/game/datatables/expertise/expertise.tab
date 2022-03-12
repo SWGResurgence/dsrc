@@ -808,6 +808,7 @@ expertise_trader_sampling_collection_2	29	1	7	2			trader
 expertise_trader_warehousing_1	29	2	1	1			trader
 expertise_trader_warehousing_2	29	2	1	2			trader
 expertise_trader_harvester_storage_1	29	2	5	1			trader
+expertise_trader_harvester_storage_2	29	2	5	2			trader
 expertise_trader_sampling_efficiency_1	29	2	7	1			trader
 expertise_trader_personnel_management_1	29	3	1	1			trader
 expertise_trader_personnel_management_2	29	3	1	2			trader
