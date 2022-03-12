@@ -1509,19 +1509,11 @@ public class loot extends script.base_script
     }
     public static obj_id chroniclesCraftingLootDrop(obj_id player) throws InterruptedException
     {
-        if (hasToggledChroniclesLootOff(player))
-        {
-            return obj_id.NULL_ID;
-        }
-        return chroniclesNonCorpseLootDrop(player, "crafting", pgc_quests.PGC_CHRONICLE_BASE_CRAFTING_LOOT_CHANCE, "crafting");
+        return hasToggledChroniclesLootOff(player) ? obj_id.NULL_ID : chroniclesNonCorpseLootDrop(player, "crafting", pgc_quests.PGC_CHRONICLE_BASE_CRAFTING_LOOT_CHANCE, "crafting");
     }
     public static obj_id chroniclesPvpLootDrop(obj_id player) throws InterruptedException
     {
-        if (hasToggledChroniclesLootOff(player))
-        {
-            return obj_id.NULL_ID;
-        }
-        return chroniclesNonCorpseLootDrop(player, "pvp", pgc_quests.PGC_CHRONICLE_BASE_PVP_LOOT_CHANCE, "pvping");
+        return hasToggledChroniclesLootOff(player) ? obj_id.NULL_ID : chroniclesNonCorpseLootDrop(player, "pvp", pgc_quests.PGC_CHRONICLE_BASE_PVP_LOOT_CHANCE, "pvping");
     }
     public static obj_id chroniclesNonCorpseLootDrop(obj_id player, String relicCategory, int relicChance, String activityType) throws InterruptedException
     {
