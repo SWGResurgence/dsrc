@@ -1,10 +1,7 @@
 @base object/draft_schematic/droid/base_droid_schematic.iff
 @class draft_schematic_object_template 7
-//
-// skills used: inventor/basic general component design
-//
 
-itemsPerContainer = 25
+itemsPerContainer = 1000
 craftedObjectTemplate = "object/tangible/component/droid/crafting_module_structure.iff"
 
 slots = [
@@ -37,8 +34,6 @@ skillCommands = ["unskilled"]
 manufactureScripts = [ "systems.crafting.droid.crafted_items.crafting_droid_crafting_module" ]
 
 @class intangible_object_template 0
-
-
 @class object_template 5
 
 complexity = 35
