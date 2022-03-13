@@ -188,11 +188,9 @@ public class buff extends script.base_script
 		}
 		return true;
 	}
-    public static boolean applyBuff(obj_id target, int[] nameCrcs) throws InterruptedException {
-        for (int nameCrc : nameCrcs) {
-            applyBuff(target, null, nameCrc, 0.0f, 0.0f);
-        }
-        return true;
+    public static boolean applyBuff(obj_id target, int nameCrc) throws InterruptedException
+    {
+        return applyBuff(target, null, nameCrc, 0.0f, 0.0f);
     }
     public static boolean applyBuff(obj_id target, obj_id owner, int nameCrc) throws InterruptedException
     {
