@@ -482,9 +482,9 @@ public class buff extends script.base_script
         }
         int[] _matchedBuffs = new int[matchedBuffs.size()];
         for (int _i = 0; _i < matchedBuffs.size(); ++_i)
-		{
-			_matchedBuffs[_i] = (Integer) matchedBuffs.get(_i);
-		}
+        {
+            _matchedBuffs[_i] = (Integer) matchedBuffs.get(_i);
+        }
         return _matchedBuffs;
     }
     public static int[] getAllBuffs(obj_id target) throws InterruptedException
