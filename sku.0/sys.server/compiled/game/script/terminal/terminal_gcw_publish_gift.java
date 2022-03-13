@@ -34,7 +34,6 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
     };
     public static final String[][] PLANETS_DATA = 
     {
-        
         {
             "corellia",
             "dantooine",
@@ -44,7 +43,6 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             "talus",
             "tatooine"
         },
-        
         {
             "CORELLIA",
             "DANTOOINE",
@@ -147,17 +145,17 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             if (dict != null)
             {
                 String[] columnHeader = dict.getStringArray("column");
-                if ((columnHeader != null) && (columnHeader.length > 0))
+                if (columnHeader != null && columnHeader.length > 0S)
                 {
                     String[] columnHeaderType = dict.getStringArray("columnType");
-                    if ((columnHeaderType != null) && (columnHeaderType.length > 0) && (columnHeaderType.length == columnHeader.length))
+                    if (columnHeaderType != null && columnHeaderType.length > 0 && columnHeaderType.length == columnHeader.length)
                     {
                         boolean validColumnData = true;
                         String[][] columnData = new String[columnHeader.length][0];
                         for (int i = 0; i < columnHeader.length; ++i)
                         {
                             columnData[i] = dict.getStringArray("column" + i);
-                            if ((columnData[i] == null) || (columnData[i].length <= 0))
+                            if (columnData[i] == null || columnData[i].length <= 0)
                             {
                                 validColumnData = false;
                                 break;
