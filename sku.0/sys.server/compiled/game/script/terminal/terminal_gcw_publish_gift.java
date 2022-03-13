@@ -1,22 +1,15 @@
 package script.terminal;
 
 import script.*;
-import script.base_class.*;
-import script.combat_engine.*;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Vector;
-import script.base_script;
-
 import script.library.gcw;
-import script.library.player_structure;
 import script.library.sui;
 import script.library.utils;
-import script.library.prose;
-import script.library.trial;
 
 public class terminal_gcw_publish_gift extends script.terminal.base.base_terminal
 {
+    public terminal_gcw_publish_gift()
+    {
+    }
     public static final String VAR_TERMINAL_STATUS = "gcw.static_base.terminal_status";
     public static final String VAR_BASE_STATUS = "gcw.static_base.base_status";
     public static final String BASE_BEING_CAPTURED = " TERMINAL STATUS: BEING CAPTURED\n";
@@ -44,6 +37,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
     };
     public static final String[][] PLANETS_DATA = 
     {
+        
         {
             "corellia",
             "dantooine",
@@ -53,6 +47,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             "talus",
             "tatooine"
         },
+        
         {
             "CORELLIA",
             "DANTOOINE",
@@ -155,17 +150,17 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             if (dict != null)
             {
                 String[] columnHeader = dict.getStringArray("column");
-                if (columnHeader != null && columnHeader.length > 0)
+                if ((columnHeader != null) && (columnHeader.length > 0))
                 {
                     String[] columnHeaderType = dict.getStringArray("columnType");
-                    if (columnHeaderType != null && columnHeaderType.length > 0 && columnHeaderType.length == columnHeader.length)
+                    if ((columnHeaderType != null) && (columnHeaderType.length > 0) && (columnHeaderType.length == columnHeader.length))
                     {
                         boolean validColumnData = true;
                         String[][] columnData = new String[columnHeader.length][0];
                         for (int i = 0; i < columnHeader.length; ++i)
                         {
                             columnData[i] = dict.getStringArray("column" + i);
-                            if (columnData[i] == null || columnData[i].length <= 0)
+                            if ((columnData[i] == null) || (columnData[i].length <= 0))
                             {
                                 validColumnData = false;
                                 break;
@@ -392,7 +387,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             return SCRIPT_CONTINUE;
         }
         String gcwData = getGcwData(self, player);
-        if (gcwData == null || gcwData.isEmpty())
+        if (gcwData == null || gcwData.equals(""))
         {
             return SCRIPT_CONTINUE;
         }
@@ -503,6 +498,9 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         String allBaseData = "";
         String treePrefix = ".hq_";
         dictionary baseDic = new dictionary();
+        int faction = 0;
+        String factionName = "";
+        location loc = new location();
         for (int i = 1; i < maxBasesOnPlanet; i++)
         {
             baseDic = utils.getDictionaryScriptVar(planetId, gcw.VAR_BASE_HACK_DICTIONARY + treePrefix + i);
@@ -516,21 +514,20 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
                 {
                     allBaseData += " BASE ID: " + baseDic.getObjId("id") + sui.newLine();
                 }
-                int faction = baseDic.getByte("faction");
-                String faction = "";
+                faction = baseDic.getInt("faction");
                 switch (faction)
                 {
                     case gcw.FACTION_REBEL:
-                        factionName = "REBEL";
-                        break;
+                    factionName = "REBEL";
+                    break;
                     case gcw.FACTION_IMPERIAL:
-                        factionName = "IMPERIAL";
-                        break;
+                    factionName = "IMPERIAL";
+                    break;
                     default:
-                        factionName = "ERROR";
-                        break;
+                    factionName = "ERROR";
+                    break;
                 }
-                location loc = baseDic.getLocation("location");
+                loc = baseDic.getLocation("location");
                 int x = (int)loc.x;
                 int y = (int)loc.y;
                 int z = (int)loc.z;
@@ -633,7 +630,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         {
             return null;
         }
-        else if (planet == null || planet.isEmpty() || planetName == null || planetName.isEmpty())
+        else if (planet == null || planet.equals("") || planetName == null || planetName.equals(""))
         {
             return null;
         }
