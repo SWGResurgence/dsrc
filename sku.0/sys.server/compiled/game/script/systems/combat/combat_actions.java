@@ -8361,10 +8361,6 @@ public class combat_actions extends script.systems.combat.combat_base {
     }
 
     public int pvp_airstrike_ability(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
-        if (getTopMostContainer(self) != self) {
-            sendSystemMessage(self, new string_id("spam", "cant_do_indoors"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("pvp_airstrike_ability", self, target, params, "", "")) {
             return SCRIPT_OVERRIDE;
         }
@@ -8375,10 +8371,6 @@ public class combat_actions extends script.systems.combat.combat_base {
     }
 
     public int pvp_airstrike_rebel_ability(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
-        if (getTopMostContainer(self) != self) {
-            sendSystemMessage(self, new string_id("spam", "cant_do_indoors"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("pvp_airstrike_rebel_ability", self, target, params, "", "")) {
             return SCRIPT_OVERRIDE;
         }
@@ -12347,10 +12339,6 @@ public class combat_actions extends script.systems.combat.combat_base {
     }
 
     public int of_del_ae_dm_boss(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
-        if (getTopMostContainer(self) != self) {
-            sendSystemMessage(self, new string_id("spam", "cant_do_indoors"));
-            return SCRIPT_OVERRIDE;
-        }
         if (!combatStandardAction("of_del_ae_dm_boss", self, target, params, "", "")) {
             return SCRIPT_OVERRIDE;
         }
