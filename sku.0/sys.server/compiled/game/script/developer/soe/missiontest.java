@@ -1,4 +1,4 @@
-package script.working.breinhart;
+package script.developer.soe;
 
 import script.library.space_quest;
 import script.location;

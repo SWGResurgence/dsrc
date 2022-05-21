@@ -1,4 +1,4 @@
-package script.developer;
+package script.developer.talisa;
 
 import script.location;
 import script.obj_id;
@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 /**
  * Simple tool for getting around dungeons quickly.
  *
- * Usage: attach developer.dungeon_utility
+ * Usage: attach developer.buildout_dungeon_utility
  * Be standing in the dungeon. Then say in spatial:
  *
  * "dungeonBottom" -> warp to bottom most cell
@@ -22,10 +22,10 @@ import java.util.StringTokenizer;
  * @since SWG Source 3.1 - September 2021
  * @author Aconite
  */
-public class dungeon_utility extends script.base_script
+public class buildout_dungeon_utility extends script.base_script
 {
 
-	public dungeon_utility()
+	public buildout_dungeon_utility()
 	{
 	}
 
