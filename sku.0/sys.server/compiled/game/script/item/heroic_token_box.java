@@ -15,45 +15,44 @@ public class heroic_token_box extends script.base_script
 {
     private static final string_id MNU_WITHDRAW = new string_id("token_box", "withdraw");
     private static final String[] TOKEN_OPTIONS = {
-        "Axkva Min Token of Heroism",               //#00
-        "Mos Espa Token of Heroism",                //#01
-        "Droid Factory Token of Heroism",           //#02
-        "Black Sun Token of Heroism",               //#03
-        "Exar Kun Token of Heroism",                //#04
-        "Echo Base Token of Heroism",               //#05
-        "Marauder Token of Heroism",                //#06
-        "Mustafar Token of Heroism",                //#07
-        "Veteran Reward Token",                     //#08
-        "A Duty Mission Token",                     //#09
-        "Rebel Battlefield Token",                  //#10
-        "Imperial Battlefield Token",               //#11
-        "Imperial Station Battle Token",            //#12
-        "Rebel Station Battle Token",               //#13
-        "Rebel Alliance Galactic Civil War Token",  //#14
-        "Imperial Galactic Civil War Token",        //#15
-        "Imperial Restuss Commendation",            //#16
-        "Rebel Restuss Commendation",               //#17
-        "Empire Day Token",                         //#18
-        "Remebrance Day Token",                     //#19
-        "Rebel Alliance Propaganda Token",          //#20
-        "Imperial Propaganda Token",                //#21
-        "Galactic Moon Coin",                       //#22
-        "Ewok Festival of Love Chak Heart",         //#23
-        "Copper Chronicles Token",                  //#24
-        "Silver Chronicles Token",                  //#25
-        "Gold Chronicles Token",                    //#26
-        "Meatlump Lump",                            //#27
-        "Midlithe Crystal",                         //#28
-        "Dathomir Amber",                           //#29
-        "Spider Silk",                              //#30
-        "Rancor Teeth",                             //#31  
-        "Whuffa Leather",                           //#32
-        "Rare Dried Herb",                          //#33
-        "Spell Weaver Crystal",                     //#34
-        "Resurgence Token of Achievement",          //#35
-        "Entertainer Token of Achievement",         //#36
-        "Teasure Token of Achievement",             //#37
-        "Kashyyyk Token of Freedom"                 //#38
+        "Heroic: Axkva Min Token of Heroism",
+        "Heroic: Mos Espa Token of Heroism",
+        "Heroic: Droid Factory Token of Heroism",
+        "Heroic: Black Sun Token of Heroism",
+        "Heroic: Exar Kun Token of Heroism",
+        "Heroic: Echo Base Token of Heroism",
+        "Heroic: Marauder Token of Heroism",
+        "Heroic: Mustafar Token of Heroism",
+        "Token: Veteran Rewards",
+        "Token: Space Duty Missions",
+        "Token: Imperial Battlefields",
+        "Token: Rebel Battlefields",
+        "Token: Imperial Space GCW",
+        "Token: Rebel Space GCW",
+        "Token: Imperial City Invasions",
+        "Token: Rebel City Invasions",
+        "Token: Imperial Restuss",
+        "Token: Rebel Restuss",
+        "Token: Imperial Empire Day",
+        "Token: Rebel Empire Day",
+        "Token: Imperial Life Day",
+        "Token: Galactic Moon Festival",
+        "Token: Love Day Chak Heart",
+        "Token: Chronicler Copper",
+        "Token: Chronicler Silver",
+        "Token: Chronicler Gold",
+        "Token: Midlithe Crystals",
+        "Token: Meatlump",
+        "Token: Dathomir Amber",
+        "Token: Spider Silk",
+        "Token: Rancor Teeth",
+        "Token: Whuffa Leather",
+        "Token: Rare Dried Herbs",
+        "Token: Spell Weaver Crystal",
+        "Token: Apotheosis Token of Achievement",
+        "Token: Entertainer Token of Achievement",
+        "Token: Treasure Token of Achievement",
+        "Token: Kashyyyk Token of Freedom"
     };
     private static final int[] TOKENS = {
         0,
