@@ -47,8 +47,8 @@ public class bounty_hunter extends script.base_script
     public static final int BOUNTY_FLOOD_CONTROL_DELAY = 60;
     public static final int BOUNTY_MISSION_TIME_LIMIT = 259200;
     public static final int MAX_BOUNTY = 1000000000;
-    public static final int MAX_BOUNTY_SET = 10000000;
-    public static final int MIN_BOUNTY_SET = 20000;
+    public static final int MAX_BOUNTY_SET = 5000000;
+    public static final int MIN_BOUNTY_SET = 1000;
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String BOUNTY_CHECK_TABLE = "datatables/missions/bounty/bounty_check.iff";
     public static final String STF = "bounty_hunter";
@@ -460,6 +460,7 @@ public class bounty_hunter extends script.base_script
         }
         return lastMissionId;
     }
+    public static final int Max_Bounty_Hunters = utils.getIntConfigSetting("GameServer", "maxBountyHunters");
     public static boolean hasMaxBountyMissionsOnTarget(obj_id target) throws InterruptedException
     {
         obj_id[] hunters = getJediBounties(target);
@@ -469,7 +470,7 @@ public class bounty_hunter extends script.base_script
         }
         int numHunters = hunters.length;
         String Smax = getConfigSetting("GameServer", "maxJediBounties");
-        int maxHunters = 8;
+        int maxHunters = Max_Bounty_Hunters;
         if (Smax != null && !Smax.equals(""))
         {
             Integer Imax = Integer.getInteger(Smax);
