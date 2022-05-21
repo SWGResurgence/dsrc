@@ -568,6 +568,9 @@ public class npe extends script.base_script
         }
         return true;
     }
+    
+    // BEGINNING OF ARMOR AND ITEMS FOR NEW CHARACTERS \\
+    
     public static obj_id[] grantNewbArmor(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -1183,7 +1186,7 @@ public class npe extends script.base_script
         }
     }
 	
-	// WEAPONS FOR NEW CHARACTERS //
+    // BEGINNING OF WEAPONS FOR NEW CHARACTERS \\
 	
     public static obj_id[] giveProfessionWeapon(obj_id player) throws InterruptedException
     {
