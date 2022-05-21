@@ -48,6 +48,7 @@ public class bounty_hunter extends script.base_script
     public static final int BOUNTY_MISSION_TIME_LIMIT = 259200;
     public static final int MAX_BOUNTY = 1000000000;
     public static final int MAX_BOUNTY_SET = 10000000;
+    public static final int MIN_BOUNTY_SET = 20000;
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String BOUNTY_CHECK_TABLE = "datatables/missions/bounty/bounty_check.iff";
     public static final String STF = "bounty_hunter";
