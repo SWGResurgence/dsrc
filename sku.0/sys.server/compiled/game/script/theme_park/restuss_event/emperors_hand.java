@@ -28,7 +28,7 @@ public class emperors_hand extends script.base_script
     }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
-		sendSystemMessagePlanetTestingOnly("ATTENTION RORI CIVILIANS: The Hand, of his majesty, the Emperor, has been reported to have been killed by " + getName(killer));
+		sendSystemMessagePlanetTestingOnly("ATTENTION RORI CIVILIANS: The Hand of his majesty, the Emperor, has been reported to have been killed by " + getName(killer));
         return SCRIPT_CONTINUE;
     }
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
