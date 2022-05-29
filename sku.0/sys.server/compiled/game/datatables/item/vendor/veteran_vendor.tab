@@ -63,7 +63,7 @@ object/tangible/veteran_reward/frn_vet_x_wing_toy.iff	6		Miniature X-wing Replic
 object/tangible/veteran_reward/frn_vet_tusken_raider_toy.iff	45		Miniature Tusken Raider Replica
 object/tangible/veteran_reward/vr_mouse_droid_deed.iff	96		Mouse Droid Familiar
 object/tangible/veteran_reward/vr_mynock_deed.iff	96		Mynock Familiar
-item_vet_reward_lockout_remover	100	1	Neural Recon Network Terminal
+item_neural_recon_network_control_interface_01_01	100	1	Neural Recon Network Control Interface
 st_cn_vet_reward_nightsister_boss	57		Nightsister Bloodwitch Storyteller Token
 object/tangible/veteran_reward/frn_vet_podracer_statue.iff	54		Podracer Statue
 object/tangible/veteran_reward/frn_vet_holo_leia.iff	27		Princess Leia Hologram

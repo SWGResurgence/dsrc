@@ -5029,3 +5029,4 @@ item_schematic_efol_prop_sparkler_r			"string:loot_schematic.schematic=object/dr
 item_schematic_prop_ribbon_magic_efol_l			"string:loot_schematic.schematic=object/draft_schematic/dance_prop/shared_prop_ribbon_magic_efol_l.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_entertainer_phase4_master"								
 item_schematic_prop_ribbon_magic_efol_r			"string:loot_schematic.schematic=object/draft_schematic/dance_prop/shared_prop_ribbon_magic_efol_r.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_entertainer_phase4_master"								
 item_vet_reward_box
+item_neural_recon_network_control_interface_01_01
