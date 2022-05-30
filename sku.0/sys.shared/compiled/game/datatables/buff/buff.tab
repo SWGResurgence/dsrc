@@ -1076,7 +1076,7 @@ gcw_base_damage_absorb_b	gcw_base_damage_absorb			4	command.shock	1800	expertise
 gcw_base_damage_absorb_c	gcw_base_damage_absorb			3	command.shock	1800	expertise_innate_protection_kinetic	300	expertise_innate_protection_energy	300		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_damage_absorb_d	gcw_base_damage_absorb			2	command.shock	1800	expertise_innate_protection_kinetic	500	expertise_innate_protection_energy	500		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_damage_absorb_e	gcw_base_damage_absorb			1	command.shock	1800	expertise_innate_protection_kinetic	750	expertise_innate_protection_energy	750		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-fs_forsake_fear	expertiseActionHeal	channeled		18	command.fs_path_forsake_fear	10	group	0	expertise_channel_action_heal	6		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+fs_forsake_fear	expertiseActionHeal	channeled		18	command.fs_path_forsake_fear	10	group	0	expertise_channel_action_heal	6	action	2000	expertise_action_all	5		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_critical_heal_a	gcw_critical_heal			1	command.powerBoost	1800	avoid_incap_heal	800		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_critical_heal_b	gcw_critical_heal			2	command.powerBoost	1800	avoid_incap_heal	1600		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_critical_heal_c	gcw_critical_heal			3	command.powerBoost	1800	avoid_incap_heal	2500		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
