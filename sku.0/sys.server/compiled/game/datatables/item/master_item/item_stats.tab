@@ -5030,3 +5030,4 @@ item_schematic_prop_ribbon_magic_efol_l			"string:loot_schematic.schematic=objec
 item_schematic_prop_ribbon_magic_efol_r			"string:loot_schematic.schematic=object/draft_schematic/dance_prop/shared_prop_ribbon_magic_efol_r.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_entertainer_phase4_master"								
 item_vet_reward_box
 item_neural_recon_network_control_interface_01_01
+item_irish_darkshadow_memorial_01_01
