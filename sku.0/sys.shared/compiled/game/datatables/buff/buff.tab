@@ -719,7 +719,7 @@ sm_sly_lie	sly_lie			10	command.sm_path_sly_lie	600	expertise_sly_lie	0		0		0		0
 sm_fast_talk	fast_talk			10	command.sm_path_fast_talk	600	expertise_fast_talk	0		0		0		0		0	STATE_NONE	none	appearance/pt_smuggler_fast_talk.prt		1	0		1	1	1	0	1	1	0	1	1	1
 sm_off_the_cuff	off_the_cuff			10	command.sm_general_off_the_cuff	10	expertise_next_hit_crit	0	expertise_crit_remove_buff	0		0		0		0	STATE_NONE	none	clienteffect/sm_off_the_cuff.cef		1	0		1	1	1	0	1	1	0	1	1	1
 sm_end_of_the_line	end_of_the_line			26	command.sm_general_end_of_the_line	10	expertise_crit_double_damage	0	expertise_crit_remove_buff	0		0		0		0	STATE_NONE	none	clienteffect/sm_end_of_the_line.cef		1	0		1	1	1	0	1	1	0	1	1	1
-sm_nerf_herder	nerf_herder			10	command.sm_nerf_herder	10	expertise_crit_root	0	expertise_crit_remove_buff	0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+sm_nerf_herder	nerf_herder			10	command.sm_nerf_herder	10	expertise_crit_root	0	expertise_crit_remove_buff	0		0		0		0	STATE_NONE	none			1	0		1	1	0	0	1	1	0	1	1	1
 sm_nerf_herder_root	root			50	command.sm_nerf_herder	10	movement	0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 sm_narrow_escape_1	narrow_escape			34	command.sm_general_narrow_escape	4	movement_resist_snare	100	movement	0		0		0		0	STATE_NONE	none	clienteffect/sm_narrow_escape.cef		1	0		1	1	1	0	1	1	0	1	1	1
 sm_narrow_escape_2	narrow_escape			50	command.sm_general_narrow_escape	6	movement_resist_snare	100	movement	0		0		0		0	STATE_NONE	none	clienteffect/sm_narrow_escape.cef		1	0		1	1	1	0	1	1	0	1	1	1
