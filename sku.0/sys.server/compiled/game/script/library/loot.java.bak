@@ -2527,6 +2527,51 @@ public class loot extends script.base_script
     {
         // get the attacker who did the most damage.
         obj_id player = getObjIdObjVar(target, xp.VAR_TOP_GROUP);
+        
+        
+        if (group.isGroupObject(killer))
+        {
+        	Vector attackerList = utils.getResizeableObjIdBatchScriptVar(target, xp.VAR_ATTACKER_LIST + ".attackers");
+        	
+        	if (attackerList != null && attackerList.size() > 0)
+        	{
+        		obj_id[] members = getGroupMemberIds(killer);
+        		
+        		if (members != null && members.length > 0)
+        		{
+        			//fo each group member in the attackers in range
+        			
+        			for(obj_id member: members )
+        			{
+        				if (attackerList.indexOf(member) >= 0)
+        				{
+        					
+        					if (addRareLootToPlayer(member, target) && !looted)
+        					{
+        						looted = true;
+        					}
+        					
+        				}
+        			}
+        			
+        		}
+        		
+        	}
+        	
+        	
+        }
+        else
+        {
+        	return addRareLootToPlayer(killer, target);
+        }
+        
+        
+        return looted;
+    }
+    
+    
+    public static boolean addRareLootToPlayer(obj_id player, obj_id target) throws InterruptedException
+    {
 
         // make sure the attacker is a player.
         if(!isValidId(player) || !isPlayer(player)){
@@ -2650,7 +2695,7 @@ public class loot extends script.base_script
         }
         LOG("rare_loot", "Player (" + player + ") just qualified for a " + type + " RLS chest!");
 
-        obj_id chest = createRareLootChest(target, lootType);
+        obj_id chest = createRareLootChest(player, lootType);
 
         setObjVar(player, "loot.rls.lastChestAwardTime", getGameTime());
         setObjVar(player, "loot.rls.lastLootedChest", chest);
