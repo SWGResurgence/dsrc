@@ -5,8 +5,6 @@
 gender = GE_female
 species = SP_human
 
-animationMapFilename = "all_female.map
-
 @class tangible_object_template 3
 @class object_template 3
 
