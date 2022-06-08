@@ -18,7 +18,8 @@ slots = [
 	optional=false,
 	name = "craft_weapon_ingredients_n" "grip",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_weapon_ingredients_n" "grip", ingredient="petrochem_inert_polymer", count=30]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_weapon_ingredients_n" "grip", ingredient="petrochem_inert_polymer", count=30]], 
+complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
