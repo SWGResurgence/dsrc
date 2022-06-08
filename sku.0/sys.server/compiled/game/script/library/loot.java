@@ -2528,7 +2528,7 @@ public class loot extends script.base_script
     	boolean looted = false;
     	
     	// get the attacker who did the most damage.
-        obj_id player = getObjIdObjVar(target, xp.VAR_TOP_GROUP);
+        obj_id killer = getObjIdObjVar(target, xp.VAR_TOP_GROUP);
         
         
         if (group.isGroupObject(killer))
@@ -2541,7 +2541,7 @@ public class loot extends script.base_script
         		
         		if (members != null && members.length > 0)
         		{
-        			//fo each group member in the attackers in range
+        			//for each group member in the attackers in range
         			
         			for(obj_id member: members )
         			{

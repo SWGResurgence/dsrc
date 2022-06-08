@@ -2525,7 +2525,9 @@ public class loot extends script.base_script
     }
     public static boolean addRareLoot(obj_id target) throws InterruptedException
     {
-        // get the attacker who did the most damage.
+    	boolean looted = false;
+    	
+    	// get the attacker who did the most damage.
         obj_id player = getObjIdObjVar(target, xp.VAR_TOP_GROUP);
         
         
