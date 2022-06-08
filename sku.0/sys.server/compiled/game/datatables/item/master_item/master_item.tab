@@ -8879,3 +8879,4 @@ item_irish_darkshadow_memorial_01_01	object/static/structure/custom/irish_memori
 item_aurillian_certified_scroll_01_01	object/tangible/loot/misc/aurillian_certified_scroll.iff							1		"item.special.nomove,object.autostack,item.heroic_token"		1	Aurillian Certified Scroll	"This scroll can be used to redeem certain items from a new vendor located in Aurillia, it can also be stored in the Token Box of Achievements.	
 item_geocaves_passkey	object/tangible/loot/dungeon/geonosian_mad_bunker/passkey.iff							1		item.special.nomove"""		1	Geocaves Electronic Passkey	"This scroll can be used to redeem certain items from a new vendor located in Aurillia, it can also be stored in the Token Box of Achievements.	
 item_itv_deed_tie_interceptor	object/tangible/deed/vehicle_deed/instant_travel_terminal_snowspeeder.iff							4		systems.veteran_reward.instant_travel_terminal_deed			ITV: Snow Speeder	Deed for your very own snowspeeder instant travel vehicle.	
+"
