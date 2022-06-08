@@ -540,7 +540,7 @@ public class destroy_duty extends script.base_script
         money.bankTo(money.ACCT_SPACE_QUEST_REWARD, player, reward);
         obj_id pInv = utils.getInventoryContainer(player);
         obj_id playerShip = space_transition.getContainingShip(player);
-        int tokens = reward / 125;
+        int tokens = reward / 1000;
         /*if (tokens < 1)
         {
             tokens = 1;
