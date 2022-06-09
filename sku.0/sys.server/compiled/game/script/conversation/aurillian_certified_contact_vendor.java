@@ -69,8 +69,6 @@ public class aurillian_certified_contact_vendor extends script.base_script {
             chat.chat(self, player, new string_id(c_stringFile, "s_3"));
         } else if (response.equals("s_4")) {
             chat.chat(self, player, new string_id(c_stringFile, "s_5"));
-        } else if (response.equals("s_6")) {
-            chat.chat(self, player, new string_id(c_stringFile, "s_7"));
         }
         npcEndConversation(player);
         return SCRIPT_CONTINUE;
