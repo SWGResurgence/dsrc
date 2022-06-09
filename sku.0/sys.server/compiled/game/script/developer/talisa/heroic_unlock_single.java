@@ -6,7 +6,7 @@ import script.library.resource;
 import script.library.sui;
 import script.library.utils;
 
-public class heroic_unlock extends script.base_script {
+public class heroic_unlock_single extends script.base_script {
     public heroic_unlock() {
     }
     
