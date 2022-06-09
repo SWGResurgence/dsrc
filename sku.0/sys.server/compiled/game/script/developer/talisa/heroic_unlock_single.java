@@ -29,7 +29,7 @@ public class heroic_unlock extends script.base_script {
         return SCRIPT_CONTINUE;
     }
     
-    public void use(obj_id self, obj_idplayer) throws InterruptedException {
+    public void use(obj_id self, obj_id player) throws InterruptedException {
         //unlock heroics here...
     }
 }
