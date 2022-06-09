@@ -4,7 +4,6 @@ import script.*;
 import script.library.instance;
 import script.library.resource;
 import script.library.sui;
-import script.library.utils;
 
 public class heroic_grant extends script.base_script {
 	public heroic_grant() {
