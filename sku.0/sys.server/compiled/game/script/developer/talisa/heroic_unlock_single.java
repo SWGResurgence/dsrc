@@ -1,4 +1,4 @@
-package developer.talisa;
+package script.developer.talisa;
 
 import script.*;
 import script.library.instance;
