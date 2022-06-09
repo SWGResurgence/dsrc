@@ -13,8 +13,8 @@ public class heroic_unlock_single extends script.base_script {
     public static final string_id SID = new string_id("sui", "use");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException {
         if (!utils.isNestedWithin(self, player)) {
-            return SCRIPT_CONTINUE;
             sendSystemMessageTestingOnly(player, "The Development Testing for Menu Request is currently disabled.");
+            return SCRIPT_CONTINUE;
         }
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
         if (mid != null) {
