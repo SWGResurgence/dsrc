@@ -7,7 +7,7 @@ import script.library.sui;
 import script.library.utils;
 
 public class heroic_unlock_single extends script.base_script {
-    public heroic_unlock() {
+    public heroic_unlock_single() {
     }
     
     public static final string_id SID = new string_id("sui", "use");
