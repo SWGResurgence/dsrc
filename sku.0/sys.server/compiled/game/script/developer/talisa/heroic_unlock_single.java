@@ -14,10 +14,12 @@ public class heroic_unlock_single extends script.base_script {
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException {
         if (!utils.isNestedWithin(self, player)) {
             return SCRIPT_CONTINUE;
+            sendSystemMessageTestingOnly(player, "The Development Testing for Menu Request is currently disabled.");
         }
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
         if (mid != null) {
             mid.setServerNotify(true);
+            sendSystemMessageTestingOnly(player, "The Development Testing for Item Use is currently disabled.");
         }
         return SCRIPT_CONTINUE;
     }
@@ -25,6 +27,7 @@ public class heroic_unlock_single extends script.base_script {
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException {
         if (item == menu_info_types.ITEM_USE) {
             use(self, player);
+            sendSystemMessageTestingOnly(player, "The Development Testing for Menu Select is currently disabled.");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
