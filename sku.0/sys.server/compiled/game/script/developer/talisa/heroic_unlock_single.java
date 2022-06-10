@@ -35,7 +35,7 @@ public class heroic_unlock_single extends script.base_script {
     // Server Call for Selected Menu Operation
     
     public void use(obj_id self, obj_id player) throws InterruptedException {
-        String[] instanceFlags = dataTableGetStringColumn(instance.HEROIC_INSTANCE_DATATABLE, "key_required");
+        String[] instanceFlags = dataTableGetStringColumn(instance.INSTANCE_DATATABLE, "key_required");
         ArrayList<String> unflaggedInstances = new ArrayList<String>();
         ArrayList<prose_package> instanceNames = new ArrayList<prose_package>();
         cleanScriptVars(player);
