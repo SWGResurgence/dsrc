@@ -42,7 +42,7 @@ public class heroic_unlock_single extends script.base_script {
             "heroic_ig88",
             "heroic_tusken_army",
             "heroic_star_destroyer"
-        };
+        }, "key_required";
         ArrayList<String> unflaggedInstances = new ArrayList<String>();
         ArrayList<prose_package> instanceNames = new ArrayList<prose_package>();
         cleanScriptVars(player);
