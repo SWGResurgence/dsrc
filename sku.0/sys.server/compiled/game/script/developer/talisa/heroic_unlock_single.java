@@ -17,7 +17,7 @@ public class heroic_unlock_single extends script.base_script {
     
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException {
         mi.addRootMenu(menu_info_types.ITEM_USE, SID);
-        sendSystemMessageTestingOnly(player, "Server Calling Menu.");
+        sendSystemMessageTestingOnly(player, "Select which Heroic Instance that you wish to permenantly unlock. You can only choose one.");
         return SCRIPT_CONTINUE;
     }
     
@@ -26,7 +26,7 @@ public class heroic_unlock_single extends script.base_script {
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException {
         if (item == menu_info_types.ITEM_USE) {
             use(self, player);
-            sendSystemMessageTestingOnly(player, "Server Calling Menu Select.");
+            sendSystemMessageTestingOnly(player, "Are you sure that you wish to unlock this one?");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
@@ -93,7 +93,7 @@ public class heroic_unlock_single extends script.base_script {
             String instanceToFlag = unflaggedInstances[idx];
             instance.flagPlayerForInstance(player, instanceToFlag);
             cleanScriptVars(player);
-            sendSystemMessageTestingOnly(player, "Heroic Instance Unlocked");
+            sendSystemMessageTestingOnly(player, "The Heroic Instance that you have choosen, has been unlocked.");
             destroyObject(self);
         }
         return SCRIPT_CONTINUE;
