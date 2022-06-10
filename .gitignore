@@ -8,3 +8,5 @@ sku.0/sys.server/compiled/game/script/conversation/backup_heroic_prequest_bypass
 sku.0/sys.server/compiled/game/script/conversation/base/backup_conversation_base.java
 sku.0/sys.server/compiled/game/script/conversation/heroic_prequest_bypass.java
 sku.0/sys.server/compiled/game/script/item/special/notradeshared_base.java
+*.sqlite
+sku.0/sys.server/compiled/game/script/developer/talisa/.vs/ProjectSettings.json
