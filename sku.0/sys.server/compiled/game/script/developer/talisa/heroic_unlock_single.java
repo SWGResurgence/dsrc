@@ -85,8 +85,10 @@ public class heroic_unlock_single extends script.base_script {
             }
             String instanceToFlag = unflaggedInstances[idx];
             instance.flagPlayerForInstance(player, instanceToFlag);
+            cleanScriptVars(player);
+            sendSystemMessageTestingOnly(player, "Heroic Instance Unlocked");
+            destroyObject(self);
         }
-        
         return SCRIPT_CONTINUE;
     }
     
