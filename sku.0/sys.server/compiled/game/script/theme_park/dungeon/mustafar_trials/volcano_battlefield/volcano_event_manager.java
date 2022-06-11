@@ -315,7 +315,7 @@ public class volcano_event_manager extends script.base_script
         // HEROIC SYSTEM BEGIN \\
         
         dictionary dict = new dictionary();
-        dict.put("tokenIndex", 29);
+        dict.put("tokenIndex", 7);
         dict.put("tokenCount", 4);
         utils.messageTo(players, "handleAwardtoken", dict, 0, false);
         obj_id group = getGroupObject(players[0]);
