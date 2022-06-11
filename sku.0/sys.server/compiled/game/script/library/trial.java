@@ -294,7 +294,7 @@ public class trial extends script.base_script
         "item_entertainer_token_01_01",             //#36   Token: Entertainer Token of Achievement
         "item_treasure_reward_token_01_01",         //#37   Token: Treasure Token of Achievement
         "item_kashyyyk_reward_token_01_01"     ,    //#38   Token: Kashyyyk Token of Freedom
-        "item_aurillian_certified_scroll_01_01"		  //#39	  Token: Aurillian Certified Scroll
+        "item_aurillian_certified_scroll_01_01"		  //#39	  Token: Aurilian Certified Scroll
     
     };
     public static final int NUM_HEROIC_TOKEN_TYPES = HEROIC_TOKENS.length;
