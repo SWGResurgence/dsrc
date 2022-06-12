@@ -5,16 +5,13 @@ import script.*;
 
 public class respecseller extends script.base_script
 {
+    public respecseller()
+    {
+    }
     public static String c_stringFile = "conversation/respecseller";
     public boolean respecseller_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
-    }
-    public void respecseller_action_showTokenVendorUI(obj_id player, obj_id npc) throws InterruptedException
-    {
-        dictionary d = new dictionary();
-        d.put("player", player);
-        messageTo(npc, "showInventorySUI", d, 0, false);
     }
     public boolean respecseller_condition_hasBoughtRespecsBefore(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -515,7 +512,6 @@ public class respecseller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        
         return SCRIPT_DEFAULT;
     }
     public int respecseller_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
@@ -841,32 +837,6 @@ public class respecseller extends script.base_script
             }
         }
         return SCRIPT_DEFAULT;
-    }
-    public int respecseller_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
-    {
-        if (response.equals("s_101"))
-        {
-            respecseller_action_showTokenVendorUI(player, self);
-        }
-        npcSetConversation(player);
-        return SCRIPT_CONTINUE;
-    }
-    public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
-    {
-        if (ai_lib.isInCombat(self) || ai_lib.isInCombat(player))
-        {
-            return SCRIPT_CONTINUE;
-        }
-        if (respecseller_condition__defaultCondition(player, self))
-        {
-            prose_package pp = new prose_package();
-            pp = prose.setStringId(pp, new string_id(c_stringFile, "s_100"));
-            pp.target.set(player);
-            npcStartConversation(player, self, "respecseller", null, pp, new string_id[]{new string_id(c_stringFile, "s_101")});
-            return SCRIPT_CONTINUE;
-        }
-        chat.chat(self, "Error: All conditions for OnStartNpcConversation were false.");
-        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
