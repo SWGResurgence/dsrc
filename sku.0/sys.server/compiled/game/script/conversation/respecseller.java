@@ -11,6 +11,8 @@ import script.library.factions;
 import script.library.prose;
 import script.library.utils;
 
+import script.library.*;
+
 public class respecseller extends script.base_script
 {
     public static String c_stringFile = "conversation/respecseller";
