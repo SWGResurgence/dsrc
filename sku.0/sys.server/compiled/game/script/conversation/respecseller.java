@@ -1,10 +1,7 @@
 package script.conversation;
 
-import script.*;
-import script.base_class.*;
-import script.base_script;
-
 import script.library.*;
+import script.*;
 
 public class respecseller extends script.base_script
 {
