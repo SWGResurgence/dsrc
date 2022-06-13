@@ -1,4 +1,4 @@
-package script.item;
+package script.library;
 
 import script.*;
 import java.util.HashSet;

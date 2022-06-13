@@ -1,4 +1,4 @@
-package script.item;
+package script.library;
 
 import script.*;
 import script.library.*;
@@ -71,7 +71,7 @@ public class profession_roadmap_package extends base_script {
         obj_id player = sui.getPlayerId(params);
         int btn = sui.getIntButtonPressed(params);
         int idx = sui.getListboxSelectedRow(params);
-        if (btx == sui.BP_CANCEL) {
+        if (btn == sui.BP_CANCEL) {
             cleanScriptVars(player);
             return SCRIPT_CONTINUE;
         }
@@ -79,6 +79,33 @@ public class profession_roadmap_package extends base_script {
             cleanScriptVars(player);
             return SCRIPT_CONTINUE;
         }
+    }
+    
+    // Defining refreshMenu
+    
+    public void refreshMenu(obj_id player, String prompt, String title, String[] options, String myHandler, boolean draw) throws InterruptedException {
+        obj_id self = getSelf();
+        closeOldWindow(player);
+        if (outOfRange(self, player, true)) {
+            cleanScriptVars(player);
+            return;
+        }
+        if (draw == false) {
+            int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL_REFRESH, title, options, myHandler, false, false);
+            sui.listboxUseOtherButton(pid, "Back");
+            sui.showSUIPage(pid);
+            setWindowPid(player, pid);
+        }else{
+            int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, options, myHandler, true, false);
+            sui.showSUIPage(pid);
+            setWindowPid(player, pid);
+        }
+    }
+    
+    // Defining outOfRange
+    
+    public boolean outOfRange(obj_id self, obj_id player, boolean message) throws InterruptedException {
+        return false;
     }
     
     // Defining handleRoadmapRedliveryProfessionsOption
