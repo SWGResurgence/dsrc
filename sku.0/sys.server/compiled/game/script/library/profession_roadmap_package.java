@@ -211,7 +211,7 @@ public class profession_roadmap_package extends base_script {
     
     public void closeOldWindow(obj_id player) throws InterruptedException {
         String playerPath = "character_builder.";
-        if (utils.hasScriptVar(player, "character_builder.pid"); {
+        if (utils.hasScriptVar(player, "character_builder.pid")); {
           forceCloseSUIPage(oldpid);
           utils.removeScriptVar(player, "character_builder.pid");
         }
