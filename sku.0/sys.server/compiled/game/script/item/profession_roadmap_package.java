@@ -1,4 +1,4 @@
-package script.items;
+package script.item;
 
 import script.*;
 import script.library.*;
