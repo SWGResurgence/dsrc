@@ -47,7 +47,7 @@ public class profession_roadmap_package extends base_script {
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException {
         if (item == menu_info_types.ITEM_USE) {
             use(self, player);
-            startRoadmapRedeliverySelection(player
+            startRoadmapRedeliverySelection(player);
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
@@ -60,7 +60,7 @@ public class profession_roadmap_package extends base_script {
             return SCRIPT_CONTINUE;
         }
         obj_id player = sui.getPlayerId(params);
-        int (btn = sui.getIntButtonPressed(params);
+        int btn = sui.getIntButtonPressed(params);
         int idx = sui.getListboxSelectedRow(params);
         if (btx == sui.BP_CANCEL) {
             cleanScriptVars(player);
