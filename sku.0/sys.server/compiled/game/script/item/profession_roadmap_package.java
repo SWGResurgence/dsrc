@@ -10,8 +10,6 @@ import java.lang.String;
 import java.util.HashSet;
 
 public class profession_roadmap_package extends base_script {
-    public class profession_roadmap_package() {
-    }
     
     // Localized String for "claim_redelivery_package" taken from "sui.stf"
     
