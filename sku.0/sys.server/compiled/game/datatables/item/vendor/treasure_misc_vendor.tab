@@ -1,0 +1,14 @@
+item	cash	token36	limit	class	script	note
+s[none]	i[0]	i[0]	i[0]	i[0]	s	c
+object/tangible/furniture/terminal/terminal_serving_droid.iff		5				Astromech Serving Droid Terminal
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_belt.iff		1				Bounty Hunter Belt
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_bicep_l.iff		1				Bounty Hunter Bicep Armor
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_bicep_r.iff		1				Bounty Hunter Bicep Armor
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_bracer_l.iff		1				Bounty Hunter Bracer Armor
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_bracer_r.iff		1				Bounty Hunter Bracer Armor
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_boots.iff		1				Bounty Hunter Boots
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_chest_plate.iff		1				Bounty Hunter Chest Plate
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_gloves.iff		1				Bounty Hunter Gloves
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_helmet.iff		1				Bounty Hunter Helmet
+object/tangible/wearables/armor/bounty_hunter/armor_bounty_hunter_leggings.iff		1				Bounty Hunter Leg Armor
+item_treasure_map_81_90		1				Mysterious Data Disk
