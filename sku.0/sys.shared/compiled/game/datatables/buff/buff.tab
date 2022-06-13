@@ -1105,12 +1105,12 @@ of_focus_fire_3	focusFire	of_aura_2		48	command.of_focus_fire	270	group	0	expert
 of_focus_fire_4	focusFire	of_aura_2		62	command.of_focus_fire	270	group	0	expertise_strikethrough_chance	4	combat_strikethrough_value	26	expertise_critical_niche_all	3		0	STATE_NONE	none	clienteffect/off_focus_fire.cef		1	0		1	1	1	0	1	1	0	1	1	1
 of_focus_fire_5	focusFire	of_aura_2		76	command.of_focus_fire	270	group	0	expertise_strikethrough_chance	4	combat_strikethrough_value	29	expertise_critical_niche_all	4		0	STATE_NONE	none	clienteffect/off_focus_fire.cef		1	0		1	1	1	0	1	1	0	1	1	1
 of_focus_fire_6	focusFire	of_aura_2		90	command.of_focus_fire	270	group	0	expertise_strikethrough_chance	5	combat_strikethrough_value	32	expertise_critical_niche_all	5		0	STATE_NONE	none	clienteffect/off_focus_fire.cef		1	0		1	1	1	0	1	1	0	1	1	1
-of_inspiration_1	offInspire			26	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	870		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
-of_inspiration_2	offInspire			34	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	1111		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
-of_inspiration_3	offInspire			48	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	1532		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
-of_inspiration_4	offInspire			62	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	1954		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
-of_inspiration_5	offInspire			76	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	2374		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
-of_inspiration_6	offInspire			90	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	2800		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
+of_inspiration_1	offInspire			26	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	1307		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
+of_inspiration_2	offInspire			34	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	1667		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
+of_inspiration_3	offInspire			48	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	2298		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
+of_inspiration_4	offInspire			62	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	2931		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
+of_inspiration_5	offInspire			76	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	3561		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
+of_inspiration_6	offInspire			90	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	4200		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
 of_scatter_1	groupSpeed			26	command.of_scatter	10	group	0	movement	0	expertise_glancing_blow_all	5	movement_resist_snare	100	movement_resist_root	100	STATE_NONE	none	clienteffect/off_scatter.cef		1	0		1	1	1	0	1	1	0	1	1	1
 of_charge_1	groupSpeed			26	command.of_charge	10	group	0	movement	0	expertise_damage_all	10	expertise_action_all	10	movement_resist_snare	100	STATE_NONE	none	clienteffect/off_charge.cef		1	0		1	1	1	0	1	1	0	1	1	1
 of_deb_def_1	paintTarget			3	command.of_deb_def	10	expertise_dodge	-2	expertise_parry	-2	critical_hit_vulnerable	3		0		0	STATE_NONE	none	appearance/pt_special_attack_volley_fire.prt		1	1		1	1	1	0	1	1	0	1	1	1
