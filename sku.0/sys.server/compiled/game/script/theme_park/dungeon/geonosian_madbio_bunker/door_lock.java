@@ -1,4 +1,4 @@
-package script.theme_park.dungeon.death_watch_bunker;
+package script.theme_park.dungeon.geonosian_madbio_bunker;
 
 import script.base_script;
 
