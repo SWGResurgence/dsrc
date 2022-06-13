@@ -7,7 +7,7 @@ import script.location;
 import script.obj_id;
 
 public class locked_crafting_room extends script.base_script
-{
+{/*
     public locked_crafting_room()
     {
     }
@@ -159,5 +159,5 @@ public class locked_crafting_room extends script.base_script
         }
         removeAll(self);
         return SCRIPT_CONTINUE;
-    }
+    }*/
 }

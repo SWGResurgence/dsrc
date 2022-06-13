@@ -8,7 +8,7 @@ import script.obj_id;
 import java.util.Vector;
 
 public class door_lock extends script.base_script
-{
+{/*
     public door_lock()
     {
     }
@@ -209,5 +209,5 @@ public class door_lock extends script.base_script
     public obj_id getSmallRoom() throws InterruptedException
     {
         return getCellId(trial.getTop(getSelf()), "smallroom57");
-    }
+    }*/
 }
