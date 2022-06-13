@@ -1,3 +1,7 @@
-item	cash	token39	limit	class	script	note
-s[none]	i[0]	i[0]	i[0]	i[0]	s	c
-item_single_heroic_unlock_01_01		1				Single Heroic Unlock
+item	cash	token0	token1	token2	token3	token4	token39	limit	class	script	note
+s[none]	i[0]	i[0]	i[0]	i[0]	i[0]	i[0]	i[0]	i[0]	i[0]	s	c
+item_droid_factory_heroic_token_box_01_01		2									IG88 Exchange Heroic Token Box
+item_axkva_heroic_token_box_01_01			2								Axkva Exchange Heroic Token Box
+item_tusken_heroic_token_box_01_01		3	3								Tusken Exchange Heroic Token Box
+item_black_sun_heroic_token_box_01_01		5	5	2							Star Destroyer Exchange Heroic Token Box
+item_exar_kun_heroic_token_box_01_02		7	7	5	3						Exar Heroic Exchange Token Box
