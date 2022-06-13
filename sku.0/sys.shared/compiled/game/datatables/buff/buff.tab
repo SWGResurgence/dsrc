@@ -2012,4 +2012,4 @@ tok_ent_invis_buff_tracker_4	collection_ent_token			1	buffs.smuggled	3600		0		0	
 ent_jax_familiar	vr_familiar			4	buffs.genericBuff	-1	expertise_en_inspire_pulse_duration_increase	2																	0								
 hospital_buff	hospital_buff			1	command.bactaInfusion	-1	expertise_buff_duration_line_me_enhance	7200																									
 bm_helper_monkey_domestic	bm_player_buff	tcg_diner_station		1	command.bm_helper_monkey_domestic	900		0	clothing_experimentation	2	clothing_assembly	5	food_assembly	5	food_experimentation	6	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-entertainer_buff	entertainer_buff			1	command.powerBoost	-1	expertise_en_inspire_base_point_increase	10	expertise_en_inspire_pulse_duration_increase	5	expertise_en_inspire_buff_duration_increase	60																					
+entertainer_buff	entertainer_buff			1	command.powerBoost	-1	expertise_en_inspire_base_point_increase	10	expertise_en_inspire_pulse_duration_increase	8	expertise_en_inspire_buff_duration_increase	60																					
