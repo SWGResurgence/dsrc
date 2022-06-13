@@ -39,7 +39,7 @@ public class profession_roadmap_package extends base_script {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("", ""));
         return SCRIPT_CONTINUE;
     }
-    
+
     // Server Call to Respond When Menu Row is Selected
     
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException {
@@ -49,6 +49,17 @@ public class profession_roadmap_package extends base_script {
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
+    }
+    
+    // Defining startRoadmapRedeliverySelection
+    
+    public void startRoadmapRedeliverySelection(obj_id player) throws InterruptedException {
+        obj_id self = getSelf();
+        String prompt = "Choose a Profession Roadmap Set to Redeem:";
+        String totle = "Supplies Redemption";
+        closeOldWindow(player);
+        int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, ROADMAP_REDILIVERY_PROFESSIONS, "handleOptionSelect", true, false);
+        setWindowPid(player, pid);
     }
     
     // Server Call to Respond When Menu Option is Selected
@@ -169,5 +180,19 @@ public class profession_roadmap_package extends base_script {
     
     public void cleanScriptVars(obj_id player) throws InterruptedException {
         utils.removeScriptVarTree(player, "profession_roadmap_package");
+    }
+    
+    public void closeOldWindow(obj_id player) throws InterruptedException {
+        String playerPath = "character_builder.";
+        if (utils.hasScriptVar(player, "character_builder.pid"); {
+          forceCloseSUIPage(oldpid);
+          utils.removeScriptVar(player, "character_builder.pid");
+        }
+    }
+    
+    public void setWindowPid(obj_id player, int pid) throws InterruptedException {
+        if (pid > -1) {
+            utils.setScriptVar(player, "character_builder.pid", pid);
+        }
     }
 }
