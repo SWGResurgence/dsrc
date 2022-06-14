@@ -1914,7 +1914,9 @@ expertise_of_paint_act_2	expertise_of_paint_act_1									expertise_of_paint_act
 expertise_of_paint_act_3	expertise_of_paint_act_2									expertise_of_paint_act_2												expertise_action_line_of_paint=10			0	
 expertise_of_paint_dam_1	expertise																					"expertise_damage_line_of_paint=10,expertise_action_line_of_paint=10"			0	
 expertise_of_paint_dam_2	expertise_of_paint_dam_1									expertise_of_paint_dam_1												"expertise_damage_line_of_paint=10,expertise_action_line_of_paint=10"			0	
+expertise_of_advanced_target_tracking_1	expertise_of_paint_dam_2									expertise_of_paint_dam_2											of_deb_off_1	expertise_critical_niche_all=5				
 expertise_of_advanced_paint_1	expertise_of_paint_dam_2									expertise_of_paint_dam_2											of_deb_def_4				0	
+expertise_of_advanced_target_identification_1	expertise_of_advanced_paint_1									expertise_of_advanced_paint_1											of_deb_off_2	detect_hidden=50				
 expertise_of_strength_1	expertise																					strength_modified=10			0	
 expertise_of_strength_2	expertise_of_strength_1																					strength_modified=10			0	
 expertise_of_strength_3	expertise_of_strength_2																					strength_modified=10			0	
@@ -1984,95 +1986,90 @@ expertise_me_hot_duration_1	expertise																					expertise_healing_line
 expertise_me_hot_duration_2	expertise_me_hot_duration_1																					expertise_healing_line_me_hot=10			0	
 expertise_me_hot_duration_3	expertise_me_hot_duration_2																					expertise_healing_line_me_hot=15			0	
 expertise_me_hot_duration_4	expertise_me_hot_duration_3																					expertise_healing_line_me_hot=15			0	
-expertise_me_drag	expertise_me_hot_duration_4									expertise_me_hot_duration_4											me_drag_1				0	
-expertise_me_revive_duration_1	expertise																					"expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5"			0	
-expertise_me_revive_duration_2	expertise_me_revive_duration_1																					"expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5"			0	
-expertise_me_revive_duration_3	expertise_me_revive_duration_2																					"expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5"			0	
-expertise_me_blood_cleaners_1	expertise_me_revive_duration_3									expertise_me_revive_duration_3											me_blood_cleaners_1				0	
-expertise_me_bacta_bomb_1	expertise_me_blood_cleaners_1									expertise_me_blood_cleaners_1											me_bacta_bomb_1				0	
 expertise_me_heal_damage_1	expertise																					expertise_healing_line_me_heal=5			0	
 expertise_me_heal_damage_2	expertise_me_heal_damage_1																					expertise_healing_line_me_heal=5			0	
 expertise_me_heal_damage_3	expertise_me_heal_damage_2																					expertise_healing_line_me_heal=5			0	
 expertise_me_heal_damage_4	expertise_me_heal_damage_3																					expertise_healing_line_me_heal=10			0	
-expertise_me_cure_affliction_1	expertise_me_heal_damage_4									expertise_me_heal_damage_4											me_cure_affliction_1				0	
-expertise_me_heal_action_1	expertise																					expertise_action_line_me_heal=10			0	
-expertise_me_heal_action_2	expertise_me_heal_action_1																					expertise_action_line_me_heal=10			0	
-expertise_me_heal_action_3	expertise_me_heal_action_2																					expertise_action_line_me_heal=15			0	
-expertise_me_serotonin_boost_1	expertise_me_heal_action_3									expertise_me_heal_action_3											me_serotonin_boost_1				0	
-expertise_me_bacta_grenade_1	expertise_me_serotonin_boost_1									expertise_me_serotonin_boost_1											me_bacta_grenade_1				0	
-expertise_me_enhance_duration_1	expertise																					expertise_buff_duration_line_me_enhance=300			0	
-expertise_me_enhance_duration_2	expertise_me_enhance_duration_1																					expertise_buff_duration_line_me_enhance=300			0	
-expertise_me_enhance_duration_3	expertise_me_enhance_duration_2																					expertise_buff_duration_line_me_enhance=600			0	
-expertise_me_enhancement_specialist_1	expertise_me_enhance_duration_3									expertise_me_enhance_duration_3											me_enhance_action_1				0	
-expertise_me_reckless_stimulation_1	expertise_me_enhancement_specialist_1									expertise_me_enhancement_specialist_1											me_reckless_stimulation_1				0	
-expertise_me_stasis_1	expertise_me_reckless_stimulation_1									expertise_me_reckless_stimulation_1											me_stasis_1				0	
 expertise_me_vital_action_1	expertise																					expertise_action_line_me_dm=5			0	
 expertise_me_vital_action_2	expertise_me_vital_action_1																					expertise_action_line_me_dm=5			0	
 expertise_me_vital_action_3	expertise_me_vital_action_2																					expertise_action_line_me_dm=5			0	
 expertise_me_vital_action_4	expertise_me_vital_action_3																					expertise_action_line_me_dm=10			0	
-expertise_me_bacta_resistance_1	expertise_me_vital_action_4									expertise_me_vital_action_4											me_bacta_resistance_1				0	
-expertise_me_dot_damage_1	expertise																					expertise_dot_increase=5			0	
-expertise_me_dot_damage_2	expertise_me_dot_damage_1																					expertise_dot_increase=5			0	
-expertise_me_dot_damage_3	expertise_me_dot_damage_2																					expertise_dot_increase=5			0	
-expertise_me_serotonin_purge_1	expertise_me_dot_damage_3									expertise_me_dot_damage_3											me_serotonin_purge_1				0	
-expertise_me_induce_insanity_1	expertise_me_serotonin_purge_1									expertise_me_serotonin_purge_1											me_induce_insanity_1				0	
 expertise_me_vital_damage_1	expertise																					expertise_damage_line_me_dm=5			0	
 expertise_me_vital_damage_2	expertise_me_vital_damage_1																					expertise_damage_line_me_dm=5			0	
 expertise_me_vital_damage_3	expertise_me_vital_damage_2																					expertise_damage_line_me_dm=5			0	
 expertise_me_vital_damage_4	expertise_me_vital_damage_3																					expertise_damage_line_me_dm=5			0	
+expertise_me_enhance_duration_1	expertise																					expertise_buff_duration_line_me_enhance=300			0	
+expertise_me_enhance_duration_2	expertise_me_enhance_duration_1																					expertise_buff_duration_line_me_enhance=300			0	
+expertise_me_enhance_duration_3	expertise_me_enhance_duration_2																					expertise_buff_duration_line_me_enhance=600			0	
+expertise_me_bacta_resistance_1	expertise_me_vital_action_4									expertise_me_vital_action_4											me_bacta_resistance_1				0	
 expertise_me_electrolyte_drain_1	expertise_me_vital_damage_4									expertise_me_vital_damage_4											me_electrolyte_drain_1				0	
+expertise_me_revive_duration_1	expertise																					"expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5"			0	
+expertise_me_revive_duration_2	expertise_me_revive_duration_1																					"expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5"			0	
+expertise_me_revive_duration_3	expertise_me_revive_duration_2																					"expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5"			0	
+expertise_me_heal_action_1	expertise																					expertise_action_line_me_heal=10			0	
+expertise_me_heal_action_2	expertise_me_heal_action_1																					expertise_action_line_me_heal=10			0	
+expertise_me_heal_action_3	expertise_me_heal_action_2																					expertise_action_line_me_heal=15			0	
+expertise_me_enhancement_specialist_1	expertise_me_enhance_duration_3									expertise_me_enhance_duration_3											me_enhance_action_1				0	
+expertise_me_dot_damage_1	expertise																					expertise_dot_increase=5			0	
+expertise_me_dot_damage_2	expertise_me_dot_damage_1																					expertise_dot_increase=5			0	
+expertise_me_dot_damage_3	expertise_me_dot_damage_2																					expertise_dot_increase=5			0	
 expertise_me_dot_duration_1	expertise																					expertise_dot_duration_line_me_dot=3			0	
 expertise_me_dot_duration_2	expertise_me_dot_duration_1																					expertise_dot_duration_line_me_dot=3			0	
 expertise_me_dot_duration_3	expertise_me_dot_duration_2																					expertise_dot_duration_line_me_dot=4			0	
+expertise_me_bacta_bomb_1	expertise_me_heal_action_3									expertise_me_heal_action_3											me_bacta_bomb_1				0	
+expertise_me_reckless_stimulation_1	expertise_me_enhancement_specialist_1									expertise_me_enhancement_specialist_1											me_reckless_stimulation_1				0	
+expertise_me_serotonin_purge_1	expertise_me_dot_damage_3									expertise_me_dot_damage_3											me_serotonin_purge_1				0	
 expertise_me_traumatize_1	expertise_me_dot_duration_3									expertise_me_dot_duration_3											me_traumatize_1				0	
+expertise_me_stasis_1	expertise_me_reckless_stimulation_1									expertise_me_reckless_stimulation_1											me_stasis_1				0	
+expertise_me_induce_insanity_1	expertise_me_serotonin_purge_1									expertise_me_serotonin_purge_1											me_induce_insanity_1				0	
 expertise_me_thyroid_rupture_1	expertise_me_traumatize_1									expertise_me_traumatize_1											me_thyroid_rupture_1				0	
 expertise_me_strength_1	expertise																					strength_modified=10			0	
 expertise_me_strength_2	expertise_me_strength_1																					strength_modified=10			0	
 expertise_me_strength_3	expertise_me_strength_2																					strength_modified=10			0	
 expertise_me_strength_4	expertise_me_strength_3																					strength_modified=20			0	
-expertise_me_enhance_strength_1	expertise_me_strength_4									expertise_me_strength_4											me_enhance_strength_1				0	
-expertise_me_carbine_damage_1	expertise																					expertise_damage_weapon_1=2			0	
-expertise_me_carbine_damage_2	expertise_me_carbine_damage_1																					expertise_damage_weapon_1=2			0	
-expertise_me_carbine_damage_3	expertise_me_carbine_damage_2																					expertise_damage_weapon_1=3			0	
-expertise_me_carbine_damage_4	expertise_me_carbine_damage_3																					expertise_damage_weapon_1=3			0	
-expertise_me_dueterium_rounds_1	expertise_me_carbine_damage_4									expertise_me_carbine_damage_4												expertise_dueterium_rounds_proc=5			0	
-expertise_me_humanoid_crits_1	expertise																					"expertise_critical_niche_pvp=1,expertise_critical_niche_npc=1"			0	
-expertise_me_humanoid_crits_2	expertise_me_humanoid_crits_1																					"expertise_critical_niche_pvp=2,expertise_critical_niche_npc=2"			0	
-expertise_me_humanoid_crits_3	expertise_me_humanoid_crits_2																					"expertise_critical_niche_pvp=2,expertise_critical_niche_npc=2"			0	
-expertise_me_burst_1	expertise_me_humanoid_crits_3									expertise_me_humanoid_crits_3											me_burst_1				0	
 expertise_me_agility_1	expertise																					agility_modified=10			0	
 expertise_me_agility_2	expertise_me_agility_1																					agility_modified=10			0	
 expertise_me_agility_3	expertise_me_agility_2																					agility_modified=10			0	
 expertise_me_agility_4	expertise_me_agility_3																					agility_modified=20			0	
-expertise_me_enhance_agility_1	expertise_me_agility_4									expertise_me_agility_4											me_enhance_agility_1				0	
-expertise_me_unarmed_damage_1	expertise																					expertise_damage_melee=3			0	
-expertise_me_unarmed_damage_2	expertise_me_unarmed_damage_1																					expertise_damage_melee=3			0	
-expertise_me_unarmed_damage_3	expertise_me_unarmed_damage_2																					expertise_damage_melee=4			0	
-expertise_me_unarmed_damage_4	expertise_me_unarmed_damage_3																					expertise_damage_melee=5			0	
-expertise_me_poison_knuckle_1	expertise_me_unarmed_damage_4									expertise_me_unarmed_damage_4												expertise_poison_knuckle_proc=5			0	
-expertise_me_unarmed_crit_1	expertise																					expertise_undiminished_critical_melee=1			0	
-expertise_me_unarmed_crit_2	expertise_me_unarmed_crit_1																					expertise_undiminished_critical_melee=2			0	
-expertise_me_unarmed_crit_3	expertise_me_unarmed_crit_2																					expertise_undiminished_critical_melee=2			0	
-expertise_me_cranial_smash_1	expertise_me_unarmed_crit_3									expertise_me_unarmed_crit_3											me_cranial_smash_1				0	
-expertise_me_agro_healing_1	expertise																					expertise_agro_healing=10			0	
-expertise_me_agro_healing_2	expertise_me_agro_healing_1																					expertise_agro_healing=20			0	
-expertise_me_agro_healing_3	expertise_me_agro_healing_2																					expertise_agro_healing=20			0	
-expertise_me_evasion_1	expertise_me_agro_healing_3									expertise_me_agro_healing_3											me_evasion_1				0	
 expertise_me_precision_1	expertise																					precision_modified=10			0	
 expertise_me_precision_2	expertise_me_precision_1																					precision_modified=10			0	
 expertise_me_precision_3	expertise_me_precision_2																					precision_modified=10			0	
 expertise_me_precision_4	expertise_me_precision_3																					precision_modified=20			0	
-expertise_me_enhance_precision_1	expertise_me_precision_4									expertise_me_precision_4											me_enhance_precision_1				0	
-expertise_me_kinetic_armor_1	expertise																					"expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75"			0	
-expertise_me_kinetic_armor_2	expertise_me_kinetic_armor_1																					"expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75"			0	
-expertise_me_kinetic_armor_3	expertise_me_kinetic_armor_2																					"expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75"			0	
-expertise_me_kinetic_armor_4	expertise_me_kinetic_armor_3																					"expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75"			0	
-expertise_me_enhance_block_1	expertise_me_kinetic_armor_4									expertise_me_kinetic_armor_4											me_enhance_block_1				0	
+expertise_me_carbine_damage_1	expertise																					expertise_damage_weapon_1=2			0	
+expertise_me_carbine_damage_2	expertise_me_carbine_damage_1																					expertise_damage_weapon_1=2			0	
+expertise_me_carbine_damage_3	expertise_me_carbine_damage_2																					expertise_damage_weapon_1=3			0	
+expertise_me_carbine_damage_4	expertise_me_carbine_damage_3																					expertise_damage_weapon_1=3			0	
+expertise_me_enhance_strength_1	expertise																				me_enhance_strength_1				0	
+expertise_me_unarmed_damage_1	expertise																					expertise_damage_melee=3			0	
+expertise_me_unarmed_damage_2	expertise_me_unarmed_damage_1																					expertise_damage_melee=3			0	
+expertise_me_unarmed_damage_3	expertise_me_unarmed_damage_2																					expertise_damage_melee=4			0	
+expertise_me_unarmed_damage_4	expertise_me_unarmed_damage_3																					expertise_damage_melee=5			0	
+expertise_me_agro_healing_1	expertise																					expertise_agro_healing=10			0	
+expertise_me_agro_healing_2	expertise_me_agro_healing_1																					expertise_agro_healing=20			0	
+expertise_me_agro_healing_3	expertise_me_agro_healing_2																					expertise_agro_healing=20			0	
+expertise_me_enhance_agility_1	expertise																				me_enhance_agility_1				0	
+expertise_me_enhance_precision_1	expertise																				me_enhance_precision_1				0	
 expertise_me_energy_armor_1	expertise																					"expertise_innate_protection_energy=150,expertise_innate_protection_all=75"			0	
 expertise_me_energy_armor_2	expertise_me_energy_armor_1																					"expertise_innate_protection_energy=150,expertise_innate_protection_all=75"			0	
 expertise_me_energy_armor_3	expertise_me_energy_armor_2																					"expertise_innate_protection_energy=150,expertise_innate_protection_all=75"			0	
 expertise_me_energy_armor_4	expertise_me_energy_armor_3																					"expertise_innate_protection_energy=150,expertise_innate_protection_all=75"			0	
-expertise_me_enhance_dodge_1	expertise_me_energy_armor_4									expertise_me_energy_armor_4											me_enhance_dodge_1				0	
+expertise_me_dueterium_rounds_1	expertise_me_carbine_damage_4									expertise_me_carbine_damage_4												expertise_dueterium_rounds_proc=5			0	
+expertise_me_poison_knuckle_1	expertise_me_unarmed_damage_4									expertise_me_unarmed_damage_4												expertise_poison_knuckle_proc=5			0	
+expertise_me_kinetic_armor_1	expertise_me_energy_armor_4									expertise_me_energy_armor_4												"expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75"			0	
+expertise_me_kinetic_armor_2	expertise_me_kinetic_armor_1																					"expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75"			0	
+expertise_me_kinetic_armor_3	expertise_me_kinetic_armor_2																					"expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75"			0	
+expertise_me_kinetic_armor_4	expertise_me_kinetic_armor_3																					"expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75"			0	
+expertise_me_humanoid_crits_1	expertise																					"expertise_critical_niche_pvp=1,expertise_critical_niche_npc=1"			0	
+expertise_me_humanoid_crits_2	expertise_me_humanoid_crits_1																					"expertise_critical_niche_pvp=2,expertise_critical_niche_npc=2"			0	
+expertise_me_humanoid_crits_3	expertise_me_humanoid_crits_2																					"expertise_critical_niche_pvp=2,expertise_critical_niche_npc=2"			0	
+expertise_me_unarmed_crit_1	expertise																					expertise_undiminished_critical_melee=1			0	
+expertise_me_unarmed_crit_2	expertise_me_unarmed_crit_1																					expertise_undiminished_critical_melee=2			0	
+expertise_me_unarmed_crit_3	expertise_me_unarmed_crit_2																					expertise_undiminished_critical_melee=2			0	
+expertise_me_evasion_1	expertise																				me_evasion_1				0	
+expertise_me_burst_1	expertise_me_humanoid_crits_3									expertise_me_humanoid_crits_3											me_burst_1				0	
+expertise_me_cranial_smash_1	expertise_me_unarmed_crit_3									expertise_me_unarmed_crit_3											me_cranial_smash_1				0	
+expertise_me_enhance_block_1	expertise																				me_enhance_block_1				0	
+expertise_me_enhance_dodge_1	expertise																				me_enhance_dodge_1				0	
 expertise_co_remote_detonator_1	expertise																				co_remote_detonator_1				0	
 expertise_co_suppressing_fire_1	expertise																				co_suppressing_fire				0	
 expertise_co_powered_armor_1	expertise																					expertise_innate_protection_all=250			0	
