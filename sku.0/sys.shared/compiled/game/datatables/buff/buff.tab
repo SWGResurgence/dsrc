@@ -1459,7 +1459,7 @@ king_head_crack	tusken_king_crack			1	jedi.forceWeaken	6	expertise_healing_reduc
 king_rend	tusken_king_rend			50	command.co_riddle_armor	15	private_armor_bonus	-2000		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 king_sandstorm	king_sandstorm			1	command.bm_wing_buffet	12	glancing_blow_vulnerable	35		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 axkva_crystalize	axkva_crystalize			100	command.shock	60	movement	0	combat_stun	0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
-stasis_recourse	stasis			40	buffs.stasisRecourse	60		0		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
+stasis_recourse	stasis			40	buffs.stasisRecourse	30		0		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 buddy_xp_buff	exp_buff			100	command.cyborgStrengthBuff	1800	xp_bonus_general	100		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 event_lifeday_cookie	event_run_speed			1	command.wookiee_ability	3000	movement	10	constitution_modified	125		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 event_lifeday_drink	event_vitality_boost			1	command.gallopStop	3000	expertise_damage_all	4	expertise_action_all	3		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
