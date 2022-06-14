@@ -1895,8 +1895,8 @@ expertise_of_aoe_act_4	expertise_of_aoe_act_3																					expertise_acti
 expertise_of_aoe_crit_1	expertise																					expertise_critical_line_of_aoe=10			0	
 expertise_of_aoe_crit_2	expertise_of_aoe_crit_1																					expertise_critical_line_of_aoe=15			0	
 expertise_of_aoe_crit_3	expertise_of_aoe_crit_2																					expertise_critical_line_of_aoe=25			0	
-expertise_of_aoe_dam_1	expertise																					expertise_damage_line_of_aoe=10			0	
-expertise_of_aoe_dam_2	expertise_of_aoe_dam_1																					expertise_damage_line_of_aoe=15			0	
+expertise_of_aoe_dam_1	expertise																					expertise_damage_line_of_aoe=20			0	
+expertise_of_aoe_dam_2	expertise_of_aoe_dam_1																					expertise_damage_line_of_aoe=30			0	
 expertise_of_firepower_1	expertise_of_aoe_dam_2									expertise_of_aoe_dam_2											of_firepower_1				0	
 expertise_of_firepower_cool_1	expertise_of_firepower_1									expertise_of_firepower_1												expertise_cooldown_line_of_firepower=3			0	
 expertise_of_firepower_cool_2	expertise_of_firepower_cool_1																					expertise_cooldown_line_of_firepower=3			0	
