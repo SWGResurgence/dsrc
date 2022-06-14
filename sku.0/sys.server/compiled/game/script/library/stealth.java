@@ -3117,7 +3117,7 @@ public class stealth extends script.base_script
         float drainRatio = 9.0f;
         if (camouflage < 100.0f)
         {
-            drainRatio = 10.0f - (0.1f / (0.1f + ((camouflage) / 100.0f)));
+            drainRatio = 9.0f - (0.1f / (0.1f + ((camouflage) / 100.0f)));
         }
         int actionCost = (int)(getMaxAction(player) / drainRatio);
         int action = testDrainAttribute(player, ACTION, actionCost);
