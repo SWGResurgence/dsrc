@@ -36,6 +36,9 @@ public class katarn_loot_controller extends script.base_script {
         int x = rand(1, 100);
         if (x < 26) { // 25% Drop Chance for Kashyyyk Embroidered Sash {
             static_item.createNewItemFunction("item_tcg_loot_reward_series7_embroidered_sash", corpseInventory);
+            if (x < 11) { // 10% Drop Chance for Kashyyyk Beast Muzzle {
+                static_item.createNewItemFunction("item_tcg_loot_reward_series6_beast_muzzle", corpseInventory);
+            }
         }  
         String myLoot1 = "object/tangible/loot/misc/kashyyyk_token.iff";
         createObject(myLoot1, corpseInventory, "");
