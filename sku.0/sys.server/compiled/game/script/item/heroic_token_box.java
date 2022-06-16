@@ -20,7 +20,7 @@ public class heroic_token_box extends script.base_script
 {
     private static final string_id MNU_WITHDRAW = new string_id("token_box", "withdraw");
     public int OnAttach(obj_id self) throws InterruptedException {
-        if )!hasObjVar(self, "item.set.tokens_held")) {
+        if (!hasObjVar(self, "item.set.tokens_held")) {
             trial.initializeBox(self);
         } else {
             trial.verifyBox(self);
