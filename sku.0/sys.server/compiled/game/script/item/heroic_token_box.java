@@ -37,7 +37,7 @@ public class heroic_token_box extends script.base_script
     }
     
     @Override
-    public int OnGetAttributes(obj_id self, obj_id player, String[], names, String[] attribs) throws InterruptedException {
+    public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException {
         int free = getFirstFreeIndex(names);
         if (free == -1 || !hasObjVar(self, "item.set.tokens_held")) {
             return SCRIPT_CONTINUE;
@@ -65,7 +65,7 @@ public class heroic_token_box extends script.base_script
         if (utils.isNestedWithin(self, player) && item == menu_info_types.SERVER_MENU1) {
             String title = "Box of Achievements Withdraw";
             String prompt = "Please select the token that you would like to withdraw.";
-            List(String> tokenOptions = new ArrayList<>();
+            List(String> tokenOptions = new ArrayList<>());
             for (String token : trial.HEROIC_TOKENS) {
                 if (trial.getTokenAmountInBox(self, token) > 0) {
                     tokenOptions.add(token);
