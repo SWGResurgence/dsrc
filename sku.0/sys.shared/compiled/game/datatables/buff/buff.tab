@@ -615,7 +615,7 @@ towArmorAssembly	genBuff_4			80	buffs.genericBuff	-1	armor_assembly	50	armor_exp
 towWeaponAssembly	genBuff_4			80	buffs.genericBuff	-1	weapon_assembly	50	weapon_experimentation	5	luck_modified	100		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 towDroidAssembly	genBuff_4			80	buffs.genericBuff	-1	droid_assembly	50	droid_experimentation	5	cybernetic_assembly	50	cybernetic_experimentation	5	luck_modified	100	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 towMedAssembly	genBuff_4			80	buffs.genericBuff	-1	bm_incubator_dps_armor	3	incubation_time_reduction	11	bm_xp_mod_boost	5		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
-towFoodAssembly	genBuff_4			80	buffs.genericBuff	-1	food_assembly	50	food_experimentation	5	clothing_assembly	50	clothing_experimentation	5	luck_modified	100		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+towFoodAssembly	genBuff_4			80	buffs.genericBuff	-1	food_assembly	50	food_experimentation	5	clothing_assembly	50	clothing_experimentation	5	luck_modified	100	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 towFacGuardDefenseItem	genBuff_4			58	command.powerBoost	20	agility_modified	160		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towForemanCoolingItem	genBuff_4			58	command.countertoxinSpray	30	luck_modified	160		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towForemanBurstRun	burstrun	escape		1	command.burstRun	60	movement	0		0		0		0		0	STATE_NONE	removeBurstRun			1	0		1	1	1	0	1	1	0	1	1	1
