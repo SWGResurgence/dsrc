@@ -6,6 +6,8 @@ import script.obj_id;
 import script.string_id;
 
 import java.util.Arrays;
+import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.Vector;
 
@@ -2522,85 +2524,97 @@ public class trial extends script.base_script
         utils.removeScriptVar(sequencer, "gcw.rebel.participants");
         utils.removeScriptVar(sequencer, "gcw.imperial.participants");
     }
-    public static boolean purchaseTokenItem(obj_id player, int price, String tokenName) throws InterruptedException
+    public static boolean purchaseTokenItem(obj_id player, String tokenName, int price) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player) || price < 0 || tokenName == null || tokenName.length() <= 0)
         {
             return false;
         }
-        obj_id[] inventoryContents = getInventoryAndEquipment(player);
-        if (inventoryContents == null || inventoryContents.length <= 0)
+        if (getTokenTotal(player, tokenName) < price)
         {
             return false;
         }
         int tokensOwed = price;
         obj_id tokens = utils.getObjectInInventory(player, tokenName);
-        int invTokenAmt = tokens != null ? getCount(tokens) : 0;
-        if (invTokenAmt > 0) {
-            if (tokensOwed > invTokenAmt) {
+        int invTokenAmt = tokens!= null ? getCount(tokens) : 0;
+        if (invTokenAmt > 0)
+        {
+            if (tokensOwed > invTokenAmt)
+            {
                 destroyObject(tokens);
                 tokensOwed -= invTokenAmt;
-            } else {
-                setCount(tokens, invTokenAmt - tokensOwed);
+            }
+            else
+            {
+                setCount(tokens, invTokenAmt = tokensOwed);
                 return true;
             }
         }
         obj_id tokenBox = utils.getObjectInInventory(player, TOKEN_BOX);
         withdrawTokensFromBox(tokenBox, tokenName, tokensOwed);
         return true;
-    }
+    } 
     public static int getSpaceDutyTokenPrice(int level) throws InterruptedException
     {
         return (level *5) + 50;
     }
     public static int getTokenTotal(obj_id player, String token) throws InterruptedException
     {
-        if (!isIdValid(player) || !exists(player) || token == null || token.length() <= 0)
+        if (!isIdValud(player) || !exists(player) || token == null || token.length() <= 0)
         {
             return 0;
         }
         int tokenCount = getTokenAmountInInventory(player, token);
         obj_id tokenBox = utils.getObjectInInventory(player, TOKEN_BOX);
-        if (tokenBox != null) {
-            tokenCount += getTokenAmountInBox(tokenBox, token);
+        if (tokenBox != null)
+        {
+            tokenCount += getTokenAmountInInventory(tokenBox, token);
         }
         return tokenCount;
     }
-    public static int getTokenAmountInBox(obj_id box, String token) throws InterruptedException {
+    public static int getTokenAmountInBox(obj_id box, String token) throws InterruptedException
+    {
         verifyBox(box);
         int t = 0;
-        if (hasObjVar(box, "item.set.tokens_held")) {
+        if (hasObjVar(box, "item.set.tokens_held"))
+        {
             int[] virtualTokenArray = getIntArrayObjVar(box, "item.set.tokens_held");
-            for (int k = 0; k < trial.HEROIC_TOKENS.length; k++) {
-                if (trial.HEROIC_TOKENS[k].equals(token)) {
-                    t = k;
+            for (int k = 0; k < trial.HEROIC_TOKENS.length; k++)
+            {
+                if (trial.HEROIC_TOKENS[k].equals(token))
+                {
+                    t=k;
                 }
             }
             return virtualTokenArray[t];
         }
-         return 0;
+        return 0;
     }
-    public static int getTokenAmountInInventory(obj_id player, String token) throws InterruptedException {
+    public static int getTokenAmountInInventory(obj_id player, String token) throws InterruptedException
+    {
         obj_id tokens = utils.getObjectInInventory(player, token);
         return tokens != null ? getCount(tokens) : 0;
     }
-    public static void withdrawTokensFromBox(obj_id box, String token, int amount) {
+    public static void withdrawTokensFromBox(obj_id box, String token, int amount) throws InterruptedException
+    {
         int vTokens = 0;
-        if (hasObjVar(box, "item.set.tokens_held")) {
+        if (hasObjVar(box, "item.set.tokens_held"))
+        {
             int[] virtualTokens = getIntArrayObjVar(box, "item.set.tokens_held");
             int t = -1;
-            for (int k = 0; k < HEROIC_TOKENS.length; k++) {
-                if (HEROIC_TOKENS[k].equals(token)) {
-                    t = k;
-                    vTokens = virtualTokens[t];
-                }
+            for (int k = 0; k < HEROIC_TOKENS.length; k++)
+            {
+               if (HEROIC_TOKENS[k].equals(token))
+               {
+                  t=k;
+                  vTokens = virtualTokens[t];
+               }
             }
-            if (t > -1) {
-                if (vTokens > amount) {
+            if (t > -1)
+            {
+                if (vTokens > amount)
+                {
                     vTokens -= amount;
-                    virtualTokens[t] = vTokens;
-                } else {
-                    amount -= vTokens;
                     virtualTokens[t] = 0;
                 }
                 setObjVar(box, "item.set.tokens_held", virtualTokens);
