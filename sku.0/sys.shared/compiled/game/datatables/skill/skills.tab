@@ -1959,6 +1959,7 @@ expertise_of_armor_eng_2	expertise_of_armor_eng_1																					expertise_
 expertise_of_stimulator_1	expertise																				of_stimulator_1				0	
 expertise_of_heal_dam_1	expertise_of_stimulator_1									expertise_of_stimulator_1												expertise_healing_line_of_heal=5			0	
 expertise_of_heal_dam_2	expertise_of_heal_dam_1																					expertise_healing_line_of_heal=10			0	
+expertise_of_emergency_shield	expertise																				of_emergency_shield					
 expertise_of_armor_kin_1	expertise																					expertise_innate_protection_kinetic=500			0	
 expertise_of_armor_kin_2	expertise_of_armor_kin_1																					expertise_innate_protection_kinetic=500			0	
 expertise_of_purge_1	expertise																				of_purge_1				0	
