@@ -6,7 +6,7 @@ import script.library.static_item;
 import script.library.utils;
 import script.obj_id;
 
-public class acklay_loot_controller extends script.base_script
+public class loot_controller_mutant_acklay extends script.base_script
 {
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {

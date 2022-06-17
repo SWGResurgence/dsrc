@@ -3,7 +3,7 @@ package script.structure.municipal;
 import script.*;
 import script.library.*;
 
-public class meditation_rooms extends script.base_script {
+public class player_meditation_rooms extends script.base_script {
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException {
         if (isPlayer(item) && utils.isProfession(item, utils.JEDI)) {
             buff.applyBuff(item, "tcg_diner_meditation_rooms");

@@ -6,7 +6,7 @@ import script.library.static_item;
 import script.library.utils;
 import script.obj_id;
 
-public class nexu_death extends script.base_script
+public class loot_controller_nexu extends script.base_script
 {
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {

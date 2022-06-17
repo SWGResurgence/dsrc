@@ -8,7 +8,7 @@ import script.library.utils;
 
 import script.obj_id;
 
-public class grievous_death extends script.base_script {
+public class loot_controller_grevious extends script.base_script {
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException {
         obj_id corpseInventory = utils.getInventoryContainer(self);
         if (corpseInventory == null) {
