@@ -94,11 +94,11 @@ final public class prose_package implements Serializable
 	public int       digitInteger;
 	public float     digitFloat;
 	public boolean   complexGrammar;
-}
+/*}
 
-// Addition from SWG: Prophecy: Prose_Package
+    Addition from SWG: Prophecy: Prose_Package
 
-public string_id getTOStringId() {
+    public string_id getTOStringId() {
         return other.getStringId();
     }
 
@@ -212,12 +212,12 @@ public string_id getTOStringId() {
         public void set(string_id nameId) {
             this.nameId = nameId;
         }
-    }
+    }*/
 
     /*
 		Below are temporary solutions for the syntax errors in our prose_package revamp. We plan to remove these in the near future
-     */
-    public prose_package(string_id sid, obj_id actor, String actorString, string_id actorStringId, obj_id target, String targetString, string_id targetStringId, obj_id other, String otherString, string_id otherStringId, int di, float df) {
+    */
+    /*public prose_package(string_id sid, obj_id actor, String actorString, string_id actorStringId, obj_id target, String targetString, string_id targetStringId, obj_id other, String otherString, string_id otherStringId, int di, float df) {
         if (actorString != null && !actorString.isEmpty()) {
             actorStringId = null;
         }
@@ -417,6 +417,6 @@ public string_id getTOStringId() {
         this.target.update(target);
         this.other.update(other);
         this.actor.update(actor);
-    }
+    }*/
 };
 
