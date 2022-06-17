@@ -4841,7 +4841,7 @@ public class combat_actions extends script.systems.combat.combat_base {
         if (baseCooldownTime < 0) {
             return SCRIPT_CONTINUE;
         }
-        floatcooldownTimeMod = getEnhancedSkillStatisticModifierUncapped(self, "expertise_cooldown_line_of_paint");
+        float cooldownTimeMod = getEnhancedSkillStatisticModifierUncapped(self, "expertise_cooldown_line_of_paint");
         setCommandTimerValue(self, TIMER_COOLDOWN, baseCooldownTime - (cooldownTimeMod / 10));
         doInspiredAction(self);
         return SCRIPT_CONTINUE;
@@ -4855,7 +4855,7 @@ public class combat_actions extends script.systems.combat.combat_base {
         if (baseCooldownTime < 0) {
             return SCRIPT_CONTINUE;
         }
-        floatcooldownTimeMod = getEnhancedSkillStatisticModifierUncapped(self, "expertise_cooldown_line_of_paint");
+        float cooldownTimeMod = getEnhancedSkillStatisticModifierUncapped(self, "expertise_cooldown_line_of_paint");
         setCommandTimerValue(self, TIMER_COOLDOWN, baseCooldownTime - (cooldownTimeMod / 10));
         doInspiredAction(self);
         return SCRIPT_CONTINUE;
