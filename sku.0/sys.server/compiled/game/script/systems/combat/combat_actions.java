@@ -4847,7 +4847,7 @@ public class combat_actions extends script.systems.combat.combat_base {
         return SCRIPT_CONTINUE;
     }
     
-    public int of_deb_off_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
+    public int of_deb_off_2(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
         if (!combatStandardAction("of_deb_off_2", self, target, params, "", "")) {
             return SCRIPT_CONTINUE;
         }
