@@ -4832,6 +4832,34 @@ public class combat_actions extends script.systems.combat.combat_base {
         doInspiredAction(self);
         return SCRIPT_CONTINUE;
     }
+    
+    public int of_deb_off_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
+        if (!combatStandardAction("of_deb_off_1", self, target, params, "", "")) {
+            return SCRIPT_CONTINUE;
+        }
+        float baseCooldownTime = getBaseCooldownTime("of_deb_off_1");
+        if (baseCooldownTime < 0) {
+            return SCRIPT_CONTINUE;
+        }
+        floatcooldownTimeMod = getEnhancedSkillStatisticModifierUncapped(self, "expertise_cooldown_line_of_paint");
+        setCommandTimerValue(self, TIMER_COOLDOWN, baseCooldownTime - (cooldownTimeMod / 10));
+        doInspiredAction(self);
+        return SCRIPT_CONTINUE;
+    }
+    
+    public int of_deb_off_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
+        if (!combatStandardAction("of_deb_off_2", self, target, params, "", "")) {
+            return SCRIPT_CONTINUE;
+        }
+        float baseCooldownTime = getBaseCooldownTime("of_deb_off_2");
+        if (baseCooldownTime < 0) {
+            return SCRIPT_CONTINUE;
+        }
+        floatcooldownTimeMod = getEnhancedSkillStatisticModifierUncapped(self, "expertise_cooldown_line_of_paint");
+        setCommandTimerValue(self, TIMER_COOLDOWN, baseCooldownTime - (cooldownTimeMod / 10));
+        doInspiredAction(self);
+        return SCRIPT_CONTINUE;
+    }
 
     public int of_decapitate_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
         if (!combatStandardAction("of_decapitate_1", self, target, params, "", "")) {
@@ -7540,6 +7568,13 @@ public class combat_actions extends script.systems.combat.combat_base {
     public int bh_shields_1(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
         if (!combatStandardAction("bh_shields_1", self, target, params, "", "")) {
             return SCRIPT_OVERRIDE;
+        }
+        return SCRIPT_CONTINUE;
+    }
+    
+    public int of_emergency_shield(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
+        if (!combatStandardAction("of_emergency_shield", self, target, params, "", "")) {
+            return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
