@@ -1914,7 +1914,7 @@ expertise_of_paint_act_2	expertise_of_paint_act_1									expertise_of_paint_act
 expertise_of_paint_act_3	expertise_of_paint_act_2									expertise_of_paint_act_2												expertise_action_line_of_paint=10			0	
 expertise_of_paint_dam_1	expertise																					"expertise_damage_line_of_paint=10,expertise_action_line_of_paint=10"			0	
 expertise_of_paint_dam_2	expertise_of_paint_dam_1									expertise_of_paint_dam_1												"expertise_damage_line_of_paint=10,expertise_action_line_of_paint=10"			0	
-expertise_of_advanced_target_tracking_1	expertise_of_paint_dam_2									expertise_of_paint_dam_2											of_deb_off_1	expertise_critical_niche_all=5				
+expertise_of_advanced_target_tracking_1	expertise_of_paint_dam_2									expertise_of_paint_dam_2											of_deb_off_1	"expertise_critical_niche_all=5,expertise_damage_line_of_paint=10"				
 expertise_of_advanced_paint_1	expertise_of_paint_dam_2									expertise_of_paint_dam_2											of_deb_def_4				0	
 expertise_of_advanced_target_identification_1	expertise_of_advanced_paint_1									expertise_of_advanced_paint_1											of_deb_off_2	detect_hidden=50				
 expertise_of_strength_1	expertise																					strength_modified=10			0	
@@ -1983,7 +1983,7 @@ pvp_rebel_unstoppable_ability																					command_pvp_unstoppable_rebel_
 pvp_rebel_last_man_ability																					command_pvp_last_man_rebel_ability				0	
 pvp_rebel_aura_buff_self																					pvp_aura_buff_rebel_self				0	
 pvp_rebel_airstrike_ability																					pvp_airstrike_rebel_ability				0	
-expertise_me_hot_duration_1	expertise																					expertise_healing_line_me_hot=10			0	
+expertise_me_hot_duration_1	expertise									expertise_me_heal_damage_1												expertise_healing_line_me_hot=10			0	
 expertise_me_hot_duration_2	expertise_me_hot_duration_1																					expertise_healing_line_me_hot=10			0	
 expertise_me_hot_duration_3	expertise_me_hot_duration_2																					expertise_healing_line_me_hot=15			0	
 expertise_me_hot_duration_4	expertise_me_hot_duration_3																					expertise_healing_line_me_hot=15			0	
@@ -1999,17 +1999,18 @@ expertise_me_vital_damage_1	expertise																					expertise_damage_line_
 expertise_me_vital_damage_2	expertise_me_vital_damage_1																					expertise_damage_line_me_dm=5			0	
 expertise_me_vital_damage_3	expertise_me_vital_damage_2																					expertise_damage_line_me_dm=5			0	
 expertise_me_vital_damage_4	expertise_me_vital_damage_3																					expertise_damage_line_me_dm=5			0	
+expertise_me_revive_duration_1	expertise																					"expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5"			0	
+expertise_me_revive_duration_2	expertise_me_revive_duration_1																					"expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5"			0	
+expertise_me_revive_duration_3	expertise_me_revive_duration_2																					"expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5"			0	
+expertise_me_heal_action_1	expertise_me_heal_damage_4									expertise_me_heal_damage_4												expertise_action_line_me_heal=10			0	
+expertise_me_heal_action_2	expertise_me_heal_action_1																					expertise_action_line_me_heal=10			0	
+expertise_me_heal_action_3	expertise_me_heal_action_2																					expertise_action_line_me_heal=15			0	
 expertise_me_enhance_duration_1	expertise																					expertise_buff_duration_line_me_enhance=300			0	
 expertise_me_enhance_duration_2	expertise_me_enhance_duration_1																					expertise_buff_duration_line_me_enhance=300			0	
 expertise_me_enhance_duration_3	expertise_me_enhance_duration_2																					expertise_buff_duration_line_me_enhance=600			0	
 expertise_me_bacta_resistance_1	expertise_me_vital_action_4									expertise_me_vital_action_4											me_bacta_resistance_1				0	
 expertise_me_electrolyte_drain_1	expertise_me_vital_damage_4									expertise_me_vital_damage_4											me_electrolyte_drain_1				0	
-expertise_me_revive_duration_1	expertise																					"expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5"			0	
-expertise_me_revive_duration_2	expertise_me_revive_duration_1																					"expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5"			0	
-expertise_me_revive_duration_3	expertise_me_revive_duration_2																					"expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5"			0	
-expertise_me_heal_action_1	expertise																					expertise_action_line_me_heal=10			0	
-expertise_me_heal_action_2	expertise_me_heal_action_1																					expertise_action_line_me_heal=10			0	
-expertise_me_heal_action_3	expertise_me_heal_action_2																					expertise_action_line_me_heal=15			0	
+expertise_me_bacta_bomb_1	expertise_me_heal_action_3									expertise_me_heal_action_3											me_bacta_bomb_1				0	
 expertise_me_enhancement_specialist_1	expertise_me_enhance_duration_3									expertise_me_enhance_duration_3											me_enhance_action_1				0	
 expertise_me_dot_damage_1	expertise																					expertise_dot_increase=5			0	
 expertise_me_dot_damage_2	expertise_me_dot_damage_1																					expertise_dot_increase=5			0	
@@ -2017,7 +2018,6 @@ expertise_me_dot_damage_3	expertise_me_dot_damage_2																					expertis
 expertise_me_dot_duration_1	expertise																					expertise_dot_duration_line_me_dot=3			0	
 expertise_me_dot_duration_2	expertise_me_dot_duration_1																					expertise_dot_duration_line_me_dot=3			0	
 expertise_me_dot_duration_3	expertise_me_dot_duration_2																					expertise_dot_duration_line_me_dot=4			0	
-expertise_me_bacta_bomb_1	expertise_me_heal_action_3									expertise_me_heal_action_3											me_bacta_bomb_1				0	
 expertise_me_reckless_stimulation_1	expertise_me_enhancement_specialist_1									expertise_me_enhancement_specialist_1											me_reckless_stimulation_1				0	
 expertise_me_serotonin_purge_1	expertise_me_dot_damage_3									expertise_me_dot_damage_3											me_serotonin_purge_1				0	
 expertise_me_traumatize_1	expertise_me_dot_duration_3									expertise_me_dot_duration_3											me_traumatize_1				0	
