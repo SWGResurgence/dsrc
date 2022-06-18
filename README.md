@@ -2,5 +2,4 @@
 
 This repo was forked from Stella Bellum. Please credit them (notably Cekis) if you use any of the work here.
 
-## Pull requests are welcome and encouraged 
-  
+## Pull requests are welcome and encouraged
