@@ -11,11 +11,12 @@ item_schematic_ex_vibro_blade_unit	1000		Exceptional Vibro Blade Unit Schematic
 item_schematic_ex_reinforcement_core	1000		Exceptional Weapon Reinforcement Core Schematic
 item_tcg_loot_reward_series6_build02_hk47_mustafar_diorama	300		HK47: Mustafar Diorama
 item_tcg_loot_reward_series5_mustafar_diorama	150		Mustafar Diorama
-item_tow_ring_armorsmith_04_01	50		Relic Armorsmith's Ring
-item_tow_ring_bioeng_04_01	50		Relic Bio-Engineer's Ring
-item_tow_ring_chef_04_01	50		Relic Chef's Ring
-item_tow_ring_droideng_04_01	50		Relic Droid Engineer's Ring
-item_tow_ring_weaponsmith_04_01	50		Relic Weaponsmith's Ring
+item_tow_ring_architect_04_01	100		Relic Armorsmith's Ring
+item_tow_ring_armorsmith_04_01	100		Relic Armorsmith's Ring
+item_tow_ring_bioeng_04_01	100		Relic Bio-Engineer's Ring
+item_tow_ring_chef_04_01	100		Relic Chef's Ring
+item_tow_ring_droideng_04_01	100		Relic Droid Engineer's Ring
+item_tow_ring_weaponsmith_04_01	100		Relic Weaponsmith's Ring
 item_tow_schematic_psg_05_01	500		Schematic: Old Republic Personal Shield
 item_tow_foreman_burst_run_04_01	1000		Sprint Enhancement Stim
 item_restuss_schematic_saber_04_01	500		Technical Readout of a One-Handed Lightsaber Hilt

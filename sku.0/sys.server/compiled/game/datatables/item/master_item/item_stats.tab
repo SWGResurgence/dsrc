@@ -635,6 +635,7 @@ item_tow_ring_weaponsmith_04_01					towWeaponAssembly
 item_tow_ring_droideng_04_01					towDroidAssembly						
 item_tow_ring_bioeng_04_01					towMedAssembly						
 item_tow_ring_chef_04_01					towFoodAssembly						
+item_tow_ring_architect_04_01					towStructuresAssembly						
 item_tow_factory_gaurd_trinket_04_01					towFacGuardDefenseItem	long_reuse_4	1800				
 item_tow_foreman_fire_absorb_04_01					towForemanCoolingItem	long_reuse_4	1800				
 item_tow_foreman_burst_run_04_01				index_color_1=11	burstRun	long_reuse_4	1800				
