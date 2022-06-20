@@ -1,0 +1,13 @@
+@base object/tangible/base/shared_tangible_base.iff
+
+@class tangible_object 6
+@class object_template 5
+
+objectName = "item_n"  "default"
+detailedDescription = "item_d"  "default"
+appearanceFilename = "appearance/aurilia_token.apt"
+ 
+gameObjectType = GOT_misc_item_usable
+
+clientDataFile = "clientdata/index/client_shared_index_1_17.cdf"
+ 

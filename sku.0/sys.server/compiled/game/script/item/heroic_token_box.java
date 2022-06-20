@@ -53,7 +53,8 @@ public class heroic_token_box extends script.base_script
         "Token: Entertainer Token of Achievement",
         "Token: Treasure Token of Achievement",
         "Token: Kashyyyk Token of Freedom",
-        "Token: Aurilian Certified Scroll"
+        "Token: Aurilian Certified Scroll",
+        "Token: World Boss Token of Achievement"
     };
     private static final int[] TOKENS = {
         0,
@@ -95,7 +96,8 @@ public class heroic_token_box extends script.base_script
         36,
         37,
         38,
-        39
+        39,
+        40
     };    
     public int OnAttach(obj_id self) throws InterruptedException
     {
