@@ -4,3 +4,5 @@
 @class object_template 5
 
 sharedTemplate = "object/tangible/loot/misc/shared_world_base_token.iff"
+
+scripts = ["structure.municipal.meditation_rooms"]
