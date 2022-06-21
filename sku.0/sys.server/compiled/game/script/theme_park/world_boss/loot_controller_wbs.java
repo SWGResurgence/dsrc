@@ -29,7 +29,7 @@ public class loot_controller_wbs extends script.base_script {
         }
         int x = rand(1, 100);
         if (x < 101) {    // 100% Drop Rate: World Boss Token
-            static_item.createNewItemFunction("item_world_boss_token_01_01", 8));
+            static_item.createNewItemFunction("item_world_boss_token_01_01", 8);
         }
         /*String myLoot1 = "object/tangible/loot/misc/world_base_token.iff";
         createObject(myLoot1, corpseInventory, "");
