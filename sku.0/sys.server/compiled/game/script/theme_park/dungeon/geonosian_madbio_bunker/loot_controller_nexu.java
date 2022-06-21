@@ -35,7 +35,7 @@ public class loot_controller_nexu extends script.base_script
             return;
         }
         int x = rand(1, 100);
-        if (x < 101) { // 100% Drop Rate: Geonosian Solar Sail ITV
+        if (x < 76) {      // 75% Drop Rate: Geonosian Solar Sail ITV
             static_item.createNewItemFunction("item_tcg_loot_reward_series4_home_itv_02_01", corpseInventory);
             if (x < 26) {  // 25% Drop Chance: Auto Feeder
             static_item.createNewItemFunction("item_tcg_loot_reward_series6_auto_feeder", corpseInventory);
