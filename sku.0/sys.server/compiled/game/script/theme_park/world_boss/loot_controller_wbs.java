@@ -1,4 +1,4 @@
-package script.theme_park.world_boss
+package script.theme_park.world_boss;
 
 import script.dictionary;
 import script.library.ai_lib;
