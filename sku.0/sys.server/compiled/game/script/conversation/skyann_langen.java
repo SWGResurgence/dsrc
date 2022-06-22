@@ -36,7 +36,7 @@ public class skyann_langen extends script.base_script {
         return false;
     }
     public void skyann_langen_action_sendRewardSignal (obj_id player, obj_id npc) throws InterruptedException {
-        groundquests.sendSingal(player, "completedWorldBossPekoEmpress");
+        groundquests.sendSignal(player, "completedWorldBossPekoEmpress");
     }
     public void skyann_langen_action_grantQuest (obj_id player, obj_id npc) throws InterruptedException {
         groundquests.grantQuest(player, "quest/world_boss_peko_empress");
@@ -186,7 +186,7 @@ public class skyann_langen extends script.base_script {
         return SCRIPT_CONTINUE;
     }
     public boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses) {
-        Object[] object = new Object[responses.length];
+        Object[] objects = new Object[responses.length];
         System.arraycopy(responses, 0, objects, 0, responses.length);
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
@@ -236,7 +236,7 @@ public class skyann_langen extends script.base_script {
             return SCRIPT_CONTINUE;
     }
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException {
-        if (!conversationId.equalss("skyann_langen"))
+        if (!conversationId.equals("skyann_langen"))
             return SCRIPT_CONTINUE;
         obj_id npc = self;
         int branchId = utils.getIntScriptVar (player, "conversation.skyann_langen.branchId");
