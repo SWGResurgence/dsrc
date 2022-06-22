@@ -37,9 +37,9 @@ public class loot_controller_reek extends script.base_script
         int x = rand(1, 100);
         if (x < 51) {  // 50% Drop Chance: Reek DNA Core
             static_item.createNewItemFunction("item_cs_dna_reek");
-            if (x < 26) {  // 25% Drop Chance: TCG - Organizational Datapad
+        }
+        if (x < 26) {  // 25% Drop Chance: TCG - Organizational Datapad
             static_item.createNewItemFunction("item_tcg_loot_reward_series2_organizational_datapad", corpseInventory);
-            }
         }
         /*String myLoot1 = "object/tangible/tcg/series4/instant_travel_terminal_home.iff";
         String myLoot2 = "object/tangible/wearables/cybernetic/s02/cybernetic_s02_arm_r.iff";
