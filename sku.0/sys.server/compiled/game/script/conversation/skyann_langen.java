@@ -4,7 +4,7 @@ import script.library.ai_lib;
 import script.library.chat;
 import script.library.conversation;
 import script.library.utils;
-import script.groundquests;
+import script.library.groundquests;
 
 import script.*;
 
