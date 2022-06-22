@@ -49,7 +49,7 @@ public class skyann_langen extends script.base_script {
                 int numberOfResponses = 0;
                 boolean hasResponse = false;
                 boolean hasResponse0 = false;
-                if (skyann_langen_condition_defaultCondition (player, npc) {
+                if (skyann_langen_condition_defaultCondition (player, npc)) {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse0 = true;
@@ -73,7 +73,7 @@ public class skyann_langen extends script.base_script {
     }
     public int skyann_langen_handleBranch5 (obj_id player, obj_id npc, string_id response) throws InterruptedException {
         if (response.equals("s_6")) {
-            if (skyann_langen_condition_defaultCondition (player, npc) {
+            if (skyann_langen_condition_defaultCondition (player, npc)) {
                 string_id message = new string_id (c_stringFile, "s_7");
                 int numberOfResponses = 0;
                 boolean hasResponse = false;
@@ -107,7 +107,7 @@ public class skyann_langen extends script.base_script {
                 int numberOfResponses = 0;
                 boolean hasResponse = false;
                 boolean hasResponse0 = false;
-                if skyann_langen_condition_defaultCondition (player, npc) {
+                if (skyann_langen_condition_defaultCondition (player, npc)) {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse0 = true;
@@ -136,7 +136,7 @@ public class skyann_langen extends script.base_script {
                 int numberOfResponses = 0;
                 boolean hasResponse = false;
                 boolean hasResponse0 = false;
-                if skyann_langen_condition_defaultCondition (player, npc) {
+                if (skyann_langen_condition_defaultCondition (player, npc)) {
                     ++numberOfResponses;
                     hasResponse = true;
                     hasResponse0 = true;
@@ -158,9 +158,9 @@ public class skyann_langen extends script.base_script {
         }
         return SCRIPT_CONTINUE;
     }
-    public skyann_langen_handleBranch8 (obj_id player, obj_id npc, string_id response) throws InterruptedException {
+    public int skyann_langen_handleBranch8 (obj_id player, obj_id npc, string_id response) throws InterruptedException {
         if (response.equals("s_12")) {
-            if (skyann_langen_condition_defaultCondition (player, npc) {
+            if (skyann_langen_condition_defaultCondition (player, npc)) {
                 skyann_langen_action_grantQuest (player, npc);
                 string_id message = new string_id (c_stringFile, "s_13");
                 utils.removeScriptVar (player, "conversation.skyann_langen.branchId");
@@ -174,7 +174,7 @@ public class skyann_langen extends script.base_script {
         setCondition (self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
-    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info_menuInfo) throws InterruptedException {
+    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException {
         int menu = menuInfo.addRootMenu (menu_info_types.CONVERSE_START, null);
         menuInfoData.setServerNotify (false);
         setCondition (self, CONDITION_CONVERSABLE);
@@ -200,7 +200,7 @@ public class skyann_langen extends script.base_script {
             chat.chat (npc, player, message);
             return SCRIPT_CONTINUE;
         }
-        if (skyann_langen_condition_isOnQuest (player, npc) {
+        if (skyann_langen_condition_isOnQuest (player, npc)) {
             string_id message = new string_id (c_stringFile, "s_15");
             chat.chat (npc, player, message);
             return SCRIPT_CONTINUE;
@@ -210,7 +210,7 @@ public class skyann_langen extends script.base_script {
             chat.chat (npc, player, message);
             return SCRIPT_CONTINUE;
         }
-        if (skyann_langen_condition_defaultCondition (player, npc) {
+        if (skyann_langen_condition_defaultCondition (player, npc)) {
             string_id message = new string_id (c_stringFile, "s_3");
             int numberOfResponses = 0;
             boolean hasResponse = false;
