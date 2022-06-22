@@ -176,6 +176,7 @@ public class skyann_langen extends script.base_script {
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException {
         int menu = menuInfo.addRootMenu (menu_info_types.CONVERSE_START, null);
+        menu_info_data menuInfoData = menuInfo.getMenuItemById (menu);
         menuInfoData.setServerNotify (false);
         setCondition (self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
