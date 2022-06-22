@@ -5,11 +5,3 @@
 @class object_template 0
 
 sharedTemplate = "object/mobile/shared_skyann_langen.iff"
-
-contents = [
-          [slotName = "inventory",
-          equipObject = true,
-          content = "object/tangible/inventory/vendor_inventory.iff"],
-          [slotName = "mission_bag",
-          equipObject = true,
-          content = "object/tangible/mission_bag/mission_bag.iff"]]
