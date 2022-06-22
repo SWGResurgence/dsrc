@@ -29,10 +29,10 @@ public class loot_controller_peko extends script.base_script {
         }
         int x = rand(1, 100);
         if (x < 91) { // 90% Drop Rate: TCG - Ball of Peace
-            static_item.createNewItemFunction("item_tcg_loot_reward_series4_ball_of_peace_02_01");
+            static_item.createNewItemFunction("item_tcg_loot_reward_series4_ball_of_peace_02_01", corpseInventory);
         }
         if (x < 26) { // 25% Drop Rate: TCG - Toxic Peko-Peko Mount
-                static_item.createNewItemFunction("item_tcg_loot_reward_series4_peko_peko_mount_02_01");
+            static_item.createNewItemFunction("item_tcg_loot_reward_series4_peko_peko_mount_02_01", corpseInventory);
         }
         /*String myLoot1 = "";
         createObject(myLoot1, corpseInventory, "");

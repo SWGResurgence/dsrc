@@ -36,7 +36,7 @@ public class loot_controller_reek extends script.base_script
         }
         int x = rand(1, 100);
         if (x < 51) {  // 50% Drop Chance: Reek DNA Core
-            static_item.createNewItemFunction("item_cs_dna_reek");
+            static_item.createNewItemFunction("item_cs_dna_reek", corpseInventory);
         }
         if (x < 26) {  // 25% Drop Chance: TCG - Organizational Datapad
             static_item.createNewItemFunction("item_tcg_loot_reward_series2_organizational_datapad", corpseInventory);
