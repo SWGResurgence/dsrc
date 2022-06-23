@@ -20,7 +20,7 @@ public class skyann_langen extends script.base_script {
         if (groundquests.hasCompletedQuest(player, "quest/world_boss_peko_empress")) {
             return true;
         }
-        return true;
+        return false;
     }
     public boolean skyann_langen_condition_readyForReward (obj_id player, obj_id npc) throws InterruptedException {
         faceTo(npc, player);
