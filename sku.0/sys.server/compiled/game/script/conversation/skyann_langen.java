@@ -17,29 +17,29 @@ public class skyann_langen extends script.base_script {
         return true;
     }
     public boolean skyann_langen_condition_finishedQuest (obj_id player, obj_id npc) throws InterruptedException {
-        if (groundquests.hasCompletedQuest(player, "quest/world_boss_peko_empress")) {
+        if (groundquests.hasCompletedQuest(player, "quest/world_boss_naboo_peko")) {
             return true;
         }
         return false;
     }
     public boolean skyann_langen_condition_readyForReward (obj_id player, obj_id npc) throws InterruptedException {
         faceTo(npc, player);
-        if (groundquests.isTaskActive(player, "quest/world_boss_peko_empress", "returnSkyannLangen")) {
+        if (groundquests.isTaskActive(player, "quest/world_boss_naboo_peko", "returnSkyannLangen")) {
             return true;
         }
         return false;
     }
     public boolean skyann_langen_condition_isOnQuest (obj_id player, obj_id npc) throws InterruptedException {
-        if (groundquests.isQuestActive(player, "quest/world_boss_peko_empress")) {
+        if (groundquests.isQuestActive(player, "quest/world_boss_naboo_peko")) {
             return true;
         }
         return false;
     }
     public void skyann_langen_action_sendRewardSignal (obj_id player, obj_id npc) throws InterruptedException {
-        groundquests.sendSignal(player, "completedWorldBossPekoEmpress");
+        groundquests.sendSignal(player, "completedWorldBossNabooPeko");
     }
     public void skyann_langen_action_grantQuest (obj_id player, obj_id npc) throws InterruptedException {
-        groundquests.grantQuest(player, "quest/world_boss_peko_empress");
+        groundquests.grantQuest(player, "quest/world_boss_naboo_peko");
         return;
     }
     public int skyann_langen_handleBranch4 (obj_id player, obj_id npc, string_id response) throws InterruptedException {
