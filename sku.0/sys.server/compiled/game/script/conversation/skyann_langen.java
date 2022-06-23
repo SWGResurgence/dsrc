@@ -24,7 +24,7 @@ public class skyann_langen extends script.base_script {
     }
     public boolean skyann_langen_condition_readyForReward (obj_id player, obj_id npc) throws InterruptedException {
         faceTo(npc, player);
-        if (groundquests.isTaskActive(player, "quest/world_boss_peko_empress", "talkToSkyannLangen")) {
+        if (groundquests.isTaskActive(player, "quest/world_boss_peko_empress", "returnSkyannLangen")) {
             return true;
         }
         return false;
@@ -117,11 +117,11 @@ public class skyann_langen extends script.base_script {
                     string_id responses [] = new string_id [numberOfResponses];
                     if (hasResponse0)
                         responses [responseIndex++] = new string_id (c_stringFile, "s_10");
-                        utils.setScriptVar (player, "conversation.ackli.branchId", 7);
+                        utils.setScriptVar (player, "conversation.skyann_langen.branchId", 7);
                         npcSpeak (player, message);
                         npcSetConversationResponses (player, responses);
                 } else {
-                    utils.removeScriptVar (player, "conversation.ackli.branchId");
+                    utils.removeScriptVar (player, "conversation.skyann_langen.branchId");
                     npcEndConversationWithMessage (player, message);
                 }
                 return SCRIPT_CONTINUE;
@@ -146,11 +146,11 @@ public class skyann_langen extends script.base_script {
                     string_id responses [] = new string_id [numberOfResponses];
                     if (hasResponse0)
                         responses [responseIndex++] = new string_id (c_stringFile, "s_12");
-                        utils.setScriptVar (player, "conversation.ackli.branchId", 8);
+                        utils.setScriptVar (player, "conversation.skyann_langen.branchId", 8);
                         npcSpeak (player, message);
                         npcSetConversationResponses (player, responses);
                 } else {
-                    utils.removeScriptVar (player, "conversation.ackli.branchId");
+                    utils.removeScriptVar (player, "conversation.skyann_langen.branchId");
                     npcEndConversationWithMessage (player, message);
                 }
                 return SCRIPT_CONTINUE;
