@@ -10,8 +10,8 @@ import script.library.utils;
 
 import script.obj_id;
 
-public class katarn_loot_controller extends script.base_script {
-    public katarn_loot_controller() {
+public class loot_controller_katarn extends script.base_script {
+    public loot_controller_katarn() {
     }
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException {
         obj_id corpseInventory = utils.getInventoryContainer(self);
