@@ -1,0 +1,22 @@
+@base object/tangible/deed/base/base_deed.iff
+@class tangible_object_template 0
+@class object_template 0
+
+sharedTemplate = "object/tangible/deed/generator_deed/shared_generator_elite_geothermal_deed.iff"
+
+objvars = +[
+	"player_structure.deed.template" = "object/installation/generators/power_elite_generator_geothermal_style_1.iff",
+	"player_structure.deed.buildtime" = 60,
+	"player_structure.deed.maxExtractionRate" = 16,
+	"player_structure.deed.currentExtractionRate" = 16,
+	"player_structure.deed.maxHopperSize" = 100000]
+  
+objvars = +[
+	"player_structure.deed.template" = "object/tangible/deed/generator_deed/generator_elite_geothermal_deed.iff",
+	"player_structure.deed.buildtime" = 90,
+  "skillmod.bonus.harvester_energy_decrease" = 10,
+  "skillmod.bonus.harvester_maintenance_decrease" = 8,
+  "skillmod.bonus.harvester_collection_increase" = 20]
+
+scripts = +[
+	"item.structure_deed.player_structure_deed"]
