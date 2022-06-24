@@ -46,17 +46,6 @@ public static String c_stringFile = "conversation/skyann_langen";
 
 // ----------------------------------------------------------------------
 
-	public boolean skyann_langen_condition_isOnQuest (obj_id player, obj_id npc) throws InterruptedException
-	{
-        if (groundquests.isQuestActive(player, "quest/world_boss_naboo_peko"))
-        {
-            return true;
-        }
-        return false;
-    }
-
-// ----------------------------------------------------------------------
-
 	public boolean skyann_langen_condition_readyForReward (obj_id player, obj_id npc) throws InterruptedException
 	{
         faceTo(npc, player);
@@ -437,16 +426,6 @@ public int OnStartNpcConversation(obj_id self, obj_id player) throws Interrupted
 
 		//-- NPC: I see you're still alive and you have what I asked for. Here's the reward I promised. 
 		string_id message = new string_id (c_stringFile, "s_14");
-		chat.chat (npc, player, message);
-
-		return SCRIPT_CONTINUE;
-	}
-
-	//-- [NOTE] 
-	if (skyann_langen_condition_isOnQuest (player, npc))
-	{
-		//-- NPC: Look, I gave you the location and a job to do. I don't want to be your friend. This is just business. The longer you stand around here, the better chance of someone completing the job before you. If you want that reward I suggest you get moving. 
-		string_id message = new string_id (c_stringFile, "s_15");
 		chat.chat (npc, player, message);
 
 		return SCRIPT_CONTINUE;
