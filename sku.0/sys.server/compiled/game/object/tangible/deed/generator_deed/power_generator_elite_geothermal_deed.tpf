@@ -5,7 +5,7 @@
 sharedTemplate = "object/tangible/deed/generator_deed/shared_generator_elite_geothermal_deed.iff"
 
 objvars = +[
-	"player_structure.deed.template" = "object/installation/generators/power_generator_elite_geothermal_style_1.iff",
+	"player_structure.deed.template" = "object/installation/generators/power_elite_generator_geothermal_style_1.iff",
 	"player_structure.deed.buildtime" = 60,
 	"player_structure.deed.maxExtractionRate" = 16,
 	"player_structure.deed.currentExtractionRate" = 16,
