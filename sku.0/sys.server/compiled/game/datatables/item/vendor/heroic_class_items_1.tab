@@ -125,6 +125,9 @@ item_bracelet_r_set_ent_01_01		2		2	2		9		entertainer
 item_necklace_set_ent_01_01		2	2			2	9		entertainer
 item_band_set_ent_01_01		2	2	2			9		entertainer
 item_ring_set_ent_01_01		2	2	2			9		entertainer
+item_heroic_schematic_backpack_01_09		10	10	10	15	15			
+item_heroic_schematic_backpack_01_08		25	25	25	30	30			
+item_heroic_schematic_backpack_01_07		25	25	25	30	30			
 item_force_crystal_04_01		10	10			15			
 item_force_crystal_04_02				10	10	15			
 armor_infiltrator_chest_plate			1	2					
