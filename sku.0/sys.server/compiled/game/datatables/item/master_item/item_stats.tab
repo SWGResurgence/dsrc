@@ -5035,3 +5035,5 @@ item_irish_darkshadow_memorial_01_01
 item_aurillian_certified_scroll_01_01
 item_world_boss_token_01_01
 item_elite_geothermal_generator_deed_schematic_01_01			"string:loot_schematic.schematic=object/draft_schematic/structure/installation_generator_elite_geothermal.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase4_master"								
+item_painting_resurgence_rebel_01_01
+item_painting_resurgence_imperial_01_01
