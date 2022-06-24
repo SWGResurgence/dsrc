@@ -46,9 +46,9 @@ public static String c_stringFile = "conversation/skyann_langen";
 
 // ----------------------------------------------------------------------
 
-	public boolean skyann_langen_condition_finishedQuest (obj_id player, obj_id npc) throws InterruptedException
+	public boolean skyann_langen_condition_isOnQuest (obj_id player, obj_id npc) throws InterruptedException
 	{
-        if (groundquests.hasCompletedQuest(player, "quest/world_boss_naboo_peko"))
+        if (groundquests.isQuestActive(player, "quest/world_boss_naboo_peko"))
         {
             return true;
         }
@@ -453,7 +453,7 @@ public int OnStartNpcConversation(obj_id self, obj_id player) throws Interrupted
 	}
 
 	//-- [NOTE] 
-	if (skyann_langen_condition_finishedQuest (player, npc))
+	if (skyann_langen_condition_isOnQuest (player, npc))
 	{
 		//-- NPC: You handled yourself pretty well. I've sent a few spacers that way before you came along and needless to say none have returned. Don't be a stranger, I may have more jobs for you.
 		string_id message = new string_id (c_stringFile, "s_16");
