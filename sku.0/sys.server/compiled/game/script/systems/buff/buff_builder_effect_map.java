@@ -16,7 +16,7 @@ public class buff_builder_effect_map extends script.base_script {
             int rowCount = dataTableGetNumRows(DATATABLE_BUFF_BUILDER_EFFECT_MAP);
             dictionary row;
             String affect;
-            for (int index=0; index < rowCount; index++ {
+            for (int index=0; index < rowCount; index++) {
                 row = dataTableGetNumRow(DATATABLE_BUFF_BUILDER_EFFECT_MAP, index);
                 affect = row.getString("BUFF_BUILDER_AFFECTS");
                 if (affect.equals(affectName)) {
@@ -26,7 +26,7 @@ public class buff_builder_effect_map extends script.base_script {
         }
         return effectList.toArray(new String[effectList.size()]);
     }
-    public static String[] getEffects() throw InterruptedException {
+    public static String[] getEffects() throws InterruptedException {
         return dataTableGetStringColumn(DATATABLE_BUFF_BUILDER_EFFECT_MAP, "AFFECT");
     }
 }
