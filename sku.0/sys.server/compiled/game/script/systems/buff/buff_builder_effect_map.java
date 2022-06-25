@@ -17,7 +17,7 @@ public class buff_builder_effect_map extends script.base_script {
             dictionary row;
             String affect;
             for (int index=0; index < rowCount; index++) {
-                row = dataTableGetNumRow(DATATABLE_BUFF_BUILDER_EFFECT_MAP, index);
+                row = dataTableGetRow(DATATABLE_BUFF_BUILDER_EFFECT_MAP, index);
                 affect = row.getString("BUFF_BUILDER_AFFECTS");
                 if (affect.equals(affectName)) {
                     effectList.add(row.getString("AFFECT"));
