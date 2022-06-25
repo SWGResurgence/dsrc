@@ -5,9 +5,6 @@ import script.library.*;
 
 public class ai extends script.base_script
 {
-    public ai()
-    {
-    }
     //public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "ai_script";
     public static final String MENU_FILE = "pet/pet_menu";
@@ -1020,7 +1017,7 @@ public class ai extends script.base_script
             }
             else 
             {
-                if (!loot.hasToggledChroniclesLootOff(killCredit))
+                if (isPlayer(killCredit) && !loot.hasToggledChroniclesLootOff(killCredit))
                 {
                     hasChanceToDropChroniclesLoot = true;
                 }

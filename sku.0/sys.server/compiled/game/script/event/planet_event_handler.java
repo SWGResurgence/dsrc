@@ -12,11 +12,11 @@ public class planet_event_handler extends script.base_script
     private static final String EVENT_TIMESTAMP = "lifeday.time_stamp";
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "planet_event_handler.OnAttach: trigger initialized.");
+        //CustomerServiceLog("holidayEvent", "planet_event_handler.OnAttach: trigger initialized.");
         String lifedayRunning = getConfigSetting("GameServer", "lifeday");
         if (lifedayRunning != null && !lifedayRunning.equals("false"))
         {
-            CustomerServiceLog("holidayEvent", "planet_event_handler.OnAttach: Life Day oconfig found.");
+            //CustomerServiceLog("holidayEvent", "planet_event_handler.OnAttach: Life Day oconfig found.");
             checkLifeDayData(self);
         }
         else
@@ -25,17 +25,17 @@ public class planet_event_handler extends script.base_script
         }
         if (!checkForHolidayEventConfigs(self))
         {
-            CustomerServiceLog("holidayEvent", "planet_event_handler.OnAttach: checkForHolidayEventConfigs failed.");
+            //CustomerServiceLog("holidayEvent", "planet_event_handler.OnAttach: checkForHolidayEventConfigs failed.");
         }
         return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "planet_event_handler.OnInitialize: trigger initialized.");
+        //CustomerServiceLog("holidayEvent", "planet_event_handler.OnInitialize: trigger initialized.");
         String lifedayRunning = getConfigSetting("GameServer", "lifeday");
         if (lifedayRunning != null && !lifedayRunning.equals("false"))
         {
-            CustomerServiceLog("holidayEvent", "planet_event_handler.OnInitialize: Life Day oconfig found.");
+            //CustomerServiceLog("holidayEvent", "planet_event_handler.OnInitialize: Life Day oconfig found.");
             checkLifeDayData(self);
         }
         else
@@ -44,7 +44,7 @@ public class planet_event_handler extends script.base_script
         }
         if (!checkForHolidayEventConfigs(self))
         {
-            CustomerServiceLog("holidayEvent", "planet_event_handler.OnInitialize: checkForHolidayEventConfigs failed.");
+            //CustomerServiceLog("holidayEvent", "planet_event_handler.OnInitialize: checkForHolidayEventConfigs failed.");
         }
         return SCRIPT_CONTINUE;
     }
@@ -93,7 +93,7 @@ public class planet_event_handler extends script.base_script
     }
     public int setUpEventLeaderBoard(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "planet_event_handler.setUpEventLeaderBoard: Event Leader Board Data being initialized.");
+        //CustomerServiceLog("holidayEvent", "planet_event_handler.setUpEventLeaderBoard: Event Leader Board Data being initialized.");
         if (params == null || params.isEmpty())
         {
             return SCRIPT_CONTINUE;
@@ -105,21 +105,21 @@ public class planet_event_handler extends script.base_script
         }
         if (hasObjVar(self, holiday.PLANET_VAR_EVENT_PREFIX + eventVar))
         {
-            CustomerServiceLog("holidayEvent", "planet_event_handler.OnInitialize: Event data found: " + eventVar + ", removing data so we can start new.");
+            //CustomerServiceLog("holidayEvent", "planet_event_handler.OnInitialize: Event data found: " + eventVar + ", removing data so we can start new.");
             removeObjVar(self, holiday.PLANET_VAR_EVENT_PREFIX + eventVar);
         }
         if (eventVar.equals(holiday.PLANET_VAR_EMPIRE_DAY))
         {
-            CustomerServiceLog("holidayEvent", "planet_event_handler.setUpEventLeaderBoard: Setting up Empire Day data for the first time.");
+            //CustomerServiceLog("holidayEvent", "planet_event_handler.setUpEventLeaderBoard: Setting up Empire Day data for the first time.");
             if (!hasObjVar(self, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY + holiday.PLANET_VAR_SCORE_TIMESTAMP))
             {
-                CustomerServiceLog("holidayEvent", "planet_event_handler.setUpEventLeaderBoard: Setting up Empire Day score time stamp.");
+                //CustomerServiceLog("holidayEvent", "planet_event_handler.setUpEventLeaderBoard: Setting up Empire Day score time stamp.");
                 int now = getCalendarTime();
                 int secondsUntil = holiday.getEmpireDayLockoutDelay();
                 int then = now + secondsUntil;
                 setObjVar(self, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY + holiday.PLANET_VAR_SCORE_TIMESTAMP, then);
                 messageTo(self, "resetEventDataAfterDelay", params, secondsUntil, false);
-                CustomerServiceLog("holidayEvent", "planet_event_handler.setUpEventLeaderBoard: Sending message to reset scores in: " + secondsUntil + ". Message has payload: " + params);
+                //CustomerServiceLog("holidayEvent", "planet_event_handler.setUpEventLeaderBoard: Sending message to reset scores in: " + secondsUntil + ". Message has payload: " + params);
                 setupInitialEventScores(self, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY + holiday.PLANET_VAR_SCORE, 5, true);
             }
         }
@@ -127,36 +127,36 @@ public class planet_event_handler extends script.base_script
     }
     public int resetEventDataAfterDelay(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Message Handler Initialized.");
+        //CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Message Handler Initialized.");
         if (params == null || params.isEmpty())
         {
-            CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Could not find params for reset.");
+            //CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Could not find params for reset.");
             return SCRIPT_CONTINUE;
         }
         String eventVar = params.getString("eventVar");
         if (eventVar == null || eventVar.length() <= 0)
         {
-            CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Could not find eventVar params for reset.");
+            //CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Could not find eventVar params for reset.");
             return SCRIPT_CONTINUE;
         }
-        CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Event to reset: " + eventVar);
+        //CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Event to reset: " + eventVar);
         String eventConfig = params.getString("eventConfig");
         if (eventConfig == null || eventConfig.length() <= 0)
         {
-            CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Could not find eventConfig params for reset.");
+            //CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Could not find eventConfig params for reset.");
             return SCRIPT_CONTINUE;
         }
-        CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Event config to reset: " + eventConfig);
+        //CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Event config to reset: " + eventConfig);
         String eventRunning = getConfigSetting("GameServer", eventConfig);
         if (eventRunning != null && !eventRunning.equals("false"))
         {
-            CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Event running: " + eventRunning);
-            CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Message received with cargo. eventVar: " + eventVar + " with eventConfig: " + eventConfig + ". The data is being reset because the delay time has expired as planned.");
+            //CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Event running: " + eventRunning);
+            //CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Message received with cargo. eventVar: " + eventVar + " with eventConfig: " + eventConfig + ". The data is being reset because the delay time has expired as planned.");
             messageTo(self, "setUpEventLeaderBoard", params, 3.0f, false);
         }
         else 
         {
-            CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Message received with cargo. eventVar: " + eventVar + " with eventConfig: " + eventConfig + ". The data WAS NOT reset because the event was not running.");
+            //CustomerServiceLog("holidayEvent", "planet_event_handler.resetEventDataAfterDelay: Message received with cargo. eventVar: " + eventVar + " with eventConfig: " + eventConfig + ". The data WAS NOT reset because the event was not running.");
             if (hasObjVar(self, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY))
             {
                 removeObjVar(self, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY);
@@ -266,11 +266,11 @@ public class planet_event_handler extends script.base_script
         {
             return false;
         }
-        CustomerServiceLog("holidayEvent", "planet_event_handler.checkForHolidayEventConfigs: Function initialized.");
+        //CustomerServiceLog("holidayEvent", "planet_event_handler.checkForHolidayEventConfigs: Function initialized.");
         String empiredayRunning = getConfigSetting("GameServer", "empireday_ceremony");
         if (empiredayRunning != null && (empiredayRunning.equals("true") || empiredayRunning.equals("1")))
         {
-            CustomerServiceLog("holidayEvent", "planet_event_handler.checkForHolidayEventConfigs: EMPIRE DAY CONFIG FOUND.");
+            //CustomerServiceLog("holidayEvent", "planet_event_handler.checkForHolidayEventConfigs: EMPIRE DAY CONFIG FOUND.");
             dictionary params = new dictionary();
             params.put("eventVar", holiday.PLANET_VAR_EMPIRE_DAY);
             params.put("eventConfig", "empireday_ceremony");
@@ -280,7 +280,7 @@ public class planet_event_handler extends script.base_script
         {
             if (hasObjVar(planet, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY))
             {
-                CustomerServiceLog("holidayEvent", "planet_event_handler.checkForHolidayEventConfigs: Var: " + holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY + " removed because the event was not running.");
+                //CustomerServiceLog("holidayEvent", "planet_event_handler.checkForHolidayEventConfigs: Var: " + holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY + " removed because the event was not running.");
                 removeObjVar(planet, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY);
             }
         }

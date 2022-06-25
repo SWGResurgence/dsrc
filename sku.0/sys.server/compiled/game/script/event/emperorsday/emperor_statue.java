@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class emperor_statue extends script.base_script
 {
-    public emperor_statue()
-    {
-    }
     public static final String MUSIC_IMPERIAL_MARCH = "object/soundobject/soundobject_imperial_march.iff";
     public static final String MUSIC_IMPERIAL_ATTACK = "object/soundobject/soundobject_imperial_attack.iff";
     public static final String EMP_DAY = "event/emperors_day";
@@ -35,7 +32,7 @@ public class emperor_statue extends script.base_script
     public static final float LAMBDA_YAW = -0.01f;
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.OnInitialize: Init.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.OnInitialize: Init.");
         if (utils.hasScriptVar(self, "musicObject")) {
             obj_id oldSoundObject = utils.getObjIdScriptVar(self, "musicObject");
             if ((isIdValid(oldSoundObject)) && exists(oldSoundObject)) {
@@ -43,7 +40,7 @@ public class emperor_statue extends script.base_script
             }
         }
         utils.setScriptVar(self, "musicObject", createObject(MUSIC_IMPERIAL_ATTACK, getLocation(self)));
-        CustomerServiceLog("holidayEvent", "emperor_statue.OnInitialize: Preparing Parade.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.OnInitialize: Preparing Parade.");
         messageTo(self, "prepareParade", null, 30.0f, false);
         return SCRIPT_CONTINUE;
     }
@@ -227,65 +224,65 @@ public class emperor_statue extends script.base_script
     }
     public int prepareParade(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.prepareParade: messageHandler initialized.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.prepareParade: messageHandler initialized.");
         if (!utils.hasScriptVar(self, "paradeRunning"))
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.prepareParade: Parade is not running.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.prepareParade: Parade is not running.");
             utils.setScriptVar(self, "paradeRunning", 1);
             obj_id oldSoundObject = utils.getObjIdScriptVar(self, "musicObject");
             if ((isIdValid(oldSoundObject)) && exists(oldSoundObject))
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.prepareParade: Destroying Sound Object.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.prepareParade: Destroying Sound Object.");
                 destroyObject(oldSoundObject);
             }
             messageTo(self, "parade", null, 10.0f, false);
         }
         else 
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.prepareParade: Failed to start because the statue says the parade is running.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.prepareParade: Failed to start because the statue says the parade is running.");
         }
         return SCRIPT_CONTINUE;
     }
     public int parade(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.parade: messageHandler initialized.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.parade: messageHandler initialized.");
         obj_id vendor = getObjIdObjVar(self, holiday.SPAWNER_PREFIX_OBJVAR + "vendor");
         if (isIdValid(vendor) || exists(vendor))
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.parade: removing conversation script from vendor so players cannot interrupt the ceremony.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.parade: removing conversation script from vendor so players cannot interrupt the ceremony.");
             detachScript(vendor, "conversation.imperial_emperorsday_vendor");
         }
         if (!utils.hasScriptVar(self, "musicObject"))
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.parade: Creating new music object.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.parade: Creating new music object.");
         }
         else
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.parade: Getting existing music object.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.parade: Getting existing music object.");
             destroyObject(utils.getObjIdScriptVar(self, "musicObject"));
         }
         utils.setScriptVar(self, "musicObject", createObject(MUSIC_IMPERIAL_MARCH, getLocation(self)));
 
-        CustomerServiceLog("holidayEvent", "emperor_statue.parade: Getting shuttle waypoint data in preparation for shuttle landing.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.parade: Getting shuttle waypoint data in preparation for shuttle landing.");
         obj_id spawnPoint = holiday.getEmpireDayWaypointObjectObjId(self, "shuttlePathingLastPoint", holiday.OBJECT_NEAR_CHECK_RANGE_100M);
         location spawnLoc = getLocation(spawnPoint);
         boolean lambdaCreation = createLambdaDropship(self, spawnLoc);
-        CustomerServiceLog("holidayEvent", "emperor_statue.parade: Shuttle spawnPoint: " + spawnPoint);
-        CustomerServiceLog("holidayEvent", "emperor_statue.parade: Shuttle spawnPoint spawnLoc: " + spawnLoc);
-        CustomerServiceLog("holidayEvent", "emperor_statue.parade: lambda was created: " + lambdaCreation);
+        //CustomerServiceLog("holidayEvent", "emperor_statue.parade: Shuttle spawnPoint: " + spawnPoint);
+        //CustomerServiceLog("holidayEvent", "emperor_statue.parade: Shuttle spawnPoint spawnLoc: " + spawnLoc);
+        //CustomerServiceLog("holidayEvent", "emperor_statue.parade: lambda was created: " + lambdaCreation);
         if (!lambdaCreation)
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.parade: The shuttle failed to spawn!! Notify design immediately.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.parade: The shuttle failed to spawn!! Notify design immediately.");
             return SCRIPT_CONTINUE;
         }
         obj_id lambda = utils.getObjIdScriptVar(self, "lambdaShuttle");
         if (isValidId(lambda) && exists(lambda))
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.parade: Sending Message to move to new point in X seconds");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.parade: Sending Message to move to new point in X seconds");
             setObjVar(lambda, "exitpoint", holiday.getEmpireDayWaypointObjectObjId(self, "shuttlePathingMidPoint", holiday.OBJECT_NEAR_CHECK_RANGE_250M));
             messageTo(self, "shuttleAdjust", null, 5, false);
         }
-        CustomerServiceLog("holidayEvent", "emperor_statue.parade: Sending Message to NPCS to spawn in 25 seconds");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.parade: Sending Message to NPCS to spawn in 25 seconds");
         messageTo(self, "spawnDarkTroopers1", null, 28.0f, false);
         messageTo(self, "spawnDarkTroopers2", null, 28.0f, false);
         messageTo(self, "spawnVader", null, 35.0f, false);
@@ -293,7 +290,7 @@ public class emperor_statue extends script.base_script
     }
     public int shuttleAdjust(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.parade: Adjusting location now");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.parade: Adjusting location now");
         obj_id lambda = utils.getObjIdScriptVar(self, "lambdaShuttle");
         if (isValidId(lambda) && exists(lambda))
         {
@@ -410,30 +407,30 @@ public class emperor_statue extends script.base_script
     }
     public int launchRandomTieFighterFlyBy(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomTieFighterFlyBy: messageHandler initialized.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomTieFighterFlyBy: messageHandler initialized.");
         obj_id cauldronRight = getObjIdObjVar(self, holiday.SPAWNER_PREFIX_OBJVAR + "cauldron_right");
         obj_id cauldronLeft = getObjIdObjVar(self, holiday.SPAWNER_PREFIX_OBJVAR + "cauldron_left");
         if (!isValidId(cauldronRight) && !exists(cauldronRight) && !isValidId(cauldronRight) && !exists(cauldronRight))
         {
             return SCRIPT_CONTINUE;
         }
-        CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomTieFighterFlyBy: random number received, firing something.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomTieFighterFlyBy: random number received, firing something.");
         switch (rand(1, 4))
         {
             case 1:
-                CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomTieFighterFlyBy: case 1.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomTieFighterFlyBy: case 1.");
                 playTieFighterPair(self, cauldronLeft);
                 break;
             case 2:
-                CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomTieFighterFlyBy: case 2.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomTieFighterFlyBy: case 2.");
                 playTieFighterGroup(self, cauldronLeft);
                 break;
             case 3:
-                CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomTieFighterFlyBy: case 3.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomTieFighterFlyBy: case 3.");
                 playTieFighterPair(self, cauldronRight);
                 break;
             case 4:
-                CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomTieFighterFlyBy: case 4.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomTieFighterFlyBy: case 4.");
                 playTieFighterGroup(self, cauldronRight);
                 break;
         }
@@ -441,7 +438,7 @@ public class emperor_statue extends script.base_script
     }
     public int launchRandomNonFactionalFirework(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomFirework: messageHandler initialized.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomFirework: messageHandler initialized.");
         location statue = getLocation(self);
         location here = (location)statue.clone();
         here.z = statue.z + 20;
@@ -459,7 +456,7 @@ public class emperor_statue extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomFirework: We are selecting a random firework out of a list of " + nonFactionalTemplates.size());
+        //CustomerServiceLog("holidayEvent", "emperor_statue.launchRandomFirework: We are selecting a random firework out of a list of " + nonFactionalTemplates.size());
         int roll = rand(0, nonFactionalTemplates.size() - 1);
         String template = ((String)nonFactionalTemplates.get(roll));
         location there = utils.getRandomLocationInRing(here, 0, 10);
@@ -485,7 +482,7 @@ public class emperor_statue extends script.base_script
     }
     public int vaderLeaving(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.vaderLeaving: messageHandler initialized.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.vaderLeaving: messageHandler initialized.");
         if (utils.hasScriptVar(self, "stormtrooper_squadleader"))
         {
             Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "stormtrooper_squadleader");
@@ -579,7 +576,7 @@ public class emperor_statue extends script.base_script
     }
     public int destroyParade(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.destroyParade: Destroy Parade, Destroying Parade now.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.destroyParade: Destroy Parade, Destroying Parade now.");
         obj_id vendor = getObjIdObjVar(self, holiday.SPAWNER_PREFIX_OBJVAR + "vendor");
         if (isIdValid(vendor) || exists(vendor))
         {
@@ -591,14 +588,14 @@ public class emperor_statue extends script.base_script
         obj_id lambda = utils.getObjIdScriptVar(self, "lambdaShuttle");
         if ((isIdValid(lambda)) && exists(lambda))
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.destroyParade: Lambda getting take off instructions in 20 seconds.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.destroyParade: Lambda getting take off instructions in 20 seconds.");
             messageTo(lambda, "takeOff", null, 20.0f, false);
             utils.removeScriptVar(self, "lambdaShuttle");
         }
         obj_id vader = getObjIdObjVar(self, holiday.SPAWNER_PREFIX_OBJVAR + "vader");
         if (isIdValid(vader) || exists(vader))
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.destroyParade: Destroying all parade NPCs that are vader.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.destroyParade: Destroying all parade NPCs that are vader.");
             Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "vader");
             for (Object aNpc : npc) {
                 if (isIdValid(vader) && exists(vader)) {
@@ -610,7 +607,7 @@ public class emperor_statue extends script.base_script
         }
         if (utils.hasScriptVar(self, "dark_trooper"))
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.destroyParade: Destroying all parade NPCs that are dark troppers.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.destroyParade: Destroying all parade NPCs that are dark troppers.");
             Vector npc = utils.getResizeableObjIdArrayScriptVar(self, "dark_trooper");
             for (Object aNpc : npc) {
                 if (isIdValid(((obj_id) aNpc)) && exists(((obj_id) aNpc))) {
@@ -622,7 +619,7 @@ public class emperor_statue extends script.base_script
         messageTo(self, "normalMusic", null, 15.0f, false);
         messageTo(self, "prepareParade", null, holiday.EMPIRE_DAY_SECONDS_TO_START, false);
         setObjVar(self, "ceremonyTime", getCalendarTime() + holiday.EMPIRE_DAY_SECONDS_TO_START);
-        CustomerServiceLog("holidayEvent", "emperor_statue.destroyParade: Restarting Parade in " + holiday.EMPIRE_DAY_SECONDS_TO_START + " seconds.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.destroyParade: Restarting Parade in " + holiday.EMPIRE_DAY_SECONDS_TO_START + " seconds.");
         utils.removeScriptVar(self, "paradeRunning");
         return SCRIPT_CONTINUE;
     }
@@ -752,14 +749,14 @@ public class emperor_statue extends script.base_script
     }
     public int darth6(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.darth6: messageHandler Initialized.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.darth6: messageHandler Initialized.");
         obj_id vader = getObjIdObjVar(self, holiday.SPAWNER_PREFIX_OBJVAR + "vader");
         if (isIdValid(vader) || exists(vader))
         {
             obj_id[] playersInRange = getAllPlayers(getLocation(self), 100.0f);
             if (playersInRange == null || playersInRange.length <= 0)
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.darth6: There were no players in the area that were eligible. Vader is leaving due to Case 1.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.darth6: There were no players in the area that were eligible. Vader is leaving due to Case 1.");
                 chat.chat(vader, DARTH_6_ALT);
                 messageTo(self, "vaderLeaving", null, 15.0f, false);
                 return SCRIPT_CONTINUE;
@@ -776,7 +773,7 @@ public class emperor_statue extends script.base_script
             }
             if (imperialPlayers.size() <= 0)
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.darth6: There were players in the area but none that were eligible. Vader is leaving.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.darth6: There were players in the area but none that were eligible. Vader is leaving.");
                 chat.chat(vader, DARTH_6_ALT);
                 messageTo(self, "vaderLeaving", null, 15.0f, false);
                 return SCRIPT_CONTINUE;
@@ -784,17 +781,17 @@ public class emperor_statue extends script.base_script
             obj_id[] listOfWinners = holiday.getEmpireDayWinningPlayers(self, imperialPlayers);
             if (listOfWinners == null || listOfWinners.length <= 0)
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.darth6: A list of eligible players were sent to the getWinningPlayers function but it came back corrupted or null.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.darth6: A list of eligible players were sent to the getWinningPlayers function but it came back corrupted or null.");
                 chat.chat(vader, DARTH_6_ALT);
                 messageTo(self, "vaderLeaving", null, 15.0f, false);
                 return SCRIPT_CONTINUE;
             }
-            CustomerServiceLog("holidayEvent", "emperor_statue.darth6: A list of eligible players has been received and will now be announced. The list length is: " + listOfWinners.length);
+            //CustomerServiceLog("holidayEvent", "emperor_statue.darth6: A list of eligible players has been received and will now be announced. The list length is: " + listOfWinners.length);
             String winnerList = "";
             int winnerCount = listOfWinners.length;
             if (winnerCount == 1)
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.darth6: The list length is only one player: " + listOfWinners[0]);
+                //CustomerServiceLog("holidayEvent", "emperor_statue.darth6: The list length is only one player: " + listOfWinners[0]);
                 prose_package pp = prose.getPackage(DARTH_6);
                 winnerList = getFirstName(listOfWinners[0]);
                 prose.setTO(pp, winnerList);
@@ -811,7 +808,7 @@ public class emperor_statue extends script.base_script
             }
             else 
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.darth6: The list length is: " + listOfWinners.length);
+                //CustomerServiceLog("holidayEvent", "emperor_statue.darth6: The list length is: " + listOfWinners.length);
                 prose_package pp = prose.getPackage(DARTH_6);
                 for (int i = 0; i < winnerCount; i++)
                 {
@@ -833,14 +830,14 @@ public class emperor_statue extends script.base_script
                 }
                 if (winnerList.equals(""))
                 {
-                    CustomerServiceLog("holidayEvent", "yoda_fountain.leia6: The player names to be called somehow got corrupted. Sending Leia to falcon.");
+                    //CustomerServiceLog("holidayEvent", "yoda_fountain.leia6: The player names to be called somehow got corrupted. Sending Leia to falcon.");
                     chat.chat(vader, DARTH_6_ALT);
                     messageTo(self, "vaderLeaving", null, 15.0f, false);
                     return SCRIPT_CONTINUE;
                 }
                 prose.setTO(pp, winnerList);
                 chat.chat(vader, listOfWinners[0], pp);
-                CustomerServiceLog("holidayEvent", "yoda_fountain.leia6: setting winnerList on Leia.");
+                //CustomerServiceLog("holidayEvent", "yoda_fountain.leia6: setting winnerList on Leia.");
                 setObjVar(vader, "listOfWinners", listOfWinners);
                 params.put("winnerList", winnerList);
                 params.put("listOfWinners", listOfWinners);
@@ -853,20 +850,20 @@ public class emperor_statue extends script.base_script
     }
     public int vendor3(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.vendor3: messageHandler Initialized.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.vendor3: messageHandler Initialized.");
         if (params == null)
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.vendor3: There were no params passed to the vendor3 message handler.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.vendor3: There were no params passed to the vendor3 message handler.");
             return SCRIPT_CONTINUE;
         }
         if (!params.containsKey("winnerList"))
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.vendor3: There was no winnerlist key passed in the params.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.vendor3: There was no winnerlist key passed in the params.");
             return SCRIPT_CONTINUE;
         }
         if (!params.containsKey("listOfWinners"))
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.vendor3: There was no listOfWinners key passed in the params.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.vendor3: There was no listOfWinners key passed in the params.");
             return SCRIPT_CONTINUE;
         }
         obj_id vader = getObjIdObjVar(self, holiday.SPAWNER_PREFIX_OBJVAR + "vendor");
@@ -883,13 +880,13 @@ public class emperor_statue extends script.base_script
             String winnerList = params.getString("winnerList");
             if (winnerList == null || winnerList.equals(""))
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.vendor3: The vendor cannot speak out to ask the player to step forward because the player name string(s) were not found.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.vendor3: The vendor cannot speak out to ask the player to step forward because the player name string(s) were not found.");
                 return SCRIPT_CONTINUE;
             }
             obj_id[] listOfWinners = params.getObjIdArray("listOfWinners");
             if (listOfWinners == null || listOfWinners.length <= 0)
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.vendor3: The list of winners was not found. The vendor cannot ask the player(s) to step forward.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.vendor3: The list of winners was not found. The vendor cannot ask the player(s) to step forward.");
                 return SCRIPT_CONTINUE;
             }
             prose_package pp = prose.getPackage(VENDOR_3);
@@ -900,20 +897,20 @@ public class emperor_statue extends script.base_script
     }
     public int waitingHalf(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: messageHandler Initialized.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: messageHandler Initialized.");
         if (params == null)
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: There were no params passed to the vendor3 message handler.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: There were no params passed to the vendor3 message handler.");
             return SCRIPT_CONTINUE;
         }
         if (!params.containsKey("winnerList"))
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: There was no winnerlist key passed in the params.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: There was no winnerlist key passed in the params.");
             return SCRIPT_CONTINUE;
         }
         if (!params.containsKey("listOfWinners"))
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: There was no listOfWinners key passed in the params.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: There was no listOfWinners key passed in the params.");
             return SCRIPT_CONTINUE;
         }
         obj_id vader = getObjIdObjVar(self, holiday.SPAWNER_PREFIX_OBJVAR + "vader");
@@ -921,7 +918,7 @@ public class emperor_statue extends script.base_script
         {
             if (!hasObjVar(vader, "readyForBadge"))
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: Vader has given out the badges already. No need to continue.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: Vader has given out the badges already. No need to continue.");
                 messageTo(self, "vaderLeaving", null, 1, false);
                 setObjVar(vader, "alreadyLeaving", true);
                 return SCRIPT_CONTINUE;
@@ -929,19 +926,19 @@ public class emperor_statue extends script.base_script
             String winnerList = params.getString("winnerList");
             if (winnerList == null || winnerList.equals(""))
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: Vader cannot speak out to ask the player to step forward because the player name string(s) were not found.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: Vader cannot speak out to ask the player to step forward because the player name string(s) were not found.");
                 return SCRIPT_CONTINUE;
             }
             obj_id[] listOfWinners = params.getObjIdArray("listOfWinners");
             if (listOfWinners == null || listOfWinners.length <= 0)
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: The list of winners was not found. Vader cannot ask the player(s) to step forward.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: The list of winners was not found. Vader cannot ask the player(s) to step forward.");
                 return SCRIPT_CONTINUE;
             }
             obj_var_list allMissingPlayers = getObjVarList(vader, "readyForBadge");
             if (allMissingPlayers == null)
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: Vader was about to talk smack about 1 or more players not bowing but none of the players are actually missing.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: Vader was about to talk smack about 1 or more players not bowing but none of the players are actually missing.");
                 messageTo(self, "vaderLeaving", null, 1, false);
                 setObjVar(vader, "alreadyLeaving", true);
                 return SCRIPT_CONTINUE;
@@ -955,7 +952,7 @@ public class emperor_statue extends script.base_script
             }
             if (miaList.size() <= 0)
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: We tried to get a list of missing players but failed. Sending Vader to shuttle.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: We tried to get a list of missing players but failed. Sending Vader to shuttle.");
                 messageTo(self, "vaderLeaving", null, 1, false);
                 setObjVar(vader, "alreadyLeaving", true);
                 return SCRIPT_CONTINUE;
@@ -963,12 +960,12 @@ public class emperor_statue extends script.base_script
             String waitingOnList = "";
             if (miaList.size() == 1)
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: The list length for MIA players is only one player: " + miaList.get(0));
+                //CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: The list length for MIA players is only one player: " + miaList.get(0));
                 waitingOnList = getFirstName(((obj_id)miaList.get(0)));
             }
             else 
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: The list length for MIA players is: " + miaList.size());
+                //CustomerServiceLog("holidayEvent", "emperor_statue.waitingHalf: The list length for MIA players is: " + miaList.size());
                 for (int i = 0; i < miaList.size(); i++)
                 {
                     if (i == 0)
@@ -996,7 +993,7 @@ public class emperor_statue extends script.base_script
     }
     public int vendorReplyAnnoyed(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.vendorReplyAnnoyed: messageHandler Initialized.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.vendorReplyAnnoyed: messageHandler Initialized.");
         obj_id vendor = getObjIdObjVar(self, holiday.SPAWNER_PREFIX_OBJVAR + "vendor");
         if (isIdValid(vendor) || exists(vendor))
         {
@@ -1007,20 +1004,20 @@ public class emperor_statue extends script.base_script
     }
     public int waitingDone(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: messageHandler Initialized.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: messageHandler Initialized.");
         if (params == null)
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: There were no params passed to the vendor3 message handler.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: There were no params passed to the vendor3 message handler.");
             return SCRIPT_CONTINUE;
         }
         if (!params.containsKey("winnerList"))
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: There was no winnerlist key passed in the params.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: There was no winnerlist key passed in the params.");
             return SCRIPT_CONTINUE;
         }
         if (!params.containsKey("listOfWinners"))
         {
-            CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: There was no listOfWinners key passed in the params.");
+            //CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: There was no listOfWinners key passed in the params.");
             return SCRIPT_CONTINUE;
         }
         obj_id vader = getObjIdObjVar(self, holiday.SPAWNER_PREFIX_OBJVAR + "vader");
@@ -1032,27 +1029,27 @@ public class emperor_statue extends script.base_script
             }
             if (!hasObjVar(vader, "readyForBadge"))
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: Vader has given out the badges already. No need to continue.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: Vader has given out the badges already. No need to continue.");
                 messageTo(self, "vaderLeaving", null, 1, false);
                 return SCRIPT_CONTINUE;
             }
             if (!hasObjVar(vader, "miaList"))
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: Vader did not receive the MIA list. No need to continue.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: Vader did not receive the MIA list. No need to continue.");
                 messageTo(self, "vaderLeaving", null, 1, false);
                 return SCRIPT_CONTINUE;
             }
             obj_id[] oldMiaList = getObjIdArrayObjVar(vader, "miaList");
             if (oldMiaList == null || oldMiaList.length <= 0)
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: Vader had an old MIA player list but it was invalid or corrupt. Vader is leaving as a result.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: Vader had an old MIA player list but it was invalid or corrupt. Vader is leaving as a result.");
                 messageTo(self, "vaderLeaving", null, 1, false);
                 return SCRIPT_CONTINUE;
             }
             obj_var_list allMissingPlayers = getObjVarList(vader, "readyForBadge");
             if (allMissingPlayers == null)
             {
-                CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: Vader was about to talk smack about 1 or more players not bowing but none of the players are actually missing.");
+                //CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: Vader was about to talk smack about 1 or more players not bowing but none of the players are actually missing.");
                 messageTo(self, "vaderLeaving", null, 1, false);
                 return SCRIPT_CONTINUE;
             }
@@ -1069,7 +1066,7 @@ public class emperor_statue extends script.base_script
                 }
                 if (lastestMiaList.size() <= 0)
                 {
-                    CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: We tried to get a list of missing players but failed. Sending Vader to shuttle.");
+                    //CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: We tried to get a list of missing players but failed. Sending Vader to shuttle.");
                     messageTo(self, "vaderLeaving", null, 1, false);
                     setObjVar(vader, "alreadyLeaving", true);
                     return SCRIPT_CONTINUE;
@@ -1077,12 +1074,12 @@ public class emperor_statue extends script.base_script
                 String waitingOnList = "";
                 if (lastestMiaList.size() == 1)
                 {
-                    CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: The list length for MIA players is only one player: " + lastestMiaList.get(0));
+                    //CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: The list length for MIA players is only one player: " + lastestMiaList.get(0));
                     waitingOnList = getFirstName(((obj_id)lastestMiaList.get(0)));
                 }
                 else 
                 {
-                    CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: The list length for MIA players is: " + lastestMiaList.size());
+                    //CustomerServiceLog("holidayEvent", "emperor_statue.waitingDone: The list length for MIA players is: " + lastestMiaList.size());
                     for (int i = 0; i < lastestMiaList.size(); i++)
                     {
                         if (i == 0)
@@ -1130,7 +1127,7 @@ public class emperor_statue extends script.base_script
     }
     public int vendorReplyWaiting(obj_id self, dictionary params) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.vendorReplyWaiting: messageHandler Initialized.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.vendorReplyWaiting: messageHandler Initialized.");
         obj_id vendor = getObjIdObjVar(self, holiday.SPAWNER_PREFIX_OBJVAR + "vendor");
         if (isIdValid(vendor) || exists(vendor))
         {
@@ -1142,7 +1139,7 @@ public class emperor_statue extends script.base_script
     }
     public boolean playTieFighterPair(obj_id self, obj_id playOnObject) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.playTieFighterPair: Function initialized.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.playTieFighterPair: Function initialized.");
         if (!isValidId(self) || !exists(self))
         {
             return false;
@@ -1151,14 +1148,14 @@ public class emperor_statue extends script.base_script
         {
             return false;
         }
-        CustomerServiceLog("holidayEvent", "emperor_statue.playTieFighterPair: playing.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.playTieFighterPair: playing.");
         location here = getLocation(playOnObject);
         playClientEffectLoc(getPlayerCreaturesInRange(here, 200.0f), holiday.IMPERIAL_FLYBY_PARTICLE_01, here, 1.0f);
         return true;
     }
     public boolean playTieFighterGroup(obj_id self, obj_id playOnObject) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.playTieFighterGroup:  Function initialized.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.playTieFighterGroup:  Function initialized.");
         if (!isValidId(self) || !exists(self))
         {
             return false;
@@ -1167,14 +1164,14 @@ public class emperor_statue extends script.base_script
         {
             return false;
         }
-        CustomerServiceLog("holidayEvent", "emperor_statue.playTieFighterGroup: playing.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.playTieFighterGroup: playing.");
         location here = getLocation(playOnObject);
         playClientEffectLoc(getPlayerCreaturesInRange(here, 200.0f), holiday.IMPERIAL_FLYBY_PARTICLE_02, here, 1.0f);
         return true;
     }
     public boolean createLambdaDropship(obj_id self, location loc) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.createLambdaDropship: Init.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.createLambdaDropship: Init.");
         if (loc == null)
         {
             return false;
@@ -1183,15 +1180,15 @@ public class emperor_statue extends script.base_script
         {
             return false;
         }
-        CustomerServiceLog("holidayEvent", "emperor_statue.createLambdaDropship: Creating shuttle at location: " + loc);
+        //CustomerServiceLog("holidayEvent", "emperor_statue.createLambdaDropship: Creating shuttle at location: " + loc);
         obj_id lambda = create.object("object/creature/npc/theme_park/lambda_shuttle.iff", loc);
         if (!isIdValid(lambda))
         {
             return false;
         }
-        CustomerServiceLog("holidayEvent", "emperor_statue.createLambdaDropship: Lambda OID: " + lambda);
+        //CustomerServiceLog("holidayEvent", "emperor_statue.createLambdaDropship: Lambda OID: " + lambda);
         setYaw(lambda, LAMBDA_YAW);
-        CustomerServiceLog("holidayEvent", "emperor_statue.createLambdaDropship: Lambda Yaw: " + getYaw(lambda));
+        //CustomerServiceLog("holidayEvent", "emperor_statue.createLambdaDropship: Lambda Yaw: " + getYaw(lambda));
         utils.setScriptVar(self, "lambdaShuttle", lambda);
         utils.setScriptVar(lambda, "statue", self);
         attachScript(lambda, "systems.spawning.dropship.emperorsday_lambda");

@@ -5,4 +5,3 @@
 
 sharedTemplate = "object/tangible/loot/simple_kit/shared_legacy_droid_body.iff"
 
-scripts = +["object.autostack"]

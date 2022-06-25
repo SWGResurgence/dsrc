@@ -82,7 +82,7 @@ public class player_stealth extends script.systems.combat.combat_base
         {
             return SCRIPT_CONTINUE;
         }
-        int invis = getStringCrc(toLower(invisBuff));
+        /*int invis = getStringCrc(toLower(invisBuff));
         switch (invis)
         {
             case (342850470):
@@ -105,7 +105,8 @@ public class player_stealth extends script.systems.combat.combat_base
             break;
             default:
             break;
-        }
+        }*/
+        perpetuate = stealth.checkSpyStealthUpkeep(self);
         if (perpetuate && !utils.hasScriptVar(self, stealth.INVIS_UPKEEP_MSG_DISPATCHED))
         {
             utils.setScriptVar(self, stealth.INVIS_UPKEEP_MSG_DISPATCHED, 1);

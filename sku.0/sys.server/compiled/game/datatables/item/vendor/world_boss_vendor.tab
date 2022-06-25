@@ -1,0 +1,6 @@
+item	cash	token40	limit	class	script	note
+s[none]	i[0]	i[0]	i[0]	i[0]	s	c
+rare_loot_chest_quality_1		1				Rare Loot Chest
+rare_loot_chest_quality_2		3				Exceptional Loot Chest
+rare_loot_chest_quality_3		5				Legendary Loot Chest
+item_tcg_loot_reward_series5_atat_head_itv		100				ITV: AT-AT Head

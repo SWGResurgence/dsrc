@@ -2,72 +2,42 @@ NAME	CATEGORY	AFFECTS	MAX_TIMES_APPLIED	COST	AFFECT_AMOUNT	REQUIRED_EXPERTISE
 s	s	s	i	i	i	s
 agility	attributes	agility_modified	10	1	15	
 block_value	attributes	combat_block_value	10	1	15	
-camouflage	attributes	camouflage	10	1	15	
+camouflage	attributes	camouflage	10	1	15	holism
 constitution	attributes	constitution_modified	10	1	15	
-detect_camouflage	attributes	detect_hidden	10	1	15	
-evasion_value	attributes	combat_evasion_value	10	1	15	
+detect_camouflage	attributes	detect_hidden	10	1	15	holism
+evasion_value	attributes	combat_evasion_value	10	1	15	holism
 luck	attributes	luck_modified	10	1	15	
 precision	attributes	precision_modified	10	1	15	
 stamina	attributes	stamina_modified	10	1	15	
 strength	attributes	strength_modified	10	1	15	
-strikethrough_value	attributes	combat_strikethrough_value	10	1	15	
+strikethrough_value	attributes	combat_strikethrough_value	10	1	15	holism
 action_cost_reduction	combat	expertise_action_all	2	4	5	
-block_chance	combat	combat_block_chance	2	4	3	
+block_chance	combat	combat_block_chance	2	4	3	holism
 critical_hit	combat	expertise_critical_niche_all	2	4	3	
-critical_hit_defense	combat	expertise_critical_hit_reduction	2	4	3	
-devastation	combat	expertise_co_pos_secured_line_burst_fire_devastation_bonus	2	4	3	
-dodge_chance	combat	combat_dodge	2	4	3	
-evasion_chance	combat	combat_evasion_chance	2	4	3	
-glancing_blow_increased	combat	expertise_glancing_blow_all	2	4	3	
-glancing_blow_melee	combat	expertise_glancing_blow_melee	2	4	3	
-glancing_blow_ranged	combat	expertise_glancing_blow_ranged	2	4	3	
-heal_potency	combat	expertise_healing_all	5	2	4	holism
-parry_rating	combat	combat_parry	2	4	3	
+critical_hit_defense	combat	expertise_critical_hit_reduction	2	4	3	holism
+devastation	combat	expertise_co_pos_secured_line_burst_fire_devastation_bonus	2	4	3	holism
+dodge_chance	combat	combat_dodge	2	4	3	holism
+evasion_chance	combat	combat_evasion_chance	2	4	3	holism
+glancing_blow_increased	combat	expertise_glancing_blow_all	2	4	3	holism
+glancing_blow_melee	combat	expertise_glancing_blow_melee	2	4	3	holism
+glancing_blow_ranged	combat	expertise_glancing_blow_ranged	2	4	3	holism
+heal_potency	combat	expertise_healing_all	5	2	4	
+parry_rating	combat	combat_parry	2	4	3	holism
 reactive_second_chance	combat	reactive_second_chance	4	2	2	second_chance
-resilience	combat	expertise_dot_absorption_all	5	2	4	holism
-strikethrough_chance	combat	combat_strikethrough_chance	2	4	3	
+resilience	combat	expertise_dot_absorption_all	5	2	4	
+strikethrough_chance	combat	combat_strikethrough_chance	2	4	3	holism
 flush_with_success	misc	flush_with_success	5	2	3	flush_with_success  
+flush_with_success_bm	misc	bm_xp_mod_boost	5	2	3	flush_with_success  
 reactive_go_with_the_flow	misc	movement_speed	5	2	5	go_with_the_flow 
 kinetic	resistances	expertise_innate_protection_kinetic	5	1	450	
 energy	resistances	expertise_innate_protection_energy	5	1	450	
 elemental	resistances	elemental_resistance	5	1	450	
 amazing_success_chance	trade	crafting_critical_success_bonus	5	4	2	harvest_faire  
+crafting_ground_assembly	trade	armor_assembly	10	2	25	harvest_faire  
+crafting_ground_experimentation	trade	armor_experimentation	7	2	1	harvest_faire  
+crafting_space_assembly	trade	general_assembly	10	2	25	harvest_faire  
+crafting_space_experimentation	trade	general_experimentation	7	2	1	harvest_faire  
 factory_speed	trade	factory_speed	5	2	2	harvest_faire  
-general_crafting_armor_assembly	trade	armor_assembly	5	2	1	harvest_faire  
-general_crafting_armor_experimentation	trade	armor_experimentation	7	2	1	harvest_faire  
-general_crafting_artisan_assembly	trade	general_assembly	5	2	1	
-general_crafting_artisan_experimentation	trade	general_experimentation	7	2	1	
-general_crafting_clothing_assembly	trade	clothing_assembly	5	2	1	harvest_faire  
-general_crafting_clothing_experimentation	trade	clothing_experimentation	7	2	1	harvest_faire  
-general_crafting_cybernetic_assembly	trade	cybernetic_assembly	5	2	1	harvest_faire  
-general_crafting_cybernetic_experimentation	trade	cybernetic_experimentation	7	2	1	harvest_faire  
-general_crafting_droid_assembly	trade	droid_assembly	5	2	1	harvest_faire  
-general_crafting_droid_experimentation	trade	droid_experimentation	7	2	1	harvest_faire  
-general_crafting_food_assembly	trade	food_assembly	5	2	1	harvest_faire  
-general_crafting_food_experimentation	trade	food_experimentation	7	2	1	harvest_faire  
-general_crafting_instrument_assembly	trade	instrument_assembly	5	2	1	harvest_faire  
-general_crafting_lightsaber_assembly	trade	jedi_saber_assembly	5	2	1	harvest_faire  
-general_crafting_lightsaber_experimentation	trade	jedi_saber_experimentation	7	2	1	harvest_faire  
-general_crafting_prop_assembly	trade	prop_assembly	5	2	1	harvest_faire  
-general_crafting_structure_assembly	trade	structure_assembly	5	2	1	harvest_faire  
-general_crafting_structure_experimentation	trade	structure_experimentation	7	2	1	harvest_faire  
-general_crafting_weapon_assembly	trade	weapon_assembly	5	2	1	harvest_faire  
-general_crafting_weapon_experimentation	trade	weapon_experimentation	7	2	1	harvest_faire  
-hand_sampling	trade	expertise_resource_sampling_increase	20	1	1	harvest_faire  
 incubation_time_reduction	trade	incubation_time_reduction	5	2	2	harvest_faire  
-mutation_chance	trade	bm_mutation_chance_increase	5	2	2	harvest_faire  
+mutation_chance	trade	bm_mutation_chance_increase	2	5	5	harvest_faire  
 reverse_engineering_chance	trade	expertise_reverse_engineering_bonus	5	2	2	harvest_faire  
-space_crafting_advanced_ship_assembly	trade	advanced_assembly	5	2	1	harvest_faire  
-space_crafting_advanced_ship_experimentation	trade	advanced_ship_experimentation	7	2	1	harvest_faire  
-space_crafting_booster_assembly	trade	booster_assembly	5	2	1	harvest_faire  
-space_crafting_booster_experimentation	trade	booster_experimentation	7	2	1	harvest_faire  
-space_crafting_chassis_assembly	trade	chassis_assembly	5	2	1	harvest_faire  
-space_crafting_chassis_experimentation	trade	chassis_experimentation	7	2	1	harvest_faire  
-space_crafting_engine_assembly	trade	engine_assembly	5	2	1	harvest_faire  
-space_crafting_engine_experimentation	trade	engine_experimentation	7	2	1	harvest_faire  
-space_crafting_power_systems_assembly	trade	power_systems	5	2	1	harvest_faire  
-space_crafting_power_systems_experimentation	trade	power_systems_experimentation	7	2	1	harvest_faire  
-space_crafting_shield_assembly	trade	shields_assembly	5	2	1	harvest_faire  
-space_crafting_shield_experimentation	trade	shields_experimentation	7	2	1	harvest_faire  
-space_crafting_weapon_systems_assembly	trade	weapon_systems	5	2	1	harvest_faire  
-space_crafting_weapon_systems_experimentation	trade	weapon_systems_experimentation	7	2	1	harvest_faire  

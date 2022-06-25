@@ -5,4 +5,3 @@
 
 sharedTemplate = "object/tangible/loot/simple_kit/shared_viewscreen_reader.iff"
 
-scripts = +["object.autostack"]

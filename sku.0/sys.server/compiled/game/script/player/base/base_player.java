@@ -7,8 +7,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
-import script.cureward.cureward;
-
 public class base_player extends script.base_script
 {
     public static final int TIME_DEATH = 5;
@@ -364,7 +362,7 @@ public class base_player extends script.base_script
         {
             skill.doPlayerLeveling(self, oldCombatLevel, newCombatLevel);
         }
-        else 
+        else
         {
             skill.setPlayerStatsForLevel(self, newCombatLevel);
             utils.removeScriptVar(self, "respec.conceal");
@@ -541,7 +539,7 @@ public class base_player extends script.base_script
         {
             skill.grantAllPoliticianSkills(self);
         }
-        else 
+        else
         {
             int currentCity = getCitizenOfCityId(self);
             obj_id currentCityMayor = cityGetLeader(currentCity);
@@ -584,7 +582,7 @@ public class base_player extends script.base_script
         {
             grantCommand(self, SPACE_CERTIFICATION);
         }
-        else 
+        else
         {
             revokeCommand(self, SPACE_CERTIFICATION);
         }
@@ -761,7 +759,7 @@ public class base_player extends script.base_script
         {
             setObjVar(self, "bounty.decayTime", currentTime);
         }
-        else 
+        else
         {
             int bounty = getIntObjVar(self, "bounty.amount");
             if (currentTime - lastDecayTime > 604800)
@@ -819,7 +817,7 @@ public class base_player extends script.base_script
             {
                 badge.grantBadge(self, "pvp_imperial_lieutenant");
             }
-            else 
+            else
             {
                 badge.grantBadge(self, "pvp_rebel_lieutenant");
             }
@@ -831,7 +829,7 @@ public class base_player extends script.base_script
             {
                 badge.grantBadge(self, "pvp_imperial_captain");
             }
-            else 
+            else
             {
                 badge.grantBadge(self, "pvp_rebel_captain");
             }
@@ -843,7 +841,7 @@ public class base_player extends script.base_script
             {
                 badge.grantBadge(self, "pvp_imperial_major");
             }
-            else 
+            else
             {
                 badge.grantBadge(self, "pvp_rebel_major");
             }
@@ -855,7 +853,7 @@ public class base_player extends script.base_script
             {
                 badge.grantBadge(self, "pvp_imperial_lt_colonel");
             }
-            else 
+            else
             {
                 badge.grantBadge(self, "pvp_rebel_commander");
             }
@@ -867,7 +865,7 @@ public class base_player extends script.base_script
             {
                 badge.grantBadge(self, "pvp_imperial_colonel");
             }
-            else 
+            else
             {
                 badge.grantBadge(self, "pvp_rebel_colonel");
             }
@@ -879,7 +877,7 @@ public class base_player extends script.base_script
             {
                 badge.grantBadge(self, "pvp_imperial_general");
             }
-            else 
+            else
             {
                 badge.grantBadge(self, "pvp_rebel_general");
             }
@@ -1046,7 +1044,7 @@ public class base_player extends script.base_script
             pclib.killPlayer(self, killer, true);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             buff.applyBuff(self, "incapWeaken");
         }
@@ -1070,7 +1068,7 @@ public class base_player extends script.base_script
         {
             sendSystemMessage(self, SID_VICTIM_INCAPACITATED);
         }
-        else 
+        else
         {
             prose_package ppToVictim = prose.getPackage(PROSE_VICTIM_INCAP, killer);
             sendSystemMessageProse(self, ppToVictim);
@@ -1223,7 +1221,7 @@ public class base_player extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             mid.setServerNotify(true);
         }
@@ -1243,7 +1241,7 @@ public class base_player extends script.base_script
             {
                 mi.addRootMenu(menu_info_types.SERVER_PERFORMANCE_WATCH_STOP, performance.SID_RADIAL_PERFORMANCE_WATCH_STOP);
             }
-            else 
+            else
             {
                 if (hasScript(self, performance.DANCE_HEARTBEAT_SCRIPT))
                 {
@@ -1303,7 +1301,7 @@ public class base_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public int OnLogin(obj_id self) throws InterruptedException
+        public int OnLogin(obj_id self) throws InterruptedException
     {
         boolean ctsDisconnectRequested = false;
         if (hasObjVar(self, "disableLoginCtsInProgress"))
@@ -1337,7 +1335,7 @@ public class base_player extends script.base_script
                     String strGalaxyMessage = "\\#FF0000" + utils.getStringObjVar(planetId, "galaxyMessage") + "\\#FFFFFF";
                     sendConsoleMessage(self, strGalaxyMessage);
                 }
-                else 
+                else
                 {
                     /*String strGalaxyMessage = "\\#FF0000" + "Welcome to SWG: Resurgence!" + "\r\n" + "\\#CC9900" + "If you encounter any bugs, please report them on our Mantis Bug Tracker, and thank you for participating in our testing phase!" + "\\#FFFFFF";
                     sendConsoleMessage(self, strGalaxyMessage);*/
@@ -1357,7 +1355,7 @@ public class base_player extends script.base_script
                     {
                         strGalaxyMessage += utils.getStringObjVar(planetId, "galaxyWardenMessage");
                     }
-                    else 
+                    else
                     {
                         strGalaxyMessage += "Welcome warden";
                     }
@@ -1419,7 +1417,7 @@ public class base_player extends script.base_script
             min = dataTableGetFloat("datatables/player/racial_scale.iff", species, "MALE_MIN");
             max = dataTableGetFloat("datatables/player/racial_scale.iff", species, "MALE_MAX");
         }
-        else 
+        else
         {
             min = dataTableGetFloat("datatables/player/racial_scale.iff", species, "FEMALE_MIN");
             max = dataTableGetFloat("datatables/player/racial_scale.iff", species, "FEMALE_MAX");
@@ -1450,7 +1448,7 @@ public class base_player extends script.base_script
                     messageTo(self, "removeScentMaskNoNotify", null, 0, false);
                 }
             }
-            else 
+            else
             {
                 messageTo(self, "removeScentMaskNoNotify", null, 0, false);
             }
@@ -1503,6 +1501,7 @@ public class base_player extends script.base_script
                 removeObjVar(self, "groupWaypoint");
             }
         }
+        veteran_deprecated.updateVeteranTime(self);
         if (hasObjVar(self, "renamePerformed"))
         {
             String old_name = getStringObjVar(self, "renamePerformed");
@@ -1615,7 +1614,7 @@ public class base_player extends script.base_script
                 }
                 messageTo(self, pclib.HANDLER_PLAYER_DEATH, null, 5, false);
             }
-            else 
+            else
             {
                 if (hasObjVar(self, pclib.VAR_BEEN_COUPDEGRACED))
                 {
@@ -1623,7 +1622,7 @@ public class base_player extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             messageTo(self, "handleCloneRespawn", null, 1.0f, false);
         }
@@ -1789,7 +1788,7 @@ public class base_player extends script.base_script
     }
     public int handlerRemoveGroupBuffEffect(obj_id self, dictionary params) throws InterruptedException
     {
-        if (params == null || params.isEmpty())
+        if ((params == null) || (params.isEmpty()))
         {
             return SCRIPT_CONTINUE;
         }
@@ -1932,7 +1931,7 @@ public class base_player extends script.base_script
                 {
                     combatLevel = getIntObjVar(self, "combatLevel");
                 }
-                else 
+                else
                 {
                     if (isIdValid(respecDevice))
                     {
@@ -1984,18 +1983,18 @@ public class base_player extends script.base_script
                     {
                         detachScript(self, "npe.handoff_to_tatooine");
                     }
-                    else 
+                    else
                     {
                         groundquests.requestGrantQuest(self, questNewbieStartBH);
                     }
                 }
-                else 
+                else
                 {
                     if (groundquests.hasCompletedQuest(self, questNewbieStart) || groundquests.isQuestActive(self, questNewbieStart))
                     {
                         detachScript(self, "npe.handoff_to_tatooine");
                     }
-                    else 
+                    else
                     {
                         groundquests.requestGrantQuest(self, questNewbieStart);
                     }
@@ -2082,7 +2081,7 @@ public class base_player extends script.base_script
             {
                 templateRow = dataTableSearchColumnForString(template, 0, racial_tbl);
             }
-            else 
+            else
             {
                 templateRow = dataTableSearchColumnForString(template, 1, racial_tbl);
             }
@@ -2152,7 +2151,7 @@ public class base_player extends script.base_script
                 setObjVar(self, "building_ejection_point", buildingEjectionPoint);
             }
         }
-        else 
+        else
         {
             removeObjVar(self, "building_ejection_point");
         }
@@ -2298,7 +2297,7 @@ public class base_player extends script.base_script
         {
             sender = getTopMostContainer(self);
         }
-        else 
+        else
         {
             sender = params.getObjId("sender");
         }
@@ -2395,14 +2394,14 @@ public class base_player extends script.base_script
                 {
                     pclib.sendToAnyLocation(self, loc1, null);
                 }
-                else 
+                else
                 {
                     pclib.sendToAnyLocation(self, loc2, null);
                 }
                 sendSystemMessage(self, SID_SYS_EJECT_SUCCESS);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_SYS_EJECT_FAIL_PROXIMITY);
         }
@@ -2425,7 +2424,7 @@ public class base_player extends script.base_script
         {
             performance.watch(self, target);
         }
-        else 
+        else
         {
             performance.stopWatch(self);
         }
@@ -2438,7 +2437,7 @@ public class base_player extends script.base_script
         {
             performance.listen(self, target);
         }
-        else 
+        else
         {
             performance.stopListen(self);
         }
@@ -2500,7 +2499,7 @@ public class base_player extends script.base_script
             if ((consentTo == null) || (consentTo.length == 0))
             {
             }
-            else 
+            else
             {
                 obj_id target = consentTo[idx];
                 queueCommand(self, (-1562441686), null, getPlayerFullName(target), COMMAND_PRIORITY_DEFAULT);
@@ -2545,7 +2544,7 @@ public class base_player extends script.base_script
             newConsentFrom.setSize(0);
             consentFrom = newConsentFrom;
         }
-        else 
+        else
         {
             if (utils.getElementPositionInArray(consentFrom, consenter) > -1)
             {
@@ -2572,7 +2571,7 @@ public class base_player extends script.base_script
                 {
                     removeObjVar(self, pclib.VAR_CONSENT_FROM_BASE);
                 }
-                else 
+                else
                 {
                     setObjVar(self, pclib.VAR_CONSENT_FROM_ID, consentFrom);
                 }
@@ -2599,7 +2598,7 @@ public class base_player extends script.base_script
             {
                 group.notifyCoinLoot(gid, self, corpseId, cash);
             }
-            else 
+            else
             {
                 prose_package pp = prose.getPackage(PROSE_COIN_LOOT_NO_TARGET, null, nullId, cash);
                 sendSystemMessageProse(self, pp);
@@ -2614,7 +2613,7 @@ public class base_player extends script.base_script
                     messageTo(corpseId, "handleCorpseExpire", null, 2, true);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     return SCRIPT_CONTINUE;
                 }
@@ -2638,7 +2637,7 @@ public class base_player extends script.base_script
         {
             CustomerServiceLog("Death", "(" + self + ") " + getName(self) + " FAILED to loot " + cash + " credits from (" + corpseId + ") " + getName(corpseId));
         }
-        else 
+        else
         {
             CustomerServiceLog("Loot", "(" + self + ") " + getName(self) + " FAILED to loot " + cash + " credits from (" + corpseId + ") " + getName(corpseId));
         }
@@ -2698,15 +2697,12 @@ public class base_player extends script.base_script
             {
                 removeObjVar(self, pclib.VAR_CORPSE_BASE);
             }
-            else 
+            else
             {
                 utils.setResizeableBatchObjVar(self, pclib.VAR_CORPSE_ID, corpses);
                 utils.setResizeableBatchObjVar(self, pclib.VAR_CORPSE_KILLER, killers);
                 utils.setResizeableBatchObjVar(self, pclib.VAR_CORPSE_STAMP, stamps);
             }
-        }
-        else 
-        {
         }
         return SCRIPT_CONTINUE;
     }
@@ -2846,7 +2842,7 @@ public class base_player extends script.base_script
             utils.setScriptVar(self, "buffDecay", 1);
             buff.decayAllBuffsFromPvpDeath(self);
         }
-        else 
+        else
         {
             buff.removeAllBuffs(self, true);
         }
@@ -2890,7 +2886,7 @@ public class base_player extends script.base_script
             cloneLocs = utils.addElement(cloneLocs, cloneLoc);
             spawnLocs = utils.addElement(spawnLocs, cloneLoc);
         }
-        else 
+        else
         {
             if (cloninglib.canUseBindFacility(planetName, areaName))
             {
@@ -2910,19 +2906,19 @@ public class base_player extends script.base_script
                                 bindLoc = null;
                                 spawnLoc = null;
                             }
-                            else 
+                            else
                             {
                                 bindName += cloneName;
                             }
                         }
-                        else 
+                        else
                         {
                             bindName += "@base_player:clone_location_unknown";
                             bindLoc = null;
                             spawnLoc = null;
                         }
                     }
-                    else 
+                    else
                     {
                         bindName += "@base_player:clone_location_none";
                         bindLoc = null;
@@ -2936,7 +2932,7 @@ public class base_player extends script.base_script
                     {
                         damage = utils.addElement(damage, 0);
                     }
-                    else 
+                    else
                     {
                         damage = utils.addElement(damage, cloninglib.CLONE_DAMAGE_LOW);
                     }
@@ -3036,7 +3032,7 @@ public class base_player extends script.base_script
     }
     public int handleCloneSuiUpdate(obj_id self, dictionary params) throws InterruptedException
     {
-        if ((params == null) || (params.isEmpty()))
+        if (params == null || params.isEmpty())
         {
             return SCRIPT_CONTINUE;
         }
@@ -3071,7 +3067,7 @@ public class base_player extends script.base_script
         {
             text = "" + (int)dist + "m";
         }
-        else 
+        else
         {
             text = "" + (int)(dist / 1000.0f) + "km";
         }
@@ -3245,7 +3241,7 @@ public class base_player extends script.base_script
             utils.removeScriptVar(self, "reviveSUI.pid");
             messageTo(self, "handlePlayerResuscitated", null, 0, true);
         }
-        else 
+        else
         {
             prose_package pp = new prose_package();
             pp = prose.setStringId(pp, new string_id("spam", "revive_attempt_denied"));
@@ -3286,7 +3282,7 @@ public class base_player extends script.base_script
                     utils.setScriptVar(self, "no_cloning_sickness", 1);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(self, SID_CLONE_FAIL_SELECTION);
             }
@@ -3385,7 +3381,7 @@ public class base_player extends script.base_script
             removeObjVar(self, "fullHealClone");
             healing.healClone(self, false);
         }
-        else 
+        else
         {
             healing.healClone(self, true);
         }
@@ -3436,7 +3432,7 @@ public class base_player extends script.base_script
             sendSystemMessageProse(medic, pp);
             sendSystemMessageProse(self, pp);
         }
-        else 
+        else
         {
             sendSystemMessage(self, new string_id("healing", "perform_revive_success_self_only"));
         }
@@ -3593,7 +3589,7 @@ public class base_player extends script.base_script
     }
     public int cmdTip(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if ((params == null) || (params.equals("")))
+        if (params == null || params.equals(""))
         {
             showTipSyntax(self);
             return SCRIPT_CONTINUE;
@@ -3622,7 +3618,7 @@ public class base_player extends script.base_script
                 prose_package tipAbort = prose.getPackage(pclib.PROSE_TIP_ABORT, oldTarget);
                 sendSystemMessageProse(self, tipAbort);
             }
-            else 
+            else
             {
                 sendSystemMessage(self, pclib.SID_TIP_ABORT);
             }
@@ -3676,7 +3672,7 @@ public class base_player extends script.base_script
             {
                 pclib.giveTip(self, target, getName(target), amt, useCash);
             }
-            else 
+            else
             {
                 obj_id playerId = getPlayerIdFromFirstName(name);
                 if (isIdValid(playerId))
@@ -3727,7 +3723,7 @@ public class base_player extends script.base_script
             prose_package nsfWire = prose.getPackage(pclib.PROSE_TIP_NSF_WIRE, self, getName(self), null, target, targetName, null, null, null, null, total, 0.0f);
             sendSystemMessageProse(self, nsfWire);
         }
-        else 
+        else
         {
             dictionary d = new dictionary();
             d.put("target", target);
@@ -3772,7 +3768,7 @@ public class base_player extends script.base_script
             sendSystemMessageProse(target, toTarget);
             CustomerServiceLog("Trade", "  Tip -- Player: " + self + " " + getName(self) + " Target: " + target + " " + getName(target) + " -- Cash tip transfer successfully completed. Amt: " + amt);
         }
-        else 
+        else
         {
             CustomerServiceLog("Trade", "  Tip -- Player: " + self + " " + getName(self) + " Target: " + target + " " + getName(target) + " -- Bank->Escrow wire transfer complete. Telling target to request escrow funds. Amt: " + amt);
             messageTo(target, "handleTipEscrowRequest", params, 1.0f, true);
@@ -3796,7 +3792,7 @@ public class base_player extends script.base_script
                 refundEscrow(player, playerName, self, getName(self), amt);
             }
         }
-        else 
+        else
         {
             CustomerServiceLog("Trade", "  Tip -- Player: " + player + " " + playerName + " Target: " + self + " " + getName(self) + " -- Target was unable to request tip funds from escrow because the amount is invalid! Amt: " + amt);
         }
@@ -3858,7 +3854,7 @@ public class base_player extends script.base_script
         obj_id target = params.getObjId("target");
         String targetName = params.getString("targetName");
         int amt = params.getInt("amt");
-        if (amt < 1 || amt > 1000000)
+        if (amt < 1 || amt > 10000000)
         {
             CustomerServiceLog("Trade", "  Tip -- Player: " + player + " " + playerName + " Target: " + target + " " + targetName + " -- Unable to refund escrow because the amount is invalid! Amt:" + amt);
             return SCRIPT_CONTINUE;
@@ -3925,7 +3921,7 @@ public class base_player extends script.base_script
             prose_package nsfCash = prose.getPackage(pclib.PROSE_TIP_NSF_CASH, target, amt);
             sendSystemMessageProse(self, nsfCash);
         }
-        else 
+        else
         {
             CustomerServiceLog("Trade", "  Tip -- Player: " + self + " " + getName(self) + " Target: " + target + " " + getName(target) + " -- Bank->Escrow transfer failed in transferBankCreditsToNamedAccount! Amt: " + amt);
             prose_package nsfBank = prose.getPackage(pclib.PROSE_TIP_NSF_BANK, target, amt);
@@ -4124,21 +4120,21 @@ public class base_player extends script.base_script
                     }
                     return true;
                 }
-                else 
+                else
                 {
                     showFlyTextPrivate(killer, killer, new string_id("combat_effects", "range_too_far"), 1.5f, colors.MEDIUMTURQUOISE);
                     combat.sendCombatSpamMessage(killer, new string_id("cbt_spam", "out_of_range_far"), COMBAT_RESULT_OUT_OF_RANGE);
                     CustomerServiceLog("Pvp", "Player %TU received deathblow message for target %TT, but has moved too " + "far away (" + distance + ")", killer, victim);
                 }
             }
-            else 
+            else
             {
                 combat.sendCombatSpamMessage(killer, new string_id("cbt_spam", "invalid_target"));
                 showFlyTextPrivate(killer, killer, new string_id("combat_effects", "target_invalid_fly"), 1.5f, colors.WHITE);
                 CustomerServiceLog("Pvp", "Player %TU received deathblow message for target %TT, but we could " + "not get the player's positions", killer, victim);
             }
         }
-        else 
+        else
         {
             combat.sendCombatSpamMessage(killer, new string_id("cbt_spam", "invalid_target"));
             showFlyTextPrivate(killer, killer, new string_id("combat_effects", "target_invalid_fly"), 1.5f, colors.WHITE);
@@ -4151,7 +4147,7 @@ public class base_player extends script.base_script
         {
             pclib.coupDeGrace(target, self);
         }
-        else 
+        else
         {
             return SCRIPT_OVERRIDE;
         }
@@ -4180,27 +4176,27 @@ public class base_player extends script.base_script
                             CustomerServiceLog("Pvp", "Player %TU received deathblow message for target %TT, and is performing the blow");
                             pclib.coupDeGrace(target, self);
                         }
-                        else 
+                        else
                         {
                             CustomerServiceLog("Pvp", "Player %TU received deathblow message for target %TT, but has moved too " + "far away (" + distance + ")", self, target);
                         }
                     }
-                    else 
+                    else
                     {
                         CustomerServiceLog("Pvp", "Player %TU received deathblow message for target %TT, but we could " + "not get the player's positions", self, target);
                     }
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("Pvp", "Player %TU received deathblow message, but target %TT is no longer incapped ", self, target);
                 }
             }
-            else 
+            else
             {
                 CustomerServiceLog("Pvp", "Player %TU received deathblow message, but has invalid deathblow scriptvar " + target, self);
             }
         }
-        else 
+        else
         {
             CustomerServiceLog("Pvp", "Player %TU received deathblow message, but has no deathblow scriptvar ", self);
         }
@@ -4225,7 +4221,7 @@ public class base_player extends script.base_script
             {
                 pclib.consent(self, target);
             }
-            else 
+            else
             {
                 if (hasObjVar(self, pclib.VAR_CONSENT_TO_ID))
                 {
@@ -4247,7 +4243,7 @@ public class base_player extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             if (params.startsWith(">"))
             {
@@ -4271,7 +4267,7 @@ public class base_player extends script.base_script
                     }
                 } while (st.hasMoreTokens());
             }
-            else 
+            else
             {
                 obj_id playerId = getPlayerIdFromFirstName(params);
                 if (isIdValid(playerId))
@@ -4291,7 +4287,7 @@ public class base_player extends script.base_script
             {
                 pclib.unconsent(self, target);
             }
-            else 
+            else
             {
                 if (hasObjVar(self, pclib.VAR_CONSENT_TO_ID))
                 {
@@ -4313,7 +4309,7 @@ public class base_player extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             if (params.startsWith(">"))
             {
@@ -4336,7 +4332,7 @@ public class base_player extends script.base_script
                     }
                 } while (st.hasMoreTokens());
             }
-            else 
+            else
             {
                 obj_id playerId = getPlayerIdFromFirstName(params);
                 if (isIdValid(playerId))
@@ -4356,7 +4352,7 @@ public class base_player extends script.base_script
             {
                 pclib.hasConsent(self, target, true);
             }
-            else 
+            else
             {
                 if (hasObjVar(self, pclib.VAR_CONSENT_FROM_ID))
                 {
@@ -4378,7 +4374,7 @@ public class base_player extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             if (params.startsWith(">"))
             {
@@ -4402,7 +4398,7 @@ public class base_player extends script.base_script
                     }
                 } while (st.hasMoreTokens());
             }
-            else 
+            else
             {
                 obj_id playerId = getPlayerIdFromFirstName(params);
                 if (isIdValid(playerId))
@@ -4445,7 +4441,7 @@ public class base_player extends script.base_script
             {
                 d.put("timeLeft", 1);
             }
-            else 
+            else
             {
                 d.put("timeLeft", LOGOUT_TIME);
             }
@@ -4482,7 +4478,7 @@ public class base_player extends script.base_script
             sendSystemMessage(self, MILK_NO_TARGET);
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_NO_ALLOW_MILK);
             return SCRIPT_OVERRIDE;
@@ -4530,7 +4526,7 @@ public class base_player extends script.base_script
         {
             target = lookAtTarget;
         }
-        else 
+        else
         {
             sendSystemMessage(self, LAIR_NOT_TARGETED);
             return SCRIPT_OVERRIDE;
@@ -4546,7 +4542,7 @@ public class base_player extends script.base_script
             sendSystemMessage(self, TOO_FAR_FROM_LAIR);
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             if (!utils.hasScriptVar(target, "lair.searched") && !isIncapacitated(self))
             {
@@ -4555,7 +4551,7 @@ public class base_player extends script.base_script
                 dict.put("player", self);
                 messageTo(target, "searchLair", dict, 0, false);
             }
-            else 
+            else
             {
                 sendSystemMessage(self, SID_FOUND_NOTHING);
             }
@@ -4631,7 +4627,7 @@ public class base_player extends script.base_script
             {
                 squad_leader.sendSquadWaypoint(self, getLocation(self));
             }
-            else 
+            else
             {
                 location wayLoc = combat.getCommandGroundTargetLocation(params);
                 squad_leader.sendSquadWaypoint(self, wayLoc);
@@ -4829,7 +4825,7 @@ public class base_player extends script.base_script
             {
                 utils.setScriptVar(player, "survey_event.gamble", 3);
             }
-            else 
+            else
             {
                 utils.setScriptVar(player, "survey_event.gamble", 4);
             }
@@ -4920,7 +4916,7 @@ public class base_player extends script.base_script
         {
             utils.setScriptVar(player, "survey_event.gamble", 1);
         }
-        else 
+        else
         {
             utils.setScriptVar(player, "survey_event.gamble", 2);
         }
@@ -4944,7 +4940,7 @@ public class base_player extends script.base_script
         {
             sendSystemMessage(self, bio_engineer.SID_HARVEST_DNA_FAILED);
         }
-        else 
+        else
         {
             prose_package pp = prose.getPackage(bio_engineer.PROSE_HARVEST_DNA_FAILED, target);
             sendSystemMessageProse(self, pp);
@@ -4988,7 +4984,7 @@ public class base_player extends script.base_script
                         utils.addElement(parsedParams, token);
                     }
                 }
-                else 
+                else
                 {
                     utils.addElement(parsedParams, token);
                 }
@@ -5010,7 +5006,7 @@ public class base_player extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             String wpGroundPlanet = null;
             vector wpGroundPLanetBuildoutCoords = null;
@@ -5028,7 +5024,7 @@ public class base_player extends script.base_script
                     useTarget = true;
                     ++parsedIndex;
                 }
-                else 
+                else
                 {
                     for (int i = 0; i < WAYPOINT_GROUND_PLANETS_EXTERNAL.length; ++i)
                     {
@@ -5093,13 +5089,13 @@ public class base_player extends script.base_script
                             --parsedIndex;
                         }
                     }
-                    else 
+                    else
                     {
                         wpCoord1 = Float.NEGATIVE_INFINITY;
                         --parsedIndex;
                     }
                 }
-                else 
+                else
                 {
                     wpCoord1 = Float.NEGATIVE_INFINITY;
                     --parsedIndex;
@@ -5158,13 +5154,13 @@ public class base_player extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 if (wpCoord3 == Float.NEGATIVE_INFINITY)
                 {
                     spot = new location(wpCoord1, 0.0f, wpCoord2);
                 }
-                else 
+                else
                 {
                     spot = new location(wpCoord1, wpCoord2, wpCoord3);
                 }
@@ -5187,7 +5183,7 @@ public class base_player extends script.base_script
                         wpDifferentPlanet = true;
                         spot.area = wpSpaceZone;
                     }
-                    else 
+                    else
                     {
                         location currentLoc = getWorldLocation(self);
                         if (currentLoc != null)
@@ -5225,7 +5221,7 @@ public class base_player extends script.base_script
         {
             sendSystemMessageTestingOnly(self, "Waypoint: The system was unable to parse a valid waypoint location.");
         }
-        else 
+        else
         {
             obj_id wp = createWaypointInDatapadWithLimits(self, spot);
             if (isIdValid(wp))
@@ -5242,7 +5238,7 @@ public class base_player extends script.base_script
                     {
                         wpName = ((String)parsedParams.get(i));
                     }
-                    else 
+                    else
                     {
                         wpName += " ";
                         wpName += ((String)parsedParams.get(i));
@@ -5267,18 +5263,18 @@ public class base_player extends script.base_script
                     {
                         sendSystemMessageTestingOnly(self, "Waypoint: New waypoint \"" + wpName + "\" created for look at target location (" + (int)displayCoordX + ", " + (int)spot.y + ", " + (int)displayCoordZ + ")");
                     }
-                    else 
+                    else
                     {
                         sendSystemMessageTestingOnly(self, "Waypoint: New waypoint \"" + wpName + "\" created for location (" + (int)displayCoordX + ", " + (int)spot.y + ", " + (int)displayCoordZ + ")");
                     }
                 }
-                else 
+                else
                 {
                     final String localizedPlanetName = localize(new string_id("planet_n", spot.area));
                     sendSystemMessageTestingOnly(self, "Waypoint: New waypoint \"" + wpName + "\" created for location " + localizedPlanetName + " (" + (int)displayCoordX + ", " + (int)spot.y + ", " + (int)displayCoordZ + ")");
                 }
             }
-            else 
+            else
             {
                 string_id errorMessage = new string_id("base_player", "too_many_waypoints");
                 sendSystemMessage(self, errorMessage);
@@ -5316,7 +5312,7 @@ public class base_player extends script.base_script
                         utils.addElement(parsedParams, token);
                     }
                 }
-                else 
+                else
                 {
                     utils.addElement(parsedParams, token);
                 }
@@ -5329,7 +5325,7 @@ public class base_player extends script.base_script
             {
                 target = space_transition.getContainingShip(self);
             }
-            else 
+            else
             {
                 obj_id objContainer = getTopMostContainer(target);
                 if (isIdValid(objContainer))
@@ -5344,7 +5340,7 @@ public class base_player extends script.base_script
                 displayCoordZ = spot.z;
             }
         }
-        else 
+        else
         {
             String wpGroundPlanet = null;
             vector wpGroundPLanetBuildoutCoords = null;
@@ -5418,13 +5414,13 @@ public class base_player extends script.base_script
                             --parsedIndex;
                         }
                     }
-                    else 
+                    else
                     {
                         wpCoord1 = Float.NEGATIVE_INFINITY;
                         --parsedIndex;
                     }
                 }
-                else 
+                else
                 {
                     wpCoord1 = Float.NEGATIVE_INFINITY;
                     --parsedIndex;
@@ -5452,7 +5448,7 @@ public class base_player extends script.base_script
                 {
                     target = space_transition.getContainingShip(self);
                 }
-                else 
+                else
                 {
                     obj_id objContainer = getTopMostContainer(target);
                     if (isIdValid(objContainer))
@@ -5467,13 +5463,13 @@ public class base_player extends script.base_script
                     displayCoordZ = spot.z;
                 }
             }
-            else 
+            else
             {
                 if (wpCoord3 == Float.NEGATIVE_INFINITY)
                 {
                     spot = new location(wpCoord1, 0.0f, wpCoord2);
                 }
-                else 
+                else
                 {
                     spot = new location(wpCoord1, wpCoord2, wpCoord3);
                 }
@@ -5525,7 +5521,7 @@ public class base_player extends script.base_script
         {
             sendSystemMessageTestingOnly(self, "Waypoint: The system was unable to parse a valid waypoint location.");
         }
-        else 
+        else
         {
             obj_id wp = createWaypointInDatapadWithLimits(self, spot);
             if (isIdValid(wp))
@@ -5542,7 +5538,7 @@ public class base_player extends script.base_script
                     {
                         wpName = ((String)parsedParams.get(i));
                     }
-                    else 
+                    else
                     {
                         wpName += " ";
                         wpName += ((String)parsedParams.get(i));
@@ -5565,13 +5561,13 @@ public class base_player extends script.base_script
                 {
                     sendSystemMessageTestingOnly(self, "Waypoint: New waypoint \"" + wpName + "\" created for location (" + (int)displayCoordX + ", " + (int)spot.y + ", " + (int)displayCoordZ + ")");
                 }
-                else 
+                else
                 {
                     final String localizedPlanetName = localize(new string_id("planet_n", spot.area));
                     sendSystemMessageTestingOnly(self, "Waypoint: New waypoint \"" + wpName + "\" created for location " + localizedPlanetName + " (" + (int)displayCoordX + ", " + (int)spot.y + ", " + (int)displayCoordZ + ")");
                 }
             }
-            else 
+            else
             {
                 string_id errorMessage = new string_id("base_player", "too_many_waypoints");
                 sendSystemMessage(self, errorMessage);
@@ -5642,7 +5638,7 @@ public class base_player extends script.base_script
             newBanCities[0] = city_id;
             setObjVar(target, "city.banlist", newBanCities);
         }
-        else 
+        else
         {
             for (int banCity : banCities) {
                 if (banCity == city_id) {
@@ -5704,7 +5700,7 @@ public class base_player extends script.base_script
             {
                 removeObjVar(target, "city.banlist");
             }
-            else 
+            else
             {
                 int j = 0;
                 int[] newBanCities = new int[banCities.length - 1];
@@ -5929,7 +5925,7 @@ public class base_player extends script.base_script
                         setObjVar(target, "city.st_zoning_rights_time", stampTimesArray);
                         return;
                     }
-                    else 
+                    else
                     {
                         ids.removeElementAt(i);
                         times.removeElementAt(i);
@@ -5984,7 +5980,7 @@ public class base_player extends script.base_script
             setObjVar(target, "city.st_zoning_rights", stampIdsArray);
             setObjVar(target, "city.st_zoning_rights_time", stampTimesArray);
         }
-        else 
+        else
         {
             int[] id_array = new int[]
             {
@@ -6161,7 +6157,7 @@ public class base_player extends script.base_script
             {
                 planetList[i] = "\\#888888 " + planets[i] + " (0)";
             }
-            else 
+            else
             {
                 planetList[i] = "\\#00FF00 " + planets[i] + "\\#FFFFFF (" + count + ")";
             }
@@ -6204,7 +6200,7 @@ public class base_player extends script.base_script
                 planetCities[i] = 1;
                 count++;
             }
-            else 
+            else
             {
                 planetCities[i] = 0;
             }
@@ -6375,7 +6371,7 @@ public class base_player extends script.base_script
                 {
                     voteInfo[i] = "\\#00FF00 " + ((String)vote_names.get(i)) + "\\#AAAAFF Votes: " + (Integer) vote_counts.get(i) + "\\#FFFFFF (" + ((obj_id)vote_ids.get(i)) + ") " + "\\#AAAAAA (Incumbent)";
                 }
-                else 
+                else
                 {
                     voteInfo[i] = "\\#00FF00 " + ((String)vote_names.get(i)) + "\\#AAAAFF Votes: " + (Integer) vote_counts.get(i) + "\\#FFFFFF (" + ((obj_id)vote_ids.get(i)) + ")";
                 }
@@ -6526,13 +6522,13 @@ public class base_player extends script.base_script
                     }
                     resultSize.set(tmp.length);
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("CharacterTransfer", "OnStartCharacterUpload(withItems=" + withItems + ") tmp.length=" + tmp.length + " is >= results.length=" + results.length + ", not enough buffer space to pack the dictionary! character transfer will FAIL");
                     return SCRIPT_OVERRIDE;
                 }
             }
-            else 
+            else
             {
                 CustomerServiceLog("CharacterTransfer", "OnStartCharacterUpload(withItems=" + withItems + ") runScripts(\"OnUploadCharacter\") returned SCRIPT_OVERRIDE, character transfer will FAIL");
                 final string_id mailTransferFailedScriptError = new string_id("character_transfer", "failed_internal_script_error");
@@ -6652,7 +6648,7 @@ public class base_player extends script.base_script
             {
                 return null;
             }
-            else 
+            else
             {
                 if (isEquipped || isAppearanceEquipped)
                 {
@@ -6663,14 +6659,14 @@ public class base_player extends script.base_script
                 {
                     newItem = createObjectInInventoryAllowOverload(objectTemplateCrc, self);
                 }
-                else 
+                else
                 {
                     int containerType = getContainerType(container);
                     if (containerType == 2)
                     {
                         newItem = createObjectOverloaded(objectTemplateCrc, container);
                     }
-                    else 
+                    else
                     {
                         newItem = createObject(objectTemplateCrc, container, "");
                     }
@@ -6682,7 +6678,7 @@ public class base_player extends script.base_script
                 CustomerServiceLog("CharacterTransfer", "unpackItem() : FAILED to create object in container " + container + ": " + itemDictionary);
                 return null;
             }
-            else 
+            else
             {
                 setOwner(newItem, self);
                 utils.setLocalVar(newItem, "ctsBeingUnpacked", true);
@@ -6886,7 +6882,7 @@ public class base_player extends script.base_script
                 if ((objectTemplateName != null) && (objectTemplateName.endsWith("player_sorosuub_space_yacht.iff")))
                 {
                 }
-                else 
+                else
                 {
                     space_crafting.uninstallAll(newItem);
                 }
@@ -6946,14 +6942,14 @@ public class base_player extends script.base_script
                     }
                     setObjVar(newItem, jedi.VAR_CRYSTAL_OWNER_ID, 0);
                 }
-                else 
+                else
                 {
                     if (itemDictionary.getBoolean("isCrystalOwner"))
                     {
                         setObjVar(newItem, jedi.VAR_CRYSTAL_OWNER_ID, self);
                         setObjVar(newItem, jedi.VAR_CRYSTAL_OWNER_NAME, getName(self));
                     }
-                    else 
+                    else
                     {
                         setObjVar(newItem, jedi.VAR_CRYSTAL_OWNER_ID, 0);
                         setObjVar(newItem, jedi.VAR_CRYSTAL_OWNER_NAME, "None");
@@ -6991,7 +6987,7 @@ public class base_player extends script.base_script
                         setResourceCtsData(newItem, quantity, resourceData);
                     }
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("CharacterTransfer", "unpackItem() : created pseudo resource container " + newItem);
                 }
@@ -7162,7 +7158,7 @@ public class base_player extends script.base_script
                 {
                     setObjVar(newItem, storyteller.BLUEPRINT_AUTHOR_OBJVAR, self);
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("CharacterTransfer", "Player is not blueprint's designer: player = " + self + "; blueprint =  " + newItem);
                 }
@@ -7326,7 +7322,7 @@ public class base_player extends script.base_script
                 {
                     CustomerServiceLog("CharacterTransfer", "unpackItem()  : equipped item (" + newItem + ")");
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("CharacterTransfer", "unpackItem()  : FAILED to equip item (" + newItem + ")");
                 }
@@ -7343,7 +7339,7 @@ public class base_player extends script.base_script
                 {
                     CustomerServiceLog("CharacterTransfer", "unpackItem()  : equipped appearance item (" + newItem + ")");
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("CharacterTransfer", "unpackItem()  : FAILED to equip appearance item (" + newItem + ")");
                 }
@@ -7508,7 +7504,7 @@ public class base_player extends script.base_script
                 itemDictionary.put("staticItemName", staticItemName);
                 CustomerServiceLog("CharacterTransfer", "packItem(" + item + ", " + allowOverride + ") staticItemName=" + staticItemName);
             }
-            else 
+            else
             {
                 CustomerServiceLog("CharacterTransfer", "packItem(" + item + ", " + allowOverride + ") objectTemplateName=" + objectTemplateName + ", name=" + name);
                 String[] itemScripts = getScriptList(item);
@@ -7569,20 +7565,20 @@ public class base_player extends script.base_script
                             itemDictionary.put("attribute_types", itemAttribTypes);
                             itemDictionary.put("attribute_values", itemAttribValues);
                         }
-                        else 
+                        else
                         {
                             CustomerServiceLog("CharacterTransfer", "packItem() FAILED: getAttribs(" + item + ") = null.");
                             return null;
                         }
                     }
-                    else 
+                    else
                     {
                         int maxHitpoints = getMaxHitpoints(item);
                         if (maxHitpoints != ATTRIB_ERROR)
                         {
                             itemDictionary.put("maxHitpoints", maxHitpoints);
                         }
-                        else 
+                        else
                         {
                             CustomerServiceLog("CharacterTransfer", "packItem() FAILED: getMaxHitpoints(" + item + ") failed!");
                             return null;
@@ -7592,7 +7588,7 @@ public class base_player extends script.base_script
                         {
                             itemDictionary.put("hitpoints", hitpoints);
                         }
-                        else 
+                        else
                         {
                             CustomerServiceLog("CharacterTransfer", "packItem() FAILED: getHitpoints(" + item + ") failed!");
                             return null;
@@ -7655,7 +7651,7 @@ public class base_player extends script.base_script
                     {
                         itemDictionary.put("isCrystalOwner", true);
                     }
-                    else 
+                    else
                     {
                         itemDictionary.put("isCrystalOwner", false);
                     }
@@ -7669,7 +7665,7 @@ public class base_player extends script.base_script
                 {
                     itemDictionary.put("isBiolinkOwner", true);
                 }
-                else 
+                else
                 {
                     itemDictionary.put("isBiolinkOwner", false);
                 }
@@ -7683,7 +7679,7 @@ public class base_player extends script.base_script
                     {
                         itemDictionary.put("isBlueprintDesigner", true);
                     }
-                    else 
+                    else
                     {
                         itemDictionary.put("isBlueprintDesigner", false);
                     }
@@ -7693,7 +7689,7 @@ public class base_player extends script.base_script
             {
                 itemDictionary.put("isEquipped", true);
             }
-            else 
+            else
             {
                 itemDictionary.put("isEquipped", false);
             }
@@ -7702,7 +7698,7 @@ public class base_player extends script.base_script
             {
                 itemDictionary.put("isAppearanceEquipped", true);
             }
-            else 
+            else
             {
                 itemDictionary.put("isAppearanceEquipped", false);
             }
@@ -7734,7 +7730,7 @@ public class base_player extends script.base_script
                     itemDictionary.put("resourceQuantity", quantity);
                     itemDictionary.put("resourceData", resourceData);
                 }
-                else 
+                else
                 {
                     resourceCurrentCrateCount[0] = resourceCurrentCrateCount[0] + 1;
                     CustomerServiceLog("CharacterTransfer", "packItem(" + item + ") packed pseudo resource container (" + resourceCurrentCrateCount[0] + "/" + resourceCrateCountLimit + ") (" + resourceCurrentUnitCount[0] + "/" + resourceUnitCountLimit + ")");
@@ -7750,12 +7746,12 @@ public class base_player extends script.base_script
                     {
                         itemDictionary.put("factoryCrateCreatorIsSelf", true);
                     }
-                    else 
+                    else
                     {
                         itemDictionary.put("factoryCrateCreatorIsSelf", false);
                     }
                 }
-                else 
+                else
                 {
                     itemDictionary.put("factoryCrateHasCreator", false);
                 }
@@ -7823,7 +7819,7 @@ public class base_player extends script.base_script
                 if ((objectTemplateName != null) && (objectTemplateName.endsWith("player_sorosuub_space_yacht.iff")))
                 {
                 }
-                else 
+                else
                 {
                     dictionary shipDict = new dictionary();
                     int[] shipSlots = getShipChassisSlots(item);
@@ -8039,7 +8035,7 @@ public class base_player extends script.base_script
                                 break;
                             }
                         }
-                        else 
+                        else
                         {
                             if (!allowOverride)
                             {
@@ -8089,7 +8085,7 @@ public class base_player extends script.base_script
                     CustomerServiceLog("CharacterTransfer", "OnUploadCharacter() : FAILED because of CTS completed or in progress for character");
                     return SCRIPT_OVERRIDE;
                 }
-                else 
+                else
                 {
                     removeObjVar(self, "disableLoginCtsInProgress");
                 }
@@ -8374,7 +8370,7 @@ public class base_player extends script.base_script
                             {
                                 inventoryDictionary.put(inventoryItems[inventoryIter], itemDictionary);
                             }
-                            else 
+                            else
                             {
                                 if (!allowOverride)
                                 {
@@ -8422,7 +8418,7 @@ public class base_player extends script.base_script
                                 {
                                     bankDictionary.put(bankItems[bankIter], itemDictionary);
                                 }
-                                else 
+                                else
                                 {
                                     if (!allowOverride)
                                     {
@@ -8435,7 +8431,7 @@ public class base_player extends script.base_script
                     characterData.put("bankDictionary", bankDictionary);
                     LIVE_LOG("CharacterTransfer", "OnUploadCharacter() : bank items packed (" + bankDictionary.toString() + ")");
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("CharacterTransfer", "OnUploadCharacter() : FAILED to pack bank items. bank object is not valid. TRANSFER FAILED");
                     return SCRIPT_OVERRIDE;
@@ -8506,7 +8502,7 @@ public class base_player extends script.base_script
                                 {
                                     datapadDictionary.put(datapadItems[datapadIter], itemDictionary);
                                 }
-                                else 
+                                else
                                 {
                                     if (!allowOverride)
                                     {
@@ -8519,7 +8515,7 @@ public class base_player extends script.base_script
                     characterData.put("datapadDictionary", datapadDictionary);
                     LIVE_LOG("CharacterTransfer", "OnUploadCharacter() : datapad items packed (" + datapadDictionary.toString() + ")");
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("CharacterTransfer", "OnUploadCharacter() : FAILED to pack datapad items. datapad object is not valid. TRANSFER FAILED");
                     return SCRIPT_OVERRIDE;
@@ -8531,7 +8527,7 @@ public class base_player extends script.base_script
                 {
                     CustomerServiceLog("CharacterTransfer", "OnUploadCharacter() : FAILED to find a buy back container object.");
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("CharacterTransfer", "OnUploadCharacter() : SUCCESS finding a buy back container object.");
                     obj_id[] buyBackItems = getContents(buyBackContainer);
@@ -8565,7 +8561,7 @@ public class base_player extends script.base_script
                                 {
                                     buyBackDictionary.put(buyBackItems[buyBackIter], itemDictionary);
                                 }
-                                else 
+                                else
                                 {
                                     if (!allowOverride)
                                     {
@@ -8614,7 +8610,7 @@ public class base_player extends script.base_script
                                 {
                                     hangarDictionary.put(hangarItems[hangarIter], itemDictionary);
                                 }
-                                else 
+                                else
                                 {
                                     if (!allowOverride)
                                     {
@@ -8627,7 +8623,7 @@ public class base_player extends script.base_script
                     characterData.put("hangarDictionary", hangarDictionary);
                     LIVE_LOG("CharacterTransfer", "OnUploadCharacter() : hangar items packed (" + hangarDictionary.toString() + ")");
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("CharacterTransfer", "OnUploadCharacter() : FAILED to pack hangar items. hangar object is not valid. The player doesnt have a hangar object, transfer continuing.");
                 }
@@ -8658,7 +8654,7 @@ public class base_player extends script.base_script
                                 {
                                     appearanceDictionary.put(appearanceItems[appearanceIter], itemDictionary);
                                 }
-                                else 
+                                else
                                 {
                                     if (!allowOverride)
                                     {
@@ -8671,7 +8667,7 @@ public class base_player extends script.base_script
                     characterData.put("appearanceDictionary", appearanceDictionary);
                     LIVE_LOG("CharacterTransfer", "OnUploadCharacter() : appearance inventory items packed (" + appearanceDictionary.toString() + ")");
                 }
-                else 
+                else
                 {
                     CustomerServiceLog("CharacterTransfer", "OnUploadCharacter() : FAILED to pack appearance inventory items. appearance inventory object is not valid. TRANSFER FAILED");
                     return SCRIPT_OVERRIDE;
@@ -8753,7 +8749,7 @@ public class base_player extends script.base_script
                 idx = 3;
             }
         }
-        else 
+        else
         {
             if (species == SPECIES_HUMAN || species == SPECIES_ZABRAK || species == SPECIES_BOTHAN || species == SPECIES_RODIAN || species == SPECIES_TWILEK)
             {
@@ -9065,7 +9061,7 @@ public class base_player extends script.base_script
                                 CustomerServiceLog("CharacterTransfer", "transferBankCreditsFromNamedAccount(characterTransfer, " + self + ", " + transferAmount + ", null, null, null) FAILED");
                                 break;
                             }
-                            else 
+                            else
                             {
                                 if (!withdrawCashFromBank(self, transferAmount, null, null, null))
                                 {
@@ -9102,7 +9098,7 @@ public class base_player extends script.base_script
                     {
                         return SCRIPT_OVERRIDE;
                     }
-                    else 
+                    else
                     {
                         Set keySet = inventoryDictionary.keySet();
                         for (Object o : keySet) {
@@ -9133,7 +9129,7 @@ public class base_player extends script.base_script
                     {
                         return SCRIPT_OVERRIDE;
                     }
-                    else 
+                    else
                     {
                         Set keySet = bankDictionary.keySet();
                         for (Object o : keySet) {
@@ -9174,7 +9170,7 @@ public class base_player extends script.base_script
                     {
                         return SCRIPT_OVERRIDE;
                     }
-                    else 
+                    else
                     {
                         dictionary datapadItemOidTranslation = new dictionary();
                         Vector shipsWithDroidControlDevice = new Vector();
@@ -9231,7 +9227,7 @@ public class base_player extends script.base_script
                     {
                         CustomerServiceLog("CharacterTransfer", "OnDownloadCharacter : source character did not have a buy back dictionary data!!");
                     }
-                    else 
+                    else
                     {
                         if (!isIdValid(buyBackContainer))
                         {
@@ -9271,7 +9267,7 @@ public class base_player extends script.base_script
                     {
                         CustomerServiceLog("CharacterTransfer", "OnDownloadCharacter : source character did not have a hangar object.");
                     }
-                    else 
+                    else
                     {
                         if (!isIdValid(playerHangar))
                         {
@@ -9332,7 +9328,7 @@ public class base_player extends script.base_script
                     {
                         return SCRIPT_OVERRIDE;
                     }
-                    else 
+                    else
                     {
                         Set keySet = appearanceDictionary.keySet();
                         for (Object o : keySet) {
@@ -9353,7 +9349,7 @@ public class base_player extends script.base_script
                     }
                     utils.removeScriptVar(self, "autostack.ignoreitems");
                 }
-                else 
+                else
                 {
                     obj_id inventory = getObjectInSlot(self, "inventory");
                     if (isIdValid(inventory))
@@ -9374,7 +9370,7 @@ public class base_player extends script.base_script
                     attachScript(self, "space.quest_logic.player_spacequest");
                 }
             }
-            else 
+            else
             {
                 return SCRIPT_OVERRIDE;
             }
@@ -9577,28 +9573,52 @@ public class base_player extends script.base_script
     }
     public int cmdGetVeteranRewardTime(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-				obj_id tatooine = getPlanetByName("tatooine");
-        String objVar = "vetTokenCD_" + getPlayerStationId(self);
-		if (!hasObjVar(tatooine, objVar)) {
-			cureward.giveVeteranRewardToken(self, 500);
-			return SCRIPT_CONTINUE;
-		}
-        int timeLeft = getIntObjVar(tatooine, objVar) + 86400 - getCalendarTime();
-
-        if (timeLeft > 0) {
-            prose_package pp = new prose_package();
-            pp.stringId = new string_id("veteran", "time_left");
-            pp.digitInteger = timeLeft;
-            sendSystemMessageProse(self, pp);
-        } else {
-            cureward.giveVeteranRewardToken(self, (timeLeft / -86400) + 1);
+        if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards")))
+        {
+            return SCRIPT_CONTINUE;
         }
+        if (isGod(self))
+        {
+            if (!isIdValid(target))
+            {
+                target = self;
+            }
+            if (veteran_deprecated.checkVeteranTarget(target))
+            {
+                int veteranTime = getIntObjVar(target, veteran_deprecated.OBJVAR_TIME_ACTIVE);
+                prose_package pp = new prose_package();
+                pp.stringId = veteran_deprecated.SID_VETERAN_TIME_ACTIVE;
+                pp.target.id = target;
+                pp.digitInteger = veteranTime;
+                sendSystemMessageProse(self, pp);
+            }
+        }
+        else
+        {
+            if (hasObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE))
+            {
+                int veteranTime = getIntObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE);
+                prose_package pp = new prose_package();
+                pp.stringId = veteran_deprecated.SID_VETERAN_SELF_TIME_ACTIVE;
+                pp.digitInteger = veteranTime;
+                sendSystemMessageProse(self, pp);
+            }
+            else
+            {
+                sendSystemMessage(self, veteran_deprecated.SID_SYSTEM_INACTIVE);
+            }
+       }
         return SCRIPT_CONTINUE;
     }
     public int cmdListVeteranRewards(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards")))
         {
+            return SCRIPT_CONTINUE;
+        }
+        if (!isGod(self) && !hasObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE))
+        {
+            sendSystemMessage(self, veteran_deprecated.SID_SYSTEM_INACTIVE);
             return SCRIPT_CONTINUE;
         }
         int[] templateCrcs = dataTableGetIntColumn(veteran_deprecated.REWARDS_DATATABLE, veteran_deprecated.REWARDS_COLUMN_TEMPLATE);
@@ -9628,7 +9648,7 @@ public class base_player extends script.base_script
             {
                 milestonesText[i] = "@" + nameIds[i] + " :\\>200" + (milestones[i] * veteran_deprecated.DAYS_PER_MILESTONE) + daysText;
             }
-            else 
+            else
             {
                 milestonesText[i] = "<error>";
             }
@@ -9642,7 +9662,7 @@ public class base_player extends script.base_script
     }
     public int handleVeteranMilestoneSelected(obj_id self, dictionary params) throws InterruptedException
     {
-        if ((params == null) || (params.isEmpty()))
+        if (params == null || params.isEmpty())
         {
             veteran_deprecated.cleanupPlayerData(self);
             return SCRIPT_CONTINUE;
@@ -9703,14 +9723,11 @@ public class base_player extends script.base_script
             veteran_deprecated.cleanupPlayerData(self);
             sendSystemMessage(self, veteran_deprecated.SID_REWARD_ERROR);
         }
-        else 
-        {
-        }
         return SCRIPT_CONTINUE;
     }
     public int handleVeteranRewardConfirmed(obj_id self, dictionary params) throws InterruptedException
     {
-        if ((params == null) || (params.isEmpty()))
+        if (params == null || params.isEmpty())
         {
             veteran_deprecated.cleanupPlayerData(self);
             return SCRIPT_CONTINUE;
@@ -9722,7 +9739,7 @@ public class base_player extends script.base_script
             {
                 veteran_deprecated.cleanupPlayerData(self);
             }
-            else 
+            else
             {
                 (self.getScriptVars()).remove(veteran_deprecated.SCRIPTVAR_SELECTED_REWARD);
                 int milestone = (self.getScriptVars()).getInt(veteran_deprecated.SCRIPTVAR_SELECTED_MILESTONE);
@@ -9743,7 +9760,7 @@ public class base_player extends script.base_script
             veteran_deprecated.cleanupPlayerData(self);
             sendSystemMessage(self, veteran_deprecated.SID_REWARD_GIVEN);
         }
-        else 
+        else
         {
             veteran_deprecated.cleanupPlayerData(self);
             sendSystemMessage(self, veteran_deprecated.SID_REWARD_ERROR);
@@ -9777,17 +9794,17 @@ public class base_player extends script.base_script
                 {
                     sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_granted"));
                 }
-                else 
+                else
                 {
                     sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_grant_failed"));
                 }
             }
-            else 
+            else
             {
                 sui.msgbox(self, self, "@" + veteran_deprecated.VETERAN_STRING_TABLE + ":flash_speeder_replace_prompt", sui.YES_NO, "msgFlashSpeederConfirmed");
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_not_eligible"));
         }
@@ -9824,7 +9841,7 @@ public class base_player extends script.base_script
             CustomerServiceLog("flash_speeder", "%TU has purchased a new JtL pre-order Flash Speeder.", self);
             sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_granted"));
         }
-        else 
+        else
         {
             sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_grant_failed"));
         }
@@ -9922,7 +9939,7 @@ public class base_player extends script.base_script
                 {
                     sendSystemMessage(self, new string_id("gcw", "pvp_advanced_region_level_low"));
                 }
-                else 
+                else
                 {
                     sendSystemMessage(self, new string_id("gcw", "pvp_advanced_region_not_allowed"));
                 }
@@ -9932,7 +9949,7 @@ public class base_player extends script.base_script
                 {
                     utils.removeScriptVar(self, enterAttempt);
                 }
-                else 
+                else
                 {
                     attempts++;
                     utils.setScriptVar(self, enterAttempt, attempts);
@@ -9971,7 +9988,7 @@ public class base_player extends script.base_script
                         playEffect = true;
                     }
                 }
-                else 
+                else
                 {
                     playEffect = true;
                 }
@@ -10025,7 +10042,7 @@ public class base_player extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             region enteredRegion = getRegion(planetName, regionName);
             if (enteredRegion != null && enteredRegion.getPvPType() == regions.PVP_REGION_TYPE_ADVANCED)
@@ -10093,7 +10110,7 @@ public class base_player extends script.base_script
                     sendSystemMessage(self, "[GodMode] Please disregard that previous message as you are clearly still within the Blackwing facility. Be sure to enjoy your infection while you are here.", "");
                 }
             }
-            else 
+            else
             {
                 buff.removeBuff(self, "death_troopers_infection_1");
                 buff.removeBuff(self, "death_troopers_infection_2");
@@ -10101,7 +10118,7 @@ public class base_player extends script.base_script
                 buff.removeBuff(self, "death_troopers_no_vehicle");
             }
         }
-        else 
+        else
         {
             region exitedRegion = getRegion(planetName, regionName);
             if (exitedRegion != null && exitedRegion.getPvPType() == regions.PVP_REGION_TYPE_ADVANCED)
@@ -10132,12 +10149,12 @@ public class base_player extends script.base_script
                 {
                     return false;
                 }
-                else 
+                else
                 {
                     sendSystemMessageTestingOnly(self, "GODMODE MSG:  You can only acquire this skill BECAUSE you are in god mode");
                 }
             }
-            else 
+            else
             {
                 pvpSetAlignedFaction(self, (-615855020));
                 if (pvpGetType(self) == PVPTYPE_NEUTRAL)
@@ -10146,9 +10163,6 @@ public class base_player extends script.base_script
                     {
                         pvpMakeCovert(self);
                     }
-                }
-                else 
-                {
                 }
             }
         }
@@ -10162,12 +10176,12 @@ public class base_player extends script.base_script
                 {
                     return false;
                 }
-                else 
+                else
                 {
                     sendSystemMessageTestingOnly(self, "GODMODE MSG:  You can only acquire this skill BECAUSE you are in god mode");
                 }
             }
-            else 
+            else
             {
                 pvpSetAlignedFaction(self, (370444368));
                 if (pvpGetType(self) == PVPTYPE_NEUTRAL)
@@ -10176,9 +10190,6 @@ public class base_player extends script.base_script
                     {
                         pvpMakeCovert(self);
                     }
-                }
-                else 
-                {
                 }
             }
         }
@@ -10192,7 +10203,7 @@ public class base_player extends script.base_script
             {
                 space_flags.setSpaceTrack(self, space_flags.REBEL_TATOOINE);
             }
-            else 
+            else
             {
                 space_flags.setSpaceTrack(self, space_flags.PRIVATEER_TATOOINE);
             }
@@ -10292,7 +10303,7 @@ public class base_player extends script.base_script
             int intBaseFactionRefund = (int)(baseFactionRefund);
             sendSystemMessageProse(self, prose.getPackage(new string_id("faction_perk", "old_fbase_refunded"), baseLotRefund, intBaseFactionRefund));
         }
-        else 
+        else
         {
             sendSystemMessageProse(self, prose.getPackage(new string_id("faction_perk", "new_old_fbase_refunded"), baseLotRefund));
         }
@@ -10397,7 +10408,7 @@ public class base_player extends script.base_script
                         {
                             modifyCollectionSlotValue(self, "kill_rebel_01", 1);
                         }
-                        else 
+                        else
                         {
                             modifyCollectionSlotValue(self, "kill_rebel_boss_01", 1);
                         }
@@ -10408,7 +10419,7 @@ public class base_player extends script.base_script
                         {
                             modifyCollectionSlotValue(self, "kill_imperial_01", 1);
                         }
-                        else 
+                        else
                         {
                             modifyCollectionSlotValue(self, "kill_imperial_boss_01", 1);
                         }
@@ -10497,7 +10508,7 @@ public class base_player extends script.base_script
                     utils.removeScriptVar(audience, "dancerID");
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(audience, performance.SID_CC_NO_FUNDS);
                 utils.removeScriptVar(audience, performance.VAR_PERFORM_PAY_WAIT);
@@ -10509,7 +10520,7 @@ public class base_player extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             utils.removeScriptVar(audience, performance.VAR_PERFORM_PAY_WAIT);
             utils.setScriptVar(audience, performance.VAR_PERFORM_PAY_DISAGREE, charge);
@@ -10806,7 +10817,7 @@ public class base_player extends script.base_script
     }
     public int OnGetStaticItemsAttributes(obj_id self, String staticItemName, String[] names, String[] attribs) throws InterruptedException
     {
-        if ((names == null) || (attribs == null) || (names.length != attribs.length))
+        if (names == null || attribs == null || names.length != attribs.length)
         {
             return SCRIPT_CONTINUE;
         }
@@ -10856,13 +10867,13 @@ public class base_player extends script.base_script
             {
                 smuggler.showSellJunkSui(player, self, true, false);
             }
-            else 
+            else
             {
                 smuggler.showSellJunkSui(player, self, false, false);
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (idx < 0)
             {
@@ -11057,7 +11068,7 @@ public class base_player extends script.base_script
             {
                 setObjVar(self, "factionBaseCount", updatedFactionBaseCount);
             }
-            else 
+            else
             {
                 removeObjVar(self, "factionBaseCount");
             }
@@ -11065,7 +11076,7 @@ public class base_player extends script.base_script
             {
                 sendSystemMessage(self, SID_CAN_PLACE_ONE_BASE);
             }
-            else 
+            else
             {
                 sendSystemMessageProse(self, prose.getPackage(new string_id("faction_perk", "faction_base_unit_refunded"), (player_structure.MAX_BASE_COUNT - updatedFactionBaseCount)));
             }
@@ -11309,6 +11320,17 @@ public class base_player extends script.base_script
             bounty_hunter.showSetBountySUI(self, killer);
             return SCRIPT_CONTINUE;
         }
+        if (amount > bounty_hunter.MAX_BOUNTY_SET)
+        {
+            sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_cap"));
+            amount = bounty_hunter.MAX_BOUNTY_SET;
+        }
+        if (amount < bounty_hunter.MIN_BOUNTY_SET)
+        {
+            sendSystemMessage(self, new string_id("bounty_hunter", "setbounty_too_little"));
+            bounty_hunter.showSetBountySUI(self, killer);
+            return SCRIPT_CONTINUE;
+        }
         if (hasObjVar(killer, "bounty.amount"))
         {
             int bounty = getIntObjVar(killer, "bounty.amount");
@@ -11511,13 +11533,13 @@ public class base_player extends script.base_script
                 webster.put("targetName", getName(self));
                 messageTo(storytellerPlayer, "handleStorytellerAssistantDeclined", webster, 0, false);
             }
-            else 
+            else
             {
                 if (!utils.hasScriptVar(self, "storytellerAssistant"))
                 {
                     storyteller.storyAssistantSui(storytellerPlayer, storytellerName, self);
                 }
-                else 
+                else
                 {
                     boolean alreadyAStorytellersAssistant = false;
                     obj_id storytellerId = utils.getObjIdScriptVar(self, "storytellerAssistant");
@@ -11570,12 +11592,12 @@ public class base_player extends script.base_script
                 {
                     storyteller.storyPlayerRemoveAssistant(storytellerPlayer, storytellerName, self);
                 }
-                else 
+                else
                 {
                     messageTo(storytellerPlayer, "handleStorytellerRemovePlayerNotAssistant", webster, 0, false);
                 }
             }
-            else 
+            else
             {
                 messageTo(storytellerPlayer, "handleStorytellerRemovePlayerNotAssistant", webster, 0, false);
             }
@@ -11595,7 +11617,7 @@ public class base_player extends script.base_script
                 webster.put("targetName", getName(self));
                 messageTo(storytellerPlayer, "handleStorytellerInviteDeclined", webster, 0, false);
             }
-            else 
+            else
             {
                 if (!utils.hasScriptVar(self, "storytellerid"))
                 {
@@ -11603,12 +11625,12 @@ public class base_player extends script.base_script
                     {
                         storyteller.storyInviteSui(storytellerAssistant, storytellerName, self);
                     }
-                    else 
+                    else
                     {
                         storyteller.storyInviteSui(storytellerPlayer, storytellerName, self);
                     }
                 }
-                else 
+                else
                 {
                     boolean alreadyInStorytellersStory = false;
                     obj_id storytellerId = utils.getObjIdScriptVar(self, "storytellerid");
@@ -11624,7 +11646,7 @@ public class base_player extends script.base_script
                     {
                         messageTo(storytellerAssistant, "handleStorytellerInviteAlreadyInAStory", webster, 0, false);
                     }
-                    else 
+                    else
                     {
                         messageTo(storytellerPlayer, "handleStorytellerInviteAlreadyInAStory", webster, 0, false);
                     }
@@ -11670,12 +11692,12 @@ public class base_player extends script.base_script
                 {
                     storyteller.storyPlayerRemovedFromStory(storytellerPlayer, storytellerName, self);
                 }
-                else 
+                else
                 {
                     messageTo(storytellerPlayer, "handleStorytellerRemovePlayerNotInStory", null, 0, false);
                 }
             }
-            else 
+            else
             {
                 messageTo(storytellerPlayer, "handleStorytellerRemovePlayerNotInStory", null, 0, false);
             }
@@ -11777,7 +11799,7 @@ public class base_player extends script.base_script
                 String strGalaxyMessage = "\\#FF0000" + utils.getStringObjVar(planetId, "galaxyMessage") + "\\#FFFFFF";
                 sendConsoleMessage(self, strGalaxyMessage);
             }
-            else 
+            else
             {
                 /*String strGalaxyMessage = "\\#FF0000" + "Welcome to SWG: Resurgence!" + "\r\n" + "\\#CC9900" + "If you encounter any bugs, please report them on our Mantis Bug Tracker, and thank you for participating in our testing phase!" + "\\#FFFFFF";
                 sendConsoleMessage(self, strGalaxyMessage);*/
@@ -11797,7 +11819,7 @@ public class base_player extends script.base_script
                 {
                     strGalaxyMessage += utils.getStringObjVar(planetId, "galaxyWardenMessage");
                 }
-                else 
+                else
                 {
                     strGalaxyMessage += "Welcome warden";
                 }
@@ -11805,7 +11827,7 @@ public class base_player extends script.base_script
                 sendConsoleMessage(self, strGalaxyMessage);
             }
         }
-        else 
+        else
         {
             sendConsoleMessage(self, "Welcome to Star Wars Galaxies");
         }
@@ -11963,7 +11985,7 @@ public class base_player extends script.base_script
             utils.removeScriptVar(self, "death.beingCoupDeGraced");
             pclib.coupDeGrace(victim, killer, playAnim, usePVPRules);
         }
-        else 
+        else
         {
             if (numberOfTries >= 5)
             {
@@ -11986,7 +12008,7 @@ public class base_player extends script.base_script
             {
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }
@@ -12007,7 +12029,7 @@ public class base_player extends script.base_script
         {
             return false;
         }
-        if (params == null || params.equals(""))
+        if ((params == null) || (params.equals("")))
         {
             return false;
         }
@@ -12115,7 +12137,7 @@ public class base_player extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (idx < 0)
             {
@@ -12224,7 +12246,7 @@ public class base_player extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (idx < 0)
             {
@@ -12246,7 +12268,7 @@ public class base_player extends script.base_script
             {
                 removeObjVar(junk[idx], smuggler.JUNK_DEALKER_NO_SALE_FLAG);
             }
-            else 
+            else
             {
                 setObjVar(junk[idx], smuggler.JUNK_DEALKER_NO_SALE_FLAG, getGameTime());
             }

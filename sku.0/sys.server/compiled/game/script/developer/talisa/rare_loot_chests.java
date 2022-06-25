@@ -13,7 +13,7 @@ import script.string_id;
 import java.util.ArrayList;
 import java.util.List;
 
-public class rls extends script.base_script {
+public class rare_loot_chests extends script.base_script {
     public int OnSpeaking(obj_id self, String text) throws InterruptedException {
         if(text.equalsIgnoreCase("rls")) {
             loot.createRareLootChest(self, 1);

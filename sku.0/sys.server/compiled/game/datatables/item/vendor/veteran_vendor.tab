@@ -9,9 +9,9 @@ object/tangible/veteran_reward/data_terminal_s3.iff	3		A Holonet Terminal
 object/tangible/veteran_reward/data_terminal_s1.iff	3		A Holonet Tracking Console
 object/tangible/veteran_reward/respec_voucher_deed.iff	78		A Respec Voucher
 object/tangible/veteran_reward/data_terminal_s2.iff	3		A Sample Readout Console
-item_trader_advanced_buff_01_01	250	1	Advanced Superior Crafting Unit
+item_trader_advanced_buff_01_01	1000		Advanced Superior Crafting Unit
 item_vet_reward_75month_houseplant_02	75		An Exotic Plant
-item_creature_harvester_deed_01_01	500		Automated Creature Harvester Deed
+item_creature_harvester_deed_01_01	750		Automated Creature Harvester Deed
 object/tangible/veteran_reward/one_year_anniversary/painting_01.iff	3	1	Cast Wing in Flight
 item_respec_token_01_01	100	1	Character Respec Device
 object/tangible/veteran_reward/city_flag_kit.iff	54		City Banner Kit
@@ -63,7 +63,7 @@ object/tangible/veteran_reward/frn_vet_x_wing_toy.iff	6		Miniature X-wing Replic
 object/tangible/veteran_reward/frn_vet_tusken_raider_toy.iff	45		Miniature Tusken Raider Replica
 object/tangible/veteran_reward/vr_mouse_droid_deed.iff	96		Mouse Droid Familiar
 object/tangible/veteran_reward/vr_mynock_deed.iff	96		Mynock Familiar
-item_vet_reward_lockout_remover	81		Neural Recon Network Terminal
+item_neural_recon_network_control_interface_01_01	100	1	Neural Recon Network Control Interface
 st_cn_vet_reward_nightsister_boss	57		Nightsister Bloodwitch Storyteller Token
 object/tangible/veteran_reward/frn_vet_podracer_statue.iff	54		Podracer Statue
 object/tangible/veteran_reward/frn_vet_holo_leia.iff	27		Princess Leia Hologram

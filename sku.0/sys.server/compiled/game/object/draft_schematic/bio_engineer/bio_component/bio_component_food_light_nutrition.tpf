@@ -1,8 +1,7 @@
 @base object/draft_schematic/bio_engineer/bio_component/base_bio_component_schematic.iff
 @class draft_schematic_object_template 7
-//
-itemsPerContainer = 25
-//
+
+itemsPerContainer = 1000
 
 craftedObjectTemplate = "object/tangible/component/bio/bio_component_food_light_nutrition.iff"
 slots = [
@@ -10,7 +9,7 @@ slots = [
 	optional=false,
 	name = "craft_tissue_ingredients_n" "nutrient_base",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_tissue_ingredients_n" "nutrient_base", ingredient="organic", count=20]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_tissue_ingredients_n" "nutrient_base", ingredient="organic", count=2]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -18,7 +17,7 @@ slots = [
 	optional=false,
 	name = "craft_tissue_ingredients_n" "vitamin_enhancers",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_tissue_ingredients_n" "vitamin_enhancers", ingredient="flora_food", count=15]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_tissue_ingredients_n" "vitamin_enhancers", ingredient="flora_food", count=5]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -26,7 +25,7 @@ slots = [
 	optional=false,
 	name = "craft_tissue_ingredients_n" "chemical_enhancers",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_tissue_ingredients_n" "chemical_enhancers", ingredient="creature_food", count=15]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_tissue_ingredients_n" "chemical_enhancers", ingredient="creature_food", count=7]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -43,7 +42,6 @@ destroyIngredients = true
 manufactureScripts = [ "systems.crafting.bio_engineer.crafting_bio_food_component" ]
 
 @class intangible_object_template 0
-
 @class object_template 7
 
 complexity = 15

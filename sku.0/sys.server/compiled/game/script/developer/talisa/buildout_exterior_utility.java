@@ -1,4 +1,4 @@
-package script.developer;
+package script.developer.talisa;
 
 import script.dictionary;
 import script.library.sui;
@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * SWG Buildout Utility
  * For World Building in the Release Game Client
- * To Use: attach developer.buildout_utility to your player and say "info" for commands
+ * To Use: attach developer.talisa.buildout_exterior_utility to your player and say "info" for commands
  *
  * Most usage will be creating an object either with this script or by some other means,
  * targeting it, and saying "getBuildoutInfo" in spatial which will give you an SUI window
@@ -29,9 +29,9 @@ import java.util.List;
  *
  * Authors: Aconite
  */
-public class buildout_utility extends script.base_script {
+public class buildout_exterior_utility extends script.base_script {
 
-    public buildout_utility()
+    public buildout_exterior_utility()
     {
     }
 

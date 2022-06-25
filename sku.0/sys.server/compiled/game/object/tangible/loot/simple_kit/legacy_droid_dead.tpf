@@ -4,5 +4,3 @@
 @class object_template 5
 
 sharedTemplate = "object/tangible/loot/simple_kit/shared_legacy_droid_dead.iff"
-
-scripts = +["object.autostack"]

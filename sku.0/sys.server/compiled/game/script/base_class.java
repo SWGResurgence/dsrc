@@ -22099,6 +22099,15 @@ public class base_class
         return _getAccountNumLots(getLongWithNull(player));
     }
     /**
+     * Get the maximum housing lots a character can have
+     * @return       The number of lots has available to them.
+     */
+    private static native int _getMaxHousingLots();
+    public static int getMaxHousingLots()
+    {
+        return _getMaxHousingLots();
+    }
+    /**
      * Find out what game features this player has purchased
      * @param player The player (creature object)
      * @return       A 32bit bit-vector indicating the game features this player has purchased.

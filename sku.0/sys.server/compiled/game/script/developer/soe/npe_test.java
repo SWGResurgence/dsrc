@@ -1,4 +1,4 @@
-package script.working.vthakkar;
+package script.developer.soe;
 
 import script.dictionary;
 import script.library.npe;

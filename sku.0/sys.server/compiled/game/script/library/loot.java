@@ -1509,19 +1509,11 @@ public class loot extends script.base_script
     }
     public static obj_id chroniclesCraftingLootDrop(obj_id player) throws InterruptedException
     {
-        if (hasToggledChroniclesLootOff(player))
-        {
-            return obj_id.NULL_ID;
-        }
-        return chroniclesNonCorpseLootDrop(player, "crafting", pgc_quests.PGC_CHRONICLE_BASE_CRAFTING_LOOT_CHANCE, "crafting");
+        return hasToggledChroniclesLootOff(player) ? obj_id.NULL_ID : chroniclesNonCorpseLootDrop(player, "crafting", pgc_quests.PGC_CHRONICLE_BASE_CRAFTING_LOOT_CHANCE, "crafting");
     }
     public static obj_id chroniclesPvpLootDrop(obj_id player) throws InterruptedException
     {
-        if (hasToggledChroniclesLootOff(player))
-        {
-            return obj_id.NULL_ID;
-        }
-        return chroniclesNonCorpseLootDrop(player, "pvp", pgc_quests.PGC_CHRONICLE_BASE_PVP_LOOT_CHANCE, "pvping");
+        return hasToggledChroniclesLootOff(player) ? obj_id.NULL_ID : chroniclesNonCorpseLootDrop(player, "pvp", pgc_quests.PGC_CHRONICLE_BASE_PVP_LOOT_CHANCE, "pvping");
     }
     public static obj_id chroniclesNonCorpseLootDrop(obj_id player, String relicCategory, int relicChance, String activityType) throws InterruptedException
     {
@@ -2533,8 +2525,55 @@ public class loot extends script.base_script
     }
     public static boolean addRareLoot(obj_id target) throws InterruptedException
     {
-        // get the attacker who did the most damage.
-        obj_id player = getObjIdObjVar(target, xp.VAR_TOP_GROUP);
+    	boolean looted = false;
+    	
+    	// get the attacker who did the most damage.
+        obj_id killer = getObjIdObjVar(target, xp.VAR_TOP_GROUP);
+        
+        
+        if (group.isGroupObject(killer))
+        {
+        	Vector attackerList = utils.getResizeableObjIdBatchScriptVar(target, xp.VAR_ATTACKER_LIST + ".attackers");
+        	
+        	if (attackerList != null && attackerList.size() > 0)
+        	{
+        		obj_id[] members = getGroupMemberIds(killer);
+        		
+        		if (members != null && members.length > 0)
+        		{
+        			//for each group member in the attackers in range
+        			
+        			for(obj_id member: members )
+        			{
+        				if (attackerList.indexOf(member) >= 0)
+        				{
+        					
+        					if (addRareLootToPlayer(member, target) && !looted)
+        					{
+        						looted = true;
+        					}
+        					
+        				}
+        			}
+        			
+        		}
+        		
+        	}
+        	
+        	
+        }
+        else
+        {
+        	return addRareLootToPlayer(killer, target);
+        }
+        
+        
+        return looted;
+    }
+    
+    
+    public static boolean addRareLootToPlayer(obj_id player, obj_id target) throws InterruptedException
+    {
 
         // make sure the attacker is a player.
         if(!isValidId(player) || !isPlayer(player)){
@@ -2658,7 +2697,7 @@ public class loot extends script.base_script
         }
         LOG("rare_loot", "Player (" + player + ") just qualified for a " + type + " RLS chest!");
 
-        obj_id chest = createRareLootChest(target, lootType);
+        obj_id chest = createRareLootChest(player, lootType);
 
         setObjVar(player, "loot.rls.lastChestAwardTime", getGameTime());
         setObjVar(player, "loot.rls.lastLootedChest", chest);

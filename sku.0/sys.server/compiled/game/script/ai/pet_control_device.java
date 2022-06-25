@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class pet_control_device extends script.base_script
 {
-    public pet_control_device()
-    {
-    }
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String PCDPING_PCD_SCRIPT_NAME = "ai.pcd_ping_response";
     public static final String MESSAGE_PET_ID = "petId";
@@ -1887,11 +1884,7 @@ public class pet_control_device extends script.base_script
     }
     public boolean validatePetStats(obj_id pcd, obj_id player) throws InterruptedException
     {
-        if (!hasObjVar(pcd, "pet.crafted"))
-        {
-            return true;
-        }
-        if (hasObjVar(pcd, "ai.pet.trainedMount"))
+        if (!hasObjVar(pcd, "pet.crafted") || hasObjVar(pcd, "ai.pet.trainedMount"))
         {
             return true;
         }
@@ -2066,7 +2059,7 @@ public class pet_control_device extends script.base_script
     }
     public int handlePetFixDialog(obj_id self, dictionary params) throws InterruptedException
     {
-        if ((params == null) || (params.isEmpty()))
+        if (params == null || params.isEmpty())
         {
             return SCRIPT_CONTINUE;
         }
@@ -2076,7 +2069,7 @@ public class pet_control_device extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            if (revert != null && !revert.equals(""))
+            if (revert != null && !revert.isEmpty())
             {
                 bio_engineer.adjustBrokenPetLevel(self, player);
             }
