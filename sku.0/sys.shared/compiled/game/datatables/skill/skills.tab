@@ -1914,7 +1914,9 @@ expertise_of_paint_act_2	expertise_of_paint_act_1									expertise_of_paint_act
 expertise_of_paint_act_3	expertise_of_paint_act_2									expertise_of_paint_act_2												expertise_action_line_of_paint=10			0	
 expertise_of_paint_dam_1	expertise																					"expertise_damage_line_of_paint=10,expertise_action_line_of_paint=10"			0	
 expertise_of_paint_dam_2	expertise_of_paint_dam_1									expertise_of_paint_dam_1												"expertise_damage_line_of_paint=10,expertise_action_line_of_paint=10"			0	
+expertise_of_advanced_target_tracking_1	expertise_of_paint_dam_2									expertise_of_paint_dam_2												expertise_critical_niche_all=5				
 expertise_of_advanced_paint_1	expertise_of_paint_dam_2									expertise_of_paint_dam_2											of_deb_def_4				0	
+expertise_of_advanced_target_identification_1	expertise_of_advanced_paint_1									expertise_of_advanced_paint_1												detect_hidden=50				
 expertise_of_strength_1	expertise																					strength_modified=10			0	
 expertise_of_strength_2	expertise_of_strength_1																					strength_modified=10			0	
 expertise_of_strength_3	expertise_of_strength_2																					strength_modified=10			0	
@@ -1960,6 +1962,7 @@ expertise_of_heal_dam_2	expertise_of_heal_dam_1																					expertise_he
 expertise_of_armor_kin_1	expertise																					expertise_innate_protection_kinetic=500			0	
 expertise_of_armor_kin_2	expertise_of_armor_kin_1																					expertise_innate_protection_kinetic=500			0	
 expertise_of_purge_1	expertise																				of_purge_1				0	
+expertise_of_emergency_shield	expertise																				of_emergency_shield					
 expertise_of_heal_cool_1	expertise_of_purge_1									expertise_of_purge_1												expertise_cooldown_line_of_heal=1			0	
 expertise_of_heal_cool_2	expertise_of_heal_cool_1																					expertise_cooldown_line_of_heal=2			0	
 sm_title_bootlegger				1		1																			0	

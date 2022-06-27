@@ -360,7 +360,9 @@ expertise_of_sure_dam_3	11	2	6	3			officer
 expertise_of_sure_dam_4	11	2	6	4			officer
 expertise_of_paint_dam_1	11	4	6	1			officer
 expertise_of_paint_dam_2	11	4	6	2			officer
+expertise_of_advanced_target_tracking_1	11	4	7	1			officer
 expertise_of_advanced_paint_1	11	5	6	1			officer
+expertise_of_advanced_target_identification_1	11	5	7	2			officer
 expertise_of_strength_1	10	1	1	1			officer
 expertise_of_strength_2	10	1	1	2			officer
 expertise_of_strength_3	10	1	1	3			officer
@@ -401,6 +403,7 @@ expertise_of_heal_dam_2	10	5	5	2			officer
 expertise_of_armor_kin_1	10	2	7	1			officer
 expertise_of_armor_kin_2	10	2	7	2			officer
 expertise_of_purge_1	10	4	7	1			officer
+expertise_of_emergency_shield	10	5	6	1			officer
 expertise_of_heal_cool_1	10	5	7	1			officer
 expertise_of_heal_cool_2	10	5	7	2			officer
 expertise_me_hot_duration_1	17	1	1	1			medic
