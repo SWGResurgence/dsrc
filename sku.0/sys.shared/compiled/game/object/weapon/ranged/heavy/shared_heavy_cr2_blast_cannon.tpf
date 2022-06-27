@@ -8,5 +8,5 @@
 objectName = "static_item_n" "weapon_heavy_cr2_04_01"
 detailedDescription = "static_item_d" "weapon_heavy_cr2_04_01"
 
-appearanceFilename = "appearance/wp_hvy_ice_gun.apt""
+appearanceFilename = "appearance/wp_hvy_mandalorian.apt""
 gameObjectType = GOT_weapon_heavy_special
