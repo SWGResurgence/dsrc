@@ -293,6 +293,12 @@ public class regions extends script.base_script
         {
             return "rori";
         }
+        objNamedPlanet = getPlanetByName("dxun");
+        LOG("regions_spam", "dxun is " + objNamedPlanet);
+        if (objNamedPlanet == objPlanet)
+        {
+            return "dxun";
+        }
         return null;
     }
     public static boolean isInPvPRegion(obj_id object) throws InterruptedException
