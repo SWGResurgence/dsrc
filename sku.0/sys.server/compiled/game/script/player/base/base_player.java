@@ -212,7 +212,8 @@ public class base_player extends script.base_script
         "kachirho",
         "etyyy",
         "khowir",
-        "mustafar"
+        "mustafar",
+        "dxun"
     };
     public static final String[] WAYPOINT_GROUND_PLANETS_INTERNAL = 
     {
@@ -229,7 +230,8 @@ public class base_player extends script.base_script
         "kashyyyk_main",
         "kashyyyk_hunting",
         "kashyyyk_dead_forest",
-        "mustafar"
+        "mustafar",
+        "dxun"
     };
     public static final vector[] WAYPOINT_GROUND_PLANETS_BUILDOUT_COORDS = 
     {
@@ -246,7 +248,8 @@ public class base_player extends script.base_script
         new vector(0.0f, 0.0f, 0.0f),
         new vector(0.0f, 0.0f, 0.0f),
         new vector(0.0f, 0.0f, 0.0f),
-        new vector(-2304.0f, 0.0f, 2848.0f)
+        new vector(-2304.0f, 0.0f, 2848.0f),
+        null
     };
     public static final String[] WAYPOINT_SPACE_ZONES_EXTERNAL = 
     {
@@ -261,7 +264,8 @@ public class base_player extends script.base_script
         "space_dantooine",
         "space_dathomir",
         "space_kashyyyk",
-        "space_nova_orion"
+        "space_nova_orion",
+        "space_dxun"
     };
     public static final String[] WAYPOINT_SPACE_ZONES_INTERNAL = 
     {
@@ -276,7 +280,8 @@ public class base_player extends script.base_script
         "space_dantooine",
         "space_dathomir",
         "space_kashyyyk",
-        "space_nova_orion"
+        "space_nova_orion",
+        "space_dxun"
     };
     public static final boolean LOGGING_ON = true;
     public static final String LOGNAME = "junk_log";
