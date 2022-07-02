@@ -9,9 +9,9 @@ item_treasure_map_bonus_buff_04_02		100				Rare Nova Crystal
 item_treasure_map_bonus_buff_04_03		100				Rare Power Gem
 item_treasure_map_bonus_buff_04_01		100				Rare Rol Stone
 item_treasure_map_bonus_buff_04_05		100				Rare Sasho Gem
-item_treasure_map_bonus_consumable_04_01		0				Flask of Elba Water
-item_treasure_map_bonus_consumable_04_02		0				Flask of Naris-bud Tea
-item_treasure_map_bonus_consumable_04_03		0				Small flask of Nerfmilk
+item_treasure_map_bonus_consumable_04_01		50				Flask of Elba Water
+item_treasure_map_bonus_consumable_04_02		50				Flask of Naris-bud Tea
+item_treasure_map_bonus_consumable_04_03		50				Small flask of Nerfmilk
 item_collection_jedi_holocron_02_04		15				Strange Jedi Meditative Holocron 4/5
 item_collection_sith_holocron_02_04		15				Strange Sith Meditative Holocron 4/5
 item_collection_jedi_holocron_01_04		50				Strange Jedi Waistpack Holocron 4/5
