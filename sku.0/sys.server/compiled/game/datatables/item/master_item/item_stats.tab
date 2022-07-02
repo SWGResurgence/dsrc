@@ -4538,7 +4538,7 @@ item_event_loveday_wings_blue
 item_event_loveday_wings_gold											
 item_event_loveday_halo											
 item_event_loveday_hearts					loveday_hearts_item	loveday_hearts_effect	240				
-item_vet_reward_78month_ttgm_itt						ttgm_itt_group	21600				
+item_vet_reward_78month_ttgm_itt						ttgm_itt_group	14400				
 item_tcg_loot_reward_series7_atpt_walker			"string:vehicle_attribs.object_ref=tcg_at_pt_walker,float:hit_points=15000"								
 item_tcg_loot_reward_series7_military_transport			"string:vehicle_attribs.object_ref=tcg_military_transport,float:hit_points=15000"								
 item_tcg_loot_reward_series7_build01_tie_canopy			"string:tcg.combineItemTemplatePattern=object/tangible/tcg/series7/combine_object_,string:tcg.setName=set7_gunship"								
