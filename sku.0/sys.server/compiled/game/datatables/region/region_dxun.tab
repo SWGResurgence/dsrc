@@ -22,7 +22,7 @@ dxun	rectangle	-8000	-8000	8000	8000	normal	default	0	0	spawnFalse	none	1	0	0	0
 @dxun_region_names:peak_two	circle	-4608	-2464	1500		normal	forest	70	90	mission	other	1	0	0	0	
 @dxun_region_names:peak_three	circle	2160	-1328	912		normal	forest	70	90	mission	other	1	0	0	0	
 @dxun_region_names:peak_four	circle	4848	-4144	912		normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:czerka_outpost	circle	-898	1587	400		normal	city	70	90	spawnFalse	none	0	0	0	0	
+@dxun_region_names:czerka_outpost	circle	4268	3688	400		normal	city	70	90	spawnFalse	none	0	0	0	0	
 @dxun_region_names:tabernas_desert_1	circle	-416	4416	1530		normal	fictional	1	100	spawnFalse	none	1	0	1	0	
 @dxun_region_names:tabernas_desert_2	circle	1984	4960	1248		normal	fictional	1	100	spawnFalse	none	1	0	1	0	
 @dxun_region_names:tabernas_desert_3	circle	3792	5808	1040		normal	fictional	1	100	spawnFalse	none	1	0	1	0	
