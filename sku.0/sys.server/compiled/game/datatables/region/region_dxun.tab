@@ -73,17 +73,24 @@ eastedge_dxun_nobuild	rectangle	7640	-7640	8000	7640	normal	default	0	0	spawnFal
 @dxun_region_names:northeastern_medium	rectangle	41.333333	3991.333333	4100	7890	normal	fictional	70	80	spawnTrue	none	1	0	0	0	
 @dxun_region_names:northeastern_hard	rectangle	4108	991.333333	8000	7890	normal	fictional	80	90	spawnTrue	none	1	0	0	0	
 @dxun_region_names:northeastern_veryhard	circle	4949	4391	191		normal	fictional	80	90	spawnTrue	none	1	0	0	0	
-gcw_region_dxun_1	circle	-7100	7080	750		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
+gcw_region_dxun_1	circle	-6448	6464	2000		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
 gcw_region_dxun_2	circle	-3542	3258	2000		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
 gcw_region_dxun_3	circle	-882	1578	1000		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
 gcw_region_dxun_4	circle	1058	2918	1250		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
-gcw_region_dxun_5	circle	4268	3688	2000		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
+gcw_region_dxun_5	circle	4268	3688	1250		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
 gcw_region_dxun_6	circle	-1812	-1372	2000		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
 gcw_region_dxun_7	circle	1038	318	1250		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
 gcw_region_dxun_8	circle	4268	-352	2000		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
 gcw_region_dxun_9	circle	1438	-2242	1250		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
-gcw_region_dxun_10	circle	-6502	-6982	750		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
+gcw_region_dxun_10	circle	-6502	-6982	2000		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
 gcw_region_dxun_11	circle	-1932	-5432	2000		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
 gcw_region_dxun_12	circle	1398	-4842	1250		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
 gcw_region_dxun_13	circle	3368	-3552	1000		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
 gcw_region_dxun_14	circle	5848	-5352	2000		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
+gcw_region_dxun_17	circle	-5248	-3040	1250		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
+gcw_region_dxun_18	circle	-5568	-192	1250		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
+gcw_region_dxun_19	circle	-6928	2096	1250		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
+gcw_region_dxun_20	circle	-1632	6544	1250		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
+gcw_region_dxun_21	circle	-473	4391	1250		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
+gcw_region_dxun_22	circle	1856	5968	1250		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
+gcw_region_dxun_23	circle	4080	6816	1250		normal	fictional	0	0	spawnFalse	none	1	0	0	0	
