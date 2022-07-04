@@ -628,3 +628,6 @@ rh?a+l?[phf].*[ck]+o+[sz]+t+[aeiou]+r	name_declined_developer
 ^kusho$	name_declined_reserved
 ^koku.?bakuryocho$	name_declined_reserved
 ^cekis$	name_declined_reserved
+mandalorian	name_declined_reserved
+talisa	name_declined_developer
+talisaknight	name_declined_developer
