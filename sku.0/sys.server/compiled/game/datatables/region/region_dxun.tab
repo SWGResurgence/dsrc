@@ -81,8 +81,6 @@ northedge_dxun_nobuild	rectangle	-8000	7640	8000	8000	normal	default	0	0	spawnFa
 westedge_dxun_nobuild	rectangle	-7999.5	-7640	-7640	7640	normal	default	0	0	spawnFalse	none	0	0	0	0	
 southedge_dxun_nobuild	rectangle	-7999.5	-8000	8000	-7640	normal	default	0	0	spawnFalse	none	0	0	0	0	
 eastedge_dxun_nobuild	rectangle	7640	-7640	8000	7640	normal	default	0	0	spawnFalse	none	0	0	0	0	
-old_battlefield_nobuild_end1	circle	-469	3651	256		normal	default	0	0	spawnFalse	none	0	0	0	0	
-old_battlefield_nobuild_end2	circle	-2790	-4457	256		normal	default	0	0	spawnFalse	none	0	0	0	0	
 @dxun_region_names:western_hard	rectangle	-8000	-6520	-3950	1800	normal	fictional	75	90	spawnTrue	none	1	0	0	0	
 @dxun_region_names:southern_central_medium	rectangle	-3958.666667	-6525.333333	80	-970	normal	fictional	70	80	spawnTrue	none	1	0	0	0	
 @dxun_region_names:southern_central_easy	rectangle	74.666667	-5420	4090	-970	normal	fictional	70	75	spawnTrue	none	1	0	0	0	
