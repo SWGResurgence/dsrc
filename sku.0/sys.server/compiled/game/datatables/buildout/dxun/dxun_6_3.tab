@@ -1,3 +1,3 @@
 objid	container	server_template_crc	cell_index	px	py	pz	qw	qx	qy	qz	scripts	objvars
 i	i	h	i	f	f	f	f	f	f	f	s	p
--4605014261	0	object/building/dathomir/dathomir_quarantine_zone_starport.iff	0	1174	24	614	1	0	0	0	planet_map.map_loc:structure.municipal.starport	portalProperty.crc|0|-688757533|travel.air_time|0|60|travel.arrival_location|8|-20.340000 0.000000 -17.760000 dxun 0|travel.base_object|7|4605014286:4605014289:4605014301:4605014304:|travel.cost|0|100|travel.ground_time|0|300|travel.point_name|4|Czerka Outpost Starport|travel.shuttle_available|0|0|travel.shuttle_timestamp|0|3105532|travel.version|0|3|$|
+-4562042153	0	object/static/structure/corellia/corl_imprv_wall_4x16_s03.iff	0	1121.7817	24	623.9685	1	0	0	0		$|
