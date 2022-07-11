@@ -522,28 +522,30 @@ public class destroy_duty extends script.base_script
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         int reward = params.getInt("reward");
         int type = params.getInt("type");
-        prose_package pp = null;
-        switch (type)
+        switch (types)
         {
             case 1:
-                pp = prose.getPackage(SID_ROUND_REWARD, reward);
-                break;
-            case 2:
-                pp = prose.getPackage(SID_COMPLETE_REWARD, reward);
-                break;
-            case 3:
-                pp = prose.getPackage(SID_BOSS_REWARD, reward);
-                break;
-        }
-        if (pp != null)
+            prose_package pp = prose.getPackage(SID_ROUND_REWARD, reward);
             sendQuestSystemMessage(player, pp);
+            break;
+            case 2:
+            pp = prose.getPackage(SID_COMPLETE_REWARD, reward);
+            sendQuestSystemMessage(player, pp);
+            break;
+            case 3:
+            pp = prose.getPackage(SID_BOSS_REWARD, reward);
+            sendQuestSystemMessage(player, pp);
+            break;
+            default;
+            break;
+        }
         money.bankTo(money.ACCT_SPACE_QUEST_REWARD, player, reward);
         obj_id pInv = utils.getInventoryContainer(player);
         obj_id playerShip = space_transition.getContainingShip(player);
-        int tokens = reward / 1000;
-        if (hasObjVar(playerShip, "spaceFaction.overt"))
+        int tokens = reward / 250;
+        if (tokens < 1)
         {
-            tokens += tokens / 2;
+            tokens = 1;
         }
         prose_package pt = prose.getPackage(SID_TOKEN_REWARD, tokens);
         sendQuestSystemMessage(player, pt);
