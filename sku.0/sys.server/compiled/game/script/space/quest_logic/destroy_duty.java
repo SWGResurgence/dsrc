@@ -5,7 +5,7 @@ import script.library.*;
 
 public class destroy_duty extends script.base_script
 {
-    private static final float dutyTokenBonus = Float.parseFloat(getConfigSetting("GameServer", "dutyTokenBonus"));
+    //private static final float dutyTokenBonus = Float.parseFloat(getConfigSetting("GameServer", "dutyTokenBonus"));
     public static final string_id SID_TARGET_LOCATED = new string_id("space/quest", "destroy_duty_target_located");
     public static final string_id SID_TARGET_DETECTED = new string_id("space/quest", "destroy_duty_target_detected");
     public static final string_id SID_BOSS_DETECTED = new string_id("space/quest", "destroy_duty_boss_detected");
@@ -541,15 +541,10 @@ public class destroy_duty extends script.base_script
         obj_id pInv = utils.getInventoryContainer(player);
         obj_id playerShip = space_transition.getContainingShip(player);
         int tokens = reward / 1000;
-        /*if (tokens < 1)
-        {
-            tokens = 1;
-        }*/
         if (hasObjVar(playerShip, "spaceFaction.overt"))
         {
             tokens += tokens / 2;
         }
-        tokens *= dutyTokenBonus;
         prose_package pt = prose.getPackage(SID_TOKEN_REWARD, tokens);
         sendQuestSystemMessage(player, pt);
         static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, tokens);
