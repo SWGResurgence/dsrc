@@ -547,6 +547,11 @@ public class destroy_duty extends script.base_script
         {
             tokens = 1;
         }
+        if (hasObjVar(playerShip, "spaceFaction.overt"))
+        {
+            int pvpTokens = tokens / 2;
+            tokens = tokens + pvpTokens;
+        }
         prose_package pt = prose.getPackage(SID_TOKEN_REWARD, tokens);
         sendQuestSystemMessage(player, pt);
         static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, tokens);
