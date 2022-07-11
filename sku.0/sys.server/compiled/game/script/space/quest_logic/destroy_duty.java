@@ -536,7 +536,7 @@ public class destroy_duty extends script.base_script
             pp = prose.getPackage(SID_BOSS_REWARD, reward);
             sendQuestSystemMessage(player, pp);
             break;
-            default;
+            default:
             break;
         }
         money.bankTo(money.ACCT_SPACE_QUEST_REWARD, player, reward);
