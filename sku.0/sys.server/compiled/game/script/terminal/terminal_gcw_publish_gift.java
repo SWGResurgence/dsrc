@@ -524,9 +524,9 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
                         break;
                 }
                 location loc = baseDic.getLocation("location");
-                int x = (int)loc.x;
-                int y = (int)loc.y;
-                int z = (int)loc.z;
+                int x = (int)loc.getX();
+                int y = (int)loc.getY();
+                int z = (int)loc.getZ();
                 allBaseData += " " + factionName + " Player Base reports alarm at: " + x + " " + y + " " + z + sui.newLine();
             }
         }
