@@ -522,7 +522,7 @@ public class destroy_duty extends script.base_script
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         int reward = params.getInt("reward");
         int type = params.getInt("type");
-        switch (types)
+        switch (type)
         {
             case 1:
             prose_package pp = prose.getPackage(SID_ROUND_REWARD, reward);
