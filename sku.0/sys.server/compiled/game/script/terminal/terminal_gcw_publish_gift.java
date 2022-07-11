@@ -148,7 +148,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             if (dict != null)
             {
                 String[] columnHeader = dict.getStringArray("column");
-                if (columnHeader != null && columnHeader.length > 0S)
+                if (columnHeader != null && columnHeader.length > 0)
                 {
                     String[] columnHeaderType = dict.getStringArray("columnType");
                     if (columnHeaderType != null && columnHeaderType.length > 0 && columnHeaderType.length == columnHeader.length)
