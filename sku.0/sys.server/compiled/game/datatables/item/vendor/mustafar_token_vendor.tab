@@ -12,12 +12,14 @@ item_schematic_ex_reinforcement_core	500		Exceptional Weapon Reinforcement Core 
 item_tcg_loot_reward_series6_build02_hk47_mustafar_diorama	300		HK47: Mustafar Diorama
 item_schematic_vehicle_lava_res_kit	100		Lava Resistance Kit Schematic
 item_tcg_loot_reward_series5_mustafar_diorama	150		Mustafar Diorama
-item_tow_ring_architect_04_01	100		Relic Armorsmith's Ring
-item_tow_ring_armorsmith_04_01	100		Relic Armorsmith's Ring
-item_tow_ring_bioeng_04_01	100		Relic Bio-Engineer's Ring
-item_tow_ring_chef_04_01	100		Relic Chef's Ring
-item_tow_ring_droideng_04_01	100		Relic Droid Engineer's Ring
-item_tow_ring_weaponsmith_04_01	100		Relic Weaponsmith's Ring
+item_tow_ring_architect_04_01	100		Relic Ring of Architecture
+item_tow_ring_armorsmith_04_01	100		Relic Ring of Armorsmithing
+item_tow_ring_beast_master_04_01	100		Relic Ring of Beast Mastery
+item_tow_ring_chef_04_01	100		Relic Ring of Domestics
+item_tow_ring_cybernetics_technician_04_01	100		Relic Ring of Cybernetics Engineering
+item_tow_ring_inspiration_04_01	100		Relic Ring of Inspired Entertainment
+item_tow_ring_tailor_04_01	100		Relic Ring of Weaponsmithing
+item_tow_ring_weaponsmith_04_01	100		Relic Ring of Weaponsmithing
 item_tow_schematic_psg_05_01	500		Schematic: Old Republic Personal Shield
 item_tow_foreman_burst_run_04_01	1000		Sprint Enhancement Stim
 item_restuss_schematic_saber_04_01	500		Technical Readout of a One-Handed Lightsaber Hilt
