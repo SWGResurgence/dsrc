@@ -385,7 +385,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             return SCRIPT_CONTINUE;
         }
         String gcwData = getGcwData(self, player);
-        if (gcwData == null || gcwData.equals(""))
+        if (gcwData == null || gcwData.isEmpty())
         {
             return SCRIPT_CONTINUE;
         }
@@ -626,7 +626,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         {
             return null;
         }
-        else if (planet == null || planet.equals("") || planetName == null || planetName.equals(""))
+        else if (planet == null || planet.isEmpty() || planetName == null || planetName.isEmpty())
         {
             return null;
         }
