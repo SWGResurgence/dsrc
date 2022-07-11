@@ -4,3 +4,5 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -456203935	0	object/static/structure/corellia/corl_imprv_wall_4x16_s03.iff	0	1226.8257	24	623.98535	1	0	0	0		$|
 -469700178	0	object/building/military/outpost_starport.iff	0	1174	24	614	1	0	0	0	structure.municipal.starport:planet_map.map_loc	travel.air_time|0|60|travel.cost|0|150|travel.ground_time|0|300|travel.point_name|4|Czerka Outpost|travel.shuttle_available|0|1|travel.version|0|3|$|
 -469700179	-469700178	object/cell/cell.iff	1	0	0	0	1	0	0	0		$|
+-473900303	-469700179	object/tangible/terminal/terminal_space.iff	1	1166	24.2	594.6499	1	0	0	0	space.terminal.terminal_space	
+-4739004284	0	object/tangible/ground_spawning/area_spawner.iff	0	1151.9229	24	600.4895	-0.10671828	0	0.99428946	0	systems.spawner_area	fltMaxSpawnTime|2|1.000000|fltMinSpawnTime|2|0.100000|fltRadius|2|1.000000|intDefaultBehavior|0|3|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|ep3_chassis_broker_05|strSpawnerType|4|area|strSpawns|4|ep3_chassis_broker_05|$|
