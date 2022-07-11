@@ -36,6 +36,7 @@ public class heroic_token_box extends script.base_script
         "Token: Imperial Empire Day",
         "Token: Rebel Empire Day",
         "Token: Imperial Life Day",
+        "Token: Rebel Life Day",
         "Token: Galactic Moon Festival",
         "Token: Love Day Chak Heart",
         "Token: Chronicler Copper",
