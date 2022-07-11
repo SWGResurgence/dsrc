@@ -771,7 +771,7 @@ public class dictionary implements Serializable
 		if (value instanceof Byte)
 			return (Byte) value;
     if (value instanceof Integer)
-      System.out.printIn("getBute being called on key " + key.toString() + ". This should be using getInt!");
+      System.out.println("getByte being called on key " + key.toString() + ". This should be using getInt!");
 		return 0;
 	}	// getByte()
 
