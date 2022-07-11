@@ -843,13 +843,13 @@ public class pvp extends script.base_script
         {
             bounty = getIntObjVar(killer, "bounty.amount");
         }
-        bounty += 1000000;
+        bounty += 1000;
         setObjVar(killer, "bounty.amount", bounty);
-        if (bounty >= 900000000)
+        if (bounty >= 10000)
         {
             setJediBountyValue(killer, bounty);
         }
-        CustomerServiceLog("bounty", "A bounty of 1,000,000 credits has been automatically put on %TU for killing %TT", killer, victim);
+        CustomerServiceLog("bounty", "A bounty of 1,000 credits has been automatically put on %TU for killing %TT", killer, victim);
     }
     public static void battlefieldWarp(obj_id player, location loc) throws InterruptedException
     {
