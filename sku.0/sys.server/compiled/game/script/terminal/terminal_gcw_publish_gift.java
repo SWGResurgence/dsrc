@@ -1,9 +1,17 @@
 package script.terminal;
 
 import script.*;
+
+import java.util.Arrays;
+import java.util.Hashtable;
+import java.util.Vector;
+
 import script.library.gcw;
+import script.library.player_structure;
 import script.library.sui;
 import script.library.utils;
+import script.library.prose;
+import script.library.trial;
 
 public class terminal_gcw_publish_gift extends script.terminal.base.base_terminal
 {
@@ -37,6 +45,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
     };
     public static final String[][] PLANETS_DATA = 
     {
+        
         {
             "corellia",
             "dantooine",
@@ -46,6 +55,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             "talus",
             "tatooine"
         },
+        
         {
             "CORELLIA",
             "DANTOOINE",
@@ -56,7 +66,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             "TATOOINE"
         }
     };
-    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
+    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi)
     {
         menu_info_data data = mi.getMenuItemByType(menu_info_types.ITEM_USE);
         if (!isGod(player))
@@ -81,7 +91,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         updateGCWInfo(self);
         return super.OnObjectMenuRequest(self, player, mi);
     }
-    public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
+    public int OnObjectMenuSelect(obj_id self, obj_id player, int item)
     {
         final boolean isIntelPad = (getTemplateName(self)).equals(WAR_INTELPAD_TEMPLATE);
         if (!isGod(player))
@@ -148,17 +158,17 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             if (dict != null)
             {
                 String[] columnHeader = dict.getStringArray("column");
-                if (columnHeader != null && columnHeader.length > 0)
+                if ((columnHeader != null) && (columnHeader.length > 0))
                 {
                     String[] columnHeaderType = dict.getStringArray("columnType");
-                    if (columnHeaderType != null && columnHeaderType.length > 0 && columnHeaderType.length == columnHeader.length)
+                    if ((columnHeaderType != null) && (columnHeaderType.length > 0) && (columnHeaderType.length == columnHeader.length))
                     {
                         boolean validColumnData = true;
                         String[][] columnData = new String[columnHeader.length][0];
                         for (int i = 0; i < columnHeader.length; ++i)
                         {
                             columnData[i] = dict.getStringArray("column" + i);
-                            if (columnData[i] == null || columnData[i].length <= 0)
+                            if ((columnData[i] == null) || (columnData[i].length <= 0))
                             {
                                 validColumnData = false;
                                 break;
@@ -355,7 +365,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         }
         return SCRIPT_CONTINUE;
     }
-    public int OnClusterWideDataResponse(obj_id self, String strCategory, String strSubCategory, int intRequestId, String[] strElementNames, dictionary[] dctData, int intLockKey) throws InterruptedException
+    public int OnClusterWideDataResponse(obj_id self, String strCategory, String strSubCategory, int intRequestId, String[] strElementNames, dictionary[] dctData, int intLockKey)
     {
         blog("OnClusterWideDataResponse: " + strSubCategory);
         final int imperialPlanetaryScore = getGcwGroupImperialScorePercentile(strSubCategory);
@@ -363,7 +373,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         utils.setScriptVar(self, "Rebel." + strSubCategory + ".controlScore", (100 - imperialPlanetaryScore));
         return SCRIPT_CONTINUE;
     }
-    public int refreshSuiGcwData(obj_id self, dictionary params) throws InterruptedException
+    public int refreshSuiGcwData(obj_id self, dictionary params)
     {
         obj_id player = sui.getPlayerId(params);
         if (!isValidId(player))
@@ -385,7 +395,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             return SCRIPT_CONTINUE;
         }
         String gcwData = getGcwData(self, player);
-        if (gcwData == null || gcwData.isEmpty())
+        if (gcwData == null || gcwData.equals(""))
         {
             return SCRIPT_CONTINUE;
         }
@@ -394,7 +404,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         messageTo(self, "refreshSuiGcwData", params, 10, false);
         return SCRIPT_CONTINUE;
     }
-    public int closeSui(obj_id self, dictionary params) throws InterruptedException
+    public int closeSui(obj_id self, dictionary params)
     {
         obj_id player = sui.getPlayerId(params);
         if (!isValidId(player))
@@ -404,7 +414,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         sui.removePid(player, PID_NAME);
         return SCRIPT_CONTINUE;
     }
-    public boolean updateGCWInfo(obj_id self) throws InterruptedException
+    public boolean updateGCWInfo(obj_id self)
     {
         blog("in updateGCWInfo");
         if (!utils.hasScriptVar(self, "lastUpdate"))
@@ -429,7 +439,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         }
         return true;
     }
-    public void openSui(obj_id player) throws InterruptedException
+    public void openSui(obj_id player)
     {
         obj_id self = getSelf();
         String gcwData = getGcwData(self, player);
@@ -438,7 +448,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             createCustomUI(self, player, gcwData);
         }
     }
-    public String getGcwData(obj_id self, obj_id player) throws InterruptedException
+    public String getGcwData(obj_id self, obj_id player)
     {
         if (!isValidId(player))
         {
@@ -483,7 +493,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         gcwData += "Last Updated: " + strCalTime;
         return gcwData;
     }
-    public String getPlayerBaseData(obj_id player, obj_id planetId, int maxBasesOnPlanet) throws InterruptedException
+    public String getPlayerBaseData(obj_id player, obj_id planetId, int maxBasesOnPlanet)
     {
         if (!isValidId(planetId))
         {
@@ -496,6 +506,9 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         String allBaseData = "";
         String treePrefix = ".hq_";
         dictionary baseDic = new dictionary();
+        int faction = 0;
+        String factionName = "";
+        location loc = new location();
         for (int i = 1; i < maxBasesOnPlanet; i++)
         {
             baseDic = utils.getDictionaryScriptVar(planetId, gcw.VAR_BASE_HACK_DICTIONARY + treePrefix + i);
@@ -509,44 +522,45 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
                 {
                     allBaseData += " BASE ID: " + baseDic.getObjId("id") + sui.newLine();
                 }
-                int faction = baseDic.getInt("faction");
-                String factionName = "";
+                faction = baseDic.getInt("faction");
                 switch (faction)
                 {
                     case gcw.FACTION_REBEL:
-                        factionName = "REBEL";
-                        break;
+                    factionName = "REBEL";
+                    break;
                     case gcw.FACTION_IMPERIAL:
-                        factionName = "IMPERIAL";
-                        break;
+                    factionName = "IMPERIAL";
+                    break;
                     default:
-                        factionName = "ERROR";
-                        break;
+                    factionName = "ERROR";
+                    break;
                 }
-                location loc = baseDic.getLocation("location");
-                int x = (int)loc.getX();
-                int y = (int)loc.getY();
-                int z = (int)loc.getZ();
+                loc = baseDic.getLocation("location");
+                int x = (int)loc.x;
+                int y = (int)loc.y;
+                int z = (int)loc.z;
                 allBaseData += " " + factionName + " Player Base reports alarm at: " + x + " " + y + " " + z + sui.newLine();
             }
         }
         return allBaseData;
     }
-    public String getTerminalData(int[] terminalArray) throws InterruptedException
+    public String getTerminalData(int[] terminalArray)
     {
         if (terminalArray == null || terminalArray.length == 0)
         {
             return null;
         }
         int terminal_one = terminalArray[0];
-        for (int i1 : terminalArray) {
-            if (terminal_one != i1) {
+        for (int i = 0; i < terminalArray.length; i++)
+        {
+            if (terminal_one != terminalArray[i])
+            {
                 return BASE_BEING_CAPTURED;
             }
         }
         return BASE_SECURED;
     }
-    public String getStaticBaseData(int status) throws InterruptedException
+    public String getStaticBaseData(int status)
     {
         if (status < 0)
         {
@@ -565,7 +579,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             return null;
         }
     }
-    public void createCustomUI(obj_id self, obj_id player, String combinedString) throws InterruptedException
+    public void createCustomUI(obj_id self, obj_id player, String combinedString)
     {
         if (!isValidId(self) || !isValidId(player))
         {
@@ -594,7 +608,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         flushSUIPage(pid);
         messageTo(self, "refreshSuiGcwData", params, 10, false);
     }
-    public void closeOldWindow(obj_id player) throws InterruptedException
+    public void closeOldWindow(obj_id player)
     {
         int pid = sui.getPid(player, PID_NAME);
         if (pid > -1)
@@ -603,7 +617,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             sui.removePid(player, PID_NAME);
         }
     }
-    public int checkScene(obj_id self, obj_id player) throws InterruptedException
+    public int checkScene(obj_id self, obj_id player)
     {
         if (!isValidId(self) || !isValidId(player))
         {
@@ -620,13 +634,13 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         }
         return gcwPlanetIndex;
     }
-    public String getSpecificPlanetData(obj_id self, obj_id player, obj_id planetId, String gcwData, String planet, String planetName) throws InterruptedException
+    public String getSpecificPlanetData(obj_id self, obj_id player, obj_id planetId, String gcwData, String planet, String planetName)
     {
         if (!isValidId(self) || !exists(self) || !isValidId(player) || !exists(player) || !isValidId(planetId) || !exists(planetId))
         {
             return null;
         }
-        else if (planet == null || planet.isEmpty() || planetName == null || planetName.isEmpty())
+        else if (planet == null || planet.equals("") || planetName == null || planetName.equals(""))
         {
             return null;
         }
@@ -668,7 +682,7 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
         gcwData += sui.newLine();
         return gcwData;
     }
-    public boolean blog(String msg) throws InterruptedException
+    public boolean blog(String msg)
     {
         return true;
     }
