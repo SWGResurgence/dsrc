@@ -1,12 +1,17 @@
 package script.theme_park.world_boss;
 
 import script.dictionary;
+import script.library.*;
 import script.library.ai_lib;
 import script.library.static_item;
 import script.library.utils;
 import script.obj_id;
 
 public class loot_controller_peko extends script.base_script {
+    public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException {
+        sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getName(killer));
+        return SCRIPT_CONTINUE;
+    }
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException {
         obj_id corpseInventory = utils.getInventoryContainer(self);
         if (corpseInventory == null) {
