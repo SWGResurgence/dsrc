@@ -1,4 +1,4 @@
-@base object/mobile/skeleton/dxun/shared_lizard_boma.iff
+@base object/mobile/skeleton/shared_lizard_basic.iff
 
 @class creature_object_template 10
 
@@ -11,5 +11,5 @@ objectName = "monster_name" "boma"
 detailedDescription = "" ""
 lookAtText = "monster_lookat" "boma"
 
-appearanceFilename = "appearance/boma.sat"
-clientDataFile = "clientdata/creature/client_shared_cr_boma.cdf"
+appearanceFilename = "appearance/bocatt.sat"
+clientDataFile = "clientdata/creature/client_shared_cr_bocatt.cdf"
