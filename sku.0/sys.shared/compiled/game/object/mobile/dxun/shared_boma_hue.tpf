@@ -5,4 +5,4 @@
 @class object_template 0
 
 appearanceFilename = "appearance/bocatt_hue.sat"
-clientDataFile = "clientdata/creature/client_shared_cr_bocatt.cdf", "clientdata/index/client_shared_index_1_30.cdf"
+clientDataFile = "clientdata/index/client_shared_index_1_34.cdf" 
