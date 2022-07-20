@@ -1,0 +1,8 @@
+@base object/mobile/shared_boma.iff
+
+@class creature_object_template 10
+@class tangible_object_template 3
+@class object_template 0
+
+appearanceFilename = "appearance/boma_hue.sat"
+clientDataFile = "clientdata/creature/client_shared_cr_boma.cdf"

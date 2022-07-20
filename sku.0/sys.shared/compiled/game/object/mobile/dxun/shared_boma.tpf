@@ -1,0 +1,15 @@
+@base object/mobile/skeleton/shared_lizard_boma.iff
+
+@class creature_object_template 10
+
+species = SP_bocatt
+
+@class tangible_object_template 3
+@class object_template 0
+
+objectName = "monster_name" "boma"
+detailedDescription = "" ""
+lookAtText = "monster_lookat" "boma"
+
+appearanceFilename = "appearance/boma.sat"
+clientDataFile = "clientdata/creature/client_shared_cr_boma.cdf"
