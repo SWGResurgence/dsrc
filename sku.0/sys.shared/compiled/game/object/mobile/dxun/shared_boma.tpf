@@ -1,4 +1,4 @@
-@base object/mobile/skeleton/shared_lizard_boma.iff
+@base object/mobile/skeleton/dxun/shared_lizard_boma.iff
 
 @class creature_object_template 10
 

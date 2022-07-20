@@ -1,4 +1,4 @@
-@base object/mobile/shared_boma.iff
+@base object/mobile/dxun/shared_boma.iff
 
 @class creature_object_template 10
 @class tangible_object_template 3
