@@ -2,6 +2,9 @@ package script.master_controller_boma;
 
 import script.*;
 import script.library.hue;
+import script.library.colors;
+
+import script.color;
 
 public class master_controller_boma extends script.base_script {
     public int OnAttach(obj_id self) throws InterruptedException {
