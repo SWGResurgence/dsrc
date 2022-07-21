@@ -9,4 +9,10 @@ public class master_controller_boma extends script.base_script {
         hue.setColor(self, [1/2], color);
         return SCRIPT_CONTINUE;
     }
+    public static void setPalcolorCustomVarClosestColor(obj_id target, String varPathName, color c) throws InterruptedException {
+        if (varPathName.startsWith("/")) {
+            varPathName = varPathName.substring(1);
+        }
+        setPalcolorCustomVarClosestColor(target, varPathName, c.getR(), c.getG(), c.getB(), c.getA());
+    }
 }
