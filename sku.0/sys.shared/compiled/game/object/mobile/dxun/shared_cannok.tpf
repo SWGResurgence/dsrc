@@ -14,4 +14,4 @@ lookAtText = "monster_lookat"  "cannok"
 appearanceFilename = "appearance/spined_puc_hue.sat"
 portalLayoutFilename = ""
 
-clientDataFile = "clientdata/creature/client_shared_cr_giant_spined_puc.cdf"
+clientDataFile = "clientdata/index/client_shared_index_1_33.cdf"
