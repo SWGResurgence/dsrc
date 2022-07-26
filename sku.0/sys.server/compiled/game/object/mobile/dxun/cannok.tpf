@@ -4,4 +4,4 @@
 @class tangible_object_template 0
 @class object_template 0
 
-sharedTemplate = "object/mobile/shared_cannok.iff"
+sharedTemplate = "object/mobile/dxun/shared_cannok.iff"
