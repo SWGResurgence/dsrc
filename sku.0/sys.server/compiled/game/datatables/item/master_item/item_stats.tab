@@ -3741,7 +3741,7 @@ item_tcg_loot_reward_series2_diner			"string:player_structure.deed.template=obje
 item_tcg_loot_reward_series2_barn			"string:player_structure.deed.template=object/building/player/city/barn_no_planet_restriction.iff,int:player_structure.deed.buildtime=90"								
 item_tcg_loot_reward_series1_housecleaning_kit			"int:increaseAmount=50,int:nonGenericStorageItem=1"							clienteffect/tcg_add_storage_house_cleaning.cef	
 item_tcg_loot_reward_series1_beru_whitesuns_cookbook			"int:increaseAmount=100,int:nonGenericStorageItem=1"							clienteffect/tcg_add_storage_cookbook.cef	
-item_tcg_loot_reward_series1_organizational_datapad			"int:increaseAmount=100,int:nonGenericStorageItem=1"							clienteffect/tcg_add_storage_datapad.cef	
+item_tcg_loot_reward_series2_organizational_datapad			"int:increaseAmount=100,int:nonGenericStorageItem=1"							clienteffect/tcg_add_storage_datapad.cef	
 item_tcg_loot_reward_series1_gorax_ear					tcg_series1_gorax_ear	long_reuse_4	3600			clienteffect/tcg_gorax_ear.cef	
 item_tcg_loot_reward_series1_morgukai_shadow_scroll					tcg_series1_morgukai_shadow_scroll	long_reuse_4	3600			clienteffect/tcg_shadow_scroll.cef	
 item_tcg_loot_reward_series2_sanyassan_skull					tcg_series2_sanyassan_skull	long_reuse_4	3600			clienteffect/tcg_sanyassan_skull.cef	
