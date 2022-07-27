@@ -4,9 +4,9 @@
 @class tangible_object_template 3
 @class object_template 3
 
-objectName = "monster_name"  "skreev"
+objectName = "monster_name"  "borgle"
 detailedDescription = "" ""
-lookAtText = "monster_lookat"  "skreev"
+lookAtText = "monster_lookat"  "borgle"
 
 snapToTerrain = true
 tintPalette = "0"
