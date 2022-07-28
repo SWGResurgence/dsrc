@@ -3,4 +3,4 @@
 @class tangible_object_template 1
 @class object_template 2
 
-sharedTemplate = "object/tangible/painting/resurgence/mandalorian/painting_mandalorian_knights.iff"
+sharedTemplate = "object/tangible/painting/resurgence/mandalorian/shared_painting_mandalorian_knights.iff"
