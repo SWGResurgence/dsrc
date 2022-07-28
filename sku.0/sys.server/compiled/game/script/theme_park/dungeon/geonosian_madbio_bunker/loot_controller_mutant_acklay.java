@@ -48,7 +48,7 @@ public class loot_controller_mutant_acklay extends script.base_script
         /*String myLoot1 = "";
         String myLoot2 = "object/tangible/wearables/cybernetic/s02/cybernetic_s02_arm_r.iff";
         createObject(myLoot1, corpseInventory, "");
-        createObject(myLoot2, corpseInventory, "");*/
+        createObject(myLoot2, corpseInventory, "");*/ 
         return;
     }
 }
