@@ -6,4 +6,4 @@
 objectName = "static_item_n" "item_basilisk_war_droid_itv"
 detailedDescription = "static_item_d" "item_basilisk_war_droid_itv"
 
-appearanceFilename = "appearance/basilisk_war_droid.apt"
+appearanceFilename = "appearance/basilisk_war_droid.sat"
