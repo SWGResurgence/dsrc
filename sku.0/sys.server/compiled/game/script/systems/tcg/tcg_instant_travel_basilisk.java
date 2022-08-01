@@ -81,7 +81,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
         {
             main_options[1] = "Set Location 2";
         }
-        else
+        if (hasObjVar(itv, "travel_tcg.stationary_itv.name.3"))
         {
             main_options[2] = "Reset " + getStringObjVar(itv, "travel_tcg.stationary_itv.name.3");
         }
@@ -89,7 +89,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
         {
             main_options[2] = "Set Location 3";
         }
-        else
+        if (hasObjVar(itv, "travel_tcg.stationary_itv.name.4"))
         {
             main_options[3] = "Reset " + getStringObjVar(itv, "travel_tcg.stationary_itv.name.4");
         }
@@ -97,7 +97,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
         {
             main_options[3] = "Set Location 4";
         }
-        else
+        if (hasObjVar(itv, "travel_tcg.stationary_itv.name.5"))
         {
             main_options[4] = "Reset " + getStringObjVar(itv, "travel_tcg.stationary_itv.name.5");
         }
