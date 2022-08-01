@@ -258,7 +258,7 @@ public class tcg_instant_travel_basilisk extends script.base_script
         {
             return;
         }
-        String[] main_options = new String[2];
+        String[] main_options = new String[5];
         if (hasObjVar(itv, "travel_tcg.stationary_itv.name.1") && hasObjVar(itv, "travel_tcg.stationary_itv.location.1") && hasObjVar(itv, "travel_tcg.stationary_itv.scene.1"))
         {
             String name = getStringObjVar(itv, "travel_tcg.stationary_itv.name.1");
