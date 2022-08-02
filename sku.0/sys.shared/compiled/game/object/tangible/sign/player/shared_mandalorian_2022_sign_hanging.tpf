@@ -6,4 +6,4 @@
 objectName = "static_name_n" "item_mandalorian_hanging_sign_02_01"
 detailedDescription = "static_name_d" "item_mandalorian_hanging_sign_02_01"
 
-appearanceFilename = ""
+appearanceFilename = "appearance/mandalorian_sign_house_hanging.apt"
