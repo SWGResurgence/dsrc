@@ -53,7 +53,8 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             "naboo",
             "rori",
             "talus",
-            "tatooine"
+            "tatooine",
+            "dxun"
         },
         
         {
@@ -63,7 +64,8 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             "NABOO",
             "RORI",
             "TALUS",
-            "TATOOINE"
+            "TATOOINE",
+            "DXUN"
         }
     };
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
