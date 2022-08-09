@@ -1,6 +1,6 @@
 id	Description	Object Template	Money	Once Per Account	Once Per Account Feature Id	Once Per Character	Can Trade In	Comment
 s	s	s	i	b	b[0]	b	b[0]	c
-item_vet_token_scroll	veteran_new:vet_token_scroll	item_vet_token_scroll	0	1		0		
+item_vet_token_scroll	veteran_new:vet_token_scroll	item_vet_token_scroll	0	0		0		
 sorosuub	veteran_new:sorosuub	object/tangible/space/veteran_reward/sorosuub_space_yacht_deed.iff	0	0		1		
 varactyl	veteran_new:varactyl	object/tangible/deed/ep3_pet_deed/varactyl_deed.iff	0	1		0		
 barc_speeder	veteran_new:barc_speeder	object/tangible/deed/vehicle_deed/barc_speeder_deed.iff	0	1		0		
@@ -10,7 +10,7 @@ instant_travel	veteran_new:instant_travel_terminal	object/tangible/veteran_rewar
 cybernetic_xp_chip	veteran_new:cybernetic_experience_chip	object/tangible/veteran_reward/exp_buff_item_crate.iff	0	1		0		
 walker_at_rt	veteran_new:walker_at_rt	object/tangible/veteran_reward/vehicle_walker_at_rt_camo.iff	0	1		0		
 instant_travel_royal_ship	veteran_new:instant_travel_terminal_royal_ship	object/tangible/deed/vehicle_deed/instant_travel_terminal_royal_ship_deed.iff	0	0		1		
-grievous_wheel_bike	veteran_new:grievous_wheel_bike	item_deed_grievous_wheel_bike	0	0		1	
+grievous_wheel_bike	veteran_new:grievous_wheel_bike	item_deed_grievous_wheel_bike	0	0		1		
 hover_chair	veteran_new:hover_chair	item_deed_hover_chair_06_01	0	1		0		
 item_level90_boost	veteran_new:item_level90_boost	item_level90_boost	0	0		1		
 heroic_biolink_set	veteran_new:heroic_biolink_set	heroic_biolink_set	0	0		1		
