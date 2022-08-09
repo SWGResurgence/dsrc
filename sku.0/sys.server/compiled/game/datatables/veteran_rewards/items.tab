@@ -1,6 +1,6 @@
 id	Description	Object Template	Money	Once Per Account	Once Per Account Feature Id	Once Per Character	Can Trade In	Comment
 s	s	s	i	b	b[0]	b	b[0]	c
-item_vet_token_scroll	veteran_new:vet_token_scroll	item_vet_token_scroll	0	0		0		
+item_vet_token_scroll	veteran_new:vet_token_scroll	item_vet_token_scroll	0	1		0		
 sorosuub	veteran_new:sorosuub	object/tangible/space/veteran_reward/sorosuub_space_yacht_deed.iff	0	0		1		
 varactyl	veteran_new:varactyl	object/tangible/deed/ep3_pet_deed/varactyl_deed.iff	0	1		0		
 barc_speeder	veteran_new:barc_speeder	object/tangible/deed/vehicle_deed/barc_speeder_deed.iff	0	1		0		
