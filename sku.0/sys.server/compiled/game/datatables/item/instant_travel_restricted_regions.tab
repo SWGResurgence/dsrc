@@ -1,4 +1,4 @@
 region_name	notes
 s	c
 pvp_battlefield	"These regions will be checked using startsWith(), so the name can either be the full name or just a starting string."
-dxun	"These regions will be checked using startsWith(), so the name can either be the full name or just a starting string."
+gcw_region_dxun	"These regions will be checked using startsWith(), so the name can either be the full name or just a starting string."
