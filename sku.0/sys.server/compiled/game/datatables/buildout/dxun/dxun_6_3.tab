@@ -18,8 +18,3 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -480304572	0	object/tangible/crafting/station/public_food_station.iff	0	1131.51	24	595.26	-0.69925094	0	0.7148765	0	systems.crafting.base_station	buildoutObjectId|-480304572|crafting.private|0|0|crafting.station|0|1|crafting.type|0|8644|$|
 -541550429	0	object/tangible/planet_map_location/city.iff	0	1167.8066	24	612.9302	1	0	0	0	planet_map.map_loc	$|
 -545250426	0	object/building/military/outpost_cloning_facility_s02.iff	0	1152	24	654	-4.08E-04	0	0.99999964	0	structure.municipal.cloning_facility:planet_map.map_loc	
--545250427	-545250426	object/cell/cell.iff	1	0	0	0	1	0	0	0		$|
--545250428	-545250426	object/cell/cell.iff	1	0	0	0	1	0	0	0		$|
--545250429	-545250426	object/cell/cell.iff	1	0	0	0	1	0	0	0		$|
--545250430	-545250426	object/cell/cell.iff	1	0	0	0	1	0	0	0		$|
--545250431	-545250426	object/cell/cell.iff	1	0	0	0	1	0	0	0		$|
