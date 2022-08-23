@@ -22,6 +22,7 @@ object/tangible/veteran_reward/frn_tech_console_sectional_c.iff	12		Database Inp
 item_vet_66_month_jedi_temple_burning	66		Death - Destroyed Jedi Temple Miniature
 object/tangible/veteran_reward/frn_vet_holo_deathstar.iff	24		Death Star Hologram
 object/tangible/veteran_reward/frn_vet_houseplant.iff	9		Decorative Houseplant
+item_bestine_decorative_sword_01_01	75		Decorative Sword
 object/tangible/veteran_reward/one_year_anniversary/painting_10.iff	3	1	Dusk in Kachirho
 object/tangible/veteran_reward/frn_vet_emp_chair.iff	30		Emperor's Chair
 object/tangible/veteran_reward/one_year_anniversary/painting_09.iff	3	1	Emperor's Eyes
@@ -65,8 +66,10 @@ object/tangible/veteran_reward/vr_mouse_droid_deed.iff	96		Mouse Droid Familiar
 object/tangible/veteran_reward/vr_mynock_deed.iff	96		Mynock Familiar
 item_neural_recon_network_control_interface_01_01	75	1	Neural Recon Network Control Interface
 st_cn_vet_reward_nightsister_boss	57		Nightsister Bloodwitch Storyteller Token
+item_ornate_rug_01_01	150		Ornate Rug
 object/tangible/veteran_reward/frn_vet_podracer_statue.iff	54		Podracer Statue
 object/tangible/veteran_reward/frn_vet_holo_leia.iff	27		Princess Leia Hologram
+item_rare_painting_01_01	75		Rare Painting
 st_cn_vet_reward_rebel_commando_boss	54		Rebel Commando Vindicator Storyteller Token
 object/tangible/veteran_reward/frn_vet_rug_rebel.iff	18		Rebel Rug
 object/tangible/veteran_reward/frn_yoda_fountain.iff	63		Remembrance Day Yoda Fountain
@@ -85,3 +88,6 @@ object/tangible/veteran_reward/one_year_anniversary/painting_03.iff	3	1	Tatooine
 object/tangible/veteran_reward/frn_vet_carbonite_ugnaught.iff	51		Ugnaught in Carbonite
 object/tangible/veteran_reward/frn_couch_falcon_section_s01.iff	6		YT-1300 Modular Seating
 object/tangible/veteran_reward/frn_couch_falcon_corner_s01.iff	6		YT-1300 Passenger Lounge
+
+item_bestine_decorative_sword_01_01
+item_ornate_rug_01_01
