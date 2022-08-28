@@ -245,6 +245,7 @@ public class base_player extends script.base_script
         null,
         null,
         null,
+		null,
         new vector(0.0f, 0.0f, 0.0f),
         new vector(0.0f, 0.0f, 0.0f),
         new vector(0.0f, 0.0f, 0.0f),
@@ -263,9 +264,9 @@ public class base_player extends script.base_script
         "space_lok",
         "space_dantooine",
         "space_dathomir",
-		"space_dxun"
+		"space_dxun",
         "space_kashyyyk",
-        "space_nova_orion",
+        "space_nova_orion"
     };
     public static final String[] WAYPOINT_SPACE_ZONES_INTERNAL = 
     {
@@ -279,9 +280,9 @@ public class base_player extends script.base_script
         "space_lok",
         "space_dantooine",
         "space_dathomir",
-		"space_dxun"
+		"space_dxun",
         "space_kashyyyk",
-        "space_nova_orion",
+        "space_nova_orion"
     };
     public static final boolean LOGGING_ON = true;
     public static final String LOGNAME = "junk_log";
