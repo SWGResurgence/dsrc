@@ -209,11 +209,11 @@ public class base_player extends script.base_script
         "lok",
         "dantooine",
         "dathomir",
+		"dxun",
         "kachirho",
         "etyyy",
         "khowir",
-        "mustafar",
-        "dxun"
+        "mustafar"
     };
     public static final String[] WAYPOINT_GROUND_PLANETS_INTERNAL = 
     {
@@ -227,11 +227,11 @@ public class base_player extends script.base_script
         "lok",
         "dantooine",
         "dathomir",
+		"dxun",
         "kashyyyk_main",
         "kashyyyk_hunting",
         "kashyyyk_dead_forest",
-        "mustafar",
-        "dxun"
+        "mustafar"
     };
     public static final vector[] WAYPOINT_GROUND_PLANETS_BUILDOUT_COORDS = 
     {
@@ -263,9 +263,9 @@ public class base_player extends script.base_script
         "space_lok",
         "space_dantooine",
         "space_dathomir",
+		"space_dxun"
         "space_kashyyyk",
         "space_nova_orion",
-        "space_dxun"
     };
     public static final String[] WAYPOINT_SPACE_ZONES_INTERNAL = 
     {
@@ -279,9 +279,9 @@ public class base_player extends script.base_script
         "space_lok",
         "space_dantooine",
         "space_dathomir",
+		"space_dxun"
         "space_kashyyyk",
         "space_nova_orion",
-        "space_dxun"
     };
     public static final boolean LOGGING_ON = true;
     public static final String LOGNAME = "junk_log";
