@@ -4,9 +4,9 @@
 @class tangible_object_template 3
 @class object_template 4
 
-objectName = "mob/creatures"  "world_boss_elder_ancient_krayt_dragon"
+objectName = "mob/creature_names"  "world_boss_elder_ancient_krayt_dragon"
 detailedDescription = "" ""
-lookAtText = "mob/creatures"  "world_boss_elder_ancient_krayt_dragon"
+lookAtText = "mob/creature_names"  "world_boss_elder_ancient_krayt_dragon"
 
 appearanceFilename = "appearance/krayt_dragon_hue.sat"
 clientDataFile = "clientdata/creature/client_shared_cr_krayt_dragon.cdf"
