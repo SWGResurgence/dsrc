@@ -543,7 +543,8 @@ public class destroy_duty extends script.base_script
         int tokens = reward / 125;
         if (hasObjVar(playerShip, "spaceFaction.overt"))
         {
-            tokens += tokens / 2;
+            int pvpTokens = tokens / 2;
+			tokens = tokens + pvpTokens;
         }
         tokens *= dutyTokenBonus;
         prose_package pt = prose.getPackage(SID_TOKEN_REWARD, tokens);
