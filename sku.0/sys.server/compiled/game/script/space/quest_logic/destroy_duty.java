@@ -542,7 +542,6 @@ public class destroy_duty extends script.base_script
             break;
         }
         money.bankTo(money.ACCT_SPACE_QUEST_REWARD, player, reward);
-        obj_id pInv = utils.getInventoryContainer(player);
         obj_id playerShip = space_transition.getContainingShip(player);
         int tokens = reward / 250;
         if (tokens < 1)
@@ -557,6 +556,10 @@ public class destroy_duty extends script.base_script
         prose_package pt = prose.getPackage(SID_TOKEN_REWARD, tokens);
         sendQuestSystemMessage(player, pt);
         static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, tokens);
+		dictionary dict = new dictionary();
+		dict.put("tokenIndex", 9);
+		dict.put("tokenCount", tokens);
+		utils.messageTo(player, "handleAwardtoken", dict, 0 false);
         CustomerServiceLog("space_piracy", "Player " + player + " have received " + tokens + " Space Duty Tokens (item_token_duty_space_01_01)");
         return SCRIPT_CONTINUE;
     }
