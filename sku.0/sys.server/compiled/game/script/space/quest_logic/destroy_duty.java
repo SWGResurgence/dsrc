@@ -5,7 +5,9 @@ import script.library.*;
 
 public class destroy_duty extends script.base_script
 {
-    //private static final float dutyTokenBonus = Float.parseFloat(getConfigSetting("GameServer", "dutyTokenBonus"));
+    public destroy_duty()
+    {
+    }
     public static final string_id SID_TARGET_LOCATED = new string_id("space/quest", "destroy_duty_target_located");
     public static final string_id SID_TARGET_DETECTED = new string_id("space/quest", "destroy_duty_target_detected");
     public static final string_id SID_BOSS_DETECTED = new string_id("space/quest", "destroy_duty_boss_detected");
@@ -433,14 +435,14 @@ public class destroy_duty extends script.base_script
         setObjVar(self, "rounddeadships", rounddeadships);
         removeObjVar(self, "deadships");
         dictionary outparams = new dictionary();
-        if (wavescomplete == wavesperround || hasObjVar(self, "currentBossLevel"))
+        if ((wavescomplete == wavesperround) || hasObjVar(self, "currentBossLevel"))
         {
             setObjVar(self, "wavescomplete", 0);
             int roundscomplete = getIntObjVar(self, "roundscomplete");
             roundscomplete++;
             setObjVar(self, "roundscomplete", roundscomplete);
             int roundsperlevel = getIntObjVar(self, "roundsPerLevel");
-            if (roundscomplete == roundsperlevel || hasObjVar(self, "currentBossLevel"))
+            if ((roundscomplete == roundsperlevel) || hasObjVar(self, "currentBossLevel"))
             {
                 if (!hasObjVar(self, "currentBossLevel"))
                 {
@@ -547,6 +549,11 @@ public class destroy_duty extends script.base_script
         {
             tokens = 1;
         }
+        if (hasObjVar(playerShip, "spaceFaction.overt"))
+        {
+            int pvpTokens = tokens / 2;
+            tokens = tokens + pvpTokens;
+        }
         prose_package pt = prose.getPackage(SID_TOKEN_REWARD, tokens);
         sendQuestSystemMessage(player, pt);
         static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, tokens);
@@ -601,7 +608,11 @@ public class destroy_duty extends script.base_script
     }
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
-        if (params != null && hasObjVar(self, "in_progress"))
+        if (params == null)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (hasObjVar(self, "in_progress"))
         {
             clearTargetWaypoint(self);
             cleanupShips(self);
