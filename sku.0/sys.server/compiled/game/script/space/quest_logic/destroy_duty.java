@@ -541,10 +541,6 @@ public class destroy_duty extends script.base_script
         obj_id pInv = utils.getInventoryContainer(player);
         obj_id playerShip = space_transition.getContainingShip(player);
         int tokens = reward / 125;
-        if (tokens < 1)
-        {
-            tokens = 1;
-        }
         if (hasObjVar(playerShip, "spaceFaction.overt"))
         {
             tokens += tokens / 2;
