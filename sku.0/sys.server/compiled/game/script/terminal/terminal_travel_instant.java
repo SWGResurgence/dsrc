@@ -104,6 +104,7 @@ public class terminal_travel_instant extends script.base_script
             if (success) {
                 utils.setScriptVar(self, "transport", 1);
             }
+			sendSystemMessageTestingOnly(player, Debugging Travel Options);
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
