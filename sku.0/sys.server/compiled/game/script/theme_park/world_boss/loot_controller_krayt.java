@@ -1,14 +1,17 @@
-package script.theme_park;
+package script.theme_park.world_boss;
 
 import script.dictionary;
-
+import script.library.*;
 import script.library.ai_lib;
 import script.library.static_item;
 import script.library.utils;
-
 import script.obj_id;
 
-public class loot_controller_krayt extends script.base_script {
+public class loot_controller_peko extends script.base_script {
+    public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException {
+        sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getName(killer));
+        return SCRIPT_CONTINUE;
+    }
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException {
         obj_id corpseInventory = utils.getInventoryContainer(self);
         if (corpseInventory == null) {
@@ -30,15 +33,15 @@ public class loot_controller_krayt extends script.base_script {
             return;
         }
         int x = rand(1, 100);
-		if(x < 61){  // 60% Drop Rate: TCG: Tatooine Travel Advertisement
-			static_item.createNewItemFunction("item_tcg_loot_reward_series4_tatooine_travel_advertisement_02_01");
-			if(x < 26){  // 25% Drop Rate: TCG: Toydarian Greeter
-				static_item.createNewItemFunction("item_tcg_loot_reward_series3_greeter_toydarian", corpseInventory);
-			}
-		}
-        /*String myLoot1 = "object/tangible/ship/crafted/chassis/grievous_starfighter_reward_deed.iff";
-        String myLoot2 = "object/tangible/wearables/cybernetic/s02/cybernetic_s02_arm_r.iff";
+        if (x < 61) { // 60% Drop Rate: TCG - Tatooine Travel Advertisement
+            static_item.createNewItemFunction("item_tcg_loot_reward_series4_tatooine_travel_advertisement_02_01", corpseInventory);
+        }
+        if (x < 26) { // 25% Drop Rate: TCG - Toydarian Greeter
+            static_item.createNewItemFunction("item_tcg_loot_reward_series3_greeter_toydarian", corpseInventory);
+        }
+        /*String myLoot1 = "";
         createObject(myLoot1, corpseInventory, "");
+        String myLoot2 = "";
         createObject(myLoot2, corpseInventory, "");*/
         return;
     }
