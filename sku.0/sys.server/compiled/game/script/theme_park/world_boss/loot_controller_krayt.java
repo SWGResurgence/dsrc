@@ -7,7 +7,7 @@ import script.library.static_item;
 import script.library.utils;
 import script.obj_id;
 
-public class loot_controller_peko extends script.base_script {
+public class loot_controller_krayt extends script.base_script {
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException {
         sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getName(killer));
         return SCRIPT_CONTINUE;
