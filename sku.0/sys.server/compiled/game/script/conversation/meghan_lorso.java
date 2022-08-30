@@ -277,7 +277,7 @@ public boolean meghan_lorso_condition__defaultCondition (obj_id player, obj_id n
 				boolean hasResponse = false;
 			
 				//-- PLAYER: Fair enough, anything else I need to know?
-				boolean hasResponse = false;
+				boolean hasResponse0 = false;
 				if (meghan_lorso_condition__defaultCondition (player, npc))
 				{
 					++numberOfResponses;
