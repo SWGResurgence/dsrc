@@ -127,7 +127,7 @@ public boolean meghan_lorso_condition__defaultCondition (obj_id player, obj_id n
 				if (hasResponse)
 				{
 					int responseIndex = 0;
-					string_id responses [] new string_id [numberOfResponses];
+					string_id responses [] = new string_id [numberOfResponses];
 					
 					if (hasResponse0)
 						responses [responseIndex++] = new string_id (c_stringFile, "s_6");
@@ -271,7 +271,7 @@ public boolean meghan_lorso_condition__defaultCondition (obj_id player, obj_id n
 			if (meghan_lorso_condition__defaultCondition (player, npc))
 			{
 				//-- NPC: Here are the Coordinates for Camp Czerka on Rori. You'll find some Czerka Scientists there that will be certain to put your skills and talents to good use.
-				string_id message = = new string_id (c_stringFile, "s_11");
+				string_id message = new string_id (c_stringFile, "s_11");
 				int numberOfResponses = 0;
 			
 				boolean hasResponse = false;
@@ -342,7 +342,7 @@ public boolean meghan_lorso_condition__defaultCondition (obj_id player, obj_id n
 
 	public int OnInitialize(obj_id self) throws InterruptedException
 	{
-		if ((!isMob (self)) || (isPlayer )self)))
+		if ((!isMob (self)) || (isPlayer (self)))
 		{
 			detachScript(self, "conversation/meghan_lorso");
 		}
@@ -353,12 +353,12 @@ public boolean meghan_lorso_condition__defaultCondition (obj_id player, obj_id n
 	
 	public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
 	{
-		int menu = menu_info_data menuInfoData = menuInfo.getMenuItemById (menu);
+		int menu = menuInfo.addRootMenu (menu_info_types.CONVERSE_START, null);
 		menu_info_data menuInfoData = menuInfo.getMenuItemById (menu);
 		menuInfoData.setServerNotify (false);
 		setCondition (self, CONDITION_CONVERSABLE);
 		
-		return SCRIPT_CONTINUE
+		return SCRIPT_CONTINUE;
 	}
 	
 	public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
