@@ -1,27 +1,27 @@
 regionName	geometry	minX_or_centerX	minZ_or_centerZ	maxX_or_radius	maxZ	pvpType	geographicalType	minDifficultyType	maxDifficultyType	spawnableType	missionType	buildable	municipal	visible	notify	environmentFlags
 s	"e(rectangle=0,circle=1)[rectangle]"	f	f	f	f	"e(normal=0,truce=1,pvp_battlefield=2,pve_battlefield=3,pvp_advanced=4)[normal]"	"e(desert=0,forest=1,jungle=2,plateau=3,oasis=4,canyon=5,lake=6,lakeshore=7,beach=8,ocean=9,underwater=10,river=11,volcano=12,swamp=13,plains=14,prairie=15,mountains=16,hills=17,grassland=18,wasteland=19,city=20,fictional=21,pathfind=22,default=23,theater=24,overload=25)[default]"	i	i	"e(spawnFalse=0,spawnTrue=1,mission=2,default=3,difficulty=5)[spawnFalse]"	"e(none=0,destroy=1,other=2,tatooine_anchorhead=3,tatooine_bestine=4,tatooine_mos_eisley=5,tatooine_mos_entha=6,tatooine_mos_espa=7,tatooine_mos_taike=8,tatooine_wayfar=9,naboo_theed=10,naboo_deeja_peak=11,naboo_kaadara=12,naboo_moenia=13,naboo_keren=14,tatooine_bib_1=15,corellia_coronet=16,corellia_tyrena=17,corellia_bela_vistal=18,corellia_vreni_island=19,corellia_kor_vella=20,corellia_daoba_guerfel=21,rori_narmle=22,rori_restuss=23,talus_dearic=24,talus_nashal=25,yavin4_labor_outpost=26,yavin4_mining_outpost=27,endor_neutral_outpost=28,dantooine_mining_outpost=29,dantooine_pirate_outpost=30,dathomir_trade_outpost=31,dathomir_survey_outpost=32,lok_nyms_stronghold=33,dxun_czerka_outpost=34)[none]"	b[1]	b[0]	b[0]	b[0]	s
-dxun	rectangle	-8000	-8000	8000	8000	normal	default	0	0	spawnFalse	none	1	0	0	0	
-@dxun_region_names:world_spawner	rectangle	-8000	-8000	8000	8000	normal	default	70	90	default	other	1	0	0	0	
-@dxun_region_names:desert_one	rectangle	-1500	4000	6000	7000	normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:desert_two	rectangle	2752	5024	5600	6752	normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:mountain_one	circle	-6160	5936	1520		normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:mountain_two	rectangle	-7808	-4416	-7008	3456	normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:mountain_three	rectangle	-2628	6944	7552	7712	normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:mountain_four	rectangle	6656	-5408	7584	7520	normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:plains_one	rectangle	-5504	-672	-3808	3264	normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:plains_two	rectangle	-3296	-1952	-2240	-416	normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:plains_three	rectangle	1216	-512	4960	3072	normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:plains_four	rectangle	416	-5152	2688	-2592	normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:forest_one	rectangle	-4384	3552	-2144	6432	normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:forest_two	rectangle	-6752	-4640	-5536	3552	normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:forest_three	rectangle	-4960	-5792	-928	-3360	normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:forest_four	rectangle	-7999	-7999	7999	7999	normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:forest_five	rectangle	3360	3232	4480	4608	normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:forest_six	rectangle	1500	-6912	6272	-2272	normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:peak_one	circle	-1696	1152	1500		normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:peak_two	circle	-4608	-2464	1500		normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:peak_three	circle	2160	-1328	912		normal	forest	70	90	mission	other	1	0	0	0	
-@dxun_region_names:peak_four	circle	4848	-4144	912		normal	forest	70	90	mission	other	1	0	0	0	
+dxun	rectangle	-8000	-8000	8000	8000	normal	default	0	0	spawnFalse	none	0	0	0	0	
+@dxun_region_names:world_spawner	rectangle	-8000	-8000	8000	8000	normal	default	70	90	default	other	0	0	0	0	
+@dxun_region_names:desert_one	rectangle	-1500	4000	6000	7000	normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:desert_two	rectangle	2752	5024	5600	6752	normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:mountain_one	circle	-6160	5936	1520		normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:mountain_two	rectangle	-7808	-4416	-7008	3456	normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:mountain_three	rectangle	-2628	6944	7552	7712	normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:mountain_four	rectangle	6656	-5408	7584	7520	normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:plains_one	rectangle	-5504	-672	-3808	3264	normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:plains_two	rectangle	-3296	-1952	-2240	-416	normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:plains_three	rectangle	1216	-512	4960	3072	normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:plains_four	rectangle	416	-5152	2688	-2592	normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:forest_one	rectangle	-4384	3552	-2144	6432	normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:forest_two	rectangle	-6752	-4640	-5536	3552	normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:forest_three	rectangle	-4960	-5792	-928	-3360	normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:forest_four	rectangle	-7999	-7999	7999	7999	normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:forest_five	rectangle	3360	3232	4480	4608	normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:forest_six	rectangle	1500	-6912	6272	-2272	normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:peak_one	circle	-1696	1152	1500		normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:peak_two	circle	-4608	-2464	1500		normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:peak_three	circle	2160	-1328	912		normal	forest	70	90	mission	other	0	0	0	0	
+@dxun_region_names:peak_four	circle	4848	-4144	912		normal	forest	70	90	mission	other	0	0	0	0	
 @dxun_region_names:refuge_village_tree_1	circle	84	39	80		normal	city	70	90	spawnFalse	none	0	0	0	0	
 @dxun_region_names:refuge_village_tree_2	circle	4545	-2395	128		normal	city	70	90	spawnFalse	none	0	0	0	0	
 @dxun_region_names:refuge_lake_village_1	circle	1435	-3190	150		normal	city	70	90	spawnFalse	none	0	0	0	0	
