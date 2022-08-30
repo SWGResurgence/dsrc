@@ -4,4 +4,4 @@
 @class tangible_object_template 0
 @class object_template 0
 
-sharedTemplate = "object/mobile/shared_meghan_lorso.iff"
+sharedTemplate = "object/mobile/dxun/shared_meghan_lorso.iff"
