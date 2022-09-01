@@ -5042,8 +5042,6 @@ item_tow_ring_inspiration_04_01	"expertise_en_inspire_pulse_duration_increase=1,
 item_tow_ring_tailor_04_01	"clothing_assembly=25,clothing_experimentation=1,luck_modified=50"										
 item_tow_ring_weaponsmith_04_01	"weapon_assembly=25,weapon_experimentation=1,luck_modified=50"										
 item_painting_resurgence_mandalorian_knights_01_01											
-item_resurgence_mandalorian_banner_01_01											
-item_resurgence_mandalorian_banner_freestanding_01_01											
 item_basilisk_war_droid_itv											
 item_mandalorian_standing_sign_02_01	special_sign_mandalorian_standing=1		string:static_item=item_mandalorian_standing_sign_02_01								
 item_mandalorian_hanging_sign_02_01	special_sign_mandalorian_hanging=1		string:static_item=item_mandalorian_hanging_sign_02_01								
@@ -5068,3 +5066,7 @@ item_veteran_reward_token_box_medium_01_01
 item_veteran_reward_token_box_medium_01_02											
 item_veteran_reward_token_box_large_01_01											
 item_veteran_reward_token_box_large_01_02											
+item_resurgence_czerka_banner_01_01
+item_resurgence_czerka_banner_01_02
+item_resurgence_mandalorian_banner_01_01
+item_resurgence_mandalorian_banner_01_02
