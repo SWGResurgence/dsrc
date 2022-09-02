@@ -3,8 +3,8 @@
 @class static_object_template 0
 @class object_template 5
 
-objectName = "static_item_n"  "item_resurgence_mandalorian_banner_hanging_01_01"
-detailedDescription = "static_item_d"  "item_resurgence_mandalorian_banner_hanging_01_01"
+objectName = "static_item_n"  "item_resurgence_czerka_banner_01_03"
+detailedDescription = "static_item_d"  "item_resurgence_czerka_banner_01_03"
 
 appearanceFilename = "appearance/mun_dxun_banner_generic_s01.apt"
 portalLayoutFilename = ""
