@@ -374,3 +374,15 @@ tusken_iso_s_warrior_ranged		bh_dm_crit_8	3	100		bh_dm_8	6	100		sp_dot_5	9	100		
 wod_mutant_rancor_boss	WoD - Mutant Rancor Boss	bm_dampen_pain_5	2	100	once	bm_stomp_5	4	100		bm_shaken_3	6	100	once	bm_shaken_3	9	100		death_troopers_death_wing_afflict	12	100																																						
 ep3_rryatt_katarn	Rryatt Trail - Katarn Boss	bm_dampen_pain_4	2	100	once	bm_stomp_4	4	100		bm_shaken_2	6	100	once	bm_shaken_2	9	100		me_hot_2	15	100																																						
 world_boss_peko	Naboo World Boss	bm_bolster_armor_5	2	100	once	trample_random	3	100		bm_siphon_master	6	100		bm_dampen_pain_5	2	100	once	bm_stomp_5	9	100		bm_shaken_3	6	100	once	bm_shaken_3	18	100																														
+world_boss_krayt	Tatooine World Boss	bm_bolster_armor_5	2	100		trample_random	3	100		bm_enfeeble_5	9	100		bm_damage_disease_5	15	100	once	bm_siphon_master	6	100		bm_stomp_5	4	100		me_hot_1	20	100		bm_claw_5	4	100		bm_dampen_pain_5	2	100	once																					
+dxun_boma	Boma																																																									
+dxun_cannok	Cannok																																																									
+dxun_devourer	Devourer																																																									
+dxun_drexl	Drexl																																																									
+dxun_gharzr	Gharzr																																																									
+dxun_maalraas	Maalraas																																																									
+dxun_skreev	Skreev																																																									
+dxun_varlax	Varlax																																																									
+dxun_wodnakki	Wodnakki																																																									
+dxun_zakkeg	Zakkeg																																																									
+czerka_hk80_assault_droid	Czerka Assault Droid	bh_dm_8	9	100		bh_dm_crit_8	3	100		bh_dm_cc_3	3	100		bh_dread_strike_5	3	100		ig88_droideka_shield	6	100																																						

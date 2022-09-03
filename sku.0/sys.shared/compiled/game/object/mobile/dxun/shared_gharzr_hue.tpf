@@ -1,0 +1,16 @@
+@base object/mobile/skeleton/shared_cat_predatory.iff
+
+@class creature_object_template 10
+
+species = SP_bolma
+
+@class tangible_object_template 5
+@class object_template 5
+
+objectName = "monster_name"  "gharzr"
+detailedDescription = "" ""
+lookAtText = "monster_lookat"  "gharzr"
+
+appearanceFilename = "appearance/narglatch_hue.sat"
+
+clientDataFile = "clientdata/index/client_shared_index_1_1.cdf"

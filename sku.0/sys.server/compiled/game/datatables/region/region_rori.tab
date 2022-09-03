@@ -160,3 +160,4 @@ gcw_region_rori_9	circle	148	-4192	3100		normal	fictional	0	0	spawnFalse	none	1	
 gcw_region_rori_10	circle	4648	-1852	1900		normal	fictional	0	0	spawnFalse	none	1	0	0	0
 gcw_region_rori_11	circle	-4772	-5512	1900		normal	fictional	0	0	spawnFalse	none	1	0	0	0
 gcw_region_rori_12	circle	5128	-5792	2000		normal	fictional	0	0	spawnFalse	none	1	0	0	0
+czerka_camp	circle	1413	4333	1200		normal	default	0	0	spawnFalse	none	0	0	0	0

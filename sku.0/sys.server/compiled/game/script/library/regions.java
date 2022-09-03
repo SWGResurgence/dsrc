@@ -70,7 +70,8 @@ public class regions extends script.base_script
     public static final int MISSION_DATHOMIR_TRADE_OUTPOST = 31;
     public static final int MISSION_DATHOMIR_SURVEY_OUTPOST = 32;
     public static final int MISSION_LOK_NYMS_STRONGHOLD = 33;
-    public static final int MISSION_MAX = 34;
+    public static final int MISSION_DXUN_CZERKA_OUTPOST = 34;
+    public static final int MISSION_MAX = 35;
     public static final int RD_NEWBIE = 0;
     public static final int RD_EASY = 1;
     public static final int RD_NORMAL = 2;
@@ -227,6 +228,8 @@ public class regions extends script.base_script
                 return MISSION_DATHOMIR_SURVEY_OUTPOST;
             case "lok_nyms_stronghold":
                 return MISSION_LOK_NYMS_STRONGHOLD;
+            case "dxun_czerka_outpost":
+                return MISSION_DXUN_CZERKA_OUTPOST;
         }
         return 0;
     }
@@ -292,6 +295,12 @@ public class regions extends script.base_script
         if (objNamedPlanet == objPlanet)
         {
             return "rori";
+        }
+        objNamedPlanet = getPlanetByName("dxun");
+        LOG("regions_spam", "dxun is " + objNamedPlanet);
+        if (objNamedPlanet == objPlanet)
+        {
+            return "dxun";
         }
         return null;
     }
