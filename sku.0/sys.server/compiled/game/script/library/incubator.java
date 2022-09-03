@@ -27,7 +27,7 @@ public class incubator extends script.base_script
     public static final int RESOURCE_POWER_AMOUNT_CAP = 50000;
     public static final int POWER_PER_SESSION = 2500;
     public static final int MAX_MUTAGEN_POINTS = 20;
-    public static final int MUTATION_MAX_INCREASE = 18;
+    public static final int MUTATION_MAX_INCREASE = 26;
     public static final int MAX_MUTATIONS = 3;
     public static final int MUTATION_SKILL_BONUS_AMT = 2;
     public static final float MUTATION_BONUS_DNA = 3.5f;

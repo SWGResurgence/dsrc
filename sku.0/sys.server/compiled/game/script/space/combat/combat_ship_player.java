@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class combat_ship_player extends script.base_script
 {
-    public combat_ship_player()
-    {
-    }
     public static final int CMD_REACTOR_PUMP_DELAY = 120;
     public static final int CMD_IFF_SCRAMBLE_DELAY = 180;
     public static final int CMD_REPAIR_SHIP_DELAY = 240;
@@ -427,7 +424,7 @@ public class combat_ship_player extends script.base_script
             obj_id ship = space_transition.getContainingShip(self);
             transform loc = space_combat.playerCommandSpawnerLocGetter(ship, true);
             String strikePackageType = "squad_test";
-            Vector baddysquad = space_create.createSquad(null, strikePackageType, loc, 20.0f, null);
+            space_create.createSquad(null, strikePackageType, loc, 20.0f, null);
         }
         if (command.equalsIgnoreCase("bomberEvac"))
         {

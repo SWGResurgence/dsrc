@@ -1,6 +1,4 @@
 strItemType
 s
-object/tangible/loot/mustafar/cube_loot/cube_loot_1i.iff
-object/tangible/loot/mustafar/cube_loot/cube_loot_1r.iff
-
-
+item_mustafar_fg_impulse_detector
+item_mustafar_fg_distress_beacon

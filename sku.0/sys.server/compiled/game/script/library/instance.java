@@ -7,6 +7,7 @@ import java.util.Vector;
 public class instance extends script.base_script
 {
     public static final String INSTANCE_DATATABLE = "datatables/instance/instance_datatable.iff";
+    public static final String HEROIC_INSTANCE_DATATABLE = "datatables/instance/heroic_instance_datatable.iff";
     public static final String REQUEST_TYPE = "instance.request_name";
     public static final String REQUEST_TEAM = "instance.request_team";
     public static final String REQUEST_TRIGGER = "instance.request_trigger";

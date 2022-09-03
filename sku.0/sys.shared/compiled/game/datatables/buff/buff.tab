@@ -611,11 +611,12 @@ incognito	incognito			1	command.incognito	-1		0	invis	0		0		0		0	STATE_NONE	none
 startled	stealthFailure			1	command.traumatize	20	movement	30	combat_slow	30		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 caltropSnare	caltropSnare	snare		3	command.crippleAttack	15	movement	25		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 flashBang	flashBang			3	command.startleShot	10	precision_modified	-100	strength_modified	-100		0		0		0	STATE_BLINDED	none			1	1		1	1	1	0	1	1	0	1	1	1
-towArmorAssembly	genBuff_4			80	buffs.genericBuff	-1	armor_assembly	10		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
-towWeaponAssembly	genBuff_4			80	buffs.genericBuff	-1	weapon_assembly	10		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
-towDroidAssembly	genBuff_4			80	buffs.genericBuff	-1	droid_assembly	10		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
-towMedAssembly	genBuff_4			80	buffs.genericBuff	-1	medicine_assembly	10		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
-towFoodAssembly	genBuff_4			80	buffs.genericBuff	-1	food_assembly	10		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+towArmorAssembly	genBuff_4			80	buffs.genericBuff	-1	armor_assembly	50	armor_experimentation	5	luck_modified	100		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+towWeaponAssembly	genBuff_4			80	buffs.genericBuff	-1	weapon_assembly	50	weapon_experimentation	5	luck_modified	100		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+towDroidAssembly	genBuff_4			80	buffs.genericBuff	-1	droid_assembly	50	droid_experimentation	5	cybernetic_assembly	50	cybernetic_experimentation	5	luck_modified	100	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+towMedAssembly	genBuff_4			80	buffs.genericBuff	-1	bm_incubator_dps_armor	3	incubation_time_reduction	11	bm_xp_mod_boost	5		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+towFoodAssembly	genBuff_4			80	buffs.genericBuff	-1	food_assembly	50	food_experimentation	5	clothing_assembly	50	clothing_experimentation	5	luck_modified	100	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+towStructuresAssembly	genBuff_4			80	buffs.genericBuff	-1	structures_assembly	50	structures_experimentation	5	luck_modified	100		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 towFacGuardDefenseItem	genBuff_4			58	command.powerBoost	20	agility_modified	160		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towForemanCoolingItem	genBuff_4			58	command.countertoxinSpray	30	luck_modified	160		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towForemanBurstRun	burstrun	escape		1	command.burstRun	60	movement	0		0		0		0		0	STATE_NONE	removeBurstRun			1	0		1	1	1	0	1	1	0	1	1	1
@@ -719,7 +720,7 @@ sm_sly_lie	sly_lie			10	command.sm_path_sly_lie	600	expertise_sly_lie	0		0		0		0
 sm_fast_talk	fast_talk			10	command.sm_path_fast_talk	600	expertise_fast_talk	0		0		0		0		0	STATE_NONE	none	appearance/pt_smuggler_fast_talk.prt		1	0		1	1	1	0	1	1	0	1	1	1
 sm_off_the_cuff	off_the_cuff			10	command.sm_general_off_the_cuff	10	expertise_next_hit_crit	0	expertise_crit_remove_buff	0		0		0		0	STATE_NONE	none	clienteffect/sm_off_the_cuff.cef		1	0		1	1	1	0	1	1	0	1	1	1
 sm_end_of_the_line	end_of_the_line			26	command.sm_general_end_of_the_line	10	expertise_crit_double_damage	0	expertise_crit_remove_buff	0		0		0		0	STATE_NONE	none	clienteffect/sm_end_of_the_line.cef		1	0		1	1	1	0	1	1	0	1	1	1
-sm_nerf_herder	nerf_herder			10	command.sm_nerf_herder	10	expertise_crit_root	0	expertise_crit_remove_buff	0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+sm_nerf_herder	nerf_herder			10	command.sm_nerf_herder	10	expertise_crit_root	0	expertise_crit_remove_buff	0		0		0		0	STATE_NONE	none			1	0		1	1	0	0	1	1	0	1	1	1
 sm_nerf_herder_root	root			50	command.sm_nerf_herder	10	movement	0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 sm_narrow_escape_1	narrow_escape			34	command.sm_general_narrow_escape	4	movement_resist_snare	100	movement	0		0		0		0	STATE_NONE	none	clienteffect/sm_narrow_escape.cef		1	0		1	1	1	0	1	1	0	1	1	1
 sm_narrow_escape_2	narrow_escape			50	command.sm_general_narrow_escape	6	movement_resist_snare	100	movement	0		0		0		0	STATE_NONE	none	clienteffect/sm_narrow_escape.cef		1	0		1	1	1	0	1	1	0	1	1	1
@@ -1076,7 +1077,7 @@ gcw_base_damage_absorb_b	gcw_base_damage_absorb			4	command.shock	1800	expertise
 gcw_base_damage_absorb_c	gcw_base_damage_absorb			3	command.shock	1800	expertise_innate_protection_kinetic	300	expertise_innate_protection_energy	300		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_damage_absorb_d	gcw_base_damage_absorb			2	command.shock	1800	expertise_innate_protection_kinetic	500	expertise_innate_protection_energy	500		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_damage_absorb_e	gcw_base_damage_absorb			1	command.shock	1800	expertise_innate_protection_kinetic	750	expertise_innate_protection_energy	750		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-fs_forsake_fear	expertiseActionHeal	channeled		18	command.fs_path_forsake_fear	10	group	0	expertise_channel_action_heal	6		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+fs_forsake_fear	expertiseActionHeal	channeled		18	command.fs_path_forsake_fear	10	group	0	expertise_channel_action_heal	6	action	2000	expertise_action_all	5		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_critical_heal_a	gcw_critical_heal			1	command.powerBoost	1800	avoid_incap_heal	800		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_critical_heal_b	gcw_critical_heal			2	command.powerBoost	1800	avoid_incap_heal	1600		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 gcw_base_critical_heal_c	gcw_critical_heal			3	command.powerBoost	1800	avoid_incap_heal	2500		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -1105,12 +1106,12 @@ of_focus_fire_3	focusFire	of_aura_2		48	command.of_focus_fire	270	group	0	expert
 of_focus_fire_4	focusFire	of_aura_2		62	command.of_focus_fire	270	group	0	expertise_strikethrough_chance	4	combat_strikethrough_value	26	expertise_critical_niche_all	3		0	STATE_NONE	none	clienteffect/off_focus_fire.cef		1	0		1	1	1	0	1	1	0	1	1	1
 of_focus_fire_5	focusFire	of_aura_2		76	command.of_focus_fire	270	group	0	expertise_strikethrough_chance	4	combat_strikethrough_value	29	expertise_critical_niche_all	4		0	STATE_NONE	none	clienteffect/off_focus_fire.cef		1	0		1	1	1	0	1	1	0	1	1	1
 of_focus_fire_6	focusFire	of_aura_2		90	command.of_focus_fire	270	group	0	expertise_strikethrough_chance	5	combat_strikethrough_value	32	expertise_critical_niche_all	5		0	STATE_NONE	none	clienteffect/off_focus_fire.cef		1	0		1	1	1	0	1	1	0	1	1	1
-of_inspiration_1	offInspire			26	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	870		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
-of_inspiration_2	offInspire			34	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	1111		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
-of_inspiration_3	offInspire			48	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	1532		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
-of_inspiration_4	offInspire			62	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	1954		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
-of_inspiration_5	offInspire			76	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	2374		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
-of_inspiration_6	offInspire			90	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	2800		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
+of_inspiration_1	offInspire			26	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	1307		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
+of_inspiration_2	offInspire			34	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	1667		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
+of_inspiration_3	offInspire			48	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	2298		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
+of_inspiration_4	offInspire			62	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	2931		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
+of_inspiration_5	offInspire			76	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	3561		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
+of_inspiration_6	offInspire			90	command.of_inspiration	35	group	0	expertise_action_all	5	healing_action	4200		0		0	STATE_NONE	none	clienteffect/off_inspiration.cef		1	0		1	1	1	0	1	1	0	1	1	1
 of_scatter_1	groupSpeed			26	command.of_scatter	10	group	0	movement	0	expertise_glancing_blow_all	5	movement_resist_snare	100	movement_resist_root	100	STATE_NONE	none	clienteffect/off_scatter.cef		1	0		1	1	1	0	1	1	0	1	1	1
 of_charge_1	groupSpeed			26	command.of_charge	10	group	0	movement	0	expertise_damage_all	10	expertise_action_all	10	movement_resist_snare	100	STATE_NONE	none	clienteffect/off_charge.cef		1	0		1	1	1	0	1	1	0	1	1	1
 of_deb_def_1	paintTarget			3	command.of_deb_def	10	expertise_dodge	-2	expertise_parry	-2	critical_hit_vulnerable	3		0		0	STATE_NONE	none	appearance/pt_special_attack_volley_fire.prt		1	1		1	1	1	0	1	1	0	1	1	1
@@ -1133,13 +1134,13 @@ pvp_aura_buff_self	pvpAuraBuff			100	command.pvp_aura_buff_self	180	agility_modi
 pvp_aura_buff_target	pvpAuraBuff			99	command.pvp_aura_buff_self	10	agility_modified	200	constitution_modified	120	expertise_innate_protection_kinetic	750	expertise_innate_protection_energy	750		0	STATE_NONE	none	appearance/pt_aurabuff_imperial.prt		1	0		1	1	1	0	1	1	0	1	1	1
 pvp_aura_buff_rebel_self	pvpAuraBuff			100	command.pvp_aura_buff_rebel_self	180	agility_modified	200	constitution_modified	120	expertise_innate_protection_kinetic	750	expertise_innate_protection_energy	750	pvp_aura_buff_self	0	STATE_NONE	none	appearance/pt_aurabuff_rebel_caster.prt		1	0		1	1	1	0	1	1	0	1	1	1
 pvp_aura_buff_rebel_target	pvpAuraBuff			99	command.pvp_aura_buff_rebel_self	10	agility_modified	200	constitution_modified	120	expertise_innate_protection_kinetic	750	expertise_innate_protection_energy	750		0	STATE_NONE	none	appearance/pt_aurabuff_rebel.prt		1	0		1	1	1	0	1	1	0	1	1	1
-of_firepower	of_firepower			90	command.of_firepower	60	expertise_damage_line_of_aoe	125	expertise_critical_line_of_aoe	50		0		0		0	STATE_NONE	none	clienteffect/off_superior_firepower.cef		1	0		1	1	1	0	1	1	0	1	1	1
-of_tactical_drop_1	genBuff_3			26	command.powerBoost	3600	constitution_modified	75		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-of_tactical_drop_2	genBuff_3			34	command.powerBoost	3600	constitution_modified	75	expertise_critical_niche_all	5		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-of_tactical_drop_3	genBuff_3			48	command.powerBoost	3600	constitution_modified	75	expertise_critical_niche_all	5	expertise_dodge	3		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-of_tactical_drop_4	genBuff_3			62	command.powerBoost	3600	constitution_modified	75	expertise_critical_niche_all	5	expertise_dodge	3	expertise_action_all	5		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-of_tactical_drop_5	genBuff_3			76	command.powerBoost	3600	constitution_modified	75	expertise_critical_niche_all	5	expertise_dodge	4	expertise_action_all	5	expertise_damage_all	5	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-of_tactical_drop_6	genBuff_3			90	command.powerBoost	3600	constitution_modified	100	expertise_critical_niche_all	7	expertise_dodge	5	expertise_action_all	7	expertise_damage_all	7	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+of_firepower	of_firepower			90	command.of_firepower	120	expertise_damage_line_of_aoe	125	expertise_critical_line_of_aoe	50		0		0		0	STATE_NONE	none	clienteffect/off_superior_firepower.cef		1	0		1	1	1	0	1	1	0	1	1	1
+of_tactical_drop_1	genBuff_3			26	command.powerBoost	3600	constitution_modified	150		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	0
+of_tactical_drop_2	genBuff_3			34	command.powerBoost	3600	constitution_modified	150	expertise_critical_niche_all	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	0
+of_tactical_drop_3	genBuff_3			48	command.powerBoost	3600	constitution_modified	150	expertise_critical_niche_all	10	expertise_dodge	3		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	0
+of_tactical_drop_4	genBuff_3			62	command.powerBoost	3600	constitution_modified	150	expertise_critical_niche_all	10	expertise_dodge	6	expertise_action_all	10		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	0
+of_tactical_drop_5	genBuff_3			76	command.powerBoost	3600	constitution_modified	150	expertise_critical_niche_all	10	expertise_dodge	8	expertise_action_all	10	expertise_damage_all	5	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	0
+of_tactical_drop_6	genBuff_3			90	command.powerBoost	3600	constitution_modified	300	expertise_critical_niche_all	14	expertise_dodge	10	expertise_action_all	14	expertise_damage_all	7	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	0
 pvp_retaliation_ability	pvpOffensive			100	command.command_pvp_retaliation_ability	120	reac_buff	1		0		0		0		0	STATE_NONE	none	appearance/pt_officer_focus_fire.prt		1	0		1	0	1	0	1	1	0	1	1	1
 pvp_retaliation_rebel_ability	pvpOffensive			100	command.command_pvp_retaliation_rebel_ability	120	reac_buff	1		0		0		0		0	STATE_NONE	none	appearance/pt_officer_focus_fire.prt		1	0		1	0	1	0	1	1	0	1	1	1
 pvp_adrenaline_ability	pvp_adrenaline_ability			90	command.command_pvp_adrenaline_ability	120	reac_buff	1		0		0		0		0	STATE_NONE	none	appearance/pt_officer_tactics.prt		1	0		1	0	1	0	1	1	0	1	1	1
@@ -1161,22 +1162,22 @@ vehicle_5	vehicle			1	command.detonateDroid	-1	expertise_glancing_blow_ranged	90
 exclude_self_exclusive_proxy_of_last_words	deadOfficersFTW			90	command.of_last_words	1	exclude_self	0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 shmiGraveBuff	genBuff_4			100	buffs.genericBuff	3600	strength_modified	60	stamina_modified	60	agility_modified	60	precision_modified	60	luck_modified	60	STATE_NONE	none	clienteffect/bh_shields_effect.cef		1	0		1	0	1	0	1	1	0	1	1	1
 sr88_mine	mine			5	buffs.cryobanSnare	30	movement	0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-me_buff_health_0	medicConstitution			14	command.me_buff_health	600	constitution_modified	35		0		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		1	0	1	0	1	1	0	1	1	1
-me_buff_health_2	medicConstitution			76	command.me_buff_health	600	constitution_modified	250		0		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		1	0	1	0	1	1	0	1	1	1
-me_buff_action_1	medicAction			18	command.me_enhance_action	600	stamina_modified	35		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_action.cef		1	0		1	0	1	0	1	1	0	1	1	1
-me_buff_action_2	medicAction			48	command.me_enhance_action	600	stamina_modified	80		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_action.cef		1	0		1	0	1	0	1	1	0	1	1	1
-me_buff_action_3	medicAction			76	command.me_enhance_action	600	stamina_modified	250		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_action.cef		1	0		1	0	1	0	1	1	0	1	1	1
-me_buff_strength_1	medicStrength			10	command.me_enhance_strength	600	strength_modified	15		0		0		0		0	STATE_NONE	none	appearance/pt_medic_enhance_strength.prt		1	0		1	0	1	0	1	1	0	1	1	1
-me_buff_strength_2	medicStrength			34	command.me_enhance_strength	600	strength_modified	45		0		0		0		0	STATE_NONE	none	appearance/pt_medic_enhance_strength.prt		1	0		1	0	1	0	1	1	0	1	1	1
-me_buff_strength_3	medicStrength			62	command.me_enhance_strength	600	strength_modified	80		0		0		0		0	STATE_NONE	none	appearance/pt_medic_enhance_strength.prt		1	0		1	0	1	0	1	1	0	1	1	1
-me_buff_agility_1	medicAgility			10	command.me_enhance_agility	600	agility_modified	15		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_agility.cef		1	0		1	0	1	0	1	1	0	1	1	1
-me_buff_agility_2	medicAgility			34	command.me_enhance_agility	600	agility_modified	45		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_agility.cef		1	0		1	0	1	0	1	1	0	1	1	1
-me_buff_agility_3	medicAgility			62	command.me_enhance_agility	600	agility_modified	80		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_agility.cef		1	0		1	0	1	0	1	1	0	1	1	1
-me_buff_precision_1	medicPrecision			10	command.me_enhance_precision	600	precision_modified	15		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_precision.cef		1	0		1	0	1	0	1	1	0	1	1	1
-me_buff_precision_2	medicPrecision			34	command.me_enhance_precision	600	precision_modified	45		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_precision.cef		1	0		1	0	1	0	1	1	0	1	1	1
-me_buff_precision_3	medicPrecision			62	command.me_enhance_precision	600	precision_modified	80		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_precision.cef		1	0		1	0	1	0	1	1	0	1	1	1
-me_buff_melee_gb_1	medicBlock			34	command.me_enhance_block	600	expertise_block_chance	10	combat_block_value	200		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_block.cef		1	0		1	0	1	0	1	1	0	1	1	1
-me_buff_ranged_gb_1	medicDodge			34	command.me_enhance_dodge	600	expertise_dodge	5		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_dodge.cef		1	0		1	0	1	0	1	1	0	1	1	1
+me_buff_health_0	medicConstitution			14	command.me_buff_health	600	constitution_modified	35		0		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		1	0	1	0	1	1	0	1	1	0
+me_buff_health_2	medicConstitution			76	command.me_buff_health	600	constitution_modified	250		0		0		0		0	STATE_NONE	none	appearance/pt_heal_2.prt		1	0		1	0	1	0	1	1	0	1	1	0
+me_buff_action_1	medicAction			18	command.me_enhance_action	600	stamina_modified	35		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_action.cef		1	0		1	0	1	0	1	1	0	1	1	0
+me_buff_action_2	medicAction			48	command.me_enhance_action	600	stamina_modified	80		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_action.cef		1	0		1	0	1	0	1	1	0	1	1	0
+me_buff_action_3	medicAction			76	command.me_enhance_action	600	stamina_modified	250		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_action.cef		1	0		1	0	1	0	1	1	0	1	1	0
+me_buff_strength_1	medicStrength			10	command.me_enhance_strength	600	strength_modified	15		0		0		0		0	STATE_NONE	none	appearance/pt_medic_enhance_strength.prt		1	0		1	0	1	0	1	1	0	1	1	0
+me_buff_strength_2	medicStrength			34	command.me_enhance_strength	600	strength_modified	45		0		0		0		0	STATE_NONE	none	appearance/pt_medic_enhance_strength.prt		1	0		1	0	1	0	1	1	0	1	1	0
+me_buff_strength_3	medicStrength			62	command.me_enhance_strength	600	strength_modified	80		0		0		0		0	STATE_NONE	none	appearance/pt_medic_enhance_strength.prt		1	0		1	0	1	0	1	1	0	1	1	0
+me_buff_agility_1	medicAgility			10	command.me_enhance_agility	600	agility_modified	15		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_agility.cef		1	0		1	0	1	0	1	1	0	1	1	0
+me_buff_agility_2	medicAgility			34	command.me_enhance_agility	600	agility_modified	45		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_agility.cef		1	0		1	0	1	0	1	1	0	1	1	0
+me_buff_agility_3	medicAgility			62	command.me_enhance_agility	600	agility_modified	80		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_agility.cef		1	0		1	0	1	0	1	1	0	1	1	0
+me_buff_precision_1	medicPrecision			10	command.me_enhance_precision	600	precision_modified	15		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_precision.cef		1	0		1	0	1	0	1	1	0	1	1	0
+me_buff_precision_2	medicPrecision			34	command.me_enhance_precision	600	precision_modified	45		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_precision.cef		1	0		1	0	1	0	1	1	0	1	1	0
+me_buff_precision_3	medicPrecision			62	command.me_enhance_precision	600	precision_modified	80		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_precision.cef		1	0		1	0	1	0	1	1	0	1	1	0
+me_buff_melee_gb_1	medicBlock			34	command.me_enhance_block	600	expertise_block_chance	10	combat_block_value	200		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_block.cef		1	0		1	0	1	0	1	1	0	1	1	0
+me_buff_ranged_gb_1	medicDodge			34	command.me_enhance_dodge	600	expertise_dodge	5		0		0		0		0	STATE_NONE	none	clienteffect/medic_enhance_dodge.cef		1	0		1	0	1	0	1	1	0	1	1	0
 me_serotonin_boost_1	medicCancelDebuff			26	command.me_serotonin_boost	3	debuff_purge	1		0		0		0		0	STATE_NONE	none	clienteffect/medic_serotonin_boost.cef		1	0		1	0	1	0	1	1	0	1	1	1
 me_cure_affliction_1	medicCancelBuff			26	command.me_cure_affliction	6	dot_reduction_all	5	dot_resist_all	100		0		0		0	STATE_NONE	none	clienteffect/medic_cure_affliction.cef		1	0		1	0	1	0	1	1	0	1	1	1
 me_bacta_resistance_1	healingDebuff			21	command.me_bacta_resistance	18	expertise_healing_reduction	40		0		0		0		0	STATE_NONE	none	clienteffect/medic_bacta_resistance.cef		1	1		1	1	1	0	1	1	0	1	1	1
@@ -1212,7 +1213,7 @@ en_debuff_thrill_2	en_thrill			52	command.en_thrill	10	critical_hit_vulnerable	6
 en_sweeping_pirouette_root	en_sweeping_pirouette_root	root		1	command.en_sweeping_pirouette	3	movement	0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 en_unhealthy_fixation_debuff	en_unhealthy_fixation_debuff			5	command.en_unhealthy_fixation	1	en_unhealthy_stun	0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 en_spiral_kick_snare	en_spiral_kick_snare	snare		3	command.en_spiral_kick	5	movement	0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
-buildabuff_inspiration	inspiration			1	command.inspire	0	buildabuff	1		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+buildabuff_inspiration	inspiration			1	command.inspire	0	buildabuff	1		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	0
 recent_heal	stimpack			1	command.bandages	60		0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 channel_healing	channeling			1	command.channeling	12	channel_heal_health	0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 charge_stun_debuff	charge_stun			100	command.bm_charge	3	movement	0		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
@@ -1459,7 +1460,7 @@ king_head_crack	tusken_king_crack			1	jedi.forceWeaken	6	expertise_healing_reduc
 king_rend	tusken_king_rend			50	command.co_riddle_armor	15	private_armor_bonus	-2000		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 king_sandstorm	king_sandstorm			1	command.bm_wing_buffet	12	glancing_blow_vulnerable	35		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 axkva_crystalize	axkva_crystalize			100	command.shock	60	movement	0	combat_stun	0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
-stasis_recourse	stasis			40	buffs.stasisRecourse	60		0		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
+stasis_recourse	stasis			40	buffs.stasisRecourse	30		0		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 buddy_xp_buff	exp_buff			100	command.cyborgStrengthBuff	1800	xp_bonus_general	100		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 event_lifeday_cookie	event_run_speed			1	command.wookiee_ability	3000	movement	10	constitution_modified	125		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 event_lifeday_drink	event_vitality_boost			1	command.gallopStop	3000	expertise_damage_all	4	expertise_action_all	3		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -1873,7 +1874,7 @@ death_troopers_death_wing_afflict	death_troopers_death_wing_afflict			10	buffs.d
 death_troopers_infection_1	death_troopers_infection			10	buffs.death_troopers_infection_1	300	constitution_modified	-10	stamina_modified	-10		0		0		0	STATE_NONE	death_troopers_infection_1	clienteffect/death_trooper_infection_01.cef	head	1	1		0	0	0	0	1	1	0	1	0	1
 death_troopers_infection_2	death_troopers_infection			20	buffs.death_troopers_infection_2	65	healthPercent	-1.5	actionPercent	-1.5	outbreak_stacking_infection	60		0		0	STATE_NONE	death_troopers_infection_2	clienteffect/death_trooper_infection_02.cef	head	1	1		0	0	0	0	60	1	0	1	0	1
 death_troopers_infection_3	death_troopers_infection			30	buffs.death_troopers_infection_3	60	healthPercent	-90	actionPercent	-90		0		0		0	STATE_NONE	death_troopers_infection_3	clienteffect/death_trooper_infection_03.cef	head	1	1		0	0	0	0	1	1	0	1	0	1
-death_troopers_inoculation	death_troopers_infection			40	buffs.death_troopers_inoculation	3600		0		0		0		0		0	STATE_NONE	death_troopers_inoculation	clienteffect/death_trooper_anti_virus.cef		1	0		0	0	1	0	1	1	0	0	0	0
+death_troopers_inoculation	death_troopers_infection			40	buffs.death_troopers_inoculation	14400		0		0		0		0		0	STATE_NONE	death_troopers_inoculation	clienteffect/death_trooper_anti_virus.cef		1	0		0	0	1	0	1	1	0	0	0	0
 death_troopers_afflicted_konk	death_troopers_afflicted_konk			10	command.sm_pistol_whip	4	movement	0		0		0		0		0	STATE_NONE	none	clienteffect/sm_pistol_whip.cef	head	1	1		1	1	1	0	1	1	0	1	1	1
 death_troopers_no_vehicle	death_troopers_no_vehicle			1		-1		0		0		0		0		0	STATE_NONE	none			0	1		0	1	0	0	1	1	0	1	1	1
 death_troopers_afflicted_npc	afflicted_npc			1	buffs.death_troopers_afflicted_npc	-1	expertise_innate_protection_all	3999	combat_divide_damage_taken	22	combat_glancing_blow_reduction	700		0		0	STATE_NONE	none			0	0		0	1	1	0	1	1	0	1	0	1
@@ -1978,8 +1979,8 @@ of_pt_proxy_7	pt_proxy			62	command.of_deb_def	1	paint_target	7		0		0		0		0	STAT
 of_pt_proxy_8	pt_proxy			72	command.of_deb_def	1	paint_target	8		0		0		0		0	STATE_NONE	none			1	1		0	1	1	0	1	1	0	1	1	1
 of_deadeye_debuff	deadeye_debuff			70	command.of_deadeye_debuff	15	action_burn	50	glancing_blow_vulnerable	30		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 of_emergency_shield	of_emergency_shield			80	command.of_emergency_shield	10	combat_divide_damage_taken	75	combat_divide_damage_dealt	75		0		0		0	STATE_NONE	none	clienteffect/of_em_shields.cef		1	0		1	1	1	0	1	1	0	1	1	1
-banner_buff_entertainer	banner_ent			1	Roadmap.entertainer	600	expertise_dodge	2	expertise_action_all	2	expertise_glancing_blow_all	2	expertise_critical_niche_all	2		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-banner_buff_trader	banner_trad			1	Roadmap.trader	600	luck_modified	250	expertise_reverse_engineering_bonus	5		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+banner_buff_entertainer	banner_ent			1	Roadmap.entertainer	1800	expertise_dodge	2	expertise_action_all	2	expertise_glancing_blow_all	2	expertise_critical_niche_all	2		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+banner_buff_trader	banner_trad			1	Roadmap.trader	1800	luck_modified	250		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 en_action_regen	en_action_regen			10	command.sm_general_elbow_grease	10	expertise_action_weapon_melee	60		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 set_bonus_trader_1	setBonusTrader			1	command.powerBoost	-1	stamina_modified	60		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 set_bonus_trader_2	setBonusTrader			1	command.powerBoost	-1	stamina_modified	90	agility_modified	90		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
@@ -1992,7 +1993,7 @@ event_halloween_costume_skeleton1	shapechange	halloween_shapechange		1	buffs.cos
 costume_hutt_female	shapechange	halloween_shapechange		1	buffs.costume	1800	movement	0	event_halloween_costume	3		0		0		0	STATE_NONE	none			1	0		0	1	1	1	1	1	0	1	1	1
 gcw_rocket_turret	gcw_mini_turret			1		1	gcw_mini_turret	1		0		0		0		0	STATE_NONE	none			0	0		1	1	1	0	1	1	0	1	1	1
 tusken_ritual_1	tusken_ritual_1			100	command.of_deadeye_debuff	30	healing_health	8500		0		0		0		0	STATE_NONE	none	clienteffect/off_last_words.cef		1	0		1	1	1	0	1	1	0	1	1	1
-trader_advanced_buff	genBuff_4			50	buffs.genericBuff	7200	expertise_resource_sampling_increase	100	expertise_resource_quality_increase	50		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+trader_advanced_buff	trader_advanced_buff			50	buffs.genericBuff	7200	expertise_resource_sampling_increase	40	expertise_resource_quality_increase	40		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 trader_limited_shields_charged_handler	bh_shields_handler			10		1	bh_shields_handler	0		0		0		0		0	STATE_NONE	none	clienteffect/bh_shields_effect.cef		0	0		0	1	0	0	1	1	0	1	1	1
 trader_limited_shields	bh_shields			10	command.bh_shields	30	combat_divide_damage_taken	1	bh_shields_charged_handler	0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	50	1	0	1	1	1
 trader_limited_shields_block	bh_shields	bh_shields	bh_shields	15		5		0		0		0		0		0	STATE_NONE	none			0	0		1	1	1	0	1	1	0	1	1	1
@@ -2012,4 +2013,7 @@ tok_ent_invis_buff_tracker_4	collection_ent_token			1	buffs.smuggled	3600		0		0	
 ent_jax_familiar	vr_familiar			4	buffs.genericBuff	-1	expertise_en_inspire_pulse_duration_increase	2																	0								
 hospital_buff	hospital_buff			1	command.bactaInfusion	-1	expertise_buff_duration_line_me_enhance	7200																									
 bm_helper_monkey_domestic	bm_player_buff	tcg_diner_station		1	command.bm_helper_monkey_domestic	900		0	clothing_experimentation	2	clothing_assembly	5	food_assembly	5	food_experimentation	6	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-entertainer_buff	entertainer_buff			1	command.powerBoost	-1	expertise_en_inspire_base_point_increase	10	expertise_en_inspire_pulse_duration_increase	5	expertise_en_inspire_buff_duration_increase	60																					
+entertainer_buff	entertainer_buff			1	command.powerBoost	-1	expertise_en_inspire_base_point_increase	10	expertise_en_inspire_pulse_duration_increase	8	expertise_en_inspire_buff_duration_increase	60																					
+of_deb_off_1	targetTracking			90	command.of_deb_def	20			expertise_dodge	-7	critical_hit_vulnerable	16		0		0	STATE_NONE	none	appearance/pt_officer_paint_target.prt		1	1		1	1	1	0	1	1	0	1	1	1
+of_deb_off_2	identityTracking			90	command.of_deb_def	20	detect_hidden	-50	camouflage	-100		0		0		0	STATE_NONE	none	appearance/pt_officer_paint_target.prt		1	1		1	1	1	0	1	1	0	1	1	1
+tcg_diner_meditation_rooms	tcg_diner_meditation_rooms			1	buffs.tcg_meditation_rooms	-1	jedi_saber_assembly	10	jedi_saber_experimentation	1	luck_modified	100	station_buff	0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1

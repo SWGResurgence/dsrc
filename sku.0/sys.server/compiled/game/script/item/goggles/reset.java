@@ -7,9 +7,6 @@ import script.string_id;
 
 public class reset extends script.base_script
 {
-    public reset()
-    {
-    }
     public static final String[] COLLECTOR_EDITION_ITEMS = 
     {
         "object/tangible/wearables/goggles/goggles_s01.iff",
@@ -24,6 +21,11 @@ public class reset extends script.base_script
     };
     public int createNewGoggles(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
+        String config = getConfigSetting("GameServer", "seGogglesReward");
+        if (config == null || !config.equals("true"))
+        {
+            return SCRIPT_CONTINUE;
+        }
         boolean createFailed = false;
         if (features.isCollectorEdition(self) || features.isJPCollectorEdition(self))
         {

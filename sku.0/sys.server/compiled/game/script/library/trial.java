@@ -255,43 +255,47 @@ public class trial extends script.base_script
     public static final int TIME_MONSTER_WIN = 60 * 60 * 20;
     public static final String[] HEROIC_TOKENS = 
     {
-		"item_heroic_token_axkva_01_01", 					  //#0    Heroic Token: Nightsister
-    "item_heroic_token_tusken_01_01",					  //#1    Heroic Token: Tusken King
-		"item_heroic_token_ig88_01_01",						  //#2    Heroic Token: Droid Factory
-    "item_heroic_token_black_sun_01_01",				//#3    Heroic Token: Lost Star Destroyer
-    "item_heroic_token_exar_01_01",						  //#4    Heroic Token: Exar Kun
-    "item_heroic_token_echo_base_01_01",				//#5    Heroic Token: Battle of Hoth
-		"item_heroic_token_marauder_01_01",					//#6    Heroic Token: Marauder Instance
-		"item_heroic_token_mustafar_01_01",					//#7    Heroic Token: Mustafar Instances
-		"item_vet_reward_token_01_01",						  //#8    Token: Veteran Rewards
-		"item_token_duty_space_01_01",						  //#9    Token: Space Duty Missions
-		"item_battlefield_rebel_token",						  //#10   Token: Rebel Battlefields
-    "item_battlefield_imperial_token",					//#11   Token: Imperial Battlefields
-		"item_imperial_station_token_01_01",				//#12   Token: Imperial Space GCW
-    "item_rebel_station_token_01_01",					  //#13   Token: Rebel Space GCW
-		"item_gcw_rebel_token",								      //#14   Token: Rebel City Invasions
-    "item_gcw_imperial_token",							    //#15   Token: Imperial City Invasions
-		"item_restuss_imperial_commendation_02_01", //#16   Commendation: Imperial Restuss
-		"item_restuss_rebel_commendation_02_01",		//#17   Commendation: Rebel Restuss
-		"item_empire_day_imperial_token",					  //#18   Token: Imperial Empire Day
-    "item_empire_day_rebel_token",						  //#19   Token: Rebel Empire Day
-    "item_event_lifeday_rebel_token",					  //#20   Token: Rebel Life Day
-    "item_event_lifeday_imperial_token",				//#21   Token: Imperial Life Day
-		"item_event_halloween_coin",						    //#22   Coin: Galactic Moon Festival
-		"item_event_loveday_chak_heart",					  //#23   Token: Love Day Chak Heart
-		"item_pgc_token_01",								        //#24   Token: Copper
-    "item_pgc_token_02",								        //#25   Token: Silver
-    "item_pgc_token_03",								        //#26   Token: Gold
-		"item_meatlump_lump_01_01",							    //#27   Lump: Meatlump
-		"item_nova_orion_space_resource_01_01",			//#28   Token: Midlithe Crystals
-    "item_wod_token_1",                         //#29   Token: Witches of Dathomir
-    "item_wod_token_2",                         //#30   Token: Witches of Dathomir
-    "item_wod_token_3",                         //#31   Token: Witches of Dathomir
-    "item_wod_token_4",                         //#32   Token: Witches of Dathomir
-    "item_wod_token_5",                         //#33   Token: Witches of Dathomir
-    "item_token_apotheosis_01_01",              //#34   Token: Apotheosis of Resurgence 
-    "item_entertainer_token_01_01",             //#35   Token: Entertainer of Achievment
-    "item_treasure_reward_token_01_01"          //#36   Token: Treasure Loot
+        "item_heroic_token_axkva_01_01",            //#0    Heroic Token: Nightsister
+        "item_heroic_token_tusken_01_01",           //#1    Heroic Token: Tusken King
+        "item_heroic_token_ig88_01_01",             //#2    Heroic Token: Droid Factory
+        "item_heroic_token_black_sun_01_01",        //#3    Heroic Token: Lost Star Destroyer
+        "item_heroic_token_exar_01_01",             //#4    Heroic Token: Exar Kun
+        "item_heroic_token_echo_base_01_01",        //#5    Heroic Token: Battle of Hoth
+        "item_heroic_token_marauder_01_01",         //#6    Heroic Token: Marauder Instance
+        "item_heroic_token_mustafar_01_01",         //#7    Heroic Token: Mustafar Instances
+        "item_vet_reward_token_01_01",              //#8    Token: Veteran Rewards
+        "item_token_duty_space_01_01",              //#9    Token: Space Duty Missions
+        "item_battlefield_imperial_token",          //#10   Token: Imperial Battlefields
+        "item_battlefield_rebel_token",             //#11   Token: Rebel Battlefields
+        "item_imperial_station_token_01_01",        //#12   Token: Imperial Space GCW
+        "item_rebel_station_token_01_01",           //#13   Token: Rebel Space GCW
+        "item_gcw_imperial_token",                  //#14   Token: Imperial City Invasions
+        "item_gcw_rebel_token",                     //#15   Token: Rebel City Invasions
+        "item_restuss_imperial_commendation_02_01", //#16   Token: Imperial Restuss
+        "item_restuss_rebel_commendation_02_01",    //#17   Token: Rebel Restuss
+        "item_empire_day_imperial_token",           //#18   Token: Imperial Empire Day
+        "item_empire_day_rebel_token",              //#19   Token: Rebel Empire Day
+        "item_event_lifeday_imperial_token",        //#20   Token: Imperial Life Day
+        "item_event_lifeday_rebel_token",           //#21   Token: Rebel Life Day
+        "item_event_halloween_coin",                //#22   Token: Galactic Moon Festival
+        "item_event_loveday_chak_heart",            //#23   Token: Love Day Chak Heart
+        "item_pgc_token_01",                        //#24   Token: Chronicler Copper
+        "item_pgc_token_02",                        //#25   Token: Chronicler Silver
+        "item_pgc_token_03",                        //#26   Token: Chronicler Gold
+        "item_nova_orion_space_resource_01_01",     //#27   Token: Midlithe Crystals
+        "item_meatlump_lump_01_01",                 //#28   Token: Meatlump
+        "item_wod_token_1",                         //#29   Token: Dathomir Amber
+        "item_wod_token_2",                         //#30   Token: Spider Silk
+        "item_wod_token_3",                         //#31   Token: Rancor Teeth
+        "item_wod_token_4",                         //#32   Token: Whuffa Leather
+        "item_wod_token_5",                         //#33   Token: Rare Dried Herbs
+        "item_wod_token_6",                         //#34   Token: Spell Weaver Crystal
+        "item_token_apotheosis_01_01",              //#35   Token: Apotheosis Token of Achievement 
+        "item_entertainer_token_01_01",             //#36   Token: Entertainer Token of Achievement
+        "item_treasure_reward_token_01_01",         //#37   Token: Treasure Token of Achievement
+        "item_kashyyyk_reward_token_01_01"     ,    //#38   Token: Kashyyyk Token of Freedom
+        "item_aurillian_certified_scroll_01_01",	//#39	Token: Aurilian Certified Scroll
+        "item_world_boss_token_01_01"               //#40   Token: World Boss Token of Achievement
     
     };
     public static final int NUM_HEROIC_TOKEN_TYPES = HEROIC_TOKENS.length;

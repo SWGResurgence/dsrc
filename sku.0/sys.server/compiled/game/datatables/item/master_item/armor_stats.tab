@@ -54,7 +54,7 @@ armor_medic_roadmap_bracer_l_02_01	advanced	recon	1	0.82	0	40000	"constitution_m
 armor_medic_roadmap_bracer_r_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
 armor_medic_roadmap_gloves_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
 armor_medic_roadmap_boots_02_01	advanced	recon	1	0.82	0	40000	"constitution_modified=25,agility_modified=25,luck_modified=25"							
-armor_spy_roadmap_chest_02_01	advanced	battle	1	0.82	0	40000	"camouflag=25,expertise_damage_weapon_1=1,expertise_critical_carbine=1"				"index_color_1=32,index_color_2=34"			
+armor_spy_roadmap_chest_02_01	advanced	battle	1	0.82	0	40000	"camouflage=25,expertise_damage_weapon_1=1,expertise_critical_carbine=1"				"index_color_1=32,index_color_2=34"			
 armor_spy_roadmap_leggings_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
 armor_spy_roadmap_helmet_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			
 armor_spy_roadmap_bicep_l_02_01	advanced	battle	1	0.82	0	40000	"constitution_modified=25,camouflage=25,precision_modified=25"				"index_color_1=32,index_color_2=34"			

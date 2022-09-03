@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class vehicle_control_device extends script.base_script
 {
-    public vehicle_control_device()
-    {
-    }
     public static final boolean debug = false;
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String VCDPING_VCD_SCRIPT_NAME = "systems.vehicle_system.vcd_ping_response";

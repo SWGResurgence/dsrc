@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class callable extends script.base_script
 {
-    public callable()
-    {
-    }
     public static final int CALLABLE_TYPE_UNKNOWN = -1;
     public static final int CALLABLE_TYPE_COMBAT_OTHER = 0;
     public static final int CALLABLE_TYPE_COMBAT_PET = 1;

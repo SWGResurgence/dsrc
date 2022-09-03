@@ -1,4 +1,4 @@
-package script.working.cthurow;
+package script.developer.soe;
 
 import script.dictionary;
 import script.obj_id;

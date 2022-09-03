@@ -1,6 +1,5 @@
 strItemType
 s
-object/tangible/loot/mustafar/cube_loot/cube_loot_1e.iff
-object/tangible/loot/mustafar/cube_loot/cube_loot_1n.iff
-object/tangible/loot/mustafar/cube_loot/cube_loot_1w.iff
-
+item_mustafar_fg_booster
+item_mustafar_fg_small_crate
+item_mustafar_fg_fuse

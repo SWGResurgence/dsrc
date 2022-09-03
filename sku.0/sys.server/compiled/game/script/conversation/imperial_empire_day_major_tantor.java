@@ -5,10 +5,7 @@ import script.*;
 
 public class imperial_empire_day_major_tantor extends script.base_script
 {
-    public imperial_empire_day_major_tantor()
-    {
-    }
-    public static String c_stringFile = "conversation/imperial_empire_day_major_tantor";
+    public static final String c_stringFile = "conversation/imperial_empire_day_major_tantor";
     public boolean imperial_empire_day_major_tantor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
@@ -393,19 +390,19 @@ public class imperial_empire_day_major_tantor extends script.base_script
         String playerName = getPlayerFullName(player);
         if (!collection.removeCollectionForRealsies(player, holiday.REBEL_RESISTANCE_COLLECTION))
         {
-            CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: ERROR. Player: (" + player + ") " + playerName + " was UNABLE to remove their Imperial collection " + holiday.REBEL_RESISTANCE_COLLECTION + " and fix themselves to continue doing Kiosk events.");
+           // CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: ERROR. Player: (" + player + ") " + playerName + " was UNABLE to remove their Imperial collection " + holiday.REBEL_RESISTANCE_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
         else 
         {
-            CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: Player: (" + player + ") " + playerName + " was able to remove their Imperial collection " + holiday.REBEL_RESISTANCE_COLLECTION + " and fix themselves to continue doing Kiosk events.");
+            //CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: Player: (" + player + ") " + playerName + " was able to remove their Imperial collection " + holiday.REBEL_RESISTANCE_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
         if (!collection.removeCollectionForRealsies(player, holiday.REBEL_VANDAL_COLLECTION))
         {
-            CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: ERROR. Player: (" + player + ") " + playerName + " was UNABLE to remove their Imperial collection " + holiday.REBEL_VANDAL_COLLECTION + " and fix themselves to continue doing Kiosk events.");
+            //CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: ERROR. Player: (" + player + ") " + playerName + " was UNABLE to remove their Imperial collection " + holiday.REBEL_VANDAL_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
         else 
         {
-            CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: Player: (" + player + ") " + playerName + " was able to remove their Imperial collection " + holiday.REBEL_VANDAL_COLLECTION + " and fix themselves to continue doing Kiosk events.");
+            //CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: Player: (" + player + ") " + playerName + " was able to remove their Imperial collection " + holiday.REBEL_VANDAL_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
     }
     public String imperial_empire_day_major_tantor_tokenTO_timeLeftRecruitment(obj_id player, obj_id npc) throws InterruptedException

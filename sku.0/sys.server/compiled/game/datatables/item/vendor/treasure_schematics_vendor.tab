@@ -1,7 +1,9 @@
-item	cash	token36	limit	class	script	note
+item	cash	token37	limit	class	script	note
 s[none]	i[0]	i[0]	i[0]	i[0]	s	c
 object/tangible/loot/loot_schematic/agitator_motor_schematic.iff		1				Agitator Motor
 object/tangible/loot/loot_schematic/assorted_fruit_schematic.iff		1				Assorted Fruit Draft Schematic
+item_treasure_map_backpack_schematic_04_01		2				Schematic for Ayelixe/Krongbing Textiles Survival Backpack
+item_treasure_map_backpack_schematic_04_02		5				Schematic for Ayelixe/Krongbing Textiles Survival Backpack V2
 item_treasure_map_bar_piece_straight_s2_schematic		2				Bar Counter Large Schematic
 item_treasure_map_bar_counter_s1_schematic		2				Bar Counter Schematic
 item_treasure_map_bar_piece_curve_s1_schematic		2				Bar Corner Piece 1 Schematic

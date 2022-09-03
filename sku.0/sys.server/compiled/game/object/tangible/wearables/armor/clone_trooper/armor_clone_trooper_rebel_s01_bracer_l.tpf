@@ -9,3 +9,5 @@ armor = ""
 
 sharedTemplate = "object/tangible/wearables/armor/clone_trooper/shared_armor_clone_trooper_rebel_s01_bracer_l.iff"
 
+objvars =+ [ 
+		"skillmod.bonus.luck_modified" = 30, "skillmod.bonus.agility_modified" = 30, "skillmod.bonus.constitution_modified" = 30]

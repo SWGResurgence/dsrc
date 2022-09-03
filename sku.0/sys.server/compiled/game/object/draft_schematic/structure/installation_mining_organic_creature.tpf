@@ -9,7 +9,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "load_bearing_frame",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "load_bearing_frame", ingredient="metal", count=550]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "load_bearing_frame", ingredient="metal", count=5500]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -17,7 +17,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "body_shell_and_casing",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "body_shell_and_casing", ingredient="steel", count=25]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "body_shell_and_casing", ingredient="steel", count=2500]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -25,7 +25,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "structure_foundation",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "structure_foundation", ingredient="ore", count=35]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "structure_foundation", ingredient="ore", count=3500]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -33,7 +33,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "creature_handling_mechanism",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "plant_handling_mechanism", ingredient="metal", count=10]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "plant_handling_mechanism", ingredient="metal", count=1000]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -41,7 +41,7 @@ slots = [
 	optional=false,
 	name = "craft_structure_ingredients_n" "bio_storage_tank",
 	options = [
-		[ingredientType=IT_templateGeneric, ingredients = [[name="craft_structure_ingredients_n" "bio_storage_tank", ingredient="object/tangible/component/structure/wall_module.iff", count=2]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_templateGeneric, ingredients = [[name="craft_structure_ingredients_n" "bio_storage_tank", ingredient="object/tangible/component/structure/wall_module.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],

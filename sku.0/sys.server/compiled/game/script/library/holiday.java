@@ -531,7 +531,7 @@ public class holiday extends script.base_script
     }
     public static boolean playEmpireDayFireWorksAndFlyBys(obj_id masterObject, int faction) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "emperor_statue.playFireWorksAndFlyBys: Function initialized.");
+        //CustomerServiceLog("holidayEvent", "emperor_statue.playFireWorksAndFlyBys: Function initialized.");
         if (!isValidId(masterObject) || !exists(masterObject))
         {
             return false;
@@ -645,7 +645,7 @@ public class holiday extends script.base_script
     }
     public static obj_id[] getEmpireDayWinningPlayers(obj_id holidayObject, Vector eligiblePlayers) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: init");
+        //CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: init");
         if (!isIdValid(holidayObject) || !exists(holidayObject))
         {
             return null;
@@ -658,21 +658,21 @@ public class holiday extends script.base_script
         String empiredayWinnerConfig = getConfigSetting("GameServer", "empireday_ceremony_winners");
         if (empiredayWinnerConfig != null && utils.stringToInt(empiredayWinnerConfig) > -1)
         {
-            CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: The max badge winners was: " + maxEmpireDayWinners + " but there is a server config that might overwrite this amount.");
+            //CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: The max badge winners was: " + maxEmpireDayWinners + " but there is a server config that might overwrite this amount.");
             int configWinners = utils.stringToInt(empiredayWinnerConfig);
-            CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: The server config shows the max badge winners should be: " + configWinners + " checking to see if that is less or more than the current amount.");
+            //CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: The server config shows the max badge winners should be: " + configWinners + " checking to see if that is less or more than the current amount.");
             if (configWinners != maxEmpireDayWinners)
             {
-                CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: The server config if a different amount than the current max so we are using the server config.");
+                //CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: The server config if a different amount than the current max so we are using the server config.");
                 maxEmpireDayWinners = configWinners;
             }
         }
         int originalListSize = eligiblePlayers.size();
         if (originalListSize <= maxEmpireDayWinners)
         {
-            CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: There is less than " + maxEmpireDayWinners + " or exactly " + maxEmpireDayWinners + " winning players");
+            //CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: There is less than " + maxEmpireDayWinners + " or exactly " + maxEmpireDayWinners + " winning players");
             for (Object eligiblePlayer : eligiblePlayers) {
-                CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: Player " + getPlayerName(((obj_id) eligiblePlayer)) + "(" + ((obj_id) eligiblePlayer) + ") was selected for badge.");
+                //CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: Player " + getPlayerName(((obj_id) eligiblePlayer)) + "(" + ((obj_id) eligiblePlayer) + ") was selected for badge.");
             }
             obj_id[] _eligiblePlayers = new obj_id[0];
             if (eligiblePlayers != null)
@@ -682,10 +682,10 @@ public class holiday extends script.base_script
             }
             return _eligiblePlayers;
         }
-        CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: creating lists of players and winners.");
+        //CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: creating lists of players and winners.");
         Vector winningPlayers = new Vector();
         winningPlayers.setSize(0);
-        CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: originalListSize: " + originalListSize);
+        //CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: originalListSize: " + originalListSize);
         for (int i = 0; i < maxEmpireDayWinners; i++)
         {
             int randomWinner = rand(0, (eligiblePlayers.size() - 1));
@@ -700,16 +700,16 @@ public class holiday extends script.base_script
             }
             String playerName = getPlayerName(playerId);
             winningPlayers.add(playerId);
-            CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: Player " + playerName + "(" + playerId + ") was selected for badge.");
+            //CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: Player " + playerName + "(" + playerId + ") was selected for badge.");
             eligiblePlayers.remove(playerId);
             if (eligiblePlayers.size() >= (originalListSize - i))
             {
-                CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: Error with eligiblePlayers list. It did not remove a player on iteration: " + i);
+                //CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: Error with eligiblePlayers list. It did not remove a player on iteration: " + i);
                 break;
             }
             else if (winningPlayers.size() <= (i))
             {
-                CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: Error with winningPlayers list. Did not add a player properly on iteration: " + i);
+                //CustomerServiceLog("holidayEvent", "holiday.getEmpireDayWinningPlayers: Error with winningPlayers list. Did not add a player properly on iteration: " + i);
                 break;
             }
         }
@@ -735,35 +735,35 @@ public class holiday extends script.base_script
         {
             return false;
         }
-        CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") is about to receive event gifts");
+        //CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") is about to receive event gifts");
         String eventGiftOne = IMPERIAL_AND_REBEL_EVENT_GIFT;
         String eventGiftTwo = "";
         if (faction == REBEL_PLAYER)
         {
-            CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") has been identified as faction: " + faction + " so the player will receive appropriate factional gifts");
+            //CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") has been identified as faction: " + faction + " so the player will receive appropriate factional gifts");
             eventGiftTwo = REBEL_REMEMBRANCE_DAY_GIFT;
         }
         else 
         {
-            CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") has been identified as faction: " + faction + " so the player will receive appropriate factional gifts");
+            //CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") has been identified as faction: " + faction + " so the player will receive appropriate factional gifts");
             eventGiftTwo = IMPERIAL_EMPIRE_DAY_GIFT;
         }
         obj_id inv = utils.getInventoryContainer(player);
         if (!isValidId(inv) || !exists(inv))
         {
-            CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") did not have a valid inventory. exiting without giving gifts.");
+            //CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") did not have a valid inventory. exiting without giving gifts.");
             return false;
         }
         obj_id giftOne = static_item.createNewItemFunction(eventGiftOne, inv);
         if (!isValidId(giftOne) || !exists(giftOne))
         {
-            CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") failed to receive gift one: " + eventGiftOne + " this may be due to having a full inventory or the item being corrupted.");
+            //CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") failed to receive gift one: " + eventGiftOne + " this may be due to having a full inventory or the item being corrupted.");
             return false;
         }
         obj_id giftTwo = static_item.createNewItemFunction(eventGiftTwo, inv);
         if (!isValidId(giftTwo) || !exists(giftTwo))
         {
-            CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") failed to receive gift one: " + eventGiftTwo + " this may be due to having a full inventory or the item being corrupted.");
+            //CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") failed to receive gift one: " + eventGiftTwo + " this may be due to having a full inventory or the item being corrupted.");
             return false;
         }
         setObjVar(player, holiday.currentYearObjVar(), 1);
@@ -775,7 +775,7 @@ public class holiday extends script.base_script
         {
             sendSystemMessage(player, GIFT_GRANTED_REBEL);
         }
-        CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") has received " + faction + " gifts: " + eventGiftOne + " and " + eventGiftTwo);
+        //CustomerServiceLog("grantGift", getFirstName(player) + "(" + player + ") has received " + faction + " gifts: " + eventGiftOne + " and " + eventGiftTwo);
         return true;
     }
     public static int getEmoteBeligerence(String emote) throws InterruptedException
@@ -898,12 +898,12 @@ public class holiday extends script.base_script
         obj_id masterObject = holiday.masterObjectObjId(celeb);
         if (!isIdValid(masterObject) && !exists(masterObject))
         {
-            CustomerServiceLog("holidayEvent", "imperial_npc.grantEmperorDayBadge: No Emperor Statue Found! Player: " + player + " cannot receive rewards from Vader!");
+            //CustomerServiceLog("holidayEvent", "imperial_npc.grantEmperorDayBadge: No Emperor Statue Found! Player: " + player + " cannot receive rewards from Vader!");
             return false;
         }
         if (listOfWinners == null || listOfWinners.length <= 0)
         {
-            CustomerServiceLog("holidayEvent", "imperial_npc.grantEmperorDayBadge: The list of winners was not found. Vader cannot give the player his badge.");
+            //CustomerServiceLog("holidayEvent", "imperial_npc.grantEmperorDayBadge: The list of winners was not found. Vader cannot give the player his badge.");
             return false;
         }
         boolean foundPlayerObjVar = false;
@@ -914,13 +914,13 @@ public class holiday extends script.base_script
             {
                 continue;
             }
-            CustomerServiceLog("holidayEvent", "imperial_npc.grantEmperorDayBadge: The player: " + player + " OID was found on Vader, removing it and awarding player badge.");
+            //CustomerServiceLog("holidayEvent", "imperial_npc.grantEmperorDayBadge: The player: " + player + " OID was found on Vader, removing it and awarding player badge.");
             foundPlayerObjVar = true;
             removeObjVar(celeb, "readyForBadge.winner_" + (i + 1));
         }
         if (!foundPlayerObjVar)
         {
-            CustomerServiceLog("holidayEvent", "imperial_npc.grantEmperorDayBadge: The player's objvar was not found. Vader cannot give the player his badge.");
+            //CustomerServiceLog("holidayEvent", "imperial_npc.grantEmperorDayBadge: The player's objvar was not found. Vader cannot give the player his badge.");
             return false;
         }
         doAnimationAction(celeb, "nod_head_once");
@@ -930,19 +930,19 @@ public class holiday extends script.base_script
         {
             if (!badge.grantBadge(player, holiday.EMPIRE_DAY_CHAMPION_BADGE))
             {
-                CustomerServiceLog("holidayEvent", "imperial_npc.grantEmperorDayBadge: Could not modify badge slot: " + holiday.EMPIRE_DAY_CHAMPION_BADGE + " for Player: " + player + ". Player cannot receive rewards from Vader!");
+                //CustomerServiceLog("holidayEvent", "imperial_npc.grantEmperorDayBadge: Could not modify badge slot: " + holiday.EMPIRE_DAY_CHAMPION_BADGE + " for Player: " + player + ". Player cannot receive rewards from Vader!");
                 return false;
             }
             factions.addFactionStanding(player, factions.FACTION_IMPERIAL, 250);
             prose_package pp2 = prose.getPackage(DARTH_BADGE_1);
             prose.setTT(pp2, player);
             chat.chat(celeb, player, pp2);
-            CustomerServiceLog("holidayEvent", "imperial_npc.grantEmperorDayBadge: Player: " + player + " has received their badge.");
+            //CustomerServiceLog("holidayEvent", "imperial_npc.grantEmperorDayBadge: Player: " + player + " has received their badge.");
             return true;
         }
         if (!badge.grantBadge(player, holiday.REMEMBRANCE_DAY_CHAMPION_BADGE))
         {
-            CustomerServiceLog("holidayEvent", "imperial_npc.grantEmperorDayBadge: Could not modify badge slot: " + holiday.EMPIRE_DAY_CHAMPION_BADGE + " for Player: " + player + ". Player cannot receive rewards from Vader!");
+            //CustomerServiceLog("holidayEvent", "imperial_npc.grantEmperorDayBadge: Could not modify badge slot: " + holiday.EMPIRE_DAY_CHAMPION_BADGE + " for Player: " + player + ". Player cannot receive rewards from Vader!");
             return false;
         }
         factions.addFactionStanding(player, factions.FACTION_REBEL, 250);
@@ -986,20 +986,20 @@ public class holiday extends script.base_script
         }
         if (!hasObjVar(eventObject, "objParent"))
         {
-            CustomerServiceLog("holidayEvent", "holiday.replaceEventObject: object " + eventObject + " doesn't have the object parent objvar so it will be destroyed and the player receives no credit.");
+            //CustomerServiceLog("holidayEvent", "holiday.replaceEventObject: object " + eventObject + " doesn't have the object parent objvar so it will be destroyed and the player receives no credit.");
             trial.cleanupObject(eventObject);
             return false;
         }
         obj_id objParent = getObjIdObjVar(eventObject, "objParent");
         if (!isValidId(objParent) || !exists(objParent))
         {
-            CustomerServiceLog("holidayEvent", "holiday.replaceEventObject: object " + eventObject + " could not find parent object: " + objParent + " so it will be destroyed and the player receives no credit.");
+            //CustomerServiceLog("holidayEvent", "holiday.replaceEventObject: object " + eventObject + " could not find parent object: " + objParent + " so it will be destroyed and the player receives no credit.");
             trial.cleanupObject(eventObject);
             return false;
         }
         if (!utils.hasScriptVar(eventObject, "deathTracker"))
         {
-            CustomerServiceLog("holidayEvent", "holiday.replaceEventObject: object " + eventObject + " did not have the deathTracker scriptvar so it will be destroyed and the player receives no credit.");
+            //CustomerServiceLog("holidayEvent", "holiday.replaceEventObject: object " + eventObject + " did not have the deathTracker scriptvar so it will be destroyed and the player receives no credit.");
             trial.cleanupObject(eventObject);
             return false;
         }
@@ -1011,19 +1011,19 @@ public class holiday extends script.base_script
         location loc = utils.getLocationScriptVar(eventObject, "deathTracker");
         if (loc == null)
         {
-            CustomerServiceLog("holidayEvent", "holiday.replaceEventObject: object " + eventObject + " had a corrupt location so it will be destroyed and the player receives no credit.");
+            //CustomerServiceLog("holidayEvent", "holiday.replaceEventObject: object " + eventObject + " had a corrupt location so it will be destroyed and the player receives no credit.");
             trial.cleanupObject(eventObject);
             return false;
         }
         obj_id replacementEventObject = createObject(objectTemplate, loc);
         if (!isValidId(objParent) || !exists(objParent))
         {
-            CustomerServiceLog("holidayEvent", "holiday.replaceEventObject: object " + eventObject + " could not spawn a replacement object. This is likely due to an incorrect replacement template string. The event object will be destroyed and the player receives no credit.");
+            //CustomerServiceLog("holidayEvent", "holiday.replaceEventObject: object " + eventObject + " could not spawn a replacement object. This is likely due to an incorrect replacement template string. The event object will be destroyed and the player receives no credit.");
             trial.cleanupObject(eventObject);
             return false;
         }
         float yaw = getYaw(eventObject);
-        CustomerServiceLog("holidayEvent", "holiday.replaceEventObject: object " + eventObject + " did not have the deathTracker scriptvar so it will be destroyed and the plaeyr receives no credit.");
+        //CustomerServiceLog("holidayEvent", "holiday.replaceEventObject: object " + eventObject + " did not have the deathTracker scriptvar so it will be destroyed and the plaeyr receives no credit.");
         setObjVar(eventObject, "dontCountDeath", 1);
         setObjVar(replacementEventObject, "objParent", objParent);
         setObjVar(replacementEventObject, "fltRespawnTime", respawnTime);
@@ -1036,7 +1036,7 @@ public class holiday extends script.base_script
     }
     public static boolean rewardEmpireDayPlayer(obj_id player, int playerFaction, String parentBuffName, String childBuffName, String collectionSlot, String eventName) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "holiday.rewardEmpireDayPlayer: Player " + player + " is attempting to increment the childcounter buff: " + childBuffName + ".");
+        //CustomerServiceLog("holidayEvent", "holiday.rewardEmpireDayPlayer: Player " + player + " is attempting to increment the childcounter buff: " + childBuffName + ".");
         if (!isValidId(player) || !exists(player))
         {
             return false;
@@ -1067,21 +1067,21 @@ public class holiday extends script.base_script
         }
         if (!buff.hasBuff(player, parentBuffName))
         {
-            CustomerServiceLog("holidayEvent", "holiday.rewardEmpireDayPlayer: Player " + player + " no longer has required parent buff: " + parentBuffName + "  so they cannot receive the counter buff: " + childBuffName + ".");
+            //CustomerServiceLog("holidayEvent", "holiday.rewardEmpireDayPlayer: Player " + player + " no longer has required parent buff: " + parentBuffName + "  so they cannot receive the counter buff: " + childBuffName + ".");
             return false;
         }
-        CustomerServiceLog("holidayEvent", "holiday.rewardEmpireDayPlayer: Player " + player + " has passed validation.");
+        //CustomerServiceLog("holidayEvent", "holiday.rewardEmpireDayPlayer: Player " + player + " has passed validation.");
         String eventType = buff.getStringGroupTwo(parentBuffName);
         if (eventType == null || eventType.equals(""))
         {
-            CustomerServiceLog("holidayEvent", "holiday.rewardEmpireDayPlayer: Player " + player + " tried to apply childbuff: " + childBuffName + " but it had no group2 data so it failed. exiting without giving player credit.");
+            //CustomerServiceLog("holidayEvent", "holiday.rewardEmpireDayPlayer: Player " + player + " tried to apply childbuff: " + childBuffName + " but it had no group2 data so it failed. exiting without giving player credit.");
             return false;
         }
         if (!buff.hasBuff(player, childBuffName))
         {
             if (!eventType.startsWith(BUFF_COMBATANT_GROUP) && !eventType.startsWith(BUFF_SF_GROUP))
             {
-                CustomerServiceLog("holidayEvent", "holiday.rewardEmpireDayPlayer: Player " + player + " tried to apply childbuff: " + childBuffName + " but the group2 is invalid. exiting without giving player credit.");
+                //CustomerServiceLog("holidayEvent", "holiday.rewardEmpireDayPlayer: Player " + player + " tried to apply childbuff: " + childBuffName + " but the group2 is invalid. exiting without giving player credit.");
                 return false;
             }
             if (playerFaction == IMPERIAL_PLAYER)
@@ -1141,7 +1141,7 @@ public class holiday extends script.base_script
                 buff.applyBuff(player, childBuffName);
             }
             play2dNonLoopingSound(player, groundquests.MUSIC_QUEST_COMPLETED);
-            CustomerServiceLog("holidayEvent", "holiday.rewardEmpireDayPlayer: Player " + player + " no longer has required parent buff: " + parentBuffName + "  so they cannot receive the counter buff: " + childBuffName + ".");
+            //CustomerServiceLog("holidayEvent", "holiday.rewardEmpireDayPlayer: Player " + player + " no longer has required parent buff: " + parentBuffName + "  so they cannot receive the counter buff: " + childBuffName + ".");
         }
         else 
         {
@@ -1201,7 +1201,7 @@ public class holiday extends script.base_script
         int now = getCalendarTime();
         int secondsUntil = getEmpireDayLockoutDelay();
         int then = now + secondsUntil;
-        CustomerServiceLog("holidayEvent", "holiday.setEventLockOutTimeStamp: Setting lockout for player: " + player + " to expire on: " + then);
+        //CustomerServiceLog("holidayEvent", "holiday.setEventLockOutTimeStamp: Setting lockout for player: " + player + " to expire on: " + then);
         setObjVar(player, eventLockOut, then);
         return true;
     }
@@ -1225,7 +1225,7 @@ public class holiday extends script.base_script
         }
         if (!hasObjVar(player, eventLockTimer) && hasObjVar(player, eventLockFlag))
         {
-            CustomerServiceLog("holidayEvent", "holiday.checkEventLockOutRemoval: Player: " + player + " had lockout flag: " + eventLockFlag + " but not timer: " + eventLockTimer + ". Removing flag.");
+            //CustomerServiceLog("holidayEvent", "holiday.checkEventLockOutRemoval: Player: " + player + " had lockout flag: " + eventLockFlag + " but not timer: " + eventLockTimer + ". Removing flag.");
             removeObjVar(player, eventLockFlag);
             return true;
         }
@@ -1233,7 +1233,7 @@ public class holiday extends script.base_script
         int then = getIntObjVar(player, eventLockTimer);
         if (then <= 0)
         {
-            CustomerServiceLog("holidayEvent", "holiday.checkEventLockOutRemoval: Player: " + player + " had invalid lockout timer: " + eventLockTimer + " for flag: " + eventLockFlag + ". POSSIBLE EXPLOIT. Removing both objvars.");
+            //CustomerServiceLog("holidayEvent", "holiday.checkEventLockOutRemoval: Player: " + player + " had invalid lockout timer: " + eventLockTimer + " for flag: " + eventLockFlag + ". POSSIBLE EXPLOIT. Removing both objvars.");
             removeObjVar(player, eventLockTimer);
             removeObjVar(player, eventLockFlag);
             removeObjVar(player, PLAYER_EMPIRE_DAY_SCORE);
@@ -1242,7 +1242,7 @@ public class holiday extends script.base_script
         }
         if (now > then)
         {
-            CustomerServiceLog("holidayEvent", "holiday.checkEventLockOutRemoval: Player: " + player + " has lockout timer that has expired: " + eventLockTimer + " for flag: " + eventLockFlag + ". Removing both objvars to allow participation in event.");
+            //CustomerServiceLog("holidayEvent", "holiday.checkEventLockOutRemoval: Player: " + player + " has lockout timer that has expired: " + eventLockTimer + " for flag: " + eventLockFlag + ". Removing both objvars to allow participation in event.");
             removeObjVar(player, eventLockTimer);
             removeObjVar(player, eventLockFlag);
             removeObjVar(player, PLAYER_EMPIRE_DAY_SCORE);
@@ -1304,12 +1304,12 @@ public class holiday extends script.base_script
         if (!hasObjVar(player, PLAYER_EMPIRE_DAY_SCORE))
         {
             setObjVar(player, PLAYER_EMPIRE_DAY_SCORE, getIntObjVar(player, PLAYER_EMPIRE_DAY_SCORE) + amount);
-            CustomerServiceLog("holidayEvent", "holiday.getEventTokens Player: " + player + " received their very first event points of " + amount + ". Now the player has a score of: " + getIntObjVar(player, PLAYER_EMPIRE_DAY_SCORE));
+            //CustomerServiceLog("holidayEvent", "holiday.getEventTokens Player: " + player + " received their very first event points of " + amount + ". Now the player has a score of: " + getIntObjVar(player, PLAYER_EMPIRE_DAY_SCORE));
         }
         else 
         {
             setObjVar(player, PLAYER_EMPIRE_DAY_SCORE, getIntObjVar(player, PLAYER_EMPIRE_DAY_SCORE) + amount);
-            CustomerServiceLog("holidayEvent", "holiday.getEventTokens Player: " + player + " received " + amount + " points and now has a score of: " + getIntObjVar(player, PLAYER_EMPIRE_DAY_SCORE));
+            //CustomerServiceLog("holidayEvent", "holiday.getEventTokens Player: " + player + " received " + amount + " points and now has a score of: " + getIntObjVar(player, PLAYER_EMPIRE_DAY_SCORE));
         }
         if (amount == 1)
         {
@@ -1397,7 +1397,7 @@ public class holiday extends script.base_script
                 String name = getStringObjVar(planet, scoreObjVar + ".slot_" + i + holiday.PLANET_VAR_PLAYER_FACTION_IMP + holiday.PLANET_VAR_PLAYER_NAME);
                 int score = getIntObjVar(planet, scoreObjVar + ".slot_" + i + holiday.PLANET_VAR_PLAYER_FACTION_IMP + holiday.PLANET_VAR_PLAYER_SCORE);
                 data += i + "\t" + name + "\t - " + score + "\n";
-                CustomerServiceLog("holidayEventScore", "getEventHighScores: name: " + name + " score: " + score);
+                //CustomerServiceLog("holidayEventScore", "getEventHighScores: name: " + name + " score: " + score);
             }
             data += sui.colorRed() + "\nREBEL\n" + sui.colorWhite();
             for (int i = 1; i <= MAX_NUMBER_OF_PLANET_HIGH_SCORES; i++)
@@ -1411,7 +1411,7 @@ public class holiday extends script.base_script
     }
     public static boolean setEmpireDayLeaderScores(obj_id planet, obj_id player, String scoreObjVar, int newScore, String playerName, int faction) throws InterruptedException
     {
-        CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: scoreObjVar: " + scoreObjVar + " score: " + newScore);
+        //CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: scoreObjVar: " + scoreObjVar + " score: " + newScore);
         if (!isValidId(planet) || !exists(planet))
         {
             return false;
@@ -1428,18 +1428,18 @@ public class holiday extends script.base_script
         {
             return false;
         }
-        CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: passed validation");
+        //CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: passed validation");
         String postAppendName = "";
         String postAppendScore = "";
         if (faction == holiday.IMPERIAL_PLAYER)
         {
-            CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: Is Imp Player");
+            //CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: Is Imp Player");
             postAppendName = holiday.PLANET_VAR_PLAYER_FACTION_IMP + holiday.PLANET_VAR_PLAYER_NAME;
             postAppendScore = holiday.PLANET_VAR_PLAYER_FACTION_IMP + holiday.PLANET_VAR_PLAYER_SCORE;
         }
         else if (faction == holiday.REBEL_PLAYER)
         {
-            CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: Is Reb Player");
+            //CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: Is Reb Player");
             postAppendName = holiday.PLANET_VAR_PLAYER_FACTION_REB + holiday.PLANET_VAR_PLAYER_NAME;
             postAppendScore = holiday.PLANET_VAR_PLAYER_FACTION_REB + holiday.PLANET_VAR_PLAYER_SCORE;
         }
@@ -1453,8 +1453,8 @@ public class holiday extends script.base_script
         }
         if (newScore <= getIntObjVar(planet, scoreObjVar + ".slot_5" + postAppendScore))
         {
-            CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: Player doesn't have a high enough score");
-            CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: Lowest score: " + getIntObjVar(planet, scoreObjVar + ".slot_5" + postAppendScore));
+            //CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: Player doesn't have a high enough score");
+            //CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: Lowest score: " + getIntObjVar(planet, scoreObjVar + ".slot_5" + postAppendScore));
             return true;
         }
         for (int i = 1; i <= MAX_NUMBER_OF_PLANET_HIGH_SCORES; i++)
@@ -1466,15 +1466,15 @@ public class holiday extends script.base_script
             }
             if (!playerName.equals(name))
             {
-                CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: NO match. Name: " + name + " and player name: " + playerName);
-                CustomerServiceLog("holidayEventScore", "Name length: " + name.length() + " and player name: " + playerName.length());
+                //CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: NO match. Name: " + name + " and player name: " + playerName);
+                //CustomerServiceLog("holidayEventScore", "Name length: " + name.length() + " and player name: " + playerName.length());
                 continue;
             }
-            CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: found name match");
+            //CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: found name match");
             int score = getIntObjVar(planet, scoreObjVar + ".slot_" + i + postAppendScore);
             if (newScore == score)
             {
-                CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: Player already has a score on leader board.");
+                //CustomerServiceLog("holidayEventScore", "setEmpireDayLeaderScores: Player already has a score on leader board.");
                 return true;
             }
         }
@@ -1492,7 +1492,7 @@ public class holiday extends script.base_script
             }
             if (newScore >= existingScore)
             {
-                CustomerServiceLog("holidayEventScore", newScore + " is greater than " + existingScore);
+                //CustomerServiceLog("holidayEventScore", newScore + " is greater than " + existingScore);
                 newHsSlot = i;
             }
             else 

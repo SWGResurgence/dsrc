@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class pet_lib extends script.base_script
 {
-    public pet_lib()
-    {
-    }
     public static final int CUSTOMIZATION_COUNT = 2000;
     public static final int MAX_NUMBER_OF_FRIENDS = 5;
     public static final int MAX_WAYPOINTS = 10;
@@ -450,7 +447,7 @@ public class pet_lib extends script.base_script
             LOG("pet","Cannot get the profession for player (" + player + ") while getting droid command level.");
             return 0;
         }
-        boolean isTrader = false;
+        boolean isTrader = profession.equals("trader");
         if (profession.equals("trader"))
         {
             isTrader = true;
@@ -481,7 +478,7 @@ public class pet_lib extends script.base_script
         obj_id petControlDevice = callable.getCallableCD(pet);
         String command = getStringObjVar(petControlDevice, "ai.pet.command." + commandNum);
         String oldCommand = null;
-        if (command == null || command.equals(""))
+        if (command == null || command.isEmpty())
         {
             if (isCreaturePet(pet))
             {
@@ -3478,10 +3475,7 @@ public class pet_lib extends script.base_script
         int maxDamage = getIntObjVar(petControlDevice, "creature_attribs.maxDamage");
         if (isIdValid(player) && exists(player))
         {
-            if (level > 60 && !craftinglib.isTrader(player))
-            {
-                level = 60;
-            }
+            //setObjVar(pet, "difficultyClass", craftinglib.isTrader(player) ? 1 : 0); - TODO: Fix this later
             dictionary droidDefaultStatsDict = dataTableGetRow(TBL_MOB_STAT_BALANCE, level - 1);
             myHealth = droidDefaultStatsDict.getInt("HP");
             toHit = droidDefaultStatsDict.getInt("ToHit") - 5;
@@ -3492,10 +3486,6 @@ public class pet_lib extends script.base_script
         }
         setLevel(pet, level);
         utils.setScriptVar(pet, "ai.level", level);
-        if (hasObjVar(pet, "difficultyClass"))
-        {
-            removeObjVar(pet, "difficultyClass");
-        }
         if (myHealth < 1)
         {
             myHealth = 1;
@@ -5394,14 +5384,6 @@ public class pet_lib extends script.base_script
             }
         }
         return;
-    }
-    public static int getDroidCapLevel(obj_id who, int level) throws InterruptedException
-    {
-        if (craftinglib.isTrader(who))
-        {
-            return 90;
-        }
-        return 60;
     }
     public static void initDroidDefaultStats(obj_id deed) throws InterruptedException
     {

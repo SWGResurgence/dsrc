@@ -3114,7 +3114,7 @@ public class stealth extends script.base_script
     {
         float camouflage = getEnhancedSkillStatisticModifierUncapped(player, "camouflage");
         camouflage += getEnhancedSkillStatisticModifierUncapped(player, "stealth");
-        float drainRatio = 10.0f;
+        float drainRatio = 9.0f;
         if (camouflage < 100.0f)
         {
             drainRatio = 7.91f - (0.1f / (0.1f + ((camouflage) / 100.0f)));

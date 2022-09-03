@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class combat_base extends script.base_script
 {
-    public combat_base()
-    {
-    }
     public static final float MAX_THROWING_DISTANCE = 30;
     public static final float PVP_DAMAGE_REDUCTION_VALUE = 0.75f;
     public static final float UNIVERSAL_ACTION_COST_MULTIPLIER = 1.0f;

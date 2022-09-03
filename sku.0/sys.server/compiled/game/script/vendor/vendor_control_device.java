@@ -5,9 +5,6 @@ import script.*;
 
 public class vendor_control_device extends script.base_script
 {
-    public vendor_control_device()
-    {
-    }
     public static final string_id UNPACK_VENDOR = new string_id("sui", "unpack_vendor");
     public static final string_id SID_ONLY_IN_HOUSES = new string_id("sui", "only_in_houses");
     public static final string_id SID_VENDOR_PUBLIC_ONLY = new string_id("player_structure", "vendor_public_only");
@@ -150,7 +147,7 @@ public class vendor_control_device extends script.base_script
                     sendSystemMessage(player, SID_ONLY_IN_HOUSES);
                     return SCRIPT_CONTINUE;
                 }
-                if (getAccountNumLots(getPlayerObject(player)) > player_structure.MAX_LOTS)
+                if (getAccountNumLots(getPlayerObject(player)) > getMaxHousingLots())
                 {
                     obj_id lotOverlimitStructure = getObjIdObjVar(player, "lotOverlimit.structure_id");
                     if (isIdValid(lotOverlimitStructure) && (lotOverlimitStructure != structure))

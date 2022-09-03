@@ -5,4 +5,3 @@
 
 sharedTemplate = "object/tangible/loot/simple_kit/shared_flat_canvas.iff"
 
-scripts = +["object.autostack"]

@@ -4,7 +4,7 @@ import script.*;
 import script.library.utils;
 
 public class door_lock_crafting_armor extends script.base_script
-{
+{/*
     public door_lock_crafting_armor()
     {
     }
@@ -104,5 +104,5 @@ public class door_lock_crafting_armor extends script.base_script
             removeObjVar(self, "room_in_use");
         }
         return SCRIPT_CONTINUE;
-    }
+    }*/
 }

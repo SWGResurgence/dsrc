@@ -5,9 +5,6 @@ import script.string_id;
 
 public class restuss_event extends script.base_script
 {
-    public restuss_event()
-    {
-    }
     public static final String MASTER_PATROL_ARRAY = "master_patrol_point_array";
     public static final String PATROL_POINTS = "patrolPoints";
     public static final String PATROL_TYPE = "patrolType";

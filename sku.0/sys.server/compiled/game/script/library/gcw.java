@@ -88,7 +88,9 @@ public class gcw extends script.base_script
         "space_endor",
         "space_lok",
         "space_naboo",
-        "space_yavin4"
+        "space_yavin4",
+        "dxun",
+        "space_dxun"
     };
     public static final String[] defaultRegions =
     {
@@ -109,7 +111,9 @@ public class gcw extends script.base_script
         "gcw_region_endor_16",
         "gcw_region_lok_14",
         "gcw_region_naboo_14",
-        "gcw_region_yavin4_18"
+        "gcw_region_yavin4_18",
+        "gcw_region_dxun_15",
+        "gcw_region_dxun_16"
     };
     public static final String[] pointTypes =
     {
@@ -700,7 +704,8 @@ public class gcw extends script.base_script
             "dathomir",
             "yavin4",
             "endor",
-            "mustafar"
+            "mustafar",
+            "dxun"
         };
         for (String s : restrictedScene) {
             if (s.equals(scene)) {
