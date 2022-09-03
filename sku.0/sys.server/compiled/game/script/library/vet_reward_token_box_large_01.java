@@ -11,7 +11,7 @@ public class vet_reward_token_box_large_01 extends script.base_script {
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException {
         if (item == menu_info_types.ITEM_USE) {
-            sendSystemMessage(player, new string_id(STF_FILE, "opened_boxe"));
+            sendSystemMessage(player, new string_id(STF_FILE, "opened_box"));
             obj_id[] allTheArmor = grantVetTokens(player);
             destroyObject(self);
             return SCRIPT_CONTINUE;
