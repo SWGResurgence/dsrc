@@ -1,5 +1,9 @@
 strItemType	comments
 s	s
+item_bestine_loyalist_necklace_01_01	Bestine: Loyalty Necklace
+item_bestine_lithitanium_rifle_01_01	Bestine: Lithitanium Rifle
+item_bestine_decorative_statue_01_01	Bestine: Decorative Statue
+item_bestine_planet_star_painting_01_01	Bestine: Planet and Star Painting
 rare_loot_chest_quality_1	Chest: Rare Chest
 item_costume_dug	Costume: Dug Instructions
 item_costume_geonosian	Costume: Geonosian Instructions
@@ -39,3 +43,5 @@ item_tow_schematic_jedi_statue_02_01	Schematic: Jedi Statue
 item_schematic_fruit_stand_lg	Schematic: Large Fruit Stand
 item_schematic_lugjack_machine	Schematic: Lugjack Machine
 object/tangible/painting/painting_droid_bright.iff	Schematic: Modified Fusion Reactor
+item_veteran_reward_token_box_large_01_01	Small Veteran Rewards Token Box
+item_veteran_reward_token_box_large_01_02	Small Veteran Rewards Token Box

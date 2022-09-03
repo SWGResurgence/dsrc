@@ -83,7 +83,8 @@ public class esb_anniv_holocron extends script.base_script {
             "rori",
             "tatooine",
             "talus",
-            "yavin4"
+            "yavin4",
+            "dxun"
     };
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException {

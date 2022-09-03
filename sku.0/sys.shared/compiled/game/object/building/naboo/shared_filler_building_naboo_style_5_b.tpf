@@ -1,0 +1,16 @@
+@base object/building/base/shared_base_filler_building.iff
+
+@class building_object_template 1
+@class tangible_object_template 6
+@class object_template 6
+
+clearFloraRadius = 20
+
+objectName = "building_name"  "filler_building_naboo_style_5"
+detailedDescription = "building_detail"  "filler_building_naboo_style_5"
+lookAtText = "building_lookat"  "filler_building_naboo_style_5"
+
+appearanceFilename = "appearance/thm_nboo_thed_imprv_building_s05_b.apt"
+portalLayoutFilename = ""
+
+clientDataFile = "clientdata/building/shared_naboo_filler_bldg_5.cdf"

@@ -1,0 +1,17 @@
+@base object/mobile/skeleton/shared_frog.iff
+
+@class creature_object_template 9
+
+species = SP_spinedPuc
+
+@class tangible_object_template 3
+@class object_template 4
+
+objectName = "monster_name"  "cannok"
+detailedDescription = "" ""
+lookAtText = "monster_lookat"  "cannok"
+
+appearanceFilename = "appearance/spined_puc_hue.sat"
+portalLayoutFilename = ""
+
+clientDataFile = "clientdata/index/client_shared_index_1_33.cdf"

@@ -10,7 +10,7 @@ instant_travel	veteran_new:instant_travel_terminal	object/tangible/veteran_rewar
 cybernetic_xp_chip	veteran_new:cybernetic_experience_chip	object/tangible/veteran_reward/exp_buff_item_crate.iff	0	1		0		
 walker_at_rt	veteran_new:walker_at_rt	object/tangible/veteran_reward/vehicle_walker_at_rt_camo.iff	0	1		0		
 instant_travel_royal_ship	veteran_new:instant_travel_terminal_royal_ship	object/tangible/deed/vehicle_deed/instant_travel_terminal_royal_ship_deed.iff	0	0		1		
-grievous_wheel_bike	veteran_new:grievous_wheel_bike	item_deed_grievous_wheel_bike	0	0		1	
+grievous_wheel_bike	veteran_new:grievous_wheel_bike	item_deed_grievous_wheel_bike	0	0		1		
 hover_chair	veteran_new:hover_chair	item_deed_hover_chair_06_01	0	1		0		
 item_level90_boost	veteran_new:item_level90_boost	item_level90_boost	0	0		1		
 heroic_biolink_set	veteran_new:heroic_biolink_set	heroic_biolink_set	0	0		1		
@@ -21,3 +21,4 @@ pilotequipment3	veteran_new:pilotequipment3	pilotequipment3	0	0		1
 pilotequipment4	veteran_new:pilotequipment4	pilotequipment4	0	0		1		
 pilotequipment5	veteran_new:pilotequipment5	pilotequipment5	0	0		1		
 trader_care_package	veteran_new:trader_care_package	trader_care_package	0	1		0		
+game_update_4_gift	veteran_new:game_update_4_gift	game_update_4_gift	0	1		0		

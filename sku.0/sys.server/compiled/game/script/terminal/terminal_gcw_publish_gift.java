@@ -1,9 +1,17 @@
 package script.terminal;
 
 import script.*;
+
+import java.util.Arrays;
+import java.util.Hashtable;
+import java.util.Vector;
+
 import script.library.gcw;
+import script.library.player_structure;
 import script.library.sui;
 import script.library.utils;
+import script.library.prose;
+import script.library.trial;
 
 public class terminal_gcw_publish_gift extends script.terminal.base.base_terminal
 {
@@ -45,7 +53,8 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             "naboo",
             "rori",
             "talus",
-            "tatooine"
+            "tatooine",
+            "dxun"
         },
         
         {
@@ -55,7 +64,8 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             "NABOO",
             "RORI",
             "TALUS",
-            "TATOOINE"
+            "TATOOINE",
+            "DXUN"
         }
     };
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
@@ -543,8 +553,10 @@ public class terminal_gcw_publish_gift extends script.terminal.base.base_termina
             return null;
         }
         int terminal_one = terminalArray[0];
-        for (int i1 : terminalArray) {
-            if (terminal_one != i1) {
+        for (int i = 0; i < terminalArray.length; i++)
+        {
+            if (terminal_one != terminalArray[i])
+            {
                 return BASE_BEING_CAPTURED;
             }
         }

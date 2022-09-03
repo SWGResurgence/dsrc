@@ -10,6 +10,7 @@ public class color
 	public static final color GREEN = new color(  0, 255,   0, 255);
 	public static final color RED   = new color(255,   0,   0, 255);
 	public static final color WHITE = new color(255, 255, 255, 255);
+  public static final color DXUNGREEN = new color(23, 53, 11, 0);
 
 	public int getR()
 		{

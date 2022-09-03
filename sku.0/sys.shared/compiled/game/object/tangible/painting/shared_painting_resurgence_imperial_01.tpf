@@ -1,9 +1,0 @@
-@base object/tangible/furniture/base/shared_furniture_base.iff
-
-@class tangible_object_template 6
-@class object_template 5
-
-objectName = "frn_n"  "painting_resurgence_imperial_01"
-detailedDescription = "frn_d"  "painting_resurgence_imperial_01"
-
-appearanceFilename = "appearance/resurgence_painting_imperial_01.apt"

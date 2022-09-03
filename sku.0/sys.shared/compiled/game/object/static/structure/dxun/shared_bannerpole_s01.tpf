@@ -1,0 +1,12 @@
+@base object/static/base/shared_static_flagpole_base.iff
+
+@class static_object_template 0
+@class object_template 10
+
+objectName = "static_item_n"  "item_resurgence_dxun_bannerpole_01_01"
+detailedDescription = "static_item_d"  "item_resurgence_dxun_bannerpole_01_01"
+
+appearanceFilename = "appearance/mun_dxun_bannerpole_s01.apt"
+portalLayoutFilename = ""
+
+clientDataFile = "clientdata/structure/dxun_imprv_bannerpole_s01.cdf"

@@ -13,8 +13,8 @@ item_jedi_robe_04_01	"constitution_modified=50,precision_modified=80"		int:armor
 item_jedi_robe_04_02	"constitution_modified=50,strength_modified=80"		int:armor.general_protection_clothing=4500	index_color_1=3							
 item_jedi_robe_04_03	"constitution_modified=80,agility_modified=5,strength_modified=50,precision_modified=50"		int:armor.general_protection_clothing=5000	index_color_1=4							
 item_jedi_robe_04_04	"constitution_modified=80,agility_modified=5,luck_modified=50,precision_modified=50"		int:armor.general_protection_clothing=5000	index_color_1=3							
-item_jedi_robe_06_01	"constitution_modified=150,strength_modified=150,luck_modified=150,precision_modified=150,agility_modified=150,expertise_glancing_blow_melee=10,expertise_glancing_blow_ranged=10,expertise_glancing_blow_all=5"		"int:armor.general_protection_clothing=6875,int:item.set.set_id=90001"	index_color_1=4							
-item_jedi_robe_06_02	"constitution_modified=150,strength_modified=150,luck_modified=150,precision_modified=150,agility_modified=150,expertise_glancing_blow_melee=10,expertise_glancing_blow_ranged=10,expertise_glancing_blow_all=5"		"int:armor.general_protection_clothing=6875,int:item.set.set_id=90001"	index_color_1=3							
+item_jedi_robe_06_01	"constitution_modified=75,strength_modified=75,luck_modified=75,precision_modified=75,agility_modified=75"		"int:armor.general_protection_clothing=3432,int:item.set.set_id=90001"	index_color_1=4							
+item_jedi_robe_06_02	"constitution_modified=75,strength_modified=75,luck_modified=75,precision_modified=75,agility_modified=75"		"int:armor.general_protection_clothing=3432,int:item.set.set_id=90001"		"int:armor.general_protection_clothing=6875,int:item.set.set_id=90001"	index_color_1=3					
 item_datapad_01_01											
 item_tooth_01_01											
 item_tooth_01_02											
@@ -569,8 +569,8 @@ item_tow_schematic_flamer_03_01			"string:loot_schematic.schematic=object/draft_
 item_tow_schematic_cannon_03_01			"string:loot_schematic.schematic=object/draft_schematic/weapon/appearance/weapon_appearance_heavy_lava_cannon.iff,string:loot_schematic.skill_req=class_munitions_phase4_master"								
 item_tow_schematic_rifle_03_01			"string:loot_schematic.schematic=object/draft_schematic/weapon/appearance/weapon_appearance_rifle_dp23.iff,string:loot_schematic.skill_req=class_munitions_phase4_master"								
 item_tow_schematic_rifle_03_02			"string:loot_schematic.schematic=object/draft_schematic/weapon/appearance/weapon_appearance_rifle_disrupter.iff,string:loot_schematic.skill_req=class_munitions_phase4_master"								
-item_tow_schematic_vehicle_02_01			"string:vehicle_attribs.object_ref=lava_skiff,float:hit_points=1500"								
-item_tow_schematic_vehicle_02_02			"string:vehicle_attribs.object_ref=desert_skiff,float:hit_points=1500"								
+item_tow_schematic_vehicle_02_01			"string:vehicle_attribs.object_ref=lava_skiff,float:hit_points=15000"								
+item_tow_schematic_vehicle_02_02			"string:vehicle_attribs.object_ref=desert_skiff,float:hit_points=15000"								
 item_tow_buff_crystal_02_01				index_color_1=1	towCrystalOffenseBurst	long_reuse_3	3600			appearance/pt_special_hit_concuss.prt	
 item_tow_buff_crystal_02_02				index_color_1=22	towCrystalDefenseBurst	long_reuse_3	3600			appearance/pt_special_hit_concuss.prt	
 item_tow_buff_crystal_02_03				index_color_1=30	towCrystalDotImmunity	towCrystalDotImmunity	3600			appearance/pt_special_hit_concuss.prt	
@@ -630,12 +630,6 @@ item_tow_necklace_taming_03_02			int:skillmod.bonus.bm_creature_knowledge=4
 item_tow_necklace_taming_03_03			int:skillmod.bonus.bm_creature_knowledge=6								
 item_tow_necklace_taming_03_04			int:skillmod.bonus.bm_creature_knowledge=8								
 item_tow_necklace_taming_03_05			int:skillmod.bonus.bm_creature_knowledge=10								
-item_tow_ring_armorsmith_04_01					towArmorAssembly						
-item_tow_ring_weaponsmith_04_01					towWeaponAssembly						
-item_tow_ring_droideng_04_01					towDroidAssembly						
-item_tow_ring_bioeng_04_01					towMedAssembly						
-item_tow_ring_chef_04_01					towFoodAssembly						
-item_tow_ring_architect_04_01					towStructuresAssembly						
 item_tow_factory_gaurd_trinket_04_01					towFacGuardDefenseItem	long_reuse_4	1800				
 item_tow_foreman_fire_absorb_04_01					towForemanCoolingItem	long_reuse_4	1800				
 item_tow_foreman_burst_run_04_01				index_color_1=11	burstRun	long_reuse_4	1800				
@@ -3747,7 +3741,7 @@ item_tcg_loot_reward_series2_diner			"string:player_structure.deed.template=obje
 item_tcg_loot_reward_series2_barn			"string:player_structure.deed.template=object/building/player/city/barn_no_planet_restriction.iff,int:player_structure.deed.buildtime=90"								
 item_tcg_loot_reward_series1_housecleaning_kit			"int:increaseAmount=50,int:nonGenericStorageItem=1"							clienteffect/tcg_add_storage_house_cleaning.cef	
 item_tcg_loot_reward_series1_beru_whitesuns_cookbook			"int:increaseAmount=100,int:nonGenericStorageItem=1"							clienteffect/tcg_add_storage_cookbook.cef	
-item_tcg_loot_reward_series1_organizational_datapad			"int:increaseAmount=100,int:nonGenericStorageItem=1"							clienteffect/tcg_add_storage_datapad.cef	
+item_tcg_loot_reward_series2_organizational_datapad			"int:increaseAmount=100,int:nonGenericStorageItem=1"							clienteffect/tcg_add_storage_datapad.cef	
 item_tcg_loot_reward_series1_gorax_ear					tcg_series1_gorax_ear	long_reuse_4	3600			clienteffect/tcg_gorax_ear.cef	
 item_tcg_loot_reward_series1_morgukai_shadow_scroll					tcg_series1_morgukai_shadow_scroll	long_reuse_4	3600			clienteffect/tcg_shadow_scroll.cef	
 item_tcg_loot_reward_series2_sanyassan_skull					tcg_series2_sanyassan_skull	long_reuse_4	3600			clienteffect/tcg_sanyassan_skull.cef	
@@ -4538,7 +4532,7 @@ item_event_loveday_wings_blue
 item_event_loveday_wings_gold											
 item_event_loveday_halo											
 item_event_loveday_hearts					loveday_hearts_item	loveday_hearts_effect	240				
-item_vet_reward_78month_ttgm_itt						ttgm_itt_group	21600				
+item_vet_reward_78month_ttgm_itt						ttgm_itt_group	14400				
 item_tcg_loot_reward_series7_atpt_walker			"string:vehicle_attribs.object_ref=tcg_at_pt_walker,float:hit_points=15000"								
 item_tcg_loot_reward_series7_military_transport			"string:vehicle_attribs.object_ref=tcg_military_transport,float:hit_points=15000"								
 item_tcg_loot_reward_series7_build01_tie_canopy			"string:tcg.combineItemTemplatePattern=object/tangible/tcg/series7/combine_object_,string:tcg.setName=set7_gunship"								
@@ -4553,7 +4547,7 @@ item_tcg_loot_reward_series7_deed_vip_bunker			"string:player_structure.deed.tem
 item_tcg_loot_reward_series7_purple_cape											
 item_tcg_loot_reward_series7_gold_cape											
 item_tcg_loot_reward_series7_handmade_sash											
-item_tcg_loot_reward_series7_embroidered_sash	"luck_modified=300"										
+item_tcg_loot_reward_series7_embroidered_sash	luck_modified=300										
 item_tcg_loot_reward_series7_tie_fighter_familiar			string:creatureName=tcg_tie_fighter_familiar								
 item_tcg_loot_reward_series7_xwing_fighter_familiar			string:creatureName=tcg_xwing_fighter_familiar								
 item_tcg_loot_reward_series7_hutt_fighter_familiar			string:creatureName=tcg_hutt_fighter_familiar								
@@ -5029,12 +5023,52 @@ item_schematic_efol_prop_sparkler_l			"string:loot_schematic.schematic=object/dr
 item_schematic_efol_prop_sparkler_r			"string:loot_schematic.schematic=object/draft_schematic/dance_prop/shared_prop_sparkler_efol_r.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_entertainer_phase4_master"								
 item_schematic_prop_ribbon_magic_efol_l			"string:loot_schematic.schematic=object/draft_schematic/dance_prop/shared_prop_ribbon_magic_efol_l.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_entertainer_phase4_master"								
 item_schematic_prop_ribbon_magic_efol_r			"string:loot_schematic.schematic=object/draft_schematic/dance_prop/shared_prop_ribbon_magic_efol_r.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_entertainer_phase4_master"								
-item_vet_reward_box
-item_neural_recon_network_control_interface_01_01
-item_irish_darkshadow_memorial_01_01
-item_aurillian_certified_scroll_01_01
-item_world_boss_token_01_01
+item_vet_reward_box											
+item_neural_recon_network_control_interface_01_01											
+item_irish_darkshadow_memorial_01_01											
+item_aurillian_certified_scroll_01_01											
+item_world_boss_token_01_01											
 item_elite_geothermal_generator_deed_schematic_01_01			"string:loot_schematic.schematic=object/draft_schematic/structure/installation_generator_elite_geothermal.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase4_master"								
-item_painting_resurgence_rebel_01_01
-item_painting_resurgence_imperial_01_01
-item_instance_unlock_heroics_01_01
+item_painting_resurgence_imperial_01_01											
+item_painting_resurgence_rebel_01_01											
+item_instance_unlock_heroics_01_01											
+item_tow_ring_architect_04_01	"structures_assembly=25,structures_experimentation=1,luck_modified=50"										
+item_tow_ring_armorsmith_04_01	"armor_assembly=25,armor_experimentation=1,luck_modified=50"										
+item_tow_ring_beast_master_04_01	"bm_incubator_dps_armor=2,incubation_time_reduction=6,bm_xp_mod_boost=3"										
+item_tow_ring_chef_04_01	"food_assembly=25=25,food_experimentation=1,luck_modified=50"										
+item_tow_ring_cybernetics_technician_04_01	"cybernetic_assembly=25,cybernetic_assembly=1,luck_modified=50"										
+item_tow_ring_droid_engineer_04_01	"droid_assembly=25,droid_experimentation=1,luck_modified=50"										
+item_tow_ring_inspiration_04_01	"expertise_en_inspire_pulse_duration_increase=1,expertise_en_inspire_buff_duration_increase=15"										
+item_tow_ring_tailor_04_01	"clothing_assembly=25,clothing_experimentation=1,luck_modified=50"										
+item_tow_ring_weaponsmith_04_01	"weapon_assembly=25,weapon_experimentation=1,luck_modified=50"										
+item_painting_resurgence_mandalorian_knights_01_01											
+item_basilisk_war_droid_itv											
+item_mandalorian_standing_sign_02_01	special_sign_mandalorian_standing=1		string:static_item=item_mandalorian_standing_sign_02_01								
+item_mandalorian_hanging_sign_02_01	special_sign_mandalorian_hanging=1		string:static_item=item_mandalorian_hanging_sign_02_01								
+item_painting_resurgence_twilek_highclass_01_01											
+item_painting_resurgence_dxun_cliffs_01_01											
+item_borstel_disruptor_01_01											
+item_rtp_imperial_banner_01											
+item_ornate_rug_01_01											
+item_bestine_decorative_sword_01_01											
+item_rare_painting_01_01											
+item_bestine_loyalist_necklace_01_01											
+item_bestine_lithitanium_rifle_01_01											
+item_bestine_decorative_statue_01_01											
+item_bestine_planet_star_painting_01_01											
+item_staff_appreciation_rancor											
+item_staff_appreciation_bantha											
+item_staff_appreciation_dewback											
+item_staff_appreciation_star_destroyer											
+item_veteran_reward_token_box_small_01_01											
+item_veteran_reward_token_box_small_01_02											
+item_veteran_reward_token_box_medium_01_01											
+item_veteran_reward_token_box_medium_01_02											
+item_veteran_reward_token_box_large_01_01											
+item_veteran_reward_token_box_large_01_02											
+item_resurgence_czerka_banner_01_01
+item_resurgence_czerka_banner_01_02
+item_resurgence_czerka_banner_01_03
+item_resurgence_mandalorian_banner_01_01
+item_resurgence_mandalorian_banner_01_02
+game_update_4_gift

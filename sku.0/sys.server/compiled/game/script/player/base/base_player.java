@@ -209,6 +209,7 @@ public class base_player extends script.base_script
         "lok",
         "dantooine",
         "dathomir",
+		"dxun",
         "kachirho",
         "etyyy",
         "khowir",
@@ -226,6 +227,7 @@ public class base_player extends script.base_script
         "lok",
         "dantooine",
         "dathomir",
+		"dxun",
         "kashyyyk_main",
         "kashyyyk_hunting",
         "kashyyyk_dead_forest",
@@ -243,10 +245,12 @@ public class base_player extends script.base_script
         null,
         null,
         null,
+		null,
         new vector(0.0f, 0.0f, 0.0f),
         new vector(0.0f, 0.0f, 0.0f),
         new vector(0.0f, 0.0f, 0.0f),
-        new vector(-2304.0f, 0.0f, 2848.0f)
+        new vector(-2304.0f, 0.0f, 2848.0f),
+        null
     };
     public static final String[] WAYPOINT_SPACE_ZONES_EXTERNAL = 
     {
@@ -260,6 +264,7 @@ public class base_player extends script.base_script
         "space_lok",
         "space_dantooine",
         "space_dathomir",
+		"space_dxun",
         "space_kashyyyk",
         "space_nova_orion"
     };
@@ -275,6 +280,7 @@ public class base_player extends script.base_script
         "space_lok",
         "space_dantooine",
         "space_dathomir",
+		"space_dxun",
         "space_kashyyyk",
         "space_nova_orion"
     };
