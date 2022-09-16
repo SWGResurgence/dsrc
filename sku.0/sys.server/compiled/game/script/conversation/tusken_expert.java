@@ -12,6 +12,7 @@ public class tusken_expert extends script.base_script
 	public int OnMoveMoving(obj_id self) throws InterruptedException
     {
         setMovementPercent(self, 3.0f);
+		setMovementRun(self);
         return SCRIPT_CONTINUE;
     }
     public boolean tusken_expert_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
