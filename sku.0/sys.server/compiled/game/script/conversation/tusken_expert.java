@@ -173,9 +173,7 @@ public class tusken_expert extends script.base_script
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setTriggerVolume(self);
-		//setMovementPercent(self, 3.0f);
-		setMovementRun(self);
-		setBaseRunSpeed(self, 2.5f);
+		setMovementPercent(self, 3.0f);
         return SCRIPT_CONTINUE;
     }
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
