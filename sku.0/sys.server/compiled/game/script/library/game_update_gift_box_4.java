@@ -23,6 +23,7 @@ public class game_update_gift_box_4 extends script.base_script {
 		obj_id pInv = utils.getInventoryContainer(player);
 		HashSet theSet = new HashSet();
 		theSet.add(static_item.createNewItemFunction("item_painting_resurgence_dxun_cliffs_01_01", pInv));
+		theSet.add(static_item.createNewItemFunction("item_veteran_reward_token_box_large_01_01", pInv));
 		obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
         showLootBox(player, items);
