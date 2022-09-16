@@ -9,6 +9,11 @@ public class tusken_expert extends script.base_script
     {
     }
     public static String c_stringFile = "conversation/tusken_expert";
+	public int OnMoveMoving(obj_id self) throws InterruptedException
+    {
+        setMovementPercent(self, 3.0f);
+        return SCRIPT_CONTINUE;
+    }
     public boolean tusken_expert_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
