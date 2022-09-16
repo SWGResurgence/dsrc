@@ -9,17 +9,6 @@ public class tusken_expert extends script.base_script
     {
     }
     public static String c_stringFile = "conversation/tusken_expert";
-	public int OnAttach(obj_id self) throws InterruptedException
-    {
-        //setMovementPercent(self, 3.0f);
-		setMovementRun(self);
-		setBaseRunSpeed(self, 2.5f);
-        return SCRIPT_CONTINUE;
-    }
-    public int OnDetach(obj_id self) throws InterruptedException
-    {
-        return SCRIPT_CONTINUE;
-    }
     public boolean tusken_expert_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         return true;
@@ -184,6 +173,9 @@ public class tusken_expert extends script.base_script
     {
         setCondition(self, CONDITION_CONVERSABLE);
         setTriggerVolume(self);
+		//setMovementPercent(self, 3.0f);
+		setMovementRun(self);
+		setBaseRunSpeed(self, 2.5f);
         return SCRIPT_CONTINUE;
     }
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
