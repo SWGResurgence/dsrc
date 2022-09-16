@@ -5032,7 +5032,7 @@ item_elite_geothermal_generator_deed_schematic_01_01			"string:loot_schematic.sc
 item_painting_resurgence_imperial_01_01											
 item_painting_resurgence_rebel_01_01											
 item_instance_unlock_heroics_01_01											
-item_tow_ring_architect_04_01	"structures_assembly=25,structures_experimentation=1,luck_modified=50"										
+item_tow_ring_architect_04_01	"structure_assembly=25,structure_experimentation=1,luck_modified=50"										
 item_tow_ring_armorsmith_04_01	"armor_assembly=25,armor_experimentation=1,luck_modified=50"										
 item_tow_ring_beast_master_04_01	"bm_incubator_dps_armor=2,incubation_time_reduction=6,bm_xp_mod_boost=3"										
 item_tow_ring_chef_04_01	"food_assembly=25=25,food_experimentation=1,luck_modified=50"										

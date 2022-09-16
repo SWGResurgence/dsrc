@@ -2,5 +2,6 @@ strItemType
 s
 item_tow_junk_creature_horn_02_01
 object/tangible/item/som/tulrus_parts.iff
-item_mustafar_fg_ambush_detector
-item_mustafar_fg_medical_enhancement
+object/tangible/loot/mustafar/cube_loot/cube_loot_1g.iff
+object/tangible/loot/mustafar/cube_loot/cube_loot_1p.iff
+
