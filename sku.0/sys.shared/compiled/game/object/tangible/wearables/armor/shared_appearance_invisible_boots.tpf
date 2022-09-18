@@ -1,9 +1,0 @@
-@base object/tangible/wearables/base/shared_base_sabaton.iff
-@class tangible_object_template 10
-@class object_template 10
-
-objectName = "wearables_name" "apperance_invisible_boots"
-detailedDescription = "wearables_detail" "appearance_invisible_boots"
-appearanceFilename = "appearance/armor_padded_s01_boots_m.sat"
-
-gameObjectType = GOT_misc_appearance_only_invisible
