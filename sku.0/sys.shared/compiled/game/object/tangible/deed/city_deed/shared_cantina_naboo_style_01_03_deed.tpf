@@ -3,8 +3,8 @@
 @class tangible_object_template 6
 @class object_template 5
 
-objectName = "deed"  "naboo_cantina_style_01_02_deed"
-detailedDescription = "deed"  "naboo_cantina_style_01_02_deed"
+objectName = "deed"  "naboo_cantina_style_01_03_deed"
+detailedDescription = "deed"  "naboo_cantina_style_01_03_deed"
 lookAtText = ""  ""
 
 appearanceFilename = "appearance/eqp_tool_datapad.apt"
