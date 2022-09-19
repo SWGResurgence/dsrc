@@ -5095,3 +5095,4 @@ item_naboo_house_small_style_01_02_deed			"string:player_structure.deed.template
 item_naboo_house_small_style_01_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_01_c.iff,int:player_structure.deed.buildtime=90"								
 item_naboo_house_small_style_02_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_b.iff,int:player_structure.deed.buildtime=90"								
 item_naboo_house_small_style_02_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_c.iff,int:player_structure.deed.buildtime=90"								
+item_dxun_drexl_familiar			string:creatureName=vr_dxun_drexl								
