@@ -1015,7 +1015,7 @@ vr_familiar_defense_4	vr_familiar			4	buffs.genericBuff	-1	agility_modified	20	c
 vr_familiar_defense_5	vr_familiar			5	buffs.genericBuff	-1	agility_modified	25	constitution_modified	25	luck_modified	25		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 vr_familiar_defense_6	vr_familiar			6	buffs.genericBuff	-1	agility_modified	30	constitution_modified	30	luck_modified	30		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 vr_familiar_defense_7	vr_familiar			7	buffs.genericBuff	-1	agility_modified	35	constitution_modified	35	luck_modified	35		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
-vr_familiar_defense_8	vr_familiar			8	buffs.genericBuff	-1	agility_modified	40	constitution_modified	100	luck_modified	100		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+vr_familiar_defense_8	vr_familiar			8	buffs.genericBuff	-1	agility_modified	100	constitution_modified	100	luck_modified	100		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 criticalColdEffect	criticalEffect			10	buffs.cryobanSnare	15	combat_multiply_damage_taken	10		0		0		0		0	STATE_NONE	applyCritImmunityBuff			1	1		1	1	1	0	1	1	0	1	1	1
 criticalAcidEffect	criticalEffect			10	command.concussionShot	3	critical_hit_vulnerable	75		0		0		0		0	STATE_NONE	applyCritImmunityBuff			1	1		1	1	1	0	1	1	0	1	1	1
 criticalElectricEffect	criticalEffect			10	command.shock	6	glancing_blow_vulnerable	75		0		0		0		0	STATE_NONE	applyCritImmunityBuff			1	1		1	1	1	0	1	1	0	1	1	1
