@@ -10,11 +10,11 @@ import script.obj_id;
 public class loot_controller_krayt extends script.base_script {
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException {
 		if (pet_lib.isPet(killer)) {
-			sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerName(pet_lib.getMaster(killer)));
+			sendSystemMessageGalaxyTestingOnly("ATTENTION GALAXY BOUNTY HUNTERS: The Self-Proclaimed Mandalore, The Renegade, Pax Vizla has been reported to have been killed and the Czerka Corporation has paid out the out the bounty to " + getPlayerName(pet_lib.getMaster(killer)));
 		}
-        sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getName(killer));
-        return SCRIPT_CONTINUE;
-    }
+		sendSystemMessageGalaxyTestingOnly("ATTENTION GALAXY BOUNTY HUNTERS: The Self-Proclaimed Mandalore, The Renegade, Pax Vizla has been reported to have been killed and the Czerka Corporation has paid out the out the bounty to " + getName(killer));
+		return SCRIPT_CONTINUE;
+	}
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException {
         obj_id corpseInventory = utils.getInventoryContainer(self);
         if (corpseInventory == null) {
@@ -36,12 +36,15 @@ public class loot_controller_krayt extends script.base_script {
             return;
         }
         int x = rand(1, 100);
-        if (x < 61) { // 60% Drop Rate: TCG - Tatooine Travel Advertisement
-            static_item.createNewItemFunction("item_tcg_loot_reward_series4_tatooine_travel_advertisement_02_01", corpseInventory);
+        if (x < 61) { // 60% Drop Rate: TCG - Mandalorian Knights Painting
+            static_item.createNewItemFunction("item_painting_resurgence_mandalorian_knights_01_01", corpseInventory);
         }
-        if (x < 26) { // 25% Drop Rate: TCG - Toydarian Greeter
-            static_item.createNewItemFunction("item_tcg_loot_reward_series3_greeter_toydarian", corpseInventory);
+        if (x < 26) { // 25% Drop Rate: Naboo Signaling Unit
+            static_item.createNewItemFunction("item_tcg_loot_reward_series5_signal_unit", corpseInventory);
         }
+		if (x < 11) { // 10% Drop Rate: TCG - Mandalorian Banner
+			static_item.createNewItemFunction("item_tcg_loot_reward_series3_mandalorian_skull_banner", corpseInventory);
+		}	
         /*String myLoot1 = "";
         createObject(myLoot1, corpseInventory, "");
         String myLoot2 = "";

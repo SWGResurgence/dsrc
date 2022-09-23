@@ -9,6 +9,9 @@ import script.obj_id;
 
 public class loot_controller_peko extends script.base_script {
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException {
+		if (pet_lib.isPet(killer)) {
+			sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerName(pet_lib.getMaster(killer)));
+		}
         sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getName(killer));
         return SCRIPT_CONTINUE;
     }
