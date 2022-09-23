@@ -6,4 +6,4 @@
 sharedTemplate = "object/tangible/component/armor/shared_feather_peko_albatross.iff"
 
 objvars = +[
-	"skillmod.bonus.constitution" = 50, "skillmod.bonus.modified_stamina"]
+	"skillmod.bonus.constitution" = 50, "skillmod.bonus.modified_stamina" = 25]
