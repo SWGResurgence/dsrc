@@ -14,7 +14,7 @@ item_jedi_robe_04_02	"constitution_modified=50,strength_modified=80"		int:armor.
 item_jedi_robe_04_03	"constitution_modified=80,agility_modified=5,strength_modified=50,precision_modified=50"		int:armor.general_protection_clothing=5000	index_color_1=4							
 item_jedi_robe_04_04	"constitution_modified=80,agility_modified=5,luck_modified=50,precision_modified=50"		int:armor.general_protection_clothing=5000	index_color_1=3							
 item_jedi_robe_06_01	"constitution_modified=100,strength_modified=100,luck_modified=100,precision_modified=100,agility_modified=100"		"int:armor.general_protection_clothing=5600,int:item.set.set_id=90001"	index_color_1=4							
-item_jedi_robe_06_02	"constitution_modified=100,strength_modified=100,luck_modified=100,precision_modified=100,agility_modified=100"		"int:armor.general_protection_clothing=5600,int:item.set.set_id=90001"	index_color_1=3					
+item_jedi_robe_06_02	"constitution_modified=100,strength_modified=100,luck_modified=100,precision_modified=100,agility_modified=100"		"int:armor.general_protection_clothing=5600,int:item.set.set_id=90001"	index_color_1=3							
 item_datapad_01_01											
 item_tooth_01_01											
 item_tooth_01_02											
@@ -5032,20 +5032,19 @@ item_elite_geothermal_generator_deed_schematic_01_01			"string:loot_schematic.sc
 item_painting_resurgence_imperial_01_01											
 item_painting_resurgence_rebel_01_01											
 item_instance_unlock_heroics_01_01											
-item_tow_ring_advanced_component_04_01	"advanced_assembly=25,advanced_ship_experimentation=5,booster_assembly=25,booster_experimentation=1,luck_modified=50"
+item_tow_ring_advanced_component_04_01	"advanced_assembly=25,advanced_ship_experimentation=5,booster_assembly=25,booster_experimentation=1,luck_modified=50"										
 item_tow_ring_architect_04_01	"structure_assembly=25,structure_experimentation=1,luck_modified=50"										
 item_tow_ring_armorsmith_04_01	"armor_assembly=25,armor_experimentation=1,luck_modified=50"										
-item_tow_ring_artisan_04_01	"general_assembly=25,general_experimentation=1,luck_modified=50"
+item_tow_ring_artisan_04_01	"general_assembly=25,general_experimentation=1,luck_modified=50"										
 item_tow_ring_beast_master_04_01	"bm_incubator_dps_armor=2,incubation_time_reduction=6,bm_xp_mod_boost=3,luck_modified=25"										
-item_tow_ring_chassis_04_01	"chassis_assembly=25,chassis_experimentation=3,engine_assembly=25,engine_experimentation=1,luck_modified=50"
+item_tow_ring_chassis_04_01	"chassis_assembly=25,chassis_experimentation=3,engine_assembly=25,engine_experimentation=1,luck_modified=50"										
 item_tow_ring_chef_04_01	"food_assembly=25,food_experimentation=1,luck_modified=50"										
 item_tow_ring_cybernetics_technician_04_01	"cybernetic_assembly=25,cybernetic_experimentation=1,cybernetic_assembly=1,luck_modified=50"										
 item_tow_ring_defensive_systems_04_01	"shields_assembly=25,shields_experimentation=3,weapon_systems=25,weapon_systems_experimentation=3,luck_modified=50"										
 item_tow_ring_droid_engineer_04_01	"droid_assembly=25,droid_experimentation=1,luck_modified=50"										
 item_tow_ring_inspiration_04_01	"expertise_en_inspire_pulse_duration_increase=1,expertise_en_inspire_buff_duration_increase=15,luck_modified=25"										
-item_tow_ring_power_systems_04_01	"booster_assembly=25,booster_experimentation=1,power_systems=25,power_systems_experimentation=1,luck_modified=50"
-item_tow_ring_tailor_04_01	"clothing_assembly=25,clothing_experimentation=1,luck_modified=50"
-
+item_tow_ring_power_systems_04_01	"booster_assembly=25,booster_experimentation=1,power_systems=25,power_systems_experimentation=1,luck_modified=50"										
+item_tow_ring_tailor_04_01	"clothing_assembly=25,clothing_experimentation=1,luck_modified=50"										
 item_tow_ring_weaponsmith_04_01	"weapon_assembly=25,weapon_experimentation=1,luck_modified=50"										
 item_painting_resurgence_mandalorian_knights_01_01											
 item_basilisk_war_droid_itv											
@@ -5072,12 +5071,12 @@ item_veteran_reward_token_box_medium_01_01
 item_veteran_reward_token_box_medium_01_02											
 item_veteran_reward_token_box_large_01_01											
 item_veteran_reward_token_box_large_01_02											
-item_resurgence_czerka_banner_01_01
-item_resurgence_czerka_banner_01_02
-item_resurgence_czerka_banner_01_03
-item_resurgence_mandalorian_banner_01_01
-item_resurgence_mandalorian_banner_01_02
-game_update_4_gift
+item_resurgence_czerka_banner_01_01											
+item_resurgence_czerka_banner_01_02											
+item_resurgence_czerka_banner_01_03											
+item_resurgence_mandalorian_banner_01_01											
+item_resurgence_mandalorian_banner_01_02											
+game_update_4_gift											
 item_cantina_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/cantina_naboo_b.iff,int:player_structure.deed.buildtime=90"								
 item_cantina_naboo_style_01_03_deed			"string:player_structure.deed.template=object/building/player/city/cantina_naboo_c.iff,int:player_structure.deed.buildtime=90"								
 item_cityhall_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/cityhall_naboo_b.iff,int:player_structure.deed.buildtime=90"								
