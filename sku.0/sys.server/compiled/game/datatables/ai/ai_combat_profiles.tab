@@ -375,7 +375,7 @@ wod_mutant_rancor_boss	WoD - Mutant Rancor Boss	bm_dampen_pain_5	2	100	once	bm_s
 ep3_rryatt_katarn	Rryatt Trail - Katarn Boss	bm_dampen_pain_4	2	100	once	bm_stomp_4	4	100		bm_shaken_2	6	100	once	bm_shaken_2	9	100		me_hot_2	15	100																																						
 world_boss_peko	Naboo World Boss	bm_bolster_armor_5	2	100	once	trample_random	3	100		bm_siphon_master	6	100		bm_dampen_pain_5	2	100	once	bm_stomp_5	9	100		bm_shaken_3	6	100	once	bm_shaken_3	18	100																														
 world_boss_krayt	Tatooine World Boss	bm_bolster_armor_5	2	100		trample_random	3	100		bm_enfeeble_5	9	100		bm_damage_disease_5	15	100	once	bm_siphon_master	6	100		bm_stomp_5	4	100		me_hot_1	20	100		bm_claw_5	4	100		bm_dampen_pain_5	2	100	once																					
-world_boss_paxvizla	Dxun Vizla World Boss	ig88_droideka_shield	6	100		bh_dm_8	9	100		bh_dread_strike_5	3	100		bh_dm_crit_8	2	100		me_bacta_grenade_1	6	100																																						
+world_boss_paxvizla	Dxun Vizla World Boss	ig88_droideka_shield	6	100		bh_dm_7	9	100		bh_dread_strike_4	3	100		bh_dm_crit_7	2	100		me_bacta_grenade_1	6	100																																						
 clan_vizla_mandalorian	Clan Vizla Mandalorian	bh_dm_8	9	100		bh_dm_crit_8	2	100		me_hot_1	20	100																																														
 dxun_boma	Boma																																																									
 dxun_cannok	Cannok																																																									
