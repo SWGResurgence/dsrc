@@ -1279,7 +1279,7 @@ bm_happiness_joyous	bm_happiness_icon			1	command.bm_happiness_joyous	-1	experti
 bm_happiness_happy	bm_happiness_icon			1	command.bm_happiness_happy	-1	expertise_damage_all	15		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 bm_happiness_very_happy	bm_happiness_icon			1	command.bm_happiness_very_happy	-1	expertise_damage_all	20		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 bm_happiness_ecstatic	bm_happiness_icon			1	command.bm_happiness_ecstatic	-1	expertise_damage_all	25		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-bm_truffle_pig	bm_player_buff			1	command.bm_truffle_pig	900	bm_beast_family_pig	0	forage_bonus_mod	25	enzyme_bonus_mod	25		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+bm_truffle_pig	bm_player_buff			1	command.bm_truffle_pig	900	bm_beast_family_pig	0	forage_bonus_mod	35	enzyme_bonus_mod	35		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 bm_helper_monkey_domestic	bm_player_buff	tcg_diner_station		1	command.bm_helper_monkey_domestic	900	bm_beast_family_monkey	0	clothing_experimentation	2	clothing_assembly	5	food_assembly	5	food_experimentation	6	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 bm_helper_monkey_engineering	bm_player_buff			1	command.bm_helper_monkey_domestic	900	bm_beast_family_monkey	0	droid_experimentation	4	droid_assembly	8	cybernetic_experimentation	4	cybernetic_assembly	8	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 bm_helper_monkey_structure	bm_player_buff	tcg_diner_station		1	command.bm_helper_monkey_domestic	900	bm_beast_family_monkey	0	expertise_experimentation_increase_architect	2	structure_assembly	5	advanced_assembly	5	structure_experimentation	6	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
