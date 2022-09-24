@@ -570,7 +570,7 @@ item_tow_schematic_cannon_03_01			"string:loot_schematic.schematic=object/draft_
 item_tow_schematic_rifle_03_01			"string:loot_schematic.schematic=object/draft_schematic/weapon/appearance/weapon_appearance_rifle_dp23.iff,string:loot_schematic.skill_req=class_munitions_phase4_master"								
 item_tow_schematic_rifle_03_02			"string:loot_schematic.schematic=object/draft_schematic/weapon/appearance/weapon_appearance_rifle_disrupter.iff,string:loot_schematic.skill_req=class_munitions_phase4_master"								
 item_tow_schematic_vehicle_02_01			"string:vehicle_attribs.object_ref=lava_skiff,float:hit_points=30000"								
-item_tow_schematic_vehicle_02_02			"string:vehicle_attribs.object_ref=desert_skiff,float:hit_points=15000"								
+item_tow_schematic_vehicle_02_02			"string:vehicle_attribs.object_ref=desert_skiff,float:hit_points=75000"								
 item_tow_buff_crystal_02_01				index_color_1=1	towCrystalOffenseBurst	long_reuse_3	3600			appearance/pt_special_hit_concuss.prt	
 item_tow_buff_crystal_02_02				index_color_1=22	towCrystalDefenseBurst	long_reuse_3	3600			appearance/pt_special_hit_concuss.prt	
 item_tow_buff_crystal_02_03				index_color_1=30	towCrystalDotImmunity	towCrystalDotImmunity	3600			appearance/pt_special_hit_concuss.prt	
