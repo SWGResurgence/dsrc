@@ -36,6 +36,8 @@ public class pumpkin_smasher_object extends script.base_script
             playClientEffectObj(player, "clienteffect/egg_break.cef", player, "root");
             broadcast(player, "You've smashed a pumpkin.");
             modifyCollectionSlotValue(player, "halloween_pumpkin_pulper", 1);
+            hideFromClient(self, true);
+            destroyObject(self);
         }
         return SCRIPT_CONTINUE;
     }
