@@ -1279,11 +1279,11 @@ bm_happiness_joyous	bm_happiness_icon			1	command.bm_happiness_joyous	-1	experti
 bm_happiness_happy	bm_happiness_icon			1	command.bm_happiness_happy	-1	expertise_damage_all	15		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 bm_happiness_very_happy	bm_happiness_icon			1	command.bm_happiness_very_happy	-1	expertise_damage_all	20		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 bm_happiness_ecstatic	bm_happiness_icon			1	command.bm_happiness_ecstatic	-1	expertise_damage_all	25		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-bm_truffle_pig	bm_player_buff			1	command.bm_truffle_pig	900	bm_beast_family_pig	0	forage_bonus_mod	25	enzyme_bonus_mod	25		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-bm_helper_monkey_domestic	bm_player_buff	tcg_diner_station		1	command.bm_helper_monkey_domestic	900	bm_beast_family_monkey	0	clothing_experimentation	2	clothing_assembly	5	food_assembly	5	food_experimentation	6	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-bm_helper_monkey_engineering	bm_player_buff			1	command.bm_helper_monkey_domestic	900	bm_beast_family_monkey	0	droid_experimentation	4	droid_assembly	8	cybernetic_experimentation	4	cybernetic_assembly	8	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-bm_helper_monkey_structure	bm_player_buff	tcg_diner_station		1	command.bm_helper_monkey_domestic	900	bm_beast_family_monkey	0	expertise_experimentation_increase_architect	2	structure_assembly	5	advanced_assembly	5	structure_experimentation	6	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
-bm_helper_monkey_munitions	bm_player_buff			1	command.bm_helper_monkey_domestic	900	bm_beast_family_monkey	0	weapon_experimentation	2	weapon_assembly	5	armor_assembly	5	armor_experimentation	2	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+bm_truffle_pig	bm_player_buff			1	command.bm_truffle_pig	3600	bm_beast_family_pig	0	forage_bonus_mod	35	enzyme_bonus_mod	35		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+bm_helper_monkey_domestic	bm_player_buff	tcg_diner_station		1	command.bm_helper_monkey_domestic	3600	bm_beast_family_monkey	0	clothing_experimentation	2	clothing_assembly	5	food_assembly	5	food_experimentation	6	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+bm_helper_monkey_engineering	bm_player_buff			1	command.bm_helper_monkey_domestic	3600	bm_beast_family_monkey	0	droid_experimentation	4	droid_assembly	8	cybernetic_experimentation	4	cybernetic_assembly	8	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+bm_helper_monkey_structure	bm_player_buff	tcg_diner_station		1	command.bm_helper_monkey_domestic	3600	bm_beast_family_monkey	0	expertise_experimentation_increase_architect	2	structure_assembly	5	advanced_assembly	5	structure_experimentation	6	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+bm_helper_monkey_munitions	bm_player_buff			1	command.bm_helper_monkey_domestic	3600	bm_beast_family_monkey	0	weapon_experimentation	2	weapon_assembly	5	armor_assembly	5	armor_experimentation	2	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 bm_beast_steroid	bm_beast_xp_buff			1	command.bm_deflective_hide	900	bm_beast_xp_buff	0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 bm_goo	bm_goo			1	command.bm_goo	4	expertise_action_all	-20		0		0		0		0	STATE_NONE	none			1	1		1	1	1	0	1	1	0	1	1	1
 bm_kick	bm_kick			1	command.bm_kick	2	movement	0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -1314,7 +1314,7 @@ combat_all_attack_miss_vulnerability	test_combat			1	buffs.foodBeverage	120	comb
 event_run_speed	event_run_speed			1	buffs.foodBeverage	3000	movement	25		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 event_vitality_boost	event_vitality_boost			1	buffs.foodBeverage	3000	expertise_damage_all	3	expertise_action_all	3		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 combat_glancing_blow_reduction	combat_glancing_reduction			1	buffs.foodBeverage	120	combat_glancing_blow_reduction	100		0		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
-bm_helper_monkey_jedi	bm_player_buff			1	command.bm_helper_monkey_domestic	900	bm_beast_family_monkey	0	jedi_saber_experimentation	10	jedi_saber_assembly	10		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+bm_helper_monkey_jedi	bm_player_buff			1	command.bm_helper_monkey_domestic	3600	bm_beast_family_monkey	0	jedi_saber_experimentation	10	jedi_saber_assembly	10		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 heal_diminishing_returns_1	healingDR			1	command.heal_dr_none	30		0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 heal_diminishing_returns_2	healingDR			1	command.heal_dr_light	30		0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 heal_diminishing_returns_3	healingDR			1	command.heal_dr_med	30		0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -1468,7 +1468,7 @@ grenadier_kinetic	krix_grenadier_kinetic			50	command.co_riddle_armor	15	experti
 krix_resonance	krix_resonance			50	command.ig88_droideka_electrify	5	krix_resonance	0		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 sm_smuggled	smuggled			1	buffs.smuggled	3600	expertise_damage_all	7	combat_divide_damage_taken	6	constitution_modified	250		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 sm_smuggled_01	smuggled			1	buffs.forcedEntry	3600	expertise_damage_all	4	combat_divide_damage_taken	5	constitution_modified	250		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
-bm_helper_monkey_shipwright	bm_player_buff			1	command.bm_helper_monkey_domestic	900	bm_beast_family_monkey	0	chassis_experimentation	10	engine_experimentation	10	shields_experimentation	10	weapon_systems_experimentation	10	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+bm_helper_monkey_shipwright	bm_player_buff			1	command.bm_helper_monkey_domestic	3600	bm_beast_family_monkey	0	chassis_experimentation	10	engine_experimentation	10	shields_experimentation	10	weapon_systems_experimentation	10	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 col_ent_invis_buff_tracker	collection_ent			1	buffs.smuggled	900		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
 col_sd_invis_buff_tracker	collection_sd			1	buffs.smuggled	21600		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
 nova_orion_rank6_lucky_salvage	nova_orion			1	command.sm_path_fake_goods	7200		0		0		0		0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
@@ -2012,7 +2012,7 @@ tok_ent_invis_buff_tracker_3	collection_ent_token			1	buffs.smuggled	3000		0		0	
 tok_ent_invis_buff_tracker_4	collection_ent_token			1	buffs.smuggled	3600		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
 ent_jax_familiar	vr_familiar			4	buffs.genericBuff	-1	expertise_en_inspire_pulse_duration_increase	2																	0								
 hospital_buff	hospital_buff			1	command.bactaInfusion	-1	expertise_buff_duration_line_me_enhance	7200																									
-bm_helper_monkey_domestic	bm_player_buff	tcg_diner_station		1	command.bm_helper_monkey_domestic	900		0	clothing_experimentation	2	clothing_assembly	5	food_assembly	5	food_experimentation	6	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+bm_helper_monkey_domestic	bm_player_buff	tcg_diner_station		1	command.bm_helper_monkey_domestic	3600		0	clothing_experimentation	2	clothing_assembly	5	food_assembly	5	food_experimentation	6	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 entertainer_buff	entertainer_buff			1	command.powerBoost	-1	expertise_en_inspire_base_point_increase	10	expertise_en_inspire_pulse_duration_increase	8	expertise_en_inspire_buff_duration_increase	60																					
 of_deb_off_1	targetTracking			90	command.of_deb_def	20			expertise_dodge	-7	critical_hit_vulnerable	16		0		0	STATE_NONE	none	appearance/pt_officer_paint_target.prt		1	1		1	1	1	0	1	1	0	1	1	1
 of_deb_off_2	identityTracking			90	command.of_deb_def	20	detect_hidden	-50	camouflage	-100		0		0		0	STATE_NONE	none	appearance/pt_officer_paint_target.prt		1	1		1	1	1	0	1	1	0	1	1	1
