@@ -1,6 +1,8 @@
 package script.event.halloween;
 
 import script.library.buff;
+import script.library.static_item;
+import script.library.utils;
 import script.menu_info;
 import script.menu_info_types;
 import script.obj_id;
@@ -28,9 +30,12 @@ public class pumpkin_smasher_object extends script.base_script
             }
             int randChance = rand(1,100);
             if (randChance <= 90 ) {
-                broadcast(player, "You have found pumpkin puree!");
+                broadcast(player, "You find a strange object inside the pumpkin!");
+                static_item.createNewItemFunction("event_halloween_token", utils.getInventoryContainer(player), 2);
             }
-            broadcast(player, "You've smashed the pumpkin.");
+            playClientEffectObj(player, "clienteffect/egg_break.cef", player, "root");
+            broadcast(player, "You've smashed a pumpkin.");
+            modifyCollectionSlotValue(player, "halloween_pumpkin_pulper", 1);
         }
         return SCRIPT_CONTINUE;
     }
