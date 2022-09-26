@@ -13,6 +13,7 @@ public class terminal_space extends script.terminal.base.base_terminal
     public static final float TERMINAL_USE_DISTANCE = 8.0f;
     public static final string_id SID_LAUNCH_SHIP = new string_id("space/space_terminal", "launch_ship");
     public static final string_id SID_NOT_IN_COMBAT = new string_id("travel", "not_in_combat");
+    public static final String LAUNCH_LOCATIONS = "datatables/space_zones/launch_locations.iff";
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         requestPreloadCompleteTrigger(self);
@@ -30,7 +31,7 @@ public class terminal_space extends script.terminal.base.base_terminal
             //setName(self, "BUSTED TERMINAL! PUT ME IN A CITY!@!@!@!@");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             for (region rgnTest : rgnCities) {
                 strName = rgnTest.getName();
@@ -45,7 +46,8 @@ public class terminal_space extends script.terminal.base.base_terminal
             }
             if (dctTeleportInfo == null)
             {
-                //setName(self, "NO ENTRY FOR " + strName + " in teleport datatable. Busted terminal");
+                setName(self, "NO ENTRY FOR " + strName + " in teleport datatable. Busted terminal");
+                dctTeleportInfo = dataTableGetRow(LAUNCH_LOCATIONS, strName);
                 return SCRIPT_CONTINUE;
             }
         }
@@ -92,7 +94,7 @@ public class terminal_space extends script.terminal.base.base_terminal
         {
             LOG("space", "OnAboutToLaunchIntoSpace warpLocation space.loc.space was null on terminal");
         }
-        else 
+        else
         {
             LOG("space", "getting scd and stuff");
             LOG("space", "scd is " + shipControlDevice);
@@ -153,7 +155,7 @@ public class terminal_space extends script.terminal.base.base_terminal
                     {
                         doStarportToStarportLaunch(player, ship, membersApprovedByShipOwner, destinationGroundPlanet, destinationGroundTravelPoint);
                     }
-                    else 
+                    else
                     {
                         LOG("space", "location is " + warpLocation);
                         location locDestination = space_utils.getRandomLocationInSphere(warpLocation, 150, 300);
@@ -408,7 +410,7 @@ public class terminal_space extends script.terminal.base.base_terminal
             launch(player, ship, membersApprovedByShipOwner, locDestination, groundLoc);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
         }
         sendDirtyObjectMenuNotification(self);
