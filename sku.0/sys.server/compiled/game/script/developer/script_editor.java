@@ -14,7 +14,7 @@ public class script_editor extends script.base_script
     }
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
-        if (!isGod(self))
+        if (!isInAdminTable(self))
         {
             return SCRIPT_CONTINUE;
         }
@@ -169,6 +169,7 @@ public class script_editor extends script.base_script
                 setSUIProperty(pageId, "outputPage.text", "Text", outputWindowText);
                 boolean showResult = showSUIPage(pageId);
                 flushSUIPage(pageId);
+                broadcast(self, "WOW I CAN NOW EDIT THIS SCRIPT");
             }
         }
         return SCRIPT_CONTINUE;

@@ -14,7 +14,8 @@ public class pumpkin_smasher_object extends script.base_script
     {
     }
     private static final String HALLOWEEN = "event/halloween";
-    public static final string_id SID_USE = new string_id(HALLOWEEN, "learn_song");
+    public static final string_id SID_USE = new string_id(HALLOWEEN, "smash_pumpkin");
+    public static final String PULPED_ITER_OBJVAR = "halloween.pulped";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE);
@@ -24,6 +25,11 @@ public class pumpkin_smasher_object extends script.base_script
     {
         if (item == menu_info_types.SERVER_MENU1)
         {
+            int baseUse = 0;
+            if (!hasObjVar(player, PULPED_ITER_OBJVAR))
+            {
+                setObjVar(self, PULPED_ITER_OBJVAR, baseUse);
+            }
             if (!buff.hasBuff(player, "event_halloween_pumpkin_pulper"))
             {
                 buff.applyBuff(player, "event_halloween_pumpkin_pulper");
@@ -33,7 +39,9 @@ public class pumpkin_smasher_object extends script.base_script
                 broadcast(player, "You find a strange object inside the pumpkin!");
                 static_item.createNewItemFunction("event_halloween_token", utils.getInventoryContainer(player), 2);
             }
-            playClientEffectObj(player, "clienteffect/egg_break.cef", player, "root");
+            int currentSmashed = getIntObjVar(player, "halloween.pulped");
+            setObjVar(player, PULPED_ITER_OBJVAR, currentSmashed++);
+            playClientEffectObj(player, "clienteffect/egg_hatch_01.cef", player, "root");
             broadcast(player, "You've smashed a pumpkin.");
             modifyCollectionSlotValue(player, "halloween_pumpkin_pulper", 1);
             hideFromClient(self, true);

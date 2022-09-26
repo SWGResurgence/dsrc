@@ -25,7 +25,7 @@ public class pumpkin_spawner extends script.base_script {
         if (!hasObjVar(self,"halloween.pulp_master")) {
             setObjVar(self, "halloween.pulp_master", planet);
         }
-        int runTimes = 48;
+        int runTimes = 0;
         while (runTimes <= 48) {
             location spot = here;
             if (spot == null)
