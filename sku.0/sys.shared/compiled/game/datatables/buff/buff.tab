@@ -584,12 +584,15 @@ npeMeleeSpeedLongDuration	genBuff_4			3	buffs.spiceAction	900	strength_modified	
 npeComboAccLongDuration	genBuff_4			3	buffs.genericBuff	900	precision_modified	5	strength_modified	5		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 towHealthMinor	genBuff_3			19	command.regeneration	300	constitution_modified	30		0		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towCrystalOffenseBurst	genBuff_3			60	command.detonateDroid	1800	constitution_modified	120	precision_modified	120	strength_modified	120		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-towCrystalDefenseBurst	genBuff_3			60	command.powerBoost	1800	constitution_modified	120	agility_modified	120		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+towCrystalDefenseBurst	genBuff_3			60	command.powerBoost	1800	constitution_modified	120	agility_modified	120	luck_modified	"120
+
+"		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towCrystalDotImmunity	genBuff_4			60	buffs.spiceHealth	1800	expertise_dot_absorption_all	50	dot_resist_all	50		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 towHelmetAccuracy	genBuff_1			90	command.aim	-1	precision_modified	20	strength_modified	20		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 towGlovesHealEff	genBuff_1			90	command.sampledna	-1	constitution_modified	30	agility_modified	30	stamina_modified	30	expertise_healing_all	5	expertise_action_all	5	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 towCrystalUberCombat	towCrystal	haste		60	command.dazzle	1800	constitution_modified	200	stamina_modified	200	precision_modified	200	strength_modified	200		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
-towCrystalUberDs	towCrystal			60	command.powerBoost	1800	constitution_modified	200	luck_modified	200	agility_modified	200		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+towCrystalUberDs	towCrystal			60	command.powerBoost	1800	constitution_modified	200	luck_modified	200	agility_modified	200	"
+"	0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towCrystalABImmune	towCrystal	armorBreak		60	command.powerBoost	1800	constitution_modified	150	stamina_modified	150		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 towRingAbsorption	genBuff_4			90	command.bandage	-1	agility_modified	20	constitution_modified	20	stamina_modified	20		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 towAbsorption	genBuff_4			60	command.bandage	900	agility_modified	20	constitution_modified	20	stamina_modified	20		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
