@@ -1,9 +1,8 @@
 package script.structure.municipal;
 
-import script.library.buff;
 import script.library.ai_lib;
+import script.library.buff;
 import script.library.create;
-import script.library.structure;
 import script.library.utils;
 import script.location;
 import script.obj_id;
@@ -13,11 +12,17 @@ public class player_cantina extends script.base_script {
         if (isPlayer(item) && utils.isProfession(item, utils.ENTERTAINER)) {
             buff.applyBuff(item, "entertainer_buff");
         }
+        if (isPlayer(item) && utils.isProfession(item, utils.MEDIC)) {
+            buff.applyBuff(item, "medic_buff");
+        }
         return SCRIPT_CONTINUE;
     }
     public int OnAboutToLoseItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException {
         if (isPlayer(item) && buff.hasBuff(item, "entertainer_buff")) {
             buff.removeBuff(item, "entertainer_buff");
+        }
+        if (isPlayer(item) && buff.hasBuff(item, "medic_buff")) {
+            buff.removeBuff(item, "medic_buff");
         }
         return SCRIPT_CONTINUE;
     }
