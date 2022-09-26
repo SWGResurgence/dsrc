@@ -5,3 +5,7 @@
 @class object_template 3
 
 sharedTemplate = "object/building/naboo/shared_cantina_naboo_b.iff"
+
+objvars =+["healing.canhealwound"=1, "safeLogout"=1]
+
+scripts =+["structure.municipal.npcCantina"]

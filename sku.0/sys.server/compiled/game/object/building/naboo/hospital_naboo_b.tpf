@@ -6,4 +6,6 @@
 
 sharedTemplate = "object/building/naboo/shared_hospital_naboo_b.iff"
 
-scripts = +["systems.elevator.hospital_elevators"]
+objvars =+["healing.canhealwound"=1, "safeLogout"=1]
+
+scripts = +["systems.elevator.hospital_elevators", "structure.municipal.npcHospital"]
