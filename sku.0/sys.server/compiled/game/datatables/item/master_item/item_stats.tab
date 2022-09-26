@@ -5029,7 +5029,7 @@ item_neural_recon_network_control_interface_01_01
 item_irish_darkshadow_memorial_01_01											
 item_aurillian_certified_scroll_01_01											
 item_world_boss_token_01_01											
-item_elite_geothermal_generator_deed_schematic_01_01			string:loot_schematic.schematic=object/draft_schematic/structure/installation_generator_elite_geothermal.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase4_master								
+item_elite_geothermal_generator_deed_schematic_01_01			string:loot_schematic.schematic=object/draft_schematic/structure/installation_generator_geothermal_elite.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase4_master
 item_painting_resurgence_imperial_01_01											
 item_painting_resurgence_rebel_01_01											
 item_instance_unlock_heroics_01_01											
@@ -5095,3 +5095,6 @@ item_naboo_house_small_style_01_03_deed			string:player_structure.deed.template=
 item_naboo_house_small_style_02_02_deed			string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_b.iff,int:player_structure.deed.buildtime=90								
 item_naboo_house_small_style_02_03_deed			string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_c.iff,int:player_structure.deed.buildtime=90								
 dxun_drexl_familiar			string:creatureName=dxun_drexl_familiar								
+item_elite_geothermal_generator_deed_01_01											
+item_turbo_energy_drilling_pumping_unit_advanced_01_01
+item_turbo_energy_drilling_pumping_unit_advanced_schematic_01_01			string:loot_schematic.schematic=object/draft_schematic/structure/component/structure_turbo_energy_drilling_pumping_unit_advanced.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase4_master

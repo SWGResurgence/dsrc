@@ -1,0 +1,8 @@
+@base object/tangible/component/base/base_component.iff
+
+@class tangible_object_template 0
+@class object_template 0
+
+sharedTemplate = "object/tangible/component/structure/shared_turbo_energy_drilling_pumping_unit_advanced.iff"
+
+scripts = [ "systems.crafting.structure.harvest_component" ]
