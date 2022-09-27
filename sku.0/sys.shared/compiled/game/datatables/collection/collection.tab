@@ -550,6 +550,7 @@ badge_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0
 			halloween_badge_09	6841	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0																															
 			halloween_badge_10	21832	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0																															
 			halloween_badge_11	22700	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0																															
+			halloween_badge_22	29008	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0																															
 		col_lifeday_08		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						1	0																															
 			lifeday_badge_08	6096	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0																															
 			lifeday_badge_09	6031	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0																															
@@ -6229,11 +6230,13 @@ fish_record_current_holder_book				0	-1	-1																		sound/music_acq_mine
 			fish_record_current_holder_striped_talus	21334	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0																															
 			fish_record_current_holder_striped_tatooine	21335	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0																															
 			fish_record_current_holder_striped_yavin4	21336	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0																															
+resurgence_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0																															
 	resurgence_page			0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0																															
 		halloween_pumpkin_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0																															
 			halloween_pumpkin_pulper	29001	29005	1000	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	0	1	smashingly_spooky					1	1	pulper																														
 		trick_or_treater		0	-1	-1																																																											
 			halloween_trick_or_treater	29006	29007	5000	noScriptNotifyOnModify																	sound/music_acq_miner.snd		0	1	galactic_nuisance					1	1																															
+removed_slots_book				0	-1	-1																	sound/music_acq_miner.snd	gray	1	0						0	0																																
 	removed_slots_page			0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0																															
 		slots_removed		0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0																															
 			reserved_mail_04_03	16083	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0																															
