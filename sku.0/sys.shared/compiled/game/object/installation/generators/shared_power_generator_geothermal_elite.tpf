@@ -12,6 +12,6 @@ detailedDescription = "" ""
 lookAtText = "" ""
 
 appearanceFilename = "appearance/ins_all_mobile_chem_refinery.apt"
-portalLayoutFileName = ""
+portalLayoutFilename = ""
 
 clientDataFile = "clientdata/installation/client_shared_mining_liquid_harvester_style_1.cdf"
