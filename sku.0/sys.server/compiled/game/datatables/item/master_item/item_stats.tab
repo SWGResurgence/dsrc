@@ -5078,23 +5078,5 @@ item_resurgence_czerka_banner_01_03
 item_resurgence_mandalorian_banner_01_01											
 item_resurgence_mandalorian_banner_01_02											
 game_update_4_gift											
-item_cantina_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/cantina_naboo_b.iff,int:player_structure.deed.buildtime=90"								
-item_cantina_naboo_style_01_03_deed			"string:player_structure.deed.template=object/building/player/city/cantina_naboo_c.iff,int:player_structure.deed.buildtime=90"								
-item_cityhall_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/cityhall_naboo_b.iff,int:player_structure.deed.buildtime=90"								
-item_cloning_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/cloning_naboo_b.iff,int:player_structure.deed.buildtime=90"								
-item_hospital_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/hospital_naboo_b.iff,int:player_structure.deed.buildtime=90"								
-item_hospital_naboo_style_02_01_deed			"string:player_structure.deed.template=object/building/naboo/hospital_naboo_c.iff,int:player_structure.deed.buildtime=90"								
-item_shuttleport_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/naboo/shuttleport_naboo_b.iff,int:player_structure.deed.buildtime=90"								
-item_naboo_guild_style_01_02_deed			"string:player_structure.deed.template=object/building/player/player_guildhall_naboo_style_01_b.iff,int:player_structure.deed.buildtime=90"								
-item_naboo_house_large_style_01_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_large_style_01_b.iff,int:player_structure.deed.buildtime=90"								
-item_naboo_house_large_style_01_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_large_style_01_c.iff,int:player_structure.deed.buildtime=90"								
-item_naboo_house_medium_style_01_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_medium_style_01_b.iff,int:player_structure.deed.buildtime=90"								
-item_naboo_house_medium_style_01_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_medium_style_01_c.iff,int:player_structure.deed.buildtime=90"								
-item_naboo_house_small_style_01_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_01_b.iff,int:player_structure.deed.buildtime=90"								
-item_naboo_house_small_style_01_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_01_c.iff,int:player_structure.deed.buildtime=90"								
-item_naboo_house_small_style_02_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_b.iff,int:player_structure.deed.buildtime=90"								
-item_naboo_house_small_style_02_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_c.iff,int:player_structure.deed.buildtime=90"								
 dxun_drexl_familiar			string:creatureName=dxun_drexl_familiar								
-item_elite_geothermal_generator_deed_01_01											
-item_turbo_energy_drilling_pumping_unit_advanced_01_01											
 item_turbo_energy_drilling_pumping_unit_advanced_schematic_01_01			"string:loot_schematic.schematic=object/draft_schematic/structure/component/structure_turbo_energy_drilling_pumping_unit_advanced.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase4_master"								
