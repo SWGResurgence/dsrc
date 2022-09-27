@@ -1,10 +1,7 @@
 package script.event.halloween;
 
-import script.*;
-import script.library.buff;
 import script.library.create;
-import script.library.static_item;
-import script.library.utils;
+import script.*;
 
 public class pumpkin_spawner extends script.base_script {
     private static final String HALLOWEEN = "event/halloween";
@@ -43,27 +40,19 @@ public class pumpkin_spawner extends script.base_script {
         int runTimes = 0;
         while (runTimes <= 48) {
             location spot = here;
-            if (spot != null)
-            {
-                location locLowerLeft = spot;
-                locLowerLeft.x -= 6500.0f;
-                locLowerLeft.z -= 6500.0f;
-                location locUpperRight = spot;
-                locUpperRight.x += 6500.0f;
-                locUpperRight.z += 6500.0f;
-                spot = getGoodLocation(2.0f, 2.0f, locLowerLeft, locUpperRight, true, false);
-                if (spot == null)
-                {
-                    LOG("halloween", "Invalid spot to place pumpkin. Revise!");
-                }
-                spot.y = getHeightAtLocation(spot.x, spot.z);
-                obj_id pumpkin = create.object("object/tangible/holiday/halloween/pumpkin_object.iff", spot);
-                attachScript(pumpkin, "event.halloween.pumpkin_smasher_object");
-                setName(pumpkin, NAME_VARIATIONS[rand(0,2)]);
-                setScale(pumpkin, rand(0.5f,1.5f));
-                obj_id player = getClosestPlayer(getLocation(self));
-                broadcast(player, "spawned vegetation at " + spot.x + spot.y + spot.z + spot.area);
-            }
+            location locLowerLeft = spot;
+            locLowerLeft.x -= 6500.0f;
+            locLowerLeft.z -= 6500.0f;
+            location locUpperRight = spot;
+            locUpperRight.x += 6500.0f;
+            locUpperRight.z += 6500.0f;
+            spot = getGoodLocation(2.0f, 2.0f, locLowerLeft, locUpperRight, true, false);
+            spot.y = getHeightAtLocation(spot.x, spot.z);
+            obj_id pumpkin = create.object("object/tangible/holiday/halloween/pumpkin_object.iff", spot);
+            attachScript(pumpkin, "event.halloween.pumpkin_smasher_object");
+            setName(pumpkin, NAME_VARIATIONS[rand(0,2)]);
+            obj_id player = getClosestPlayer(getLocation(self));
+            broadcast(player, "spawned vegetation at " + spot.x + spot.y + spot.z + spot.area);
             runTimes++;
         }
         return SCRIPT_CONTINUE;
