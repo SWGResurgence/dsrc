@@ -32,7 +32,7 @@ public class pumpkin_spawner extends script.base_script {
         }
         return SCRIPT_CONTINUE;
     }
-    public int handleWorldSpawn(obj_id self) throws InterruptedException {
+    public void handleWorldSpawn(obj_id self) throws InterruptedException {
         location here = getLocation(self);
         if (!hasObjVar(self,"halloween.pulp_master")) {
             setObjVar(self, "halloween.pulp_master", 1);
@@ -56,7 +56,6 @@ public class pumpkin_spawner extends script.base_script {
             broadcast(player, "spawned vegetation at " + spot.x + elevation + spot.z + spot.area);
             runTimes++;
         }
-        return SCRIPT_CONTINUE;
     }
 }
 
