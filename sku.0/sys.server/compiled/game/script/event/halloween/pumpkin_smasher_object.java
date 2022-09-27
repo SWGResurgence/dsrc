@@ -38,7 +38,7 @@ public class pumpkin_smasher_object extends script.base_script
             int randChance = rand(1,100);
             if (randChance < 10 ) {
                 broadcast(player, "You find a strange object inside the pumpkin!");
-                static_item.createNewItemFunction("event_halloween_token", utils.getInventoryContainer(player), 2);
+                static_item.createNewItemFunction("item_event_halloween_coin", utils.getInventoryContainer(player), 2);
             }
             playClientEffectObj(player, "clienteffect/egg_hatch_01.cef", player, "foot_l");
             broadcast(player, "You have smashed this pumpkin.");
