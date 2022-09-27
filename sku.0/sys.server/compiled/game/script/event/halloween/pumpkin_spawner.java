@@ -51,9 +51,9 @@ public class pumpkin_spawner extends script.base_script {
             obj_id pumpkin = create.object("object/tangible/holiday/halloween/pumpkin_object.iff", spot);
             attachScript(pumpkin, "event.halloween.pumpkin_smasher_object");
             setName(pumpkin, NAME_VARIATIONS[rand(0,2)]);
-            obj_id player = getClosestPlayer(getLocation(self));
             float elevation = getElevation(spot);
-            broadcast(player, "spawned vegetation at " + spot.x + elevation + spot.z + spot.area);
+            //broadcast(player, "spawned vegetation at " + spot.x + elevation + spot.z + spot.area);
+            setName(self, "Pumpkin Count: " + Integer.toString(runTimes));
             runTimes++;
         }
     }
