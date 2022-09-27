@@ -10,7 +10,6 @@ species = SP_human
 
 objectName = "mob/creature_names" "restuss_rebel_commendation_officer"
 detailedDescription = "" ""
-lootAtText = "" ""
 
 appearanceFilename = "appearance/hum_f.sat"
 
