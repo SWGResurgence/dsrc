@@ -10,4 +10,4 @@ currentExtractionRate = 15
 maxHopperSize = 100000
 masterClassName = "energy_renewable_site_limited_geothermal"
 
-sharedTemplate = object/installation/generators/shared_power_generator_geothermal_elite.iff"
+sharedTemplate = "object/installation/generators/shared_power_generator_geothermal_elite.iff"

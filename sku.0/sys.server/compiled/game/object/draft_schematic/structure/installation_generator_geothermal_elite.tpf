@@ -3,7 +3,7 @@
 @class draft_schematic_object_template 7
 
 itemsPerContainer = 0
-craftedObjectTemplate = object/tangible/deed/generator_deed/power_generator_geothermal_elite_deed.iff"
+craftedObjectTemplate = "object/tangible/deed/generator_deed/power_generator_geothermal_elite_deed.iff"
 slots = [
     [
     optional = false,

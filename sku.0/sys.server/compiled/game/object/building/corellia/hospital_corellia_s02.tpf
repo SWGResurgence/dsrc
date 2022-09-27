@@ -8,4 +8,4 @@ sharedTemplate = "object/building/corellia/shared_hospital_corellia_s02.iff"
 
 objvars =+["healing.canhealwound"=1, "safeLogout"=1]
 
-scripts = +["systems.elevator.hospital_elevators", "structure.municipal.npcHospital"
+scripts = +["systems.elevator.hospital_elevators", "structure.municipal.npcHospital"]

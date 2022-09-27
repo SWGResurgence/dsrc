@@ -6,7 +6,7 @@ attributes = [
     [name = "crafting" "complexity", experiment = "" "", value = 25..25],
     [name = "crafting" "xp", experiment = "" "", value = 50000..50000],
     [name = "crafting" "extractRate", experiment = "crafting" "expEfficiency", value = 30..70],
-    [name = "crafting" "hopperSize", experiment = "crafting" "expStorage", value = 66000.960000],
+    [name = "crafting" "hopperSize", experiment = "crafting" "expStorage", value = 66000..960000],
     [name = "crafting" "hitPoints", experiment = "" "", value = 5000..7000]]
 
 slots = [

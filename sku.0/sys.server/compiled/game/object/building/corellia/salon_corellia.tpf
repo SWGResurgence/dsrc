@@ -6,7 +6,7 @@
 
 sharedTemplate = "object/building/corellia/shared_salon_corellia.iff"
 
-objvars = +["salon" = 1, healing.canhealwound"=1, "safeLogout"=1]
+objvars = +["salon" = 1, "healing.canhealwound" =1, "safeLogout"=1]
 
 scripts =+["planet_map.map_loc"]
 

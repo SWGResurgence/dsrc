@@ -45,6 +45,7 @@ slots = [
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
+	[
 	optional = false,
     	name = "craft_structure_ingredients_n" "power_supply_unit",
     	options = [

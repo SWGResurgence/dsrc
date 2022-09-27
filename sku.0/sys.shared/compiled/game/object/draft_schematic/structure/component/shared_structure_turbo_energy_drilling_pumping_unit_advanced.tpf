@@ -13,7 +13,7 @@ slots = [
    	[name = "craft_structure_ingredients_n" "well_head_positioning_and_piping", hardpoint = ""],
    	[name = "craft_structure_ingredients_n" "fluid_hoses", hardpoint = ""],
    	[name = "craft_structure_ingredients_n" "pump_unit", hardpoint = ""],
-   	[name = "craft_structure_ingredients_n" "sealant_and_shock_absorbing_buffers", hardpoint = "],
+   	[name = "craft_structure_ingredients_n" "sealant_and_shock_absorbing_buffers", hardpoint = ""],
    	[name = "craft_structure_ingredients_n" "power_supply_unit", hardpoint = ""]]
 
 craftedSharedTemplate="object/tangible/component/structure/shared_turbo_energy_drilling_pumping_unit_advanced.iff"
