@@ -8,7 +8,7 @@ import script.library.utils;
 
 public class pumpkin_spawner extends script.base_script {
     private static final String HALLOWEEN = "event/halloween";
-    public static final string_id SID_USE = new string_id(HALLOWEEN, "smash_pumpkin");
+    public static final string_id SID_USE = new string_id(HALLOWEEN, "spawn_pumpkins");
     public void pumpkin_spawner()
     {
     }
@@ -43,7 +43,7 @@ public class pumpkin_spawner extends script.base_script {
         int runTimes = 0;
         while (runTimes <= 48) {
             location spot = here;
-            if (spot == null)
+            if (spot != null)
             {
                 location locLowerLeft = spot;
                 locLowerLeft.x -= 6500.0f;
