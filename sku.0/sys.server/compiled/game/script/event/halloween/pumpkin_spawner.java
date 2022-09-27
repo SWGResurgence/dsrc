@@ -1,10 +1,15 @@
 package script.event.halloween;
 
 import script.*;
+import script.library.buff;
 import script.library.create;
+import script.library.static_item;
+import script.library.utils;
 
 public class pumpkin_spawner extends script.base_script {
-    public void pumpkin_spawnert()
+    private static final String HALLOWEEN = "event/halloween";
+    public static final string_id SID_USE = new string_id(HALLOWEEN, "smash_pumpkin");
+    public void pumpkin_spawner()
     {
     }
     public String[] NAME_VARIATIONS = {
@@ -16,14 +21,24 @@ public class pumpkin_spawner extends script.base_script {
         return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException {
-        handleWorldSpawn(self, getCurrentSceneName());
         return SCRIPT_CONTINUE;
     }
-    public void handleWorldSpawn(obj_id self, String planet) throws InterruptedException {
-        String pumpkinTemplate = "";
+    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
+    {
+        mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE);
+        return SCRIPT_CONTINUE;
+    }
+    public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException {
+        if (item == menu_info_types.SERVER_MENU1) {
+            handleWorldSpawn(self);
+            broadcast(player, "Spawning 48 pumpkins...");
+        }
+        return SCRIPT_CONTINUE;
+    }
+    public int handleWorldSpawn(obj_id self) throws InterruptedException {
         location here = getLocation(self);
         if (!hasObjVar(self,"halloween.pulp_master")) {
-            setObjVar(self, "halloween.pulp_master", planet);
+            setObjVar(self, "halloween.pulp_master", 1);
         }
         int runTimes = 0;
         while (runTimes <= 48) {
@@ -43,12 +58,15 @@ public class pumpkin_spawner extends script.base_script {
                 }
                 spot.y = getHeightAtLocation(spot.x, spot.z);
                 obj_id pumpkin = create.object("object/tangible/holiday/halloween/pumpkin_object.iff", spot);
+                attachScript(pumpkin, "event.halloween.pumpkin_smasher_object");
                 setName(pumpkin, NAME_VARIATIONS[rand(0,2)]);
+                setScale(pumpkin, rand(0.5f,1.5f));
                 obj_id player = getClosestPlayer(getLocation(self));
                 broadcast(player, "spawned vegetation at " + spot.x + spot.y + spot.z + spot.area);
             }
             runTimes++;
         }
+        return SCRIPT_CONTINUE;
     }
 }
 
