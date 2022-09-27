@@ -5095,6 +5095,5 @@ item_naboo_house_small_style_01_03_deed			"string:player_structure.deed.template
 item_naboo_house_small_style_02_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_b.iff,int:player_structure.deed.buildtime=90"								
 item_naboo_house_small_style_02_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_c.iff,int:player_structure.deed.buildtime=90"								
 dxun_drexl_familiar			string:creatureName=dxun_drexl_familiar								
-item_elite_geothermal_generator_deed_01_01											
 item_turbo_energy_drilling_pumping_unit_advanced_01_01											
 item_turbo_energy_drilling_pumping_unit_advanced_schematic_01_01			"string:loot_schematic.schematic=object/draft_schematic/structure/component/structure_turbo_energy_drilling_pumping_unit_advanced.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase4_master"								
