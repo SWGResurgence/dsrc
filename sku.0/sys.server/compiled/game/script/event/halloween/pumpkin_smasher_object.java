@@ -40,9 +40,10 @@ public class pumpkin_smasher_object extends script.base_script
                 broadcast(player, "You find a strange object inside the pumpkin!");
                 static_item.createNewItemFunction("event_halloween_token", utils.getInventoryContainer(player), 2);
             }
-            setObjVar(player, PULPED_ITER_OBJVAR, currentSmashed++);
             playClientEffectObj(player, "clienteffect/egg_hatch_01.cef", player, "foot_l");
             broadcast(player, "You have smashed this pumpkin.");
+            int currentSmashed = getIntObjVar(player, PULPED_ITER_OBJVAR);
+            setObjVar(player, PULPED_ITER_OBJVAR, currentSmashed++);
             /*modifyCollectionSlotValue(player, "halloween_pumpkin_pulper", 1);
             if (hasCompletedCollectionSlot(player, "halloween_pumpkin_pulper")) {
                 modifyCollectionSlotValue(player, "halloween_pumpkin_pulper_finish", 1);
