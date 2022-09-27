@@ -33,27 +33,27 @@ public class pumpkin_spawner extends script.base_script {
         return SCRIPT_CONTINUE;
     }
     public void handleWorldSpawn(obj_id self) throws InterruptedException {
-        location here = getLocation(self);
         if (!hasObjVar(self,"halloween.pulp_master")) {
             setObjVar(self, "halloween.pulp_master", 1);
         }
         int runTimes = 0;
         while (runTimes < 48) {
-            location spot = here;
+            location spot = getLocation(self);
             location locLowerLeft = spot;
-            locLowerLeft.x -= 6500.0f;
-            locLowerLeft.z -= 6500.0f;
+                locLowerLeft.x -= 6500.0f;
+                locLowerLeft.z -= 6500.0f;
             location locUpperRight = spot;
-            locUpperRight.x += 6500.0f;
-            locUpperRight.z += 6500.0f;
-            spot = getGoodLocation(2.0f, 2.0f, locLowerLeft, locUpperRight, true, false);
+                locUpperRight.x += 6500.0f;
+                locUpperRight.z += 6500.0f;
+            location pumpkin_loc = getGoodLocation(2.0f, 2.0f, locLowerLeft, locUpperRight, true, true);
             //spot.y = getHeightAtLocation(spot.x, spot.z);
-            obj_id pumpkin = create.object("object/tangible/holiday/halloween/pumpkin_object.iff", spot);
+            obj_id pumpkin = create.object("object/tangible/holiday/halloween/pumpkin_object.iff", pumpkin_loc);
             attachScript(pumpkin, "event.halloween.pumpkin_smasher_object");
             setName(pumpkin, NAME_VARIATIONS[rand(0,2)]);
-            float elevation = getElevation(spot);
+            //float elevation = getElevation(spot);
             //broadcast(player, "spawned vegetation at " + spot.x + elevation + spot.z + spot.area);
-            setName(self, "Pumpkin Count: " + Integer.toString(runTimes));
+            setName(self, "Pumpkin Spawner");
+            broadcast(getClosestPlayer(getLocation(self)), "Incrementing");
             runTimes++;
         }
     }
