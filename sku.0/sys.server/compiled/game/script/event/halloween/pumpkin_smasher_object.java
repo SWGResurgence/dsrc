@@ -23,12 +23,12 @@ public class pumpkin_smasher_object extends script.base_script
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
-        if (item == menu_info_types.SERVER_MENU1)
+        if (item == menu_info_types.ITEM_USE)
         {
             int baseUse = 0;
             if (!hasObjVar(player, PULPED_ITER_OBJVAR))
             {
-                setObjVar(self, PULPED_ITER_OBJVAR, baseUse);
+                setObjVar(player, PULPED_ITER_OBJVAR, baseUse);
             }
             if (!buff.hasBuff(player, "event_halloween_pumpkin_pulper"))
             {

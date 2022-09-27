@@ -29,7 +29,7 @@ public class pumpkin_spawner extends script.base_script {
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException {
-        if (item == menu_info_types.SERVER_MENU1) {
+        if (item == menu_info_types.ITEM_USE) {
             handleWorldSpawn(self);
             broadcast(player, "Spawning 48 pumpkins...");
         }
