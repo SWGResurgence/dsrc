@@ -23,6 +23,7 @@ public class pumpkin_spawner extends script.base_script {
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE);
+        mi.notify();
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException {
@@ -37,8 +38,9 @@ public class pumpkin_spawner extends script.base_script {
             setObjVar(self, "halloween.pulp_master", 1);
         }
         int runTimes = 0;
-        while (runTimes < 48) {
+        while (runTimes < 64) {
             location spot = getLocation(self);
+            broadcast(getClosestPlayer(getLocation(self)), "Spot found");
             location locLowerLeft = spot;
                 locLowerLeft.x -= 6500.0f;
                 locLowerLeft.z -= 6500.0f;
@@ -46,10 +48,14 @@ public class pumpkin_spawner extends script.base_script {
                 locUpperRight.x += 6500.0f;
                 locUpperRight.z += 6500.0f;
             location pumpkin_loc = getGoodLocation(2.0f, 2.0f, locLowerLeft, locUpperRight, true, true);
+            broadcast(getClosestPlayer(getLocation(self)), String.valueOf(pumpkin_loc));
             //spot.y = getHeightAtLocation(spot.x, spot.z);
             obj_id pumpkin = create.object("object/tangible/holiday/halloween/pumpkin_object.iff", pumpkin_loc);
+            broadcast(getClosestPlayer(getLocation(self)), "Attempted to spawn object");
             attachScript(pumpkin, "event.halloween.pumpkin_smasher_object");
+            broadcast(getClosestPlayer(getLocation(self)), "Attempted to attach script");
             setName(pumpkin, NAME_VARIATIONS[rand(0,2)]);
+            broadcast(getClosestPlayer(getLocation(self)), "Setting names");
             //float elevation = getElevation(spot);
             //broadcast(player, "spawned vegetation at " + spot.x + elevation + spot.z + spot.area);
             setName(self, "Pumpkin Spawner");
