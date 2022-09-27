@@ -47,14 +47,19 @@ public class pumpkin_spawner extends script.base_script {
             location locUpperRight = spot;
                 locUpperRight.x += 6500.0f;
                 locUpperRight.z += 6500.0f;
-            location pumpkin_loc = getGoodLocation(2.0f, 2.0f, locLowerLeft, locUpperRight, true, true);
+            location pumpkin_loc = getGoodLocationAvoidCollidables(2.0f, 2.0f, locLowerLeft, locUpperRight, true, true, 128.0f);
             broadcast(getClosestPlayer(getLocation(self)), String.valueOf(pumpkin_loc));
             //spot.y = getHeightAtLocation(spot.x, spot.z);
             obj_id pumpkin = create.object("object/tangible/holiday/halloween/pumpkin_object.iff", pumpkin_loc);
             broadcast(getClosestPlayer(getLocation(self)), "Attempted to spawn object");
             attachScript(pumpkin, "event.halloween.pumpkin_smasher_object");
             broadcast(getClosestPlayer(getLocation(self)), "Attempted to attach script");
-            setName(pumpkin, NAME_VARIATIONS[rand(0,2)]);
+            String randomName = NAME_VARIATIONS[rand(0,2)];
+            if (randomName == null)
+            {
+                randomName = "a pumpkin";
+            }
+            setName(pumpkin, randomName);
             broadcast(getClosestPlayer(getLocation(self)), "Setting names");
             //float elevation = getElevation(spot);
             //broadcast(player, "spawned vegetation at " + spot.x + elevation + spot.z + spot.area);
