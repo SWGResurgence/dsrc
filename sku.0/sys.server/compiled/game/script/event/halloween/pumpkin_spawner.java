@@ -38,7 +38,7 @@ public class pumpkin_spawner extends script.base_script {
             setObjVar(self, "halloween.pulp_master", 1);
         }
         int runTimes = 0;
-        while (runTimes <= 48) {
+        while (runTimes < 48) {
             location spot = here;
             location locLowerLeft = spot;
             locLowerLeft.x -= 6500.0f;
