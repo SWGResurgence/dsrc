@@ -11,7 +11,7 @@ objectName = "installation_n" "geothermal_generator_elite"
 detailedDescription = "" ""
 lookAtText = "" ""
 
-appearanceFileName = "appearance/ins_all_mobile_chem_refinery.apt"
+appearanceFilename = "appearance/ins_all_mobile_chem_refinery.apt"
 portalLayoutFileName = ""
 
 clientDataFile = "clientdata/installation/client_shared_mining_liquid_harvester_style_1.cdf"

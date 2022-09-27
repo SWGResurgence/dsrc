@@ -58,6 +58,5 @@ skillCommands = ["unskilled"]
 manufactureScripts = [ "systems.crafting.structure.specific_item.crafting_mining_unit" ]
 
 complexity = 17
-volume = 1
-
 sharedTemplate = "object/draft_schematic/structure/component/shared_structure_turbo_energy_drilling_pumping_unit_advanced.iff"
+volume = 1

@@ -30,9 +30,7 @@ craftedSharedTemplate="object/tangible/deed/generator_deed/shared_generator_geot
 snapToTerrain = false
 containerType = CT_none
 tintPalette = ""
-
-slotDescriptorFileName = ""
-arrangementDescriptorFileName = "abstract/slot/arrangement/arrangement_datapad.iff"
-portalLayoutFileName = ""
-
+slotDescriptorFilename = ""
+arrangementDescriptorFilename = "abstract/slot/arrangement/arrangement_datapad.iff"
+portalLayoutFilename = ""
 clientDataFile = ""
