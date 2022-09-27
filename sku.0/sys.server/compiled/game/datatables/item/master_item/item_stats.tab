@@ -569,8 +569,8 @@ item_tow_schematic_flamer_03_01			"string:loot_schematic.schematic=object/draft_
 item_tow_schematic_cannon_03_01			"string:loot_schematic.schematic=object/draft_schematic/weapon/appearance/weapon_appearance_heavy_lava_cannon.iff,string:loot_schematic.skill_req=class_munitions_phase4_master"								
 item_tow_schematic_rifle_03_01			"string:loot_schematic.schematic=object/draft_schematic/weapon/appearance/weapon_appearance_rifle_dp23.iff,string:loot_schematic.skill_req=class_munitions_phase4_master"								
 item_tow_schematic_rifle_03_02			"string:loot_schematic.schematic=object/draft_schematic/weapon/appearance/weapon_appearance_rifle_disrupter.iff,string:loot_schematic.skill_req=class_munitions_phase4_master"								
-item_tow_schematic_vehicle_02_01			"string:vehicle_attribs.object_ref=lava_skiff,float:hit_points=30000"								
-item_tow_schematic_vehicle_02_02			"string:vehicle_attribs.object_ref=desert_skiff,float:hit_points=75000"								
+item_tow_schematic_vehicle_02_01			"string:vehicle_attribs.object_ref=lava_skiff,float:hit_points=15000"								
+item_tow_schematic_vehicle_02_02			"string:vehicle_attribs.object_ref=desert_skiff,float:hit_points=15000"								
 item_tow_buff_crystal_02_01				index_color_1=1	towCrystalOffenseBurst	long_reuse_3	3600			appearance/pt_special_hit_concuss.prt	
 item_tow_buff_crystal_02_02				index_color_1=22	towCrystalDefenseBurst	long_reuse_3	3600			appearance/pt_special_hit_concuss.prt	
 item_tow_buff_crystal_02_03				index_color_1=30	towCrystalDotImmunity	towCrystalDotImmunity	3600			appearance/pt_special_hit_concuss.prt	
@@ -2205,7 +2205,7 @@ item_gcw_base_health_a_03_01			"int:healing.power=3500,int:healing.combat_level_
 item_gcw_base_health_b_03_01			"int:healing.power=4000,int:healing.combat_level_required=60"					55			
 item_gcw_base_health_c_03_01			"int:healing.power=4500,int:healing.combat_level_required=65"					55			
 item_gcw_base_health_d_03_01			"int:healing.power=5000,int:healing.combat_level_required=70"					55			
-item_gcw_base_health_e_04_01			"int:healing.power=8500,int:healing.combat_level_required=75"					55			
+item_gcw_base_health_e_04_01			"int:healing.power=5500,int:healing.combat_level_required=75"					55			
 item_gcw_base_action_a_03_01			"int:healing.power=1750,int:healing.combat_level_required=55,int:healing.pool=2"					55			
 item_gcw_base_action_b_03_01			"int:healing.power=2000,int:healing.combat_level_required=60,int:healing.pool=2"					55			
 item_gcw_base_action_c_03_01			"int:healing.power=2250,int:healing.combat_level_required=65,int:healing.pool=2"					55			
@@ -4086,7 +4086,7 @@ item_costume_toydarian					costume_toydarian
 item_tcg_loot_reward_series3_general_grievous_gutsack					tcg_series3_general_grievous_gutsack					clienteffect/general_greivous_gutsack.cef	
 item_tcg_loot_reward_series3_hh_15_torpedo_warhead					tcg_series3_hh_15_torpedo_warhead					clienteffect/hh_15_torpedo_warhead.cef	salute2
 item_tcg_loot_reward_series3_wookiee_ceremonial_pipe					tcg_series3_wookiee_ceremonial_pipe					clienteffect/wookiee_pipe.cef	
-item_tcg_loot_reward_series3_jango_fett_memorial_statue											
+item_tcg_loot_reward_series3_jango_fett_memorial_statue										 	
 item_tcg_loot_reward_series3_boba_fett_statue											
 item_tcg_loot_reward_series3_sith_meditation_room_deed			"string:player_structure.deed.template=object/building/player/player_house_sith_meditation_room.iff,int:player_structure.deed.buildtime=90"								
 item_tcg_loot_reward_series3_jedi_meditation_room_deed			"string:player_structure.deed.template=object/building/player/player_house_jedi_meditation_room.iff,int:player_structure.deed.buildtime=90"								
@@ -4532,8 +4532,7 @@ item_event_loveday_wings_blue
 item_event_loveday_wings_gold											
 item_event_loveday_halo											
 item_event_loveday_hearts					loveday_hearts_item	loveday_hearts_effect	240				
-item_vet_reward_78month_ttgm_itt						ttgm_itt_group	"10800
-"				
+item_vet_reward_78month_ttgm_itt						ttgm_itt_group	14400				
 item_tcg_loot_reward_series7_atpt_walker			"string:vehicle_attribs.object_ref=tcg_at_pt_walker,float:hit_points=15000"								
 item_tcg_loot_reward_series7_military_transport			"string:vehicle_attribs.object_ref=tcg_military_transport,float:hit_points=15000"								
 item_tcg_loot_reward_series7_build01_tie_canopy			"string:tcg.combineItemTemplatePattern=object/tangible/tcg/series7/combine_object_,string:tcg.setName=set7_gunship"								
@@ -5029,7 +5028,7 @@ item_neural_recon_network_control_interface_01_01
 item_irish_darkshadow_memorial_01_01											
 item_aurillian_certified_scroll_01_01											
 item_world_boss_token_01_01											
-item_elite_geothermal_generator_deed_schematic_01_01			"string:loot_schematic.schematic=object/draft_schematic/structure/installation_generator_geothermal_elite.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase4_master"								
+item_elite_geothermal_generator_deed_schematic_01_01			"string:loot_schematic.schematic=object/draft_schematic/structure/installation_generator_elite_geothermal.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase4_master"								
 item_painting_resurgence_imperial_01_01											
 item_painting_resurgence_rebel_01_01											
 item_instance_unlock_heroics_01_01											
@@ -5078,5 +5077,20 @@ item_resurgence_czerka_banner_01_03
 item_resurgence_mandalorian_banner_01_01											
 item_resurgence_mandalorian_banner_01_02											
 game_update_4_gift											
+item_cantina_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/cantina_naboo_b.iff,int:player_structure.deed.buildtime=90"								
+item_cantina_naboo_style_01_03_deed			"string:player_structure.deed.template=object/building/player/city/cantina_naboo_c.iff,int:player_structure.deed.buildtime=90"								
+item_cityhall_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/cityhall_naboo_b.iff,int:player_structure.deed.buildtime=90"								
+item_cloning_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/cloning_naboo_b.iff,int:player_structure.deed.buildtime=90"								
+item_hospital_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/hospital_naboo_b.iff,int:player_structure.deed.buildtime=90"								
+item_hospital_naboo_style_02_01_deed			"string:player_structure.deed.template=object/building/naboo/hospital_naboo_c.iff,int:player_structure.deed.buildtime=90"								
+item_shuttleport_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/naboo/shuttleport_naboo_b.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_guild_style_01_02_deed			"string:player_structure.deed.template=object/building/player/player_guildhall_naboo_style_01_b.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_large_style_01_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_large_style_01_b.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_large_style_01_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_large_style_01_c.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_medium_style_01_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_medium_style_01_b.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_medium_style_01_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_medium_style_01_c.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_small_style_01_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_01_b.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_small_style_01_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_01_c.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_small_style_02_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_b.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_small_style_02_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_c.iff,int:player_structure.deed.buildtime=90"								
 dxun_drexl_familiar			string:creatureName=dxun_drexl_familiar								
-item_turbo_energy_drilling_pumping_unit_advanced_schematic_01_01			"string:loot_schematic.schematic=object/draft_schematic/structure/component/structure_turbo_energy_drilling_pumping_unit_advanced.iff,int:loot_schematic.uses=1,string:loot_schematic.skill_req=class_structures_phase4_master"								
