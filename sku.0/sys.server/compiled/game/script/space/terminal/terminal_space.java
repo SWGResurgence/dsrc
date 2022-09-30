@@ -20,6 +20,13 @@ public class terminal_space extends script.terminal.base.base_terminal
     }
     public int OnPreloadComplete(obj_id self) throws InterruptedException
     {
+        if (getTemplateName(self).contains("portable"))
+        {
+            obj_id building = structure.getContainingBuilding(self);
+            if (isIdValid(building)) {
+                setObjVar(building, "travel.point_name", "Portable Launch Location");
+            }
+        }
         String strFileName = "datatables/space_zones/launch_locations.iff";
         String strName = "mos_eisley";
         dictionary dctTeleportInfo = null;
@@ -27,7 +34,7 @@ public class terminal_space extends script.terminal.base.base_terminal
         region[] rgnCities = getRegionsWithGeographicalAtPoint(locTest, regions.GEO_CITY);
         if (rgnCities == null || rgnCities.length == 0)
         {
-            //setName(self, "BUSTED TERMINAL! PUT ME IN A CITY!@!@!@!@");
+            setName (self, "Broken Space Terminal");
             return SCRIPT_CONTINUE;
         }
         else 
@@ -45,7 +52,7 @@ public class terminal_space extends script.terminal.base.base_terminal
             }
             if (dctTeleportInfo == null)
             {
-                //setName(self, "NO ENTRY FOR " + strName + " in teleport datatable. Busted terminal");
+                dctTeleportInfo.equals("mos_eisley");
                 return SCRIPT_CONTINUE;
             }
         }
