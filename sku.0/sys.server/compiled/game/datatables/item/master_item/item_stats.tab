@@ -3832,8 +3832,10 @@ item_event_halloween_lantern_03
 item_event_halloween_lantern_04											
 item_event_halloween_painting											
 item_event_halloween_krayt_01											
-item_event_halloween_house_sign			"string:modifiedSign=object/tangible/sign/player/house_address_halloween_sign.iff,int:hangingStanding=1,string:structure.modifiedSignModel=item_event_halloween_house_sign"								
-item_event_halloween_song_book											
+item_event_halloween_house_sign			"string:modifiedSign=object/tangible/sign/player/house_address_halloween_sign.iff,int:hangingStanding=1,string:structure.modifiedSignModel=item_event_halloween_house_sign"
+item_efol_hanging_sign_01			"string:modifiedSign=object/tangible/sign/player/efol_standing_sign_01.iff,int:hangingStanding=1,string:structure.modifiedSignModel=item_event_efol_house_sign"
+item_efol_standing_sign_01			"string:modifiedSign=object/tangible/sign/player/efol_hanging_sign_01.iff,int:hangingStanding=1,string:structure.modifiedSignModel=item_event_efol_house_sign"
+item_event_halloween_song_book
 item_event_halloween_skull_candle_01											
 item_event_halloween_skull_candle_02											
 item_event_halloween_spider_web_03											
