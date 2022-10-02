@@ -38,12 +38,10 @@ public class player_developer extends base_script {
                 }
             }
         }
-        if (cmd.equalsIgnoreCase("puppet"))
-        {
+        if (cmd.equalsIgnoreCase("puppet")) {
             String speech = tok.nextToken();
-            String splitMsg = String.valueOf(split(speech,' '));
+            String splitMsg = String.valueOf(split(speech, ' '));
             chat.chat(target, splitMsg);
-            return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("wiki"))
         {
