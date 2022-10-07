@@ -10,7 +10,7 @@ public class resurgence  extends script.base_script {
     }
     public static final string_id SID_PROMPT = new string_id("resurgence", "ui_list_objects_prompt");
     public static final string_id SID_TITLE = new string_id("resurgence", "ui_list_objects_title");
-    public int spawnWithScript(obj_id self, String template, String script ) throws InterruptedException {
+    public static int spawnWithScript(obj_id self, String template, String script ) throws InterruptedException {
         location loc = getLocation(self);
         obj_id spawned = create.object(template, loc);
         attachScript(spawned, script);
@@ -31,7 +31,7 @@ public class resurgence  extends script.base_script {
             sendSystemMessage(self, "Pumpkin: " + allPumpkins[i], null);
         }
     }
-    public void cmdReadyCheck(obj_id self, obj_id target, String params, float defaultTime, dictionary dict) throws InterruptedException {
+    public static void cmdReadyCheck(obj_id self, obj_id target, String params, float defaultTime, dictionary dict) throws InterruptedException {
         obj_id[] players = getGroupMemberIds(self);
         if (players == null || players.length == 0) {
             sendSystemMessage(self, "You are not in a group.", null);
@@ -46,7 +46,7 @@ public class resurgence  extends script.base_script {
             sui.msgbox(self, players[i], "The group leader has initialized a ready check.", 1, "READY CHECK", "handleReadyCheck");
         }
     }
-    public void handleReadyCheck(obj_id self, dictionary params) throws InterruptedException {
+    public static void handleReadyCheck(obj_id self, dictionary params) throws InterruptedException {
         int bp = sui.getIntButtonPressed(params);
         obj_id target = params.getObjId("readyCheckLeaderId");
         if (bp == sui.BP_OK) {
@@ -58,7 +58,7 @@ public class resurgence  extends script.base_script {
             chat.chat(self, "Not Ready.");
         }
     }
-    public int presentSui(obj_id self, dictionary params) throws InterruptedException {
+    public static int presentSui(obj_id self, dictionary params) throws InterruptedException {
         String title = params.getString("title");
         String prompt = params.getString("prompt");
         String[] buttons = params.getStringArray("buttons");
@@ -72,12 +72,12 @@ public class resurgence  extends script.base_script {
         sui.showSUIPage(pid);
         return SCRIPT_CONTINUE;
     }
-    public int destroySui(obj_id self, dictionary params) throws InterruptedException {
+    public static int destroySui(obj_id self, dictionary params) throws InterruptedException {
         int pid = params.getInt("pid");
         sui.closeSUI(self, pid);
         return SCRIPT_CONTINUE;
     }
-    public int moveAllPlayers(  obj_id self, dictionary params) throws InterruptedException {
+    public static int moveAllPlayers(  obj_id self, dictionary params) throws InterruptedException {
         String planet = params.getString("planet");
         float x = params.getFloat("x");
         float y = params.getFloat("y");
@@ -92,7 +92,7 @@ public class resurgence  extends script.base_script {
         }
         return SCRIPT_CONTINUE;
     }
-    public void pushPlayer(obj_id self, obj_id target, float distance, float angle) throws InterruptedException {
+    public static void pushPlayer(obj_id self, obj_id target, float distance, float angle) throws InterruptedException {
         if (!isIdValid(target) || !exists(target)) {
             debugServerConsoleMsg(self, "pushPlayer() - target is not a valid object.");
         }
@@ -108,7 +108,7 @@ public class resurgence  extends script.base_script {
         warpPlayer(target, loc.area, x, loc.y, z, null, 0, 0, 0);
         debugServerConsoleMsg(self, "pushPlayer() - player pushed.");
     }
-    public int explode(obj_id self, dictionary params) throws InterruptedException {
+    public static int explode(obj_id self, dictionary params) throws InterruptedException {
         location loc = getLocation(self);
         playClientEffectLoc(self, "clienteffect/combat_explosion_lair_large.cef", loc, 0);
         return SCRIPT_CONTINUE;
@@ -143,7 +143,7 @@ public class resurgence  extends script.base_script {
             //no objvar to retrieve
             closeOldWindow(player);
     }*/
-    public void renameItems(obj_id self, obj_id target, String name) throws InterruptedException {
+    public static void renameItems(obj_id self, obj_id target, String name) throws InterruptedException {
         obj_id[] items = getInventoryAndEquipment(target);
         if (items == null || items.length == 0) {
             sendSystemMessage(self, "No items found.", null);
@@ -153,7 +153,7 @@ public class resurgence  extends script.base_script {
             setName(items[i], name);
         }
     }
-    public void applyGMNameTag( obj_id self, obj_id target) throws InterruptedException {
+    public static void applyGMNameTag(obj_id self, obj_id target) throws InterruptedException {
         if (!isIdValid(target) || !exists(target)) {
             debugServerConsoleMsg(self, "applyGMNameTag() - target is not a valid object.");
         }
@@ -165,7 +165,7 @@ public class resurgence  extends script.base_script {
         setName(target, gmName);
         debugServerConsoleMsg(self, "applyGMNameTag() - GM filter tag applied.");
     }
-    public void warpToNearestBuilding(  obj_id self, obj_id target) throws InterruptedException {
+    public static void warpToNearestBuilding(obj_id self, obj_id target) throws InterruptedException {
         if (!isIdValid(target) || !exists(target)) {
             debugServerConsoleMsg(self, "warpToNearestBuilding() - target is not a valid object.");
         }
@@ -181,7 +181,7 @@ public class resurgence  extends script.base_script {
         warpPlayer(target, buildingLoc.area, buildingLoc.x, buildingLoc.y, buildingLoc.z, null, 0, 0, 0);
         debugServerConsoleMsg(self, "warpToNearestBuilding() - player warped to nearest building.");
     }
-    public void createCreatureGrid( obj_id self, obj_id target, String creature, int rows, int columns, float distance) throws InterruptedException {
+    public static void createCreatureGrid(obj_id self, obj_id target, String creature, int rows, int columns, float distance) throws InterruptedException {
         if (!isIdValid(target) || !exists(target)) {
             debugServerConsoleMsg(self, "createCreatureGrid() - target is not a valid object.");
         }
@@ -206,5 +206,30 @@ public class resurgence  extends script.base_script {
             z += distance;
         }
         debugServerConsoleMsg(self, "createCreatureGrid() - creature grid created.");
+    }
+    public static void createCircleSpawn(obj_id self, obj_id target, String creature, int amount, float distance) throws InterruptedException {
+        if (!isIdValid(target) || !exists(target)) {
+            debugServerConsoleMsg(self, "createCircleSpawn() - target is not a valid object.");
+        }
+        if (!isPlayer(target)) {
+            debugServerConsoleMsg(self, "createCircleSpawn() - target is not a player.");
+        }
+        if (amount < 1) {
+            debugServerConsoleMsg(self, "createCircleSpawn() - amount is less than 1.");
+        }
+        if (distance < 0) {
+            debugServerConsoleMsg(self, "createCircleSpawn() - distance is less than 0.");
+        }
+        location loc = getLocation(target);
+        float x = loc.x;
+        float z = loc.z;
+        for (int i = 0; i < amount; i++) {
+            float angle = (float) (i * (360 / amount));
+            x = loc.x + (float) Math.cos(angle) * distance;
+            z = loc.z + (float) Math.sin(angle) * distance;
+            obj_id creatureObj = create.object(creature, new location(x, loc.y, z, loc.area));
+            faceTo(self, creatureObj);
+        }
+        debugServerConsoleMsg(self, "createCircleSpawn() - circle spawn created.");
     }
 }
