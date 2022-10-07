@@ -997,6 +997,20 @@ public class talisa_test extends script.base_script
                     sendSystemMessageTestingOnly(self, "shop_sign: " + shop_sign);
                     return SCRIPT_CONTINUE;
                 }
+                else if (priCommand.equalsIgnoreCase("clone_object"))
+                {
+                    obj_id target = utils.stringToObjId(secCommand);
+                    String[] scripts = getScriptList(target);
+                    obj_id cloned_item = utils.cloneObject(target,utils.getInventoryContainer(target));
+                    if (scripts.length > 0) {
+                        for (String script : scripts)
+                        {
+                            attachScript(cloned_item, script);
+                        }
+                    }
+                    setCrafter(cloned_item, self);
+                    return SCRIPT_CONTINUE;
+                }
                 else if (priCommand.equalsIgnoreCase("give_shop_sign"))
                 {
                     applySkillStatisticModifier(self, "shop_sign", 1);
