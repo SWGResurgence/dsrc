@@ -1,27 +1,35 @@
+//please note this whole library was generated with copliot. don't expect everything to work right out of the box.
+
 package script.library;
 import script.*;
 import script.library.*;
 import script.library.sui;
 
 import static script.library.holiday.closeOldWindow;
+import static script.library.utils.sendMail;
+import static script.script_entry.runScript;
 
 public class resurgence  extends script.base_script {
     public resurgence() {
     }
+
     public static final string_id SID_PROMPT = new string_id("resurgence", "ui_list_objects_prompt");
     public static final string_id SID_TITLE = new string_id("resurgence", "ui_list_objects_title");
-    public static int spawnWithScript(obj_id self, String template, String script ) throws InterruptedException {
+
+    public static int spawnWithScript(obj_id self, String template, String script) throws InterruptedException {
         location loc = getLocation(self);
         obj_id spawned = create.object(template, loc);
         attachScript(spawned, script);
         return SCRIPT_CONTINUE;
     }
+
     public static void sendToOrigin(obj_id self) throws InterruptedException {
         location loc = getLocation(self);
         obj_id planet = getPlanetByName(loc.area);
         warpPlayer(self, loc.area, loc.x, loc.y, loc.z, null, 0, 0, 0);
     }
-    public static void listAllPumpkins( obj_id self ) throws InterruptedException {
+
+    public static void listAllPumpkins(obj_id self) throws InterruptedException {
         obj_id[] allPumpkins = getAllObjectsWithTemplate(getLocation(self), 1000, "object/tangible/holiday/halloween/pumpkin_object.iff");
         if (allPumpkins == null || allPumpkins.length == 0) {
             sendSystemMessage(self, "No pumpkins found.", null);
@@ -31,6 +39,7 @@ public class resurgence  extends script.base_script {
             sendSystemMessage(self, "Pumpkin: " + allPumpkins[i], null);
         }
     }
+
     public static void cmdReadyCheck(obj_id self, obj_id target, String params, float defaultTime, dictionary dict) throws InterruptedException {
         obj_id[] players = getGroupMemberIds(self);
         if (players == null || players.length == 0) {
@@ -46,6 +55,7 @@ public class resurgence  extends script.base_script {
             sui.msgbox(self, players[i], "The group leader has initialized a ready check.", 1, "READY CHECK", "handleReadyCheck");
         }
     }
+
     public static void handleReadyCheck(obj_id self, dictionary params) throws InterruptedException {
         int bp = sui.getIntButtonPressed(params);
         obj_id target = params.getObjId("readyCheckLeaderId");
@@ -58,6 +68,7 @@ public class resurgence  extends script.base_script {
             chat.chat(self, "Not Ready.");
         }
     }
+
     public static int presentSui(obj_id self, dictionary params) throws InterruptedException {
         String title = params.getString("title");
         String prompt = params.getString("prompt");
@@ -72,12 +83,14 @@ public class resurgence  extends script.base_script {
         sui.showSUIPage(pid);
         return SCRIPT_CONTINUE;
     }
+
     public static int destroySui(obj_id self, dictionary params) throws InterruptedException {
         int pid = params.getInt("pid");
         sui.closeSUI(self, pid);
         return SCRIPT_CONTINUE;
     }
-    public static int moveAllPlayers(  obj_id self, dictionary params) throws InterruptedException {
+
+    public static int moveAllPlayers(obj_id self, dictionary params) throws InterruptedException {
         String planet = params.getString("planet");
         float x = params.getFloat("x");
         float y = params.getFloat("y");
@@ -87,11 +100,12 @@ public class resurgence  extends script.base_script {
             sendSystemMessage(self, "No players found.", null);
             return SCRIPT_CONTINUE;
         }
-        for (int i = 0; i < players.length; i++) {
-            warpPlayer(players[i], planet, x, y, z, null, 0, 0, 0);
+        for (obj_id player : players) {
+            warpPlayer(player, planet, x, y, z, null, 0, 0, 0);
         }
         return SCRIPT_CONTINUE;
     }
+
     public static void pushPlayer(obj_id self, obj_id target, float distance, float angle) throws InterruptedException {
         if (!isIdValid(target) || !exists(target)) {
             debugServerConsoleMsg(self, "pushPlayer() - target is not a valid object.");
@@ -108,11 +122,13 @@ public class resurgence  extends script.base_script {
         warpPlayer(target, loc.area, x, loc.y, z, null, 0, 0, 0);
         debugServerConsoleMsg(self, "pushPlayer() - player pushed.");
     }
+
     public static int explode(obj_id self, dictionary params) throws InterruptedException {
         location loc = getLocation(self);
         playClientEffectLoc(self, "clienteffect/combat_explosion_lair_large.cef", loc, 0);
         return SCRIPT_CONTINUE;
     }
+
     /*public void listAllObjectsByTemplate(obj_id self, obj_id player, String template) throws InterruptedException {
         obj_id[] allObjects = getAllObjectsWithTemplate(getLocation(self), 1000, template);
         if (allObjects == null || allObjects.length == 0) {
@@ -153,6 +169,7 @@ public class resurgence  extends script.base_script {
             setName(items[i], name);
         }
     }
+
     public static void applyGMNameTag(obj_id self, obj_id target) throws InterruptedException {
         if (!isIdValid(target) || !exists(target)) {
             debugServerConsoleMsg(self, "applyGMNameTag() - target is not a valid object.");
@@ -161,10 +178,11 @@ public class resurgence  extends script.base_script {
             debugServerConsoleMsg(self, "applyGMNameTag() - target is not a player.");
         }
         String name = getName(target);
-        String gmName =  name +  " *GM*";
+        String gmName = name + " *GM*";
         setName(target, gmName);
         debugServerConsoleMsg(self, "applyGMNameTag() - GM filter tag applied.");
     }
+
     public static void warpToNearestBuilding(obj_id self, obj_id target) throws InterruptedException {
         if (!isIdValid(target) || !exists(target)) {
             debugServerConsoleMsg(self, "warpToNearestBuilding() - target is not a valid object.");
@@ -181,6 +199,7 @@ public class resurgence  extends script.base_script {
         warpPlayer(target, buildingLoc.area, buildingLoc.x, buildingLoc.y, buildingLoc.z, null, 0, 0, 0);
         debugServerConsoleMsg(self, "warpToNearestBuilding() - player warped to nearest building.");
     }
+
     public static void createCreatureGrid(obj_id self, obj_id target, String creature, int rows, int columns, float distance) throws InterruptedException {
         if (!isIdValid(target) || !exists(target)) {
             debugServerConsoleMsg(self, "createCreatureGrid() - target is not a valid object.");
@@ -207,6 +226,7 @@ public class resurgence  extends script.base_script {
         }
         debugServerConsoleMsg(self, "createCreatureGrid() - creature grid created.");
     }
+
     public static void createCircleSpawn(obj_id self, obj_id target, String creature, int amount, float distance) throws InterruptedException {
         if (!isIdValid(target) || !exists(target)) {
             debugServerConsoleMsg(self, "createCircleSpawn() - target is not a valid object.");
@@ -231,5 +251,133 @@ public class resurgence  extends script.base_script {
             faceTo(self, creatureObj);
         }
         debugServerConsoleMsg(self, "createCircleSpawn() - circle spawn created.");
+    }
+
+    public static void setRainbowName(obj_id self, obj_id target) throws InterruptedException {
+        if (!isIdValid(target) || !exists(target)) {
+            debugServerConsoleMsg(self, "setRainbowName() - target is not a valid object.");
+        }
+        if (!isPlayer(target)) {
+            debugServerConsoleMsg(self, "setRainbowName() - target is not a player.");
+        }
+        String name = getName(target);
+        //String rainbowName = name + "  ^#FF0000^R^#FF7F00^a^#FFFF00^i^#00FF00^n^#0000FF^b^#4B0082^o^#9400D3^w";
+        //setName(target, rainbowName);
+        debugServerConsoleMsg(self, "setRainbowName() - rainbow name applied.");
+    }
+
+    public static void relax(obj_id self, obj_id target) throws InterruptedException {
+        if (!isIdValid(target) || !exists(target)) {
+            debugServerConsoleMsg(self, "relax() - target is not a valid object.");
+        }
+        if (!isPlayer(target)) {
+            debugServerConsoleMsg(self, "relax() - target is not a player.");
+        }
+        setPosture(target, POSTURE_SITTING);
+        debugServerConsoleMsg(self, "relax() - player relaxed.");
+    }
+
+    public static void suspicious(obj_id self, obj_id target) throws InterruptedException {
+        if (!isIdValid(target) || !exists(target)) {
+            debugServerConsoleMsg(self, "suspicious() - target is not a valid object.");
+        }
+        if (!isPlayer(target)) {
+            debugServerConsoleMsg(self, "suspicious() - target is not a player.");
+        }
+        setPosture(target, POSTURE_CROUCHED);
+        debugServerConsoleMsg(self, "suspicious() - player is now suspicious.");
+    }
+
+    public static void bankruptPlayer(obj_id self, obj_id target) throws InterruptedException {
+        if (!isIdValid(target) || !exists(target)) {
+            debugServerConsoleMsg(self, "bankruptPlayer() - target is not a valid object.");
+        }
+        if (!isPlayer(target)) {
+            debugServerConsoleMsg(self, "bankruptPlayer() - target is not a player.");
+        }
+        int cash = getCashBalance(target);
+        int bank = getBankBalance(target);
+        if (cash > 0) {
+            withdrawCashFromBank(target, cash, "bankruptPlayer", null, null);
+        }
+        if (bank > 0) {
+            withdrawCashFromBank(target, bank, "bankruptPlayer", null, null);
+        }
+        debugServerConsoleMsg(self, "bankruptPlayer() - player is now bankrupt.");
+    }
+    public static boolean isNear    (obj_id self, obj_id target, float distance) throws InterruptedException {
+        if (!isIdValid(target) || !exists(target)) {
+            debugServerConsoleMsg(self, "isNear() - target is not a valid object.");
+        }
+        if (!isPlayer(target)) {
+            debugServerConsoleMsg(self, "isNear() - target is not a player.");
+        }
+        if (distance < 0) {
+            debugServerConsoleMsg(self, "isNear() - distance is less than 0.");
+        }
+        location loc = getLocation(self);
+        location targetLoc = getLocation(target);
+        float dist = getDistance(loc, targetLoc);
+        return dist <= distance;
+    }
+    public static void sendPlayerHomeBind(  obj_id self, obj_id target) throws InterruptedException {
+        if (!isIdValid(target) || !exists(target)) {
+            debugServerConsoleMsg(self, "sendPlayerHomeBind() - target is not a valid object.");
+        }
+        if (!isPlayer(target)) {
+            debugServerConsoleMsg(self, "sendPlayerHomeBind() - target is not a player.");
+        }
+        location homeBind = getHomeLocation(target);
+        warpPlayer(target, homeBind.area, homeBind.x, homeBind.y, homeBind.z, null, 0, 0, 0);
+        debugServerConsoleMsg(self, "sendPlayerHomeBind() - player sent to home bind.");
+    }
+
+    public static int getNumberOfPlayersInRange(obj_id self, float distance) throws InterruptedException {
+        if (distance < 0) {
+            debugServerConsoleMsg(self, "getNumberOfPlayersInRange() - distance is less than 0.");
+        }
+        obj_id[] players = getPlayerCreaturesInRange(getLocation(self), distance);
+        return players.length;
+    }
+
+    public static void launchWookiepediaPage(obj_id self, String page) throws InterruptedException {
+        if (page == null || page.equals("")) {
+            debugServerConsoleMsg(self, "launchWookiepediaPage() - page is null or empty.");
+        }
+        String replacedText = page.replaceAll(" ", "_");
+        String url = "http://starwars.wikia.com/wiki/" + page;
+        sui.msgbox(self, self, "Opening " + url + " in your browser.", sui.OK_ONLY, "Wookiepedia", "noHandler");
+        launchClientWebBrowser(self, url);
+        debugServerConsoleMsg(self, "launchWookiepediaPage() - wookiepedia page launched.");
+    }
+
+    public static void spawnAllItemsFromTable(obj_id self, String datatable) throws InterruptedException {
+        if (datatable == null || datatable.equals("")) {
+            debugServerConsoleMsg(self, "spawnAllItemsFromTable() - datatable is null or empty.");
+        }
+        String[] items = dataTableGetStringColumnNoDefaults(datatable, "item");
+        for (int i = 0; i < items.length; i++) {
+            obj_id item = createObject(items[i], getLocation(self));
+            if (isIdValid(item)) {
+                debugServerConsoleMsg(self, "spawnAllItemsFromTable() - item " + items[i] + " spawned.");
+            }
+        }
+    }
+    public static void removeAllItemsOfTemplate(obj_id self, String template) throws InterruptedException {
+        if (template == null || template.equals("")) {
+            debugServerConsoleMsg(self, "removeAllItemsOfTemplate() - template is null or empty.");
+        }
+        var items = getContents(self);
+        for (int i = 0; i < items.length; i++) {
+            if (getTemplateName(items[i]).equals(template)) {
+                destroyObject(items[i]);
+                debugServerConsoleMsg(self, "removeAllItemsOfTemplate() - item " + template + " removed.");
+            }
+        }
+    }
+    public  static String getMemoryUsage() throws InterruptedException {
+        Runtime runtime = Runtime.getRuntime();
+        long memory = runtime.totalMemory() - runtime.freeMemory();
+        return Long.toString(memory);
     }
 }
