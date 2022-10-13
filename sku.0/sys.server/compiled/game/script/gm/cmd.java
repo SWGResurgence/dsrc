@@ -9,10 +9,28 @@ import java.util.Vector;
 
 public class cmd extends script.base_script
 {
+    private static final boolean VETERAN_REWARDS_ENABLED = utils.checkConfigFlag("GameServer", "enableVeteranRewards");
+
     public cmd()
     {
     }
-    private static final boolean VETERAN_REWARDS_ENABLED = utils.checkConfigFlag("GameServer", "enableVeteranRewards");
+
+    private static void showAdminCmdSyntax(obj_id self) throws InterruptedException
+    {
+        sendSystemMessageTestingOnly(self, "Outputting nested commands and syntax of /admin to console");
+        sendConsoleMessage(self, "\\#ffff00 ============ Syntax: /admin commands ============ \\#.");
+        sendConsoleMessage(self, "\\#00ffff dumpPermsForCell \\#bfff00 <oid> \\#.");
+        sendConsoleMessage(self, "returns the public status and permissions list for the provided cell");
+        sendConsoleMessage(self, "\\#00ffff getRotation \\#bfff00 <oid> \\#.");
+        sendConsoleMessage(self, "returns the quaternions and rotation of an object");
+        sendConsoleMessage(self, "\\#00ffff getUsername \\#bfff00 <player first name OR oid> \\#.");
+        sendConsoleMessage(self, "returns the account username of the specified player");
+        sendConsoleMessage(self, "\\#00ffff setWeather \\#bfff00 <clear | mild | heavy | severe> \\#.");
+        sendConsoleMessage(self, "sets the weather for the current scene");
+        sendConsoleMessage(self, "\\#00ffff startGcwSpaceBattle \\#bfff00 <planet> <type> \\#.");
+        sendConsoleMessage(self, "sends a request to start the GCW2 space battle for the specified scene and type");
+        sendConsoleMessage(self, "\\#ffff00 ============ ============ ============ ============ \\#.");
+    }
 
     public int cmdGetPlayerId(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
@@ -34,6 +52,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdAiIgnore(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id ship = getPilotedShip(self);
@@ -60,6 +79,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdForceCommand(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
@@ -92,6 +112,7 @@ public class cmd extends script.base_script
         sendSystemMessageTestingOnly(self, "/forceCommand: attempting to queue command: '" + cmd + " " + cmdParams + "' for (" + target + ")" + getName(target));
         return SCRIPT_CONTINUE;
     }
+
     public int cmdMoney(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         dictionary d = gm.parseTarget(params, target, "CREDITS");
@@ -164,16 +185,19 @@ public class cmd extends script.base_script
         showMoneySyntax(self);
         return SCRIPT_CONTINUE;
     }
+
     public void showMoneySyntax(obj_id self) throws InterruptedException
     {
         sendSystemMessageTestingOnly(self, "[Syntax] /credits [-target]|[-id:<oid>] cash|bank (+|-)<amt>");
         sendSystemMessageTestingOnly(self, "[Syntax] /credits [-target]|[-id:<oid>] balance");
     }
+
     public int cmdBroadcast(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         queueCommand(self, (-351572629), target, params, COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdBroadcastPlanet(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (params != null && !params.equalsIgnoreCase(""))
@@ -187,6 +211,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdBroadcastGalaxy(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (params != null && !params.equalsIgnoreCase(""))
@@ -200,6 +225,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdBroadcastArea(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         final float MAX_RANGE = 256.0f;
@@ -241,13 +267,16 @@ public class cmd extends script.base_script
             sendSystemMessageTestingOnly(self, "[Error] /broadcastArea: No players within range");
             return SCRIPT_CONTINUE;
         }
-        for (obj_id player : players) {
-            if (isIdValid(player) && isPlayer(player)) {
+        for (obj_id player : players)
+        {
+            if (isIdValid(player) && isPlayer(player))
+            {
                 sendSystemMessageTestingOnly(player, message);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public dictionary parseRange(String params) throws InterruptedException
     {
         final String KEYWORD_RANGE = "-range:";
@@ -284,16 +313,20 @@ public class cmd extends script.base_script
         }
         return ret;
     }
+
     public int cmdKill(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         // If you're in space, kill the space ship you're targeting
-        if(isSpaceScene()) {
+        if (isSpaceScene())
+        {
             target = getLookAtTarget(self);
-            if(!isIdValid(target)) {
+            if (!isIdValid(target))
+            {
                 sendSystemMessageTestingOnly(self, "/kill: Your target for /kill was not valid.");
                 return SCRIPT_CONTINUE;
             }
-            if(isPlayer(target)) {
+            if (isPlayer(target))
+            {
                 sendSystemMessageTestingOnly(self, "/kill: You cannot use /kill on a player controlled ship. Use /killPlayer.");
                 return SCRIPT_CONTINUE;
             }
@@ -329,6 +362,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdKillPlayer(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target) || isDead(target))
@@ -349,6 +383,7 @@ public class cmd extends script.base_script
         pclib.coupDeGrace(target, target, true, true);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdFreezePlayer(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (params.contains(gm.KEYWORD_ID))
@@ -370,6 +405,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdUnfreezePlayer(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (params.contains(gm.KEYWORD_ID))
@@ -391,6 +427,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdShowFactionInformation(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -425,6 +462,7 @@ public class cmd extends script.base_script
         gm.showFactionInformation(self, target);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetFaction(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -588,6 +626,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetFactionStanding(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -671,6 +710,7 @@ public class cmd extends script.base_script
         queueCommand(self, (-532090019), target, "", COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGetRank(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target))
@@ -682,6 +722,7 @@ public class cmd extends script.base_script
         sendSystemMessageTestingOnly(self, "(" + target + ") " + getName(target) + "'s rank = (" + rank + ") " + getString(new string_id("faction_recruiter", factions.getRankName(rank, faction))));
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetRank(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         int currentRank = pvpGetCurrentGcwRank(target);
@@ -700,34 +741,43 @@ public class cmd extends script.base_script
         String tempGoalRank = st.nextToken();
         int goalRank = Integer.parseInt(tempGoalRank);
 
-        if (goalRank < 1 || goalRank > 12) {
+        if (goalRank < 1 || goalRank > 12)
+        {
             sendSystemMessageTestingOnly(self, "Rank must be an integer between 1 (Private) and 12 (General).");
             return SCRIPT_CONTINUE;
         }
-        if (currentRank == goalRank) {
-            sendSystemMessageTestingOnly(self, "The desired rank you specified is already the current rank of "+getPlayerName(target));
+        if (currentRank == goalRank)
+        {
+            sendSystemMessageTestingOnly(self, "The desired rank you specified is already the current rank of " + getPlayerName(target));
             return SCRIPT_CONTINUE;
         }
-        if (faction == 0) {
-            sendSystemMessageTestingOnly(self, getPlayerName(target)+" is currently neutral and not aligned with a faction so you cannot set their rank.");
+        if (faction == 0)
+        {
+            sendSystemMessageTestingOnly(self, getPlayerName(target) + " is currently neutral and not aligned with a faction so you cannot set their rank.");
             return SCRIPT_CONTINUE;
         }
 
         int neededRankChange = goalRank - currentRank;
-        if (neededRankChange > 0) {
-            do {
+        if (neededRankChange > 0)
+        {
+            do
+            {
                 gcw.increaseGcwRatingToNextRank(target);
                 currentRank = pvpGetCurrentGcwRank(target);
             } while (currentRank != goalRank);
-        } else if (neededRankChange < 0) {
-            do {
+        }
+        else if (neededRankChange < 0)
+        {
+            do
+            {
                 gcw.decreaseGcwRatingToPreviousRank(target);
                 currentRank = pvpGetCurrentGcwRank(target);
             } while (currentRank != goalRank);
         }
-        sendSystemMessageTestingOnly(self, "Successfully changed the rank of "+getPlayerName(target)+ "("+target+").");
+        sendSystemMessageTestingOnly(self, "Successfully changed the rank of " + getPlayerName(target) + "(" + target + ").");
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGrantSkill(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -753,6 +803,7 @@ public class cmd extends script.base_script
         utils.setScriptVar(self, "gmGrantSkill.target", target);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdRevokeSkill(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -794,13 +845,16 @@ public class cmd extends script.base_script
         CustomerServiceLog("Skill", "CSR: (" + self + ") " + getName(self) + " has revoked skill '" + params + "' from (" + target + ") " + utils.getStringName(target));
         return SCRIPT_CONTINUE;
     }
+
     public void listSkills(obj_id self, String[] skills) throws InterruptedException
     {
         Vector entries = new Vector();
         entries.setSize(0);
-        for (String skill : skills) {
+        for (String skill : skills)
+        {
             String stringname = getString(new string_id("skl_n", skill));
-            if (stringname != null && !stringname.equalsIgnoreCase("")) {
+            if (stringname != null && !stringname.equalsIgnoreCase(""))
+            {
                 String linedata = "(" + stringname + ") " + skill;
                 entries = utils.addElement(entries, linedata);
             }
@@ -809,6 +863,7 @@ public class cmd extends script.base_script
         String listPrompt = "A listing of all the currently used skills";
         sui.listbox(self, self, listPrompt, sui.OK_ONLY, listTitle, entries, "noHandler", true, false);
     }
+
     public int cmdSearchCorpse(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (utils.hasScriptVar(self, gm.SCRIPTVAR_SEARCHCORPSE_PID))
@@ -885,6 +940,7 @@ public class cmd extends script.base_script
         sendSystemMessageTestingOnly(self, "/searchCorpse: was unable to construct a valid interface!");
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetSpeed(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -941,6 +997,7 @@ public class cmd extends script.base_script
         sendSystemMessageTestingOnly(self, "(" + target + ") " + utils.getStringName(target) + "'s new speed multiplier = " + newSpeed);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetName(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -963,6 +1020,7 @@ public class cmd extends script.base_script
         setName(target, params);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetFirstName(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -999,7 +1057,7 @@ public class cmd extends script.base_script
             StringTokenizer st = new StringTokenizer(name);
             String fname = st.nextToken();
             newname = params;
-            while (st.hasMoreTokens())newname += " " + st.nextToken();
+            while (st.hasMoreTokens()) newname += " " + st.nextToken();
         }
         if (newname.equalsIgnoreCase(name))
         {
@@ -1018,6 +1076,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetLastName(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1067,6 +1126,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGrantBadge(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1116,6 +1176,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdRevokeBadge(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1162,6 +1223,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdShowExperience(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1191,6 +1253,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetExperience(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1225,9 +1288,11 @@ public class cmd extends script.base_script
         {
             Vector entries = new Vector();
             entries.setSize(0);
-            for (String xpType : xpTypes) {
+            for (String xpType : xpTypes)
+            {
                 String stringname = getString(new string_id("exp_n", xpType));
-                if (stringname != null && !stringname.equalsIgnoreCase("")) {
+                if (stringname != null && !stringname.equalsIgnoreCase(""))
+                {
                     String linedata = "(" + stringname + ") " + xpType;
                     entries = utils.addElement(entries, linedata);
                 }
@@ -1286,11 +1351,13 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showSetExperienceSyntax(obj_id self) throws InterruptedException
     {
         sendSystemMessageTestingOnly(self, "[Syntax] /setExperience [-target] <xp type> (+|-)<value>");
         sendSystemMessageTestingOnly(self, "[Syntax] /setExperience list");
     }
+
     public int cmdFindObject(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id objToFind = utils.stringToObjId(params);
@@ -1306,6 +1373,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdFindObjectByTemplate(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -1322,6 +1390,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdFindPlayer(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -1338,6 +1407,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdFindWarden(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         sendConsoleMessage(self, "Searching for wardens");
@@ -1345,6 +1415,7 @@ public class cmd extends script.base_script
         findWardenAnywhere(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdFindCreature(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -1361,6 +1432,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdWipeItems(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1387,6 +1459,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdAdjustLotCount(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1418,6 +1491,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdEditBankAccount(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "cmdEditBankAccount");
@@ -1471,6 +1545,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetHue(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         boolean parseTarget = false;
@@ -1560,11 +1635,11 @@ public class cmd extends script.base_script
         if (c != null && cv.isPalColor())
         {
             sendSystemMessageTestingOnly(self, "/setHue: attempting to hue " + target + "'s " + varIdxPath + " color " + colorname);
-            palcolor_custom_var pcv = (palcolor_custom_var)cv;
+            palcolor_custom_var pcv = (palcolor_custom_var) cv;
             pcv.setToClosestColor(c);
             return SCRIPT_CONTINUE;
         }
-        ranged_int_custom_var ri = (ranged_int_custom_var)cv;
+        ranged_int_custom_var ri = (ranged_int_custom_var) cv;
         boolean showPalIdxUI = true;
         if (palIdx > -1)
         {
@@ -1591,11 +1666,13 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showSetHueSyntax(obj_id self) throws InterruptedException
     {
         sendSystemMessageTestingOnly(self, "[Syntax] /setHue [-target]|[-id:<oid>] (var index) (palette index)");
         sendSystemMessageTestingOnly(self, "[Syntax] /setHue [-target]|[-id:<oid>] (var index) (color name)");
     }
+
     public int cmdGoto(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         dictionary d = new dictionary();
@@ -1613,8 +1690,7 @@ public class cmd extends script.base_script
                 try
                 {
                     id = Long.valueOf(oid);
-                }
-                catch(NumberFormatException err)
+                } catch (NumberFormatException err)
                 {
                     debugServerConsoleMsg(self, "Long Conversion Failed, Continuing to next onArrivedAtLocation");
                     return SCRIPT_CONTINUE;
@@ -1625,6 +1701,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int onObjectLocateResponseForCmdGoto(obj_id self, dictionary params) throws InterruptedException
     {
         location l = params.getLocation("location");
@@ -1634,6 +1711,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetPlayerState(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
@@ -1654,6 +1732,7 @@ public class cmd extends script.base_script
         gm.showSetPlayerStateUI(target);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdUnCityBan(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1715,6 +1794,7 @@ public class cmd extends script.base_script
             return SCRIPT_CONTINUE;
         }
     }
+
     public int cmdInvulnerable(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id ship = getPilotedShip(self);
@@ -1740,6 +1820,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetTef(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -1782,6 +1863,7 @@ public class cmd extends script.base_script
         sendSystemMessageTestingOnly(self, "A temporary enemy flag has been set against your current target (OID: " + target + ")");
         return SCRIPT_CONTINUE;
     }
+
     public int cmdInitializeComponent(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "cmdInitializeComponent -- " + params);
@@ -1879,6 +1961,7 @@ public class cmd extends script.base_script
         sendSystemMessageTestingOnly(self, "Component initialization complete.");
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGmWeapon(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         trace.log("Weapons", "gm.cmdGmWeapon -->> " + params, self, trace.TL_WARNING);
@@ -1920,7 +2003,8 @@ public class cmd extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             sendSystemMessageTestingOnly(self, "Weapon type IDs matching your query (" + kind + ") are:");
-            for (Object name : names) {
+            for (Object name : names)
+            {
                 sendSystemMessageTestingOnly(self, (String) name);
             }
             sendSystemMessageTestingOnly(self, "Done listing " + names.size() + " matches.");
@@ -2018,6 +2102,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGMFsVillage(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         trace.log(fs_dyn_village.LOG_CHAN, "gm.cmdGMFsVillage -->> " + params, self, trace.TL_WARNING);
@@ -2148,11 +2233,12 @@ public class cmd extends script.base_script
                     trace.log(fs_dyn_village.LOG_CHAN, "fs_counterstrike::pickAndWriteCycleNamesAndLocs: -> getAllCampHints returned badly structured data. Camps not determine camp info for this cycle.", null, trace.TL_ERROR_LOG);
                     return SCRIPT_CONTINUE;
                 }
-                Vector names = (Vector)campsDat.get(1);
+                Vector names = (Vector) campsDat.get(1);
                 if (names.indexOf(key) < 0)
                 {
                     sendSystemMessageTestingOnly(self, "'" + key + "' is not a valid camp name.  Valid camp names are:");
-                    for (Object name : names) {
+                    for (Object name : names)
+                    {
                         sendSystemMessageTestingOnly(self, (String) name);
                     }
                     return SCRIPT_CONTINUE;
@@ -2343,7 +2429,8 @@ public class cmd extends script.base_script
             obj_id resource = createObject(template, inventory, "");
             if (!isIdNull(resource))
             {
-                for (Object attrib : attribs) {
+                for (Object attrib : attribs)
+                {
                     setObjVar(resource, (String) attrib, rand(500, 1000));
                 }
             }
@@ -2381,6 +2468,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGMForceRank(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("force_rank", "gm.cmdGMForceRank -- " + params);
@@ -2417,12 +2505,12 @@ public class cmd extends script.base_script
                 if (curRank + 2 > force_rank.COUNCIL_RANK_NUMBER + 1)
                 {
                     LOG("force_rank", "Min XP for rank " + (curRank + 1) + " is " + (force_rank.getForceRankMinXp(curRank + 1)) + ".");
-                    newXP = (int)Math.floor(force_rank.getForceRankMinXp(curRank + 1) * 1.5f);
+                    newXP = (int) Math.floor(force_rank.getForceRankMinXp(curRank + 1) * 1.5f);
                 }
                 else
                 {
                     LOG("force_rank", "Min XP for rank " + (curRank + 2) + " is " + (force_rank.getForceRankMinXp(curRank + 2)) + ".");
-                    newXP = (int)Math.floor(force_rank.getForceRankMinXp(curRank + 2) * 1.5f);
+                    newXP = (int) Math.floor(force_rank.getForceRankMinXp(curRank + 2) * 1.5f);
                 }
                 force_rank.adjustForceRankXP(target, newXP - curXP);
                 sendSystemMessageTestingOnly(self, "Promotion initiated.  This may take a minute or so.");
@@ -2627,8 +2715,7 @@ public class cmd extends script.base_script
             try
             {
                 amt = Integer.parseInt(amount);
-            }
-            catch(NumberFormatException err)
+            } catch (NumberFormatException err)
             {
                 sendSystemMessageTestingOnly(self, "Format: /gmForceRank deltaXp <amount>  -- any positive or negative integer");
                 return SCRIPT_CONTINUE;
@@ -2698,8 +2785,7 @@ public class cmd extends script.base_script
             {
                 rank = Integer.parseInt(strRank);
                 score = Integer.parseInt(strScore);
-            }
-            catch(NumberFormatException err)
+            } catch (NumberFormatException err)
             {
                 sendSystemMessageTestingOnly(self, "Format: /gmForceRank setChallengeScore <rank 2-11> <score>");
                 return SCRIPT_CONTINUE;
@@ -2739,6 +2825,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgGotIntResponse(obj_id self, dictionary params) throws InterruptedException
     {
         boolean rslt = false;
@@ -2767,6 +2854,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgGetDurationInfo(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER))
@@ -2804,6 +2892,7 @@ public class cmd extends script.base_script
         sendSystemMessageTestingOnly(self, "The current phase (" + curPhase + ") began " + startedWhen + " ago, is " + durationTime + " long, and thus is set to expire naturally in " + timeLeft);
         return SCRIPT_CONTINUE;
     }
+
     public int msgGetCampInfo(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER))
@@ -2863,7 +2952,7 @@ public class cmd extends script.base_script
         sendSystemMessageTestingOnly(self, "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
         for (int i = 0; i < campNames.size(); i++)
         {
-            name = (String)campNames.get(i);
+            name = (String) campNames.get(i);
             if (campLocs.length > i)
             {
                 loc = campLocs[i];
@@ -2884,10 +2973,11 @@ public class cmd extends script.base_script
             {
                 id = null;
             }
-            sendSystemMessageTestingOnly(self, name + "	" + loc.toString() + "ID=" + id);
+            sendSystemMessageTestingOnly(self, name + "	" + loc + "ID=" + id);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgActivatePhase(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "gm.cmd.fs_village.wantPhase"))
@@ -2921,6 +3011,7 @@ public class cmd extends script.base_script
         sendSystemMessageGalaxyOob("If you are currently on a Force Sensititivy training quest, you should log out now and log back in at this time.  The village phase has been changed and you will not be able to complete your current quest at this time.");
         return SCRIPT_CONTINUE;
     }
+
     public int msgGotIdResponse(obj_id self, dictionary params) throws InterruptedException
     {
         boolean rslt = false;
@@ -2949,6 +3040,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgIdRegistered(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey("success"))
@@ -2969,6 +3061,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgResetFSTask(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, fs_quests.SCRIPT_VAR_REMOVE_TASK_PLAYER);
@@ -3011,6 +3104,7 @@ public class cmd extends script.base_script
         CustomerServiceLog("fs_quests", "GM %TU resetting task " + task_name + " on %TT.", self, player);
         return SCRIPT_CONTINUE;
     }
+
     public int msgCSUnlockBranch(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, fs_quests.SCRIPT_VAR_UNLOCK_BRANCH_PLAYER);
@@ -3040,6 +3134,7 @@ public class cmd extends script.base_script
         sendSystemMessageTestingOnly(self, "You unlock branch " + branch + " on " + getName(player));
         return SCRIPT_CONTINUE;
     }
+
     public int cmdEnclaveIdForPulse(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey("enclave"))
@@ -3057,13 +3152,15 @@ public class cmd extends script.base_script
         force_rank.performEnclaveMaintenance(enclave);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdHasVeteranReward(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!("true").equalsIgnoreCase(getConfigSetting("GameServer", "enableVeteranRewards")))
         {
             return SCRIPT_CONTINUE;
         }
-        if(!isGod(self)) {
+        if (!isGod(self))
+        {
             return SCRIPT_CONTINUE;
         }
         if (!VETERAN_REWARDS_ENABLED)
@@ -3097,13 +3194,15 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetVeteranReward(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!("true").equalsIgnoreCase(getConfigSetting("GameServer", "enableVeteranRewards")))
         {
             return SCRIPT_CONTINUE;
         }
-        if(!isGod(self)) {
+        if (!isGod(self))
+        {
             return SCRIPT_CONTINUE;
         }
         if (!VETERAN_REWARDS_ENABLED)
@@ -3132,13 +3231,15 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdClearVeteranReward(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!("true").equalsIgnoreCase(getConfigSetting("GameServer", "enableVeteranRewards")))
         {
             return SCRIPT_CONTINUE;
         }
-        if(!isGod(self)) {
+        if (!isGod(self))
+        {
             return SCRIPT_CONTINUE;
         }
         if (!VETERAN_REWARDS_ENABLED)
@@ -3167,13 +3268,15 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdOverrideActiveMonths(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!("true").equalsIgnoreCase(getConfigSetting("GameServer", "enableVeteranRewards")))
         {
             return SCRIPT_CONTINUE;
         }
-        if(!isGod(self)) {
+        if (!isGod(self))
+        {
             return SCRIPT_CONTINUE;
         }
         if (!VETERAN_REWARDS_ENABLED)
@@ -3181,20 +3284,20 @@ public class cmd extends script.base_script
             sendSystemMessageTestingOnly(self, "Veteran rewards are currently disabled.");
             return SCRIPT_CONTINUE;
         }
-            if (params == null || params.length() == 0)
-            {
-                sendSystemMessageTestingOnly(self, "format: /overrideActiveMonths <months>");
-                return SCRIPT_CONTINUE;
-            }
-            int months = parseMilestone(params);
-            if (months <= 0)
-            {
-                removeObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN);
-                removeObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE);
-                sendSystemMessage(self, veteran_deprecated.SID_ACTIVE_MONTHS_CLEARED);
-            }
-            else
-            {
+        if (params == null || params.length() == 0)
+        {
+            sendSystemMessageTestingOnly(self, "format: /overrideActiveMonths <months>");
+            return SCRIPT_CONTINUE;
+        }
+        int months = parseMilestone(params);
+        if (months <= 0)
+        {
+            removeObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN);
+            removeObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE);
+            sendSystemMessage(self, veteran_deprecated.SID_ACTIVE_MONTHS_CLEARED);
+        }
+        else
+        {
                 /*int days = months * veteran_deprecated.DAYS_PER_MONTH;
                 setObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN_TOTAL_TIME, days);
                 setObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN_ENTITLED_TIME, days);
@@ -3202,9 +3305,10 @@ public class cmd extends script.base_script
                 setObjVar(self, veteran_deprecated.OBJVAR_FAKE_VETERAN_ENTITLED_LOGIN_TIME, 0);
                 setObjVar(self, veteran_deprecated.OBJVAR_TIME_ACTIVE, days);
                 sendSystemMessage(self, veteran_deprecated.SID_OK);*/
-            }
+        }
         return SCRIPT_CONTINUE;
     }
+
     public int parseMilestone(String params) throws InterruptedException
     {
         String milestone;
@@ -3223,6 +3327,7 @@ public class cmd extends script.base_script
         }
         return Integer.valueOf(milestone);
     }
+
     public int cmdResetJedi(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
@@ -3242,6 +3347,7 @@ public class cmd extends script.base_script
         gm.cmdResetJedi(target);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdDeactivateQuest(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
@@ -3264,6 +3370,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdActivateQuest(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
@@ -3286,6 +3393,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdListActiveQuests(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target))
@@ -3340,6 +3448,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdClearCompletedQuest(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         LOG("newquests", "received /clearCompletedQuest");
@@ -3365,6 +3474,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdCompleteQuest(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
@@ -3387,6 +3497,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdListCompletedQuests(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(target) || !isPlayer(target))
@@ -3441,43 +3552,18 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGrantPadawanTrialsEligibility(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        String[] fs_skills =
-                {
-                        "force_title_jedi_novice",
-                        "force_sensitive_combat_prowess_novice",
-                        "force_sensitive_combat_prowess_melee_accuracy_01",
-                        "force_sensitive_combat_prowess_melee_accuracy_02",
-                        "force_sensitive_combat_prowess_melee_accuracy_03",
-                        "force_sensitive_combat_prowess_melee_accuracy_04",
-                        "force_sensitive_combat_prowess_melee_speed_01",
-                        "force_sensitive_combat_prowess_melee_speed_02",
-                        "force_sensitive_combat_prowess_melee_speed_03",
-                        "force_sensitive_combat_prowess_melee_speed_04",
-                        "force_sensitive_enhanced_reflexes_novice",
-                        "force_sensitive_enhanced_reflexes_ranged_defense_01",
-                        "force_sensitive_enhanced_reflexes_ranged_defense_02",
-                        "force_sensitive_enhanced_reflexes_ranged_defense_03",
-                        "force_sensitive_enhanced_reflexes_ranged_defense_04",
-                        "force_sensitive_enhanced_reflexes_melee_defense_01",
-                        "force_sensitive_enhanced_reflexes_melee_defense_02",
-                        "force_sensitive_enhanced_reflexes_melee_defense_03",
-                        "force_sensitive_enhanced_reflexes_melee_defense_04",
-                        "force_sensitive_heightened_senses_novice",
-                        "force_sensitive_heightened_senses_surveying_01",
-                        "force_sensitive_heightened_senses_surveying_02",
-                        "force_sensitive_heightened_senses_surveying_03",
-                        "force_sensitive_heightened_senses_surveying_04",
-                        "force_sensitive_heightened_senses_luck_01",
-                        "force_sensitive_heightened_senses_luck_02",
-                        "force_sensitive_heightened_senses_luck_03",
-                        "force_sensitive_heightened_senses_luck_04"
-                };
+        String[] fs_skills = {
+                "force_title_jedi_novice", "force_sensitive_combat_prowess_novice", "force_sensitive_combat_prowess_melee_accuracy_01", "force_sensitive_combat_prowess_melee_accuracy_02", "force_sensitive_combat_prowess_melee_accuracy_03", "force_sensitive_combat_prowess_melee_accuracy_04", "force_sensitive_combat_prowess_melee_speed_01", "force_sensitive_combat_prowess_melee_speed_02", "force_sensitive_combat_prowess_melee_speed_03", "force_sensitive_combat_prowess_melee_speed_04", "force_sensitive_enhanced_reflexes_novice", "force_sensitive_enhanced_reflexes_ranged_defense_01", "force_sensitive_enhanced_reflexes_ranged_defense_02", "force_sensitive_enhanced_reflexes_ranged_defense_03", "force_sensitive_enhanced_reflexes_ranged_defense_04", "force_sensitive_enhanced_reflexes_melee_defense_01", "force_sensitive_enhanced_reflexes_melee_defense_02", "force_sensitive_enhanced_reflexes_melee_defense_03", "force_sensitive_enhanced_reflexes_melee_defense_04", "force_sensitive_heightened_senses_novice", "force_sensitive_heightened_senses_surveying_01", "force_sensitive_heightened_senses_surveying_02", "force_sensitive_heightened_senses_surveying_03", "force_sensitive_heightened_senses_surveying_04", "force_sensitive_heightened_senses_luck_01", "force_sensitive_heightened_senses_luck_02", "force_sensitive_heightened_senses_luck_03", "force_sensitive_heightened_senses_luck_04"
+        };
         fs_quests.makeVillageEligible(self);
         setJediState(self, JEDI_STATE_FORCE_SENSITIVE);
-        for (String skill : fs_skills) {
-            if (!hasSkill(self, skill)) {
+        for (String skill : fs_skills)
+        {
+            if (!hasSkill(self, skill))
+            {
                 grantSkill(self, skill);
             }
         }
@@ -3490,11 +3576,13 @@ public class cmd extends script.base_script
         sendSystemMessage(self, str_msg, "");
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGetGameTime(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         sendSystemMessage(self, "The time is " + getGameTime(), null);
         return SCRIPT_CONTINUE;
     }
+
     public int gmJediState(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (params == null || params.length() < 1)
@@ -3570,6 +3658,7 @@ public class cmd extends script.base_script
         sendSystemMessageTestingOnly(self, "format: /gmJediState <command>    /gmJediState ? for help");
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetGroupXPBonus(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isGod(self))
@@ -3601,14 +3690,17 @@ public class cmd extends script.base_script
             sendSystemMessageTestingOnly(self, "You have to be in a group with other players to set a test group xp bonus.");
             return SCRIPT_CONTINUE;
         }
-        for (obj_id member : members) {
-            if (member.isLoaded() && isPlayer(member)) {
+        for (obj_id member : members)
+        {
+            if (member.isLoaded() && isPlayer(member))
+            {
                 utils.setScriptVar(member, "__groupXPBonus", bonus);
             }
         }
         sendSystemMessageTestingOnly(self, "Test group XP bonus set to " + bonus);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdCreateStaticItem(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (params == null || params.length() < 1)
@@ -3691,6 +3783,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdDumpTargetInformation(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         sendSystemMessageTestingOnly(self, "targetis " + params);
@@ -3733,6 +3826,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdDumpObjectInformation(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -3774,27 +3868,33 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdNpeGotoMedicalBay(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if(!isGod(self)) {
+        if (!isGod(self))
+        {
             return SCRIPT_CONTINUE;
         }
         sendSystemMessageTestingOnly(self, "Sending you to a medical bay instance");
         sendPlayerToTutorial(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdNpeGotoMilleniumFalcon(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if(!isGod(self)) {
+        if (!isGod(self))
+        {
             return SCRIPT_CONTINUE;
         }
         sendSystemMessageTestingOnly(self, "Sending you to a millenium falcon instance");
         npe.movePlayerFromHangarToFalcon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdNpeGotoTansariiStation(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if(!isGod(self)) {
+        if (!isGod(self))
+        {
             return SCRIPT_CONTINUE;
         }
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -3812,9 +3912,11 @@ public class cmd extends script.base_script
         npe.movePlayerFromFalconToSharedStation(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdNpeGotoStationGamma(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if(!isGod(self)) {
+        if (!isGod(self))
+        {
             return SCRIPT_CONTINUE;
         }
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -3832,12 +3934,14 @@ public class cmd extends script.base_script
         npe.movePlayerFromOrdMantellSpaceToOrdMantellDungeon(self);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdStartRestussStageTwo(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         attachScript(self, "systems.cw_data.cluster_wide_response_manager");
         getClusterWideData("event", "restuss_event", true, self);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdCompleteRestussStageOne(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id[] spawnedItems = getAllObjectsWithObjVar(getLocation(self), 200.0f, "element");
@@ -3845,39 +3949,48 @@ public class cmd extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id spawnedItem : spawnedItems) {
-            if (!hasObjVar(spawnedItem, "element")) {
+        for (obj_id spawnedItem : spawnedItems)
+        {
+            if (!hasObjVar(spawnedItem, "element"))
+            {
                 continue;
             }
             String element = getStringObjVar(spawnedItem, "element");
-            if (!element.startsWith("ph1")) {
+            if (!element.startsWith("ph1"))
+            {
                 continue;
             }
-            if (element.equals("ph1_restuss_master")) {
+            if (element.equals("ph1_restuss_master"))
+            {
                 continue;
             }
-            if (element.contains("wall") || element.contains("medic")) {
+            if (element.contains("wall") || element.contains("medic"))
+            {
                 continue;
             }
-            if (element.contains("baracks")) {
+            if (element.contains("baracks"))
+            {
                 messageTo(spawnedItem, "incrimentPhase", null, 0, false);
                 messageTo(spawnedItem, "incrimentPhase", null, 20, false);
                 messageTo(spawnedItem, "incrimentPhase", null, 40, false);
                 continue;
             }
-            if (element.contains("headq")) {
+            if (element.contains("headq"))
+            {
                 messageTo(spawnedItem, "incrimentPhase", null, 5, false);
                 messageTo(spawnedItem, "incrimentPhase", null, 25, false);
                 messageTo(spawnedItem, "incrimentPhase", null, 45, false);
                 continue;
             }
-            if (element.contains("commu")) {
+            if (element.contains("commu"))
+            {
                 messageTo(spawnedItem, "incrimentPhase", null, 10, false);
                 messageTo(spawnedItem, "incrimentPhase", null, 30, false);
                 messageTo(spawnedItem, "incrimentPhase", null, 50, false);
                 continue;
             }
-            if (element.contains("logis")) {
+            if (element.contains("logis"))
+            {
                 messageTo(spawnedItem, "incrimentPhase", null, 15, false);
                 messageTo(spawnedItem, "incrimentPhase", null, 35, false);
                 messageTo(spawnedItem, "incrimentPhase", null, 55, false);
@@ -3886,6 +3999,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGmShowQuest(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         StringTokenizer st = new java.util.StringTokenizer(params);
@@ -3908,7 +4022,8 @@ public class cmd extends script.base_script
                 String combinedQuestList = "";
                 if (listQuests != null)
                 {
-                    for (String listQuest : listQuests) {
+                    for (String listQuest : listQuests)
+                    {
                         combinedQuestList += listQuest + "\n";
                     }
                     if (!combinedQuestList.equals(""))
@@ -3937,6 +4052,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGmClearQuest(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         StringTokenizer st = new java.util.StringTokenizer(params);
@@ -3969,6 +4085,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdGmRegrantQuest(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         StringTokenizer st = new java.util.StringTokenizer(params);
@@ -4001,49 +4118,63 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetInstanceAuthorized(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isGod(self))
         {
             return SCRIPT_CONTINUE;
         }
-        if (params.contains(gm.KEYWORD_TARGET)) {
+        if (params.contains(gm.KEYWORD_TARGET))
+        {
             params = gm.removeKeyword(params, gm.KEYWORD_TARGET);
-        } else {
+        }
+        else
+        {
             target = self;
         }
         String[] instanceFlags = dataTableGetStringColumn(instance.INSTANCE_DATATABLE, "key_required");
-        if (instanceFlags != null && instanceFlags.length > 0) {
-            if(utils.hasScriptVar(target, gm.INSTANCE_AUTH)) {
+        if (instanceFlags != null && instanceFlags.length > 0)
+        {
+            if (utils.hasScriptVar(target, gm.INSTANCE_AUTH))
+            {
                 utils.removeScriptVar(target, gm.INSTANCE_AUTH);
-                for (String flag : instanceFlags) {
-                    if (flag != null && flag.length() > 0) {
+                for (String flag : instanceFlags)
+                {
+                    if (flag != null && flag.length() > 0)
+                    {
                         instance.removePlayerFlagForInstance(target, flag);
                     }
                 }
                 removeObjVar(target, "mand.acknowledge");
                 sendSystemMessageTestingOnly(target, "You are no longer flagged for or overriding instance authorization.");
-                if(target != self) {
-                    sendSystemMessageTestingOnly(self, "setInstanceAuthorized: You have removed flags and instance authorization for "+getPlayerName(target)+" ("+target+"). Use this command again to re-grant instance overrides.");
+                if (target != self)
+                {
+                    sendSystemMessageTestingOnly(self, "setInstanceAuthorized: You have removed flags and instance authorization for " + getPlayerName(target) + " (" + target + "). Use this command again to re-grant instance overrides.");
                 }
                 return SCRIPT_CONTINUE;
             }
-            else {
+            else
+            {
                 utils.setScriptVar(target, gm.INSTANCE_AUTH, 1);
-                for (String flag : instanceFlags) {
-                    if (flag != null && flag.length() > 0) {
+                for (String flag : instanceFlags)
+                {
+                    if (flag != null && flag.length() > 0)
+                    {
                         instance.flagPlayerForInstance(target, flag);
                     }
                 }
                 setObjVar(target, "mand.acknowledge", 1);
                 sendSystemMessageTestingOnly(target, "You are now flagged for all instances and overriding instance authorization.");
-                if(target != self) {
-                    sendSystemMessageTestingOnly(self, "setInstanceAuthorized: You have flagged "+getPlayerName(target)+" ("+target+") to access all instances and overrode their instance authorization. Use this command again to revert this override.");
+                if (target != self)
+                {
+                    sendSystemMessageTestingOnly(self, "setInstanceAuthorized: You have flagged " + getPlayerName(target) + " (" + target + ") to access all instances and overrode their instance authorization. Use this command again to revert this override.");
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdCombatDataRecord(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isGod(self))
@@ -4066,6 +4197,7 @@ public class cmd extends script.base_script
         sendSystemMessage(self, message, "");
         return SCRIPT_CONTINUE;
     }
+
     public int cmdCombatDataClear(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isGod(self))
@@ -4084,6 +4216,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdCombatDataReport(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isGod(self))
@@ -4093,6 +4226,7 @@ public class cmd extends script.base_script
         target_dummy.reportCombatData(self, self);
         return SCRIPT_CONTINUE;
     }
+
     public int cmdCombatDataStop(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isGod(self))
@@ -4110,6 +4244,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdCsDumpTarget(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         StringTokenizer st = new java.util.StringTokenizer(params);
@@ -4148,6 +4283,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void createDumpFile(obj_id self, obj_id targetObject) throws InterruptedException
     {
         if (isValidId(targetObject))
@@ -4158,6 +4294,7 @@ public class cmd extends script.base_script
             gm.createDumpTargetUI(self, combinedString);
         }
     }
+
     public int exportCsDumpFile(obj_id self, dictionary params) throws InterruptedException
     {
         int btn = sui.getIntButtonPressed(params);
@@ -4171,6 +4308,7 @@ public class cmd extends script.base_script
         utils.removeScriptVarTree(self, "export");
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetGalaxyMessage(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (getGodLevel(self) < 10)
@@ -4202,7 +4340,7 @@ public class cmd extends script.base_script
                     {
                         if (commandParams.indexOf("set") == 0 && commandParams.length() > 4)
                         {
-                            commandParams = commandParams.substring(4, commandParams.length());
+                            commandParams = commandParams.substring(4);
                             commandParams = commandParams.trim();
                             setObjVar(planetId, "galaxyMessage", commandParams);
                             String strMessage = "\\#FF0000" + "Give it a few moments, then check the new message with /motd" + "\\#FFFFFF";
@@ -4227,6 +4365,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdSetWardenGalaxyMessage(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (getGodLevel(self) < 10)
@@ -4258,7 +4397,7 @@ public class cmd extends script.base_script
                     {
                         if (commandParams.indexOf("set") == 0 && commandParams.length() > 4)
                         {
-                            commandParams = commandParams.substring(4, commandParams.length());
+                            commandParams = commandParams.substring(4);
                             commandParams = commandParams.trim();
                             setObjVar(planetId, "galaxyWardenMessage", commandParams);
                             String strMessage = "\\#FF0000" + "Give it a few moments, then check the new warden message with /motd" + "\\#FFFFFF";
@@ -4283,6 +4422,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int gmCreateSpecificResource(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if ((params == null) || (params.equals("")))
@@ -4313,6 +4453,7 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int gmCreateClassResource(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if ((params == null) || (params.equals("")))
@@ -4344,99 +4485,122 @@ public class cmd extends script.base_script
     }
 
     // SWG Source Admin Command Additions (we nest them in here (e.g. /admin <subcommand> <params>)
-    public int cmdAdmin(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
+    public int cmdAdmin(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
 
-        if(!isGod(self)) {
+        if (!isGod(self))
+        {
             return SCRIPT_CONTINUE;
         }
         StringTokenizer st = new StringTokenizer(params);
         String command;
-        if(st.hasMoreTokens()) {
+        if (st.hasMoreTokens())
+        {
             command = st.nextToken();
-        } else {
+        }
+        else
+        {
             showAdminCmdSyntax(self);
             return SCRIPT_CONTINUE;
         }
 
-        if(command.equalsIgnoreCase("dumpPermsForCell")) {
+        if (command.equalsIgnoreCase("dumpPermsForCell"))
+        {
 
             obj_id oid;
-            if(!st.hasMoreTokens()) {
+            if (!st.hasMoreTokens())
+            {
                 sendSystemMessageTestingOnly(self, "Syntax: /admin dumpPermsForCell <oid>");
                 return SCRIPT_CONTINUE;
-            } else {
+            }
+            else
+            {
                 oid = obj_id.getObjId(Long.parseLong(st.nextToken()));
             }
-            if (!isValidId(oid)) {
+            if (!isValidId(oid))
+            {
                 sendSystemMessageTestingOnly(self, "The object specified for dumpPermsForCell was not valid.");
                 return SCRIPT_CONTINUE;
             }
 
-            String message = "Access Permissions for Cell "+oid+":\n\n" +
-                    "Cell is Public? "+permissionsIsPublic(oid) + "\n\n" +
-                    "Allowed List: \n" + Arrays.toString(permissionsGetAllowed(oid)) + "\n\n" +
-                    "Banned List: \n" + Arrays.toString(permissionsGetBanned(oid)) + "\n\n";
+            String message = "Access Permissions for Cell " + oid + ":\n\n" + "Cell is Public? " + permissionsIsPublic(oid) + "\n\n" + "Allowed List: \n" + Arrays.toString(permissionsGetAllowed(oid)) + "\n\n" + "Banned List: \n" + Arrays.toString(permissionsGetBanned(oid)) + "\n\n";
 
             sui.msgbox(self, self, message, sui.OK_ONLY, "Cell Permissions", "noHandler");
 
             return SCRIPT_CONTINUE;
         }
-
-        else if(command.equalsIgnoreCase("getRotation")) {
+        else if (command.equalsIgnoreCase("getRotation"))
+        {
 
             obj_id oid;
-            if(!st.hasMoreTokens()) {
+            if (!st.hasMoreTokens())
+            {
                 sendSystemMessageTestingOnly(self, "Syntax: /admin getRotation <oid>");
                 return SCRIPT_CONTINUE;
-            } else {
+            }
+            else
+            {
                 oid = obj_id.getObjId(Long.parseLong(st.nextToken()));
             }
-            if (!isValidId(oid)) {
+            if (!isValidId(oid))
+            {
                 sendSystemMessageTestingOnly(self, "The object specified for getRotation was not valid.");
                 return SCRIPT_CONTINUE;
             }
             float[] q = getQuaternion(oid);
-            sendConsoleMessage(self, "Rotation Information for Object \\#FFFF00"+oid+"\\#.");
-            sendConsoleMessage(self, "\\#FFFF00Template:\\#. "+getTemplateName(oid));
-            sendConsoleMessage(self, "\\#FFFF00Rotation:\\#. "+getFurnitureRotationDegree(oid));
-            sendConsoleMessage(self, "\\#FFFF00Quaternions:\\#. qW "+q[0]+" qX "+q[1]+" qY "+q[2]+" qZ "+q[3]);
+            sendConsoleMessage(self, "Rotation Information for Object \\#FFFF00" + oid + "\\#.");
+            sendConsoleMessage(self, "\\#FFFF00Template:\\#. " + getTemplateName(oid));
+            sendConsoleMessage(self, "\\#FFFF00Rotation:\\#. " + getFurnitureRotationDegree(oid));
+            sendConsoleMessage(self, "\\#FFFF00Quaternions:\\#. qW " + q[0] + " qX " + q[1] + " qY " + q[2] + " qZ " + q[3]);
             return SCRIPT_CONTINUE;
         }
+        else if (command.equalsIgnoreCase("getUsername"))
+        {
 
-        else if (command.equalsIgnoreCase("getUsername")) {
-
-            if(!st.hasMoreTokens()) {
+            if (!st.hasMoreTokens())
+            {
                 sendSystemMessageTestingOnly(self, "Syntax: /admin getUsername <player first name OR object ID>");
                 return SCRIPT_CONTINUE;
-            } else {
+            }
+            else
+            {
                 String toParse = st.nextToken();
                 obj_id player;
-                if(toParse.matches(".*\\d.*")) {
+                if (toParse.matches(".*\\d.*"))
+                {
                     player = obj_id.getObjId(Long.parseLong(toParse));
-                } else
+                }
+                else
                 {
                     player = getPlayerIdFromFirstName(toParse);
                 }
-                if (isIdValid(player) && isPlayer(player)) {
-                    sendSystemMessageTestingOnly(self, "The username for "+getPlayerName(player)+" ("+player+") is: "+getPlayerAccountUsername(player));
-                } else {
+                if (isIdValid(player) && isPlayer(player))
+                {
+                    sendSystemMessageTestingOnly(self, "The username for " + getPlayerName(player) + " (" + player + ") is: " + getPlayerAccountUsername(player));
+                }
+                else
+                {
                     sendSystemMessageTestingOnly(self, "getUsername: Error: The name or OID you provided is not valid or is not a player.");
                     sendSystemMessageTestingOnly(self, "Syntax: /admin getUsername <player first name OR object ID>");
                 }
                 return SCRIPT_CONTINUE;
             }
         }
-
-        else if (command.equalsIgnoreCase("setWeather")) {
+        else if (command.equalsIgnoreCase("setWeather"))
+        {
 
             String weather;
-            if(st.hasMoreTokens()) {
+            if (st.hasMoreTokens())
+            {
                 weather = st.nextToken();
-            } else {
+            }
+            else
+            {
                 sendSystemMessageTestingOnly(self, "Syntax: /admin setWeather <clear | mild | heavy | severe>");
                 return SCRIPT_CONTINUE;
             }
-            switch (weather) {
+            switch (weather)
+            {
                 case "clear":
                     sendSystemMessageTestingOnly(self, "setWeather: Setting Weather to Clear... It will take a minute to appear...");
                     setWeatherData(0, 0.01f, 0.01f);
@@ -4459,68 +4623,238 @@ public class cmd extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
+        else if (command.equalsIgnoreCase("startGcwSpaceBattle"))
+        {
 
-        else if (command.equalsIgnoreCase("startGcwSpaceBattle")) {
-
-            if(!st.hasMoreTokens()) {
+            if (!st.hasMoreTokens())
+            {
                 sendSystemMessageTestingOnly(self, "Syntax: /admin startGcwSpaceBattle <scene> <type>");
                 return SCRIPT_CONTINUE;
             }
-            else {
+            else
+            {
                 String scene = st.nextToken();
                 String[] allowedScenes = {"tatooine", "dantooine", "lok", "naboo", "corellia"};
-                if(!Arrays.asList(allowedScenes).contains(scene)) {
-                    sendSystemMessageTestingOnly(self, "Error: The scene you specified was not valid. Valid scenes are: "+ Arrays.toString(allowedScenes));
+                if (!Arrays.asList(allowedScenes).contains(scene))
+                {
+                    sendSystemMessageTestingOnly(self, "Error: The scene you specified was not valid. Valid scenes are: " + Arrays.toString(allowedScenes));
                     return SCRIPT_CONTINUE;
-                } else {
-                    if(!st.hasMoreTokens()) {
+                }
+                else
+                {
+                    if (!st.hasMoreTokens())
+                    {
                         sendSystemMessageTestingOnly(self, "Syntax: /admin startGcwSpaceBattle <scene> <type>");
                         return SCRIPT_CONTINUE;
                     }
                     String type = st.nextToken();
-                    if(!type.equalsIgnoreCase("pvp") && !type.equalsIgnoreCase("pve")) {
+                    if (!type.equalsIgnoreCase("pvp") && !type.equalsIgnoreCase("pve"))
+                    {
                         sendSystemMessageTestingOnly(self, "Error: Battle type must be pvp or pve.");
                         return SCRIPT_CONTINUE;
                     }
                     obj_id masterObject = getPlanetByName("tatooine");
-                    if(!hasObjVar(masterObject, "space_gcw.space_"+scene+".spawner")) {
+                    if (!hasObjVar(masterObject, "space_gcw.space_" + scene + ".spawner"))
+                    {
                         sendSystemMessageTestingOnly(self, "Error: Couldn't find the spawner for that scene. Have you started the space scene and visited it before so it can initialize?");
                         return SCRIPT_CONTINUE;
-                    } else {
-                        obj_id spawner = getObjIdObjVar(masterObject, "space_gcw.space_"+scene+".spawner");
+                    }
+                    else
+                    {
+                        obj_id spawner = getObjIdObjVar(masterObject, "space_gcw.space_" + scene + ".spawner");
                         dictionary d = new dictionary();
                         d.put("battle_type", type);
                         d.put("controller", masterObject);
                         messageTo(spawner, "startSpaceGCWBattle", d, 0f, false);
-                        sendSystemMessageTestingOnly(self, "Successfully requested start for battle in the space zone of "+scene+" of type "+type);
+                        sendSystemMessageTestingOnly(self, "Successfully requested start for battle in the space zone of " + scene + " of type " + type);
                         sendConsoleMessage(self, "\\#00FFFF ***startSpaceGcwBattle REMINDER: The battle will start after the configured prep time and will not begin if the space zone isn't currently active with at least 1 player in it so you may need to re-send the command when the zone is active.\\#.");
                         return SCRIPT_CONTINUE;
                     }
                 }
             }
         }
-
-        else {
-            showAdminCmdSyntax(self);
+        else if (command.equalsIgnoreCase("openlink"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin openlink url");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String url = st.nextToken();
+                launchClientWebBrowser(target, url);
+            }
         }
-
+        else if (command.equalsIgnoreCase("playeffect"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffect <effect name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String effect = st.nextToken();
+                playClientEffectObj(self, effect, self, "");
+            }
+        }
+        else if (command.equalsIgnoreCase("playeffecttarget"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffecttarget <effect name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String effect = st.nextToken();
+                playClientEffectObj(target, effect, target, "");
+            }
+        }
+        else if (command.equalsIgnoreCase("playeffectloc"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectloc <effect name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String effect = st.nextToken();
+                playClientEffectLoc(self, effect, getLocation(self), 0.0f);
+            }
+        }
+        else if (command.equalsIgnoreCase("playeffectloctarget"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectloctarget <effect name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String effect = st.nextToken();
+                playClientEffectLoc(target, effect, getLocation(target), 0.0f);
+            }
+        }
+        else if (command.equalsIgnoreCase("playeffectatloc"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectlocatloc <effect name> <x> <y> <z>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String effect = st.nextToken();
+                float x = Float.parseFloat(st.nextToken());
+                float y = Float.parseFloat(st.nextToken());
+                float z = Float.parseFloat(st.nextToken());
+                location loc = new location(x, y, z);
+                playClientEffectLoc(self, effect, loc, 0.0f);
+            }
+        }
+        else if (command.equalsIgnoreCase("playsound"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playsound <sound name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String sound = st.nextToken();
+                playClientEffectObj(self, sound, self, "");
+            }
+        }
+        else if (command.equalsIgnoreCase("playsoundtarget"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundtarget <sound name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String sound = st.nextToken();
+                playClientEffectObj(target, sound, target, "");
+            }
+        }
+        else if (command.equalsIgnoreCase("playsoundloc"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundloc <sound name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String sound = st.nextToken();
+                playClientEffectLoc(self, sound, getLocation(self), 0.0f);
+            }
+        }
+        else if (command.equalsIgnoreCase("playsoundloctarget"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundloctarget <sound name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String sound = st.nextToken();
+                playClientEffectLoc(target, sound, getLocation(target), 0.0f);
+            }
+        }
+        else if (command.equalsIgnoreCase("playsoundatloc"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundlocatloc <sound name> <x> <y> <z>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String sound = st.nextToken();
+                float x = Float.parseFloat(st.nextToken());
+                float y = Float.parseFloat(st.nextToken());
+                float z = Float.parseFloat(st.nextToken());
+                location loc = new location(x, y, z);
+                playClientEffectLoc(self, sound, loc, 0.0f);
+            }
+        }
+        else if (command.equalsIgnoreCase("playmusic"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playmusic <music name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String music = st.nextToken();
+                playMusic(self, music);
+            }
+        }
+        else if (command.equalsIgnoreCase("playmusictarget"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playmusictarget <music name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String music = st.nextToken();
+                playMusic(target, music);
+            }
+        }
+        else
+        {
+            sendSystemMessageTestingOnly(self, "Unknown command: " + command);
+        }
         return SCRIPT_CONTINUE;
-    }
-
-    private static void showAdminCmdSyntax(obj_id self) throws InterruptedException {
-        sendSystemMessageTestingOnly(self, "Outputting nested commands and syntax of /admin to console");
-        sendConsoleMessage(self, "\\#ffff00 ============ Syntax: /admin commands ============ \\#.");
-        sendConsoleMessage(self, "\\#00ffff dumpPermsForCell \\#bfff00 <oid> \\#.");
-        sendConsoleMessage(self, "returns the public status and permissions list for the provided cell");
-        sendConsoleMessage(self, "\\#00ffff getRotation \\#bfff00 <oid> \\#.");
-        sendConsoleMessage(self, "returns the quaternions and rotation of an object");
-        sendConsoleMessage(self, "\\#00ffff getUsername \\#bfff00 <player first name OR oid> \\#.");
-        sendConsoleMessage(self, "returns the account username of the specified player");
-        sendConsoleMessage(self, "\\#00ffff setWeather \\#bfff00 <clear | mild | heavy | severe> \\#.");
-        sendConsoleMessage(self, "sets the weather for the current scene");
-        sendConsoleMessage(self, "\\#00ffff startGcwSpaceBattle \\#bfff00 <planet> <type> \\#.");
-        sendConsoleMessage(self, "sends a request to start the GCW2 space battle for the specified scene and type");
-        sendConsoleMessage(self, "\\#ffff00 ============ ============ ============ ============ \\#.");
     }
 
     public int cmdGenerateCraftedItem(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
@@ -4573,5 +4907,4 @@ public class cmd extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-
 }
