@@ -4343,7 +4343,8 @@ item_pgc_token_02
 item_pgc_token_03											
 item_pgc_relic_fragment											
 item_pgc_booster_pack											
-item_pgc_booster_pack_goto			string:chronicles.boosterPackCategory=goto_task								
+item_pgc_booster_pack_goto			string:chronicles.boosterPackCategory=goto_task
+item_chronicles_heroic_pack			string:chronicles.boosterPackCategory=rare
 item_pgc_booster_pack_comm			string:chronicles.boosterPackCategory=comm_message								
 item_pgc_starter_kit			int:chronicles.isStarterPack=1								
 item_pgc_fireplace											
