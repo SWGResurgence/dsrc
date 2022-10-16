@@ -14,10 +14,17 @@ public class city_furniture extends script.base_script
     public static final string_id SID_DECO_TOO_CLOSE = new string_id("city/city", "deco_too_close");
     public static final string_id SID_NO_MORE_DECOS = new string_id("city/city", "no_more_decos");
     public static final string_id SID_ALIGN = new string_id("city/city", "align");
+    public static final string_id SID_MOVEMENT = new string_id("city/city", "movement");
     public static final string_id SID_NORTH = new string_id("city/city", "north");
     public static final string_id SID_SOUTH = new string_id("city/city", "south");
     public static final string_id SID_EAST = new string_id("city/city", "east");
     public static final string_id SID_WEST = new string_id("city/city", "west");
+    public static final string_id SID_MOVE_FORWARD = new string_id("city/city", "forward");
+    public static final string_id SID_MOVE_BACKWARD = new string_id("city/city", "back");
+    public static final string_id SID_MOVE_LEFT = new string_id("city/city", "left");
+    public static final string_id SID_MOVE_RIGHT = new string_id("city/city", "right");
+    public static final string_id SID_MOVE_UP = new string_id("city/city", "up");
+    public static final string_id SID_MOVE_DOWN = new string_id("city/city", "down");
     public static final string_id NO_SKILL_DECO = new string_id("city/city", "no_skill_deco");
     public static final String CITY_DECORATIONS = "datatables/city/decorations.iff";
     public static final string_id SID_CIVIC_ONLY = new string_id("city/city", "civic_only");
@@ -101,7 +108,7 @@ public class city_furniture extends script.base_script
     {
         int city_id = getCityAtLocation(getLocation(player), 0);
         boolean isMayor = city.isTheCityMayor(player, city_id);
-        if (!isMayor)
+        if (!isMayor || !isGod(player))
         {
             return SCRIPT_CONTINUE;
         }
@@ -137,11 +144,19 @@ public class city_furniture extends script.base_script
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU5, SID_SOUTH);
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU6, SID_EAST);
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU7, SID_WEST);
+            int movement = mi.addRootMenu(menu_info_types.SERVER_MENU10, SID_MOVEMENT);
+            mi.addSubMenu(movement, menu_info_types.SERVER_MENU11, SID_MOVE_FORWARD);
+            mi.addSubMenu(movement, menu_info_types.SERVER_MENU12, SID_MOVE_BACKWARD);
+            mi.addSubMenu(movement, menu_info_types.SERVER_MENU13, SID_MOVE_LEFT);
+            mi.addSubMenu(movement, menu_info_types.SERVER_MENU14, SID_MOVE_RIGHT);
+            mi.addSubMenu(movement, menu_info_types.SERVER_MENU15, SID_MOVE_UP);
+            mi.addSubMenu(movement, menu_info_types.SERVER_MENU16, SID_MOVE_DOWN);
         }
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
+        location loc = getLocation(self);
         sendDirtyObjectMenuNotification(self);
         int city_id = city.checkMayorCity(player, false);
         if (city_id == 0)
@@ -175,6 +190,36 @@ public class city_furniture extends script.base_script
         else if (item == menu_info_types.SERVER_MENU7)
         {
             setYaw(self, -90);
+        }
+        else if (item == menu_info_types.SERVER_MENU11)
+        {
+            loc.z = loc.z + 5;
+            setLocation(self, loc);
+        }
+        else if(item == menu_info_types.SERVER_MENU12)
+        {
+            loc.z = loc.z - 5;
+            setLocation(self, loc);
+        }
+        else if(item == menu_info_types.SERVER_MENU13)
+        {
+            loc.x = loc.x - 5;
+            setLocation(self, loc);
+        }
+        else if(item == menu_info_types.SERVER_MENU14)
+        {
+            loc.x = loc.x + 5;
+            setLocation(self, loc);
+        }
+        else if(item == menu_info_types.SERVER_MENU15)
+        {
+            loc.y = loc.y + 5;
+            setLocation(self, loc);
+        }
+        else if(item == menu_info_types.SERVER_MENU16)
+        {
+            loc.y = loc.y - 5;
+            setLocation(self, loc);
         }
         return SCRIPT_CONTINUE;
     }
@@ -226,7 +271,7 @@ public class city_furniture extends script.base_script
                 }
                 location oloc = getLocation(structure1);
                 float dist = utils.getDistance2D(loc, oloc);
-                if ((dist < 25) && (dist > 0)) {
+                if ((dist < 1.5) && (dist > 0)) {
                     prose_package pp = prose.getPackage(SID_DECO_TOO_CLOSE, localize(getNameStringId(structure1)));
                     sendSystemMessageProse(player, pp);
                     return;
