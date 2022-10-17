@@ -132,7 +132,7 @@ badge_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0
 			content_corellia_39_corsec_hero	209	-1	-1																		NONE	none	0	1						0	0
 			anniversary_30th_event_badge	228	-1	-1																		sound/music_acq_miner.snd	none	0	0						0	0
 			champion_of_hoth	6019	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0
-			prolog_content_badge	6840	-1	-1																		sound/music_acq_miner.snd	none	0	0						0	0
+	prolog_content_badge	6840	-1	-1																		sound/music_acq_miner.snd	none	0	0						0	0
 		col_bdg_hero_tatooine		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						1	0
 			poi_rabidbeast	7	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 			poi_prisonbreak	8	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
@@ -6207,3 +6207,10 @@ removed_slots_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	
 	removed_slots_page			0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0
 		slots_removed		0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0
 			reserved_mail_04_03	16083	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+resurgence_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						1	0
+	resurgence_page			0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						1	0
+		event_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						1	0
+			col_halloween_pumpkin_smasher	31500	31600	100	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0
+			col_halloween_22	31601	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0
+			col_title_thief	31602	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0
+			
