@@ -15,6 +15,7 @@ public class pumpkin_smasher_object extends script.base_script
     }
     private static final String HALLOWEEN = "event/halloween";
     public static final string_id SID_USE = new string_id(HALLOWEEN, "smash_pumpkin");
+    public static final String COLLECTION_NAME = "col_halloween_pumpkin_smasher";
     public static final String PULPED_ITER_OBJVAR = "halloween.pulped";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
@@ -46,10 +47,14 @@ public class pumpkin_smasher_object extends script.base_script
                 static_item.createNewItemFunction("item_event_halloween_coin", utils.getInventoryContainer(player), 5);
             }
             playClientEffectObj(player, "clienteffect/egg_hatch_01.cef", player, "root");
-            broadcast(player, "You have smashed this pumpkin.");
             int currentSmashed = getIntObjVar(player, PULPED_ITER_OBJVAR);
             setObjVar(player, PULPED_ITER_OBJVAR, currentSmashed + 1);
-            //@TODO add collection modifer and collection
+            //@TODO add collection [col_halloween_pumpkin_smasher]
+            if (currentSmashed <= 10)
+            {
+                broadcast(player, "You have smashed " + currentSmashed + " pumpkins.");
+                modifyCollectionSlotValue(player, COLLECTION_NAME, 1);
+            }
             hideFromClient(self, true);
             destroyObject(self);
         }
