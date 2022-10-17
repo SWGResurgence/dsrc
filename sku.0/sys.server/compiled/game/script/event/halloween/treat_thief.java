@@ -9,7 +9,17 @@ import script.obj_id;
 public class treat_thief extends script.base_script {
     public treat_thief() {
     }
-
+    public static final String RING_EVENT_ONE = "event_halloween_minion_01";
+    public static final String RING_EVENT_TWO = "event_halloween_minion_02";
+    public static final int RING_EVENT_NUM_MOBS = 16;
+    public static final float RING_EVENT_MOB_RANGE = 0.0f;
+    public static final String SIDEKICK_TEMPLATE_ONE = "event_halloween_sidekick_01";
+    public static final String SIDEKICK_TEMPLATE_TWO = "event_halloween_sidekick_02";
+    public static final String SIDEKICK_BUFF = "event_halloween_sidekick_buff";
+    public static final String FINAL_BUFF = "event_halloween_boss_last_chance";
+    public static final int FINAL_BUFF_DURATION = 5;
+    public static final int FINAL_BUFF_POWER = 100;
+    public static final String LOOT_DROP_TEMPLATE = "object/tangible/loot/quest/halloween_treat.iff"; //@TODO: change me
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
@@ -17,8 +27,6 @@ public class treat_thief extends script.base_script {
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, false);
-        setHealth(self, 2500000);
-        setHitpoints(self, 2500000);
         setName(self, "Treat Thief");
         setScale(self, 2.0f);
         startFog(self);
@@ -30,16 +38,17 @@ public class treat_thief extends script.base_script {
     }
     public int OnCombatEntered(obj_id self, obj_id attacker, obj_id[] attackers, dictionary params) throws InterruptedException
     {
-        //sendSystemMessageGalaxyTestingOnly("[World Event] The Treat Thief has been spotted on " + toUpper(getCurrentSceneName(), 1));
-        obj_id[] players = getPlayerCreaturesInRange(self, 64.0f);
-        if (players == null || players.length == 0)
+        if (hasObjVar(self, "event.halloween_spam"))
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id player : players) {
-            addHate(self, player, 1);
+        else
+        {
+            setObjVar(self, "event.halloween_spam", 1);
+            sendSystemMessageGalaxyTestingOnly("[World Event] The Treat Thief has been engaged on " + toUpper(getCurrentSceneName(), 0));
+
         }
-        return SCRIPT_CONTINUE;
+       return SCRIPT_CONTINUE;
     }
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
@@ -50,6 +59,17 @@ public class treat_thief extends script.base_script {
         if (!isPlayer(attacker))
         {
             return SCRIPT_CONTINUE;
+        }
+        if (group.isGrouped(attacker))
+        {
+            obj_id[] groupMembers = getGroupMemberIds(attacker);
+            if (groupMembers == null || groupMembers.length == 0)
+            {
+                return SCRIPT_CONTINUE;
+            }
+            for (obj_id groupMember : groupMembers) {
+                addToHealth(groupMember, 20 * 180);
+            }
         }
         float max = getMaxHealth(self);
         float current = getHealth(self);
@@ -66,46 +86,46 @@ public class treat_thief extends script.base_script {
                         {
                             if (ratio <= 0.3f && !hasObjVar(self, "event.halloween_final_ratio"))
                             {
-                                if (!buff.hasBuff(self, "event_rebel_candy"))
+                                if (!buff.hasBuff(self, FINAL_BUFF))
                                 {
-                                    buff.applyBuff(self, "event_rebel_candy", -1.0f, 40.0f);
-                                    setObjVar(self, "event.halloween_final_ratio", true);
+                                    buff.applyBuff(self, FINAL_BUFF, FINAL_BUFF_DURATION, FINAL_BUFF_POWER);
+                                    setObjVar(self, "event.halloween_final_ratio", 1);
                                 }
                             }
-                            spawnSidekick(self, "tusken_warlord","frogBuff", 1.0f);
-                            setObjVar(self, "event.halloween_fifth_ratio", true);
+                            spawnSidekick(self, SIDEKICK_TEMPLATE_TWO,SIDEKICK_BUFF, 1.0f, 40.0f);
+                            setObjVar(self, "event.halloween_fifth_ratio", 1);
                             return SCRIPT_CONTINUE;
                         }
-                        chat.chat(self, "You're not getting away with this" + getName(attacker));
-                        spawnSidekick(self, "tusken_warlord", "frogBuff", 1.0f);
-                        setObjVar(self, "event.halloween_fourth_ratio", true);
+                        chat.chat(self, "Stay away! I have a family to steal from!");
+                        spawnSidekick(self, SIDEKICK_TEMPLATE_ONE, SIDEKICK_BUFF, 1.0f, 2.5f);
+                        setObjVar(self, "event.halloween_fourth_ratio", 1);
                         return SCRIPT_CONTINUE;
                     }
-                    chat.chat(self, "Finally... I've been waiting for you " + getName(attacker));
-                    createCircleSpawn(self, attacker,  "nuna", 20, 10.0f );
-                    setObjVar(self, "event.halloween_third_ratio", true);
+                    chat.chat(self, "Those first minions were weak! Maybe these will be more of a challenge.");
+                    createCircleSpawn(self, attacker,  RING_EVENT_TWO, RING_EVENT_NUM_MOBS, RING_EVENT_MOB_RANGE );
+                    setObjVar(self, "event.halloween_third_ratio", 1);
                     return SCRIPT_CONTINUE;
                 }
-                chat.chat(self, "Haha! I have your credits, " + getName(attacker) + "!");
-                broadcast(attacker, "You have been robbed!");
+                chat.chat(self, "My ledger seems a little light.. I'll be taking those credits, " + getName(attacker) + "!");
+                broadcast(attacker, "The Treat Thief has stolen your credits!");
                 if (money.hasFunds(attacker, money.MT_TOTAL, 1000)) {
                     money.withdraw(attacker, 1000);
                 }
-                pushPlayer(self, attacker,  -10.0f, 45.0f);
-                setObjVar(self, "event.halloween_second_ratio", true);
+                pushPlayer(self, attacker,  -10.0f, 0.0f);
+                setObjVar(self, "event.halloween_second_ratio", 1);
                 return SCRIPT_CONTINUE;
             }
-            chat.chat(self, "Help me minions. My precious treats are being stolen!");
-            createCircleSpawn(self, self,  "tusken_warlord", 6, 5.0f );
+            chat.chat(self, "You cannot have my goods! Minions!!!");
             setObjVar(self, "event.halloween_first_ratio", 1);
+            createCircleSpawn(self, self,  RING_EVENT_ONE, RING_EVENT_NUM_MOBS, RING_EVENT_MOB_RANGE);
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
-    public void spawnSidekick(obj_id self, String creature, String buffName, float scale) throws InterruptedException {
+    public void spawnSidekick(obj_id self, String creature, String buffName, float dur, float scale) throws InterruptedException {
         obj_id sidekick = create.object(creature, getLocation(self));
         setScale(sidekick, scale);
-        buff.applyBuff(sidekick, buffName, -1.0f);
+        buff.applyBuff(sidekick, buffName, dur);
         chat.chat(sidekick, "Utinni!");
     }
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
@@ -113,8 +133,8 @@ public class treat_thief extends script.base_script {
         int lootChanc = rand(1, 100);
         if (lootChanc <= 50)
         {
-            obj_id loot = createObject("object/tangible/loot/creature_loot/collections/shared_treasure_map_01.iff", utils.getInventoryContainer(self), "");
-            setName(loot, "Treasure Map");
+            obj_id loot = createObject(LOOT_DROP_TEMPLATE, utils.getInventoryContainer(self), "");
+            setName(loot, "Halloween Treat");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
