@@ -1191,6 +1191,12 @@ public class base_player extends script.base_script
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         removeObjVar(self, "noTrade");
+        if(isGod(player))
+        {
+           int pid = mi.addRootMenu(menu_info_types.SERVER_MENU30, new string_id("sui", "god_menu"));
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU31, new string_id("sui", "toggle_freeze_player"));
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU32, new string_id("sui", "diagnose_player"));
+        }
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.COMBAT_DEATH_BLOW);
         if (mid == null)
         {

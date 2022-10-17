@@ -4794,6 +4794,19 @@ public class cmd extends script.base_script
                 playClientEffectLoc(self, sound, getLocation(self), 0.0f);
             }
         }
+        else if (command.equalsIgnoreCase("puppet"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundloc <sound name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String text = st.nextToken();
+                chat.chat(target, text);
+            }
+        }
         else if (command.equalsIgnoreCase("playsoundloctarget"))
         {
             if (!st.hasMoreTokens())
@@ -4850,9 +4863,20 @@ public class cmd extends script.base_script
                 playMusic(target, music);
             }
         }
+        else if (command.equalsIgnoreCase("slap"))
+        {
+            obj_id player = target;
+            if (player == null)
+            {
+                player = self;
+                buff.applyBuff(self, "acid");
+            }
+            buff.applyBuff(player, "acid");
+        }
         else
         {
             sendSystemMessageTestingOnly(self, "Unknown command: " + command);
+            showAdminCmdSyntax(self);
         }
         return SCRIPT_CONTINUE;
     }

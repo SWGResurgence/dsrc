@@ -5306,7 +5306,7 @@ public class player_building extends script.base_script
     public boolean isMoveCommandValid(obj_id player, obj_id target) throws InterruptedException
     {
         location loc = getLocation(player);
-        if (isInWorldCell(player) && isGod(player))
+        if (isGod(player))
         {
             return true;
         }
