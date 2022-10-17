@@ -132,7 +132,7 @@ badge_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0
 			content_corellia_39_corsec_hero	209	-1	-1																		NONE	none	0	1						0	0
 			anniversary_30th_event_badge	228	-1	-1																		sound/music_acq_miner.snd	none	0	0						0	0
 			champion_of_hoth	6019	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0
-	prolog_content_badge	6840	-1	-1																		sound/music_acq_miner.snd	none	0	0						0	0
+			prolog_content_badge	6840	-1	-1																		sound/music_acq_miner.snd	none	0	0						0	0
 		col_bdg_hero_tatooine		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						1	0
 			poi_rabidbeast	7	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 			poi_prisonbreak	8	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
