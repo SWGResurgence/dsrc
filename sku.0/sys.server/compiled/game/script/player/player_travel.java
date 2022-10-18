@@ -154,7 +154,8 @@ public class player_travel extends script.base_script
     {
         if (callable.hasAnyCallable(self))
         {
-            sendSystemMessage(self, new string_id("beast", "beast_cant_travel"));
+            //sendSystemMessage(self, new string_id("beast", "beast_cant_travel"));
+            callable.storeCallables(self);
             return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;

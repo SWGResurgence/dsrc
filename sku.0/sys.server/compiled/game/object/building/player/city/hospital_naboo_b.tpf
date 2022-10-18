@@ -4,10 +4,11 @@
 @class tangible_object_template 1
 @class object_template 3
 
-updateRanges[UR_near] = 0
-updateRanges[UR_normal] = 0
-
 sharedTemplate = "object/building/player/city/shared_hospital_naboo_b.iff"
 
-objvars =+["healing.canhealwound"=1, "safeLogout"=1]
 scripts =+["structure.municipal.hospital"]
+
+objvars =+["healing.canhealwound"=1, "safeLogout"=1]
+
+updateRanges[UR_near] = 0
+updateRanges[UR_normal] = 0

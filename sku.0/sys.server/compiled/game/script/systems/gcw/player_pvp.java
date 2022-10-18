@@ -827,11 +827,11 @@ public class player_pvp extends script.base_script
                 {
                     if (faction == factions.FACTION_FLAG_REBEL)
                     {
-                        static_item.createNewItemFunction("item_battlefield_rebel_token_" + battlefieldName, container);
+                        static_item.createNewItemFunction("item_battlefield_rebel_token", container);
                     }
                     else 
                     {
-                        static_item.createNewItemFunction("item_battlefield_imperial_token_" + battlefieldName, container);
+                        static_item.createNewItemFunction("item_battlefield_imperial_token", container);
                     }
                 }
             }

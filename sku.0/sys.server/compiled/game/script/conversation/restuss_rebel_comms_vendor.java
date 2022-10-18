@@ -1,8 +1,13 @@
 package script.conversation;
 
 import script.*;
+import script.base_class.*;
+import script.base_script;
+
 import script.library.ai_lib;
 import script.library.chat;
+import script.library.conversation;
+import script.library.factions;
 import script.library.prose;
 import script.library.utils;
 

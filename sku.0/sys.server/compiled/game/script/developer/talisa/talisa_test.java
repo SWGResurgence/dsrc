@@ -959,6 +959,16 @@ public class talisa_test extends script.base_script
                     persistObject(object);
                     sendSystemMessageTestingOnly(self, "Object: " + secCommand + " persisted.");
                 }
+                else if (priCommand.equalsIgnoreCase("persist_area") && !secCommand.equals(""))
+                {
+                    float range = utils.stringToFloat(secCommand);
+                    obj_id[] objects = getObjectsInRange(getLocation(self), range);
+                    for (obj_id object : objects) {
+                        persistObject(object);
+                        sendSystemMessageTestingOnly(self, "Persisted: " + object.toString());
+                    }
+                    debugConsoleMsg(self, "Persisted area. Total Range: " + range);
+                }
                 else if (priCommand.equalsIgnoreCase("is_persisted") && !secCommand.equals(""))
                 {
                     obj_id object = utils.stringToObjId(secCommand);
@@ -985,6 +995,20 @@ public class talisa_test extends script.base_script
                     sendSystemMessageTestingOnly(self, "special_sign_halloween_standing_sign: " + special_sign_halloween_standing_sign);
                     int shop_sign = getSkillStatMod(self, "shop_sign");
                     sendSystemMessageTestingOnly(self, "shop_sign: " + shop_sign);
+                    return SCRIPT_CONTINUE;
+                }
+                else if (priCommand.equalsIgnoreCase("clone_object"))
+                {
+                    obj_id target = utils.stringToObjId(secCommand);
+                    String[] scripts = getScriptList(target);
+                    obj_id cloned_item = utils.cloneObject(target,utils.getInventoryContainer(target));
+                    if (scripts.length > 0) {
+                        for (String script : scripts)
+                        {
+                            attachScript(cloned_item, script);
+                        }
+                    }
+                    setCrafter(cloned_item, self);
                     return SCRIPT_CONTINUE;
                 }
                 else if (priCommand.equalsIgnoreCase("give_shop_sign"))

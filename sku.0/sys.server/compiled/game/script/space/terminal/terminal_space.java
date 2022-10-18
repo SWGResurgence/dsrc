@@ -13,7 +13,6 @@ public class terminal_space extends script.terminal.base.base_terminal
     public static final float TERMINAL_USE_DISTANCE = 8.0f;
     public static final string_id SID_LAUNCH_SHIP = new string_id("space/space_terminal", "launch_ship");
     public static final string_id SID_NOT_IN_COMBAT = new string_id("travel", "not_in_combat");
-    public static final String LAUNCH_LOCATIONS = "datatables/space_zones/launch_locations.iff";
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         requestPreloadCompleteTrigger(self);
@@ -21,6 +20,13 @@ public class terminal_space extends script.terminal.base.base_terminal
     }
     public int OnPreloadComplete(obj_id self) throws InterruptedException
     {
+        if (getTemplateName(self).contains("portable"))
+        {
+            obj_id building = structure.getContainingBuilding(self);
+            if (isIdValid(building)) {
+                setObjVar(building, "travel.point_name", "Portable Launch Location");
+            }
+        }
         String strFileName = "datatables/space_zones/launch_locations.iff";
         String strName = "mos_eisley";
         dictionary dctTeleportInfo = null;
@@ -28,10 +34,10 @@ public class terminal_space extends script.terminal.base.base_terminal
         region[] rgnCities = getRegionsWithGeographicalAtPoint(locTest, regions.GEO_CITY);
         if (rgnCities == null || rgnCities.length == 0)
         {
-            //setName(self, "BUSTED TERMINAL! PUT ME IN A CITY!@!@!@!@");
+            setName (self, "Broken Space Terminal");
             return SCRIPT_CONTINUE;
         }
-        else
+        else 
         {
             for (region rgnTest : rgnCities) {
                 strName = rgnTest.getName();
@@ -46,8 +52,7 @@ public class terminal_space extends script.terminal.base.base_terminal
             }
             if (dctTeleportInfo == null)
             {
-                setName(self, "NO ENTRY FOR " + strName + " in teleport datatable. Busted terminal");
-                dctTeleportInfo = dataTableGetRow(LAUNCH_LOCATIONS, strName);
+                dctTeleportInfo.equals("mos_eisley");
                 return SCRIPT_CONTINUE;
             }
         }
@@ -94,7 +99,7 @@ public class terminal_space extends script.terminal.base.base_terminal
         {
             LOG("space", "OnAboutToLaunchIntoSpace warpLocation space.loc.space was null on terminal");
         }
-        else
+        else 
         {
             LOG("space", "getting scd and stuff");
             LOG("space", "scd is " + shipControlDevice);
@@ -155,7 +160,7 @@ public class terminal_space extends script.terminal.base.base_terminal
                     {
                         doStarportToStarportLaunch(player, ship, membersApprovedByShipOwner, destinationGroundPlanet, destinationGroundTravelPoint);
                     }
-                    else
+                    else 
                     {
                         LOG("space", "location is " + warpLocation);
                         location locDestination = space_utils.getRandomLocationInSphere(warpLocation, 150, 300);
@@ -410,7 +415,7 @@ public class terminal_space extends script.terminal.base.base_terminal
             launch(player, ship, membersApprovedByShipOwner, locDestination, groundLoc);
             return SCRIPT_CONTINUE;
         }
-        else
+        else 
         {
         }
         sendDirtyObjectMenuNotification(self);

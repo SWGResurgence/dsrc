@@ -1,8 +1,8 @@
 item	cash	token22	class	script	note
 s[none]	i[0]	i[0]	i[0]	s	c
 item_event_halloween_song_book		900			2008 I am using this column for notes
-item_event_halloween_bat_pheromone_01_01	5000				2008 5000 credits
-item_event_halloween_spider_pheromone_01_01	5000				2008 5000 credits
+item_event_halloween_bat_pheromone_01_01	50000				2022 50000 credits
+item_event_halloween_spider_pheromone_01_01	50000				2022 50000 credits
 item_event_halloween_trick_device_02_01		200			2008
 item_event_halloween_trick_device_03_01		700			2008
 st_pr_scarecrow_01		400			2008
@@ -44,5 +44,7 @@ costume_spider_droid		600			2011
 item_costume_hutt_female		600			2011
 item_skeleton_costume		600			2010
 item_zozpheratu_costume		800			2010
-item_costume_kit	900				2008
-item_ponda_halloween_hand	10000				2011 10000 credits
+item_costume_awing		750			2022
+item_costume_tiefighter		750			2022
+item_costume_kit	550				2008
+item_ponda_halloween_hand	150000				2011

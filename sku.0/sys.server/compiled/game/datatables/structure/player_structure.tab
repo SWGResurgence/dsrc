@@ -80,7 +80,6 @@ object/installation/generators/power_generator_fusion_style_1.iff	object/install
 object/installation/generators/power_generator_photo_bio_style_1.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		0				4							
 object/installation/generators/power_generator_solar_style_1.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		0				4							
 object/installation/generators/power_generator_geothermal_style_1.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		0				4							
-object/installation/generators/power_generator_geothermal_elite.iff	object/installation/base/construction_installation_base.iff			-2									51	6	1000	25000		0				4							
 object/installation/generators/power_generator_wind_style_1.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		0				4							
 object/installation/mining_gas/mining_gas_harvester_style_1.iff	object/installation/base/construction_installation_base.iff			-1									4	6	1000	1500		10				4							
 object/installation/mining_gas/mining_gas_harvester_style_2.iff	object/installation/base/construction_installation_base.iff			-1									7	6	1000	3000		25				4							

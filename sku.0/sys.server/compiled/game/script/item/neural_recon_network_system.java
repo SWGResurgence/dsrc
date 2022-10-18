@@ -44,7 +44,7 @@ public class neural_recon_network_system extends script.base_script
 				int lastUsed = getIntObjVar(self, "used.timestamp");
 				if(currentGameTime < (lastUsed + 172800))
 				{
-					//TODO: add message here to tell player it aint time yet
+					broadcast(player, "You cannot use this yet!");
 					return SCRIPT_CONTINUE; //If it hasn't been 2 days yet, don't allow them to continue.
 				}
 			}
@@ -121,6 +121,7 @@ public class neural_recon_network_system extends script.base_script
 			if(currentGameTime < (lastUsed + 172800))
 			{
 				//TODO: add message here to tell player it aint time yet
+                broadcast(player, "You cannot use this yet!");
 				return SCRIPT_CONTINUE; //If it hasn't been 2 days yet, don't allow them to continue.
 			}
 		}
@@ -194,6 +195,7 @@ public class neural_recon_network_system extends script.base_script
 			if(currentGameTime < (lastUsed + 172800))
 			{
 				//TODO: add message here to tell player it aint time yet
+                broadcast(player, "You cannot use this yet!");
 				return SCRIPT_CONTINUE; //If it hasn't been 2 days yet, don't allow them to continue.
 			}
 		}
@@ -263,7 +265,7 @@ public class neural_recon_network_system extends script.base_script
 
 		}
 		setObjVar(self, "used.timestamp", getCalendarTime());
-        //destroyObject(self);
+        destroyObject(self);
         return SCRIPT_CONTINUE;
     }
 }

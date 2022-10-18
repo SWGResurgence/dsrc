@@ -3,7 +3,6 @@ package script.player.base;
 import script.*;
 import script.library.*;
 
-import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
@@ -390,15 +389,10 @@ public class base_player extends script.base_script
         if(!utils.checkConfigFlag("Custom", "grantLevelSpecificRewards")) return;
         if(hasObjVar(player, "level.reward." + newCombatLevel)) return;
         obj_id inv = utils.getInventoryContainer(player);
-        switch(newCombatLevel){
-            case 20:
-                // create the Level 20 reward Flash Speeder (stella)
-                createLevelReward("Flash Speeder deed", "object/tangible/deed/vehicle_deed/speederbike_flash_deed.iff", newCombatLevel, player);
-                break;
-            case 70:
-                createLevelReward("Lava Flea deed", "object/tangible/veteran_reward/mount_lava_flea.iff", newCombatLevel, player);
-                // create the Level 70 reward Lava Flea (stella)
-                break;
+        switch (newCombatLevel) {
+            case 20: createLevelReward("Flash Speeder deed", "object/tangible/deed/vehicle_deed/speederbike_flash_deed.iff", newCombatLevel, player);
+            case 70: createLevelReward("Lava Flea deed", "object/tangible/veteran_reward/mount_lava_flea.iff", newCombatLevel, player);
+
         }
     }
     public void createLevelReward(String name, String template, int level, obj_id player) throws InterruptedException{
@@ -1197,6 +1191,12 @@ public class base_player extends script.base_script
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         removeObjVar(self, "noTrade");
+        if(isGod(player))
+        {
+           int pid = mi.addRootMenu(menu_info_types.SERVER_MENU30, new string_id("sui", "god_menu"));
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU31, new string_id("sui", "toggle_freeze_player"));
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU32, new string_id("sui", "diagnose_player"));
+        }
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.COMBAT_DEATH_BLOW);
         if (mid == null)
         {
@@ -12377,7 +12377,7 @@ public class base_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    
-    // END ENZYME LOOT TOGGLE \\
-    
+    public obj_id getGroupLeaderInventory(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
+        return utils.getInventoryContainer(getGroupLeaderId(self));
+    }
 }

@@ -20,6 +20,14 @@ slots = [
 		[ingredientType=IT_resourceClass, ingredients = [[name="craft_armor_ingredients_n" "body", ingredient="hide", count=4]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
+	appearance = "" ],
+	[
+	optional=false,
+	name = "craft_armor_ingredients_n" "liner",
+	options = [
+		[ingredientType=IT_template, ingredients = [[name="craft_armor_ingredients_n" "liner", ingredient="object/tangible/component/clothing/fiberplast_panel.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
+	optionalSkillCommand = "",
+	complexity = 0,
 	appearance = "" ]]
 skillCommands = ["unskilled"]
 manufactureScripts = ["systems.crafting.armor.crafting_armor_nostats"]
