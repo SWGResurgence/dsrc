@@ -50,7 +50,7 @@ public class pumpkin_smasher_object extends script.base_script
             int currentSmashed = getIntObjVar(player, PULPED_ITER_OBJVAR);
             setObjVar(player, PULPED_ITER_OBJVAR, currentSmashed + 1);
             //@TODO add collection [col_halloween_pumpkin_smasher]
-            if (currentSmashed <= 10)
+            if (currentSmashed <= 100)
             {
                 broadcast(player, "You have smashed " + currentSmashed + " pumpkins.");
                 modifyCollectionSlotValue(player, COLLECTION_NAME, 1);
