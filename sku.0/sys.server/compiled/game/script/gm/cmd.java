@@ -4796,16 +4796,8 @@ public class cmd extends script.base_script
         }
         else if (command.equalsIgnoreCase("puppet"))
         {
-            if (!st.hasMoreTokens())
-            {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundloc <sound name>");
-                return SCRIPT_CONTINUE;
-            }
-            else
-            {
-                String text = st.nextToken();
-                chat.chat(target, text);
-            }
+            chat.chat(target, st.nextToken());
+            return SCRIPT_CONTINUE;
         }
         else if (command.equalsIgnoreCase("playsoundloctarget"))
         {

@@ -1,4 +1,4 @@
-package script.master_controller_boma;
+package script.theme_park.dxun;
 
 import script.*;
 import script.library.hue;

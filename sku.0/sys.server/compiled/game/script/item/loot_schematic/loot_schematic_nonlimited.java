@@ -114,6 +114,21 @@ public class loot_schematic_nonlimited extends script.base_script
         }
         if (item == menu_info_types.ITEM_USE)
         {
+            if (isGod(player))
+            {
+                String schematic = getStringObjVar(self, VAR_SCHEMATIC);
+                if (hasSchematic(player, schematic))
+                {
+                    sendSystemMessage(player, SID_ALREADY_HAVE_SCHEMATIC);
+                    return SCRIPT_CONTINUE;
+                }
+                else
+                {
+                    grantSchematic(player, schematic);
+                    sendSystemMessage(player, SID_SCHEMATIC_GRANTED);
+                    return SCRIPT_CONTINUE;
+                }
+            }
             if (hasObjVar(self, VAR_SKILL_REQ))
             {
                 String skill_req = getStringObjVar(self, VAR_SKILL_REQ);
