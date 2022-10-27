@@ -1,6 +1,7 @@
 package script.event.halloween;
 
 import script.library.buff;
+import script.library.create;
 import script.library.static_item;
 import script.library.utils;
 import script.menu_info;
@@ -32,24 +33,23 @@ public class pumpkin_smasher_object extends script.base_script
             {
                 setObjVar(player, PULPED_ITER_OBJVAR, baseUse);
             }
-            if (hasObjVar(player, PULPED_ITER_OBJVAR))
-            {
-                int iter = getIntObjVar(player, PULPED_ITER_OBJVAR + baseUse++);
-                setObjVar(player, PULPED_ITER_OBJVAR, iter);
-            }
             if (!buff.hasBuff(player, "event_halloween_pumpkin_puree"))
             {
                 buff.applyBuff(player, "event_halloween_pumpkin_puree");
             }
-            int randChance = rand(1,100);
-            if (randChance < 11 ) {
+            int coinChance = rand(1,100);
+            if (coinChance < 11 ) {
                 broadcast(player, "You find some strange objects inside this pumpkin.");
                 static_item.createNewItemFunction("item_event_halloween_coin", utils.getInventoryContainer(player), 5);
+            }
+            int mobChance = rand(1,100);
+            if (mobChance <= 6 ) {
+                broadcast(player, "You've gotten the attention of a Galactic Naysayer!");
+                create.createCreature("event_halloween_naysayer", getLocation(player), true);
             }
             playClientEffectObj(player, "clienteffect/egg_hatch_01.cef", player, "root");
             int currentSmashed = getIntObjVar(player, PULPED_ITER_OBJVAR);
             setObjVar(player, PULPED_ITER_OBJVAR, currentSmashed + 1);
-            //@TODO add collection [col_halloween_pumpkin_smasher]
             if (currentSmashed <= 100)
             {
                 broadcast(player, "You have smashed " + currentSmashed + " pumpkins.");

@@ -375,9 +375,25 @@ public class resurgence  extends script.base_script {
             }
         }
     }
-    public  static String getMemoryUsage() throws InterruptedException {
+    public static String getMemoryUsage() throws InterruptedException {
         Runtime runtime = Runtime.getRuntime();
         long memory = runtime.totalMemory() - runtime.freeMemory();
         return Long.toString(memory);
+    }
+    public static void requestMemoryUsage(obj_id self) throws InterruptedException {
+        String memory = getMemoryUsage();
+        sui.msgbox(self, self, "Memory usage: " + memory + " bytes.", sui.OK_ONLY, "Memory Usage", "noHandler");
+        debugServerConsoleMsg(self, "requestMemoryUsage() - memory usage requested.");
+    }
+    public static void getKarma(obj_id self, obj_id target) throws InterruptedException {
+        if (!isIdValid(target) || !exists(target)) {
+            debugServerConsoleMsg(self, "getKarma() - target is not a valid object.");
+        }
+        if (!isPlayer(target)) {
+            debugServerConsoleMsg(self, "getKarma() - target is not a player.");
+        }
+        //@todo add in karma stat
+        //sui.msgbox(self, self, "Karma: " + karma, sui.OK_ONLY, "Karma", "noHandler");
+        debugServerConsoleMsg(self, "getKarma() - karma requested.");
     }
 }
