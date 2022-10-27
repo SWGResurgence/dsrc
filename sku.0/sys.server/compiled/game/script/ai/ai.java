@@ -1864,7 +1864,7 @@ public class ai extends script.base_script
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        if (isGod(player))
+        if (isGod(player) && !isInvulnerable(self))
         {
             int root = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("sui", "loot_control"));
             mi.addSubMenu(root, menu_info_types.SERVER_MENU21, new string_id("sui", "loot_increment"));
@@ -1990,7 +1990,6 @@ public class ai extends script.base_script
             obj_id creature = create.object(creatureName, spawnLoc);
             if (isIdValid(creature))
             {
-                attachScript(creature, "ai.ai");
                 faceTo(creature, self);
             }
             angle += angleIncrement;
