@@ -62,7 +62,16 @@ public class player_developer extends base_script {
         }
         if (cmd.equals("-help"))
         {
-            debugConsoleMsg(self, "quest [grant, complete, clear, task], puppet, wiki, scale, messageto");
+            debugConsoleMsg(self, "Developer Commands:  ");
+            debugConsoleMsg(self, "  /developer quest grant <questname> - Grants a quest to the target.");
+            debugConsoleMsg(self, "  /developer quest complete <questname> - Completes a quest for the target.");
+            debugConsoleMsg(self, "  /developer quest clear <questname> - Clears a quest for the target.");
+            debugConsoleMsg(self, "  /developer quest task complete <questname> <taskname> - Completes a task for the target.");
+            debugConsoleMsg(self, "  /developer puppet <message> - Makes the target speak a message.");
+            debugConsoleMsg(self, "  /developer scale <float> - Resizes the target.");
+            debugConsoleMsg(self, "  /developer messageto <message> <float> - Sends a message to the target.");
+            debugConsoleMsg(self, "  /developer wiki <search> - Opens a wiki page in your browser.");
+            return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
