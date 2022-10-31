@@ -5,12 +5,12 @@ import script.library.*;
 
 public class ai extends script.base_script
 {
-    //public static final boolean LOGGING_ON = false;
+    public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "ai_script";
     public static final String MENU_FILE = "pet/pet_menu";
-    //public static final float CORPSE_CLEANUP_DELAY = 300.0f;
+    public static final float CORPSE_CLEANUP_DELAY = 300.0f;
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
-    //public static final string_id SID_NOTIFY_STALKED = new string_id("skl_use", "notify_stalked");
+    public static final string_id SID_NOTIFY_STALKED = new string_id("skl_use", "notify_stalked");
     public static final string_id SID_CANT_MILK = new string_id("skl_use", "milk_cant");
     public static final string_id SID_MILK_NOT_HIDDEN = new string_id("skl_use", "milk_not_hidden");
     public static final string_id SID_MILK_BEGIN = new string_id("skl_use", "milk_begin");
@@ -20,7 +20,7 @@ public class ai extends script.base_script
     public static final string_id SID_MILK_SUCCESS = new string_id("skl_use", "milk_success");
     public static final string_id SID_BEING_MILKED = new string_id("skl_use", "being_milked");
     public static final string_id SID_CANT_MILK_MOUNTED = new string_id("skl_use", "milk_mounted");
-    //public static final string_id SID_CANT_MILK_COMBAT = new string_id("skl_use", "milk_combat");
+    public static final string_id SID_CANT_MILK_COMBAT = new string_id("skl_use", "milk_combat");
     public static final string_id SID_CANT_MILK_INV_FULL = new string_id("skl_use", "milk_inventory_full");
     public static final string_id SID_ALREADY_RECRUITED = new string_id("collection", "already_recruited");
     public static final string_id SID_ENEMY_RECRUIT = new string_id("collection", "enemy_recruit");
