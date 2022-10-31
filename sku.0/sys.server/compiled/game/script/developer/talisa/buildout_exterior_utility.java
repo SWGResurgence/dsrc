@@ -31,10 +31,6 @@ import java.util.List;
 public class buildout_exterior_utility extends script.base_script
 {
 
-    public buildout_exterior_utility()
-    {
-    }
-
     public static String[] SCENES = {
             "corellia",
             "dantooine",
@@ -47,6 +43,11 @@ public class buildout_exterior_utility extends script.base_script
             "tatooine",
             "dxun",
     };
+
+    public buildout_exterior_utility()
+    {
+    }
+
     public static int getCellIndex(obj_id cell)
     {
         if (isIdValid(cell))
