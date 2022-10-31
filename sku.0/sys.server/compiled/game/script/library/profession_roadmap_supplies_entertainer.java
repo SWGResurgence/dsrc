@@ -4,6 +4,7 @@ import script.menu_info;
 import script.menu_info_types;
 import script.obj_id;
 import script.string_id;
+import script.library.*;
 
 import java.util.HashSet;
 
