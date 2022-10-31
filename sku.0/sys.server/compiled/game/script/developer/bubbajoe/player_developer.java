@@ -1,42 +1,63 @@
-package script.developer.bubbajoe;
-import script.*;
-import script.library.groundquests;
-import script.library.chat;
-import script.library.utils;
+/*
+@Purpose: /developer command handler for player
 
-public class player_developer extends base_script {
-    public player_developer(){
+@Author: BubbaJoe
+
+ */
+package script.developer.bubbajoe;
+
+import script.base_script;
+import script.dictionary;
+import script.library.chat;
+import script.library.groundquests;
+import script.library.utils;
+import script.obj_id;
+
+public class player_developer extends base_script
+{
+    public player_developer()
+    {
 
     }
-    public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
+
+    public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
         java.util.StringTokenizer tok = new java.util.StringTokenizer(params);
 
         String cmd = tok.nextToken();
-        if (cmd.equalsIgnoreCase("quest")) {
+        if (cmd.equalsIgnoreCase("quest"))
+        {
             String subcommand = tok.nextToken();
             String questString = tok.nextToken();
-            if (subcommand.equalsIgnoreCase("grant")) {
+            if (subcommand.equalsIgnoreCase("grant"))
+            {
                 groundquests.grantQuest(target, questString);
             }
-            if (subcommand.equalsIgnoreCase("complete")) {
+            if (subcommand.equalsIgnoreCase("complete"))
+            {
                 groundquests.completeQuest(target, questString);
             }
-            if (subcommand.equalsIgnoreCase("clear")) {
+            if (subcommand.equalsIgnoreCase("clear"))
+            {
                 groundquests.clearQuest(target, questString);
             }
-            if (subcommand.equalsIgnoreCase("task")) {
+            if (subcommand.equalsIgnoreCase("task"))
+            {
                 String task = tok.nextToken();
-                if (task.equalsIgnoreCase("complete")) {
+                if (task.equalsIgnoreCase("complete"))
+                {
                     groundquests.completeTask(target, questString, tok.nextToken());
                 }
             }
         }
-        if (cmd.equalsIgnoreCase("puppet")) {
+        if (cmd.equalsIgnoreCase("puppet"))
+        {
             String speech = tok.nextToken();
             String splitMsg = String.valueOf(split(speech, ' '));
             chat.chat(target, splitMsg);
         }
-        if (cmd.equalsIgnoreCase("wiki")) {
+        if (cmd.equalsIgnoreCase("wiki"))
+        {
             //example: /developer wiki Combat Macro
             // /developer wiki (params[param, param2, param3])
             String speech = tok.nextToken();
@@ -47,14 +68,16 @@ public class player_developer extends base_script {
             launchClientWebBrowser(self, pathed);
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equalsIgnoreCase("scale")) {
+        if (cmd.equalsIgnoreCase("scale"))
+        {
             float original = getScale(target);
             broadcast(self, "Original Scale: " + original);
             setScale(target, utils.stringToFloat(tok.nextToken()));
             broadcast(target, "You have been resized.");
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equalsIgnoreCase("messageto")) {
+        if (cmd.equalsIgnoreCase("messageto"))
+        {
             dictionary param = new dictionary();
             messageTo(target, tok.nextToken(), param, utils.stringToFloat(tok.nextToken()), true);
             return SCRIPT_CONTINUE;
@@ -75,7 +98,8 @@ public class player_developer extends base_script {
         }
         return SCRIPT_CONTINUE;
     }
-    public int getPlayerLevel (obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+
+    public int getPlayerLevel(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         int level = getLevel(target);
         debugSpeakMsg(self, "Your level is " + level);

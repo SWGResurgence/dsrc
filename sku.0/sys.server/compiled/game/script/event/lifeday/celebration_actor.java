@@ -1,8 +1,8 @@
 /*
 
-Lifeday 2022
+@Purpose Lifeday Actor Script
 
-Actor for the Lifeday Celebration. This actor is pure flavor. It does not affect gameplay.
+@Author BubbaJoe
  */
 
 package script.event.lifeday;

@@ -1,3 +1,10 @@
+/*
+@Purpose: Pumpkin Object for Galactic Moon Festival
+
+@Author: BubbaJoe
+
+@TODO: Add naysayer and collection reconcilation
+ */
 package script.event.halloween;
 
 import script.library.buff;

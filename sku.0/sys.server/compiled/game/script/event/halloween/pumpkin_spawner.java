@@ -1,3 +1,20 @@
+
+/*
+@Purpose: Pumpkin Spawner for Galactic Moon Festival
+
+@Author: BubbaJoe
+
+Does the following:
+    - Spawns a pumpkin
+    - Sets the pumpkin's name
+    - Sets the pumpkin's loc
+    - Sets the pumpkin's script
+    - Sets the pumpkin's heading
+
+Does not do the following:
+
+    - Look for a good loc to spawn the pumpkin (can spawn inside buildings etc)
+ */
 package script.event.halloween;
 
 import script.library.create;

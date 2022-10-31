@@ -1,3 +1,9 @@
+/*
+@Purpose: Gift for Lifeday 2022 script.
+
+@Author: BubbaJoe
+ */
+
 package script.event.lifeday;
 
 import script.obj_id;

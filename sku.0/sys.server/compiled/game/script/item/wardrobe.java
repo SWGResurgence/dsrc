@@ -1,3 +1,9 @@
+
+/*
+@Purpose: Wardrobe script for the Lifeday 2022 Reward
+
+@Author: BubbaJoe
+ */
 package script.item;
 
 import script.obj_id;
