@@ -28,6 +28,9 @@ public class pumpkin_spawner extends script.base_script
             "a plump pumpkin",
             "a regular pumpkin",
             "a scrawny pumpkin",
+            "a nasty pumpkin",
+            "a scary pumpkin",
+            "a jagged pumpkin",
     };
 
     public void pumpkin_spawner()
@@ -36,7 +39,7 @@ public class pumpkin_spawner extends script.base_script
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        setName(self, "Pumpkin Spawner");
+        setName(self, "[Event] Pumpkin Spawner");
         return SCRIPT_CONTINUE;
     }
 
@@ -57,7 +60,7 @@ public class pumpkin_spawner extends script.base_script
         if (item == menu_info_types.ITEM_USE)
         {
             handleWorldSpawn(self);
-            broadcast(player, "Spawning 100 pumpkins...");
+            broadcast(player, "Spawning ~100 pumpkins...");
         }
         return SCRIPT_CONTINUE;
     }
@@ -67,19 +70,24 @@ public class pumpkin_spawner extends script.base_script
         for (int i = 0; i <= 100; i++)
         {
             location pumpkin_loc = getLocation(self);
-            pumpkin_loc.x = pumpkin_loc.x + (rand(-8000.0f, 8000.0f));
-            pumpkin_loc.z = pumpkin_loc.z + (rand(-8000.0f, 8000.0f));
+            pumpkin_loc.x = pumpkin_loc.x + (rand(-7250.0f, 7250.0f));
+            pumpkin_loc.z = pumpkin_loc.z + (rand(-7250.0f, 7250.0f));
             pumpkin_loc.y = getHeightAtLocation(pumpkin_loc.x, pumpkin_loc.z);
             obj_id pumpkin = create.object("object/tangible/holiday/halloween/pumpkin_object.iff", pumpkin_loc);
             attachScript(pumpkin, "event.halloween.pumpkin_smasher_object");
             setYaw(pumpkin, rand(0.0f, 360.0f));
-            String randomName = NAME_VARIATIONS[rand(0, 2)];
+            String randomName = getRandFromArray(NAME_VARIATIONS);
             if (randomName == null)
             {
                 randomName = "a pumpkin";
             }
             setName(pumpkin, randomName);
         }
+    }
+    public String getRandFromArray(String[] array) throws InterruptedException
+    {
+        int randIndex = rand(0, array.length - 1);
+        return array[randIndex];
     }
 }
 
