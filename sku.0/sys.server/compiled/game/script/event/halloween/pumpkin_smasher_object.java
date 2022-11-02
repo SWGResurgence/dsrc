@@ -51,13 +51,13 @@ public class pumpkin_smasher_object extends script.base_script
             }
             int mobChance = rand(1,100);
             if (mobChance <= 6 ) {
-                broadcast(player, "You've gotten the attention of a Galactic Naysayer!");
-                create.createCreature("event_halloween_naysayer", getLocation(player), true);
+                broadcast(player, "An angry worm seems to have been living inside this pumpkin!");
+                create.createCreature("angry_forage_worm", getLocation(player), true);
             }
             playClientEffectObj(player, "clienteffect/egg_hatch_01.cef", player, "root");
             int currentSmashed = getIntObjVar(player, PULPED_ITER_OBJVAR);
             setObjVar(player, PULPED_ITER_OBJVAR, currentSmashed + 1);
-            if (currentSmashed <= 100)
+            if (currentSmashed >= 100)
             {
                 broadcast(player, "You have smashed " + currentSmashed + " pumpkins.");
                 modifyCollectionSlotValue(player, COLLECTION_NAME, 1);
