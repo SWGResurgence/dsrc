@@ -6210,6 +6210,6 @@ removed_slots_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	
 resurgence_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						1	0
 	resurgence_page			0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						1	0
 		event_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						1	0
-			col_halloween_pumpkin_smasher	31500	31600	100	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0
-			col_halloween_22	31601	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0
-			col_title_thief	31602	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0
+			col_halloween_pumpkin_smasher	31500	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0
+			col_halloween_22	31501	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0
+			col_title_thief	31502	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0
