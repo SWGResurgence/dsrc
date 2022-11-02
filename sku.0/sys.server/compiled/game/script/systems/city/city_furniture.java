@@ -144,6 +144,7 @@ public class city_furniture extends script.base_script
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU5, SID_SOUTH);
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU6, SID_EAST);
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU7, SID_WEST);
+            //@note: Below adds cardinal movements to the menu.
             int movement = mi.addRootMenu(menu_info_types.SERVER_MENU10, SID_MOVEMENT);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU11, SID_MOVE_FORWARD);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU12, SID_MOVE_BACKWARD);
@@ -158,6 +159,11 @@ public class city_furniture extends script.base_script
     {
         location loc = getLocation(self);
         sendDirtyObjectMenuNotification(self);
+        int movementRate = getIntObjVar(self, "city.movementRate");
+        if (movementRate == 0)
+        {
+            movementRate = 1;
+        }
         int city_id = city.checkMayorCity(player, false);
         if (city_id == 0)
         {
@@ -191,36 +197,67 @@ public class city_furniture extends script.base_script
         {
             setYaw(self, -90);
         }
+        else if (item == menu_info_types.SERVER_MENU10)
+        {
+            sui.inputbox(player, "Please specify movement increment.", "handleMovementIncrement");
+        }
         else if (item == menu_info_types.SERVER_MENU11)
         {
-            loc.z = loc.z + 5;
+            loc.z = loc.z + movementRate;
             setLocation(self, loc);
         }
         else if(item == menu_info_types.SERVER_MENU12)
         {
-            loc.z = loc.z - 5;
+            loc.z = loc.z - movementRate;
             setLocation(self, loc);
         }
         else if(item == menu_info_types.SERVER_MENU13)
         {
-            loc.x = loc.x - 5;
+            loc.x = loc.x - movementRate;
             setLocation(self, loc);
         }
         else if(item == menu_info_types.SERVER_MENU14)
         {
-            loc.x = loc.x + 5;
+            loc.x = loc.x + movementRate;
             setLocation(self, loc);
         }
         else if(item == menu_info_types.SERVER_MENU15)
         {
-            loc.y = loc.y + 5;
+            loc.y = loc.y + movementRate;
             setLocation(self, loc);
         }
         else if(item == menu_info_types.SERVER_MENU16)
         {
-            loc.y = loc.y - 5;
+            loc.y = loc.y - movementRate;
             setLocation(self, loc);
         }
+        return SCRIPT_CONTINUE;
+    }
+    public int handleMovementIncrease(obj_id self, dictionary params) throws InterruptedException
+    {
+        if (params == null || params.isEmpty())
+        {
+            return SCRIPT_CONTINUE;
+        }
+        obj_id player = sui.getPlayerId(params);
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_CANCEL)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        int amount = utils.stringToInt(sui.getInputBoxText(params));
+        if (amount == 0)
+        {
+            broadcast(player, "Amount must be greater than or equal to 1.");
+            return SCRIPT_CONTINUE;
+        }
+        if (amount > 350)
+        {
+            broadcast(player, "Amount must be less than or equal to 350.");
+            return SCRIPT_CONTINUE;
+        }
+        setObjVar(player, "city.movementRate", amount);
+        sendSystemMessageTestingOnly(player, "Attached.");
         return SCRIPT_CONTINUE;
     }
     public void placeDecoration(int city_id, obj_id player, obj_id self) throws InterruptedException
