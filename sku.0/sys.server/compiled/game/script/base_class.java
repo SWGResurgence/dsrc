@@ -8,6 +8,7 @@ package script;
 import script.library.utils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
@@ -1888,6 +1889,54 @@ public class base_class
      *         the message to print
      */
     private static native void _debugServerConsoleMsg(long object, String msg);
+
+    /**
+     * Prints a message to a specified webhook url with its payload..
+     * Please note that discord throttles webhooks severely. Use for community like applications only.
+     *
+     * @param object
+     *         the object sending the message (may be null)
+     * @param msg
+     *         the message to print
+     * @param avatarUri
+     *         the image url to use.
+     */
+    public static void pushWebhook(String channel, String msg, String avatarUri)
+    {
+        String apiKey = getConfigSetting("Discord", "webhookKey");
+        String avatar_pic = avatarUri;
+        String gally = getGalaxyName();
+        DiscordWebhook webhook = new DiscordWebhook(apiKey);
+        webhook.setContent(msg);
+        webhook.setAvatarUrl(avatar_pic);
+        webhook.setUsername("SKYNET: " + gally);
+        try {
+            webhook.execute();
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+    }
+
+    /**
+     * Discord Log but no avatar, just text.
+     * @param msg     What to send
+     */
+
+    public static void pushWebhookTiny(String msg)
+    {
+        String apiKey = getConfigSetting("Discord", "webhookKey");
+        String gally = getGalaxyName();
+        DiscordWebhook webhook = new DiscordWebhook(apiKey);
+        webhook.setContent(msg);
+        webhook.setUsername("SKYNET: " + gally);
+        webhook.setTts(true);
+        try {
+            webhook.execute();
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+
+    }
 
     public static void debugServerConsoleMsg(obj_id object, String msg)
     {
@@ -32949,4 +32998,4 @@ public class base_class
             return adminUsernames.contains(getPlayerAccountUsername(player));
         }
     }
-}   // class base_class
+}// class base_class
