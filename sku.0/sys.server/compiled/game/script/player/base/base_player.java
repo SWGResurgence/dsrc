@@ -1377,6 +1377,37 @@ public class base_player extends script.base_script
             messageTo(player, "handleWatchRadialCmd", params, 0, false);
             sendDirtyObjectMenuNotification(self);
         }
+        else if (item == menu_info_types.SERVER_MENU31)
+        {
+           if (getState(player, STATE_FROZEN) == 1)
+           {
+               setState(player, STATE_FROZEN, false);
+           }
+           else
+           {
+               setState(player, STATE_FROZEN, true);
+           }
+        }
+        else if (item == menu_info_types.SERVER_MENU32)
+        {
+            String prompt = "------------------ INFO PAGE: " + getName(player) + " ------------------";
+            prompt += "Player Name: " + getName(player) + "\n";
+            prompt += "Player OID: " + player + "\n";
+            prompt += "Player Location: " + getLocation(player) + "\n";
+            prompt += "------------------ " + "Character Info" + " ------------------";
+            prompt += "Player Posture: " + getPosture(player) + "\n";
+            prompt += "Player Health: " + getAttrib(player, HEALTH) + "\n";
+            prompt += "Player Action: " + getAttrib(player, ACTION) + "\n";
+            prompt += "Player Money (total): " + getTotalMoney(player) + "\n";
+            prompt += "Player Money (bank): " + getBankBalance(player) + "\n";
+            prompt += "Player Money (cash): " + getCashBalance(player) + "\n";
+            prompt += "Player Weight: " + getVolumeFree(player) + "\n";
+            prompt += "------------------ " + "Faction Stats" + " ------------------";
+            prompt += "Player Faction: " + factions.getFaction(player) + "\n";
+            prompt += "Player Faction Standing: " + factions.getFactionStanding(player, factions.getFaction(player)) + "\n";
+
+            sui.msgbox(self, player, prompt, sui.OK_ONLY, "title", "noHandler");
+        }
         return SCRIPT_CONTINUE;
     }
 
