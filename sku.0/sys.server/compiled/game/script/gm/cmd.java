@@ -2,6 +2,7 @@ package script.gm;
 
 import script.*;
 import script.library.*;
+import script.library.vehicle;
 
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -4864,6 +4865,25 @@ public class cmd extends script.base_script
                 buff.applyBuff(self, "acid");
             }
             buff.applyBuff(player, "acid");
+        }
+        else if (command.equalsIgnoreCase("modvehicle"))
+        {
+            if (st.countTokens() < 1)
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin modvehicle <mod value> <mod index>");
+                return SCRIPT_CONTINUE;
+            }
+            if (vehicle.isRidingVehicle(self))
+            {
+                obj_id vehid = getMountId(self);
+                String vehicleModifier = st.nextToken();
+                float vehicleModifierValue = Float.parseFloat(st.nextToken());
+                vehicle.setValue(vehid, vehicleModifierValue, Integer.parseInt(vehicleModifier));
+            }
+            else
+            {
+                sendSystemMessageTestingOnly(self,"You are not riding a vehicle.");
+            }
         }
         else
         {
