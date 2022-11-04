@@ -1,0 +1,12 @@
+@base object/tangible/furniture/base/shared_furniture_base.iff
+
+@class tangible_object_template 6
+
+@class object_template 5
+
+
+objectName = "loot_aurora_n"  "nightsister_infiltrator"
+
+detailedDescription = "loot_aurora_d"  "nightsister_infiltrator"
+
+appearanceFilename = "appearance/nightsister_infiltrator.apt"

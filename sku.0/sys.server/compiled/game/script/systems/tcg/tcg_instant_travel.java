@@ -43,6 +43,14 @@ public class tcg_instant_travel extends script.base_script
         {
             pet_lib.doDismountNow(player, true);
         }
+        if (callable.hasAnyCallable(player))
+        {
+            callable.storeCallables(player);
+        }
+        if (!hasScript(player, "name.name"))
+        {
+            attachScript(player, "name.name");
+        }
         obj_id tcg_itv = getSelf();
         if (item == menu_info_types.SERVER_MENU8)
         {

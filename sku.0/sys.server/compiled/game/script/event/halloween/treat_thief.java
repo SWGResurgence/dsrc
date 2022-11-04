@@ -1,3 +1,9 @@
+/*
+@Purpose: World Boss for Galactic Moon Festival
+
+@Author: BubbaJoe
+
+ */
 package script.event.halloween;
 
 import script.dictionary;
@@ -114,7 +120,7 @@ public class treat_thief extends script.base_script
             }
             for (obj_id groupMember : groupMembers)
             {
-                addToHealth(groupMember, 20 * 180);
+                addToHealth(self, groupMembers.length * 1800);
             }
         }
         float max = getMaxHealth(self);
@@ -162,7 +168,7 @@ public class treat_thief extends script.base_script
                 setObjVar(self, "event.halloween_second_ratio", 1);
                 return SCRIPT_CONTINUE;
             }
-            chat.chat(self, "You cannot have my goods! Minions!!!");
+            chat.chat(self, "You cannot have my goodies! Minions!!!");
             setObjVar(self, "event.halloween_first_ratio", 1);
             createCircleSpawn(self, self, RING_EVENT_ONE, RING_EVENT_NUM_MOBS, RING_EVENT_MOB_RANGE);
             return SCRIPT_CONTINUE;

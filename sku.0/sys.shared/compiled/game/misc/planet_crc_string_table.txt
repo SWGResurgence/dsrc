@@ -47,3 +47,6 @@ adventure1
 adventure2
 dxun
 space_dxun
+adventure3
+dungeon_hub
+taanab

@@ -5,7 +5,6 @@ import script.library.sui;
 import script.library.utils;
 import script.location;
 import script.obj_id;
-import script.transform;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,40 +16,79 @@ import java.util.List;
  * SWG Buildout Utility
  * For World Building in the Release Game Client
  * To Use: attach developer.talisa.buildout_exterior_utility to your player and say "info" for commands
- *
+ * <p>
  * Most usage will be creating an object either with this script or by some other means,
  * targeting it, and saying "getBuildoutInfo" in spatial which will give you an SUI window
  * of everything you need to type in to add that object to a buildout.
- *
+ * <p>
  * *************************************************
  * This is a WORK IN PROGRESS
  * I'm adding it now upon request to help a few people get the gist of buildouts.
  * *************************************************
- *
+ * <p>
  * Authors: Aconite
  */
-public class buildout_exterior_utility extends script.base_script {
+public class buildout_exterior_utility extends script.base_script
+{
+
+    public static String[] SCENES = {
+            "corellia",
+            "dantooine",
+            "dathomir",
+            "endor",
+            "lok",
+            "naboo",
+            "rori",
+            "talus",
+            "tatooine",
+            "dxun",
+    };
 
     public buildout_exterior_utility()
     {
     }
 
-    public int OnAttach(obj_id self) throws InterruptedException {
+    public static int getCellIndex(obj_id cell)
+    {
+        if (isIdValid(cell))
+        {
+            return Arrays.asList(getCellIds(getTopMostContainer(cell))).indexOf(cell);
+        }
+        return 0;
+    }
+
+    public static boolean isWorldCoordinateOffset(String scene)
+    {
+        dictionary d = dataTableGetRow("datatables/buildout/buildout_scenes.iff", scene);
+        return d != null && d.getInt("adjust_map_coordinates") > 0;
+    }
+
+    public static String getHeaderFormat(String header)
+    {
+        return "\\#00FFFF" + header + ":\\#.\n";
+    }
+
+    public int OnAttach(obj_id self) throws InterruptedException
+    {
         sendSystemMessageTestingOnly(self, "Buildout Utility Attached... say INFO for help.");
         return SCRIPT_CONTINUE;
     }
 
-    public int OnSpeaking(obj_id self, String text) throws InterruptedException, IOException {
+    public int OnSpeaking(obj_id self, String text) throws InterruptedException, IOException
+    {
 
-        if (!isGod(self)) {
+        if (!isGod(self))
+        {
             return SCRIPT_CONTINUE;
         }
 
         java.util.StringTokenizer tok = new java.util.StringTokenizer(text);
         String command1 = tok.nextToken();
         String command2 = "";
-        if (tok.hasMoreTokens()) {
-            if (tok.hasMoreTokens()) {
+        if (tok.hasMoreTokens())
+        {
+            if (tok.hasMoreTokens())
+            {
                 command2 = tok.nextToken();
             }
         }
@@ -58,7 +96,8 @@ public class buildout_exterior_utility extends script.base_script {
         // ===========================================================================
         // ===== info
         // ===========================================================================
-        if (command1.equalsIgnoreCase("info")) {
+        if (command1.equalsIgnoreCase("info"))
+        {
             sendSystemMessageTestingOnly(self, "Instructions for buildout utility sent to your console.");
             sendConsoleMessage(self, "\\#ffff00 ============ buildout_utility spatial chat/speak commands ============ \\#.");
             sendConsoleMessage(self, "\\#00ffff clearObjects \\#.");
@@ -71,18 +110,21 @@ public class buildout_exterior_utility extends script.base_script {
             sendConsoleMessage(self, "returns all buildout information for the specified object");
             sendConsoleMessage(self, "\\#00ffff getObjects \\#.");
             sendConsoleMessage(self, "returns all objects within 500m with buildout_utility.write objvar");
-            //sendConsoleMessage(self, "\\#00ffff writeBuildout \\#bfff00 <file name> \\#.");
-            //sendConsoleMessage(self, "writes all objects within 500m range with the buildout_utility.write objvar to a buildout formatted .csv file swg-main/linux/exe");
+            sendConsoleMessage(self, "\\#00ffff writeBuildout \\#bfff00 <file name> \\#.");
+            sendConsoleMessage(self, "writes all objects within 500m range with the buildout_utility.write objvar to a buildout formatted .csv file swg-main/linux/exe");
             sendConsoleMessage(self, "\\#ffff00 ============ ============ ============ ============ \\#.");
             return SCRIPT_CONTINUE;
 
             // ===========================================================================
             // ===== getBuildoutArea
             // ===========================================================================
-        } else if (command1.equalsIgnoreCase("getBuildoutArea")) {
+        }
+        else if (command1.equalsIgnoreCase("getBuildoutArea"))
+        {
             location here = getLocation(self);
             obj_id containingBuilding = getTopMostContainer(self);
-            if (isIdValid(containingBuilding)) {
+            if (isIdValid(containingBuilding))
+            {
                 here = getLocation(containingBuilding);
             }
             String buildoutAreaName = getBuildoutAreaName(here.x, here.z, getCurrentSceneName());
@@ -92,7 +134,9 @@ public class buildout_exterior_utility extends script.base_script {
             // ===========================================================================
             // ===== getBuildoutInfo
             // ===========================================================================
-        } else if (command1.equalsIgnoreCase("getBuildoutInfo")) {
+        }
+        else if (command1.equalsIgnoreCase("getBuildoutInfo"))
+        {
 
             obj_id oid = utils.stringToObjId(command2);
 
@@ -111,7 +155,7 @@ public class buildout_exterior_utility extends script.base_script {
 
             sb.append("Buildout Information for Object: ").append(oid).append("\n\n");
 
-            if(hasObjVar(oid, "buildoutObjectId"))
+            if (hasObjVar(oid, "buildoutObjectId"))
             {
                 sb.append(getHeaderFormat("Object ID in Buildout File"));
                 sb.append("\t").append(getIntObjVar(oid, "buildoutObjectId"));
@@ -127,9 +171,9 @@ public class buildout_exterior_utility extends script.base_script {
             sb.append("\t").append(buildoutAreaName).append("\n\n");
 
             sb.append(getHeaderFormat("Container"));
-            if(isIdValid(objectLoc.cell))
+            if (isIdValid(objectLoc.cell))
             {
-               sb.append("\t").append(objectLoc.cell);
+                sb.append("\t").append(objectLoc.cell);
             }
             else
             {
@@ -145,7 +189,7 @@ public class buildout_exterior_utility extends script.base_script {
             // X Y Z coordinates
             final float[] buildout = getBuildoutAreaSizeAndCenter(objectLoc.x, objectLoc.z, objectLoc.area, false, false);
             sb.append(getHeaderFormat("Object to Parent Coordinates (for Buildout) [pX, pY, pZ]"));
-            if(isIdValid(objectLoc.cell))
+            if (isIdValid(objectLoc.cell))
             {
                 sb.append("\t").append(objectLoc.x).append(",\n");
                 sb.append("\t").append(objectLoc.y).append(",\n");
@@ -183,18 +227,22 @@ public class buildout_exterior_utility extends script.base_script {
             // ===========================================================================
             // ===== writeBuildout
             // ===========================================================================
-        } else if (command1.equalsIgnoreCase("writeBuildout")) {
+        }
+        else if (command1.equalsIgnoreCase("writeBuildout"))
+        {
 
             sendSystemMessageTestingOnly(self, "This feature is currently disabled as it needs repair.");
 
-            /*
-            if (command2.isEmpty()) {
+
+            if (command2.isEmpty())
+            {
                 sendSystemMessageTestingOnly(self, "[SYNTAX] writeBuildout <file name>");
                 return SCRIPT_CONTINUE;
             }
 
             List<String> list = Arrays.asList(SCENES);
-            if(!list.contains(getCurrentSceneName())) {
+            if (!list.contains(getCurrentSceneName()))
+            {
                 sendSystemMessageTestingOnly(self, "You cannot use this feature in your current scene (likely due to world size mismatch).");
                 return SCRIPT_CONTINUE;
             }
@@ -202,49 +250,55 @@ public class buildout_exterior_utility extends script.base_script {
             location me = getLocation(self);
             obj_id[] objects = getAllObjectsWithObjVar(me, 500f, "buildout_utility.write");
 
-            PrintWriter writer = new PrintWriter(command2+".csv", StandardCharsets.UTF_8);
+            PrintWriter writer = new PrintWriter(command2 + ".csv", StandardCharsets.UTF_8);
             writer.println("objid,container,server_template_crc,cell_index,px,py,pz,qw,qx,qy,qz,scripts,objvars");
-            for (obj_id i : objects) {
+            for (obj_id i : objects)
+            {
                 String template = getTemplateName(i);
                 location wp = getLocation(i);
                 obj_id cell = wp.cell;
                 boolean isInBuilding = isIdValid(cell);
                 obj_id container = null;
-                if (isInBuilding) {
+                if (isInBuilding)
+                {
                     container = getContainedBy(cell);
                 }
                 String scripts = Arrays.toString(getScriptList(i));
                 String objvars = getPackedObjvars(i);
                 float[] q = getQuaternion(i);
                 String buildout = getBuildoutAreaName(wp.x, wp.z);
-                float coord_x = wp.x - getBuildoutRootCoords(buildout).x;
-                float coord_z = wp.z - getBuildoutRootCoords(buildout).z;
-                writer.println(i+","+container+","+template+","+cell+","+coord_x+","+wp.y+","+coord_z+","+q[0]+","+q[1]+","+q[2]+","+q[3]+","+scripts+","+objvars);
+                float coord_x = wp.x;// - getBuildoutRootCoords(buildout).x;
+                float coord_z = wp.z;// - getBuildoutRootCoords(buildout).z;
+                writer.println(i + "," + container + "," + template + "," + cell + "," + coord_x + "," + wp.y + "," + coord_z + "," + q[0] + "," + q[1] + "," + q[2] + "," + q[3] + "," + scripts + "," + objvars);
             }
             writer.close();
-            sendSystemMessageTestingOnly(self, "Successfully wrote file "+command2+".csv to swg-main/exe/linux...");
-             */
+            sendSystemMessageTestingOnly(self, "Successfully wrote file " + command2 + ".csv to swg-main/exe/linux...");
 
             // ===========================================================================
             // ===== getObjects
             // ===========================================================================\
-        } else if (command1.equalsIgnoreCase("getObjects")) {
+        }
+        else if (command1.equalsIgnoreCase("getObjects"))
+        {
 
             location me = getLocation(self);
             obj_id[] objects = getAllObjectsWithObjVar(me, 500f, "buildout_utility.write");
 
             int count = 0;
-            for (obj_id i : objects) {
+            for (obj_id i : objects)
+            {
                 count++;
             }
 
-            String header = "Listing all objects within 500m with buildout_utility.write objvar \n Total object count: "+count+"\n\n";
+            String header = "Listing all objects within 500m with buildout_utility.write objvar \n Total object count: " + count + "\n\n";
             sui.msgbox(self, self, header + Arrays.toString(objects), sui.OK_ONLY, "getObjects", "noHandler");
 
             // ===========================================================================
             // ===== clearObjects
             // ===========================================================================
-        } else if (command1.equalsIgnoreCase("clearObjects")) {
+        }
+        else if (command1.equalsIgnoreCase("clearObjects"))
+        {
 
             location me = getLocation(self);
             obj_id[] objects = getAllObjectsWithObjVar(me, 500f, "buildout_utility.write");
@@ -252,7 +306,8 @@ public class buildout_exterior_utility extends script.base_script {
 
             sendSystemMessageTestingOnly(self, "clearObjects: Destroying all objects in range with buildout_utility.write ObjVar...");
 
-            for (obj_id i : objects) {
+            for (obj_id i : objects)
+            {
                 sendConsoleMessage(self, "buildout_utility clearObjects: Destroying object " + getName(i) + " (" + i + ")");
                 destroyObject(i);
                 count++;
@@ -264,9 +319,12 @@ public class buildout_exterior_utility extends script.base_script {
             // ===========================================================================
             // ===== createObjects
             // ===========================================================================
-        } else if (command1.equalsIgnoreCase("createObject")) {
+        }
+        else if (command1.equalsIgnoreCase("createObject"))
+        {
 
-            if (command2.isEmpty()) {
+            if (command2.isEmpty())
+            {
                 sendSystemMessageTestingOnly(self, "[SYNTAX] createObject <template>");
                 return SCRIPT_CONTINUE;
             }
@@ -275,34 +333,17 @@ public class buildout_exterior_utility extends script.base_script {
             obj_id object = createObject(command2, me);
             setObjVar(object, "buildout_utility.write", 1);
 
-            if(isValidId(object)) {
+            if (isValidId(object))
+            {
                 sendSystemMessageTestingOnly(self, "createObject: Success, new object OID is " + object);
-            } else {
+            }
+            else
+            {
                 sendSystemMessageTestingOnly(self, "createObject: ERROR creating object. Check your template spelling.");
             }
 
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
-    }
-
-    public static int getCellIndex(obj_id cell)
-    {
-        if(isIdValid(cell))
-        {
-            return Arrays.asList(getCellIds(getTopMostContainer(cell))).indexOf(cell);
-        }
-        return 0;
-    }
-
-    public static boolean isWorldCoordinateOffset(String scene)
-    {
-        dictionary d = dataTableGetRow("datatables/buildout/buildout_scenes.iff", scene);
-        return d != null && d.getInt("adjust_map_coordinates") > 0;
-    }
-
-    public static String getHeaderFormat(String header)
-    {
-        return "\\#00FFFF"+header+":\\#.\n";
     }
 }
