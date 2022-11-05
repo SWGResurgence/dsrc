@@ -536,6 +536,7 @@
 0x371fbb09	spacequest/escort_duty/tatooine_privateer_tier4_1
 0x37413a98	quest/newbie_gendra_imperial_pilot
 0x3745db38	quest/restuss_rebel_space_destroy_1
+0x3748b259	quest/world_boss_tatooine_krayt
 0x37824659	spacequest/assassinate/corellia_imperial_tier3_4_c
 0x37c17e39	quest/talus_dearic_coa_rebel_view
 0x37d2cd5e	quest/smuggle_pointer_generic_5
@@ -986,6 +987,7 @@
 0x5e2d4601	quest/npe_pilot_medium_2
 0x5e414e35	spacequest/assassinate/corellia_rebel_tier3_3_a
 0x5e45a0fe	quest/corellia_droid_bunker_legacy_goto
+0x5e512a01	quest/world_boss_dxun_paxvizla
 0x5e602d44	spacequest/escort_duty/naboo_imperial_7
 0x5e8782b4	quest/ep3_hunt_sordaan_webweaver_bet_won
 0x5e8d008f	quest/legacy_button_jawatracks_reb_pt3_v2
@@ -1429,6 +1431,7 @@
 0x844dff9a	spacequest/assassinate/stn_dantooine_owner_rebel_landing_tier2_3
 0x84611ec0	spacequest/assassinate/corellia_privateer_tier4_4a
 0x84649e2e	spacequest/patrol/tatooine_imperial_tier4_1
+0x84805fdc	spacequest/assassinate/c_syren5_imp_space
 0x848ee9e6	quest/npe_pointer_boba
 0x848ef0cd	quest/jabba_ree_yees_v2
 0x8496377c	quest/wod_rubina_goto_sm
@@ -1817,6 +1820,7 @@
 0xabdfb1d4	spacequest/destroy_surpriseattack/naboo_imperial_1
 0xabe84743	quest/ep3_forest_perusta_quest_1
 0xac061d8c	spacequest/rescue_duty/test_rescue_duty
+0xac175ef9	spacequest/assassinate/c_syren5_reb_space
 0xac4a04bf	spacequest/destroy_surpriseattack/tatooine_imperial_tier4_1_a
 0xac87e973	spacequest/destroy/poi_tatooine_general2_2
 0xac8af435	spacequest/rescue/corellia_station_mission1_1
@@ -1864,6 +1868,7 @@
 0xb065984a	quest/legacy_head_runaway1_space
 0xb06d0a6a	spacequest/destroy_surpriseattack/stn_yavin4_company_all_massassi_tier2_10
 0xb06d9e8b	spacequest/space_battle/no_rank4_nova_03_01
+0xb06e5517	quest/world_boss_naboo_peko
 0xb085fbd1	spacequest/destroy/tatooine_imperial_2
 0xb0a4b28e	spacequest/patrol/nova_orion_rank1_01
 0xb0cff1bb	quest/npe_comm_smuggler
@@ -2653,6 +2658,7 @@
 0xfb535571	quest/legacy_button_reb_valarian_v2
 0xfb545f04	quest/npe_frelka_quest
 0xfb5adc4d	spacequest/destroy_surpriseattack/naboo_rebel_tier3_3_a
+0xfb5ccc61	quest/goto_camp_czerka
 0xfb71e1a9	spacequest/survival/tatooine_rebel_tier3_3_c
 0xfb7935c5	quest/naboo_theed_hugo_borvo
 0xfb80e92f	quest/tatooine_espa_leg_work
