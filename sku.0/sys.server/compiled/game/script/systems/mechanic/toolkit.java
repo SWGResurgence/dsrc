@@ -1,10 +1,7 @@
 package script.systems.mechanic;
 
+import script.*;
 import script.library.utils;
-import script.menu_info;
-import script.menu_info_types;
-import script.obj_id;
-import script.string_id;
 import script.library.vehicle;
 
 public class toolkit extends script.base_script
@@ -28,6 +25,11 @@ public class toolkit extends script.base_script
                 broadcast(player,"You must be in your vehicle to apply this tune-up.");
                 return SCRIPT_CONTINUE;
             }
+            if (!isNearGarage(player))
+            {
+                broadcast(player,"You must be in the garage bay to apply this tune-up.");
+                return SCRIPT_CONTINUE;
+            }
             if (vehicle.getMaximumSpeed(vehicle.getMountId(player)) > 256)
             {
                 broadcast(player,"Your vehicle cannot possibly accept any more tuning.");
@@ -38,6 +40,7 @@ public class toolkit extends script.base_script
             float modifier = getFloatObjVar(self, "mechanic.modifier");
             vehicle.setMaximumSpeed(veh, currentSpeed + modifier);
             broadcast(player,"Your vehicle has been tuned up.");
+            listAndSaveAllModifiers(self, player);
             obj_id cod = getCrafter(self);
             if (cod != player) // if you are the mechanic do not pay yourself.
             {
@@ -60,6 +63,128 @@ public class toolkit extends script.base_script
             attribs[idx] = "Increase Vehicular Speed";
             idx++;
         }
+        if (hasObjVar(self, "mechanic.toolkit.height"))
+        {
+            names[idx] = "toolkit_type";
+            attribs[idx] = "Increase Vehicular Height";
+            idx++;
+        }
+        if (hasObjVar(self, "mechanic.toolkit.acceleration"))
+        {
+            names[idx] = "toolkit_type";
+            attribs[idx] = "Increase Vehicular Acceleration";
+            idx++;
+        }
+        if (hasObjVar(self, "mechanic.toolkit.banking"))
+        {
+            names[idx] = "toolkit_type";
+            attribs[idx] = "Increase Vehicular Banking";
+            idx++;
+        }
+        if (hasObjVar(self, "mechanic.toolkit.turning"))
+        {
+            names[idx] = "toolkit_type";
+            attribs[idx] = "Increase Vehicular Turning";
+            idx++;
+        }
+        if (hasObjVar(self, "mechanic.toolkit.deceleration"))
+        {
+            names[idx] = "toolkit_type";
+            attribs[idx] = "Increase Vehicular Deceleration";
+            idx++;
+        }
+        if (hasObjVar(self, "mechanic.toolkit.toughness"))
+        {
+            names[idx] = "toolkit_type";
+            attribs[idx] = "Increase Vehicular Toughness";
+            idx++;
+        }
         return SCRIPT_CONTINUE;
+    }
+    public boolean isNearGarage(obj_id player) throws InterruptedException
+    {
+        obj_id[] objects = getObjectsInRange(getLocation(player), 12);
+        for (int i = 0; i < objects.length; i++)
+        {
+            if (getTemplateName(objects[i]).contains("object/building/player/city/garage_"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public void setToolKitType(obj_id self, String type) throws InterruptedException
+    {
+        setObjVar(self, "mechanic.toolkit." + type, true);
+    }
+    public void setToolkitPower(obj_id self, float power) throws InterruptedException
+    {
+        setObjVar(self, "mechanic.modifier", power);
+    }
+    public boolean isMunicipal(location loc) throws InterruptedException
+    {
+        obj_id[] objects = getObjectsInRange(loc, 64);
+        for (int i = 0; i < objects.length; i++)
+        {
+            if (getTemplateName(objects[i]).contains("object/building/player/city/"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public void listAndSaveAllModifiers(obj_id self, obj_id player) throws InterruptedException
+    {
+        if (!vehicle.isRidingVehicle(player)){
+            broadcast(player,"You must be in your vehicle to save your diagnostics.");
+        }
+        obj_id veh_id = getMountId(player);
+        float minspeed = vehicle.getMinimumSpeed(veh_id);
+        float maxspeed = vehicle.getMaximumSpeed(veh_id);
+        float height = vehicle.getHoverHeight(veh_id);
+        float acceleration = vehicle.getAccelMin(veh_id);
+        float accelerationmax = vehicle.getAccelMax(veh_id);
+        float banking = vehicle.getBankingAngle(veh_id);
+        float turning = vehicle.getTurnRateMin(veh_id);
+        float turning_max = vehicle.getTurnRateMax(veh_id);
+        float deceleration = vehicle.getDecel(veh_id);
+        float glide = vehicle.getGlide(veh_id);
+        float autolevel = vehicle.getAutoLevelling(veh_id);
+        float dampingheight = vehicle.getDampingHeight(veh_id);
+        float dampingpitch = vehicle.getDampingPitch(veh_id);
+        float dampingroll = vehicle.getDampingRoll(veh_id);
+        boolean strafe = vehicle.getStrafe(veh_id);
+        broadcast(player,"Minimum Speed: " + minspeed);
+        broadcast(player,"Maximum Speed: " + maxspeed);
+        broadcast(player,"Hover Height: " + height);
+        broadcast(player,"Acceleration: " + acceleration);
+        broadcast(player,"Acceleration Max: " + accelerationmax);
+        broadcast(player,"Banking Angle: " + banking);
+        broadcast(player,"Turning Rate: " + turning);
+        broadcast(player,"Deceleration: " + deceleration);
+        broadcast(player,"Glide: " + glide);
+        broadcast(player,"Auto-Levelling: " + autolevel);
+        broadcast(player,"Damping Height (falling speed): " + dampingheight);
+        broadcast(player,"Damping Pitch: " + dampingpitch);
+        broadcast(player,"Damping Roll: " + dampingroll);
+        broadcast(player,"Strafe: " + strafe);
+        setObjVar(player, "mechanic.modifer.speed_min", minspeed);
+        setObjVar(player, "mechanic.modifer.speed_max", maxspeed);
+        setObjVar(player, "mechanic.modifer.height", height);
+        setObjVar(player, "mechanic.modifer.acceleration", acceleration);
+        setObjVar(player, "mechanic.modifer.acceleration_max", accelerationmax);
+        setObjVar(player, "mechanic.modifer.banking", banking);
+        setObjVar(player, "mechanic.modifer.turning", turning);
+        setObjVar(player, "mechanic.modifer.turning_max", turning_max);
+        setObjVar(player, "mechanic.modifer.deceleration", deceleration);
+        setObjVar(player, "mechanic.modifer.glide", glide);
+        setObjVar(player, "mechanic.modifer.autolevelling", autolevel);
+        setObjVar(player, "mechanic.modifer.damping_height", dampingheight);
+        setObjVar(player, "mechanic.modifer.damping_pitch", dampingpitch);
+        setObjVar(player, "mechanic.modifer.damping_roll", dampingroll);
+        setObjVar(player, "mechanic.modifer.strafe", strafe);
+        setObjVar(player, "mechanic.targetVehicle", veh_id);
+        broadcast(player,"All modifiers saved.");
+
     }
 }
