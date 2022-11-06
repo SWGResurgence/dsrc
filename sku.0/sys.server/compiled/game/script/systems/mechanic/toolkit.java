@@ -88,7 +88,7 @@ public class toolkit extends script.base_script
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
-        if (hasObjVar(self, "mechanic.modiifer"))
+        if (hasObjVar(self, "mechanic.modifier"))
         {
             float modifier = getFloatObjVar(self, "mechanic.modifier");
             names[idx] = "mechanic.modifier";

@@ -1,5 +1,5 @@
 firstItem	secondItem	thirdItem	modifier
-s	s	s	f
+s	s	s	s
 object/tangible/loot/mustafar/cube_loot/cube_loot_1a.iff	object/tangible/loot/mustafar/cube_loot/cube_loot_2a.iff	object/tangible/loot/mustafar/cube_loot/cube_loot_3a.iff	speed_min
 object/tangible/loot/mustafar/cube_loot/cube_loot_1a.iff	object/tangible/loot/mustafar/cube_loot/cube_loot_2a.iff	object/tangible/loot/mustafar/cube_loot/cube_loot_3a.iff	speed_nax
 object/tangible/loot/mustafar/cube_loot/cube_loot_1a.iff	object/tangible/loot/mustafar/cube_loot/cube_loot_2a.iff	object/tangible/loot/mustafar/cube_loot/cube_loot_3a.iff	accel_min
@@ -17,4 +17,4 @@ object/tangible/loot/mustafar/cube_loot/cube_loot_1a.iff	object/tangible/loot/mu
 object/tangible/loot/mustafar/cube_loot/cube_loot_1a.iff	object/tangible/loot/mustafar/cube_loot/cube_loot_2a.iff	object/tangible/loot/mustafar/cube_loot/cube_loot_3a.iff	accel_min
 object/tangible/loot/mustafar/cube_loot/cube_loot_1a.iff	object/tangible/loot/mustafar/cube_loot/cube_loot_2a.iff	object/tangible/loot/mustafar/cube_loot/cube_loot_3a.iff	accel_min
 object/tangible/loot/mustafar/cube_loot/cube_loot_1a.iff	object/tangible/loot/mustafar/cube_loot/cube_loot_2a.iff	object/tangible/loot/mustafar/cube_loot/cube_loot_3a.iff	accel_min
-object/tangible/mechanic/mechanic_toolkit.iff	object/tangible/mechanic/mechanic_toolkit.iff	object/tangible/mechanic/mechanic_toolkit.iff	3
+object/tangible/mechanic/mechanic_toolkit.iff	object/tangible/mechanic/mechanic_toolkit.iff	object/tangible/mechanic/mechanic_toolkit.iff	combine_stats
