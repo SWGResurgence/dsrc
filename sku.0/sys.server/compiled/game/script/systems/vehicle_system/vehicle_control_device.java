@@ -194,6 +194,10 @@ public class vehicle_control_device extends script.base_script
                 callable.storeCallable(player, objCallable);
             }
             obj_id vehicle = createVehicle(player, self);
+            if (hasObjVar(self, "mechanic"))
+            {
+                setName(self, getName(self) + "(modified)");
+            }
             if (!isIdValid(vehicle))
             {
                 LOG("vehicle-bug", "OnObjectMenuSelect(): failed to create vehicle");
@@ -946,7 +950,7 @@ public class vehicle_control_device extends script.base_script
                     vehicle.setDampingHeight(vehid, damping_height);
                     vehicle.setDampingPitch(vehid, damping_pitch);
                     vehicle.setDampingRoll(vehid, damping_roll);
-                    vehicle.setStrafe(vehid, hasObjVar(player, "mechanic.modifer.strafe"));
+                    vehicle.setStrafe(vehid, strafe);
                     debugConsoleMsg(player, "Vehicle Tuned");
 
 
