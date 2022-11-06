@@ -507,6 +507,10 @@ public class player_travel extends script.base_script
     }
     public int msgTravelToStarport(obj_id self, dictionary params) throws InterruptedException
     {
+        if (callable.hasAnyCallable(self)) {
+            callable.storeCallables(self);
+            return SCRIPT_OVERRIDE;
+        }
         LOG("LOG_CHANNEL", "player_travel::msgTravelToStarport -- " + self + "  " + params);
         location loc = params.getLocation("location");
         warpPlayer(self, loc.area, loc.x, loc.y, loc.z, null, 0.0f, 0.0f, 0.0f);
