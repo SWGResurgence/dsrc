@@ -1275,7 +1275,7 @@ public class base_player extends script.base_script
         {
             int pid = mi.addRootMenu(menu_info_types.SERVER_MENU30, new string_id("sui", "god_menu"));
             mi.addSubMenu(pid, menu_info_types.SERVER_MENU31, new string_id("sui", "toggle_freeze_player"));
-            mi.addSubMenu(pid, menu_info_types.SERVER_MENU32, new string_id("sui", "diagnose_player"));
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU32, new string_id("sui", "list_stats"));
         }
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.COMBAT_DEATH_BLOW);
         if (mid == null)
@@ -1390,21 +1390,24 @@ public class base_player extends script.base_script
         }
         else if (item == menu_info_types.SERVER_MENU32)
         {
-            String prompt = "------------------ INFO PAGE: " + getName(player) + " ------------------";
-            prompt += "Player Name: " + getName(player) + "\n";
-            prompt += "Player OID: " + player + "\n";
-            prompt += "Player Location: " + getLocation(player) + "\n";
-            prompt += "------------------ " + "Character Info" + " ------------------";
-            prompt += "Player Posture: " + getPosture(player) + "\n";
-            prompt += "Player Health: " + getAttrib(player, HEALTH) + "\n";
-            prompt += "Player Action: " + getAttrib(player, ACTION) + "\n";
-            prompt += "Player Money (total): " + getTotalMoney(player) + "\n";
-            prompt += "Player Money (bank): " + getBankBalance(player) + "\n";
-            prompt += "Player Money (cash): " + getCashBalance(player) + "\n";
-            prompt += "Player Weight: " + getVolumeFree(player) + "\n";
-            prompt += "------------------ " + "Faction Stats" + " ------------------";
-            prompt += "Player Faction: " + factions.getFaction(player) + "\n";
-            prompt += "Player Faction Standing: " + factions.getFactionStanding(player, factions.getFaction(player)) + "\n";
+            String prompt = "------------------ INFO PAGE: " + getName(self) + " ------------------" + "\n";
+            prompt += "Player Name: " + getName(self) + "\n";
+            prompt += "Player OID: " + self + "\n";
+            prompt += "Player Location: " + getLocation(self) + "\n";
+            prompt += "------------------ " + "Character Info" + " ------------------"+ "\n";
+            prompt += "Player Posture: " + getPosture(self) + "\n";
+            prompt += "Player Health: " + getAttrib(self, HEALTH) + "\n";
+            prompt += "Player Action: " + getAttrib(self, ACTION) + "\n";
+            prompt += "Player Money (total): " + getTotalMoney(self) + "\n";
+            prompt += "Player Money (bank): " + getBankBalance(self) + "\n";
+            prompt += "Player Money (cash): " + getCashBalance(self) + "\n";
+            prompt += "Player Weight: " + getVolumeFree(self) + "\n";
+            prompt += "------------------ " + "Faction Stats" + " ------------------"+ "\n";
+            prompt += "Player Faction: " + factions.getFaction(self) + "\n";
+            prompt += "Player Faction Standing: " + factions.getFactionStanding(self, factions.getFaction(self)) + "\n";
+            prompt += "__________________ " + "Guild" + " __________________"+ "\n";
+            prompt += "Player Guild: " + guild.getGuildId(self) + "\n";
+
 
             sui.msgbox(self, player, prompt, sui.OK_ONLY, "title", "noHandler");
         }
@@ -12302,6 +12305,17 @@ public class base_player extends script.base_script
             String storytellerAssistantName = utils.getStringScriptVar(self, "storytellerAssistantName");
             names[idx] = "storyteller_assistant_name";
             attribs[idx] = storytellerAssistantName;
+            idx++;
+            if (idx >= names.length)
+            {
+                return SCRIPT_CONTINUE;
+            }
+        }
+        if (isGod(player))
+        {
+            String stationName = getPlayerAccountUsername(self);
+            names[idx] = "station_name";
+            attribs[idx] = stationName;
             idx++;
             if (idx >= names.length)
             {
