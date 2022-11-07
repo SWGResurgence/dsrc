@@ -32,20 +32,20 @@ public class qatool extends script.base_script
     public static final int XPTOOL_MENUOPTION = 7;
     public static final int FACTIONTOOL_MENUOPTION = 8;
     public static final int INVTOOL_MENUOPTION = 9;
-    //public static final int MSTRITEMTOOL_MENUOPTION = 10;
-    public static final int NGETOOL_MENUOPTION = 10;
-    public static final int NPCFINDERTOOL_MENUOPTION = 11;
-    public static final int PET_OPTION = 12;
-    public static final int PROFESSIONTOOL_MENUOPTION = 13;
-    public static final int QUESTTOOL_MENUOPTION = 14;
-    public static final int RESOURCETOOL_MENUOPTION = 15;
-    public static final int RESOURCE_REWARD_TOOL_MENUOPTION = 16;
-    public static final int SCRIPTTOOL_MENUOPTION = 17;
-    public static final int SPACETOOL_MENUOPTION = 18;
-    public static final int FROGTOOL_MENUOPTION = 19;
-    public static final int VETERANREWARD_MENUOPTION = 20;
-    public static final int WEAPONS_MENUOPTION = 21;
-    public static final int WEARABLESTOOL_MENUOPTION = 22;
+    public static final int MSTRITEMTOOL_MENUOPTION = 10;
+    public static final int NGETOOL_MENUOPTION = 11;
+    public static final int NPCFINDERTOOL_MENUOPTION = 12;
+    public static final int PET_OPTION = 13;
+    public static final int PROFESSIONTOOL_MENUOPTION = 14;
+    public static final int QUESTTOOL_MENUOPTION = 15;
+    public static final int RESOURCETOOL_MENUOPTION = 16;
+    public static final int RESOURCE_REWARD_TOOL_MENUOPTION = 17;
+    public static final int SCRIPTTOOL_MENUOPTION = 18;
+    public static final int SPACETOOL_MENUOPTION = 19;
+    public static final int FROGTOOL_MENUOPTION = 20;
+    public static final int VETERANREWARD_MENUOPTION = 21;
+    public static final int WEAPONS_MENUOPTION = 22;
+    public static final int WEARABLESTOOL_MENUOPTION = 23;
     public static final String QATOOL_TITLE = "/QATOOL USAGE";
     public static final String SCRIPT_VAR = "qatool";
     public static final String TITLE = "QA Tools";
@@ -2373,10 +2373,10 @@ public class qatool extends script.base_script
                     case INVTOOL_MENUOPTION:
                     qa.refreshMenu(self, PROMPT, TITLE, INVENTORY_TOOL_MENU, "mainMenuOptions", "qainv.pid", sui.OK_CANCEL_REFRESH);
                     break;
-                    /*case MSTRITEMTOOL_MENUOPTION:
+                    case MSTRITEMTOOL_MENUOPTION:
                     utils.setScriptVar(self, "qaitem.mainMenu", ITEM_TOOL_MENU);
                     qa.refreshMenu(self, ITEM_TOOL_PROMPT, ITEM_TOOL_TITLE, ITEM_TOOL_MENU, "handleMainMenuOptions", "qaitem.pid", sui.OK_CANCEL_REFRESH);
-                    break;*/
+                    break;
                     case NGETOOL_MENUOPTION:
                     qa.createInputBox(player, NGE_TOOL_PROMPT, NGE_TOOL_TITLE, "handleGiveRespecItem", "qange.pid");
                     break;
