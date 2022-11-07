@@ -1,0 +1,54 @@
+@base object/draft_schematic/item/base_item_schematic.iff
+@class draft_schematic_object_template 7
+// no more than 15!
+itemsPerContainer = 15
+//
+
+category = CT_misc
+craftedObjectTemplate = "object/tangible/mechanic/mechanic_tool.iff"
+slots = [
+	[
+	optional=false,
+	name = "craft_item_ingredients_n" "cube_core",
+	options = [
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "core", ingredient="metal", count=2420]], complexity = 0, skillCommand = "unskilled"]],
+	optionalSkillCommand = "",
+	complexity = 0,
+	appearance = "" ],
+	[
+	optional=false,
+	name = "craft_item_ingredients_n" "hardened_shell",
+	options = [
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "wiring", ingredient="petrochem_inert", count=200]], complexity = 0, skillCommand = "unskilled"]],
+	optionalSkillCommand = "",
+	complexity = 0,
+	appearance = "" ],
+	[
+	optional=false,
+	name = "craft_item_ingredients_n" "logic_unit",
+	options = [
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "logic_unit", ingredient="copper", count=5200]], complexity = 0, skillCommand = "unskilled"]],
+	optionalSkillCommand = "",
+	complexity = 0,
+	appearance = "" ],
+	[
+	optional=false,
+	name = "craft_item_ingredients_n" "color_actuator",
+	options = [
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "color_actuator", ingredient="chemical", count=1000]], complexity = 0, skillCommand = "unskilled"]],
+	optionalSkillCommand = "",
+	complexity = 0,
+	appearance = "" ]]
+skillCommands = ["unskilled"]
+
+manufactureScripts = [ "systems.crafting.item.specific_item.crafting_station_item" ]
+
+@class intangible_object_template 0
+
+
+@class object_template 5
+
+complexity = 2
+sharedTemplate = "object/draft_schematic/item/shared_item_mechanic_kit.iff"
+volume = 1
+
