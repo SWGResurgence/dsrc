@@ -159,7 +159,7 @@ public class city_furniture extends script.base_script
     {
         location loc = getLocation(self);
         sendDirtyObjectMenuNotification(self);
-        int movementRate = getIntObjVar(self, "city.movementRate");
+        int movementRate = getIntObjVar(player, "city.movementRate");
         if (movementRate == 0)
         {
             movementRate = 1;
@@ -233,7 +233,7 @@ public class city_furniture extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public int handleMovementIncrease(obj_id self, dictionary params) throws InterruptedException
+    public int handleMovementIncrement(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
         {
@@ -262,21 +262,7 @@ public class city_furniture extends script.base_script
     }
     public void placeDecoration(int city_id, obj_id player, obj_id self) throws InterruptedException
     {
-        String command = null;
-        String[] templates = dataTableGetStringColumn(CITY_DECORATIONS, "TEMPLATE");
-        for (int i = 0; i < templates.length; i++)
-        {
-            if (templates[i].equals(getTemplateName(self)))
-            {
-                command = dataTableGetString(CITY_DECORATIONS, i, "COMMAND");
-                break;
-            }
-        }
-        if (command == null)
-        {
-            return;
-        }
-        if (!hasCommand(player, command))
+        if (!hasCommand(player, "grantZoningRights"))
         {
             sendSystemMessage(player, NO_SKILL_DECO);
             return;
