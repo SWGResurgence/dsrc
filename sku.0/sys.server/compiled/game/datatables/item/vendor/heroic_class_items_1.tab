@@ -140,4 +140,7 @@ armor_infiltrator_bracer_r					1	1
 armor_infiltrator_gloves				1	1							
 armor_infiltrator_boots					1	1						
 armor_infiltrator_belt				1	1							
-item_tcg_loot_reward_series1_organa_speeder		8	8	8	8	8						
+item_tcg_loot_reward_series1_organa_speeder		16	16	16	16	16			HJ-2 Organa Airspeeder			
+item_tcg_loot_reward_series8_bespin_lamp_off		8	8	8	8	8			Cloud City Lamp			
+item_tcg_loot_reward_series8_bespin_shelves		8	8	8	8	8			Cloud City Shelves			
+item_tcg_loot_reward_series8_torture_table		8	8	8	8	8			Torture Table			
