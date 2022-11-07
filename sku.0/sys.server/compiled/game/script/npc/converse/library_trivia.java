@@ -232,6 +232,12 @@ public class library_trivia extends script.base_script
                 badge.grantBadge(speaker, "bdg_library_trivia");
                 static_item.createNewItemFunction("item_tcg_loot_reward_series4_senate_pod_02_01", utils.getInventoryContainer(self));
             }
+            /*
+            TODO:
+            Integrate ObjVar Checks to Reward.
+            Example can be found in conversation.zahard_cody.java
+            Search for: "myTrig"
+            */
             npcEndConversation(speaker);
         }
         return SCRIPT_CONTINUE;
