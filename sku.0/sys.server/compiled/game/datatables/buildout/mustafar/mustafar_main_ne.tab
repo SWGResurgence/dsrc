@@ -4,10 +4,10 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -1105364085	0	object/tangible/collection/rare_melee_lifeblood_cleaver.iff	0	1847.24	61.1932	244.435	-0.570944	0.704624	0.0753506	-0.414549	systems.collections.consume_click	collection.slotName|4|col_rare_melee_04:lifeblood_cleaver_01|$|
 -1012172847	0	object/tangible/collection/rare_carbine_mustafarian_modified_sfor_republic.iff	0	1225.63	59.722	2411.73	-0.567695	-0.133982	0.288574	0.759274	systems.collections.consume_click	collection.slotName|4|col_rare_carbine_02:mustafarian_modified_sfor_republic_01|$|
 -838451800	0	object/tangible/collection/rare_rifle_taskmaster_gauss.iff	0	2498.85	265.536	1245.05	-0.606796	0.340152	0.453945	0.556803	systems.collections.consume_click	collection.slotName|4|col_rare_rifle_03:taskmaster_gauss_01|$|
--91470199	0	object/tangible/collection/rare_rifle_coynite_disruptor.iff	0	190.1	63.1617	2662.75	-0.326331	0.0237043	0.684679	0.651277	systems.collections.consume_click	collection.slotName|4|col_rare_rifle_01:coynite_disruptor_01|$|
+-11712285033	0	object/tangible/collection/rare_rifle_coynite_disruptor.iff	0	190.97266	62.967278	2662.2988	1	0	0	0	systems.collections.consume_click	collection.slotName|4|col_rare_rifle_01:coynite_disruptor_01|$|
 -1050	0	object/static/particle/pt_frn_all_glowing_light_s3.iff	0	1559.5	85.9912	3289.48	0.717907	0	0	-0.69614		$|
 -1049	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2588.15	207.085	1193.25	1	0	0	0		$|
--1048	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2587.16	207.061	1192.93	-3.2e-008	0	1	0		$|
+-1048	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2587.16	207.061	1192.93	-3.20E-08	0	1	0		$|
 -1047	0	object/static/worldbuilding/furniture/modern_chest.iff	0	2588.24	207.047	1181.21	0.956802	0	-0.29074	0		$|
 -1046	0	object/static/worldbuilding/furniture/modern_chest.iff	0	2588.38	207.009	1179.93	1	0	0	0		$|
 -1045	0	object/static/worldbuilding/terminal/wall_terminal_bank_off_01.iff	0	2591.03	206.277	1172.9	0.844162	0	0.536088	0		$|
@@ -21,7 +21,7 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -1037	0	object/static/worldbuilding/furniture/tech_cabinet.iff	0	2472.84	207.626	1389.32	-0.0457803	0	0.998951	0		$|
 -1036	0	object/static/worldbuilding/furniture/tech_cabinet.iff	0	2472.33	207.601	1385.22	-0.0457803	0	0.998951	0		$|
 -1035	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2495.88	207.623	1402.42	1	0	0	0		$|
--1034	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2494.89	207.623	1402.09	-3.2e-008	0	1	0		$|
+-1034	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2494.89	207.623	1402.09	-3.20E-08	0	1	0		$|
 -1033	0	object/static/worldbuilding/furniture/tech_armoire.iff	0	2657.29	130.724	1356.55	-0.362358	0	0.932039	0		$|
 -1032	0	object/static/worldbuilding/furniture/tech_armoire.iff	0	2655.27	130.692	1354.32	-0.362358	0	0.932039	0		$|
 -1031	0	object/static/worldbuilding/furniture/tech_armoire.iff	0	2653.23	130.692	1352.08	-0.362358	0	0.932039	0		$|
@@ -36,10 +36,10 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -1022	0	object/static/worldbuilding/furniture/tech_cabinet.iff	0	2656.17	130.692	1357.64	-0.357693	0	0.933839	0		$|
 -1021	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2656.9	130.692	1358.21	-0.475732	0	0.87959	0		$|
 -1020	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2666.06	130.696	1373.21	1	0	0	0		$|
--1019	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2665.07	130.696	1372.89	-3.2e-008	0	1	0		$|
+-1019	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2665.07	130.696	1372.89	-3.20E-08	0	1	0		$|
 -1018	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2663.32	130.692	1370.82	1	0	0	0		$|
--1017	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2662.33	130.692	1370.5	-3.2e-008	0	1	0		$|
--1016	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2626.67	130.645	1348.78	-3.2e-008	0	1	0		$|
+-1017	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2662.33	130.692	1370.5	-3.20E-08	0	1	0		$|
+-1016	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2626.67	130.645	1348.78	-3.20E-08	0	1	0		$|
 -1015	0	object/static/worldbuilding/furniture/cheap_end_table.iff	0	2627.66	130.645	1349.1	1	0	0	0		$|
 -1014	0	object/static/worldbuilding/furniture/modern_cabinet.iff	0	2633.99	130.06	1354.09	-0.125459	0.00992082	0.992048	-0.00125463		$|
 -1013	0	object/static/worldbuilding/furniture/modern_chest.iff	0	2629.66	130.598	1347.78	0.986418	0	0.164252	0		$|
@@ -401,7 +401,7 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -657	0	object/building/kashyyyk/thm_all_humanoid_bone_pile_s02.iff	0	1635.35	58.108	960.603	0.9997	-0.0244874	0	0		$|
 -656	0	object/building/kashyyyk/thm_all_humanoid_bone_skull.iff	0	1637.92	58.282	955.685	1	0	0	0		$|
 -655	0	object/building/kashyyyk/thm_all_bones_wookiee_s03.iff	0	1652.66	58.6441	925.09	0.999592	0.00565252	0.000158227	0.0279808		$|
--654	0	object/building/kashyyyk/thm_all_humanoid_bone_pile_s02.iff	0	1648.86	58.4278	924.878	0.999603	0.00320754	8.98e-005	0.0279811		$|
+-654	0	object/building/kashyyyk/thm_all_humanoid_bone_pile_s02.iff	0	1648.86	58.4278	924.878	0.999603	0.00320754	8.98E-05	0.0279811		$|
 -653	0	object/building/kashyyyk/thm_all_humanoid_bone_pile_s03.iff	0	1626.03	58.6801	901.391	0.99927	0.0381976	0	0		$|
 -652	0	object/building/kashyyyk/thm_all_humanoid_bone_pile_s02.iff	0	1631.03	58.6261	902.095	0.999271	0.0381872	0	0		$|
 -651	0	object/building/kashyyyk/thm_all_bones_wookiee_s02.iff	0	1628.26	58.739	900.621	0.99927	0.0381976	0	0		$|
@@ -595,7 +595,7 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -463	0	object/tangible/furniture/cheap/end_table_s01.iff	0	2589.14	207.082	1191.11	0.174892	0	0.984588	0		$|
 -462	0	object/static/item/item_chair_cafe_s01.iff	0	2589.66	207.082	1190.4	-0.447711	0	0.894178	0		$|
 -461	0	object/static/item/item_chair_cafe_s01.iff	0	2580.58	206.03	1196.74	0.552863	0	0.833272	0		$|
--460	0	object/tangible/furniture/cheap/end_table_s01.iff	0	2580.87	206.03	1195.84	-3.2e-008	0	1	0		$|
+-460	0	object/tangible/furniture/cheap/end_table_s01.iff	0	2580.87	206.03	1195.84	-3.20E-08	0	1	0		$|
 -459	0	object/static/item/item_chair_cafe_s01.iff	0	2588.67	207.085	1192.54	-0.620362	0	0.784316	0		$|
 -458	0	object/static/item/item_chair_cafe_s01.iff	0	2586.87	207.083	1193.82	0.552863	0	0.833272	0		$|
 -457	0	object/static/structure/tatooine/debris_tatt_crate_1.iff	0	2621.26	208.853	1162.55	-0.707107	0	0.707107	0		$|
@@ -628,14 +628,14 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -430	0	object/static/structure/general/debris_deathstar_large_tube.iff	0	2472.36	208.18	1370.85	0.998988	-0.0449848	0	0		$|
 -429	0	object/static/structure/general/debris_deathstar_large_tube.iff	0	2472.12	208.623	1370.95	0.998988	-0.0449848	0	0		$|
 -428	0	object/static/structure/tatooine/palette_tatooine_style_01.iff	0	2469.07	207.633	1388.86	0.999987	0	0.00499984	0		$|
--427	0	object/static/item/item_cheap_cabinet_01.iff	0	2469.38	207.763	1389.51	-1.16e-007	0	1	0		$|
+-427	0	object/static/item/item_cheap_cabinet_01.iff	0	2469.38	207.763	1389.51	-1.16E-07	0	1	0		$|
 -426	0	object/static/item/item_cheap_cabinet_01.iff	0	2468.37	207.763	1389.17	0.707107	0	0.707107	0		$|
 -425	0	object/static/item/item_cheap_cabinet_01.iff	0	2468.71	207.763	1388.16	1	0	0	0		$|
 -424	0	object/static/item/item_cheap_cabinet_01.iff	0	2469.72	207.763	1388.5	-0.707107	0	0.707107	0		$|
 -423	0	object/static/item/item_cheap_cabinet_01.iff	0	2467.3	207.745	1384.91	0.707107	0	0.707107	0		$|
 -422	0	object/static/item/item_cheap_cabinet_01.iff	0	2467.64	207.745	1383.9	1	0	0	0		$|
 -421	0	object/static/item/item_cheap_cabinet_01.iff	0	2468.64	207.745	1384.24	-0.707107	0	0.707107	0		$|
--420	0	object/static/item/item_cheap_cabinet_01.iff	0	2468.3	207.745	1385.25	-1.16e-007	0	1	0		$|
+-420	0	object/static/item/item_cheap_cabinet_01.iff	0	2468.3	207.745	1385.25	-1.16E-07	0	1	0		$|
 -419	0	object/static/structure/tatooine/palette_tatooine_style_01.iff	0	2467.99	207.615	1384.6	0.999987	0	0.00499984	0		$|
 -418	0	object/tangible/furniture/technical/chair_s01.iff	0	2474.24	207.626	1386.78	-0.700285	0	0.713864	0		occupied.limit|0|1|$|
 -417	0	object/tangible/camp/camp_cot_s1.iff	0	2474.01	207.594	1387.84	0.99875	0	0.0499792	0		occupied.limit|0|1|$|
@@ -649,14 +649,14 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -409	0	object/static/structure/general/prp_junk_s8.iff	0	2501.18	209.457	1398.29	0.447519	0.43103	0.560681	-0.547336		$|
 -408	0	object/static/structure/general/prp_junk_s8.iff	0	2501.22	209.488	1399.52	0.5049	0.489976	0.509974	-0.4949		$|
 -407	0	object/static/structure/tatooine/palette_tatooine_style_01.iff	0	2501.26	208.856	1398.73	0.999987	0	0.00499998	0		$|
--406	0	object/static/structure/general/prp_engine.iff	0	2500.43	208.318	1398.24	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
--405	0	object/static/structure/general/prp_engine.iff	0	2501.24	208.328	1398.24	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
--404	0	object/static/structure/general/prp_engine.iff	0	2502.04	208.328	1398.23	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
--403	0	object/static/structure/general/prp_engine.iff	0	2502.09	208.328	1399.08	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
+-406	0	object/static/structure/general/prp_engine.iff	0	2500.43	208.318	1398.24	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
+-405	0	object/static/structure/general/prp_engine.iff	0	2501.24	208.328	1398.24	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
+-404	0	object/static/structure/general/prp_engine.iff	0	2502.04	208.328	1398.23	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
+-403	0	object/static/structure/general/prp_engine.iff	0	2502.09	208.328	1399.08	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
 -402	0	object/static/structure/general/prp_engine.iff	0	2502.04	208.318	1399.96	-0.707107	0.707107	0	0		$|
 -401	0	object/static/structure/general/prp_engine.iff	0	2501.24	208.318	1399.97	-0.707107	0.707107	0	0		$|
--400	0	object/static/structure/general/prp_engine.iff	0	2501.29	208.328	1399.09	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
--399	0	object/static/structure/general/prp_engine.iff	0	2500.48	208.318	1399.09	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
+-400	0	object/static/structure/general/prp_engine.iff	0	2501.29	208.328	1399.09	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
+-399	0	object/static/structure/general/prp_engine.iff	0	2500.48	208.318	1399.09	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
 -398	0	object/static/structure/general/prp_engine.iff	0	2500.43	208.309	1399.97	-0.707107	0.707107	0	0		$|
 -397	0	object/static/structure/tatooine/palette_tatooine_style_01.iff	0	2501.26	207.623	1398.73	1	0	0	0		$|
 -396	0	object/static/item/item_container_electronics.iff	0	2502.87	208.508	1402.15	1	0	0	0		$|
@@ -685,7 +685,7 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -373	0	object/static/item/item_cheap_cabinet_01.iff	0	2666.4	130.854	1369.86	0.707107	0	0.707107	0		$|
 -372	0	object/static/item/item_cheap_cabinet_01.iff	0	2666.74	130.854	1368.86	1	0	0	0		$|
 -371	0	object/static/item/item_cheap_cabinet_01.iff	0	2667.74	130.854	1369.2	-0.707107	0	0.707107	0		$|
--370	0	object/static/item/item_cheap_cabinet_01.iff	0	2667.4	130.854	1370.21	-1.16e-007	0	1	0		$|
+-370	0	object/static/item/item_cheap_cabinet_01.iff	0	2667.4	130.854	1370.21	-1.16E-07	0	1	0		$|
 -369	0	object/static/structure/tatooine/palette_tatooine_style_01.iff	0	2667.1	130.724	1369.55	0.999987	0	0.00499984	0		$|
 -368	0	object/tangible/food/bar/drink_bar_s02.iff	0	2665.12	130.379	1373.16	1	0	0	0	item.food	buff_name|4|tasty_beverage|duration|2|1.000000|effectiveness|2|1.000000|filling_amount|0|5|filling_type|0|1|$|
 -367	0	object/tangible/food/bar/drink_bar_s01.iff	0	2664.93	131.107	1373.2	1	0	0	0	item.food	buff_name|4|tasty_beverage|duration|2|1.000000|effectiveness|2|1.000000|filling_amount|0|5|filling_type|0|1|$|
@@ -693,7 +693,7 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -365	0	object/static/item/item_chair_cafe_s01.iff	0	2666.58	130.696	1372.5	-0.620362	0	0.784316	0		$|
 -364	0	object/static/item/item_chair_cafe_s01.iff	0	2664.77	130.696	1373.78	0.552863	0	0.833272	0		$|
 -363	0	object/static/item/item_cheap_cabinet_01.iff	0	2633.84	130.759	1347.88	0.707107	0	0.707107	0		$|
--362	0	object/static/item/item_cheap_cabinet_01.iff	0	2634.85	130.759	1348.23	-1.16e-007	0	1	0		$|
+-362	0	object/static/item/item_cheap_cabinet_01.iff	0	2634.85	130.759	1348.23	-1.16E-07	0	1	0		$|
 -361	0	object/static/item/item_cheap_cabinet_01.iff	0	2635.19	130.759	1347.22	-0.707107	0	0.707107	0		$|
 -360	0	object/static/item/item_cheap_cabinet_01.iff	0	2634.18	130.759	1346.88	1	0	0	0		$|
 -359	0	object/static/structure/tatooine/palette_tatooine_style_01.iff	0	2634.54	130.629	1347.57	0.999987	0	0.00499984	0		$|
@@ -701,14 +701,14 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -357	0	object/static/structure/general/prp_junk_s8.iff	0	2600.72	132.526	1380.51	0.447519	0.43103	0.560681	-0.547336		$|
 -356	0	object/static/structure/general/prp_junk_s8.iff	0	2600.77	132.558	1381.75	0.5049	0.489976	0.509974	-0.4949		$|
 -355	0	object/static/structure/tatooine/palette_tatooine_style_01.iff	0	2600.81	131.926	1380.95	0.999987	0	0.00499998	0		$|
--354	0	object/static/structure/general/prp_engine.iff	0	2599.98	131.388	1380.47	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
--353	0	object/static/structure/general/prp_engine.iff	0	2600.78	131.398	1380.47	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
--352	0	object/static/structure/general/prp_engine.iff	0	2601.59	131.398	1380.46	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
--351	0	object/static/structure/general/prp_engine.iff	0	2601.63	131.398	1381.31	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
+-354	0	object/static/structure/general/prp_engine.iff	0	2599.98	131.388	1380.47	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
+-353	0	object/static/structure/general/prp_engine.iff	0	2600.78	131.398	1380.47	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
+-352	0	object/static/structure/general/prp_engine.iff	0	2601.59	131.398	1380.46	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
+-351	0	object/static/structure/general/prp_engine.iff	0	2601.63	131.398	1381.31	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
 -350	0	object/static/structure/general/prp_engine.iff	0	2601.59	131.388	1382.19	-0.707107	0.707107	0	0		$|
 -349	0	object/static/structure/general/prp_engine.iff	0	2600.78	131.388	1382.2	-0.707107	0.707107	0	0		$|
--348	0	object/static/structure/general/prp_engine.iff	0	2600.83	131.398	1381.32	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
--347	0	object/static/structure/general/prp_engine.iff	0	2600.02	131.388	1381.32	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
+-348	0	object/static/structure/general/prp_engine.iff	0	2600.83	131.398	1381.32	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
+-347	0	object/static/structure/general/prp_engine.iff	0	2600.02	131.388	1381.32	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
 -346	0	object/static/structure/general/prp_engine.iff	0	2599.98	131.378	1382.2	-0.707107	0.707107	0	0		$|
 -345	0	object/static/structure/tatooine/palette_tatooine_style_01.iff	0	2600.8	130.692	1380.95	1	0	0	0		$|
 -344	0	object/static/item/item_container_electronics.iff	0	2598.36	131.577	1384.66	1	0	0	0		$|
@@ -739,14 +739,14 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -319	0	object/static/structure/general/prp_junk_s8.iff	0	2621.37	132.495	1355.09	0.447519	0.43103	0.560681	-0.547336		$|
 -318	0	object/static/structure/general/prp_junk_s8.iff	0	2621.42	132.526	1356.32	0.5049	0.489976	0.509974	-0.4949		$|
 -317	0	object/static/structure/tatooine/palette_tatooine_style_01.iff	0	2621.46	131.894	1355.53	0.999987	0	0.00499998	0		$|
--316	0	object/static/structure/general/prp_engine.iff	0	2620.63	131.356	1355.04	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
--315	0	object/static/structure/general/prp_engine.iff	0	2621.43	131.366	1355.04	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
--314	0	object/static/structure/general/prp_engine.iff	0	2622.24	131.366	1355.03	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
--313	0	object/static/structure/general/prp_engine.iff	0	2622.28	131.366	1355.88	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
+-316	0	object/static/structure/general/prp_engine.iff	0	2620.63	131.356	1355.04	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
+-315	0	object/static/structure/general/prp_engine.iff	0	2621.43	131.366	1355.04	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
+-314	0	object/static/structure/general/prp_engine.iff	0	2622.24	131.366	1355.03	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
+-313	0	object/static/structure/general/prp_engine.iff	0	2622.28	131.366	1355.88	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
 -312	0	object/static/structure/general/prp_engine.iff	0	2622.24	131.356	1356.76	-0.707107	0.707107	0	0		$|
 -311	0	object/static/structure/general/prp_engine.iff	0	2621.43	131.356	1356.77	-0.707107	0.707107	0	0		$|
--310	0	object/static/structure/general/prp_engine.iff	0	2621.48	131.366	1355.89	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
--309	0	object/static/structure/general/prp_engine.iff	0	2620.67	131.356	1355.89	-0.707107	0.707107	-1.12e-007	-1.12e-007		$|
+-310	0	object/static/structure/general/prp_engine.iff	0	2621.48	131.366	1355.89	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
+-309	0	object/static/structure/general/prp_engine.iff	0	2620.67	131.356	1355.89	-0.707107	0.707107	-1.12E-07	-1.12E-07		$|
 -308	0	object/static/structure/general/prp_engine.iff	0	2620.63	131.347	1356.77	-0.707107	0.707107	0	0		$|
 -307	0	object/static/structure/tatooine/palette_tatooine_style_01.iff	0	2621.45	130.661	1355.53	1	0	0	0		$|
 -306	0	object/static/item/item_container_electronics.iff	0	2616.52	131.546	1356.26	1	0	0	0		$|
@@ -781,7 +781,7 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -277	0	object/building/mustafar/structures/must_jeditemple_wall_long.iff	0	2626.35	135.862	1501.08	0.931861	-0.00675768	0.345956	0.109107		$|
 -276	0	object/building/mustafar/structures/must_smuggler_landing_pad.iff	0	2641.85	132.833	1380.62	0.94441	0	0.328769	0		$|
 -275	0	object/static/structure/tatooine/antenna_tatt_style_2.iff	0	2631.8	131.261	1386.41	-0.693111	0	0.720831	0		$|
--274	0	object/static/structure/tatooine/debris_tatt_radar_dish.iff	0	2629.96	146.358	1381.39	0.988012	7.48e-008	0.15438	-2.04e-008		$|
+-274	0	object/static/structure/tatooine/debris_tatt_radar_dish.iff	0	2629.96	146.358	1381.39	0.988012	7.48E-08	0.15438	-2.04E-08		$|
 -273	0	object/building/mustafar/structures/must_jeditemple_wall_long.iff	0	2482.62	161.285	1761.04	-0.656171	0.651798	-0.264123	-0.273565		$|
 -272	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2513.24	159.798	1756.56	0.728703	0.0177857	0.683612	0.0367358		$|
 -271	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2512.65	159.705	1749.53	0.768966	-0.151878	-0.609217	-0.120326		$|
@@ -844,7 +844,7 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -214	0	object/building/mustafar/structures/must_jeditemple_wall_long.iff	0	2484.29	263.52	1278.38	0.839192	0	-0.543835	0		$|
 -213	0	object/building/mustafar/structures/must_jeditemple_wall_low.iff	0	2489.24	263.384	1283.6	1	0	0	0		$|
 -212	0	object/building/mustafar/structures/must_jeditemple_wall_long.iff	0	2503.44	263.442	1283.72	1	0	0	0		$|
--211	0	object/building/mustafar/structures/must_jeditemple_wall_high_02.iff	0	2511.76	263.573	1283.58	-3.19e-008	2.08e-009	0.997888	0.0649542		$|
+-211	0	object/building/mustafar/structures/must_jeditemple_wall_high_02.iff	0	2511.76	263.573	1283.58	-3.19E-08	2.08E-09	0.997888	0.0649542		$|
 -210	0	object/building/mustafar/structures/must_jeditemple_wall_high.iff	0	2516.07	264.087	1281.34	-0.705379	-0.0353828	0.707066	0.0352984		$|
 -209	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2515.73	263.985	1275.19	0.702713	0	0.711473	0		$|
 -208	0	object/building/mustafar/structures/must_jeditemple_wall_low.iff	0	2515.41	263.995	1268.6	0.674876	0	0.737931	0		$|
@@ -860,17 +860,17 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -198	0	object/building/mustafar/structures/must_jeditemple_wall_low.iff	0	2467.48	262.537	1239.32	0.714421	0	0.699716	0		$|
 -197	0	object/building/mustafar/structures/must_jeditemple_wall_high.iff	0	2466.08	262.585	1244.57	0.875175	0	0.483807	0		$|
 -196	0	object/building/mustafar/structures/must_jeditemple_wall_long.iff	0	2464.41	262.525	1251.61	0.707107	0	0.707107	0		$|
--195	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2487.6	275.405	1259.16	-2.65e-008	0.828148	-1.79e-008	0.560509		$|
--194	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2485.52	275.443	1253.88	-2.65e-008	0.828148	-1.79e-008	0.560509		$|
--193	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2485.69	275.308	1248.57	-2.7e-008	0.844589	1.71e-008	-0.535416		$|
--192	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2494.97	275.348	1242.03	-3.12e-008	0.975897	6.98e-009	-0.21823		$|
--191	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2489.53	275.339	1244.46	-7.01e-009	0.219007	-3.12e-008	0.975723		$|
--190	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2501.13	275.112	1241.51	-3.16e-008	0.987227	-5.1e-009	0.159318		$|
--189	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2505.39	275.188	1244.29	-2.65e-008	0.828148	-1.79e-008	0.560509		$|
--188	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2507.6	275.224	1249.72	-2.65e-008	0.828148	-1.79e-008	0.560509		$|
--187	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2507.11	274.804	1256.84	-1.9e-008	0.592536	-2.58e-008	0.805544		$|
--186	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2504.09	274.878	1261.57	-3.12e-008	0.973666	7.3e-009	-0.227978		$|
--185	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2498.75	274.79	1264.09	-3.12e-008	0.973666	7.3e-009	-0.227978		$|
+-195	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2487.6	275.405	1259.16	-2.65E-08	0.828148	-1.79E-08	0.560509		$|
+-194	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2485.52	275.443	1253.88	-2.65E-08	0.828148	-1.79E-08	0.560509		$|
+-193	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2485.69	275.308	1248.57	-2.70E-08	0.844589	1.71E-08	-0.535416		$|
+-192	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2494.97	275.348	1242.03	-3.12E-08	0.975897	6.98E-09	-0.21823		$|
+-191	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2489.53	275.339	1244.46	-7.01E-09	0.219007	-3.12E-08	0.975723		$|
+-190	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2501.13	275.112	1241.51	-3.16E-08	0.987227	-5.10E-09	0.159318		$|
+-189	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2505.39	275.188	1244.29	-2.65E-08	0.828148	-1.79E-08	0.560509		$|
+-188	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2507.6	275.224	1249.72	-2.65E-08	0.828148	-1.79E-08	0.560509		$|
+-187	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2507.11	274.804	1256.84	-1.90E-08	0.592536	-2.58E-08	0.805544		$|
+-186	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2504.09	274.878	1261.57	-3.12E-08	0.973666	7.30E-09	-0.227978		$|
+-185	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2498.75	274.79	1264.09	-3.12E-08	0.973666	7.30E-09	-0.227978		$|
 -184	0	object/static/structure/corellia/corl_power_arial_thin.iff	0	2485.37	262.76	1245.78	1	0	0	0		$|
 -183	0	object/static/structure/corellia/corl_power_arial_thin.iff	0	2484.71	262.816	1247.28	1	0	0	0		$|
 -182	0	object/static/structure/corellia/corl_power_arial_thin.iff	0	2483.92	262.931	1248.75	1	0	0	0		$|
@@ -908,25 +908,25 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -150	0	object/static/structure/corellia/corl_power_arial_thin.iff	0	2487.8	261.717	1243.63	1	0	0	0		$|
 -149	0	object/static/structure/corellia/corl_power_arial_thin.iff	0	2486.71	262.663	1244.03	1	0	0	0		$|
 -148	0	object/building/mustafar/structures/must_jeditemple_wall_low.iff	0	2502.11	264.048	1240.25	0.985585	0	-0.169182	0		$|
--147	0	object/building/mustafar/structures/must_jeditemple_wall_high.iff	0	2501.89	275.052	1239.94	-1.78e-008	-0.159666	3.89e-008	0.987171		$|
--146	0	object/building/mustafar/structures/must_jeditemple_wall_high_02.iff	0	2508.6	274.861	1257.36	-5.79e-009	0.592536	-3.23e-008	0.805544		$|
+-147	0	object/building/mustafar/structures/must_jeditemple_wall_high.iff	0	2501.89	275.052	1239.94	-1.78E-08	-0.159666	3.89E-08	0.987171		$|
+-146	0	object/building/mustafar/structures/must_jeditemple_wall_high_02.iff	0	2508.6	274.861	1257.36	-5.79E-09	0.592536	-3.23E-08	0.805544		$|
 -145	0	object/building/mustafar/structures/must_jeditemple_wall_low.iff	0	2508.82	263.887	1257.53	0.819648	0	0.572868	0		$|
--144	0	object/building/mustafar/structures/must_jeditemple_wall_high_02.iff	0	2484.43	275.348	1247.91	-3.8e-009	0.538961	-3.26e-008	0.842331		$|
+-144	0	object/building/mustafar/structures/must_jeditemple_wall_high_02.iff	0	2484.43	275.348	1247.91	-3.80E-09	0.538961	-3.26E-08	0.842331		$|
 -143	0	object/building/mustafar/structures/must_jeditemple_wall_low.iff	0	2484.13	264.374	1247.95	0.833712	0	0.552199	0		$|
 -142	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2484.42	264.451	1255.58	0.563985	0	0.825785	0		$|
 -141	0	object/building/mustafar/structures/must_jeditemple_wall_low.iff	0	2486.28	264.451	1260.32	0.822502	0	-0.568762	0		$|
--140	0	object/building/mustafar/structures/must_jeditemple_wall_high.iff	0	2486.37	275.436	1260.39	3.15e-008	0.824686	2.82e-008	0.56559		$|
--139	0	object/building/mustafar/structures/must_jeditemple_wall_high_02.iff	0	2483.98	275.437	1254.5	2.82e-008	-0.557023	-1.83e-008	0.830497		$|
--138	0	object/building/mustafar/structures/must_jeditemple_wall_high.iff	0	2509.45	275.18	1250.05	3.15e-008	0.824686	2.82e-008	0.56559		$|
+-140	0	object/building/mustafar/structures/must_jeditemple_wall_high.iff	0	2486.37	275.436	1260.39	3.15E-08	0.824686	2.82E-08	0.56559		$|
+-139	0	object/building/mustafar/structures/must_jeditemple_wall_high_02.iff	0	2483.98	275.437	1254.5	2.82E-08	-0.557023	-1.83E-08	0.830497		$|
+-138	0	object/building/mustafar/structures/must_jeditemple_wall_high.iff	0	2509.45	275.18	1250.05	3.15E-08	0.824686	2.82E-08	0.56559		$|
 -137	0	object/building/mustafar/structures/must_jeditemple_wall_low.iff	0	2509.35	264.195	1249.98	0.822502	0	-0.568762	0		$|
 -136	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2507.49	264.195	1245.24	0.563985	0	0.825785	0		$|
--135	0	object/building/mustafar/structures/must_jeditemple_wall_high_02.iff	0	2507.05	275.181	1244.15	2.82e-008	-0.557023	-1.83e-008	0.830497		$|
--134	0	object/building/mustafar/structures/must_jeditemple_wall_high.iff	0	2488.57	275.321	1243.29	-6.33e-009	0.222763	4.32e-008	0.974873		$|
+-135	0	object/building/mustafar/structures/must_jeditemple_wall_high_02.iff	0	2507.05	275.181	1244.15	2.82E-08	-0.557023	-1.83E-08	0.830497		$|
+-134	0	object/building/mustafar/structures/must_jeditemple_wall_high.iff	0	2488.57	275.321	1243.29	-6.33E-09	0.222763	4.32E-08	0.974873		$|
 -133	0	object/building/mustafar/structures/must_jeditemple_wall_low.iff	0	2488.57	264.451	1243.3	0.979061	0	0.203567	0		$|
 -132	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2494.43	264.451	1240.63	0.978031	0	0.20846	0		$|
--131	0	object/building/mustafar/structures/must_jeditemple_wall_high_02.iff	0	2494.44	275.339	1240.63	-3.22e-008	0.979061	-7.61e-009	-0.203567		$|
--130	0	object/building/mustafar/structures/must_jeditemple_wall_high.iff	0	2498.65	274.87	1265.61	-6.33e-009	0.222763	4.32e-008	0.974873		$|
--129	0	object/building/mustafar/structures/must_jeditemple_wall_high_02.iff	0	2504.52	274.888	1262.95	-3.22e-008	0.979061	-7.61e-009	-0.203567		$|
+-131	0	object/building/mustafar/structures/must_jeditemple_wall_high_02.iff	0	2494.44	275.339	1240.63	-3.22E-08	0.979061	-7.61E-09	-0.203567		$|
+-130	0	object/building/mustafar/structures/must_jeditemple_wall_high.iff	0	2498.65	274.87	1265.61	-6.33E-09	0.222763	4.32E-08	0.974873		$|
+-129	0	object/building/mustafar/structures/must_jeditemple_wall_high_02.iff	0	2504.52	274.888	1262.95	-3.22E-08	0.979061	-7.61E-09	-0.203567		$|
 -128	0	object/building/mustafar/structures/must_jeditemple_wall_low_02.iff	0	2504.52	264	1262.95	0.978031	0	0.20846	0		$|
 -127	0	object/building/mustafar/structures/must_jeditemple_wall_low.iff	0	2498.65	264	1265.61	0.979061	0	0.203567	0		$|
 -126	0	object/building/mustafar/structures/must_smuggler_landing_pad.iff	0	2468.23	253.308	1302.83	0.882333	0	-0.470626	0		$|
@@ -1055,15 +1055,15 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -3	0	object/tangible/ground_spawning/area_spawner.iff	0	2469.09	161.215	1730.12	-0.501745	0	0.865015	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|901.000000|fltMinSpawnTime|2|900.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|som_kenobi_historian_dark_jedi|strSpawnerType|4|area|strSpawns|4|mustafar/kenobi_historian_dark_jedi|$|
 -2	0	object/tangible/ground_spawning/area_spawner.iff	0	1084.57	58.0784	1997.37	0.567478	0	0.823389	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|601.000000|fltMinSpawnTime|2|600.000000|fltRadius|2|25.000000|intDefaultBehavior|0|2|intGoodLocationSpawner|0|0|intSpawnCount|0|5|intSpawnSystem|0|1|registerWithController|0|1|strName|4|destroyed_jedi_camp_cobak_guard_01|strSpawnerType|4|area|strSpawns|4|mustafar/xandank_cobak_guard|$|
 -1	0	object/tangible/ground_spawning/area_spawner.iff	0	1094.81	58.0933	1986.05	0.384459	0	0.923142	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|601.000000|fltMinSpawnTime|2|600.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|destroyed_jedi_camp_cobak|strSpawnerType|4|area|strSpawns|4|mustafar/xandank_cobak|$|
--7629235867	0	object/tangible/ground_spawning/patrol_spawner.iff	0	2500.1978	206.7059	1360.9414	1.0	0	0	0	systems.spawning.spawner_patrol	fltMaxSpawnTime|2|1800.000000|fltMinSpawnTime|2|0.100000|fltRadius|2|10.000000|intDefaultBehavior|0|3|intGoodLocationSpawner|0|0|intSpawnCount|0|5|intSpawnSystem|0|1|patrolPathType|4|oscillate|registerWithController|0|1|strName|4|som_storm_lord_zealots|strPatrolPointNames|5|som_storm_lord_zealots_7629235867_1:som_storm_lord_zealots_7629235867_2:som_storm_lord_zealots_7629235867_3:som_storm_lord_zealots_7629235867_4:som_storm_lord_zealots_7629235867_5:som_storm_lord_zealots_7629235867_6:som_storm_lord_zealots_7629235867_7:som_storm_lord_zealots_7629235867_8:som_storm_lord_zealots_7629235867_9:som_storm_lord_zealots_7629235867_10:som_storm_lord_zealots_7629235867_11:|strSpawnerType|4|patrol|strSpawns|4|som_storm_lord_touched|$|
--7629236019	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2512.893	206.66212	1370.8862	1.0	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_1|registerWithController|0|1|$|
--7629236062	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2514.2417	206.7059	1384.6729	1.0	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_2|registerWithController|0|1|$|
--7629236111	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2512.358	206.7059	1396.2627	1.0	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_3|registerWithController|0|1|$|
--7629236143	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2503.8008	206.7059	1388.7573	1.0	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_4|registerWithController|0|1|$|
--7629236205	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2496.0342	206.7059	1375.4707	1.0	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_5|registerWithController|0|1|$|
--7629236258	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2481.4348	206.7059	1383.5029	1.0	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_6|registerWithController|0|1|$|
--7629236280	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2479.394	206.592	1373.1621	1.0	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_7|registerWithController|0|1|$|
--7629236308	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2478.3928	206.7059	1361.6885	1.0	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_8|registerWithController|0|1|$|
--7629236379	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2460.4004	205.098	1346.4653	1.0	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_9|registerWithController|0|1|$|
--7629236420	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2484.3672	205.5403	1343.3394	1.0	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_10|registerWithController|0|1|$|
--7629236493	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2496.1956	206.69632	1353.6152	1.0	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_10|registerWithController|0|1|$|
+-7629235867	0	object/tangible/ground_spawning/patrol_spawner.iff	0	2500.1978	206.7059	1360.9414	1	0	0	0	systems.spawning.spawner_patrol	fltMaxSpawnTime|2|1800.000000|fltMinSpawnTime|2|0.100000|fltRadius|2|10.000000|intDefaultBehavior|0|3|intGoodLocationSpawner|0|0|intSpawnCount|0|5|intSpawnSystem|0|1|patrolPathType|4|oscillate|registerWithController|0|1|strName|4|som_storm_lord_zealots|strPatrolPointNames|5|som_storm_lord_zealots_7629235867_1:som_storm_lord_zealots_7629235867_2:som_storm_lord_zealots_7629235867_3:som_storm_lord_zealots_7629235867_4:som_storm_lord_zealots_7629235867_5:som_storm_lord_zealots_7629235867_6:som_storm_lord_zealots_7629235867_7:som_storm_lord_zealots_7629235867_8:som_storm_lord_zealots_7629235867_9:som_storm_lord_zealots_7629235867_10:som_storm_lord_zealots_7629235867_11:|strSpawnerType|4|patrol|strSpawns|4|som_storm_lord_touched|$|
+-7629236019	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2512.893	206.66212	1370.8862	1	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_1|registerWithController|0|1|$|
+-7629236062	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2514.2417	206.7059	1384.6729	1	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_2|registerWithController|0|1|$|
+-7629236111	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2512.358	206.7059	1396.2627	1	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_3|registerWithController|0|1|$|
+-7629236143	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2503.8008	206.7059	1388.7573	1	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_4|registerWithController|0|1|$|
+-7629236205	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2496.0342	206.7059	1375.4707	1	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_5|registerWithController|0|1|$|
+-7629236258	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2481.4348	206.7059	1383.5029	1	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_6|registerWithController|0|1|$|
+-7629236280	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2479.394	206.592	1373.1621	1	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_7|registerWithController|0|1|$|
+-7629236308	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2478.3928	206.7059	1361.6885	1	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_8|registerWithController|0|1|$|
+-7629236379	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2460.4004	205.098	1346.4653	1	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_9|registerWithController|0|1|$|
+-7629236420	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2484.3672	205.5403	1343.3394	1	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_10|registerWithController|0|1|$|
+-7629236493	0	object/tangible/ground_spawning/patrol_waypoint.iff	0	2496.1956	206.69632	1353.6152	1	0	0	0	systems.spawning.patrol_point_setup	ignoreInBuildoutArray|0|1|pointName|4|som_storm_lord_zealots_7629235867_10|registerWithController|0|1|$|
