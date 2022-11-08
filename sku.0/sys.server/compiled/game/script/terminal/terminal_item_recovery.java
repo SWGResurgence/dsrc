@@ -28,7 +28,7 @@ public class terminal_item_recovery extends script.base_script
         if (item == menu_info_types.SERVER_MENU1)
         {
             boolean hasJabba = badge.hasBadge(player, "bdg_jabba"); //@todo find correct badge name & check to make sure players who do have one, don't have another.
-            if (hasJabba)
+            if (hasJabba && (!hasObjVar(player, "recovery.jabba")))
             {
                 obj_id recoveredItem = createObject("object/tangible/tcg/series6/decorative_jabba_bed.iff", player, "");
                 setObjVar(recoveredItem, "recovery.item", recoveredItem);
