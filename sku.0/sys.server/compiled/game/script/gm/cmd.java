@@ -3751,11 +3751,7 @@ public class cmd extends script.base_script
             {
                 for (int i = count; i > 0; i = i - 500)
                 {
-                    int tempCount = 500;
-                    if (i < 500)
-                    {
-                        tempCount = i;
-                    }
+                    int tempCount = Math.min(i, 500);
                     staticItemId = static_item.createNewItemFunction(itemName, inventory, tempCount);
                 }
             }
@@ -4795,10 +4791,20 @@ public class cmd extends script.base_script
                 playClientEffectLoc(self, sound, getLocation(self), 0.0f);
             }
         }
-        else if (command.equalsIgnoreCase("puppet"))
+        else if (command.equalsIgnoreCase("say"))
         {
-            chat.chat(target, st.nextToken());
-            return SCRIPT_CONTINUE;
+            String words = st.nextToken();
+            chat.chat(target, words);
+        }
+        else if (command.equalsIgnoreCase("setcount"))
+        {
+            setCount(target, Integer.parseInt(st.nextToken()));
+        }
+        else if (command.equalsIgnoreCase("sendWarning"))
+        {
+            String message = st.nextToken();
+            WARNING(message);
+
         }
         else if (command.equalsIgnoreCase("playsoundloctarget"))
         {
@@ -4811,13 +4817,14 @@ public class cmd extends script.base_script
             {
                 String sound = st.nextToken();
                 playClientEffectLoc(target, sound, getLocation(target), 0.0f);
+                return SCRIPT_CONTINUE;
             }
         }
         else if (command.equalsIgnoreCase("playsoundatloc"))
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundlocatloc <sound name> <x> <y> <z>");
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundatloc <sound name> <x> <y> <z>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -4828,6 +4835,7 @@ public class cmd extends script.base_script
                 float z = Float.parseFloat(st.nextToken());
                 location loc = new location(x, y, z);
                 playClientEffectLoc(self, sound, loc, 0.0f);
+                return SCRIPT_CONTINUE;
             }
         }
         else if (command.equalsIgnoreCase("playmusic"))
@@ -4842,6 +4850,7 @@ public class cmd extends script.base_script
                 String music = st.nextToken();
                 playMusic(self, music);
             }
+            return SCRIPT_CONTINUE;
         }
         else if (command.equalsIgnoreCase("playmusictarget"))
         {
@@ -4855,22 +4864,18 @@ public class cmd extends script.base_script
                 String music = st.nextToken();
                 playMusic(target, music);
             }
+            return SCRIPT_CONTINUE;
         }
         else if (command.equalsIgnoreCase("slap"))
         {
-            obj_id player = target;
-            if (player == null)
-            {
-                player = self;
-                buff.applyBuff(self, "acid");
-            }
-            buff.applyBuff(player, "acid");
+            slapPlayer(self, target);
+            return SCRIPT_CONTINUE;
         }
         else if (command.equalsIgnoreCase("modvehicle"))
         {
             if (st.countTokens() < 1)
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin modvehicle <mod value> <mod index>");
+                sendSystemMessageTestingOnly(self, "Syntax: /admin modvehicle <mod index> <mod value>");
                 return SCRIPT_CONTINUE;
             }
             if (vehicle.isRidingVehicle(self))
@@ -4879,6 +4884,7 @@ public class cmd extends script.base_script
                 String vehicleModifier = st.nextToken();
                 float vehicleModifierValue = Float.parseFloat(st.nextToken());
                 vehicle.setValue(vehid, vehicleModifierValue, Integer.parseInt(vehicleModifier));
+                return SCRIPT_CONTINUE;
             }
             else
             {
@@ -4891,6 +4897,16 @@ public class cmd extends script.base_script
             showAdminCmdSyntax(self);
         }
         return SCRIPT_CONTINUE;
+    }
+
+    public void slapPlayer(obj_id self, obj_id target) throws InterruptedException
+    {
+        location slapLoc = getLocation(target);
+        slapLoc.x = slapLoc.x + rand(-100, -100);
+        slapLoc.z = slapLoc.z + rand(-100, -100);
+        slapLoc.y = getHeightAtLocation(slapLoc.x, slapLoc.z);
+        warpPlayer(target, slapLoc.area, slapLoc.x, slapLoc.y, slapLoc.z, null, 0, 0, 0);
+        broadcast(target, "You have been PWN'd by Shalon.");
     }
 
     public int cmdGenerateCraftedItem(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
@@ -4941,6 +4957,16 @@ public class cmd extends script.base_script
             CustomerServiceLog("generateCraftedItem", "Object obj_id " + item + " was created of type " + schematic + ". It was created in the inventory of object " + creationTarget + " which is named " + getName(creationTarget) + ".");
             debugServerConsoleMsg(self, "Object obj_id " + item + " was created of type " + schematic + ". It was created in the inventory of object " + creationTarget + " which is named " + getName(creationTarget) + ".");
         }
+        return SCRIPT_CONTINUE;
+    }
+
+    public int cmdSetCount(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        if (!isIdValid(target))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        setCount(target, utils.stringToInt(params));
         return SCRIPT_CONTINUE;
     }
 }
