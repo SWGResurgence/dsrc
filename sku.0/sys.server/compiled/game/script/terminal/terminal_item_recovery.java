@@ -34,6 +34,7 @@ public class terminal_item_recovery extends script.base_script
                 setObjVar(recoveredItem, "recovery.item", recoveredItem);
                 setObjVar(recoveredItem, "recovery.time", getGameTime());
                 setObjVar(player, "recovery.jabba", recoveredItem);
+                broadcast(player, "You have recovered this parcel."); //@todo dont break the 4th wall. MUH IMMERSION
             }
 
         }
