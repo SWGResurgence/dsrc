@@ -324,6 +324,42 @@ public class base_player extends script.base_script
                     }
             };
 
+    public static void handleReadyCheck(obj_id self, dictionary params) throws InterruptedException
+    {
+        obj_id target = params.getObjId("readyCheckLeaderId");
+        obj_id player = sui.getPlayerId(params);
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_OK)
+        {
+            sendSystemMessage(target, getPlayerName(player) + " is ready!", null);
+            chat.chat(self, "Ready!");
+        }
+        if (bp == sui.BP_CANCEL)
+        {
+            sendSystemMessage(target, getPlayerName(player) + " is not ready!", null);
+            chat.chat(self, "Not Ready!");
+        }
+    }
+
+    public static void generateHousingList(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        String[] fileList = {
+                ""
+        };
+        ArrayList<String> ar = new ArrayList<String>(Arrays.asList(fileList));
+        obj_id[] houseItems = getContents(getContainedBy(self));
+        String cellName = getCellName(getContainedBy(self));
+        for (obj_id houseItem : houseItems)
+        {
+            String currentLoc = getLocation(self).toString();
+            String itemName = getName(self);
+            float heading = getYaw(self);
+            String line = itemName + "\t" + currentLoc + "\t" + heading + "\t" + cellName + "\n";
+            ar.add(line);
+        }
+        saveTextOnClient(self, "export/housing_layout.txt", ar.toString());
+    }
+
     public int OnCustomizeFinished(obj_id self, obj_id object, String params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "armor_colorize.tool_oid") || utils.hasScriptVar(self, "structure_colorize.tool_oid"))
@@ -1379,14 +1415,7 @@ public class base_player extends script.base_script
         }
         else if (item == menu_info_types.SERVER_MENU31)
         {
-           if (getState(player, STATE_FROZEN) == 1)
-           {
-               setState(player, STATE_FROZEN, false);
-           }
-           else
-           {
-               setState(player, STATE_FROZEN, true);
-           }
+            setState(player, STATE_FROZEN, getState(player, STATE_FROZEN) != 1);
         }
         else if (item == menu_info_types.SERVER_MENU32)
         {
@@ -1394,7 +1423,7 @@ public class base_player extends script.base_script
             prompt += "Player Name: " + getName(self) + "\n";
             prompt += "Player OID: " + self + "\n";
             prompt += "Player Location: " + getLocation(self) + "\n";
-            prompt += "------------------ " + "Character Info" + " ------------------"+ "\n";
+            prompt += "------------------ " + "Character Info" + " ------------------" + "\n";
             prompt += "Player Posture: " + getPosture(self) + "\n";
             prompt += "Player Health: " + getAttrib(self, HEALTH) + "\n";
             prompt += "Player Action: " + getAttrib(self, ACTION) + "\n";
@@ -1402,10 +1431,10 @@ public class base_player extends script.base_script
             prompt += "Player Money (bank): " + getBankBalance(self) + "\n";
             prompt += "Player Money (cash): " + getCashBalance(self) + "\n";
             prompt += "Player Weight: " + getVolumeFree(self) + "\n";
-            prompt += "------------------ " + "Faction Stats" + " ------------------"+ "\n";
+            prompt += "------------------ " + "Faction Stats" + " ------------------" + "\n";
             prompt += "Player Faction: " + factions.getFaction(self) + "\n";
             prompt += "Player Faction Standing: " + factions.getFactionStanding(self, factions.getFaction(self)) + "\n";
-            prompt += "__________________ " + "Guild" + " __________________"+ "\n";
+            prompt += "__________________ " + "Guild" + " __________________" + "\n";
             prompt += "Player Guild: " + guild.getGuildId(self) + "\n";
 
 
@@ -12831,6 +12860,8 @@ public class base_player extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
+    // BEGIN ENZYME LOOT TOGGLE \\
+
     public boolean blog(String txt) throws InterruptedException
     {
         if (LOGGING_ON)
@@ -12851,8 +12882,6 @@ public class base_player extends script.base_script
         warpPlayer(self, loc.area, loc.x, loc.y, loc.z, loc.cell, 0, 0, 0, "noHandler", false);
         return SCRIPT_CONTINUE;
     }
-
-    // BEGIN ENZYME LOOT TOGGLE \\
 
     public int cmdEnzymeLootToggle(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
@@ -12930,7 +12959,8 @@ public class base_player extends script.base_script
             debugSpeakMsg(self, "You are not in a group!");
             return;
         }
-        if (!group.isLeader(self)) {
+        if (!group.isLeader(self))
+        {
             debugSpeakMsg(self, "Only the group leader can start a ready check.");
             return;
         }
@@ -12942,39 +12972,10 @@ public class base_player extends script.base_script
         obj_id[] groupMembers = getGroupMemberIds(self);
         String prompt = " has initiated a ready check!\nAre you ready?";
         params.put("readyCheckLeaderId", self);
-        for (obj_id indi : groupMembers) {
+        for (obj_id indi : groupMembers)
+        {
             sui.msgbox(self, indi, prompt, sui.OK_CANCEL, "handleReadyCheck", null);
             params.put("readyCheckLeaderId", self);
         }
-    }
-    public static void handleReadyCheck(obj_id self, dictionary params) throws InterruptedException {
-        obj_id target = params.getObjId("readyCheckLeaderId");
-        obj_id player = sui.getPlayerId(params);
-        int bp = sui.getIntButtonPressed(params);
-        if (bp == sui.BP_OK) {
-            sendSystemMessage(target, getPlayerName(player) + " is ready!", null);
-            chat.chat(self, "Ready!");
-        }
-        if (bp == sui.BP_CANCEL) {
-            sendSystemMessage(target, getPlayerName(player) + " is not ready!", null);
-            chat.chat(self, "Not Ready!");
-        }
-    }
-    public static void generateHousingList( obj_id self, obj_id target, String params, float defaultTime ) throws InterruptedException
-    {
-        String[] fileList = {
-                ""
-        };
-        ArrayList<String> ar = new ArrayList<String>(Arrays.asList(fileList));
-        obj_id[] houseItems = getContents(getContainedBy(self));
-        String cellName = getCellName(getContainedBy(self));
-        for (obj_id houseItem : houseItems) {
-            String currentLoc = getLocation(self).toString();
-            String itemName = getName(self);
-            float heading = getYaw(self);
-            String line = itemName + "\t" + currentLoc + "\t" + heading + "\t" + cellName + "\n";
-            ar.add(line);
-        }
-        saveTextOnClient(self, "export/housing_layout.txt", ar.toString());
     }
 }
