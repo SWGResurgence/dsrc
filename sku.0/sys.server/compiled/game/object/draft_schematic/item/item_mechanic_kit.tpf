@@ -5,7 +5,7 @@ itemsPerContainer = 15
 //
 
 category = CT_misc
-craftedObjectTemplate = "object/tangible/mechanic/mechanic_tool.iff"
+craftedObjectTemplate = "object/tangible/item/vehicle_mechanic.iff"
 slots = [
 	[
 	optional=false,
@@ -41,14 +41,14 @@ slots = [
 	appearance = "" ]]
 skillCommands = ["unskilled"]
 
-manufactureScripts = [ "systems.crafting.item.specific_item.crafting_station_item" ]
+manufactureScripts = [ "systems.crafting.item.specific_item.crafting_tool" ]
 
 @class intangible_object_template 0
 
 
 @class object_template 5
 
-complexity = 2
+complexity = 25
 sharedTemplate = "object/draft_schematic/item/shared_item_mechanic_kit.iff"
 volume = 1
 
