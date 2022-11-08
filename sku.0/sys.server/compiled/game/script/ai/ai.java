@@ -2536,4 +2536,19 @@ public class ai extends script.base_script
         LOG(LOGGING_CATEGORY, msg);
         return true;
     }
+    public String[] SPEECH_RESPONSES = {
+            "Hey.",
+            "Hello.",
+            "Greetings.",
+            "Hi.",
+            "Howdy.",
+            "What's up?",
+            "How are you?",
+            "Can't talk right now."
+    };
+    public String getRandomArray(String[] array) throws InterruptedException
+    {
+        int random = rand(0, array.length - 1);
+        return array[random];
+    }
 }
