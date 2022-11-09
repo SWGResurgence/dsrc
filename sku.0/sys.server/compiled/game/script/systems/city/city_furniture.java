@@ -14,7 +14,7 @@ public class city_furniture extends script.base_script
     public static final string_id SID_DECO_TOO_CLOSE = new string_id("city/city", "deco_too_close");
     public static final string_id SID_NO_MORE_DECOS = new string_id("city/city", "no_more_decos");
     public static final string_id SID_ALIGN = new string_id("city/city", "align");
-    public static final string_id SID_MOVEMENT = new string_id("city/city", "movement");
+    public static final string_id SID_MOVE = new string_id("city/city", "movement");
     public static final string_id SID_NORTH = new string_id("city/city", "north");
     public static final string_id SID_SOUTH = new string_id("city/city", "south");
     public static final string_id SID_EAST = new string_id("city/city", "east");
@@ -25,6 +25,7 @@ public class city_furniture extends script.base_script
     public static final string_id SID_MOVE_RIGHT = new string_id("city/city", "right");
     public static final string_id SID_MOVE_UP = new string_id("city/city", "up");
     public static final string_id SID_MOVE_DOWN = new string_id("city/city", "down");
+    public static final string_id SID_MOVE_TO_ME = new string_id("city/city", "to_me");
     public static final string_id NO_SKILL_DECO = new string_id("city/city", "no_skill_deco");
     public static final String CITY_DECORATIONS = "datatables/city/decorations.iff";
     public static final string_id SID_CIVIC_ONLY = new string_id("city/city", "civic_only");
@@ -108,7 +109,7 @@ public class city_furniture extends script.base_script
     {
         int city_id = getCityAtLocation(getLocation(player), 0);
         boolean isMayor = city.isTheCityMayor(player, city_id);
-        if (!isMayor || !isGod(player))
+        if (!isMayor)
         {
             return SCRIPT_CONTINUE;
         }
@@ -138,6 +139,7 @@ public class city_furniture extends script.base_script
             else if (isMayor)
             {
                 mi.addRootMenu(menu_info_types.SERVER_MENU2, SID_MT_REMOVE);
+
             }
             int menu = mi.addRootMenu(menu_info_types.SERVER_MENU3, SID_ALIGN);
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU4, SID_NORTH);
@@ -145,13 +147,14 @@ public class city_furniture extends script.base_script
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU6, SID_EAST);
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU7, SID_WEST);
             //@note: Below adds cardinal movements to the menu.
-            int movement = mi.addRootMenu(menu_info_types.SERVER_MENU10, SID_MOVEMENT);
+            int movement = mi.addRootMenu(menu_info_types.SERVER_MENU10, SID_MOVE);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU11, SID_MOVE_FORWARD);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU12, SID_MOVE_BACKWARD);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU13, SID_MOVE_LEFT);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU14, SID_MOVE_RIGHT);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU15, SID_MOVE_UP);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU16, SID_MOVE_DOWN);
+            mi.addSubMenu(movement, menu_info_types.SERVER_MENU17, SID_MOVE_TO_ME);
         }
         return SCRIPT_CONTINUE;
     }
@@ -230,6 +233,11 @@ public class city_furniture extends script.base_script
         {
             loc.y = loc.y - movementRate;
             setLocation(self, loc);
+        }
+        else if(item == menu_info_types.SERVER_MENU17)
+        {
+            location pLoc = getLocation(player);
+            setLocation(self, pLoc);
         }
         return SCRIPT_CONTINUE;
     }
