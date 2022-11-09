@@ -75,10 +75,7 @@ public class hero_mark extends script.base_script
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        if (hasObjVar(self, "charges"))
-        {
-            int id = mi.addRootMenu(menu_info_types.SERVER_MENU10, SID_MENU_RESTORE);
-        }
+        int id = mi.addRootMenu(menu_info_types.SERVER_MENU10, SID_MENU_RESTORE);
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
@@ -89,7 +86,6 @@ public class hero_mark extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            int charges = getIntObjVar(self, "charges");
             /*if (!utils.isEquipped(self))
             {
                 sendSystemMessage(player, SID_RESTORE_NOT_EQUIPPED);
@@ -135,15 +131,6 @@ public class hero_mark extends script.base_script
             playClientEffectObj(player, "clienteffect/item_ring_hero_mark.cef", player, hardpoint);
             sendSystemMessage(player, SID_RESTORE_MSG);
             messageTo(player, "handlePlayerResuscitated", null, 0, true);
-            charges--;
-            if (charges <= 0)
-            {
-                removeObjVar(self, "charges");
-            }
-            else 
-            {
-                setObjVar(self, "charges", charges);
-            }
             setObjVar(self, "lastUsed", getGameTime());
         }
         return SCRIPT_CONTINUE;
