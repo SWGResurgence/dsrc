@@ -1,6 +1,7 @@
 package script.item.loot;
 
 import script.library.buff;
+import script.library.utils;
 import script.obj_id;
 import script.menu_info;
 import script.menu_info_types;
@@ -12,6 +13,33 @@ public class toy extends script.base_script
     public toy()
     {
     }
+    public static int currentGameTime = getCalendarTime();
+    public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
+    {
+        int idx = utils.getValidAttributeIndex(names);
+        int lastUsed = getIntObjVar(self, "used.timestamp");
+        names[idx] = "last_used";
+        attribs[idx] = getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getIntObjVar(self, "used.timestamp"));
+        idx++;
+        names[idx] = "next_use";
+        attribs[idx] = getCalendarTimeStringLocal_YYYYMMDDHHMMSS(getIntObjVar(self, "used.timestamp") + 14400);
+        idx++;
+        String NO = "\\#DD1234" + "No" + "\\#FFFFFF";
+        String YES = "\\#32CD32" + "Yes" + "\\#FFFFFF";
+        if(currentGameTime < (lastUsed + 14400))
+        {
+            names[idx] = "ready";
+            attribs[idx] = NO;
+            idx++;
+        }
+        else
+        {
+            names[idx] = "ready";
+            attribs[idx] = YES;
+            idx++;
+        }
+        return SCRIPT_CONTINUE;
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Katiara's Toy (Enhancement)");
@@ -22,24 +50,25 @@ public class toy extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("spam", "use"));
         return SCRIPT_CONTINUE;
     }
-    public int OnObjectMenuResponse(obj_id self, obj_id player, menu_info mi) throws InterruptedException
+    public int OnObjectMenuSelect(obj_id self, obj_id player, int mi) throws InterruptedException
     {
-        if (mi.getMenuItemByType(menu_info_types.ITEM_USE) != null)
+        if (mi == menu_info_types.ITEM_USE)
         {
-            int currentGameTime = getCalendarTime();
-            if(hasObjVar(self, "used.timestamp"))
+            if (getContainedBy(self) != player)
             {
-                int lastUsed = getIntObjVar(self, "used.timestamp");
-                if(currentGameTime < (lastUsed + 14400))
-                {
-                    broadcast(player, "You cannot use this yet.");
-                    return SCRIPT_CONTINUE;
-                }
-                else
-                {
-                    buff.applyBuff(player, "nova_orion_rank6_lucky_salvage");
-                    setObjVar(self, "used.timestamp", currentGameTime);
-                }
+                sendSystemMessage(player, new string_id("spam", "must_be_holding"));
+                return SCRIPT_CONTINUE;
+            }
+            int lastUsed = getIntObjVar(self, "used.timestamp");
+            if (currentGameTime < (lastUsed + 14400))
+            {
+                broadcast(player, "You cannot use this yet.");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                buff.applyBuff(player, "nova_orion_rank6_lucky_salvage");
+                setObjVar(self, "used.timestamp", currentGameTime);
             }
         }
         return SCRIPT_CONTINUE;
