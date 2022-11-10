@@ -26,6 +26,7 @@ public class city_furniture extends script.base_script
     public static final string_id SID_MOVE_UP = new string_id("city/city", "up");
     public static final string_id SID_MOVE_DOWN = new string_id("city/city", "down");
     public static final string_id SID_MOVE_TO_ME = new string_id("city/city", "to_me");
+    public static final string_id SID_NAME = new string_id("city/city", "name");
     public static final string_id NO_SKILL_DECO = new string_id("city/city", "no_skill_deco");
     public static final String CITY_DECORATIONS = "datatables/city/decorations.iff";
     public static final string_id SID_CIVIC_ONLY = new string_id("city/city", "civic_only");
@@ -113,6 +114,7 @@ public class city_furniture extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
+
         region[] rgnTest = getRegionsWithBuildableAtPoint(getLocation(player), regions.BUILD_FALSE);
         if (rgnTest != null)
         {
@@ -155,6 +157,7 @@ public class city_furniture extends script.base_script
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU15, SID_MOVE_UP);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU16, SID_MOVE_DOWN);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU17, SID_MOVE_TO_ME);
+            mi.addRootMenu(menu_info_types.SERVER_MENU18, SID_NAME);
         }
         return SCRIPT_CONTINUE;
     }
@@ -162,11 +165,11 @@ public class city_furniture extends script.base_script
     {
         location loc = getLocation(self);
         sendDirtyObjectMenuNotification(self);
-        int movementRate = getIntObjVar(player, "city.movementRate");
-        if (movementRate == 0)
+        if (!hasObjVar(player, "city.movementRate"))
         {
-            movementRate = 1;
+            setObjVar(player, "city.movementRate", 1);
         }
+        int movementRate = getIntObjVar(player, "city.movementRate");
         int city_id = city.checkMayorCity(player, false);
         if (city_id == 0)
         {
@@ -202,7 +205,7 @@ public class city_furniture extends script.base_script
         }
         else if (item == menu_info_types.SERVER_MENU10)
         {
-            sui.inputbox(player, "Please specify movement increment.", "handleMovementIncrement");
+            sui.inputbox(self, player, "Please specify movement increment.", "handleMovementIncrement");
         }
         else if (item == menu_info_types.SERVER_MENU11)
         {
@@ -239,6 +242,10 @@ public class city_furniture extends script.base_script
             location pLoc = getLocation(player);
             setLocation(self, pLoc);
         }
+        else if(item == menu_info_types.SERVER_MENU18)
+        {
+            sui.inputbox(self, player, "Please specify a name for this decoration. Leave blank for no name.", "handleDecorationName");
+        }
         return SCRIPT_CONTINUE;
     }
     public int handleMovementIncrement(obj_id self, dictionary params) throws InterruptedException
@@ -267,6 +274,19 @@ public class city_furniture extends script.base_script
         setObjVar(player, "city.movementRate", amount);
         sendSystemMessageTestingOnly(player, "Attached.");
         return SCRIPT_CONTINUE;
+    }
+    public void handleDecorationName(obj_id self, dictionary params) throws InterruptedException
+    {
+        obj_id player = sui.getPlayerId(params);
+        String name = sui.getInputBoxText(params);
+        if (name == null || name.equals(""))
+        {
+            setName(self, "");
+        }
+        setObjVar(self, "city.decorationName", name);
+        setName(self, name);
+        broadcast(player, "Decoration has been renamed to to " + name);
+        return;
     }
     public void placeDecoration(int city_id, obj_id player, obj_id self) throws InterruptedException
     {
