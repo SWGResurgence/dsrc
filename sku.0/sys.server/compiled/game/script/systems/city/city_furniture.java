@@ -205,7 +205,7 @@ public class city_furniture extends script.base_script
         }
         else if (item == menu_info_types.SERVER_MENU10)
         {
-            sui.inputbox(self, player, "Please specify movement increment.", "handleMovementIncrement");
+            sui.inputbox(self, player, "Please enter a three digit number to use when moving decorations.. \n\n\n This value cannot be greater than 250.,", "Decoration Movement", "handleMovementIncrement", 3, false, "1");
         }
         else if (item == menu_info_types.SERVER_MENU11)
         {
@@ -229,11 +229,19 @@ public class city_furniture extends script.base_script
         }
         else if(item == menu_info_types.SERVER_MENU15)
         {
+            if (movementRate > 250)
+            {
+                broadcast(player, "You cannot move a decoration UP more than 250 meters at a time.");
+            }
             loc.y = loc.y + movementRate;
             setLocation(self, loc);
         }
         else if(item == menu_info_types.SERVER_MENU16)
         {
+            if (movementRate > 250)
+            {
+                broadcast(player, "You cannot move a decoration DOWN more than 250 meters at a time.");
+            }
             loc.y = loc.y - movementRate;
             setLocation(self, loc);
         }
@@ -244,7 +252,7 @@ public class city_furniture extends script.base_script
         }
         else if(item == menu_info_types.SERVER_MENU18)
         {
-            sui.inputbox(self, player, "Please specify a name for this decoration. Leave blank for no name.", "handleDecorationName");
+            sui.inputbox(self, player, "Please enter a name for this decoration. \n\n\n Enter one space into the field for this object to have no name,", "Decoration Name", "handleDecorationName", 126, false, getName(self));
         }
         return SCRIPT_CONTINUE;
     }
@@ -266,13 +274,13 @@ public class city_furniture extends script.base_script
             broadcast(player, "Amount must be greater than or equal to 1.");
             return SCRIPT_CONTINUE;
         }
-        if (amount > 350)
+        if (amount > 250)
         {
-            broadcast(player, "Amount must be less than or equal to 350.");
+            broadcast(player, "Amount must be less than or equal to 250.");
             return SCRIPT_CONTINUE;
         }
         setObjVar(player, "city.movementRate", amount);
-        sendSystemMessageTestingOnly(player, "Attached.");
+        sendSystemMessageTestingOnly(player, "Movement rate set: " + amount);
         return SCRIPT_CONTINUE;
     }
     public void handleDecorationName(obj_id self, dictionary params) throws InterruptedException
@@ -285,7 +293,7 @@ public class city_furniture extends script.base_script
         }
         setObjVar(self, "city.decorationName", name);
         setName(self, name);
-        broadcast(player, "Decoration has been renamed to to " + name);
+        broadcast(player, "Decoration has been renamed to " + name);
         return;
     }
     public void placeDecoration(int city_id, obj_id player, obj_id self) throws InterruptedException
