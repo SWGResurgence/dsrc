@@ -15,14 +15,9 @@ public class toolkit extends script.base_script
             {
                     "speed", "height", "acceleration", "banking", "turning", "deceleration", "damping_height"
             };
+
     public toolkit()
     {
-    }
-
-    public int OnAttach(obj_id self) throws InterruptedException
-    {
-        setObjVar(self, "mechanic.toolkit.", "speed");
-        return SCRIPT_CONTINUE;
     }
 
     public static int setValue(obj_id vehicle, float value, int var_index) throws InterruptedException
@@ -32,6 +27,13 @@ public class toolkit extends script.base_script
         int ivalue = (int) (value * vi_conversion);
         setRangedIntCustomVarValue(vehicle, vi_name, ivalue);
         return ivalue;
+    }
+
+    public int OnAttach(obj_id self) throws InterruptedException
+    {
+        setObjVar(self, "mechanic.modifier", 2.0f);
+        setName(self, "Mechanic Toolkit");
+        return SCRIPT_CONTINUE;
     }
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
@@ -73,49 +75,49 @@ public class toolkit extends script.base_script
                 currentValue = vehicle.getMaximumSpeed(veh);
                 currentValue += getTookitPower(self);
                 setValue(veh, currentValue, vehicle.VAR_SPEED_MAX);
-                broadcast(player, "You have increased your vehicle's maximum speed by " + Float.toString(getTookitPower(self)));
+                broadcast(player, "You have increased your vehicle's maximum speed by " + getTookitPower(self));
             }
             else if (getTookitType(self) == 13)
             {
                 currentValue = vehicle.getHoverHeight(veh);
                 currentValue += getTookitPower(self);
                 setValue(veh, currentValue, vehicle.VAR_HOVER_HEIGHT);
-                broadcast(player, "You have increased your vehicle's maximum hover height by " + Float.toString(getTookitPower(self)));
+                broadcast(player, "You have increased your vehicle's maximum hover height by " + getTookitPower(self));
             }
             else if (getTookitType(self) == 5)
             {
                 currentValue = vehicle.getAccelMax(veh);
                 currentValue += getTookitPower(self);
                 setValue(veh, currentValue, vehicle.VAR_ACCEL_MAX);
-                broadcast(player, "You have increased your vehicle's acceleration by " + Float.toString(getTookitPower(self)));
+                broadcast(player, "You have increased your vehicle's acceleration by " + getTookitPower(self));
             }
             else if (getTookitType(self) == 12)
             {
                 currentValue = vehicle.getBankingAngle(veh);
                 currentValue += getTookitPower(self);
                 setValue(veh, currentValue, vehicle.VAR_BANKING);
-                broadcast(player, "You have increased your vehicle's banking by " + Float.toString(getTookitPower(self)));
+                broadcast(player, "You have increased your vehicle's banking by " + getTookitPower(self));
             }
             else if (getTookitType(self) == 4)
             {
                 currentValue = vehicle.getTurnRateMax(veh);
                 currentValue += getTookitPower(self);
                 setValue(veh, currentValue, vehicle.VAR_TURN_RATE_MAX);
-                broadcast(player, "You have increased your vehicle's turning by " + Float.toString(getTookitPower(self)));
+                broadcast(player, "You have increased your vehicle's turning by " + getTookitPower(self));
             }
             else if (getTookitType(self) == 6)
             {
                 currentValue = vehicle.getDecel(veh);
                 currentValue += getTookitPower(self);
                 setValue(veh, currentValue, vehicle.VAR_DECEL);
-                broadcast(player, "You have increased your vehicle's deceleration by " + Float.toString(getTookitPower(self)));
+                broadcast(player, "You have increased your vehicle's deceleration by " + getTookitPower(self));
             }
             else if (getTookitType(self) == 10)
             {
                 currentValue = vehicle.getDampingHeight(veh);
                 currentValue += getTookitPower(self);
                 setValue(veh, currentValue, vehicle.VAR_DAMP_HEIGHT);
-                broadcast(player, "You have increased your vehicle's damping height by " + Float.toString(getTookitPower(self)));
+                broadcast(player, "You have increased your vehicle's damping height by " + getTookitPower(self));
             }
             else
             {
@@ -365,7 +367,7 @@ public class toolkit extends script.base_script
         {
             float modifier = getFloatObjVar(self, "mechanic.modifier");
             names[idx] = "toolkit_power";
-            attribs[idx] = "Incremental: " + modifier;
+            attribs[idx] =  Float.toString(modifier);
             idx++;
         }
         return SCRIPT_CONTINUE;
@@ -384,11 +386,11 @@ public class toolkit extends script.base_script
         {
             case 0:
                 setToolKitType(self, "speed");
-                //setToolkitPower(self, 1.5f);
+                setToolkitPower(self, 1.5f);
                 break;
             case 1:
                 setToolKitType(self, "height");
-                //setToolkitPower(self, 1.5f);
+                setToolkitPower(self, 1.5f);
                 break;
             case 2:
                 setToolKitType(self, "acceleration");
@@ -445,6 +447,7 @@ public class toolkit extends script.base_script
         float power = Float.parseFloat(inputText);
         setToolkitPower(self, power);
     }
+
     public boolean isNumbers(String str) throws InterruptedException
     {
         for (int i = 0; i < str.length(); i++)
