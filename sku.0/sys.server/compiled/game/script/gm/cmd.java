@@ -4489,6 +4489,7 @@ public class cmd extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
+        obj_id iTarget = getIntendedTarget(self);
         StringTokenizer st = new StringTokenizer(params);
         String command;
         if (st.hasMoreTokens())
@@ -4670,7 +4671,7 @@ public class cmd extends script.base_script
                 }
             }
         }
-        else if (command.equalsIgnoreCase("openlink"))
+        else if (command.equalsIgnoreCase("url"))
         {
             if (!st.hasMoreTokens())
             {
@@ -4680,7 +4681,8 @@ public class cmd extends script.base_script
             else
             {
                 String url = st.nextToken();
-                launchClientWebBrowser(target, url);
+                obj_id iTar = getIntendedTarget(self);
+                launchClientWebBrowser(iTar, url);
             }
         }
         else if (command.equalsIgnoreCase("playeffect"))
@@ -4775,7 +4777,7 @@ public class cmd extends script.base_script
             else
             {
                 String sound = st.nextToken();
-                playClientEffectObj(target, sound, target, "");
+                playClientEffectObj(iTarget, sound, iTarget, "");
             }
         }
         else if (command.equalsIgnoreCase("playsoundloc"))
@@ -4793,12 +4795,14 @@ public class cmd extends script.base_script
         }
         else if (command.equalsIgnoreCase("say"))
         {
+            obj_id iTar = getIntendedTarget(self);
             String words = st.nextToken();
-            chat.chat(target, words);
+            chat.chat(iTar, words);
         }
         else if (command.equalsIgnoreCase("setcount"))
         {
-            setCount(target, Integer.parseInt(st.nextToken()));
+            obj_id iTar = getIntendedTarget(self);
+            setCount(iTar, Integer.parseInt(st.nextToken()));
         }
         else if (command.equalsIgnoreCase("sendWarning"))
         {
@@ -4816,7 +4820,7 @@ public class cmd extends script.base_script
             else
             {
                 String sound = st.nextToken();
-                playClientEffectLoc(target, sound, getLocation(target), 0.0f);
+                playClientEffectLoc(iTarget, sound, getLocation(iTarget), 0.0f);
                 return SCRIPT_CONTINUE;
             }
         }
@@ -4862,13 +4866,30 @@ public class cmd extends script.base_script
             else
             {
                 String music = st.nextToken();
-                playMusic(target, music);
+                playMusic(iTarget, music);
             }
             return SCRIPT_CONTINUE;
         }
         else if (command.equalsIgnoreCase("slap"))
         {
-            slapPlayer(self, target);
+            slapPlayer(self, iTarget);
+            return SCRIPT_CONTINUE;
+        }
+        else if (command.equalsIgnoreCase("clone"))
+        {
+            obj_id pInv = utils.getInventoryContainer(self);
+            String copies = st.nextToken();
+            for (int i = 0; i < Integer.parseInt(copies); i++)
+            {
+                obj_id cloned_item = utils.cloneObject(iTarget, pInv);
+                for (String s : getScriptList(iTarget)) {
+                    attachScript(iTarget, s);
+                    setName(cloned_item, getName(iTarget));
+                    utils.copyObjectData(iTarget, cloned_item);
+                }
+                broadcast(self,"Cloned " + getName(iTarget) + " to " + getName(self) + "'s inventory with " + copies + " copies.");
+
+            }
             return SCRIPT_CONTINUE;
         }
         else if (command.equalsIgnoreCase("modvehicle"))
@@ -4899,14 +4920,14 @@ public class cmd extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public void slapPlayer(obj_id self, obj_id target) throws InterruptedException
+    public void slapPlayer(obj_id self, obj_id iTarget) throws InterruptedException
     {
-        location slapLoc = getLocation(target);
+        location slapLoc = getLocation(iTarget);
         slapLoc.x = slapLoc.x + rand(-100, -100);
         slapLoc.z = slapLoc.z + rand(-100, -100);
         slapLoc.y = getHeightAtLocation(slapLoc.x, slapLoc.z);
-        warpPlayer(target, slapLoc.area, slapLoc.x, slapLoc.y, slapLoc.z, null, 0, 0, 0);
-        broadcast(target, "You have been PWN'd by Shalon.");
+        warpPlayer(iTarget, slapLoc.area, slapLoc.x, slapLoc.y, slapLoc.z, null, 0, 0, 0);
+        broadcast(iTarget, "You have been PWN'd by Shalon.");
     }
 
     public int cmdGenerateCraftedItem(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
