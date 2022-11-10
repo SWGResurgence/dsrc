@@ -13,6 +13,7 @@ public class toy extends script.base_script
     public toy()
     {
     }
+    public static int COOLDOWN_TIME = 14400;
     public static int currentGameTime = getCalendarTime();
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
@@ -26,7 +27,7 @@ public class toy extends script.base_script
         idx++;
         String NO = "\\#DD1234" + "No" + "\\#FFFFFF";
         String YES = "\\#32CD32" + "Yes" + "\\#FFFFFF";
-        if(currentGameTime < (lastUsed + 14400))
+        if(currentGameTime < (lastUsed + COOLDOWN_TIME))
         {
             names[idx] = "ready";
             attribs[idx] = NO;
@@ -54,13 +55,13 @@ public class toy extends script.base_script
     {
         if (mi == menu_info_types.ITEM_USE)
         {
-            if (getContainedBy(self) != player)
+            if (getContainedBy(self) != utils.getInventoryContainer(player))
             {
-                sendSystemMessage(player, new string_id("spam", "must_be_holding"));
+                sendSystemMessage(player, new string_id("spam", "must_be_in_inventory"));
                 return SCRIPT_CONTINUE;
             }
             int lastUsed = getIntObjVar(self, "used.timestamp");
-            if (currentGameTime < (lastUsed + 14400))
+            if (currentGameTime < (lastUsed + COOLDOWN_TIME))
             {
                 broadcast(player, "You cannot use this yet.");
                 return SCRIPT_CONTINUE;
