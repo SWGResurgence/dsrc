@@ -108,13 +108,10 @@ public class city_furniture extends script.base_script
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        int city_id = getCityAtLocation(getLocation(player), 0);
-        boolean isMayor = city.isTheCityMayor(player, city_id);
-        if (!isMayor)
+        if (canPlaceItem(self, player))
         {
-            return SCRIPT_CONTINUE;
+            mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_PLACE);
         }
-
         region[] rgnTest = getRegionsWithBuildableAtPoint(getLocation(player), regions.BUILD_FALSE);
         if (rgnTest != null)
         {
@@ -134,6 +131,8 @@ public class city_furniture extends script.base_script
         }
         else 
         {
+            int city_id = getCityAtLocation(getLocation(player), 0);
+            boolean isMayor = city.isTheCityMayor(player, city_id);
             if (getOwner(self) == player)
             {
                 mi.addRootMenu(menu_info_types.ITEM_PICKUP, SID_MT_REMOVE);
@@ -294,7 +293,6 @@ public class city_furniture extends script.base_script
         setObjVar(self, "city.decorationName", name);
         setName(self, name);
         broadcast(player, "Decoration has been renamed to " + name);
-        return;
     }
     public void placeDecoration(int city_id, obj_id player, obj_id self) throws InterruptedException
     {
@@ -499,5 +497,24 @@ public class city_furniture extends script.base_script
             moveToOfflinePlayerInventoryAndUnload(item, player);
         }
         return isValidObject;
+    }
+    public boolean canPlaceItem(obj_id self, obj_id player) throws InterruptedException
+    {
+        //@note: keep these in order of importance, with the most important last
+        int city_id = getCityAtLocation(getLocation(player), 0);
+        boolean isMayor = city.isTheCityMayor(player, city_id);
+        if (hasObjVar(player, "city_decorator"))
+        {
+            return true;
+        }
+        if (city.isMilitiaOfCity(player, city_id))
+        {
+            return true;
+        }
+        if (isMayor)
+        {
+            return true;
+        }
+        else return false;
     }
 }

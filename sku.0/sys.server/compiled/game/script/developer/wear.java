@@ -1,21 +1,33 @@
 package script.developer;
 
+import script.*;
 import script.library.chat;
+import script.library.city;
+import script.library.sui;
 import script.library.utils;
-import script.obj_id;
+
+import static script.library.ai_lib.setMood;
 
 public class wear extends script.base_script
 {
     public wear()
     {
     }
+    public int OnAttach(obj_id self)
+    {
+        setInvulnerable(self, true);
+        setName(self, "City Actor Hireling");
+        return SCRIPT_CONTINUE;
+    }
     public int OnGiveItem(obj_id self, obj_id item, obj_id giver) throws InterruptedException
     {
-        if (isGod(giver))
+        int city_id = getCityAtLocation(getLocation(giver), 0);
+        boolean isMayor = city.isTheCityMayor(giver, city_id);
+        if (isMayor)
         {
             if (isIdValid(item))
             {
-                if (isPlayer(self))
+                if (isPlayer(giver))
                 {
                     sendSystemMessageTestingOnly(giver, "You gave " + getName(self) + " " + getName(item) + ".");
                     if (equipOverride(item, self))
@@ -34,6 +46,158 @@ public class wear extends script.base_script
                 }
             }
         }
+        return SCRIPT_CONTINUE;
+    }
+    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
+    {
+        if (canManipulateActor(self, player))
+        {
+            int hireling_main = mi.addRootMenu(menu_info_types.SERVER_MENU10, new string_id("city/city", "hireling_menu"));
+            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU11, new string_id("city/city", "hireling_set_name"));
+            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU12, new string_id("city/city", "hireling_set_posture"));
+            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU13, new string_id("city/city", "hireling_set_mood"));
+            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU14, new string_id("city/city", "hireling_set_animation"));
+            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU15, new string_id("city/city", "hireling_set_size"));
+            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU16, new string_id("city/city", "hireling_reset_clothing"));
+
+        }
+        return SCRIPT_CONTINUE;
+    }
+    public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
+    {
+        if (canManipulateActor(self, player))
+        {
+            if (item == menu_info_types.SERVER_MENU10)
+            {
+                if (!hasObjVar(self, "city_id"))
+                {
+                    setObjVar(self, "city_id", getCityAtLocation(getLocation(player), 0));
+                }
+            }
+            else if (item == menu_info_types.SERVER_MENU11)
+            {
+                sui.inputbox(self, player, "Enter the name for the hireling.", null, "handleSetName");                //@call msgbox for name
+            }
+            else if (item == menu_info_types.SERVER_MENU12)
+            {
+                sui.inputbox(self, player, "Enter the posture for the hireling.\n(Required format: integer)", null, "handleSetPosture");                //@call msgbox for posture
+            }
+            else if (item == menu_info_types.SERVER_MENU13)
+            {
+                sui.inputbox(self, player, "Enter the mood for the hireling.", null, "handleSetMood");
+            }
+            else if (item == menu_info_types.SERVER_MENU14)
+            {
+                sui.inputbox(self, player, "Enter the animation for the hireling.", null, "handleSetAnimation");
+            }
+            else if (item == menu_info_types.SERVER_MENU15)
+            {
+                sui.inputbox(self, player, "Enter the size you want the hireling to be.\n(Required format: integer)" , null, "handleSetSize");
+            }
+            else if (item == menu_info_types.SERVER_MENU16)
+            {
+                obj_id[] delList = getInventoryAndEquipment(self);
+                for (script.obj_id obj_id : delList)
+                {
+                    destroyObject(obj_id);
+                }
+            }
+        }
+        return SCRIPT_CONTINUE;
+    }
+    public boolean canManipulateActor(obj_id self, obj_id player) throws InterruptedException
+    {
+        //@note: keep these in order of importance, with the most important last
+        int city_id = getCityAtLocation(getLocation(player), 0);
+        boolean isMayor = city.isTheCityMayor(player, city_id);
+        if (hasObjVar(player, "city_decorator"))
+        {
+            return true;
+        }
+        if (city.isMilitiaOfCity(player, city_id))
+        {
+            return true;
+        }
+        if (isMayor)
+        {
+            return true;
+        }
+        else return false;
+    }
+    public int handleSetName(obj_id self, dictionary params) throws InterruptedException
+    {
+        if (params == null)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_CANCEL)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        String name = sui.getInputBoxText(params);
+        setName(self, name);
+        return SCRIPT_CONTINUE;
+    }
+    public int handleSetSize(obj_id self, dictionary params) throws InterruptedException
+    {
+        if (params == null)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_CANCEL)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        String size = sui.getInputBoxText(params);
+        float sizeFloat = utils.stringToFloat(size);
+        setScale(self, sizeFloat);
+        return SCRIPT_CONTINUE;
+    }
+    public int handleSetAnimation(obj_id self, dictionary params) throws InterruptedException
+    {
+        if (params == null)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_CANCEL)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        String anim = sui.getInputBoxText(params);
+        doAnimationAction(self, anim);
+        return SCRIPT_CONTINUE;
+    }
+    public int handleSetMood(obj_id self, dictionary params) throws InterruptedException
+    {
+        if (params == null)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_CANCEL)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        String mood = sui.getInputBoxText(params);
+        setAnimationMood(self, mood);
+        return SCRIPT_CONTINUE;
+    }
+    public int handleSetPosture(obj_id self, dictionary params) throws InterruptedException
+    {
+        if (params == null)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_CANCEL)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        String posture = sui.getInputBoxText(params);
+        setPosture(self, utils.stringToInt(posture));
         return SCRIPT_CONTINUE;
     }
 }

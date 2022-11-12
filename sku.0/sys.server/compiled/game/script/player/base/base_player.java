@@ -6182,6 +6182,7 @@ public class base_player extends script.base_script
                 {
                     removeObjVar(target, "city.zoning_rights");
                     removeObjVar(target, "city.zoning_rights_time");
+                    removeObjVar(target, "city_decorator");
                     sendSystemMessage(player, SID_RIGHTS_REVOKED);
                     sendSystemMessage(target, SID_RIGHTS_REVOKED_OTHER);
                     return;
@@ -6190,6 +6191,7 @@ public class base_player extends script.base_script
         }
         setObjVar(target, "city.zoning_rights", city_id);
         setObjVar(target, "city.zoning_rights_time", getGameTime());
+        setObjVar(target, "city_decorator", true);
         prose_package pp = prose.getPackage(SID_RIGHTS_GRANTED, cityGetName(city_id));
         sendSystemMessageProse(target, pp);
         pp = prose.getPackage(SID_RIGHTS_GRANTED_SELF, getName(target));
