@@ -50,8 +50,8 @@ scale = 1.00..1.12
 
 @class object_template 3
 
-objectName = "npc_vendor_name" "veteran_rewards"
-detailedDescription = "npc_vendor_description" "veteran_rewards"
+objectName = "npc_vendor_name" "veteran_vendor"
+detailedDescription = "npc_vendor_description" "veteran_vendor"
 lookAtText = "npc_vendor_lookat ""
 
 appearanceFilename = "appearance/hum_m.sat"
