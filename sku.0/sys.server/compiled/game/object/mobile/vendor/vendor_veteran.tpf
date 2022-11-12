@@ -4,7 +4,7 @@
  @class tangible_object_template 0
  @class object_template 0
 
- sharedTemplate = "object/mobile/vendor/veteran_rewards.iff"
+ sharedTemplate = "object/mobile/vendor/shared_vendor_veteran.iff"
 
  contents = [
                     [slotName = "inventory",
