@@ -34,6 +34,7 @@ object/tangible/veteran_reward/vr_gacklebat_deed.iff	96		Gackle Bat Familiar
 object/tangible/veteran_reward/frn_vet_carbonite_geonosian.iff	51		Geonosian in Carbonite
 object/tangible/veteran_reward/frn_vet_carbonite_gungan.iff	51		Gungan in Carbonite
 object/tangible/veteran_reward/frn_tech_console_sectional_a.iff	12		Holonet Databank
+item_holopet_emitter_01_01	50		Holo-Pet Emitter
 item_vet_homing_beacon_03_01	57		Homing Beacon
 item_deed_hover_chair_06_01	60	5	Hover Chair Vehicle Deed
 object/tangible/veteran_reward/one_year_anniversary/painting_06.iff	3	1	Hutt Greed
