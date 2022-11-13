@@ -1,0 +1,11 @@
+item	token8	limit	note
+s	i	i[0]	c
+item_trader_advanced_buff_01_01	500		Advanced Superior Crafting Unit
+item_creature_harvester_deed_01_01	750		Automated Creature Harvester Deed
+item_respec_token_01_01	100	1	Character Respec Device
+item_holopet_emitter_01_01	50		Holo-Pet Emitter
+item_neural_recon_network_control_interface_01_01	75	1	Neural Recon Network Control Interface
+item_ornate_rug_01_01	150		Ornate Rug
+item_vet_reward_resource_fabricator	75		Resource Fabricator
+item_vet_reward_resource_industrial_replicator	100		Resource Industrial Replicator
+item_vet_reward_resource_supply_generator	50		Resource Supply Generator
