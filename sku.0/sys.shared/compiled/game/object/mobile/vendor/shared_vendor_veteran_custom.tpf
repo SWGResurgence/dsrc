@@ -9,8 +9,8 @@ species = SP_human
 @class object_template 3
 
 objectName = "npc_vendor_name" "veteran_custom_vendor"
-detailedDescription = "npc_vendor_description" "veteran_custom_vendor"
-lookAtText = "npc_vendor_lookat" ""
+detailedDescription = "" ""
+lookAtText = "npc_vendor_name" "veteran_custom_vendor"
 
 appearanceFilename = "appearance/hum_f.sat"
 

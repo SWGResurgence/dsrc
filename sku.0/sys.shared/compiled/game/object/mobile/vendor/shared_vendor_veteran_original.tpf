@@ -47,7 +47,7 @@ rangedIntCustomizationVariables = [
     [variableName="/shared_owner/blend_skinny", minValueInclusive=0, defaultValue=0, maxValueExclusive=256]]
 
 objectName = "npc_vendor_name" "veteran_original_vendor"
-detailedDescription = "npc_vendor_description" "veteran_original_vendor"
+detailedDescription = "" ""
 lookAtText = "npc_vendor_name" "veteran_original_vendor"
 
 appearanceFilename = "appearance/hum_m.sat"
