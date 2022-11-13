@@ -13,6 +13,8 @@ import script.library.groundquests;
 import script.library.utils;
 import script.obj_id;
 
+import java.util.Arrays;
+
 public class player_developer extends base_script
 {
     public player_developer()
@@ -53,8 +55,12 @@ public class player_developer extends base_script
         if (cmd.equalsIgnoreCase("puppet"))
         {
             String speech = tok.nextToken();
-            String splitMsg = String.valueOf(split(speech, ' '));
-            chat.chat(target, splitMsg);
+            String combinedMessage = "";
+            while (tok.hasMoreTokens())
+            {
+                combinedMessage += tok.nextToken() + " ";
+            }
+            chat.chat(target, combinedMessage);
         }
         if (cmd.equalsIgnoreCase("wiki"))
         {

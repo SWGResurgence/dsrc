@@ -1,6 +1,7 @@
 package script.gm;
 
 import script.*;
+import script.ai.ai;
 import script.library.*;
 import script.library.vehicle;
 
@@ -4810,6 +4811,22 @@ public class cmd extends script.base_script
             WARNING(message);
 
         }
+        else if (command.equalsIgnoreCase("sws"))
+        {
+            String template = st.nextToken();
+            String script = st.nextToken();
+            obj_id item = createObject(template, getLocation(self));
+            attachScript(item, script);
+            setYaw(item, getYaw(self));
+        }
+        else if (command.equalsIgnoreCase("ringspawn"))
+        {
+            String creatureToSpawn = st.nextToken();
+            int num = Integer.parseInt(st.nextToken());
+            float radius = Float.parseFloat(st.nextToken());
+            spawnRing(self, num, radius, getLocation(self), creatureToSpawn);
+
+        }
         else if (command.equalsIgnoreCase("playsoundloctarget"))
         {
             if (!st.hasMoreTokens())
@@ -4875,6 +4892,10 @@ public class cmd extends script.base_script
             slapPlayer(self, iTarget);
             return SCRIPT_CONTINUE;
         }
+        else if (command.equalsIgnoreCase("boxspawn"))
+        {
+            boxSpawn(self, Integer.parseInt(st.nextToken()), Float.parseFloat(st.nextToken()), getLocation(self), st.nextToken());
+        }
         else if (command.equalsIgnoreCase("clone"))
         {
             obj_id pInv = utils.getInventoryContainer(self);
@@ -4918,6 +4939,35 @@ public class cmd extends script.base_script
             showAdminCmdSyntax(self);
         }
         return SCRIPT_CONTINUE;
+    }
+
+    public void boxSpawn(obj_id self, int numRowsX, float numRowsY, location location, String spawn) throws InterruptedException
+    {
+        float x = location.x;
+        float y = location.y;
+        float z = location.z;
+        float yaw = getYaw(self);
+        float xInc = 0;
+        float yInc = 0;
+        float zInc = 0;
+        float yawInc = 0;
+        for (int i = 0; i < numRowsX; i++)
+        {
+            obj_id creature = null;
+            for (int j = 0; j < numRowsY; j++)
+            {
+                location spawnLoc = new location(x + xInc, y + yInc, z + zInc, location.area, null);
+                creature = create.object(spawn, spawnLoc);
+                xInc += 5;
+                yawInc += 5;
+                faceTo(creature, self);
+            }
+            xInc = 0;
+            yInc += 5;
+            yawInc = 0;
+            faceTo(creature, self);
+        }
+
     }
 
     public void slapPlayer(obj_id self, obj_id iTarget) throws InterruptedException
@@ -4988,6 +5038,24 @@ public class cmd extends script.base_script
             return SCRIPT_CONTINUE;
         }
         setCount(target, utils.stringToInt(params));
+        return SCRIPT_CONTINUE;
+    }
+    public static int spawnRing(obj_id self, int numMobs, float radius, location loc, String creatureName) throws InterruptedException
+    {
+        if (!isIdValid(self) || !exists(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        float x = loc.x;
+        float z = loc.z;
+        for (int i = 0; i < numMobs; i++)
+        {
+            float angle = (float) (i * (360 / numMobs));
+            x = loc.x + (float) Math.cos(angle) * radius;
+            z = loc.z + (float) Math.sin(angle) * radius;
+            obj_id creatureObj = create.object(creatureName, new location(x, getHeightAtLocation(x,z), z, loc.area));
+            faceTo(creatureObj, self);
+        }
         return SCRIPT_CONTINUE;
     }
 }

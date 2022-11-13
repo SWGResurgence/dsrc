@@ -23,21 +23,14 @@ public class wear extends script.base_script
     {
         int city_id = getCityAtLocation(getLocation(giver), 0);
         boolean isMayor = city.isTheCityMayor(giver, city_id);
-        if (isMayor)
+        if (canManipulateActor(self, giver))
         {
             if (isIdValid(item))
             {
                 if (isPlayer(giver))
                 {
                     sendSystemMessageTestingOnly(giver, "You gave " + getName(self) + " " + getName(item) + ".");
-                    if (equipOverride(item, self))
-                    {
-                        sendSystemMessageTestingOnly(giver, "You equipped " + getName(item) + " on " + getName(self) + ".");
-                    }
-                    else
-                    {
-                        sendSystemMessageTestingOnly(giver, "You failed to equip " + getName(item) + " on " + getName(self) + ".");
-                    }
+                    equipOverride(item, self);
                 }
                 else
                 {
@@ -52,13 +45,13 @@ public class wear extends script.base_script
     {
         if (canManipulateActor(self, player))
         {
-            int hireling_main = mi.addRootMenu(menu_info_types.SERVER_MENU10, new string_id("city/city", "hireling_menu"));
-            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU11, new string_id("city/city", "hireling_set_name"));
-            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU12, new string_id("city/city", "hireling_set_posture"));
-            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU13, new string_id("city/city", "hireling_set_mood"));
-            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU14, new string_id("city/city", "hireling_set_animation"));
-            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU15, new string_id("city/city", "hireling_set_size"));
-            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU16, new string_id("city/city", "hireling_reset_clothing"));
+            int hireling_main = mi.addRootMenu(menu_info_types.SERVER_MENU19, new string_id("city/city", "hireling_menu"));
+            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU20, new string_id("city/city", "hireling_set_name"));
+            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU21, new string_id("city/city", "hireling_set_posture"));
+            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU22, new string_id("city/city", "hireling_set_mood"));
+            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU23, new string_id("city/city", "hireling_set_animation"));
+            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU24, new string_id("city/city", "hireling_set_size"));
+            mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU25, new string_id("city/city", "hireling_reset_clothing"));
 
         }
         return SCRIPT_CONTINUE;
@@ -67,34 +60,39 @@ public class wear extends script.base_script
     {
         if (canManipulateActor(self, player))
         {
-            if (item == menu_info_types.SERVER_MENU10)
+            if (item == menu_info_types.SERVER_MENU19)
             {
                 if (!hasObjVar(self, "city_id"))
                 {
                     setObjVar(self, "city_id", getCityAtLocation(getLocation(player), 0));
                 }
+                if (!hasScript(self, "systems.city.city_furniture"))
+                {
+                    attachScript(self, "systems.city.city_furniture");
+                }
             }
-            else if (item == menu_info_types.SERVER_MENU11)
+            else if (item == menu_info_types.SERVER_MENU20)
             {
-                sui.inputbox(self, player, "Enter the name for the hireling.", null, "handleSetName");                //@call msgbox for name
+                sui.inputbox(self, player, "Enter the name for this hireling.", "handleSetName");
+                //@call msgbox for name
             }
-            else if (item == menu_info_types.SERVER_MENU12)
+            else if (item == menu_info_types.SERVER_MENU21)
             {
-                sui.inputbox(self, player, "Enter the posture for the hireling.\n(Required format: integer)", null, "handleSetPosture");                //@call msgbox for posture
+                sui.inputbox(self, player, "Enter the posture for the hireling.\n(Required format: integer)", "handleSetPosture");                //@call msgbox for posture
             }
-            else if (item == menu_info_types.SERVER_MENU13)
+            else if (item == menu_info_types.SERVER_MENU22)
             {
-                sui.inputbox(self, player, "Enter the mood for the hireling.", null, "handleSetMood");
+                sui.inputbox(self, player, "Enter the mood for the hireling.", "handleSetMood");
             }
-            else if (item == menu_info_types.SERVER_MENU14)
+            else if (item == menu_info_types.SERVER_MENU23)
             {
-                sui.inputbox(self, player, "Enter the animation for the hireling.", null, "handleSetAnimation");
+                sui.inputbox(self, player, "Enter the animation for the hireling.", "handleSetAnimation");
             }
-            else if (item == menu_info_types.SERVER_MENU15)
+            else if (item == menu_info_types.SERVER_MENU24)
             {
-                sui.inputbox(self, player, "Enter the size you want the hireling to be.\n(Required format: integer)" , null, "handleSetSize");
+                sui.inputbox(self, player, "Enter the size you want the hireling to be.\n(Required format: integer)", "handleSetSize");
             }
-            else if (item == menu_info_types.SERVER_MENU16)
+            else if (item == menu_info_types.SERVER_MENU25)
             {
                 obj_id[] delList = getInventoryAndEquipment(self);
                 for (script.obj_id obj_id : delList)

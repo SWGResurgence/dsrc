@@ -125,7 +125,7 @@ public class city_furniture extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (0 == getIntObjVar(self, "city_id"))
+        if (!hasObjVar(self, "city_id"))
         {
             mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_PLACE);
         }
