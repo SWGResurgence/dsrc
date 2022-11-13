@@ -48,7 +48,7 @@ rangedIntCustomizationVariables = [
 
 objectName = "npc_vendor_name" "veteran_original_vendor"
 detailedDescription = "npc_vendor_description" veteran_original_vendor"
-lookAtText = "npc_vendor_lookat" ""
+lookAtText = "npc_vendor_name" "veteran_original_vendor"
 
 appearanceFilename = "appearance/hum_m.sat"
 
