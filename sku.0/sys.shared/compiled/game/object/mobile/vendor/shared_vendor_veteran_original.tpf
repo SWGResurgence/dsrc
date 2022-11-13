@@ -6,6 +6,7 @@ gender = GE_male
 species = SP_human
 
 @class tangible_object_template 3
+@class object_template 3
 
 objectName = "npc_vendor_name" "veteran_original_vendor"
 detailedDescription = "" ""
