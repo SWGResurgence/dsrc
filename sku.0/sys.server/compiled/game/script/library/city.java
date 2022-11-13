@@ -1331,12 +1331,12 @@ public class city extends script.base_script
     }
     public static int getMaxDecorationCount(int city_id, int rank) throws InterruptedException
     {
-        int baseDecorCount = rank * 150;
+        int baseDecorCount = rank * 2500;
         int flag = cityGetSpec(city_id);
         if (flag == SF_SPEC_DECOR_INCREASE)
         {
             LOG("sissynoid", "City Has Increased Decoration Spec!  Increasing Decorations by 200%");
-            baseDecorCount = rank * 200;
+            baseDecorCount = rank * 3000;
             return baseDecorCount;
         }
         return baseDecorCount;
