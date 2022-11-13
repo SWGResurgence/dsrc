@@ -15,6 +15,12 @@ item_tcg_loot_reward_series1_indoor_fountain_02				10			Small Indoor Fountain
 item_tcg_loot_reward_series3_empal_surecon_center_medical_table				20			EmPal SuRecon Center Medical Table
 item_tcg_loot_reward_series5_xj6_air_speeder				28			Vehicle Deed: XJ-6 Airspeeder
 item_tcg_loot_reward_series8_glass_sculpture				20			Glass Helix Sculpture
+item_rare_painting_01_01			150				
+object/tangible/veteran_reward/one_year_anniversary/painting_10.iff			125				
+object/tangible/veteran_reward/one_year_anniversary/painting_01.iff			125				
+object/tangible/veteran_reward/one_year_anniversary/painting_06.iff			125				
+object/tangible/veteran_reward/one_year_anniversary/painting_08.iff			125				
+object/tangible/veteran_reward/one_year_anniversary/painting_03.iff			125				
 item_pgc_monitorscreen			219				
 item_pgc_monitorscreen_sm			177				
 item_pgc_glass_pane_01			169				
