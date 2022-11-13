@@ -14,4 +14,4 @@ lookAtText = "npc_vendor_lookat" ""
 
 appearanceFilename = "appearance/hum_f.sat"
 
-clientDataFile = "clientdata/npc/client_shared_npc_dressed_imperial_officer_f.cdf
+clientDataFile = "clientdata/npc/client_shared_npc_dressed_imperial_officer_f.cdf"

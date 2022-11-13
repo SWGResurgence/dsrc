@@ -7,8 +7,6 @@ species = SP_human
 
 @class tangible_object_template 3
 
-scale = 1.00..1.12
-
 paletteColorCustomizationVariables = [
     [variableName="/private/index_color_2", palettePathName="palette/pc_eye_hum.pal", defaultPaletteIndex=0], // maxValueExclusive=32
     [variableName="/private/index_color_3", palettePathName="palette/white.pal", defaultPaletteIndex=0], // maxValueExclusive=2
@@ -55,3 +53,5 @@ lookAtText = "npc_vendor_lookat" ""
 appearanceFilename = "appearance/hum_m.sat"
 
 clientDataFile = "clientdata/npc/client_shared_npc_dressed_imperial_officer_m_3.cdf"
+
+scale = 1.00..1.12
