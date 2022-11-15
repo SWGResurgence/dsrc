@@ -18,7 +18,6 @@ object/tangible/veteran_reward/frn_tech_console_sectional_c.iff	12		Database Inp
 item_vet_66_month_jedi_temple_burning	66		Death - Destroyed Jedi Temple Miniature
 object/tangible/veteran_reward/frn_vet_holo_deathstar.iff	24		Death Star Hologram
 object/tangible/veteran_reward/frn_vet_houseplant.iff	9		Decorative Houseplant
-item_bestine_decorative_sword_01_01	75		Decorative Sword
 object/tangible/veteran_reward/frn_vet_emp_chair.iff	30		Emperor's Chair
 object/tangible/veteran_reward/one_year_anniversary/painting_09.iff	3	1	Emperor's Eyes
 object/tangible/veteran_reward/frn_vet_palpatine_statue.iff	63		Empire Day Emperor's Statue
@@ -68,7 +67,6 @@ item_vet_reward_sd_console_02	84		Star Destroyer System Console
 st_cn_vet_reward_stormtrooper_boss	54		Stormtrooper Veteran Storyteller Token
 st_cn_vet_reward_super_battle_droid_boss	54		Super Battle Droid Storyteller Token
 object/tangible/veteran_reward/frn_tech_console_sectional_b.iff	12		System Readout Terminal
-item_restuss_schematic_saber_04_01	250		Tusken Raider Dreadlord Storyteller Token
 st_cn_vet_reward_tusken_boss	57		Tusken Raider Dreadlord Storyteller Token
 object/tangible/veteran_reward/frn_vet_carbonite_ugnaught.iff	51		Ugnaught in Carbonite
 object/tangible/veteran_reward/frn_couch_falcon_section_s01.iff	6		YT-1300 Modular Seating
