@@ -73,24 +73,26 @@ public class wear extends script.base_script
             }
             else if (item == menu_info_types.SERVER_MENU20)
             {
-                sui.inputbox(self, player, "Enter the name for this hireling.", "handleSetName");
+                sui.inputbox(self, player, "Enter the name for this hireling.\n(Example: Arispe Moonbeam)", "handleSetName");
                 //@call msgbox for name
             }
             else if (item == menu_info_types.SERVER_MENU21)
             {
-                sui.inputbox(self, player, "Enter the posture for the hireling.\n(Required format: integer)", "handleSetPosture");                //@call msgbox for posture
+                sui.inputbox(self, player, "Enter the posture for the hireling.\n(Example, standing: 0)", "handleSetPosture");                //@call msgbox for posture
             }
             else if (item == menu_info_types.SERVER_MENU22)
             {
-                sui.inputbox(self, player, "Enter the mood for the hireling.", "handleSetMood");
+                sui.inputbox(self, player, "Enter the mood for the hireling.\n(Example: npc_sitting_chair)", "handleSetMood");
             }
             else if (item == menu_info_types.SERVER_MENU23)
             {
-                sui.inputbox(self, player, "Enter the animation for the hireling.", "handleSetAnimation");
+                sui.inputbox(self, player, "Enter the animation for the hireling.\n(Example: celebrate", "handleSetAnimation");
+
+
             }
             else if (item == menu_info_types.SERVER_MENU24)
             {
-                sui.inputbox(self, player, "Enter the size you want the hireling to be.\n(Required format: integer)", "handleSetSize");
+                sui.inputbox(self, player, "Enter the size you want the hireling to be.\n(Example: 1.0f", "handleSetSize");
             }
             else if (item == menu_info_types.SERVER_MENU25)
             {
@@ -117,6 +119,10 @@ public class wear extends script.base_script
             return true;
         }
         if (isMayor)
+        {
+            return true;
+        }
+        if (isGod)
         {
             return true;
         }
