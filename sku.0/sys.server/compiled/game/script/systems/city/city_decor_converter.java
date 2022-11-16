@@ -24,6 +24,10 @@ public class city_decor_converter extends script.base_script
             }
             else if (getTemplateName(item).contains("object/tangible/"))
             {
+                if (hasScript(item, "item.static_item_base"))
+                {
+                    setObjVar(item, "noTrade", 1);
+                }
                detachAllScripts(item);
                attachScript(item, "systems.city.city_furniture");
                setName(item, "");

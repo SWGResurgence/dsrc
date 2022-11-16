@@ -290,7 +290,7 @@ public class city_furniture extends script.base_script
         }
         setObjVar(self, "city.decorationName", name);
         setName(self, name);
-        broadcast(player, "Decoration has been renamed to " + name);
+        broadcast(player, "Decoration has been renamed to: " + name);
     }
     public void placeDecoration(int city_id, obj_id player, obj_id self) throws InterruptedException
     {
@@ -514,6 +514,10 @@ public class city_furniture extends script.base_script
             return true;
         }
         if (isMayor)
+        {
+            return true;
+        }
+        if (isGod(player))
         {
             return true;
         }
