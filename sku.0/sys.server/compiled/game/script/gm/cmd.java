@@ -1,7 +1,7 @@
 package script.gm;
 
 import script.*;
-import script.ai.ai;
+//import script.ai.ai;
 import script.library.*;
 import script.library.vehicle;
 
@@ -4794,21 +4794,149 @@ public class cmd extends script.base_script
                 playClientEffectLoc(self, sound, getLocation(self), 0.0f);
             }
         }
+        else if (command.equalsIgnoreCase("playsoundeveryone"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundloc <sound name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                obj_id[] players = getAllPlayers(getLocation(self), 8000.0f);
+                for (obj_id player : players) {
+                    String sound = st.nextToken();
+                    playClientEffectObj(player, sound, player, "");
+                }
+            }
+        }
+        else if (command.equalsIgnoreCase("playcefeveryone"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playcefeveryone <sound name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                obj_id[] players = getAllPlayers(getLocation(self), 8000.0f);
+                for (obj_id player : players) {
+                    String sound = st.nextToken();
+                    playClientEffectObj(player, sound, player, "head");
+                }
+            }
+        }
+        else if (command.equalsIgnoreCase("rewardarea"))
+        {
+            if (!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin grantItemArea <item> <count>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                String item = st.nextToken();
+                int count = Integer.parseInt(st.nextToken());
+                obj_id[] players = getAllPlayers(getLocation(self), 250.0f);
+                for (obj_id player : players) {
+                    obj_id pInv = utils.getInventoryContainer(player);
+                    obj_id pItem = static_item.createNewItemFunction(item, pInv, count);
+                    if (isIdValid(pItem)) {
+                        sendSystemMessageTestingOnly(player, "\\#DD1234You have been awarded items!\\#FFFFFF");
+                    }
+                }
+            }
+        }
+        else if (command.equalsIgnoreCase("editlootarea"))
+        {
+            float radius = 250.0f;
+            if (st.hasMoreTokens())
+            {
+                radius = Float.parseFloat(st.nextToken());
+            }
+            obj_id[] creatures = getCreaturesInRange(getLocation(self), radius);
+            for (obj_id creature : creatures) {
+                if (isMob(creature)) {
+                    if (hasObjVar(self, "loot.numItems")) {
+                        setObjVar(creature, "loot.numItems", st.nextToken());
+                    }
+                }
+            }
+
+
+        }
         else if (command.equalsIgnoreCase("say"))
         {
             obj_id iTar = getIntendedTarget(self);
             String words = st.nextToken();
+            if (st.hasMoreTokens())
+            {
+                while (st.hasMoreTokens())
+                {
+                    words += " " + st.nextToken();
+                }
+            }
+            if (st.countTokens() == 1)
+            {
+                chat.chat(iTar, words);
+            }
+            else {
+
+                broadcast(self, "Syntax: /admin say <message>");
+            }
             chat.chat(iTar, words);
+        }
+        else if (command.equalsIgnoreCase("setloottable"))
+        {
+            String table = st.nextToken();
+            if (table == null || table.equals(""))
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin setloottable <loot table name>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                setObjVar(self, "loot.lootTable", table);
+                sendSystemMessageTestingOnly(self, "Loot table set to " + table);
+            }
+        }
+        else if (command.equalsIgnoreCase("setnumitems"))
+        {
+            obj_id iTar = getIntendedTarget(self);
+            int level = Integer.parseInt(st.nextToken());
+            if (level == 0)
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin setnumitems <loot level>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                setObjVar(self, "loot.numItems", level);
+                sendSystemMessageTestingOnly(self, "Number of loot items set to " + level);
+            }
         }
         else if (command.equalsIgnoreCase("setcount"))
         {
             obj_id iTar = getIntendedTarget(self);
             setCount(iTar, Integer.parseInt(st.nextToken()));
         }
-        else if (command.equalsIgnoreCase("sendWarning"))
+        else if (command.equalsIgnoreCase("setcountcontainer"))
         {
-            String message = st.nextToken();
-            WARNING(message);
+            obj_id[] itemsInside = utils.getContents(utils.getInventoryContainer(getIntendedTarget(self)));
+            for (obj_id itemInside : itemsInside) {
+                setCount(itemInside, Integer.parseInt(st.nextToken()));
+            }
+        }
+        else if (command.equalsIgnoreCase("sendwarning"))
+        {
+            String words = st.nextToken();
+            if (st.hasMoreTokens())
+            {
+                while (st.hasMoreTokens())
+                {
+                    words += " " + st.nextToken();
+                }
+            }
 
         }
         else if (command.equalsIgnoreCase("sws"))
@@ -4891,6 +5019,10 @@ public class cmd extends script.base_script
         {
             slapPlayer(self, iTarget);
             return SCRIPT_CONTINUE;
+        }
+        else if (command.equalsIgnoreCase("removeinvuln"))
+        {
+            setInvulnerable(iTarget, false);
         }
         else if (command.equalsIgnoreCase("boxspawn"))
         {
