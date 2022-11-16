@@ -21,9 +21,14 @@ public class celebration_actor extends script.base_script
     }
     public static String[] actorChatter =
             {
-                    "@@CHANGE_ME@@",
-                    "@@CHANGE_ME@@",
-                    "@@CHANGE_ME@@",
+                    "Man, I am tired. I hope this is the last one.",
+                    "I can't wait to get home and sleep.",
+                    "I hope I get a good spot in the parade.",
+                    "I hope I get to see the parade.",
+                    "I hope I start to feel better soon.",
+                    "I hope I don't get sick.",
+                    "I wonder where the parade is going to be this year.",
+                    "I wonder what the parade is going to be like this year.",
             };
 
     public int OnAttach(obj_id self) throws InterruptedException

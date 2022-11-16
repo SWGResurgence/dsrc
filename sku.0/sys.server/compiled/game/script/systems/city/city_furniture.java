@@ -125,10 +125,6 @@ public class city_furniture extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (!hasObjVar(self, "city_id"))
-        {
-            mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_PLACE);
-        }
         else 
         {
             int city_id = getCityAtLocation(getLocation(player), 0);
@@ -147,7 +143,7 @@ public class city_furniture extends script.base_script
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU5, SID_SOUTH);
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU6, SID_EAST);
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU7, SID_WEST);
-            //@note: Below adds cardinal movements to the menu.
+            //@note: Below adds cardinal movements to the menu. -v
             int movement = mi.addRootMenu(menu_info_types.SERVER_MENU10, SID_MOVE);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU11, SID_MOVE_FORWARD);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU12, SID_MOVE_BACKWARD);
@@ -155,7 +151,9 @@ public class city_furniture extends script.base_script
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU14, SID_MOVE_RIGHT);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU15, SID_MOVE_UP);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU16, SID_MOVE_DOWN);
+            //Move Object to me -v
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU17, SID_MOVE_TO_ME);
+            //Set Object name -v
             mi.addRootMenu(menu_info_types.SERVER_MENU18, SID_NAME);
         }
         return SCRIPT_CONTINUE;
@@ -503,6 +501,10 @@ public class city_furniture extends script.base_script
         //@note: keep these in order of importance, with the most important last
         int city_id = getCityAtLocation(getLocation(player), 0);
         boolean isMayor = city.isTheCityMayor(player, city_id);
+        if (hasObjVar(self, "city_id"))
+        {
+            return false;
+        }
         if (hasObjVar(player, "city_decorator"))
         {
             return true;
