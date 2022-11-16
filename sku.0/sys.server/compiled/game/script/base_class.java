@@ -8,7 +8,6 @@ package script;
 import script.library.utils;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
@@ -1901,9 +1900,10 @@ public class base_class
      * @param avatarUri
      *         the image url to use.
      */
+
     public static void pushWebhook(String channel, String msg, String avatarUri)
     {
-        String apiKey = getConfigSetting("Discord", "webhookKey");
+        /*String apiKey = getConfigSetting("Discord", "webhookKey");
         String avatar_pic = avatarUri;
         String gally = getGalaxyName();
         DiscordWebhook webhook = new DiscordWebhook(apiKey);
@@ -1914,7 +1914,7 @@ public class base_class
             webhook.execute();
         } catch (IOException io) {
             io.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -1924,7 +1924,7 @@ public class base_class
 
     public static void pushWebhookTiny(String msg)
     {
-        String apiKey = getConfigSetting("Discord", "webhookKey");
+        /*String apiKey = getConfigSetting("Discord", "webhookKey");
         String gally = getGalaxyName();
         DiscordWebhook webhook = new DiscordWebhook(apiKey);
         webhook.setContent(msg);
@@ -1935,8 +1935,10 @@ public class base_class
         } catch (IOException io) {
             io.printStackTrace();
         }
+        */
 
     }
+
 
     public static void debugServerConsoleMsg(obj_id object, String msg)
     {

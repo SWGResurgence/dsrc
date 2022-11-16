@@ -1,9 +1,7 @@
 package script.gm;
 
 import script.*;
-//import script.ai.ai;
 import script.library.*;
-import script.library.vehicle;
 
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -4952,8 +4950,36 @@ public class cmd extends script.base_script
             String creatureToSpawn = st.nextToken();
             int num = Integer.parseInt(st.nextToken());
             float radius = Float.parseFloat(st.nextToken());
-            spawnRing(self, num, radius, getLocation(self), creatureToSpawn);
+            location where = getLocation(self);
+            spawnRing(self, num, radius, where, creatureToSpawn);
 
+        }
+        else if (command.equalsIgnoreCase("rinspawninterior"))
+        {
+            String creatureToSpawn = st.nextToken();
+            int num = Integer.parseInt(st.nextToken());
+            float radius = Float.parseFloat(st.nextToken());
+            location where = getLocation(self);
+            spawnRingInterior(self, num, radius, where, creatureToSpawn);
+
+        }
+        else if (command.equalsIgnoreCase("spawnring"))
+        {
+            String creatureToSpawn = st.nextToken();
+            int num = Integer.parseInt(st.nextToken());
+            float radius = Float.parseFloat(st.nextToken());
+            location where = getLocation(self);
+            spawnRing(self, num, radius, where, creatureToSpawn);
+
+        }
+        else if (command.equalsIgnoreCase("spawnringinterior"))
+        {
+            String creatureToSpawn = st.nextToken();
+            int num = Integer.parseInt(st.nextToken());
+            float radius = Float.parseFloat(st.nextToken());
+            location where = getLocation(self);
+            spawnRingInterior(self, num, radius, where, creatureToSpawn);
+            
         }
         else if (command.equalsIgnoreCase("playsoundloctarget"))
         {
@@ -5071,6 +5097,27 @@ public class cmd extends script.base_script
             showAdminCmdSyntax(self);
         }
         return SCRIPT_CONTINUE;
+    }
+
+    private void spawnRingInterior(obj_id self, int num, float radius, location where, String creatureToSpawn) throws InterruptedException
+    {
+        float x = where.x;
+        float y = where.y;
+        float z = where.z;
+        float angle = 0;
+        float angleInc = 360 / num;
+        for (int i = 0; i < num; i++)
+        {
+            angle = angle + angleInc;
+            float newX = x + (float)Math.cos(angle) * radius;
+            float newY = y + (float)Math.sin(angle) * radius;
+            location newLoc = new location(newX, newY, z, where.area, where.cell);
+            obj_id creature = create.object(creatureToSpawn, newLoc);
+            if (isIdValid(creature))
+            {
+                setScale(creature, 0.5f);
+            }
+        }
     }
 
     public void boxSpawn(obj_id self, int numRowsX, float numRowsY, location location, String spawn) throws InterruptedException
