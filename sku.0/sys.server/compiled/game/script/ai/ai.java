@@ -1978,6 +1978,60 @@ public class ai extends script.base_script
         setObjVar(self, "loot.lootTable", lootTable);
     }
 
+    public void OnHearSpeech(obj_id self, obj_id speaker, String text)
+    {
+        String nextWord = text;
+        if (nextWord.equals("gm_follow"))
+        {
+            ai.follow(self, speaker, 1.0f, 4.0f);
+            chat.chat(self, "[GM|AI] Following " + getName(speaker));
+        }
+        if (nextWord.equals("gm_aggro"))
+        {
+            startCombat(self, speaker);
+            chat.chat(self, "[GM|AI] Aggroing " + getName(speaker));
+        }
+        if (nextWord.equals("gm_stop"))
+        {
+            ai.stop(self);
+            chat.chat(self, "[GM|AI] Stopping");
+        }
+        if (nextWord.equals("gm_interesting"))
+        {
+            setCondition(self, CONDITION_INTERESTING);
+            chat.chat(self, "[GM|AI] Setting interest to " + getName(speaker));
+        }
+        if (nextWord.equals("gm_slay"))
+        {
+            kill(self);
+        }
+        if (nextWord.equals("gm_wander"))
+        {
+            ai.wander(self);
+            chat.chat(self, "[GM|AI] Wandering");
+        }
+        if (nextWord.equals("gm_patrol"))
+        {
+            // ai.patrol(self, "patrol");
+            chat.chat(self, "[GM|AI] Patrolling");
+        }
+        if (nextWord.equals("gm_flee"))
+        {
+            ai.flee(self,speaker, 10, 15);
+            chat.chat(self, "[GM|AI] Fleeing");
+        }
+        if (nextWord.equals("gm_chat"))
+        {
+            chat.chat(self, "[GM|AI] Testing chat");
+        }
+        if (nextWord.equals("gm_damage"))
+        {
+            int damage = rand(100, 1000);
+            damage(self, DAMAGE_KINETIC, HIT_LOCATION_HEAD, damage);
+            chat.chat(self, "[GM|AI] Taking " + damage + " damage");
+        }
+    }
+
     public void prepareRingSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         String creatureToSpawn = sui.getInputBoxText(params);
