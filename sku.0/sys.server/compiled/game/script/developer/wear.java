@@ -1,12 +1,9 @@
 package script.developer;
 
 import script.*;
-import script.library.chat;
 import script.library.city;
 import script.library.sui;
 import script.library.utils;
-
-import static script.library.ai_lib.setMood;
 
 public class wear extends script.base_script
 {
@@ -122,7 +119,7 @@ public class wear extends script.base_script
         {
             return true;
         }
-        if (isGod)
+        if (isGod(player))
         {
             return true;
         }

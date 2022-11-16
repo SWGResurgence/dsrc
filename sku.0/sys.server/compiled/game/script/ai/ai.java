@@ -1978,7 +1978,7 @@ public class ai extends script.base_script
         setObjVar(self, "loot.lootTable", lootTable);
     }
 
-    public void OnHearSpeech(obj_id self, obj_id speaker, String text)
+    public void OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         String nextWord = text;
         if (nextWord.equals("gm_follow"))
