@@ -5211,7 +5211,7 @@ item_heroic_random_bracelet_r_01_03	object/tangible/wearables/bracelet/bracelet_
 item_heroic_random_bracelet_r_01_04	object/tangible/wearables/bracelet/bracelet_s05_r.iff			75				4		item.heroic_random_stat_item		1	Champion's Bangles (right)	Champion's Bangles (right)	
 item_heroic_random_bracelet_r_01_05	object/tangible/wearables/bracelet/bracelet_s06_r.iff			75				4		item.heroic_random_stat_item		1	Champion's Metal Bracelet (right)	Champion's Metal Bracelet (right)	
 col_glass_shelving_reward_02_01	object/tangible/loot/loot_schematic/generic_limited_use.iff							1		item.loot_schematic.loot_schematic		1	Schematic for Glass Shelves	This schematic contains the specific diagrams needed to create Glass Shelves.	
-item_katiara_toy	object/tangible/loot/quest/nova_orion/stuffed_star_destroyer.iff	item						4		item.special.nomove		1	Katiara's Toy	Katiara Orion's favorite toy.	
+item_katiara_toy	object/tangible/loot/quest/nova_orion/stuffed_star_destroyer.iff	item						4		item.special.nomove,item.loot.toy		2	Katiara's Toy	Katiara Orion's favorite toy.
 item_katiara_toy_quest_item	object/tangible/loot/quest/nova_orion/stuffed_star_destroyer_quest_item.iff	item	1					4		item.special.nomove		1	Katiara's Toy	Katiara Orion's favorite toy. [Quest Item]	
 item_schematic_pistol_dd6_01_01	object/tangible/loot/loot_schematic/generic_limited_use.iff							5		item.loot_schematic.loot_schematic	2	1	Schematic: Pistol DD6	Schematic: Pistol DD6	
 chapter_8_space_mobile_02_01	object/tangible/collection/reward/space_mobile_publish_gift.iff							1				1	A Space Mobile	A space mobile depicting X-wings and TIE fighters battling for supremacy in the Naboo System.  This item can be used as decoration for your home.	

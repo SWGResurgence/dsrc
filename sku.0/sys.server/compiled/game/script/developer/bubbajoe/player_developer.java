@@ -49,13 +49,25 @@ public class player_developer extends base_script
                     groundquests.completeTask(target, questString, tok.nextToken());
                 }
             }
+            return SCRIPT_CONTINUE;
         }
-        if (cmd.equalsIgnoreCase("puppet"))
+        if (cmd.equalsIgnoreCase("reloadAllScripts"))
+        {
+            reloadAllScripts(self);
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("say"))
         {
             String speech = tok.nextToken();
-            String splitMsg = String.valueOf(split(speech, ' '));
-            chat.chat(target, splitMsg);
+            String combinedMessage = "";
+            while (tok.hasMoreTokens())
+            {
+                combinedMessage += tok.nextToken() + " ";
+            }
+            chat.chat(target, combinedMessage);
+            return SCRIPT_CONTINUE;
         }
+
         if (cmd.equalsIgnoreCase("wiki"))
         {
             //example: /developer wiki Combat Macro
@@ -99,6 +111,16 @@ public class player_developer extends base_script
         return SCRIPT_CONTINUE;
     }
 
+    private void reloadAllScripts(obj_id self) throws InterruptedException
+    {
+        debugServerConsoleMsg(self, "Reloading all scripts");
+        String[] scripts = getScriptList(self);
+        for (String script : scripts)
+        {
+            reloadScript(script);
+            broadcast(self, "Reloaded script: " + script);
+        }
+    }
     public int getPlayerLevel(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         int level = getLevel(target);

@@ -14,7 +14,7 @@ public class city_furniture extends script.base_script
     public static final string_id SID_DECO_TOO_CLOSE = new string_id("city/city", "deco_too_close");
     public static final string_id SID_NO_MORE_DECOS = new string_id("city/city", "no_more_decos");
     public static final string_id SID_ALIGN = new string_id("city/city", "align");
-    public static final string_id SID_MOVEMENT = new string_id("city/city", "movement");
+    public static final string_id SID_MOVE = new string_id("city/city", "movement");
     public static final string_id SID_NORTH = new string_id("city/city", "north");
     public static final string_id SID_SOUTH = new string_id("city/city", "south");
     public static final string_id SID_EAST = new string_id("city/city", "east");
@@ -25,6 +25,8 @@ public class city_furniture extends script.base_script
     public static final string_id SID_MOVE_RIGHT = new string_id("city/city", "right");
     public static final string_id SID_MOVE_UP = new string_id("city/city", "up");
     public static final string_id SID_MOVE_DOWN = new string_id("city/city", "down");
+    public static final string_id SID_MOVE_TO_ME = new string_id("city/city", "to_me");
+    public static final string_id SID_NAME = new string_id("city/city", "name");
     public static final string_id NO_SKILL_DECO = new string_id("city/city", "no_skill_deco");
     public static final String CITY_DECORATIONS = "datatables/city/decorations.iff";
     public static final string_id SID_CIVIC_ONLY = new string_id("city/city", "civic_only");
@@ -106,11 +108,9 @@ public class city_furniture extends script.base_script
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        int city_id = getCityAtLocation(getLocation(player), 0);
-        boolean isMayor = city.isTheCityMayor(player, city_id);
-        if (!isMayor || !isGod(player))
+        if (canPlaceItem(self, player))
         {
-            return SCRIPT_CONTINUE;
+            mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_PLACE);
         }
         region[] rgnTest = getRegionsWithBuildableAtPoint(getLocation(player), regions.BUILD_FALSE);
         if (rgnTest != null)
@@ -125,12 +125,10 @@ public class city_furniture extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (0 == getIntObjVar(self, "city_id"))
-        {
-            mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_PLACE);
-        }
         else 
         {
+            int city_id = getCityAtLocation(getLocation(player), 0);
+            boolean isMayor = city.isTheCityMayor(player, city_id);
             if (getOwner(self) == player)
             {
                 mi.addRootMenu(menu_info_types.ITEM_PICKUP, SID_MT_REMOVE);
@@ -138,20 +136,25 @@ public class city_furniture extends script.base_script
             else if (isMayor)
             {
                 mi.addRootMenu(menu_info_types.SERVER_MENU2, SID_MT_REMOVE);
+
             }
             int menu = mi.addRootMenu(menu_info_types.SERVER_MENU3, SID_ALIGN);
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU4, SID_NORTH);
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU5, SID_SOUTH);
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU6, SID_EAST);
             mi.addSubMenu(menu, menu_info_types.SERVER_MENU7, SID_WEST);
-            //@note: Below adds cardinal movements to the menu.
-            int movement = mi.addRootMenu(menu_info_types.SERVER_MENU10, SID_MOVEMENT);
+            //@note: Below adds cardinal movements to the menu. -v
+            int movement = mi.addRootMenu(menu_info_types.SERVER_MENU10, SID_MOVE);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU11, SID_MOVE_FORWARD);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU12, SID_MOVE_BACKWARD);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU13, SID_MOVE_LEFT);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU14, SID_MOVE_RIGHT);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU15, SID_MOVE_UP);
             mi.addSubMenu(movement, menu_info_types.SERVER_MENU16, SID_MOVE_DOWN);
+            //Move Object to me -v
+            mi.addSubMenu(movement, menu_info_types.SERVER_MENU17, SID_MOVE_TO_ME);
+            //Set Object name -v
+            mi.addRootMenu(menu_info_types.SERVER_MENU18, SID_NAME);
         }
         return SCRIPT_CONTINUE;
     }
@@ -159,11 +162,11 @@ public class city_furniture extends script.base_script
     {
         location loc = getLocation(self);
         sendDirtyObjectMenuNotification(self);
-        int movementRate = getIntObjVar(self, "city.movementRate");
-        if (movementRate == 0)
+        if (!hasObjVar(player, "city.movementRate"))
         {
-            movementRate = 1;
+            setObjVar(player, "city.movementRate", 1);
         }
+        int movementRate = getIntObjVar(player, "city.movementRate");
         int city_id = city.checkMayorCity(player, false);
         if (city_id == 0)
         {
@@ -199,7 +202,7 @@ public class city_furniture extends script.base_script
         }
         else if (item == menu_info_types.SERVER_MENU10)
         {
-            sui.inputbox(player, "Please specify movement increment.", "handleMovementIncrement");
+            sui.inputbox(self, player, "Please enter a three digit number to use when moving decorations.. \n\n\n This value cannot be greater than 250.,", "Decoration Movement", "handleMovementIncrement", 3, false, "1");
         }
         else if (item == menu_info_types.SERVER_MENU11)
         {
@@ -223,17 +226,34 @@ public class city_furniture extends script.base_script
         }
         else if(item == menu_info_types.SERVER_MENU15)
         {
+            if (movementRate > 250)
+            {
+                broadcast(player, "You cannot move a decoration UP more than 250 meters at a time.");
+            }
             loc.y = loc.y + movementRate;
             setLocation(self, loc);
         }
         else if(item == menu_info_types.SERVER_MENU16)
         {
+            if (movementRate > 250)
+            {
+                broadcast(player, "You cannot move a decoration DOWN more than 250 meters at a time.");
+            }
             loc.y = loc.y - movementRate;
             setLocation(self, loc);
         }
+        else if(item == menu_info_types.SERVER_MENU17)
+        {
+            location pLoc = getLocation(player);
+            setLocation(self, pLoc);
+        }
+        else if(item == menu_info_types.SERVER_MENU18)
+        {
+            sui.inputbox(self, player, "Please enter a name for this decoration. \n\n\n Enter one space into the field for this object to have no name,", "Decoration Name", "handleDecorationName", 126, false, getName(self));
+        }
         return SCRIPT_CONTINUE;
     }
-    public int handleMovementIncrease(obj_id self, dictionary params) throws InterruptedException
+    public int handleMovementIncrement(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
         {
@@ -251,32 +271,30 @@ public class city_furniture extends script.base_script
             broadcast(player, "Amount must be greater than or equal to 1.");
             return SCRIPT_CONTINUE;
         }
-        if (amount > 350)
+        if (amount > 250)
         {
-            broadcast(player, "Amount must be less than or equal to 350.");
+            broadcast(player, "Amount must be less than or equal to 250.");
             return SCRIPT_CONTINUE;
         }
         setObjVar(player, "city.movementRate", amount);
-        sendSystemMessageTestingOnly(player, "Attached.");
+        sendSystemMessageTestingOnly(player, "Movement rate set: " + amount);
         return SCRIPT_CONTINUE;
+    }
+    public void handleDecorationName(obj_id self, dictionary params) throws InterruptedException
+    {
+        obj_id player = sui.getPlayerId(params);
+        String name = sui.getInputBoxText(params);
+        if (name == null || name.equals(""))
+        {
+            setName(self, "");
+        }
+        setObjVar(self, "city.decorationName", name);
+        setName(self, name);
+        broadcast(player, "Decoration has been renamed to: " + name);
     }
     public void placeDecoration(int city_id, obj_id player, obj_id self) throws InterruptedException
     {
-        String command = null;
-        String[] templates = dataTableGetStringColumn(CITY_DECORATIONS, "TEMPLATE");
-        for (int i = 0; i < templates.length; i++)
-        {
-            if (templates[i].equals(getTemplateName(self)))
-            {
-                command = dataTableGetString(CITY_DECORATIONS, i, "COMMAND");
-                break;
-            }
-        }
-        if (command == null)
-        {
-            return;
-        }
-        if (!hasCommand(player, command))
+        if (!hasCommand(player, "grantZoningRights"))
         {
             sendSystemMessage(player, NO_SKILL_DECO);
             return;
@@ -477,5 +495,32 @@ public class city_furniture extends script.base_script
             moveToOfflinePlayerInventoryAndUnload(item, player);
         }
         return isValidObject;
+    }
+    public boolean canPlaceItem(obj_id self, obj_id player) throws InterruptedException
+    {
+        //@note: keep these in order of importance, with the most important last
+        int city_id = getCityAtLocation(getLocation(player), 0);
+        boolean isMayor = city.isTheCityMayor(player, city_id);
+        if (hasObjVar(self, "city_id"))
+        {
+            return false;
+        }
+        if (hasObjVar(player, "city_decorator"))
+        {
+            return true;
+        }
+        if (city.isMilitiaOfCity(player, city_id))
+        {
+            return true;
+        }
+        if (isMayor)
+        {
+            return true;
+        }
+        if (isGod(player))
+        {
+            return true;
+        }
+        else return false;
     }
 }
