@@ -3282,6 +3282,10 @@ public class performance extends script.base_script
     }
     public static boolean hasMaxHolo(obj_id actor) throws InterruptedException
     {
+        if (isGod(actor))
+        {
+            return false;
+        }
         if (!isIdValid(actor))
         {
             return true;

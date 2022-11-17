@@ -12,16 +12,17 @@ public class vehicle_control_device extends script.base_script
     public static final String VCDPING_VCD_SCRIPT_NAME = "systems.vehicle_system.vcd_ping_response";
     public static final String MESSAGE_VEHICLE_ID = "vehicleId";
     public static final string_id SID_FAILED_TO_CALL = new string_id("pet/pet_menu", "failed_to_call_vehicle");
-    public static final String[] TCG_VEHICLE_UPDATE_LIST = 
-    {
-        "object/intangible/vehicle/landspeeder_organa_pcd.iff",
-        "object/intangible/vehicle/mechno_chair_pcd.iff",
-        "object/intangible/vehicle/sith_speeder_pcd.iff"
-    };
+    public static final String[] TCG_VEHICLE_UPDATE_LIST =
+            {
+                    "object/intangible/vehicle/landspeeder_organa_pcd.iff",
+                    "object/intangible/vehicle/mechno_chair_pcd.iff",
+                    "object/intangible/vehicle/sith_speeder_pcd.iff"
+            };
     public static final int TCG_PCD_MAX_HEALTH = 15000;
     public static final int TCG_PCD_OLD_MAX_HEALTH = 1500;
     public static final int TCG_PCD_OLD_NEW_DIFFERENCE = 13500;
     public static final String TCG_VEHICLE_PCD_UPDATED = "tcg.vehicle_pcd_maxhealth_update";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (debug)
@@ -59,7 +60,7 @@ public class vehicle_control_device extends script.base_script
             {
                 CustomerServiceLog("40K_HAM_vehicle_fixup", "vehicle PCD " + getName(self) + " (" + self + ") with current hp (" + (hasObjVar(self, "attrib.hit_points") ? Integer.toString(getIntObjVar(self, "attrib.hit_points")) : "not set") + ") max hp (" + (hasObjVar(self, "attrib.max_hp") ? Integer.toString(getIntObjVar(self, "attrib.max_hp")) : "not set") + ") owned by %TU " + "fixed to current hp (500) max hp (1500)", owner);
             }
-            else 
+            else
             {
                 CustomerServiceLog("40K_HAM_vehicle_fixup", "vehicle PCD " + getName(self) + " (" + self + ") with current hp (" + (hasObjVar(self, "attrib.hit_points") ? Integer.toString(getIntObjVar(self, "attrib.hit_points")) : "not set") + ") max hp (" + (hasObjVar(self, "attrib.max_hp") ? Integer.toString(getIntObjVar(self, "attrib.max_hp")) : "not set") + ") " + "fixed to current hp (500) max hp (1500)");
             }
@@ -71,7 +72,7 @@ public class vehicle_control_device extends script.base_script
         {
             setCount(self, 0);
         }
-        else 
+        else
         {
             setCount(self, 1);
         }
@@ -85,8 +86,10 @@ public class vehicle_control_device extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String tcgPcd = "";
-        for (String s : TCG_VEHICLE_UPDATE_LIST) {
-            if (!s.startsWith(templateName)) {
+        for (String s : TCG_VEHICLE_UPDATE_LIST)
+        {
+            if (!s.startsWith(templateName))
+            {
                 continue;
             }
             tcgPcd = s;
@@ -102,6 +105,7 @@ public class vehicle_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id myContainer = getContainedBy(self);
@@ -116,6 +120,7 @@ public class vehicle_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.VEHICLE_GENERATE)
@@ -133,7 +138,7 @@ public class vehicle_control_device extends script.base_script
                     sendSystemMessage(player, pet_lib.SID_SYS_CANT_CALL_ANOTHER_RIDEABLE);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     vehicle.storeVehicle(self, player);
                     callable.restoreCallable(player);
@@ -154,7 +159,7 @@ public class vehicle_control_device extends script.base_script
                     CustomerServiceLog("vehicle_bug", "VCD-OnObjectMenuSelect::Sent signal to destroy with ID: " + dict.getInt("signalId"));
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     callable.setCDCallable(self, null);
                     sendDirtyObjectMenuNotification(self);
@@ -189,6 +194,10 @@ public class vehicle_control_device extends script.base_script
                 callable.storeCallable(player, objCallable);
             }
             obj_id vehicle = createVehicle(player, self);
+            if (hasObjVar(self, "mechanic"))
+            {
+                setName(self, getName(self) + "(modified)");
+            }
             if (!isIdValid(vehicle))
             {
                 LOG("vehicle-bug", "OnObjectMenuSelect(): failed to create vehicle");
@@ -207,26 +216,27 @@ public class vehicle_control_device extends script.base_script
                     callable.restoreCallable(player);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     callable.setCDCallable(self, null);
                     sendDirtyObjectMenuNotification(self);
                     LOG("vehicle-bug", "OnObjectMenuSelect(): vcd id=[" + self + "] selected VEHICLE_STORE but the scriptvar on the VCD is INVALID, setting count to zero anyway.");
                 }
             }
-            else 
+            else
             {
                 sendDirtyObjectMenuNotification(self);
                 LOG("vehicle-bug", "OnObjectMenuSelect(): vcd id=[" + self + "] selected VEHICLE_STORE but the VCD has no scriptvar, setting count to zero anyway.");
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             LOG("", "Radial menu selection not in available list: " + item);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void destroyCurrentPet(obj_id petControlDevice) throws InterruptedException
     {
         if (callable.hasCDCallable(petControlDevice))
@@ -251,6 +261,7 @@ public class vehicle_control_device extends script.base_script
         }
         callable.setCDCallable(petControlDevice, null);
     }
+
     public int handleStorePetRequest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id currentPet = callable.getCDCallable(self);
@@ -267,6 +278,7 @@ public class vehicle_control_device extends script.base_script
         destroyCurrentPet(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (hasScript(item, "ai.pet_control_device"))
@@ -281,6 +293,7 @@ public class vehicle_control_device extends script.base_script
         debugServerConsoleMsg(null, "**********  ONABOUTTORECIEVEITEM triggered on the pcd script. We're NOT allowing it, as it appears to come from something that isIdValid.");
         return SCRIPT_OVERRIDE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "pet.releasingPet"))
@@ -307,6 +320,7 @@ public class vehicle_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id master = getContainedBy(sourceContainer);
@@ -317,6 +331,7 @@ public class vehicle_control_device extends script.base_script
         destroyCurrentPet(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id datapad = getContainedBy(self);
@@ -332,9 +347,11 @@ public class vehicle_control_device extends script.base_script
         sendSystemMessage(master, new string_id("pet/pet_menu", "device_added"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
-        if(!isIdValid(self) || !exists(self) || self == null || self.equals(obj_id.NULL_ID)){
+        if (!isIdValid(self) || !exists(self) || self == null || self.equals(obj_id.NULL_ID))
+        {
             CustomerServiceLog("vehicle-bug", "Unable to get vehicle (" + self + ") or vehicle's location (" + getLocation(self)
                     + ").  Player (" + getPlayerFullName(player) + ":" + player + "), vehicle template (" + getTemplateName(self)
                     + "),  Player's location (" + getLocation(player) + ").");
@@ -375,7 +392,7 @@ public class vehicle_control_device extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        if(hasObjVar(self, vehicle.VAR_LAVA_RESISTANT))
+        if (hasObjVar(self, vehicle.VAR_LAVA_RESISTANT))
         {
             names[idx] = "lava_resistance";
             attribs[idx] = "100%";
@@ -387,6 +404,7 @@ public class vehicle_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isSameFaction(obj_id petControlDevice) throws InterruptedException
     {
         obj_id datapad = getContainedBy(petControlDevice);
@@ -426,6 +444,7 @@ public class vehicle_control_device extends script.base_script
         }
         return true;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id newMaster = getContainedBy(destContainer);
@@ -463,6 +482,7 @@ public class vehicle_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getLevelFromPetControlDevice(obj_id petControlDevice) throws InterruptedException
     {
         int growthStage = 10;
@@ -486,6 +506,7 @@ public class vehicle_control_device extends script.base_script
         }
         return maxDiff;
     }
+
     public int handlePetDeathblow(obj_id self, dictionary params) throws InterruptedException
     {
         int vitality = getIntObjVar(self, "pet.vitality");
@@ -497,11 +518,13 @@ public class vehicle_control_device extends script.base_script
         setObjVar(self, "pet.vitality", vitality);
         return SCRIPT_CONTINUE;
     }
+
     public int handleFlagDeadCreature(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "pet.isDead", true);
         return SCRIPT_CONTINUE;
     }
+
     public boolean petIsDead(obj_id petControlDevice, obj_id player, int petType) throws InterruptedException
     {
         if (hasObjVar(petControlDevice, "pet.isDead"))
@@ -516,6 +539,7 @@ public class vehicle_control_device extends script.base_script
         }
         return false;
     }
+
     public boolean validatePetStats(obj_id pcd, obj_id player) throws InterruptedException
     {
         if (!hasObjVar(pcd, "pet.crafted"))
@@ -561,6 +585,7 @@ public class vehicle_control_device extends script.base_script
         }
         return status;
     }
+
     public int handleValidatePet(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id currentPet = callable.getCDCallable(self);
@@ -573,7 +598,7 @@ public class vehicle_control_device extends script.base_script
                 {
                     destroyObject(calledPet);
                 }
-                else 
+                else
                 {
                     messageTo(calledPet, "handlePackRequest", null, 1, false);
                 }
@@ -594,17 +619,19 @@ public class vehicle_control_device extends script.base_script
             {
                 destroyObject(calledPet);
             }
-            else 
+            else
             {
                 messageTo(calledPet, "handlePackRequest", null, 1, false);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleGrowthChoice(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public obj_id createVehicle(obj_id player, obj_id petControlDevice) throws InterruptedException
     {
         debugServerConsoleMsg(player, "+++ VEHICLE_CONTROL_DEVICE . createVehicle +++ Entered PCD/Pet creation function.");
@@ -654,7 +681,7 @@ public class vehicle_control_device extends script.base_script
             debugServerConsoleMsg(null, "+++ VEHICLE_CONTROL_DEVICE . createVehicle +++ makePetMountable(pet) returned FALSE.");
             return pet;
         }
-        else 
+        else
         {
             setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
             setObjVar(pet, "ai.pet.trainedMount", 1);
@@ -683,30 +710,30 @@ public class vehicle_control_device extends script.base_script
                         switch (cnt)
                         {
                             case 5:
-                            customizationFadeToWhite(pet, 0.15f);
-                            sendSystemMessage(player, pet_lib.SID_SYS_VEH_CUST_FADING);
-                            break;
+                                customizationFadeToWhite(pet, 0.15f);
+                                sendSystemMessage(player, pet_lib.SID_SYS_VEH_CUST_FADING);
+                                break;
                             case 4:
-                            customizationFadeToWhite(pet, 0.20f);
-                            sendSystemMessage(player, pet_lib.SID_SYS_VEH_CUST_FADING);
-                            break;
+                                customizationFadeToWhite(pet, 0.20f);
+                                sendSystemMessage(player, pet_lib.SID_SYS_VEH_CUST_FADING);
+                                break;
                             case 3:
-                            customizationFadeToWhite(pet, 0.25f);
-                            sendSystemMessage(player, pet_lib.SID_SYS_VEH_CUST_FADING);
-                            break;
+                                customizationFadeToWhite(pet, 0.25f);
+                                sendSystemMessage(player, pet_lib.SID_SYS_VEH_CUST_FADING);
+                                break;
                             case 2:
-                            customizationFadeToWhite(pet, 0.30f);
-                            sendSystemMessage(player, pet_lib.SID_SYS_VEH_CUST_FADING);
-                            break;
+                                customizationFadeToWhite(pet, 0.30f);
+                                sendSystemMessage(player, pet_lib.SID_SYS_VEH_CUST_FADING);
+                                break;
                             case 1:
-                            customizationFadeToWhite(pet, 0.35f);
-                            sendSystemMessage(player, pet_lib.SID_SYS_VEH_CUST_FADING);
-                            break;
+                                customizationFadeToWhite(pet, 0.35f);
+                                sendSystemMessage(player, pet_lib.SID_SYS_VEH_CUST_FADING);
+                                break;
                             case 0:
-                            customizationFadeToWhite(pet, 0.40f);
-                            sendSystemMessage(player, pet_lib.SID_SYS_VEH_CUST_GONE);
-                            removeObjVar(petControlDevice, vehicle.VAR_PALVAR_CNT);
-                            break;
+                                customizationFadeToWhite(pet, 0.40f);
+                                sendSystemMessage(player, pet_lib.SID_SYS_VEH_CUST_GONE);
+                                removeObjVar(petControlDevice, vehicle.VAR_PALVAR_CNT);
+                                break;
                         }
                     }
                 }
@@ -721,7 +748,7 @@ public class vehicle_control_device extends script.base_script
                 prose_package pp = prose.getPackage(vehicle.SID_SYS_USES_LEFT, uses);
                 sendSystemMessageProse(player, pp);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, vehicle.SID_SYS_USES_LEFT_LAST);
             }
@@ -736,13 +763,14 @@ public class vehicle_control_device extends script.base_script
         {
             vehicle.setHoverHeight(pet, 4);
         }
-        if(vehicle.isLavaResistant(petControlDevice))
+        if (vehicle.isLavaResistant(petControlDevice))
         {
-          setObjVar(pet, vehicle.VAR_LAVA_RESISTANT, true);
+            setObjVar(pet, vehicle.VAR_LAVA_RESISTANT, true);
         }
         callable.setCallableLinks(player, petControlDevice, pet);
         return pet;
     }
+
     public void customizationFadeToWhite(obj_id pet, float percent) throws InterruptedException
     {
         ranged_int_custom_var[] ricv = hue.getPalcolorVars(pet);
@@ -752,8 +780,10 @@ public class vehicle_control_device extends script.base_script
         {
             return;
         }
-        for (ranged_int_custom_var ranged_int_custom_var : ricv) {
-            if (ranged_int_custom_var.isPalColor()) {
+        for (ranged_int_custom_var ranged_int_custom_var : ricv)
+        {
+            if (ranged_int_custom_var.isPalColor())
+            {
                 pcv = utils.addElement(pcv, (palcolor_custom_var) ranged_int_custom_var);
             }
         }
@@ -761,7 +791,8 @@ public class vehicle_control_device extends script.base_script
         {
             return;
         }
-        for (Object o : pcv) {
+        for (Object o : pcv)
+        {
             color old_color = ((palcolor_custom_var) o).getSelectedColor();
             int old_r = old_color.getR();
             int old_g = old_color.getG();
@@ -779,6 +810,7 @@ public class vehicle_control_device extends script.base_script
             ((palcolor_custom_var) o).setToClosestColor(new_color);
         }
     }
+
     public int handleRemoveCurrentVehicle(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id sendingVehicleId = params.getObjId(MESSAGE_VEHICLE_ID);
@@ -803,18 +835,19 @@ public class vehicle_control_device extends script.base_script
                     LOG("vcd-debug", "vehicle_control_device.handleRemoveCurrentVehicle(): vcd id=[" + self + "]: removing scriptvar requested by vehicle id=[" + sendingVehicleId + "]");
                 }
             }
-            else 
+            else
             {
                 LOG("vcd", "vehicle_control_device.handleRemoveCurrentVehicle(): vcd id=[" + self + "]: ignoring request from vehicle id=[" + sendingVehicleId + "]: VCD thinks it is controlling a different vehicle, id=[" + controlledVehicleId + "]");
             }
         }
-        else 
+        else
         {
             debugServerConsoleMsg(null, "+++ vehicle_control_device.messageHandler handleRemoveCurrentVehicle +++ WHOOPS! no callable.current scriptvar on VCD.");
             debugServerConsoleMsg(null, "+++ vehicle_control_device.messageHandler handleRemoveCurrentVehicle +++ How'd that happen?.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleStoreVehicleDamage(obj_id self, dictionary params) throws InterruptedException
     {
         int hp = params.getInt("hp");
@@ -822,6 +855,7 @@ public class vehicle_control_device extends script.base_script
         vehicle.storeDamage(self, hp, penalty);
         return SCRIPT_CONTINUE;
     }
+
     public boolean updateTcgVehicleMaxHealth(obj_id tcgVehiclePcd) throws InterruptedException
     {
         if (!isValidId(tcgVehiclePcd) || !exists(tcgVehiclePcd))
@@ -849,12 +883,12 @@ public class vehicle_control_device extends script.base_script
                 int damage = TCG_PCD_OLD_MAX_HEALTH - currentHp;
                 currentHp = TCG_PCD_MAX_HEALTH - damage;
             }
-            else 
+            else
             {
                 currentHp = TCG_PCD_MAX_HEALTH;
             }
         }
-        else 
+        else
         {
             currentHp = TCG_PCD_MAX_HEALTH;
         }
@@ -867,6 +901,7 @@ public class vehicle_control_device extends script.base_script
         setObjVar(tcgVehiclePcd, TCG_VEHICLE_PCD_UPDATED, true);
         return true;
     }
+
     public int modifyPaletteIndex(int idx) throws InterruptedException
     {
         int series_idx = idx % 8;
@@ -875,5 +910,52 @@ public class vehicle_control_device extends script.base_script
             return idx;
         }
         return idx - 1;
+    }
+
+    public void tuneVehicle(obj_id self, obj_id player, obj_id vehid) throws InterruptedException
+    {
+        if (isIdValid(vehid))
+        {
+            float speed_min = getFloatObjVar(player, "mechanic.modifer.speed_min");
+            float speed_max = getFloatObjVar(player, "mechanic.modifer.speed_max");
+            float height = getFloatObjVar(player, "mechanic.modifer.height");
+            float acceleration = getFloatObjVar(player, "mechanic.modifer.acceleration");
+            float acceleration_max = getFloatObjVar(player, "mechanic.modifer.acceleration_max");
+            float banking = getFloatObjVar(player, "mechanic.modifer.banking");
+            float turning = getFloatObjVar(player, "mechanic.modifer.turning");
+            float turning_max = getFloatObjVar(player, "mechanic.modifer.turning");
+            float deceleration = getFloatObjVar(player, "mechanic.modifer.deceleration");
+            float glide = getFloatObjVar(player, "mechanic.modifer.glide");
+            float autolevelling = getFloatObjVar(player, "mechanic.modifer.autolevelling");
+            float damping_height = getFloatObjVar(player, "mechanic.modifer.damping_height");
+            float damping_pitch = getFloatObjVar(player, "mechanic.modifer.damping_pitch");
+            float damping_roll = getFloatObjVar(player, "mechanic.modifer.damping_roll");
+            boolean strafe = getBooleanObjVar(player, "mechanic.modifer.strafe");
+            obj_id vehicleToCheck = getObjIdObjVar(player, "mechanic.targetVehicle");
+            if (isIdValid(vehicleToCheck))
+            {
+                if (vehicleToCheck == vehid)
+                {
+                    vehicle.setMinimumSpeed(vehid, speed_min);
+                    vehicle.setMaximumSpeed(vehid, speed_max);
+                    vehicle.setHoverHeight(vehid, height);
+                    vehicle.setAccelMin(vehid, acceleration);
+                    vehicle.setAccelMax(vehid, acceleration_max);
+                    vehicle.setBankingAngle(vehid, banking);
+                    vehicle.setTurnRateMin(vehid, turning);
+                    vehicle.setTurnRateMax(vehid, turning_max);
+                    vehicle.setDecel(vehid, deceleration);
+                    vehicle.setGlide(vehid, glide);
+                    vehicle.setAutoLevelling(vehid, autolevelling);
+                    vehicle.setDampingHeight(vehid, damping_height);
+                    vehicle.setDampingPitch(vehid, damping_pitch);
+                    vehicle.setDampingRoll(vehid, damping_roll);
+                    vehicle.setStrafe(vehid, strafe);
+                    debugConsoleMsg(player, "Vehicle Tuned");
+
+
+                }
+            }
+        }
     }
 }

@@ -1864,14 +1864,15 @@ public class ai extends script.base_script
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        if (isGod(player) && !isInvulnerable(self))
+        if (isGod(player) && !isInvulnerable(self) && !isPlayer(self))
         {
             int root = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("sui", "loot_control"));
             mi.addSubMenu(root, menu_info_types.SERVER_MENU21, new string_id("sui", "loot_increment"));
             mi.addSubMenu(root, menu_info_types.SERVER_MENU22, new string_id("sui", "loot_decrement"));
+            mi.addSubMenu(root, menu_info_types.SERVER_MENU24, new string_id("sui", "loot_set_table"));
             int root2 = mi.addRootMenu(menu_info_types.SERVER_MENU23, new string_id("sui", "peace"));
-            int root3 = mi.addRootMenu(menu_info_types.SERVER_MENU24, new string_id("sui", "loot_table"));
-            int root4 = mi.addRootMenu(menu_info_types.SERVER_MENU25, new string_id("sui", "make_grid"));
+            int root4 = mi.addRootMenu(menu_info_types.SERVER_MENU25, new string_id("sui", "spawn_functions"));
+            mi.addSubMenu(root4, menu_info_types.SERVER_MENU26, new string_id("sui", "spawn_ring"));
             return SCRIPT_CONTINUE;
         }
         if (pet_lib.isPet(self) || beast_lib.isBeast(self))
@@ -1948,9 +1949,13 @@ public class ai extends script.base_script
         }
         if (item == menu_info_types.SERVER_MENU25)
         {
-            String prompt = "Enter creature name to make grid:";
-            sui.inputbox(player, prompt, "handleGridInput");
             return SCRIPT_CONTINUE;
+        }
+        if (item == menu_info_types.SERVER_MENU26)
+        {
+            String prompt = "Enter creature name to make a ring spawn.";
+            sui.inputbox(self, player, prompt, "prepareRingSpawn");
+
         }
         return SCRIPT_CONTINUE;
     }
@@ -1973,27 +1978,89 @@ public class ai extends script.base_script
         setObjVar(self, "loot.lootTable", lootTable);
     }
 
-    public void handleGrid(obj_id self, dictionary params) throws InterruptedException
+    public void OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
-        String grid = sui.getInputBoxText(params);
-        spawnCreaturesInCircle(self, grid, 24, 46.0f);
+        String nextWord = text;
+        if (nextWord.equals("gm_follow"))
+        {
+            ai.follow(self, speaker, 1.0f, 4.0f);
+            chat.chat(self, "[GM|AI] Following " + getName(speaker));
+        }
+        if (nextWord.equals("gm_aggro"))
+        {
+            startCombat(self, speaker);
+            chat.chat(self, "[GM|AI] Aggroing " + getName(speaker));
+        }
+        if (nextWord.equals("gm_stop"))
+        {
+            ai.stop(self);
+            chat.chat(self, "[GM|AI] Stopping");
+        }
+        if (nextWord.equals("gm_interesting"))
+        {
+            setCondition(self, CONDITION_INTERESTING);
+            chat.chat(self, "[GM|AI] Setting interest to " + getName(speaker));
+        }
+        if (nextWord.equals("gm_slay"))
+        {
+            kill(self);
+        }
+        if (nextWord.equals("gm_wander"))
+        {
+            ai.wander(self);
+            chat.chat(self, "[GM|AI] Wandering");
+        }
+        if (nextWord.equals("gm_patrol"))
+        {
+            // ai.patrol(self, "patrol");
+            chat.chat(self, "[GM|AI] Patrolling");
+        }
+        if (nextWord.equals("gm_flee"))
+        {
+            ai.flee(self,speaker, 10, 15);
+            chat.chat(self, "[GM|AI] Fleeing");
+        }
+        if (nextWord.equals("gm_chat"))
+        {
+            chat.chat(self, "[GM|AI] Testing chat");
+        }
+        if (nextWord.equals("gm_damage"))
+        {
+            int damage = rand(100, 1000);
+            damage(self, DAMAGE_KINETIC, HIT_LOCATION_HEAD, damage);
+            chat.chat(self, "[GM|AI] Taking " + damage + " damage");
+        }
     }
 
-    public void spawnCreaturesInCircle(obj_id self, String creatureName, int numCreatures, float radius) throws InterruptedException
+    public void prepareRingSpawn(obj_id self, dictionary params) throws InterruptedException
     {
-        location here = getLocation(self);
-        float angle = 0.0f;
-        float angleIncrement = 360.0f / numCreatures;
-        for (int i = 0; i < numCreatures; i++)
+        String creatureToSpawn = sui.getInputBoxText(params);
+        obj_id player = sui.getPlayerId(params);
+        if (creatureToSpawn == null)
         {
-            location spawnLoc = new location(here.x + (radius * (float) Math.cos(angle)), here.y, here.z + (radius * (float) Math.sin(angle)), here.area, null);
-            obj_id creature = create.object(creatureName, spawnLoc);
-            if (isIdValid(creature))
-            {
-                faceTo(creature, self);
-            }
-            angle += angleIncrement;
+            broadcast(player, "Creature name is null.");
+            return;
         }
+        spawnRing(self, 12, 14.0f, getLocation(self), creatureToSpawn);
+    }
+
+    public int spawnRing(obj_id self, int numMobs, float radius, location loc, String creatureName) throws InterruptedException
+    {
+        if (!isIdValid(self) || !exists(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        float x = loc.x;
+        float z = loc.z;
+        for (int i = 0; i < numMobs; i++)
+        {
+            float angle = (float) (i * (360 / numMobs));
+            x = loc.x + (float) Math.cos(angle) * radius;
+            z = loc.z + (float) Math.sin(angle) * radius;
+            obj_id creatureObj = create.object(creatureName, new location(x, getHeightAtLocation(x,z), z, loc.area));
+            faceTo(creatureObj, self);
+        }
+        return SCRIPT_CONTINUE;
     }
 
     public int OnDestroy(obj_id self) throws InterruptedException
@@ -2522,5 +2589,20 @@ public class ai extends script.base_script
     {
         LOG(LOGGING_CATEGORY, msg);
         return true;
+    }
+    public String[] SPEECH_RESPONSES = {
+            "Hey.",
+            "Hello.",
+            "Greetings.",
+            "Hi.",
+            "Howdy.",
+            "What's up?",
+            "How are you?",
+            "Can't talk right now."
+    };
+    public String getRandomArray(String[] array) throws InterruptedException
+    {
+        int random = rand(0, array.length - 1);
+        return array[random];
     }
 }

@@ -324,6 +324,42 @@ public class base_player extends script.base_script
                     }
             };
 
+    public static void handleReadyCheck(obj_id self, dictionary params) throws InterruptedException
+    {
+        obj_id target = params.getObjId("readyCheckLeaderId");
+        obj_id player = sui.getPlayerId(params);
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_OK)
+        {
+            sendSystemMessage(target, getPlayerName(player) + " is ready!", null);
+            chat.chat(self, "Ready!");
+        }
+        if (bp == sui.BP_CANCEL)
+        {
+            sendSystemMessage(target, getPlayerName(player) + " is not ready!", null);
+            chat.chat(self, "Not Ready!");
+        }
+    }
+
+    public static void generateHousingList(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        String[] fileList = {
+                ""
+        };
+        ArrayList<String> ar = new ArrayList<String>(Arrays.asList(fileList));
+        obj_id[] houseItems = getContents(getContainedBy(self));
+        String cellName = getCellName(getContainedBy(self));
+        for (obj_id houseItem : houseItems)
+        {
+            String currentLoc = getLocation(self).toString();
+            String itemName = getName(self);
+            float heading = getYaw(self);
+            String line = itemName + "\t" + currentLoc + "\t" + heading + "\t" + cellName + "\n";
+            ar.add(line);
+        }
+        saveTextOnClient(self, "export/housing_layout.txt", ar.toString());
+    }
+
     public int OnCustomizeFinished(obj_id self, obj_id object, String params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "armor_colorize.tool_oid") || utils.hasScriptVar(self, "structure_colorize.tool_oid"))
@@ -1275,7 +1311,7 @@ public class base_player extends script.base_script
         {
             int pid = mi.addRootMenu(menu_info_types.SERVER_MENU30, new string_id("sui", "god_menu"));
             mi.addSubMenu(pid, menu_info_types.SERVER_MENU31, new string_id("sui", "toggle_freeze_player"));
-            mi.addSubMenu(pid, menu_info_types.SERVER_MENU32, new string_id("sui", "diagnose_player"));
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU32, new string_id("sui", "list_stats"));
         }
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.COMBAT_DEATH_BLOW);
         if (mid == null)
@@ -1379,32 +1415,28 @@ public class base_player extends script.base_script
         }
         else if (item == menu_info_types.SERVER_MENU31)
         {
-           if (getState(player, STATE_FROZEN) == 1)
-           {
-               setState(player, STATE_FROZEN, false);
-           }
-           else
-           {
-               setState(player, STATE_FROZEN, true);
-           }
+            setState(player, STATE_FROZEN, getState(player, STATE_FROZEN) != 1);
         }
         else if (item == menu_info_types.SERVER_MENU32)
         {
-            String prompt = "------------------ INFO PAGE: " + getName(player) + " ------------------";
-            prompt += "Player Name: " + getName(player) + "\n";
-            prompt += "Player OID: " + player + "\n";
-            prompt += "Player Location: " + getLocation(player) + "\n";
-            prompt += "------------------ " + "Character Info" + " ------------------";
-            prompt += "Player Posture: " + getPosture(player) + "\n";
-            prompt += "Player Health: " + getAttrib(player, HEALTH) + "\n";
-            prompt += "Player Action: " + getAttrib(player, ACTION) + "\n";
-            prompt += "Player Money (total): " + getTotalMoney(player) + "\n";
-            prompt += "Player Money (bank): " + getBankBalance(player) + "\n";
-            prompt += "Player Money (cash): " + getCashBalance(player) + "\n";
-            prompt += "Player Weight: " + getVolumeFree(player) + "\n";
-            prompt += "------------------ " + "Faction Stats" + " ------------------";
-            prompt += "Player Faction: " + factions.getFaction(player) + "\n";
-            prompt += "Player Faction Standing: " + factions.getFactionStanding(player, factions.getFaction(player)) + "\n";
+            String prompt = "------------------ INFO PAGE: " + getName(self) + " ------------------" + "\n";
+            prompt += "Player Name: " + getName(self) + "\n";
+            prompt += "Player OID: " + self + "\n";
+            prompt += "Player Location: " + getLocation(self) + "\n";
+            prompt += "------------------ " + "Character Info" + " ------------------" + "\n";
+            prompt += "Player Posture: " + getPosture(self) + "\n";
+            prompt += "Player Health: " + getAttrib(self, HEALTH) + "\n";
+            prompt += "Player Action: " + getAttrib(self, ACTION) + "\n";
+            prompt += "Player Money (total): " + getTotalMoney(self) + "\n";
+            prompt += "Player Money (bank): " + getBankBalance(self) + "\n";
+            prompt += "Player Money (cash): " + getCashBalance(self) + "\n";
+            prompt += "Player Weight: " + getVolumeFree(self) + "\n";
+            prompt += "------------------ " + "Faction Stats" + " ------------------" + "\n";
+            prompt += "Player Faction: " + factions.getFaction(self) + "\n";
+            prompt += "Player Faction Standing: " + factions.getFactionStanding(self, factions.getFaction(self)) + "\n";
+            prompt += "__________________ " + "Guild" + " __________________" + "\n";
+            prompt += "Player Guild: " + guild.getGuildId(self) + "\n";
+
 
             sui.msgbox(self, player, prompt, sui.OK_ONLY, "title", "noHandler");
         }
@@ -6150,6 +6182,7 @@ public class base_player extends script.base_script
                 {
                     removeObjVar(target, "city.zoning_rights");
                     removeObjVar(target, "city.zoning_rights_time");
+                    removeObjVar(target, "city_decorator");
                     sendSystemMessage(player, SID_RIGHTS_REVOKED);
                     sendSystemMessage(target, SID_RIGHTS_REVOKED_OTHER);
                     return;
@@ -6158,6 +6191,7 @@ public class base_player extends script.base_script
         }
         setObjVar(target, "city.zoning_rights", city_id);
         setObjVar(target, "city.zoning_rights_time", getGameTime());
+        setObjVar(target, "city_decorator", true);
         prose_package pp = prose.getPackage(SID_RIGHTS_GRANTED, cityGetName(city_id));
         sendSystemMessageProse(target, pp);
         pp = prose.getPackage(SID_RIGHTS_GRANTED_SELF, getName(target));
@@ -12308,6 +12342,17 @@ public class base_player extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
+        if (isGod(player))
+        {
+            String stationName = getPlayerAccountUsername(self);
+            names[idx] = "station_name";
+            attribs[idx] = stationName;
+            idx++;
+            if (idx >= names.length)
+            {
+                return SCRIPT_CONTINUE;
+            }
+        }
         return SCRIPT_CONTINUE;
     }
 
@@ -12817,6 +12862,8 @@ public class base_player extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
+    // BEGIN ENZYME LOOT TOGGLE \\
+
     public boolean blog(String txt) throws InterruptedException
     {
         if (LOGGING_ON)
@@ -12837,8 +12884,6 @@ public class base_player extends script.base_script
         warpPlayer(self, loc.area, loc.x, loc.y, loc.z, loc.cell, 0, 0, 0, "noHandler", false);
         return SCRIPT_CONTINUE;
     }
-
-    // BEGIN ENZYME LOOT TOGGLE \\
 
     public int cmdEnzymeLootToggle(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
@@ -12916,7 +12961,8 @@ public class base_player extends script.base_script
             debugSpeakMsg(self, "You are not in a group!");
             return;
         }
-        if (!group.isLeader(self)) {
+        if (!group.isLeader(self))
+        {
             debugSpeakMsg(self, "Only the group leader can start a ready check.");
             return;
         }
@@ -12928,39 +12974,10 @@ public class base_player extends script.base_script
         obj_id[] groupMembers = getGroupMemberIds(self);
         String prompt = " has initiated a ready check!\nAre you ready?";
         params.put("readyCheckLeaderId", self);
-        for (obj_id indi : groupMembers) {
+        for (obj_id indi : groupMembers)
+        {
             sui.msgbox(self, indi, prompt, sui.OK_CANCEL, "handleReadyCheck", null);
             params.put("readyCheckLeaderId", self);
         }
-    }
-    public static void handleReadyCheck(obj_id self, dictionary params) throws InterruptedException {
-        obj_id target = params.getObjId("readyCheckLeaderId");
-        obj_id player = sui.getPlayerId(params);
-        int bp = sui.getIntButtonPressed(params);
-        if (bp == sui.BP_OK) {
-            sendSystemMessage(target, getPlayerName(player) + " is ready!", null);
-            chat.chat(self, "Ready!");
-        }
-        if (bp == sui.BP_CANCEL) {
-            sendSystemMessage(target, getPlayerName(player) + " is not ready!", null);
-            chat.chat(self, "Not Ready!");
-        }
-    }
-    public static void generateHousingList( obj_id self, obj_id target, String params, float defaultTime ) throws InterruptedException
-    {
-        String[] fileList = {
-                ""
-        };
-        ArrayList<String> ar = new ArrayList<String>(Arrays.asList(fileList));
-        obj_id[] houseItems = getContents(getContainedBy(self));
-        String cellName = getCellName(getContainedBy(self));
-        for (obj_id houseItem : houseItems) {
-            String currentLoc = getLocation(self).toString();
-            String itemName = getName(self);
-            float heading = getYaw(self);
-            String line = itemName + "\t" + currentLoc + "\t" + heading + "\t" + cellName + "\n";
-            ar.add(line);
-        }
-        saveTextOnClient(self, "export/housing_layout.txt", ar.toString());
     }
 }
