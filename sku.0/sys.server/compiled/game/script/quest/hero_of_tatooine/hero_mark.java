@@ -11,10 +11,6 @@ public class hero_mark extends script.base_script
     public hero_mark()
     {
     }
-    public static int BUFF_TIME = 10800;
-    public static int BUFF_TIME_VANILLA = 82800;
-    public static int REVIVE_HEALTH = 2000;
-    public static int REVIVE_ACTION = 1600;
     public static final string_id SID_MENU_RESTORE = new string_id("quest/hero_of_tatooine/system_messages", "menu_restore");
     public static final string_id SID_RESTORE_MSG = new string_id("quest/hero_of_tatooine/system_messages", "restore_msg");
     public static final string_id SID_RESTORE_NOT_YET = new string_id("quest/hero_of_tatooine/system_messages", "restore_not_yet");
@@ -75,7 +71,10 @@ public class hero_mark extends script.base_script
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        int id = mi.addRootMenu(menu_info_types.SERVER_MENU10, SID_MENU_RESTORE);
+        if (hasObjVar(self, "charges"))
+        {
+            int id = mi.addRootMenu(menu_info_types.SERVER_MENU10, SID_MENU_RESTORE);
+        }
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
@@ -86,15 +85,16 @@ public class hero_mark extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            /*if (!utils.isEquipped(self))
+            int charges = getIntObjVar(self, "charges");
+            if (!utils.isEquipped(self))
             {
                 sendSystemMessage(player, SID_RESTORE_NOT_EQUIPPED);
                 return SCRIPT_CONTINUE;
-            }*/
+            }
             if (hasObjVar(self, "lastUsed"))
             {
                 int last_used = getIntObjVar(self, "lastUsed");
-                if ((getGameTime() - last_used) < BUFF_TIME)
+                if ((getGameTime() - last_used) < 82800)
                 {
                     int secRemain = 82800 - (getGameTime() - last_used);
                     prose_package pp = prose.getPackage(SID_RESTORE_NOT_YET, parseTimeMsg(parseTimeRemaining(secRemain), true));
@@ -126,11 +126,19 @@ public class hero_mark extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             pclib.clearEffectsForDeath(player);
-            setAttrib(player, HEALTH, REVIVE_HEALTH);
-            setAttrib(player, ACTION, REVIVE_ACTION);
+            setAttrib(player, HEALTH, 200);
             playClientEffectObj(player, "clienteffect/item_ring_hero_mark.cef", player, hardpoint);
             sendSystemMessage(player, SID_RESTORE_MSG);
             messageTo(player, "handlePlayerResuscitated", null, 0, true);
+            charges--;
+            if (charges <= 0)
+            {
+                removeObjVar(self, "charges");
+            }
+            else 
+            {
+                setObjVar(self, "charges", charges);
+            }
             setObjVar(self, "lastUsed", getGameTime());
         }
         return SCRIPT_CONTINUE;

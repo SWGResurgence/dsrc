@@ -1,8 +1,5 @@
 package script.library;
 
-import script.dictionary;
-import script.obj_id;
-
 public class anims extends script.base_script
 {
     public anims()
@@ -1875,22 +1872,4 @@ public class anims extends script.base_script
     public static final String PLAYER_WHISPER = "whisper";
     public static final String PLAYER_WIPE_SURFACE = "wipe_surface";
     public static final String PLAYER_YAWN = "yawn";
-    public void startAnimation(obj_id player, String anim, float animTime) throws InterruptedException
-    {
-        messageTo(player, "continueAnimation", null, animTime, true);
-        utils.setScriptVar(player, "anim", anim);
-        utils.setScriptVar(player, "animTime", animTime);
-    }
-
-    public int continueAnimation(obj_id player, dictionary params) throws InterruptedException
-    {
-        String anim = utils.getStringScriptVar(player, "anim");
-        float time = utils.getFloatScriptVar(player, "animTime");
-        if (anim != null && !anim.equals(""))
-        {
-            doAnimationAction(player, anim);
-        }
-        messageTo(player, "continueAnimation", null, time, true);
-        return SCRIPT_CONTINUE;
-    }
 }

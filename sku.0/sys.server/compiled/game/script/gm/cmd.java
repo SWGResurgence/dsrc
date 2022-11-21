@@ -2,6 +2,7 @@ package script.gm;
 
 import script.*;
 import script.library.*;
+import script.library.vehicle;
 
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -3750,7 +3751,11 @@ public class cmd extends script.base_script
             {
                 for (int i = count; i > 0; i = i - 500)
                 {
-                    int tempCount = Math.min(i, 500);
+                    int tempCount = 500;
+                    if (i < 500)
+                    {
+                        tempCount = i;
+                    }
                     staticItemId = static_item.createNewItemFunction(itemName, inventory, tempCount);
                 }
             }
@@ -4488,7 +4493,6 @@ public class cmd extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        obj_id iTarget = getIntendedTarget(self);
         StringTokenizer st = new StringTokenizer(params);
         String command;
         if (st.hasMoreTokens())
@@ -4670,7 +4674,7 @@ public class cmd extends script.base_script
                 }
             }
         }
-        else if (command.equalsIgnoreCase("url"))
+        else if (command.equalsIgnoreCase("openlink"))
         {
             if (!st.hasMoreTokens())
             {
@@ -4680,8 +4684,7 @@ public class cmd extends script.base_script
             else
             {
                 String url = st.nextToken();
-                obj_id iTar = getIntendedTarget(self);
-                launchClientWebBrowser(iTar, url);
+                launchClientWebBrowser(target, url);
             }
         }
         else if (command.equalsIgnoreCase("playeffect"))
@@ -4776,7 +4779,7 @@ public class cmd extends script.base_script
             else
             {
                 String sound = st.nextToken();
-                playClientEffectObj(iTarget, sound, iTarget, "");
+                playClientEffectObj(target, sound, target, "");
             }
         }
         else if (command.equalsIgnoreCase("playsoundloc"))
@@ -4792,194 +4795,10 @@ public class cmd extends script.base_script
                 playClientEffectLoc(self, sound, getLocation(self), 0.0f);
             }
         }
-        else if (command.equalsIgnoreCase("playsoundeveryone"))
+        else if (command.equalsIgnoreCase("puppet"))
         {
-            if (!st.hasMoreTokens())
-            {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundloc <sound name>");
-                return SCRIPT_CONTINUE;
-            }
-            else
-            {
-                obj_id[] players = getAllPlayers(getLocation(self), 8000.0f);
-                for (obj_id player : players) {
-                    String sound = st.nextToken();
-                    playClientEffectObj(player, sound, player, "");
-                }
-            }
-        }
-        else if (command.equalsIgnoreCase("playcefeveryone"))
-        {
-            if (!st.hasMoreTokens())
-            {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playcefeveryone <sound name>");
-                return SCRIPT_CONTINUE;
-            }
-            else
-            {
-                obj_id[] players = getAllPlayers(getLocation(self), 8000.0f);
-                for (obj_id player : players) {
-                    String sound = st.nextToken();
-                    playClientEffectObj(player, sound, player, "head");
-                }
-            }
-        }
-        else if (command.equalsIgnoreCase("rewardarea"))
-        {
-            if (!st.hasMoreTokens())
-            {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin grantItemArea <item> <count>");
-                return SCRIPT_CONTINUE;
-            }
-            else
-            {
-                String item = st.nextToken();
-                int count = Integer.parseInt(st.nextToken());
-                obj_id[] players = getAllPlayers(getLocation(self), 250.0f);
-                for (obj_id player : players) {
-                    obj_id pInv = utils.getInventoryContainer(player);
-                    obj_id pItem = static_item.createNewItemFunction(item, pInv, count);
-                    if (isIdValid(pItem)) {
-                        sendSystemMessageTestingOnly(player, "\\#DD1234You have been awarded items!\\#FFFFFF");
-                    }
-                }
-            }
-        }
-        else if (command.equalsIgnoreCase("editlootarea"))
-        {
-            float radius = 250.0f;
-            if (st.hasMoreTokens())
-            {
-                radius = Float.parseFloat(st.nextToken());
-            }
-            obj_id[] creatures = getCreaturesInRange(getLocation(self), radius);
-            for (obj_id creature : creatures) {
-                if (isMob(creature)) {
-                    if (hasObjVar(self, "loot.numItems")) {
-                        setObjVar(creature, "loot.numItems", st.nextToken());
-                    }
-                }
-            }
-
-
-        }
-        else if (command.equalsIgnoreCase("say"))
-        {
-            obj_id iTar = getIntendedTarget(self);
-            String words = st.nextToken();
-            if (st.hasMoreTokens())
-            {
-                while (st.hasMoreTokens())
-                {
-                    words += " " + st.nextToken();
-                }
-            }
-            if (st.countTokens() == 1)
-            {
-                chat.chat(iTar, words);
-            }
-            else {
-
-                broadcast(self, "Syntax: /admin say <message>");
-            }
-            chat.chat(iTar, words);
-        }
-        else if (command.equalsIgnoreCase("setloottable"))
-        {
-            String table = st.nextToken();
-            if (table == null || table.equals(""))
-            {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin setloottable <loot table name>");
-                return SCRIPT_CONTINUE;
-            }
-            else
-            {
-                setObjVar(self, "loot.lootTable", table);
-                sendSystemMessageTestingOnly(self, "Loot table set to " + table);
-            }
-        }
-        else if (command.equalsIgnoreCase("setnumitems"))
-        {
-            obj_id iTar = getIntendedTarget(self);
-            int level = Integer.parseInt(st.nextToken());
-            if (level == 0)
-            {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin setnumitems <loot level>");
-                return SCRIPT_CONTINUE;
-            }
-            else
-            {
-                setObjVar(self, "loot.numItems", level);
-                sendSystemMessageTestingOnly(self, "Number of loot items set to " + level);
-            }
-        }
-        else if (command.equalsIgnoreCase("setcount"))
-        {
-            obj_id iTar = getIntendedTarget(self);
-            setCount(iTar, Integer.parseInt(st.nextToken()));
-        }
-        else if (command.equalsIgnoreCase("setcountcontainer"))
-        {
-            obj_id[] itemsInside = utils.getContents(utils.getInventoryContainer(getIntendedTarget(self)));
-            for (obj_id itemInside : itemsInside) {
-                setCount(itemInside, Integer.parseInt(st.nextToken()));
-            }
-        }
-        else if (command.equalsIgnoreCase("sendwarning"))
-        {
-            String words = st.nextToken();
-            if (st.hasMoreTokens())
-            {
-                while (st.hasMoreTokens())
-                {
-                    words += " " + st.nextToken();
-                }
-            }
-
-        }
-        else if (command.equalsIgnoreCase("sws"))
-        {
-            String template = st.nextToken();
-            String script = st.nextToken();
-            obj_id item = createObject(template, getLocation(self));
-            attachScript(item, script);
-            setYaw(item, getYaw(self));
-        }
-        else if (command.equalsIgnoreCase("ringspawn"))
-        {
-            String creatureToSpawn = st.nextToken();
-            int num = Integer.parseInt(st.nextToken());
-            float radius = Float.parseFloat(st.nextToken());
-            location where = getLocation(self);
-            spawnRing(self, num, radius, where, creatureToSpawn);
-
-        }
-        else if (command.equalsIgnoreCase("rinspawninterior"))
-        {
-            String creatureToSpawn = st.nextToken();
-            int num = Integer.parseInt(st.nextToken());
-            float radius = Float.parseFloat(st.nextToken());
-            location where = getLocation(self);
-            spawnRingInterior(self, num, radius, where, creatureToSpawn);
-
-        }
-        else if (command.equalsIgnoreCase("spawnring"))
-        {
-            String creatureToSpawn = st.nextToken();
-            int num = Integer.parseInt(st.nextToken());
-            float radius = Float.parseFloat(st.nextToken());
-            location where = getLocation(self);
-            spawnRing(self, num, radius, where, creatureToSpawn);
-
-        }
-        else if (command.equalsIgnoreCase("spawnringinterior"))
-        {
-            String creatureToSpawn = st.nextToken();
-            int num = Integer.parseInt(st.nextToken());
-            float radius = Float.parseFloat(st.nextToken());
-            location where = getLocation(self);
-            spawnRingInterior(self, num, radius, where, creatureToSpawn);
-            
+            chat.chat(target, st.nextToken());
+            return SCRIPT_CONTINUE;
         }
         else if (command.equalsIgnoreCase("playsoundloctarget"))
         {
@@ -4991,15 +4810,14 @@ public class cmd extends script.base_script
             else
             {
                 String sound = st.nextToken();
-                playClientEffectLoc(iTarget, sound, getLocation(iTarget), 0.0f);
-                return SCRIPT_CONTINUE;
+                playClientEffectLoc(target, sound, getLocation(target), 0.0f);
             }
         }
         else if (command.equalsIgnoreCase("playsoundatloc"))
         {
             if (!st.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundatloc <sound name> <x> <y> <z>");
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundlocatloc <sound name> <x> <y> <z>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -5010,7 +4828,6 @@ public class cmd extends script.base_script
                 float z = Float.parseFloat(st.nextToken());
                 location loc = new location(x, y, z);
                 playClientEffectLoc(self, sound, loc, 0.0f);
-                return SCRIPT_CONTINUE;
             }
         }
         else if (command.equalsIgnoreCase("playmusic"))
@@ -5025,7 +4842,6 @@ public class cmd extends script.base_script
                 String music = st.nextToken();
                 playMusic(self, music);
             }
-            return SCRIPT_CONTINUE;
         }
         else if (command.equalsIgnoreCase("playmusictarget"))
         {
@@ -5037,45 +4853,24 @@ public class cmd extends script.base_script
             else
             {
                 String music = st.nextToken();
-                playMusic(iTarget, music);
+                playMusic(target, music);
             }
-            return SCRIPT_CONTINUE;
         }
         else if (command.equalsIgnoreCase("slap"))
         {
-            slapPlayer(self, iTarget);
-            return SCRIPT_CONTINUE;
-        }
-        else if (command.equalsIgnoreCase("removeinvuln"))
-        {
-            setInvulnerable(iTarget, false);
-        }
-        else if (command.equalsIgnoreCase("boxspawn"))
-        {
-            boxSpawn(self, Integer.parseInt(st.nextToken()), Float.parseFloat(st.nextToken()), getLocation(self), st.nextToken());
-        }
-        else if (command.equalsIgnoreCase("clone"))
-        {
-            obj_id pInv = utils.getInventoryContainer(self);
-            String copies = st.nextToken();
-            for (int i = 0; i < Integer.parseInt(copies); i++)
+            obj_id player = target;
+            if (player == null)
             {
-                obj_id cloned_item = utils.cloneObject(iTarget, pInv);
-                for (String s : getScriptList(iTarget)) {
-                    attachScript(iTarget, s);
-                    setName(cloned_item, getName(iTarget));
-                    utils.copyObjectData(iTarget, cloned_item);
-                }
-                broadcast(self,"Cloned " + getName(iTarget) + " to " + getName(self) + "'s inventory with " + copies + " copies.");
-
+                player = self;
+                buff.applyBuff(self, "acid");
             }
-            return SCRIPT_CONTINUE;
+            buff.applyBuff(player, "acid");
         }
         else if (command.equalsIgnoreCase("modvehicle"))
         {
             if (st.countTokens() < 1)
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin modvehicle <mod index> <mod value>");
+                sendSystemMessageTestingOnly(self, "Syntax: /admin modvehicle <mod value> <mod index>");
                 return SCRIPT_CONTINUE;
             }
             if (vehicle.isRidingVehicle(self))
@@ -5084,7 +4879,6 @@ public class cmd extends script.base_script
                 String vehicleModifier = st.nextToken();
                 float vehicleModifierValue = Float.parseFloat(st.nextToken());
                 vehicle.setValue(vehid, vehicleModifierValue, Integer.parseInt(vehicleModifier));
-                return SCRIPT_CONTINUE;
             }
             else
             {
@@ -5097,66 +4891,6 @@ public class cmd extends script.base_script
             showAdminCmdSyntax(self);
         }
         return SCRIPT_CONTINUE;
-    }
-
-    private void spawnRingInterior(obj_id self, int num, float radius, location where, String creatureToSpawn) throws InterruptedException
-    {
-        float x = where.x;
-        float y = where.y;
-        float z = where.z;
-        float angle = 0;
-        float angleInc = 360 / num;
-        for (int i = 0; i < num; i++)
-        {
-            angle = angle + angleInc;
-            float newX = x + (float)Math.cos(angle) * radius;
-            float newY = y + (float)Math.sin(angle) * radius;
-            location newLoc = new location(newX, newY, z, where.area, where.cell);
-            obj_id creature = create.object(creatureToSpawn, newLoc);
-            if (isIdValid(creature))
-            {
-                setScale(creature, 0.5f);
-            }
-        }
-    }
-
-    public void boxSpawn(obj_id self, int numRowsX, float numRowsY, location location, String spawn) throws InterruptedException
-    {
-        float x = location.x;
-        float y = location.y;
-        float z = location.z;
-        float yaw = getYaw(self);
-        float xInc = 0;
-        float yInc = 0;
-        float zInc = 0;
-        float yawInc = 0;
-        for (int i = 0; i < numRowsX; i++)
-        {
-            obj_id creature = null;
-            for (int j = 0; j < numRowsY; j++)
-            {
-                location spawnLoc = new location(x + xInc, y + yInc, z + zInc, location.area, null);
-                creature = create.object(spawn, spawnLoc);
-                xInc += 5;
-                yawInc += 5;
-                faceTo(creature, self);
-            }
-            xInc = 0;
-            yInc += 5;
-            yawInc = 0;
-            faceTo(creature, self);
-        }
-
-    }
-
-    public void slapPlayer(obj_id self, obj_id iTarget) throws InterruptedException
-    {
-        location slapLoc = getLocation(iTarget);
-        slapLoc.x = slapLoc.x + rand(-100, -100);
-        slapLoc.z = slapLoc.z + rand(-100, -100);
-        slapLoc.y = getHeightAtLocation(slapLoc.x, slapLoc.z);
-        warpPlayer(iTarget, slapLoc.area, slapLoc.x, slapLoc.y, slapLoc.z, null, 0, 0, 0);
-        broadcast(iTarget, "You have been PWN'd by Shalon.");
     }
 
     public int cmdGenerateCraftedItem(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
@@ -5206,34 +4940,6 @@ public class cmd extends script.base_script
             sendSystemMessageTestingOnly(self, "Item created and placed into the inventory of " + getName(creationTarget));
             CustomerServiceLog("generateCraftedItem", "Object obj_id " + item + " was created of type " + schematic + ". It was created in the inventory of object " + creationTarget + " which is named " + getName(creationTarget) + ".");
             debugServerConsoleMsg(self, "Object obj_id " + item + " was created of type " + schematic + ". It was created in the inventory of object " + creationTarget + " which is named " + getName(creationTarget) + ".");
-        }
-        return SCRIPT_CONTINUE;
-    }
-
-    public int cmdSetCount(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
-    {
-        if (!isIdValid(target))
-        {
-            return SCRIPT_CONTINUE;
-        }
-        setCount(target, utils.stringToInt(params));
-        return SCRIPT_CONTINUE;
-    }
-    public static int spawnRing(obj_id self, int numMobs, float radius, location loc, String creatureName) throws InterruptedException
-    {
-        if (!isIdValid(self) || !exists(self))
-        {
-            return SCRIPT_CONTINUE;
-        }
-        float x = loc.x;
-        float z = loc.z;
-        for (int i = 0; i < numMobs; i++)
-        {
-            float angle = (float) (i * (360 / numMobs));
-            x = loc.x + (float) Math.cos(angle) * radius;
-            z = loc.z + (float) Math.sin(angle) * radius;
-            obj_id creatureObj = create.object(creatureName, new location(x, getHeightAtLocation(x,z), z, loc.area));
-            faceTo(creatureObj, self);
         }
         return SCRIPT_CONTINUE;
     }

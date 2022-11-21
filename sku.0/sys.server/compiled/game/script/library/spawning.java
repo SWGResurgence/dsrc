@@ -45,33 +45,6 @@ public class spawning extends script.base_script
         }
         return locTest;
     }
-    public static location getLocationWithOffset(location locTest, float fltX, float fltZ) throws InterruptedException
-    {
-        locTest.x = locTest.x + fltX;
-        locTest.z = locTest.z + fltZ;
-        return locTest;
-    }
-    public static location[] getDatapadWaypoints(obj_id objPlayer) throws InterruptedException
-    {
-        obj_id[] objWaypoints = getWaypointsInDatapad(objPlayer);
-        if (objWaypoints == null)
-        {
-            return null;
-        }
-        location[] locWaypoints = new location[objWaypoints.length];
-        for (int intI = 0; intI < objWaypoints.length; intI++)
-        {
-            locWaypoints[intI] = getWaypointLocation(objWaypoints[intI]);
-        }
-        return locWaypoints;
-    }
-    public static void setAllAttribs(obj_id self, obj_id target, int[] attribs) throws InterruptedException
-    {
-        for (int attrib : attribs)
-        {
-            setAttrib(target, attrib, getAttrib(self, attrib));
-        }
-    }
     public static boolean checkSpawnCount(obj_id self) throws InterruptedException
     {
         int intSpawnCount = getIntObjVar(self, "intSpawnCount");

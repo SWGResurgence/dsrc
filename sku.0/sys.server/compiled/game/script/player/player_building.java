@@ -912,11 +912,11 @@ public class player_building extends script.base_script
             LOG("LOG_CHANNEL", "x ->" + x + " z ->" + z + " dist ->" + dist_scaled);
             move_loc = new location(x + loc.x, loc.y, z + loc.z, loc.area, loc.cell);
             LOG("LOG_CHANNEL", "move_loc ->" + move_loc);
-            /*if (!isValidInteriorLocation(move_loc))
+            if (!isValidInteriorLocation(move_loc))
             {
                 sendSystemMessage(self, new string_id(STF, "not_valid_location"));
                 return SCRIPT_CONTINUE;
-            }*/
+            }
         }
         else if (direction.equals("UP") || direction.equals("DOWN"))
         {
@@ -928,18 +928,13 @@ public class player_building extends script.base_script
             {
                 y = y * -1;
             }
-            if (isInWorldCell(target))
-            {
-                move_loc = new location(loc.x, y + loc.y, loc.z, loc.area);
-            }
-            else {
-                move_loc = new location(loc.x, y + loc.y, loc.z, loc.area, loc.cell);
-            }
-            loc.area = getCurrentSceneName();
-            setLocation(target, move_loc);
-            /*obj_id building = getTopMostContainer(target);
+            LOG("LOG_CHANNEL", "y ->" + y + " dist ->" + dist_scaled);
+            move_loc = new location(loc.x, y + loc.y, loc.z, loc.area, loc.cell);
+            LOG("LOG_CHANNEL", "move_loc ->" + move_loc);
+            obj_id building = getTopMostContainer(target);
             String bldgstr = getTemplateName(building);
             String cellname = getCellName(building, loc.cell);
+            float new_y = y + loc.y;
             if (!utils.hasScriptVar(target, "vertical.template") || !utils.hasScriptVar(target, "vertical.cell") || !utils.hasScriptVar(target, "vertical.min_height") || !utils.hasScriptVar(target, "vertical.max_height") || !(utils.getStringScriptVar(target, "vertical.template")).equals(bldgstr) || !(utils.getStringScriptVar(target, "vertical.cell")).equals(cellname))
             {
                 String[] template = dataTableGetStringColumn(DATATABLE_HEIGHT, "template");
@@ -966,7 +961,7 @@ public class player_building extends script.base_script
             {
                 sendSystemMessage(self, new string_id(STF, "not_valid_location"));
                 return SCRIPT_CONTINUE;
-            }*/
+            }
         }
         else if (target != intendedTarget)
         {
@@ -5310,14 +5305,8 @@ public class player_building extends script.base_script
     }
     public boolean isMoveCommandValid(obj_id player, obj_id target) throws InterruptedException
     {
-        int city_id = getCityAtLocation(getLocation(player), 0);
-        boolean isMayor = city.isTheCityMayor(player, city_id);
         location loc = getLocation(player);
         if (isGod(player))
-        {
-            return true;
-        }
-        if (hasObjVar(target, "city_id") && (isMayor || city.isMilitiaOfCity(player, city_id) || hasObjVar(player, "city_decorator")) && isInWorldCell(player))
         {
             return true;
         }

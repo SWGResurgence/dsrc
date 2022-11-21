@@ -232,19 +232,12 @@ public class library_trivia extends script.base_script
                 badge.grantBadge(speaker, "bdg_library_trivia");
                 static_item.createNewItemFunction("item_tcg_loot_reward_series4_senate_pod_02_01", utils.getInventoryContainer(self));
             }
-            if (badge.hasBadge(speaker, "bdg_library_trivia"))
-            {
-                if (!hasObjVar(speaker, "podReward"))
-                {
-                    static_item.createNewItemFunction("item_tcg_loot_reward_series4_senate_pod_02_01", utils.getInventoryContainer(self));
-                    setObjVar(speaker, "podReward", 1);
-                    string_id already = new string_id(CONVO, "dont_forget_this");
-                    npcSpeak(speaker, already);
-                }
-                string_id already = new string_id(CONVO, "nothing_more_i_can_offer");
-                npcSpeak(speaker, already);
-
-            }
+            /*
+            TODO:
+            Integrate ObjVar Checks to Reward.
+            Example can be found in conversation.zahard_cody.java
+            Search for: "myTrig"
+            */
             npcEndConversation(speaker);
         }
         return SCRIPT_CONTINUE;

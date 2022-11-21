@@ -24,10 +24,9 @@ public class wardrobe extends script.base_script
         {
             setObjVar(item, "wardrobe.ownedBy", transferer);
         }
-        setName(item, getName(self) + "[modified]");
         return SCRIPT_CONTINUE;
     }
-    public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
+    public int OnAboutToLooseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!getTemplateName(item).contains("object/tangible/wearables/"))
         {
@@ -41,10 +40,6 @@ public class wardrobe extends script.base_script
                 broadcast(transferer, "You can only retrieve your own wearables from this container.");
                 return SCRIPT_CONTINUE;
             }
-        }
-        if (!hasScript(item, "systems.armor_rehue.composite_rehue"))
-        {
-            attachScript(item, "systems.armor_rehue.composite_rehue");
         }
         return SCRIPT_CONTINUE;
     }

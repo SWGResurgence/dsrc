@@ -10,8 +10,8 @@ import java.util.Vector;
 public class terminal_character_builder extends script.base_script
 {
     public static final int CASH_AMOUNT = 10000000;
-    public static final int AMT = 10000000;
-    public static final int FACTION_AMT = 5000;
+    public static final int AMT = 1000000;
+    public static final int FACTION_AMT = 250000;
     public static final float WEAPON_SPEED = 0.1f;
     public static final float WEAPON_DAMAGE = 1.0f;
     public static final float WEAPON_ELEMENTAL = 1.0f;
