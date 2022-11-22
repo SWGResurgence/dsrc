@@ -41,7 +41,7 @@ public class loot_controller_mutant_acklay extends script.base_script
         if (x < 26){  // 25% Drop Chance
             static_item.createNewItemFunction("item_tcg_loot_reward_series4_geonosian_speeder_02_01", corpseInventory);
         }
-        if (x < 02){  // 01% Drop Chance
+        if (x < 6){  // 5% Drop Chance
             static_item.createNewItemFunction("item_tcg_loot_reward_series2_barn", corpseInventory);
         }
 
