@@ -10,6 +10,8 @@ import script.library.utils;
 import java.io.File;
 import java.util.*;
 
+
+@SuppressWarnings("JavadocReference")
 public class base_class
 {
     // info about an object listening for a message
@@ -3899,6 +3901,15 @@ public class base_class
     * Send a system message to an individual
     */
     public static void sendSystemMessageTestingOnly (obj_id to, String localizedMessageText)
+    {
+        //sendSystemMessageTestingOnly (getChatName (to), localizedMessageText);
+        sendSystemMessage(to, localizedMessageText, null);
+    }
+	
+	/**
+     * Send a system message to an individual
+     */
+    public static void broadcast (obj_id to, String localizedMessageText)
     {
         //sendSystemMessageTestingOnly (getChatName (to), localizedMessageText);
         sendSystemMessage(to, localizedMessageText, null);
