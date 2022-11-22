@@ -8,6 +8,11 @@ import script.library.utils;
 import script.obj_id;
 
 public class loot_controller_peko extends script.base_script {
+	public static final String VOLUME_NAME = "aggressive_area";
+	public int OnAttach(obj_id self) throws InterruptedException {
+		sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have last been seen on Tatooine. Czerka Corporation is paying for it's remains.");
+		return SCRIPT_CONTINUE;
+	}
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException {
         if (pet_lib.isPet(killer)) {
 			sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerName(pet_lib.getMaster(killer)));
