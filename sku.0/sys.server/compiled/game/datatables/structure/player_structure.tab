@@ -237,7 +237,7 @@ object/building/player/city/shuttleport_tatooine.iff	object/building/player/cons
 																							object/tangible/terminal/terminal_player_structure_nosnap.iff	8.4	-1	-14.5	WORLD_DELTA	90	
 object/building/player/city/shuttleport_naboo.iff	object/building/player/construction/construction_player_house_tatooine_large_style_01.iff		1			1	3	2	1				0	0	1000		1		private_place_shuttleport	100	place_shuttleport	4							
 																							object/tangible/terminal/terminal_player_structure_nosnap.iff	8.4	-1	-14.5	WORLD_DELTA	90	
-object/building/player/city/shuttleport_naboo_b.iff	object/building/player/construction/construction_player_house_tatooine_large_style_01.iff		1			1	3	2	1				0	0	1000		1		private_place_shuttleport	100	place_shuttleport	4							
+object/building/naboo/shuttleport_naboo_b.iff	object/building/player/construction/construction_player_house_tatooine_large_style_01.iff		1			1	3	2	1				0	0	1000		1		private_place_shuttleport	100	place_shuttleport	4							
 																							object/tangible/terminal/terminal_player_structure_nosnap.iff	8.4	-1	-14.5	WORLD_DELTA	90	
 object/building/player/city/shuttleport_corellia.iff	object/building/player/construction/construction_player_house_tatooine_large_style_01.iff		1			1	3	2	1				0	0	1000		1		private_place_shuttleport	100	place_shuttleport	4							
 																							object/tangible/terminal/terminal_player_structure_nosnap.iff	8.4	-1	-14.5	WORLD_DELTA	90	
