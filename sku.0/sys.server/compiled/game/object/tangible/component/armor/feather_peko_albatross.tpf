@@ -4,6 +4,6 @@
 @class object_template 8
 
 objvars = +[
-	"skillmod.bonus.constitution" = 50, "skillmod.bonus.modified_stamina" = 25]
+	"skillmod.bonus.constitution_modified" = 50, "skillmod.bonus.stamina_modified" = 25]
 
 sharedTemplate = "object/tangible/component/armor/shared_feather_peko_albatross.iff"
