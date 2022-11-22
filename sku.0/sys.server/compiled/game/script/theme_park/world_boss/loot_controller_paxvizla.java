@@ -7,7 +7,7 @@ import script.library.static_item;
 import script.library.utils;
 import script.obj_id;
 
-public class loot_controller_krayt extends script.base_script {
+public class loot_controller_paxvizla extends script.base_script {
 	public static final String VOLUME_NAME = "aggressive_area";
 	public int OnAttach(obj_id self) throws InterruptedException {
 		sendSystemMessageGalaxyTestingOnly("ATTENTION GALAXY BOUNTY HUNTERS: The Self-Proclaimed Mandalore, The Renegade, Pax Vizla has been reported to have been last seen on Dxun at the Abandoned Mandalorian Outpost.");
