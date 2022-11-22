@@ -2013,11 +2013,12 @@ tok_ent_invis_buff_tracker_2	collection_ent_token			1	buffs.smuggled	2400		0		0	
 tok_ent_invis_buff_tracker_3	collection_ent_token			1	buffs.smuggled	3000		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
 tok_ent_invis_buff_tracker_4	collection_ent_token			1	buffs.smuggled	3600		0		0		0		0		0	STATE_NONE	none			0	0		0	0	1	0	1	1	0	1	1	1
 ent_jax_familiar	vr_familiar			4	buffs.genericBuff	-1	expertise_en_inspire_pulse_duration_increase	2																	0								
-hospital_buff	hospital_buff			1	command.bactaInfusion	-1	expertise_buff_duration_line_me_enhance	7200																									
+medic_buff	medic_buff			1	command.bactaInfusion	-1	expertise_buff_duration_line_me_enhance	7200
 bm_helper_monkey_domestic	bm_player_buff	tcg_diner_station		1	command.bm_helper_monkey_domestic	900		0	clothing_experimentation	2	clothing_assembly	5	food_assembly	5	food_experimentation	6	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 entertainer_buff	entertainer_buff			1	command.powerBoost	-1	expertise_en_inspire_base_point_increase	10	expertise_en_inspire_pulse_duration_increase	8	expertise_en_inspire_buff_duration_increase	60																					
 of_deb_off_1	targetTracking			90	command.of_deb_def	20			expertise_dodge	-7	critical_hit_vulnerable	16		0		0	STATE_NONE	none	appearance/pt_officer_paint_target.prt		1	1		1	1	1	0	1	1	0	1	1	1
-of_deb_off_2	identityTracking			90	command.of_deb_def	20	detect_hidden	-50	camouflage	-100		0		0		0	STATE_NONE	none	appearance/pt_officer_paint_target.prt		1	1		1	1	1	0	1	1	0	1	1	1
+of_deb_off_2	identityTracking			90	command.of_deb_def	20	detect_hidden	-50	camouflage	-100		0		0		0	STATE_NONE	none	
+appearance/pt_officer_paint_target.prt		1	1		1	1	1	0	1	1	0	1	1	1
 tcg_diner_meditation_rooms	tcg_diner_meditation_rooms			1	buffs.tcg_meditation_rooms	-1	jedi_saber_assembly	10	jedi_saber_experimentation	1	luck_modified	100	station_buff	0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 vr_dxun_drexl	vr_familiar			12	buffs.genericBuff	-1	expertise_action_all	10	exotic_dodge_reduction	4	exotic_parry_reduction	4												0	0	0							
 event_halloween_pumpkin_puree	event_halloween_pumpkin_puree			12	buffs.costume	7200	movement	25	slope_move	25														0	0
