@@ -72,7 +72,7 @@ public static String c_stringFile = "conversation/ned_dross";
 
 	public void ned_dross_action_sendRewardSignal (obj_id player, obj_id npc) throws InterruptedException
 	{
-        groundquests.sendSignal(player, "completedWorldBossDxunVizla");
+       groundquests.sendSignal(player, "completedWorldBossDxunPaxvizla");
     }
 
 // ----------------------------------------------------------------------
