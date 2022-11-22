@@ -638,4 +638,23 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 -945626147	-1551938285	object/building/kashyyyk/frn_sordaan_armory_static.iff	1	2.48476	0.662425	-1.06308	0.488874	0	0.872354	0		$|
 -797314927	-1551938285	object/tangible/ground_spawning/area_spawner.iff	1	0.0748728	0.267105	-1.02578	0.99489	0	-0.100962	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|9.000000|fltMinSpawnTime|2|3.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|chronicle_reward_vendor|strSpawnerType|4|area|strSpawns|4|chronicles_reward_vendor|$|
 -19864356	0	object/tangible/planet_map_location/city.iff	0	1348.73	5.94832	142.789	0.938444	0	0.345432	0		$|
--84540500	0	object/tangible/ground_spawning/area_spawner.iff	0	1286.8804	6	69.703125	0.94136167	0	0.33739924	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|1.000000|fltMinSpawnTime|2|0.000010|fltRadius|2|0.000010|intDefaultBehavior|0|3|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|vet_reward_vendor|strSpawnerType|4|area|strSpawns|4|vet_reward_vendor|$|
+-11725342494	0	object/tangible/ground_spawning/area_spawner.iff	0	1328.2192	6	38.291016	-0.33677396	0	0.94158554	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|1.000000|fltMinSpawnTime|2|0.000001|fltRadius|2|0.000001|intDefaultBehavior|0|3|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|respec_item_delivery_vendor|strSpawnerType|4|area|strSpawns|4|respec_item_delivery_vendor|$|
+-993564890	0	object/static/structure/naboo/fountain_naboo_style_1.iff	0	1272	6.000001	54	0.9358969	0	0.35227406	0		$|
+-993565018	0	object/static/structure/naboo/planter_naboo_theed_style_1.iff	0	1278	6	36	1	0	0	0		$|
+-993565044	0	object/static/structure/naboo/planter_naboo_theed_style_1.iff	0	1256	6	56	1	0	0	0		$|
+-993565304	0	object/static/structure/general/streetlamp_medium_blue_style_01.iff	0	1252.2314	6	38.13379	1	0	0	0		$|
+-993565317	0	object/static/structure/general/streetlamp_medium_blue_style_01.iff	0	1261.4604	6	30.474121	0.70710725	0	-0.70710623	0		$|
+-993565262	0	object/static/structure/custom/irish_memorial.iff	0	1259.4121	7.6220007	37.820312	0.9410756	0	0.33819622	0		$|
+-993564721	0	object/static/structure/naboo/bridge_stairs_s03.iff	0	1289.7705	6.000001	38.563965	0.42837954	0	0.9035989	0		$|
+-993564647	0	object/static/structure/naboo/bridge_stairs_s02.iff	0	1256.23	6.0000033	66.413086	0.42837954	0	0.9035989	0		$|
+-993564547	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	0	1269.4048	6	34.135254	-0.33603027	0	0.9418512	0		$|
+-993564544	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	0	1262	6.000001	41	-0.33603027	0	0.9418512	0		$|
+-993564570	0	object/static/structure/naboo/elevated_walkway_cap_s01.iff	0	1255.8257	6.000002	45.873047	-0.33603027	0	0.9418512	0		$|
+-993564500	0	object/static/structure/naboo/elevated_walkway_corner_s01.iff	0	1273.4048	6.000003	31.135254	-0.33603027	0	0.9418512	0		$|
+-993564449	0	object/static/structure/naboo/elevated_walkway_corner_s01.iff	0	1251	6	60	0.9035985	0	-0.4283804	0		$|
+-993565129	0	object/static/structure/naboo/enclosed_walkway_s01.iff	0	1259	6.000001	43	0.9376466	0	0.34758994	0		$|
+-993565190	0	object/static/structure/naboo/enclosed_walkway_s01.iff	0	1265.4575	6.0002136	37.53418	0.93764657	0	0.34759015	0		$|
+-891055583	0	object/tangible/ground_spawning/area_spawner.iff	0	1277.895	6	55.25049	0.9435474	0	0.33123738	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|1.000000|fltMinSpawnTime|2|0.000001|fltRadius|2|0.000001|intDefaultBehavior|0|3|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|original_vet_reward_vendor|strSpawnerType|4|area|strSpawns|4|original_vet_reward_vendor|$|
+-891059711	0	object/tangible/ground_spawning/area_spawner.iff	0	1272.104	6	60.822266	0.9367592	0	0.34997472	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|1.000000|fltMinSpawnTime|2|0.000001|fltRadius|2|0.000001|intDefaultBehavior|0|3|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|custom_vet_reward_vendor|strSpawnerType|4|area|strSpawns|4|custom_vet_reward_vendor|$|
+-918046478	0	object/tangible/event_perk/banner_imperial_style_01.iff	0	1261.94629	6	73.3222656	0.9427547	0	0.3334871	0		$|
+-918054409	0	object/tangible/event_perk/banner_imperial_style_01.iff	0	1295.20215	6	45.71045	0.9427547	0	0.333487123	0		$|
