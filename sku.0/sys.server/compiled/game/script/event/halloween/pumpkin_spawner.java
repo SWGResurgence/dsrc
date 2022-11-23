@@ -44,6 +44,8 @@ public class pumpkin_spawner extends script.base_script {
                 spot.y = getHeightAtLocation(spot.x, spot.z);
                 obj_id pumpkin = create.object("object/tangible/holiday/halloween/pumpkin_object.iff", spot);
                 setName(pumpkin, NAME_VARIATIONS[rand(0,2)]);
+				obj_id player = getClosestPlayer(getLocation(self));
+                broadcast(player, "spawned vegetation at " + spot.x + spot.y + spot.z + spot.area);
             }
             runTimes++;
         }
