@@ -6203,11 +6203,9 @@ fish_record_current_holder_book				0	-1	-1																		sound/music_acq_mine
 			fish_record_current_holder_striped_talus	21334	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0			
 			fish_record_current_holder_striped_tatooine	21335	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0			
 			fish_record_current_holder_striped_yavin4	21336	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0			
-removed_slots_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
 	removed_slots_page			0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
 		slots_removed		0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
 			reserved_mail_04_03	16083	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-resurgence_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						1	0			
 	resurgence_page			0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						1	0			
 		event_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						1	0			
 			col_halloween_pumpkin_smasher	22763	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0			
