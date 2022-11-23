@@ -12,16 +12,9 @@ public class imperial_recruit extends script.theme_park.recruitment.base.base_re
     {
     }
     public static final String CONVO = "recruiting/imperial_recruit";
-    public int OnInitialize(obj_id self) throws InterruptedException
-    {
-	// TODO: wtf is the empty if, and the scope brackets for below?
-	// also couldn't this ranodmizing crap be made a function for all classes to consume instead?
-	if (!hasObjVar(self, "dressed"))
-        {
-
-	}
-
-	{
+    public int OnInitialize(obj_id self) throws InterruptedException {
+		if (!hasObjVar(self, "dressed")) {
+			
             obj_id suit = createObject("object/tangible/wearables/bodysuit/bodysuit_tie_fighter.iff", self, "");
             obj_id boots = createObject("object/tangible/wearables/boots/boots_s03.iff", self, "");
             hue.hueObject(self);
