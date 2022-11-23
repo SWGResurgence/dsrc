@@ -63,7 +63,7 @@ object/tangible/loot/mustafar/cube_loot/cube_loot_3h.iff	70		warmly glowing
 object/tangible/loot/mustafar/cube_loot/cube_loot_3d.iff	90		warmly glowing
 object/tangible/loot/mustafar/cube_loot/cube_loot_3o.iff	35		warmly glowing
 object/tangible/loot/mustafar/cube_loot/cube_loot_3e.iff	70		warmly glowing
-item_tcg_loot_reward_series7_deed_vip_bunker	5000		Deed VIP Bunker
+item_tcg_loot_reward_series7_deed_vip_bunker	2500		Deed VIP Bunker
 item_schematic_ex_blaster_pistol_barrel	500		Exceptional Blaster Pistol Barrel Schematic
 item_schematic_ex_blaster_rifle_barrel	500		Exceptional Blaster Rifle Barrel Schematic
 item_schematic_ex_gas_cartridge	500		Exceptional Gas Cartridge Schematic
