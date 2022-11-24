@@ -39,6 +39,7 @@ public class terminal_resource extends script.terminal.base.terminal_add_use
         "endor",
         "dantooine",
         "dathomir",
+		"dxun",
         "lok",
         "yavin4"
     };
