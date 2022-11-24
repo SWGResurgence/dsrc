@@ -959,6 +959,16 @@ public class talisa_test extends script.base_script
                     persistObject(object);
                     sendSystemMessageTestingOnly(self, "Object: " + secCommand + " persisted.");
                 }
+				else if (priCommand.equalsIgnoreCase("persist_area") && !secCommand.equals(""))
+                {
+                    float range = utils.stringToFloat(secCommand);
+                    obj_id[] objects = getObjectsInRange(getLocation(self), range);
+                    for (obj_id object : objects) {
+                        persistObject(object);
+                        sendSystemMessageTestingOnly(self, "Persisted: " + object.toString());
+                    }
+                    debugConsoleMsg(self, "Persisted area. Total Range: " + range);
+                }
                 else if (priCommand.equalsIgnoreCase("is_persisted") && !secCommand.equals(""))
                 {
                     obj_id object = utils.stringToObjId(secCommand);
