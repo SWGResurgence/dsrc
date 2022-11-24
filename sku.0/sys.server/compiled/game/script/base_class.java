@@ -26878,5 +26878,4 @@ public class base_class
             return adminUsernames.contains(getPlayerAccountUsername(player));
         }
     }
-
 }   // class base_class
