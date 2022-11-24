@@ -45,6 +45,18 @@ public class player_developer extends base_script {
             chat.chat(target, splitMsg);
             return SCRIPT_CONTINUE;
         }
+		if (cmd.equalsIgnoreCase("wiki"))
+        {
+            //example: /developer wiki Combat Macro
+            // /developer wiki (params[param, param2, param3])
+            String speech = tok.nextToken();
+            String wiki_link = "https://swg.fandom.com/wiki/" + speech;
+            String pathed;
+            pathed = wiki_link.replace(" ", "_");
+            //chat.chat(target, splitMsg);
+            launchClientWebBrowser(self, pathed);
+            return SCRIPT_CONTINUE;
+        }
         if (cmd.equalsIgnoreCase("scale"))
         {
             float original = getScale(target);
