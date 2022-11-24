@@ -73,6 +73,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         "yavin4",
         "dantooine",
         "dathomir",
+		"dxun",
         "lok",
         "rori",
         "endor"
@@ -86,6 +87,7 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         "yavin4",
         "dantooine",
         "dathomir",
+		"dxun",
         "lok",
         "rori",
         "endor"
@@ -189,7 +191,8 @@ public class mission_dynamic_base extends script.systems.missions.base.mission_b
         "dantooine_mining_outpost",
         "dantooine_pirate_outpost",
         "dathomir_trade_outpost",
-        "dathomir_survey_outpost"
+        "dathomir_survey_outpost",
+		"dxun_czerka_outpost"
     };
     public static final float PREFERRED_DISTANCE = 1000.0f;
     public obj_id createMissionDataInContainer(obj_id objCreator, float fltEffeciencyRequirement, int intExpireTime, obj_id objCreatorToken, String strMissionType, String strScript) throws InterruptedException
