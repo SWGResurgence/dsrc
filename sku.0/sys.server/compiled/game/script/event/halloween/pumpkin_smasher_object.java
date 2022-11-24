@@ -31,23 +31,25 @@ public class pumpkin_smasher_object extends script.base_script
             {
                 setObjVar(player, PULPED_ITER_OBJVAR, baseUse);
             }
-            /*if (!buff.hasBuff(player, "event_halloween_pumpkin_pulper"))
+            if (hasObjVar(player, PULPED_ITER_OBJVAR))
             {
-                buff.applyBuff(player, "event_halloween_pumpkin_pulper");
-            }*/
+                int iter = getIntObjVar(player, PULPED_ITER_OBJVAR + baseUse++);
+                setObjVar(player, PULPED_ITER_OBJVAR, iter);
+            }
+            if (!buff.hasBuff(player, "event_halloween_pumpkin_puree"))
+            {
+                buff.applyBuff(player, "event_halloween_pumpkin_puree");
+            }
             int randChance = rand(1,100);
             if (randChance < 10 ) {
-                broadcast(player, "You find a strange object inside the pumpkin!");
-                static_item.createNewItemFunction("item_event_halloween_coin", utils.getInventoryContainer(player), 2);
+                broadcast(player, "You find a some strange objects inside this pumpkin.");
+                static_item.createNewItemFunction("item_event_halloween_coin", utils.getInventoryContainer(player), 5);
             }
-            playClientEffectObj(player, "clienteffect/egg_hatch_01.cef", player, "foot_l");
+            playClientEffectObj(player, "clienteffect/egg_hatch_01.cef", player, "root");
             broadcast(player, "You have smashed this pumpkin.");
 			int currentSmashed = getIntObjVar(player, PULPED_ITER_OBJVAR);
             setObjVar(player, PULPED_ITER_OBJVAR, currentSmashed + 1);
-            /*modifyCollectionSlotValue(player, "halloween_pumpkin_pulper", 1);
-            if (hasCompletedCollectionSlot(player, "halloween_pumpkin_pulper")) {
-                modifyCollectionSlotValue(player, "halloween_pumpkin_pulper_finish", 1);
-            }*/
+            //@TODO add collection modifer and collection
             hideFromClient(self, true);
             destroyObject(self);
         }
