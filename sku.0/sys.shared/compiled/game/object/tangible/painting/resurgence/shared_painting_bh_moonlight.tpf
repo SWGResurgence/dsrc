@@ -1,0 +1,9 @@
+@base object/tangible/furniture/base/shared_furniture_base.iff
+
+@class tangible_object_template 6
+@class object_template 5
+
+objectName = "static_item_n"  "item_painting_resurgence_bh_moonlight_01_01"
+detailedDescription = "static_item_d"  "item_painting_resurgence_bh_moonlight_01_01"
+
+appearanceFilename = "appearance/painting_resurgence_bh_moonlight.apt"

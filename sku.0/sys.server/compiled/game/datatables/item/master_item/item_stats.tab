@@ -5099,6 +5099,11 @@ item_naboo_house_small_style_01_03_deed			"string:player_structure.deed.template
 item_naboo_house_small_style_02_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_b.iff,int:player_structure.deed.buildtime=90"								
 item_naboo_house_small_style_02_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_c.iff,int:player_structure.deed.buildtime=90"								
 dxun_drexl_familiar			string:creatureName=dxun_drexl_familiar								
+item_painting_resurgence_bh_moonlight_01_01
+item_painting_resurgence_elegant_dancing_01_01
+item_painting_resurgence_environment_abstract_01_01
+item_painting_resurgence_imperial_diarama_01_01
+item_painting_resurgence_loot_01_01
 item_painting_resurgence_theater_poster_01_01
 item_painting_resurgence_gmf_mustafar_01_01
 item_painting_courascant_travel_advertisement_01_01
