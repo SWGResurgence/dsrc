@@ -4278,7 +4278,7 @@ item_tcg_loot_reward_series5_player_house_hangar			"string:player_structure.deed
 item_tcg_loot_reward_series5_mustafar_diorama											
 item_tcg_loot_reward_series5_klorri_clan_shield					tcg_series5_klorri_clan_shield						
 item_tcg_loot_reward_series5_signal_unit											
-item_tcg_loot_reward_series5_nightsister_backpack											
+item_tcg_loot_reward_series5_nightsister_backpack	"constitution_modified=100,luck_modified=100,strength_modified=100,detect_hidden=100,expertise_critical_line_me_dm=15,expertise_action_all=25"																					
 item_tcg_loot_reward_series5_tiefighter_chair											
 item_tcg_loot_reward_series5_deathstar_hologram											
 item_tcg_loot_reward_series5_theater_poster											
