@@ -1,7 +1,6 @@
 item	token7	limit	note
 s	i	i[0]	c
-object/tangible/loot/mustafar/cube_loot/cube_loot_1g.iff
-	5		faintly glowing
+object/tangible/loot/mustafar/cube_loot/cube_loot_1g.iff	5		faintly glowing
 object/tangible/loot/mustafar/cube_loot/cube_loot_1f.iff	5		faintly glowing
 object/tangible/loot/mustafar/cube_loot/cube_loot_1e.iff	5		faintly glowing
 object/tangible/loot/mustafar/cube_loot/cube_loot_1c.iff	5		faintly glowing
@@ -63,7 +62,7 @@ object/tangible/loot/mustafar/cube_loot/cube_loot_3h.iff	70		warmly glowing
 object/tangible/loot/mustafar/cube_loot/cube_loot_3d.iff	90		warmly glowing
 object/tangible/loot/mustafar/cube_loot/cube_loot_3o.iff	35		warmly glowing
 object/tangible/loot/mustafar/cube_loot/cube_loot_3e.iff	70		warmly glowing
-item_tcg_loot_reward_series7_deed_vip_bunker	5000		Deed VIP Bunker
+item_tcg_loot_reward_series7_deed_vip_bunker	1000		Deed VIP Bunker
 item_schematic_ex_blaster_pistol_barrel	500		Exceptional Blaster Pistol Barrel Schematic
 item_schematic_ex_blaster_rifle_barrel	500		Exceptional Blaster Rifle Barrel Schematic
 item_schematic_ex_gas_cartridge	500		Exceptional Gas Cartridge Schematic
@@ -95,3 +94,6 @@ item_restuss_schematic_saber_04_01	500		Technical Readout of a One-Handed Lights
 weapon_carbine_advanced_sfor_04_01	175		Weapon: Advanced SFOR Carbine
 weapon_pistol_old_republic_ion_relic_04_01	175		Weapon: Old Republic Ion Pistol
 item_tcg_loot_reward_series3_mustafar_travel_advertisement	100		Travel Advertisement: Mustafar
+
+
+item_limited_use_schematic_commando_ice_gun_04_01
