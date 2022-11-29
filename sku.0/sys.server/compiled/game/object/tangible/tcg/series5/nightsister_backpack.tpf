@@ -7,4 +7,4 @@ sharedTemplate = "object/tangible/tcg/series5/shared_nightsister_backpack.iff"
 
 scripts = +["item.armor.biolink_item_non_faction"]
 
-objvars = +["skillmod.bonus.constitution_modified" = 125, "skillmod.bonus.luck_modified" = 125, "skillmod.bonus.strength_modified" = 125, "skillmod.bonus.detect_hidden" = 125, "skillmod.bonus.expertise_critical_line_me_dm" = 15, "skillmod.bonus.expertise_action_all" = 25]
+objvars = +["skillmod.bonus.constitution_modified" = 125, "skillmod.bonus.luck_modified" = 125, "skillmod.bonus.strength_modified" = 125, "skillmod.bonus.detect_hidden" = 125, "skillmod.bonus.expertise_damage_line_dm" = 15, "skillmod.bonus.expertise_action_all" = 25]
