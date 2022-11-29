@@ -128,7 +128,10 @@ public class city extends script.base_script
         "mos entha",
         "mos taike",
         "wayfar",
-        "lake retreat"
+        "lake retreat",
+        "czerka outpost",
+        "pandath",
+        "pendath",
     };
     public static final String OBJVAR_DERANK_EXEMPT = "city.derank_exempt";
     public static final String CITIZEN_LIST_QUERIED = "cityhall.citizen_list_queried";
@@ -1331,12 +1334,12 @@ public class city extends script.base_script
     }
     public static int getMaxDecorationCount(int city_id, int rank) throws InterruptedException
     {
-        int baseDecorCount = rank * 15;
+        int baseDecorCount = rank * 2500;
         int flag = cityGetSpec(city_id);
         if (flag == SF_SPEC_DECOR_INCREASE)
         {
-            LOG("sissynoid", "City Has Increased Decoration Spec!  Increasing Decorations by 20%");
-            baseDecorCount = rank * 20;
+            LOG("sissynoid", "City Has Increased Decoration Spec!  Increasing Decorations by 200%");
+            baseDecorCount = rank * 3000;
             return baseDecorCount;
         }
         return baseDecorCount;

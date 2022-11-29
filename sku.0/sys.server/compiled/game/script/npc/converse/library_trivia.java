@@ -2,6 +2,7 @@ package script.npc.converse;
 
 import script.library.ai_lib;
 import script.library.badge;
+import script.library.static_item;
 import script.library.utils;
 import script.obj_id;
 import script.string_id;
@@ -23,13 +24,13 @@ public class library_trivia extends script.base_script
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         string_id message = new string_id(CONVO, "want_trivia");
-        string_id response[] = new string_id[2];
+        string_id[] response = new string_id[2];
         response[0] = new string_id(CONVO, "yes");
         response[1] = new string_id(CONVO, "no");
         npcStartConversation(speaker, self, "Convo", message, response);
         return SCRIPT_CONTINUE;
     }
-    public int OnNpcConversationResponse(obj_id self, String convo, obj_id speaker, string_id response) throws InterruptedException
+    public int OnNpcConversationResponse(obj_id self, obj_id player, String convo, obj_id speaker, string_id response) throws InterruptedException
     {
         int intQuestion = utils.getIntScriptVar(speaker, "libTrivQuestion");
         if (intQuestion == 0)
@@ -229,6 +230,20 @@ public class library_trivia extends script.base_script
             if (!badge.hasBadge(speaker, "bdg_library_trivia"))
             {
                 badge.grantBadge(speaker, "bdg_library_trivia");
+                static_item.createNewItemFunction("item_tcg_loot_reward_series4_senate_pod_02_01", utils.getInventoryContainer(self));
+            }
+            if (badge.hasBadge(speaker, "bdg_library_trivia"))
+            {
+                if (!hasObjVar(speaker, "podReward"))
+                {
+                    static_item.createNewItemFunction("item_tcg_loot_reward_series4_senate_pod_02_01", utils.getInventoryContainer(self));
+                    setObjVar(speaker, "podReward", 1);
+                    string_id already = new string_id(CONVO, "dont_forget_this");
+                    npcSpeak(speaker, already);
+                }
+                string_id already = new string_id(CONVO, "nothing_more_i_can_offer");
+                npcSpeak(speaker, already);
+
             }
             npcEndConversation(speaker);
         }

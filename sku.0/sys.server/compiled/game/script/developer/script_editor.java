@@ -14,7 +14,7 @@ public class script_editor extends script.base_script
     }
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
-        if (!isGod(self))
+        if (!isInAdminTable(self))
         {
             return SCRIPT_CONTINUE;
         }
@@ -51,7 +51,7 @@ public class script_editor extends script.base_script
             scriptClassName += "/" + path[iter];
         }
         scriptClassName += ".class";
-        scriptFileName += ".script";
+        scriptFileName += ".java";
         String scriptContents = file_access.readTextFile(scriptFileName);
         if (scriptContents == null)
         {
@@ -89,7 +89,7 @@ public class script_editor extends script.base_script
         String scriptContents = params.getString("pageText.text.LocalText");
         if (scriptContents == null)
         {
-            sendSystemMessageTestingOnly(self, "could not get script contents from the client");
+            sendSystemMessageTestingOnly(self, "could not get script from data source!");
         }
         String outputWindowText = new String();
         if (params.getString("outputPage.text.LocalText") != null)
@@ -122,7 +122,7 @@ public class script_editor extends script.base_script
                                     {
                                         try
                                         {
-                                            String outputString = system_process.runAndGetOutput("nge-swg-master/utils/mocha/script_prep2.py -i " + scriptFileName);
+                                            String outputString = system_process.runAndGetOutput("/home/swg/swg-main/exe/linux/script.sh");
                                             if (outputString != null)
                                             {
                                                 outputWindowText += outputString + "\n";

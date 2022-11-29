@@ -8,9 +8,6 @@ import script.string_id;
 
 public class talisa_test extends script.base_script
 {
-    public talisa_test()
-    {
-    }
     public static final int SF_COST_CITY_LOW = 16;
     public static final int SF_SKILL_TRAINER = 64;
     public static final String CITY_SKILL_TRAINERS = "datatables/city/skill_trainers.iff";
@@ -26,209 +23,213 @@ public class talisa_test extends script.base_script
     public static final int ENEMY_COUNT = 3;
     public static final int DATATABLE_IDX = 8;
     public static final String[] ALL_PLAYER_HOUSING =
-    {
-        "object/building/player/player_garage_corellia_style_01.iff",
-        "object/building/player/player_garage_naboo_style_01.iff",
-        "object/building/player/player_garage_tatooine_style_01.iff",
-        "object/building/player/player_guildhall_corellia_style_01.iff",
-        "object/building/player/player_guildhall_generic_style_01.iff",
-        "object/building/player/player_guildhall_naboo_style_01.iff",
-        "object/building/player/player_guildhall_tatooine_style_01.iff",
-        "object/building/player/player_guildhall_tatooine_style_02.iff",
-        "object/building/player/player_house_corellia_large_style_01.iff",
-        "object/building/player/player_house_corellia_large_style_02.iff",
-        "object/building/player/player_house_corellia_medium_style_01.iff",
-        "object/building/player/player_house_corellia_medium_style_02.iff",
-        "object/building/player/player_house_corellia_small_style_01.iff",
-        "object/building/player/player_house_corellia_small_style_01_floorplan_02.iff",
-        "object/building/player/player_house_corellia_small_style_02.iff",
-        "object/building/player/player_house_corellia_small_style_02_floorplan_02.iff",
-        "object/building/player/player_house_generic_large_style_01.iff",
-        "object/building/player/player_house_generic_large_style_02.iff",
-        "object/building/player/player_house_generic_medium_style_01.iff",
-        "object/building/player/player_house_generic_medium_style_02.iff",
-        "object/building/player/player_house_generic_small_style_01.iff",
-        "object/building/player/player_house_generic_small_style_01_floorplan_02.iff",
-        "object/building/player/player_house_generic_small_style_02.iff",
-        "object/building/player/player_house_generic_small_style_02_floorplan_02.iff",
-        "object/building/player/player_house_mustafar_lg.iff",
-        "object/building/player/player_house_naboo_large_style_01.iff",
-        "object/building/player/player_house_naboo_medium_style_01.iff",
-        "object/building/player/player_house_naboo_small_style_01.iff",
-        "object/building/player/player_house_naboo_small_style_02.iff",
-        "object/building/player/player_house_tatooine_large_style_01.iff",
-        "object/building/player/player_house_tatooine_medium_style_01.iff",
-        "object/building/player/player_house_tatooine_small_style_01.iff",
-        "object/building/player/player_house_tatooine_small_style_02.iff",
-        "object/building/player/player_merchant_tent_style_01.iff",
-        "object/building/player/player_merchant_tent_style_02.iff",
-        "object/building/player/player_merchant_tent_style_03.iff",
-        "object/building/player/player_mustafar_house_lg.iff"
-    };
+            {
+                    "object/building/player/player_garage_corellia_style_01.iff",
+                    "object/building/player/player_garage_naboo_style_01.iff",
+                    "object/building/player/player_garage_tatooine_style_01.iff",
+                    "object/building/player/player_guildhall_corellia_style_01.iff",
+                    "object/building/player/player_guildhall_generic_style_01.iff",
+                    "object/building/player/player_guildhall_naboo_style_01.iff",
+                    "object/building/player/player_guildhall_tatooine_style_01.iff",
+                    "object/building/player/player_guildhall_tatooine_style_02.iff",
+                    "object/building/player/player_house_corellia_large_style_01.iff",
+                    "object/building/player/player_house_corellia_large_style_02.iff",
+                    "object/building/player/player_house_corellia_medium_style_01.iff",
+                    "object/building/player/player_house_corellia_medium_style_02.iff",
+                    "object/building/player/player_house_corellia_small_style_01.iff",
+                    "object/building/player/player_house_corellia_small_style_01_floorplan_02.iff",
+                    "object/building/player/player_house_corellia_small_style_02.iff",
+                    "object/building/player/player_house_corellia_small_style_02_floorplan_02.iff",
+                    "object/building/player/player_house_generic_large_style_01.iff",
+                    "object/building/player/player_house_generic_large_style_02.iff",
+                    "object/building/player/player_house_generic_medium_style_01.iff",
+                    "object/building/player/player_house_generic_medium_style_02.iff",
+                    "object/building/player/player_house_generic_small_style_01.iff",
+                    "object/building/player/player_house_generic_small_style_01_floorplan_02.iff",
+                    "object/building/player/player_house_generic_small_style_02.iff",
+                    "object/building/player/player_house_generic_small_style_02_floorplan_02.iff",
+                    "object/building/player/player_house_mustafar_lg.iff",
+                    "object/building/player/player_house_naboo_large_style_01.iff",
+                    "object/building/player/player_house_naboo_medium_style_01.iff",
+                    "object/building/player/player_house_naboo_small_style_01.iff",
+                    "object/building/player/player_house_naboo_small_style_02.iff",
+                    "object/building/player/player_house_tatooine_large_style_01.iff",
+                    "object/building/player/player_house_tatooine_medium_style_01.iff",
+                    "object/building/player/player_house_tatooine_small_style_01.iff",
+                    "object/building/player/player_house_tatooine_small_style_02.iff",
+                    "object/building/player/player_merchant_tent_style_01.iff",
+                    "object/building/player/player_merchant_tent_style_02.iff",
+                    "object/building/player/player_merchant_tent_style_03.iff",
+                    "object/building/player/player_mustafar_house_lg.iff"
+            };
     public static final String[] ALL_PLAYER_CITY_STRUCTURES =
-    {
-        "object/building/player/city/bank_corellia.iff",
-        "object/building/player/city/bank_naboo.iff",
-        "object/building/player/city/bank_tatooine.iff",
-        "object/building/player/city/barn_no_planet_restriction.iff",
-        "object/building/player/city/cantina_corellia.iff",
-        "object/building/player/city/cantina_naboo.iff",
-        "object/building/player/city/cantina_tatooine.iff",
-        "object/building/player/city/cityhall_corellia.iff",
-        "object/building/player/city/cityhall_naboo.iff",
-        "object/building/player/city/cityhall_tatooine.iff",
-        "object/building/player/city/cloning_corellia.iff",
-        "object/building/player/city/cloning_naboo.iff",
-        "object/building/player/city/cloning_tatooine.iff",
-        "object/building/player/city/diner_no_planet_restriction.iff",
-        "object/building/player/city/e3_demo_cityhall_tatooine.iff",
-        "object/building/player/city/e3_demo_shuttleport_tatooine.iff",
-        "object/building/player/city/garden_corellia_lrg_01.iff",
-        "object/building/player/city/garden_corellia_lrg_02.iff",
-        "object/building/player/city/garden_corellia_lrg_03.iff",
-        "object/building/player/city/garden_corellia_lrg_04.iff",
-        "object/building/player/city/garden_corellia_lrg_05.iff",
-        "object/building/player/city/garden_corellia_med_01.iff",
-        "object/building/player/city/garden_corellia_med_02.iff",
-        "object/building/player/city/garden_corellia_med_03.iff",
-        "object/building/player/city/garden_corellia_med_04.iff",
-        "object/building/player/city/garden_corellia_med_05.iff",
-        "object/building/player/city/garden_corellia_sml_01.iff",
-        "object/building/player/city/garden_corellia_sml_02.iff",
-        "object/building/player/city/garden_corellia_sml_03.iff",
-        "object/building/player/city/garden_corellia_sml_04.iff",
-        "object/building/player/city/garden_corellia_sml_05.iff",
-        "object/building/player/city/garden_dantooine_lrg_01.iff",
-        "object/building/player/city/garden_dantooine_med_01.iff",
-        "object/building/player/city/garden_dantooine_sml_01.iff",
-        "object/building/player/city/garden_dathomir_lrg_01.iff",
-        "object/building/player/city/garden_dathomir_med_01.iff",
-        "object/building/player/city/garden_dathomir_sml_01.iff",
-        "object/building/player/city/garden_endor_lrg_01.iff",
-        "object/building/player/city/garden_endor_med_01.iff",
-        "object/building/player/city/garden_endor_sml_01.iff",
-        "object/building/player/city/garden_naboo_large.iff",
-        "object/building/player/city/garden_naboo_lrg_01.iff",
-        "object/building/player/city/garden_naboo_lrg_02.iff",
-        "object/building/player/city/garden_naboo_lrg_03.iff",
-        "object/building/player/city/garden_naboo_lrg_04.iff",
-        "object/building/player/city/garden_naboo_lrg_05.iff",
-        "object/building/player/city/garden_naboo_med_01.iff",
-        "object/building/player/city/garden_naboo_med_02.iff",
-        "object/building/player/city/garden_naboo_med_03.iff",
-        "object/building/player/city/garden_naboo_med_04.iff",
-        "object/building/player/city/garden_naboo_med_05.iff",
-        "object/building/player/city/garden_naboo_sml_01.iff",
-        "object/building/player/city/garden_naboo_sml_02.iff",
-        "object/building/player/city/garden_naboo_sml_03.iff",
-        "object/building/player/city/garden_naboo_sml_04.iff",
-        "object/building/player/city/garden_naboo_sml_05.iff",
-        "object/building/player/city/garden_tatooine_lrg_01.iff",
-        "object/building/player/city/garden_tatooine_lrg_02.iff",
-        "object/building/player/city/garden_tatooine_lrg_03.iff",
-        "object/building/player/city/garden_tatooine_lrg_04.iff",
-        "object/building/player/city/garden_tatooine_lrg_05.iff",
-        "object/building/player/city/garden_tatooine_med_01.iff",
-        "object/building/player/city/garden_tatooine_med_02.iff",
-        "object/building/player/city/garden_tatooine_med_03.iff",
-        "object/building/player/city/garden_tatooine_med_04.iff",
-        "object/building/player/city/garden_tatooine_med_05.iff",
-        "object/building/player/city/garden_tatooine_sml_01.iff",
-        "object/building/player/city/garden_tatooine_sml_02.iff",
-        "object/building/player/city/garden_tatooine_sml_03.iff",
-        "object/building/player/city/garden_tatooine_sml_04.iff",
-        "object/building/player/city/garden_tatooine_sml_05.iff",
-        "object/building/player/city/hospital_corellia.iff",
-        "object/building/player/city/hospital_naboo.iff",
-        "object/building/player/city/hospital_tatooine.iff",
-        "object/building/player/city/shuttleport_corellia.iff",
-        "object/building/player/city/shuttleport_naboo.iff",
-        "object/building/player/city/shuttleport_tatooine.iff",
-        "object/building/player/city/theater_corellia.iff",
-        "object/building/player/city/theater_naboo.iff",
-        "object/building/player/city/theater_tatooine.iff"
-    };
+            {
+                    "object/building/player/city/bank_corellia.iff",
+                    "object/building/player/city/bank_naboo.iff",
+                    "object/building/player/city/bank_tatooine.iff",
+                    "object/building/player/city/barn_no_planet_restriction.iff",
+                    "object/building/player/city/cantina_corellia.iff",
+                    "object/building/player/city/cantina_naboo.iff",
+                    "object/building/player/city/cantina_tatooine.iff",
+                    "object/building/player/city/cityhall_corellia.iff",
+                    "object/building/player/city/cityhall_naboo.iff",
+                    "object/building/player/city/cityhall_tatooine.iff",
+                    "object/building/player/city/cloning_corellia.iff",
+                    "object/building/player/city/cloning_naboo.iff",
+                    "object/building/player/city/cloning_tatooine.iff",
+                    "object/building/player/city/diner_no_planet_restriction.iff",
+                    "object/building/player/city/e3_demo_cityhall_tatooine.iff",
+                    "object/building/player/city/e3_demo_shuttleport_tatooine.iff",
+                    "object/building/player/city/garden_corellia_lrg_01.iff",
+                    "object/building/player/city/garden_corellia_lrg_02.iff",
+                    "object/building/player/city/garden_corellia_lrg_03.iff",
+                    "object/building/player/city/garden_corellia_lrg_04.iff",
+                    "object/building/player/city/garden_corellia_lrg_05.iff",
+                    "object/building/player/city/garden_corellia_med_01.iff",
+                    "object/building/player/city/garden_corellia_med_02.iff",
+                    "object/building/player/city/garden_corellia_med_03.iff",
+                    "object/building/player/city/garden_corellia_med_04.iff",
+                    "object/building/player/city/garden_corellia_med_05.iff",
+                    "object/building/player/city/garden_corellia_sml_01.iff",
+                    "object/building/player/city/garden_corellia_sml_02.iff",
+                    "object/building/player/city/garden_corellia_sml_03.iff",
+                    "object/building/player/city/garden_corellia_sml_04.iff",
+                    "object/building/player/city/garden_corellia_sml_05.iff",
+                    "object/building/player/city/garden_dantooine_lrg_01.iff",
+                    "object/building/player/city/garden_dantooine_med_01.iff",
+                    "object/building/player/city/garden_dantooine_sml_01.iff",
+                    "object/building/player/city/garden_dathomir_lrg_01.iff",
+                    "object/building/player/city/garden_dathomir_med_01.iff",
+                    "object/building/player/city/garden_dathomir_sml_01.iff",
+                    "object/building/player/city/garden_endor_lrg_01.iff",
+                    "object/building/player/city/garden_endor_med_01.iff",
+                    "object/building/player/city/garden_endor_sml_01.iff",
+                    "object/building/player/city/garden_naboo_large.iff",
+                    "object/building/player/city/garden_naboo_lrg_01.iff",
+                    "object/building/player/city/garden_naboo_lrg_02.iff",
+                    "object/building/player/city/garden_naboo_lrg_03.iff",
+                    "object/building/player/city/garden_naboo_lrg_04.iff",
+                    "object/building/player/city/garden_naboo_lrg_05.iff",
+                    "object/building/player/city/garden_naboo_med_01.iff",
+                    "object/building/player/city/garden_naboo_med_02.iff",
+                    "object/building/player/city/garden_naboo_med_03.iff",
+                    "object/building/player/city/garden_naboo_med_04.iff",
+                    "object/building/player/city/garden_naboo_med_05.iff",
+                    "object/building/player/city/garden_naboo_sml_01.iff",
+                    "object/building/player/city/garden_naboo_sml_02.iff",
+                    "object/building/player/city/garden_naboo_sml_03.iff",
+                    "object/building/player/city/garden_naboo_sml_04.iff",
+                    "object/building/player/city/garden_naboo_sml_05.iff",
+                    "object/building/player/city/garden_tatooine_lrg_01.iff",
+                    "object/building/player/city/garden_tatooine_lrg_02.iff",
+                    "object/building/player/city/garden_tatooine_lrg_03.iff",
+                    "object/building/player/city/garden_tatooine_lrg_04.iff",
+                    "object/building/player/city/garden_tatooine_lrg_05.iff",
+                    "object/building/player/city/garden_tatooine_med_01.iff",
+                    "object/building/player/city/garden_tatooine_med_02.iff",
+                    "object/building/player/city/garden_tatooine_med_03.iff",
+                    "object/building/player/city/garden_tatooine_med_04.iff",
+                    "object/building/player/city/garden_tatooine_med_05.iff",
+                    "object/building/player/city/garden_tatooine_sml_01.iff",
+                    "object/building/player/city/garden_tatooine_sml_02.iff",
+                    "object/building/player/city/garden_tatooine_sml_03.iff",
+                    "object/building/player/city/garden_tatooine_sml_04.iff",
+                    "object/building/player/city/garden_tatooine_sml_05.iff",
+                    "object/building/player/city/hospital_corellia.iff",
+                    "object/building/player/city/hospital_naboo.iff",
+                    "object/building/player/city/hospital_tatooine.iff",
+                    "object/building/player/city/shuttleport_corellia.iff",
+                    "object/building/player/city/shuttleport_naboo.iff",
+                    "object/building/player/city/shuttleport_tatooine.iff",
+                    "object/building/player/city/theater_corellia.iff",
+                    "object/building/player/city/theater_naboo.iff",
+                    "object/building/player/city/theater_tatooine.iff"
+            };
     public static final String[] TCG_EXPANSION =
-    {
-        "item_tcg_loot_reward_series2_v_wing",
-        "item_tcg_loot_reward_series2_podracer_mawhonic",
-        "item_tcg_loot_reward_series2_sanyassan_skull",
-        "item_tcg_loot_reward_series1_video_game_table",
-        "item_tcg_loot_reward_series1_organizational_datapad",
-        "item_tcg_loot_reward_series2_barn",
-        "item_tcg_loot_reward_series2_versafunction88_datapad",
-        "item_tcg_loot_reward_series2_keelkana_tooth",
-        "item_tcg_loot_reward_series2_painting_darth_vader",
-        "item_tcg_loot_reward_series2_diner",
-        "item_tcg_loot_reward_series2_display_case_02",
-        "item_tcg_loot_reward_series2_greeter_ewok",
-        "item_tcg_loot_reward_series2_chon_bust",
-        "item_tcg_loot_reward_series2_vendor_bomarr_monk",
-        "item_tcg_loot_reward_series2_greeter_serving_droid",
-        "item_tcg_loot_reward_series2_drink_dispenser",
-        "item_tcg_loot_reward_series2_painting_alliance_propaganda",
-        "item_tcg_loot_reward_series2_vendor_meatlump",
-        "item_tcg_loot_reward_series2_arc170_flightsuit",
-        "item_tcg_loot_reward_series1_indoor_garden_01",
-        "item_tcg_loot_reward_series2_mandalorian_strongbox",
-        "item_tcg_loot_reward_series2_computer_console_02",
-        "item_tcg_loot_reward_series1_indoor_fountain_02",
-        "item_tcg_loot_reward_series9_lepese_dictionary",
-        "item_tcg_loot_reward_series1_morgukai_shadow_scroll",
-        "item_tcg_loot_reward_series6_snow_jacket",
-        "item_tcg_loot_reward_series2_darth_vader_statuette",
-        "item_tcg_loot_reward_series2_princess_leia_statuette",
-        "item_tcg_loot_reward_series2_greeter_jawa",
-        "item_tcg_loot_reward_series1_vendor_serving_droid",
-        "item_tcg_loot_reward_series9_fish_tank",
-        "item_tcg_loot_reward_series1_greeter_gungan"
-    };
+            {
+                    "item_tcg_loot_reward_series2_v_wing",
+                    "item_tcg_loot_reward_series2_podracer_mawhonic",
+                    "item_tcg_loot_reward_series2_sanyassan_skull",
+                    "item_tcg_loot_reward_series1_video_game_table",
+                    "item_tcg_loot_reward_series1_organizational_datapad",
+                    "item_tcg_loot_reward_series2_barn",
+                    "item_tcg_loot_reward_series2_versafunction88_datapad",
+                    "item_tcg_loot_reward_series2_keelkana_tooth",
+                    "item_tcg_loot_reward_series2_painting_darth_vader",
+                    "item_tcg_loot_reward_series2_diner",
+                    "item_tcg_loot_reward_series2_display_case_02",
+                    "item_tcg_loot_reward_series2_greeter_ewok",
+                    "item_tcg_loot_reward_series2_chon_bust",
+                    "item_tcg_loot_reward_series2_vendor_bomarr_monk",
+                    "item_tcg_loot_reward_series2_greeter_serving_droid",
+                    "item_tcg_loot_reward_series2_drink_dispenser",
+                    "item_tcg_loot_reward_series2_painting_alliance_propaganda",
+                    "item_tcg_loot_reward_series2_vendor_meatlump",
+                    "item_tcg_loot_reward_series2_arc170_flightsuit",
+                    "item_tcg_loot_reward_series1_indoor_garden_01",
+                    "item_tcg_loot_reward_series2_mandalorian_strongbox",
+                    "item_tcg_loot_reward_series2_computer_console_02",
+                    "item_tcg_loot_reward_series1_indoor_fountain_02",
+                    "item_tcg_loot_reward_series9_lepese_dictionary",
+                    "item_tcg_loot_reward_series1_morgukai_shadow_scroll",
+                    "item_tcg_loot_reward_series6_snow_jacket",
+                    "item_tcg_loot_reward_series2_darth_vader_statuette",
+                    "item_tcg_loot_reward_series2_princess_leia_statuette",
+                    "item_tcg_loot_reward_series2_greeter_jawa",
+                    "item_tcg_loot_reward_series1_vendor_serving_droid",
+                    "item_tcg_loot_reward_series9_fish_tank",
+                    "item_tcg_loot_reward_series1_greeter_gungan"
+            };
     public static final String[] TCG_LAUNCH =
-    {
-        "item_tcg_loot_reward_series1_black_corset_dress",
-        "item_tcg_loot_reward_series1_naboo_jacket",
-        "item_tcg_loot_reward_series1_dooku_bust",
-        "item_tcg_loot_reward_series1_display_case_01",
-        "item_tcg_loot_reward_series1_gorax_ear",
-        "item_tcg_loot_reward_series1_bas_relief",
-        "item_tcg_loot_reward_series1_glowing_blue_eyes",
-        "item_tcg_loot_reward_series1_glowing_red_eyes",
-        "item_tcg_loot_reward_series1_vendor_gungan",
-        "item_tcg_loot_reward_series1_housecleaning_kit",
-        "item_tcg_loot_reward_series1_indoor_fountain_01",
-        "item_tcg_loot_reward_series1_vendor_jawa",
-        "item_tcg_loot_reward_series1_greeter_meatlump",
-        "item_tcg_loot_reward_series1_mechno_chair",
-        "item_tcg_loot_reward_series1_nuna_ball_advertisement",
-        "item_tcg_loot_reward_series1_podracer_gasgano",
-        "item_tcg_loot_reward_series1_painting_jedi_crest",
-        "item_tcg_loot_reward_series1_painting_trooper",
-        "item_tcg_loot_reward_series1_radtrooper_badge",
-        "item_tcg_loot_reward_series1_sith_speeder",
-        "item_tcg_loot_reward_series1_tusken_talisman",
-        "item_tcg_loot_reward_series1_organa_speeder",
-        "item_tcg_loot_reward_series1_computer_console_01",
-        "item_tcg_loot_reward_series1_vendor_ewok",
-        "item_tcg_loot_reward_series1_hans_hydrospanner",
-        "item_tcg_loot_reward_series1_painting_imperial_propaganda",
-        "item_tcg_loot_reward_series1_indoor_garden_02",
-        "item_tcg_loot_reward_series1_orange_flightsuit",
-        "item_tcg_loot_reward_series1_vendor_bomarr_monk",
-        "item_tcg_loot_reward_series1_target_creature",
-        "item_tcg_loot_reward_series1_beru_whitesuns_cookbook",
-        "item_tcg_loot_reward_series9_jedi_library_bookshelf"
-    };
+            {
+                    "item_tcg_loot_reward_series1_black_corset_dress",
+                    "item_tcg_loot_reward_series1_naboo_jacket",
+                    "item_tcg_loot_reward_series1_dooku_bust",
+                    "item_tcg_loot_reward_series1_display_case_01",
+                    "item_tcg_loot_reward_series1_gorax_ear",
+                    "item_tcg_loot_reward_series1_bas_relief",
+                    "item_tcg_loot_reward_series1_glowing_blue_eyes",
+                    "item_tcg_loot_reward_series1_glowing_red_eyes",
+                    "item_tcg_loot_reward_series1_vendor_gungan",
+                    "item_tcg_loot_reward_series1_housecleaning_kit",
+                    "item_tcg_loot_reward_series1_indoor_fountain_01",
+                    "item_tcg_loot_reward_series1_vendor_jawa",
+                    "item_tcg_loot_reward_series1_greeter_meatlump",
+                    "item_tcg_loot_reward_series1_mechno_chair",
+                    "item_tcg_loot_reward_series1_nuna_ball_advertisement",
+                    "item_tcg_loot_reward_series1_podracer_gasgano",
+                    "item_tcg_loot_reward_series1_painting_jedi_crest",
+                    "item_tcg_loot_reward_series1_painting_trooper",
+                    "item_tcg_loot_reward_series1_radtrooper_badge",
+                    "item_tcg_loot_reward_series1_sith_speeder",
+                    "item_tcg_loot_reward_series1_tusken_talisman",
+                    "item_tcg_loot_reward_series1_organa_speeder",
+                    "item_tcg_loot_reward_series1_computer_console_01",
+                    "item_tcg_loot_reward_series1_vendor_ewok",
+                    "item_tcg_loot_reward_series1_hans_hydrospanner",
+                    "item_tcg_loot_reward_series1_painting_imperial_propaganda",
+                    "item_tcg_loot_reward_series1_indoor_garden_02",
+                    "item_tcg_loot_reward_series1_orange_flightsuit",
+                    "item_tcg_loot_reward_series1_vendor_bomarr_monk",
+                    "item_tcg_loot_reward_series1_target_creature",
+                    "item_tcg_loot_reward_series1_beru_whitesuns_cookbook",
+                    "item_tcg_loot_reward_series9_jedi_library_bookshelf"
+            };
     public static final String[] TCG_ANIMATIONS =
+            {
+                    "greeter_anims_face",
+                    "greeter_anims_happy",
+                    "greeter_anims_sick_sad",
+                    "greeter_anims_polite",
+                    "greeter_anims_rude",
+                    "greeter_anims_expression",
+                    "emote_greeter_ewok",
+                    "emote_greeter_jawa"
+            };
+    public talisa_test()
     {
-        "greeter_anims_face",
-        "greeter_anims_happy",
-        "greeter_anims_sick_sad",
-        "greeter_anims_polite",
-        "greeter_anims_rude",
-        "greeter_anims_expression",
-        "emote_greeter_ewok",
-        "emote_greeter_jawa"
-    };
+    }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))
@@ -321,7 +322,8 @@ public class talisa_test extends script.base_script
                         return SCRIPT_CONTINUE;
                     }
                     obj_id[] structures = cityGetStructureIds(city_id);
-                    for (obj_id structure1 : structures) {
+                    for (obj_id structure1 : structures)
+                    {
                         sendSystemMessage(self, "Found: " + getName(structure1), null);
                     }
                     sendSystemMessage(self, "getTrainerCount: " + city.getTrainerCount(city_id), null);
@@ -667,7 +669,8 @@ public class talisa_test extends script.base_script
                 {
                     String data = "";
                     int iteration = TCG_EXPANSION.length;
-                    for (String s : TCG_EXPANSION) {
+                    for (String s : TCG_EXPANSION)
+                    {
                         dictionary itemData = dataTableGetRow(static_item.MASTER_ITEM_TABLE, s);
                         data += itemData.getString("template_name");
                         data += "\n\r";
@@ -686,7 +689,8 @@ public class talisa_test extends script.base_script
                         sendSystemMessage(self, vendor_lib.SID_INVENTORY_FULL_GENERIC);
                         return SCRIPT_CONTINUE;
                     }
-                    for (String s : TCG_EXPANSION) {
+                    for (String s : TCG_EXPANSION)
+                    {
                         static_item.createNewItemFunction(s, pInv);
                     }
                 }
@@ -702,7 +706,8 @@ public class talisa_test extends script.base_script
                         sendSystemMessage(self, vendor_lib.SID_INVENTORY_FULL_GENERIC);
                         return SCRIPT_CONTINUE;
                     }
-                    for (String tcgLaunch : TCG_LAUNCH) {
+                    for (String tcgLaunch : TCG_LAUNCH)
+                    {
                         static_item.createNewItemFunction(tcgLaunch, pInv);
                     }
                 }
@@ -901,22 +906,36 @@ public class talisa_test extends script.base_script
                 else if (priCommand.equalsIgnoreCase("get_player_housing_lots"))
                 {
                     String data = "";
-                    for (String s : ALL_PLAYER_HOUSING) {
+                    for (String s : ALL_PLAYER_HOUSING)
+                    {
                         String lotStr = "";
                         int lot = getAdjustedLotCount(s);
-                        if (lot == -99) {
+                        if (lot == -99)
+                        {
                             lotStr = "Lot count set to 1 because of error";
-                        } else if (lot == -1) {
+                        }
+                        else if (lot == -1)
+                        {
                             lotStr = "template error";
-                        } else if (lot == -2) {
+                        }
+                        else if (lot == -2)
+                        {
                             lotStr = "footprint template error";
-                        } else if (lot == -3) {
+                        }
+                        else if (lot == -3)
+                        {
                             lotStr = "index error";
-                        } else if (lot > 0) {
+                        }
+                        else if (lot > 0)
+                        {
                             lotStr = "" + lot;
-                        } else if (lot == 0) {
+                        }
+                        else if (lot == 0)
+                        {
                             lotStr = "none";
-                        } else if (lot == -69) {
+                        }
+                        else if (lot == -69)
+                        {
                             lotStr = "Exempt";
                         }
                         data += s + "\t" + lotStr + "\n";
@@ -926,22 +945,36 @@ public class talisa_test extends script.base_script
                 else if (priCommand.equalsIgnoreCase("get_player_city_lots"))
                 {
                     String data = "";
-                    for (String allPlayerCityStructure : ALL_PLAYER_CITY_STRUCTURES) {
+                    for (String allPlayerCityStructure : ALL_PLAYER_CITY_STRUCTURES)
+                    {
                         String lotStr = "";
                         int lot = getAdjustedLotCount(allPlayerCityStructure);
-                        if (lot == -99) {
+                        if (lot == -99)
+                        {
                             lotStr = "Lot count set to 1 because of error";
-                        } else if (lot == -1) {
+                        }
+                        else if (lot == -1)
+                        {
                             lotStr = "template error";
-                        } else if (lot == -2) {
+                        }
+                        else if (lot == -2)
+                        {
                             lotStr = "footprint template error";
-                        } else if (lot == -3) {
+                        }
+                        else if (lot == -3)
+                        {
                             lotStr = "index error";
-                        } else if (lot > 0) {
+                        }
+                        else if (lot > 0)
+                        {
                             lotStr = "" + lot;
-                        } else if (lot == 0) {
+                        }
+                        else if (lot == 0)
+                        {
                             lotStr = "none";
-                        } else if (lot == -69) {
+                        }
+                        else if (lot == -69)
+                        {
                             lotStr = "Exempt";
                         }
                         data += allPlayerCityStructure + "\t" + lotStr + "\n";
@@ -958,6 +991,17 @@ public class talisa_test extends script.base_script
                     }
                     persistObject(object);
                     sendSystemMessageTestingOnly(self, "Object: " + secCommand + " persisted.");
+                }
+                else if (priCommand.equalsIgnoreCase("persist_area") && !secCommand.equals(""))
+                {
+                    float range = utils.stringToFloat(secCommand);
+                    obj_id[] objects = getObjectsInRange(getLocation(self), range);
+                    for (obj_id object : objects)
+                    {
+                        persistObject(object);
+                        sendSystemMessageTestingOnly(self, "Persisted: " + object.toString());
+                    }
+                    debugConsoleMsg(self, "Persisted area. Total Range: " + range);
                 }
                 else if (priCommand.equalsIgnoreCase("is_persisted") && !secCommand.equals(""))
                 {
@@ -985,6 +1029,21 @@ public class talisa_test extends script.base_script
                     sendSystemMessageTestingOnly(self, "special_sign_halloween_standing_sign: " + special_sign_halloween_standing_sign);
                     int shop_sign = getSkillStatMod(self, "shop_sign");
                     sendSystemMessageTestingOnly(self, "shop_sign: " + shop_sign);
+                    return SCRIPT_CONTINUE;
+                }
+                else if (priCommand.equalsIgnoreCase("clone_object"))
+                {
+                    obj_id target = utils.stringToObjId(secCommand);
+                    String[] scripts = getScriptList(target);
+                    obj_id cloned_item = utils.cloneObject(target, utils.getInventoryContainer(target));
+                    if (scripts.length > 0)
+                    {
+                        for (String script : scripts)
+                        {
+                            attachScript(cloned_item, script);
+                        }
+                    }
+                    setCrafter(cloned_item, self);
                     return SCRIPT_CONTINUE;
                 }
                 else if (priCommand.equalsIgnoreCase("give_shop_sign"))
@@ -1710,7 +1769,8 @@ public class talisa_test extends script.base_script
                     }
                     else
                     {
-                        for (obj_id obj_id : myList) {
+                        for (obj_id obj_id : myList)
+                        {
                             sendSystemMessageTestingOnly(self, "found: " + obj_id);
                         }
                         sendSystemMessageTestingOnly(self, "done");
@@ -2118,6 +2178,7 @@ public class talisa_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int spawnTreasure(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id map = self;
@@ -2169,6 +2230,7 @@ public class talisa_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean verifyVariablesNotNull(String loot_table, String type, int mobLevel, int groupModifier, int count, int datTableIdx) throws InterruptedException
     {
         if (loot_table == null || loot_table.equals(""))
@@ -2191,12 +2253,9 @@ public class talisa_test extends script.base_script
         {
             return false;
         }
-        if (datTableIdx < 0)
-        {
-            return false;
-        }
-        return true;
+        return datTableIdx >= 0;
     }
+
     public boolean setCitySkillTrainers(obj_id self, int city_id) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -2233,18 +2292,23 @@ public class talisa_test extends script.base_script
         }
         return true;
     }
+
     public boolean destroyCitySkillTrainers(obj_id self, int city_id) throws InterruptedException
     {
         obj_id[] structures = cityGetStructureIds(city_id);
-        for (obj_id structure : structures) {
-            if (structure.isLoaded()) {
-                if (!city.isNormalStructure(city_id, structure)) {
+        for (obj_id structure : structures)
+        {
+            if (structure.isLoaded())
+            {
+                if (!city.isNormalStructure(city_id, structure))
+                {
                     destroyObject(structure);
                 }
             }
         }
         return true;
     }
+
     public obj_id findTarget(obj_id self) throws InterruptedException
     {
         obj_id intendedTarget = getIntendedTarget(self);
@@ -2268,6 +2332,7 @@ public class talisa_test extends script.base_script
         }
         return self;
     }
+
     public int getAdjustedLotCount(String template) throws InterruptedException
     {
         if (template == null || template.equals(""))
@@ -2296,6 +2361,7 @@ public class talisa_test extends script.base_script
         }
         return -69;
     }
+
     public boolean isDeluxSarlacc(obj_id sarlacc) throws InterruptedException
     {
         if (!isValidId(sarlacc) || !exists(sarlacc))
@@ -2318,12 +2384,9 @@ public class talisa_test extends script.base_script
         {
             return false;
         }
-        if (!hasObjVar(sarlacc, house_pet.SARLACC_LAST_FED))
-        {
-            return false;
-        }
-        return true;
+        return hasObjVar(sarlacc, house_pet.SARLACC_LAST_FED);
     }
+
     public boolean isMassiffBowl(obj_id massifBowl) throws InterruptedException
     {
         if (!isValidId(massifBowl) || !exists(massifBowl))
@@ -2338,12 +2401,9 @@ public class talisa_test extends script.base_script
         {
             return false;
         }
-        if (!hasObjVar(massifBowl, house_pet.MASSIFF_LAST_FED))
-        {
-            return false;
-        }
-        return true;
+        return hasObjVar(massifBowl, house_pet.MASSIFF_LAST_FED);
     }
+
     public String getListOfFoodItems(obj_id sarlacc) throws InterruptedException
     {
         if (!isValidId(sarlacc))
@@ -2370,6 +2430,7 @@ public class talisa_test extends script.base_script
         }
         return logData;
     }
+
     public obj_id getCurrentAdvancedCamp(obj_id player) throws InterruptedException
     {
         obj_id[] objects = getNonCreaturesInRange(player, 25.0f);
@@ -2377,12 +2438,17 @@ public class talisa_test extends script.base_script
         {
             return null;
         }
-        for (obj_id object : objects) {
-            if (hasScript(object, "item.camp.camp_advanced")) {
+        for (obj_id object : objects)
+        {
+            if (hasScript(object, "item.camp.camp_advanced"))
+            {
                 sendSystemMessageTestingOnly(player, "found script.");
-                if (isInTriggerVolume(object, "campsite", player)) {
+                if (isInTriggerVolume(object, "campsite", player))
+                {
                     return object;
-                } else {
+                }
+                else
+                {
                     sendSystemMessageTestingOnly(player, "no objects found.");
                 }
             }

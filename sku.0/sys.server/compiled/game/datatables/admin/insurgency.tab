@@ -1,8 +1,11 @@
 AdminAccounts	AdminLevel	AdminSkill	AdminComment	AdminComment2	AdminIpBlocks	AdminIpComment	AdminSuid	OldAdminSuid
 s	i{0}	s	c	c	s	c	i{0}	i{0}
-admin-rat	50	admin	Community Lead			main admin account	1	
-admin-talisa	50	admin	Operations/Development Lead	all account names must be lower case		main admin account	2	
-admin-zephrina	50	admin	Public Relations Lead			main admin account	3	
-qa-strafe	40		Lead QA				4	
-qa-draig	40		QA				5	
-intern-zell	30		QA				6	
+admin-shalon	50	admin	Community Lead
+admin-talisa	50	admin	Operations/Development Lead
+admin-ward	50	admin	Undetermined Lead
+dev-bubba	50		Dev-Staff
+gm-bald	50		GM-Staff
+gm-csrgaming	50		GM-Staff
+gm-draig	50		GM-Staff
+gm-icey	50		GM Staff
+gm-zell	50		GM Staff

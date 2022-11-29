@@ -555,7 +555,6 @@ badge_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0
 			lifeday_badge_09	6031	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0			
 			lifeday_badge_10	21962	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0			
 			lifeday_badge_11	22701	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0			
-			lifeday_badge_20	22794	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0			
 		col_loveday_09		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						1	0			
 			loveday_badge_09	6127	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0			
 			loveday_cupid_badge_09	6126	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0			
@@ -1323,18 +1322,6 @@ slayer_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						
 			col_imperial_rank_ltcol_01_01	5673	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_imperial_rank_col_01_01	5674	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_imperial_rank_gen_01_01	5675	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-		col_syren5_imp		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_syren5_imp_false_orders_01_01	22763	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_imp_stolen_codes_01_01	22764	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_imp_forged_rank_insignia_01_01	22765	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_imp_rank_insignia_01_01	22766	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_imp_isb_datapad_01_01	22767	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-		col_syren5_reb		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_syren5_reb_false_orders_01_01	22768	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_reb_stolen_codes_01_01	22769	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_reb_forged_rank_insignia_01_01	22770	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_reb_rank_insignia_01_01	22771	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_syren5_reb_intel_datapad_01_01	22772	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 	creature_kill			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		kill_nyms_themepark_pirate		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			kill_nyms_themepark_sulfur_lake_pirate_activate	15899	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
@@ -1790,8 +1777,6 @@ slayer_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						
 			cold_blooded_tier_2_complete	2694	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_hoth_probe_droid_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			hoth_probe_droid_counter	6222	6233	15	kill_heroic_echo_probe_droid																	sound/music_acq_miner.snd	gray	0	0						0	0			
-		col_necrosis_slayer																									1							1		Necrosis Neutralizer	
-			necrosis_slayer_counter	22773	22783	20	kill_ep3_general_grievous																													N-K Necrosis	You have successfully defeated Kinesworthy and Lorn's dangerous creation.
 	force_sensitive_kill			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_jedi_npc_kill		0	-1	-1																		sound/music_acq_miner.snd	gray	0	1						0	1			
 			kill_padawan_01	5515	5523	50	kill_fallen_padawan	kill_dark_jedi_sentinel	kill_light_jedi_sentinel	kill_treasure_guard_padawan	kill_ep3_rryatt_crazed_jedi													sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -2123,17 +2108,6 @@ artifact_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			round_red_gem_style2_08	4882	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			round_red_gem_style2_09	4883	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			round_red_gem_style2_10	4884	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-		col_round_orange		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			round_orange_gem_style1_01	22784	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_02	22785	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_03	22786	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_04	22787	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_05	22788	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_06	22789	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_07	22790	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_08	22791	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_09	22792	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			round_orange_gem_style1_10	22793	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	hoth_collections			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_hoth_frozen_tauntaun_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			hoth_frozen_tauntaun	6208	6214	10																		sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -3039,15 +3013,15 @@ hobbies_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0					
 			smuggled_groups	5285	5292	25																		sound/music_acq_miner.snd	gray	0	0						0	0			
 	harvesting_resources			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_resource_harvest_hide		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_resource_hide_01	5354	5359	15																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_hide_01	5354	5359	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_resource_harvest_meat		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_resource_meat_01	5360	5365	15																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_meat_01	5360	5365	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_resource_harvest_bone		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_resource_bone_01	5366	5371	15																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_bone_01	5366	5371	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_resource_harvest_milk		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_resource_harvest_milk_01	5372	5380	15																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_harvest_milk_01	5372	5380	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_resource_harvest_egg		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			col_resource_harvest_egg_01	5408	5416	15																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_resource_harvest_egg_01	5408	5416	30																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_resource_harvest_complete		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			col_resource_hide_complete	5569	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_resource_meat_complete	5570	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -3865,7 +3839,7 @@ achievement_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0	
 		col_boss_badge_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			undead_minor_bosses_killed	15340	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			undead_cornburr_killed	15341	-1	-1	kill_outbreak_afflicted_maintenance_boss																	sound/music_acq_miner.snd	gray	0	0						0	0			
-			undead_rancor_killed	15342	-1	-1	kill_outbreak_afflicted_rancor																	sound/music_acq_miner.snd	gray	0	0						0	0
+			undead_rancor_killed	15342	-1	-1	kill_outbreak_afflicted_rancor																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	meatlump_theme_park			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_meatlump_rank_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			meatlump_rank_01_01	5908	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -6233,3 +6207,9 @@ removed_slots_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	
 	removed_slots_page			0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
 		slots_removed		0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
 			reserved_mail_04_03	16083	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+resurgence_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						1	0			
+	resurgence_page			0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						1	0			
+		event_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	1	0						1	0			
+			col_halloween_pumpkin_smasher	22763	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0			
+			col_halloween_22	22764	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0			
+			col_title_thief	22765	-1	-1	noScriptNotifyOnModify																	sound/music_acq_miner.snd	gray	1	1						1	0			

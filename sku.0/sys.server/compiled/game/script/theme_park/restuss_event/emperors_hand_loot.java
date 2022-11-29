@@ -32,10 +32,10 @@ public class emperors_hand_loot extends script.base_script {
 			return;
 		}
 		int x = rand(1, 100);
-		if (x < 100) { /* 100% Drop Chance: Legendary Loot Chest */
+		if (x < 100) { /* 99% Drop Chance: Legendary Loot Chest */
 			static_item.createNewItemFunction("rare_loot_chest_quality_3", corpseInventory);
 		}
-		if (x < 100) { /* 100% Drop Chance: Jinsu Razor Lightsaber Schematic */
+		if (x < 100) { /* 99% Drop Chance: Jinsu Razor Lightsaber Schematic */
 			static_item.createNewItemFunction("item_restuss_schematic_saber_04_01", corpseInventory);
 		}
 		if (x < 2) { /* 1% Drop Chance: Sith Waistpack 4/5 */

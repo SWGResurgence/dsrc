@@ -10,6 +10,29 @@ item_deed_landspeeder_usv5_s02				24			"So in the case of this table only trader
 item_deed_podracer_anakin				30			
 item_pgc_starship_storage_device_01				16			
 item_pgc_sandcrawler_house_deed				48			
+item_tcg_loot_reward_series1_indoor_fountain_01				10			Large Indoor Fountain
+item_tcg_loot_reward_series1_indoor_fountain_02				10			Small Indoor Fountain
+item_tcg_loot_reward_series3_empal_surecon_center_medical_table				20			EmPal SuRecon Center Medical Table
+item_tcg_loot_reward_series5_xj6_air_speeder				28			Vehicle Deed: XJ-6 Airspeeder
+item_tcg_loot_reward_series8_glass_sculpture				20			Glass Helix Sculpture
+item_housepack_xeno_couch_01_01				5			
+item_housepack_xeno_desk_01_01				5			
+item_housepack_xeno_table_01_01				5			
+item_housepack_xeno_desk_lamp_01_01				5			
+item_housepack_xeno_rug_01_01				5			
+item_housepack_xeno_recliner_01_01				5			
+item_housepack_painting_rebel_01_01				12			
+item_housepack_painting_imperial_01_01				12			
+item_holopet_cle004_data_cube_01_01				20			
+item_holopet_ins444_data_cube_01_01				20			
+item_housepack_emperor_desk_01_01				25			
+item_housepack_emperor_chair_01_01				25			
+item_housepack_emperor_desk_lamp_01_01				5			
+object/tangible/veteran_reward/one_year_anniversary/painting_10.iff			125				
+object/tangible/veteran_reward/one_year_anniversary/painting_01.iff			125				
+object/tangible/veteran_reward/one_year_anniversary/painting_06.iff			125				
+object/tangible/veteran_reward/one_year_anniversary/painting_08.iff			125				
+object/tangible/veteran_reward/one_year_anniversary/painting_03.iff			125				
 item_pgc_monitorscreen			219				
 item_pgc_monitorscreen_sm			177				
 item_pgc_glass_pane_01			169				
@@ -52,3 +75,4 @@ item_pgc_planet_hologram_yavin4_02			162
 item_costume_chiss_01			119				
 item_costume_exar_kun_cultist			119				
 item_costume_kit		900					
+item_chronicles_heroic_pack	25000			16			

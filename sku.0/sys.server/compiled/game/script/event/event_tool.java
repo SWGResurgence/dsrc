@@ -437,19 +437,19 @@ public class event_tool extends script.base_script
     {
         if (params == null || params.equals(""))
         {
-            sendSystemMessage(self, "[Syntax] /eventTefArea <range>. Valid range is 1 to 256.", null);
+            sendSystemMessage(self, "[Syntax] /eventTefArea <range>. Valid range is 1 to 8000.", null);
             return SCRIPT_CONTINUE;
         }
         StringTokenizer st = new StringTokenizer(params);
         int numArgs = st.countTokens();
         if (numArgs > 1)
         {
-            sendSystemMessage(self, "[Syntax] /eventTefArea <range>. Valid range is 1 to 256.", null);
+            sendSystemMessage(self, "[Syntax] /eventTefArea <range>. Valid range is 1 to 8000.", null);
             return SCRIPT_CONTINUE;
         }
         String rangeStr = st.nextToken();
         float range = utils.stringToInt(rangeStr);
-        if (range < 1 || range > 256)
+        if (range < 1 || range > 8000)
         {
             sendSystemMessage(self, "Invalid range. Range must be between 1 and 256.", null);
             return SCRIPT_CONTINUE;

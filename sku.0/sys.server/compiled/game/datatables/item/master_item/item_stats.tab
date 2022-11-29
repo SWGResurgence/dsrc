@@ -14,7 +14,7 @@ item_jedi_robe_04_02	"constitution_modified=50,strength_modified=80"		int:armor.
 item_jedi_robe_04_03	"constitution_modified=80,agility_modified=5,strength_modified=50,precision_modified=50"		int:armor.general_protection_clothing=5000	index_color_1=4							
 item_jedi_robe_04_04	"constitution_modified=80,agility_modified=5,luck_modified=50,precision_modified=50"		int:armor.general_protection_clothing=5000	index_color_1=3							
 item_jedi_robe_06_01	"constitution_modified=100,strength_modified=100,luck_modified=100,precision_modified=100,agility_modified=100"		"int:armor.general_protection_clothing=5600,int:item.set.set_id=90001"	index_color_1=4							
-item_jedi_robe_06_02	"constitution_modified=100,strength_modified=100,luck_modified=100,precision_modified=100,agility_modified=100"		"int:armor.general_protection_clothing=5600,int:item.set.set_id=90001"		"int:armor.general_protection_clothing=6875,int:item.set.set_id=90001"	index_color_1=3					
+item_jedi_robe_06_02	"constitution_modified=100,strength_modified=100,luck_modified=100,precision_modified=100,agility_modified=100"		"int:armor.general_protection_clothing=5600,int:item.set.set_id=90001"	index_color_1=3							
 item_datapad_01_01											
 item_tooth_01_01											
 item_tooth_01_02											
@@ -569,8 +569,8 @@ item_tow_schematic_flamer_03_01			"string:loot_schematic.schematic=object/draft_
 item_tow_schematic_cannon_03_01			"string:loot_schematic.schematic=object/draft_schematic/weapon/appearance/weapon_appearance_heavy_lava_cannon.iff,string:loot_schematic.skill_req=class_munitions_phase4_master"								
 item_tow_schematic_rifle_03_01			"string:loot_schematic.schematic=object/draft_schematic/weapon/appearance/weapon_appearance_rifle_dp23.iff,string:loot_schematic.skill_req=class_munitions_phase4_master"								
 item_tow_schematic_rifle_03_02			"string:loot_schematic.schematic=object/draft_schematic/weapon/appearance/weapon_appearance_rifle_disrupter.iff,string:loot_schematic.skill_req=class_munitions_phase4_master"								
-item_tow_schematic_vehicle_02_01			"string:vehicle_attribs.object_ref=lava_skiff,float:hit_points=15000"								
-item_tow_schematic_vehicle_02_02			"string:vehicle_attribs.object_ref=desert_skiff,float:hit_points=15000"								
+item_tow_schematic_vehicle_02_01			"string:vehicle_attribs.object_ref=lava_skiff,float:hit_points=30000"								
+item_tow_schematic_vehicle_02_02			"string:vehicle_attribs.object_ref=desert_skiff,float:hit_points=75000"								
 item_tow_buff_crystal_02_01				index_color_1=1	towCrystalOffenseBurst	long_reuse_3	3600			appearance/pt_special_hit_concuss.prt	
 item_tow_buff_crystal_02_02				index_color_1=22	towCrystalDefenseBurst	long_reuse_3	3600			appearance/pt_special_hit_concuss.prt	
 item_tow_buff_crystal_02_03				index_color_1=30	towCrystalDotImmunity	towCrystalDotImmunity	3600			appearance/pt_special_hit_concuss.prt	
@@ -2205,7 +2205,7 @@ item_gcw_base_health_a_03_01			"int:healing.power=3500,int:healing.combat_level_
 item_gcw_base_health_b_03_01			"int:healing.power=4000,int:healing.combat_level_required=60"					55			
 item_gcw_base_health_c_03_01			"int:healing.power=4500,int:healing.combat_level_required=65"					55			
 item_gcw_base_health_d_03_01			"int:healing.power=5000,int:healing.combat_level_required=70"					55			
-item_gcw_base_health_e_04_01			"int:healing.power=5500,int:healing.combat_level_required=75"					55			
+item_gcw_base_health_e_04_01			"int:healing.power=8500,int:healing.combat_level_required=75"					55			
 item_gcw_base_action_a_03_01			"int:healing.power=1750,int:healing.combat_level_required=55,int:healing.pool=2"					55			
 item_gcw_base_action_b_03_01			"int:healing.power=2000,int:healing.combat_level_required=60,int:healing.pool=2"					55			
 item_gcw_base_action_c_03_01			"int:healing.power=2250,int:healing.combat_level_required=65,int:healing.pool=2"					55			
@@ -3832,8 +3832,10 @@ item_event_halloween_lantern_03
 item_event_halloween_lantern_04											
 item_event_halloween_painting											
 item_event_halloween_krayt_01											
-item_event_halloween_house_sign			"string:modifiedSign=object/tangible/sign/player/house_address_halloween_sign.iff,int:hangingStanding=1,string:structure.modifiedSignModel=item_event_halloween_house_sign"								
-item_event_halloween_song_book											
+item_event_halloween_house_sign			"string:modifiedSign=object/tangible/sign/player/house_address_halloween_sign.iff,int:hangingStanding=1,string:structure.modifiedSignModel=item_event_halloween_house_sign"
+item_efol_hanging_sign_01			"string:modifiedSign=object/tangible/sign/player/efol_standing_sign_01.iff,int:hangingStanding=1,string:structure.modifiedSignModel=item_event_efol_house_sign"
+item_efol_standing_sign_01			"string:modifiedSign=object/tangible/sign/player/efol_hanging_sign_01.iff,int:hangingStanding=1,string:structure.modifiedSignModel=item_event_efol_house_sign"
+item_event_halloween_song_book
 item_event_halloween_skull_candle_01											
 item_event_halloween_skull_candle_02											
 item_event_halloween_spider_web_03											
@@ -4037,7 +4039,9 @@ item_costume_gungan					costume_gungan
 item_costume_ewok					costume_ewok						
 item_costume_gamorrean_guard					costume_gamorrean_guard						
 item_costume_battle_droid					costume_battle_droid						
-item_costume_droideka					costume_droideka						
+item_costume_droideka					costume_droideka
+item_costume_awing					costume_awing
+item_costume_tiefighter					costume_tiefighter
 item_event_flower_from_2008			"int:nocert=1,int:allProfs=1"								
 item_event_loveday_decorative_berry											
 item_event_loveday_decorative_drink											
@@ -4339,7 +4343,8 @@ item_pgc_token_02
 item_pgc_token_03											
 item_pgc_relic_fragment											
 item_pgc_booster_pack											
-item_pgc_booster_pack_goto			string:chronicles.boosterPackCategory=goto_task								
+item_pgc_booster_pack_goto			string:chronicles.boosterPackCategory=goto_task
+item_chronicles_heroic_pack			string:chronicles.boosterPackCategory=rare
 item_pgc_booster_pack_comm			string:chronicles.boosterPackCategory=comm_message								
 item_pgc_starter_kit			int:chronicles.isStarterPack=1								
 item_pgc_fireplace											
@@ -5032,21 +5037,19 @@ item_elite_geothermal_generator_deed_schematic_01_01			"string:loot_schematic.sc
 item_painting_resurgence_imperial_01_01											
 item_painting_resurgence_rebel_01_01											
 item_instance_unlock_heroics_01_01											
-item_tow_ring_advanced_component_04_01	"advanced_assembly=25,advanced_ship_experimentation=1,luck_modified=50"
+item_tow_ring_advanced_component_04_01	"advanced_assembly=25,advanced_ship_experimentation=5,booster_assembly=25,booster_experimentation=1,luck_modified=50"										
 item_tow_ring_architect_04_01	"structure_assembly=25,structure_experimentation=1,luck_modified=50"										
 item_tow_ring_armorsmith_04_01	"armor_assembly=25,armor_experimentation=1,luck_modified=50"										
-item_tow_ring_artisan_04_01	"general_assembly=25,general_experimentation=1,luck_modified=50"
+item_tow_ring_artisan_04_01	"general_assembly=25,general_experimentation=1,luck_modified=50"										
 item_tow_ring_beast_master_04_01	"bm_incubator_dps_armor=2,incubation_time_reduction=6,bm_xp_mod_boost=3,luck_modified=25"										
-item_tow_ring_chassis_04_01	"chassis_assembly=25,chassis_experimentation=1,luck_modified=50"
-item_tow_ring_chef_04_01	"food_assembly=25=25,food_experimentation=1,luck_modified=50"										
+item_tow_ring_chassis_04_01	"chassis_assembly=25,chassis_experimentation=3,engine_assembly=25,engine_experimentation=1,luck_modified=50"										
+item_tow_ring_chef_04_01	"food_assembly=25,food_experimentation=1,luck_modified=50"										
 item_tow_ring_cybernetics_technician_04_01	"cybernetic_assembly=25,cybernetic_experimentation=1,cybernetic_assembly=1,luck_modified=50"										
+item_tow_ring_defensive_systems_04_01	"shields_assembly=25,shields_experimentation=3,weapon_systems=25,weapon_systems_experimentation=3,luck_modified=50"										
 item_tow_ring_droid_engineer_04_01	"droid_assembly=25,droid_experimentation=1,luck_modified=50"										
-item_tow_ring_engine_04_01	"engine_assembly=25,engine_experimentation=1,luck_modified=50"
 item_tow_ring_inspiration_04_01	"expertise_en_inspire_pulse_duration_increase=1,expertise_en_inspire_buff_duration_increase=15,luck_modified=25"										
-item_tow_ring_power_systems_04_01	"power_systems=25,power_systems_experimentation=1,luck_modified=50"
-item_tow_ring_shields_04_01	"shields_assembly=25,shields_experimentation=1,luck_modified=50"
-item_tow_ring_tailor_04_01	"clothing_assembly=25,clothing_experimentation=1,luck_modified=50"
-item_tow_ring_weapon_systems_04_01	"weapon_systems=25,weapon_systems_experimentation=1,luck_modified=50"										
+item_tow_ring_power_systems_04_01	"booster_assembly=25,booster_experimentation=1,power_systems=25,power_systems_experimentation=1,luck_modified=50"										
+item_tow_ring_tailor_04_01	"clothing_assembly=25,clothing_experimentation=1,luck_modified=50"										
 item_tow_ring_weaponsmith_04_01	"weapon_assembly=25,weapon_experimentation=1,luck_modified=50"										
 item_painting_resurgence_mandalorian_knights_01_01											
 item_basilisk_war_droid_itv											
@@ -5073,9 +5076,30 @@ item_veteran_reward_token_box_medium_01_01
 item_veteran_reward_token_box_medium_01_02											
 item_veteran_reward_token_box_large_01_01											
 item_veteran_reward_token_box_large_01_02											
-item_resurgence_czerka_banner_01_01
-item_resurgence_czerka_banner_01_02
-item_resurgence_czerka_banner_01_03
-item_resurgence_mandalorian_banner_01_01
-item_resurgence_mandalorian_banner_01_02
-game_update_4_gift
+item_resurgence_czerka_banner_01_01											
+item_resurgence_czerka_banner_01_02											
+item_resurgence_czerka_banner_01_03											
+item_resurgence_mandalorian_banner_01_01											
+item_resurgence_mandalorian_banner_01_02											
+game_update_4_gift											
+item_cantina_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/cantina_naboo_b.iff,int:player_structure.deed.buildtime=90"								
+item_cantina_naboo_style_01_03_deed			"string:player_structure.deed.template=object/building/player/city/cantina_naboo_c.iff,int:player_structure.deed.buildtime=90"								
+item_cityhall_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/cityhall_naboo_b.iff,int:player_structure.deed.buildtime=90"								
+item_cloning_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/cloning_naboo_b.iff,int:player_structure.deed.buildtime=90"								
+item_hospital_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/hospital_naboo_b.iff,int:player_structure.deed.buildtime=90"								
+item_hospital_naboo_style_02_01_deed			"string:player_structure.deed.template=object/building/naboo/hospital_naboo_c.iff,int:player_structure.deed.buildtime=90"								
+item_shuttleport_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/naboo/shuttleport_naboo_b.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_guild_style_01_02_deed			"string:player_structure.deed.template=object/building/player/player_guildhall_naboo_style_01_b.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_large_style_01_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_large_style_01_b.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_large_style_01_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_large_style_01_c.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_medium_style_01_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_medium_style_01_b.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_medium_style_01_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_medium_style_01_c.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_small_style_01_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_01_b.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_small_style_01_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_01_c.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_small_style_02_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_b.iff,int:player_structure.deed.buildtime=90"								
+item_naboo_house_small_style_02_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_c.iff,int:player_structure.deed.buildtime=90"								
+dxun_drexl_familiar			string:creatureName=dxun_drexl_familiar								
+item_painting_resurgence_theater_poster_01_01
+item_painting_resurgence_gmf_mustafar_01_01
+item_painting_courascant_travel_advertisement_01_01
+item_painting_twilek_f_01_01

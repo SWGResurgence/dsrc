@@ -374,6 +374,11 @@ public class player_saga_quest extends script.base_script
                 if (isIdValid(oldRecipe) && exists(oldRecipe))
                 {
                     questHolocron = oldRecipe;
+                    // Exploit Fix (SWGSource:v3.1) - Check if the player is trying to create a recipe that has subrecipes.
+                    if(!getTemplateName(oldRecipe).equals(pgc_quests.PGC_QUEST_RECIPE_TEMPLATE))
+                    {
+                        return false;
+                    }
                     resetAllPlayerQuestData(questHolocron);
                     if (hasObjVar(questHolocron, "chronicles"))
                     {

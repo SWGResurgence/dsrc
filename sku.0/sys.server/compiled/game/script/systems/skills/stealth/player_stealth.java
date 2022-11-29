@@ -101,7 +101,7 @@ public class player_stealth extends script.systems.combat.combat_base
             perpetuate = stealth.checkWildernessStealthUpkeep(self);
             break;
             case (2068822907):
-            //perpetuate = stealth.checkSpyStealthUpkeep(self);
+            //perpetuate = stealth.checkSpyStealthUpkeep(self); //@Commented out due to Breaking Action Regeneration a few Updates ago.
             break;
             default:
             break;
