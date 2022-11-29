@@ -3832,10 +3832,10 @@ item_event_halloween_lantern_03
 item_event_halloween_lantern_04											
 item_event_halloween_painting											
 item_event_halloween_krayt_01											
-item_event_halloween_house_sign			"string:modifiedSign=object/tangible/sign/player/house_address_halloween_sign.iff,int:hangingStanding=1,string:structure.modifiedSignModel=item_event_halloween_house_sign"
-item_efol_hanging_sign_01			"string:modifiedSign=object/tangible/sign/player/efol_standing_sign_01.iff,int:hangingStanding=1,string:structure.modifiedSignModel=item_event_efol_house_sign"
-item_efol_standing_sign_01			"string:modifiedSign=object/tangible/sign/player/efol_hanging_sign_01.iff,int:hangingStanding=1,string:structure.modifiedSignModel=item_event_efol_house_sign"
-item_event_halloween_song_book
+item_event_halloween_house_sign			"string:modifiedSign=object/tangible/sign/player/house_address_halloween_sign.iff,int:hangingStanding=1,string:structure.modifiedSignModel=item_event_halloween_house_sign"								
+item_efol_hanging_sign_01			"string:modifiedSign=object/tangible/sign/player/efol_standing_sign_01.iff,int:hangingStanding=1,string:structure.modifiedSignModel=item_event_efol_house_sign"								
+item_efol_standing_sign_01			"string:modifiedSign=object/tangible/sign/player/efol_hanging_sign_01.iff,int:hangingStanding=1,string:structure.modifiedSignModel=item_event_efol_house_sign"								
+item_event_halloween_song_book											
 item_event_halloween_skull_candle_01											
 item_event_halloween_skull_candle_02											
 item_event_halloween_spider_web_03											
@@ -4039,9 +4039,9 @@ item_costume_gungan					costume_gungan
 item_costume_ewok					costume_ewok						
 item_costume_gamorrean_guard					costume_gamorrean_guard						
 item_costume_battle_droid					costume_battle_droid						
-item_costume_droideka					costume_droideka
-item_costume_awing					costume_awing
-item_costume_tiefighter					costume_tiefighter
+item_costume_droideka					costume_droideka						
+item_costume_awing					costume_awing						
+item_costume_tiefighter					costume_tiefighter						
 item_event_flower_from_2008			"int:nocert=1,int:allProfs=1"								
 item_event_loveday_decorative_berry											
 item_event_loveday_decorative_drink											
@@ -4278,7 +4278,7 @@ item_tcg_loot_reward_series5_player_house_hangar			"string:player_structure.deed
 item_tcg_loot_reward_series5_mustafar_diorama											
 item_tcg_loot_reward_series5_klorri_clan_shield					tcg_series5_klorri_clan_shield						
 item_tcg_loot_reward_series5_signal_unit											
-item_tcg_loot_reward_series5_nightsister_backpack	"constitution_modified=100,luck_modified=100,strength_modified=100,detect_hidden=100,expertise_critical_line_me_dm=15,expertise_action_all=25"																					
+item_tcg_loot_reward_series5_nightsister_backpack											
 item_tcg_loot_reward_series5_tiefighter_chair											
 item_tcg_loot_reward_series5_deathstar_hologram											
 item_tcg_loot_reward_series5_theater_poster											
@@ -4343,8 +4343,8 @@ item_pgc_token_02
 item_pgc_token_03											
 item_pgc_relic_fragment											
 item_pgc_booster_pack											
-item_pgc_booster_pack_goto			string:chronicles.boosterPackCategory=goto_task
-item_chronicles_heroic_pack			string:chronicles.boosterPackCategory=rare
+item_pgc_booster_pack_goto			string:chronicles.boosterPackCategory=goto_task								
+item_chronicles_heroic_pack			string:chronicles.boosterPackCategory=rare								
 item_pgc_booster_pack_comm			string:chronicles.boosterPackCategory=comm_message								
 item_pgc_starter_kit			int:chronicles.isStarterPack=1								
 item_pgc_fireplace											
@@ -5099,7 +5099,7 @@ item_naboo_house_small_style_01_03_deed			"string:player_structure.deed.template
 item_naboo_house_small_style_02_02_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_b.iff,int:player_structure.deed.buildtime=90"								
 item_naboo_house_small_style_02_03_deed			"string:player_structure.deed.template=object/building/player/player_house_naboo_small_style_02_c.iff,int:player_structure.deed.buildtime=90"								
 dxun_drexl_familiar			string:creatureName=dxun_drexl_familiar								
-item_painting_resurgence_theater_poster_01_01
-item_painting_resurgence_gmf_mustafar_01_01
-item_painting_courascant_travel_advertisement_01_01
-item_painting_twilek_f_01_01
+item_painting_resurgence_theater_poster_01_01											
+item_painting_resurgence_gmf_mustafar_01_01											
+item_painting_courascant_travel_advertisement_01_01											
+item_painting_twilek_f_01_01											
