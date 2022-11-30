@@ -841,6 +841,14 @@ saga_relic_destroy_veermok_sentry	none	other	-1				string:chronicles.slotName=sa
 saga_relic_destroy_vekis_kiyanu	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_vekis_kiyanu	rare	4				
 saga_relic_destroy_womprat_social	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_womprat_social	"womprat,tatooine"	1				
 													
+saga_relic_destroy_world_boss_elder_ancient_krayt_dragon	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_world_boss_elder_ancient_krayt_dragon	"world_boss,rare"	4				
+saga_relic_destroy_world_boss_mutant_peko_peko_empress	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_world_boss_mutant_peko_peko_empress	"world_boss,rare"	4				
+saga_relic_destroy_world_boss_paxvizla	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_world_boss_paxvizla	"world_boss,rare"	4				
+													
+saga_relic_destroy_loot_world_boss_elder_ancient_krayt_dragon	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple_loot:relic_destroy_loot_world_boss_elder_ancient_krayt_dragon	"world_boss,rare"	4				
+saga_relic_destroy_loot_world_boss_mutant_peko_peko_empress	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple_loot:relic_destroy_loot_world_boss_mutant_peko_peko_empress	"world_boss,rare"	4				
+saga_relic_destroy_loot_world_boss_paxvizla	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple_loot:relic_destroy_loot_world_boss_paxvizla	"world_boss,rare"	4				
+													
 saga_relic_perform_anchorhead_tavern	none	other	-1				string:chronicles.slotName=saga_relic_perform:relic_perform_anchorhead_tavern	"perform,no_loot"	1				
 saga_relic_perform_aurilia_guildhall	none	other	-1				string:chronicles.slotName=saga_relic_perform:relic_perform_aurilia_guildhall	"perform,no_loot"	4				
 saga_relic_perform_bela_vistal_cantina	none	other	-1				string:chronicles.slotName=saga_relic_perform:relic_perform_bela_vistal_cantina	"perform,no_loot"	2				
@@ -1319,6 +1327,8 @@ saga_relic_destroy_loot_death_trooper_50	none	other	-1				string:chronicles.slot
 saga_relic_destroy_loot_death_trooper_90	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple_loot:relic_destroy_loot_death_trooper_90	afflicted	4				
 													
 saga_relic_goto_global_generic	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_global_generic	"global,goto_task"	1				
+saga_relic_goto_dxun_dxun_czerka_outpost	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_dxun_dxun_czerka_outpost	"dxun,goto_task"	3				
+saga_relic_goto_dxun_abandoned_mandalorian_outpost	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_dxun_abandoned_mandalorian_outpost	"world_boss,dxun,goto_task"	3				
 saga_relic_goto_tatooine_escape_pod	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_tatooine_escape_pod	"tatooine,goto_task"	1				
 saga_relic_goto_tatooine_jabbas_palace	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_tatooine_jabbas_palace	"tatooine,goto_task"	1				
 saga_relic_goto_tatooine_fort_tusken	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_tato_fort_tusken_gate	"tatooine,goto_task"	1				
@@ -1414,6 +1424,7 @@ saga_relic_goto_rori_cobral_hideout	none	other	-1				string:chronicles.slotName=
 saga_relic_goto_rori_bark_mite_cave	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_rori_bark_mite_cave	"rori,goto_task"	3				
 saga_relic_goto_rori_torton_cave	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_rori_torton_cave	"rori,goto_task"	3				
 saga_relic_goto_rori_kobola_mine	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_rori_kobola_mine	"rori,goto_task"	3				
+saga_relic_goto_rori_czerka_camp	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_rori_czerka_camp	"rori,dxun,goto_task"	3				
 saga_relic_goto_yavin4_geonosian_lab	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_yavin4_geonosian_lab	"yavin4,goto_task"	3				
 saga_relic_goto_yavin4_blue_leaf_temple	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_yavin4_blue_leaf_temple	"yavin4,goto_task"	3				
 saga_relic_goto_yavin4_dark_jedi_bunker	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_yavin4_dark_jedi_bunker	"yavin4,goto_task"	3				
