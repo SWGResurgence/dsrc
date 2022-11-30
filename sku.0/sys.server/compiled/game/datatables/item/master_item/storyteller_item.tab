@@ -405,7 +405,6 @@ saga_relic_comm_wookiee_female	none	other	-1				string:chronicles.slotName=saga_
 saga_relic_comm_wookiee_male	none	other	-1				string:chronicles.slotName=saga_relic_comm_message:relic_comm_wookiee_male	comm_message	1				
 saga_relic_comm_zabrak_female	none	other	-1				string:chronicles.slotName=saga_relic_comm_message:relic_comm_zabrak_female	comm_message	1				
 saga_relic_comm_zabrak_male	none	other	-1				string:chronicles.slotName=saga_relic_comm_message:relic_comm_zabrak_male	comm_message	1				
-													
 saga_relic_destroy_aakuan	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_aakuan	"aakuan,talus"	2				
 saga_relic_destroy_aakuan_guardian	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_aakuan_guardian	"aakuan,talus"	2				
 saga_relic_destroy_aakuan_defender	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_aakuan_defender	"aakuan,talus"	2				
@@ -566,26 +565,26 @@ saga_relic_destroy_gorax	none	other	-1				string:chronicles.slotName=saga_relic_
 saga_relic_destroy_greater_desert_womprat	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_greater_desert_womprat	"womprat,tatooine"	1				
 saga_relic_destroy_greater_sludge_panther	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_greater_sludge_panther	"sludge_panther,talus"	2				
 saga_relic_destroy_greyshroud_terrorist	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_greyshroud_terrorist	"grey_shroud,corellia"	2				
-saga_relic_destroy_heroic_axkva_min	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_axkva_min	"heroic_axkva_min,rare"	4				
-saga_relic_destroy_heroic_captain_prat	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_captain_prat	"captain_prat,rare"	4				
-saga_relic_destroy_heroic_comander_kenkirk	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_comander_kenkirk	"commander_kenkirk,rare"	4				
-saga_relic_destroy_heroic_exar_chaos	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_chaos	"exar_chaos,rare"	4				
-saga_relic_destroy_heroic_exar_caretaker	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_caretaker	"exar_caretaker,rare"	4				
-saga_relic_destroy_heroic_exar_gackle	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_gackle	"exar_gackle,rare"	4				
-saga_relic_destroy_heroic_exar_harmony	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_gorvo	"heroic_gorvo,rare"	4				
-saga_relic_destroy_heroic_exar_hate	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_harmony	"exar_harmony,rare"	4				
-saga_relic_destroy_heroic_exar_kun	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_hate	"exar_hate,rare"	4				
-saga_relic_destroy_heroic_exar_minder	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_kun	"exar_kun,rare"	4				
-saga_relic_destroy_heroic_exar_skreeg	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_skreeg	"exar_skreeg,rare"	4				
-saga_relic_destroy_heroic_exar_vengence	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_vengence	"exar_vengeance,rare"	4				
-saga_relic_destroy_heroic_exar_wrath	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_wrath	"exar_wrath,rare"	4				
-saga_relic_destroy_heroic_gorvo	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_minder	"exar_minder,rare"	4				
-saga_relic_destroy_heroic_ig88	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_ig88	"heroic_ig88,rare"	4				
-saga_relic_destroy_heroic_kimaru	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_kimaru	"heroic_kimaru,rare"	4				
-saga_relic_destroy_heroic_krix_swiftshadow	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_krix_swiftshadow	"krix_swiftshadow,rare"	4				
-saga_relic_destroy_heroic_lelli_hi	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_lelli_hi	"lelli_hi,rare"	4				
-saga_relic_destroy_heroic_nandina	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_nandina	"heroic_nandina,rare"	4				
-saga_relic_destroy_heroic_suin_chalo	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_suin_chalo	"suin_chalo,rare"	4				
+saga_relic_destroy_heroic_axkva_min	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_axkva_min	"heroic,heroic_axkva_min,rare"	4				
+saga_relic_destroy_heroic_captain_prat	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_captain_prat	"heroic,captain_prat,rare"	4				
+saga_relic_destroy_heroic_comander_kenkirk	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_comander_kenkirk	"heroic,commander_kenkirk,rare"	4				
+saga_relic_destroy_heroic_exar_chaos	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_chaos	"heroic,exar_chaos,rare"	4				
+saga_relic_destroy_heroic_exar_caretaker	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_caretaker	"heroic,exar_caretaker,rare"	4				
+saga_relic_destroy_heroic_exar_gackle	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_gackle	"heroic,exar_gackle,rare"	4				
+saga_relic_destroy_heroic_exar_harmony	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_gorvo	"heroic,heroic_gorvo,rare"	4				
+saga_relic_destroy_heroic_exar_hate	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_harmony	"heroic,exar_harmony,rare"	4				
+saga_relic_destroy_heroic_exar_kun	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_hate	"heroic,exar_hate,rare"	4				
+saga_relic_destroy_heroic_exar_minder	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_kun	"heroic,exar_kun,rare"	4				
+saga_relic_destroy_heroic_exar_skreeg	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_skreeg	"heroic,exar_skreeg,rare"	4				
+saga_relic_destroy_heroic_exar_vengence	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_vengence	"heroic,exar_vengeance,rare"	4				
+saga_relic_destroy_heroic_exar_wrath	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_wrath	"heroic,exar_wrath,rare"	4				
+saga_relic_destroy_heroic_gorvo	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_exar_minder	"heroic,exar_minder,rare"	4				
+saga_relic_destroy_heroic_ig88	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_ig88	"heroic,heroic_ig88,rare"	4				
+saga_relic_destroy_heroic_kimaru	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_kimaru	"heroic,heroic_kimaru,rare"	4				
+saga_relic_destroy_heroic_krix_swiftshadow	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_krix_swiftshadow	"heroic,krix_swiftshadow,rare"	4				
+saga_relic_destroy_heroic_lelli_hi	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_lelli_hi	"heroic,lelli_hi,rare"	4				
+saga_relic_destroy_heroic_nandina	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_nandina	"heroic,heroic_nandina,rare"	4				
+saga_relic_destroy_heroic_suin_chalo	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_heroic_suin_chalo	"heroic,suin_chalo,rare"	4				
 saga_relic_destroy_hk_ak_prime	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_hk_ak_prime	"hk_ak_prime, rare"	4				
 saga_relic_destroy_hk_cym_prototype	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_hk_cym_prototype	"hk_cym_prototype,rare"	4				
 saga_relic_destroy_hk_forward_comander	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_hk_forward_comander	"hk_forward_commander,rare"	4				
@@ -840,15 +839,12 @@ saga_relic_destroy_veermok_scout	none	other	-1				string:chronicles.slotName=sag
 saga_relic_destroy_veermok_sentry	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_veermok_sentry	"veermok,naboo"	1				
 saga_relic_destroy_vekis_kiyanu	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_vekis_kiyanu	rare	4				
 saga_relic_destroy_womprat_social	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_womprat_social	"womprat,tatooine"	1				
-													
 saga_relic_destroy_world_boss_elder_ancient_krayt_dragon	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_world_boss_elder_ancient_krayt_dragon	"world_boss,rare"	4				
 saga_relic_destroy_world_boss_mutant_peko_peko_empress	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_world_boss_mutant_peko_peko_empress	"world_boss,rare"	4				
 saga_relic_destroy_world_boss_paxvizla	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple:relic_destroy_world_boss_paxvizla	"world_boss,rare"	4				
-													
 saga_relic_destroy_loot_world_boss_elder_ancient_krayt_dragon	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple_loot:relic_destroy_loot_world_boss_elder_ancient_krayt_dragon	"world_boss,rare"	4				
 saga_relic_destroy_loot_world_boss_mutant_peko_peko_empress	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple_loot:relic_destroy_loot_world_boss_mutant_peko_peko_empress	"world_boss,rare"	4				
 saga_relic_destroy_loot_world_boss_paxvizla	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple_loot:relic_destroy_loot_world_boss_paxvizla	"world_boss,rare"	4				
-													
 saga_relic_perform_anchorhead_tavern	none	other	-1				string:chronicles.slotName=saga_relic_perform:relic_perform_anchorhead_tavern	"perform,no_loot"	1				
 saga_relic_perform_aurilia_guildhall	none	other	-1				string:chronicles.slotName=saga_relic_perform:relic_perform_aurilia_guildhall	"perform,no_loot"	4				
 saga_relic_perform_bela_vistal_cantina	none	other	-1				string:chronicles.slotName=saga_relic_perform:relic_perform_bela_vistal_cantina	"perform,no_loot"	2				
@@ -890,7 +886,6 @@ saga_relic_perform_vreni_island_cantina	none	other	-1				string:chronicles.slotN
 saga_relic_perform_wayfar_cantina	none	other	-1				string:chronicles.slotName=saga_relic_perform:relic_perform_wayfar_cantina	"perform,no_loot"	2				
 saga_relic_perform_yavin4_labor_outpost	none	other	-1				string:chronicles.slotName=saga_relic_perform:relic_perform_yavin4_labor_outpost	"perform,no_loot"	3				
 saga_relic_perform_yavin4_mining_outpost	none	other	-1				string:chronicles.slotName=saga_relic_perform:relic_perform_yavin4_mining_outpost	"perform,no_loot"	3				
-													
 saga_relic_destroy_loot_valarians	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple_loot:relic_destroy_loot_valarians	"valarian,tatooine"	1				
 saga_relic_destroy_loot_dune_lizard	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple_loot:relic_destroy_loot_dune_lizard	"dune_lizard,tatooine"	1				
 saga_relic_destroy_loot_tusken_chief	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple_loot:relic_destroy_loot_tusken_chief	"tusken,tatooine"	1				
@@ -1325,7 +1320,6 @@ saga_relic_destroy_loot_afflicted_rancor	none	other	-1				string:chronicles.slot
 saga_relic_destroy_loot_death_trooper_10	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple_loot:relic_destroy_loot_death_trooper_10	afflicted	1				
 saga_relic_destroy_loot_death_trooper_50	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple_loot:relic_destroy_loot_death_trooper_50	afflicted	2				
 saga_relic_destroy_loot_death_trooper_90	none	other	-1				string:chronicles.slotName=saga_relic_destroy_multiple_loot:relic_destroy_loot_death_trooper_90	afflicted	4				
-													
 saga_relic_goto_global_generic	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_global_generic	"global,goto_task"	1				
 saga_relic_goto_dxun_dxun_czerka_outpost	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_dxun_dxun_czerka_outpost	"dxun,goto_task"	3				
 saga_relic_goto_dxun_abandoned_mandalorian_outpost	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_dxun_abandoned_mandalorian_outpost	"world_boss,dxun,goto_task"	3				
@@ -1460,7 +1454,6 @@ saga_relic_goto_mustafar_crash_excavation_site	none	other	-1				string:chronicle
 saga_relic_goto_mustafar_burning_plains	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_mustafar_burning_plains	"mustafar,goto_task"	4				
 saga_relic_goto_mustafar_tulrus_grounds	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_mustafar_tulrus_grounds	"mustafar,goto_task"	4				
 saga_relic_goto_mustafar_berkens_flow	none	other	-1				string:chronicles.slotName=saga_relic_goto_location:relic_goto_mustafar_berkens_flow	"mustafar,goto_task"	4				
-													
 saga_relic_craft_chance_cube_01	none	other	-1				string:chronicles.slotName=relic_craft_item:relic_craft_chance_cube_01	crafting	1				
 saga_relic_craft_dom_food_bacta_01_01	none	other	-1				string:chronicles.slotName=relic_craft_item:relic_craft_dom_food_bacta_01_01	crafting	1				
 saga_relic_craft_dom_food_bacta_01_02	none	other	-1				string:chronicles.slotName=relic_craft_item:relic_craft_dom_food_bacta_01_02	crafting	1				
