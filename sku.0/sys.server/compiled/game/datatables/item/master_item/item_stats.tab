@@ -4344,9 +4344,9 @@ item_pgc_token_03
 item_pgc_relic_fragment											
 item_pgc_booster_pack											
 item_pgc_booster_pack_goto			string:chronicles.boosterPackCategory=goto_task								
-item_chronicles_heroic_pack			string:chronicles.boosterPackCategory=heroic								
+item_pgc_booster_pack_heroic_pack			string:chronicles.boosterPackCategory=heroic								
 item_pgc_booster_pack_comm			string:chronicles.boosterPackCategory=comm_message								
-item_chronicles_world_boss_pack			string:chronicles.boosterPackCategory=world_boss								
+item_pgc_booster_pack_world_boss			string:chronicles.boosterPackCategory=world_boss								
 item_pgc_starter_kit			int:chronicles.isStarterPack=1								
 item_pgc_fireplace											
 item_special_sign_pgc_consumable	special_sign_chronicle_master_hanging_sign=1		string:static_item=item_pgc_chronicle_master_sign								

@@ -1,8 +1,10 @@
 item	cash	token24	token25	token26	class	script	note
 s[none]	i[0]	i[0]	i[0]	i[0]	i[0]	s	c
 item_pgc_booster_pack			20		0		"See library.utils for the int value of the classes. 0 is ""all"" but will only show if there are no items for the opener's class."
-item_pgc_booster_pack_goto			20				
 item_pgc_booster_pack_comm			20				
+item_pgc_booster_pack_goto			20				
+item_pgc_booster_pack_heroic_pack			50				
+item_pgc_booster_pack_world_boss			100				
 item_pgc_copper_token_box_01_01			1				
 item_pgc_silver_token_box_01_01				1			
 item_pgc_gold_token_box_01_01			1000				
@@ -84,4 +86,3 @@ st_pr_exar_kun_zapper			119
 item_costume_chiss_01			119				
 item_costume_exar_kun_cultist		900					
 item_costume_kit	25000			16			
-item_chronicles_heroic_pack							
