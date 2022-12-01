@@ -6109,7 +6109,7 @@ saga_relic_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	0		
 			relic_goto_mustafar_tulrus_grounds	14343	14348	61	UIType:Location	quest_data:80:0:0:1	"waypoint:mustafar,1139,79,134,none,Tulrus Nesting Grounds"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_goto_mustafar_berkens_flow	14349	14354	61	UIType:Location	quest_data:85:0:0:1	"waypoint:mustafar,2353,62,1287,none,Berken's Flow"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_goto_dxun_dxun_czerka_outpost	22817	22822	61	UIType:Location	quest_data:100:0:0:0	"waypoint:dxun,3214,24,-3483,none,Czerka Outpost"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
-			relic_goto_dxun_abandoned_mandalorian_outpost	22822	22827	61	UIType:Location	quest_data:100:0:0:0	"waypoint:dxun,-4576,-20,-2155,none,Abandoned Mandalorian Outpost"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
+			relic_goto_dxun_abandoned_mandalorian_outpost	22823	22828	61	UIType:Location	quest_data:100:0:0:0	"waypoint:dxun,-4576,-20,-2155,none,Abandoned Mandalorian Outpost"	radius:10														sound/music_acq_miner.snd	gray	1	0						1	0			
 		saga_relic_retrieve_item		0	-1	-1	task_shared_data:1:0:0:0																	sound/music_acq_miner.snd	gray	1	0						1	0			
 			saga_test_retrieve_item_01	14355	14360	61	UIType:Loot	relic_data:9:0:0:0	template:object/tangible/quest/speeder_junk_engine.iff	message:saga_relic:test_speeder_engine	"menu:saga_relic,test_speeder_engine_menu"	count:1												sound/music_acq_miner.snd	gray	1	0						1	0			
 		saga_relic_pvp_objective		0	-1	-1	task_shared_data:0:0:0:1																	sound/music_acq_miner.snd	gray	1	0						1	0			
