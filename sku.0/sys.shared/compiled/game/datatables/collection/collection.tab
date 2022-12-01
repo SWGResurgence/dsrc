@@ -5069,6 +5069,7 @@ saga_relic_book				0	-1	-1																		sound/music_acq_miner.snd	gray	1	0		
 			relic_destroy_wod_spider_boss_consort	22060	22065	61	UIType:Kill	relic_data:90:0:0:0	creature_name:wod_spider_queen_consort	message:	count:-1													sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_destroy_wod_spider_boss_guard	22066	22071	61	UIType:Kill	relic_data:90:0:0:0	creature_name:wod_spider_queen_guard	message:	count:-1													sound/music_acq_miner.snd	gray	1	0						1	0			
 			relic_destroy_wod_spider_boss_royal_guard	22072	22077	61	UIType:Kill	relic_data:90:0:0:0	creature_name:wod_spider_royal_guard	message:	count:-1													sound/music_acq_miner.snd	gray	1	0						1	0			
+			relic_destroy_world_boss_elder_ancient_krayt_dragon	22766	22774	61	UIType:Kill	relic_data:100:0:0:0	creature_name:world_boss_elder_ancient_krayt_dragon	message:	count:-1													sound/music_acq_miner.snd	gray	1	0						1	0			
 		saga_relic_destroy_multiple_loot		0	-1	-1	task_shared_data:1:0:0:0																	sound/music_acq_miner.snd	gray	1	0						1	0			
 			saga_test_destroy_multiple_loot_01	8811	8816	61	UIType:KillLoot	relic_data:3:0:0:0	creature_name:kreetle	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
 			saga_test_destroy_multiple_loot_02	8817	8822	61	UIType:KillLoot	relic_data:5:0:0:0	social_group:kreetle	message:saga_relic:none	count:-1	drop_rate:-1												sound/music_acq_miner.snd	gray	1	0						1	0			
