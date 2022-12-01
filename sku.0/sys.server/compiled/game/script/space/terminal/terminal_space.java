@@ -1,32 +1,9 @@
 package script.space.terminal;
 
 import script.*;
-import script.base_class.*;
-import script.combat_engine.*;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Vector;
-import script.base_script;
+import script.library.*;
 
-import script.library.ai_lib;
-import script.library.callable;
-import script.library.locations;
-import script.library.performance;
-import script.library.pet_lib;
-import script.library.player_structure;
-import script.library.regions;
-import script.library.session;
-import script.library.space_crafting;
-import script.library.space_flags;
-import script.library.space_transition;
-import script.library.space_utils;
-import script.library.stealth;
-import script.library.sui;
-import script.library.travel;
-import script.library.utils;
-import script.library.vehicle;
-import script.library.buff;
-import script.library.event_perk;
+import java.util.Vector;
 
 public class terminal_space extends script.terminal.base.base_terminal {
     public static final float TERMINAL_USE_DISTANCE = 8.0f;
@@ -40,33 +17,32 @@ public class terminal_space extends script.terminal.base.base_terminal {
     }
 
     public int OnPreloadComplete(obj_id self) throws InterruptedException {
+        if (getTemplateName(self).contains("portable")) {
+            obj_id building = structure.getContainingBuilding(self);
+            if (isIdValid(building)) {
+                setObjVar(building, "travel.point_name", "Portable Launch Location");
+            }
+        }
         String strName = "mos_eisley";
         dictionary dctTeleportInfo = null;
-        if (getTemplateName(self).equals("object/tangible/terminal/portable_space_terminal.iff")) {
-            dctTeleportInfo = dataTableGetRow(LAUNCH_LOCATIONS, strName);
-        } else {
-            location locTest = getLocation(self);
-            region[] rgnCities = getRegionsWithGeographicalAtPoint(locTest, regions.GEO_CITY);
-            if (rgnCities == null || rgnCities.length == 0) {
-                setName(self, "BUSTED TERMINAL! PUT ME IN A CITY!");
-            } else {
-                for (int i = 0; i < rgnCities.length; i++) {
-                    region rgnTest = rgnCities[i];
-                    strName = rgnTest.getName();
-                    if (strName.startsWith("@")) {
-                        string_id strTest = utils.unpackString(strName);
-                        strName = strTest.getAsciiId();
-                        dctTeleportInfo = dataTableGetRow(LAUNCH_LOCATIONS, strName);
-                        if (dctTeleportInfo != null) {
-                            break;
-                        }
+        location locTest = getLocation(self);
+        region[] rgnCities = getRegionsWithGeographicalAtPoint(locTest, regions.GEO_CITY);
+        if (rgnCities != null && rgnCities.length > 0) {
+            for (int i = 0; i < rgnCities.length; i++) {
+                region rgnTest = rgnCities[i];
+                strName = rgnTest.getName();
+                if (strName.startsWith("@")) {
+                    string_id strTest = utils.unpackString(strName);
+                    strName = strTest.getAsciiId();
+                    dctTeleportInfo = dataTableGetRow(LAUNCH_LOCATIONS, strName);
+                    if (dctTeleportInfo != null) {
+                        break;
                     }
                 }
             }
         }
         if (dctTeleportInfo == null) {
-            setName(self, "NO ENTRY FOR " + strName + " in teleport datable. Busted terminal");
-            return SCRIPT_CONTINUE;
+            dctTeleportInfo = dataTableGetRow(LAUNCH_LOCATIONS, strName);
         }
         utils.setScriptVar(self, "space.loc.space", new location(dctTeleportInfo.getFloat("spaceX"), dctTeleportInfo.getFloat("spaceY"), dctTeleportInfo.getFloat("spaceZ"), dctTeleportInfo.getString("spaceScene")));
         utils.setScriptVar(self, "space.locationName", "w" + dctTeleportInfo.getInt("spaceLocationIndex"));
