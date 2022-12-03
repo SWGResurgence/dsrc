@@ -2467,9 +2467,9 @@ crafting_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			beetle_specimen_reward	4920	4928	20	crafted_beetle_specimen_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_plants			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_potted_plant_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			potted_plant_reward	2513	2521	20	crafted_plant_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			potted_plant_reward	2513	2521	10	crafted_plant_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_potted_flower_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			potted_flower_reward	2522	2530	20	crafted_flower_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			potted_flower_reward	2522	2530	10	crafted_flower_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_mannequin			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_posed_ig88_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			posed_ig88_reward	2486	2494	10	crafted_posed_ig88_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
