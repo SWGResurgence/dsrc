@@ -3,6 +3,8 @@ package script.ai;
 import script.*;
 import script.library.*;
 
+import static script.systems.city.city_hire.TOOL;
+
 public class ai extends script.base_script
 {
     public static final boolean LOGGING_ON = false;
@@ -2432,6 +2434,18 @@ public class ai extends script.base_script
 
     public int OnGiveItem(obj_id self, obj_id item, obj_id giver) throws InterruptedException
     {
+        if (getTemplateName(item).equals(TOOL))
+        {
+            obj_id player = giver;
+            obj_id mobile = self;
+            String string_template = getTemplateName(self);
+            obj_id token = create.createObject(TOOL, utils.getInventoryContainer(player), "");
+            setObjVar(token, "city_hire.mobile", string_template);
+            setObjVar(token, "tokenUsed", 1);
+            attachScript(token, "systems.city.city_hire");
+            setName(token, "City Actor Deed: " + getCreatureName(mobile));
+            return SCRIPT_OVERRIDE;
+        }
         if (!hasCompletedCollectionSlot(giver, "meatlump_recruiter_starter"))
         {
             return SCRIPT_CONTINUE;

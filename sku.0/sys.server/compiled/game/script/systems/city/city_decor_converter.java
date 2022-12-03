@@ -1,9 +1,8 @@
 package script.systems.city;
 
-import script.dictionary;
+import script.*;
 import script.library.create;
 import script.library.utils;
-import script.obj_id;
 
 import static script.library.storyteller.STORYTELLER_DATATABLE;
 
@@ -86,6 +85,30 @@ public class city_decor_converter extends script.base_script
             attachScript(prop, "systems.city.city_actor");
             destroyObject(item);
         }
+    }
+
+    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
+    {
+        if (isGod(player))
+        {
+            mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("[GM] Create Actor Deed"));
+        }
+        return SCRIPT_CONTINUE;
+    }
+    public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
+    {
+
+        if (item == menu_info_types.SERVER_MENU1)
+        {
+            obj_id deed = createObject("object/tangible/loot/tool/datapad_broken.iff", utils.getInventoryContainer(player), "");
+            if (isIdValid(deed))
+            {
+
+                debugConsoleMsg(player, "Deed Object: " + deed);
+                attachScript(deed, "systems.city.city_hire");
+            }
+        }
+        return SCRIPT_CONTINUE;
     }
 
 }
