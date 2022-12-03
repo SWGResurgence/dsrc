@@ -1868,13 +1868,13 @@ public class ai extends script.base_script
     {
         if (isGod(player) && !isInvulnerable(self) && !isPlayer(self))
         {
-            int root = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("sui", "loot_control"));
-            mi.addSubMenu(root, menu_info_types.SERVER_MENU21, new string_id("sui", "loot_increment"));
-            mi.addSubMenu(root, menu_info_types.SERVER_MENU22, new string_id("sui", "loot_decrement"));
-            mi.addSubMenu(root, menu_info_types.SERVER_MENU24, new string_id("sui", "loot_set_table"));
-            int root2 = mi.addRootMenu(menu_info_types.SERVER_MENU23, new string_id("sui", "peace"));
-            int root4 = mi.addRootMenu(menu_info_types.SERVER_MENU25, new string_id("sui", "spawn_functions"));
-            mi.addSubMenu(root4, menu_info_types.SERVER_MENU26, new string_id("sui", "spawn_ring"));
+            int root = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("*Loot*"));
+            mi.addSubMenu(root, menu_info_types.SERVER_MENU21, new string_id("Increase Drop Count by 1"));
+            mi.addSubMenu(root, menu_info_types.SERVER_MENU22, new string_id("Decrease Drop Count by 1"));
+            mi.addSubMenu(root, menu_info_types.SERVER_MENU24, new string_id("Set Loot Table"));
+            int root2 = mi.addRootMenu(menu_info_types.SERVER_MENU23, new string_id("*Terminate Combat*"));
+            int root4 = mi.addRootMenu(menu_info_types.SERVER_MENU25, new string_id("*Spawning*"));
+            mi.addSubMenu(root4, menu_info_types.SERVER_MENU26, new string_id("Ring"));
             return SCRIPT_CONTINUE;
         }
         if (pet_lib.isPet(self) || beast_lib.isBeast(self))
