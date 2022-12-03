@@ -1785,13 +1785,13 @@ slayer_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						
 			kill_jedi_elder_01	5542	5550	50	kill_treasure_guard_jedi_elite	kill_dark_jedi_master	kill_township_dark_jedi_ras	kill_treasure_guard_jedi_boss	kill_som_kenobi_dark_jedi_boss	kill_itp_vader_dark_jedi	kill_itp_vader_dark_jedi_leader											sound/music_acq_miner.snd	gray	0	0						0	0			
 	factional_kill			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_imperial_kill		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_01	5551	5559	100	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_01	5551	5559	50	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_imperial_boss_kill		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_imperial_boss_01	5574	5582	100	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_imperial_boss_01	5574	5582	50	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_rebel_kill		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_01	5560	5568	100	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_01	5560	5568	50	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_rebel_boss_kill		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			kill_rebel_boss_01	5583	5591	100	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			kill_rebel_boss_01	5583	5591	50	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	heroic_kills			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_axkva_min_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			heroic_axkva_min_01	2793	2797	5	rewardOnUpdate	kill_heroic_axkva_axkva_min																sound/music_acq_miner.snd	gray	0	0						0	0			
