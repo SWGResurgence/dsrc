@@ -2480,7 +2480,7 @@ crafting_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			nightsister_necklace_reward	2549	2557	20	crafted_nightsister_necklace_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_droid_component			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_dancing_droid_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			dancing_droid_reward	2531	2539	20	crafted_dancing_droid_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			dancing_droid_reward	2531	2539	10	crafted_dancing_droid_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_space_chassis			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_gunship_rebel_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			space_gunship_rebel_reward	5118	5126	10	crafted_space_gunship_rebel_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
