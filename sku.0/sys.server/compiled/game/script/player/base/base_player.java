@@ -1442,6 +1442,12 @@ public class base_player extends script.base_script
             {
                 prompt += s + "\n";
             }
+            prompt += "------------------ " + "ScriptVars" + " ------------------" + "\n";
+            String[] list2 = utils.getStringBatchScriptVar(self, "");
+            for (String s : list2)
+            {
+                prompt += s + "\n";
+            }
 
 
             sui.msgbox(self, player, prompt, sui.OK_ONLY, "title", "noHandler");
