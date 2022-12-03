@@ -5083,6 +5083,7 @@ item_resurgence_czerka_banner_01_03
 item_resurgence_mandalorian_banner_01_01											
 item_resurgence_mandalorian_banner_01_02											
 game_update_4_gift											
+game_update_5_gift											
 item_cantina_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/cantina_naboo_b.iff,int:player_structure.deed.buildtime=90"								
 item_cantina_naboo_style_01_03_deed			"string:player_structure.deed.template=object/building/player/city/cantina_naboo_c.iff,int:player_structure.deed.buildtime=90"								
 item_cityhall_naboo_style_01_02_deed			"string:player_structure.deed.template=object/building/player/city/cityhall_naboo_b.iff,int:player_structure.deed.buildtime=90"								
