@@ -2472,9 +2472,9 @@ crafting_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			potted_flower_reward	2522	2530	20	crafted_flower_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_mannequin			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_posed_ig88_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			posed_ig88_reward	2486	2494	20	crafted_posed_ig88_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			posed_ig88_reward	2486	2494	10	crafted_posed_ig88_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_posed_stormtrooper_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			posed_stormtrooper_reward	2540	2548	20	crafted_posed_stormtrooper_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			posed_stormtrooper_reward	2540	2548	10	crafted_posed_stormtrooper_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_jewelry			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_nightsister_necklace_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			nightsister_necklace_reward	2549	2557	10	crafted_nightsister_necklace_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
