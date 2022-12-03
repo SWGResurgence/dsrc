@@ -1309,9 +1309,9 @@ public class base_player extends script.base_script
         removeObjVar(self, "noTrade");
         if (isGod(player))
         {
-            int pid = mi.addRootMenu(menu_info_types.SERVER_MENU30, new string_id("sui", "god_menu"));
-            mi.addSubMenu(pid, menu_info_types.SERVER_MENU31, new string_id("sui", "toggle_freeze_player"));
-            mi.addSubMenu(pid, menu_info_types.SERVER_MENU32, new string_id("sui", "list_stats"));
+            int pid = mi.addRootMenu(menu_info_types.SERVER_MENU30, new string_id("Internal"));
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU31, new string_id("Freeze Player"));
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU32, new string_id("Get Player Information"));
         }
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.COMBAT_DEATH_BLOW);
         if (mid == null)
@@ -1415,7 +1415,7 @@ public class base_player extends script.base_script
         }
         else if (item == menu_info_types.SERVER_MENU31)
         {
-            setState(player, STATE_FROZEN, getState(player, STATE_FROZEN) != 1);
+            setState(self, STATE_FROZEN, getState(self, STATE_FROZEN) != 1);
         }
         else if (item == menu_info_types.SERVER_MENU32)
         {
@@ -1434,8 +1434,14 @@ public class base_player extends script.base_script
             prompt += "------------------ " + "Faction Stats" + " ------------------" + "\n";
             prompt += "Player Faction: " + factions.getFaction(self) + "\n";
             prompt += "Player Faction Standing: " + factions.getFactionStanding(self, factions.getFaction(self)) + "\n";
-            prompt += "__________________ " + "Guild" + " __________________" + "\n";
+            prompt += "------------------ " + "Guild Stats" + " ------------------" + "\n";
             prompt += "Player Guild: " + guild.getGuildId(self) + "\n";
+            prompt += "------------------ " + "Scripts" + " ------------------" + "\n";
+            String[] list = getScriptList(self);
+            for (String s : list)
+            {
+                prompt += s + "\n";
+            }
 
 
             sui.msgbox(self, player, prompt, sui.OK_ONLY, "title", "noHandler");
