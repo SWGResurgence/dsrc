@@ -1069,11 +1069,11 @@ weapon_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						
 		col_lightsaber_2h_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_lightsaber_2h_01_01	5730	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
 			col_lightsaber_2h_01_02	5731	-1	-1	kill_heroic_exar_hate_fist											col_lightsaber_2h_01_01						sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_lightsaber_2h_01_03	5732	5736	10	kill_heroic_sd_stormtrooper_grenadier											col_lightsaber_2h_01_01						sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_lightsaber_2h_01_03	5732	5736	5	kill_heroic_sd_stormtrooper_grenadier											col_lightsaber_2h_01_01						sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_lightsaber_polearm_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_lightsaber_polearm_01_01	5737	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
 			col_lightsaber_polearm_01_02	5738	-1	-1	kill_heroic_axkva_suin_chalo											col_lightsaber_polearm_01_01						sound/music_acq_miner.snd	gray	0	0						0	0			
-			col_lightsaber_polearm_01_03	5739	5743	10	kill_heroic_tusken_warlord											col_lightsaber_polearm_01_01						sound/music_acq_miner.snd	gray	0	0						0	0			
+			col_lightsaber_polearm_01_03	5739	5743	5	kill_heroic_tusken_warlord											col_lightsaber_polearm_01_01						sound/music_acq_miner.snd	gray	0	0						0	0			
 	spy_weapon			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		spy_unarmed_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_spy_unarmed_01_01	6296	-1	-1	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
@@ -1776,7 +1776,7 @@ slayer_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						
 			primative_tier_2_complete	2792	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			cold_blooded_tier_2_complete	2694	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_hoth_probe_droid_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			hoth_probe_droid_counter	6222	6233	15	kill_heroic_echo_probe_droid																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			hoth_probe_droid_counter	6222	6233	5	kill_heroic_echo_probe_droid																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	force_sensitive_kill			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_jedi_npc_kill		0	-1	-1																		sound/music_acq_miner.snd	gray	0	1						0	1			
 			kill_padawan_01	5515	5523	50	kill_fallen_padawan	kill_dark_jedi_sentinel	kill_light_jedi_sentinel	kill_treasure_guard_padawan	kill_ep3_rryatt_crazed_jedi													sound/music_acq_miner.snd	gray	0	0						0	0			
