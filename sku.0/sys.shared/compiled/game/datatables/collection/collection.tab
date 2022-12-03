@@ -2110,9 +2110,9 @@ artifact_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			round_red_gem_style2_10	4884	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 	hoth_collections			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_hoth_frozen_tauntaun_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			hoth_frozen_tauntaun	6208	6214	10																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			hoth_frozen_tauntaun	6208	6214	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_hoth_meteorite_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			hoth_meteorite_01	6215	6221	10																		sound/music_acq_miner.snd	gray	0	0						0	0			
+			hoth_meteorite_01	6215	6221	5																		sound/music_acq_miner.snd	gray	0	0						0	0			
 decor_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 	decor_items			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_eng_trader		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
