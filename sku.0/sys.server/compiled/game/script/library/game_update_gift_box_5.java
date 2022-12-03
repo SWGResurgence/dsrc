@@ -1,7 +1,6 @@
 package script.library;
 
 import script.*;
-
 import java.util.HashSet;
 
 public class game_update_gift_box_5 extends base_script {
