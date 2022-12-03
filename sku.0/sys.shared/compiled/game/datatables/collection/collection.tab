@@ -2483,58 +2483,58 @@ crafting_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0				
 			dancing_droid_reward	2531	2539	20	crafted_dancing_droid_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_space_chassis			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_gunship_rebel_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_gunship_rebel_reward	5118	5126	20	crafted_space_gunship_rebel_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_gunship_rebel_reward	5118	5126	10	crafted_space_gunship_rebel_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_gunship_imperial_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_gunship_imperial_reward	5127	5135	20	crafted_space_gunship_imperial_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_gunship_imperial_reward	5127	5135	10	crafted_space_gunship_imperial_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_gunship_neutral_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_gunship_neutral_reward	5136	5144	20	crafted_space_gunship_neutral_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_gunship_neutral_reward	5136	5144	10	crafted_space_gunship_neutral_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	crafted_space_component			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_cargo_hold_01_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_cargo_hold_01_reward	5145	5153	20	crafted_space_cargo_hold_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_cargo_hold_01_reward	5145	5153	10	crafted_space_cargo_hold_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_pob_couch_01_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_pob_couch_01_reward	5154	5162	20	crafted_space_pob_couch_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_pob_couch_01_reward	5154	5162	10	crafted_space_pob_couch_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_pob_chair_01_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_pob_chair_01_reward	5163	5171	20	crafted_space_pob_chair_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_pob_chair_01_reward	5163	5171	10	crafted_space_pob_chair_01_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_booster_mk1_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_booster_mk1_reward	4929	4937	20	crafted_space_booster_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_booster_mk1_reward	4929	4937	10	crafted_space_booster_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_booster_mk2_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_booster_mk2_reward	4938	4946	20	crafted_space_booster_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_booster_mk2_reward	4938	4946	10	crafted_space_booster_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_booster_mk3_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_booster_mk3_reward	4947	4955	20	crafted_space_booster_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_booster_mk3_reward	4947	4955	10	crafted_space_booster_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_booster_mk4_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_booster_mk4_reward	4956	4964	20	crafted_space_booster_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_booster_mk4_reward	4956	4964	10	crafted_space_booster_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_booster_mk5_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_booster_mk5_reward	4965	4973	20	crafted_space_booster_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_booster_mk5_reward	4965	4973	10	crafted_space_booster_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_capacitor_mk1_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_capacitor_mk1_reward	4974	4982	20	crafted_space_capacitor_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_capacitor_mk1_reward	4974	4982	10	crafted_space_capacitor_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_capacitor_mk2_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_capacitor_mk2_reward	4983	4991	20	crafted_space_capacitor_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_capacitor_mk2_reward	4983	4991	10	crafted_space_capacitor_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_capacitor_mk3_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_capacitor_mk3_reward	4992	5000	20	crafted_space_capacitor_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_capacitor_mk3_reward	4992	5000	10	crafted_space_capacitor_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_capacitor_mk4_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_capacitor_mk4_reward	5001	5009	20	crafted_space_capacitor_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_capacitor_mk4_reward	5001	5009	10	crafted_space_capacitor_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_capacitor_mk5_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_capacitor_mk5_reward	5010	5018	20	crafted_space_capacitor_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_capacitor_mk5_reward	5010	5018	10	crafted_space_capacitor_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_engine_mk1_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_engine_mk1_reward	5019	5027	20	crafted_space_engine_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_engine_mk1_reward	5019	5027	10	crafted_space_engine_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_engine_mk2_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_engine_mk2_reward	5028	5036	20	crafted_space_engine_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_engine_mk2_reward	5028	5036	10	crafted_space_engine_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_engine_mk3_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_engine_mk3_reward	5037	5045	20	crafted_space_engine_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_engine_mk3_reward	5037	5045	10	crafted_space_engine_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_engine_mk4_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_engine_mk4_reward	5046	5054	20	crafted_space_engine_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_engine_mk4_reward	5046	5054	10	crafted_space_engine_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_engine_mk5_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_engine_mk5_reward	5055	5063	20	crafted_space_engine_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_engine_mk5_reward	5055	5063	10	crafted_space_engine_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_reactor_mk1_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_reactor_mk1_reward	5064	5072	20	crafted_space_reactor_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_reactor_mk1_reward	5064	5072	10	crafted_space_reactor_mk1_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_reactor_mk2_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_reactor_mk2_reward	5082	5090	20	crafted_space_reactor_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_reactor_mk2_reward	5082	5090	10	crafted_space_reactor_mk2_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_reactor_mk3_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_reactor_mk3_reward	5091	5099	20	crafted_space_reactor_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_reactor_mk3_reward	5091	5099	10	crafted_space_reactor_mk3_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_reactor_mk4_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_reactor_mk4_reward	5100	5108	20	crafted_space_reactor_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_reactor_mk4_reward	5100	5108	10	crafted_space_reactor_mk4_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		trader_space_reactor_mk5_counter		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
-			space_reactor_mk5_reward	5109	5117	20	crafted_space_reactor_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
+			space_reactor_mk5_reward	5109	5117	10	crafted_space_reactor_mk5_reward																	sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_space_helper_monkey_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_space_helper_monkey_01_01	6747	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_space_helper_monkey_01_02	6748	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
