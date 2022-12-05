@@ -21,7 +21,7 @@ public class cell extends script.base_script
     {
         if (isPlayer(item))
         {
-            if (isAllowedInCurrentCell(item))
+            if (isAllowedInCurrentCell(item, getContainedBy(item)))
             {
                 return SCRIPT_CONTINUE;
             }
@@ -33,31 +33,19 @@ public class cell extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public boolean isAllowedInCurrentCell(obj_id player) throws InterruptedException
+    public boolean isAllowedInCurrentCell(obj_id player, obj_id cell) throws InterruptedException
     {
-        obj_id currentCell = getContainedBy(player);
+        obj_id currentCell = cell;
         if (currentCell == null)
         {
             return false;
         }
-        if (currentCell == getTopMostContainer(player))
+        if (hasObjVar(currentCell, "roomPermissions"))
         {
-            return true;
-        }
-        if (hasObjVar(currentCell, "cell.owner"))
-        {
-            obj_id owner = getObjIdObjVar(currentCell, "cell.owner");
-            if (owner == player)
+            obj_id[] roomPermissions = getObjIdArrayObjVar(currentCell, "roomPermissions");
+            for (int i = 0; i < roomPermissions.length; i++)
             {
-                return true;
-            }
-        }
-        if (hasObjVar(currentCell, "cell.allowed"))
-        {
-            obj_id[] allowed = getObjIdArrayObjVar(currentCell, "cell.allowed");
-            for (int i = 0; i < allowed.length; i++)
-            {
-                if (allowed[i] == player)
+                if (roomPermissions[i] == player)
                 {
                     return true;
                 }
