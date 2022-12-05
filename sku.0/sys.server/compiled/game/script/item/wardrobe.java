@@ -24,7 +24,7 @@ public class wardrobe extends script.base_script
         {
             setObjVar(item, "wardrobe.ownedBy", transferer);
         }
-        setName(item, getName(self) + "[modified]");
+        setName(item, "Clothing " + "[modified]");
         return SCRIPT_CONTINUE;
     }
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
