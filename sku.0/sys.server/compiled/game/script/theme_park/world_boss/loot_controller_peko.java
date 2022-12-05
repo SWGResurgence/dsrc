@@ -9,6 +9,11 @@ public class loot_controller_peko extends script.base_script
 {
     public static final String VOLUME_NAME = "aggressive_area";
 
+
+    public String[] SQUAWK_MSGS = {
+            "<LOUDS AVIAN NOISES>",
+            "<ANGRY AVIAN NOISES>"
+    };
     public int OnAttach(obj_id self) throws InterruptedException
     {
         sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress, her nesting site has been reported to have last been  on Naboo. Czerka Corporation is paying for it's remains.");
@@ -20,6 +25,14 @@ public class loot_controller_peko extends script.base_script
         if (pet_lib.isPet(killer))
         {
             sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerName(pet_lib.getMaster(killer)));
+        }
+        if (beast_lib.isBeast(killer))
+        {
+            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerName(beast_lib.getMaster(killer)));
+        }
+        if (!isPlayer(killer))
+        {
+            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerName(getMaster(killer)));
         }
         sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getName(killer));
         return SCRIPT_CONTINUE;
@@ -61,10 +74,6 @@ public class loot_controller_peko extends script.base_script
         { // 25% Drop Rate: TCG - Toxic Peko-Peko Mount
             static_item.createNewItemFunction("item_tcg_loot_reward_series4_peko_peko_mount_02_01", corpseInventory);
         }
-        /*String myLoot1 = "";
-        createObject(myLoot1, corpseInventory, "");
-        String myLoot2 = "";
-        createObject(myLoot2, corpseInventory, "");*/
         return;
     }
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
@@ -75,6 +84,11 @@ public class loot_controller_peko extends script.base_script
         if (attacker == self) //this is a self damage check
         {
             return SCRIPT_CONTINUE;
+        }
+        if (!utils.hasScriptVar(self, "chirp"))
+        {
+            chat.chat(self, SQUAWK_MSGS[rand(0, SQUAWK_MSGS.length - 1)]);
+            utils.setScriptVar(self, "chirp", 1);
         }
         if (percentHealth <= 50)
         {
@@ -89,6 +103,7 @@ public class loot_controller_peko extends script.base_script
         {
             if (!utils.hasScriptVar(self, "hasKnockedBack"))
             {
+                chat.chat(self, "<ANNOYED AVIAN NOISES>");
                 obj_id[] players = getPlayerCreaturesInRange(self, 64.0f);
                 staggerPlayers(self, players);
                 utils.setScriptVar(self, "hasKnockedBack", 1);
@@ -123,7 +138,7 @@ public class loot_controller_peko extends script.base_script
         for (obj_id iTarget : targets)
         {
             warpPlayer(iTarget, slapLoc.area, slapLoc.x, slapLoc.y, slapLoc.z, null, 0, 0, 0);
-            broadcast(iTarget, "The wind from the Peko-Peko's wings knocks you back!");
+            broadcast(iTarget, "The wind from the Mutated Peko-Peko's wings knocked you back!");
             setYaw(self, rand(0.0f,180.0f));
         }
 
