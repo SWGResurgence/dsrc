@@ -1,11 +1,9 @@
 package script.theme_park.world_boss;
 
 import script.dictionary;
-import script.library.ai_lib;
-import script.library.pet_lib;
-import script.library.static_item;
-import script.library.utils;
+import script.library.*;
 import script.obj_id;
+import script.string_id;
 
 public class loot_controller_krayt extends script.base_script
 {
@@ -19,6 +17,7 @@ public class loot_controller_krayt extends script.base_script
 
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
+        showFlyText(self, new string_id("+ REGURGITATION + "), 10.5f, colors.DEEPPINK);
         if (pet_lib.isPet(killer))
         {
             sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have been destroyed and the Czerka Corporation has paid out the bounty to " + getPlayerName(pet_lib.getMaster(killer)));
@@ -39,6 +38,7 @@ public class loot_controller_krayt extends script.base_script
             return SCRIPT_CONTINUE;
         }
         createMyLoot(self);
+        createStomachContents(self, corpseInventory);
         return SCRIPT_CONTINUE;
     }
 
@@ -63,10 +63,34 @@ public class loot_controller_krayt extends script.base_script
         { // 25% Drop Rate: TCG - Toydarian Greeter
             static_item.createNewItemFunction("item_tcg_loot_reward_series3_greeter_toydarian", corpseInventory);
         }
-        /*String myLoot1 = "";
-        createObject(myLoot1, corpseInventory, "");
-        String myLoot2 = "";
-        createObject(myLoot2, corpseInventory, "");*/
         return;
+    }
+    public void createStomachContents(obj_id self, obj_id container) throws InterruptedException
+    {
+        int JUNK_COUNT = getAllPlayers(getLocation(self), 120.0f).length * 3;
+        if (container == null)
+        {
+            return;
+        }
+        if (!isIdValid(self))
+        {
+            return;
+        }
+        if (!isIdValid(container))
+        {
+            return;
+        }
+        String JUNK_TABLE = "datatables/crafting/reverse_engineering_junk.iff";
+        String column = "note";
+        for (int i = 0; i < JUNK_COUNT; i++)
+        {
+            //Subtract 1 in the junk table index to make sure we don't hit the "none" row.
+            String junk = dataTableGetString(JUNK_TABLE, rand(1, dataTableGetNumRows(JUNK_TABLE) - 1), column);
+            obj_id junkItem = static_item.createNewItemFunction(junk, container);
+            if (isIdValid(junkItem))
+            {
+                setCount(junkItem, rand(1, 5));
+            }
+        }
     }
 }
