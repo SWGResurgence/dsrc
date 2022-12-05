@@ -218,12 +218,8 @@ public class trick_or_treater extends script.base_script
         }
         return false;
     }
-    private boolean costumeBuffExists(obj_id player) throws InterruptedException
-    {
-        return buff.hasBuff(player, "event_halloween_costume_jawa") ||
-                buff.hasBuff(player, "event_halloween_costume_droid") ||
-                buff.hasBuff(player, "event_halloween_costume_kowakian") ||
-                buff.hasBuff(player, "event_halloween_costume_hutt_female") ||
-                buff.hasBuff(player, "event_halloween_costume_toydarian");
-    }
+    if(buff.getBuffOnTargetFromGroup(self, "shapechange") == 0)
+            {
+                return SCRIPT_CONTINUE;
+            }
 }
