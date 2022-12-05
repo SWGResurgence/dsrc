@@ -1,10 +1,8 @@
 package script.theme_park.world_boss;
 
 import script.dictionary;
-import script.library.ai_lib;
-import script.library.pet_lib;
-import script.library.static_item;
-import script.library.utils;
+import script.library.*;
+import script.location;
 import script.obj_id;
 
 public class loot_controller_peko extends script.base_script
@@ -68,5 +66,65 @@ public class loot_controller_peko extends script.base_script
         String myLoot2 = "";
         createObject(myLoot2, corpseInventory, "");*/
         return;
+    }
+    public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
+    {
+        int health = getHealth(self);
+        int maxHealth = getMaxHealth(self);
+        int percentHealth = (health * 100) / maxHealth;
+        if (attacker == self) //this is a self damage check
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (percentHealth <= 50)
+        {
+            if (!utils.hasScriptVar(self, "hasSpawned"))
+            {
+                resurgence.createCircleSpawn(self, self, "peko_peko", 12, 24);
+                utils.setScriptVar(self, "hasSpawned", 1);
+                return SCRIPT_CONTINUE;
+            }
+        }
+        if (percentHealth <= 20)
+        {
+            if (!utils.hasScriptVar(self, "hasKnockedBack"))
+            {
+                obj_id[] players = getPlayerCreaturesInRange(self, 64.0f);
+                staggerPlayers(self, players);
+                utils.setScriptVar(self, "hasKnockedBack", 1);
+                return SCRIPT_CONTINUE;
+            }
+        }
+        if (percentHealth <= 5)
+        {
+            if (!utils.hasScriptVar(self, "hasLastStand"))
+            {
+                obj_id[] players = getPlayerCreaturesInRange(self, 64.0f);
+                resurgence.createCircleSpawn(self, self, "peko_peko", 6, 24);
+                createObject("peko_peko_albatross_high", getLocation(self));
+                staggerPlayers(self, players);
+                for (obj_id who : players)
+                {
+                    broadcast(who, "The Mutated Peko-Peko Empress has called upon her whelps to aid her in her final stand!");
+                }
+                return SCRIPT_CONTINUE;
+            }
+        }
+        return SCRIPT_CONTINUE;
+    }
+    public void staggerPlayers(obj_id self, obj_id[] targets) throws InterruptedException
+    {
+        location stagger = null;
+        location slapLoc = getLocation(self);
+        stagger.x = slapLoc.x + rand(-64, 64);
+        stagger.z = slapLoc.z + rand(-64, 64);
+        stagger.y = getHeightAtLocation(slapLoc.x, slapLoc.z);
+        stagger.area = getCurrentSceneName();
+        for (obj_id iTarget : targets)
+        {
+            warpPlayer(iTarget, slapLoc.area, slapLoc.x, slapLoc.y, slapLoc.z, null, 0, 0, 0);
+            broadcast(iTarget, "The wind from the Peko-Peko's wings knocks you back!");
+        }
+
     }
 }
