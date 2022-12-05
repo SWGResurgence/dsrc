@@ -26,6 +26,33 @@ public class loot_controller_krayt extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
+    public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
+    {
+        int health = getHealth(self);
+        int maxHealth = getMaxHealth(self);
+        int percentHealth = (health * 100) / maxHealth;
+        if (attacker == self) //this is a self damage check
+        {
+            return SCRIPT_CONTINUE;
+        }
+        int retaliateChance = rand(1,100);
+        if ((retaliateChance % 2) == 0) {
+            if (percentHealth < 10)
+            {
+                obj_id aoe_targets[] = getCreaturesInRange(self, 64.0f);
+                for (obj_id testSubjects : aoe_targets)
+                {
+                    buff.applyBuff(testSubjects, "acid", 60.0f, 5.0f);
+                    showFlyText(testSubjects, new string_id("- STOMACH ACID -"), 10.5f, colors.YELLOW);
+                    broadcast(testSubjects, "You have been hit with stomach acid!");
+                }
+            }
+        } else {
+            //this is the odd chance. Do thing or something here.
+        }
+        return SCRIPT_CONTINUE;
+    }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id corpseInventory = utils.getInventoryContainer(self);
