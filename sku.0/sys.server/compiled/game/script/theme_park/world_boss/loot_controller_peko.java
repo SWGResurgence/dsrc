@@ -124,6 +124,7 @@ public class loot_controller_peko extends script.base_script
         {
             warpPlayer(iTarget, slapLoc.area, slapLoc.x, slapLoc.y, slapLoc.z, null, 0, 0, 0);
             broadcast(iTarget, "The wind from the Peko-Peko's wings knocks you back!");
+            setYaw(self, rand(0.0f,180.0f));
         }
 
     }
