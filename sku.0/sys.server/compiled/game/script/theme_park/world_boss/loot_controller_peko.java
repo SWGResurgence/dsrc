@@ -20,6 +20,19 @@ public class loot_controller_peko extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
+    public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
+    {
+        obj_id allPlayersNearby[] = getAllPlayers(getLocation(self), 128.0f);
+        if (allPlayersNearby != null && allPlayersNearby.length > 0)
+        {
+            for (obj_id allPlayersNearby1 : allPlayersNearby)
+            {
+                groundquests.sendSignal(allPlayersNearby1, "collectedPekoPekoAlbatross");
+            }
+        }
+        return SCRIPT_CONTINUE;
+    }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (pet_lib.isPet(killer))
