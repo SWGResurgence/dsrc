@@ -1,6 +1,7 @@
 package script.systems.city;
 
 import script.*;
+import script.library.ai_lib;
 import script.library.city;
 import script.library.sui;
 import script.library.utils;
@@ -14,6 +15,7 @@ public class city_actor extends script.base_script
     }
     public int OnAttach(obj_id self)
     {
+        int city_id = getCityAtLocation(getLocation(self), 0);
         setInvulnerable(self, true);
         setName(self, "City Actor");
         return SCRIPT_CONTINUE;
@@ -52,7 +54,9 @@ public class city_actor extends script.base_script
                 mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU22, new string_id("Customize: Mood"));
                 mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU23, new string_id("Customize: Animation"));
                 mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU24, new string_id("Customize: Size"));
+                mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU26, new string_id("Customize: AI"));
                 mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU25, new string_id("Reset All Settings"));
+                mi.addRootMenu(menu_info_types.SERVER_MENU27, new string_id("Remove *"));
             }
         }
         return SCRIPT_CONTINUE;
@@ -72,6 +76,8 @@ public class city_actor extends script.base_script
                 {
                     attachScript(self, "systems.city.city_furniture");
                 }
+                int city_id = getCityAtLocation(getLocation(player), 0);
+                city.addDecoration(city_id, player, self);
             }
             else if (item == menu_info_types.SERVER_MENU21)
             {
@@ -100,9 +106,28 @@ public class city_actor extends script.base_script
                 setPosture(self, POSTURE_UPRIGHT);
                 setMood(self, "none");
             }
+            else if (item == menu_info_types.SERVER_MENU26)
+            {
+                sui.inputbox(self, player, "Enter the A.I. you want this actor to have.\n\n\nOptions: [wander, loiter, none]", "handleSetAI");
+            }
+            else if (item == menu_info_types.SERVER_MENU27)
+            {
+                removalCleanup(self, player, true);
+            }
         }
         return SCRIPT_CONTINUE;
     }
+
+    public void removalCleanup(obj_id object, obj_id player, boolean spam) throws InterruptedException
+    {
+        removeObjVar(object, "city_id");
+        city.removeDecoration(object);
+        if (spam)
+        {
+            broadcast(player, "The city actor has been removed.");
+        }
+    }
+
     public boolean canManipulateActor(obj_id self, obj_id player) throws InterruptedException
     {
         //@note: keep these in order of importance, with the most important last
@@ -141,21 +166,40 @@ public class city_actor extends script.base_script
         setName(self, name);
         return SCRIPT_CONTINUE;
     }
-    public int handleSetSize(obj_id self, dictionary params) throws InterruptedException
+    public int handleSetAi(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
         {
             return SCRIPT_CONTINUE;
         }
+        obj_id player = sui.getPlayerId(params);
         int bp = sui.getIntButtonPressed(params);
         if (bp == sui.BP_CANCEL)
         {
             return SCRIPT_CONTINUE;
         }
-        String size = sui.getInputBoxText(params);
-        float sizeFloat = utils.stringToFloat(size);
-        setScale(self, sizeFloat);
-        return SCRIPT_CONTINUE;
+        String ai_template = sui.getInputBoxText(params);
+        if (ai_template.equals("loiter"))
+        {
+            ai_lib.loiterLocation(self, getLocation(self), 1.0f, 20.0f, 1.0f, 2.0f);
+            return SCRIPT_CONTINUE;
+        }
+        else if (ai_template.equals("wander"))
+        {
+            ai_lib.wander(self);
+            return SCRIPT_CONTINUE;
+        }
+        else if (ai_template.equals("none"))
+        {
+            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+            return SCRIPT_CONTINUE;
+        }
+        else
+        {
+            broadcast(player, "Invalid AI Template. Valid settings: [wander | loiter | none]");
+            return SCRIPT_CONTINUE;
+        }
+
     }
     public int handleSetAnimation(obj_id self, dictionary params) throws InterruptedException
     {
