@@ -1467,6 +1467,27 @@ public class base_player extends script.base_script
 
     public int OnLogin(obj_id self) throws InterruptedException
     {
+        if (!utils.hasScriptVar(self, "welcome_message"))
+        {
+            String red = " \\#FF0000";
+            String gold = " \\#FFD700";
+            String tan = " \\#D2B48C";
+            String white = " \\#FFFFFF";
+            String welcomeMessage = "Welcome to " + gold + "Apotheosis" + white + "!" + "\n";
+            String pleaseRead = "Please read the " + tan + "rules" + white + " and " + tan + "FAQ" + white + " before starting your adventure." + "\n";
+            String numCharacters = "Number of allowed characters: " + gold + "10\n";
+            String maxLogin = "Number of allowed characters per account: " + gold + "10\n";
+            String features = tan + "Key Features:\n";
+            String feature1 = tan + "1. " + white + "Instant Level 90 token.\n";
+            String feature2 = tan + "2. " + white + "Custom Content\n";
+            String feature3 = tan + "3. " + white + "Custom Quests\n";
+            String feature4 = tan + "4. " + white + "Custom Items\n";
+            String feature5 = tan + "5. " + white + "Many more..\n";
+            String nl = "\n";
+            String welcome = welcomeMessage + pleaseRead + numCharacters + maxLogin + features + feature1 + feature2 + feature3 + feature4 + feature5;
+            sui.msgbox(self, self, welcome, sui.OK_ONLY, "WELCOME TO THE GALAXY", "noHandler");
+            utils.setScriptVar(self, "welcome_message", 1);
+        }
         boolean ctsDisconnectRequested = false;
         if (hasObjVar(self, "disableLoginCtsInProgress"))
         {
