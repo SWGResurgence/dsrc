@@ -4,6 +4,7 @@ package script.systems.city;/*
 @Purpose: Dragging (OnGiveItem) onto a mobile will make a token that spawns the npc in the city.
 */
 
+import script.library.city;
 import script.library.create;
 import script.menu_info;
 import script.menu_info_types;
@@ -26,13 +27,17 @@ public class city_hire extends script.base_script
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        if (hasObjVar(self, "tokenUsed"))
+        if (canManipulateToken(self, player))
         {
-            mi.addRootMenu(menu_info_types.SERVER_MENU50, new string_id("Place Actor"));
-        }
-        else
-        {
-            broadcast(player, "You must drag this token onto a mobile to hire it.");
+            if (hasObjVar(self, "tokenUsed"))
+            {
+
+                mi.addRootMenu(menu_info_types.SERVER_MENU50, new string_id("Place Actor"));
+            }
+            else
+            {
+                broadcast(player, "You must drag this token onto a mobile to hire it.");
+            }
         }
         return SCRIPT_CONTINUE;
     }
@@ -54,11 +59,34 @@ public class city_hire extends script.base_script
                 }
                 else
                 {
-                    broadcast(player, "You must drag this token onto a mobile to hire it.");
+                    broadcast(player, "You must drag this token onto a mob to hire it.");
                 }
             }
         }
         return SCRIPT_CONTINUE;
+    }
+    public boolean canManipulateToken(obj_id self, obj_id player) throws InterruptedException
+    {
+        //@note: keep these in order of importance, with the most important last
+        int city_id = getCityAtLocation(getLocation(player), 0);
+        boolean isMayor = city.isTheCityMayor(player, city_id);
+        if (hasObjVar(player, "city_decorator"))
+        {
+            return true;
+        }
+        if (city.isMilitiaOfCity(player, city_id))
+        {
+            return true;
+        }
+        if (isMayor)
+        {
+            return true;
+        }
+        if (isGod(player))
+        {
+            return true;
+        }
+        else return false;
     }
 }
 

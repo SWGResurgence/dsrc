@@ -45,17 +45,23 @@ public class city_actor extends script.base_script
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
+        if (!utils.hasScriptVar(self, "city_actor_setup"))
+        {
+            int city_id = getCityAtLocation(getLocation(player), 0);
+            city.addDecoration(city_id, player, self);
+            utils.setScriptVar(self, "city_actor_setup", true);
+        }
         if (canManipulateActor(self, player))
         {
             if (isInWorldCell(player))
             {
                 int hireling_main = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("Actor *"));
-                mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU21, new string_id("Customize: Posture"));
-                mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU22, new string_id("Customize: Mood"));
-                mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU23, new string_id("Customize: Animation"));
-                mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU24, new string_id("Customize: Size"));
-                mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU26, new string_id("Customize: AI"));
-                mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU25, new string_id("Reset All Settings"));
+                mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU21, new string_id("* Customize: Posture"));
+                mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU22, new string_id("* Customize: Mood"));
+                mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU23, new string_id("* Customize: Animation"));
+                mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU24, new string_id("* Customize: Size"));
+                mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU26, new string_id("* Customize: AI"));
+                mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU25, new string_id("* Reset All Settings"));
                 mi.addRootMenu(menu_info_types.SERVER_MENU27, new string_id("Remove *"));
             }
         }
@@ -76,8 +82,6 @@ public class city_actor extends script.base_script
                 {
                     attachScript(self, "systems.city.city_furniture");
                 }
-                int city_id = getCityAtLocation(getLocation(player), 0);
-                city.addDecoration(city_id, player, self);
             }
             else if (item == menu_info_types.SERVER_MENU21)
             {
@@ -164,6 +168,34 @@ public class city_actor extends script.base_script
         }
         String name = sui.getInputBoxText(params);
         setName(self, name);
+        return SCRIPT_CONTINUE;
+    }
+    public int handleSetSize(obj_id self, dictionary params) throws InterruptedException
+    {
+        if (params == null)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_CANCEL)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        String size = sui.getInputBoxText(params);
+        float sizeFloat = utils.stringToFloat(size);
+        if (sizeFloat <= 0.0f)
+        {
+            setScale(self, 0.5f);
+        }
+        if (sizeFloat > 25.0f)
+        {
+            setScale(self, 25.0f);
+        }
+        else
+        {
+            setScale(self, sizeFloat);
+        }
+        setScale(self, sizeFloat);
         return SCRIPT_CONTINUE;
     }
     public int handleSetAi(obj_id self, dictionary params) throws InterruptedException
