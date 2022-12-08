@@ -324,23 +324,6 @@ public class base_player extends script.base_script
                     }
             };
 
-    public static void handleReadyCheck(obj_id self, dictionary params) throws InterruptedException
-    {
-        obj_id target = params.getObjId("readyCheckLeaderId");
-        obj_id player = sui.getPlayerId(params);
-        int bp = sui.getIntButtonPressed(params);
-        if (bp == sui.BP_OK)
-        {
-            sendSystemMessage(target, getPlayerName(player) + " is ready!", null);
-            chat.chat(self, "Ready!");
-        }
-        if (bp == sui.BP_CANCEL)
-        {
-            sendSystemMessage(target, getPlayerName(player) + " is not ready!", null);
-            chat.chat(self, "Not Ready!");
-        }
-    }
-
     public static void generateHousingList(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         String[] fileList = {
@@ -13006,11 +12989,28 @@ public class base_player extends script.base_script
         }
         obj_id[] groupMembers = getGroupMemberIds(self);
         String prompt = " has initiated a ready check!\nAre you ready?";
-        params.put("readyCheckLeaderId", self);
         for (obj_id indi : groupMembers)
         {
             sui.msgbox(self, indi, prompt, sui.OK_CANCEL, "handleReadyCheck", null);
-            params.put("readyCheckLeaderId", self);
         }
+    }
+    public int handleReadyCheck(obj_id self, dictionary params) throws InterruptedException
+    {
+        obj_id leader = group.getLeader(self);
+        obj_id player = sui.getPlayerId(params);
+        if (params == null || params.isEmpty())
+        {
+            return SCRIPT_CONTINUE;
+        }
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_CANCEL)
+        {
+            broadcast(leader, toUpper(getPlayerName(player), 0) + " is not ready.");
+            showFlyText(self, new string_id("NOT READY!"), 10.5f, colors.RED);
+            return SCRIPT_CONTINUE;
+        }
+        showFlyText(self, new string_id("READY!"), 10.5f, colors.GREEN);
+        broadcast(leader, toUpper(getPlayerName(player), 0) + " is ready!");
+        return SCRIPT_CONTINUE;
     }
 }
