@@ -1868,13 +1868,13 @@ public class ai extends script.base_script
     {
         if (isGod(player) && !isInvulnerable(self) && !isPlayer(self))
         {
-            int root = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("*Loot*"));
-            mi.addSubMenu(root, menu_info_types.SERVER_MENU21, new string_id("Increase Drop Count by 1"));
-            mi.addSubMenu(root, menu_info_types.SERVER_MENU22, new string_id("Decrease Drop Count by 1"));
-            mi.addSubMenu(root, menu_info_types.SERVER_MENU24, new string_id("Set Loot Table"));
-            int root2 = mi.addRootMenu(menu_info_types.SERVER_MENU23, new string_id("*Terminate Combat*"));
-            int root4 = mi.addRootMenu(menu_info_types.SERVER_MENU25, new string_id("*Spawning*"));
-            mi.addSubMenu(root4, menu_info_types.SERVER_MENU26, new string_id("Ring"));
+            int root = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("Loot *"));
+            mi.addSubMenu(root, menu_info_types.SERVER_MENU21, new string_id("* Increase Drop Count by 1"));
+            mi.addSubMenu(root, menu_info_types.SERVER_MENU22, new string_id("* Decrease Drop Count by 1"));
+            mi.addSubMenu(root, menu_info_types.SERVER_MENU24, new string_id("* Set Loot Table"));
+            int root2 = mi.addRootMenu(menu_info_types.SERVER_MENU23, new string_id("Terminate Combat *"));
+            int root4 = mi.addRootMenu(menu_info_types.SERVER_MENU25, new string_id("Spawn Functions *"));
+            mi.addSubMenu(root4, menu_info_types.SERVER_MENU26, new string_id("* Circle Spawn"));
             return SCRIPT_CONTINUE;
         }
         if (pet_lib.isPet(self) || beast_lib.isBeast(self))
@@ -1985,7 +1985,7 @@ public class ai extends script.base_script
         String nextWord = text;
         if (nextWord.equals("gm_follow"))
         {
-            ai.follow(self, speaker, 1.0f, 4.0f);
+            ai.follow(self, speaker, 1.0f, 10.0f);
             chat.chat(self, "[GM|AI] Following " + getName(speaker));
         }
         if (nextWord.equals("gm_aggro"))
