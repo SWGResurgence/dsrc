@@ -60,7 +60,7 @@ public class city_hire extends script.base_script
                 }
                 else
                 {
-                    broadcast(player, "You must drag this datapad onto a mob to copy its bio-data.");
+                    broadcast(player, "You must drag this datapad onto a creature or person to copy its bio-data.");
                 }
             }
         }
