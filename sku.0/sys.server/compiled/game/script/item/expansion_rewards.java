@@ -1,6 +1,12 @@
-package script.library;
+package script.item;
 
-import script.*;
+import script.library.static_item;
+import script.library.utils;
+import script.menu_info;
+import script.menu_info_types;
+import script.obj_id;
+import script.string_id;
+
 import java.util.HashSet;
 
 public class expansion_rewards extends script.base_script {

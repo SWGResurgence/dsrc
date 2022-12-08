@@ -1,5 +1,7 @@
-package script.library;
+package script.item;
 
+import script.library.static_item;
+import script.library.utils;
 import script.menu_info;
 import script.menu_info_types;
 import script.obj_id;
@@ -7,17 +9,17 @@ import script.string_id;
 
 import java.util.HashSet;
 
-public class chronicle_silver_token_box extends script.base_script
+public class chronicle_copper_token_box extends script.base_script
 {
 
     public static final String STF_FILE = "npe";
 
-    public static obj_id[] grantSilverTokens(obj_id player) throws InterruptedException
+    public static obj_id[] grantCopperTokens(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
         HashSet theSet = new HashSet();
-        theSet.add(static_item.createNewItemFunction("item_pgc_token_02", pInv, 500));
-        theSet.add(static_item.createNewItemFunction("item_pgc_token_02", pInv, 500));
+        theSet.add(static_item.createNewItemFunction("item_pgc_token_01", pInv, 500));
+        theSet.add(static_item.createNewItemFunction("item_pgc_token_01", pInv, 500));
         obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
         showLootBox(player, items);
@@ -35,7 +37,7 @@ public class chronicle_silver_token_box extends script.base_script
         if (item == menu_info_types.ITEM_USE)
         {
             sendSystemMessage(player, new string_id(STF_FILE, "opened_crate"));
-            obj_id[] allTheArmor = grantSilverTokens(player);
+            obj_id[] allTheArmor = grantCopperTokens(player);
             destroyObject(self);
             return SCRIPT_CONTINUE;
         }
