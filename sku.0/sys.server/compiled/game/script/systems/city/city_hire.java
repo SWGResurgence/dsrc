@@ -55,11 +55,12 @@ public class city_hire extends script.base_script
                         obj_id actor = create.createObject(getStringObjVar(self, "city_hire.mobile"), getLocation(player));
                         attachScript(actor, "systems.city.city_actor");
                         broadcast(player, "Hired:  \"" + getName(actor) + "\"");
+                        destroyObject(self);
                     }
                 }
                 else
                 {
-                    broadcast(player, "You must drag this token onto a mob to hire it.");
+                    broadcast(player, "You must drag this datapad onto a mob to copy its bio-data.");
                 }
             }
         }
