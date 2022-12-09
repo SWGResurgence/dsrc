@@ -3,6 +3,8 @@ package script.ai;
 import script.*;
 import script.library.*;
 
+import static script.systems.city.city_hire.TOOL;
+
 public class ai extends script.base_script
 {
     public static final boolean LOGGING_ON = false;
@@ -1866,13 +1868,13 @@ public class ai extends script.base_script
     {
         if (isGod(player) && !isInvulnerable(self) && !isPlayer(self))
         {
-            int root = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("sui", "loot_control"));
-            mi.addSubMenu(root, menu_info_types.SERVER_MENU21, new string_id("sui", "loot_increment"));
-            mi.addSubMenu(root, menu_info_types.SERVER_MENU22, new string_id("sui", "loot_decrement"));
-            mi.addSubMenu(root, menu_info_types.SERVER_MENU24, new string_id("sui", "loot_set_table"));
-            int root2 = mi.addRootMenu(menu_info_types.SERVER_MENU23, new string_id("sui", "peace"));
-            int root4 = mi.addRootMenu(menu_info_types.SERVER_MENU25, new string_id("sui", "spawn_functions"));
-            mi.addSubMenu(root4, menu_info_types.SERVER_MENU26, new string_id("sui", "spawn_ring"));
+            int root = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("Loot *"));
+            mi.addSubMenu(root, menu_info_types.SERVER_MENU21, new string_id("* Increase Drop Count by 1"));
+            mi.addSubMenu(root, menu_info_types.SERVER_MENU22, new string_id("* Decrease Drop Count by 1"));
+            mi.addSubMenu(root, menu_info_types.SERVER_MENU24, new string_id("* Set Loot Table"));
+            int root2 = mi.addRootMenu(menu_info_types.SERVER_MENU23, new string_id("Terminate Combat *"));
+            int root4 = mi.addRootMenu(menu_info_types.SERVER_MENU25, new string_id("Spawn Functions *"));
+            mi.addSubMenu(root4, menu_info_types.SERVER_MENU26, new string_id("* Circle Spawn"));
             return SCRIPT_CONTINUE;
         }
         if (pet_lib.isPet(self) || beast_lib.isBeast(self))
@@ -1983,7 +1985,7 @@ public class ai extends script.base_script
         String nextWord = text;
         if (nextWord.equals("gm_follow"))
         {
-            ai.follow(self, speaker, 1.0f, 4.0f);
+            ai.follow(self, speaker, 1.0f, 10.0f);
             chat.chat(self, "[GM|AI] Following " + getName(speaker));
         }
         if (nextWord.equals("gm_aggro"))
@@ -2432,6 +2434,18 @@ public class ai extends script.base_script
 
     public int OnGiveItem(obj_id self, obj_id item, obj_id giver) throws InterruptedException
     {
+        if (getTemplateName(item).equals(TOOL))
+        {
+            obj_id player = giver;
+            obj_id mobile = self;
+            String string_template = getTemplateName(self);
+            obj_id token = create.createObject(TOOL, utils.getInventoryContainer(player), "");
+            setObjVar(token, "city_hire.mobile", string_template);
+            setObjVar(token, "tokenUsed", 1);
+            attachScript(token, "systems.city.city_hire");
+            setName(token, "City Actor Deed: " + getCreatureName(mobile));
+            return SCRIPT_OVERRIDE;
+        }
         if (!hasCompletedCollectionSlot(giver, "meatlump_recruiter_starter"))
         {
             return SCRIPT_CONTINUE;

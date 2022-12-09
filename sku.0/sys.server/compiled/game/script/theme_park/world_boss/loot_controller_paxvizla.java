@@ -67,10 +67,6 @@ public class loot_controller_paxvizla extends script.base_script
         { // 10% Drop Rate: TCG - Mandalorian Banner
             static_item.createNewItemFunction("item_tcg_loot_reward_series3_mandalorian_skull_banner", corpseInventory);
         }
-        /*String myLoot1 = "";
-        createObject(myLoot1, corpseInventory, "");
-        String myLoot2 = "";
-        createObject(myLoot2, corpseInventory, "");*/
         return;
     }
 }

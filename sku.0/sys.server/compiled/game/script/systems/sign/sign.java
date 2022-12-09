@@ -47,6 +47,7 @@ public class sign extends script.base_script
             int management_root = mi.addRootMenu(menu_info_types.SERVER_TERMINAL_MANAGEMENT, SID_TERMINAL_MANAGEMENT);
             mi.addSubMenu(management_root, menu_info_types.SERVER_MENU11, SID_TERMINAL_CITY_PACK_HOUSE);
         }
+        mi.addRootMenu(menu_info_types.SERVER_MENU3, new string_id("Ring Doorbell"));
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
@@ -139,6 +140,25 @@ public class sign extends script.base_script
         {
             obj_id sign = getSelf();
             AttemptPackCityAbandonedStructure(player, sign);
+        }
+        if (item == menu_info_types.SERVER_MENU3)
+        {
+            String commPrompt = "\\#FFD700" + toUpper(getPlayerName(player), 0) + " is at your door.";
+            obj_id house = utils.getObjIdScriptVar(self,"player_structure.parent");
+            obj_id[] occupants = player_structure.getPlayersInBuilding(house);
+            if (isIdValid(house))
+            {
+                for (obj_id occupant : occupants) {
+                    String doorbellSnd = getStringObjVar(house, "player_structure_doorbell_snd");
+                    if (doorbellSnd == null || doorbellSnd.equals("")) {
+                        doorbellSnd = "sound/item_ding.snd";
+                    }
+                    playClientEffectObj(player, doorbellSnd, player, "");
+                    prose_package pp = new prose_package();
+                    prose.setStringId(pp, new string_id(commPrompt));
+                    commPlayer(occupant, self, pp, "");
+                }
+            }
         }
         return SCRIPT_CONTINUE;
     }
