@@ -44,7 +44,7 @@ public class pumpkin_smasher_object extends script.base_script
                 buff.applyBuff(player, "event_halloween_pumpkin_puree");
             }
             int coinChance = rand(1,100);
-            if (coinChance < 11 ) {
+            if (coinChance < 10 ) {
                 broadcast(player, "You find some strange objects inside this pumpkin.");
                 static_item.createNewItemFunction("item_event_halloween_coin", utils.getInventoryContainer(player), 5);
             }
@@ -53,7 +53,7 @@ public class pumpkin_smasher_object extends script.base_script
                 broadcast(player, "An angry worm seems to have been living inside this pumpkin!");
                 create.createCreature("angry_forage_worm", getLocation(player), true);
             }
-            playClientEffectObj(player, "clienteffect/egg_hatch_01.cef", player, "root");
+            playClientEffectLoc(player, "clienteffect/egg_hatch_01.cef", getLocation(player), 0.0f);
             int currentSmashed = getIntObjVar(player, PULPED_ITER_OBJVAR);
             setObjVar(player, PULPED_ITER_OBJVAR, currentSmashed + 1);
             if (currentSmashed >= 100)

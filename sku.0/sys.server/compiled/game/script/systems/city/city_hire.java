@@ -1,7 +1,7 @@
 package script.systems.city;/*
 @Filename: script.systems.city.city_hire
 @Author: BubbaJoeX
-@Purpose: Dragging (OnGiveItem) onto a mobile will make a token that spawns the npc in the city.
+@Purpose: Dragging this item onto a mobile will allow you to hire them.
 */
 
 import script.library.city;
@@ -13,7 +13,7 @@ import script.string_id;
 
 public class city_hire extends script.base_script
 {
-    public static String TOOL = "object/tangible/loot/tool/datapad_broken.iff";
+    public static String TOOL = "object/tangible/loot/tool/city_actor_bio_extractor.iff";
 
     public int OnAttach(obj_id self)
     {
