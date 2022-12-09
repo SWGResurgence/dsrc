@@ -1794,17 +1794,17 @@ slayer_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						
 			kill_rebel_boss_01	5583	5591	50	clearOnComplete																	sound/music_acq_miner.snd	gray	0	0						0	0			
 	heroic_kills			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_axkva_min_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			heroic_axkva_min_01	2793	2797	5	rewardOnUpdate	kill_heroic_axkva_axkva_min																sound/music_acq_miner.snd	gray	0	0						0	0			
+			heroic_axkva_min_01	2793	2797	10	rewardOnUpdate	kill_heroic_axkva_axkva_min																sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_tusken_king_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			heroic_tusken_king_01	2614	2618	5	rewardOnUpdate	kill_heroic_tusken_king																sound/music_acq_miner.snd	gray	0	0						0	0			
+			heroic_tusken_king_01	2614	2618	10	rewardOnUpdate	kill_heroic_tusken_king																sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_ig88_factory_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			heroic_ig88_01	2619	2623	5	rewardOnUpdate	kill_heroic_ig88_ig88_rocket																sound/music_acq_miner.snd	gray	0	0						0	0			
+			heroic_ig88_01	2619	2623	10	rewardOnUpdate	kill_heroic_ig88_ig88_rocket																sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_star_destroyer_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			heroic_star_destroyer_01	5279	5283	5	rewardOnUpdate	kill_heroic_sd_captain_sait	kill_sd_captain_sait															sound/music_acq_miner.snd	gray	0	0						0	0			
+			heroic_star_destroyer_01	5279	5283	10	rewardOnUpdate	kill_heroic_sd_captain_sait	kill_sd_captain_sait															sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_exar_kun_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			heroic_exar_kun_01	5680	5684	5	rewardOnUpdate	kill_heroic_exar_kun																sound/music_acq_miner.snd	gray	0	0						0	0			
+			heroic_exar_kun_01	5680	5684	10	rewardOnUpdate	kill_heroic_exar_kun																sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_minder_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-			heroic_minder_01	5686	5690	5	rewardOnUpdate	kill_heroic_exar_minder																sound/music_acq_miner.snd	gray	0	0						0	0			
+			heroic_minder_01	5686	5690	10	rewardOnUpdate	kill_heroic_exar_minder																sound/music_acq_miner.snd	gray	0	0						0	0			
 		col_hoth_imperial_kill_01		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	1			
 			col_hoth_imperial_01	6234	-1	-1	kill_heroic_echo_rebel_sharpshooter_1																	sound/music_acq_miner.snd	gray	0	0						0	0			
 			col_hoth_imperial_02	6235	-1	-1	kill_heroic_echo_rebel_sharpshooter_2																	sound/music_acq_miner.snd	gray	0	0						0	0			
