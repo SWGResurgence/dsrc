@@ -14,6 +14,7 @@ public class loot_controller_peko extends script.base_script
             "<LOUDS AVIAN NOISES>",
             "<ANGRY AVIAN NOISES>"
     };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress, her nesting site has been reported to have last been  on Naboo. Czerka Corporation is paying for it's remains.");
@@ -22,7 +23,7 @@ public class loot_controller_peko extends script.base_script
 
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
-        obj_id allPlayersNearby[] = getAllPlayers(getLocation(self), 128.0f);
+        obj_id[] allPlayersNearby = getAllPlayers(getLocation(self), 128.0f);
         if (allPlayersNearby != null && allPlayersNearby.length > 0)
         {
             for (obj_id allPlayersNearby1 : allPlayersNearby)
@@ -89,6 +90,7 @@ public class loot_controller_peko extends script.base_script
         }
         return;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         int health = getHealth(self);
@@ -140,19 +142,20 @@ public class loot_controller_peko extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void staggerPlayers(obj_id self, obj_id[] targets) throws InterruptedException
     {
         location stagger = null;
         location slapLoc = getLocation(self);
-        stagger.x = slapLoc.x + rand(-64, 64);
-        stagger.z = slapLoc.z + rand(-64, 64);
+        stagger.x = slapLoc.x + rand(-64.0f, 64.0f);
+        stagger.z = slapLoc.z + rand(-64.0f, 64.0f);
         stagger.y = getHeightAtLocation(slapLoc.x, slapLoc.z);
         stagger.area = getCurrentSceneName();
         for (obj_id iTarget : targets)
         {
             warpPlayer(iTarget, slapLoc.area, slapLoc.x, slapLoc.y, slapLoc.z, null, 0, 0, 0);
             broadcast(iTarget, "The wind from the Mutated Peko-Peko's wings knocked you back!");
-            setYaw(self, rand(0.0f,180.0f));
+            setYaw(self, rand(0.0f, 180.0f));
         }
 
     }

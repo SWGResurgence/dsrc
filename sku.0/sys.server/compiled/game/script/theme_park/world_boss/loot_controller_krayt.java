@@ -35,11 +35,12 @@ public class loot_controller_krayt extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        int retaliateChance = rand(1,100);
-        if ((retaliateChance % 2) == 0) {
+        int retaliateChance = rand(1, 100);
+        if ((retaliateChance % 2) == 0)
+        {
             if (percentHealth < 10)
             {
-                obj_id aoe_targets[] = getCreaturesInRange(self, 64.0f);
+                obj_id[] aoe_targets = getCreaturesInRange(self, 64.0f);
                 for (obj_id testSubjects : aoe_targets)
                 {
                     buff.applyBuff(testSubjects, "acid", 60.0f, 5.0f);
@@ -47,7 +48,19 @@ public class loot_controller_krayt extends script.base_script
                     broadcast(testSubjects, "You have been hit with stomach acid!");
                 }
             }
-        } else {
+        }
+        else
+        {
+            if (percentHealth < 10)
+            {
+                obj_id[] aoe_targets = getCreaturesInRange(self, 64.0f);
+                for (obj_id testSubjects : aoe_targets)
+                {
+                    buff.applyBuff(testSubjects, "poison", 60.0f, 5.0f);
+                    showFlyText(testSubjects, new string_id("- POISON -"), 10.5f, colors.GREEN);
+                    broadcast(testSubjects, "You have been hit with poison!");
+                }
+            }
             //this is the odd chance. Do thing or something here.
         }
         return SCRIPT_CONTINUE;
@@ -92,6 +105,7 @@ public class loot_controller_krayt extends script.base_script
         }
         return;
     }
+
     public void createStomachContents(obj_id self, obj_id container) throws InterruptedException
     {
         int JUNK_COUNT = getAllPlayers(getLocation(self), 120.0f).length * 3;
