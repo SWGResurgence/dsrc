@@ -14,25 +14,29 @@ public class cell_lock extends script.base_script
     {
         return getContainedBy(player);
     }
+
     public int OnAttach(obj_id self)
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self)
     {
         return SCRIPT_CONTINUE;
     }
-    public int OnObjectMenuRequest( obj_id self, obj_id player, menu_info mi ) throws InterruptedException
+
+    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isGod(player))
         {
-            mi.addRootMenu( menu_info_types.SERVER_MENU1, new string_id( "Lock Room" ));
-            mi.addRootMenu( menu_info_types.SERVER_MENU2, new string_id( "Unlock Room" ));
-            mi.addRootMenu( menu_info_types.SERVER_MENU3, new string_id( "Add to Room Permissions" ));
-            mi.addRootMenu( menu_info_types.SERVER_MENU4, new string_id( "Remove from Room Permissions" ));
+            mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("Lock Room"));
+            mi.addRootMenu(menu_info_types.SERVER_MENU2, new string_id("Unlock Room"));
+            mi.addRootMenu(menu_info_types.SERVER_MENU3, new string_id("Add to Room Permissions"));
+            mi.addRootMenu(menu_info_types.SERVER_MENU4, new string_id("Remove from Room Permissions"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int menu) throws InterruptedException
     {
         if (isGod(player))
@@ -78,6 +82,7 @@ public class cell_lock extends script.base_script
         setObjVar(getCurrentCellName(self), "roomLocked", true);
         broadcast(player, "You have locked this room.");
     }
+
     public int handleAddPlayerToRoomPermissions(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id house = getTopMostContainer(self);
@@ -113,6 +118,7 @@ public class cell_lock extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRemovePlayerFromRoomPermissions(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id house = getTopMostContainer(self);

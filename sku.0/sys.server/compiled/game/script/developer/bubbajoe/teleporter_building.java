@@ -68,10 +68,11 @@ public class teleporter_building extends script.base_script
         {
             String prompt = "Enter the name you want to give this teleporter.";
             String title = "Set Name";
-            sui.inputbox(self, player, prompt,"handleSetName");
+            sui.inputbox(self, player, prompt, "handleSetName");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -94,6 +95,7 @@ public class teleporter_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetName(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);

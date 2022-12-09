@@ -1,37 +1,37 @@
 package script.systems.raf;
 
-import script.*;
-import script.base_class.*;
-import script.combat_engine.*;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Vector;
-import script.base_script;
-
 import script.library.static_item;
 import script.library.sui;
+import script.obj_id;
 
-public class ReferAFriend extends script.base_script {
-    public int setReferrer(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
-		 if (!isPlayer(target)) {
+public class ReferAFriend extends script.base_script
+{
+    public int setReferrer(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        if (!isPlayer(target))
+        {
             return SCRIPT_CONTINUE;
         }
-		int stationIdSelf = getPlayerStationId(self);
+        int stationIdSelf = getPlayerStationId(self);
         int stationIdTarget = getPlayerStationId(target);
-        if (stationIdSelf == stationIdTarget) {
+        if (stationIdSelf == stationIdTarget)
+        {
             sendSystemMessageTestingOnly(self, "You cannot refer yourself.");
             return SCRIPT_CONTINUE;
         }
         obj_id tatooine = getPlanetByName("tatooine");
-        if (hasObjVar(tatooine, "raf.referred_" + stationIdSelf)) {
+        if (hasObjVar(tatooine, "raf.referred_" + stationIdSelf))
+        {
             sendSystemMessageTestingOnly(self, "You have already set another player as your referrer.");
             return SCRIPT_CONTINUE;
         }
-        if (hasObjVar(tatooine, "raf.referred_" + stationIdTarget) && getIntObjVar(tatooine, "raf.referred_" + stationIdTarget) == stationIdSelf) {
+        if (hasObjVar(tatooine, "raf.referred_" + stationIdTarget) && getIntObjVar(tatooine, "raf.referred_" + stationIdTarget) == stationIdSelf)
+        {
             sendSystemMessageTestingOnly(self, "You cannot refer this friend because he is referred to you.");
             return SCRIPT_CONTINUE;
         }
-        if (hasObjVar(tatooine, "raf.last_referred_" + stationIdTarget) && getIntObjVar(tatooine, "raf.last_referred_" + stationIdTarget) >= getCurrentBirthDate()) { // TODO: Check the account instead of the character
+        if (hasObjVar(tatooine, "raf.last_referred_" + stationIdTarget) && getIntObjVar(tatooine, "raf.last_referred_" + stationIdTarget) >= getCurrentBirthDate())
+        { // TODO: Check the account instead of the character
             sendSystemMessageTestingOnly(self, "You cannot refer this friend because he has referred another friend within the last 24 hours.");
             return SCRIPT_CONTINUE;
         }
