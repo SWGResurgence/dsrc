@@ -300,3 +300,5 @@ object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gcw_s01_gen4
 object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gcw_s01_gen5.iff	lightsaber_one_handed_gcw_s01_gen5	85	force_sensitive
 object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gcw_s01_gen4.iff	lightsaber_two_handed_gcw_s01_gen4	85	force_sensitive
 object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gcw_s01_gen5.iff	lightsaber_two_handed_gcw_s01_gen5	85	force_sensitive
+object/weapon/melee/pike/crafted_saber/sword_lightsaber_pike_gen6.iff	lightsaber_pike_gen6	88	force_sensitive			
+object/weapon/ranged/heavy/heavy_cr2_blast_cannon.iff	weapon_appearance_heavy_cr2_pvp		commando			

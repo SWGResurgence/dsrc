@@ -305,13 +305,32 @@ public class volcano_event_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public int hkDefeated(obj_id self, dictionary params) throws InterruptedException
-    {
-        trial.setDungeonCleanOutTimer(self);
+    public int hkDefeated(obj_id self, dictionary params) throws InterruptedException {
+		trial.setDungeonCleanOutTimer(self);
         trial.sendCompletionSignal(self, trial.VOLCANO_WIN_SIGNAL);
         messageTo(self, "replacePlaceholder", null, 0, false);
         obj_id[] players = instance.getPlayersInInstanceArea(self);
         badge.grantBadge(players, "bdg_must_victory_volcano");
+        
+        // HEROIC SYSTEM BEGIN \\
+        
+        dictionary dict = new dictionary();
+        dict.put("tokenIndex", 7);
+        dict.put("tokenCount", 8);
+        utils.messageTo(players, "handleAwardtoken", dict, 0, false);
+        obj_id group = getGroupObject(players[0]);
+        int calendarTime = getCalendarTime();
+        String realTime = getCalendarTimeStringLocal(calendarTime);
+        CustomerServiceLog("instance-mustafar_trials_volcano_battlefield", "HK 47 Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
+        CustomerServiceLog("instance-mustafar_trials_volcano_battlefield", "Group (" + group + ") consists of: ");
+        for (int i = 0; i < players.length; ++i)
+        {
+            String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
+            CustomerServiceLog("instance-mustafar_trials_volcano_battlefield", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
+        }
+        
+        // HEROIC SYSTEM END \\
+        
         return SCRIPT_CONTINUE;
     }
     public void doLogging(String section, String message) throws InterruptedException

@@ -1,10 +1,7 @@
 @base object/draft_schematic/item/base_item_schematic.iff
-//@base object/draft_schematic/item/item_base_tool.iff
-
 @class draft_schematic_object_template 7
-//
-itemsPerContainer = 25
-//
+
+itemsPerContainer = 1000
 
 craftedObjectTemplate = "object/tangible/medicine/pet/droid_stimpack_a.iff"
 
@@ -25,11 +22,10 @@ slots = [
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ]]
+  
 manufactureScripts = [ "systems.crafting.item.specific_item.crafting_repairkit" ]
 
 @class intangible_object_template 0
-
-
 @class object_template 5
 
 complexity = 32

@@ -137,7 +137,6 @@ public class menu_info_types
 	public static final int OPEN_STORYTELLER_RECIPE    = index++;
 	public static final int GOD_TELEPORT			   = index++;
 
-
 	/// do not add any constants between here and SERVER_DIVIDER
 	/// unless they also exist on the client
 

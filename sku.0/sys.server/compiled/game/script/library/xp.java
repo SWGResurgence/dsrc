@@ -1963,7 +1963,7 @@ public class xp extends script.base_script
             return 0;
         }
         String profPrefix = space_flags.getProfessionPrefix(player);
-        if (profPrefix == null || profPrefix.equals(""))
+        if (profPrefix == null || profPrefix.isEmpty())
         {
             return 0;
         }

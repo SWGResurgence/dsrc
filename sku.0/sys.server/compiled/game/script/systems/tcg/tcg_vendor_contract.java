@@ -8,9 +8,6 @@ import script.library.vendor_lib;
 
 public class tcg_vendor_contract extends script.base_script
 {
-    public tcg_vendor_contract()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "vendor";
     public static final string_id SID_NO_USE_WHILE_DEAD = new string_id("player_structure", "while_dead");

@@ -7,5 +7,3 @@
 
 sharedTemplate = "object/tangible/wearables/hat/shared_hat_rebel_trooper_01.iff"
 
-objvars =+ ["faction_recruiter.faction"="Rebel"]
-scripts =+ ["npc.faction_recruiter.faction_item"]

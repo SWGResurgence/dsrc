@@ -17,6 +17,7 @@ public class tusken_controller extends script.base_script
         instance.setClock(self, 300);
         dictionary dict = new dictionary();
         dict.put("tokenIndex", 1);
+        dict.put("tokenCount", 3);
         utils.messageTo(players, "handleAwardtoken", dict, 0, false);
         obj_id group = getGroupObject(players[0]);
         int calendarTime = getCalendarTime();

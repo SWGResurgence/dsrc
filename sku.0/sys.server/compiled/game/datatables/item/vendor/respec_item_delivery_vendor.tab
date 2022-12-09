@@ -1,0 +1,11 @@
+item	cash	limit	class	script	note
+s[none]	i[0]	i[0]	i[0]	s	c
+item_jedi_roadmap_supplies_01_01	0		7		Jedi Roadmap Supplies
+item_bh_profession_roadmap_supplies_01_01	0		6		Bounty Hunter Roadmap Supplies
+item_smuggler_profession_roadmap_supplies_01_01	0		2		Smuggler Roadmap Supplies
+item_officer_profession_roadmap_supplies_01_01	0		4		Officer Roadmap Supplies
+item_commando_profession_roadmap_supplies_01_01	0		1		Commando Roadmap Supplies
+item_spy_profession_roadmap_supplies_01_01	0		5		Spy Roadmap Supplies
+item_medic_profession_roadmap_supplies_01_01	0		3		Medic Roadmap Supplies
+item_entertainer_profession_roadmap_supplies_01_01	0		9		Entertainer Roadmap Supplies
+item_trader_profession_roadmap_supplies_01_01	0		8		Trader Roadmap Supplies

@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class vendor_lib extends script.base_script
 {
-    public vendor_lib()
-    {
-    }
     public static final String VAR_MAINTENANCE_RATE = "vendor.maintanence.rate";
     public static final String VAR_DECAY_RATE = "vendor.maintanence.decay";
     public static final String VAR_LAST_MAINTANENCE = "vendor.last_maintanence";
@@ -150,7 +147,7 @@ public class vendor_lib extends script.base_script
         {
             return false;
         }
-        if (amt < 1 || amt > 100000)
+        if (amt < 1 || amt > 1000000)
         {
             return false;
         }
@@ -168,7 +165,7 @@ public class vendor_lib extends script.base_script
         {
             return false;
         }
-        if (amt < 1 || amt > 100000)
+        if (amt < 1 || amt > 1000000)
         {
             return false;
         }

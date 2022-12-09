@@ -29,7 +29,7 @@ public class rebel_npc extends script.base_script
         obj_id masterObject = holiday.masterObjectObjId(self);
         if (hasObjVar(self, "leia"))
         {
-            CustomerServiceLog("holidayEvent", "imperial_npc.OnMovePathComplete: Leia has come to a stop at a location.");
+            //CustomerServiceLog("holidayEvent", "imperial_npc.OnMovePathComplete: Leia has come to a stop at a location.");
             obj_id spawnPoint = holiday.getEmpireDayWaypointObjectObjId(self, "spawnCeleb", holiday.OBJECT_NEAR_CHECK_RANGE_2M);
             obj_id pathPoint = holiday.getEmpireDayWaypointObjectObjId(self, "pathLeia", holiday.OBJECT_NEAR_CHECK_RANGE_2M);
             if (isIdValid(pathPoint) && exists(pathPoint))
@@ -55,7 +55,7 @@ public class rebel_npc extends script.base_script
         }
         else if (hasObjVar(self, "han"))
         {
-            CustomerServiceLog("holidayEvent", "imperial_npc.OnMovePathComplete: Han has come to a stop at a location.");
+            //CustomerServiceLog("holidayEvent", "imperial_npc.OnMovePathComplete: Han has come to a stop at a location.");
             obj_id spawnPoint = holiday.getEmpireDayWaypointObjectObjId(self, "spawnCeleb", holiday.OBJECT_NEAR_CHECK_RANGE_2M);
             obj_id pathPoint = holiday.getEmpireDayWaypointObjectObjId(self, "pathHan", holiday.OBJECT_NEAR_CHECK_RANGE_2M);
             if (isIdValid(spawnPoint) && exists(spawnPoint))
@@ -74,13 +74,13 @@ public class rebel_npc extends script.base_script
             }
             if (isIdValid(pathPoint) && exists(pathPoint))
             {
-                CustomerServiceLog("holidayEvent", "imperial_npc.OnMovePathComplete: Han has a valid pathPoint.");
+                //CustomerServiceLog("holidayEvent", "imperial_npc.OnMovePathComplete: Han has a valid pathPoint.");
                 setYaw(self, -140.0f);
             }
         }
         else if (hasObjVar(self, "chewie"))
         {
-            CustomerServiceLog("holidayEvent", "imperial_npc.OnMovePathComplete: Chewie has come to a stop at a location.");
+            //CustomerServiceLog("holidayEvent", "imperial_npc.OnMovePathComplete: Chewie has come to a stop at a location.");
             obj_id spawnPoint = holiday.getEmpireDayWaypointObjectObjId(self, "spawnCeleb", holiday.OBJECT_NEAR_CHECK_RANGE_2M);
             obj_id pathPoint = holiday.getEmpireDayWaypointObjectObjId(self, "pathChewie", holiday.OBJECT_NEAR_CHECK_RANGE_2M);
             if (isIdValid(spawnPoint) && exists(spawnPoint))
@@ -99,7 +99,7 @@ public class rebel_npc extends script.base_script
             }
             if (isIdValid(pathPoint) && exists(pathPoint))
             {
-                CustomerServiceLog("holidayEvent", "imperial_npc.OnMovePathComplete: Chewie has a valid pathPoint.");
+                //CustomerServiceLog("holidayEvent", "imperial_npc.OnMovePathComplete: Chewie has a valid pathPoint.");
                 setYaw(self, -140.0f);
             }
         }
@@ -154,7 +154,7 @@ public class rebel_npc extends script.base_script
             obj_id[] listOfWinners = getObjIdArrayObjVar(self, "listOfWinners");
             if (listOfWinners == null || listOfWinners.length <= 0)
             {
-                CustomerServiceLog("holidayEvent", "imperial_npc.OnObjectMenuSelect: THE LIST OF WINNERS WASNT FOUND ON VADER. Vader cannot give the player his badge.");
+                //CustomerServiceLog("holidayEvent", "imperial_npc.OnObjectMenuSelect: THE LIST OF WINNERS WASNT FOUND ON VADER. Vader cannot give the player his badge.");
                 return SCRIPT_CONTINUE;
             }
             boolean playerReward = false;
@@ -202,7 +202,7 @@ public class rebel_npc extends script.base_script
             {
                 holiday.slapPlayerDownForBeingRude(self, emoteSayer);
             }
-            CustomerServiceLog("holidayEvent", "imperial_npc.OnObjectMenuSelect: Player: " + emoteSayer + " was rude to an NPC at the ceremony and will now be punished.");
+            //CustomerServiceLog("holidayEvent", "imperial_npc.OnObjectMenuSelect: Player: " + emoteSayer + " was rude to an NPC at the ceremony and will now be punished.");
         }
         if (hasObjVar(self, "leia") && hasObjVar(self, "readyForBadge") && utils.hasScriptVar(emoteSayer, "emperorsDayBadge") && emotetarget == self)
         {
@@ -243,7 +243,7 @@ public class rebel_npc extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        CustomerServiceLog("holidayEvent", "rebel_npc.playerKnockedOut: The player: " + player + " was knocked down by an Empire Day Ceremony NPC.");
+        //CustomerServiceLog("holidayEvent", "rebel_npc.playerKnockedOut: The player: " + player + " was knocked down by an Empire Day Ceremony NPC.");
         damage(player, DAMAGE_KINETIC, HIT_LOCATION_BODY, 100);
         setPosture(player, POSTURE_INCAPACITATED);
         if (factions.isImperial(player))

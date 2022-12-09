@@ -1,14 +1,14 @@
 @base object/draft_schematic/structure/base_structure_schematic.iff
 @class draft_schematic_object_template 7
 
-itemsPerContainer = 1
+itemsPerContainer = 0
 craftedObjectTemplate = "object/tangible/deed/player_house_deed/tree_house_01_deed.iff"
 slots = [
 	[
 	optional = false,
 	name = "craft_structure_ingredients_n" "frame_and_walls",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "frame_and_walls", ingredient="wood", count=15000]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "frame_and_walls", ingredient="wood", count=1500]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -16,7 +16,7 @@ slots = [
 	optional = false,
 	name = "craft_structure_ingredients_n" "foliage",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "foliage", ingredient="fruit_flowers", count=1000]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "foliage", ingredient="fruit_flowers", count=100]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -24,7 +24,7 @@ slots = [
 	optional = false,
 	name = "craft_structure_ingredients_n" "foundation",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "foundation", ingredient="ore", count=1500]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "foundation", ingredient="ore", count=150]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -32,7 +32,7 @@ slots = [
 	optional = false,
 	name = "craft_structure_ingredients_n" "molding",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "molding", ingredient="softwood_conifer_kashyyyk", count=500]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "molding", ingredient="softwood_conifer_kashyyyk", count=50]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -40,7 +40,7 @@ slots = [
 	optional = false,
 	name = "craft_structure_ingredients_n" "decorative_foliage",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "decorative_foliage", ingredient="fruit_flowers_kashyyyk", count=500]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_structure_ingredients_n" "decorative_foliage", ingredient="fruit_flowers_kashyyyk", count=50]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],

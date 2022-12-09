@@ -1,8 +1,7 @@
 @base object/draft_schematic/item/base_item_schematic.iff
 @class draft_schematic_object_template 7
-//
-itemsPerContainer = 25
-//
+
+itemsPerContainer = 1000
 
 category = CT_misc
 craftedObjectTemplate = "object/tangible/component/item/electronic_energy_distributor.iff"
@@ -60,8 +59,6 @@ skillCommands = ["unskilled"]
 manufactureScripts = [ "systems.crafting.item.specific_item.crafting_item_component" ]
 
 @class intangible_object_template 0
-
-
 @class object_template 5
 
 complexity = 19

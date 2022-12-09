@@ -9,14 +9,14 @@
 
 @class draft_schematic_object_template 7
 
-itemsPerContainer = 100
+itemsPerContainer = 1000
 craftedObjectTemplate = "object/tangible/component/genetic_engineering/combiner_use_capsule.iff"
 slots = [
 	[
 	optional = false,
 	name = "craft_item_ingredients_n" "combiner_use_capsule_a",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "combiner_use_capsule_a", ingredient="copper", count=500]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "combiner_use_capsule_a", ingredient="copper", count=50]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],
@@ -24,7 +24,7 @@ slots = [
 	optional = false,
 	name = "craft_item_ingredients_n" "combiner_use_capsule_b",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "combiner_use_capsule_b", ingredient="ore", count=250]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "combiner_use_capsule_b", ingredient="ore", count=25]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0,
 	appearance = "" ],

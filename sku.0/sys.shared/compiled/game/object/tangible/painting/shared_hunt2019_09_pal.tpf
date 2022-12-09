@@ -1,0 +1,14 @@
+//Created by TBailey 9.8.2004
+
+@base object/tangible/furniture/base/shared_furniture_base.iff
+
+@class tangible_object_template 6
+
+@class object_template 5
+
+
+objectName = "item_n" "hunt2019_09_pal"
+
+detailedDescription = "item_n" "hunt2019_09_pal"
+
+appearanceFilename = "appearance/hunt2019_09_pal.apt"

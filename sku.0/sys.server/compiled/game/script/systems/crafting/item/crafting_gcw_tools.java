@@ -26,7 +26,7 @@ public class crafting_gcw_tools extends script.base_script
         }
         else if (!profession.equals("trader"))
         {
-            fatigue = 5;
+            fatigue = 2;
         }
         if (getCount(self) > 1)
         {

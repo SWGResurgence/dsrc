@@ -226,7 +226,7 @@ misc	no child inherit
 	length	float
 	num_in_stack	int
 	pilotSkillRequired	enum	@skl_n:pilot_imperial_navy_master	@skl_n:pilot_imperial_navy_novice	@skl_n:pilot_imperial_navy_starships_01	@skl_n:pilot_imperial_navy_starships_02	@skl_n:pilot_imperial_navy_starships_03	@skl_n:pilot_imperial_navy_starships_04	@skl_n:pilot_neutral_master	@skl_n:pilot_neutral_novice	@skl_n:pilot_neutral_starships_01	@skl_n:pilot_neutral_starships_02	@skl_n:pilot_neutral_starships_03	@skl_n:pilot_neutral_starships_04	@skl_n:pilot_rebel_navy_master	@skl_n:pilot_rebel_navy_novice	@skl_n:pilot_rebel_navy_starships_01	@skl_n:pilot_rebel_navy_starships_02	@skl_n:pilot_rebel_navy_starships_03	@skl_n:pilot_rebel_navy_starships_04	@space_crafting_n:all_master
-	planet	enum	@planet_n:corellia	@planet_n:dantooine	@planet_n:dathomir	@planet_n:endor	@planet_n:lok	@planet_n:naboo	@planet_n:rori	@planet_n:talus	@planet_n:tatooine	@planet_n:yavin4
+	planet	enum	@planet_n:corellia	@planet_n:dantooine	@planet_n:dathomir	@planet_n:endor	@planet_n:lok	@planet_n:naboo	@planet_n:rori	@planet_n:talus	@planet_n:tatooine	@planet_n:yavin4	@planet_n:dxun
 	serial_number	string
 	type	string	a blackfish	a blowfish	a bluefish	a faa	a laa	a ray	a striped fish
 misc_container	@obj_attr_n:experiment_bonus_eff	float

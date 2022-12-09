@@ -3585,3 +3585,325 @@ slot																resource	0	binding_and_reinforcement	petrochem_inert_polymer
 slot																resource	0	padding	hide_wooly	5
 slot																template	0	load_bearing_harness	object/tangible/component/clothing/synthetic_cloth.iff	1
 slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+final	armor_appearance_infiltrator_s01_chest_plate		systems.crafting.armor.component.crafting_new_armor_final	0	9	15	300	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s01_chest_plate.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	hide_bristley	50
+slot																resource	0	armor_core_frame	iron	100
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	3
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+slot																template	1	power_bit	object/tangible/component/armor/power_bit.iff	1
+final	armor_appearance_infiltrator_s01_leggings		systems.crafting.armor.component.crafting_new_armor_final	0	8	15	240	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s01_leggings.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	hide_bristley	45
+slot																resource	0	armor_core_frame	iron	90
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	2
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_infiltrator_s01_helmet		systems.crafting.armor.component.crafting_new_armor_final	0	8	15	220	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s01_helmet.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	hide_bristley	40
+slot																resource	0	armor_core_frame	iron	80
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	2
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_infiltrator_s01_bicep_l		systems.crafting.armor.component.crafting_new_armor_final	0	8	15	150	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s01_bicep_l.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	hide_bristley	25
+slot																resource	0	armor_core_frame	iron	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_infiltrator_s01_bicep_r		systems.crafting.armor.component.crafting_new_armor_final	0	8	15	150	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s01_bicep_r.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	hide_bristley	25
+slot																resource	0	armor_core_frame	iron	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_infiltrator_s01_bracer_l		systems.crafting.armor.component.crafting_new_armor_final	0	8	15	140	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s01_bracer_l.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	hide_bristley	25
+slot																resource	0	armor_core_frame	iron	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_infiltrator_s01_bracer_r		systems.crafting.armor.component.crafting_new_armor_final	0	8	15	140	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s01_bracer_r.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	hide_bristley	14
+slot																resource	0	armor_core_frame	iron	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+clothing	armor_appearance_infiltrator_s01_gloves		systems.crafting.armor.crafting_armor_nostats	0	4	15	50	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s01_gloves.iff					1					
+slot																resource	0	appearance_fragments	hide_bristley	15
+slot																resource	0	armor_core_frame	iron	20
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+clothing	armor_appearance_infiltrator_s01_boots		systems.crafting.armor.crafting_armor_nostats	0	4	15	70	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s01_boots.iff					1					
+slot																resource	0	appearance_fragments	hide_bristley	25
+slot																resource	0	armor_core_frame	iron	20
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+clothing	armor_appearance_infiltrator_s01_belt		systems.crafting.armor.crafting_armor_nostats	0	3	25	60	armor_crafting	1	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s01_belt.iff					1					
+slot																resource	0	shell	petrochem_inert	20
+slot																resource	0	binding_and_reinforcement	petrochem_inert	10
+slot																resource	0	hardware	metal	30
+final	armor_appearance_infiltrator_s02_chest_plate		systems.crafting.armor.component.crafting_new_armor_final	0	9	15	300	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s02_chest_plate.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	hide_bristley	50
+slot																resource	0	armor_core_frame	iron	100
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	3
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+slot																template	1	power_bit	object/tangible/component/armor/power_bit.iff	1
+final	armor_appearance_infiltrator_s02_leggings		systems.crafting.armor.component.crafting_new_armor_final	0	8	15	240	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s02_leggings.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	hide_bristley	45
+slot																resource	0	armor_core_frame	iron	90
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	2
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_infiltrator_s02_helmet		systems.crafting.armor.component.crafting_new_armor_final	0	8	15	220	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s02_helmet.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	hide_bristley	40
+slot																resource	0	armor_core_frame	iron	80
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	2
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_infiltrator_s02_bicep_l		systems.crafting.armor.component.crafting_new_armor_final	0	8	15	150	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s02_bicep_l.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	hide_bristley	25
+slot																resource	0	armor_core_frame	iron	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_infiltrator_s02_bicep_r		systems.crafting.armor.component.crafting_new_armor_final	0	8	15	150	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s02_bicep_r.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	hide_bristley	25
+slot																resource	0	armor_core_frame	iron	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_infiltrator_s02_bracer_l		systems.crafting.armor.component.crafting_new_armor_final	0	8	15	140	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s02_bracer_l.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	hide_bristley	25
+slot																resource	0	armor_core_frame	iron	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_infiltrator_s02_bracer_r		systems.crafting.armor.component.crafting_new_armor_final	0	8	15	140	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s02_bracer_r.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	hide_bristley	14
+slot																resource	0	armor_core_frame	iron	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+clothing	armor_appearance_infiltrator_s02_gloves		systems.crafting.armor.crafting_armor_nostats	0	4	15	50	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s02_gloves.iff					1					
+slot																resource	0	appearance_fragments	hide_bristley	15
+slot																resource	0	armor_core_frame	iron	20
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+clothing	armor_appearance_infiltrator_s02_boots		systems.crafting.armor.crafting_armor_nostats	0	4	15	70	armor_crafting	3	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s02_boots.iff					1					
+slot																resource	0	appearance_fragments	hide_bristley	25
+slot																resource	0	armor_core_frame	iron	20
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+clothing	armor_appearance_infiltrator_s02_belt		systems.crafting.armor.crafting_armor_nostats	0	3	25	60	armor_crafting	1	object/tangible/wearables/armor/infiltrator/armor_infiltrator_s02_belt.iff					1					
+slot																resource	0	shell	petrochem_inert	20
+slot																resource	0	binding_and_reinforcement	petrochem_inert	10
+slot																resource	0	hardware	metal	30
+final	armor_appearance_storm_commando_chest		systems.crafting.armor.component.crafting_new_armor_factional_final	0	9	15	300	armor_crafting	3	object/tangible/wearables/armor/storm_commando/armor_storm_commando_chest_plate.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	100
+slot																resource	0	armor_core_frame	steel	100
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	3
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+slot																template	1	power_bit	object/tangible/component/armor/power_bit.iff	1
+final	armor_appearance_storm_commando_leggings		systems.crafting.armor.component.crafting_new_armor_factional_final	0	8	15	250	armor_crafting	3	object/tangible/wearables/armor/storm_commando/armor_storm_commando_leggings.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	90
+slot																resource	0	armor_core_frame	steel	90
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	2
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_storm_commando_helmet		systems.crafting.armor.component.crafting_new_armor_factional_final	0	8	15	220	armor_crafting	3	object/tangible/wearables/armor/storm_commando/armor_storm_commando_helmet.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	80
+slot																resource	0	armor_core_frame	steel	80
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	2
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_storm_commando_bicep_l		systems.crafting.armor.component.crafting_new_armor_factional_final	0	8	15	150	armor_crafting	3	object/tangible/wearables/armor/storm_commando/armor_storm_commando_bicep_l.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	50
+slot																resource	0	armor_core_frame	steel	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_storm_commando_bicep_r		systems.crafting.armor.component.crafting_new_armor_factional_final	0	8	15	150	armor_crafting	3	object/tangible/wearables/armor/storm_commando/armor_storm_commando_bicep_r.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	50
+slot																resource	0	armor_core_frame	steel	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_storm_commando_bracer_l		systems.crafting.armor.component.crafting_new_armor_factional_final	0	8	15	140	armor_crafting	3	object/tangible/wearables/armor/storm_commando/armor_storm_commando_bracer_l.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	50
+slot																resource	0	armor_core_frame	steel	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_storm_commando_bracer_r		systems.crafting.armor.component.crafting_new_armor_factional_final	0	8	15	140	armor_crafting	3	object/tangible/wearables/armor/storm_commando/armor_storm_commando_bracer_r.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	50
+slot																resource	0	armor_core_frame	steel	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+clothing	armor_appearance_storm_commando_gloves		systems.crafting.armor.component.crafting_new_armor_nostat_factional_final	0	4	15	50	armor_crafting	3	object/tangible/wearables/armor/storm_commando/armor_storm_commando_gloves.iff					1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	30
+slot																resource	0	armor_core_frame	steel	20
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+clothing	armor_appearance_storm_commando_boots		systems.crafting.armor.component.crafting_new_armor_nostat_factional_final	0	4	15	70	armor_crafting	3	object/tangible/wearables/armor/storm_commando/armor_storm_commando_boots.iff					1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	50
+slot																resource	0	armor_core_frame	steel	20
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+clothing	armor_appearance_storm_commando_utility_belt		systems.crafting.armor.component.crafting_new_armor_nostat_factional_final	0	8	15	43	armor_crafting	1	object/tangible/wearables/armor/storm_commando/armor_storm_commando_utility_belt.iff					1					
+slot																resource	0	auxilary_coverage	hide_leathery	5
+slot																resource	0	body	hide_scaley	5
+slot																resource	0	liner	fiberplast	5
+slot																resource	0	hardware_and_attachments	metal	5
+slot																resource	0	binding_and_reinforcement	petrochem_inert_polymer	3
+slot																resource	0	padding	hide_wooly	5
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/synthetic_cloth.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+final	armor_appearance_rebel_pathfinder_chest_plate		systems.crafting.armor.component.crafting_new_armor_factional_final	0	9	15	300	armor_crafting	3	object/tangible/wearables/armor/rebel_pathfinder/armor_rebel_pathfinder_chest_plate.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	100
+slot																resource	0	armor_core_frame	steel	100
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	3
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+slot																template	1	power_bit	object/tangible/component/armor/power_bit.iff	1
+final	armor_appearance_rebel_pathfinder_leggings		systems.crafting.armor.component.crafting_new_armor_factional_final	0	8	15	250	armor_crafting	3	object/tangible/wearables/armor/rebel_pathfinder/armor_rebel_pathfinder_leggings.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	90
+slot																resource	0	armor_core_frame	steel	90
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	2
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_rebel_pathfinder_helmet		systems.crafting.armor.component.crafting_new_armor_factional_final	0	8	15	220	armor_crafting	3	object/tangible/wearables/armor/rebel_pathfinder/armor_rebel_pathfinder_helmet.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	80
+slot																resource	0	armor_core_frame	steel	80
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	2
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_rebel_pathfinder_bicep_l		systems.crafting.armor.component.crafting_new_armor_factional_final	0	8	15	150	armor_crafting	3	object/tangible/wearables/armor/rebel_pathfinder/armor_rebel_pathfinder_bicep_l.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	50
+slot																resource	0	armor_core_frame	steel	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_rebel_pathfinder_bicep_r		systems.crafting.armor.component.crafting_new_armor_factional_final	0	8	15	150	armor_crafting	3	object/tangible/wearables/armor/rebel_pathfinder/armor_rebel_pathfinder_bicep_r.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	50
+slot																resource	0	armor_core_frame	steel	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_rebel_pathfinder_bracer_l		systems.crafting.armor.component.crafting_new_armor_factional_final	0	8	15	140	armor_crafting	3	object/tangible/wearables/armor/rebel_pathfinder/armor_rebel_pathfinder_bracer_l.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	50
+slot																resource	0	armor_core_frame	steel	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+final	armor_appearance_rebel_pathfinder_bracer_r		systems.crafting.armor.component.crafting_new_armor_factional_final	0	8	15	140	armor_crafting	3	object/tangible/wearables/armor/rebel_pathfinder/armor_rebel_pathfinder_bracer_r.iff			battle	1.85	1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	50
+slot																resource	0	armor_core_frame	steel	50
+slot																template	0	armor_core	object/tangible/component/armor/armor_core_battle.iff	1
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+slot																template	1	enhancement_cartridge	object/tangible/component/armor/bio_cartridge.iff	1
+slot																template	1	appearance_enhancement_one	object/tangible/component/armor/armor_appearance_enhancement_base.iff	1
+slot																template	1	appearance_enhancement_two	object/tangible/component/armor/armor_appearance_enhancement_base_two.iff	1
+clothing	armor_appearance_rebel_pathfinder_gloves		systems.crafting.armor.component.crafting_new_armor_nostat_factional_final	0	4	15	50	armor_crafting	3	object/tangible/wearables/armor/rebel_pathfinder/armor_rebel_pathfinder_gloves.iff					1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	30
+slot																resource	0	armor_core_frame	steel	20
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+clothing	armor_appearance_rebel_pathfinder_boots		systems.crafting.armor.component.crafting_new_armor_nostat_factional_final	0	4	15	70	armor_crafting	3	object/tangible/wearables/armor/rebel_pathfinder/armor_rebel_pathfinder_boots.iff					1					
+slot																resource	0	appearance_fragments	petrochem_inert_polymer	50
+slot																resource	0	armor_core_frame	steel	20
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/fiberplast_panel.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1
+clothing	armor_appearance_rebel_pathfinder_belt		systems.crafting.armor.component.crafting_new_armor_nostat_factional_final	0	8	15	43	armor_crafting	1	object/tangible/wearables/armor/rebel_pathfinder/armor_rebel_pathfinder_belt.iff					1					
+slot																resource	0	auxilary_coverage	hide_leathery	5
+slot																resource	0	body	hide_scaley	5
+slot																resource	0	liner	fiberplast	5
+slot																resource	0	hardware_and_attachments	metal	5
+slot																resource	0	binding_and_reinforcement	petrochem_inert_polymer	3
+slot																resource	0	padding	hide_wooly	5
+slot																template	0	load_bearing_harness	object/tangible/component/clothing/synthetic_cloth.iff	1
+slot																template	0	reinforcement	object/tangible/component/clothing/reinforced_fiber_panels.iff	1

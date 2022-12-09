@@ -37,3 +37,5 @@ nova_orion_station	Nova Orion Station	corellia	-5003	21	-2228	space_nova_orion	5
 dathomir_fs_village	The Township of Aurilia	dathomir	5436	78	-4179	space_dathomir	-6880	2742	-3956	station_dathomir	3
 heroic_star_destroyer	Blackguard	corellia	-5003	21	-2228	space_nova_orion	500	500	500	station_nova_orion	1
 black_mesa	Dathomir Quarantine Zone	dathomir	-5697	511	-6474	space_dathomir	-6880	2742	-3956	station_dathomir	3
+dxun_czerka_outpost	Czerka Outpost	dxun	3201	24	-3471	space_dxun	-5268	-1500	-5209	station_corellia	11
+mustafar_main_se	Mensix Mining Facility	mustafar	405	230	-1346	space_corellia	6519	-5373	-2600	station_corellia	12

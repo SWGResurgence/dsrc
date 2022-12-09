@@ -6,6 +6,8 @@
 
 @class object_template 10
 
+objectName = "static_item_n"  "item_event_lifeday_present_pile"
+detailedDescription = "static_item_d"  "item_event_lifeday_present_pile"
+
 appearanceFilename = "appearance/lifeday_presents_s01.apt"
 
-clientDataFile = "clientdata/item/client_shared_life_day_present.cdf"

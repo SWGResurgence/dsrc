@@ -2277,7 +2277,7 @@ public class terminal_city extends script.base_script
         }
         else 
         {
-            if ((amt < 5000) || (amt > 150000))
+            if ((amt < 5000) || (amt > 5000000))
             {
                 sendSystemMessage(player, SID_WITHDRAW_LIMITS);
                 return SCRIPT_CONTINUE;

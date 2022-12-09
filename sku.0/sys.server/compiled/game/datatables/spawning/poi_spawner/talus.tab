@@ -420,6 +420,4 @@ s	c	c	c	c	c	f	i	s	f	s	i[1]	i[1]
 1053342	5199.15	30.5354	-1739	talus	0	900	3	painted_spat			0
 1414952	-4918.28	66	-3110.45	talus	0	300	1	talus_ttlp_soldier			0
 1414953	-4593.02	0.62	4347.52	talus	0	300	3	talus_ttlp_soldier	6		0
-4886858	365	6	-286	talus	0	1	1	syren5_dak_ralter	1	conversation.c_story1_5	1
-4887575	4370	2	5346	talus	0	1	1	syren5_officer_mkae	1	conversation.c_story1_5_rebel	1
 6647925	684.687	13.8002	-3219.83	talus	0	1	1	coa_dathnaeya_loessin		conversation.talus_dearic_coa_dathnaeya_loessin	1

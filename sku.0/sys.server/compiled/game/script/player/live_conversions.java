@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class live_conversions extends script.base_script
 {
-    public live_conversions()
-    {
-    }
     public static final int FLAG_ARRAY_SIZE = 2;
     public static final int FLAG_MAX_BITS = FLAG_ARRAY_SIZE * 32;
     public static final int FEMALE_PILOT_MEDAL_FLAG = 0;
@@ -703,7 +700,7 @@ public class live_conversions extends script.base_script
     }
     public void updateLotOverLimitStructureLocation(obj_id player) throws InterruptedException
     {
-        if (getAccountNumLots(getPlayerObject(player)) <= player_structure.MAX_LOTS)
+        if (getAccountNumLots(getPlayerObject(player)) <= getMaxHousingLots())
         {
             removeObjVar(player, "lotOverlimit");
         }

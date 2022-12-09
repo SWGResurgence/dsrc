@@ -101,10 +101,10 @@ public class terminal_travel_instant extends script.base_script
             utils.setScriptVar(player, travel.SCRIPT_VAR_TERMINAL, self);
             utils.setScriptVar(player, "instantTravel", true);
             boolean success = enterClientTicketPurchaseMode(player, planet, travel_point, true);
+            //sendSystemMessageGalaxyTestingOnly("[SKYNET] Instant Travel Terminal: " + getFirstName(player) + " - " + planet + " - " + travel_point);
             if (success) {
                 utils.setScriptVar(self, "transport", 1);
             }
-            return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }

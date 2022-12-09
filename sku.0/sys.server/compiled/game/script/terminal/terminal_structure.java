@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class terminal_structure extends script.base_script
 {
-    public terminal_structure()
-    {
-    }
     public static final String TERMINAL_LOGGING = "special_sign";
     public static final boolean LOGGING_ON = true;
     public static final string_id SID_TERMINAL_PERMISSIONS = new string_id("player_structure", "permissions");
@@ -91,16 +88,10 @@ public class terminal_structure extends script.base_script
                 int owner_root = mi.addRootMenu(menu_info_types.SERVER_MENU16, SID_SHOW_MAYOR_OWNER);
             }
         }
-        if (player_structure.isAdmin(structure, player) || charactersAreSamePlayer(player, getOwner(structure)))
+        if (player_structure.isAdmin(structure, player) || getPlayerStationId(player_structure.getOwner(structure)) == getPlayerStationId(player))
         {
             blog("terminal_structure::OnObjectMenuRequest - you are admin");
-            if (player_structure.isHarvester(structure) || player_structure.isGenerator(structure))
-            {
-                if (!player_structure.isOwner(structure, player))
-                {
-                    return SCRIPT_CONTINUE;
-                }
-            }
+
             int management_root = mi.addRootMenu(menu_info_types.SERVER_TERMINAL_MANAGEMENT, SID_TERMINAL_MANAGEMENT);
             mi.addSubMenu(management_root, menu_info_types.SERVER_TERMINAL_MANAGEMENT_DESTROY, SID_TERMINAL_MANAGEMENT_DESTROY);
             if (got == GOT_installation_minefield)
@@ -132,7 +123,8 @@ public class terminal_structure extends script.base_script
                 permissions_root = mi.addRootMenu(menu_info_types.SERVER_TERMINAL_PERMISSIONS, SID_TERMINAL_PERMISSIONS);
                 mi.addSubMenu(permissions_root, menu_info_types.SERVER_TERMINAL_PERMISSIONS_ADMIN, SID_TERMINAL_PERMISSIONS_ADMIN);
             }
-            if ((template.contains("cityhall_")))
+            /*if ((template.contains("cityhall_")))*/
+                      if (template.indexOf("cityhall_") > -1)
             {
                 return SCRIPT_CONTINUE;
             }
@@ -158,6 +150,11 @@ public class terminal_structure extends script.base_script
                 mi.addSubMenu(permissions_root, menu_info_types.SERVER_TERMINAL_PERMISSIONS_ENTER, SID_TERMINAL_PERMISSIONS_ENTER);
                 mi.addSubMenu(management_root, menu_info_types.SERVER_TERMINAL_MANAGEMENT_RESIDENCE, SID_TERMINAL_MANAGEMENT_RESIDENCE);
                 mi.addSubMenu(permissions_root, menu_info_types.SERVER_TERMINAL_PERMISSIONS_BANNED, SID_TERMINAL_PERMISSIONS_BANNED);
+                if(isStructureOwner)
+                {
+                    String text = player_structure.isAdminToAccountEnabled(structure) ? "Remove Account as Admin" : "Add Account as Admin";
+                    mi.addSubMenu(permissions_root, menu_info_types.SERVER_MENU25, new string_id(text));
+                }
                 if (areAllContentsLoaded(structure))
                 {
                     string_id privacyMenu_sid = SID_TERMINAL_MANAGEMENT_PRIVACY;
@@ -219,7 +216,7 @@ public class terminal_structure extends script.base_script
                     int decor_root = mi.addRootMenu(menu_info_types.SERVER_MENU14, new string_id("GM Tools"));
                     mi.addSubMenu(decor_root, menu_info_types.SERVER_MENU15, SID_STRUCTURE_ADD_DECOR);
                     mi.addSubMenu(decor_root, menu_info_types.SERVER_MENU16, SID_STRUCTURE_REMOVE_DECOR);
-                    mi.addSubMenu(decor_root, menu_info_types.SERVER_MENU33, new string_id("Fix Terminal Placement"));
+					mi.addSubMenu(decor_root, menu_info_types.SERVER_MENU33, new string_id("Fix Terminal Placement"));
                     mi.addSubMenu(decor_root, menu_info_types.SERVER_MENU34, new string_id("Fix Structure Sign"));
                 }
             }
@@ -299,7 +296,7 @@ public class terminal_structure extends script.base_script
                 player_structure.validateHarvestedResources(structure);
             }
         }
-        if (!player_structure.isAdmin(structure, player) && !charactersAreSamePlayer(player, getOwner(structure)) && !player_structure.isAbandoned(structure))
+        if (!player_structure.isAdmin(structure, player) && !player_structure.isAbandoned(structure))
         {
             return SCRIPT_CONTINUE;
         }
@@ -582,8 +579,10 @@ public class terminal_structure extends script.base_script
             }
             player_structure.displayAvailableNonGenericStorageTypes(player, self, structure);
         }
-        // GM Tool: fix a structure management terminal that has been accidentally moved/destroyed
-        else if (item == menu_info_types.SERVER_MENU33 && isGod(player))
+		
+		// GM Tool Begin
+		
+		else if (item == menu_info_types.SERVER_MENU33 && isGod(player))
         {
             obj_id top = player_structure.getStructure(self);
             if(isIdValid(top)) {
@@ -607,6 +606,21 @@ public class terminal_structure extends script.base_script
                 sendSystemMessageTestingOnly(player, "Fix attempt failed - Could not determine structure object.");
             }
         }
+        // player owner can add their entire account to the admin list with this toggle (does not show up on admin list, separate button)
+        else if (item == menu_info_types.SERVER_MENU25 && player_structure.isOwner(structure, player))
+        {
+            if(player_structure.isAdminToAccountEnabled(structure))
+            {
+                player_structure.removeAccountFromAdminList(structure, player);
+            }
+            else
+            {
+                player_structure.addAccountToAdminList(structure, player);
+            }
+        }
+		
+		// GM Tool End
+		
         return SCRIPT_CONTINUE;
     }
     public int handleStorageRedeedChoice(obj_id self, dictionary params) throws InterruptedException
@@ -619,7 +633,7 @@ public class terminal_structure extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id structure = player_structure.getStructure(player);
-        if (!player_structure.isOwner(structure, player))
+        if (!player_structure.isOwner(structure, player) && getPlayerStationId(player) != getPlayerStationId(getOwner(structure)))
         {
             return SCRIPT_CONTINUE;
         }
@@ -884,7 +898,7 @@ public class terminal_structure extends script.base_script
         }
         return true;
     }
-    // ensure GMs can't accidentally pick up a structure management terminal that's in a building
+	// ensure GMs can't accidentally pick up a structure management terminal that's in a building
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException {
         if(!utils.isNestedWithinAPlayer(self) && isGod(transferer)) {
             return SCRIPT_OVERRIDE;

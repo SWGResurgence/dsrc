@@ -10,11 +10,9 @@ import java.util.Vector;
 
 public class resource extends script.base_script
 {
-    public resource()
-    {
-    }
-    public static final int RESOURCE_AMOUNT = 30000;
+    public static final int RESOURCE_AMOUNT = 50000;
     public static final String ROOT_RESOURCE_CLASS = "resource";
+    public static final String ROOT_SPACE_RESOURCE_CLASS = "space_resource";
     public static final String ROOT_ORGANIC_CLASS = "organic";
     public static final String ROOT_INORGANIC_CLASS = "inorganic";
     public static final String OBJVAR_RESOURCE_REWARDED = "rewarded";

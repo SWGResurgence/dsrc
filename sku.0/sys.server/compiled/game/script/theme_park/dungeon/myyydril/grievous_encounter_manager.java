@@ -1,9 +1,7 @@
 package script.theme_park.dungeon.myyydril;
 
 import script.dictionary;
-import script.library.badge;
-import script.library.create;
-import script.library.utils;
+import script.library.*;
 import script.location;
 import script.obj_id;
 import script.string_id;
@@ -12,9 +10,6 @@ import java.util.Vector;
 
 public class grievous_encounter_manager extends script.base_script
 {
-    public grievous_encounter_manager()
-    {
-    }
     public static final string_id START = new string_id("dungeon/myyydril", "start");
     public static final string_id STOP = new string_id("dungeon/myyydril", "stop");
     public int OnAttach(obj_id self) throws InterruptedException
@@ -211,6 +206,7 @@ public class grievous_encounter_manager extends script.base_script
             }
             messageTo(self, "handleEndEncounter", params, 60.0f, false);
         }
+        
         return SCRIPT_CONTINUE;
     }
     public obj_id[] getEventPlayersInDungeon(obj_id dungeon) throws InterruptedException

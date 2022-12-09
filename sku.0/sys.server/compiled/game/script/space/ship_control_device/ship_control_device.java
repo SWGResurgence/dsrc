@@ -5,27 +5,30 @@ import script.library.*;
 
 public class ship_control_device extends script.base_script
 {
-    public ship_control_device()
-    {
-    }
     public static final string_id RENAME_SHIP = new string_id("sui", "rename_ship");
     public static final string_id PACK_SHIP = new string_id("sui", "pack_ship");
     public static final string_id PROMPT1 = new string_id("sui", "rename_ship_text");
     public static final String[] ignoreRules = new String[]
-    {
-        "name_declined_number"
-    };
+            {
+                    "name_declined_number"
+            };
     public static final String SPACE_MINING = "space_mining";
     public static final String IN_USE_OBJVAR = "ship_redeed.inUse";
     public static final int MAX_RESOURCE = 1000000;
     public static final string_id SID_TERMINAL_REDEED_STORAGE = new string_id("player_structure", "redeed_storage");
     public static final string_id SID_STORAGE_INCREASE_REDEED_TITLE = new string_id("player_structure", "sui_storage_redeed_title");
     public static final string_id SID_STORAGE_INCREASE_REDEED_PROMPT = new string_id("player_structure", "sui_storage_redeed_prompt");
+
+    public ship_control_device()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "noTrade", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         pobShipLotRefunder(self);
@@ -34,6 +37,7 @@ public class ship_control_device extends script.base_script
         messageTo(self, "checkCollectionReactor", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id objPlayer, String[] strNames, String[] strAttribs) throws InterruptedException
     {
         int intIndex = utils.getValidAttributeIndex(strNames);
@@ -50,6 +54,7 @@ public class ship_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id source, obj_id destination, obj_id transferer) throws InterruptedException
     {
         if (isIdValid(destination))
@@ -67,6 +72,7 @@ public class ship_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -82,7 +88,7 @@ public class ship_control_device extends script.base_script
             {
                 mi.addRootMenu(menu_info_types.DICE_ROLL, SID_TERMINAL_REDEED_STORAGE);
             }
-            else 
+            else
             {
                 mi.addRootMenu(menu_info_types.SERVER_MENU2, PACK_SHIP);
             }
@@ -101,8 +107,27 @@ public class ship_control_device extends script.base_script
                 mi.addRootMenu(menu_info_types.SERVER_MENU4, strSpam2);
             }
         }
+        String pos = getLocation(player).area;
+
+        if (!pos.startsWith("space_"))
+        {
+            if (isGod(player))
+            {
+                if (getIntObjVar(self, "atmos_flight") == 1)
+                {
+                    string_id strSpam = new string_id("space/space_interaction", "atmos_land_ship");
+                    mi.addRootMenu(menu_info_types.SERVER_MENU6, strSpam);
+                }
+                else
+                {
+                    string_id strSpam2 = new string_id("space/space_interaction", "atmos_launch_ship");
+                    mi.addRootMenu(menu_info_types.SERVER_MENU5, strSpam2);
+                }
+            }
+        }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -209,13 +234,13 @@ public class ship_control_device extends script.base_script
                     destroyObject(self);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     removeObjVar(self, IN_USE_OBJVAR);
                     return SCRIPT_CONTINUE;
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("space/space_interaction", "components_installed"));
                 removeObjVar(self, IN_USE_OBJVAR);
@@ -259,11 +284,15 @@ public class ship_control_device extends script.base_script
             }
             obj_id[] resourceTypes = getShipCargoHoldContentsResourceTypes(objShip);
             boolean resourcesGiven = false;
-            for (obj_id resourceType : resourceTypes) {
-                if (!giveResourceReward(resourceType, player, getShipCargoHoldContent(objShip, resourceType), objShip)) {
+            for (int i = 0; i < resourceTypes.length; i++)
+            {
+                if (!giveResourceReward(resourceTypes[i], player, getShipCargoHoldContent(objShip, resourceTypes[i]), objShip))
+                {
                     sendSystemMessage(player, new string_id("space/space_interaction", "full_inventory"));
                     break;
-                } else {
+                }
+                else
+                {
                     resourcesGiven = true;
                 }
             }
@@ -282,8 +311,38 @@ public class ship_control_device extends script.base_script
             }
             player_structure.displayAvailableNonGenericStorageTypes(player, self, objShip);
         }
+        if (item == menu_info_types.SERVER_MENU5)
+        {
+            setObjVar(self, "atmos_flight", 1);
+
+            obj_id scd = self;
+            if (isIdValid(scd))
+            {
+                obj_id ship = space_transition.getShipFromShipControlDevice(scd);
+                if (isIdValid(ship))
+                {
+                    // Move ship 150m above the player
+                    location loc = getLocation(player);
+                    loc.y += 150;
+
+                    space_transition.unpackShipForPlayer(player, ship);
+                    setLocation(space_transition.getContainingShip(player), loc);
+                }
+            }
+        }
+        if (item == menu_info_types.SERVER_MENU6)
+        {
+            setObjVar(self, "atmos_flight", 0);
+
+            obj_id containingShip = space_transition.getContainingShip(player);
+            if (isIdValid(containingShip))
+            {
+                space_transition.packShip(containingShip);
+            }
+        }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (isIdValid(getContainedBy(self)))
@@ -313,7 +372,7 @@ public class ship_control_device extends script.base_script
                 {
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id("space/space_interaction", "toomanyships"));
                     return SCRIPT_OVERRIDE;
@@ -322,6 +381,7 @@ public class ship_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, IN_USE_OBJVAR))
@@ -335,11 +395,13 @@ public class ship_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int forceCollectionReactorInit(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "checkCollectionReactor", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int checkCollectionReactor(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("ShipComponents", "Initializing Collection reactor check for: (" + self + ") " + getName(self) + " a ship control device in player datapad.");
@@ -360,6 +422,7 @@ public class ship_control_device extends script.base_script
         blog("component_fix", "SCD - checkCollectionReactor: FAIL FROM space_crafting library");
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorageRedeedChoice(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -392,10 +455,12 @@ public class ship_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cargoList(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int renameShip(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -415,17 +480,18 @@ public class ship_control_device extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             string_id msg2 = new string_id("sui", "rename_ship_reserved");
             sendSystemMessage(player, msg2);
             return SCRIPT_CONTINUE;
         }
     }
+
     public obj_id packShipDeed(obj_id pcd, obj_id ship, obj_id player) throws InterruptedException
     {
         String type = getShipChassisType(ship);
-        String newType = type.substring(7, type.length());
+        String newType = type.substring(7);
         obj_id inventory = utils.getInventoryContainer(player);
         float mass = getChassisComponentMassMaximum(ship);
         float hp = getShipMaximumChassisHitPoints(ship);
@@ -439,11 +505,12 @@ public class ship_control_device extends script.base_script
             setObjVar(newDeed, "ship_chassis.type", newType);
             return newDeed;
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public void pobShipLotRefunder(obj_id pcd) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(pcd);
@@ -469,6 +536,7 @@ public class ship_control_device extends script.base_script
         }
         return;
     }
+
     public boolean giveResourceReward(obj_id objResourceId, obj_id player, int intAmount, obj_id objShip) throws InterruptedException
     {
         obj_id objContainer = utils.getInventoryContainer(player);
@@ -485,13 +553,13 @@ public class ship_control_device extends script.base_script
                 addResourceToContainer(objStack, objResourceId, intAmount, null);
                 objStack = null;
             }
-            else 
+            else
             {
                 addResourceToContainer(objStack, objResourceId, intAmount, null);
                 sendSystemMessageTestingOnly(player, "Incrementing count!");
             }
         }
-        else 
+        else
         {
             objStack = createResourceCrate(objResourceId, intAmount, objContainer);
             if (objStack == null)
@@ -502,6 +570,7 @@ public class ship_control_device extends script.base_script
         setShipCargoHoldContent(objShip, objResourceId, 0);
         return true;
     }
+
     public obj_id getResourceStack(obj_id objContainer, obj_id objResource) throws InterruptedException
     {
         if (!isIdValid(objContainer))
@@ -513,17 +582,21 @@ public class ship_control_device extends script.base_script
         {
             return null;
         }
-        for (obj_id objContent : objContents) {
-            obj_id objType = getResourceContainerResourceType(objContent);
-            if (objType == objResource) {
-                int intCount = getResourceContainerQuantity(objContent);
-                if (intCount < MAX_RESOURCE) {
-                    return objContent;
+        for (int intI = 0; intI < objContents.length; intI++)
+        {
+            obj_id objType = getResourceContainerResourceType(objContents[intI]);
+            if (objType == objResource)
+            {
+                int intCount = getResourceContainerQuantity(objContents[intI]);
+                if (intCount < MAX_RESOURCE)
+                {
+                    return objContents[intI];
                 }
             }
         }
         return null;
     }
+
     public void gunshipCheck(obj_id objShip) throws InterruptedException
     {
         if (!isIdValid(objShip))
@@ -551,6 +624,7 @@ public class ship_control_device extends script.base_script
         }
         return;
     }
+
     public boolean blog(String category, String msg) throws InterruptedException
     {
         return true;

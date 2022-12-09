@@ -18,6 +18,7 @@ public class axkva_controller extends script.base_script
         trial.setDungeonCleanOutTimer(self, 15);
         dictionary dict = new dictionary();
         dict.put("tokenIndex", 0);
+        dict.put("tokenCount", 3);
         utils.messageTo(players, "handleAwardtoken", dict, 0, false);
         obj_id group = getGroupObject(players[0]);
         int calendarTime = getCalendarTime();

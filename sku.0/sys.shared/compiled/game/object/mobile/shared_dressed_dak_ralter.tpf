@@ -15,5 +15,8 @@ animationMapFilename = "all_male.map"
 
 @class object_template 3
 
+objectName = "npc_name" "syren_5_dak_ralter"
+detailedDescription = "" ""
+lookAtText = "npc_lookat" "syren_5_dak_ralter"
 appearanceFilename = "appearance/hum_m.sat"
 clientDataFile = "clientdata/npc/client_shared_dressed_dak_ralter.cdf"

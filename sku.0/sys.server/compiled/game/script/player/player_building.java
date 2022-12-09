@@ -5,11 +5,10 @@ import script.library.*;
 
 import java.util.Vector;
 
+import static script.library.utils.isEquipped;
+
 public class player_building extends script.base_script
 {
-    public player_building()
-    {
-    }
     public static final String LOGGING_CATEGORY = "vendor";
     public static final boolean LOGGING_ON = true;
     public static final String DATATABLE_HEIGHT = "datatables/structure/cell_height.iff";
@@ -102,7 +101,7 @@ public class player_building extends script.base_script
     public static final string_id SID_ROTATE_CONFIRM_SAVE = new string_id(STF, "rotate_confirm_save");
     public static final string_id SID_ROTATE_RESTORE_EMPTY_SLOT = new string_id(STF, "rotate_restore_empty_slot");
     public static final string_id SID_DESTRUCTION_LOCKED = new string_id("city/city", "destruction_locked");
-    public static final int VAR_TRUE = 1;
+    public static final int MAX_DEPOSIT = 1000000;
     public int OnPlaceStructure(obj_id self, obj_id player, obj_id deed, location position, int rotation) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_building::OnPlaceStructure");
@@ -235,11 +234,6 @@ public class player_building extends script.base_script
         }
         if (name == null)
         {
-            return SCRIPT_CONTINUE;
-        }
-        if (name.length() > 40)
-        {
-            sendSystemMessage(player, new string_id(STF, "permission_40_char"));
             return SCRIPT_CONTINUE;
         }
         if (!player_structure.isInAdminRange(structure, self))
@@ -920,11 +914,11 @@ public class player_building extends script.base_script
             LOG("LOG_CHANNEL", "x ->" + x + " z ->" + z + " dist ->" + dist_scaled);
             move_loc = new location(x + loc.x, loc.y, z + loc.z, loc.area, loc.cell);
             LOG("LOG_CHANNEL", "move_loc ->" + move_loc);
-            if (!isValidInteriorLocation(move_loc))
+            /*if (!isValidInteriorLocation(move_loc))
             {
                 sendSystemMessage(self, new string_id(STF, "not_valid_location"));
                 return SCRIPT_CONTINUE;
-            }
+            }*/
         }
         else if (direction.equals("UP") || direction.equals("DOWN"))
         {
@@ -936,13 +930,18 @@ public class player_building extends script.base_script
             {
                 y = y * -1;
             }
-            LOG("LOG_CHANNEL", "y ->" + y + " dist ->" + dist_scaled);
-            move_loc = new location(loc.x, y + loc.y, loc.z, loc.area, loc.cell);
-            LOG("LOG_CHANNEL", "move_loc ->" + move_loc);
-            obj_id building = getTopMostContainer(target);
+            if (isInWorldCell(target))
+            {
+                move_loc = new location(loc.x, y + loc.y, loc.z, loc.area);
+            }
+            else {
+                move_loc = new location(loc.x, y + loc.y, loc.z, loc.area, loc.cell);
+            }
+            loc.area = getCurrentSceneName();
+            setLocation(target, move_loc);
+            /*obj_id building = getTopMostContainer(target);
             String bldgstr = getTemplateName(building);
             String cellname = getCellName(building, loc.cell);
-            float new_y = y + loc.y;
             if (!utils.hasScriptVar(target, "vertical.template") || !utils.hasScriptVar(target, "vertical.cell") || !utils.hasScriptVar(target, "vertical.min_height") || !utils.hasScriptVar(target, "vertical.max_height") || !(utils.getStringScriptVar(target, "vertical.template")).equals(bldgstr) || !(utils.getStringScriptVar(target, "vertical.cell")).equals(cellname))
             {
                 String[] template = dataTableGetStringColumn(DATATABLE_HEIGHT, "template");
@@ -969,7 +968,7 @@ public class player_building extends script.base_script
             {
                 sendSystemMessage(self, new string_id(STF, "not_valid_location"));
                 return SCRIPT_CONTINUE;
-            }
+            }*/
         }
         else if (target != intendedTarget)
         {
@@ -1365,7 +1364,7 @@ public class player_building extends script.base_script
             sendSystemMessage(self, new string_id(STF, "no_building"));
             return SCRIPT_CONTINUE;
         }
-        if (!player_structure.isAdmin(structure, self) && !charactersAreSamePlayer(self, getOwner(structure))) 
+        if (!player_structure.isAdmin(structure, self))
         {
             LOG("LOG_CHANNEL", "You must be a building admin to do that.");
             sendSystemMessage(self, new string_id(STF, "must_be_admin"));
@@ -1410,7 +1409,7 @@ public class player_building extends script.base_script
         int inInv = 0;
         dictionary d = new dictionary();
         obj_id[] contents = utils.getFilteredPlayerContents(self);
-        if ((contents == null) || (contents.length == 0))
+        if (contents == null || contents.length == 0)
         {
             return SCRIPT_CONTINUE;
         }
@@ -1755,9 +1754,10 @@ public class player_building extends script.base_script
         }
         if (player_structure.isHarvester(structure) || player_structure.isGenerator(structure))
         {
+            sendSystemMessageTestingOnly(self, "You cannot use this command on a Harvester or Generator.");
             return SCRIPT_CONTINUE;
         }
-        if (!player_structure.isAdmin(structure, self) && !charactersAreSamePlayer(self, getOwner(structure)))
+        if (!player_structure.isAdmin(structure, self))
         {
             LOG("LOG_CHANNEL", "You must be a building admin to do that.");
             string_id strSpam = new string_id("player_structure", "not_admin");
@@ -1784,10 +1784,10 @@ public class player_building extends script.base_script
         if (st.hasMoreTokens())
         {
             target_str = st.nextToken();
-            if (target_str.length() > 40)
+            // fixup for tokenizer and city names
+            if(target_str.startsWith("city:"))
             {
-                sendSystemMessage(self, new string_id(STF, "permission_40_char"));
-                return SCRIPT_CONTINUE;
+                target_str = params.substring(params.indexOf("city:", 1));
             }
         }
         if ((target == null) || (target == obj_id.NULL_ID))
@@ -1845,7 +1845,7 @@ public class player_building extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        if ((perm_switch == 3) && (getAccountNumLots(getPlayerObject(self)) > player_structure.MAX_LOTS))
+        if ((perm_switch == 3) && (getAccountNumLots(getPlayerObject(self)) > getMaxHousingLots()))
         {
             obj_id lotOverlimitStructure = getObjIdObjVar(self, "lotOverlimit.structure_id");
             if (isIdValid(lotOverlimitStructure) && (lotOverlimitStructure == structure))
@@ -2404,11 +2404,10 @@ public class player_building extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        String amt_str = st.nextToken();
-        int amt = utils.stringToInt(amt_str);
-        if (amt < 1 || amt > 100000)
+        int amt = utils.stringToInt(st.nextToken());
+		if (amt < 1 || amt > MAX_DEPOSIT)
         {
-            LOG("LOG_CHANNEL", "The amount must be between 1 and 100000");
+            LOG("LOG_CHANNEL", "The amount must be between 1 and 1000000");
             sendSystemMessage(self, new string_id(STF, "amount_params"));
             return SCRIPT_CONTINUE;
         }
@@ -4831,7 +4830,7 @@ public class player_building extends script.base_script
     public int OnConstructionComplete(obj_id self, dictionary params) throws InterruptedException
     {
         string_id structure_name = params.getStringId("structure_name");
-        int lots_remaining = player_structure.MAX_LOTS - getAccountNumLots(getPlayerObject(self));
+        int lots_remaining = getMaxHousingLots() - getAccountNumLots(getPlayerObject(self));
         prose_package pp_msg = new prose_package();
         pp_msg.stringId = ((lots_remaining >= 0) ? SID_CONSTRUCTION_COMPLETE : SID_CONSTRUCTION_COMPLETE_LOT_LIMIT_EXCEEDED);
         pp_msg.actor.set(self);
@@ -5313,7 +5312,17 @@ public class player_building extends script.base_script
     }
     public boolean isMoveCommandValid(obj_id player, obj_id target) throws InterruptedException
     {
+        int city_id = getCityAtLocation(getLocation(player), 0);
+        boolean isMayor = city.isTheCityMayor(player, city_id);
         location loc = getLocation(player);
+        if (isGod(player))
+        {
+            return true;
+        }
+        if (hasObjVar(target, "city_id") && (isMayor || city.isMilitiaOfCity(player, city_id) || hasObjVar(player, "city_decorator")) && isInWorldCell(player))
+        {
+            return true;
+        }
         obj_id structure = getTopMostContainer(loc.cell);
         if (!isIdValid(structure) || !isIdValid(target))
         {
@@ -5632,5 +5641,63 @@ public class player_building extends script.base_script
             LOG(LOGGING_CATEGORY, msg);
         }
         return true;
+    }
+    public int pickupAllRoomItemsIntoInventory(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        obj_id building = getTopMostContainer(self);
+        obj_id cellId = getContainedBy(self);
+        String cellName = getCellName(building, cellId);
+        obj_id[] pickupContents;
+        if (building == null)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        pickupContents = getContents(cellId);
+        for (obj_id item : pickupContents)
+        {
+            if (hasObjVar(item, "noTrade"))
+            {
+                return SCRIPT_CONTINUE;
+            }
+            if (hasScript(item, "item.special.nomove"))
+            {
+                return SCRIPT_CONTINUE;
+            }
+            putIn(item, utils.getInventoryContainer(self));
+        }
+        return SCRIPT_CONTINUE;
+    }
+    public int dropAllInventoryItemsIntoRoom(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        obj_id building = getTopMostContainer(self);
+        obj_id cellId = getContainedBy(self);
+        String cellName = getCellName(building, cellId);
+        obj_id[] dropContents;
+        if (building == null)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        dropContents = getContents(utils.getInventoryContainer(self));
+        for (obj_id item : dropContents)
+        {
+            if (hasObjVar(item, "noTrade"))
+            {
+                return SCRIPT_CONTINUE;
+            }
+            if (hasScript(item, "item.special.nomove"))
+            {
+                return SCRIPT_CONTINUE;
+            }
+            if (isEquipped(item))
+            {
+                return SCRIPT_CONTINUE;
+            }
+            if (utils.isContainer(item))
+            {
+                utils.setScriptVar(item, "x_hax_x", true); //@NOTE: future exploit var to track if a container was dropped into a room via this method.
+            }
+            putIn(item, cellId);
+        }
+        return SCRIPT_CONTINUE;
     }
 }

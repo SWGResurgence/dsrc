@@ -528,6 +528,7 @@ public class ig88 extends script.base_script
         obj_id[] players = trial.getPlayersInDungeon(trial.getParent(self));
         dictionary dict = new dictionary();
         dict.put("tokenIndex", 2);
+        dict.put("tokenCount", 3);
         utils.messageTo(players, "handleAwardtoken", dict, 1, false);
         obj_id group = getGroupObject(players[0]);
         int calendarTime = getCalendarTime();

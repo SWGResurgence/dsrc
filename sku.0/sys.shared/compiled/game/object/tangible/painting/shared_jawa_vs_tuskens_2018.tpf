@@ -1,0 +1,14 @@
+// Template Editor -SWG Source
+
+@base object/tangible/furniture/base/shared_furniture_base.iff
+
+@class tangible_object_template 6
+
+@class object_template 5
+
+
+objectName = "loot_aurora_n"  "jawa_vs_tuskens_2018"
+
+detailedDescription = "loot_aurora_d"  "jawa_vs_tuskens_2018"
+
+appearanceFilename = "appearance/jawa_vs_tuskens_2018.apt"

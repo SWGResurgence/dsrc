@@ -4,36 +4,27 @@
 
 @class tangible_object_template 3
 
-
 triggerVolumes = [  ]
 
 combatSkeleton = CS_none
 
-
-
-
 @class object_template 8
-
 
 sharedTemplate = "object/tangible/bank/shared_character_bank.iff"
 
 scripts = [  ]
 
-volume = 100
+volume = 250
 
 visibleFlags = [ VF_gm ]
-
 deleteFlags = [ DF_gm ]
-
 
 invulnerable = true
 
 complexity = 0
-
 tintIndex = 0
 
 updateRanges[UR_near] = 0
-
 updateRanges[UR_normal] = 0
 
 updateRanges[UR_far] = 0

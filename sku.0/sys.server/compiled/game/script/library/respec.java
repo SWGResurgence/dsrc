@@ -6,27 +6,30 @@ import java.util.Enumeration;
 
 public class respec extends script.base_script
 {
-    public respec()
-    {
-    }
     public static final String EXPERTISE_VERSION_TABLE = "datatables/expertise/respec_version.iff";
     public static final String EXPERTISE_VERSION_OBJVAR = "professionExpertiseVersion";
-    public static final String BEAST_MASTER_EXPERTISE_VERSION_OBJVAR = "beastMasterExpertiseVersion";
+	public static final String BEAST_MASTER_EXPERTISE_VERSION_OBJVAR = "beastMasterExpertiseVersion";
     public static final int RESPEC_PRICE_MULTIPLIER = 10000;
     public static final int[] RESPEC_COST = new int[]
     {
-        0,
-        100000,
-        150000,
-        250000,
-        500000,
-        1000000,
-        6000000,
-        7000000,
-        8000000,
-        9000000,
-        10000000,
-        25000000
+    0,				  // Free
+    25000,			// 25K
+		50000,			// 50K				
+		100000,			// 100K
+		150000,			// 150K
+		250000,			// 250K
+		500000,			// 500K
+		1000000,		// 1MIL	
+		2500000,		// 2.5MIL
+		5000000,		// 5MIL	
+		10000000,		// 10MIL
+		15000000,		// 15MIL
+		20000000,		// 20MIL
+		25000000,		// 25MIL
+		50000000,		// 50MIL
+		75000000,		// 75MIL
+		100000000,	// 100MIL
+		
     };
     public static final String OBJVAR_RESPEC_TOKEN = "respecToken.token";
     public static final String OBJVAR_RESPEC_TOKEN_USED = "respecToken.tokenUsed";
@@ -968,11 +971,7 @@ public class respec extends script.base_script
     {
         String skillTemplate = getSkillTemplate(player);
         String profession = skill.getProfessionName(skillTemplate);
-        if (profession == null || skillTemplate == null)
-        {
-            return false;
-        }
-        if (profession.equals("") || skillTemplate.equals(""))
+        if (profession == null || profession.isEmpty() || skillTemplate == null || skillTemplate.isEmpty())
         {
             return false;
         }
@@ -1008,11 +1007,7 @@ public class respec extends script.base_script
     {
         String skillTemplate = getSkillTemplate(player);
         String profession = skill.getProfessionName(skillTemplate);
-        if (profession == null || skillTemplate == null)
-        {
-            return -1;
-        }
-        if (profession.equals("") || skillTemplate.equals(""))
+        if (profession == null || profession.isEmpty() || skillTemplate == null || skillTemplate.isEmpty())
         {
             return -1;
         }
@@ -1112,7 +1107,7 @@ public class respec extends script.base_script
             return false;
         }
 
-        int timeTillNextDecay = getCalendarTime() + secondsUntilNextMonthlyTime(1, 10, 0, 0);
+        int timeTillNextDecay = getCalendarTime() + secondsUntilNextWeeklyTime(1, 0, 0, 0);
         setObjVar(player, OBJVAR_RESPEC_DECAY_TIME, timeTillNextDecay);
         return true;
     }

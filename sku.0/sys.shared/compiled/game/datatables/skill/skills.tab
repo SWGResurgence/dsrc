@@ -184,20 +184,20 @@ class_medic_phase1	class	oneByFour	0	0	1	0	0	0						0											1	0
 class_medic_phase1_novice	class_medic_phase1	oneByFour	0	0	0	0	100	0				combat_general	100	4810							me_ae_heal_1	slope_move=25,cybernetic_psychosis_resistance=2			1	0
 class_medic_phase1_02	class_medic_phase1	oneByFour	0	0	0	0	100	0		class_medic_phase1_novice		combat_general	3700	16120							me_dm_1				1	0
 class_medic_phase1_03	class_medic_phase1_02	oneByFour	0	0	0	0	100	0		class_medic_phase1_02		combat_general	12400	30160							me_dm_dot_1				1	0
-class_medic_phase1_04	class_medic_phase1_03	oneByFour	0	0	0	0	100	0		class_medic_phase1_03		combat_general	23200	67730							me_ae_heal_2,me_rv_ooc,me_rv_pvp_single,droid_flame_jet_1,droid_droideka_shield_1,droid_battery_dump_1,droid_regenerative_plating_1,droid_electrical_shock_1,droid_torturous_needle_1,droid_follow,droid_follow_other,droid_stay,droid_guard,droid_friend,droid_attack,droid_patrol,droid_patrol_point,droid_patrol_clear,droid_store,droid_transfer,droid_group,droid_trick_1,droid_trick_2,droid_trick_3,droid_trick_4				1	0
+class_medic_phase1_04	class_medic_phase1_03	oneByFour	0	0	0	0	100	0		class_medic_phase1_03		combat_general	23200	67730							me_ae_heal_2,me_blood_cleaners_1,me_drag_1,me_rv_ooc,me_rv_pvp_single,droid_flame_jet_1,droid_droideka_shield_1,droid_battery_dump_1,droid_regenerative_plating_1,droid_electrical_shock_1,droid_torturous_needle_1,droid_follow,droid_follow_other,droid_stay,droid_guard,droid_friend,droid_attack,droid_patrol,droid_patrol_point,droid_patrol_clear,droid_store,droid_transfer,droid_group,droid_trick_1,droid_trick_2,droid_trick_3,droid_trick_4				1	0
 class_medic_phase1_05	class_medic_phase1_04	oneByFour	0	0	0	0	100	0		class_medic_phase1_04		combat_general	52100	105300							me_dm_2,me_bacta_ampule_1				1	0
 class_medic_phase1_master	class_medic_phase1	oneByFour	0	1	0	0	100	0		class_medic_phase1_05		combat_general	81000	151060							me_dm_3	slope_move=25,cybernetic_psychosis_resistance=2			1	0
 class_medic_phase2	class	oneByFour	0	0	1	0	0	0						0											1	0
 class_medic_phase2_novice	class_medic_phase2	oneByFour	0	0	0	0	100	0		class_medic_phase1_master		combat_general	116200	205140							me_dm_dot_2,wear_all_armor				1	0
 class_medic_phase2_02	class_medic_phase2	oneByFour	0	0	0	0	100	0		class_medic_phase2_novice		combat_general	157800	267540							me_dm_dot_3,place_hospital,me_bacta_ampule_2	private_place_hospital=100			1	0
-class_medic_phase2_03	class_medic_phase2_02	oneByFour	0	0	0	0	100	0		class_medic_phase2_02		combat_general	205800	339690							me_ae_heal_3				1	0
+class_medic_phase2_03	class_medic_phase2_02	oneByFour	0	0	0	0	100	0		class_medic_phase2_02		combat_general	205800	339690							me_ae_heal_3,me_cure_affliction_1,me_serotonin_boost_1				1	0
 class_medic_phase2_04	class_medic_phase2_03	oneByFour	0	0	0	0	100	0		class_medic_phase2_03		combat_general	261300	423410							me_hot_1				1	0
 class_medic_phase2_05	class_medic_phase2_04	oneByFour	0	0	0	0	100	0		class_medic_phase2_04		combat_general	325700	519610							me_fld_dm_dot_1,me_rv_area,me_rv_pvp_area				1	0
 class_medic_phase2_master	class_medic_phase2	oneByFour	0	1	0	0	100	0		class_medic_phase2_05		combat_general	399700	629980							me_dm_4,me_bacta_ampule_3	cybernetic_psychosis_resistance=2			1	0
 class_medic_phase3	class	oneByFour	0	0	1	0	0	0																	1	0
 class_medic_phase3_novice	class_medic_phase3	oneByFour	0	0	0	0	100	0		class_medic_phase2_master		combat_general	484600	756860							me_buff_health_1,me_dm_dot_4				1	0
 class_medic_phase3_02	class_medic_phase3	oneByFour	0	0	0	0	100	0		class_medic_phase3_novice		combat_general	582200	901160							me_fld_dm_dot_2				1	0
-class_medic_phase3_03	class_medic_phase3_02	oneByFour	0	0	0	0	100	0		class_medic_phase3_02		combat_general	693200	1065610							me_dm_5,me_bacta_ampule_4				1	0
+class_medic_phase3_03	class_medic_phase3_02	oneByFour	0	0	0	0	100	0		class_medic_phase3_02		combat_general	693200	1065610							me_dm_5,me_bacta_ampule_4,me_bacta_grenade_1				1	0
 class_medic_phase3_04	class_medic_phase3_03	oneByFour	0	0	0	0	100	0		class_medic_phase3_03		combat_general	819700	1252940							me_ae_heal_4				1	0
 class_medic_phase3_05	class_medic_phase3_04	oneByFour	0	0	0	0	100	0		class_medic_phase3_04		combat_general	963800	1466790							me_hot_2				1	0
 class_medic_phase3_master	class_medic_phase3	oneByFour	0	1	0	0	100	0		class_medic_phase3_05		combat_general	1128300	1710540							me_dm_6,me_dm_dot_5,me_bacta_ampule_5	cybernetic_psychosis_resistance=2			1	0
@@ -207,7 +207,7 @@ class_medic_phase4_02	class_medic_phase4	oneByFour	0	0	0	0	100	0		class_medic_ph
 class_medic_phase4_03	class_medic_phase4_02	oneByFour	0	0	0	0	100	0		class_medic_phase4_02		combat_general	1772600	2664480							me_ae_heal_5				1	0
 class_medic_phase4_04	class_medic_phase4_03	oneByFour	0	0	0	0	100	0		class_medic_phase4_03		combat_general	2049600	3074500							me_sh_1,me_dm_dot_6				1	0
 class_medic_phase4_05	class_medic_phase4_04	oneByFour	0	0	0	0	100	0		class_medic_phase4_04		combat_general	2365000	3540940							me_dm_8,me_bacta_ampule_6				1	0
-class_medic_phase4_master	class_medic_phase4	oneByFour	0	1	0	0	100	0		class_medic_phase4_05		combat_general	2723800	3540940							me_ae_heal_6	cybernetic_psychosis_resistance=2			1	0
+class_medic_phase4_master	class_medic_phase4	oneByFour	0	1	0	0	100	0		class_medic_phase4_05		combat_general	2723800	3540940							me_ae_heal_6,	cybernetic_psychosis_resistance=2			1	0
 class_entertainer_phase1	class	oneByFour	0	0	1	0	0	0						0											1	0
 class_entertainer_phase1_novice	class_entertainer_phase1	oneByFour	0	0	0	0	100	0				entertainer	100	4810							fizz,spotlight,startMusic+rock,flourish+1,flourish+2,flourish+3,flourish+4,flourish+5,flourish+6,flourish+7,flourish+8,imagedesign,covercharge,inspire,registerWithLocation,musician,dancer,groupdance	hair=1,face=1,slope_move=25,instrument_customization=20,cybernetic_psychosis_resistance=2	craftDancePropA,craftInstrumentGroupA,craftInstrumentGroupB		1	0
 class_entertainer_phase1_02	class_entertainer_phase1	oneByFour	0	1	0	0	100	0		class_entertainer_phase1_novice		entertainer	3700	16120							prop_staff,colorlights,startDance+basic2	hair=1,instrument_customization=20			1	0
@@ -1887,9 +1887,7 @@ expertise_of_sup_cool_1	expertise																					expertise_cooldown_line_of
 expertise_of_sup_cool_2	expertise_of_sup_cool_1																					expertise_cooldown_line_of_sup=4			0	
 expertise_of_sup_cool_3	expertise_of_sup_cool_2																					expertise_cooldown_line_of_sup=4			0	
 expertise_of_sup_cool_4	expertise_of_sup_cool_3																					expertise_cooldown_line_of_sup=4			0	
-expertise_of_medical_sup_1	expertise_of_sup_cool_4									expertise_of_sup_cool_4											of_medical_sup_1				0	
-expertise_of_tactical_sup_1	expertise_of_medical_sup_1									expertise_of_medical_sup_1											of_tactical_sup_1				0	
-expertise_of_reinforcements_1	expertise_of_tactical_sup_1									expertise_of_tactical_sup_1											of_reinforcements_1				0	
+expertise_of_reinforcements_1	expertise																				of_reinforcements_1				0	
 expertise_of_aoe_act_1	expertise																					expertise_action_line_of_aoe=5			0	
 expertise_of_aoe_act_2	expertise_of_aoe_act_1																					expertise_action_line_of_aoe=5			0	
 expertise_of_aoe_act_3	expertise_of_aoe_act_2																					expertise_action_line_of_aoe=5			0	
@@ -1916,7 +1914,9 @@ expertise_of_paint_act_2	expertise_of_paint_act_1									expertise_of_paint_act
 expertise_of_paint_act_3	expertise_of_paint_act_2									expertise_of_paint_act_2												expertise_action_line_of_paint=10			0	
 expertise_of_paint_dam_1	expertise																					expertise_damage_line_of_paint=10,expertise_action_line_of_paint=10			0	
 expertise_of_paint_dam_2	expertise_of_paint_dam_1									expertise_of_paint_dam_1												expertise_damage_line_of_paint=10,expertise_action_line_of_paint=10			0	
+expertise_of_advanced_target_tracking_1	expertise_of_paint_dam_2									expertise_of_paint_dam_2												expertise_critical_niche_all=5				
 expertise_of_advanced_paint_1	expertise_of_paint_dam_2									expertise_of_paint_dam_2											of_deb_def_4				0	
+expertise_of_advanced_target_identification_1	expertise_of_advanced_paint_1									expertise_of_advanced_paint_1												detect_hidden=50				
 expertise_of_strength_1	expertise																					strength_modified=10			0	
 expertise_of_strength_2	expertise_of_strength_1																					strength_modified=10			0	
 expertise_of_strength_3	expertise_of_strength_2																					strength_modified=10			0	
@@ -1962,6 +1962,7 @@ expertise_of_heal_dam_2	expertise_of_heal_dam_1																					expertise_he
 expertise_of_armor_kin_1	expertise																					expertise_innate_protection_kinetic=500			0	
 expertise_of_armor_kin_2	expertise_of_armor_kin_1																					expertise_innate_protection_kinetic=500			0	
 expertise_of_purge_1	expertise																				of_purge_1				0	
+expertise_of_emergency_shield	expertise																				of_emergency_shield					
 expertise_of_heal_cool_1	expertise_of_purge_1									expertise_of_purge_1												expertise_cooldown_line_of_heal=1			0	
 expertise_of_heal_cool_2	expertise_of_heal_cool_1																					expertise_cooldown_line_of_heal=2			0	
 sm_title_bootlegger				1		1																			0	
@@ -1982,99 +1983,94 @@ pvp_rebel_unstoppable_ability																					command_pvp_unstoppable_rebel_
 pvp_rebel_last_man_ability																					command_pvp_last_man_rebel_ability				0	
 pvp_rebel_aura_buff_self																					pvp_aura_buff_rebel_self				0	
 pvp_rebel_airstrike_ability																					pvp_airstrike_rebel_ability				0	
-expertise_me_hot_duration_1	expertise																					expertise_healing_line_me_hot=10			0	
+expertise_me_hot_duration_1	expertise									expertise_me_heal_damage_1												expertise_healing_line_me_hot=10			0	
 expertise_me_hot_duration_2	expertise_me_hot_duration_1																					expertise_healing_line_me_hot=10			0	
 expertise_me_hot_duration_3	expertise_me_hot_duration_2																					expertise_healing_line_me_hot=15			0	
 expertise_me_hot_duration_4	expertise_me_hot_duration_3																					expertise_healing_line_me_hot=15			0	
-expertise_me_drag	expertise_me_hot_duration_4									expertise_me_hot_duration_4											me_drag_1				0	
-expertise_me_revive_duration_1	expertise																					expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5			0	
-expertise_me_revive_duration_2	expertise_me_revive_duration_1																					expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5			0	
-expertise_me_revive_duration_3	expertise_me_revive_duration_2																					expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5			0	
-expertise_me_blood_cleaners_1	expertise_me_revive_duration_3									expertise_me_revive_duration_3											me_blood_cleaners_1				0	
-expertise_me_bacta_bomb_1	expertise_me_blood_cleaners_1									expertise_me_blood_cleaners_1											me_bacta_bomb_1				0	
 expertise_me_heal_damage_1	expertise																					expertise_healing_line_me_heal=5			0	
 expertise_me_heal_damage_2	expertise_me_heal_damage_1																					expertise_healing_line_me_heal=5			0	
 expertise_me_heal_damage_3	expertise_me_heal_damage_2																					expertise_healing_line_me_heal=5			0	
 expertise_me_heal_damage_4	expertise_me_heal_damage_3																					expertise_healing_line_me_heal=10			0	
-expertise_me_cure_affliction_1	expertise_me_heal_damage_4									expertise_me_heal_damage_4											me_cure_affliction_1				0	
-expertise_me_heal_action_1	expertise																					expertise_action_line_me_heal=10			0	
-expertise_me_heal_action_2	expertise_me_heal_action_1																					expertise_action_line_me_heal=10			0	
-expertise_me_heal_action_3	expertise_me_heal_action_2																					expertise_action_line_me_heal=15			0	
-expertise_me_serotonin_boost_1	expertise_me_heal_action_3									expertise_me_heal_action_3											me_serotonin_boost_1				0	
-expertise_me_bacta_grenade_1	expertise_me_serotonin_boost_1									expertise_me_serotonin_boost_1											me_bacta_grenade_1				0	
-expertise_me_enhance_duration_1	expertise																					expertise_buff_duration_line_me_enhance=300			0	
-expertise_me_enhance_duration_2	expertise_me_enhance_duration_1																					expertise_buff_duration_line_me_enhance=300			0	
-expertise_me_enhance_duration_3	expertise_me_enhance_duration_2																					expertise_buff_duration_line_me_enhance=600			0	
-expertise_me_enhancement_specialist_1	expertise_me_enhance_duration_3									expertise_me_enhance_duration_3											me_enhance_action_1				0	
-expertise_me_reckless_stimulation_1	expertise_me_enhancement_specialist_1									expertise_me_enhancement_specialist_1											me_reckless_stimulation_1				0	
-expertise_me_stasis_1	expertise_me_reckless_stimulation_1									expertise_me_reckless_stimulation_1											me_stasis_1				0	
 expertise_me_vital_action_1	expertise																					expertise_action_line_me_dm=5			0	
 expertise_me_vital_action_2	expertise_me_vital_action_1																					expertise_action_line_me_dm=5			0	
 expertise_me_vital_action_3	expertise_me_vital_action_2																					expertise_action_line_me_dm=5			0	
 expertise_me_vital_action_4	expertise_me_vital_action_3																					expertise_action_line_me_dm=10			0	
-expertise_me_bacta_resistance_1	expertise_me_vital_action_4									expertise_me_vital_action_4											me_bacta_resistance_1				0	
-expertise_me_dot_damage_1	expertise																					expertise_dot_increase=5			0	
-expertise_me_dot_damage_2	expertise_me_dot_damage_1																					expertise_dot_increase=5			0	
-expertise_me_dot_damage_3	expertise_me_dot_damage_2																					expertise_dot_increase=5			0	
-expertise_me_serotonin_purge_1	expertise_me_dot_damage_3									expertise_me_dot_damage_3											me_serotonin_purge_1				0	
-expertise_me_induce_insanity_1	expertise_me_serotonin_purge_1									expertise_me_serotonin_purge_1											me_induce_insanity_1				0	
 expertise_me_vital_damage_1	expertise																					expertise_damage_line_me_dm=5			0	
 expertise_me_vital_damage_2	expertise_me_vital_damage_1																					expertise_damage_line_me_dm=5			0	
 expertise_me_vital_damage_3	expertise_me_vital_damage_2																					expertise_damage_line_me_dm=5			0	
 expertise_me_vital_damage_4	expertise_me_vital_damage_3																					expertise_damage_line_me_dm=5			0	
+expertise_me_revive_duration_1	expertise																					expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5			0	
+expertise_me_revive_duration_2	expertise_me_revive_duration_1																					expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5			0	
+expertise_me_revive_duration_3	expertise_me_revive_duration_2																					expertise_cooldown_line_me_revive=5,expertise_cooldown_line_me_aoe_revive=5			0	
+expertise_me_heal_action_1	expertise_me_heal_damage_4									expertise_me_heal_damage_4												expertise_action_line_me_heal=10			0	
+expertise_me_heal_action_2	expertise_me_heal_action_1																					expertise_action_line_me_heal=10			0	
+expertise_me_heal_action_3	expertise_me_heal_action_2																					expertise_action_line_me_heal=15			0	
+expertise_me_enhance_duration_1	expertise																					expertise_buff_duration_line_me_enhance=300			0	
+expertise_me_enhance_duration_2	expertise_me_enhance_duration_1																					expertise_buff_duration_line_me_enhance=300			0	
+expertise_me_enhance_duration_3	expertise_me_enhance_duration_2																					expertise_buff_duration_line_me_enhance=600			0	
+expertise_me_bacta_resistance_1	expertise_me_vital_action_4									expertise_me_vital_action_4											me_bacta_resistance_1				0	
 expertise_me_electrolyte_drain_1	expertise_me_vital_damage_4									expertise_me_vital_damage_4											me_electrolyte_drain_1				0	
+expertise_me_bacta_bomb_1	expertise_me_heal_action_3									expertise_me_heal_action_3											me_bacta_bomb_1				0	
+expertise_me_enhancement_specialist_1	expertise_me_enhance_duration_3									expertise_me_enhance_duration_3											me_enhance_action_1				0	
+expertise_me_dot_damage_1	expertise																					expertise_dot_increase=5			0	
+expertise_me_dot_damage_2	expertise_me_dot_damage_1																					expertise_dot_increase=5			0	
+expertise_me_dot_damage_3	expertise_me_dot_damage_2																					expertise_dot_increase=5			0	
 expertise_me_dot_duration_1	expertise																					expertise_dot_duration_line_me_dot=3			0	
 expertise_me_dot_duration_2	expertise_me_dot_duration_1																					expertise_dot_duration_line_me_dot=3			0	
 expertise_me_dot_duration_3	expertise_me_dot_duration_2																					expertise_dot_duration_line_me_dot=4			0	
+expertise_me_reckless_stimulation_1	expertise_me_enhancement_specialist_1									expertise_me_enhancement_specialist_1											me_reckless_stimulation_1				0	
+expertise_me_serotonin_purge_1	expertise_me_dot_damage_3									expertise_me_dot_damage_3											me_serotonin_purge_1				0	
 expertise_me_traumatize_1	expertise_me_dot_duration_3									expertise_me_dot_duration_3											me_traumatize_1				0	
+expertise_me_stasis_1	expertise_me_reckless_stimulation_1									expertise_me_reckless_stimulation_1											me_stasis_1				0	
+expertise_me_induce_insanity_1	expertise_me_serotonin_purge_1									expertise_me_serotonin_purge_1											me_induce_insanity_1				0	
 expertise_me_thyroid_rupture_1	expertise_me_traumatize_1									expertise_me_traumatize_1											me_thyroid_rupture_1				0	
 expertise_me_strength_1	expertise																					strength_modified=10			0	
 expertise_me_strength_2	expertise_me_strength_1																					strength_modified=10			0	
 expertise_me_strength_3	expertise_me_strength_2																					strength_modified=10			0	
 expertise_me_strength_4	expertise_me_strength_3																					strength_modified=20			0	
-expertise_me_enhance_strength_1	expertise_me_strength_4									expertise_me_strength_4											me_enhance_strength_1				0	
-expertise_me_carbine_damage_1	expertise																					expertise_damage_weapon_1=2			0	
-expertise_me_carbine_damage_2	expertise_me_carbine_damage_1																					expertise_damage_weapon_1=2			0	
-expertise_me_carbine_damage_3	expertise_me_carbine_damage_2																					expertise_damage_weapon_1=3			0	
-expertise_me_carbine_damage_4	expertise_me_carbine_damage_3																					expertise_damage_weapon_1=3			0	
-expertise_me_dueterium_rounds_1	expertise_me_carbine_damage_4									expertise_me_carbine_damage_4												expertise_dueterium_rounds_proc=5			0	
-expertise_me_humanoid_crits_1	expertise																					expertise_critical_niche_pvp=1,expertise_critical_niche_npc=1			0	
-expertise_me_humanoid_crits_2	expertise_me_humanoid_crits_1																					expertise_critical_niche_pvp=2,expertise_critical_niche_npc=2			0	
-expertise_me_humanoid_crits_3	expertise_me_humanoid_crits_2																					expertise_critical_niche_pvp=2,expertise_critical_niche_npc=2			0	
-expertise_me_burst_1	expertise_me_humanoid_crits_3									expertise_me_humanoid_crits_3											me_burst_1				0	
 expertise_me_agility_1	expertise																					agility_modified=10			0	
 expertise_me_agility_2	expertise_me_agility_1																					agility_modified=10			0	
 expertise_me_agility_3	expertise_me_agility_2																					agility_modified=10			0	
 expertise_me_agility_4	expertise_me_agility_3																					agility_modified=20			0	
-expertise_me_enhance_agility_1	expertise_me_agility_4									expertise_me_agility_4											me_enhance_agility_1				0	
-expertise_me_unarmed_damage_1	expertise																					expertise_damage_melee=3			0	
-expertise_me_unarmed_damage_2	expertise_me_unarmed_damage_1																					expertise_damage_melee=3			0	
-expertise_me_unarmed_damage_3	expertise_me_unarmed_damage_2																					expertise_damage_melee=4			0	
-expertise_me_unarmed_damage_4	expertise_me_unarmed_damage_3																					expertise_damage_melee=5			0	
-expertise_me_poison_knuckle_1	expertise_me_unarmed_damage_4									expertise_me_unarmed_damage_4												expertise_poison_knuckle_proc=5			0	
-expertise_me_unarmed_crit_1	expertise																					expertise_undiminished_critical_melee=1			0	
-expertise_me_unarmed_crit_2	expertise_me_unarmed_crit_1																					expertise_undiminished_critical_melee=2			0	
-expertise_me_unarmed_crit_3	expertise_me_unarmed_crit_2																					expertise_undiminished_critical_melee=2			0	
-expertise_me_cranial_smash_1	expertise_me_unarmed_crit_3									expertise_me_unarmed_crit_3											me_cranial_smash_1				0	
-expertise_me_agro_healing_1	expertise																					expertise_agro_healing=10			0	
-expertise_me_agro_healing_2	expertise_me_agro_healing_1																					expertise_agro_healing=20			0	
-expertise_me_agro_healing_3	expertise_me_agro_healing_2																					expertise_agro_healing=20			0	
-expertise_me_evasion_1	expertise_me_agro_healing_3									expertise_me_agro_healing_3											me_evasion_1				0	
 expertise_me_precision_1	expertise																					precision_modified=10			0	
 expertise_me_precision_2	expertise_me_precision_1																					precision_modified=10			0	
 expertise_me_precision_3	expertise_me_precision_2																					precision_modified=10			0	
 expertise_me_precision_4	expertise_me_precision_3																					precision_modified=20			0	
-expertise_me_enhance_precision_1	expertise_me_precision_4									expertise_me_precision_4											me_enhance_precision_1				0	
-expertise_me_kinetic_armor_1	expertise																					expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75			0	
-expertise_me_kinetic_armor_2	expertise_me_kinetic_armor_1																					expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75			0	
-expertise_me_kinetic_armor_3	expertise_me_kinetic_armor_2																					expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75			0	
-expertise_me_kinetic_armor_4	expertise_me_kinetic_armor_3																					expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75			0	
-expertise_me_enhance_block_1	expertise_me_kinetic_armor_4									expertise_me_kinetic_armor_4											me_enhance_block_1				0	
+expertise_me_carbine_damage_1	expertise																					expertise_damage_weapon_1=2			0	
+expertise_me_carbine_damage_2	expertise_me_carbine_damage_1																					expertise_damage_weapon_1=2			0	
+expertise_me_carbine_damage_3	expertise_me_carbine_damage_2																					expertise_damage_weapon_1=3			0	
+expertise_me_carbine_damage_4	expertise_me_carbine_damage_3																					expertise_damage_weapon_1=3			0	
+expertise_me_enhance_strength_1	expertise																				me_enhance_strength_1				0	
+expertise_me_unarmed_damage_1	expertise																					expertise_damage_melee=3			0	
+expertise_me_unarmed_damage_2	expertise_me_unarmed_damage_1																					expertise_damage_melee=3			0	
+expertise_me_unarmed_damage_3	expertise_me_unarmed_damage_2																					expertise_damage_melee=4			0	
+expertise_me_unarmed_damage_4	expertise_me_unarmed_damage_3																					expertise_damage_melee=5			0	
+expertise_me_agro_healing_1	expertise																					expertise_agro_healing=10			0	
+expertise_me_agro_healing_2	expertise_me_agro_healing_1																					expertise_agro_healing=20			0	
+expertise_me_agro_healing_3	expertise_me_agro_healing_2																					expertise_agro_healing=20			0	
+expertise_me_enhance_agility_1	expertise																				me_enhance_agility_1				0	
+expertise_me_enhance_precision_1	expertise																				me_enhance_precision_1				0	
 expertise_me_energy_armor_1	expertise																					expertise_innate_protection_energy=150,expertise_innate_protection_all=75			0	
 expertise_me_energy_armor_2	expertise_me_energy_armor_1																					expertise_innate_protection_energy=150,expertise_innate_protection_all=75			0	
 expertise_me_energy_armor_3	expertise_me_energy_armor_2																					expertise_innate_protection_energy=150,expertise_innate_protection_all=75			0	
 expertise_me_energy_armor_4	expertise_me_energy_armor_3																					expertise_innate_protection_energy=150,expertise_innate_protection_all=75			0	
-expertise_me_enhance_dodge_1	expertise_me_energy_armor_4									expertise_me_energy_armor_4											me_enhance_dodge_1				0	
+expertise_me_dueterium_rounds_1	expertise_me_carbine_damage_4									expertise_me_carbine_damage_4												expertise_dueterium_rounds_proc=5			0	
+expertise_me_poison_knuckle_1	expertise_me_unarmed_damage_4									expertise_me_unarmed_damage_4												expertise_poison_knuckle_proc=5			0	
+expertise_me_kinetic_armor_1	expertise_me_energy_armor_4									expertise_me_energy_armor_4												expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75			0	
+expertise_me_kinetic_armor_2	expertise_me_kinetic_armor_1																					expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75			0	
+expertise_me_kinetic_armor_3	expertise_me_kinetic_armor_2																					expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75			0	
+expertise_me_kinetic_armor_4	expertise_me_kinetic_armor_3																					expertise_innate_protection_kinetic=150,expertise_innate_protection_all=75			0	
+expertise_me_humanoid_crits_1	expertise																					expertise_critical_niche_pvp=1,expertise_critical_niche_npc=1			0	
+expertise_me_humanoid_crits_2	expertise_me_humanoid_crits_1																					expertise_critical_niche_pvp=2,expertise_critical_niche_npc=2			0	
+expertise_me_humanoid_crits_3	expertise_me_humanoid_crits_2																					expertise_critical_niche_pvp=2,expertise_critical_niche_npc=2			0	
+expertise_me_unarmed_crit_1	expertise																					expertise_undiminished_critical_melee=1			0	
+expertise_me_unarmed_crit_2	expertise_me_unarmed_crit_1																					expertise_undiminished_critical_melee=2			0	
+expertise_me_unarmed_crit_3	expertise_me_unarmed_crit_2																					expertise_undiminished_critical_melee=2			0	
+expertise_me_evasion_1	expertise																				me_evasion_1				0	
+expertise_me_burst_1	expertise_me_humanoid_crits_3									expertise_me_humanoid_crits_3											me_burst_1				0	
+expertise_me_cranial_smash_1	expertise_me_unarmed_crit_3									expertise_me_unarmed_crit_3											me_cranial_smash_1				0	
+expertise_me_enhance_block_1	expertise																				me_enhance_block_1				0	
+expertise_me_enhance_dodge_1	expertise																				me_enhance_dodge_1				0	
 expertise_co_remote_detonator_1	expertise																				co_remote_detonator_1				0	
 expertise_co_suppressing_fire_1	expertise																				co_suppressing_fire				0	
 expertise_co_powered_armor_1	expertise																					expertise_innate_protection_all=250			0	
@@ -2300,26 +2296,25 @@ expertise_en_inspired_fitness_1	expertise																					expertise_en_inspi
 expertise_en_inspired_fitness_2	expertise_en_inspired_fitness_1																					expertise_en_inspire_attrib_increase=50				
 expertise_en_inspired_fitness_3	expertise_en_inspired_fitness_2																					expertise_en_inspire_attrib_increase=50				
 expertise_en_inspired_fitness_4	expertise_en_inspired_fitness_3																					expertise_en_inspire_attrib_increase=50				
-expertise_en_inspired_resilience_1	expertise																					expertise_en_inspire_resist_increase=50				
-expertise_en_inspired_resilience_2	expertise_en_inspired_resilience_1																					expertise_en_inspire_resist_increase=50				
-expertise_en_inspired_resilience_3	expertise_en_inspired_resilience_2																					expertise_en_inspire_resist_increase=50				
-expertise_en_inspired_resilience_4	expertise_en_inspired_resilience_3																					expertise_en_inspire_resist_increase=50				
+expertise_en_inspired_resilience_1	expertise																					expertise_en_inspire_resist_increase=75				
+expertise_en_inspired_resilience_2	expertise_en_inspired_resilience_1																					expertise_en_inspire_resist_increase=75				
+expertise_en_inspired_resilience_3	expertise_en_inspired_resilience_2																					expertise_en_inspire_resist_increase=75				
+expertise_en_inspired_resilience_4	expertise_en_inspired_resilience_3																					expertise_en_inspire_resist_increase=75				
 expertise_en_inspired_industry_1	expertise																					expertise_en_inspire_trader_increase=25				
 expertise_en_inspired_industry_2	expertise_en_inspired_industry_1																					expertise_en_inspire_trader_increase=25				
 expertise_en_inspired_industry_3	expertise_en_inspired_industry_2																					expertise_en_inspire_trader_increase=25				
 expertise_en_inspired_industry_4	expertise_en_inspired_industry_3																					expertise_en_inspire_trader_increase=25				
-expertise_en_creativity_1	expertise																					expertise_en_inspire_base_point_increase=3				
-expertise_en_creativity_2	expertise_en_creativity_1																					expertise_en_inspire_base_point_increase=3				
-expertise_en_creativity_3	expertise_en_creativity_2																					expertise_en_inspire_base_point_increase=3				
-expertise_en_creativity_4	expertise_en_creativity_3																					expertise_en_inspire_base_point_increase=3				
+expertise_en_creativity_1	expertise																					expertise_en_inspire_base_point_increase=8				
+expertise_en_creativity_2	expertise_en_creativity_1																					expertise_en_inspire_base_point_increase=8				
+expertise_en_creativity_3	expertise_en_creativity_2																					expertise_en_inspire_base_point_increase=8				
+expertise_en_creativity_4	expertise_en_creativity_3																					expertise_en_inspire_base_point_increase=8				
 expertise_en_holism_1	expertise																				en_healer_buff_package					
 expertise_en_harvest_faire_1	expertise																				en_harvest_faire_buff_package					
 expertise_en_second_chance_1	expertise																				en_second_chance_buff_package					
 expertise_en_go_with_the_flow_1	expertise																				en_go_with_the_flow_buff_package					
-expertise_en_intense_performer_1	expertise																					expertise_en_inspire_pulse_duration_increase=1				
-expertise_en_intense_performer_2	expertise_en_intense_performer_1																					expertise_en_inspire_pulse_duration_increase=1				
+expertise_en_intense_performer_1	expertise																					expertise_en_inspire_pulse_duration_increase=2				
+expertise_en_intense_performer_2	expertise_en_intense_performer_1																					expertise_en_inspire_pulse_duration_increase=2				
 expertise_en_intense_performer_3	expertise_en_intense_performer_2																					expertise_en_inspire_pulse_duration_increase=1				
-expertise_en_intense_performer_4	expertise_en_intense_performer_3																					expertise_en_inspire_pulse_duration_increase=1				
 expertise_en_affability_1	expertise																					expertise_en_performance_increase=5				
 expertise_en_affability_2	expertise_en_affability_1																					expertise_en_performance_increase=5				
 expertise_en_affability_3	expertise_en_affability_2																					expertise_en_performance_increase=5				
@@ -2328,13 +2323,12 @@ expertise_en_flush_with_success_1	expertise																				en_flush_with_suc
 expertise_en_inspired_reactions_1	expertise																					expertise_en_inspire_proc_chance_increase=1				
 expertise_en_inspired_reactions_2	expertise_en_inspired_reactions_1																					expertise_en_inspire_proc_chance_increase=1				
 expertise_en_inspired_reactions_3	expertise_en_inspired_reactions_2																					expertise_en_inspire_proc_chance_increase=1				
-expertise_en_inspired_reactions_4	expertise_en_inspired_reactions_3																					expertise_en_inspire_proc_chance_increase=1				
-expertise_en_lasting_impression_1	expertise_en_intense_performer_4									expertise_en_intense_performer_4												expertise_en_inspire_buff_duration_increase=30				
+expertise_en_lasting_impression_1	expertise_en_intense_performer_3									expertise_en_intense_performer_3												expertise_en_inspire_buff_duration_increase=30				
 expertise_en_lasting_impression_2	expertise_en_lasting_impression_1																					expertise_en_inspire_buff_duration_increase=30				
 expertise_en_lasting_impression_3	expertise_en_lasting_impression_2																					expertise_en_inspire_buff_duration_increase=30				
 expertise_en_lasting_impression_4	expertise_en_lasting_impression_3																					expertise_en_inspire_buff_duration_increase=30				
 expertise_en_holography_1	expertise																				en_holographic_image					
-expertise_en_inspired_warfare_1	expertise_en_inspired_reactions_4									expertise_en_inspired_reactions_4												expertise_en_combat_buff_increase=1				
+expertise_en_inspired_warfare_1	expertise_en_inspired_reactions_3									expertise_en_inspired_reactions_3												expertise_en_combat_buff_increase=1				
 expertise_en_inspired_warfare_2	expertise_en_inspired_warfare_1																					expertise_en_combat_buff_increase=1				
 expertise_en_inspired_warfare_3	expertise_en_inspired_warfare_2																					expertise_en_combat_buff_increase=1				
 expertise_en_inspired_warfare_4	expertise_en_inspired_warfare_3																					expertise_en_combat_buff_increase=1				
@@ -2386,216 +2380,111 @@ expertise_en_uprising_2	expertise_en_uprising_1																					expertise_cr
 expertise_en_annulling_1	expertise_en_void_dance_1									expertise_en_void_dance_1												expertise_buff_en_void_dance_buff=5				
 expertise_en_annulling_2	expertise_en_annulling_1																					expertise_buff_en_void_dance_buff=5				
 expertise_en_annulling_3	expertise_en_annulling_2																					expertise_buff_en_void_dance_buff=5				
-expertise_trader_business_accounting_1	expertise																					expertise_vendor_cost_decrease=1				
-expertise_trader_business_accounting_2	expertise_trader_business_accounting_1																					expertise_vendor_cost_decrease=1				
-expertise_trader_business_accounting_3	expertise_trader_business_accounting_2																					expertise_vendor_cost_decrease=1				
-expertise_trader_business_accounting_4	expertise_trader_business_accounting_3																					expertise_vendor_cost_decrease=1				
-expertise_trader_sampling_collection_1	expertise																					expertise_resource_sampling_increase=25				
-expertise_trader_sampling_collection_2	expertise_trader_sampling_collection_1																					expertise_resource_sampling_increase=25				
-expertise_trader_sampling_collection_3	expertise_trader_sampling_collection_2																					expertise_resource_sampling_increase=25				
-expertise_trader_sampling_collection_4	expertise_trader_sampling_collection_3																					expertise_resource_sampling_increase=25				
-expertise_trader_warehousing_1	expertise_trader_business_accounting_4									expertise_trader_business_accounting_4												vendor_item_limit=50				
-expertise_trader_warehousing_2	expertise_trader_warehousing_1																					vendor_item_limit=50				
-expertise_trader_warehousing_3	expertise_trader_warehousing_2																					vendor_item_limit=50				
-expertise_trader_warehousing_4	expertise_trader_warehousing_3																					vendor_item_limit=50				
-expertise_trader_harvester_storage_1	expertise																					expertise_havester_storage_increase=3				
-expertise_trader_harvester_storage_2	expertise_trader_harvester_storage_1																					expertise_havester_storage_increase=3				
-expertise_trader_harvester_storage_3	expertise_trader_harvester_storage_2																					expertise_havester_storage_increase=3				
-expertise_trader_harvester_storage_4	expertise_trader_harvester_storage_3																					expertise_havester_storage_increase=3				
-expertise_trader_sampling_efficiency_1	expertise_trader_sampling_collection_4									expertise_trader_sampling_collection_4												expertise_resource_sampling_time_decrease=5				
-expertise_trader_sampling_efficiency_2	expertise_trader_sampling_efficiency_1																					expertise_resource_sampling_time_decrease=5				
-expertise_trader_sampling_efficiency_3	expertise_trader_sampling_efficiency_2																					expertise_resource_sampling_time_decrease=5				
-expertise_trader_personnel_management_1	expertise_trader_warehousing_4									expertise_trader_warehousing_4												manage_vendor=1				
-expertise_trader_personnel_management_2	expertise_trader_personnel_management_1																					manage_vendor=1				
-expertise_trader_factory_maintenance_1	expertise																					expertise_factory_maintenance_decrease=10				
-expertise_trader_factory_maintenance_2	expertise_trader_factory_maintenance_1																					expertise_factory_maintenance_decrease=5				
-expertise_trader_factory_maintenance_3	expertise_trader_factory_maintenance_2																					expertise_factory_maintenance_decrease=5				
-expertise_trader_factory_maintenance_4	expertise_trader_factory_maintenance_3																					expertise_factory_maintenance_decrease=10				
-expertise_trader_harvester_maintenance_1	expertise_trader_harvester_storage_4									expertise_trader_harvester_storage_4												expertise_harvester_maintenance_decrease=4				
-expertise_trader_harvester_maintenance_2	expertise_trader_harvester_maintenance_1																					expertise_harvester_maintenance_decrease=4				
-expertise_trader_harvester_maintenance_3	expertise_trader_harvester_maintenance_2																					expertise_harvester_maintenance_decrease=4				
-expertise_trader_harvester_maintenance_4	expertise_trader_harvester_maintenance_3																					expertise_harvester_maintenance_decrease=4				
-expertise_trader_factory_energy_1	expertise_trader_factory_maintenance_4									expertise_trader_factory_maintenance_4												expertise_factory_energy_decrease=5				
-expertise_trader_factory_energy_2	expertise_trader_factory_energy_1																					expertise_factory_energy_decrease=5				
-expertise_trader_factory_energy_3	expertise_trader_factory_energy_2																					expertise_factory_energy_decrease=5				
-expertise_trader_factory_energy_4	expertise_trader_factory_energy_3																					expertise_factory_energy_decrease=5				
-expertise_trader_harvester_energy_1	expertise_trader_harvester_maintenance_4									expertise_trader_harvester_maintenance_4												expertise_harvester_energy_decrease=5				
-expertise_trader_harvester_energy_2	expertise_trader_harvester_energy_1																					expertise_harvester_energy_decrease=5				
-expertise_trader_harvester_energy_3	expertise_trader_harvester_energy_2																					expertise_harvester_energy_decrease=5				
-expertise_trader_harvester_energy_4	expertise_trader_harvester_energy_3																					expertise_harvester_energy_decrease=5				
-expertise_trader_reverse_engineering_1	expertise																					expertise_reverse_engineering_bonus=5				
-expertise_trader_reverse_engineering_2	expertise_trader_reverse_engineering_1																					expertise_reverse_engineering_bonus=5				
-expertise_trader_factory_production_1	expertise_trader_factory_energy_4									expertise_trader_factory_energy_4												factory_speed=5				
-expertise_trader_factory_production_2	expertise_trader_factory_production_1																					factory_speed=5				
-expertise_trader_harvester_collection_1	expertise_trader_harvester_energy_4									expertise_trader_harvester_energy_4												expertise_harvester_collection_increase=20				
-expertise_trader_harvester_collection_2	expertise_trader_harvester_collection_1																					expertise_harvester_collection_increase=10				
-expertise_domestic_tailor_dexterity_1	expertise																					clothing_assembly=5				
-expertise_domestic_tailor_dexterity_2	expertise_domestic_tailor_dexterity_1																					clothing_assembly=5				
-expertise_domestic_tailor_dexterity_3	expertise_domestic_tailor_dexterity_2																					clothing_assembly=5				
-expertise_domestic_tailor_dexterity_4	expertise_domestic_tailor_dexterity_3																					clothing_assembly=5				
-expertise_domestic_artisan_dexterity_1	expertise																					general_assembly=5				
-expertise_domestic_artisan_dexterity_2	expertise_domestic_artisan_dexterity_1																					general_assembly=5				
-expertise_domestic_artisan_dexterity_3	expertise_domestic_artisan_dexterity_2																					general_assembly=5				
-expertise_domestic_artisan_dexterity_4	expertise_domestic_artisan_dexterity_3																					general_assembly=5				
-expertise_domestic_chef_dexterity_1	expertise																					food_assembly=5				
-expertise_domestic_chef_dexterity_2	expertise_domestic_chef_dexterity_1																					food_assembly=5				
-expertise_domestic_chef_dexterity_3	expertise_domestic_chef_dexterity_2																					food_assembly=5				
-expertise_domestic_chef_dexterity_4	expertise_domestic_chef_dexterity_3																					food_assembly=5				
-expertise_domestic_tailor_insight_1	expertise																					expertise_complexity_decrease_tailor=1				
-expertise_domestic_tailor_insight_2	expertise_domestic_tailor_insight_1																					expertise_complexity_decrease_tailor=1				
-expertise_domestic_artisan_hypothesis_1	expertise_domestic_artisan_dexterity_4									expertise_domestic_artisan_dexterity_4												expertise_experimentation_increase_artisan=3				
-expertise_domestic_artisan_hypothesis_2	expertise_domestic_artisan_hypothesis_1																					expertise_experimentation_increase_artisan=3				
-expertise_domestic_artisan_hypothesis_3	expertise_domestic_artisan_hypothesis_2																					expertise_experimentation_increase_artisan=3				
-expertise_domestic_artisan_hypothesis_4	expertise_domestic_artisan_hypothesis_3																					expertise_experimentation_increase_artisan=3				
-expertise_domestic_chef_insight_1	expertise																					expertise_complexity_decrease_chef=1				
-expertise_domestic_chef_insight_2	expertise_domestic_chef_insight_1																					expertise_complexity_decrease_chef=1				
-expertise_domestic_tailor_hypothesis_1	expertise_domestic_tailor_dexterity_4									expertise_domestic_tailor_dexterity_4												expertise_experimentation_increase_tailor=3				
-expertise_domestic_tailor_hypothesis_2	expertise_domestic_tailor_hypothesis_1																					expertise_experimentation_increase_tailor=3				
-expertise_domestic_tailor_hypothesis_3	expertise_domestic_tailor_hypothesis_2																					expertise_experimentation_increase_tailor=3				
-expertise_domestic_tailor_hypothesis_4	expertise_domestic_tailor_hypothesis_3																					expertise_experimentation_increase_tailor=3				
-expertise_domestic_resource_processing_1	expertise																					expertise_resource_quality_increase=1				
-expertise_domestic_resource_processing_2	expertise_domestic_resource_processing_1																					expertise_resource_quality_increase=1				
-expertise_domestic_chef_hypothesis_1	expertise_domestic_chef_dexterity_4									expertise_domestic_chef_dexterity_4												expertise_experimentation_increase_chef=3				
-expertise_domestic_chef_hypothesis_2	expertise_domestic_chef_hypothesis_1																					expertise_experimentation_increase_chef=3				
-expertise_domestic_chef_hypothesis_3	expertise_domestic_chef_hypothesis_2																					expertise_experimentation_increase_chef=3				
-expertise_domestic_chef_hypothesis_4	expertise_domestic_chef_hypothesis_3																					expertise_experimentation_increase_chef=3				
-expertise_domestic_tailor_keen_understanding_1	expertise_domestic_tailor_insight_2									expertise_domestic_tailor_insight_2												expertise_complexity_decrease_tailor=2				
-expertise_domestic_tailor_keen_understanding_2	expertise_domestic_tailor_keen_understanding_1																					expertise_complexity_decrease_tailor=2				
-expertise_domestic_resource_refinement_1	expertise_domestic_resource_processing_2									expertise_domestic_resource_processing_2												expertise_resource_quality_increase=1				
-expertise_domestic_resource_refinement_2	expertise_domestic_resource_refinement_1																					expertise_resource_quality_increase=1				
-expertise_domestic_artisan_advanced_theory_1	expertise_domestic_artisan_hypothesis_4									expertise_domestic_artisan_hypothesis_4												general_experimentation=10				
-expertise_domestic_chef_keen_understanding_1	expertise_domestic_chef_insight_2									expertise_domestic_chef_insight_2												expertise_complexity_decrease_chef=2				
-expertise_domestic_chef_keen_understanding_2	expertise_domestic_chef_keen_understanding_1																					expertise_complexity_decrease_chef=2				
-expertise_domestic_tailor_advanced_theory_1	expertise_domestic_tailor_hypothesis_4									expertise_domestic_tailor_hypothesis_4												clothing_experimentation=10				
+expertise_trader_business_accounting_1	expertise																					expertise_vendor_cost_decrease=5				
+expertise_trader_business_accounting_2	expertise_trader_business_accounting_1									expertise_trader_business_accounting_1												expertise_vendor_cost_decrease=10				
+expertise_trader_sampling_collection_1	expertise																					expertise_resource_sampling_increase=100				
+expertise_trader_sampling_collection_2	expertise_trader_sampling_collection_1									expertise_trader_sampling_collection_1												expertise_resource_sampling_increase=200				
+expertise_trader_warehousing_1	expertise_trader_business_accounting_2									expertise_trader_business_accounting_2												vendor_item_limit=500				
+expertise_trader_warehousing_2	expertise_trader_warehousing_1									expertise_trader_warehousing_1												vendor_item_limit=1000				
+expertise_trader_harvester_storage_1	expertise																					expertise_havester_storage_increase=12				
+expertise_trader_sampling_efficiency_1	expertise_trader_sampling_collection_1									expertise_trader_sampling_collection_1												expertise_resource_sampling_time_decrease=30				
+expertise_trader_personnel_management_1	expertise_trader_warehousing_2									expertise_trader_warehousing_2												manage_vendor=2				
+expertise_trader_personnel_management_2	expertise_trader_personnel_management_1									expertise_trader_personnel_management_1												manage_vendor=5				
+expertise_trader_factory_maintenance_1	expertise																					expertise_factory_maintenance_decrease=15				
+expertise_trader_factory_maintenance_2	expertise_trader_factory_maintenance_1									expertise_trader_factory_maintenance_1												expertise_factory_maintenance_decrease=30				
+expertise_trader_harvester_maintenance_1	expertise_trader_harvester_storage_1									expertise_trader_harvester_storage_1												expertise_harvester_maintenance_decrease=16				
+expertise_trader_factory_energy_1	expertise_trader_factory_maintenance_2									expertise_trader_factory_maintenance_2												expertise_factory_energy_decrease=20				
+expertise_trader_factory_energy_2	expertise_trader_factory_energy_1									expertise_trader_factory_energy_1												expertise_factory_energy_decrease=40				
+expertise_trader_harvester_energy_1	expertise_trader_harvester_maintenance_1									expertise_trader_harvester_maintenance_1												expertise_harvester_energy_decrease=20				
+expertise_trader_reverse_engineering_1	expertise																					expertise_reverse_engineering_bonus=15				
+expertise_trader_factory_production_1	expertise_trader_factory_energy_2									expertise_trader_factory_energy_2												factory_speed=10				
+expertise_domestic_tailor_dexterity_1	expertise																					clothing_assembly=20				
+expertise_domestic_artisan_dexterity_1	expertise																					general_assembly=10				
+expertise_domestic_artisan_dexterity_2	expertise_domestic_artisan_dexterity_1									expertise_domestic_artisan_dexterity_1												general_assembly=20				
+expertise_domestic_chef_dexterity_1	expertise																					food_assembly=20				
+expertise_domestic_tailor_insight_1	expertise																					expertise_complexity_decrease_tailor=2				
+expertise_domestic_artisan_hypothesis_1	expertise_domestic_artisan_dexterity_2									expertise_domestic_artisan_dexterity_2												expertise_experimentation_increase_artisan=6				
+expertise_domestic_artisan_hypothesis_2	expertise_domestic_artisan_hypothesis_1									expertise_domestic_artisan_hypothesis_1												expertise_experimentation_increase_artisan=12				
+expertise_domestic_chef_insight_1	expertise																					expertise_complexity_decrease_chef=2				
+expertise_domestic_tailor_hypothesis_1	expertise_domestic_tailor_dexterity_1									expertise_domestic_tailor_dexterity_1												expertise_experimentation_increase_tailor=12				
+expertise_domestic_resource_processing_1	expertise																					expertise_resource_quality_increase=2				
+expertise_domestic_resource_processing_2	expertise_domestic_resource_processing_1									expertise_domestic_resource_processing_1												expertise_resource_quality_increase=4				
+expertise_domestic_chef_hypothesis_1	expertise_domestic_chef_dexterity_1									expertise_domestic_chef_dexterity_1												expertise_experimentation_increase_chef=12				
+expertise_domestic_tailor_keen_understanding_1	expertise_domestic_tailor_insight_1									expertise_domestic_tailor_insight_1												expertise_complexity_decrease_tailor=4				
+expertise_domestic_resource_refinement_1	expertise_domestic_resource_processing_1									expertise_domestic_resource_processing_1												expertise_resource_quality_increase=2				
+expertise_domestic_artisan_advanced_theory_1	expertise_domestic_artisan_hypothesis_2									expertise_domestic_artisan_hypothesis_2												general_experimentation=10				
+expertise_domestic_chef_keen_understanding_1	expertise_domestic_chef_insight_1									expertise_domestic_chef_insight_1												expertise_complexity_decrease_chef=4				
+expertise_domestic_tailor_advanced_theory_1	expertise_domestic_tailor_hypothesis_1									expertise_domestic_tailor_hypothesis_1												clothing_experimentation=10				
 expertise_domestic_tailor_socket_bonus_1	expertise																						craftExpertiseSocketRetrofitter			
 expertise_domestic_tailor_attachment_upgrade_1	expertise																					expertise_attachment_upgrade=1				
 expertise_domestic_chef_schematic_1_1	expertise																						craftFoodLightAdditive,craftFoodMediumAdditive			
 expertise_domestic_chef_schematic_2_1	expertise																						craftFoodHeavyAdditive,craftFoodMediumAdditive			
-expertise_domestic_chef_advanced_theory_1	expertise_domestic_chef_hypothesis_4									expertise_domestic_chef_hypothesis_4												food_experimentation=10				
-expertise_structure_architect_dexterity_1	expertise																					structure_assembly=5				
-expertise_structure_architect_dexterity_2	expertise_structure_architect_dexterity_1																					structure_assembly=5				
-expertise_structure_architect_dexterity_3	expertise_structure_architect_dexterity_2																					structure_assembly=5				
-expertise_structure_architect_dexterity_4	expertise_structure_architect_dexterity_3																					structure_assembly=5				
-expertise_structure_artisan_dexterity_1	expertise																					general_assembly=5				
-expertise_structure_artisan_dexterity_2	expertise_structure_artisan_dexterity_1																					general_assembly=5				
-expertise_structure_artisan_dexterity_3	expertise_structure_artisan_dexterity_2																					general_assembly=5				
-expertise_structure_artisan_dexterity_4	expertise_structure_artisan_dexterity_3																					general_assembly=5				
-expertise_structure_shipwright_dexterity_1	expertise																					chassis_assembly=5,engine_assembly=5,booster_assembly=5,power_systems=5,weapon_systems=5,shields_assembly=5,advanced_assembly=5				
-expertise_structure_shipwright_dexterity_2	expertise_structure_shipwright_dexterity_1																					chassis_assembly=5,engine_assembly=5,booster_assembly=5,power_systems=5,weapon_systems=5,shields_assembly=5,advanced_assembly=5				
-expertise_structure_shipwright_dexterity_3	expertise_structure_shipwright_dexterity_2																					chassis_assembly=5,engine_assembly=5,booster_assembly=5,power_systems=5,weapon_systems=5,shields_assembly=5,advanced_assembly=5				
-expertise_structure_shipwright_dexterity_4	expertise_structure_shipwright_dexterity_3																					chassis_assembly=5,engine_assembly=5,booster_assembly=5,power_systems=5,weapon_systems=5,shields_assembly=5,advanced_assembly=5				
-expertise_structure_architect_insight_1	expertise																					expertise_complexity_decrease_architect=1				
-expertise_structure_architect_insight_2	expertise_structure_architect_insight_1																					expertise_complexity_decrease_architect=1				
-expertise_structure_artisan_hypothesis_1	expertise_structure_artisan_dexterity_4									expertise_structure_artisan_dexterity_4												expertise_experimentation_increase_artisan=3				
-expertise_structure_artisan_hypothesis_2	expertise_structure_artisan_hypothesis_1																					expertise_experimentation_increase_artisan=3				
-expertise_structure_artisan_hypothesis_3	expertise_structure_artisan_hypothesis_2																					expertise_experimentation_increase_artisan=3				
-expertise_structure_artisan_hypothesis_4	expertise_structure_artisan_hypothesis_3																					expertise_experimentation_increase_artisan=3				
-expertise_structure_shipwright_insight_1	expertise																					expertise_complexity_decrease_shipwright=1				
-expertise_structure_shipwright_insight_2	expertise_structure_shipwright_insight_1																					expertise_complexity_decrease_shipwright=1				
-expertise_structure_architect_hypothesis_1	expertise_structure_architect_dexterity_4									expertise_structure_architect_dexterity_4												expertise_experimentation_increase_architect=3				
-expertise_structure_architect_hypothesis_2	expertise_structure_architect_hypothesis_1																					expertise_experimentation_increase_architect=3				
-expertise_structure_architect_hypothesis_3	expertise_structure_architect_hypothesis_2																					expertise_experimentation_increase_architect=3				
-expertise_structure_architect_hypothesis_4	expertise_structure_architect_hypothesis_3																					expertise_experimentation_increase_architect=3				
-expertise_structure_resource_processing_1	expertise																					expertise_resource_quality_increase=1				
-expertise_structure_resource_processing_2	expertise_structure_resource_processing_1																					expertise_resource_quality_increase=1				
-expertise_structure_shipwright_hypothesis_1	expertise_structure_shipwright_dexterity_4									expertise_structure_shipwright_dexterity_4												expertise_experimentation_increase_shipwright=3				
-expertise_structure_shipwright_hypothesis_2	expertise_structure_shipwright_hypothesis_1																					expertise_experimentation_increase_shipwright=3				
-expertise_structure_shipwright_hypothesis_3	expertise_structure_shipwright_hypothesis_2																					expertise_experimentation_increase_shipwright=3				
-expertise_structure_shipwright_hypothesis_4	expertise_structure_shipwright_hypothesis_3																					expertise_experimentation_increase_shipwright=3				
-expertise_structure_architect_keen_understanding_1	expertise_structure_architect_insight_2									expertise_structure_architect_insight_2												expertise_complexity_decrease_architect=2				
-expertise_structure_architect_keen_understanding_2	expertise_structure_architect_keen_understanding_1																					expertise_complexity_decrease_architect=2				
-expertise_structure_resource_refinement_1	expertise_structure_resource_processing_2									expertise_structure_resource_processing_2												expertise_resource_quality_increase=1				
-expertise_structure_resource_refinement_2	expertise_structure_resource_refinement_1																					expertise_resource_quality_increase=1				
-expertise_structure_artisan_advanced_theory_1	expertise_structure_artisan_hypothesis_4									expertise_structure_artisan_hypothesis_4												general_experimentation=10				
-expertise_structure_shipwright_keen_understanding_1	expertise_structure_shipwright_insight_2									expertise_structure_shipwright_insight_2												expertise_complexity_decrease_shipwright=2				
-expertise_structure_shipwright_keen_understanding_2	expertise_structure_shipwright_keen_understanding_1																					expertise_complexity_decrease_shipwright=2				
-expertise_structure_architect_advanced_theory_1	expertise_structure_architect_hypothesis_4									expertise_structure_architect_hypothesis_4												structure_experimentation=10				
+expertise_domestic_chef_advanced_theory_1	expertise_domestic_chef_hypothesis_1									expertise_domestic_chef_hypothesis_1												food_experimentation=10				
+expertise_structure_architect_dexterity_1	expertise																					structure_assembly=20				
+expertise_structure_artisan_dexterity_1	expertise																					general_assembly=10				
+expertise_structure_artisan_dexterity_2	expertise_structure_artisan_dexterity_1									expertise_structure_artisan_dexterity_1												general_assembly=20				
+expertise_structure_shipwright_dexterity_1	expertise																					chassis_assembly=20,engine_assembly=20,booster_assembly=20,power_systems=20,weapon_systems=20,shields_assembly=20,advanced_assembly=20				
+expertise_structure_architect_insight_1	expertise																					expertise_complexity_decrease_architect=2				
+expertise_structure_artisan_hypothesis_1	expertise_structure_artisan_dexterity_2									expertise_structure_artisan_dexterity_2												expertise_experimentation_increase_artisan=6				
+expertise_structure_artisan_hypothesis_2	expertise_structure_artisan_hypothesis_1									expertise_structure_artisan_hypothesis_1												expertise_experimentation_increase_artisan=12				
+expertise_structure_shipwright_insight_1	expertise																					expertise_complexity_decrease_shipwright=2				
+expertise_structure_architect_hypothesis_1	expertise_structure_architect_dexterity_1									expertise_structure_architect_dexterity_1												expertise_experimentation_increase_architect=12				
+expertise_structure_resource_processing_1	expertise																					expertise_resource_quality_increase=2				
+expertise_structure_resource_processing_2	expertise_structure_resource_processing_1									expertise_structure_resource_processing_1												expertise_resource_quality_increase=4				
+expertise_structure_shipwright_hypothesis_1	expertise_structure_shipwright_dexterity_1									expertise_structure_shipwright_dexterity_1												expertise_experimentation_increase_shipwright=12				
+expertise_structure_architect_keen_understanding_1	expertise_structure_architect_insight_1									expertise_structure_architect_insight_1												expertise_complexity_decrease_architect=4				
+expertise_structure_resource_refinement_1	expertise_structure_resource_processing_1									expertise_structure_resource_processing_1												expertise_resource_quality_increase=2				
+expertise_structure_artisan_advanced_theory_1	expertise_structure_artisan_hypothesis_2									expertise_structure_artisan_hypothesis_2												general_experimentation=10				
+expertise_structure_shipwright_keen_understanding_1	expertise_structure_shipwright_insight_1									expertise_structure_shipwright_insight_1												expertise_complexity_decrease_shipwright=4				
+expertise_structure_architect_advanced_theory_1	expertise_structure_architect_hypothesis_1									expertise_structure_architect_hypothesis_1												structure_experimentation=10				
 expertise_structure_architect_schematic_1_1	expertise																						craftArchitectExpertiseSchematics1			
 expertise_structure_architect_schematic_2_1	expertise																						craftArchitectExpertiseSchematics2			
 expertise_structure_shipwright_schematic_1_1	expertise																						craftShipwrightExpertiseSchematics1			
 expertise_structure_shipwright_schematic_2_1	expertise																						craftShipwrightExpertiseSchematics2			
-expertise_structure_shipwright_advanced_theory_1	expertise_structure_shipwright_hypothesis_4									expertise_structure_shipwright_hypothesis_4												chassis_experimentation=10,weapon_systems_experimentation=10,engine_experimentation=10,booster_experimentation=10,power_systems_experimentation=10,shields_experimentation=10,advanced_ship_experimentation=10				
-expertise_munition_weaponsmith_dexterity_1	expertise																					weapon_assembly=5				
-expertise_munition_weaponsmith_dexterity_2	expertise_munition_weaponsmith_dexterity_1																					weapon_assembly=5				
-expertise_munition_weaponsmith_dexterity_3	expertise_munition_weaponsmith_dexterity_2																					weapon_assembly=5				
-expertise_munition_weaponsmith_dexterity_4	expertise_munition_weaponsmith_dexterity_3																					weapon_assembly=5				
-expertise_munition_artisan_dexterity_1	expertise																					general_assembly=5				
-expertise_munition_artisan_dexterity_2	expertise_munition_artisan_dexterity_1																					general_assembly=5				
-expertise_munition_artisan_dexterity_3	expertise_munition_artisan_dexterity_2																					general_assembly=5				
-expertise_munition_artisan_dexterity_4	expertise_munition_artisan_dexterity_3																					general_assembly=5				
-expertise_munition_armorsmith_dexterity_1	expertise																					armor_assembly=5				
-expertise_munition_armorsmith_dexterity_2	expertise_munition_armorsmith_dexterity_1																					armor_assembly=5				
-expertise_munition_armorsmith_dexterity_3	expertise_munition_armorsmith_dexterity_2																					armor_assembly=5				
-expertise_munition_armorsmith_dexterity_4	expertise_munition_armorsmith_dexterity_3																					armor_assembly=5				
-expertise_munition_weaponsmith_insight_1	expertise																					expertise_complexity_decrease_weaponsmith=1				
-expertise_munition_weaponsmith_insight_2	expertise_munition_weaponsmith_insight_1																					expertise_complexity_decrease_weaponsmith=1				
-expertise_munition_artisan_hypothesis_1	expertise_munition_artisan_dexterity_4									expertise_munition_artisan_dexterity_4												expertise_experimentation_increase_artisan=3				
-expertise_munition_artisan_hypothesis_2	expertise_munition_artisan_hypothesis_1																					expertise_experimentation_increase_artisan=3				
-expertise_munition_artisan_hypothesis_3	expertise_munition_artisan_hypothesis_2																					expertise_experimentation_increase_artisan=3				
-expertise_munition_artisan_hypothesis_4	expertise_munition_artisan_hypothesis_3																					expertise_experimentation_increase_artisan=3				
-expertise_munition_armorsmith_insight_1	expertise																					expertise_complexity_decrease_armorsmith=1				
-expertise_munition_armorsmith_insight_2	expertise_munition_armorsmith_insight_1																					expertise_complexity_decrease_armorsmith=1				
-expertise_munition_weaponsmith_hypothesis_1	expertise_munition_weaponsmith_dexterity_4									expertise_munition_weaponsmith_dexterity_4												expertise_experimentation_increase_weaponsmith=3				
-expertise_munition_weaponsmith_hypothesis_2	expertise_munition_weaponsmith_hypothesis_1																					expertise_experimentation_increase_weaponsmith=3				
-expertise_munition_weaponsmith_hypothesis_3	expertise_munition_weaponsmith_hypothesis_2																					expertise_experimentation_increase_weaponsmith=3				
-expertise_munition_weaponsmith_hypothesis_4	expertise_munition_weaponsmith_hypothesis_3																					expertise_experimentation_increase_weaponsmith=3				
-expertise_munition_resource_processing_1	expertise																					expertise_resource_quality_increase=1				
-expertise_munition_resource_processing_2	expertise_munition_resource_processing_1																					expertise_resource_quality_increase=1				
-expertise_munition_armorsmith_hypothesis_1	expertise_munition_armorsmith_dexterity_4									expertise_munition_armorsmith_dexterity_4												expertise_experimentation_increase_armorsmith=3				
-expertise_munition_armorsmith_hypothesis_2	expertise_munition_armorsmith_hypothesis_1																					expertise_experimentation_increase_armorsmith=3				
-expertise_munition_armorsmith_hypothesis_3	expertise_munition_armorsmith_hypothesis_2																					expertise_experimentation_increase_armorsmith=3				
-expertise_munition_armorsmith_hypothesis_4	expertise_munition_armorsmith_hypothesis_3																					expertise_experimentation_increase_armorsmith=3				
-expertise_munition_weaponsmith_keen_understanding_1	expertise_munition_weaponsmith_insight_2									expertise_munition_weaponsmith_insight_2												expertise_complexity_decrease_weaponsmith=2				
-expertise_munition_weaponsmith_keen_understanding_2	expertise_munition_weaponsmith_keen_understanding_1																					expertise_complexity_decrease_weaponsmith=2				
-expertise_munition_resource_refinement_1	expertise_munition_resource_processing_2									expertise_munition_resource_processing_2												expertise_resource_quality_increase=1				
-expertise_munition_resource_refinement_2	expertise_munition_resource_refinement_1																					expertise_resource_quality_increase=1				
-expertise_munition_artisan_advanced_theory_1	expertise_munition_artisan_hypothesis_4									expertise_munition_artisan_hypothesis_4												general_experimentation=10				
-expertise_munition_armorsmith_keen_understanding_1	expertise_munition_armorsmith_insight_2									expertise_munition_armorsmith_insight_2												expertise_complexity_decrease_armorsmith=2				
-expertise_munition_armorsmith_keen_understanding_2	expertise_munition_armorsmith_keen_understanding_1																					expertise_complexity_decrease_armorsmith=2				
-expertise_munition_weaponsmith_advanced_theory_1	expertise_munition_weaponsmith_hypothesis_4									expertise_munition_weaponsmith_hypothesis_4												weapon_experimentation=10				
+expertise_structure_shipwright_advanced_theory_1	expertise_structure_shipwright_hypothesis_1									expertise_structure_shipwright_hypothesis_1												chassis_experimentation=10,weapon_systems_experimentation=10,engine_experimentation=10,booster_experimentation=10,power_systems_experimentation=10,shields_experimentation=10,advanced_ship_experimentation=10				
+expertise_munition_weaponsmith_dexterity_1	expertise																					weapon_assembly=20				
+expertise_munition_artisan_dexterity_1	expertise																					general_assembly=10				
+expertise_munition_artisan_dexterity_2	expertise_munition_artisan_dexterity_1									expertise_munition_artisan_dexterity_1												general_assembly=20				
+expertise_munition_armorsmith_dexterity_1	expertise																					armor_assembly=20				
+expertise_munition_weaponsmith_insight_1	expertise																					expertise_complexity_decrease_weaponsmith=2				
+expertise_munition_artisan_hypothesis_1	expertise_munition_artisan_dexterity_2									expertise_munition_artisan_dexterity_2												expertise_experimentation_increase_artisan=6				
+expertise_munition_artisan_hypothesis_2	expertise_munition_artisan_hypothesis_1									expertise_munition_artisan_hypothesis_1												expertise_experimentation_increase_artisan=12				
+expertise_munition_armorsmith_insight_1	expertise																					expertise_complexity_decrease_armorsmith=2				
+expertise_munition_weaponsmith_hypothesis_1	expertise_munition_weaponsmith_dexterity_1									expertise_munition_weaponsmith_dexterity_1												expertise_experimentation_increase_weaponsmith=12				
+expertise_munition_resource_processing_1	expertise																					expertise_resource_quality_increase=2				
+expertise_munition_resource_processing_2	expertise_munition_resource_processing_1									expertise_munition_resource_processing_1												expertise_resource_quality_increase=4				
+expertise_munition_armorsmith_hypothesis_1	expertise_munition_armorsmith_dexterity_1									expertise_munition_armorsmith_dexterity_1												expertise_experimentation_increase_armorsmith=12				
+expertise_munition_weaponsmith_keen_understanding_1	expertise_munition_weaponsmith_insight_1									expertise_munition_weaponsmith_insight_1												expertise_complexity_decrease_weaponsmith=4				
+expertise_munition_resource_refinement_1	expertise_munition_resource_processing_1									expertise_munition_resource_processing_1												expertise_resource_quality_increase=2				
+expertise_munition_artisan_advanced_theory_1	expertise_munition_artisan_hypothesis_2									expertise_munition_artisan_hypothesis_2												general_experimentation=10				
+expertise_munition_armorsmith_keen_understanding_1	expertise_munition_armorsmith_insight_1									expertise_munition_armorsmith_insight_1												expertise_complexity_decrease_armorsmith=4				
+expertise_munition_weaponsmith_advanced_theory_1	expertise_munition_weaponsmith_hypothesis_1									expertise_munition_weaponsmith_hypothesis_1												weapon_experimentation=10				
 expertise_munition_weaponsmith_socket_bonus_1	expertise																						craftExpertiseSocketRetrofitter			
 expertise_munition_weaponsmith_attachment_upgrade_1	expertise																									
 expertise_munition_armorsmith_attachment_upgrade_1	expertise																					expertise_attachment_upgrade=1				
 expertise_munition_armorsmith_socket_bonus_1	expertise																						craftExpertiseSocketRetrofitter			
-expertise_munition_armorsmith_advanced_theory_1	expertise_munition_armorsmith_hypothesis_4									expertise_munition_armorsmith_hypothesis_4												armor_experimentation=10				
-expertise_engineering_droid_dexterity_1	expertise																					droid_assembly=5				
-expertise_engineering_droid_dexterity_2	expertise_engineering_droid_dexterity_1																					droid_assembly=5				
-expertise_engineering_droid_dexterity_3	expertise_engineering_droid_dexterity_2																					droid_assembly=5				
-expertise_engineering_droid_dexterity_4	expertise_engineering_droid_dexterity_3																					droid_assembly=5				
-expertise_engineering_artisan_dexterity_1	expertise																					general_assembly=5				
-expertise_engineering_artisan_dexterity_2	expertise_engineering_artisan_dexterity_1																					general_assembly=5				
-expertise_engineering_artisan_dexterity_3	expertise_engineering_artisan_dexterity_2																					general_assembly=5				
-expertise_engineering_artisan_dexterity_4	expertise_engineering_artisan_dexterity_3																					general_assembly=5				
+expertise_munition_armorsmith_advanced_theory_1	expertise_munition_armorsmith_hypothesis_1									expertise_munition_armorsmith_hypothesis_1												armor_experimentation=10				
+expertise_engineering_droid_dexterity_1	expertise																					droid_assembly=20				
+expertise_engineering_artisan_dexterity_1	expertise																					general_assembly=10				
+expertise_engineering_artisan_dexterity_2	expertise_engineering_artisan_dexterity_1									expertise_engineering_artisan_dexterity_1												general_assembly=20				
 expertise_engineering_flame_jet_1	expertise																						craftExpertiseFlameJetModule			
 expertise_engineering_electrical_shock_1	expertise																						craftExpertiseElectricalShockModule			
-expertise_engineering_droid_insight_1	expertise																					expertise_complexity_decrease_droid=1				
-expertise_engineering_droid_insight_2	expertise_engineering_droid_insight_1																					expertise_complexity_decrease_droid=1				
-expertise_engineering_artisan_hypothesis_1	expertise_engineering_artisan_dexterity_4									expertise_engineering_artisan_dexterity_4												expertise_experimentation_increase_artisan=3				
-expertise_engineering_artisan_hypothesis_2	expertise_engineering_artisan_hypothesis_1																					expertise_experimentation_increase_artisan=3				
-expertise_engineering_artisan_hypothesis_3	expertise_engineering_artisan_hypothesis_2																					expertise_experimentation_increase_artisan=3				
-expertise_engineering_artisan_hypothesis_4	expertise_engineering_artisan_hypothesis_3																					expertise_experimentation_increase_artisan=3				
-expertise_engineering_sticky_fuel_1	expertise_engineering_flame_jet_1									expertise_engineering_flame_jet_1												expertise_engineering_sticky_fuel=1				
-expertise_engineering_sticky_fuel_2	expertise_engineering_sticky_fuel_1																					expertise_engineering_sticky_fuel=1				
-expertise_engineering_varied_voltage_1	expertise_engineering_electrical_shock_1									expertise_engineering_electrical_shock_1												expertise_engineering_varied_voltage=1				
-expertise_engineering_varied_voltage_2	expertise_engineering_varied_voltage_1																					expertise_engineering_varied_voltage=1				
-expertise_engineering_droid_hypothesis_1	expertise_engineering_droid_dexterity_4									expertise_engineering_droid_dexterity_4												expertise_experimentation_increase_droid=3				
-expertise_engineering_droid_hypothesis_2	expertise_engineering_droid_hypothesis_1																					expertise_experimentation_increase_droid=3				
-expertise_engineering_droid_hypothesis_3	expertise_engineering_droid_hypothesis_2																					expertise_experimentation_increase_droid=3				
-expertise_engineering_droid_hypothesis_4	expertise_engineering_droid_hypothesis_3																					expertise_experimentation_increase_droid=3				
-expertise_engineering_resource_processing_1	expertise																					expertise_resource_quality_increase=1				
-expertise_engineering_resource_processing_2	expertise_engineering_resource_processing_1																					expertise_resource_quality_increase=1				
+expertise_engineering_droid_insight_1	expertise																					expertise_complexity_decrease_droid=2				
+expertise_engineering_artisan_hypothesis_1	expertise_engineering_artisan_dexterity_2									expertise_engineering_artisan_dexterity_2												expertise_experimentation_increase_artisan=6				
+expertise_engineering_artisan_hypothesis_2	expertise_engineering_artisan_hypothesis_1									expertise_engineering_artisan_hypothesis_1												expertise_experimentation_increase_artisan=12				
+expertise_engineering_sticky_fuel_1	expertise_engineering_flame_jet_1									expertise_engineering_flame_jet_1												expertise_engineering_sticky_fuel=2				
+expertise_engineering_varied_voltage_1	expertise_engineering_electrical_shock_1									expertise_engineering_electrical_shock_1												expertise_engineering_varied_voltage=2				
+expertise_engineering_droid_hypothesis_1	expertise_engineering_droid_dexterity_1									expertise_engineering_droid_dexterity_1												expertise_experimentation_increase_droid=12				
+expertise_engineering_resource_processing_1	expertise																					expertise_resource_quality_increase=2				
+expertise_engineering_resource_processing_2	expertise_engineering_resource_processing_1									expertise_engineering_resource_processing_1												expertise_resource_quality_increase=4				
 expertise_engineering_droideka_shield_1	expertise																						craftExpertiseDroidekaShieldModule			
 expertise_engineering_torturous_needle_1	expertise																						craftExpertiseTorturousNeedleModule			
-expertise_engineering_droid_keen_understanding_1	expertise_engineering_droid_insight_2									expertise_engineering_droid_insight_2												expertise_complexity_decrease_droid=2				
-expertise_engineering_droid_keen_understanding_2	expertise_engineering_droid_keen_understanding_1																					expertise_complexity_decrease_droid=2				
-expertise_engineering_resource_refinement_1	expertise_engineering_resource_processing_2									expertise_engineering_resource_processing_2												expertise_resource_quality_increase=1				
-expertise_engineering_resource_refinement_2	expertise_engineering_resource_refinement_1																					expertise_resource_quality_increase=1				
-expertise_engineering_artisan_advanced_theory_1	expertise_engineering_artisan_hypothesis_4									expertise_engineering_artisan_hypothesis_4												general_experimentation=10				
-expertise_engineering_shield_expansion_1	expertise_engineering_droideka_shield_1									expertise_engineering_droideka_shield_1												expertise_engineering_shield_expansion=1				
-expertise_engineering_shield_expansion_2	expertise_engineering_shield_expansion_1																					expertise_engineering_shield_expansion=1				
-expertise_engineering_noxious_spray_1	expertise_engineering_torturous_needle_1									expertise_engineering_torturous_needle_1												expertise_engineering_noxious_spray=1				
-expertise_engineering_noxious_spray_2	expertise_engineering_noxious_spray_1																					expertise_engineering_noxious_spray=1				
-expertise_engineering_droid_advanced_theory_1	expertise_engineering_droid_hypothesis_4									expertise_engineering_droid_hypothesis_4												droid_experimentation=10				
+expertise_engineering_droid_keen_understanding_1	expertise_engineering_droid_insight_1									expertise_engineering_droid_insight_1												expertise_complexity_decrease_droid=4				
+expertise_engineering_resource_refinement_1	expertise_engineering_resource_processing_1									expertise_engineering_resource_processing_1												expertise_resource_quality_increase=2				
+expertise_engineering_artisan_advanced_theory_1	expertise_engineering_artisan_hypothesis_2									expertise_engineering_artisan_hypothesis_2												general_experimentation=10				
+expertise_engineering_shield_expansion_1	expertise_engineering_droideka_shield_1									expertise_engineering_droideka_shield_1												expertise_engineering_shield_expansion=2				
+expertise_engineering_noxious_spray_1	expertise_engineering_torturous_needle_1									expertise_engineering_torturous_needle_1												expertise_engineering_noxious_spray=2				
+expertise_engineering_droid_advanced_theory_1	expertise_engineering_droid_hypothesis_1									expertise_engineering_droid_hypothesis_1												droid_experimentation=10				
 expertise_engineering_droid_schematic_1_1	expertise																						craftDroidExpertiseDroids			
 expertise_engineering_droid_schematic_2_1	expertise																						craftDroidExpertiseModules			
 expertise_engineering_weaponsmith_attachment_upgrade_1	expertise																					expertise_attachment_upgrade=1				
@@ -2604,31 +2493,14 @@ expertise_engineering_regenerative_plating_1	expertise																						craf
 expertise_engineering_battery_dump_1	expertise																						craftExpertiseBatteryDump			
 expertise_engineering_weaponsmith_advanced_theory_1																										
 expertise_engineering_weaponsmith_dexterity_1																										
-expertise_engineering_weaponsmith_dexterity_2																										
-expertise_engineering_weaponsmith_dexterity_3																										
-expertise_engineering_weaponsmith_dexterity_4																										
 expertise_engineering_weaponsmith_insight_1																										
-expertise_engineering_weaponsmith_insight_2																										
 expertise_engineering_weaponsmith_hypothesis_1																										
-expertise_engineering_weaponsmith_hypothesis_2																										
-expertise_engineering_weaponsmith_hypothesis_3																										
-expertise_engineering_weaponsmith_hypothesis_4																										
 expertise_engineering_weaponsmith_keen_understanding_1																										
-expertise_engineering_weaponsmith_keen_understanding_2																										
-expertise_cybernetic_dexterity_1	expertise																					cybernetic_assembly=5				
-expertise_cybernetic_dexterity_2	expertise_cybernetic_dexterity_1																					cybernetic_assembly=5				
-expertise_cybernetic_dexterity_3	expertise_cybernetic_dexterity_2																					cybernetic_assembly=5				
-expertise_cybernetic_dexterity_4	expertise_cybernetic_dexterity_3																					cybernetic_assembly=5				
-expertise_engineering_cybernetic_hypothesis_1	expertise_cybernetic_dexterity_4									expertise_cybernetic_dexterity_4												expertise_experimentation_increase_cybernetic=3				
-expertise_engineering_cybernetic_hypothesis_2	expertise_engineering_cybernetic_hypothesis_1																					expertise_experimentation_increase_cybernetic=3				
-expertise_engineering_cybernetic_hypothesis_3	expertise_engineering_cybernetic_hypothesis_2																					expertise_experimentation_increase_cybernetic=3				
-expertise_engineering_cybernetic_hypothesis_4	expertise_engineering_cybernetic_hypothesis_3																					expertise_experimentation_increase_cybernetic=3				
+expertise_cybernetic_dexterity_1	expertise																					cybernetic_assembly=20				
+expertise_engineering_cybernetic_hypothesis_1	expertise_cybernetic_dexterity_1									expertise_cybernetic_dexterity_1												expertise_experimentation_increase_cybernetic=12				
 expertise_engineering_cybernetic_s03_schematics_1	expertise																						craftCyberneticExpertiseS03			
-expertise_engineering_cybernetic_advanced_theory_1	expertise_engineering_cybernetic_hypothesis_4									expertise_engineering_cybernetic_hypothesis_4												cybernetic_experimentation=10				
-expertise_engineering_cybernetic_negative_effects_reduction_1	expertise																					expertise_cybernetic_negative_effects_reduction=5				
-expertise_engineering_cybernetic_negative_effects_reduction_2	expertise_engineering_cybernetic_negative_effects_reduction_1																					expertise_cybernetic_negative_effects_reduction=5				
-expertise_engineering_cybernetic_negative_effects_reduction_3	expertise_engineering_cybernetic_negative_effects_reduction_2																					expertise_cybernetic_negative_effects_reduction=5				
-expertise_engineering_cybernetic_negative_effects_reduction_4	expertise_engineering_cybernetic_negative_effects_reduction_3																					expertise_cybernetic_negative_effects_reduction=5				
+expertise_engineering_cybernetic_advanced_theory_1	expertise_engineering_cybernetic_hypothesis_1									expertise_engineering_cybernetic_hypothesis_1												cybernetic_experimentation=10				
+expertise_engineering_cybernetic_negative_effects_reduction_1	expertise																					expertise_cybernetic_negative_effects_reduction=20				
 expertise_bm_specialized_supplements_2	expertise_bm_specialized_supplements_1																									
 expertise_bm_beast_mastery_2	expertise_bm_beast_mastery_1																									
 expertise_bm_pet_tricks_1	expertise																									
@@ -2749,7 +2621,9 @@ costume_tusken_king	costume		0	0	0	0	0	0						0							costume_tusken_king				0	0
 costume_ugnaught	costume		0	0	0	0	0	0						0							costume_ugnaught				0	0
 costume_wampa	costume		0	0	0	0	0	0						0							costume_wampa				0	0
 costume_zozpheratu	costume		0	0	0	0	0	0						0							costume_zozpheratu				0	0
-class_chronicles	class																									
+costume_awing	costume		0	0	0	0	0	0													costume_awing				0	0
+costume_tie_fighter	costume		0	0	0	0	0	0													costume_tie_fighter				0	0
+class_chronicles	class		0	0	0	0	0	0																		
 class_chronicles_novice	class_chronicles		0	1	1	0	0	0				chronicles	0	50000								chronicles_max_tasks=6,chronicles_relic_quality=1			1	0
 class_chronicles_1	class_chronicles_novice		0	0	0	0	0	0		class_chronicles_novice		chronicles	30000	120000								chronicles_max_quest_shared=5			1	0
 class_chronicles_2	class_chronicles_1		0	0	0	0	0	0		class_chronicles_1		chronicles	70000	266000								chronicles_relic_mastery=1			1	0

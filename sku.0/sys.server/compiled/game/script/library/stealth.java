@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class stealth extends script.base_script
 {
-    public stealth()
-    {
-    }
     public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###.##");
     public static final int MAX_BUILDINGS_FOR_WILDNERNESS = 5;
     public static final int MIN_BLENDIN_CROWD_SIZE = 10;
@@ -34,7 +31,7 @@ public class stealth extends script.base_script
     public static final float MAX_CHANCE_TO_DETECT_HIDDEN = 99.0f;
     public static final float PASSIVE_DETECT_CHANCE = 20.0f;
     public static final float ACTIVE_DETECT_CHANCE = 50.0f;
-    public static final float MAX_HIDING_DETECT_SCORE = 220;
+    public static final float MAX_HIDING_DETECT_SCORE = 1000;
     public static final int HEP_UPKEEP_COST = 10;
     public static final String HEP_BASE_POWER = "basePower";
     public static final String HEP_EFFECTIVENESS = "effectiveness";
@@ -2782,6 +2779,7 @@ public class stealth extends script.base_script
         {
             decoyStealth(mobile);
         }
+			makeBeastInvisible(mobile, effectName);
     }
     public static boolean canPerformCamouflageSelf(obj_id player) throws InterruptedException
     {
@@ -3116,7 +3114,7 @@ public class stealth extends script.base_script
     {
         float camouflage = getEnhancedSkillStatisticModifierUncapped(player, "camouflage");
         camouflage += getEnhancedSkillStatisticModifierUncapped(player, "stealth");
-        float drainRatio = 10.0f;
+        float drainRatio = 9.0f;
         if (camouflage < 100.0f)
         {
             drainRatio = 7.91f - (0.1f / (0.1f + ((camouflage) / 100.0f)));

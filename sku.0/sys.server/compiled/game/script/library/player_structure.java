@@ -2,14 +2,10 @@ package script.library;
 
 import script.*;
 
-import java.util.StringTokenizer;
-import java.util.Vector;
+import java.util.*;
 
 public class player_structure extends script.base_script
 {
-    public player_structure()
-    {
-    }
     public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "special_sign";
     public static final String SCRIPT_TERMINAL_STRUCTURE = "terminal.terminal_structure";
@@ -116,7 +112,6 @@ public class player_structure extends script.base_script
     public static final float RATE_POWER_MIN = 1.0f;
     public static final float MERCHANT_SALES_MODIFIER = -0.2f;
     public static final int MIN_RESIDENCE_DURATION = 86400;
-    public static final int MAX_LOTS = 10;
     public static final int MAX_LIST_SIZE = 50;
     public static final int MAIL_WARNING_INTERVAL = 86400;
     public static final int TIME_TO_NEXT_PACKUP = 86400;
@@ -192,8 +187,8 @@ public class player_structure extends script.base_script
     public static final String SELFPOWERED_DEED = "object/tangible/veteran_reward/harvester.iff";
     public static final String SELFPOWERED_DEED_ELITE = "object/tangible/veteran_reward/harvester_elite.iff";
     public static final int MAX_BASE_COUNT = 3;
-    public static final int HARVESTER_MAX_EXTRACTION_RATE = 70;
-    public static final int HARVESTER_MAX_HOPPER_SIZE = 600000;
+    public static final int HARVESTER_MAX_EXTRACTION_RATE = 88;
+    public static final int HARVESTER_MAX_HOPPER_SIZE = 2000000;
     public static final int DESTROY_RESULT_SUCCESS = 0;
     public static final int DESTROY_RESULT_SUCCESS_SELFPOWERED = 1;
     public static final int DESTROY_RESULT_FAIL_COULD_NOT_CREATE_DEED = 2;
@@ -225,6 +220,7 @@ public class player_structure extends script.base_script
     public static final string_id SID_NO_CITY = new string_id("city/city", "no_city_during_packup");
     public static final string_id SID_GENERIC_CITY_PACKUP_ERROR = new string_id("city/city", "city_packup_generic_fail");
     public static final string_id SID_MAYOR_PROTECTED = new string_id("city/city", "city_packup_mayor_protected");
+    public static final String VAR_ADMIN_ALL_CHARACTERS_ON_ACCOUNT = "player_structure.admin_all_characters";
     public static obj_id createPlayerStructure(String template, obj_id owner, location loc, int rotation, dictionary deed_info) throws InterruptedException
     {
         if (template == null)
@@ -652,12 +648,10 @@ public class player_structure extends script.base_script
             int expertiseExtractionIncrease = getSkillStatisticModifier(owner, "expertise_harvester_collection_increase");
             int currentExtraction = deed_info.getInt("current_extraction");
             int maxExtraction = deed_info.getInt("max_extraction");
-            setObjVar(structure, "current_extraction", currentExtraction);
-            setObjVar(structure, "max_extraction", maxExtraction);
             if (expertiseExtractionIncrease > 0)
             {
-                currentExtraction += (int)(currentExtraction * expertiseExtractionIncrease / 100.0f);
-                maxExtraction += (int)(maxExtraction * expertiseExtractionIncrease / 100.0f);
+                currentExtraction += (int)(currentExtraction * (1.0f + expertiseExtractionIncrease / 100.0f));
+                maxExtraction += (int)(maxExtraction * (1.0f + expertiseExtractionIncrease / 100.0f));
             }
             if (currentExtraction > HARVESTER_MAX_EXTRACTION_RATE)
             {
@@ -667,6 +661,8 @@ public class player_structure extends script.base_script
             {
                 maxExtraction = HARVESTER_MAX_EXTRACTION_RATE;
             }
+			setObjVar(structure, "current_extraction", currentExtraction);
+			setObjVar(structure, "max_extraction", maxExtraction);
             setCurrentExtractionRate(structure, currentExtraction);
             setMaxExtractionRate(structure, maxExtraction);
         }
@@ -815,7 +811,7 @@ public class player_structure extends script.base_script
                     struct_lots = 1;
                 }
                 flagConverted(template, structure);
-                if ((getAccountNumLots(getPlayerObject(player)) + struct_lots) > MAX_LOTS)
+                if ((getAccountNumLots(getPlayerObject(player)) + struct_lots) > getMaxHousingLots())
                 {
                     String realStructureTemplate = template;
                     if (exists(structure))
@@ -1167,12 +1163,13 @@ public class player_structure extends script.base_script
             {
                 lots_needed = 1;
             }
-            if (lots > MAX_LOTS)
+            int max_lots = getMaxHousingLots();
+            if (lots > max_lots)
             {
                 sendSystemMessageProse(player, prose.getPackage(new string_id(STF_FILE, "not_enough_lots"), lots_needed));
                 return false;
             }
-            if ((lots + lots_needed) > MAX_LOTS)
+            if ((lots + lots_needed) > max_lots)
             {
                 if (!allowOverLotLimitIfPlayerHouse || (template.indexOf("object/building/player/player_house_") != 0)) {
                     sendSystemMessageProse(player, prose.getPackage(new string_id(STF_FILE, "not_enough_lots"), lots_needed));
@@ -1512,24 +1509,31 @@ public class player_structure extends script.base_script
             return null;
         }
         String[] fullEntryList = permissionsGetAllowed(structure);
-        Vector filteredEntryList = new Vector();
-        filteredEntryList.setSize(0);
+        List<String> cleanEntryList = new ArrayList<>();
 
-        for (String entryItemString : fullEntryList) {
-            if (!isIdValid(utils.stringToObjId(entryItemString))) {
-                if ((entryItemString.toLowerCase()).contains("guild:")) {
-                    if (findGuild(((entryItemString.substring(6)).toLowerCase()).trim()) > 0) {
-                        utils.addElement(filteredEntryList, entryItemString);
-                    }
-                } else {
-                    utils.addElement(filteredEntryList, entryItemString);
-                }
+        for(String entry : fullEntryList)
+        {
+            if(entry.startsWith("guild:"))
+            {
+                cleanEntryList.add("guild:"+entry.substring(6));
+                continue;
+            }
+            if(entry.startsWith("city:"))
+            {
+                cleanEntryList.add("city:"+entry.substring(5));
+                continue;
+            }
+            if(entry.startsWith("faction:"))
+            {
+                cleanEntryList.add("faction:"+entry.substring(8));
+                continue;
+            }
+            if(!entry.startsWith("account:")) // do not show account: entries to players
+            {
+                cleanEntryList.add(entry);
             }
         }
-        String[] returnList = new String[0];
-        returnList = new String[filteredEntryList.size()];
-        filteredEntryList.toArray(returnList);
-        return returnList;
+        return cleanEntryList.toArray(new String[0]);
     }
     public static String[] getCompleteEntryList(obj_id structure) throws InterruptedException
     {
@@ -1585,13 +1589,17 @@ public class player_structure extends script.base_script
     }
     public static boolean isNameOnAdminList(obj_id structure, String player_or_guild_name) throws InterruptedException
     {
-        String[] admin_list = getAdminListRaw(structure);
-        if (admin_list != null)
+        if(isAdminToAccountEnabled(structure))
         {
-            if (isNameOnRawList(admin_list, player_or_guild_name))
+            if(getPlayerStationId(getPlayerIdFromFirstName(player_or_guild_name)) == getPlayerStationId(getOwner(structure)))
             {
                 return true;
             }
+        }
+        String[] admin_list = getAdminListRaw(structure);
+        if (admin_list != null)
+        {
+            return isNameOnRawList(admin_list, player_or_guild_name);
         }
         return false;
     }
@@ -2812,7 +2820,7 @@ public class player_structure extends script.base_script
             return true;
         }
         String player_name = getPlayerName(player);
-        boolean admin = isAdmin(structure, player_name);
+        boolean admin = isAdmin(structure, player_name) || isAdminByAccountFlag(structure, player);
         if (!admin)
         {
             if (isOwner(structure, player))
@@ -2823,6 +2831,14 @@ public class player_structure extends script.base_script
             }
         }
         return admin;
+    }
+    public static boolean isAdminByAccountFlag(obj_id structure, obj_id player) throws InterruptedException
+    {
+        if(hasObjVar(structure, VAR_ADMIN_ALL_CHARACTERS_ON_ACCOUNT))
+        {
+            return (getPlayerStationId(getOwner(structure)) == getPlayerStationId(player));
+        }
+        return false;
     }
     public static boolean isVendor(obj_id structure, String player_name) throws InterruptedException
     {
@@ -3161,7 +3177,7 @@ public class player_structure extends script.base_script
                     if (guildId > 0) {
                         String guildAbbrev = guildGetAbbrev(guildId);
                         if ((guildAbbrev != null) && (!guildAbbrev.equals(""))) {
-                            converted_list.add("Guild:" + guildAbbrev);
+                            converted_list.add("Guild: " + guildAbbrev);
                         }
                     }
                 } else {
@@ -3254,8 +3270,10 @@ public class player_structure extends script.base_script
                     }
                 }
             }
-            if ((player_or_guild_name.toLowerCase()).contains("guild:"))
+            // Check adds of special access groups (guild:, city:, faction:)
+            if (isSpecialAccessPermissionGroup(player_or_guild_name))
             {
+                // Access groups cannot be added to the Admin List or a Hopper
                 if (objvar.equals(VAR_ADMIN_LIST) || objvar.equals(VAR_HOPPER_LIST))
                 {
                     if (verbose && isIdValid(admin))
@@ -3264,15 +3282,59 @@ public class player_structure extends script.base_script
                     }
                     return false;
                 }
-                if (findGuild(((player_or_guild_name.substring(6)).toLowerCase()).trim()) == 0)
+                // If adding a guild, make sure it exists
+                if(player_or_guild_name.contains("guild:"))
                 {
-                    if (verbose && isIdValid(admin))
+                    if (findGuild(((player_or_guild_name.substring(6)).toLowerCase()).trim()) == 0)
                     {
-                        sendSystemMessageProse(admin, prose.getPackage(new string_id(STF_FILE, "modify_list_invalid_guild"), (player_or_guild_name.substring(6)).trim()));
+                        if (verbose && isIdValid(admin))
+                        {
+                            sendSystemMessageProse(admin, prose.getPackage(new string_id(STF_FILE, "modify_list_invalid_guild"), (player_or_guild_name.substring(6)).trim()));
+                        }
+                        return false;
                     }
-                    return false;
+                }
+
+                // If adding a city, make sure it exists
+                if(player_or_guild_name.contains("city:"))
+                {
+                    if(findCityByName(player_or_guild_name.substring(5).toLowerCase().trim()) == 0)
+                    {
+                        if (verbose && isIdValid(admin))
+                        {
+                            sendSystemMessageTestingOnly(admin, "The City Name you entered is not valid.");
+                        }
+                        return false;
+                    }
+                }
+
+                // If adding a faction, make sure it's actually a faction
+                if(player_or_guild_name.contains("faction:"))
+                {
+                    if(!player_or_guild_name.equalsIgnoreCase("faction:imperial") &&
+                            !player_or_guild_name.equalsIgnoreCase("faction:rebel"))
+                    {
+                        if(verbose && isIdValid(admin))
+                        {
+                            sendSystemMessageTestingOnly(admin, "Invalid entry. You must enter either \"faction:imperial\" or \"faction:rebel\"");
+                        }
+                        return false;
+                    }
+                    else
+                    {
+                        // replace the value with the hash code for processing in SRC
+                        if(player_or_guild_name.toLowerCase().contains("imperial"))
+                        {
+                            player_or_guild_name = "faction:" + FACTION_HASH_IMPERIAL;
+                        }
+                        else
+                        {
+                            player_or_guild_name = "faction:" + FACTION_HASH_REBEL;
+                        }
+                    }
                 }
             }
+            // Just trying to add a regular name
             else 
             {
                 if (!isIdValid(utils.stringToObjId(player_or_guild_name)))
@@ -3288,6 +3350,7 @@ public class player_structure extends script.base_script
                     }
                 }
             }
+            
             switch (objvar) {
                 case VAR_ENTER_LIST:
                     permissionsAddAllowed(structure, player_or_guild_name);
@@ -3302,10 +3365,16 @@ public class player_structure extends script.base_script
                     hopperListAddName(structure, player_or_guild_name);
                     break;
             }
+            // Success message back to player
             if (verbose && isIdValid(admin))
             {
-                sendSystemMessageProse(admin, prose.getPackage(new string_id(STF_FILE, "player_added"), player_or_guild_name));
+                if(player_or_guild_name.contains("faction:"))
+                {
+                    player_or_guild_name = player_or_guild_name.contains(String.valueOf(FACTION_HASH_IMPERIAL)) ? "The Imperial Faction" : "The Rebel Faction";
+                }
+                sendListChangeMessage(admin, player_or_guild_name, true);
             }
+            
             if (objvar.equals(VAR_ADMIN_LIST))
             {
                 if (isBuilding(structure))
@@ -3341,8 +3410,21 @@ public class player_structure extends script.base_script
                 }
             }
         }
+        // We are REMOVING an entry from the list
         else 
         {
+            // need to do special handling for faction/account here because of how it's stored
+            if(player_or_guild_name.contains("faction:"))
+            {
+                if(player_or_guild_name.toLowerCase().contains("imperial"))
+                {
+                    player_or_guild_name = "faction:" + FACTION_HASH_IMPERIAL;
+                }
+                else
+                {
+                    player_or_guild_name = "faction:" + FACTION_HASH_REBEL;
+                }
+            }
             switch (objvar) {
                 case VAR_ENTER_LIST:
                     permissionsRemoveAllowed(structure, player_or_guild_name);
@@ -3359,7 +3441,12 @@ public class player_structure extends script.base_script
             }
             if (verbose && isIdValid(admin))
             {
-                sendSystemMessageProse(admin, prose.getPackage(new string_id(STF_FILE, "player_removed"), player_or_guild_name));
+                // reverse what we just did for displaying it back in a system message
+                if(player_or_guild_name.contains("faction:"))
+                {
+                    player_or_guild_name = player_or_guild_name.contains(String.valueOf(FACTION_HASH_IMPERIAL)) ? "The Imperial Faction" : "The Rebel Faction";
+                }
+                sendListChangeMessage(admin, player_or_guild_name, false);
             }
         }
         return true;
@@ -3548,7 +3635,7 @@ public class player_structure extends script.base_script
         {
             return false;
         }
-        if (amt < 1 || amt > 100000)
+        if (amt < 1 || amt > 1000000)
         {
             return false;
         }
@@ -3884,7 +3971,7 @@ public class player_structure extends script.base_script
                 setObjVar(deed, VAR_DEED_SURPLUS_POWER, power);
             }
         }
-        else 
+        else
         {
             if (isIdValid(containerForDeed) && getVolumeFree(containerForDeed) < 1 && bGetSelfPowered)
             {
@@ -6934,5 +7021,42 @@ public class player_structure extends script.base_script
             setObjVar(droid, "module_data.maint_list.ids", new_struct_list);
         }
         setObjVar(pcd, "module_data.maint_list.ids", new_struct_list);
+    }
+    public static void sendListChangeMessage(obj_id to, String type, boolean isAdd)
+    {
+        sendSystemMessageTestingOnly(to, type + (isAdd ? " was added to " : " was removed from ") + "the list successfully");
+    }
+
+    public static boolean isSpecialAccessPermissionGroup(String toCheck)
+    {
+        toCheck = toCheck.toLowerCase();
+        return toCheck.contains("guild:") || toCheck.contains("city:") || toCheck.contains("faction:");
+    }
+
+    public static boolean isAdminToAccountEnabled(obj_id structure) throws InterruptedException
+    {
+        return hasObjVar(structure, VAR_ADMIN_ALL_CHARACTERS_ON_ACCOUNT);
+    }
+
+    public static void addAccountToAdminList(obj_id structure, obj_id player) throws InterruptedException
+    {
+        if(!isIdValid(structure) || !isIdValid(player) || !isOwner(structure, player))
+        {
+            return;
+        }
+        setObjVar(structure, VAR_ADMIN_ALL_CHARACTERS_ON_ACCOUNT, getPlayerStationId(player));
+        permissionsAddAllowed(structure, "account:"+getPlayerStationId(player));
+        sendSystemMessageTestingOnly(player, "All characters on your account will now have entry and admin access to this structure. You can remove this access any time from the Structure Permissions menu.");
+    }
+
+    public static void removeAccountFromAdminList(obj_id structure, obj_id player) throws InterruptedException
+    {
+        if(!isIdValid(structure) || !isIdValid(player) || !isOwner(structure, player))
+        {
+            return;
+        }
+        removeObjVar(structure, VAR_ADMIN_ALL_CHARACTERS_ON_ACCOUNT);
+        permissionsRemoveAllowed(structure, "account:"+getPlayerStationId(player));
+        sendSystemMessageTestingOnly(player, "All characters on your account will no longer have entry or admin access to this structure. You will need to separately add your characters to the list if you wish for them to gain access.");
     }
 }

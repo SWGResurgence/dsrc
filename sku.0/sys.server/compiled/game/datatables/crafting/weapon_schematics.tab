@@ -1,45 +1,45 @@
 entry_type	schematic_name	schematic_description	crafting_script	items_per_container	crafting_type	slots	xp_type	volume	crafted_object_template	crafted_object_template_hash	complexity	xp	hit_points_low	hit_points_high	min_damage_low	min_damage_high	max_damage_low	max_damage_high	min_damage_low_cap	min_damage_high_cap	max_damage_low_cap	max_damage_high_cap	accuracy_low	accuracy_high	damage_type	elemental_type	elemental_value_low	elemental_value_high	attack_speed_low	attack_speed_high	tier_granted	wound_chance_low	wound_chance_high	special_attack_cost_low	special_attack_cost_high	min_range_distance	max_range_distance	slot_type	slot_optional	slot_name	slot_ingredient_name	slot_ingredient_count	slot_appearance	schematic_conversion	crc_schematic_name
-"e(weapon=0,slot=1)[weapon]"	s	s	s	i	"e(none=-1,weapon=1,lightsaber=2048)[none]"	i	"e(none=-1,crafting=0,weapon_crafting=1,melee_weapon_crafting=2,ranged_weapon_crafting=3,munition_weapon_crafting=4,jedi=5)[none]"	i[1]	s	h	i	i	i[1]	i[1]	i	i	i	i	i	i	i	i	i	i	"e(component=0,kinetic=1,energy=2)[component]"	"e(none=0,cold=64,heat=32,acid=128,electric=256)[none]"	i	i	i	i	i	i	i	i	i	i	i	"e(none=-1,resource=4,template=2,template_generic=5,schematic=6,schematic_generic=7)[none]"	b[0]	s	s	i	"e(none=0,scope=1,muzzle=2,stock=3)[none]"	s	h
-weapon	2h_sword_scythe		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	1	object/weapon/melee/2h_sword/2h_sword_scythe.iff	object/weapon/melee/2h_sword/2h_sword_scythe.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic	acid	12	35	100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/2h_sword_scythe.iff
+e(weapon=0,slot=1)[weapon]	s	s	s	i	e(none=-1,weapon=1,lightsaber=2048)[none]	i	e(none=-1,crafting=0,weapon_crafting=1,melee_weapon_crafting=2,ranged_weapon_crafting=3,munition_weapon_crafting=4,jedi=5)[none]	i[1]	s	h	i	i	i[1]	i[1]	i	i	i	i	i	i	i	i	i	i	e(component=0,kinetic=1,energy=2)[component]	e(none=0,cold=64,heat=32,acid=128,electric=256)[none]	i	i	i	i	i	i	i	i	i	i	i	e(none=-1,resource=4,template=2,template_generic=5,schematic=6,schematic_generic=7)[none]	b[0]	s	s	i	e(none=0,scope=1,muzzle=2,stock=3)[none]	s	h
+weapon	2h_sword_scythe		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	1	object/weapon/melee/2h_sword/2h_sword_scythe.iff	object/weapon/melee/2h_sword/2h_sword_scythe.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic	acid	12	35	100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/2h_sword_scythe.iff
 slot																																						resource	0	sword_core_jacket	steel_carbonite	60			
 slot																																						resource	0	grip	aluminum_phrik	30			
 slot																																						template	0	omnipotent_sword_core	object/tangible/component/weapon/geonosian_sword_core.iff	2			
-weapon	axe		systems.crafting.weapon.crafting_melee_artisan_weapon	25	weapon	3	crafting	1	object/weapon/melee/axe/axe_heavy_duty.iff	object/weapon/melee/axe/axe_heavy_duty.iff	8	42	800	1100	14	29	44	58	14	29	44	58	0	0	kinetic				100	100	1	1	1	100	100	0	4								object/draft_schematic/weapon/axe.iff
+weapon	axe		systems.crafting.weapon.crafting_melee_artisan_weapon	25	weapon	3	crafting	1	object/weapon/melee/axe/axe_heavy_duty.iff	object/weapon/melee/axe/axe_heavy_duty.iff	8	42	800	1100	14	29	44	58	14	29	44	58	0	0	kinetic				100	100	1	1	1	100	100	0	5								object/draft_schematic/weapon/axe.iff
 slot																																						resource	0	axe_head	metal	15			
 slot																																						resource	0	shaft	wood	20			
 slot																																						resource	0	axe_head_fastener	steel	6			
-weapon	axe_vibro		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	4	object/weapon/melee/axe/axe_vibroaxe.iff	object/weapon/melee/axe/axe_vibroaxe.iff	30	308	800	1100	229	458	687	916	229	458	687	916	0	0	kinetic				100	100	9	1	1	100	100	0	4								object/draft_schematic/weapon/axe_vibro.iff
+weapon	axe_vibro		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	4	object/weapon/melee/axe/axe_vibroaxe.iff	object/weapon/melee/axe/axe_vibroaxe.iff	30	308	800	1100	229	458	687	916	229	458	687	916	0	0	kinetic				100	100	9	1	1	100	100	0	5								object/draft_schematic/weapon/axe_vibro.iff
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	copper	24			
 slot																																						resource	0	axe_base	steel_ditanium	38			
 slot																																						template	0	vibration_generator_advanced	object/tangible/component/weapon/vibro_unit_advanced.iff	2			
-weapon	baton_gaderiffi		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/baton/baton_gaderiffi.iff	object/weapon/melee/baton/baton_gaderiffi.iff	26	214	800	1100	159	319	479	638	159	319	479	638	0	0	kinetic				100	100	7	1	1	100	100	0	4								object/draft_schematic/weapon/baton_gaderiffi.iff
+weapon	baton_gaderiffi		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/baton/baton_gaderiffi.iff	object/weapon/melee/baton/baton_gaderiffi.iff	26	214	800	1100	159	319	479	638	159	319	479	638	0	0	kinetic				100	100	7	1	1	100	100	0	5								object/draft_schematic/weapon/baton_gaderiffi.iff
 slot																																						resource	0	grip_unit	iron	20			
 slot																																						resource	0	reactive_striking_surface	metal	23			
 slot																																						resource	0	power_cell_brackets	metal	5			
 slot																																						template	0	reinforcement_core_advanced	object/tangible/component/weapon/reinforcement_core_advanced.iff	1			
-weapon	victor_baton_gaderiffi		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/baton/victor_baton_gaderiffi.iff	object/weapon/melee/baton/victor_baton_gaderiffi.iff	26	214	800	1100	159	319	479	638	159	319	479	638	0	0	kinetic				100	100	7	1	1	100	100	0	4								object/draft_schematic/weapon/victor_baton_gaderiffi.iff
+weapon	victor_baton_gaderiffi		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/baton/victor_baton_gaderiffi.iff	object/weapon/melee/baton/victor_baton_gaderiffi.iff	26	214	800	1100	159	319	479	638	159	319	479	638	0	0	kinetic				100	100	7	1	1	100	100	0	5								object/draft_schematic/weapon/victor_baton_gaderiffi.iff
 slot																																						resource	0	grip_unit	iron	65			
 slot																																						resource	0	reactive_striking_surface	metal	50			
 slot																																						resource	0	power_cell_brackets	metal	30			
 slot																																						template	0	reinforcement_core_advanced	object/tangible/component/weapon/reinforcement_core_advanced.iff	2			
-weapon	baton_stun		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	6	weapon_crafting	3	object/weapon/melee/baton/baton_stun.iff	object/weapon/melee/baton/baton_stun.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	energy	electric	14	35	100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/baton_stun.iff
+weapon	baton_stun		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	6	weapon_crafting	3	object/weapon/melee/baton/baton_stun.iff	object/weapon/melee/baton/baton_stun.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	energy	electric	14	35	100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/baton_stun.iff
 slot																																						resource	0	grip_unit	steel	18			
 slot																																						resource	0	conductive_strike_face	copper_polysteel	18			
 slot																																						resource	0	power_cell_brackets	metal	10			
 slot																																						resource	0	charge_accumulator	crystalline_byrothsis	6			
 slot																																						template	0	shock_pulsor	object/tangible/component/item/electronic_power_conditioner.iff	2			
 slot																																						template	0	reinforcement_core_advanced	object/tangible/component/weapon/reinforcement_core_advanced.iff	1			
-weapon	battleaxe		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_battleaxe.iff	object/weapon/melee/2h_sword/2h_sword_battleaxe.iff	8	60	800	1100	55	109	163	217	55	109	163	217	0	0	kinetic				100	100	3	1	1	100	100	0	4								object/draft_schematic/weapon/battleaxe.iff
+weapon	battleaxe		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_battleaxe.iff	object/weapon/melee/2h_sword/2h_sword_battleaxe.iff	8	60	800	1100	55	109	163	217	55	109	163	217	0	0	kinetic				100	100	3	1	1	100	100	0	5								object/draft_schematic/weapon/battleaxe.iff
 slot																																						resource	0	axe_head	iron	45			
 slot																																						resource	0	shaft	wood	35			
 slot																																						resource	0	axe_head_fastener	steel	8			
 slot																																						template	0	reinforcement_core	object/tangible/component/weapon/reinforcement_core.iff	1			
-weapon	battleaxe_quest		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_battleaxe_quest.iff	object/weapon/melee/2h_sword/2h_sword_battleaxe_quest.iff	8	60	800	1100	55	109	163	217	55	109	163	217	0	0	kinetic				100	100	3	1	1	100	100	0	4								object/draft_schematic/weapon/battleaxe_quest.iff
+weapon	battleaxe_quest		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_battleaxe_quest.iff	object/weapon/melee/2h_sword/2h_sword_battleaxe_quest.iff	8	60	800	1100	55	109	163	217	55	109	163	217	0	0	kinetic				100	100	3	1	1	100	100	0	5								object/draft_schematic/weapon/battleaxe_quest.iff
 slot																																						resource	0	axe_head	iron	35			
 slot																																						resource	0	shaft	wood	25			
 slot																																						resource	0	axe_head_fastener	steel	8			
 slot																																						template	0	reinforcement_core	object/tangible/component/weapon/reinforcement_core.iff	1			
-weapon	quest_battleaxe		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/2h_sword/quest_2h_sword_battleaxe.iff	object/weapon/melee/2h_sword/quest_2h_sword_battleaxe.iff	8	60	800	1100	55	109	163	217	55	109	163	217	0	0	kinetic				100	100	3	1	1	100	100	0	4								object/draft_schematic/weapon/quest_battleaxe.iff
+weapon	quest_battleaxe		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/2h_sword/quest_2h_sword_battleaxe.iff	object/weapon/melee/2h_sword/quest_2h_sword_battleaxe.iff	8	60	800	1100	55	109	163	217	55	109	163	217	0	0	kinetic				100	100	3	1	1	100	100	0	5								object/draft_schematic/weapon/quest_battleaxe.iff
 slot																																						resource	0	axe_head	iron	35			
 slot																																						resource	0	shaft	wood	25			
 slot																																						resource	0	axe_head_fastener	steel	8			
@@ -56,7 +56,7 @@ weapon	carbine_quest_smuggler_underslung		systems.crafting.weapon.crafting_blast
 slot																																						resource	0	frame_assembly	metal	12			
 slot																																						resource	0	receiver_assembly	chemical	6			
 slot																																						resource	0	grip_assembly	metal	3			
-weapon	cleaver		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_cleaver.iff	object/weapon/melee/2h_sword/2h_sword_cleaver.iff	21	120	800	1100	101	203	305	406	101	203	305	406	0	0	kinetic				100	100	5	1	1	100	100	0	4								object/draft_schematic/weapon/cleaver.iff
+weapon	cleaver		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_cleaver.iff	object/weapon/melee/2h_sword/2h_sword_cleaver.iff	21	120	800	1100	101	203	305	406	101	203	305	406	0	0	kinetic				100	100	5	1	1	100	100	0	5								object/draft_schematic/weapon/cleaver.iff
 slot																																						resource	0	sword_core_jacket	iron_colat	42			
 slot																																						resource	0	grip	metal	18			
 slot																																						template	0	jacketed_sword_core	object/tangible/component/weapon/sword_core.iff	2			
@@ -68,7 +68,7 @@ slot																																						resource	0	enhanced_cooling_mechanism	
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						resource	0	thermal_control_unit	ore_carbonate_alantium	30			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	executioners_hack		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	1	object/weapon/melee/2h_sword/2h_sword_blacksun_hack.iff	object/weapon/melee/2h_sword/2h_sword_blacksun_hack.iff	30	308	800	1100	229	458	687	916	229	458	687	916	0	0	kinetic				100	100	9	1	1	100	100	0	4								object/draft_schematic/weapon/executioners_hack.iff
+weapon	executioners_hack		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	1	object/weapon/melee/2h_sword/2h_sword_blacksun_hack.iff	object/weapon/melee/2h_sword/2h_sword_blacksun_hack.iff	30	308	800	1100	229	458	687	916	229	458	687	916	0	0	kinetic				100	100	9	1	1	100	100	0	5								object/draft_schematic/weapon/executioners_hack.iff
 slot																																						resource	0	sword_core_jacket	steel_carbonite	60			
 slot																																						resource	0	grip	aluminum_phrik	30			
 slot																																						template	0	omnipotent_sword_core	object/tangible/component/weapon/geonosian_sword_core.iff	2			
@@ -120,79 +120,79 @@ slot																																						template	0	ignition_pulse_generator	ob
 slot																																						resource	0	launch_tubes	steel	170			
 slot																																						template	0	shell_handling_unit	object/tangible/component/weapon/projectile_feed_mechanism_advanced.iff	3			
 slot																																						template	0	warheads	object/weapon/ranged/grenade/grenade_proton.iff	5			
-weapon	katana		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_katana.iff	object/weapon/melee/2h_sword/2h_sword_katana.iff	24	167	800	1100	159	319	479	638	159	319	479	638	0	0	kinetic				100	100	6	1	1	100	100	0	4								object/draft_schematic/weapon/katana.iff
+weapon	katana		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_katana.iff	object/weapon/melee/2h_sword/2h_sword_katana.iff	24	167	800	1100	159	319	479	638	159	319	479	638	0	0	kinetic				100	100	6	1	1	100	100	0	5								object/draft_schematic/weapon/katana.iff
 slot																																						resource	0	sword_core_jacket	steel	42			
 slot																																						resource	0	grip	petrochem_inert_polymer	12			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
-weapon	katana_quest		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_katana_quest.iff	object/weapon/melee/2h_sword/2h_sword_katana_quest.iff	24	167	800	1100	159	319	479	638	159	319	479	638	0	0	kinetic				100	100	6	1	1	100	100	0	4								object/draft_schematic/weapon/katana_quest.iff
+weapon	katana_quest		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_katana_quest.iff	object/weapon/melee/2h_sword/2h_sword_katana_quest.iff	24	167	800	1100	159	319	479	638	159	319	479	638	0	0	kinetic				100	100	6	1	1	100	100	0	5								object/draft_schematic/weapon/katana_quest.iff
 slot																																						resource	0	sword_core_jacket	steel	42			
 slot																																						resource	0	grip	petrochem_inert_polymer	12			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
-weapon	knife_stone		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	2	weapon_crafting	1	object/weapon/melee/knife/knife_stone.iff	object/weapon/melee/knife/knife_stone.iff	8	42	800	1100	14	29	44	58	14	29	44	58	0	0	kinetic				100	100	1	1	1	100	100	0	4								object/draft_schematic/weapon/knife_stone.iff
+weapon	knife_stone		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	2	weapon_crafting	1	object/weapon/melee/knife/knife_stone.iff	object/weapon/melee/knife/knife_stone.iff	8	42	800	1100	14	29	44	58	14	29	44	58	0	0	kinetic				100	100	1	1	1	100	100	0	5								object/draft_schematic/weapon/knife_stone.iff
 slot																																						resource	0	knife_blade	mineral	7			
 slot																																						resource	0	grip	bone	3			
-weapon	knife_janta		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	1	object/weapon/melee/knife/knife_janta.iff	object/weapon/melee/knife/knife_janta.iff	8	42	800	1100	14	29	44	58	14	29	44	58	0	0	kinetic				100	100	1	1	1	100	100	0	4								object/draft_schematic/weapon/knife_janta.iff
+weapon	knife_janta		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	1	object/weapon/melee/knife/knife_janta.iff	object/weapon/melee/knife/knife_janta.iff	8	42	800	1100	14	29	44	58	14	29	44	58	0	0	kinetic				100	100	1	1	1	100	100	0	5								object/draft_schematic/weapon/knife_janta.iff
 slot																																						resource	0	knife_blade	mineral	15			
 slot																																						resource	0	grip	bone	25			
 slot																																						resource	0	grip_cap	metal	20			
-weapon	knife_survival		systems.crafting.weapon.crafting_melee_artisan_weapon	25	weapon	4	crafting	1	object/weapon/melee/knife/knife_survival.iff	object/weapon/melee/knife/knife_survival.iff	8	42	800	1100	14	29	44	58	14	29	44	58	0	0	kinetic				100	100	1	1	1	100	100	0	4								object/draft_schematic/weapon/knife_survival.iff
+weapon	knife_survival		systems.crafting.weapon.crafting_melee_artisan_weapon	25	weapon	4	crafting	1	object/weapon/melee/knife/knife_survival.iff	object/weapon/melee/knife/knife_survival.iff	8	42	800	1100	14	29	44	58	14	29	44	58	0	0	kinetic				100	100	1	1	1	100	100	0	5								object/draft_schematic/weapon/knife_survival.iff
 slot																																						resource	0	knife_shaft	metal	6			
 slot																																						resource	0	cutting_edge	metal	4			
 slot																																						resource	0	grip_cap	metal	2			
 slot																																						resource	0	grip	mineral	2			
-weapon	knife_donkuwah		systems.crafting.weapon.crafting_melee_artisan_weapon	25	weapon	4	crafting	1	object/weapon/melee/knife/knife_donkuwah.iff	object/weapon/melee/knife/knife_donkuwah.iff	8	42	800	1100	14	29	44	58	14	29	44	58	0	0	kinetic				100	100	1	1	1	100	100	0	4								object/draft_schematic/weapon/knife_donkuwah.iff
+weapon	knife_donkuwah		systems.crafting.weapon.crafting_melee_artisan_weapon	25	weapon	4	crafting	1	object/weapon/melee/knife/knife_donkuwah.iff	object/weapon/melee/knife/knife_donkuwah.iff	8	42	800	1100	14	29	44	58	14	29	44	58	0	0	kinetic				100	100	1	1	1	100	100	0	5								object/draft_schematic/weapon/knife_donkuwah.iff
 slot																																						resource	0	knife_shaft	metal	6			
 slot																																						resource	0	cutting_edge	metal	4			
 slot																																						resource	0	grip_cap	metal	2			
 slot																																						resource	0	grip	mineral	2			
-weapon	knife_twilek_dagger		systems.crafting.weapon.crafting_melee_artisan_weapon	25	weapon	3	crafting	1	object/weapon/melee/knife/knife_dagger.iff	object/weapon/melee/knife/knife_dagger.iff	8	42	800	1100	14	29	44	58	14	29	44	58	0	0	kinetic				100	100	1	1	1	100	100	0	4								object/draft_schematic/weapon/knife_twilek_dagger.iff
+weapon	knife_twilek_dagger		systems.crafting.weapon.crafting_melee_artisan_weapon	25	weapon	3	crafting	1	object/weapon/melee/knife/knife_dagger.iff	object/weapon/melee/knife/knife_dagger.iff	8	42	800	1100	14	29	44	58	14	29	44	58	0	0	kinetic				100	100	1	1	1	100	100	0	5								object/draft_schematic/weapon/knife_twilek_dagger.iff
 slot																																						resource	0	knife_shaft	steel	9			
 slot																																						resource	0	cutting_edge	metal_ferrous	4			
 slot																																						resource	0	grip	petrochem_inert	7			
-weapon	knife_vibroblade		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	1	object/weapon/melee/knife/knife_vibroblade.iff	object/weapon/melee/knife/knife_vibroblade.iff	21	120	800	1100	101	203	305	406	101	203	305	406	0	0	energy				100	100	5	1	1	100	100	0	4								object/draft_schematic/weapon/knife_vibroblade.iff
+weapon	knife_vibroblade		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	1	object/weapon/melee/knife/knife_vibroblade.iff	object/weapon/melee/knife/knife_vibroblade.iff	21	120	800	1100	101	203	305	406	101	203	305	406	0	0	energy				100	100	5	1	1	100	100	0	5								object/draft_schematic/weapon/knife_vibroblade.iff
 slot																																						resource	0	knife_shaft	steel	18			
 slot																																						resource	0	cutting_edge	metal_ferrous	8			
 slot																																						resource	0	grip	metal	9			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	copper	5			
 slot																																						template	0	vibration_generator	object/tangible/component/weapon/vibro_unit.iff	1			
-weapon	knife_vibroblade_quest		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	2	object/weapon/melee/knife/knife_vibroblade_quest.iff	object/weapon/melee/knife/knife_vibroblade_quest.iff	21	120	800	1100	101	203	305	406	101	203	305	406	0	0	energy				100	100	5	1	1	100	100	0	4								object/draft_schematic/weapon/knife_vibroblade_quest.iff
+weapon	knife_vibroblade_quest		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	2	object/weapon/melee/knife/knife_vibroblade_quest.iff	object/weapon/melee/knife/knife_vibroblade_quest.iff	21	120	800	1100	101	203	305	406	101	203	305	406	0	0	energy				100	100	5	1	1	100	100	0	5								object/draft_schematic/weapon/knife_vibroblade_quest.iff
 slot																																						resource	0	knife_shaft	steel	18			
 slot																																						resource	0	cutting_edge	metal_ferrous	8			
 slot																																						resource	0	grip	metal	9			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	copper	5			
 slot																																						template	0	vibration_generator	object/tangible/component/weapon/vibro_unit.iff	1			
-weapon	knuckler_vibro		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	3	object/weapon/melee/special/vibroknuckler.iff	object/weapon/melee/special/vibroknuckler.iff	26	214	800	1100	159	319	479	638	159	319	479	638	0	0	energy				100	100	7	1	1	100	100	0	4								object/draft_schematic/weapon/knuckler_vibro.iff
+weapon	knuckler_vibro		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	3	object/weapon/melee/special/vibroknuckler.iff	object/weapon/melee/special/vibroknuckler.iff	26	214	800	1100	159	319	479	638	159	319	479	638	0	0	energy				100	100	7	1	1	100	100	0	5								object/draft_schematic/weapon/knuckler_vibro.iff
 slot																																						resource	0	grip_unit	metal_ferrous	12			
 slot																																						resource	0	strike_face	steel	8			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	metal	8			
 slot																																						resource	0	power_cell_socket	copper	4			
 slot																																						template	0	vibration_generator_advanced	object/tangible/component/weapon/vibro_unit_advanced.iff	1			
-weapon	lance_nightsister		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	1	object/weapon/melee/polearm/lance_nightsister.iff	object/weapon/melee/polearm/lance_nightsister.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	energy				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/lance_nightsister.iff
+weapon	lance_nightsister		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	1	object/weapon/melee/polearm/lance_nightsister.iff	object/weapon/melee/polearm/lance_nightsister.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	energy				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/lance_nightsister.iff
 slot																																						resource	0	lance_shaft	steel_quadranium	60			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	copper_polysteel	30			
 slot																																						resource	0	grip	metal	15			
 slot																																						template	0	vibration_generator	object/tangible/component/weapon/vibro_unit_nightsister.iff	2			
-weapon	lance_vibro		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	1	object/weapon/melee/polearm/lance_vibrolance.iff	object/weapon/melee/polearm/lance_vibrolance.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	energy				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/lance_vibro.iff
+weapon	lance_vibro		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	1	object/weapon/melee/polearm/lance_vibrolance.iff	object/weapon/melee/polearm/lance_vibrolance.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	energy				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/lance_vibro.iff
 slot																																						resource	0	lance_shaft	steel_ditanium	38			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	copper_polysteel	17			
 slot																																						resource	0	grip	metal	6			
 slot																																						template	0	vibration_generator_advanced	object/tangible/component/weapon/vibro_unit_advanced.iff	2			
-weapon	lance_vibro_controller_fp		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	5	object/weapon/melee/polearm/lance_controllerfp.iff	object/weapon/melee/polearm/lance_controllerfp.iff	26	214	800	1100	159	319	479	638	159	319	479	638	0	0	energy				100	100	7	1	1	100	100	0	4								object/draft_schematic/weapon/lance_vibro_controller_fp.iff
+weapon	lance_vibro_controller_fp		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	5	object/weapon/melee/polearm/lance_controllerfp.iff	object/weapon/melee/polearm/lance_controllerfp.iff	26	214	800	1100	159	319	479	638	159	319	479	638	0	0	energy				100	100	7	1	1	100	100	0	5								object/draft_schematic/weapon/lance_vibro_controller_fp.iff
 slot																																						resource	0	staff_shaft	metal	27			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	metal_ferrous	17			
 slot																																						template	0	power_circuits	object/tangible/component/item/electronic_control_unit.iff	1			
 slot																																						template	0	vibration_generator_advanced	object/tangible/component/weapon/vibro_unit_advanced.iff	1			
-weapon	lance_vibro_nightsister		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	5	object/weapon/melee/polearm/lance_controllerfp_nightsister.iff	object/weapon/melee/polearm/lance_controllerfp_nightsister.iff	30	308	800	1100	229	458	687	916	229	458	687	916	0	0	energy				100	100	9	1	1	100	100	0	4								object/draft_schematic/weapon/lance_vibro_nightsister.iff
+weapon	lance_vibro_nightsister		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	5	object/weapon/melee/polearm/lance_controllerfp_nightsister.iff	object/weapon/melee/polearm/lance_controllerfp_nightsister.iff	30	308	800	1100	229	458	687	916	229	458	687	916	0	0	energy				100	100	9	1	1	100	100	0	5								object/draft_schematic/weapon/lance_vibro_nightsister.iff
 slot																																						resource	0	staff_shaft	metal	35			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	metal_ferrous	25			
 slot																																						template	0	power_circuits	object/tangible/component/item/electronic_control_unit.iff	1			
 slot																																						template	0	vibration_generator_advanced	object/tangible/component/weapon/vibro_unit_advanced.iff	2			
-weapon	maul		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_maul.iff	object/weapon/melee/2h_sword/2h_sword_maul.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/maul.iff
+weapon	maul		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_maul.iff	object/weapon/melee/2h_sword/2h_sword_maul.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/maul.iff
 slot																																						resource	0	grip_unit	metal	40			
 slot																																						resource	0	reactive_striking_surface	iron_kammris	75			
 slot																																						resource	0	power_cell_brackets	copper	24			
 slot																																						template	0	reinforcement_core_advanced	object/tangible/component/weapon/reinforcement_core_advanced.iff	1			
-weapon	quest_maul		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/2h_sword/quest_2h_sword_maul.iff	object/weapon/melee/2h_sword/quest_2h_sword_maul.iff	36	450	800	1100	334	667	1000	1333	334	667	1000	1333	0	0	kinetic				100	100	12	1	1	100	100	0	4								object/draft_schematic/weapon/quest_maul.iff
+weapon	quest_maul		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/2h_sword/quest_2h_sword_maul.iff	object/weapon/melee/2h_sword/quest_2h_sword_maul.iff	36	450	800	1100	334	667	1000	1333	334	667	1000	1333	0	0	kinetic				100	100	12	1	1	100	100	0	5								object/draft_schematic/weapon/quest_maul.iff
 slot																																						resource	0	grip_unit	metal	75			
 slot																																						resource	0	reactive_striking_surface	iron_kammris	125			
 slot																																						resource	0	power_cell_brackets	copper	75			
@@ -336,13 +336,13 @@ slot																																						resource	0	receiver_assembly	metal_fer
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	2			
 slot																																						template	0	barrel_pistol_projectile_advanced	object/tangible/component/weapon/projectile_pistol_barrel_advanced.iff	1			
-weapon	poleaxe_vibro		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	1	object/weapon/melee/polearm/polearm_vibro_axe.iff	object/weapon/melee/polearm/polearm_vibro_axe.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	energy				100	100	10	1	1	100	100	0	4								object/draft_schematic/weapon/poleaxe_vibro.iff
+weapon	poleaxe_vibro		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	1	object/weapon/melee/polearm/polearm_vibro_axe.iff	object/weapon/melee/polearm/polearm_vibro_axe.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	energy				100	100	10	1	1	100	100	0	5								object/draft_schematic/weapon/poleaxe_vibro.iff
 slot																																						resource	0	lance_shaft	steel_ditanium	55			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	copper	25			
 slot																																						resource	0	grip	metal_nonferrous	15			
 slot																																						template	0	vibration_generator_advanced	object/tangible/component/weapon/vibro_unit_advanced.iff	3			
 slot																																						resource	0	axe_head	steel_duralloy	15			
-weapon	razor_knuckler		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	1	object/weapon/melee/special/blacksun_razor.iff	object/weapon/melee/special/blacksun_razor.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	energy				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/razor_knuckler.iff
+weapon	razor_knuckler		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	1	object/weapon/melee/special/blacksun_razor.iff	object/weapon/melee/special/blacksun_razor.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	energy				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/razor_knuckler.iff
 slot																																						resource	0	grip_unit	metal_ferrous	12			
 slot																																						resource	0	strike_face	steel	8			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	metal	8			
@@ -552,43 +552,43 @@ slot																																						resource	0	grip_assembly	aluminum_dura
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
 slot																																						template	0	power_supply	object/tangible/component/weapon/geonosian_power_cube_base.iff	2			
-weapon	staff		systems.crafting.weapon.crafting_staff_artisan_weapon	25	weapon	1	crafting	3	object/weapon/melee/polearm/lance_staff_wood_s1.iff	object/weapon/melee/polearm/lance_staff_wood_s1.iff	8	42	800	1100	14	29	44	58	14	29	44	58	0	0	kinetic				100	100	1	1	1	100	100	0	4								object/draft_schematic/weapon/staff.iff
+weapon	staff		systems.crafting.weapon.crafting_staff_artisan_weapon	25	weapon	1	crafting	3	object/weapon/melee/polearm/lance_staff_wood_s1.iff	object/weapon/melee/polearm/lance_staff_wood_s1.iff	8	42	800	1100	14	29	44	58	14	29	44	58	0	0	kinetic				100	100	1	1	1	100	100	0	5								object/draft_schematic/weapon/staff.iff
 slot																																						resource	0	staff_shaft	wood	16			
-weapon	staff_janta		systems.crafting.weapon.crafting_staff_artisan_weapon	25	weapon	3	crafting	3	object/weapon/melee/polearm/lance_staff_janta.iff	object/weapon/melee/polearm/lance_staff_janta.iff	8	60	800	1100	55	109	163	217	55	109	163	217	0	0	kinetic				100	100	3	1	1	100	100	0	4								object/draft_schematic/weapon/staff_janta.iff
+weapon	staff_janta		systems.crafting.weapon.crafting_staff_artisan_weapon	25	weapon	3	crafting	3	object/weapon/melee/polearm/lance_staff_janta.iff	object/weapon/melee/polearm/lance_staff_janta.iff	8	60	800	1100	55	109	163	217	55	109	163	217	0	0	kinetic				100	100	3	1	1	100	100	0	5								object/draft_schematic/weapon/staff_janta.iff
 slot																																						resource	0	staff_shaft	wood	15			
 slot																																						resource	0	flex_core	metal	10			
 slot																																						resource	0	impact_face	metal_ferrous	5			
-weapon	staff_metal		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/polearm/lance_staff_metal.iff	object/weapon/melee/polearm/lance_staff_metal.iff	16	85	800	1100	78	156	234	311	78	156	234	311	0	0	kinetic				100	100	4	1	1	100	100	0	4								object/draft_schematic/weapon/staff_metal.iff
+weapon	staff_metal		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	4	object/weapon/melee/polearm/lance_staff_metal.iff	object/weapon/melee/polearm/lance_staff_metal.iff	16	85	800	1100	78	156	234	311	78	156	234	311	0	0	kinetic				100	100	4	1	1	100	100	0	5								object/draft_schematic/weapon/staff_metal.iff
 slot																																						resource	0	staff_shaft	metal	15			
 slot																																						resource	0	flex_core	metal	10			
 slot																																						resource	0	balance_tabs	mineral	14			
 slot																																						resource	0	impact_face	metal	3			
-weapon	staff_reinforced		systems.crafting.weapon.crafting_staff_artisan_weapon	25	weapon	4	crafting	3	object/weapon/melee/polearm/lance_staff_wood_s2.iff	object/weapon/melee/polearm/lance_staff_wood_s2.iff	8	60	800	1100	55	109	163	217	55	109	163	217	0	0	kinetic				100	100	3	1	1	100	100	0	4								object/draft_schematic/weapon/staff_reinforced.iff
+weapon	staff_reinforced		systems.crafting.weapon.crafting_staff_artisan_weapon	25	weapon	4	crafting	3	object/weapon/melee/polearm/lance_staff_wood_s2.iff	object/weapon/melee/polearm/lance_staff_wood_s2.iff	8	60	800	1100	55	109	163	217	55	109	163	217	0	0	kinetic				100	100	3	1	1	100	100	0	5								object/draft_schematic/weapon/staff_reinforced.iff
 slot																																						resource	0	staff_shaft	wood	15			
 slot																																						resource	0	flex_core	metal	10			
 slot																																						resource	0	balance_tabs	mineral	10			
 slot																																						resource	0	impact_face	metal_ferrous	5			
-weapon	sword		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	2	object/weapon/melee/sword/sword_01.iff	object/weapon/melee/sword/sword_01.iff	8	60	800	1100	55	109	163	217	55	109	163	217	0	0	kinetic				100	100	3	1	1	100	100	0	4								object/draft_schematic/weapon/sword.iff
+weapon	sword		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	2	object/weapon/melee/sword/sword_01.iff	object/weapon/melee/sword/sword_01.iff	8	60	800	1100	55	109	163	217	55	109	163	217	0	0	kinetic				100	100	3	1	1	100	100	0	5								object/draft_schematic/weapon/sword.iff
 slot																																						resource	0	sword_core_jacket	metal	18			
 slot																																						resource	0	grip	petrochem_inert	5			
 slot																																						template	0	jacketed_sword_core	object/tangible/component/weapon/sword_core.iff	1			
-weapon	sword_rantok		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	2	object/weapon/melee/sword/sword_rantok.iff	object/weapon/melee/sword/sword_rantok.iff	28	261	800	1100	195	389	583	777	195	389	583	777	0	0	kinetic				100	100	8	1	1	100	100	0	4								object/draft_schematic/weapon/sword_rantok.iff
+weapon	sword_rantok		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	2	object/weapon/melee/sword/sword_rantok.iff	object/weapon/melee/sword/sword_rantok.iff	28	261	800	1100	195	389	583	777	195	389	583	777	0	0	kinetic				100	100	8	1	1	100	100	0	5								object/draft_schematic/weapon/sword_rantok.iff
 slot																																						resource	0	sword_core_jacket	metal	45			
 slot																																						resource	0	grip	petrochem_inert	60			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
-weapon	sword_nyax		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	2	object/weapon/melee/sword/sword_nyax.iff	object/weapon/melee/sword/sword_nyax.iff	28	261	800	1100	195	389	583	777	195	389	583	777	0	0	kinetic				100	100	8	1	1	100	100	0	4								object/draft_schematic/weapon/sword_nyax.iff
+weapon	sword_nyax		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	2	object/weapon/melee/sword/sword_nyax.iff	object/weapon/melee/sword/sword_nyax.iff	28	261	800	1100	195	389	583	777	195	389	583	777	0	0	kinetic				100	100	8	1	1	100	100	0	5								object/draft_schematic/weapon/sword_nyax.iff
 slot																																						resource	0	sword_core_jacket	metal	30			
 slot																																						resource	0	grip	petrochem_inert	10			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
-weapon	sword_curved		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_02.iff	object/weapon/melee/sword/sword_02.iff	26	214	800	1100	159	319	479	638	159	319	479	638	0	0	kinetic				100	100	7	1	1	100	100	0	4								object/draft_schematic/weapon/sword_curved.iff
+weapon	sword_curved		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_02.iff	object/weapon/melee/sword/sword_02.iff	26	214	800	1100	159	319	479	638	159	319	479	638	0	0	kinetic				100	100	7	1	1	100	100	0	5								object/draft_schematic/weapon/sword_curved.iff
 slot																																						resource	0	sword_core_jacket	steel	34			
 slot																																						resource	0	grip	petrochem_inert_polymer	12			
 slot																																						template	0	jacketed_sword_core	object/tangible/component/weapon/sword_core.iff	1			
-weapon	sword_curved_nyax		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_curved_nyax.iff	object/weapon/melee/sword/sword_curved_nyax.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	kinetic				100	100	10	1	1	100	100	0	4								object/draft_schematic/weapon/sword_curved_nyax.iff
+weapon	sword_curved_nyax		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_curved_nyax.iff	object/weapon/melee/sword/sword_curved_nyax.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	kinetic				100	100	10	1	1	100	100	0	5								object/draft_schematic/weapon/sword_curved_nyax.iff
 slot																																						resource	0	sword_core_jacket	steel	50			
 slot																																						resource	0	grip	petrochem_inert_polymer	22			
 slot																																						template	0	jacketed_sword_core	object/tangible/component/weapon/sword_core.iff	2			
-weapon	sword_ryyk_blade		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_blade_ryyk.iff	object/weapon/melee/sword/sword_blade_ryyk.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/sword_ryyk_blade.iff
+weapon	sword_ryyk_blade		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_blade_ryyk.iff	object/weapon/melee/sword/sword_blade_ryyk.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/sword_ryyk_blade.iff
 slot																																						resource	0	sword_core_jacket	iron	42			
 slot																																						resource	0	grip	petrochem_inert_polymer	12			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
@@ -701,15 +701,15 @@ slot																																						resource	0	bore	metal	15
 weapon	component/sword_core_geo		systems.crafting.weapon.component.crafting_blade_vibro_component	25	weapon	2	weapon_crafting	1	object/tangible/component/weapon/geonosian_sword_core.iff	object/tangible/component/weapon/geonosian_sword_core.iff	5	25	30	600																															object/draft_schematic/weapon/component/sword_core_geo.iff
 slot																																						resource	0	sword_core	steel_neutronium	50			
 slot																																						template	0	power_supply	object/tangible/component/weapon/geonosian_power_cube_base.iff	1			
-weapon	2h_sword_kashyyk		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_kashyyk.iff	object/weapon/melee/2h_sword/2h_sword_kashyyk.iff	28	261	800	1100	195	389	583	777	195	389	583	777	0	0	kinetic				100	100	8	1	1	100	100	0	4								object/draft_schematic/weapon/2h_sword_kashyyk.iff
+weapon	2h_sword_kashyyk		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_kashyyk.iff	object/weapon/melee/2h_sword/2h_sword_kashyyk.iff	28	261	800	1100	195	389	583	777	195	389	583	777	0	0	kinetic				100	100	8	1	1	100	100	0	5								object/draft_schematic/weapon/2h_sword_kashyyk.iff
 slot																																						resource	0	sword_core_jacket	steel	42			
 slot																																						resource	0	grip	petrochem_inert_polymer	12			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
-weapon	2h_sword_sith		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_sith.iff	object/weapon/melee/2h_sword/2h_sword_sith.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic	cold	12	35	100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/2h_sword_sith.iff
+weapon	2h_sword_sith		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	4	object/weapon/melee/2h_sword/2h_sword_sith.iff	object/weapon/melee/2h_sword/2h_sword_sith.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic	cold	12	35	100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/2h_sword_sith.iff
 slot																																						resource	0	sword_core_jacket	steel	42			
 slot																																						resource	0	grip	petrochem_inert_polymer	12			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
-weapon	blasterfist		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	3	object/weapon/melee/special/blasterfist.iff	object/weapon/melee/special/blasterfist.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	energy	heat	8	35	100	100	10	1	1	100	100	0	4								object/draft_schematic/weapon/blasterfist.iff
+weapon	blasterfist		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	3	object/weapon/melee/special/blasterfist.iff	object/weapon/melee/special/blasterfist.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	energy	heat	8	35	100	100	10	1	1	100	100	0	5								object/draft_schematic/weapon/blasterfist.iff
 slot																																						resource	0	grip_unit	metal_ferrous	12			
 slot																																						resource	0	strike_face	steel	8			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
@@ -763,28 +763,28 @@ slot																																						resource	0	receiver_assembly	copper_pl
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	cartridge_feed_unit_advanced	object/tangible/component/weapon/projectile_feed_mechanism_advanced.iff	3			
 slot																																						template	0	barrel_rifle_projectile_advanced	object/tangible/component/weapon/projectile_rifle_barrel_advanced.iff	1			
-weapon	massassiknuckler		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	1	object/weapon/melee/special/massassiknuckler.iff	object/weapon/melee/special/massassiknuckler.iff	26	214	800	1100	159	319	479	638	159	319	479	638	0	0	energy				100	100	7	1	1	100	100	0	4								object/draft_schematic/weapon/massassiknuckler.iff
+weapon	massassiknuckler		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	1	object/weapon/melee/special/massassiknuckler.iff	object/weapon/melee/special/massassiknuckler.iff	26	214	800	1100	159	319	479	638	159	319	479	638	0	0	energy				100	100	7	1	1	100	100	0	5								object/draft_schematic/weapon/massassiknuckler.iff
 slot																																						resource	0	grip_unit	metal_ferrous	12			
 slot																																						resource	0	strike_face	steel	8			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	metal	8			
 slot																																						resource	0	power_cell_socket	copper	4			
 slot																																						template	0	vibration_generator_advanced	object/tangible/component/weapon/vibro_unit_advanced.iff	1			
-weapon	lance_kaminoan		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	5	object/weapon/melee/polearm/lance_kaminoan.iff	object/weapon/melee/polearm/lance_kaminoan.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/lance_kaminoan.iff
+weapon	lance_kaminoan		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	5	object/weapon/melee/polearm/lance_kaminoan.iff	object/weapon/melee/polearm/lance_kaminoan.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/lance_kaminoan.iff
 slot																																						resource	0	balance_tabs	mineral	14			
 slot																																						resource	0	grip	metal	25			
 slot																																						resource	0	staff_shaft	metal	65			
-weapon	lance_massassi		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	4	object/weapon/melee/polearm/lance_massassi.iff	object/weapon/melee/polearm/lance_massassi.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/lance_massassi.iff
+weapon	lance_massassi		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	4	object/weapon/melee/polearm/lance_massassi.iff	object/weapon/melee/polearm/lance_massassi.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/lance_massassi.iff
 slot																																						resource	0	staff_shaft	metal	15			
 slot																																						resource	0	flex_core	metal	10			
 slot																																						resource	0	balance_tabs	mineral	14			
 slot																																						resource	0	impact_face	metal	3			
-weapon	lance_shock		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	5	weapon_crafting	1	object/weapon/melee/polearm/lance_shock.iff	object/weapon/melee/polearm/lance_shock.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	energy	electric	12	35	100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/lance_shock.iff
+weapon	lance_shock		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	5	weapon_crafting	1	object/weapon/melee/polearm/lance_shock.iff	object/weapon/melee/polearm/lance_shock.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	energy	electric	12	35	100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/lance_shock.iff
 slot																																						resource	0	lance_shaft	steel_ditanium	38			
 slot																																						template	0	shock_pulsor	object/tangible/component/item/electronic_power_conditioner.iff	2			
 slot																																						template	0	reinforcement_core_advanced	object/tangible/component/weapon/reinforcement_core_advanced.iff	1			
 slot																																						resource	0	grip	metal	6			
 slot																																						template	0	vibration_generator_advanced	object/tangible/component/weapon/vibro_unit_advanced.iff	2			
-weapon	lance_cryo		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	1	object/weapon/melee/polearm/lance_cryo.iff	object/weapon/melee/polearm/lance_cryo.iff	30	308	800	1100	229	458	687	915	229	458	687	915	0	0	kinetic	cold	8	30	100	100	9	1	1	100	100	0	4								object/draft_schematic/weapon/lance_cryo.iff
+weapon	lance_cryo		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	1	object/weapon/melee/polearm/lance_cryo.iff	object/weapon/melee/polearm/lance_cryo.iff	30	308	800	1100	229	458	687	915	229	458	687	915	0	0	kinetic	cold	8	30	100	100	9	1	1	100	100	0	5								object/draft_schematic/weapon/lance_cryo.iff
 slot																																						resource	0	lance_shaft	steel_ditanium	38			
 slot																																						template	0	reinforcement_core_advanced	object/tangible/component/weapon/reinforcement_core_advanced.iff	3			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	copper_polysteel	17			
@@ -831,12 +831,12 @@ slot																																						resource	0	receiver_assembly	iron_plum
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	2			
 slot																																						template	0	barrel_pistol_blaster_advanced	object/tangible/component/weapon/blaster_pistol_barrel_advanced.iff	1			
-weapon	polearm_electric		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	1	object/weapon/melee/polearm/polearm_lance_electric_polearm.iff	object/weapon/melee/polearm/polearm_lance_electric_polearm.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	kinetic	electric	8	35	100	100	10	1	1	100	100	0	4								object/draft_schematic/weapon/polearm_electric.iff
+weapon	polearm_electric		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	1	object/weapon/melee/polearm/polearm_lance_electric_polearm.iff	object/weapon/melee/polearm/polearm_lance_electric_polearm.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	kinetic	electric	8	35	100	100	10	1	1	100	100	0	5								object/draft_schematic/weapon/polearm_electric.iff
 slot																																						resource	0	lance_shaft	steel_ditanium	38			
 slot																																						template	0	shock_pulsor	object/tangible/component/item/electronic_power_conditioner.iff	2			
 slot																																						template	0	reinforcement_core_advanced	object/tangible/component/weapon/reinforcement_core_advanced.iff	1			
 slot																																						resource	0	grip	metal	6			
-weapon	polearm_kashyyk_bladestick		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	4	object/weapon/melee/polearm/lance_kashyyk.iff	object/weapon/melee/polearm/lance_kashyyk.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/polearm_kashyyk_bladestick.iff
+weapon	polearm_kashyyk_bladestick		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	4	object/weapon/melee/polearm/lance_kashyyk.iff	object/weapon/melee/polearm/lance_kashyyk.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/polearm_kashyyk_bladestick.iff
 slot																																						resource	0	staff_shaft	metal	15			
 slot																																						resource	0	flex_core	metal	10			
 slot																																						resource	0	balance_tabs	mineral	14			
@@ -875,23 +875,23 @@ slot																																						resource	0	enhanced_cooling_mechanism	
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						resource	0	thermal_control_unit	ore_carbonate_alantium	30			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	sword_acid		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_acid.iff	object/weapon/melee/sword/sword_acid.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic	acid	12	35	100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/sword_acid.iff
+weapon	sword_acid		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_acid.iff	object/weapon/melee/sword/sword_acid.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic	acid	12	35	100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/sword_acid.iff
 slot																																						resource	0	sword_core_jacket	steel	34			
 slot																																						resource	0	grip	petrochem_inert_polymer	12			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
-weapon	sword_junti_mace		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_mace_junti.iff	object/weapon/melee/sword/sword_mace_junti.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/sword_junti_mace.iff
+weapon	sword_junti_mace		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_mace_junti.iff	object/weapon/melee/sword/sword_mace_junti.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/sword_junti_mace.iff
 slot																																						resource	0	sword_core_jacket	steel	34			
 slot																																						resource	0	grip	petrochem_inert_polymer	12			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
-weapon	sword_marauder		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_marauder.iff	object/weapon/melee/sword/sword_marauder.iff	30	308	800	1100	229	458	687	915	229	458	687	915	0	0	kinetic				100	100	9	1	1	100	100	0	4								object/draft_schematic/weapon/sword_marauder.iff
+weapon	sword_marauder		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_marauder.iff	object/weapon/melee/sword/sword_marauder.iff	30	308	800	1100	229	458	687	915	229	458	687	915	0	0	kinetic				100	100	9	1	1	100	100	0	5								object/draft_schematic/weapon/sword_marauder.iff
 slot																																						resource	0	sword_core_jacket	steel	34			
 slot																																						resource	0	grip	petrochem_inert_polymer	12			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
-weapon	sword_massassi		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_massassi.iff	object/weapon/melee/sword/sword_massassi.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/sword_massassi.iff
+weapon	sword_massassi		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_massassi.iff	object/weapon/melee/sword/sword_massassi.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/sword_massassi.iff
 slot																																						resource	0	sword_core_jacket	steel	34			
 slot																																						resource	0	grip	petrochem_inert_polymer	12			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
-weapon	sword_rsf		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_rsf.iff	object/weapon/melee/sword/sword_rsf.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	kinetic				100	100	10	1	1	100	100	0	4								object/draft_schematic/weapon/sword_rsf.iff
+weapon	sword_rsf		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_rsf.iff	object/weapon/melee/sword/sword_rsf.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	kinetic				100	100	10	1	1	100	100	0	5								object/draft_schematic/weapon/sword_rsf.iff
 slot																																						resource	0	sword_core_jacket	steel	34			
 slot																																						resource	0	grip	petrochem_inert_polymer	12			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
@@ -949,7 +949,7 @@ slot																																						resource	0	shock_buffer	petrochem_iner
 slot																																						resource	0	grip_assembly	metal	15			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	knife_naktra_crystal		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	6	weapon_crafting	3	object/weapon/melee/knife/ep3/knife_naktra_crystal.iff	object/weapon/melee/knife/ep3/knife_naktra_crystal.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	4							object/draft_schematic/weapon/appearance/weapon_appearance_knife_naktra_crystal.iff	object/draft_schematic/weapon/knife_naktra_crystal.iff
+weapon	knife_naktra_crystal		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	6	weapon_crafting	3	object/weapon/melee/knife/ep3/knife_naktra_crystal.iff	object/weapon/melee/knife/ep3/knife_naktra_crystal.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5							object/draft_schematic/weapon/appearance/weapon_appearance_knife_naktra_crystal.iff	object/draft_schematic/weapon/knife_naktra_crystal.iff
 slot																																						resource	0	sword_core_jacket	iron	42			
 slot																																						template_generic	0	naktra_crystal1	object/tangible/loot/quest/naktra_crystal.iff	1			
 slot																																						template_generic	0	naktra_crystal2	object/tangible/loot/quest/naktra_crystal.iff	1			
@@ -980,11 +980,11 @@ slot																																						resource	0	receiver_assembly	steel	25
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	knife_trando_skinner		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/knife/ep3/knife_trando_skinner.iff	object/weapon/melee/knife/ep3/knife_trando_skinner.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	kinetic				100	100	10	1	1	100	100	0	4								object/draft_schematic/weapon/knife_trando_skinner.iff
+weapon	knife_trando_skinner		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/knife/ep3/knife_trando_skinner.iff	object/weapon/melee/knife/ep3/knife_trando_skinner.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	kinetic				100	100	10	1	1	100	100	0	5								object/draft_schematic/weapon/knife_trando_skinner.iff
 slot																																						resource	0	sword_core_jacket	iron	42			
 slot																																						resource	0	grip	petrochem_inert_polymer	12			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
-weapon	lance_trando		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/polearm/ep3/lance_trando.iff	object/weapon/melee/polearm/ep3/lance_trando.iff	30	308	800	1100	229	458	687	915	229	458	687	915	0	0	kinetic				100	100	9	1	1	100	100	0	4								object/draft_schematic/weapon/lance_trando.iff
+weapon	lance_trando		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/polearm/ep3/lance_trando.iff	object/weapon/melee/polearm/ep3/lance_trando.iff	30	308	800	1100	229	458	687	915	229	458	687	915	0	0	kinetic				100	100	9	1	1	100	100	0	5								object/draft_schematic/weapon/lance_trando.iff
 slot																																						resource	0	lance_shaft	steel_ditanium	38			
 slot																																						resource	0	balance_tabs	copper_polysteel	17			
 slot																																						resource	0	grip	metal	6			
@@ -1024,11 +1024,11 @@ slot																																						resource	0	receiver_assembly	steel	25
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	sword_wookiee		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/sword/ep3/sword_wookiee.iff	object/weapon/melee/sword/ep3/sword_wookiee.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/sword_wookiee.iff
+weapon	sword_wookiee		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/sword/ep3/sword_wookiee.iff	object/weapon/melee/sword/ep3/sword_wookiee.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/sword_wookiee.iff
 slot																																						resource	0	sword_core_jacket	steel	34			
 slot																																						resource	0	grip	petrochem_inert_polymer	12			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
-weapon	wookiee_knuckler		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	3	object/weapon/melee/special/ep3/wookiee_knuckler.iff	object/weapon/melee/special/ep3/wookiee_knuckler.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic	cold	12	35	100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/wookiee_knuckler.iff
+weapon	wookiee_knuckler		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	5	weapon_crafting	3	object/weapon/melee/special/ep3/wookiee_knuckler.iff	object/weapon/melee/special/ep3/wookiee_knuckler.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic	cold	12	35	100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/wookiee_knuckler.iff
 slot																																						resource	0	grip_unit	metal_ferrous	12			
 slot																																						resource	0	strike_face	steel	8			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	metal	8			
@@ -1040,7 +1040,7 @@ slot																																						resource	0	receiver_assembly	steel	25
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	loot_blackbane		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/knife/ep3_loot_blackbane.iff	object/weapon/melee/knife/ep3_loot_blackbane.iff	30	308	800	1100	229	458	687	915	229	458	687	915	0	0	kinetic				100	100	9	1	1	100	100	0	4								object/draft_schematic/weapon/loot_blackbane.iff
+weapon	loot_blackbane		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/knife/ep3_loot_blackbane.iff	object/weapon/melee/knife/ep3_loot_blackbane.iff	30	308	800	1100	229	458	687	915	229	458	687	915	0	0	kinetic				100	100	9	1	1	100	100	0	5								object/draft_schematic/weapon/loot_blackbane.iff
 slot																																						resource	0	staff_shaft	metal	15			
 slot																																						resource	0	flex_core	metal	10			
 slot																																						resource	0	balance_tabs	mineral	14			
@@ -1093,12 +1093,12 @@ slot																																						resource	0	receiver_assembly	steel	25
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	loot_eventide		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/sword/ep3_loot_eventide.iff	object/weapon/melee/sword/ep3_loot_eventide.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	kinetic				100	100	10	1	1	100	100	0	4								object/draft_schematic/weapon/loot_eventide.iff
+weapon	loot_eventide		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/sword/ep3_loot_eventide.iff	object/weapon/melee/sword/ep3_loot_eventide.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	kinetic				100	100	10	1	1	100	100	0	5								object/draft_schematic/weapon/loot_eventide.iff
 slot																																						resource	0	staff_shaft	metal	15			
 slot																																						resource	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
 slot																																						resource	0	balance_tabs	mineral	14			
 slot																																						resource	0	impact_face	metal	3			
-weapon	loot_executer		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/2h_sword/ep3_loot_executer.iff	object/weapon/melee/2h_sword/ep3_loot_executer.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/loot_executer.iff
+weapon	loot_executer		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/2h_sword/ep3_loot_executer.iff	object/weapon/melee/2h_sword/ep3_loot_executer.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/loot_executer.iff
 slot																																						resource	0	staff_shaft	metal	15			
 slot																																						resource	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
 slot																																						resource	0	balance_tabs	mineral	14			
@@ -1115,7 +1115,7 @@ slot																																						resource	0	receiver_assembly	steel	25
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	loot_heartstriker		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/special/ep3_loot_heartstriker.iff	object/weapon/melee/special/ep3_loot_heartstriker.iff	30	308	800	1100	229	458	687	915	229	458	687	915	0	0	kinetic				100	100	9	1	1	100	100	0	4								object/draft_schematic/weapon/loot_heartstriker.iff
+weapon	loot_heartstriker		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/special/ep3_loot_heartstriker.iff	object/weapon/melee/special/ep3_loot_heartstriker.iff	30	308	800	1100	229	458	687	915	229	458	687	915	0	0	kinetic				100	100	9	1	1	100	100	0	5								object/draft_schematic/weapon/loot_heartstriker.iff
 slot																																						resource	0	staff_shaft	metal	15			
 slot																																						resource	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
 slot																																						resource	0	balance_tabs	mineral	14			
@@ -1126,7 +1126,7 @@ slot																																						resource	0	receiver_assembly	steel	25
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	loot_lifeblood		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/2h_sword/ep3_loot_lifeblood.iff	object/weapon/melee/2h_sword/ep3_loot_lifeblood.iff	30	308	800	1100	229	458	687	915	229	458	687	915	0	0	kinetic				100	100	9	1	1	100	100	0	4								object/draft_schematic/weapon/loot_lifeblood.iff
+weapon	loot_lifeblood		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/2h_sword/ep3_loot_lifeblood.iff	object/weapon/melee/2h_sword/ep3_loot_lifeblood.iff	30	308	800	1100	229	458	687	915	229	458	687	915	0	0	kinetic				100	100	9	1	1	100	100	0	5								object/draft_schematic/weapon/loot_lifeblood.iff
 slot																																						resource	0	staff_shaft	metal	15			
 slot																																						resource	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
 slot																																						resource	0	balance_tabs	mineral	14			
@@ -1143,7 +1143,7 @@ slot																																						resource	0	receiver_assembly	steel	25
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	loot_necrosis		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/special/ep3_loot_necrosis.iff	object/weapon/melee/special/ep3_loot_necrosis.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/loot_necrosis.iff
+weapon	loot_necrosis		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/special/ep3_loot_necrosis.iff	object/weapon/melee/special/ep3_loot_necrosis.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/loot_necrosis.iff
 slot																																						resource	0	staff_shaft	metal	15			
 slot																																						resource	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
 slot																																						resource	0	balance_tabs	mineral	14			
@@ -1154,12 +1154,12 @@ slot																																						resource	0	receiver_assembly	steel	25
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	loot_pestilence		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/polearm/ep3_loot_pestilence.iff	object/weapon/melee/polearm/ep3_loot_pestilence.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	kinetic				100	100	10	1	1	100	100	0	4								object/draft_schematic/weapon/loot_pestilence.iff
+weapon	loot_pestilence		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/polearm/ep3_loot_pestilence.iff	object/weapon/melee/polearm/ep3_loot_pestilence.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	kinetic				100	100	10	1	1	100	100	0	5								object/draft_schematic/weapon/loot_pestilence.iff
 slot																																						resource	0	staff_shaft	metal	15			
 slot																																						resource	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
 slot																																						resource	0	balance_tabs	mineral	14			
 slot																																						resource	0	impact_face	metal	3			
-weapon	loot_poisonspike		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/polearm/ep3_loot_poisonspike.iff	object/weapon/melee/polearm/ep3_loot_poisonspike.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/loot_poisonspike.iff
+weapon	loot_poisonspike		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/polearm/ep3_loot_poisonspike.iff	object/weapon/melee/polearm/ep3_loot_poisonspike.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/loot_poisonspike.iff
 slot																																						resource	0	staff_shaft	metal	15			
 slot																																						resource	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
 slot																																						resource	0	balance_tabs	mineral	14			
@@ -1194,7 +1194,7 @@ slot																																						resource	0	receiver_assembly	steel	25
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	loot_ripper		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/sword/ep3_loot_ripper.iff	object/weapon/melee/sword/ep3_loot_ripper.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/loot_ripper.iff
+weapon	loot_ripper		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/sword/ep3_loot_ripper.iff	object/weapon/melee/sword/ep3_loot_ripper.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/loot_ripper.iff
 slot																																						resource	0	staff_shaft	metal	15			
 slot																																						resource	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
 slot																																						resource	0	balance_tabs	mineral	14			
@@ -1205,7 +1205,7 @@ slot																																						resource	0	receiver_assembly	steel	25
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	loot_sickle		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/2h_sword/ep3_loot_sickle.iff	object/weapon/melee/2h_sword/ep3_loot_sickle.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	kinetic				100	100	10	1	1	100	100	0	4								object/draft_schematic/weapon/loot_sickle.iff
+weapon	loot_sickle		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/2h_sword/ep3_loot_sickle.iff	object/weapon/melee/2h_sword/ep3_loot_sickle.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	kinetic				100	100	10	1	1	100	100	0	5								object/draft_schematic/weapon/loot_sickle.iff
 slot																																						resource	0	staff_shaft	metal	15			
 slot																																						resource	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
 slot																																						resource	0	balance_tabs	mineral	14			
@@ -1216,12 +1216,12 @@ slot																																						resource	0	receiver_assembly	steel	25
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	loot_soulstinger		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/special/ep3_loot_soulstinger.iff	object/weapon/melee/special/ep3_loot_soulstinger.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	energy				100	100	10	1	1	100	100	0	4								object/draft_schematic/weapon/loot_soulstinger.iff
+weapon	loot_soulstinger		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/special/ep3_loot_soulstinger.iff	object/weapon/melee/special/ep3_loot_soulstinger.iff	32	355	800	1100	263	527	791	1054	263	527	791	1054	0	0	energy				100	100	10	1	1	100	100	0	5								object/draft_schematic/weapon/loot_soulstinger.iff
 slot																																						resource	0	staff_shaft	metal	15			
 slot																																						resource	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
 slot																																						resource	0	balance_tabs	mineral	14			
 slot																																						resource	0	impact_face	metal	3			
-weapon	loot_strike		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/polearm/ep3_loot_strike.iff	object/weapon/melee/polearm/ep3_loot_strike.iff	30	308	800	1100	229	458	687	915	229	458	687	915	0	0	kinetic				100	100	9	1	1	100	100	0	4								object/draft_schematic/weapon/loot_strike.iff
+weapon	loot_strike		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	3	object/weapon/melee/polearm/ep3_loot_strike.iff	object/weapon/melee/polearm/ep3_loot_strike.iff	30	308	800	1100	229	458	687	915	229	458	687	915	0	0	kinetic				100	100	9	1	1	100	100	0	5								object/draft_schematic/weapon/loot_strike.iff
 slot																																						resource	0	staff_shaft	metal	15			
 slot																																						resource	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
 slot																																						resource	0	balance_tabs	mineral	14			
@@ -1232,23 +1232,23 @@ slot																																						resource	0	receiver_assembly	steel	25
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	2h_sword_avatar_wke_toothpick		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	1	object/weapon/melee/2h_sword/2h_sword_avatar_wke_toothpick.iff	object/weapon/melee/2h_sword/2h_sword_avatar_wke_toothpick.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/2h_sword_avatar_wke_toothpick.iff
+weapon	2h_sword_avatar_wke_toothpick		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	1	object/weapon/melee/2h_sword/2h_sword_avatar_wke_toothpick.iff	object/weapon/melee/2h_sword/2h_sword_avatar_wke_toothpick.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/2h_sword_avatar_wke_toothpick.iff
 slot																																						resource	0	sword_core_jacket	steel_carbonite	60			
 slot																																						resource	0	grip	aluminum_phrik	30			
 slot																																						template	0	omnipotent_sword_core	object/tangible/component/weapon/geonosian_sword_core.iff	2			
-weapon	baton_avatar_trando_stun_stick		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	6	weapon_crafting	3	object/weapon/melee/baton/baton_avatar_trando_stun_stick.iff	object/weapon/melee/baton/baton_avatar_trando_stun_stick.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	energy	electric	14	35	100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/baton_avatar_trando_stun_stick.iff
+weapon	baton_avatar_trando_stun_stick		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	6	weapon_crafting	3	object/weapon/melee/baton/baton_avatar_trando_stun_stick.iff	object/weapon/melee/baton/baton_avatar_trando_stun_stick.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	energy	electric	14	35	100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/baton_avatar_trando_stun_stick.iff
 slot																																						resource	0	grip_unit	steel	18			
 slot																																						resource	0	conductive_strike_face	copper_polysteel	18			
 slot																																						resource	0	power_cell_brackets	metal	10			
 slot																																						resource	0	charge_accumulator	crystalline_byrothsis	6			
 slot																																						template	0	shock_pulsor	object/tangible/component/item/electronic_power_conditioner.iff	2			
 slot																																						template	0	reinforcement_core_advanced	object/tangible/component/weapon/reinforcement_core_advanced.iff	1			
-weapon	lance_avatar_wke_heartlance		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	5	object/weapon/melee/polearm/lance_avatar_wke_heartlance.iff	object/weapon/melee/polearm/lance_avatar_wke_heartlance.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	energy				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/lance_avatar_wke_heartlance.iff
+weapon	lance_avatar_wke_heartlance		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	4	weapon_crafting	5	object/weapon/melee/polearm/lance_avatar_wke_heartlance.iff	object/weapon/melee/polearm/lance_avatar_wke_heartlance.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	energy				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/lance_avatar_wke_heartlance.iff
 slot																																						resource	0	staff_shaft	metal	35			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	metal_ferrous	25			
 slot																																						template	0	power_circuits	object/tangible/component/item/electronic_control_unit.iff	1			
 slot																																						template	0	vibration_generator_advanced	object/tangible/component/weapon/vibro_unit_advanced.iff	2			
-weapon	sword_avatar_wke_spiritblade		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_avatar_wke_spiritblade.iff	object/weapon/melee/sword/sword_avatar_wke_spiritblade.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	4								object/draft_schematic/weapon/sword_avatar_wke_spiritblade.iff
+weapon	sword_avatar_wke_spiritblade		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	3	weapon_crafting	3	object/weapon/melee/sword/sword_avatar_wke_spiritblade.iff	object/weapon/melee/sword/sword_avatar_wke_spiritblade.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5								object/draft_schematic/weapon/sword_avatar_wke_spiritblade.iff
 slot																																						resource	0	sword_core_jacket	iron	42			
 slot																																						resource	0	grip	petrochem_inert_polymer	12			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	1			
@@ -1322,17 +1322,17 @@ slot																																						resource	0	receiver_assembly	metal_fer
 slot																																						resource	0	grip_assembly	metal	10			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	1			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	2h_sword_obsidian		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	1	object/weapon/melee/2h_sword/som_2h_sword_obsidian.iff	object/weapon/melee/2h_sword/som_2h_sword_obsidian.iff	36	450	800	1100	334	667	1000	1333	334	667	1000	1333	0	0	kinetic				100	100	12	1	1	100	100	0	4							object/draft_schematic/weapon/appearance/weapon_appearance_2h_sword_obsidian.iff	object/draft_schematic/weapon/2h_sword_obsidian.iff
+weapon	2h_sword_obsidian		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	1	object/weapon/melee/2h_sword/som_2h_sword_obsidian.iff	object/weapon/melee/2h_sword/som_2h_sword_obsidian.iff	36	450	800	1100	334	667	1000	1333	334	667	1000	1333	0	0	kinetic				100	100	12	1	1	100	100	0	5							object/draft_schematic/weapon/appearance/weapon_appearance_2h_sword_obsidian.iff	object/draft_schematic/weapon/2h_sword_obsidian.iff
 slot																																						resource	0	sword_core_jacket	steel_carbonite	120			
 slot																																						resource	0	grip	aluminum_linksteel	60			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	3			
 slot																																						template	0	advanced_core	object/tangible/component/weapon/mustafar/2h_obsid_sword_core.iff	1			
-weapon	sword_bandit		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	1	object/weapon/melee/sword/som_sword_mustafar_bandit.iff	object/weapon/melee/sword/som_sword_mustafar_bandit.iff	36	450	800	1100	334	667	1000	1333	334	667	1000	1333	0	0	kinetic				100	100	12	1	1	100	100	0	4							object/draft_schematic/weapon/appearance/weapon_appearance_sword_bandit.iff	object/draft_schematic/weapon/sword_bandit.iff
+weapon	sword_bandit		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	1	object/weapon/melee/sword/som_sword_mustafar_bandit.iff	object/weapon/melee/sword/som_sword_mustafar_bandit.iff	36	450	800	1100	334	667	1000	1333	334	667	1000	1333	0	0	kinetic				100	100	12	1	1	100	100	0	5							object/draft_schematic/weapon/appearance/weapon_appearance_sword_bandit.iff	object/draft_schematic/weapon/sword_bandit.iff
 slot																																						resource	0	sword_core_jacket	steel_neutronium	120			
 slot																																						resource	0	grip	aluminum_titanium	60			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	3			
 slot																																						template	0	advanced_core	object/tangible/component/weapon/mustafar/1h_bandit_sword_core.iff	1			
-weapon	2h_sword_tulrus		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	1	object/weapon/melee/2h_sword/som_2h_sword_tulrus.iff	object/weapon/melee/2h_sword/som_2h_sword_tulrus.iff	36	450	800	1100	334	667	1000	1333	334	667	1000	1333	0	0	kinetic				100	100	12	1	1	100	100	0	4							object/draft_schematic/weapon/appearance/weapon_appearance_2h_sword_tulrus.iff	object/draft_schematic/weapon/2h_sword_tulrus.iff
+weapon	2h_sword_tulrus		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	1	object/weapon/melee/2h_sword/som_2h_sword_tulrus.iff	object/weapon/melee/2h_sword/som_2h_sword_tulrus.iff	36	450	800	1100	334	667	1000	1333	334	667	1000	1333	0	0	kinetic				100	100	12	1	1	100	100	0	5							object/draft_schematic/weapon/appearance/weapon_appearance_2h_sword_tulrus.iff	object/draft_schematic/weapon/2h_sword_tulrus.iff
 slot																																						resource	0	sword_core_jacket	steel_duralloy	120			
 slot																																						resource	0	grip	iron_colat	55			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	3			
@@ -1358,13 +1358,13 @@ slot																																						resource	0	grip_assembly	aluminum_phri
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	2			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
 slot																																						template	0	advanced_core	object/tangible/component/weapon/mustafar/pistol_coil_ion.iff	1			
-weapon	lance_obsidian		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	5	weapon_crafting	1	object/weapon/melee/polearm/som_lance_obsidian.iff	object/weapon/melee/polearm/som_lance_obsidian.iff	36	450	800	1100	334	667	1000	1333	334	667	1000	1333	0	0	kinetic				100	100	12	1	1	100	100	0	4							object/draft_schematic/weapon/appearance/weapon_appearance_lance_obsidian.iff	object/draft_schematic/weapon/lance_obsidian.iff
+weapon	lance_obsidian		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	5	weapon_crafting	1	object/weapon/melee/polearm/som_lance_obsidian.iff	object/weapon/melee/polearm/som_lance_obsidian.iff	36	450	800	1100	334	667	1000	1333	334	667	1000	1333	0	0	kinetic				100	100	12	1	1	100	100	0	5							object/draft_schematic/weapon/appearance/weapon_appearance_lance_obsidian.iff	object/draft_schematic/weapon/lance_obsidian.iff
 slot																																						resource	0	lance_shaft	steel_carbonite	50			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	copper_polysteel	25			
 slot																																						resource	0	grip	iron	12			
 slot																																						template	0	vibration_generator_advanced	object/tangible/component/weapon/vibro_unit_advanced.iff	2			
 slot																																						template	0	advanced_core	object/tangible/component/weapon/mustafar/obsid_lance_core.iff	1			
-weapon	lance_xandank		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	5	weapon_crafting	1	object/weapon/melee/polearm/som_lance_xandank.iff	object/weapon/melee/polearm/som_lance_xandank.iff	36	450	800	1100	334	667	1000	1333	334	667	1000	1333	0	0	kinetic				100	100	12	1	1	100	100	0	4							object/draft_schematic/weapon/appearance/weapon_appearance_lance_xandank.iff	object/draft_schematic/weapon/lance_xandank.iff
+weapon	lance_xandank		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	5	weapon_crafting	1	object/weapon/melee/polearm/som_lance_xandank.iff	object/weapon/melee/polearm/som_lance_xandank.iff	36	450	800	1100	334	667	1000	1333	334	667	1000	1333	0	0	kinetic				100	100	12	1	1	100	100	0	5							object/draft_schematic/weapon/appearance/weapon_appearance_lance_xandank.iff	object/draft_schematic/weapon/lance_xandank.iff
 slot																																						resource	0	lance_shaft	steel_ditanium	50			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	copper_mythra	25			
 slot																																						resource	0	grip	iron	12			
@@ -1401,7 +1401,7 @@ slot																																						resource	0	grip_assembly	metal	25
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
 slot																																						template	0	advanced_core	object/tangible/component/weapon/mustafar/rifle_coil_dist.iff	1			
-weapon	sword_obsidian		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	1	object/weapon/melee/sword/som_sword_obsidian.iff	object/weapon/melee/sword/som_sword_obsidian.iff	36	450	800	1100	334	667	1000	1333	334	667	1000	1333	0	0	kinetic				100	100	12	1	1	100	100	0	4							object/draft_schematic/weapon/appearance/weapon_appearance_sword_obsidian.iff	object/draft_schematic/weapon/sword_obsidian.iff
+weapon	sword_obsidian		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	1	object/weapon/melee/sword/som_sword_obsidian.iff	object/weapon/melee/sword/som_sword_obsidian.iff	36	450	800	1100	334	667	1000	1333	334	667	1000	1333	0	0	kinetic				100	100	12	1	1	100	100	0	5							object/draft_schematic/weapon/appearance/weapon_appearance_sword_obsidian.iff	object/draft_schematic/weapon/sword_obsidian.iff
 slot																																						resource	0	sword_core_jacket	steel_carbonite	75			
 slot																																						resource	0	grip	petrochem_inert_polymer	35			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	3			
@@ -1508,7 +1508,7 @@ slot																																						resource	0	receiver_assembly	aluminum_
 slot																																						resource	0	grip_assembly	petrochem_inert_polymer	28			
 slot																																						template	0	cartridge_feed_unit_advanced	object/tangible/component/weapon/projectile_feed_mechanism_advanced.iff	1			
 slot																																						template	0	barrel_rifle_projectile_advanced	object/tangible/component/weapon/projectile_rifle_barrel_advanced.iff	1			
-weapon	gaderiffi_elite		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	4	object/weapon/melee/baton/baton_gaderiffi_elite.iff	object/weapon/melee/baton/baton_gaderiffi_elite.iff	36	450	800	1100	342	683	1024	1365	342	683	1024	1365	0	0	kinetic	acid	18	45	100	100	12	1	1	100	100	0	4								object/draft_schematic/weapon/gaderiffi_elite.iff
+weapon	gaderiffi_elite		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	4	weapon_crafting	4	object/weapon/melee/baton/baton_gaderiffi_elite.iff	object/weapon/melee/baton/baton_gaderiffi_elite.iff	36	450	800	1100	342	683	1024	1365	342	683	1024	1365	0	0	kinetic	acid	18	45	100	100	12	1	1	100	100	0	5								object/draft_schematic/weapon/gaderiffi_elite.iff
 slot																																						resource	0	grip_unit	steel_ditanium	30			
 slot																																						resource	0	reactive_striking_surface	aluminum_titanium	35			
 slot																																						resource	0	power_cell_brackets	copper_polysteel	7			
@@ -1549,7 +1549,7 @@ slot																																						resource	0	receiver_assembly	iron_polo
 slot																																						resource	0	grip_assembly	metal	12			
 slot																																						template	0	cartridge_feed_unit_advanced	object/tangible/component/weapon/projectile_feed_mechanism_advanced.iff	3			
 slot																																						template	0	barrel_rifle_projectile_advanced	object/tangible/component/weapon/projectile_rifle_barrel_advanced.iff	1			
-weapon	polearm_heroic_sd		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	5	weapon_crafting	1	object/weapon/melee/polearm/polearm_heroic_sd.iff	object/weapon/melee/polearm/polearm_heroic_sd.iff	36	450	800	1100	342	683	1024	1365	342	683	1024	1365	0	0	energy	acid	18	45	100	100	12	1	1	100	100	0	4								object/draft_schematic/weapon/polearm_heroic_sd.iff
+weapon	polearm_heroic_sd		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	5	weapon_crafting	1	object/weapon/melee/polearm/polearm_heroic_sd.iff	object/weapon/melee/polearm/polearm_heroic_sd.iff	36	450	800	1100	342	683	1024	1365	342	683	1024	1365	0	0	energy	acid	18	45	100	100	12	1	1	100	100	0	5								object/draft_schematic/weapon/polearm_heroic_sd.iff
 slot																																						resource	0	lance_shaft	steel_carbonite	50			
 slot																																						resource	0	vibro_unit_and_power_cell_brackets	copper_polysteel	25			
 slot																																						resource	0	grip	iron	12			
@@ -1579,7 +1579,7 @@ slot																																						resource	0	receiver_assembly	iron_kamm
 slot																																						resource	0	grip_assembly	aluminum_linksteel	18			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	2h_sword_kun_massassi		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	1	object/weapon/melee/2h_sword/2h_sword_kun_massassi.iff	object/weapon/melee/2h_sword/2h_sword_kun_massassi.iff	36	450	800	1100	316	632	948	1264	316	632	948	1264	0	0	kinetic	cold	64	112	100	100	12	1	1	100	100	0	4								object/draft_schematic/weapon/2h_sword_kun_massassi.iff
+weapon	2h_sword_kun_massassi		systems.crafting.weapon.crafting_melee_standard_weapon	0	weapon	3	weapon_crafting	1	object/weapon/melee/2h_sword/2h_sword_kun_massassi.iff	object/weapon/melee/2h_sword/2h_sword_kun_massassi.iff	36	450	800	1100	316	632	948	1264	316	632	948	1264	0	0	kinetic	cold	64	112	100	100	12	1	1	100	100	0	5								object/draft_schematic/weapon/2h_sword_kun_massassi.iff
 slot																																						resource	0	sword_core_jacket	steel_duralloy	115			
 slot																																						resource	0	grip	iron_colat	90			
 slot																																						template	0	jacketed_sword_core_advanced	object/tangible/component/weapon/sword_core_advanced.iff	3			
@@ -1610,7 +1610,7 @@ slot																																						resource	0	enhanced_cooling_mechanism	
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						resource	0	thermal_control_unit	ore_carbonate	50			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
-weapon	knife_decorative		systems.crafting.weapon.crafting_melee_artisan_weapon	25	weapon	4	crafting	1	object/weapon/melee/knife/knife_survival_decorative.iff	object/weapon/melee/knife/knife_survival_decorative.iff	8	42	800	1100	2	5	8	10	2	5	8	10	0	0	kinetic				100	100	1	1	1	100	100	0	4								object/draft_schematic/weapon/knife_decorative.iff
+weapon	knife_decorative		systems.crafting.weapon.crafting_melee_artisan_weapon	25	weapon	4	crafting	1	object/weapon/melee/knife/knife_survival_decorative.iff	object/weapon/melee/knife/knife_survival_decorative.iff	8	42	800	1100	2	5	8	10	2	5	8	10	0	0	kinetic				100	100	1	1	1	100	100	0	5								object/draft_schematic/weapon/knife_decorative.iff
 slot																																						resource	0	knife_shaft	metal	6			
 slot																																						resource	0	cutting_edge	metal	4			
 slot																																						resource	0	grip_cap	metal	2			
@@ -1675,3 +1675,9 @@ slot																																						resource	0	activator	aluminum_titanium
 slot																																						resource	0	handgrip	petrochem_inert_polymer	60			
 slot																																						resource	0	power_field_insulator	gas_inert_culsion	60			
 slot																																						resource	0	energizers	copper_polysteel	60			
+weapon	lightsaber_pike_gen6		systems.crafting.weapon.lightsaber.crafting_melee_lightsaber_pike	0	lightsaber	5		1	object/weapon/melee/pike/crafted_saber/sword_lightsaber_pike_gen6.iff	object/weapon/melee/pike/crafted_saber/sword_lightsaber_pike_gen6.iff	38	0	1000	1300	545	890	1235	1580	545	890	1235	1580	0	0	kinetic				100	100	12	1	1	100	100	0	10								object/draft_schematic/weapon/lightsaber/lightsaber_pike_gen6.iff
+slot																																						resource	0	emitter_shroud	steel_mustafar	500			
+slot																																						resource	0	activator	aluminum_chromium	408			
+slot																																						resource	0	handgrip	petrochem_inert_polymer	425			
+slot																																						resource	0	power_field_insulator	gas_inert_mustafar	428			
+slot																																						resource	0	energizers	copper_borocarbitic	401			

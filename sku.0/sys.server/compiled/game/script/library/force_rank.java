@@ -1512,10 +1512,7 @@ public class force_rank extends script.base_script
         {
             return getIntObjVar(player, VAR_RANK);
         }
-        else 
-        {
-            return -1;
-        }
+        return -1;
     }
     public static int getForceRank(obj_id enclave, String player_name) throws InterruptedException
     {
@@ -1602,19 +1599,12 @@ public class force_rank extends script.base_script
         if (hasObjVar(object, VAR_COUNCIL))
         {
             int council = getIntObjVar(object, VAR_COUNCIL);
-            if (council != DARK_COUNCIL && council != LIGHT_COUNCIL)
-            {
-                return -1;
-            }
-            else 
+            if (council == DARK_COUNCIL || council == LIGHT_COUNCIL)
             {
                 return council;
             }
         }
-        else 
-        {
-            return -1;
-        }
+        return -1;
     }
     public static String getCouncilName(int council) throws InterruptedException
     {

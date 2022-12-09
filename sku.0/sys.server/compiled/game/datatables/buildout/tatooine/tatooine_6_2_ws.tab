@@ -462,6 +462,7 @@ i	i	h	i	f	f	f	f	f	f	f	s	p
 1189426	1189418	object/cell/cell.iff	8	0	0	0	1	0	0	0		$|
 1189427	1189418	object/cell/cell.iff	9	0	0	0	1	0	0	0		$|
 1189428	1189418	object/cell/cell.iff	10	0	0	0	1	0	0	0		$|
+1095638	1189428	object/tangible/ground_spawning/area_spawner.iff	10	3.3	-0.4	-4.3	0.01745	0	0.99985	0	systems.spawning.spawner_area	fltMaxSpawnTime|2|9.000000|fltMinSpawnTime|2|3.000000|fltRadius|2|0.000000|intDefaultBehavior|0|1|intGoodLocationSpawner|0|0|intSpawnCount|0|1|intSpawnSystem|0|1|registerWithController|0|1|strName|4|syren_1_moxar_krieg|strSpawnerType|4|area|strSpawns|4|syren_1_moxar_krieg|$|
 1189507	0	object/static/structure/tatooine/pillar_ruined_large_style_01.iff	0	1209.73	5	1611.43	0.443234	0	0.896406	0		$|
 1189508	0	object/static/structure/tatooine/pillar_damaged_large_style_01.iff	0	1215.09	5	1618.66	0.469923	0	0.882707	0		$|
 1189509	0	object/static/structure/tatooine/wall_cleft_tatooine_large_style_01.iff	0	1212.13	5	1615.89	-0.310573	0	0.950549	0		$|

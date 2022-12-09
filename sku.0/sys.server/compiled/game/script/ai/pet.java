@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class pet extends script.base_script
 {
-    public pet()
-    {
-    }
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public static final String ACTION_ALERT = "alert";
     public static final String ACTION_THREATEN = "threaten";
@@ -753,6 +750,8 @@ public class pet extends script.base_script
         {
             detachScript(self, "ai.droid");
         }
+        int buffs[] = buff.getAllBuffs(master);
+        buff.applyBuff(self, buffs);
         pet_lib.petFollow(self, master);
         return SCRIPT_CONTINUE;
     }

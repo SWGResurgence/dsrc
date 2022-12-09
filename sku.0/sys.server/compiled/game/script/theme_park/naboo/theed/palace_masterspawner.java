@@ -7,9 +7,6 @@ import script.obj_id;
 
 public class palace_masterspawner extends script.base_script
 {
-    public palace_masterspawner()
-    {
-    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleDelayedImperialSpawn", null, 5, false);

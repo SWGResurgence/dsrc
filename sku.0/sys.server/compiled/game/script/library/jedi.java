@@ -2087,7 +2087,10 @@ public class jedi extends script.base_script
             "item_color_crystal_02_28",
             "item_color_crystal_02_29",
             "item_color_crystal_02_30",
-            "item_crystal_tyranus_cunning_01"
+            "item_color_crystal_02_32",
+            "item_color_crystal_02_33",
+            "item_color_crystal_02_34",
+            "item_color_crystal_02_35"
         };
         return colorMap[color];
     }

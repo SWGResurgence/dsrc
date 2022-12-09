@@ -28,7 +28,7 @@ public class utils extends script.base_script
     public static final String TIP_OUT_THACK = TIP + ".tip_out_timeHack";
     //public static final String TRIAL_STRUCTURE = FREE_TRIAL + ".trial_structure";
     public static final int TIP_NUM_MAX = 25;
-    public static final int TIP_AMT_MAX = 100000;
+    public static final int TIP_AMT_MAX = 10000000;
     public static final String NO_TRADE_SCRIPT = "item.special.nomove";
     public static final String CTS_OBJVAR_HISTORY = "ctsRetroHistory";
     public static final int BIT_LIST_SIZE = 32;
@@ -67,6 +67,7 @@ public class utils extends script.base_script
     //public static final String XMAS_RECEIVED_VIII1 = "gift.xmas08";
     //public static final String XMAS_RECEIVED_VIII2 = "gift.xmas08v2";
     public static final String XMAS_RECEIVED_IX_01 = "gift.xmas09";
+    public static final String XMAS_RECEIVED_XX_01 = "gift.xmas20";
     //public static final String EMPIRE_DAY_RECEIVED_VI = "gift.empire08";
     public static final string_id GIFT_GRANTED = new string_id("system_msg", "gift_granted");
     public static final string_id GIFT_GRANTED_SUB = new string_id("system_msg", "gift_granted_sub");
@@ -2265,7 +2266,7 @@ public class utils extends script.base_script
     }
     public static string_id unpackString(String strId) throws InterruptedException
     {
-        if (strId == null || strId.equals(""))
+        if (strId == null || strId.isEmpty())
         {
             return null;
         }
@@ -4761,6 +4762,13 @@ public class utils extends script.base_script
         }
         return 0;
     }
+	public static byte getByteConfigSetting(String section, String key) {
+		String setting = getConfigSetting(section, key);
+		if (setting == null || setting.length() == 0) {
+			return 0;
+		}
+		return Byte.parseByte(setting);
+	}
     public static float getFloatConfigSetting(String section, String key)
     {
         String setting = getConfigSetting(section, key);
@@ -7211,6 +7219,20 @@ public class utils extends script.base_script
         }
         return intNumCreatures;
     }
+    public static obj_id getObjectInInventory(obj_id player, String staticName) {
+        obj_id[] inventoryContents = getInventoryAndEquipment(player);
+        String itemName;
+        for (obj_id inventoryContent : inventoryContents) {
+            if (!isIdValid(inventoryContent) || !exists(inventoryContent)) {
+                continue;
+            }
+            itemName = getStaticItemName(inventoryContent);
+            if (itemName != null && itemName.equals(staticName)) {
+                return inventoryContent;
+            }
+        }
+        return null;
+	}
     public static boolean inDebugMode() throws InterruptedException {
         return (utils.getIntConfigSetting("GameServer", "debugMode") == 1);
     }

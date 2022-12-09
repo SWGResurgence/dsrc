@@ -3,17 +3,16 @@ package script.ai;
 import script.*;
 import script.library.*;
 
+import static script.systems.city.city_hire.TOOL;
+
 public class ai extends script.base_script
 {
-    public ai()
-    {
-    }
-    //public static final boolean LOGGING_ON = false;
+    public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "ai_script";
     public static final String MENU_FILE = "pet/pet_menu";
-    //public static final float CORPSE_CLEANUP_DELAY = 300.0f;
+    public static final float CORPSE_CLEANUP_DELAY = 300.0f;
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
-    //public static final string_id SID_NOTIFY_STALKED = new string_id("skl_use", "notify_stalked");
+    public static final string_id SID_NOTIFY_STALKED = new string_id("skl_use", "notify_stalked");
     public static final string_id SID_CANT_MILK = new string_id("skl_use", "milk_cant");
     public static final string_id SID_MILK_NOT_HIDDEN = new string_id("skl_use", "milk_not_hidden");
     public static final string_id SID_MILK_BEGIN = new string_id("skl_use", "milk_begin");
@@ -23,13 +22,14 @@ public class ai extends script.base_script
     public static final string_id SID_MILK_SUCCESS = new string_id("skl_use", "milk_success");
     public static final string_id SID_BEING_MILKED = new string_id("skl_use", "being_milked");
     public static final string_id SID_CANT_MILK_MOUNTED = new string_id("skl_use", "milk_mounted");
-    //public static final string_id SID_CANT_MILK_COMBAT = new string_id("skl_use", "milk_combat");
+    public static final string_id SID_CANT_MILK_COMBAT = new string_id("skl_use", "milk_combat");
     public static final string_id SID_CANT_MILK_INV_FULL = new string_id("skl_use", "milk_inventory_full");
     public static final string_id SID_ALREADY_RECRUITED = new string_id("collection", "already_recruited");
     public static final string_id SID_ENEMY_RECRUIT = new string_id("collection", "enemy_recruit");
     public static final string_id SID_GAVE_RECRUIT_ITEM = new string_id("collection", "gave_recruit_item");
     public static final string_id SID_NPC_MEATLUMP_SPEAK = new string_id("collection", "npc_meatlump_speak");
     public static final string_id SID_NO_RECRUIT_REB_IMP = new string_id("collection", "no_recruit_reb_imp");
+
     public void initializeScript() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -75,24 +75,28 @@ public class ai extends script.base_script
         }
         ai_lib.resetAi();
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnAttach() self(" + self + ":" + getName(self) + ")");
         initializeScript();
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnAddedToWorld() self(" + self + ":" + getName(self) + ")");
         messageTo(self, "handleOnAddedToWorldDelay", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleOnAddedToWorldDelay(obj_id self, dictionary params) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnAddedToWorld() self(" + self + ":" + getName(self) + ")");
         initializeScript();
         return SCRIPT_CONTINUE;
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         if (ai_lib.isAiDead(self) && !pet_lib.isPet(self) && !beast_lib.isBeast(self) && isObjectPersisted(self))
@@ -101,6 +105,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnFleeTargetLost(obj_id self, obj_id oldTarget) throws InterruptedException
     {
         if (aiLoggingEnabled(self))
@@ -111,6 +116,7 @@ public class ai extends script.base_script
         doDefaultCalmBehavior(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnFleePathNotFound(obj_id self, obj_id oldTarget) throws InterruptedException
     {
         if (aiLoggingEnabled(self))
@@ -120,10 +126,12 @@ public class ai extends script.base_script
         doDefaultCalmBehavior(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnFleeWaypoint(obj_id self, obj_id target) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int resumeDefaultCalmBehavior(obj_id self, dictionary params) throws InterruptedException
     {
         if (isInNpcConversation(self) || aiIsTethered(self))
@@ -138,6 +146,7 @@ public class ai extends script.base_script
         doDefaultCalmBehavior(self);
         return SCRIPT_CONTINUE;
     }
+
     public void doDefaultCalmBehavior(obj_id npc) throws InterruptedException
     {
         if (!npc.isLoaded() || !exists(npc))
@@ -251,6 +260,7 @@ public class ai extends script.base_script
                 break;
         }
     }
+
     public int OnFollowMoving(obj_id self, obj_id target) throws InterruptedException
     {
         if (!ai_lib.isInCombat(self) && !ai_lib.isAiDead(self) && getPosture(self) != POSTURE_UPRIGHT)
@@ -262,6 +272,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowTargetLost(obj_id self, obj_id oldTarget) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnFollowTargetLost() self(" + self + ":" + getName(self) + ")");
@@ -271,11 +282,13 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         utils.removeScriptVar(self, "sentAllyDistressCall");
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowWaiting(obj_id self, obj_id target) throws InterruptedException
     {
         /*
@@ -290,6 +303,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnFollowPathNotFound(obj_id self, obj_id target) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnFollowPathNotFound() self(" + self + ":" + getName(self) + ")");
@@ -299,6 +313,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -336,6 +351,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathNotFound(obj_id self) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnMovePathNotFound() self(" + self + ":" + getName(self) + ")");
@@ -351,6 +367,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "petBeingInitialized"))
@@ -393,7 +410,7 @@ public class ai extends script.base_script
                     LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnTriggerVolumeEntered(" + volumeName + ") Breacher is a threat (pvp enemy)");
                     aggro = true;
                 }
-                else 
+                else
                 {
                     if (breacherIsAPlayer)
                     {
@@ -413,12 +430,12 @@ public class ai extends script.base_script
                             LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnTriggerVolumeEntered(" + volumeName + ") Player breacher is a NOT currently a threat (but could be with faction alignment change)");
                             aggro = true;
                         }
-                        else 
+                        else
                         {
                             LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnTriggerVolumeEntered(" + volumeName + ") Player breacher is a NOT a threat");
                         }
                     }
-                    else 
+                    else
                     {
                         if (aiIsGuard(self))
                         {
@@ -427,7 +444,7 @@ public class ai extends script.base_script
                             {
                                 LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnTriggerVolumeEntered(" + volumeName + ") guard: AI breacher is a NOT a threat (townsperson)");
                             }
-                            else 
+                            else
                             {
                                 if (ai_lib.isSameSocialGroup(self, breacher))
                                 {
@@ -437,7 +454,7 @@ public class ai extends script.base_script
                                 {
                                     LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnTriggerVolumeEntered(" + volumeName + ") guard: AI breacher is NOT a threat (pet)");
                                 }
-                                else 
+                                else
                                 {
                                     if (ai_lib.isAnimal(breacher))
                                     {
@@ -446,7 +463,7 @@ public class ai extends script.base_script
                                         {
                                             LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnTriggerVolumeEntered(" + volumeName + ") guard: AI breacher is NOT a threat 										(gcw_city_invasion npc)");
                                         }
-                                        else 
+                                        else
                                         {
                                             LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnTriggerVolumeEntered(" + volumeName + ") guard: AI breacher is a threat (animal)");
                                             aggro = true;
@@ -462,20 +479,20 @@ public class ai extends script.base_script
                                         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnTriggerVolumeEntered(" + volumeName + ") guard: AI breacher is a threat (thug)");
                                         aggro = true;
                                     }
-                                    else 
+                                    else
                                     {
                                         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnTriggerVolumeEntered(" + volumeName + ") guard: AI breacher is NOT a threat");
                                     }
                                 }
                             }
                         }
-                        else 
+                        else
                         {
                             if (ai_lib.isSameSocialGroup(self, breacher))
                             {
                                 LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnTriggerVolumeEntered(" + volumeName + ") AI breacher is NOT a threat (same social group)");
                             }
-                            else 
+                            else
                             {
                                 final int factionStatus = factions.getFactionStatus(self, breacher);
                                 if (factionStatus == factions.STATUS_ENEMY)
@@ -483,7 +500,7 @@ public class ai extends script.base_script
                                     LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnTriggerVolumeEntered(" + volumeName + ") AI breacher is a threat (factional enemy)");
                                     aggro = true;
                                 }
-                                else 
+                                else
                                 {
                                     LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnTriggerVolumeEntered(" + volumeName + ") AI breacher is NOT a threat");
                                 }
@@ -498,7 +515,7 @@ public class ai extends script.base_script
                         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnTriggerVolumeEntered(" + volumeName + ") Player breacher is a NOT a member of my Story");
                         aggro = false;
                     }
-                    else 
+                    else
                     {
                         if (getObjIdObjVar(self, "storytellerid") != utils.getObjIdScriptVar(breacher, "storytellerid"))
                         {
@@ -519,7 +536,7 @@ public class ai extends script.base_script
             {
                 ai_aggro.requestAggroCheck(breacher);
             }
-            else 
+            else
             {
                 if (!scout.isScentMasked(breacher, self))
                 {
@@ -534,6 +551,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnTriggerVolumeExited(" + volumeName + ") self(" + self + ":" + getName(self) + ") radius(" + getTriggerVolumeRadius(self, volumeName) + ") breacher(" + breacher + ":" + getName(breacher) + ")");
@@ -556,7 +574,7 @@ public class ai extends script.base_script
                     pvpRemovePersonalEnemyFlags(self, breacher);
                 }
             }
-            else 
+            else
             {
                 pvpRemovePersonalEnemyFlags(self, breacher);
             }
@@ -571,6 +589,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLoiterWaiting(obj_id self, modifiable_float time) throws InterruptedException
     {
         if (ai_lib.isHerdingCreature(self))
@@ -579,6 +598,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isThreat(obj_id npc, obj_id breacher) throws InterruptedException
     {
         if (hasObjVar(breacher, "gm"))
@@ -629,6 +649,7 @@ public class ai extends script.base_script
         }
         return (ai_lib.isAggroToward(npc, breacher) || ai_lib.isAggroToward(breacher, npc));
     }
+
     public void goAlert(obj_id npc) throws InterruptedException
     {
         if (ai_lib.isAiDead(npc))
@@ -652,6 +673,7 @@ public class ai extends script.base_script
             addToMentalStateToward(npc, threat, FEAR, -5.0f);
         }
     }
+
     public void goThreaten(obj_id npc) throws InterruptedException
     {
         if (ai_lib.isAiDead(npc))
@@ -683,15 +705,18 @@ public class ai extends script.base_script
         }
         ai_lib.setMood(npc, ai_lib.MOOD_NERVOUS);
     }
+
     public int OnBehaviorChange(obj_id self, int newBehavior, int oldBehavior, int[] changeFlags) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetDefaultBehavior(obj_id self, dictionary params) throws InterruptedException
     {
         doDefaultCalmBehavior(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -719,11 +744,13 @@ public class ai extends script.base_script
         idx = creatureKnowledge.getInt("idx");
         return SCRIPT_CONTINUE;
     }
+
     public int snareEffectOff(obj_id self, dictionary params) throws InterruptedException
     {
         showFlyText(self, new string_id("combat_effects", "no_snare"), 1.0f, colors.TOMATO);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDefenderCombatAction(obj_id self, obj_id attacker, obj_id weapon, int combatResult) throws InterruptedException
     {
         if (ai_lib.isAiDead(self) || isInvulnerable(self))
@@ -737,6 +764,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawAttack(obj_id self, obj_id defender, obj_id[] attackers) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnSawAttack() self(" + self + ":" + getName(self) + ") defender (" + defender + ") attackers.length(" + attackers.length + ")");
@@ -756,14 +784,17 @@ public class ai extends script.base_script
             }
             debugSpeakMsgc(aiLoggingEnabled(self), self, "lair defense");
         }
-        else 
+        else
         {
             if (pet_lib.isPet(self) && pet_lib.isGuarding(self, defender))
             {
-                for (final obj_id attacker : attackers) {
-                    if (isIdValid(attacker)) {
+                for (final obj_id attacker : attackers)
+                {
+                    if (isIdValid(attacker))
+                    {
                         startCombat(self, attacker);
-                        if (!ai_lib.isInCombat(self) && (defender == getMaster(self))) {
+                        if (!ai_lib.isInCombat(self) && (defender == getMaster(self)))
+                        {
                             ai_lib.barkString(self, "ally");
                         }
                     }
@@ -784,13 +815,18 @@ public class ai extends script.base_script
                 {
                     assistDefender = true;
                 }
-                for (final obj_id attacker : attackers) {
-                    if (isIdValid(attacker)) {
-                        if (assistDefender || hasAttributeAttained(attacker, attrib.THUG) || (ai_lib.isMonster(attacker) && (!pet_lib.isPet(attacker)))) {
+                for (final obj_id attacker : attackers)
+                {
+                    if (isIdValid(attacker))
+                    {
+                        if (assistDefender || hasAttributeAttained(attacker, attrib.THUG) || (ai_lib.isMonster(attacker) && (!pet_lib.isPet(attacker))))
+                        {
                             debugSpeakMsgc(aiLoggingEnabled(self), self, "OnSawAttackGuard() attacking(" + attacker + ")");
                             ai_combat_assist.assist(self, attacker);
                             break;
-                        } else if (ai_lib.isSameSocialGroup(self, attacker)) {
+                        }
+                        else if (ai_lib.isSameSocialGroup(self, attacker))
+                        {
                             debugSpeakMsgc(aiLoggingEnabled(self), self, "OnSawAttack() attacking(" + defender + ")");
                             ai_combat_assist.assist(self, defender);
                             break;
@@ -798,33 +834,46 @@ public class ai extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
-                for (final obj_id attacker : attackers) {
-                    if (isIdValid(attacker)) {
-                        if (hasObjVar(self, "storytellerid")) {
-                            if (!utils.hasScriptVar(defender, "storytellerid") && !utils.hasScriptVar(attacker, "storytellerid")) {
+                for (final obj_id attacker : attackers)
+                {
+                    if (isIdValid(attacker))
+                    {
+                        if (hasObjVar(self, "storytellerid"))
+                        {
+                            if (!utils.hasScriptVar(defender, "storytellerid") && !utils.hasScriptVar(attacker, "storytellerid"))
+                            {
                                 debugSpeakMsgc(aiLoggingEnabled(self), self, "OnSawAttack() not attacking(" + defender + ") or (" + attacker + ") as they are not a part of my story");
                                 break;
-                            } else if (hasObjVar(defender, "storytellerid") && utils.hasScriptVar(attacker, "storytellerid")) {
-                                if (getObjIdObjVar(self, "storytellerid") == getObjIdObjVar(defender, "storytellerid") && ai_lib.isSameSocialGroup(self, defender)) {
+                            }
+                            else if (hasObjVar(defender, "storytellerid") && utils.hasScriptVar(attacker, "storytellerid"))
+                            {
+                                if (getObjIdObjVar(self, "storytellerid") == getObjIdObjVar(defender, "storytellerid") && ai_lib.isSameSocialGroup(self, defender))
+                                {
                                     debugSpeakMsgc(aiLoggingEnabled(self), self, "OnSawAttack() attacking(" + attacker + ")");
                                     ai_combat_assist.assist(self, defender);
                                     break;
                                 }
-                            } else if (utils.hasScriptVar(defender, "storytellerid") && hasObjVar(attacker, "storytellerid")) {
-                                if (getObjIdObjVar(self, "storytellerid") == getObjIdObjVar(attacker, "storytellerid") && ai_lib.isSameSocialGroup(self, attacker)) {
+                            }
+                            else if (utils.hasScriptVar(defender, "storytellerid") && hasObjVar(attacker, "storytellerid"))
+                            {
+                                if (getObjIdObjVar(self, "storytellerid") == getObjIdObjVar(attacker, "storytellerid") && ai_lib.isSameSocialGroup(self, attacker))
+                                {
                                     debugSpeakMsgc(aiLoggingEnabled(self), self, "OnSawAttack() attacking(" + defender + ")");
                                     ai_combat_assist.assist(self, attacker);
                                     break;
                                 }
                             }
                         }
-                        if (ai_lib.isSameSocialGroup(self, defender)) {
+                        if (ai_lib.isSameSocialGroup(self, defender))
+                        {
                             debugSpeakMsgc(aiLoggingEnabled(self), self, "OnSawAttack() attacking(" + attacker + ")");
                             ai_combat_assist.assist(self, attacker);
                             break;
-                        } else if (ai_lib.isSameSocialGroup(self, attacker)) {
+                        }
+                        else if (ai_lib.isSameSocialGroup(self, attacker))
+                        {
                             debugSpeakMsgc(aiLoggingEnabled(self), self, "OnSawAttack() attacking(" + defender + ")");
                             ai_combat_assist.assist(self, defender);
                             break;
@@ -835,6 +884,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean defendLair(obj_id npc, obj_id defender, obj_id[] attackers, boolean isInCombat) throws InterruptedException
     {
         if (isMob(defender))
@@ -888,6 +938,7 @@ public class ai extends script.base_script
         }
         return false;
     }
+
     public int stopFleeing(obj_id self, dictionary params) throws InterruptedException
     {
         debugSpeakMsg(self, "stopping fleeing");
@@ -905,6 +956,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", ("ai::OnIncapacitated() self(" + self + ":" + getName(self) + ") attacker(" + attacker + ")"));
@@ -930,7 +982,8 @@ public class ai extends script.base_script
                 obj_id[] haters = getHateList(self);
                 if (haters.length > 0)
                 {
-                    for (obj_id hater : haters) {
+                    for (obj_id hater : haters)
+                    {
                         removeHateTarget(hater, self);
                     }
                 }
@@ -940,6 +993,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         if (isIdValid(killer) && exists(killer) && isIdValid(self) && exists(self))
@@ -974,6 +1028,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int xpDelegated(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id cInv = utils.getInventoryContainer(self);
@@ -986,12 +1041,13 @@ public class ai extends script.base_script
             attachScript(self, corpse.SCRIPT_AI_CORPSE);
             messageTo(self, "aiCorpsePrepared", null, 0, false);
         }
-        else 
+        else
         {
             xp.cleanupCreditForKills();
         }
         return SCRIPT_CONTINUE;
     }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] killers = getObjIdArrayObjVar(self, scenario.VAR_PRIMARY_KILLERS);
@@ -1012,15 +1068,17 @@ public class ai extends script.base_script
             if (group.isGroupObject(killCredit))
             {
                 obj_id[] groupMembers = getGroupMemberIds(killCredit);
-                for (obj_id groupMember : groupMembers) {
-                    if (isPlayer(groupMember) && !loot.hasToggledChroniclesLootOff(groupMember)) {
+                for (obj_id groupMember : groupMembers)
+                {
+                    if (isPlayer(groupMember) && !loot.hasToggledChroniclesLootOff(groupMember))
+                    {
                         hasChanceToDropChroniclesLoot = true;
                     }
                 }
             }
-            else 
+            else
             {
-                if (!loot.hasToggledChroniclesLootOff(killCredit))
+                if (isPlayer(killCredit) && !loot.hasToggledChroniclesLootOff(killCredit))
                 {
                     hasChanceToDropChroniclesLoot = true;
                 }
@@ -1031,12 +1089,14 @@ public class ai extends script.base_script
             hasLoot |= loot.addChronicleLoot(self);
         }
 
-        if(scheduled_drop.isSystemEnabled()) {
+        if (scheduled_drop.isSystemEnabled())
+        {
             int corpseLevel = getLevel(self);
             boolean doNotDropCard = false;
             int difficultyClass = getIntObjVar(self, "difficultyClass");
             int sourceSystem = scheduled_drop.SYSTEM_COMBAT_NORMAL;
-            switch (difficultyClass) {
+            switch (difficultyClass)
+            {
                 case 0:
                     sourceSystem = scheduled_drop.SYSTEM_COMBAT_NORMAL;
                     break;
@@ -1048,34 +1108,45 @@ public class ai extends script.base_script
                     break;
             }
             int delayCount = 0;
-            for (obj_id pk1 : pks) {
-                if (isIdValid(pk1) && (corpseLevel + 5 < getLevel(pk1) || utils.isFreeTrial(pk1))) {
+            for (obj_id pk1 : pks)
+            {
+                if (isIdValid(pk1) && (corpseLevel + 5 < getLevel(pk1) || utils.isFreeTrial(pk1)))
+                {
                     doNotDropCard = true;
                 }
-                if (isIdValid(pk1) && scheduled_drop.hasCardDelay(pk1, sourceSystem)) {
+                if (isIdValid(pk1) && scheduled_drop.hasCardDelay(pk1, sourceSystem))
+                {
                     delayCount++;
                 }
             }
-            if (delayCount > pks.length / 2) {
+            if (delayCount > pks.length / 2)
+            {
                 doNotDropCard = true;
             }
             boolean canDrop = scheduled_drop.canDropCard(sourceSystem);
-            for (obj_id pk : pks) {
-                if (isIdValid(pk)) {
+            for (obj_id pk : pks)
+            {
+                if (isIdValid(pk))
+                {
                     utils.setScriptVar(pk, scheduled_drop.PLAYER_SCRIPTVAR_DROP_TIME, getGameTime());
-                    if (isGod(pk) && hasObjVar(pk, "qa_tcg_always_drop")) {
-                        if (!doNotDropCard) {
+                    if (isGod(pk) && hasObjVar(pk, "qa_tcg_always_drop"))
+                    {
+                        if (!doNotDropCard)
+                        {
                             canDrop = true;
                         }
                     }
-                    if (isGod(pk) && hasObjVar(pk, "qa_tcg")) {
+                    if (isGod(pk) && hasObjVar(pk, "qa_tcg"))
+                    {
                         sendSystemMessageTestingOnly(pk, "QA TCG COMBAT.  Do not drop card? " + doNotDropCard + " hasCardDelay? " + scheduled_drop.hasCardDelay(pk, sourceSystem) + " isTrial? " + utils.isFreeTrial(pk) + " bad level? " + (corpseLevel + 5 < getLevel(pk)));
                     }
                 }
             }
-            if (!doNotDropCard) {
+            if (!doNotDropCard)
+            {
                 obj_id inv = utils.getInventoryContainer(self);
-                if (isIdValid(inv) && canDrop) {
+                if (isIdValid(inv) && canDrop)
+                {
                     scheduled_drop.dropCard(sourceSystem, inv);
                     hasLoot = true;
                 }
@@ -1089,11 +1160,13 @@ public class ai extends script.base_script
         xp.cleanupCreditForKills();
         return SCRIPT_CONTINUE;
     }
+
     public int corpseCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", ("ai::OnStartNpcConversation() self(" + self + ":" + getName(self) + ") speaker(" + speaker + ":" + getName(speaker) + ")"));
@@ -1119,6 +1192,7 @@ public class ai extends script.base_script
         messageTo(self, "handleAbortConversation", null, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAbortConversation(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInNpcConversation(self))
@@ -1130,6 +1204,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", ("ai::OnEndNpcConversation() self(" + self + ":" + getName(self) + ") speaker(" + speaker + ":" + getName(speaker) + ")"));
@@ -1143,16 +1218,20 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int disableAI(obj_id self, dictionary params) throws InterruptedException
     {
-        for (String script : getScriptList(self)) {
-            if (script.startsWith("ai.")) {
+        for (String script : getScriptList(self))
+        {
+            if (script.startsWith("ai."))
+            {
                 detachScript(self, script);
             }
         }
         stop(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleClearPathingFlag(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "ai.pathingAwayFrom");
@@ -1162,6 +1241,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAnimationAction(obj_id self, dictionary params) throws InterruptedException
     {
         String anim = params.getString("anim");
@@ -1169,7 +1249,7 @@ public class ai extends script.base_script
         {
             ai_lib.doAction(self, anim);
         }
-        else 
+        else
         {
             String animMood = params.getString("animMood");
             if (animMood != null)
@@ -1179,6 +1259,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleAddMaster(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id pet = params.getObjId("pet");
@@ -1224,6 +1305,7 @@ public class ai extends script.base_script
         pet_lib.addToPetList(master, self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRemoveMaster(obj_id self, dictionary params) throws InterruptedException
     {
         if (!pet_lib.hasMaster(self))
@@ -1264,6 +1346,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleWailingPet(obj_id self, dictionary params) throws InterruptedException
     {
         if (pet_lib.hasMaster(self) || ai_lib.isAiDead(self))
@@ -1290,6 +1373,7 @@ public class ai extends script.base_script
         messageTo(self, "handleWailingPet", null, 15, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroyAbandonedPet(obj_id self, dictionary params) throws InterruptedException
     {
         if (!pet_lib.hasMaster(self))
@@ -1298,17 +1382,22 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public boolean crossPortalBreach(obj_id npc, obj_id breacher) throws InterruptedException {
+
+    public boolean crossPortalBreach(obj_id npc, obj_id breacher) throws InterruptedException
+    {
         return isIdValid(getLocation(npc).cell) != isIdValid(getLocation(breacher).cell) || !canSee(npc, breacher);
     }
+
     public void manageCrossPortalBreach(obj_id npc, obj_id breacher) throws InterruptedException
     {
-        if (isPlayer(breacher)) {
+        if (isPlayer(breacher))
+        {
             dictionary params = new dictionary();
             params.put("breacher", breacher);
             messageTo(npc, "handleMonitorMovement", params, 5, false);
         }
     }
+
     public int handleMonitorMovement(obj_id self, dictionary params) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::handleMonitorMovement() self(" + self + ")");
@@ -1326,17 +1415,24 @@ public class ai extends script.base_script
             return SCRIPT_CONTINUE;
         }
         obj_id yourCell = getLocation(breacher).cell;
-        if (isIdValid(yourCell)) {
-            if (yourCell != getLocation(self).cell) {
+        if (isIdValid(yourCell))
+        {
+            if (yourCell != getLocation(self).cell)
+            {
                 messageTo(self, "handleMonitorMovement", params, 3, false);
-            } else if (ai_lib.isInCombat(self)) {
+            }
+            else if (ai_lib.isInCombat(self))
+            {
                 messageTo(self, "handleMonitorMovement", params, 3, false);
-            } else {
+            }
+            else
+            {
                 startCombat(self, breacher);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (pet_lib.isPet(self))
@@ -1372,7 +1468,7 @@ public class ai extends script.base_script
                 removeObjVar(self, "ai.combat.moveMode");
                 stop(self);
             }
-            else 
+            else
             {
                 stop(self);
                 pathTo(self, aiGetHomeLocation(self));
@@ -1382,6 +1478,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean fightNotFlee(obj_id npc, obj_id threat) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(npc), "debug_ai", "ai::fightNotFlee() npc(" + npc + ") threat(" + threat + ")");
@@ -1414,6 +1511,7 @@ public class ai extends script.base_script
         }
         return false;
     }
+
     public int handleEntertainmentStart(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("entertainer");
@@ -1505,7 +1603,7 @@ public class ai extends script.base_script
                 utils.setScriptVar(self, "lostInterestTime", getGameTime());
                 messageTo(self, "lostInterest", params, 60, false);
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }
@@ -1523,7 +1621,7 @@ public class ai extends script.base_script
             {
                 setAnimationMood(self, "npc_sad");
             }
-            else 
+            else
             {
                 setAnimationMood(self, "bored");
             }
@@ -1534,12 +1632,12 @@ public class ai extends script.base_script
             {
                 setAnimationMood(self, "bored");
             }
-            else 
+            else
             {
                 setAnimationMood(self, "entertained");
             }
         }
-        else 
+        else
         {
             setAnimationMood(self, "entertained");
         }
@@ -1551,6 +1649,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleNoEntertainment(obj_id self, dictionary params) throws InterruptedException
     {
         boolean stopListening = false;
@@ -1574,17 +1673,19 @@ public class ai extends script.base_script
             stop(self);
             messageTo(self, "resumeDefaultCalmBehavior", null, 0, false);
         }
-        else 
+        else
         {
             messageTo(self, "handleNoEntertainment", null, 30, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePerformerStopPerforming(obj_id self, dictionary params) throws InterruptedException
     {
         utils.notifyObject(self, "handleEntertainmentStop", params);
         return SCRIPT_CONTINUE;
     }
+
     public int handleEntertainmentStop(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = obj_id.NULL_ID;
@@ -1668,7 +1769,7 @@ public class ai extends script.base_script
                     break;
             }
         }
-        else 
+        else
         {
             switch (rand(1, 4))
             {
@@ -1708,19 +1809,23 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnChangedPosture(obj_id self, int before, int after) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int dizzyCheckFailed(obj_id self, dictionary params) throws InterruptedException
     {
         ai_lib.aiSetPosture(self, POSTURE_KNOCKED_DOWN);
         return SCRIPT_CONTINUE;
     }
+
     public int applyModTrap(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -1734,7 +1839,7 @@ public class ai extends script.base_script
         java.util.Enumeration keys = params.keys();
         while (keys.hasMoreElements())
         {
-            String key = (String)keys.nextElement();
+            String key = (String) keys.nextElement();
             if (!key.equals("prefix"))
             {
                 utils.setScriptVar(self, "trapmod." + key, params.getInt(key));
@@ -1745,19 +1850,33 @@ public class ai extends script.base_script
         String prefix = params.getString("prefix");
         showFlyText(self, new string_id("trap/trap", prefix + "_on"), 1.2f, colors.ORANGERED);
         obj_id[] players = getPlayerCreaturesInRange(self, 50.0f);
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             playClientEffectLoc(player, "clienteffect/combat_trap_" + prefix + ".cef", getLocation(self), 0.0f);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeModTrap(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "trapmod");
         showFlyText(self, new string_id("trap/trap", params.getString("prefix") + "_off"), 1.2f, colors.ORANGERED);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
+        if (isGod(player) && !isInvulnerable(self) && !isPlayer(self))
+        {
+            int root = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("Loot *"));
+            mi.addSubMenu(root, menu_info_types.SERVER_MENU21, new string_id("* Increase Drop Count by 1"));
+            mi.addSubMenu(root, menu_info_types.SERVER_MENU22, new string_id("* Decrease Drop Count by 1"));
+            mi.addSubMenu(root, menu_info_types.SERVER_MENU24, new string_id("* Set Loot Table"));
+            int root2 = mi.addRootMenu(menu_info_types.SERVER_MENU23, new string_id("Terminate Combat *"));
+            int root4 = mi.addRootMenu(menu_info_types.SERVER_MENU25, new string_id("Spawn Functions *"));
+            mi.addSubMenu(root4, menu_info_types.SERVER_MENU26, new string_id("* Circle Spawn"));
+            return SCRIPT_CONTINUE;
+        }
         if (pet_lib.isPet(self) || beast_lib.isBeast(self))
         {
             return SCRIPT_CONTINUE;
@@ -1780,10 +1899,172 @@ public class ai extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
+        if (item == menu_info_types.SERVER_MENU20)
+        {
+            blog("SERVER_MENU20");
+            return SCRIPT_CONTINUE;
+        }
+        if (item == menu_info_types.SERVER_MENU21)
+        {
+            int loot = getIntObjVar(self, "loot.numItems");
+            if (loot == 0)
+            {
+                setObjVar(self, "loot.numItems", 1);
+            }
+            else
+            {
+                setObjVar(self, "loot.numItems", loot + 1);
+            }
+            return SCRIPT_CONTINUE;
+        }
+        if (item == menu_info_types.SERVER_MENU22)
+        {
+            int loot = getIntObjVar(self, "loot.numItems");
+            if (loot == 0)
+            {
+                setObjVar(self, "loot.numItems", 0);
+            }
+            else
+            {
+                setObjVar(self, "loot.numItems", loot - 1);
+            }
+            return SCRIPT_CONTINUE;
+        }
+        if (item == menu_info_types.SERVER_MENU23)
+        {
+            stopCombat(player);
+            return SCRIPT_CONTINUE;
+        }
+        if (item == menu_info_types.SERVER_MENU24)
+        {
+            String lootTable = getStringObjVar(self, "loot.lootTable");
+            if (lootTable == null)
+            {
+                lootTable = "none";
+            }
+            String prompt = "Current loot table: " + lootTable + "\n\nEnter new loot table:";
+            sui.inputbox(player, prompt, "handleLootTableInput");
+            return SCRIPT_CONTINUE;
+        }
+        if (item == menu_info_types.SERVER_MENU25)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (item == menu_info_types.SERVER_MENU26)
+        {
+            String prompt = "Enter creature name to make a ring spawn.";
+            sui.inputbox(self, player, prompt, "prepareRingSpawn");
+
+        }
         return SCRIPT_CONTINUE;
     }
+
+    public void handleLootTableInput(obj_id self, dictionary params) throws InterruptedException
+    {
+        if (params == null)
+        {
+            return;
+        }
+        String lootTable = sui.getInputBoxText(params);
+        if (lootTable == null)
+        {
+            return;
+        }
+        if (lootTable.equals(""))
+        {
+            return;
+        }
+        setObjVar(self, "loot.lootTable", lootTable);
+    }
+
+    public void OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
+    {
+        String nextWord = text;
+        if (nextWord.equals("gm_follow"))
+        {
+            ai.follow(self, speaker, 1.0f, 10.0f);
+            chat.chat(self, "[GM|AI] Following " + getName(speaker));
+        }
+        if (nextWord.equals("gm_aggro"))
+        {
+            startCombat(self, speaker);
+            chat.chat(self, "[GM|AI] Aggroing " + getName(speaker));
+        }
+        if (nextWord.equals("gm_stop"))
+        {
+            ai.stop(self);
+            chat.chat(self, "[GM|AI] Stopping");
+        }
+        if (nextWord.equals("gm_interesting"))
+        {
+            setCondition(self, CONDITION_INTERESTING);
+            chat.chat(self, "[GM|AI] Setting interest to " + getName(speaker));
+        }
+        if (nextWord.equals("gm_slay"))
+        {
+            kill(self);
+        }
+        if (nextWord.equals("gm_wander"))
+        {
+            ai.wander(self);
+            chat.chat(self, "[GM|AI] Wandering");
+        }
+        if (nextWord.equals("gm_patrol"))
+        {
+            // ai.patrol(self, "patrol");
+            chat.chat(self, "[GM|AI] Patrolling");
+        }
+        if (nextWord.equals("gm_flee"))
+        {
+            ai.flee(self,speaker, 10, 15);
+            chat.chat(self, "[GM|AI] Fleeing");
+        }
+        if (nextWord.equals("gm_chat"))
+        {
+            chat.chat(self, "[GM|AI] Testing chat");
+        }
+        if (nextWord.equals("gm_damage"))
+        {
+            int damage = rand(100, 1000);
+            damage(self, DAMAGE_KINETIC, HIT_LOCATION_HEAD, damage);
+            chat.chat(self, "[GM|AI] Taking " + damage + " damage");
+        }
+    }
+
+    public void prepareRingSpawn(obj_id self, dictionary params) throws InterruptedException
+    {
+        String creatureToSpawn = sui.getInputBoxText(params);
+        obj_id player = sui.getPlayerId(params);
+        if (creatureToSpawn == null)
+        {
+            broadcast(player, "Creature name is null.");
+            return;
+        }
+        spawnRing(self, 12, 14.0f, getLocation(self), creatureToSpawn);
+    }
+
+    public int spawnRing(obj_id self, int numMobs, float radius, location loc, String creatureName) throws InterruptedException
+    {
+        if (!isIdValid(self) || !exists(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        float x = loc.x;
+        float z = loc.z;
+        for (int i = 0; i < numMobs; i++)
+        {
+            float angle = (float) (i * (360 / numMobs));
+            x = loc.x + (float) Math.cos(angle) * radius;
+            z = loc.z + (float) Math.sin(angle) * radius;
+            obj_id creatureObj = create.object(creatureName, new location(x, getHeightAtLocation(x,z), z, loc.area));
+            faceTo(creatureObj, self);
+        }
+        return SCRIPT_CONTINUE;
+    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id group = getGroupObject(self);
@@ -1793,6 +2074,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int forceAnimalAttack(obj_id self, dictionary params) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::forceAnimalAttack() self(" + self + ")");
@@ -1816,12 +2098,13 @@ public class ai extends script.base_script
             stop(self);
             setLookAtTarget(self, target);
         }
-        else 
+        else
         {
             startCombat(self, target);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int attemptMilkHandler(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -1831,6 +2114,7 @@ public class ai extends script.base_script
         attemptMilk(params.getObjId("player"), self);
         return SCRIPT_CONTINUE;
     }
+
     public void attemptMilk(obj_id player, obj_id self) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -1889,7 +2173,7 @@ public class ai extends script.base_script
                 messageTo(self, "milkingCreatureStunned", null, 0, false);
                 messageTo(self, "milkingCreatureStunRemoval", null, 4, false);
             }
-            else 
+            else
             {
                 messageTo(self, "milkingCreatureStunFail", null, 0, false);
                 CustomerServiceLog("milking_and_lair_search", "handleMilking: Player: " + getName(player) + " OID: " + player + " failed to stun the creature.");
@@ -1902,6 +2186,7 @@ public class ai extends script.base_script
         params.put("player", player);
         messageTo(self, "handleMilking", params, 7, false);
     }
+
     public int handleMilking(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -1977,7 +2262,7 @@ public class ai extends script.base_script
             int amt = rand(mlev * 10, lev * 10);
             if (shortenAttempts && milkQuantityModified > 0)
             {
-                amt = amt + (int)(amt * milkQuantityModified);
+                amt = amt + (int) (amt * milkQuantityModified);
             }
             String resourceType = ai_lib.getMilkType(self);
             if (resourceType == null || resourceType.equals(""))
@@ -2033,7 +2318,8 @@ public class ai extends script.base_script
                 CustomerServiceLog("milking_and_lair_search", "handleMilking: Player: " + getName(player) + " OID: " + player + " attempted to milk but could not retrieve location data while milking " + self + " " + getName(self));
                 return SCRIPT_CONTINUE;
             }
-            for (obj_id obj_id : resourceList) {
+            for (obj_id obj_id : resourceList)
+            {
                 blog("" + obj_id);
                 setLocation(obj_id, curloc);
                 putIn(obj_id, pInv, player);
@@ -2041,7 +2327,7 @@ public class ai extends script.base_script
             sendSystemMessage(player, SID_MILK_SUCCESS);
             utils.setScriptVar(self, "milk.lasttime", getGameTime());
             utils.removeScriptVar(self, "milk.attempts");
-            if (!collection.collectionResource(player, "milk", (int)milkExceptionalModified))
+            if (!collection.collectionResource(player, "milk", (int) milkExceptionalModified))
             {
                 blog("ai.handleMilking: cannot get resource data from getLocation cpp");
                 CustomerServiceLog("milking_and_lair_search", "handleMilking: Player: " + getName(player) + " OID: " + player + " did not receive an exceptional milk from creature " + self + " " + getName(self) + ". Check the collection logs for additional details.");
@@ -2049,13 +2335,14 @@ public class ai extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_MILK_CONTINUE);
         }
         messageTo(self, "handleMilking", params, 7, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnParameters(obj_id self, dictionary params) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::handleSpawnParameters() self(" + self + ")");
@@ -2089,17 +2376,20 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int playDelayedClientEffect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
         playClientEffectObj(target, params.getString("effect"), target, "");
         return SCRIPT_CONTINUE;
     }
+
     public int clearScriptVar(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, params.getString("name"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnInvulnerableChanged(obj_id self, boolean invulnerable) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnInvulnerableChanged() self(" + self + ") invulerable(" + invulnerable + ")");
@@ -2108,12 +2398,13 @@ public class ai extends script.base_script
             removeTriggerVolume(ai_lib.ALERT_VOLUME_NAME);
             removeTriggerVolume(ai_lib.AGGRO_VOLUME_NAME);
         }
-        else 
+        else
         {
             ai_lib.resetCombatTriggerVolumes();
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitateTarget(obj_id self, obj_id victim) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "experienced"))
@@ -2132,6 +2423,7 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int clearCollectionCameraParticle(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -2139,8 +2431,21 @@ public class ai extends script.base_script
         utils.removeScriptVar(target, "picture_taken_debuff");
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id giver) throws InterruptedException
     {
+        if (getTemplateName(item).equals(TOOL))
+        {
+            obj_id player = giver;
+            obj_id mobile = self;
+            String string_template = getTemplateName(self);
+            obj_id token = create.createObject(TOOL, utils.getInventoryContainer(player), "");
+            setObjVar(token, "city_hire.mobile", string_template);
+            setObjVar(token, "tokenUsed", 1);
+            attachScript(token, "systems.city.city_hire");
+            setName(token, "City Actor Deed: " + getCreatureName(mobile));
+            return SCRIPT_OVERRIDE;
+        }
         if (!hasCompletedCollectionSlot(giver, "meatlump_recruiter_starter"))
         {
             return SCRIPT_CONTINUE;
@@ -2207,7 +2512,7 @@ public class ai extends script.base_script
             location locGoodLocation = locations.getGoodLocationAroundLocationAvoidCollidables(currentLoc, searchSize, searchSize, searchSize, searchSize, false, false, 6.0f);
             if (locGoodLocation == null)
             {
-                locGoodLocation = (location)currentLoc.clone();
+                locGoodLocation = (location) currentLoc.clone();
             }
             int mobCount = rand(1, 3);
             if (utils.isProfession(giver, utils.TRADER))
@@ -2230,7 +2535,7 @@ public class ai extends script.base_script
             utils.setScriptVar(self, "collection.investigator", 1);
             messageTo(self, "removeMeatlumpInvestigatorScriptVar", null, 82800, false);
         }
-        else 
+        else
         {
             sendSystemMessage(giver, SID_GAVE_RECRUIT_ITEM);
             int count = getCount(item);
@@ -2240,7 +2545,7 @@ public class ai extends script.base_script
                 detachScript(item, "item.special.nodestroy");
                 destroyObject(item);
             }
-            else 
+            else
             {
                 setCount(item, count);
             }
@@ -2250,33 +2555,39 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeMeatlumpRecruitmentScriptVar(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "collection.recruited");
         return SCRIPT_CONTINUE;
     }
+
     public int removeMeatlumpInvestigatorScriptVar(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "collection.investigator");
         return SCRIPT_CONTINUE;
     }
+
     public int milkingCreatureStunned(obj_id self, dictionary params) throws InterruptedException
     {
         showFlyText(self, new string_id("npc_reaction/flytext", "stun"), 2.0f, colors.ORANGERED);
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int milkingCreatureStunFail(obj_id self, dictionary params) throws InterruptedException
     {
         showFlyText(self, new string_id("npc_reaction/flytext", "stun_fail"), 2.0f, colors.ORANGERED);
         return SCRIPT_CONTINUE;
     }
+
     public int milkingCreatureStunRemoval(obj_id self, dictionary params) throws InterruptedException
     {
         showFlyText(self, new string_id("npc_reaction/flytext", "stun_expired"), 2.0f, colors.ORANGERED);
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
         return SCRIPT_CONTINUE;
     }
+
     public int redoYaw(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");
@@ -2287,9 +2598,25 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         LOG(LOGGING_CATEGORY, msg);
         return true;
+    }
+    public String[] SPEECH_RESPONSES = {
+            "Hey.",
+            "Hello.",
+            "Greetings.",
+            "Hi.",
+            "Howdy.",
+            "What's up?",
+            "How are you?",
+            "Can't talk right now."
+    };
+    public String getRandomArray(String[] array) throws InterruptedException
+    {
+        int random = rand(0, array.length - 1);
+        return array[random];
     }
 }

@@ -1,0 +1,17 @@
+@base object/weapon/ranged/rifle/base/shared_rifle_base.iff
+
+@class weapon_object_template 4
+weaponEffect = "projectile_rifle"
+weaponEffectIndex = 1
+
+@class tangible_object_template 3
+
+@class object_template 3
+
+objectName = "weapon_name" "rifle_tusken_isolationist"
+detailedDescription = "weapon_detail" "rifle_tusken_isolationist"
+lookAtText = "weapon_lookat" "rifle_tusken_isolationist"
+
+appearanceFilename = "appearance/wp_rifle_tusken_s03.apt"
+
+portalLayoutFilename = ""

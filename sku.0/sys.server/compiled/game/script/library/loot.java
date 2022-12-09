@@ -16,6 +16,7 @@ public class loot extends script.base_script
     public static final String VAR_DENY_LOOT = "denyLoot";
     public static final String VAR_LOOT_QUALITY = "loot.loot_quality";
     public static final String CHRONICLES_LOOT_TOGGLE_OBJVAR = "chroniclesLoot_toggledOff";
+    public static final String ENZYME_LOOT_TOGGLE_OBJVAR = "enzymeLoot_toggledOff";
     public static final String TBL_EXCLUSION = "datatables/loot/exclusion.iff";
     public static final String COL_TEMPLATE = "TEMPLATE";
     public static final String COL_EXCLUDE = "EXCLUDE";
@@ -97,7 +98,8 @@ public class loot extends script.base_script
         "endor",
         "naboo",
         "tatooine",
-        "yavin4"
+        "yavin4",
+        "dxun"
     };
     public static final String[] CHEST_TYPES = {
             "rare",
@@ -147,6 +149,7 @@ public class loot extends script.base_script
         int niche = ai_lib.aiGetNiche(mobType);
         if (niche == NICHE_MONSTER || niche == NICHE_HERBIVORE || niche == NICHE_CARNIVORE || niche == NICHE_PREDATOR)
         {
+            boolean hasChanceToDropEnzymeLoot = false;
             int[] hasResource = corpse.hasResource(mobType);
             if (hasResource != null && hasResource.length > 0)
             {
@@ -156,7 +159,32 @@ public class loot extends script.base_script
             {
                 return false;
             }
-            hasLoot |= addBeastEnzymes(target);
+            if (hasObjVar(target, xp.VAR_TOP_GROUP))
+            {
+                obj_id killCredit = getObjIdObjVar(target, xp.VAR_TOP_GROUP);
+                if (group.isGroupObject(killCredit))
+                {
+                    obj_id[] groupMembers = getGroupMemberIds(killCredit);
+                    for (obj_id groupMember : groupMembers)
+                    {
+                        if (isPlayer(groupMember) && !loot.hasToggledEnzymeLootOff(groupMember))
+                        {
+                            hasChanceToDropEnzymeLoot = true;
+                        }
+                    }
+                }
+                else
+                {
+                    if (isPlayer(killCredit) && !loot.hasToggledEnzymeLootOff(killCredit))
+                    {
+                        hasChanceToDropEnzymeLoot = true;
+                    }
+                }
+            }
+            if (hasChanceToDropEnzymeLoot == true)
+            {
+                hasLoot |= loot.addBeastEnzymes(target);
+            }
         }
         return hasLoot;
     }
@@ -1482,19 +1510,11 @@ public class loot extends script.base_script
     }
     public static obj_id chroniclesCraftingLootDrop(obj_id player) throws InterruptedException
     {
-        if (hasToggledChroniclesLootOff(player))
-        {
-            return obj_id.NULL_ID;
-        }
-        return chroniclesNonCorpseLootDrop(player, "crafting", pgc_quests.PGC_CHRONICLE_BASE_CRAFTING_LOOT_CHANCE, "crafting");
+        return hasToggledChroniclesLootOff(player) ? obj_id.NULL_ID : chroniclesNonCorpseLootDrop(player, "crafting", pgc_quests.PGC_CHRONICLE_BASE_CRAFTING_LOOT_CHANCE, "crafting");
     }
     public static obj_id chroniclesPvpLootDrop(obj_id player) throws InterruptedException
     {
-        if (hasToggledChroniclesLootOff(player))
-        {
-            return obj_id.NULL_ID;
-        }
-        return chroniclesNonCorpseLootDrop(player, "pvp", pgc_quests.PGC_CHRONICLE_BASE_PVP_LOOT_CHANCE, "pvping");
+        return hasToggledChroniclesLootOff(player) ? obj_id.NULL_ID : chroniclesNonCorpseLootDrop(player, "pvp", pgc_quests.PGC_CHRONICLE_BASE_PVP_LOOT_CHANCE, "pvping");
     }
     public static obj_id chroniclesNonCorpseLootDrop(obj_id player, String relicCategory, int relicChance, String activityType) throws InterruptedException
     {
@@ -1542,6 +1562,24 @@ public class loot extends script.base_script
     {
         return addCollectionLoot(target, false, null);
     }
+    
+    // BEGIN ENZYME LOOT TOGGLE \\
+    
+    public static boolean hasToggledEnzymeLootOff(obj_id player) throws InterruptedException
+    {
+        return hasObjVar(player, ENZYME_LOOT_TOGGLE_OBJVAR);
+    }
+    public static void disableEnzymeLoot(obj_id player) throws InterruptedException
+    {
+        setObjVar(player, ENZYME_LOOT_TOGGLE_OBJVAR, true);
+    }
+    public static void enableEnzymeLoot(obj_id player) throws InterruptedException
+    {
+        removeObjVar(player, ENZYME_LOOT_TOGGLE_OBJVAR);
+    }
+    
+    // END ENZYME LOOT TOGGLE \\
+    
     public static boolean addCollectionLoot(obj_id target, boolean theftBool, obj_id thief) throws InterruptedException
     {
         String creatureName = ai_lib.getCreatureName(target);
@@ -2488,8 +2526,55 @@ public class loot extends script.base_script
     }
     public static boolean addRareLoot(obj_id target) throws InterruptedException
     {
-        // get the attacker who did the most damage.
-        obj_id player = getObjIdObjVar(target, xp.VAR_TOP_GROUP);
+    	boolean looted = false;
+    	
+    	// get the attacker who did the most damage.
+        obj_id killer = getObjIdObjVar(target, xp.VAR_TOP_GROUP);
+        
+        
+        if (group.isGroupObject(killer))
+        {
+        	Vector attackerList = utils.getResizeableObjIdBatchScriptVar(target, xp.VAR_ATTACKER_LIST + ".attackers");
+        	
+        	if (attackerList != null && attackerList.size() > 0)
+        	{
+        		obj_id[] members = getGroupMemberIds(killer);
+        		
+        		if (members != null && members.length > 0)
+        		{
+        			//for each group member in the attackers in range
+        			
+        			for(obj_id member: members )
+        			{
+        				if (attackerList.indexOf(member) >= 0)
+        				{
+        					
+        					if (addRareLootToPlayer(member, target) && !looted)
+        					{
+        						looted = true;
+        					}
+        					
+        				}
+        			}
+        			
+        		}
+        		
+        	}
+        	
+        	
+        }
+        else
+        {
+        	return addRareLootToPlayer(killer, target);
+        }
+        
+        
+        return looted;
+    }
+    
+    
+    public static boolean addRareLootToPlayer(obj_id player, obj_id target) throws InterruptedException
+    {
 
         // make sure the attacker is a player.
         if(!isValidId(player) || !isPlayer(player)){
@@ -2613,7 +2698,7 @@ public class loot extends script.base_script
         }
         LOG("rare_loot", "Player (" + player + ") just qualified for a " + type + " RLS chest!");
 
-        obj_id chest = createRareLootChest(target, lootType);
+        obj_id chest = createRareLootChest(player, lootType);
 
         setObjVar(player, "loot.rls.lastChestAwardTime", getGameTime());
         setObjVar(player, "loot.rls.lastLootedChest", chest);

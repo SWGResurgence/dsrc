@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class craftinglib extends script.base_script
 {
-    public craftinglib()
-    {
-    }
     public static final String VERSION = "v0.00.00";
     public static final float COMPLEXITY_INCREMENT_MOD = 3.0f;
     public static final float RESOURCE_NOT_USED = -9999;
@@ -23,8 +20,8 @@ public class craftinglib extends script.base_script
     public static final float EXPERIENCE_GRANTED_MULTIPLIER = 3.0f;
     public static final int socketThreshold = 60;
     public static final int socketDelta = 10;
-    public static final int maxSockets = 1;
-    public static final int socketChance = 50;
+    public static final int maxSockets = 3;
+    public static final int socketChance = 75;
     public static final float STATION_AREA = 20.0f;
     public static final String OBJVAR_STATION = "crafting.station";
     public static final String OBJVAR_PRIVATE_STATION = "crafting.private";
@@ -1147,7 +1144,7 @@ public class craftinglib extends script.base_script
         }
         float cityRollAdjust = 1.0f;
         int city_id = city.checkCity(player, false);
-        if (city_id > 0 && (city.cityHasSpec(city_id, city.SF_SPEC_RESEARCH) || city.cityHasSpec(city_id, city.SF_SPEC_MASTER_MANUFACTURING)))
+        if (city_id > 0 && (city.getCityRank(city_id) == 3 || city.cityHasSpec(city_id, city.SF_SPEC_MASTER_MANUFACTURING)))
         {
             cityRollAdjust = 1.15f;
             sendSystemMessage(player, new string_id("city/city", "research_center_message"));
@@ -1772,7 +1769,7 @@ public class craftinglib extends script.base_script
         }
         if (craftingType == STATION_TYPE_SPACE)
         {
-            return "space_station";
+            return "space_station, tcg_hanger_station";
         }
         if (craftingType == STATION_TYPE_FOOD_AND_STRUCTURE)
         {

@@ -523,7 +523,7 @@ public class faction_recruiter extends script.base_script
     }
     public int msgFactionItemRankSelected(obj_id self, dictionary params) throws InterruptedException
     {
-        if ((params == null) || (params.isEmpty()))
+        if (params == null || params.isEmpty())
         {
             return SCRIPT_CONTINUE;
         }

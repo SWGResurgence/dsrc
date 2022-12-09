@@ -8,3 +8,4 @@ tcg_itv_location	callforg9riggerpickup
 itv_snowspeeder	callforsnowspeeder
 itv_slave_1	callforslave1pickup
 default_itv	callforpickup
+basiliskWarDroid	carforbasiliskwardroid

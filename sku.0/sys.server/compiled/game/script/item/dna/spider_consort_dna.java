@@ -11,7 +11,7 @@ public class spider_consort_dna extends script.base_script
     {
     }
     public static final String SPIDER_CONSORT_DNA_LOOT_ITEM = "item_spiderclan_consort_dna";
-    public static final int SPIDER_CONSORT_DNA_LOOT_CHANCE = 15;
+    public static final int SPIDER_CONSORT_DNA_LOOT_CHANCE = 5;
 
 
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException

@@ -10,22 +10,22 @@ public class vehicle extends script.base_script
     public static final int MAX_STORED_VEHICLES = 3;
     public static final int MAX_STORED_VEHICLES_MUSTAFAR_EXPANSION = 6;
     public static final int MAX_VEHICLES = 1;
-    public static final int VAR_SPEED_MIN = 0;
-    public static final int VAR_SPEED_MAX = 1;
-    public static final int VAR_TURN_RATE_MIN = 2;
-    public static final int VAR_TURN_RATE_MAX = 3;
-    public static final int VAR_ACCEL_MIN = 4;
-    public static final int VAR_ACCEL_MAX = 5;
-    public static final int VAR_DECEL = 6;
-    public static final int VAR_SLOPE_MOD = 7;
-    public static final int VAR_DAMP_ROLL = 8;
-    public static final int VAR_DAMP_PITCH = 9;
-    public static final int VAR_DAMP_HEIGHT = 10;
-    public static final int VAR_GLIDE = 11;
-    public static final int VAR_BANKING = 12;
-    public static final int VAR_HOVER_HEIGHT = 13;
-    public static final int VAR_AUTO_LEVEL = 14;
-    public static final int VAR_STRAFE = 15;
+    public static final int VAR_SPEED_MIN = 0; //Minimum consistant speed for the vehicle
+    public static final int VAR_SPEED_MAX = 1; //Maximum consistant speed for the vehicle
+    public static final int VAR_TURN_RATE_MIN = 2;//Minimum turn rate for the vehicle
+    public static final int VAR_TURN_RATE_MAX = 3;//Maximum turn rate for the vehicle
+    public static final int VAR_ACCEL_MIN = 4; // Base acceleration
+    public static final int VAR_ACCEL_MAX = 5; // Maximum acceleration
+    public static final int VAR_DECEL = 6; // Time to stop from full speed
+    public static final int VAR_SLOPE_MOD = 7; // (Unused) Slope modifier
+    public static final int VAR_DAMP_ROLL = 8;// How much the vehicle rolls when turning
+    public static final int VAR_DAMP_PITCH = 9;//How much the vehicle pitches (think going down hill)
+    public static final int VAR_DAMP_HEIGHT = 10; // How much tolerance for the vehicle to try to stay at the same height
+    public static final int VAR_GLIDE = 11; // How much the vehicle will glide when in air.
+    public static final int VAR_BANKING = 12; // How much the vehicle will bank when turning
+    public static final int VAR_HOVER_HEIGHT = 13; // How high the vehicle will hover
+    public static final int VAR_AUTO_LEVEL = 14; // How much the vehicle will try to level itself
+    public static final int VAR_STRAFE = 15; // How much the vehicle will strafe
     public static final string_id SID_SYS_CANT_CALL_LOC = new string_id("pet/pet_menu", "cant_call_vehicle");
     public static final string_id SID_SYS_CANT_CALL_NUM = new string_id("pet/pet_menu", "cant_call_vehicle");
     public static final string_id SID_SYS_HAS_MAX_VEHICLE = new string_id("pet/pet_menu", "has_max_vehicle");
@@ -49,9 +49,18 @@ public class vehicle extends script.base_script
     public static final string_id SID_CONVERT_VCD_MOVED = new string_id("spam", "vehicle_to_schem_vcd_moved");
     public static final String STF = "pet/pet_menu";
     public static final String VEHICLE_STAT_TABLE = "datatables/vehicle/vehicle_stats.iff";
+    public static final String TABLE_LAVA_RESISTANCE = "datatables/terrain/creature_water_values.iff";
     public static final int MOD_TYPE_MAX_SPEED = 1;
     public static final String OBJVAR_MOD_MAX_SPEED_DURATION = "vehicle.mod.maxSpeed.duration";
     public static final String OBJVAR_MOD_MAX_SPEED_OLD = "vehicle.mod.maxSpeed.old";
+    /**
+     * ObjVar attached to Vehicle Control Device and Vehicle Objects if it is resistant
+     * to lava (as applied by Resistance Kit, not through template exemption).
+     *
+     * @since SWG Source 3.1 - September 2021
+     * @apiNote must match to value in src CreatureController.cpp
+     */
+    public static final String VAR_LAVA_RESISTANT = "vehicle.lava_resistance";
     public static final String[] s_varInfoNames = new String[]
     {
         "/private/index_speed_min",
@@ -255,7 +264,7 @@ public class vehicle extends script.base_script
     {
         return isVehicle(obj) && hasScript(obj, "systems.vehicle_system.battlefield_vehicle");
     }
-    public static String getVehicleTemplate(obj_id controlDevice) throws InterruptedException
+    public static String getVehicleTemplate(obj_id controlDevice)
     {
         if (!isIdValid(controlDevice))
         {
@@ -286,7 +295,7 @@ public class vehicle extends script.base_script
         messageTo(vehicle, "revertVehicleMod", params, duration, false);
         setMaximumSpeed(vehicle, currentMaxSpeed * factor);
     }
-    public static String getVehicleReference(obj_id controlDevice) throws InterruptedException
+    public static String getVehicleReference(obj_id controlDevice)
     {
         if (!isIdValid(controlDevice))
         {
@@ -1107,4 +1116,39 @@ public class vehicle extends script.base_script
         }
         return null;
     }
+  /**
+     * @param vehicleControlDevice the OID of the intangible vehicle control device
+     *                             (NOT the tangible vehicle object)
+     *
+     * @return true if this vehicle is lava resistant based either on its template
+     * being included in the exemption table or if a kit has been used on it to apply
+     * the exemption ObjVar.
+     *
+     * @since SWG Source 3.1 - September 2021
+     * @author Aconite
+     */
+    public static boolean isLavaResistant(obj_id vehicleControlDevice)
+    {
+        return hasObjVar(vehicleControlDevice, VAR_LAVA_RESISTANT) ||
+                isLavaResistant(getVehicleTemplate(vehicleControlDevice));
+    }
+
+    /**
+     * @param vehicleTemplate template of the actual vehicle (not control device)
+     *
+     * @return true if this vehicle's template is lava resistant
+     *
+     * @since SWG Source 3.1 - September 2021
+     * @author Aconite
+     */
+    public static boolean isLavaResistant(String vehicleTemplate)
+    {
+        dictionary d = dataTableGetRow(TABLE_LAVA_RESISTANCE, vehicleTemplate);
+        if(d != null && d.size() > 0)
+        {
+            return d.getFloat("lava_resistance") >= 100f;
+        }
+        return false;
+    }
+
 }

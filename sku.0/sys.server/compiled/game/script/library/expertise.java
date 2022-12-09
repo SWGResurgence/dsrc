@@ -105,7 +105,7 @@ public class expertise extends script.base_script
         {
             return false;
         }
-        if (skillName == null || skillName.equals(""))
+        if (skillName == null || skillName.isEmpty())
         {
             return false;
         }

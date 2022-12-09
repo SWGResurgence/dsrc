@@ -1,0 +1,11 @@
+@base object/intangible/vehicle/shared_vehicle_pcd_base.iff
+
+@class intangible_object_template 0
+
+@class object_template 5
+
+
+objectName = "monster_name"  "swoopracer_black"
+detailedDescription = "monster_detail" "swoopracer_black"
+appearanceFilename = "appearance/swoopracer_black.apt"
+

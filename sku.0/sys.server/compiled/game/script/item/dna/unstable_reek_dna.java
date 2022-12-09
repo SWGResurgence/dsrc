@@ -11,7 +11,7 @@ public class unstable_reek_dna extends script.base_script
     {
     }
     public static final String UNSTABLE_REEK_DNA_LOOT_ITEM = "item_cs_dna_reek";
-    public static final int UNSTABLE_REEK_DNA_LOOT_CHANCE = 15;
+    public static final int UNSTABLE_REEK_DNA_LOOT_CHANCE = 5;
 
 
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException

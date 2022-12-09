@@ -108,7 +108,6 @@ s	c	s	s	s	f	f	s	s	s	s
 3356021	Ruins -6731 81 1082		garyn_thief		600	900	
 3356022	Ruins -6731 81 1082		garyn_thief		600	900	
 3356166	Questgiverkillmite 5335 80 5637		commoner_human_female				conversation.lf_killmite
-2746448	QuestReceiverGiverDoctor StoryArc1 -5108 80 -2202 in med center		scientist_human_male				conversation.c_story1_1_doc
 2395637	CrashSite 0 0 2000		itp_thrawn_rebel_scout		220	330	
 2395638	CrashSite 0 0 2000		itp_thrawn_rebel_scout		220	330
 2395639	CrashSite 0 0 2000		itp_thrawn_rebel_scout		220	330
@@ -129,27 +128,3 @@ s	c	s	s	s	f	f	s	s	s	s
 2395654	CrashSite 0 0 2000		itp_thrawn_rebel_scout		220	330	
 2395655	CrashSite 0 0 2000		itp_thrawn_rebel_scout		220	330	
 2395656	CrashSite 0 0 2000		itp_thrawn_rebel_scout		220	330	
-3566195	Casino in Narmle WP -5286 -2266 actual -5264 -2290		patron_human_female_03				conversation.c_story1_2_mole
-3566275	In Black Sun bunker WP 4836 -1090 actual 4836 -1090		scientist_human_male				conversation.c_story1_2_chemist
-3566276	In Black Sun bunker WP 4836 -1090		black_sun_minion		600	900	
-3566277	In Black Sun bunker WP 4836 -1091		black_sun_minion		600	900	
-3566278	In Black Sun bunker WP 4836 -1092		black_sun_minion		600	900	
-3566279	In Black Sun bunker WP 4836 -1093		black_sun_minion		600	900	
-3566280	In Black Sun bunker WP 4836 -1094		black_sun_minion		600	900	
-3566281	In Black Sun bunker WP 4836 -1095		black_sun_smuggler		600	900	
-3566282	In Black Sun bunker WP 4836 -1096		black_sun_smuggler		600	900	
-3566283	In Black Sun bunker WP 4836 -1097		black_sun_smuggler		600	900	
-3566285	In Black Sun bunker WP 4836 -1098		black_sun_smuggler		600	900	
-3566286	In Black Sun bunker WP 4836 -1099		black_sun_smuggler		600	900	
-3566287	In Black Sun bunker WP 4836 -1100		black_sun_minion		600	900	
-3566288	In Black Sun bunker WP 4836 -1101		black_sun_smuggler		600	900
-3566289	In Black Sun bunker WP 4836 -1102		black_sun_smuggler		600	900
-3566290	In Black Sun bunker WP 4836 -1103		black_sun_smuggler		600	900
-3566291	In Black Sun bunker WP 4836 -1104		black_sun_smuggler		600	900
-3566292	In Black Sun bunker WP 4836 -1105		black_sun_smuggler		600	900
-3566293	In Black Sun bunker WP 4836 -1106		black_sun_initiate		600	900
-3566294	In Black Sun bunker WP 4836 -1107		black_sun_initiate		600	900
-3566295	In Black Sun bunker WP 4836 -1108		black_sun_initiate		600	900
-3566296	In Black Sun bunker WP 4836 -1109		black_sun_initiate		600	900
-3566297	In Black Sun bunker WP 4836 -1110		black_sun_initiate		600	900
-3566298	In Black Sun bunker WP 4836 -1111		black_sun_initiate		600	900

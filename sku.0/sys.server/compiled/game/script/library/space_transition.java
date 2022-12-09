@@ -471,7 +471,10 @@ public class space_transition extends script.base_script
                         copyObjVar(ship, player, "teleportFixup");
                         LIVE_LOG("TeleportFixup", "Copying teleportFixup objVar from " + ship + " to " + player);
                     }
+                    float currentHeight = getHeightAtLocation(shipLoc.x, shipLoc.z);
+                    shipLoc.y = currentHeight;
                     setLocation(player, shipLoc);
+
                 }
             }
         }

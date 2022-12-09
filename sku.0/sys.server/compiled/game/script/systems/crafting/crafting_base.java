@@ -5,9 +5,6 @@ import script.library.*;
 
 public class crafting_base extends script.base_script
 {
-    public crafting_base()
-    {
-    }
     public static final String VERSION = "v0.00.00";
     public String[] getRequiredSkills() throws InterruptedException
     {
@@ -254,9 +251,9 @@ public class crafting_base extends script.base_script
                     }
                     if (experimentModTotal > craftinglib.socketThreshold) {
                         int sockets = 0;
-                        int chance = experimentModTotal - 50;
+                        int chance = experimentModTotal - 75;
                         if (chance > rand(1, 100)) {
-                            sockets = 1;
+                            sockets = 3;
                         }
                         objectAttrib.minValue = sockets;
                         objectAttrib.maxValue = sockets;

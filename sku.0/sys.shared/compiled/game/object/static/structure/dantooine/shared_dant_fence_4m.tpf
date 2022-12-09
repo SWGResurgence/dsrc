@@ -14,6 +14,6 @@ lookAtText = "string_table"  "pristine wall"
 
 snapToTerrain = false
 
-appearanceFilename = "appearance/thm_dant_fence_4m.apt"
+appearanceFilename = "appearance/thm_dant_fence_4m_no_col.apt"
 
 portalLayoutFilename = ""

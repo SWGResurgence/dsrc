@@ -422,6 +422,26 @@ public class working_controller extends script.base_script
         trial.sendCompletionSignal(self, trial.WORKING_WIN_SIGNAL);
         obj_id[] players = instance.getPlayersInInstanceArea(self);
         badge.grantBadge(players, "bdg_must_victory_odf");
+        
+        // HEROIC SYSTEM BEGIN \\
+        
+        dictionary dict = new dictionary();
+        dict.put("tokenIndex", 7);
+        dict.put("tokenCount", 10);
+        utils.messageTo(players, "handleAwardtoken", dict, 0, false);
+        obj_id group = getGroupObject(players[0]);
+        int calendarTime = getCalendarTime();
+        String realTime = getCalendarTimeStringLocal(calendarTime);
+        CustomerServiceLog("instance-mustafar_trials_operational_droid_factory", "Doom Bringer Defeated in instance (" + self + ") by group_id (" + group + ") at " + realTime);
+        CustomerServiceLog("instance-mustafar_trials_operational_droid_factory", "Group (" + group + ") consists of: ");
+        for (int i = 0; i < players.length; ++i)
+        {
+            String strProfession = skill.getProfessionName(getSkillTemplate(players[i]));
+            CustomerServiceLog("instance-mustafar_trials_operational_droid_factory", "Group (" + group + ") member " + i + " " + getFirstName(players[i]) + "'s(" + players[i] + ") profession is " + strProfession + ".");
+        }
+        
+        // HEROIC SYSTEM END \\
+        
         return SCRIPT_CONTINUE;
     }
     public int doomTargetDestroyed(obj_id self, dictionary params) throws InterruptedException

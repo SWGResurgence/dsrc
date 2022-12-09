@@ -5,9 +5,7 @@ import script.library.*;
 
 public class destroy_duty extends script.base_script
 {
-    public destroy_duty()
-    {
-    }
+    private static final float dutyTokenBonus = Float.parseFloat(getConfigSetting("GameServer", "dutyTokenBonus"));
     public static final string_id SID_TARGET_LOCATED = new string_id("space/quest", "destroy_duty_target_located");
     public static final string_id SID_TARGET_DETECTED = new string_id("space/quest", "destroy_duty_target_detected");
     public static final string_id SID_BOSS_DETECTED = new string_id("space/quest", "destroy_duty_boss_detected");
@@ -435,14 +433,14 @@ public class destroy_duty extends script.base_script
         setObjVar(self, "rounddeadships", rounddeadships);
         removeObjVar(self, "deadships");
         dictionary outparams = new dictionary();
-        if ((wavescomplete == wavesperround) || hasObjVar(self, "currentBossLevel"))
+        if (wavescomplete == wavesperround || hasObjVar(self, "currentBossLevel"))
         {
             setObjVar(self, "wavescomplete", 0);
             int roundscomplete = getIntObjVar(self, "roundscomplete");
             roundscomplete++;
             setObjVar(self, "roundscomplete", roundscomplete);
             int roundsperlevel = getIntObjVar(self, "roundsPerLevel");
-            if ((roundscomplete == roundsperlevel) || hasObjVar(self, "currentBossLevel"))
+            if (roundscomplete == roundsperlevel || hasObjVar(self, "currentBossLevel"))
             {
                 if (!hasObjVar(self, "currentBossLevel"))
                 {
@@ -524,36 +522,31 @@ public class destroy_duty extends script.base_script
         obj_id player = getObjIdObjVar(self, space_quest.QUEST_OWNER);
         int reward = params.getInt("reward");
         int type = params.getInt("type");
+        prose_package pp = null;
         switch (type)
         {
             case 1:
-            prose_package pp = prose.getPackage(SID_ROUND_REWARD, reward);
-            sendQuestSystemMessage(player, pp);
-            break;
+                pp = prose.getPackage(SID_ROUND_REWARD, reward);
+                break;
             case 2:
-            pp = prose.getPackage(SID_COMPLETE_REWARD, reward);
-            sendQuestSystemMessage(player, pp);
-            break;
+                pp = prose.getPackage(SID_COMPLETE_REWARD, reward);
+                break;
             case 3:
-            pp = prose.getPackage(SID_BOSS_REWARD, reward);
-            sendQuestSystemMessage(player, pp);
-            break;
-            default:
-            break;
+                pp = prose.getPackage(SID_BOSS_REWARD, reward);
+                break;
         }
+        if (pp != null)
+            sendQuestSystemMessage(player, pp);
         money.bankTo(money.ACCT_SPACE_QUEST_REWARD, player, reward);
         obj_id pInv = utils.getInventoryContainer(player);
         obj_id playerShip = space_transition.getContainingShip(player);
-        int tokens = reward / 250;
-        if (tokens < 1)
-        {
-            tokens = 1;
-        }
+        int tokens = reward / 125;
         if (hasObjVar(playerShip, "spaceFaction.overt"))
         {
             int pvpTokens = tokens / 2;
-            tokens = tokens + pvpTokens;
+			tokens = tokens + pvpTokens;
         }
+        tokens *= dutyTokenBonus;
         prose_package pt = prose.getPackage(SID_TOKEN_REWARD, tokens);
         sendQuestSystemMessage(player, pt);
         static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, tokens);
@@ -608,11 +601,7 @@ public class destroy_duty extends script.base_script
     }
     public int playerShipDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
-        if (params == null)
-        {
-            return SCRIPT_CONTINUE;
-        }
-        if (hasObjVar(self, "in_progress"))
+        if (params != null && hasObjVar(self, "in_progress"))
         {
             clearTargetWaypoint(self);
             cleanupShips(self);

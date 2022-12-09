@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class locked_container extends script.base_script
 {
-    public locked_container()
-    {
-    }
     public static final string_id SID_LOCK_MENU = new string_id("spam", "sid_lock_menu");
     public static final string_id SID_MENU_REMOVE_LOCK = new string_id("spam", "sid_menu_lock_remove");
     public static final string_id SID_MENU_ADD_ACCESS_PLAYER = new string_id("spam", "sid_menu_lock_add_player");
@@ -74,7 +71,7 @@ public class locked_container extends script.base_script
     }
     public void addPlayerToAccess(obj_id container, obj_id player) throws InterruptedException
     {
-        if (!isIdValid(container) || !exists(container) || !isIdValid(player) || !exists(player))
+        if (!isIdValid(container) || !exists(container) || !isIdValid(player))
         {
             return;
         }
@@ -82,7 +79,7 @@ public class locked_container extends script.base_script
     }
     public void removePlayerFromAccess(obj_id container, obj_id player) throws InterruptedException
     {
-        if (!isIdValid(container) || !exists(container) || !isIdValid(player) || !exists(player))
+        if (!isIdValid(container) || !exists(container) || !isIdValid(player))
         {
             return;
         }
@@ -127,7 +124,7 @@ public class locked_container extends script.base_script
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id lockedBy = getObjIdObjVar(self, "lock_owner");
-        if (isIdValid(lockedBy) && player == lockedBy)
+        if ((isIdValid(lockedBy) && player == lockedBy) || isGod(player))
         {
             int lockMenu = mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_LOCK_MENU);
             mi.addSubMenu(lockMenu, menu_info_types.SERVER_MENU2, SID_MENU_REMOVE_LOCK);
@@ -239,11 +236,7 @@ public class locked_container extends script.base_script
         if (sui.getIntButtonPressed(params) == sui.BP_OK)
         {
             String accessorName = sui.getInputBoxText(params);
-            obj_id target = utils.getNearbyPlayerByName(player, accessorName);
-            if (!isIdValid(target))
-            {
-                target = getPlayerIdFromFirstName(accessorName);
-            }
+            obj_id target = getPlayerIdFromFirstName(accessorName);
             if (isIdValid(target))
             {
                 addPlayerToAccess(self, target);
@@ -266,11 +259,7 @@ public class locked_container extends script.base_script
         if (sui.getIntButtonPressed(params) == sui.BP_OK)
         {
             String accessorName = sui.getInputBoxText(params);
-            obj_id target = utils.getNearbyPlayerByName(player, accessorName);
-            if (!isIdValid(target))
-            {
-                target = getPlayerIdFromFirstName(accessorName);
-            }
+            obj_id target = getPlayerIdFromFirstName(accessorName);
             if (lockedBy == target)
             {
                 return SCRIPT_CONTINUE;

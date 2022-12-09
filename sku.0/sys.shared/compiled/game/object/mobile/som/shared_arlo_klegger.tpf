@@ -1,0 +1,15 @@
+@base object/mobile/skeleton/shared_humanoid.iff
+
+@class creature_object_template 10
+
+gender = GE_male
+species = SP_rodian
+
+@class tangible_object_template 3
+
+
+
+@class object_template 3
+
+appearanceFilename = "appearance/mustifarian_c.sat"
+clientDataFile = "clientdata/npc/som/client_shared_arlo_klegger.cdf"

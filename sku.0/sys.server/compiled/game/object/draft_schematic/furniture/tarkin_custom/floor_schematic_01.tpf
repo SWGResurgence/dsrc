@@ -1,0 +1,26 @@
+@base object/draft_schematic/furniture/furniture_base.iff
+@class draft_schematic_object_template 7
+
+itemsPerContainer = 10
+craftedObjectTemplate = "object/tangible/tarkin_custom/decorative/echo_base_poi_bunker_rebl_floor.iff"
+
+slots = [
+	[
+	optional=false,
+	name = "craft_furniture_ingredients_n" "wall_sections",
+	options = [
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_furniture_ingredients_n" "wall_sections", ingredient="ore", count=100]], complexity = 0, skillCommand = "unskilled"]],
+	optionalSkillCommand = "",
+	complexity = 0,
+	appearance = "" ]]
+skillCommands = ["unskilled"]
+
+manufactureScripts = [ "systems.crafting.furniture.specific_item.floor1" ]
+
+@class intangible_object_template 0
+
+@class object_template 5
+
+complexity = 15
+sharedTemplate = "object/draft_schematic/furniture/tarkin_custom/shared_floor_schematic_01.iff"
+volume = 2

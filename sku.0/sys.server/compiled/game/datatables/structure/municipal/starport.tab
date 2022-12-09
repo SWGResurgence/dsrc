@@ -70,9 +70,9 @@ object/building/naboo/rori_restuss_starport.iff	20.34	0	17.76	WORLD_DELTA	300	60
 									object/tangible/travel/ticket_collector/ticket_collector.iff	1	0	10	WORLD_DELTA	315	0	0	1
 									object/tangible/terminal/terminal_space.iff	-7.6	0	-19.5	r1	0	1	0	0
 object/building/naboo/rori_restuss_shuttleport.iff	20	0	0	WORLD_DELTA	300	60	1	1									
-									object/tangible/terminal/terminal_travel.iff	13.3	-0.6	9.4	WORLD_DELTA	270	1	0	0
-									object/creature/npc/theme_park/player_shuttle.iff	0	-0.6	-5	WORLD_DELTA	180	0	1	0
-									object/tangible/travel/ticket_collector/ticket_collector.iff	13.3	-0.6	-9.4	WORLD_DELTA	270	0	0	1
+ 									object/tangible/terminal/terminal_travel.iff	13.3	-0.6	9.4	WORLD_DELTA	270	1	0	0
+ 									object/creature/npc/theme_park/player_shuttle.iff	0	-0.6	-5	WORLD_DELTA	180	0	1	0
+ 									object/tangible/travel/ticket_collector/ticket_collector.iff	13.3	-0.6	-9.4	WORLD_DELTA	270	0	0	1
 object/tangible/gcw/static_base/invisible_beacon.iff	0	0	0	WORLD_DELTA	300	60	1	1									
 object/tangible/camp/camp_shuttle_beacon.iff	0	0	0	WORLD_DELTA	300	60	1	1									
 object/building/dathomir/dathomir_quarantine_zone_starport.iff	20.34	0	17.76	WORLD_DELTA	300	60	0	1									

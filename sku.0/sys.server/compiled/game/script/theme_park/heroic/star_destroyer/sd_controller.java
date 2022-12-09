@@ -16,6 +16,7 @@ public class sd_controller extends script.base_script
         obj_id[] players = trial.getPlayersInDungeon(self);
         dictionary dict = new dictionary();
         dict.put("tokenIndex", 3);
+        dict.put("tokenCount", 3);
         utils.messageTo(players, "handleAwardtoken", dict, 0, false);
         obj_id group = getGroupObject(players[0]);
         int calendarTime = getCalendarTime();

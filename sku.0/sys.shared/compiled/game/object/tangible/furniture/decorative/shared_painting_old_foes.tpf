@@ -1,0 +1,13 @@
+@base object/tangible/furniture/base/shared_furniture_base.iff
+
+@class tangible_object_template 6
+
+@class object_template 5
+
+objectName = "static_item_n" "item_old_foes_painting"
+
+detailedDescription = "static_item_d" "item_old_foes_painting"
+
+appearanceFilename = "appearance/frn_all_painting_old_foes.apt"
+
+portalLayoutFilename = ""

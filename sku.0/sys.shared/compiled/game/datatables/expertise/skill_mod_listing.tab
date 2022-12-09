@@ -542,6 +542,7 @@ special_vendor_tcg_series3_nightsister	ALL	misc	1	6060			TCG Set 3 Vendor
 special_vendor_tcg_series3_battle_droid	ALL	misc	1	6070			TCG Set 3 Vendor
 special_vendor_tcg_series4_toydarian	ALL	misc	1	6080			TCG Set 4 Vendor
 special_vendor_tcg_series4_kitonak	ALL	misc	1	6090			TCG Set 4 Vendor
+special_vendor_tcg_series10_wookiee	ALL	misc	1	6090			TCG Set 10 Vendor
 special_sign_tcg_series3	ALL	misc	1	7000			TCG Set 3 animated signs
 special_sign_tcg_series5	ALL	misc	1	7001			TCG Set 5 signs
 special_sign_halloween_hanging_sign	ALL	misc	1	7010			Galactic Moon Festival Signs, version 2
@@ -552,6 +553,8 @@ special_sign_reb_empire_day_standing	ALL	misc	1	7023			Empire Day 2009
 special_sign_reb_empire_day_hanging	ALL	misc	1	7024			Empire Day 2009
 special_sign_chronicle_master_standing_sign	ALL	misc	1	7025			Chronicle Master Signs - Standing
 special_sign_chronicle_master_hanging_sign	ALL	misc	1	7026			Chronicle Master Signs - Hanging
+special_sign_wod_standing_sign	ALL	misc	1	7027			Witches of Dathomir Signs - Standing
+special_sign_wod_hanging_sign	ALL	misc	1	7028			Witches of Dathomir Signs - Hanging
 milk_quantity_modified	ALL	attributes	1	8000			Modifier for milk that can be harvested
 milk_exceptional_modified	ALL	attributes	1	8010			Modifier for exceptional milk that can be harvested (collection item)
 milk_stun_modified	ALL	attributes	1	8020			Modifier for stunning while milking

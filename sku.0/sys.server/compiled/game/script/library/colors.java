@@ -146,6 +146,7 @@ public class colors extends script.base_script
     public static final color COPPER = new color(184, 115, 51, 255);
     public static final color GOLD = new color(205, 127, 50, 255);
     public static final color SILVER = new color(230, 232, 250, 255);
+    public static final color DXUNGREEN = new color(23, 53, 11, 0);
     public static final String TBL_COLOR_RGB = "datatables/color/rgb.iff";
     public static color getColorByName(String name) throws InterruptedException
     {

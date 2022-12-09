@@ -7,9 +7,6 @@ import script.string_id;
 
 public class incubator extends script.base_script
 {
-    public incubator()
-    {
-    }
     public static final int MAX_ADJUSTED_POINTS_PER_SESSION_DPS_ARMOR = 8;
     public static final int MAX_ADJUSTED_POINTS_PER_SESSION_ATTRIBUTES = 16;
     public static final int MAX_SESSION_SKILL_INCREMENT = 10;
@@ -30,7 +27,7 @@ public class incubator extends script.base_script
     public static final int RESOURCE_POWER_AMOUNT_CAP = 50000;
     public static final int POWER_PER_SESSION = 2500;
     public static final int MAX_MUTAGEN_POINTS = 20;
-    public static final int MUTATION_MAX_INCREASE = 18;
+    public static final int MUTATION_MAX_INCREASE = 26;
     public static final int MAX_MUTATIONS = 3;
     public static final int MUTATION_SKILL_BONUS_AMT = 2;
     public static final float MUTATION_BONUS_DNA = 3.5f;
@@ -631,9 +628,11 @@ public class incubator extends script.base_script
                 modifiedTime -= skillModifier * 60;
             }
             int city_id = city.checkCity(player, false);
+                      int cityTime = 0;
             if (city.cityHasSpec(city_id, city.SF_SPEC_INCUBATOR))
             {
-                modifiedTime -= (3 * 60 * 60);
+                modifiedTime -= (5 * 60 * 60);
+                                cityTime = 5;
             }
             if (stationFunctionality != 0)
             {
@@ -650,7 +649,7 @@ public class incubator extends script.base_script
             if (modifiedTime > 0)
             {
                 setObjVar(player, NEXT_SESSION, modifiedTime);
-                CustomerServiceLog("INCUBATOR: ", "Incubator Session Completed, next session can be performed in  " + ((modifiedTime - currentTime) / 3600) + " hours");
+                sendSystemMessageTestingOnly(player, "[INCUBATION TIME REDUCTION REPORT] Exotic modifier: " + skillModifier + " seconds. Expertise modifier: " + expertiseModifier + " hours. City Bonus: " + cityTime + " hours.");
                 return true;
             }
         }

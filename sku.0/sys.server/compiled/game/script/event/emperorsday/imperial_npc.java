@@ -63,7 +63,7 @@ public class imperial_npc extends script.base_script
         }
         if (hasObjVar(self, "vader") && hasObjVar(self, "readyForBadge") && utils.hasScriptVar(player, "emperorsDayBadge"))
         {
-            CustomerServiceLog("holidayEvent", "imperial_npc.OnObjectMenuSelect: The player is authorized to access Vader and receive reward badge.");
+            //CustomerServiceLog("holidayEvent", "imperial_npc.OnObjectMenuSelect: The player is authorized to access Vader and receive reward badge.");
             mi.addRootMenu(menu_info_types.ITEM_USE, holiday.BOW);
         }
         return SCRIPT_CONTINUE;
@@ -79,7 +79,7 @@ public class imperial_npc extends script.base_script
             obj_id[] listOfWinners = getObjIdArrayObjVar(self, "listOfWinners");
             if (listOfWinners == null || listOfWinners.length <= 0)
             {
-                CustomerServiceLog("holidayEvent", "imperial_npc.OnObjectMenuSelect: THE LIST OF WINNERS WASNT FOUND ON VADER. Vader cannot give the player his badge.");
+                //CustomerServiceLog("holidayEvent", "imperial_npc.OnObjectMenuSelect: THE LIST OF WINNERS WASNT FOUND ON VADER. Vader cannot give the player his badge.");
                 return SCRIPT_CONTINUE;
             }
             boolean playerReward = false;
@@ -94,10 +94,10 @@ public class imperial_npc extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            CustomerServiceLog("holidayEvent", "imperial_npc.OnObjectMenuSelect: The list of winners was received. Player: " + player + " has the variable to claim reward.");
+            //CustomerServiceLog("holidayEvent", "imperial_npc.OnObjectMenuSelect: The list of winners was received. Player: " + player + " has the variable to claim reward.");
             if (!holiday.grantEmperorDayBadge(player, self, listOfWinners, holiday.IMPERIAL_PLAYER))
             {
-                CustomerServiceLog("holidayEvent", "imperial_npc.OnObjectMenuSelect: The grantEmperorDayBadge function shows that rewarding the player: " + player + " FAILED!");
+                //CustomerServiceLog("holidayEvent", "imperial_npc.OnObjectMenuSelect: The grantEmperorDayBadge function shows that rewarding the player: " + player + " FAILED!");
             }
         }
         sendDirtyObjectMenuNotification(self);
@@ -117,7 +117,7 @@ public class imperial_npc extends script.base_script
         if (!hasObjVar(self, "vader") && factions.isRebel(emoteSayer) && emotetarget == self)
         {
             holiday.slapPlayerDownForBeingRude(self, emoteSayer);
-            CustomerServiceLog("holidayEvent", "imperial_npc.OnObjectMenuSelect: Player: " + emoteSayer + " was rude to an NPC at the ceremony and will now be punished.");
+            //CustomerServiceLog("holidayEvent", "imperial_npc.OnObjectMenuSelect: Player: " + emoteSayer + " was rude to an NPC at the ceremony and will now be punished.");
         }
         if (hasObjVar(self, "vader") && hasObjVar(self, "readyForBadge") && utils.hasScriptVar(emoteSayer, "emperorsDayBadge"))
         {
@@ -160,7 +160,7 @@ public class imperial_npc extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        CustomerServiceLog("holidayEvent", "imperial_npc.playerKnockedOut: The player: " + player + " was knocked down by an Empire Day Ceremony NPC.");
+        //CustomerServiceLog("holidayEvent", "imperial_npc.playerKnockedOut: The player: " + player + " was knocked down by an Empire Day Ceremony NPC.");
         damage(player, DAMAGE_KINETIC, HIT_LOCATION_BODY, 100);
         setPosture(player, POSTURE_INCAPACITATED);
         if (factions.isRebel(player))

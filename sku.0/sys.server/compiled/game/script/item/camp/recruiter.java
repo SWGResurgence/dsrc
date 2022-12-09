@@ -33,7 +33,7 @@ public class recruiter extends script.base_script
         float yaw = getYaw(self);
         String faction = getStringObjVar(self, "faction");
         String spawn = "";
-        if (faction == null || faction.equals(""))
+        if (faction == null || faction.isEmpty())
         {
             return SCRIPT_CONTINUE;
         }
@@ -45,7 +45,7 @@ public class recruiter extends script.base_script
         {
             spawn = "imperial_recruiter";
         }
-        if (spawn == null || spawn.equals(""))
+        if (spawn == null || spawn.isEmpty())
         {
             return SCRIPT_CONTINUE;
         }

@@ -11,7 +11,7 @@ weaponEffectIndex = 7
 
 objectName = "weapon_name" "rifle_eweb"
 detailedDescription = "weapon_name" "rifle_eweb"
-lookAtText = "weapon_lookat" "rifle_a280"
+lookAtText = "weapon_lookat" "rifle_eweb"
 
 appearanceFilename = "appearance/wp_rifle_snow_trooper.apt"
 

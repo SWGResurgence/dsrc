@@ -1,0 +1,17 @@
+// 
+
+@base  object/weapon/ranged/carbine/base/shared_carbine_base.iff 
+
+@class weapon_object_template 4
+weaponEffectIndex = 9
+
+@class tangible_object_template 3
+
+@class object_template 3
+
+objectName = "weapon_name" "carbine_exceptional_imperial_e11"
+detailedDescription = "weapon_detail" "carbine_exceptional_imperial_e11"
+
+appearanceFilename = "appearance/wp_carbine_e11_combined.apt"
+
+portalLayoutFilename = ""

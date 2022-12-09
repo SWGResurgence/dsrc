@@ -1,0 +1,45 @@
+@base object/draft_schematic/furniture/furniture_base.iff
+@class draft_schematic_object_template 7
+//
+// skills used: inventor/basic general component design
+//
+
+itemsPerContainer = 0
+craftedObjectTemplate = "object/tangible/event_perk/life_day_presents.iff"
+
+slots = [
+	[
+	optional=false,
+	name = "craft_furniture_ingredients_n" "frame",
+	options = [
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_furniture_ingredients_n" "frame", ingredient="wood", count=80]], complexity = 0, skillCommand = "unskilled"]],
+	optionalSkillCommand = "",
+	complexity = 0,
+	appearance = "" ],
+	[
+	optional=false,
+	name = "craft_furniture_ingredients_n" "ribbon",
+	options = [
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_furniture_ingredients_n" "ribbon", ingredient="petrochem_inert", count=30]], complexity = 0, skillCommand = "unskilled"]],
+	optionalSkillCommand = "",
+	complexity = 0,
+	appearance = "" ],
+	[
+	optional=false,
+	name = "craft_furniture_ingredients_n" "wrapping",
+	options = [
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_furniture_ingredients_n" "wrapping", ingredient="wood", count=95]], complexity = 0, skillCommand = "unskilled"]],
+	optionalSkillCommand = "",
+	complexity = 0,
+	appearance = "" ]]
+skillCommands = ["unskilled"]
+
+manufactureScripts = [ "systems.crafting.furniture.specific_item.furniture_item" ]
+
+@class intangible_object_template 0
+
+@class object_template 5
+
+complexity = 12
+sharedTemplate = "object/draft_schematic/furniture/shared_furniture_lifeday_present_pile.iff"
+volume = 1

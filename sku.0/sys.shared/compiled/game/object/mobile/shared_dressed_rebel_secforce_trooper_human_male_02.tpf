@@ -1,0 +1,20 @@
+
+@base object/mobile/skeleton/shared_humanoid.iff
+
+@class creature_object_template 3
+
+gender = GE_male
+species = SP_human
+
+@class tangible_object_template 3
+
+
+
+@class object_template 3
+
+objectName = "npc_name" "syren_5_rebel_secforce_trooper"
+detailedDescription = "" ""
+lookAtText = "npc_lookat" "syren_5_rebel_secforce_trooper"
+appearanceFilename = "appearance/hum_m.sat"
+clientDataFile = "clientdata/npc/client_shared_npc_dressed_rebel_secforce_trooper_human_male_02.cdf"
+

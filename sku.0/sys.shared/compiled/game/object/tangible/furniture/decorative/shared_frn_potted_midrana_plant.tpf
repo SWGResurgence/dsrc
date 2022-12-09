@@ -1,0 +1,18 @@
+// 
+
+@base object/tangible/furniture/base/shared_furniture_base.iff
+
+@class tangible_object_template 6
+
+@class object_template 5
+
+
+objectName = "frn_n"  "potted_midrana_plant"
+
+detailedDescription = "frn_d"  "potted_midrana_plant"
+
+appearanceFilename = "appearance/frn_all_potted_plants_sml_s06.apt"
+
+clientDataFile = "clientdata/item/client_shared_item_gem_purple_s01.cdf"
+
+portalLayoutFilename = ""

@@ -15,13 +15,13 @@ public class empire_day_interior_npc_spawner extends script.base_script
     }
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.OnAttach: Initialized.");
+        //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.OnAttach: Initialized.");
         messageTo(self, "beginEmpireDaySpawning", null, (holiday.EMPIRE_DAY_EVENT_START_DELAY + 300), false);
         return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.OnInitialize: Initialized.");
+        //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.OnInitialize: Initialized.");
         messageTo(self, "beginEmpireDaySpawning", null, (holiday.EMPIRE_DAY_EVENT_START_DELAY + 300), false);
         return SCRIPT_CONTINUE;
     }
@@ -31,23 +31,23 @@ public class empire_day_interior_npc_spawner extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.beginEmpireDaySpawning: Initialized.");
+        //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.beginEmpireDaySpawning: Initialized.");
         String datatable = getStringObjVar(self, "empire_day_spawn_table");
         if (datatable == null || datatable.length() <= 0)
         {
-            CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.beginEmpireDaySpawning: The datatable objvar for the event spawning was not found.");
+            //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.beginEmpireDaySpawning: The datatable objvar for the event spawning was not found.");
             return SCRIPT_CONTINUE;
         }
-        CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.beginEmpireDaySpawning: datatable: " + datatable);
+        //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.beginEmpireDaySpawning: datatable: " + datatable);
         int numberOfCreaturesToSpawn = dataTableGetNumRows(datatable);
         if (numberOfCreaturesToSpawn <= 0)
         {
-            CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.beginEmpireDaySpawning: The datatable objvar was found but the table reference was corrupt or had no rows.");
+            //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.beginEmpireDaySpawning: The datatable objvar was found but the table reference was corrupt or had no rows.");
             return SCRIPT_CONTINUE;
         }
-        CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.beginEmpireDaySpawning: numberOfCreaturesToSpawn: " + numberOfCreaturesToSpawn);
+        //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.beginEmpireDaySpawning: numberOfCreaturesToSpawn: " + numberOfCreaturesToSpawn);
         int x = utils.getIntScriptVar(self, "spawnCounter");
-        CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.beginEmpireDaySpawning: spawnCounter: " + x);
+        //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.beginEmpireDaySpawning: spawnCounter: " + x);
         while (x < numberOfCreaturesToSpawn)
         {
             if (hasObjVar(self, "empire_day_spawned" + x))
@@ -155,19 +155,19 @@ public class empire_day_interior_npc_spawner extends script.base_script
     }
     public void spawnCreatures(int x, String datatable, obj_id self) throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.spawnCreatures: Init");
+        //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.spawnCreatures: Init");
         String spawn = dataTableGetString(datatable, x, "spawns");
         float xCoord = dataTableGetFloat(datatable, x, "loc_x");
         float yCoord = dataTableGetFloat(datatable, x, "loc_y");
         float zCoord = dataTableGetFloat(datatable, x, "loc_z");
         location myself = getLocation(self);
-        CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.spawnCreatures: my location: " + myself);
+        //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.spawnCreatures: my location: " + myself);
         String planet = myself.area;
         String spawnRoom = dataTableGetString(datatable, x, "room");
         obj_id room = getCellId(self, spawnRoom);
         if (!isIdValid(room) && (!spawnRoom.equals("world")))
         {
-            CustomerServiceLog("bad_spawner_data", "spawner " + self + ", datatable " + datatable + ", row " + x + ", mob " + spawn + ", room " + spawnRoom + " doesn't exist");
+            //CustomerServiceLog("bad_spawner_data", "spawner " + self + ", datatable " + datatable + ", row " + x + ", mob " + spawn + ", room " + spawnRoom + " doesn't exist");
             removeObjVar(self, "empire_day_spawned" + x);
             return;
         }
@@ -177,7 +177,7 @@ public class empire_day_interior_npc_spawner extends script.base_script
         {
             return;
         }
-        CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.spawnCreatures: spawnedCreature: " + spawnedCreature);
+        //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.spawnCreatures: spawnedCreature: " + spawnedCreature);
         if (dataTableHasColumn(datatable, "convo_script"))
         {
             String convoScript = dataTableGetString(datatable, x, "convo_script");
@@ -307,7 +307,7 @@ public class empire_day_interior_npc_spawner extends script.base_script
     }
     public boolean isEmpireDayRunning() throws InterruptedException
     {
-        CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.isEmpireDayRunning: Initializing check for building.");
+        //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.isEmpireDayRunning: Initializing check for building.");
         String empiredayRunning = getConfigSetting("GameServer", "empireday_ceremony");
         if(empiredayRunning == null || empiredayRunning.equals("0") || empiredayRunning.equals("false")){
             return false;
@@ -316,20 +316,20 @@ public class empire_day_interior_npc_spawner extends script.base_script
         int empireday = empiredayString.indexOf("empireday_ceremony");
         if (empireday < 0)
         {
-            CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.isEmpireDayRunning: event is NOT runing or starting.");
+            //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.isEmpireDayRunning: event is NOT runing or starting.");
             if (empiredayRunning.equals("true") || empiredayRunning.equals("1"))
             {
                 obj_id self = getSelf();
-                CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.isEmpireDayRunning: There is a config that shows the event is running. Sending a message to later to see if we tried to spawn too soon.");
+                //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.isEmpireDayRunning: There is a config that shows the event is running. Sending a message to later to see if we tried to spawn too soon.");
                 messageTo(self, "beginEmpireDaySpawning", null, (holiday.EMPIRE_DAY_EVENT_START_DELAY + 300), false);
             }
             else 
             {
-                CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.isEmpireDayRunning: There is a config that shows the event is NOT running.");
+                //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.isEmpireDayRunning: There is a config that shows the event is NOT running.");
             }
             return false;
         }
-        CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.isEmpireDayRunning: event is runing or starting.");
+        //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.isEmpireDayRunning: event is runing or starting.");
         return true;
     }
 }

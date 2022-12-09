@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class buff extends script.base_script
 {
-    public buff()
-    {
-    }
     public static final int MAX_EFFECTS = 5;
     public static final int GROUP_BUFF_DISTANCE = 100;
     public static final String BUFF_TABLE = "datatables/buff/buff.iff";
@@ -183,6 +180,14 @@ public class buff extends script.base_script
             results[i] = applyBuff(targets[i], caster, buffName);
         }
         return results;
+    }
+    public static boolean applyBuff(obj_id target, int[] nameCrcs) throws InterruptedException
+    {
+        for (int nameCrc : nameCrcs)
+        {
+            applyBuff(target, null, nameCrc, 0.0f, 0.0f);
+        }
+        return true;
     }
     public static boolean applyBuff(obj_id target, int nameCrc) throws InterruptedException
     {
@@ -470,9 +475,9 @@ public class buff extends script.base_script
         }
         int[] _matchedBuffs = new int[matchedBuffs.size()];
         for (int _i = 0; _i < matchedBuffs.size(); ++_i)
-		{
-			_matchedBuffs[_i] = (Integer) matchedBuffs.get(_i);
-		}
+        {
+            _matchedBuffs[_i] = (Integer) matchedBuffs.get(_i);
+        }
         return _matchedBuffs;
     }
     public static int[] getAllBuffs(obj_id target) throws InterruptedException

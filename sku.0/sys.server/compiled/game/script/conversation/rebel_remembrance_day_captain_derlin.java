@@ -248,21 +248,21 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         obj_id tatooine = getPlanetByName("tatooine");
         if (!isIdValid(tatooine) || !exists(tatooine))
         {
-            CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: Could not find Tatooine OID.");
+            //CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: Could not find Tatooine OID.");
             return;
         }
         String data = holiday.getEventHighScores(tatooine, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY + holiday.PLANET_VAR_SCORE, true);
         if (data == null || data.length() <= 0)
         {
-            CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: High Score Data Invalid.");
+            //CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: High Score Data Invalid.");
             return;
         }
         if (!holiday.createEventLeaderBoardUI(player, holiday.LEADER_BOARD_TITLE, data))
         {
-            CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: createEventLeaderBoardUI failed.");
+            //CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: createEventLeaderBoardUI failed.");
             return;
         }
-        CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: High Score Data received by player: " + player + ".");
+        //CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: High Score Data received by player: " + player + ".");
     }
     public void rebel_remembrance_day_captain_derlin_action_setSFVandalEventOnPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -309,12 +309,12 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         obj_id tatooine = getPlanetByName("tatooine");
         if (!isIdValid(tatooine) || !exists(tatooine))
         {
-            CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: Could not find Tatooine OID.");
+            //CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: Could not find Tatooine OID.");
             return;
         }
         if (!holiday.setEmpireDayLeaderScores(tatooine, player, holiday.PLANET_VAR_EVENT_PREFIX + holiday.PLANET_VAR_EMPIRE_DAY + holiday.PLANET_VAR_SCORE, playerScore, playerName, holiday.REBEL_PLAYER))
         {
-            CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: Player: (" + player + ") " + playerName + " was unable to attain leader board data. Their score was: " + playerScore);
+            //CustomerServiceLog("holidayEvent", "derlin_conversation.getLeaderBoardSui: Player: (" + player + ") " + playerName + " was unable to attain leader board data. Their score was: " + playerScore);
             return;
         }
     }
@@ -361,19 +361,19 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
         String playerName = getPlayerFullName(player);
         if (!collection.removeCollectionForRealsies(player, holiday.IMPERIAL_RECRUITING_COLLECTION))
         {
-            CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: ERROR. Player: (" + player + ") " + playerName + " was UNABLE to remove their Imperial collection " + holiday.IMPERIAL_RECRUITING_COLLECTION + " and fix themselves to continue doing Kiosk events.");
+            //CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: ERROR. Player: (" + player + ") " + playerName + " was UNABLE to remove their Imperial collection " + holiday.IMPERIAL_RECRUITING_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
         else 
         {
-            CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: Player: (" + player + ") " + playerName + " was able to remove their Imperial collection " + holiday.IMPERIAL_RECRUITING_COLLECTION + " and fix themselves to continue doing Kiosk events.");
+            //CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: Player: (" + player + ") " + playerName + " was able to remove their Imperial collection " + holiday.IMPERIAL_RECRUITING_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
         if (!collection.removeCollectionForRealsies(player, holiday.IMPERIAL_ANTIPROP_COLLECTION))
         {
-            CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: ERROR. Player: (" + player + ") " + playerName + " was UNABLE to remove their Imperial collection " + holiday.IMPERIAL_ANTIPROP_COLLECTION + " and fix themselves to continue doing Kiosk events.");
+            //CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: ERROR. Player: (" + player + ") " + playerName + " was UNABLE to remove their Imperial collection " + holiday.IMPERIAL_ANTIPROP_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
         else 
         {
-            CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: Player: (" + player + ") " + playerName + " was able to remove their Imperial collection " + holiday.IMPERIAL_ANTIPROP_COLLECTION + " and fix themselves to continue doing Kiosk events.");
+            //CustomerServiceLog("holidayEvent", "derlin_conversation.removeImpCollections: Player: (" + player + ") " + playerName + " was able to remove their Imperial collection " + holiday.IMPERIAL_ANTIPROP_COLLECTION + " and fix themselves to continue doing Kiosk events.");
         }
     }
     public String rebel_remembrance_day_captain_derlin_tokenTO_timeLeftVandal(obj_id player, obj_id npc) throws InterruptedException

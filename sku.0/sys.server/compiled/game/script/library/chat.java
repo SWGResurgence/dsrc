@@ -6,9 +6,6 @@ import script.string_id;
 
 public class chat extends script.base_script
 {
-    public chat()
-    {
-    }
     public static final String MOOD_NONE = "none";
     public static final String MOOD_ABSENTMINDED = "absentminded";
     public static final String MOOD_AMAZED = "amazed";
@@ -197,6 +194,7 @@ public class chat extends script.base_script
     public static final String MOOD_HURRIED = "hurried";
     public static final String MOOD_PATIENT = "patient";
     public static final String MOOD_FIRM = "firm";
+	public static final String MOOD_UNDEAD = "undead";
     public static final String[] BADMOODS = 
     {
         MOOD_ANGRY,
@@ -256,7 +254,8 @@ public class chat extends script.base_script
         MOOD_DISDAINFUL,
         MOOD_CONTEMPTUOUS,
         MOOD_WARY,
-        MOOD_MALEVOLENT
+        MOOD_MALEVOLENT,
+		MOOD_UNDEAD
     };
     public static final String[] GOODMOODS = 
     {
@@ -530,7 +529,8 @@ public class chat extends script.base_script
         MOOD_MALEVOLENT,
         MOOD_HURRIED,
         MOOD_PATIENT,
-        MOOD_FIRM
+        MOOD_FIRM,
+		MOOD_UNDEAD
     };
     public static final String CHAT_SAY = "say";
     public static final String CHAT_INTONE = "intone";

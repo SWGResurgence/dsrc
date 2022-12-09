@@ -6,9 +6,6 @@ import java.util.HashSet;
 
 public class npe extends script.base_script
 {
-    public npe()
-    {
-    }
     public static final String SCRIPT_PUBLIC_TRAVEL = "npe.npe_instance_travel_player";
     public static final String SCRIPT_SPACE_TRAVEL = "npe.travel_player_space_dungeon_falcon";
     public static final String DUNGEON_PUBLIC_MANAGER_NAME = "npe_public_instances";
@@ -571,6 +568,9 @@ public class npe extends script.base_script
         }
         return true;
     }
+    
+    // BEGINNING OF ARMOR AND ITEMS FOR NEW CHARACTERS \\
+    
     public static obj_id[] grantNewbArmor(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -580,6 +580,19 @@ public class npe extends script.base_script
         if (utils.isProfession(player, utils.FORCE_SENSITIVE))
         {
             theSet.add(static_item.createNewItemFunction("item_npe_fs_robe_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_force_sensitive_shirt_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_force_sensitive_pants_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_force_sensitive_jacket_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_force_sensitive_boots_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_jedi_robe_light_04_01", pInv)); //Light Jedi Knight Robe
+            theSet.add(static_item.createNewItemFunction("item_jedi_robe_dark_04_01", pInv)); //Dark Jedi Knight Robe
+            theSet.add(static_item.createNewItemFunction("item_lightsaber_tool_01_01", pInv));
+            theSet.add(static_item.createNewItemFunction("item_color_crystal_02_00", pInv));
+            theSet.add(static_item.createNewItemFunction("item_color_crystal_02_02", pInv));
+            theSet.add(static_item.createNewItemFunction("item_color_crystal_02_04", pInv));
+            theSet.add(static_item.createNewItemFunction("item_color_crystal_02_06", pInv));
+            theSet.add(static_item.createNewItemFunction("item_color_crystal_02_08", pInv));
+            theSet.add(static_item.createNewItemFunction("item_power_crystal_04_14", pInv));
         }
         else if (pSpecies == SPECIES_WOOKIEE)
         {
@@ -604,7 +617,7 @@ public class npe extends script.base_script
             {
                 theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
             }
-            else 
+            else
             {
                 theSet.add(static_item.createNewItemFunction("item_smuggler_boots_02_01", pInv));
             }
@@ -618,7 +631,7 @@ public class npe extends script.base_script
             {
                 theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
             }
-            else 
+            else
             {
                 theSet.add(static_item.createNewItemFunction("item_bounty_hunter_boots_02_01", pInv));
             }
@@ -632,7 +645,7 @@ public class npe extends script.base_script
             {
                 theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
             }
-            else 
+            else
             {
                 theSet.add(static_item.createNewItemFunction("item_officer_boots_02_01", pInv));
             }
@@ -646,7 +659,7 @@ public class npe extends script.base_script
             {
                 theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
             }
-            else 
+            else
             {
                 theSet.add(static_item.createNewItemFunction("item_commando_boots_02_01", pInv));
             }
@@ -660,7 +673,7 @@ public class npe extends script.base_script
             {
                 theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
             }
-            else 
+            else
             {
                 theSet.add(static_item.createNewItemFunction("item_medic_shoes_02_01", pInv));
             }
@@ -669,7 +682,7 @@ public class npe extends script.base_script
         {
             theSet.add(static_item.createNewItemFunction("item_spy_shirt_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_spy_pants_02_01", pInv));
-            if (pSpecies != SPECIES_MON_CALAMARI && pSpecies != SPECIES_TRANDOSHAN)
+            if (pSpecies != SPECIES_MON_CALAMARI && pSpecies !=SPECIES_TRANDOSHAN)
             {
                 theSet.add(static_item.createNewItemFunction("item_spy_gloves_02_01", pInv));
             }
@@ -677,7 +690,7 @@ public class npe extends script.base_script
             {
                 theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
             }
-            else 
+            else
             {
                 theSet.add(static_item.createNewItemFunction("item_spy_boots_02_01", pInv));
             }
@@ -689,45 +702,32 @@ public class npe extends script.base_script
                 theSet.add(static_item.createNewItemFunction("item_entertainer_shirt_02_01", pInv));
                 theSet.add(static_item.createNewItemFunction("item_entertainer_pants_02_01", pInv));
                 theSet.add(static_item.createNewItemFunction("item_entertainer_hat_02_01", pInv));
+                theSet.add(static_item.createNewItemFunction("item_entertainer_boots_02_01", pInv));
                 if (pSpecies == SPECIES_TRANDOSHAN)
                 {
                     theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
-                }
-                else 
-                {
-                    theSet.add(static_item.createNewItemFunction("item_entertainer_boots_02_01", pInv));
                 }
             }
             else 
             {
                 theSet.add(static_item.createNewItemFunction("item_entertainer_shirt_02_02", pInv));
                 theSet.add(static_item.createNewItemFunction("item_entertainer_skirt_02_01", pInv));
-                if (pSpecies != SPECIES_MON_CALAMARI && pSpecies != SPECIES_TRANDOSHAN)
-                {
-                    theSet.add(static_item.createNewItemFunction("item_entertainer_gloves_02_01", pInv));
-                }
+                theSet.add(static_item.createNewItemFunction("item_entertainer_boots_02_01", pInv));
                 if (pSpecies == SPECIES_TRANDOSHAN)
                 {
                     theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
-                }
-                else 
-                {
-                    theSet.add(static_item.createNewItemFunction("item_entertainer_shoes_02_01", pInv));
                 }
             }
         }
         else if (utils.isProfession(player, utils.TRADER))
         {
+            theSet.add(static_item.createNewItemFunction("item_npe_gen_craft_tool_trader_03_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_trader_shirt_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_trader_pants_02_01", pInv));
             theSet.add(static_item.createNewItemFunction("item_trader_vest_02_01", pInv));
             if (pSpecies == SPECIES_TRANDOSHAN)
             {
                 theSet.add(static_item.createNewItemFunction("item_npe_trando_necklace_01_01", pInv));
-            }
-            else 
-            {
-                theSet.add(static_item.createNewItemFunction("item_trader_shoes_02_01", pInv));
             }
         }
         obj_id[] items = new obj_id[theSet.size()];
@@ -1175,45 +1175,55 @@ public class npe extends script.base_script
             questClearQuest(quest, player);
         }
     }
+	
+    // BEGINNING OF WEAPONS FOR NEW CHARACTERS \\
+	
     public static obj_id[] giveProfessionWeapon(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
         HashSet theSet = new HashSet();
         if (utils.isProfession(player, utils.SMUGGLER))
         {
-            theSet.add(static_item.createNewItemFunction("item_npe_smuggler_han_solo_gun", pInv));
+            theSet.add(static_item.createNewItemFunction("weapon_tow_pistol_03_01", pInv));                   //Coynite Disruptor Pistol
+            theSet.add(static_item.createNewItemFunction("weapon_tow_sword_1h_03_01", pInv));                 //Blade of the Betrayer
         }
         else if (utils.isProfession(player, utils.BOUNTY_HUNTER))
         {
-            theSet.add(static_item.createNewItemFunction("weapon_npe_carbine_bh_03_01", pInv));
+            theSet.add(static_item.createNewItemFunction("weapon_tow_rifle_04_01", pInv));                    //DP-23 Rifle
+            theSet.add(static_item.createNewItemFunction("weapon_tow_carbine_03_01", pInv));                  //Coynite SFOR Carbine
         }
         else if (utils.isProfession(player, utils.OFFICER))
         {
-            theSet.add(static_item.createNewItemFunction("item_npe_officer_sidearm", pInv));
+            theSet.add(static_item.createNewItemFunction("weapon_tow_pistol_03_01", pInv));                   //Coynite Disruptor Pistol
+            theSet.add(static_item.createNewItemFunction("weapon_tow_sword_1h_03_01", pInv));                 //Blade of the Betrayer
         }
         else if (utils.isProfession(player, utils.COMMANDO))
         {
-            theSet.add(static_item.createNewItemFunction("weapon_npe_commando_carbine_03_01", pInv));
+            theSet.add(static_item.createNewItemFunction("weapon_tow_carbine_03_01", pInv));                  //Coynite SFOR Carbine
+            theSet.add(static_item.createNewItemFunction("weapon_tow_heavy_rocket_launcher_05_01", pInv));    //Rocket Launcher
         }
         else if (utils.isProfession(player, utils.FORCE_SENSITIVE))
         {
-            theSet.add(static_item.createNewItemFunction("weapon_polearm_02_03", pInv));
+            theSet.add(static_item.createNewItemFunction("weapon_polearm_02_03", pInv));                      //Jedi Training Staff
+            theSet.add(static_item.createNewItemFunction("weapon_tow_rifle_04_02", pInv));                    //Disrupter Rifle
         }
         else if (utils.isProfession(player, utils.MEDIC))
         {
-            theSet.add(static_item.createNewItemFunction("weapon_npe_medic_pistol_03_01", pInv));
+            theSet.add(static_item.createNewItemFunction("weapon_tow_carbine_03_01", pInv));                  //Coynite SFOR Carbine
+            theSet.add(static_item.createNewItemFunction("weapon_tow_rifle_04_02", pInv));                    //Disrupter Rifle
         }
         else if (utils.isProfession(player, utils.SPY))
         {
-            theSet.add(static_item.createNewItemFunction("weapon_npe_carbine_spy_03_01", pInv));
+            theSet.add(static_item.createNewItemFunction("weapon_tow_blasterfist_04_01", pInv));              //Guardian Blaster Fist
+            theSet.add(static_item.createNewItemFunction("weapon_tow_carbine_03_01", pInv));                  //Coynite SFOR Carbine
         }
         else if (utils.isProfession(player, utils.ENTERTAINER))
         {
-            theSet.add(static_item.createNewItemFunction("item_npe_dance_prop_l_entertainer_02_01", pInv));
+            theSet.add(static_item.createNewItemFunction("weapon_tow_blasterfist_04_01", pInv));              //Guardian Blaster Fist
         }
         else if (utils.isProfession(player, utils.TRADER))
         {
-            theSet.add(static_item.createNewItemFunction("item_npe_gen_craft_tool_trader_03_01", pInv));
+            theSet.add(static_item.createNewItemFunction("weapon_tow_sword_1h_01_01", pInv));                 //Mustafar Bandit Sword
         }
         obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
