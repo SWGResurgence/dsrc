@@ -58,11 +58,9 @@ skillCommands = ["unskilled"]
 manufactureScripts = ["systems.crafting.weapon.crafting_melee_standard_weapon"]
 
 @class intangible_object_template 1
-
 @class object_template 8
 
-complexity = 34
+complexity = 17
 volume = 3
 sharedTemplate = "object/draft_schematic/weapon/appearance/shared_weapon_appearance_stun_baton_legendary.iff"
 xpPoints = [[type = XP_craftingWeapons, level = 0, value = 0]]
-
