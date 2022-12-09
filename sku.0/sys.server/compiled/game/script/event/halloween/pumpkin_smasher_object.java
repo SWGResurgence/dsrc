@@ -43,7 +43,7 @@ public class pumpkin_smasher_object extends script.base_script
             int coinChance = rand(1,100);
             if (coinChance < 50 ) {
                 broadcast(player, "You find some strange objects inside this pumpkin.");
-                static_item.createNewItemFunction("item_event_halloween_coin", utils.getInventoryContainer(player), 5);
+                static_item.createNewItemFunction("item_event_halloween_coin", utils.getInventoryContainer(player), 15);
             }
             int mobChance = rand(1,100);
             if (mobChance <= 25 ) {
