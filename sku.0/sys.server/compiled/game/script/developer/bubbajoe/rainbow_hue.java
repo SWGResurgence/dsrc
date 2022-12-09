@@ -5,6 +5,7 @@ package script.developer.bubbajoe;/*
 */
 
 import script.color;
+import script.library.hue;
 import script.obj_id;
 
 public class rainbow_hue extends script.base_script
@@ -28,21 +29,21 @@ public class rainbow_hue extends script.base_script
     {
         messageTo(self, "hueSecondLoop", null, 1, true);
     }
-    public void hueLoop(obj_id self)
+    public void hueLoop(obj_id self) throws InterruptedException
     {
         color[] pal_primus = getPalcolorCustomVarColors(self, "/private/index_color_1");
         for (int i = 0; i < pal_primus.length; i++)
         {
-            setPalcolorCustomVarClosestColor(self, "/private/index_color_1", pal_primus[i].getR(), pal_primus[i].getG(), pal_primus[i].getB(), pal_primus[i].getA());
+            hue.setColor(self, "/private/index_color_1", pal_primus[i]);
         }
         hueLoop(self);
     }
-    public void hueSecondLoop(obj_id self)
+    public void hueSecondLoop(obj_id self) throws InterruptedException
     {
-        color[] pal_secondus = getPalcolorCustomVarColors(self, "/private/index_color_1");
+        color[] pal_secondus = getPalcolorCustomVarColors(self, "/private/index_color_2");
         for (int i = 0; i < pal_secondus.length; i++)
         {
-            setPalcolorCustomVarClosestColor(self, "/private/index_color_1", pal_secondus[i].getR(), pal_secondus[i].getG(), pal_secondus[i].getB(), pal_secondus[i].getA());
+            hue.setColor(self, "/private/index_color_2", pal_secondus[i]);
         }
         hueSecondLoop(self);
     }
