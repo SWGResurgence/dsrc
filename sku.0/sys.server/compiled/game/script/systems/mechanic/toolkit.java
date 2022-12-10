@@ -72,49 +72,49 @@ public class toolkit extends script.base_script
             float currentValue;
             switch (getTookitType(self))
             {
-                case 1 -> {
+                case 1: {
                     currentValue = vehicle.getMaximumSpeed(veh);
                     currentValue += getTookitPower(self);
                     setValue(veh, currentValue, vehicle.VAR_SPEED_MAX);
                     broadcast(player, "You have increased your vehicle's maximum speed by " + getTookitPower(self));
                 }
-                case 13 -> {
+                case 13: {
                     currentValue = vehicle.getHoverHeight(veh);
                     currentValue += getTookitPower(self);
                     setValue(veh, currentValue, vehicle.VAR_HOVER_HEIGHT);
                     broadcast(player, "You have increased your vehicle's maximum hover height by " + getTookitPower(self));
                 }
-                case 5 -> {
+                case 5: {
                     currentValue = vehicle.getAccelMax(veh);
                     currentValue += getTookitPower(self);
                     setValue(veh, currentValue, vehicle.VAR_ACCEL_MAX);
                     broadcast(player, "You have increased your vehicle's acceleration by " + getTookitPower(self));
                 }
-                case 12 -> {
+                case 12: {
                     currentValue = vehicle.getBankingAngle(veh);
                     currentValue += getTookitPower(self);
                     setValue(veh, currentValue, vehicle.VAR_BANKING);
                     broadcast(player, "You have increased your vehicle's banking by " + getTookitPower(self));
                 }
-                case 4 -> {
+                case 4: {
                     currentValue = vehicle.getTurnRateMax(veh);
                     currentValue += getTookitPower(self);
                     setValue(veh, currentValue, vehicle.VAR_TURN_RATE_MAX);
                     broadcast(player, "You have increased your vehicle's turning by " + getTookitPower(self));
                 }
-                case 6 -> {
+                case 6: {
                     currentValue = vehicle.getDecel(veh);
                     currentValue += getTookitPower(self);
                     setValue(veh, currentValue, vehicle.VAR_DECEL);
                     broadcast(player, "You have increased your vehicle's deceleration by " + getTookitPower(self));
                 }
-                case 10 -> {
+                case 10: {
                     currentValue = vehicle.getDampingHeight(veh);
                     currentValue += getTookitPower(self);
                     setValue(veh, currentValue, vehicle.VAR_DAMP_HEIGHT);
                     broadcast(player, "You have increased your vehicle's damping height by " + getTookitPower(self));
                 }
-                default -> broadcast(player, "This toolkit seems to be malfunctioning.");
+                default: broadcast(player, "This toolkit seems to be malfunctioning.");
             }
             listAndSaveAllModifiers(self, player);
             obj_id cod = getCrafter(self);
