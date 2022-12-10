@@ -5107,3 +5107,4 @@ item_painting_courascant_travel_advertisement_01_01
 item_painting_twilek_f_01_01											
 item_pgc_jabba_drapes_purple											
 item_gmf_jabba_fancyrug											
+item_resurgence_bunker_deed_01_01			"string:player_structure.deed.template=object/building/player/player_resurgence_bunker_a.iff,int:player_structure.deed.buildtime=90"																		
