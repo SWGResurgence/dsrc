@@ -22,7 +22,7 @@ slots = [
 	[name = "craft_weapon_ingredients_n" "charge_accumulator", hardpoint = ""],
 	[name = "craft_weapon_ingredients_n" "grip", hardpoint = ""],
 	[name = "craft_weapon_ingredients_n" "power_cell_socket", hardpoint = ""],
-	[name = "craft_weapon_ingredients_n" "weapon_core", hardpoint = ""]
+	[name = "craft_weapon_ingredients_n" "weapon_core", hardpoint = ""],
 	[name = "craft_weapon_ingredients_n" "vibration_generator", hardpoint = ""]]
 
 craftedSharedTemplate = "object/weapon/melee/baton/shared_baton_stun_legendary.iff"
