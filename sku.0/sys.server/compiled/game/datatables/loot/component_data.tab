@@ -303,8 +303,8 @@ object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_one_s08.iff	
 	attribute.bonus.0	216	225
 	attribute.bonus.2	216	225
 object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_one_s09.iff	amount 	1	1
-	attribute.bonus.0		
-	attribute.bonus.2		
+	attribute.bonus.0	226	250
+	attribute.bonus.2	226	250
 object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_one_s10.iff	amount 	1	1
 	attribute.bonus.0	200	215
 	attribute.bonus.2	200	215
@@ -330,8 +330,8 @@ object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_one_s17.iff	
 	attribute.bonus.0	216	225
 	attribute.bonus.2	216	225
 object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_one_s18.iff	amount 	1	1
-	attribute.bonus.0		
-	attribute.bonus.2		
+	attribute.bonus.0	226	250
+	attribute.bonus.2	226	250
 object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_one_s19.iff	amount 	1	1
 	attribute.bonus.0	251	265
 	attribute.bonus.2	251	265
