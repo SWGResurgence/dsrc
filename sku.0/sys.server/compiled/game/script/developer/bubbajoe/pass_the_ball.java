@@ -18,7 +18,7 @@ public class pass_the_ball extends script.base_script
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Pass Ball"));
+        mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Pass the Ball"));
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
@@ -43,7 +43,7 @@ public class pass_the_ball extends script.base_script
             doAnimationAction(player, "throw_object_left");
             broadcast(player, "You have passed the ball to " + toUpper(getName(myTarget), 0));
             putIn(self, utils.getInventoryContainer(myTarget));
-            broadcast(myTarget, "You have received the ball from " + toUpper(getName(player) + "!", 0));
+            broadcast(myTarget, "You have been passed the ball from " + toUpper(getName(player) + "!", 0));
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;

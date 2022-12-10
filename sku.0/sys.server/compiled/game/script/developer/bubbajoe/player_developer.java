@@ -119,7 +119,8 @@ public class player_developer extends base_script
             debugConsoleMsg(self, "  /developer quest complete <questname> - Completes a quest for the target.");
             debugConsoleMsg(self, "  /developer quest clear <questname> - Clears a quest for the target.");
             debugConsoleMsg(self, "  /developer quest task complete <questname> <taskname> - Completes a task for the target.");
-            debugConsoleMsg(self, "  /developer puppet <message> - Makes the target speak a message.");
+            debugConsoleMsg(self, "  /developer say <message> - Makes the target speak a message.");
+            debugConsoleMsg(self, "  /developer comm <message> - Makes the target speak a message in a comm. window.");
             debugConsoleMsg(self, "  /developer scale <float> - Resizes the target.");
             debugConsoleMsg(self, "  /developer messageto <message> <float> - Sends a message to the target.");
             debugConsoleMsg(self, "  /developer wiki <search> - Opens a wiki page in your browser.");
