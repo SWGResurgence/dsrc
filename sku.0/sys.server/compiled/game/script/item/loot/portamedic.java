@@ -59,7 +59,7 @@ public class portamedic extends script.base_script
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("spam", "use"));
+        mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Sample Fluids"));
         return SCRIPT_CONTINUE;
     }
 

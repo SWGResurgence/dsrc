@@ -5,6 +5,8 @@ import script.library.*;
 
 import java.util.Vector;
 
+import static script.library.utils.isEquipped;
+
 public class player_building extends script.base_script
 {
     public static final String LOGGING_CATEGORY = "vendor";
@@ -5639,5 +5641,63 @@ public class player_building extends script.base_script
             LOG(LOGGING_CATEGORY, msg);
         }
         return true;
+    }
+    public int pickupAllRoomItemsIntoInventory(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        obj_id building = getTopMostContainer(self);
+        obj_id cellId = getContainedBy(self);
+        String cellName = getCellName(building, cellId);
+        obj_id[] pickupContents;
+        if (building == null)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        pickupContents = getContents(cellId);
+        for (obj_id item : pickupContents)
+        {
+            if (hasObjVar(item, "noTrade"))
+            {
+                return SCRIPT_CONTINUE;
+            }
+            if (hasScript(item, "item.special.nomove"))
+            {
+                return SCRIPT_CONTINUE;
+            }
+            putIn(item, utils.getInventoryContainer(self));
+        }
+        return SCRIPT_CONTINUE;
+    }
+    public int dropAllInventoryItemsIntoRoom(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        obj_id building = getTopMostContainer(self);
+        obj_id cellId = getContainedBy(self);
+        String cellName = getCellName(building, cellId);
+        obj_id[] dropContents;
+        if (building == null)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        dropContents = getContents(utils.getInventoryContainer(self));
+        for (obj_id item : dropContents)
+        {
+            if (hasObjVar(item, "noTrade"))
+            {
+                return SCRIPT_CONTINUE;
+            }
+            if (hasScript(item, "item.special.nomove"))
+            {
+                return SCRIPT_CONTINUE;
+            }
+            if (isEquipped(item))
+            {
+                return SCRIPT_CONTINUE;
+            }
+            if (utils.isContainer(item))
+            {
+                utils.setScriptVar(item, "x_hax_x", true); //@NOTE: future exploit var to track if a container was dropped into a room via this method.
+            }
+            putIn(item, cellId);
+        }
+        return SCRIPT_CONTINUE;
     }
 }

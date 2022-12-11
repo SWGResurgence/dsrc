@@ -85,8 +85,7 @@ manufactureScripts = ["systems.crafting.weapon.core.crafting_new_weapon_core"]
 
 @class object_template 8
 
-complexity = 44
+complexity = 22
 volume = 1
 sharedTemplate = "object/draft_schematic/weapon/core/shared_weapon_core_heavy_advanced.iff"
 xpPoints = [[type = XP_craftingWeapons, level = 0, value = 0]]
-

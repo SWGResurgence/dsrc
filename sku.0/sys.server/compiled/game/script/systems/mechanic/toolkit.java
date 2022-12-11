@@ -70,58 +70,51 @@ public class toolkit extends script.base_script
             }
             obj_id veh = getMountId(player);
             float currentValue;
-            if (getTookitType(self) == 1)
+            switch (getTookitType(self))
             {
-                currentValue = vehicle.getMaximumSpeed(veh);
-                currentValue += getTookitPower(self);
-                setValue(veh, currentValue, vehicle.VAR_SPEED_MAX);
-                broadcast(player, "You have increased your vehicle's maximum speed by " + getTookitPower(self));
-            }
-            else if (getTookitType(self) == 13)
-            {
-                currentValue = vehicle.getHoverHeight(veh);
-                currentValue += getTookitPower(self);
-                setValue(veh, currentValue, vehicle.VAR_HOVER_HEIGHT);
-                broadcast(player, "You have increased your vehicle's maximum hover height by " + getTookitPower(self));
-            }
-            else if (getTookitType(self) == 5)
-            {
-                currentValue = vehicle.getAccelMax(veh);
-                currentValue += getTookitPower(self);
-                setValue(veh, currentValue, vehicle.VAR_ACCEL_MAX);
-                broadcast(player, "You have increased your vehicle's acceleration by " + getTookitPower(self));
-            }
-            else if (getTookitType(self) == 12)
-            {
-                currentValue = vehicle.getBankingAngle(veh);
-                currentValue += getTookitPower(self);
-                setValue(veh, currentValue, vehicle.VAR_BANKING);
-                broadcast(player, "You have increased your vehicle's banking by " + getTookitPower(self));
-            }
-            else if (getTookitType(self) == 4)
-            {
-                currentValue = vehicle.getTurnRateMax(veh);
-                currentValue += getTookitPower(self);
-                setValue(veh, currentValue, vehicle.VAR_TURN_RATE_MAX);
-                broadcast(player, "You have increased your vehicle's turning by " + getTookitPower(self));
-            }
-            else if (getTookitType(self) == 6)
-            {
-                currentValue = vehicle.getDecel(veh);
-                currentValue += getTookitPower(self);
-                setValue(veh, currentValue, vehicle.VAR_DECEL);
-                broadcast(player, "You have increased your vehicle's deceleration by " + getTookitPower(self));
-            }
-            else if (getTookitType(self) == 10)
-            {
-                currentValue = vehicle.getDampingHeight(veh);
-                currentValue += getTookitPower(self);
-                setValue(veh, currentValue, vehicle.VAR_DAMP_HEIGHT);
-                broadcast(player, "You have increased your vehicle's damping height by " + getTookitPower(self));
-            }
-            else
-            {
-                broadcast(player, "This toolkit seems to be malfunctioning.");
+                case 1: {
+                    currentValue = vehicle.getMaximumSpeed(veh);
+                    currentValue += getTookitPower(self);
+                    setValue(veh, currentValue, vehicle.VAR_SPEED_MAX);
+                    broadcast(player, "You have increased your vehicle's maximum speed by " + getTookitPower(self));
+                }
+                case 13: {
+                    currentValue = vehicle.getHoverHeight(veh);
+                    currentValue += getTookitPower(self);
+                    setValue(veh, currentValue, vehicle.VAR_HOVER_HEIGHT);
+                    broadcast(player, "You have increased your vehicle's maximum hover height by " + getTookitPower(self));
+                }
+                case 5: {
+                    currentValue = vehicle.getAccelMax(veh);
+                    currentValue += getTookitPower(self);
+                    setValue(veh, currentValue, vehicle.VAR_ACCEL_MAX);
+                    broadcast(player, "You have increased your vehicle's acceleration by " + getTookitPower(self));
+                }
+                case 12: {
+                    currentValue = vehicle.getBankingAngle(veh);
+                    currentValue += getTookitPower(self);
+                    setValue(veh, currentValue, vehicle.VAR_BANKING);
+                    broadcast(player, "You have increased your vehicle's banking by " + getTookitPower(self));
+                }
+                case 4: {
+                    currentValue = vehicle.getTurnRateMax(veh);
+                    currentValue += getTookitPower(self);
+                    setValue(veh, currentValue, vehicle.VAR_TURN_RATE_MAX);
+                    broadcast(player, "You have increased your vehicle's turning by " + getTookitPower(self));
+                }
+                case 6: {
+                    currentValue = vehicle.getDecel(veh);
+                    currentValue += getTookitPower(self);
+                    setValue(veh, currentValue, vehicle.VAR_DECEL);
+                    broadcast(player, "You have increased your vehicle's deceleration by " + getTookitPower(self));
+                }
+                case 10: {
+                    currentValue = vehicle.getDampingHeight(veh);
+                    currentValue += getTookitPower(self);
+                    setValue(veh, currentValue, vehicle.VAR_DAMP_HEIGHT);
+                    broadcast(player, "You have increased your vehicle's damping height by " + getTookitPower(self));
+                }
+                default: broadcast(player, "This toolkit seems to be malfunctioning.");
             }
             listAndSaveAllModifiers(self, player);
             obj_id cod = getCrafter(self);
@@ -279,37 +272,6 @@ public class toolkit extends script.base_script
         float dampingpitch = vehicle.getDampingPitch(veh_id);
         float dampingroll = vehicle.getDampingRoll(veh_id);
         boolean strafe = vehicle.getStrafe(veh_id);
-        broadcast(player, "Minimum Speed: " + minspeed);
-        broadcast(player, "Maximum Speed: " + maxspeed);
-        broadcast(player, "Hover Height: " + height);
-        broadcast(player, "Acceleration: " + acceleration);
-        broadcast(player, "Acceleration Max: " + accelerationmax);
-        broadcast(player, "Banking Angle: " + banking);
-        broadcast(player, "Turning Rate: " + turning);
-        broadcast(player, "Turning Rate Max: " + turning_max);
-        broadcast(player, "Deceleration: " + deceleration);
-        broadcast(player, "Glide: " + glide);
-        broadcast(player, "Auto-Levelling: " + autolevel);
-        broadcast(player, "Damping Height (falling speed): " + dampingheight);
-        broadcast(player, "Damping Pitch: " + dampingpitch);
-        broadcast(player, "Damping Roll: " + dampingroll);
-        broadcast(player, "Strafe: " + strafe);
-        setObjVar(player, "mechanic.modifed.speed_min", minspeed);
-        setObjVar(player, "mechanic.modifed.speed_max", maxspeed);
-        setObjVar(player, "mechanic.modifed.height", height);
-        setObjVar(player, "mechanic.modifed.acceleration", acceleration);
-        setObjVar(player, "mechanic.modifed.acceleration_max", accelerationmax);
-        setObjVar(player, "mechanic.modifed.banking", banking);
-        setObjVar(player, "mechanic.modifed.turning", turning);
-        setObjVar(player, "mechanic.modifed.turning_max", turning_max);
-        setObjVar(player, "mechanic.modifed.deceleration", deceleration);
-        setObjVar(player, "mechanic.modifed.glide", glide);
-        setObjVar(player, "mechanic.modifed.autolevelling", autolevel);
-        setObjVar(player, "mechanic.modifed.damping_height", dampingheight);
-        setObjVar(player, "mechanic.modifed.damping_pitch", dampingpitch);
-        setObjVar(player, "mechanic.modifed.damping_roll", dampingroll);
-        setObjVar(player, "mechanic.modifed.strafe", strafe);
-        setObjVar(player, "mechanic.targetVehicle", veh_id);
         broadcast(player, "All modifiers saved.");
 
     }

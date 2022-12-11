@@ -3,6 +3,8 @@
 
 @Author: BubbaJoe
 
+@shelved: 1.0
+
  */
 package script.event.halloween;
 
@@ -25,7 +27,7 @@ public class treat_thief extends script.base_script
     public static final int FINAL_BUFF_DURATION = 5;
     public static final int FINAL_BUFF_POWER = 100;
     public static final float RUBBERBAND_DISTANCE = 16.0f;
-    public static final String LOOT_DROP_TEMPLATE = "object/tangible/loot/quest/halloween_treat.iff"; //@TODO: change me
+    public static final String LOOT_DROP_TEMPLATE = "item_city_actor_deed"; //@TODO: change me
     public treat_thief()
     {
     }

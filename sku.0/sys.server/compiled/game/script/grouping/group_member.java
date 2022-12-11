@@ -373,7 +373,7 @@ public class group_member extends script.base_script
             }
             sendSystemMessage(self, new string_id(group.GROUP_STF, leader_only));
         }
-        groupLootSui(self);
+        groupLootSui(self);//TODO: This is getting called regardless of group perms
         return SCRIPT_CONTINUE;
     }
     private int groupLootSui(obj_id self) throws InterruptedException

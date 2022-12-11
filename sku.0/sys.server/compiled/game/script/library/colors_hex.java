@@ -140,4 +140,105 @@ public class colors_hex extends script.base_script
     public static final String COPPER = "#B87333";
     public static final String GOLD = "#CD7F32";
     public static final String SILVER = "#E6E8FA";
+    public String setWhite(String source)
+    {
+        return "\\#" + WHITE + source;
+    }
+    public String setGold(String source)
+    {
+        return "\\#" + GOLD + source;
+    }
+    public String setSilver(String source)
+    {
+        return "\\#" + SILVER + source;
+    }
+    public String setCopper(String source)
+    {
+        return "\\#" + COPPER + source;
+    }
+    public String setYellow(String source)
+    {
+        return "\\#" + YELLOW + source;
+    }
+    public String setMoccasin(String source)
+    {
+        return "\\#" + MOCCASIN + source;
+    }
+    public String setGoldenrod(String source)
+    {
+        return "\\#" + GOLDENROD + source;
+    }
+    public String setGoldYellow(String source)
+    {
+        return "\\#" + GOLDYELLOW + source;
+    }
+    public String setCornSilk(String source)
+    {
+        return "\\#" + CORNSILK + source;
+    }
+    public String setPaleGoldenrod(String source)
+    {
+        return "\\#" + PALEGOLDENROD + source;
+    }
+
+    public String setPapayaWhip(String source)
+    {
+        return "\"" + PAPAYAWHIP + source;
+    }
+    public String setLightYellow(String source)
+    {
+        return "\"" + LIGHTYELLOW + source;
+    }
+    public String setLightGoldenrodYellow(String source)
+    {
+        return "\"" + LIGHTGOLDENRODYELLOW + source;
+    }
+    public String setLightGoldenrod(String source)
+    {
+        return "\"" + LIGHTGOLDENROD + source;
+    }
+    public String setLemonChiffon(String source)
+    {
+        return "\"" + LEMONCHIFFON + source;
+    }
+    public String setDarkGoldenrod(String source)
+    {
+        return "\"" + DARKGOLDENROD + source;
+    }
+    public String setBlanchedAlmond(String source)
+    {
+        return "\"" + BLANCHEDALMOND + source;
+    }
+    public String setWhiteSmoke(String source)
+    {
+        return "\"" + WHITESMOKE + source;
+    }
+    public String setOldLace(String source)
+    {
+        return "\"" + OLDLACE + source;
+    }
+    public String setNavajoWhite(String source)
+    {
+        return "\"" + NAVAJOWHITE + source;
+    }
+    public String setGhostWhite(String source)
+    {
+        return "\"" + GHOSTWHITE + source;
+    }
+    public String setFloralWhite(String source)
+    {
+        return "\"" + FLORALWHITE + source;
+    }
+    public String setAntiqueWhite(String source)
+    {
+        return "\"" + ANTIQUEWHITE + source;
+    }
+    public String setViolet(String source)
+    {
+        return "\"" + VIOLET + source;
+    }
+    public String setThistle(String source)
+    {
+        return "\"" + THISTLE + source;
+    }
 }

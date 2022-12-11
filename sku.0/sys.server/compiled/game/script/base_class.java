@@ -13,8 +13,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Vector;
 
-
-@SuppressWarnings("JavadocReference")
+@SuppressWarnings({"JavadocReference", "unused"})
 public class base_class
 {
     // info about an object listening for a message
@@ -27,27 +26,19 @@ public class base_class
     }   // class listener_data
     */
     // Collection of scripts that are listening for broadcast messages
-    private static Hashtable m_listeners = new Hashtable();
+    private static final Hashtable m_listeners = new Hashtable();
 
     /**
-     * The range data associated with a weapon.
+     * Gets the object id of a cell at a given world coordinate
+     *
+     * @param location
+     *         the coordinates to query
+     * @return the id of the cell corresponding to the coordinates or nil if it cannot be found.
      */
-    public static class range_info implements Cloneable
+    public static obj_id getCellId(obj_id building, String cellName)
     {
-        public float minRange = 0;          // min-distance range of the weapon (unit = meter)
-        public float maxRange = 0;          // maximum effective range of the weapon (unit = meter)
-
-        public Object clone()
-        {
-            try
-            {
-                return super.clone();
-            } catch (CloneNotSupportedException err)
-            {
-            }
-            return null;
-        }
-    }   // class range_info
+        return getObjIdWithNull(_getCellId(getLongWithNull(building), cellName));
+    }
 
     //*********************************************************************
     // Special objects that are used to identify the type of resizeable array
@@ -8997,18 +8988,17 @@ public class base_class
      */
     private static native long _getCellId(long building, String cellName);
 
-    public static obj_id getCellId(obj_id building, String cellName)
-    {
-        return getObjIdWithNull(_getCellId(getLongWithNull(building), cellName));
-    }
-
     /**
-     * Gets the object id of a cell at a given world coordinate
+     * Use this function to signal to observing clients that the target attributes have changed.
+     * This should only be used you when change a server-only attribute.  This includes attributes
+     * that are populated from script only, or attributes that are not synchronized down to the client.
      *
-     * @param location
-     *         the coordinates to query
-     * @return the id of the cell corresponding to the coordinates or nil if it cannot be found.
+     * @param target
+     *         the object whose attributes are changing
      */
+
+    private static native void _sendDirtyAttributesNotification(long target);
+
     public static native location getLocationForWorldCoordinate(float x, float y, float z);
 
     /**
@@ -28179,15 +28169,26 @@ public class base_class
     }
 
     /**
-     * Use this function to signal to observing clients that the target attributes have changed.
-     * This should only be used you when change a server-only attribute.  This includes attributes
-     * that are populated from script only, or attributes that are not synchronized down to the client.
-     *
-     * @param target
-     *         the object who's attributes are changing
+     * The range data associated with a weapon.
      */
+    public static class range_info implements Cloneable
+    {
+        public float minRange = 0;          // min-distance range of the weapon (unit = meter)
+        public float maxRange = 0;          // maximum effective range of the weapon (unit = meter)
 
-    private static native void _sendDirtyAttributesNotification(long target);
+        public Object clone()
+        {
+            try
+            {
+                return super.clone();
+            }
+            catch (CloneNotSupportedException err)
+            {
+                System.out.print("Exception called!");
+            }
+            return null;
+        }
+    }   // class range_info
 
     public static void sendDirtyAttributesNotification(obj_id target)
     {
