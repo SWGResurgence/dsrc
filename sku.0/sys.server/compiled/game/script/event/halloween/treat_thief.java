@@ -18,8 +18,8 @@ public class treat_thief extends script.base_script
 {
     public static final String RING_EVENT_ONE = "event_halloween_minion_01";
     public static final String RING_EVENT_TWO = "event_halloween_minion_02";
-    public static final int RING_EVENT_NUM_MOBS = 16;
-    public static final float RING_EVENT_MOB_RANGE = 0.0f;
+    public static final int RING_EVENT_NUM_MOBS = 12;//myst be divisible by 2 or else they will quadsect the ring --v
+    public static final float RING_EVENT_MOB_RANGE = 24.0f;
     public static final String SIDEKICK_TEMPLATE_ONE = "event_halloween_sidekick_01";
     public static final String SIDEKICK_TEMPLATE_TWO = "event_halloween_sidekick_02";
     public static final String SIDEKICK_BUFF = "event_halloween_sidekick_buff";
@@ -27,7 +27,7 @@ public class treat_thief extends script.base_script
     public static final int FINAL_BUFF_DURATION = 5;
     public static final int FINAL_BUFF_POWER = 100;
     public static final float RUBBERBAND_DISTANCE = 16.0f;
-    public static final String LOOT_DROP_TEMPLATE = "item_city_actor_deed"; //@TODO: change me
+    public static final String LOOT_DROP_TEMPLATE = "item_city_actor_deed";
     public treat_thief()
     {
     }
@@ -77,7 +77,7 @@ public class treat_thief extends script.base_script
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, false);
-        setName(self, "Treat Thief");
+        setName(self, "Galactic Treat Thief");
         setScale(self, 2.0f);
         startFog(self);
         return SCRIPT_CONTINUE;
@@ -90,13 +90,13 @@ public class treat_thief extends script.base_script
 
     public int OnCombatEntered(obj_id self, obj_id attacker, obj_id[] attackers, dictionary params) throws InterruptedException
     {
-        if (hasObjVar(self, "event.halloween_spam"))
+        if (utils.hasScriptVar(self, "event.halloween_spam"))
         {
             return SCRIPT_CONTINUE;
         }
         else
         {
-            setObjVar(self, "event.halloween_spam", 1);
+            utils.setScriptVar(self, "event.halloween_spam", 1);
             sendSystemMessageGalaxyTestingOnly("[World Event] The Treat Thief has been engaged on " + toUpper(getCurrentSceneName(), 0));
 
         }
@@ -105,6 +105,23 @@ public class treat_thief extends script.base_script
 
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
+        if (!utils.hasScriptVar(self, "event.halloween_group_checked")) //increase the mobs health based on group size.
+        {
+            if (group.isGrouped(attacker))
+            {
+                obj_id[] groupMembers = getGroupMemberIds(attacker);
+                if (groupMembers == null || groupMembers.length == 0)
+                {
+                    return SCRIPT_CONTINUE;
+                }
+                for (obj_id groupMember : groupMembers)
+                {
+                    addToHealth(self, 12000);// 12k health per group member
+                    sendSystemMessage(attacker, "Being grouped has increased this enemies statistics!", null);
+                }
+                utils.setScriptVar(self, "event.halloween_group", 1);
+            }
+        }
         if (beast_lib.isBeast(attacker) || pet_lib.isPet(attacker))
         {
             attacker = getMaster(attacker);
@@ -113,51 +130,39 @@ public class treat_thief extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        if (group.isGrouped(attacker))
-        {
-            obj_id[] groupMembers = getGroupMemberIds(attacker);
-            if (groupMembers == null || groupMembers.length == 0)
-            {
-                return SCRIPT_CONTINUE;
-            }
-            for (obj_id groupMember : groupMembers)
-            {
-                addToHealth(self, groupMembers.length * 1800);
-            }
-        }
         float max = getMaxHealth(self);
         float current = getHealth(self);
         float ratio = current / max;
-        if (ratio <= 0.9f && !hasObjVar(self, "event.halloween_first_ratio"))
+        if (ratio <= 0.9f && !utils.hasScriptVar(self, "event.halloween_first_ratio"))
         {
-            if (ratio <= 0.75f && !hasObjVar(self, "event.halloween_second_ratio"))
+            if (ratio <= 0.75f && !utils.hasScriptVar(self, "event.halloween_second_ratio"))
             {
-                if (ratio <= 0.6f && !hasObjVar(self, "event.halloween_third_ratio"))
+                if (ratio <= 0.6f && !utils.hasScriptVar(self, "event.halloween_third_ratio"))
                 {
-                    if (ratio <= 0.45f && !hasObjVar(self, "event.halloween_fourth_ratio"))
+                    if (ratio <= 0.45f && !utils.hasScriptVar(self, "event.halloween_fourth_ratio"))
                     {
-                        if (ratio <= 0.35f && !hasObjVar(self, "event.halloween_fifth_ratio"))
+                        if (ratio <= 0.35f && !utils.hasScriptVar(self, "event.halloween_fifth_ratio"))
                         {
-                            if (ratio <= 0.3f && !hasObjVar(self, "event.halloween_final_ratio"))
+                            if (ratio <= 0.3f && !utils.hasScriptVar(self, "event.halloween_final_ratio"))
                             {
                                 if (!buff.hasBuff(self, FINAL_BUFF))
                                 {
                                     buff.applyBuff(self, FINAL_BUFF, FINAL_BUFF_DURATION, FINAL_BUFF_POWER);
-                                    setObjVar(self, "event.halloween_final_ratio", 1);
+                                    utils.setScriptVar(self, "event.halloween_final_ratio", 1);
                                 }
                             }
                             spawnSidekick(self, SIDEKICK_TEMPLATE_TWO, SIDEKICK_BUFF, 1.0f, 40.0f);
-                            setObjVar(self, "event.halloween_fifth_ratio", 1);
+                            utils.setScriptVar(self, "event.halloween_fifth_ratio", 1);
                             return SCRIPT_CONTINUE;
                         }
                         chat.chat(self, "Stay away! I have a family to steal from!");
                         spawnSidekick(self, SIDEKICK_TEMPLATE_ONE, SIDEKICK_BUFF, 1.0f, 2.5f);
-                        setObjVar(self, "event.halloween_fourth_ratio", 1);
+                        utils.setScriptVar(self, "event.halloween_fourth_ratio", 1);
                         return SCRIPT_CONTINUE;
                     }
                     chat.chat(self, "Those first minions were weak! Maybe these will be more of a challenge.");
                     createCircleSpawn(self, attacker, RING_EVENT_TWO, RING_EVENT_NUM_MOBS, RING_EVENT_MOB_RANGE);
-                    setObjVar(self, "event.halloween_third_ratio", 1);
+                    utils.setScriptVar(self, "event.halloween_third_ratio", 1);
                     return SCRIPT_CONTINUE;
                 }
                 chat.chat(self, "My ledger seems a little light.. I'll be taking those credits, " + getName(attacker) + "!");
@@ -167,11 +172,11 @@ public class treat_thief extends script.base_script
                     money.withdraw(attacker, 1000);
                 }
                 pushPlayer(self, attacker, RUBBERBAND_DISTANCE);
-                setObjVar(self, "event.halloween_second_ratio", 1);
+                utils.setScriptVar(self, "event.halloween_second_ratio", 1);
                 return SCRIPT_CONTINUE;
             }
             chat.chat(self, "You cannot have my goodies! Minions!!!");
-            setObjVar(self, "event.halloween_first_ratio", 1);
+            utils.setScriptVar(self, "event.halloween_first_ratio", 1);
             createCircleSpawn(self, self, RING_EVENT_ONE, RING_EVENT_NUM_MOBS, RING_EVENT_MOB_RANGE);
             return SCRIPT_CONTINUE;
         }
