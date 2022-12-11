@@ -220,10 +220,10 @@ public class trick_or_treater extends script.base_script
     }
     private boolean costumeBuffExists(obj_id player) throws InterruptedException
     {
-        if (buff.getBuffOnTargetFromGroup(player, "shapechange") == 0)
+        if (buff.getBuffOnTargetFromGroup(player, "shapechange") != 0)
         {
-            return false;
+            return true;
         }
-        else return true;
+        return false;
     }
 }
