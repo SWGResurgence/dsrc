@@ -222,8 +222,8 @@ public class trick_or_treater extends script.base_script
     {
         if (buff.getBuffOnTargetFromGroup(player, "shapechange") == 0)
         {
-            return true;
+            return false
         }
-        else return false;
+        else return true;
     }
 }
