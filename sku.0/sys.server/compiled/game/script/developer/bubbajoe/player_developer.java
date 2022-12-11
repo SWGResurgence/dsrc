@@ -156,6 +156,7 @@ public class player_developer extends base_script
         loc.z = loc.z - root.z;
         return loc;
     }
+
     public void putPlayersInRing(obj_id[] targets, float ring_radius)
     {
         for (obj_id who : targets)

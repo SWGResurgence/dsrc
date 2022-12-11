@@ -10,12 +10,14 @@ public class wear extends script.base_script
     public wear()
     {
     }
+
     public int OnAttach(obj_id self)
     {
         setInvulnerable(self, true);
         setName(self, "City Actor Hireling");
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id giver) throws InterruptedException
     {
         int city_id = getCityAtLocation(getLocation(giver), 0);
@@ -38,6 +40,7 @@ public class wear extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulateActor(self, player))
@@ -53,6 +56,7 @@ public class wear extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (canManipulateActor(self, player))
@@ -102,6 +106,7 @@ public class wear extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canManipulateActor(obj_id self, obj_id player) throws InterruptedException
     {
         //@note: keep these in order of importance, with the most important last
@@ -119,12 +124,9 @@ public class wear extends script.base_script
         {
             return true;
         }
-        if (isGod(player))
-        {
-            return true;
-        }
-        else return false;
+        return isGod(player);
     }
+
     public int handleSetName(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -140,6 +142,7 @@ public class wear extends script.base_script
         setName(self, name);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetSize(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -156,6 +159,7 @@ public class wear extends script.base_script
         setScale(self, sizeFloat);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetAnimation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -171,6 +175,7 @@ public class wear extends script.base_script
         doAnimationAction(self, anim);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetMood(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -186,6 +191,7 @@ public class wear extends script.base_script
         setAnimationMood(self, mood);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetPosture(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)

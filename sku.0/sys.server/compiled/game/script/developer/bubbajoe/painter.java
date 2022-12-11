@@ -51,9 +51,10 @@ public class painter extends script.base_script
             g.drawOval((int) x, (int) y, 2, 2);
             ImageIO.write(image, "png", new File(path, getCurrentSceneName() + ".png"));
         }
-        broadcast(self,"Painted " + targets.length + " objects.");
+        broadcast(self, "Painted " + targets.length + " objects.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text)
     {
         if (text.equals(toLower("paint")))
@@ -67,8 +68,7 @@ public class painter extends script.base_script
             try
             {
                 paint(self, targets);
-            }
-            catch (IOException e)
+            } catch (IOException e)
             {
                 e.printStackTrace();
             }

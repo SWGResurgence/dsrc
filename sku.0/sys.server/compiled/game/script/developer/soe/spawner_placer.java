@@ -10,6 +10,7 @@ public class spawner_placer extends script.base_script
     public spawner_placer()
     {
     }
+
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         String[] strCommands = split(strText, ' ');

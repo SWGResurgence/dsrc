@@ -8,11 +8,13 @@ public class moneytest extends script.base_script
     public moneytest()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "money test script attached.");
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         dictionary d = new dictionary();
@@ -23,7 +25,7 @@ public class moneytest extends script.base_script
             {
                 debugSpeakMsg(self, "returned true.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "returned false.");
             }
@@ -35,7 +37,7 @@ public class moneytest extends script.base_script
             {
                 debugSpeakMsg(self, "returned true.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "returned false.");
             }
@@ -47,7 +49,7 @@ public class moneytest extends script.base_script
             {
                 debugSpeakMsg(self, "returned true.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "returned false.");
             }
@@ -59,7 +61,7 @@ public class moneytest extends script.base_script
             {
                 debugSpeakMsg(self, "returned true.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "returned false.");
             }
@@ -71,7 +73,7 @@ public class moneytest extends script.base_script
             {
                 debugSpeakMsg(self, "returned true.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "returned false.");
             }
@@ -83,7 +85,7 @@ public class moneytest extends script.base_script
             {
                 debugSpeakMsg(self, "returned true.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "returned false.");
             }
@@ -95,7 +97,7 @@ public class moneytest extends script.base_script
             {
                 debugSpeakMsg(self, "returned true.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "returned false.");
             }
@@ -107,7 +109,7 @@ public class moneytest extends script.base_script
             {
                 debugSpeakMsg(self, "returned true.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "returned false.");
             }
@@ -119,7 +121,7 @@ public class moneytest extends script.base_script
             {
                 debugSpeakMsg(self, "returned true.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "returned false.");
             }
@@ -131,7 +133,7 @@ public class moneytest extends script.base_script
             {
                 debugSpeakMsg(self, "returned true.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "returned false.");
             }
@@ -143,7 +145,7 @@ public class moneytest extends script.base_script
             {
                 debugSpeakMsg(self, "returned true.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "returned false.");
             }
@@ -155,18 +157,20 @@ public class moneytest extends script.base_script
             {
                 debugSpeakMsg(self, "returned true.");
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "returned false.");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int success(obj_id self, dictionary params) throws InterruptedException
     {
         debugSpeakMsg(self, "Got success message.");
         return SCRIPT_CONTINUE;
     }
+
     public int fail(obj_id self, dictionary params) throws InterruptedException
     {
         debugSpeakMsg(self, "Got fail message.");

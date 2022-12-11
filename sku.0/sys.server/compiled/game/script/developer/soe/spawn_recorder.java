@@ -12,13 +12,14 @@ public class spawn_recorder extends script.base_script
     public spawn_recorder()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "record_table"))
         {
             sendSystemMessageTestingOnly(self, "Attach the objvar 'record_table' to yourself with the name of the table to which you want to record");
         }
-        else 
+        else
         {
             String table = getStringObjVar(self, "record_table");
             sendSystemMessageTestingOnly(self, "Recording to table: " + table);
@@ -27,6 +28,7 @@ public class spawn_recorder extends script.base_script
         sendSystemMessageTestingOnly(self, "Say 'mark <creature name>' to place a creature or npc at your current location and heading");
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (!(toLower(text)).startsWith("mark"))
@@ -73,13 +75,16 @@ public class spawn_recorder extends script.base_script
         datatable.serverDataTableAddRow(table, dctRow);
         return SCRIPT_CONTINUE;
     }
+
     public String getRoomName(obj_id building, obj_id cell) throws InterruptedException
     {
         String[] allCells = getCellNames(building);
         int numberOfCells = allCells.length;
-        for (String cellName : allCells) {
+        for (String cellName : allCells)
+        {
             obj_id thisCell = getCellId(building, cellName);
-            if (thisCell == cell) {
+            if (thisCell == cell)
+            {
                 return cellName;
             }
         }
