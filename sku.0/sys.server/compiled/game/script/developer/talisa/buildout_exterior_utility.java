@@ -42,6 +42,7 @@ public class buildout_exterior_utility extends script.base_script
             "talus",
             "tatooine",
             "dxun",
+            "hub",
     };
 
     public buildout_exterior_utility()
@@ -250,8 +251,8 @@ public class buildout_exterior_utility extends script.base_script
             location me = getLocation(self);
             obj_id[] objects = getAllObjectsWithObjVar(me, 500f, "buildout_utility.write");
 
-            PrintWriter writer = new PrintWriter(command2 + ".csv", StandardCharsets.UTF_8);
-            writer.println("objid,container,server_template_crc,cell_index,px,py,pz,qw,qx,qy,qz,scripts,objvars");
+            PrintWriter writer = new PrintWriter("_" + command2 + ".tab", StandardCharsets.UTF_8); //never save it as the same name as the file you are writing to, or you will overwrite it even if its in a different directory. /riotact
+            writer.println("objid\tcontainer\tserver_template_crc\tcell_index\tpx\tpy\tpz\tqw\tqx\tqy\tqz\tscripts\tobjvars");
             for (obj_id i : objects)
             {
                 String template = getTemplateName(i);
@@ -269,7 +270,10 @@ public class buildout_exterior_utility extends script.base_script
                 String buildout = getBuildoutAreaName(wp.x, wp.z);
                 float coord_x = wp.x;// - getBuildoutRootCoords(buildout).x;
                 float coord_z = wp.z;// - getBuildoutRootCoords(buildout).z;
-                writer.println(i + "," + container + "," + template + "," + cell + "," + coord_x + "," + wp.y + "," + coord_z + "," + q[0] + "," + q[1] + "," + q[2] + "," + q[3] + "," + scripts + "," + objvars);
+                String rb1 = scripts.replace("[", "");
+                String rb2 = rb1.replace("]", "");
+                String final_scripts = rb2;
+                writer.println(i + "\t" + container + "\t" + template + "\t" + cell + "\t" + coord_x + "\t" + wp.y + "\t" + coord_z + "\t" + q[0] + "\t" + q[1] + "\t" + q[2] + "\t" + q[3] + "\t" + final_scripts + "\t" + objvars);
             }
             writer.close();
             sendSystemMessageTestingOnly(self, "Successfully wrote file " + command2 + ".csv to swg-main/exe/linux...");
@@ -342,6 +346,17 @@ public class buildout_exterior_utility extends script.base_script
                 sendSystemMessageTestingOnly(self, "createObject: ERROR creating object. Check your template spelling.");
             }
 
+            return SCRIPT_CONTINUE;
+        }
+        else if (command1.equalsIgnoreCase("tag"))
+        {
+            obj_id objToSave = getIntendedTarget(self);
+            if (!isIdValid(objToSave))
+            {
+                sendSystemMessageTestingOnly(self, "tag: ERROR - You must have an object targeted to use this command.");
+                return SCRIPT_CONTINUE;
+            }
+            setObjVar(objToSave, "buildout_utility.write", 1);
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
