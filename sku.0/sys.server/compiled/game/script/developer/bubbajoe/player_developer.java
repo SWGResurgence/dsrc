@@ -6,12 +6,11 @@
  */
 package script.developer.bubbajoe;
 
-import script.base_script;
-import script.dictionary;
+import script.*;
 import script.library.chat;
 import script.library.groundquests;
+import script.library.prose;
 import script.library.utils;
-import script.obj_id;
 
 public class player_developer extends base_script
 {
@@ -67,6 +66,23 @@ public class player_developer extends base_script
             chat.chat(target, combinedMessage);
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equalsIgnoreCase("comm"))
+        {
+            String speech = tok.nextToken();
+            String combinedMessage = "";
+            while (tok.hasMoreTokens())
+            {
+                combinedMessage += tok.nextToken() + " ";
+            }
+            if (combinedMessage == null || combinedMessage.equals(""))
+            {
+                return SCRIPT_CONTINUE;
+            }
+            prose_package pp = prose.getPackage(new string_id(combinedMessage));
+            commPlayer(self, target, pp);
+            return SCRIPT_CONTINUE;
+        }
+
 
         if (cmd.equalsIgnoreCase("wiki"))
         {
@@ -80,6 +96,7 @@ public class player_developer extends base_script
             launchClientWebBrowser(self, pathed);
             return SCRIPT_CONTINUE;
         }
+
         if (cmd.equalsIgnoreCase("scale"))
         {
             float original = getScale(target);
@@ -102,7 +119,8 @@ public class player_developer extends base_script
             debugConsoleMsg(self, "  /developer quest complete <questname> - Completes a quest for the target.");
             debugConsoleMsg(self, "  /developer quest clear <questname> - Clears a quest for the target.");
             debugConsoleMsg(self, "  /developer quest task complete <questname> <taskname> - Completes a task for the target.");
-            debugConsoleMsg(self, "  /developer puppet <message> - Makes the target speak a message.");
+            debugConsoleMsg(self, "  /developer say <message> - Makes the target speak a message.");
+            debugConsoleMsg(self, "  /developer comm <message> - Makes the target speak a message in a comm. window.");
             debugConsoleMsg(self, "  /developer scale <float> - Resizes the target.");
             debugConsoleMsg(self, "  /developer messageto <message> <float> - Sends a message to the target.");
             debugConsoleMsg(self, "  /developer wiki <search> - Opens a wiki page in your browser.");
@@ -127,6 +145,32 @@ public class player_developer extends base_script
         int level = getLevel(target);
         debugSpeakMsg(self, "Your level is " + level);
         return SCRIPT_CONTINUE;
+    }
+
+    public location getOffsetFromRoot(obj_id self, obj_id structure_attachment)
+    {
+        location loc = getLocation(self);
+        location root = getLocation(structure_attachment);
+        loc.x = loc.x - root.x;
+        loc.y = loc.y - root.y;
+        loc.z = loc.z - root.z;
+        return loc;
+    }
+    public void putPlayersInRing(obj_id[] targets, float ring_radius)
+    {
+        for (obj_id who : targets)
+        {
+            if (isIdValid(who))
+            {
+                location where = getLocation(who);
+                float angle = rand(0, 360);
+                float x = ring_radius * (float) Math.cos(angle);
+                float y = ring_radius * (float) Math.sin(angle);
+                where.x = where.x + x;
+                where.y = where.y + y;
+                setLocation(who, where);
+            }
+        }
     }
 }
 
