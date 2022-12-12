@@ -9,8 +9,8 @@ import script.string_id;
 
 public class portamedic extends script.base_script
 {
-    public static int COOLDOWN_TIME = 3600 * 2;
-    public static float BUFF_MODIFIER = 5.0f;
+    public static int COOLDOWN_TIME = 3600 * 2; // 2 hours
+    public static float BUFF_MODIFIER = 75.0f;
     public static int currentGameTime = getCalendarTime();
     public portamedic()
     {
@@ -26,6 +26,10 @@ public class portamedic extends script.base_script
         if (hasScript(self, "item.static_item_base"))
         {
             detachScript(self, "item.static_item_base");
+        }
+        if (hasScript(self, "object.autostack"))
+        {
+            detachScript(self, "object.autostack");
         }
         return SCRIPT_CONTINUE;
     }
@@ -59,7 +63,7 @@ public class portamedic extends script.base_script
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Sample Fluids"));
+        mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Sample the Fluids"));
         return SCRIPT_CONTINUE;
     }
 
