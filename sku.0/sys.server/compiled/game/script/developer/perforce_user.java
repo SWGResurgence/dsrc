@@ -6,7 +6,6 @@ import script.library.utils;
 import script.obj_id;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
@@ -15,6 +14,7 @@ public class perforce_user extends script.base_script
     public perforce_user()
     {
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (!isGod(self))
@@ -27,28 +27,28 @@ public class perforce_user extends script.base_script
         {
             args.add(st.nextToken());
         }
-        if (!(((String)args.get(0)).equals("p4")))
+        if (!(args.get(0).equals("p4")))
         {
             return SCRIPT_CONTINUE;
         }
-        if (args.size() > 1 && ((String)args.get(1)).equals("login"))
+        if (args.size() > 1 && args.get(1).equals("login"))
         {
             perforce.setupPerforce();
         }
-        else if (args.size() > 1 && ((String)args.get(1)).equals("edit"))
+        else if (args.size() > 1 && args.get(1).equals("edit"))
         {
             if (args.size() > 2)
             {
-                String arg2 = ((String)args.get(2));
+                String arg2 = ((String) args.get(2));
                 perforce.openExistingFileForExclusiveEdit(arg2);
             }
         }
-        else if (args.size() > 1 && ((String)args.get(1)).equals("opened"))
+        else if (args.size() > 1 && args.get(1).equals("opened"))
         {
             String[] results = perforce.opened();
             if (results != null)
             {
-                String openedFiles = new String();
+                String openedFiles = "";
                 int iter = 0;
                 for (iter = 0; iter < results.length; ++iter)
                 {
@@ -64,18 +64,18 @@ public class perforce_user extends script.base_script
                 showSUIPage(page);
                 flushSUIPage(page);
             }
-            else 
+            else
             {
                 chat.chat(self, "there was an error retrieving the file listing");
             }
         }
-        else if (args.size() > 1 && ((String)args.get(1)).equals("submit"))
+        else if (args.size() > 1 && args.get(1).equals("submit"))
         {
             String param = null;
             int changeList = 0;
             if (args.size() > 2)
             {
-                param = ((String)args.get(2));
+                param = ((String) args.get(2));
             }
             if (param != null)
             {
@@ -90,17 +90,17 @@ public class perforce_user extends script.base_script
             showSUIPage(page);
             flushSUIPage(page);
         }
-        else if (args.size() > 1 && ((String)args.get(1)).equals("diff"))
+        else if (args.size() > 1 && args.get(1).equals("diff"))
         {
             String param = null;
             int changeList = 0;
             if (args.size() > 2)
             {
-                param = ((String)args.get(2));
+                param = ((String) args.get(2));
             }
             String diff = perforce.diff(param);
             String[] diffLines = split(diff, '\n');
-            String diffedText = new String("\\#FFFFFF");
+            String diffedText = "\\#FFFFFF";
             int iter = 0;
             for (iter = 0; iter < diffLines.length; ++iter)
             {
@@ -112,7 +112,7 @@ public class perforce_user extends script.base_script
                 {
                     diffedText += "\\#00FF00" + diffLines[iter] + "\n" + "\\#FFFFFF";
                 }
-                else 
+                else
                 {
                     diffedText += diffLines[iter] + "\n" + "\\#FFFFFF";
                 }
@@ -157,9 +157,9 @@ public class perforce_user extends script.base_script
                                 files.add(fileSpec);
                                 changes.put(change, files);
                             }
-                            else 
+                            else
                             {
-                                Vector files = (Vector)changes.get(change);
+                                Vector files = (Vector) changes.get(change);
                                 files.add(fileSpec);
                             }
                         }
@@ -169,12 +169,14 @@ public class perforce_user extends script.base_script
             }
             clearSUIDataSourceContainer(page, "changes.dataTree");
             Set keySet = changes.keySet();
-            for (Object o : keySet) {
+            for (Object o : keySet)
+            {
                 String key = (String) o;
                 Vector files = (Vector) changes.get(key);
                 addSUIDataSourceContainer(page, "changes.dataTree", key);
                 setSUIProperty(page, "changes.dataTree." + key, "text", key);
-                for (iter = 0; iter < files.size(); ++iter) {
+                for (iter = 0; iter < files.size(); ++iter)
+                {
                     String f = ((String) files.get(iter));
                     addSUIDataSourceContainer(page, "changes.dataTree." + key, f);
                     setSUIProperty(page, "changes.dataTree." + key + "." + f, "text", f);
@@ -187,6 +189,7 @@ public class perforce_user extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int onPerforceSetupBtnOk(obj_id self, dictionary params) throws InterruptedException
     {
         String userId = params.getString("boxInputUserId.inputUserId.LocalText");
@@ -196,6 +199,7 @@ public class perforce_user extends script.base_script
         forceCloseSUIPage(params.getInt("pageId"));
         return SCRIPT_CONTINUE;
     }
+
     public int onPerforceSubmitTextEditorBtnOk(obj_id self, dictionary params) throws InterruptedException
     {
         int page = params.getInt("pageId");
@@ -210,21 +214,21 @@ public class perforce_user extends script.base_script
         }
         Vector outputWindowText = new Vector();
         boolean submitSucceeded = perforce.submit(submissionContents, outputWindowText);
-        String results = new String();
+        String results = "";
         if (submitSucceeded)
         {
             setSUIProperty(page, "pageText.text", "LocalText", "");
             setSUIProperty(page, "pageText.text", "Text", "");
             results += "\\##00FF00";
         }
-        else 
+        else
         {
             results += "\\##FF0000";
         }
         int iter = 0;
         for (iter = 0; iter < outputWindowText.size(); ++iter)
         {
-            results += ((String)outputWindowText.get(iter)) + "\n";
+            results += outputWindowText.get(iter) + "\n";
         }
         setSUIProperty(page, "outputPage.text", "Text", results);
         flushSUIPage(page);

@@ -17,6 +17,7 @@ public class cell extends script.base_script
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToRecieveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(item))
@@ -33,6 +34,7 @@ public class cell extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isAllowedInCurrentCell(obj_id player, obj_id cell) throws InterruptedException
     {
         obj_id currentCell = cell;

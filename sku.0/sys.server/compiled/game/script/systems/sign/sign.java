@@ -156,7 +156,7 @@ public class sign extends script.base_script
                     playClientEffectObj(player, doorbellSnd, player, "");
                     prose_package pp = new prose_package();
                     prose.setStringId(pp, new string_id(commPrompt));
-                    commPlayer(occupant, self, pp, "");
+                    commPlayer(occupant, self, pp);
                 }
             }
         }

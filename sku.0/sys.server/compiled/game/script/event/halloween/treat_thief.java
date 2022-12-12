@@ -88,7 +88,7 @@ public class treat_thief extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public int OnCombatEntered(obj_id self, obj_id attacker, obj_id[] attackers, dictionary params) throws InterruptedException
+    public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "event.halloween_spam"))
         {
@@ -98,7 +98,6 @@ public class treat_thief extends script.base_script
         {
             utils.setScriptVar(self, "event.halloween_spam", 1);
             sendSystemMessageGalaxyTestingOnly("[World Event] The Treat Thief has been engaged on " + toUpper(getCurrentSceneName(), 0));
-
         }
         return SCRIPT_CONTINUE;
     }

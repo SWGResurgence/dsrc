@@ -2,7 +2,8 @@ package script.systems.loot;
 
 import script.obj_id;
 
-public class rare_item extends script.base_script {
+public class rare_item extends script.base_script
+{
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if ((names == null) || (attribs == null) || (names.length != attribs.length))

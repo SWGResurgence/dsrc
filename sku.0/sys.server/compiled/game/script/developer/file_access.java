@@ -11,6 +11,7 @@ public class file_access extends script.base_script
     public file_access()
     {
     }
+
     public static String readTextFile(String fileName) throws InterruptedException
     {
         String result = null;
@@ -23,11 +24,10 @@ public class file_access extends script.base_script
                 try
                 {
                     FileInputStream inputStream = new FileInputStream(f);
-                    byte[] buf = new byte[(int)len];
+                    byte[] buf = new byte[(int) len];
                     inputStream.read(buf);
                     result = new String(buf);
-                }
-                catch(Exception e)
+                } catch (Exception e)
                 {
                     obj_id self = getSelf();
                     sendSystemMessageTestingOnly(self, "An exception occurred while trying to read " + fileName);
@@ -36,6 +36,7 @@ public class file_access extends script.base_script
         }
         return result;
     }
+
     public static boolean isWritable(String fileName) throws InterruptedException
     {
         boolean result = false;
@@ -49,6 +50,7 @@ public class file_access extends script.base_script
         }
         return result;
     }
+
     public static boolean writeTextFile(String fileName, String fileContents) throws InterruptedException
     {
         boolean result = false;
@@ -58,8 +60,7 @@ public class file_access extends script.base_script
             try
             {
                 f.createNewFile();
-            }
-            catch(Exception e)
+            } catch (Exception e)
             {
                 return false;
             }
@@ -76,8 +77,7 @@ public class file_access extends script.base_script
                     writer.close();
                     result = true;
                 }
-            }
-            catch(Exception e)
+            } catch (Exception e)
             {
                 obj_id self = getSelf();
                 sendSystemMessageTestingOnly(self, "failed to write " + fileName + " : " + e);
