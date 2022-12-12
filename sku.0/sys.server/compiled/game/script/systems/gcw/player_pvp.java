@@ -708,10 +708,10 @@ public class player_pvp extends script.base_script
     }
     public boolean canReceiveReward(obj_id self) throws InterruptedException
     {
-        if (!isPlayerActive(self))
-        {
-            return false;
-        }
+        //if (!isPlayerActive(self))
+        //{
+        //   return false;
+        //} @TODO: add back in or another anti-afk method.
         int damage = utils.getIntScriptVar(self, "battlefield.damage");
         int healing = utils.getIntScriptVar(self, "battlefield.healing");
         int captures = utils.getIntScriptVar(self, "battlefield.captures");

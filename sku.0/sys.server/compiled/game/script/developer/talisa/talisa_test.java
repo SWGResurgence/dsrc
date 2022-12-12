@@ -226,6 +226,7 @@ public class talisa_test extends script.base_script
                     "emote_greeter_ewok",
                     "emote_greeter_jawa"
             };
+
     public talisa_test()
     {
     }

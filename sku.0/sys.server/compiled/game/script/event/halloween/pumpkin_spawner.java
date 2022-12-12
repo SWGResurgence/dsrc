@@ -20,6 +20,8 @@ package script.event.halloween;
 import script.library.create;
 import script.*;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class pumpkin_spawner extends script.base_script
 {
     private static final String HALLOWEEN = "event/halloween";
@@ -54,7 +56,7 @@ public class pumpkin_spawner extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
+    public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException, InvocationTargetException
     {
         if (item == menu_info_types.ITEM_USE)
         {

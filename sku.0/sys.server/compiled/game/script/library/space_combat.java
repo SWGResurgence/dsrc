@@ -915,7 +915,7 @@ public class space_combat extends script.base_script
                 canDrop = true;
                 hasDelay = false;
             }
-            if (isIdValid(pilotInv) && canDrop && !hasDelay && isPlayerActive(objPilot))
+            if (isIdValid(pilotInv) && canDrop && !hasDelay)// && isPlayerActive(objPilot)) @TODO: add back in or another anti-afk method.
             {
                 obj_id card = scheduled_drop.dropCard(scheduled_drop.SYSTEM_COMBAT_SPACE, pilotInv);
                 if (isIdValid(card))
