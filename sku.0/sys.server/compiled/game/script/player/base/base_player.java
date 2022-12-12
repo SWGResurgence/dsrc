@@ -324,6 +324,23 @@ public class base_player extends script.base_script
                     }
             };
 
+    public static void handleReadyCheck(obj_id self, dictionary params) throws InterruptedException
+    {
+        obj_id target = params.getObjId("readyCheckLeaderId");
+        obj_id player = sui.getPlayerId(params);
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_OK)
+        {
+            sendSystemMessage(target, getPlayerName(player) + " is ready!", null);
+            chat.chat(self, "Ready!");
+        }
+        if (bp == sui.BP_CANCEL)
+        {
+            sendSystemMessage(target, getPlayerName(player) + " is not ready!", null);
+            chat.chat(self, "Not Ready!");
+        }
+    }
+
     public static void generateHousingList(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         String[] fileList = {
@@ -1432,6 +1449,7 @@ public class base_player extends script.base_script
                 prompt += s + "\n";
             }
 
+
             sui.msgbox(self, player, prompt, sui.OK_ONLY, "title", "noHandler");
         }
         return SCRIPT_CONTINUE;
@@ -1449,32 +1467,6 @@ public class base_player extends script.base_script
 
     public int OnLogin(obj_id self) throws InterruptedException
     {
-        if (!utils.hasScriptVar(self, "welcome_message"))
-        {
-            String red = " \\#FF0000";
-            String gold = " \\#FFD700";
-            String tan = " \\#D2B48C";
-            String white = " \\#FFFFFF";
-            String apricot = " \\#FFDAB9";
-            String welcomeMessage = "Welcome to " + gold + "Apotheosis" + white + "!" + "\n";
-            String pleaseRead = "Please read the " + tan + "rules" + white + " and " + tan + "FAQ" + white + " before starting your adventure." + "\n";
-            String numCharacters = "Number of allowed characters: " + gold + "10\n";
-            String maxLogin = white + "Number of allowed characters per account: " + gold + "4\n";
-            String features = tan + "Key Features:\n";
-            String feature1 = tan + "1. " + white + "Instant Level 90 token.\n";
-            String feature2 = tan + "2. " + white + "Exciting World Bosses\n";
-            String feature3 = tan + "3. " + white + "Quality of Life Improvements\n";
-            String feature4 = tan + "4. " + white + "New areas to explore\n";
-            String feature5 = tan + "5. " + white + "Many new things coming SoonTM\n";
-            String break_features = "\n\n\n\n\n";
-            String anyQuestions = apricot + "If you have any questions, please ask around in Discord or the SWG:Resurgence Forums." + "\n";
-            String discord = apricot + "Discord: " + gold + "https://discord.com/invite/D498cmzj\n";
-            String goodLuck = gold + "Good luck and have fun!" + "\n";
-            String nl = "\n";
-            String welcome = welcomeMessage + pleaseRead + numCharacters + maxLogin + features + feature1 + feature2 + feature3 + feature4 + feature5 + break_features + anyQuestions + discord + break_features + goodLuck;
-            sui.msgbox(self, self, welcome, sui.OK_ONLY, apricot + "WELCOME TO THE GALAXY", "noHandler");
-            utils.setScriptVar(self, "welcome_message", 1);
-        }
         boolean ctsDisconnectRequested = false;
         if (hasObjVar(self, "disableLoginCtsInProgress"))
         {
@@ -12978,43 +12970,26 @@ public class base_player extends script.base_script
     {
         if (!group.isGrouped(self))
         {
-            broadcast(self, "You are not in a group!");
+            debugSpeakMsg(self, "You are not in a group!");
             return;
         }
         if (!group.isLeader(self))
         {
-            broadcast(self, "Only the group leader can start a ready check.");
+            debugSpeakMsg(self, "Only the group leader can start a ready check.");
             return;
         }
         if (combat.isInCombat(self))
         {
-            broadcast(self, "You are in combat and cannot start a ready check now.");
+            debugSpeakMsg(self, "You are in combat and cannot start a ready check now.");
             return;
         }
         obj_id[] groupMembers = getGroupMemberIds(self);
         String prompt = " has initiated a ready check!\nAre you ready?";
+        params.put("readyCheckLeaderId", self);
         for (obj_id indi : groupMembers)
         {
             sui.msgbox(self, indi, prompt, sui.OK_CANCEL, "handleReadyCheck", null);
+            params.put("readyCheckLeaderId", self);
         }
-    }
-    public int handleReadyCheck(obj_id self, dictionary params) throws InterruptedException
-    {
-        obj_id leader = group.getLeader(self);
-        obj_id player = sui.getPlayerId(params);
-        if (params == null || params.isEmpty())
-        {
-            return SCRIPT_CONTINUE;
-        }
-        int bp = sui.getIntButtonPressed(params);
-        if (bp == sui.BP_CANCEL)
-        {
-            broadcast(leader, toUpper(getPlayerName(player), 0) + " is not ready.");
-            showFlyText(self, new string_id("NOT READY!"), 10.5f, colors.RED);
-            return SCRIPT_CONTINUE;
-        }
-        showFlyText(self, new string_id("READY!"), 10.5f, colors.GREEN);
-        broadcast(leader, toUpper(getPlayerName(player), 0) + " is ready!");
-        return SCRIPT_CONTINUE;
     }
 }

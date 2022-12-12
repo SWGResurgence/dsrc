@@ -19,7 +19,7 @@ public class player_developer extends base_script
     public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         java.util.StringTokenizer tok = new java.util.StringTokenizer(params);
-
+        target = getIntendedTarget(self);
         String cmd = tok.nextToken();
         if (cmd.equalsIgnoreCase("quest"))
         {
@@ -95,7 +95,7 @@ public class player_developer extends base_script
             };
             if (flag.equals("") || flag == null)
             {
-                broadcast(self,"/developer pumpkin [single | ring]");
+                broadcast(self, "/developer pumpkin [single | ring]");
 
                 return SCRIPT_CONTINUE;
             }
@@ -112,7 +112,7 @@ public class player_developer extends base_script
                 int radius = utils.stringToInt(tok.nextToken());
                 if (howMany == 0 || radius == 0)
                 {
-                    broadcast(self,"/developer pumpkin ring [num to spawn] [radius]");
+                    broadcast(self, "/developer pumpkin ring [num to spawn] [radius]");
                     return SCRIPT_CONTINUE;
                 }
                 if (!isIdValid(self) || !exists(self))
@@ -126,7 +126,7 @@ public class player_developer extends base_script
                     float angle = (float) (i * (360 / howMany));
                     x = loc.x + (float) Math.cos(angle) * radius;
                     z = loc.z + (float) Math.sin(angle) * radius;
-                    obj_id pumpkin = create.object("object/tangible/holiday/halloween/pumpkin_object.iff", new location(x, getHeightAtLocation(x,z), z, loc.area));
+                    obj_id pumpkin = create.object("object/tangible/holiday/halloween/pumpkin_object.iff", new location(x, getHeightAtLocation(x, z), z, loc.area));
                     attachScript(pumpkin, "event.halloween.pumpkin_smasher_object");
                     faceTo(pumpkin, pumpkinMaster);
                     setName(pumpkin, pumpkinNames[rand(0, pumpkinNames.length - 1)]);
@@ -164,6 +164,32 @@ public class player_developer extends base_script
             return SCRIPT_CONTINUE;
             //messageTo(target,token[0], params, token[1], true);
         }
+        if (cmd.equalsIgnoreCase("convertStringToCrc"))
+        {
+            String hash = tok.nextToken();
+            int hashValue = getStringCrc(hash);
+            broadcast(self, "Hash Value: " + hashValue);
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("possess"))
+        {
+            int commandName = getStringCrc(tok.nextToken());
+            String commandParams = null;
+            if (tok.hasMoreTokens())
+            {
+                for (int i = 0; i < tok.countTokens(); i++)
+                {
+                    commandParams += tok.nextToken() + " ";
+                }
+            }
+            else
+            {
+                commandParams = "";
+            }
+            queueCommand(target, commandName, target, commandParams, COMMAND_PRIORITY_IMMEDIATE);
+            return SCRIPT_CONTINUE;
+        }
+
         if (cmd.equals("-help"))
         {
             debugConsoleMsg(self, "Developer Commands:  ");
@@ -201,12 +227,9 @@ public class player_developer extends base_script
 
     public location getOffsetFromRoot(obj_id self, obj_id structure_attachment)
     {
-        location loc = getLocation(self);
-        location root = getLocation(structure_attachment);
-        loc.x = loc.x - root.x;
-        loc.y = loc.y - root.y;
-        loc.z = loc.z - root.z;
-        return loc;
+        location loc = getLocation(structure_attachment);
+        location root = getLocation(self);
+        return new location(loc.x - root.x, loc.y - root.y, loc.z - root.z, loc.area);
     }
 
     public void putPlayersInRing(obj_id[] targets, float ring_radius)
