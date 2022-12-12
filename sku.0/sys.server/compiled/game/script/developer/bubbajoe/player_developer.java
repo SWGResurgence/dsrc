@@ -7,10 +7,7 @@
 package script.developer.bubbajoe;
 
 import script.*;
-import script.library.chat;
-import script.library.groundquests;
-import script.library.prose;
-import script.library.utils;
+import script.library.*;
 
 public class player_developer extends base_script
 {
@@ -83,6 +80,61 @@ public class player_developer extends base_script
             return SCRIPT_CONTINUE;
         }
 
+        if (cmd.equalsIgnoreCase("pumpkin"))
+        {
+            obj_id pumpkinMaster = getIntendedTarget(self);
+            String flag = tok.nextToken();
+            String[] pumpkinNames = {
+                    "a nice looking pumpkin",
+                    "a plump pumpkin",
+                    "a rotten pumpkin",
+                    "a small pumpkin",
+                    "a large pumpkin",
+                    "a medium sized pumpkin",
+                    "a bountiful pumpkin",
+            };
+            if (flag.equals("") || flag == null)
+            {
+                broadcast(self,"/developer pumpkin [single | ring]");
+
+                return SCRIPT_CONTINUE;
+            }
+            if (flag.equalsIgnoreCase("single"))
+            {
+                obj_id pumpkin = createObject("object/tangible/holiday/halloween/pumpkin_object.iff", getLocation(pumpkinMaster));
+                attachScript(pumpkin, "event.halloween.pumpkin_smasher_object");
+                setName(pumpkin, pumpkinNames[rand(0, pumpkinNames.length - 1)]);
+            }
+            if (flag.equalsIgnoreCase("ring"))
+            {
+                location loc = getLocation(pumpkinMaster);
+                int howMany = utils.stringToInt(tok.nextToken());
+                int radius = utils.stringToInt(tok.nextToken());
+                if (howMany == 0 || radius == 0)
+                {
+                    broadcast(self,"/developer pumpkin ring [num to spawn] [radius]");
+                    return SCRIPT_CONTINUE;
+                }
+                if (!isIdValid(self) || !exists(self))
+                {
+                    return SCRIPT_CONTINUE;
+                }
+                float x = loc.x;
+                float z = loc.z;
+                for (int i = 0; i < howMany; i++)
+                {
+                    float angle = (float) (i * (360 / howMany));
+                    x = loc.x + (float) Math.cos(angle) * radius;
+                    z = loc.z + (float) Math.sin(angle) * radius;
+                    obj_id pumpkin = create.object("object/tangible/holiday/halloween/pumpkin_object.iff", new location(x, getHeightAtLocation(x,z), z, loc.area));
+                    attachScript(pumpkin, "event.halloween.pumpkin_smasher_object");
+                    faceTo(pumpkin, pumpkinMaster);
+                    setName(pumpkin, pumpkinNames[rand(0, pumpkinNames.length - 1)]);
+                }
+                prose_package pp = prose.getPackage(new string_id("Pumpkin Madness!"));
+                commPlayer(self, pumpkinMaster, pp);
+            }
+        }
 
         if (cmd.equalsIgnoreCase("wiki"))
         {
