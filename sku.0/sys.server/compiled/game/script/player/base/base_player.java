@@ -1432,7 +1432,6 @@ public class base_player extends script.base_script
                 prompt += s + "\n";
             }
 
-
             sui.msgbox(self, player, prompt, sui.OK_ONLY, "title", "noHandler");
         }
         return SCRIPT_CONTINUE;
@@ -1456,19 +1455,24 @@ public class base_player extends script.base_script
             String gold = " \\#FFD700";
             String tan = " \\#D2B48C";
             String white = " \\#FFFFFF";
+            String apricot = " \\#FFDAB9";
             String welcomeMessage = "Welcome to " + gold + "Apotheosis" + white + "!" + "\n";
             String pleaseRead = "Please read the " + tan + "rules" + white + " and " + tan + "FAQ" + white + " before starting your adventure." + "\n";
             String numCharacters = "Number of allowed characters: " + gold + "10\n";
-            String maxLogin = "Number of allowed characters per account: " + gold + "10\n";
+            String maxLogin = white + "Number of allowed characters per account: " + gold + "4\n";
             String features = tan + "Key Features:\n";
             String feature1 = tan + "1. " + white + "Instant Level 90 token.\n";
-            String feature2 = tan + "2. " + white + "Custom Content\n";
-            String feature3 = tan + "3. " + white + "Custom Quests\n";
-            String feature4 = tan + "4. " + white + "Custom Items\n";
-            String feature5 = tan + "5. " + white + "Many more..\n";
+            String feature2 = tan + "2. " + white + "Exciting World Bosses\n";
+            String feature3 = tan + "3. " + white + "Quality of Life Improvements\n";
+            String feature4 = tan + "4. " + white + "New areas to explore\n";
+            String feature5 = tan + "5. " + white + "Many new things coming SoonTM\n";
+            String break_features = "\n\n\n\n\n";
+            String anyQuestions = apricot + "If you have any questions, please ask around in Discord or the SWG:Resurgence Forums." + "\n";
+            String discord = apricot + "Discord: " + gold + "https://discord.com/invite/D498cmzj\n";
+            String goodLuck = gold + "Good luck and have fun!" + "\n";
             String nl = "\n";
-            String welcome = welcomeMessage + pleaseRead + numCharacters + maxLogin + features + feature1 + feature2 + feature3 + feature4 + feature5;
-            sui.msgbox(self, self, welcome, sui.OK_ONLY, "WELCOME TO THE GALAXY", "noHandler");
+            String welcome = welcomeMessage + pleaseRead + numCharacters + maxLogin + features + feature1 + feature2 + feature3 + feature4 + feature5 + break_features + anyQuestions + discord + break_features + goodLuck;
+            sui.msgbox(self, self, welcome, sui.OK_ONLY, apricot + "WELCOME TO THE GALAXY", "noHandler");
             utils.setScriptVar(self, "welcome_message", 1);
         }
         boolean ctsDisconnectRequested = false;
@@ -12974,17 +12978,17 @@ public class base_player extends script.base_script
     {
         if (!group.isGrouped(self))
         {
-            debugSpeakMsg(self, "You are not in a group!");
+            broadcast(self, "You are not in a group!");
             return;
         }
         if (!group.isLeader(self))
         {
-            debugSpeakMsg(self, "Only the group leader can start a ready check.");
+            broadcast(self, "Only the group leader can start a ready check.");
             return;
         }
         if (combat.isInCombat(self))
         {
-            debugSpeakMsg(self, "You are in combat and cannot start a ready check now.");
+            broadcast(self, "You are in combat and cannot start a ready check now.");
             return;
         }
         obj_id[] groupMembers = getGroupMemberIds(self);
