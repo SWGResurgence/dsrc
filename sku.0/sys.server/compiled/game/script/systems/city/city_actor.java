@@ -83,7 +83,7 @@ public class city_actor extends script.base_script
             }
             else if (item == menu_info_types.SERVER_MENU21)
             {
-                sui.inputbox(self, player, "Enter the posture for the hireling.\n(Example, standing: 0)", "handleSetPosture");                //@call msgbox for posture
+                sui.inputbox(self, player, "Enter the posture for the hireling.\n(Example: '0' [which is standing])", "handleSetPosture");                //@call msgbox for posture
             }
             else if (item == menu_info_types.SERVER_MENU22)
             {
@@ -95,7 +95,7 @@ public class city_actor extends script.base_script
             }
             else if (item == menu_info_types.SERVER_MENU24)
             {
-                sui.inputbox(self, player, "Enter the size you want the hireling to be.\n(Example: 1.0f", "handleSetSize");
+                sui.inputbox(self, player, "Enter the size you want the hireling to be.\n(Example: 1.0)", "handleSetSize");
             }
             else if (item == menu_info_types.SERVER_MENU25)
             {
@@ -118,22 +118,18 @@ public class city_actor extends script.base_script
             }
             else if (item == menu_info_types.SERVER_MENU27)
             {
-                removalCleanup(self, player, true);
+                sui.msgbox(self, player, "\\#FFD700Are you sure you want to remove this actor?", sui.YES_NO, "handleRemoveActor");
             }
         }
         return SCRIPT_CONTINUE;
     }
-
-    public void removalCleanup(obj_id object, obj_id player, boolean spam) throws InterruptedException
+    public int handleRemoveActor(obj_id self, dictionary params) throws InterruptedException
     {
-        removeObjVar(object, "city_id");
-        city.removeDecoration(object);
-        if (spam)
-        {
-            broadcast(player, "The city actor has been removed.");
-        }
+        removeObjVar(self, "city_id");
+        city.removeDecoration(self);
+        destroyObject(self);
+        return SCRIPT_CONTINUE;
     }
-
     public boolean canManipulateActor(obj_id self, obj_id player) throws InterruptedException
     {
         //@note: keep these in order of importance, with the most important last
