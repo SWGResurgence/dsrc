@@ -33,7 +33,7 @@ public class heroic_token extends script.base_script
         }
         for (int i = 0; i < contents.length; i++)
         {
-            if (isIdValid(contents[i]) && getTemplateName(contents[i]).equals("object/tangible/item/heroic_token_box.iff"))
+            if (isIdValid(contents[i]) && getTemplateName(contents[i]).equals("object/tangible/loot/misc/heroic_token_box.iff"))
             {
                 return true;
             }
