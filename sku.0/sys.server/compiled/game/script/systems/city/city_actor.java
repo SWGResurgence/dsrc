@@ -125,9 +125,17 @@ public class city_actor extends script.base_script
     }
     public int handleRemoveActor(obj_id self, dictionary params) throws InterruptedException
     {
-        removeObjVar(self, "city_id");
-        city.removeDecoration(self);
-        destroyObject(self);
+        obj_id player = sui.getPlayerId(params);
+        if (sui.getIntButtonPressed(params) == sui.BP_OK)
+        {
+            removeObjVar(self, "city_id");
+            city.removeDecoration(self);
+            destroyObject(self);
+        }
+        else
+        {
+            broadcast(player, "Actor removal cancelled.");
+        }
         return SCRIPT_CONTINUE;
     }
     public boolean canManipulateActor(obj_id self, obj_id player) throws InterruptedException
