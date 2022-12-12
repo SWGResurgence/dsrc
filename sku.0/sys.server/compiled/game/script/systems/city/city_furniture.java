@@ -368,7 +368,7 @@ public class city_furniture extends script.base_script
         setYaw(self, getYaw(player));
         if (isGod(player))
         {
-            debugSpeakMsg(self, "[devl] I am placing " + name + " in " + cityGetName(city_id));
+            chat.chat(self, "[GodMode] I am placing " + name + " in " + cityGetName(city_id));
         }
         city.addDecoration(city_id, player, self);
     }

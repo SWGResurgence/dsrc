@@ -47,8 +47,6 @@ public class city_actor extends script.base_script
     {
         if (!utils.hasScriptVar(self, "city_actor_setup"))
         {
-            int city_id = getCityAtLocation(getLocation(player), 0);
-            city.addDecoration(city_id, player, self);
             utils.setScriptVar(self, "city_actor_setup", true);
         }
         if (canManipulateActor(self, player))
@@ -112,6 +110,10 @@ public class city_actor extends script.base_script
             }
             else if (item == menu_info_types.SERVER_MENU26)
             {
+                if (!hasScript(self, "ai.ai"))
+                {
+                    attachScript(self, "ai.ai");
+                }
                 sui.inputbox(self, player, "Enter the A.I. you want this actor to have.\n\n\nOptions: [wander, loiter, none]", "handleSetAI");
             }
             else if (item == menu_info_types.SERVER_MENU27)
