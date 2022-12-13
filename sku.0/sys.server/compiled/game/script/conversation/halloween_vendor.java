@@ -112,7 +112,7 @@ public class halloween_vendor extends script.base_script
             int numberOfCoins = utils.countOfStackedItemsInArray(coins);
             if (numberOfCoins != 0)
             {
-                if (numberOfCoins >= 900 && !hasCompletedCollectionSlot(player, "halloween_badge_11"))
+                if (numberOfCoins >= 1 && !hasCompletedCollectionSlot(player, "halloween_badge_11"))
                 {
                     return true;
                 }

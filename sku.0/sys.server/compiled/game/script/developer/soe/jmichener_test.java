@@ -13,6 +13,7 @@ public class jmichener_test extends script.base_script
     public jmichener_test()
     {
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         obj_id player = self;
@@ -54,7 +55,7 @@ public class jmichener_test extends script.base_script
                 {
                     sendSystemMessageTestingOnly(player, "player has buff: 'col_ent_invis_buff_tracker'.");
                 }
-                else 
+                else
                 {
                     sendSystemMessageTestingOnly(player, "player does NOT have buff: 'col_ent_invis_buff_tracker'.");
                 }
@@ -72,7 +73,7 @@ public class jmichener_test extends script.base_script
                 {
                     sendSystemMessageTestingOnly(player, "player has buff: 'col_sd_invis_buff_tracker'.");
                 }
-                else 
+                else
                 {
                     sendSystemMessageTestingOnly(player, "player does NOT have buff: 'col_sd_invis_buff_tracker'.");
                 }
@@ -110,7 +111,7 @@ public class jmichener_test extends script.base_script
                 {
                     sendSystemMessageTestingOnly(player, "Your Action Regen Rate has been restored");
                 }
-                else 
+                else
                 {
                     sendSystemMessageTestingOnly(player, "Problem - Regen Rate was not restored!");
                 }

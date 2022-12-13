@@ -54,6 +54,9 @@ public class city_hire extends script.base_script
                     {
                         obj_id actor = create.createObject(getStringObjVar(self, "city_hire.mobile"), getLocation(player));
                         attachScript(actor, "systems.city.city_actor");
+                        attachScript(actor, "systems.city.city_furniture");
+                        int city_id = getCityAtLocation(getLocation(player), 0);
+                        city.addDecoration(city_id, player, self);
                         broadcast(player, "Hired:  \"" + getName(actor) + "\"");
                         destroyObject(self);
                     }

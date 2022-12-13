@@ -21,14 +21,17 @@ public class rainbow_hue extends script.base_script
     {
         return SCRIPT_CONTINUE;
     }
+
     public void startPrimusHueLoop(obj_id self)
     {
         messageTo(self, "hueLoop", null, 1, true);
     }
+
     public void startSecondusHueLoop(obj_id self)
     {
         messageTo(self, "hueSecondLoop", null, 1, true);
     }
+
     public void hueLoop(obj_id self) throws InterruptedException
     {
         color[] pal_primus = getPalcolorCustomVarColors(self, "/private/index_color_1");
@@ -38,6 +41,7 @@ public class rainbow_hue extends script.base_script
         }
         hueLoop(self);
     }
+
     public void hueSecondLoop(obj_id self) throws InterruptedException
     {
         color[] pal_secondus = getPalcolorCustomVarColors(self, "/private/index_color_2");

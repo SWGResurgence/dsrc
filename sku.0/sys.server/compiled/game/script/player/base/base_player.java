@@ -324,6 +324,23 @@ public class base_player extends script.base_script
                     }
             };
 
+    public static void handleReadyCheck(obj_id self, dictionary params) throws InterruptedException
+    {
+        obj_id target = params.getObjId("readyCheckLeaderId");
+        obj_id player = sui.getPlayerId(params);
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_OK)
+        {
+            sendSystemMessage(target, getPlayerName(player) + " is ready!", null);
+            chat.chat(self, "Ready!");
+        }
+        if (bp == sui.BP_CANCEL)
+        {
+            sendSystemMessage(target, getPlayerName(player) + " is not ready!", null);
+            chat.chat(self, "Not Ready!");
+        }
+    }
+
     public static void generateHousingList(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         String[] fileList = {
@@ -1457,17 +1474,24 @@ public class base_player extends script.base_script
             String tan = " \\#D2B48C";
             String white = " \\#FFFFFF";
             String welcomeMessage = "Welcome to " + gold + "Apotheosis" + white + "!" + "\n";
-            String pleaseRead = "Please read the " + tan + "rules" + white + " and " + tan + "FAQ" + white + " before starting your adventure." + "\n";
-            String numCharacters = "Number of allowed characters: " + gold + "10\n";
-            String maxLogin = "Number of allowed characters per account: " + gold + "10\n";
+            String pleaseRead = "Please read the " + tan + "Rules & Policies" + white + " and " + tan + "F.A.Q" + white + " before starting your adventure(s)." + "\n";
+            String numCharacters = "Number of Allowed Character(s): " + gold + "8\n";
+            String maxLogin = "Number of Allowed Character(s) Online: " + gold + "8\n";
+            String numAccts = "Number of Allowed Account(s): " + gold + "1\n";
+            String multiAccts = "Multiple Account(s): " + gold + "By Ticket\n";
             String features = tan + "Key Features:\n";
-            String feature1 = tan + "1. " + white + "Instant Level 90 token.\n";
-            String feature2 = tan + "2. " + white + "Custom Content\n";
-            String feature3 = tan + "3. " + white + "Custom Quests\n";
-            String feature4 = tan + "4. " + white + "Custom Items\n";
-            String feature5 = tan + "5. " + white + "Many more..\n";
+            String feature1 = tan + "1. " + white + "Instant Level 90 Token.\n";
+            String feature2 = tan + "2. " + white + "One Free Heroic Jewelry Set.\n";
+            String feature3 = tan + "3. " + white + "20 Character Lots.\n";
+            String feature4 = tan + "4. " + white + "Starter Packs for Space and Traders.\n";
+            String feature5 = tan + "5. " + white + "Veteran Rewards can be purchased in Theed.\n";
+            String feature6 = tan + "6. " + white + "Rare Loot System.\n";
+            String feature7 = tan + "7. " + white + "World Boss System.\n";
+            String feature8 = tan + "8. " + white + "Dxun is the New Planet.\n";
+            String feature9 = tan + "9. " + white + "Variety of TCG and Custom Content.\n";
+            String feature10 = tan + "10. " + white + "More yet to come...\n";
             String nl = "\n";
-            String welcome = welcomeMessage + pleaseRead + numCharacters + maxLogin + features + feature1 + feature2 + feature3 + feature4 + feature5;
+            String welcome = welcomeMessage + pleaseRead + numCharacters + maxLogin + numAccts + multiAccts + features + feature1 + feature2 + feature3 + feature4 + feature5 + feature6 + feature7 + feature8 + feature9 + feature10;
             sui.msgbox(self, self, welcome, sui.OK_ONLY, "WELCOME TO THE GALAXY", "noHandler");
             utils.setScriptVar(self, "welcome_message", 1);
         }
@@ -12989,28 +13013,11 @@ public class base_player extends script.base_script
         }
         obj_id[] groupMembers = getGroupMemberIds(self);
         String prompt = " has initiated a ready check!\nAre you ready?";
+        params.put("readyCheckLeaderId", self);
         for (obj_id indi : groupMembers)
         {
             sui.msgbox(self, indi, prompt, sui.OK_CANCEL, "handleReadyCheck", null);
+            params.put("readyCheckLeaderId", self);
         }
-    }
-    public int handleReadyCheck(obj_id self, dictionary params) throws InterruptedException
-    {
-        obj_id leader = group.getLeader(self);
-        obj_id player = sui.getPlayerId(params);
-        if (params == null || params.isEmpty())
-        {
-            return SCRIPT_CONTINUE;
-        }
-        int bp = sui.getIntButtonPressed(params);
-        if (bp == sui.BP_CANCEL)
-        {
-            broadcast(leader, toUpper(getPlayerName(player), 0) + " is not ready.");
-            showFlyText(self, new string_id("NOT READY!"), 10.5f, colors.RED);
-            return SCRIPT_CONTINUE;
-        }
-        showFlyText(self, new string_id("READY!"), 10.5f, colors.GREEN);
-        broadcast(leader, toUpper(getPlayerName(player), 0) + " is ready!");
-        return SCRIPT_CONTINUE;
     }
 }

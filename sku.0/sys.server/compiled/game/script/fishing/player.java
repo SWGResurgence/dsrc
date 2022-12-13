@@ -22,7 +22,7 @@ public class player extends script.base_script
         minigame.cleanupFishing(self);
         return SCRIPT_CONTINUE;
     }
-    public int OnEnteredCombat(obj_id self) throws InterruptedException
+    public int OnEnter(obj_id self) throws InterruptedException
     {
         minigame.stopFishing(self, false);
         return SCRIPT_CONTINUE;

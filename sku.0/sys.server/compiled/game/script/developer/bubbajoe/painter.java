@@ -7,14 +7,13 @@ package script.developer.bubbajoe;/*
 import script.location;
 import script.obj_id;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.util.StringTokenizer;
 
 public class painter extends script.base_script
 {
+    public float PLANET_WIDE = 8192f;
+    public location origin = new location(0, 0, 0, getCurrentSceneName(), null);
     public int OnAttach(obj_id self)
     {
         return SCRIPT_CONTINUE;
@@ -24,41 +23,29 @@ public class painter extends script.base_script
     {
         return SCRIPT_CONTINUE;
     }
-
+    public String header = "\n";
     public int paint(obj_id self, obj_id[] targets) throws IOException
     {
-        String path = "/home/swg/swg-main/exe/linux/hotmaps/";
-        BufferedImage image = ImageIO.read(new File(path, getCurrentSceneName() + ".png"));
-        if (image == null)
+        for (int i = 0; i < targets.length; i++)
         {
-            sendSystemMessageTestingOnly(self, "Image is null, making new image, try again.");
-            BufferedImage newImage = new BufferedImage(8000, 8000, BufferedImage.TYPE_INT_RGB);
-            ImageIO.write(newImage, "png", new File(path, getCurrentSceneName() + ".png"));
-            return SCRIPT_CONTINUE;
+            String information;
+            location loc = getLocation(targets[i]);
+            String x = Float.toString(loc.x);
+            String z = Float.toString(loc.z);
+            String y = Float.toString(loc.y);
+            information = x + " " + y + " " + z + "\n";
+            header += information;
         }
-        for (obj_id target : targets)
-        {
-            location loc = getLocation(target);
-            float x = loc.x;
-            float y = loc.y;
-            float z = loc.z;
-            String xString = Float.toString(x);
-            String yString = Float.toString(y);
-            String zString = Float.toString(z);
-            String coords = xString + " " + yString + " " + zString;
-            sendSystemMessageTestingOnly(self, coords);
-            Graphics g = image.getGraphics();
-            g.drawOval((int) x, (int) y, 2, 2);
-            ImageIO.write(image, "png", new File(path, getCurrentSceneName() + ".png"));
-        }
-        broadcast(self,"Painted " + targets.length + " objects.");
+        saveTextOnClient(self, "SwgMapper_" + getCurrentSceneName() + ".txt", header);
+        broadcast(self, "Painted " + targets.length + " objects. Run in SwgMapper to see the results.");
         return SCRIPT_CONTINUE;
     }
-    public int OnSpeaking(obj_id self, String text)
+
+    public int OnSpeaking(obj_id self, String text) throws IOException
     {
-        if (text.equals(toLower("paint")))
+        if (text.equals(toLower("paintPlayers")))
         {
-            obj_id[] targets = getAllPlayers(getLocation(self), 8000);
+            obj_id[] targets = getAllPlayers(origin, PLANET_WIDE);
             if (targets == null)
             {
                 sendSystemMessageTestingOnly(self, "No targets selected.");
@@ -67,11 +54,17 @@ public class painter extends script.base_script
             try
             {
                 paint(self, targets);
-            }
-            catch (IOException e)
+            } catch (IOException e)
             {
                 e.printStackTrace();
             }
+        }
+        if (text.equalsIgnoreCase("paintBySelection"))
+        {
+            StringTokenizer st = new StringTokenizer(text);
+            String templateName = st.nextToken();
+            obj_id[] targets = getAllObjectsWithTemplate(origin, PLANET_WIDE, templateName);
+            paint(self, targets);
         }
         return SCRIPT_CONTINUE;
     }

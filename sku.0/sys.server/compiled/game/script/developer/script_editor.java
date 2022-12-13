@@ -12,6 +12,7 @@ public class script_editor extends script.base_script
     public script_editor()
     {
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (!isInAdminTable(self))
@@ -80,6 +81,7 @@ public class script_editor extends script.base_script
         utils.setScriptVar(self, trackClassName, scriptClassName);
         return SCRIPT_OVERRIDE;
     }
+
     public int onScriptEditBtnOk(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isGod(self))
@@ -91,7 +93,7 @@ public class script_editor extends script.base_script
         {
             sendSystemMessageTestingOnly(self, "could not get script from data source!");
         }
-        String outputWindowText = new String();
+        String outputWindowText = "";
         if (params.getString("outputPage.text.LocalText") != null)
         {
         }
@@ -107,13 +109,13 @@ public class script_editor extends script.base_script
                     if (scriptFileName != null)
                     {
                         outputWindowText += "--== Compiling " + scriptFileName + " ==--\n";
-                        
+
                         {
                             String scriptNameScriptVar = "scriptBase" + pageId;
                             String scriptName = utils.getStringScriptVar(self, scriptNameScriptVar);
                             String classNameScriptVar = "classBase" + pageId;
                             String className = utils.getStringScriptVar(self, classNameScriptVar);
-                            
+
                             {
                                 if (file_access.writeTextFile(scriptFileName, scriptContents))
                                 {
@@ -134,35 +136,34 @@ public class script_editor extends script.base_script
                                                     Date d = new Date();
                                                     outputWindowText += "Script " + scriptName + " reloaded successfully at " + d + "\n";
                                                 }
-                                                else 
+                                                else
                                                 {
                                                     outputWindowText += "*** ERROR: Could not reload " + scriptName + "\n";
                                                 }
                                             }
-                                        }
-                                        catch(Exception e)
+                                        } catch (Exception e)
                                         {
                                             outputWindowText += "*** ERROR: An exception occurred while trying to compile " + scriptFileName + " : " + e + "\n";
                                         }
                                     }
-                                    else 
+                                    else
                                     {
                                         outputWindowText += "*** ERROR: could not get runtime\n";
                                     }
                                 }
-                                else 
+                                else
                                 {
                                     outputWindowText += "*** ERROR: could not write " + scriptFileName + "\n";
                                 }
                             }
                         }
                     }
-                    else 
+                    else
                     {
                         outputWindowText += "*** ERROR: could not retrieve script file name from " + scriptFileNameKey + "\n";
                     }
                 }
-                else 
+                else
                 {
                     outputWindowText += "*** ERROR: could not create file name key \"scriptFileName" + pageId + "\"\n";
                 }

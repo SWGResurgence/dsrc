@@ -11,7 +11,7 @@ public class npe_test extends script.base_script
     public npe_test()
     {
     }
-    
+
     public boolean checkGod(obj_id self) throws InterruptedException
     {
         if (isGod(self))
@@ -21,6 +21,7 @@ public class npe_test extends script.base_script
         }
         return false;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         java.util.StringTokenizer st = new java.util.StringTokenizer(text);
@@ -119,8 +120,10 @@ public class npe_test extends script.base_script
             obj_id[] tempArray;
             int counter = 0;
             tempArray = getObjectsInRange(self, 20000);
-            for (obj_id obj_id : tempArray) {
-                if (type.equals(getTemplateName(obj_id))) {
+            for (obj_id obj_id : tempArray)
+            {
+                if (type.equals(getTemplateName(obj_id)))
+                {
                     ++counter;
                     sendSystemMessageTestingOnly(self, "" + counter + ": " + obj_id);
                 }
@@ -132,10 +135,12 @@ public class npe_test extends script.base_script
             obj_id[] tempArray;
             int counter = 0;
             tempArray = getObjectsInRange(self, 20000);
-            for (obj_id obj_id : tempArray) {
+            for (obj_id obj_id : tempArray)
+            {
                 String template = getTemplateName(obj_id);
                 location loc = getLocation(obj_id);
-                if (loc.cell == null || loc.cell == obj_id.NULL_ID) {
+                if (loc.cell == null || loc.cell == script.obj_id.NULL_ID)
+                {
                     debugConsoleMsg(self, loc.x + " " + loc.y + " " + loc.z + " " + template);
                     ++counter;
                 }
@@ -192,11 +197,7 @@ public class npe_test extends script.base_script
         else if (arg.equals("setTutorial") && st.countTokens() == 1)
         {
             String val = st.nextToken();
-            boolean tutVal = false;
-            if (val.equals("true"))
-            {
-                tutVal = true;
-            }
+            boolean tutVal = val.equals("true");
             sendSystemMessageTestingOnly(self, "Setting tutorial bit to " + tutVal);
             setCompletedTutorial(self, tutVal);
         }
@@ -233,7 +234,7 @@ public class npe_test extends script.base_script
             {
                 sendSystemMessageTestingOnly(self, "Config setting for " + section + ":" + key + " is " + value);
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "Didn't find a config setting for " + section + ":" + key);
             }
@@ -247,8 +248,10 @@ public class npe_test extends script.base_script
             int range = utils.stringToInt(st.nextToken());
             location loc = new location(x, y, z, scene);
             obj_id[] players_range = getPlayerCreaturesInRange(loc, range);
-            for (obj_id obj_id : players_range) {
-                if (isIdValid(obj_id)) {
+            for (obj_id obj_id : players_range)
+            {
+                if (isIdValid(obj_id))
+                {
                     sendSystemMessageTestingOnly(self, "Got player " + obj_id + " " + getPlayerFullName(obj_id));
                 }
             }
@@ -269,6 +272,7 @@ public class npe_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String name, int request_id, String[] element_name_list, dictionary[] data, int lock_key) throws InterruptedException
     {
         sendSystemMessageTestingOnly(self, "OnClusterWideDataResponse: " + manage_name + ", name: " + name + ", lock key: " + lock_key);
