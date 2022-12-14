@@ -1,9 +1,7 @@
 package script.theme_park.world_boss;
 
-import script.library.buff;
-import script.library.colors;
-import script.library.pet_lib;
-import script.library.static_item;
+import script.dictionary;
+import script.library.*;
 import script.obj_id;
 import script.string_id;
 
@@ -16,7 +14,20 @@ public class master_controller_krayt extends script.base_script
         sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Elder Ancient Krayt Dragon has been reported to have last been seen on Tatooine. Czerka Corporation is paying for it's remains.");
         return SCRIPT_CONTINUE;
     }
-
+    public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
+    {
+        obj_id corpseInventory = utils.getInventoryContainer(self);
+        if (corpseInventory == null)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (!isIdValid(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        createStomachContents(self, corpseInventory);
+        return SCRIPT_CONTINUE;
+    }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         showFlyText(self, new string_id("+ REGURGITATION + "), 10.5f, colors.DEEPPINK);
@@ -42,12 +53,11 @@ public class master_controller_krayt extends script.base_script
         {
             if (percentHealth < 10)
             {
-                obj_id[] aoe_targets = getCreaturesInRange(self, 64.0f);
+                obj_id[] aoe_targets = getPlayerCreaturesInRange(getLocation(self), 64f);
                 for (obj_id testSubjects : aoe_targets)
                 {
-                    buff.applyBuff(testSubjects, "acid", 60.0f, 5.0f);
-                    showFlyText(testSubjects, new string_id("- STOMACH ACID -"), 10.5f, colors.YELLOW);
-                    broadcast(testSubjects, "You have been hit with stomach acid!");
+                    buff.applyBuff(testSubjects, "acid", 60f, 5f);
+
                 }
             }
         }
@@ -55,12 +65,16 @@ public class master_controller_krayt extends script.base_script
         {
             if (percentHealth < 10)
             {
-                obj_id[] aoe_targets = getCreaturesInRange(self, 64.0f);
-                for (obj_id testSubjects : aoe_targets)
+                if (!utils.hasScriptVar(self, "krayt_poison"))
                 {
-                    buff.applyBuff(testSubjects, "poison", 60.0f, 5.0f);
-                    showFlyText(testSubjects, new string_id("- POISON -"), 10.5f, colors.GREEN);
-                    broadcast(testSubjects, "You have been hit with poison!");
+                    obj_id[] aoe_targets = getCreaturesInRange(self, 64.0f);
+                    for (obj_id testSubjects : aoe_targets)
+                    {
+                        buff.applyBuff(testSubjects, "poison", 60.0f, 5.0f);
+                        showFlyText(testSubjects, new string_id("- POISON -"), 10.5f, colors.GREEN);
+                        broadcast(testSubjects, "You have been hit with poison!");
+                    }
+                    utils.setScriptVar(self, "krayt_poison", 1);
                 }
             }
             //this is the odd chance. Do thing or something here.
@@ -87,8 +101,8 @@ public class master_controller_krayt extends script.base_script
         String column = "note";
         for (int i = 0; i < JUNK_COUNT; i++)
         {
-            //Subtract 1 in the junk table index to make sure we don't hit the "none" row.
-            String junk = dataTableGetString(JUNK_TABLE, rand(1, dataTableGetNumRows(JUNK_TABLE) - 1), column);
+            //Add 1 in the junk table index to make sure we don't hit the "none" row.
+            String junk = dataTableGetString(JUNK_TABLE, rand(1, dataTableGetNumRows(JUNK_TABLE)), column);
             obj_id junkItem = static_item.createNewItemFunction(junk, container);
             if (isIdValid(junkItem))
             {
