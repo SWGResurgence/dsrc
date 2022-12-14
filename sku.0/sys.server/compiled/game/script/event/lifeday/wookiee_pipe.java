@@ -70,7 +70,7 @@ public class wookiee_pipe extends script.base_script
                 }
                 else //if not trader, grant _combat
                 {
-                    buff.applyBuff(player, "event_lifeday_wookiee_pipe_combat");//@note amazing success
+                    buff.applyBuff(player, "event_lifeday_wookiee_pipe_combat");//@note ACR with 10% chance of crit
                 }
                 setObjVar(self, "used.timestamp", currentGameTime);
             }
