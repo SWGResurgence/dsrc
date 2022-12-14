@@ -32982,7 +32982,7 @@ public class base_class
     /**
      * isInAdminTable
      * Alternative to isGod check which validates if the player is connected from an account listed in the admin data table
-     * This validates the username regardless of whether /setGod is on or off so it is better for security and auditing of admin accounts
+     * This validates the username regardless of whether /setGod is on or off, so it is better for security and auditing of admin accounts
      * or for announcements/messages to GM characters (in the case of SWG Source, for patch note/admin updates)
      *
      * @param player
@@ -33000,5 +33000,9 @@ public class base_class
             List<String> adminUsernames = Arrays.asList(dataTableGetStringColumn(getConfigSetting("ConnectionServer", "adminAccountDataTable"), "AdminAccounts"));
             return adminUsernames.contains(getPlayerAccountUsername(player));
         }
+    }
+    public static string_id unlocalizedString(String strText) throws InterruptedException
+    {
+        return new string_id(strText);
     }
 }// class base_class
