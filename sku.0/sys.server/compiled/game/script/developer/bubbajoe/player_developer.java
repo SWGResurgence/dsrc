@@ -149,6 +149,16 @@ public class player_developer extends base_script
             return SCRIPT_CONTINUE;
         }
 
+        if (cmd.equals("ballgame"))
+        {
+            obj_id pInv = utils.getInventoryContainer(self);
+            obj_id hotPotato = createObject("object/tangible/loot/dungeon/geonosian_mad_bunker/relic_gbb_small_ball.iff", pInv, "");
+            setName(hotPotato, "Ball");
+            attachScript(hotPotato, "developer.bubbajoe.pass_the_ball");
+            broadcast(self, "a Small Ball has been created in your inventory.");
+            return SCRIPT_CONTINUE;
+        }
+
         if (cmd.equalsIgnoreCase("scale"))
         {
             float original = getScale(target);
@@ -156,6 +166,10 @@ public class player_developer extends base_script
             setScale(target, utils.stringToFloat(tok.nextToken()));
             broadcast(target, "You have been resized.");
             return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("pathToMe"))
+        {
+            createClientPathAdvanced(target, getLocation(target), getLocation(self), "default");
         }
         if (cmd.equalsIgnoreCase("messageto"))
         {
