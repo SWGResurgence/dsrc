@@ -16739,6 +16739,15 @@ public class base_class
     {
         _doAnimationAction(getLongWithNull(target), animationActionName);
     }
+    /**
+     * Invokes a creature/player object to do an animation by name. Example cbt_throw_1
+     *
+     * @param target
+     *         the object id for the player/creature
+     * @param moodName
+     *         the mood string to update on the creature.
+     */
+
 
     private static native void _setAnimationMood(long target, String moodName);
 
@@ -16746,6 +16755,14 @@ public class base_class
     {
         _setAnimationMood(getLongWithNull(target), moodName);
     }
+    /**
+     * Sets the animation mood of a creature object.
+     *
+     * @param target
+     *         the object id for the player/creature
+     * @param moodName
+     *         the mood string to update on the creature.
+     */
 
     private static native String _getAnimationMood(long target);
 
