@@ -16745,7 +16745,7 @@ public class base_class
      * @param target
      *         the object id for the player/creature
      * @param moodName
-     *         the mood string to update on the creature.
+     *         the animation string to update on the creature.
      */
 
 
