@@ -1419,39 +1419,135 @@ public class base_player extends script.base_script
         }
         else if (item == menu_info_types.SERVER_MENU32)
         {
-            String prompt = "------------------ INFO PAGE: " + getName(self) + " ------------------" + "\n";
-            prompt += "Player Name: " + getName(self) + "\n";
-            prompt += "Player OID: " + self + "\n";
-            prompt += "Player Location: " + getLocation(self) + "\n";
-            prompt += "------------------ " + "Character Info" + " ------------------" + "\n";
-            prompt += "Player Posture: " + getPosture(self) + "\n";
-            prompt += "Player Health: " + getAttrib(self, HEALTH) + "\n";
-            prompt += "Player Action: " + getAttrib(self, ACTION) + "\n";
-            prompt += "Player Money (total): " + getTotalMoney(self) + "\n";
-            prompt += "Player Money (bank): " + getBankBalance(self) + "\n";
-            prompt += "Player Money (cash): " + getCashBalance(self) + "\n";
-            prompt += "Player Weight: " + getVolumeFree(self) + "\n";
-            prompt += "------------------ " + "Faction Stats" + " ------------------" + "\n";
-            prompt += "Player Faction: " + factions.getFaction(self) + "\n";
-            prompt += "Player Faction Standing: " + factions.getFactionStanding(self, factions.getFaction(self)) + "\n";
-            prompt += "------------------ " + "Guild Stats" + " ------------------" + "\n";
-            prompt += "Player Guild: " + guild.getGuildId(self) + "\n";
-            prompt += "------------------ " + "Scripts" + " ------------------" + "\n";
+            String prompt = " ------------------  SKYNET: " + getName(self) + " ------------------ " + "\n";
+            prompt += "Full Name: " + getPlayerFullName(self) + "\n";
+            prompt += "NetworkId: " + self + "\n";
+            prompt += "Location: " + getLocation(self) + "\n";
+            prompt += " ------------------ " + "Avatar" + " ------------------ " + "\n";
+            prompt += "Posture: " + getPosture(self) + "\n";
+            prompt += "Locomotion " + getLocomotion(self) + "\n";
+            prompt += "Scale: " + getScale(self) + "\n";
+            prompt += "Race: " + getRace(self) + "\n";
+            prompt += " ------------------ " + "Player" + " ------------------ " + "\n";
+            prompt += "Health: " + getAttrib(self, HEALTH) + "\n";
+            prompt += "Action: " + getAttrib(self, ACTION) + "\n";
+            prompt += "Money (total): " + getTotalMoney(self) + "\n";
+            prompt += "Money (bank): " + getBankBalance(self) + "\n";
+            prompt += "Money (cash): " + getCashBalance(self) + "\n";
+            prompt += "Player Inventory Space: " + getVolumeFree(utils.getInventoryContainer(self)) + "/125 \n";
+            prompt += " ------------------ " + "Faction" + " ------------------ " + "\n";
+            if (factions.isRebel(self))
+            {
+                prompt += "Aligned: Rebel \n";
+                prompt += "Rank:" + pvpGetCurrentGcwRank(self) + "\n\n";
+                prompt += "(Current GCW Cycle Information) \n";
+                prompt += "GCW Points: " + pvpGetCurrentGcwPoints(self) + "\n";
+                prompt += "GCW Kills: " + pvpGetCurrentPvpKills(self) + "\n";
+                prompt += "GCW Kills: " + pvpGetCurrentGcwRating(self) + "\n";
+            }
+            else if (factions.isImperial(self))
+            {
+                prompt += "Aligned: Imperial \n";
+                prompt += "Rank: " + pvpGetCurrentGcwRank(self) + "\n\n";
+                prompt += "(Current GCW Cycle Information) \n";
+                prompt += "GCW Points: " + pvpGetCurrentGcwPoints(self) + "\n";
+                prompt += "GCW Kills: " + pvpGetCurrentPvpKills(self) + "\n";
+                prompt += "GCW Kills: " + pvpGetCurrentGcwRating(self) + "\n";
+            }
+            else
+            {
+                prompt += "Neutral, unaligned.\n";
+            }
+
+            prompt += " ------------------ " + "Group" + " ------------------ " + "\n";
+            if (!group.isGrouped(self))
+            {
+                prompt += "Player is ungrouped. \n";
+            }
+            else
+            {
+                prompt += "Group ID: " + group.getGroupObject(self) + "\n";
+            }
+            prompt += " ------------------ " + "Guild" + " ------------------ " + "\n";
+            if (getGuildId(self) == 0)
+            {
+                prompt += "Player is not guilded. \n";
+            }
+            else
+            {
+                prompt += "Name: " + guildGetName(getGuildId(self)) + "\n";
+                prompt += "Abbrev.: " + guildGetAbbrev(getGuildId(self)) + "\n";
+                prompt += "ID: " + getGuildId(self) + "\n";
+                prompt += "Rank: " + guildGetMemberRank(getGuildId(self), self) + "\n";
+            }
+            prompt += " ------------------ " + "Skills" + " ------------------ " + "\n";
+            String[] skillList = getSkillListingForPlayer(self);
+            for (int i = 0; i < skillList.length; i++)
+            {
+                prompt += skillList[i] + "\n";
+            }
+            prompt += " ------------------ " + "Event" + " ------------------ " + "\n";
+            int pumpkinPulped = getIntObjVar(self, "halloween.pulped");
+            prompt += "Pumpkin Pulped: " + pumpkinPulped + "\n";
+            prompt += "Pumpkin Pulper Award: " + (!hasObjVar(self, "halloween.22_award") ? "no" : "yes") + "\n";
+            prompt += " ------------------ " + "Scripts" + " ------------------ " + "\n";
             String[] list = getScriptList(self);
             for (String s : list)
             {
                 prompt += s + "\n";
             }
-            prompt += "------------------ " + "ScriptVars" + " ------------------" + "\n";
-            String[] list2 = utils.getStringBatchScriptVar(self, "");
-            for (String s : list2)
+            prompt += " ------------------ " + "Buffs" + " ------------------ " + "\n";
+            int[] buffs = buff.getAllBuffs(self);
+            prompt += "Displayed below are Buff CRCs. \n";
+            for (int buff : buffs)
             {
-                prompt += s + "\n";
+                prompt += buff + "\n";
             }
-
-
-            sui.msgbox(self, player, prompt, sui.OK_ONLY, "title", "noHandler");
+            prompt += " ------------------ " + "Combat" + " ------------------ " + "\n";
+            prompt += "Player is " + (!combat.isInCombat(self) ? "disengaged" : "dngaged with " + getTarget(self)) + "\n";
+            prompt += "Player is in stealth: " + (getCreatureCoverVisibility(self) ? "false" : "true") + "\n";
+            prompt += " ------------------ " + "Notes" + " ------------------ " + "\n";
+            if (!hasObjVar(self, "skynet.notes"))
+            {
+                prompt += "No notes have been added to this player by Administration. \n";
+            }
+            else
+            {
+                prompt += getStringObjVar(self, "skynet.notes") + "\n";
+            }
+            prompt += " ------------------ " + "Inventory" + " ------------------ " + "\n";
+            obj_id[] contents = utils.getContents(self, true);
+            for (obj_id content : contents)
+            {
+                if (!hasObjVar(content, "noTrade"))
+                {
+                    prompt += "[ID: " + content + "] " + getTemplateName(content) + "\\#DB7093[NO TRADE]\\#FF0000" + "\n";
+                }
+                else
+                {
+                    prompt += "[ID: " + content + "] " + getTemplateName(content);
+                }
+            }
+            String title = "CSR DATAPAD";
+            int page = sui.createSUIPage(sui.SUI_MSGBOX, self, player, "noHandler");
+            setSUIProperty(page, "Prompt.lblPrompt", "LocalText", prompt);
+            setSUIProperty(page, "bg.caption.lblTitle", "Text", title);
+            setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
+            setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
+            setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
+            setSUIProperty(page, "btnCancel", "Visible", "true");
+            setSUIProperty(page, "btnRevert", "Visible", "false");
+            setSUIProperty(page, "btnOk", sui.PROP_TEXT, "Export");
+            subscribeToSUIEvent(page, sui_event_type.SET_onClosedOk, "%button0%", "exportCsDumpFile");
+            subscribeToSUIEvent(page, sui_event_type.SET_onClosedCancel, "%button0%", "exportCsDumpFile");
+            showSUIPage(page);
+            flushSUIPage(page);
         }
+        return SCRIPT_CONTINUE;
+    }
+    public int exportCsDumpFile(obj_id self, dictionary params)
+    {
+        saveTextOnClient(self, "csr_dump_" + getCalendarTime()  + ".txt", params.getString("prompt"));
         return SCRIPT_CONTINUE;
     }
 
