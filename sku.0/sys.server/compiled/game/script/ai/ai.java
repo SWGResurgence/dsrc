@@ -1983,32 +1983,52 @@ public class ai extends script.base_script
     public void OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         String nextWord = text;
+        if (getDistance(self, speaker) > 10.0f)
+        {
+            return;
+        }
+        if (isInvulnerable(self))
+        {
+            return;
+        }
+        if (isDead(self))
+        {
+            return;
+        }
+        if (!isInWorldCell(self))
+        {
+            return;
+        }
+        if (pet_lib.isPet(self) || beast_lib.isBeast(self))
+        {
+            return;
+        }
         if (nextWord.equals("gm_follow"))
         {
             ai.follow(self, getIntendedTarget(speaker), 1f, 6f);
             setMovementRun(self);
             setMovementPercent(self, 16.0f);
-            showFlyText(self, new string_id("- FOLLOWING! -"), 1f, colors.RED);
+            showFlyText(self, new string_id("!"), 1f, colors.RED);
         }
         if (nextWord.equals("gm_aggro"))
         {
             startCombat(self, getIntendedTarget(speaker));
-            showFlyText(self, new string_id("- AGGRO -"), 1f, colors.RED);
+            showFlyText(self, new string_id("!"), 1f, colors.RED);
         }
         if (nextWord.equals("gm_stop"))
         {
             ai.stop(self);
-            showFlyText(self, new string_id("!- STOP -!"), 1f, colors.RED);
+            showFlyText(self, new string_id("!"), 1f, colors.RED);
         }
         if (nextWord.equals("gm_interesting"))
         {
             setCondition(self, CONDITION_INTERESTING);
-            showFlyText(self, new string_id("- INTERESTING -"), 1f, colors.RED);
+            showFlyText(self, new string_id("!"), 1f, colors.RED);
         }
         if (nextWord.equals("gm_damage"))
         {
             damage(self, DAMAGE_KINETIC, HIT_LOCATION_BODY, 1000000);
-            showFlyText(self, new string_id("!- MERCY -!"), 1f, colors.RED);
+            showFlyText(self, new string_id("X_X"), 1f, colors.RED);
         }
         if (nextWord.equals("gm_kill"))
         {
@@ -2017,21 +2037,25 @@ public class ai extends script.base_script
         if (nextWord.equals("gm_wander"))
         {
             ai.wander(self);
-            showFlyText(self, new string_id("- WANDER -"), 1.5f, colors.RED);
+            showFlyText(self, new string_id("!"), 1.5f, colors.RED);
         }
         if (nextWord.equals("gm_patrol"))
         {
             // ai.patrol(self, "patrol");
-            showFlyText(self, new string_id("- PATROL -"), 1.5f, colors.RED);
+            showFlyText(self, new string_id("!"), 1.5f, colors.RED);
         }
         if (nextWord.equals("gm_flee"))
         {
-            ai.flee(self,speaker, 10, 15);
-            showFlyText(self, new string_id("- OMG I'M GONNA WHIZZ MYSELF -"), 1.5f, colors.RED);
+            ai.flee(self,getTarget(speaker), 10, 15);
+            showFlyText(self, new string_id("!"), 1.5f, colors.RED);
         }
         if (nextWord.equals("gm_test"))
         {
-            showFlyText(self, new string_id("- TEST -"), 1.5f, colors.RED);
+            showFlyText(self, new string_id("^_^"), 1.5f, colors.HOTPINK);
+        }
+        if (nextWord.equals("gm_ai_test"))
+        {
+            showFlyText(self, new string_id("^_^"), 1.5f, colors.HOTPINK);
         }
         if (nextWord.equals("gm_rand_damage"))
         {
