@@ -33005,4 +33005,9 @@ public class base_class
     {
         return new string_id(strText);
     }
+
+    public static location here(obj_id player)
+    {
+        return getLocation(player);
+    }
 }// class base_class
