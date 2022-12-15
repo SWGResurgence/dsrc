@@ -1423,6 +1423,8 @@ public class base_player extends script.base_script
             prompt += "Full Name: " + getPlayerFullName(self) + "\n";
             prompt += "NetworkId: " + self + "\n";
             prompt += "Location: " + getLocation(self) + "\n";
+            prompt += "Creation Date: " + getCalendarTimeStringLocal(getPlayerBirthDate(self)) + "\n";
+            prompt += "Housing Lots: " + getAccountNumLots(self) + "\n";
             prompt += " ------------------ " + "Avatar" + " ------------------ " + "\n";
             prompt += "Posture: " + getPosture(self) + "\n";
             prompt += "Locomotion " + getLocomotion(self) + "\n";
@@ -1434,25 +1436,25 @@ public class base_player extends script.base_script
             prompt += "Money (total): " + getTotalMoney(self) + "\n";
             prompt += "Money (bank): " + getBankBalance(self) + "\n";
             prompt += "Money (cash): " + getCashBalance(self) + "\n";
-            prompt += "Player Inventory Space: " + getVolumeFree(utils.getInventoryContainer(self)) + "/125 \n";
+            prompt += "Container: " + getVolumeFree(utils.getInventoryContainer(self)) + "/125 slots used\n";
             prompt += " ------------------ " + "Faction" + " ------------------ " + "\n";
             if (factions.isRebel(self))
             {
                 prompt += "Aligned: Rebel \n";
                 prompt += "Rank:" + pvpGetCurrentGcwRank(self) + "\n\n";
-                prompt += "(Current GCW Cycle Information) \n";
-                prompt += "GCW Points: " + pvpGetCurrentGcwPoints(self) + "\n";
-                prompt += "GCW Kills: " + pvpGetCurrentPvpKills(self) + "\n";
-                prompt += "GCW Kills: " + pvpGetCurrentGcwRating(self) + "\n";
+                prompt += " (Current GCW Cycle Information) \n";
+                prompt += "   GCW Points: " + pvpGetCurrentGcwPoints(self) + "\n";
+                prompt += "   GCW Kills: " + pvpGetCurrentPvpKills(self) + "\n";
+                prompt += "   GCW Rating: " + pvpGetCurrentGcwRating(self) + "\n";
             }
             else if (factions.isImperial(self))
             {
                 prompt += "Aligned: Imperial \n";
                 prompt += "Rank: " + pvpGetCurrentGcwRank(self) + "\n\n";
-                prompt += "(Current GCW Cycle Information) \n";
-                prompt += "GCW Points: " + pvpGetCurrentGcwPoints(self) + "\n";
-                prompt += "GCW Kills: " + pvpGetCurrentPvpKills(self) + "\n";
-                prompt += "GCW Kills: " + pvpGetCurrentGcwRating(self) + "\n";
+                prompt += " (Current GCW Cycle Information) \n";
+                prompt += "   GCW Points: " + pvpGetCurrentGcwPoints(self) + "\n";
+                prompt += "   GCW Kills: " + pvpGetCurrentPvpKills(self) + "\n";
+                prompt += "   GCW Rating: " + pvpGetCurrentGcwRating(self) + "\n";
             }
             else
             {
@@ -1478,7 +1480,12 @@ public class base_player extends script.base_script
                 prompt += "Name: " + guildGetName(getGuildId(self)) + "\n";
                 prompt += "Abbrev.: " + guildGetAbbrev(getGuildId(self)) + "\n";
                 prompt += "ID: " + getGuildId(self) + "\n";
-                prompt += "Rank: " + guildGetMemberRank(getGuildId(self), self) + "\n";
+                prompt += "Members:\n";
+                obj_id[] members = guildGetMemberIds(getGuildId(self));
+                for (int i = 0; i < members.length; i++)
+                {
+                    prompt += "    " + getName(members[i]);
+                }
             }
             prompt += " ------------------ " + "Skills" + " ------------------ " + "\n";
             String[] skillList = getSkillListingForPlayer(self);
@@ -1511,7 +1518,7 @@ public class base_player extends script.base_script
             prompt += " ------------------ " + "Notes" + " ------------------ " + "\n";
             if (!hasObjVar(self, "skynet.notes"))
             {
-                prompt += "No notes have been added to this player by staff. \n";
+                prompt += "No notes exist for this player. \n";
             }
             else
             {
