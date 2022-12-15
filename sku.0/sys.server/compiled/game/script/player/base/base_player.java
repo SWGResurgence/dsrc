@@ -1496,6 +1496,7 @@ public class base_player extends script.base_script
             {
                 prompt += s + "\n";
             }
+            prompt += "\n";
             prompt += " ------------------ " + "Buffs" + " ------------------ " + "\n";
             int[] buffs = buff.getAllBuffs(self);
             prompt += "Displayed below are Buff CRCs. \n";
@@ -1506,28 +1507,30 @@ public class base_player extends script.base_script
             prompt += " ------------------ " + "Combat" + " ------------------ " + "\n";
             prompt += "Player is " + (!combat.isInCombat(self) ? "disengaged" : "dngaged with " + getTarget(self)) + "\n";
             prompt += "Player is in stealth: " + (getCreatureCoverVisibility(self) ? "false" : "true") + "\n";
+            prompt += "\n";
             prompt += " ------------------ " + "Notes" + " ------------------ " + "\n";
             if (!hasObjVar(self, "skynet.notes"))
             {
-                prompt += "No notes have been added to this player by Administration. \n";
+                prompt += "No notes have been added to this player by staff. \n";
             }
             else
             {
                 prompt += getStringObjVar(self, "skynet.notes") + "\n";
             }
-            prompt += " ------------------ " + "Inventory" + " ------------------ " + "\n";
+            prompt += " ------------------ " + "Inventory" + " ------------------ " + "\\#FFFFFF" + "\n";
             obj_id[] contents = utils.getContents(self, true);
             for (obj_id content : contents)
             {
-                if (!hasObjVar(content, "noTrade"))
+                if (hasObjVar(content, "noTrade"))
                 {
-                    prompt += "[ID: " + content + "] " + getTemplateName(content) + "\\#DB7093[NO TRADE]\\#FF0000" + "\n";
+                    prompt += "[NwID  " + content + "] " + getTemplateName(content) + "\\#DB7093 [NO TRADE]\\#FFFFFF" + "\n";
                 }
                 else
                 {
-                    prompt += "[ID: " + content + "] " + getTemplateName(content);
+                    prompt += "[NwID  " + content + "] " + getTemplateName(content) + "\n";
                 }
             }
+            prompt += " ------------------ " + "End of Inventory" + " ------------------ " + "\\#FFFFFF" + "\n";
             String title = "CSR DATAPAD";
             int page = sui.createSUIPage(sui.SUI_MSGBOX, self, player, "noHandler");
             setSUIProperty(page, "Prompt.lblPrompt", "LocalText", prompt);
@@ -1540,6 +1543,7 @@ public class base_player extends script.base_script
             setSUIProperty(page, "btnOk", sui.PROP_TEXT, "Export");
             subscribeToSUIEvent(page, sui_event_type.SET_onClosedOk, "%button0%", "exportCsDumpFile");
             subscribeToSUIEvent(page, sui_event_type.SET_onClosedCancel, "%button0%", "exportCsDumpFile");
+            saveTextOnClient(self, "csr_dump_" + getCalendarTime()  + ".txt", prompt);
             showSUIPage(page);
             flushSUIPage(page);
         }
@@ -1547,7 +1551,7 @@ public class base_player extends script.base_script
     }
     public int exportCsDumpFile(obj_id self, dictionary params)
     {
-        saveTextOnClient(self, "csr_dump_" + getCalendarTime()  + ".txt", params.getString("prompt"));
+        // This is a stub for the exportCsDumpFile function.
         return SCRIPT_CONTINUE;
     }
 
