@@ -1574,6 +1574,34 @@ public class base_player extends script.base_script
 
     public int OnLogin(obj_id self) throws InterruptedException
     {
+        if (!utils.hasScriptVar(self, "welcome_message"))
+        {
+            String red = " \\#FF0000";
+            String gold = " \\#FFD700";
+            String tan = " \\#D2B48C";
+            String white = " \\#FFFFFF";
+            String welcomeMessage = "Welcome to " + gold + "Apotheosis" + white + "!" + "\n";
+            String pleaseRead = "Please read the " + tan + "Rules & Policies" + white + " and " + tan + "F.A.Q" + white + " before starting your adventure(s)." + "\n";
+            String numCharacters = "Number of Allowed Character(s): " + gold + "8\n";
+            String maxLogin = "Number of Allowed Character(s) Online: " + gold + "8\n";
+            String numAccts = "Number of Allowed Account(s): " + gold + "1\n";
+            String multiAccts = "Multiple Account(s): " + gold + "By Ticket\n";
+            String features = tan + "Key Features:\n";
+            String feature1 = tan + "1. " + white + "Instant Level 90 Token.\n";
+            String feature2 = tan + "2. " + white + "One Free Heroic Jewelry Set.\n";
+            String feature3 = tan + "3. " + white + "20 Character Lots.\n";
+            String feature4 = tan + "4. " + white + "Starter Packs for Space and Traders.\n";
+            String feature5 = tan + "5. " + white + "Veteran Rewards can be purchased in Theed.\n";
+            String feature6 = tan + "6. " + white + "Rare Loot System.\n";
+            String feature7 = tan + "7. " + white + "World Boss System.\n";
+            String feature8 = tan + "8. " + white + "Dxun is the New Planet.\n";
+            String feature9 = tan + "9. " + white + "Variety of TCG and Custom Content.\n";
+            String feature10 = tan + "10. " + white + "More yet to come...\n";
+            String nl = "\n";
+            String welcome = welcomeMessage + pleaseRead + numCharacters + maxLogin + numAccts + multiAccts + features + feature1 + feature2 + feature3 + feature4 + feature5 + feature6 + feature7 + feature8 + feature9 + feature10;
+            sui.msgbox(self, self, welcome, sui.OK_ONLY, "WELCOME TO THE GALAXY", "noHandler");
+            utils.setScriptVar(self, "welcome_message", 1);
+        }
         boolean ctsDisconnectRequested = false;
         if (hasObjVar(self, "disableLoginCtsInProgress"))
         {

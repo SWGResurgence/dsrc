@@ -11,7 +11,10 @@ public class token_gift_box extends script.base_script {
         obj_id pInv = utils.getInventoryContainer(player);
         HashSet theSet = new HashSet();
 
-        theSet.add(static_item.createNewItemFunction("item_event_halloween_coin", pInv, 4000));
+        theSet.add(static_item.createNewItemFunction("item_event_halloween_coin", pInv, 500));
+        theSet.add(static_item.createNewItemFunction("item_event_halloween_coin", pInv, 500));
+        theSet.add(static_item.createNewItemFunction("item_event_halloween_coin", pInv, 500));
+        theSet.add(static_item.createNewItemFunction("item_event_halloween_coin", pInv, 500));
         obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
         showLootBox(player, items);
