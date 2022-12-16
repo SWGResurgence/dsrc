@@ -149,11 +149,15 @@ public class sign extends script.base_script
             if (isIdValid(house))
             {
                 for (obj_id occupant : occupants) {
+                    if (occupants.length > 0) {
+                        broadcast(player, "No one is home.");
+                        return;
+                    }
                     String doorbellSnd = getStringObjVar(house, "player_structure_doorbell_snd");
                     if (doorbellSnd == null || doorbellSnd.equals("")) {
                         doorbellSnd = "sound/item_ding.snd";
                     }
-                    playClientEffectObj(player, doorbellSnd, player, "");
+                    playClientEffectObj(occupant, doorbellSnd, occupant, "");
                     prose_package pp = new prose_package();
                     prose.setStringId(pp, new string_id(commPrompt));
                     commPlayer(occupant, self, pp);
