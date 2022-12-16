@@ -39,8 +39,10 @@ public class book extends script.base_script
         int page = createSUIPage("/Script.editScript", book, who);
         setSUIProperty(page, "pageText.text", "Text", colors_hex.Default(getStringObjVar(book, "book.text")));
         setSUIProperty(page, "pageText.text", "Font", "starwarslogo_optimized_56");
+        setSUIProperty(page, "pageText.text", "Editable", "True");
+        setSUIProperty(page, "btnOk", "Text", "Save");
         setSUIProperty(page, "bg.caption.text", "LocalText", getStringObjVar(book, "book.title"));
-        subscribeToSUIEvent(page, sui_event_type.SET_onButton, "btnOk", "nextPage");
+        subscribeToSUIEvent(page, sui_event_type.SET_onButton, "btnOk", "saveText");
         subscribeToSUIPropertyForEvent(page, sui_event_type.SET_onButton, "btnOk", "pageText.text", "LocalText");
         subscribeToSUIPropertyForEvent(page, sui_event_type.SET_onButton, "btnOk", "outputPage.text", "LocalText");
         setSUIAssociatedObject(page, book);
