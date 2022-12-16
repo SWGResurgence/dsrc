@@ -1501,15 +1501,16 @@ public class base_player extends script.base_script
             String[] list = getScriptList(self);
             for (String s : list)
             {
-                prompt += s + "\n";
+                String removed = s.replace("script.", "");
+                prompt += removed + "\n";
             }
             prompt += "\n";
             prompt += " ------------------ " + "Buffs" + " ------------------ " + "\n";
             int[] buffs = buff.getAllBuffs(self);
-            prompt += "Displayed below are Buff CRCs. \n";
-            for (int buff : buffs)
+            prompt += "Names: \n";
+            for (int buffIndex : buffs)
             {
-                prompt += buff + "\n";
+                prompt += buff.getBuffNameFromCrc(buffIndex) + "\n";
             }
             prompt += " ------------------ " + "Combat" + " ------------------ " + "\n";
             prompt += "Player is " + (!combat.isInCombat(self) ? "disengaged" : "dngaged with " + getTarget(self)) + "\n";
@@ -1550,7 +1551,7 @@ public class base_player extends script.base_script
             setSUIProperty(page, "btnOk", sui.PROP_TEXT, "Export");
             subscribeToSUIEvent(page, sui_event_type.SET_onClosedOk, "%button0%", "exportCsDumpFile");
             subscribeToSUIEvent(page, sui_event_type.SET_onClosedCancel, "%button0%", "exportCsDumpFile");
-            saveTextOnClient(self, "csr_dump_" + getCalendarTime()  + ".txt", prompt);
+            saveTextOnClient(self, "csr_dump_" + getCalendarTime() + ".txt", prompt);
             showSUIPage(page);
             flushSUIPage(page);
         }
