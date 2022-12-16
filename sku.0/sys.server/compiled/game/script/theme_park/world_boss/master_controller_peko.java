@@ -11,7 +11,8 @@ public class master_controller_peko extends script.base_script
 
     public String[] SQUAWK_MSGS = {
             "<LOUDS AVIAN NOISES>",
-            "<ANGRY AVIAN NOISES>"
+            "<ANGRY AVIAN NOISES>",
+            "<UPSET AVIAN NOISES>",
     };
 
     public int OnAttach(obj_id self) throws InterruptedException
@@ -82,7 +83,6 @@ public class master_controller_peko extends script.base_script
                 obj_id[] players = getPlayerCreaturesInRange(self, 64.0f);
                 staggerPlayers(self, players);
                 utils.setScriptVar(self, "hasKnockedBack", 1);
-                return SCRIPT_CONTINUE;
             }
         }
         if (percentHealth <= 5)
@@ -90,14 +90,13 @@ public class master_controller_peko extends script.base_script
             if (!utils.hasScriptVar(self, "hasLastStand"))
             {
                 obj_id[] players = getPlayerCreaturesInRange(self, 64.0f);
-                resurgence.createCircleSpawn(self, self, "peko_peko", 6, 24);
-                createObject("peko_peko_albatross_high", getLocation(self));
+                resurgence.createCircleSpawn(self, self, "peko_peko_albatross_high", 6, 24);
                 staggerPlayers(self, players);
                 for (obj_id who : players)
                 {
                     broadcast(who, "The Mutated Peko-Peko Empress has called upon her whelps to aid her in her final stand!");
                 }
-                return SCRIPT_CONTINUE;
+                utils.setScriptVar(self, "hasLastStand", 1);
             }
         }
         return SCRIPT_CONTINUE;
@@ -105,7 +104,7 @@ public class master_controller_peko extends script.base_script
 
     public void staggerPlayers(obj_id self, obj_id[] targets) throws InterruptedException
     {
-        location stagger = null;
+        location stagger = new location();
         location slapLoc = getLocation(self);
         stagger.x = slapLoc.x + rand(-64.0f, 64.0f);
         stagger.z = slapLoc.z + rand(-64.0f, 64.0f);

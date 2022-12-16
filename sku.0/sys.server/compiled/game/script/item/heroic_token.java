@@ -26,14 +26,10 @@ public class heroic_token extends script.base_script
 
     public boolean hasTokenBoxInInventory(obj_id player) throws InterruptedException
     {
-        obj_id[] contents = getContents(utils.getInventoryContainer(player));
-        if (contents == null || contents.length == 0)
-        {
-            return false;
-        }
+        obj_id[] contents = utils.getContents(player, true);
         for (int i = 0; i < contents.length; i++)
         {
-            if (isIdValid(contents[i]) && getTemplateName(contents[i]).equals("object/tangible/loot/misc/heroic_token_box.iff"))
+            if (getTemplateName(contents[i]).equals("object/tangible/loot/misc/heroic_token_box.iff"))
             {
                 return true;
             }

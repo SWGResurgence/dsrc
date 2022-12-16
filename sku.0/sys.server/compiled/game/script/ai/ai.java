@@ -1866,7 +1866,7 @@ public class ai extends script.base_script
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        if (isGod(player) && !isInvulnerable(self) && !isPlayer(self))
+        if (isGod(player) && !isInvulnerable(self) && !isPlayer(self) && !hasScript(self, "systems.city.city_actor"))
         {
             int root = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("Loot *"));
             mi.addSubMenu(root, menu_info_types.SERVER_MENU21, new string_id("* Increase Drop Count by 1"));
@@ -1956,7 +1956,7 @@ public class ai extends script.base_script
         if (item == menu_info_types.SERVER_MENU26)
         {
             String prompt = "Enter creature name to make a ring spawn.";
-            sui.inputbox(self, player, prompt, "prepareRingSpawn");
+            sui.inputbox(player, player, prompt, "prepareRingSpawn");
 
         }
         return SCRIPT_CONTINUE;
@@ -1983,50 +1983,81 @@ public class ai extends script.base_script
     public void OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         String nextWord = text;
+        if (getDistance(self, speaker) > 10.0f)
+        {
+            return;
+        }
+        if (isInvulnerable(self))
+        {
+            return;
+        }
+        if (isDead(self))
+        {
+            return;
+        }
+        if (!isInWorldCell(self))
+        {
+            return;
+        }
+        if (pet_lib.isPet(self) || beast_lib.isBeast(self))
+        {
+            return;
+        }
         if (nextWord.equals("gm_follow"))
         {
-            ai.follow(self, speaker, 1.0f, 10.0f);
-            chat.chat(self, "[GM|AI] Following " + getName(speaker));
+            ai.follow(self, getIntendedTarget(speaker), 1f, 6f);
+            setMovementRun(self);
+            setMovementPercent(self, 16.0f);
+            showFlyText(self, new string_id("!"), 1f, colors.RED);
         }
         if (nextWord.equals("gm_aggro"))
         {
-            startCombat(self, speaker);
-            chat.chat(self, "[GM|AI] Aggroing " + getName(speaker));
+            startCombat(self, getIntendedTarget(speaker));
+            showFlyText(self, new string_id("!"), 1f, colors.RED);
         }
         if (nextWord.equals("gm_stop"))
         {
             ai.stop(self);
-            chat.chat(self, "[GM|AI] Stopping");
+            showFlyText(self, new string_id("!"), 1f, colors.RED);
         }
         if (nextWord.equals("gm_interesting"))
         {
             setCondition(self, CONDITION_INTERESTING);
-            chat.chat(self, "[GM|AI] Setting interest to " + getName(speaker));
+            showFlyText(self, new string_id("!"), 1f, colors.RED);
         }
-        if (nextWord.equals("gm_slay"))
+        if (nextWord.equals("gm_damage"))
+        {
+            damage(self, DAMAGE_KINETIC, HIT_LOCATION_BODY, 1000000);
+            showFlyText(self, new string_id("X_X"), 1f, colors.RED);
+        }
+        if (nextWord.equals("gm_kill"))
         {
             kill(self);
         }
         if (nextWord.equals("gm_wander"))
         {
             ai.wander(self);
-            chat.chat(self, "[GM|AI] Wandering");
+            showFlyText(self, new string_id("!"), 1.5f, colors.RED);
         }
         if (nextWord.equals("gm_patrol"))
         {
             // ai.patrol(self, "patrol");
-            chat.chat(self, "[GM|AI] Patrolling");
+            showFlyText(self, new string_id("!"), 1.5f, colors.RED);
         }
         if (nextWord.equals("gm_flee"))
         {
-            ai.flee(self,speaker, 10, 15);
-            chat.chat(self, "[GM|AI] Fleeing");
+            ai.flee(self,getTarget(speaker), 10, 15);
+            showFlyText(self, new string_id("!"), 1.5f, colors.RED);
         }
-        if (nextWord.equals("gm_chat"))
+        if (nextWord.equals("gm_test"))
         {
-            chat.chat(self, "[GM|AI] Testing chat");
+            showFlyText(self, new string_id("^_^"), 1.5f, colors.HOTPINK);
         }
-        if (nextWord.equals("gm_damage"))
+        if (nextWord.equals("gm_ai_test"))
+        {
+            showFlyText(self, new string_id("^_^"), 1.5f, colors.HOTPINK);
+        }
+        if (nextWord.equals("gm_rand_damage"))
         {
             int damage = rand(100, 1000);
             damage(self, DAMAGE_KINETIC, HIT_LOCATION_HEAD, damage);

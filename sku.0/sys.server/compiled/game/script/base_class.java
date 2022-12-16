@@ -16739,6 +16739,15 @@ public class base_class
     {
         _doAnimationAction(getLongWithNull(target), animationActionName);
     }
+    /**
+     * Invokes a creature/player object to do an animation by name. Example cbt_throw_1
+     *
+     * @param target
+     *         the object id for the player/creature
+     * @param moodName
+     *         the animation string to update on the creature.
+     */
+
 
     private static native void _setAnimationMood(long target, String moodName);
 
@@ -16746,6 +16755,14 @@ public class base_class
     {
         _setAnimationMood(getLongWithNull(target), moodName);
     }
+    /**
+     * Sets the animation mood of a creature object.
+     *
+     * @param target
+     *         the object id for the player/creature
+     * @param moodName
+     *         the mood string to update on the creature.
+     */
 
     private static native String _getAnimationMood(long target);
 
@@ -32982,7 +32999,7 @@ public class base_class
     /**
      * isInAdminTable
      * Alternative to isGod check which validates if the player is connected from an account listed in the admin data table
-     * This validates the username regardless of whether /setGod is on or off so it is better for security and auditing of admin accounts
+     * This validates the username regardless of whether /setGod is on or off, so it is better for security and auditing of admin accounts
      * or for announcements/messages to GM characters (in the case of SWG Source, for patch note/admin updates)
      *
      * @param player
@@ -33000,5 +33017,14 @@ public class base_class
             List<String> adminUsernames = Arrays.asList(dataTableGetStringColumn(getConfigSetting("ConnectionServer", "adminAccountDataTable"), "AdminAccounts"));
             return adminUsernames.contains(getPlayerAccountUsername(player));
         }
+    }
+    public static string_id unlocalizedString(String strText) throws InterruptedException
+    {
+        return new string_id(strText);
+    }
+
+    public static location here(obj_id player)
+    {
+        return getLocation(player);
     }
 }// class base_class

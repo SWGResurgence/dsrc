@@ -8,10 +8,9 @@
 package script.event.lifeday;
 
 
-import script.location;
-import script.obj_id;
-import script.library.chat;
 import script.library.ai_lib;
+import script.library.chat;
+import script.obj_id;
 
 
 public class celebration_actor extends script.base_script
@@ -37,16 +36,16 @@ public class celebration_actor extends script.base_script
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
         setAnimationMood(self, "conversation");
         chirp(self);
-        continueChirping(self);
         return SCRIPT_CONTINUE;
     }
     public void chirp(obj_id self) throws InterruptedException
     {
         chat.chat(self, getRandomEntry(actorChatter));
+        messageTo(self, "continueChirping", null, 10f, false);
     }
     public void continueChirping(obj_id self) throws InterruptedException
     {
-        messageTo(self, "chirp", null, 360.0f, false);
+        messageTo(self, "chirp", null, 1f, false);
     }
     public String getRandomEntry(String[] array) throws InterruptedException
     {
