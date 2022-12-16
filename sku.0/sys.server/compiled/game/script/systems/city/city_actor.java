@@ -31,7 +31,7 @@ public class city_actor extends script.base_script
             {
                 if (isPlayer(giver))
                 {
-                    sendSystemMessageTestingOnly(giver, "You gave [" + getName(self) + " ] to [" + getName(item) + "].");
+                    sendSystemMessageTestingOnly(giver, "You gave [" + getName(item) + " ] to [" + getName(self) + "].");
                     equipOverride(item, self);
                 }
                 else
@@ -60,7 +60,11 @@ public class city_actor extends script.base_script
                 mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU24, new string_id("* Customize: Size"));
                 mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU26, new string_id("* Customize: AI"));
                 mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU25, new string_id("* Reset All Settings"));
-                mi.addRootMenu(menu_info_types.SERVER_MENU27, new string_id("Remove *"));
+                if (hasObjVar(self, "city_id"))
+                {
+                    mi.addRootMenu(menu_info_types.SERVER_MENU27, new string_id("Remove *"));
+                }
+
             }
         }
         return SCRIPT_CONTINUE;
