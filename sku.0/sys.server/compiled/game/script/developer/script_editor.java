@@ -28,12 +28,12 @@ public class script_editor extends script.base_script
         String params = st.nextToken();
         if (params == null)
         {
-            sendSystemMessageTestingOnly(self, "Usage: /editScript <script name>  e.g. /editScript justin.test_scriptedit");
+            sendSystemMessageTestingOnly(self, "Usage: /editScript <script name>  e.g. /editScript test.qatool");
             return SCRIPT_OVERRIDE;
         }
         if (params.length() < 1)
         {
-            sendSystemMessageTestingOnly(self, "Usage: /editScript <script name>  e.g. /editScript justin.test_scriptedit");
+            sendSystemMessageTestingOnly(self, "Usage: /editScript <script name>  e.g. /editScript test.qatool");
             return SCRIPT_OVERRIDE;
         }
         String scriptBaseName = params;
@@ -61,7 +61,7 @@ public class script_editor extends script.base_script
         }
         if (scriptContents == null)
         {
-            sendSystemMessageTestingOnly(self, "Could not get script contents from " + scriptBaseName + ".script or " + scriptBaseName + ".scriptlib");
+            sendSystemMessageTestingOnly(self, "Could not get script contents from " + scriptBaseName + ".java");
             return SCRIPT_OVERRIDE;
         }
         int page = createSUIPage("/Script.editScript", self, self);
