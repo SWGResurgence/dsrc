@@ -26,6 +26,17 @@ public class component_attrib_mod extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
+        if (hasObjVar(self, "attribute.bonus.2"))
+        {
+            names[idx] = "action_bonus";
+            attribs[idx] = "+" + getIntObjVar(self, "attribute.bonus.2");
+            
+            idx++;
+            if (idx >= names.length)
+            {
+                return SCRIPT_CONTINUE;
+            }
+        }
         return SCRIPT_CONTINUE;
     }
 }

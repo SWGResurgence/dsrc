@@ -62,6 +62,8 @@ public class component_attribs extends script.base_script
                 int intVal = (int)val;
                 removeObjVar(self, "attribute.bonus.0");
                 setObjVar(self, "attribute.bonus.0", intVal);
+                removeObjVar(self, "attribute.bonus.2");
+                setObjVar(self, "attribute.bonus.2", intVal);
             }
         }
         return SCRIPT_CONTINUE;
