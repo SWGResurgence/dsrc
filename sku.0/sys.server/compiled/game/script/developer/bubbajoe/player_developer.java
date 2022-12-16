@@ -216,6 +216,12 @@ public class player_developer extends base_script
             debugConsoleMsg(self, "  /developer scale <float> - Resizes the target.");
             debugConsoleMsg(self, "  /developer messageto <message> <float> - Sends a message to the target.");
             debugConsoleMsg(self, "  /developer wiki <search> - Opens a wiki page in your browser.");
+            debugConsoleMsg(self, "  /developer ballgame - Creates a ball in your inventory.");
+            debugConsoleMsg(self, "  /developer pathToMe - Creates a path to you.");
+            debugConsoleMsg(self, "  /developer convertStringToCrc <string> - Converts a string to a CRC.");
+            debugConsoleMsg(self, "  /developer possess <command> <params> - Possesses the target and makes them do a command.");
+            debugConsoleMsg(self, "  /developer pumpkin ring <num to spawn> <radius> - Spawns a ring of pumpkins around the pumpkin master.");
+            debugConsoleMsg(self, "  /developer pumpkin single - Makes a single pumpkin");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
@@ -261,6 +267,19 @@ public class player_developer extends base_script
                 setLocation(who, where);
             }
         }
+    }
+
+    public void pathToMe(obj_id self, obj_id target) throws InterruptedException
+    {
+        location here = getLocation(self);
+        location there = getLocation(target);
+        createClientPathAdvanced(target, there, here, "default");
+    }
+    public void pathToWho(obj_id self, obj_id target) throws InterruptedException
+    {
+        location here = getLocation(self);
+        location there = getLocation(target);
+        createClientPathAdvanced(self, here, there, "default");
     }
 }
 
