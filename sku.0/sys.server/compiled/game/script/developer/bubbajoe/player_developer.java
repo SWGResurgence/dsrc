@@ -81,7 +81,7 @@ public class player_developer extends base_script
 
         if (cmd.equalsIgnoreCase("pumpkin"))
         {
-            obj_id pumpkinMaster = getIntendedTarget(self);
+            obj_id pumpkinMaster = target;
             String flag = tok.nextToken();
             String[] pumpkinNames = {
                     "a plump pumpkin",
@@ -129,8 +129,8 @@ public class player_developer extends base_script
                     faceTo(pumpkin, pumpkinMaster);
                     setName(pumpkin, pumpkinNames[rand(0, pumpkinNames.length - 1)]);
                 }
-                prose_package pp = prose.getPackage(new string_id("Pumpkin Madness!"));
-                commPlayer(self, pumpkinMaster, pp);
+                prose_package pp = prose.getPackage(new string_id("H'chu apenkee, Moulee-rah!"));
+                commPlayer(self, pumpkinMaster, pp, "object/mobile/jabba_the_hutt.iff");
             }
         }
 
@@ -144,6 +144,27 @@ public class player_developer extends base_script
             pathed = wiki_link.replace(" ", "_");
             //chat.chat(target, splitMsg);
             launchClientWebBrowser(self, pathed);
+            return SCRIPT_CONTINUE;
+        }
+
+        if (cmd.equals("shuttleRebelDrop"))
+        {
+            String message = "Mayday! Mayday! Mayday! I have to drop my payload, " + getFirstName(target) + "!";
+            prose_package commP = new prose_package();
+            commP.stringId = new string_id(message);
+            commPlayer(self, target, commP, "object/mobile/dressed_rebel_intel_officer_human_female_01.iff");
+            obj_id[] players = getAllPlayers(getLocation(target), 10.0f);
+            playClientEffectLoc(players, "appearance/rebel_transport_touch_and_go.prt", getLocation(target), 2.0f);
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equals("shuttleImperialDrop"))
+        {
+            String message = "Prepare for your cargo delivery, " + getFirstName(target) + "! I don't want any hiccups.";
+            prose_package commP = new prose_package();
+            commP.stringId = new string_id(message);
+            commPlayer(self, target, commP, "object/mobile/dressed_imperial_officer_m_2.iff");
+            obj_id[] players = getAllPlayers(getLocation(target), 10.0f);
+            playClientEffectLoc(players, "appearance/imperial_transport_touch_and_go.prt", getLocation(target), 2.0f);
             return SCRIPT_CONTINUE;
         }
 
