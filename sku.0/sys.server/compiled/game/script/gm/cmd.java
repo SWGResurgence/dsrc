@@ -110,6 +110,7 @@ public class cmd extends script.base_script
         }
         cmdParams.trim();
         sendSystemMessageTestingOnly(self, "/forceCommand: attempting to queue command: '" + cmd + " " + cmdParams + "' for (" + target + ")" + getName(target));
+        queueCommand(target, utils.getStringCrc(cmd), getIntendedTarget(target), cmdParams, COMMAND_PRIORITY_NORMAL);
         return SCRIPT_CONTINUE;
     }
 

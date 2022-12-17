@@ -36,7 +36,7 @@ public class painter extends script.base_script
             information = x + " " + y + " " + z + "\n";
             header += information;
         }
-        saveTextOnClient(self, "SwgMapper_" + getCurrentSceneName() + ".txt", header);
+        saveTextOnClient(self, "SwgMapper_" + getCurrentSceneName().toString() + ".txt", header);
         broadcast(self, "Painted " + targets.length + " objects. Run in SwgMapper to see the results.");
         return SCRIPT_CONTINUE;
     }
