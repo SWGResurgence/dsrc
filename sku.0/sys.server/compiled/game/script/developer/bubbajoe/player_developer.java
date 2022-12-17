@@ -153,9 +153,10 @@ public class player_developer extends base_script
         {
             obj_id pInv = utils.getInventoryContainer(self);
             obj_id hotPotato = createObject("object/tangible/loot/dungeon/geonosian_mad_bunker/relic_gbb_small_ball.iff", pInv, "");
-            setName(hotPotato, "Ball");
+            setName(hotPotato, "a throwable ball");
             attachScript(hotPotato, "developer.bubbajoe.pass_the_ball");
-            broadcast(self, "a Small Ball has been created in your inventory.");
+            detachScript(hotPotato, "object.autostack");
+            broadcast(self, "a throwable ball has been created in your inventory.");
             return SCRIPT_CONTINUE;
         }
 
@@ -271,6 +272,12 @@ public class player_developer extends base_script
             queueCommand(target, commandName, target, commandParams, COMMAND_PRIORITY_IMMEDIATE);
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equals("animate"))
+        {
+            String animationFile = tok.nextToken();
+            doAnimationAction(target, animationFile);
+            broadcast(self, "Animation '" + animationFile + "' performed on " + getName(target));
+        }
 
         if (cmd.equals("-help"))
         {
@@ -319,6 +326,7 @@ public class player_developer extends base_script
         location root = getLocation(self);
         return new location(loc.x - root.x, loc.y - root.y, loc.z - root.z, loc.area);
     }
+
 
     public void putPlayersInRing(obj_id[] targets, float ring_radius)
     {
