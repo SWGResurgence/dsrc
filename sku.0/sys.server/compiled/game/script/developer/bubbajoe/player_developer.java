@@ -19,7 +19,6 @@ public class player_developer extends base_script
     public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         java.util.StringTokenizer tok = new java.util.StringTokenizer(params);
-        target = getIntendedTarget(self);
         String cmd = tok.nextToken();
         if (cmd.equalsIgnoreCase("quest"))
         {
@@ -85,13 +84,12 @@ public class player_developer extends base_script
             obj_id pumpkinMaster = getIntendedTarget(self);
             String flag = tok.nextToken();
             String[] pumpkinNames = {
-                    "a nice looking pumpkin",
                     "a plump pumpkin",
-                    "a rotten pumpkin",
-                    "a small pumpkin",
-                    "a large pumpkin",
-                    "a medium sized pumpkin",
-                    "a bountiful pumpkin",
+                    "a regular pumpkin",
+                    "a scrawny pumpkin",
+                    "a nasty pumpkin",
+                    "a scary pumpkin",
+                    "a jagged pumpkin",
             };
             if (flag.equals("") || flag == null)
             {
@@ -277,6 +275,111 @@ public class player_developer extends base_script
             String animationFile = tok.nextToken();
             doAnimationAction(target, animationFile);
             broadcast(self, "Animation '" + animationFile + "' performed on " + getName(target));
+        }
+        if (cmd.equals("setRange"))
+        {
+            float minRange = utils.stringToFloat(tok.nextToken());
+            float maxRange = utils.stringToFloat(tok.nextToken());
+            setWeaponRangeInfo(getHeldWeapon(self), minRange, maxRange);
+        }
+
+        if (cmd.equals("modweapon"))
+        {
+            obj_id weapon = utils.getHeldWeapon(self);
+            if (weapon == null)
+            {
+                return SCRIPT_CONTINUE;
+            }
+            String mod = tok.nextToken();
+            String value = tok.nextToken();
+            if (mod.equals("minDamage"))
+            {
+                setWeaponMinDamage(weapon, Integer.parseInt(value));
+            }
+            if (mod.equals("maxDamage"))
+            {
+                setWeaponMaxDamage(weapon, Integer.parseInt(value));
+            }
+            if (mod.equals("attackSpeed"))
+            {
+                setWeaponAttackSpeed(weapon, utils.stringToFloat(value));//float
+            }
+            if (mod.equals("woundChance"))
+            {
+                setWeaponWoundChance(weapon, utils.stringToFloat(value));//float
+            }
+            if (mod.equals("attackCost"))
+            {
+                setWeaponAttackCost(weapon, Integer.parseInt(value));
+            }
+            if (mod.equals("elementalValue"))
+            {
+                setWeaponElementalValue(weapon, Integer.parseInt(value));
+            }
+            if (mod.equals("elementalType"))
+            {
+                setWeaponElementalType(weapon, Integer.parseInt(value));
+            }
+            if (mod.equals("accuracy"))
+            {
+                setWeaponAccuracy(weapon, Integer.parseInt(value));
+            }
+            if (mod.equals("damageRadius"))
+            {
+                setWeaponDamageRadius(weapon, utils.stringToFloat(value));//float
+            }
+            if (mod.equals("setKinetic"))
+            {
+                setWeaponDamageType(weapon, DAMAGE_KINETIC);
+            }
+            if (mod.equals("setEnergy"))
+            {
+                setWeaponDamageType(weapon, DAMAGE_ENERGY);
+            }
+            if (mod.equals("setElectricity"))
+            {
+                setWeaponDamageType(weapon, DAMAGE_ELEMENTAL_ELECTRICAL);
+            }
+            if (mod.equals("setStun"))
+            {
+                setWeaponDamageType(weapon, DAMAGE_STUN);
+            }
+            if (mod.equals("setBlast"))
+            {
+                setWeaponDamageType(weapon, DAMAGE_BLAST);
+            }
+            if (mod.equals("setHeat"))
+            {
+                setWeaponDamageType(weapon, DAMAGE_ELEMENTAL_HEAT);
+            }
+            if (mod.equals("setCold"))
+            {
+                setWeaponDamageType(weapon, DAMAGE_ELEMENTAL_COLD);
+            }
+            if (mod.equals("setAcid"))
+            {
+                setWeaponDamageType(weapon, DAMAGE_ELEMENTAL_ACID);
+            }
+            if (mod.equals("setRestraint"))
+            {
+                setWeaponDamageType(weapon, DAMAGE_RESTRAINT);
+            }
+
+            if (mod.equals("resetAllStats"))
+            {
+                setWeaponMinDamage(weapon, 24);
+                setWeaponMaxDamage(weapon, 64);
+                setWeaponAttackSpeed(weapon, 1.05f);
+                setWeaponWoundChance(weapon, 0f);
+                setWeaponAttackCost(weapon, 2);
+                setWeaponElementalValue(weapon, 0);
+                setWeaponElementalType(weapon, 0);
+                setWeaponAccuracy(weapon, 0);
+                setWeaponDamageRadius(weapon, 64.0f);
+                setWeaponDamageType(weapon, DAMAGE_KINETIC);
+                setWeaponRangeInfo(weapon, 0f, 1200f);
+                setWeaponDamageRadius(weapon, 0f);
+            }
         }
 
         if (cmd.equals("-help"))

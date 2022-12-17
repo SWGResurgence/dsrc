@@ -1942,7 +1942,6 @@ public class cmd extends script.base_script
         loot.randomizeComponent(target, level, target);
         setCraftedId(target, source);
         setCrafter(target, self);
-        setObjVar(target, "csr.loot.creator", self);
         if (bonus > 1)
         {
             string_id item_sid = getNameStringId(target);
@@ -1955,10 +1954,13 @@ public class cmd extends script.base_script
             {
                 prefix = new string_id("obj_n", "exceptional_prefix");
             }
-            String name = localize(item_sid) + " (" + localize(prefix) + ")";
+            String goldhex = "\\#FFD700";
+            String whitehex = "\\#FFFFFF";
+            String name = goldhex + localize(item_sid) + " (" + localize(prefix) + ")" + whitehex;
             setName(target, name);
         }
-        CustomerServiceLog("loot", "CSR: %TU has created %TT at level " + level + " and at rarity bonus " + bonus, self, target);
+        //this isn't logging? wrong formatting? unsure.
+        // CustomerServiceLog("loot", "CSR: %TU has created %TT at level " + level + " and at rarity bonus " + bonus, self, target);
         sendSystemMessageTestingOnly(self, "Component initialization complete.");
         return SCRIPT_CONTINUE;
     }
@@ -2036,9 +2038,9 @@ public class cmd extends script.base_script
                 }
                 intensity = (tempIntensity / 100.0f);
             }
-            if (intensity > 1.25f)
+            if (intensity > 20f)
             {
-                intensity = 1.25f;
+                intensity = 20f;
             }
             if (weapons.createWeapon(schematicId, self, weapons.VIA_SCHEMATIC, intensity) == null)
             {
@@ -2099,7 +2101,7 @@ public class cmd extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "format: /cmdGmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
+            sendSystemMessageTestingOnly(self, "format: /GmWeapon <command> (params)   OR   /GmWeapon ? for help");
         }
         return SCRIPT_CONTINUE;
     }

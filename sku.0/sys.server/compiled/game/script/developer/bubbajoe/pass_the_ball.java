@@ -71,7 +71,7 @@ public class pass_the_ball extends script.base_script
             obj_id[] witnesses = getAllPlayers(getLocation(self), 10.0f);
             for (obj_id witness : witnesses)
             {
-                playClientEffectObj(player, "clienteffect/entertainer_dazzle_level_three.cef", witness, "");
+                playClientEffectLoc(player, "clienteffect/entertainer_dazzle_level_three.cef", getLocation(witness), 15.0f);
             }
             broadcast(getIntendedTarget(player), "You have been passed the ball from " + toUpper(getName(player) + "!", 0));
             return SCRIPT_CONTINUE;
