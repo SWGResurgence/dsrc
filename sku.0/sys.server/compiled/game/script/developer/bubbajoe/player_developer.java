@@ -185,6 +185,74 @@ public class player_developer extends base_script
             broadcast(self, "Hash Value: " + hashValue);
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equalsIgnoreCase("travel"))
+        {//@example /developer travel add COST Epic Name With Spaces
+            String which = tok.nextToken();
+            if (which.equals("add"))
+            {
+                int cost = utils.stringToInt((tok.nextToken()));
+                String pointName = tok.nextToken();
+                if (tok.hasMoreTokens())
+                {
+                    pointName += " " + tok.nextToken();
+                }
+                location loc = getLocation(target);
+
+                if (cost == 0)
+                {
+                    cost = 125;
+                }
+                if (pointName == null || pointName.equals(""))
+                {
+                    broadcast(self, "You must specify a point name.");
+                    return SCRIPT_CONTINUE;
+                }
+                if (loc == null)
+                {
+                    broadcast(self, "You must specify a valid target.");
+                    return SCRIPT_CONTINUE;
+                }
+                setObjVar(self, "temp_shuttle", pointName);
+                debugConsoleMsg(self, "Shuttle point " + pointName + " added at " + loc.x + ", " + loc.y + ", " + loc.z + " for " + cost + " credits.");
+                addPlanetTravelPoint(getCurrentSceneName(), pointName, getLocation(self), cost, true, TPT_NPC_Starport);
+            }
+            if (which.equals("remove"))
+            {
+                String pointName = tok.nextToken();
+                if (tok.hasMoreTokens())
+                {
+                    pointName += " " + tok.nextToken();
+                }
+                if (pointName == null || pointName.equals(""))
+                {
+                    broadcast(self, "You must specify a point name.");
+                    return SCRIPT_CONTINUE;
+                }
+                removePlanetTravelPoint(getCurrentSceneName(), pointName);
+            }
+            else
+            {
+                broadcast(self, "Invalid Syntax: /developer travel add COST Epic Name With Spaces");
+                return SCRIPT_CONTINUE;
+            }
+        }
+        if (cmd.equalsIgnoreCase("removeSpecStamp"))
+        {
+            obj_id city_hall = getIntendedTarget(self);
+            String VAR_CITY = "spec_stamp";
+            String VAR_CITY_OLD = VAR_CITY + ".old"; // for backwards compatibility
+            if (hasObjVar(city_hall, VAR_CITY))
+            {
+                setObjVar(city_hall, VAR_CITY_OLD, getIntObjVar(city_hall, VAR_CITY));
+                removeObjVar(city_hall, VAR_CITY);
+                sendSystemMessageTestingOnly(self, "Removed Spec Stamp from City Hall with preservation of old specstamp.");
+            }
+            else
+            {
+                sendSystemMessageTestingOnly(self, "This target does not have the \"spec_stamp\" objvar.");
+            }
+            return SCRIPT_CONTINUE;
+        }
         if (cmd.equalsIgnoreCase("possess"))
         {
             int commandName = getStringCrc(tok.nextToken());
