@@ -252,7 +252,7 @@ public class player_developer extends base_script
             }
             else
             {
-                broadcast(self, "Invalid Syntax: /developer travel add COST Epic Name With Spaces");
+                broadcast(self, "Invalid Syntax: /developer travel add [COST] [Epic Name With Spaces]");
                 return SCRIPT_CONTINUE;
             }
         }
