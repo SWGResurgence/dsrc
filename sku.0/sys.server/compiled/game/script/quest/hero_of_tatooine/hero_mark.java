@@ -65,7 +65,6 @@ public class hero_mark extends script.base_script
     }
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        setObjVar(self, "charges", 50);
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
@@ -81,10 +80,6 @@ public class hero_mark extends script.base_script
     {
         if (item == menu_info_types.SERVER_MENU10)
         {
-            if (!hasObjVar(self, "charges"))
-            {
-                return SCRIPT_CONTINUE;
-            }
             if (hasObjVar(self, "lastUsed"))
             {
                 int last_used = getIntObjVar(self, "lastUsed");
