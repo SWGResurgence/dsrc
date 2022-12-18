@@ -4650,18 +4650,29 @@ public class base_class
         //sendSystemMessageTestingOnly (getChatName (to), localizedMessageText);
         sendSystemMessage(to, localizedMessageText, null);
     }
-
     /**
      * Send a system message to an individual
      */
-    public static void broadcast(obj_id to, String localizedMessageText)
+    public static void broadcast (obj_id to, String localizedMessageText)
     {
         //sendSystemMessageTestingOnly (getChatName (to), localizedMessageText);
         sendSystemMessage(to, localizedMessageText, null);
     }
-
     /**
      * Send a system message to an individual
+     */
+
+    public static void broadcastGroup(obj_id[] players, String localizedMessageText)
+    {
+        for (obj_id individual_player : players)
+        {
+            sendSystemMessage(individual_player, localizedMessageText, null);
+        }
+    }
+
+
+    /**
+     * Send a system message to the group
      */
     public static void sendSystemMessageOob(obj_id to, String oob)
     {
