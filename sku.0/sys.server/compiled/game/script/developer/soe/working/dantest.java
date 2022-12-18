@@ -1,4 +1,4 @@
-package script.working;
+package script.developer.soe.working;
 
 import script.*;
 import script.combat_engine.hit_result;

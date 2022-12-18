@@ -1,4 +1,4 @@
-package script.developer.soe;
+package script.developer.soe.working;
 
 import script.library.space_quest;
 import script.location;

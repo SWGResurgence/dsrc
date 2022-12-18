@@ -1,4 +1,4 @@
-package script.working.wwallace;
+package script.developer.soe.working;
 
 import script.dictionary;
 import script.library.datatable;

@@ -1,4 +1,4 @@
-package script.working.wwallace;
+package script.developer.soe.working;
 
 import script.library.utils;
 import script.location;

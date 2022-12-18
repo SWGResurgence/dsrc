@@ -1,4 +1,4 @@
-package script.working;
+package script.developer.soe.working;
 
 import script.library.buff;
 import script.library.create;
