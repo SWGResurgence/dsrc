@@ -764,7 +764,118 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+    public int OnSawEmote(obj_id self, obj_id performer, String emote) throws InterruptedException
+    {
+        boolean enableSlapDamage = false;
+        String[] EMOTE_PET_HUMANOID_RESPONSES = {
+                "I don't like that.",
+                "Please don't touch me.",
+                "In some places we'd be betrothed",
+                "Ew, your ugly."
+        };
+        String[] EMOTE_SLAP_HUMANOID_RESPONSES = {
+                "Ow!",
+                "Please have mercy!",
+                "Ouch!",
+                "-winces in pain-"
+        };
+        String[] EMOTE_BMOC_HUMANOID_RESPONSES = {
+                "You picked the wrong one!",
+                "Wanna tussle!?",
+                "Bring it on!",
+                "I am stronger than you!"
+        };
+        String[] EMOTE_DANCE_HUMANOID_RESPONSES = {
+                "I love this dance.",
+                "Are you trying to seduce me?",
+                "Feel the vibes.",
+                "Ok, if you say so.."
+        };
+        if (emote.startsWith("pet"))
+        {
+            if (!ai_lib.isHumanoid(self))
+            {
+                showFlyText(self, new string_id("<3"), 1.0f, colors.DEEPPINK);
+            }
+            else
+            {
+                chat.chat(self, getRandomArray(EMOTE_PET_HUMANOID_RESPONSES));
+                doAnimationAction(self, anims.HUMAN_EMT_THREATEN);
+            }
+            return SCRIPT_CONTINUE;
+        }
+        else if (emote.startsWith("summon") || emote.startsWith("beckon"))
+        {
+            showFlyText(self, new string_id("- ! -"), 12.0f, colors.WHITE);
+            ai_lib.follow(self, performer, 1.0f, 12.0f);
+            return SCRIPT_CONTINUE;
+        }
+        else if (emote.startsWith("shoo") || emote.startsWith("dismiss"))
+        {
+            showFlyText(self, new string_id("- ! -"), 12.0f, colors.RED);
+            ai_lib.aiStopFollowing(self);
+            ai_lib.wander(self);
+            return SCRIPT_CONTINUE;
+        }
+        else if (emote.startsWith("slap") || emote.startsWith("backhand"))
+        {
+            if (ai_lib.isHumanoid(self))
+            {
+                chat.chat(self, getRandomArray(EMOTE_SLAP_HUMANOID_RESPONSES));
+                if (enableSlapDamage)
+                {
+                    int damage = rand(256, 1024);
+                    int health = getAttrib(self, HEALTH);
+                    int newHealth = health - damage;
+                    if (newHealth < 0)
+                    {
+                        newHealth = 0;
+                    }
+                    setAttrib(self, HEALTH, newHealth);
+                }
+                else
+                {
+                    doAnimationAction(self, anims.PLAYER_GET_HIT_HEAVY_BACKWARD);
+                }
+            }
+            else
+            {
+                showFlyText(self, new string_id("Ouch!"), 1.0f, colors.DEEPPINK);
+            }
+            return SCRIPT_CONTINUE;
+        }
+        else if (emote.startsWith("bmoc"))
+        {
+            if (ai_lib.isHumanoid(self))
+            {
+                chat.chat(self, getRandomArray(EMOTE_BMOC_HUMANOID_RESPONSES));
+                startCombat(self, performer);
+            }
+            else
+            {
+                showFlyText(self, new string_id("!"), 1.0f, colors.DEEPPINK);
+            }
+            return SCRIPT_CONTINUE;
 
+        }
+        else if (emote.startsWith("dance"))
+        {
+            if (ai_lib.isHumanoid(self))
+            {
+                setAnimationMood(self, "themepark_oola");
+                ai_lib.setDefaultCalmMood(self, "themepark_oola");
+                ai_lib.setMood(self, "themepark_oola");
+                chat.chat(self, getRandomArray(EMOTE_DANCE_HUMANOID_RESPONSES));
+            }
+            else
+            {
+                chat.chat(self, "<This creature cannot dance with you.>");
+            }
+            return SCRIPT_CONTINUE;
+
+        }
+        return SCRIPT_CONTINUE;
+    }
     public int OnSawAttack(obj_id self, obj_id defender, obj_id[] attackers) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnSawAttack() self(" + self + ":" + getName(self) + ") defender (" + defender + ") attackers.length(" + attackers.length + ")");
