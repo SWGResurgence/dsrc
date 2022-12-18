@@ -1,13 +1,11 @@
-package script.e3demo;
+package script.developer.soe.e3demo;
 
 import script.*;
 import script.library.*;
 
-import java.util.Vector;
-
-public class demoer extends script.base_script
+public class e3_demoer extends script.base_script
 {
-    public demoer()
+    public e3_demoer()
     {
     }
     public static final String[] MANDALORIAN_ARMOR = 
@@ -279,266 +277,153 @@ public class demoer extends script.base_script
     };
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if(!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)){
-            detachScript(self, "e3demo.demoer");
-            return SCRIPT_CONTINUE;
-        }
         setObjVar(self, "intAutoSaveOff", 1);
+        queueCommand(self, (1577314655), self, "declared imperial", COMMAND_PRIORITY_FRONT);
+        return SCRIPT_CONTINUE;
+    }
+    public int OnLogout(obj_id self) throws InterruptedException
+    {
+        location locTest = new location();
+        locTest.area = "tatooine";
+        setLocation(self, locTest);
+        return SCRIPT_CONTINUE;
+    }
+    public int OnInitialize(obj_id self) throws InterruptedException
+    {
+        queueCommand(self, (1577314655), self, "declared imperial", COMMAND_PRIORITY_FRONT);
         return SCRIPT_CONTINUE;
     }
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         String[] strCommands = split(strText, ' ');
-        if (strCommands[0].equalsIgnoreCase("setupGroundDemo1"))
+        if (strCommands[0].equalsIgnoreCase("setupDemo"))
         {
-            location jabbaPalace = new location(2591, 2, 4423);
-            obj_id palace1 = createObject("object/building/tatooine/palace_tatooine_jabba.iff", jabbaPalace);
-            setObjVar(self, "palace1", palace1);
-            dictionary dctParams = new dictionary();
-            dctParams.put("objBuilding", palace1);
-            String[] strScripts = getScriptList(palace1);
-            detachScriptList(strScripts, palace1);
-            LOG("test", "Messaging self with " + dctParams.toString());
-            sendSystemMessageTestingOnly(self, "Setup Ground Demo 1");
-            messageTo(self, "cleanoutBuilding", dctParams, 15, false);
-            obj_id[] decor = new obj_id[13];
-            location crawler1loc = new location(2527, 0.66f, 4624);
-            obj_id crawler1 = createObject("object/static/vehicle/static_sandcrawler.iff", crawler1loc);
-            decor[0] = crawler1;
-            location crawler2loc = new location(2529, 0.86f, 4672);
-            obj_id crawler2 = createObject("object/static/vehicle/static_sandcrawler.iff", crawler2loc);
-            decor[1] = crawler2;
-            location jawa1loc = new location(2540, 0.70f, 4624);
-            obj_id jawa1 = createObject("object/static/creature/tatooine_jawa.iff", jawa1loc);
-            decor[2] = jawa1;
-            location jawa2loc = new location(2543, 0.71f, 4624);
-            obj_id jawa2 = createObject("object/static/creature/tatooine_jawa.iff", jawa2loc);
-            decor[3] = jawa2;
-            location jawa3loc = new location(2543, 0.75f, 4627);
-            obj_id jawa3 = createObject("object/static/creature/tatooine_jawa.iff", jawa3loc);
-            decor[4] = jawa3;
-            location jawa4loc = new location(2540, 0.74f, 4626);
-            obj_id jawa4 = createObject("object/static/creature/tatooine_jawa.iff", jawa4loc);
-            decor[5] = jawa4;
-            location r2loc = new location(2542, 0.73f, 4625);
-            obj_id r2 = createObject("object/static/creature/droids_r2.iff", r2loc);
-            decor[6] = r2;
-            location poiLoc = new location(2551, 1.94f, 4662);
-            obj_id poi = createObject("object/static/poi/scene/camp_jawa_lrg.iff", poiLoc);
-            decor[7] = poi;
-            location banthaLoc = new location(2572.73f, 1.96f, 4666.73f);
-            obj_id bantha = createObject("object/static/creature/tatooine_bantha_saddle.iff", banthaLoc);
-            decor[8] = bantha;
-            location gamor1loc = new location(2599, 0, 4578);
-            obj_id gamor1 = create.object("gamorrean_guard", gamor1loc);
-            setInvulnerable(gamor1, true);
-            ai_lib.setDefaultCalmBehavior(gamor1, ai_lib.BEHAVIOR_SENTINEL);
-            setScale(gamor1, 1.5f);
-            setYaw(gamor1, 0);
-            decor[9] = gamor1;
-            location gamor2loc = new location(2582, 0, 4578);
-            obj_id gamor2 = create.object("gamorrean_guard", gamor2loc);
-            setInvulnerable(gamor2, true);
-            ai_lib.setDefaultCalmBehavior(gamor2, ai_lib.BEHAVIOR_SENTINEL);
-            setScale(gamor2, 1.5f);
-            setYaw(gamor2, 0);
-            decor[10] = gamor2;
-            obj_id cell = getCellId(palace1, "foyer");
-            location bomarr1loc = new location(-6.4f, 0.2f, 119.8f, "thm_tato_jabbas_palace", cell);
-            obj_id bomarr1 = create.object("bomarr_monk", bomarr1loc);
-            setInvulnerable(bomarr1, true);
-            ai_lib.setDefaultCalmBehavior(bomarr1, ai_lib.BEHAVIOR_SENTINEL);
-            setYaw(bomarr1, 11);
-            decor[11] = bomarr1;
-            location bomarr2loc = new location(6.0f, 0.2f, 130.8f, "thm_tato_jabbas_palace", cell);
-            obj_id bomarr2 = create.object("bomarr_monk", bomarr2loc);
-            setInvulnerable(bomarr2, true);
-            ai_lib.setDefaultCalmBehavior(bomarr2, ai_lib.BEHAVIOR_SENTINEL);
-            setYaw(bomarr2, -14);
-            decor[11] = bomarr2;
-            for (obj_id obj_id : decor) {
-                setObjVar(obj_id, "intGroundDemo1", 1);
+            debugServerConsoleMsg(self, "************************* setting Up the Demo");
+            location locTest = getLocation(self);
+            String strArea = locTest.area;
+            if (!strArea.equals("space_light1"))
+            {
+                sendSystemMessageTestingOnly(self, "You must make a tiebomber pcd and go to space_light1 to use this command");
+                return SCRIPT_CONTINUE;
             }
-            setObjVar(self, "decor", decor);
+            obj_id[] objTestObjects = getAllObjectsWithTemplate(getLocation(self), 320000, "object/ship/player/player_star_destroyer.iff");
+            obj_id objShip = objTestObjects[0];
+            obj_id objCell = getCellId(objShip, "elevator_e3_up");
+            transform trDestination = getTransformObjVar(objShip, "trBridge");
+            sendSystemMessageTestingOnly(self, "Sending you to " + objCell + " in object " + objShip);
+            space_transition.enterCapitalShip(self, trDestination, objCell);
+            messageTo(self, "beginMusicPlaying", null, 10, false);
         }
-        if (strCommands[0].equalsIgnoreCase("setupGroundDemo2"))
+        if (strCommands[0].equals("resetDemo"))
         {
-            location jabbaPalace = new location(-2480, 0.25f, -5109);
-            obj_id palace2 = createObject("object/building/tatooine/palace_tatooine_jabba.iff", jabbaPalace);
-            setObjVar(self, "palace2", palace2);
-            dictionary dctParams = new dictionary();
-            dctParams.put("objBuilding", palace2);
-            String[] strScripts = getScriptList(palace2);
-            detachScriptList(strScripts, palace2);
-            LOG("test", "Messaging self with " + dctParams.toString());
-            sendSystemMessageTestingOnly(self, "Setup Ground Demo 2");
-            messageTo(self, "cleanoutBuilding", dctParams, 15, false);
-            obj_id[] decor = new obj_id[13];
-            location crawler1loc = new location(-2528.72f, 0, -4915.57f);
-            obj_id crawler1 = createObject("object/static/vehicle/static_sandcrawler.iff", crawler1loc);
-            decor[0] = crawler1;
-            location crawler2loc = new location(-2529.78f, 0, -4868.04f);
-            obj_id crawler2 = createObject("object/static/vehicle/static_sandcrawler.iff", crawler2loc);
-            decor[1] = crawler2;
-            location jawa1loc = new location(-2502.87f, 0, -4913.52f);
-            obj_id jawa1 = createObject("object/static/creature/tatooine_jawa.iff", jawa1loc);
-            setYaw(jawa1, -2);
-            decor[2] = jawa1;
-            location jawa2loc = new location(-2505.72f, 0, -4911.22f);
-            obj_id jawa2 = createObject("object/static/creature/tatooine_jawa.iff", jawa2loc);
-            setYaw(jawa2, 95);
-            decor[3] = jawa2;
-            location jawa3loc = new location(-2502.09f, 0, -4910.44f);
-            obj_id jawa3 = createObject("object/static/creature/tatooine_jawa.iff", jawa3loc);
-            setYaw(jawa3, -164);
-            decor[4] = jawa3;
-            location jawa4loc = new location(-2500.72f, 0, -4911.91f);
-            obj_id jawa4 = createObject("object/static/creature/tatooine_jawa.iff", jawa4loc);
-            setYaw(jawa4, -87);
-            decor[5] = jawa4;
-            location r2loc = new location(-2502.95f, 0, -4911.74f);
-            obj_id r2 = createObject("object/static/creature/droids_r2.iff", r2loc);
-            decor[6] = r2;
-            location poiLoc = new location(-2499.79f, 0, -4883.52f);
-            obj_id poi = createObject("object/static/poi/scene/camp_jawa_lrg.iff", poiLoc);
-            decor[7] = poi;
-            location banthaLoc = new location(-2479.56f, 0, -4882.23f);
-            obj_id bantha = createObject("object/static/creature/tatooine_bantha_saddle.iff", banthaLoc);
-            decor[8] = bantha;
-            location gamor1loc = new location(-2471.3f, 0, -4954.6f);
-            obj_id gamor1 = create.object("gamorrean_guard", gamor1loc);
-            setInvulnerable(gamor1, true);
-            ai_lib.setDefaultCalmBehavior(gamor1, ai_lib.BEHAVIOR_SENTINEL);
-            setScale(gamor1, 1.5f);
-            setYaw(gamor1, 0);
-            decor[9] = gamor1;
-            location gamor2loc = new location(-2488.7f, 0, -4956.8f);
-            obj_id gamor2 = create.object("gamorrean_guard", gamor2loc);
-            setInvulnerable(gamor2, true);
-            ai_lib.setDefaultCalmBehavior(gamor2, ai_lib.BEHAVIOR_SENTINEL);
-            setScale(gamor2, 1.5f);
-            setYaw(gamor2, 0);
-            decor[10] = gamor2;
-            obj_id cell = getCellId(palace2, "foyer");
-            location bomarr1loc = new location(-6.4f, 0.2f, 119.8f, "thm_tato_jabbas_palace", cell);
-            obj_id bomarr1 = create.object("bomarr_monk", bomarr1loc);
-            setInvulnerable(bomarr1, true);
-            ai_lib.setDefaultCalmBehavior(bomarr1, ai_lib.BEHAVIOR_SENTINEL);
-            setYaw(bomarr1, 11);
-            decor[11] = bomarr1;
-            location bomarr2loc = new location(6.0f, 0.2f, 130.8f, "thm_tato_jabbas_palace", cell);
-            obj_id bomarr2 = create.object("bomarr_monk", bomarr2loc);
-            setInvulnerable(bomarr2, true);
-            ai_lib.setDefaultCalmBehavior(bomarr2, ai_lib.BEHAVIOR_SENTINEL);
-            setYaw(bomarr2, -14);
-            decor[11] = bomarr2;
-            for (obj_id obj_id : decor) {
-                setObjVar(obj_id, "intGroundDemo2", 1);
-            }
-            setObjVar(self, "decor", decor);
-        }
-        if (strCommands[0].equalsIgnoreCase("cleanupGroundDemo1"))
-        {
-            location jabbaPalace = new location(2591, 2, 4423);
-            obj_id[] objTestObjects = getObjectsInRange(jabbaPalace, 1000);
+            obj_id[] objTestObjects = getAllObjectsWithObjVar(getLocation(self), 320000, "intDeleteOnReset");
             if (objTestObjects != null)
             {
                 for (obj_id objTestObject : objTestObjects) {
                     destroyObject(objTestObject);
                 }
             }
-            return SCRIPT_CONTINUE;
+            objTestObjects = getAllObjectsWithTemplate(getLocation(self), 320000, "object/ship/player/player_corellian_corvette.iff");
+            messageTo(objTestObjects[0], "delayedSpawn", null, 1, false);
+            objTestObjects = getAllObjectsWithTemplate(getLocation(self), 320000, "object/ship/player/player_star_destroyer.iff");
+            obj_id objShip = objTestObjects[0];
+            obj_id objCell = getCellId(objShip, "elevator_e3_up");
+            location locTest = new location();
+            locTest.cell = objCell;
+            setLocation(self, locTest);
+            messageTo(self, "beginMusicPlaying", null, 5, false);
         }
-        if (strCommands[0].equalsIgnoreCase("cleanupGroundDemo2"))
+        if (strCommands[0].equalsIgnoreCase("makeMandalorian"))
         {
-            location jabbaPalace = new location(-2480, 0.25f, -5109);
-            obj_id[] objTestObjects = getObjectsInRange(jabbaPalace, 1000);
-            if (objTestObjects != null)
+            createInInventory(self, MANDALORIAN_ARMOR);
+            sendSystemMessageTestingOnly(self, "Made Mandalorian Armor");
+        }
+        if (strCommands[0].equalsIgnoreCase("makeWookieeArmor"))
+        {
+            createInInventory(self, WOOKIEE_ARMOR);
+            sendSystemMessageTestingOnly(self, "Made Wookiee Armor");
+        }
+        if (strCommands[0].equalsIgnoreCase("makeShipComponents"))
+        {
+            createInInventory(self, SHIP_COMPONENTS);
+            sendSystemMessageTestingOnly(self, "Made Ship ComponentsArmor");
+        }
+        if (strCommands[0].equalsIgnoreCase("nextColor"))
+        {
+            obj_id objWeapon = getCurrentWeapon(self);
+            custom_var myVar = getCustomVarByName(objWeapon, "private/index_color_blade");
+            if (myVar.isPalColor())
             {
-                for (obj_id objTestObject : objTestObjects) {
-                    destroyObject(objTestObject);
+                palcolor_custom_var pcVar = (palcolor_custom_var)myVar;
+                int intColor = pcVar.getValue();
+                intColor = intColor + 1;
+                if (intColor > 11)
+                {
+                    intColor = 0;
+                }
+                pcVar.setValue(intColor);
+            }
+        }
+        if (strCommands[0].equalsIgnoreCase("makeJediClothes"))
+        {
+            createInInventory(self, JEDI_CLOTHES);
+            sendSystemMessageTestingOnly(self, "Made jedi clothes");
+        }
+        if (strCommands[0].equalsIgnoreCase("combatOn"))
+        {
+            setCombatTarget(self, getLookAtTarget(self));
+            setState(self, STATE_COMBAT, true);
+            sendSystemMessageTestingOnly(self, "COMBAT ON!");
+        }
+        if (strCommands[0].equalsIgnoreCase("combatOff"))
+        {
+            setCombatTarget(self, null);
+            setState(self, STATE_COMBAT, false);
+            sendSystemMessageTestingOnly(self, "COMBAT ON!");
+        }
+        if (strCommands[0].equalsIgnoreCase("makeLightsabers"))
+        {
+            String[] strItems = LIGHTSABERS;
+            obj_id objInventory = utils.getInventoryContainer(self);
+            for (String strItem : strItems) {
+                obj_id objTest = createObjectOverloaded(strItem, objInventory);
+                if (!isIdValid(objTest)) {
+                    sendSystemMessageTestingOnly(self, "Item of template " + strItem + " is Incorret!");
+                } else {
+                    setObjVar(objTest, "crafting.source_schematic", objTest);
+                    setCrafter(objTest, self);
                 }
             }
-            return SCRIPT_CONTINUE;
+            sendSystemMessageTestingOnly(self, "Made some lightsabers");
         }
-        if (strCommands[0].equalsIgnoreCase("gotoGroundDemo1"))
+        if (strCommands[0].equalsIgnoreCase("resetNebulon"))
         {
-            warpPlayer(self, "tatooine", 2569, 2, 4665, null, 0, 0, 0, "", false);
-        }
-        if (strCommands[0].equalsIgnoreCase("gotoGroundDemo2"))
-        {
-            warpPlayer(self, "tatooine", -2483.9f, 0, -4879.6f, null, 0, 0, 0, "", false);
-        }
-        if (strCommands[0].equalsIgnoreCase("startGroundDemo1"))
-        {
-            sendSystemMessageTestingOnly(self, "Demo is starting now!  Proceed into the palace!");
-            obj_id palace1 = getObjIdObjVar(self, "palace1");
-            obj_id cell = getCellId(palace1, "foyer");
-            location grievousSpawn = new location(-1.2f, 0.3f, 116.9f, "thm_tato_jabbas_palace", cell);
-            obj_id grievous = create.object("demo_general_grievous", grievousSpawn);
-            attachScript(grievous, "e3demo.grievous");
-            setObjVar(grievous, "player", self);
-            setObjVar(grievous, "demoNumber", 1);
-        }
-        if (strCommands[0].equalsIgnoreCase("startGroundDemo2"))
-        {
-            sendSystemMessageTestingOnly(self, "Demo is starting now!  Proceed into the palace!");
-            obj_id palace2 = getObjIdObjVar(self, "palace2");
-            obj_id cell = getCellId(palace2, "foyer");
-            location grievousSpawn = new location(-1.2f, 0.3f, 116.9f, "thm_tato_jabbas_palace", cell);
-            obj_id grievous = create.object("demo_general_grievous", grievousSpawn);
-            attachScript(grievous, "e3demo.grievous");
-            setObjVar(grievous, "player", self);
-            setObjVar(grievous, "demoNumber", 2);
-        }
-        if (strCommands[0].equalsIgnoreCase("cleanupGroundDemo1"))
-        {
-            obj_id palace1 = getObjIdObjVar(self, "palace1");
-            destroyObject(palace1);
-            obj_id[] decor = getObjIdArrayObjVar(self, "decor");
-            for (obj_id obj_id : decor) {
-                if (isIdValid(obj_id)) {
-                    destroyObject(obj_id);
-                }
+            obj_id[] objTestObjects = getAllObjectsWithObjVar(getLocation(self), 320000, "intNebulon");
+            for (obj_id objTestObject : objTestObjects) {
+                setObjVar(objTestObject, "intReset", 1);
+                destroyObject(objTestObject);
             }
-        }
-        if (strCommands[0].equalsIgnoreCase("cleanupgroundDemo2"))
-        {
-            obj_id palace2 = getObjIdObjVar(self, "palace2");
-            destroyObject(palace2);
-            obj_id[] decor = getObjIdArrayObjVar(self, "decor");
-            for (obj_id obj_id : decor) {
-                if (isIdValid(obj_id)) {
-                    destroyObject(obj_id);
-                }
-            }
-        }
-        if (strCommands[0].equalsIgnoreCase("setupSpaceDemo"))
-        {
-            obj_id objShip = space_transition.getContainingShip(self);
-            if (!isIdValid(objShip))
-            {
-                obj_id objPCD = space_utils.createShipControlDevice(self, "xwing", true);
-                objShip = space_transition.getShipFromShipControlDevice(objPCD);
-            }
-            grantAllSkills(self, REBEL_PILOT);
-            setFlightModel(objShip, "demoer");
-            setShipCapacitorEnergyMaximum(objShip, 50000);
-            setShipCapacitorEnergyCurrent(objShip, 50000);
-            setShipCapacitorEnergyRechargeRate(objShip, 1000);
+            obj_id[] objNebulon = getAllObjectsWithScript(getLocation(self), 320000, "e3demo.spawner_nebulon");
             dictionary dctParams = new dictionary();
-            dctParams.put("objShip", objShip);
-            messageTo(self, "gotoSpace", dctParams, 1, false);
+            space_utils.notifyObject(objNebulon[0], "spawnNebulon", dctParams);
+            sendSystemMessageTestingOnly(self, "Reset nebulon");
         }
-        if (strCommands[0].equalsIgnoreCase("resetSpaceDemo"))
+        if (strCommands[0].equalsIgnoreCase("destroyNebulon"))
         {
-            obj_id objShip = space_transition.getContainingShip(self);
-            int spaceFaction = space_transition.getPlayerSpaceFaction(self);
-            shipSetSpaceFaction(space_transition.getContainingShip(self), spaceFaction);
-            warpPlayer(objShip, "space_kashyyyk", 2934, 455, -2340, null, 2934, 455, -2340, null, true);
-            messageTo(self, "faceAvatar", null, 2, false);
-            grantAllSkills(self, REBEL_PILOT);
-            sendSystemMessageTestingOnly(self, "FOOZLE");
+            obj_id[] objTestObjects = getAllObjectsWithObjVar(getLocation(self), 320000, "intNebulon");
+            for (obj_id objTestObject : objTestObjects) {
+                setObjVar(objTestObject, "intReset", 1);
+                destroyObject(objTestObject);
+            }
+        }
+        if (strCommands[0].equalsIgnoreCase("openJediSlot"))
+        {
+            removeObjVar(self, "jedi.timeStamp");
+            addJediSlot(self);
+            playMusic(self, "sound/music_amb_underwater_b.snd");
+            setObjVar(self, "jedi.enabled", 1);
+            string_id strSpam = new string_id("jedi_spam", "force_sensitive");
+            sendSystemMessage(self, strSpam);
         }
         if (strCommands[0].equalsIgnoreCase("makeRebelPilot"))
         {
@@ -588,6 +473,36 @@ public class demoer extends script.base_script
         if (strCommands[0].equalsIgnoreCase("makeJetpack"))
         {
             createJetpack(self);
+        }
+        if (strCommands[0].equalsIgnoreCase("colorXwing"))
+        {
+            obj_id shipId = getPilotedShip(self);
+            if (isIdValid(shipId))
+            {
+                String index = "/shared_owner/index_color_1";
+                sui.colorize(self, self, shipId, index, "handleColorize");
+            }
+            return SCRIPT_CONTINUE;
+        }
+        if (strCommands[0].equalsIgnoreCase("patternXwing"))
+        {
+            obj_id shipId = getPilotedShip(self);
+            if (isIdValid(shipId))
+            {
+                String index = "/shared_owner/index_texture_1";
+                hue.setRangedIntCustomVar(shipId, index, 0);
+            }
+            return SCRIPT_CONTINUE;
+        }
+        if (strCommands[0].equalsIgnoreCase("patternTwoXwing"))
+        {
+            obj_id shipId = getPilotedShip(self);
+            if (isIdValid(shipId))
+            {
+                String index = "/shared_owner/index_texture_1";
+                hue.setRangedIntCustomVar(shipId, index, 1);
+            }
+            return SCRIPT_CONTINUE;
         }
         if (strCommands[0].equalsIgnoreCase("makeDroid"))
         {
@@ -725,145 +640,14 @@ public class demoer extends script.base_script
         }
         return;
     }
-    public void setFlightModel(obj_id objShip, String strFlightModel) throws InterruptedException
+    public int beginMusicPlaying(obj_id self, dictionary params) throws InterruptedException
     {
-        dictionary dctShipInfo = dataTableGetRow("datatables/ship/ship_debug.iff", strFlightModel);
-        if (dctShipInfo == null)
+        String bldgName = getTemplateName(getTopMostContainer(self));
+        if (bldgName.equals("object/ship/player/player_star_destroyer.iff"))
         {
-            return;
-        }
-        if (!isIdValid(objShip))
-        {
-            return;
-        }
-        setShipEngineAccelerationRate(objShip, dctShipInfo.getFloat("engine_accel"));
-        setShipEngineDecelerationRate(objShip, dctShipInfo.getFloat("engine_decel"));
-        setShipEnginePitchAccelerationRateDegrees(objShip, dctShipInfo.getFloat("engine_pitch_accel"));
-        setShipEngineYawAccelerationRateDegrees(objShip, dctShipInfo.getFloat("engine_yaw_accel"));
-        setShipEngineRollAccelerationRateDegrees(objShip, dctShipInfo.getFloat("engine_roll_accel"));
-        setShipEnginePitchRateMaximumDegrees(objShip, dctShipInfo.getFloat("engine_pitch"));
-        setShipEngineYawRateMaximumDegrees(objShip, dctShipInfo.getFloat("engine_yaw"));
-        setShipEngineRollRateMaximumDegrees(objShip, dctShipInfo.getFloat("engine_roll"));
-        setShipEngineSpeedMaximum(objShip, dctShipInfo.getFloat("engine_speed"));
-        setShipEngineSpeedRotationFactorMaximum(objShip, dctShipInfo.getFloat("speed_rotation_factor"));
-        setShipSlideDampener(objShip, dctShipInfo.getFloat("slideDamp"));
-        setShipBoosterEnergyCurrent(objShip, dctShipInfo.getFloat("booster_energy"));
-        setShipBoosterEnergyMaximum(objShip, dctShipInfo.getFloat("booster_energy"));
-        setShipBoosterEnergyRechargeRate(objShip, dctShipInfo.getFloat("booster_recharge"));
-        setShipBoosterEnergyConsumptionRate(objShip, dctShipInfo.getFloat("booster_consumption"));
-        setShipBoosterAcceleration(objShip, dctShipInfo.getFloat("booster_accel"));
-        setShipBoosterSpeedMaximum(objShip, dctShipInfo.getFloat("booster_speed"));
-        return;
-    }
-    public int faceAvatar(obj_id self, dictionary params) throws InterruptedException
-    {
-        obj_id objShip = space_transition.getContainingShip(self);
-        obj_id[] objAsteroids = getAllObjectsWithTemplate(getLocation(self), 320000, "object/ship/spacestation_avatar_platform.iff");
-        obj_id objAsteroid = objAsteroids[0];
-        vector vctTest = space_utils.getVector(objAsteroid);
-        transform trTest = getTransform_o2p(objShip);
-        transform trFinalTransform = space_utils.faceTransformToVector(trTest, vctTest);
-        setTransform_o2p(objShip, trFinalTransform);
-        int spaceFaction = space_transition.getPlayerSpaceFaction(self);
-        shipSetSpaceFaction(space_transition.getContainingShip(self), spaceFaction);
-        return SCRIPT_CONTINUE;
-    }
-    public int resetDemo1(obj_id self, dictionary params) throws InterruptedException
-    {
-        warpPlayer(self, "tatooine", 2569, 2, 4665, null, 0, 0, 0, "", false);
-        messageTo(self, "setUpDemo1", null, 1.0f, true);
-        return SCRIPT_CONTINUE;
-    }
-    public int resetDemo2(obj_id self, dictionary params) throws InterruptedException
-    {
-        warpPlayer(self, "tatooine", -2483.9f, 0, -4879.6f, null, 0, 0, 0, "", false);
-        messageTo(self, "setUpDemo2", null, 1.0f, true);
-        return SCRIPT_CONTINUE;
-    }
-    public int setUpDemo1(obj_id self, dictionary params) throws InterruptedException
-    {
-        obj_id palace1 = getObjIdObjVar(self, "palace1");
-        obj_id cell = getCellId(palace1, "foyer");
-        location grievousSpawn = new location(-1.2f, 0.3f, 116.9f, "thm_tato_jabbas_palace", cell);
-        obj_id grievous = create.object("demo_general_grievous", grievousSpawn);
-        attachScript(grievous, "e3demo.grievous");
-        setObjVar(grievous, "player", self);
-        setObjVar(grievous, "demoNumber", 1);
-        return SCRIPT_CONTINUE;
-    }
-    public int setUpDemo2(obj_id self, dictionary params) throws InterruptedException
-    {
-        obj_id palace2 = getObjIdObjVar(self, "palace2");
-        obj_id cell = getCellId(palace2, "foyer");
-        location grievousSpawn = new location(-1.2f, 0.3f, 116.9f, "thm_tato_jabbas_palace", cell);
-        obj_id grievous = create.object("demo_general_grievous", grievousSpawn);
-        attachScript(grievous, "e3demo.grievous");
-        setObjVar(grievous, "player", self);
-        setObjVar(grievous, "demoNumber", 2);
-        return SCRIPT_CONTINUE;
-    }
-    public int cleanoutBuilding(obj_id self, dictionary params) throws InterruptedException
-    {
-        LOG("test", "Cleaningout bulidng");
-        obj_id objBuilding = params.getObjId("objBuilding");
-        obj_id[] objContents = getContents(objBuilding);
-        if (objContents != null)
-        {
-            for (obj_id objContent : objContents) {
-                String strTemplate = getTemplateName(objContent);
-                int intIndex = strTemplate.indexOf("cell.iff");
-                LOG("test", "intIndex is " + intIndex);
-                if (intIndex == -1) {
-                    destroyObject(objContent);
-                }
-            }
+            play2dNonLoopingMusic(self, "sound/mus_imperial_march_excerpt.snd");
+            messageTo(self, "beginMusicPlaying", null, 55, false);
         }
         return SCRIPT_CONTINUE;
-    }
-    public void detachScriptList(String[] strScriptList, obj_id objObject) throws InterruptedException
-    {
-        for (String s : strScriptList) {
-            String script = s;
-            if (script.contains("script.")) {
-                script = script.substring(7);
-            }
-            if (!script.equals("")) {
-                detachScript(objObject, script);
-            }
-        }
-    }
-    public int gotoSpace(obj_id self, dictionary params) throws InterruptedException
-    {
-        obj_id objShip = params.getObjId("objShip");
-        location locTest = new location();
-        locTest.area = "space_kashyyyk";
-        locTest.x = 2934;
-        locTest.y = 455;
-        locTest.z = -2340;
-        launch(self, objShip, null, locTest, getLocation(self));
-        messageTo(self, "faceAvatar", null, 5, false);
-        return SCRIPT_CONTINUE;
-    }
-    public void launch(obj_id player, obj_id ship, obj_id[] membersApprovedByShipOwner, location warpLocation, location groundLoc) throws InterruptedException
-    {
-        space_transition.clearOvertStatus(ship);
-        Vector groupMembersToWarp = utils.addElement(null, player);
-        Vector groupMemberStartIndex = utils.addElement(null, 0);
-        utils.setScriptVar(player, "strLaunchPointName", "launching");
-        Vector shipStartLocations = space_transition.getShipStartLocations(ship);
-        if (shipStartLocations != null && shipStartLocations.size() > 0)
-        {
-            int startIndex = 0;
-            location playerLoc = getLocation(player);
-            if (isIdValid(playerLoc.cell))
-            {
-                obj_id group = getGroupObject(player);
-            }
-        }
-        for (int i = 0; i < groupMembersToWarp.size(); ++i)
-        {
-            space_transition.setLaunchInfo(((obj_id)groupMembersToWarp.get(i)), ship, (Integer) groupMemberStartIndex.get(i), groundLoc);
-            warpPlayer(((obj_id)groupMembersToWarp.get(i)), warpLocation.area, warpLocation.x, warpLocation.y, warpLocation.z, null, warpLocation.x, warpLocation.y, warpLocation.z);
-        }
     }
 }

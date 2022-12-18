@@ -1,4 +1,4 @@
-package script.e3demo;
+package script.developer.soe.e3demo;
 
 import script.obj_id;
 

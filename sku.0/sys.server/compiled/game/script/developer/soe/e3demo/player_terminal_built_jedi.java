@@ -1,10 +1,10 @@
-package script.player;
+package script.developer.soe.e3demo;
 
 import script.obj_id;
 
-public class testcenter_player extends script.base_script
+public class player_terminal_built_jedi extends script.base_script
 {
-    public testcenter_player()
+    public player_terminal_built_jedi()
     {
     }
     public int OnInitialize(obj_id self) throws InterruptedException
