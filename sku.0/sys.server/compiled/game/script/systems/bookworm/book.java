@@ -4,6 +4,7 @@ package script.systems.bookworm;/*
 @Purpose:
 */
 
+import script.dictionary;
 import script.library.colors_hex;
 import script.library.utils;
 import script.menu_info;
@@ -55,5 +56,10 @@ public class book extends script.base_script
         }
 
         return SCRIPT_OVERRIDE;
+    }
+    public int saveText(obj_id self, dictionary params) throws InterruptedException
+    {
+        //_saveBookText(long obj_id, dictionary params);
+        return SCRIPT_CONTINUE;
     }
 }
