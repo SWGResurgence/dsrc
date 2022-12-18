@@ -1,4 +1,4 @@
-package script.hnguyen;
+package script.developer.soe.hnguyen;
 
 import script.dictionary;
 import script.obj_id;

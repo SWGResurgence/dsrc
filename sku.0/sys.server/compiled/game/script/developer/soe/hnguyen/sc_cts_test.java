@@ -1,4 +1,4 @@
-package script.hnguyen;
+package script.developer.soe.hnguyen;
 
 import script.library.cts;
 import script.library.utils;

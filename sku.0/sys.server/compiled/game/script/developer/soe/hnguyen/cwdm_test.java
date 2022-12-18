@@ -1,4 +1,4 @@
-package script.hnguyen;
+package script.developer.soe.hnguyen;
 
 import script.*;
 import script.combat_engine.hit_result;
