@@ -1150,7 +1150,7 @@ public class craftinglib extends script.base_script
             sendSystemMessage(player, new string_id("city/city", "research_center_message"));
             if (isPlayerQA)
             {
-                sendSystemMessageTestingOnly(player, "GOD MODE\n-----------------EXPERIMENT:  15% raw random bonus for research city\n");
+                sendSystemMessageTestingOnly(player, "GOD MODE: [Experiment] 15% raw random bonus for research city\n");
             }
         }
         debugServerConsoleMsg(null, "craftinglib::calcSuccessPerAttributeExperimentation city adjustment = " + cityRollAdjust);
