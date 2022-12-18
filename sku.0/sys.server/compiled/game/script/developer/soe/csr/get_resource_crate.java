@@ -1,4 +1,4 @@
-package script.csr;
+package script.developer.soe.csr;
 
 import script.library.utils;
 import script.obj_id;
