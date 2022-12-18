@@ -5,6 +5,7 @@ import script.library.utils;
 import script.obj_id;
 import script.system_process;
 
+import java.io.File;
 import java.util.Date;
 
 public class script_editor extends script.base_script
@@ -124,7 +125,7 @@ public class script_editor extends script.base_script
                                     {
                                         try
                                         {
-                                            String outputString = system_process.runAndGetOutput("/home/swg/swg-main/exe/linux/script.sh");
+                                            String outputString = system_process.runAndGetOutput("ant compile_java", new File("../../"));
                                             if (outputString != null)
                                             {
                                                 outputWindowText += outputString + "\n";
