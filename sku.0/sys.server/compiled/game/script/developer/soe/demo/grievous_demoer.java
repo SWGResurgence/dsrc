@@ -1,4 +1,4 @@
-package script.demo;
+package script.developer.soe.demo;
 
 import script.dictionary;
 import script.library.create;

@@ -1,4 +1,4 @@
-package script.debug;
+package script.developer.soe.debug;
 
 import script.deltadictionary;
 import script.dictionary;

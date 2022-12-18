@@ -1,4 +1,4 @@
-package script.qa;
+package script.developer.soe.qa;
 
 import script.dictionary;
 import script.library.create;
