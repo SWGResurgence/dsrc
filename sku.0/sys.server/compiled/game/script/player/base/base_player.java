@@ -1396,7 +1396,7 @@ public class base_player extends script.base_script
             String numCharacters = "Number of Allowed Character(s): " + gold + "8" + white + "\n";
             String maxLogin = "Number of Allowed Character(s) Online: " + gold + "8" + white + "\n";
             String numAccts = "Number of Allowed Account(s): " + gold + "1" + white + "\n";
-            String multiAccts = "Multiple Account(s): " + red + "Upon request and pending validation of account details." + white + "\n";
+            String multiAccts = "Multiple Account(s): " + gold + "Contact Customer Support" + white + "\n";
             String features = gold + "Key Features:\n";
             String feature1 = gold + "* " + white + "Instant " + blue + "Level 90" + white + "Token." + "\n";
             String feature2 = gold + "* " + white + "One Free Heroic Jewelry Set.\n";
