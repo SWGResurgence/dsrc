@@ -5265,7 +5265,7 @@ public class cmd extends script.base_script
         setCount(target, utils.stringToInt(params));
         return SCRIPT_CONTINUE;
     }
-    public static int spawnRing(obj_id self, int numMobs, float radius, location loc, String creatureName) throws InterruptedException
+    public int spawnRing(obj_id self, int numMobs, float radius, location loc, String creatureName) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
         {
@@ -5280,6 +5280,15 @@ public class cmd extends script.base_script
             z = loc.z + (float) Math.sin(angle) * radius;
             obj_id creatureObj = create.object(creatureName, new location(x, getHeightAtLocation(x,z), z, loc.area));
             faceTo(creatureObj, self);
+        }
+        return SCRIPT_CONTINUE;
+    }
+    public int OnAttach(obj_id self) throws InterruptedException
+    {
+        if (!hasScript(self, "developer.soe.beta.test_create"))
+        {
+            attachScript(self, "developer.soe.beta.test_create");
+            //@TODO: Remove this when SRC is changed to reflect this update.
         }
         return SCRIPT_CONTINUE;
     }

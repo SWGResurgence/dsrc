@@ -7292,7 +7292,7 @@ public class base_player extends script.base_script
                 {
                     name = localize(getNameStringId(newItem));
                 }
-                name = "\\" + colors_hex.GREEN + "" + name + " (tuned)\\#.";
+                name = colors_hex.HEADER + colors_hex.GREEN + "" + name + " (tuned)\\#.";
                 setName(newItem, name);
             }
             if (itemDictionary.containsKey("biolink"))

@@ -3017,7 +3017,7 @@ public class player_building extends script.base_script
             prompt += getString(confirm_destruction_detail2) + "\n\n";
             string_id confirm_destruction_detail3a = new string_id(STF, "confirm_destruction_d3a");
             string_id confirm_destruction_detail3b = new string_id(STF, "confirm_destruction_d3b");
-            prompt += getString(confirm_destruction_detail3a) + " \\" + colors_hex.LIMEGREEN + getString(confirm_destruction_detail3b) + "\\#.";
+            prompt += getString(confirm_destruction_detail3a) + colors_hex.HEADER + colors_hex.LIMEGREEN + getString(confirm_destruction_detail3b) + colors_hex.FOOTER;
             string_id confirm_destruction_detail4 = new string_id(STF, "confirm_destruction_d4");
             prompt += getString(confirm_destruction_detail4);
             Vector entries = new Vector();
@@ -3037,7 +3037,7 @@ public class player_building extends script.base_script
             {
                 string_id redeed_alert_text = new string_id(STF, "can_redeed_alert");
                 string_id redeed_yes_alert_text = new string_id(STF, "can_redeed_yes_suffix");
-                entries = utils.addElement(entries, getString(redeed_alert_text) + "\\" + colors_hex.LIMEGREEN + getString(redeed_yes_alert_text));
+                entries = utils.addElement(entries, getString(redeed_alert_text) + colors_hex.HEADER + colors_hex.LIMEGREEN + getString(redeed_yes_alert_text) + colors_hex.FOOTER);
                 int max_condition = player_structure.getMaxCondition(structure);
                 int condition = player_structure.getStructureCondition(structure);
                 String conditionColor = colors_hex.LIMEGREEN;
@@ -3047,36 +3047,36 @@ public class player_building extends script.base_script
                     willRedeed = false;
                 }
                 string_id redeed_condition_text = new string_id(STF, "redeed_condition");
-                entries = utils.addElement(entries, " - " + getString(redeed_condition_text) + "\\" + conditionColor + condition + "/" + max_condition);
+                entries = utils.addElement(entries, " - " + getString(redeed_condition_text) + colors_hex.HEADER + conditionColor + condition + "/" + max_condition+ colors_hex.FOOTER);
                 int pool = player_structure.getMaintenancePool(structure);
                 int reclaim_pool = player_structure.getRedeedCost(structure);
                 String maintColor = colors_hex.LIMEGREEN;
                 if (pool < reclaim_pool)
                 {
-                    maintColor = colors_hex.TOMATO;
+                    maintColor = colors_hex.HEADER + colors_hex.TOMATO;
                     willRedeed = false;
                 }
                 string_id redeed_maintenance_text = new string_id(STF, "redeed_maintenance");
-                entries = utils.addElement(entries, " - " + getString(redeed_maintenance_text) + "\\" + maintColor + pool + "/" + reclaim_pool);
+                entries = utils.addElement(entries, " - " + getString(redeed_maintenance_text) + colors_hex.HEADER + maintColor + pool + "/" + reclaim_pool);
             }
             else 
             {
                 string_id redeed_alert_text = new string_id(STF, "can_redeed_alert");
                 string_id redeed_no_alert_text = new string_id(STF, "can_redeed_no_suffix");
-                entries = utils.addElement(entries, getString(redeed_alert_text) + "\\" + colors_hex.TOMATO + getString(redeed_no_alert_text));
+                entries = utils.addElement(entries, getString(redeed_alert_text) + colors_hex.HEADER + colors_hex.TOMATO + getString(redeed_no_alert_text));
                 willRedeed = false;
             }
             if (willRedeed)
             {
                 string_id redeed_confirmation_text = new string_id(STF, "redeed_confirmation");
                 string_id redeed_yes_alert_text = new string_id(STF, "can_redeed_yes_suffix");
-                prompt += "\n" + getString(redeed_confirmation_text) + "\\" + colors_hex.LIMEGREEN + getString(redeed_yes_alert_text);
+                prompt += "\n" + getString(redeed_confirmation_text) + colors_hex.HEADER + colors_hex.LIMEGREEN + getString(redeed_yes_alert_text);
             }
             else 
             {
                 string_id redeed_confirmation_text = new string_id(STF, "redeed_confirmation");
                 string_id redeed_no_alert_text = new string_id(STF, "can_redeed_no_suffix");
-                prompt += "\n" + getString(redeed_confirmation_text) + "\\" + colors_hex.TOMATO + getString(redeed_no_alert_text);
+                prompt += "\n" + getString(redeed_confirmation_text) + colors_hex.HEADER + colors_hex.TOMATO + getString(redeed_no_alert_text);
             }
             int pid = sui.listbox(self, self, prompt, sui.YES_NO, title, entries, "handleDestroyUi");
             if (pid > -1)
@@ -4909,12 +4909,12 @@ public class player_building extends script.base_script
         if (willRedeed)
         {
             string_id will_redeed_confirm_text = new string_id(STF, "will_redeed_confirm");
-            prompt += colors_hex.LIMEGREEN + getString(will_redeed_confirm_text);
+            prompt += colors_hex.HEADER + colors_hex.LIMEGREEN + getString(will_redeed_confirm_text);
         }
         else 
         {
             string_id will_not_redeed_confirm_text = new string_id(STF, "will_not_redeed_confirm");
-            prompt += colors_hex.TOMATO + getString(will_not_redeed_confirm_text);
+            prompt += colors_hex.HEADER + colors_hex.TOMATO + getString(will_not_redeed_confirm_text);
         }
         prompt += "\\#.";
         string_id will_redeed_confirm_suffix_text = new string_id(STF, "will_redeed_suffix");
@@ -4927,6 +4927,8 @@ public class player_building extends script.base_script
         }
         prompt += "\n\nCode: " + key;
         int pid = sui.inputbox(self, self, prompt, title, "handleDestroyConfirm", 6, false, "");
+        //@TODO: make redeed font bigger
+        sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
         if (pid > -1)
         {
             utils.setScriptVar(self, "player_structure.destroy.pid", pid);

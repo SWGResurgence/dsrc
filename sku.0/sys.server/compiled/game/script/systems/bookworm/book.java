@@ -41,6 +41,7 @@ public class book extends script.base_script
         setSUIProperty(page, "pageText.text", "Text", colors_hex.Default(getStringObjVar(book, "book.text")));
         setSUIProperty(page, "pageText.text", "Font", "starwarslogo_optimized_56");
         setSUIProperty(page, "pageText.text", "Editable", "True");
+        setSUIProperty(page, "pageText.text", "GetsInput", "True");
         setSUIProperty(page, "btnOk", "Text", "Save");
         setSUIProperty(page, "bg.caption.text", "LocalText", getStringObjVar(book, "book.title"));
         subscribeToSUIEvent(page, sui_event_type.SET_onButton, "btnOk", "saveText");

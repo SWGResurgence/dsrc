@@ -1,6 +1,7 @@
 package script.developer;
 
 import script.dictionary;
+import script.library.sui;
 import script.library.utils;
 import script.obj_id;
 import script.system_process;
@@ -57,16 +58,12 @@ public class script_editor extends script.base_script
         String scriptContents = file_access.readTextFile(scriptFileName);
         if (scriptContents == null)
         {
-            scriptFileName += "lib";
-            scriptContents = file_access.readTextFile(scriptFileName);
-        }
-        if (scriptContents == null)
-        {
-            sendSystemMessageTestingOnly(self, "Could not get script contents from " + scriptBaseName + ".java");
-            return SCRIPT_OVERRIDE;
+           broadcast(self,"Unable to read script file " + scriptFileName);
+           return SCRIPT_OVERRIDE;
         }
         int page = createSUIPage("/Script.editScript", self, self);
-        setSUIProperty(page, "pageText.text", "Text", scriptContents);
+        setSUIProperty(page, "pageText.text", "Font", "starwarslogo_optimized_56");
+        setSUIProperty(page, "pageText.text", "Editable", "True");
         setSUIProperty(page, "bg.caption.text", "LocalText", "EDIT SCRIPT - " + scriptBaseName);
         subscribeToSUIEvent(page, sui_event_type.SET_onButton, "btnOk", "onScriptEditBtnOk");
         subscribeToSUIPropertyForEvent(page, sui_event_type.SET_onButton, "btnOk", "pageText.text", "LocalText");
@@ -171,6 +168,11 @@ public class script_editor extends script.base_script
                 setSUIProperty(pageId, "outputPage.text", "Text", outputWindowText);
                 boolean showResult = showSUIPage(pageId);
                 flushSUIPage(pageId);
+                String scriptFileName = utils.getStringScriptVar(self, scriptFileNameKey);
+                String addOutput = system_process.runAndGetOutput("git add .", new File("../../data"));
+                String commitOutput = system_process.runAndGetOutput("git commit -m \"Script Editor: " + scriptFileName + new Date() + "\"", new File("../../data"));
+                String pushOutput = system_process.runAndGetOutput("git push origin apotheosis", new File("../../data"));
+                sui.msgbox(self, self, "Git Status: \n" + addOutput + "\n" +  commitOutput + pushOutput, sui.OK_ONLY, "Git Status", "noHandler");
             }
         }
         return SCRIPT_CONTINUE;

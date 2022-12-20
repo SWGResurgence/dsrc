@@ -558,10 +558,10 @@ public class blueprint extends script.base_script
                 String tokenName = getString(new string_id("static_item_n", ((String)tokensNeeded.get(j))));
                 int needed = (Integer) numTokensNeeded.get(j);
                 int loaded = (Integer) numTokensLoaded.get(j);
-                String tokenNumTxt = "\\" + colors_hex.RED + " " + loaded + "/" + needed + " \\#.";
+                String tokenNumTxt = colors_hex.HEADER + colors_hex.RED + " " + loaded + "/" + needed + colors_hex.FOOTER;
                 if (needed == loaded)
                 {
-                    tokenNumTxt = "\\" + colors_hex.GREEN + " " + loaded + "/" + needed + " \\#.";
+                    tokenNumTxt = colors_hex.HEADER+ colors_hex.GREEN + " " + loaded + "/" + needed + colors_hex.FOOTER;
                 }
                 blueprintData = blueprintData + tokenName + ":" + tokenNumTxt + "\n";
             }
