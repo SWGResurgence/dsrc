@@ -352,11 +352,12 @@ public class player_developer extends base_script
         if (cmd.equals("touchContainer"))
         {
 
-            String name = tok.nextToken() + colors_hex.HEADER + colors_hex.AQUAMARINE + " (Container)" + colors_hex.FOOTER;
+            String tag = colors_hex.HEADER + colors_hex.AQUAMARINE + " (Developer Item)" + colors_hex.FOOTER;
             obj_id[] contents = getContents(target);
             for (obj_id content : contents)
             {
-                setName(content, name);
+                String oldName = utils.getStringName(content);
+                setName(content, oldName + tag);
             }
             return SCRIPT_CONTINUE;
         }

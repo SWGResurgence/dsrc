@@ -2054,10 +2054,11 @@ public class ai extends script.base_script
             String lootTable = getStringObjVar(self, "loot.lootTable");
             if (lootTable == null)
             {
-                lootTable = "none";
+                lootTable = "none. (default)";
             }
             String prompt = "Current loot table: " + lootTable + "\n\nEnter new loot table:";
-            sui.inputbox(player, prompt, "handleLootTableInput");
+            int pid = sui.inputbox(player, prompt, "handleLootTableInput");
+            sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
             return SCRIPT_CONTINUE;
         }
         if (item == menu_info_types.SERVER_MENU25)
@@ -2066,8 +2067,9 @@ public class ai extends script.base_script
         }
         if (item == menu_info_types.SERVER_MENU26)
         {
-            String prompt = "Enter creature name to make a ring spawn.";
-            sui.inputbox(player, player, prompt, "prepareRingSpawn");
+            String prompt = "Enter creature name to make a ring spawn.\n For a complete list of creature names, seek out mobs.iff!";
+            int pid = sui.inputbox(player, player, prompt, "prepareRingSpawn");
+            sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
 
         }
         return SCRIPT_CONTINUE;
@@ -2162,11 +2164,11 @@ public class ai extends script.base_script
         }
         if (nextWord.equals("gm_test"))
         {
-            showFlyText(self, new string_id("^_^"), 1.5f, colors.HOTPINK);
+            showFlyText(self, new string_id("! ^_^ !"), 1.5f, colors.HOTPINK);
         }
         if (nextWord.equals("gm_ai_test"))
         {
-            showFlyText(self, new string_id("^_^"), 1.5f, colors.HOTPINK);
+            showFlyText(self, new string_id("^_^"), 1.5f, colors.ORANGE);
         }
         if (nextWord.equals("gm_rand_damage"))
         {
@@ -2585,7 +2587,7 @@ public class ai extends script.base_script
             setObjVar(token, "city_hire.mobile", string_template);
             setObjVar(token, "tokenUsed", 1);
             attachScript(token, "systems.city.city_hire");
-            setName(token, "City Actor Deed: " + getCreatureName(mobile));
+            setName(token, "City Actor Deed: " + utils.getStringName(mobile));
             return SCRIPT_OVERRIDE;
         }
         if (!hasCompletedCollectionSlot(giver, "meatlump_recruiter_starter"))

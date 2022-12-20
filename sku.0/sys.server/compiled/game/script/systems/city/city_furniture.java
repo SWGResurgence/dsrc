@@ -235,7 +235,8 @@ public class city_furniture extends script.base_script
         }
         else if (item == menu_info_types.SERVER_MENU10)
         {
-            sui.inputbox(self, player, "Please enter a three digit number to use when moving decorations.. \n\n\n This value cannot be greater than 250.,", "Decoration Movement", "handleMovementIncrement", 3, false, "1");
+            int pid = sui.inputbox(self, player, "Please enter a three digit number to use when moving decorations.. \n\n\n This value cannot be greater than 250.,", "Decoration Movement", "handleMovementIncrement", 3, false, "1");
+            sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
         }
         else if (item == menu_info_types.SERVER_MENU11)
         {
@@ -282,7 +283,8 @@ public class city_furniture extends script.base_script
         }
         else if (item == menu_info_types.SERVER_MENU18)
         {
-            sui.inputbox(self, player, "Please enter a name for this decoration. \n\n\n Enter one space into the field for this object to have no name,", "Decoration Name", "handleDecorationName", 126, false, getName(self));
+            int pid =sui.inputbox(self, player, "Please enter a name for this decoration. \n\n\n Enter one space into the field for this object to have no name,", "Decoration Name", "handleDecorationName", 126, false, getName(self));
+            sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
         }
         else if (item == menu_info_types.SERVER_MENU18)
         {
@@ -322,8 +324,8 @@ public class city_furniture extends script.base_script
     public void snapToGround(obj_id self)
     {
         location loc = getLocation(self);
-        loc.z = getHeightAtLocation(loc.x, loc.z);
-        setLocation(self, loc);
+        location groundLoc = new location( loc.x, getHeightAtLocation(loc.x, loc.z), loc.z, getCurrentSceneName(), loc.cell);
+        setLocation(self, groundLoc);
     }
 
     public void handleDecorationName(obj_id self, dictionary params) throws InterruptedException
@@ -369,6 +371,10 @@ public class city_furniture extends script.base_script
         if (isGod(player))
         {
             chat.chat(self, "[GodMode] I am placing " + name + " in " + cityGetName(city_id));
+        }
+        else
+        {
+            chat.chat(self, "Oh yes, that looks nice!");
         }
         city.addDecoration(city_id, player, self);
     }
