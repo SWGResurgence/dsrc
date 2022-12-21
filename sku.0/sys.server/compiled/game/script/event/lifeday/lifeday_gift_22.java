@@ -3,6 +3,7 @@
 
 @Author: BubbaJoe
 @Purpose: Creates gifts for Lifeday 2022.
+@TODO: Create entries in master_item with the rewards I want. Then update the FLAG string below %
  */
 
 package script.event.lifeday;
@@ -52,7 +53,7 @@ public class lifeday_gift_22 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
             createGoodies(pInv);
-            grantRandomItemsByFlag(player, pInv, "lifeday");
+            grantRandomItemsByFlag(player, pInv, "lifeday");// %
             playClientEffectObj(player, "clienteffect/lifeday_gift.cef", player, "");
             destroyObject(self);
         }
@@ -88,8 +89,8 @@ public class lifeday_gift_22 extends script.base_script
             {
                 continue;
             }
-            broadcast(player, "You have received an additional " + bagLimit + " gifts!");
         }
+        broadcast(player, "You have received an additional " + bagLimit + " gifts!");
     }
 
 }
