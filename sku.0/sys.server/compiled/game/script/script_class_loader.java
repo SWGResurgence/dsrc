@@ -40,6 +40,7 @@ public class script_class_loader extends ClassLoader
 	private static final String[] NATIVE_CLASS_PREFIXES = {
 			"java.",
 			"javax.",
+			"javafx.",
 			"sun.",
 			"intuitive.",
 			"jdk.",
