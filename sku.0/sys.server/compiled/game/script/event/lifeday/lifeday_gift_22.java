@@ -53,6 +53,7 @@ public class lifeday_gift_22 extends script.base_script
             }
             createGoodies(pInv);
             grantRandomItemsByFlag(player, pInv, "lifeday");
+            playClientEffectObj(player, "clienteffect/lifeday_gift.cef", player, "");
             destroyObject(self);
         }
         return SCRIPT_CONTINUE;
@@ -64,7 +65,7 @@ public class lifeday_gift_22 extends script.base_script
         {
             obj_id individualGoodie = static_item.createNewItemFunction(GOODIES[i], pInv);
             setDescriptionStringId(individualGoodie, new string_id("This item was a personal gift from Saun Dann"));
-            setName(individualGoodie, utils.getStringName(individualGoodie) + " (Lifeday 2022)");
+            setName(individualGoodie, getStaticItemName(individualGoodie) + " (Lifeday 2022)");
             attachScript(individualGoodie, "item.special.nomove");
             setObjVar(individualGoodie, "noTrade", true);
         }
