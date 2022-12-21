@@ -1893,9 +1893,8 @@ public class base_class
      *         the image url to use.
      */
 
-    public static void pushWebhook(String msg, String avatarUri, boolean tts)
+    public static void pushWebhook(String msg, String avatarUri, boolean tts, String apiKey)
     {
-        String apiKey = getConfigSetting("Discord", "webhookKey");
         String avatar_pic = avatarUri;
         String gally = getGalaxyName();
         DiscordWebhook webhook = new DiscordWebhook(apiKey);
@@ -1913,9 +1912,8 @@ public class base_class
      * Discord Log but no avatar, just text.
      * @param msg     What to send
      */
-    public static void pushWebhookFull(String msg, String avatarUri, boolean tts, boolean embed)
+    public static void pushWebhookFull(String msg, String avatarUri, boolean tts, boolean embed, String apiKey)
     {
-        String apiKey = getConfigSetting("Discord", "webhookKey");
         String avatar_pic = avatarUri;
         String gally = getGalaxyName();
         DiscordWebhook webhook = new DiscordWebhook(apiKey);
@@ -1939,13 +1937,13 @@ public class base_class
      * @param msg     What to send
      */
 
-    public static void pushWebhookTiny(String msg)
+    public static void pushWebhookTiny(String msg, String apiKey)
     {
-        String apiKey = getConfigSetting("Discord", "webhookKey");
         String gally = toUpper(getGalaxyName(), 0);
         DiscordWebhook webhook = new DiscordWebhook(apiKey);
         webhook.setContent(msg);
         webhook.setUsername("Newsnet Reporter: " + gally);
+        webhook.setAvatarUrl("https://i.imgur.com/BrBe3CV.png");
         webhook.setTts(true);
         try {
             webhook.execute();

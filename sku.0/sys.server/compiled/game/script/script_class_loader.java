@@ -18,6 +18,7 @@ import java.util.logging.SimpleFormatter;
  * @since SWG Source 3.1 - August 2021 (Refactored)
  * @author Aconite
  * @author SOE (prior to 3.1 refactor)
+ * @Author BubbaJoeX (resurgence additions [bot, webhook, javafx etc])
  */
 public class script_class_loader extends ClassLoader
 {
@@ -45,6 +46,7 @@ public class script_class_loader extends ClassLoader
 			"intuitive.",
 			"jdk.",
 			"oracle.",
+			"jda.",
 	};
 	/**
 	 * Set to true to enable debugging script class loader. See: LOGGER
