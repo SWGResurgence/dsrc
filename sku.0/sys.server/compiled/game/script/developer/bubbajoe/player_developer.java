@@ -339,9 +339,13 @@ public class player_developer extends base_script
             doAnimationAction(target, animationFile);
             broadcast(self, "Animation '" + animationFile + "' performed on " + getName(target));
         }
-        if (cmd.equals("renameContents"))
+        if (cmd.equals("renameContainerContents"))
         {
             String name = tok.nextToken();
+            while (tok.hasMoreTokens())
+            {
+                name += " " + tok.nextToken();
+            }
             obj_id[] contents = getContents(target);
             for (obj_id content : contents)
             {
@@ -349,15 +353,66 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equals("tagContainerContents"))
+        {
+            String tag = tok.nextToken();
+            while (tok.hasMoreTokens())
+            {
+                tag += " " + tok.nextToken();
+            }
+            obj_id[] contents = getContents(target);
+            for (obj_id content : contents)
+            {
+                String craftedName = getName(content);
+                String originalName = utils.getStringName(content);
+                if (!isCrafted(content))
+                {
+                    setName(content, originalName + " (" + tag + ")");
+                }
+                else
+                {
+                    setName(content, craftedName + " (" + tag + ")");
+                }
+            }
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equals("unlockContainer"))
+        {
+            obj_id[] contents = getContents(target);
+            for (obj_id content : contents)
+            {
+                removeObjVar(content, "noTrade");
+                detachScript(content, "item.special.nomove");
+            }
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equals("lockContainer"))
+        {
+            obj_id[] contents = getContents(target);
+            for (obj_id content : contents)
+            {
+                setObjVar(content, "noTrade", 1);
+                attachScript(content, "item.special.nomove");
+            }
+            return SCRIPT_CONTINUE;
+        }
         if (cmd.equals("touchContainer"))
         {
-
             String tag = colors_hex.HEADER + colors_hex.AQUAMARINE + " (Developer Item)" + colors_hex.FOOTER;
             obj_id[] contents = getContents(target);
             for (obj_id content : contents)
             {
                 String oldName = utils.getStringName(content);
                 setName(content, oldName + tag);
+            }
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equals("revertContainerContents"))
+        {
+            obj_id[] contents = getContents(target);
+            for (obj_id content : contents)
+            {
+                setName(content, getTemplateName(content));
             }
             return SCRIPT_CONTINUE;
         }
@@ -395,6 +450,12 @@ public class player_developer extends base_script
                 bagLimit++;
             }
             broadcast(self, "Granted all items to " + getName(target));
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equals("magicSatchel"))
+        {
+            obj_id satchel = create.createObject("object/tangible/container/general/satchel.iff", utils.getInventoryContainer(self), "");
+            attachScript(satchel, "developer.bubbajoe.magic_satchel");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equals("buffAllByName"))
@@ -440,6 +501,7 @@ public class player_developer extends base_script
                 {
                     if(badSkills.contains(skill))
                     {
+                        broadcast(self, "Skipping " + skill + ", bad skill.");
                         continue;
                     }
                     grantSkill(target, skill);
@@ -474,12 +536,6 @@ public class player_developer extends base_script
             setName(myBag, "Travel Pack of " + query);
             broadcast(self, "Granted all items with search parameter "+ query + " to " +  getName(target));
             return SCRIPT_CONTINUE;
-        }
-        if (cmd.equals("setRange"))
-        {
-            float minRange = utils.stringToFloat(tok.nextToken());
-            float maxRange = utils.stringToFloat(tok.nextToken());
-            setWeaponRangeInfo(getHeldWeapon(self), minRange, maxRange);
         }
 
         if (cmd.equals("editWeapon"))
@@ -762,7 +818,7 @@ public class player_developer extends base_script
             }
             {
 
-                broadcast(self, "Syntax: /admin say <message>");
+                broadcast(self, "Syntax: /developer say <message>");
             }
             chat.chat(iTar, words);
         }
@@ -964,22 +1020,38 @@ public class player_developer extends base_script
         if (cmd.equals("-help"))
         {
             debugConsoleMsg(self, "Developer Commands:  ");
+            debugConsoleMsg(self, "  QUEST:");
             debugConsoleMsg(self, "  /developer quest grant <questname> - Grants a quest to the target.");
             debugConsoleMsg(self, "  /developer quest complete <questname> - Completes a quest for the target.");
             debugConsoleMsg(self, "  /developer quest clear <questname> - Clears a quest for the target.");
             debugConsoleMsg(self, "  /developer quest task complete <questname> <taskname> - Completes a task for the target.");
+            debugConsoleMsg(self, "  MISC:");
             debugConsoleMsg(self, "  /developer say <message> - Makes the target speak a message.");
             debugConsoleMsg(self, "  /developer comm <message> - Makes the target speak a message in a comm. window.");
             debugConsoleMsg(self, "  /developer scale <float> - Resizes the target.");
             debugConsoleMsg(self, "  /developer messageto <message> <float> - Sends a message to the target.");
             debugConsoleMsg(self, "  /developer wiki <search> - Opens a wiki page in your browser.");
-            debugConsoleMsg(self, "  /developer ballgame - Creates a ball in your inventory.");
             debugConsoleMsg(self, "  /developer pathToMe - Creates a path to you.");
             debugConsoleMsg(self, "  /developer convertStringToCrc <string> - Converts a string to a CRC.");
             debugConsoleMsg(self, "  /developer possess <command> <params> - Possesses the target and makes them do a command.");
+            debugConsoleMsg(self, "  INTERNAL:");
+            debugConsoleMsg(self, "  /developer shell <directory> <command and params> - Runs a command on the server box and returns the output to a messagebox.");
+            debugConsoleMsg(self, "  EVENT:");
             debugConsoleMsg(self, "  /developer pumpkin ring <num to spawn> <radius> - Spawns a ring of pumpkins around the pumpkin master.");
             debugConsoleMsg(self, "  /developer pumpkin single - Makes a single pumpkin");
+            debugConsoleMsg(self, "  /developer ballgame - Creates a ball in your inventory.");
+            debugConsoleMsg(self, "  /developer tagContainerContents <tag> - Tags all items in a container. Formats all item names in container with a parenthesis and the tag.");
+            debugConsoleMsg(self, "  /developer revertContainerContents - Resets the items in a container to their template paths.");
+            debugConsoleMsg(self, "  /developer renameContainerContents <name> - Renames all items in a container to the parameter.");
+            debugConsoleMsg(self, "  /developer lockContainer - Applies noTrade objvar and attaches item.special.nomove");
+            debugConsoleMsg(self, "  /developer unlockContainer - Removes noTrade objvar and detaches item.special.nomove");
+            debugConsoleMsg(self, "  DEBUG:");
+            debugConsoleMsg(self, "  / ADD MORE HERE");
             return SCRIPT_CONTINUE;
+        }
+        else
+        {
+            broadcast(self, "Command not found.  Use -help for a list of commands.");
         }
         return SCRIPT_CONTINUE;
     }
@@ -996,8 +1068,26 @@ public class player_developer extends base_script
         for (String script : scripts)
         {
             reloadScript(script);
-            broadcast(self, "Reloaded script: " + script);
+            broadcast(self, "Attempting to reload " + script);
         }
+    }
+
+    public void sendWebhook(obj_id self, String url, String message)
+    {
+        if (url == null || url.equals(""))
+        {
+            return;
+        }
+        if (message == null || message.equals(""))
+        {
+            return;
+        }
+        DiscordWebhook webhook = new DiscordWebhook(url);
+
+        webhook.setContent(message);
+        webhook.setAvatarUrl("https://i.imgur.com/WO53VrH.png");
+        webhook.setTts(true);
+        webhook.setUsername("Newsnet Reporter");
     }
 
     public int handleShellOutput(obj_id self, dictionary params)
@@ -1064,7 +1154,7 @@ public class player_developer extends base_script
         float y = where.y;
         float z = where.z;
         float angle = 0;
-        float angleInc = 360 / num;
+        float angleInc = 360.0f / num;
         for (int i = 0; i < num; i++)
         {
              angle = angle + angleInc;
