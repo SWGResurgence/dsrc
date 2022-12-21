@@ -88,7 +88,7 @@ public class lifeday_gift_22 extends script.base_script
             {
                 continue;
             }
-            broadcast(player, "You have received " + bagLimit + " gifts!");
+            broadcast(player, "You have received an additional " + bagLimit + " gifts!");
         }
     }
 
