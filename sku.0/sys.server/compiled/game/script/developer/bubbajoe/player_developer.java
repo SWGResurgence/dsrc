@@ -1168,6 +1168,15 @@ public class player_developer extends base_script
             }
         }
     }
+    private location getO2P(obj_id self, obj_id target) throws InterruptedException
+    {
+        location here = getLocation(self);
+        location there = getLocation(target);
+        float x = here.x - there.x;
+        float y = here.y - there.y;
+        float z = here.z - there.z;
+        return new location(x, y, z);
+    }
 }
 
 
