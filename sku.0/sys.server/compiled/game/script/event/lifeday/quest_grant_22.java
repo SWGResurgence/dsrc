@@ -36,7 +36,7 @@ public class quest_grant_22 extends script.base_script
                 sendSystemMessage(player, new string_id("You have already completed this quest."));
                 return SCRIPT_CONTINUE;
             }
-            groundquests.grantQuest(player, "lifeday_kkronch");
+            groundquests.grantQuest(player, "lifeday_kkronch")
         }
         return SCRIPT_CONTINUE;
     }
