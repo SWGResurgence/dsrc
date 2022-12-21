@@ -1000,12 +1000,12 @@ public class player_developer extends base_script
         {
             if (tok.countTokens() < 1)
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin modvehicle <mod index> <mod value>");
+                sendSystemMessageTestingOnly(self, "Syntax: /admin modvehicle (target) <mod index> <mod value>");
                 return SCRIPT_CONTINUE;
             }
-            if (vehicle.isRidingVehicle(self))
+            if (vehicle.isRidingVehicle(target))
             {
-                obj_id vehid = getMountId(self);
+                obj_id vehid = getMountId(target);
                 String vehicleModifier = tok.nextToken();
                 float vehicleModifierValue = Float.parseFloat(tok.nextToken());
                 vehicle.setValue(vehid, vehicleModifierValue, Integer.parseInt(vehicleModifier));
@@ -1142,10 +1142,13 @@ public class player_developer extends base_script
     }
     public int OnLogin(obj_id self) throws InterruptedException
     {
-        sendConsoleCommand( "/setGodMode 0", self);
-        sendConsoleCommand( "/object setCoverVisibility " + self + " " + 0, self);
-        sendConsoleCommand( "/object hide " + self + " " + 0, self);
-        sendConsoleCommand( "/echo YOU ARE VISIBLE WITH THIS SCRIPT ON LOGIN!", self);
+        if(hasObjVar(self, "live_qa"))
+        {
+            sendConsoleCommand( "/object setCoverVisibility " + self + " " + 0, self);
+            sendConsoleCommand( "/object hide " + self + " " + 0, self);
+            sendConsoleCommand( "/echo You are visible and interactable due to having the 'live_qa' objvar.", self);
+            sendConsoleCommand( "/setGodMode 0", self);
+        }
         return SCRIPT_CONTINUE;
     }
     private void spawnRingInterior(obj_id self, int num, float radius, location where, String creatureToSpawn) throws InterruptedException
