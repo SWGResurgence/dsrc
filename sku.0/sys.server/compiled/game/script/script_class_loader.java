@@ -48,7 +48,7 @@ public class script_class_loader extends ClassLoader
 	/**
 	 * Set to true to enable debugging script class loader. See: LOGGER
 	 */
-	private static final boolean DEBUG = false;
+	private static final boolean DEBUG = true;
 	/**
 	 * Because we can't use SRC logging due to its inaccessibility while we
 	 * are in the process of initialization, we just use Java's Native Logging
