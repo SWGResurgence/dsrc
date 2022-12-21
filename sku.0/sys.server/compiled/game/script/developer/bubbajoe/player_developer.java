@@ -186,7 +186,7 @@ public class player_developer extends base_script
         {
             String where = tok.nextToken();
             String command = tok.nextToken();
-            String args = new String();
+            String args = "";
             while (tok.hasMoreTokens())
             {
                 args += tok.nextToken() + " ";
@@ -537,10 +537,29 @@ public class player_developer extends base_script
             broadcast(self, "Granted all items with search parameter "+ query + " to " +  getName(target));
             return SCRIPT_CONTINUE;
         }
-
+        if (cmd.equals("toggle"))
+        {
+            String toggle = tok.nextToken();
+            switch (toggle)
+            {
+                case "on":
+                    sendConsoleCommand( "/object setCoverVisibility " + self + " " + 0, self);
+                    sendConsoleCommand( "/object hide " + self + " " + 1, self);
+                    sendConsoleCommand( "/echo You are visible.", self);
+                    break;
+                case "off":
+                    sendConsoleCommand( "/object setCoverVisibility " + self + " " + 1, self);
+                    sendConsoleCommand( "/object hide " + self + " " + 0, self);
+                    sendConsoleCommand( "/echo You are visible.", self);
+                    break;
+                default:
+                    sendConsoleCommand( "Usage: /developer toggle [on|off]", self);
+                    break;
+            }
+        }
         if (cmd.equals("editWeapon"))
         {
-            obj_id weapon = utils.getHeldWeapon(self);
+            obj_id weapon = utils.getHeldWeapon(target);
             if (weapon == null)
             {
                 return SCRIPT_CONTINUE;
@@ -778,7 +797,7 @@ public class player_developer extends base_script
                     obj_id pInv = utils.getInventoryContainer(player);
                     obj_id pItem = static_item.createNewItemFunction(item, pInv, count);
                     if (isIdValid(pItem)) {
-                        sendSystemMessageTestingOnly(player, "\\#DD1234You have been awarded items!\\#FFFFFF");
+                        sendSystemMessageTestingOnly(player, colors_hex.HEADER + colors_hex.ORANGE + "You have been awarded " + count + " " + getStaticItemName(pItem) + " by the Event Team!");
                     }
                 }
             }
@@ -973,6 +992,24 @@ public class player_developer extends base_script
         if (cmd.equalsIgnoreCase("setinvuln"))
         {
             setInvulnerable(iTarget, true);
+        }
+        if (cmd.equalsIgnoreCase("commPlanet"))
+        {
+            String message = tok.nextToken();
+            if (tok.hasMoreTokens())
+            {
+                while (tok.hasMoreTokens())
+                {
+                    message += " " + tok.nextToken();
+                }
+            }
+            obj_id[] recipients = getPlayerCreaturesInRange(getLocation(self), 16000.0f);
+            for (obj_id recipient : recipients)
+            {
+                prose_package pp = new prose_package();
+                prose.setStringId(pp, new string_id(message));
+                commPlayer(self, recipient, pp);
+            }
         }
         if (cmd.equalsIgnoreCase("boxspawn"))
         {
@@ -1171,7 +1208,7 @@ public class player_developer extends base_script
             }
         }
     }
-    private location getO2P(obj_id self, obj_id target) throws InterruptedException
+    private location getO2P(obj_id self, obj_id target)
     {
         location here = getLocation(self);
         location there = getLocation(target);
