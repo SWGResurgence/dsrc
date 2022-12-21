@@ -33,7 +33,7 @@ public class controller extends script.base_script
             }
             else
             {
-                mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("Find Watto"));
+                mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("Find a Watto"));
             }
         }
         return SCRIPT_CONTINUE;
@@ -44,23 +44,29 @@ public class controller extends script.base_script
         {
             if (item == menu_info_types.ITEM_USE)
             {
-                location here = getLocation(self);
-                obj_id watto = create.object(TOYDARIANS[rand(0, TOYDARIANS.length - 1)], here);
-                setObjVar(watto, "made_watto", 1);
+                location watto_loc = new location(0, 0,0,getCurrentSceneName(), null);
+                watto_loc.x = watto_loc.x + (rand(-7250.0f, 7250.0f));
+                watto_loc.z = watto_loc.z + (rand(-7250.0f, 7250.0f));
+                watto_loc.y = getHeightAtLocation(watto_loc.x, watto_loc.z);
+                obj_id watto = create.object(TOYDARIANS[rand(0, TOYDARIANS.length - 1)], watto_loc);
+                attachScript(watto, "event.wheres_watto.wheres_watto");
+                setName(watto, "Watto");
+                setObjVar(watto, "watto_tag", 1);
+                setObjVar(watto, "watto", watto);
+                setObjVar(self, "made_watto", 1);
                 return SCRIPT_CONTINUE;
             }
             if (item == menu_info_types.SERVER_MENU1)
             {
-                obj_id watto = getObjIdObjVar(self, "made_watto");
+                obj_id watto = getObjIdObjVar(self, "watto");
                 if (isIdValid(watto))
                 {
-                    location here = getLocation(watto);
-                    broadcast(player, "Watto is at " + here.x + ", " + here.y + ", " + here.z);
-                    createWaypointInDatapad(player, watto);
+                    location watto_loc = getLocation(watto);
+                    warpPlayer(player, watto_loc.area, watto_loc.x, watto_loc.y, watto_loc.z, null, 0, 0, 0);
                 }
                 else
                 {
-                    sendSystemMessage(player, "Watto is not valid.", null);
+                    sendSystemMessage(player, "Watto is not on this planet.", null);
                 }
                 return SCRIPT_CONTINUE;
             }

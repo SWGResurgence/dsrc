@@ -149,7 +149,7 @@ public class sign extends script.base_script
             if (isIdValid(house))
             {
                 for (obj_id occupant : occupants) {
-                    if (occupants.length > 0) {
+                    if (occupants.length <= 0) {
                         broadcast(player, "No one is home.");
                         return SCRIPT_CONTINUE;
                     }
@@ -160,7 +160,7 @@ public class sign extends script.base_script
                     playClientEffectObj(occupant, doorbellSnd, occupant, "");
                     prose_package pp = new prose_package();
                     prose.setStringId(pp, new string_id(commPrompt));
-                    commPlayer(self, occupant, pp);
+                    commPlayers(self, getTemplateName(player), "sound/sys_comm_other.snd", 5.0f, occupant, pp);
                 }
             }
         }

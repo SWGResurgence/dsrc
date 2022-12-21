@@ -32,14 +32,11 @@ public class wheres_watto extends script.base_script
                 utils.removeScriptVar(player, "conversation.wheres_watto.branchId");
                 setObjVar(player, "wheres_watto.found", 1);
                 npcEndConversationWithMessage(player, message);
-                location locLowerLeft = new location();
-                locLowerLeft.x = -5000;
-                locLowerLeft.z = -5000;
-                location locUpperRight = new location();
-                locUpperRight.x = 5000;
-                locUpperRight.z = 5000;
-                location goodLoc = getGoodLocationAvoidCollidables(15.0f, 15.0f, locLowerLeft, locUpperRight, false, false, 5.0f);
-                setLocation(npc, goodLoc);
+                location watto_loc = new location(0, 0,0,getCurrentSceneName(), null);
+                watto_loc.x = watto_loc.x + (rand(-7250.0f, 7250.0f));
+                watto_loc.z = watto_loc.z + (rand(-7250.0f, 7250.0f));
+                watto_loc.y = getHeightAtLocation(watto_loc.x, watto_loc.z);setLocation(npc, watto_loc);
+                setLocation(npc, watto_loc);
                 return SCRIPT_CONTINUE;
             }
 
@@ -63,7 +60,6 @@ public class wheres_watto extends script.base_script
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);
-
         return SCRIPT_CONTINUE;
     }
 
