@@ -6,9 +6,6 @@ import script.library.*;
 
 public class terminal_travel_instant extends script.base_script
 {
-    public terminal_travel_instant()
-    {
-    }
     public static final string_id SID_TIMEOUT = new string_id("travel", "pickup_timeout");
     public static final string_id SID_LEFT_ME = new string_id("travel", "left_pickup_zone");
     public static final string_id SID_NOT_YOUR_SHIP = new string_id("travel", "not_your_ship");
@@ -17,12 +14,17 @@ public class terminal_travel_instant extends script.base_script
     public static final boolean CONST_FLAG_DO_LOGGING = false;
     public static final String ITV_PICKUP_BUFF = "call_for_pickup";
     public static final String PID_VAR = "home_itv_pid";
+    public terminal_travel_instant()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debugLogging("//***// OnInitialize: ", "////>>>> ENTERED. ");
         messageTo(self, "timeOutSelfExpire", null, 59, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id owner = (playerCheck(self, "OnObjectMenuRequest - "));
@@ -32,52 +34,75 @@ public class terminal_travel_instant extends script.base_script
             return SCRIPT_CONTINUE;
         }
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("", ""));
-        if(hasObjVar(self, "itv_slave_1")) {
+        if (hasObjVar(self, "itv_slave_1"))
+        {
             mi.addRootMenu(menu_info_types.ITEM_USE_OTHER, new string_id("tcg", "travel_locations"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
-        if (item == menu_info_types.ITEM_USE || item == menu_info_types.ITEM_USE_OTHER) {
+
+        if (item == menu_info_types.ITEM_USE || item == menu_info_types.ITEM_USE_OTHER)
+        {
             obj_id owner = (playerCheck(self, "OnObjectMenuSelect - "));
-            if (owner != player) {
+            if (owner != player)
+            {
                 return SCRIPT_CONTINUE;
             }
-            if (getState(player, STATE_RIDING_MOUNT) == 1) {
+            if (getState(player, STATE_RIDING_MOUNT) == 1)
+            {
                 pet_lib.doDismountNow(player, true);
             }
-            if (item == menu_info_types.ITEM_USE) {
-                if (hasObjVar(self, "tcg_itv_home") || hasObjVar(self, "itv_slave_1")) {
-                    if (city.isAMayor(player)) {
+            if (item == menu_info_types.ITEM_USE)
+            {
+                callable.storeCallables(player);
+                if (hasObjVar(self, "tcg_itv_home") || hasObjVar(self, "itv_slave_1"))
+                {
+                    if (city.isAMayor(player))
+                    {
                         int city_id = getCitizenOfCityId(player);
-                        if (cityExists(city_id)) {
+                        if (cityExists(city_id))
+                        {
                             obj_id city_hall = cityGetCityHall(city_id);
-                            if (isIdValid(city_hall)) {
+                            if (isIdValid(city_hall))
+                            {
                                 dictionary dict = new dictionary();
                                 dict.put("requestingObject", self);
                                 dict.put("homeOwner", player);
                                 messageTo(city_hall, "retrieveHouseCoords", dict, 0.0f, false);
-                            } else {
+                            }
+                            else
+                            {
                                 sendSystemMessage(player, new string_id("tcg", "no_residence_home_itv"));
                             }
                         }
                         return SCRIPT_CONTINUE;
-                    } else if (hasObjVar(player, "residenceHouseId")) {
+                    }
+                    else if (hasObjVar(player, "residenceHouseId"))
+                    {
                         obj_id home = getObjIdObjVar(player, "residenceHouseId");
-                        if (isIdValid(home)) {
+                        if (isIdValid(home))
+                        {
                             dictionary dict = new dictionary();
                             dict.put("requestingObject", self);
                             dict.put("homeOwner", player);
                             messageTo(home, "retrieveHouseCoords", dict, 0, false);
-                        } else {
+                        }
+                        else
+                        {
                             sendSystemMessage(player, new string_id("tcg", "no_residence_home_itv"));
                         }
-                    } else {
+                    }
+                    else
+                    {
                         sendSystemMessage(player, new string_id("tcg", "no_residence_home_itv"));
                     }
                     return SCRIPT_CONTINUE;
-                } else if (hasObjVar(self, "tcg_itv_location") || hasObjVar(self, "itv_snowspeeder")) {
+                }
+                else if (hasObjVar(self, "tcg_itv_location") || hasObjVar(self, "itv_snowspeeder"))
+                {
                     LocationItvOptions(self, player);
                     return SCRIPT_CONTINUE;
                 }
@@ -87,14 +112,17 @@ public class terminal_travel_instant extends script.base_script
             String travel_point = "Starfighter";
             int cityId = getCityAtLocation(getLocation(player), 1000);
             debugLogging("//***// OnObjectMenuSelect: ", "////>>>> cityId at player's location is: " + cityId);
-            if (cityId != 0) {
+            if (cityId != 0)
+            {
                 travel_point = cityGetName(cityId);
                 debugLogging("//***// OnObjectMenuSelect: ", "////>>>> city name at player's location is: " + travel_point);
             }
             LOG("LOG_CHANNEL", "player ->" + player + " planet ->" + planet + " travel_point ->" + travel_point);
             String config = getConfigSetting("GameServer", "disableTravelSystem");
-            if (config != null) {
-                if (config.equals("on")) {
+            if (config != null)
+            {
+                if (config.equals("on"))
+                {
                     return SCRIPT_CONTINUE;
                 }
             }
@@ -102,12 +130,14 @@ public class terminal_travel_instant extends script.base_script
             utils.setScriptVar(player, "instantTravel", true);
             boolean success = enterClientTicketPurchaseMode(player, planet, travel_point, true);
             //sendSystemMessageGalaxyTestingOnly("[SKYNET] Instant Travel Terminal: " + getFirstName(player) + " - " + planet + " - " + travel_point);
-            if (success) {
+            if (success)
+            {
                 utils.setScriptVar(self, "transport", 1);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         obj_id player = (playerCheck(self, "OnTriggerVolumeEntered - "));
@@ -116,6 +146,7 @@ public class terminal_travel_instant extends script.base_script
         messageTo(self, "cleanupShip", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public void debugLogging(String section, String message) throws InterruptedException
     {
         if (CONST_FLAG_DO_LOGGING)
@@ -123,6 +154,7 @@ public class terminal_travel_instant extends script.base_script
             LOG("debug/terminal_travel_instant/" + section, message);
         }
     }
+
     public void pickupObjectTriggerVolumeInitializer(obj_id self) throws InterruptedException
     {
         obj_id player = (playerCheck(self, "pickupObjectTriggerVolumeInitializer"));
@@ -133,6 +165,7 @@ public class terminal_travel_instant extends script.base_script
             addTriggerVolumeEventSource(TRIGGER_VOLUME_PICKUP_SHIP, player);
         }
     }
+
     public obj_id playerCheck(obj_id self, String section) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "playerOwner"))
@@ -142,18 +175,19 @@ public class terminal_travel_instant extends script.base_script
             {
                 return player;
             }
-            else 
+            else
             {
                 debugLogging(section, "////>>>> the player owner scriptvar isn't valid, so destroying self");
             }
         }
-        else 
+        else
         {
             debugLogging(section, "////>>>> we don't have a player owner scriptvar, so no way to know what to track. Destroying self");
         }
         messageTo(self, "cleanupShip", null, 0, false);
         return null;
     }
+
     public void LocationItvOptions(obj_id ship, obj_id player) throws InterruptedException
     {
         if (!isIdValid(ship) || !isIdValid(player))
@@ -169,28 +203,34 @@ public class terminal_travel_instant extends script.base_script
         String itvName;
         String prompt;
         String title;
-        if(hasObjVar(ship, "tcg_itv_location")){
+        if (hasObjVar(ship, "tcg_itv_location"))
+        {
             itvName = "travel_tcg";
             prompt = "@tcg:location_itv_d";
             title = "@tcg:location_itv_t";
             availableLocations = 3;
         }
-        else if(hasObjVar(ship, "itv_snowspeeder")){
+        else if (hasObjVar(ship, "itv_snowspeeder"))
+        {
             itvName = "travel_snowspeeder";
             prompt = "@spam:location_snowspeeder_manage_d";
             title = "@spam:snowspeeder_itv_t";
             availableLocations = 2;
         }
-        else{
+        else
+        {
             return;
         }
         String[] main_options = new String[availableLocations + 1];
         main_options[0] = "Manage Locations";
-        for(int i = 1; i <= availableLocations; i++){
-            if(hasObjVar(player, itvName + ".itv.name." + i)){
+        for (int i = 1; i <= availableLocations; i++)
+        {
+            if (hasObjVar(player, itvName + ".itv.name." + i))
+            {
                 main_options[i] = getStringObjVar(player, itvName + ".itv.name." + i);
             }
-            else{
+            else
+            {
                 main_options[i] = "Travel Location " + i;
             }
         }
@@ -208,6 +248,7 @@ public class terminal_travel_instant extends script.base_script
         );
         sui.setPid(player, pid, PID_VAR);
     }
+
     public void sendPlayerToLocation(obj_id player, int idx) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -215,27 +256,36 @@ public class terminal_travel_instant extends script.base_script
             return;
         }
         obj_id self = getSelf();
-        if(hasObjVar(self, "tcg_itv_location")) {
-            if (hasObjVar(player, ("travel_tcg.itv.location." + idx)) && hasObjVar(player, ("travel_tcg.itv.scene." + idx))) {
+        if (hasObjVar(self, "tcg_itv_location"))
+        {
+            if (hasObjVar(player, ("travel_tcg.itv.location." + idx)) && hasObjVar(player, ("travel_tcg.itv.scene." + idx)))
+            {
                 location travelLoc = getLocationObjVar(player, ("travel_tcg.itv.location." + idx));
                 String destPlanet = getStringObjVar(player, ("travel_tcg.itv.scene." + idx));
                 warpPlayer(player, destPlanet, travelLoc.x, travelLoc.y, travelLoc.z, null, 0, 0, 0, "", false);
                 messageTo(self, "cleanupShip", null, 0.0f, false);
-            } else {
+            }
+            else
+            {
                 sendSystemMessage(player, new string_id("tcg", "corrupt_itv_location_data"));
             }
         }
-        else if(hasObjVar(self, "itv_snowspeeder")){
-            if (hasObjVar(player, ("travel_snowspeeder.itv.location." + idx)) && hasObjVar(player, ("travel_snowspeeder.itv.scene." + idx))) {
+        else if (hasObjVar(self, "itv_snowspeeder"))
+        {
+            if (hasObjVar(player, ("travel_snowspeeder.itv.location." + idx)) && hasObjVar(player, ("travel_snowspeeder.itv.scene." + idx)))
+            {
                 location travelLoc = getLocationObjVar(player, ("travel_snowspeeder.itv.location." + idx));
                 String destPlanet = getStringObjVar(player, ("travel_snowspeeder.itv.scene." + idx));
                 warpPlayer(player, destPlanet, travelLoc.x, travelLoc.y, travelLoc.z, null, 0, 0, 0, "", false);
                 messageTo(self, "cleanupShip", null, 0.0f, false);
-            } else {
+            }
+            else
+            {
                 sendSystemMessage(player, new string_id("tcg", "corrupt_itv_location_data"));
             }
         }
     }
+
     public boolean canMarkAtLocation(obj_id player) throws InterruptedException
     {
         obj_id playerCurrentMount = getMountId(player);
@@ -251,7 +301,7 @@ public class terminal_travel_instant extends script.base_script
         {
             return false;
         }
-        region geoCities[] = getRegionsWithGeographicalAtPoint(here, regions.GEO_CITY);
+        region[] geoCities = getRegionsWithGeographicalAtPoint(here, regions.GEO_CITY);
         if (geoCities != null && geoCities.length > 0)
         {
             return false;
@@ -268,6 +318,7 @@ public class terminal_travel_instant extends script.base_script
         }
         return !combat.isInCombat(player);
     }
+
     public int timeOutSelfExpire(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "playerOwner"))
@@ -281,6 +332,7 @@ public class terminal_travel_instant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int initializeInstaTravelShip(obj_id self, dictionary params) throws InterruptedException
     {
         debugLogging("//***// OnInitialize: ", "////>>>> ENTERED. ");
@@ -294,13 +346,14 @@ public class terminal_travel_instant extends script.base_script
                 messageTo(self, "cleanupShip", null, 0, false);
             }
         }
-        else 
+        else
         {
             debugLogging("//// OnInitialize: ", "////>>>> apparently we don't have a playerOwner scriptvar, so destroy self.");
             messageTo(self, "cleanupShip", null, 0, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupShip(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, "playerOwner");
@@ -316,6 +369,7 @@ public class terminal_travel_instant extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int ownerResidenceLocationResponse(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -336,7 +390,7 @@ public class terminal_travel_instant extends script.base_script
             sendSystemMessage(player, new string_id("tcg", "invalid_home_itv_location"));
             messageTo(self, "cleanupShip", null, 0, false);
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "homeLoc", homeLocation);
             utils.setScriptVar(self, "destPlanet", homePlanet);
@@ -345,6 +399,7 @@ public class terminal_travel_instant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int sendPlayerToHomeLocation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -366,7 +421,7 @@ public class terminal_travel_instant extends script.base_script
             messageTo(self, "cleanupShip", null, 0, false);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             location destLoc = utils.getLocationScriptVar(self, "homeLoc");
             String destPlanet = utils.getStringScriptVar(self, "destPlanet");
@@ -375,6 +430,7 @@ public class terminal_travel_instant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleLocationItvOptions(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -420,21 +476,26 @@ public class terminal_travel_instant extends script.base_script
             case 0:
                 String name = "";
                 int size = 0;
-                if(hasObjVar(self, "tcg_itv_location")) {
+                if (hasObjVar(self, "tcg_itv_location"))
+                {
                     name = "travel_tcg";
                     size = 3;
                 }
-                else if(hasObjVar(self, "itv_snowspeeder")){
+                else if (hasObjVar(self, "itv_snowspeeder"))
+                {
                     name = "travel_snowspeeder";
                     size = 2;
                 }
-                else {
+                else
+                {
                     break;
                 }
                 String[] locationITVManageOptions = new String[size];
-                for(int i = 0; i < size; i++) {
+                for (int i = 0; i < size; i++)
+                {
                     locationITVManageOptions[i] = "Set Location " + (i + 1);
-                    if (hasObjVar(player, name + ".itv.name." + (i + 1))) {
+                    if (hasObjVar(player, name + ".itv.name." + (i + 1)))
+                    {
                         locationITVManageOptions[i] = "Overwrite: " + getStringObjVar(player, name + ".itv.name." + (i + 1));
                     }
                 }
@@ -462,6 +523,7 @@ public class terminal_travel_instant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleManageLocationItvOptions(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -500,52 +562,53 @@ public class terminal_travel_instant extends script.base_script
         switch (idx)
         {
             case 0:
-            if (canMarkAtLocation(player))
-            {
-                int pid = sui.filteredInputbox(self, player, "@tcg:prompt_itv_location_set", "@tcg:title_itv_location_set", "handleSetItvLocation", "");
-                sui.setPid(player, pid, PID_VAR);
-                utils.setScriptVar(player, "travel.itv.number", 1);
-            }
-            else 
-            {
-                sendSystemMessage(player, new string_id("tcg", "invalid_location_for_location_itv"));
-            }
-            break;
+                if (canMarkAtLocation(player))
+                {
+                    int pid = sui.filteredInputbox(self, player, "@tcg:prompt_itv_location_set", "@tcg:title_itv_location_set", "handleSetItvLocation", "");
+                    sui.setPid(player, pid, PID_VAR);
+                    utils.setScriptVar(player, "travel.itv.number", 1);
+                }
+                else
+                {
+                    sendSystemMessage(player, new string_id("tcg", "invalid_location_for_location_itv"));
+                }
+                break;
             case 1:
-            if (canMarkAtLocation(player))
-            {
-                int pid = sui.filteredInputbox(self, player, "@tcg:prompt_itv_location_set", "@tcg:title_itv_location_set", "handleSetItvLocation", "");
-                sui.setPid(player, pid, PID_VAR);
-                utils.setScriptVar(player, "travel.itv.number", 2);
-            }
-            else 
-            {
-                sendSystemMessage(player, new string_id("tcg", "invalid_location_for_location_itv"));
-            }
-            break;
+                if (canMarkAtLocation(player))
+                {
+                    int pid = sui.filteredInputbox(self, player, "@tcg:prompt_itv_location_set", "@tcg:title_itv_location_set", "handleSetItvLocation", "");
+                    sui.setPid(player, pid, PID_VAR);
+                    utils.setScriptVar(player, "travel.itv.number", 2);
+                }
+                else
+                {
+                    sendSystemMessage(player, new string_id("tcg", "invalid_location_for_location_itv"));
+                }
+                break;
             case 2:
-            if (canMarkAtLocation(player))
-            {
-                int pid = sui.filteredInputbox(self, player, "@tcg:prompt_itv_location_set", "@tcg:title_itv_location_set", "handleSetItvLocation", "");
-                sui.setPid(player, pid, PID_VAR);
-                utils.setScriptVar(player, "travel.itv.number", 3);
-            }
-            else 
-            {
-                sendSystemMessage(player, new string_id("tcg", "invalid_location_for_location_itv"));
-            }
-            break;
+                if (canMarkAtLocation(player))
+                {
+                    int pid = sui.filteredInputbox(self, player, "@tcg:prompt_itv_location_set", "@tcg:title_itv_location_set", "handleSetItvLocation", "");
+                    sui.setPid(player, pid, PID_VAR);
+                    utils.setScriptVar(player, "travel.itv.number", 3);
+                }
+                else
+                {
+                    sendSystemMessage(player, new string_id("tcg", "invalid_location_for_location_itv"));
+                }
+                break;
             default:
-            messageTo(self, "cleanupShip", null, 0, false);
-            if (sui.hasPid(player, PID_VAR))
-            {
-                int pid = sui.getPid(player, PID_VAR);
-                forceCloseSUIPage(pid);
-            }
-            break;
+                messageTo(self, "cleanupShip", null, 0, false);
+                if (sui.hasPid(player, PID_VAR))
+                {
+                    int pid = sui.getPid(player, PID_VAR);
+                    forceCloseSUIPage(pid);
+                }
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetItvLocation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -589,10 +652,12 @@ public class terminal_travel_instant extends script.base_script
             if (canMarkAtLocation(player) && markLocation != null && markScene != null)
             {
                 String name = "";
-                if(hasObjVar(self, "tcg_itv_location")){
+                if (hasObjVar(self, "tcg_itv_location"))
+                {
                     name = "travel_tcg";
                 }
-                else if(hasObjVar(self, "itv_snowspeeder")) {
+                else if (hasObjVar(self, "itv_snowspeeder"))
+                {
                     name = "travel_snowspeeder";
                 }
                 setObjVar(player, name + ".itv.location." + n, markLocation);
@@ -601,7 +666,7 @@ public class terminal_travel_instant extends script.base_script
                 sendSystemMessage(self, new string_id("tcg", "valid_location_set"));
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("tcg", "invalid_location_for_location_itv"));
         }
