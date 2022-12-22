@@ -1633,6 +1633,7 @@ public class terminal_city extends script.base_script
                     break;
                     default:
                     LOG("sissynoid", "Horrible Failure");
+                    broadcast(player, "Found an unknown structure type. Please advise!");
                     break;
                 }
             }

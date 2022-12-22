@@ -8,6 +8,7 @@ package script;
 import script.library.utils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
@@ -1892,20 +1893,43 @@ public class base_class
      *         the image url to use.
      */
 
-    public static void pushWebhook(String channel, String msg, String avatarUri)
+    public static void pushWebhook(String msg, String avatarUri, boolean tts, String apiKey)
     {
-        /*String apiKey = getConfigSetting("Discord", "webhookKey");
         String avatar_pic = avatarUri;
         String gally = getGalaxyName();
         DiscordWebhook webhook = new DiscordWebhook(apiKey);
         webhook.setContent(msg);
         webhook.setAvatarUrl(avatar_pic);
-        webhook.setUsername("SKYNET: " + gally);
+        webhook.setTts(tts);
+        webhook.setUsername("Newsnet Reporter");
         try {
             webhook.execute();
         } catch (IOException io) {
             io.printStackTrace();
-        }*/
+        }
+    }
+    /**
+     * Discord Log but no avatar, just text.
+     * @param msg     What to send
+     */
+    public static void pushWebhookFull(String msg, String avatarUri, boolean tts, boolean embed, String apiKey)
+    {
+        String avatar_pic = avatarUri;
+        String gally = getGalaxyName();
+        DiscordWebhook webhook = new DiscordWebhook(apiKey);
+        webhook.setContent(msg);
+        webhook.setAvatarUrl(avatar_pic);
+        webhook.setTts(tts);
+        webhook.setUsername("Newsnet Reporter: " + gally);
+        if (embed)
+        {
+            //@TODO: add embed logic here.
+        }
+        try {
+            webhook.execute();
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
     }
 
     /**
@@ -1913,27 +1937,43 @@ public class base_class
      * @param msg     What to send
      */
 
-    public static void pushWebhookTiny(String msg)
+    public static void pushWebhookTiny(String msg, String apiKey)
     {
-        /*String apiKey = getConfigSetting("Discord", "webhookKey");
-        String gally = getGalaxyName();
+        String gally = toUpper(getGalaxyName(), 0);
         DiscordWebhook webhook = new DiscordWebhook(apiKey);
         webhook.setContent(msg);
-        webhook.setUsername("SKYNET: " + gally);
+        webhook.setUsername("Newsnet Reporter: " + gally);
+        webhook.setAvatarUrl("https://i.imgur.com/BrBe3CV.png");
         webhook.setTts(true);
         try {
             webhook.execute();
         } catch (IOException io) {
             io.printStackTrace();
         }
-        */
+
 
     }
-
+    /**
+     * Discord Log dry
+     * @param msg     What to send
+     */
 
     public static void debugServerConsoleMsg(obj_id object, String msg)
     {
         _debugServerConsoleMsg(getLongWithNull(object), msg);
+    }
+
+    /**
+     * Logs a message no stupid unknown location.
+     *
+     * @param channel
+     *         the channel to log to
+     * @param msg
+     *         the message to log
+     */
+    public static void liteLog(String msg)
+    {
+        System.out.print(msg + "\n");
     }
 
     /**
@@ -4650,18 +4690,29 @@ public class base_class
         //sendSystemMessageTestingOnly (getChatName (to), localizedMessageText);
         sendSystemMessage(to, localizedMessageText, null);
     }
-
     /**
      * Send a system message to an individual
      */
-    public static void broadcast(obj_id to, String localizedMessageText)
+    public static void broadcast (obj_id to, String localizedMessageText)
     {
         //sendSystemMessageTestingOnly (getChatName (to), localizedMessageText);
         sendSystemMessage(to, localizedMessageText, null);
     }
-
     /**
      * Send a system message to an individual
+     */
+
+    public static void broadcastGroup(obj_id[] players, String localizedMessageText)
+    {
+        for (obj_id individual_player : players)
+        {
+            sendSystemMessage(individual_player, localizedMessageText, null);
+        }
+    }
+
+
+    /**
+     * Send a system message to the group
      */
     public static void sendSystemMessageOob(obj_id to, String oob)
     {

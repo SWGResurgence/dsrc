@@ -4,6 +4,7 @@ package script.systems.bookworm;/*
 @Purpose:
 */
 
+import script.dictionary;
 import script.library.colors_hex;
 import script.library.utils;
 import script.menu_info;
@@ -39,8 +40,11 @@ public class book extends script.base_script
         int page = createSUIPage("/Script.editScript", book, who);
         setSUIProperty(page, "pageText.text", "Text", colors_hex.Default(getStringObjVar(book, "book.text")));
         setSUIProperty(page, "pageText.text", "Font", "starwarslogo_optimized_56");
+        setSUIProperty(page, "pageText.text", "Editable", "True");
+        setSUIProperty(page, "pageText.text", "GetsInput", "True");
+        setSUIProperty(page, "btnOk", "Text", "Save");
         setSUIProperty(page, "bg.caption.text", "LocalText", getStringObjVar(book, "book.title"));
-        subscribeToSUIEvent(page, sui_event_type.SET_onButton, "btnOk", "nextPage");
+        subscribeToSUIEvent(page, sui_event_type.SET_onButton, "btnOk", "saveText");
         subscribeToSUIPropertyForEvent(page, sui_event_type.SET_onButton, "btnOk", "pageText.text", "LocalText");
         subscribeToSUIPropertyForEvent(page, sui_event_type.SET_onButton, "btnOk", "outputPage.text", "LocalText");
         setSUIAssociatedObject(page, book);
@@ -53,5 +57,10 @@ public class book extends script.base_script
         }
 
         return SCRIPT_OVERRIDE;
+    }
+    public int saveText(obj_id self, dictionary params) throws InterruptedException
+    {
+        //_saveBookText(long obj_id, dictionary params);
+        return SCRIPT_CONTINUE;
     }
 }

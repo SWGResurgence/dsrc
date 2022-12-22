@@ -57,8 +57,8 @@ public class player_pvp extends script.base_script
         "battlefield4",
         "battlefield5"
     };
-    public static final String COLOR_REBELS = "\\" + colors_hex.COLOR_REBELS;
-    public static final String COLOR_IMPERIALS = "\\" + colors_hex.COLOR_IMPERIALS;
+    public static final String COLOR_REBELS = colors_hex.HEADER + colors_hex.COLOR_REBELS;
+    public static final String COLOR_IMPERIALS = colors_hex.HEADER + colors_hex.COLOR_IMPERIALS;
     public void blog(obj_id controller, String text) throws InterruptedException
     {
         String battlefieldName = "none";

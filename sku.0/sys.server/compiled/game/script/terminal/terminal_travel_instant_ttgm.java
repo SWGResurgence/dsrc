@@ -7,15 +7,16 @@ import java.util.Vector;
 
 public class terminal_travel_instant_ttgm extends script.base_script
 {
-    public terminal_travel_instant_ttgm()
-    {
-    }
     public static final String PID_VAR = "teleportToGroupMember.pid";
     public static final String GROUP_NAMES_LIST_VAR = "teleportToGroupMember.groupieNames";
     public static final String TRAVEL_LOC_VAR = "teleportToGroupMember.groupieLoc";
     public static final String TRAVEL_LOC_REGIONS_VAR = "teleportToGroupMember.groupieRegions";
     public static final String VAR_TREE_NAME = "teleportToGroupMember";
     public static final string_id SID_WHILE_DEAD = new string_id("spam", "while_dead");
+    public terminal_travel_instant_ttgm()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -31,6 +32,7 @@ public class terminal_travel_instant_ttgm extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("reward_sys", "vet_ttgm_use_menu"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -43,11 +45,13 @@ public class terminal_travel_instant_ttgm extends script.base_script
         }
         if (item == menu_info_types.ITEM_USE)
         {
+            callable.storeCallables(player);
             showGroupMemberMenu(self, player);
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public dictionary getMyItemData(obj_id self) throws InterruptedException
     {
         dictionary itemData = new dictionary();
@@ -65,6 +69,7 @@ public class terminal_travel_instant_ttgm extends script.base_script
         }
         return itemData;
     }
+
     public void showGroupMemberMenu(obj_id self, obj_id player) throws InterruptedException
     {
         dictionary itemData = getMyItemData(self);
@@ -132,6 +137,7 @@ public class terminal_travel_instant_ttgm extends script.base_script
         }
         return;
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVarTree(player, VAR_TREE_NAME))
@@ -141,6 +147,7 @@ public class terminal_travel_instant_ttgm extends script.base_script
             utils.removeScriptVarTree(player, VAR_TREE_NAME);
         }
     }
+
     public int teleportToGroupMemberChoiceHandler(obj_id self, dictionary params) throws InterruptedException
     {
         int button = sui.getIntButtonPressed(params);
@@ -181,6 +188,7 @@ public class terminal_travel_instant_ttgm extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int groupMemberLocationResponseHandler(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id requester = params.getObjId("requester");
@@ -200,6 +208,7 @@ public class terminal_travel_instant_ttgm extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleConfirmTravel(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -250,6 +259,7 @@ public class terminal_travel_instant_ttgm extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isValidTravelLocation(obj_id player, location travelLoc, String[] groupieRegions) throws InterruptedException
     {
         String planet = travelLoc.area;
@@ -286,13 +296,19 @@ public class terminal_travel_instant_ttgm extends script.base_script
         if (groupieRegions != null && groupieRegions.length > 0)
         {
             String[] restrictedRegions = dataTableGetStringColumn("datatables/item/instant_travel_restricted_regions.iff", "region_name");
-            for (String regionTheyAreIn : groupieRegions) {
-                for (String restrictedRegion : restrictedRegions) {
-                    if (regionTheyAreIn.startsWith(restrictedRegion)) {
+            for (String regionTheyAreIn : groupieRegions)
+            {
+                for (String restrictedRegion : restrictedRegions)
+                {
+                    if (regionTheyAreIn.startsWith(restrictedRegion))
+                    {
                         sendSystemMessage(player, new string_id("reward_sys", "vet_ttgm_invalid_scene"));
                         return false;
-                    } else if (regionTheyAreIn.equals("dathomir_fs_village_unpassable")) {
-                        if (!township.isTownshipEligible(player)) {
+                    }
+                    else if (regionTheyAreIn.equals("dathomir_fs_village_unpassable"))
+                    {
+                        if (!township.isTownshipEligible(player))
+                        {
                             sendSystemMessage(player, new string_id("reward_sys", "vet_ttgm_ineligible_aurilia"));
                             return false;
                         }
@@ -302,10 +318,12 @@ public class terminal_travel_instant_ttgm extends script.base_script
         }
         return true;
     }
+
     public boolean isOwner(obj_id object, obj_id player) throws InterruptedException
     {
         return getOwner(object) == player;
     }
+
     public boolean terminalIsInRangeOfPlayer(obj_id terminal, obj_id player) throws InterruptedException
     {
         if (!isIdValid(terminal) || !isIdValid(player))
@@ -314,10 +332,7 @@ public class terminal_travel_instant_ttgm extends script.base_script
         }
         if (!utils.isNestedWithin(terminal, player))
         {
-            if (utils.getDistance2D(terminal, player) > 40)
-            {
-                return false;
-            }
+            return !(utils.getDistance2D(terminal, player) > 40);
         }
         return true;
     }

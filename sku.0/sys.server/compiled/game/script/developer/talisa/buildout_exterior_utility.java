@@ -231,10 +231,13 @@ public class buildout_exterior_utility extends script.base_script
         }
         else if (command1.equalsIgnoreCase("writeBuildout"))
         {
-
-            sendSystemMessageTestingOnly(self, "This feature is currently disabled as it needs repair.");
-
-
+            location here = getLocation(self);
+            obj_id containingBuilding = getTopMostContainer(self);
+            if (isIdValid(containingBuilding))
+            {
+                here = getLocation(containingBuilding);
+            }
+            String buildoutAreaName = getBuildoutAreaName(here.x, here.z, getCurrentSceneName());
             if (command2.isEmpty())
             {
                 sendSystemMessageTestingOnly(self, "[SYNTAX] writeBuildout <file name>");
@@ -251,7 +254,7 @@ public class buildout_exterior_utility extends script.base_script
             location me = getLocation(self);
             obj_id[] objects = getAllObjectsWithObjVar(me, 500f, "buildout_utility.write");
 
-            PrintWriter writer = new PrintWriter("_" + command2 + ".tab", StandardCharsets.UTF_8); //never save it as the same name as the file you are writing to, or you will overwrite it even if its in a different directory. /riotact
+            PrintWriter writer = new PrintWriter("devl_" + buildoutAreaName + ".tab", StandardCharsets.UTF_8); //never save it as the same name as the file you are writing to, or you will overwrite it even if its in a different directory. /riotact
             writer.println("objid\tcontainer\tserver_template_crc\tcell_index\tpx\tpy\tpz\tqw\tqx\tqy\tqz\tscripts\tobjvars");
             for (obj_id i : objects)
             {
@@ -272,11 +275,13 @@ public class buildout_exterior_utility extends script.base_script
                 float coord_z = wp.z;// - getBuildoutRootCoords(buildout).z;
                 String rb1 = scripts.replace("[", "");
                 String rb2 = rb1.replace("]", "");
-                String final_scripts = rb2;
-                writer.println(i + "\t" + container + "\t" + template + "\t" + cell + "\t" + coord_x + "\t" + wp.y + "\t" + coord_z + "\t" + q[0] + "\t" + q[1] + "\t" + q[2] + "\t" + q[3] + "\t" + final_scripts + "\t" + objvars);
+                String rb3 = rb2.replace(" ", "");
+                String rb4 = rb3.replace(",", ":");
+                String final_scripts = rb4;
+                writer.println(i + "\t" + (!isIdValid(container) ? "0" : container) + "\t" + template + "\t" + getCellIndex(cell) + "\t" + coord_x + "\t" + wp.y + "\t" + coord_z + "\t" + q[3] + "\t" + q[0] + "\t" + q[1] + "\t" + q[2] + "\t" + final_scripts + "\t" + objvars);
             }
             writer.close();
-            sendSystemMessageTestingOnly(self, "Successfully wrote file " + command2 + ".csv to swg-main/exe/linux...");
+            sendSystemMessageTestingOnly(self, "Wrote to file: devl_" + buildoutAreaName + ".tab. Check your /exe/linux directory.");
 
             // ===========================================================================
             // ===== getObjects

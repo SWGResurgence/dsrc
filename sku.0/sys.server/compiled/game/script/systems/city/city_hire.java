@@ -6,6 +6,7 @@ package script.systems.city;/*
 
 import script.library.city;
 import script.library.create;
+import script.library.utils;
 import script.menu_info;
 import script.menu_info_types;
 import script.obj_id;
@@ -36,7 +37,7 @@ public class city_hire extends script.base_script
             }
             else
             {
-                broadcast(player, "You must drag this token onto a mobile to hire it.");
+                broadcast(player, "You must drag the Extraction Unit onto the creature you wish to hire.");
             }
         }
         return SCRIPT_CONTINUE;
@@ -57,7 +58,7 @@ public class city_hire extends script.base_script
                         attachScript(actor, "systems.city.city_furniture");
                         int city_id = getCityAtLocation(getLocation(player), 0);
                         city.addDecoration(city_id, player, self);
-                        broadcast(player, "Hired:  \"" + getName(actor) + "\"");
+                        broadcast(player, "Hired:  \"" + utils.getStringName(actor) + "\"");
                         destroyObject(self);
                     }
                 }

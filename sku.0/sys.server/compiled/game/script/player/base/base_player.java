@@ -324,21 +324,9 @@ public class base_player extends script.base_script
                     }
             };
 
-    public static void handleReadyCheck(obj_id self, dictionary params) throws InterruptedException
+    public static String gold(String str)
     {
-        obj_id target = params.getObjId("readyCheckLeaderId");
-        obj_id player = sui.getPlayerId(params);
-        int bp = sui.getIntButtonPressed(params);
-        if (bp == sui.BP_OK)
-        {
-            sendSystemMessage(target, getPlayerName(player) + " is ready!", null);
-            chat.chat(self, "Ready!");
-        }
-        if (bp == sui.BP_CANCEL)
-        {
-            sendSystemMessage(target, getPlayerName(player) + " is not ready!", null);
-            chat.chat(self, "Not Ready!");
-        }
+        return "\\#FFD700 " + str + "\\#FFFFFF";
     }
 
     public static void generateHousingList(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
@@ -1374,188 +1362,9 @@ public class base_player extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
+    public static String red(String str)
     {
-        if (item == menu_info_types.COMBAT_DEATH_BLOW)
-        {
-        }
-        else if (item == menu_info_types.SERVER_MENU9)
-        {
-            queueCommand(player, (-1360827551), self, "", COMMAND_PRIORITY_DEFAULT);
-        }
-        else if (item == menu_info_types.SERVER_MENU1)
-        {
-            queueCommand(player, (-915040138), self, "", COMMAND_PRIORITY_DEFAULT);
-        }
-        else if (item == menu_info_types.SERVER_PERFORMANCE_LISTEN)
-        {
-            dictionary params = new dictionary();
-            params.put("target", self);
-            messageTo(player, "handleListenRadialCmd", params, 0, false);
-            sendDirtyObjectMenuNotification(self);
-        }
-        else if (item == menu_info_types.SERVER_PERFORMANCE_WATCH)
-        {
-            dictionary params = new dictionary();
-            params.put("target", self);
-            messageTo(player, "handleWatchRadialCmd", params, 0, false);
-            sendDirtyObjectMenuNotification(self);
-        }
-        else if (item == menu_info_types.SERVER_PERFORMANCE_LISTEN_STOP)
-        {
-            dictionary params = new dictionary();
-            messageTo(player, "handleListenRadialCmd", params, 0, false);
-            sendDirtyObjectMenuNotification(self);
-        }
-        else if (item == menu_info_types.SERVER_PERFORMANCE_WATCH_STOP)
-        {
-            dictionary params = new dictionary();
-            messageTo(player, "handleWatchRadialCmd", params, 0, false);
-            sendDirtyObjectMenuNotification(self);
-        }
-        else if (item == menu_info_types.SERVER_MENU31)
-        {
-            setState(self, STATE_FROZEN, getState(self, STATE_FROZEN) != 1);
-        }
-        else if (item == menu_info_types.SERVER_MENU32)
-        {
-            String prompt = " ------------------  SKYNET: " + getName(self) + " ------------------ " + "\n";
-            prompt += "Full Name: " + getPlayerFullName(self) + "\n";
-            prompt += "NetworkId: " + self + "\n";
-            prompt += "Location: " + getLocation(self) + "\n";
-            prompt += "Creation Date: " + getCalendarTimeStringLocal(getPlayerBirthDate(self)) + "\n";
-            prompt += "Housing Lots: " + getAccountNumLots(self) + "\n";
-            prompt += " ------------------ " + "Avatar" + " ------------------ " + "\n";
-            prompt += "Posture: " + getPosture(self) + "\n";
-            prompt += "Locomotion " + getLocomotion(self) + "\n";
-            prompt += "Scale: " + getScale(self) + "\n";
-            prompt += "Race: " + getRace(self) + "\n";
-            prompt += " ------------------ " + "Player" + " ------------------ " + "\n";
-            prompt += "Health: " + getAttrib(self, HEALTH) + "\n";
-            prompt += "Action: " + getAttrib(self, ACTION) + "\n";
-            prompt += "Money (total): " + getTotalMoney(self) + "\n";
-            prompt += "Money (bank): " + getBankBalance(self) + "\n";
-            prompt += "Money (cash): " + getCashBalance(self) + "\n";
-            prompt += "Container: " + getVolumeFree(utils.getInventoryContainer(self)) + "/125 slots used\n";
-            prompt += " ------------------ " + "Faction" + " ------------------ " + "\n";
-            if (factions.isRebel(self))
-            {
-                prompt += "Aligned: Rebel \n";
-                prompt += "Rank:" + pvpGetCurrentGcwRank(self) + "\n\n";
-                prompt += " (Current GCW Cycle Information) \n";
-                prompt += "   GCW Points: " + pvpGetCurrentGcwPoints(self) + "\n";
-                prompt += "   GCW Kills: " + pvpGetCurrentPvpKills(self) + "\n";
-                prompt += "   GCW Rating: " + pvpGetCurrentGcwRating(self) + "\n";
-            }
-            else if (factions.isImperial(self))
-            {
-                prompt += "Aligned: Imperial \n";
-                prompt += "Rank: " + pvpGetCurrentGcwRank(self) + "\n\n";
-                prompt += " (Current GCW Cycle Information) \n";
-                prompt += "   GCW Points: " + pvpGetCurrentGcwPoints(self) + "\n";
-                prompt += "   GCW Kills: " + pvpGetCurrentPvpKills(self) + "\n";
-                prompt += "   GCW Rating: " + pvpGetCurrentGcwRating(self) + "\n";
-            }
-            else
-            {
-                prompt += "Neutral, unaligned.\n";
-            }
-
-            prompt += " ------------------ " + "Group" + " ------------------ " + "\n";
-            if (!group.isGrouped(self))
-            {
-                prompt += "Player is ungrouped. \n";
-            }
-            else
-            {
-                prompt += "Group ID: " + group.getGroupObject(self) + "\n";
-            }
-            prompt += " ------------------ " + "Guild" + " ------------------ " + "\n";
-            if (getGuildId(self) == 0)
-            {
-                prompt += "Player is not guilded. \n";
-            }
-            else
-            {
-                prompt += "Name: " + guildGetName(getGuildId(self)) + "\n";
-                prompt += "Abbrev.: " + guildGetAbbrev(getGuildId(self)) + "\n";
-                prompt += "ID: " + getGuildId(self) + "\n";
-                prompt += "Members:\n";
-                obj_id[] members = guildGetMemberIds(getGuildId(self));
-                for (int i = 0; i < members.length; i++)
-                {
-                    prompt += "    " + getName(members[i]);
-                }
-            }
-            prompt += " ------------------ " + "Skills" + " ------------------ " + "\n";
-            String[] skillList = getSkillListingForPlayer(self);
-            for (int i = 0; i < skillList.length; i++)
-            {
-                prompt += skillList[i] + "\n";
-            }
-            prompt += " ------------------ " + "Event" + " ------------------ " + "\n";
-            int pumpkinPulped = getIntObjVar(self, "halloween.pulped");
-            prompt += "Pumpkin Pulped: " + pumpkinPulped + "\n";
-            prompt += "Pumpkin Pulper Award: " + (!hasObjVar(self, "halloween.22_award") ? "no" : "yes") + "\n";
-            prompt += " ------------------ " + "Scripts" + " ------------------ " + "\n";
-            String[] list = getScriptList(self);
-            for (String s : list)
-            {
-                String removed = s.replace("script.", "");
-                prompt += removed + "\n";
-            }
-            prompt += "\n";
-            prompt += " ------------------ " + "Buffs" + " ------------------ " + "\n";
-            int[] buffs = buff.getAllBuffs(self);
-            prompt += "Names: \n";
-            for (int buffIndex : buffs)
-            {
-                prompt += buff.getBuffNameFromCrc(buffIndex) + "\n";
-            }
-            prompt += " ------------------ " + "Combat" + " ------------------ " + "\n";
-            prompt += "Player is " + (!combat.isInCombat(self) ? "disengaged" : "dngaged with " + getTarget(self)) + "\n";
-            prompt += "Player is in stealth: " + (getCreatureCoverVisibility(self) ? "false" : "true") + "\n";
-            prompt += "\n";
-            prompt += " ------------------ " + "Notes" + " ------------------ " + "\n";
-            if (!hasObjVar(self, "skynet.notes"))
-            {
-                prompt += "No notes exist for this player. \n";
-            }
-            else
-            {
-                prompt += getStringObjVar(self, "skynet.notes") + "\n";
-            }
-            prompt += " ------------------ " + "Inventory" + " ------------------ " + "\\#FFFFFF" + "\n";
-            obj_id[] contents = utils.getContents(self, true);
-            for (obj_id content : contents)
-            {
-                if (hasObjVar(content, "noTrade"))
-                {
-                    prompt += "[NwID  " + content + "] " + getTemplateName(content) + "\\#DB7093 [NO TRADE]\\#FFFFFF" + "\n";
-                }
-                else
-                {
-                    prompt += "[NwID  " + content + "] " + getTemplateName(content) + "\n";
-                }
-            }
-            prompt += " ------------------ " + "End of Inventory" + " ------------------ " + "\\#FFFFFF" + "\n";
-            String title = "CSR DATAPAD";
-            int page = sui.createSUIPage(sui.SUI_MSGBOX, self, player, "noHandler");
-            setSUIProperty(page, "Prompt.lblPrompt", "LocalText", prompt);
-            setSUIProperty(page, "bg.caption.lblTitle", "Text", title);
-            setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
-            setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
-            setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
-            setSUIProperty(page, "btnCancel", "Visible", "true");
-            setSUIProperty(page, "btnRevert", "Visible", "false");
-            setSUIProperty(page, "btnOk", sui.PROP_TEXT, "Export");
-            subscribeToSUIEvent(page, sui_event_type.SET_onClosedOk, "%button0%", "exportCsDumpFile");
-            subscribeToSUIEvent(page, sui_event_type.SET_onClosedCancel, "%button0%", "exportCsDumpFile");
-            saveTextOnClient(self, "csr_dump_" + getCalendarTime() + ".txt", prompt);
-            showSUIPage(page);
-            flushSUIPage(page);
-        }
-        return SCRIPT_CONTINUE;
+        return "\\#FF0000 " + str + "\\#FFFFFF";
     }
     public int exportCsDumpFile(obj_id self, dictionary params)
     {
@@ -1581,26 +1390,41 @@ public class base_player extends script.base_script
             String gold = " \\#FFD700";
             String tan = " \\#D2B48C";
             String white = " \\#FFFFFF";
-            String welcomeMessage = "Welcome to " + gold + "Apotheosis" + white + "!" + "\n";
-            String pleaseRead = "Please read the " + tan + "Rules & Policies" + white + " and " + tan + "F.A.Q" + white + " before starting your adventure(s)." + "\n";
-            String numCharacters = "Number of Allowed Character(s): " + gold + "8\n";
-            String maxLogin = "Number of Allowed Character(s) Online: " + gold + "8\n";
-            String numAccts = "Number of Allowed Account(s): " + gold + "1\n";
-            String multiAccts = "Multiple Account(s): " + gold + "By Ticket\n";
-            String features = tan + "Key Features:\n";
-            String feature1 = tan + "1. " + white + "Instant Level 90 Token.\n";
-            String feature2 = tan + "2. " + white + "One Free Heroic Jewelry Set.\n";
-            String feature3 = tan + "3. " + white + "20 Character Lots.\n";
-            String feature4 = tan + "4. " + white + "Starter Packs for Space and Traders.\n";
-            String feature5 = tan + "5. " + white + "Veteran Rewards can be purchased in Theed.\n";
-            String feature6 = tan + "6. " + white + "Rare Loot System.\n";
-            String feature7 = tan + "7. " + white + "World Boss System.\n";
-            String feature8 = tan + "8. " + white + "Dxun is the New Planet.\n";
-            String feature9 = tan + "9. " + white + "Variety of TCG and Custom Content.\n";
-            String feature10 = tan + "10. " + white + "More yet to come...\n";
+            String blue = " \\#0000FF";
+            String welcomeMessage = "Thanks for playing on Apotheosis!" + "\n";
+            String pleaseRead = "Please read the " + tan + "Rules & Policies" + white + " and " + tan + "F.A.Q." + white + " before starting your adventure(s)." + "\n";
+            String numCharacters = "Number of Allowed Character(s): " + gold + "8" + white + "\n";
+            String maxLogin = "Number of Allowed Character(s) Online: " + gold + "8" + white + "\n";
+            String numAccts = "Number of Allowed Account(s): " + gold + "1" + white + "\n";
+            String multiAccts = "Multiple Account(s): " + gold + "Contact Customer Support" + white + "\n";
+            String features = gold + "Key Features:\n";
+            String feature1 = gold + "* " + white + "Instant " + blue + "Level 90" + white + "Token." + "\n";
+            String feature2 = gold + "* " + white + "One Free Heroic Jewelry Set.\n";
+            String feature3 = gold + "* " + white + "20 Housing Lots.\n";
+            String feature4 = gold + "* " + white + "Starter Packs for Traders and Pilots\n";
+            String feature5 = gold + "* " + white + "A Veteran Reward Vendor to obtain old rewards.\n";
+            String feature6 = gold + "* " + white + "Rare Loot System (RLS).\n";
+            String feature7 = gold + "* " + white + "World Boss System.\n";
+            String feature8 = gold + "* " + white + "New Planet: Dxun\n";
+            String feature9 = gold + "* " + white + "Variety of TCG and Custom Content.\n";
+            String feature10 = tan + "* " + white + "More yet to come...\n";
             String nl = "\n";
             String welcome = welcomeMessage + pleaseRead + numCharacters + maxLogin + numAccts + multiAccts + features + feature1 + feature2 + feature3 + feature4 + feature5 + feature6 + feature7 + feature8 + feature9 + feature10;
-            sui.msgbox(self, self, welcome, sui.OK_ONLY, "WELCOME TO THE GALAXY", "noHandler");
+            String title = gold("Welcome to Apotheosis!");
+            int page = sui.createSUIPage(sui.SUI_MSGBOX, self, self, "noHandler");
+            setSUIProperty(page, "Prompt.lblPrompt", "LocalText", welcome);
+            setSUIProperty(page, "Prompt.lblPrompt", "TextAlignmentVertical'", "Center");
+            setSUIProperty(page, "bg.caption.lblTitle", "Text", title);
+            setSUIProperty(page, "bg.caption.lblTitle", "Font", "starwarslogo_optimized_56");
+            setSUIProperty(page, "Prompt.lblPrompt", "Editable", "false");
+            setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
+            setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "false");
+            setSUIProperty(page, "btnCancel", "Visible", "true");
+            setSUIProperty(page, "btnRevert", "Visible", "false");
+            setSUIProperty(page, "btnOk", sui.PROP_TEXT, "Exit");
+            saveTextOnClient(self, "motd_" + toString(getPlayerAccountUsername(self)) + ".txt", welcome);
+            showSUIPage(page);
+            flushSUIPage(page);
             utils.setScriptVar(self, "welcome_message", 1);
         }
         boolean ctsDisconnectRequested = false;
@@ -7483,7 +7307,7 @@ public class base_player extends script.base_script
                 {
                     name = localize(getNameStringId(newItem));
                 }
-                name = "\\" + colors_hex.GREEN + "" + name + " (tuned)\\#.";
+                name = colors_hex.HEADER + colors_hex.GREEN + "" + name + " (tuned)\\#.";
                 setName(newItem, name);
             }
             if (itemDictionary.containsKey("biolink"))
@@ -11503,7 +11327,7 @@ public class base_player extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        if (utils.outOfRange(dealer, self, 10.0f, true))
+        if (utils.outOfRange(dealer, self, 10.0f, true)) //@TODO: Figure this log error out.
         {
             return SCRIPT_CONTINUE;
         }
@@ -13102,21 +12926,265 @@ public class base_player extends script.base_script
         return utils.getInventoryContainer(getGroupLeaderId(self));
     }
 
+    public static String azure(String str)
+    {
+        return "\\#00FFFF " + str + "\\#FFFFFF";
+    }
+
+    public static String construction(String str)
+    {
+        String yellow = "\\#FFFF00";
+        String black = "\\#000000";
+        for (char c : str.toCharArray())
+        {
+            yellow += c;
+            black += c;
+            str = yellow + black;
+        }
+        return "\\#00FFFF " + str + "\\#FFFFFF";
+    }
+
+    public int handleReadyCheck(obj_id self, dictionary params) throws InterruptedException
+    {
+        obj_id target = params.getObjId("readyCheckLeaderId_" + getGroupObject(self));
+        obj_id player = sui.getPlayerId(params);
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_OK)
+        {
+            sendSystemMessage(target, getPlayerName(player) + " is ready!", null);
+            chat.chat(self, "Ready!");
+        }
+        if (bp == sui.BP_CANCEL)
+        {
+            sendSystemMessage(target, getPlayerName(player) + " is not ready!", null);
+            chat.chat(self, "Not Ready!");
+        }
+        return SCRIPT_CONTINUE;
+    }
+
+    public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
+    {
+        if (item == menu_info_types.COMBAT_DEATH_BLOW)
+        {
+        }
+        else if (item == menu_info_types.SERVER_MENU9)
+        {
+            queueCommand(player, (-1360827551), self, "", COMMAND_PRIORITY_DEFAULT);
+        }
+        else if (item == menu_info_types.SERVER_MENU1)
+        {
+            queueCommand(player, (-915040138), self, "", COMMAND_PRIORITY_DEFAULT);
+        }
+        else if (item == menu_info_types.SERVER_PERFORMANCE_LISTEN)
+        {
+            dictionary params = new dictionary();
+            params.put("target", self);
+            messageTo(player, "handleListenRadialCmd", params, 0, false);
+            sendDirtyObjectMenuNotification(self);
+        }
+        else if (item == menu_info_types.SERVER_PERFORMANCE_WATCH)
+        {
+            dictionary params = new dictionary();
+            params.put("target", self);
+            messageTo(player, "handleWatchRadialCmd", params, 0, false);
+            sendDirtyObjectMenuNotification(self);
+        }
+        else if (item == menu_info_types.SERVER_PERFORMANCE_LISTEN_STOP)
+        {
+            dictionary params = new dictionary();
+            messageTo(player, "handleListenRadialCmd", params, 0, false);
+            sendDirtyObjectMenuNotification(self);
+        }
+        else if (item == menu_info_types.SERVER_PERFORMANCE_WATCH_STOP)
+        {
+            dictionary params = new dictionary();
+            messageTo(player, "handleWatchRadialCmd", params, 0, false);
+            sendDirtyObjectMenuNotification(self);
+        }
+        else if (item == menu_info_types.SERVER_MENU31)
+        {
+            setState(self, STATE_FROZEN, getState(self, STATE_FROZEN) != 1);
+        }
+        else if (item == menu_info_types.SERVER_MENU32)
+        {
+            String prompt = gold(" ------------------  SKYNET: " + getName(self) + " ------------------ ") + "\n";
+            prompt += "Full Name: " + getPlayerFullName(self) + "\n";
+            prompt += "NetworkId: " + self + "\n";
+            prompt += "Location: " + getLocation(self) + "\n";
+            prompt += "Creation Date: " + getCalendarTimeStringLocal(getPlayerBirthDate(self)) + "\n";
+            prompt += "Housing Lots: " + getAccountNumLots(self) + "\n";
+            prompt += " ------------------ " + gold("Avatar") + " ------------------ " + "\n";
+            prompt += "Posture: " + getPosture(self) + "\n";
+            prompt += "Locomotion " + getLocomotion(self) + "\n";
+            prompt += "Scale: " + getScale(self) + "\n";
+            prompt += "Race: " + getRace(self) + "\n";
+            prompt += " ------------------ " + gold("Player") + " ------------------ " + "\n";
+            prompt += "Health: " + getAttrib(self, HEALTH) + "\n";
+            prompt += "Action: " + getAttrib(self, ACTION) + "\n";
+            prompt += "Money (total): " + getTotalMoney(self) + "\n";
+            prompt += "Money (bank): " + getBankBalance(self) + "\n";
+            prompt += "Money (cash): " + getCashBalance(self) + "\n";
+            prompt += "Container: " + getVolumeFree(utils.getInventoryContainer(self)) + "/125 slots used\n";
+            prompt += " ------------------ " + gold("Faction") + " ------------------ " + "\n";
+            if (factions.isRebel(self))
+            {
+                prompt += "Aligned: Rebel \n";
+                prompt += "Rank:" + pvpGetCurrentGcwRank(self) + "\n\n";
+                prompt += " (Current GCW Cycle Information) \n";
+                prompt += "   GCW Points: " + pvpGetCurrentGcwPoints(self) + "\n";
+                prompt += "   GCW Kills: " + pvpGetCurrentPvpKills(self) + "\n";
+                prompt += "   GCW Rating: " + pvpGetCurrentGcwRating(self) + "\n";
+            }
+            else if (factions.isImperial(self))
+            {
+                prompt += "Aligned: Imperial \n";
+                prompt += "Rank: " + pvpGetCurrentGcwRank(self) + "\n\n";
+                prompt += " (Current GCW Cycle Information) \n";
+                prompt += "   GCW Points: " + pvpGetCurrentGcwPoints(self) + "\n";
+                prompt += "   GCW Kills: " + pvpGetCurrentPvpKills(self) + "\n";
+                prompt += "   GCW Rating: " + pvpGetCurrentGcwRating(self) + "\n";
+            }
+            else
+            {
+                prompt += "Neutral, unaligned.\n";
+            }
+
+            prompt += " ------------------ " + gold("Group") + " ------------------ " + "\n";
+            if (!group.isGrouped(self))
+            {
+                prompt += "Player is ungrouped. \n";
+            }
+            else
+            {
+                prompt += "Group ID: " + group.getGroupObject(self) + "\n";
+            }
+            prompt += " ------------------ " + gold("Guild") + " ------------------ " + "\n";
+            if (getGuildId(self) == 0)
+            {
+                prompt += "Player is not guilded. \n";
+            }
+            else
+            {
+                prompt += "Name: " + guildGetName(getGuildId(self)) + "\n";
+                prompt += "Abbrev.: " + guildGetAbbrev(getGuildId(self)) + "\n";
+                prompt += "ID: " + getGuildId(self) + "\n";
+                prompt += "Members:\n";
+                obj_id[] members = guildGetMemberIds(getGuildId(self));
+                for (int i = 0; i < members.length; i++)
+                {
+                    if (members[i] != self)
+                    {
+                        if (isIdValid(members[i]))
+                        {
+                            prompt += getPlayerFullName(members[i]) + "\n";
+                        }
+                    }
+                }
+            }
+            prompt += " ------------------ " + gold("Skills") + " ------------------ " + "\n";
+            String[] skillList = getSkillListingForPlayer(self);
+            for (int i = 0; i < skillList.length; i++)
+            {
+                prompt += skillList[i] + "\n";
+            }
+            prompt += " ------------------ " + gold("Event") + " ------------------ " + "\n";
+            int pumpkinPulped = getIntObjVar(self, "halloween.pulped");
+            prompt += "Pumpkin Pulped: " + pumpkinPulped + "\n";
+            prompt += "Pumpkin Pulper Award: " + (!hasObjVar(self, "halloween.22_award") ? "no" : "yes") + "\n";
+            prompt += " ------------------ " + gold("Scripts") + " ------------------ " + "\n";
+            String[] list = getScriptList(self);
+            for (String s : list)
+            {
+                String removed = s.replace("script.", "");
+                prompt += removed + "\n";
+            }
+            prompt += "\n";
+            prompt += " ------------------ " + gold("Buffs") + " ------------------ " + "\n";
+            int[] buffs = buff.getAllBuffs(self);
+            prompt += "Names: \n";
+            for (int buffIndex : buffs)
+            {
+                prompt += buff.getBuffNameFromCrc(buffIndex) + "\n";
+            }
+            prompt += " ------------------ " + gold("Combat") + " ------------------ " + "\n";
+            prompt += "Player is " + (!combat.isInCombat(self) ? "disengaged" : "engaged with " + getTarget(self)) + "\n";
+            prompt += "Player is in stealth: " + (getCreatureCoverVisibility(self) ? "false" : "true") + "\n";
+            prompt += "\n";
+            prompt += " ------------------ " + gold("Notes") + " ------------------ " + "\n";
+            if (!hasObjVar(self, "skynet.notes"))
+            {
+                prompt += "No notes exist for this player. \n";
+            }
+            else
+            {
+                prompt += getStringObjVar(self, "skynet.notes") + "\n";
+            }
+            prompt += " ------------------ " + gold("Inventory") + " ------------------ " + "\n";
+            obj_id[] contents = utils.getContents(self, true);
+            for (obj_id content : contents)
+            {
+                if (hasObjVar(content, "noTrade"))
+                {
+                    prompt += "[NwID  " + content + "] " + getTemplateName(content) + red(" [NO TRADE] ") + "\n";
+                }
+                else if (getTemplateName(content).contains("character_builder"))
+                {
+                    prompt += "[NwID  " + content + "] " + getTemplateName(content) + azure(" [INSTANT DELETE LIST] ") + "\n";
+                }
+                else if (hasScript(content, "item.loot.portamedic"))
+                {
+                    prompt += "[NwID  " + content + "] " + getTemplateName(content) + azure(" [DEVELOPMENT ITEM] ") + "\n";
+                }
+                else if (hasScript(content, "item.loot.toy"))
+                {
+                    prompt += "[NwID  " + content + "] " + getTemplateName(content) + azure(" [DEVELOPMENT ITEM] ") + "\n";
+                }
+                else if (hasScript(content, "systems.city.city_hire"))
+                {
+                    prompt += "[NwID  " + content + "] " + getTemplateName(content) + azure(" [DEVELOPMENT ITEM] ") + "\n";
+                }
+                else if (hasObjVar(content, "item.temporary.time_stamp"))
+                {
+                    prompt += "[NwID  " + content + "] " + getTemplateName(content) + azure(" [TEMPORARY ITEM] ") + "\n";
+                }
+                else
+                {
+                    prompt += "[NwID  " + content + "] " + getTemplateName(content) + "\n";
+                }
+            }
+            prompt += " ------------------ " + gold("End of Inventory") + " ------------------ " + "\n";
+            String title = gold("CSR DATAPAD");
+            int page = sui.createSUIPage(sui.SUI_MSGBOX, self, player, "noHandler");
+            setSUIProperty(page, "Prompt.lblPrompt", "LocalText", prompt);
+            setSUIProperty(page, "bg.caption.lblTitle", "Text", title);
+            setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
+            setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
+            setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
+            setSUIProperty(page, "btnCancel", "Visible", "true");
+            setSUIProperty(page, "btnRevert", "Visible", "false");
+            setSUIProperty(page, "btnOk", sui.PROP_TEXT, "Exit");
+            saveTextOnClient(player, "csr_dump_" + toString(getPlayerAccountUsername(self)) + ".txt", prompt);
+            showSUIPage(page);
+            flushSUIPage(page);
+        }
+        return SCRIPT_CONTINUE;
+    }
+
     public void cmdReadyCheck(obj_id self, obj_id target, String param, dictionary params, float defaultTime) throws InterruptedException
     {
         if (!group.isGrouped(self))
         {
-            debugSpeakMsg(self, "You are not in a group!");
+            broadcast(self, "You are not in a group!");
             return;
         }
         if (!group.isLeader(self))
         {
-            debugSpeakMsg(self, "Only the group leader can start a ready check.");
+            broadcast(self, "Only the group leader can start a ready check.");
             return;
         }
         if (combat.isInCombat(self))
         {
-            debugSpeakMsg(self, "You are in combat and cannot start a ready check now.");
+            broadcast(self, "You are in combat and cannot start a ready check now.");
             return;
         }
         obj_id[] groupMembers = getGroupMemberIds(self);
@@ -13125,7 +13193,7 @@ public class base_player extends script.base_script
         for (obj_id indi : groupMembers)
         {
             sui.msgbox(self, indi, prompt, sui.OK_CANCEL, "handleReadyCheck", null);
-            params.put("readyCheckLeaderId", self);
+            params.put("readyCheckLeaderId_" + getGroupObject(self), self);
         }
     }
 }

@@ -13,7 +13,7 @@ Does the following:
 
 Does not do the following:
 
-    - Look for a good loc to spawn the pumpkin (can spawn inside buildings etc)
+    - Look for a good loc to spawn the pumpkin (can spawn inside buildings, lairs, static flora, etc.)
  */
 package script.event.halloween;
 
@@ -24,6 +24,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class pumpkin_spawner extends script.base_script
 {
+    public static int PUMPKIN_COUNT = 50;
     private static final String HALLOWEEN = "event/halloween";
     public static final string_id SID_USE = new string_id(HALLOWEEN, "spawn_pumpkins");
     public String[] NAME_VARIATIONS = {
@@ -61,7 +62,8 @@ public class pumpkin_spawner extends script.base_script
         if (item == menu_info_types.ITEM_USE)
         {
             handleWorldSpawn(self);
-            broadcast(player, "Spawning ~100 pumpkins...");
+            broadcast(player, "Spawning 50 pumpkins.");
+            debugConsoleMsg(player, "Do not click this terminal more than 4 times per character per planet.");
         }
         return SCRIPT_CONTINUE;
     }

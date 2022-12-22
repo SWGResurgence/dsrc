@@ -12,25 +12,22 @@ public class heroic_token extends script.base_script
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
         if (hasTokenBoxInInventory(player))
         {
-            if (mid != null)
+            int pid = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Store Single Token"));
+            if (getCount( self ) > 1)
             {
-                mid.setServerNotify(true);
+                mi.addSubMenu(pid, menu_info_types.SERVER_MENU1, new string_id("Store Multiple Tokens"));
             }
         }
-
         return SCRIPT_CONTINUE;
     }
 
     public boolean hasTokenBoxInInventory(obj_id player) throws InterruptedException
     {
         obj_id[] contents = utils.getContents(player, true);
-        for (int i = 0; i < contents.length; i++)
-        {
-            if (getTemplateName(contents[i]).equals("object/tangible/loot/misc/heroic_token_box.iff"))
-            {
+        for (obj_id indi : contents) {
+            if (hasScript(indi, "item.heroic_token_box")) {
                 return true;
             }
         }

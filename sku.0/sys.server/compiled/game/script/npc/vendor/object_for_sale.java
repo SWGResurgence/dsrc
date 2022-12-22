@@ -11,10 +11,12 @@ import java.util.Map;
 
 public class object_for_sale extends script.base_script
 {
+    public object_for_sale()
+    {
+    }
     public static final String VENDOR_TOKEN_TYPE = "item.token.type";
     public static final string_id SID_INV_FULL = new string_id("spam", "npc_vendor_player_inv_full");
-    public static final string_id SID_LIMIT_REACHED = new string_id("spam", "npc_vendor_player_limit_reached");
-	public int OnAttach(obj_id self) throws InterruptedException
+    public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, township.OBJECT_FOR_SALE_ON_VENDOR, true);
         return SCRIPT_CONTINUE;
@@ -42,7 +44,7 @@ public class object_for_sale extends script.base_script
             {
                 processItemPurchase(self, player);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("spam", "buildabuff_nsf_buffee"));
             }
@@ -88,7 +90,7 @@ public class object_for_sale extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             String tokenList = getStringObjVar(self, VENDOR_TOKEN_TYPE);
             String[] differentTokens = split(tokenList, ',');
@@ -128,21 +130,7 @@ public class object_for_sale extends script.base_script
         }
         return true;
     }
-	public boolean confirmLimit(obj_id self, obj_id player) throws InterruptedException
-    {
-        if (hasObjVar(self, vendor.OBJECT_FOR_SALE_LIMIT) && getIntObjVar(self, vendor.OBJECT_FOR_SALE_LIMIT) > 0)
-        {
-            obj_id naboo = getPlanetByName("naboo");
-            int crc = getObjectTemplateCrc(getTemplateName(self));
-            String objVar = "bought_" + crc + "_" + getPlayerStationId(player);
-            if (hasObjVar(naboo, objVar)) {
-                sendSystemMessage(player, SID_LIMIT_REACHED);
-                return false;
-            }
-            setObjVar(naboo, objVar, true);
-        }
-        return true;
-    }
+
     public boolean confirmFunds(obj_id self, obj_id player) throws InterruptedException {
         int creditCost = getIntObjVar(self, "item.object_for_sale.cash_cost");
         int[] tokenCosts = getIntArrayObjVar(self, "item.object_for_sale.token_cost");
@@ -209,7 +197,7 @@ public class object_for_sale extends script.base_script
                 }
             }
         }
-        
+
         // now after reviewing all inventory items, let's check how many tokens we have
         for(Map.Entry<String, Integer> token : tokensNeeded.entrySet()){
             // bail if we don't have enough of a token type
@@ -228,15 +216,12 @@ public class object_for_sale extends script.base_script
         int[] tokenCostForReals = getIntArrayObjVar(self, "item.object_for_sale.token_cost");
         obj_id purchasedItem = obj_id.NULL_ID;
         String myName = "";
-		if (!confirmLimit(self, player)) {
-			return;
-        }
         if (static_item.isStaticItem(self))
         {
             myName = static_item.getStaticItemName(self);
             purchasedItem = static_item.createNewItemFunction(myName, inventory);
         }
-        else 
+        else
         {
             myName = getTemplateName(self);
             purchasedItem = createObjectOverloaded(myName, inventory);
@@ -264,8 +249,7 @@ public class object_for_sale extends script.base_script
         boolean foundTokenHolderBox = false;
         for (obj_id inventoryContent : inventoryContents) {
             String itemName = getStaticItemName(inventoryContent);
-            if (itemName != null && !itemName.isEmpty())
-			{
+            if (itemName != null && !itemName.equals("")) {
                 if (hasObjVar(self, VENDOR_TOKEN_TYPE)) {
                     String tokenList = getStringObjVar(self, VENDOR_TOKEN_TYPE);
                     String[] differentTokens = split(tokenList, ',');
@@ -325,6 +309,7 @@ public class object_for_sale extends script.base_script
                 }
             }
         }
+        return;
     }
     public string_id parseNameToStringId(String itemName, obj_id item) throws InterruptedException
     {
@@ -340,7 +325,7 @@ public class object_for_sale extends script.base_script
             String reference = parsedString[1];
             itemNameSID = new string_id(stfFile, reference);
         }
-        else 
+        else
         {
             String stfFile = parsedString[0];
             itemNameSID = new string_id(stfFile, " ");

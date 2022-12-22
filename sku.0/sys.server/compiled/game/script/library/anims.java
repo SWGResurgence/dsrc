@@ -2,7 +2,7 @@ package script.library;
 
 import script.dictionary;
 import script.obj_id;
-
+@SuppressWarnings("unused")
 public class anims extends script.base_script
 {
     public anims()

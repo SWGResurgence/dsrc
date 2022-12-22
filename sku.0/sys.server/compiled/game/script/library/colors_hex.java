@@ -5,6 +5,7 @@ public class colors_hex extends script.base_script
     public colors_hex()
     {
     }
+    public static final String HEADER = "\\#";
     public static final String BLACK = "000000";
     public static final String COLOR_REBELS = "D93311";
     public static final String COLOR_IMPERIALS = "C2B5C9";
@@ -140,7 +141,7 @@ public class colors_hex extends script.base_script
     public static final String COPPER = "B87333";
     public static final String GOLD = "CD7F32";
     public static final String SILVER = "E6E8FA";
-    public static final String HEADER = "\\#";
+    public static final String FOOTER = "\\#.";
     public static String White(String source)
     {
         return HEADER + WHITE + source;

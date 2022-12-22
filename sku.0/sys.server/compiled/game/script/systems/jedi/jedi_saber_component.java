@@ -147,7 +147,7 @@ public class jedi_saber_component extends script.base_script
         {
             name = localize(getNameStringId(self));
         }
-        name = "\\" + colors_hex.RED + "" + name + " (broken)\\#.";
+        name = colors_hex.HEADER + colors_hex.RED + "" + name + " (broken)\\#.";
         LOG("saber_test", "Setting Crystal name to: " + name);
         setName(self, name);
         return SCRIPT_CONTINUE;
@@ -224,6 +224,7 @@ public class jedi_saber_component extends script.base_script
     }
     public void tuneCrystal(obj_id player) throws InterruptedException
     {
+        //@TODO: manage crystal verisoning
         obj_id self = getSelf();
         setObjVar(self, jedi.VAR_CRYSTAL_OWNER_ID, player);
         setObjVar(self, jedi.VAR_CRYSTAL_OWNER_NAME, getName(player));
@@ -232,7 +233,7 @@ public class jedi_saber_component extends script.base_script
         {
             name = localize(getNameStringId(self));
         }
-        name = "\\" + colors_hex.GREEN + "" + name + " (tuned)\\#.";
+        name = colors_hex.HEADER + colors_hex.AQUAMARINE + "" + name + " (tuned)" + colors_hex.FOOTER;
         setName(self, name);
         sendSystemMessage(player, new string_id("jedi_spam", "crystal_tune_success"));
         sendDirtyObjectMenuNotification(self);

@@ -1,10 +1,12 @@
 package script.developer;
 
 import script.dictionary;
+import script.library.sui;
 import script.library.utils;
 import script.obj_id;
 import script.system_process;
 
+import java.io.File;
 import java.util.Date;
 
 public class script_editor extends script.base_script
@@ -28,12 +30,12 @@ public class script_editor extends script.base_script
         String params = st.nextToken();
         if (params == null)
         {
-            sendSystemMessageTestingOnly(self, "Usage: /editScript <script name>  e.g. /editScript justin.test_scriptedit");
+            sendSystemMessageTestingOnly(self, "Usage: /editScript <script name>  e.g. /editScript test.qatool");
             return SCRIPT_OVERRIDE;
         }
         if (params.length() < 1)
         {
-            sendSystemMessageTestingOnly(self, "Usage: /editScript <script name>  e.g. /editScript justin.test_scriptedit");
+            sendSystemMessageTestingOnly(self, "Usage: /editScript <script name>  e.g. /editScript test.qatool");
             return SCRIPT_OVERRIDE;
         }
         String scriptBaseName = params;
@@ -56,16 +58,12 @@ public class script_editor extends script.base_script
         String scriptContents = file_access.readTextFile(scriptFileName);
         if (scriptContents == null)
         {
-            scriptFileName += "lib";
-            scriptContents = file_access.readTextFile(scriptFileName);
-        }
-        if (scriptContents == null)
-        {
-            sendSystemMessageTestingOnly(self, "Could not get script contents from " + scriptBaseName + ".script or " + scriptBaseName + ".scriptlib");
-            return SCRIPT_OVERRIDE;
+           broadcast(self,"Unable to read script file " + scriptFileName);
+           return SCRIPT_OVERRIDE;
         }
         int page = createSUIPage("/Script.editScript", self, self);
-        setSUIProperty(page, "pageText.text", "Text", scriptContents);
+        setSUIProperty(page, "pageText.text", "Font", "starwarslogo_optimized_56");
+        setSUIProperty(page, "pageText.text", "Editable", "True");
         setSUIProperty(page, "bg.caption.text", "LocalText", "EDIT SCRIPT - " + scriptBaseName);
         subscribeToSUIEvent(page, sui_event_type.SET_onButton, "btnOk", "onScriptEditBtnOk");
         subscribeToSUIPropertyForEvent(page, sui_event_type.SET_onButton, "btnOk", "pageText.text", "LocalText");
@@ -124,7 +122,7 @@ public class script_editor extends script.base_script
                                     {
                                         try
                                         {
-                                            String outputString = system_process.runAndGetOutput("/home/swg/swg-main/exe/linux/script.sh");
+                                            String outputString = system_process.runAndGetOutput("ant compile_java", new File("../../"));
                                             if (outputString != null)
                                             {
                                                 outputWindowText += outputString + "\n";
@@ -170,6 +168,11 @@ public class script_editor extends script.base_script
                 setSUIProperty(pageId, "outputPage.text", "Text", outputWindowText);
                 boolean showResult = showSUIPage(pageId);
                 flushSUIPage(pageId);
+                String scriptFileName = utils.getStringScriptVar(self, scriptFileNameKey);
+                String addOutput = system_process.runAndGetOutput("git add .", new File("../../data"));
+                String commitOutput = system_process.runAndGetOutput("git commit -m \"Script Editor: " + scriptFileName + new Date() + "\"", new File("../../data"));
+                String pushOutput = system_process.runAndGetOutput("git push origin apotheosis", new File("../../data"));
+                sui.msgbox(self, self, "Git Status: \n" + addOutput + "\n" +  commitOutput + pushOutput, sui.OK_ONLY, "Git Status", "noHandler");
             }
         }
         return SCRIPT_CONTINUE;
