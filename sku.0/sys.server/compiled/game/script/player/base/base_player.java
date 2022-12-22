@@ -11327,7 +11327,7 @@ public class base_player extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        if (utils.outOfRange(dealer, self, 10.0f, true))
+        if (utils.outOfRange(dealer, self, 10.0f, true)) //@TODO: Figure this log error out.
         {
             return SCRIPT_CONTINUE;
         }
