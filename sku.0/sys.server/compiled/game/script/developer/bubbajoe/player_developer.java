@@ -18,7 +18,6 @@ public class player_developer extends base_script
     {
 
     }
-
     public String APIKEY = "https://discord.com/api/webhooks/1054125244060799076/YUI-Gwy8iJTHzBJkPkFBp7kjH27uGNFlO6z6-LFx39kAel5PlQ_xk_sFqxzdf5igiapD";
     public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
@@ -140,13 +139,10 @@ public class player_developer extends base_script
 
         if (cmd.equalsIgnoreCase("wiki"))
         {
-            //example: /developer wiki Combat Macro
-            // /developer wiki (params[param, param2, param3])
             String speech = tok.nextToken();
             String wiki_link = "https://swg.fandom.com/wiki/" + speech;
             String pathed;
             pathed = wiki_link.replace(" ", "_");
-            //chat.chat(target, splitMsg);
             launchClientWebBrowser(self, pathed);
             return SCRIPT_CONTINUE;
         }
@@ -207,7 +203,7 @@ public class player_developer extends base_script
             setSUIProperty(page, "btnRevert", "Visible", "false");
             showSUIPage(page);
             flushSUIPage(page);
-            broadcast(self, "Ran command..");
+            broadcast(self, "Ran command.");
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("markObjects"))
@@ -239,7 +235,6 @@ public class player_developer extends base_script
             dictionary param = new dictionary();
             messageTo(target, tok.nextToken(), param, utils.stringToFloat(tok.nextToken()), true);
             return SCRIPT_CONTINUE;
-            //messageTo(target,token[0], params, token[1], true);
         }
         if (cmd.equalsIgnoreCase("convertstringtocrc"))
         {
@@ -249,7 +244,7 @@ public class player_developer extends base_script
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("travel"))
-        {//@example /developer travel add COST Epic Name With Spaces
+        {
             String which = tok.nextToken();
             if (which.equals("add"))
             {
@@ -303,7 +298,7 @@ public class player_developer extends base_script
         {
             obj_id city_hall = getIntendedTarget(self);
             String VAR_CITY = "spec_stamp";
-            String VAR_CITY_OLD = VAR_CITY + ".old"; // for backwards compatibility
+            String VAR_CITY_OLD = VAR_CITY + ".old";
             if (hasObjVar(city_hall, VAR_CITY))
             {
                 setObjVar(city_hall, VAR_CITY_OLD, getIntObjVar(city_hall, VAR_CITY));
@@ -421,7 +416,6 @@ public class player_developer extends base_script
         {
             String SCHEMATIC_TABLE = "datatables/crafting/schematic_group.iff";
             String SCHEMATIC_TABLE_COLUMN = "GroupId";
-            //for every string in the colulmn GroupId, grantSchematicGroup to my target.
             String[] schematicGroups = dataTableGetStringColumnNoDefaults(SCHEMATIC_TABLE, SCHEMATIC_TABLE_COLUMN);
             for (String schematicGroup : schematicGroups)
             {
@@ -530,7 +524,6 @@ public class player_developer extends base_script
                 }
                 else
                 {
-                    //skip it
                     debugConsoleMsg(self, "Skipping item " + item);
                 }
             }
@@ -885,6 +878,7 @@ public class player_developer extends base_script
                     words += " " + tok.nextToken();
                 }
             }
+            //liteLog(words);
             System.out.println(words);
         }
         if (cmd.equalsIgnoreCase("sws"))

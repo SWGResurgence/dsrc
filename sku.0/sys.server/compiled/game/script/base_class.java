@@ -1964,6 +1964,19 @@ public class base_class
     }
 
     /**
+     * Logs a message no stupid unknown location.
+     *
+     * @param channel
+     *         the channel to log to
+     * @param msg
+     *         the message to log
+     */
+    public static void liteLog(String msg)
+    {
+        System.out.print(msg + "\n");
+    }
+
+    /**
      * Logs a message.
      *
      * @param channel
