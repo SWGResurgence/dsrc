@@ -11,19 +11,6 @@ item_costume_mynock	Costume: Mynock Instructions
 item_costume_rancor	Costume: Rancor Instructions
 item_costume_ugnaught	Costume: Ugnaught Instructions
 item_costume_wampa	Costume: Wampa Instuctions
-object/tangible/item/quest/force_sensitive/fs_sculpture_1.iff	Decoration: An Aurillian Sculpture Section 1
-object/tangible/item/quest/force_sensitive/fs_sculpture_2.iff	Decoration: An Aurillian Sculpture Section 2
-object/tangible/item/quest/force_sensitive/fs_sculpture_3.iff	Decoration: An Aurillian Sculpture Section 3
-object/tangible/item/quest/force_sensitive/fs_sculpture_4.iff	Decoration: An Aurillian Sculpture Section 4
-object/tangible/item/quest/force_sensitive/bacta_tank.iff	Decoration: A Bacta Tank
-item_content_decor_hologram_disk_03_01	Decoration: Data Disk Hologram
-item_content_bubble_tank_02_01	Decoration: Decorative Bubble Tank
-object/tangible/veteran_reward/frn_vet_rug_imperial.iff	Decoration: Imperial Rug
-item_tow_decor_jedi_relic_02_03	Decoration: Jedi Relic
-item_tow_decor_lava_geode_02_01	Decoration: Lava Geode
-item_ep3_rewards_prayor_mobile	Decoration: Prayer Mobile
-object/tangible/veteran_reward/frn_vet_rug_rebel.iff	Decoration: Rebel Rug
-item_tow_decor_sith_relic_02_01	Decoration: Sith Relic
 object/tangible/veteran_reward/resource.iff	Deed: A Crate of Free Resources
 item_city_actor_deed	Biological Extraction Unit
 object/tangible/mission/quest_item/bren_kingal_q4_needed.iff	Gear: AT-ST pilot's helmet
@@ -44,4 +31,3 @@ item_schematic_fruit_stand_lg	Schematic: Large Fruit Stand
 item_schematic_lugjack_machine	Schematic: Lugjack Machine
 object/tangible/painting/painting_droid_bright.iff	Schematic: Modified Fusion Reactor
 item_veteran_reward_token_box_large_01_01	Small Veteran Rewards Token Box
-item_veteran_reward_token_box_large_01_02	Small Veteran Rewards Token Box
