@@ -2013,64 +2013,69 @@ public class ai extends script.base_script
 
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
-        if (item == menu_info_types.SERVER_MENU20)
+        if (isGod(player))
         {
-            blog("SERVER_MENU20");
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU21)
-        {
-            int loot = getIntObjVar(self, "loot.numItems");
-            if (loot == 0)
+            if (item == menu_info_types.SERVER_MENU20)
             {
-                setObjVar(self, "loot.numItems", 1);
+                blog("SERVER_MENU20");
+                return SCRIPT_CONTINUE;
             }
-            else
+            if (item == menu_info_types.SERVER_MENU21)
             {
-                setObjVar(self, "loot.numItems", loot + 1);
+                int loot = getIntObjVar(self, "loot.numItems");
+                if (loot == 0)
+                {
+                    setObjVar(self, "loot.numItems", 1);
+                }
+                else
+                {
+                    setObjVar(self, "loot.numItems", loot + 1);
+                }
+                return SCRIPT_CONTINUE;
             }
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU22)
-        {
-            int loot = getIntObjVar(self, "loot.numItems");
-            if (loot == 0)
+            if (item == menu_info_types.SERVER_MENU22)
             {
-                setObjVar(self, "loot.numItems", 0);
+                int loot = getIntObjVar(self, "loot.numItems");
+                if (loot == 0)
+                {
+                    setObjVar(self, "loot.numItems", 0);
+                }
+                else
+                {
+                    setObjVar(self, "loot.numItems", loot - 1);
+                }
+                return SCRIPT_CONTINUE;
             }
-            else
+            if (item == menu_info_types.SERVER_MENU23)
             {
-                setObjVar(self, "loot.numItems", loot - 1);
+                stopCombat(player);
+                return SCRIPT_CONTINUE;
             }
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU23)
-        {
-            stopCombat(player);
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU24)
-        {
-            String lootTable = getStringObjVar(self, "loot.lootTable");
-            if (lootTable == null)
+            if (item == menu_info_types.SERVER_MENU24)
             {
-                lootTable = "none. (default)";
+                String lootTable = getStringObjVar(self, "loot.lootTable");
+                if (lootTable == null)
+                {
+                    lootTable = "none. (default)";
+                }
+                String prompt = "Current loot table: " + lootTable + "\n\nEnter new loot table:";
+                int pid = sui.inputbox(player, prompt, "handleLootTableInput");
+                sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
+                return SCRIPT_CONTINUE;
             }
-            String prompt = "Current loot table: " + lootTable + "\n\nEnter new loot table:";
-            int pid = sui.inputbox(player, prompt, "handleLootTableInput");
-            sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU25)
-        {
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU26)
-        {
-            String prompt = "Enter creature name to make a ring spawn.\n For a complete list of creature names, seek out mobs.iff!";
-            int pid = sui.inputbox(player, player, prompt, "prepareRingSpawn");
-            sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
-
+            if (item == menu_info_types.SERVER_MENU25)
+            {
+                return SCRIPT_CONTINUE;
+            }
+            if (item == menu_info_types.SERVER_MENU26)
+            {
+                if (!hasScript(self, "systems.city.city_actor"))
+                {
+                    String prompt = "Enter creature name to make a ring spawn.\n For a complete list of creature names, seek out mobs.iff!";
+                    int pid = sui.inputbox(player, player, prompt, "prepareRingSpawn");
+                    sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
+                }
+            }
         }
         return SCRIPT_CONTINUE;
     }
