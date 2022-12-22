@@ -7,6 +7,10 @@ package script.developer.bubbajoe;/*
 import script.location;
 import script.obj_id;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
@@ -28,16 +32,15 @@ public class painter extends script.base_script
     {
         for (int i = 0; i < targets.length; i++)
         {
-            String information;
-            location loc = getLocation(targets[i]);
-            String x = Float.toString(loc.x);
-            String z = Float.toString(loc.z);
-            String y = Float.toString(loc.y);
-            information = x + " " + y + " " + z + "\n";
-            header += information;
+            location here = getLocation(targets[i]);
+            final BufferedImage image = new BufferedImage( 8000, 8000, BufferedImage.TYPE_INT_ARGB);
+            final Graphics2D graphics2D = image.createGraphics();
+            graphics2D.setPaint(Color.BLACK);
+            graphics2D.drawOval((int) here.x, (int) here.z, 2, 2);
+            graphics2D.dispose();
+            ImageIO.write (image, "png", new File( "/home/swg/Desktop/test.png"));
         }
-        saveTextOnClient(self, "SwgMapper_" + getCurrentSceneName().toString() + ".txt", header);
-        broadcast(self, "Painted " + targets.length + " objects. Run in SwgMapper to see the results.");
+        broadcast(self, "Attempting to paint " + targets.length + " objects.");
         return SCRIPT_CONTINUE;
     }
 

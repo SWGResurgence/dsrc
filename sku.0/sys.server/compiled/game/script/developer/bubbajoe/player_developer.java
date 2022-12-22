@@ -19,6 +19,7 @@ public class player_developer extends base_script
 
     }
 
+    public String APIKEY = "https://discord.com/api/webhooks/1054125244060799076/YUI-Gwy8iJTHzBJkPkFBp7kjH27uGNFlO6z6-LFx39kAel5PlQ_xk_sFqxzdf5igiapD";
     public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id iTarget = getIntendedTarget(self);
@@ -150,7 +151,7 @@ public class player_developer extends base_script
             return SCRIPT_CONTINUE;
         }
 
-        if (cmd.equals("shuttleRebelDrop"))
+        if (cmd.equalsIgnoreCase("shuttleRebelDrop"))
         {
             String message = "Mayday! Mayday! Mayday! I have to drop my payload, " + getFirstName(target) + "!";
             prose_package commP = new prose_package();
@@ -160,7 +161,7 @@ public class player_developer extends base_script
             playClientEffectLoc(players, "appearance/rebel_transport_touch_and_go.prt", getLocation(target), 2.0f);
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equals("shuttleImperialDrop"))
+        if (cmd.equalsIgnoreCase("shuttleImperialDrop"))
         {
             String message = "Prepare for your cargo delivery, " + getFirstName(target) + "! I don't want any hiccups.";
             prose_package commP = new prose_package();
@@ -171,7 +172,7 @@ public class player_developer extends base_script
             return SCRIPT_CONTINUE;
         }
 
-        if (cmd.equals("ballgame"))
+        if (cmd.equalsIgnoreCase("ballgame"))
         {
             obj_id pInv = utils.getInventoryContainer(self);
             obj_id hotPotato = createObject("object/tangible/loot/dungeon/geonosian_mad_bunker/relic_gbb_small_ball.iff", pInv, "");
@@ -182,7 +183,7 @@ public class player_developer extends base_script
             return SCRIPT_CONTINUE;
         }
 
-        if (cmd.equals("shell"))
+        if (cmd.equalsIgnoreCase("shell"))
         {
             String where = tok.nextToken();
             String command = tok.nextToken();
@@ -209,7 +210,7 @@ public class player_developer extends base_script
             broadcast(self, "Ran command..");
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equals("markObjects"))
+        if (cmd.equalsIgnoreCase("markObjects"))
         {
             obj_id[] nearbyObjects = getObjectsInRange(getLocation(self), 256.0f);
             for (obj_id nearbyObject : nearbyObjects)
@@ -333,13 +334,13 @@ public class player_developer extends base_script
             queueCommand(target, commandName, target, commandParams.toString(), COMMAND_PRIORITY_IMMEDIATE);
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equals("animate"))
+        if (cmd.equalsIgnoreCase("animate"))
         {
             String animationFile = tok.nextToken();
             doAnimationAction(target, animationFile);
             broadcast(self, "Animation '" + animationFile + "' performed on " + getName(target));
         }
-        if (cmd.equals("renameContainerContents"))
+        if (cmd.equalsIgnoreCase("renameContainerContents"))
         {
             String name = tok.nextToken();
             while (tok.hasMoreTokens())
@@ -353,7 +354,7 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equals("tagContainerContents"))
+        if (cmd.equalsIgnoreCase("tagContainerContents"))
         {
             String tag = tok.nextToken();
             while (tok.hasMoreTokens())
@@ -376,7 +377,7 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equals("unlockContainer"))
+        if (cmd.equalsIgnoreCase("unlockContainer"))
         {
             obj_id[] contents = getContents(target);
             for (obj_id content : contents)
@@ -386,7 +387,7 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equals("lockContainer"))
+        if (cmd.equalsIgnoreCase("lockContainer"))
         {
             obj_id[] contents = getContents(target);
             for (obj_id content : contents)
@@ -396,7 +397,7 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equals("touchContainer"))
+        if (cmd.equalsIgnoreCase("touchContainer"))
         {
             String tag = colors_hex.HEADER + colors_hex.AQUAMARINE + " (Developer Item)" + colors_hex.FOOTER;
             obj_id[] contents = getContents(target);
@@ -407,7 +408,7 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equals("revertContainerContents"))
+        if (cmd.equalsIgnoreCase("revertContainerContents"))
         {
             obj_id[] contents = getContents(target);
             for (obj_id content : contents)
@@ -416,7 +417,7 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equals("grantAllSchematics"))
+        if (cmd.equalsIgnoreCase("grantAllSchematics"))
         {
             String SCHEMATIC_TABLE = "datatables/crafting/schematic_group.iff";
             String SCHEMATIC_TABLE_COLUMN = "GroupId";
@@ -430,7 +431,7 @@ public class player_developer extends base_script
             broadcast(self, "Granted all schematic groups to " + getName(target));
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equals("grantAllItems"))
+        if (cmd.equalsIgnoreCase("grantAllItems"))
         {
             String ITEM_TABLE = "datatables/item/master_item/master_item.iff";
             String ITEM_TABLE_COLUMN = "name";
@@ -452,13 +453,13 @@ public class player_developer extends base_script
             broadcast(self, "Granted all items to " + getName(target));
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equals("magicSatchel"))
+        if (cmd.equalsIgnoreCase("magicSatchel"))
         {
             obj_id satchel = create.createObject("object/tangible/container/general/satchel.iff", utils.getInventoryContainer(self), "");
             attachScript(satchel, "developer.bubbajoe.magic_satchel");
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equals("buffAllByName"))
+        if (cmd.equalsIgnoreCase("buffAllByName"))
         {
             String query = tok.nextToken();
             String BUFF_TABLE = "datatables/buff/buff.iff";
@@ -479,7 +480,7 @@ public class player_developer extends base_script
             broadcast(self, "Granted all items to " + getName(target));
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equals("grantAllSkills"))
+        if (cmd.equalsIgnoreCase("grantAllSkills"))
         {
             ArrayList<String> badSkills = new ArrayList<String>();
             badSkills.add("combat_melee_basic");
@@ -514,7 +515,7 @@ public class player_developer extends base_script
             broadcast(self, "Granted all skills from search to " + getName(target));
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equals("grantAllItemsBySearch"))
+        if (cmd.equalsIgnoreCase("grantAllItemsBySearch"))
         {
             String query = tok.nextToken();
             String ITEM_TABLE = "datatables/item/master_item/master_item.iff";
@@ -537,7 +538,7 @@ public class player_developer extends base_script
             broadcast(self, "Granted all items with search parameter "+ query + " to " +  getName(target));
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equals("toggle"))
+        if (cmd.equalsIgnoreCase("toggle"))
         {
             String toggle = tok.nextToken();
             switch (toggle)
@@ -557,7 +558,7 @@ public class player_developer extends base_script
                     break;
             }
         }
-        if (cmd.equals("editWeapon"))
+        if (cmd.equalsIgnoreCase("editWeapon"))
         {
             obj_id weapon = utils.getHeldWeapon(target);
             if (weapon == null)
@@ -831,14 +832,6 @@ public class player_developer extends base_script
                     words += " " + tok.nextToken();
                 }
             }
-            if (tok.countTokens() == 1)
-            {
-                chat.chat(iTar, words);
-            }
-            {
-
-                broadcast(self, "Syntax: /developer say <message>");
-            }
             chat.chat(iTar, words);
         }
         if (cmd.equalsIgnoreCase("setloottable"))
@@ -892,15 +885,37 @@ public class player_developer extends base_script
                     words += " " + tok.nextToken();
                 }
             }
-
+            System.out.println(words);
         }
         if (cmd.equalsIgnoreCase("sws"))
         {
             String template = tok.nextToken();
             String script = tok.nextToken();
             obj_id item = createObject(template, getLocation(self));
+            if (item == null)
+            {
+                broadcast(self, "Invalid template name.");
+                return SCRIPT_CONTINUE;
+            }
+            if (script == null)
+            {
+                broadcast(self, "Invalid script name.");
+                return SCRIPT_CONTINUE;
+            }
             attachScript(item, script);
             setYaw(item, getYaw(self));
+        }
+        if (cmd.equalsIgnoreCase("sendPreviewMessage"))
+        {
+            String message = tok.nextToken();
+            if (tok.hasMoreTokens())
+            {
+                while (tok.hasMoreTokens())
+                {
+                    message += " " + tok.nextToken();
+                }
+            }
+            sendWebhook(APIKEY, message);
         }
         if (cmd.equalsIgnoreCase("ringspawn"))
         {
@@ -1054,7 +1069,7 @@ public class player_developer extends base_script
             }
         }
 
-        if (cmd.equals("-help"))
+        if (cmd.equalsIgnoreCase("-help"))
         {
             debugConsoleMsg(self, "Developer Commands:  ");
             debugConsoleMsg(self, "  QUEST:");
@@ -1109,7 +1124,7 @@ public class player_developer extends base_script
         }
     }
 
-    public void sendWebhook(obj_id self, String url, String message)
+    public void sendWebhook(String url, String message)
     {
         if (url == null || url.equals(""))
         {
@@ -1120,7 +1135,6 @@ public class player_developer extends base_script
             return;
         }
         DiscordWebhook webhook = new DiscordWebhook(url);
-
         webhook.setContent(message);
         webhook.setAvatarUrl("https://i.imgur.com/WO53VrH.png");
         webhook.setTts(true);
