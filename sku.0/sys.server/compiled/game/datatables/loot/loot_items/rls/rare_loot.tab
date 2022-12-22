@@ -25,6 +25,7 @@ item_ep3_rewards_prayor_mobile	Decoration: Prayer Mobile
 object/tangible/veteran_reward/frn_vet_rug_rebel.iff	Decoration: Rebel Rug
 item_tow_decor_sith_relic_02_01	Decoration: Sith Relic
 object/tangible/veteran_reward/resource.iff	Deed: A Crate of Free Resources
+item_city_actor_deed	Biological Extraction Unit
 object/tangible/mission/quest_item/bren_kingal_q4_needed.iff	Gear: AT-ST pilot's helmet
 object/tangible/wearables/helmet/helmet_s06.iff	Gear: Endor Rebel Helmet
 item_jedi_robe_06_01	Gear: Jedi Master Cloak
@@ -44,4 +45,3 @@ item_schematic_lugjack_machine	Schematic: Lugjack Machine
 object/tangible/painting/painting_droid_bright.iff	Schematic: Modified Fusion Reactor
 item_veteran_reward_token_box_large_01_01	Small Veteran Rewards Token Box
 item_veteran_reward_token_box_large_01_02	Small Veteran Rewards Token Box
-item_city_actor_deed	Biological Extraction Unit
