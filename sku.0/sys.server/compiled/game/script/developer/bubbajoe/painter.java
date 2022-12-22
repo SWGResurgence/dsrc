@@ -2,6 +2,8 @@ package script.developer.bubbajoe;/*
 @Filename: script.developer.bubbajoe.painter
 @Author: BubbaJoeX
 @Purpose: Gets coordinates from a specified object and plots them on an image on /home/swg/swg-main/exe/linux/
+
+@WIP: This script is a work in progress and is not yet functional.
 */
 
 import script.location;
