@@ -20,7 +20,7 @@ item_content_bubble_tank_02_01	175		Decoration: Bubble Tank
 object/tangible/item/quest/force_sensitive/bacta_tank.iff	100		Decoration: A Bacta Tank
 object/tangible/veteran_reward/frn_vet_rug_imperial.iff	125		Decoration: Imperial Rug
 object/tangible/veteran_reward/frn_vet_rug_rebel.iff	125		Decoration: Rebel Rug
-item_ornate_rug_01_01	320		Ornate Rug
+item_ornate_rug_01_01	320		Decoration: Ornate Rug
 item_tow_decor_jedi_relic_02_03	210		Decoration: Jedi Relic
 item_tow_decor_lava_geode_02_01	50		Decoration: Lava Geode
 item_ep3_rewards_prayor_mobile	50		Decoration: Prayer Mobile
@@ -29,7 +29,10 @@ object/tangible/item/quest/force_sensitive/fs_sculpture_1.iff	200		Sculpture 1
 object/tangible/item/quest/force_sensitive/fs_sculpture_2.iff	200		Sculpture 1
 object/tangible/item/quest/force_sensitive/fs_sculpture_3.iff	200		Sculpture 1
 object/tangible/item/quest/force_sensitive/fs_sculpture_4.iff	200		Sculpture 1
-object/tangible/painting/painting_han_wanted.iff	120		Wanted Poster: Han
+object/tangible/painting/painting_han_wanted.iff	120		Decoration: Wanted Poster: Han
 object/tangible/painting/painting_leia_wanted.iff	120		Wanted Poster: Leia
 object/tangible/painting/painting_luke_wanted.iff	120		Wanted Poster: Luke
-item_rare_painting_01_01	275		Rare Painting
+item_rare_painting_01_01	275		Decoration: Rare Painting
+item_bestine_decorative_sword_01_01	120		Decoration: Four Pronged Mace
+item_bestine_decorative_statue_01_01	120		Bestine: Decorative Statue
+item_bestine_planet_star_painting_01_01	120		Bestine: Planet and Star Painting
