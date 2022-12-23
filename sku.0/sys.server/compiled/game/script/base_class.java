@@ -658,8 +658,7 @@ public class base_class
     public static final int TRIG_ON_RATING_FINISHED = 301;
     public static final int TRIG_ON_ABANDON_PLAYER_QUEST = 302;
     public static final int TRIG_ON_GCW_SCORE_CATEGORY_PERCENTILE_CHANGE = 303;
-    public static final int GOT_none = private_GOT_counter = 0x00000000;
-    public static final int GOT_corpse = ++private_GOT_counter;
+
 
     /**
      * @}
@@ -667,6 +666,8 @@ public class base_class
      * @{
      */
     private static int private_GOT_counter = 0;
+    public static final int GOT_none = private_GOT_counter = 0x00000000;
+    public static final int GOT_corpse = ++private_GOT_counter;
     public static final int GOT_group = ++private_GOT_counter;
     public static final int GOT_guild = ++private_GOT_counter;
     public static final int GOT_lair = ++private_GOT_counter;
