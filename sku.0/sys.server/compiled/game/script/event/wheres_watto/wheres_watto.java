@@ -42,7 +42,7 @@ public class wheres_watto extends script.base_script
 
         }
 
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
 
     public int OnInitialize(obj_id self) throws InterruptedException

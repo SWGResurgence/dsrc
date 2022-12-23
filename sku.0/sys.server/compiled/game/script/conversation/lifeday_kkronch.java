@@ -127,7 +127,7 @@ int lifeday_kkronch_handleBranch1 (obj_id player, obj_id npc, string_id response
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -201,7 +201,7 @@ int lifeday_kkronch_handleBranch2 (obj_id player, obj_id npc, string_id response
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------

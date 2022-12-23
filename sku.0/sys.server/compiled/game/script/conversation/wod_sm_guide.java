@@ -1,19 +1,7 @@
 package script.conversation;
 
+import script.library.*;
 import script.*;
-import script.base_class.*;
-import script.combat_engine.*;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Vector;
-import script.base_script;
-
-import script.library.ai_lib;
-import script.library.chat;
-import script.library.content;
-import script.library.conversation;
-import script.library.groundquests;
-import script.library.utils;
 
 public class wod_sm_guide extends script.base_script
 {
@@ -142,7 +130,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -244,7 +232,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -451,7 +439,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -533,7 +521,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -740,7 +728,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -832,7 +820,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1039,7 +1027,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1077,7 +1065,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1115,7 +1103,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1153,7 +1141,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1202,7 +1190,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1294,7 +1282,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1501,7 +1489,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1593,7 +1581,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1800,7 +1788,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1859,7 +1847,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1951,7 +1939,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_sm_guide_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2158,7 +2146,7 @@ public class wod_sm_guide extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
