@@ -25,9 +25,13 @@ public class script_class_loader extends ClassLoader
     // keep a dummy method object around to identify methods that are missing from scripts
     private static final Object NO_OBJECT = new Object();
     /**
-     * Hash Table of Cached Script Class Loader Classes
+     * Contains an immutable collection of script names from the "script"
+     * package (root package) and inner classes of library classes that
+     * should be included during class initialization.
+     *
+     * @since SWG Source 3.1 - August 2021
      */
-    private static final Hashtable<String, script_class_loader> LOADER_CACHE = new Hashtable<>();
+    private static final Set<String> DEFAULT_LOAD = getDefaultLoad();
     /**
      * A class whose name is prefixed with any of the items in this array will
      * be handled through the default load process which uses Java's native
@@ -45,6 +49,26 @@ public class script_class_loader extends ClassLoader
             "jdk.",
             "oracle.",
     };
+    public static Method NO_METHOD = null;
+    /**
+     * Hash Table of Methods for this Class Loader Object with String
+     * Method Name used by SRC mapped to a Java Method Object.
+     */
+    private final Hashtable<String, Method> METHODS = new Hashtable<>();
+    /**
+     * List of Classes which are Derived From this Class Loader or
+     * which are Inner Classes/Enums to the Class of this Class Loader.
+     *
+     * @since SWG Source 3.1 - August 2021
+     */
+    private final ArrayList<String> DERIVED_CLASSES = new ArrayList<>();
+    private String 		myClassName;		// class this loader is responsible for
+    /**
+     * Hash Table of Cached Script Class Loader Classes
+     */
+    private static final Hashtable<String, script_class_loader> LOADER_CACHE = new Hashtable<>();
+    private Class<?>	myClass;			// class this loader has loaded
+    private Object		myObject;			// object instance of our class
     /**
      * Set to true to enable debugging script class loader. See: LOGGER
      */
@@ -57,15 +81,6 @@ public class script_class_loader extends ClassLoader
      * The log writes to swg-main/exe/linux/script_class_loader.log
      */
     private static final Logger LOGGER = DEBUG ? Logger.getLogger(script_class_loader.class.getName()) : null;
-    /**
-     * Contains an immutable collection of script names from the "script"
-     * package (root package) and inner classes of library classes that
-     * should be included during class initialization.
-     *
-     * @since SWG Source 3.1 - August 2021
-     */
-    private static final Set<String> DEFAULT_LOAD = getDefaultLoad();
-    public static Method NO_METHOD = null;
 
     static
     {
@@ -97,22 +112,6 @@ public class script_class_loader extends ClassLoader
         }
 
     }
-
-    /**
-     * Hash Table of Methods for this Class Loader Object with String
-     * Method Name used by SRC mapped to a Java Method Object.
-     */
-    private final Hashtable<String, Method> METHODS = new Hashtable<>();
-    /**
-     * List of Classes which are Derived From this Class Loader or
-     * which are Inner Classes/Enums to the Class of this Class Loader.
-     *
-     * @since SWG Source 3.1 - August 2021
-     */
-    private final ArrayList<String> DERIVED_CLASSES = new ArrayList<>();
-    private String 		myClassName;		// class this loader is responsible for
-    private Class<?>	myClass;			// class this loader has loaded
-    private Object		myObject;			// object instance of our class
 
     /**
      * Class constructor.
@@ -248,116 +247,6 @@ public class script_class_loader extends ClassLoader
             }
         }
         return result;
-    }
-
-    /**
-     * Loads a .class file from a file.
-     *
-     * @param name      name of the class to load
-     *
-     * @return byte array containing the class data
-     */
-    private static byte[] loadClassData(String name)
-    {
-        byte[] data = null;
-        final String pathName = name.replace('.', java.io.File.separatorChar);
-        final String fullName = script_entry.getScriptPath() + pathName + ".class";
-        if(DEBUG)
-        {
-            LOGGER.info("loadClassData is trying to load class "+name+" which was resolved to pathName "+pathName+" and fullName "+fullName);
-        }
-        try
-        {
-            RandomAccessFile file = new RandomAccessFile(fullName, "r");
-            data = new byte[(int)file.length()];
-            file.readFully(data);
-            file.close();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            if(DEBUG)
-            {
-                final String message = String.format("loadClassData reached error when trying to load %s (pathName: %s) (fullName %s) -> %s :: %s",
-                        name, pathName, fullName, e.getMessage(), e.getCause());
-                LOGGER.warning(message);
-            }
-        }
-        return data;
-    }
-
-    /**
-     * @param name the name of the class
-     * @return true if the first most class name matches a native class prefix
-     *
-     * @since SWG Source 3.1 - August 2021
-     * @author Aconite
-     */
-    private static boolean isNativeClass(String name)
-    {
-        return Arrays.stream(NATIVE_CLASS_PREFIXES).anyMatch(name::startsWith);
-    }
-
-    /**
-     * @return An immutable collection of the string names of any class
-     * in the script package and any of their respective inner classes
-     * and any inner classes/enumerations of script.library.*$*
-     * or enumerations formatted for our custom class load process.
-     *
-     * @since SWG Source 3.1 - August 2021
-     * @author Aconite
-     */
-    private static Set<String> getDefaultLoad()
-    {
-        final Set<String> defaultLoad = new HashSet<>();
-        try
-        {
-            JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-            StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
-            JavaFileManager.Location location = StandardLocation.CLASS_PATH;
-            Set<JavaFileObject.Kind> kinds = new HashSet<>();
-            kinds.add(JavaFileObject.Kind.CLASS);
-            Iterable<JavaFileObject> baseList = fileManager.list(location, "script", kinds, false);
-            Iterable<JavaFileObject> libList = fileManager.list(location, "script.library", kinds, false);
-            String script;
-            String value;
-            for (JavaFileObject o : baseList)
-            {
-                script = o.getName();
-                value = script.strip()
-                        .substring(script.indexOf(":")+1)
-                        .substring(script.indexOf("game/")+5)
-                        .replace("/", ".")
-                        .replace(".class", "");
-                if(DEBUG && LOGGER != null)
-                {
-                    LOGGER.info("script_class_loader static initialization is adding base "+value+" to the default load set.");
-                }
-                defaultLoad.add(value);
-            }
-            for (JavaFileObject o : libList)
-            {
-                script = o.getName();
-                if(script.contains("$"))
-                {
-                    value = script.strip()
-                            .substring(script.indexOf(":")+1)
-                            .substring(script.indexOf("game/")+5)
-                            .replace("/", ".")
-                            .replace(".class", "");
-                    if(DEBUG && LOGGER != null)
-                    {
-                        LOGGER.info("script_class_loader static initialization is adding library "+value+" to the default load set.");
-                    }
-                    defaultLoad.add(value);
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return Collections.unmodifiableSet(defaultLoad);
     }
 
     /**
@@ -501,5 +390,115 @@ public class script_class_loader extends ClassLoader
             }
         }
         return myClass;
+    }
+
+    /**
+     * Loads a .class file from a file.
+     *
+     * @param name      name of the class to load
+     *
+     * @return byte array containing the class data
+     */
+    private static byte[] loadClassData(String name)
+    {
+        byte[] data = null;
+        final String pathName = name.replace('.', java.io.File.separatorChar);
+        final String fullName = script_entry.getScriptPath() + pathName + ".class";
+        if(DEBUG)
+        {
+            LOGGER.info("loadClassData is trying to load class "+name+" which was resolved to pathName "+pathName+" and fullName "+fullName);
+        }
+        try
+        {
+            RandomAccessFile file = new RandomAccessFile(fullName, "r");
+            data = new byte[(int)file.length()];
+            file.readFully(data);
+            file.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            if(DEBUG)
+            {
+                final String message = String.format("loadClassData reached error when trying to load %s (pathName: %s) (fullName %s) -> %s :: %s",
+                        name, pathName, fullName, e.getMessage(), e.getCause());
+                LOGGER.warning(message);
+            }
+        }
+        return data;
+    }
+
+    /**
+     * @param name the name of the class
+     * @return true if the first most class name matches a native class prefix
+     *
+     * @since SWG Source 3.1 - August 2021
+     * @author Aconite
+     */
+    private static boolean isNativeClass(String name)
+    {
+        return Arrays.stream(NATIVE_CLASS_PREFIXES).anyMatch(name::startsWith);
+    }
+
+    /**
+     * @return An immutable collection of the string names of any class
+     * in the script package and any of their respective inner classes
+     * and any inner classes/enumerations of script.library.*$*
+     * or enumerations formatted for our custom class load process.
+     *
+     * @since SWG Source 3.1 - August 2021
+     * @author Aconite
+     */
+    private static Set<String> getDefaultLoad()
+    {
+        final Set<String> defaultLoad = new HashSet<>();
+        try
+        {
+            JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+            StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
+            JavaFileManager.Location location = StandardLocation.CLASS_PATH;
+            Set<JavaFileObject.Kind> kinds = new HashSet<>();
+            kinds.add(JavaFileObject.Kind.CLASS);
+            Iterable<JavaFileObject> baseList = fileManager.list(location, "script", kinds, false);
+            Iterable<JavaFileObject> libList = fileManager.list(location, "script.library", kinds, false);
+            String script;
+            String value;
+            for (JavaFileObject o : baseList)
+            {
+                script = o.getName();
+                value = script.strip()
+                        .substring(script.indexOf(":")+1)
+                        .substring(script.indexOf("game/")+5)
+                        .replace("/", ".")
+                        .replace(".class", "");
+                if(DEBUG && LOGGER != null)
+                {
+                    LOGGER.info("script_class_loader static initialization is adding base "+value+" to the default load set.");
+                }
+                defaultLoad.add(value);
+            }
+            for (JavaFileObject o : libList)
+            {
+                script = o.getName();
+                if(script.contains("$"))
+                {
+                    value = script.strip()
+                            .substring(script.indexOf(":")+1)
+                            .substring(script.indexOf("game/")+5)
+                            .replace("/", ".")
+                            .replace(".class", "");
+                    if(DEBUG && LOGGER != null)
+                    {
+                        LOGGER.info("script_class_loader static initialization is adding library "+value+" to the default load set.");
+                    }
+                    defaultLoad.add(value);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return Collections.unmodifiableSet(defaultLoad);
     }
 }
