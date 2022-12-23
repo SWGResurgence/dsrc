@@ -24,7 +24,7 @@ public class book extends script.base_script
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        mi.addRootMenu(menu_info_types.ITEM_USE, unlocalizedString("Read"));
+        mi.addRootMenu(menu_info_types.ITEM_USE, unlocalized("Read"));
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int menu) throws InterruptedException

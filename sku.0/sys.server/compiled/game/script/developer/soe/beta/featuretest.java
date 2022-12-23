@@ -1,7 +1,5 @@
 package script.developer.soe.beta;
 
-import script.library.features;
-import script.library.utils;
 import script.obj_id;
 
 public class featuretest extends script.base_script
@@ -18,13 +16,9 @@ public class featuretest extends script.base_script
     }
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
-        if (text.equals("featuretest"))
+        if (text.equals("haha no more"))
         {
-            sendSystemMessageTestingOnly(self, "getGameFeatures(): " + getGameFeatureBits(self));
-            sendSystemMessageTestingOnly(self, "getSubFeatures(): " + getSubscriptionFeatureBits(self));
-            sendSystemMessageTestingOnly(self, "utils.checkBit( SWG_BASE_GAME ): " + utils.checkBit(getGameFeatureBits(self), SWG_COLLECTORS_GAME));
-            sendSystemMessageTestingOnly(self, "utils.checkBit( SWG_COLLECTORS_GAME ): " + utils.checkBit(getGameFeatureBits(self), SWG_COLLECTORS_GAME));
-            sendSystemMessageTestingOnly(self, "isCollectorEdition" + features.isCollectorEdition(self));
+            broadcast(self, "DEPRECATED");
         }
         return SCRIPT_CONTINUE;
     }

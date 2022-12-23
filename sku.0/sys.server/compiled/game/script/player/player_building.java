@@ -219,11 +219,6 @@ public class player_building extends script.base_script
     }
     public int OnPermissionListModify(obj_id self, obj_id player, String name, String listName, String action) throws InterruptedException
     {
-        if (utils.isFreeTrial(player))
-        {
-            sendSystemMessage(player, SID_TRIAL_NO_MODIFY);
-            return SCRIPT_CONTINUE;
-        }
         LOG("debug", "player_building::OnPermissionListModify");
         obj_id structure = player_structure.getStructure(self);
         if ((structure == null) || (structure == obj_id.NULL_ID))
@@ -1168,10 +1163,6 @@ public class player_building extends script.base_script
     public int paWithdraw(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
-        if (utils.isFreeTrial(self))
-        {
-            return SCRIPT_CONTINUE;
-        }
         if (!player_structure.isGuildHall(structure))
         {
             LOG("LOG_CHANNEL", self + " ->You can only do that in a guild hall.");
@@ -1352,11 +1343,7 @@ public class player_building extends script.base_script
         obj_id structure = player_structure.getStructure(self);
         if (!player_structure.isOwner(structure, self))
         {
-            if (utils.isFreeTrial(self))
-            {
-                sendSystemMessage(self, SID_TRIAL_STRUCTURE);
-                return SCRIPT_CONTINUE;
-            }
+            broadcast(self, "You are adding power to a structure you do not own.");
         }
         if (!isIdValid(structure))
         {
@@ -1491,11 +1478,7 @@ public class player_building extends script.base_script
         obj_id structure = player_structure.getStructure(self);
         if (!player_structure.isOwner(structure, self))
         {
-            if (utils.isFreeTrial(self))
-            {
-                sendSystemMessage(self, SID_TRIAL_STRUCTURE);
-                return SCRIPT_CONTINUE;
-            }
+            broadcast(self, "You are assigning a maintenance droid to a structure you do not own.");
         }
         if (!isIdValid(structure))
         {
@@ -1728,11 +1711,6 @@ public class player_building extends script.base_script
     {
         LOG("LOG_CHANNEL", "player_building::setPermission-- params ->" + params + " target ->" + target);
         obj_id structure = player_structure.getStructure(self);
-        if (utils.isFreeTrial(self))
-        {
-            sendSystemMessage(self, SID_TRIAL_NO_MODIFY);
-            return SCRIPT_CONTINUE;
-        }
         LOG("LOG_CHANNEL", "structure ->" + structure);
         if (!isIdValid(structure))
         {
@@ -2338,11 +2316,7 @@ public class player_building extends script.base_script
         LOG("house", "payMaintenance - structure = " + structure);
         if (!player_structure.isOwner(structure, self))
         {
-            if (utils.isFreeTrial(self))
-            {
-                sendSystemMessage(self, SID_TRIAL_STRUCTURE);
-                return SCRIPT_CONTINUE;
-            }
+            sendSystemMessage(self, new string_id("You are permitted to pay maintenance, but note that you do not own this structure."));
         }
         if (player_structure.isCivic(structure))
         {
@@ -2420,10 +2394,8 @@ public class player_building extends script.base_script
         obj_id structure = player_structure.getStructure(self);
         if (!player_structure.isOwner(structure, self))
         {
-            if (utils.isFreeTrial(self))
-            {
-                return SCRIPT_CONTINUE;
-            }
+            broadcast(self, "You are attempting to set privacy on a structure you do not own.");
+            return SCRIPT_CONTINUE;
         }
         if (!isIdValid(structure))
         {
@@ -2510,11 +2482,6 @@ public class player_building extends script.base_script
     public int declareResidence(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id structure = player_structure.getStructure(self);
-        if (utils.isFreeTrial(self))
-        {
-            sendSystemMessage(self, SID_NO_DECLARE);
-            return SCRIPT_CONTINUE;
-        }
         if (!isIdValid(structure))
         {
             LOG("LOG_CHANNEL", "You must be in a building to do that.");
@@ -2738,11 +2705,6 @@ public class player_building extends script.base_script
         {
             LOG("LOG_CHANNEL", "You cannot transfer ownership with a special sign attached");
             sendSystemMessage(self, player_structure.SID_SPECIAL_SIGN_NO_TRANSFER);
-            return SCRIPT_CONTINUE;
-        }
-        if (utils.isFreeTrial(target))
-        {
-            sendSystemMessage(self, SID_NO_TRANSFER);
             return SCRIPT_CONTINUE;
         }
         if (player_structure.isBanned(structure, target))
@@ -4272,11 +4234,6 @@ public class player_building extends script.base_script
             removeVendorVars(player);
             return SCRIPT_CONTINUE;
         }
-        if (utils.isFreeTrial(player))
-        {
-            removeVendorVars(player);
-            return SCRIPT_CONTINUE;
-        }
         blog("player_building.buildVendor: vendor data initial validation pass");
         obj_id structure = player_structure.getStructure(player);
         obj_id inventory = getObjectInSlot(player, "inventory");
@@ -4293,11 +4250,11 @@ public class player_building extends script.base_script
         obj_id vendor = null;
         if (terminalSuffix.equals("NPC"))
         {
-            String[] genderList = 
-            {
-                "male",
-                "female"
-            };
+            String[] genderList =
+                    {
+                            "male",
+                            "female"
+                    };
             String creatureName = "vendor";
             String templateName;
             int raceIndex = utils.getIntScriptVar(player, "vendor.raceIndex");
@@ -4321,7 +4278,7 @@ public class player_building extends script.base_script
                 }
                 templateName = playerTypes[rand(1, playerTypes.length - 1)] + "_" + genderList[genderIndex] + ".iff";
             }
-            else 
+            else
             {
                 String[] raceTypes = utils.getStringArrayScriptVar(player, "vendor.races");
                 if (raceTypes == null)
@@ -4416,12 +4373,12 @@ public class player_building extends script.base_script
                     dressup.dressNpc(vendor, "random_ithorian", true);
                     setObjVar(vendor, "dressed", 1);
                 }
-                else 
+                else
                 {
                     dressup.dressNpc(vendor, "rich_no_jacket");
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_SYS_CREATE_FAILED);
                 destroyObject(vendor);
@@ -4429,7 +4386,7 @@ public class player_building extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             String vendorTemplate = "object/tangible/vendor/vendor_" + terminalSuffix;
             if (vendorTemplate == null || vendorTemplate.equals(""))
@@ -5406,10 +5363,6 @@ public class player_building extends script.base_script
     }
     public boolean canPlaceCivic(obj_id player, obj_id deed, location position, String template) throws InterruptedException
     {
-        if (utils.isFreeTrial(player))
-        {
-            return false;
-        }
         int city_id = getCityAtLocation(position, 0);
         if (!cityExists(city_id))
         {
@@ -5426,10 +5379,6 @@ public class player_building extends script.base_script
     {
         int city_id = getCityAtLocation(position, 0);
         if (!cityExists(city_id))
-        {
-            return false;
-        }
-        if (utils.isFreeTrial(player))
         {
             return false;
         }
@@ -5533,12 +5482,6 @@ public class player_building extends script.base_script
         if (player_structure.isCivic(self))
         {
             blog("player_building:validateVendorPlacement() - isCivic = true");
-            return false;
-        }
-        if (utils.isFreeTrial(self))
-        {
-            blog("player_building:validateVendorPlacement() - Player is free trial");
-            sendSystemMessage(self, SID_NO_VENDOR);
             return false;
         }
         if (hasObjVar(self, "vendor_not_initialized"))

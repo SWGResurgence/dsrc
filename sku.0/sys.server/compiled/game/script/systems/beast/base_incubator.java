@@ -58,11 +58,6 @@ public class base_incubator extends script.base_script
             sendSystemMessage(player, SID_WHILE_DEAD);
             return SCRIPT_CONTINUE;
         }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, SID_NO_TRIAL_ACCOUNTS);
-            return SCRIPT_CONTINUE;
-        }
         if (incubator.hasActiveUser(station) && incubator.hasActiveIncubator(player))
         {
             incubator.checkIncubatorForMismatch(station, player);
@@ -116,11 +111,6 @@ public class base_incubator extends script.base_script
         if (isDead(player) || isIncapacitated(player))
         {
             sendSystemMessage(player, SID_WHILE_DEAD);
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, SID_NO_TRIAL_ACCOUNTS);
             return SCRIPT_CONTINUE;
         }
         obj_id station = self;

@@ -63,8 +63,8 @@ public class trooper extends script.base_script
         {
             if (rand(1, 10) == 1)
             {
-                int yourGender = getGender(breacher);
-                if (yourGender == GENDER_MALE)
+                Gender yourGender = getGender(breacher);
+                if (yourGender == Gender.MALE)
                 {
                     chat.chat(self, new string_id(CONVO_FILE, "trooper_greeting_m"));
                 }

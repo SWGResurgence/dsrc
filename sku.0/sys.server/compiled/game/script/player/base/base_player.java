@@ -1531,12 +1531,12 @@ public class base_player extends script.base_script
         chatEnterRoom("SWG." + getGalaxyName() + ".system");
         chatEnterRoom("SWG." + getGalaxyName() + "." + getCurrentSceneName() + ".system");
         float curScale = getScale(self);
-        int gender = getGender(self);
+        Gender gender = getGender(self);
         int intSpecies = getSpecies(self);
         String species = utils.getPlayerSpeciesName(intSpecies);
         float min = 1.0f;
         float max = 1.0f;
-        if (gender == GENDER_MALE)
+        if (gender == Gender.MALE)
         {
             min = dataTableGetFloat("datatables/player/racial_scale.iff", species, "MALE_MIN");
             max = dataTableGetFloat("datatables/player/racial_scale.iff", species, "MALE_MAX");
@@ -2244,7 +2244,7 @@ public class base_player extends script.base_script
             }
             String racial_tbl = "datatables/creation/racial_mods.iff";
             int templateRow = 0;
-            if (getGender(self) == GENDER_MALE)
+            if (getGender(self) == Gender.MALE)
             {
                 templateRow = dataTableSearchColumnForString(template, 0, racial_tbl);
             }
@@ -3973,10 +3973,7 @@ public class base_player extends script.base_script
             d.put("targetName", targetName);
             CustomerServiceLog("Trade", "  Tip -- Player: " + self + " " + getName(self) + " Target: " + target + " -- Transferring wire bank money to escrow account! Amt: " + amt);
             transferBankCreditsToNamedAccount(self, money.ACCT_TIP_ESCROW, amt, "handleTipSuccess", "handleTipFail", d);
-            if (utils.isFreeTrial(self, target))
-            {
-                pclib.doTipLogging(self, target, amt);
-            }
+
             CustomerServiceLog("Trade", "  Tip -- Player: " + self + " " + getName(self) + " Target: " + target + " -- Transferring wire bank fee to surcharge account! Amt: " + fee);
             transferBankCreditsToNamedAccount(self, money.ACCT_TIP_SURCHARGE, fee, "noHandler", "noHandler", d);
             utils.moneyOutMetric(self, money.ACCT_TIP_SURCHARGE, fee);
@@ -9072,10 +9069,10 @@ public class base_player extends script.base_script
     public void createStartingEquipment(obj_id objPlayer) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(objPlayer);
-        int gender = getGender(objPlayer);
+        Gender gender = getGender(objPlayer);
         int species = getSpecies(objPlayer);
         int idx = -1;
-        if (gender == GENDER_MALE)
+        if (gender == Gender.MALE)
         {
             if (species == SPECIES_HUMAN || species == SPECIES_ZABRAK || species == SPECIES_BOTHAN || species == SPECIES_MON_CALAMARI || species == SPECIES_RODIAN || species == SPECIES_TWILEK)
             {
@@ -9915,13 +9912,6 @@ public class base_player extends script.base_script
             return SCRIPT_CONTINUE;
         }
         int playerLevel = getLevel(self);
-        if (isFreeTrialAccount(self))
-        {
-            if (playerLevel >= xp.TRIAL_LEVEL_CAP)
-            {
-                return SCRIPT_CONTINUE;
-            }
-        }
         String xp_type = params.getString("xp_type");
         int amt = params.getInt("amt");
         String fromCallback = params.getString("fromCallback");
@@ -10203,39 +10193,27 @@ public class base_player extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        int sub_bits = getGameFeatureBits(self);
-        if (hasObjVar(self, "flash_speeder.eligible"))
+        if (!hasObjVar(self, "flash_speeder.granted"))
         {
-            sub_bits = getIntObjVar(self, "flash_speeder.eligible");
-        }
-        if (features.isSpaceEdition(self) && utils.checkBit(sub_bits, 3) || features.isJPCollectorEdition(self))
-        {
-            if (!hasObjVar(self, "flash_speeder.granted"))
+            obj_id inv = getObjectInSlot(self, "inventory");
+            int free_space = getVolumeFree(inv);
+            if (free_space < 1)
             {
-                obj_id inv = getObjectInSlot(self, "inventory");
-                int free_space = getVolumeFree(inv);
-                if (free_space < 1)
-                {
-                    sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_no_inv_space"));
-                    return SCRIPT_CONTINUE;
-                }
-                if (veteran_deprecated.checkFlashSpeederReward(self))
-                {
-                    sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_granted"));
-                }
-                else
-                {
-                    sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_grant_failed"));
-                }
+                sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_no_inv_space"));
+                return SCRIPT_CONTINUE;
+            }
+            if (veteran_deprecated.checkFlashSpeederReward(self))
+            {
+                sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_granted"));
             }
             else
             {
-                sui.msgbox(self, self, "@" + veteran_deprecated.VETERAN_STRING_TABLE + ":flash_speeder_replace_prompt", sui.YES_NO, "msgFlashSpeederConfirmed");
+                sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_grant_failed"));
             }
         }
         else
         {
-            sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_not_eligible"));
+            sui.msgbox(self, self, "@" + veteran_deprecated.VETERAN_STRING_TABLE + ":flash_speeder_replace_prompt", sui.YES_NO, "msgFlashSpeederConfirmed");
         }
         return SCRIPT_CONTINUE;
     }

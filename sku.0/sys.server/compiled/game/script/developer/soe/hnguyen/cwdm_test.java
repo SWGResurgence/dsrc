@@ -1,22 +1,15 @@
 package script.developer.soe.hnguyen;
 
-import script.*;
-import script.combat_engine.hit_result;
-import script.library.*;
-
-import java.util.Iterator;
-import java.util.Set;
-import java.util.StringTokenizer;
-import java.util.Vector;
-
 public class cwdm_test extends script.base_script
 {
     public cwdm_test()
     {
     }
     public static final String PROP_TEXT = "Text";
+    /*
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
+
         if (objSpeaker != self)
         {
             return SCRIPT_CONTINUE;
@@ -4009,5 +4002,5 @@ public class cwdm_test extends script.base_script
     {
         i[0] = i[0] + 1;
         l[0] = l[0] + 1L;
-    }
+    }*/
 }

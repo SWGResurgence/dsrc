@@ -30,9 +30,9 @@ public class talus_nashal_droid_head extends script.base_script
     }
     public String talus_nashal_droid_head_tokenTO_tokenGenderTitle(obj_id player, obj_id npc) throws InterruptedException
     {
-        int gender = getGender(player);
+        Gender gender = getGender(player);
         String title;
-        if (gender == GENDER_MALE)
+        if (gender == Gender.MALE)
         {
             title = "sir";
         }
