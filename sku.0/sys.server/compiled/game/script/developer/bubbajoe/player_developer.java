@@ -783,7 +783,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin grantItemArea <item> <count>");
+                sendSystemMessageTestingOnly(self, "Syntax: /admin rewardarea <item> <count>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -797,7 +797,7 @@ public class player_developer extends base_script
                     obj_id pItem = static_item.createNewItemFunction(item, pInv, count);
                     if (isIdValid(pItem))
                     {
-                        sendSystemMessageTestingOnly(player, colors_hex.HEADER + colors_hex.ORANGE + "You have been awarded " + count + " " + getStaticItemName(pItem) + " by the Event Team!");
+                        sendSystemMessageTestingOnly(player, colors_hex.HEADER + colors_hex.ORANGE + "You have been awarded " + count + " " + utils.getStringName(pItem) + " by the Event Team!");
                     }
                 }
             }
