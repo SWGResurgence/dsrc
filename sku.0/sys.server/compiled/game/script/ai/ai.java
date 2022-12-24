@@ -2585,14 +2585,22 @@ public class ai extends script.base_script
     {
         if (getTemplateName(item).equals(TOOL))
         {
-            obj_id player = giver;
-            obj_id mobile = self;
-            String string_template = getTemplateName(self);
-            obj_id token = create.createObject(TOOL, utils.getInventoryContainer(player), "");
-            setObjVar(token, "city_hire.mobile", string_template);
-            setObjVar(token, "tokenUsed", 1);
-            attachScript(token, "systems.city.city_hire");
-            setName(token, "City Actor Deed: " + utils.getStringName(mobile));
+            if (!hasObjVar(item, "actorMade"))
+            {
+                obj_id player = giver;
+                obj_id mobile = self;
+                String string_template = getTemplateName(self);
+                obj_id token = create.createObject(TOOL, utils.getInventoryContainer(player), "");
+                setObjVar(token, "city_hire.mobile", string_template);
+                setObjVar(token, "tokenUsed", 1);
+                setObjVar(token, "actorMade", 1);
+                attachScript(token, "systems.city.city_hire");
+                setName(token, "City Actor Deed: " + utils.getStringName(mobile));
+            }
+            else
+            {
+                broadcast(giver, "The data buffer on this extraction unit is at max capacity.");
+            }
             return SCRIPT_OVERRIDE;
         }
         if (!hasCompletedCollectionSlot(giver, "meatlump_recruiter_starter"))
