@@ -5,9 +5,7 @@ import script.*;
 
 public class som_kenobi_serpent_thief extends script.base_script
 {
-    public som_kenobi_serpent_thief()
-    {
-    }
+
     public static String c_stringFile = "conversation/som_kenobi_serpent_thief";
     public boolean som_kenobi_serpent_thief_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

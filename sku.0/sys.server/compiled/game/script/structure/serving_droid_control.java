@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class serving_droid_control extends script.base_script
 {
-    public serving_droid_control()
-    {
-    }
+
     public static final String DROID_ID = "serving_droid.droid";
     public int OnAttach(obj_id self) throws InterruptedException
     {

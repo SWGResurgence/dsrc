@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class ct_guard extends script.base_script
 {
-    public ct_guard()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, 65000);

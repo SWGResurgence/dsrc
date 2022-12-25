@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class interior_buildout extends script.base_script
 {
-    public interior_buildout()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         dictionary dctParams = new dictionary();

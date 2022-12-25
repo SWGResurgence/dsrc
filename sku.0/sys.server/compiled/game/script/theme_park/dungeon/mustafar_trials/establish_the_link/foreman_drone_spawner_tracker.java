@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class foreman_drone_spawner_tracker extends script.base_script
 {
-    public foreman_drone_spawner_tracker()
-    {
-    }
+
     public static final boolean LOGGING = false;
     public int OnDestroy(obj_id self) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.*;
 
 public class naboo_24_gungan_power_grab_02 extends script.base_script
 {
-    public naboo_24_gungan_power_grab_02()
-    {
-    }
+
     public static String c_stringFile = "conversation/naboo_24_gungan_power_grab_02";
     public boolean naboo_24_gungan_power_grab_02_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

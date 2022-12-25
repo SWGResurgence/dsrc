@@ -5,9 +5,7 @@ import script.*;
 
 public class exar_kun_intro_giver extends script.base_script
 {
-    public exar_kun_intro_giver()
-    {
-    }
+
     public static String c_stringFile = "conversation/exar_kun_intro_giver";
     public boolean exar_kun_intro_giver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class destroy_objective extends script.base_script
 {
-    public destroy_objective()
-    {
-    }
+
     public static final String VAR_WARNING_LEVEL = "battlefield.warning_level";
     public static final String VAR_FACTION = "battlefield.faction";
     public static final string_id SID_REPAIR_STRUCTURE = new string_id("battlefield", "repair_structure");

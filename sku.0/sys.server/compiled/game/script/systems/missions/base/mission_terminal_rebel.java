@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class mission_terminal_rebel extends script.base_script
 {
-    public mission_terminal_rebel()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "strFaction", factions.FACTION_REBEL);

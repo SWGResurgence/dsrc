@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_trandoshan_fezrik_bendledon extends script.base_script
 {
-    public ep3_trandoshan_fezrik_bendledon()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_trandoshan_fezrik_bendledon";
     public boolean ep3_trandoshan_fezrik_bendledon_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

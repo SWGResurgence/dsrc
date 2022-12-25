@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class armor_ris extends script.base_script
 {
-    public armor_ris()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

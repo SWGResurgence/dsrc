@@ -9,9 +9,7 @@ import script.string_id;
 
 public class airlock_backup extends script.base_script
 {
-    public airlock_backup()
-    {
-    }
+
     public static final String TBL_BACKUP = "datatables/dungeon/death_watch/airlock_backup.iff";
     public static final String STF_FILE = "dungeon/death_watch";
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException

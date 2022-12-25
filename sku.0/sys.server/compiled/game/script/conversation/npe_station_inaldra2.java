@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_station_inaldra2 extends script.base_script
 {
-    public npe_station_inaldra2()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_station_inaldra2";
     public boolean npe_station_inaldra2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import script.library.planetary_map;
 
 public class museum_event_npc extends script.base_script
 {
-    public museum_event_npc()
-    {
-    }
+
     public static final String FACE_TO_VOLUME_NAME = "faceToTriggerVolume";
 
     public static final String VARNAME_MUSEUM_STATUS = "strMuseumEventStatus";

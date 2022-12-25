@@ -1,21 +1,15 @@
 package script.theme_park.wod;
 
-import script.*;
-import script.base_class.*;
-import script.combat_engine.*;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Vector;
-import script.base_script;
-
 import script.library.groundquests;
 import script.library.utils;
+import script.menu_info;
+import script.menu_info_types;
+import script.obj_id;
+import script.string_id;
 
 public class crafting_altars extends script.base_script
 {
-    public crafting_altars()
-    {
-    }
+
     public static final string_id schematicGranted = new string_id("theme_park/wod", "schematic_learned_altar");
     public static final string_id noAltarItem = new string_id("theme_park/wod", "no_altar_item");
     public static final string_id noRepair = new string_id("theme_park/wod", "no_repair");

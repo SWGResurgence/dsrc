@@ -7,9 +7,7 @@ import script.string_id;
 
 public class goodbye_letter extends script.base_script
 {
-    public goodbye_letter()
-    {
-    }
+
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

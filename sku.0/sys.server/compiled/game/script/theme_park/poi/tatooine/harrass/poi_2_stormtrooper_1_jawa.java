@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class poi_2_stormtrooper_1_jawa extends script.base_script
 {
-    public poi_2_stormtrooper_1_jawa()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location here = new location(getLocation(self));

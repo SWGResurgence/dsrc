@@ -5,9 +5,7 @@ import script.*;
 
 public class som_exploration_marker extends script.base_script
 {
-    public som_exploration_marker()
-    {
-    }
+
     public static String c_stringFile = "conversation/som_exploration_marker";
     public boolean som_exploration_marker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,9 +8,7 @@ import script.*;
 
 public class nym_themepark_smuggler extends script.base_script
 {
-    public nym_themepark_smuggler()
-    {
-    }
+
     public static String c_stringFile = "conversation/nym_themepark_smuggler";
     public boolean nym_themepark_smuggler_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

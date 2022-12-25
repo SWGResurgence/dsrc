@@ -8,9 +8,7 @@ import script.*;
 
 public class rtp_leia_bothan_spynet extends script.base_script
 {
-    public rtp_leia_bothan_spynet()
-    {
-    }
+
     public static String c_stringFile = "conversation/rtp_leia_bothan_spynet";
     public boolean rtp_leia_bothan_spynet_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

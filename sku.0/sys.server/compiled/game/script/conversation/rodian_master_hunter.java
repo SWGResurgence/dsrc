@@ -7,9 +7,7 @@ import script.*;
 
 public class rodian_master_hunter extends script.base_script
 {
-    public rodian_master_hunter()
-    {
-    }
+
     public static String c_stringFile = "conversation/rodian_master_hunter";
     public boolean rodian_master_hunter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import script.string_id;
 
 public class mission_hunting extends script.systems.missions.base.mission_dynamic_base
 {
-    public mission_hunting()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class obiwan_obi_facer extends script.base_script
 {
-    public obiwan_obi_facer()
-    {
-    }
+
     public static final boolean CONST_FLAG_DO_LOGGING = true;
     public int OnArrivedAtLocation(obj_id self, String location) throws InterruptedException
     {

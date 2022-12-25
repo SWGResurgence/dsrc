@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_rroot extends script.base_script
 {
-    public ep3_rroot()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_rroot";
     public boolean ep3_rroot_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

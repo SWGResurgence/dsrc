@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class tcg_vendor extends script.base_script
 {
-    public tcg_vendor()
-    {
-    }
+
     public static String c_stringFile = "conversation/tcg_vendor";
     public boolean tcg_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class poi_predator extends script.base_script
 {
-    public poi_predator()
-    {
-    }
+
     public int killTarget(obj_id self, dictionary params) throws InterruptedException
     {
         debugSpeakMsg(self, "That's it! Now you die!");

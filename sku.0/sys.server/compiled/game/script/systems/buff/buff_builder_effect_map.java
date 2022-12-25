@@ -1,14 +1,12 @@
 package script.systems.buff;
 
-import script.*;
-import script.library.*;
+import script.dictionary;
 
 import java.util.ArrayList;
 
 public class buff_builder_effect_map extends script.base_script {
     public static final String DATATABLE_BUFF_BUILDER_EFFECT_MAP = "datatables/buff/buff_builder_effect_map.iff";
-    public buff_builder_effect_map() {
-    }
+
     public static String[] getEffectList(String affectName) throws InterruptedException {
         ArrayList<String> effectList = new ArrayList<String>();
         int rowIndex = dataTableSearchColumnForString(affectName, "BUFF_BUILDER_AFFECTS", DATATABLE_BUFF_BUILDER_EFFECT_MAP);

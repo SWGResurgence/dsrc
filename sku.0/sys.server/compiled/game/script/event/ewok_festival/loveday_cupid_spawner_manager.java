@@ -9,9 +9,7 @@ import java.time.LocalTime;
 
 public class loveday_cupid_spawner_manager extends script.base_script
 {
-    public loveday_cupid_spawner_manager()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "initializeCupidSpawnerManager", null, 9, false);

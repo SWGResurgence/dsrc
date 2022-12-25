@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class ig88_mouse_droid extends script.base_script
 {
-    public ig88_mouse_droid()
-    {
-    }
+
     public void findNextTarget(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))

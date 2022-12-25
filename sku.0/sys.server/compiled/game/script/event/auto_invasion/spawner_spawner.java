@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class spawner_spawner extends script.base_script
 {
-    public spawner_spawner()
-    {
-    }
+
     public static final int[] LOCS = 
     {
         -4915,6,4093,

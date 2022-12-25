@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class pvp_lieutenant_comm_link_trooper extends script.base_script
 {
-    public pvp_lieutenant_comm_link_trooper()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "despawn", null, 30, false);

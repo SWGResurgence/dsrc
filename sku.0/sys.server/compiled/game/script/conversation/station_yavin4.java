@@ -5,9 +5,7 @@ import script.*;
 
 public class station_yavin4 extends script.base_script
 {
-    public station_yavin4()
-    {
-    }
+
     public static String c_stringFile = "conversation/station_yavin4";
     public boolean station_yavin4_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

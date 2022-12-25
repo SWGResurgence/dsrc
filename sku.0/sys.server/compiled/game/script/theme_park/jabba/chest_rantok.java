@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class chest_rantok extends script.base_script
 {
-    public chest_rantok()
-    {
-    }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         String itemName = getTemplateName(item);

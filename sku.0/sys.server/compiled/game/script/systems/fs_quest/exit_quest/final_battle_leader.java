@@ -8,9 +8,7 @@ import script.library.theater;
 
 public class final_battle_leader extends script.base_script
 {
-    public final_battle_leader()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id spawner = getObjIdObjVar(self, "quest_spawner.spawned_by");

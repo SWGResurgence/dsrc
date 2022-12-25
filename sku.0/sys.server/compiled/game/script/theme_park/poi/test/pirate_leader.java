@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class pirate_leader extends script.theme_park.poi.base
 {
-    public pirate_leader()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String objective = poiGetObjective(self);

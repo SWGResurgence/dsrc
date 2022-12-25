@@ -7,9 +7,7 @@ import script.string_id;
 
 public class npe_notify_objects extends script.base_script
 {
-    public npe_notify_objects()
-    {
-    }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(item))

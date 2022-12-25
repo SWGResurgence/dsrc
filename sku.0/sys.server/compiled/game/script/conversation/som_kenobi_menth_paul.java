@@ -5,9 +5,7 @@ import script.*;
 
 public class som_kenobi_menth_paul extends script.base_script
 {
-    public som_kenobi_menth_paul()
-    {
-    }
+
     public static String c_stringFile = "conversation/som_kenobi_menth_paul";
     public boolean som_kenobi_menth_paul_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

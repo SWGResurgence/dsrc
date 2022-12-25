@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_fast_charge_fuel_cell extends script.systems.crafting.space.booster.crafting_base_booster_component
 {
-    public crafting_fast_charge_fuel_cell()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

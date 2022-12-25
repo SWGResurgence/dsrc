@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class fs_village_npc_spawner extends script.base_script
 {
-    public fs_village_npc_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

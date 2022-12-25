@@ -6,9 +6,7 @@ import script.string_id;
 
 public class combat_supply_drop_crate extends script.base_script
 {
-    public combat_supply_drop_crate()
-    {
-    }
+
     public int OnAboutToLoseItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id owner = utils.getObjIdScriptVar(self, "supply_drop.crateOwner");

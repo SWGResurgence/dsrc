@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_kachirho_varactyl_egg extends script.base_script
 {
-    public ep3_kachirho_varactyl_egg()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_kachirho_varactyl_egg";
     public boolean ep3_kachirho_varactyl_egg_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

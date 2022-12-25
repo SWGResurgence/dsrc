@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class lt_lance extends script.base_script
 {
-    public lt_lance()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Lt. Lance");

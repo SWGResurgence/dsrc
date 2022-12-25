@@ -8,9 +8,7 @@ import script.*;
 
 public class dera_darklighter extends script.base_script
 {
-    public dera_darklighter()
-    {
-    }
+
     public static String c_stringFile = "conversation/dera_darklighter";
     public boolean dera_darklighter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

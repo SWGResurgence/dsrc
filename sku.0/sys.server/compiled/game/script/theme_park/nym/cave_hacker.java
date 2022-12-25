@@ -6,9 +6,7 @@ import script.string_id;
 
 public class cave_hacker extends script.base_script
 {
-    public cave_hacker()
-    {
-    }
+
     public static final String CONVO = "celebrity/lok_hacker";
     public int OnAttach(obj_id self) throws InterruptedException
     {

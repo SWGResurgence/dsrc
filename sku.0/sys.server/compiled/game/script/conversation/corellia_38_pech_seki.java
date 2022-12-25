@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_38_pech_seki extends script.base_script
 {
-    public corellia_38_pech_seki()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_38_pech_seki";
     public boolean corellia_38_pech_seki_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

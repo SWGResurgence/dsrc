@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class flip_banner extends script.base_script
 {
-    public flip_banner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkBannerImpulse", null, 1.0f, false);

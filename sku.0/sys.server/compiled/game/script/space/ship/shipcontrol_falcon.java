@@ -9,9 +9,7 @@ import script.string_id;
 
 public class shipcontrol_falcon extends script.base_script
 {
-    public shipcontrol_falcon()
-    {
-    }
+
     public static final string_id SID_PILOT = new string_id("space/space_interaction", "pilot_ship");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

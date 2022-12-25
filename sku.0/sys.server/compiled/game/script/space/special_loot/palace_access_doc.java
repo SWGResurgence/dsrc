@@ -5,9 +5,7 @@ import script.library.sui;
 
 public class palace_access_doc extends script.base_script
 {
-    public palace_access_doc()
-    {
-    }
+
     public static final string_id SID_READ = new string_id("space/quest", "read");
     public static final string_id SID_SYS_NOT_IN_INV = new string_id("space/quest", "not_in_inv");
     public static final string_id SID_SIGNED = new string_id("space/quest", "signed_palace_access");

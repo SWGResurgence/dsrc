@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class item_component_attribute extends script.base_script
 {
-    public item_component_attribute()
-    {
-    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

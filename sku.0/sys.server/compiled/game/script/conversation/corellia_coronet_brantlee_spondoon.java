@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_coronet_brantlee_spondoon extends script.base_script
 {
-    public corellia_coronet_brantlee_spondoon()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_coronet_brantlee_spondoon";
     public boolean corellia_coronet_brantlee_spondoon_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

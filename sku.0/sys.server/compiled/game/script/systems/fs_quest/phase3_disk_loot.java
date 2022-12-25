@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class phase3_disk_loot extends script.base_script
 {
-    public phase3_disk_loot()
-    {
-    }
+
     public static final String FREQUENCY_DISK = "object/tangible/loot/quest/force_sensitive/camp_frequency_datapad.iff";
     public static final String WAYPOINT_DISK = "object/tangible/loot/quest/force_sensitive/camp_waypoint_datapad.iff";
     public static final int PERCENT_CHANCE_OF_LOOT = 20;

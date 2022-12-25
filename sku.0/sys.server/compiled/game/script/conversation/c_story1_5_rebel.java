@@ -5,9 +5,7 @@ import script.*;
 
 public class c_story1_5_rebel extends script.base_script
 {
-    public c_story1_5_rebel()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_story1_5_rebel";
     public boolean c_story1_5_rebel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

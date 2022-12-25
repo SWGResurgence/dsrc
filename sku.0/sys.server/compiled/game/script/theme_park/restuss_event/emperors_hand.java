@@ -1,15 +1,17 @@
 package script.theme_park.restuss_event;
 
-import script.*;
-import script.library.*;
-
-import java.util.Vector;
+import script.dictionary;
+import script.library.ai_lib;
+import script.library.chat;
+import script.library.prose;
+import script.library.utils;
+import script.obj_id;
+import script.prose_package;
+import script.string_id;
 
 public class emperors_hand extends script.base_script
 {
-    public emperors_hand()
-    {
-    }
+
     public static final String VOLUME_NAME = "aggressive_area";
     public static final string_id FOUND_JEDI = new string_id("restuss_event/object", "jedi_located");
     public int OnAttach(obj_id self) throws InterruptedException

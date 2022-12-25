@@ -5,9 +5,7 @@ import script.library.utils;
 
 public class core_rod_maker extends script.base_script
 {
-    public core_rod_maker()
-    {
-    }
+
     public static final String COREROD_TEMPLATE = "object/tangible/mission/quest_item/warren_core_control_rod_s01.iff";
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public int OnInitialize(obj_id self) throws InterruptedException

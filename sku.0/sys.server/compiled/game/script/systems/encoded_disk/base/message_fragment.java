@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class message_fragment extends script.base_script
 {
-    public message_fragment()
-    {
-    }
+
     public static final string_id SID_SYS_MESSAGE_ASSEMBLED = new string_id("encoded_disk/message_fragment", "sys_message_assembled");
     public static final string_id SID_SYS_NOT_ALL_PARTS = new string_id("encoded_disk/message_fragment", "sys_not_all_parts");
     public static final string_id SID_SYS_NOT_IN_INV = new string_id("encoded_disk/message_fragment", "sys_not_in_inv");

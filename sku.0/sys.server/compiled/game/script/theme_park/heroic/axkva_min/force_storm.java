@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class force_storm extends script.base_script
 {
-    public force_storm()
-    {
-    }
+
     public static final float TARGET_SWITCH = 6.0f;
     public static final float STORM_PULSE = 1.0f;
     public static final float LIFESPAN = 18.0f;

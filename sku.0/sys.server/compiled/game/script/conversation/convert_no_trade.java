@@ -23,11 +23,7 @@ public class convert_no_trade extends script.base_script
 // Script Constants
 // ======================================================================
 
-    public convert_no_trade()
 
-    {
-
-    }
 
 // ======================================================================
 // Script Conditions

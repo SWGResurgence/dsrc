@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_blaster_rifle_barrel_component extends script.systems.crafting.weapon.crafting_base_weapon_component
 {
-    public crafting_blaster_rifle_barrel_component()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class imperial_backup extends script.base_script
 {
-    public imperial_backup()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "goingToFight", null, 1, false);

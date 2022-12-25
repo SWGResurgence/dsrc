@@ -9,9 +9,7 @@ import script.string_id;
 
 public class player_plant_grow extends script.base_script
 {
-    public player_plant_grow()
-    {
-    }
+
     public static final String VAR_CRITICAL_ATTRIBS = "plant_grow.critical_attribs";
     public static final String VAR_WATER_LEVEL = "plant_grow.water_level";
     public static final String VAR_IDEAL_WATER_LEVEL = "plant_grow.water_level_ideal";

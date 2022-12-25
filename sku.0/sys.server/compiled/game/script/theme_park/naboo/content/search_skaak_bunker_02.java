@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class search_skaak_bunker_02 extends script.base_script
 {
-    public search_skaak_bunker_02()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "doGating", null, 19, true);

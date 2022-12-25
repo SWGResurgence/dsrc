@@ -9,9 +9,7 @@ import script.string_id;
 
 public class broken_droid extends script.base_script
 {
-    public broken_droid()
-    {
-    }
+
     public static final String MSGS = "dungeon/corvette";
     public int OnAttach(obj_id self) throws InterruptedException
     {

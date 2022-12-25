@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class fs_reflex1_theater extends script.base_script
 {
-    public fs_reflex1_theater()
-    {
-    }
+
     public int OnTheaterCreated(obj_id self, obj_id[] objects, obj_id player, obj_id creator) throws InterruptedException
     {
         CustomerServiceLog("fs_quests", "DEBUG -- %TU has spawned the theater assigned to him/her.", player);

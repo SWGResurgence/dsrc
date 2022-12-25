@@ -1,22 +1,13 @@
 package script.theme_park.wod;
 
 import script.*;
-import script.base_class.*;
-import script.combat_engine.*;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Vector;
-import script.base_script;
-
-import script.library.groundquests;
-import script.library.create;
 import script.library.ai_lib;
+import script.library.create;
+import script.library.groundquests;
 
 public class first_sister_altar extends script.base_script
 {
-    public first_sister_altar()
-    {
-    }
+
     public static string_id SID_MNU_USE = new string_id("pet/pet_menu", "menu_store");
     public static final string_id TOO_SOON_REUSE = new string_id("spam", "snowball_not_ready");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

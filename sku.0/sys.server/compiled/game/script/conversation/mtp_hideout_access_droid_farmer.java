@@ -8,9 +8,7 @@ import script.*;
 
 public class mtp_hideout_access_droid_farmer extends script.base_script
 {
-    public mtp_hideout_access_droid_farmer()
-    {
-    }
+
     public static String c_stringFile = "conversation/mtp_hideout_access_droid_farmer";
     public boolean mtp_hideout_access_droid_farmer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

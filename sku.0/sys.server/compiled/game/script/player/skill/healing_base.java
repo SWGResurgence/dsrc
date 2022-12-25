@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class healing_base extends script.base_script
 {
-    public healing_base()
-    {
-    }
+
     public static final int CONE = 0;
     public static final int SINGLE_TARGET = 1;
     public static final int AREA = 2;

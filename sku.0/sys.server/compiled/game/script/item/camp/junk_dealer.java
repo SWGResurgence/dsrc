@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class junk_dealer extends script.base_script
 {
-    public junk_dealer()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleSpawnJunkDealer", null, 3.0f, false);

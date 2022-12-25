@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class mission_terminal_bounty extends script.base_script
 {
-    public mission_terminal_bounty()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "intBounty", 1);

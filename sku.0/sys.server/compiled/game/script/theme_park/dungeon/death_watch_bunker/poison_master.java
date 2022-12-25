@@ -6,9 +6,7 @@ import script.string_id;
 
 public class poison_master extends script.base_script
 {
-    public poison_master()
-    {
-    }
+
     public static final String SCRIPT_POISON = "theme_park.dungeon.death_watch_bunker.death_watch_poison_player";
     public static final string_id ALLUM_WARNING = new string_id("dungeon/death_watch", "allum_warning");
     public int OnAttach(obj_id self) throws InterruptedException

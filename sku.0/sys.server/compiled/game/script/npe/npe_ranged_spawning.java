@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class npe_ranged_spawning extends script.base_script
 {
-    public npe_ranged_spawning()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location myLoc = new location();

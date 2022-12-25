@@ -5,9 +5,7 @@ import script.*;
 
 public class station_talus extends script.base_script
 {
-    public station_talus()
-    {
-    }
+
     public static String c_stringFile = "conversation/station_talus";
     public boolean station_talus_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class travel_shuttle extends script.base_script
 {
-    public travel_shuttle()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.ai");

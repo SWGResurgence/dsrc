@@ -6,9 +6,7 @@ import java.util.Vector;
 
 public class space_pilot_command extends script.base_script
 {
-    public space_pilot_command()
-    {
-    }
+
     public static final int DROID_VOCALIZE_REACT_CHANCE = 2;
     public static final int SHIP_DAMAGED_SKILLMOD_PENALTY_TIME = 10;
     public static final String DROID_WELDING_EFFECT_DATATABLE = "datatables/space_command/droid_welding_effects_table.iff";

@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_imp_cmd_richards extends script.base_script
 {
-    public ep3_imp_cmd_richards()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_imp_cmd_richards";
     public boolean ep3_imp_cmd_richards_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

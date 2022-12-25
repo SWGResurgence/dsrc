@@ -8,9 +8,7 @@ import script.*;
 
 public class naboo_theed_sgt_bragg extends script.base_script
 {
-    public naboo_theed_sgt_bragg()
-    {
-    }
+
     public static String c_stringFile = "conversation/naboo_theed_sgt_bragg";
     public boolean naboo_theed_sgt_bragg_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

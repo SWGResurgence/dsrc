@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_belga_daeri extends script.base_script
 {
-    public ep3_belga_daeri()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_belga_daeri";
     public boolean ep3_belga_daeri_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

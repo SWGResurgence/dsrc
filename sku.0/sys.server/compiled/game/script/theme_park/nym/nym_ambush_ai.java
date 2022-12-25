@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class nym_ambush_ai extends script.base_script
 {
-    public nym_ambush_ai()
-    {
-    }
+
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_trigger";
     public static final String FAIL_SIGNAL = "fail_signal";

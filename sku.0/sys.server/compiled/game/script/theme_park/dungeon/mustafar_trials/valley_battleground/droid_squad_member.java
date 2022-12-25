@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class droid_squad_member extends script.base_script
 {
-    public droid_squad_member()
-    {
-    }
+
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

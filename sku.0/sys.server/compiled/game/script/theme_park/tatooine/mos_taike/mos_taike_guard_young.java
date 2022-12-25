@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class mos_taike_guard_young extends script.base_script
 {
-    public mos_taike_guard_young()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/armor/padded/armor_padded_s01_chest_plate.iff", self, "");

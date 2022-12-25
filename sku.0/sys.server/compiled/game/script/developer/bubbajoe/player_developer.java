@@ -14,10 +14,7 @@ import java.util.ArrayList;
 @SuppressWarnings({"unused", "javadoc", "deprecated", "SpellCheckingInspection"})
 public class player_developer extends base_script
 {
-    public player_developer()
-    {
 
-    }
     public String APIKEY = "https://discord.com/api/webhooks/1054125244060799076/YUI-Gwy8iJTHzBJkPkFBp7kjH27uGNFlO6z6-LFx39kAel5PlQ_xk_sFqxzdf5igiapD";
     public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {

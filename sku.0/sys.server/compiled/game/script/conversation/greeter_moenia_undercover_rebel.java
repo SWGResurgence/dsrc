@@ -5,9 +5,7 @@ import script.*;
 
 public class greeter_moenia_undercover_rebel extends script.base_script
 {
-    public greeter_moenia_undercover_rebel()
-    {
-    }
+
     public static String c_stringFile = "conversation/greeter_moenia_undercover_rebel";
     public boolean greeter_moenia_undercover_rebel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

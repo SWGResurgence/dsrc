@@ -8,9 +8,7 @@ import script.*;
 
 public class tatooine_knives_parry_kcur extends script.base_script
 {
-    public tatooine_knives_parry_kcur()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_knives_parry_kcur";
     public boolean tatooine_knives_parry_kcur_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

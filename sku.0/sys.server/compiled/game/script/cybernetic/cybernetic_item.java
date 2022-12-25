@@ -7,9 +7,7 @@ import script.string_id;
 
 public class cybernetic_item extends script.base_script
 {
-    public cybernetic_item()
-    {
-    }
+
     public static final string_id SID_ERROR = new string_id("ep3/cybernetic", "cannot_equip");
     public static final string_id SID_REQUIRE_EP3 = new string_id("ep3/cybernetic", "ep3_required");
     public int OnAttach(obj_id self) throws InterruptedException

@@ -6,9 +6,7 @@ import script.string_id;
 
 public class minefield_util extends script.base_script
 {
-    public minefield_util()
-    {
-    }
+
     public static final float WARNING_BUFFER = 16.0f;
     public static final float MINE_ACTION_RADIUS = 1.4f;
     public static final float TIME_DELAY = 8.0f;

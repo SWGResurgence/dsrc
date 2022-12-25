@@ -8,9 +8,7 @@ import script.*;
 
 public class wod_rescue_initiate extends script.base_script
 {
-    public wod_rescue_initiate()
-    {
-    }
+
     public static String c_stringFile = "conversation/wod_rescue_initiate";
     public boolean wod_rescue_initiate_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

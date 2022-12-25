@@ -5,9 +5,7 @@ import script.*;
 
 public class greeter_mos_espa_young_pilot extends script.base_script
 {
-    public greeter_mos_espa_young_pilot()
-    {
-    }
+
     public static String c_stringFile = "conversation/greeter_mos_espa_young_pilot";
     public boolean greeter_mos_espa_young_pilot_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

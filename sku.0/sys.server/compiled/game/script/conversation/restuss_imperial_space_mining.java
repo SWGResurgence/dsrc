@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class restuss_imperial_space_mining extends script.base_script
 {
-    public restuss_imperial_space_mining()
-    {
-    }
+
     public static String c_stringFile = "conversation/restuss_imperial_space_mining";
     public boolean restuss_imperial_space_mining_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

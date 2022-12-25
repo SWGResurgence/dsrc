@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_39_shobbo_durron extends script.base_script
 {
-    public corellia_39_shobbo_durron()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_39_shobbo_durron";
     public boolean corellia_39_shobbo_durron_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

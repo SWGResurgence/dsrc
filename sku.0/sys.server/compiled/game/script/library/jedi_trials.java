@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class jedi_trials extends script.base_script
 {
-    public jedi_trials()
-    {
-    }
+
     public static final String PADAWAN_TRIALS_DATATABLE = "datatables/jedi_trials/padawan_trials.iff";
     public static final String KNIGHT_TRIALS_DATATABLE = "datatables/jedi_trials/knight_trials.iff";
     public static final String FORCE_SHRINES_DATATABLE = "datatables/jedi_trials/force_shrine_loc.iff";

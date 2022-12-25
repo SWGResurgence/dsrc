@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class mining_salvage_hulk extends script.base_script
 {
-    public mining_salvage_hulk()
-    {
-    }
+
     public static final int MAX_RESOURCE = 1000000;
     public int OnAttach(obj_id self) throws InterruptedException
     {

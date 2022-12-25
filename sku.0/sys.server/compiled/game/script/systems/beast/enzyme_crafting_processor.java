@@ -8,9 +8,7 @@ import script.*;
 
 public class enzyme_crafting_processor extends script.systems.beast.enzyme_crafting_base
 {
-    public enzyme_crafting_processor()
-    {
-    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isInValidOperatingLocation())

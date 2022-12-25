@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class skillmod_click_item extends script.base_script
 {
-    public skillmod_click_item()
-    {
-    }
+
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "skillmod";
     public static final string_id SID_NOT_YET = new string_id("base_player", "not_yet");

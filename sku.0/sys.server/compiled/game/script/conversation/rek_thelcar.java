@@ -5,9 +5,7 @@ import script.*;
 
 public class rek_thelcar extends script.base_script
 {
-    public rek_thelcar()
-    {
-    }
+
     public static String c_stringFile = "conversation/rek_thelcar";
     public boolean rek_thelcar_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

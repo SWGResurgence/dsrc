@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class master_object extends script.base_script {
 
-    public master_object()
-    {
-    }
+
 
     public static final String OBJVAR_LEADERBOARD_UPDATE_TIME = "leaderboards_last_updated";
     public static final String OBJVAR_CONTROLLER_SETUP_TIME = "master_fishing_object_created";

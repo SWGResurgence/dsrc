@@ -8,9 +8,7 @@ import script.*;
 
 public class ree_yees extends script.base_script
 {
-    public ree_yees()
-    {
-    }
+
     public static String c_stringFile = "conversation/ree_yees";
     public boolean ree_yees_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

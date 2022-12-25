@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class shield_ring extends script.base_script
 {
-    public shield_ring()
-    {
-    }
+
     private static final String[] HELP_TEXT =
     {
         "=========================================",

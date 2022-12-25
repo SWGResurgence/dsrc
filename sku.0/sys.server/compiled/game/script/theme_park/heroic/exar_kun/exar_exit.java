@@ -8,9 +8,7 @@ import script.string_id;
 
 public class exar_exit extends script.base_script
 {
-    public exar_exit()
-    {
-    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (getDistance(player, self) > 6.0f)

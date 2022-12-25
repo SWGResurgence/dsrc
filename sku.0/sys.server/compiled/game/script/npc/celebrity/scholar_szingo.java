@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class scholar_szingo extends script.base_script
 {
-    public scholar_szingo()
-    {
-    }
+
     public static final String CONVO = "celebrity/scholar_szingo";
     public int OnAttach(obj_id self) throws InterruptedException
     {

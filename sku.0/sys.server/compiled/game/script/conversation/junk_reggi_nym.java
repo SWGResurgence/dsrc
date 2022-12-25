@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class junk_reggi_nym extends script.base_script
 {
-    public junk_reggi_nym()
-    {
-    }
+
     public static String c_stringFile = "conversation/junk_reggi_nym";
     public boolean junk_reggi_nym_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

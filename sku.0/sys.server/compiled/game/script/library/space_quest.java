@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class space_quest extends script.base_script
 {
-    public space_quest()
-    {
-    }
+
     public static final String QUEST_OBJECT_TEMPLATE = "object/mission/base_mission_object.iff";
     public static final String QUEST_MANAGER = "questManager";
     public static final String QUEST_TYPE = "questType";

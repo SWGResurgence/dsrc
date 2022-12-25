@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class camp_sm extends script.poi.template.scene.camp.jawa.base
 {
-    public camp_sm()
-    {
-    }
+    
     public static final int COL_MAX = 1;
     public int handleTheaterSetup(obj_id self, dictionary params) throws InterruptedException
     {

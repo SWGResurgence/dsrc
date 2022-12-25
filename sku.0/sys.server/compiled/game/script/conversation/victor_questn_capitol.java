@@ -8,9 +8,7 @@ import script.*;
 
 public class victor_questn_capitol extends script.base_script
 {
-    public victor_questn_capitol()
-    {
-    }
+
     public static String c_stringFile = "conversation/victor_questn_capitol";
     public boolean victor_questn_capitol_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

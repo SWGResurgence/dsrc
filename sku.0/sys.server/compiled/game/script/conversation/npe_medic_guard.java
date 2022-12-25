@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_medic_guard extends script.base_script
 {
-    public npe_medic_guard()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_medic_guard";
     public boolean npe_medic_guard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

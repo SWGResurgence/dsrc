@@ -8,9 +8,7 @@ public class corellia_npc_easy extends base_newbie_npc_spawner
     public int maxSpawn = 4;
     public boolean newbie = true;
 
-    public corellia_npc_easy()
-    {
-    }
+
     public String pickCreature() throws InterruptedException
     {
         switch (rand(1, 5))

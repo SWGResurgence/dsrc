@@ -10,9 +10,7 @@ import static script.library.ai_lib.setMood;
 
 public class city_actor extends script.base_script
 {
-    public city_actor()
-    {
-    }
+
     public int OnAttach(obj_id self)
     {
         setInvulnerable(self, true);
@@ -216,22 +214,18 @@ public class city_actor extends script.base_script
         String ai_template = sui.getInputBoxText(params);
         switch (ai_template)
         {
-            case "loiter" -> {
+            case "loiter":
                 ai_lib.loiterLocation(self, getLocation(self), 1.0f, 20.0f, 1.0f, 2.0f);
                 return SCRIPT_CONTINUE;
-            }
-            case "wander" -> {
+            case "wander":
                 ai_lib.wander(self);
                 return SCRIPT_CONTINUE;
-            }
-            case "none" -> {
+            case "none":
                 ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
                 return SCRIPT_CONTINUE;
-            }
-            default -> {
+            default:
                 broadcast(player, "Invalid AI Template. Valid settings: [wander | loiter | none]");
                 return SCRIPT_CONTINUE;
-            }
         }
     }
     public int handleSetAnimation(obj_id self, dictionary params) throws InterruptedException

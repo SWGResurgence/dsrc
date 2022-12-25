@@ -9,9 +9,7 @@ import script.string_id;
 
 public class storage_wave_02 extends script.base_script
 {
-    public storage_wave_02()
-    {
-    }
+
     public static final String TBL_STORAGE_WAVE = "datatables/dungeon/death_watch/storage_wave.iff";
     public static final string_id CALL_BACK_UP = new string_id("dungeon/death_watch", "call_back_up");
     public int OnAttach(obj_id self) throws InterruptedException

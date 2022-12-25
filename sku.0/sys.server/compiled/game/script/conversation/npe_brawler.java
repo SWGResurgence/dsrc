@@ -5,9 +5,7 @@ import script.*;
 
 public class npe_brawler extends script.base_script
 {
-    public npe_brawler()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_brawler";
     public boolean npe_brawler_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

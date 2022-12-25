@@ -7,9 +7,7 @@ import script.resource_weight;
 
 public class crafting_spice extends script.systems.crafting.crafting_base
 {
-    public crafting_spice()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

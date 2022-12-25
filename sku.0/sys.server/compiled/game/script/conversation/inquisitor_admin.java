@@ -8,9 +8,7 @@ import script.*;
 
 public class inquisitor_admin extends script.base_script
 {
-    public inquisitor_admin()
-    {
-    }
+
     public static String c_stringFile = "conversation/inquisitor_admin";
     public boolean inquisitor_admin_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

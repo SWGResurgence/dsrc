@@ -7,9 +7,7 @@ import script.*;
 
 public class som_battlefield_miner_leader extends script.base_script
 {
-    public som_battlefield_miner_leader()
-    {
-    }
+
     public static String c_stringFile = "conversation/som_battlefield_miner_leader";
     public boolean som_battlefield_miner_leader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

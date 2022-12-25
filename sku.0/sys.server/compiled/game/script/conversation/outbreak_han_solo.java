@@ -5,9 +5,7 @@ import script.library.*;
 
 public class outbreak_han_solo extends script.base_script
 {
-    public outbreak_han_solo()
-    {
-    }
+
     public static String c_stringFile = "conversation/outbreak_han_solo";
     public boolean outbreak_han_solo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

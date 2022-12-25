@@ -5,9 +5,7 @@ import script.library.*;
 
 public class crash_site_requisition extends script.base_script
 {
-    public crash_site_requisition()
-    {
-    }
+
     public static final String EMPIREDAY = "event/empire_day";
     public static final String LIFEDAY = "event/life_day";
     public static final string_id SID_WRONG_FACTION = new string_id(EMPIREDAY, "wrong_faction");

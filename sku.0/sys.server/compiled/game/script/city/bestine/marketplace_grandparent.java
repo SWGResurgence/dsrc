@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class marketplace_grandparent extends script.base_script
 {
-    public marketplace_grandparent()
-    {
-    }
+
     public static final String MASTER_OBJECT = "object/tangible/poi/tatooine/bestine/bestine_marketplace_spawner_object.iff";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

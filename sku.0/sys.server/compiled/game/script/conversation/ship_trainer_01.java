@@ -7,9 +7,7 @@ import script.*;
 
 public class ship_trainer_01 extends script.base_script
 {
-    public ship_trainer_01()
-    {
-    }
+
     public static String c_stringFile = "conversation/ship_trainer_01";
     public boolean ship_trainer_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

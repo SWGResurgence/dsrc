@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class spawn_on_creature extends script.base_script
 {
-    public spawn_on_creature()
-    {
-    }
+
     public static final int maxRetries = 5;
     public static final String retryCountName = "retryCount";
     public int OnAttach(obj_id self) throws InterruptedException

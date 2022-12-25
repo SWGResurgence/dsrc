@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class obiwan_quest_monitor extends script.base_script
 {
-    public obiwan_quest_monitor()
-    {
-    }
+
     public static final String TRIGGER_QUEST = "som_prelude_obiwan_check";
     public static final boolean CONST_FLAG_DO_LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException

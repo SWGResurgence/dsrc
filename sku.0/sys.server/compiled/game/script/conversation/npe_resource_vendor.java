@@ -5,9 +5,7 @@ import script.library.*;
 
 public class npe_resource_vendor extends script.base_script
 {
-    public npe_resource_vendor()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_resource_vendor";
     public boolean npe_resource_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

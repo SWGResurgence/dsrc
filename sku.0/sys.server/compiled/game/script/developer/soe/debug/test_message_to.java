@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class test_message_to extends script.base_script
 {
-    public test_message_to()
-    {
-    }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (!isGod(self))

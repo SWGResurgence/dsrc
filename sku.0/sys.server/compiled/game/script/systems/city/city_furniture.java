@@ -28,9 +28,7 @@ public class city_furniture extends script.base_script
     public static final string_id NO_SKILL_DECO = new string_id("You do not have the skill to place this decoration.");
     public static final String CITY_DECORATIONS = "datatables/city/decorations.iff";
     public static final string_id SID_CIVIC_ONLY = new string_id("city/city", "civic_only");
-    public city_furniture()
-    {
-    }
+
 
     public int OnInitialize(obj_id self) throws InterruptedException
     {

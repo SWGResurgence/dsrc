@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class gcw_poi_guard_spawning extends script.base_script
 {
-    public gcw_poi_guard_spawning()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnSentry", null, 10, false);

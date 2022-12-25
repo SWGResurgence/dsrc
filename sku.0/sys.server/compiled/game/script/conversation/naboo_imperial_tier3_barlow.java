@@ -8,9 +8,7 @@ import script.*;
 
 public class naboo_imperial_tier3_barlow extends script.base_script
 {
-    public naboo_imperial_tier3_barlow()
-    {
-    }
+
     public static String c_stringFile = "conversation/naboo_imperial_tier3_barlow";
     public boolean naboo_imperial_tier3_barlow_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

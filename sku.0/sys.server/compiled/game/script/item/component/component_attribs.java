@@ -8,9 +8,7 @@ import script.obj_var_list;
 
 public class component_attribs extends script.base_script
 {
-    public component_attribs()
-    {
-    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (names == null || attribs == null || names.length != attribs.length)

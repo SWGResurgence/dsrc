@@ -11,9 +11,7 @@ import script.string_id;
 
 public class image_designer_response extends script.base_script
 {
-    public image_designer_response()
-    {
-    }
+
     public static final String DATATABLE_CUSTOMIZATION = "datatables/customization/customization_skill_mods.iff";
     public static final String DATATABLE_HAIR_STYLE_MODS = "datatables/customization/hair_assets_skill_mods.iff";
     public static final String SCRIPT_IMAGE_DESIGNER_RESPONSE = "systems.image_designer.image_designer_response";

@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class retrieve_item_on_item_inventory extends script.base_script
 {
-    public retrieve_item_on_item_inventory()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "getQuestPlayerName", null, 1, false);

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class city_raid_grandparent extends script.base_script
 {
-    public city_raid_grandparent()
-    {
-    }
+
     public static final String MASTER_OBJECT_TEMPLATE = "object/tangible/poi/tatooine/bestine/bestine_city_raid_spawner_object.iff";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

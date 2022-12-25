@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class interior_spawner extends script.base_script
 {
-    public interior_spawner()
-    {
-    }
+
     public static final String TABLE_BEGIN = "datatables/spawning/poi_spawner/";
     public static final String TYPE = "TYPE";
     public static final String POP = "POP";

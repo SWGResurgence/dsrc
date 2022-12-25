@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class hidden_content_spawning extends script.base_script
 {
-    public hidden_content_spawning()
-    {
-    }
+
     public static final int RADIUS = 1000;
     public int OnAttach(obj_id self) throws InterruptedException
     {

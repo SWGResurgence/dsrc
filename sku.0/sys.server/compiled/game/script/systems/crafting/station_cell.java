@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class station_cell extends script.base_script
 {
-    public station_cell()
-    {
-    }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (getGameObjectType(item) == GOT_misc_crafting_station)

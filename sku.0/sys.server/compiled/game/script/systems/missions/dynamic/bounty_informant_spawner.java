@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class bounty_informant_spawner extends script.systems.missions.base.mission_dynamic_base
 {
-    public bounty_informant_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

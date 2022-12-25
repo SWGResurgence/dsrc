@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_tie_in_chassis extends script.systems.crafting.space.chassis.crafting_base_tie_in_chassis
 {
-    public crafting_tie_in_chassis()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

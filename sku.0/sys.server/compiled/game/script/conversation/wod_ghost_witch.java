@@ -8,9 +8,7 @@ import script.*;
 
 public class wod_ghost_witch extends script.base_script
 {
-    public wod_ghost_witch()
-    {
-    }
+
     public static String c_stringFile = "conversation/wod_ghost_witch";
     public boolean wod_ghost_witch_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

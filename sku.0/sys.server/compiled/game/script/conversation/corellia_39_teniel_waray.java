@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_39_teniel_waray extends script.base_script
 {
-    public corellia_39_teniel_waray()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_39_teniel_waray";
     public boolean corellia_39_teniel_waray_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,9 +8,7 @@ import script.*;
 
 public class station_corellia_mining extends script.base_script
 {
-    public station_corellia_mining()
-    {
-    }
+
     public static String c_stringFile = "conversation/station_corellia_mining";
     public boolean station_corellia_mining_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

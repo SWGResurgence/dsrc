@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class exar_vengence extends script.base_script
 {
-    public exar_vengence()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, 545020);

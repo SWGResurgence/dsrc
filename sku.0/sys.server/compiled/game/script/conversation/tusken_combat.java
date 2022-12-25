@@ -7,9 +7,7 @@ import script.*;
 
 public class tusken_combat extends script.base_script
 {
-    public tusken_combat()
-    {
-    }
+
     public static String c_stringFile = "conversation/tusken_combat";
     public boolean tusken_combat_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

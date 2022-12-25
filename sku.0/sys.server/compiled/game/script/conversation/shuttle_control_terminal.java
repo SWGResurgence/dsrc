@@ -5,9 +5,7 @@ import script.library.*;
 
 public class shuttle_control_terminal extends script.base_script
 {
-    public shuttle_control_terminal()
-    {
-    }
+
     public static String c_stringFile = "conversation/shuttle_control_terminal";
     public boolean shuttle_control_terminal_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

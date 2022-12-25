@@ -10,9 +10,7 @@ import script.obj_id;
 
 public class spawner_random extends script.base_script
 {
-    public spawner_random()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("holidaySpawner", "spawner_random.OnAttach: Initialized for: " + self);

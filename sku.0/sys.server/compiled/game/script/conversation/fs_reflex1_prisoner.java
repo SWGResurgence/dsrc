@@ -8,9 +8,7 @@ import script.library.quests;
 
 public class fs_reflex1_prisoner extends script.base_script
 {
-    public fs_reflex1_prisoner()
-    {
-    }
+
     public static String c_stringFile = "conversation/fs_reflex1_prisoner";
     public boolean fs_reflex1_prisoner_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

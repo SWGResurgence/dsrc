@@ -7,9 +7,7 @@ import script.string_id;
 
 public class space_dungeon_data extends script.base_script
 {
-    public space_dungeon_data()
-    {
-    }
+
     public static final String TEMPLATE_TICKET = "object/tangible/travel/travel_ticket/dungeon_ticket.iff";
     public static final String DUNGEON_DATATABLE = "datatables/dungeon/space_dungeon.iff";
     public static final String TRAVEL_DUNGEON = "item.travel_ticket.travel_space_dungeon";

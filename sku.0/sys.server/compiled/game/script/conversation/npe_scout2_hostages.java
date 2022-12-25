@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_scout2_hostages extends script.base_script
 {
-    public npe_scout2_hostages()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_scout2_hostages";
     public boolean npe_scout2_hostages_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

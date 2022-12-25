@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class fort_tusken extends script.base_script
 {
-    public fort_tusken()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);

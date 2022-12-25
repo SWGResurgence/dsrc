@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class imperial_space_gcw_vendor extends script.base_script
 {
-    public imperial_space_gcw_vendor()
-    {
-    }
+
     public static String c_stringFile = "conversation/imperial_gcw2_vendor";
     private boolean defaultCondition() throws InterruptedException
     {

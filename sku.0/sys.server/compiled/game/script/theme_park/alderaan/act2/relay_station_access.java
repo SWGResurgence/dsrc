@@ -5,9 +5,7 @@ import script.string_id;
 
 public class relay_station_access extends script.base_script
 {
-    public relay_station_access()
-    {
-    }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))

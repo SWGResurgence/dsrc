@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class house_pet extends script.base_script
 {
-    public house_pet()
-    {
-    }
+
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "massiff_pet";
     public static final String SARLACC_LOOT_TABLE = "datatables/loot/sarlacc_cts_housepet_loot.iff";

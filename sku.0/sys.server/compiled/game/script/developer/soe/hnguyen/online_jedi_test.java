@@ -8,9 +8,7 @@ import java.util.StringTokenizer;
 
 public class online_jedi_test extends script.base_script
 {
-    public online_jedi_test()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

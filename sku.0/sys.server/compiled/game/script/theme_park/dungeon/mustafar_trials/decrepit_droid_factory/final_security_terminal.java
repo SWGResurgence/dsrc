@@ -9,9 +9,7 @@ import script.string_id;
 
 public class final_security_terminal extends script.base_script
 {
-    public final_security_terminal()
-    {
-    }
+
     public static final String DECREPIT_STF = "mustafar/decrepit_droid_factory";
     public static final string_id SID_SECURITY_LOCK_ACTIVE = new string_id(DECREPIT_STF, "guardian_lock_on");
     public static final string_id SID_DISABLE_LOCK = new string_id(DECREPIT_STF, "disable_guardian_lock");

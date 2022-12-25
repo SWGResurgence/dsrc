@@ -8,9 +8,7 @@ import script.string_id;
 
 public class u13_ponda_baba extends script.base_script
 {
-    public u13_ponda_baba()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         chat.setChatMood(self, chat.MOOD_PETULANT);

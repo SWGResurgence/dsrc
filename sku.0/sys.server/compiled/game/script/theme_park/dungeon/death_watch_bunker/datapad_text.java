@@ -5,9 +5,7 @@ import script.*;
 
 public class datapad_text extends script.base_script
 {
-    public datapad_text()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Data Storage Unit");

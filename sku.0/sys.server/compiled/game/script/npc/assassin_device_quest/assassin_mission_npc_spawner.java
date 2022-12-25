@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class assassin_mission_npc_spawner extends script.base_script
 {
-    public assassin_mission_npc_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String strConfigSetting = getConfigSetting("GameServer", "assassinMissionsEnabled");

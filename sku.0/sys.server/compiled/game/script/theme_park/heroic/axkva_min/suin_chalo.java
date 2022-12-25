@@ -6,9 +6,7 @@ import script.string_id;
 
 public class suin_chalo extends script.base_script
 {
-    public suin_chalo()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_AXKVA_SUIN);

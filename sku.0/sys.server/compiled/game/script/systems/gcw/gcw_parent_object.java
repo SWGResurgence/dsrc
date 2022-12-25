@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class gcw_parent_object extends script.base_script
 {
-    public gcw_parent_object()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "GCW Parent Object! DO NOT DELETE");

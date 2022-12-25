@@ -13,9 +13,7 @@ import script.library.utils;
 
 public class random_wod_token extends script.base_script
 {
-    public random_wod_token()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "createRandomObject", null, 1, false);

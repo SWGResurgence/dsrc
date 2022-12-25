@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class hideout_angry_meatlump_spawner extends script.base_script
 {
-    public hideout_angry_meatlump_spawner()
-    {
-    }
+
     public static final String ELIGIBLE_OBJVAR = "angryMeatlumpsEligible";
     public static final String ANGRY_MEATLUMPS_LIST_SCRIPTVAR = "angryMeatlumpsList";
     public static final String HIDEOUT_ID_OBJVAR = "angryMeatlump.hideout";

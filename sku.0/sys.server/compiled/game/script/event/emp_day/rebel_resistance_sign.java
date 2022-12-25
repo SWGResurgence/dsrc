@@ -5,9 +5,7 @@ import script.library.*;
 
 public class rebel_resistance_sign extends script.base_script
 {
-    public rebel_resistance_sign()
-    {
-    }
+
     public static final String EMPIREDAY = "event/empire_day";
     public static final String LIFEDAY = "event/life_day";
     public static final string_id SID_COLLECTION_NOT_FLAGGED = new string_id(EMPIREDAY, "imp_collection_not_flagged");

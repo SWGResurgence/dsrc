@@ -5,9 +5,7 @@ import script.*;
 
 public class tusken_invasion_instance extends script.base_script
 {
-    public tusken_invasion_instance()
-    {
-    }
+
     public static String c_stringFile = "conversation/tusken_invasion_instance";
     public boolean tusken_invasion_instance_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -11,9 +11,7 @@ import script.string_id;
 
 public class player_money extends script.base_script
 {
-    public player_money()
-    {
-    }
+
     public int handlePayDeposit(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))

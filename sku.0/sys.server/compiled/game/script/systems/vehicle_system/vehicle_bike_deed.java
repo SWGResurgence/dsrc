@@ -11,9 +11,7 @@ import script.string_id;
 
 public class vehicle_bike_deed extends script.base_script
 {
-    public vehicle_bike_deed()
-    {
-    }
+
     public static final String MENU_FILE = "pet/pet_menu";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

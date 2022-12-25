@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_basic_analysis_tool extends script.systems.crafting.space.reverse_engineering.crafting_base_analysis_tool
 {
-    public crafting_basic_analysis_tool()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

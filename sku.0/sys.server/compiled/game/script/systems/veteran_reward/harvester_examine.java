@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class harvester_examine extends script.base_script
 {
-    public harvester_examine()
-    {
-    }
+
     public int OnGetAttributes(obj_id self, obj_id playerId, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = getFirstFreeIndex(names);

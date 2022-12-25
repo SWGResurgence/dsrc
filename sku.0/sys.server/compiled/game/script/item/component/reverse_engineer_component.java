@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class reverse_engineer_component extends script.base_script
 {
-    public reverse_engineer_component()
-    {
-    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (names == null || attribs == null || names.length != attribs.length)

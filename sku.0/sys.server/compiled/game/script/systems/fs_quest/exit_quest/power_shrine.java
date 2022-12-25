@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class power_shrine extends script.base_script
 {
-    public power_shrine()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "msgFSBattleHealPulse", null, 5.0f, false);

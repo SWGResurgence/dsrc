@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class krayt_graveyard extends script.base_script
 {
-    public krayt_graveyard()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         doKraytSpawn();

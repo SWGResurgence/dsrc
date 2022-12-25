@@ -10,9 +10,7 @@ import script.string_id;
 
 public class destroyduty_ship extends script.base_script
 {
-    public destroyduty_ship()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "randomTaunt", null, rand(10, 20), false);

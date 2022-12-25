@@ -6,9 +6,7 @@ import script.library.chat;
 
 public class clone_npc extends script.theme_park.newbie_tutorial.tutorial_base
 {
-    public clone_npc()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("playerEntered", 10.0f, true);

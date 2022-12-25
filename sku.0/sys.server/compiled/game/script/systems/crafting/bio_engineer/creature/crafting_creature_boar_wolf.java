@@ -8,9 +8,7 @@ import script.resource_weight;
 
 public class crafting_creature_boar_wolf extends script.systems.crafting.bio_engineer.crafting_base_creature
 {
-    public crafting_creature_boar_wolf()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

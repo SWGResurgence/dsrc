@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class wait_for_signal extends script.quest.task.ground.base_task
 {
-    public wait_for_signal()
-    {
-    }
+
     public static final String dataTableColumnSignalName = "SIGNAL_NAME";
     public static final String dataTableColumnWaitMarkerCreate = "WAIT_MARKER_CREATE";
     public static final String dataTableColumnWaitMarkerTemplate = "WAIT_MARKER_TEMPLATE";

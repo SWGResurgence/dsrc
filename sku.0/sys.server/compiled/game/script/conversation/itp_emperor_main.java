@@ -5,9 +5,7 @@ import script.*;
 
 public class itp_emperor_main extends script.base_script
 {
-    public itp_emperor_main()
-    {
-    }
+
     public static String c_stringFile = "conversation/itp_emperor_main";
     public boolean itp_emperor_main_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

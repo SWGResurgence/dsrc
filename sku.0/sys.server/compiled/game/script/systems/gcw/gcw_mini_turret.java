@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class gcw_mini_turret extends script.base_script
 {
-    public gcw_mini_turret()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 60.0f, false);

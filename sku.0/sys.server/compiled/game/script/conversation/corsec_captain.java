@@ -8,9 +8,7 @@ import script.*;
 
 public class corsec_captain extends script.base_script
 {
-    public corsec_captain()
-    {
-    }
+
     public static String c_stringFile = "conversation/corsec_captain";
     public boolean corsec_captain_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

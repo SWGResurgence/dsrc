@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class planetary_base_register extends script.base_script
 {
-    public planetary_base_register()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setControlData(self);

@@ -5,9 +5,7 @@ import script.*;
 
 public class yavin_rebel_trainer_2 extends script.base_script
 {
-    public yavin_rebel_trainer_2()
-    {
-    }
+
     public static String c_stringFile = "conversation/yavin_rebel_trainer_2";
     public boolean yavin_rebel_trainer_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

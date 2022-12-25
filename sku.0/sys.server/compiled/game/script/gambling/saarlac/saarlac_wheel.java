@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class saarlac_wheel extends script.gambling.base.wheel
 {
-    public saarlac_wheel()
-    {
-    }
+
     public static final String[] WHEEL_OUTCOMES = 
     {
         "Bestine",

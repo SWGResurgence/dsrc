@@ -6,9 +6,7 @@ import script.string_id;
 
 public class base_recruiter extends script.base_script
 {
-    public base_recruiter()
-    {
-    }
+
     public static final String DATA_ITEM_CONVO = "data_item";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

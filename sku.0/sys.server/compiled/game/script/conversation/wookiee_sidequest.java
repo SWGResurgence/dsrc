@@ -5,9 +5,7 @@ import script.*;
 
 public class wookiee_sidequest extends script.base_script
 {
-    public wookiee_sidequest()
-    {
-    }
+
     public static String c_stringFile = "conversation/wookiee_sidequest";
     public boolean wookiee_sidequest_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

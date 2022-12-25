@@ -5,9 +5,7 @@ import script.library.*;
 
 public class gcw_turret extends script.base_script
 {
-    public gcw_turret()
-    {
-    }
+
     public static final string_id SID_MNU_REPAIR = new string_id("sui", "mnu_repair");
     public static final string_id SID_MNU_DEFEND = new string_id("sui", "mnu_defend");
     public int OnAttach(obj_id self) throws InterruptedException

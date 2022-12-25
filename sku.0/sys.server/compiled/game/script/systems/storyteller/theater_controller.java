@@ -13,9 +13,7 @@ import java.util.Vector;
 
 public class theater_controller extends script.base_script
 {
-    public theater_controller()
-    {
-    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isInBuildoutMode(self))

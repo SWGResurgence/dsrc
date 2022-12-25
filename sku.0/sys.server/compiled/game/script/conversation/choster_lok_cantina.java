@@ -8,9 +8,7 @@ import script.*;
 
 public class choster_lok_cantina extends script.base_script
 {
-    public choster_lok_cantina()
-    {
-    }
+
     public static String c_stringFile = "conversation/choster_lok_cantina";
     public boolean choster_lok_cantina_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

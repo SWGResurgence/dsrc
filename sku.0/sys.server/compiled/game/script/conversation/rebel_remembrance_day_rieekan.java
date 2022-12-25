@@ -5,9 +5,7 @@ import script.*;
 
 public class rebel_remembrance_day_rieekan extends script.base_script
 {
-    public rebel_remembrance_day_rieekan()
-    {
-    }
+
     public static String c_stringFile = "conversation/rebel_remembrance_day_rieekan";
     public boolean rebel_remembrance_day_rieekan_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

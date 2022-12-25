@@ -10,9 +10,7 @@ public class conversation_base extends script.base_script
 	public String c_stringFile = "";
 	public String scriptName = "";
 	public String conversation = "";
-	public conversation_base()
-	{
-	}
+
 	public int OnInitialize(obj_id self) throws InterruptedException
 	{
 		if ((!isTangible(self)) || (isPlayer(self)))

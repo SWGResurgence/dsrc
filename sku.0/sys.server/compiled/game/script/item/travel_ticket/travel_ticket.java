@@ -8,9 +8,7 @@ import script.*;
 
 public class travel_ticket extends script.base_script
 {
-    public travel_ticket()
-    {
-    }
+
     public static final string_id SID_BANNED_TICKET = new string_id("city/city", "banned_services");
     public static final string_id SID_ON_PET_OR_VEHICLE = new string_id("travel/travel", "on_pet_or_vehicle");
     public static final string_id SID_TICKET_INVALID = new string_id("travel/travel", "ticket_invalid");

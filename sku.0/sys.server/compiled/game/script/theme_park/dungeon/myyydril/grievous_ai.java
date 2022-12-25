@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class grievous_ai extends script.base_script
 {
-    public grievous_ai()
-    {
-    }
+
     public static final string_id FIVE = new string_id("dungeon/myyydril", "five");
     public static final string_id FOUR = new string_id("dungeon/myyydril", "four");
     public static final string_id THREE = new string_id("dungeon/myyydril", "three");

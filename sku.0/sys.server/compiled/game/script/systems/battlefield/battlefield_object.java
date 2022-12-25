@@ -8,9 +8,7 @@ import script.region;
 
 public class battlefield_object extends script.base_script
 {
-    public battlefield_object()
-    {
-    }
+
     public int OnFollowMoving(obj_id self, obj_id target) throws InterruptedException
     {
         region bf = battlefield.getBattlefield(self);

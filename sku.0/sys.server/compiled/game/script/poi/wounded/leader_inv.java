@@ -11,9 +11,7 @@ import script.obj_id;
 
 public class leader_inv extends script.item.container.add_only
 {
-    public leader_inv()
-    {
-    }
+
     public static final int PROVIDED_MEDICINE = 4;
     public int OnAttach(obj_id self) throws InterruptedException
     {

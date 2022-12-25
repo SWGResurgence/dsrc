@@ -11,9 +11,7 @@ import script.string_id;
 
 public class fs_old_man_exit extends script.base_script
 {
-    public fs_old_man_exit()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("fs_oldman_messagerange", 12, true);

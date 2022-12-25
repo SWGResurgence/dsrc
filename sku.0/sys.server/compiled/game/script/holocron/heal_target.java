@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class heal_target extends script.base_script
 {
-    public heal_target()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         factions.setFaction(self, "Unattackable");

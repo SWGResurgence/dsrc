@@ -10,9 +10,7 @@ import script.string_id;
 
 public class warren_base extends script.base_script
 {
-    public warren_base()
-    {
-    }
+
     public static final String ESCAPEE = "warren.escapee";
     public static final String ESCAPEE_CREATURENAME = "commoner";
     public static final String ESCAPEE_SCRIPT = "theme_park.warren.escapee";

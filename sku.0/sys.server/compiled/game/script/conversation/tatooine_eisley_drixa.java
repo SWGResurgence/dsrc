@@ -8,9 +8,7 @@ import script.*;
 
 public class tatooine_eisley_drixa extends script.base_script
 {
-    public tatooine_eisley_drixa()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_eisley_drixa";
     public boolean tatooine_eisley_drixa_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

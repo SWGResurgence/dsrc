@@ -7,9 +7,7 @@ import script.*;
 
 public class menagerie_bioll extends script.base_script
 {
-    public menagerie_bioll()
-    {
-    }
+
     public static String c_stringFile = "conversation/menagerie_bioll";
     public boolean menagerie_bioll_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

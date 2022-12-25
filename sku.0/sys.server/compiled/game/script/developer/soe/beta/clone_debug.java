@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class clone_debug extends script.base_script
 {
-    public clone_debug()
-    {
-    }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (text.equals("info"))

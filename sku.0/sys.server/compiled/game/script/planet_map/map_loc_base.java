@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class map_loc_base extends script.base_script
 {
-    public map_loc_base()
-    {
-    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         planetary_map.removeMapLocation(self);

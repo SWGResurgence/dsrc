@@ -5,9 +5,7 @@ import script.*;
 
 public class emp_day_imperial_commander extends script.base_script
 {
-    public emp_day_imperial_commander()
-    {
-    }
+
     public static String c_stringFile = "conversation/emp_day_imperial_commander";
     public boolean emp_day_imperial_commander_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

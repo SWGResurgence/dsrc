@@ -5,9 +5,7 @@ import script.*;
 
 public class tusken_kav_golder extends script.base_script
 {
-    public tusken_kav_golder()
-    {
-    }
+
     public static String c_stringFile = "conversation/tusken_kav_golder";
     public boolean tusken_kav_golder_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

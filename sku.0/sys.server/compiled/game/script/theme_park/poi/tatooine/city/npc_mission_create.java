@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class npc_mission_create extends script.base_script
 {
-    public npc_mission_create()
-    {
-    }
+
     public static final String npcTable = "datatables/poi/city/convo_npc.iff";
     public int OnAttach(obj_id self) throws InterruptedException
     {

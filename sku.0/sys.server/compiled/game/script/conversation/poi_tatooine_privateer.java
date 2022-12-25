@@ -5,9 +5,7 @@ import script.*;
 
 public class poi_tatooine_privateer extends script.base_script
 {
-    public poi_tatooine_privateer()
-    {
-    }
+
     public static String c_stringFile = "conversation/poi_tatooine_privateer";
     public boolean poi_tatooine_privateer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

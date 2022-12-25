@@ -7,9 +7,7 @@ import script.region;
 
 public class battlefield_spawner extends script.base_script
 {
-    public battlefield_spawner()
-    {
-    }
+
     public static final String VAR_NUMBER_SPAWNS = "battlefield.number_spawns";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.library.*;
 
 public class gcw_mulit_image_painting extends script.base_script
 {
-    public gcw_mulit_image_painting()
-    {
-    }
+
     public static final String CUST_TEXTURE_VAR = "/private/index_texture_1";
     public static final String SUI_MENU_PID = "gcw_painting_controls_pid";
     public static final String PAINTING_CUR_MODE_OBJVAR = "gcw_painting_current_mode";

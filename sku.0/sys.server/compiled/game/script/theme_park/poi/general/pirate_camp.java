@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class pirate_camp extends script.theme_park.poi.base
 {
-    public pirate_camp()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         initializePoi(self);

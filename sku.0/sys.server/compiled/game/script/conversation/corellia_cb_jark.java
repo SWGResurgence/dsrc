@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_cb_jark extends script.base_script
 {
-    public corellia_cb_jark()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_cb_jark";
     public boolean corellia_cb_jark_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

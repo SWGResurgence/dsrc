@@ -6,9 +6,7 @@ import java.util.StringTokenizer;
 
 public class lec_particleplayer extends script.base_script
 {
-    public lec_particleplayer()
-    {
-    }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (speaker != self)

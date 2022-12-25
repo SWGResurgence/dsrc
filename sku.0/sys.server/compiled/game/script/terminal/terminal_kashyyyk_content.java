@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class terminal_kashyyyk_content extends script.base_script
 {
-    public terminal_kashyyyk_content()
-    {
-    }
+
     public static final int CASH_AMOUNT = 50000;
     public static final int AMT = 100000;
     public static final int FACTION_AMT = 250000;

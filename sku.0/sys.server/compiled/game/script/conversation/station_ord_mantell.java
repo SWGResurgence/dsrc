@@ -5,9 +5,7 @@ import script.*;
 
 public class station_ord_mantell extends script.base_script
 {
-    public station_ord_mantell()
-    {
-    }
+
     public static String c_stringFile = "conversation/station_ord_mantell";
     public boolean station_ord_mantell_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

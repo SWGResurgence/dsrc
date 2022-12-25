@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_scout1_guard extends script.base_script
 {
-    public npe_scout1_guard()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_scout1_guard";
     public boolean npe_scout1_guard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class hutt_quest1 extends script.base_script
 {
-    public hutt_quest1()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location center = new location(-5667, 35, -5863, "tatooine", null);

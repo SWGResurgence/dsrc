@@ -8,9 +8,7 @@ import script.*;
 
 public class lava_beetle_nest_destroy_donko extends script.base_script
 {
-    public lava_beetle_nest_destroy_donko()
-    {
-    }
+
     public static String c_stringFile = "conversation/lava_beetle_nest_destroy_donko";
     public boolean lava_beetle_nest_destroy_donko_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

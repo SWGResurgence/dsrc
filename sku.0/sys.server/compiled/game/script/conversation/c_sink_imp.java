@@ -5,9 +5,7 @@ import script.*;
 
 public class c_sink_imp extends script.base_script
 {
-    public c_sink_imp()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_sink_imp";
     public boolean c_sink_imp_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

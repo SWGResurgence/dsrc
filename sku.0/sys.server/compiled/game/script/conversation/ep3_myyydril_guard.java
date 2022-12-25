@@ -7,9 +7,7 @@ import script.*;
 
 public class ep3_myyydril_guard extends script.base_script
 {
-    public ep3_myyydril_guard()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_myyydril_guard";
     public boolean ep3_myyydril_guard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

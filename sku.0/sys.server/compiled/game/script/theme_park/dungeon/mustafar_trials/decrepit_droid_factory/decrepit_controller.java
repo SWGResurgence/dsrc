@@ -6,8 +6,7 @@ import script.location;
 import script.obj_id;
 
 public class decrepit_controller extends script.base_script {
-    public decrepit_controller() {
-    }
+
     public static final String[] LOCKED_ROOMS = {
         "mainroom27",
         "hall2",

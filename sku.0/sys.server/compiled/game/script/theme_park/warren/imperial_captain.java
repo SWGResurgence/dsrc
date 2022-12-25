@@ -5,9 +5,7 @@ import script.*;
 
 public class imperial_captain extends script.base_script
 {
-    public imperial_captain()
-    {
-    }
+
     public static final String CONVO_FILE = "theme_park/warren/warren";
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public static final String PASSKEYCODE = "object/tangible/mission/quest_item/warren_passkey_s01.iff";

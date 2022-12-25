@@ -5,9 +5,7 @@ import script.library.utils;
 
 public class fs_crafting1_terminal extends script.base_script
 {
-    public fs_crafting1_terminal()
-    {
-    }
+
     public static final string_id SID_MENU_ACCESS_TERMINAL = new string_id("quest/force_sensitive/fs_crafting", "menu_access_terminal");
     public static final string_id SID_NAME_ACCESS_TERMINAL = new string_id("quest/force_sensitive/fs_crafting", "name_access_terminal");
     public static final string_id SID_MSG_CANT_USE_YET = new string_id("quest/force_sensitive/fs_crafting", "msg_cant_use_yet");

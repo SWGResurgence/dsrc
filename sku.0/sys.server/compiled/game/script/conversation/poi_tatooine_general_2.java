@@ -5,9 +5,7 @@ import script.*;
 
 public class poi_tatooine_general_2 extends script.base_script
 {
-    public poi_tatooine_general_2()
-    {
-    }
+
     public static String c_stringFile = "conversation/poi_tatooine_general_2";
     public boolean poi_tatooine_general_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

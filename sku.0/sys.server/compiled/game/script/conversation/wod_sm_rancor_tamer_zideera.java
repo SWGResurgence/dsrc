@@ -5,9 +5,7 @@ import script.*;
 
 public class wod_sm_rancor_tamer_zideera extends script.base_script
 {
-    public wod_sm_rancor_tamer_zideera()
-    {
-    }
+
     public static String c_stringFile = "conversation/wod_sm_rancor_tamer_zideera";
     public boolean wod_sm_rancor_tamer_zideera_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

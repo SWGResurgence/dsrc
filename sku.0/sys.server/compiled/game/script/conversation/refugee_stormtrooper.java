@@ -8,9 +8,7 @@ import script.*;
 
 public class refugee_stormtrooper extends script.base_script
 {
-    public refugee_stormtrooper()
-    {
-    }
+
     public static String c_stringFile = "conversation/refugee_stormtrooper";
     public boolean refugee_stormtrooper_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

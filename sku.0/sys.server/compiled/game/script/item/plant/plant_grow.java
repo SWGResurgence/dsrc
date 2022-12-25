@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class plant_grow extends script.base_script
 {
-    public plant_grow()
-    {
-    }
+
     public static final int PULSE_RATE = 21600;
     public static final String VAR_CRITICAL_ATTRIBS = "plant_grow.critical_attribs";
     public static final String VAR_WATER_LEVEL = "plant_grow.water_level";

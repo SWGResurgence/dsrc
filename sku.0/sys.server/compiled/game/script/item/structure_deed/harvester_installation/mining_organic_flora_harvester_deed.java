@@ -4,9 +4,7 @@ import script.*;
 
 public class mining_organic_flora_harvester_deed extends script.base_script
 {
-    public mining_organic_flora_harvester_deed()
-    {
-    }
+
     public static final String VERSION = "v1.00.00";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

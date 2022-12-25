@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_droid_wound_repair_comp_housing extends script.systems.crafting.droid.crafting_base_droid_repair_component
 {
-    public crafting_droid_wound_repair_comp_housing()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

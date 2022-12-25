@@ -6,9 +6,7 @@ import script.library.sui;
 
 public class temporary_structure extends script.base_script
 {
-    public temporary_structure()
-    {
-    }
+
     public static final string_id SID_TERMINAL_MANAGEMENT_STATUS = new string_id("player_structure", "management_status");
     public int OnBuildingComplete(obj_id self, dictionary params) throws InterruptedException
     {

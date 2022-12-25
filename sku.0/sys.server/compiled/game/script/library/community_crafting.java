@@ -7,9 +7,7 @@ import java.util.*;
 
 public class community_crafting extends script.base_script
 {
-    public community_crafting()
-    {
-    }
+
     public static final int MAX_PLAYERS_PER_PROJECT = 200;
     public static final float NONCRAFTED_COMPONENT_QUALITY = 0.25f * 0.25f;
     public static final String OBJVAR_COMMUNITY_CRAFTING_BASE = "community_crafting";

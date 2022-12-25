@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class chance_cube extends script.item.dice.base.base_dice
 {
-    public chance_cube()
-    {
-    }
+
     public static final String DICE_FACE_COLOR_RED = "red";
     public static final String DICE_FACE_COLOR_BLUE = "blue";
     public static final int DICE_FACE_COUNT = 2;

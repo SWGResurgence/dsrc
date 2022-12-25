@@ -6,9 +6,7 @@ import java.util.Vector;
 
 public class space_transition extends script.base_script
 {
-    public space_transition()
-    {
-    }
+
     public static final boolean debugSpaceTransition = true;
     public static final String DATATABLE_SHIP_START_LOCATIONS = "datatables/ship/ship_start_locations.iff";
     public static final String COLUMN_TEMPLATE = "template";

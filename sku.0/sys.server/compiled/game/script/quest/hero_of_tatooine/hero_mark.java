@@ -8,9 +8,7 @@ import script.*;
 
 public class hero_mark extends script.base_script
 {
-    public hero_mark()
-    {
-    }
+
     public static int BUFF_TIME = 60 * 20;
     public static int BUFF_TIME_VANILLA = 82800;
     public static int REVIVE_HEALTH = 15000;

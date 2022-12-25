@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class death_script extends script.base_script
 {
-    public death_script()
-    {
-    }
+    
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "doubleCheck", null, 3600, false);

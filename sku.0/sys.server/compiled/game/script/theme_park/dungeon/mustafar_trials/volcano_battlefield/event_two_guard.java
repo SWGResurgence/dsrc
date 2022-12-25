@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class event_two_guard extends script.base_script
 {
-    public event_two_guard()
-    {
-    }
+
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class huff_guard extends script.base_script
 {
-    public huff_guard()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

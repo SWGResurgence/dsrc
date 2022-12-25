@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_disappearances_1_hike_master extends script.base_script
 {
-    public corellia_disappearances_1_hike_master()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_disappearances_1_hike_master";
     public boolean corellia_disappearances_1_hike_master_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

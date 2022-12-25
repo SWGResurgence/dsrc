@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class pet_deed extends script.base_script
 {
-    public pet_deed()
-    {
-    }
+
     public static final String MENU_FILE = "pet/pet_menu";
     public static final string_id SID_CONVERT_PET_ITEM_TO_DNA = new string_id("incubator", "convert_pet_item_to_dna");
     public static final string_id SID_CONVERT_PROMPT = new string_id("incubator", "convert_pet_item_prompt");

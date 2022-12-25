@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_forest_outcast_informant extends script.base_script
 {
-    public ep3_forest_outcast_informant()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_forest_outcast_informant";
     public boolean ep3_forest_outcast_informant_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

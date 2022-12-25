@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class bocctyyy_bet_spawned_tracker extends script.base_script
 {
-    public bocctyyy_bet_spawned_tracker()
-    {
-    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "cleaningUp"))

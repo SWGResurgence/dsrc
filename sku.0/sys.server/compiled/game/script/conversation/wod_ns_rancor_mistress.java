@@ -8,9 +8,7 @@ import script.*;
 
 public class wod_ns_rancor_mistress extends script.base_script
 {
-    public wod_ns_rancor_mistress()
-    {
-    }
+
     public static String c_stringFile = "conversation/wod_ns_rancor_mistress";
     public boolean wod_ns_rancor_mistress_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

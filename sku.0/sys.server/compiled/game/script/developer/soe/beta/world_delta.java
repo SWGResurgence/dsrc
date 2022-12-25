@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class world_delta extends script.base_script
 {
-    public world_delta()
-    {
-    }
+
     public static final String VAR_DELTA_TARGET = "delta_target";
     public int OnAttach(obj_id self) throws InterruptedException
     {

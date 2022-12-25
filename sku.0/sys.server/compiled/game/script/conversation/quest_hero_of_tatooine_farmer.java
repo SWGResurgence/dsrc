@@ -5,9 +5,7 @@ import script.*;
 
 public class quest_hero_of_tatooine_farmer extends script.base_script
 {
-    public quest_hero_of_tatooine_farmer()
-    {
-    }
+
     public static String c_stringFile = "conversation/quest_hero_of_tatooine_farmer";
     public boolean quest_hero_of_tatooine_farmer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

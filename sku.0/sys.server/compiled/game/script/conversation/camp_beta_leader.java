@@ -8,9 +8,7 @@ import script.*;
 
 public class camp_beta_leader extends script.base_script
 {
-    public camp_beta_leader()
-    {
-    }
+
     public static String c_stringFile = "conversation/camp_beta_leader";
     public boolean camp_beta_leader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

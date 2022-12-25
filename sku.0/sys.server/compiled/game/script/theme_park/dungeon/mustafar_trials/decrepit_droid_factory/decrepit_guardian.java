@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class decrepit_guardian extends script.base_script
 {
-    public decrepit_guardian()
-    {
-    }
+
     public static final float DEBUFF_RECAST = 60;
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException

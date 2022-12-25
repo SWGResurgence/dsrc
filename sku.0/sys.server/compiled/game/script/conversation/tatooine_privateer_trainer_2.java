@@ -8,9 +8,7 @@ import script.*;
 
 public class tatooine_privateer_trainer_2 extends script.base_script
 {
-    public tatooine_privateer_trainer_2()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_privateer_trainer_2";
     public boolean tatooine_privateer_trainer_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

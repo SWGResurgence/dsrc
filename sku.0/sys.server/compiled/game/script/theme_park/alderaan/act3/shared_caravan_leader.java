@@ -11,9 +11,7 @@ import java.util.Vector;
 
 public class shared_caravan_leader extends script.base_script
 {
-    public shared_caravan_leader()
-    {
-    }
+
     public static final String[] TEMPLATE_LIST = 
     {
         "object/building/poi/generic_flatten_medium.iff",

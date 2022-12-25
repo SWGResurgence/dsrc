@@ -8,9 +8,7 @@ import script.string_id;
 
 public class treasure_guard extends script.base_script
 {
-    public treasure_guard()
-    {
-    }
+
     public static final String RARE_CHAT = "rare_elite_chat";
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {

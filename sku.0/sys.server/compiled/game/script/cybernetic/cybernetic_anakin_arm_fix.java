@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class cybernetic_anakin_arm_fix extends script.base_script
 {
-    public cybernetic_anakin_arm_fix()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "delayedCyberneticForearmFix", null, 4.0f, false);

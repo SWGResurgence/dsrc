@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class rtp_han_solo_tiki_torch extends script.base_script
 {
-    public rtp_han_solo_tiki_torch()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "questFlavorObjectSpawned"))

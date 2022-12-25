@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class rebel_recruit extends script.theme_park.recruitment.base.base_recruiter
 {
-    public rebel_recruit()
-    {
-    }
+
     public static final String CONVO = "recruiting/rebel_recruit";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

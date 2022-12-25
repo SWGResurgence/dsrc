@@ -7,9 +7,7 @@ import script.*;
 
 public class ep3_myyydril_herder extends script.base_script
 {
-    public ep3_myyydril_herder()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_myyydril_herder";
     public boolean ep3_myyydril_herder_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

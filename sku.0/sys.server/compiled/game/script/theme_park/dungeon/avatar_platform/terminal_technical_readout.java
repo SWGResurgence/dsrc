@@ -8,9 +8,7 @@ import script.string_id;
 
 public class terminal_technical_readout extends script.base_script
 {
-    public terminal_technical_readout()
-    {
-    }
+
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id STATION_READOUT = new string_id(STF, "technical_readout");
     public static final string_id READOUT_GRANTED = new string_id(STF, "readout_granted");

@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class player_instance extends script.base_script
 {
-    public player_instance()
-    {
-    }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!isGod(self))

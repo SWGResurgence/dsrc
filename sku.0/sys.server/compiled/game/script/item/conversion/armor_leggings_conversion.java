@@ -2,9 +2,7 @@ package script.item.conversion;
 
 public class armor_leggings_conversion extends script.item.conversion.armor_base_conversion
 {
-    public armor_leggings_conversion()
-    {
-    }
+
     public static final String[] ARMOR_SET_ASSAULT = 
     {
         "composite/armor_composite_leggings.iff",

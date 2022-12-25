@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class death_watch_treadwell extends script.base_script
 {
-    public death_watch_treadwell()
-    {
-    }
+
     public static String c_stringFile = "conversation/death_watch_treadwell";
     public boolean death_watch_treadwell_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

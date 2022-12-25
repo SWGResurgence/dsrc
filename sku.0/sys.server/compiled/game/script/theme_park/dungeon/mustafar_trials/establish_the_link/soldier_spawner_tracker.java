@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class soldier_spawner_tracker extends script.base_script
 {
-    public soldier_spawner_tracker()
-    {
-    }
+
     public static final boolean LOGGING = false;
     public int OnDestroy(obj_id self) throws InterruptedException
     {

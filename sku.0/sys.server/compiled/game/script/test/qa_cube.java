@@ -9,9 +9,7 @@ import script.string_id;
 
 public class qa_cube extends script.base_script
 {
-    public qa_cube()
-    {
-    }
+
     public static final String SCRIPTVAR = "qa_cube";
     public static final String CUBE_DATATABLE_1 = "datatables/item/loot_cube/republic_assembly_tool.iff";
     public static final String CHU_GON_DAR_CUBE = "object/tangible/container/loot/som_cube.iff";

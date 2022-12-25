@@ -7,9 +7,7 @@ import script.string_id;
 
 public class cell_guard extends script.base_script
 {
-    public cell_guard()
-    {
-    }
+
     public static final String CONVO_FILE = "theme_park/warren/warren";
     public static final String ALERT_VOLUME_NAME = "alertVolume";
     public static final String AGGRO_VOLUME_NAME = "aggroVolume";

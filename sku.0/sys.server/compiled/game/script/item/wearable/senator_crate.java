@@ -11,9 +11,7 @@ import java.util.HashSet;
 
 public class senator_crate extends script.base_script
 {
-    public senator_crate()
-    {
-    }
+
     public static final String STF_FILE = "npe";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class space_ai extends script.base_script
 {
-    public space_ai()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setupShip(self);

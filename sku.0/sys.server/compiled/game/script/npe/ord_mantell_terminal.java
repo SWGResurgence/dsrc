@@ -8,9 +8,7 @@ import script.*;
 
 public class ord_mantell_terminal extends script.base_script
 {
-    public ord_mantell_terminal()
-    {
-    }
+
     public static final string_id LAUNCH = new string_id("npe", "launch");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

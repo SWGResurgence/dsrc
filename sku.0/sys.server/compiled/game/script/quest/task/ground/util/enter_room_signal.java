@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class enter_room_signal extends script.base_script
 {
-    public enter_room_signal()
-    {
-    }
+
     public static final String SIGNAL = "signal_name";
     public static final String ENTERED = "entered_";
     public int OnAboutToReceiveItem(obj_id self, obj_id roomComingFrom, obj_id roomGoingTo, obj_id player) throws InterruptedException

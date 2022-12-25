@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class bm_vendor extends script.base_script
 {
-    public bm_vendor()
-    {
-    }
+
     public static String c_stringFile = "conversation/bm_vendor";
     public boolean bm_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

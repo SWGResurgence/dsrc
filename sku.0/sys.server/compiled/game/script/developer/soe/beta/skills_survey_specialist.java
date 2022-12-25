@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class skills_survey_specialist extends script.base_script
 {
-    public skills_survey_specialist()
-    {
-    }
+
     public static final String SKILL_NAME = "crafting_artisan_master";
     public int OnAttach(obj_id self) throws InterruptedException
     {

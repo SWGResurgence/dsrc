@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class base_container extends script.base_script
 {
-    public base_container()
-    {
-    }
+
     public static final String SCRIPT_BASE_CONTAINER = "item.container.base.base_container";
     public int OnAttach(obj_id self) throws InterruptedException
     {

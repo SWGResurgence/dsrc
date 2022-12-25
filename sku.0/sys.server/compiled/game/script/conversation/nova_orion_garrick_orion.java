@@ -5,9 +5,7 @@ import script.*;
 
 public class nova_orion_garrick_orion extends script.base_script
 {
-    public nova_orion_garrick_orion()
-    {
-    }
+
     public static String c_stringFile = "conversation/nova_orion_garrick_orion";
     public boolean nova_orion_garrick_orion_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

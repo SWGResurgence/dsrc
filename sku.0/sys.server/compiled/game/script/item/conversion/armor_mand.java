@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class armor_mand extends script.base_script
 {
-    public armor_mand()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

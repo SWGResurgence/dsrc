@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class spawn_generation_tool extends script.base_script
 {
-    public spawn_generation_tool()
-    {
-    }
+
     public static final String MASTER_SPAWN_OBJECT = "spawn.master_object";
     public static final String ASSOCIATED_SPAWN_TABLE = "spawn.associated_table";
     public static final String NOT_ASSIGNED = "Not Assigned";

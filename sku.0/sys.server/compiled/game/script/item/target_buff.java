@@ -6,9 +6,7 @@ import script.*;
 
 public class target_buff extends script.base_script
 {
-    public target_buff()
-    {
-    }
+
     public static final string_id SID_BUFF_NPC_ONLY = new string_id("spam", "item_buff_npc_only");
     public static final string_id SID_BUFF_WONT_STACK = new string_id("spam", "item_buff_no_stack");
     public static final string_id SID_BUFF_PLAYER_ONLY = new string_id("spam", "item_buff_player_only");

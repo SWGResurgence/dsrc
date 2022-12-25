@@ -6,9 +6,7 @@ import script.string_id;
 
 public class minigame_cmd extends script.base_script
 {
-    public minigame_cmd()
-    {
-    }
+
     public static final String STF = "som/som_item";
     public int cmdFish(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {

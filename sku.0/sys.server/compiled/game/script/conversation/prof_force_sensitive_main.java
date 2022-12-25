@@ -8,9 +8,7 @@ import script.*;
 
 public class prof_force_sensitive_main extends script.base_script
 {
-    public prof_force_sensitive_main()
-    {
-    }
+
     public static String c_stringFile = "conversation/prof_force_sensitive_main";
     public boolean prof_force_sensitive_main_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

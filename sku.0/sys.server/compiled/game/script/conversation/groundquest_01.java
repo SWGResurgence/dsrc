@@ -7,9 +7,7 @@ import script.*;
 
 public class groundquest_01 extends script.base_script
 {
-    public groundquest_01()
-    {
-    }
+
     public static String c_stringFile = "conversation/groundquest_01";
     public boolean groundquest_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

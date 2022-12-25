@@ -1,6 +1,10 @@
 /**
  * File Name:        base_class
  * Desc:  Base class for all scripts.
+ *
+ * @Author Sony Online Entertainment (1999-2011)
+ * @Author SWG-Source Affiliates (2011 - present)
+ * @Author Resurgence Server Team [#cp] 2022
  */
 
 package script;

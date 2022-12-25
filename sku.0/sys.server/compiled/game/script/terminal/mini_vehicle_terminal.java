@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class mini_vehicle_terminal extends script.base_script
 {
-    public mini_vehicle_terminal()
-    {
-    }
+
     public static final String MENU_FILE = "pet/pet_menu";
     public static final string_id VEHICLE_NAME = new string_id(MENU_FILE, "mini_vehicle_custom_name");
     public static final string_id VEHICLE_BIOLINK_NEEDED = new string_id(MENU_FILE, "mini_vehicle_biolink_needed");

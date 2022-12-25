@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class spawner_find_node extends script.base_script
 {
-    public spawner_find_node()
-    {
-    }
+
     public static final int DEFAULT_SEARCH_RADIUS = 100;
     public int OnInitialize(obj_id self) throws InterruptedException
     {

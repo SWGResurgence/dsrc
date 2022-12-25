@@ -8,9 +8,7 @@ import script.*;
 
 public class prof_spy_21_sarlis extends script.base_script
 {
-    public prof_spy_21_sarlis()
-    {
-    }
+
     public static String c_stringFile = "conversation/prof_spy_21_sarlis";
     public boolean prof_spy_21_sarlis_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

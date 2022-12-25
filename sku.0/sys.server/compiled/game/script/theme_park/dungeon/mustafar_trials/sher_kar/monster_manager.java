@@ -5,8 +5,7 @@ import script.library.*;
 import script.obj_id;
 
 public class monster_manager extends script.base_script {
-	public monster_manager() {
-	}
+
 public static final boolean LOGGING = false;
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException {
         clearEventArea(self);

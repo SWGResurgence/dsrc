@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class poi_herd_grasslands_falumpaset extends script.theme_park.poi.base
 {
-    public poi_herd_grasslands_falumpaset()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         poiCreateObject("object/creature/monster/falumpaset/falumpaset_grasslands_large.iff", 8, 8);

@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class rryatt_trail_guide extends script.base_script
 {
-    public rryatt_trail_guide()
-    {
-    }
+
     public static String c_stringFile = "conversation/rryatt_trail_guide";
     public boolean rryatt_trail_guide_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

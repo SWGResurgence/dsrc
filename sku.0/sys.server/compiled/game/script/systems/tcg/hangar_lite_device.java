@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class hangar_lite_device extends script.base_script
 {
-    public hangar_lite_device()
-    {
-    }
+
     public static final String PID_NAME = "hangar_lite";
     public static final String SCRIPT_VAR_SCD_LIST = "hangar_lite.scds";
     public static final String SCRIPT_VAR_RESTORING_SHIP = "hangar_lite.restoring";

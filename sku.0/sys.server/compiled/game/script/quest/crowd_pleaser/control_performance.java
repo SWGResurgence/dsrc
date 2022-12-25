@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class control_performance extends script.base_script
 {
-    public control_performance()
-    {
-    }
+
     public static final String PERFORMANCE_DATATABLE = "datatables/performance/performance.iff";
     public static final String SEATING_DATATABLE = "datatables/quest/crowd_pleaser/theater_seat.iff";
     public static final String PLAYER_PERFORMANCE_SCRIPT = "quest.crowd_pleaser.player_performance";

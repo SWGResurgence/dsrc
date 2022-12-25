@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class interior_component extends script.base_script
 {
-    public interior_component()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("space", "ONATTACH GOING OFF ON INTERIOR COMPONETNES");

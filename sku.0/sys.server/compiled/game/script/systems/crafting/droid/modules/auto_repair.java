@@ -5,9 +5,7 @@ import script.library.*;
 
 public class auto_repair extends script.base_script
 {
-    public auto_repair()
-    {
-    }
+
     public static final String STF_FILE = "pet/droid_modules";
     public static final String SCRIPT_VAR_REPAIR_ON = "module_data.repair_on";
     public static final String SCRIPT_VAR_LAST_REPAIR = "module_data.last_repair";

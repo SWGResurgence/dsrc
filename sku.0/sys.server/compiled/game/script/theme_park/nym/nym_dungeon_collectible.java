@@ -5,9 +5,7 @@ import script.library.groundquests;
 
 public class nym_dungeon_collectible extends script.base_script
 {
-    public nym_dungeon_collectible()
-    {
-    }
+
     public static final String STF_FILE = "pet/droid_modules";
     public static final string_id RETRIEVE = new string_id("celebrity/jinkins", "retrieve");
     public int makeNewModule(obj_id self, dictionary params) throws InterruptedException

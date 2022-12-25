@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class equip_weapon extends script.base_script
 {
-    public equip_weapon()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!aiUsingPrimaryWeapon(self))

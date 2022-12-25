@@ -9,9 +9,7 @@ import java.util.*;
 
 public class group_object extends script.base_script
 {
-    public group_object()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

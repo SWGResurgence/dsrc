@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class rebel_research_defend extends script.base_script
 {
-    public rebel_research_defend()
-    {
-    }
+
     public static final String[] TEMPLATE_LIST = 
     {
         "object/building/poi/generic_flatten_medium.iff",

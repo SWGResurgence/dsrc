@@ -5,9 +5,7 @@ import script.*;
 
 public class gate_keeper_quarantine_zone extends script.base_script
 {
-    public gate_keeper_quarantine_zone()
-    {
-    }
+
     public static String c_stringFile = "conversation/gate_keeper_quarantine_zone";
     public boolean gate_keeper_quarantine_zone_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

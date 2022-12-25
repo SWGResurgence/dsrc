@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class factional_guard_self_destruct extends script.base_script
 {
-    public factional_guard_self_destruct()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "selfDestruct", null, 300, false);

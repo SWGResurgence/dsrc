@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class planet_weather extends script.base_script
 {
-    public planet_weather()
-    {
-    }
+
     public static final String PARAM_WEATHER_DESIRED = "desired";
     public static final String PARAM_WEATHER_CURRENT = "current";
     public static final int WEATHER_GOOD = 0;

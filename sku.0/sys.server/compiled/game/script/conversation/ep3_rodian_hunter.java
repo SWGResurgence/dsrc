@@ -7,9 +7,7 @@ import script.*;
 
 public class ep3_rodian_hunter extends script.base_script
 {
-    public ep3_rodian_hunter()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_rodian_hunter";
     public boolean ep3_rodian_hunter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

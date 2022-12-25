@@ -5,9 +5,7 @@ import script.*;
 
 public class quest_crowd_pleaser_manager extends script.base_script
 {
-    public quest_crowd_pleaser_manager()
-    {
-    }
+
     public static String c_stringFile = "conversation/quest_crowd_pleaser_manager";
     public boolean quest_crowd_pleaser_manager_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

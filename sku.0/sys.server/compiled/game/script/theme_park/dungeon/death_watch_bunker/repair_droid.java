@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class repair_droid extends script.base_script
 {
-    public repair_droid()
-    {
-    }
+
     public static final String TBL_ATTACK_WAVE1 = "datatables/dungeon/death_watch/attack_wave_01.iff";
     public static final String TBL_ATTACK_WAVE2 = "datatables/dungeon/death_watch/attack_wave_02.iff";
     public static final string_id VENTILATION_REPAIR = new string_id("dungeon/death_watch", "ventilation_repair");

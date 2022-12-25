@@ -8,9 +8,7 @@ import script.string_id;
 
 public class sher_kar extends script.base_script
 {
-    public sher_kar()
-    {
-    }
+
     public static final int AE_RECAST = 32;
     public static final int AE_DAMAGE = 600;
     public static final float HEALTH_TRIGGER_1 = 0.95f;

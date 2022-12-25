@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class medicine_buff extends script.base_script
 {
-    public medicine_buff()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, consumable.VAR_CONSUMABLE_MODS))

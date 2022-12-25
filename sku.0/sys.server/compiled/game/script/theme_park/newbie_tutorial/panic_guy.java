@@ -9,9 +9,7 @@ import script.string_id;
 
 public class panic_guy extends script.theme_park.newbie_tutorial.tutorial_base
 {
-    public panic_guy()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         queueCommand(self, (1000440469), self, "unhappy", COMMAND_PRIORITY_DEFAULT);

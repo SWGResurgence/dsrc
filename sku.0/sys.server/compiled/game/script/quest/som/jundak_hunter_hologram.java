@@ -5,9 +5,7 @@ import script.*;
 
 public class jundak_hunter_hologram extends script.base_script
 {
-    public jundak_hunter_hologram()
-    {
-    }
+
     public static final String STF = "som/som_quest";
     public static final string_id EXAMINE = new string_id(STF, "jundak_hunter_hologram_examine");
     public static final string_id ALREADY = new string_id(STF, "jundak_hunter_hologram_already");

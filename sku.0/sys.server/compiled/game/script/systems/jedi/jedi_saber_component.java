@@ -5,9 +5,7 @@ import script.library.*;
 
 public class jedi_saber_component extends script.base_script
 {
-    public jedi_saber_component()
-    {
-    }
+
     public static final String SHADER_TABLE = "datatables/appearance/alternate_lightsaber_shaders.iff";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

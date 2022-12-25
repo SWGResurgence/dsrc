@@ -8,9 +8,7 @@ import script.transform;
 
 public class rohak_figurine_spawner extends script.base_script
 {
-    public rohak_figurine_spawner()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnFigurine", null, 9, false);

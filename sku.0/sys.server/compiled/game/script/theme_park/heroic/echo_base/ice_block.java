@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class ice_block extends script.base_script
 {
-    public ice_block()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "cleanupSelf", null, 90.0f, false);

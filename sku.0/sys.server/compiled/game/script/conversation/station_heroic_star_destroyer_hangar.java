@@ -5,9 +5,7 @@ import script.*;
 
 public class station_heroic_star_destroyer_hangar extends script.base_script
 {
-    public station_heroic_star_destroyer_hangar()
-    {
-    }
+
     public static String c_stringFile = "conversation/station_heroic_star_destroyer_hangar";
     public boolean station_heroic_star_destroyer_hangar_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

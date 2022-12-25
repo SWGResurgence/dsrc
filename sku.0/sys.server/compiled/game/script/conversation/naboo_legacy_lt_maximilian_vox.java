@@ -5,9 +5,7 @@ import script.*;
 
 public class naboo_legacy_lt_maximilian_vox extends script.base_script
 {
-    public naboo_legacy_lt_maximilian_vox()
-    {
-    }
+
     public static String c_stringFile = "conversation/naboo_legacy_lt_maximilian_vox";
     public boolean naboo_legacy_lt_maximilian_vox_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

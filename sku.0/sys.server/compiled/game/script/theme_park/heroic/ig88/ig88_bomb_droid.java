@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class ig88_bomb_droid extends script.base_script
 {
-    public ig88_bomb_droid()
-    {
-    }
+
     public int setBombDroidMaxHealth(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))

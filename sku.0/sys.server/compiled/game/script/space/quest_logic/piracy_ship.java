@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class piracy_ship extends script.base_script
 {
-    public piracy_ship()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "statusCheck", null, 5.0f, false);

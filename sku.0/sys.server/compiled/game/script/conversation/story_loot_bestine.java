@@ -5,9 +5,7 @@ import script.*;
 
 public class story_loot_bestine extends script.base_script
 {
-    public story_loot_bestine()
-    {
-    }
+
     public static String c_stringFile = "conversation/story_loot_bestine";
     public boolean story_loot_bestine_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

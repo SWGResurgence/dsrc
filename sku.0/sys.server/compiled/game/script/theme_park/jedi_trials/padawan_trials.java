@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class padawan_trials extends script.base_script
 {
-    public padawan_trials()
-    {
-    }
+
     public static final String CITIES_DATATABLE = "datatables/jedi_trials/cities.iff";
     public static final String TRIAL_NPC_SCRIPT = "theme_park.jedi_trials.padawan_trial_npc";
     public static final String TRIAL_SCRIPT_PREFIX = "conversation.padawan_";

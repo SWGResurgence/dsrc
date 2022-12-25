@@ -5,9 +5,7 @@ import script.library.utils;
 
 public class ore_recycler extends script.base_script
 {
-    public ore_recycler()
-    {
-    }
+
     public static final String STF = "recycler_messages";
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id player, obj_id item) throws InterruptedException
     {

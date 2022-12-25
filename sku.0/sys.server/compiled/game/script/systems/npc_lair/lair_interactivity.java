@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class lair_interactivity extends script.base_script
 {
-    public lair_interactivity()
-    {
-    }
+
     public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "lair_interactivity";
     public static final String LAIR_SEARCHED = "lair.searched";

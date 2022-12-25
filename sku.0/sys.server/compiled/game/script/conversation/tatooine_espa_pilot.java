@@ -8,9 +8,7 @@ import script.*;
 
 public class tatooine_espa_pilot extends script.base_script
 {
-    public tatooine_espa_pilot()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_espa_pilot";
     public boolean tatooine_espa_pilot_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_basic_weapon extends script.systems.crafting.space.weapon.crafting_base_space_weapon
 {
-    public crafting_basic_weapon()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class fs_theater_enemy extends script.base_script
 {
-    public fs_theater_enemy()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         final location anchorLocation = getLocation(self);

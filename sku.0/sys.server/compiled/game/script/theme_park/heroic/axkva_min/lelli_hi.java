@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class lelli_hi extends script.base_script
 {
-    public lelli_hi()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_AXKVA_LILLI_HI);

@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class mission_object extends script.systems.missions.base.mission_dynamic_base
 {
-    public mission_object()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("mission_spam", "Mission data is live, obj_id is " + self);

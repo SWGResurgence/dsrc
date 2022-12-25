@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class fs_crafting4_computer_core extends script.base_script
 {
-    public fs_crafting4_computer_core()
-    {
-    }
+    
     public static final int NO_WIRE = 0;
     public static final int RED_WIRE = 1;
     public static final int BLUE_WIRE = 2;

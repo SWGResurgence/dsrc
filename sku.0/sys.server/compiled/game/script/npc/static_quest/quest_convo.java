@@ -7,8 +7,7 @@ import script.obj_id;
 import script.string_id;
 
 public class quest_convo extends script.base_script {
-    public quest_convo() {
-    }
+
 
     public static final String FACETO_VOLUME_NAME = "faceToTriggerVolume";
 

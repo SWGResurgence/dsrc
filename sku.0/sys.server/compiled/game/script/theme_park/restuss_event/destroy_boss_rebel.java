@@ -10,9 +10,7 @@ import script.string_id;
 
 public class destroy_boss_rebel extends script.base_script
 {
-    public destroy_boss_rebel()
-    {
-    }
+
     public static final String VOLUME_NAME = "quest_area";
     public static final string_id AREA_FOUND = new string_id("restuss_event/object", "right_area");
     public static final string_id AREA_FOUND_NO_SPAWN = new string_id("restuss_event/object", "right_area_wrong_time");

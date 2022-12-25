@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class destroy_target extends script.base_script
 {
-    public destroy_target()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);

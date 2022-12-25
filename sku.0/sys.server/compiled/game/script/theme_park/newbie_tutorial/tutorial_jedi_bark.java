@@ -7,9 +7,7 @@ import script.string_id;
 
 public class tutorial_jedi_bark extends script.base_script
 {
-    public tutorial_jedi_bark()
-    {
-    }
+
     public static final String JEDI_BARK = "newbie_tutorial/newbie_convo";
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {

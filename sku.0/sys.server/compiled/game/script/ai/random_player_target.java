@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class random_player_target extends script.base_script
 {
-    public random_player_target()
-    {
-    }
+
     public void addHateToTarget(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))

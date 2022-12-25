@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class fs_cs_kill5_guards extends script.base_script
 {
-    public fs_cs_kill5_guards()
-    {
-    }
+
     public int receiveCreditForKill(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newquests", "fs_cs_kill5_guards: receiveCreditForKill()");

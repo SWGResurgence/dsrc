@@ -4,9 +4,7 @@ import script.*;
 
 public class hk47_history_datapad extends script.base_script
 {
-    public hk47_history_datapad()
-    {
-    }
+
     public static final String STF = "som/som_quest";
     public static final string_id ACCESS = new string_id(STF, "hk_history_datapad");
     public static final string_id SID_PART1 = new string_id(STF, "hk_history_datapad_01");

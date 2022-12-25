@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class fs_defend_01_cleanup extends script.base_script
 {
-    public fs_defend_01_cleanup()
-    {
-    }
+
     public int msgQuestAbortPhaseChange(obj_id self, dictionary params) throws InterruptedException
     {
         if (!quests.isComplete("fs_defend_01", self) || !quests.isComplete("fs_defend_02", self))

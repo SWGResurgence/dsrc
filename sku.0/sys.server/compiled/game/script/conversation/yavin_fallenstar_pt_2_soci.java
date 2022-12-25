@@ -8,9 +8,7 @@ import script.*;
 
 public class yavin_fallenstar_pt_2_soci extends script.base_script
 {
-    public yavin_fallenstar_pt_2_soci()
-    {
-    }
+
     public static String c_stringFile = "conversation/yavin_fallenstar_pt_2_soci";
     public boolean yavin_fallenstar_pt_2_soci_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

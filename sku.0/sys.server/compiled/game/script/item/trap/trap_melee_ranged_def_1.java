@@ -10,9 +10,7 @@ import script.string_id;
 
 public class trap_melee_ranged_def_1 extends script.item.trap.trap_base
 {
-    public trap_melee_ranged_def_1()
-    {
-    }
+
     public static final int TRAP_DIFF = 20;
     public static final string_id SID_SYS_EFFECT = new string_id("trap/trap", "trap_melee_ranged_def_1_effect");
     public static final string_id SID_NO_EFFECT = new string_id("trap/trap", "trap_effect_no");

@@ -8,9 +8,7 @@ import script.string_id;
 
 public class turret_y8_upper extends script.base_script
 {
-    public turret_y8_upper()
-    {
-    }
+
     public static final string_id SID_PILOT = new string_id("space/space_interaction", "pilot_ship");
     public static final string_id SID_TURRET_UPPER = new string_id("space/space_interaction", "turret_upper");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

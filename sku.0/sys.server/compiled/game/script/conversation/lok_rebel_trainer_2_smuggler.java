@@ -8,9 +8,7 @@ import script.*;
 
 public class lok_rebel_trainer_2_smuggler extends script.base_script
 {
-    public lok_rebel_trainer_2_smuggler()
-    {
-    }
+
     public static String c_stringFile = "conversation/lok_rebel_trainer_2_smuggler";
     public boolean lok_rebel_trainer_2_smuggler_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

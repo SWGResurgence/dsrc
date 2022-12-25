@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class trigger_volume_vistas extends script.base_script
 {
-    public trigger_volume_vistas()
-    {
-    }
+
     public static final String COLLECTION_PREFIX = "col_panoramic_vistas_";
     public static final String SLOT_OBJVAR = "collection.marker";
     public static final float UPDATE_RADIUS = 2.0f;

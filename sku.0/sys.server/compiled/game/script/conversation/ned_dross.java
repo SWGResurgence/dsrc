@@ -22,11 +22,7 @@ import script.*;
 
 public class ned_dross extends script.base_script
 {
-	public ned_dross()
 
-	{
-
-	}
 
 // ======================================================================
 // Script Constants

@@ -22,11 +22,7 @@ import script.*;
 
 public class wod_kyrene extends script.base_script
 {
-	public wod_kyrene()
 
-	{
-
-	}
 
 // ======================================================================
 // Script Constants

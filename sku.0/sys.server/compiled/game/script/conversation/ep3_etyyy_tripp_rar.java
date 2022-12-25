@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_etyyy_tripp_rar extends script.base_script
 {
-    public ep3_etyyy_tripp_rar()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_etyyy_tripp_rar";
     public boolean ep3_etyyy_tripp_rar_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

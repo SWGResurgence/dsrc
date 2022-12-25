@@ -5,9 +5,7 @@ import script.*;
 
 public class outbreak_rodian_pilot extends script.base_script
 {
-    public outbreak_rodian_pilot()
-    {
-    }
+
     public static String c_stringFile = "conversation/outbreak_rodian_pilot";
     public boolean outbreak_rodian_pilot_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.*;
 
 public class npe_drunk extends script.base_script
 {
-    public npe_drunk()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_drunk";
     public boolean npe_drunk_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

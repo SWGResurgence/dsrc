@@ -8,9 +8,7 @@ import script.string_id;
 
 public class axkva_door_enter extends script.base_script
 {
-    public axkva_door_enter()
-    {
-    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         item.addRootMenu(menu_info_types.ITEM_USE, new string_id("building_name", "heroic_axkva_enter"));

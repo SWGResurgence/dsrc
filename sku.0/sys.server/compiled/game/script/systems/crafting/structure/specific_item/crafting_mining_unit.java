@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_mining_unit extends script.systems.crafting.structure.crafting_base_mining_component
 {
-    public crafting_mining_unit()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

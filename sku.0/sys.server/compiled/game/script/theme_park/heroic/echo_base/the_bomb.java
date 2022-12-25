@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class the_bomb extends script.base_script
 {
-    public the_bomb()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, 150000);

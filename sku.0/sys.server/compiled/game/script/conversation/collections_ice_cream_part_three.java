@@ -8,9 +8,7 @@ import script.*;
 
 public class collections_ice_cream_part_three extends script.base_script
 {
-    public collections_ice_cream_part_three()
-    {
-    }
+
     public static String c_stringFile = "conversation/collections_ice_cream_part_three";
     public boolean collections_ice_cream_part_three_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

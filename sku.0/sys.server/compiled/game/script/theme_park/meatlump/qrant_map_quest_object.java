@@ -5,9 +5,7 @@ import script.library.*;
 
 public class qrant_map_quest_object extends script.base_script
 {
-    public qrant_map_quest_object()
-    {
-    }
+
     public static final string_id RADIAL_INSPECT = new string_id("quest/ground/util/quest_giver_object", "radial_inspect");
     public static final string_id OFFER_QUEST_MSG = new string_id("quest/ground/util/quest_giver_object", "offer_quest_teleport");
     public static final string_id SUI_TITLE = new string_id("quest/ground/util/quest_giver_object", "sui_title");

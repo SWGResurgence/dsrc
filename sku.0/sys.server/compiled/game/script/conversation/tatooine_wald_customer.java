@@ -8,9 +8,7 @@ import script.*;
 
 public class tatooine_wald_customer extends script.base_script
 {
-    public tatooine_wald_customer()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_wald_customer";
     public boolean tatooine_wald_customer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

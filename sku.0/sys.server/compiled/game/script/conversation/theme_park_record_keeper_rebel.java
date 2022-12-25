@@ -7,9 +7,7 @@ import script.*;
 
 public class theme_park_record_keeper_rebel extends script.base_script
 {
-    public theme_park_record_keeper_rebel()
-    {
-    }
+
     public static String c_stringFile = "conversation/theme_park_record_keeper_rebel";
     public boolean theme_park_record_keeper_rebel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

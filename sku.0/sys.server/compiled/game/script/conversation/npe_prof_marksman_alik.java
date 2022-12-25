@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_prof_marksman_alik extends script.base_script
 {
-    public npe_prof_marksman_alik()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_prof_marksman_alik";
     public boolean npe_prof_marksman_alik_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.library.*;
 
 public class prisoner_pirate_cave extends script.base_script
 {
-    public prisoner_pirate_cave()
-    {
-    }
+
     public static String c_stringFile = "conversation/prisoner_pirate_cave";
     public boolean prisoner_pirate_cave_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class biogenic_herald_dealer extends script.base_script
 {
-    public biogenic_herald_dealer()
-    {
-    }
+
     public static String c_stringFile = "conversation/biogenic_herald_dealer";
     public boolean biogenic_herald_dealer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

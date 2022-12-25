@@ -5,9 +5,7 @@ import script.*;
 
 public class mtp_complaint_department extends script.base_script
 {
-    public mtp_complaint_department()
-    {
-    }
+
     public static String c_stringFile = "conversation/mtp_complaint_department";
     public boolean mtp_complaint_department_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

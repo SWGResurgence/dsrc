@@ -8,9 +8,7 @@ import script.string_id;
 
 public class quest_finish extends script.base_script
 {
-    public quest_finish()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setupSelf", null, 4, true);

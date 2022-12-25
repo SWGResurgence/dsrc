@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_tyrena_bannoc_gnoc extends script.base_script
 {
-    public corellia_tyrena_bannoc_gnoc()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_tyrena_bannoc_gnoc";
     public boolean corellia_tyrena_bannoc_gnoc_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

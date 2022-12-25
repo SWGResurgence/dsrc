@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_39_chun_solso extends script.base_script
 {
-    public corellia_39_chun_solso()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_39_chun_solso";
     public boolean corellia_39_chun_solso_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

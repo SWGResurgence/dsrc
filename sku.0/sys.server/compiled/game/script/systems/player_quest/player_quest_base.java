@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class player_quest_base extends script.base_script
 {
-    public player_quest_base()
-    {
-    }
+
     public static final String HOLOCRON_NAME = "holocronName";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -22,11 +22,7 @@ import script.*;
 
 public class meghan_lorso extends script.base_script
 {
-	public meghan_lorso()
 
-	{
-
-	}
 
 // ======================================================================
 // Script Constants

@@ -8,9 +8,7 @@ import script.*;
 
 public class tatooine_espa_jawadroid extends script.base_script
 {
-    public tatooine_espa_jawadroid()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_espa_jawadroid";
     public boolean tatooine_espa_jawadroid_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

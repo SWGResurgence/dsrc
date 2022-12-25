@@ -9,9 +9,7 @@ import script.string_id;
 
 public class main_hall_terminal extends script.base_script
 {
-    public main_hall_terminal()
-    {
-    }
+    
     public static final String DECREPIT_STF = "mustafar/decrepit_droid_factory";
     public static final string_id SID_OPEN_MAIN_HALL = new string_id(DECREPIT_STF, "decrepit_open_main_hall");
     public int OnAttach(obj_id self) throws InterruptedException

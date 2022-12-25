@@ -8,9 +8,7 @@ import script.*;
 
 public class prof_medic_11_third extends script.base_script
 {
-    public prof_medic_11_third()
-    {
-    }
+
     public static String c_stringFile = "conversation/prof_medic_11_third";
     public boolean prof_medic_11_third_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

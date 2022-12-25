@@ -13,9 +13,7 @@ import script.library.utils;
 
 public class wod_razorangler_dna extends script.base_script
 {
-    public wod_razorangler_dna()
-    {
-    }
+
     public static final String DNA_LOOT_ITEM = "item_razor_angler_dna";
     public static final int DNA_LOOT_CHANCE = 15;
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException

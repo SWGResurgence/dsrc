@@ -8,9 +8,7 @@ import script.*;
 
 public class stap_quest_tk555 extends script.base_script
 {
-    public stap_quest_tk555()
-    {
-    }
+
     public static String c_stringFile = "conversation/stap_quest_tk555";
     public boolean stap_quest_tk555_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

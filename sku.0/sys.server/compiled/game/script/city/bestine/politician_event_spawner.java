@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class politician_event_spawner extends script.base_script
 {
-    public politician_event_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         deltadictionary dctScriptVars = self.getScriptVars();

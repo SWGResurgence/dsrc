@@ -7,9 +7,7 @@ import script.*;
 
 public class corellia_tyrena_harkog_gerr extends script.base_script
 {
-    public corellia_tyrena_harkog_gerr()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_tyrena_harkog_gerr";
     public boolean corellia_tyrena_harkog_gerr_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

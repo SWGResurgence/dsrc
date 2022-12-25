@@ -5,9 +5,7 @@ import script.*;
 
 public class lava_flea_bounty extends script.base_script
 {
-    public lava_flea_bounty()
-    {
-    }
+
     public static final String STF = "som/som_quest";
     public static final string_id EXAMINE = new string_id(STF, "lava_flea_bounty_examine");
     public static final string_id ALREADY = new string_id(STF, "lava_flea_bounty_already");

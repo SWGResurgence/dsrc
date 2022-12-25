@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class poi_waiting extends script.base_script
 {
-    public poi_waiting()
-    {
-    }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         detachScript(self, "theme_park.tatooine.behavior.poi_waiting");

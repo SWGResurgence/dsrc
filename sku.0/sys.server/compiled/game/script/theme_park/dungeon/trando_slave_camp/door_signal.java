@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class door_signal extends script.base_script
 {
-    public door_signal()
-    {
-    }
+
     public int OnReceivedItem(obj_id self, obj_id cell, obj_id world, obj_id player) throws InterruptedException
     {
         if (!hasObjVar(getTopMostContainer(self), "toskKilled"))

@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class player_beta extends script.base_script
 {
-    public player_beta()
-    {
-    }
+
     public static final String SKILL_WEAPON_RANGED_BASIC = "combat_ranged_weapons_basic";
     public static final String SKILL_WEAPON_MELEE_BASIC = "combat_melee_basic";
     public static final String SKILL_NOVICE_SCOUT = "outdoors_scout_novice";

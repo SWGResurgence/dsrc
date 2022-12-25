@@ -8,9 +8,7 @@ import script.*;
 
 public class c_ddroid_droid extends script.base_script
 {
-    public c_ddroid_droid()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_ddroid_droid";
     public boolean c_ddroid_droid_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

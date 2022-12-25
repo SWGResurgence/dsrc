@@ -4,9 +4,7 @@ import script.*;
 
 public class food_factory_deed extends script.base_script
 {
-    public food_factory_deed()
-    {
-    }
+
     public static final String VERSION = "v1.00.00";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

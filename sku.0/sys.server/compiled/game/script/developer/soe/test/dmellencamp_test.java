@@ -6,9 +6,7 @@ import script.library.*;
 
 public class dmellencamp_test extends script.base_script
 {
-    public dmellencamp_test()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {

@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class boss_buff extends script.base_script
 {
-    public boss_buff()
-    {
-    }
+
     private static final String[] HELP_TEXT =
     {
         "=========================================",

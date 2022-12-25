@@ -7,9 +7,7 @@ import script.*;
 
 public class ep3_vryyyr extends script.base_script
 {
-    public ep3_vryyyr()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_vryyyr";
     public boolean ep3_vryyyr_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

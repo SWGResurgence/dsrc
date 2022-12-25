@@ -8,9 +8,7 @@ import script.*;
 
 public class gt643_stormtrooper extends script.base_script
 {
-    public gt643_stormtrooper()
-    {
-    }
+
     public static String c_stringFile = "conversation/gt643_stormtrooper";
     public boolean gt643_stormtrooper_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

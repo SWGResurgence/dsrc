@@ -10,9 +10,7 @@ import script.string_id;
 
 public class greeter_one extends script.theme_park.newbie_tutorial.tutorial_base
 {
-    public greeter_one()
-    {
-    }
+    
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setHomeLocation(self, getLocation(self));

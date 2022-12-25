@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class combat_grenade extends script.systems.combat.combat_base
 {
-    public combat_grenade()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (static_item.isStaticItem(self))

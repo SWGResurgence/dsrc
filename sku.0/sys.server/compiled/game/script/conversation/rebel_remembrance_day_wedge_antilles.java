@@ -5,9 +5,7 @@ import script.*;
 
 public class rebel_remembrance_day_wedge_antilles extends script.base_script
 {
-    public rebel_remembrance_day_wedge_antilles()
-    {
-    }
+
     public static String c_stringFile = "conversation/rebel_remembrance_day_wedge_antilles";
     public boolean rebel_remembrance_day_wedge_antilles_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

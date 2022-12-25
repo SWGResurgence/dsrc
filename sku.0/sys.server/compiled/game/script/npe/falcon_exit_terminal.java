@@ -9,9 +9,7 @@ import script.string_id;
 
 public class falcon_exit_terminal extends script.base_script
 {
-    public falcon_exit_terminal()
-    {
-    }
+
     public static final string_id HYPERSPACE = new string_id("npe", "hyperspace");
     public int OnAttach(obj_id self) throws InterruptedException
     {

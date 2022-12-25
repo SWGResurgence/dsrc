@@ -8,9 +8,7 @@ import script.string_id;
 
 public class magic_stone extends script.base_script
 {
-    public magic_stone()
-    {
-    }
+    
     public static final string_id TELEPORT = new string_id("dungeon/myyydril", "teleport");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

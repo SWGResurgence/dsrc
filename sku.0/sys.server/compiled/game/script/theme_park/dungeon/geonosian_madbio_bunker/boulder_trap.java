@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class boulder_trap extends script.base_script
 {
-    public boulder_trap()
-    {
-    }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))

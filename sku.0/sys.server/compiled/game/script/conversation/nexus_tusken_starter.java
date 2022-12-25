@@ -8,9 +8,7 @@ import script.*;
 
 public class nexus_tusken_starter extends script.base_script
 {
-    public nexus_tusken_starter()
-    {
-    }
+
     public static String c_stringFile = "conversation/nexus_tusken_starter";
     public boolean nexus_tusken_starter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

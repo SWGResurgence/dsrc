@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_coronet_times_editor extends script.base_script
 {
-    public corellia_coronet_times_editor()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_coronet_times_editor";
     public boolean corellia_coronet_times_editor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

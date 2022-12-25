@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class traveler_two extends script.base_script
 {
-    public traveler_two()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

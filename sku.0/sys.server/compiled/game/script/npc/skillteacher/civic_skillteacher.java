@@ -8,9 +8,7 @@ import script.string_id;
 
 public class civic_skillteacher extends script.base_script
 {
-    public civic_skillteacher()
-    {
-    }
+
     public static final string_id SID_MT_REMOVE = new string_id("city/city", "mt_remove");
     public static final string_id SID_MT_REMOVED = new string_id("city/city", "mt_removed");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class player_destroy extends script.base_script
 {
-    public player_destroy()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location questLoc = getLocationObjVar(self, "mos_taike.old_guard.targetLoc");

@@ -8,9 +8,7 @@ import script.*;
 
 public class coronet_captain_dool extends script.base_script
 {
-    public coronet_captain_dool()
-    {
-    }
+
     public static String c_stringFile = "conversation/coronet_captain_dool";
     public boolean coronet_captain_dool_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

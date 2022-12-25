@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class entertainer_vendor_lady_gysyndra extends script.base_script
 {
-    public entertainer_vendor_lady_gysyndra()
-    {
-    }
+
     public static String c_stringFile = "conversation/entertainer_vendor_lady_gysyndra";
     public boolean entertainer_vendor_lady_gysyndra_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

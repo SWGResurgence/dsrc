@@ -8,9 +8,7 @@ import script.string_id;
 
 public class terminal_safety_override extends script.base_script
 {
-    public terminal_safety_override()
-    {
-    }
+
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id SAFETY_STATUS = new string_id(STF, "safety_status");
     public static final string_id SHIELD_OFF = new string_id(STF, "shield_off");

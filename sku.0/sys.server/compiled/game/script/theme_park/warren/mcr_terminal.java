@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class mcr_terminal extends script.base_script
 {
-    public mcr_terminal()
-    {
-    }
+
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public static final String DEACTIVATE = "mcr_term_deactivated";
     public static final String ACTIVATE = "mcr_term_active";

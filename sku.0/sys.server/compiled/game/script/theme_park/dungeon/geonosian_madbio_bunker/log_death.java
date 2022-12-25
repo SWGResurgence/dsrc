@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class log_death extends script.base_script
 {
-    public log_death()
-    {
-    }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         String name = getName(self);

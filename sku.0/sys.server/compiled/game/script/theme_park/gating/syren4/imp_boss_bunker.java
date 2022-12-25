@@ -7,9 +7,7 @@ import script.string_id;
 
 public class imp_boss_bunker extends script.base_script
 {
-    public imp_boss_bunker()
-    {
-    }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item) || isIdValid(destinationCell))

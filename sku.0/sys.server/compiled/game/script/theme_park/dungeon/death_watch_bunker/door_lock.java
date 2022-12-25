@@ -1,17 +1,8 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
-import script.dictionary;
-import script.library.trial;
-import script.library.utils;
-import script.obj_id;
-
-import java.util.Vector;
-
 public class door_lock extends script.base_script
 {/*
-    public door_lock()
-    {
-    }
+
     public static final String MSGS = "dungeon/death_watch_bunker";
     public static final String VAR_ACCESS_LIST = "access";
     public int OnInitialize(obj_id self) throws InterruptedException

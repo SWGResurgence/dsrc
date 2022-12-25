@@ -7,9 +7,7 @@ import script.string_id;
 
 public class droid_datapad_handler extends script.base_script
 {
-    public droid_datapad_handler()
-    {
-    }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id objStartContainer, obj_id objPlayer, obj_id objItem) throws InterruptedException
     {
         if (!isIdValid(objItem) || !isIdValid(objPlayer) || !isIdValid(objStartContainer))

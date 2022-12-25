@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class tusken_quest_tracker extends script.base_script
 {
-    public tusken_quest_tracker()
-    {
-    }
+
     public static final String PHASE = "phase";
     public static final String DEAD_CITIZEN = "citizen";
     public static final String P1_GRANT = "heroic_tusken_tracking_01";

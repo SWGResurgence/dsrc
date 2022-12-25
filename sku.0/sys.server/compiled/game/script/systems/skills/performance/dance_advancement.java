@@ -6,9 +6,7 @@ import script.library.xp;
 
 public class dance_advancement extends script.base_script
 {
-    public dance_advancement()
-    {
-    }
+
     public static final String ADVANCEMENT_OBJVAR = "dance_advancement";
     public static final string_id SUI_PROMPT0 = new string_id("dance_advancement", "sui_prompt0");
     public static final string_id SUI_PROMPT1 = new string_id("dance_advancement", "sui_prompt1");

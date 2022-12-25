@@ -9,9 +9,7 @@ import script.string_id;
 
 public class shared_lookout extends script.base_script
 {
-    public shared_lookout()
-    {
-    }
+
     public static final String GU_REPAIR_KIT = "object/tangible/theme_park/alderaan/act3/grav_unit_repair_kit.iff";
     public static final String IMPERIAL_SHARED_STF = "theme_park/alderaan/act3/shared_imperial_missions";
     public static final string_id REPAIR_KIT_RECEIVED = new string_id(IMPERIAL_SHARED_STF, "m2_repair_kit_received");

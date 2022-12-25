@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_cb_donovan extends script.base_script
 {
-    public corellia_cb_donovan()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_cb_donovan";
     public boolean corellia_cb_donovan_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

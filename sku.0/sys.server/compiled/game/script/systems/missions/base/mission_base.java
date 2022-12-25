@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class mission_base extends script.base_script
 {
-    public mission_base()
-    {
-    }
+
     public static final String MISSION_SUCCESS_PERSISTENT_MESSAGE = "success";
     public static final String MISSION_FAILURE_PERSISTENT_MESSAGE = "failure";
     public static final String MISSION_INCOMPLETE_PERSISTENT_MESSAGE = "incomplete";

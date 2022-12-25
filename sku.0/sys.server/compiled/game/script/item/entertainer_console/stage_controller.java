@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class stage_controller extends script.terminal.base.base_terminal
 {
-    public stage_controller()
-    {
-    }
+
     public static final String[] PROP_TYPE = 
     {
         "Backdrop",

@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class shuttle_beacon extends script.base_script
 {
-    public shuttle_beacon()
-    {
-    }
+
     public static final String SHUTTLE_TABLE = "datatables/event_perk/shuttle_options.iff";
     public static final String DATATABLE = "datatables/event_perk/perk_data.iff";
     public static final String STF_FILE = "event_perk";

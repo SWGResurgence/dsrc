@@ -5,9 +5,7 @@ import script.*;
 
 public class gcw_demoralized_soldier extends script.base_script
 {
-    public gcw_demoralized_soldier()
-    {
-    }
+
     public static String c_stringFile = "conversation/gcw_demoralized_soldier";
     public boolean gcw_demoralized_soldier_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

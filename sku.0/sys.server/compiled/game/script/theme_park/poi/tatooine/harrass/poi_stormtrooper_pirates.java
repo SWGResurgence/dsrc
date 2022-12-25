@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class poi_stormtrooper_pirates extends script.theme_park.poi.base
 {
-    public poi_stormtrooper_pirates()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location here = new location(getLocation(self));

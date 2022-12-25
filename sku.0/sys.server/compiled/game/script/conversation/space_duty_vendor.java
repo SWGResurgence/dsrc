@@ -5,9 +5,7 @@ import script.library.*;
 
 public class space_duty_vendor extends script.base_script
 {
-    public space_duty_vendor()
-    {
-    }
+
     public static String c_stringFile = "conversation/space_duty_vendor";
     public boolean space_duty_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

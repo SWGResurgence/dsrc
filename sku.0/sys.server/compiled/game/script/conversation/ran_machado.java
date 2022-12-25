@@ -5,9 +5,7 @@ import script.*;
 
 public class ran_machado extends script.base_script
 {
-    public ran_machado()
-    {
-    }
+
     public static String c_stringFile = "conversation/ran_machado";
     public boolean ran_machado_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

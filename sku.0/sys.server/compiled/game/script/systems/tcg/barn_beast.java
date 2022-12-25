@@ -5,9 +5,7 @@ import script.library.*;
 
 public class barn_beast extends script.base_script
 {
-    public barn_beast()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);

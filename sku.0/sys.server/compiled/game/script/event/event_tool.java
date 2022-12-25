@@ -9,9 +9,7 @@ import java.util.StringTokenizer;
 
 public class event_tool extends script.base_script
 {
-    public event_tool()
-    {
-    }
+
     private static final String[] BADBUFFS =
     {
         "movement",

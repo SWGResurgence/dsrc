@@ -5,9 +5,7 @@ import script.library.*;
 
 public class quharek_phase_2 extends script.base_script
 {
-    public quharek_phase_2()
-    {
-    }
+
     public static String c_stringFile = "conversation/quharek_phase_2";
     public boolean quharek_phase_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

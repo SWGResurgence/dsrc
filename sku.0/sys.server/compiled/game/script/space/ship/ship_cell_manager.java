@@ -8,9 +8,7 @@ import script.string_id;
 
 public class ship_cell_manager extends script.base_script
 {
-    public ship_cell_manager()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

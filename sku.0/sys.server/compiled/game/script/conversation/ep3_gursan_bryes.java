@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_gursan_bryes extends script.base_script
 {
-    public ep3_gursan_bryes()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_gursan_bryes";
     public boolean ep3_gursan_bryes_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

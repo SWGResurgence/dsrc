@@ -8,9 +8,7 @@ import script.string_id;
 
 public class ice_cream_buff extends script.base_script
 {
-    public ice_cream_buff()
-    {
-    }
+
     public static final String ALREADY_SETUP = "itemFoodScriptRemoved";
     public static final String ITEM_FOOD_SCRIPT = "item.food";
     public static final String OWNER_OID = "owner";

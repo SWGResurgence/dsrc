@@ -5,9 +5,7 @@ import script.*;
 
 public class legacy_naboo_lt_col_typho extends script.base_script
 {
-    public legacy_naboo_lt_col_typho()
-    {
-    }
+
     public static String c_stringFile = "conversation/legacy_naboo_lt_col_typho";
     public boolean legacy_naboo_lt_col_typho_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import script.string_id;
 
 public class kor_vella_ryll_smuggler_block extends script.base_script
 {
-    public kor_vella_ryll_smuggler_block()
-    {
-    }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item) || isGod(item))

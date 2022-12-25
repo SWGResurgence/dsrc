@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class event_one_guard extends script.base_script
 {
-    public event_one_guard()
-    {
-    }
+
     public static final String SHIELD = "effect_shield";
     public static final boolean doLogging = false;
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException

@@ -7,9 +7,7 @@ import script.string_id;
 
 public class dungeon_ticket extends script.base_script
 {
-    public dungeon_ticket()
-    {
-    }
+
     public static final string_id SID_NO_COLLECTOR = new string_id("dungeon/space_dungeon", "no_collector");
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {

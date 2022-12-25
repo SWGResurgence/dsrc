@@ -11,9 +11,7 @@ import script.string_id;
 
 public class fs_village_wall_repair extends script.base_script
 {
-    public fs_village_wall_repair()
-    {
-    }
+
     public static final String PP_FILE_LOC = "quest/force_sensitive/fs_wall_repair";
     public static final String RESPONSE_TEXT = "datatables/fs_quests/fs_wall_repair.iff";
     public static final int INITIAL_DELAY = 10;

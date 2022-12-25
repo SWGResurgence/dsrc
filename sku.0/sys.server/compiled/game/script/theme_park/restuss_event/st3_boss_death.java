@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class st3_boss_death extends script.base_script
 {
-    public st3_boss_death()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

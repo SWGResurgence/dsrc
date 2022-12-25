@@ -5,9 +5,7 @@ import script.*;
 
 public class defend_the_village extends script.base_script
 {
-    public defend_the_village()
-    {
-    }
+
     public static String c_stringFile = "conversation/defend_the_village";
     public boolean defend_the_village_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

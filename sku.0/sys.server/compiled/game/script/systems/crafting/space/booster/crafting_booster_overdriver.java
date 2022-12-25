@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_booster_overdriver extends script.systems.crafting.space.booster.crafting_base_booster_component
 {
-    public crafting_booster_overdriver()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

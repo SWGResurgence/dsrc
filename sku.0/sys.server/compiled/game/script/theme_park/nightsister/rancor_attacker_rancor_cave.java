@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class rancor_attacker_rancor_cave extends script.base_script
 {
-    public rancor_attacker_rancor_cave()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "nightsisterCaveSpawn", null, 3.0f, false);

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class poi_city_street_music extends script.base_script
 {
-    public poi_city_street_music()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

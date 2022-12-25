@@ -11,9 +11,7 @@ import java.util.Map;
 
 public class object_for_sale extends script.base_script
 {
-    public object_for_sale()
-    {
-    }
+
     public static final String VENDOR_TOKEN_TYPE = "item.token.type";
     public static final string_id SID_INV_FULL = new string_id("spam", "npc_vendor_player_inv_full");
     public int OnAttach(obj_id self) throws InterruptedException

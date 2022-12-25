@@ -8,9 +8,7 @@ import script.*;
 
 public class talus_nashal_mother extends script.base_script
 {
-    public talus_nashal_mother()
-    {
-    }
+
     public static String c_stringFile = "conversation/talus_nashal_mother";
     public boolean talus_nashal_mother_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

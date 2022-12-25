@@ -8,9 +8,7 @@ import script.*;
 
 public class som_doctor_lu extends script.base_script
 {
-    public som_doctor_lu()
-    {
-    }
+
     public static String c_stringFile = "conversation/som_doctor_lu";
     public boolean som_doctor_lu_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

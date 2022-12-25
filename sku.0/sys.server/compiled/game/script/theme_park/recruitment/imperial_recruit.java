@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class imperial_recruit extends script.theme_park.recruitment.base.base_recruiter
 {
-    public imperial_recruit()
-    {
-    }
+
     public static final String CONVO = "recruiting/imperial_recruit";
     public int OnInitialize(obj_id self) throws InterruptedException {
         if (!hasObjVar(self, "dressed")) {

@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class ig88_alarm extends script.base_script
 {
-    public ig88_alarm()
-    {
-    }
+
     public int alarm_on(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))

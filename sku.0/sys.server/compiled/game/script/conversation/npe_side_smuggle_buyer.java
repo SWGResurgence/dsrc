@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_side_smuggle_buyer extends script.base_script
 {
-    public npe_side_smuggle_buyer()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_side_smuggle_buyer";
     public boolean npe_side_smuggle_buyer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

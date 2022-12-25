@@ -8,9 +8,7 @@ import script.string_id;
 
 public class stronghold_ladder extends script.base_script
 {
-    public stronghold_ladder()
-    {
-    }
+
     public static final String STF_FILE = "theme_park/outbreak/outbreak";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

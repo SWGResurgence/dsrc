@@ -5,9 +5,7 @@ import script.*;
 
 public class clone_droid extends script.base_script
 {
-    public clone_droid()
-    {
-    }
+
     public static String c_stringFile = "conversation/clone_droid";
     public boolean clone_droid_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

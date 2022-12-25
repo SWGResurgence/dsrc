@@ -22,11 +22,7 @@ import script.*;
 
 public class wod_prison_head_guard extends script.base_script
 {
-	public wod_prison_head_guard()
 
-	{
-
-	}
 
 // ======================================================================
 // Script Constants

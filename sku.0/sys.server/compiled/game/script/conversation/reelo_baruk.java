@@ -8,9 +8,7 @@ import script.*;
 
 public class reelo_baruk extends script.base_script
 {
-    public reelo_baruk()
-    {
-    }
+
     public static String c_stringFile = "conversation/reelo_baruk";
     public boolean reelo_baruk_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

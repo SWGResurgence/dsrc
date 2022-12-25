@@ -8,9 +8,7 @@ import script.*;
 
 public class mtp_hideout_safe_tech extends script.base_script
 {
-    public mtp_hideout_safe_tech()
-    {
-    }
+
     public static String c_stringFile = "conversation/mtp_hideout_safe_tech";
     public boolean mtp_hideout_safe_tech_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

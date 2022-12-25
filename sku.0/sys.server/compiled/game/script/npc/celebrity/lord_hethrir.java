@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class lord_hethrir extends script.base_script
 {
-    public lord_hethrir()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Lord Hethrir");

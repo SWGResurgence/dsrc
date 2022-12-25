@@ -6,9 +6,7 @@ import script.library.*;
 
 public class jwatson_test extends script.base_script
 {
-    public jwatson_test()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {

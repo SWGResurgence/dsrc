@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_etyyy_kint_zsam extends script.base_script
 {
-    public ep3_etyyy_kint_zsam()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_etyyy_kint_zsam";
     public boolean ep3_etyyy_kint_zsam_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

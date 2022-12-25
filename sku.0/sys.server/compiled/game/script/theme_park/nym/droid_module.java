@@ -5,9 +5,7 @@ import script.library.groundquests;
 
 public class droid_module extends script.base_script
 {
-    public droid_module()
-    {
-    }
+
     public static final String STF_FILE = "pet/droid_modules";
     public static final string_id RETRIEVE = new string_id("celebrity/jinkins", "retrieve");
     public int makeNewModule(obj_id self, dictionary params) throws InterruptedException

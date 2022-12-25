@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_tyrena_stavu extends script.base_script
 {
-    public corellia_tyrena_stavu()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_tyrena_stavu";
     public boolean corellia_tyrena_stavu_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

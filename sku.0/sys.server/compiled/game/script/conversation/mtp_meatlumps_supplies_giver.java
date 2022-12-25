@@ -8,9 +8,7 @@ import script.*;
 
 public class mtp_meatlumps_supplies_giver extends script.base_script
 {
-    public mtp_meatlumps_supplies_giver()
-    {
-    }
+
     public static String c_stringFile = "conversation/mtp_meatlumps_supplies_giver";
     public boolean mtp_meatlumps_supplies_giver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

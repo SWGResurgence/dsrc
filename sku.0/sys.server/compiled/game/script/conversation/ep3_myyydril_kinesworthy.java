@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_myyydril_kinesworthy extends script.base_script
 {
-    public ep3_myyydril_kinesworthy()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_myyydril_kinesworthy";
     public boolean ep3_myyydril_kinesworthy_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

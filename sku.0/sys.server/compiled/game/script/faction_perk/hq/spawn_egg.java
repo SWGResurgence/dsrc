@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class spawn_egg extends script.base_script
 {
-    public spawn_egg()
-    {
-    }
+
     private static final String VAR_SPAWN_PATHPOINTS = hq.VAR_SPAWN_BASE + ".pathPoints";
     private static final String VAR_SPAWN_FORMATION = hq.VAR_SPAWN_BASE + ".formation";
     private static final String VAR_CLEANING_UP = hq.VAR_SPAWN_BASE + ".cleaningUp";

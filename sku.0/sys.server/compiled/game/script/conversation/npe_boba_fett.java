@@ -5,9 +5,7 @@ import script.*;
 
 public class npe_boba_fett extends script.base_script
 {
-    public npe_boba_fett()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_boba_fett";
     public boolean npe_boba_fett_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class devistator_repair extends script.base_script
 {
-    public devistator_repair()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

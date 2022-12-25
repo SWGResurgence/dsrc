@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class gcw_city_kit_tower extends script.systems.gcw.gcw_city_kit
 {
-    public gcw_city_kit_tower()
-    {
-    }
+
     public obj_id getPlayerInTower() throws InterruptedException
     {
         return null;

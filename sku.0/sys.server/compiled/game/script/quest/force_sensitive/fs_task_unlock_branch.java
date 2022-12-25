@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class fs_task_unlock_branch extends script.base_script
 {
-    public fs_task_unlock_branch()
-    {
-    }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         boolean success = false;

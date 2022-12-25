@@ -8,9 +8,7 @@ import script.*;
 
 public class community_painting_handout_2008 extends script.base_script
 {
-    public community_painting_handout_2008()
-    {
-    }
+
     public static String c_stringFile = "conversation/community_painting_handout_2008";
     public boolean community_painting_handout_2008_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.string_id;
 
 public class active_juggle extends script.base_script
 {
-    public active_juggle()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         groundquests.questStartJuggle(self);

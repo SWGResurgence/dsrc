@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class empire_day_interior_spawn_npc extends script.base_script
 {
-    public empire_day_interior_spawn_npc()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "removeConversationScripts", null, 10, false);

@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class lifeday_vendor extends script.base_script
 {
-    public lifeday_vendor()
-    {
-    }
+
     public static String c_stringFile = "conversation/lifeday_vendor";
     public boolean lifeday_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

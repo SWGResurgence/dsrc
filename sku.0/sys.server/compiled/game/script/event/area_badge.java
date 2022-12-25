@@ -8,9 +8,7 @@ import java.util.StringTokenizer;
 
 public class area_badge extends script.base_script
 {
-    public area_badge()
-    {
-    }
+
     private static final String[] HELP_TEXT =
     {
         "------------------------------------",

@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class static_escort extends script.quest.task.ground.base_task
 {
-    public static_escort()
-    {
-    }
+
     public static final String dataTableColumnServerTemplate = "SERVER_TEMPLATE";
     public static final String dataTableColumnMovementType = "MOVEMENT_TYPE";
     public static final String dataTableColumnMaxAllowedDistance = "MAX_ALLOWED_ESCORT_DISTANCE";

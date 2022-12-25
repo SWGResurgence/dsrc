@@ -5,9 +5,7 @@ import script.*;
 
 public class npe_side_dungeon_meat extends script.base_script
 {
-    public npe_side_dungeon_meat()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_side_dungeon_meat";
     public boolean npe_side_dungeon_meat_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

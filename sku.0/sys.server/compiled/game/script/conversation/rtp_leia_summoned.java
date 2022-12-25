@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class rtp_leia_summoned extends script.base_script
 {
-    public rtp_leia_summoned()
-    {
-    }
+
     public static String c_stringFile = "conversation/rtp_leia_summoned";
     public boolean rtp_leia_summoned_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

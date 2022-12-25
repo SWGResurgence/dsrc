@@ -5,9 +5,7 @@ import script.*;
 
 public class mtp_meatlump_wine extends script.base_script
 {
-    public mtp_meatlump_wine()
-    {
-    }
+
     public static String c_stringFile = "conversation/mtp_meatlump_wine";
     public boolean mtp_meatlump_wine_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

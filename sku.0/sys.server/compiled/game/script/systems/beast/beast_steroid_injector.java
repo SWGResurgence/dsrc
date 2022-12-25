@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class beast_steroid_injector extends script.base_script
 {
-    public beast_steroid_injector()
-    {
-    }
+
     public static final string_id SID_BEAST_HAS_BUFF = new string_id("beast", "beast_has_buff");
     public static final string_id SID_BEAST_WRONG_FAMILY = new string_id("beast", "beast_buff_wrong_type");
     public static final string_id SID_BEAST_NO_BEAST = new string_id("beast", "beast_buff_no_beast");

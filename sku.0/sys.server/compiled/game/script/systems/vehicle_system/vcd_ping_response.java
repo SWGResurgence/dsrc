@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class vcd_ping_response extends script.base_script
 {
-    public vcd_ping_response()
-    {
-    }
+
     public static final String VCDPING_MESSAGE_VCD_ID_NAME = "vcdId";
     public static final String VCDPING_MESSAGE_VEHICLE_ID_NAME = "vehicleId";
     public static final String VCDPING_MESSAGE_MESSAGE_ID_NAME = "messageId";

@@ -8,9 +8,7 @@ import script.*;
 
 public class nexus_ig88_starter extends script.base_script
 {
-    public nexus_ig88_starter()
-    {
-    }
+
     public static String c_stringFile = "conversation/nexus_ig88_starter";
     public boolean nexus_ig88_starter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

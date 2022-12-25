@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_38_civius_bain extends script.base_script
 {
-    public corellia_38_civius_bain()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_38_civius_bain";
     public boolean corellia_38_civius_bain_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,9 +8,7 @@ import script.*;
 
 public class talus_nashal_kiki extends script.base_script
 {
-    public talus_nashal_kiki()
-    {
-    }
+
     public static String c_stringFile = "conversation/talus_nashal_kiki";
     public boolean talus_nashal_kiki_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

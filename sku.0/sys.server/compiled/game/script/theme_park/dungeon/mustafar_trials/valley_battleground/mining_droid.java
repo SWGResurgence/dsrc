@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class mining_droid extends script.base_script
 {
-    public mining_droid()
-    {
-    }
+
     public static final String STF = "mustafar/valley_battlefield";
     public static final string_id ACTIVATE_DROID = new string_id(STF, "activate_droid");
     public static final boolean LOGGING = false;

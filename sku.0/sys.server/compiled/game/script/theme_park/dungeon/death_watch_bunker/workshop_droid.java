@@ -8,9 +8,7 @@ import script.string_id;
 
 public class workshop_droid extends script.base_script
 {
-    public workshop_droid()
-    {
-    }
+
     public static final String FACETO_VOLUME_NAME = "faceToTriggerVolume";
     public static final string_id BATTERY_CLEANED = new string_id("dungeon/death_watch", "battery_cleaned");
     public static final string_id NEED_BATTERY = new string_id("dungeon/death_watch", "need_battery");

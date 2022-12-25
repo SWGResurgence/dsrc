@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_station_chewie extends script.base_script
 {
-    public npe_station_chewie()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_station_chewie";
     public boolean npe_station_chewie_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

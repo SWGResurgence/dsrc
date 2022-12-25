@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class pirate_base extends script.base_script
 {
-    public pirate_base()
-    {
-    }
+
     public int OnDefenderCombatAction(obj_id self, obj_id killer, obj_id weapon, int combatResult) throws InterruptedException
     {
         obj_id base = getObjIdObjVar(self, "base");

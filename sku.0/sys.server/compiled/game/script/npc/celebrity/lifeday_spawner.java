@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class lifeday_spawner extends script.base_script
 {
-    public lifeday_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String setting = getConfigSetting("EventTeam", "lifeday");

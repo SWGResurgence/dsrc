@@ -8,9 +8,7 @@ import script.string_id;
 
 public class terminal_crafting_display extends script.base_script
 {
-    public terminal_crafting_display()
-    {
-    }
+
     public static final string_id SID_GRANT_BUFF = new string_id("spam", "assembly_terminal_grant_buff");
     public static final string_id SID_NOT_IN_HOUSE = new string_id("spam", "assembly_terminal_not_in_huse");
     public static final string_id SID_WRONG_CLASS = new string_id("spam", "assembly_terminal_wrong_class");

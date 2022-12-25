@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class lair_base extends script.theme_park.poi.base
 {
-    public lair_base()
-    {
-    }
+
     public static final int LAIR_RANGE = 200;
     public static final int LAIR_LIMIT = 2;
     public int OnInitialize(obj_id self) throws InterruptedException

@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class sd_chief_olum extends script.base_script
 {
-    public sd_chief_olum()
-    {
-    }
+
     public static String c_stringFile = "conversation/sd_chief_olum";
     public boolean sd_chief_olum_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

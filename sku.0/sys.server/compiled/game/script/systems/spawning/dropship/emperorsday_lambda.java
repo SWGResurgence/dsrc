@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class emperorsday_lambda extends script.systems.spawning.dropship.base
 {
-    public emperorsday_lambda()
-    {
-    }
+
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "empireday";
     public int OnAttach(obj_id self) throws InterruptedException

@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class fs_crafting1_player extends script.base_script
 {
-    public fs_crafting1_player()
-    {
-    }
+
     public static final string_id MSG_COMP_NOT_INSTALLED = new string_id("quest/force_sensitive/fs_crafting", "phase1_msg_comp_not_installed");
     public static final string_id MSG_INVENTORY_FULL = new string_id("quest/force_sensitive/fs_crafting", "phase1_msg_inventory_full");
     public static final string_id MSG_ALREADY_HAVE_COMPONENT = new string_id("quest/force_sensitive/fs_crafting", "phase1_msg_already_have_component");

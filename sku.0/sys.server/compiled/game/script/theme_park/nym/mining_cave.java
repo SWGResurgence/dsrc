@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class mining_cave extends script.base_script
 {
-    public mining_cave()
-    {
-    }
+
     public static final String NYM_OBJECT_DATATABLE = "datatables/spawning/theme_park/nym_mining_cave_objects.iff";
     public static final String SPAWNER_DATATABLE = "datatables/spawning/theme_park/nym_imperial_mine.iff";
     public int OnInitialize(obj_id self) throws InterruptedException

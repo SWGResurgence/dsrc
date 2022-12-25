@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class npe_brochure extends script.base_script
 {
-    public npe_brochure()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_brochure";
     public boolean npe_brochure_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

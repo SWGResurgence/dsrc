@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class story_arc_chapter_three_pilot extends script.base_script
 {
-    public story_arc_chapter_three_pilot()
-    {
-    }
+
     public static String c_stringFile = "conversation/story_arc_chapter_three_pilot";
     public boolean story_arc_chapter_three_pilot_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

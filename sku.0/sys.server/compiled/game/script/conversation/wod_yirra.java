@@ -19,11 +19,7 @@ import script.*;
 
 public class wod_yirra extends script.base_script
 {
-	public wod_yirra()
 
-	{
-
-	}
 
 // ======================================================================
 // Script Constants

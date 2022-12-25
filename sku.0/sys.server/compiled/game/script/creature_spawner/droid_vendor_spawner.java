@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class droid_vendor_spawner extends script.base_script
 {
-    public droid_vendor_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "started_spawning"))

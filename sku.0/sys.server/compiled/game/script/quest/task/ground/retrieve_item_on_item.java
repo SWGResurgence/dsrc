@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class retrieve_item_on_item extends script.base_script
 {
-    public retrieve_item_on_item()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isMob(self))

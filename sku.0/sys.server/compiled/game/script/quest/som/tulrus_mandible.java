@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class tulrus_mandible extends script.base_script
 {
-    public tulrus_mandible()
-    {
-    }
+
     public static final String STF = "som/som_quest";
     public static final string_id EXAMINE = new string_id(STF, "tulrus_horn_examine");
     public static final string_id DESTROY = new string_id(STF, "tulrus_horn_destroy");

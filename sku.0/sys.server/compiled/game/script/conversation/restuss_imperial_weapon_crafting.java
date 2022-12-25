@@ -5,9 +5,7 @@ import script.*;
 
 public class restuss_imperial_weapon_crafting extends script.base_script
 {
-    public restuss_imperial_weapon_crafting()
-    {
-    }
+
     public static String c_stringFile = "conversation/restuss_imperial_weapon_crafting";
     public boolean restuss_imperial_weapon_crafting_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

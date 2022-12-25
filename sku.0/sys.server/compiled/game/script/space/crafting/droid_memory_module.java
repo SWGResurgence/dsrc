@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class droid_memory_module extends script.base_script
 {
-    public droid_memory_module()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         string_id strSpam = getNameStringId(self);

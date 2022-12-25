@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class rancor_harass_stormtroopers extends script.theme_park.poi.base
 {
-    public rancor_harass_stormtroopers()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "First POI Test Attached");

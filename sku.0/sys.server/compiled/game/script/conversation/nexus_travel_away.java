@@ -5,9 +5,7 @@ import script.library.*;
 
 public class nexus_travel_away extends script.base_script
 {
-    public nexus_travel_away()
-    {
-    }
+
     public static String c_stringFile = "conversation/nexus_travel_away";
     public boolean nexus_travel_away_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -9,9 +9,7 @@ import script.string_id;
 
 public class mayor_vip extends script.base_script
 {
-    public mayor_vip()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);

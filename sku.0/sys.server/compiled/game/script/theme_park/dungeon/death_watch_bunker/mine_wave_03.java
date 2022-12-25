@@ -8,9 +8,7 @@ import script.string_id;
 
 public class mine_wave_03 extends script.base_script
 {
-    public mine_wave_03()
-    {
-    }
+
     public static final String TBL_MINE_WAVE = "datatables/dungeon/death_watch/mine_wave.iff";
     public static final string_id CALL_BACK_UP = new string_id("dungeon/death_watch", "call_back_up");
     public int OnAttach(obj_id self) throws InterruptedException

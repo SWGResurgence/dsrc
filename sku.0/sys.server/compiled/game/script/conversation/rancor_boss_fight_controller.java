@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class rancor_boss_fight_controller extends script.base_script
 {
-    public rancor_boss_fight_controller()
-    {
-    }
+
     public static String c_stringFile = "conversation/rancor_boss_fight_controller";
     public boolean rancor_boss_fight_controller_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

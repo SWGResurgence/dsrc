@@ -8,9 +8,7 @@ import script.string_id;
 
 public class enzyme_extractor extends script.base_script
 {
-    public enzyme_extractor()
-    {
-    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int options = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("beast", "extract_type_3_enzyme"));

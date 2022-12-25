@@ -8,9 +8,7 @@ import static script.library.storyteller.STORYTELLER_DATATABLE;
 
 public class city_decor_converter extends script.base_script
 {
-    public city_decor_converter()
-    {
-    }
+
 
     //@Converts a story teller object to a city decor object
     public static void createPropObject(obj_id self, obj_id token)

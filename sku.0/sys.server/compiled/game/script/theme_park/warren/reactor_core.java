@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class reactor_core extends script.base_script
 {
-    public reactor_core()
-    {
-    }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))

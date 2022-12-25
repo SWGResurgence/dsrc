@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class npe_band_sequence extends script.base_script
 {
-    public npe_band_sequence()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

@@ -5,9 +5,7 @@ import script.string_id;
 
 public class assistant_armory_lock extends script.base_script
 {
-    public assistant_armory_lock()
-    {
-    }
+
     public static final String MSGS = "dungeon/geonosian_madbio";
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {

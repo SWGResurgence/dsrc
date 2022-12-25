@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_journal_quest extends script.base_script
 {
-    public npe_journal_quest()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_journal_quest";
     public boolean npe_journal_quest_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

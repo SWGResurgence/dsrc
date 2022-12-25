@@ -5,9 +5,7 @@ import script.*;
 
 public class detainment_npc_rescue extends script.base_script
 {
-    public detainment_npc_rescue()
-    {
-    }
+
     public static String c_stringFile = "conversation/detainment_npc_rescue";
     public boolean detainment_npc_rescue_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

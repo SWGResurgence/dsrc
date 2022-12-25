@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class echo_player extends script.base_script
 {
-    public echo_player()
-    {
-    }
+
     public static final String BADGE_PLANET_HOTH = "bdg_hoth_planet";
     public static String[] QUEST_TO_CLEAR = 
     {

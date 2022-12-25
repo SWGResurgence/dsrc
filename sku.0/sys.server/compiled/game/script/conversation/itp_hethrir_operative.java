@@ -8,9 +8,7 @@ import script.*;
 
 public class itp_hethrir_operative extends script.base_script
 {
-    public itp_hethrir_operative()
-    {
-    }
+
     public static String c_stringFile = "conversation/itp_hethrir_operative";
     public boolean itp_hethrir_operative_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

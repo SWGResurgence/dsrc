@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class credit_for_kills extends script.base_script
 {
-    public credit_for_kills()
-    {
-    }
+
     public static final String VERSION = "v1.00.00";
     public int OnAttach(obj_id self) throws InterruptedException
     {

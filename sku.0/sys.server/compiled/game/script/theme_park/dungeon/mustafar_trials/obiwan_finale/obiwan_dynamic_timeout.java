@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class obiwan_dynamic_timeout extends script.base_script
 {
-    public obiwan_dynamic_timeout()
-    {
-    }
+
     public static final String TRIGGER_VOLUME_OBI = "obiwan_interest_volume";
     public static final float OBI_INTEREST_RADIUS = 7.0f;
     public static final boolean CONST_FLAG_DO_LOGGING = false;

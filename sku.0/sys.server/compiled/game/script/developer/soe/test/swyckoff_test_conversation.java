@@ -8,9 +8,7 @@ import script.*;
 
 public class swyckoff_test_conversation extends script.base_script
 {
-    public swyckoff_test_conversation()
-    {
-    }
+
     public static String c_stringFile = "conversation/test/swyckoff_test_conversation";
     public boolean swyckoff_test_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

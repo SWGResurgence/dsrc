@@ -5,9 +5,7 @@ import script.library.*;
 
 public class obiwan_crystal_object extends script.base_script
 {
-    public obiwan_crystal_object()
-    {
-    }
+
     public static final string_id SID_USE_CRYSTAL = new string_id(mustafar.STF_OBI_MSGS, "obiwan_finale_use_crystal");
     public static final string_id SID_DESTROY_CRYSTAL = new string_id(mustafar.STF_OBI_MSGS, "obiwan_finale_destroy_crystal");
     public static final string_id SID_TAKE_CRYSTAL = new string_id(mustafar.STF_OBI_MSGS, "obiwan_finale_take_crystal");

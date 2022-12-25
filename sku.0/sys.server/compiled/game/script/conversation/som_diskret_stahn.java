@@ -7,9 +7,7 @@ import script.*;
 
 public class som_diskret_stahn extends script.base_script
 {
-    public som_diskret_stahn()
-    {
-    }
+
     public static String c_stringFile = "conversation/som_diskret_stahn";
     public boolean som_diskret_stahn_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

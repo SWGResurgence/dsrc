@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class event_three extends script.base_script
 {
-    public event_three()
-    {
-    }
+
     public static final String boss = "som_volcano_three_forward_commander";
     public static final String GUARD = "som_volcano_three_hk77";
     public static final String risen = "som_volcano_three_risen_commander";

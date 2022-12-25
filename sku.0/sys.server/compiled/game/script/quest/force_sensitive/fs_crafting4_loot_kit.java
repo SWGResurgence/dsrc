@@ -7,9 +7,7 @@ import script.string_id;
 
 public class fs_crafting4_loot_kit extends script.base_script
 {
-    public fs_crafting4_loot_kit()
-    {
-    }
+
     public static final string_id SID_LOOT_KIT_DESTROYED = new string_id("quest/force_sensitive/fs_crafting", "crafting4_kit_destroyed");
     public static final string_id SID_LOOT_KIT_DESTROYED_OVER = new string_id("quest/force_sensitive/fs_crafting", "crafting4_kit_destroyed_over");
     public int OnDestroy(obj_id self) throws InterruptedException

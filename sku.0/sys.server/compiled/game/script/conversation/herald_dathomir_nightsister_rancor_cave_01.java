@@ -6,9 +6,7 @@ import script.*;
 
 public class herald_dathomir_nightsister_rancor_cave_01 extends script.base_script
 {
-    public herald_dathomir_nightsister_rancor_cave_01()
-    {
-    }
+
     public static String c_stringFile = "conversation/herald_dathomir_nightsister_rancor_cave_01";
     public boolean herald_dathomir_nightsister_rancor_cave_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

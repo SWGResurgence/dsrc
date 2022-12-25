@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_forest_kerritamba extends script.base_script
 {
-    public ep3_forest_kerritamba()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_forest_kerritamba";
     public boolean ep3_forest_kerritamba_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

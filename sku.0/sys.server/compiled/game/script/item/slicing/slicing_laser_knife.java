@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class slicing_laser_knife extends script.base_script
 {
-    public slicing_laser_knife()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCount(self, 10);

@@ -22,11 +22,7 @@ import script.*;
 
 public class skyann_langen extends script.base_script
 {
-	public skyann_langen()
 
-	{
-
-	}
 
 // ======================================================================
 // Script Constants

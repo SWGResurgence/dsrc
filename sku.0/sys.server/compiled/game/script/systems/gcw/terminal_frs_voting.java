@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class terminal_frs_voting extends script.base_script
 {
-    public terminal_frs_voting()
-    {
-    }
+
     public static final String SCRIPT_VAR_SUI_PID = "force_rank.vote_sui";
     public static final String SCRIPT_VAR_TERMINAL = "force_rank.vote_terminal";
     public int OnInitialize(obj_id self) throws InterruptedException

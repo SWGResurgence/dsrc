@@ -8,9 +8,7 @@ public class rori_npc_easy extends base_newbie_npc_spawner
     public int maxPop = 4;
     public boolean newbie = true;
 
-    public rori_npc_easy()
-    {
-    }
+
     public String pickCreature() throws InterruptedException
     {
         switch (rand(1, 4))

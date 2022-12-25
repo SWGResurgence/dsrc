@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_39_gwhirrye_baric extends script.base_script
 {
-    public corellia_39_gwhirrye_baric()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_39_gwhirrye_baric";
     public boolean corellia_39_gwhirrye_baric_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

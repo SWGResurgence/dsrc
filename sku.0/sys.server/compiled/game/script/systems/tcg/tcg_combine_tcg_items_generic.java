@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class tcg_combine_tcg_items_generic extends script.base_script
 {
-    public tcg_combine_tcg_items_generic()
-    {
-    }
+
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "combine";
     public static final String OBJVAR_SET_NAME = "tcg.setName";

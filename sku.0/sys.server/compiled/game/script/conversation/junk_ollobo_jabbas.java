@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class junk_ollobo_jabbas extends script.base_script
 {
-    public junk_ollobo_jabbas()
-    {
-    }
+
     public static String c_stringFile = "conversation/junk_ollobo_jabbas";
     public boolean junk_ollobo_jabbas_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

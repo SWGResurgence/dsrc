@@ -8,9 +8,7 @@ import script.*;
 
 public class lf_safetyquestgiver extends script.base_script
 {
-    public lf_safetyquestgiver()
-    {
-    }
+
     public static String c_stringFile = "conversation/lf_safetyquestgiver";
     public boolean lf_safetyquestgiver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

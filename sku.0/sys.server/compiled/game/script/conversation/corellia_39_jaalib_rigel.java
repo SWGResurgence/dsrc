@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_39_jaalib_rigel extends script.base_script
 {
-    public corellia_39_jaalib_rigel()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_39_jaalib_rigel";
     public boolean corellia_39_jaalib_rigel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

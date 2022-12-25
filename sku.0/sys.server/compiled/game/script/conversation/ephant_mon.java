@@ -8,9 +8,7 @@ import script.*;
 
 public class ephant_mon extends script.base_script
 {
-    public ephant_mon()
-    {
-    }
+
     public static String c_stringFile = "conversation/ephant_mon";
     public boolean ephant_mon_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

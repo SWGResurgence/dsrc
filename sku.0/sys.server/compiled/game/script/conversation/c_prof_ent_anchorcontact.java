@@ -8,9 +8,7 @@ import script.*;
 
 public class c_prof_ent_anchorcontact extends script.base_script
 {
-    public c_prof_ent_anchorcontact()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_prof_ent_anchorcontact";
     public boolean c_prof_ent_anchorcontact_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

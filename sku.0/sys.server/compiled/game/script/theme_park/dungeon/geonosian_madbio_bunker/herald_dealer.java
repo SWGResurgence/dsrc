@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class herald_dealer extends script.base_script
 {
-    public herald_dealer()
-    {
-    }
+
     public static final String TBL = "datatables/npc/relic_dealer/relic_geonosian_bio_bunker.iff";
     public static final String SCRIPTVAR_JUNK_SUI = "relicdealer.biogenic.sui";
     public static final String SCRIPTVAR_JUNK_IDS = "relicdealer.biogenic.ids";

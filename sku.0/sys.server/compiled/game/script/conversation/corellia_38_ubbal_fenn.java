@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_38_ubbal_fenn extends script.base_script
 {
-    public corellia_38_ubbal_fenn()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_38_ubbal_fenn";
     public boolean corellia_38_ubbal_fenn_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class etyyy_broodmaster_hsskas_spawner extends script.base_script
 {
-    public etyyy_broodmaster_hsskas_spawner()
-    {
-    }
+
     public static final String triggerName = "triggerVolumeSpawnHsskas";
     public static final String actionTrigger = "triggerVolumeActionTrigger";
     public static final float triggerRange = 100.0f;

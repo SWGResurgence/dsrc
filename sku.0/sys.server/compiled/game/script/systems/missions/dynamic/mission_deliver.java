@@ -8,9 +8,7 @@ import script.string_id;
 
 public class mission_deliver extends script.systems.missions.base.mission_dynamic_base
 {
-    public mission_deliver()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "systems.missions.base.mission_cleanup_tracker"))

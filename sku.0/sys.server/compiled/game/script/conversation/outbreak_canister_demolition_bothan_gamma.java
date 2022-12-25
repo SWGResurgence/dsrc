@@ -8,9 +8,7 @@ import script.*;
 
 public class outbreak_canister_demolition_bothan_gamma extends script.base_script
 {
-    public outbreak_canister_demolition_bothan_gamma()
-    {
-    }
+
     public static String c_stringFile = "conversation/outbreak_canister_demolition_bothan_gamma";
     public boolean outbreak_canister_demolition_bothan_gamma_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

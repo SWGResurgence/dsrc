@@ -6,9 +6,7 @@ import script.string_id;
 
 public class npc_inventory_controller extends script.base_script
 {
-    public npc_inventory_controller()
-    {
-    }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isIdValid(transferer) && isPlayer(transferer))

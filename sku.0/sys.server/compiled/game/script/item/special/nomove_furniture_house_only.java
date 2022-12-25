@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class nomove_furniture_house_only extends script.base_script
 {
-    public nomove_furniture_house_only()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "notrade"))

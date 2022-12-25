@@ -5,9 +5,7 @@ import script.*;
 
 public class tatooine_privateer_tier4 extends script.base_script
 {
-    public tatooine_privateer_tier4()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_privateer_tier4";
     public boolean tatooine_privateer_tier4_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

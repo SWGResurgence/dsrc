@@ -7,9 +7,7 @@ import script.string_id;
 
 public class meatlump_king extends script.base_script
 {
-    public meatlump_king()
-    {
-    }
+
     public static final String MEATLUMP_KING_DATATABLE = "datatables/theme_park/meatlump/meatlump_king.iff";
     public static final String OFFERING_COLUMN = "offering";
     public static final String REACTION_TYPE_COLUMN = "reactionType";

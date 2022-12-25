@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class helper_droid extends script.base_script
 {
-    public helper_droid()
-    {
-    }
+
     public static final String NEW_PLAYER_SCRIPT = "theme_park.new_player.new_player";
     public static final string_id SID_DEFAULT_TEXT_MSG = new string_id("new_player", "default_text_msg");
     public static final string_id SID_DEFAULT_OK_BUTTON = new string_id("new_player", "default_ok_button");

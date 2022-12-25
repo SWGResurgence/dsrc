@@ -5,9 +5,7 @@ import script.library.utils;
 
 public class house_container_lock extends script.base_script
 {
-    public house_container_lock()
-    {
-    }
+
     public static final string_id SID_LOCK_BAD_STRUCTURE = new string_id("spam", "sid_lock_bad_structure");
     public static final string_id SID_LOCK_BAD_LOCK_TARGET = new string_id("spam", "sid_lock_bad_lock_target");
     public static final string_id SID_LOCK_BAD_ALREADY_LOCKED = new string_id("spam", "sid_lock_bad_already_locked");

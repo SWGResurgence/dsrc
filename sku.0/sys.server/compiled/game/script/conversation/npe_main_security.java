@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_main_security extends script.base_script
 {
-    public npe_main_security()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_main_security";
     public boolean npe_main_security_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

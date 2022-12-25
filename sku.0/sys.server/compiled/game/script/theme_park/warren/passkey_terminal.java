@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class passkey_terminal extends script.base_script
 {
-    public passkey_terminal()
-    {
-    }
+
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public static final String CONVO_FILE = "theme_park/warren/warren";
     public static final String ACTIVE = "turret_pass_active";

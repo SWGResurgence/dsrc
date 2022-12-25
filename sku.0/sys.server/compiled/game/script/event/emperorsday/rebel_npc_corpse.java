@@ -8,9 +8,7 @@ import script.library.holiday;
 
 public class rebel_npc_corpse extends script.base_script
 {
-    public rebel_npc_corpse()
-    {
-    }
+
     public static final String EMPIREDAY = "event/empire_day";
     public static final string_id SID_MNU_REBEL = new string_id(EMPIREDAY, "rebel_crash_victim_rebel_menu");
     public static final string_id SID_MNU_IMPERIAL = new string_id(EMPIREDAY, "rebel_crash_victim_imperial_menu");

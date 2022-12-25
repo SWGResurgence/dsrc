@@ -8,9 +8,7 @@ import script.*;
 
 public class bounty_check_reset extends script.base_script
 {
-    public bounty_check_reset()
-    {
-    }
+
     public static String c_stringFile = "conversation/bounty_check_reset";
     public boolean bounty_check_reset_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

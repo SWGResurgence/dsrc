@@ -5,9 +5,7 @@ import script.library.chat;
 
 public class bldg_destroy extends script.base_script
 {
-    public bldg_destroy()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "bark", null, 10, true);

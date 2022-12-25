@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class rtp_wedge_imperial_meeting extends script.base_script
 {
-    public rtp_wedge_imperial_meeting()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume("rtp_wedge_imperial_meeting", 10.0f, true);

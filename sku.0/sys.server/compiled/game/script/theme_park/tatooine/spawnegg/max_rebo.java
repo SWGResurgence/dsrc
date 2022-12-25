@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class max_rebo extends script.base_script
 {
-    public max_rebo()
-    {
-    }
+
     public static final String SCRIPTPATH = "theme_park.tatooine.";
     public static final String TEMPLATE = "object/creature/npc/theme_park/max_rebo.iff";
     public static final String[] SCRIPTS = 

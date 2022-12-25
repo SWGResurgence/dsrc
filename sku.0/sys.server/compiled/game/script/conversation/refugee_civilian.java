@@ -8,9 +8,7 @@ import script.*;
 
 public class refugee_civilian extends script.base_script
 {
-    public refugee_civilian()
-    {
-    }
+
     public static String c_stringFile = "conversation/refugee_civilian";
     public boolean refugee_civilian_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

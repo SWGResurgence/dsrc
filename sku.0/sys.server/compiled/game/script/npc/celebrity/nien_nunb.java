@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class nien_nunb extends script.base_script
 {
-    public nien_nunb()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Nien Nunb");

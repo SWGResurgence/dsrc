@@ -5,9 +5,7 @@ import script.*;
 
 public class pvp_lieutenant_comm_link extends script.base_script
 {
-    public pvp_lieutenant_comm_link()
-    {
-    }
+
     public static final int FACTION_NONE = -1;
     public static final int FACTION_REBEL = 0;
     public static final int FACTION_IMPERIAL = 1;

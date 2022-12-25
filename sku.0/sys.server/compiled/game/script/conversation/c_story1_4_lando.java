@@ -8,9 +8,7 @@ import script.*;
 
 public class c_story1_4_lando extends script.base_script
 {
-    public c_story1_4_lando()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_story1_4_lando";
     public boolean c_story1_4_lando_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import script.*;
 
 public class village_sarguillo_2 extends script.base_script
 {
-    public village_sarguillo_2()
-    {
-    }
+
     public static String c_stringFile = "conversation/village_sarguillo_2";
     public boolean village_sarguillo_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

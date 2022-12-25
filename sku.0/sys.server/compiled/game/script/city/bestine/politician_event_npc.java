@@ -7,9 +7,7 @@ import script.library.planetary_map;
 
 public class politician_event_npc extends script.base_script
 {
-    public politician_event_npc()
-    {
-    }
+
     public static final String FACE_TO_VOLUME_NAME = "faceToTriggerVolume";
     public static final String EVIDENCE_ITEM_SEAN_1 = "object/tangible/loot/quest/sean_questp_ctestimony.iff";
     public static final String EVIDENCE_ITEM_SEAN_2 = "object/tangible/loot/quest/sean_questp_mdisk.iff";

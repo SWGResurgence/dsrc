@@ -7,9 +7,7 @@ import script.resource_weight;
 
 public class crafting_food_additive extends script.systems.crafting.crafting_base
 {
-    public crafting_food_additive()
-    {
-    }
+
     public static final String VERSION = "v1.00.00";
     public static final String FOOD_DATA = "datatables/food/food_data.iff";
     public static final String[] REQUIRED_SKILLS = 

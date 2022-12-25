@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class juriarte_test extends script.base.remote_object_requester
 {
-    public juriarte_test()
-    {
-    }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))

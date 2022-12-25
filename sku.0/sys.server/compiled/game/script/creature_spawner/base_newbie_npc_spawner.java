@@ -12,9 +12,7 @@ public class base_newbie_npc_spawner extends script.base_script
 	public int maxPop = 3;
 	public boolean newbie = false;
 
-	public base_newbie_npc_spawner()
-	{
-	}
+
 	public int OnInitialize(obj_id self) throws InterruptedException
 	{
 		spawnCreatures(self);

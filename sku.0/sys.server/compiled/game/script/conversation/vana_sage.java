@@ -8,9 +8,7 @@ import script.*;
 
 public class vana_sage extends script.base_script
 {
-    public vana_sage()
-    {
-    }
+
     public static String c_stringFile = "conversation/vana_sage";
     public boolean vana_sage_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

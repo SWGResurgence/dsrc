@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class npc_base_builder_respawn extends script.base_script
 {
-    public npc_base_builder_respawn()
-    {
-    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (ai_lib.isMob(self))

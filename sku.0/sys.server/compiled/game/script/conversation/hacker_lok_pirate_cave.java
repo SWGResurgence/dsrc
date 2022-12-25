@@ -8,9 +8,7 @@ import script.*;
 
 public class hacker_lok_pirate_cave extends script.base_script
 {
-    public hacker_lok_pirate_cave()
-    {
-    }
+
     public static String c_stringFile = "conversation/hacker_lok_pirate_cave";
     public boolean hacker_lok_pirate_cave_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

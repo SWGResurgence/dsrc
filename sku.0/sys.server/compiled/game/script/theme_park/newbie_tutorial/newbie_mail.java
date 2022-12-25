@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class newbie_mail extends script.theme_park.newbie_tutorial.tutorial_base
 {
-    public newbie_mail()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         newbieTutorialRequest(self, "clientReady");

@@ -6,9 +6,7 @@ import script.resource_weight;
 
 public class crafting_powerup_item extends script.systems.crafting.item.crafting_base_powerup
 {
-    public crafting_powerup_item()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

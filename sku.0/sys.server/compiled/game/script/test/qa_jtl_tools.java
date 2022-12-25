@@ -14,9 +14,7 @@ import java.util.Vector;
 
 public class qa_jtl_tools extends script.base_script
 {
-    public qa_jtl_tools()
-    {
-    }
+
     public static final String SCRIPTVAR = "qajtl";
     public static final String LOOT_DATATABLE = "datatables/space_loot/loot_items.iff";
     public static final String SHIP_DATATABLE = "datatables/test/qa_jtl_ships.iff";

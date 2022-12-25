@@ -10,9 +10,7 @@ import script.string_id;
 
 public class craft_droidengineer_droid extends script.base_script
 {
-    public craft_droidengineer_droid()
-    {
-    }
+    
     public static final String TBL_JETPACK_WAVE = "datatables/dungeon/death_watch/jetpack_crafting_attack_wave.iff";
     public static final String MSGS = "dungeon/death_watch";
     public int OnAttach(obj_id self) throws InterruptedException

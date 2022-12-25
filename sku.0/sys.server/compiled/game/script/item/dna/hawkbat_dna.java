@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class hawkbat_dna extends script.base_script
 {
-    public hawkbat_dna()
-    {
-    }
+
     public static final String HAWK_BAT_DNA_LOOT_ITEM = "item_cs_dna_hawk_bat";
     public static final int HAWK_BAT_DNA_LOOT_CHANCE = 5;
 

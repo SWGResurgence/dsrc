@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class altruism_mother extends script.base_script
 {
-    public altruism_mother()
-    {
-    }
+
     public static final String ALTRUISM_OBJVAR = "quest.hero_of_tatooine.altruism";
     public static final String ALTRUISM_LEADER = ALTRUISM_OBJVAR + ".leader";
     public static final String ALTRUISM_ACTIVE = ALTRUISM_OBJVAR + ".active";

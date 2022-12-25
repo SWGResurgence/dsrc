@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_clone_relics_clone_trooper_mort extends script.base_script
 {
-    public ep3_clone_relics_clone_trooper_mort()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_clone_relics_clone_trooper_mort";
     public boolean ep3_clone_relics_clone_trooper_mort_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

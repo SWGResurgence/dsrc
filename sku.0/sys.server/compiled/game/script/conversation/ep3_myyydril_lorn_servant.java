@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class ep3_myyydril_lorn_servant extends script.base_script
 {
-    public ep3_myyydril_lorn_servant()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_myyydril_lorn_servant";
     public boolean ep3_myyydril_lorn_servant_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,9 +8,7 @@ import script.*;
 
 public class tatooine_bestinejobs_jasha extends script.base_script
 {
-    public tatooine_bestinejobs_jasha()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_bestinejobs_jasha";
     public boolean tatooine_bestinejobs_jasha_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

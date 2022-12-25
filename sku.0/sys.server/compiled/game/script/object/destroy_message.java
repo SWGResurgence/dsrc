@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class destroy_message extends script.base_script
 {
-    public destroy_message()
-    {
-    }
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         sendMessages(self);

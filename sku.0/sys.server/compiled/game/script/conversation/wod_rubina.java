@@ -8,9 +8,7 @@ import script.*;
 
 public class wod_rubina extends script.base_script
 {
-    public wod_rubina()
-    {
-    }
+
     public static String c_stringFile = "conversation/wod_rubina";
     public boolean wod_rubina_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

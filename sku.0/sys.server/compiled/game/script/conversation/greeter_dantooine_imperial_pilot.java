@@ -5,9 +5,7 @@ import script.*;
 
 public class greeter_dantooine_imperial_pilot extends script.base_script
 {
-    public greeter_dantooine_imperial_pilot()
-    {
-    }
+
     public static String c_stringFile = "conversation/greeter_dantooine_imperial_pilot";
     public boolean greeter_dantooine_imperial_pilot_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

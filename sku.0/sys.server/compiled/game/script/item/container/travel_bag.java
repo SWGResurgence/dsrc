@@ -4,9 +4,7 @@ import script.*;
 
 public class travel_bag extends script.base_script
 {
-    public travel_bag()
-    {
-    }
+
     public static final String DATATABLE_START_LOCATIONS = "datatables/creation/starting_locations.iff";
     public static final String SCRIPT_TRAVEL_BAG = "item.container.travel_bag";
     public static final string_id SID_TRAVEL_TATOOINE = new string_id("travel", "travel_tatooine");

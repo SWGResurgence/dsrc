@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class battle_spawner extends script.base_script
 {
-    public battle_spawner()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "ep3demoCleanUpBattle", null, 36000, false);

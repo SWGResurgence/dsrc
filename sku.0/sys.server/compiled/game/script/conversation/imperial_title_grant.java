@@ -5,9 +5,7 @@ import script.*;
 
 public class imperial_title_grant extends script.base_script
 {
-    public imperial_title_grant()
-    {
-    }
+    
     public static String c_stringFile = "conversation/imperial_title_grant";
     public boolean imperial_title_grant_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

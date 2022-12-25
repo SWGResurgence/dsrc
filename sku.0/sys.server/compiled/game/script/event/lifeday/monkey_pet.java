@@ -5,9 +5,7 @@ import script.library.*;
 
 public class monkey_pet extends script.base_script
 {
-    public monkey_pet()
-    {
-    }
+
     private static final String LIFEDAY = "event/life_day";
     private static final String MONKEY_RED = "lifeday_monkey_lizard";
     private static final String MONKEY_GREEN = "lifeday_monkey_lizard_green";

@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class death_watch_insane_miner extends script.base_script
 {
-    public death_watch_insane_miner()
-    {
-    }
+
     public static String c_stringFile = "conversation/death_watch_insane_miner";
     public boolean death_watch_insane_miner_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

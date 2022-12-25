@@ -9,9 +9,7 @@ import script.string_id;
 
 public class veteran_reward_crate_exp_buff extends script.base_script
 {
-    public veteran_reward_crate_exp_buff()
-    {
-    }
+
     public static final String STF_FILE = "npe";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

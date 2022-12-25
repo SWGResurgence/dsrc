@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class pvp_spec_ops_imperial_armor_dye_kit extends script.base_script
 {
-    public pvp_spec_ops_imperial_armor_dye_kit()
-    {
-    }
+    
     public static final String[] COLORS = 
     {
         "@tool/customizer:imppvp_color_white",

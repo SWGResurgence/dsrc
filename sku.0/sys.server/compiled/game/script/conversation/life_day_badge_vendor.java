@@ -5,9 +5,7 @@ import script.*;
 
 public class life_day_badge_vendor extends script.base_script
 {
-    public life_day_badge_vendor()
-    {
-    }
+
     public static String c_stringFile = "conversation/life_day_badge_vendor";
     public boolean life_day_badge_vendor_condition_defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

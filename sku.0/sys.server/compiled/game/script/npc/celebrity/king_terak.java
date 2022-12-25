@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class king_terak extends script.base_script
 {
-    public king_terak()
-    {
-    }
+
     public static final String CONVO = "celebrity/king_terak";
     public int OnAttach(obj_id self) throws InterruptedException
     {

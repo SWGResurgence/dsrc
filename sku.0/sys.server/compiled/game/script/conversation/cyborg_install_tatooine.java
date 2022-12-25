@@ -5,9 +5,7 @@ import script.library.*;
 
 public class cyborg_install_tatooine extends script.base_script
 {
-    public cyborg_install_tatooine()
-    {
-    }
+
     public static String c_stringFile = "conversation/cyborg_install_tatooine";
     public boolean cyborg_install_tatooine_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

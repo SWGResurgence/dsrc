@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class hospital_elevators extends script.base_script
 {
-    public hospital_elevators()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);

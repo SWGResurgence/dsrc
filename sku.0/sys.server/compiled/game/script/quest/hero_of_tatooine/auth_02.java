@@ -9,9 +9,7 @@ import script.string_id;
 
 public class auth_02 extends script.base_script
 {
-    public auth_02()
-    {
-    }
+
     public static final String STF_FILE = "quest/hero_of_tatooine/auth_chat";
     public int OnAttach(obj_id self) throws InterruptedException
     {

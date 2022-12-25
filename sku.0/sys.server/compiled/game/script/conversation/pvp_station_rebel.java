@@ -5,9 +5,7 @@ import script.*;
 
 public class pvp_station_rebel extends script.base_script
 {
-    public pvp_station_rebel()
-    {
-    }
+
     public static String c_stringFile = "conversation/pvp_station_rebel";
     public boolean pvp_station_rebel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

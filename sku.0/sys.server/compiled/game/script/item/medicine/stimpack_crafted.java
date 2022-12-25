@@ -7,9 +7,7 @@ import script.*;
 
 public class stimpack_crafted extends script.base_script
 {
-    public stimpack_crafted()
-    {
-    }
+
     public static final string_id SID_ITEM_LEVEL_TOO_LOW = new string_id("healing", "item_level_too_low");
     public static final string_id SID_STIMPACK_TOO_SOON = new string_id("healing", "channel_heal_stimpack_too_soon");
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException

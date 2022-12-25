@@ -8,9 +8,7 @@ import script.*;
 
 public class talus_dearic_jana extends script.base_script
 {
-    public talus_dearic_jana()
-    {
-    }
+
     public static String c_stringFile = "conversation/talus_dearic_jana";
     public boolean talus_dearic_jana_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

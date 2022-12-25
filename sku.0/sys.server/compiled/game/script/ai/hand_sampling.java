@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class hand_sampling extends script.base_script
 {
-    public hand_sampling()
-    {
-    }
+
     public static final int BUFF_TICK_TIME = 20;
     public int OnInitialize(obj_id self) throws InterruptedException
     {

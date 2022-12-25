@@ -5,9 +5,7 @@ import script.library.*;
 
 public class lifeday_objective extends script.base_script
 {
-    public lifeday_objective()
-    {
-    }
+
     private static final String LIFEDAY = "event/life_day";
     private static final string_id SID_ALREADY_DRESSED = new string_id(LIFEDAY, "already_dressed");
     private static final string_id SID_ALREADY_STOMPED = new string_id(LIFEDAY, "already_stomped");

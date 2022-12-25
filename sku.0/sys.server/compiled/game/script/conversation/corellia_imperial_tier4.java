@@ -5,9 +5,7 @@ import script.*;
 
 public class corellia_imperial_tier4 extends script.base_script
 {
-    public corellia_imperial_tier4()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_imperial_tier4";
     public boolean corellia_imperial_tier4_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.library.*;
 
 public class loot_schematic extends script.base_script
 {
-    public loot_schematic()
-    {
-    }
+
     public static final String VAR_SCHEMATIC = "loot_schematic.schematic";
     public static final String VAR_SKILL = "loot_schematic.skill";
     public static final String VAR_ABILITY = "loot_schematic.ability";

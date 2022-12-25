@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_clone_relics_nym_starmap_nym extends script.base_script
 {
-    public ep3_clone_relics_nym_starmap_nym()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_clone_relics_nym_starmap_nym";
     public boolean ep3_clone_relics_nym_starmap_nym_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

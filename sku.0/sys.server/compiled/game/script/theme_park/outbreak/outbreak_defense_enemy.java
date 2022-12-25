@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class outbreak_defense_enemy extends script.base_script
 {
-    public outbreak_defense_enemy()
-    {
-    }
+
     public static final String GUARD_OCCUPIED = "occupied";
     public int OnAttach(obj_id self) throws InterruptedException
     {

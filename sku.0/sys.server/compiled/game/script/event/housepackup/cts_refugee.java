@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class cts_refugee extends script.base_script
 {
-    public cts_refugee()
-    {
-    }
+
     public static final boolean BLOGGING_ON = true;
     public static final String BLOG_CATEGORY = "CharacterTransfer";
     public int OnInitialize(obj_id self) throws InterruptedException

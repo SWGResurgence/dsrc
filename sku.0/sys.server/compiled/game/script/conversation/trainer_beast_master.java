@@ -5,9 +5,7 @@ import script.*;
 
 public class trainer_beast_master extends script.base_script
 {
-    public trainer_beast_master()
-    {
-    }
+
     public static String c_stringFile = "conversation/trainer_beast_master";
     public boolean trainer_beast_master_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

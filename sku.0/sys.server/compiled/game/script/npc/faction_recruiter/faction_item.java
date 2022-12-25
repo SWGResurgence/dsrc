@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class faction_item extends script.base_script
 {
-    public faction_item()
-    {
-    }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (isPlayer(destContainer))

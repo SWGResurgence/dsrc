@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_vendor_rallen extends script.base_script
 {
-    public npe_vendor_rallen()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_vendor_rallen";
     public boolean npe_vendor_rallen_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

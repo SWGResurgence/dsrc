@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_trando_herald extends script.base_script
 {
-    public ep3_trando_herald()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_trando_herald";
     public boolean ep3_trando_herald_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

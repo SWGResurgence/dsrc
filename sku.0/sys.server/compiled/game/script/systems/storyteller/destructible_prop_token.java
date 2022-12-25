@@ -7,9 +7,7 @@ import script.*;
 
 public class destructible_prop_token extends script.base_script
 {
-    public destructible_prop_token()
-    {
-    }
+
     public static final int MIN_HEALTH = 180000;
     public static final int MAX_HEALTH = 250000;
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

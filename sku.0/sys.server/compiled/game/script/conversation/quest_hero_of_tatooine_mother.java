@@ -7,9 +7,7 @@ import script.*;
 
 public class quest_hero_of_tatooine_mother extends script.base_script
 {
-    public quest_hero_of_tatooine_mother()
-    {
-    }
+
     public static String c_stringFile = "conversation/quest_hero_of_tatooine_mother";
     public boolean quest_hero_of_tatooine_mother_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

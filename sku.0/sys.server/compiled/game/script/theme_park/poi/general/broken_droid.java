@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class broken_droid extends script.theme_park.poi.base
 {
-    public broken_droid()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

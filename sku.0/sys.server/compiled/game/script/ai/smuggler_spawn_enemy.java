@@ -8,9 +8,7 @@ import script.string_id;
 
 public class smuggler_spawn_enemy extends script.base_script
 {
-    public smuggler_spawn_enemy()
-    {
-    }
+
     public static final String STRING_FILE = "smuggler/enemy";
     public static final int FLAG_CLEAN_UP = 1;
     public static final int FLAG_ATTACK = 2;

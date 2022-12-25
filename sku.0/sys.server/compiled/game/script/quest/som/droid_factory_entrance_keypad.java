@@ -5,9 +5,7 @@ import script.library.groundquests;
 
 public class droid_factory_entrance_keypad extends script.base_script
 {
-    public droid_factory_entrance_keypad()
-    {
-    }
+
     public static final String STF = "som/som_quest";
     public static final string_id ENTER_CODE = new string_id(STF, "df_keypad_code");
     public static final string_id UNLOCKED = new string_id(STF, "df_keypad_unlocked");

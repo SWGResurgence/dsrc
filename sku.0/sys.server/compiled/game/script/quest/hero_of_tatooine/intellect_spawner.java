@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class intellect_spawner extends script.base_script
 {
-    public intellect_spawner()
-    {
-    }
+
     public static final String SPAWNER_DATATABLE = "datatables/quest/hero_of_tatooine/intellect_spawner.iff";
     public static final String SPAWNER_OBJVAR = "quest.hero_of_tatooine.intellect.spawner";
     public static final String SPAWNER_CONTROLLER = SPAWNER_OBJVAR + ".controller";

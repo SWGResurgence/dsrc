@@ -9,9 +9,7 @@ import script.string_id;
 
 public class imperial_mission extends script.base_script
 {
-    public imperial_mission()
-    {
-    }
+
     public static final String IMPERIAL_STF = "theme_park/alderaan/act2/imperial_missions";
     public static final String IMPERIAL_SHARED_STF = "theme_park/alderaan/act2/shared_imperial_missions";
     public int OnAttach(obj_id self) throws InterruptedException

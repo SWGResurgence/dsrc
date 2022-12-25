@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class e3_corvette extends script.base_script
 {
-    public e3_corvette()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "intAlwaysDump", 1);

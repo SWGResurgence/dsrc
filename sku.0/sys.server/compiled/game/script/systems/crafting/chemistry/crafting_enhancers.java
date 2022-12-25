@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_enhancers extends script.systems.crafting.chemistry.crafting_base_enhancer
 {
-    public crafting_enhancers()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

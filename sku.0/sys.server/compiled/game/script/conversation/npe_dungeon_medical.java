@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_dungeon_medical extends script.base_script
 {
-    public npe_dungeon_medical()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_dungeon_medical";
     public boolean npe_dungeon_medical_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

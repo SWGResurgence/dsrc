@@ -8,9 +8,7 @@ import script.*;
 
 public class trig_longo extends script.base_script
 {
-    public trig_longo()
-    {
-    }
+
     public static String c_stringFile = "conversation/trig_longo";
     public boolean trig_longo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

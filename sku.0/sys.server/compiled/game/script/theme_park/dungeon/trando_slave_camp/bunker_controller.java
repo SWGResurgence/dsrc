@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class bunker_controller extends script.base_script
 {
-    public bunker_controller()
-    {
-    }
+
     public static final String DATATABLE = "datatables/dungeon/trando_slave_camp/camp_command_bunker.iff";
     public static final String[] CELL_NAMES = 
     {

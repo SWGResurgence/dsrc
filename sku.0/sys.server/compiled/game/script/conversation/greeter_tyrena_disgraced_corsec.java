@@ -5,9 +5,7 @@ import script.*;
 
 public class greeter_tyrena_disgraced_corsec extends script.base_script
 {
-    public greeter_tyrena_disgraced_corsec()
-    {
-    }
+
     public static String c_stringFile = "conversation/greeter_tyrena_disgraced_corsec";
     public boolean greeter_tyrena_disgraced_corsec_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

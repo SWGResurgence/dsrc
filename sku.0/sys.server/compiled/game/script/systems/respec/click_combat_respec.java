@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class click_combat_respec extends script.base_script
 {
-    public click_combat_respec()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         playUiEffect(self, "showMediator=ws_professiontemplateselect");

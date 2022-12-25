@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class south_squad_leader extends script.base_script
 {
-    public south_squad_leader()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleClanup", null, 30.0f, false);

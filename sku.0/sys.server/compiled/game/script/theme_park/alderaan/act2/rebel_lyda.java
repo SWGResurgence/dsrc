@@ -11,9 +11,7 @@ import java.util.Vector;
 
 public class rebel_lyda extends script.base_script
 {
-    public rebel_lyda()
-    {
-    }
+
     public static final String[] TEMPLATE_LIST = 
     {
         "object/building/poi/generic_flatten_small.iff",

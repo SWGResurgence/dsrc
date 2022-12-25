@@ -8,9 +8,7 @@ import script.*;
 
 public class striking_miners_urst extends script.base_script
 {
-    public striking_miners_urst()
-    {
-    }
+
     public static String c_stringFile = "conversation/striking_miners_urst";
     public boolean striking_miners_urst_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

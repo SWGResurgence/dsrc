@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class ep3_herald_wookiee extends script.base_script
 {
-    public ep3_herald_wookiee()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);

@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class exar_kun extends script.base_script
 {
-    public exar_kun()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCreatureCoverVisibility(self, false);

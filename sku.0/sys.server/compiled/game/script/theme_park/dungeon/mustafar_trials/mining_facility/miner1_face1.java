@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class miner1_face1 extends script.base_script
 {
-    public miner1_face1()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         sequencer.registerSequenceObject(self, "miner1_face1");

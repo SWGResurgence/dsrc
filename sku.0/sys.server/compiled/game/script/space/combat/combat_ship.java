@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class combat_ship extends script.base_script
 {
-    public combat_ship()
-    {
-    }
+
     public static final float BROKEN_COMPONENT_DEFAULT_MASS = 50000.0f;
     public static final float SPACE_YACHT_COMPONENT_DEFAULT_MASS = 0.0f;
     public static final string_id SID_TARGET_DISABLED = new string_id("space/quest", "target_disabled2");

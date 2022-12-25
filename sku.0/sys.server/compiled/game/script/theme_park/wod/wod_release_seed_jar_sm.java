@@ -12,9 +12,7 @@ import script.library.static_item;
 
 public class wod_release_seed_jar_sm extends script.base_script
 {
-    public wod_release_seed_jar_sm()
-    {
-    }
+
     public static final string_id SID_MNU_USE = new string_id("spam", "open");
     public static final string_id SID_SYS_NOT_IN_INV = new string_id("spam", "cannot_use_not_in_inv");
     public static final String[] TREES = 

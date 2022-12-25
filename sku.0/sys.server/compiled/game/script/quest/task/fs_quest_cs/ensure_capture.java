@@ -6,9 +6,7 @@ import script.string_id;
 
 public class ensure_capture extends script.base_script
 {
-    public ensure_capture()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         sendSystemMessage(self, new string_id("fs_quest_village", "fs_cs_ensure_detail"));

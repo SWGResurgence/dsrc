@@ -8,9 +8,7 @@ import script.string_id;
 
 public class qa_pilot_roadmap_tatooine_imperial extends script.base_script
 {
-    public qa_pilot_roadmap_tatooine_imperial()
-    {
-    }
+
     public static final String TOOL_TITLE = "Tatooine Imperial Pilot";
     public static final String TOOL_PROMPT = "Tatooine Imperial Pilot\nSelect the pilot roadmap quest or function to complete.";
     public static final String SCRIPTVAR = "pilotimptat";

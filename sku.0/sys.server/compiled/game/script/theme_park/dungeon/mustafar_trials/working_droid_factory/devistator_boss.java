@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class devistator_boss extends script.base_script
 {
-    public devistator_boss()
-    {
-    }
+    
     public static final boolean LOGGING = false;
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {

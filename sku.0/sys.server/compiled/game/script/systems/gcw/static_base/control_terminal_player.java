@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class control_terminal_player extends script.base_script
 {
-    public control_terminal_player()
-    {
-    }
+
     public static final String SCRIPT_VAR_ATTEMPT_ID = "gcw.static_base.control_terminal.attempt_id";
     public static final String SCRIPT_VAR_TERMINAL = "gcw.static_base.control_terminal.terminal";
     public int OnEnteredCombat(obj_id self) throws InterruptedException

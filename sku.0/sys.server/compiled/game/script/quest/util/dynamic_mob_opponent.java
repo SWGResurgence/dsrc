@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class dynamic_mob_opponent extends script.base_script
 {
-    public dynamic_mob_opponent()
-    {
-    }
+
     public static final String CLIENT_EFFECT = "appearance/pt_smoke_puff.prt";
     public static final String FAIL_SIGNAL = "fail_signal";
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";

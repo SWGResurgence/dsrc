@@ -6,9 +6,7 @@ import script.string_id;
 
 public class fs_crafting1_comp extends script.base_script
 {
-    public fs_crafting1_comp()
-    {
-    }
+
     public static final String QUEST_OBJVAR = "quest.fs_crafting1";
     public static final String STATUS_OBJVAR = QUEST_OBJVAR + ".status";
     public static final String ANALYZED_OBJVAR = QUEST_OBJVAR + ".analyzed";

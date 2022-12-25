@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class auto_invasion extends script.base_script
 {
-    public auto_invasion()
-    {
-    }
+
     public static final String DATATABLE = "datatables/event/invasion/city_data.iff";
     public static final String LEVEL_TABLE = "datatables/event/invasion/level_threshold.iff";
     public static final float THIRTY_SIX_HOURS = 60 * 60 * 36;

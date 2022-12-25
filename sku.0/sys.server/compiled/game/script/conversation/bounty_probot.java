@@ -7,9 +7,7 @@ import script.*;
 
 public class bounty_probot extends script.base_script
 {
-    public bounty_probot()
-    {
-    }
+
     public static String c_stringFile = "conversation/bounty_probot";
     public boolean bounty_probot_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

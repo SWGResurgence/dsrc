@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class patrol_spawned_tracker extends script.base_script
 {
-    public patrol_spawned_tracker()
-    {
-    }
+
     public static final boolean LOGGING = false;
     public int OnDestroy(obj_id self) throws InterruptedException
     {

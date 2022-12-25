@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class qa_pilot_roadmap_tatooine_rebel extends script.base_script
 {
-    public qa_pilot_roadmap_tatooine_rebel()
-    {
-    }
+
     public static final String TOOL_TITLE = "Tatooine Rebel Pilot";
     public static final String TOOL_PROMPT = "Tatooine Rebel Pilot\nSelect the pilot roadmap quest or function to complete.";
     public static final String SCRIPTVAR = "pilotrebtat";

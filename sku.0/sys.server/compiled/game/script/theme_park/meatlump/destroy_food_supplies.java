@@ -5,9 +5,7 @@ import script.library.*;
 
 public class destroy_food_supplies extends script.base_script
 {
-    public destroy_food_supplies()
-    {
-    }
+
     public static final boolean LOGGING_ON = false;
     public static final String VAR_PREFIX = "meatlump_food_supplies";
     public static final String PID_NAME = VAR_PREFIX + ".pid";

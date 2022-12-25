@@ -8,9 +8,7 @@ import script.*;
 
 public class naboo_deeja_peak_prof_hudmasse extends script.base_script
 {
-    public naboo_deeja_peak_prof_hudmasse()
-    {
-    }
+
     public static String c_stringFile = "conversation/naboo_deeja_peak_prof_hudmasse";
     public boolean naboo_deeja_peak_prof_hudmasse_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

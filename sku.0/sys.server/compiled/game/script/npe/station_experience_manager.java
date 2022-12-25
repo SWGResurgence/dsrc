@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class station_experience_manager extends script.base_script
 {
-    public station_experience_manager()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id droidCell = getCellId(self, "dockingbay2");

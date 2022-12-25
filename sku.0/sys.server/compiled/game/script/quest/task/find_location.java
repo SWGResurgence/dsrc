@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class find_location extends script.base_script
 {
-    public find_location()
-    {
-    }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         int rows = dataTableGetNumRows("datatables/player/quests.iff");

@@ -8,9 +8,7 @@ import script.*;
 
 public class legacy_button_bastra extends script.base_script
 {
-    public legacy_button_bastra()
-    {
-    }
+
     public static String c_stringFile = "conversation/legacy_button_bastra";
     public boolean legacy_button_bastra_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

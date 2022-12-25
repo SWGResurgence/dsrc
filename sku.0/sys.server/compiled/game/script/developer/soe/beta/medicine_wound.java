@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class medicine_wound extends script.base_script
 {
-    public medicine_wound()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String template_name = getTemplateName(self);

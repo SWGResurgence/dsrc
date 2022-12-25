@@ -8,9 +8,7 @@ import script.string_id;
 
 public class structure_rollup extends script.base_script
 {
-    public structure_rollup()
-    {
-    }
+
     public int OnDoStructureRollup(obj_id self, obj_id player, boolean warnOnly) throws InterruptedException
     {
         String structName = player_structure.getStructureName(self);

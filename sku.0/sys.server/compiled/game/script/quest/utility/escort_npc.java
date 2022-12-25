@@ -8,9 +8,7 @@ import script.string_id;
 
 public class escort_npc extends script.base_script
 {
-    public escort_npc()
-    {
-    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!hasObjVar(self, "quests.supressFollowMenu") && getMaster(self) == player)

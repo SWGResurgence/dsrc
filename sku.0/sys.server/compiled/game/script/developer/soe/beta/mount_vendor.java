@@ -5,9 +5,7 @@ import script.library.*;
 
 public class mount_vendor extends script.base_script
 {
-    public mount_vendor()
-    {
-    }
+
     public static final String MOUNT_VENDOR_CONVO = "beta/mount_vendor";
     public static final int EXPIRATION_TIME = 60 * 60 * 24 * 4;
     public static final int MOUNT_EXPIRATION_TIME = 60 * 60 * 24 * 7;

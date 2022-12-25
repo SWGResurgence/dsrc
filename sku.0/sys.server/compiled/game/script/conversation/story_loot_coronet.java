@@ -5,9 +5,7 @@ import script.*;
 
 public class story_loot_coronet extends script.base_script
 {
-    public story_loot_coronet()
-    {
-    }
+
     public static String c_stringFile = "conversation/story_loot_coronet";
     public boolean story_loot_coronet_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class ep3_rodian_junk_dealer extends script.base_script
 {
-    public ep3_rodian_junk_dealer()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_rodian_junk_dealer";
     public boolean ep3_rodian_junk_dealer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

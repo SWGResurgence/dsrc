@@ -12,9 +12,7 @@ import script.obj_id;
 
 public class fs_village_turret_ai extends script.systems.turret.generic_turret_ai
 {
-    public fs_village_turret_ai()
-    {
-    }
+
     public float doAttack(obj_id target) throws InterruptedException
     {
         obj_id self = getSelf();

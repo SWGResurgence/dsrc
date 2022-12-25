@@ -6,9 +6,7 @@ import script.*;
 
 public class theme_park_record_keeper_jabba extends script.base_script
 {
-    public theme_park_record_keeper_jabba()
-    {
-    }
+
     public static String c_stringFile = "conversation/theme_park_record_keeper_jabba";
     public boolean theme_park_record_keeper_jabba_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

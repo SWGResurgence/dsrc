@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class theater_spawnegg extends script.base_script
 {
-    public theater_spawnegg()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "beginSpawning", null, 30, false);

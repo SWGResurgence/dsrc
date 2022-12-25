@@ -11,9 +11,7 @@ import java.util.Date;
 
 public class script_editor extends script.base_script
 {
-    public script_editor()
-    {
-    }
+
 
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {

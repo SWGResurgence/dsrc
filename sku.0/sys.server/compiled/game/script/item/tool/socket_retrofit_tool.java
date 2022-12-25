@@ -9,9 +9,7 @@ import script.string_id;
 
 public class socket_retrofit_tool extends script.base_script
 {
-    public socket_retrofit_tool()
-    {
-    }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, transferer))

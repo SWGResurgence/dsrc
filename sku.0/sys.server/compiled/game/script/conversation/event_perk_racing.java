@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class event_perk_racing extends script.base_script
 {
-    public event_perk_racing()
-    {
-    }
+
     public static String c_stringFile = "conversation/event_perk_racing";
     public boolean event_perk_racing_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

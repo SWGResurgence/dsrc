@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class squad_member extends script.base_script
 {
-    public squad_member()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

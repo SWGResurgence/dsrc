@@ -5,9 +5,7 @@ import script.library.*;
 
 public class npe_medic_questgiver extends script.base_script
 {
-    public npe_medic_questgiver()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_medic_questgiver";
     public boolean npe_medic_questgiver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

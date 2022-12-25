@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class remote_object_requester extends script.base.remote_object
 {
-    public remote_object_requester()
-    {
-    }
+
     public int OnClusterWideDataResponse(obj_id self, String managerName, String elementNameExp, int requestId, String[] elementNameList, dictionary[] dictionaryList, int lockKey) throws InterruptedException
     {
         if (logsEnabled())

@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_trando_pressk extends script.base_script
 {
-    public ep3_trando_pressk()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_trando_pressk";
     public boolean ep3_trando_pressk_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

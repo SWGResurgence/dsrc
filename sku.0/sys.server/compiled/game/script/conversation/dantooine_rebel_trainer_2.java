@@ -5,9 +5,7 @@ import script.*;
 
 public class dantooine_rebel_trainer_2 extends script.base_script
 {
-    public dantooine_rebel_trainer_2()
-    {
-    }
+
     public static String c_stringFile = "conversation/dantooine_rebel_trainer_2";
     public boolean dantooine_rebel_trainer_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class gcw_npc_hurt extends script.base_script
 {
-    public gcw_npc_hurt()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleSetup", null, 1.0f, false);

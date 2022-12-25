@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class final_battle_npc extends script.base_script
 {
-    public final_battle_npc()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id theater_object = getObjIdObjVar(self, "quest_spawner.theater");

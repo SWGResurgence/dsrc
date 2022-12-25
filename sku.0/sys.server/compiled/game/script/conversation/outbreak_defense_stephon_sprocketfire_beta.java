@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class outbreak_defense_stephon_sprocketfire_beta extends script.base_script
 {
-    public outbreak_defense_stephon_sprocketfire_beta()
-    {
-    }
+
     public static String c_stringFile = "conversation/outbreak_defense_stephon_sprocketfire_beta";
     public boolean outbreak_defense_stephon_sprocketfire_beta_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

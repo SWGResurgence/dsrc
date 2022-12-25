@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class shuttle_test extends script.base_script
 {
-    public shuttle_test()
-    {
-    }
+
     public int startLandingSequence(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = params.getObjId("owner");

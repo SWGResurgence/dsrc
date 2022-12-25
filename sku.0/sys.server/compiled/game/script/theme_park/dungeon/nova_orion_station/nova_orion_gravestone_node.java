@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class nova_orion_gravestone_node extends script.base_script
 {
-    public nova_orion_gravestone_node()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "graveEventInProgress"))

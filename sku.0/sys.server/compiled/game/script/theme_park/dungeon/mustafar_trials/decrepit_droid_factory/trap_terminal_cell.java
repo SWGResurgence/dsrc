@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class trap_terminal_cell extends script.base_script
 {
-    public trap_terminal_cell()
-    {
-    }
+
     public static final boolean LOGGING = false;
     public int triggerTrap(obj_id self, dictionary params) throws InterruptedException
     {

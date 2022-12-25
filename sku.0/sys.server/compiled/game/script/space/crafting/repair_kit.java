@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class repair_kit extends script.base_script
 {
-    public repair_kit()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String strKitType = getStringObjVar(self, "strKitType");

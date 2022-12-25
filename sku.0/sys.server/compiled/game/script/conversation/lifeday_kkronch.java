@@ -28,11 +28,7 @@ public static String c_stringFile = "conversation/lifeday_kkronch";
 // Script Constants
 // ======================================================================
 
-	public lifeday_kkronch()
 
-	{
-
-	}
 
 // ======================================================================
 // Script Conditions

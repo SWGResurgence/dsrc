@@ -7,9 +7,7 @@ import script.string_id;
 
 public class ferocious_beast extends script.base_script
 {
-    public ferocious_beast()
-    {
-    }
+
     public static final String SCRIPT_NAME = "quest.hero_of_tatooine.ferocious_beast";
     public static final String NOMOVE_SCRIPT = "item.special.nomove_furniture";
     public static final String NOMOVE_OBJVAR = "noTrade";

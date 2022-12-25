@@ -5,9 +5,7 @@ import script.library.*;
 
 public class esebesta_test extends script.base_script
 {
-    public esebesta_test()
-    {
-    }
+
     public static final String PROP_TEXT = "Text";
     public static final String SUI_TRANSFER = "Script.transfer";
     public static final String TRANSFER_PAGE_PROMPT = "Prompt";

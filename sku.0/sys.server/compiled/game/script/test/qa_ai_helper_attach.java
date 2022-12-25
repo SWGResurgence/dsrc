@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class qa_ai_helper_attach extends script.base_script
 {
-    public qa_ai_helper_attach()
-    {
-    }
+
     public static final int ATTACK_OPTION = 0;
     public static final int PROGRAM_OPTION = 1;
     public static final int DIEINPLACE = 0;

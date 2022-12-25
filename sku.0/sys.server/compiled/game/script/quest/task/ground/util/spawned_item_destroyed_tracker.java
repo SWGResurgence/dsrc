@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class spawned_item_destroyed_tracker extends script.base_script
 {
-    public spawned_item_destroyed_tracker()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleSpawnedItemDestroySelf", null, 16, false);

@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class jedi_watch_dog_chest extends script.base_script
 {
-    public jedi_watch_dog_chest()
-    {
-    }
+
     public static final String STF = "som/som_quest";
     public static final string_id ENTER_CODE = new string_id(STF, "enter_code");
     public static final string_id UNLOCKED = new string_id(STF, "unlocked");

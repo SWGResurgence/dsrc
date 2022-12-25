@@ -8,9 +8,7 @@ import script.*;
 
 public class som_kenobi_historian_dark_jedi extends script.base_script
 {
-    public som_kenobi_historian_dark_jedi()
-    {
-    }
+
     public static String c_stringFile = "conversation/som_kenobi_historian_dark_jedi";
     public boolean som_kenobi_historian_dark_jedi_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

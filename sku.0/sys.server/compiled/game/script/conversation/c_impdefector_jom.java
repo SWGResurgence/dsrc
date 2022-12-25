@@ -5,9 +5,7 @@ import script.*;
 
 public class c_impdefector_jom extends script.base_script
 {
-    public c_impdefector_jom()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_impdefector_jom";
     public boolean c_impdefector_jom_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

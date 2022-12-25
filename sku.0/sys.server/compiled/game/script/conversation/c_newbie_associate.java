@@ -8,9 +8,7 @@ import script.*;
 
 public class c_newbie_associate extends script.base_script
 {
-    public c_newbie_associate()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_newbie_associate";
     public boolean c_newbie_associate_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

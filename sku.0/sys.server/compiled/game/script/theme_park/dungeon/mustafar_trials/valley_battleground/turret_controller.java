@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class turret_controller extends script.base_script
 {
-    public turret_controller()
-    {
-    }
+
     public static final String STF = "mustafar/valley_battlefield";
     public static final string_id fire = new string_id(STF, "fire");
     public static final string_id assemble = new string_id(STF, "assemble_turret");

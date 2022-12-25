@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class terminal_insurance_override extends script.base_script
 {
-    public terminal_insurance_override()
-    {
-    }
+
     public int handleRequestedInsurance(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))

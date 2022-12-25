@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class computer_console_level_02 extends script.base_script
 {
-    public computer_console_level_02()
-    {
-    }
+
     public static String c_stringFile = "conversation/computer_console_level_02";
     public boolean computer_console_level_02_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

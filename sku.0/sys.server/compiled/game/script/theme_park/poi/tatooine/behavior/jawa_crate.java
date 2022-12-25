@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class jawa_crate extends script.theme_park.poi.base
 {
-    public jawa_crate()
-    {
-    }
+
     public int OnAboutToLoseItem(obj_id self, obj_id dest, obj_id grabber, obj_id item) throws InterruptedException
     {
         obj_id jawa1 = getObjIdObjVar(self, "jawa1");

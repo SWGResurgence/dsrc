@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class clicky_biolink_item extends script.base_script
 {
-    public clicky_biolink_item()
-    {
-    }
+
     public static final String VAR_TEMP_BASE = "biotemp";
     public static final string_id SID_ITEM_BIO_LINKED = new string_id("base_player", "item_bio_linked");
     public static final string_id SID_MUST_USE_FROM_INVENTORY = new string_id("base_player", "must_biolink_to_use_from_inventory");

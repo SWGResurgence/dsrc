@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class ai_controller extends script.base_script
 {
-    public ai_controller()
-    {
-    }
+
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

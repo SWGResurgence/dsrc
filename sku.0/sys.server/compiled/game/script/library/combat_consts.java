@@ -2,9 +2,7 @@ package script.library;
 
 public class combat_consts extends script.base_script
 {
-    public combat_consts()
-    {
-    }
+
     public static final int toHitNumber = 75;
     public static final float baseToHit = 90.0f;
     public static final float maxToHit = 95.0f;

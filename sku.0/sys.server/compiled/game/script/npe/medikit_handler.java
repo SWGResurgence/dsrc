@@ -9,9 +9,7 @@ import script.string_id;
 
 public class medikit_handler extends script.base_script
 {
-    public medikit_handler()
-    {
-    }
+
     public static final string_id GET_STIMPACK = new string_id("npe_hangar_1", "get_stimpack");
     public int OnAttach(obj_id self) throws InterruptedException
     {

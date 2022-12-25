@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class random_encounter extends script.base_script
 {
-    public random_encounter()
-    {
-    }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         LOG("newquests", "random_encounter - OnQuestActivated(+ " + questRow + ")");

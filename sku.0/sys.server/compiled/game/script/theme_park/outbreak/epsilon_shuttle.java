@@ -8,9 +8,7 @@ import script.string_id;
 
 public class epsilon_shuttle extends script.base_script
 {
-    public epsilon_shuttle()
-    {
-    }
+
     public static final String STF_FILE = "theme_park/outbreak/outbreak";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

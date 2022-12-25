@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class tcg_self_destruct extends script.base_script
 {
-    public tcg_self_destruct()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "startTimer", null, 1, false);

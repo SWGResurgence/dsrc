@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class player_cmd_tie_bomber_escort extends script.base_script
 {
-    public player_cmd_tie_bomber_escort()
-    {
-    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "evacuate"))

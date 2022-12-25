@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class marketplace_npc extends script.base_script
 {
-    public marketplace_npc()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id marketplaceSpawner = getObjIdObjVar(self, "marketplaceSpawner");

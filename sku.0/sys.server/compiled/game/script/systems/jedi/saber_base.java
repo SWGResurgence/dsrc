@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class saber_base extends script.base_script
 {
-    public saber_base()
-    {
-    }
+
     public static final string_id SID_NO_PARTS_TO_RECOVER = new string_id("jedi_spam", "no_parts_to_recover");
     public int OnInitialize(obj_id self) throws InterruptedException
     {

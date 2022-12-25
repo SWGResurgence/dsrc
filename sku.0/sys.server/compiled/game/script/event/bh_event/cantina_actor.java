@@ -10,9 +10,7 @@ import script.string_id;
 
 public class cantina_actor extends script.base_script
 {
-    public cantina_actor()
-    {
-    }
+
     public static final String STF_FILE = "event/bhcelebs";
     public int moveToMainActorPosition(obj_id self, dictionary params) throws InterruptedException
     {

@@ -9,9 +9,7 @@ import script.obj_var_list;
 
 public class crafting_new_armor_core extends script.systems.crafting.crafting_base
 {
-    public crafting_new_armor_core()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {

@@ -8,9 +8,7 @@ import script.*;
 
 public class yavin_fallenstar_pt_1_megan extends script.base_script
 {
-    public yavin_fallenstar_pt_1_megan()
-    {
-    }
+
     public static String c_stringFile = "conversation/yavin_fallenstar_pt_1_megan";
     public boolean yavin_fallenstar_pt_1_megan_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

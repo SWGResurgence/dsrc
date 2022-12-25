@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class npc_base_builder extends script.base_script
 {
-    public npc_base_builder()
-    {
-    }
+
     public static final String SPAWN_DATATABLE = "base_builder.spawn_datatable";
     public static final String SPAWN_LIST = "base_builder.spawn_list";
     public static final String SPAWN_POSITION = "base_builder.spawn_position";

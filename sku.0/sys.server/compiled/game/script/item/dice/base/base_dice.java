@@ -6,9 +6,7 @@ import script.library.prose;
 
 public class base_dice extends script.base_script
 {
-    public base_dice()
-    {
-    }
+
     public static final String VAR_ROLL_RESULT = "roll_result_value";
     public static final String VAR_FACE_COUNT = "dice_face_count";
     public static final String DICE_TYPE_NAME = "dice_type_name";

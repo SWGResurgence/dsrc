@@ -5,9 +5,7 @@ import script.library.*;
 
 public class cyborg_install_temporary extends script.base_script
 {
-    public cyborg_install_temporary()
-    {
-    }
+
     public static String c_stringFile = "conversation/cyborg_install_temporary";
     public boolean cyborg_install_temporary_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

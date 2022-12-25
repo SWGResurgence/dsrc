@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class event_ls_npc_spawner extends script.base_script
 {
-    public event_ls_npc_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "event.lost_squadron.num_rewards"))

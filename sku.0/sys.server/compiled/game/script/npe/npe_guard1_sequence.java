@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class npe_guard1_sequence extends script.base_script
 {
-    public npe_guard1_sequence()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

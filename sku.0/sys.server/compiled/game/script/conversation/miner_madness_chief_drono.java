@@ -8,9 +8,7 @@ import script.*;
 
 public class miner_madness_chief_drono extends script.base_script
 {
-    public miner_madness_chief_drono()
-    {
-    }
+
     public static String c_stringFile = "conversation/miner_madness_chief_drono";
     public boolean miner_madness_chief_drono_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

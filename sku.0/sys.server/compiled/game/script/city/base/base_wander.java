@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class base_wander extends script.base_script
 {
-	public base_wander()
-	{
-	}
+
 	public String[] patrolPoints =
 			{
 					"city1",

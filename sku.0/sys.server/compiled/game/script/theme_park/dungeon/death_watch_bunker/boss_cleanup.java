@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class boss_cleanup extends script.base_script
 {
-    public boss_cleanup()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleAttackerCleanUp", null, 1500.0f, false);

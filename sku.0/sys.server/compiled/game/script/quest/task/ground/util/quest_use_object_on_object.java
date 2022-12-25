@@ -5,9 +5,7 @@ import script.*;
 
 public class quest_use_object_on_object extends script.base_script
 {
-    public quest_use_object_on_object()
-    {
-    }
+
     public static final string_id SID_USE_CAMERA = new string_id("collection", "use_camera");
     public static final string_id SID_PICTURE_TAKEN = new string_id("collection", "picture_taken");
     public static final string_id SID_INVALID_TARGET = new string_id("collection", "invalid_target");

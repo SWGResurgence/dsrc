@@ -7,9 +7,7 @@ import script.*;
 
 public class c_tutorial_hostage extends script.base_script
 {
-    public c_tutorial_hostage()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_tutorial_hostage";
     public boolean c_tutorial_hostage_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

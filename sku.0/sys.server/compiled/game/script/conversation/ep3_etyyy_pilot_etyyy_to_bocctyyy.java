@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_etyyy_pilot_etyyy_to_bocctyyy extends script.base_script
 {
-    public ep3_etyyy_pilot_etyyy_to_bocctyyy()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_etyyy_pilot_etyyy_to_bocctyyy";
     public boolean ep3_etyyy_pilot_etyyy_to_bocctyyy_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

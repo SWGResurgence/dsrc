@@ -5,9 +5,7 @@ import script.*;
 
 public class rebel_broker extends script.base_script
 {
-    public rebel_broker()
-    {
-    }
+
     public static String c_stringFile = "conversation/rebel_broker";
     public boolean rebel_broker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

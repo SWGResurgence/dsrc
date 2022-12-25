@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class loveday_disillusion_blaire extends script.base_script
 {
-    public loveday_disillusion_blaire()
-    {
-    }
+
     public static String c_stringFile = "conversation/loveday_disillusion_blaire";
     public boolean loveday_disillusion_blaire_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

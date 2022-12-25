@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_mine_munition extends script.systems.crafting.munition.crafting_base_munition
 {
-    public crafting_mine_munition()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

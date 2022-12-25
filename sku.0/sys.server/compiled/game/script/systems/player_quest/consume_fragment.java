@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class consume_fragment extends script.base_script
 {
-    public consume_fragment()
-    {
-    }
+
     public static final String PID_NAME = "chronicleFragmentReconstruct";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

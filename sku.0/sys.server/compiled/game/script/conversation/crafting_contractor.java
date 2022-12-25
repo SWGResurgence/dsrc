@@ -5,9 +5,7 @@ import script.*;
 
 public class crafting_contractor extends script.base_script
 {
-    public crafting_contractor()
-    {
-    }
+
     public static String c_stringFile = "conversation/crafting_contractor";
     public boolean crafting_contractor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

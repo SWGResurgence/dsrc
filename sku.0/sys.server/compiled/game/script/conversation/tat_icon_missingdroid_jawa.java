@@ -8,9 +8,7 @@ import script.*;
 
 public class tat_icon_missingdroid_jawa extends script.base_script
 {
-    public tat_icon_missingdroid_jawa()
-    {
-    }
+
     public static String c_stringFile = "conversation/tat_icon_missingdroid_jawa";
     public boolean tat_icon_missingdroid_jawa_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

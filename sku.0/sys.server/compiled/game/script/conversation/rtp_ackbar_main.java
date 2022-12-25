@@ -5,9 +5,7 @@ import script.*;
 
 public class rtp_ackbar_main extends script.base_script
 {
-    public rtp_ackbar_main()
-    {
-    }
+
     public static String c_stringFile = "conversation/rtp_ackbar_main";
     public boolean rtp_ackbar_main_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

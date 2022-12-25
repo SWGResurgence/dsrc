@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class sequencer_object extends script.base_script
 {
-    public sequencer_object()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "strSequenceIdentifier"))

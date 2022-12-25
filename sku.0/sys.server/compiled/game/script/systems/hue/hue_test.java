@@ -4,9 +4,7 @@ import script.*;
 
 public class hue_test extends script.base_script
 {
-    public hue_test()
-    {
-    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnuHue = mi.addRootMenu(menu_info_types.SERVER_HUE, new string_id("hue", "hue"));

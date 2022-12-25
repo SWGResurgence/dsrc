@@ -5,9 +5,7 @@ import script.*;
 
 public class greeter_mos_eisley_smuggler_fat extends script.base_script
 {
-    public greeter_mos_eisley_smuggler_fat()
-    {
-    }
+
     public static String c_stringFile = "conversation/greeter_mos_eisley_smuggler_fat";
     public boolean greeter_mos_eisley_smuggler_fat_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.*;
 
 public class station_avatar_platform extends script.base_script
 {
-    public station_avatar_platform()
-    {
-    }
+
     public static String c_stringFile = "conversation/station_avatar_platform";
     public boolean station_avatar_platform_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

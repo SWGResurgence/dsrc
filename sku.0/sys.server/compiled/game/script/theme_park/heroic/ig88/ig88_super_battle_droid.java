@@ -10,9 +10,7 @@ import script.obj_id;
 
 public class ig88_super_battle_droid extends script.base_script
 {
-    public ig88_super_battle_droid()
-    {
-    }
+
     public obj_id getRocketTarget(obj_id self) throws InterruptedException
     {
         obj_id dungeon = getTopMostContainer(self);

@@ -8,9 +8,7 @@ import script.*;
 
 public class coronet_sheelya_husband extends script.base_script
 {
-    public coronet_sheelya_husband()
-    {
-    }
+
     public static String c_stringFile = "conversation/coronet_sheelya_husband";
     public boolean coronet_sheelya_husband_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

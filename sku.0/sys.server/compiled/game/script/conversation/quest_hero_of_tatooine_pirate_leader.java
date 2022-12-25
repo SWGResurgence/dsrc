@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class quest_hero_of_tatooine_pirate_leader extends script.base_script
 {
-    public quest_hero_of_tatooine_pirate_leader()
-    {
-    }
+
     public static String c_stringFile = "conversation/quest_hero_of_tatooine_pirate_leader";
     public boolean quest_hero_of_tatooine_pirate_leader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

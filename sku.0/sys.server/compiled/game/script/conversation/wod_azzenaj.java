@@ -8,9 +8,7 @@ import script.*;
 
 public class wod_azzenaj extends script.base_script
 {
-    public wod_azzenaj()
-    {
-    }
+
     public static String c_stringFile = "conversation/wod_azzenaj";
     public boolean wod_azzenaj_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

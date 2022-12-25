@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_bounty_strong_arm extends script.base_script
 {
-    public npe_bounty_strong_arm()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_bounty_strong_arm";
     public boolean npe_bounty_strong_arm_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

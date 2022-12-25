@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class gcw_city_kit_barricade extends script.systems.gcw.gcw_city_kit
 {
-    public gcw_city_kit_barricade()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

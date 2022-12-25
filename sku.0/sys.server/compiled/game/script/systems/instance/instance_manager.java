@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class instance_manager extends script.base_script
 {
-    public instance_manager()
-    {
-    }
+
     public static boolean LOGGING = true;
     public int OnAttach(obj_id self) throws InterruptedException
     {

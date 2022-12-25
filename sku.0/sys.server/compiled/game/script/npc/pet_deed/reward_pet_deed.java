@@ -9,9 +9,7 @@ import script.string_id;
 
 public class reward_pet_deed extends script.base_script
 {
-    public reward_pet_deed()
-    {
-    }
+
     public static final String MENU_FILE = "pet/pet_menu";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

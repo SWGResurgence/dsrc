@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class animal_cage extends script.theme_park.poi.base
 {
-    public animal_cage()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "runAnimalCage", null, 3, true);

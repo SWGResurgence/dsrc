@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class reactor_core_container extends script.base_script
 {
-    public reactor_core_container()
-    {
-    }
+
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public static final String COREROD_TEMPLATE = "object/tangible/mission/quest_item/warren_core_control_rod_s01.iff";
     public int OnInitialize(obj_id self) throws InterruptedException

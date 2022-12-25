@@ -6,9 +6,7 @@ import script.library.weapons;
 
 public class crafting_blaster_weapon extends script.systems.crafting.weapon.crafting_base_weapon
 {
-    public crafting_blaster_weapon()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

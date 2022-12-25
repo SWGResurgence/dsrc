@@ -6,9 +6,7 @@ import script.library.trial;
 
 public class code_terminal_slave extends script.base_script
 {
-    public code_terminal_slave()
-    {
-    }
+
     public static final String DECREPIT_STF = "mustafar/decrepit_droid_factory";
     public static final string_id SID_GET_ACCESS_SNIP = new string_id(DECREPIT_STF, "get_access_snip");
     public static final string_id SID_NOT_LOCKED = new string_id(DECREPIT_STF, "decrepit_not_locked");

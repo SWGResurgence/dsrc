@@ -7,9 +7,7 @@ import script.string_id;
 
 public class terrified_dialog extends script.base_script
 {
-    public terrified_dialog()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "saySomething", null, 10, true);

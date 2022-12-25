@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_vehicle_basilisk extends script.systems.crafting.vehicle.crafting_base_vehicle
 {
-    public crafting_vehicle_basilisk()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

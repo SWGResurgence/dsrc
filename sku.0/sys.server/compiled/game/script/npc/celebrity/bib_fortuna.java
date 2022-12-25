@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class bib_fortuna extends script.base_script
 {
-    public bib_fortuna()
-    {
-    }
+
     public static final String CONVO = "celebrity/captain_eso";
     public int OnAttach(obj_id self) throws InterruptedException
     {

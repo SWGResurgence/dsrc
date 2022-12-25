@@ -7,9 +7,7 @@ import script.string_id;
 
 public class cts_greeter extends script.base_script
 {
-    public cts_greeter()
-    {
-    }
+
     public static final boolean BLOGGING_ON = true;
     public static final String BLOG_CATEGORY = "CharacterTransfer";
     public static final String STF_FILE = "veteran_new";

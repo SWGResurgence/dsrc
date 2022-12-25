@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_seljin_kuric extends script.base_script
 {
-    public ep3_seljin_kuric()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_seljin_kuric";
     public boolean ep3_seljin_kuric_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

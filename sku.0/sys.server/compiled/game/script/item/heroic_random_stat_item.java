@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class heroic_random_stat_item extends script.base_script
 {
-    public heroic_random_stat_item()
-    {
-    }
+
     public static final String[] STAT_ONE = 
     {
         "agility_modified",

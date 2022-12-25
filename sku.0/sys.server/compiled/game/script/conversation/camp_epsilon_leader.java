@@ -8,9 +8,7 @@ import script.*;
 
 public class camp_epsilon_leader extends script.base_script
 {
-    public camp_epsilon_leader()
-    {
-    }
+
     public static String c_stringFile = "conversation/camp_epsilon_leader";
     public boolean camp_epsilon_leader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

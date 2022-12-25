@@ -5,9 +5,7 @@ import script.*;
 
 public class wod_ns_guide extends script.base_script
 {
-    public wod_ns_guide()
-    {
-    }
+
     public static String c_stringFile = "conversation/wod_ns_guide";
     public boolean wod_ns_guide_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

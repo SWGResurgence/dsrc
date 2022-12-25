@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_droid_factory_sergeant_mener extends script.base_script
 {
-    public corellia_droid_factory_sergeant_mener()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_droid_factory_sergeant_mener";
     public boolean corellia_droid_factory_sergeant_mener_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

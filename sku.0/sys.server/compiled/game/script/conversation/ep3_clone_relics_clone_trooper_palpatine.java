@@ -5,9 +5,7 @@ import script.library.*;
 
 public class ep3_clone_relics_clone_trooper_palpatine extends script.base_script
 {
-    public ep3_clone_relics_clone_trooper_palpatine()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_clone_relics_clone_trooper_palpatine";
     public boolean ep3_clone_relics_clone_trooper_palpatine_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -11,9 +11,7 @@ import java.util.Vector;
 
 public class tcg_creature_armor_statue extends script.base_script
 {
-    public tcg_creature_armor_statue()
-    {
-    }
+
     public static final string_id SID_VAC_ARMOR = new string_id("tcg", "start_statue");
     public static final string_id SID_NOT_IN_HOUSE = new string_id("tcg", "not_in_house");
     public static final string_id SID_NO_CREATURE_IN_DP = new string_id("tcg", "no_creature_in_dp");

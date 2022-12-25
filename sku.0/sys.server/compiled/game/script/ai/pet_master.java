@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class pet_master extends script.base_script
 {
-    public pet_master()
-    {
-    }
+
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String STF_FILE = "pet/droid_modules";
     public static final string_id SID_SYS_EMBOLDEN = new string_id("pet/pet_menu", "sys_embolden");

@@ -8,9 +8,7 @@ import script.string_id;
 
 public class fs_xp_convert extends script.base_script
 {
-    public fs_xp_convert()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "quest.force_sensitive.fs_xp_convert");

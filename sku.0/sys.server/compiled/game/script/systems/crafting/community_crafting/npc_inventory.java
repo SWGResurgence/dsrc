@@ -7,9 +7,7 @@ import script.string_id;
 
 public class npc_inventory extends script.base_script
 {
-    public npc_inventory()
-    {
-    }
+
     public static final String OBJVAR_CRAFTING_TRACKER = community_crafting.OBJVAR_COMMUNITY_CRAFTING_TRACKER;
     public static final String OBJVAR_MY_OWNER = community_crafting.OBJVAR_COMMUNITY_CRAFTING_BASE + ".myOwner";
     public static final String OBJVAR_PLAYERS_CAN_ACCESS_CONTAINER = "players_can_access_container";

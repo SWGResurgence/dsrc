@@ -6,9 +6,7 @@ import script.string_id;
 
 public class droid_cave_gate extends script.base_script
 {
-    public droid_cave_gate()
-    {
-    }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))

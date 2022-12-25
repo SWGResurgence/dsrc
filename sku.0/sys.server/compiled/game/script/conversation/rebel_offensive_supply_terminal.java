@@ -5,9 +5,7 @@ import script.library.*;
 
 public class rebel_offensive_supply_terminal extends script.base_script
 {
-    public rebel_offensive_supply_terminal()
-    {
-    }
+
     public static String c_stringFile = "conversation/rebel_offensive_supply_terminal";
     public boolean rebel_offensive_supply_terminal_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

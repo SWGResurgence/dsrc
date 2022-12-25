@@ -7,9 +7,7 @@ import script.*;
 
 public class survivor_02 extends script.base_script
 {
-    public survivor_02()
-    {
-    }
+
     public static String c_stringFile = "conversation/survivor_02";
     public boolean survivor_02_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

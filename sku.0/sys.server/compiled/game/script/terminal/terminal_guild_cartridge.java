@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class terminal_guild_cartridge extends script.base_script
 {
-    public terminal_guild_cartridge()
-    {
-    }
+
     public static final string_id SID_GUILD_LOAD_CARTRIDGE = new string_id("guild", "load_cartridge");
     public static final string_id SID_LOAD_CARTRIDGE_PROMPT = new string_id("guild", "load_cartridge_prompt");
     public static final string_id SID_LOAD_CARTRIDGE_TITLE = new string_id("guild", "load_cartridge_title");

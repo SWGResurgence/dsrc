@@ -5,9 +5,7 @@ import script.library.*;
 
 public class fs_reflex2_player extends script.base_script
 {
-    public fs_reflex2_player()
-    {
-    }
+
     public static final string_id MSG_FIND_THEATER_WAYPOINT = new string_id("quest/force_sensitive/fs_reflex", "msg_phase_02_find_theater_waypoint");
     public static final string_id MSG_GOT_CRATE = new string_id("quest/force_sensitive/fs_reflex", "msg_phase_02_got_crate");
     public static final string_id MSG_QUEST_FINISHED = new string_id("quest/force_sensitive/fs_reflex", "msg_phase_02_quest_finished");

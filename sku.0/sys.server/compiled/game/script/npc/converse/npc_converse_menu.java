@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class npc_converse_menu extends script.base_script
 {
-    public npc_converse_menu()
-    {
-    }
+
     public static final String SCRIPT_NPC_CONVERSE_MENU = "npc.converse.npc_converse_menu";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

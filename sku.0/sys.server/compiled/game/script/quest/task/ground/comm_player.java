@@ -7,9 +7,7 @@ import script.prose_package;
 
 public class comm_player extends script.quest.task.ground.base_task
 {
-    public comm_player()
-    {
-    }
+
     public static final String dataTableColumnCommMessageText = "COMM_MESSAGE_TEXT";
     public static final String dataTableColumnNPCAppearanceServerTemplate = "NPC_APPEARANCE_SERVER_TEMPLATE";
     public static final String taskType = "comm_player";

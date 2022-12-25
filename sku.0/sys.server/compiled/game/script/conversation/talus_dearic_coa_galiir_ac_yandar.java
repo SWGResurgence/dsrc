@@ -8,9 +8,7 @@ import script.*;
 
 public class talus_dearic_coa_galiir_ac_yandar extends script.base_script
 {
-    public talus_dearic_coa_galiir_ac_yandar()
-    {
-    }
+
     public static String c_stringFile = "conversation/talus_dearic_coa_galiir_ac_yandar";
     public boolean talus_dearic_coa_galiir_ac_yandar_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

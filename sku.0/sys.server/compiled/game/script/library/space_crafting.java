@@ -6,9 +6,7 @@ import java.util.Vector;
 
 public class space_crafting extends script.base_script
 {
-    public space_crafting()
-    {
-    }
+
     public static final int CHASSIS = space_combat.SHIP;
     public static final int HULL = -1;
     public static final int LIFE_SUPPORT = -2;

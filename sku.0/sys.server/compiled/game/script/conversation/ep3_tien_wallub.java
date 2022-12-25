@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_tien_wallub extends script.base_script
 {
-    public ep3_tien_wallub()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_tien_wallub";
     public boolean ep3_tien_wallub_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

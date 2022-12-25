@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class tree_spawner extends script.base_script
 {
-    public tree_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnTree", null, 5, true);

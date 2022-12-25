@@ -8,9 +8,7 @@ import script.*;
 
 public class story_arc_chapter_three_cobar extends script.base_script
 {
-    public story_arc_chapter_three_cobar()
-    {
-    }
+
     public static String c_stringFile = "conversation/story_arc_chapter_three_cobar";
     public boolean story_arc_chapter_three_cobar_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

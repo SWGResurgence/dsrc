@@ -7,9 +7,7 @@ import script.string_id;
 
 public class fs_medic_puzzle_cleanup extends script.base_script
 {
-    public fs_medic_puzzle_cleanup()
-    {
-    }
+
     public static final boolean DEBUGGING = false;
     public int msgQuestAbortPhaseChange(obj_id self, dictionary params) throws InterruptedException
     {

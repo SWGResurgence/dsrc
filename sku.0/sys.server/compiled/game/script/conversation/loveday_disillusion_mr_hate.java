@@ -8,9 +8,7 @@ import script.*;
 
 public class loveday_disillusion_mr_hate extends script.base_script
 {
-    public loveday_disillusion_mr_hate()
-    {
-    }
+
     public static String c_stringFile = "conversation/loveday_disillusion_mr_hate";
     public boolean loveday_disillusion_mr_hate_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

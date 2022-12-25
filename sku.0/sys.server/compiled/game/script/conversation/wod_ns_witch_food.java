@@ -8,9 +8,7 @@ import script.*;
 
 public class wod_ns_witch_food extends script.base_script
 {
-    public wod_ns_witch_food()
-    {
-    }
+
     public static String c_stringFile = "conversation/wod_ns_witch_food";
     public boolean wod_ns_witch_food_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

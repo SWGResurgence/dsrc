@@ -5,9 +5,7 @@ import script.library.*;
 
 public class race_coordinator extends script.base_script
 {
-    public race_coordinator()
-    {
-    }
+
     public static final String RACING_STF = "theme_park/racing/racing";
     public static final int[] CHECK_POINT = 
     {

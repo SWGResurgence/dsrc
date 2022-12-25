@@ -5,9 +5,7 @@ import script.*;
 
 public class corvette_yondalla_neutral_rescue extends script.base_script
 {
-    public corvette_yondalla_neutral_rescue()
-    {
-    }
+
     public static String c_stringFile = "conversation/corvette_yondalla_neutral_rescue";
     public boolean corvette_yondalla_neutral_rescue_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

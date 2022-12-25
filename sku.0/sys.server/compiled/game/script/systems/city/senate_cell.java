@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class senate_cell extends script.base_script
 {
-    public senate_cell()
-    {
-    }
+
     public static final String JEDI_ROOM_PERMISSIONS_TABLE = "datatables/pvp/jedi_enclave_room_permissions.iff";
     public static final String DATA_COLUMN_COMMUNITY_CELLS = "_community_cells";
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException

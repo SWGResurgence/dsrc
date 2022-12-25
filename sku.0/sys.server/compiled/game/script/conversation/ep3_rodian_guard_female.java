@@ -7,9 +7,7 @@ import script.*;
 
 public class ep3_rodian_guard_female extends script.base_script
 {
-    public ep3_rodian_guard_female()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_rodian_guard_female";
     public boolean ep3_rodian_guard_female_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

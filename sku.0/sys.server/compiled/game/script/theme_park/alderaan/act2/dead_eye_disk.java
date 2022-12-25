@@ -9,9 +9,7 @@ import script.string_id;
 
 public class dead_eye_disk extends script.base_script
 {
-    public dead_eye_disk()
-    {
-    }
+
     public static final String REBEL_STF = "theme_park/alderaan/act2/rebel_missions";
     public static final String REBEL_SHARED_STF = "theme_park/alderaan/act2/shared_rebel_missions";
     public static final string_id DISK_NAME_DECODED = new string_id(REBEL_SHARED_STF, "disk_name_decoded");

@@ -15,9 +15,7 @@ import java.util.Vector;
 
 public class combat_simulator_master extends script.base_script
 {
-    public combat_simulator_master()
-    {
-    }
+
     public static boolean debug = false;
     public static final String actorScript = "simulator.combat_simulator_actor";
     public static final float CRAFTED_QUALITY = 0.85f;

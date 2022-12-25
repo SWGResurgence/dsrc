@@ -5,9 +5,7 @@ import script.library.*;
 
 public class doctor_griffax_jin extends script.base_script
 {
-    public doctor_griffax_jin()
-    {
-    }
+
     public static String c_stringFile = "conversation/doctor_griffax_jin";
     public boolean doctor_griffax_jin_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

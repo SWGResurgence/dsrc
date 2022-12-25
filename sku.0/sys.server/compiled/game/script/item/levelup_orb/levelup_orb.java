@@ -6,9 +6,7 @@ import script.*;
 
 public class levelup_orb extends script.base_script
 {
-    public levelup_orb()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "item.special.nomove"))

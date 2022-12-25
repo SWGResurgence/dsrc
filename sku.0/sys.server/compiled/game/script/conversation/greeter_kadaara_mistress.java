@@ -5,9 +5,7 @@ import script.*;
 
 public class greeter_kadaara_mistress extends script.base_script
 {
-    public greeter_kadaara_mistress()
-    {
-    }
+
     public static String c_stringFile = "conversation/greeter_kadaara_mistress";
     public boolean greeter_kadaara_mistress_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

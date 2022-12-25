@@ -9,9 +9,7 @@ import script.string_id;
 
 public class library_trivia extends script.base_script
 {
-    public library_trivia()
-    {
-    }
+
     public static final String CONVO = "celebrity/librarian";
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class remote_theater_spawner extends script.base_script
 {
-    public remote_theater_spawner()
-    {
-    }
+
     public int handleCreateRemoteTheater(obj_id self, dictionary params) throws InterruptedException
     {
         String datatable = params.getString("datatable");

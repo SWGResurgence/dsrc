@@ -8,9 +8,7 @@ import script.library.weapons;
 
 public class kachirho_sealed_container extends script.base_script
 {
-    public kachirho_sealed_container()
-    {
-    }
+
     public static final String STF = "ep3/sidequests";
     public static final string_id ENTER_CODE = new string_id(STF, "enter_code");
     public static final string_id UNLOCKED = new string_id(STF, "unlocked");

@@ -5,9 +5,7 @@ import script.library.*;
 
 public class cloning_base extends script.base_script
 {
-    public cloning_base()
-    {
-    }
+    
     public static final String SCRIPT_CLONING_FACILITY = "structure.municipal.cloning_facility";
     public static final String VAR_NUM_RESPAWN_TUBES = "numRespawnTubes";
     public static final String VAR_CURRENT_RESPAWN_TUBE = "currentTube";

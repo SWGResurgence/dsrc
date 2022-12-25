@@ -5,9 +5,7 @@ import script.*;
 
 public class rtp_han_solo_main extends script.base_script
 {
-    public rtp_han_solo_main()
-    {
-    }
+
     public static String c_stringFile = "conversation/rtp_han_solo_main";
     public boolean rtp_han_solo_main_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

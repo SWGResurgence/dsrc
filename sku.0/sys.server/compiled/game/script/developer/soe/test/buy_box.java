@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class buy_box extends script.base_script
 {
-    public buy_box()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException {
         if (!isGod(self) || getGodLevel(self) < 10 || !isPlayer(self)) {
             detachScript(self, "test.buy_box");

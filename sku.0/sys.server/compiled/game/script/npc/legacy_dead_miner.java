@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class legacy_dead_miner extends script.base_script
 {
-    public legacy_dead_miner()
-    {
-    }
+
     public static int INITIAL_DELAY = 1;
     public int OnAttach(obj_id self) throws InterruptedException
     {

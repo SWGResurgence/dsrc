@@ -8,9 +8,7 @@ import script.*;
 
 public class u13_lieutenant_tarc extends script.base_script
 {
-    public u13_lieutenant_tarc()
-    {
-    }
+    
     public static String c_stringFile = "conversation/u13_lieutenant_tarc";
     public boolean u13_lieutenant_tarc_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

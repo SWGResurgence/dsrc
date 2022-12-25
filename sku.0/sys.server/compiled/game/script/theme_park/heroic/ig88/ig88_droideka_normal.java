@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class ig88_droideka_normal extends script.base_script
 {
-    public ig88_droideka_normal()
-    {
-    }
+
     public void findNextTarget(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))

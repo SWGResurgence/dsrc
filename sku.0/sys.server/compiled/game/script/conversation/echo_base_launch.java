@@ -5,9 +5,7 @@ import script.library.*;
 
 public class echo_base_launch extends script.base_script
 {
-    public echo_base_launch()
-    {
-    }
+
     public static String c_stringFile = "conversation/echo_base_launch";
     public boolean echo_base_launch_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

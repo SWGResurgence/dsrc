@@ -8,9 +8,7 @@ import script.string_id;
 
 public class turret_y8_lower extends script.base_script
 {
-    public turret_y8_lower()
-    {
-    }
+
     public static final string_id SID_PILOT = new string_id("space/space_interaction", "pilot_ship");
     public static final string_id SID_TURRET_LOWER = new string_id("space/space_interaction", "turret_lower");
     public static final string_id SID_TURRET_LOWER_2 = new string_id("space/space_interaction", "turret_lower_2");

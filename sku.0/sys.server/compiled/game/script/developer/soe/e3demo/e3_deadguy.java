@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class e3_deadguy extends script.base_script
 {
-    public e3_deadguy()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         kill(self);

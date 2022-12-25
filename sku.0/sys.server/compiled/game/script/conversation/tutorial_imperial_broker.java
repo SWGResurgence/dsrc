@@ -5,9 +5,7 @@ import script.*;
 
 public class tutorial_imperial_broker extends script.base_script
 {
-    public tutorial_imperial_broker()
-    {
-    }
+
     public static String c_stringFile = "conversation/tutorial_imperial_broker";
     public boolean tutorial_imperial_broker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_kachirho_varactyl_hunter extends script.base_script
 {
-    public ep3_kachirho_varactyl_hunter()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_kachirho_varactyl_hunter";
     public boolean ep3_kachirho_varactyl_hunter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.*;
 
 public class c_ddroid_amarent extends script.base_script
 {
-    public c_ddroid_amarent()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_ddroid_amarent";
     public boolean c_ddroid_amarent_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

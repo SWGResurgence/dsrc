@@ -7,9 +7,7 @@ import script.*;
 
 public class sean_questn_university extends script.base_script
 {
-    public sean_questn_university()
-    {
-    }
+
     public static String c_stringFile = "conversation/sean_questn_university";
     public boolean sean_questn_university_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.*;
 
 public class disable_sidequest extends script.base_script
 {
-    public disable_sidequest()
-    {
-    }
+
     public static String c_stringFile = "conversation/disable_sidequest";
     public boolean disable_sidequest_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

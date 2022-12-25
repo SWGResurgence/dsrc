@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class comm_array extends script.base_script
 {
-    public comm_array()
-    {
-    }
+
     public static final string_id SID_MNU_HACK = new string_id("restuss_event/object", "hack_comm");
     public static final string_id SID_NO_HACK = new string_id("restuss_event/object", "cant_hack");
     public static final string_id SID_BEING_HACKED = new string_id("restuss_event/object", "being_hacked");

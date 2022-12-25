@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class kav_golder extends script.base_script
 {
-    public kav_golder()
-    {
-    }
+    
     public int OnArrivedAtLocation(obj_id self, String location) throws InterruptedException
     {
         if (location.equals("kav_final"))

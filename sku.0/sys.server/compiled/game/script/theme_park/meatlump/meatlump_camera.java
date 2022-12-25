@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class meatlump_camera extends script.base_script
 {
-    public meatlump_camera()
-    {
-    }
+
     public static final string_id SID_USE_CAMERA = new string_id("collection", "use_camera");
     public static final string_id SID_INVALID_OBJECT = new string_id("collection", "invalid_camera_target");
     public static final string_id SID_PICTURE_TAKEN = new string_id("collection", "picture_taken");

@@ -5,9 +5,7 @@ import script.library.*;
 
 public class blackwing_canister_collection extends script.base_script
 {
-    public blackwing_canister_collection()
-    {
-    }
+
     public static final String OUTBREAK = "theme_park/outbreak/outbreak";
     public static final string_id SID_YOU_DIED = new string_id(OUTBREAK, "canister_death");
     public static final string_id SID_NOT_WHILE_MOUNTED = new string_id(OUTBREAK, "canister_not_while_mounted");

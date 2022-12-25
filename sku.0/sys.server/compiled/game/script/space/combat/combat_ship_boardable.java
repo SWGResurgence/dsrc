@@ -10,9 +10,7 @@ import script.transform;
 
 public class combat_ship_boardable extends script.base_script
 {
-    public combat_ship_boardable()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String strBoardingType = getStringObjVar(self, "strBoardingType");

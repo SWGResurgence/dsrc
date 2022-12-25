@@ -7,9 +7,7 @@ import script.*;
 
 public class npe_collector extends script.base_script
 {
-    public npe_collector()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_collector";
     public boolean npe_collector_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,9 +8,7 @@ import script.*;
 
 public class station_naboo_mining extends script.base_script
 {
-    public station_naboo_mining()
-    {
-    }
+
     public static String c_stringFile = "conversation/station_naboo_mining";
     public boolean station_naboo_mining_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

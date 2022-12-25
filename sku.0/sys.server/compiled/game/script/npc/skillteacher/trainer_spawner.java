@@ -10,9 +10,7 @@ import script.string_id;
 
 public class trainer_spawner extends script.base_script
 {
-    public trainer_spawner()
-    {
-    }
+
     public static final boolean TRAINERS_OFF = true;
     public int OnInitialize(obj_id self) throws InterruptedException
     {

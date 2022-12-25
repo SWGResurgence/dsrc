@@ -9,9 +9,7 @@ import script.vector;
 
 public class content_manager extends script.base.remote_object_creator
 {
-    public content_manager()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "intNoDump", 1);

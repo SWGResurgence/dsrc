@@ -8,9 +8,7 @@ import script.*;
 
 public class naboo_boss_nass extends script.base_script
 {
-    public naboo_boss_nass()
-    {
-    }
+
     public static String c_stringFile = "conversation/naboo_boss_nass";
     public boolean naboo_boss_nass_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

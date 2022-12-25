@@ -5,9 +5,7 @@ import script.*;
 
 public class event_cheerleader_luke extends script.base_script
 {
-    public event_cheerleader_luke()
-    {
-    }
+
     public static String c_stringFile = "conversation/event_cheerleader_luke";
     public boolean event_cheerleader_luke_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

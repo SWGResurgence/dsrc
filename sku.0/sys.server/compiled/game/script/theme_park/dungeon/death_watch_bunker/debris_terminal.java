@@ -4,9 +4,7 @@ import script.*;
 
 public class debris_terminal extends script.base_script
 {
-    public debris_terminal()
-    {
-    }
+
     public static final String MSGS = "dungeon/death_watch";
     public int OnAttach(obj_id self) throws InterruptedException
     {

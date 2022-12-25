@@ -8,9 +8,7 @@ import script.string_id;
 
 public class wirartu_attack extends script.base_script
 {
-    public wirartu_attack()
-    {
-    }
+
     public static final String STF_FILE = "quest/pirates";
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {

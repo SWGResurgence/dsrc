@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class escape_hatch extends script.base_script
 {
-    public escape_hatch()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

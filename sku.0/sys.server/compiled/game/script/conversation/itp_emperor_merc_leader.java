@@ -8,9 +8,7 @@ import script.*;
 
 public class itp_emperor_merc_leader extends script.base_script
 {
-    public itp_emperor_merc_leader()
-    {
-    }
+
     public static String c_stringFile = "conversation/itp_emperor_merc_leader";
     public boolean itp_emperor_merc_leader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

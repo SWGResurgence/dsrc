@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class dungeon_timer extends script.base_script
 {
-    public dungeon_timer()
-    {
-    }
+
     public static final String MSGS = "dungeon/corvette";
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {

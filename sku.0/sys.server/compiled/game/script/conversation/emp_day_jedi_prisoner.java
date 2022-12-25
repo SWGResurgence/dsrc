@@ -7,9 +7,7 @@ import script.*;
 
 public class emp_day_jedi_prisoner extends script.base_script
 {
-    public emp_day_jedi_prisoner()
-    {
-    }
+
     public static String c_stringFile = "conversation/emp_day_jedi_prisoner";
     public boolean emp_day_jedi_prisoner_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

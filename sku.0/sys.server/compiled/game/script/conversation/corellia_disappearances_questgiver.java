@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_disappearances_questgiver extends script.base_script
 {
-    public corellia_disappearances_questgiver()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_disappearances_questgiver";
     public boolean corellia_disappearances_questgiver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -2,9 +2,7 @@ package script.creature_spawner;
 
 public class corellia_easy extends base_newbie_creature_spawner
 {
-    public corellia_easy()
-    {
-    }
+
     public static final boolean SPAWNER_DISABLED = true;
     public int maxPop = 6;
     public boolean newbie = true;

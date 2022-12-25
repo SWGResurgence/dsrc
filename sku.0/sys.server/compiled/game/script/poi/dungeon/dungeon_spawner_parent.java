@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class dungeon_spawner_parent extends script.base_script
 {
-    public dungeon_spawner_parent()
-    {
-    }
+
     public static final float SPAWN_DELAY = 1.0f;
     public int OnInitialize(obj_id self) throws InterruptedException
     {

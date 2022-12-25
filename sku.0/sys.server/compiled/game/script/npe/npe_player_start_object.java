@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class npe_player_start_object extends script.base_script
 {
-    public npe_player_start_object()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

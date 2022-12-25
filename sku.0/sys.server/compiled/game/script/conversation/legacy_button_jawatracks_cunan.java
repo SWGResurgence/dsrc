@@ -8,9 +8,7 @@ import script.*;
 
 public class legacy_button_jawatracks_cunan extends script.base_script
 {
-    public legacy_button_jawatracks_cunan()
-    {
-    }
+
     public static String c_stringFile = "conversation/legacy_button_jawatracks_cunan";
     public boolean legacy_button_jawatracks_cunan_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

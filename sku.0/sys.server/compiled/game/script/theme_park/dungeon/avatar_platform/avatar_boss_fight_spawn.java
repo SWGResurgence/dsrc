@@ -10,9 +10,7 @@ import script.string_id;
 
 public class avatar_boss_fight_spawn extends script.base_script
 {
-    public avatar_boss_fight_spawn()
-    {
-    }
+
     public static final String STF = "dungeon/avatar_platform";
     public static final String TBL_BOSS_FIGHT = "datatables/dungeon/avatar_platform/ep3_avatar_platform_boss_trando.iff";
     public static final string_id TAUNT = new string_id(STF, "harwakokok_taunt");

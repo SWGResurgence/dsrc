@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_eyma extends script.base_script
 {
-    public ep3_eyma()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_eyma";
     public boolean ep3_eyma_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

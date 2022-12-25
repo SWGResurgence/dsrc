@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class convoy_master extends script.base_script
 {
-    public convoy_master()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 180, false);

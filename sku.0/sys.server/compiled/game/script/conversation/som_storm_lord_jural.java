@@ -8,9 +8,7 @@ import script.*;
 
 public class som_storm_lord_jural extends script.base_script
 {
-    public som_storm_lord_jural()
-    {
-    }
+
     public static String c_stringFile = "conversation/som_storm_lord_jural";
     public boolean som_storm_lord_jural_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

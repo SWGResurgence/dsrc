@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class rc_terminal extends script.base_script
 {
-    public rc_terminal()
-    {
-    }
+
     public static final String MSGS = "dungeon/death_watch";
     public int OnAttach(obj_id self) throws InterruptedException
     {

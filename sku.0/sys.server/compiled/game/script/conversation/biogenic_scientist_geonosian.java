@@ -6,9 +6,7 @@ import script.*;
 
 public class biogenic_scientist_geonosian extends script.base_script
 {
-    public biogenic_scientist_geonosian()
-    {
-    }
+
     public static String c_stringFile = "conversation/biogenic_scientist_geonosian";
     public boolean biogenic_scientist_geonosian_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

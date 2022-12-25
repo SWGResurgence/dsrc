@@ -5,9 +5,7 @@ import script.*;
 
 public class core_terminal extends script.base_script
 {
-    public core_terminal()
-    {
-    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int id = mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("mustafar/old_republic_facility", "core_terminal_use"));

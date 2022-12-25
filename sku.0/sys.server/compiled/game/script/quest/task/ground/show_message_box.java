@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class show_message_box extends script.quest.task.ground.base_task
 {
-    public show_message_box()
-    {
-    }
+
     public static final String dataTableColumnMessageBoxTitle = "MESSAGE_BOX_TITLE";
     public static final String dataTableColumnMessageBoxText = "MESSAGE_BOX_TEXT";
     public static final String dataTableColumnMessageBoxSound = "MESSAGE_BOX_SOUND";

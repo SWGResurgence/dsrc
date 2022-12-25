@@ -5,9 +5,7 @@ import script.library.*;
 
 public class obiwan_event_manager extends script.base_script
 {
-    public obiwan_event_manager()
-    {
-    }
+
     public static final String STF_OBI_CONVO = "conversation/som_kenobi_obi_wan";
     public static final string_id SID_LAUNCH = new string_id(mustafar.STF_OBI_MSGS, "obiwan_finale_launch");
     public static final string_id SID_EJECT = new string_id(mustafar.STF_OBI_MSGS, "obiwan_finale_eject");

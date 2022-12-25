@@ -5,9 +5,7 @@ import script.*;
 
 public class npe_pilot_hard extends script.base_script
 {
-    public npe_pilot_hard()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_pilot_hard";
     public boolean npe_pilot_hard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

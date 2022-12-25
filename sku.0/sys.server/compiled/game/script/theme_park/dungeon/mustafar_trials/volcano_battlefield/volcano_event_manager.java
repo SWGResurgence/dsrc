@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class volcano_event_manager extends script.base_script
 {
-    public volcano_event_manager()
-    {
-    }
+
     public static final String dataTable = "datatables/dungeon/mustafar_trials/volcano_battlefield/volcano_event_data.iff";
     public static final int[] events = 
     {

@@ -8,9 +8,7 @@ import script.*;
 
 public class disgruntled_leader extends script.base_script
 {
-    public disgruntled_leader()
-    {
-    }
+
     public static String c_stringFile = "conversation/disgruntled_leader";
     public boolean disgruntled_leader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

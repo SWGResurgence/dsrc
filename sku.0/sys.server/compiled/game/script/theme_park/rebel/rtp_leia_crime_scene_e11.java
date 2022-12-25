@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class rtp_leia_crime_scene_e11 extends script.base_script
 {
-    public rtp_leia_crime_scene_e11()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "e11Spawned"))

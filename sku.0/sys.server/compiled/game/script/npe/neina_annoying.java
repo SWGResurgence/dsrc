@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class neina_annoying extends script.base_script
 {
-    public neina_annoying()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "annoying1", null, 1, false);

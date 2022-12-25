@@ -5,9 +5,7 @@ import script.library.*;
 
 public class delivery_hassel extends script.base_script
 {
-    public delivery_hassel()
-    {
-    }
+
     public static String c_stringFile = "conversation/delivery_hassel";
     public boolean delivery_hassel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.*;
 
 public class som_kenobi_computer_technician extends script.base_script
 {
-    public som_kenobi_computer_technician()
-    {
-    }
+
     public static String c_stringFile = "conversation/som_kenobi_computer_technician";
     public boolean som_kenobi_computer_technician_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

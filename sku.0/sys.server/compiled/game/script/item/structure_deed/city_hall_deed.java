@@ -9,9 +9,7 @@ import script.string_id;
 
 public class city_hall_deed extends script.item.structure_deed.player_structure_deed
 {
-    public city_hall_deed()
-    {
-    }
+
     public static final string_id SID_OBSCENE = new string_id("player_structure", "obscene");
     public static final string_id SID_NOT_UNIQUE = new string_id("player_structure", "cityname_not_unique");
     public static final string_id SID_ALREADY_MAYOR = new string_id("city/city", "already_mayor");

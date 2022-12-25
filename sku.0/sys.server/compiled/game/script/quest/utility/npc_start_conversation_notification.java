@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class npc_start_conversation_notification extends script.base_script
 {
-    public npc_start_conversation_notification()
-    {
-    }
+
     public int locationRequest(obj_id self, dictionary params) throws InterruptedException
     {
         if (params != null)

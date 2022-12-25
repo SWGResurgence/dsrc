@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_main_trace extends script.base_script
 {
-    public npe_main_trace()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_main_trace";
     public boolean npe_main_trace_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

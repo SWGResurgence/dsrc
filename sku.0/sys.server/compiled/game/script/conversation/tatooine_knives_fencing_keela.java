@@ -8,9 +8,7 @@ import script.*;
 
 public class tatooine_knives_fencing_keela extends script.base_script
 {
-    public tatooine_knives_fencing_keela()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_knives_fencing_keela";
     public boolean tatooine_knives_fencing_keela_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

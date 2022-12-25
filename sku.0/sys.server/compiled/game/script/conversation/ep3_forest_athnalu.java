@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_forest_athnalu extends script.base_script
 {
-    public ep3_forest_athnalu()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_forest_athnalu";
     public boolean ep3_forest_athnalu_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

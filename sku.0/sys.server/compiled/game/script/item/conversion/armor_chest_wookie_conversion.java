@@ -2,9 +2,7 @@ package script.item.conversion;
 
 public class armor_chest_wookie_conversion extends script.item.conversion.armor_base_conversion
 {
-    public armor_chest_wookie_conversion()
-    {
-    }
+
     public static final String[] ARMOR_SET_ASSAULT = 
     {
         "kashyyykian_hunting/armor_kashyyykian_hunting_chest_plate.iff"

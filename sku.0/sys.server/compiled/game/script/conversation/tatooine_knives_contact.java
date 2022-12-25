@@ -8,9 +8,7 @@ import script.*;
 
 public class tatooine_knives_contact extends script.base_script
 {
-    public tatooine_knives_contact()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_knives_contact";
     public boolean tatooine_knives_contact_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.*;
 
 public class wod_ns_sage extends script.base_script
 {
-    public wod_ns_sage()
-    {
-    }
+
     public static String c_stringFile = "conversation/wod_ns_sage";
     public boolean wod_ns_sage_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

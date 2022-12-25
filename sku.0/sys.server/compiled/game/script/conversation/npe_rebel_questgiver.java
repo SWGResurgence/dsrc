@@ -5,9 +5,7 @@ import script.*;
 
 public class npe_rebel_questgiver extends script.base_script
 {
-    public npe_rebel_questgiver()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_rebel_questgiver";
     public boolean npe_rebel_questgiver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class boss_terminal_mining_cave_foreman extends script.base_script
 {
-    public boss_terminal_mining_cave_foreman()
-    {
-    }
+
     public static String c_stringFile = "conversation/boss_terminal_mining_cave_foreman";
     public boolean boss_terminal_mining_cave_foreman_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

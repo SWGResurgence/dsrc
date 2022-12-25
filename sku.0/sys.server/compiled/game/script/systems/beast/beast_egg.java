@@ -5,9 +5,7 @@ import script.library.*;
 
 public class beast_egg extends script.base_script
 {
-    public beast_egg()
-    {
-    }
+
     public static final string_id SID_WHILE_DEAD = new string_id("beast", "no_hatch_while_dead");
     public static final string_id SID_EGG_HATCH = new string_id("beast", "hatch_egg");
     public static final string_id SID_GOD_EGG_HATCH = new string_id("beast", "god_hatch_egg");

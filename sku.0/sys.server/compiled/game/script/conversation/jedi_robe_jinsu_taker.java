@@ -8,9 +8,7 @@ import script.*;
 
 public class jedi_robe_jinsu_taker extends script.base_script
 {
-    public jedi_robe_jinsu_taker()
-    {
-    }
+
     public static String c_stringFile = "conversation/jedi_robe_jinsu_taker";
     public boolean jedi_robe_jinsu_taker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

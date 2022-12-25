@@ -13,9 +13,7 @@ import script.library.utils;
 
 public class wod_spiderqueen_dna extends script.base_script
 {
-    public wod_spiderqueen_dna()
-    {
-    }
+
     public static final String DNA_LOOT_ITEM = "item_spiderclan_queen_dna";
     public static final int DNA_LOOT_CHANCE = 15;
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException

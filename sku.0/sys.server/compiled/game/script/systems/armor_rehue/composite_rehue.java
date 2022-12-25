@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class composite_rehue extends script.base_script
 {
-    public composite_rehue()
-    {
-    }
+
     public static final string_id MNU_COLOR = new string_id("sui", "set_color");
     public static final String SCRIPTVAR_ARMOR_PID = "armor_rehue.pid";
     public int OnInitialize(obj_id self) throws InterruptedException

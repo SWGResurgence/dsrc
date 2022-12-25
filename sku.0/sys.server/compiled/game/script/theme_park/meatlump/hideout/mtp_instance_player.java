@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class mtp_instance_player extends script.base_script
 {
-    public mtp_instance_player()
-    {
-    }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);

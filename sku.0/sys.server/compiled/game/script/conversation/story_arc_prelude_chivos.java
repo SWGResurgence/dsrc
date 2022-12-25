@@ -8,9 +8,7 @@ import script.*;
 
 public class story_arc_prelude_chivos extends script.base_script
 {
-    public story_arc_prelude_chivos()
-    {
-    }
+    
     public static String c_stringFile = "conversation/story_arc_prelude_chivos";
     public boolean story_arc_prelude_chivos_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

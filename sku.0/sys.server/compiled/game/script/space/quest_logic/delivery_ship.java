@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class delivery_ship extends script.base_script
 {
-    public delivery_ship()
-    {
-    }
+
     public int lightspeedJump(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObjectHyperspace(self);

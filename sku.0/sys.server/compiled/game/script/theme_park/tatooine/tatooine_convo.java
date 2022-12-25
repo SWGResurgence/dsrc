@@ -6,9 +6,7 @@ import script.string_id;
 
 public class tatooine_convo extends script.base_script
 {
-    public tatooine_convo()
-    {
-    }
+
     public static final String CONVO = "tatooine_convo";
     public static final location mos_eisley = new location(3355, 6, -5018, "tatooine", null);
     public static final location mos_espa = new location(-2882, 7, 2097, "tatooine");

@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class loveday_ewok_cupid extends script.base_script
 {
-    public loveday_ewok_cupid()
-    {
-    }
+
     public static String c_stringFile = "conversation/loveday_ewok_cupid";
     public boolean loveday_ewok_cupid_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

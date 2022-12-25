@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class jedi_sentinel_light_spawner extends script.base_script
 {
-    public jedi_sentinel_light_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnCreatures(self);

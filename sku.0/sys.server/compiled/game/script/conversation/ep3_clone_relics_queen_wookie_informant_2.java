@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_clone_relics_queen_wookie_informant_2 extends script.base_script
 {
-    public ep3_clone_relics_queen_wookie_informant_2()
-    {
-    }
+    
     public static String c_stringFile = "conversation/ep3_clone_relics_queen_wookie_informant_2";
     public boolean ep3_clone_relics_queen_wookie_informant_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

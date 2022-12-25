@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class mtp_ragtag_ames_missd extends script.base_script
 {
-    public mtp_ragtag_ames_missd()
-    {
-    }
+
     public static String c_stringFile = "conversation/mtp_ragtag_ames_missd";
     public boolean mtp_ragtag_ames_missd_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -33,9 +33,7 @@ public final class attrib_mod implements Comparable, Serializable
 	/**
 	 * Class constructor. This is for use when creating an attrib_mod from C.
 	 */
-	private attrib_mod()
-	{
-	}
+
 
 	/**
 	 * Class constructor. Makes an old-style attrib mod.

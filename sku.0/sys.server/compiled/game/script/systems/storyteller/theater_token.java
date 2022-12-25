@@ -8,9 +8,7 @@ import script.string_id;
 
 public class theater_token extends script.base_script
 {
-    public theater_token()
-    {
-    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("storyteller", "deploy_mode"));

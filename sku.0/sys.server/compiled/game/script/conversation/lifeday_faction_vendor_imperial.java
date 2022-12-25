@@ -5,9 +5,7 @@ import script.library.*;
 
 public class lifeday_faction_vendor_imperial extends script.base_script
 {
-    public lifeday_faction_vendor_imperial()
-    {
-    }
+
     public static String c_stringFile = "conversation/lifeday_faction_vendor_imperial";
     public boolean lifeday_faction_vendor_imperial_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

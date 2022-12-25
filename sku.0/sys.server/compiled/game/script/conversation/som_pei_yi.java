@@ -7,9 +7,7 @@ import script.*;
 
 public class som_pei_yi extends script.base_script
 {
-    public som_pei_yi()
-    {
-    }
+
     public static String c_stringFile = "conversation/som_pei_yi";
     public boolean som_pei_yi_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

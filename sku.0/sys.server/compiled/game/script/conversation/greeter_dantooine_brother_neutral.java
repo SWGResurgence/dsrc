@@ -5,9 +5,7 @@ import script.*;
 
 public class greeter_dantooine_brother_neutral extends script.base_script
 {
-    public greeter_dantooine_brother_neutral()
-    {
-    }
+
     public static String c_stringFile = "conversation/greeter_dantooine_brother_neutral";
     public boolean greeter_dantooine_brother_neutral_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.*;
 
 public class lava_lizard_food extends script.base_script
 {
-    public lava_lizard_food()
-    {
-    }
+
     public static final String STF = "som/som_quest";
     public static final string_id EXAMINE = new string_id(STF, "lava_lizard_food_examine");
     public static final string_id ALREADY = new string_id(STF, "lava_lizard_food_already");

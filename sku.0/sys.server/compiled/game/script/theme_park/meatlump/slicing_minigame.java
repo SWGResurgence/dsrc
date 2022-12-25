@@ -5,9 +5,7 @@ import script.library.*;
 
 public class slicing_minigame extends script.base_script
 {
-    public slicing_minigame()
-    {
-    }
+
     public static final boolean LOGGING_ON = true;
     public static final String VAR_PREFIX = "meatlump_safe";
     public static final String NONIMPERATIVE_VAR_PREFIX = "meatlump_safe_nonimperative";

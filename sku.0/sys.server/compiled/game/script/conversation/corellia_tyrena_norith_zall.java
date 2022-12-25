@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_tyrena_norith_zall extends script.base_script
 {
-    public corellia_tyrena_norith_zall()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_tyrena_norith_zall";
     public boolean corellia_tyrena_norith_zall_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

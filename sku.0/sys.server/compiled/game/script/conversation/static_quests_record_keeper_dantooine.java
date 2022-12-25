@@ -7,9 +7,7 @@ import script.*;
 
 public class static_quests_record_keeper_dantooine extends script.base_script
 {
-    public static_quests_record_keeper_dantooine()
-    {
-    }
+
     public static String c_stringFile = "conversation/static_quests_record_keeper_dantooine";
     public boolean static_quests_record_keeper_dantooine_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

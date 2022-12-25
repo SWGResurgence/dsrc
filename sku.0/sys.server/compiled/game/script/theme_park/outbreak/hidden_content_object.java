@@ -6,9 +6,7 @@ import script.library.groundquests;
 
 public class hidden_content_object extends script.base_script
 {
-    public hidden_content_object()
-    {
-    }
+
     public static final String MENU_STRING_FILE = "theme_park/outbreak/outbreak";
     public static final String MENU_OBJ_VAR = "menu_string";
     public static final String QUEST_OBJ_VAR = "questName";

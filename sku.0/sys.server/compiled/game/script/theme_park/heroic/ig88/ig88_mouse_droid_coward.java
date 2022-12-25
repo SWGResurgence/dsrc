@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class ig88_mouse_droid_coward extends script.base_script
 {
-    public ig88_mouse_droid_coward()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id dungeon = getTopMostContainer(self);

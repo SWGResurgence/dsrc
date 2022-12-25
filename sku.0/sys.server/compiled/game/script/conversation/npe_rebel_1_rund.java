@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_rebel_1_rund extends script.base_script
 {
-    public npe_rebel_1_rund()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_rebel_1_rund";
     public boolean npe_rebel_1_rund_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

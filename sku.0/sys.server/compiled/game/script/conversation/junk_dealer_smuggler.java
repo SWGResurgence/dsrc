@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class junk_dealer_smuggler extends script.base_script
 {
-    public junk_dealer_smuggler()
-    {
-    }
+
     public static String c_stringFile = "conversation/junk_dealer_smuggler";
     public boolean junk_dealer_smuggler_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

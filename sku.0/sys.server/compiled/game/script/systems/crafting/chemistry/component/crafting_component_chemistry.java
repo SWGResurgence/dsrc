@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_component_chemistry extends script.systems.crafting.chemistry.crafting_base_chemical_component
 {
-    public crafting_component_chemistry()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

@@ -8,9 +8,7 @@ import script.*;
 
 public class legacy_darklighter_guard extends script.base_script
 {
-    public legacy_darklighter_guard()
-    {
-    }
+
     public static String c_stringFile = "conversation/legacy_darklighter_guard";
     public boolean legacy_darklighter_guard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

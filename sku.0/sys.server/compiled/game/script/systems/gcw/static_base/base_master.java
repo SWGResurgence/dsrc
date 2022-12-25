@@ -11,9 +11,7 @@ import java.util.Vector;
 
 public class base_master extends script.base_script
 {
-    public base_master()
-    {
-    }
+
     public static final int NO_CONTROL = 0;
     public static final int IMPERIAL_CONTROL = 1;
     public static final int REBEL_CONTROL = 2;

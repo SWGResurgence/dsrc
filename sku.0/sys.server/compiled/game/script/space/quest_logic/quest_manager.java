@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class quest_manager extends script.base_script
 {
-    public quest_manager()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         registerNamedObject(space_quest.QUEST_MANAGER, self);

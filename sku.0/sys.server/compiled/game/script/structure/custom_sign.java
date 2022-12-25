@@ -5,9 +5,7 @@ import script.library.*;
 
 public class custom_sign extends script.base_script
 {
-    public custom_sign()
-    {
-    }
+
     public static final String SIGN_TYPE = new String("hangingStanding");
     public static final String MODIFIED_SIGN = new String("modifiedSign");
     public static final String SPAM = new String("spam");

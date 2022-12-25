@@ -7,9 +7,7 @@ import script.string_id;
 
 public class griffax_jin_undead extends script.base_script
 {
-    public griffax_jin_undead()
-    {
-    }
+
     public static final string_id SID_JIN_ESCAPED = new string_id("theme_park/outbreak/outbreak", "dr_jin_escaped");
     public int OnIncapacitateTarget(obj_id self, obj_id victim) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class ephant_mon extends script.base_script
 {
-    public ephant_mon()
-    {
-    }
+
     public static final String SCRIPTPATH = "theme_park.tatooine.";
     public static final String TEMPLATE = "object/creature/npc/theme_park/ephant_mon.iff";
     public static final String[] SCRIPTS = 

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class npe_walk_point_object extends script.base_script
 {
-    public npe_walk_point_object()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

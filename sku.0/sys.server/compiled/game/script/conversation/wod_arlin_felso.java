@@ -21,11 +21,7 @@ import script.*;
 
 public class wod_arlin_felso extends script.base_script
 {
-	public wod_arlin_felso()
 
-	{
-
-	}
 
 // ======================================================================
 // Script Constants

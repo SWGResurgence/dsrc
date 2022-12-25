@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class outbreak_defense_zsu_val_epsilon extends script.base_script
 {
-    public outbreak_defense_zsu_val_epsilon()
-    {
-    }
+
     public static String c_stringFile = "conversation/outbreak_defense_zsu_val_epsilon";
     public boolean outbreak_defense_zsu_val_epsilon_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

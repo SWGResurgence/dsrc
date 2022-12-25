@@ -5,9 +5,7 @@ import script.*;
 
 public class elevator_up_droid extends script.base_script
 {
-    public elevator_up_droid()
-    {
-    }
+
     public static final String STF_FILE = "elevator_text";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

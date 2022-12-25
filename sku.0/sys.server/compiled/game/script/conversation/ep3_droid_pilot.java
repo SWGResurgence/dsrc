@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_droid_pilot extends script.base_script
 {
-    public ep3_droid_pilot()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_droid_pilot";
     public boolean ep3_droid_pilot_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.*;
 
 public class ep3_kachirho_rawarok extends script.base_script
 {
-    public ep3_kachirho_rawarok()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_kachirho_rawarok";
     public boolean ep3_kachirho_rawarok_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.string_id;
 
 public class npe_journal_skeleton extends script.base_script
 {
-    public npe_journal_skeleton()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("questdude", 10.0f, true);

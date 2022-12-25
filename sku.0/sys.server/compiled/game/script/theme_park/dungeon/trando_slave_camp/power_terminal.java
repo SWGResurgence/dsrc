@@ -8,9 +8,7 @@ import script.string_id;
 
 public class power_terminal extends script.base_script
 {
-    public power_terminal()
-    {
-    }
+
     public static final String STF = "terminal_ui";
     public static final string_id POWER_TOGGLE = new string_id(STF, "power_toggle");
     public static final string_id UNLOCKED = new string_id(STF, "power_security_off");

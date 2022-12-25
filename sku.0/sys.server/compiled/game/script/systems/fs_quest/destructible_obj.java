@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class destructible_obj extends script.base_script
 {
-    public destructible_obj()
-    {
-    }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         location loc = getLocation(self);

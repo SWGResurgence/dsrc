@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class npc_lair_ai extends script.theme_park.poi.base
 {
-    public npc_lair_ai()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id baseObj = poiGetBaseObject(self);

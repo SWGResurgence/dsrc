@@ -5,9 +5,7 @@ import script.*;
 
 public class slicer_01_mos_taike extends script.base_script
 {
-    public slicer_01_mos_taike()
-    {
-    }
+
     public static String c_stringFile = "conversation/slicer_01_mos_taike";
     public boolean slicer_01_mos_taike_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.*;
 
 public class rebel_pilot_rescue extends script.base_script
 {
-    public rebel_pilot_rescue()
-    {
-    }
+
     public static String c_stringFile = "conversation/rebel_pilot_rescue";
     public boolean rebel_pilot_rescue_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

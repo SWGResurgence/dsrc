@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_refined_crystal_pack extends script.systems.crafting.weapon.crafting_base_saber_component
 {
-    public crafting_refined_crystal_pack()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

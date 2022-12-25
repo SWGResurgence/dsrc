@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class rryatt_player extends script.base_script
 {
-    public rryatt_player()
-    {
-    }
+
     public static final String lastTrailGuideTransition = "lastRryattTransition";
     public int OnLogin(obj_id self) throws InterruptedException
     {

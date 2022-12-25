@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class objvar_mangle extends script.base_script
 {
-    public objvar_mangle()
-    {
-    }
+
     public static final int INTS_PER_SEGMENT = 80;
     public static final int FLOATS_PER_SEGMENT = 40;
     public static final int STRINGS_PER_SEGMENT = 10;

@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class component_missile extends script.base_script
 {
-    public component_missile()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

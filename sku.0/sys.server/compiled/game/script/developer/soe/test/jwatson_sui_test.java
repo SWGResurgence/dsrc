@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class jwatson_sui_test extends script.base_script
 {
-    public jwatson_sui_test()
-    {
-    }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         java.util.StringTokenizer tok = new java.util.StringTokenizer(text);

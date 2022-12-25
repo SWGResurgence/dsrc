@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_engineer_enzyme_processing extends script.systems.crafting.chemistry.enzyme.crafting_base_enzyme_processing
 {
-    public crafting_engineer_enzyme_processing()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

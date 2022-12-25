@@ -9,9 +9,7 @@ import script.string_id;
 
 public class avatar_opening_chat extends script.base_script
 {
-    public avatar_opening_chat()
-    {
-    }
+
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id OPENING = new string_id(STF, "trando_chat_01");
     public static final string_id RESPONSE = new string_id(STF, "trando_chat_02");

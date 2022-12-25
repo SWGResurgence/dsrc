@@ -8,9 +8,7 @@ import script.*;
 
 public class tatooine_tosche_sorna extends script.base_script
 {
-    public tatooine_tosche_sorna()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_tosche_sorna";
     public boolean tatooine_tosche_sorna_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -10,9 +10,7 @@ import script.region;
 
 public class imperial_commander extends script.base_script
 {
-    public imperial_commander()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);

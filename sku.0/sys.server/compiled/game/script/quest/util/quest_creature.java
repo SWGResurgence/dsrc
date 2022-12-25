@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class quest_creature extends script.base_script
 {
-    public quest_creature()
-    {
-    }
+
     public static final String VAR_SPAWNER_CURRENT_POPULATION = "quest_spawner.current_pop";
     public static final String VAR_SPAWNED_BY = "quest_spawner.spawned_by";
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException

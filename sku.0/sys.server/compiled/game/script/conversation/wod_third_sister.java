@@ -8,9 +8,7 @@ import script.*;
 
 public class wod_third_sister extends script.base_script
 {
-    public wod_third_sister()
-    {
-    }
+
     public static String c_stringFile = "conversation/wod_third_sister";
     public boolean wod_third_sister_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

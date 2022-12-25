@@ -5,9 +5,7 @@ import script.*;
 
 public class c_story1_3_wire extends script.base_script
 {
-    public c_story1_3_wire()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_story1_3_wire";
     public boolean c_story1_3_wire_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

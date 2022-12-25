@@ -8,9 +8,7 @@ import script.library.xp;
 
 public class destroy_multi extends script.base_script
 {
-    public destroy_multi()
-    {
-    }
+
     public int receiveCreditForKill(obj_id self, dictionary params) throws InterruptedException
     {
         String targetType = params.getString("creatureName");

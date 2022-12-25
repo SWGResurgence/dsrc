@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class hracca_spawned_tracker extends script.base_script
 {
-    public hracca_spawned_tracker()
-    {
-    }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (!hasObjVar(self, "cleaningUp"))

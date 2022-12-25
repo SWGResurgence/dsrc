@@ -8,9 +8,7 @@ import script.*;
 
 public class dath_bh_wanted_list_01 extends script.base_script
 {
-    public dath_bh_wanted_list_01()
-    {
-    }
+
     public static String c_stringFile = "conversation/dath_bh_wanted_list_01";
     public boolean dath_bh_wanted_list_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

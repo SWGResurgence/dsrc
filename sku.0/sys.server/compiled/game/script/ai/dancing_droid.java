@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class dancing_droid extends script.base_script
 {
-    public dancing_droid()
-    {
-    }
+
     public static final string_id SID_DANCE = new string_id("pet/pet_menu", "dance");
     public static final String TRIG_VOLUME = "droid_trig_volume";
     public static final int TRIG_RADIUS = 20;

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class weakened_wall extends script.base_script
 {
-    public weakened_wall()
-    {
-    }
+
     public static final String LOG_NAME = "poiFactoryLiberation Weakened Wall";
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {

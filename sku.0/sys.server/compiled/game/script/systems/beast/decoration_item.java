@@ -5,9 +5,7 @@ import script.library.*;
 
 public class decoration_item extends script.base_script
 {
-    public decoration_item()
-    {
-    }
+
     public static final string_id SID_CONVERT_PET_ITEM_TO_DNA = new string_id("incubator", "convert_pet_item_to_dna");
     public static final string_id SID_CONVERT_PROMPT = new string_id("incubator", "convert_pet_item_prompt");
     public static final string_id SID_CONVERT_TITLE = new string_id("incubator", "convert_pet_item_title");

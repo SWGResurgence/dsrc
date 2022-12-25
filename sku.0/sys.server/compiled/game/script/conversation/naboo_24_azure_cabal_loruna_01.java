@@ -5,9 +5,7 @@ import script.*;
 
 public class naboo_24_azure_cabal_loruna_01 extends script.base_script
 {
-    public naboo_24_azure_cabal_loruna_01()
-    {
-    }
+
     public static String c_stringFile = "conversation/naboo_24_azure_cabal_loruna_01";
     public boolean naboo_24_azure_cabal_loruna_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class corellia_battle_script_1 extends script.base_script
 {
-    public corellia_battle_script_1()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);

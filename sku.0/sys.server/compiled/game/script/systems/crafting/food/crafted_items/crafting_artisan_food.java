@@ -2,9 +2,7 @@ package script.systems.crafting.food.crafted_items;
 
 public class crafting_artisan_food extends script.systems.crafting.food.crafted_items.crafting_food
 {
-    public crafting_artisan_food()
-    {
-    }
+
     public static final String[] REQUIRED_SKILLS = 
     {
         "crafting_artisan_novice"

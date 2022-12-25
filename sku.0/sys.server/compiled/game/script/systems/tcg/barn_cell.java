@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class barn_cell extends script.base_script
 {
-    public barn_cell()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (spawnRanchHand(self))

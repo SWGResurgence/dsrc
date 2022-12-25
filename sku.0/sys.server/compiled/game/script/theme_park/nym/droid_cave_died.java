@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class droid_cave_died extends script.base_script
 {
-    public droid_cave_died()
-    {
-    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id mom = getObjIdObjVar(self, "mom");
