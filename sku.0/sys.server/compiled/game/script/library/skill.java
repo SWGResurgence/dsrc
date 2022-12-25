@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class skill extends script.base_script
 {
-    public skill()
-    {
-    }
+
     public static final String DELIM_RANGE = "..";
     public static final String SCRIPTVAR_SKILLS = "trainer.skills";
     public static final String SCRIPTVAR_JEDI_SKILLS = "trainer.jedi_skills";

@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class demoer extends script.base_script
 {
-    public demoer()
-    {
-    }
+
     public static final String[] MANDALORIAN_ARMOR = 
     {
         "object/tangible/wearables/armor/mandalorian/armor_mandalorian_bracer_l.iff",

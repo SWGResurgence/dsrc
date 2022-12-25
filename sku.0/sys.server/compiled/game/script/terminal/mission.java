@@ -7,9 +7,7 @@ import script.string_id;
 
 public class mission extends script.terminal.base.base_terminal
 {
-    public mission()
-    {
-    }
+
     public static final string_id SID_MISSION_OPTIONS = new string_id("terminal_ui", "mission_options");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

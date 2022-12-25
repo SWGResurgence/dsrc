@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class qadna extends script.base_script
 {
-    public qadna()
-    {
-    }
     public static final String INCUBATOR_TEMPLATES = "datatables/beast/incubator_templates.iff";
     public static final String SCRIPTVAR = "qadna";
     public static final String DNA_PROMPT = "Choose the creature you want to get DNA from. \nThe chosen DNA will be created in your inventory.";

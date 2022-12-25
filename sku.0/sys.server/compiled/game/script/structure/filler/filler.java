@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class filler extends script.base_script
 {
-    public filler()
-    {
-    }
+    
     public static final String SCRIPT_ME = "structure.filler.filler";
     public static final float DELAY_TIME = 5.0f;
     public static final String HANDLER_INIT_FILLER_SPAWN = "handleInitFillerSpawn";

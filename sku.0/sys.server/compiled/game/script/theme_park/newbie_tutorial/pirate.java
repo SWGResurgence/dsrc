@@ -10,9 +10,7 @@ import script.string_id;
 
 public class pirate extends script.theme_park.newbie_tutorial.tutorial_base
 {
-    public pirate()
-    {
-    }
+    
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_AGGRESSIVE);

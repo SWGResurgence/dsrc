@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class alarm extends script.base_script
 {
-    public alarm()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("space", "ONATTACH GOING OFF ON INTERIOR COMPONETNES");

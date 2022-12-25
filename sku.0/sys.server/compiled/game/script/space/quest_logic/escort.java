@@ -10,9 +10,7 @@ import script.string_id;
 
 public class escort extends script.space.quest_logic.escort_duty
 {
-    public escort()
-    {
-    }
+    
     public static final string_id SID_ABANDONED_ESCORT = new string_id("space/quest", "escort_abandoned");
     public static final int TRIGGER_OVERRIDE = -99;
     public int initializedQuestPlayer(obj_id self, dictionary params) throws InterruptedException

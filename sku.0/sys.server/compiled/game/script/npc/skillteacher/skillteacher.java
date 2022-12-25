@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class skillteacher extends script.base_script
 {
-    public skillteacher()
-    {
-    }
+
     public static final String VAR_SKILL_TEMPLATE = "npcSkillTemplate";
     public static final String CONVONAME = "skill_teacher";
     public static final String CONVOFILE = "skill_teacher";

@@ -7,9 +7,7 @@ import script.string_id;
 
 public class misc extends script.base_script
 {
-    public misc()
-    {
-    }
+    
     public static final string_id SID_LAUNCH_FIREWORKS_INDOORS = new string_id("firework", "launch_fireworks_indoors");
     public int cmdLaunchFirework(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {

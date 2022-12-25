@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class defend extends script.quest.task.ground.base_task
 {
-    public defend()
-    {
-    }
+
     public static final String OBJVAR_DEFENSE_TARGET = "defend_target";
     public static final String DEFEND_TARGET = "defendTarget";
     public static final String QUEST_CRC = "questCrc";

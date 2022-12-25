@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class mouse extends script.theme_park.newbie_tutorial.tutorial_base
 {
-    public mouse()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "moveToLocationOne", null, 5, false);

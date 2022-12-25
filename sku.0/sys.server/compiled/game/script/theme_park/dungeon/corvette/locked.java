@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class locked extends script.base_script
 {
-    public locked()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         permissionsMakePrivate(self);

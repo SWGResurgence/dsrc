@@ -5,9 +5,7 @@ import script.library.*;
 
 public class sign extends script.base_script
 {
-    public sign()
-    {
-    }
+    
     public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "packup";
     public static final string_id SID_TERMINAL_MANAGEMENT = new string_id("player_structure", "management");

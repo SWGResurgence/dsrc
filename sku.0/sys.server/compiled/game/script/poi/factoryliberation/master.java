@@ -8,9 +8,7 @@ import script.string_id;
 
 public class master extends script.theme_park.poi.base
 {
-    public master()
-    {
-    }
+    
     public static final String SCENARIO_NAME = "factoryliberation";
     public static final String LOG_NAME = "poiFactoryLiberation Master";
     public static final String SCENARIO_THEATER = "object/building/poi/tatooine_factory_liberation.iff";

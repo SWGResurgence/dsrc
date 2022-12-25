@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class launch extends script.theme_park.poi.base
 {
-    public launch()
-    {
-    }
+
     public static final String POI_SCRIPT = "poi.script";
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class healing extends script.base_script
 {
-    public healing()
-    {
-    }
+
     public static final int VAR_ITEM_REUSE_TIME = 20;
     public static final int ITEM_CHANNEL_HEAL_TICKS = 5;
     public static final String VAR_ENHANCER_EFFICIENCY = "healing.enhancement";

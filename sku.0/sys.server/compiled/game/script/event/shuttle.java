@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class shuttle extends script.base_script
 {
-    public shuttle()
-    {
-    }
+
     private static final String[] PROMPT_TEXT =
     {
         "Enter \"setup\" to setup data, \"data\" to view current data, \"quit\" to end. After setup type \"f\" to have the shuttle do an automatic fly-by. Type \"m\" to spawn and manually control the shuttle then use \"land\" to make it land, \"leave\" to make it take off.",

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class antagonist extends script.poi.base.scenario_actor
 {
-    public antagonist()
-    {
-    }
+    
     public static final String LOG_NAME = "poiRabidBeast Antagonist";
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class blueprint extends script.base_script
 {
-    public blueprint()
-    {
-    }
+    
     public static final int MENU_BLUEPRINT_DEPLOY = menu_info_types.ITEM_USE;
     public static final int MENU_BLUEPRINT_OPTIONS = menu_info_types.SERVER_MENU5;
     public static final int MENU_BLUEPRINT_LOAD = menu_info_types.ITEM_OPEN;

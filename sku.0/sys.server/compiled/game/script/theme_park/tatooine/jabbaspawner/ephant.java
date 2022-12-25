@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class ephant extends script.base_script
 {
-    public ephant()
-    {
-    }
+    
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id palace = getObjIdObjVar(self, "palace");

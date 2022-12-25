@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class jabba extends script.base_script
 {
-    public jabba()
-    {
-    }
+
     public static final String SCRIPTPATH = "theme_park.tatooine.";
     public static final String TEMPLATE = "object/creature/npc/theme_park/jabba_the_hutt.iff";
     public static final String[] SCRIPTS = 

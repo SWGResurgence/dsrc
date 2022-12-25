@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class guild extends script.base_script
 {
-    public guild()
-    {
-    }
+
     public static final int GUILD_PERMISSIONS_NONE = 0;
     public static final int GUILD_PERMISSION_MEMBER = (1 << 0);
     public static final int GUILD_PERMISSION_SPONSOR = (1 << 1);

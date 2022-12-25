@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class master extends script.base_script
 {
-    public master()
-    {
-    }
+
     public static final int NO_CONTROL = 0;
     public static final int IMPERIAL_CONTROL = 1;
     public static final int REBEL_CONTROL = 2;

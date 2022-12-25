@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class locations extends script.base_script
 {
-    public locations()
-    {
-    }
+    
     public static final float GOOD_LOCATION_SEARCH_SIZE = 200;
     public static final String[] PLANETS = 
     {

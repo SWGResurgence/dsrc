@@ -81,6 +81,10 @@ public class player_utility extends script.base_script
                 buff.applyBuff(self, "tcg_series3_hands_of_seduction");
             }
         }
+        if (hasScript(self, "name.name")) //this is to remove the rename radial off players.
+        {
+            detachScript(self, "name.name");
+        }
         return SCRIPT_CONTINUE;
     }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException

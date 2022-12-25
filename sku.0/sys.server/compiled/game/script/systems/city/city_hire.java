@@ -88,11 +88,7 @@ public class city_hire extends script.base_script
         {
             return true;
         }
-        if (isGod(player))
-        {
-            return true;
-        }
-        else return false;
+        return isGod(player);
     }
 }
 

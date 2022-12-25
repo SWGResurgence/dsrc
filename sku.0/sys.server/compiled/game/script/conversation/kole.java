@@ -8,9 +8,7 @@ import script.*;
 
 public class kole extends script.base_script
 {
-    public kole()
-    {
-    }
+    
     public static String c_stringFile = "conversation/kole";
     public boolean kole_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

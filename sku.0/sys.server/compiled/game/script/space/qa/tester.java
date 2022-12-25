@@ -9,9 +9,7 @@ import script.vector;
 
 public class tester extends script.base_script
 {
-    public tester()
-    {
-    }
+
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         String[] strCommands = split(strText, ' ');

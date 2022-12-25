@@ -7,9 +7,7 @@ import java.util.StringTokenizer;
 
 public class recovery extends script.base_script
 {
-    public recovery()
-    {
-    }
+
     public static final string_id SID_ABANDONED_MISSION = new string_id("space/quest", "mission_abandoned");
     public static final string_id SID_ABANDONED_RECOVERY = new string_id("space/quest", "recovery_abandoned");
     public static final string_id SID_TARGETS_REMAINING = new string_id("space/quest", "destroy_duty_targets_remaining");

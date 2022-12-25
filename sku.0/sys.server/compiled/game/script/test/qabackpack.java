@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class qabackpack extends script.base_script
 {
-    public qabackpack()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))

@@ -10,9 +10,7 @@ import script.obj_id;
 
 public class prisoner extends script.base_script
 {
-    public prisoner()
-    {
-    }
+
     public static final String frustrationEmotes[] = 
     {
         "scratch",

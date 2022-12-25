@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class pirates extends script.base_script
 {
-    public pirates()
-    {
-    }
+
     public int die(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

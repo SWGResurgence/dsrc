@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class featuretest extends script.base_script
 {
-    public featuretest()
-    {
-    }
+
     public static final int SWG_BASE_GAME = 0x00000001;
     public static final int SWG_COLLECTORS_GAME = 0x00000002;
     public int OnAttach(obj_id self) throws InterruptedException

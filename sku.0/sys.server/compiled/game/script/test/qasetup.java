@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class qasetup extends script.base_script
 {
-    public qasetup()
-    {
-    }
+
     public static final float CONDITION = 1.0f;
     public static final float GENERAL_PROTECTION = 1.0f;
     public static final String ARMOR_SET_PREFIX = "object/tangible/wearables/armor/";

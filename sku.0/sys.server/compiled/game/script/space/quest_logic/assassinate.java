@@ -8,9 +8,7 @@ import script.library.space_quest;
 
 public class assassinate extends script.space.quest_logic.recovery
 {
-    public assassinate()
-    {
-    }
+
     public static final String SOUND_SPAWN_ENEMY = "clienteffect/ui_quest_spawn_enemy.cef";
     public static final String SOUND_DESTROYED_ALL = "clienteffect/ui_quest_destroyed_all.cef";
     public static final string_id WARPOUT_FAILURE = new string_id("space/quest", "warpout_failure");

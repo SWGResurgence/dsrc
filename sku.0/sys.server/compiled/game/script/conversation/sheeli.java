@@ -5,9 +5,7 @@ import script.library.*;
 
 public class sheeli extends script.base_script
 {
-    public sheeli()
-    {
-    }
+
     public static String c_stringFile = "conversation/sheeli";
     public boolean sheeli_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

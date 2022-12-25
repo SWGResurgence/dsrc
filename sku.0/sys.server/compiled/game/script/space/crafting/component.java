@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class component extends script.base_script
 {
-    public component()
-    {
-    }
+    
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String template = getTemplateName(self);

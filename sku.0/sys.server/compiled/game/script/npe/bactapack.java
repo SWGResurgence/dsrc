@@ -6,9 +6,7 @@ import script.*;
 
 public class bactapack extends script.base_script
 {
-    public bactapack()
-    {
-    }
+
     public static final string_id SID_ITEM_YOU_MUST_TARGET = new string_id("healing", "item_must_target");
     public static final string_id SID_ITEM_ONLY_OTHERS = new string_id("healing", "item_only_on_others");
     public static final string_id SID_ITEM_NO_NEED = new string_id("healing", "item_no_need");

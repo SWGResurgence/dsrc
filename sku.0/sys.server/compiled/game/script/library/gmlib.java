@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class gmlib extends script.base_script
 {
-    public gmlib()
-    {
-    }
+
     public static String freezePlayer(long playerId) throws InterruptedException
     {
         debugServerConsoleMsg(null, "In freeze");

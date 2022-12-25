@@ -6,6 +6,7 @@ package script.developer.bubbajoe;/*
 @WIP: This script is a work in progress and is not yet functional.
 */
 
+import script.base_class;
 import script.location;
 import script.obj_id;
 
@@ -14,6 +15,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class painter extends script.base_script
@@ -32,23 +34,22 @@ public class painter extends script.base_script
     public String header = "\n";
     public int paint(obj_id self, obj_id[] targets) throws IOException
     {
-        for (int i = 0; i < targets.length; i++)
+        final BufferedImage image = new BufferedImage( 1024, 1024, BufferedImage.TYPE_INT_ARGB);
+        final Graphics2D graphics2D = image.createGraphics();
+        Arrays.stream(targets).map(base_class::getLocation).forEach(here ->
         {
-            location here = getLocation(targets[i]);
-            final BufferedImage image = new BufferedImage( 8000, 8000, BufferedImage.TYPE_INT_ARGB);
-            final Graphics2D graphics2D = image.createGraphics();
             graphics2D.setPaint(Color.BLACK);
             graphics2D.drawOval((int) here.x, (int) here.z, 2, 2);
             graphics2D.dispose();
-            ImageIO.write (image, "png", new File( "/home/swg/Desktop/test.png"));
-        }
+        });
+        ImageIO.write (image, "png", new File( "/home/swg/swg-main/test.png"));
         broadcast(self, "Attempting to paint " + targets.length + " objects.");
         return SCRIPT_CONTINUE;
     }
 
     public int OnSpeaking(obj_id self, String text) throws IOException
     {
-        if (text.equals(toLower("paintPlayers")))
+        if (text.equals("paintPlayers"))
         {
             obj_id[] targets = getAllPlayers(origin, PLANET_WIDE);
             if (targets == null)
@@ -64,11 +65,13 @@ public class painter extends script.base_script
                 e.printStackTrace();
             }
         }
-        if (text.equalsIgnoreCase("paintBySelection"))
+        if (text.equals("paintBySelection"))
         {
+            broadcast(self, "Running paintBySelection.");
             StringTokenizer st = new StringTokenizer(text);
             String templateName = st.nextToken();
             obj_id[] targets = getAllObjectsWithTemplate(origin, PLANET_WIDE, templateName);
+            broadcast(self, "template: " + templateName);
             paint(self, targets);
         }
         return SCRIPT_CONTINUE;

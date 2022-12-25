@@ -6,9 +6,7 @@ import java.util.Vector;
 
 public class performance extends script.base_script
 {
-    public performance()
-    {
-    }
+
     public static final String DATATABLE_PERFORMANCE = "datatables/performance/performance.iff";
     public static final String DATATABLE_COL_HEAL_WOUND = "healMindWound";
     public static final String DATATABLE_COL_HEAL_SHOCK = "healShockWound";

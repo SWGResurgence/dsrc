@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class malakili extends script.base_script
 {
-    public malakili()
-    {
-    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id palace = getObjIdObjVar(self, "palace");

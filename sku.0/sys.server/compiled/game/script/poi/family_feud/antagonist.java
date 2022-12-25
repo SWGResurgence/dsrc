@@ -13,9 +13,7 @@ import java.util.Vector;
 
 public class antagonist extends script.poi.base.scenario_actor
 {
-    public antagonist()
-    {
-    }
+    
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String VAR_EN_ROUTE = scenario.VAR_SCENARIO_BASE + ".enRoute";
     public static final String HANDLER_TIMER = "handleTimer";

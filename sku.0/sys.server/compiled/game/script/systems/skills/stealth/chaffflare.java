@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class chaffflare extends script.base_script
 {
-    public chaffflare()
-    {
-    }
+
     public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###.##");
     public int OnAttach(obj_id self) throws InterruptedException
     {

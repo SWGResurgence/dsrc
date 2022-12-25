@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class cantina extends script.base_script
 {
-    public cantina()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);

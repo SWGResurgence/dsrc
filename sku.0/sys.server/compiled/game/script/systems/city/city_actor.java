@@ -15,7 +15,6 @@ public class city_actor extends script.base_script
     }
     public int OnAttach(obj_id self)
     {
-        int city_id = getCityAtLocation(getLocation(self), 0);
         setInvulnerable(self, true);
         setName(self, "City Actor");
         return SCRIPT_CONTINUE;
@@ -23,9 +22,7 @@ public class city_actor extends script.base_script
 
     public int OnGiveItem(obj_id self, obj_id item, obj_id giver) throws InterruptedException
     {
-        int city_id = getCityAtLocation(getLocation(giver), 0);
-        boolean isMayor = city.isTheCityMayor(giver, city_id);
-        if (canManipulateActor(self, giver))
+        if (canManipulateActor(giver))
         {
             if (isIdValid(item))
             {
@@ -49,7 +46,7 @@ public class city_actor extends script.base_script
         {
             utils.setScriptVar(self, "city_actor_setup", true);
         }
-        if (canManipulateActor(self, player))
+        if (canManipulateActor(player))
         {
             if (isInWorldCell(player))
             {
@@ -71,7 +68,7 @@ public class city_actor extends script.base_script
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
-        if (canManipulateActor(self, player))
+        if (canManipulateActor(player))
         {
             if (item == menu_info_types.SERVER_MENU20)
             {
@@ -142,7 +139,7 @@ public class city_actor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public boolean canManipulateActor(obj_id self, obj_id player) throws InterruptedException
+    public boolean canManipulateActor(obj_id player) throws InterruptedException
     {
         //@note: keep these in order of importance, with the most important last
         int city_id = getCityAtLocation(getLocation(player), 0);
@@ -159,11 +156,7 @@ public class city_actor extends script.base_script
         {
             return true;
         }
-        if (isGod(player))
-        {
-            return true;
-        }
-        else return false;
+        return isGod(player);
     }
     public int handleSetName(obj_id self, dictionary params) throws InterruptedException
     {
@@ -221,27 +214,25 @@ public class city_actor extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String ai_template = sui.getInputBoxText(params);
-        if (ai_template.equals("loiter"))
+        switch (ai_template)
         {
-            ai_lib.loiterLocation(self, getLocation(self), 1.0f, 20.0f, 1.0f, 2.0f);
-            return SCRIPT_CONTINUE;
+            case "loiter" -> {
+                ai_lib.loiterLocation(self, getLocation(self), 1.0f, 20.0f, 1.0f, 2.0f);
+                return SCRIPT_CONTINUE;
+            }
+            case "wander" -> {
+                ai_lib.wander(self);
+                return SCRIPT_CONTINUE;
+            }
+            case "none" -> {
+                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
+                return SCRIPT_CONTINUE;
+            }
+            default -> {
+                broadcast(player, "Invalid AI Template. Valid settings: [wander | loiter | none]");
+                return SCRIPT_CONTINUE;
+            }
         }
-        else if (ai_template.equals("wander"))
-        {
-            ai_lib.wander(self);
-            return SCRIPT_CONTINUE;
-        }
-        else if (ai_template.equals("none"))
-        {
-            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_STOP);
-            return SCRIPT_CONTINUE;
-        }
-        else
-        {
-            broadcast(player, "Invalid AI Template. Valid settings: [wander | loiter | none]");
-            return SCRIPT_CONTINUE;
-        }
-
     }
     public int handleSetAnimation(obj_id self, dictionary params) throws InterruptedException
     {

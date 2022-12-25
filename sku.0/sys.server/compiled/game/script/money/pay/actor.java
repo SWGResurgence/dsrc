@@ -10,9 +10,7 @@ import script.string_id;
 
 public class actor extends script.base_script
 {
-    public actor()
-    {
-    }
+
     public static final String HANDLER_DETACH_ME = "handleDetachMe";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

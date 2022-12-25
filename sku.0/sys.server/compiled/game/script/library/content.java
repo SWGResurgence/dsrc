@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class content extends script.base_script
 {
-    public content()
-    {
-    }
+
     public static final String SECURITY_CLEARANCE_ASTRO = "bdg_content_rsf_clearance_1";
     public static final String SECURITY_CLEARANCE_BINARY = "bdg_content_rsf_clearance_2";
     public static final String SECURITY_CLEARANCE_CHUBA = "bdg_content_rsf_clearance_3";

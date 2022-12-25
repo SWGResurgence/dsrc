@@ -7,9 +7,7 @@ import script.*;
 
 public class heraldnaboo extends script.base_script
 {
-    public heraldnaboo()
-    {
-    }
+
     public static String c_stringFile = "conversation/heraldnaboo";
     public boolean heraldnaboo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

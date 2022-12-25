@@ -4,9 +4,7 @@ import script.*;
 
 public class camping extends script.base_script
 {
-    public camping()
-    {
-    }
+
     public static final float CAMP_SIZE[] = 
     {
             6.0f,

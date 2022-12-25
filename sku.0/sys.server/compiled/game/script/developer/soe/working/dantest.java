@@ -14,9 +14,7 @@ public class dantest extends script.base_script
     public static final int SPAWN_CHECK_DISTANCE = 64;
     public static final int SPAWN_CHECK_LIMIT = 15;
     public static final int SPAWN_CHECK_THEATER_LIMIT = 1;
-    public dantest()
-    {
-    }
+
 
     public String getLevelString(int intLevel) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.string_id;
 
 public class wald extends script.base_script
 {
-    public wald()
-    {
-    }
+
     public static final String CONVO = "celebrity/wald";
     public int OnAttach(obj_id self) throws InterruptedException
     {

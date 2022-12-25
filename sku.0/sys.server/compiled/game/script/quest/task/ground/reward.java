@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class reward extends script.quest.task.ground.base_task
 {
-    public reward()
-    {
-    }
+
     public static final String taskType = "reward";
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class qaxp extends script.base_script
 {
-    public qaxp()
-    {
-    }
+
     public static final int XP_AMOUNT = 1000000;
     public static final String SCRIPTVAR = "qaxp";
     public static final String PROMPT = "Select the amount of XP you desire in the right box";

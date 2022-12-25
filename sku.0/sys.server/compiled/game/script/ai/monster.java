@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class monster extends script.base_script
 {
-    public monster()
-    {
-    }
+
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public int OnAttach(obj_id self) throws InterruptedException
     {

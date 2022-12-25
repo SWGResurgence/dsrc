@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class movement extends script.base_script
 {
-    public movement()
-    {
-    }
+
     public static final int MT_BOOST = 1;
     public static final int MT_SNARE = 2;
     public static final int MT_PERMABOOST = 3;

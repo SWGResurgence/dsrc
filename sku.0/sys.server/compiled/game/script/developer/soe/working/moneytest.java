@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class moneytest extends script.base_script
 {
-    public moneytest()
-    {
-    }
+
 
     public int OnAttach(obj_id self) throws InterruptedException
     {

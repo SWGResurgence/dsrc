@@ -6,9 +6,7 @@ import script.string_id;
 
 public class leaving extends script.base_script
 {
-    public leaving()
-    {
-    }
+
     public static final String MSGS = "dungeon/death_watch";
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {

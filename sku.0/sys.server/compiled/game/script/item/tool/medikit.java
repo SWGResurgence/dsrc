@@ -8,9 +8,7 @@ import script.string_id;
 
 public class medikit extends script.base_script
 {
-    public medikit()
-    {
-    }
+
     public static final String SCRIPTVAR_PID = "tool.pid";
     public static final String SCRIPTVAR_PLAYER = "tool.player";
     public static final String SCRIPTVAR_TARGET = "tool.lookattarget";

@@ -115,7 +115,7 @@ public class city_furniture extends script.base_script
     {
         if (canPlaceItem(self, player))
         {
-            if (!isInWorldCell(self))
+            if (isInWorldCell(self) && (!hasObjVar(self, "city_id")))
             {
                 mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_PLACE);
             }

@@ -6,9 +6,7 @@ import java.util.Vector;
 
 public class holiday extends script.base_script
 {
-    public holiday()
-    {
-    }
+
     public static final String PLANET_VAR_EVENT_PREFIX = "event";
     public static final String PLANET_VAR_SCORE = ".score";
     public static final String PLANET_VAR_EMPIRE_DAY = ".empire_day";

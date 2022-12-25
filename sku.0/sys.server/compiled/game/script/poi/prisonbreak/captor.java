@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class captor extends script.base_script
 {
-    public captor()
-    {
-    }
+
     public static final String captorEmotes[] = 
     {
         "scratch",

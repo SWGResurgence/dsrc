@@ -8,9 +8,7 @@ import java.time.LocalTime;
 
 public class missions extends script.base_script
 {
-    public missions()
-    {
-    }
+
     public static final int STATE_DYNAMIC_PICKUP = 1;
     public static final int STATE_DYNAMIC_DROPOFF = 2;
     public static final int STATE_DYNAMIC_START = 3;

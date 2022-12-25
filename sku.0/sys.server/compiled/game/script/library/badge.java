@@ -6,9 +6,7 @@ import script.string_id;
 
 public class badge extends script.base_script
 {
-    public badge()
-    {
-    }
+
     public static final String SFX_REVOKE = "sound/music_gloom_a.snd";
     public static final String STF_COLLECTION_N = "collection_n";
     public static final String BADGE_BOOK = "badge_book";

@@ -5,9 +5,7 @@ import script.library.*;
 
 public class salvage extends script.space.quest_logic.recovery
 {
-    public salvage()
-    {
-    }
+
     public static final string_id SID_ABANDONED_RESCUE = new string_id("space/quest", "rescue_abandoned");
     public static final string_id SID_REMAINDER_UPDATE = new string_id("space/quest", "mining_remainder_update");
     public int OnAttach(obj_id self) throws InterruptedException

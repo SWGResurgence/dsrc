@@ -5,9 +5,7 @@ import script.library.*;
 
 public class delivery extends script.base_script
 {
-    public delivery()
-    {
-    }
+
     public static final string_id SID_ABANDONED_MISSION = new string_id("space/quest", "mission_abandoned");
     public static final string_id SID_TARGETS_REMAINING = new string_id("space/quest", "destroy_duty_targets_remaining");
     public static final String SOUND_SPAWN_ESCORT = "clienteffect/ui_quest_spawn_escort.cef";

@@ -7,9 +7,7 @@ import script.*;
 
 public class stimpack extends script.base_script
 {
-    public stimpack()
-    {
-    }
+
     public static final string_id SID_ITEM_LEVEL_TOO_LOW = new string_id("healing", "item_level_too_low");
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {

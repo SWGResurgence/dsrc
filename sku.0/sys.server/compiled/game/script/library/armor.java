@@ -7,9 +7,7 @@ import java.util.Map;
 
 public class armor extends script.base_script
 {
-    public armor()
-    {
-    }
+
     public static final String DATATABLE_ARMOR = "datatables/crafting/armor.iff";
     public static final String DATATABLE_ARMOR_PENALTY = "datatables/crafting/armor_penalty.iff";
     public static final String DATATABLE_TYPE_COL = "type";

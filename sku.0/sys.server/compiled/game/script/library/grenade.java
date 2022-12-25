@@ -6,9 +6,7 @@ import script.string_id;
 
 public class grenade extends script.base_script
 {
-    public grenade()
-    {
-    }
+
     public static final string_id SID_THROW_DELAY = new string_id("grenade", "throw_delay");
     public static final string_id SID_THROW_CLASS_DELAY = new string_id("grenade", "throw_class_delay");
     public static boolean canThrowGrenade(obj_id thrower, obj_id grenade, boolean verbose) throws InterruptedException

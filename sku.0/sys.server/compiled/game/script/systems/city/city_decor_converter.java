@@ -13,13 +13,12 @@ public class city_decor_converter extends script.base_script
     }
 
     //@Converts a story teller object to a city decor object
-    public static void createPropObject(obj_id self, obj_id token) throws InterruptedException
+    public static void createPropObject(obj_id self, obj_id token)
     {
         obj_id prop = null;
         String itemName = getStaticItemName(token);
-        int row = dataTableSearchColumnForString(itemName, "name", STORYTELLER_DATATABLE);
         dictionary dict = dataTableGetRow(STORYTELLER_DATATABLE, itemName);
-        String template = dict.getString("template_name");
+        String template = dict != null ? dict.getString("template_name") : null;
         prop = create.createObject(template, self, "");
         if (isIdValid(prop))
         {
@@ -59,7 +58,7 @@ public class city_decor_converter extends script.base_script
             else if (getTemplateName(item).contains("object/tangible/"))
             {
                 attachScript(item, "systems.city.city_furniture");
-                String oldName = getStaticItemName(item);
+                String oldName = utils.getStringName(item);
                 setName(item, oldName + " (City Decoration)");
                 return SCRIPT_CONTINUE;
             }
@@ -75,9 +74,8 @@ public class city_decor_converter extends script.base_script
     public void createActorProp(obj_id self, obj_id item, obj_id transferer) throws InterruptedException
     {
         String itemName = getStaticItemName(item);
-        int row = dataTableSearchColumnForString(itemName, "name", STORYTELLER_DATATABLE);
         dictionary dict = dataTableGetRow(STORYTELLER_DATATABLE, itemName);
-        String template = dict.getString("template_name");
+        String template = dict != null ? dict.getString("template_name") : null;
         obj_id prop = create.createObject(template, utils.getInventoryContainer(transferer), "");
         if (isIdValid(prop))
         {
@@ -100,7 +98,7 @@ public class city_decor_converter extends script.base_script
 
         if (item == menu_info_types.SERVER_MENU1)
         {
-            obj_id deed = createObject("object/tangible/loot/tool/datapad_broken.iff", utils.getInventoryContainer(player), "");
+            obj_id deed = createObject("object/tangible/loot/tool/city_actor_bio_extractor.iff", utils.getInventoryContainer(player), "");
             if (isIdValid(deed))
             {
 

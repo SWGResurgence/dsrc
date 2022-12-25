@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class comestible extends script.base_script
 {
-    public comestible()
-    {
-    }
+
     public static final String SCRIPT_COMESTIBLE = "item.comestible.comestible";
     public static final String EXAM_ATTRIB_MOD = "attribmods";
     public static final String EXAM_NONE = "@consumable:none";

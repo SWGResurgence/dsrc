@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class veers extends script.base_script
 {
-    public veers()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Colonel Veers");

@@ -11,9 +11,7 @@ import java.util.Vector;
 
 public class field extends script.systems.combat.combat_base_old
 {
-    public field()
-    {
-    }
+
     public static final String BLAST_PARTICLE_TEMPLATE = "object/static/particle/particle_sm_explosion.iff";
     public static final String WARNING_PARTICLE_TEMPLATE = "object/static/particle/particle_mine_warning.iff";
     public static final String VOL_MINEFIELD = "volMineField";

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class pirate extends script.base_script
 {
-    public pirate()
-    {
-    }
+    
     public static final String pirateEmotes[] = 
     {
         "scratch",

@@ -5,9 +5,7 @@ import script.library.*;
 
 public class vendor extends script.terminal.base.base_terminal
 {
-    public vendor()
-    {
-    }
+    
     public static final string_id SID_GIVE_VENDOR_MAINTENANCE = new string_id("player_structure", "give_maintenance");
     public static final string_id SID_TAKE_VENDOR_MAINTENANCE = new string_id("player_structure", "take_maintenance");
     public static final string_id SID_REGISTER_VENDOR = new string_id("player_structure", "register_vendor");

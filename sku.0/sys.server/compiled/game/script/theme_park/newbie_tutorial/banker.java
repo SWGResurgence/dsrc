@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class banker extends script.theme_park.newbie_tutorial.tutorial_base
 {
-    public banker()
-    {
-    }
+
     public int handleInitiateConvo(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getPlayer(self);

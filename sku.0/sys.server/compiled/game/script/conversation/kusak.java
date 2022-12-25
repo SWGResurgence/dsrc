@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class kusak extends script.base_script
 {
-    public kusak()
-    {
-    }
+
     public static String c_stringFile = "conversation/kusak";
     public boolean kusak_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

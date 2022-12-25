@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class siradfar extends script.base_script
 {
-    public siradfar()
-    {
-    }
+    
     public static final String SCRIPTPATH = "theme_park.tatooine.";
     public static final String TEMPLATE = "object/creature/npc/theme_park/generic_rodian_male.iff";
     public static final String[] SCRIPTS = 

@@ -6,9 +6,7 @@ import script.string_id;
 
 public class shuttle extends script.base_script
 {
-    public shuttle()
-    {
-    }
+    
     public static final String STF_FILE = "event_perk";
     public int OnAttach(obj_id self) throws InterruptedException
     {

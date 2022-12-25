@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class warden extends script.base_script
 {
-    public warden()
-    {
-    }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         stopClientEffectObjByLabel(trial.getPlayersInDungeon(trial.getTop(self)), self, "burn");

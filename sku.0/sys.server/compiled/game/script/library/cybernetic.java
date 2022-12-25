@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class cybernetic extends script.base_script
 {
-    public cybernetic()
-    {
-    }
+
     public static final String CYBORG_TABLE = "datatables/cybernetic/cybernetic.iff";
     public static final String CYBORG_LEGS = "object/tangible/wearables/cybernetic/s01/cybernetic_s01_legs.iff";
     public static final String CYBORG_LEFT_ARM = "object/tangible/wearables/cybernetic/s01/cybernetic_s01_arm_l.iff";

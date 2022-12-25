@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class karling extends script.base_script
 {
-    public karling()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_SHER_KARLING);

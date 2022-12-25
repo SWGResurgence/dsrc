@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class escort extends script.base_script
 {
-    public escort()
-    {
-    }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         if (quests.isMyQuest(questRow, "quest.task.escort"))

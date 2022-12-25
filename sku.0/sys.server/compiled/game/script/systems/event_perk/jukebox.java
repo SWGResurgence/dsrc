@@ -8,9 +8,7 @@ import java.util.Arrays;
 
 public class jukebox extends script.base_script
 {
-    public jukebox()
-    {
-    }
+
     public static final String TBL_SONGS = "datatables/event_perk/jukebox_songs.iff";
     public static final String JUKBOX_SONG_OBJVAR = "storyteller.jukebox_song";
     public static final String JUKBOX_RANGE_OBJVAR = "storyteller.jukebox_range";

@@ -10,9 +10,7 @@ import script.obj_id;
 
 public class hideoutspawner extends script.base_script
 {
-    public hideoutspawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);

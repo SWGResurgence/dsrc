@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class gcwlaunch extends script.base_script
 {
-    public gcwlaunch()
-    {
-    }
+
     public static final String SHUTTLE = "object/creature/npc/theme_park/player_shuttle.iff";
     public static final String ESCORT = "wookiee_brawler";
     public static final String CELEB = "trandoshan_slavemaster";

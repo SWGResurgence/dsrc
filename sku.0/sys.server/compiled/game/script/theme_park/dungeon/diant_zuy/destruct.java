@@ -5,9 +5,7 @@ import script.library.chat;
 
 public class destruct extends script.base_script
 {
-    public destruct()
-    {
-    }
+
     public static final string_id DESTRUCT_ENGAGED = new string_id("dungeon/diant_bunker", "destruct_engaged");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

@@ -22,11 +22,7 @@ import script.*;
 
 public class ackli extends script.base_script
 {
-	public ackli()
 
-	{
-
-	}
 
 // ======================================================================
 // Script Constants

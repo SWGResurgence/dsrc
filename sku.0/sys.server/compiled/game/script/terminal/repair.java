@@ -5,9 +5,7 @@ import script.library.*;
 
 public class repair extends script.terminal.base.base_terminal
 {
-    public repair()
-    {
-    }
+
     public static final string_id SID_MNU_REPAIR = new string_id("sui", "mnu_repair");
     public static final string_id SID_MNU_REPAIR_ALL = new string_id("sui", "mnu_repair_all");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

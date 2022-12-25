@@ -10,9 +10,7 @@ import script.string_id;
 
 public class computer extends script.terminal.base.base_terminal
 {
-    public computer()
-    {
-    }
+
     public static final string_id SID_TERMINAL_DISABLED = new string_id("skill_teacher", "skill_terminal_disabled");
     public static final String MSGS = "dungeon/corvette";
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException

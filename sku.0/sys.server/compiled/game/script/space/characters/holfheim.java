@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class holfheim extends script.base_script
 {
-    public holfheim()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setAnimationMood(self, "npc_imperial");

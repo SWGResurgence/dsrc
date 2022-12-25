@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class borvo extends script.base_script
 {
-    public borvo()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Borvo the Hutt");

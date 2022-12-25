@@ -12,9 +12,7 @@ import java.util.HashSet;
 
 public class qafaction extends script.base_script
 {
-    public qafaction()
-    {
-    }
+
     public static final String NPC_PROMPT = "Choose a faction option\n" + "NOTE: Some factions are not really available to players, so occasionally if you select one and try to " + "add or remove the faction, it will not work";
     public static final String PROMPT = "Choose a faction option";
     public static final String TITLE = "QA Faction Tool";

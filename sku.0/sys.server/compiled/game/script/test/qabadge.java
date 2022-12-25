@@ -11,9 +11,7 @@ import java.util.Vector;
 
 public class qabadge extends script.base_script
 {
-    public qabadge()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))

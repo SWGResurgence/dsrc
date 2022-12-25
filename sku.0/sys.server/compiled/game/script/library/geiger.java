@@ -6,9 +6,7 @@ import script.string_id;
 
 public class geiger extends script.base_script
 {
-    public geiger()
-    {
-    }
+
     public static final String OBJVAR_GEIGER_LOCATION = "geiger.location";
     public static final String OBJVAR_GEIGER_FACTOR = "geiger.factor";
     public static final String OBJVAR_GEIGER_OBJECT = "geiger.object";

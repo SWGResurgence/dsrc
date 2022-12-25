@@ -7,9 +7,7 @@ import script.string_id;
 
 public class kais extends script.base_script
 {
-    public kais()
-    {
-    }
+
     public static final String CONVO = "celebrity/kais";
     public int OnAttach(obj_id self) throws InterruptedException
     {

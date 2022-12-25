@@ -11,9 +11,7 @@ import java.util.Vector;
 
 public class scout extends script.base_script
 {
-    public scout()
-    {
-    }
+
     public static final String SCRIPTVAR_SCOUT_TARGET = "behavior.scout.target";
     public static final String SCRIPTVAR_SCANNED = "behavior.scout.scanned";
     public static final String SCRIPTVAR_SCAN_STATUS = "behavior.scout.scan_status";

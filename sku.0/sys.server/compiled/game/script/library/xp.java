@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class xp extends script.base_script
 {
-    public xp()
-    {
-    }
+
     public static final float COMBAT_GENERAL_EXCHANGE_RATE = 0.10f;
     public static final float JEDI_GENERAL_EXCHANGE_RATE = 0.18f;
     public static final float SOCIAL_ENTERTAINER_EXCHANGE_RATE = 1.0f;

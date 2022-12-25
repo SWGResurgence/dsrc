@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class weapons extends script.base_script
 {
-    public weapons()
-    {
-    }
+
     public static final String WEAPON_DATA_TABLE = "datatables/crafting/weapon_schematics.iff";
     public static final String COL_SCHEMATIC_NAME = "schematic_name";
     public static final String COL_CRAFTING_SCRIPT = "crafting_script";

@@ -11,9 +11,7 @@ import script.string_id;
 
 public class gcwraid extends script.base_script
 {
-    public gcwraid()
-    {
-    }
+
     public static final String DATATABLE = "datatables/event/gcwraid/city_data.iff";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

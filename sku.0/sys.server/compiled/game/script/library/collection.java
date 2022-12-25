@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class collection extends script.base_script
 {
-    public collection()
-    {
-    }
+
     public static final String COLLECTION_REWARD_TABLE = "datatables/collection/rewards.iff";
     public static final String COLLECTION_TABLE = "datatables/collection/collection.iff";
     public static final String COLLECTION_NPC_TABLE = "datatables/collection/collection_npc.iff";

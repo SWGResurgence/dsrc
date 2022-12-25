@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class terminal extends script.base_script
 {
-    public terminal()
-    {
-    }
+
     public static final string_id MNU_OVERLOAD = new string_id("hq", "mnu_overload");
     public static final string_id MNU_SHUTDOWN = new string_id("hq", "mnu_shutdown");
     public static final string_id MNU_DONATE = new string_id("hq", "mnu_donate");

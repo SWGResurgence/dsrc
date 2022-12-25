@@ -8,9 +8,7 @@ import script.*;
 
 public class jabba extends script.base_script
 {
-    public jabba()
-    {
-    }
+
     public static String c_stringFile = "conversation/jabba";
     public boolean jabba_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

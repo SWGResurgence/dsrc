@@ -6,9 +6,7 @@ import java.util.*;
 
 public class gm extends script.base_script
 {
-    public gm()
-    {
-    }
+
     public static final String SCRIPT_CMD = "gm.cmd";
     public static final String SCRIPT_HANDLER = "gm.handler";
     public static final String KEYWORD_SELF = "-self";

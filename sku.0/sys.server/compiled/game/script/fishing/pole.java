@@ -10,9 +10,7 @@ import script.string_id;
 
 public class pole extends script.base_script
 {
-    public pole()
-    {
-    }
+
     public static final String STF = "som/som_item";
     public static final string_id MNU_TACKLE = new string_id(minigame.STF_FISH, "mnu_open_tackle");
     public static final string_id MNU_BAIT = new string_id(minigame.STF_FISH, "mnu_set_bait");

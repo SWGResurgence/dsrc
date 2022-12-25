@@ -5,9 +5,7 @@ import script.library.*;
 
 public class beast extends script.base_script
 {
-    public beast()
-    {
-    }
+
     public static final String MENU_FILE = "pet/pet_menu";
     public static final int MAX_UNACKNOWLEDGED_MESSAGE_COUNT = 3;
     public static final int PING_INTERVAL = 120;

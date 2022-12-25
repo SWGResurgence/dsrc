@@ -8,9 +8,7 @@ import script.*;
 
 public class porcellus extends script.base_script
 {
-    public porcellus()
-    {
-    }
+
     public static String c_stringFile = "conversation/porcellus";
     public boolean porcellus_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

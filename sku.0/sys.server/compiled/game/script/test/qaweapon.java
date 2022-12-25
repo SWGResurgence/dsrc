@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class qaweapon extends script.base_script
 {
-    public qaweapon()
-    {
-    }
+
     public static final String SCRIPTVAR = "qaweapon";
     public static final String[] WEAPON_DAMAGE = 
     {

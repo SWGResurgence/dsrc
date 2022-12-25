@@ -4,9 +4,7 @@ import script.*;
 
 public class consumable extends script.base_script
 {
-    public consumable()
-    {
-    }
+
     public static final float MAX_AFFECT_DISTANCE = 6.0f;
     public static final String[] STAT_NAME = 
     {

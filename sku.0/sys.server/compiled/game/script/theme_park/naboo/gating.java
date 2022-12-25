@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class gating extends script.base_script
 {
-    public gating()
-    {
-    }
+
     public static final String KAJA_QUEST_1 = "kajaQuest1";
     public static final String KAJA_QUEST_2 = "kajaQuest2";
     public static final String LOAM_QUEST_1 = "loamQuest1";

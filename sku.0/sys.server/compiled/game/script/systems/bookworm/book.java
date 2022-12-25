@@ -47,6 +47,7 @@ public class book extends script.base_script
         subscribeToSUIEvent(page, sui_event_type.SET_onButton, "btnOk", "saveText");
         subscribeToSUIPropertyForEvent(page, sui_event_type.SET_onButton, "btnOk", "pageText.text", "LocalText");
         subscribeToSUIPropertyForEvent(page, sui_event_type.SET_onButton, "btnOk", "outputPage.text", "LocalText");
+        subscribeToSUIEvent(page, sui_event_type.SET_onButton, "btnOk", "saveText");
         setSUIAssociatedObject(page, book);
         boolean showResult = showSUIPage(page);
         flushSUIPage(page);
@@ -55,12 +56,13 @@ public class book extends script.base_script
         {
             utils.setScriptVar(book, "pageId", page);
         }
-
         return SCRIPT_OVERRIDE;
     }
     public int saveText(obj_id self, dictionary params) throws InterruptedException
     {
         //_saveBookText(long obj_id, dictionary params);
+        //For now, save the work on the client.
+        saveTextOnClient(self, "bookworm/your_lovely_book.txt", params.getString("pageText"));
         return SCRIPT_CONTINUE;
     }
 }

@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class colzet extends script.base_script
 {
-    public colzet()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

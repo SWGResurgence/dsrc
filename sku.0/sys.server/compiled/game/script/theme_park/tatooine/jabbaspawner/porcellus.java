@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class porcellus extends script.base_script
 {
-    public porcellus()
-    {
-    }
+    
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id palace = getObjIdObjVar(self, "palace");

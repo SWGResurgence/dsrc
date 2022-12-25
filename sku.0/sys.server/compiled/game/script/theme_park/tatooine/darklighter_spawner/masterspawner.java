@@ -40,9 +40,7 @@ public class masterspawner extends script.base_script
 	};
 	public static final String guardTable = "datatables/npc/guard_spawner/guard.iff";
 
-	public masterspawner()
-	{
-	}
+
 	public int OnInitialize(obj_id self) throws InterruptedException
 	{
 		debugServerConsoleMsg(self, "Initialized Darklighter spawner script");

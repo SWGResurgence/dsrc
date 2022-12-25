@@ -5,9 +5,7 @@ import script.string_id;
 
 public class innate extends script.base_script
 {
-    public innate()
-    {
-    }
+
     public static final int ONE_HOUR = 3600;
     public static final int TWO_HOURS = ONE_HOUR * 2;
     public static final float DURATION_REGEN = 300.0f;

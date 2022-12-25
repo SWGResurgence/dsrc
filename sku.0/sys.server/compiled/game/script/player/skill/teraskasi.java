@@ -6,9 +6,7 @@ import script.prose_package;
 
 public class teraskasi extends script.systems.combat.combat_base
 {
-    public teraskasi()
-    {
-    }
+
     public int cmdForceOfWill(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         int modval = meditation.getMeditationSkillMod(self);

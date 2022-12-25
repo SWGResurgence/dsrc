@@ -105,9 +105,7 @@ public class masterspawner extends script.base_script
 			{"r5","1.2"}
 	};
 
-	public masterspawner()
-	{
-	}
+	
 	public int OnInitialize(obj_id self) throws InterruptedException
 	{
 		debugServerConsoleMsg(self, "Initialized Imperial Outpost spawner script");

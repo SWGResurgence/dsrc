@@ -9,9 +9,7 @@ import script.string_id;
 
 public class promoter extends script.base_script
 {
-    public promoter()
-    {
-    }
+    
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

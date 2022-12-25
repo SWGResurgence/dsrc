@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class shaman extends script.base_script
 {
-    public shaman()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleChiefInitialize", null, 9, false);

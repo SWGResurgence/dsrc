@@ -8,9 +8,7 @@ import script.string_id;
 
 public class crafted extends script.item.comestible.comestible
 {
-    public crafted()
-    {
-    }
+    
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         String food_type = getStringObjVar(self, "food_type");

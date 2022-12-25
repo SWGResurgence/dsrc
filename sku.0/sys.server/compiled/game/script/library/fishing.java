@@ -9,9 +9,7 @@ import java.util.List;
 
 public class fishing extends script.base_script {
 
-    public fishing()
-    {
-    }
+
 
     /*
     Config options for customizing fishing system via localOptions.cfg (values represent defaults)
