@@ -15,7 +15,9 @@ import java.util.ArrayList;
 public class player_developer extends base_script
 {
 
-    public String APIKEY = "https://discord.com/api/webhooks/1054125244060799076/YUI-Gwy8iJTHzBJkPkFBp7kjH27uGNFlO6z6-LFx39kAel5PlQ_xk_sFqxzdf5igiapD";
+    //public String APIKEY = "https://discord.com/api/webhooks/1054125244060799076/YUI-Gwy8iJTHzBJkPkFBp7kjH27uGNFlO6z6-LFx39kAel5PlQ_xk_sFqxzdf5igiapD";
+    public String APIKEY = "https://discord.com/api/webhooks/1056764306320003132/LRryi0SZDM920lm7Z6wRcs4eCKJAEkHcRCwLuyiKMYgzK5MGHvRj9kUx0gd3wFl_4wjE";
+
     public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id iTarget = getIntendedTarget(self);
@@ -50,6 +52,25 @@ public class player_developer extends base_script
         if (cmd.equalsIgnoreCase("reloadAllScripts"))
         {
             reloadAllScripts(self);
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equals("listWattos"))
+        {
+            obj_id[] wattos = getAllObjectsWithObjVar(getLocation(self), 16000f, "watto_tag");
+            for (obj_id watto : wattos)
+            {
+                sendSystemMessageTestingOnly(self, "Watto: " + watto);
+            }
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equals("gotoWatto"))
+        {
+            obj_id[] wattos = getAllObjectsWithObjVar(getLocation(self), 16000f, "watto_tag");
+            if (wattos.length > 0)
+            {
+                location wattoLoc = getLocation(wattos[0]);
+                warpPlayer(self, wattoLoc.area, wattoLoc.x, wattoLoc.y, wattoLoc.z, null, 0, 0, 0);
+            }
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("say"))
@@ -966,7 +987,7 @@ public class player_developer extends base_script
                     message += " " + tok.nextToken();
                 }
             }
-            sendWebhook(APIKEY, message);
+            //sendWebhook(APIKEY, message);
         }
         if (cmd.equalsIgnoreCase("ringspawn"))
         {

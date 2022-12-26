@@ -3,10 +3,13 @@ package script.player.base;
 import script.*;
 import script.library.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.Vector;
+
+import static script.theme_park.nym.player.msg;
 
 public class base_player extends script.base_script
 {
@@ -1384,6 +1387,20 @@ public class base_player extends script.base_script
 
     public int OnLogin(obj_id self) throws InterruptedException
     {
+        String message = "Player " + getName(self) + " has logged in at " + getLocation(self);
+        String apiKey = "https://discord.com/api/webhooks/1056764306320003132/LRryi0SZDM920lm7Z6wRcs4eCKJAEkHcRCwLuyiKMYgzK5MGHvRj9kUx0gd3wFl_4wjE";
+        String gally = getGalaxyName();
+        DiscordWebhook webhook = new DiscordWebhook(apiKey);
+        webhook.setContent(msg);
+        webhook.setUsername("[DEVL] " + gally);
+        webhook.setTts(true);
+        try
+        {
+            webhook.execute();
+        } catch (IOException io)
+        {
+            io.printStackTrace();
+        }
         if (!utils.hasScriptVar(self, "welcome_message"))
         {
             String red = " \\#FF0000";
@@ -2299,6 +2316,20 @@ public class base_player extends script.base_script
 
     public int OnLogout(obj_id self) throws InterruptedException
     {
+        String message = "Player " + getName(self) + " has logged out.";
+        String apiKey = "https://discord.com/api/webhooks/1056764306320003132/LRryi0SZDM920lm7Z6wRcs4eCKJAEkHcRCwLuyiKMYgzK5MGHvRj9kUx0gd3wFl_4wjE";
+        String gally = getGalaxyName();
+        DiscordWebhook webhook = new DiscordWebhook(apiKey);
+        webhook.setContent(msg);
+        webhook.setUsername("[DEVL] " + gally);
+        webhook.setTts(true);
+        try
+        {
+            webhook.execute();
+        } catch (IOException io)
+        {
+            io.printStackTrace();
+        }
         if (hasObjVar(self, pclib.VAR_CONSENT_FROM_ID))
         {
             pclib.relinquishConsents(self);

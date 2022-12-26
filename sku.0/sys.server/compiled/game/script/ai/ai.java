@@ -791,6 +791,10 @@ public class ai extends script.base_script
                 "Feel the vibes.",
                 "Ok, if you say so.."
         };
+        if (pet_lib.isPet(self) || beast_lib.isBeast(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
         if (emote.startsWith("pet"))
         {
             if (!ai_lib.isHumanoid(self))

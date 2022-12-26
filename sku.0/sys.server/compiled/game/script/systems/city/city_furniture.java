@@ -113,10 +113,7 @@ public class city_furniture extends script.base_script
     {
         if (canPlaceItem(self, player))
         {
-            if (isInWorldCell(self) && (!hasObjVar(self, "city_id")))
-            {
-                mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_PLACE);
-            }
+            mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_PLACE);
         }
         if (canManipulate(self, player))
         {
@@ -154,15 +151,9 @@ public class city_furniture extends script.base_script
         }
         else
         {
-            if (isInWorldCell(player))
+            if (isInWorldCell(player) && !utils.isNestedWithinAPlayer(player))
             {
-                int city_id = getCityAtLocation(getLocation(player), 0);
-                boolean isMayor = city.isTheCityMayor(player, city_id);
-                if (getOwner(self) == player)
-                {
-                    mi.addRootMenu(menu_info_types.ITEM_PICKUP, SID_MT_REMOVE);
-                }
-                else if (isMayor)
+                if (canManipulate(self, player))
                 {
                     mi.addRootMenu(menu_info_types.SERVER_MENU2, SID_MT_REMOVE);
                 }
@@ -368,11 +359,11 @@ public class city_furniture extends script.base_script
         setYaw(self, getYaw(player));
         if (isGod(player))
         {
-            chat.chat(self, "[GodMode] I am placing " + name + " in " + cityGetName(city_id));
+            chat.chat(player, "[GodMode] I am placing " + name + " in " + cityGetName(city_id));
         }
         else
         {
-            chat.chat(self, "Oh yes, that looks nice!");
+            chat.chat(player, "Oh yes, that looks nice!");
         }
         city.addDecoration(city_id, player, self);
     }
@@ -546,22 +537,29 @@ public class city_furniture extends script.base_script
         //@note: keep these in order of importance, with the most important last
         int city_id = getCityAtLocation(getLocation(player), 0);
         boolean isMayor = city.isTheCityMayor(player, city_id);
-        if (hasObjVar(self, "city_id"))
+        if (utils.isNestedWithinAPlayer(self))
+        {
+            if (hasObjVar(self, "city_id"))
+            {
+                return false;
+            }
+            if (hasObjVar(player, "city_decorator"))
+            {
+                return true;
+            }
+            if (city.isMilitiaOfCity(player, city_id))
+            {
+                return true;
+            }
+            if (isMayor)
+            {
+                return true;
+            }
+            return isGod(player);
+        }
+        else
         {
             return false;
         }
-        if (hasObjVar(player, "city_decorator"))
-        {
-            return true;
-        }
-        if (city.isMilitiaOfCity(player, city_id))
-        {
-            return true;
-        }
-        if (isMayor)
-        {
-            return true;
-        }
-        return isGod(player);
     }
 }
