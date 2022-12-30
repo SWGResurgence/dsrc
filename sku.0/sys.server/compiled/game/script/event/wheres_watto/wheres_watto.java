@@ -25,10 +25,13 @@ public class wheres_watto extends script.base_script
             "item_tcg_loot_reward_series1_housecleaning_kit",
             "item_tcg_loot_reward_series1_painting_jedi_crest",
             "item_tcg_loot_reward_series1_sith_speeder",
+            "item_tcg_loot_reward_series1_display_case_01",
+            "item_tcg_loot_reward_series2_display_case_02",
             "item_tcg_loot_reward_series2_mandalorian_strongbox",
             "item_tcg_loot_reward_series2_organizational_datapad",
             "item_tcg_loot_reward_series3_armored_bantha",
             "item_tcg_loot_reward_series3_boba_fett_statue",
+            "item_tcg_loot_reward_series3_house_sign",
             "item_tcg_loot_reward_series3_jango_fett_memorial_statue",
             "item_tcg_loot_reward_series3_mandalorian_skull_banner",
             "item_tcg_loot_reward_series3_merr_son_jt12_jetpack-blueprints",
@@ -37,17 +40,22 @@ public class wheres_watto extends script.base_script
             "item_tcg_loot_reward_series4_peko_peko_mount_02_01",
             "item_tcg_loot_reward_series4_video_game_table_02_01",
             "item_tcg_loot_reward_series5_galactic_hunters_poster",
+            "item_tcg_loot_reward_series5_house_sign",
             "item_tcg_loot_reward_series5_painting_jedi_techniques",
+            "item_tcg_loot_reward_series6_auto_feeder",
             "item_tcg_loot_reward_series6_beast_muzzle",
             "item_tcg_loot_reward_series6_dewback_armor",
-            "item_tcg_loot_reward_series6_auto_feeder",
+            "item_tcg_loot_reward_series6_baby_colo_set",
             "item_tcg_loot_reward_series7_build01_tie_canopy",
             "item_tcg_loot_reward_series7_build02_xwing_wing",
             "item_tcg_loot_reward_series7_build03_gunship_blueprint",
             "item_tcg_loot_reward_series7_build04_broken_ball_turret",
+            "item_tcg_loot_reward_series7_camo_armor_kit",
+            "item_tcg_loot_reward_series7_hutt_fighter_familiar",
+            "item_tcg_loot_reward_series7_tie_fighter_familiar",
+            "item_tcg_loot_reward_series7_xwing_fighter_familiar",
             "item_tcg_loot_reward_series9_jedi_library_bookshelf",
     };
-
     public boolean wheres_watto_condition__defaultCondition(obj_id player, obj_id npc)
     {
         return true;
@@ -149,7 +157,9 @@ public class wheres_watto extends script.base_script
             {
                 sendSystemMessageTestingOnly(player, "debug: one time grant of: " + reward);
             }
-            static_item.createNewItemFunction(reward, utils.getInventoryContainer(player));
+            obj_id one_time_item = static_item.createNewItemFunction(reward, utils.getInventoryContainer(player));
+            detachScript(one_time_item, "item.special.nomove");
+            removeObjVar(one_time_item, "noTrade");
             setObjVar(player, "watto_found_main", 1);
         }
         else
@@ -160,7 +170,9 @@ public class wheres_watto extends script.base_script
             {
                 sendSystemMessageTestingOnly(player, "debug: repeatable reward of: " + reward);
             }
-            static_item.createNewItemFunction(reward, utils.getInventoryContainer(player));
+            obj_id repeatable_item = static_item.createNewItemFunction(reward, utils.getInventoryContainer(player));
+            detachScript(repeatable_item, "item.special.nomove");
+            removeObjVar(repeatable_item, "noTrade");
         }
         return SCRIPT_CONTINUE;
     }
