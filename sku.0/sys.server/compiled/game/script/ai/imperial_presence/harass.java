@@ -613,11 +613,7 @@ public class harass extends script.base_script
         {
             return false;
         }
-        if ("imperial" == getFactionName(self))
-        {
-            return true;
-        }
-        else if (utils.isProfession(target, utils.FORCE_SENSITIVE) && isInEnemyFaction(self, target))
+        if (getFactionName(self).equals("imperial")  || utils.isProfession(target, utils.FORCE_SENSITIVE) && isInEnemyFaction(self, target))
         {
             return true;
         }
