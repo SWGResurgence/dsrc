@@ -191,6 +191,11 @@ public class heroic_token_box extends script.base_script
         } else {
             obj_id inv = getObjectInSlot(player, "inventory");
             if (getVolumeFree(inv) > 0) {
+                if (!(amount > 500))
+                {
+                    broadcast(player, "You can only withdraw 500 tokens at a time.");
+                    return SCRIPT_CONTINUE;
+                }
                 trial.withdrawTokensFromBox(tokenBox, tokenType, amount);
                 static_item.createNewItemFunction(tokenType, player, amount);
             } else {
