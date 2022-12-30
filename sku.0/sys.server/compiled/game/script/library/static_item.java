@@ -116,7 +116,7 @@ public class static_item extends script.base_script
         }
         setStaticItemVersion(newItem, itemData.getInt("version"));
         int chargeList = itemData.getInt("charges");
-        if (chargeList > 0 && chargeList <= 500)
+        if (chargeList > 0 && chargeList <= 9999)
         {
             setCount(newItem, chargeList);
         }
