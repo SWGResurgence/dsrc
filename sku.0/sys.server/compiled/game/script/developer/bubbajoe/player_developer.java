@@ -998,7 +998,7 @@ public class player_developer extends base_script
             resurgence.createCircleSpawn(self, self, creatureToSpawn, num, radius);
 
         }
-        if (cmd.equalsIgnoreCase("spawnringinterior"))
+        if (cmd.equalsIgnoreCase("ringspawninside"))
         {
             String creatureToSpawn = tok.nextToken();
             int num = Integer.parseInt(tok.nextToken());

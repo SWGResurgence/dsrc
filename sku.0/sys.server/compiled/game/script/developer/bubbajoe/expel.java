@@ -1,7 +1,7 @@
 package script.developer.bubbajoe;/*
 @Filename: script.developer.bubbajoe.tmp_barker
 @Author: BubbaJoeX
-@Purpose: Barks a string on a loop.
+@Purpose: Expells players from a trigger volume named "no_enter"
 */
 
 import script.obj_id;

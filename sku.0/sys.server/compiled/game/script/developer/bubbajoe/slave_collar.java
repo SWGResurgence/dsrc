@@ -1,7 +1,7 @@
 package script.developer.bubbajoe;/*
 @Filename: script.developer.bubbajoe.slave_collar
 @Author: BubbaJoeX
-@Purpose: Dragging a slave collar on a mob will allow them to be controlled by the player like a pet, or factional hire.
+@Purpose: [WIP] Dragging a slave collar on a mob will allow them to be controlled by the player like a pet, or factional hire.
 */
 
 import script.obj_id;
