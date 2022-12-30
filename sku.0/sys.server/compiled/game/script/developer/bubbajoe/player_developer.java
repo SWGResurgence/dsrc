@@ -583,7 +583,7 @@ public class player_developer extends base_script
             {
                 broadcast(self, "No mod specified. See console for valid mods.");
                 debugConsoleMsg(self, "/developer editWeapon <mod> <value>");
-                debugConsoleMsg(self, "List of valid mods: minDamage\nmaxDamage\nattackSpeed\nwoundChance\nattackCost\naccuracy\nelementalType\nelementalValue\nrangeInfo\ndamageType\ndamageRadius");
+                debugConsoleMsg(self, "List of valid mods:\nminDamage\nmaxDamage\nattackSpeed\nwoundChance\nattackCost\naccuracy\nelementalType\nelementalValue\nrangeInfo\nq\ndamageRadius");
                 return SCRIPT_CONTINUE;
             }
             switch (mod)
@@ -1036,6 +1036,36 @@ public class player_developer extends base_script
                 float z = Float.parseFloat(tok.nextToken());
                 location loc = new location(x, y, z);
                 playClientEffectLoc(self, sound, loc, 0.0f);
+                return SCRIPT_CONTINUE;
+            }
+        }
+        if (cmd.equalsIgnoreCase("areacommand"))
+        {
+            if (!tok.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /developer areacommand <command> <radius>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                float radius = Float.parseFloat(tok.nextToken());
+                String command = tok.nextToken();
+                while (tok.hasMoreTokens())
+                {
+                    command += " " + tok.nextToken();
+                }
+                obj_id[] players = getPlayerCreaturesInRange(getLocation(self), radius);
+                for (obj_id player : players)
+                {
+                    if (isGod(player))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        sendConsoleCommand(command, player);
+                    }
+                }
                 return SCRIPT_CONTINUE;
             }
         }
