@@ -1385,22 +1385,23 @@ public class base_player extends script.base_script
     public int OnLogin(obj_id self) throws InterruptedException
     {
         location loginLoc = getLocation(self);
-        System.out.println("\nOnLogin: " + self + " " + getName(self) + " on planet " + getCurrentSceneName() + " at " + loginLoc.x + ", " + loginLoc.y + ", " + loginLoc.z + "\n");
-        if (!utils.hasScriptVar(self, "welcome_message"))
+        System.out.println("\nZoning: " + self + " " + getName(self) + " has zoned to " + getCurrentSceneName() + " at " + loginLoc.x + ", " + loginLoc.y + ", " + loginLoc.z + "\n");
+        if (!hasObjVar(self, "resurgence_welcome_onetimer"))
         {
             String red = " \\#FF0000";
             String gold = " \\#FFD700";
             String tan = " \\#D2B48C";
             String white = " \\#FFFFFF";
             String blue = " \\#0000FF";
-            String welcomeMessage = "Thanks for playing on Apotheosis!" + "\n";
+            String teal = " \\#008080";
+            String welcomeMessage = "\\#.Thanks for playing on Apotheosis!" + "\n";
             String pleaseRead = "Please read the " + tan + "Rules & Policies" + white + " and " + tan + "F.A.Q." + white + " before starting your adventure(s)." + "\n";
             String numCharacters = "Number of Allowed Character(s): " + gold + "8" + white + "\n";
             String maxLogin = "Number of Allowed Character(s) Online: " + gold + "8" + white + "\n";
             String numAccts = "Number of Allowed Account(s): " + gold + "1" + white + "\n";
             String multiAccts = "Multiple Account(s): " + gold + "Contact Customer Support" + white + "\n";
             String features = gold + "Key Features:\n";
-            String feature1 = gold + "* " + white + "Instant " + blue + "Level 90" + white + "Token." + "\n";
+            String feature1 = gold + "* " + white + "Instant " + teal + "Level 90" + white + "Token." + "\n";
             String feature2 = gold + "* " + white + "One Free Heroic Jewelry Set.\n";
             String feature3 = gold + "* " + white + "20 Housing Lots.\n";
             String feature4 = gold + "* " + white + "Starter Packs for Traders and Pilots\n";
@@ -1410,7 +1411,7 @@ public class base_player extends script.base_script
             String feature8 = gold + "* " + white + "New Planet: Dxun\n";
             String feature9 = gold + "* " + white + "Variety of TCG and Custom Content.\n";
             String feature10 = tan + "* " + white + "More yet to come...\n";
-            String nl = "\n";
+            String nl = "\n\\#.";
             String welcome = welcomeMessage + pleaseRead + numCharacters + maxLogin + numAccts + multiAccts + features + feature1 + feature2 + feature3 + feature4 + feature5 + feature6 + feature7 + feature8 + feature9 + feature10;
             String title = gold("Welcome to Apotheosis!");
             int page = sui.createSUIPage(sui.SUI_MSGBOX, self, self, "noHandler");
@@ -1424,10 +1425,10 @@ public class base_player extends script.base_script
             setSUIProperty(page, "btnCancel", "Visible", "true");
             setSUIProperty(page, "btnRevert", "Visible", "false");
             setSUIProperty(page, "btnOk", sui.PROP_TEXT, "Exit");
-            saveTextOnClient(self, "motd_" + toString(getPlayerAccountUsername(self)) + ".txt", welcome);
+            saveTextOnClient(self, "server_welcome.txt", welcome);
             showSUIPage(page);
             flushSUIPage(page);
-            utils.setScriptVar(self, "welcome_message", 1);
+            setObjVar(self, "resurgence_welcome_onetimer", 1);
         }
         boolean ctsDisconnectRequested = false;
         if (hasObjVar(self, "disableLoginCtsInProgress"))
