@@ -272,7 +272,7 @@ public class wheres_watto extends script.base_script
     {
         hideFromClient(self, false);
     }
-
+    //@deprecation note: pls update to Calendar.*() methods
     public boolean isJanuary() throws InterruptedException
     {
         java.util.Date date = new java.util.Date();
@@ -294,5 +294,5 @@ public class wheres_watto extends script.base_script
         }
         return false;
     }
-
+    //@deprecation
 }
