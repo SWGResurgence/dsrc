@@ -6,9 +6,7 @@ import script.*;
 
 public class dev_control_terminal extends script.base_script
 {
-    public dev_control_terminal()
-    {
-    }
+
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public static final String PASSKEYCODE = "object/intangible/data_item/warren_encryption_key.iff";
     public int OnInitialize(obj_id self) throws InterruptedException

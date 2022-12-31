@@ -6,9 +6,7 @@ import script.*;
 
 public class biogenic_construction extends script.base_script
 {
-    public biogenic_construction()
-    {
-    }
+
     public static String c_stringFile = "conversation/biogenic_construction";
     public boolean biogenic_construction_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

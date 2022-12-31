@@ -8,9 +8,7 @@ import script.*;
 
 public class tat_icon_missingdroid_jawa extends script.base_script
 {
-    public tat_icon_missingdroid_jawa()
-    {
-    }
+
     public static String c_stringFile = "conversation/tat_icon_missingdroid_jawa";
     public boolean tat_icon_missingdroid_jawa_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -106,7 +104,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -156,7 +154,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -206,7 +204,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -221,7 +219,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -317,7 +315,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -356,7 +354,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -395,7 +393,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -434,7 +432,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -484,7 +482,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -558,7 +556,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -597,7 +595,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -636,7 +634,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -675,7 +673,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -714,7 +712,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -753,7 +751,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -792,7 +790,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -808,7 +806,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -915,7 +913,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -976,7 +974,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tat_icon_missingdroid_jawa_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1037,7 +1035,7 @@ public class tat_icon_missingdroid_jawa extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

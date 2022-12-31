@@ -5,9 +5,7 @@ import script.library.*;
 
 public class trap_base extends script.base_script
 {
-    public trap_base()
-    {
-    }
+
     public static final string_id SID_DECODE = new string_id("treasure_map/treasure_map", "decode");
     public static final string_id SID_SYS_NOT_READY = new string_id("trap/trap", "sys_not_ready");
     public static final string_id SID_SYS_MISS = new string_id("trap/trap", "sys_miss");

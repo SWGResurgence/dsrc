@@ -10,9 +10,7 @@ import script.obj_id;
 
 public class event_two extends script.base_script
 {
-    public event_two()
-    {
-    }
+
     public static final String boss = "som_volcano_two_ak_prime";
     public static final String guard = "som_volcano_two_hk77";
     public static final boolean LOGGING = false;

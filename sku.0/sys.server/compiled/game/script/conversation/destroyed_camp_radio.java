@@ -8,9 +8,7 @@ import script.*;
 
 public class destroyed_camp_radio extends script.base_script
 {
-    public destroyed_camp_radio()
-    {
-    }
+
     public static String c_stringFile = "conversation/destroyed_camp_radio";
     public boolean destroyed_camp_radio_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -69,7 +67,7 @@ public class destroyed_camp_radio extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int destroyed_camp_radio_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -107,7 +105,7 @@ public class destroyed_camp_radio extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int destroyed_camp_radio_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -145,7 +143,7 @@ public class destroyed_camp_radio extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int destroyed_camp_radio_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -194,7 +192,7 @@ public class destroyed_camp_radio extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int destroyed_camp_radio_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -219,7 +217,7 @@ public class destroyed_camp_radio extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int destroyed_camp_radio_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -257,7 +255,7 @@ public class destroyed_camp_radio extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int destroyed_camp_radio_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -295,7 +293,7 @@ public class destroyed_camp_radio extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int destroyed_camp_radio_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -333,7 +331,7 @@ public class destroyed_camp_radio extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int destroyed_camp_radio_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -382,7 +380,7 @@ public class destroyed_camp_radio extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int destroyed_camp_radio_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -408,7 +406,7 @@ public class destroyed_camp_radio extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int destroyed_camp_radio_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -422,7 +420,7 @@ public class destroyed_camp_radio extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int destroyed_camp_radio_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -460,7 +458,7 @@ public class destroyed_camp_radio extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int destroyed_camp_radio_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -509,7 +507,7 @@ public class destroyed_camp_radio extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int destroyed_camp_radio_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -534,7 +532,7 @@ public class destroyed_camp_radio extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

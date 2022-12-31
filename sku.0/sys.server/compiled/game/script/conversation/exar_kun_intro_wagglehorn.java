@@ -8,9 +8,7 @@ import script.*;
 
 public class exar_kun_intro_wagglehorn extends script.base_script
 {
-    public exar_kun_intro_wagglehorn()
-    {
-    }
+    
     public static String c_stringFile = "conversation/exar_kun_intro_wagglehorn";
     public boolean exar_kun_intro_wagglehorn_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -69,7 +67,7 @@ public class exar_kun_intro_wagglehorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int exar_kun_intro_wagglehorn_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -84,7 +82,7 @@ public class exar_kun_intro_wagglehorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int exar_kun_intro_wagglehorn_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -99,7 +97,7 @@ public class exar_kun_intro_wagglehorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

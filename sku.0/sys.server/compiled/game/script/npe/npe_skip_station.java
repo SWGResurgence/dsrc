@@ -9,9 +9,7 @@ import java.util.StringTokenizer;
 
 public class npe_skip_station extends script.base_script
 {
-    public npe_skip_station()
-    {
-    }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         obj_id player = self;

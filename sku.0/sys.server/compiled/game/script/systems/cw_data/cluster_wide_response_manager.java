@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class cluster_wide_response_manager extends script.base_script
 {
-    public cluster_wide_response_manager()
-    {
-    }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String name, int request_id, String[] element_name_list, dictionary[] dungeon_data, int lock_key) throws InterruptedException
     {
         LOG("doLogging", "Recieved CWData. Name = " + name);

@@ -6,9 +6,7 @@ import java.util.Vector;
 
 public class smuggler extends script.base_script
 {
-    public smuggler()
-    {
-    }
+
     public static final String TBL = "datatables/npc/junk_dealer/junk_dealer.iff";
     public static final String SCRIPTVAR_JUNK_SUI = "relicdealer.biogenic.sui";
     public static final String SCRIPTVAR_JUNK_IDS = "relicdealer.biogenic.ids";

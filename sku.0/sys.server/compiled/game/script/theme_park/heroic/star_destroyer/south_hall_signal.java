@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class south_hall_signal extends script.base_script
 {
-    public south_hall_signal()
-    {
-    }
+
     public int startSpawnLoop(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))

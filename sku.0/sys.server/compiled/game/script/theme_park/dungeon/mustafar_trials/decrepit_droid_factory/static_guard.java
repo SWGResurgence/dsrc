@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class static_guard extends script.base_script
 {
-    public static_guard()
-    {
-    }
+
     public static final boolean LOGGING = false;
     public int OnDestroy(obj_id self) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class handoff_to_tatooine extends script.base_script
 {
-    public handoff_to_tatooine()
-    {
-    }
+
     public static final String questNewbieStart = "quest/speeder_quest";
     public static final String questNewbieStartBH = "quest/speeder_quest";
     public static final String questCrafterEntertainer = "quest/tatooine_eisley_noncombat";

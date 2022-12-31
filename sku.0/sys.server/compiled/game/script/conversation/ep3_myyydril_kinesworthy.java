@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_myyydril_kinesworthy extends script.base_script
 {
-    public ep3_myyydril_kinesworthy()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_myyydril_kinesworthy";
     public boolean ep3_myyydril_kinesworthy_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -136,7 +134,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -175,7 +173,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -189,7 +187,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -203,7 +201,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -241,7 +239,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -256,7 +254,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -295,7 +293,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -334,7 +332,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -348,7 +346,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -362,7 +360,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -400,7 +398,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -438,7 +436,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -476,7 +474,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -514,7 +512,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -552,7 +550,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -601,7 +599,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -626,7 +624,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -665,7 +663,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -679,7 +677,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -693,7 +691,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -732,7 +730,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -770,7 +768,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -808,7 +806,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -846,7 +844,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -884,7 +882,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -922,7 +920,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -960,7 +958,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -998,7 +996,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1036,7 +1034,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1074,7 +1072,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1112,7 +1110,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1151,7 +1149,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_kinesworthy_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1165,7 +1163,7 @@ public class ep3_myyydril_kinesworthy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

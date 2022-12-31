@@ -5,9 +5,7 @@ import script.library.*;
 
 public class player_stealth extends script.systems.combat.combat_base
 {
-    public player_stealth()
-    {
-    }
+
     public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("#####");
     public int smokeBombTimerExpired(obj_id self, dictionary params) throws InterruptedException
     {

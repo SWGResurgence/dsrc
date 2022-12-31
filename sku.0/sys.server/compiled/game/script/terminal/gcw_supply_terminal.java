@@ -7,9 +7,7 @@ import script.string_id;
 
 public class gcw_supply_terminal extends script.base_script
 {
-    public gcw_supply_terminal()
-    {
-    }
+
     public static final String SLICE = "You slice the ";
     public static final int BASE_SLICING_TIME = 5;
     public static final String STRING_FILE = "gcw";

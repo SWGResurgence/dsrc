@@ -9,9 +9,7 @@ import script.region;
 
 public class battlefield_utility extends script.base_script
 {
-    public battlefield_utility()
-    {
-    }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         location loc = getLocation(self);

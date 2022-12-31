@@ -8,9 +8,7 @@ import script.*;
 
 public class prof_commando_21_galuf extends script.base_script
 {
-    public prof_commando_21_galuf()
-    {
-    }
+
     public static String c_stringFile = "conversation/prof_commando_21_galuf";
     public boolean prof_commando_21_galuf_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -58,7 +56,7 @@ public class prof_commando_21_galuf extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

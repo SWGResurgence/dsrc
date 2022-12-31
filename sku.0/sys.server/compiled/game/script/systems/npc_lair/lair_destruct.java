@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class lair_destruct extends script.base_script
 {
-    public lair_destruct()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "systems.npc_lair.lair_interactivity");

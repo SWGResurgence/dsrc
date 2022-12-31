@@ -10,9 +10,7 @@ import script.string_id;
 
 public class om_escort extends script.base_script
 {
-    public om_escort()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");

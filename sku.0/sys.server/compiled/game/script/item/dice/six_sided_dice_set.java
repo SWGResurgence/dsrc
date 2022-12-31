@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class six_sided_dice_set extends script.item.dice.base.base_dice
 {
-    public six_sided_dice_set()
-    {
-    }
+
     public static final int FACE_COUNT = 6;
     public static final int DEFAULT_DICE_COUNT = 1;
     public static final String TYPE_NAME = "six_sided_dice_set";

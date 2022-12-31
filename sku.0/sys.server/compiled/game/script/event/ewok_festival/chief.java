@@ -8,9 +8,7 @@ import script.string_id;
 
 public class chief extends script.base_script
 {
-    public chief()
-    {
-    }
+
     public static final string_id GIVE_GIFT = new string_id("spam", "ewok_chief_give_gift");
     public static final string_id HAVE_GIFT = new string_id("spam", "ewok_chief_have_gift");
     public static final String OBJ_BOUQUET_QUEST = "loveday_flowers_2010";

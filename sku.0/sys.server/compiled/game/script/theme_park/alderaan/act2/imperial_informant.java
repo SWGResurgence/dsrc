@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class imperial_informant extends script.base_script
 {
-    public imperial_informant()
-    {
-    }
+
     public static final String IMPERIAL_STF = "theme_park/alderaan/act2/imperial_missions";
     public int OnAttach(obj_id self) throws InterruptedException
     {

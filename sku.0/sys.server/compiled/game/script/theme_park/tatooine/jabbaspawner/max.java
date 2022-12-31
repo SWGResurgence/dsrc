@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class max extends script.base_script
 {
-    public max()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         grantSkill(self, "social_entertainer_novice");

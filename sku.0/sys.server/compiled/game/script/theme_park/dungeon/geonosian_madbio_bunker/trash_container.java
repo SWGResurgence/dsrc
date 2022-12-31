@@ -4,9 +4,7 @@ import script.*;
 
 public class trash_container extends script.base_script
 {
-    public trash_container()
-    {
-    }
+
     public static final String MSGS = "dungeon/geonosian_madbio";
     public int OnAttach(obj_id self) throws InterruptedException
     {

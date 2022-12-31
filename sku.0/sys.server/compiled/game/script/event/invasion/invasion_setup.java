@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class invasion_setup extends script.base_script
 {
-    public invasion_setup()
-    {
-    }
+
     public static final String[] PROMPT_TEXT = 
     {
         "How many different types of creature will be spawned?",

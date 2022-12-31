@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class encounter_on_creature extends script.base_script
 {
-    public encounter_on_creature()
-    {
-    }
+
     public static final String objvarOnCreatureOwner = "quest.owner";
     public static final String objvarOnCreatureQuestCrc = "quest.questCrc";
     public static final String objvarOnCreatureTaskId = "quest.taskId";

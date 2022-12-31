@@ -7,9 +7,7 @@ import script.library.sui;
 
 public class chapter_8_quest_object extends script.base_script
 {
-    public chapter_8_quest_object()
-    {
-    }
+
     public static final string_id RADIAL_INSPECT = new string_id("quest/ground/util/quest_giver_object", "radial_inspect");
     public static final string_id OFFER_QUEST_MSG = new string_id("quest/ground/util/quest_giver_object", "offer_quest");
     public static final string_id SUI_TITLE = new string_id("quest/ground/util/quest_giver_object", "sui_title");

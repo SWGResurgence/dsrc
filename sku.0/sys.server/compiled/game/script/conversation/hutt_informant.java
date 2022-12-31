@@ -7,9 +7,7 @@ import script.*;
 
 public class hutt_informant extends script.base_script
 {
-    public hutt_informant()
-    {
-    }
+
     public static String c_stringFile = "conversation/hutt_informant";
     public boolean hutt_informant_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

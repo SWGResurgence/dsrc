@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class bounty_probe_droid extends script.systems.missions.base.mission_dynamic_base
 {
-    public bounty_probe_droid()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int intDroidType = getIntObjVar(self, "intDroidType");

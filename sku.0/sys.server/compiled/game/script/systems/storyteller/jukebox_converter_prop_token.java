@@ -7,9 +7,7 @@ import script.*;
 
 public class jukebox_converter_prop_token extends script.base_script
 {
-    public jukebox_converter_prop_token()
-    {
-    }
+
     public static final String JUKEBOX_SCRIPT = "systems.event_perk.jukebox";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
@@ -26,11 +24,6 @@ public class jukebox_converter_prop_token extends script.base_script
         if (!utils.isNestedWithin(self, player))
         {
             sendSystemMessage(player, new string_id("storyteller", "placement_from_inventory_only"));
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "placement_no_trial_accounts"));
             return SCRIPT_CONTINUE;
         }
         obj_id target = getStorytellerTokenTarget(player);

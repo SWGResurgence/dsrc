@@ -5,9 +5,7 @@ import script.*;
 
 public class naboo_rebel_tier1_kiizete extends script.base_script
 {
-    public naboo_rebel_tier1_kiizete()
-    {
-    }
+
     public static String c_stringFile = "conversation/naboo_rebel_tier1_kiizete";
     public boolean naboo_rebel_tier1_kiizete_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -125,7 +123,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -153,7 +151,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -320,7 +318,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -487,7 +485,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -654,7 +652,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -682,7 +680,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -839,7 +837,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -879,7 +877,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -976,7 +974,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1038,7 +1036,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1136,7 +1134,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1234,7 +1232,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1332,7 +1330,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1429,7 +1427,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1457,7 +1455,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1520,7 +1518,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1548,7 +1546,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1658,7 +1656,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1698,7 +1696,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1714,7 +1712,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1820,7 +1818,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1949,7 +1947,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2012,7 +2010,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2064,7 +2062,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2080,7 +2078,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2155,7 +2153,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2218,7 +2216,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2246,7 +2244,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2297,7 +2295,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2379,7 +2377,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2508,7 +2506,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2571,7 +2569,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2623,7 +2621,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2639,7 +2637,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2714,7 +2712,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2777,7 +2775,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_rebel_tier1_kiizete_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2805,7 +2803,7 @@ public class naboo_rebel_tier1_kiizete extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

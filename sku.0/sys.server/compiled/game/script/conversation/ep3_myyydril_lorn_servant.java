@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class ep3_myyydril_lorn_servant extends script.base_script
 {
-    public ep3_myyydril_lorn_servant()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_myyydril_lorn_servant";
     public boolean ep3_myyydril_lorn_servant_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -108,7 +106,7 @@ public class ep3_myyydril_lorn_servant extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_lorn_servant_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -146,7 +144,7 @@ public class ep3_myyydril_lorn_servant extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_lorn_servant_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -184,7 +182,7 @@ public class ep3_myyydril_lorn_servant extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_lorn_servant_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -222,7 +220,7 @@ public class ep3_myyydril_lorn_servant extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_lorn_servant_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -237,7 +235,7 @@ public class ep3_myyydril_lorn_servant extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_droid_factory_sergeant_hirka extends script.base_script
 {
-    public corellia_droid_factory_sergeant_hirka()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_droid_factory_sergeant_hirka";
     public boolean corellia_droid_factory_sergeant_hirka_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -41,7 +39,7 @@ public class corellia_droid_factory_sergeant_hirka extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

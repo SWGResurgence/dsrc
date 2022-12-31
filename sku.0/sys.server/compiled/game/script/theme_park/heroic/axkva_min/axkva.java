@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class axkva extends script.base_script
 {
-    public axkva()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_AXKVA);

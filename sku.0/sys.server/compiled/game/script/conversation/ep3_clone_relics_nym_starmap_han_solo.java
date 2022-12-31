@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_clone_relics_nym_starmap_han_solo extends script.base_script
 {
-    public ep3_clone_relics_nym_starmap_han_solo()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_clone_relics_nym_starmap_han_solo";
     public boolean ep3_clone_relics_nym_starmap_han_solo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -71,7 +69,7 @@ public class ep3_clone_relics_nym_starmap_han_solo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_nym_starmap_han_solo_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -111,7 +109,7 @@ public class ep3_clone_relics_nym_starmap_han_solo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_nym_starmap_han_solo_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -151,7 +149,7 @@ public class ep3_clone_relics_nym_starmap_han_solo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_nym_starmap_han_solo_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -190,7 +188,7 @@ public class ep3_clone_relics_nym_starmap_han_solo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_nym_starmap_han_solo_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -207,7 +205,7 @@ public class ep3_clone_relics_nym_starmap_han_solo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_nym_starmap_han_solo_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -246,7 +244,7 @@ public class ep3_clone_relics_nym_starmap_han_solo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_nym_starmap_han_solo_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -286,7 +284,7 @@ public class ep3_clone_relics_nym_starmap_han_solo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_nym_starmap_han_solo_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -337,7 +335,7 @@ public class ep3_clone_relics_nym_starmap_han_solo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_nym_starmap_han_solo_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -435,7 +433,7 @@ public class ep3_clone_relics_nym_starmap_han_solo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_nym_starmap_han_solo_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -488,7 +486,7 @@ public class ep3_clone_relics_nym_starmap_han_solo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_nym_starmap_han_solo_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -527,7 +525,7 @@ public class ep3_clone_relics_nym_starmap_han_solo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_nym_starmap_han_solo_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -543,7 +541,7 @@ public class ep3_clone_relics_nym_starmap_han_solo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_nym_starmap_han_solo_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -596,7 +594,7 @@ public class ep3_clone_relics_nym_starmap_han_solo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

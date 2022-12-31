@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class quest_test extends script.base_script
 {
-    public quest_test()
-    {
-    }
+
     public static String[] OPTIONS = 
     {
         "=========================",

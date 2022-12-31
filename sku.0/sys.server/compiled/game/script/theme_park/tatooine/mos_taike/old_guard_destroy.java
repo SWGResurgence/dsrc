@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class old_guard_destroy extends script.base_script
 {
-    public old_guard_destroy()
-    {
-    }
+    
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");

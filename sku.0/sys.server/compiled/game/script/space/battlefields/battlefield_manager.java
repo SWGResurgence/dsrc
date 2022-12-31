@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class battlefield_manager extends script.base_script
 {
-    public battlefield_manager()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOG("space", "manager preloading");

@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_new_armor_advanced_layer_1 extends script.systems.crafting.armor.crafting_new_armor_layer
 {
-    public crafting_new_armor_advanced_layer_1()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

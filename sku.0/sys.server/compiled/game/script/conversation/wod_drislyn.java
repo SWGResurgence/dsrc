@@ -14,14 +14,16 @@ package script.conversation;
 // Library Includes
 // ======================================================================
 
-import script.library.*;
+import script.library.ai_lib;
+import script.library.chat;
+import script.library.groundquests;
+import script.library.utils;
 import script.*;
 
 public class wod_drislyn extends script.base_script
 {
-	public wod_drislyn()
-	{
-	}
+
+
 // ======================================================================
 // Script Constants
 // ======================================================================
@@ -260,7 +262,7 @@ int wod_drislyn_handleBranch4 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -290,7 +292,7 @@ int wod_drislyn_handleBranch5 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -320,7 +322,7 @@ int wod_drislyn_handleBranch8 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -379,7 +381,7 @@ int wod_drislyn_handleBranch10 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -436,7 +438,7 @@ int wod_drislyn_handleBranch11 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -493,7 +495,7 @@ int wod_drislyn_handleBranch12 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -562,7 +564,7 @@ int wod_drislyn_handleBranch13 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -639,7 +641,7 @@ int wod_drislyn_handleBranch14 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -669,7 +671,7 @@ int wod_drislyn_handleBranch15 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -726,7 +728,7 @@ int wod_drislyn_handleBranch19 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -783,7 +785,7 @@ int wod_drislyn_handleBranch20 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -840,7 +842,7 @@ int wod_drislyn_handleBranch21 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -909,7 +911,7 @@ int wod_drislyn_handleBranch22 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1013,7 +1015,7 @@ int wod_drislyn_handleBranch23 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1070,7 +1072,7 @@ int wod_drislyn_handleBranch24 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1100,7 +1102,7 @@ int wod_drislyn_handleBranch25 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1130,7 +1132,7 @@ int wod_drislyn_handleBranch27 (obj_id player, obj_id npc, string_id response) t
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------

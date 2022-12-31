@@ -5,9 +5,7 @@ import script.*;
 
 public class npe_pilot_hard extends script.base_script
 {
-    public npe_pilot_hard()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_pilot_hard";
     public boolean npe_pilot_hard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -107,7 +105,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -146,7 +144,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -185,7 +183,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -223,7 +221,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -262,7 +260,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -278,7 +276,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -329,7 +327,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -379,7 +377,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -417,7 +415,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -433,7 +431,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -448,7 +446,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -498,7 +496,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -548,7 +546,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -564,7 +562,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -602,7 +600,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -617,7 +615,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -657,7 +655,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_pilot_hard_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -672,7 +670,7 @@ public class npe_pilot_hard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

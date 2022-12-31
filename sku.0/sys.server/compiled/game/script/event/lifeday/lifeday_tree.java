@@ -10,9 +10,7 @@ import script.string_id;
 
 public class lifeday_tree extends script.base_script
 {
-    public lifeday_tree()
-    {
-    }
+
     private static final string_id TREE_USE = new string_id("spam", "tree_use");
     private static final string_id NOT_OLD_ENOUGH = new string_id("spam", "not_old_enough");
     private static final string_id GIFT_GRANTED = new string_id("spam", "gift_granted");

@@ -8,9 +8,7 @@ import script.*;
 
 public class corvette_rebel_prisoner extends script.base_script
 {
-    public corvette_rebel_prisoner()
-    {
-    }
+
     public static String c_stringFile = "conversation/corvette_rebel_prisoner";
     public boolean corvette_rebel_prisoner_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

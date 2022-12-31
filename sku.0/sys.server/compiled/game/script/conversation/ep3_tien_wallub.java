@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_tien_wallub extends script.base_script
 {
-    public ep3_tien_wallub()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_tien_wallub";
     public boolean ep3_tien_wallub_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -89,7 +87,7 @@ public class ep3_tien_wallub extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_tien_wallub_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -128,7 +126,7 @@ public class ep3_tien_wallub extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_tien_wallub_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -167,7 +165,7 @@ public class ep3_tien_wallub extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_tien_wallub_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -206,7 +204,7 @@ public class ep3_tien_wallub extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_tien_wallub_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -227,7 +225,7 @@ public class ep3_tien_wallub extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_tien_wallub_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -312,7 +310,7 @@ public class ep3_tien_wallub extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

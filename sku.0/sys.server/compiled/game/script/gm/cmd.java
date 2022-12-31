@@ -12,9 +12,7 @@ public class cmd extends script.base_script
 {
     private static final boolean VETERAN_REWARDS_ENABLED = utils.checkConfigFlag("GameServer", "enableVeteranRewards");
 
-    public cmd()
-    {
-    }
+
 
     private static void showAdminCmdSyntax(obj_id self) throws InterruptedException
     {
@@ -3757,9 +3755,9 @@ public class cmd extends script.base_script
             }
             if (canAutoStack && count > 0)
             {
-                for (int i = count; i > 0; i = i - 500)
+                for (int i = count; i > 0; i = i - 9999)
                 {
-                    int tempCount = Math.min(i, 500);
+                    int tempCount = Math.min(i, 9999);
                     staticItemId = static_item.createNewItemFunction(itemName, inventory, tempCount);
                 }
             }

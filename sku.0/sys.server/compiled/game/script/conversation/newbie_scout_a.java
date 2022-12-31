@@ -8,9 +8,7 @@ import script.*;
 
 public class newbie_scout_a extends script.base_script
 {
-    public newbie_scout_a()
-    {
-    }
+
     public static String c_stringFile = "conversation/newbie_scout_a";
     public boolean newbie_scout_a_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -150,7 +148,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -166,7 +164,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -182,7 +180,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -198,7 +196,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -248,7 +246,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -263,7 +261,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -336,7 +334,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -410,7 +408,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -438,7 +436,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -512,7 +510,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -574,7 +572,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -602,7 +600,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -689,7 +687,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -704,7 +702,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -755,7 +753,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -807,7 +805,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -879,7 +877,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -942,7 +940,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -992,7 +990,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int newbie_scout_a_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1021,7 +1019,7 @@ public class newbie_scout_a extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

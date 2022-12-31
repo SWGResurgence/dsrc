@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class nomi_rhane extends script.base_script
 {
-    public nomi_rhane()
-    {
-    }
+
     public static String c_stringFile = "conversation/nomi_rhane";
     public boolean nomi_rhane_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -108,7 +106,7 @@ public class nomi_rhane extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nomi_rhane_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -146,7 +144,7 @@ public class nomi_rhane extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nomi_rhane_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -192,7 +190,7 @@ public class nomi_rhane extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nomi_rhane_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -207,7 +205,7 @@ public class nomi_rhane extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

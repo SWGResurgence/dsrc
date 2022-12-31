@@ -8,9 +8,7 @@ import script.*;
 
 public class som_kenobi_collectors_business_q4p3 extends script.base_script
 {
-    public som_kenobi_collectors_business_q4p3()
-    {
-    }
+
     public static String c_stringFile = "conversation/som_kenobi_collectors_business_q4p3";
     public boolean som_kenobi_collectors_business_q4p3_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -124,7 +122,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -163,7 +161,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -210,7 +208,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -230,7 +228,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -269,7 +267,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -308,7 +306,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -329,7 +327,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -394,7 +392,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -506,7 +504,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -544,7 +542,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -590,7 +588,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -636,7 +634,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -675,7 +673,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -721,7 +719,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -771,7 +769,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -831,7 +829,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -851,7 +849,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -889,7 +887,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -936,7 +934,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -983,7 +981,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1022,7 +1020,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1069,7 +1067,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1119,7 +1117,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1175,7 +1173,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_collectors_business_q4p3_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1195,7 +1193,7 @@ public class som_kenobi_collectors_business_q4p3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

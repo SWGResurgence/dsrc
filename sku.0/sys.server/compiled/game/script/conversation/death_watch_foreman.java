@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class death_watch_foreman extends script.base_script
 {
-    public death_watch_foreman()
-    {
-    }
+
     public static String c_stringFile = "conversation/death_watch_foreman";
     public boolean death_watch_foreman_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -517,7 +515,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -600,7 +598,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -649,7 +647,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -732,7 +730,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -815,7 +813,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -887,7 +885,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -936,7 +934,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -961,7 +959,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1010,7 +1008,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1035,7 +1033,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1084,7 +1082,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1133,7 +1131,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1216,7 +1214,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1265,7 +1263,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1348,7 +1346,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1407,7 +1405,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1432,7 +1430,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1481,7 +1479,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1541,7 +1539,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1566,7 +1564,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1590,7 +1588,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1628,7 +1626,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1677,7 +1675,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1737,7 +1735,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1762,7 +1760,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1845,7 +1843,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1894,7 +1892,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1988,7 +1986,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2021,7 +2019,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2054,7 +2052,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2137,7 +2135,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2186,7 +2184,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2211,7 +2209,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2249,7 +2247,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2271,7 +2269,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2309,7 +2307,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2331,7 +2329,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2353,7 +2351,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2378,7 +2376,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int death_watch_foreman_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2403,7 +2401,7 @@ public class death_watch_foreman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

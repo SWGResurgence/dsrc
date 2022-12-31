@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class rryatt_trail_guide_up extends script.base_script
 {
-    public rryatt_trail_guide_up()
-    {
-    }
+
     public static String c_stringFile = "conversation/rryatt_trail_guide_up";
     public boolean rryatt_trail_guide_up_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -56,7 +54,7 @@ public class rryatt_trail_guide_up extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

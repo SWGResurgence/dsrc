@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_myyydril_cantina_girl extends script.base_script
 {
-    public ep3_myyydril_cantina_girl()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_myyydril_cantina_girl";
     public boolean ep3_myyydril_cantina_girl_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -91,7 +89,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -105,7 +103,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -153,7 +151,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -168,7 +166,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -248,7 +246,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -387,7 +385,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -435,7 +433,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -484,7 +482,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -532,7 +530,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -546,7 +544,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -594,7 +592,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -643,7 +641,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -691,7 +689,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -729,7 +727,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -743,7 +741,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -815,7 +813,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -853,7 +851,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -891,7 +889,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -929,7 +927,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -943,7 +941,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -981,7 +979,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1019,7 +1017,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1057,7 +1055,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_myyydril_cantina_girl_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1071,7 +1069,7 @@ public class ep3_myyydril_cantina_girl extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

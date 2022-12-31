@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class joker_two extends script.base_script
 {
-    public joker_two()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

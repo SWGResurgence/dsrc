@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_etyyy_kint_zsam extends script.base_script
 {
-    public ep3_etyyy_kint_zsam()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_etyyy_kint_zsam";
     public boolean ep3_etyyy_kint_zsam_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -276,7 +274,7 @@ public class ep3_etyyy_kint_zsam extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_kint_zsam_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -292,7 +290,7 @@ public class ep3_etyyy_kint_zsam extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_kint_zsam_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -318,7 +316,7 @@ public class ep3_etyyy_kint_zsam extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_kint_zsam_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -425,7 +423,7 @@ public class ep3_etyyy_kint_zsam extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_kint_zsam_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -508,7 +506,7 @@ public class ep3_etyyy_kint_zsam extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_kint_zsam_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -614,7 +612,7 @@ public class ep3_etyyy_kint_zsam extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_kint_zsam_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -675,7 +673,7 @@ public class ep3_etyyy_kint_zsam extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_kint_zsam_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -714,7 +712,7 @@ public class ep3_etyyy_kint_zsam extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_kint_zsam_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -764,7 +762,7 @@ public class ep3_etyyy_kint_zsam extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_kint_zsam_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -800,7 +798,7 @@ public class ep3_etyyy_kint_zsam extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_kint_zsam_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -839,7 +837,7 @@ public class ep3_etyyy_kint_zsam extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_kint_zsam_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -854,7 +852,7 @@ public class ep3_etyyy_kint_zsam extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

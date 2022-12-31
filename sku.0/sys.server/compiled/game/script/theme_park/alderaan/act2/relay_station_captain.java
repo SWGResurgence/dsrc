@@ -5,9 +5,7 @@ import script.string_id;
 
 public class relay_station_captain extends script.base_script
 {
-    public relay_station_captain()
-    {
-    }
+
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         obj_id station = getObjIdObjVar(self, "coa2.rebel.relay_station");

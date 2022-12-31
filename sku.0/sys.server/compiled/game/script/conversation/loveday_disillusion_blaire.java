@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class loveday_disillusion_blaire extends script.base_script
 {
-    public loveday_disillusion_blaire()
-    {
-    }
+
     public static String c_stringFile = "conversation/loveday_disillusion_blaire";
     public boolean loveday_disillusion_blaire_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -166,7 +164,7 @@ public class loveday_disillusion_blaire extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int loveday_disillusion_blaire_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -181,7 +179,7 @@ public class loveday_disillusion_blaire extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int loveday_disillusion_blaire_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -219,7 +217,7 @@ public class loveday_disillusion_blaire extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int loveday_disillusion_blaire_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -257,7 +255,7 @@ public class loveday_disillusion_blaire extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int loveday_disillusion_blaire_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -272,7 +270,7 @@ public class loveday_disillusion_blaire extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int loveday_disillusion_blaire_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -287,7 +285,7 @@ public class loveday_disillusion_blaire extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int loveday_disillusion_blaire_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -302,7 +300,7 @@ public class loveday_disillusion_blaire extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

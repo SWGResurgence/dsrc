@@ -5,9 +5,7 @@ import script.library.*;
 
 public class qtqc_phase_3 extends script.base_script
 {
-    public qtqc_phase_3()
-    {
-    }
+
     public static String c_stringFile = "conversation/qtqc_phase_3";
     public boolean qtqc_phase_3_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

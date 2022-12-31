@@ -9,9 +9,7 @@ import script.string_id;
 
 public class trap_drowsy_dart extends script.item.trap.trap_base
 {
-    public trap_drowsy_dart()
-    {
-    }
+
     public static final int TRAP_DIFF = 5;
     public static final string_id SID_SYS_EFFECT = new string_id("trap/trap", "trap_drowsy_effect");
     public static final string_id SID_NO_EFFECT = new string_id("trap/trap", "trap_drowsy_effect_no");

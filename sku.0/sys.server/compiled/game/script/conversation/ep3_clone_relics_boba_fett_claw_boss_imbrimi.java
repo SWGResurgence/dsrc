@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_clone_relics_boba_fett_claw_boss_imbrimi extends script.base_script
 {
-    public ep3_clone_relics_boba_fett_claw_boss_imbrimi()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_clone_relics_boba_fett_claw_boss_imbrimi";
     public boolean ep3_clone_relics_boba_fett_claw_boss_imbrimi_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -96,7 +94,7 @@ public class ep3_clone_relics_boba_fett_claw_boss_imbrimi extends script.base_sc
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_boba_fett_claw_boss_imbrimi_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -135,7 +133,7 @@ public class ep3_clone_relics_boba_fett_claw_boss_imbrimi extends script.base_sc
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_boba_fett_claw_boss_imbrimi_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -185,7 +183,7 @@ public class ep3_clone_relics_boba_fett_claw_boss_imbrimi extends script.base_sc
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_boba_fett_claw_boss_imbrimi_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -259,7 +257,7 @@ public class ep3_clone_relics_boba_fett_claw_boss_imbrimi extends script.base_sc
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_boba_fett_claw_boss_imbrimi_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -298,7 +296,7 @@ public class ep3_clone_relics_boba_fett_claw_boss_imbrimi extends script.base_sc
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_boba_fett_claw_boss_imbrimi_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -337,7 +335,7 @@ public class ep3_clone_relics_boba_fett_claw_boss_imbrimi extends script.base_sc
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_boba_fett_claw_boss_imbrimi_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -376,7 +374,7 @@ public class ep3_clone_relics_boba_fett_claw_boss_imbrimi extends script.base_sc
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_boba_fett_claw_boss_imbrimi_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -392,7 +390,7 @@ public class ep3_clone_relics_boba_fett_claw_boss_imbrimi extends script.base_sc
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_boba_fett_claw_boss_imbrimi_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -431,7 +429,7 @@ public class ep3_clone_relics_boba_fett_claw_boss_imbrimi extends script.base_sc
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_boba_fett_claw_boss_imbrimi_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -470,7 +468,7 @@ public class ep3_clone_relics_boba_fett_claw_boss_imbrimi extends script.base_sc
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_boba_fett_claw_boss_imbrimi_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -485,7 +483,7 @@ public class ep3_clone_relics_boba_fett_claw_boss_imbrimi extends script.base_sc
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

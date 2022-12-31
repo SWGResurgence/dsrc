@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class poi_rebel_outpost extends script.theme_park.poi.base
 {
-    public poi_rebel_outpost()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String objective = poiGetObjective(self);

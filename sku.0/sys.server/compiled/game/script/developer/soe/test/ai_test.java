@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class ai_test extends script.base_script
 {
-    public ai_test()
-    {
-    }
+
     public void end(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "testPet"))

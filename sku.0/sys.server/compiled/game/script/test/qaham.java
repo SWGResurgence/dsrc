@@ -6,9 +6,7 @@ import java.util.StringTokenizer;
 
 public class qaham extends script.base_script
 {
-    public qaham()
-    {
-    }
+
     public static final String QA_REGEN_OBJVAR = "test.qaham.OriginalActionRegen";
     public static final float QA_MASSIVE_REGEN_RATE = 10000;
     public int OnAttach(obj_id self) throws InterruptedException

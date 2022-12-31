@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class stealth_monitor extends script.base_script
 {
-    public stealth_monitor()
-    {
-    }
+
     public int OnLocomotionChanged(obj_id self, int newLocomotion, int oldLocomotion) throws InterruptedException
     {
         stealth.OnLocomotionChange(self, oldLocomotion, newLocomotion);

@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class setup extends script.base_script
 {
-    public setup()
-    {
-    }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);

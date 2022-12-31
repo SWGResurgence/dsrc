@@ -8,9 +8,7 @@ import script.*;
 
 public class mtp_hideout_access_lieutenant_kaiya extends script.base_script
 {
-    public mtp_hideout_access_lieutenant_kaiya()
-    {
-    }
+
     public static String c_stringFile = "conversation/mtp_hideout_access_lieutenant_kaiya";
     public boolean mtp_hideout_access_lieutenant_kaiya_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -113,7 +111,7 @@ public class mtp_hideout_access_lieutenant_kaiya extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_access_lieutenant_kaiya_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -129,7 +127,7 @@ public class mtp_hideout_access_lieutenant_kaiya extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_access_lieutenant_kaiya_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -168,7 +166,7 @@ public class mtp_hideout_access_lieutenant_kaiya extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_access_lieutenant_kaiya_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -208,7 +206,7 @@ public class mtp_hideout_access_lieutenant_kaiya extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_access_lieutenant_kaiya_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -223,7 +221,7 @@ public class mtp_hideout_access_lieutenant_kaiya extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_access_lieutenant_kaiya_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -263,7 +261,7 @@ public class mtp_hideout_access_lieutenant_kaiya extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_access_lieutenant_kaiya_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -302,7 +300,7 @@ public class mtp_hideout_access_lieutenant_kaiya extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_access_lieutenant_kaiya_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -317,7 +315,7 @@ public class mtp_hideout_access_lieutenant_kaiya extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

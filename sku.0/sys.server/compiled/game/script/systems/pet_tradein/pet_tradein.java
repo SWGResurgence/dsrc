@@ -11,9 +11,7 @@ import script.string_id;
 
 public class pet_tradein extends script.base_script
 {
-    public pet_tradein()
-    {
-    }
+
     public static final String CREATURE_TRADEIN = "creature_tradein";
     public static final String TRADE_DATA = "datatables/dispenser/creature_trade_in.iff";
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";

@@ -14,14 +14,16 @@ package script.conversation;
 // Library Includes
 // ======================================================================
 
-import script.library.*;
+import script.library.ai_lib;
+import script.library.chat;
+import script.library.groundquests;
+import script.library.utils;
 import script.*;
 
 public class wod_kyrene extends script.base_script
 {
-	public wod_kyrene()
-	{
-	}
+
+
 // ======================================================================
 // Script Constants
 // ======================================================================
@@ -353,7 +355,7 @@ int wod_kyrene_handleBranch1 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -381,7 +383,7 @@ int wod_kyrene_handleBranch3 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -409,7 +411,7 @@ int wod_kyrene_handleBranch5 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -437,7 +439,7 @@ int wod_kyrene_handleBranch7 (obj_id player, obj_id npc, string_id response) thr
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -560,7 +562,7 @@ int wod_kyrene_handleBranch10 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -668,7 +670,7 @@ int wod_kyrene_handleBranch11 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -701,7 +703,7 @@ int wod_kyrene_handleBranch18 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -729,7 +731,7 @@ int wod_kyrene_handleBranch20 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -782,7 +784,7 @@ int wod_kyrene_handleBranch22 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -851,7 +853,7 @@ int wod_kyrene_handleBranch25 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -899,7 +901,7 @@ int wod_kyrene_handleBranch26 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -927,7 +929,7 @@ int wod_kyrene_handleBranch29 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -984,7 +986,7 @@ int wod_kyrene_handleBranch31 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1014,7 +1016,7 @@ int wod_kyrene_handleBranch32 (obj_id player, obj_id npc, string_id response) th
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------

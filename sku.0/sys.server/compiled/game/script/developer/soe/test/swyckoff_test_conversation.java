@@ -8,9 +8,7 @@ import script.*;
 
 public class swyckoff_test_conversation extends script.base_script
 {
-    public swyckoff_test_conversation()
-    {
-    }
+
     public static String c_stringFile = "conversation/test/swyckoff_test_conversation";
     public boolean swyckoff_test_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -150,7 +148,7 @@ public class swyckoff_test_conversation extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int swyckoff_test_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -166,7 +164,7 @@ public class swyckoff_test_conversation extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int swyckoff_test_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -180,7 +178,7 @@ public class swyckoff_test_conversation extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int swyckoff_test_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -204,7 +202,7 @@ public class swyckoff_test_conversation extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

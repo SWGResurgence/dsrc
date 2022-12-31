@@ -5,9 +5,7 @@ import script.string_id;
 
 public class pounce_convo extends script.base_script
 {
-    public pounce_convo()
-    {
-    }
+
     public static final String CONVO = "pounce_convo";
     public int OnAttach(obj_id self) throws InterruptedException
     {

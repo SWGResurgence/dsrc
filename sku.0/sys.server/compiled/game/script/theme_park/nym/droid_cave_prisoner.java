@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class droid_cave_prisoner extends script.base_script
 {
-    public droid_cave_prisoner()
-    {
-    }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         failRescueQuest(self);

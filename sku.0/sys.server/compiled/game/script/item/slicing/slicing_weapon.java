@@ -8,9 +8,7 @@ import script.string_id;
 
 public class slicing_weapon extends script.base_script
 {
-    public slicing_weapon()
-    {
-    }
+
     public static final string_id SID_SLICE = new string_id("slicing/slicing", "slice");
     public static final string_id SID_REPAIR = new string_id("slicing/slicing", "repair");
     public static final string_id SID_NO_KIT = new string_id("slicing/slicing", "no_weapon_kit");

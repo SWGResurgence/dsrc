@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class camp_defense_spawner extends script.base_script
 {
-    public camp_defense_spawner()
-    {
-    }
+
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_trigger";
     public static final String CLIENT_EFFECT = "appearance/pt_smoke_puff.prt";

@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class gcw_city_kit_turret extends script.systems.gcw.gcw_city_kit
 {
-    public gcw_city_kit_turret()
-    {
-    }
+
     public static final int CONSTRUCTION_HP_TURRET = 5000;
     public static final String[] lowImperials = 
     {

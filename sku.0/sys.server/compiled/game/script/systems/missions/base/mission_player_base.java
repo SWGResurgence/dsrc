@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class mission_player_base extends script.systems.missions.base.mission_dynamic_base
 {
-    public mission_player_base()
-    {
-    }
+    
     public void playerDestructionIncomplete(obj_id objMission) throws InterruptedException
     {
         dictionary dctParams = new dictionary();

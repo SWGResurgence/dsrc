@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class guard_spawner extends script.base_script
 {
-    public guard_spawner()
-    {
-    }
+
     public static final String guardTable = "datatables/npc/guard_spawner/guard.iff";
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import script.*;
 
 public class wrapped_lifeday_present_two extends script.base_script
 {
-    public wrapped_lifeday_present_two()
-    {
-    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);

@@ -5,9 +5,7 @@ import script.*;
 
 public class rebel_remembrance_day_wedge extends script.base_script
 {
-    public rebel_remembrance_day_wedge()
-    {
-    }
+
     public static String c_stringFile = "conversation/rebel_remembrance_day_wedge";
     public boolean rebel_remembrance_day_wedge_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -79,7 +77,7 @@ public class rebel_remembrance_day_wedge extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_wedge_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -119,7 +117,7 @@ public class rebel_remembrance_day_wedge extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_wedge_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -158,7 +156,7 @@ public class rebel_remembrance_day_wedge extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_wedge_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -197,7 +195,7 @@ public class rebel_remembrance_day_wedge extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_wedge_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -212,7 +210,7 @@ public class rebel_remembrance_day_wedge extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -8,9 +8,7 @@ import script.string_id;
 
 public class marketplace_spawner extends script.base_script
 {
-    public marketplace_spawner()
-    {
-    }
+
     public static final String STF = "bestine";
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -10,9 +10,7 @@ import script.obj_id;
 
 public class spawner_random_proxy extends script.base_script
 {
-    public spawner_random_proxy()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("holidaySpawner", "spawner_random.OnAttach: Initialized for: " + self);

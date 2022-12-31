@@ -5,9 +5,7 @@ import script.*;
 
 public class som_exploration_marker extends script.base_script
 {
-    public som_exploration_marker()
-    {
-    }
+
     public static String c_stringFile = "conversation/som_exploration_marker";
     public boolean som_exploration_marker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -121,7 +119,7 @@ public class som_exploration_marker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_exploration_marker_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -238,7 +236,7 @@ public class som_exploration_marker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_exploration_marker_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -326,7 +324,7 @@ public class som_exploration_marker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_exploration_marker_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -376,7 +374,7 @@ public class som_exploration_marker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_exploration_marker_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -415,7 +413,7 @@ public class som_exploration_marker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_exploration_marker_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -454,7 +452,7 @@ public class som_exploration_marker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_exploration_marker_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -493,7 +491,7 @@ public class som_exploration_marker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_exploration_marker_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -543,7 +541,7 @@ public class som_exploration_marker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_exploration_marker_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -659,7 +657,7 @@ public class som_exploration_marker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_exploration_marker_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -747,7 +745,7 @@ public class som_exploration_marker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

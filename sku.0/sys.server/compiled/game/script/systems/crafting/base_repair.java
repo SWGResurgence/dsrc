@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class base_repair extends script.base_script
 {
-    public base_repair()
-    {
-    }
+
     public static final String SCRIPT_ME = "systems.crafting.base_repair";
     public static final String REPAIR_LIST_TITLE = "@sui:repairable_objects";
     public static final String REPAIR_LIST_PROMPT = "@sui:select_repair";

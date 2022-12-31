@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_coronet_lt_jasper extends script.base_script
 {
-    public corellia_coronet_lt_jasper()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_coronet_lt_jasper";
     public boolean corellia_coronet_lt_jasper_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -211,7 +209,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -262,7 +260,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -287,7 +285,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -302,7 +300,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -340,7 +338,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -378,7 +376,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -427,7 +425,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -452,7 +450,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -477,7 +475,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -527,7 +525,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -552,7 +550,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -590,7 +588,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -628,7 +626,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -677,7 +675,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -702,7 +700,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -727,7 +725,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -775,7 +773,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -790,7 +788,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -838,7 +836,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -853,7 +851,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -902,7 +900,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -951,7 +949,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1010,7 +1008,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_lt_jasper_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1035,7 +1033,7 @@ public class corellia_coronet_lt_jasper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
 {
-    public pvp_spec_ops_rebel_armor_dye_kit()
-    {
-    }
+    
     public static final String[] COLORS = 
     {
         "@tool/customizer:rebpvp_color_grey",

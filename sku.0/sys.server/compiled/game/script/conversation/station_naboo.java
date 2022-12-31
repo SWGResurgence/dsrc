@@ -5,9 +5,7 @@ import script.*;
 
 public class station_naboo extends script.base_script
 {
-    public station_naboo()
-    {
-    }
+
     public static String c_stringFile = "conversation/station_naboo";
     public boolean station_naboo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -548,7 +546,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -707,7 +705,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1123,7 +1121,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1596,7 +1594,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1629,7 +1627,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1662,7 +1660,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1695,7 +1693,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1728,7 +1726,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1761,7 +1759,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1794,7 +1792,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1827,7 +1825,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1852,7 +1850,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1885,7 +1883,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2123,7 +2121,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2156,7 +2154,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2189,7 +2187,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2222,7 +2220,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2255,7 +2253,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2314,7 +2312,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2373,7 +2371,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2432,7 +2430,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2457,7 +2455,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_naboo_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2581,7 +2579,7 @@ public class station_naboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

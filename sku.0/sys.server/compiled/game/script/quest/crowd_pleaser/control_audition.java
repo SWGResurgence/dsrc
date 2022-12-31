@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class control_audition extends script.base_script
 {
-    public control_audition()
-    {
-    }
+
     public static final String PERFORMANCE_DATATABLE = "datatables/performance/performance.iff";
     public static final String PLAYER_SCRIPT = "quest.crowd_pleaser.player_performance";
     public static final String STATUS_OBJVAR = "quest.crowd_pleaser.status";

@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_weapon_efficiency_booster extends script.systems.crafting.space.weapon.crafting_base_space_weapon_component
 {
-    public crafting_weapon_efficiency_booster()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

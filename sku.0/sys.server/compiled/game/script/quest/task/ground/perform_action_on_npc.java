@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class perform_action_on_npc extends script.quest.task.ground.base_task
 {
-    public perform_action_on_npc()
-    {
-    }
+
     public static final String dataTableColumnActionName = "ACTION_NAME";
     public static final String taskType = "perform_action_on_npc";
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException

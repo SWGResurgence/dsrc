@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class target_dummy extends script.base_script
 {
-    public target_dummy()
-    {
-    }
+
     public static final String TERMINAL_LOGGING = "target_creature";
     public static final boolean LOGGING_ON = true;
     public static final String OWNER_OBJVAR = "targetDummyOwner";

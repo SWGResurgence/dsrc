@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class hk_squad_member extends script.base_script
 {
-    public hk_squad_member()
-    {
-    }
+
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

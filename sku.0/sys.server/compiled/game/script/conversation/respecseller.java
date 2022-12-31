@@ -5,9 +5,7 @@ import script.*;
 
 public class respecseller extends script.base_script
 {
-    public respecseller()
-    {
-    }
+
     public static String c_stringFile = "conversation/respecseller";
     public boolean respecseller_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -512,7 +510,7 @@ public class respecseller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int respecseller_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -537,7 +535,7 @@ public class respecseller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int respecseller_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -562,7 +560,7 @@ public class respecseller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int respecseller_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -587,7 +585,7 @@ public class respecseller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int respecseller_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -612,7 +610,7 @@ public class respecseller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int respecseller_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -650,7 +648,7 @@ public class respecseller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int respecseller_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -767,7 +765,7 @@ public class respecseller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int respecseller_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -796,7 +794,7 @@ public class respecseller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int respecseller_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -836,7 +834,7 @@ public class respecseller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

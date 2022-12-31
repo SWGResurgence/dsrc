@@ -5,9 +5,7 @@ import script.library.utils;
 
 public class animate_object extends script.base_script
 {
-    public animate_object()
-    {
-    }
+
     public static final String LOCKOUT = "animation_lockout";
     public static final String LOCKOUT_TIME = "lockout_time";
     public static final String USE_STRING = "use_string";

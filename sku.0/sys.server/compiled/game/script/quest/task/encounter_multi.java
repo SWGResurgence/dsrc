@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class encounter_multi extends script.base_script
 {
-    public encounter_multi()
-    {
-    }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         if (quests.isMyQuest(questRow, "quest.task.encounter_multi"))

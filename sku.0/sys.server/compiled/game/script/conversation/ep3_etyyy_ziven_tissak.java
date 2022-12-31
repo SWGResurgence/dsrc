@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_etyyy_ziven_tissak extends script.base_script
 {
-    public ep3_etyyy_ziven_tissak()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_etyyy_ziven_tissak";
     public boolean ep3_etyyy_ziven_tissak_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -190,7 +188,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -270,7 +268,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -319,7 +317,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -399,7 +397,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -479,7 +477,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -528,7 +526,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -608,7 +606,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -688,7 +686,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -737,7 +735,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -817,7 +815,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -866,7 +864,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -938,7 +936,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -987,7 +985,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1059,7 +1057,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1108,7 +1106,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1180,7 +1178,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1252,7 +1250,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1301,7 +1299,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_etyyy_ziven_tissak_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1316,7 +1314,7 @@ public class ep3_etyyy_ziven_tissak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

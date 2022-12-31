@@ -5,9 +5,7 @@ import script.*;
 
 public class stormtrooper_leader_quarantine_zone extends script.base_script
 {
-    public stormtrooper_leader_quarantine_zone()
-    {
-    }
+
     public static String c_stringFile = "conversation/stormtrooper_leader_quarantine_zone";
     public boolean stormtrooper_leader_quarantine_zone_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -91,7 +89,7 @@ public class stormtrooper_leader_quarantine_zone extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int stormtrooper_leader_quarantine_zone_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -106,7 +104,7 @@ public class stormtrooper_leader_quarantine_zone extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int stormtrooper_leader_quarantine_zone_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -121,7 +119,7 @@ public class stormtrooper_leader_quarantine_zone extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int stormtrooper_leader_quarantine_zone_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -136,7 +134,7 @@ public class stormtrooper_leader_quarantine_zone extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int stormtrooper_leader_quarantine_zone_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -174,7 +172,7 @@ public class stormtrooper_leader_quarantine_zone extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int stormtrooper_leader_quarantine_zone_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -212,7 +210,7 @@ public class stormtrooper_leader_quarantine_zone extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int stormtrooper_leader_quarantine_zone_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -227,7 +225,7 @@ public class stormtrooper_leader_quarantine_zone extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int stormtrooper_leader_quarantine_zone_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -242,7 +240,7 @@ public class stormtrooper_leader_quarantine_zone extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

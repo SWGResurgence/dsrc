@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class furniture extends script.base_script
 {
-    public furniture()
-    {
-    }
+
     public static final String VAR_CHAIR_OCCUPIED_BASE = "occupied";
     public static final String VAR_CHAIR_OCCUPIED_IDS = "occupied.ids";
     public static final String VAR_CHAIR_OCCUPIED_LIMIT = "occupied.limit";

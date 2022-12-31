@@ -5,9 +5,7 @@ import script.*;
 
 public class e3_bridge_handler extends script.base_script
 {
-    public e3_bridge_handler()
-    {
-    }
+
     public static String c_stringFile = "conversation/e3_bridge_handler";
     public boolean e3_bridge_handler_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -34,7 +32,7 @@ public class e3_bridge_handler extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

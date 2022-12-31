@@ -5,9 +5,7 @@ import script.*;
 
 public class fs_medic_puzzle_head_medic extends script.base_script
 {
-    public fs_medic_puzzle_head_medic()
-    {
-    }
+
     public static String c_stringFile = "conversation/fs_medic_puzzle_head_medic";
     public boolean fs_medic_puzzle_head_medic_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

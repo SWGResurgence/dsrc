@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class st3_south_battle extends script.base_script
 {
-    public st3_south_battle()
-    {
-    }
+
     public static final String VOLUME_NAME = "quest_area";
     public int OnAttach(obj_id self) throws InterruptedException
     {

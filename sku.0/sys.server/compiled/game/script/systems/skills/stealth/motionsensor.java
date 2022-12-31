@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class motionsensor extends script.base_script
 {
-    public motionsensor()
-    {
-    }
+
     public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("#####");
     public int OnInitialize(obj_id self) throws InterruptedException
     {

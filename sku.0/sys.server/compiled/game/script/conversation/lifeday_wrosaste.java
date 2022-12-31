@@ -27,11 +27,7 @@ public static String c_stringFile = "conversation/lifeday_wrosaste";
 // Script Constants
 // ======================================================================
 
-	public lifeday_wrosaste()
 
-	{
-
-	}
 
 // ======================================================================
 // Script Conditions
@@ -126,7 +122,7 @@ int lifeday_wrosaste_handleBranch1 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -230,7 +226,7 @@ int lifeday_wrosaste_handleBranch2 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -258,7 +254,7 @@ int lifeday_wrosaste_handleBranch3 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------

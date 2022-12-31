@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class antagonist extends script.poi.base.scenario_actor
 {
-    public antagonist()
-    {
-    }
+
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiMysteriousDisk Antagonist";
     public int OnAttach(obj_id self) throws InterruptedException

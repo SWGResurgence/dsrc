@@ -5,9 +5,7 @@ import script.*;
 
 public class c_ddroid_valance extends script.base_script
 {
-    public c_ddroid_valance()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_ddroid_valance";
     public boolean c_ddroid_valance_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -158,7 +156,7 @@ public class c_ddroid_valance extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_valance_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -196,7 +194,7 @@ public class c_ddroid_valance extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_valance_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -234,7 +232,7 @@ public class c_ddroid_valance extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_valance_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -294,7 +292,7 @@ public class c_ddroid_valance extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_valance_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -364,7 +362,7 @@ public class c_ddroid_valance extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_valance_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -389,7 +387,7 @@ public class c_ddroid_valance extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_valance_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -456,7 +454,7 @@ public class c_ddroid_valance extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_valance_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -481,7 +479,7 @@ public class c_ddroid_valance extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_valance_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -540,7 +538,7 @@ public class c_ddroid_valance extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_valance_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -565,7 +563,7 @@ public class c_ddroid_valance extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_valance_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -590,7 +588,7 @@ public class c_ddroid_valance extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_valance_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -604,7 +602,7 @@ public class c_ddroid_valance extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

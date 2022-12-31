@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class jawa_spawner extends script.base_script
 {
-    public jawa_spawner()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkForStart", null, 30, true);

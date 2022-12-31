@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class avatar_boss_fight_room extends script.base_script
 {
-    public avatar_boss_fight_room()
-    {
-    }
+
     public int OnReceivedItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))

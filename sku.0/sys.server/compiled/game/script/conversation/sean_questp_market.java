@@ -7,9 +7,7 @@ import script.*;
 
 public class sean_questp_market extends script.base_script
 {
-    public sean_questp_market()
-    {
-    }
+
     public static String c_stringFile = "conversation/sean_questp_market";
     public boolean sean_questp_market_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -131,7 +129,7 @@ public class sean_questp_market extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int sean_questp_market_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -179,7 +177,7 @@ public class sean_questp_market extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int sean_questp_market_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -217,7 +215,7 @@ public class sean_questp_market extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int sean_questp_market_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -255,7 +253,7 @@ public class sean_questp_market extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int sean_questp_market_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -278,7 +276,7 @@ public class sean_questp_market extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

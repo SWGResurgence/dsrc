@@ -9,9 +9,7 @@ import script.string_id;
 
 public class npc_mission_05_convo extends script.systems.missions.base.mission_dynamic_base
 {
-    public npc_mission_05_convo()
-    {
-    }
+
     public static final String CONVO = "npc_mission/npc_mission_05";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

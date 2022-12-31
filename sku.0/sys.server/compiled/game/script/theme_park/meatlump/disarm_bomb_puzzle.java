@@ -7,9 +7,7 @@ import java.util.Random;
 
 public class disarm_bomb_puzzle extends script.base_script
 {
-    public disarm_bomb_puzzle()
-    {
-    }
+
     public static final boolean LOGGING_ON = false;
     public static final String VAR_PREFIX = "meatlump_target_map";
     public static final String PID_NAME = VAR_PREFIX + ".pid";

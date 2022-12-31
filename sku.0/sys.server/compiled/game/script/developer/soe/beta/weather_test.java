@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class weather_test extends script.base_script
 {
-    public weather_test()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Weather Test Script Attached");

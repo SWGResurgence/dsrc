@@ -5,9 +5,7 @@ import script.*;
 
 public class ran_machado extends script.base_script
 {
-    public ran_machado()
-    {
-    }
+
     public static String c_stringFile = "conversation/ran_machado";
     public boolean ran_machado_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -74,7 +72,7 @@ public class ran_machado extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ran_machado_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -94,7 +92,7 @@ public class ran_machado extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ran_machado_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -133,7 +131,7 @@ public class ran_machado extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ran_machado_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -172,7 +170,7 @@ public class ran_machado extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ran_machado_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -211,7 +209,7 @@ public class ran_machado extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ran_machado_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -227,7 +225,7 @@ public class ran_machado extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.string_id;
 
 public class npe_medbay_sequence extends script.base_script
 {
-    public npe_medbay_sequence()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

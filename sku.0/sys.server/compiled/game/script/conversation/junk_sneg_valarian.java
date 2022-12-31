@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class junk_sneg_valarian extends script.base_script
 {
-    public junk_sneg_valarian()
-    {
-    }
+
     public static String c_stringFile = "conversation/junk_sneg_valarian";
     public boolean junk_sneg_valarian_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -87,7 +85,7 @@ public class junk_sneg_valarian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int junk_sneg_valarian_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -146,7 +144,7 @@ public class junk_sneg_valarian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int junk_sneg_valarian_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -205,7 +203,7 @@ public class junk_sneg_valarian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int junk_sneg_valarian_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -230,7 +228,7 @@ public class junk_sneg_valarian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

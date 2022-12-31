@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class kusak extends script.base_script
 {
-    public kusak()
-    {
-    }
+
     public static String c_stringFile = "conversation/kusak";
     public boolean kusak_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -442,7 +440,7 @@ public class kusak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int kusak_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -556,7 +554,7 @@ public class kusak extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public static final String[] ALL_WEED_TEMPLATES = 
     {

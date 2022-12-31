@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class public_instance_setup extends script.base_script
 {
-    public public_instance_setup()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         getClusterWideData("public_instances", getStringObjVar(self, "instance_name") + "_" + self, true, self);

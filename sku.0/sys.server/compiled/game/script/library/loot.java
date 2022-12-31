@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class loot extends script.base_script
 {
-    public loot()
-    {
-    }
+    
     public static final int COL_LOOT_MULTIPLIER_ON = 1;
     public static final String TBL_CREATURES = "datatables/mob/creatures.iff";
     public static final String TBL_COMPONENT_DATA = "datatables/loot/component_data.iff";

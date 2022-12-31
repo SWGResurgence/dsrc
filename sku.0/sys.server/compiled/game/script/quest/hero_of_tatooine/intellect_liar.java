@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class intellect_liar extends script.base_script
 {
-    public intellect_liar()
-    {
-    }
+
     public static final String CONVO = "quest/hero_of_tatooine/intellect_liar";
     public static final String HERO_OF_TATOOINE_COMPLETE = "quest.hero_of_tatooine.complete";
     public static final String SPAWNER_OBJVAR = "quest.hero_of_tatooine.intellect.spawner";

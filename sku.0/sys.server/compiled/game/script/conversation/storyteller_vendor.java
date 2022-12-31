@@ -8,9 +8,7 @@ import script.*;
 
 public class storyteller_vendor extends script.base_script
 {
-    public storyteller_vendor()
-    {
-    }
+
     public static String c_stringFile = "conversation/storyteller_vendor";
     public boolean storyteller_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -18,10 +16,6 @@ public class storyteller_vendor extends script.base_script
     }
     public boolean storyteller_vendor_condition_checkFromToken(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (isFreeTrialAccount(player))
-        {
-            return false;
-        }
         if (hasObjVar(npc, "storytellerid"))
         {
             obj_id storytelledId = getObjIdObjVar(npc, "storytellerid");
@@ -71,7 +65,7 @@ public class storyteller_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

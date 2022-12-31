@@ -11,9 +11,7 @@ import java.util.StringTokenizer;
 
 public class inspect extends script.base_script
 {
-    public inspect()
-    {
-    }
+
     public static final string_id SID_TARGET_WAYPOINTS = new string_id("space/quest", "inspect_target_waypoints");
     public static final string_id SID_ABANDONED_INSPECT = new string_id("space/quest", "inspect_abandoned");
     public static final string_id SID_RECOVERED_CARGO = new string_id("space/quest", "inspect_recovered_cargo");

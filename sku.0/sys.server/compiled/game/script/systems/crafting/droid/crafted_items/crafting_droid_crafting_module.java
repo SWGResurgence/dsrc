@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_droid_crafting_module extends script.systems.crafting.droid.crafting_base_droid_component
 {
-    public crafting_droid_crafting_module()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

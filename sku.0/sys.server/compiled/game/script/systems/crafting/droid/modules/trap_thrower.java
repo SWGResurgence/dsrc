@@ -5,9 +5,7 @@ import script.library.*;
 
 public class trap_thrower extends script.base_script
 {
-    public trap_thrower()
-    {
-    }
+
     public static final String STF = "pet/droid_modules";
     public static final String MAX_TRAP_LOAD = "max_trap_load";
     public static final String RECENT_TRAP_THROWN = "thrown.recent_trap";

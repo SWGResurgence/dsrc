@@ -9,9 +9,7 @@ import script.string_id;
 
 public class rancher extends script.base_script
 {
-    public rancher()
-    {
-    }
+
     public static final String STF_FILE = "quest/hero_of_tatooine/rancher";
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -8,9 +8,7 @@ import script.string_id;
 
 public class terminal_items extends script.base_script
 {
-    public terminal_items()
-    {
-    }
+
     public static final String CONVO = "city/bestine/terminal_items";
     public static final String DATATABLE_NAME = "datatables/city/bestine/terminal_items.iff";
     public static final String GET_QUEST_ITEM_VOLUME_NAME = "getQuestItemTriggerVolume";

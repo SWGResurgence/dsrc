@@ -7,9 +7,7 @@ import script.library.trial;
 
 public class end_terminal extends script.base_script
 {
-    public end_terminal()
-    {
-    }
+
     public static final String DECREPIT_STF = "mustafar/decrepit_droid_factory";
     public static final string_id SID_ACTIVATE_FACTORY = new string_id(DECREPIT_STF, "activate_factory");
     public static final string_id SID_FACTORY_ACTIVE = new string_id(DECREPIT_STF, "factory_active");

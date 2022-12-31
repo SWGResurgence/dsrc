@@ -13,9 +13,7 @@ import script.obj_id;
 
 public class resurgence_generic extends script.base_script
 {
-    public resurgence_generic()
-    {
-    }
+
 
     public static int OnAttach(obj_id self) throws InterruptedException
     {

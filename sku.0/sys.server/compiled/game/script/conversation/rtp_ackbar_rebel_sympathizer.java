@@ -8,9 +8,7 @@ import script.*;
 
 public class rtp_ackbar_rebel_sympathizer extends script.base_script
 {
-    public rtp_ackbar_rebel_sympathizer()
-    {
-    }
+
     public static String c_stringFile = "conversation/rtp_ackbar_rebel_sympathizer";
     public boolean rtp_ackbar_rebel_sympathizer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -40,7 +38,7 @@ public class rtp_ackbar_rebel_sympathizer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

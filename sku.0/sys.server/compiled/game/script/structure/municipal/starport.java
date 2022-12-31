@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class starport extends script.base_script
 {
-    public starport()
-    {
-    }
+    
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "starport::OnAttach -- " + self);

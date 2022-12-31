@@ -7,9 +7,7 @@ import script.string_id;
 
 public class travel extends script.terminal.base.base_terminal
 {
-    public travel()
-    {
-    }
+
     public static final string_id SID_TRAVEL_OPTIONS = new string_id("terminal_ui", "travel_options");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

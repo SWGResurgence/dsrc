@@ -8,9 +8,7 @@ import script.*;
 
 public class inquisitor_admin extends script.base_script
 {
-    public inquisitor_admin()
-    {
-    }
+
     public static String c_stringFile = "conversation/inquisitor_admin";
     public boolean inquisitor_admin_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -231,7 +229,7 @@ public class inquisitor_admin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int inquisitor_admin_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -269,7 +267,7 @@ public class inquisitor_admin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int inquisitor_admin_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -307,7 +305,7 @@ public class inquisitor_admin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int inquisitor_admin_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -345,7 +343,7 @@ public class inquisitor_admin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int inquisitor_admin_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -383,7 +381,7 @@ public class inquisitor_admin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int inquisitor_admin_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -402,7 +400,7 @@ public class inquisitor_admin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int inquisitor_admin_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -440,7 +438,7 @@ public class inquisitor_admin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int inquisitor_admin_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -480,7 +478,7 @@ public class inquisitor_admin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int inquisitor_admin_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -519,7 +517,7 @@ public class inquisitor_admin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int inquisitor_admin_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -557,7 +555,7 @@ public class inquisitor_admin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int inquisitor_admin_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -595,7 +593,7 @@ public class inquisitor_admin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int inquisitor_admin_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -611,7 +609,7 @@ public class inquisitor_admin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

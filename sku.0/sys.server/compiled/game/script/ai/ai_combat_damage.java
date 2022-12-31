@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class ai_combat_damage extends script.base_script
 {
-    public ai_combat_damage()
-    {
-    }
+
     public static void addAttack(obj_id attacker) throws InterruptedException
     {
         final obj_id self = getSelf();

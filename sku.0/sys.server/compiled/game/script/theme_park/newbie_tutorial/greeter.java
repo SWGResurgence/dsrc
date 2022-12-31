@@ -6,9 +6,7 @@ import script.library.colors;
 
 public class greeter extends script.theme_park.newbie_tutorial.tutorial_base
 {
-    public greeter()
-    {
-    }
+
     public int initiateConvo(obj_id self, dictionary params) throws InterruptedException
     {
         makeStaticWaypoint(self);

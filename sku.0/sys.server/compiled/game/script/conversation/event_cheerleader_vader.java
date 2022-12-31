@@ -5,9 +5,7 @@ import script.*;
 
 public class event_cheerleader_vader extends script.base_script
 {
-    public event_cheerleader_vader()
-    {
-    }
+
     public static String c_stringFile = "conversation/event_cheerleader_vader";
     public boolean event_cheerleader_vader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -213,7 +211,7 @@ public class event_cheerleader_vader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_cheerleader_vader_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -263,7 +261,7 @@ public class event_cheerleader_vader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_cheerleader_vader_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -291,7 +289,7 @@ public class event_cheerleader_vader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_cheerleader_vader_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -529,7 +527,7 @@ public class event_cheerleader_vader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_cheerleader_vader_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -568,7 +566,7 @@ public class event_cheerleader_vader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_cheerleader_vader_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -584,7 +582,7 @@ public class event_cheerleader_vader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_cheerleader_vader_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -623,7 +621,7 @@ public class event_cheerleader_vader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_cheerleader_vader_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -639,7 +637,7 @@ public class event_cheerleader_vader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_cheerleader_vader_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -655,7 +653,7 @@ public class event_cheerleader_vader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_cheerleader_vader_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -671,7 +669,7 @@ public class event_cheerleader_vader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_cheerleader_vader_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -687,7 +685,7 @@ public class event_cheerleader_vader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_cheerleader_vader_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -726,7 +724,7 @@ public class event_cheerleader_vader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_cheerleader_vader_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -742,7 +740,7 @@ public class event_cheerleader_vader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

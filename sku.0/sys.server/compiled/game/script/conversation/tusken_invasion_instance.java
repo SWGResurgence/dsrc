@@ -5,9 +5,7 @@ import script.*;
 
 public class tusken_invasion_instance extends script.base_script
 {
-    public tusken_invasion_instance()
-    {
-    }
+
     public static String c_stringFile = "conversation/tusken_invasion_instance";
     public boolean tusken_invasion_instance_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -63,7 +61,7 @@ public class tusken_invasion_instance extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tusken_invasion_instance_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -78,7 +76,7 @@ public class tusken_invasion_instance extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

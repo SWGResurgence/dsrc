@@ -5,9 +5,7 @@ import script.library.*;
 
 public class village_quharek extends script.base_script
 {
-    public village_quharek()
-    {
-    }
+
     public static String c_stringFile = "conversation/village_quharek";
     public boolean village_quharek_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

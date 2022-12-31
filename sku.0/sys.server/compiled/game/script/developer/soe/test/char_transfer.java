@@ -6,9 +6,7 @@ import script.script_entry;
 
 public class char_transfer extends script.base.remote_object_requester
 {
-    public char_transfer()
-    {
-    }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (isGod(self))

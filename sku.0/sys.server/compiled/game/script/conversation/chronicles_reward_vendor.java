@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class chronicles_reward_vendor extends script.base_script
 {
-    public chronicles_reward_vendor()
-    {
-    }
+
     public static String c_stringFile = "conversation/chronicles_reward_vendor";
     public boolean chronicles_reward_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.string_id;
 
 public class base extends script.base_script
 {
-    public base()
-    {
-    }
+
     public static final String VAR_GOT = "container.got";
     public static final string_id PROSE_WRONG_ITEM_TYPE = new string_id("error_message", "wrong_item_type");
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException

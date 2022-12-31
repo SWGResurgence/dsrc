@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class debug_completed extends script.quest.task.ground.base_task
 {
-    public debug_completed()
-    {
-    }
+
     public int failedDebugTask(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("groundquests", "quest.task.ground.debug_completed:failedDebugTask(" + params + ")");

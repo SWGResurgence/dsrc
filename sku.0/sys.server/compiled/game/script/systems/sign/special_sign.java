@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class special_sign extends script.base_script
 {
-    public special_sign()
-    {
-    }
+
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "special_sign";
     public static final string_id SID_NO_USE_WHILE_DEAD = new string_id("player_structure", "while_dead");

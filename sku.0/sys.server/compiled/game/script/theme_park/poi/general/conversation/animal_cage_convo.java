@@ -7,9 +7,7 @@ import script.string_id;
 
 public class animal_cage_convo extends script.base_script
 {
-    public animal_cage_convo()
-    {
-    }
+
     public static final String CONVO = "npc_reaction/animal_cage";
     public static final String STF_FILE = "npc_reaction/animal_cage";
     public int OnAttach(obj_id self) throws InterruptedException

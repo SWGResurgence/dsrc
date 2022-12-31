@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class cannot_die_healing_test extends script.base_script
 {
-    public cannot_die_healing_test()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException {
         if (!isGod(self) || getGodLevel(self) < 10 || !isPlayer(self)) {
             detachScript(self, "test.buy_box");

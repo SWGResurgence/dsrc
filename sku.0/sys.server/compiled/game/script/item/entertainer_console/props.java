@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class props extends script.base_script
 {
-    public props()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id container = getLocation(self).cell;

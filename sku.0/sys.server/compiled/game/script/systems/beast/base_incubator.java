@@ -5,9 +5,7 @@ import script.library.*;
 
 public class base_incubator extends script.base_script
 {
-    public base_incubator()
-    {
-    }
+
     public static final string_id SID_WHILE_DEAD = new string_id("player_structure", "while_dead");
     public static final string_id SID_TERMINAL_MANAGEMENT = new string_id("player_structure", "incubator_management");
     public static final string_id SID_TERMINAL_MANAGEMENT_POWER_REMOVE = new string_id("player_structure", "incubator_power_remove");
@@ -56,11 +54,6 @@ public class base_incubator extends script.base_script
         if (isDead(player) || isIncapacitated(player))
         {
             sendSystemMessage(player, SID_WHILE_DEAD);
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, SID_NO_TRIAL_ACCOUNTS);
             return SCRIPT_CONTINUE;
         }
         if (incubator.hasActiveUser(station) && incubator.hasActiveIncubator(player))
@@ -116,11 +109,6 @@ public class base_incubator extends script.base_script
         if (isDead(player) || isIncapacitated(player))
         {
             sendSystemMessage(player, SID_WHILE_DEAD);
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, SID_NO_TRIAL_ACCOUNTS);
             return SCRIPT_CONTINUE;
         }
         obj_id station = self;

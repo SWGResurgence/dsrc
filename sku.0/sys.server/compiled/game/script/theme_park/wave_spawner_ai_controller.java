@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class wave_spawner_ai_controller extends script.base_script
 {
-    public wave_spawner_ai_controller()
-    {
-    }
+
     public static final boolean LOGGING = true;
     public int OnAttach(obj_id self) throws InterruptedException
     {

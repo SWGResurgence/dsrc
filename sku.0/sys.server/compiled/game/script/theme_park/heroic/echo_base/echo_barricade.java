@@ -5,9 +5,7 @@ import script.library.*;
 
 public class echo_barricade extends script.base_script
 {
-    public echo_barricade()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isValidBarricadeLocation(self))

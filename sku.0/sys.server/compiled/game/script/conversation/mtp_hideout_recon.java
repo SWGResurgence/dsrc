@@ -8,9 +8,7 @@ import script.*;
 
 public class mtp_hideout_recon extends script.base_script
 {
-    public mtp_hideout_recon()
-    {
-    }
+
     public static String c_stringFile = "conversation/mtp_hideout_recon";
     public boolean mtp_hideout_recon_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -179,7 +177,7 @@ public class mtp_hideout_recon extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_recon_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -227,7 +225,7 @@ public class mtp_hideout_recon extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_recon_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -276,7 +274,7 @@ public class mtp_hideout_recon extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_recon_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -301,7 +299,7 @@ public class mtp_hideout_recon extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public static final String[] PHOTO_PLANETS = 
     {

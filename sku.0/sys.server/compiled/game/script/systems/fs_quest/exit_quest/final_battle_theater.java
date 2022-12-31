@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class final_battle_theater extends script.base_script
 {
-    public final_battle_theater()
-    {
-    }
+
     public int OnTheaterCreated(obj_id self, obj_id[] objects, obj_id player, obj_id creator) throws InterruptedException
     {
         setObjVar(self, "fs_quest.final_battle.player", player);

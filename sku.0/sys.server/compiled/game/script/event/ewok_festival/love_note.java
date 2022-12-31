@@ -11,9 +11,7 @@ import script.string_id;
 
 public class love_note extends script.base_script
 {
-    public love_note()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

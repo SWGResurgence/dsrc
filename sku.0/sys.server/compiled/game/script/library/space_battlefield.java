@@ -6,9 +6,7 @@ import java.util.Vector;
 
 public class space_battlefield extends script.base_script
 {
-    public space_battlefield()
-    {
-    }
+
     public static final float RESET_TIME = 90;
     public static final int STATE_IMPERIAL = 1;
     public static final int STATE_REBEL = 0;

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class marauderbase_spawner extends script.base_script
 {
-    public marauderbase_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);

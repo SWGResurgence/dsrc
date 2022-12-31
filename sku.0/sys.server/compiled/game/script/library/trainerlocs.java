@@ -6,9 +6,7 @@ import script.string_id;
 
 public class trainerlocs extends script.base_script
 {
-    public trainerlocs()
-    {
-    }
+
     public static obj_id getTrehlaKeeloLocation(obj_id player, String profession, String track) throws InterruptedException
     {
         location targetLoc = new location();

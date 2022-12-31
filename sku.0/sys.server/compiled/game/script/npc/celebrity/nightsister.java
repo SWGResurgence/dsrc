@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class nightsister extends script.base_script
 {
-    public nightsister()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int clothesType = rand(1, 2);

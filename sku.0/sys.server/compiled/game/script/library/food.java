@@ -4,9 +4,7 @@ import script.*;
 
 public class food extends script.base_script
 {
-    public food()
-    {
-    }
+
     public static void applyInstantEffect(obj_id target, obj_id item) throws InterruptedException
     {
         if (!hasObjVar(item, "instant"))

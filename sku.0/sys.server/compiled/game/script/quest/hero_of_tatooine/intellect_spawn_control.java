@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class intellect_spawn_control extends script.base_script
 {
-    public intellect_spawn_control()
-    {
-    }
+
     public static final String SPAWNER_DATATABLE = "datatables/quest/hero_of_tatooine/intellect_spawner.iff";
     public static final String SPAWNER_OBJVAR = "quest.hero_of_tatooine.intellect.spawner";
     public static final String SPAWNER_IDS = SPAWNER_OBJVAR + ".ids";

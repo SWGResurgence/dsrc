@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_medic_wounded2 extends script.base_script
 {
-    public npe_medic_wounded2()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_medic_wounded2";
     public boolean npe_medic_wounded2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -61,7 +59,7 @@ public class npe_medic_wounded2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_medic_wounded2_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -76,7 +74,7 @@ public class npe_medic_wounded2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_medic_wounded2_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -114,7 +112,7 @@ public class npe_medic_wounded2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_medic_wounded2_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -152,7 +150,7 @@ public class npe_medic_wounded2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_medic_wounded2_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -167,7 +165,7 @@ public class npe_medic_wounded2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_medic_wounded2_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -181,7 +179,7 @@ public class npe_medic_wounded2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

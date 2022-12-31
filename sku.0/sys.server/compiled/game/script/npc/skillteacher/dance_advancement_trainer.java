@@ -5,9 +5,7 @@ import script.*;
 
 public class dance_advancement_trainer extends script.base_script
 {
-    public dance_advancement_trainer()
-    {
-    }
+
     public static final String CONVO = "dance_advancement";
     public static final String ADVANCEMENT_OBJVAR = "dance_advancement";
     public int OnAttach(obj_id self) throws InterruptedException

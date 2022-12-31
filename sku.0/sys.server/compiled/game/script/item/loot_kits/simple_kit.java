@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class simple_kit extends script.base_script
 {
-    public simple_kit()
-    {
-    }
+
     public static final String STF = "loot_kit";
     public static final string_id INCORRECT_ITEM = new string_id(STF, "incorrect_item");
     public static final string_id ALREADY_CONTAINS = new string_id(STF, "already_contains");

@@ -5,9 +5,7 @@ import script.*;
 
 public class heroic_sd_intro_rebel extends script.base_script
 {
-    public heroic_sd_intro_rebel()
-    {
-    }
+
     public static String c_stringFile = "conversation/heroic_sd_intro_rebel";
     public boolean heroic_sd_intro_rebel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -56,7 +54,7 @@ public class heroic_sd_intro_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

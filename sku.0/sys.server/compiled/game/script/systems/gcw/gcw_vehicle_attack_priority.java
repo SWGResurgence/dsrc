@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class gcw_vehicle_attack_priority extends script.systems.combat.combat_base
 {
-    public gcw_vehicle_attack_priority()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id parent = trial.getParent(self);

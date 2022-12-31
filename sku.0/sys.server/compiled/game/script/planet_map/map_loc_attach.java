@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class map_loc_attach extends script.planet_map.map_loc_base
 {
-    public map_loc_attach()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!planetary_map.addMapLocation(self))

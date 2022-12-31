@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class rebel_turret extends script.base_script
 {
-    public rebel_turret()
-    {
-    }
+
     public static final String HOTH_TURRET_DAMAGE_BUFF = "hoth_turret_damage_bonus";
     public static final String PHASE_3_TURRET = "p3_turret";
     public int OnAttach(obj_id self) throws InterruptedException

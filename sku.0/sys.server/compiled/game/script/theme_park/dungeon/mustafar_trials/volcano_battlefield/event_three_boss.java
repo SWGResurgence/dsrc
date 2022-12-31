@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class event_three_boss extends script.base_script
 {
-    public event_three_boss()
-    {
-    }
+
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

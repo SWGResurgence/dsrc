@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class npe_test extends script.base_script
 {
-    public npe_test()
-    {
-    }
+
 
     public boolean checkGod(obj_id self) throws InterruptedException
     {

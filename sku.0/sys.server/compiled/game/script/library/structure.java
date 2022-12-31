@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class structure extends script.base_script
 {
-    public structure()
-    {
-    }
+
     public static final String TEMPLATE_DEED = "object/intangible/deed/deed.iff";
     public static final String TEMPLATE_CELL = "object/cell/cell.iff";
     public static final String SLOT_GENERAL_INVENTORY = "";

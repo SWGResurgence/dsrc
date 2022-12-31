@@ -10,9 +10,7 @@ import script.string_id;
 
 public class heavyweapons extends script.base_script
 {
-    public heavyweapons()
-    {
-    }
+
     public static final int TYPE_LAUNCHER_PISTOL = 1;
     public static final int TYPE_ROCKET_LAUNCHER = 2;
     public static final int TYPE_FLAME_THROWER = 3;

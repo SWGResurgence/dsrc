@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class ballot_box extends script.base_script
 {
-    public ballot_box()
-    {
-    }
+
     public static final int BALLOT_TEXT_MAX_LENGTH = 120;
     public static final int BALLOT_TITLE_MAX_LENGTH = 32;
     public static final int BALLOT_ITEM_MAX_LENGTH = 64;

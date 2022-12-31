@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class junk_dealer_arms extends script.base_script
 {
-    public junk_dealer_arms()
-    {
-    }
+
     public static String c_stringFile = "conversation/junk_dealer_arms";
     public boolean junk_dealer_arms_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -53,7 +51,7 @@ public class junk_dealer_arms extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

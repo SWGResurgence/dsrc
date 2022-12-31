@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class gcw_city_kit_patrol extends script.systems.gcw.gcw_city_kit
 {
-    public gcw_city_kit_patrol()
-    {
-    }
+
     public void setupConstructionQuests(obj_id self, obj_id pylon) throws InterruptedException
     {
         setName(pylon, "Patrol Construction Site");

@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class npe_follow_han_object extends script.base_script
 {
-    public npe_follow_han_object()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "hanHere", false);

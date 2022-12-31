@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class camp_module_attribute extends script.base_script
 {
-    public camp_module_attribute()
-    {
-    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

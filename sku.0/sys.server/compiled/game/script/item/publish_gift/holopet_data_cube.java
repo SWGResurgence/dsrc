@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class holopet_data_cube extends script.base_script
 {
-    public holopet_data_cube()
-    {
-    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

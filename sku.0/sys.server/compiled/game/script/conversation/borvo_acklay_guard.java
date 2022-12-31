@@ -8,9 +8,7 @@ import script.*;
 
 public class borvo_acklay_guard extends script.base_script
 {
-    public borvo_acklay_guard()
-    {
-    }
+
     public static String c_stringFile = "conversation/borvo_acklay_guard";
     public boolean borvo_acklay_guard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -65,7 +63,7 @@ public class borvo_acklay_guard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int borvo_acklay_guard_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -79,7 +77,7 @@ public class borvo_acklay_guard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int borvo_acklay_guard_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -103,7 +101,7 @@ public class borvo_acklay_guard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import script.*;
 
 public class enhancer extends script.base_script
 {
-    public enhancer()
-    {
-    }
+    
     public static final string_id CANNOT_USE_ITEM = new string_id("base_player", "cannot_use_item");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

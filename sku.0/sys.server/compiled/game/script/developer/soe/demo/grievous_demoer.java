@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class grievous_demoer extends script.base_script
 {
-    public grievous_demoer()
-    {
-    }
+
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         String[] strCommands = split(strText, ' ');

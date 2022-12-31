@@ -8,9 +8,7 @@ import script.library.prose;
 
 public class trap_tranq_dart extends script.item.trap.trap_base
 {
-    public trap_tranq_dart()
-    {
-    }
+
     public static final int TRAP_DIFF = 20;
     public static final int REUSE_TIMER = 10;
     public static final string_id SID_SYS_EFFECT = new string_id("trap/trap", "trap_tranq_dart_effect");

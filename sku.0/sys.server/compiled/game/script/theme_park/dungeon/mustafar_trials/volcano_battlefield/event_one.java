@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class event_one extends script.base_script
 {
-    public event_one()
-    {
-    }
+
     public static final String boss = "som_volcano_one_taskmaster";
     public static final String guard = "som_volcano_one_sustainer";
     public static final boolean doLogging = false;

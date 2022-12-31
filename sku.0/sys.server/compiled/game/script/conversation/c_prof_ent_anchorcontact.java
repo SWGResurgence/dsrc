@@ -8,9 +8,7 @@ import script.*;
 
 public class c_prof_ent_anchorcontact extends script.base_script
 {
-    public c_prof_ent_anchorcontact()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_prof_ent_anchorcontact";
     public boolean c_prof_ent_anchorcontact_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -91,7 +89,7 @@ public class c_prof_ent_anchorcontact extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_prof_ent_anchorcontact_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -142,7 +140,7 @@ public class c_prof_ent_anchorcontact extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_prof_ent_anchorcontact_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -159,7 +157,7 @@ public class c_prof_ent_anchorcontact extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

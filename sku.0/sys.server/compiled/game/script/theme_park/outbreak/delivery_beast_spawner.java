@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class delivery_beast_spawner extends script.base_script
 {
-    public delivery_beast_spawner()
-    {
-    }
+
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_delivery_trigger";
     public static final String CREATURE_NAME_OBJVAR = "creatureName";

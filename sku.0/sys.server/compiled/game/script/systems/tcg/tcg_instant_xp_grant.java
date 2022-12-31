@@ -8,9 +8,7 @@ import script.*;
 
 public class tcg_instant_xp_grant extends script.base_script
 {
-    public tcg_instant_xp_grant()
-    {
-    }
+
     public static final String TBL_PLAYER_LEVEL_XP = "datatables/player/player_level.iff";
     public static final string_id SID_REWARD_XP = new string_id("collection", "reward_xp_amount");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

@@ -5,9 +5,7 @@ import script.*;
 
 public class naboo_privateer_trainer_3 extends script.base_script
 {
-    public naboo_privateer_trainer_3()
-    {
-    }
+
     public static String c_stringFile = "conversation/naboo_privateer_trainer_3";
     public boolean naboo_privateer_trainer_3_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -189,7 +187,7 @@ public class naboo_privateer_trainer_3 extends script.base_script
     }
     public boolean naboo_privateer_trainer_3_condition_isGenderMale(obj_id player, obj_id npc) throws InterruptedException
     {
-        return (getGender(player) == GENDER_MALE);
+        return (getGender(player) == Gender.MALE);
     }
     public boolean naboo_privateer_trainer_3_condition_has_goBackToKyatt(obj_id player, obj_id npc) throws InterruptedException
     {

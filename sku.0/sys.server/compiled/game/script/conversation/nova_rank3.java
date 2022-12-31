@@ -5,9 +5,7 @@ import script.*;
 
 public class nova_rank3 extends script.base_script
 {
-    public nova_rank3()
-    {
-    }
+
     public static String c_stringFile = "conversation/nova_rank3";
     public boolean nova_rank3_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -150,7 +148,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -188,7 +186,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -202,7 +200,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -227,7 +225,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -266,7 +264,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -281,7 +279,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -306,7 +304,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -345,7 +343,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -383,7 +381,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -398,7 +396,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -423,7 +421,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -462,7 +460,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -500,7 +498,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -515,7 +513,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -540,7 +538,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -578,7 +576,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -616,7 +614,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_rank3_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -631,7 +629,7 @@ public class nova_rank3 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

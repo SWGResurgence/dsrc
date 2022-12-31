@@ -5,9 +5,7 @@ import script.library.*;
 
 public class barn_lite_device extends script.base_script
 {
-    public barn_lite_device()
-    {
-    }
+
     public static final int MENU_ROOT_OPTION = menu_info_types.SERVER_MENU1;
     public static final int MENU_STORE_BEAST_OPTION = menu_info_types.SERVER_MENU2;
     public static final int MENU_RECLAIM_BEAST_OPTION = menu_info_types.SERVER_MENU3;

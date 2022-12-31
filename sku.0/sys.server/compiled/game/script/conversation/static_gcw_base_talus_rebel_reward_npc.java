@@ -5,9 +5,7 @@ import script.*;
 
 public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
 {
-    public static_gcw_base_talus_rebel_reward_npc()
-    {
-    }
+
     public static String c_stringFile = "conversation/static_gcw_base_talus_rebel_reward_npc";
     public boolean static_gcw_base_talus_rebel_reward_npc_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -1274,7 +1272,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1289,7 +1287,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1304,7 +1302,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1319,7 +1317,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1334,7 +1332,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1349,7 +1347,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1364,7 +1362,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1379,7 +1377,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1394,7 +1392,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1409,7 +1407,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1424,7 +1422,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1439,7 +1437,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1454,7 +1452,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1469,7 +1467,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1484,7 +1482,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1499,7 +1497,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1514,7 +1512,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1529,7 +1527,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1544,7 +1542,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1559,7 +1557,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1574,7 +1572,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1589,7 +1587,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1604,7 +1602,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1619,7 +1617,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1634,7 +1632,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1649,7 +1647,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1664,7 +1662,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1679,7 +1677,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1694,7 +1692,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1709,7 +1707,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int static_gcw_base_talus_rebel_reward_npc_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1724,7 +1722,7 @@ public class static_gcw_base_talus_rebel_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

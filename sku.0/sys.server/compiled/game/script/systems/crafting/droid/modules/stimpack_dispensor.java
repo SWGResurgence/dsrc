@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class stimpack_dispensor extends script.base_script
 {
-    public stimpack_dispensor()
-    {
-    }
+
     public static final String STF_FILE = "pet/droid_modules";
     public static final String SCRIPT_VAR_STIMPACK_LIST = "droid_module.stimpack_list";
     public static final String SCRIPT_VAR_STIMPACK_DROID = "droid_module.stimpack_droid";

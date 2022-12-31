@@ -16,6 +16,7 @@ public class controller extends script.base_script
     };
     public int OnAttach(obj_id self)
     {
+        setObjVar(self, "watto_controller_master", 1);
         return SCRIPT_CONTINUE;
     }
 

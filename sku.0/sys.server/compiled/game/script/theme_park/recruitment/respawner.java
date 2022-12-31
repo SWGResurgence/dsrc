@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class respawner extends script.base_script
 {
-    public respawner()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         stop(self);

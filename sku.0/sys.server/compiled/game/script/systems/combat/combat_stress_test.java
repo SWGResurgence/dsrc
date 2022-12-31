@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class combat_stress_test extends script.base_script
 {
-    public combat_stress_test()
-    {
-    }
+
     public static final int START_COMBAT_DELAY = 300;
     public int OnAttach(obj_id self) throws InterruptedException
     {

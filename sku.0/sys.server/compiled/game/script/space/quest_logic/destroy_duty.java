@@ -549,7 +549,8 @@ public class destroy_duty extends script.base_script
         tokens *= dutyTokenBonus;
         prose_package pt = prose.getPackage(SID_TOKEN_REWARD, tokens);
         sendQuestSystemMessage(player, pt);
-        static_item.createNewItemFunction("item_token_duty_space_01_01", pInv, tokens);
+        obj_id test = static_item.createNewItemFunction("item_token_duty_space_01_01", pInv);
+        setCount (test, tokens);
         CustomerServiceLog("space_piracy", "Player " + player + " have received " + tokens + " Space Duty Tokens (item_token_duty_space_01_01)");
         return SCRIPT_CONTINUE;
     }

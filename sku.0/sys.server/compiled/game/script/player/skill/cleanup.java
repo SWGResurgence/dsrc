@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class cleanup extends script.base_script
 {
-    public cleanup()
-    {
-    }
+
     public int OnRecapacitated(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, meditation.VAR_FORCE_OF_WILL_ACTIVE))

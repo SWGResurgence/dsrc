@@ -5,9 +5,7 @@ import script.*;
 
 public class corvette_bruce_neutral_destroy extends script.base_script
 {
-    public corvette_bruce_neutral_destroy()
-    {
-    }
+
     public static String c_stringFile = "conversation/corvette_bruce_neutral_destroy";
     public boolean corvette_bruce_neutral_destroy_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

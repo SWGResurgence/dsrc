@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_side_robbery_thief extends script.base_script
 {
-    public npe_side_robbery_thief()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_side_robbery_thief";
     public boolean npe_side_robbery_thief_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -81,7 +79,7 @@ public class npe_side_robbery_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_side_robbery_thief_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -143,7 +141,7 @@ public class npe_side_robbery_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_side_robbery_thief_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -229,7 +227,7 @@ public class npe_side_robbery_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_side_robbery_thief_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -279,7 +277,7 @@ public class npe_side_robbery_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_side_robbery_thief_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -307,7 +305,7 @@ public class npe_side_robbery_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_side_robbery_thief_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -358,7 +356,7 @@ public class npe_side_robbery_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

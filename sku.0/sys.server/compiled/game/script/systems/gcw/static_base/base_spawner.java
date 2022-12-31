@@ -10,9 +10,7 @@ import script.obj_var_list;
 
 public class base_spawner extends script.base_script
 {
-    public base_spawner()
-    {
-    }
+
     public static final String SPAWNED_LIST = "spawned";
     public static final String SPAWNED = SPAWNED_LIST + ".spawnNumber_";
     public static final String VAR_BASE_MASTER = "gcw.static_base.master";

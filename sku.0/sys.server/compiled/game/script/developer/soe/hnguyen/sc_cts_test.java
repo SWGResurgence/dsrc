@@ -8,9 +8,7 @@ import java.util.StringTokenizer;
 
 public class sc_cts_test extends script.base_script
 {
-    public sc_cts_test()
-    {
-    }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (objSpeaker != self)

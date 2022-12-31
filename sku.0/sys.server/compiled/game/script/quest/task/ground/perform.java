@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class perform extends script.quest.task.ground.base_task
 {
-    public perform()
-    {
-    }
+
     public static final String dataTableColumnPerformBuilding = "PERFORM_BUILDING";
     public static final String dataTableColumnPerformCellname = "PERFORM_CELLNAME";
     public static final String dataTableColumnPerformDuration = "PERFORM_DURATION";

@@ -7,9 +7,7 @@ import script.*;
 
 public class emp_day_jedi_prisoner extends script.base_script
 {
-    public emp_day_jedi_prisoner()
-    {
-    }
+
     public static String c_stringFile = "conversation/emp_day_jedi_prisoner";
     public boolean emp_day_jedi_prisoner_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -2497,7 +2495,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2593,7 +2591,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3021,7 +3019,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5401,7 +5399,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7781,7 +7779,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8209,7 +8207,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -10589,7 +10587,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -12969,7 +12967,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -13397,7 +13395,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -15777,7 +15775,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -18157,7 +18155,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -20537,7 +20535,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -22917,7 +22915,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -25297,7 +25295,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -27677,7 +27675,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -30057,7 +30055,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -30107,7 +30105,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -30535,7 +30533,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -32915,7 +32913,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -35295,7 +35293,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -35334,7 +35332,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -35384,7 +35382,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -35612,7 +35610,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -37992,7 +37990,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -40372,7 +40370,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -42752,7 +42750,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -42968,7 +42966,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -45348,7 +45346,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -47728,7 +47726,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -50108,7 +50106,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -52488,7 +52486,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -52584,7 +52582,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -52612,7 +52610,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int emp_day_jedi_prisoner_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -52640,7 +52638,7 @@ public class emp_day_jedi_prisoner extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

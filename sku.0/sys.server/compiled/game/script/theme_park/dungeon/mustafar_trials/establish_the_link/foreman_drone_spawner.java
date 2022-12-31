@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class foreman_drone_spawner extends script.base_script
 {
-    public foreman_drone_spawner()
-    {
-    }
+
     public static final String BUG_COUNT = "spawning.bugCount";
     public static final int BUG_MAX = 2;
     public static final String DRONE = "som_link_lava_beetle_drone";

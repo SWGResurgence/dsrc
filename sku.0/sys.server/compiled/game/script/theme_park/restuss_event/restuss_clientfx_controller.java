@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class restuss_clientfx_controller extends script.base_script
 {
-    public restuss_clientfx_controller()
-    {
-    }
+
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -11,9 +11,7 @@ import java.util.Vector;
 
 public class player_popularity extends script.base_script
 {
-    public player_popularity()
-    {
-    }
+
     public static final String SCRIPT_NAME = "quest.crowd_pleaser.player_popularity";
     public static final String QUEST_COMPLETE_OBJVAR = "quest.crowd_pleaser.complete";
     public static final String STATUS_OBJVAR = "quest.crowd_pleaser.status";

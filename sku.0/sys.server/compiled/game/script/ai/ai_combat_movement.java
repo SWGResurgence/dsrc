@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class ai_combat_movement extends script.base_script
 {
-    public ai_combat_movement()
-    {
-    }
+
     public static final int MOVEMODE_INVALID = 0;
     public static final int MOVEMODE_FOLLOW = 1;
     public static final int MOVEMODE_RANDOM = 2;

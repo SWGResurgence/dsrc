@@ -11,9 +11,7 @@ import script.string_id;
 
 public class armor_analysis_tool extends script.base_script
 {
-    public armor_analysis_tool()
-    {
-    }
+
     public static final string_id LOOT_LIST = new string_id("sui", "analyze_loot");
     public static final String TABLE = "datatables/ship/components/armor.iff";
     public static final String TOOL = "reverse_engineering_tool";

@@ -6,9 +6,7 @@ import java.util.Vector;
 
 public class performance extends script.base_script
 {
-    public performance()
-    {
-    }
+
     public static final String DATATABLE_PERFORMANCE = "datatables/performance/performance.iff";
     public static final String DATATABLE_COL_HEAL_WOUND = "healMindWound";
     public static final String DATATABLE_COL_HEAL_SHOCK = "healShockWound";
@@ -3362,7 +3360,7 @@ public class performance extends script.base_script
         }
         location myLoc = getLocation(actor);
         int species = getSpecies(actor);
-        int gender = getGender(actor);
+        Gender gender = getGender(actor);
         String template = "object/mobile/hologram/";
         String speciesString = "human";
         String genderString = "male";
@@ -3396,7 +3394,7 @@ public class performance extends script.base_script
             speciesString = "sullustan";
             break;
         }
-        if (gender == GENDER_FEMALE)
+        if (gender == Gender.FEMALE)
         {
             genderString = "female";
         }

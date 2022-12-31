@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class pirate_death extends script.base_script
 {
-    public pirate_death()
-    {
-    }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         detachScript(self, "theme_park.tatooine.behavior.poi_waiting");

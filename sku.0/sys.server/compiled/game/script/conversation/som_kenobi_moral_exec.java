@@ -8,9 +8,7 @@ import script.*;
 
 public class som_kenobi_moral_exec extends script.base_script
 {
-    public som_kenobi_moral_exec()
-    {
-    }
+
     public static String c_stringFile = "conversation/som_kenobi_moral_exec";
     public boolean som_kenobi_moral_exec_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -125,7 +123,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_moral_exec_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -165,7 +163,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_moral_exec_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -181,7 +179,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_moral_exec_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -222,7 +220,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_moral_exec_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -238,7 +236,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_moral_exec_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -335,7 +333,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_moral_exec_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -374,7 +372,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_moral_exec_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -424,7 +422,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_moral_exec_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -475,7 +473,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_moral_exec_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -491,7 +489,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_moral_exec_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -541,7 +539,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_moral_exec_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -592,7 +590,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_moral_exec_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -608,7 +606,7 @@ public class som_kenobi_moral_exec extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

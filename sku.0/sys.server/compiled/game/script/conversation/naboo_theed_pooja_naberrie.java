@@ -5,9 +5,7 @@ import script.*;
 
 public class naboo_theed_pooja_naberrie extends script.base_script
 {
-    public naboo_theed_pooja_naberrie()
-    {
-    }
+
     public static String c_stringFile = "conversation/naboo_theed_pooja_naberrie";
     public boolean naboo_theed_pooja_naberrie_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -149,7 +147,7 @@ public class naboo_theed_pooja_naberrie extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_pooja_naberrie_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -165,7 +163,7 @@ public class naboo_theed_pooja_naberrie extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_pooja_naberrie_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -213,7 +211,7 @@ public class naboo_theed_pooja_naberrie extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_pooja_naberrie_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -228,7 +226,7 @@ public class naboo_theed_pooja_naberrie extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_pooja_naberrie_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -393,7 +391,7 @@ public class naboo_theed_pooja_naberrie extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_pooja_naberrie_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -491,7 +489,7 @@ public class naboo_theed_pooja_naberrie extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_pooja_naberrie_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -539,7 +537,7 @@ public class naboo_theed_pooja_naberrie extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_pooja_naberrie_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -598,7 +596,7 @@ public class naboo_theed_pooja_naberrie extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_pooja_naberrie_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -696,7 +694,7 @@ public class naboo_theed_pooja_naberrie extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_pooja_naberrie_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -744,7 +742,7 @@ public class naboo_theed_pooja_naberrie extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_pooja_naberrie_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -803,7 +801,7 @@ public class naboo_theed_pooja_naberrie extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_pooja_naberrie_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -863,7 +861,7 @@ public class naboo_theed_pooja_naberrie extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_pooja_naberrie_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -967,7 +965,7 @@ public class naboo_theed_pooja_naberrie extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_pooja_naberrie_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1027,7 +1025,7 @@ public class naboo_theed_pooja_naberrie extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_pooja_naberrie_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1087,7 +1085,7 @@ public class naboo_theed_pooja_naberrie extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

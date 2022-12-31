@@ -7,9 +7,7 @@ import script.*;
 
 public class rodian_apprentice_hunter extends script.base_script
 {
-    public rodian_apprentice_hunter()
-    {
-    }
+
     public static String c_stringFile = "conversation/rodian_apprentice_hunter";
     public boolean rodian_apprentice_hunter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -29,7 +27,7 @@ public class rodian_apprentice_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

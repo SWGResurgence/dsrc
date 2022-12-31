@@ -7,9 +7,7 @@ import script.*;
 
 public class tusken_watto extends script.base_script
 {
-    public tusken_watto()
-    {
-    }
+
     public static String c_stringFile = "conversation/tusken_watto";
     public boolean tusken_watto_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

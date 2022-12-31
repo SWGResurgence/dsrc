@@ -6,9 +6,7 @@ import script.string_id;
 
 public class fs_medic_heal_pack extends script.base_script
 {
-    public fs_medic_heal_pack()
-    {
-    }
+
     public static final String CRAFT_VAR = "crafting_components.";
     public static final String CURE_SYMPTOM_ONE = "cureSymptomOne";
     public static final String CURE_SYMPTOM_TWO = "cureSymptomTwo";

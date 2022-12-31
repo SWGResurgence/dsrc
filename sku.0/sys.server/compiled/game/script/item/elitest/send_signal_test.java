@@ -5,9 +5,7 @@ import script.*;
 
 public class send_signal_test extends script.base_script
 {
-    public send_signal_test()
-    {
-    }
+
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id SEND_SIGNAL = new string_id(STF, "lockbox_code");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

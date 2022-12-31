@@ -10,9 +10,7 @@ import script.obj_id;
 
 public class invasion_target extends script.base_script
 {
-    public invasion_target()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         float timeStamp = getGameTime();

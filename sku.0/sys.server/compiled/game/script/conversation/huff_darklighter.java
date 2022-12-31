@@ -8,9 +8,7 @@ import script.*;
 
 public class huff_darklighter extends script.base_script
 {
-    public huff_darklighter()
-    {
-    }
+
     public static String c_stringFile = "conversation/huff_darklighter";
     public boolean huff_darklighter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -76,7 +74,7 @@ public class huff_darklighter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int huff_darklighter_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -101,7 +99,7 @@ public class huff_darklighter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

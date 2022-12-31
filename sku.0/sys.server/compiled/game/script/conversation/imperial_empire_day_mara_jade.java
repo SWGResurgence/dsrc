@@ -5,9 +5,7 @@ import script.*;
 
 public class imperial_empire_day_mara_jade extends script.base_script
 {
-    public imperial_empire_day_mara_jade()
-    {
-    }
+
     public static String c_stringFile = "conversation/imperial_empire_day_mara_jade";
     public boolean imperial_empire_day_mara_jade_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -316,7 +314,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -524,7 +522,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -539,7 +537,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -578,7 +576,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -593,7 +591,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -632,7 +630,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -647,7 +645,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -686,7 +684,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -702,7 +700,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -741,7 +739,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -756,7 +754,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -795,7 +793,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -810,7 +808,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -850,7 +848,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -890,7 +888,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -930,7 +928,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -947,7 +945,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1143,7 +1141,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1195,7 +1193,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1241,7 +1239,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1279,7 +1277,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1331,7 +1329,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1383,7 +1381,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1421,7 +1419,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1459,7 +1457,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1519,7 +1517,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1647,7 +1645,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1705,7 +1703,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1763,7 +1761,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1815,7 +1813,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1832,7 +1830,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1879,7 +1877,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1918,7 +1916,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1964,7 +1962,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2003,7 +2001,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_mara_jade_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2019,7 +2017,7 @@ public class imperial_empire_day_mara_jade extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

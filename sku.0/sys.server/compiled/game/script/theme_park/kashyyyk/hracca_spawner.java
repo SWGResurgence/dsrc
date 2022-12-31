@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class hracca_spawner extends script.base_script
 {
-    public hracca_spawner()
-    {
-    }
+
     public int doHraccaSpawnEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)

@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_39_gwhirrye_baric extends script.base_script
 {
-    public corellia_39_gwhirrye_baric()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_39_gwhirrye_baric";
     public boolean corellia_39_gwhirrye_baric_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -72,7 +70,7 @@ public class corellia_39_gwhirrye_baric extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_39_gwhirrye_baric_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -87,7 +85,7 @@ public class corellia_39_gwhirrye_baric extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

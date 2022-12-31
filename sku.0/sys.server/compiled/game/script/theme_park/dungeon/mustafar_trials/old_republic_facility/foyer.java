@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class foyer extends script.base_script
 {
-    public foyer()
-    {
-    }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))

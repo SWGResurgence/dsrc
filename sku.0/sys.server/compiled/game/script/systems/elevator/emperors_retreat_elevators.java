@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class emperors_retreat_elevators extends script.base_script
 {
-    public emperors_retreat_elevators()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);

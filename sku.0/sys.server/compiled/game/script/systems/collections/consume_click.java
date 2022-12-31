@@ -5,9 +5,7 @@ import script.library.*;
 
 public class consume_click extends script.base_script
 {
-    public consume_click()
-    {
-    }
+
     public static final String OBJVAR_SLOT_NAME = "collection.slotName";
     public static final String VAR_ACCESS_DELAY = "delay.access_delay";
     public static final String COLLECTION_HANDLER = "modifySlot";

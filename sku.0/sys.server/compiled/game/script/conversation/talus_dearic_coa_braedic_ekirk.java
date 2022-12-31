@@ -8,9 +8,7 @@ import script.*;
 
 public class talus_dearic_coa_braedic_ekirk extends script.base_script
 {
-    public talus_dearic_coa_braedic_ekirk()
-    {
-    }
+
     public static String c_stringFile = "conversation/talus_dearic_coa_braedic_ekirk";
     public boolean talus_dearic_coa_braedic_ekirk_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -63,7 +61,7 @@ public class talus_dearic_coa_braedic_ekirk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int talus_dearic_coa_braedic_ekirk_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -116,7 +114,7 @@ public class talus_dearic_coa_braedic_ekirk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int talus_dearic_coa_braedic_ekirk_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -131,7 +129,7 @@ public class talus_dearic_coa_braedic_ekirk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int talus_dearic_coa_braedic_ekirk_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -147,7 +145,7 @@ public class talus_dearic_coa_braedic_ekirk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int talus_dearic_coa_braedic_ekirk_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -199,7 +197,7 @@ public class talus_dearic_coa_braedic_ekirk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int talus_dearic_coa_braedic_ekirk_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -251,7 +249,7 @@ public class talus_dearic_coa_braedic_ekirk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int talus_dearic_coa_braedic_ekirk_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -305,7 +303,7 @@ public class talus_dearic_coa_braedic_ekirk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int talus_dearic_coa_braedic_ekirk_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -321,7 +319,7 @@ public class talus_dearic_coa_braedic_ekirk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

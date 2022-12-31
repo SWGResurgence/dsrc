@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class avatar_destruction extends script.base_script
 {
-    public avatar_destruction()
-    {
-    }
+
     public int handleDestruct(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

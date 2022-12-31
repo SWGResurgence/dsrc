@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class droid_customizer extends script.base_script
 {
-    public droid_customizer()
-    {
-    }
+
     public static final String SCRIPTVAR_PID = "tool.pid";
     public static final String SCRIPTVAR_PLAYER = "tool.player";
     public static final String SCRIPTVAR_TARGET = "tool.target";

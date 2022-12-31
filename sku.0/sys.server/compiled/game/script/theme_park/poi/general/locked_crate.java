@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class locked_crate extends script.theme_park.poi.base
 {
-    public locked_crate()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         makeCrate(self);

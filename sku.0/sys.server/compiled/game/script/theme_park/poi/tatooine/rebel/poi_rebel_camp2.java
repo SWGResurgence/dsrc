@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class poi_rebel_camp2 extends script.theme_park.poi.base
 {
-    public poi_rebel_camp2()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String objective = poiGetObjective(self);

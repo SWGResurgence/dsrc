@@ -11,9 +11,7 @@ import java.util.Vector;
 
 public class ai_combat_assist extends script.base_script
 {
-    public ai_combat_assist()
-    {
-    }
+
     public static void clearAssist() throws InterruptedException
     {
         final obj_id self = getSelf();

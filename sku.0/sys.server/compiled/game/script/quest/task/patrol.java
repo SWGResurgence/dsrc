@@ -10,9 +10,7 @@ import script.string_id;
 
 public class patrol extends script.base_script
 {
-    public patrol()
-    {
-    }
+    
     public static final boolean DEBUGGING = false;
     public int handleDestroyWaypoint(obj_id self, dictionary params) throws InterruptedException
     {

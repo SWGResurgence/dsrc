@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class mos_taike_cantina_owner extends script.base_script
 {
-    public mos_taike_cantina_owner()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id dress = createObject("object/tangible/wearables/dress/dress_s06.iff", self, "");

@@ -8,9 +8,7 @@ import script.string_id;
 
 public class smuggler_medic extends script.base_script
 {
-    public smuggler_medic()
-    {
-    }
+
     public static final float BUDDY_DURATION = 62.0f;
     public int OnAttach(obj_id self) throws InterruptedException
     {

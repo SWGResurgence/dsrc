@@ -8,9 +8,7 @@ import script.*;
 
 public class naboo_theed_sgt_bragg extends script.base_script
 {
-    public naboo_theed_sgt_bragg()
-    {
-    }
+
     public static String c_stringFile = "conversation/naboo_theed_sgt_bragg";
     public boolean naboo_theed_sgt_bragg_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -69,7 +67,7 @@ public class naboo_theed_sgt_bragg extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_sgt_bragg_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -107,7 +105,7 @@ public class naboo_theed_sgt_bragg extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_sgt_bragg_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -122,7 +120,7 @@ public class naboo_theed_sgt_bragg extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_sgt_bragg_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -161,7 +159,7 @@ public class naboo_theed_sgt_bragg extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_sgt_bragg_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -199,7 +197,7 @@ public class naboo_theed_sgt_bragg extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_sgt_bragg_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -248,7 +246,7 @@ public class naboo_theed_sgt_bragg extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_theed_sgt_bragg_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -273,7 +271,7 @@ public class naboo_theed_sgt_bragg extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

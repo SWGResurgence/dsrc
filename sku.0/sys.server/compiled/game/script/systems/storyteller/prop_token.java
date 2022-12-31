@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class prop_token extends script.base_script
 {
-    public prop_token()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         storyteller.resetTokenDailyCount(self);
@@ -51,11 +49,6 @@ public class prop_token extends script.base_script
         if (getState(player, STATE_SWIMMING) == 1)
         {
             sendSystemMessage(player, new string_id("storyteller", "placement_not_while_swimming"));
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "placement_no_trial_accounts"));
             return SCRIPT_CONTINUE;
         }
         float yaw = getYaw(player);

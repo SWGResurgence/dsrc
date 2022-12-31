@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class stage_two_controller extends script.base_script
 {
-    public stage_two_controller()
-    {
-    }
+
     public static final String STAGE = "currentStage";
     public static final String[] TRIGGER_DATA_TYPES = 
     {

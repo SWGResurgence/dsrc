@@ -9,9 +9,7 @@ import script.string_id;
 
 public class patrol_duty extends script.space.quest_logic.patrol
 {
-    public patrol_duty()
-    {
-    }
+
     public static final string_id SID_LAP_REWARD = new string_id("space/quest", "patrol_lap_reward");
     public static final string_id SID_SPECIAL_REWARD = new string_id("space/quest", "destroy_special_reward");
     public static final string_id SID_BADGE_REWARD = new string_id("space/quest", "destroy_badge_reward");

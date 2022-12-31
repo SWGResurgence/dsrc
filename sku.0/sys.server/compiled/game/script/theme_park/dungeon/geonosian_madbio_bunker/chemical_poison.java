@@ -9,9 +9,7 @@ import script.string_id;
 
 public class chemical_poison extends script.base_script
 {
-    public chemical_poison()
-    {
-    }
+
     public static final String MSGS = "dungeon/geonosian_madbio";
     public int OnAttach(obj_id self) throws InterruptedException
     {

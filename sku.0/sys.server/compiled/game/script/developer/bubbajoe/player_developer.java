@@ -11,14 +11,13 @@ import script.library.*;
 
 import java.io.File;
 import java.util.ArrayList;
-
+@SuppressWarnings({"unused", "javadoc", "deprecated", "SpellCheckingInspection"})
 public class player_developer extends base_script
 {
-    public player_developer()
-    {
 
-    }
-    public String APIKEY = "https://discord.com/api/webhooks/1054125244060799076/YUI-Gwy8iJTHzBJkPkFBp7kjH27uGNFlO6z6-LFx39kAel5PlQ_xk_sFqxzdf5igiapD";
+    //public String APIKEY = "https://discord.com/api/webhooks/1054125244060799076/YUI-Gwy8iJTHzBJkPkFBp7kjH27uGNFlO6z6-LFx39kAel5PlQ_xk_sFqxzdf5igiapD";
+    public String APIKEY = "https://discord.com/api/webhooks/1056764306320003132/LRryi0SZDM920lm7Z6wRcs4eCKJAEkHcRCwLuyiKMYgzK5MGHvRj9kUx0gd3wFl_4wjE";
+
     public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id iTarget = getIntendedTarget(self);
@@ -53,6 +52,25 @@ public class player_developer extends base_script
         if (cmd.equalsIgnoreCase("reloadAllScripts"))
         {
             reloadAllScripts(self);
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equals("listWattos"))
+        {
+            obj_id[] wattos = getAllObjectsWithObjVar(getLocation(self), 16000f, "watto_tag");
+            for (obj_id watto : wattos)
+            {
+                sendSystemMessageTestingOnly(self, "Watto: " + watto);
+            }
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equals("gotoWatto"))
+        {
+            obj_id[] wattos = getAllObjectsWithObjVar(getLocation(self), 16000f, "watto_tag");
+            if (wattos.length > 0)
+            {
+                location wattoLoc = getLocation(wattos[0]);
+                warpPlayer(self, wattoLoc.area, wattoLoc.x, wattoLoc.y, wattoLoc.z, null, 0, 0, 0);
+            }
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("say"))
@@ -226,9 +244,11 @@ public class player_developer extends base_script
             broadcast(target, "You have been resized.");
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equalsIgnoreCase("pathtome"))
+        if (cmd.equalsIgnoreCase("path"))
         {
-            createClientPathAdvanced(target, getLocation(target), getLocation(self), "default");
+            //createClientPath(self, getLocation(self), getLocation(target));
+            createClientPathAdvanced(self, getLocation(self), getLocation(target), "default");
+            return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("messageto"))
         {
@@ -494,7 +514,7 @@ public class player_developer extends base_script
             {
                 if (skill.contains(query))
                 {
-                    if(badSkills.contains(skill))
+                    if (badSkills.contains(skill))
                     {
                         broadcast(self, "Skipping " + skill + ", bad skill.");
                         continue;
@@ -528,7 +548,7 @@ public class player_developer extends base_script
                 }
             }
             setName(myBag, "Travel Pack of " + query);
-            broadcast(self, "Granted all items with search parameter "+ query + " to " +  getName(target));
+            broadcast(self, "Granted all items with search parameter " + query + " to " + getName(target));
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("toggle"))
@@ -537,17 +557,17 @@ public class player_developer extends base_script
             switch (toggle)
             {
                 case "on":
-                    sendConsoleCommand( "/object setCoverVisibility " + self + " " + 0, self);
-                    sendConsoleCommand( "/object hide " + self + " " + 1, self);
-                    sendConsoleCommand( "/echo You are visible.", self);
+                    sendConsoleCommand("/object setCoverVisibility " + self + " " + 0, self);
+                    sendConsoleCommand("/object hide " + self + " " + 1, self);
+                    sendConsoleCommand("/echo You are visible.", self);
                     break;
                 case "off":
-                    sendConsoleCommand( "/object setCoverVisibility " + self + " " + 1, self);
-                    sendConsoleCommand( "/object hide " + self + " " + 0, self);
-                    sendConsoleCommand( "/echo You are visible.", self);
+                    sendConsoleCommand("/object setCoverVisibility " + self + " " + 1, self);
+                    sendConsoleCommand("/object hide " + self + " " + 0, self);
+                    sendConsoleCommand("/echo You are visible.", self);
                     break;
                 default:
-                    sendConsoleCommand( "Usage: /developer toggle [on|off]", self);
+                    sendConsoleCommand("Usage: /developer toggle [on|off]", self);
                     break;
             }
         }
@@ -563,7 +583,7 @@ public class player_developer extends base_script
             {
                 broadcast(self, "No mod specified. See console for valid mods.");
                 debugConsoleMsg(self, "/developer editWeapon <mod> <value>");
-                debugConsoleMsg(self, "List of valid mods: minDamage\nmaxDamage\nattackSpeed\nwoundChance\nattackCost\naccuracy\nelementalType\nelementalValue\nrangeInfo\ndamageType\ndamageRadius");
+                debugConsoleMsg(self, "List of valid mods:\nminDamage\nmaxDamage\nattackSpeed\nwoundChance\nattackCost\naccuracy\nelementalType\nelementalValue\nrangeInfo\nq\ndamageRadius");
                 return SCRIPT_CONTINUE;
             }
             switch (mod)
@@ -753,7 +773,8 @@ public class player_developer extends base_script
             else
             {
                 obj_id[] players = getAllPlayers(getLocation(self), 8000.0f);
-                for (obj_id player : players) {
+                for (obj_id player : players)
+                {
                     String sound = tok.nextToken();
                     playClientEffectObj(player, sound, player, "");
                 }
@@ -769,7 +790,8 @@ public class player_developer extends base_script
             else
             {
                 obj_id[] players = getAllPlayers(getLocation(self), 8000.0f);
-                for (obj_id player : players) {
+                for (obj_id player : players)
+                {
                     String sound = tok.nextToken();
                     playClientEffectObj(player, sound, player, "head");
                 }
@@ -779,7 +801,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin grantItemArea <item> <count>");
+                sendSystemMessageTestingOnly(self, "Syntax: /admin rewardarea <item> <count>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -787,11 +809,13 @@ public class player_developer extends base_script
                 String item = tok.nextToken();
                 int count = Integer.parseInt(tok.nextToken());
                 obj_id[] players = getAllPlayers(getLocation(self), 250.0f);
-                for (obj_id player : players) {
+                for (obj_id player : players)
+                {
                     obj_id pInv = utils.getInventoryContainer(player);
                     obj_id pItem = static_item.createNewItemFunction(item, pInv, count);
-                    if (isIdValid(pItem)) {
-                        sendSystemMessageTestingOnly(player, colors_hex.HEADER + colors_hex.ORANGE + "You have been awarded " + count + " " + getStaticItemName(pItem) + " by the Event Team!");
+                    if (isIdValid(pItem))
+                    {
+                        sendSystemMessageTestingOnly(player, colors_hex.HEADER + colors_hex.ORANGE + "You have been awarded " + count + " " + utils.getStringName(pItem) + " by the Event Team!");
                     }
                 }
             }
@@ -804,9 +828,12 @@ public class player_developer extends base_script
                 radius = Float.parseFloat(tok.nextToken());
             }
             obj_id[] creatures = getCreaturesInRange(getLocation(self), radius);
-            for (obj_id creature : creatures) {
-                if (isMob(creature)) {
-                    if (hasObjVar(self, "loot.numItems")) {
+            for (obj_id creature : creatures)
+            {
+                if (isMob(creature))
+                {
+                    if (hasObjVar(self, "loot.numItems"))
+                    {
                         setObjVar(creature, "loot.numItems", tok.nextToken());
                     }
                 }
@@ -863,9 +890,60 @@ public class player_developer extends base_script
         }
         if (cmd.equalsIgnoreCase("setcountcontainer"))
         {
-            obj_id[] itemsInside = utils.getContents(getIntendedTarget(self), true);
-            for (obj_id itemInside : itemsInside) {
-                setCount(itemInside, Integer.parseInt(tok.nextToken()));
+            obj_id[] contents = getContents(target);
+            for (obj_id content : contents)
+            {
+                if (getCount(content) > 1)
+                {
+                    int howMany = utils.stringToInt(tok.nextToken());
+                    setCount(content, howMany);
+                }
+            }
+        }
+        if (cmd.equalsIgnoreCase("vars"))
+        {
+            deltadictionary myinfo = self.getScriptVars();
+            for (Object key : myinfo.keySet())
+            {
+                sendSystemMessageTestingOnly(self, "Key: " + key + " Value: " + myinfo.getString(key));
+            }
+        }
+        if (cmd.equalsIgnoreCase("locomotion"))
+        {
+            int locomotionState = Integer.parseInt(tok.nextToken());
+            setLocomotion(self, locomotionState);
+        }
+        if (cmd.equalsIgnoreCase("state"))
+        {
+            String toggle = tok.nextToken();
+            int state = Integer.parseInt(tok.nextToken());
+            if (toggle.equalsIgnoreCase("on"))
+            {
+                setState(self, state, true);
+            }
+            else if (toggle.equalsIgnoreCase("off"))
+            {
+                setState(self, state, false);
+            }
+            return SCRIPT_CONTINUE;
+        }
+
+        if (cmd.equals("posture"))
+        {
+            int posture = Integer.parseInt(tok.nextToken());
+            setPosture(self, posture);
+        }
+
+        if (cmd.equalsIgnoreCase("randomizecontainer"))
+        {
+            obj_id[] contents = utils.getContents(target, true);
+            for (obj_id content : contents)
+            {
+                if (getCount(content) > 1)
+                {
+                    setCount(content, rand(1, 9999));
+                }
+
             }
         }
         if (cmd.equalsIgnoreCase("sendwarning"))
@@ -909,7 +987,7 @@ public class player_developer extends base_script
                     message += " " + tok.nextToken();
                 }
             }
-            sendWebhook(APIKEY, message);
+            //sendWebhook(APIKEY, message);
         }
         if (cmd.equalsIgnoreCase("ringspawn"))
         {
@@ -920,7 +998,7 @@ public class player_developer extends base_script
             resurgence.createCircleSpawn(self, self, creatureToSpawn, num, radius);
 
         }
-        if (cmd.equalsIgnoreCase("spawnringinterior"))
+        if (cmd.equalsIgnoreCase("ringspawninside"))
         {
             String creatureToSpawn = tok.nextToken();
             int num = Integer.parseInt(tok.nextToken());
@@ -958,6 +1036,36 @@ public class player_developer extends base_script
                 float z = Float.parseFloat(tok.nextToken());
                 location loc = new location(x, y, z);
                 playClientEffectLoc(self, sound, loc, 0.0f);
+                return SCRIPT_CONTINUE;
+            }
+        }
+        if (cmd.equalsIgnoreCase("areacommand"))
+        {
+            if (!tok.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /developer areacommand <command> <radius>");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                float radius = Float.parseFloat(tok.nextToken());
+                String command = tok.nextToken();
+                while (tok.hasMoreTokens())
+                {
+                    command += " " + tok.nextToken();
+                }
+                obj_id[] players = getPlayerCreaturesInRange(getLocation(self), radius);
+                for (obj_id player : players)
+                {
+                    if (isGod(player))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        sendConsoleCommand(command, player);
+                    }
+                }
                 return SCRIPT_CONTINUE;
             }
         }
@@ -1032,12 +1140,13 @@ public class player_developer extends base_script
             for (int i = 0; i < Integer.parseInt(copies); i++)
             {
                 obj_id cloned_item = utils.cloneObject(iTarget, pInv);
-                for (String s : getScriptList(iTarget)) {
+                for (String s : getScriptList(iTarget))
+                {
                     attachScript(iTarget, s);
                     setName(cloned_item, getName(iTarget));
                     utils.copyObjectData(iTarget, cloned_item);
                 }
-                broadcast(self,"Cloned " + getName(iTarget) + " to " + getName(self) + "'s inventory with " + copies + " copies.");
+                broadcast(self, "Cloned " + getName(iTarget) + " to " + getName(self) + "'s inventory with " + copies + " copies.");
 
             }
             return SCRIPT_CONTINUE;
@@ -1059,8 +1168,22 @@ public class player_developer extends base_script
             }
             else
             {
-                sendSystemMessageTestingOnly(self,"You are not riding a vehicle.");
+                sendSystemMessageTestingOnly(self, "You are not riding a vehicle.");
             }
+        }
+
+        if (cmd.equalsIgnoreCase("copyOnMe"))
+        {
+            String template = getTemplateName(iTarget);
+            sendConsoleCommand("/spawn " + template + " 1 0 0", self);
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("copyInMe"))
+        {
+            String template = getTemplateName(iTarget);
+            obj_id pInv = utils.getInventoryContainer(self);
+            sendConsoleCommand("/object createIn " + template + " " + pInv, self);
+            return SCRIPT_CONTINUE;
         }
 
         if (cmd.equalsIgnoreCase("-help"))
@@ -1095,7 +1218,7 @@ public class player_developer extends base_script
             debugConsoleMsg(self, "  / ADD MORE HERE");
             return SCRIPT_CONTINUE;
         }
-        else
+        else if (cmd.equals(""))
         {
             broadcast(self, "Command not found.  Use -help for a list of commands.");
         }
@@ -1104,7 +1227,7 @@ public class player_developer extends base_script
 
     private boolean echo(obj_id self, String s)
     {
-        return sendConsoleCommand("echo " + s, self);
+        return sendConsoleCommand("/echo " + s, self);
     }
 
     private void reloadAllScripts(obj_id self)

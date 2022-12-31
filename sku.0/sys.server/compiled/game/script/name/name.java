@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class name extends script.base_script
 {
-    public name()
-    {
-    }
+
     public static final int MAX_NAME_LENGTH = 32;
     public static final string_id SID_SET_NAME_TITLE = new string_id("sui", "set_name_title");
     public static final string_id SID_SET_NAME_PROMPT = new string_id("sui", "set_name_prompt");

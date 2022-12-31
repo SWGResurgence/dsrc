@@ -7,9 +7,7 @@ import script.*;
 
 public class ep3_chewbacca extends script.base_script
 {
-    public ep3_chewbacca()
-    {
-    }
+    
     public static String c_stringFile = "conversation/ep3_chewbacca";
     public boolean ep3_chewbacca_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -172,7 +170,7 @@ public class ep3_chewbacca extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_chewbacca_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -196,7 +194,7 @@ public class ep3_chewbacca extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_chewbacca_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -266,7 +264,7 @@ public class ep3_chewbacca extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_chewbacca_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -346,7 +344,7 @@ public class ep3_chewbacca extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_chewbacca_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -380,7 +378,7 @@ public class ep3_chewbacca extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_chewbacca_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -460,7 +458,7 @@ public class ep3_chewbacca extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

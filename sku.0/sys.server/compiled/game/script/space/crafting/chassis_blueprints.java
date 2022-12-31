@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class chassis_blueprints extends script.base_script
 {
-    public chassis_blueprints()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

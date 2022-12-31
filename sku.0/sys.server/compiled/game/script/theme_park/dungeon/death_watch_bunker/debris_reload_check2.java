@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class debris_reload_check2 extends script.base_script
 {
-    public debris_reload_check2()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         boolean empty = true;

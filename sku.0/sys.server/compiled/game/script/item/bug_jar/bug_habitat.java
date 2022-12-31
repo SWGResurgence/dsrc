@@ -8,9 +8,7 @@ import script.string_id;
 
 public class bug_habitat extends script.base_script
 {
-    public bug_habitat()
-    {
-    }
+
     public static final string_id SID_RELEASE_CREATURES = new string_id("lair_n", "release_creatures");
     public static final string_id SID_RELEASE = new string_id("lair_n", "release");
     public static final string_id SID_NO_ACCESS = new string_id("lair_n", "no_access");

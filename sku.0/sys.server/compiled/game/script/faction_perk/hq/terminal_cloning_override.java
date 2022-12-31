@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class terminal_cloning_override extends script.base_script
 {
-    public terminal_cloning_override()
-    {
-    }
+
     public int handleRequestedClone(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))

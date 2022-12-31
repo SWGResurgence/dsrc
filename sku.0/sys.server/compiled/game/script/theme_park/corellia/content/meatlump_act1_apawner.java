@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class meatlump_act1_apawner extends script.base_script
 {
-    public meatlump_act1_apawner()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "attachSpawnerScript", null, 2, false);

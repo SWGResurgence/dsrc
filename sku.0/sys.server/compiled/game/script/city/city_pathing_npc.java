@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class city_pathing_npc extends script.base_script
 {
-    public city_pathing_npc()
-    {
-    }
+
     public static final int NEXT_ACTION_NONE = -1;
     public static final int NEXT_ACTION_FACETO = 0;
     public static final int NEXT_ACTION_DOANIM = 1;

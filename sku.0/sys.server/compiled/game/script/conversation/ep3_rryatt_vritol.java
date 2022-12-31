@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_rryatt_vritol extends script.base_script
 {
-    public ep3_rryatt_vritol()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_rryatt_vritol";
     public boolean ep3_rryatt_vritol_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -45,7 +43,7 @@ public class ep3_rryatt_vritol extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

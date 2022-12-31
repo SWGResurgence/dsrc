@@ -5,9 +5,7 @@ import script.string_id;
 
 public class explosion_master extends script.base_script
 {
-    public explosion_master()
-    {
-    }
+
     public static final String SCRIPT_EXPLOSION = "theme_park.dungeon.diant_zuy.explosion_player";
     public static final string_id EXPLOSION_WARNING = new string_id("dungeon/diant_bunker", "explosion_warning");
     public int OnAboutToLoseItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException

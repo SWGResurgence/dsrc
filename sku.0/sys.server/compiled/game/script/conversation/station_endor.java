@@ -5,9 +5,7 @@ import script.*;
 
 public class station_endor extends script.base_script
 {
-    public station_endor()
-    {
-    }
+
     public static String c_stringFile = "conversation/station_endor";
     public boolean station_endor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -811,7 +809,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -860,7 +858,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -886,7 +884,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -911,7 +909,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1145,7 +1143,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1170,7 +1168,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1195,7 +1193,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1220,7 +1218,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1245,7 +1243,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1383,7 +1381,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1885,7 +1883,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2023,7 +2021,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2525,7 +2523,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2663,7 +2661,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3165,7 +3163,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3238,7 +3236,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3266,7 +3264,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_endor_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3368,7 +3366,7 @@ public class station_endor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

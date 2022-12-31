@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class exar_swordsman extends script.base_script
 {
-    public exar_swordsman()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCreatureCoverVisibility(self, false);

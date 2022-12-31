@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class shuttle_beacon extends script.base_script
 {
-    public shuttle_beacon()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeShuttleBeacon", null, 3.0f, false);

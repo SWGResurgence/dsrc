@@ -5,9 +5,7 @@ import script.*;
 
 public class trigger_breach_sound extends script.base_script
 {
-    public trigger_breach_sound()
-    {
-    }
+
     public static final string_id SID_TURN_ON = new string_id("spam", "turn_on_sound_object");
     public static final string_id SID_TURN_OFF = new string_id("spam", "turn_off_sound_object");
     public static final String OBJVAR_SOUND_FILE = "soundFile";

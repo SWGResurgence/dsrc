@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class uber_lair_formation_leader extends script.theme_park.poi.base
 {
-    public uber_lair_formation_leader()
-    {
-    }
+
     public int createFormation(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("uber", "GOT SPAWN COMMAND");

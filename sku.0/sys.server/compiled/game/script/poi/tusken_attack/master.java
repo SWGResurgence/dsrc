@@ -10,9 +10,7 @@ import script.obj_id;
 
 public class master extends script.theme_park.poi.base
 {
-    public master()
-    {
-    }
+    
     public static final String SCENARIO_NAME = "tusken_attack";
     public static final String LOG_NAME = "poiTuskenAttack Master";
     public static final String BASE_PATH = "poi." + SCENARIO_NAME;

@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class enclave_controller extends script.base_script
 {
-    public enclave_controller()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String frsConfig = getConfigSetting("GameServer", "enableFRS");

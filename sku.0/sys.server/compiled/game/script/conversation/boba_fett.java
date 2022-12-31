@@ -5,9 +5,7 @@ import script.*;
 
 public class boba_fett extends script.base_script
 {
-    public boba_fett()
-    {
-    }
+
     public static String c_stringFile = "conversation/boba_fett";
     public boolean boba_fett_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -353,7 +351,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -392,7 +390,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -442,7 +440,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -472,7 +470,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -610,7 +608,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -783,7 +781,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -810,7 +808,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -970,7 +968,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1000,7 +998,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1126,7 +1124,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1151,7 +1149,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1312,7 +1310,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1362,7 +1360,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1389,7 +1387,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1550,7 +1548,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1635,7 +1633,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1709,7 +1707,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1748,7 +1746,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1788,7 +1786,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1803,7 +1801,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1842,7 +1840,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1881,7 +1879,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2019,7 +2017,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2157,7 +2155,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2295,7 +2293,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2410,7 +2408,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2616,7 +2614,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2664,7 +2662,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2678,7 +2676,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2770,7 +2768,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2877,7 +2875,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2925,7 +2923,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2939,7 +2937,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3007,7 +3005,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3079,7 +3077,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3140,7 +3138,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boba_fett_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3156,7 +3154,7 @@ public class boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.*;
 
 public class imperial_officer_dathomir extends script.base_script
 {
-    public imperial_officer_dathomir()
-    {
-    }
+
     public static String c_stringFile = "conversation/imperial_officer_dathomir";
     public boolean imperial_officer_dathomir_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

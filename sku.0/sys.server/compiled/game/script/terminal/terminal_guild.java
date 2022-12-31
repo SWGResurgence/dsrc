@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class terminal_guild extends script.terminal.base.base_terminal
 {
-    public terminal_guild()
-    {
-    }
+
     public static final string_id SID_GUILDS_LIST = new string_id("guild", "menu_list_of_guilds");
     public static final string_id SID_GUILD_WAR_LIST = new string_id("guild", "menu_list_of_guild_wars");
     public static final string_id SID_GUILD_WAR_LIST_ACTIVE = new string_id("guild", "menu_list_of_guild_wars_active");
@@ -759,10 +757,6 @@ public class terminal_guild extends script.terminal.base.base_terminal
                     sendSystemMessage(player, SID_ML_NOT_LOADED);
                     return SCRIPT_CONTINUE;
                 }
-                if (utils.isFreeTrial(player, member)) {
-                    sendSystemMessage(player, SID_ML_TRIAL);
-                    return SCRIPT_CONTINUE;
-                }
                 utils.setScriptVar(self, "temp_new_leader", member);
                 int pid = sui.msgbox(self, member, "@guild:make_leader_p", sui.YES_NO, "@guild:make_leader_t", sui.MSG_NORMAL, "handleAcceptLeadership");
                 guild.setWindowPid(self, pid);
@@ -849,10 +843,6 @@ public class terminal_guild extends script.terminal.base.base_terminal
         int guildId = getGuildId(player);
         obj_id leader = guildGetLeader(guildId);
         if (!guild.hasGuildPermission(guildId, player, guild.GUILD_PERMISSION_MEMBER))
-        {
-            return;
-        }
-        if (utils.isFreeTrial(player))
         {
             return;
         }

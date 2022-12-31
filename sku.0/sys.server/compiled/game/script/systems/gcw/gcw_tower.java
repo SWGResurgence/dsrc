@@ -5,9 +5,7 @@ import script.library.*;
 
 public class gcw_tower extends script.base_script
 {
-    public gcw_tower()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "questCallBack", 1);

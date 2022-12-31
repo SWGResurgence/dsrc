@@ -6,9 +6,7 @@ import script.region;
 
 public class regions extends script.base_script
 {
-    public regions()
-    {
-    }
+    
     public static final int GEO_DESERT = 0;
     public static final int GEO_FOREST = 1;
     public static final int GEO_JUNGLE = 2;

@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class lifeday_vendor extends script.base_script
 {
-    public lifeday_vendor()
-    {
-    }
+
     public static String c_stringFile = "conversation/lifeday_vendor";
     public boolean lifeday_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -116,7 +114,7 @@ public class lifeday_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lifeday_vendor_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -171,7 +169,7 @@ public class lifeday_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lifeday_vendor_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -191,7 +189,7 @@ public class lifeday_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lifeday_vendor_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -240,7 +238,7 @@ public class lifeday_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lifeday_vendor_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -291,7 +289,7 @@ public class lifeday_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lifeday_vendor_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -356,7 +354,7 @@ public class lifeday_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lifeday_vendor_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -390,7 +388,7 @@ public class lifeday_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lifeday_vendor_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -451,7 +449,7 @@ public class lifeday_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lifeday_vendor_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -487,7 +485,7 @@ public class lifeday_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class foreman extends script.base_script
 {
-    public foreman()
-    {
-    }
+    
     public static final boolean LOGGING = false;
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {

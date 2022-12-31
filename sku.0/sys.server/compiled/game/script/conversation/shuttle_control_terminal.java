@@ -5,9 +5,7 @@ import script.library.*;
 
 public class shuttle_control_terminal extends script.base_script
 {
-    public shuttle_control_terminal()
-    {
-    }
+
     public static String c_stringFile = "conversation/shuttle_control_terminal";
     public boolean shuttle_control_terminal_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -116,7 +114,7 @@ public class shuttle_control_terminal extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int shuttle_control_terminal_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -130,7 +128,7 @@ public class shuttle_control_terminal extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

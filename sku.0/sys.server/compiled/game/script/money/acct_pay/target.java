@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class target extends script.base_script
 {
-    public target()
-    {
-    }
+
     public static final String HANDLER_DETACH_ME = "handleDetachMe";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

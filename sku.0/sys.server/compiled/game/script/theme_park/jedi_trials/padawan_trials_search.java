@@ -8,9 +8,7 @@ import script.string_id;
 
 public class padawan_trials_search extends script.base_script
 {
-    public padawan_trials_search()
-    {
-    }
+
     public static final String DATATABLE_NAME = "datatables/dungeon/corellian_corvette_quest.iff";
     public static final string_id SEARCH_ITEM = new string_id("bestine", "search_item");
     public static final string_id ALREADY_SEARCHED_MSG = new string_id("jedi_trials", "already_searched");

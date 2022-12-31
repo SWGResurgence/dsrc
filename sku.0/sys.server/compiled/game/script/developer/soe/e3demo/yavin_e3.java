@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class yavin_e3 extends script.base_script
 {
-    public yavin_e3()
-    {
-    }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         setAttrib(self, HEALTH, getMaxAttrib(self, HEALTH));

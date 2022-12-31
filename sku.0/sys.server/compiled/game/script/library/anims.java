@@ -5,9 +5,7 @@ import script.obj_id;
 @SuppressWarnings("unused")
 public class anims extends script.base_script
 {
-    public anims()
-    {
-    }
+
     public static final String ASTROMECH_CBT_ATTACK_MELEE = "cbt_attack_melee";
     public static final String ASTROMECH_CBT_ATTACK_MELEE_WEAPON = "cbt_attack_melee_weapon";
     public static final String ASTROMECH_CBT_ATTACK_RANGED = "cbt_attack_ranged";

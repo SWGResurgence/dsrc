@@ -5,9 +5,7 @@ import script.library.*;
 
 public class delivery_hassel extends script.base_script
 {
-    public delivery_hassel()
-    {
-    }
+
     public static String c_stringFile = "conversation/delivery_hassel";
     public boolean delivery_hassel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -205,7 +203,7 @@ public class delivery_hassel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int delivery_hassel_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -243,7 +241,7 @@ public class delivery_hassel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int delivery_hassel_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -281,7 +279,7 @@ public class delivery_hassel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int delivery_hassel_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -296,7 +294,7 @@ public class delivery_hassel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int delivery_hassel_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -311,7 +309,7 @@ public class delivery_hassel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.library.utils;
 
 public class fs_crafting1_analyzer extends script.base_script
 {
-    public fs_crafting1_analyzer()
-    {
-    }
+
     public static final string_id SID_MENU_USE_ANALYZER = new string_id("quest/force_sensitive/fs_crafting", "menu_use_analyzer");
     public static final string_id SID_MSG_CANT_USE_YET = new string_id("quest/force_sensitive/fs_crafting", "msg_cant_use_yet");
     public static final String QUEST_OBJVAR = "quest.fs_crafting1";

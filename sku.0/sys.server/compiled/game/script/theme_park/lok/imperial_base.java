@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class imperial_base extends script.base_script
 {
-    public imperial_base()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);

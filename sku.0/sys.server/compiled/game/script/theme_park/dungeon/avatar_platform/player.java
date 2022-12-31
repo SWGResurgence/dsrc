@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class player extends script.base_script
 {
-    public player()
-    {
-    }
+
     public static final String MSGS = "dungeon/corvette";
     public int OnAttach(obj_id self) throws InterruptedException
     {

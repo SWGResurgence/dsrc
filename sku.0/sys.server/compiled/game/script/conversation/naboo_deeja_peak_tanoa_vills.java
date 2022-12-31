@@ -8,9 +8,7 @@ import script.*;
 
 public class naboo_deeja_peak_tanoa_vills extends script.base_script
 {
-    public naboo_deeja_peak_tanoa_vills()
-    {
-    }
+
     public static String c_stringFile = "conversation/naboo_deeja_peak_tanoa_vills";
     public boolean naboo_deeja_peak_tanoa_vills_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -105,7 +103,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_deeja_peak_tanoa_vills_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -143,7 +141,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_deeja_peak_tanoa_vills_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -181,7 +179,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_deeja_peak_tanoa_vills_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -196,7 +194,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_deeja_peak_tanoa_vills_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -234,7 +232,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_deeja_peak_tanoa_vills_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -249,7 +247,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_deeja_peak_tanoa_vills_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -287,7 +285,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_deeja_peak_tanoa_vills_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -325,7 +323,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_deeja_peak_tanoa_vills_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -340,7 +338,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_deeja_peak_tanoa_vills_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -378,7 +376,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_deeja_peak_tanoa_vills_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -416,7 +414,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_deeja_peak_tanoa_vills_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -454,7 +452,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_deeja_peak_tanoa_vills_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -492,7 +490,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_deeja_peak_tanoa_vills_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -541,7 +539,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_deeja_peak_tanoa_vills_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -589,7 +587,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_deeja_peak_tanoa_vills_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -605,7 +603,7 @@ public class naboo_deeja_peak_tanoa_vills extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

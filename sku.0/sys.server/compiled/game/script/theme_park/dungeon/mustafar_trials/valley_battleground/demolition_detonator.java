@@ -9,9 +9,7 @@ import script.string_id;
 
 public class demolition_detonator extends script.base_script
 {
-    public demolition_detonator()
-    {
-    }
+
     public static final String STF = "npc_landmines";
     public static final string_id DETONATE = new string_id(STF, "detonate_charge");
     public static final string_id PAGE = new string_id(STF, "page_charge");

@@ -5,9 +5,7 @@ import script.*;
 
 public class c_ddroid_amarent extends script.base_script
 {
-    public c_ddroid_amarent()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_ddroid_amarent";
     public boolean c_ddroid_amarent_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -158,7 +156,7 @@ public class c_ddroid_amarent extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_amarent_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -264,7 +262,7 @@ public class c_ddroid_amarent extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_amarent_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -313,7 +311,7 @@ public class c_ddroid_amarent extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_amarent_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -328,7 +326,7 @@ public class c_ddroid_amarent extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_amarent_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -366,7 +364,7 @@ public class c_ddroid_amarent extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_ddroid_amarent_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -380,7 +378,7 @@ public class c_ddroid_amarent extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

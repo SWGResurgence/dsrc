@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class lt_harburik extends script.base_script
 {
-    public lt_harburik()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);

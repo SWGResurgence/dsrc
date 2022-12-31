@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class victim_sandpanther extends script.theme_park.poi.base
 {
-    public victim_sandpanther()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "First POI Test Attached");

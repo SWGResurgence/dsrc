@@ -10,9 +10,7 @@ import script.obj_id;
 
 public class dungeon_scientist_node_spawner extends script.base_script
 {
-    public dungeon_scientist_node_spawner()
-    {
-    }
+    
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_trigger";
     public static final String NODE_SPAWN_STRING = "scientist_spawn_point";

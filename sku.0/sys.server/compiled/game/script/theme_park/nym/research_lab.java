@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class research_lab extends script.base_script
 {
-    public research_lab()
-    {
-    }
+
     public static final String NYM_OBJECT_DATATABLE = "datatables/spawning/theme_park/nym_research_lab_objects.iff";
     public static final String SPAWNER_DATATABLE = "datatables/spawning/theme_park/nym_research_lab.iff";
     public int OnInitialize(obj_id self) throws InterruptedException

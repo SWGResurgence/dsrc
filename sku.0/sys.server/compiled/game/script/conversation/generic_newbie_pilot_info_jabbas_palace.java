@@ -5,9 +5,7 @@ import script.*;
 
 public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
 {
-    public generic_newbie_pilot_info_jabbas_palace()
-    {
-    }
+
     public static String c_stringFile = "conversation/generic_newbie_pilot_info_jabbas_palace";
     public boolean generic_newbie_pilot_info_jabbas_palace_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -233,7 +231,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -341,7 +339,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -403,7 +401,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -490,7 +488,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -529,7 +527,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -545,7 +543,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -561,7 +559,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -578,7 +576,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -618,7 +616,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -658,7 +656,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -698,7 +696,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -738,7 +736,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -800,7 +798,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -887,7 +885,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -926,7 +924,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -942,7 +940,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_newbie_pilot_info_jabbas_palace_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -958,7 +956,7 @@ public class generic_newbie_pilot_info_jabbas_palace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

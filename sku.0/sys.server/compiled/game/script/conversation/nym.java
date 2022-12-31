@@ -8,9 +8,7 @@ import script.*;
 
 public class nym extends script.base_script
 {
-    public nym()
-    {
-    }
+    
     public static String c_stringFile = "conversation/nym";
     public boolean nym_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -153,7 +151,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -191,7 +189,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -229,7 +227,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -248,7 +246,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -286,7 +284,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -305,7 +303,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -343,7 +341,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -381,7 +379,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -419,7 +417,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -465,7 +463,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -503,7 +501,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -518,7 +516,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -534,7 +532,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -608,7 +606,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -647,7 +645,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -687,7 +685,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -727,7 +725,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -743,7 +741,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -826,7 +824,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -875,7 +873,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -947,7 +945,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -985,7 +983,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1000,7 +998,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nym_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1038,7 +1036,7 @@ public class nym extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

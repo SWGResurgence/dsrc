@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class fs_quests_cc extends script.base_script
 {
-    public fs_quests_cc()
-    {
-    }
+
     public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###0.00%");
     public static final String SCRIPTVAR_CRAFTING_TRACKER = fs_dyn_village.OBJVAR_MY_MASTER_OBJECT;
     public static final String SCRIPTVAR_VILLAGE_PHASE = "community_crafting.village_phase";

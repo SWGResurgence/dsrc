@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class axkva_nightsister_shards extends script.base_script
 {
-    public axkva_nightsister_shards()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "getQuestPlayerName", null, 1, false);

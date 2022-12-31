@@ -8,9 +8,7 @@ import script.*;
 
 public class mtp_angry_meatlump_giver extends script.base_script
 {
-    public mtp_angry_meatlump_giver()
-    {
-    }
+
     public static String c_stringFile = "conversation/mtp_angry_meatlump_giver";
     public boolean mtp_angry_meatlump_giver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -77,7 +75,7 @@ public class mtp_angry_meatlump_giver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

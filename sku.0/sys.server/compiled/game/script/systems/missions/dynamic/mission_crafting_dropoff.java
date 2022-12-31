@@ -7,9 +7,7 @@ import script.string_id;
 
 public class mission_crafting_dropoff extends script.systems.missions.base.mission_dynamic_base
 {
-    public mission_crafting_dropoff()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         destroyObject(self);

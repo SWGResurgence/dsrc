@@ -8,9 +8,7 @@ import script.*;
 
 public class tatooine_espa_jawadroid extends script.base_script
 {
-    public tatooine_espa_jawadroid()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_espa_jawadroid";
     public boolean tatooine_espa_jawadroid_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -64,7 +62,7 @@ public class tatooine_espa_jawadroid extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_espa_jawadroid_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -102,7 +100,7 @@ public class tatooine_espa_jawadroid extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_espa_jawadroid_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -140,7 +138,7 @@ public class tatooine_espa_jawadroid extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_espa_jawadroid_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -178,7 +176,7 @@ public class tatooine_espa_jawadroid extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_espa_jawadroid_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -216,7 +214,7 @@ public class tatooine_espa_jawadroid extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_espa_jawadroid_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -255,7 +253,7 @@ public class tatooine_espa_jawadroid extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_espa_jawadroid_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -269,7 +267,7 @@ public class tatooine_espa_jawadroid extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_espa_jawadroid_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -283,7 +281,7 @@ public class tatooine_espa_jawadroid extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

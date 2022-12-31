@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class sequence_controller extends script.base_script
 {
-    public sequence_controller()
-    {
-    }
+
     public static final String[] TRIGGER_DATA_TYPES = 
     {
         "name",

@@ -7,9 +7,7 @@ import script.*;
 
 public class npe_han_solo_falcon extends script.base_script
 {
-    public npe_han_solo_falcon()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_han_solo_falcon";
     public boolean npe_han_solo_falcon_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -49,7 +47,7 @@ public class npe_han_solo_falcon extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

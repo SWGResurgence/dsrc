@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class retrieve_item_rotate_north extends script.base_script
 {
-    public retrieve_item_rotate_north()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleRecordOriginalRotation", null, 3, false);

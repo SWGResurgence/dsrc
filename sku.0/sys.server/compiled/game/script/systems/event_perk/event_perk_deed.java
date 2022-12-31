@@ -6,9 +6,7 @@ import script.library.*;
 
 public class event_perk_deed extends script.base_script
 {
-    public event_perk_deed()
-    {
-    }
+
     public static final String TBL_PLAYER_TYPES = "datatables/vendor/vendor_player_types.iff";
     public static final String TBL_ALLNPC_TYPES = "datatables/vendor/vendor_allnpc_types.iff";
     public static final String DATATABLE = "datatables/event_perk/perk_data.iff";
@@ -47,7 +45,7 @@ public class event_perk_deed extends script.base_script
         {
             mid.setServerNotify(true);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, useEventPerk);
             if (hasObjVar(self, "event_perk.timeStamp"))
@@ -192,7 +190,7 @@ public class event_perk_deed extends script.base_script
                 destroyObject(self);
                 CustomerServiceLog("EventPerk", "(Perk Created) Type [" + type + "] Location [" + here + "] OID + [" + eventPerk + "].");
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id(STF_FILE, "bad_area"));
             }
@@ -231,7 +229,7 @@ public class event_perk_deed extends script.base_script
                 CustomerServiceLog("EventPerk", "(Perk Created) Type [" + type + "] Location [" + here + "] OID + [" + eventPerk + "].");
                 destroyObject(self);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id(STF_FILE, "bad_area"));
             }
@@ -324,10 +322,10 @@ public class event_perk_deed extends script.base_script
     }
     public void createNpcActor(obj_id self, obj_id player, location here) throws InterruptedException
     {
-        String[] randomOnly = 
-        {
-            "@player_structure:random"
-        };
+        String[] randomOnly =
+                {
+                        "@player_structure:random"
+                };
         utils.setScriptVar(self, "event_perk.checkGender", 0);
         String[] rawRaceTypes = dataTableGetStringColumn(TBL_ALLNPC_TYPES, 0);
         String[] raceTypes = new String[rawRaceTypes.length];
@@ -370,11 +368,11 @@ public class event_perk_deed extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        String[] possibleNPCGender = 
-        {
-            "@player_structure:male",
-            "@player_structure:female"
-        };
+        String[] possibleNPCGender =
+                {
+                        "@player_structure:male",
+                        "@player_structure:female"
+                };
         sui.listbox(self, player, "@event_perk_npc_actor:gender_d", sui.OK_CANCEL, "@event_perk_npc_actor:gender_t", possibleNPCGender, "handleNpcActorGenderSelect", true);
         return SCRIPT_CONTINUE;
     }
@@ -444,18 +442,18 @@ public class event_perk_deed extends script.base_script
         int genderIndex = utils.getIntScriptVar(self, "event_perk.genderIndex");
         String[] raceTypes = utils.getStringArrayScriptVar(self, "event_perk.races");
         String[] playerTypes = dataTableGetStringColumn(TBL_PLAYER_TYPES, 0);
-        String[] genderList = 
-        {
-            "male",
-            "female"
-        };
+        String[] genderList =
+                {
+                        "male",
+                        "female"
+                };
         String creatureName = "vendor";
         String templateName;
         if (raceIndex == 0)
         {
             templateName = playerTypes[rand(1, playerTypes.length - 1)] + "_" + genderList[genderIndex] + ".iff";
         }
-        else 
+        else
         {
             templateName = raceTypes[raceIndex] + "_" + genderList[genderIndex] + ".iff";
         }
@@ -472,7 +470,7 @@ public class event_perk_deed extends script.base_script
             {
                 dressup.dressNpc(vendor, "random_ithorian", true);
             }
-            else 
+            else
             {
                 dressup.dressNpc(vendor, "rich_no_jacket");
             }
@@ -488,7 +486,7 @@ public class event_perk_deed extends script.base_script
             destroyObject(self);
             CustomerServiceLog("EventPerk", "(Perk Created) Type [NPC Actor] Location [" + here + "] OID + [" + vendor + "].");
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("event_perk", "npc_creation_error"));
         }

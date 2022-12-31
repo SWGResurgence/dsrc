@@ -8,9 +8,7 @@ import script.*;
 
 public class tatooine_eisley_byxle extends script.base_script
 {
-    public tatooine_eisley_byxle()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_eisley_byxle";
     public boolean tatooine_eisley_byxle_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -86,7 +84,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_byxle_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -124,7 +122,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_byxle_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -139,7 +137,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_byxle_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -177,7 +175,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_byxle_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -215,7 +213,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_byxle_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -229,7 +227,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_byxle_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -267,7 +265,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_byxle_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -281,7 +279,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_byxle_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -295,7 +293,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_byxle_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -309,7 +307,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_byxle_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -347,7 +345,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_byxle_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -396,7 +394,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_byxle_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -444,7 +442,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_byxle_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -459,7 +457,7 @@ public class tatooine_eisley_byxle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

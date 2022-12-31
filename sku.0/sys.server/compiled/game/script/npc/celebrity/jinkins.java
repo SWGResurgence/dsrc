@@ -9,9 +9,7 @@ import script.string_id;
 
 public class jinkins extends script.base_script
 {
-    public jinkins()
-    {
-    }
+
     public static final String CONVO = "celebrity/jinkins";
     public static final String FACETO_VOLUME_NAME = "faceToTriggerVolume";
     public int OnAttach(obj_id self) throws InterruptedException

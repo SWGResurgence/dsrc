@@ -5,9 +5,7 @@ import script.library.*;
 
 public class battlefield_vehicle extends script.base_script
 {
-    public battlefield_vehicle()
-    {
-    }
+
     public static final String MENU_FILE = "pet/pet_menu";
     public static final String TABLE = "datatables/vehicle/battlefield_vehicle.iff";
     public static final boolean debug = false;

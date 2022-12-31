@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class terminal_warp extends script.base_script
 {
-    public terminal_warp()
-    {
-    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isGod(player) || hasObjVar(player, "beta.terminal_ok"))

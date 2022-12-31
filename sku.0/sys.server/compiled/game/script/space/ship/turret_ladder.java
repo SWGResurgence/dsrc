@@ -9,9 +9,7 @@ import script.string_id;
 
 public class turret_ladder extends script.base_script
 {
-    public turret_ladder()
-    {
-    }
+
     public static final string_id SID_PILOT = new string_id("space/space_interaction", "pilot_ship");
     public static final string_id SID_TURRET_ENTER = new string_id("space/space_interaction", "turret_enter");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

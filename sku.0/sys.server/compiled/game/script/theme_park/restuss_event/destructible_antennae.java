@@ -6,9 +6,7 @@ import script.library.groundquests;
 
 public class destructible_antennae extends script.base_script
 {
-    public destructible_antennae()
-    {
-    }
+
     public static final string_id SID_MNU_EXPLOSIVE = new string_id("restuss_event/object", "antenna_explosive");
     public static final string_id SID_MNU_ARM_EXPLOSIVE = new string_id("restuss_event/object", "antenna_arm_explosive");
     public static final string_id SID_MNU_WRONG_FCT = new string_id("restuss_event/object", "incorrect_faction");

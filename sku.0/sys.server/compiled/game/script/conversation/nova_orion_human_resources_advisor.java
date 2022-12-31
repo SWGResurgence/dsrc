@@ -8,9 +8,7 @@ import script.*;
 
 public class nova_orion_human_resources_advisor extends script.base_script
 {
-    public nova_orion_human_resources_advisor()
-    {
-    }
+
     public static String c_stringFile = "conversation/nova_orion_human_resources_advisor";
     public boolean nova_orion_human_resources_advisor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -87,7 +85,7 @@ public class nova_orion_human_resources_advisor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_orion_human_resources_advisor_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -145,7 +143,7 @@ public class nova_orion_human_resources_advisor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nova_orion_human_resources_advisor_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -160,7 +158,7 @@ public class nova_orion_human_resources_advisor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -2,14 +2,13 @@ package script.library;
 
 import script.*;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Vector;
 
 public class storyteller extends script.base_script
 {
-    public storyteller()
-    {
-    }
+
     public static final String STORYTELLER_DATATABLE = "datatables/item/master_item/storyteller_item.iff";
     public static final String STATIC_ITEM_DATATABLE = "datatables/item/master_item/master_item.iff";
     public static final String THEATER_MODE = "theater_mode";
@@ -528,7 +527,7 @@ public class storyteller extends script.base_script
     }
     public static void setTokenDailyCountResetTime(obj_id token) throws InterruptedException
     {
-        int timeUntilAlarm = createDailyAlarmClock(token, "storytellerEffectTokenDailyAlarm", null, 4, 0, 0);
+        int timeUntilAlarm = timedMessageToDaily(token, "storytellerEffectTokenDailyAlarm", null, LocalTime.of(4, 0, 0));
         int alarmStamp = getCalendarTime() + timeUntilAlarm;
         setObjVar(token, storyteller.STORYTELLER_DAILY_COUNT_RESET, alarmStamp);
     }
@@ -556,11 +555,6 @@ public class storyteller extends script.base_script
                 sendSystemMessage(player, new string_id("storyteller", "placement_god_mode"));
             }
             return true;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "placement_no_trial_accounts"));
-            return false;
         }
         obj_id myCell = here.cell;
         obj_id myContainer = getTopMostContainer(myCell);

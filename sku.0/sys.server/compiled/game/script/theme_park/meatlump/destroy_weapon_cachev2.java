@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class destroy_weapon_cachev2 extends script.base_script
 {
-    public destroy_weapon_cachev2()
-    {
-    }
+
     public static final String VAR_PREFIX = "meatlump_weapon_cache";
     public static final String PID_NAME = VAR_PREFIX + ".pid";
     public static final String CURRENTLY_CALIBRATION = VAR_PREFIX + ".calibration";

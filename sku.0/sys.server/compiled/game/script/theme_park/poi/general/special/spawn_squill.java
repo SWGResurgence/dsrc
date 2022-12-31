@@ -8,9 +8,7 @@ import script.theme_park.tatooine.gating;
 
 public class spawn_squill extends script.base_script
 {
-    public spawn_squill()
-    {
-    }
+
     public static final String QUEST_ID = gating.BIB_QUEST;
     public static final String QUEST_SCRIPT_PATH = "theme_park.tatooine.bib_quest.";
     public int OnAttach(obj_id self) throws InterruptedException

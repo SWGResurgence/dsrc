@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_etyyy_pilot_etyyy_to_bocctyyy extends script.base_script
 {
-    public ep3_etyyy_pilot_etyyy_to_bocctyyy()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_etyyy_pilot_etyyy_to_bocctyyy";
     public boolean ep3_etyyy_pilot_etyyy_to_bocctyyy_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -36,7 +34,7 @@ public class ep3_etyyy_pilot_etyyy_to_bocctyyy extends script.base_script
     }
     public boolean ep3_etyyy_pilot_etyyy_to_bocctyyy_condition_isFemaleCharacter(obj_id player, obj_id npc) throws InterruptedException
     {
-        return getGender(player) == GENDER_FEMALE;
+        return getGender(player) == Gender.FEMALE;
     }
     public boolean ep3_etyyy_pilot_etyyy_to_bocctyyy_condition_tooManyInGroup(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -120,7 +118,7 @@ public class ep3_etyyy_pilot_etyyy_to_bocctyyy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

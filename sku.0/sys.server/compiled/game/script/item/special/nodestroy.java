@@ -6,9 +6,7 @@ import script.string_id;
 
 public class nodestroy extends script.base_script
 {
-    public nodestroy()
-    {
-    }
+    
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id owner = getOwner(self);

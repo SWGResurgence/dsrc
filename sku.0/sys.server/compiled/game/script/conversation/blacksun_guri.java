@@ -5,9 +5,7 @@ import script.*;
 
 public class blacksun_guri extends script.base_script
 {
-    public blacksun_guri()
-    {
-    }
+
     public static String c_stringFile = "conversation/blacksun_guri";
     public boolean blacksun_guri_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -163,7 +161,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -209,7 +207,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -270,7 +268,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -307,7 +305,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -347,7 +345,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -393,7 +391,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -413,7 +411,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -535,7 +533,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -607,7 +605,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -622,7 +620,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -660,7 +658,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -698,7 +696,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -770,7 +768,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -785,7 +783,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -823,7 +821,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -861,7 +859,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -899,7 +897,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -937,7 +935,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -976,7 +974,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1014,7 +1012,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1052,7 +1050,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1090,7 +1088,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1128,7 +1126,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1166,7 +1164,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1204,7 +1202,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1242,7 +1240,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1288,7 +1286,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1326,7 +1324,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1373,7 +1371,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1411,7 +1409,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1449,7 +1447,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1528,7 +1526,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1678,7 +1676,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1716,7 +1714,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1787,7 +1785,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1937,7 +1935,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1975,7 +1973,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2013,7 +2011,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2084,7 +2082,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2234,7 +2232,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2384,7 +2382,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int blacksun_guri_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2399,7 +2397,7 @@ public class blacksun_guri extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

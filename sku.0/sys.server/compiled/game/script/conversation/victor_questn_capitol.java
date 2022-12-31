@@ -8,9 +8,7 @@ import script.*;
 
 public class victor_questn_capitol extends script.base_script
 {
-    public victor_questn_capitol()
-    {
-    }
+
     public static String c_stringFile = "conversation/victor_questn_capitol";
     public boolean victor_questn_capitol_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -131,7 +129,7 @@ public class victor_questn_capitol extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int victor_questn_capitol_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -179,7 +177,7 @@ public class victor_questn_capitol extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int victor_questn_capitol_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -202,7 +200,7 @@ public class victor_questn_capitol extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

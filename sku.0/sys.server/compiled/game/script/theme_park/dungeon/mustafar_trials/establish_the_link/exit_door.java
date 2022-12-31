@@ -9,9 +9,7 @@ import script.string_id;
 
 public class exit_door extends script.base_script
 {
-    public exit_door()
-    {
-    }
+
     public static final string_id SID_EXIT_TRIAL = new string_id(trial.UPLINK_STF, "bunker_exit");
     public static final string_id SID_EXIT_TRIAL_CONFIRM = new string_id(trial.UPLINK_STF, "bunker_exit_confirm");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

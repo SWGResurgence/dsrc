@@ -4,11 +4,11 @@ import script.dictionary;
 import script.obj_id;
 import script.string_id;
 
+import java.time.LocalTime;
+
 public class missions extends script.base_script
 {
-    public missions()
-    {
-    }
+
     public static final int STATE_DYNAMIC_PICKUP = 1;
     public static final int STATE_DYNAMIC_DROPOFF = 2;
     public static final int STATE_DYNAMIC_START = 3;
@@ -99,7 +99,7 @@ public class missions extends script.base_script
         if (!hasObjVar(player, DAILY_MISSION_CLOCK_OBJVAR))
         {
             int currentTime = getCalendarTime();
-            int alarmTime = createDailyAlarmClock(player, "handleDailyMissionReset", null, 19, 0, 0);
+            int alarmTime = timedMessageToDaily(player, "storytellerEffectTokenDailyAlarm", null, LocalTime.of(19, 0, 0));
             int alarmTimeObjVar = currentTime + alarmTime;
             setObjVar(player, DAILY_MISSION_CLOCK_OBJVAR, alarmTimeObjVar);
         }
@@ -181,7 +181,7 @@ public class missions extends script.base_script
             if (countObjVar > 0)
             {
                 int currentTime = getCalendarTime();
-                int alarmTime = createDailyAlarmClock(player, "handleDailyMissionReset", null, 19, 0, 0);
+                int alarmTime = timedMessageToDaily(player, "handleDailyMissionReset", null, LocalTime.of(19, 0, 0));
                 int alarmTimeObjVar = currentTime + alarmTime;
                 setObjVar(player, DAILY_MISSION_CLOCK_OBJVAR, alarmTimeObjVar);
             }

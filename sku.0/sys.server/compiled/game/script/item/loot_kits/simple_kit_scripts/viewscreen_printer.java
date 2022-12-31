@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class viewscreen_printer extends script.base_script
 {
-    public viewscreen_printer()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "setUp", null, 2, false);

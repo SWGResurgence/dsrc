@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class ss_setup extends script.base_script
 {
-    public ss_setup()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "beginSetup", null, 1, false);

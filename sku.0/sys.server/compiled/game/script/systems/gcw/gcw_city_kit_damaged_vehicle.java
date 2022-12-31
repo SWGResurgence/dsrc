@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class gcw_city_kit_damaged_vehicle extends script.systems.gcw.gcw_city_kit
 {
-    public gcw_city_kit_damaged_vehicle()
-    {
-    }
+
     public static final String[] imperialVehicles = 
     {
         "gcw_city_at_st_1",

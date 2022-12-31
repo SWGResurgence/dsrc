@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_main_trace extends script.base_script
 {
-    public npe_main_trace()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_main_trace";
     public boolean npe_main_trace_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -69,7 +67,7 @@ public class npe_main_trace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_main_trace_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -108,7 +106,7 @@ public class npe_main_trace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_main_trace_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -124,7 +122,7 @@ public class npe_main_trace extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

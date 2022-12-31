@@ -9,9 +9,7 @@ import script.string_id;
 
 public class alarm_clock extends script.base_script
 {
-    public alarm_clock()
-    {
-    }
+
     public static final string_id SID_ALARM_CLOCK_FORMAT = new string_id("player/player_utility.stf", "alarm_clock_format");
     public static final string_id SID_ALARM_CLOCK_1_1000 = new string_id("player/player_utility.stf", "alarm_clock_1_1000");
     public static final string_id SID_ALARM_CLOCK_SET = new string_id("player/player_utility.stf", "alarm_clock_set");

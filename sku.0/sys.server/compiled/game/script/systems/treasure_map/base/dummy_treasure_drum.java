@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class dummy_treasure_drum extends script.base_script
 {
-    public dummy_treasure_drum()
-    {
-    }
+
     public static final String SCRIPT_TREASUREGUARD = "systems.treasure_map.base.treasure_guard";
     public static final String REAL_CHEST = "object/tangible/container/drum/treasure_drum.iff";
     public static final String SCRIPT_REAL_CHEST = "systems.treasure_map.base.treasure_drum";

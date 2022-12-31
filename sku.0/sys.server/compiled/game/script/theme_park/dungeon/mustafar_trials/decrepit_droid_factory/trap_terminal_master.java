@@ -9,9 +9,7 @@ import script.string_id;
 
 public class trap_terminal_master extends script.base_script
 {
-    public trap_terminal_master()
-    {
-    }
+
     public static final String DECREPIT_STF = "mustafar/decrepit_droid_factory";
     public static final string_id SID_OPEN_THIRD_FLOOR = new string_id(DECREPIT_STF, "open_third_floor");
     public static final string_id SID_TRAP_ACTIVE = new string_id(DECREPIT_STF, "trap_active");

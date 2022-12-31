@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class antagonist extends script.theme_park.poi.base
 {
-    public antagonist()
-    {
-    }
+
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String VAR_RESET_TIMER = scenario.VAR_SCENARIO_BASE + ".resetTimer";
     public static final String HANDLER_TIMER = "handleTimer";

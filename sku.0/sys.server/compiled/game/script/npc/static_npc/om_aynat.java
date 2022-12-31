@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class om_aynat extends script.base_script
 {
-    public om_aynat()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id pants = createObject("object/tangible/wearables/pants/pants_s31.iff", self, "");

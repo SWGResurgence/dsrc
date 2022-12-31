@@ -5,9 +5,7 @@ import script.*;
 
 public class obiwan_launch_instance_object extends script.base_script
 {
-    public obiwan_launch_instance_object()
-    {
-    }
+
     public static final string_id SID_LAST_QUEST = new string_id(mustafar.STF_OBI_MSGS, "obiwan_quest_almost_complete");
     public static final string_id SID_LAUNCH = new string_id(mustafar.STF_OBI_MSGS, "obiwan_finale_launch");
     public static final string_id SID_EJECT = new string_id(mustafar.STF_OBI_MSGS, "obiwan_finale_eject");

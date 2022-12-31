@@ -8,9 +8,7 @@ import script.*;
 
 public class mechanic extends script.base_script
 {
-    public mechanic()
-    {
-    }
+
     public static String c_stringFile = "conversation/mechanic";
     public boolean mechanic_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -41,7 +39,7 @@ public class mechanic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

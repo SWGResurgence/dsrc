@@ -11,9 +11,7 @@ import script.obj_id;
 
 public class mitigation extends script.base_script
 {
-    public mitigation()
-    {
-    }
+
     public static final String PID_SCRIPTVAR = "mitigationPid";
     public static final String SCRIPTVAR = "mitigation";
     public static final String MITIGATION_TOOL_PROMPT = "SELECT AN ATTACK LOCATION.\n\r\n\rThe mitigation tool tests armor mitigation based on the attacker weapon.  No actual damage is performed on the target.  Damage and mitigation is simulated using the current mitigation system (without elemental damage).  When the test is conducted a report will be exported to your client directory.";

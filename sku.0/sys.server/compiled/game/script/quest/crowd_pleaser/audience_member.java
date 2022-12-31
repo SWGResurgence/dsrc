@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class audience_member extends script.base_script
 {
-    public audience_member()
-    {
-    }
+
     public static final String[] MUSIC_NAMES = 
     {
         "starwars1",

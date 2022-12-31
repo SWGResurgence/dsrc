@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class jilljoo_jab extends script.base_script
 {
-    public jilljoo_jab()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/shirt/shirt_s07.iff", self, "");

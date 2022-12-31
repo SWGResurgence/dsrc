@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_imperial_trap extends script.base_script
 {
-    public npe_imperial_trap()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_imperial_trap";
     public boolean npe_imperial_trap_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -84,7 +82,7 @@ public class npe_imperial_trap extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_imperial_trap_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -124,7 +122,7 @@ public class npe_imperial_trap extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_imperial_trap_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -163,7 +161,7 @@ public class npe_imperial_trap extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_imperial_trap_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -179,7 +177,7 @@ public class npe_imperial_trap extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_imperial_trap_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -251,7 +249,7 @@ public class npe_imperial_trap extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_imperial_trap_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -289,7 +287,7 @@ public class npe_imperial_trap extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_imperial_trap_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -328,7 +326,7 @@ public class npe_imperial_trap extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_imperial_trap_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -343,7 +341,7 @@ public class npe_imperial_trap extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_imperial_trap_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -381,7 +379,7 @@ public class npe_imperial_trap extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_imperial_trap_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -398,7 +396,7 @@ public class npe_imperial_trap extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

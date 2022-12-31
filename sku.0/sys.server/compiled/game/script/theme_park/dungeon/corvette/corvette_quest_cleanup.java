@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class corvette_quest_cleanup extends script.base_script
 {
-    public corvette_quest_cleanup()
-    {
-    }
+
     public static final String CORL_CORVETTE_OBJVAR = "corl_corvette";
     public static final String TICKET_OWNER_OBJVAR = CORL_CORVETTE_OBJVAR + ".ticket_owner";
     public int OnDestroy(obj_id self) throws InterruptedException

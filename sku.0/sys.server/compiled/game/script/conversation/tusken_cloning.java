@@ -7,9 +7,7 @@ import script.*;
 
 public class tusken_cloning extends script.base_script
 {
-    public tusken_cloning()
-    {
-    }
+
     public static String c_stringFile = "conversation/tusken_cloning";
     public boolean tusken_cloning_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

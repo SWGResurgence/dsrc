@@ -6,9 +6,7 @@ import java.util.Vector;
 
 public class scenario extends script.base_script
 {
-    public scenario()
-    {
-    }
+    
     public static final String MEDIATOR = "mediator";
     public static final String ANTAGONIST = "antagonist";
     public static final String VAR_SCENARIO_BASE = "scenario";

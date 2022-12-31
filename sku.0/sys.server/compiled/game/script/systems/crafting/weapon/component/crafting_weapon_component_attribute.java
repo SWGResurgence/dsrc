@@ -9,9 +9,7 @@ import script.string_id;
 
 public class crafting_weapon_component_attribute extends script.base_script
 {
-    public crafting_weapon_component_attribute()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String tangible_name = getTemplateName(self);

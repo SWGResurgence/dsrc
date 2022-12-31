@@ -8,9 +8,7 @@ import script.*;
 
 public class corvette_vledmo_neutral_rescue_target extends script.base_script
 {
-    public corvette_vledmo_neutral_rescue_target()
-    {
-    }
+
     public static String c_stringFile = "conversation/corvette_vledmo_neutral_rescue_target";
     public boolean corvette_vledmo_neutral_rescue_target_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

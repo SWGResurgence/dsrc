@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class meatlump_act1_spawned_tracker extends script.base_script
 {
-    public meatlump_act1_spawned_tracker()
-    {
-    }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id objParent = getObjIdObjVar(self, "objParent");

@@ -8,9 +8,7 @@ import script.*;
 
 public class e3_corvette extends script.base_script
 {
-    public e3_corvette()
-    {
-    }
+
     public static String c_stringFile = "conversation/e3_corvette";
     public boolean e3_corvette_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -35,7 +33,7 @@ public class e3_corvette extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

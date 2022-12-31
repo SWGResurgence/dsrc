@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class kash_rodian_shuttle extends script.base_script
 {
-    public kash_rodian_shuttle()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.ai");

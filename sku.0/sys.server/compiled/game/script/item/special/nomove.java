@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class nomove extends script.item.special.nomove_base
 {
-    public nomove()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "notrade"))

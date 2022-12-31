@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_blacksun_light_s03_chassis extends script.systems.crafting.space.chassis.crafting_base_blacksun_light_s03_chassis
 {
-    public crafting_blacksun_light_s03_chassis()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

@@ -13,9 +13,7 @@ import java.util.Vector;
 
 public class droid_patrol_script extends script.base_script
 {
-    public droid_patrol_script()
-    {
-    }
+
     public static final string_id[] DROID_RESPONSE = 
     {
         new string_id(trial.UPLINK_STF, "oww"),

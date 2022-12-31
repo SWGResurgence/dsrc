@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class one_hundred_sided_dice_set extends script.item.dice.base.base_dice
 {
-    public one_hundred_sided_dice_set()
-    {
-    }
+
     public static final int FACE_COUNT = 100;
     public static final int DEFAULT_DICE_COUNT = 1;
     public static final String TYPE_NAME = "one_hundred_sided_dice_set";

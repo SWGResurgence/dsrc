@@ -8,9 +8,7 @@ import script.*;
 
 public class stap_quest_master_1 extends script.base_script
 {
-    public stap_quest_master_1()
-    {
-    }
+
     public static String c_stringFile = "conversation/stap_quest_master_1";
     public boolean stap_quest_master_1_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -42,7 +40,7 @@ public class stap_quest_master_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

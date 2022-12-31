@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class krix extends script.base_script
 {
-    public krix()
-    {
-    }
+
     public static final float[] HEALTH_TRIGGER = 
     {
         0.5f,

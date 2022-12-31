@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class entertained extends script.base_script
 {
-    public entertained()
-    {
-    }
+    
     public static final int ENTERTAINED_CHECK_TIME = 10;
     public int OnAttach(obj_id self) throws InterruptedException
     {

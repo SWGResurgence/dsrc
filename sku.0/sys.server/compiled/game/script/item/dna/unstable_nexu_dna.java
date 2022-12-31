@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class unstable_nexu_dna extends script.base_script
 {
-    public unstable_nexu_dna()
-    {
-    }
+
     public static final String UNSTABLE_NEXU_DNA_LOOT_ITEM = "item_cs_dna_nexu";
     public static final int UNSTABLE_NEXU_DNA_LOOT_CHANCE = 2;
 

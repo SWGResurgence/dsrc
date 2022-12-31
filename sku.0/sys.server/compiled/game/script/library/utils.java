@@ -7,9 +7,7 @@ import java.util.*;
 
 public class utils extends script.base_script
 {
-    public utils()
-    {
-    }
+
     public static final String VERSION = "v0.01.00";
     public static final String VAR_OWNER = "owner";
     public static final String VAR_COOWNERS = "coowners";
@@ -5671,14 +5669,6 @@ public class utils extends script.base_script
     {
         int timeCalled = utils.getIntScriptVar(player, toCheckFor);
         return timeCalled < 1 ? -1 : timeCalled + utils.getIntScriptVar(player, modifiedTime) - getGameTime();
-    }
-    public static boolean isFreeTrial(obj_id player) throws InterruptedException
-    {
-        return isFreeTrialAccount(player);
-    }
-    public static boolean isFreeTrial(obj_id player, obj_id target) throws InterruptedException
-    {
-        return isFreeTrialAccount(player);
     }
     public static void notifyObject(obj_id objTarget, String strNotificationName, dictionary dctParams) throws InterruptedException
     {

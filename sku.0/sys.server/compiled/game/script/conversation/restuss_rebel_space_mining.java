@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class restuss_rebel_space_mining extends script.base_script
 {
-    public restuss_rebel_space_mining()
-    {
-    }
+
     public static String c_stringFile = "conversation/restuss_rebel_space_mining";
     public boolean restuss_rebel_space_mining_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -267,7 +265,7 @@ public class restuss_rebel_space_mining extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int restuss_rebel_space_mining_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -298,7 +296,7 @@ public class restuss_rebel_space_mining extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int restuss_rebel_space_mining_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -329,7 +327,7 @@ public class restuss_rebel_space_mining extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.library.*;
 
 public class beast_control_device extends script.base_script
 {
-    public beast_control_device()
-    {
-    }
+
     public static final string_id SID_CANNOT_TRANSFER_BCD = new string_id("beast", "cannot_transfer_bcd");
     public static final string_id SID_CANNOT_CALL_BEAST_COMBAT = new string_id("beast", "beast_cant_call_combat");
     public static final string_id SID_CANNOT_STORE_BEAST_COMBAT = new string_id("beast", "beast_cant_store");

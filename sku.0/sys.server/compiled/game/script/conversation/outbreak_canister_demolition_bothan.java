@@ -8,9 +8,7 @@ import script.*;
 
 public class outbreak_canister_demolition_bothan extends script.base_script
 {
-    public outbreak_canister_demolition_bothan()
-    {
-    }
+
     public static String c_stringFile = "conversation/outbreak_canister_demolition_bothan";
     public boolean outbreak_canister_demolition_bothan_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -93,7 +91,7 @@ public class outbreak_canister_demolition_bothan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int outbreak_canister_demolition_bothan_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -108,7 +106,7 @@ public class outbreak_canister_demolition_bothan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int outbreak_canister_demolition_bothan_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -125,7 +123,7 @@ public class outbreak_canister_demolition_bothan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int outbreak_canister_demolition_bothan_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -163,7 +161,7 @@ public class outbreak_canister_demolition_bothan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int outbreak_canister_demolition_bothan_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -201,7 +199,7 @@ public class outbreak_canister_demolition_bothan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int outbreak_canister_demolition_bothan_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -239,7 +237,7 @@ public class outbreak_canister_demolition_bothan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int outbreak_canister_demolition_bothan_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -277,7 +275,7 @@ public class outbreak_canister_demolition_bothan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int outbreak_canister_demolition_bothan_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -315,7 +313,7 @@ public class outbreak_canister_demolition_bothan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int outbreak_canister_demolition_bothan_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -332,7 +330,7 @@ public class outbreak_canister_demolition_bothan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.library.space_transition;
 
 public class patrol extends script.base_script
 {
-    public patrol()
-    {
-    }
+
     public static final string_id SID_NEW_WAYPOINT = new string_id("space/quest", "patrol_new_waypoint");
     public static final string_id SID_WAYPOINT_ARRIVED = new string_id("space/quest", "patrol_waypoint_arrived");
     public static final string_id SID_CIRCUIT_COMPLETE = new string_id("space/quest", "patrol_circuit_complete");

@@ -6,9 +6,7 @@ import script.*;
 
 public class privateer_broker_fired_worker extends script.base_script
 {
-    public privateer_broker_fired_worker()
-    {
-    }
+
     public static String c_stringFile = "conversation/privateer_broker_fired_worker";
     public boolean privateer_broker_fired_worker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -40,7 +38,7 @@ public class privateer_broker_fired_worker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

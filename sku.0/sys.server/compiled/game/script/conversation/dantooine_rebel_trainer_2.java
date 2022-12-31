@@ -5,9 +5,7 @@ import script.*;
 
 public class dantooine_rebel_trainer_2 extends script.base_script
 {
-    public dantooine_rebel_trainer_2()
-    {
-    }
+
     public static String c_stringFile = "conversation/dantooine_rebel_trainer_2";
     public boolean dantooine_rebel_trainer_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -505,7 +503,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -520,7 +518,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -576,7 +574,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -658,7 +656,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -691,7 +689,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -721,7 +719,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -829,7 +827,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -880,7 +878,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -970,7 +968,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1020,7 +1018,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1053,7 +1051,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1102,7 +1100,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1170,7 +1168,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1258,7 +1256,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1291,7 +1289,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1403,7 +1401,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1511,7 +1509,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1547,7 +1545,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1601,7 +1599,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1677,7 +1675,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1714,7 +1712,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1772,7 +1770,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1787,7 +1785,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1835,7 +1833,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1885,7 +1883,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1920,7 +1918,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2027,7 +2025,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2124,7 +2122,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2161,7 +2159,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2195,7 +2193,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2299,7 +2297,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2395,7 +2393,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2480,7 +2478,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2566,7 +2564,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2651,7 +2649,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2701,7 +2699,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2740,7 +2738,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2790,7 +2788,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2819,7 +2817,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2868,7 +2866,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2929,7 +2927,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3068,7 +3066,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch83(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3156,7 +3154,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3343,7 +3341,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3459,7 +3457,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch89(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3583,7 +3581,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch90(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3710,7 +3708,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch94(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3856,7 +3854,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch95(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3872,7 +3870,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch97(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3888,7 +3886,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch99(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3904,7 +3902,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch101(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3920,7 +3918,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch104(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4103,7 +4101,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch105(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4166,7 +4164,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch111(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4247,7 +4245,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch119(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4431,7 +4429,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch121(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4557,7 +4555,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch122(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4629,7 +4627,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch124(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4702,7 +4700,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch125(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4775,7 +4773,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch126(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4854,7 +4852,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch134(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4980,7 +4978,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int dantooine_rebel_trainer_2_handleBranch135(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5059,7 +5057,7 @@ public class dantooine_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

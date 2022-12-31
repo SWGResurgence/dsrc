@@ -8,9 +8,7 @@ import script.string_id;
 
 public class ai_corpse_inventory extends script.base_script
 {
-    public ai_corpse_inventory()
-    {
-    }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(transferer))

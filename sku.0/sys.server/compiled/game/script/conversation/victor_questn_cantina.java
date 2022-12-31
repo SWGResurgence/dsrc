@@ -8,9 +8,7 @@ import script.*;
 
 public class victor_questn_cantina extends script.base_script
 {
-    public victor_questn_cantina()
-    {
-    }
+
     public static String c_stringFile = "conversation/victor_questn_cantina";
     public boolean victor_questn_cantina_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

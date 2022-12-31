@@ -8,9 +8,7 @@ import script.*;
 
 public class borvo_the_hutt extends script.base_script
 {
-    public borvo_the_hutt()
-    {
-    }
+
     public static String c_stringFile = "conversation/borvo_the_hutt";
     public boolean borvo_the_hutt_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -155,7 +153,7 @@ public class borvo_the_hutt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int borvo_the_hutt_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -317,7 +315,7 @@ public class borvo_the_hutt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int borvo_the_hutt_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -387,7 +385,7 @@ public class borvo_the_hutt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int borvo_the_hutt_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -412,7 +410,7 @@ public class borvo_the_hutt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int borvo_the_hutt_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -505,7 +503,7 @@ public class borvo_the_hutt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int borvo_the_hutt_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -543,7 +541,7 @@ public class borvo_the_hutt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int borvo_the_hutt_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -592,7 +590,7 @@ public class borvo_the_hutt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int borvo_the_hutt_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -641,7 +639,7 @@ public class borvo_the_hutt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int borvo_the_hutt_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -655,7 +653,7 @@ public class borvo_the_hutt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int borvo_the_hutt_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -704,7 +702,7 @@ public class borvo_the_hutt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int borvo_the_hutt_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -729,7 +727,7 @@ public class borvo_the_hutt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

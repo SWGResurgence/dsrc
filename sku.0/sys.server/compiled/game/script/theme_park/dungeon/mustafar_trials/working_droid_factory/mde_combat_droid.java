@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class mde_combat_droid extends script.base_script
 {
-    public mde_combat_droid()
-    {
-    }
+
     public static final boolean LOGGING = true;
     public int OnDestroy(obj_id self) throws InterruptedException
     {

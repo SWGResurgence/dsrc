@@ -8,9 +8,7 @@ import script.*;
 
 public class u13_boba_fett extends script.base_script
 {
-    public u13_boba_fett()
-    {
-    }
+
     public static String c_stringFile = "conversation/u13_boba_fett";
     public boolean u13_boba_fett_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -55,7 +53,7 @@ public class u13_boba_fett extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

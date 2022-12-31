@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class poi_victim extends script.base_script
 {
-    public poi_victim()
-    {
-    }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         detachScript(self, "theme_park.tatooine.behavior.poi_victim");

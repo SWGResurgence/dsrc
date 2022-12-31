@@ -7,9 +7,7 @@ import script.*;
 
 public class sean_contact extends script.base_script
 {
-    public sean_contact()
-    {
-    }
+
     public static String c_stringFile = "conversation/sean_contact";
     public boolean sean_contact_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

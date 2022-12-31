@@ -7,9 +7,7 @@ import script.*;
 
 public class theme_park_record_keeper_imperial extends script.base_script
 {
-    public theme_park_record_keeper_imperial()
-    {
-    }
+    
     public static String c_stringFile = "conversation/theme_park_record_keeper_imperial";
     public boolean theme_park_record_keeper_imperial_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

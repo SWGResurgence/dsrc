@@ -10,9 +10,7 @@ import script.string_id;
 
 public class pole extends script.base_script
 {
-    public pole()
-    {
-    }
+
     public static final String STF = "som/som_item";
     public static final string_id MNU_TACKLE = new string_id(minigame.STF_FISH, "mnu_open_tackle");
     public static final string_id MNU_BAIT = new string_id(minigame.STF_FISH, "mnu_set_bait");
@@ -81,7 +79,7 @@ public class pole extends script.base_script
         }
         if(item == menu_info_types.SERVER_MENU30) {
             if(fishing.getElusiveFishRewardedCount() > 0) {
-                fishing.showElusiveFishLeaderboard(player, null);
+                fishing.showElusiveFishLeaderboard(player);
             } else {
                 sendSystemMessageTestingOnly(player, "No ELUSIVE Fish have been captured yet so the Leaderboard is empty.");
             }

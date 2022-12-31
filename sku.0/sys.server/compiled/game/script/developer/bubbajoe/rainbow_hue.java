@@ -14,6 +14,7 @@ public class rainbow_hue extends script.base_script
 {
     public String PAL_MAIN = "/private/index_color_1";
     public String PAL_SECOND = "/private/index_color_2";
+    public String PAL_TERTIARY = "/private/index_color_3";
     public int OnAttach(obj_id self)
     {
         return SCRIPT_CONTINUE;
@@ -26,11 +27,10 @@ public class rainbow_hue extends script.base_script
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi)
     {
-        mi.addRootMenu(menu_info_types.SERVER_MENU48, new string_id("Rainbowize"));
-        mi.addSubMenu(menu_info_types.SERVER_MENU49, menu_info_types.SERVER_MENU50, new string_id("Stop"));
+        int momma = mi.addRootMenu(menu_info_types.SERVER_MENU48, new string_id("Rainbowize"));
+        mi.addSubMenu(momma, menu_info_types.SERVER_MENU50, new string_id("Stop"));
         return SCRIPT_CONTINUE;
     }
-
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU48)
@@ -73,22 +73,22 @@ public class rainbow_hue extends script.base_script
     public void hueLoop(obj_id self) throws InterruptedException
     {
         int pal_color = 0;
-        while (pal_color < 255)
+        for (int i = 0; i < 255; i++)
         {
             hue.setColor(self, PAL_MAIN, pal_color);
             pal_color++;
         }
-        //startPrimusHueLoop(self);
+        startPrimusHueLoop(self);
     }
 
     public void hueSecondLoop(obj_id self) throws InterruptedException
     {
         int pal_color = 0;
-        while (pal_color < 255)
+        for (int i = 0; i < 255; i++)
         {
             hue.setColor(self, PAL_SECOND, pal_color);
             pal_color++;
         }
-        //startSecondusHueLoop(self);
+        startSecondusHueLoop(self);
     }
 }

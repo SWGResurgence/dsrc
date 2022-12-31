@@ -5,9 +5,7 @@ import script.*;
 
 public class c_impdefector_jom extends script.base_script
 {
-    public c_impdefector_jom()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_impdefector_jom";
     public boolean c_impdefector_jom_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -142,7 +140,7 @@ public class c_impdefector_jom extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_impdefector_jom_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -167,7 +165,7 @@ public class c_impdefector_jom extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_impdefector_jom_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -216,7 +214,7 @@ public class c_impdefector_jom extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_impdefector_jom_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -241,7 +239,7 @@ public class c_impdefector_jom extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_impdefector_jom_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -266,7 +264,7 @@ public class c_impdefector_jom extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

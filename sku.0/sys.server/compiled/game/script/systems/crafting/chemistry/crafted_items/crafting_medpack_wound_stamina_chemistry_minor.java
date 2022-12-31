@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_medpack_wound_stamina_chemistry_minor extends script.systems.crafting.chemistry.crafting_wound_stamina_chemical
 {
-    public crafting_medpack_wound_stamina_chemistry_minor()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

@@ -8,9 +8,7 @@ import script.*;
 
 public class talus_nashal_droid_head extends script.base_script
 {
-    public talus_nashal_droid_head()
-    {
-    }
+
     public static String c_stringFile = "conversation/talus_nashal_droid_head";
     public boolean talus_nashal_droid_head_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -30,9 +28,9 @@ public class talus_nashal_droid_head extends script.base_script
     }
     public String talus_nashal_droid_head_tokenTO_tokenGenderTitle(obj_id player, obj_id npc) throws InterruptedException
     {
-        int gender = getGender(player);
+        Gender gender = getGender(player);
         String title;
-        if (gender == GENDER_MALE)
+        if (gender == Gender.MALE)
         {
             title = "sir";
         }
@@ -88,7 +86,7 @@ public class talus_nashal_droid_head extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int talus_nashal_droid_head_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -136,7 +134,7 @@ public class talus_nashal_droid_head extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int talus_nashal_droid_head_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -174,7 +172,7 @@ public class talus_nashal_droid_head extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int talus_nashal_droid_head_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -223,7 +221,7 @@ public class talus_nashal_droid_head extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int talus_nashal_droid_head_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -242,7 +240,7 @@ public class talus_nashal_droid_head extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

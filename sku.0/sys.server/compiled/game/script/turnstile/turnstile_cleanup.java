@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class turnstile_cleanup extends script.base_script
 {
-    public turnstile_cleanup()
-    {
-    }
+
     public static final String HANDLER_EXPIRED_CLEANUP = "handleExpiredCleanup";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

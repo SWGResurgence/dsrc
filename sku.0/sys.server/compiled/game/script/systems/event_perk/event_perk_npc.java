@@ -6,9 +6,7 @@ import script.library.sui;
 
 public class event_perk_npc extends script.base_script
 {
-    public event_perk_npc()
-    {
-    }
+
     public static final string_id SID_AREABARKS_ENABLED = new string_id("event_perk_npc_actor", "areabarks_enabled");
     public static final string_id SID_AREABARKS_DISABLED = new string_id("event_perk_npc_actor", "areabarks_disabled");
     public static final string_id SID_OBSCENE = new string_id("event_perk_npc_actor", "obscene");

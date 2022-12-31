@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class ice_cream_nobuff extends script.base_script
 {
-    public ice_cream_nobuff()
-    {
-    }
+
     public static final string_id SID_ALREADY_HAVE_BUFF = new string_id("base_player", "food_already_have_buff");
     public static final string_id SID_BUFF_WONT_STACK = new string_id("base_player", "food_buff_wont_stack");
     public static final String ALREADY_SETUP = "itemFoodScriptRemoved";
@@ -142,7 +140,7 @@ public class ice_cream_nobuff extends script.base_script
             }
             switch (getGender(player))
             {
-                case GENDER_FEMALE:
+                case FEMALE:
                 snd += "female_eat.cef";
                 break;
                 default:

@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class nsister_rancor_axkva_guards extends script.base_script
 {
-    public nsister_rancor_axkva_guards()
-    {
-    }
+
     public int spawnguards(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id axkva = params.getObjId("axkva");

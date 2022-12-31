@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class master_guild_object extends script.base_script
 {
-    public master_guild_object()
-    {
-    }
+
     public static int guildProcessInterval = -1;
     public static int guildUpdateInterval = -1;
     public static final int DEFAULT_GUILD_PROCESS_INTERVAL = 60 * 60;

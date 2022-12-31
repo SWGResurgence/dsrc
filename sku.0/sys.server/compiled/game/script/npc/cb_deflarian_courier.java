@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class cb_deflarian_courier extends script.base_script
 {
-    public cb_deflarian_courier()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setBaseWalkSpeed(self, 6.0f);

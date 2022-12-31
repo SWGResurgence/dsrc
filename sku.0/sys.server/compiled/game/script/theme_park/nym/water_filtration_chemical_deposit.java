@@ -8,9 +8,7 @@ import script.library.sui;
 
 public class water_filtration_chemical_deposit extends script.base_script
 {
-    public water_filtration_chemical_deposit()
-    {
-    }
+
     public static final String THEMEPARK = "theme_park_nym/messages";
     public static final string_id SID_NOT_WHILE_MOUNTED = new string_id(THEMEPARK, "deposit_not_while_mounted");
     public static final string_id SID_ZIP_BAR = new string_id(THEMEPARK, "deposit_zip_bar");

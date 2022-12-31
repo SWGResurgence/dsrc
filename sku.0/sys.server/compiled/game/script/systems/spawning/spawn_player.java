@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class spawn_player extends script.systems.spawning.spawn_base
 {
-    public spawn_player()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "spawning.verboseMode");

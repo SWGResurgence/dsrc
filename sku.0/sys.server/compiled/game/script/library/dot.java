@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class dot extends script.base_script
 {
-    public dot()
-    {
-    }
+
     public static final String DOT_BLEEDING = "bleeding";
     public static final String DOT_POISON = "poison";
     public static final String DOT_DISEASE = "disease";

@@ -8,9 +8,7 @@ import script.*;
 
 public class story_arc_chapter_one_computer extends script.base_script
 {
-    public story_arc_chapter_one_computer()
-    {
-    }
+
     public static String c_stringFile = "conversation/story_arc_chapter_one_computer";
     public boolean story_arc_chapter_one_computer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -84,7 +82,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -98,7 +96,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -112,7 +110,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -150,7 +148,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -188,7 +186,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -226,7 +224,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -264,7 +262,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -302,7 +300,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -340,7 +338,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -378,7 +376,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -416,7 +414,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -454,7 +452,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -492,7 +490,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -530,7 +528,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -568,7 +566,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -606,7 +604,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -621,7 +619,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -635,7 +633,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -649,7 +647,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int story_arc_chapter_one_computer_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -663,7 +661,7 @@ public class story_arc_chapter_one_computer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class component_attrib_mod extends script.base_script
 {
-    public component_attrib_mod()
-    {
-    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

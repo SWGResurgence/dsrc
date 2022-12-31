@@ -5,9 +5,7 @@ import script.*;
 
 public class station_talus extends script.base_script
 {
-    public station_talus()
-    {
-    }
+
     public static String c_stringFile = "conversation/station_talus";
     public boolean station_talus_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -297,7 +295,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -321,7 +319,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -618,7 +616,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1041,7 +1039,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1225,7 +1223,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1258,7 +1256,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1291,7 +1289,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1324,7 +1322,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1357,7 +1355,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1595,7 +1593,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1624,7 +1622,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1653,7 +1651,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1682,7 +1680,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1711,7 +1709,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1770,7 +1768,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1819,7 +1817,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1844,7 +1842,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1869,7 +1867,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1907,7 +1905,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1945,7 +1943,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1991,7 +1989,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2037,7 +2035,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2051,7 +2049,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2349,7 +2347,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2578,7 +2576,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2603,7 +2601,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2628,7 +2626,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2653,7 +2651,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2678,7 +2676,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2703,7 +2701,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2937,7 +2935,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2962,7 +2960,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2987,7 +2985,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3012,7 +3010,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3037,7 +3035,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_talus_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3139,7 +3137,7 @@ public class station_talus extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

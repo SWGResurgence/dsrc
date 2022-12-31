@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class bombed_wall extends script.base_script
 {
-    public bombed_wall()
-    {
-    }
+
     public static final String LOG_NAME = "poiPrisonBreak Bombed Wall";
     public int enableBombedWall(obj_id self, dictionary params) throws InterruptedException
     {

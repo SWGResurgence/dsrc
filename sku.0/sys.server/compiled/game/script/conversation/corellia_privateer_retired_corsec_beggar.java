@@ -5,9 +5,7 @@ import script.*;
 
 public class corellia_privateer_retired_corsec_beggar extends script.base_script
 {
-    public corellia_privateer_retired_corsec_beggar()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_privateer_retired_corsec_beggar";
     public boolean corellia_privateer_retired_corsec_beggar_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -43,7 +41,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
     }
     public boolean corellia_privateer_retired_corsec_beggar_condition_isGenderMale(obj_id player, obj_id npc) throws InterruptedException
     {
-        return (getGender(player) == GENDER_MALE);
+        return (getGender(player) == Gender.MALE);
     }
     public boolean corellia_privateer_retired_corsec_beggar_condition_hasCompletedQuestOne(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -412,7 +410,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -532,7 +530,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -594,7 +592,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -622,7 +620,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -718,7 +716,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -779,7 +777,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -840,7 +838,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -866,7 +864,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -938,7 +936,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -975,7 +973,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1117,7 +1115,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1167,7 +1165,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1229,7 +1227,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1255,7 +1253,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1305,7 +1303,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1367,7 +1365,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1393,7 +1391,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1513,7 +1511,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1631,7 +1629,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1703,7 +1701,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1765,7 +1763,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1791,7 +1789,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1899,7 +1897,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1926,7 +1924,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1952,7 +1950,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2037,7 +2035,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2063,7 +2061,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2113,7 +2111,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2210,7 +2208,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2272,7 +2270,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2333,7 +2331,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2359,7 +2357,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2420,7 +2418,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_privateer_retired_corsec_beggar_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2446,7 +2444,7 @@ public class corellia_privateer_retired_corsec_beggar extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class ct_random_add extends script.base_script
 {
-    public ct_random_add()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id[] players = trial.getValidTargetsInCell(trial.getTop(self), "r4");

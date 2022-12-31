@@ -4,9 +4,7 @@ import script.resource_weight;
 
 public class crafting_comp_power_bit extends script.systems.crafting.weapon.crafting_new_base_weapon_component
 {
-    public crafting_comp_power_bit()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

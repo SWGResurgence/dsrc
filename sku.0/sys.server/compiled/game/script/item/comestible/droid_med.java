@@ -5,9 +5,7 @@ import script.library.*;
 
 public class droid_med extends script.base_script
 {
-    public droid_med()
-    {
-    }
+
     public static final String SCRIPT_DROID_MED = "item.comestible.droid_med";
     public static final string_id SID_NO_TARGET = new string_id("error_message", "droid_repair_no_target");
     public static final string_id SID_TARGET_NOT_DROID = new string_id("error_message", "droid_repair_target_not_droid");

@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class structure_maintenance extends script.base_script
 {
-    public structure_maintenance()
-    {
-    }
+
     public static final String STF_FILE = "pet/droid_modules";
     public static final string_id SID_ROOT_MAINT = new string_id(STF_FILE, "struct_maint_root");
     public static final string_id SID_STRUCT_MAINT = new string_id(STF_FILE, "struct_maint_perform");

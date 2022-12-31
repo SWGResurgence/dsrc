@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class orf_initialize extends script.base_script
 {
-    public orf_initialize()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id entrance = getCellId(self, "entrance");

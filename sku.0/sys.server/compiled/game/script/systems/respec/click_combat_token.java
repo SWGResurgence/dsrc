@@ -7,9 +7,7 @@ import script.*;
 
 public class click_combat_token extends script.base_script
 {
-    public click_combat_token()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "foundOwner"))

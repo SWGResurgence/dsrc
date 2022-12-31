@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class city_flag extends script.base_script
 {
-    public city_flag()
-    {
-    }
+
     public static final string_id SID_ALTER = new string_id("city/city", "alter_flag");
     public static final string_id SID_PROMPT = new string_id("city/city", "flag_prompt");
     public static final string_id SID_TITLE = new string_id("city/city", "flag_title");

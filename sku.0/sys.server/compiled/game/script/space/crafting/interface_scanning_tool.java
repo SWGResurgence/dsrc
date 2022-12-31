@@ -10,9 +10,7 @@ import script.string_id;
 
 public class interface_scanning_tool extends script.base_script
 {
-    public interface_scanning_tool()
-    {
-    }
+
     public static final string_id SCAN_CONTENT = new string_id("spam", "scan_di");
     public static final string_id START_SCAN = new string_id("sui", "start_scan");
     public static final string_id SCAN_NOTHING = new string_id("sui", "scan_nothing");

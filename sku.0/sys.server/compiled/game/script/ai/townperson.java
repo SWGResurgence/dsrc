@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class townperson extends script.base_script
 {
-    public townperson()
-    {
-    }
+
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public static final String SOCIAL_VOLUME = "npc_socialization";
     public static final float SOCIAL_RANGE = 15.0f;

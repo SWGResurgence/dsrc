@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class datapad_entry extends script.base_script
 {
-    public datapad_entry()
-    {
-    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

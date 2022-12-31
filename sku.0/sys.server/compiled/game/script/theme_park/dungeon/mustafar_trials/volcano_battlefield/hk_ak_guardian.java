@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class hk_ak_guardian extends script.base_script
 {
-    public hk_ak_guardian()
-    {
-    }
+
     public static final boolean LOGGING = false;
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {

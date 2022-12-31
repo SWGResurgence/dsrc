@@ -7,9 +7,7 @@ import script.string_id;
 
 public class resource_station extends script.base_script
 {
-    public resource_station()
-    {
-    }
+
     public static final String SPACE_MINING = "space_mining";
     public int getPricePerUnit(obj_id station, String resourceClassName) throws InterruptedException
     {

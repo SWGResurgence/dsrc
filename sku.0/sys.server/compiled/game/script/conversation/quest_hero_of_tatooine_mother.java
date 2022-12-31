@@ -7,9 +7,7 @@ import script.*;
 
 public class quest_hero_of_tatooine_mother extends script.base_script
 {
-    public quest_hero_of_tatooine_mother()
-    {
-    }
+
     public static String c_stringFile = "conversation/quest_hero_of_tatooine_mother";
     public boolean quest_hero_of_tatooine_mother_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -88,7 +86,7 @@ public class quest_hero_of_tatooine_mother extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_mother_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -185,7 +183,7 @@ public class quest_hero_of_tatooine_mother extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_mother_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -212,7 +210,7 @@ public class quest_hero_of_tatooine_mother extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_mother_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -274,7 +272,7 @@ public class quest_hero_of_tatooine_mother extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class romo_vax extends script.base_script
 {
-    public romo_vax()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Romo Vax");

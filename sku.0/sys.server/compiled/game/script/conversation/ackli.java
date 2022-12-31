@@ -16,18 +16,13 @@ package script.conversation;
 
 import script.library.ai_lib;
 import script.library.chat;
-import script.library.conversation;
-import script.library.utils;
 import script.library.groundquests;
+import script.library.utils;
 import script.*;
 
 public class ackli extends script.base_script
 {
-	public ackli()
 
-	{
-
-	}
 
 // ======================================================================
 // Script Constants
@@ -162,7 +157,7 @@ int ackli_handleBranch4 (obj_id player, obj_id npc, string_id response) throws I
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -219,7 +214,7 @@ int ackli_handleBranch5 (obj_id player, obj_id npc, string_id response) throws I
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -276,7 +271,7 @@ int ackli_handleBranch6 (obj_id player, obj_id npc, string_id response) throws I
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -333,7 +328,7 @@ int ackli_handleBranch7 (obj_id player, obj_id npc, string_id response) throws I
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -363,7 +358,7 @@ int ackli_handleBranch8 (obj_id player, obj_id npc, string_id response) throws I
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------

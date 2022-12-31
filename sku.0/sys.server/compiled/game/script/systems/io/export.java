@@ -18,9 +18,7 @@ import java.io.OutputStream;
 
 public class export extends script.base_script
 {
-    public export()
-    {
-    }
+
 
     public static void pause(int ms)
     {

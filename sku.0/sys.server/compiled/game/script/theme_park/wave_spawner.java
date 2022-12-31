@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class wave_spawner extends script.base_script
 {
-    public wave_spawner()
-    {
-    }
+
     public static final String STAGE = "currentStage";
     public static final String DATA_TABLE = "wave_spawner.data_table";
     public static final String START_DELAY = "wave_spawner.start_delay";

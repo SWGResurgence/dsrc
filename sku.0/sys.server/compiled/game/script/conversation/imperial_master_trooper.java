@@ -5,9 +5,7 @@ import script.*;
 
 public class imperial_master_trooper extends script.base_script
 {
-    public imperial_master_trooper()
-    {
-    }
+
     public static String c_stringFile = "conversation/imperial_master_trooper";
     public boolean imperial_master_trooper_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -72,7 +70,7 @@ public class imperial_master_trooper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

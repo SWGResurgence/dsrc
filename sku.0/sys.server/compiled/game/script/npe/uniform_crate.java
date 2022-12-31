@@ -8,9 +8,7 @@ import script.string_id;
 
 public class uniform_crate extends script.base_script
 {
-    public uniform_crate()
-    {
-    }
+
     public static final String STF_FILE = "npe";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

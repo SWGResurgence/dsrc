@@ -5,9 +5,7 @@ import script.*;
 
 public class imperial_master_trainer extends script.base_script
 {
-    public imperial_master_trainer()
-    {
-    }
+
     public static String c_stringFile = "conversation/imperial_master_trainer";
     public boolean imperial_master_trainer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -312,7 +310,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -397,7 +395,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -447,7 +445,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -462,7 +460,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -502,7 +500,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -517,7 +515,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -602,7 +600,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -642,7 +640,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -657,7 +655,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -708,7 +706,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -746,7 +744,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -761,7 +759,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -811,7 +809,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -885,7 +883,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -958,7 +956,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -974,7 +972,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -990,7 +988,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1028,7 +1026,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1101,7 +1099,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1175,7 +1173,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1214,7 +1212,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1286,7 +1284,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1325,7 +1323,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1340,7 +1338,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1379,7 +1377,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1394,7 +1392,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1466,7 +1464,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1550,7 +1548,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1623,7 +1621,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1662,7 +1660,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1712,7 +1710,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1786,7 +1784,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1825,7 +1823,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1865,7 +1863,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1880,7 +1878,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1920,7 +1918,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1935,7 +1933,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1985,7 +1983,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2035,7 +2033,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2074,7 +2072,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2124,7 +2122,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2209,7 +2207,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2283,7 +2281,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch67(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2323,7 +2321,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2338,7 +2336,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2378,7 +2376,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2418,7 +2416,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2492,7 +2490,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2530,7 +2528,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2579,7 +2577,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2664,7 +2662,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2749,7 +2747,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2799,7 +2797,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2873,7 +2871,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2912,7 +2910,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2951,7 +2949,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2990,7 +2988,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3030,7 +3028,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch83(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3045,7 +3043,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch85(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3084,7 +3082,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3158,7 +3156,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3208,7 +3206,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3293,7 +3291,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch89(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3331,7 +3329,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch90(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3435,7 +3433,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch91(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3520,7 +3518,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch92(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3594,7 +3592,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch93(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3633,7 +3631,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch94(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3672,7 +3670,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch95(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3722,7 +3720,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch96(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3807,7 +3805,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch97(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3857,7 +3855,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch98(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3931,7 +3929,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch99(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3971,7 +3969,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch100(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4022,7 +4020,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch101(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4078,7 +4076,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch104(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4099,7 +4097,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch107(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4138,7 +4136,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch108(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4178,7 +4176,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch109(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4217,7 +4215,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch110(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4256,7 +4254,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch111(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4295,7 +4293,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch112(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4334,7 +4332,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch113(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4408,7 +4406,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch114(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4447,7 +4445,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch115(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4486,7 +4484,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch116(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4525,7 +4523,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch117(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4564,7 +4562,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch118(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4602,7 +4600,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_master_trainer_handleBranch119(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4641,7 +4639,7 @@ public class imperial_master_trainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

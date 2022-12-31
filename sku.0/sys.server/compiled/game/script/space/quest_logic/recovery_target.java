@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class recovery_target extends script.base_script
 {
-    public recovery_target()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "pendingWarp", null, 3600.0f, false);

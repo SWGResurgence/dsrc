@@ -6,9 +6,7 @@ import script.string_id;
 
 public class temp_schematic extends script.base_script
 {
-    public temp_schematic()
-    {
-    }
+
     public static final int DEFAULT_USE_COUNT = 1;
     public static final String VAR_TEMP_SCHEMATIC_BASE = "temp_schematic";
     public static final String VAR_TEMP_SCHEMATIC_BIO_LINK = "bioLinkSchematic.schematic";

@@ -7,9 +7,7 @@ import java.util.StringTokenizer;
 
 public class quick_weapon extends script.base_script
 {
-    public quick_weapon()
-    {
-    }
+
     private static final String WEAPON_LIST = "datatables/event/weapons.iff";
     private static final String[] HELP_TEXT =
     {

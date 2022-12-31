@@ -7,9 +7,7 @@ import script.*;
 
 public class npe_tutorial_droid_1 extends script.base_script
 {
-    public npe_tutorial_droid_1()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_tutorial_droid_1";
     public boolean npe_tutorial_droid_1_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -43,7 +41,7 @@ public class npe_tutorial_droid_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

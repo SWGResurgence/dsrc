@@ -5,9 +5,7 @@ import script.library.*;
 
 public class illicit_broker_2 extends script.base_script
 {
-    public illicit_broker_2()
-    {
-    }
+
     public static String c_stringFile = "conversation/illicit_broker_2";
     public boolean illicit_broker_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -365,7 +363,7 @@ public class illicit_broker_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int illicit_broker_2_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -395,7 +393,7 @@ public class illicit_broker_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int illicit_broker_2_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -420,7 +418,7 @@ public class illicit_broker_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int illicit_broker_2_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -635,7 +633,7 @@ public class illicit_broker_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int illicit_broker_2_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -850,7 +848,7 @@ public class illicit_broker_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int illicit_broker_2_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -875,7 +873,7 @@ public class illicit_broker_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

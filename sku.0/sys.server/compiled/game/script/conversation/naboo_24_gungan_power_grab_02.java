@@ -5,9 +5,7 @@ import script.*;
 
 public class naboo_24_gungan_power_grab_02 extends script.base_script
 {
-    public naboo_24_gungan_power_grab_02()
-    {
-    }
+
     public static String c_stringFile = "conversation/naboo_24_gungan_power_grab_02";
     public boolean naboo_24_gungan_power_grab_02_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -173,7 +171,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -234,7 +232,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -296,7 +294,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -336,7 +334,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -350,7 +348,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -483,7 +481,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -611,7 +609,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -744,7 +742,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -922,7 +920,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1065,7 +1063,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1208,7 +1206,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1302,7 +1300,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1351,7 +1349,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1422,7 +1420,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1461,7 +1459,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1511,7 +1509,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1594,7 +1592,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1788,7 +1786,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1936,7 +1934,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2074,7 +2072,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_02_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2214,7 +2212,7 @@ public class naboo_24_gungan_power_grab_02 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public static final int TIER_1_INFORMANT_BARTER = 2000;
     public static final int TIER_2_INFORMANT_BARTER = 4000;

@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class fs_reflex2_theater extends script.base_script
 {
-    public fs_reflex2_theater()
-    {
-    }
+
     public int OnTheaterCreated(obj_id self, obj_id[] objects, obj_id player, obj_id creator) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class c_newbie_entertainer extends script.base_script
 {
-    public c_newbie_entertainer()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_newbie_entertainer";
     public boolean c_newbie_entertainer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -147,7 +145,7 @@ public class c_newbie_entertainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_entertainer_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -197,7 +195,7 @@ public class c_newbie_entertainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_entertainer_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -273,7 +271,7 @@ public class c_newbie_entertainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_entertainer_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -312,7 +310,7 @@ public class c_newbie_entertainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_entertainer_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -351,7 +349,7 @@ public class c_newbie_entertainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_entertainer_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -367,7 +365,7 @@ public class c_newbie_entertainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_entertainer_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -406,7 +404,7 @@ public class c_newbie_entertainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_entertainer_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -445,7 +443,7 @@ public class c_newbie_entertainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_entertainer_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -503,7 +501,7 @@ public class c_newbie_entertainer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

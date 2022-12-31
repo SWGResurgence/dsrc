@@ -5,9 +5,7 @@ import script.library.*;
 
 public class target_creature extends script.base_script
 {
-    public target_creature()
-    {
-    }
+
     public static final String TERMINAL_LOGGING = "target_creature";
     public static final boolean LOGGING_ON = false;
     public static final int OPTIONS_REPORT_COMBAT_DATA = menu_info_types.SERVER_MENU1;

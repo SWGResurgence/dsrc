@@ -9,9 +9,7 @@ import java.util.Arrays;
 
 public class esb_anniv_holocron extends script.base_script {
 
-    public esb_anniv_holocron()
-    {
-    }
+
 
     public static final String prompt_corellia = "While relaxing and enjoying the snow of Doaba Guerfel, a drunken fool insults you in a cantina. How do you react?";
     public static final String[] options_corellia = {

@@ -5,9 +5,7 @@ import script.library.*;
 
 public class destroy_surpriseattack extends script.base_script
 {
-    public destroy_surpriseattack()
-    {
-    }
+
     public static final string_id SID_REMAINDER_UPDATE = new string_id("space/quest", "destroy_remainder_update");
     public static final string_id SID_ABANDONED_DESTROY = new string_id("space/quest", "destroy_surprise_abandoned");
     public static final string_id SID_SURPRISE_ATTACK = new string_id("space/quest", "destroy_surprise_attack");

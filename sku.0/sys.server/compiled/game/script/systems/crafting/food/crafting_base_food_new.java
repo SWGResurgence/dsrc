@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class crafting_base_food_new extends script.systems.crafting.crafting_base
 {
-    public crafting_base_food_new()
-    {
-    }
+
     public static final String VERSION = "v1.00.00";
     public static final String FOOD_DATA = "datatables/food/food_data.iff";
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException

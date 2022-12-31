@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class ship_interior extends script.base_script
 {
-    public ship_interior()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         dictionary dctParams = new dictionary();

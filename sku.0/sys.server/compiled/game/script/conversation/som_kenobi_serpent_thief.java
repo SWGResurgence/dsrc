@@ -5,9 +5,7 @@ import script.*;
 
 public class som_kenobi_serpent_thief extends script.base_script
 {
-    public som_kenobi_serpent_thief()
-    {
-    }
+
     public static String c_stringFile = "conversation/som_kenobi_serpent_thief";
     public boolean som_kenobi_serpent_thief_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -105,7 +103,7 @@ public class som_kenobi_serpent_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_serpent_thief_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -156,7 +154,7 @@ public class som_kenobi_serpent_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_serpent_thief_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -232,7 +230,7 @@ public class som_kenobi_serpent_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_serpent_thief_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -272,7 +270,7 @@ public class som_kenobi_serpent_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_serpent_thief_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -312,7 +310,7 @@ public class som_kenobi_serpent_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_serpent_thief_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -351,7 +349,7 @@ public class som_kenobi_serpent_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_serpent_thief_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -402,7 +400,7 @@ public class som_kenobi_serpent_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_serpent_thief_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -456,7 +454,7 @@ public class som_kenobi_serpent_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_serpent_thief_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -473,7 +471,7 @@ public class som_kenobi_serpent_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_serpent_thief_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -524,7 +522,7 @@ public class som_kenobi_serpent_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_serpent_thief_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -599,7 +597,7 @@ public class som_kenobi_serpent_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_serpent_thief_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -638,7 +636,7 @@ public class som_kenobi_serpent_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_serpent_thief_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -688,7 +686,7 @@ public class som_kenobi_serpent_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_serpent_thief_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -720,7 +718,7 @@ public class som_kenobi_serpent_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_kenobi_serpent_thief_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -759,7 +757,7 @@ public class som_kenobi_serpent_thief extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

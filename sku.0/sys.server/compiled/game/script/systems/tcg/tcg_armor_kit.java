@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class tcg_armor_kit extends script.base_script
 {
-    public tcg_armor_kit()
-    {
-    }
+
     public static final String TEXTURE_CUSTVAR_NAME = "/private/index_texture_1";
     public static final String COLOR_CUSTVAR_NAME_01 = "/private/index_color_1";
     public static final String COLOR_CUSTVAR_NAME_02 = "/private/index_color_2";

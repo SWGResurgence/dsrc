@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_coronet_gallura_handerin extends script.base_script
 {
-    public corellia_coronet_gallura_handerin()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_coronet_gallura_handerin";
     public boolean corellia_coronet_gallura_handerin_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -94,7 +92,7 @@ public class corellia_coronet_gallura_handerin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_gallura_handerin_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -109,7 +107,7 @@ public class corellia_coronet_gallura_handerin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_gallura_handerin_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -134,7 +132,7 @@ public class corellia_coronet_gallura_handerin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_gallura_handerin_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -159,7 +157,7 @@ public class corellia_coronet_gallura_handerin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_gallura_handerin_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -184,7 +182,7 @@ public class corellia_coronet_gallura_handerin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

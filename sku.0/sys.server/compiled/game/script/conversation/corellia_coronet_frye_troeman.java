@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_coronet_frye_troeman extends script.base_script
 {
-    public corellia_coronet_frye_troeman()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_coronet_frye_troeman";
     public boolean corellia_coronet_frye_troeman_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -45,7 +43,7 @@ public class corellia_coronet_frye_troeman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_frye_troeman_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -84,7 +82,7 @@ public class corellia_coronet_frye_troeman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_coronet_frye_troeman_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -99,7 +97,7 @@ public class corellia_coronet_frye_troeman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

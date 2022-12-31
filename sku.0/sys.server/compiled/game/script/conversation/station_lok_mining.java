@@ -8,9 +8,7 @@ import script.*;
 
 public class station_lok_mining extends script.base_script
 {
-    public station_lok_mining()
-    {
-    }
+
     public static String c_stringFile = "conversation/station_lok_mining";
     public boolean station_lok_mining_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -34,7 +32,7 @@ public class station_lok_mining extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

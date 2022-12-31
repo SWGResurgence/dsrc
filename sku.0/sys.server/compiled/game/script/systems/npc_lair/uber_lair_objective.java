@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class uber_lair_objective extends script.base_script
 {
-    public uber_lair_objective()
-    {
-    }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         location death = getLocation(self);

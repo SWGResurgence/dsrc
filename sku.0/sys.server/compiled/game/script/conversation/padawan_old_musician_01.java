@@ -8,9 +8,7 @@ import script.*;
 
 public class padawan_old_musician_01 extends script.base_script
 {
-    public padawan_old_musician_01()
-    {
-    }
+
     public static String c_stringFile = "conversation/padawan_old_musician_01";
     public boolean padawan_old_musician_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -136,7 +134,7 @@ public class padawan_old_musician_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_old_musician_01_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -166,7 +164,7 @@ public class padawan_old_musician_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_old_musician_01_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -195,7 +193,7 @@ public class padawan_old_musician_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_old_musician_01_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -224,7 +222,7 @@ public class padawan_old_musician_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_old_musician_01_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -274,7 +272,7 @@ public class padawan_old_musician_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_old_musician_01_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -338,7 +336,7 @@ public class padawan_old_musician_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_old_musician_01_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -401,7 +399,7 @@ public class padawan_old_musician_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_old_musician_01_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -431,7 +429,7 @@ public class padawan_old_musician_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import script.library.chat;
 
 public class racing_lok extends script.base_script
 {
-    public racing_lok()
-    {
-    }
+
     public static String c_stringFile = "conversation/racing_lok";
     public boolean racing_lok_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

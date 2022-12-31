@@ -8,9 +8,7 @@ import script.*;
 
 public class quest_u10_draykken_bender extends script.base_script
 {
-    public quest_u10_draykken_bender()
-    {
-    }
+
     public static String c_stringFile = "conversation/quest_u10_draykken_bender";
     public boolean quest_u10_draykken_bender_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -57,7 +55,7 @@ public class quest_u10_draykken_bender extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_u10_draykken_bender_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -72,7 +70,7 @@ public class quest_u10_draykken_bender extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

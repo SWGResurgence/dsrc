@@ -11,9 +11,7 @@ import java.util.Vector;
 
 public class fs_phase3_cc_cleanup extends script.base_script
 {
-    public fs_phase3_cc_cleanup()
-    {
-    }
+
     public static final String OBJVAR_LAST_PHASE = community_crafting.OBJVAR_COMMUNITY_CRAFTING_BASE + ".lastPhase";
     public static final String SCRIPTVAR_CRAFTING_TRACKER = fs_dyn_village.OBJVAR_MY_MASTER_OBJECT;
     public static final String SCRIPTVAR_VILLAGE_PHASE = "community_crafting.village_phase";

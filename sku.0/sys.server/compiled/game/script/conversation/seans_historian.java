@@ -7,9 +7,7 @@ import script.*;
 
 public class seans_historian extends script.base_script
 {
-    public seans_historian()
-    {
-    }
+
     public static String c_stringFile = "conversation/seans_historian";
     public boolean seans_historian_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

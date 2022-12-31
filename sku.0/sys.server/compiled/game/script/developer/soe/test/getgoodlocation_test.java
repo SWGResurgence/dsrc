@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class getgoodlocation_test extends script.base_script
 {
-    public getgoodlocation_test()
-    {
-    }
+
     public void end(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Testing of GetGoodLocation has begun");

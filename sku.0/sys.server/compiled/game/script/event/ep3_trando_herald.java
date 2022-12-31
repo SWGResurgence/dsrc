@@ -10,9 +10,7 @@ import script.string_id;
 
 public class ep3_trando_herald extends script.base_script
 {
-    public ep3_trando_herald()
-    {
-    }
+
     public static final String STF_FILE = "event/ep3_trando_herald";
     public int OnAttach(obj_id self) throws InterruptedException
     {

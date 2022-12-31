@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class thale_dustrunner extends script.base_script
 {
-    public thale_dustrunner()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Thale Dustrunner (Corsec Captain)");

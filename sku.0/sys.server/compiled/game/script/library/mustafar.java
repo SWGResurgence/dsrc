@@ -5,9 +5,7 @@ import script.*;
 
 public class mustafar extends script.base_script
 {
-    public mustafar()
-    {
-    }
+    
     public static final String CONST_TBL_EVENT_DATA = "datatables/dungeon/mustafar_trials/obiwan_finale/obiwan_event_data.iff";
     public static final String STF_OBI_MSGS = "mustafar/obiwan_finale";
     public static final string_id SID_OBIWAN_BUSY = new string_id(STF_OBI_MSGS, "obi_busy_elsewhere");

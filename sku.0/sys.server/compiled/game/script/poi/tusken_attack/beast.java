@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class beast extends script.poi.base.scenario_actor
 {
-    public beast()
-    {
-    }
+
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiTuskenAttack Antagonist";
     public int OnAttach(obj_id self) throws InterruptedException

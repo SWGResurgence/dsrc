@@ -6,7 +6,6 @@ package script.systems.city;/*
 
 import script.library.city;
 import script.library.create;
-import script.library.utils;
 import script.menu_info;
 import script.menu_info_types;
 import script.obj_id;
@@ -57,8 +56,10 @@ public class city_hire extends script.base_script
                         attachScript(actor, "systems.city.city_actor");
                         attachScript(actor, "systems.city.city_furniture");
                         int city_id = getCityAtLocation(getLocation(player), 0);
+                        setObjVar(actor, "city_id", city_id);
                         city.addDecoration(city_id, player, self);
-                        broadcast(player, "Hired:  \"" + utils.getStringName(actor) + "\"");
+                        persistObject(actor);
+                        broadcast(player, "You have placed " + getCreatureName(actor) + " in the city.");
                         destroyObject(self);
                     }
                 }
@@ -87,11 +88,7 @@ public class city_hire extends script.base_script
         {
             return true;
         }
-        if (isGod(player))
-        {
-            return true;
-        }
-        else return false;
+        return isGod(player);
     }
 }
 

@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class biogenic_herald_dealer extends script.base_script
 {
-    public biogenic_herald_dealer()
-    {
-    }
+
     public static String c_stringFile = "conversation/biogenic_herald_dealer";
     public boolean biogenic_herald_dealer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -135,7 +133,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -160,7 +158,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -286,7 +284,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -423,7 +421,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -594,7 +592,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -664,7 +662,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -768,7 +766,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -827,7 +825,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -886,7 +884,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1001,7 +999,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1116,7 +1114,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1175,7 +1173,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1245,7 +1243,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1361,7 +1359,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1420,7 +1418,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1445,7 +1443,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1564,7 +1562,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1623,7 +1621,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1648,7 +1646,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1697,7 +1695,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1756,7 +1754,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1781,7 +1779,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1830,7 +1828,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1889,7 +1887,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int biogenic_herald_dealer_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1914,7 +1912,7 @@ public class biogenic_herald_dealer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

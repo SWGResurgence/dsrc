@@ -8,9 +8,7 @@ import script.string_id;
 
 public class roulette extends script.gambling.base.wheel
 {
-    public roulette()
-    {
-    }
+
     private static final String GAME_TYPE = "roulette";
     private static final int[] RED_NUMBERS =
     {

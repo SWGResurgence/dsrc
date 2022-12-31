@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class boss_controller extends script.base_script
 {
-    public boss_controller()
-    {
-    }
+
     public void findNextTarget(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))

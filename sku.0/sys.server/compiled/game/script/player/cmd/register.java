@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class register extends script.base_script
 {
-    public register()
-    {
-    }
+
     public static final string_id SID_CANNOT_REGISTER_BAD_LOC = new string_id("register", "cannot_register_bad_loc");
     public static final string_id SID_CANNOT_REGISTER_NO_SUPPORT = new string_id("register", "cannot_register_no_support");
     public static final string_id SID_CANNOT_REGISTER_NOT_NEUTRAL = new string_id("register", "cannot_register_not_neutral");

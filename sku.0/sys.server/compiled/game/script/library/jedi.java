@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class jedi extends script.base_script
 {
-    public jedi()
-    {
-    }
+
     public static final String JEDI_ACTIONS_FILE = "datatables/jedi/jedi_actions.iff";
     public static final String JEDI_RANK_DATA = "datatables/jedi/jedi_rank_data.iff";
     public static final String JEDI_CRYSTAL_COLOR_TABLE = "datatables/jedi/crystal_color_damage.iff";

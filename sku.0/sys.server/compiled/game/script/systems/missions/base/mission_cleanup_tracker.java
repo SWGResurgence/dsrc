@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class mission_cleanup_tracker extends script.base_script
 {
-    public mission_cleanup_tracker()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int startTime = getGameTime();

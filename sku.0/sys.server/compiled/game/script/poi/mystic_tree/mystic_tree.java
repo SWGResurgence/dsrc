@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class mystic_tree extends script.base_script
 {
-    public mystic_tree()
-    {
-    }
+
     public static final string_id HEAL_TREE = new string_id("ep3/mystic_tree", "heal_tree");
     public static final string_id TRANSFORM = new string_id("ep3/mystic_tree", "transform");
     public int OnInitialize(obj_id self) throws InterruptedException

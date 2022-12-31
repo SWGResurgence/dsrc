@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class echo_theater extends script.base_script
 {
-    public echo_theater()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "posture"))

@@ -8,9 +8,7 @@ import script.string_id;
 
 public class salvage_kit extends script.base_script
 {
-    public salvage_kit()
-    {
-    }
+
     public static final string_id SID_SALVAGE = new string_id("slicing/slicing", "salvage");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

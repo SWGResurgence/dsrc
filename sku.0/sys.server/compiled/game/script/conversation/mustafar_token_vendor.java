@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class mustafar_token_vendor extends script.base_script
 {
-    public mustafar_token_vendor()
-    {
-    }
+
     public static String c_stringFile = "conversation/mustafar_token_vendor";
     public boolean mustafar_token_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

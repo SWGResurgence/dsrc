@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class configurable_group_dice extends script.item.dice.base.base_dice
 {
-    public configurable_group_dice()
-    {
-    }
+
     public static final int DEFAULT_FACE_COUNT = 20;
     public static final int NUMBER_OF_DICE = 1;
     public static final String TYPE_NAME = "configurable_group_dice";

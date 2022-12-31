@@ -13,9 +13,7 @@ public class heroic_unlock_single extends script.base_script
 
     // Localized String for "use" taken from "sui.stf"
 
-    public heroic_unlock_single()
-    {
-    }
+
 
     // Server Call to obtain menu
 

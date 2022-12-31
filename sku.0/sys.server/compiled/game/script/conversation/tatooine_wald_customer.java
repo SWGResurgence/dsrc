@@ -8,9 +8,7 @@ import script.*;
 
 public class tatooine_wald_customer extends script.base_script
 {
-    public tatooine_wald_customer()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_wald_customer";
     public boolean tatooine_wald_customer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -158,7 +156,7 @@ public class tatooine_wald_customer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_wald_customer_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -212,7 +210,7 @@ public class tatooine_wald_customer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_wald_customer_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -266,7 +264,7 @@ public class tatooine_wald_customer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_wald_customer_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -283,7 +281,7 @@ public class tatooine_wald_customer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_wald_customer_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -311,7 +309,7 @@ public class tatooine_wald_customer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

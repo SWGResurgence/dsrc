@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class qa_resources extends script.base_script
 {
-    public qa_resources()
-    {
-    }
+
     public static final String SCRIPTVAR = "resource";
     public static final String[] MAIN_MENU = 
     {

@@ -6,9 +6,7 @@ import script.string_id;
 
 public class meditation extends script.base_script
 {
-    public meditation()
-    {
-    }
+
     public static final float TIME_TICK = 5.0f;
     public static final float DELAY_MIN = 3.0f;
     public static final float DELAY_MAX = 7.0f;

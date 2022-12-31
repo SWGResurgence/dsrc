@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class broken_viewscreen extends script.base_script
 {
-    public broken_viewscreen()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "setUp", null, 2, false);

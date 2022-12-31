@@ -8,9 +8,7 @@ import script.*;
 
 public class c_newbie_melee_combat extends script.base_script
 {
-    public c_newbie_melee_combat()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_newbie_melee_combat";
     public boolean c_newbie_melee_combat_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -152,7 +150,7 @@ public class c_newbie_melee_combat extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_melee_combat_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -167,7 +165,7 @@ public class c_newbie_melee_combat extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_melee_combat_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -182,7 +180,7 @@ public class c_newbie_melee_combat extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_melee_combat_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -222,7 +220,7 @@ public class c_newbie_melee_combat extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_melee_combat_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -237,7 +235,7 @@ public class c_newbie_melee_combat extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_melee_combat_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -251,7 +249,7 @@ public class c_newbie_melee_combat extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_melee_combat_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -266,7 +264,7 @@ public class c_newbie_melee_combat extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_melee_combat_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -281,7 +279,7 @@ public class c_newbie_melee_combat extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_melee_combat_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -296,7 +294,7 @@ public class c_newbie_melee_combat extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_melee_combat_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -334,7 +332,7 @@ public class c_newbie_melee_combat extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_newbie_melee_combat_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -350,7 +348,7 @@ public class c_newbie_melee_combat extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

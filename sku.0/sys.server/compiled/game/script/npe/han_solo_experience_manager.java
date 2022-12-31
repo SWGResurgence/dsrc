@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class han_solo_experience_manager extends script.base_script
 {
-    public han_solo_experience_manager()
-    {
-    }
+
     public static final String STF = "npe/han_solo_experience";
     public int OnAttach(obj_id self) throws InterruptedException
     {

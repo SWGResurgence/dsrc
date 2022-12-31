@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class listen extends script.base_script
 {
-    public listen()
-    {
-    }
+
     public static final String SCRIPT_LISTEN = "npc.bartender.list";
     public static final String VAR_LISTEN_BASE = "bartender.listen";
     public static final String VAR_LISTEN_VALUE = "bartender.listen.value";

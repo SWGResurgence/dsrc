@@ -8,9 +8,7 @@ import script.*;
 
 public class community_tcg_photo_contest_painting_handout extends script.base_script
 {
-    public community_tcg_photo_contest_painting_handout()
-    {
-    }
+
     public static String c_stringFile = "conversation/community_tcg_photo_contest_painting_handout";
     public boolean community_tcg_photo_contest_painting_handout_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -34,10 +32,6 @@ public class community_tcg_photo_contest_painting_handout extends script.base_sc
     }
     public boolean community_tcg_photo_contest_painting_handout_condition_canReceivePaintings(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (isFreeTrialAccount(player))
-        {
-            return false;
-        }
         int myAge = getCurrentBirthDate() - getPlayerBirthDate(player);
         if (hasCompletedCollection(player, "player_received_tcg_gcw_photo_painting_2010_tracker") || myAge < 10)
         {
@@ -80,10 +74,6 @@ public class community_tcg_photo_contest_painting_handout extends script.base_sc
     }
     public boolean community_tcg_photo_contest_painting_handout_condition_isTrialAccountPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (isFreeTrialAccount(player))
-        {
-            return true;
-        }
         return false;
     }
     public void community_tcg_photo_contest_painting_handout_action_grantPainting03(obj_id player, obj_id npc) throws InterruptedException
@@ -241,7 +231,7 @@ public class community_tcg_photo_contest_painting_handout extends script.base_sc
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int community_tcg_photo_contest_painting_handout_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -323,7 +313,7 @@ public class community_tcg_photo_contest_painting_handout extends script.base_sc
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int community_tcg_photo_contest_painting_handout_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -371,7 +361,7 @@ public class community_tcg_photo_contest_painting_handout extends script.base_sc
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public static string_id SID_NOT_OLD_ENOUGH = new string_id("collection", "not_old_enough");
     public int OnInitialize(obj_id self) throws InterruptedException

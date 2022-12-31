@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class free_mount extends script.base_script
 {
-    public free_mount()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         int expirationTime = getIntObjVar(self, "mount_vendor.create");

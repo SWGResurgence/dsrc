@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class enemy_dead extends script.base_script
 {
-    public enemy_dead()
-    {
-    }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id player = getObjIdObjVar(self, "killer");

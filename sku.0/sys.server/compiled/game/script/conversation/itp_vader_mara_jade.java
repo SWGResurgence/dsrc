@@ -8,9 +8,7 @@ import script.*;
 
 public class itp_vader_mara_jade extends script.base_script
 {
-    public itp_vader_mara_jade()
-    {
-    }
+
     public static String c_stringFile = "conversation/itp_vader_mara_jade";
     public boolean itp_vader_mara_jade_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

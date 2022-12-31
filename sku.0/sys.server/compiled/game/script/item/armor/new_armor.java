@@ -11,9 +11,7 @@ import script.string_id;
 
 public class new_armor extends script.base_script
 {
-    public new_armor()
-    {
-    }
+
     public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###.#");
     public static final java.text.NumberFormat percentFormat = new java.text.DecimalFormat("###.#%");
     public static final String[] SID_SPECIAL_TOOLTIP_PROTECTIONS = 

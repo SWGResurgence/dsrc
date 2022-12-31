@@ -16,15 +16,13 @@ package script.conversation;
 
 import script.library.ai_lib;
 import script.library.chat;
-import script.library.conversation;
 import script.library.utils;
 import script.*;
 
 public class wod_captain_drass extends script.base_script
 {
-	public wod_captain_drass()
-	{
-	}
+
+
 // ======================================================================
 // Script Constants
 // ======================================================================
@@ -148,7 +146,7 @@ int wod_captain_drass_handleBranch1 (obj_id player, obj_id npc, string_id respon
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -317,7 +315,7 @@ int wod_captain_drass_handleBranch2 (obj_id player, obj_id npc, string_id respon
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -410,7 +408,7 @@ int wod_captain_drass_handleBranch3 (obj_id player, obj_id npc, string_id respon
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -579,7 +577,7 @@ int wod_captain_drass_handleBranch4 (obj_id player, obj_id npc, string_id respon
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -672,7 +670,7 @@ int wod_captain_drass_handleBranch5 (obj_id player, obj_id npc, string_id respon
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -841,7 +839,7 @@ int wod_captain_drass_handleBranch6 (obj_id player, obj_id npc, string_id respon
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -934,7 +932,7 @@ int wod_captain_drass_handleBranch7 (obj_id player, obj_id npc, string_id respon
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1103,7 +1101,7 @@ int wod_captain_drass_handleBranch8 (obj_id player, obj_id npc, string_id respon
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------

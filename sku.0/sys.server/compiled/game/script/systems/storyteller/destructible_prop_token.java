@@ -7,9 +7,7 @@ import script.*;
 
 public class destructible_prop_token extends script.base_script
 {
-    public destructible_prop_token()
-    {
-    }
+
     public static final int MIN_HEALTH = 180000;
     public static final int MAX_HEALTH = 250000;
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
@@ -27,11 +25,6 @@ public class destructible_prop_token extends script.base_script
         if (!utils.isNestedWithin(self, player))
         {
             sendSystemMessage(player, new string_id("storyteller", "placement_from_inventory_only"));
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "placement_no_trial_accounts"));
             return SCRIPT_CONTINUE;
         }
         obj_id target = getStorytellerTokenTarget(player);

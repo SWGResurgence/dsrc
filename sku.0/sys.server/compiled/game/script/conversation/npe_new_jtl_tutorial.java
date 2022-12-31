@@ -7,9 +7,7 @@ import script.*;
 
 public class npe_new_jtl_tutorial extends script.base_script
 {
-    public npe_new_jtl_tutorial()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_new_jtl_tutorial";
     public boolean npe_new_jtl_tutorial_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -303,7 +301,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -543,7 +541,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -625,7 +623,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -707,7 +705,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -857,7 +855,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -917,7 +915,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -977,7 +975,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1059,7 +1057,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1341,7 +1339,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1525,7 +1523,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1596,7 +1594,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1667,7 +1665,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1738,7 +1736,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2088,7 +2086,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2339,7 +2337,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2556,7 +2554,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2627,7 +2625,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2822,7 +2820,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2893,7 +2891,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3032,7 +3030,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3092,7 +3090,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3152,7 +3150,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3223,7 +3221,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3294,7 +3292,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3376,7 +3374,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3458,7 +3456,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3496,7 +3494,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3578,7 +3576,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3727,7 +3725,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3878,7 +3876,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3949,7 +3947,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4020,7 +4018,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4091,7 +4089,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4309,7 +4307,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4391,7 +4389,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4473,7 +4471,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4555,7 +4553,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4637,7 +4635,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4920,7 +4918,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5093,7 +5091,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5131,7 +5129,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5202,7 +5200,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5273,7 +5271,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5344,7 +5342,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5517,7 +5515,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5588,7 +5586,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5659,7 +5657,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5730,7 +5728,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5903,7 +5901,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5974,7 +5972,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6012,7 +6010,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6083,7 +6081,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6154,7 +6152,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6515,7 +6513,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6699,7 +6697,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6770,7 +6768,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6841,7 +6839,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6912,7 +6910,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7118,7 +7116,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7189,7 +7187,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7328,7 +7326,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7388,7 +7386,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7448,7 +7446,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7519,7 +7517,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7737,7 +7735,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch66(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7819,7 +7817,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch67(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7901,7 +7899,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7983,7 +7981,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8065,7 +8063,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8315,7 +8313,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8386,7 +8384,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8559,7 +8557,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch73(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8630,7 +8628,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8701,7 +8699,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8772,7 +8770,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8945,7 +8943,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -9016,7 +9014,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -9087,7 +9085,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -9158,7 +9156,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_new_jtl_tutorial_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -9252,7 +9250,7 @@ public class npe_new_jtl_tutorial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

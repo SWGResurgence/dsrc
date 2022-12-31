@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class office_keypad extends script.base_script
 {
-    public office_keypad()
-    {
-    }
+
     public static final String MSGS = "dungeon/geonosian_madbio";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

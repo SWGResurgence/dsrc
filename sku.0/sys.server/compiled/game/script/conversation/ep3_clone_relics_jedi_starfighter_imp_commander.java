@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base_script
 {
-    public ep3_clone_relics_jedi_starfighter_imp_commander()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_clone_relics_jedi_starfighter_imp_commander";
     public boolean ep3_clone_relics_jedi_starfighter_imp_commander_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -220,7 +218,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -326,7 +324,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -419,7 +417,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -558,7 +556,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -587,7 +585,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -705,7 +703,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -734,7 +732,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -874,7 +872,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -939,7 +937,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -971,7 +969,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1064,7 +1062,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1239,7 +1237,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1256,7 +1254,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1308,7 +1306,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1323,7 +1321,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1450,7 +1448,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1489,7 +1487,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1540,7 +1538,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1626,7 +1624,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1723,7 +1721,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1786,7 +1784,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1816,7 +1814,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1914,7 +1912,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1968,7 +1966,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2018,7 +2016,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2069,7 +2067,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2187,7 +2185,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2257,7 +2255,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_jedi_starfighter_imp_commander_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2274,7 +2272,7 @@ public class ep3_clone_relics_jedi_starfighter_imp_commander extends script.base
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

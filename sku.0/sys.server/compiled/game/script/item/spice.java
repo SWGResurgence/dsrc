@@ -7,9 +7,7 @@ import script.*;
 
 public class spice extends script.base_script
 {
-    public spice()
-    {
-    }
+    
     public static final string_id PROSE_CONSUME_ITEM = new string_id("base_player", "prose_consume_item");
     public static final string_id SID_ALREADY_HAVE_BUFF = new string_id("base_player", "food_already_have_buff");
     public static final string_id SID_BUFF_WONT_STACK = new string_id("base_player", "food_buff_wont_stack");
@@ -147,7 +145,7 @@ public class spice extends script.base_script
         }
         switch (getGender(player))
         {
-            case GENDER_FEMALE:
+            case FEMALE:
             snd += "female_eat.cef";
             break;
             default:

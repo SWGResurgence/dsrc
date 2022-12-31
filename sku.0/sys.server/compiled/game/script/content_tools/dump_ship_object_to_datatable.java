@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class dump_ship_object_to_datatable extends script.base_script
 {
-    public dump_ship_object_to_datatable()
-    {
-    }
+
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         if (!isGod(self))

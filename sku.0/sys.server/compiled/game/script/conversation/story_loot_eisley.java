@@ -5,9 +5,7 @@ import script.*;
 
 public class story_loot_eisley extends script.base_script
 {
-    public story_loot_eisley()
-    {
-    }
+
     public static String c_stringFile = "conversation/story_loot_eisley";
     public boolean story_loot_eisley_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

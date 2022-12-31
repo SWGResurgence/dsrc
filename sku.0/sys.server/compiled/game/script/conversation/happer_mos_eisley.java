@@ -8,9 +8,7 @@ import script.*;
 
 public class happer_mos_eisley extends script.base_script
 {
-    public happer_mos_eisley()
-    {
-    }
+
     public static String c_stringFile = "conversation/happer_mos_eisley";
     public boolean happer_mos_eisley_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -80,7 +78,7 @@ public class happer_mos_eisley extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int happer_mos_eisley_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -118,7 +116,7 @@ public class happer_mos_eisley extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int happer_mos_eisley_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -156,7 +154,7 @@ public class happer_mos_eisley extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int happer_mos_eisley_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -194,7 +192,7 @@ public class happer_mos_eisley extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int happer_mos_eisley_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -232,7 +230,7 @@ public class happer_mos_eisley extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int happer_mos_eisley_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -247,7 +245,7 @@ public class happer_mos_eisley extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

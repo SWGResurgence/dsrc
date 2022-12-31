@@ -7,9 +7,7 @@ import script.string_id;
 
 public class fath_hray extends script.base_script
 {
-    public fath_hray()
-    {
-    }
+
     public static final String CONVO = "celebrity/fath_hray";
     public int OnAttach(obj_id self) throws InterruptedException
     {

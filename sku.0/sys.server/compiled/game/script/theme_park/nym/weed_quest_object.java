@@ -5,9 +5,7 @@ import script.library.*;
 
 public class weed_quest_object extends script.base_script
 {
-    public weed_quest_object()
-    {
-    }
+
     public static final String QUEST_NAME = "u16_nym_themepark_weed_pulling_ver2";
     public static final String GENERAL_QUEST_TASK = "fulfillRequisition";
     public static final String TASK_WEED_TYPE_1 = "lowGrowingWeeds";

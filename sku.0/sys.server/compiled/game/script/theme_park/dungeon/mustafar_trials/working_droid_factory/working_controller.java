@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class working_controller extends script.base_script
 {
-    public working_controller()
-    {
-    }
+
     public static final String[] LOCKED_ROOMS = 
     {
         "mainroom27",

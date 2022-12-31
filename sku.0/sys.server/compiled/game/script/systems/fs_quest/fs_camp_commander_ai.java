@@ -5,9 +5,7 @@ import script.library.*;
 
 public class fs_camp_commander_ai extends script.base_script
 {
-    public fs_camp_commander_ai()
-    {
-    }
+
     public static final int RUNAWAY_TIME_LIMIT = 180;
     public static final float MIN_DISTANCE_TO_RUN = 50.0f;
     public static final float MAX_DISTANCE_TO_RUN = 100.0f;

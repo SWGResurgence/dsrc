@@ -10,9 +10,7 @@ import script.obj_id;
 
 public class foreman_spawner extends script.base_script
 {
-    public foreman_spawner()
-    {
-    }
+
     public static final boolean LOGGING = false;
     public static final String FOREMAN = "som_link_lava_beetle_foreman";
     public static final String SOLDIER = "som_link_lava_beetle_defender";

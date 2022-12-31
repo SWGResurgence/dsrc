@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_zhailaut extends script.base_script
 {
-    public ep3_zhailaut()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_zhailaut";
     public boolean ep3_zhailaut_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -61,7 +59,7 @@ public class ep3_zhailaut extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_zhailaut_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -75,7 +73,7 @@ public class ep3_zhailaut extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_zhailaut_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -113,7 +111,7 @@ public class ep3_zhailaut extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_zhailaut_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -128,7 +126,7 @@ public class ep3_zhailaut extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

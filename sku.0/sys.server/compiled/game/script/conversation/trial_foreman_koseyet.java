@@ -5,9 +5,7 @@ import script.*;
 
 public class trial_foreman_koseyet extends script.base_script
 {
-    public trial_foreman_koseyet()
-    {
-    }
+
     public static String c_stringFile = "conversation/trial_foreman_koseyet";
     public boolean trial_foreman_koseyet_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -102,7 +100,7 @@ public class trial_foreman_koseyet extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int trial_foreman_koseyet_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -142,7 +140,7 @@ public class trial_foreman_koseyet extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int trial_foreman_koseyet_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -156,7 +154,7 @@ public class trial_foreman_koseyet extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int trial_foreman_koseyet_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -171,7 +169,7 @@ public class trial_foreman_koseyet extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int trial_foreman_koseyet_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -186,7 +184,7 @@ public class trial_foreman_koseyet extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

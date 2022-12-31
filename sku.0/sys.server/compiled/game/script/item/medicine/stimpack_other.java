@@ -7,9 +7,7 @@ import script.*;
 
 public class stimpack_other extends script.base_script
 {
-    public stimpack_other()
-    {
-    }
+
     public static final string_id SID_ITEM_YOU_MUST_TARGET = new string_id("healing", "item_must_target");
     public static final string_id SID_ITEM_ONLY_OTHERS = new string_id("healing", "item_only_on_others");
     public static final String ACTION_NAME = "bactaShot";

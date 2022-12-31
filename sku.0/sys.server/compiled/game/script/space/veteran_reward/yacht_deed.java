@@ -10,9 +10,7 @@ import script.string_id;
 
 public class yacht_deed extends script.base_script
 {
-    public yacht_deed()
-    {
-    }
+
     public static final string_id MNU_CREATE_VEHICLE = new string_id("sui", "create_vehicle");
     public static final String STF = "space/space_item";
     public static final string_id SID_ALREADY_HAVE_VEHICLE = new string_id("veteran", "have_yacht");

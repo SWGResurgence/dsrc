@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class nomove_furniture extends script.base_script
 {
-    public nomove_furniture()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "notrade"))

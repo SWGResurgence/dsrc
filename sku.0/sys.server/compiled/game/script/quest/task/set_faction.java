@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class set_faction extends script.base_script
 {
-    public set_faction()
-    {
-    }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         if (quests.isMyQuest(questRow, "quest.task.set_faction"))

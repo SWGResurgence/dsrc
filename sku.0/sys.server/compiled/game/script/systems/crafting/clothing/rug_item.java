@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class rug_item extends script.systems.crafting.clothing.crafting_base_rug
 {
-    public rug_item()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

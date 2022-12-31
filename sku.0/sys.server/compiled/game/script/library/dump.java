@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class dump extends script.base_script
 {
-    public dump()
-    {
-    }
+
     public static final String DATATABLE_FS_QUESTS = "datatables/player/quests.iff";
     public static final String[] SPACE_QUEST_TYPES = 
     {

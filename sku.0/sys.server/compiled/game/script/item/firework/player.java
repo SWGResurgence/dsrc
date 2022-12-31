@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class player extends script.base_script
 {
-    public player()
-    {
-    }
+    
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, firework.SCRIPT_PLAYER);

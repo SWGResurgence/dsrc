@@ -8,9 +8,7 @@ import script.*;
 
 public class naboo_boss_nass extends script.base_script
 {
-    public naboo_boss_nass()
-    {
-    }
+
     public static String c_stringFile = "conversation/naboo_boss_nass";
     public boolean naboo_boss_nass_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -165,7 +163,7 @@ public class naboo_boss_nass extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_boss_nass_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -180,7 +178,7 @@ public class naboo_boss_nass extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_boss_nass_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -218,7 +216,7 @@ public class naboo_boss_nass extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_boss_nass_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -256,7 +254,7 @@ public class naboo_boss_nass extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_boss_nass_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -271,7 +269,7 @@ public class naboo_boss_nass extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_boss_nass_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -286,7 +284,7 @@ public class naboo_boss_nass extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_boss_nass_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -301,7 +299,7 @@ public class naboo_boss_nass extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_boss_nass_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -316,7 +314,7 @@ public class naboo_boss_nass extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_boss_nass_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -331,7 +329,7 @@ public class naboo_boss_nass extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_boss_nass_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -379,7 +377,7 @@ public class naboo_boss_nass extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_boss_nass_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -394,7 +392,7 @@ public class naboo_boss_nass extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

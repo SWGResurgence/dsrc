@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class e3_stormtrooper_leader extends script.base_script
 {
-    public e3_stormtrooper_leader()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "moveToLocationOne", null, 5, false);

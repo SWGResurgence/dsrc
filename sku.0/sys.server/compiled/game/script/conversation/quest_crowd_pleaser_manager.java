@@ -5,9 +5,7 @@ import script.*;
 
 public class quest_crowd_pleaser_manager extends script.base_script
 {
-    public quest_crowd_pleaser_manager()
-    {
-    }
+
     public static String c_stringFile = "conversation/quest_crowd_pleaser_manager";
     public boolean quest_crowd_pleaser_manager_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -793,7 +791,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -825,7 +823,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -884,7 +882,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -916,7 +914,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1020,7 +1018,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1079,7 +1077,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1104,7 +1102,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1163,7 +1161,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1222,7 +1220,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1254,7 +1252,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1268,7 +1266,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1327,7 +1325,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1386,7 +1384,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1411,7 +1409,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1488,7 +1486,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1520,7 +1518,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1579,7 +1577,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1638,7 +1636,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1697,7 +1695,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1722,7 +1720,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1792,7 +1790,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1858,7 +1856,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1966,7 +1964,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2025,7 +2023,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2050,7 +2048,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2109,7 +2107,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch83(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2179,7 +2177,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch84(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2283,7 +2281,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch85(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2308,7 +2306,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_crowd_pleaser_manager_handleBranch88(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2367,7 +2365,7 @@ public class quest_crowd_pleaser_manager extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public static final String MUSIC_COMMAND = "startMusic+";
     public static final String DANCE_COMMAND = "startDance+";

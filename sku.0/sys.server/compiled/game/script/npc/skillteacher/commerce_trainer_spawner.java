@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class commerce_trainer_spawner extends script.base_script
 {
-    public commerce_trainer_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         dictionary params = new dictionary();

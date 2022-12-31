@@ -8,9 +8,7 @@ import script.*;
 
 public class prof_spy_21_eyan extends script.base_script
 {
-    public prof_spy_21_eyan()
-    {
-    }
+
     public static String c_stringFile = "conversation/prof_spy_21_eyan";
     public boolean prof_spy_21_eyan_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -76,7 +74,7 @@ public class prof_spy_21_eyan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int prof_spy_21_eyan_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -90,7 +88,7 @@ public class prof_spy_21_eyan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int prof_spy_21_eyan_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -129,7 +127,7 @@ public class prof_spy_21_eyan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int prof_spy_21_eyan_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -167,7 +165,7 @@ public class prof_spy_21_eyan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int prof_spy_21_eyan_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -205,7 +203,7 @@ public class prof_spy_21_eyan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int prof_spy_21_eyan_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -243,7 +241,7 @@ public class prof_spy_21_eyan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int prof_spy_21_eyan_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -281,7 +279,7 @@ public class prof_spy_21_eyan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int prof_spy_21_eyan_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -319,7 +317,7 @@ public class prof_spy_21_eyan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int prof_spy_21_eyan_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -357,7 +355,7 @@ public class prof_spy_21_eyan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int prof_spy_21_eyan_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -372,7 +370,7 @@ public class prof_spy_21_eyan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

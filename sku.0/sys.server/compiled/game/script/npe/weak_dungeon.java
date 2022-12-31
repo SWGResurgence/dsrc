@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class weak_dungeon extends script.base_script
 {
-    public weak_dungeon()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id weapon = aiGetPrimaryWeapon(self);

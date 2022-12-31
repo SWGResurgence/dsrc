@@ -5,9 +5,7 @@ import script.library.*;
 
 public class robe_collection_wave_target extends script.base_script
 {
-    public robe_collection_wave_target()
-    {
-    }
+
     public static final String DATATABLE = "datatables/quest/jedi_collection/jedi_robe_collection.iff";
     public static final String DATA_UTTERANCE = "utterance_msg";
     public static final String DATA_SLOT_AWARDED = "slot_awarded";

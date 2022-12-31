@@ -5,9 +5,7 @@ import script.*;
 
 public class yavin_rebel_trainer_2 extends script.base_script
 {
-    public yavin_rebel_trainer_2()
-    {
-    }
+
     public static String c_stringFile = "conversation/yavin_rebel_trainer_2";
     public boolean yavin_rebel_trainer_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -546,7 +544,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -570,7 +568,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -609,7 +607,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -624,7 +622,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -680,7 +678,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -761,7 +759,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -823,7 +821,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -838,7 +836,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -900,7 +898,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -961,7 +959,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -986,7 +984,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1047,7 +1045,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1107,7 +1105,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1133,7 +1131,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1161,7 +1159,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1222,7 +1220,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1303,7 +1301,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1341,7 +1339,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1390,7 +1388,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1463,7 +1461,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1501,7 +1499,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1540,7 +1538,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1589,7 +1587,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1653,7 +1651,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1678,7 +1676,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1727,7 +1725,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1776,7 +1774,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1814,7 +1812,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1864,7 +1862,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch61(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1891,7 +1889,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch65(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1917,7 +1915,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2013,7 +2011,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch69(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2037,7 +2035,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch72(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2065,7 +2063,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2169,7 +2167,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2241,7 +2239,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2279,7 +2277,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch78(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2317,7 +2315,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2332,7 +2330,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2371,7 +2369,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2386,7 +2384,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch85(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2438,7 +2436,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2478,7 +2476,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2493,7 +2491,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch90(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2553,7 +2551,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch91(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2661,7 +2659,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch92(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2790,7 +2788,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch93(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2875,7 +2873,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch96(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2958,7 +2956,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch99(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3020,7 +3018,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch101(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3047,7 +3045,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch104(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3211,7 +3209,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch106(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3339,7 +3337,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch107(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3404,7 +3402,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch109(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3431,7 +3429,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch112(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3447,7 +3445,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch114(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3472,7 +3470,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch117(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3578,7 +3576,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch118(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3604,7 +3602,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch121(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3710,7 +3708,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch122(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3736,7 +3734,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch125(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3970,7 +3968,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch126(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3987,7 +3985,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch128(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4004,7 +4002,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch130(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4021,7 +4019,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch132(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4038,7 +4036,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch134(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4238,7 +4236,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch135(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4437,7 +4435,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch137(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4643,7 +4641,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch138(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4690,7 +4688,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch143(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4794,7 +4792,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch144(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4875,7 +4873,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch152(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4956,7 +4954,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch160(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5163,7 +5161,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch162(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5281,7 +5279,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch163(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5400,7 +5398,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch164(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5484,7 +5482,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch166(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5601,7 +5599,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch167(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5707,7 +5705,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch168(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5745,7 +5743,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch169(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5759,7 +5757,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_rebel_trainer_2_handleBranch171(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5840,7 +5838,7 @@ public class yavin_rebel_trainer_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

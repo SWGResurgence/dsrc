@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class player_jedi_conversion extends script.base_script
 {
-    public player_jedi_conversion()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         convertOldJedi(self);

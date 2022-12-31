@@ -9,9 +9,7 @@ import java.util.Arrays;
 
 public class npe_instance_travel_player extends script.base_script
 {
-    public npe_instance_travel_player()
-    {
-    }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String name, int request_id, String[] element_name_list, dictionary[] data, int lock_key) throws InterruptedException
     {
         LOG("npe", "npe_instance_travel_player.OnClusterWideDataResponse");

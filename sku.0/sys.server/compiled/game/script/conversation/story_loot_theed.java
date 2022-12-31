@@ -5,9 +5,7 @@ import script.*;
 
 public class story_loot_theed extends script.base_script
 {
-    public story_loot_theed()
-    {
-    }
+
     public static String c_stringFile = "conversation/story_loot_theed";
     public boolean story_loot_theed_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class objective_terminal_override extends script.faction_perk.hq.objective_object
 {
-    public objective_terminal_override()
-    {
-    }
+
     public static final string_id MNU_DNA = new string_id("hq", "mnu_dna");
     public static final int NUM_SEQUENCE = 23;
     public static final String VAR_DNA = "hq.objective.dna";

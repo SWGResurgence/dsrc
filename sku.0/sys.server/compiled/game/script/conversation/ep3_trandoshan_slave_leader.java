@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_trandoshan_slave_leader extends script.base_script
 {
-    public ep3_trandoshan_slave_leader()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_trandoshan_slave_leader";
     public boolean ep3_trandoshan_slave_leader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -54,7 +52,7 @@ public class ep3_trandoshan_slave_leader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

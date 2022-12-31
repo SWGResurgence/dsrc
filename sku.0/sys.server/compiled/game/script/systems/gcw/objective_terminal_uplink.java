@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class objective_terminal_uplink extends script.faction_perk.hq.objective_object
 {
-    public objective_terminal_uplink()
-    {
-    }
+
     public static final string_id MNU_JAM = new string_id("hq", "mnu_jam");
     public static final String VAR_FREQ = "hq.objective.freq";
     public static final int STAGE_NONE = 0;

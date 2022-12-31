@@ -7,9 +7,7 @@ import script.string_id;
 
 public class terminal_wound extends script.base_script
 {
-    public terminal_wound()
-    {
-    }
+
     public static final string_id SID_INFLICT_DAMAGE = new string_id("wound_terminal", "inflict_damage");
     public static final string_id SID_INFLICT_WOUND = new string_id("wound_terminal", "inflict_wound");
     public static final string_id SID_INFLICT_WOUND_HEALTH = new string_id("wound_terminal", "heal_wound_health");

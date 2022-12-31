@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class hk_final_trigger extends script.base_script
 {
-    public hk_final_trigger()
-    {
-    }
+
     public static final String VOLUME_NAME = "hk_trigger";
     public static final float VOLUME_RANGE = 4.0f;
     public int OnAttach(obj_id self) throws InterruptedException

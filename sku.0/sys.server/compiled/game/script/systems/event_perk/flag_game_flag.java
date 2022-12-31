@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class flag_game_flag extends script.base_script
 {
-    public flag_game_flag()
-    {
-    }
+
     public static final String[] RESTRICTED_BUFFS = 
     {
         "invis_forceCloak",

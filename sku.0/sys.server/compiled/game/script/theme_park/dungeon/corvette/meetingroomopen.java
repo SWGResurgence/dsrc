@@ -4,9 +4,7 @@ import script.*;
 
 public class meetingroomopen extends script.base_script
 {
-    public meetingroomopen()
-    {
-    }
+    
     public static final String MSGS = "dungeon/corvette";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

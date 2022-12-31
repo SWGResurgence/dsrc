@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class combatant extends script.base_script
 {
-    public combatant()
-    {
-    }
+    
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkForNewTargets", null, 6, false);

@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class rodian_shuttle_spawner extends script.base_script
 {
-    public rodian_shuttle_spawner()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "doShuttleSpawnEvent", null, 9, false);

@@ -8,9 +8,7 @@ import script.*;
 
 public class padawan_sob_story_01 extends script.base_script
 {
-    public padawan_sob_story_01()
-    {
-    }
+
     public static String c_stringFile = "conversation/padawan_sob_story_01";
     public boolean padawan_sob_story_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -94,7 +92,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_sob_story_01_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -121,7 +119,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_sob_story_01_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -206,7 +204,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_sob_story_01_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -302,7 +300,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_sob_story_01_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -364,7 +362,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_sob_story_01_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -449,7 +447,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_sob_story_01_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -465,7 +463,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_sob_story_01_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -527,7 +525,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_sob_story_01_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -555,7 +553,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_sob_story_01_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -583,7 +581,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_sob_story_01_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -633,7 +631,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_sob_story_01_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -695,7 +693,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_sob_story_01_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -780,7 +778,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_sob_story_01_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -842,7 +840,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_sob_story_01_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -870,7 +868,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int padawan_sob_story_01_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -886,7 +884,7 @@ public class padawan_sob_story_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

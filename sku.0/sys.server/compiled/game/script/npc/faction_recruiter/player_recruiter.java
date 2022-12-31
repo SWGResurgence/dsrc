@@ -8,9 +8,7 @@ import script.string_id;
 
 public class player_recruiter extends script.base_script
 {
-    public player_recruiter()
-    {
-    }
+
     public static final string_id SID_INCREASE_FACTION_TO_CONVERT = new string_id("faction_recruiter", "increase_faction_to_convert");
     public static final string_id SID_SUI_CONFIRM_CONVERSION_TITLE = new string_id("faction_recruiter", "sui_confirm_conversion_title");
     public static final string_id SID_SUI_CONFIRM_CONVERSION_PROMPT = new string_id("faction_recruiter", "sui_confirm_conversion_prompt");

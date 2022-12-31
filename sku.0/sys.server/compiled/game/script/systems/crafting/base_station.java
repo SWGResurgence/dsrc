@@ -11,9 +11,7 @@ import java.util.Vector;
 
 public class base_station extends script.base_script
 {
-    public base_station()
-    {
-    }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (transferer == obj_id.NULL_ID || transferer == srcContainer)

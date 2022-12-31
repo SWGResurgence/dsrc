@@ -7,9 +7,7 @@ import script.resource_weight;
 
 public class crafting_food_organic_hide_artisan extends script.systems.crafting.food.crafting_base_food_new
 {
-    public crafting_food_organic_hide_artisan()
-    {
-    }
+
     public static final String[] REQUIRED_SKILLS = 
     {
         "crafting_artisan_novice"

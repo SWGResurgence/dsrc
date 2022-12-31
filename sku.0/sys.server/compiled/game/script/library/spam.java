@@ -6,9 +6,7 @@ import script.string_id;
 
 public class spam extends script.base_script
 {
-    public spam()
-    {
-    }
+
     public static final String STF_SPAM = "spam";
     public static final string_id PROSE_LOOT_ITEM_SELF = new string_id(STF_SPAM, "loot_item_self");
     public static final string_id PROSE_LOOT_ITEM_OTHER = new string_id(STF_SPAM, "loot_item_other");

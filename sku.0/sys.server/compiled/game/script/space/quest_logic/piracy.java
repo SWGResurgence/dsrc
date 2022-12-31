@@ -5,9 +5,7 @@ import script.library.*;
 
 public class piracy extends script.base_script
 {
-    public piracy()
-    {
-    }
+
     public int startBeacon(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isSpaceScene())

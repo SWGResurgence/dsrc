@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class gcw extends script.base_script
 {
-    public gcw()
-    {
-    }
+    
     public static final int GCW_UPDATE_PULSE = 300;
     public static final float DECAY_PER_UPDATE = 0.02f;
     public static final String SCRIPTVAR_SCAN_INTEREST = "scan.interest";

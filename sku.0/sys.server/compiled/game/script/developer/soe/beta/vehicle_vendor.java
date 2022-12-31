@@ -5,9 +5,7 @@ import script.library.*;
 
 public class vehicle_vendor extends script.base_script
 {
-    public vehicle_vendor()
-    {
-    }
+
     public static final String VEHICLE_VENDOR_CONVO = "beta/vehicle_vendor";
     public static final int EXPIRATION_TIME = 60 * 60 * 24 * 16;
     public static final int VEHICLE_EXPIRATION_TIME = 60 * 60 * 24 * 16;

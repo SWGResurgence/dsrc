@@ -5,9 +5,7 @@ import script.string_id;
 
 public class insurance extends script.terminal.base.base_terminal
 {
-    public insurance()
-    {
-    }
+    
     public static final String SCRIPTVAR_CONFIRM_ALL = "confirmInsureAll";
     public static final string_id SID_MNU_INSURE = new string_id("sui", "mnu_insure");
     public static final string_id SID_MNU_INSURE_ALL = new string_id("sui", "mnu_insure_all");

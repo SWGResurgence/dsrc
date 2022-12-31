@@ -7,9 +7,7 @@ import script.obj_id;
 public class restuss_event_manager extends script.base_script
 {
 
-    public restuss_event_manager()
-    {
-    }
+
     public int stepIncrease(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] controllers = getAllObjectsWithScript(getLocation(self), 200.0f, "theme_park.restuss_event.restuss_event_watcher");

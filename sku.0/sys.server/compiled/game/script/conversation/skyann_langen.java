@@ -16,18 +16,13 @@ package script.conversation;
 
 import script.library.ai_lib;
 import script.library.chat;
-import script.library.conversation;
-import script.library.utils;
 import script.library.groundquests;
+import script.library.utils;
 import script.*;
 
 public class skyann_langen extends script.base_script
 {
-	public skyann_langen()
 
-	{
-
-	}
 
 // ======================================================================
 // Script Constants
@@ -151,7 +146,7 @@ int skyann_langen_handleBranch4 (obj_id player, obj_id npc, string_id response) 
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -208,7 +203,7 @@ int skyann_langen_handleBranch5 (obj_id player, obj_id npc, string_id response) 
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -265,7 +260,7 @@ int skyann_langen_handleBranch6 (obj_id player, obj_id npc, string_id response) 
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -322,7 +317,7 @@ int skyann_langen_handleBranch7 (obj_id player, obj_id npc, string_id response) 
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -352,7 +347,7 @@ int skyann_langen_handleBranch8 (obj_id player, obj_id npc, string_id response) 
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------

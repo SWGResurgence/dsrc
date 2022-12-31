@@ -5,9 +5,7 @@ import script.*;
 
 public class npe_emergence_helper extends script.base_script
 {
-    public npe_emergence_helper()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_emergence_helper";
     public boolean npe_emergence_helper_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -96,7 +94,7 @@ public class npe_emergence_helper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_emergence_helper_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -111,7 +109,7 @@ public class npe_emergence_helper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_emergence_helper_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -149,7 +147,7 @@ public class npe_emergence_helper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_emergence_helper_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -164,7 +162,7 @@ public class npe_emergence_helper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_emergence_helper_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -215,7 +213,7 @@ public class npe_emergence_helper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_emergence_helper_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -288,7 +286,7 @@ public class npe_emergence_helper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_emergence_helper_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -327,7 +325,7 @@ public class npe_emergence_helper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_emergence_helper_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -365,7 +363,7 @@ public class npe_emergence_helper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_emergence_helper_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -404,7 +402,7 @@ public class npe_emergence_helper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_emergence_helper_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -418,7 +416,7 @@ public class npe_emergence_helper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_emergence_helper_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -433,7 +431,7 @@ public class npe_emergence_helper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

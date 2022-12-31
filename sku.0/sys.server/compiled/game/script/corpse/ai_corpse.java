@@ -5,9 +5,7 @@ import script.library.*;
 
 public class ai_corpse extends script.base_script
 {
-    public ai_corpse()
-    {
-    }
+
     public static final string_id SID_NO_ITEMS = new string_id("loot_n", "no_items");
     public static final string_id SID_NOT_IN_COMBAT = new string_id("loot_n", "not_in_combat");
     public int OnAttach(obj_id self) throws InterruptedException

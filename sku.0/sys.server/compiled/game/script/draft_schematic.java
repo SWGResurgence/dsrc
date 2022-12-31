@@ -96,9 +96,7 @@ public class draft_schematic
 	 * Class constructor, which does nothing, since this class should only be
 	 * constructed by C code, which should fill in the values directly.
 	 **/
-	private draft_schematic()
-	{
-	}	// draft_schematic()
+		// draft_schematic()
 
 	public int getCategory()
 	{

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class combat_space_base extends script.base_script
 {
-    public combat_space_base()
-    {
-    }
+
     public int finishDocking(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "docking"))

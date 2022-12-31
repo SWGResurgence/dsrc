@@ -8,9 +8,7 @@ import script.string_id;
 
 public class space_mining_destroy extends script.base_script
 {
-    public space_mining_destroy()
-    {
-    }
+
     public static final string_id SID_REMAINDER_UPDATE = new string_id("space/quest", "mining_remainder_update");
     public static final string_id SID_ABANDONED_DESTROY = new string_id("space/quest", "mining_abandoned");
     public int OnAttach(obj_id self) throws InterruptedException

@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class star_destroyer_e3 extends script.base_script
 {
-    public star_destroyer_e3()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "makeDestroyer", null, 1, false);

@@ -10,9 +10,7 @@ import java.util.StringTokenizer;
 
 public class initialize_starport extends script.base_script
 {
-    public initialize_starport()
-    {
-    }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (objSpeaker != self)

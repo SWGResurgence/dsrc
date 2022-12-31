@@ -8,9 +8,7 @@ import script.*;
 
 public class gcw_introduction_talon_karrde extends script.base_script
 {
-    public gcw_introduction_talon_karrde()
-    {
-    }
+
     public static String c_stringFile = "conversation/gcw_introduction_talon_karrde";
     public boolean gcw_introduction_talon_karrde_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -94,7 +92,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -115,7 +113,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -175,7 +173,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -303,7 +301,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -352,7 +350,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -424,7 +422,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -462,7 +460,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -500,7 +498,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -538,7 +536,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -576,7 +574,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -614,7 +612,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -674,7 +672,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -802,7 +800,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -840,7 +838,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -889,7 +887,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -983,7 +981,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1042,7 +1040,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1101,7 +1099,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gcw_introduction_talon_karrde_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1139,7 +1137,7 @@ public class gcw_introduction_talon_karrde extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

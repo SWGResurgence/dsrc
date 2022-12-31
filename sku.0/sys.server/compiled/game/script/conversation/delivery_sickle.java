@@ -8,9 +8,7 @@ import script.*;
 
 public class delivery_sickle extends script.base_script
 {
-    public delivery_sickle()
-    {
-    }
+
     public static String c_stringFile = "conversation/delivery_sickle";
     public boolean delivery_sickle_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -96,7 +94,7 @@ public class delivery_sickle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int delivery_sickle_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -134,7 +132,7 @@ public class delivery_sickle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int delivery_sickle_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -172,7 +170,7 @@ public class delivery_sickle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int delivery_sickle_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -210,7 +208,7 @@ public class delivery_sickle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int delivery_sickle_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -225,7 +223,7 @@ public class delivery_sickle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int delivery_sickle_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -239,7 +237,7 @@ public class delivery_sickle extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

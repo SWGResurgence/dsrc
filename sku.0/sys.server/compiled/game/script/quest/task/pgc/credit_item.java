@@ -7,9 +7,7 @@ import script.*;
 
 public class credit_item extends script.base_script
 {
-    public credit_item()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

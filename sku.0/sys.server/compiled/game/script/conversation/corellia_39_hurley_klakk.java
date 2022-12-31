@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_39_hurley_klakk extends script.base_script
 {
-    public corellia_39_hurley_klakk()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_39_hurley_klakk";
     public boolean corellia_39_hurley_klakk_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -56,7 +54,7 @@ public class corellia_39_hurley_klakk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

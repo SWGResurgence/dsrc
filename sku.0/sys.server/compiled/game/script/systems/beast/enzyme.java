@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class enzyme extends script.base_script
 {
-    public enzyme()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, incubator.ENZYME_COLOR_OBJVAR))

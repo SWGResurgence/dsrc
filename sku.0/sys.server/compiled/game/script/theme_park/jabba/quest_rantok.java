@@ -10,9 +10,7 @@ import script.string_id;
 
 public class quest_rantok extends script.base_script
 {
-    public quest_rantok()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "quest_table");

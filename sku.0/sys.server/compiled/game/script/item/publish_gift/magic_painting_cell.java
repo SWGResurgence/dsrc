@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class magic_painting_cell extends script.base_script
 {
-    public magic_painting_cell()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "intializePaintingCell", null, 1, false);

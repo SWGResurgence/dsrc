@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class spawner extends script.base_script
 {
-    public spawner()
-    {
-    }
+
     public static final float FIFTEEN_MINUTES = 60 * 15;
     public static final String[] FIGHTER = 
     {

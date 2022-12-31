@@ -5,9 +5,7 @@ import script.library.*;
 
 public class barn_ranchhand extends script.base_script
 {
-    public barn_ranchhand()
-    {
-    }
+
     public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "tcg_barn";
     public int OnAttach(obj_id self) throws InterruptedException

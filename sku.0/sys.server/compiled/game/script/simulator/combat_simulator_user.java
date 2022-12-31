@@ -13,9 +13,7 @@ import java.util.Vector;
 
 public class combat_simulator_user extends script.base_script
 {
-    public combat_simulator_user()
-    {
-    }
+
     public static final String COMBAT_MASTER_SCRIPT = "simulator.combat_simulator_master";
     public static final String[] COMBAT_SIMULATOR_MAIN_OPTIONS = 
     {

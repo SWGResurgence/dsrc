@@ -8,9 +8,7 @@ import script.string_id;
 
 public class huff_darklighter extends script.base_script
 {
-    public huff_darklighter()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Huff Darklighter");

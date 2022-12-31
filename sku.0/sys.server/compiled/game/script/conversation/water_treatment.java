@@ -8,9 +8,7 @@ import script.*;
 
 public class water_treatment extends script.base_script
 {
-    public water_treatment()
-    {
-    }
+    
     public static String c_stringFile = "conversation/water_treatment";
     public boolean water_treatment_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -140,7 +138,7 @@ public class water_treatment extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int water_treatment_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -160,7 +158,7 @@ public class water_treatment extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int water_treatment_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -176,7 +174,7 @@ public class water_treatment extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int water_treatment_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -215,7 +213,7 @@ public class water_treatment extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int water_treatment_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -231,7 +229,7 @@ public class water_treatment extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int water_treatment_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -270,7 +268,7 @@ public class water_treatment extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int water_treatment_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -286,7 +284,7 @@ public class water_treatment extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int water_treatment_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -325,7 +323,7 @@ public class water_treatment extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int water_treatment_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -364,7 +362,7 @@ public class water_treatment extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int water_treatment_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -403,7 +401,7 @@ public class water_treatment extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int water_treatment_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -442,7 +440,7 @@ public class water_treatment extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int water_treatment_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -458,7 +456,7 @@ public class water_treatment extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

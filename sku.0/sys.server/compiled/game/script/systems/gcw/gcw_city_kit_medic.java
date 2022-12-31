@@ -10,9 +10,7 @@ import script.obj_id;
 
 public class gcw_city_kit_medic extends script.systems.gcw.gcw_city_kit
 {
-    public gcw_city_kit_medic()
-    {
-    }
+
     public static final String[] imperialNPCs = 
     {
         "gcw_city_imperial_1",

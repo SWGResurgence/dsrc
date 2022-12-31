@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class herald_spawner extends script.base_script
 {
-    public herald_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "switch"))

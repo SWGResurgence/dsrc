@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class mission_npc extends script.theme_park.newbie_tutorial.tutorial_base
 {
-    public mission_npc()
-    {
-    }
+
     public int handleYellAtNewbie(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getPlayer(self);

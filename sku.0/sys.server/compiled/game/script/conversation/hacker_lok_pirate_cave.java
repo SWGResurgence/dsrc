@@ -8,9 +8,7 @@ import script.*;
 
 public class hacker_lok_pirate_cave extends script.base_script
 {
-    public hacker_lok_pirate_cave()
-    {
-    }
+
     public static String c_stringFile = "conversation/hacker_lok_pirate_cave";
     public boolean hacker_lok_pirate_cave_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -137,7 +135,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int hacker_lok_pirate_cave_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -175,7 +173,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int hacker_lok_pirate_cave_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -246,7 +244,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int hacker_lok_pirate_cave_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -428,7 +426,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int hacker_lok_pirate_cave_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -623,7 +621,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int hacker_lok_pirate_cave_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -805,7 +803,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int hacker_lok_pirate_cave_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -987,7 +985,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int hacker_lok_pirate_cave_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1113,7 +1111,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int hacker_lok_pirate_cave_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1308,7 +1306,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int hacker_lok_pirate_cave_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1434,7 +1432,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int hacker_lok_pirate_cave_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1616,7 +1614,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int hacker_lok_pirate_cave_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1798,7 +1796,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int hacker_lok_pirate_cave_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1993,7 +1991,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int hacker_lok_pirate_cave_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2119,7 +2117,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int hacker_lok_pirate_cave_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2301,7 +2299,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int hacker_lok_pirate_cave_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2483,7 +2481,7 @@ public class hacker_lok_pirate_cave extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

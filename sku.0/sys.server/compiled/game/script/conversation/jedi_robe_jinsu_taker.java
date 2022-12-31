@@ -8,9 +8,7 @@ import script.*;
 
 public class jedi_robe_jinsu_taker extends script.base_script
 {
-    public jedi_robe_jinsu_taker()
-    {
-    }
+
     public static String c_stringFile = "conversation/jedi_robe_jinsu_taker";
     public boolean jedi_robe_jinsu_taker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -306,7 +304,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int jedi_robe_jinsu_taker_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -482,7 +480,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int jedi_robe_jinsu_taker_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -496,7 +494,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int jedi_robe_jinsu_taker_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -510,7 +508,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int jedi_robe_jinsu_taker_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -524,7 +522,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int jedi_robe_jinsu_taker_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -584,7 +582,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int jedi_robe_jinsu_taker_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -618,7 +616,7 @@ public class jedi_robe_jinsu_taker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

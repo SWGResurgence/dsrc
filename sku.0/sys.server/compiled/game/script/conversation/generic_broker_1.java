@@ -5,9 +5,7 @@ import script.*;
 
 public class generic_broker_1 extends script.base_script
 {
-    public generic_broker_1()
-    {
-    }
+
     public static String c_stringFile = "conversation/generic_broker_1";
     public boolean generic_broker_1_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -156,7 +154,7 @@ public class generic_broker_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_broker_1_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -277,7 +275,7 @@ public class generic_broker_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_broker_1_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -302,7 +300,7 @@ public class generic_broker_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int generic_broker_1_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -327,7 +325,7 @@ public class generic_broker_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

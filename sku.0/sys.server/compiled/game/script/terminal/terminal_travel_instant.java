@@ -14,9 +14,7 @@ public class terminal_travel_instant extends script.base_script
     public static final boolean CONST_FLAG_DO_LOGGING = false;
     public static final String ITV_PICKUP_BUFF = "call_for_pickup";
     public static final String PID_VAR = "home_itv_pid";
-    public terminal_travel_instant()
-    {
-    }
+
 
     public int OnInitialize(obj_id self) throws InterruptedException
     {

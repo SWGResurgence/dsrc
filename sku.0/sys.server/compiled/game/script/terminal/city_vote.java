@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class city_vote extends script.terminal.base.base_terminal
 {
-    public city_vote()
-    {
-    }
+
     public static final string_id SID_MAYORAL_RACE = new string_id("city/city", "mayoral_race");
     public static final string_id SID_MAYORAL_STANDINGS = new string_id("city/city", "mayoral_standings");
     public static final string_id SID_MAYORAL_VOTE = new string_id("city/city", "mayoral_vote");

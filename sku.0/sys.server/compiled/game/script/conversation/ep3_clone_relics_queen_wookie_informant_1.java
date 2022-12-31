@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_clone_relics_queen_wookie_informant_1 extends script.base_script
 {
-    public ep3_clone_relics_queen_wookie_informant_1()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_clone_relics_queen_wookie_informant_1";
     public boolean ep3_clone_relics_queen_wookie_informant_1_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -59,7 +57,7 @@ public class ep3_clone_relics_queen_wookie_informant_1 extends script.base_scrip
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_queen_wookie_informant_1_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -110,7 +108,7 @@ public class ep3_clone_relics_queen_wookie_informant_1 extends script.base_scrip
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_queen_wookie_informant_1_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -184,7 +182,7 @@ public class ep3_clone_relics_queen_wookie_informant_1 extends script.base_scrip
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_queen_wookie_informant_1_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -225,7 +223,7 @@ public class ep3_clone_relics_queen_wookie_informant_1 extends script.base_scrip
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_queen_wookie_informant_1_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -244,7 +242,7 @@ public class ep3_clone_relics_queen_wookie_informant_1 extends script.base_scrip
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_queen_wookie_informant_1_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -283,7 +281,7 @@ public class ep3_clone_relics_queen_wookie_informant_1 extends script.base_scrip
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_queen_wookie_informant_1_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -300,7 +298,7 @@ public class ep3_clone_relics_queen_wookie_informant_1 extends script.base_scrip
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_queen_wookie_informant_1_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -330,7 +328,7 @@ public class ep3_clone_relics_queen_wookie_informant_1 extends script.base_scrip
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

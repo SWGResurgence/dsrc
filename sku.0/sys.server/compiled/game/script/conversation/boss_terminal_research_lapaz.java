@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class boss_terminal_research_lapaz extends script.base_script
 {
-    public boss_terminal_research_lapaz()
-    {
-    }
+
     public static String c_stringFile = "conversation/boss_terminal_research_lapaz";
     public boolean boss_terminal_research_lapaz_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -99,7 +97,7 @@ public class boss_terminal_research_lapaz extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boss_terminal_research_lapaz_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -114,7 +112,7 @@ public class boss_terminal_research_lapaz extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int boss_terminal_research_lapaz_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -128,7 +126,7 @@ public class boss_terminal_research_lapaz extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

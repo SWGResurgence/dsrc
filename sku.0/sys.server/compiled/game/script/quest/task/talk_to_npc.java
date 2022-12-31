@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class talk_to_npc extends script.base_script
 {
-    public talk_to_npc()
-    {
-    }
+
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         LOG("newquests", "talk_to_npc - OnQuestActivated(" + questRow + ")");

@@ -8,9 +8,7 @@ import script.string_id;
 
 public class rock_crevice extends script.base_script
 {
-    public rock_crevice()
-    {
-    }
+
     public static final String ALTRUISM_OBJVAR = "quest.hero_of_tatooine.altruism";
     public static final String ALTRUISM_COMPLETE = ALTRUISM_OBJVAR + ".complete";
     public static final String ALTRUISM_CONTROL = ALTRUISM_OBJVAR + ".control";

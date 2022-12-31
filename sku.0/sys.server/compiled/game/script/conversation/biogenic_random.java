@@ -7,9 +7,7 @@ import script.string_id;
 
 public class biogenic_random extends script.base_script
 {
-    public biogenic_random()
-    {
-    }
+
     public static final String CONVO = "conversation/biogenic_random";
     public int OnAttach(obj_id self) throws InterruptedException
     {

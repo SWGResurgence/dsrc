@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class palpatine extends script.base_script
 {
-    public palpatine()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "The Emperor");

@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class figrin_dan extends script.base_script
 {
-    public figrin_dan()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);

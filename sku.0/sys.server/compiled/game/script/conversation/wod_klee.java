@@ -1,24 +1,14 @@
 package script.conversation;
 
-import script.*;
-import script.base_class.*;
-import script.combat_engine.*;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Vector;
-import script.base_script;
-
 import script.library.ai_lib;
 import script.library.chat;
-import script.library.conversation;
 import script.library.groundquests;
 import script.library.utils;
+import script.*;
 
 public class wod_klee extends script.base_script
 {
-    public wod_klee()
-    {
-    }
+
     public static String c_stringFile = "conversation/wod_klee";
     public boolean wod_klee_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -157,7 +147,7 @@ public class wod_klee extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_klee_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -172,7 +162,7 @@ public class wod_klee extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_klee_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -187,7 +177,7 @@ public class wod_klee extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_klee_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -360,7 +350,7 @@ public class wod_klee extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_klee_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -563,7 +553,7 @@ public class wod_klee extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_klee_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -766,7 +756,7 @@ public class wod_klee extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_klee_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -969,7 +959,7 @@ public class wod_klee extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_klee_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -984,7 +974,7 @@ public class wod_klee extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

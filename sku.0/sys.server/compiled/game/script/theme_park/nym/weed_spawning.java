@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class weed_spawning extends script.base_script
 {
-    public weed_spawning()
-    {
-    }
+
     public static final String[] WEEDS = 
     {
         "object/tangible/furniture/nym_themepark/nym_themepark_plant_01.iff",

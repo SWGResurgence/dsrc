@@ -8,9 +8,7 @@ import script.*;
 
 public class collections_ice_cream_part_three extends script.base_script
 {
-    public collections_ice_cream_part_three()
-    {
-    }
+
     public static String c_stringFile = "conversation/collections_ice_cream_part_three";
     public boolean collections_ice_cream_part_three_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -66,7 +64,7 @@ public class collections_ice_cream_part_three extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int collections_ice_cream_part_three_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -104,7 +102,7 @@ public class collections_ice_cream_part_three extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int collections_ice_cream_part_three_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -142,7 +140,7 @@ public class collections_ice_cream_part_three extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int collections_ice_cream_part_three_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -157,7 +155,7 @@ public class collections_ice_cream_part_three extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

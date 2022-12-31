@@ -7,9 +7,7 @@ import java.util.TreeMap;
 
 public class base_script extends script.base_class
 {
-    public base_script()
-    {
-    }
+
     
     public int OnLocateObject(obj_id self, dictionary params) throws InterruptedException
     {

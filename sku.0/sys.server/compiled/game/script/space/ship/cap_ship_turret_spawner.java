@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class cap_ship_turret_spawner extends script.base_script
 {
-    public cap_ship_turret_spawner()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setupTurrets", null, 2, false);

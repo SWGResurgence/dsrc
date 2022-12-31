@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class jabba extends script.base_script
 {
-    public jabba()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Jabba the Hutt");

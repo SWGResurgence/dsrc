@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class terminal_city extends script.base_script
 {
-    public terminal_city()
-    {
-    }
+
     public static final String STF = "city/city";
     public static final string_id SID_CITY_HACKS = new string_id(STF, "city_hacks");
     public static final string_id SID_CITY_FORCE_UPDATE = new string_id(STF, "force_update");

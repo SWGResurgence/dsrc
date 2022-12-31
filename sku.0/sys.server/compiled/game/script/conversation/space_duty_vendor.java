@@ -5,9 +5,7 @@ import script.library.*;
 
 public class space_duty_vendor extends script.base_script
 {
-    public space_duty_vendor()
-    {
-    }
+
     public static String c_stringFile = "conversation/space_duty_vendor";
     public boolean space_duty_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -425,7 +423,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1759,7 +1757,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2285,7 +2283,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2310,7 +2308,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2335,7 +2333,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2360,7 +2358,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2385,7 +2383,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2410,7 +2408,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2435,7 +2433,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2460,7 +2458,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2485,7 +2483,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2571,7 +2569,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2586,7 +2584,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2601,7 +2599,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2773,7 +2771,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2945,7 +2943,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int space_duty_vendor_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3117,7 +3115,7 @@ public class space_duty_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

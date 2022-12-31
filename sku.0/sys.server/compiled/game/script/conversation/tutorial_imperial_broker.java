@@ -5,9 +5,7 @@ import script.*;
 
 public class tutorial_imperial_broker extends script.base_script
 {
-    public tutorial_imperial_broker()
-    {
-    }
+
     public static String c_stringFile = "conversation/tutorial_imperial_broker";
     public boolean tutorial_imperial_broker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -27,11 +25,11 @@ public class tutorial_imperial_broker extends script.base_script
     }
     public boolean tutorial_imperial_broker_condition_isMaleImperialFaction(obj_id player, obj_id npc) throws InterruptedException
     {
-        return (tutorial_imperial_broker_condition_isImperialFaction(player, npc) && (getGender(player) == GENDER_MALE));
+        return (tutorial_imperial_broker_condition_isImperialFaction(player, npc) && (getGender(player) == Gender.MALE));
     }
     public boolean tutorial_imperial_broker_condition_isMalePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
-        return (getGender(player) == GENDER_MALE);
+        return (getGender(player) == Gender.MALE);
     }
     public boolean tutorial_imperial_broker_condition_justSpokeToPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -166,7 +164,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -194,7 +192,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -339,7 +337,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -484,7 +482,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -547,7 +545,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -621,7 +619,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -766,7 +764,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -841,7 +839,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -986,7 +984,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1061,7 +1059,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1206,7 +1204,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1281,7 +1279,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1426,7 +1424,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1489,7 +1487,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1563,7 +1561,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1708,7 +1706,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1783,7 +1781,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1928,7 +1926,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2003,7 +2001,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2148,7 +2146,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2223,7 +2221,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2368,7 +2366,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2442,7 +2440,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2587,7 +2585,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2686,7 +2684,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2831,7 +2829,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2848,7 +2846,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2947,7 +2945,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3092,7 +3090,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3109,7 +3107,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3208,7 +3206,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3353,7 +3351,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tutorial_imperial_broker_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3370,7 +3368,7 @@ public class tutorial_imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

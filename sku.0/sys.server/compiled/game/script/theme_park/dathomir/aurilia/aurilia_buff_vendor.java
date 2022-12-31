@@ -5,9 +5,7 @@ import script.library.*;
 
 public class aurilia_buff_vendor extends script.base_script
 {
-    public aurilia_buff_vendor()
-    {
-    }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int selection) throws InterruptedException
     {
         if (selection == menu_info_types.ITEM_PUBLIC_CONTAINER_USE1)

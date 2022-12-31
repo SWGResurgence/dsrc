@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class anniversary_event_nyms extends script.base_script
 {
-    public anniversary_event_nyms()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!isObjectPersisted(self))

@@ -7,9 +7,7 @@ import script.*;
 
 public class ep3_yosena_tule extends script.base_script
 {
-    public ep3_yosena_tule()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_yosena_tule";
     public boolean ep3_yosena_tule_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

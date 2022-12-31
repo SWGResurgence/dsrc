@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class trap extends script.systems.combat.combat_base
 {
-    public trap()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "armed") && getIntObjVar(self, "armed") == 1)

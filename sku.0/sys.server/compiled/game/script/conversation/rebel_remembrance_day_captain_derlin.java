@@ -5,9 +5,7 @@ import script.*;
 
 public class rebel_remembrance_day_captain_derlin extends script.base_script
 {
-    public rebel_remembrance_day_captain_derlin()
-    {
-    }
+
     public static String c_stringFile = "conversation/rebel_remembrance_day_captain_derlin";
     public boolean rebel_remembrance_day_captain_derlin_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -447,7 +445,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -462,7 +460,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -696,7 +694,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -930,7 +928,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -968,7 +966,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1006,7 +1004,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1100,7 +1098,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1213,7 +1211,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1310,7 +1308,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1344,7 +1342,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1359,7 +1357,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1472,7 +1470,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1510,7 +1508,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1689,7 +1687,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1703,7 +1701,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1741,7 +1739,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1781,7 +1779,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1894,7 +1892,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1932,7 +1930,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2034,7 +2032,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2147,7 +2145,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2216,7 +2214,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2318,7 +2316,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2431,7 +2429,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2500,7 +2498,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2602,7 +2600,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2715,7 +2713,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2817,7 +2815,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2930,7 +2928,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2999,7 +2997,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3022,7 +3020,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3091,7 +3089,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3193,7 +3191,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3306,7 +3304,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3408,7 +3406,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rebel_remembrance_day_captain_derlin_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3521,7 +3519,7 @@ public class rebel_remembrance_day_captain_derlin extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

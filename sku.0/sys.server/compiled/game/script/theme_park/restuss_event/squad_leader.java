@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class squad_leader extends script.base_script
 {
-    public squad_leader()
-    {
-    }
+
     public static final boolean LOGGING = true;
     public int OnAttach(obj_id self) throws InterruptedException
     {

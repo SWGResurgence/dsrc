@@ -5,9 +5,7 @@ import script.string_id;
 
 public class player_stomach extends script.base_script
 {
-    public player_stomach()
-    {
-    }
+
     public static final int STOMACH_FOOD = 0;
     public static final int STOMACH_DRINK = 1;
     public static final int STOMACH_MAX = 2;

@@ -5,9 +5,7 @@ import script.library.*;
 
 public class destroy_multi extends script.quest.task.ground.base_task
 {
-    public destroy_multi()
-    {
-    }
+
     public static final String taskType = "destroy_multiple";
     public static final String datatableColumnCount = "COUNT";
     public static final String dot = ".";

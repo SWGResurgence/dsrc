@@ -8,9 +8,7 @@ import script.*;
 
 public class quest_u10_bossk_henchman extends script.base_script
 {
-    public quest_u10_bossk_henchman()
-    {
-    }
+
     public static String c_stringFile = "conversation/quest_u10_bossk_henchman";
     public boolean quest_u10_bossk_henchman_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -76,7 +74,7 @@ public class quest_u10_bossk_henchman extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

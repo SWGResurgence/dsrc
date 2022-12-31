@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class guild extends script.base_script
 {
-    public guild()
-    {
-    }
+
     public static final int GUILD_PERMISSIONS_NONE = 0;
     public static final int GUILD_PERMISSION_MEMBER = (1 << 0);
     public static final int GUILD_PERMISSION_SPONSOR = (1 << 1);
@@ -338,11 +336,6 @@ public class guild extends script.base_script
     }
     public static int create(obj_id actor, String guildName, String guildAbbrev) throws InterruptedException
     {
-        if (isFreeTrialAccount(actor))
-        {
-            sendSystemMessage(actor, SID_NO_FREE_TRIAL);
-            return 0;
-        }
         if (getGuildId(actor) != 0)
         {
             sendSystemMessage(actor, SID_GUILD_CREATE_FAIL_IN_GUILD);

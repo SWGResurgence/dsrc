@@ -8,9 +8,7 @@ import script.*;
 
 public class gt643_stormtrooper extends script.base_script
 {
-    public gt643_stormtrooper()
-    {
-    }
+
     public static String c_stringFile = "conversation/gt643_stormtrooper";
     public boolean gt643_stormtrooper_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -77,7 +75,7 @@ public class gt643_stormtrooper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gt643_stormtrooper_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -95,7 +93,7 @@ public class gt643_stormtrooper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gt643_stormtrooper_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -109,7 +107,7 @@ public class gt643_stormtrooper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gt643_stormtrooper_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -123,7 +121,7 @@ public class gt643_stormtrooper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gt643_stormtrooper_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -219,7 +217,7 @@ public class gt643_stormtrooper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gt643_stormtrooper_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -279,7 +277,7 @@ public class gt643_stormtrooper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gt643_stormtrooper_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -294,7 +292,7 @@ public class gt643_stormtrooper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int gt643_stormtrooper_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -355,7 +353,7 @@ public class gt643_stormtrooper extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

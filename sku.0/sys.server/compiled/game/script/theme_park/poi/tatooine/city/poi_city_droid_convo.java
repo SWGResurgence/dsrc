@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class poi_city_droid_convo extends script.base_script
 {
-    public poi_city_droid_convo()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id guy = spawnGuyOne(self);

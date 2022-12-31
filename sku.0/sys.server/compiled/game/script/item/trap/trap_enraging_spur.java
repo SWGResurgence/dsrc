@@ -9,9 +9,7 @@ import script.string_id;
 
 public class trap_enraging_spur extends script.item.trap.trap_base
 {
-    public trap_enraging_spur()
-    {
-    }
+
     public static final int TRAP_DIFF = 10;
     public static final int REUSE_TIMER = 10;
     public static final string_id SID_SYS_EFFECT = new string_id("trap/trap", "trap_spur_effect");

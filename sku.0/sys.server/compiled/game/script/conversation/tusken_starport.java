@@ -7,9 +7,7 @@ import script.*;
 
 public class tusken_starport extends script.base_script
 {
-    public tusken_starport()
-    {
-    }
+
     public static String c_stringFile = "conversation/tusken_starport";
     public boolean tusken_starport_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

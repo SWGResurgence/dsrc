@@ -7,9 +7,7 @@ import script.library.space_utils;
 
 public class convoy_ship extends script.base_script
 {
-    public convoy_ship()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);

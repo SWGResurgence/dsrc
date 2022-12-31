@@ -7,9 +7,7 @@ import script.string_id;
 
 public class shipping extends script.terminal.base.base_terminal
 {
-    public shipping()
-    {
-    }
+
     public static final string_id SID_SHIPPING_OPTIONS = new string_id("terminal_ui", "shipping_options");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

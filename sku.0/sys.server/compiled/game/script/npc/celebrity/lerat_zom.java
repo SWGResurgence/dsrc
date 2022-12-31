@@ -7,9 +7,7 @@ import script.string_id;
 
 public class lerat_zom extends script.base_script
 {
-    public lerat_zom()
-    {
-    }
+
     public static final String CONVO = "celebrity/lerat_zom";
     public int OnAttach(obj_id self) throws InterruptedException
     {

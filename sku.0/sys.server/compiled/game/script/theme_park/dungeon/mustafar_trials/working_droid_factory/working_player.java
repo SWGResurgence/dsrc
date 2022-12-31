@@ -6,9 +6,7 @@ import script.library.trial;
 
 public class working_player extends script.base_script
 {
-    public working_player()
-    {
-    }
+
     public static final boolean DO_LOGGING = true;
     public int dualityDetonation(obj_id self, dictionary params) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class mos_taike_mayor extends script.base_script
 {
-    public mos_taike_mayor()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/shirt/shirt_s07.iff", self, "");

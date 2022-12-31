@@ -8,9 +8,7 @@ import script.library.xp;
 
 public class terminal_xp extends script.terminal.base.terminal_add_use
 {
-    public terminal_xp()
-    {
-    }
+
     public static final int XP_AMOUNT = 100000;
     public static final String TBL = "datatables/skill/skills.iff";
     public static final String VAR_XP_TYPES = "xp_types";

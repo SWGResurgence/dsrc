@@ -36,10 +36,6 @@ public class pumpkin_spawner extends script.base_script
             "a jagged pumpkin",
     };
 
-    public void pumpkin_spawner()
-    {
-    }
-
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "[Event] Pumpkin Spawner");

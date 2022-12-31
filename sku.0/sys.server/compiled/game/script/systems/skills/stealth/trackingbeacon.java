@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class trackingbeacon extends script.base_script
 {
-    public trackingbeacon()
-    {
-    }
+
     public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("#####");
     public int msgDecaySample(obj_id self, dictionary params) throws InterruptedException
     {

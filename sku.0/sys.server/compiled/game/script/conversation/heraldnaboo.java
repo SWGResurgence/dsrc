@@ -7,9 +7,7 @@ import script.*;
 
 public class heraldnaboo extends script.base_script
 {
-    public heraldnaboo()
-    {
-    }
+
     public static String c_stringFile = "conversation/heraldnaboo";
     public boolean heraldnaboo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -130,7 +128,7 @@ public class heraldnaboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int heraldnaboo_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -236,7 +234,7 @@ public class heraldnaboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int heraldnaboo_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -331,7 +329,7 @@ public class heraldnaboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int heraldnaboo_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -401,7 +399,7 @@ public class heraldnaboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int heraldnaboo_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -438,7 +436,7 @@ public class heraldnaboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int heraldnaboo_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -534,7 +532,7 @@ public class heraldnaboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int heraldnaboo_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -605,7 +603,7 @@ public class heraldnaboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int heraldnaboo_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -642,7 +640,7 @@ public class heraldnaboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int heraldnaboo_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -712,7 +710,7 @@ public class heraldnaboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int heraldnaboo_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -749,7 +747,7 @@ public class heraldnaboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int heraldnaboo_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -786,7 +784,7 @@ public class heraldnaboo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

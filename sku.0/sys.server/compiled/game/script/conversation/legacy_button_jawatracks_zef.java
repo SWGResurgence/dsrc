@@ -8,9 +8,7 @@ import script.*;
 
 public class legacy_button_jawatracks_zef extends script.base_script
 {
-    public legacy_button_jawatracks_zef()
-    {
-    }
+
     public static String c_stringFile = "conversation/legacy_button_jawatracks_zef";
     public boolean legacy_button_jawatracks_zef_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -173,7 +171,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_button_jawatracks_zef_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -200,7 +198,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_button_jawatracks_zef_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -216,7 +214,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_button_jawatracks_zef_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -299,7 +297,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_button_jawatracks_zef_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -338,7 +336,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_button_jawatracks_zef_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -352,7 +350,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_button_jawatracks_zef_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -401,7 +399,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_button_jawatracks_zef_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -417,7 +415,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_button_jawatracks_zef_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -493,7 +491,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_button_jawatracks_zef_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -554,7 +552,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_button_jawatracks_zef_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -581,7 +579,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_button_jawatracks_zef_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -642,7 +640,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_button_jawatracks_zef_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -656,7 +654,7 @@ public class legacy_button_jawatracks_zef extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

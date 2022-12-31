@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class game_destroy extends script.base_script
 {
-    public game_destroy()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield.game_destroy::OnAttach -- " + self);

@@ -8,9 +8,7 @@ import script.*;
 
 public class gcw_rebel_buff_reward_npc extends script.base_script
 {
-    public gcw_rebel_buff_reward_npc()
-    {
-    }
+
     public static String c_stringFile = "conversation/gcw_rebel_buff_reward_npc";
     public boolean gcw_rebel_buff_reward_npc_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -52,7 +50,7 @@ public class gcw_rebel_buff_reward_npc extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

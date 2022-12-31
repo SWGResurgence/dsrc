@@ -5,9 +5,7 @@ import script.*;
 
 public class greeter_theed_protocol_droid extends script.base_script
 {
-    public greeter_theed_protocol_droid()
-    {
-    }
+
     public static String c_stringFile = "conversation/greeter_theed_protocol_droid";
     public boolean greeter_theed_protocol_droid_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

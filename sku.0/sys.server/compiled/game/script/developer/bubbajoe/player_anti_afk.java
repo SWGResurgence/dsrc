@@ -2,6 +2,7 @@ package script.developer.bubbajoe;/*
 @Filename: script.developer.bubbajoe.player_anti_afk
 @Author: BubbaJoeX
 @Purpose:
+@WIP - This script is a work in progress and is not yet functional.
 */
 
 import script.obj_id;

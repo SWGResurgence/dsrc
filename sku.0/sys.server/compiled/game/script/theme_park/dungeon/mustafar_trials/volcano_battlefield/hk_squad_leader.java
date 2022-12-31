@@ -10,9 +10,7 @@ import script.obj_id;
 
 public class hk_squad_leader extends script.base_script
 {
-    public hk_squad_leader()
-    {
-    }
+
     public static final String GUARD = "som_volcano_final_squadmember";
     public static final boolean LOGGING = false;
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException

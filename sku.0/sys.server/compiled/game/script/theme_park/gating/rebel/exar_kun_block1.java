@@ -6,9 +6,7 @@ import script.string_id;
 
 public class exar_kun_block1 extends script.base_script
 {
-    public exar_kun_block1()
-    {
-    }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isIdValid(item) || !isPlayer(item))

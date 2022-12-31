@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class sd_event_two_convo extends script.base_script
 {
-    public sd_event_two_convo()
-    {
-    }
+
     public static String c_stringFile = "conversation/sd_event_two_convo";
     public boolean sd_event_two_convo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -109,7 +107,7 @@ public class sd_event_two_convo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int sd_event_two_convo_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -125,7 +123,7 @@ public class sd_event_two_convo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class dna_harvest extends script.base_script
 {
-    public dna_harvest()
-    {
-    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (getSkillStatMod(player, "dna_harvesting") > 0)

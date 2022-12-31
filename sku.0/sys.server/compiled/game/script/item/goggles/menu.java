@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class menu extends script.base_script
 {
-    public menu()
-    {
-    }
+
     public static final string_id MNU_COLOR = new string_id("sui", "set_color");
     public static final string_id MNU_COLOR_LENS = new string_id("sui", "color_lens");
     public static final string_id MNU_COLOR_FRAME = new string_id("sui", "color_frame");

@@ -9,9 +9,7 @@ import script.string_id;
 
 public class death_watch_poison_player extends script.base_script
 {
-    public death_watch_poison_player()
-    {
-    }
+    
     public static final String SCRIPT_POISON = "theme_park.dungeon.death_watch_bunker.death_watch_poison_player";
     public static final string_id BAD_AIR = new string_id("dungeon/death_watch", "bad_air");
     public static final int HEALTH_COST = 5000;

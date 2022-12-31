@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class respec_voucher_deed extends script.base_script
 {
-    public respec_voucher_deed()
-    {
-    }
+
     public static final String STF_FILE = "veteran";
     public static final string_id RESPEC_VOUCHER = new string_id(STF_FILE, "respec_voucher");
     public static final string_id SID_RESPEC_VOUCHER_TITLE = new string_id(STF_FILE, "sui_respec_title");

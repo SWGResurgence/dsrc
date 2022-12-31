@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class entertainer_effect extends script.base_script
 {
-    public entertainer_effect()
-    {
-    }
+
     public static final String STF_FILE = "pet/droid_modules";
     public static final float EFFECT_RANGE = 30.0f;
     public static final String SCRIPT_VAR_EFFECTS_ON = "module_data.effects_on";

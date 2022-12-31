@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class publish_gift_prolog_quest extends script.base_script
 {
-    public publish_gift_prolog_quest()
-    {
-    }
+
     public static final string_id CALL_JABBA = new string_id("quest/ground/util/quest_giver_object", "call_jabba");
     public static final string_id OFFER_QUEST_MSG = new string_id("quest/ground/util/quest_giver_object", "offer_quest_comlink");
     public static final string_id SUI_TITLE = new string_id("quest/ground/util/quest_giver_object", "sui_title");
@@ -29,10 +27,6 @@ public class publish_gift_prolog_quest extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        if (isFreeTrialAccount(player))
-        {
-            return SCRIPT_CONTINUE;
-        }
         if (isInTutorialArea(player))
         {
             return SCRIPT_CONTINUE;
@@ -43,10 +37,6 @@ public class publish_gift_prolog_quest extends script.base_script
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
-        {
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
         {
             return SCRIPT_CONTINUE;
         }

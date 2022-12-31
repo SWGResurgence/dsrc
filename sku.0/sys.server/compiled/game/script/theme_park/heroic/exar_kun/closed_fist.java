@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class closed_fist extends script.base_script
 {
-    public closed_fist()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_EXAR_CLOSED);

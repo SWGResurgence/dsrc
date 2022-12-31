@@ -4,9 +4,7 @@ import script.*;
 
 public class generator extends script.base_script
 {
-    public generator()
-    {
-    }
+
     public static final String DIANT_BUNKER = "dungeon/diant_bunker";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

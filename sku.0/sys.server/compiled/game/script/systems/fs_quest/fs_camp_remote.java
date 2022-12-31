@@ -11,9 +11,7 @@ import script.string_id;
 
 public class fs_camp_remote extends script.base_script
 {
-    public fs_camp_remote()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, fs_counterstrike.OBJVAR_BORN_ON, getGameTime());

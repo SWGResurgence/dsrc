@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class bestine_wander extends script.base_script
 {
-    public bestine_wander()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "pathRandom", null, 2, false);

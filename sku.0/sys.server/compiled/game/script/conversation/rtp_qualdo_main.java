@@ -5,9 +5,7 @@ import script.*;
 
 public class rtp_qualdo_main extends script.base_script
 {
-    public rtp_qualdo_main()
-    {
-    }
+
     public static String c_stringFile = "conversation/rtp_qualdo_main";
     public boolean rtp_qualdo_main_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -73,7 +71,7 @@ public class rtp_qualdo_main extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -10,9 +10,7 @@ import script.obj_id;
 
 public class crafting_base_lightsaber extends script.systems.crafting.crafting_base
 {
-    public crafting_base_lightsaber()
-    {
-    }
+
     public static final String VERSION = "v1.00.00";
     public static final String SABER_BLADE_INDEX = "private/index_color_blade";
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException

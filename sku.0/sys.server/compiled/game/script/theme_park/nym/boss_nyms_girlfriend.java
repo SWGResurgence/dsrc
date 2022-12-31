@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class boss_nyms_girlfriend extends script.base_script
 {
-    public boss_nyms_girlfriend()
-    {
-    }
+
     public static final int RADIUS = 100;
     public static final int MIN_DIST = 20;
     public static final String DISTANCE_CHECK = "distance_check";

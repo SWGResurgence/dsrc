@@ -8,9 +8,7 @@ import script.*;
 
 public class som_doctor_lu extends script.base_script
 {
-    public som_doctor_lu()
-    {
-    }
+
     public static String c_stringFile = "conversation/som_doctor_lu";
     public boolean som_doctor_lu_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -98,7 +96,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -115,7 +113,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -131,7 +129,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -170,7 +168,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -186,7 +184,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -200,7 +198,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -239,7 +237,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -279,7 +277,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -318,7 +316,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -357,7 +355,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -374,7 +372,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -388,7 +386,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -427,7 +425,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -467,7 +465,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -506,7 +504,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -545,7 +543,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -584,7 +582,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -634,7 +632,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int som_doctor_lu_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -662,7 +660,7 @@ public class som_doctor_lu extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

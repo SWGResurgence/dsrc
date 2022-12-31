@@ -8,9 +8,7 @@ import script.*;
 
 public class prof_medic_11_reward extends script.base_script
 {
-    public prof_medic_11_reward()
-    {
-    }
+
     public static String c_stringFile = "conversation/prof_medic_11_reward";
     public boolean prof_medic_11_reward_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -46,7 +44,7 @@ public class prof_medic_11_reward extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class base extends script.base_script
 {
-    public base()
-    {
-    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenuOrServerNotify(menu_info_types.ITEM_USE, null);

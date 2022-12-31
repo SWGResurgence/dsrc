@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_heavy_battery extends script.systems.crafting.space.capacitor.crafting_base_capacitor_component
 {
-    public crafting_heavy_battery()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

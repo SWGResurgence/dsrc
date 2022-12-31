@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class loot_ep3_clone_relics_nym_starmap extends script.base_script
 {
-    public loot_ep3_clone_relics_nym_starmap()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "makeMoreLoot", null, 0, false);

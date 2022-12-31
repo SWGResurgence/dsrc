@@ -9,9 +9,7 @@ import script.string_id;
 
 public class quest_control_device extends script.base_script
 {
-    public quest_control_device()
-    {
-    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         if (utils.isNestedWithin(self, player))

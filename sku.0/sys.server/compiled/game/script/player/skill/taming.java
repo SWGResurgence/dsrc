@@ -8,9 +8,7 @@ import script.string_id;
 
 public class taming extends script.base_script
 {
-    public taming()
-    {
-    }
+
     public static final string_id SHAPECHANGE = new string_id("spam", "not_while_shapechanged");
     public int cmdTellPet(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {

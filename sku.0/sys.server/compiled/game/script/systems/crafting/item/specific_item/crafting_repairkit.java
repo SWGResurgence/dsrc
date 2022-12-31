@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_repairkit extends script.systems.crafting.item.crafting_base_repair
 {
-    public crafting_repairkit()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

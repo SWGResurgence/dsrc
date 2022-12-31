@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class ig88_controller extends script.base_script
 {
-    public ig88_controller()
-    {
-    }
+
     public int ig88Died(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))

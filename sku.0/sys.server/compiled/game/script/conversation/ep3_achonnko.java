@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class ep3_achonnko extends script.base_script
 {
-    public ep3_achonnko()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_achonnko";
     public boolean ep3_achonnko_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -125,7 +123,7 @@ public class ep3_achonnko extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_achonnko_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -197,7 +195,7 @@ public class ep3_achonnko extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_achonnko_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -235,7 +233,7 @@ public class ep3_achonnko extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_achonnko_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -250,7 +248,7 @@ public class ep3_achonnko extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_achonnko_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -342,7 +340,7 @@ public class ep3_achonnko extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_achonnko_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -380,7 +378,7 @@ public class ep3_achonnko extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_achonnko_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -395,7 +393,7 @@ public class ep3_achonnko extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

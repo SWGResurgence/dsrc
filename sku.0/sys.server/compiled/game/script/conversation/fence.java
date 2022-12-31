@@ -5,9 +5,7 @@ import script.library.*;
 
 public class fence extends script.base_script
 {
-    public fence()
-    {
-    }
+
     public static String c_stringFile = "conversation/fence";
     public boolean fence_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

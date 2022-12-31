@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class crafted_armor_recolor_kit extends script.base_script
 {
-    public crafted_armor_recolor_kit()
-    {
-    }
+
     public static final boolean BLOGGING_ON = true;
     public static final String BLOGGING_CATEGORY = "armor_recolor";
     public static final String PROP_SELECTEDINDEX = "SelectedIndex";

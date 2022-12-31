@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class no_rent extends script.base_script
 {
-    public no_rent()
-    {
-    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         checkTimeLimit(self, player);

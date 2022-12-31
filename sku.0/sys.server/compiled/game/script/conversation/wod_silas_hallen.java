@@ -16,15 +16,13 @@ package script.conversation;
 
 import script.library.ai_lib;
 import script.library.chat;
-import script.library.conversation;
 import script.library.utils;
 import script.*;
 
 public class wod_silas_hallen extends script.base_script
 {
-	public wod_silas_hallen()
-	{
-	}
+
+
 // ======================================================================
 // Script Constants
 // ======================================================================
@@ -225,7 +223,7 @@ int wod_silas_hallen_handleBranch1 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -395,7 +393,7 @@ int wod_silas_hallen_handleBranch3 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -565,7 +563,7 @@ int wod_silas_hallen_handleBranch4 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------

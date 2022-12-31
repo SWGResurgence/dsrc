@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class hall_door_terminal extends script.base_script
 {
-    public hall_door_terminal()
-    {
-    }
+
     public static final String TBL_HALL_WAVE = "datatables/dungeon/death_watch/hall_wave.iff";
     public static final string_id MNU_OPEN_DOOR = new string_id("dungeon/death_watch", "mnu_open_door");
     public static final string_id ACCESS_GRANTED = new string_id("dungeon/death_watch", "access_granted");

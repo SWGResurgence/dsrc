@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class corpse_fast_recycle extends script.base_script
 {
-    public corpse_fast_recycle()
-    {
-    }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         if (isIdValid(self))

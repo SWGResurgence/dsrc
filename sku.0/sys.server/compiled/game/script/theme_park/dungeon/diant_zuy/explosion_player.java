@@ -8,9 +8,7 @@ import script.string_id;
 
 public class explosion_player extends script.base_script
 {
-    public explosion_player()
-    {
-    }
+
     public static final String SCRIPT_EXPLOSION = "theme_park.dungeon.diant_zuy.explosion_player";
     public static final string_id BUNKER_EXPLODING = new string_id("dungeon/diant_bunker", "bunker_exploding");
     public int OnAttach(obj_id self) throws InterruptedException

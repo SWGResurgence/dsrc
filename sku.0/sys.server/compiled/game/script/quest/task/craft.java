@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class craft extends script.base_script
 {
-    public craft()
-    {
-    }
+    
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         LOG("newquests", "OnQUestActivated(" + quests.getDataEntry(questRow, "NAME"));

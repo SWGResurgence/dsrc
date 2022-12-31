@@ -5,9 +5,7 @@ import script.library.*;
 
 public class ep3_clone_relics_clone_trooper_palpatine extends script.base_script
 {
-    public ep3_clone_relics_clone_trooper_palpatine()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_clone_relics_clone_trooper_palpatine";
     public boolean ep3_clone_relics_clone_trooper_palpatine_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -95,7 +93,7 @@ public class ep3_clone_relics_clone_trooper_palpatine extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_clone_trooper_palpatine_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -135,7 +133,7 @@ public class ep3_clone_relics_clone_trooper_palpatine extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_clone_trooper_palpatine_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -183,7 +181,7 @@ public class ep3_clone_relics_clone_trooper_palpatine extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_clone_trooper_palpatine_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -234,7 +232,7 @@ public class ep3_clone_relics_clone_trooper_palpatine extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_clone_trooper_palpatine_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -312,7 +310,7 @@ public class ep3_clone_relics_clone_trooper_palpatine extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_clone_trooper_palpatine_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -390,7 +388,7 @@ public class ep3_clone_relics_clone_trooper_palpatine extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_clone_trooper_palpatine_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -431,7 +429,7 @@ public class ep3_clone_relics_clone_trooper_palpatine extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

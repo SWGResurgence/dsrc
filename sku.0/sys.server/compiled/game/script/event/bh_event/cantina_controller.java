@@ -9,9 +9,7 @@ import script.string_id;
 
 public class cantina_controller extends script.base_script
 {
-    public cantina_controller()
-    {
-    }
+
     public static final float TWENTY_FOUR_HOURS = 60 * 60 * 24;
     public static final String STF_FILE = "event/bhcelebs";
     public int OnInitialize(obj_id self) throws InterruptedException

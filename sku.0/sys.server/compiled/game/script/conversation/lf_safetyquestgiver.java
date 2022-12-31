@@ -8,9 +8,7 @@ import script.*;
 
 public class lf_safetyquestgiver extends script.base_script
 {
-    public lf_safetyquestgiver()
-    {
-    }
+
     public static String c_stringFile = "conversation/lf_safetyquestgiver";
     public boolean lf_safetyquestgiver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -316,7 +314,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -345,7 +343,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -374,7 +372,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -403,7 +401,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -428,7 +426,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -453,7 +451,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -478,7 +476,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -574,7 +572,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -672,7 +670,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -697,7 +695,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -724,7 +722,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -760,7 +758,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -854,7 +852,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -879,7 +877,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -904,7 +902,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -941,7 +939,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -966,7 +964,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1058,7 +1056,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int lf_safetyquestgiver_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1085,7 +1083,7 @@ public class lf_safetyquestgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

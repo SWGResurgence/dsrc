@@ -8,9 +8,7 @@ import script.string_id;
 
 public class player_collection extends script.base_script
 {
-    public player_collection()
-    {
-    }
+
     public static final string_id SID_SLOT_ADDED = new string_id("collection", "player_slot_added");
     public static final string_id SID_HIDDEN_SLOT = new string_id("collection", "player_hidden_slot_added");
     public static final string_id SID_COLLECTION_COMPLETE = new string_id("collection", "player_collection_complete");

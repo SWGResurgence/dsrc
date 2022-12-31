@@ -8,9 +8,7 @@ import script.*;
 
 public class tatooine_eisley_aigorn extends script.base_script
 {
-    public tatooine_eisley_aigorn()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_eisley_aigorn";
     public boolean tatooine_eisley_aigorn_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -150,7 +148,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -166,7 +164,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -205,7 +203,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -244,7 +242,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -283,7 +281,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -333,7 +331,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -360,7 +358,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -399,7 +397,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -438,7 +436,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -477,7 +475,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -492,7 +490,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -542,7 +540,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -627,7 +625,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -677,7 +675,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -716,7 +714,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -755,7 +753,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -794,7 +792,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -810,7 +808,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -849,7 +847,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_eisley_aigorn_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -899,7 +897,7 @@ public class tatooine_eisley_aigorn extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

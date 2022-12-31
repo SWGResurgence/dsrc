@@ -7,9 +7,7 @@ import script.string_id;
 
 public class turret_data_maker extends script.base_script
 {
-    public turret_data_maker()
-    {
-    }
+
     public static final String TURRET_DATA_TEMPLATE = "object/tangible/mission/quest_item/warren_turret_sequence.iff";
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public int OnInitialize(obj_id self) throws InterruptedException

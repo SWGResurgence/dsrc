@@ -8,9 +8,7 @@ import script.string_id;
 
 public class terminal_launch extends script.base_script
 {
-    public terminal_launch()
-    {
-    }
+
     public static final string_id SID_LAUNCH = new string_id("ep3/sidequests", "avatar_launch");
     public static final string_id SID_EJECT = new string_id("ep3/sidequests", "avatar_eject");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

@@ -6,9 +6,7 @@ public class tatooine_hard extends script.creature_spawner.base_newbie_creature_
     public int maxPop = 3;
     public boolean newbie = true;
 
-    public tatooine_hard()
-    {
-    }
+
     public String pickCreature() throws InterruptedException
     {
         switch (rand(1,3))

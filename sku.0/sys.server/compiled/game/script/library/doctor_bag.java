@@ -7,9 +7,7 @@ import script.string_id;
 
 public class doctor_bag extends script.base_script
 {
-    public doctor_bag()
-    {
-    }
+
     public static final int MAX_MEDS = 25;
     public static final int HEALING_RANGE = 0;
     public static final int HEALING_AREA = 1;

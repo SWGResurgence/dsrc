@@ -5,9 +5,7 @@ import script.*;
 
 public class npe_side3_questgiver extends script.base_script
 {
-    public npe_side3_questgiver()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_side3_questgiver";
     public boolean npe_side3_questgiver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -95,7 +93,7 @@ public class npe_side3_questgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_side3_questgiver_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -133,7 +131,7 @@ public class npe_side3_questgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_side3_questgiver_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -147,7 +145,7 @@ public class npe_side3_questgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_side3_questgiver_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -195,7 +193,7 @@ public class npe_side3_questgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_side3_questgiver_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -233,7 +231,7 @@ public class npe_side3_questgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_side3_questgiver_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -282,7 +280,7 @@ public class npe_side3_questgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_side3_questgiver_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -307,7 +305,7 @@ public class npe_side3_questgiver extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

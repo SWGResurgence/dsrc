@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class harvester extends script.base_script
 {
-    public harvester()
-    {
-    }
+
     public static final String OBJVAR_GROUP_REWARDED = "rewarded";
     public static final string_id SID_CONVERT = new string_id("ui_radial", "convert_harvester");
     public static final string_id SID_MAKE_ELITE = new string_id("ui_radial", "make_elite");

@@ -1,23 +1,16 @@
 package script.theme_park.wod;
 
-import script.*;
-import script.base_class.*;
-import script.combat_engine.*;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Vector;
-import script.base_script;
-
+import script.dictionary;
 import script.library.ai_lib;
 import script.library.attrib;
 import script.library.groundquests;
 import script.library.utils;
+import script.obj_id;
+import script.string_id;
 
 public class entertainer_rancor extends script.base_script
 {
-    public entertainer_rancor()
-    {
-    }
+
     public static final boolean debug = false;
     public static final String creatureTypesToLookFor = "gnarled_rancor,rancor,rancor_pygmy,rancor_youth";
     public static final String SYSTEM_MESSAGES = "theme_park/wod";

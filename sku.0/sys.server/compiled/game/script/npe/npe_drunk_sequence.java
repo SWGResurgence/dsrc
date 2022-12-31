@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class npe_drunk_sequence extends script.base_script
 {
-    public npe_drunk_sequence()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

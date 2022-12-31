@@ -8,9 +8,7 @@ import script.*;
 
 public class c_story1_2_mole extends script.base_script
 {
-    public c_story1_2_mole()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_story1_2_mole";
     public boolean c_story1_2_mole_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -97,7 +95,7 @@ public class c_story1_2_mole extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class hanger_elevator extends script.base_script
 {
-    public hanger_elevator()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "an elevator terminal");

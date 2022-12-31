@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class dantooine_rebel_base_spawner extends script.base_script
 {
-    public dantooine_rebel_base_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);

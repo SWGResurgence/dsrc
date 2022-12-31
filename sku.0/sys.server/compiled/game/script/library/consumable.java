@@ -4,9 +4,7 @@ import script.*;
 
 public class consumable extends script.base_script
 {
-    public consumable()
-    {
-    }
+
     public static final float MAX_AFFECT_DISTANCE = 6.0f;
     public static final String[] STAT_NAME = 
     {
@@ -465,13 +463,13 @@ public class consumable extends script.base_script
                         snd += "wookiee_";
                         break;
                     }
-                    int gender = getGender(player);
+                    Gender gender = getGender(player);
                     switch (gender)
                     {
-                        case GENDER_FEMALE:
+                        case FEMALE:
                         snd += "female_eat.cef";
                         break;
-                        case GENDER_MALE:
+                        case MALE:
                         default:
                         snd += "male_eat.cef";
                         break;

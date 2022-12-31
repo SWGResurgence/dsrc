@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class no_consume_badge_grant extends script.base_script
 {
-    public no_consume_badge_grant()
-    {
-    }
+
     public static final String PID_NAME = "collectionConsume";
     public static final String OBJVAR_BADGE_GRANTED = "badgeGrantedTo";
     public static final string_id SID_CONSUME_PROMPT = new string_id("collection", "non_consume_badge_prompt");

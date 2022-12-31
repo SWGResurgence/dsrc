@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class spawn_child extends script.base_script
 {
-    public spawn_child()
-    {
-    }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (hasObjVar(self, hq.VAR_SPAWN_LEADER))

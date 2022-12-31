@@ -8,9 +8,7 @@ import script.string_id;
 
 public class insurance_user extends script.theme_park.newbie_tutorial.tutorial_base
 {
-    public insurance_user()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleUseBank", null, rand(15, 30), false);

@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class terminal_money extends script.terminal.base.terminal_add_use
 {
-    public terminal_money()
-    {
-    }
+
     public static final int CASH_AMOUNT = 10000;
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {

@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
 {
-    public quest_hero_of_tatooine_bounty_hunter()
-    {
-    }
+
     public static String c_stringFile = "conversation/quest_hero_of_tatooine_bounty_hunter";
     public boolean quest_hero_of_tatooine_bounty_hunter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -148,7 +146,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -277,7 +275,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -395,7 +393,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -467,7 +465,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -596,7 +594,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -703,7 +701,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -764,7 +762,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -825,7 +823,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -886,7 +884,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -913,7 +911,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -974,7 +972,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1081,7 +1079,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_bounty_hunter_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1199,7 +1197,7 @@ public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

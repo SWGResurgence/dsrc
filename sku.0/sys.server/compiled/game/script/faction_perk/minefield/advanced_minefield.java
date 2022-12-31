@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class advanced_minefield extends script.systems.combat.combat_base
 {
-    public advanced_minefield()
-    {
-    }
+
     public static final float MAX_MINE_CHANCE = 0.8f;
     public static final int MINE_IMMUNITY_TIME = 10;
     public static final String[] MINE_ATTACK_COMMAND = 

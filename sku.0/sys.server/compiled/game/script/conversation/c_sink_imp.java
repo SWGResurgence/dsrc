@@ -5,9 +5,7 @@ import script.*;
 
 public class c_sink_imp extends script.base_script
 {
-    public c_sink_imp()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_sink_imp";
     public boolean c_sink_imp_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -306,7 +304,7 @@ public class c_sink_imp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_sink_imp_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -335,7 +333,7 @@ public class c_sink_imp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_sink_imp_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -374,7 +372,7 @@ public class c_sink_imp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_sink_imp_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -434,7 +432,7 @@ public class c_sink_imp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_sink_imp_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -504,7 +502,7 @@ public class c_sink_imp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_sink_imp_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -529,7 +527,7 @@ public class c_sink_imp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_sink_imp_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -545,7 +543,7 @@ public class c_sink_imp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_sink_imp_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -614,7 +612,7 @@ public class c_sink_imp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_sink_imp_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -664,7 +662,7 @@ public class c_sink_imp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_sink_imp_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -679,7 +677,7 @@ public class c_sink_imp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_sink_imp_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -783,7 +781,7 @@ public class c_sink_imp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_sink_imp_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -798,7 +796,7 @@ public class c_sink_imp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_sink_imp_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -824,7 +822,7 @@ public class c_sink_imp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_sink_imp_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -839,7 +837,7 @@ public class c_sink_imp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_sink_imp_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -853,7 +851,7 @@ public class c_sink_imp extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

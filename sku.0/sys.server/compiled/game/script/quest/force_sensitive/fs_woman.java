@@ -11,9 +11,7 @@ import script.string_id;
 
 public class fs_woman extends script.base_script
 {
-    public fs_woman()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("fs_woman_messagerange", 12, true);

@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class terminal_camp extends script.base_script
 {
-    public terminal_camp()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleTimeSensitiveData", null, 4, false);

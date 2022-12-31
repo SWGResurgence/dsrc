@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class holiday_controller extends script.base_script
 {
-    public holiday_controller()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         //CustomerServiceLog("holidayEvent", "holiday_controller.OnInitialize planet initialized, holiday controller called.");

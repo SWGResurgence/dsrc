@@ -2,9 +2,7 @@ package script.library;
 
 public class attrib extends script.base_script
 {
-    public attrib()
-    {
-    }
+
     public static final int ALL = 1;
     public static final int HERBIVORE = 2;
     public static final int CARNIVORE = 3;

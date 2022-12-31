@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class emp_day_spawner extends script.base_script
 {
-    public emp_day_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String setting = getConfigSetting("EventTeam", "empireDay");

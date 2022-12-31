@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class imperial_smuggler extends script.base_script
 {
-    public imperial_smuggler()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("npe_imperial_radius", 3.0f, true);

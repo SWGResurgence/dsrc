@@ -5,9 +5,7 @@ import script.*;
 
 public class station_lok extends script.base_script
 {
-    public station_lok()
-    {
-    }
+
     public static String c_stringFile = "conversation/station_lok";
     public boolean station_lok_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -706,7 +704,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -785,7 +783,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -810,7 +808,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1044,7 +1042,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1069,7 +1067,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1094,7 +1092,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1119,7 +1117,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1144,7 +1142,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1196,7 +1194,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1245,7 +1243,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1274,7 +1272,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1322,7 +1320,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1360,7 +1358,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1398,7 +1396,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1447,7 +1445,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1472,7 +1470,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1524,7 +1522,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1562,7 +1560,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1611,7 +1609,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1640,7 +1638,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1674,7 +1672,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_lok_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1754,7 +1752,7 @@ public class station_lok extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

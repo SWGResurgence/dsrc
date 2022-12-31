@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class cannot_die extends script.base_script
 {
-    public cannot_die()
-    {
-    }
+    
 
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {

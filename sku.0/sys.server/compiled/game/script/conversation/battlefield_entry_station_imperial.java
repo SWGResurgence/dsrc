@@ -5,9 +5,7 @@ import script.*;
 
 public class battlefield_entry_station_imperial extends script.base_script
 {
-    public battlefield_entry_station_imperial()
-    {
-    }
+
     public static String c_stringFile = "conversation/battlefield_entry_station_imperial";
     public boolean battlefield_entry_station_imperial_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -114,7 +112,7 @@ public class battlefield_entry_station_imperial extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class loveday_card_spawner extends script.base_script
 {
-    public loveday_card_spawner()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "initializeCardSpawner", null, 1, false);

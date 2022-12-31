@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class biolink_item extends script.base_script
 {
-    public biolink_item()
-    {
-    }
+
     public static final String VAR_TEMP_BASE = "biotemp";
     public static final String VAR_TEMP_EQUIP_FLAG = "biotemp.equip";
     public static final string_id SID_POINTS_NEEDED_FOR_BIO_LINK = new string_id("base_player", "faction_points_needed_for_bio_link");

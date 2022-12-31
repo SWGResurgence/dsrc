@@ -8,9 +8,7 @@ import script.*;
 
 public class choster_lok_cantina extends script.base_script
 {
-    public choster_lok_cantina()
-    {
-    }
+
     public static String c_stringFile = "conversation/choster_lok_cantina";
     public boolean choster_lok_cantina_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -95,7 +93,7 @@ public class choster_lok_cantina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int choster_lok_cantina_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -114,7 +112,7 @@ public class choster_lok_cantina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int choster_lok_cantina_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -158,7 +156,7 @@ public class choster_lok_cantina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int choster_lok_cantina_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -241,7 +239,7 @@ public class choster_lok_cantina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int choster_lok_cantina_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -290,7 +288,7 @@ public class choster_lok_cantina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int choster_lok_cantina_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -373,7 +371,7 @@ public class choster_lok_cantina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int choster_lok_cantina_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -467,7 +465,7 @@ public class choster_lok_cantina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int choster_lok_cantina_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -605,7 +603,7 @@ public class choster_lok_cantina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int choster_lok_cantina_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -966,7 +964,7 @@ public class choster_lok_cantina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int choster_lok_cantina_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1327,7 +1325,7 @@ public class choster_lok_cantina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int choster_lok_cantina_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1688,7 +1686,7 @@ public class choster_lok_cantina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int choster_lok_cantina_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2049,7 +2047,7 @@ public class choster_lok_cantina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int choster_lok_cantina_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2143,7 +2141,7 @@ public class choster_lok_cantina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int choster_lok_cantina_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2181,7 +2179,7 @@ public class choster_lok_cantina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int choster_lok_cantina_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2230,7 +2228,7 @@ public class choster_lok_cantina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

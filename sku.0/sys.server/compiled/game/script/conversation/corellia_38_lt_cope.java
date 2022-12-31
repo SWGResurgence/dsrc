@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_38_lt_cope extends script.base_script
 {
-    public corellia_38_lt_cope()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_38_lt_cope";
     public boolean corellia_38_lt_cope_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -111,7 +109,7 @@ public class corellia_38_lt_cope extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_38_lt_cope_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -149,7 +147,7 @@ public class corellia_38_lt_cope extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_38_lt_cope_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -187,7 +185,7 @@ public class corellia_38_lt_cope extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_38_lt_cope_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -202,7 +200,7 @@ public class corellia_38_lt_cope extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_38_lt_cope_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -217,7 +215,7 @@ public class corellia_38_lt_cope extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_38_lt_cope_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -265,7 +263,7 @@ public class corellia_38_lt_cope extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_38_lt_cope_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -280,7 +278,7 @@ public class corellia_38_lt_cope extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_38_lt_cope_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -329,7 +327,7 @@ public class corellia_38_lt_cope extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_38_lt_cope_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -354,7 +352,7 @@ public class corellia_38_lt_cope extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

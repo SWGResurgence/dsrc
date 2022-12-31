@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class mining_squad_leader extends script.base_script
 {
-    public mining_squad_leader()
-    {
-    }
+
     public static final String MINE_SOLDIER = "som_battlefield_miner";
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException

@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class kachirho_takook_recorder extends script.base_script
 {
-    public kachirho_takook_recorder()
-    {
-    }
+
     public static final String STF = "ep3/sidequests";
     public static final string_id LISTEN = new string_id(STF, "takook_recorder_listen");
     public static final string_id CLICK = new string_id(STF, "takook_recorder_click");

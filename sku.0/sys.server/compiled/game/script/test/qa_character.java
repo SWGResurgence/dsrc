@@ -7,9 +7,7 @@ import script.string_id;
 
 public class qa_character extends script.base_script
 {
-    public qa_character()
-    {
-    }
+
     public static final String TEMPLATE_TABLE = "datatables/test/qa_setup_expertise.iff";
     public static final String EXOTIC_MOD_STRINGS = "datatables/crafting/reverse_engineering_mods.iff";
     public static final String[] QASETUP_MAIN_MENU = 

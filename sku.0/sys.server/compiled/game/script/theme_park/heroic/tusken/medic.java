@@ -11,9 +11,7 @@ import java.util.Vector;
 
 public class medic extends script.base_script
 {
-    public medic()
-    {
-    }
+
     public int findSquad(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "squad"))

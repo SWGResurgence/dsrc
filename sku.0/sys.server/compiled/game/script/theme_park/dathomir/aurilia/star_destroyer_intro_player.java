@@ -10,9 +10,7 @@ import script.string_id;
 
 public class star_destroyer_intro_player extends script.base_script
 {
-    public star_destroyer_intro_player()
-    {
-    }
+
     public static final string_id SID_NO_MONEY_MSG = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_no_money");
     public static final string_id SID_PURCHASE_MSG_01 = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_purchase_msg_01");
     public static final string_id SID_PURCHASE_MSG_02 = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_purchase_msg_02");

@@ -11,9 +11,7 @@ import script.obj_id;
 
 public class vehicle_deconstruct extends script.base_script
 {
-    public vehicle_deconstruct()
-    {
-    }
+
     public static final String PID_NAME = "vehicleDeconstruct";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class minder_add extends script.base_script
 {
-    public minder_add()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         buff.applyBuff(self, "minder_add_debuff");

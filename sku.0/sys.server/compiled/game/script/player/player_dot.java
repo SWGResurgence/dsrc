@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class player_dot extends script.base_script
 {
-    public player_dot()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String[] dot_ids = dot.getAllDots(self);

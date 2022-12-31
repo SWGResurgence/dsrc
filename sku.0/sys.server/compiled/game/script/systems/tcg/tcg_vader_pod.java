@@ -9,9 +9,7 @@ import script.string_id;
 
 public class tcg_vader_pod extends script.base_script
 {
-    public tcg_vader_pod()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if(!hasObjVar(self, "status")){

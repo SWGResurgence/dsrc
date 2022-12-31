@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class fs_village_npc extends script.base_script
 {
-    public fs_village_npc()
-    {
-    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         fs_dyn_village.notifySpawnerOfDeath(self);

@@ -5,9 +5,7 @@ import script.*;
 
 public class rtp_mon_mothma_main extends script.base_script
 {
-    public rtp_mon_mothma_main()
-    {
-    }
+
     public static String c_stringFile = "conversation/rtp_mon_mothma_main";
     public boolean rtp_mon_mothma_main_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -73,7 +71,7 @@ public class rtp_mon_mothma_main extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

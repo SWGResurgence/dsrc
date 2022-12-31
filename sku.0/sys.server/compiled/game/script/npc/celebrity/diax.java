@@ -7,9 +7,7 @@ import script.string_id;
 
 public class diax extends script.base_script
 {
-    public diax()
-    {
-    }
+
     public static final String CONVO = "celebrity/diax";
     public int OnAttach(obj_id self) throws InterruptedException
     {

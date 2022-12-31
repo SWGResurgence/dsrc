@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class fs_military_initial_silent extends script.base_script
 {
-    public fs_military_initial_silent()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("fs_two_military_range", 26, true);

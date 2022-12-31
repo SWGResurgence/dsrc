@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class axkva_shade extends script.base_script
 {
-    public axkva_shade()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.ai");

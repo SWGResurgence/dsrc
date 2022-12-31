@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class loveday_disillusion_blaire_spawner extends script.base_script
 {
-    public loveday_disillusion_blaire_spawner()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnDisillusionedCupid", null, 4, false);

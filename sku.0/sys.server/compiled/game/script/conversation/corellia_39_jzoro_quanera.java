@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_39_jzoro_quanera extends script.base_script
 {
-    public corellia_39_jzoro_quanera()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_39_jzoro_quanera";
     public boolean corellia_39_jzoro_quanera_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -70,7 +68,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_39_jzoro_quanera_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -108,7 +106,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_39_jzoro_quanera_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -146,7 +144,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_39_jzoro_quanera_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -161,7 +159,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_39_jzoro_quanera_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -199,7 +197,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_39_jzoro_quanera_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -237,7 +235,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_39_jzoro_quanera_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -252,7 +250,7 @@ public class corellia_39_jzoro_quanera extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class foreman_guard extends script.base_script
 {
-    public foreman_guard()
-    {
-    }
+
     public static final boolean LOGGING = false;
     public int OnDestroy(obj_id self) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import java.util.Vector;
 
 public class slots extends script.base_script
 {
-    public slots()
-    {
-    }
+    
     public static final String BACK = "back";
     public static final String BICEP_L = "bicep_l";
     public static final String BICEP_R = "bicep_r";

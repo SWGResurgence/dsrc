@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class qaspace extends script.base_script
 {
-    public qaspace()
-    {
-    }
+
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String SPACE_MOBILE_TABLE = "datatables/space_mobile/space_mobile.iff";
     public static final String MASTER_ITEM_TABLE = "datatables/item/master_item/master_item.iff";

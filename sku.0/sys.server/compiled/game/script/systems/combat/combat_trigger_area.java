@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class combat_trigger_area extends script.base_script
 {
-    public combat_trigger_area()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         destroyObject(self);

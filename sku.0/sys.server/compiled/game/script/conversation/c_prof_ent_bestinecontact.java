@@ -8,9 +8,7 @@ import script.*;
 
 public class c_prof_ent_bestinecontact extends script.base_script
 {
-    public c_prof_ent_bestinecontact()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_prof_ent_bestinecontact";
     public boolean c_prof_ent_bestinecontact_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -92,7 +90,7 @@ public class c_prof_ent_bestinecontact extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_prof_ent_bestinecontact_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -153,7 +151,7 @@ public class c_prof_ent_bestinecontact extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_prof_ent_bestinecontact_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -205,7 +203,7 @@ public class c_prof_ent_bestinecontact extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_prof_ent_bestinecontact_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -221,7 +219,7 @@ public class c_prof_ent_bestinecontact extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

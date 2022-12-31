@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class npe_station_alarm extends script.base_script
 {
-    public npe_station_alarm()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "doPreloadRequest", null, 1, false);

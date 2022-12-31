@@ -11,9 +11,7 @@ import java.util.Vector;
 
 public class grievous_encounter_lock extends script.base_script
 {
-    public grievous_encounter_lock()
-    {
-    }
+
     public static final String start_cell = "hall55";
     public static final String entry_cell = "hall56";
     public static final String exit_cell = "hall59";
@@ -53,9 +51,11 @@ public class grievous_encounter_lock extends script.base_script
                 for (obj_id cellContent : cellContents) {
                     if (isPlayer(cellContent)) {
                         ejectPlayersFromEncounter(cellContent, dungeon);
+                        System.out.println("ejecting player " + getFirstName(cellContent) + " from encounter");
                     }
                     if ((getTemplateName(cellContent)).equals(encounter_manager)) {
                         messageTo(cellContent, "handleEndEncounter", null, 0, false);
+                        System.out.println("ending encounter");
                     }
                 }
             }
@@ -151,7 +151,7 @@ public class grievous_encounter_lock extends script.base_script
         int y = -88;
         int z = 127;
         doLogging("ejectPlayersFromEncounter", "Removing player(" + getName(player) + "/" + player + ") from encounter area");
-        warpPlayer(player, "kashyyyk_pob_dungeons", x, y, z, dungeon, exit_cell, x, y, z, "nullCallBack", true);
+        warpPlayer(player, "kashyyyk_pob_dungeons", x, y, z, dungeon, exit_cell, x, y, z, "nullCallBack", false);
     }
     public void moveSinglePlayerIntoEncounter(obj_id player, obj_id dungeon, int sessionId) throws InterruptedException
     {
@@ -162,7 +162,14 @@ public class grievous_encounter_lock extends script.base_script
         utils.setScriptVar(dungeon, encounter_session_current, sessionId);
         utils.setScriptVar(player, encounter_session_current, sessionId);
         setObjVar(player, encounter_lockout_end, getGameTime() + 1800);
+        sendDirtyCellPermissionsUpdate(player, getCellId(dungeon, encounter_cells[0]), true);
+        System.out.println("Granting accesss to cell " + encounter_cells[0]);
+        sendDirtyCellPermissionsUpdate(player, getCellId(dungeon, encounter_cells[1]), true);
+        System.out.println("Granting accesss to cell " + encounter_cells[1]);
+        sendDirtyCellPermissionsUpdate(player, getCellId(dungeon, encounter_cells[2]), true);
+        System.out.println("Granting accesss to cell " + encounter_cells[2]);
         doLogging("moveSinglePlayerIntoEncounter", "Adding player(" + getName(player) + "/" + player + ") to encounter area");
+        System.out.println("warping player " + getFirstName(player) + " to encounter");
         warpPlayer(player, "kashyyyk_pob_dungeons", x, y, z, dungeon, entry_cell, x, y, z, "nullCallBack", false);
     }
     public void moveGroupIntoEncounter(obj_id player, obj_id dungeon, int sessionId) throws InterruptedException
@@ -192,6 +199,7 @@ public class grievous_encounter_lock extends script.base_script
         if (godOverride)
         {
             doLogging("isSessionAvailable", "Session overridden by god request");
+            System.out.println("Session overridden by god request");
             messageTo(dungeon, "resetEncounterLocks", null, 0, false);
             return true;
         }
@@ -200,18 +208,21 @@ public class grievous_encounter_lock extends script.base_script
             if (utils.getIntScriptVar(dungeon, encounter_session_current) != -1)
             {
                 doLogging("isSessionAvailable", "Current session != -1, validate session");
+                System.out.println("Current session != -1, validate session");
                 return validateEncounterSession(dungeon);
             }
         }
         if (!hasObjVar(dungeon, encounter_active))
         {
             doLogging("isSessionAvailable", "Dungeon lacks encounter active objVar, returning true");
+            System.out.println("Dungeon lacks encounter active objVar, returning true");
             messageTo(dungeon, "resetEncounterLocks", null, 0, false);
             return true;
         }
         if (getIntObjVar(dungeon, encounter_active) == 1)
         {
             doLogging("isSessionAvailable", "Dungeon has session active objvar. Validating session");
+            System.out.println("Dungeon has session active objvar. Validating session");
             return validateEncounterSession(dungeon);
         }
         messageTo(dungeon, "resetEncounterLocks", null, 0, false);
@@ -225,6 +236,7 @@ public class grievous_encounter_lock extends script.base_script
             if (getGameTime() < utils.getIntScriptVar(dungeon, grace_period_end))
             {
                 doLogging("validateEncounterSession", "Grace period has not elapsed, returning false for is available check");
+                System.out.println("Grace period has not elapsed, returning false for is available check");
                 return false;
             }
         }
@@ -240,6 +252,7 @@ public class grievous_encounter_lock extends script.base_script
         if (players == null || players.length == 0)
         {
             doLogging("validateEncounterSession", "No valid players in the encounter area, send reset request");
+            System.out.println("No valid players in the encounter area, send reset request");
             messageTo(dungeon, "resetEncounterLocks", null, 0, false);
             return true;
         }
@@ -261,6 +274,7 @@ public class grievous_encounter_lock extends script.base_script
         if (utils.hasScriptVar(player, god_authorized))
         {
             doLogging("validatePlayerSessionId", "Player(" + getName(player) + "/" + player + ") is god authoratative");
+            System.out.println("Player(" + getName(player) + "/" + player + ") is god authoratative");
             return true;
         }
         if (hasObjVar(dungeon, encounter_active))
@@ -287,6 +301,7 @@ public class grievous_encounter_lock extends script.base_script
         int nextSession = sessionId + 1;
         utils.setScriptVar(dungeon, encounter_session_count, nextSession);
         doLogging("setSessionIds", "Session Id set to: " + sessionId);
+        System.out.println("Session Id set to: " + sessionId);
         return sessionId;
     }
     public void startEventTimer(obj_id dungeon, int sessionId) throws InterruptedException
@@ -310,6 +325,7 @@ public class grievous_encounter_lock extends script.base_script
         if (sessionTimeRemaining < 1)
         {
             doLogging("getDungeonRemainingTimeString", "sessionTimeRemaining less than one, calling End Dungeon Session");
+            System.out.println("sessionTimeRemaining less than one, calling End Dungeon Session");
             messageTo(dungeon, "resetEncounterLocks", null, 0, false);
         }
         return utils.formatTimeVerbose(sessionTimeRemaining);
@@ -356,6 +372,7 @@ public class grievous_encounter_lock extends script.base_script
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
+        System.out.println("Grievous Encounter Lock Initialized");
         messageTo(self, "resetEncounterLocks", null, 0, false);
         return SCRIPT_CONTINUE;
     }
@@ -371,7 +388,8 @@ public class grievous_encounter_lock extends script.base_script
             for (obj_id player : players) {
                 if (player == item) {
                     doLogging("OnRecievedItem", "Player(" + getName(item) + "/" + item + ") has entered encounter area, validating");
-                    messageTo(self, "validatePlayersInEvent", null, 0, false);
+                    System.out.println("Player(" + getName(item) + "/" + item + ") has entered encounter area, validating");
+                    //messageTo(self, "validatePlayersInEvent", null, 0, false);
                 }
             }
         }
@@ -383,6 +401,7 @@ public class grievous_encounter_lock extends script.base_script
         utils.setScriptVar(self, encounter_session_current, -1);
         devalidateEventPlayersInDungeon(self);
         clearEncounterCells(self);
+        System.out.println("Encounter Locks Reset");
         return SCRIPT_CONTINUE;
     }
     public int beginEncounter(obj_id self, dictionary params) throws InterruptedException
@@ -398,7 +417,9 @@ public class grievous_encounter_lock extends script.base_script
         moveGroupIntoEncounter(player, self, sessionId);
         setObjVar(self, encounter_active, 1);
         groundquests.sendSignal(player, "signalCompleteGrievousPrequest");
+        System.out.println("Encounter Started");
         startEventTimer(self, sessionId);
+        System.out.println("Encounter Timer Started");
         return SCRIPT_CONTINUE;
     }
     public int handleSessionTimerUpdate(obj_id self, dictionary params) throws InterruptedException
@@ -417,6 +438,7 @@ public class grievous_encounter_lock extends script.base_script
                 if (players != null && players.length > 0)
                 {
                     doLogging("handleSessionTimerUpdate", "Time remaining: " + timeRemaining + ", players to notify: " + players.length);
+                    System.out.println("Time remaining: " + timeRemaining + ", players to notify: " + players.length);
                     params.put("message", timeRemaining);
                     utils.messageTo(players, "handleGrievousTimerUpdate", params, 0.0f, false);
                 }
@@ -428,6 +450,7 @@ public class grievous_encounter_lock extends script.base_script
             else 
             {
                 doLogging("handleSessionTimerUpdate", "Next message was less than 1, ending encounter");
+                System.out.println("Next message was less than 1, ending encounter");
                 messageTo(self, "resetEncounterLocks", null, 0, false);
             }
         }
@@ -448,6 +471,7 @@ public class grievous_encounter_lock extends script.base_script
         if (players == null || players.length == 0)
         {
             doLogging("validatePlayersInEvent", "No players remain in the encounter area, send reset request");
+            System.out.println("No players remain in the encounter area, send reset request");
             messageTo(self, "resetEncounterLocks", null, 0, false);
         }
         return SCRIPT_CONTINUE;

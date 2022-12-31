@@ -4,11 +4,11 @@ import script.dictionary;
 import script.library.holiday;
 import script.obj_id;
 
+import java.time.LocalTime;
+
 public class planet_event_handler extends script.base_script
 {
-    public planet_event_handler()
-    {
-    }
+
     private static final String EVENT_TIMESTAMP = "lifeday.time_stamp";
     public int OnAttach(obj_id self) throws InterruptedException
     {
@@ -70,7 +70,7 @@ public class planet_event_handler extends script.base_script
             removeObjVar(self, "lifeday");
             setObjVar(self, "lifeday.emptyScoreBoard", "true");
             newTimeStamp(self);
-            createDailyAlarmClock(self, "lifeDayDailyAlarm", null, 10, 0, 0);
+            timedMessageToDaily(self, "lifeDayDailyAlarm", null, LocalTime.of(4, 0, 0));
         }
     }
     private boolean newDay(obj_id self) throws InterruptedException
@@ -89,7 +89,7 @@ public class planet_event_handler extends script.base_script
         int secondsUntil = secondsUntilNextDailyTime(10, 0, 0);
         int then = now + secondsUntil;
         setObjVar(self, EVENT_TIMESTAMP, then);
-        createDailyAlarmClock(self, "lifeDayDailyAlarm", null, 10, 0, 0);
+        timedMessageToDaily(self, "lifeDayDailyAlarm", null, LocalTime.of(10, 0, 0));
     }
     public int setUpEventLeaderBoard(obj_id self, dictionary params) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import java.util.Vector;
 
 public class holiday extends script.base_script
 {
-    public holiday()
-    {
-    }
+
     public static final String PLANET_VAR_EVENT_PREFIX = "event";
     public static final String PLANET_VAR_SCORE = ".score";
     public static final String PLANET_VAR_EMPIRE_DAY = ".empire_day";
@@ -637,7 +635,7 @@ public class holiday extends script.base_script
         {
             return false;
         }
-        if (isPlayerConnected(player) && !isAwayFromKeyBoard(player) && !hasCompletedCollectionSlot(player, holiday.EMPIRE_DAY_CHAMPION_BADGE) && !hasCompletedCollectionSlot(player, holiday.REMEMBRANCE_DAY_CHAMPION_BADGE) && !isGod(player) && !isDead(player) && !ai_lib.isInCombat(player) && !isIncapacitated(player) && !utils.isFreeTrial(player) && isInWorldCell(player))
+        if (isPlayerConnected(player) && !isAwayFromKeyBoard(player) && !hasCompletedCollectionSlot(player, holiday.EMPIRE_DAY_CHAMPION_BADGE) && !hasCompletedCollectionSlot(player, holiday.REMEMBRANCE_DAY_CHAMPION_BADGE) && !isGod(player) && !isDead(player) && !ai_lib.isInCombat(player) && !isIncapacitated(player) && isInWorldCell(player))
         {
             return true;
         }

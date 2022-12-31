@@ -6,9 +6,7 @@ import script.string_id;
 
 public class loot_kit_base extends script.base_script
 {
-    public loot_kit_base()
-    {
-    }
+
     public static final String STF = "loot_kit";
     public static final string_id INCORRECT_ITEM = new string_id(STF, "incorrect_item");
     public static final string_id ALREADY_CONTAINS = new string_id(STF, "already_contains");

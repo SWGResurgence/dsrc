@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class consume_prereq_met extends script.base_script
 {
-    public consume_prereq_met()
-    {
-    }
+
     public static final String PID_NAME = "collectionConsume";
     public static final String SCRIPTVAR_LIST = "collections.availableCollections";
     public static final string_id SID_CONSUME_PROMPT = new string_id("collection", "consume_item_prompt");

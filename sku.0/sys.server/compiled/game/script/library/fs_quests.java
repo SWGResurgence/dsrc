@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class fs_quests extends script.base_script
 {
-    public fs_quests()
-    {
-    }
+
     public static final String DATATABLE_SKILL_BRANCH = "datatables/quest/force_sensitive/skill_branch.iff";
     public static final String VAR_BRANCHES_UNLOCKED = "fs_quest.branches_unlocked";
     public static final String VAR_FREE_UNLOCK_USED = "fs_quest.free_unlock_used";

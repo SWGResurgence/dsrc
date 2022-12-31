@@ -9,9 +9,7 @@ import script.string_id;
 
 public class r2_loot extends script.base_script
 {
-    public r2_loot()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String newLoot = pickNewLoot();

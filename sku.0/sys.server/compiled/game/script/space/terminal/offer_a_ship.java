@@ -11,9 +11,7 @@ import script.string_id;
 
 public class offer_a_ship extends script.base_script
 {
-    public offer_a_ship()
-    {
-    }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

@@ -8,9 +8,7 @@ import script.*;
 
 public class legacy_naboo_yane extends script.base_script
 {
-    public legacy_naboo_yane()
-    {
-    }
+
     public static String c_stringFile = "conversation/legacy_naboo_yane";
     public boolean legacy_naboo_yane_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -70,7 +68,7 @@ public class legacy_naboo_yane extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_naboo_yane_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -109,7 +107,7 @@ public class legacy_naboo_yane extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_naboo_yane_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -148,7 +146,7 @@ public class legacy_naboo_yane extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_naboo_yane_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -164,7 +162,7 @@ public class legacy_naboo_yane extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

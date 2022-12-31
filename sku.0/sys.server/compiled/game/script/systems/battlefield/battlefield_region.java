@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class battlefield_region extends script.base_script
 {
-    public battlefield_region()
-    {
-    }
+
     public static final string_id SID_BATTLEFIELD_STATUS = new string_id("battlefield", "status");
     public static final string_id SID_GAME_STATUS = new string_id("battlefield", "game_status");
     public static final String VAR_TIME_WARNING_LEVEL = "battlefield.game.time_warning_level";

@@ -5,9 +5,7 @@ import script.*;
 
 public class station_ord_mantell extends script.base_script
 {
-    public station_ord_mantell()
-    {
-    }
+
     public static String c_stringFile = "conversation/station_ord_mantell";
     public boolean station_ord_mantell_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -179,7 +177,7 @@ public class station_ord_mantell extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_ord_mantell_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -417,7 +415,7 @@ public class station_ord_mantell extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_ord_mantell_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -445,7 +443,7 @@ public class station_ord_mantell extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_ord_mantell_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -478,7 +476,7 @@ public class station_ord_mantell extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_ord_mantell_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -511,7 +509,7 @@ public class station_ord_mantell extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int station_ord_mantell_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -540,7 +538,7 @@ public class station_ord_mantell extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

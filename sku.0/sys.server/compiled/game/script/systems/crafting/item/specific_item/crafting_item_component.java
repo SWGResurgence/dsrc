@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_item_component extends script.systems.crafting.item.crafting_base_item_component
 {
-    public crafting_item_component()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

@@ -6,9 +6,7 @@ import script.*;
 
 public class hangar_exit_terminal extends script.base_script
 {
-    public hangar_exit_terminal()
-    {
-    }
+
     public static final string_id OPEN_HANGAR = new string_id("npe_hangar_1", "open_hangar");
     public int OnAttach(obj_id self) throws InterruptedException
     {

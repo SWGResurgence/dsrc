@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class timer extends script.quest.task.ground.base_task
 {
-    public timer()
-    {
-    }
+    
     public static final String dataTableColumnMinTime = "MIN_TIME";
     public static final String dataTableColumnMaxTime = "MAX_TIME";
     public static final String dataTableColumnVisible = "IS_VISIBLE";

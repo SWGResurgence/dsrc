@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class advanced_turret_ai extends script.systems.combat.combat_base
 {
-    public advanced_turret_ai()
-    {
-    }
+
     public static final int INTERVAL_MAX = 10;
     public static final int FARTHEST_TRIGGER = INTERVAL_MAX - 1;
     public int OnInitialize(obj_id self) throws InterruptedException

@@ -6,9 +6,7 @@ import script.*;
 
 public class demolition_generator extends script.base_script
 {
-    public demolition_generator()
-    {
-    }
+
     public static final String DATA_TABLE = "datatables/combat/npc_landmines.iff";
     public static final String STF = "npc_landmines";
     public static final string_id PLACE_CHARGE = new string_id(STF, "place_charge");

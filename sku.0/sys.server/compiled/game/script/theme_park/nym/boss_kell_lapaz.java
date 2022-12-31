@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class boss_kell_lapaz extends script.base_script
 {
-    public boss_kell_lapaz()
-    {
-    }
+
     public void findNextTarget(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))

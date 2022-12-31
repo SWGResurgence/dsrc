@@ -12,9 +12,7 @@ import java.util.Vector;
 
 public class cloning_facility extends script.structure.municipal.cloning_base
 {
-    public cloning_facility()
-    {
-    }
+
     public static final String SCRIPT_CLONING_FACILITY = "structure.municipal.cloning_facility";
     public static final String DATATABLE_TERMINAL_LIST = "datatables/structure/municipal/cloning_facility_terminal.iff";
     public int OnInitialize(obj_id self) throws InterruptedException

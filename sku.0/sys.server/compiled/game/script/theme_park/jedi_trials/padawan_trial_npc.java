@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class padawan_trial_npc extends script.base_script
 {
-    public padawan_trial_npc()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("DestroyNpcVolume", 32.0f, true);

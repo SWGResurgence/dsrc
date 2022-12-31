@@ -5,9 +5,7 @@ import script.*;
 
 public class instrument_dispenser extends script.base_script
 {
-    public instrument_dispenser()
-    {
-    }
+
     public static final String DATATABLE_INVENTORY = "datatables/dispenser/instrument.iff";
     public static final String SCRIPT_DISPENSER_SELECT = "player.player_dispenser";
     public static final string_id SID_PURCHASE_INSTRUMENT = new string_id("dispenser", "purchase_instrument");

@@ -8,9 +8,7 @@ import script.*;
 
 public class tatooine_tosche_sorna extends script.base_script
 {
-    public tatooine_tosche_sorna()
-    {
-    }
+
     public static String c_stringFile = "conversation/tatooine_tosche_sorna";
     public boolean tatooine_tosche_sorna_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -48,7 +46,7 @@ public class tatooine_tosche_sorna extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_tosche_sorna_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -62,7 +60,7 @@ public class tatooine_tosche_sorna extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_tosche_sorna_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -101,7 +99,7 @@ public class tatooine_tosche_sorna extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_tosche_sorna_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -116,7 +114,7 @@ public class tatooine_tosche_sorna extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_tosche_sorna_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -164,7 +162,7 @@ public class tatooine_tosche_sorna extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_tosche_sorna_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -203,7 +201,7 @@ public class tatooine_tosche_sorna extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tatooine_tosche_sorna_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -217,7 +215,7 @@ public class tatooine_tosche_sorna extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class autoinsure extends script.base_script
 {
-    public autoinsure()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleAutoInsure", null, 1.0f, false);

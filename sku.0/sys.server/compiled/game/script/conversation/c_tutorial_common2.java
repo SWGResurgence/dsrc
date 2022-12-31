@@ -7,9 +7,7 @@ import script.*;
 
 public class c_tutorial_common2 extends script.base_script
 {
-    public c_tutorial_common2()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_tutorial_common2";
     public boolean c_tutorial_common2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

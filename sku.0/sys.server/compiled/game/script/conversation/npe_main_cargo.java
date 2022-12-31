@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_main_cargo extends script.base_script
 {
-    public npe_main_cargo()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_main_cargo";
     public boolean npe_main_cargo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -76,7 +74,7 @@ public class npe_main_cargo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_main_cargo_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -115,7 +113,7 @@ public class npe_main_cargo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_main_cargo_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -131,7 +129,7 @@ public class npe_main_cargo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

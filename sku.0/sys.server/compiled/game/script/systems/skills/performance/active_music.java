@@ -7,9 +7,7 @@ import script.string_id;
 
 public class active_music extends script.base_script
 {
-    public active_music()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int healingXP = getExperiencePoints(self, "entertainer_healing");

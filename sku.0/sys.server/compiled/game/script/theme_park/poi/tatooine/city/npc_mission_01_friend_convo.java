@@ -6,9 +6,7 @@ import script.string_id;
 
 public class npc_mission_01_friend_convo extends script.base_script
 {
-    public npc_mission_01_friend_convo()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         stop(self);

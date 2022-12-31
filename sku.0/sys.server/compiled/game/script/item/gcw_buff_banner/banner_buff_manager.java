@@ -11,9 +11,7 @@ import java.util.Vector;
 
 public class banner_buff_manager extends script.base_script
 {
-    public banner_buff_manager()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         trial.cleanupObject(self);

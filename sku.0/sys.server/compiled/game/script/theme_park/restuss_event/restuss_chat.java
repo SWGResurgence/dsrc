@@ -7,9 +7,7 @@ import script.string_id;
 
 public class restuss_chat extends script.base_script
 {
-    public restuss_chat()
-    {
-    }
+
     public static final String STF = "restuss_event/rebel_commando_chat";
     public static final string_id OPENING = new string_id(STF, "opening");
     public int OnAttach(obj_id self) throws InterruptedException

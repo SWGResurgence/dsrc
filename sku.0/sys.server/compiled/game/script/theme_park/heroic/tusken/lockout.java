@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class lockout extends script.base_script
 {
-    public lockout()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         permissionsMakePrivate(self);

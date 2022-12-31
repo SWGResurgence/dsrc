@@ -5,9 +5,7 @@ import script.*;
 
 public class corellia_imperial_trainer_1 extends script.base_script
 {
-    public corellia_imperial_trainer_1()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_imperial_trainer_1";
     public boolean corellia_imperial_trainer_1_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -856,7 +854,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1110,7 +1108,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1364,7 +1362,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1504,7 +1502,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1758,7 +1756,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2012,7 +2010,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2266,7 +2264,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2316,7 +2314,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2343,7 +2341,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2399,7 +2397,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2470,7 +2468,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2554,7 +2552,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2594,7 +2592,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2633,7 +2631,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2648,7 +2646,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2842,7 +2840,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2867,7 +2865,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2892,7 +2890,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2917,7 +2915,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2942,7 +2940,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3070,7 +3068,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3142,7 +3140,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3229,7 +3227,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3244,7 +3242,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3259,7 +3257,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3333,7 +3331,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3416,7 +3414,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3465,7 +3463,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3480,7 +3478,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3495,7 +3493,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3578,7 +3576,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch63(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3627,7 +3625,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch64(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3642,7 +3640,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch67(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3681,7 +3679,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch68(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3696,7 +3694,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch70(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3746,7 +3744,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch71(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3773,7 +3771,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch74(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3855,7 +3853,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch75(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3894,7 +3892,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch76(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3933,7 +3931,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch77(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3949,7 +3947,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch79(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3988,7 +3986,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch80(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4027,7 +4025,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch81(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4100,7 +4098,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch82(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4115,7 +4113,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch84(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4130,7 +4128,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch86(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4180,7 +4178,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch87(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4207,7 +4205,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch90(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4289,7 +4287,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch91(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4328,7 +4326,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch92(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4367,7 +4365,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch93(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4417,7 +4415,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch94(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4502,7 +4500,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch95(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4576,7 +4574,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch96(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4592,7 +4590,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch98(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4608,7 +4606,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch100(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4647,7 +4645,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch101(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4722,7 +4720,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch102(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4762,7 +4760,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch103(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4777,7 +4775,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch105(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4816,7 +4814,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch106(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4831,7 +4829,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch108(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4858,7 +4856,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch111(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4940,7 +4938,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch112(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4979,7 +4977,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch113(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5018,7 +5016,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch114(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5057,7 +5055,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch115(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5096,7 +5094,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch116(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5179,7 +5177,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch117(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5424,7 +5422,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch118(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5601,7 +5599,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch119(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5778,7 +5776,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch120(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5817,7 +5815,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch121(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -5867,7 +5865,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch122(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6007,7 +6005,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch123(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6217,7 +6215,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch124(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6427,7 +6425,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch125(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6466,7 +6464,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch126(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6505,7 +6503,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch127(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6544,7 +6542,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch128(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6616,7 +6614,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch129(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6826,7 +6824,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch130(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6865,7 +6863,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch131(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6904,7 +6902,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch132(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6943,7 +6941,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch133(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6982,7 +6980,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch134(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -6998,7 +6996,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch136(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7048,7 +7046,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch137(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7075,7 +7073,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch140(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7149,7 +7147,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch141(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7188,7 +7186,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch142(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7227,7 +7225,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch143(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7266,7 +7264,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch144(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7305,7 +7303,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch145(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7344,7 +7342,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch146(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7383,7 +7381,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch147(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7399,7 +7397,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch149(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7438,7 +7436,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch150(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7488,7 +7486,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch151(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7538,7 +7536,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch152(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7610,7 +7608,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch153(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7774,7 +7772,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch154(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7881,7 +7879,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch155(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -7967,7 +7965,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch156(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8040,7 +8038,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch157(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8079,7 +8077,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch158(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8118,7 +8116,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch159(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8157,7 +8155,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch160(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8196,7 +8194,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch161(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8235,7 +8233,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch162(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8285,7 +8283,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch163(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8336,7 +8334,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_imperial_trainer_1_handleBranch165(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -8443,7 +8441,7 @@ public class corellia_imperial_trainer_1 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

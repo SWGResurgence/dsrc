@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class hero_quest_squill_skull extends script.base_script
 {
-    public hero_quest_squill_skull()
-    {
-    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "hero_of_tatooine_skull_to_hermit"))

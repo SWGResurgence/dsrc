@@ -8,9 +8,7 @@ import script.*;
 
 public class yavin_fallenstar_pt_1_megan extends script.base_script
 {
-    public yavin_fallenstar_pt_1_megan()
-    {
-    }
+
     public static String c_stringFile = "conversation/yavin_fallenstar_pt_1_megan";
     public boolean yavin_fallenstar_pt_1_megan_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -176,7 +174,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -191,7 +189,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -251,7 +249,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -300,7 +298,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -315,7 +313,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -330,7 +328,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -437,7 +435,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -497,7 +495,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -523,7 +521,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -538,7 +536,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -586,7 +584,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -601,7 +599,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -628,7 +626,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -678,7 +676,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -773,7 +771,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -798,7 +796,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int yavin_fallenstar_pt_1_megan_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -857,7 +855,7 @@ public class yavin_fallenstar_pt_1_megan extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

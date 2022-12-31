@@ -8,9 +8,7 @@ import script.*;
 
 public class emp_day_reb_disk_guy extends script.base_script
 {
-    public emp_day_reb_disk_guy()
-    {
-    }
+
     public static String c_stringFile = "conversation/emp_day_reb_disk_guy";
     public boolean emp_day_reb_disk_guy_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -52,7 +50,7 @@ public class emp_day_reb_disk_guy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class move_manager extends script.base_script
 {
-    public move_manager()
-    {
-    }
+
     public static final int REST_IMP = 0;
     public static final int REST_REB = 1;
     public int marchRun(obj_id self, dictionary params) throws InterruptedException

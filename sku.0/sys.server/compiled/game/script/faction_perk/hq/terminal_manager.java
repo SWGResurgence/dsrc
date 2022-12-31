@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class terminal_manager extends script.base_script
 {
-    public terminal_manager()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         hq.loadHqTerminals(self);

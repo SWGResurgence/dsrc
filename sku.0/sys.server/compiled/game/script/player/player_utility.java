@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class player_utility extends script.base_script
 {
-    public player_utility()
-    {
-    }
+
     public static final String LOGGING_CATEGORY = "foraging";
     public static final boolean LOGGING_ON = false;
     public static final obj_id WORLD_ID = obj_id.NULL_ID;
@@ -80,6 +78,10 @@ public class player_utility extends script.base_script
             {
                 buff.applyBuff(self, "tcg_series3_hands_of_seduction");
             }
+        }
+        if (hasScript(self, "name.name")) //this is to remove the rename radial off players.
+        {
+            detachScript(self, "name.name");
         }
         return SCRIPT_CONTINUE;
     }

@@ -8,9 +8,7 @@ import script.string_id;
 
 public class message_assembled extends script.base_script
 {
-    public message_assembled()
-    {
-    }
+
     public static final string_id SID_SYS_NOT_IN_INV = new string_id("encoded_disk/message_fragment", "sys_not_in_inv");
     public static final string_id SID_USE = new string_id("treasure_map/treasure_map", "use");
     public static final String SID_CLOSE = "@treasure_map/treasure_map:close";

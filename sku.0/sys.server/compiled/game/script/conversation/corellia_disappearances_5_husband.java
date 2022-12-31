@@ -8,9 +8,7 @@ import script.*;
 
 public class corellia_disappearances_5_husband extends script.base_script
 {
-    public corellia_disappearances_5_husband()
-    {
-    }
+
     public static String c_stringFile = "conversation/corellia_disappearances_5_husband";
     public boolean corellia_disappearances_5_husband_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -64,7 +62,7 @@ public class corellia_disappearances_5_husband extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corellia_disappearances_5_husband_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -79,7 +77,7 @@ public class corellia_disappearances_5_husband extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

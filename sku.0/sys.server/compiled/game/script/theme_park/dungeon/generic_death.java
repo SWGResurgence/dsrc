@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class generic_death extends script.base_script
 {
-    public generic_death()
-    {
-    }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);

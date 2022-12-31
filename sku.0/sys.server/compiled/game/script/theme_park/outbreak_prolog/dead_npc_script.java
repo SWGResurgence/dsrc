@@ -5,9 +5,7 @@ import script.library.*;
 
 public class dead_npc_script extends script.base_script
 {
-    public dead_npc_script()
-    {
-    }
+
     public static final String MENU_STRING_FILE = "theme_park/outbreak/outbreak";
     public static final String MENU_OBJ_VAR = "menu_string";
     public static final String NO_MENU_OBJ_VAR = "none";

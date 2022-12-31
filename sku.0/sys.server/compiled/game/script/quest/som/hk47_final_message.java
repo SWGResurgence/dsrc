@@ -5,9 +5,7 @@ import script.*;
 
 public class hk47_final_message extends script.base_script
 {
-    public hk47_final_message()
-    {
-    }
+
     public static final String STF = "som/som_quest";
     public static final string_id ACTIVATE = new string_id(STF, "comm_console_message");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class veteran_rewards extends script.base_script
 {
-    public veteran_rewards()
-    {
-    }
+
     public static final String OBJVAR_NEXT_PROMPT_TIME = "veteran_rewards.next_prompt_time";
     public static final String OBJVAR_SOROSUUB_CLAIMED_ITEMS = "veteran_rewards.items_claimed.sorosuub";
     public static final String OBJVAR_6MOJTL_CONSUMED_EVENTS = "veteran_rewards.events_consumed.6moJTL";

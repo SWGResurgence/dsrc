@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class legacy_kleetuz_timeout extends script.base_script
 {
-    public legacy_kleetuz_timeout()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "msgCheckCombat", null, 10, false);

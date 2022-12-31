@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class asteroid extends script.base_script
 {
-    public asteroid()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

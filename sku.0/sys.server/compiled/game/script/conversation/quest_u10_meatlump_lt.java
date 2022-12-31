@@ -8,9 +8,7 @@ import script.*;
 
 public class quest_u10_meatlump_lt extends script.base_script
 {
-    public quest_u10_meatlump_lt()
-    {
-    }
+
     public static String c_stringFile = "conversation/quest_u10_meatlump_lt";
     public boolean quest_u10_meatlump_lt_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -65,7 +63,7 @@ public class quest_u10_meatlump_lt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_u10_meatlump_lt_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -103,7 +101,7 @@ public class quest_u10_meatlump_lt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_u10_meatlump_lt_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -141,7 +139,7 @@ public class quest_u10_meatlump_lt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_u10_meatlump_lt_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -179,7 +177,7 @@ public class quest_u10_meatlump_lt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_u10_meatlump_lt_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -229,7 +227,7 @@ public class quest_u10_meatlump_lt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_u10_meatlump_lt_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -277,7 +275,7 @@ public class quest_u10_meatlump_lt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_u10_meatlump_lt_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -291,7 +289,7 @@ public class quest_u10_meatlump_lt extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -4,9 +4,7 @@ import script.*;
 
 public class trash_shutoff extends script.base_script
 {
-    public trash_shutoff()
-    {
-    }
+
     public static final String MSGS = "dungeon/geonosian_madbio";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

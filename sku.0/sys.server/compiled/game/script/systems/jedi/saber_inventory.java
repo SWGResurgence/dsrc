@@ -6,9 +6,7 @@ import script.string_id;
 
 public class saber_inventory extends script.base_script
 {
-    public saber_inventory()
-    {
-    }
+
     public static final string_id SID_SABER_NOT_CRYSTAL = new string_id("jedi_spam", "saber_not_crystal");
     public static final string_id SID_SABER_NOT_WHILE_EQUIP = new string_id("jedi_spam", "saber_not_while_equpped");
     public static final string_id SID_SABER_CRYSTAL_NOT_TUNED = new string_id("jedi_spam", "saber_crystal_not_tuned");

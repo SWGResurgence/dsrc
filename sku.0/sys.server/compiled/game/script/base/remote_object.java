@@ -2,9 +2,7 @@ package script.base;
 
 public class remote_object extends script.base_script
 {
-    public remote_object()
-    {
-    }
+
     public static final String REMOTE_OBJECT_MANAGER = "remote_object_manager";
     public static final String BASE_NAME = "remote_object";
     public static final String ATTACH_SCRIPTS = BASE_NAME + ".attachScripts";

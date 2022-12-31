@@ -8,9 +8,7 @@ import script.*;
 
 public class itp_thrawn_keeloo extends script.base_script
 {
-    public itp_thrawn_keeloo()
-    {
-    }
+
     public static String c_stringFile = "conversation/itp_thrawn_keeloo";
     public boolean itp_thrawn_keeloo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

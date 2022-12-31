@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class paired_object_movement extends script.base_script
 {
-    public paired_object_movement()
-    {
-    }
+
     public static final int STATUS_NONE = 0;
     public static final int STATUS_ONE = 1;
     public static final int STATUS_MANY = 2;

@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class droid_name extends script.base_script
 {
-    public droid_name()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         getDroidName(self);

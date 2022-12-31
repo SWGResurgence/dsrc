@@ -7,9 +7,7 @@ import script.resource_weight;
 
 public class crafting_cybernetic_nostats extends script.systems.crafting.armor.crafting_new_armor_clothing_nostats
 {
-    public crafting_cybernetic_nostats()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

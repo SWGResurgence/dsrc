@@ -6,9 +6,7 @@ import script.string_id;
 
 public class luck extends script.base_script
 {
-    public luck()
-    {
-    }
+
     public static boolean isLucky(obj_id player) throws InterruptedException
     {
         return isLucky(player, 0.10f, true);

@@ -8,9 +8,7 @@ import script.*;
 
 public class corvette_neutral_pilot extends script.base_script
 {
-    public corvette_neutral_pilot()
-    {
-    }
+
     public static String c_stringFile = "conversation/corvette_neutral_pilot";
     public boolean corvette_neutral_pilot_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

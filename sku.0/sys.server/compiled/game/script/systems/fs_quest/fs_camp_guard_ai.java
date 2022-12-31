@@ -8,9 +8,7 @@ import script.string_id;
 
 public class fs_camp_guard_ai extends script.base_script
 {
-    public fs_camp_guard_ai()
-    {
-    }
+
     public static final String VAR_SPAWNED_BY = "quest_spawner.spawned_by";
     public void setPatrolPaths() throws InterruptedException
     {

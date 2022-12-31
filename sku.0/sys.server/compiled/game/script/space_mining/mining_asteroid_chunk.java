@@ -5,9 +5,7 @@ import script.library.*;
 
 public class mining_asteroid_chunk extends script.base_script
 {
-    public mining_asteroid_chunk()
-    {
-    }
+
     public static final int MAX_RESOURCE = 1000000;
     public int OnAttach(obj_id self) throws InterruptedException
     {

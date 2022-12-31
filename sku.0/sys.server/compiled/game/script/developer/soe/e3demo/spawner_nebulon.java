@@ -10,9 +10,7 @@ import script.vector;
 
 public class spawner_nebulon extends script.base_script
 {
-    public spawner_nebulon()
-    {
-    }
+
     public static final String[] ATTACKER_LIST = 
     {
         "tiefighter",

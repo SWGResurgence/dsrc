@@ -5,9 +5,7 @@ import script.*;
 
 public class quest_hero_of_tatooine_hermit extends script.base_script
 {
-    public quest_hero_of_tatooine_hermit()
-    {
-    }
+
     public static String c_stringFile = "conversation/quest_hero_of_tatooine_hermit";
     public boolean quest_hero_of_tatooine_hermit_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -302,7 +300,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -316,7 +314,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -531,7 +529,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -547,7 +545,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -585,7 +583,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -601,7 +599,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -683,7 +681,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -833,7 +831,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -915,7 +913,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -997,7 +995,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1079,7 +1077,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1161,7 +1159,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1345,7 +1343,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1438,7 +1436,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1531,7 +1529,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1624,7 +1622,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1717,7 +1715,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1810,7 +1808,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1848,7 +1846,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1886,7 +1884,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1924,7 +1922,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1973,7 +1971,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2021,7 +2019,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2059,7 +2057,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2097,7 +2095,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2135,7 +2133,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2173,7 +2171,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2211,7 +2209,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int quest_hero_of_tatooine_hermit_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2226,7 +2224,7 @@ public class quest_hero_of_tatooine_hermit extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

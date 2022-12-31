@@ -8,9 +8,7 @@ import script.*;
 
 public class legacy_naboo_eirtae extends script.base_script
 {
-    public legacy_naboo_eirtae()
-    {
-    }
+
     public static String c_stringFile = "conversation/legacy_naboo_eirtae";
     public boolean legacy_naboo_eirtae_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -81,7 +79,7 @@ public class legacy_naboo_eirtae extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_naboo_eirtae_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -131,7 +129,7 @@ public class legacy_naboo_eirtae extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_naboo_eirtae_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -182,7 +180,7 @@ public class legacy_naboo_eirtae extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_naboo_eirtae_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -221,7 +219,7 @@ public class legacy_naboo_eirtae extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int legacy_naboo_eirtae_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -237,7 +235,7 @@ public class legacy_naboo_eirtae extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

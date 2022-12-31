@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class cybernetic_component_attribute extends script.base_script
 {
-    public cybernetic_component_attribute()
-    {
-    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))

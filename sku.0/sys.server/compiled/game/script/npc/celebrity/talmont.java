@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class talmont extends script.base_script
 {
-    public talmont()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);

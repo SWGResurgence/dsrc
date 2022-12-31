@@ -5,9 +5,7 @@ import script.*;
 
 public class corvette_velso_imperial_destroy extends script.base_script
 {
-    public corvette_velso_imperial_destroy()
-    {
-    }
+
     public static String c_stringFile = "conversation/corvette_velso_imperial_destroy";
     public boolean corvette_velso_imperial_destroy_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -324,7 +322,7 @@ public class corvette_velso_imperial_destroy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_velso_imperial_destroy_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -461,7 +459,7 @@ public class corvette_velso_imperial_destroy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_velso_imperial_destroy_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -486,7 +484,7 @@ public class corvette_velso_imperial_destroy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_velso_imperial_destroy_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -747,7 +745,7 @@ public class corvette_velso_imperial_destroy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_velso_imperial_destroy_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -919,7 +917,7 @@ public class corvette_velso_imperial_destroy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_velso_imperial_destroy_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1180,7 +1178,7 @@ public class corvette_velso_imperial_destroy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_velso_imperial_destroy_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1441,7 +1439,7 @@ public class corvette_velso_imperial_destroy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_velso_imperial_destroy_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1702,7 +1700,7 @@ public class corvette_velso_imperial_destroy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_velso_imperial_destroy_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1963,7 +1961,7 @@ public class corvette_velso_imperial_destroy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_velso_imperial_destroy_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2226,7 +2224,7 @@ public class corvette_velso_imperial_destroy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_velso_imperial_destroy_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2318,7 +2316,7 @@ public class corvette_velso_imperial_destroy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_velso_imperial_destroy_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2581,7 +2579,7 @@ public class corvette_velso_imperial_destroy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_velso_imperial_destroy_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2844,7 +2842,7 @@ public class corvette_velso_imperial_destroy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_velso_imperial_destroy_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3107,7 +3105,7 @@ public class corvette_velso_imperial_destroy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_velso_imperial_destroy_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3370,7 +3368,7 @@ public class corvette_velso_imperial_destroy extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

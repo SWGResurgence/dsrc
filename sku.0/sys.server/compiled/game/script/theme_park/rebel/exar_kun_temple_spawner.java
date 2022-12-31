@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class exar_kun_temple_spawner extends script.base_script
 {
-    public exar_kun_temple_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);

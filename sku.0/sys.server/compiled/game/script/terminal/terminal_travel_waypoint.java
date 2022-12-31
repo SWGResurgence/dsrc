@@ -10,9 +10,7 @@ public class terminal_travel_waypoint extends script.base_script
 {
     public static String TICKET = "object/tangible/loot/tool/datapad_broken.iff";
 
-    public terminal_travel_waypoint()
-    {
-    }
+
 
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {

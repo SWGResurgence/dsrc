@@ -10,9 +10,7 @@ import script.string_id;
 
 public class kachirho_varactyl_egg extends script.base_script
 {
-    public kachirho_varactyl_egg()
-    {
-    }
+
     public static final String STF = "ep3/sidequests";
     public static final string_id HATCH_EGG = new string_id(STF, "hatch_egg");
     public static final string_id EGG_HATCHED = new string_id(STF, "egg_hatched");

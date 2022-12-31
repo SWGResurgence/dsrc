@@ -7,9 +7,7 @@ public class naboo_npc_medium extends base_newbie_npc_spawner
 {
     public int maxPop = 3;
 
-    public naboo_npc_medium()
-    {
-    }
+
     public String pickCreature() throws InterruptedException
     {
         switch (rand(1, 5))

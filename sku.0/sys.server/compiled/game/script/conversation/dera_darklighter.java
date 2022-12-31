@@ -8,9 +8,7 @@ import script.*;
 
 public class dera_darklighter extends script.base_script
 {
-    public dera_darklighter()
-    {
-    }
+
     public static String c_stringFile = "conversation/dera_darklighter";
     public boolean dera_darklighter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -63,7 +61,7 @@ public class dera_darklighter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

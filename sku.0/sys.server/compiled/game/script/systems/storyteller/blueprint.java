@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class blueprint extends script.base_script
 {
-    public blueprint()
-    {
-    }
+    
     public static final int MENU_BLUEPRINT_DEPLOY = menu_info_types.ITEM_USE;
     public static final int MENU_BLUEPRINT_OPTIONS = menu_info_types.SERVER_MENU5;
     public static final int MENU_BLUEPRINT_LOAD = menu_info_types.ITEM_OPEN;
@@ -71,11 +69,6 @@ public class blueprint extends script.base_script
         if (getState(player, STATE_SWIMMING) == 1)
         {
             sendSystemMessage(player, new string_id("storyteller", "blueprint_not_while_swimming"));
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "blueprint_no_trial_accounts"));
             return SCRIPT_CONTINUE;
         }
         location yourLoc = getLocation(player);
@@ -252,11 +245,6 @@ public class blueprint extends script.base_script
         if (getState(player, STATE_SWIMMING) == 1)
         {
             sendSystemMessage(player, new string_id("storyteller", "blueprint_not_while_swimming"));
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "blueprint_no_trial_accounts"));
             return SCRIPT_CONTINUE;
         }
         location yourLoc = getLocation(player);

@@ -12,9 +12,7 @@ import script.library.groundquests;
 
 public class rubina_basket_sm extends script.base_script
 {
-    public rubina_basket_sm()
-    {
-    }
+
     public static final string_id SID_MNU_USE = new string_id("pet/pet_menu", "menu_store");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

@@ -6,9 +6,7 @@ import script.string_id;
 
 public class atat_actor extends script.base_script
 {
-    public atat_actor()
-    {
-    }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         obj_id[] attackerList = utils.getObjIdBatchScriptVar(self, "creditForKills.attackerList.attackers");

@@ -23,9 +23,7 @@ public class cantina_controller extends script.base_script
     private String[] bartenderLineOrder = {"bar_line_2", "bar_line_3", "bar_line_4", "bar_line_5", "bar_line_6", "bar_line_7", "bar_line_8", "bar_line_9"};
     private String[] bartenderMoodOrder = {chat.MOOD_CONFUSED, chat.MOOD_CONFUSED, chat.MOOD_ENCOURAGING, chat.MOOD_CONFIDENT, chat.MOOD_RESPECTFUL, chat.MOOD_THANKFUL, chat.MOOD_DISGUSTED, chat.MOOD_WORRIED};
 
-    public cantina_controller()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String setting = getConfigSetting("GameServer", "foolsDay");

@@ -10,9 +10,7 @@ import script.string_id;
 
 public class fs_buff_item extends script.base_script
 {
-    public fs_buff_item()
-    {
-    }
+
     public static final String STRING_TABLE_NAME = "quest/force_sensitive/utils";
     public static final String VAR_TIMESTAMP = "item.time.timestamp";
     public static final String VAR_REUSE_TIME = "item.time.reuse_time";

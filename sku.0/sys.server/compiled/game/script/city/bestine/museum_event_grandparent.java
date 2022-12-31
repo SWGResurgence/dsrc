@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class museum_event_grandparent extends script.base_script
 {
-    public museum_event_grandparent()
-    {
-    }
+
     public static final String MASTER_OBJECT_TEMPLATE = "object/tangible/poi/tatooine/bestine/bestine_museum_event_master_object.iff";
     public static final String VARNAME_MUSEUM_STATUS = "strMuseumEventStatus";
     public static final String VARNAME_MUSEUM_WINNER = "strMuseumEventWinner";

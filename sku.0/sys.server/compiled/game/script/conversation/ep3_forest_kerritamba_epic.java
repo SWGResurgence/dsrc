@@ -5,9 +5,7 @@ import script.*;
 
 public class ep3_forest_kerritamba_epic extends script.base_script
 {
-    public ep3_forest_kerritamba_epic()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_forest_kerritamba_epic";
     public boolean ep3_forest_kerritamba_epic_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -141,7 +139,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -157,7 +155,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -196,7 +194,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -210,7 +208,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -224,7 +222,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -262,7 +260,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -311,7 +309,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -336,7 +334,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -375,7 +373,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -389,7 +387,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -403,7 +401,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -441,7 +439,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -479,7 +477,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -517,7 +515,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -566,7 +564,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -591,7 +589,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_forest_kerritamba_epic_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -606,7 +604,7 @@ public class ep3_forest_kerritamba_epic extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

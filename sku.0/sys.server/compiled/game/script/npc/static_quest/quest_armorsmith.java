@@ -11,9 +11,7 @@ import java.util.Vector;
 
 public class quest_armorsmith extends script.base_script
 {
-    public quest_armorsmith()
-    {
-    }
+
     public static final String SCRIPT_QUEST_ARMORSMITH = "npc.static_quest.quest_armorsmith";
     public static final String DATATABLE_ARMORSMITH_ITEMS = "datatables/npc/static_quest/armorsmith.iff";
     public static final int QUEST_COST = 50000;

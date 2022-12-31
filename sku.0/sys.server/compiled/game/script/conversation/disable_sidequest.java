@@ -7,9 +7,7 @@ import script.*;
 
 public class disable_sidequest extends script.base_script
 {
-    public disable_sidequest()
-    {
-    }
+
     public static String c_stringFile = "conversation/disable_sidequest";
     public boolean disable_sidequest_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -176,7 +174,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -216,7 +214,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -256,7 +254,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -295,7 +293,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -335,7 +333,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -374,7 +372,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -389,7 +387,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -429,7 +427,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -469,7 +467,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -508,7 +506,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -547,7 +545,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -586,7 +584,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -625,7 +623,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -664,7 +662,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -703,7 +701,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -742,7 +740,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -781,7 +779,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -821,7 +819,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -860,7 +858,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -899,7 +897,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -938,7 +936,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disable_sidequest_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -953,7 +951,7 @@ public class disable_sidequest extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

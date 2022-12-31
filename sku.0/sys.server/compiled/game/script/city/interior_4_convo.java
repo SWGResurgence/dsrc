@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class interior_4_convo extends script.city.interior_convo_base
 {
-    public interior_4_convo()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnGuy(self,"guy1");

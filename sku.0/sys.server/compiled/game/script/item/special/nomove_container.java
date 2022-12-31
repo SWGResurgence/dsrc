@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class nomove_container extends script.item.special.nomove_base
 {
-    public nomove_container()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "noTrade", true);

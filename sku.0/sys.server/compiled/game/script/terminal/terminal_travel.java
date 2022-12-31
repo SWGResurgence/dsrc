@@ -10,9 +10,7 @@ public class terminal_travel extends script.base_script
 {
     public static final string_id SID_TRAVEL_OPTIONS = new string_id("travel", "purchase_ticket");
     public static final string_id SID_BANNED_TICKET = new string_id("city/city", "banned_services");
-    public terminal_travel()
-    {
-    }
+
 
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {

@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_bounty_strong_arm extends script.base_script
 {
-    public npe_bounty_strong_arm()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_bounty_strong_arm";
     public boolean npe_bounty_strong_arm_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -69,7 +67,7 @@ public class npe_bounty_strong_arm extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_bounty_strong_arm_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -109,7 +107,7 @@ public class npe_bounty_strong_arm extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_bounty_strong_arm_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -148,7 +146,7 @@ public class npe_bounty_strong_arm extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_bounty_strong_arm_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -164,7 +162,7 @@ public class npe_bounty_strong_arm extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_bounty_strong_arm_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -178,7 +176,7 @@ public class npe_bounty_strong_arm extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

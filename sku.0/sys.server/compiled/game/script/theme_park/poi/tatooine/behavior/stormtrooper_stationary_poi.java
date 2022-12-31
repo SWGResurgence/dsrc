@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class stormtrooper_stationary_poi extends script.base_script
 {
-    public stormtrooper_stationary_poi()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         stop(self);

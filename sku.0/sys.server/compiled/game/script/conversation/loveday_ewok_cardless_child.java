@@ -8,9 +8,7 @@ import script.*;
 
 public class loveday_ewok_cardless_child extends script.base_script
 {
-    public loveday_ewok_cardless_child()
-    {
-    }
+
     public static String c_stringFile = "conversation/loveday_ewok_cardless_child";
     public boolean loveday_ewok_cardless_child_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -103,7 +101,7 @@ public class loveday_ewok_cardless_child extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int loveday_ewok_cardless_child_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -130,7 +128,7 @@ public class loveday_ewok_cardless_child extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

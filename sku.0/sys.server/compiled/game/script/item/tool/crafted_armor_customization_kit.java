@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class crafted_armor_customization_kit extends script.base_script
 {
-    public crafted_armor_customization_kit()
-    {
-    }
+
     public static final boolean BLOGGING_ON = false;
     public static final String BLOGGING_CATEGORY = "armor_recolor";
     public static final String VAR_PREFIX = "armor_colorize";

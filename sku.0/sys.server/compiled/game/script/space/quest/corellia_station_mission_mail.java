@@ -8,9 +8,7 @@ import script.string_id;
 
 public class corellia_station_mission_mail extends script.base_script
 {
-    public corellia_station_mission_mail()
-    {
-    }
+    
     public static final string_id SUBJECT_ONE = new string_id("space/quest_mail", "corellia_station_mission_subject_one");
     public static final string_id SUBJECT_TWO = new string_id("space/quest_mail", "corellia_station_mission_subject_two");
     public static final string_id BODY_ONE = new string_id("space/quest_mail", "corellia_station_mission_body_one");

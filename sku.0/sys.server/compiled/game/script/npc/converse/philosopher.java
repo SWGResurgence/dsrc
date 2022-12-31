@@ -7,9 +7,7 @@ import script.string_id;
 
 public class philosopher extends script.base_script
 {
-    public philosopher()
-    {
-    }
+
     public static final String CONVO = "static_npc/philosopher";
     public int OnAttach(obj_id self) throws InterruptedException
     {

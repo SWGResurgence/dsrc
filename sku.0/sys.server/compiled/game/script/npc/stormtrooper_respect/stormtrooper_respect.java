@@ -5,9 +5,7 @@ import script.library.*;
 
 public class stormtrooper_respect extends script.base_script
 {
-    public stormtrooper_respect()
-    {
-    }
+
     public static final String EMOTE_DATATABLE = "datatables/npc/stormtrooper_attitude/emote.iff";
     public static final String RANK_DATATABLE = "datatables/npc/stormtrooper_attitude/imprank.iff";
     public static final String KEYPHRASES = "datatables/npc/stormtrooper_attitude/keyphrases.iff";

@@ -19,9 +19,7 @@ public class terminal_travel_instant_one_use extends script.base_script
     public static final int SHIP_TYPE_INSTANT_XWING_TIE = 1;
     public static final int SHIP_TYPE_INSTANT_PRIVATEER = 2;
     public static final int SHIP_TYPE_INSTANT_ROYAL_SHIP = 3;
-    public terminal_travel_instant_one_use()
-    {
-    }
+
 
     public int OnInitialize(obj_id self) throws InterruptedException
     {

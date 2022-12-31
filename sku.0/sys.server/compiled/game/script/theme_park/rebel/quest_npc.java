@@ -10,9 +10,7 @@ import script.string_id;
 
 public class quest_npc extends script.base_script
 {
-    public quest_npc()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setupSelf", null, 4, true);

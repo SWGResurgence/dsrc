@@ -6,9 +6,7 @@ import script.library.utils;
 
 public class rohak_figurine extends script.base_script
 {
-    public rohak_figurine()
-    {
-    }
+
     public static final String FIGURINE_QUEST_NAME = "rohak_token_box";
     public int OnAttach(obj_id self) throws InterruptedException
     {

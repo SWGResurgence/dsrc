@@ -8,9 +8,7 @@ import script.*;
 
 public class tcg_pet_controller extends script.base_script
 {
-    public tcg_pet_controller()
-    {
-    }
+
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "massiff_pet";
     public static final String TCG_STR = new String("tcg");

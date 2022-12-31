@@ -5,9 +5,7 @@ import script.*;
 
 public class imperial_broker extends script.base_script
 {
-    public imperial_broker()
-    {
-    }
+
     public static String c_stringFile = "conversation/imperial_broker";
     public boolean imperial_broker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -27,11 +25,11 @@ public class imperial_broker extends script.base_script
     }
     public boolean imperial_broker_condition_isMaleImperialFaction(obj_id player, obj_id npc) throws InterruptedException
     {
-        return (imperial_broker_condition_isImperialFaction(player, npc) && (getGender(player) == GENDER_MALE));
+        return (imperial_broker_condition_isImperialFaction(player, npc) && (getGender(player) == Gender.MALE));
     }
     public boolean imperial_broker_condition_isMalePlayer(obj_id player, obj_id npc) throws InterruptedException
     {
-        return (getGender(player) == GENDER_MALE);
+        return (getGender(player) == Gender.MALE);
     }
     public boolean imperial_broker_condition_justSpokeToPlayer(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -170,7 +168,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -230,7 +228,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -256,7 +254,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -398,7 +396,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -540,7 +538,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -601,7 +599,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -673,7 +671,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -815,7 +813,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -888,7 +886,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1030,7 +1028,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1103,7 +1101,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1245,7 +1243,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1318,7 +1316,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1460,7 +1458,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1521,7 +1519,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1593,7 +1591,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1735,7 +1733,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1808,7 +1806,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1950,7 +1948,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2023,7 +2021,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2165,7 +2163,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2238,7 +2236,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2380,7 +2378,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2422,7 +2420,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch48(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2483,7 +2481,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2555,7 +2553,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2697,7 +2695,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2770,7 +2768,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2912,7 +2910,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2985,7 +2983,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch56(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3127,7 +3125,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3200,7 +3198,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_broker_handleBranch59(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3342,7 +3340,7 @@ public class imperial_broker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

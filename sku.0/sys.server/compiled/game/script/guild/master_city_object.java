@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class master_city_object extends script.base_script
 {
-    public master_city_object()
-    {
-    }
+
     public static final int CITY_PROCESS_INTERVAL = 60 * 60;
     public static final int CITY_UPDATE_INTERVAL = 60 * 60 * 24 * 7;
     public static final string_id ELECTION_INCUMBENT_WIN_SUBJECT = new string_id("city/city", "election_incumbent_win_subject");

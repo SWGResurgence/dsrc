@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_droid_damage_repair extends script.systems.crafting.droid.crafting_base_droid_repair
 {
-    public crafting_droid_damage_repair()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

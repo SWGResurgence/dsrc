@@ -5,9 +5,7 @@ import script.*;
 
 public class greeter_kadaara_mistress extends script.base_script
 {
-    public greeter_kadaara_mistress()
-    {
-    }
+
     public static String c_stringFile = "conversation/greeter_kadaara_mistress";
     public boolean greeter_kadaara_mistress_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -129,7 +127,7 @@ public class greeter_kadaara_mistress extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int greeter_kadaara_mistress_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -169,7 +167,7 @@ public class greeter_kadaara_mistress extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

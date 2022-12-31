@@ -5,9 +5,7 @@ import script.*;
 
 public class travel_shuttle_pilot extends script.base_script
 {
-    public travel_shuttle_pilot()
-    {
-    }
+
     public static final string_id SID_BOARD_SHUTTLE = new string_id("travel", "board_shuttle");
     public static final string_id SID_NEXT_SHUTTLE = new string_id("travel", "next_shuttle");
     public static final string_id SID_ON_PET_OR_VEHICLE = new string_id("travel/travel", "on_pet_or_vehicle");

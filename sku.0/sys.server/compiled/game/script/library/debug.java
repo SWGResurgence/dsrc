@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class debug extends script.base_script
 {
-    public debug()
-    {
-    }
+
     public static final String VERSION = "v0.01.00";
     public static final String VAR_DEBUG_BASE = "debug";
     public static final String VAR_DICTIONARY_IN = "debug.dict.in";

@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class power_generator extends script.base_script
 {
-    public power_generator()
-    {
-    }
+
     public static final String VOLUME_NAME = "addGeneratorHate";
     public static final float VOLUME_RANGE = 40.0f;
     public static final boolean LOGGING = false;

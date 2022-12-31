@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class loot_ep3_clone_relics_on_destroy extends script.base_script
 {
-    public loot_ep3_clone_relics_on_destroy()
-    {
-    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id container = getContainedBy(self);

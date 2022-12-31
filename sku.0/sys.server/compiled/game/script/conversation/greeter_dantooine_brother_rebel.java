@@ -5,9 +5,7 @@ import script.*;
 
 public class greeter_dantooine_brother_rebel extends script.base_script
 {
-    public greeter_dantooine_brother_rebel()
-    {
-    }
+
     public static String c_stringFile = "conversation/greeter_dantooine_brother_rebel";
     public boolean greeter_dantooine_brother_rebel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -120,7 +118,7 @@ public class greeter_dantooine_brother_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int greeter_dantooine_brother_rebel_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -263,7 +261,7 @@ public class greeter_dantooine_brother_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int greeter_dantooine_brother_rebel_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -302,7 +300,7 @@ public class greeter_dantooine_brother_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int greeter_dantooine_brother_rebel_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -341,7 +339,7 @@ public class greeter_dantooine_brother_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int greeter_dantooine_brother_rebel_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -380,7 +378,7 @@ public class greeter_dantooine_brother_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int greeter_dantooine_brother_rebel_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -394,7 +392,7 @@ public class greeter_dantooine_brother_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int greeter_dantooine_brother_rebel_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -433,7 +431,7 @@ public class greeter_dantooine_brother_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int greeter_dantooine_brother_rebel_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -472,7 +470,7 @@ public class greeter_dantooine_brother_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -8,9 +8,7 @@ import script.*;
 
 public class mtp_hideout_access_crate_maker extends script.base_script
 {
-    public mtp_hideout_access_crate_maker()
-    {
-    }
+
     public static String c_stringFile = "conversation/mtp_hideout_access_crate_maker";
     public boolean mtp_hideout_access_crate_maker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -108,7 +106,7 @@ public class mtp_hideout_access_crate_maker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_access_crate_maker_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -146,7 +144,7 @@ public class mtp_hideout_access_crate_maker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_access_crate_maker_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -161,7 +159,7 @@ public class mtp_hideout_access_crate_maker extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

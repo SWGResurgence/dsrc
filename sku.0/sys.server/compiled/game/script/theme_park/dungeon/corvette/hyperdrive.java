@@ -5,9 +5,7 @@ import script.library.sui;
 
 public class hyperdrive extends script.base_script
 {
-    public hyperdrive()
-    {
-    }
+
     public static final String MSGS = "dungeon/corvette";
     public int OnAttach(obj_id self) throws InterruptedException
     {

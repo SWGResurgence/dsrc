@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class attacker_wave extends script.base_script
 {
-    public attacker_wave()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleAttackerCleanUp", null, 120.0f, false);

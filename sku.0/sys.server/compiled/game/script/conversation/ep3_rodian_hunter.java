@@ -7,9 +7,7 @@ import script.*;
 
 public class ep3_rodian_hunter extends script.base_script
 {
-    public ep3_rodian_hunter()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_rodian_hunter";
     public boolean ep3_rodian_hunter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -136,7 +134,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_hunter_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -177,7 +175,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_hunter_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -194,7 +192,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_hunter_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -235,7 +233,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_hunter_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -252,7 +250,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_hunter_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -293,7 +291,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_hunter_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -310,7 +308,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_hunter_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -351,7 +349,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_hunter_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -392,7 +390,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_hunter_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -409,7 +407,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_hunter_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -439,7 +437,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_hunter_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -480,7 +478,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_hunter_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -521,7 +519,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_hunter_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -538,7 +536,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_hunter_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -588,7 +586,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_hunter_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -618,7 +616,7 @@ public class ep3_rodian_hunter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

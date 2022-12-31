@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class imperial_pvp_bf_vendor extends script.base_script
 {
-    public imperial_pvp_bf_vendor()
-    {
-    }
+
     public static String c_stringFile = "conversation/imperial_pvp_bf_vendor";
     public boolean imperial_pvp_bf_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

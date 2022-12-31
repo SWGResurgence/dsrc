@@ -8,9 +8,7 @@ import script.*;
 
 public class tyrena_lyman_zavala extends script.base_script
 {
-    public tyrena_lyman_zavala()
-    {
-    }
+
     public static String c_stringFile = "conversation/tyrena_lyman_zavala";
     public boolean tyrena_lyman_zavala_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -101,7 +99,7 @@ public class tyrena_lyman_zavala extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tyrena_lyman_zavala_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -116,7 +114,7 @@ public class tyrena_lyman_zavala extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tyrena_lyman_zavala_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -131,7 +129,7 @@ public class tyrena_lyman_zavala extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int tyrena_lyman_zavala_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -146,7 +144,7 @@ public class tyrena_lyman_zavala extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

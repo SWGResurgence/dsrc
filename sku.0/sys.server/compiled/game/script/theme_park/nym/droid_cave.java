@@ -10,9 +10,7 @@ import script.obj_id;
 
 public class droid_cave extends script.base_script
 {
-    public droid_cave()
-    {
-    }
+
     public static final String NYM_OBJECT_DATATABLE = "datatables/spawning/theme_park/nym_droid_cave_objects.iff";
     public static final String SPAWNER_DATATABLE = "datatables/spawning/theme_park/nym_droid_cave.iff";
     public int OnInitialize(obj_id self) throws InterruptedException

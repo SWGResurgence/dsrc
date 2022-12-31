@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class aaph_koden extends script.base_script
 {
-    public aaph_koden()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/shirt/shirt_s28.iff", self, "");

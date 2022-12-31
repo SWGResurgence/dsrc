@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class exar_wrath extends script.base_script
 {
-    public exar_wrath()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, 545020);

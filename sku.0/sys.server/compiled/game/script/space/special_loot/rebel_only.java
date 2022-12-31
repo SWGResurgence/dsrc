@@ -5,9 +5,7 @@ import script.string_id;
 
 public class rebel_only extends script.base_script
 {
-    public rebel_only()
-    {
-    }
+
     public static final string_id SID_ERROR = new string_id("space/space_loot", "rebel_only");
     public int OnAboutToBeTransferred(obj_id self, obj_id player, obj_id transferer) throws InterruptedException
     {

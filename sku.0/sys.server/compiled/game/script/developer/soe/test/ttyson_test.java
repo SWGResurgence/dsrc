@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class ttyson_test extends script.base.remote_object_requester
 {
-    public ttyson_test()
-    {
-    }
+
     public static final String STARTING_EQUIPMENT_FILE = "datatables/equipment/newbie_equipment.iff";
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
@@ -596,10 +594,6 @@ public class ttyson_test extends script.base.remote_object_requester
                         if (!player_structure.isAbandoned(target))
                         {
                             debugConsoleMsg(self, "isAbandoned = false");
-                        }
-                        if (utils.isFreeTrial(self))
-                        {
-                            debugConsoleMsg(self, "isFreeTrial = true");
                         }
                         if (!isCommoditiesServerAvailable())
                         {

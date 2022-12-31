@@ -5,9 +5,7 @@ import script.*;
 
 public class loveday_matchmaker_droid extends script.base_script
 {
-    public loveday_matchmaker_droid()
-    {
-    }
+
     public static String c_stringFile = "conversation/loveday_matchmaker_droid";
     public boolean loveday_matchmaker_droid_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -96,7 +94,7 @@ public class loveday_matchmaker_droid extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int loveday_matchmaker_droid_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -157,7 +155,7 @@ public class loveday_matchmaker_droid extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int loveday_matchmaker_droid_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -206,7 +204,7 @@ public class loveday_matchmaker_droid extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int loveday_matchmaker_droid_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -221,7 +219,7 @@ public class loveday_matchmaker_droid extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

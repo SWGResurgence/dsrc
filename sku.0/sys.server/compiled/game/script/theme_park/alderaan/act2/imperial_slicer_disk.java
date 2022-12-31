@@ -8,9 +8,7 @@ import script.string_id;
 
 public class imperial_slicer_disk extends script.base_script
 {
-    public imperial_slicer_disk()
-    {
-    }
+
     public static final String IMPERIAL_STF = "theme_park/alderaan/act2/imperial_missions";
     public static final String IMPERIAL_SHARED_STF = "theme_park/alderaan/act2/shared_imperial_missions";
     public static final string_id DISK_NAME_SLICER = new string_id(IMPERIAL_SHARED_STF, "disk_name_slicer");

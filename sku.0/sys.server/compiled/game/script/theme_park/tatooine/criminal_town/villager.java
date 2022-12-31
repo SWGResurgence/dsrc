@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class villager extends script.base_script
 {
-    public villager()
-    {
-    }
+
     public location getNewLocation(obj_id object, int x, int y, int z) throws InterruptedException
     {
         location newLoc = new location(getLocation(object));

@@ -5,9 +5,7 @@ import script.*;
 
 public class c_story1_5_rebel extends script.base_script
 {
-    public c_story1_5_rebel()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_story1_5_rebel";
     public boolean c_story1_5_rebel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -132,7 +130,7 @@ public class c_story1_5_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_5_rebel_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -181,7 +179,7 @@ public class c_story1_5_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_5_rebel_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -264,7 +262,7 @@ public class c_story1_5_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_5_rebel_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -313,7 +311,7 @@ public class c_story1_5_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_5_rebel_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -385,7 +383,7 @@ public class c_story1_5_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_5_rebel_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -423,7 +421,7 @@ public class c_story1_5_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_5_rebel_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -461,7 +459,7 @@ public class c_story1_5_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_5_rebel_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -499,7 +497,7 @@ public class c_story1_5_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_5_rebel_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -537,7 +535,7 @@ public class c_story1_5_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_5_rebel_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -552,7 +550,7 @@ public class c_story1_5_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_story1_5_rebel_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -601,7 +599,7 @@ public class c_story1_5_rebel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

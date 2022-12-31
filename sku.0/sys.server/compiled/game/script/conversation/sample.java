@@ -7,9 +7,7 @@ import script.*;
 
 public class sample extends script.base_script
 {
-    public sample()
-    {
-    }
+
     public static String c_stringFile = "conversation/sample";
     public boolean sample_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

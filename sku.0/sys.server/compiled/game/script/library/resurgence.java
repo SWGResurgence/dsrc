@@ -18,9 +18,7 @@ public class resurgence extends script.base_script
     public static final string_id SID_PROMPT = new string_id("resurgence", "ui_list_objects_prompt");
     public static final string_id SID_TITLE = new string_id("resurgence", "ui_list_objects_title");
 
-    public resurgence()
-    {
-    }
+
 
     public static int spawnWithScript(obj_id self, String template, String script) throws InterruptedException
     {

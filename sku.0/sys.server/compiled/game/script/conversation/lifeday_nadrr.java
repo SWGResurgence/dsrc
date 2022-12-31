@@ -28,11 +28,7 @@ public static String c_stringFile = "conversation/lifeday_nadrr";
 // Script Constants
 // ======================================================================
 
-	public lifeday_nadrr()
 
-	{
-
-	}
 
 // ======================================================================
 // Script Conditions
@@ -139,7 +135,7 @@ int lifeday_nadrr_handleBranch1 (obj_id player, obj_id npc, string_id response) 
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -218,7 +214,7 @@ int lifeday_nadrr_handleBranch2 (obj_id player, obj_id npc, string_id response) 
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------

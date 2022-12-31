@@ -7,9 +7,7 @@ import script.*;
 
 public class ep3_criss_nepomi extends script.base_script
 {
-    public ep3_criss_nepomi()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_criss_nepomi";
     public boolean ep3_criss_nepomi_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -27,7 +25,7 @@ public class ep3_criss_nepomi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -14,9 +14,7 @@ public class base_newbie_creature_spawner extends script.base_script
     public int maxPop = 1;
     public boolean newbie = false;
 
-    public base_newbie_creature_spawner()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!SPAWNER_DISABLED)

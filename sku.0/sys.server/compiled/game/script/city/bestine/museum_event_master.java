@@ -8,9 +8,7 @@ import java.util.Vector;
 
 public class museum_event_master extends script.base_script
 {
-    public museum_event_master()
-    {
-    }
+
     public static final String DATATABLE_NAME = "datatables/city/bestine/bestine_museum_event.iff";
 
     public int OnAttach(obj_id self) throws InterruptedException

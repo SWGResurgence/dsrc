@@ -6,9 +6,7 @@ import script.*;
 
 public class escaped_worker extends script.base_script
 {
-    public escaped_worker()
-    {
-    }
+
     public static final String CONVO_FILE = "theme_park/warren/warren";
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public int OnAttach(obj_id self) throws InterruptedException

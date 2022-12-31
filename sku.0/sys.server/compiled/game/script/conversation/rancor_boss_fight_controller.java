@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class rancor_boss_fight_controller extends script.base_script
 {
-    public rancor_boss_fight_controller()
-    {
-    }
+
     public static String c_stringFile = "conversation/rancor_boss_fight_controller";
     public boolean rancor_boss_fight_controller_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -88,7 +86,7 @@ public class rancor_boss_fight_controller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rancor_boss_fight_controller_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -137,7 +135,7 @@ public class rancor_boss_fight_controller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rancor_boss_fight_controller_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -152,7 +150,7 @@ public class rancor_boss_fight_controller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rancor_boss_fight_controller_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -166,7 +164,7 @@ public class rancor_boss_fight_controller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rancor_boss_fight_controller_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -205,7 +203,7 @@ public class rancor_boss_fight_controller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rancor_boss_fight_controller_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -220,7 +218,7 @@ public class rancor_boss_fight_controller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int rancor_boss_fight_controller_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -234,7 +232,7 @@ public class rancor_boss_fight_controller extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

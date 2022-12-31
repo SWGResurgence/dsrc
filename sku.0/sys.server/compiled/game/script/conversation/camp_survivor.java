@@ -5,9 +5,7 @@ import script.library.*;
 
 public class camp_survivor extends script.base_script
 {
-    public camp_survivor()
-    {
-    }
+
     public static String c_stringFile = "conversation/camp_survivor";
     public boolean camp_survivor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -98,7 +96,7 @@ public class camp_survivor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public static final string_id SID_YOU_WENT_TOO_FAR = new string_id("theme_park/outbreak/outbreak", "delivery_you_went_too_far");
     public int OnInitialize(obj_id self) throws InterruptedException

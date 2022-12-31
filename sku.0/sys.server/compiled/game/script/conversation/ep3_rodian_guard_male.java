@@ -7,9 +7,7 @@ import script.*;
 
 public class ep3_rodian_guard_male extends script.base_script
 {
-    public ep3_rodian_guard_male()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_rodian_guard_male";
     public boolean ep3_rodian_guard_male_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -104,7 +102,7 @@ public class ep3_rodian_guard_male extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_guard_male_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -120,7 +118,7 @@ public class ep3_rodian_guard_male extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_guard_male_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -137,7 +135,7 @@ public class ep3_rodian_guard_male extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_rodian_guard_male_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -154,7 +152,7 @@ public class ep3_rodian_guard_male extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

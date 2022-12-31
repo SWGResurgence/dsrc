@@ -7,9 +7,7 @@ import script.string_id;
 
 public class player_cmd_repair_reload_ship extends script.base_script
 {
-    public player_cmd_repair_reload_ship()
-    {
-    }
+
     public static final int DROID_VOCALIZE_REACT_CHANCE = 2;
     public static final int SHIP_DAMAGED_SKILLMOD_PENALTY_TIME = 10;
     public static final string_id SID_REPAIRSHIP_STOP_MOVING = new string_id("space/space_pilot_command", "repairship_stop_moving");

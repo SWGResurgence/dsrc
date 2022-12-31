@@ -8,9 +8,7 @@ import script.*;
 
 public class fs_intro_oldman_initial extends script.base_script
 {
-    public fs_intro_oldman_initial()
-    {
-    }
+
     public static String c_stringFile = "conversation/fs_intro_oldman_initial";
     public boolean fs_intro_oldman_initial_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

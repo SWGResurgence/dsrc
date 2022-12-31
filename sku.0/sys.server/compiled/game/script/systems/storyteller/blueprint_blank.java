@@ -8,9 +8,7 @@ import script.*;
 
 public class blueprint_blank extends script.base_script
 {
-    public blueprint_blank()
-    {
-    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("storyteller", "blueprint_record_data"));
@@ -26,11 +24,6 @@ public class blueprint_blank extends script.base_script
         if (getState(player, STATE_SWIMMING) == 1)
         {
             sendSystemMessage(player, new string_id("storyteller", "blueprint_not_while_swimming"));
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "blueprint_no_trial_accounts"));
             return SCRIPT_CONTINUE;
         }
         location yourLoc = getLocation(player);

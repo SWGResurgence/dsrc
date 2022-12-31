@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_clone_relics_trapped_geonosian extends script.base_script
 {
-    public ep3_clone_relics_trapped_geonosian()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_clone_relics_trapped_geonosian";
     public boolean ep3_clone_relics_trapped_geonosian_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -167,7 +165,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -258,7 +256,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -384,7 +382,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -409,7 +407,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -514,7 +512,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -552,7 +550,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -590,7 +588,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -628,7 +626,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -666,7 +664,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -704,7 +702,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -723,7 +721,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -828,7 +826,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -843,7 +841,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -935,7 +933,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -983,7 +981,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1087,7 +1085,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1135,7 +1133,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1173,7 +1171,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1256,7 +1254,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1315,7 +1313,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1363,7 +1361,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1401,7 +1399,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1439,7 +1437,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1477,7 +1475,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch41(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1515,7 +1513,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1553,7 +1551,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1591,7 +1589,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1640,7 +1638,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch45(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1699,7 +1697,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_clone_relics_trapped_geonosian_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1724,7 +1722,7 @@ public class ep3_clone_relics_trapped_geonosian extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

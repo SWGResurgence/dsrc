@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class oola extends script.base_script
 {
-    public oola()
-    {
-    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         messageTo(getObjIdObjVar(self, "palace"), "oolaDied", null, 20, true);

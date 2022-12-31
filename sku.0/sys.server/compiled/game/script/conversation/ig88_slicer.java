@@ -5,9 +5,7 @@ import script.*;
 
 public class ig88_slicer extends script.base_script
 {
-    public ig88_slicer()
-    {
-    }
+
     public static String c_stringFile = "conversation/ig88_slicer";
     public boolean ig88_slicer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -108,7 +106,7 @@ public class ig88_slicer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ig88_slicer_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -146,7 +144,7 @@ public class ig88_slicer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ig88_slicer_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -161,7 +159,7 @@ public class ig88_slicer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ig88_slicer_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -176,7 +174,7 @@ public class ig88_slicer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ig88_slicer_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -215,7 +213,7 @@ public class ig88_slicer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ig88_slicer_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -315,7 +313,7 @@ public class ig88_slicer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ig88_slicer_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -353,7 +351,7 @@ public class ig88_slicer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ig88_slicer_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -368,7 +366,7 @@ public class ig88_slicer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ig88_slicer_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -406,7 +404,7 @@ public class ig88_slicer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ig88_slicer_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -444,7 +442,7 @@ public class ig88_slicer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

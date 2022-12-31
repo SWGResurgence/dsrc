@@ -6,9 +6,7 @@ import script.string_id;
 
 public class waypoint extends script.base_script
 {
-    public waypoint()
-    {
-    }
+
     public int OnWaypointGetAttributes(obj_id self, obj_id waypoint, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         String questId = getStringObjVar(player, "questID");

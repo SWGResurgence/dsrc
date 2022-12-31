@@ -5,9 +5,7 @@ import script.library.*;
 
 public class nexus_travel extends script.base_script
 {
-    public nexus_travel()
-    {
-    }
+
     public static String c_stringFile = "conversation/nexus_travel";
     public boolean nexus_travel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -62,7 +60,7 @@ public class nexus_travel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nexus_travel_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -84,7 +82,7 @@ public class nexus_travel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nexus_travel_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -144,7 +142,7 @@ public class nexus_travel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nexus_travel_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -176,7 +174,7 @@ public class nexus_travel extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int nexusTravelAurillia(obj_id self, dictionary params) throws InterruptedException
     {

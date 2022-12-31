@@ -6,9 +6,7 @@ import script.string_id;
 
 public class districts extends script.base_script
 {
-    public districts()
-    {
-    }
+
     public static final int DISTRICT_SIZE = 256;
     public static final int PLANET_X_MIN = -8192;
     public static final int PLANET_Z_MIN = -8192;

@@ -7,9 +7,7 @@ import script.string_id;
 
 public class overdue_fines extends script.base_script
 {
-    public overdue_fines()
-    {
-    }
+
     public static final String WARNING_SYS_MSG = "datatables/npc/stormtrooper_attitude/responsetext.iff";
     public static final String PP_FILE_LOC = "stormtrooper_attitude/st_response";
     public static final int ROW_FOR_SYS_WARNING = 41;

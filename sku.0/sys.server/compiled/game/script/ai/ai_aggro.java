@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class ai_aggro extends script.base_script
 {
-    public ai_aggro()
-    {
-    }
+
     public static final int AGGRO_STATUS_NOT_VALID = 0;
     public static final int AGGRO_STATUS_WAITING = 1;
     public static final int AGGRO_STATUS_READY = 2;

@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_kachirho_missing_son extends script.base_script
 {
-    public ep3_kachirho_missing_son()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_kachirho_missing_son";
     public boolean ep3_kachirho_missing_son_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -109,7 +107,7 @@ public class ep3_kachirho_missing_son extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_kachirho_missing_son_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -150,7 +148,7 @@ public class ep3_kachirho_missing_son extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_kachirho_missing_son_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -191,7 +189,7 @@ public class ep3_kachirho_missing_son extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_kachirho_missing_son_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -232,7 +230,7 @@ public class ep3_kachirho_missing_son extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_kachirho_missing_son_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -249,7 +247,7 @@ public class ep3_kachirho_missing_son extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_kachirho_missing_son_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -302,7 +300,7 @@ public class ep3_kachirho_missing_son extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_kachirho_missing_son_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -354,7 +352,7 @@ public class ep3_kachirho_missing_son extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_kachirho_missing_son_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -384,7 +382,7 @@ public class ep3_kachirho_missing_son extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

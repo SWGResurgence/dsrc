@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class avatar_jawa_attack extends script.base_script
 {
-    public avatar_jawa_attack()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

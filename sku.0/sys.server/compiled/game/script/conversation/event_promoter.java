@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class event_promoter extends script.base_script
 {
-    public event_promoter()
-    {
-    }
+
     public static String c_stringFile = "conversation/event_promoter";
     public boolean event_promoter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -445,7 +443,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -773,7 +771,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -810,7 +808,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -847,7 +845,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -962,7 +960,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1281,7 +1279,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1396,7 +1394,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1511,7 +1509,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1626,7 +1624,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1741,7 +1739,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1856,7 +1854,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1971,7 +1969,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2086,7 +2084,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2390,7 +2388,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2694,7 +2692,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2998,7 +2996,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_promoter_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3302,7 +3300,7 @@ public class event_promoter extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

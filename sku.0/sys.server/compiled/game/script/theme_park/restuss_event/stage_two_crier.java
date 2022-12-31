@@ -10,9 +10,7 @@ import script.string_id;
 
 public class stage_two_crier extends script.base_script
 {
-    public stage_two_crier()
-    {
-    }
+
     public static final string_id WARNING = new string_id("restuss_event/object", "restuss_battle_cryer_warning");
     public static final String FIRST_SIGNAL = "restuss_herald.first_signal";
     public static final String SECOND_SIGNAL = "restuss_herald.second_signal";

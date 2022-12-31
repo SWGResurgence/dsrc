@@ -9,9 +9,7 @@ import script.string_id;
 
 public class escape extends script.terminal.base.base_terminal
 {
-    public escape()
-    {
-    }
+
     public static final String MSGS = "dungeon/corvette";
     public int OnAttach(obj_id self) throws InterruptedException
     {

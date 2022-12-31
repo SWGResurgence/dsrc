@@ -9,9 +9,7 @@ import script.string_id;
 
 public class fire_cell_access_terminal extends script.base_script
 {
-    public fire_cell_access_terminal()
-    {
-    }
+
     public static final String DECREPIT_STF = "mustafar/decrepit_droid_factory";
     public static final string_id SID_OPEN_ENVIRONMENTAL = new string_id(DECREPIT_STF, "access_environmental");
     public static final string_id SID_ENVIRONMENTAL_GRANTED = new string_id(DECREPIT_STF, "environmental_granted");

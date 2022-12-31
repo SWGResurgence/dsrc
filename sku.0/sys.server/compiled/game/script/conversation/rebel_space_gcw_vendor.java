@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class rebel_space_gcw_vendor extends script.base_script
 {
-    public rebel_space_gcw_vendor()
-    {
-    }
+
     public static String c_stringFile = "conversation/rebel2_gcw2_vendor";
     private boolean defaultCondition() throws InterruptedException
     {

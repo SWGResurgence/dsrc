@@ -8,9 +8,7 @@ import script.*;
 
 public class event_bossk_bossk extends script.base_script
 {
-    public event_bossk_bossk()
-    {
-    }
+
     public static String c_stringFile = "conversation/event_bossk_bossk";
     public boolean event_bossk_bossk_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -151,7 +149,7 @@ public class event_bossk_bossk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_bossk_bossk_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -203,7 +201,7 @@ public class event_bossk_bossk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_bossk_bossk_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -243,7 +241,7 @@ public class event_bossk_bossk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_bossk_bossk_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -294,7 +292,7 @@ public class event_bossk_bossk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_bossk_bossk_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -323,7 +321,7 @@ public class event_bossk_bossk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_bossk_bossk_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -375,7 +373,7 @@ public class event_bossk_bossk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_bossk_bossk_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -426,7 +424,7 @@ public class event_bossk_bossk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_bossk_bossk_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -455,7 +453,7 @@ public class event_bossk_bossk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_bossk_bossk_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -506,7 +504,7 @@ public class event_bossk_bossk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_bossk_bossk_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -546,7 +544,7 @@ public class event_bossk_bossk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_bossk_bossk_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -597,7 +595,7 @@ public class event_bossk_bossk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_bossk_bossk_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -626,7 +624,7 @@ public class event_bossk_bossk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_bossk_bossk_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -678,7 +676,7 @@ public class event_bossk_bossk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_bossk_bossk_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -728,7 +726,7 @@ public class event_bossk_bossk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int event_bossk_bossk_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -757,7 +755,7 @@ public class event_bossk_bossk extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

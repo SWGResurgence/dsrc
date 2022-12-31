@@ -8,9 +8,7 @@ import script.library.utils;
 
 public class cale_serasai extends script.base_script
 {
-    public cale_serasai()
-    {
-    }
+
     public static String c_stringFile = "conversation/cale_serasai";
     public boolean cale_serasai_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -82,7 +80,7 @@ public class cale_serasai extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int cale_serasai_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -120,7 +118,7 @@ public class cale_serasai extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int cale_serasai_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -159,7 +157,7 @@ public class cale_serasai extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int cale_serasai_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -175,7 +173,7 @@ public class cale_serasai extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int cale_serasai_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -214,7 +212,7 @@ public class cale_serasai extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int cale_serasai_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -253,7 +251,7 @@ public class cale_serasai extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int cale_serasai_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -299,7 +297,7 @@ public class cale_serasai extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int cale_serasai_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -314,7 +312,7 @@ public class cale_serasai extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

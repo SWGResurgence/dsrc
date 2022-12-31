@@ -9,9 +9,7 @@ import script.string_id;
 
 public class lair_launcher extends script.base_script
 {
-    public lair_launcher()
-    {
-    }
+
     public static final string_id SID_SHER_KAR = new string_id("travel/zone_transition", "sher_kar_cave");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {

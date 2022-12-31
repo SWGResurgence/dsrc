@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class shellfish_harvesting extends script.base_script
 {
-    public shellfish_harvesting()
-    {
-    }
+
     public static final string_id SID_USE = new string_id("sui", "use");
     public static final string_id SID_FOUND_NOTHING = new string_id("harvesting", "found_nothing");
     public static final string_id SID_FOUND_MOLLUSKS = new string_id("harvesting", "found_mollusks");

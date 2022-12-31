@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class arena_controller extends script.base_script
 {
-    public arena_controller()
-    {
-    }
+
     public static final String ARENA_CHAMPION = "object/mobile/dressed_arena_champion.iff";
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {

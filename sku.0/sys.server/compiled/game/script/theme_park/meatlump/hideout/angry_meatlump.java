@@ -8,9 +8,7 @@ import script.string_id;
 
 public class angry_meatlump extends script.base_script
 {
-    public angry_meatlump()
-    {
-    }
+
     public static final String ANGRY_MEATLUMP_DATATABLE = "datatables/theme_park/meatlump/angry_meatlump.iff";
     public static final String EMOTES_COLUMN = "requiredEmote";
     public static final String HINTS_COLUMN = "hintString";
@@ -71,8 +69,8 @@ public class angry_meatlump extends script.base_script
                         {
                             string_id hintMsg = new string_id(STF, hintString);
                             prose_package pp = prose.getPackage(hintMsg, emoteSayer, emoteSayer);
-                            String pronounTO = getGender(self) == GENDER_MALE ? "he" : "she";
-                            String pronounTT = getGender(self) == GENDER_MALE ? "his" : "her";
+                            String pronounTO = getGender(self) == Gender.FEMALE ? "he" : "she";
+                            String pronounTT = getGender(self) == Gender.MALE ? "his" : "her";
                             prose.setTO(pp, pronounTO);
                             prose.setTT(pp, pronounTT);
                             chat.chat(emoteSayer, emoteSayer, chat.CHAT_EMOTE, null, pp);

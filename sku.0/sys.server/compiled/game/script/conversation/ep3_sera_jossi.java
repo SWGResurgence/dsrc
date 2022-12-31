@@ -8,9 +8,7 @@ import script.*;
 
 public class ep3_sera_jossi extends script.base_script
 {
-    public ep3_sera_jossi()
-    {
-    }
+
     public static String c_stringFile = "conversation/ep3_sera_jossi";
     public boolean ep3_sera_jossi_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -81,7 +79,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -121,7 +119,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -247,7 +245,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -320,7 +318,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -369,7 +367,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -418,7 +416,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -457,7 +455,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -507,7 +505,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -581,7 +579,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -630,7 +628,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -690,7 +688,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -739,7 +737,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -777,7 +775,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -815,7 +813,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -853,7 +851,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -902,7 +900,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -927,7 +925,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int ep3_sera_jossi_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -966,7 +964,7 @@ public class ep3_sera_jossi extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

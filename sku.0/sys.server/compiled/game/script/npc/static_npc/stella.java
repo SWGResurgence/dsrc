@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class stella extends script.base_script
 {
-    public stella()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id dress = createObject("object/tangible/wearables/dress/dress_s06.iff", self, "");

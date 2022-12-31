@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class poi_city_droid_convo2 extends script.base_script
 {
-    public poi_city_droid_convo2()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnDroid(self);

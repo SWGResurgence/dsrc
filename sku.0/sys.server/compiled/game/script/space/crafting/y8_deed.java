@@ -10,9 +10,7 @@ import script.string_id;
 
 public class y8_deed extends script.base_script
 {
-    public y8_deed()
-    {
-    }
+
     public static final string_id MNU_CREATE_VEHICLE = new string_id("sui", "create_vehicle");
     public static final String STF = "space/space_item";
     public int OnInitialize(obj_id self) throws InterruptedException

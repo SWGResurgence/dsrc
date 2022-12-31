@@ -9,9 +9,7 @@ import script.string_id;
 
 public class trooper extends script.base_script
 {
-    public trooper()
-    {
-    }
+
     public static final String CONVO_FILE = "theme_park/warren/warren";
     public static final String ALERT_VOLUME_NAME = "alertVolume";
     public static final String ACTION_ALERT = "alert";
@@ -63,8 +61,8 @@ public class trooper extends script.base_script
         {
             if (rand(1, 10) == 1)
             {
-                int yourGender = getGender(breacher);
-                if (yourGender == GENDER_MALE)
+                Gender yourGender = getGender(breacher);
+                if (yourGender == Gender.MALE)
                 {
                     chat.chat(self, new string_id(CONVO_FILE, "trooper_greeting_m"));
                 }

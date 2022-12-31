@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class antagonist extends script.poi.base.scenario_actor
 {
-    public antagonist()
-    {
-    }
+
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiTwoLiars Antagonist";
     public static final int CONV_GREET = 0;

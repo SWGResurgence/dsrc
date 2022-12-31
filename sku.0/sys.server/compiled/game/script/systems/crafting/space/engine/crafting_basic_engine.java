@@ -5,9 +5,7 @@ import script.resource_weight;
 
 public class crafting_basic_engine extends script.systems.crafting.space.engine.crafting_base_engine
 {
-    public crafting_basic_engine()
-    {
-    }
+
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

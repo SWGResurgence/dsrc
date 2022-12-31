@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class broken_datapad extends script.base_script
 {
-    public broken_datapad()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "setUp", null, 2, false);

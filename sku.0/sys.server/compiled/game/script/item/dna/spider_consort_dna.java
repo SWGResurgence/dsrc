@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class spider_consort_dna extends script.base_script
 {
-    public spider_consort_dna()
-    {
-    }
+
     public static final String SPIDER_CONSORT_DNA_LOOT_ITEM = "item_spiderclan_consort_dna";
     public static final int SPIDER_CONSORT_DNA_LOOT_CHANCE = 5;
 

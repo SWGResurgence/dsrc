@@ -5,9 +5,7 @@ import script.*;
 
 public class lava_beetle_beads extends script.base_script
 {
-    public lava_beetle_beads()
-    {
-    }
+
     public static final String STF = "som/som_quest";
     public static final string_id EXAMINE = new string_id(STF, "lava_beetle_beads_examine");
     public static final string_id ALREADY = new string_id(STF, "lava_beetle_beads_already");

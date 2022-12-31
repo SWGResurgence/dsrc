@@ -8,9 +8,7 @@ import script.*;
 
 public class naboo_24_gungan_power_grab_01 extends script.base_script
 {
-    public naboo_24_gungan_power_grab_01()
-    {
-    }
+
     public static String c_stringFile = "conversation/naboo_24_gungan_power_grab_01";
     public boolean naboo_24_gungan_power_grab_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -154,7 +152,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -256,7 +254,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -270,7 +268,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -419,7 +417,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -531,7 +529,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -643,7 +641,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -755,7 +753,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -795,7 +793,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -834,7 +832,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -850,7 +848,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -889,7 +887,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -905,7 +903,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -953,7 +951,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -967,7 +965,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1017,7 +1015,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1090,7 +1088,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1187,7 +1185,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1283,7 +1281,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1345,7 +1343,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1369,7 +1367,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int naboo_24_gungan_power_grab_01_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1471,7 +1469,7 @@ public class naboo_24_gungan_power_grab_01 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

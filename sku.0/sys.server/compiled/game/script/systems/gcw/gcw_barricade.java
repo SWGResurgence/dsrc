@@ -5,9 +5,7 @@ import script.library.*;
 
 public class gcw_barricade extends script.base_script
 {
-    public gcw_barricade()
-    {
-    }
+
     public static final boolean LOGGING_ON = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

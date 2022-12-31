@@ -9,9 +9,7 @@ import script.string_id;
 
 public class wedding extends script.base_script
 {
-    public wedding()
-    {
-    }
+
     public static final string_id SID_CANNOT_REMOVE_RING = new string_id("unity", "cannot_remove_ring");
     public int OnAttach(obj_id self) throws InterruptedException
     {

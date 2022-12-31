@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class frog_test extends script.base_script
 {
-    public frog_test()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id room = getCellId(self, "sleepingquarters");

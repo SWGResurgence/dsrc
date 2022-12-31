@@ -8,9 +8,7 @@ import script.*;
 
 public class c_talus_grave_robbers_omkoo extends script.base_script
 {
-    public c_talus_grave_robbers_omkoo()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_talus_grave_robbers_omkoo";
     public boolean c_talus_grave_robbers_omkoo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -103,7 +101,7 @@ public class c_talus_grave_robbers_omkoo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_talus_grave_robbers_omkoo_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -174,7 +172,7 @@ public class c_talus_grave_robbers_omkoo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_talus_grave_robbers_omkoo_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -247,7 +245,7 @@ public class c_talus_grave_robbers_omkoo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_talus_grave_robbers_omkoo_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -279,7 +277,7 @@ public class c_talus_grave_robbers_omkoo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_talus_grave_robbers_omkoo_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -312,7 +310,7 @@ public class c_talus_grave_robbers_omkoo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_talus_grave_robbers_omkoo_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -379,7 +377,7 @@ public class c_talus_grave_robbers_omkoo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_talus_grave_robbers_omkoo_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -476,7 +474,7 @@ public class c_talus_grave_robbers_omkoo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_talus_grave_robbers_omkoo_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -572,7 +570,7 @@ public class c_talus_grave_robbers_omkoo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_talus_grave_robbers_omkoo_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -638,7 +636,7 @@ public class c_talus_grave_robbers_omkoo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_talus_grave_robbers_omkoo_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -672,7 +670,7 @@ public class c_talus_grave_robbers_omkoo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_talus_grave_robbers_omkoo_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -738,7 +736,7 @@ public class c_talus_grave_robbers_omkoo extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

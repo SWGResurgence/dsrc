@@ -7,9 +7,7 @@ import script.library.utils;
 
 public class nym_elevator_down extends script.base_script
 {
-    public nym_elevator_down()
-    {
-    }
+
     public static final String STF_FILE = "theme_park_nym/messages";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

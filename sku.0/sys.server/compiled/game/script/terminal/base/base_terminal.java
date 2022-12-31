@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class base_terminal extends script.base_script
 {
-    public base_terminal()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, structure.VAR_TERMINAL_HEADING))

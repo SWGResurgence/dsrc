@@ -7,9 +7,7 @@ import script.string_id;
 
 public class intellect_bounty_hunter extends script.base_script
 {
-    public intellect_bounty_hunter()
-    {
-    }
+
     public static final String MARK_OF_INTELLECT = "object/tangible/loot/quest/hero_of_tatooine/mark_intellect.iff";
     public static final String SPAWNER_OBJVAR = "quest.hero_of_tatooine.intellect.spawner";
     public static final String SPAWNER_CONTROLLER = SPAWNER_OBJVAR + ".controller";

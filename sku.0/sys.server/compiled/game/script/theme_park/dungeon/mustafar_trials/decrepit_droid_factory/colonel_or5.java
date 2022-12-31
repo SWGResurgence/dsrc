@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class colonel_or5 extends script.base_script
 {
-    public colonel_or5()
-    {
-    }
+
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

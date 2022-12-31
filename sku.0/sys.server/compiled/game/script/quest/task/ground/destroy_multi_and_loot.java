@@ -5,9 +5,7 @@ import script.library.*;
 
 public class destroy_multi_and_loot extends script.quest.task.ground.base_task
 {
-    public destroy_multi_and_loot()
-    {
-    }
+
     public static final String taskType = "destroy_multiple_and_loot";
     public static final String dot = ".";
     public static final String objvarCount = "lootedItems";

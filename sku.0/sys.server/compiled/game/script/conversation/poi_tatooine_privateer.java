@@ -5,9 +5,7 @@ import script.*;
 
 public class poi_tatooine_privateer extends script.base_script
 {
-    public poi_tatooine_privateer()
-    {
-    }
+
     public static String c_stringFile = "conversation/poi_tatooine_privateer";
     public boolean poi_tatooine_privateer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -182,7 +180,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -198,7 +196,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -237,7 +235,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -253,7 +251,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -292,7 +290,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -308,7 +306,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -347,7 +345,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -363,7 +361,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -402,7 +400,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -418,7 +416,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -434,7 +432,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -473,7 +471,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -488,7 +486,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -538,7 +536,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -599,7 +597,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -626,7 +624,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -676,7 +674,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -737,7 +735,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -764,7 +762,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -825,7 +823,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -876,7 +874,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -891,7 +889,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int poi_tatooine_privateer_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -906,7 +904,7 @@ public class poi_tatooine_privateer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

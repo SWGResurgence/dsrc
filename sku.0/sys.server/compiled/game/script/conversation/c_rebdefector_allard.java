@@ -8,9 +8,7 @@ import script.*;
 
 public class c_rebdefector_allard extends script.base_script
 {
-    public c_rebdefector_allard()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_rebdefector_allard";
     public boolean c_rebdefector_allard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -140,7 +138,7 @@ public class c_rebdefector_allard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_rebdefector_allard_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -167,7 +165,7 @@ public class c_rebdefector_allard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int c_rebdefector_allard_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -196,7 +194,7 @@ public class c_rebdefector_allard extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

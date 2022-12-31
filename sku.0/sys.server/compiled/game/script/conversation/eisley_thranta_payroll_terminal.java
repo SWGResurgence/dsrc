@@ -8,9 +8,7 @@ import script.*;
 
 public class eisley_thranta_payroll_terminal extends script.base_script
 {
-    public eisley_thranta_payroll_terminal()
-    {
-    }
+    
     public static String c_stringFile = "conversation/eisley_thranta_payroll_terminal";
     public boolean eisley_thranta_payroll_terminal_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -100,7 +98,7 @@ public class eisley_thranta_payroll_terminal extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int eisley_thranta_payroll_terminal_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -218,7 +216,7 @@ public class eisley_thranta_payroll_terminal extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int eisley_thranta_payroll_terminal_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -278,7 +276,7 @@ public class eisley_thranta_payroll_terminal extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int eisley_thranta_payroll_terminal_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -338,7 +336,7 @@ public class eisley_thranta_payroll_terminal extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int eisley_thranta_payroll_terminal_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -474,7 +472,7 @@ public class eisley_thranta_payroll_terminal extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int eisley_thranta_payroll_terminal_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -545,7 +543,7 @@ public class eisley_thranta_payroll_terminal extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int eisley_thranta_payroll_terminal_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -594,7 +592,7 @@ public class eisley_thranta_payroll_terminal extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

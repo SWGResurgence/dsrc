@@ -15,9 +15,7 @@ import script.obj_id;
 
 public class celebration_actor extends script.base_script
 {
-    public celebration_actor()
-    {
-    }
+
     public static String[] actorChatter =
             {
                     "Man, I am tired. I hope this is the last one.",

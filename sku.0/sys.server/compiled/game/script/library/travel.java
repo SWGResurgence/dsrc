@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class travel extends script.base_script
 {
-    public travel()
-    {
-    }
+    
     public static final String STARPORT_DATATABLE = "datatables/structure/municipal/starport.iff";
     public static final String DATATABLE_COL_STRUCTURE = "STRUCTURE";
     public static final String DATATABLE_COL_ARRIVAL_X = "ARRIVAL_X";

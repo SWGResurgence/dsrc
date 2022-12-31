@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class crafting_steroid_component_attribute extends script.base_script
 {
-    public crafting_steroid_component_attribute()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

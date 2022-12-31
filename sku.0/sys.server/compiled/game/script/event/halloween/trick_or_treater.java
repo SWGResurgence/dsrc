@@ -10,9 +10,7 @@ import java.util.Enumeration;
 
 public class trick_or_treater extends script.base_script
 {
-    public trick_or_treater()
-    {
-    }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         if (!costumeBuffExists(self))

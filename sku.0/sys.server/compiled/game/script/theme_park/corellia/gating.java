@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class gating extends script.base_script
 {
-    public gating()
-    {
-    }
+
     public static final String QUALDO_QUEST = "qualdoNewbieQuest1";
     public static final String WEDGE_QUEST = "wedgeNewbieQuest1";
     public static final String LANCE_QUEST = "lanceNewbieQuest1";

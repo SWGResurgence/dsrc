@@ -10,9 +10,7 @@ import java.util.Vector;
 
 public class enclave_data_handler extends script.base_script
 {
-    public enclave_data_handler()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, force_rank.SCRIPT_DATA_HANDLER);

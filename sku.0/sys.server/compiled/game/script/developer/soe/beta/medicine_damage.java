@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class medicine_damage extends script.base_script
 {
-    public medicine_damage()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int power = rand(50, 300);

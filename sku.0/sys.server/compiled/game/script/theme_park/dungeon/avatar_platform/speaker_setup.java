@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class speaker_setup extends script.base_script
 {
-    public speaker_setup()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

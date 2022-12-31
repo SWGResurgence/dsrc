@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class politician_event_master extends script.base_script
 {
-    public politician_event_master()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "beginBestineElection", null, 1, false);

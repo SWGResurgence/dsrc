@@ -25,9 +25,7 @@ import java.util.StringTokenizer;
 public class buildout_dungeon_utility extends script.base_script
 {
 
-    public buildout_dungeon_utility()
-    {
-    }
+
 
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {

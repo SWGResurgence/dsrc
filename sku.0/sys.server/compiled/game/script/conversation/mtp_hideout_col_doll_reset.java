@@ -5,9 +5,7 @@ import script.*;
 
 public class mtp_hideout_col_doll_reset extends script.base_script
 {
-    public mtp_hideout_col_doll_reset()
-    {
-    }
+    
     public static String c_stringFile = "conversation/mtp_hideout_col_doll_reset";
     public boolean mtp_hideout_col_doll_reset_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -492,7 +490,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_col_doll_reset_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -517,7 +515,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_col_doll_reset_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -542,7 +540,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_col_doll_reset_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -601,7 +599,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_col_doll_reset_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -626,7 +624,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_col_doll_reset_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -685,7 +683,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_col_doll_reset_handleBranch14(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -710,7 +708,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_col_doll_reset_handleBranch18(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -759,7 +757,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_col_doll_reset_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -784,7 +782,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_col_doll_reset_handleBranch22(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -822,7 +820,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_col_doll_reset_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -871,7 +869,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_col_doll_reset_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -896,7 +894,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_col_doll_reset_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -934,7 +932,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int mtp_hideout_col_doll_reset_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -948,7 +946,7 @@ public class mtp_hideout_col_doll_reset extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

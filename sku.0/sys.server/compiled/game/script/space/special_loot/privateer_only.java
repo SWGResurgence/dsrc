@@ -5,9 +5,7 @@ import script.string_id;
 
 public class privateer_only extends script.base_script
 {
-    public privateer_only()
-    {
-    }
+
     public static final string_id SID_ERROR = new string_id("space/space_loot", "privateer_only");
     public int OnAboutToBeTransferred(obj_id self, obj_id player, obj_id transferer) throws InterruptedException
     {

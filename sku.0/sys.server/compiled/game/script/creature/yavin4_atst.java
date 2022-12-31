@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class yavin4_atst extends script.base_script
 {
-    public yavin4_atst()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "startPatrol", null, rand(5, 15), false);

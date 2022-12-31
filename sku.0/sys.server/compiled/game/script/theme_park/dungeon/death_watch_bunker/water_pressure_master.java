@@ -10,9 +10,7 @@ import script.string_id;
 
 public class water_pressure_master extends script.base_script
 {
-    public water_pressure_master()
-    {
-    }
+
     public static final String TBL_TERMINAL_PATH = "datatables/dungeon/death_watch/water_pressure.iff";
     public static final String TBL_LIGHTS_PATH = "datatables/dungeon/death_watch/water_pressure_light.iff";
     public static final String VAR_PRESSURE_TERMINALS = "water_pressure.terminals";

@@ -19,9 +19,7 @@ public class ship_control_device extends script.base_script
     public static final string_id SID_STORAGE_INCREASE_REDEED_TITLE = new string_id("player_structure", "sui_storage_redeed_title");
     public static final string_id SID_STORAGE_INCREASE_REDEED_PROMPT = new string_id("player_structure", "sui_storage_redeed_prompt");
 
-    public ship_control_device()
-    {
-    }
+
 
     public int OnAttach(obj_id self) throws InterruptedException
     {

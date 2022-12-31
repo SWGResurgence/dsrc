@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class guard_path extends script.base_script
 {
-    public guard_path()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int timeOut = rand(20, 40);

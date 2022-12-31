@@ -1384,21 +1384,24 @@ public class base_player extends script.base_script
 
     public int OnLogin(obj_id self) throws InterruptedException
     {
-        if (!utils.hasScriptVar(self, "welcome_message"))
+        location loginLoc = getLocation(self);
+        System.out.println("\nZoning: " + self + " " + getName(self) + " has zoned to " + getCurrentSceneName() + " at " + loginLoc.x + ", " + loginLoc.y + ", " + loginLoc.z + "\n");
+        if (!hasObjVar(self, "resurgence_welcome_onetimer"))
         {
             String red = " \\#FF0000";
             String gold = " \\#FFD700";
             String tan = " \\#D2B48C";
             String white = " \\#FFFFFF";
             String blue = " \\#0000FF";
-            String welcomeMessage = "Thanks for playing on Apotheosis!" + "\n";
+            String teal = " \\#008080";
+            String welcomeMessage = "\\#.Thanks for playing on Apotheosis!" + "\n";
             String pleaseRead = "Please read the " + tan + "Rules & Policies" + white + " and " + tan + "F.A.Q." + white + " before starting your adventure(s)." + "\n";
             String numCharacters = "Number of Allowed Character(s): " + gold + "8" + white + "\n";
             String maxLogin = "Number of Allowed Character(s) Online: " + gold + "8" + white + "\n";
             String numAccts = "Number of Allowed Account(s): " + gold + "1" + white + "\n";
             String multiAccts = "Multiple Account(s): " + gold + "Contact Customer Support" + white + "\n";
             String features = gold + "Key Features:\n";
-            String feature1 = gold + "* " + white + "Instant " + blue + "Level 90" + white + "Token." + "\n";
+            String feature1 = gold + "* " + white + "Instant " + teal + "Level 90" + white + "Token." + "\n";
             String feature2 = gold + "* " + white + "One Free Heroic Jewelry Set.\n";
             String feature3 = gold + "* " + white + "20 Housing Lots.\n";
             String feature4 = gold + "* " + white + "Starter Packs for Traders and Pilots\n";
@@ -1408,7 +1411,7 @@ public class base_player extends script.base_script
             String feature8 = gold + "* " + white + "New Planet: Dxun\n";
             String feature9 = gold + "* " + white + "Variety of TCG and Custom Content.\n";
             String feature10 = tan + "* " + white + "More yet to come...\n";
-            String nl = "\n";
+            String nl = "\n\\#.";
             String welcome = welcomeMessage + pleaseRead + numCharacters + maxLogin + numAccts + multiAccts + features + feature1 + feature2 + feature3 + feature4 + feature5 + feature6 + feature7 + feature8 + feature9 + feature10;
             String title = gold("Welcome to Apotheosis!");
             int page = sui.createSUIPage(sui.SUI_MSGBOX, self, self, "noHandler");
@@ -1422,10 +1425,10 @@ public class base_player extends script.base_script
             setSUIProperty(page, "btnCancel", "Visible", "true");
             setSUIProperty(page, "btnRevert", "Visible", "false");
             setSUIProperty(page, "btnOk", sui.PROP_TEXT, "Exit");
-            saveTextOnClient(self, "motd_" + toString(getPlayerAccountUsername(self)) + ".txt", welcome);
+            saveTextOnClient(self, "server_welcome.txt", welcome);
             showSUIPage(page);
             flushSUIPage(page);
-            utils.setScriptVar(self, "welcome_message", 1);
+            setObjVar(self, "resurgence_welcome_onetimer", 1);
         }
         boolean ctsDisconnectRequested = false;
         if (hasObjVar(self, "disableLoginCtsInProgress"))
@@ -1531,12 +1534,12 @@ public class base_player extends script.base_script
         chatEnterRoom("SWG." + getGalaxyName() + ".system");
         chatEnterRoom("SWG." + getGalaxyName() + "." + getCurrentSceneName() + ".system");
         float curScale = getScale(self);
-        int gender = getGender(self);
+        Gender gender = getGender(self);
         int intSpecies = getSpecies(self);
         String species = utils.getPlayerSpeciesName(intSpecies);
         float min = 1.0f;
         float max = 1.0f;
-        if (gender == GENDER_MALE)
+        if (gender == Gender.MALE)
         {
             min = dataTableGetFloat("datatables/player/racial_scale.iff", species, "MALE_MIN");
             max = dataTableGetFloat("datatables/player/racial_scale.iff", species, "MALE_MAX");
@@ -2244,7 +2247,7 @@ public class base_player extends script.base_script
             }
             String racial_tbl = "datatables/creation/racial_mods.iff";
             int templateRow = 0;
-            if (getGender(self) == GENDER_MALE)
+            if (getGender(self) == Gender.MALE)
             {
                 templateRow = dataTableSearchColumnForString(template, 0, racial_tbl);
             }
@@ -2299,6 +2302,8 @@ public class base_player extends script.base_script
 
     public int OnLogout(obj_id self) throws InterruptedException
     {
+        location logoutLoc = getLocation(self);
+        System.out.println("\nOnLogout: " + self + " " + getName(self) + " on planet " + getCurrentSceneName() + " at " + logoutLoc.x + ", " + logoutLoc.y + ", " + logoutLoc.z + "\n");
         if (hasObjVar(self, pclib.VAR_CONSENT_FROM_ID))
         {
             pclib.relinquishConsents(self);
@@ -3973,10 +3978,7 @@ public class base_player extends script.base_script
             d.put("targetName", targetName);
             CustomerServiceLog("Trade", "  Tip -- Player: " + self + " " + getName(self) + " Target: " + target + " -- Transferring wire bank money to escrow account! Amt: " + amt);
             transferBankCreditsToNamedAccount(self, money.ACCT_TIP_ESCROW, amt, "handleTipSuccess", "handleTipFail", d);
-            if (utils.isFreeTrial(self, target))
-            {
-                pclib.doTipLogging(self, target, amt);
-            }
+
             CustomerServiceLog("Trade", "  Tip -- Player: " + self + " " + getName(self) + " Target: " + target + " -- Transferring wire bank fee to surcharge account! Amt: " + fee);
             transferBankCreditsToNamedAccount(self, money.ACCT_TIP_SURCHARGE, fee, "noHandler", "noHandler", d);
             utils.moneyOutMetric(self, money.ACCT_TIP_SURCHARGE, fee);
@@ -9072,10 +9074,10 @@ public class base_player extends script.base_script
     public void createStartingEquipment(obj_id objPlayer) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(objPlayer);
-        int gender = getGender(objPlayer);
+        Gender gender = getGender(objPlayer);
         int species = getSpecies(objPlayer);
         int idx = -1;
-        if (gender == GENDER_MALE)
+        if (gender == Gender.MALE)
         {
             if (species == SPECIES_HUMAN || species == SPECIES_ZABRAK || species == SPECIES_BOTHAN || species == SPECIES_MON_CALAMARI || species == SPECIES_RODIAN || species == SPECIES_TWILEK)
             {
@@ -9915,13 +9917,6 @@ public class base_player extends script.base_script
             return SCRIPT_CONTINUE;
         }
         int playerLevel = getLevel(self);
-        if (isFreeTrialAccount(self))
-        {
-            if (playerLevel >= xp.TRIAL_LEVEL_CAP)
-            {
-                return SCRIPT_CONTINUE;
-            }
-        }
         String xp_type = params.getString("xp_type");
         int amt = params.getInt("amt");
         String fromCallback = params.getString("fromCallback");
@@ -10203,39 +10198,27 @@ public class base_player extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        int sub_bits = getGameFeatureBits(self);
-        if (hasObjVar(self, "flash_speeder.eligible"))
+        if (!hasObjVar(self, "flash_speeder.granted"))
         {
-            sub_bits = getIntObjVar(self, "flash_speeder.eligible");
-        }
-        if (features.isSpaceEdition(self) && utils.checkBit(sub_bits, 3) || features.isJPCollectorEdition(self))
-        {
-            if (!hasObjVar(self, "flash_speeder.granted"))
+            obj_id inv = getObjectInSlot(self, "inventory");
+            int free_space = getVolumeFree(inv);
+            if (free_space < 1)
             {
-                obj_id inv = getObjectInSlot(self, "inventory");
-                int free_space = getVolumeFree(inv);
-                if (free_space < 1)
-                {
-                    sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_no_inv_space"));
-                    return SCRIPT_CONTINUE;
-                }
-                if (veteran_deprecated.checkFlashSpeederReward(self))
-                {
-                    sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_granted"));
-                }
-                else
-                {
-                    sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_grant_failed"));
-                }
+                sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_no_inv_space"));
+                return SCRIPT_CONTINUE;
+            }
+            if (veteran_deprecated.checkFlashSpeederReward(self))
+            {
+                sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_granted"));
             }
             else
             {
-                sui.msgbox(self, self, "@" + veteran_deprecated.VETERAN_STRING_TABLE + ":flash_speeder_replace_prompt", sui.YES_NO, "msgFlashSpeederConfirmed");
+                sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_grant_failed"));
             }
         }
         else
         {
-            sendSystemMessage(self, new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "flash_speeder_not_eligible"));
+            sui.msgbox(self, self, "@" + veteran_deprecated.VETERAN_STRING_TABLE + ":flash_speeder_replace_prompt", sui.YES_NO, "msgFlashSpeederConfirmed");
         }
         return SCRIPT_CONTINUE;
     }

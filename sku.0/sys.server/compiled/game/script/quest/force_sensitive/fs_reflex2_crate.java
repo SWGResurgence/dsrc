@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class fs_reflex2_crate extends script.base_script
 {
-    public fs_reflex2_crate()
-    {
-    }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

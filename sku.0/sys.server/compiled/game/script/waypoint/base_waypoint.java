@@ -5,9 +5,7 @@ import script.library.utils;
 
 public class base_waypoint extends script.base_script
 {
-    public base_waypoint()
-    {
-    }
+
     public static final string_id MNU_SET_COLOR = new string_id("sui", "set_color");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

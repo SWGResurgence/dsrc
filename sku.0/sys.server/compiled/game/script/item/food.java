@@ -8,9 +8,7 @@ import script.*;
 
 public class food extends script.base_script
 {
-    public food()
-    {
-    }
+
     public static final string_id SID_PET_ONLY = new string_id("base_player", "food_pet_only");
     public static final string_id SID_TOO_FULL = new string_id("base_player", "food_too_full");
     public static final string_id SID_ALREADY_HAVE_BUFF = new string_id("base_player", "food_already_have_buff");
@@ -251,7 +249,7 @@ public class food extends script.base_script
             removeOldBuff = true;
         }
         float newDuration = timeLeft + duration;
-        float maxDuration = 2 * 60 * 60;
+        float maxDuration = 5 * 60 * 60;
         if (newDuration > maxDuration)
         {
             sendSystemMessage(player, SID_BUFF_DUR_OVER_MAX);
@@ -278,12 +276,13 @@ public class food extends script.base_script
                 default:
                 snd += "human_";
             }
-            switch (getGender(player))
+            String genderTemplate = getTemplateName(player);
+            if (genderTemplate.contains("_female"))
             {
-                case GENDER_FEMALE:
                 snd += "female_eat.cef";
-                break;
-                default:
+            }
+            else
+            {
                 snd += "male_eat.cef";
             }
             playClientEffectLoc(player, snd, getLocation(player), getScale(player));

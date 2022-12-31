@@ -7,9 +7,7 @@ import java.util.Vector;
 
 public class tcg extends script.base_script
 {
-    public tcg()
-    {
-    }
+
     public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "tcg_barn";
     public static final String RANCHHAND_CELL_SCRIPT = "systems.tcg.barn_cell";

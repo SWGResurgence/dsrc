@@ -791,6 +791,10 @@ public class ai extends script.base_script
                 "Feel the vibes.",
                 "Ok, if you say so.."
         };
+        if (pet_lib.isPet(self) || beast_lib.isBeast(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
         if (emote.startsWith("pet"))
         {
             if (!ai_lib.isHumanoid(self))
@@ -1221,7 +1225,7 @@ public class ai extends script.base_script
             int delayCount = 0;
             for (obj_id pk1 : pks)
             {
-                if (isIdValid(pk1) && (corpseLevel + 5 < getLevel(pk1) || utils.isFreeTrial(pk1)))
+                if (isIdValid(pk1) && (corpseLevel + 5 < getLevel(pk1)))
                 {
                     doNotDropCard = true;
                 }
@@ -1249,7 +1253,7 @@ public class ai extends script.base_script
                     }
                     if (isGod(pk) && hasObjVar(pk, "qa_tcg"))
                     {
-                        sendSystemMessageTestingOnly(pk, "QA TCG COMBAT.  Do not drop card? " + doNotDropCard + " hasCardDelay? " + scheduled_drop.hasCardDelay(pk, sourceSystem) + " isTrial? " + utils.isFreeTrial(pk) + " bad level? " + (corpseLevel + 5 < getLevel(pk)));
+                        sendSystemMessageTestingOnly(pk, "QA TCG COMBAT.  Do not drop card? " + doNotDropCard + " hasCardDelay? " + scheduled_drop.hasCardDelay(pk, sourceSystem) + " bad level? " + (corpseLevel + 5 < getLevel(pk)));
                     }
                 }
             }
@@ -2013,64 +2017,69 @@ public class ai extends script.base_script
 
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
-        if (item == menu_info_types.SERVER_MENU20)
+        if (isGod(player))
         {
-            blog("SERVER_MENU20");
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU21)
-        {
-            int loot = getIntObjVar(self, "loot.numItems");
-            if (loot == 0)
+            if (item == menu_info_types.SERVER_MENU20)
             {
-                setObjVar(self, "loot.numItems", 1);
+                blog("SERVER_MENU20");
+                return SCRIPT_CONTINUE;
             }
-            else
+            if (item == menu_info_types.SERVER_MENU21)
             {
-                setObjVar(self, "loot.numItems", loot + 1);
+                int loot = getIntObjVar(self, "loot.numItems");
+                if (loot == 0)
+                {
+                    setObjVar(self, "loot.numItems", 1);
+                }
+                else
+                {
+                    setObjVar(self, "loot.numItems", loot + 1);
+                }
+                return SCRIPT_CONTINUE;
             }
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU22)
-        {
-            int loot = getIntObjVar(self, "loot.numItems");
-            if (loot == 0)
+            if (item == menu_info_types.SERVER_MENU22)
             {
-                setObjVar(self, "loot.numItems", 0);
+                int loot = getIntObjVar(self, "loot.numItems");
+                if (loot == 0)
+                {
+                    setObjVar(self, "loot.numItems", 0);
+                }
+                else
+                {
+                    setObjVar(self, "loot.numItems", loot - 1);
+                }
+                return SCRIPT_CONTINUE;
             }
-            else
+            if (item == menu_info_types.SERVER_MENU23)
             {
-                setObjVar(self, "loot.numItems", loot - 1);
+                stopCombat(player);
+                return SCRIPT_CONTINUE;
             }
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU23)
-        {
-            stopCombat(player);
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU24)
-        {
-            String lootTable = getStringObjVar(self, "loot.lootTable");
-            if (lootTable == null)
+            if (item == menu_info_types.SERVER_MENU24)
             {
-                lootTable = "none. (default)";
+                String lootTable = getStringObjVar(self, "loot.lootTable");
+                if (lootTable == null)
+                {
+                    lootTable = "none. (default)";
+                }
+                String prompt = "Current loot table: " + lootTable + "\n\nEnter new loot table:";
+                int pid = sui.inputbox(player, prompt, "handleLootTableInput");
+                sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
+                return SCRIPT_CONTINUE;
             }
-            String prompt = "Current loot table: " + lootTable + "\n\nEnter new loot table:";
-            int pid = sui.inputbox(player, prompt, "handleLootTableInput");
-            sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU25)
-        {
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU26)
-        {
-            String prompt = "Enter creature name to make a ring spawn.\n For a complete list of creature names, seek out mobs.iff!";
-            int pid = sui.inputbox(player, player, prompt, "prepareRingSpawn");
-            sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
-
+            if (item == menu_info_types.SERVER_MENU25)
+            {
+                return SCRIPT_CONTINUE;
+            }
+            if (item == menu_info_types.SERVER_MENU26)
+            {
+                if (!hasScript(self, "systems.city.city_actor"))
+                {
+                    String prompt = "Enter creature name to make a ring spawn.\n For a complete list of creature names, seek out mobs.iff!";
+                    int pid = sui.inputbox(player, player, prompt, "prepareRingSpawn");
+                    sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
+                }
+            }
         }
         return SCRIPT_CONTINUE;
     }
@@ -2580,14 +2589,22 @@ public class ai extends script.base_script
     {
         if (getTemplateName(item).equals(TOOL))
         {
-            obj_id player = giver;
-            obj_id mobile = self;
-            String string_template = getTemplateName(self);
-            obj_id token = create.createObject(TOOL, utils.getInventoryContainer(player), "");
-            setObjVar(token, "city_hire.mobile", string_template);
-            setObjVar(token, "tokenUsed", 1);
-            attachScript(token, "systems.city.city_hire");
-            setName(token, "City Actor Deed: " + utils.getStringName(mobile));
+            if (!hasObjVar(item, "actorMade"))
+            {
+                obj_id player = giver;
+                obj_id mobile = self;
+                String string_template = getTemplateName(self);
+                obj_id token = create.createObject(TOOL, utils.getInventoryContainer(player), "");
+                setObjVar(token, "city_hire.mobile", string_template);
+                setObjVar(token, "tokenUsed", 1);
+                setObjVar(token, "actorMade", 1);
+                attachScript(token, "systems.city.city_hire");
+                setName(token, "City Actor Deed: " + utils.getStringName(mobile));
+            }
+            else
+            {
+                broadcast(giver, "The data buffer on this extraction unit is at max capacity.");
+            }
             return SCRIPT_OVERRIDE;
         }
         if (!hasCompletedCollectionSlot(giver, "meatlump_recruiter_starter"))

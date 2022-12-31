@@ -5,9 +5,7 @@ import script.*;
 
 public class corvette_imperial_pilot extends script.base_script
 {
-    public corvette_imperial_pilot()
-    {
-    }
+
     public static String c_stringFile = "conversation/corvette_imperial_pilot";
     public boolean corvette_imperial_pilot_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -154,7 +152,7 @@ public class corvette_imperial_pilot extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_imperial_pilot_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -234,7 +232,7 @@ public class corvette_imperial_pilot extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int corvette_imperial_pilot_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -280,7 +278,7 @@ public class corvette_imperial_pilot extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

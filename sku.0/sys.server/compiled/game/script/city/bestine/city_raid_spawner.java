@@ -9,9 +9,7 @@ import script.obj_id;
 
 public class city_raid_spawner extends script.base_script
 {
-    public city_raid_spawner()
-    {
-    }
+
     public static final float SPAWN_DELAY = 1.0f;
     public static final int ONE_DAY_IN_SECS = 86400;
     public static final int EIGHT_HOURS_IN_SECS = 28800;

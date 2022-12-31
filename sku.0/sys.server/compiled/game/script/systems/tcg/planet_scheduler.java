@@ -6,9 +6,7 @@ import script.obj_id;
 
 public class planet_scheduler extends script.base_script
 {
-    public planet_scheduler()
-    {
-    }
+
     public int clearPromotions(obj_id self, dictionary params) throws InterruptedException
     {
         String[] promotions = scheduled_drop.getSchedulerPromotions();

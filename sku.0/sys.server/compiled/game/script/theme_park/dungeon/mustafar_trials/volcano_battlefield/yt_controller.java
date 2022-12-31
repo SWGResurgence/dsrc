@@ -5,9 +5,7 @@ import script.obj_id;
 
 public class yt_controller extends script.base_script
 {
-    public yt_controller()
-    {
-    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         destroyObject(self);

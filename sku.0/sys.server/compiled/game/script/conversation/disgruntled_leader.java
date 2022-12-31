@@ -8,9 +8,7 @@ import script.*;
 
 public class disgruntled_leader extends script.base_script
 {
-    public disgruntled_leader()
-    {
-    }
+
     public static String c_stringFile = "conversation/disgruntled_leader";
     public boolean disgruntled_leader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -54,7 +52,7 @@ public class disgruntled_leader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disgruntled_leader_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -94,7 +92,7 @@ public class disgruntled_leader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disgruntled_leader_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -134,7 +132,7 @@ public class disgruntled_leader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disgruntled_leader_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -174,7 +172,7 @@ public class disgruntled_leader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int disgruntled_leader_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -190,7 +188,7 @@ public class disgruntled_leader extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

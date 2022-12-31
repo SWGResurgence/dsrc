@@ -8,9 +8,7 @@ import script.string_id;
 
 public class jtl_newbie extends script.theme_park.newbie_tutorial.tutorial_base
 {
-    public jtl_newbie()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "jtlNewbie", 1);

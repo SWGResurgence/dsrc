@@ -13,9 +13,7 @@ import script.library.utils;
 
 public class pro_seed_jar extends script.base_script
 {
-    public pro_seed_jar()
-    {
-    }
+
     public static final string_id SID_MNU_USE = new string_id("spam", "open");
     public static final string_id SID_SYS_NOT_IN_INV = new string_id("encoded_disk/message_fragment", "sys_not_in_inv");
     public static final String[] TREES = 

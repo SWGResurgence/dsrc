@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class test_create extends script.base_script
 {
-    public test_create()
-    {
-    }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         int stringCheck = text.indexOf("create ");

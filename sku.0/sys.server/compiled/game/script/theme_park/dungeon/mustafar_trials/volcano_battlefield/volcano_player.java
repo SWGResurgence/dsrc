@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class volcano_player extends script.base_script
 {
-    public volcano_player()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "sendEnterSignal", null, 20, false);

@@ -7,9 +7,7 @@ import script.obj_id;
 
 public class herd_spawner extends script.theme_park.poi.base
 {
-    public herd_spawner()
-    {
-    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         doSpawning(self);

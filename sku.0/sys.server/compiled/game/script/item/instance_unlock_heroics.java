@@ -9,8 +9,7 @@ import script.obj_id;
 import script.string_id;
 
 public class instance_unlock_heroics extends script.base_script {
-	public instance_unlock_heroics() {
-	}
+
 	public static final String HANDLER_SET_TOOL_CLASS = "handleSetToolClass";
     public static final string_id SID_TOOL_OPTIONS = new string_id("sui", "Unlock_Heroics");
     public static final string_id SID_TOOL_CLASS = new string_id("sui", "Set_Heroic");

@@ -16,9 +16,7 @@ public class toolkit extends script.base_script
         "speed", "height", "acceleration", "banking", "turning", "deceleration", "damping_height"
     };
 
-    public toolkit()
-    {
-    }
+
 
     public static int setValue(obj_id vehicle, float value, int var_index) throws InterruptedException
     {

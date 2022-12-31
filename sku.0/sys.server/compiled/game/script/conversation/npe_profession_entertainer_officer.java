@@ -8,9 +8,7 @@ import script.*;
 
 public class npe_profession_entertainer_officer extends script.base_script
 {
-    public npe_profession_entertainer_officer()
-    {
-    }
+
     public static String c_stringFile = "conversation/npe_profession_entertainer_officer";
     public boolean npe_profession_entertainer_officer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -80,7 +78,7 @@ public class npe_profession_entertainer_officer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_profession_entertainer_officer_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -118,7 +116,7 @@ public class npe_profession_entertainer_officer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_profession_entertainer_officer_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -156,7 +154,7 @@ public class npe_profession_entertainer_officer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_profession_entertainer_officer_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -171,7 +169,7 @@ public class npe_profession_entertainer_officer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_profession_entertainer_officer_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -209,7 +207,7 @@ public class npe_profession_entertainer_officer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int npe_profession_entertainer_officer_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -224,7 +222,7 @@ public class npe_profession_entertainer_officer extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

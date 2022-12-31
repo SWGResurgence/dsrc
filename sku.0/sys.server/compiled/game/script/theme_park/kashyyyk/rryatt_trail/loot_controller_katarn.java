@@ -1,18 +1,13 @@
 package script.theme_park.kashyyyk.rryatt_trail;
 
-import script.*;
 import script.dictionary;
-
-import script.library.*;
 import script.library.ai_lib;
 import script.library.static_item;
 import script.library.utils;
-
 import script.obj_id;
 
 public class loot_controller_katarn extends script.base_script {
-    public loot_controller_katarn() {
-    }
+
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException {
         obj_id corpseInventory = utils.getInventoryContainer(self);
         if (corpseInventory == null) {

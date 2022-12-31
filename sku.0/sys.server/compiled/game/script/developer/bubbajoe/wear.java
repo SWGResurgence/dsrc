@@ -4,9 +4,7 @@ import script.obj_id;
 
 public class wear extends script.base_script
 {
-    public wear()
-    {
-    }
+
 
     public int OnAttach(obj_id self)
     {

@@ -8,9 +8,7 @@ import script.obj_id;
 
 public class doom_hand extends script.base_script
 {
-    public doom_hand()
-    {
-    }
+
     public static final boolean LOGGING = true;
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {

@@ -11,9 +11,7 @@ import script.string_id;
 
 public class trigger_journal extends script.base_script
 {
-    public trigger_journal()
-    {
-    }
+
     public static final float MAX_DISTANCE = 5.0f;
     public static final string_id TOO_FAR = new string_id("npe", "gamma_travel_too_far");
     public int OnInitialize(obj_id self) throws InterruptedException

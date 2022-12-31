@@ -9,9 +9,7 @@ import java.util.Vector;
 
 public class show extends script.base_script
 {
-    public show()
-    {
-    }
+
     public static final string_id MNU_LAUNCH = new string_id(firework.STF, "mnu_launch");
     public static final string_id MNU_SHOW_DATA = new string_id(firework.STF, "mnu_show_data");
     public static final string_id MNU_ADD_EVENT = new string_id(firework.STF, "mnu_add_event");

@@ -8,9 +8,7 @@ import script.*;
 
 public class c_newbie_melee_combat_client_2 extends script.base_script
 {
-    public c_newbie_melee_combat_client_2()
-    {
-    }
+
     public static String c_stringFile = "conversation/c_newbie_melee_combat_client_2";
     public boolean c_newbie_melee_combat_client_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -52,7 +50,7 @@ public class c_newbie_melee_combat_client_2 extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
