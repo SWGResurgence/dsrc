@@ -103,12 +103,12 @@ public class teleporter_building extends script.base_script
         int bp = sui.getIntButtonPressed(params);
         if (bp == sui.BP_CANCEL)
         {
-            broadcast(player, "You have canceled your name change.");
+            broadcast(player, "You have canceled your the name change.");
             return SCRIPT_CONTINUE;
         }
         if (bp == sui.BP_REVERT)
         {
-            broadcast(player, "You have canceled your name change.");
+            broadcast(player, "You have canceled your the name change.");
             return SCRIPT_CONTINUE;
         }
         if (bp == sui.BP_OK)
