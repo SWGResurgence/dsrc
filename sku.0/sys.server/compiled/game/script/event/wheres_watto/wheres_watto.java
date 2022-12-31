@@ -34,7 +34,7 @@ public class wheres_watto extends script.base_script
             "item_tcg_loot_reward_series3_house_sign",
             "item_tcg_loot_reward_series3_jango_fett_memorial_statue",
             "item_tcg_loot_reward_series3_mandalorian_skull_banner",
-            "item_tcg_loot_reward_series3_merr_son_jt12_jetpack-blueprints",
+            "item_tcg_loot_reward_series3_merr_sonn_jt12_jetpack_blueprints",
             "item_tcg_loot_reward_series3_swamp_speeder",
             "item_tcg_loot_reward_series3_wookiee_ceremonial_pipe",
             "item_tcg_loot_reward_series4_peko_peko_mount_02_01",
@@ -56,6 +56,7 @@ public class wheres_watto extends script.base_script
             "item_tcg_loot_reward_series7_xwing_fighter_familiar",
             "item_tcg_loot_reward_series9_jedi_library_bookshelf",
     };
+
     public boolean wheres_watto_condition__defaultCondition(obj_id player, obj_id npc)
     {
         return true;
@@ -68,27 +69,36 @@ public class wheres_watto extends script.base_script
 
     int wheres_watto_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
-		//-- [RESPONSE NOTE]
+        //-- [RESPONSE NOTE]
         //-- PLAYER: Gotcha!
         if (response.equals("s_4"))
         {
+            System.out.println("Watto has been found at : " + getLocation(npc));
             //-- [NOTE] warp the creo to a different spot.
             if (wheres_watto_condition__defaultCondition(player, npc))
             {
-                //-- NPC: Bet you can't find me this time!
                 string_id message = new string_id(c_stringFile, "s_5");
                 utils.removeScriptVar(player, "conversation.wheres_watto.branchId");
                 setObjVar(player, "wheres_watto.found", 1);
-                npcEndConversationWithMessage(player, message);
                 location watto_loc = new location(0, 0, 0, getCurrentSceneName(), null);
-                createReward(npc, player);
                 watto_loc.x = watto_loc.x + (rand(-7250.0f, 7250.0f));
                 watto_loc.z = watto_loc.z + (rand(-7250.0f, 7250.0f));
                 watto_loc.y = getHeightAtLocation(watto_loc.x, watto_loc.z);
-                obj_id newWatto = create.object("object/mobile/watto.iff", watto_loc, false);
-                attachScript(newWatto, "event.wheres_watto.wheres_watto");
-                npcEndConversation(player);
-                destroyObject(npc);
+                createReward(npc, player);
+                System.out.println("\nMaking a new Watto at " + watto_loc + "\n");
+                if (isJanuary() || isDecember())
+                {
+                    //-- NPC: Bet you can't find me this time!
+                    obj_id newWatto = create.object("object/mobile/watto.iff", watto_loc, true);
+                    ai_lib.wander(newWatto, 1.0f, 64.0f);
+                    setMovementWalk(newWatto);
+                    setMovementPercent(newWatto, 0.6f);
+                    ai_lib.barkString(npc, "Aye! I'm walking here!");
+                    attachScript(newWatto, "event.wheres_watto.wheres_watto");
+                    npcEndConversationWithMessage(player, message);
+                    npcEndConversation(player);
+                    destroyObject(npc);
+                }
                 return SCRIPT_CONTINUE;
             }
         }
@@ -261,6 +271,28 @@ public class wheres_watto extends script.base_script
     public void unHideMe(obj_id self)
     {
         hideFromClient(self, false);
+    }
+
+    public boolean isJanuary() throws InterruptedException
+    {
+        java.util.Date date = new java.util.Date();
+        int month = date.getMonth();
+        if (month == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isDecember() throws InterruptedException
+    {
+        java.util.Date date = new java.util.Date();
+        int month = date.getMonth();
+        if (month == 11)
+        {
+            return true;
+        }
+        return false;
     }
 
 }
