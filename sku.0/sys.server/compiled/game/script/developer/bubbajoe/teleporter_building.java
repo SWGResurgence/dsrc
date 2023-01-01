@@ -1,10 +1,11 @@
 package script.developer.bubbajoe;/*
 @Filename: script.developer.bubbajoe.teleporter_building
 @Author: BubbaJoeX
-@Purpose: This script is used to give the user a list of cells with thier cell name and warp them to it if they select it.
+@Purpose: This script is used to teleport players to a location saved on the terminal. You must be in god-mode and have the terminal in your inventory to setup, then get the OID and place in the world.
 */
 
 import script.*;
+import script.library.colors_hex;
 import script.library.sui;
 
 public class teleporter_building extends script.base_script
@@ -38,8 +39,8 @@ public class teleporter_building extends script.base_script
     {
         if (item == menu_info_types.ITEM_USE)
         {
-            String prompt = "\\#c49c48Are you sure you want to travel?";
-            String title = "\\#c49c48Confirm Travel";
+            String prompt = colors_hex.HEADER + colors_hex.GOLD + "Are you sure you wish to travel to this location?" + colors_hex.FOOTER;
+            String title = colors_hex.HEADER + colors_hex.SEASHELL + "Confirm Travel" + colors_hex.FOOTER;
             sui.msgbox(self, player, prompt, sui.YES_NO, title, "handleConfirm");
         }
         if (item == menu_info_types.SERVER_MENU1)
@@ -102,12 +103,12 @@ public class teleporter_building extends script.base_script
         int bp = sui.getIntButtonPressed(params);
         if (bp == sui.BP_CANCEL)
         {
-            broadcast(player, "You have canceled your name change.");
+            broadcast(player, "You have canceled your the name change.");
             return SCRIPT_CONTINUE;
         }
         if (bp == sui.BP_REVERT)
         {
-            broadcast(player, "You have canceled your name change.");
+            broadcast(player, "You have canceled your the name change.");
             return SCRIPT_CONTINUE;
         }
         if (bp == sui.BP_OK)

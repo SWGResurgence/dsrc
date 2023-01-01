@@ -23,11 +23,11 @@ public class ai_lib extends script.base_script
     public static final int BEHAVIOR_SENTINEL = 1;
     public static final int BEHAVIOR_LOITER = 2;
     public static final int BEHAVIOR_STOP = 3;
-    //public static final String DIF_VERY_EASY = "veryEasy";
-    //public static final String DIF_EASY = "easy";
-    //public static final String DIF_MEDIUM = "medium";
-    //public static final String DIF_HARD = "hard";
-    //public static final String DIF_VERY_HARD = "veryHard";
+    public static final String DIF_VERY_EASY = "veryEasy";
+    public static final String DIF_EASY = "easy";
+    public static final String DIF_MEDIUM = "medium";
+    public static final String DIF_HARD = "hard";
+    public static final String DIF_VERY_HARD = "veryHard";
     public static final String ALLY_LIST = "allyList";
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String CREATURE_NAME_FILE = "mob/creature_names";
@@ -48,8 +48,8 @@ public class ai_lib extends script.base_script
     public static final int FORMATION_WEDGE = 1;
     public static final int FORMATION_LINE = 2;
     public static final int FORMATION_BOX = 3;
-    //public static final int DIFFICULTY_NORMAL = 0;
-    //public static final int DIFFICULTY_ELITE = 1;
+    public static final int DIFFICULTY_NORMAL = 0;
+    public static final int DIFFICULTY_ELITE = 1;
     public static final int DIFFICULTY_BOSS = 2;
     public static final String SHARED_HEALTH_LIST = "shared_health_list";
     public static boolean isWithinLeash(obj_id ai) throws InterruptedException

@@ -1,7 +1,8 @@
 package script.developer.bubbajoe;/*
 @Filename: script.developer.bubbajoe.
 @Author: BubbaJoeX
-@Purpose:
+@Purpose: Locks a single room (cell). Only players listed in roomPermissions objvar list can enter the room.
+@tandem cell | cell_lock
 */
 
 import script.*;
@@ -10,7 +11,7 @@ import script.library.sui;
 @SuppressWarnings("unused")
 public class cell_lock extends script.base_script
 {
-    public obj_id getCurrentCellName(obj_id player) throws InterruptedException
+    public obj_id getCurrentCell(obj_id player) throws InterruptedException
     {
         return getContainedBy(player);
     }
@@ -63,23 +64,25 @@ public class cell_lock extends script.base_script
 
     public void unlockRoom(obj_id self, obj_id player) throws InterruptedException
     {
-        setObjVar(getCurrentCellName(self), "roomLocked", false);
+        detachScript(getCurrentCell(player), "developer.bubbajoe.cell_lock");
+        setObjVar(getCurrentCell(self), "roomLocked", false);
         broadcast(player, "You have unlocked this room.");
     }
 
     public void removePlayerFromRoomPermissions(obj_id self, obj_id player) throws InterruptedException
     {
-        sui.msgbox(self, player, "Enter the name of the player you wish to remove from the room's permissions.", sui.OK_CANCEL, "Remove Player from Room", "handleRemovePlayerFromRoomPermissions");
+        sui.inputbox(self, player, "Enter the name of the player you wish to remove from the room's permissions.", "PERMISSIONS", "handleRemovePlayerFromRoomPermissions", getPlayerName(player));
     }
 
     public void addPlayerToRoomPermissions(obj_id self, obj_id player) throws InterruptedException
     {
-        sui.msgbox(self, player, "Please enter the name of the player you wish to add to the room's permissions.", sui.OK_CANCEL, "Add Player to Room", "handleAddPlayerToRoomPermissions");
+        sui.inputbox(self, player, "Please enter the name of the player you wish to add to the room's permissions.", "PERMISSIONS", "handleAddPlayerFromRoomPermissions", getPlayerName(player));
     }
 
     public void lockRoom(obj_id self, obj_id player) throws InterruptedException
     {
-        setObjVar(getCurrentCellName(self), "roomLocked", true);
+        attachScript(getCurrentCell(player), "script.developer.bubbajoe.cell");
+        setObjVar(getCurrentCell(self), "roomLocked", true);
         broadcast(player, "You have locked this room.");
     }
 

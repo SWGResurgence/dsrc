@@ -36,7 +36,7 @@ public class city_hire extends script.base_script
             }
             else
             {
-                broadcast(player, "You must drag this token onto a mobile to hire it.");
+                broadcast(player, "You must drag the Extraction Unit onto the creature you wish to hire.");
             }
         }
         return SCRIPT_CONTINUE;
@@ -56,8 +56,10 @@ public class city_hire extends script.base_script
                         attachScript(actor, "systems.city.city_actor");
                         attachScript(actor, "systems.city.city_furniture");
                         int city_id = getCityAtLocation(getLocation(player), 0);
+                        setObjVar(actor, "city_id", city_id);
                         city.addDecoration(city_id, player, self);
-                        broadcast(player, "Hired:  \"" + getName(actor) + "\"");
+                        persistObject(actor);
+                        broadcast(player, "You have placed " + getCreatureName(actor) + " in the city.");
                         destroyObject(self);
                     }
                 }

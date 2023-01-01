@@ -126,7 +126,7 @@ int lifeday_wrosaste_handleBranch1 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -230,7 +230,7 @@ int lifeday_wrosaste_handleBranch2 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -258,7 +258,7 @@ int lifeday_wrosaste_handleBranch3 (obj_id player, obj_id npc, string_id respons
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------

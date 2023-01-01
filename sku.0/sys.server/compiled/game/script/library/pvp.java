@@ -80,8 +80,8 @@ public class pvp extends script.base_script
     public static final String BATTLEFIELD_ACTIVE_PLAYERS = "battlefield.active_players";
     public static final String BATTLEFIELD_ACTIVE_REBEL_PLAYERS = "battlefield.active_rebel_players";
     public static final String BATTLEFIELD_ACTIVE_IMPERIAL_PLAYERS = "battlefield.active_imperial_players";
-    public static final String COLOR_REBELS = "\\" + colors_hex.COLOR_REBELS;
-    public static final String COLOR_IMPERIALS = "\\" + colors_hex.COLOR_IMPERIALS;
+    public static final String COLOR_REBELS = colors_hex.HEADER + colors_hex.COLOR_REBELS;
+    public static final String COLOR_IMPERIALS = colors_hex.HEADER + colors_hex.COLOR_IMPERIALS;
     public static obj_var[] _packageCombatWinners(obj_id victim) throws InterruptedException
     {
         if (!isIdValid(victim))

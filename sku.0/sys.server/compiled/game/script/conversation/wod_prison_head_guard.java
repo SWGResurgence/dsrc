@@ -14,14 +14,20 @@ package script.conversation;
 // Library Includes
 // ======================================================================
 
-import script.library.*;
+import script.library.ai_lib;
+import script.library.chat;
+import script.library.groundquests;
+import script.library.utils;
 import script.*;
 
 public class wod_prison_head_guard extends script.base_script
 {
-	public wod_prison_head_guard()
-	{
-	}
+	public wod_prison_head_guard()
+
+	{
+
+	}
+
 // ======================================================================
 // Script Constants
 // ======================================================================
@@ -219,7 +225,7 @@ int wod_prison_head_guard_handleBranch2 (obj_id player, obj_id npc, string_id re
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -247,7 +253,7 @@ int wod_prison_head_guard_handleBranch4 (obj_id player, obj_id npc, string_id re
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -304,7 +310,7 @@ int wod_prison_head_guard_handleBranch6 (obj_id player, obj_id npc, string_id re
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -363,7 +369,7 @@ int wod_prison_head_guard_handleBranch7 (obj_id player, obj_id npc, string_id re
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -393,7 +399,7 @@ int wod_prison_head_guard_handleBranch8 (obj_id player, obj_id npc, string_id re
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -450,7 +456,7 @@ int wod_prison_head_guard_handleBranch10 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -507,7 +513,7 @@ int wod_prison_head_guard_handleBranch11 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -537,7 +543,7 @@ int wod_prison_head_guard_handleBranch12 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -594,7 +600,7 @@ int wod_prison_head_guard_handleBranch14 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -651,7 +657,7 @@ int wod_prison_head_guard_handleBranch15 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -708,7 +714,7 @@ int wod_prison_head_guard_handleBranch16 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -765,7 +771,7 @@ int wod_prison_head_guard_handleBranch17 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -822,7 +828,7 @@ int wod_prison_head_guard_handleBranch18 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -879,7 +885,7 @@ int wod_prison_head_guard_handleBranch19 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -909,7 +915,7 @@ int wod_prison_head_guard_handleBranch20 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -937,7 +943,7 @@ int wod_prison_head_guard_handleBranch22 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1008,7 +1014,7 @@ int wod_prison_head_guard_handleBranch24 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1112,7 +1118,7 @@ int wod_prison_head_guard_handleBranch25 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1142,7 +1148,7 @@ int wod_prison_head_guard_handleBranch26 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1199,7 +1205,7 @@ int wod_prison_head_guard_handleBranch28 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1229,7 +1235,7 @@ int wod_prison_head_guard_handleBranch29 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1286,7 +1292,7 @@ int wod_prison_head_guard_handleBranch31 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1355,7 +1361,7 @@ int wod_prison_head_guard_handleBranch32 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1430,7 +1436,7 @@ int wod_prison_head_guard_handleBranch33 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1487,7 +1493,7 @@ int wod_prison_head_guard_handleBranch34 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -1517,7 +1523,7 @@ int wod_prison_head_guard_handleBranch35 (obj_id player, obj_id npc, string_id r
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------

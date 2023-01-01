@@ -5,6 +5,8 @@ import script.library.holiday;
 import script.library.utils;
 import script.obj_id;
 
+import java.time.LocalTime;
+
 public class loveday_cupid_spawner_manager extends script.base_script
 {
     public loveday_cupid_spawner_manager()
@@ -22,13 +24,13 @@ public class loveday_cupid_spawner_manager extends script.base_script
     }
     public int initializeCupidSpawnerManager(obj_id self, dictionary params) throws InterruptedException
     {
-        createHourlyAlarmClock(self, "triggerHourlyCupidNPCs", null, 0, 0);
+        timedMessageToDaily(self, "triggerHourlyCupidNPCs", null, LocalTime.of(1, 0));
         return SCRIPT_CONTINUE;
     }
     public int triggerHourlyCupidNPCs(obj_id self, dictionary params) throws InterruptedException
     {
         getLovedayCupidSpawnerIds(self);
-        createHourlyAlarmClock(self, "triggerHourlyCupidNPCs", null, 0, 0);
+        timedMessageToDaily(self, "triggerHourlyCupidNPCs", null, LocalTime.of(1, 0));
         return SCRIPT_CONTINUE;
     }
     public void getLovedayCupidSpawnerIds(obj_id self) throws InterruptedException

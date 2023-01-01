@@ -127,7 +127,7 @@ public class obiwan_lair_boss extends script.base_script
             {
                 utils.setScriptVar(self, "ignoreForcePowerAttack", 1);
                 utils.removeScriptVar(self, "forcePowerAttack");
-                doAnimationAction(self, "anims.HUMAN_REA_STAND_COMBAT_GET_HIT_HEAVY");
+                doAnimationAction(self, anims.HUMAN_REA_STAND_COMBAT_GET_HIT_HEAVY);
                 obj_id dungeon = getTopMostContainer(self);
                 if (!isIdValid(dungeon))
                 {

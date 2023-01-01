@@ -73,11 +73,6 @@ public class blueprint extends script.base_script
             sendSystemMessage(player, new string_id("storyteller", "blueprint_not_while_swimming"));
             return SCRIPT_CONTINUE;
         }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "blueprint_no_trial_accounts"));
-            return SCRIPT_CONTINUE;
-        }
         location yourLoc = getLocation(player);
         if (isIdValid(yourLoc.cell))
         {
@@ -252,11 +247,6 @@ public class blueprint extends script.base_script
         if (getState(player, STATE_SWIMMING) == 1)
         {
             sendSystemMessage(player, new string_id("storyteller", "blueprint_not_while_swimming"));
-            return SCRIPT_CONTINUE;
-        }
-        if (isFreeTrialAccount(player))
-        {
-            sendSystemMessage(player, new string_id("storyteller", "blueprint_no_trial_accounts"));
             return SCRIPT_CONTINUE;
         }
         location yourLoc = getLocation(player);
@@ -558,10 +548,10 @@ public class blueprint extends script.base_script
                 String tokenName = getString(new string_id("static_item_n", ((String)tokensNeeded.get(j))));
                 int needed = (Integer) numTokensNeeded.get(j);
                 int loaded = (Integer) numTokensLoaded.get(j);
-                String tokenNumTxt = "\\" + colors_hex.RED + " " + loaded + "/" + needed + " \\#.";
+                String tokenNumTxt = colors_hex.HEADER + colors_hex.RED + " " + loaded + "/" + needed + colors_hex.FOOTER;
                 if (needed == loaded)
                 {
-                    tokenNumTxt = "\\" + colors_hex.GREEN + " " + loaded + "/" + needed + " \\#.";
+                    tokenNumTxt = colors_hex.HEADER+ colors_hex.GREEN + " " + loaded + "/" + needed + colors_hex.FOOTER;
                 }
                 blueprintData = blueprintData + tokenName + ":" + tokenNumTxt + "\n";
             }

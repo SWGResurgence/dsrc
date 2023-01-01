@@ -476,7 +476,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -491,7 +491,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch6(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -781,7 +781,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1071,7 +1071,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch8(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1109,7 +1109,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1147,7 +1147,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch10(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1241,7 +1241,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1402,7 +1402,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch12(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1485,7 +1485,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1519,7 +1519,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1534,7 +1534,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1695,7 +1695,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1710,7 +1710,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch23(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1725,7 +1725,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1763,7 +1763,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1943,7 +1943,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch29(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1957,7 +1957,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1995,7 +1995,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch32(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2035,7 +2035,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2196,7 +2196,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch35(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2234,7 +2234,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2336,7 +2336,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2497,7 +2497,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2566,7 +2566,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch39(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2668,7 +2668,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch40(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2829,7 +2829,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch42(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2898,7 +2898,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch43(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3000,7 +3000,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch44(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3161,7 +3161,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch46(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3263,7 +3263,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3424,7 +3424,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3493,7 +3493,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3595,7 +3595,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch51(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3756,7 +3756,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch53(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3825,7 +3825,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch54(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -3927,7 +3927,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch55(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4088,7 +4088,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch57(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4190,7 +4190,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch58(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4351,7 +4351,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch60(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4366,7 +4366,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int imperial_empire_day_major_tantor_handleBranch62(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -4381,7 +4381,7 @@ public class imperial_empire_day_major_tantor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

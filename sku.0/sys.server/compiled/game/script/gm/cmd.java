@@ -3,6 +3,7 @@ package script.gm;
 import script.*;
 import script.library.*;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -82,34 +83,40 @@ public class cmd extends script.base_script
 
     public int cmdForceCommand(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
-        if (!isIdValid(target) || !isPlayer(target) || params == null || params.equalsIgnoreCase(""))
-        {
-            sendSystemMessageTestingOnly(self, "[Syntax] /forceCommand -target <command> <params> (with lookat target)");
-            return SCRIPT_CONTINUE;
-        }
-        if (params.contains(gm.KEYWORD_TARGET))
-        {
-            params = gm.removeKeyword(params, gm.KEYWORD_TARGET);
-        }
-        else
-        {
-            sendSystemMessageTestingOnly(self, "[Syntax] /forceCommand -target <command> <params> (with lookat target)");
+        if(!isGod(self)) {
             return SCRIPT_CONTINUE;
         }
         StringTokenizer st = new StringTokenizer(params);
-        String cmd = st.nextToken();
-        obj_id cmdTarget = null;
-        String cmdParams = "";
-        while (st.hasMoreTokens())
-        {
-            String tmp = st.nextToken();
-            if (tmp != null && !tmp.equalsIgnoreCase(""))
-            {
-                cmdParams += tmp + " ";
+        if(!st.hasMoreTokens()) {
+            sendSystemMessageTestingOnly(self, "Syntax: /forceCommand <-target OR <oid>> </command with params>");
+            sendSystemMessageTestingOnly(self, "Example: /forceCommand 9248492842 /tell aconite hi");
+        } else {
+            String focus = st.nextToken();
+            if(focus.contains("target")) {
+                target = getLookAtTarget(self);
+            } else {
+                if (focus.matches(".*\\d.*")) {
+                    target = obj_id.getObjId(Long.parseLong(focus));
+                } else {
+                    sendSystemMessageTestingOnly(self, "Syntax: /forceCommand <-target OR objId> <command with params>");
+                    sendSystemMessageTestingOnly(self, "Example: /forceCommand 9248492842 tell bubba-joe hii");
+                    return SCRIPT_CONTINUE;
+                }
             }
+            if(!isIdValid(target) || !isPlayer(target)) {
+                sendSystemMessageTestingOnly(self, "forceCommand: Error: Target was not valid. Target must be a player.");
+                return SCRIPT_CONTINUE;
+            }
+            if(!st.hasMoreTokens()) {
+                sendSystemMessageTestingOnly(self, "Syntax: /forceCommand <-target OR objId> <command with params>");
+                sendSystemMessageTestingOnly(self, "Example: /forceCommand 9248492842 tell bubba-joe hi");
+            } else {
+                String cmd = st.nextToken("").replaceFirst(" ", "/");
+                sendConsoleCommand(cmd, target);
+                sendSystemMessageTestingOnly(self, "forceCommand: Successfully sent forceful command "+cmd+" request to "+getPlayerName(target)+ "("+target+").");
+            }
+            return SCRIPT_CONTINUE;
         }
-        cmdParams.trim();
-        sendSystemMessageTestingOnly(self, "/forceCommand: attempting to queue command: '" + cmd + " " + cmdParams + "' for (" + target + ")" + getName(target));
         return SCRIPT_CONTINUE;
     }
 
@@ -1941,7 +1948,6 @@ public class cmd extends script.base_script
         loot.randomizeComponent(target, level, target);
         setCraftedId(target, source);
         setCrafter(target, self);
-        setObjVar(target, "csr.loot.creator", self);
         if (bonus > 1)
         {
             string_id item_sid = getNameStringId(target);
@@ -1954,10 +1960,13 @@ public class cmd extends script.base_script
             {
                 prefix = new string_id("obj_n", "exceptional_prefix");
             }
-            String name = localize(item_sid) + " (" + localize(prefix) + ")";
+            String goldhex = "\\#FFD700";
+            String whitehex = "\\#FFFFFF";
+            String name = goldhex + localize(item_sid) + " (" + localize(prefix) + ")" + whitehex;
             setName(target, name);
         }
-        CustomerServiceLog("loot", "CSR: %TU has created %TT at level " + level + " and at rarity bonus " + bonus, self, target);
+        //this isn't logging? wrong formatting? unsure.
+        // CustomerServiceLog("loot", "CSR: %TU has created %TT at level " + level + " and at rarity bonus " + bonus, self, target);
         sendSystemMessageTestingOnly(self, "Component initialization complete.");
         return SCRIPT_CONTINUE;
     }
@@ -2035,9 +2044,9 @@ public class cmd extends script.base_script
                 }
                 intensity = (tempIntensity / 100.0f);
             }
-            if (intensity > 1.25f)
+            if (intensity > 20f)
             {
-                intensity = 1.25f;
+                intensity = 20f;
             }
             if (weapons.createWeapon(schematicId, self, weapons.VIA_SCHEMATIC, intensity) == null)
             {
@@ -2098,7 +2107,7 @@ public class cmd extends script.base_script
         }
         else
         {
-            sendSystemMessageTestingOnly(self, "format: /cmdGmWeapon <command> (params)   OR   /cmdGmWeapon ? for help");
+            sendSystemMessageTestingOnly(self, "format: /GmWeapon <command> (params)   OR   /GmWeapon ? for help");
         }
         return SCRIPT_CONTINUE;
     }
@@ -3748,9 +3757,9 @@ public class cmd extends script.base_script
             }
             if (canAutoStack && count > 0)
             {
-                for (int i = count; i > 0; i = i - 500)
+                for (int i = count; i > 0; i = i - 9999)
                 {
-                    int tempCount = Math.min(i, 500);
+                    int tempCount = Math.min(i, 9999);
                     staticItemId = static_item.createNewItemFunction(itemName, inventory, tempCount);
                 }
             }
@@ -4500,7 +4509,44 @@ public class cmd extends script.base_script
             showAdminCmdSyntax(self);
             return SCRIPT_CONTINUE;
         }
+        if(command.equalsIgnoreCase("compileScripts") || command.equalsIgnoreCase("cs"))
+        {
+            final String result = system_process.runAndGetOutput("ant compile_java", new File("../../"));
+            if(result.contains("BUILD SUCCESSFUL"))
+            {
+                sendSystemMessageTestingOnly(self, "compileScripts: ant compile_java BUILD SUCCESSFUL.");
+            }
+            else
+            {
+                sendSystemMessageTestingOnly(self, "compileScripts: ERROR or BUILD FAILED. Sending output to console.");
+                sendConsoleMessage(self, result);
+            }
+            return SCRIPT_CONTINUE;
+        }
 
+        if(command.equalsIgnoreCase("compileAndReloadScript") || command.equalsIgnoreCase("crs"))
+        {
+            if(!st.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin crs <script>");
+            }
+            else
+            {
+                final String script = st.nextToken();
+                final String result = system_process.runAndGetOutput("ant compile_java", new File("../../"));
+                if(result.contains("BUILD SUCCESSFUL"))
+                {
+                    sendSystemMessageTestingOnly(self, "compileAndReloadScript: ant compile_java BUILD SUCCESSFUL. Reloading "+script+"...");
+                    sendConsoleCommand("/script reload "+script, self);
+                }
+                else
+                {
+                    sendSystemMessageTestingOnly(self, "compileAndReloadScript: ERROR or BUILD FAILED. Sending output to console.");
+                    sendConsoleMessage(self, result);
+                }
+            }
+            return SCRIPT_CONTINUE;
+        }
         if (command.equalsIgnoreCase("dumpPermsForCell"))
         {
 
@@ -5219,7 +5265,7 @@ public class cmd extends script.base_script
         setCount(target, utils.stringToInt(params));
         return SCRIPT_CONTINUE;
     }
-    public static int spawnRing(obj_id self, int numMobs, float radius, location loc, String creatureName) throws InterruptedException
+    public int spawnRing(obj_id self, int numMobs, float radius, location loc, String creatureName) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
         {
@@ -5234,6 +5280,15 @@ public class cmd extends script.base_script
             z = loc.z + (float) Math.sin(angle) * radius;
             obj_id creatureObj = create.object(creatureName, new location(x, getHeightAtLocation(x,z), z, loc.area));
             faceTo(creatureObj, self);
+        }
+        return SCRIPT_CONTINUE;
+    }
+    public int OnAttach(obj_id self) throws InterruptedException
+    {
+        if (!hasScript(self, "developer.soe.beta.test_create"))
+        {
+            attachScript(self, "developer.soe.beta.test_create");
+            //@TODO: Remove this when SRC is changed to reflect this update.
         }
         return SCRIPT_CONTINUE;
     }

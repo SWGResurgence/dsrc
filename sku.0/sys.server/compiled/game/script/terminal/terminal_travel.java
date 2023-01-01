@@ -8,17 +8,19 @@ import script.*;
 
 public class terminal_travel extends script.base_script
 {
+    public static final string_id SID_TRAVEL_OPTIONS = new string_id("travel", "purchase_ticket");
+    public static final string_id SID_BANNED_TICKET = new string_id("city/city", "banned_services");
     public terminal_travel()
     {
     }
-    public static final string_id SID_TRAVEL_OPTIONS = new string_id("travel", "purchase_ticket");
-    public static final string_id SID_BANNED_TICKET = new string_id("city/city", "banned_services");
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         obj_id starport = travel.getStarportFromTerminal(self);
         LOG("LOG_CHANNEL", "terminal_travel::OnUnloadedFromMemory -- " + self + " from starport " + starport);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data data = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -26,12 +28,13 @@ public class terminal_travel extends script.base_script
         {
             data.setServerNotify(true);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_TRAVEL_OPTIONS);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

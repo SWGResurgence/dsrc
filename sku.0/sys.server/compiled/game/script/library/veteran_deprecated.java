@@ -97,14 +97,17 @@ public class veteran_deprecated extends script.base_script
     public static final string_id SID_UNAVAILABLE_NEEDS_EXPANSION = new string_id(VETERAN_STRING_TABLE, "unavailable_needs_expansion");
     public static final string_id SID_UNAVAILABLE_NOT_ENOUGH_MILESTONE = new string_id(VETERAN_STRING_TABLE, "unavailable_not_enough_milestone");
     public static final string_id SID_UNKNOWN = new string_id(VETERAN_STRING_TABLE, "unknown");
+    private static final boolean VETERAN_REWARDS_ENABLED = utils.checkConfigFlag("GameServer", "enableVeteranRewards");
+    private static final boolean ONE_YEAR_ANNIV_ENABLED = utils.checkConfigFlag("GameServer", "enableOneYearAnniversary");
+    private static final boolean FLASH_SPEEDER_REWARD_ENABLED = utils.checkConfigFlag("GameServer", "flashSpeederReward");
+
     public static void updateVeteranTime(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
         {
             return;
         }
-        if (!("true").equals(getConfigSetting("GameServer", "enableVeteranRewards")))
-        {
+        if (!VETERAN_REWARDS_ENABLED) {
             return;
         }
         if ((player.getScriptVars()).hasKey(SCRIPTVAR_VETERAN_LOGGED_IN))
@@ -124,7 +127,7 @@ public class veteran_deprecated extends script.base_script
             setObjVar(player, OBJVAR_REWARDS_RECEIVED, new int[REWARD_FLAGS_SIZE]);
             setObjVar(player, OBJVAR_MILESTONES_NOTIFIED, new int[REWARD_FLAGS_SIZE]);
         }
-        else 
+        else
         {
             setObjVar(player, OBJVAR_TIME_ACTIVE, totalEntitledTime);
         }
@@ -172,7 +175,7 @@ public class veteran_deprecated extends script.base_script
                 {
                     milestonesText.add(((i + 1) * DAYS_PER_MILESTONE) + daysText + " (" + alreadyClaimedText + ")");
                 }
-                else 
+                else
                 {
                     milestonesText.add(((i + 1) * DAYS_PER_MILESTONE) + daysText);
                 }
@@ -219,7 +222,7 @@ public class veteran_deprecated extends script.base_script
                     {
                         name += "#";
                     }
-                    else 
+                    else
                     {
                         name += " #";
                     }
@@ -247,13 +250,13 @@ public class veteran_deprecated extends script.base_script
                     {
                         name = name + " (" + needsExpansionText + ")";
                     }
-                    else 
+                    else
                     {
                         name = name + " (" + unavailableText + ")";
                     }
                 }
             }
-            else 
+            else
             {
                 availableRewards.add(unknownText);
             }
@@ -420,7 +423,7 @@ public class veteran_deprecated extends script.base_script
                 }
                 onetimesNew[onetimes.length] = templateCrc;
             }
-            else 
+            else
             {
                 onetimesNew = new int[1];
                 onetimesNew[0] = templateCrc;
@@ -454,7 +457,7 @@ public class veteran_deprecated extends script.base_script
         {
             name = "@" + nameId;
         }
-        else 
+        else
         {
             CustomerServiceLog("veteran", "Could not find reward at index " + index);
         }
@@ -474,42 +477,6 @@ public class veteran_deprecated extends script.base_script
                         return CAN_GET_REWARD_FAIL_ALREADY_CLAIMED;
                     }
                 }
-            }
-        }
-        int requiredBit = dataTableGetInt(REWARDS_DATATABLE, index, REWARDS_COLUMN_REQUIREDGAMEFEATUREBITANY);
-        if (requiredBit > 0)
-        {
-            int game_bits = getGameFeatureBits(player);
-            if ((game_bits & requiredBit) == 0)
-            {
-                return CAN_GET_REWARD_FAIL_INADEQUATE_SUBSCRIPTION;
-            }
-        }
-        requiredBit = dataTableGetInt(REWARDS_DATATABLE, index, REWARDS_COLUMN_REQUIREDGAMEFEATUREBITALL);
-        if (requiredBit > 0)
-        {
-            int game_bits = getGameFeatureBits(player);
-            if ((game_bits & requiredBit) != requiredBit)
-            {
-                return CAN_GET_REWARD_FAIL_INADEQUATE_SUBSCRIPTION;
-            }
-        }
-        requiredBit = dataTableGetInt(REWARDS_DATATABLE, index, REWARDS_COLUMN_REQUIREDSUBSCRIPTIONFEATUREBITANY);
-        if (requiredBit > 0)
-        {
-            int sub_bits = getSubscriptionFeatureBits(player);
-            if ((sub_bits & requiredBit) == 0)
-            {
-                return CAN_GET_REWARD_FAIL_INADEQUATE_SUBSCRIPTION;
-            }
-        }
-        requiredBit = dataTableGetInt(REWARDS_DATATABLE, index, REWARDS_COLUMN_REQUIREDSUBSCRIPTIONFEATUREBITALL);
-        if (requiredBit > 0)
-        {
-            int sub_bits = getSubscriptionFeatureBits(player);
-            if ((sub_bits & requiredBit) != requiredBit)
-            {
-                return CAN_GET_REWARD_FAIL_INADEQUATE_SUBSCRIPTION;
             }
         }
         int rewardMilestone = dataTableGetInt(REWARDS_DATATABLE, index, REWARDS_COLUMN_MILESTONE);
@@ -628,12 +595,12 @@ public class veteran_deprecated extends script.base_script
             {
                 return true;
             }
-            else 
+            else
             {
                 sendSystemMessage(getSelf(), veteran_deprecated.SID_SYSTEM_INACTIVE);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(getSelf(), veteran_deprecated.SID_INVALID_TARGET);
         }
@@ -641,8 +608,7 @@ public class veteran_deprecated extends script.base_script
     }
     public static void giveOneYearAnniversaryReward(obj_id player) throws InterruptedException
     {
-        if (!("true").equals(getConfigSetting("GameServer", "enableOneYearAnniversary")))
-        {
+        if(!ONE_YEAR_ANNIV_ENABLED) {
             return;
         }
         if (!isPlayer(player))
@@ -698,42 +664,22 @@ public class veteran_deprecated extends script.base_script
     }
     public static boolean checkFlashSpeederReward(obj_id player) throws InterruptedException
     {
-        if (!isIdValid(player))
-        {
-            LOG("flash_speeder", "veteran_deprecated.checkFlashSpeeder: Player is invalid.");
-            return false;
-        }
-        if (!isPlayer(player))
-        {
-            LOG("flash_speeder", "veteran_deprecated.checkFlashSpeeder: " + player + " is not a player.");
-            return false;
-        }
-        if (isUsingAdminLogin(player))
+        if (!isIdValid(player) || !isPlayer(player))
         {
             return false;
         }
-        String config = getConfigSetting("GameServer", "flashSpeederReward");
-        if (config != null && config.equals("true"))
-        {
-            int sub_bits = getGameFeatureBits(player);
-            if (hasObjVar(player, "flash_speeder.eligible"))
-            {
-                sub_bits = getIntObjVar(player, "flash_speeder.eligible");
-            }
-            if ((features.isSpaceEdition(player) && utils.checkBit(sub_bits, 3)) || features.isJPCollectorEdition(player))
-            {
-                if (!hasObjVar(player, "flash_speeder.granted"))
-                {
-                    createObjectInInventoryAllowOverload("object/tangible/deed/vehicle_deed/speederbike_flash_deed.iff", player);
-                    CustomerServiceLog("flash_speeder", "%TU has received a JtL pre-order Flash Speeder.", player);
-                    string_id sub = new string_id(VETERAN_STRING_TABLE, "flash_speeder_granted_sub");
-                    string_id body = new string_id(VETERAN_STRING_TABLE, "flash_speeder_granted_body");
-                    utils.sendMail(sub, body, player, "System");
-                    setObjVar(player, "flash_speeder.granted", 1);
-                    return true;
-                }
+        if (FLASH_SPEEDER_REWARD_ENABLED) {
+            if (!hasObjVar(player, "flash_speeder.granted")) {
+                createObjectInInventoryAllowOverload("object/tangible/deed/vehicle_deed/speederbike_flash_deed.iff", player);
+                CustomerServiceLog("flash_speeder", "%TU has received a JtL pre-order Flash Speeder.", player);
+                string_id sub = new string_id(VETERAN_STRING_TABLE, "flash_speeder_granted_sub");
+                string_id body = new string_id(VETERAN_STRING_TABLE, "flash_speeder_granted_body");
+                utils.sendMail(sub, body, player, "System");
+                setObjVar(player, "flash_speeder.granted", 1);
+                return true;
             }
         }
         return false;
     }
+
 }
