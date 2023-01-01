@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class fs_village_master extends script.base_script
 {
-
+    public fs_village_master()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

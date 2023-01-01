@@ -8,7 +8,9 @@ import script.*;
 
 public class wod_gethzerion extends script.base_script
 {
-
+    public wod_gethzerion()
+    {
+    }
     public static String c_stringFile = "conversation/wod_gethzerion";
     public boolean wod_gethzerion_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

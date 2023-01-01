@@ -8,7 +8,9 @@ import script.*;
 
 public class itp_vader_dark_jedi extends script.base_script
 {
-
+    public itp_vader_dark_jedi()
+    {
+    }
     public static String c_stringFile = "conversation/itp_vader_dark_jedi";
     public boolean itp_vader_dark_jedi_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

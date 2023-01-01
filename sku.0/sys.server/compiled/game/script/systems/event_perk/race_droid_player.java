@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class race_droid_player extends script.base_script
 {
-
+    public race_droid_player()
+    {
+    }
     public static final String RACING_STF = "theme_park/racing/racing";
     public int OnAttach(obj_id self) throws InterruptedException
     {

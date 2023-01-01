@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class museum_event_spawner extends script.base_script
 {
-
+    public museum_event_spawner()
+    {
+    }
     public static final String SCRIPT_NAME = "city.bestine.museum_event_spawner";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

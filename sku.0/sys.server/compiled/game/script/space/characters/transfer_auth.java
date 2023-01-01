@@ -5,7 +5,9 @@ import script.library.sui;
 
 public class transfer_auth extends script.base_script
 {
-
+    public transfer_auth()
+    {
+    }
     public static final string_id SID_READ = new string_id("space/quest", "read");
     public static final string_id SID_SYS_NOT_IN_INV = new string_id("space/quest", "not_in_inv");
     public static final string_id SID_SIGNED = new string_id("space/quest", "signed");

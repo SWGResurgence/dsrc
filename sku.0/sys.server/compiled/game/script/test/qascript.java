@@ -11,7 +11,9 @@ import java.util.HashSet;
 
 public class qascript extends script.base_script
 {
-
+    public qascript()
+    {
+    }
     public static final String TOOL_TITLE = "QA SCRIPT TOOL";
     public static final String TOOL_PROMPT = "This tool allows the tester to see what Scripts are currently attached to their character and attach/detach each script individually to troubleshoot problems or test functionality.\n\n\rCurrent Scripts Attached:\n";
     public static final String SCRIPTVAR = "qascript";

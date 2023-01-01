@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class player_shuttle extends script.systems.spawning.dropship.base
 {
-
+    public player_shuttle()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return super.OnAttach(self);

@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class cale_serasai extends script.base_script
 {
-
+    public cale_serasai()
+    {
+    }
     public static String c_stringFile = "conversation/cale_serasai";
     public boolean cale_serasai_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

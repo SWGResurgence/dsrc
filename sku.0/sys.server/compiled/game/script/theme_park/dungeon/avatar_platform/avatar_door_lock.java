@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class avatar_door_lock extends script.base_script
 {
-
+    public avatar_door_lock()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setAvatarDoorLocks(self);

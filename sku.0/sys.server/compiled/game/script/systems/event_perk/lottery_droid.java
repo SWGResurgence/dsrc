@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class lottery_droid extends script.base_script
 {
-
+    public lottery_droid()
+    {
+    }
     public static final String DATATABLE = "datatables/event_perk/lottery_setup_data.iff";
     public int OnAttach(obj_id self) throws InterruptedException
     {

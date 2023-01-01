@@ -7,7 +7,9 @@ import script.string_id;
 
 public class fs_combat_healing extends script.base_script
 {
-
+    public fs_combat_healing()
+    {
+    }
     public static final boolean DEBUGGING = false;
     public int receiveCreditForCombatHealing(obj_id self, dictionary params) throws InterruptedException
     {

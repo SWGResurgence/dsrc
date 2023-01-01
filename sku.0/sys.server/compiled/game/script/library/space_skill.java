@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class space_skill extends script.base_script
 {
-
+    public space_skill()
+    {
+    }
     public static final String WAYPOINT_BTN = "@space/space_interaction:retire_waypoint_btn";
     public static final String REBEL_WARNING = "@space/space_interaction:retire_rebel_warning";
     public static final String IMPERIAL_WARNING = "@space/space_interaction:retire_imperial_warning";

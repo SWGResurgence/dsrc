@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class open_hand extends script.base_script
 {
-
+    public open_hand()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_EXAR_OPEN);

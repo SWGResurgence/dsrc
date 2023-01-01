@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class base_theater extends script.base_script
 {
-
+    public base_theater()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, theater.VAR_STAMP, getGameTime());

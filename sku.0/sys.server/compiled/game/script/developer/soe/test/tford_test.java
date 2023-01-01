@@ -7,7 +7,9 @@ import script.string_id;
 
 public class tford_test extends script.base_script
 {
-
+    public tford_test()
+    {
+    }
     public int OnLootLotterySelected(obj_id self, obj_id target_id, obj_id[] selection_ids) throws InterruptedException
     {
         debugConsoleMsg(self, "loot lottery by " + self + " for " + target_id);

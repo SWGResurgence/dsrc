@@ -5,7 +5,9 @@ import script.library.trial;
 
 public class hangar_access extends script.base_script
 {
-
+    public hangar_access()
+    {
+    }
     public static final int STATE_NONE = 0;
     public static final int STATE_ACTIVE = 1;
     public static final int STATE_DONE = 2;

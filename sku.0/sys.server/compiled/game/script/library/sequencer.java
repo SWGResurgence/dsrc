@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class sequencer extends script.base_script
 {
-    
+    public sequencer()
+    {
+    }
     public static final int STOP_SEQUENCE = -1;
     public static final int CHANGE_TABLE = -2;
     public static obj_id getSequenceObject(String strIdentifier) throws InterruptedException

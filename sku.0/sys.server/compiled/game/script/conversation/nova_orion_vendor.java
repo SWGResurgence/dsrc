@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class nova_orion_vendor extends script.base_script
 {
-
+    public nova_orion_vendor()
+    {
+    }
     public static String c_stringFile = "conversation/nova_orion_vendor";
     public boolean nova_orion_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

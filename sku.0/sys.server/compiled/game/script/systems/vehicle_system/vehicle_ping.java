@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class vehicle_ping extends script.base_script
 {
-
+    public vehicle_ping()
+    {
+    }
     public static final String VCDPING_VCD_SCRIPT_NAME = "systems.vehicle_system.vcd_ping_response";
     public static final String VCDPING_SEND_MESSAGE_NUMBER = "vcdping.sendMsgNumber";
     public static final String VCDPING_LAST_ACK_MESSAGE_NUMBER = "vcdping.lastAckNumber";

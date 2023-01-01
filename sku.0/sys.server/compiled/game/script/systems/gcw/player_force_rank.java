@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class player_force_rank extends script.base_script
 {
-
+    public player_force_rank()
+    {
+    }
     public static final String SCRIPT_VAR_SUI_PID = "force_rank.vote_sui";
     public static final String SCRIPT_VAR_TERMINAL = "force_rank.vote_terminal";
     public static final String SCRIPT_VAR_PETITIONERS = "force_rank.vote_petitioners";

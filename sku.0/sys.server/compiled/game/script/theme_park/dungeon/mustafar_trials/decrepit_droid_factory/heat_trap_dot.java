@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class heat_trap_dot extends script.base_script
 {
-
+    public heat_trap_dot()
+    {
+    }
     public static final int DAMAGE = 2000;
     public static final int DURATION = 5;
     public static final boolean LOGGING = false;

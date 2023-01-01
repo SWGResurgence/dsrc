@@ -11,7 +11,9 @@ import script.vector;
 
 public class mining_asteroid_dynamic extends script.base_script
 {
-
+    public mining_asteroid_dynamic()
+    {
+    }
     public static final int MAX_RESOURCE = 1000000;
     public int OnAttach(obj_id self) throws InterruptedException
     {

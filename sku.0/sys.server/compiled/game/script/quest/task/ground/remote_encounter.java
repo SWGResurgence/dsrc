@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class remote_encounter extends script.quest.task.ground.base_task
 {
-
+    public remote_encounter()
+    {
+    }
     public static final String taskType = "remote_encounter";
     public static final String dataTableColumnCreatureName = "CREATURE_NAME";
     public static final String dataTableColumnEncounterSceneName = "ENCOUNTER_SCENE_NAME";

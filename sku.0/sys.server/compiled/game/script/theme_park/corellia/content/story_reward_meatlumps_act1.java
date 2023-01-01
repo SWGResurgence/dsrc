@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class story_reward_meatlumps_act1 extends script.base_script
 {
-
+    public story_reward_meatlumps_act1()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "getQuestPlayerName", null, 1, false);

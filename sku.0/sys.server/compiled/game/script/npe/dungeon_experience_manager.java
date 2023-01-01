@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class dungeon_experience_manager extends script.base_script
 {
-
+    public dungeon_experience_manager()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id droidCell = getCellId(self, "cave_entrance");

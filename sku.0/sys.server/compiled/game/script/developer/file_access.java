@@ -8,7 +8,9 @@ import java.io.FileWriter;
 
 public class file_access extends script.base_script
 {
-
+    public file_access()
+    {
+    }
 
     public static String readTextFile(String fileName) throws InterruptedException
     {

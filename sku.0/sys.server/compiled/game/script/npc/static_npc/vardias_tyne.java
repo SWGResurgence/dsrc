@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class vardias_tyne extends script.base_script
 {
-    
+    public vardias_tyne()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/shirt/shirt_s07.iff", self, "");

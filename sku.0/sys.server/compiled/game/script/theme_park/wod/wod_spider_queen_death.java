@@ -18,7 +18,9 @@ import script.library.static_item;
 
 public class wod_spider_queen_death extends script.base_script
 {
-
+    public wod_spider_queen_death()
+    {
+    }
     public static final String NS_BACKPACK_SCHEMATIC = "item_wod_bossloot_ns_backpack";
     public static final String SMC_BACKPACK_SCHEMATIC = "item_wod_bossloot_smc_backpack";
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException

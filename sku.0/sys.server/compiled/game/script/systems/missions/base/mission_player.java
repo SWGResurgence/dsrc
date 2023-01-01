@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class mission_player extends script.systems.missions.base.mission_player_base
 {
-
+    public mission_player()
+    {
+    }
     public static final String[] OPS_APPEARANCES = 
     {
         "object/mobile/dressed_rebel_trooper_human_female_01.iff",

@@ -8,7 +8,9 @@ import script.string_id;
 
 public class som_order_rewards extends script.base_script
 {
-
+    public som_order_rewards()
+    {
+    }
     public static final String STF = "som/som_item";
     public static final string_id EXAMINE_MOUNT = new string_id(STF, "generate_lava_flea");
     public static final string_id EXAMINE_VEHICLE = new string_id(STF, "generate_skiff");

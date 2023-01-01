@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class universal_trainer extends script.base_script
 {
-
+    public universal_trainer()
+    {
+    }
     public static final String skill_table = "datatables/npc_customization/skill_table.iff";
     public int OnAttach(obj_id self) throws InterruptedException
     {

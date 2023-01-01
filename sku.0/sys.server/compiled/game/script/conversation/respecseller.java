@@ -5,7 +5,9 @@ import script.*;
 
 public class respecseller extends script.base_script
 {
-
+    public respecseller()
+    {
+    }
     public static String c_stringFile = "conversation/respecseller";
     public boolean respecseller_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

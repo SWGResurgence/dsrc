@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class wampa_boss extends script.base_script
 {
-
+    public wampa_boss()
+    {
+    }
     public static final String ADDS_VAR_BASE = "uncleJoeAdds";
     public static final String TEN_PERCENT = ADDS_VAR_BASE + ".tenPercent";
     public static final String TWENTY_PERCENT = ADDS_VAR_BASE + ".twentyPercent";

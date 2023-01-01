@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class obiwan_fader_handler extends script.base_script
 {
-
+    public obiwan_fader_handler()
+    {
+    }
     public static final boolean CONST_FLAG_DO_LOGGING = false;
     public void debugLogging(String section, String message) throws InterruptedException
     {

@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class volleytarget extends script.base_script
 {
-
+    public volleytarget()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id[] me = new obj_id[]

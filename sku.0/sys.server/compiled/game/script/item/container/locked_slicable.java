@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class locked_slicable extends script.base_script
 {
-
+    public locked_slicable()
+    {
+    }
     public static final string_id SID_SLICE = new string_id("slicing/slicing", "slice");
     public static final string_id SID_LOCKED = new string_id("slicing/slicing", "locked");
     public static final string_id SID_BROKEN = new string_id("slicing/slicing", "broken");

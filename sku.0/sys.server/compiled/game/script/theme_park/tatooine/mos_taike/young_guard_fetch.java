@@ -5,7 +5,9 @@ import script.library.*;
 
 public class young_guard_fetch extends script.base_script
 {
-
+    public young_guard_fetch()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");

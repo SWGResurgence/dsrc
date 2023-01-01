@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_etyyy_banol_starkiller extends script.base_script
 {
-
+    public ep3_etyyy_banol_starkiller()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_etyyy_banol_starkiller";
     public boolean ep3_etyyy_banol_starkiller_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

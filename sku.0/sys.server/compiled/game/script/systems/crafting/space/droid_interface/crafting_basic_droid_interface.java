@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_basic_droid_interface extends script.systems.crafting.space.droid_interface.crafting_base_droid_interface
 {
-
+    public crafting_basic_droid_interface()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

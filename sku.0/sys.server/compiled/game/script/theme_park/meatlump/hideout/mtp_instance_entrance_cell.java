@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class mtp_instance_entrance_cell extends script.base_script
 {
-
+    public mtp_instance_entrance_cell()
+    {
+    }
     public static final String LEVEL_CONTROL_TEMPLATE = "object/tangible/meatlump/hideout/mtp_hideout_instance_entryb_controller.iff";
     public int OnReceivedItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {

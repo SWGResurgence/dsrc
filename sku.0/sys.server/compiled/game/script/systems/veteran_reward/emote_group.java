@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class emote_group extends script.base_script
 {
-
+    public emote_group()
+    {
+    }
     public static final String OBJVAR_GROUP_GAINED = "group";
     public static final String OBJVAR_GROUP_REWARDED = "rewarded";
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException

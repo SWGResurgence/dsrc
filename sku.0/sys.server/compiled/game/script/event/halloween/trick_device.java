@@ -5,7 +5,9 @@ import script.library.*;
 
 public class trick_device extends script.base_script
 {
-
+    public trick_device()
+    {
+    }
     private static final String HALLOWEEN = "event/halloween";
     private static final string_id TRICK_OPTION_1_ID = new string_id(HALLOWEEN, "halloween_trick_1");
     private static final string_id TRICK_OPTION_2_ID = new string_id(HALLOWEEN, "halloween_trick_2");

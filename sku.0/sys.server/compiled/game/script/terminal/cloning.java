@@ -5,7 +5,9 @@ import script.library.*;
 
 public class cloning extends script.terminal.base.base_terminal
 {
-
+    public cloning()
+    {
+    }
     public static final String HANDLER_CLONE_CONFIRM = "handleCloneConfirm";
     public static final String HANDLER_CLONE_COUPON_CONFIRM = "handleCloneCouponConfirm";
     public static final string_id SID_SET_BIND_PT = new string_id("sui", "mnu_clone");

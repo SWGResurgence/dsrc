@@ -7,7 +7,9 @@ public class naboo_medium extends script.creature_spawner.base_newbie_creature_s
     public static final boolean SPAWNER_DISABLED = false;
     public int maxPop = 4;
 
-
+    public naboo_medium()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnCreatures(self);

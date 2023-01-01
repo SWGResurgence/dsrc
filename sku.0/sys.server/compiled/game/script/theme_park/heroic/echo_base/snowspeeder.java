@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class snowspeeder extends script.base_script
 {
-
+    public snowspeeder()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.creature_combat");

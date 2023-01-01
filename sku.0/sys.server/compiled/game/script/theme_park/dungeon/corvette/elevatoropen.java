@@ -4,7 +4,9 @@ import script.*;
 
 public class elevatoropen extends script.base_script
 {
-
+    public elevatoropen()
+    {
+    }
     public static final String MSGS = "dungeon/corvette";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

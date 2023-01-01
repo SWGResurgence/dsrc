@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class elite_guard extends script.base_script
 {
-
+    public elite_guard()
+    {
+    }
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

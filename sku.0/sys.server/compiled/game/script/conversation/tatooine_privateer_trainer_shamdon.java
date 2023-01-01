@@ -5,7 +5,9 @@ import script.*;
 
 public class tatooine_privateer_trainer_shamdon extends script.base_script
 {
-
+    public tatooine_privateer_trainer_shamdon()
+    {
+    }
     public static String c_stringFile = "conversation/tatooine_privateer_trainer_shamdon";
     public boolean tatooine_privateer_trainer_shamdon_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

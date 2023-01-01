@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class bug_spawner_tracker extends script.base_script
 {
-
+    public bug_spawner_tracker()
+    {
+    }
     public static final String PATH_MAX = "pathMax";
     public static final boolean LOGGING = false;
     public int OnDestroy(obj_id self) throws InterruptedException

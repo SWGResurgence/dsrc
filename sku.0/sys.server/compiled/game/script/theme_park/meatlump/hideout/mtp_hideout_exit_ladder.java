@@ -4,7 +4,9 @@ import script.*;
 
 public class mtp_hideout_exit_ladder extends script.base_script
 {
-
+    public mtp_hideout_exit_ladder()
+    {
+    }
     public static final String STF_FILE = "elevator_text";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

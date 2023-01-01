@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class qa_cybernetic extends script.base_script
 {
-
+    public qa_cybernetic()
+    {
+    }
     public static final String SCRIPTVAR = "qacybernetic";
     public static final int INSTALL_OPTION = 0;
     public static final int UNINSTALL_OPTION = 1;

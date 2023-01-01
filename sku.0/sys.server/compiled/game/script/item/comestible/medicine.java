@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class medicine extends script.base_script
 {
-
+    public medicine()
+    {
+    }
     public static final String SCRIPT_MEDICINE = "item.comestible.medicine";
     public static final String MSG_TARGET_NOT_PLAYER = "@error_message:target_not_player";
     public static final string_id SID_TARGET_NOT_CREATURE = new string_id("error_message", "target_not_creature");

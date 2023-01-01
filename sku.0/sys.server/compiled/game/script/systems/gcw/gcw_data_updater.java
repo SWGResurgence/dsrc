@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class gcw_data_updater extends script.base_script
 {
-
+    public gcw_data_updater()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "updateGCWInfo", null, 1.0f, false);

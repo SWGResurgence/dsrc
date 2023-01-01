@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class wait_for_tasks extends script.base_script
 {
-
+    public wait_for_tasks()
+    {
+    }
     public int OnForceSensitiveQuestCompleted(obj_id self, String questName, boolean succeeded) throws InterruptedException
     {
         if (quests.isMyQuest(quests.getQuestId(questName), "quest.task.wait_for_tasks"))

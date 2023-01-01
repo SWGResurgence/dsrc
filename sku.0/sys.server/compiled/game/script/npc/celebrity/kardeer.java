@@ -7,7 +7,9 @@ import script.string_id;
 
 public class kardeer extends script.base_script
 {
-    
+    public kardeer()
+    {
+    }
     public static final String CONVO = "celebrity/kardeer";
     public int OnAttach(obj_id self) throws InterruptedException
     {

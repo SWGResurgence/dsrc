@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class sd_controller extends script.base_script
 {
-    
+    public sd_controller()
+    {
+    }
     public int saitDied(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getPlayersInDungeon(self);

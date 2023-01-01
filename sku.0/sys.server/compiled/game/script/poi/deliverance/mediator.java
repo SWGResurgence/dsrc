@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class mediator extends script.theme_park.poi.base
 {
-
+    public mediator()
+    {
+    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String VAR_RUNNING_SCENARIO = "running_scenario";
     public static final String HANDLER_TIMER = "handleTimer";

@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class event_one_boss extends script.base_script
 {
-
+    public event_one_boss()
+    {
+    }
     public static final String[] BUFF_LIST = 
     {
         "volc_boss_one_1",

@@ -9,7 +9,9 @@ import script.string_id;
 
 public class base extends script.base_script
 {
-
+    public base()
+    {
+    }
     public static final string_id SID_NO_FIREWORKS_IN_SPACE = new string_id("space/space_interaction", "no_fireworks_in_space");
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -5,7 +5,9 @@ import script.*;
 
 public class corvette_velso_imperial_destroy extends script.base_script
 {
-
+    public corvette_velso_imperial_destroy()
+    {
+    }
     public static String c_stringFile = "conversation/corvette_velso_imperial_destroy";
     public boolean corvette_velso_imperial_destroy_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

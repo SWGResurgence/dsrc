@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class invulnerable extends script.base_script
 {
-
+    public invulnerable()
+    {
+    }
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if(!isGod(self)) {

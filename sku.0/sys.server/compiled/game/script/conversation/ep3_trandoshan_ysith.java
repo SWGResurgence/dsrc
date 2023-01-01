@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_trandoshan_ysith extends script.base_script
 {
-
+    public ep3_trandoshan_ysith()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_trandoshan_ysith";
     public boolean ep3_trandoshan_ysith_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

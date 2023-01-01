@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class gcw_vehicle_boss_patrol extends script.base_script
 {
-
+    public gcw_vehicle_boss_patrol()
+    {
+    }
     public static final String bossImperials = "gcw_city_atat";
     public static final String bossRebels = "gcw_city_hailfire_droid";
     public int OnInitialize(obj_id self) throws InterruptedException

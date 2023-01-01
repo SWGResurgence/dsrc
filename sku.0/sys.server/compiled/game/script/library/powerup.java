@@ -7,7 +7,9 @@ import script.string_id;
 
 public class powerup extends script.base_script
 {
-
+    public powerup()
+    {
+    }
     public static final int DEFAULT_USE_COUNT = 500;
     public static final String VAR_POWERUP_BASE = "powerup";
     public static final String SCRIPT_WEAPON = VAR_POWERUP_BASE + ".weapon";

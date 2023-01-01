@@ -5,7 +5,9 @@ import script.*;
 
 public class greeter_dantooine_brother_imperial extends script.base_script
 {
-
+    public greeter_dantooine_brother_imperial()
+    {
+    }
     public static String c_stringFile = "conversation/greeter_dantooine_brother_imperial";
     public boolean greeter_dantooine_brother_imperial_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

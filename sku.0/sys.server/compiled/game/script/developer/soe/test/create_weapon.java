@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class create_weapon extends script.base_script
 {
-
+    public create_weapon()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isGod(self) || getGodLevel(self) < 10 || !isPlayer(self)) {

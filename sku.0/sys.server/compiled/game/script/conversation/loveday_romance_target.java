@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class loveday_romance_target extends script.base_script
 {
-
+    public loveday_romance_target()
+    {
+    }
     public static String c_stringFile = "conversation/loveday_romance_target";
     public boolean loveday_romance_target_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

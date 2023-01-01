@@ -5,7 +5,9 @@ import script.*;
 
 public class c_newbie_secondchance extends script.base_script
 {
-
+    public c_newbie_secondchance()
+    {
+    }
     public static String c_stringFile = "conversation/c_newbie_secondchance";
     public boolean c_newbie_secondchance_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

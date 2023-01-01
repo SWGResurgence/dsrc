@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class spawned_pirate_tracker extends script.base_script
 {
-
+    public spawned_pirate_tracker()
+    {
+    }
     public int OnIncapacitated(obj_id self, obj_id objAttacker) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "intCleanedUp"))

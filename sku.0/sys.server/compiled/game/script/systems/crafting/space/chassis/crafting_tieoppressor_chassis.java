@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_tieoppressor_chassis extends script.systems.crafting.space.chassis.crafting_base_tieoppressor_chassis
 {
-
+    public crafting_tieoppressor_chassis()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

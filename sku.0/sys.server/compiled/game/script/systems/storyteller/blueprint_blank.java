@@ -8,7 +8,9 @@ import script.*;
 
 public class blueprint_blank extends script.base_script
 {
-
+    public blueprint_blank()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("storyteller", "blueprint_record_data"));

@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_medpack_stimpack_chemistry extends script.systems.crafting.chemistry.crafting_base_stimpack
 {
-
+    public crafting_medpack_stimpack_chemistry()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

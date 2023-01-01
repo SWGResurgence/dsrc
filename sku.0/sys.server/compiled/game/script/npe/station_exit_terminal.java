@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class station_exit_terminal extends script.base_script
 {
-
+    public station_exit_terminal()
+    {
+    }
     public static final string_id EXIT_STATION = new string_id("npe", "exit_station");
     public int OnAttach(obj_id self) throws InterruptedException
     {

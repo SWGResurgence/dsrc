@@ -14,7 +14,9 @@ import java.util.Vector;
 
 public class generic_turret_ai extends script.systems.combat.combat_base_old
 {
-
+    public generic_turret_ai()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         turret.activateTurret(self);

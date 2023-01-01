@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class battlefield_terminal extends script.base_script
 {
-
+    public battlefield_terminal()
+    {
+    }
     public static final int NO_CONTROL = factions.FACTION_FLAG_UNKNOWN;
     public static final int IMPERIAL_CONTROL = factions.FACTION_FLAG_IMPERIAL;
     public static final int REBEL_CONTROL = factions.FACTION_FLAG_REBEL;

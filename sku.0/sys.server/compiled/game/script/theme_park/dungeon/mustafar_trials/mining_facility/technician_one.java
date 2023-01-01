@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class technician_one extends script.base_script
 {
-
+    public technician_one()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "content_tools.sequencer_master_object");

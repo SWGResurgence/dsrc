@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class emulsion_color extends script.base_script
 {
-
+    public emulsion_color()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String item = getTemplateName(self);

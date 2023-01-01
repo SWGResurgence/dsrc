@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class heroic_token_vendor extends script.base_script
 {
-
+    public heroic_token_vendor()
+    {
+    }
     public static String c_stringFile = "conversation/heroic_token_vendor";
     public boolean heroic_token_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class gcw_publish_gift_terminal extends script.terminal.base.base_terminal
 {
-
+    public gcw_publish_gift_terminal()
+    {
+    }
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

@@ -5,7 +5,9 @@ import script.*;
 
 public class static_gcw_base_naboo_imperial_reward_npc extends script.base_script
 {
-
+    public static_gcw_base_naboo_imperial_reward_npc()
+    {
+    }
     public static String c_stringFile = "conversation/static_gcw_base_naboo_imperial_reward_npc";
     public boolean static_gcw_base_naboo_imperial_reward_npc_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

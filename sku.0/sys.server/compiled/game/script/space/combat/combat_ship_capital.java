@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class combat_ship_capital extends script.space.combat.combat_space_base
 {
-
+    public combat_ship_capital()
+    {
+    }
     public static final string_id SID_TARGET_DISABLED = new string_id("space/quest", "target_disabled2");
     public static final int MAXIMUM_DAMAGE_PHASES = 9;
 

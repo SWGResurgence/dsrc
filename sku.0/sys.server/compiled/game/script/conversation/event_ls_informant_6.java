@@ -7,7 +7,9 @@ import script.*;
 
 public class event_ls_informant_6 extends script.base_script
 {
-
+    public event_ls_informant_6()
+    {
+    }
     public static String c_stringFile = "conversation/event_ls_informant_6";
     public boolean event_ls_informant_6_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

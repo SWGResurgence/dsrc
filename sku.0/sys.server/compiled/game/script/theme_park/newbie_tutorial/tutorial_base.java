@@ -5,7 +5,9 @@ import script.library.*;
 
 public class tutorial_base extends script.base_script
 {
-
+    public tutorial_base()
+    {
+    }
     public static final String NEWBIE_STRING_FILE = "newbie_tutorial/system_messages";
     public static final String NEWBIE_CONVO = "newbie_tutorial/newbie_convo";
     public static final String NEWBIE_SCRIPT = "theme_park.newbie_tutorial.newbie";

@@ -9,7 +9,9 @@ import script.string_id;
 
 public class obiwan_lair_boss extends script.base_script
 {
-
+    public obiwan_lair_boss()
+    {
+    }
     public static final String[] FORCE_ATTACK_ANIMS = 
     {
         "force_push",

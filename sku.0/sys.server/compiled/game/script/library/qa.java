@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class qa extends script.base_script
 {
-
+    public qa()
+    {
+    }
     public static final String[] QATOOL_MAIN_MENU = dataTableGetStringColumn("datatables/test/qa_tool_menu.iff", "main_tool");
     public static final String QATOOL_TITLE = "QA Tools";
     public static final String QATOOL_PROMPT = "Choose the tool you want to use";

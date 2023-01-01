@@ -5,7 +5,9 @@ import script.library.*;
 
 public class quest_holocron extends script.base_script
 {
-
+    public quest_holocron()
+    {
+    }
     public static final int MENU_ACTIVATE_QUEST = menu_info_types.SERVER_MENU1;
     public static final int MENU_RATE_QUEST = menu_info_types.SERVER_MENU2;
     public static final int MENU_CLAIM_REWARDS = menu_info_types.SERVER_MENU3;

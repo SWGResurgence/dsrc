@@ -6,7 +6,9 @@ import script.library.weapons;
 
 public class crafting_new_weapon_final extends script.systems.crafting.crafting_base
 {
-
+    public crafting_new_weapon_final()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {

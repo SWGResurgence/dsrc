@@ -6,7 +6,9 @@ import script.*;
 
 public class keanna_likyna extends script.base_script
 {
-
+    public keanna_likyna()
+    {
+    }
     public static String c_stringFile = "conversation/keanna_likyna";
     public boolean keanna_likyna_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

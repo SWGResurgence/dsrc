@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class heal_medicine extends script.base_script
 {
-
+    public heal_medicine()
+    {
+    }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

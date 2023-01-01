@@ -7,7 +7,9 @@ import script.*;
 
 public class relay_station_terminal extends script.base_script
 {
-
+    public relay_station_terminal()
+    {
+    }
     public static final String REBEL_STF = "theme_park/alderaan/act2/rebel_missions";
     public static final String REBEL_SHARED_STF = "theme_park/alderaan/act2/shared_rebel_missions";
     public static final string_id MESSAGE_SENT = new string_id(REBEL_SHARED_STF, "message_sent");

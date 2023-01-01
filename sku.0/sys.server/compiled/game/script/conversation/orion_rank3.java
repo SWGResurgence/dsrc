@@ -5,7 +5,9 @@ import script.*;
 
 public class orion_rank3 extends script.base_script
 {
-
+    public orion_rank3()
+    {
+    }
     public static String c_stringFile = "conversation/orion_rank3";
     public boolean orion_rank3_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

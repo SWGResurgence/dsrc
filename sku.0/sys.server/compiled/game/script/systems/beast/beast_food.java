@@ -10,7 +10,9 @@ import script.string_id;
 
 public class beast_food extends script.base_script
 {
-    
+    public beast_food()
+    {
+    }
     public static final string_id SID_FEED_BEAST = new string_id("beast", "menu_feed");
     public int OnAttach(obj_id self) throws InterruptedException
     {

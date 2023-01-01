@@ -5,7 +5,9 @@ import script.library.*;
 
 public class camp_master extends script.base_script
 {
-
+    public camp_master()
+    {
+    }
     public static final String TOTAL_XP = "total_xp";
     public static final int CAMP_TICK_XP = 25;
     public static final int XP_MAX[] = 

@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class junk_sneg_valarian extends script.base_script
 {
-
+    public junk_sneg_valarian()
+    {
+    }
     public static String c_stringFile = "conversation/junk_sneg_valarian";
     public boolean junk_sneg_valarian_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

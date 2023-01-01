@@ -9,7 +9,9 @@ import script.string_id;
 
 public class homing_beacon extends script.base_script
 {
-
+    public homing_beacon()
+    {
+    }
     public static final string_id NOT_OWNER = new string_id("spam", "homing_not_owner");
     public static final string_id BEACON_ACTIVE = new string_id("spam", "homing_activated");
     public static final string_id BEACON_DESTROY = new string_id("spam", "homing_destroy");

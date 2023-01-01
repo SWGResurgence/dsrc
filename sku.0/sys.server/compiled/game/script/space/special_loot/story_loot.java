@@ -8,7 +8,9 @@ import script.string_id;
 
 public class story_loot extends script.base_script
 {
-
+    public story_loot()
+    {
+    }
     public static final string_id SID_READ = new string_id("space/quest", "read");
     public static final string_id SID_SYS_NOT_IN_INV = new string_id("space/quest", "not_in_inv");
     public static final String DATATABLE_NAME = "datatables/space_loot/story_loot.iff";

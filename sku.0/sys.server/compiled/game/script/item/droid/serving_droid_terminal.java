@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class serving_droid_terminal extends script.base_script
 {
-
+    public serving_droid_terminal()
+    {
+    }
     public static final String DROIDTEMPLATE = "object/creature/npc/droid/serving_droid.iff";
     public static final String MENU_FILE = "pet/pet_menu";
     public static final string_id TERMINAL_NAME = new string_id(MENU_FILE, "serving_droid_terminal_custom_name");

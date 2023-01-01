@@ -10,7 +10,9 @@ import script.string_id;
 
 public class trainer_spawner extends script.base_script
 {
-
+    public trainer_spawner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "msgTimeStamp"))

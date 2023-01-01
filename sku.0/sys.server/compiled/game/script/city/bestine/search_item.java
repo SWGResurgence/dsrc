@@ -8,7 +8,9 @@ import script.string_id;
 
 public class search_item extends script.base_script
 {
-
+    public search_item()
+    {
+    }
     public static final string_id SEARCH_ITEM = new string_id("bestine", "search_item");
     public static final string_id ALREADY_SEARCHED_MSG = new string_id("bestine", "already_searched");
     public static final string_id DEFAULT_RECEIVE_MSG = new string_id("bestine", "default_receive_msg");

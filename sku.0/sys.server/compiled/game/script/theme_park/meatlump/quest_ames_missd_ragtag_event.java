@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class quest_ames_missd_ragtag_event extends script.base_script
 {
-
+    public quest_ames_missd_ragtag_event()
+    {
+    }
     public static final String OWNER_SCRIPTVAR = "waveEventPlayer";
     public int OnAttach(obj_id self) throws InterruptedException
     {

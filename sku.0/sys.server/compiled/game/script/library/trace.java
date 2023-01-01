@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class trace extends script.base_script
 {
-    
+    public trace()
+    {
+    }
     public static final int TL_DEBUG = 1;
     public static final int TL_ERROR_LOG = 2;
     public static final int TL_CS_LOG = 4;

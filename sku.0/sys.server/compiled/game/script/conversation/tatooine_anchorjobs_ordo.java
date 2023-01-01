@@ -8,7 +8,9 @@ import script.*;
 
 public class tatooine_anchorjobs_ordo extends script.base_script
 {
-
+    public tatooine_anchorjobs_ordo()
+    {
+    }
     public static String c_stringFile = "conversation/tatooine_anchorjobs_ordo";
     public boolean tatooine_anchorjobs_ordo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class rapid_assembly_unit extends script.base_script
 {
-
+    public rapid_assembly_unit()
+    {
+    }
     public static final String DROID_COMBAT = "som_working_blastromech";
     public static final String DROID_ASSASSIN = "som_working_assassin_droid";
     public static final String DROID_BOMB = "som_working_detonation_droid";

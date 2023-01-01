@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class player_structure_deed extends script.base_script
 {
-
+    public player_structure_deed()
+    {
+    }
     public static final string_id SID_NO_PLACING_STRUCTURES_IN_SPACE = new string_id("space/space_interaction", "no_placing_structures_in_space");
     public static final String LIGHT_HARVESTERS[] = 
     {

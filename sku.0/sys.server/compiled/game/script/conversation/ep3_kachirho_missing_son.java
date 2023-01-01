@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_kachirho_missing_son extends script.base_script
 {
-
+    public ep3_kachirho_missing_son()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_kachirho_missing_son";
     public boolean ep3_kachirho_missing_son_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

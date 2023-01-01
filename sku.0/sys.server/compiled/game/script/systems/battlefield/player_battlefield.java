@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class player_battlefield extends script.base_script
 {
-
+    public player_battlefield()
+    {
+    }
     public static final String VAR_PLACED_STRUCTURE = "battlefield.placed_structure";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

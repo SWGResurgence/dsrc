@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class active_registered extends script.base_script
 {
-
+    public active_registered()
+    {
+    }
     public static final string_id SID_LOCATION_REGISTRATION_CANCELLED = new string_id("travel", "location_registration_cancelled");
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {

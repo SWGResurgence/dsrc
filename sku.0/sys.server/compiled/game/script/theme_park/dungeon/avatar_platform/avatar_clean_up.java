@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class avatar_clean_up extends script.base_script
 {
-
+    public avatar_clean_up()
+    {
+    }
     public int msgSpaceDungeonCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "avatar_platform"))

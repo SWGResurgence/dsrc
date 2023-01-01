@@ -4,7 +4,9 @@ import script.*;
 
 public class terminal_medicine extends script.base_script
 {
-
+    public terminal_medicine()
+    {
+    }
     public static final string_id SID_ORDER_DAMAGE_MEDICINE = new string_id("sui", "order_damage_medicine");
     public static final string_id SID_ORDER_WOUND_MEDICINE = new string_id("sui", "order_wound_medicine");
     public static final String VAR_CAN_USE_TERMINAL = "terminal.can_use_terminal";

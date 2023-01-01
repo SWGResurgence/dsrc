@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class theater_npc_spawn_special extends script.base_script
 {
-
+    public theater_npc_spawn_special()
+    {
+    }
     public int OnTheaterCreated(obj_id self, obj_id[] objects, obj_id player, obj_id creator) throws InterruptedException
     {
         location here = getLocation(self);

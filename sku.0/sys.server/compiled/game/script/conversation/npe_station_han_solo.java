@@ -8,7 +8,9 @@ import script.*;
 
 public class npe_station_han_solo extends script.base_script
 {
-
+    public npe_station_han_solo()
+    {
+    }
     public static String c_stringFile = "conversation/npe_station_han_solo";
     public boolean npe_station_han_solo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -13,7 +13,9 @@ import java.util.Vector;
 
 public class qa_resource_reward extends script.base_script
 {
-
+    public qa_resource_reward()
+    {
+    }
     public static final int RESOURCE_AMOUNT = 100000;
     public static final String ROOT_RESOURCE_CLASS = "resource";
     public static final String ROOT_ORGANIC_CLASS = "organic";

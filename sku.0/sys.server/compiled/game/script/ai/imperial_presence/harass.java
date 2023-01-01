@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class harass extends script.base_script
 {
-
+    public harass()
+    {
+    }
     public static final String SCRIPTVAR_FINE = "harass.fine";
     public static final String SCRIPTVAR_HARASS_BASE = "harass";
     public static final String SCRIPTVAR_TARGET = "harass.target";

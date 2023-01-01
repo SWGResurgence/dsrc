@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class tusken_controller extends script.base_script
 {
-
+    public tusken_controller()
+    {
+    }
     public int kingDied(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = getPlayerCreaturesInRange(getLocation(self), 1000.0f);

@@ -5,7 +5,9 @@ import script.library.*;
 
 public class st_static extends script.base_script
 {
-
+    public st_static()
+    {
+    }
     public static final String VOLUME_NAME = "perception";
     public static final String STRING_FILE = "conversation/crackdown_st_static";
     public static final string_id REBEL_BREACH = new string_id(STRING_FILE, "rebel_breach");

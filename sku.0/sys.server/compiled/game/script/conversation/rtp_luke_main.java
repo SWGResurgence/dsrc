@@ -5,7 +5,9 @@ import script.*;
 
 public class rtp_luke_main extends script.base_script
 {
-
+    public rtp_luke_main()
+    {
+    }
     public static String c_stringFile = "conversation/rtp_luke_main";
     public boolean rtp_luke_main_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

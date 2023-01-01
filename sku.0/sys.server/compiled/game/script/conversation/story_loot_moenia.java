@@ -5,7 +5,9 @@ import script.*;
 
 public class story_loot_moenia extends script.base_script
 {
-
+    public story_loot_moenia()
+    {
+    }
     public static String c_stringFile = "conversation/story_loot_moenia";
     public boolean story_loot_moenia_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

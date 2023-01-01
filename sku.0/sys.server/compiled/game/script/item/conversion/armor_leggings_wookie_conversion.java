@@ -2,7 +2,9 @@ package script.item.conversion;
 
 public class armor_leggings_wookie_conversion extends script.item.conversion.armor_base_conversion
 {
-
+    public armor_leggings_wookie_conversion()
+    {
+    }
     public static final String[] ARMOR_SET_ASSAULT = 
     {
         "kashyyykian_hunting/armor_kashyyykian_hunting_leggings.iff"

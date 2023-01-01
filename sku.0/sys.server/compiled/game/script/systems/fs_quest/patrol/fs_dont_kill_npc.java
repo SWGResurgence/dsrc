@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class fs_dont_kill_npc extends script.base_script
 {
-
+    public fs_dont_kill_npc()
+    {
+    }
     public static final float DESTROY_TIME = 600.0f;
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {

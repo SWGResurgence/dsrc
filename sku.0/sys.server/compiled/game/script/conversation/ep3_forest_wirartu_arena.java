@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_forest_wirartu_arena extends script.base_script
 {
-
+    public ep3_forest_wirartu_arena()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_forest_wirartu_arena";
     public boolean ep3_forest_wirartu_arena_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

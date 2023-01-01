@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class combat_trainer_spawner extends script.base_script
 {
-
+    public combat_trainer_spawner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Attached Combat Guild Spawner in OnInitialize");

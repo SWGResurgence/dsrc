@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class droid_spawner extends script.base_script
 {
-
+    public droid_spawner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkForStart", null, 30, true);

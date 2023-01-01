@@ -8,7 +8,9 @@ import script.library.weapons;
 
 public class crafting_base_weapon extends script.systems.crafting.crafting_base
 {
-
+    public crafting_base_weapon()
+    {
+    }
     public static final String VERSION = "v1.00.00";
     public static final float MAX_STAT_INTENSITY = 1.00f;
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class theater_manager extends script.base_script
 {
-
+    public theater_manager()
+    {
+    }
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         hq.cleanupHqTheater(self);

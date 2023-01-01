@@ -8,7 +8,9 @@ import script.*;
 
 public class lf_killmite extends script.base_script
 {
-
+    public lf_killmite()
+    {
+    }
     public static String c_stringFile = "conversation/lf_killmite";
     public boolean lf_killmite_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,7 +8,9 @@ import script.*;
 
 public class naboo_deeja_peak_vance_groten extends script.base_script
 {
-
+    public naboo_deeja_peak_vance_groten()
+    {
+    }
     public static String c_stringFile = "conversation/naboo_deeja_peak_vance_groten";
     public boolean naboo_deeja_peak_vance_groten_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

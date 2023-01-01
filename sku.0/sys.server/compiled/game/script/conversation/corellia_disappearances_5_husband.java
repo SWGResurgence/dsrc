@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_disappearances_5_husband extends script.base_script
 {
-
+    public corellia_disappearances_5_husband()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_disappearances_5_husband";
     public boolean corellia_disappearances_5_husband_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

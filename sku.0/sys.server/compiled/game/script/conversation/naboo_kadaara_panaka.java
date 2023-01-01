@@ -5,7 +5,9 @@ import script.*;
 
 public class naboo_kadaara_panaka extends script.base_script
 {
-
+    public naboo_kadaara_panaka()
+    {
+    }
     public static String c_stringFile = "conversation/naboo_kadaara_panaka";
     public boolean naboo_kadaara_panaka_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

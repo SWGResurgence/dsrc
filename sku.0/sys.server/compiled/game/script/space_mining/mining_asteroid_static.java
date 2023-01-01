@@ -5,7 +5,9 @@ import script.library.*;
 
 public class mining_asteroid_static extends script.base_script
 {
-
+    public mining_asteroid_static()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "mining_asteroid.numShipsSpawned", 0);

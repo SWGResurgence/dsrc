@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class crafting_base_powerup extends script.systems.crafting.crafting_base
 {
-
+    public crafting_base_powerup()
+    {
+    }
     public static final String VERSION = "v1.00.00";
     public static final float MAX_BARREL_DAMAGE_BONUS = 0.35f;
     public static final float MAX_BARREL_SPEED_PENALTY = 0.25f;

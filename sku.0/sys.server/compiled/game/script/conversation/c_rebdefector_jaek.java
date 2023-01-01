@@ -5,7 +5,9 @@ import script.*;
 
 public class c_rebdefector_jaek extends script.base_script
 {
-
+    public c_rebdefector_jaek()
+    {
+    }
     public static String c_stringFile = "conversation/c_rebdefector_jaek";
     public boolean c_rebdefector_jaek_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

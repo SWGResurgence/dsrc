@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class imperial_lrg extends script.base_script
 {
-
+    public imperial_lrg()
+    {
+    }
     public static final boolean IS_PERSISTED = true;
     public static final String SENTINEL_GUARD = "stormtrooper";
     public static final String[] SENTINEL = 

@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class city_pathing extends script.base_script
 {
-
+    public city_pathing()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         respawnNpc(self);

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class poi_herd_forest_chuba extends script.theme_park.poi.base
 {
-
+    public poi_herd_forest_chuba()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         poiCreateObject("object/creature/monster/chuba/chuba_forest_large.iff", 8, 8);

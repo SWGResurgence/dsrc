@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class dynamic_enemy extends script.base_script
 {
-
+    public dynamic_enemy()
+    {
+    }
     public static final int MAXDISTANCE = 60;
     public int OnAttach(obj_id self) throws InterruptedException
     {

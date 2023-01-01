@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class imp_p3_major extends script.base_script
 {
-
+    public imp_p3_major()
+    {
+    }
     public static String c_stringFile = "conversation/imp_p3_major";
     public boolean imp_p3_major_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

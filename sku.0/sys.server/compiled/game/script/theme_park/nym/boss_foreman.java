@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class boss_foreman extends script.base_script
 {
-
+    public boss_foreman()
+    {
+    }
     public void findNextTarget(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))

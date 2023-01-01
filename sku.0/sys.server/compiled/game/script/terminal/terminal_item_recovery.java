@@ -13,7 +13,9 @@ import script.menu_info_types;
 
 public class terminal_item_recovery extends script.base_script
 {
-
+    public terminal_item_recovery()
+    {
+    }
     public static final String STF = "terminal_ui";
     public static final string_id SID_RECOVER = new string_id(STF, "recover");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

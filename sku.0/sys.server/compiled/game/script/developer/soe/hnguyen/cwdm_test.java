@@ -2,7 +2,9 @@ package script.developer.soe.hnguyen;
 
 public class cwdm_test extends script.base_script
 {
-
+    public cwdm_test()
+    {
+    }
     public static final String PROP_TEXT = "Text";
     /*
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException

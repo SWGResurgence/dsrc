@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class beast_display extends script.base_script
 {
-
+    public beast_display()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (getOwner(self) == player)

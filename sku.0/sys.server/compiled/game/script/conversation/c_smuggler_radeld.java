@@ -8,7 +8,9 @@ import script.*;
 
 public class c_smuggler_radeld extends script.base_script
 {
-
+    public c_smuggler_radeld()
+    {
+    }
     public static String c_stringFile = "conversation/c_smuggler_radeld";
     public boolean c_smuggler_radeld_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

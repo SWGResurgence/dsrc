@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class lucky_despot_elevators extends script.base_script
 {
-
+    public lucky_despot_elevators()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);

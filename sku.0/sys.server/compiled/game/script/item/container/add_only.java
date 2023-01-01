@@ -5,7 +5,9 @@ import script.string_id;
 
 public class add_only extends script.base_script
 {
-
+    public add_only()
+    {
+    }
     public static final String SCRIPT_ME = "item.container.add_only";
     public static final string_id SID_REMOVE_ONLY_CONTAINER = new string_id("error_message", "add_only");
     public int OnAttach(obj_id self) throws InterruptedException

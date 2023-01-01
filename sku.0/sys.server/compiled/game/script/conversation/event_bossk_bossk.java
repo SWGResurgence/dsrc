@@ -8,7 +8,9 @@ import script.*;
 
 public class event_bossk_bossk extends script.base_script
 {
-
+    public event_bossk_bossk()
+    {
+    }
     public static String c_stringFile = "conversation/event_bossk_bossk";
     public boolean event_bossk_bossk_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

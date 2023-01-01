@@ -7,7 +7,9 @@ import script.string_id;
 
 public class quest_convo extends script.base_script
 {
-
+    public quest_convo()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");

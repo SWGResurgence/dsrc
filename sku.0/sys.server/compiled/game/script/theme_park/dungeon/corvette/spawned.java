@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class spawned extends script.base_script
 {
-
+    public spawned()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "cleanUp", null, 300, false);

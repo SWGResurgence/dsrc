@@ -8,7 +8,9 @@ import script.string_id;
 
 public class imperial_trouble extends script.base_script
 {
-
+    public imperial_trouble()
+    {
+    }
     public static String CONVO = "npc_reaction/imperial_crackdown_cantina";
     public int startMoving(obj_id self, dictionary params) throws InterruptedException
     {

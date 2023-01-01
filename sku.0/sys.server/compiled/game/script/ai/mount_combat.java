@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class mount_combat extends script.systems.combat.combat_base
 {
-
+    public mount_combat()
+    {
+    }
     public static final int RANGE_NEAR = 0;
     public static final int RANGE_MID_NEAR = 1;
     public static final int RANGE_MID_FAR = 2;

@@ -8,7 +8,9 @@ import script.*;
 
 public class rtp_qualdo_ithorian extends script.base_script
 {
-
+    public rtp_qualdo_ithorian()
+    {
+    }
     public static String c_stringFile = "conversation/rtp_qualdo_ithorian";
     public boolean rtp_qualdo_ithorian_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

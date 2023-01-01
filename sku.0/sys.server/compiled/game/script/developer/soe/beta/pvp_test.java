@@ -8,7 +8,9 @@ import java.util.StringTokenizer;
 
 public class pvp_test extends script.base_script
 {
-
+    public pvp_test()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         sendSystemMessageTestingOnly(self, "PvP debug script attached.");

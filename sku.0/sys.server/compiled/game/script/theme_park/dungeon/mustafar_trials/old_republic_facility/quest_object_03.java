@@ -5,7 +5,9 @@ import script.*;
 
 public class quest_object_03 extends script.base_script
 {
-
+    public quest_object_03()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);

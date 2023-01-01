@@ -8,7 +8,9 @@ import script.*;
 
 public class som_obi_wan_kenobi extends script.base_script
 {
-
+    public som_obi_wan_kenobi()
+    {
+    }
     public static String c_stringFile = "conversation/som_obi_wan_kenobi";
     public boolean som_obi_wan_kenobi_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

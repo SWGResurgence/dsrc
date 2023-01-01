@@ -5,7 +5,9 @@ import script.*;
 
 public class loveday_matchmaker_droid extends script.base_script
 {
-
+    public loveday_matchmaker_droid()
+    {
+    }
     public static String c_stringFile = "conversation/loveday_matchmaker_droid";
     public boolean loveday_matchmaker_droid_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

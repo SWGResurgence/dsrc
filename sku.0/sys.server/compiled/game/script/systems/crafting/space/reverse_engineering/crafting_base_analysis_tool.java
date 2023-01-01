@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class crafting_base_analysis_tool extends script.systems.crafting.crafting_base
 {
-
+    public crafting_base_analysis_tool()
+    {
+    }
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
         super.calcAndSetPrototypeProperties(prototype, itemAttributes, craftingValuesDictionary);

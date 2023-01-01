@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class mission_terminal extends script.base_script
 {
-
+    public mission_terminal()
+    {
+    }
     public static final string_id SID_MNU_REDEEM = new string_id("sui", "mnu_redeem");
     public static final string_id SID_REDEEM_PROMPT = new string_id("sui", "redeem_data_item_prompt");
     public static final string_id SID_REDEEM_TITLE = new string_id("sui", "redeem_data_item_title");

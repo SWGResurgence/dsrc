@@ -12,7 +12,9 @@ import java.util.StringTokenizer;
 
 public class destroy extends script.base_script
 {
-
+    public destroy()
+    {
+    }
     public static final string_id SID_REMAINDER_UPDATE = new string_id("space/quest", "destroy_remainder_update");
     public static final string_id SID_TARGET_WAYPOINTS = new string_id("space/quest", "destroy_target_waypoints");
     public static final string_id SID_ABANDONED_DESTROY = new string_id("space/quest", "destroy_abandoned");

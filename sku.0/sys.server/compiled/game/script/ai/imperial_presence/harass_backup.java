@@ -9,7 +9,9 @@ import script.string_id;
 
 public class harass_backup extends script.base_script
 {
-
+    public harass_backup()
+    {
+    }
     public static final String STF = "imperial_presence/contraband_search";
     public int OnAttach(obj_id self) throws InterruptedException
     {

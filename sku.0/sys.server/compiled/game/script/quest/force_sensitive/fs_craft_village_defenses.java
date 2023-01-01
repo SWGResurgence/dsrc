@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class fs_craft_village_defenses extends script.base_script
 {
-
+    public fs_craft_village_defenses()
+    {
+    }
     public static final String QUEST_MAIN = "fs_phase_2_craft_defenses_main";
     public static final String QUEST_STEP_01 = "fs_phase_2_craft_defenses_01";
     public static final String QUEST_STEP_02 = "fs_phase_2_craft_defenses_02";

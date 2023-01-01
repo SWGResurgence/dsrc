@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class sd_event_two_convo extends script.base_script
 {
-
+    public sd_event_two_convo()
+    {
+    }
     public static String c_stringFile = "conversation/sd_event_two_convo";
     public boolean sd_event_two_convo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

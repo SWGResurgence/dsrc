@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class gcw_damaged_vehicle extends script.base_script
 {
-
+    public gcw_damaged_vehicle()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleSetup", null, 1.0f, false);

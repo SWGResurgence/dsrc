@@ -5,7 +5,9 @@ import script.*;
 
 public class station_rodian_base extends script.base_script
 {
-
+    public station_rodian_base()
+    {
+    }
     public static String c_stringFile = "conversation/station_rodian_base";
     public boolean station_rodian_base_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -9,7 +9,9 @@ import script.string_id;
 
 public class fountain extends script.base_script
 {
-
+    public fountain()
+    {
+    }
     public static final string_id FOUNTAIN_USE = new string_id("spam", "fountain_use");
     public static final string_id ALREADY_HAVE = new string_id("spam", "already_have");
     public static final string_id BERRY_GRANTED = new string_id("spam", "berry_granted");

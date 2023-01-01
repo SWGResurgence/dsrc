@@ -11,7 +11,9 @@ import script.string_id;
 
 public class final_battle_second extends script.base_script
 {
-
+    public final_battle_second()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id spawner = getObjIdObjVar(self, "quest_spawner.spawned_by");

@@ -5,7 +5,9 @@ import script.library.*;
 
 public class village_whip extends script.base_script
 {
-
+    public village_whip()
+    {
+    }
     public static String c_stringFile = "conversation/village_whip";
     public boolean village_whip_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

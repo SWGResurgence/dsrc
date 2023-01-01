@@ -5,7 +5,9 @@ import script.string_id;
 
 public class elusive_fish extends script.base_script {
 
-    
+    public elusive_fish()
+    {
+    }
 
     public int OnAttach(obj_id self) throws InterruptedException {
         String name = getStringObjVar(self, "fish.name");

@@ -5,7 +5,9 @@ import script.*;
 
 public class mtp_corellia_times_contact extends script.base_script
 {
-
+    public mtp_corellia_times_contact()
+    {
+    }
     public static String c_stringFile = "conversation/mtp_corellia_times_contact";
     public boolean mtp_corellia_times_contact_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

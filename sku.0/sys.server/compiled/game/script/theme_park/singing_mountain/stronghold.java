@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class stronghold extends script.base_script
 {
-
+    public stronghold()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);

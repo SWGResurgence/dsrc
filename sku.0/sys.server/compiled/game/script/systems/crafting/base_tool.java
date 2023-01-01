@@ -5,7 +5,9 @@ import script.library.*;
 
 public class base_tool extends script.base_script
 {
-
+    public base_tool()
+    {
+    }
     public static final String PROTOTYPE_SLOT = "anythingNoMod2";
     public static final String OBJVAR_CRAFTING_FAKE_PROTOTYPE = "crafting.isFakePrototype";
     public static final string_id INVENTORY_FULL = new string_id("spam", "inv_full");

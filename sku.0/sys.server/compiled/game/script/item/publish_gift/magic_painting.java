@@ -8,7 +8,9 @@ import script.string_id;
 
 public class magic_painting extends script.base_script
 {
-
+    public magic_painting()
+    {
+    }
     public static final string_id MOVED_CTRL_OBJ = new string_id("spam", "magic_painting_ctrl_moved");
     public static final string_id ROOM_HAS_CTRL_OBJ = new string_id("spam", "magic_painting_ctrl_already");
     public int OnAttach(obj_id self) throws InterruptedException

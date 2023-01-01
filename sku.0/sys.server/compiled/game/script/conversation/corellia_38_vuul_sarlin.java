@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_38_vuul_sarlin extends script.base_script
 {
-
+    public corellia_38_vuul_sarlin()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_38_vuul_sarlin";
     public boolean corellia_38_vuul_sarlin_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

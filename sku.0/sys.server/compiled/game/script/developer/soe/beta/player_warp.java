@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class player_warp extends script.base_script
 {
-
+    public player_warp()
+    {
+    }
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (text.startsWith("warp"))

@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class crusader_armor_dye_kit extends script.base_script
 {
-
+    public crusader_armor_dye_kit()
+    {
+    }
     public static final String[] COLORS = 
     {
         "@tool/customizer:cadk_color_original",

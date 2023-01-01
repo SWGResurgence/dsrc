@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class mini_bloodrazor_bunker extends script.base_script
 {
-
+    public mini_bloodrazor_bunker()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int sekritCode = rand(1000, 9999);

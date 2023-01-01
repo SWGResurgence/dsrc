@@ -7,7 +7,9 @@ import java.util.*;
 
 public class utils extends script.base_script
 {
-
+    public utils()
+    {
+    }
     public static final String VERSION = "v0.01.00";
     public static final String VAR_OWNER = "owner";
     public static final String VAR_COOWNERS = "coowners";

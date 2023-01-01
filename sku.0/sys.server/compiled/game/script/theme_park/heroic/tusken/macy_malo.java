@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class macy_malo extends script.base_script
 {
-
+    public macy_malo()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "bomb_a_tusken", null, rand(35, 60), false);

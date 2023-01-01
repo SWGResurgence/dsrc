@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class foraged extends script.item.comestible.comestible
 {
-
+    public foraged()
+    {
+    }
     public static final String FORAGED_DATA = "datatables/foraging/forage_global.iff";
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {

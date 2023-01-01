@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class mission_messagehandler extends script.base_script
 {
-
+    public mission_messagehandler()
+    {
+    }
     public int addListener(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objListener = params.getObjId("objListener");

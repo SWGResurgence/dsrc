@@ -6,7 +6,9 @@ import java.util.Vector;
 
 public class planetary_map extends script.base_script
 {
-
+    public planetary_map()
+    {
+    }
     public static final byte NO_FLAG = 0;
     public static final float MAX_CLUMP_DISTANCE = 32.0f;
     public static final String TBL = "datatables/planet_map/map_locations.iff";

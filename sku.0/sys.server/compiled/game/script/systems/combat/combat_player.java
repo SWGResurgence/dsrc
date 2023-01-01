@@ -6,7 +6,9 @@ import script.string_id;
 
 public class combat_player extends script.systems.combat.combat_base
 {
-
+    public combat_player()
+    {
+    }
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         combat.clearCombatDebuffs(self);

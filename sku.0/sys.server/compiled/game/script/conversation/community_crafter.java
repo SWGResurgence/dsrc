@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class community_crafter extends script.base_script
 {
-
+    public community_crafter()
+    {
+    }
     public static String c_stringFile = "conversation/community_crafter";
     public boolean community_crafter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,7 +5,9 @@ import script.library.*;
 
 public class xp_purchase extends script.base_script
 {
-
+    public xp_purchase()
+    {
+    }
     public static final string_id SID_MENU_LEARN = new string_id("item/xp_purchase", "menu_learn");
     public static final string_id SID_MSG_NO_MIN_SKILL = new string_id("item/xp_purchase", "msg_no_min_skill");
     public static final string_id SID_MSG_NO_XP = new string_id("item/xp_purchase", "msg_no_xp");

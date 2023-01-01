@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class lambda extends script.systems.spawning.dropship.base
 {
-
+    public lambda()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleAttachDelay", null, 2.0f, false);

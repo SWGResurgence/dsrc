@@ -8,7 +8,9 @@ import script.string_id;
 
 public class dying_miner extends script.base_script
 {
-
+    public dying_miner()
+    {
+    }
     public static final string_id MNU_INSPECT_MINER = new string_id("som/som_quest", "examine_miner");
     public int OnAttach(obj_id self) throws InterruptedException
     {

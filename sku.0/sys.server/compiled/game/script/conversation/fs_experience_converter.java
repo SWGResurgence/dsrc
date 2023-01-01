@@ -5,7 +5,9 @@ import script.*;
 
 public class fs_experience_converter extends script.base_script
 {
-
+    public fs_experience_converter()
+    {
+    }
     public static String c_stringFile = "conversation/fs_experience_converter";
     public boolean fs_experience_converter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

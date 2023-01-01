@@ -4,7 +4,9 @@ import script.*;
 
 public class security extends script.base_script
 {
-
+    public security()
+    {
+    }
     public static final String MSGS = "dungeon/corvette";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

@@ -8,7 +8,9 @@ import script.*;
 
 public class npe_side_robbery_thief extends script.base_script
 {
-
+    public npe_side_robbery_thief()
+    {
+    }
     public static String c_stringFile = "conversation/npe_side_robbery_thief";
     public boolean npe_side_robbery_thief_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

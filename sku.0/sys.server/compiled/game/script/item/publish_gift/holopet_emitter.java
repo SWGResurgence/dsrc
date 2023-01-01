@@ -7,7 +7,9 @@ import java.util.Arrays;
 
 public class holopet_emitter extends script.base_script
 {
-
+    public holopet_emitter()
+    {
+    }
     public static final string_id NOT_IN_INVENTORY = new string_id("spam", "not_in_inventory");
     public static final float HEARTBEAT = 600.0f;
     public static final String PID_NAME = "holo-pet";

@@ -7,7 +7,9 @@ import script.library.vendor_lib;
 
 public class tcg_greeter_contract extends script.base_script
 {
-
+    public tcg_greeter_contract()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "greeter";
     public static final String GREETER_APPEARANCE_PID = "greeter_ui_pid.appearance_pid";

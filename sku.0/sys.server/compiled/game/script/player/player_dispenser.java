@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class player_dispenser extends script.base_script
 {
-
+    public player_dispenser()
+    {
+    }
     public static final String VAR_DATATABLE = "dispenser.datatable";
     public static final string_id SID_INVALID_SELECTION = new string_id("dispenser", "invalid_selection");
     public static final string_id SID_PURCHASE_COMPLETE = new string_id("dispenser", "purchase_complete");

@@ -7,7 +7,9 @@ import script.*;
 
 public class snow_machine extends script.base_script
 {
-
+    public snow_machine()
+    {
+    }
     public static final string_id SID_WHILE_DEAD = new string_id("spam", "while_dead");
     public static final string_id SID_HAS_SNOWBALL_ALREADY = new string_id("spam", "has_snowball");
     public static final string_id SID_SNOWBALL_VERY_HOT = new string_id("spam", "snowball_hot_environment");

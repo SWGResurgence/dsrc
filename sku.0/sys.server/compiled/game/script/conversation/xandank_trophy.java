@@ -8,7 +8,9 @@ import script.*;
 
 public class xandank_trophy extends script.base_script
 {
-
+    public xandank_trophy()
+    {
+    }
     public static String c_stringFile = "conversation/xandank_trophy";
     public boolean xandank_trophy_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

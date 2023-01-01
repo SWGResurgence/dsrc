@@ -8,7 +8,9 @@ import script.*;
 
 public class grenz_zittoun extends script.base_script
 {
-
+    public grenz_zittoun()
+    {
+    }
     public static String c_stringFile = "conversation/grenz_zittoun";
     public boolean grenz_zittoun_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

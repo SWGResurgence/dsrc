@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class monster_maker extends script.base_script
 {
-
+    public monster_maker()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("kwi_spawner", 10.0f, true);

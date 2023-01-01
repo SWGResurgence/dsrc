@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class dud_firework extends script.base_script
 {
-
+    public dud_firework()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "setUp", null, 2, false);

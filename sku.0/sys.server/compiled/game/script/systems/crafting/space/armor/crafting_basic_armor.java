@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_basic_armor extends script.systems.crafting.space.armor.crafting_base_space_armor
 {
-
+    public crafting_basic_armor()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

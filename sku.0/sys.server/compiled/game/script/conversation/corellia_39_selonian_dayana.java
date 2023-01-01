@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_39_selonian_dayana extends script.base_script
 {
-
+    public corellia_39_selonian_dayana()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_39_selonian_dayana";
     public boolean corellia_39_selonian_dayana_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

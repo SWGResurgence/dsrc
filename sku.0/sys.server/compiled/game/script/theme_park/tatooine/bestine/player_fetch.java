@@ -10,7 +10,9 @@ import script.string_id;
 
 public class player_fetch extends script.base_script
 {
-
+    public player_fetch()
+    {
+    }
     public static final String CONVO = "theme_park_bestine/curator";
     public int OnAttach(obj_id self) throws InterruptedException
     {

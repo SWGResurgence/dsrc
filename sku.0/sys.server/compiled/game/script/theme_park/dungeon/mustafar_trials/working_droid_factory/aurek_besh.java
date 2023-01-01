@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class aurek_besh extends script.base_script
 {
-
+    public aurek_besh()
+    {
+    }
     public static final boolean LOGGING = true;
     public int OnDestroy(obj_id self) throws InterruptedException
     {

@@ -39,7 +39,9 @@ public class heroic_biolink_set extends base_script
             "Tragedy Set",
             "Tinkers Set"
     };
-
+    public heroic_biolink_set()
+    {
+    }
 
     public static obj_id[] grantBioSet(obj_id player, int num, obj_id destroy_me) throws InterruptedException
     {

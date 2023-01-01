@@ -8,7 +8,9 @@ import script.string_id;
 
 public class diary_terminal extends script.base_script
 {
-
+    public diary_terminal()
+    {
+    }
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

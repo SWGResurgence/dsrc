@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class doc_bag extends script.base_script
 {
-
+    public doc_bag()
+    {
+    }
     public static final string_id SID_EXAMINE_MEDS = new string_id("doctor_bag", "examine_meds");
     public static final string_id SID_REMOVE_MEDS = new string_id("doctor_bag", "remove_meds");
     public static final string_id SID_NOTHING_IN_BAG = new string_id("doctor_bag", "nothing_in_bag");

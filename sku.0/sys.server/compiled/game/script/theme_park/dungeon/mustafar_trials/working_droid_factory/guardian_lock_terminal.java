@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class guardian_lock_terminal extends script.base_script
 {
-
+    public guardian_lock_terminal()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

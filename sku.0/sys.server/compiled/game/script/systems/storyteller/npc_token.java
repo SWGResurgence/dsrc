@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class npc_token extends script.base_script
 {
-    
+    public npc_token()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         storyteller.resetTokenDailyCount(self);

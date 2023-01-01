@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class ep3_achonnko extends script.base_script
 {
-
+    public ep3_achonnko()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_achonnko";
     public boolean ep3_achonnko_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

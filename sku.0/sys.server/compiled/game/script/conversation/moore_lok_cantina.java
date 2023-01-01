@@ -5,7 +5,9 @@ import script.library.*;
 
 public class moore_lok_cantina extends script.base_script
 {
-
+    public moore_lok_cantina()
+    {
+    }
     public static String c_stringFile = "conversation/moore_lok_cantina";
     public boolean moore_lok_cantina_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

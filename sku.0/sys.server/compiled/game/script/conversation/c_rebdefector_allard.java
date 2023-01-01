@@ -8,7 +8,9 @@ import script.*;
 
 public class c_rebdefector_allard extends script.base_script
 {
-
+    public c_rebdefector_allard()
+    {
+    }
     public static String c_stringFile = "conversation/c_rebdefector_allard";
     public boolean c_rebdefector_allard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

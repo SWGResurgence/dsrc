@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class tcg_video_game_series4 extends script.base_script
 {
-
+    public tcg_video_game_series4()
+    {
+    }
     public static final String MINIGAME_PARAM_PREFIX = "minigame_mahjong";
     public static final String MINIGAME_GAMENAME_MAHJONG = "mahjong";
     public static final String MINIGAME_VARNAME_GAME = "game";

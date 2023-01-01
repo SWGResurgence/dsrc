@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class player_fetch extends script.base_script
 {
-
+    public player_fetch()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location questLoc = getLocationObjVar(self, "mos_taike.young_guard.fetchLoc");

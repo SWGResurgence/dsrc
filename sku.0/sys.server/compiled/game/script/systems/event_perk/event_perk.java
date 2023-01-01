@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class event_perk extends script.base_script
 {
-
+    public event_perk()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         float lifeSpan = getFloatObjVar(self, "event_perk.lifeSpan");

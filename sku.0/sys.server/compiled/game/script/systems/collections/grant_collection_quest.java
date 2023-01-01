@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class grant_collection_quest extends script.base_script
 {
-
+    public grant_collection_quest()
+    {
+    }
     public static final boolean LOGGING_ENABLED = true;
     public static final String STF = "som/som_quest";
     public static final string_id EXAMINE = new string_id(STF, "blistmok_heart_examine");

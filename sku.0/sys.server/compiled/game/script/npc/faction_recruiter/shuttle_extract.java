@@ -6,7 +6,9 @@ import script.*;
 
 public class shuttle_extract extends script.base_script
 {
-
+    public shuttle_extract()
+    {
+    }
     public static final String SCRIPT_PLAYER_SHUTTLE_EXTRACT = "npc.faction_recruiter.player_shuttle_extract";
     public static final String VAR_FACTION = "faction_recruiter.faction";
     public static final String VAR_EXTRACTION_LOCATION = "faction_recruiter.extraction_location";

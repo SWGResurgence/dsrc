@@ -12,7 +12,9 @@ import java.util.Vector;
 
 public class spawner_patrol extends script.base_script
 {
-
+    public spawner_patrol()
+    {
+    }
     public static final int LOCATION_SEARCH_RADIUS = 1000;
     public int OnInitialize(obj_id self) throws InterruptedException
     {

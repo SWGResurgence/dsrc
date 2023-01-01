@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class proton_chair extends script.base_script
 {
-
+    public proton_chair()
+    {
+    }
     private static final String LIFEDAY = "event/life_day";
     private static final String SOUND_1 = "sound/proton_chair_adorable.snd";
     private static final String SOUND_2 = "sound/proton_chair_create_me.snd";

@@ -9,7 +9,9 @@ import script.string_id;
 
 public class loveday_reward_crossbow extends script.base_script
 {
-
+    public loveday_reward_crossbow()
+    {
+    }
     public static final string_id SID_ITEM_NOT_IN_INVENTORY = new string_id("base_player", "not_in_your_inventory");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

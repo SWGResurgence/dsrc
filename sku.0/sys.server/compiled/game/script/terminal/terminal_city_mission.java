@@ -6,7 +6,9 @@ import script.library.player_structure;
 
 public class terminal_city_mission extends script.base_script
 {
-
+    public terminal_city_mission()
+    {
+    }
     public static final string_id SID_MT_REMOVE = new string_id("city/city", "mt_remove");
     public static final string_id SID_MT_REMOVED = new string_id("city/city", "mt_removed");
     public int OnInitialize(obj_id self) throws InterruptedException

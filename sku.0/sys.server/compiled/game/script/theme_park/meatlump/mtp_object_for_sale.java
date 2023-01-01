@@ -8,7 +8,9 @@ import script.string_id;
 
 public class mtp_object_for_sale extends script.base_script
 {
-
+    public mtp_object_for_sale()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, township.OBJECT_FOR_SALE_ON_VENDOR, true);

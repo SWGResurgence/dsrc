@@ -7,7 +7,9 @@ import script.string_id;
 
 public class grievous_player extends script.base_script
 {
-
+    public grievous_player()
+    {
+    }
     public static final boolean isLogging = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

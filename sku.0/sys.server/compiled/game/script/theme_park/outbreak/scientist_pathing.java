@@ -8,7 +8,9 @@ import script.string_id;
 
 public class scientist_pathing extends script.base_script
 {
-
+    public scientist_pathing()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_pathing";
     public static final String PATHING_NODE = "pathing_node";

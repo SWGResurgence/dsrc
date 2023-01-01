@@ -5,7 +5,9 @@ import script.*;
 
 public class ep3_forest_arena_guard_interior extends script.base_script
 {
-
+    public ep3_forest_arena_guard_interior()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_forest_arena_guard_interior";
     public boolean ep3_forest_arena_guard_interior_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,7 +8,9 @@ import script.string_id;
 
 public class navicomputer extends script.base_script
 {
-
+    public navicomputer()
+    {
+    }
     public static final String CREATURE_NAME_FILE = "item_n";
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {

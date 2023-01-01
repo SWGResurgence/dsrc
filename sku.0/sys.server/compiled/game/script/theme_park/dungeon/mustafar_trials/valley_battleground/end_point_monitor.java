@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class end_point_monitor extends script.base_script
 {
-
+    public end_point_monitor()
+    {
+    }
     public static final String VOLUME_NAME = "finish_monitor";
     public static final float VOLUME_RANGE = 18.0f;
     public static final int RESCAN = 10;

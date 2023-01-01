@@ -10,7 +10,9 @@ import script.string_id;
 
 public class legacy_wounded extends script.base_script
 {
-
+    public legacy_wounded()
+    {
+    }
     public static final String PP_FILE_LOC = "quest/legacy/legacy_wounded";
     public static final String RESPONSE_TEXT = "datatables/npc/legacy/legacy_lamentations.iff";
     public static int INITIAL_DELAY = 10;

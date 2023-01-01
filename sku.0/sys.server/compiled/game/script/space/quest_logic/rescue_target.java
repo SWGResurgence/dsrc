@@ -9,7 +9,9 @@ import script.string_id;
 
 public class rescue_target extends script.base_script
 {
-
+    public rescue_target()
+    {
+    }
     public static final string_id SID_RESCUE_TARGET_DISABLED = new string_id("space/quest", "rescue_target_disabled");
     public int OnAttach(obj_id self) throws InterruptedException
     {

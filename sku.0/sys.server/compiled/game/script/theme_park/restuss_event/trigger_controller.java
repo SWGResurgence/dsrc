@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class trigger_controller extends script.base_script
 {
-
+    public trigger_controller()
+    {
+    }
     public static final boolean LOGGING = true;
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class component_loot extends script.base_script
 {
-
+    public component_loot()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "ship_comp.armor_hitpoints_current"))

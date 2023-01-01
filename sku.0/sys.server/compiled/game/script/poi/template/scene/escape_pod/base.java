@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class base extends script.base_script
 {
-    
+    public base()
+    {
+    }
     public static final String VAR_THEATER_BASE = "theater";
     public static final String VAR_CHILDREN = VAR_THEATER_BASE + ".children";
     public static final String VAR_BEEN_INITIALIZED = "beenInitialized";

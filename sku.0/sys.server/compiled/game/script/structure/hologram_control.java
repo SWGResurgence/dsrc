@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class hologram_control extends script.base_script
 {
-
+    public hologram_control()
+    {
+    }
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id[] players = player_structure.getPlayersInBuilding(self);

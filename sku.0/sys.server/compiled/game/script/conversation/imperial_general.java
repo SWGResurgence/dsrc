@@ -5,7 +5,9 @@ import script.library.*;
 
 public class imperial_general extends script.base_script
 {
-
+    public imperial_general()
+    {
+    }
     public static String c_stringFile = "conversation/imperial_general";
     public boolean imperial_general_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

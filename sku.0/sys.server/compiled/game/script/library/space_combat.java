@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class space_combat extends script.base_script
 {
-
+    public space_combat()
+    {
+    }
     public static final float SPACE_DEATH_DELAY = 10.0f;
     public static final int CHASSIS = 1;
     public static final int COMPONENT = 2;

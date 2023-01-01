@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class citizen extends script.base_script
 {
-    
+    public citizen()
+    {
+    }
     public static final String SOCIAL_VOLUME = "npc_socialization";
     public static final float SOCIAL_RANGE = 8.0f;
     public static final int NUM_UTTERANCE_OPTIONS = 15;

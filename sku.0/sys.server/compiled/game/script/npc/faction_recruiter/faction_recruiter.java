@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class faction_recruiter extends script.base_script
 {
-
+    public faction_recruiter()
+    {
+    }
     public static final String DATATABLE_ALLOWED_XP_TYPES = "datatables/npc/faction_recruiter/allowed_xp_types.iff";
     public static final String CONVERSE_FACTION_PERKS = "faction_perks";
     public static final string_id SID_GREETING = new string_id("faction_recruiter", "greeting");

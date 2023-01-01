@@ -8,7 +8,9 @@ import script.*;
 
 public class c_smuggler_lorusku extends script.base_script
 {
-
+    public c_smuggler_lorusku()
+    {
+    }
     public static String c_stringFile = "conversation/c_smuggler_lorusku";
     public boolean c_smuggler_lorusku_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

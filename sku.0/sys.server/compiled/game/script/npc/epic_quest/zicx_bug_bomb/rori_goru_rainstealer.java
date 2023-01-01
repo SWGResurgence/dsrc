@@ -8,7 +8,9 @@ import script.string_id;
 
 public class rori_goru_rainstealer extends script.base_script
 {
-
+    public rori_goru_rainstealer()
+    {
+    }
     public static final String CONVO = "epic_quest/zicx_bug_bomb/rori_goru_rainstealer";
     public int OnAttach(obj_id self) throws InterruptedException
     {

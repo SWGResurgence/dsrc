@@ -8,7 +8,9 @@ import script.*;
 
 public class jinkins extends script.base_script
 {
-    
+    public jinkins()
+    {
+    }
     public static String c_stringFile = "conversation/jinkins";
     public boolean jinkins_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

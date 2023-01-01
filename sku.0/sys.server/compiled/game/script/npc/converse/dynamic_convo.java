@@ -12,7 +12,9 @@ import java.util.Vector;
 
 public class dynamic_convo extends script.base_script
 {
-
+    public dynamic_convo()
+    {
+    }
     public static final string_id GIVE_ITEM_SUCCESS = new string_id("system_msg", "give_item_success");
     public static final string_id GIVE_ITEM_FAILURE = new string_id("system_msg", "give_item_failure");
     public static final string_id SCHEMATIC_GRANTED = new string_id("system_msg", "schematic_granted");

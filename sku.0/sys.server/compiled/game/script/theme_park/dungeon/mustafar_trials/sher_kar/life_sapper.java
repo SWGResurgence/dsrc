@@ -11,7 +11,9 @@ import script.string_id;
 
 public class life_sapper extends script.base_script
 {
-
+    public life_sapper()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_SHER_KAR_LIFESAPPER);

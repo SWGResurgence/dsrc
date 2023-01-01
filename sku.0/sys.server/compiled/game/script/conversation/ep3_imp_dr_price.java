@@ -5,7 +5,9 @@ import script.*;
 
 public class ep3_imp_dr_price extends script.base_script
 {
-
+    public ep3_imp_dr_price()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_imp_dr_price";
     public boolean ep3_imp_dr_price_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

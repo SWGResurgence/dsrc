@@ -5,7 +5,9 @@ import script.library.*;
 
 public class vehicle_garage extends script.base_script
 {
-
+    public vehicle_garage()
+    {
+    }
     public static final String STF_PET = "pet/pet_menu";
     public static final String VOL_GARAGE = "garageRepairEntry";
     public static final string_id SID_PROCESSING_OVERPAYMENT = new string_id(STF_PET, "processing_overpayment");

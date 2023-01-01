@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class shuttle_control extends script.base_script
 {
-
+    public shuttle_control()
+    {
+    }
     private static final float DECAY_TIME = 60 * 60 * 8;
     private static final float[] LANDING_TIME =
     {

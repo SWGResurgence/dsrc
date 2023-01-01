@@ -6,7 +6,9 @@ import script.string_id;
 
 public class mission_survey extends script.systems.missions.base.mission_dynamic_base
 {
-
+    public mission_survey()
+    {
+    }
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (player == null || names == null || attribs == null || names.length != attribs.length)

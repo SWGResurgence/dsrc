@@ -8,7 +8,9 @@ import script.string_id;
 
 public class nym_contact extends script.base_script
 {
-
+    public nym_contact()
+    {
+    }
     public static final String CONVO = "celebrity/lok_gambler";
     public int OnAttach(obj_id self) throws InterruptedException
     {

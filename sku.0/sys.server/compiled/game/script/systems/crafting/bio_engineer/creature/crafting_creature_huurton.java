@@ -7,7 +7,9 @@ import script.resource_weight;
 
 public class crafting_creature_huurton extends script.systems.crafting.bio_engineer.crafting_base_creature
 {
-
+    public crafting_creature_huurton()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

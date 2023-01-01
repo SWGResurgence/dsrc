@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class npe_station_junk_dealer_2 extends script.base_script
 {
-
+    public npe_station_junk_dealer_2()
+    {
+    }
     public static String c_stringFile = "conversation/npe_station_junk_dealer_2";
     public boolean npe_station_junk_dealer_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

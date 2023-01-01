@@ -8,7 +8,9 @@ import script.*;
 
 public class tatooine_entha_draknus extends script.base_script
 {
-
+    public tatooine_entha_draknus()
+    {
+    }
     public static String c_stringFile = "conversation/tatooine_entha_draknus";
     public boolean tatooine_entha_draknus_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

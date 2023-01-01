@@ -10,7 +10,9 @@ import script.string_id;
 
 public class mtp_vendor extends script.base_script
 {
-
+    public mtp_vendor()
+    {
+    }
     public static final String VENDOR_TABLE_DIRECTORY = "datatables/item/vendor/";
     public static final String VENDOR_TABLE_OBJVAR = "item.vendor.vendor_table";
     public static final String VENDOR_CONTAINER_TEMPLATE = "object/tangible/container/vendor/npc_only.iff";

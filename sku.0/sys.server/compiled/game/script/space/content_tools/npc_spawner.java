@@ -9,7 +9,9 @@ import script.string_id;
 
 public class npc_spawner extends script.base_script
 {
-
+    public npc_spawner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOG("space", "ONINTIAILIZE");

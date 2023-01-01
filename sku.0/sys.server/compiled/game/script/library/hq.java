@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class hq extends script.base_script
 {
-
+    public hq()
+    {
+    }
     public static final float VULNERABILITY_CYCLE = 172800.0f;
     public static final float VULNERABILITY_LENGTH = 10800.0f;
     public static final String SCRIPT_CLONING_OVERRIDE = "faction_perk.hq.terminal_cloning_override";

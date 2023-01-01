@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class crafting_gcw_tools extends script.base_script
 {
-
+    public crafting_gcw_tools()
+    {
+    }
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

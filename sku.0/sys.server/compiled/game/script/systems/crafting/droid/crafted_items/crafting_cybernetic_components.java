@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_cybernetic_components extends script.systems.crafting.droid.crafting_base_cybernetic_component
 {
-
+    public crafting_cybernetic_components()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class c_story1_1_corpse extends script.base_script
 {
-
+    public c_story1_1_corpse()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if ((!isMob(self)) || (isPlayer(self)))

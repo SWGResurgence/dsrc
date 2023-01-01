@@ -7,7 +7,9 @@ import script.*;
 
 public class ord_mantell_dungeon_terminal extends script.base_script
 {
-
+    public ord_mantell_dungeon_terminal()
+    {
+    }
     public static final string_id LAUNCH = new string_id("npe", "leave_dungeon");
     public int OnAttach(obj_id self) throws InterruptedException
     {

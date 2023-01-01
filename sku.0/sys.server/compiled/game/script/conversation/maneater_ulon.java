@@ -8,7 +8,9 @@ import script.*;
 
 public class maneater_ulon extends script.base_script
 {
-
+    public maneater_ulon()
+    {
+    }
     public static String c_stringFile = "conversation/maneater_ulon";
     public boolean maneater_ulon_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

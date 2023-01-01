@@ -7,7 +7,9 @@ import script.string_id;
 
 public class doctor_knag extends script.base_script
 {
-
+    public doctor_knag()
+    {
+    }
     public static final String CONVO_FILE = "theme_park/warren/warren";
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public static final String ACTION_ALERT = "alert";

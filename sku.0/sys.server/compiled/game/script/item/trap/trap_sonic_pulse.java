@@ -8,7 +8,9 @@ import script.string_id;
 
 public class trap_sonic_pulse extends script.item.trap.trap_base
 {
-
+    public trap_sonic_pulse()
+    {
+    }
     public static final int TRAP_DIFF = 45;
     public static final string_id SID_SYS_EFFECT = new string_id("trap/trap", "trap_sonic_pulse_effect");
     public int OnAttach(obj_id self) throws InterruptedException

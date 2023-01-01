@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class wuher extends script.base_script
 {
-
+    public wuher()
+    {
+    }
     public static final String CONVO = "celebrity/wuher";
     public int OnAttach(obj_id self) throws InterruptedException
     {

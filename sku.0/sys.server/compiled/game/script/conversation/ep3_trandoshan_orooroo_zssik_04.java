@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_trandoshan_orooroo_zssik_04 extends script.base_script
 {
-
+    public ep3_trandoshan_orooroo_zssik_04()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_trandoshan_orooroo_zssik_04";
     public boolean ep3_trandoshan_orooroo_zssik_04_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

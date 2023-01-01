@@ -8,7 +8,9 @@ import script.*;
 
 public class naboo_theed_jorgellansel extends script.base_script
 {
-
+    public naboo_theed_jorgellansel()
+    {
+    }
     public static String c_stringFile = "conversation/naboo_theed_jorgellansel";
     public boolean naboo_theed_jorgellansel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

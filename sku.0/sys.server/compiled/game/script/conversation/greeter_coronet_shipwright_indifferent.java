@@ -8,7 +8,9 @@ import script.*;
 
 public class greeter_coronet_shipwright_indifferent extends script.base_script
 {
-
+    public greeter_coronet_shipwright_indifferent()
+    {
+    }
     public static String c_stringFile = "conversation/greeter_coronet_shipwright_indifferent";
     public boolean greeter_coronet_shipwright_indifferent_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

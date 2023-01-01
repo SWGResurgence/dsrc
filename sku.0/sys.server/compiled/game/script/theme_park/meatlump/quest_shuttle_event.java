@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class quest_shuttle_event extends script.base_script
 {
-
+    public quest_shuttle_event()
+    {
+    }
     public static final boolean LOGGING_ON = false;
     public static final String SMUGGLER_MOB = "mtp_hideout_quest_smuggler";
     public static final String MEATLUMP_LOG = "meatlump_weapons_delivery";

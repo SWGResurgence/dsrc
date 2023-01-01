@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class porcellus extends script.base_script
 {
-
+    public porcellus()
+    {
+    }
     public static final String SCRIPTPATH = "theme_park.tatooine.";
     public static final String TEMPLATE = "object/creature/npc/theme_park/generic_human_male.iff";
     public static final String[] SCRIPTS = 

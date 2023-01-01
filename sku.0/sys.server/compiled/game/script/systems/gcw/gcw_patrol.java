@@ -5,7 +5,9 @@ import script.library.*;
 
 public class gcw_patrol extends script.base_script
 {
-
+    public gcw_patrol()
+    {
+    }
     public static final string_id SID_THERE_IS_NO_GUARD = new string_id("gcw", "there_is_no_guard_to_entertain");
     public static final string_id SID_PATROL_ALREADY_ENTERTAINED = new string_id("gcw", "patrol_point_already_entertained");
     public static final int ENTERTAINMENT_TIMER = 300;

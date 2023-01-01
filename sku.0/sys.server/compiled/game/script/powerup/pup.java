@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class pup extends script.base_script
 {
-
+    public pup()
+    {
+    }
     public static final int LATEST_CONVERTED_VERSION = 2;
     public static final String TEMPLATE_NAME_EXPLOSIVE = "object/tangible/powerup/weapon/thrown_explosive.iff";
     public static final String TEMPLATE_NAME_WIRING = "object/tangible/powerup/weapon/thrown_wiring.iff";

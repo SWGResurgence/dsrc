@@ -10,7 +10,9 @@ import script.obj_id;
 
 public class survivor_pathing extends script.base_script
 {
-
+    public survivor_pathing()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_pathing";
     public static final String PATHING_NODE = "pathing_node";

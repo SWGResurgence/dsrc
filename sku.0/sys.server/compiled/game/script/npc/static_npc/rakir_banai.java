@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class rakir_banai extends script.base_script
 {
-
+    public rakir_banai()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/shirt/shirt_s07.iff", self, "");

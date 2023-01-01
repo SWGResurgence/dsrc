@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class debugger extends script.base_script
 {
-    
+    public debugger()
+    {
+    }
     public static final String DEBUG_EMOTE_TARGET = "debug.emote_target";
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {

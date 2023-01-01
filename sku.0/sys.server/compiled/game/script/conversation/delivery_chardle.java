@@ -8,7 +8,9 @@ import script.*;
 
 public class delivery_chardle extends script.base_script
 {
-
+    public delivery_chardle()
+    {
+    }
     public static String c_stringFile = "conversation/delivery_chardle";
     public boolean delivery_chardle_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

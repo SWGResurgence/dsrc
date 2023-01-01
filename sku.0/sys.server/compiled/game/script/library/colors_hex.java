@@ -2,7 +2,9 @@ package script.library;
 
 public class colors_hex extends script.base_script
 {
-
+    public colors_hex()
+    {
+    }
     public static final String HEADER = "\\#";
     public static final String BLACK = "000000";
     public static final String COLOR_REBELS = "D93311";

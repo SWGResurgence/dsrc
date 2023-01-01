@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class technician extends script.base_script
 {
-
+    public technician()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

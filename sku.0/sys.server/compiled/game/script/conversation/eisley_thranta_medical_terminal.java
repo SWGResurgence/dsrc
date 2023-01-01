@@ -8,7 +8,9 @@ import script.*;
 
 public class eisley_thranta_medical_terminal extends script.base_script
 {
-
+    public eisley_thranta_medical_terminal()
+    {
+    }
     public static String c_stringFile = "conversation/eisley_thranta_medical_terminal";
     public boolean eisley_thranta_medical_terminal_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

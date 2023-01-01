@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class owner extends script.base_script
 {
-
+    public owner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, sui.SCRIPT_FILTER_OWNER);

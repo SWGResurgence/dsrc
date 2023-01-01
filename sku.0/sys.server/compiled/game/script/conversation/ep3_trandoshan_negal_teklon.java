@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_trandoshan_negal_teklon extends script.base_script
 {
-
+    public ep3_trandoshan_negal_teklon()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_trandoshan_negal_teklon";
     public boolean ep3_trandoshan_negal_teklon_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

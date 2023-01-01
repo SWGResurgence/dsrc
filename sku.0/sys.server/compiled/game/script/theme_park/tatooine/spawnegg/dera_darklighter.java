@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class dera_darklighter extends script.base_script
 {
-
+    public dera_darklighter()
+    {
+    }
     public static final String SCRIPTPATH = "theme_park.tatooine.";
     public static final String[] SCRIPTS = 
     {

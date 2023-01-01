@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class echo_placeable_object extends script.base_script
 {
-
+    public echo_placeable_object()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isValidBarricadeLocation(self))

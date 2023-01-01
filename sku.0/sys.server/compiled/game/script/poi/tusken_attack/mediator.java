@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class mediator extends script.poi.base.scenario_actor
 {
-
+    public mediator()
+    {
+    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiTuskenAttack Mediator";
     public int OnAttach(obj_id self) throws InterruptedException

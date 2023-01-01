@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class structure_customization_kit extends script.systems.crafting.furniture.crafting_base_furniture_customization
 {
-
+    public structure_customization_kit()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

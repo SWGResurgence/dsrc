@@ -8,7 +8,9 @@ import script.*;
 
 public class greeter_bestine_bookie extends script.base_script
 {
-
+    public greeter_bestine_bookie()
+    {
+    }
     public static String c_stringFile = "conversation/greeter_bestine_bookie";
     public boolean greeter_bestine_bookie_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

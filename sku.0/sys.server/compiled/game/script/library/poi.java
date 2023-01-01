@@ -4,7 +4,9 @@ import script.*;
 
 public class poi extends script.base_script
 {
-
+    public poi()
+    {
+    }
     public static final int POI_INCOMPLETE = 0;
     public static final int POI_SUCCESS = 1;
     public static final int POI_FAIL = 2;

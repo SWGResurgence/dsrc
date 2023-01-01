@@ -8,7 +8,9 @@ import script.obj_var;
 
 public class bio_component_attrib extends script.base_script
 {
-
+    public bio_component_attrib()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + craftinglib.TISSUE_SKILL_MODS))

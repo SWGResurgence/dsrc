@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class factional_dungeon_parent extends script.base_script
 {
-
+    public factional_dungeon_parent()
+    {
+    }
     public static final int OBJECTIVE_RESPAWN_TIME = 28800;
     public static final String IMPERIAL_TO_REBEL_FILENAME = "datatables/poi/imperial_rebel_lookup/imperial_to_rebel.iff";
     public static final String REBEL_TO_IMPERIAL_FILENAME = "datatables/poi/imperial_rebel_lookup/rebel_to_imperial.iff";

@@ -5,7 +5,9 @@ import script.library.groundquests;
 
 public class xandank_trophy extends script.base_script
 {
-
+    public xandank_trophy()
+    {
+    }
     public static final String STF = "som/som_quest";
     public static final string_id TRACK = new string_id(STF, "xandank_trophy_track");
     public static final string_id TRACK_FOUND_ONE = new string_id(STF, "xandank_trophy_track_one");

@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class imperial_ship_spawner extends script.base_script
 {
-
+    public imperial_ship_spawner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);

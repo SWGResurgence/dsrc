@@ -6,7 +6,9 @@ import script.*;
 
 public class herald_emperors_retreat extends script.base_script
 {
-
+    public herald_emperors_retreat()
+    {
+    }
     public static String c_stringFile = "conversation/herald_emperors_retreat";
     public boolean herald_emperors_retreat_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

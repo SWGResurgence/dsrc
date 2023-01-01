@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class rebel_research_guard extends script.base_script
 {
-
+    public rebel_research_guard()
+    {
+    }
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         obj_id facility = getObjIdObjVar(self, "coa3.rebel.facility");

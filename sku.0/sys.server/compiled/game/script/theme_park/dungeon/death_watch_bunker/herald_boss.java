@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class herald_boss extends script.base_script
 {
-
+    public herald_boss()
+    {
+    }
     public static final String TBL_BACKUP = "datatables/dungeon/death_watch/boss_backup.iff";
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {

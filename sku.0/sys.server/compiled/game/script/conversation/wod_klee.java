@@ -8,7 +8,9 @@ import script.*;
 
 public class wod_klee extends script.base_script
 {
-
+    public wod_klee()
+    {
+    }
     public static String c_stringFile = "conversation/wod_klee";
     public boolean wod_klee_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

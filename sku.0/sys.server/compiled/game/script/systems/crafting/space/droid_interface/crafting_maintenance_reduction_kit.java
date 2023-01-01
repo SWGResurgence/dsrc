@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_maintenance_reduction_kit extends script.systems.crafting.space.droid_interface.crafting_base_droid_interface_component
 {
-
+    public crafting_maintenance_reduction_kit()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

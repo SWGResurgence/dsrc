@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class cheater extends script.base_script
 {
-    
+    public cheater()
+    {
+    }
     public static final String CHEATER_SCRIPT = "csr.cheater";
     public static final String CHEATER_OBJVAR = "cheater";
     public static final String DURATION_OBJVAR = "cheater_days";

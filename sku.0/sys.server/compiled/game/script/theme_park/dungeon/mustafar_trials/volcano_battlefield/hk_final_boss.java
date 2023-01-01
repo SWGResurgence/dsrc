@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class hk_final_boss extends script.base_script
 {
-
+    public hk_final_boss()
+    {
+    }
     public static final String GUARD = "som_volcano_final_risen_sustainer";
     public static final String KUBAZA = "som_volcano_final_lava_beetle";
     public static final String AKBOT = "som_volcano_final_walker";

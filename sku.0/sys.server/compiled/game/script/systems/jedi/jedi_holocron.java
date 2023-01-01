@@ -5,7 +5,9 @@ import script.*;
 
 public class jedi_holocron extends script.base_script
 {
-
+    public jedi_holocron()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasObjVar(self, "intUsed"))

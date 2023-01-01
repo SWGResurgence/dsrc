@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_38_major_walden extends script.base_script
 {
-
+    public corellia_38_major_walden()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_38_major_walden";
     public boolean corellia_38_major_walden_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

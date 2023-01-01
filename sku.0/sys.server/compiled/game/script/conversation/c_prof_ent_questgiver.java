@@ -5,7 +5,9 @@ import script.*;
 
 public class c_prof_ent_questgiver extends script.base_script
 {
-
+    public c_prof_ent_questgiver()
+    {
+    }
     public static String c_stringFile = "conversation/c_prof_ent_questgiver";
     public boolean c_prof_ent_questgiver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

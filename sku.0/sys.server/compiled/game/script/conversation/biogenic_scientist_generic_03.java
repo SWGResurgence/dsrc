@@ -6,7 +6,9 @@ import script.*;
 
 public class biogenic_scientist_generic_03 extends script.base_script
 {
-
+    public biogenic_scientist_generic_03()
+    {
+    }
     public static String c_stringFile = "conversation/biogenic_scientist_generic_03";
     public boolean biogenic_scientist_generic_03_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

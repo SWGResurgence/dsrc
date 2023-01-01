@@ -5,7 +5,9 @@ import script.library.*;
 
 public class fs_kickoff extends script.base_script
 {
-
+    public fs_kickoff()
+    {
+    }
     public static final String RANGED_SPEED_BRANCH = "force_sensitive_combat_prowess_ranged_speed";
     public static final String MELEE_DEFENSE_BRANCH = "force_sensitive_enhanced_reflexes_melee_defense";
     public static final String RANGED_SPEED_QUEST = "fs_defend_wait_01";

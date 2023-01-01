@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class patrol_guard extends script.base_script
 {
-
+    public patrol_guard()
+    {
+    }
     public static final boolean LOGGING = false;
     public int OnDestroy(obj_id self) throws InterruptedException
     {

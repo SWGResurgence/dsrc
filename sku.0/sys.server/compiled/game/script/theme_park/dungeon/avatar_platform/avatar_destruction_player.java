@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class avatar_destruction_player extends script.base_script
 {
-
+    public avatar_destruction_player()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id structure = getTopMostContainer(self);

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class dumpster_spawner extends script.base_script
 {
-
+    public dumpster_spawner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("nyms_themepark", "dumpster_spawner.OnAttach() Initializing spawning functionality for spawner: " + self);

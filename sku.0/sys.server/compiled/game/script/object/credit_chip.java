@@ -9,7 +9,9 @@ import script.string_id;
 
 public class credit_chip extends script.base_script
 {
-
+    public credit_chip()
+    {
+    }
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int intCredits = getIntObjVar(self, "loot.intCredits");

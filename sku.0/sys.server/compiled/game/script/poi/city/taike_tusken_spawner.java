@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class taike_tusken_spawner extends script.base_script
 {
-
+    public taike_tusken_spawner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "waiting"))

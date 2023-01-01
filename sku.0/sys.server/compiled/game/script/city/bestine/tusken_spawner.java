@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class tusken_spawner extends script.base_script
 {
-
+    public tusken_spawner()
+    {
+    }
     public static final String HEAD = "object/tangible/loot/quest/tusken_head.iff";
     public static final String BATON = "object/weapon/melee/baton/victor_baton_gaderiffi.iff";
     public static final String CARVED = "object/tangible/loot/quest/carved_stone.iff";

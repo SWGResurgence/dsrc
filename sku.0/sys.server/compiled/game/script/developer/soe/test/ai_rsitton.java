@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class ai_rsitton extends script.base_script
 {
-
+    public ai_rsitton()
+    {
+    }
     public static final String s_logLabel = "ai_rsitton";
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {

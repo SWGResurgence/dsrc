@@ -5,7 +5,9 @@ import script.*;
 
 public class blacksun_guri extends script.base_script
 {
-
+    public blacksun_guri()
+    {
+    }
     public static String c_stringFile = "conversation/blacksun_guri";
     public boolean blacksun_guri_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

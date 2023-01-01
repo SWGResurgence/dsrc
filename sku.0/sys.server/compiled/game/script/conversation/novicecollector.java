@@ -5,7 +5,9 @@ import script.library.*;
 
 public class novicecollector extends script.base_script
 {
-
+    public novicecollector()
+    {
+    }
     public static String c_stringFile = "conversation/novicecollector";
     public boolean novicecollector_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

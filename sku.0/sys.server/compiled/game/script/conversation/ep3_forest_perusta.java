@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_forest_perusta extends script.base_script
 {
-
+    public ep3_forest_perusta()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_forest_perusta";
     public boolean ep3_forest_perusta_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

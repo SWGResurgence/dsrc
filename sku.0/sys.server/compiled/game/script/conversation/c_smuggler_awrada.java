@@ -8,7 +8,9 @@ import script.*;
 
 public class c_smuggler_awrada extends script.base_script
 {
-
+    public c_smuggler_awrada()
+    {
+    }
     public static String c_stringFile = "conversation/c_smuggler_awrada";
     public boolean c_smuggler_awrada_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

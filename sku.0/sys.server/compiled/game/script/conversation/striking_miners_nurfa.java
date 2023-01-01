@@ -8,7 +8,9 @@ import script.*;
 
 public class striking_miners_nurfa extends script.base_script
 {
-
+    public striking_miners_nurfa()
+    {
+    }
     public static String c_stringFile = "conversation/striking_miners_nurfa";
     public boolean striking_miners_nurfa_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,7 +8,9 @@ import script.*;
 
 public class collections_fixbrokenspacekillcollections extends script.base_script
 {
-    
+    public collections_fixbrokenspacekillcollections()
+    {
+    }
     public static String c_stringFile = "conversation/collections_fixbrokenspacekillcollections";
     public boolean collections_fixbrokenspacekillcollections_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

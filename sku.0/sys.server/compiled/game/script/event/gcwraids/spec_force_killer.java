@@ -8,7 +8,9 @@ import script.string_id;
 
 public class spec_force_killer extends script.base_script
 {
-
+    public spec_force_killer()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int killReb5 = questGetQuestId("quest/event_gcwcheerleader_sfreb5");

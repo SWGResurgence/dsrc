@@ -5,7 +5,9 @@ import script.library.*;
 
 public class terminal_pob_ship extends script.base_script
 {
-
+    public terminal_pob_ship()
+    {
+    }
     public static final string_id SID_TERMINAL_PERMISSIONS = new string_id("player_structure", "permissions");
     public static final string_id SID_MOVE_FIRST_ITEM = new string_id("player_structure", "move_first_item");
     public static final string_id SID_MOVED_FIRST_ITEM = new string_id("player_structure", "moved_first_item_pob");

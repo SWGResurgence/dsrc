@@ -8,7 +8,9 @@ import script.*;
 
 public class itp_thrawn_winthazen extends script.base_script
 {
-
+    public itp_thrawn_winthazen()
+    {
+    }
     public static String c_stringFile = "conversation/itp_thrawn_winthazen";
     public boolean itp_thrawn_winthazen_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

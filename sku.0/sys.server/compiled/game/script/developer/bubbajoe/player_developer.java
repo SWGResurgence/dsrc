@@ -11,10 +11,12 @@ import script.library.*;
 
 import java.io.File;
 import java.util.ArrayList;
-@SuppressWarnings({"unused", "javadoc", "deprecated", "SpellCheckingInspection"})
+
 public class player_developer extends base_script
 {
-
+    public player_developer()
+    {
+    }
     //public String APIKEY = "https://discord.com/api/webhooks/1054125244060799076/YUI-Gwy8iJTHzBJkPkFBp7kjH27uGNFlO6z6-LFx39kAel5PlQ_xk_sFqxzdf5igiapD";
     public String APIKEY = "https://discord.com/api/webhooks/1056764306320003132/LRryi0SZDM920lm7Z6wRcs4eCKJAEkHcRCwLuyiKMYgzK5MGHvRj9kUx0gd3wFl_4wjE";
 
@@ -898,14 +900,6 @@ public class player_developer extends base_script
                     int howMany = utils.stringToInt(tok.nextToken());
                     setCount(content, howMany);
                 }
-            }
-        }
-        if (cmd.equalsIgnoreCase("vars"))
-        {
-            deltadictionary myinfo = self.getScriptVars();
-            for (Object key : myinfo.keySet())
-            {
-                sendSystemMessageTestingOnly(self, "Key: " + key + " Value: " + myinfo.getString(key));
             }
         }
         if (cmd.equalsIgnoreCase("locomotion"))

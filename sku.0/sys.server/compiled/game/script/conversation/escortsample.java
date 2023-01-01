@@ -8,7 +8,9 @@ import script.*;
 
 public class escortsample extends script.base_script
 {
-
+    public escortsample()
+    {
+    }
     public static String c_stringFile = "conversation/escortsample";
     public boolean escortsample_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

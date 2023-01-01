@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class doom_target extends script.base_script
 {
-
+    public doom_target()
+    {
+    }
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

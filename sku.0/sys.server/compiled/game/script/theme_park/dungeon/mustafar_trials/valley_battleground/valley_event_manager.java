@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class valley_event_manager extends script.base_script
 {
-
+    public valley_event_manager()
+    {
+    }
     public static final String STAGE = "currentStage";
     public static final boolean LOGGING = false;
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException

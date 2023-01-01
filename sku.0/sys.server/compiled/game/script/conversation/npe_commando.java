@@ -5,7 +5,9 @@ import script.library.*;
 
 public class npe_commando extends script.base_script
 {
-
+    public npe_commando()
+    {
+    }
     public static String c_stringFile = "conversation/npe_commando";
     public boolean npe_commando_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

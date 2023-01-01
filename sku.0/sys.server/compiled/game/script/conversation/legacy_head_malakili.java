@@ -8,7 +8,9 @@ import script.*;
 
 public class legacy_head_malakili extends script.base_script
 {
-
+    public legacy_head_malakili()
+    {
+    }
     public static String c_stringFile = "conversation/legacy_head_malakili";
     public boolean legacy_head_malakili_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class ep3_myyydril_compactor extends script.base_script
 {
-
+    public ep3_myyydril_compactor()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_myyydril_compactor";
     public boolean ep3_myyydril_compactor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

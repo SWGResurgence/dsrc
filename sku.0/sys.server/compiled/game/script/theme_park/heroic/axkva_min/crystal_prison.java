@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class crystal_prison extends script.base_script
 {
-
+    public crystal_prison()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "validateTarget", null, 1.0f, false);

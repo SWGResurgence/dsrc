@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class space_utils extends script.base_script
 {
-
+    public space_utils()
+    {
+    }
     public static final int POB_LOOT_BOX_CAPACITY = 75;
     public static final string_id SID_NO_SHIP_CERTIFICATION = new string_id("space/space_interaction", "no_ship_certification");
     public static final string_id SID_NO_WORKING_SHIP = new string_id("space/space_interaction", "no_working_ship");

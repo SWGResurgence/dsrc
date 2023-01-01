@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class cts extends script.base_script
 {
-
+    public cts()
+    {
+    }
     public static final boolean BLOGGING_ON = true;
     public static final String BLOG_CATEGORY = "CharacterTransfer";
     public static final String CTS_GIFT_TEMPLATE = "object/tangible/furniture/house_cleanup/cts_";

@@ -10,7 +10,9 @@ import script.string_id;
 
 public class avatar_wke_prisoner_01 extends script.base_script
 {
-
+    public avatar_wke_prisoner_01()
+    {
+    }
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id THANKS = new string_id(STF, "wke_thanks_01");
     public static final string_id NO_QUEST = new string_id(STF, "wke_no_quest_01");

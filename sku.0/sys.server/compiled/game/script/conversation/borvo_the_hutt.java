@@ -8,7 +8,9 @@ import script.*;
 
 public class borvo_the_hutt extends script.base_script
 {
-
+    public borvo_the_hutt()
+    {
+    }
     public static String c_stringFile = "conversation/borvo_the_hutt";
     public boolean borvo_the_hutt_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

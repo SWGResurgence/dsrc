@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class rubble_effect extends script.base_script
 {
-
+    public rubble_effect()
+    {
+    }
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))

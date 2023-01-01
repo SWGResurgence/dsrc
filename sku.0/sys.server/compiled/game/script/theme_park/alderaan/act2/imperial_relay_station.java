@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class imperial_relay_station extends script.base_script
 {
-
+    public imperial_relay_station()
+    {
+    }
     public static final String[] TEMPLATE_LIST = 
     {
         "object/building/poi/generic_flatten_medium.iff",

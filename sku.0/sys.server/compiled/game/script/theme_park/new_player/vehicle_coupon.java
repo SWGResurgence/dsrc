@@ -5,7 +5,9 @@ import script.*;
 
 public class vehicle_coupon extends script.base_script
 {
-
+    public vehicle_coupon()
+    {
+    }
     public static final String STF = "new_player";
     public static final String VEHICLE_TYPE = "spdrbike";
     public static final string_id MENU_CALL = new string_id(STF, "vehicle_coupon_menu_call");

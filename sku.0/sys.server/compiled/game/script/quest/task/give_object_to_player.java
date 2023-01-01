@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class give_object_to_player extends script.base_script
 {
-
+    public give_object_to_player()
+    {
+    }
     public int OnQuestActivated(obj_id self, int questRow) throws InterruptedException
     {
         LOG("newquests", "give_object_to_player - OnQuestActivated(+ " + questRow + ")");

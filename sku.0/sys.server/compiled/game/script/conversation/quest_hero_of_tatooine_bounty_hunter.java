@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class quest_hero_of_tatooine_bounty_hunter extends script.base_script
 {
-
+    public quest_hero_of_tatooine_bounty_hunter()
+    {
+    }
     public static String c_stringFile = "conversation/quest_hero_of_tatooine_bounty_hunter";
     public boolean quest_hero_of_tatooine_bounty_hunter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

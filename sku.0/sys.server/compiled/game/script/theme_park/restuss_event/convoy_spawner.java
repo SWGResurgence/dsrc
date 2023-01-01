@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class convoy_spawner extends script.base_script
 {
-
+    public convoy_spawner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "createConvoy", null, 1, false);

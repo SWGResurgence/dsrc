@@ -8,7 +8,9 @@ import script.*;
 
 public class tusken_giver extends script.base_script
 {
-
+    public tusken_giver()
+    {
+    }
     public static String c_stringFile = "conversation/tusken_giver";
     public boolean tusken_giver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

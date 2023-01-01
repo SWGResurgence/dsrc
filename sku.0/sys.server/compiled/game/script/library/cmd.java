@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class cmd extends script.base_script
 {
-
+    public cmd()
+    {
+    }
     public static final int ACHE = (-1057579270);
     public static final int ADJUST = (-1680170559);
     public static final int ADN = (-1332248058);

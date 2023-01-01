@@ -8,7 +8,9 @@ import script.string_id;
 
 public class give_item extends script.quest.task.ground.base_task
 {
-
+    public give_item()
+    {
+    }
     public static final String dataTableNumToGive = "NUM_TO_GIVE";
     public static final String dataTableItemToGive = "ITEM_TO_GIVE";
     public static final String dataTableCreateItem = "CREATE_ITEM";

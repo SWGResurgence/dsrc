@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_cheyerooto extends script.base_script
 {
-
+    public ep3_cheyerooto()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_cheyerooto";
     public boolean ep3_cheyerooto_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

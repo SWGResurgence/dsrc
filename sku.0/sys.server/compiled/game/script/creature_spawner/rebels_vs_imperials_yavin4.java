@@ -48,7 +48,9 @@ public class rebels_vs_imperials_yavin4 extends script.base_script
             "imperial_colonel"
     };
 
-
+    public rebels_vs_imperials_yavin4()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "imperialPoints", 0);

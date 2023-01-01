@@ -8,7 +8,9 @@ import script.string_id;
 
 public class grav_unit_repair_kit extends script.base_script
 {
-
+    public grav_unit_repair_kit()
+    {
+    }
     public static final String REBEL_SHARED_STF = "theme_park/alderaan/act3/shared_rebel_missions";
     public static final string_id GRAV_UNIT_REPAIRED = new string_id(REBEL_SHARED_STF, "repair_grav_unit");
     public static final string_id REPAIR_FAILED = new string_id(REBEL_SHARED_STF, "repair_failed");

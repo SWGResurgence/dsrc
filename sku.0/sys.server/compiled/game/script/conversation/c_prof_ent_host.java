@@ -8,7 +8,9 @@ import script.*;
 
 public class c_prof_ent_host extends script.base_script
 {
-
+    public c_prof_ent_host()
+    {
+    }
     public static String c_stringFile = "conversation/c_prof_ent_host";
     public boolean c_prof_ent_host_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

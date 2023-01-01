@@ -8,7 +8,9 @@ import script.library.xp;
 
 public class nobles_ai extends script.base_script
 {
-
+    public nobles_ai()
+    {
+    }
     public static final String CONVO_FILE = "theme_park/royal_kidnapping/nobles";
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public static final String XP_REWARD_TYPE = "combat_general";

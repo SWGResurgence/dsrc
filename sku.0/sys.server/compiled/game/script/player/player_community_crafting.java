@@ -8,7 +8,9 @@ import script.string_id;
 
 public class player_community_crafting extends script.base_script
 {
-
+    public player_community_crafting()
+    {
+    }
     public static final float MIN_NPC_DISTANCE = 6.0f;
     public static final String OBJVAR_CLEANUP = community_crafting.OBJVAR_COMMUNITY_CRAFTING_BASE + ".cleanup";
     public static final String OBJVAR_REWARD_PRIZE = community_crafting.OBJVAR_COMMUNITY_CRAFTING_BASE + "." + community_crafting.REWARD_PRIZE;

@@ -13,7 +13,9 @@ import java.util.stream.Stream;
 
 public class qa_quest_skipper extends script.base_script
 {
-
+    public qa_quest_skipper()
+    {
+    }
     public static final String QUEST_TOOL_TITLE = "QA Quest Tool";
     public static final String QUEST_TOOL_PROMPT = "Select a Quest or menu item.\n\n(A) Active Quest\n(C) Completed Quest";
     public static final String QUEST_TOOL_SUBPROMPT = "Be sure to select the correct option. The quest will be modified per your selection without any additional verification. You can also select an individual quest task to manage it. \n\nThe visible tasks of the quest are displayed below prepended with their ID followed by (A) for an active task, (C) for a completed task, or (I) for an inactive task. You can select a task to activate/complete/fail/reset it.";

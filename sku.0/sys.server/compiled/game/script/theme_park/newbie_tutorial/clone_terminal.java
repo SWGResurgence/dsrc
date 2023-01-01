@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class clone_terminal extends script.theme_park.newbie_tutorial.tutorial_base
 {
-
+    public clone_terminal()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         utils.setScriptVar(player, "newbie.usedCloneTerm", true);

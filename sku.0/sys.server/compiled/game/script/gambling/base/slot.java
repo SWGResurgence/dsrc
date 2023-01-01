@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class slot extends script.gambling.base.default_interface
 {
-    
+    public slot()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         int slotBalance = getBankBalance(self);

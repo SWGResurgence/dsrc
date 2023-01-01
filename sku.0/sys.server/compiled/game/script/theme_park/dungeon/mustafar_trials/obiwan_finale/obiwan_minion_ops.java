@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class obiwan_minion_ops extends script.base_script
 {
-
+    public obiwan_minion_ops()
+    {
+    }
     public static final boolean CONST_FLAG_DO_LOGGING = true;
     public int OnAttach(obj_id self) throws InterruptedException
     {

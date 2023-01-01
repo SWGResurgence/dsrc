@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class player_cmd_pirate extends script.base_script
 {
-
+    public player_cmd_pirate()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         dictionary outparams = new dictionary();

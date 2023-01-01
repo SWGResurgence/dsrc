@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_myyydril_weaponsmith extends script.base_script
 {
-
+    public ep3_myyydril_weaponsmith()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_myyydril_weaponsmith";
     public boolean ep3_myyydril_weaponsmith_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

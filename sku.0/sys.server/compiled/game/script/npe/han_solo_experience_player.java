@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class han_solo_experience_player extends script.base_script
 {
-
+    public han_solo_experience_player()
+    {
+    }
     public int grenadedamage(obj_id self, dictionary params) throws InterruptedException
     {
         int maxHealth = getMaxHealth(self);

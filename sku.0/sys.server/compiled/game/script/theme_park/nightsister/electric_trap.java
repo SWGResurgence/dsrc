@@ -7,7 +7,9 @@ import script.string_id;
 
 public class electric_trap extends script.base_script
 {
-
+    public electric_trap()
+    {
+    }
     public static final String MSGS = "dungeon/nightsister_rancor_cave";
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -7,7 +7,9 @@ import script.*;
 
 public class ep3_chanoota extends script.base_script
 {
-
+    public ep3_chanoota()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_chanoota";
     public boolean ep3_chanoota_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

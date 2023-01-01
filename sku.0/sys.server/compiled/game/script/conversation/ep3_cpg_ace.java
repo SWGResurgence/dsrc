@@ -5,7 +5,9 @@ import script.*;
 
 public class ep3_cpg_ace extends script.base_script
 {
-
+    public ep3_cpg_ace()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_cpg_ace";
     public boolean ep3_cpg_ace_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

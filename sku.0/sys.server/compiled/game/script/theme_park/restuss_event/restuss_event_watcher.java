@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class restuss_event_watcher extends script.base_script
 {
-
+    public restuss_event_watcher()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException {
         if(automationEnabled()) completeStageOne(self, null);
         return SCRIPT_CONTINUE;

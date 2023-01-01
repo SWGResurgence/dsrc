@@ -5,7 +5,9 @@ import script.dictionary;
 
 public class colors extends script.base_script
 {
-    
+    public colors()
+    {
+    }
     public static final color BLACK = new color(0, 0, 0, 255);
     public static final color GREY = new color(190, 190, 190, 255);
     public static final color DIMGREY = new color(105, 105, 105, 255);

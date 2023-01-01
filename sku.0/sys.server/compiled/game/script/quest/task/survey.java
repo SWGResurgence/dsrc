@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class survey extends script.base_script
 {
-
+    public survey()
+    {
+    }
     public int surveyComplete(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newquests", "survey - surveyComplete()");

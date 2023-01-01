@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class phinea_shantee extends script.base_script
 {
-
+    public phinea_shantee()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/shirt/shirt_s07.iff", self, "");

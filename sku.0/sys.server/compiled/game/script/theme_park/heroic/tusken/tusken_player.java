@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class tusken_player extends script.base_script
 {
-
+    public tusken_player()
+    {
+    }
     public int OnLogin(obj_id self) throws InterruptedException
     {
         String area = locations.getBuildoutAreaName(self);

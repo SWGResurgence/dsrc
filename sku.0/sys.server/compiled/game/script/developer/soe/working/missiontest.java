@@ -8,7 +8,9 @@ public class missiontest extends script.base_script
 {
     public static final String mission_type = "patrol";
     public static final String mission_name = "npe_easy_main_1";
-
+    public missiontest()
+    {
+    }
 
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {

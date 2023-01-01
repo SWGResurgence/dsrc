@@ -9,7 +9,9 @@ import script.string_id;
 
 public class echo_quest_tracker extends script.base_script
 {
-
+    public echo_quest_tracker()
+    {
+    }
     public static final String PHASE = "phase";
     public static final String P1_DEAD_AT = "p1_dead_at";
     public static final String P1_GENERATOR_DESTROYED = "p1_generator_destroyed";

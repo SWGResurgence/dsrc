@@ -5,7 +5,9 @@ import script.*;
 
 public class imperial_empire_day_mara_jade extends script.base_script
 {
-
+    public imperial_empire_day_mara_jade()
+    {
+    }
     public static String c_stringFile = "conversation/imperial_empire_day_mara_jade";
     public boolean imperial_empire_day_mara_jade_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

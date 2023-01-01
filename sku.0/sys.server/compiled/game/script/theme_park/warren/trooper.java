@@ -9,7 +9,9 @@ import script.string_id;
 
 public class trooper extends script.base_script
 {
-
+    public trooper()
+    {
+    }
     public static final String CONVO_FILE = "theme_park/warren/warren";
     public static final String ALERT_VOLUME_NAME = "alertVolume";
     public static final String ACTION_ALERT = "alert";

@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class craft extends script.quest.task.ground.base_task
 {
-
+    public craft()
+    {
+    }
     public static final String dataTableColumnServerTemplate = "SERVER_OBJECT_TEMPLATE";
     public static final String dataTableColumnCount = "COUNT";
     public static final String objvarCount = "count";

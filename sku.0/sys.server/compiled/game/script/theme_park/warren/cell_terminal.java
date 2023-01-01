@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class cell_terminal extends script.base_script
 {
-
+    public cell_terminal()
+    {
+    }
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public static final String ACTIVE = "cell_locked";
     public static final String INACTIVE = "cell_open";

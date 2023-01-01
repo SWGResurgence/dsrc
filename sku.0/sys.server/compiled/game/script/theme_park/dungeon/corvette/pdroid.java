@@ -7,7 +7,9 @@ import script.string_id;
 
 public class pdroid extends script.base_script
 {
-
+    public pdroid()
+    {
+    }
     public static final String MSGS = "dungeon/corvette";
     public int woohoo(obj_id self, dictionary params) throws InterruptedException
     {

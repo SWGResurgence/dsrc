@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class space_flags extends script.base_script
 {
-    
+    public space_flags()
+    {
+    }
     public static final String PRIVATEER_TATOOINE = "tatooinePrivateer";
     public static final String PRIVATEER_NABOO = "nabooPrivateer";
     public static final String PRIVATEER_CORELLIA = "corelliaPrivateer";

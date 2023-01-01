@@ -8,7 +8,9 @@ import script.*;
 
 public class prof_spy_21_eyan extends script.base_script
 {
-
+    public prof_spy_21_eyan()
+    {
+    }
     public static String c_stringFile = "conversation/prof_spy_21_eyan";
     public boolean prof_spy_21_eyan_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

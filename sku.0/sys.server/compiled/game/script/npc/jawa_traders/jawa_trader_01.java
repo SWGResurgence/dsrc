@@ -6,7 +6,9 @@ import script.string_id;
 
 public class jawa_trader_01 extends script.base_script
 {
-
+    public jawa_trader_01()
+    {
+    }
     public static final String FACETO_VOLUME_NAME = "faceToTriggerVolume";
     public static final String CONVO = "jawa_trader";
     public static final String TBL = "datatables/npc/junk_dealer/junk_dealer.iff";

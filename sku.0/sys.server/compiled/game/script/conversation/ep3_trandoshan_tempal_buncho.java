@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_trandoshan_tempal_buncho extends script.base_script
 {
-
+    public ep3_trandoshan_tempal_buncho()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_trandoshan_tempal_buncho";
     public boolean ep3_trandoshan_tempal_buncho_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

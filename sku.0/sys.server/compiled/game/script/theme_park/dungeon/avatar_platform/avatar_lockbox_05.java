@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class avatar_lockbox_05 extends script.base_script
 {
-
+    public avatar_lockbox_05()
+    {
+    }
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id ENTER_CODE = new string_id(STF, "lockbox_code");
     public static final string_id UNLOCKED = new string_id(STF, "lockbox_unlocked");

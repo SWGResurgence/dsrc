@@ -9,7 +9,9 @@ import script.string_id;
 
 public class dna extends script.base_script
 {
-
+    public dna()
+    {
+    }
     public static final string_id SID_GOD_DNA_DATA = new string_id("incubator", "GODMODE_ADD_DATA");
     public static final string_id SID_GOD_FIX = new string_id("incubator", "GODMODE_FIX_DATA");
     public int OnAttach(obj_id self) throws InterruptedException

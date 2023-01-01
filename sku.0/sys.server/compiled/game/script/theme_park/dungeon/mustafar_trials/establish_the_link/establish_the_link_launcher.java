@@ -9,7 +9,9 @@ import script.string_id;
 
 public class establish_the_link_launcher extends script.base_script
 {
-
+    public establish_the_link_launcher()
+    {
+    }
     public static final string_id SID_UPLINK_CAVE = new string_id("dungeon/space_dungeon", "uplink_cave");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {

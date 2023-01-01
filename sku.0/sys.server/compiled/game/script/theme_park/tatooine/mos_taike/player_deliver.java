@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class player_deliver extends script.base_script
 {
-
+    public player_deliver()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location here = getLocationObjVar(self, "mos_taike.cantina.receiverLoc");

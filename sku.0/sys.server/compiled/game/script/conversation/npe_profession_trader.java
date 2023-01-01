@@ -5,7 +5,9 @@ import script.*;
 
 public class npe_profession_trader extends script.base_script
 {
-
+    public npe_profession_trader()
+    {
+    }
     public static String c_stringFile = "conversation/npe_profession_trader";
     public boolean npe_profession_trader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_quest_template extends script.base_script
 {
-
+    public ep3_quest_template()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_quest_template";
     public boolean ep3_quest_template_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

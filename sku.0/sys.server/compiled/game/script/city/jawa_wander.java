@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class jawa_wander extends script.base_script
 {
-
+    public jawa_wander()
+    {
+    }
     public static final String[] patrolPoints = 
     {
         "jawa1",

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class gorr_ebelt extends script.base_script
 {
-
+    public gorr_ebelt()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/shirt/shirt_s30.iff", self, "");

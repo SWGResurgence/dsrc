@@ -6,7 +6,9 @@ import java.util.Vector;
 
 public class player_version extends script.base_script
 {
-
+    public player_version()
+    {
+    }
     public static boolean updateSkills(obj_id player) throws InterruptedException
     {
         return !(!isIdValid(player) || (!isPlayer(player)));

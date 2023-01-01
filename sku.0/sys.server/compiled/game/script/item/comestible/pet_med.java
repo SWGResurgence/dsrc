@@ -5,7 +5,9 @@ import script.library.*;
 
 public class pet_med extends script.base_script
 {
-
+    public pet_med()
+    {
+    }
     public static final String SCRIPT_PET_MED = "item.comestible.pet_med";
     public static final string_id SID_TARGET_NOT_CREATURE = new string_id("error_message", "target_not_creature");
     public static final string_id SID_TARGETTING_ERROR = new string_id("error_message", "targetting_error");

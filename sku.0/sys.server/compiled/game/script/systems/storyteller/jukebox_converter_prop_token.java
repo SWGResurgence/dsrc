@@ -7,7 +7,9 @@ import script.*;
 
 public class jukebox_converter_prop_token extends script.base_script
 {
-
+    public jukebox_converter_prop_token()
+    {
+    }
     public static final String JUKEBOX_SCRIPT = "systems.event_perk.jukebox";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

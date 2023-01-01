@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class invitation_terminal extends script.base_script
 {
-
+    public invitation_terminal()
+    {
+    }
     public static final String JUKEBOX_SCRIPT = "systems.event_perk.jukebox";
     public int OnAttach(obj_id self) throws InterruptedException
     {

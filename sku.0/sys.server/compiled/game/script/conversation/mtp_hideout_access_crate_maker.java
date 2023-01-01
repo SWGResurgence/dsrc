@@ -8,7 +8,9 @@ import script.*;
 
 public class mtp_hideout_access_crate_maker extends script.base_script
 {
-
+    public mtp_hideout_access_crate_maker()
+    {
+    }
     public static String c_stringFile = "conversation/mtp_hideout_access_crate_maker";
     public boolean mtp_hideout_access_crate_maker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

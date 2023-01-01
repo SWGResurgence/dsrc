@@ -10,7 +10,9 @@ import java.util.StringTokenizer;
 
 public class jmichener_test extends script.base_script
 {
-
+    public jmichener_test()
+    {
+    }
 
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class binna_jode extends script.base_script
 {
-
+    public binna_jode()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id skirt = createObject("object/tangible/wearables/skirt/skirt_s04.iff", self, "");

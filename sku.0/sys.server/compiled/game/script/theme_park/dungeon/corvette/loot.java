@@ -11,7 +11,9 @@ import script.string_id;
 
 public class loot extends script.base_script
 {
-
+    public loot()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "item.container.loot_crate");

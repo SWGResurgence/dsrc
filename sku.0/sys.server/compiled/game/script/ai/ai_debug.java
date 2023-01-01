@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class ai_debug extends script.base_script
 {
-
+    public ai_debug()
+    {
+    }
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         healShockWound(self, getShockWound(self));

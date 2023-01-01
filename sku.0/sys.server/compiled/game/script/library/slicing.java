@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class slicing extends script.base_script
 {
-
+    public slicing()
+    {
+    }
     public static final string_id SID_SLICING_UNDERWAY = new string_id("slicing/slicing", "slicing_underway");
     public static final string_id SID_ALREADY_SLICING = new string_id("slicing/slicing", "already_slicing");
     public static final string_id SID_ALREADY_SLICED = new string_id("slicing/slicing", "already_sliced");

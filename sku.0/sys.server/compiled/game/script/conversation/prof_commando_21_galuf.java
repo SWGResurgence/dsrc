@@ -8,7 +8,9 @@ import script.*;
 
 public class prof_commando_21_galuf extends script.base_script
 {
-
+    public prof_commando_21_galuf()
+    {
+    }
     public static String c_stringFile = "conversation/prof_commando_21_galuf";
     public boolean prof_commando_21_galuf_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

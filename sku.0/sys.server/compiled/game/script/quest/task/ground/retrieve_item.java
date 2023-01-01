@@ -12,7 +12,9 @@ import java.util.Vector;
 
 public class retrieve_item extends script.quest.task.ground.base_task
 {
-
+    public retrieve_item()
+    {
+    }
     public static final String dataTableColumnServerTemplate = "SERVER_TEMPLATE";
     public static final String dataTableColumnNumRequired = "NUM_REQUIRED";
     public static final String dataTableColumnDropPercent = "DROP_PERCENT";

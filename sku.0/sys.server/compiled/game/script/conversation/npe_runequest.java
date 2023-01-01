@@ -5,7 +5,9 @@ import script.*;
 
 public class npe_runequest extends script.base_script
 {
-
+    public npe_runequest()
+    {
+    }
     public static String c_stringFile = "conversation/npe_runequest";
     public boolean npe_runequest_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

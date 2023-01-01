@@ -10,7 +10,9 @@ import script.string_id;
 
 public class celeb_respect extends script.base_script
 {
-
+    public celeb_respect()
+    {
+    }
     private static final String EMOTE_DATATABLE = "datatables/npc/stormtrooper_attitude/emote.iff";
     public static final String STF_FILE = "event/gcw_raids";
     public int OnSawEmote(obj_id self, obj_id emoteSayer, String emotein) throws InterruptedException

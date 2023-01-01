@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class hk_risen_guard extends script.base_script
 {
-
+    public hk_risen_guard()
+    {
+    }
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

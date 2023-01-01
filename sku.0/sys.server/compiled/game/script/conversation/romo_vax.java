@@ -8,7 +8,9 @@ import script.*;
 
 public class romo_vax extends script.base_script
 {
-
+    public romo_vax()
+    {
+    }
     public static String c_stringFile = "conversation/romo_vax";
     public boolean romo_vax_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

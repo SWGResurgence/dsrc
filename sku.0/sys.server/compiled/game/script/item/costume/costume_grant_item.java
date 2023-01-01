@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class costume_grant_item extends script.base_script
 {
-
+    public costume_grant_item()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))

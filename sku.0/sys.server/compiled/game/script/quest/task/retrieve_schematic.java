@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class retrieve_schematic extends script.base_script
 {
-
+    public retrieve_schematic()
+    {
+    }
     public int OnGrantedSchematic(obj_id self, int schematicCrc, boolean fromSkill) throws InterruptedException
     {
         String[] activeTasks = quests.getActiveQuestsWithScript("quest.task.retrieve_schematic", self);

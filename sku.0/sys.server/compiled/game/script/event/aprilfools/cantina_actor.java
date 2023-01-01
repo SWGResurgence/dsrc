@@ -10,7 +10,9 @@ import script.string_id;
 
 public class cantina_actor extends script.base_script
 {
-
+    public cantina_actor()
+    {
+    }
     public static final String RAND_LOCATION = "datatables/event/aprilfools/random_location.iff";
     public static final String POSITIONS = "datatables/event/aprilfools/cantina_positions.iff";
     public static final String DATATABLE = "datatables/event/invasion/ewok_bonus_loot.iff";

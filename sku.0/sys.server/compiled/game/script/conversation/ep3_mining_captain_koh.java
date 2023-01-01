@@ -5,7 +5,9 @@ import script.*;
 
 public class ep3_mining_captain_koh extends script.base_script
 {
-
+    public ep3_mining_captain_koh()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_mining_captain_koh";
     public boolean ep3_mining_captain_koh_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

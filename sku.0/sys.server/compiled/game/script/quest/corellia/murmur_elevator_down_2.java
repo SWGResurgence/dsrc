@@ -5,7 +5,9 @@ import script.*;
 
 public class murmur_elevator_down_2 extends script.base_script
 {
-
+    public murmur_elevator_down_2()
+    {
+    }
     public static final String STF_FILE = "elevator_text";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

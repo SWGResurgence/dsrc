@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class perforce extends script.base_script
 {
-
+    public perforce()
+    {
+    }
 
     public static String getIdOptions() throws InterruptedException
     {

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class find_theater extends script.base_script
 {
-
+    public find_theater()
+    {
+    }
     public void completeTask(obj_id self, String questName, boolean succeeded) throws InterruptedException
     {
         if (hasObjVar(self, "quest." + questName))

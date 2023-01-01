@@ -9,7 +9,9 @@ public class tatooine_npc_medium extends base_newbie_npc_spawner
     public int maxPop = 3;
     public boolean newbie = true;
 
-
+    public tatooine_npc_medium()
+    {
+    }
     public String pickCreature() throws InterruptedException
     {
         switch (rand(1,9))

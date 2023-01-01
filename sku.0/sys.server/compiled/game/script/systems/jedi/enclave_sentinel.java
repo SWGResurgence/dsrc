@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class enclave_sentinel extends script.base_script
 {
-
+    public enclave_sentinel()
+    {
+    }
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         boolean isLightJedi = hasObjVar(self, "jedi.enclave.light");

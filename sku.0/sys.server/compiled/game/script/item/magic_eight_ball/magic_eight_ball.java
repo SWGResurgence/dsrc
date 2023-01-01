@@ -5,7 +5,9 @@ import script.library.sui;
 
 public class magic_eight_ball extends script.base_script
 {
-
+    public magic_eight_ball()
+    {
+    }
     public static final string_id SID_READ_OPTION = new string_id("sui", "read_option");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

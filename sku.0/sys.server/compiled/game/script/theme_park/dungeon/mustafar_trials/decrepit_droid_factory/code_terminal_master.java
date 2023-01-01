@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class code_terminal_master extends script.base_script
 {
-
+    public code_terminal_master()
+    {
+    }
     public static final String DECREPIT_STF = "mustafar/decrepit_droid_factory";
     public static final string_id SID_ENTER_ACCESS_CODE = new string_id(DECREPIT_STF, "enter_second_floor_code");
     public static final string_id SID_CODE_RESET = new string_id(DECREPIT_STF, "reset_security_code");

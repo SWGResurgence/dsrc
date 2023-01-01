@@ -7,7 +7,9 @@ import script.ranged_int_custom_var;
 
 public class coloring extends script.base_script
 {
-
+    public coloring()
+    {
+    }
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         int stringCheck = text.indexOf("color");

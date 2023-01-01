@@ -20,7 +20,9 @@ import script.string_id;
 
 public class pumpkin_smasher_object extends script.base_script
 {
-
+    public pumpkin_smasher_object()
+    {
+    }
     public static final string_id SID_USE = new string_id("Smash!");
     private static final String HALLOWEEN = "event/halloween";
     public static String[] LOOT_TABLES = {

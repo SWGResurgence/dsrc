@@ -9,7 +9,9 @@ import script.string_id;
 
 public class workbench extends script.base_script
 {
-
+    public workbench()
+    {
+    }
     public static final string_id AGUMENTED_REBREATHER = new string_id("dungeon/death_watch", "agumented_rebreather");
     public static final string_id MNU_WORKBENCH = new string_id("dungeon/death_watch", "mnu_workbench");
     public static final string_id MISSING_COMPONENT = new string_id("dungeon/death_watch", "missing_component");

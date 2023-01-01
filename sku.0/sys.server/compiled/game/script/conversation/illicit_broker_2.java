@@ -5,7 +5,9 @@ import script.library.*;
 
 public class illicit_broker_2 extends script.base_script
 {
-
+    public illicit_broker_2()
+    {
+    }
     public static String c_stringFile = "conversation/illicit_broker_2";
     public boolean illicit_broker_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

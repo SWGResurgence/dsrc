@@ -9,7 +9,9 @@ import script.string_id;
 
 public class toy extends script.base_script
 {
-
+    public toy()
+    {
+    }
     public static int COOLDOWN_TIME = 14400; // 4 hours
     public static int currentGameTime = getCalendarTime();
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException

@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class ai_controller extends script.base_script
 {
-
+    public ai_controller()
+    {
+    }
     public static final String PATH = "patrol_path";
     public static final String MOVETO = "moveTo";
     public static final boolean LOGGING = true;

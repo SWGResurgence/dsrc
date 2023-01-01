@@ -5,7 +5,9 @@ import script.library.*;
 
 public class ai_combat extends script.base_script
 {
-
+    public ai_combat()
+    {
+    }
     public static void doAttack(obj_id ai, obj_id target) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(ai), "debug_ai", "ai_combat::doAttack() ai(" + ai + ")");

@@ -7,7 +7,9 @@ import script.library.space_dungeon;
 
 public class terminal_main_console extends script.base_script
 {
-
+    public terminal_main_console()
+    {
+    }
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id ENTER_CODE = new string_id(STF, "enter_code");
     public static final string_id WARNING_DESTRUCT = new string_id(STF, "warning_destruct");

@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class swyckoff_test extends script.base.remote_object_requester
 {
-
+    public swyckoff_test()
+    {
+    }
     public static final String FINISH_PLANET = "tatooine";
     public static final float FINISH_X = 3528.0f;
     public static final float FINISH_Z = -4804.0f;

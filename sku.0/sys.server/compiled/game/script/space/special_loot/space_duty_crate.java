@@ -10,7 +10,9 @@ import script.string_id;
 
 public class space_duty_crate extends script.base_script
 {
-
+    public space_duty_crate()
+    {
+    }
     public static final string_id SID_OPEN_CRATE = new string_id("spam", "open_crate");
     public static final String LOOT_LIST = "datatables/space_loot/piracy_loot/crate_list.iff";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

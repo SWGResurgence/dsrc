@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class master_droid_engineer extends script.base_script
 {
-
+    public master_droid_engineer()
+    {
+    }
     public static final String VOLUME_NAME = "mdeStartRange";
     public static final float VOLUME_RANGE = 25.0f;
     public static final float RAT_STAGE_1 = 0.90f;

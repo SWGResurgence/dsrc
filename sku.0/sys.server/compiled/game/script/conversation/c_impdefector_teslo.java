@@ -8,7 +8,9 @@ import script.*;
 
 public class c_impdefector_teslo extends script.base_script
 {
-
+    public c_impdefector_teslo()
+    {
+    }
     public static String c_stringFile = "conversation/c_impdefector_teslo";
     public boolean c_impdefector_teslo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

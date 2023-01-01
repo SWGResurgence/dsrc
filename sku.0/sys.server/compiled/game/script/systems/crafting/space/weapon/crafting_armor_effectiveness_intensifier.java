@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_armor_effectiveness_intensifier extends script.systems.crafting.space.weapon.crafting_base_space_weapon_component
 {
-
+    public crafting_armor_effectiveness_intensifier()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

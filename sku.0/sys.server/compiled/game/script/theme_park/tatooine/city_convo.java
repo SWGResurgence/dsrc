@@ -6,7 +6,9 @@ import script.string_id;
 
 public class city_convo extends script.base_script
 {
-
+    public city_convo()
+    {
+    }
     public static final location mos_eisley = new location(3386, 6, -4825, "tatooine");
     public static final location mos_espa = new location(-2882, 7, 2097, "tatooine");
     public static final location bestine = new location(-927, 11, -4483, "tatooine");

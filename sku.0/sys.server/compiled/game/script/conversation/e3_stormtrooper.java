@@ -8,7 +8,9 @@ import script.*;
 
 public class e3_stormtrooper extends script.base_script
 {
-
+    public e3_stormtrooper()
+    {
+    }
     public static String c_stringFile = "conversation/e3_stormtrooper";
     public boolean e3_stormtrooper_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class weak_droid extends script.base_script
 {
-
+    public weak_droid()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id weapon = aiGetPrimaryWeapon(self);

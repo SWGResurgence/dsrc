@@ -4,7 +4,9 @@ import script.*;
 
 public class combat_flare_gun extends script.systems.combat.combat_base
 {
-
+    public combat_flare_gun()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCount(self, 5);

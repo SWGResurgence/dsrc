@@ -13,7 +13,9 @@ import java.util.Vector;
 
 public class qawearables extends script.base_script
 {
-
+    public qawearables()
+    {
+    }
     public static final String DATATABLE_LOCATION = "datatables/test/qa_wearables.iff";
     public String[] populateArray(obj_id player, String datatableName, String choice, String column1, String column2, boolean filtered, boolean allFunction) throws InterruptedException
     {

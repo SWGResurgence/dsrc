@@ -8,7 +8,9 @@ import script.*;
 
 public class mtp_hideout_access_old_meatlump extends script.base_script
 {
-
+    public mtp_hideout_access_old_meatlump()
+    {
+    }
     public static String c_stringFile = "conversation/mtp_hideout_access_old_meatlump";
     public boolean mtp_hideout_access_old_meatlump_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

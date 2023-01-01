@@ -5,7 +5,9 @@ import script.*;
 
 public class mustafar_damaged_map extends script.base_script
 {
-    
+    public mustafar_damaged_map()
+    {
+    }
     public static final String STF = "som/som_quest";
     public static final string_id EXAMINE = new string_id(STF, "mustafar_damaged_map_examine");
     public static final string_id COMPLETED = new string_id(STF, "mustafar_damaged_map_already");

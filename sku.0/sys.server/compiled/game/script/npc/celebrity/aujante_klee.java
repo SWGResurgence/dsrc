@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class aujante_klee extends script.base_script
 {
-
+    public aujante_klee()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id pants = createObject("object/tangible/wearables/pants/nightsister_pants_s01.iff", self, "");

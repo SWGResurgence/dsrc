@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class combat_ship_security_terminal extends script.base_script
 {
-
+    public combat_ship_security_terminal()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String strCellToLock = getStringObjVar(self, "strCellToLock");

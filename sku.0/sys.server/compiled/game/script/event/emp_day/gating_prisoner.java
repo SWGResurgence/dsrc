@@ -5,7 +5,9 @@ import script.string_id;
 
 public class gating_prisoner extends script.base_script
 {
-
+    public gating_prisoner()
+    {
+    }
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))

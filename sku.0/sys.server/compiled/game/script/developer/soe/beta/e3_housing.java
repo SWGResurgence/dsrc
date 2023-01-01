@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class e3_housing extends script.base_script
 {
-
+    public e3_housing()
+    {
+    }
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         obj_id deed = obj_id.NULL_ID;

@@ -8,7 +8,9 @@ import script.library.weapons;
 
 public class avatar_lockbox_03 extends script.base_script
 {
-
+    public avatar_lockbox_03()
+    {
+    }
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id ENTER_CODE = new string_id(STF, "lockbox_code");
     public static final string_id UNLOCKED = new string_id(STF, "lockbox_unlocked");

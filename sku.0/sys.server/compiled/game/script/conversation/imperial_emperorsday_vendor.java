@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class imperial_emperorsday_vendor extends script.base_script
 {
-
+    public imperial_emperorsday_vendor()
+    {
+    }
     public static String c_stringFile = "conversation/imperial_emperorsday_vendor";
     public boolean imperial_emperorsday_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

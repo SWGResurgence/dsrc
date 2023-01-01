@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class bug_spawner extends script.base_script
 {
-
+    public bug_spawner()
+    {
+    }
     public static final String BUG_COUNT = "spawning.bugCount";
     public static final int BUG_MAX = 8;
     public static final String DRONE = "som_link_lava_beetle_drone";

@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class pazaak extends script.gambling.base.table
 {
-
+    public pazaak()
+    {
+    }
     public static final int[] PLAY_DECK = 
     {
         1,

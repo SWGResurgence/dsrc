@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class kessel_manager extends script.base_script
 {
-
+    public kessel_manager()
+    {
+    }
     public static String RETAIN_TABLE = "datatables/space_content/battlefields/kessel_no_destroy.iff";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

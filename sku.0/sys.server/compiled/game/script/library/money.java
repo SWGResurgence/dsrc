@@ -7,7 +7,9 @@ import script.string_id;
 
 public class money extends script.base_script
 {
-
+    public money()
+    {
+    }
     public static final String SCRIPT_PAY_ACTOR = "money.pay.actor";
     public static final String SCRIPT_ACCT_PAY = "money.acct_pay.target";
     public static final String VAR_MONEY_BASE = "money";

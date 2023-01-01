@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class weather_machine extends script.base_script
 {
-
+    public weather_machine()
+    {
+    }
     public static final string_id SID_WHILE_DEAD = new string_id("spam", "while_dead");
     public static final string_id SID_TURN_ON = new string_id("spam", "weather_machine_on");
     public static final string_id SID_TURN_OFF = new string_id("spam", "weather_machine_off");

@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class player_escort extends script.base_script
 {
-
+    public player_escort()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location questLoc = getLocationObjVar(self, "mos_taike.mayor.vip_loc");

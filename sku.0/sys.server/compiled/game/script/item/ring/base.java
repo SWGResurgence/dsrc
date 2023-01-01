@@ -8,7 +8,9 @@ import script.*;
 
 public class base extends script.base_script
 {
-
+    public base()
+    {
+    }
     public static final string_id SID_ALREADY_PROPOSING = new string_id("unity", "already_proposing");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

@@ -5,7 +5,9 @@ import script.*;
 
 public class npe_emergence_helper extends script.base_script
 {
-
+    public npe_emergence_helper()
+    {
+    }
     public static String c_stringFile = "conversation/npe_emergence_helper";
     public boolean npe_emergence_helper_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

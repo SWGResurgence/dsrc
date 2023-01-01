@@ -7,7 +7,9 @@ import script.string_id;
 
 public class cybernetic_player extends script.systems.combat.combat_base
 {
-    
+    public cybernetic_player()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         cybernetic.validateSkillMods(self);

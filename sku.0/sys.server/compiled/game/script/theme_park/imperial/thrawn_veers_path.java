@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class thrawn_veers_path extends script.base_script
 {
-
+    public thrawn_veers_path()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "thrawn_veers_MoveToBalcony", null, 10, true);

@@ -9,7 +9,9 @@ import script.string_id;
 
 public class hall2_block extends script.base_script
 {
-
+    public hall2_block()
+    {
+    }
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))

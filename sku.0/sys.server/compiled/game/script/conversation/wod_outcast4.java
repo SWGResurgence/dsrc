@@ -8,7 +8,9 @@ import script.*;
 
 public class wod_outcast4 extends script.base_script
 {
-
+    public wod_outcast4()
+    {
+    }
     public static String c_stringFile = "conversation/wod_outcast4";
     public boolean wod_outcast4_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

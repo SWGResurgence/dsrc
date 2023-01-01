@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class loot_ep3_clone_relics_starmap extends script.base_script
 {
-
+    public loot_ep3_clone_relics_starmap()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))

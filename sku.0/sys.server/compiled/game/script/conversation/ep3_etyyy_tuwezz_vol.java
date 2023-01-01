@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_etyyy_tuwezz_vol extends script.base_script
 {
-
+    public ep3_etyyy_tuwezz_vol()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_etyyy_tuwezz_vol";
     public boolean ep3_etyyy_tuwezz_vol_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

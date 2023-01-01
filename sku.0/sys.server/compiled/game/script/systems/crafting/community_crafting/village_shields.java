@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class village_shields extends script.systems.crafting.community_crafting.base
 {
-
+    public village_shields()
+    {
+    }
     public static final String[] REQUIRED_SKILLS = 
     {
         "crafting_artisan_novice"

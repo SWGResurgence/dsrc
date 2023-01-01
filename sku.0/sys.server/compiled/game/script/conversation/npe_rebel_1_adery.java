@@ -8,7 +8,9 @@ import script.*;
 
 public class npe_rebel_1_adery extends script.base_script
 {
-
+    public npe_rebel_1_adery()
+    {
+    }
     public static String c_stringFile = "conversation/npe_rebel_1_adery";
     public boolean npe_rebel_1_adery_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

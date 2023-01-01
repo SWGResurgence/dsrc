@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class boss_terminal_mining_research_barnet extends script.base_script
 {
-
+    public boss_terminal_mining_research_barnet()
+    {
+    }
     public static String c_stringFile = "conversation/boss_terminal_mining_research_barnet";
     public boolean boss_terminal_mining_research_barnet_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

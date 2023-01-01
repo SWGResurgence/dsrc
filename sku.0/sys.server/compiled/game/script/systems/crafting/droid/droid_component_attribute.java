@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class droid_component_attribute extends script.base_script
 {
-
+    public droid_component_attribute()
+    {
+    }
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))

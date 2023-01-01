@@ -4,7 +4,9 @@ import script.*;
 
 public class weapon_crafting_station_deed extends script.base_script
 {
-
+    public weapon_crafting_station_deed()
+    {
+    }
     public static final String VERSION = "v1.00.00";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

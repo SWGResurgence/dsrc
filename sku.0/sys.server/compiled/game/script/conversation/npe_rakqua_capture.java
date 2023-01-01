@@ -8,7 +8,9 @@ import script.*;
 
 public class npe_rakqua_capture extends script.base_script
 {
-
+    public npe_rakqua_capture()
+    {
+    }
     public static String c_stringFile = "conversation/npe_rakqua_capture";
     public boolean npe_rakqua_capture_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

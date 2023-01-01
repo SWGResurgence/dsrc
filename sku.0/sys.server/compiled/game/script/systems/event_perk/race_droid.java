@@ -7,7 +7,9 @@ import java.util.StringTokenizer;
 
 public class race_droid extends script.base_script
 {
-
+    public race_droid()
+    {
+    }
     public static final String RACING_STF = "theme_park/racing/racing";
     public int OnAttach(obj_id self) throws InterruptedException
     {

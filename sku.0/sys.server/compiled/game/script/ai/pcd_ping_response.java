@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class pcd_ping_response extends script.base_script
 {
-
+    public pcd_ping_response()
+    {
+    }
     public static final String PCDPING_MESSAGE_PCD_ID_NAME = "pcdId";
     public static final String PCDPING_MESSAGE_PET_ID_NAME = "petId";
     public static final String PCDPING_MESSAGE_MESSAGE_ID_NAME = "messageId";

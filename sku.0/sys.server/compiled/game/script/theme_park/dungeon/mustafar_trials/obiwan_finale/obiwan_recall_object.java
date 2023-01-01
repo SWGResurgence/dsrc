@@ -7,7 +7,9 @@ import script.*;
 
 public class obiwan_recall_object extends script.base_script
 {
-
+    public obiwan_recall_object()
+    {
+    }
     public static final String STF_OBI_CONVO = "conversation/som_kenobi_obi_wan";
     public static final string_id SID_CALL_OBI = new string_id(mustafar.STF_OBI_MSGS, "recall_obiwan");
     public static final string_id SID_CALLED_OBI = new string_id(mustafar.STF_OBI_MSGS, "recalling_obiwan");

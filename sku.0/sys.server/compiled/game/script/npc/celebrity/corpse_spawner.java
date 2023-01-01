@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class corpse_spawner extends script.base_script
 {
-
+    public corpse_spawner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String spawn = getStringObjVar(self, "spawns");

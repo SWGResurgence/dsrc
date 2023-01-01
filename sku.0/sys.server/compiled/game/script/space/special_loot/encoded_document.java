@@ -7,7 +7,9 @@ import java.util.StringTokenizer;
 
 public class encoded_document extends script.base_script
 {
-
+    public encoded_document()
+    {
+    }
     public static final string_id SID_USE = new string_id("space/encoded_doc", "use");
     public static final string_id SID_READ = new string_id("space/encoded_doc", "read");
     public static final string_id STORE_WAYPOINT = new string_id("space/encoded_doc", "stored_waypoint");

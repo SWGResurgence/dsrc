@@ -13,7 +13,9 @@ import script.string_id;
 
 public class turret_operations extends script.systems.combat.combat_base_old
 {
-
+    public turret_operations()
+    {
+    }
     public static final String STF = "xx";
     public static final string_id takeControlObject = new string_id(STF, "take_control_object");
     public static final string_id alreadyInUse = new string_id(STF, "already_in_use");

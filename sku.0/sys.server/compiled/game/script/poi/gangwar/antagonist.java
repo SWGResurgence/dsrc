@@ -10,7 +10,9 @@ import script.string_id;
 
 public class antagonist extends script.poi.base.scenario_actor
 {
-
+    public antagonist()
+    {
+    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiGangWar Antagonist";
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";

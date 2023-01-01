@@ -5,7 +5,9 @@ import script.*;
 
 public class jundak_skull extends script.base_script
 {
-
+    public jundak_skull()
+    {
+    }
     public static final String STF = "som/som_quest";
     public static final string_id EXAMINE = new string_id(STF, "jundak_skull_examine");
     public static final string_id ALREADY = new string_id(STF, "jundak_skull_already");

@@ -8,7 +8,9 @@ import script.string_id;
 
 public class npc_mission_convo extends script.systems.missions.base.mission_dynamic_base
 {
-
+    public npc_mission_convo()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "mission.intPersistent", 1);

@@ -5,7 +5,9 @@ import script.*;
 
 public class itp_kaja_main extends script.base_script
 {
-
+    public itp_kaja_main()
+    {
+    }
     public static String c_stringFile = "conversation/itp_kaja_main";
     public boolean itp_kaja_main_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

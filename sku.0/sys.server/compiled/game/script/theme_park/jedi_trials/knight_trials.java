@@ -5,7 +5,9 @@ import script.library.*;
 
 public class knight_trials extends script.base_script
 {
-
+    public knight_trials()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String config = getConfigSetting("JediConfig", "skipJediKnightTrials");

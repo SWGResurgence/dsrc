@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class player_slicing extends script.base_script
 {
-
+    public player_slicing()
+    {
+    }
     public int handleSlicingCategory(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);

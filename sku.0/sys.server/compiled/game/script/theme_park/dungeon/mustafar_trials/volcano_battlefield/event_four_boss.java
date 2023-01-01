@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class event_four_boss extends script.base_script
 {
-
+    public event_four_boss()
+    {
+    }
     public static final String GUARD = "som_volcano_four_lava_beetle";
     public static final int BEETLE_RESPAWN = 31;
     public static final int POISON_RECAST = 35;

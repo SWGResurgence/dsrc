@@ -7,7 +7,9 @@ import script.string_id;
 
 public class hutt_informant_approach extends script.base_script
 {
-
+    public hutt_informant_approach()
+    {
+    }
     public static final String CALL_OUT_TO_VOLUME_NAME = "callOutToTriggerVolume";
     public int OnAttach(obj_id self) throws InterruptedException
     {

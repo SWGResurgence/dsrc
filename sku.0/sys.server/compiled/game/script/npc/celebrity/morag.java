@@ -6,7 +6,9 @@ import script.string_id;
 
 public class morag extends script.base_script
 {
-
+    public morag()
+    {
+    }
     public static final String CONVO = "celebrity/morag";
     public int OnAttach(obj_id self) throws InterruptedException
     {

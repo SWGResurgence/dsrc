@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class rebel_weapons_depot_elevators extends script.base_script
 {
-
+    public rebel_weapons_depot_elevators()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);

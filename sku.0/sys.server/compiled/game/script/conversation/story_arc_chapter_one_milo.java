@@ -8,7 +8,9 @@ import script.*;
 
 public class story_arc_chapter_one_milo extends script.base_script
 {
-
+    public story_arc_chapter_one_milo()
+    {
+    }
     public static String c_stringFile = "conversation/story_arc_chapter_one_milo";
     public boolean story_arc_chapter_one_milo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

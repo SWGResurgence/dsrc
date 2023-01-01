@@ -6,7 +6,9 @@ import script.string_id;
 
 public class gethzerion extends script.base_script
 {
-    
+    public gethzerion()
+    {
+    }
     public static final String CONVO = "celebrity/gethzerion";
     public int OnAttach(obj_id self) throws InterruptedException
     {

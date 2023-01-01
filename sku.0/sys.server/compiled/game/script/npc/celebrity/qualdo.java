@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class qualdo extends script.base_script
 {
-
+    public qualdo()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Qual'do Herm");

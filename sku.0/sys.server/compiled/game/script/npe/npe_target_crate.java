@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class npe_target_crate extends script.base_script
 {
-
+    public npe_target_crate()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         // prevent crate from being searched for eggs (ya, exploit).

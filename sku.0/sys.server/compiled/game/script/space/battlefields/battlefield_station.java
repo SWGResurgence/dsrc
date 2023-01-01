@@ -5,7 +5,9 @@ import script.library.*;
 
 public class battlefield_station extends script.base_script
 {
-
+    public battlefield_station()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setShipFaction(self, "generic");

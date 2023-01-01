@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class clear_quest extends script.quest.task.ground.base_task
 {
-
+    public clear_quest()
+    {
+    }
     public static final String taskType = "clear_quest";
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {

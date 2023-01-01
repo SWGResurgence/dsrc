@@ -8,7 +8,9 @@ import script.string_id;
 
 public class player_spice extends script.base_script
 {
-
+    public player_spice()
+    {
+    }
     public int OnAttribModDone(obj_id self, String modName, boolean isDead) throws InterruptedException
     {
         String name = utils.getStringScriptVar(self, "spice.name");

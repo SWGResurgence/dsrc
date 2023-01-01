@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class bocctyyy_bet_controller extends script.base_script
 {
-
+    public bocctyyy_bet_controller()
+    {
+    }
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, space_dungeon.VAR_QUEST_TYPE))

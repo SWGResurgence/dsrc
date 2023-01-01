@@ -8,7 +8,9 @@ import script.*;
 
 public class c_impdefector_def extends script.base_script
 {
-
+    public c_impdefector_def()
+    {
+    }
     public static String c_stringFile = "conversation/c_impdefector_def";
     public boolean c_impdefector_def_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

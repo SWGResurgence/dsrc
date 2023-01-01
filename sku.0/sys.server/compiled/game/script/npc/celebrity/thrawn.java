@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class thrawn extends script.base_script
 {
-    
+    public thrawn()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Captain Thrawn");

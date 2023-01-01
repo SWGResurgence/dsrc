@@ -9,7 +9,9 @@ import script.quest.task.ground.remote_encounter;
 
 public class remote_encounter_creature extends script.base_script
 {
-
+    public remote_encounter_creature()
+    {
+    }
     public static final boolean LOGS_ENABLED = false;
     public static final String REC = "RemoteEncounterCreature";
     public int OnAttach(obj_id self) throws InterruptedException

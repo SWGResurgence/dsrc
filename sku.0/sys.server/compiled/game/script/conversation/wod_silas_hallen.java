@@ -21,7 +21,11 @@ import script.*;
 
 public class wod_silas_hallen extends script.base_script
 {
+	public wod_silas_hallen()
 
+	{
+
+	}
 
 // ======================================================================
 // Script Constants

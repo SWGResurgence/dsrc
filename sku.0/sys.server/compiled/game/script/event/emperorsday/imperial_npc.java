@@ -5,7 +5,9 @@ import script.library.*;
 
 public class imperial_npc extends script.base_script
 {
-
+    public imperial_npc()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String npcType = getStringObjVar(self, "emperorsday.npcType");

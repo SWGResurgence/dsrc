@@ -8,7 +8,9 @@ import script.*;
 
 public class droid_vendor extends script.base_script
 {
-
+    public droid_vendor()
+    {
+    }
     public static final String DROID_VENDOR_CONVO = "beta/droid_vendor";
     public int OnAttach(obj_id self) throws InterruptedException
     {

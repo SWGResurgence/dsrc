@@ -8,7 +8,9 @@ import script.*;
 
 public class ig88_bothan_01 extends script.base_script
 {
-
+    public ig88_bothan_01()
+    {
+    }
     public static String c_stringFile = "conversation/ig88_bothan_01";
     public boolean ig88_bothan_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -6,7 +6,9 @@ import script.string_id;
 
 public class command_warning extends script.base_script
 {
-
+    public command_warning()
+    {
+    }
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {

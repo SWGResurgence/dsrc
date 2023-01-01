@@ -8,7 +8,9 @@ import script.string_id;
 
 public class rescue extends script.space.quest_logic.recovery
 {
-
+    public rescue()
+    {
+    }
     public static final string_id SID_ABANDONED_RESCUE = new string_id("space/quest", "rescue_abandoned");
     public int OnAttach(obj_id self) throws InterruptedException
     {

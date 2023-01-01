@@ -9,7 +9,9 @@ import script.string_id;
 
 public class tcg_vwing_deed extends script.base_script
 {
-
+    public tcg_vwing_deed()
+    {
+    }
     public static final String LOGGING_CATEGORY = "vwing";
     public static final boolean LOGGING_ON = false;
     public static final string_id MNU_CREATE_VEHICLE = new string_id("sui", "create_vehicle");

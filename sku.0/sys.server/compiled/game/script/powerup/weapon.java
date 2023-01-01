@@ -7,7 +7,9 @@ import script.*;
 
 public class weapon extends script.base_script
 {
-    
+    public weapon()
+    {
+    }
     public static final string_id MNU_REMOVE_POWERUP = new string_id("powerup", "mnu_remove_powerup");
     public static final string_id PROSE_REMOVE_POWERUP = new string_id("powerup", "prose_remove_powerup");
     public int OnApplyPowerup(obj_id self, obj_id player, obj_id target) throws InterruptedException

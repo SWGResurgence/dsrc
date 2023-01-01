@@ -8,7 +8,9 @@ import script.*;
 
 public class som_glyph_hunt extends script.base_script
 {
-
+    public som_glyph_hunt()
+    {
+    }
     public static String c_stringFile = "conversation/som_glyph_hunt";
     public boolean som_glyph_hunt_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

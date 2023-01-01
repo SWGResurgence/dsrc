@@ -5,7 +5,9 @@ import script.library.*;
 
 public class control_terminal extends script.base_script
 {
-
+    public control_terminal()
+    {
+    }
     public static final int NO_CONTROL = 0;
     public static final int IMPERIAL_CONTROL = 1;
     public static final int REBEL_CONTROL = 2;

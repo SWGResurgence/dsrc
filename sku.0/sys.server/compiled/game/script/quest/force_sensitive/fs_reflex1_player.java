@@ -11,7 +11,9 @@ import script.string_id;
 
 public class fs_reflex1_player extends script.base_script
 {
-
+    public fs_reflex1_player()
+    {
+    }
     public static final string_id MSG_FIND_THEATER_WAYPOINT = new string_id("quest/force_sensitive/fs_reflex", "msg_phase_01_find_theater_waypoint");
     public static final string_id MSG_QUEST_FINISHED = new string_id("quest/force_sensitive/fs_reflex", "msg_phase_01_quest_finished");
     public static final string_id MSG_QUEST_CONTINUE = new string_id("quest/force_sensitive/fs_reflex", "msg_phase_01_quest_continue");

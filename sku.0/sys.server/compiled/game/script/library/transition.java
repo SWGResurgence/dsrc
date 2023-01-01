@@ -6,7 +6,9 @@ import script.string_id;
 
 public class transition extends script.base_script
 {
-    
+    public transition()
+    {
+    }
     public static final float distanceMax = 6.0f;
     public static final String dataTable = "datatables/travel/zone_transition.iff";
     public static final String STF = "travel/zone_transition";

@@ -4,7 +4,9 @@ import script.*;
 
 public class space_content extends script.base_script
 {
-
+    public space_content()
+    {
+    }
     public static final String LAUNCH_LOCATION_DATATABLE_NAME = "datatables/space_zones/launch_locations.iff";
     public static final String LAUNCH_LOCATION_COLUMN_POINTNAME = "pointName";
     public static final String LAUNCH_LOCATION_COLUMN_GROUND_SCENE = "groundScene";

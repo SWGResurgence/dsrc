@@ -10,7 +10,9 @@ import script.obj_id;
 
 public class hk_final extends script.base_script
 {
-
+    public hk_final()
+    {
+    }
     public static final String BOSS = "som_volcano_final_hk47";
     public static final String SQUAD_LEADER = "som_volcano_final_squadleader";
     public static final boolean LOGGING = false;

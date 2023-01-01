@@ -8,7 +8,9 @@ import script.*;
 
 public class jedi_cloak extends script.base_script
 {
-
+    public jedi_cloak()
+    {
+    }
     public static final string_id SID_USE_HOOD_UP = new string_id("spam", "hood_up");
     public static final string_id SID_USE_HOOD_DOWN = new string_id("spam", "hood_down");
     public static final string_id SID_NO_TWO_CLOAK = new string_id("spam", "no_two_cloak");

@@ -8,7 +8,9 @@ import script.string_id;
 
 public class fs_crafting4_player extends script.base_script
 {
-
+    public fs_crafting4_player()
+    {
+    }
     public static final string_id SID_NO_MONEY_MSG = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_no_money");
     public static final string_id SID_PURCHASE_MSG_01 = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_purchase_msg_01");
     public static final string_id SID_PURCHASE_MSG_02 = new string_id("quest/force_sensitive/fs_crafting", "tracking_data_purchase_msg_02");

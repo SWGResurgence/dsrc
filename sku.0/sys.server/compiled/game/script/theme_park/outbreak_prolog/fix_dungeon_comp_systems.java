@@ -5,7 +5,9 @@ import script.*;
 
 public class fix_dungeon_comp_systems extends script.base_script
 {
-
+    public fix_dungeon_comp_systems()
+    {
+    }
     public static final String MENU_STRING_FILE = "theme_park/outbreak/outbreak";
     public static final String MENU_OBJ_VAR = "computer_system";
     public static final String NO_MENU_OBJ_VAR = "none";

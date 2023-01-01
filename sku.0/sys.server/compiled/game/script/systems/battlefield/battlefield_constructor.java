@@ -8,7 +8,9 @@ import script.string_id;
 
 public class battlefield_constructor extends script.base_script
 {
-
+    public battlefield_constructor()
+    {
+    }
     public static final string_id SID_BUILD_STRUCTURE = new string_id("battlefield", "build_structure");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

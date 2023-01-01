@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class airlock_clean extends script.base_script
 {
-
+    public airlock_clean()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleAttackerCleanUp", null, 300.0f, false);

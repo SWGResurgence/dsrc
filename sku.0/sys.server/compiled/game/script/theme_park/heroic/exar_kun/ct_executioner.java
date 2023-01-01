@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class ct_executioner extends script.base_script
 {
-
+    public ct_executioner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.creature_combat");

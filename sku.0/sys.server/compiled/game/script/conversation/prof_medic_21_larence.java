@@ -8,7 +8,9 @@ import script.*;
 
 public class prof_medic_21_larence extends script.base_script
 {
-
+    public prof_medic_21_larence()
+    {
+    }
     public static String c_stringFile = "conversation/prof_medic_21_larence";
     public boolean prof_medic_21_larence_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

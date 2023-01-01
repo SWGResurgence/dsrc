@@ -10,7 +10,9 @@ import script.string_id;
 
 public class timer extends script.base_script
 {
-
+    public timer()
+    {
+    }
     public static final String MSGS = "dungeon/corvette";
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -9,7 +9,9 @@ import script.string_id;
 
 public class player_racing extends script.base_script
 {
-    
+    public player_racing()
+    {
+    }
     public static final String RACING_STF = "theme_park/racing/racing";
     public int OnAttach(obj_id self) throws InterruptedException
     {

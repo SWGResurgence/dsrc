@@ -5,7 +5,9 @@ import script.library.*;
 
 public class collections_collector extends script.base_script
 {
-
+    public collections_collector()
+    {
+    }
     public static String c_stringFile = "conversation/collections_collector";
     public boolean collections_collector_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

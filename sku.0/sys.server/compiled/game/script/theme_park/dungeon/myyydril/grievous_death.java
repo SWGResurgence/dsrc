@@ -13,7 +13,9 @@ import script.obj_id;
 
 public class grievous_death extends script.base_script
 {
-
+    public grievous_death()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

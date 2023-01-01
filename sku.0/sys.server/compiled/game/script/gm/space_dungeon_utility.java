@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class space_dungeon_utility extends script.base_script
 {
-
+    public space_dungeon_utility()
+    {
+    }
     public static final String SCRIPT_VAR_DATA_MODE = "space_dungeon.data_mode";
     public static final String SCRIPT_VAR_MOVE_DUNGEON = "space_dungeon.move_dungeon";
     public static final String SCRIPT_VAR_TARGET = "space_dungeon.target";

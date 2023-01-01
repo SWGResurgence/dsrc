@@ -5,7 +5,9 @@ import script.*;
 
 public class generic_newbie_pilot_info_gia_pei extends script.base_script
 {
-
+    public generic_newbie_pilot_info_gia_pei()
+    {
+    }
     public static String c_stringFile = "conversation/generic_newbie_pilot_info_gia_pei";
     public boolean generic_newbie_pilot_info_gia_pei_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

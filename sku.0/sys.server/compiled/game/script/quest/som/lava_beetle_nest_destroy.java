@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class lava_beetle_nest_destroy extends script.base_script
 {
-
+    public lava_beetle_nest_destroy()
+    {
+    }
     public static final String STF = "som/som_quest";
     public static final string_id DESTROY = new string_id(STF, "lava_beetle_nest_destroy");
     public static final string_id NO_EXPLOSIVES = new string_id(STF, "lava_beetle_nest_no_explosives");

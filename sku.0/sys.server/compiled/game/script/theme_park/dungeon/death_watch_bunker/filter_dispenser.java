@@ -9,7 +9,9 @@ import script.string_id;
 
 public class filter_dispenser extends script.base_script
 {
-
+    public filter_dispenser()
+    {
+    }
     public static final string_id MNU_ISSUE_FILTER = new string_id("dungeon/death_watch", "mnu_issue_filter");
     public static final string_id ISSUE_FILTER = new string_id("dungeon/death_watch", "issue_filter");
     public static final string_id ALREADY_HAS_FILTER = new string_id("dungeon/death_watch", "already_has_filter");

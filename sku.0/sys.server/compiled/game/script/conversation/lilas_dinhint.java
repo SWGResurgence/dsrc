@@ -8,7 +8,9 @@ import script.*;
 
 public class lilas_dinhint extends script.base_script
 {
-
+    public lilas_dinhint()
+    {
+    }
     public static String c_stringFile = "conversation/lilas_dinhint";
     public boolean lilas_dinhint_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class camp_spit extends script.base_script
 {
-
+    public camp_spit()
+    {
+    }
     public static final String VAR_CHILDREN = "myChildren";
     public static final String VAR_CAMP_LOGS = VAR_CHILDREN + ".logs";
     public static final String VAR_CAMP_CAMPFIRE = VAR_CHILDREN + ".campfire";

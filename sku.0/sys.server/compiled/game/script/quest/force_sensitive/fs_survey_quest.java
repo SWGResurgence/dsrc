@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class fs_survey_quest extends script.base_script
 {
-
+    public fs_survey_quest()
+    {
+    }
     public int forceSensitiveQuestInfo(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id resource = params.getObjId("resource");

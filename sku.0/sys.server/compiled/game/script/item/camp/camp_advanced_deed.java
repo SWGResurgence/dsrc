@@ -5,7 +5,9 @@ import script.library.*;
 
 public class camp_advanced_deed extends script.base_script
 {
-
+    public camp_advanced_deed()
+    {
+    }
     public static final string_id SID_DEPLOY = new string_id("camp", "deploy");
     public static final string_id SID_SYS_ALREADY_CAMPING = new string_id("camp", "sys_already_camping");
     public static final string_id SID_SYS_CANT_CAMP = new string_id("camp", "sys_cant_camp");

@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class capt_loftus extends script.base_script
 {
-
+    public capt_loftus()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/shirt/shirt_s07.iff", self, "");

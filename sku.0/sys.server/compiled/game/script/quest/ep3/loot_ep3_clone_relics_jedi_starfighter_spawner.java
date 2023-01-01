@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class loot_ep3_clone_relics_jedi_starfighter_spawner extends script.base_script
 {
-
+    public loot_ep3_clone_relics_jedi_starfighter_spawner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id oldBox = utils.getObjIdScriptVar(self, "newBox");

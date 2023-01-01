@@ -5,7 +5,9 @@ import script.library.groundquests;
 
 public class miner_tracking_computer extends script.base_script
 {
-
+    public miner_tracking_computer()
+    {
+    }
     public static final String STF = "som/som_quest";
     public static final string_id ACTIVATE = new string_id(STF, "tracking_computer_activate");
     public static final string_id WAIT = new string_id(STF, "tracking_computer_working");

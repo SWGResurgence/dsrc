@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class tcg_tauntaun_ride extends script.base_script
 {
-
+    public tcg_tauntaun_ride()
+    {
+    }
     public static final string_id COLLECT_MONEY = new string_id("spam", "collect_money");
     public static final string_id COIN_BOX_TITLE = new string_id("spam", "coin_box_title");
     public static final string_id COIN_BOX_PROMPT = new string_id("spam", "coin_box_prompt");

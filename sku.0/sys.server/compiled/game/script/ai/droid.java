@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class droid extends script.base_script
 {
-
+    public droid()
+    {
+    }
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {

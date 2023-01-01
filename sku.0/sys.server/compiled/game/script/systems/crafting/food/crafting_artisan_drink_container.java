@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class crafting_artisan_drink_container extends script.systems.crafting.crafting_base
 {
-
+    public crafting_artisan_drink_container()
+    {
+    }
     public static final String VERSION = "v1.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

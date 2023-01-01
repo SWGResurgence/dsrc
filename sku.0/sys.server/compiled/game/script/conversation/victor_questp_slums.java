@@ -7,7 +7,9 @@ import script.*;
 
 public class victor_questp_slums extends script.base_script
 {
-
+    public victor_questp_slums()
+    {
+    }
     public static String c_stringFile = "conversation/victor_questp_slums";
     public boolean victor_questp_slums_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

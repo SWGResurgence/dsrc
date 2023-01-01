@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class imperial_research_destroy extends script.base_script
 {
-
+    public imperial_research_destroy()
+    {
+    }
     public static final String[] TEMPLATE_LIST = 
     {
         "object/building/poi/generic_flatten_medium.iff",

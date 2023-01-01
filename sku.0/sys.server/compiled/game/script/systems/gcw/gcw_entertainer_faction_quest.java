@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class gcw_entertainer_faction_quest extends script.base_script
 {
-
+    public gcw_entertainer_faction_quest()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))

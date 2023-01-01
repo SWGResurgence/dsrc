@@ -5,7 +5,9 @@ import script.*;
 
 public class wod_ns_rancor_tamer_diax extends script.base_script
 {
-
+    public wod_ns_rancor_tamer_diax()
+    {
+    }
     public static String c_stringFile = "conversation/wod_ns_rancor_tamer_diax";
     public boolean wod_ns_rancor_tamer_diax_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

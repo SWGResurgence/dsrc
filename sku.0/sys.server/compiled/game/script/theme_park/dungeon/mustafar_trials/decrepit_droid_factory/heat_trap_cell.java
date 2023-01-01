@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class heat_trap_cell extends script.base_script
 {
-
+    public heat_trap_cell()
+    {
+    }
     public static final String DOT_SCRIPT = "theme_park.dungeon.mustafar_trials.decrepit_droid_factory.heat_trap_dot";
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException

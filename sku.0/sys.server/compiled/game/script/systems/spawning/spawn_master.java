@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class spawn_master extends script.systems.spawning.spawn_base
 {
-
+    public spawn_master()
+    {
+    }
     public int OnUniverseComplete(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "boolSpawnerIsOn"))

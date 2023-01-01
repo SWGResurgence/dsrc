@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class difficultytest extends script.base_script
 {
-
+    public difficultytest()
+    {
+    }
 
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {

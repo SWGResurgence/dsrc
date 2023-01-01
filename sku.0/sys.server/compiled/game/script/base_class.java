@@ -1,10 +1,6 @@
 /**
  * File Name:        base_class
  * Desc:  Base class for all scripts.
- *
- * @Author Sony Online Entertainment (1999-2011)
- * @Author SWG-Source Affiliates (2011 - present)
- * @Author Resurgence Server Team [#cp] 2022
  */
 
 package script;
@@ -20,7 +16,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Vector;
 
-@SuppressWarnings({"unused", "javadoc", "deprecated", "SpellCheckingInspection"})
+@SuppressWarnings({"JavadocReference", "unused"})
 public class base_class
 {
     /** return value for triggers */

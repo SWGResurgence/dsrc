@@ -9,7 +9,9 @@ import java.util.StringTokenizer;
 
 public class spawn_recorder extends script.base_script
 {
-
+    public spawn_recorder()
+    {
+    }
 
     public int OnAttach(obj_id self) throws InterruptedException
     {

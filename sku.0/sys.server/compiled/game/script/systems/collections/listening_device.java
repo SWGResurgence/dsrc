@@ -8,7 +8,9 @@ import script.string_id;
 
 public class listening_device extends script.base_script
 {
-
+    public listening_device()
+    {
+    }
     public static final string_id SID_USE_DEVICE = new string_id("collection", "use_device");
     public static final string_id NOT_WHILE_INCAPPED = new string_id("quest/ground/util/quest_giver_object", "not_while_incapped");
     public static final string_id SID_NOT_WHILE_IN_COMBAT = new string_id("base_player", "not_while_in_combat");

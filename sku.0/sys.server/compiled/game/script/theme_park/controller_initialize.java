@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class controller_initialize extends script.base_script
 {
-
+    public controller_initialize()
+    {
+    }
     public static final String CONTROLLER = "object/tangible/ground_spawning/patrol_waypoint.iff";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

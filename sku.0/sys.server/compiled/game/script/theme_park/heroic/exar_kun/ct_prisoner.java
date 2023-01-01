@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class ct_prisoner extends script.base_script
 {
-
+    public ct_prisoner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.creature_combat");

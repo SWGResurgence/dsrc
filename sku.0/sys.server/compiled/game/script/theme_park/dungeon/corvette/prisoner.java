@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class prisoner extends script.base_script
 {
-
+    public prisoner()
+    {
+    }
     public int escapeNow(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);

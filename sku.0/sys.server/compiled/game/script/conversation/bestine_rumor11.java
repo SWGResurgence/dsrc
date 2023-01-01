@@ -6,7 +6,9 @@ import script.*;
 
 public class bestine_rumor11 extends script.base_script
 {
-
+    public bestine_rumor11()
+    {
+    }
     public static String c_stringFile = "conversation/bestine_rumor11";
     public boolean bestine_rumor11_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

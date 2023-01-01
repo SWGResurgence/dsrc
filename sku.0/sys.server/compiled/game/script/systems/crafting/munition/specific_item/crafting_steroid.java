@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_steroid extends script.systems.crafting.munition.crafting_base_steroid
 {
-
+    public crafting_steroid()
+    {
+    }
     public static final String VERSION = "v1.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

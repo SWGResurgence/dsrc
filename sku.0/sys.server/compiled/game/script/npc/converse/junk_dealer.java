@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class junk_dealer extends script.base_script
 {
-
+    public junk_dealer()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGNAME = "junk_log";
     public int OnAttach(obj_id self) throws InterruptedException

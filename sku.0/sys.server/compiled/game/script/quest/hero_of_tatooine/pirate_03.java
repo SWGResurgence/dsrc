@@ -9,7 +9,9 @@ import script.string_id;
 
 public class pirate_03 extends script.base_script
 {
-
+    public pirate_03()
+    {
+    }
     public static final string_id NPC_NAME = new string_id("quest/hero_of_tatooine/npc_names", "pirate_trapped_02");
     public int OnAttach(obj_id self) throws InterruptedException
     {

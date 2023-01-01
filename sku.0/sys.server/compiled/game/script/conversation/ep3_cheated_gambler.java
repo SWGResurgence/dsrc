@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_cheated_gambler extends script.base_script
 {
-
+    public ep3_cheated_gambler()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_cheated_gambler";
     public boolean ep3_cheated_gambler_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

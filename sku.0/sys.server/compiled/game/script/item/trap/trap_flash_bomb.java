@@ -8,7 +8,9 @@ import script.string_id;
 
 public class trap_flash_bomb extends script.item.trap.trap_base
 {
-
+    public trap_flash_bomb()
+    {
+    }
     public static final int TRAP_DIFF = 40;
     public static final string_id SID_SYS_EFFECT = new string_id("trap/trap", "trap_flash_bomb_effect");
     public int OnAttach(obj_id self) throws InterruptedException

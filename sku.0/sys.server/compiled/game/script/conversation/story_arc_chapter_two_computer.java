@@ -5,7 +5,9 @@ import script.*;
 
 public class story_arc_chapter_two_computer extends script.base_script
 {
-
+    public story_arc_chapter_two_computer()
+    {
+    }
     public static String c_stringFile = "conversation/story_arc_chapter_two_computer";
     public boolean story_arc_chapter_two_computer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

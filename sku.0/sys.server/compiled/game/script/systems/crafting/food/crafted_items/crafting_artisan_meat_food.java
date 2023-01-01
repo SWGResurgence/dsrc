@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_artisan_meat_food extends script.systems.crafting.food.crafting_base_food
 {
-
+    public crafting_artisan_meat_food()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

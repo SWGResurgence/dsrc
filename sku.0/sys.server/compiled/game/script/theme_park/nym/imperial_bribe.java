@@ -8,7 +8,9 @@ import script.string_id;
 
 public class imperial_bribe extends script.base_script
 {
-
+    public imperial_bribe()
+    {
+    }
     public static final String CONVO = "celebrity/imperial_bribe";
     public int OnAttach(obj_id self) throws InterruptedException
     {

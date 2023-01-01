@@ -7,7 +7,9 @@ import script.region;
 
 public class poi_object extends script.theme_park.poi.base
 {
-
+    public poi_object()
+    {
+    }
     public static final String POI_SCRIPT = "poi.script";
     public int OnAttach(obj_id self) throws InterruptedException
     {

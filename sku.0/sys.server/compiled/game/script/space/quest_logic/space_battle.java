@@ -5,7 +5,9 @@ import script.library.*;
 
 public class space_battle extends script.base_script
 {
-
+    public space_battle()
+    {
+    }
     public static final string_id SID_ABANDONED_BATTLE = new string_id("space/quest", "battle_abandoned");
     public static final string_id WARPOUT_FAILURE = new string_id("space/quest", "warpout_failure");
     public static final String SOUND_SPAWN_ALLIES = "clienteffect/ui_quest_spawn_friendly.cef";
