@@ -9,8 +9,8 @@ import script.*;
 public class hero_mark extends script.base_script
 {
 
-    public static int BUFF_TIME = 60 * 20;
-    public static int BUFF_TIME_VANILLA = 82800;
+    public static int BUFF_TIME = 5400; // 1.5 hours
+    public static int BUFF_TIME_VANILLA = 82800; // 23 hours
     public static int REVIVE_HEALTH = 15000;
     public static int REVIVE_ACTION = 12000;
     public static final string_id SID_MENU_RESTORE = new string_id("quest/hero_of_tatooine/system_messages", "menu_restore");
