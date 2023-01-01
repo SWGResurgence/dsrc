@@ -13,7 +13,9 @@ import java.util.Vector;
 
 public class qaprofession extends script.base_script
 {
-
+    public qaprofession()
+    {
+    }
     public static final String SCRIPTVAR = "qaprofession";
     public static final String SKILL_TEMPLATE = "datatables/skill_template/skill_template.iff";
     public static final String SKILL_TABLE = "datatables/skill/skills.iff";

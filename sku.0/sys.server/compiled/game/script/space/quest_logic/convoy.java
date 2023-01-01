@@ -5,7 +5,9 @@ import script.library.*;
 
 public class convoy extends script.space.quest_logic.escort
 {
-
+    public convoy()
+    {
+    }
     public static final string_id SID_CONVOY_SURVIVED = new string_id("space/quest", "convoy_survived");
     public static final string_id SID_CONVOY_PERFECT = new string_id("space/quest", "convoy_perfect");
     public int OnAttach(obj_id self) throws InterruptedException

@@ -6,7 +6,9 @@ import script.library.sui;
 
 public class mainframe extends script.base_script
 {
-
+    public mainframe()
+    {
+    }
     public static final String DIANT_BUNKER = "dungeon/diant_bunker";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class invulnerable extends script.base_script
 {
-    
+    public invulnerable()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

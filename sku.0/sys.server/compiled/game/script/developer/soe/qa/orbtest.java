@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class orbtest extends script.base_script
 {
-
+    public orbtest()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         sendSystemMessageTestingOnly(self, "orbtest script attached. Say 'GO' to start the test");

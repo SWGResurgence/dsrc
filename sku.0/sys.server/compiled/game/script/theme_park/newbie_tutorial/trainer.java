@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class trainer extends script.theme_park.newbie_tutorial.tutorial_base
 {
-
+    public trainer()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         removeStaticWaypoint(self);

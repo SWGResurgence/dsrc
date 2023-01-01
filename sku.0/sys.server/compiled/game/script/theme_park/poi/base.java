@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class base extends script.base_script
 {
-
+    public base()
+    {
+    }
     public static final int POI_INCOMPLETE = poi.POI_INCOMPLETE;
     public static final int POI_SUCCESS = poi.POI_SUCCESS;
     public static final int POI_FAIL = poi.POI_FAIL;

@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class gambling extends script.base_script
 {
-
+    public gambling()
+    {
+    }
     public static final String SCRIPTVAR_GAMBLING = "isGambling";
     public static final String VAR_GAMBLE_BASE = "gambling";
     public static final String VAR_PREDEFINED_TYPE = VAR_GAMBLE_BASE + ".predefined";

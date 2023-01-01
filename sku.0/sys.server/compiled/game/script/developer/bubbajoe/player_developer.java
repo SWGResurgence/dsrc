@@ -11,7 +11,7 @@ import script.library.*;
 
 import java.io.File;
 import java.util.ArrayList;
-@SuppressWarnings({"unused", "javadoc", "deprecated", "SpellCheckingInspection"})
+
 public class player_developer extends base_script
 {
 
@@ -898,14 +898,6 @@ public class player_developer extends base_script
                     int howMany = utils.stringToInt(tok.nextToken());
                     setCount(content, howMany);
                 }
-            }
-        }
-        if (cmd.equalsIgnoreCase("vars"))
-        {
-            deltadictionary myinfo = self.getScriptVars();
-            for (Object key : myinfo.keySet())
-            {
-                sendSystemMessageTestingOnly(self, "Key: " + key + " Value: " + myinfo.getString(key));
             }
         }
         if (cmd.equalsIgnoreCase("locomotion"))

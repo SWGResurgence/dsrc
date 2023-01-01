@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class qadatapad extends script.base_script
 {
-
+    public qadatapad()
+    {
+    }
     public static final String SCRIPTVAR = "qadatapad";
     public static final String DATAPAD_TOOL_TITLE = "QA DATAPAD TOOL";
     public static final String DATAPAD_TOOL_PROMPT = "This tool allows the tester to view, warp, export and import into the datapad";

@@ -7,7 +7,9 @@ import script.library.xp;
 
 public class microphone extends script.base_script
 {
-
+    public microphone()
+    {
+    }
     public static final float MIC_RADIUS = 0.05f;
     public static final string_id SIGNAL_MESSAGE = new string_id("sui", "mic_speaker_signal");
     public static final string_id SID_ACTIVATE = new string_id("sui", "mic_activation");

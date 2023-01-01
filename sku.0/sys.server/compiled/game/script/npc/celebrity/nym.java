@@ -6,7 +6,9 @@ import script.string_id;
 
 public class nym extends script.base_script
 {
-    
+    public nym()
+    {
+    }
     public static final String CONVO = "celebrity/nym";
     public int OnAttach(obj_id self) throws InterruptedException
     {

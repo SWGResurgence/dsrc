@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class base extends script.systems.crafting.crafting_base
 {
-
+    public base()
+    {
+    }
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         for (draft_schematic.attribute itemAttribute : itemAttributes) {

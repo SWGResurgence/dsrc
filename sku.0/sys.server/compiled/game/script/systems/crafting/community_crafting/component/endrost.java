@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class endrost extends script.systems.crafting.community_crafting.component.base_component
 {
-
+    public endrost()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

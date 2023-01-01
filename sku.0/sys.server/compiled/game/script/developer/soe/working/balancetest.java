@@ -14,7 +14,9 @@ public class balancetest extends script.base_script
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String STAT_BALANCE_TABLE = "datatables/mob/stat_balance.iff";
     public static final boolean CONST_FLAG_DO_LOGGING = true;
-
+    public balancetest()
+    {
+    }
 
     public int checkDifficulty(obj_id self, dictionary params) throws InterruptedException
     {

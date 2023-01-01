@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class turret extends script.base_script
 {
-
+    public turret()
+    {
+    }
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public static final float ALERT_VOLUME_SIZE = 120.0f;
     public static final float FACTION_TURRET_RANGE = 96.0f;

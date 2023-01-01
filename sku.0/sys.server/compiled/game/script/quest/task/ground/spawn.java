@@ -5,7 +5,9 @@ import script.library.*;
 
 public class spawn extends script.quest.task.ground.base_task
 {
-    
+    public spawn()
+    {
+    }
     public static final String dataTableColumnCreatureType = "CREATURE_TYPE";
     public static final String dataTableColumnMinCount = "MIN_COUNT";
     public static final String dataTableColumnMaxCount = "MAX_COUNT";

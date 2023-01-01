@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class npcdeath extends script.base_script
 {
-    
+    public npcdeath()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "quests.target"))

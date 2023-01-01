@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class grenadier extends script.base_script
 {
-
+    public grenadier()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "ai.combat.oneShotAction", "non_attack");

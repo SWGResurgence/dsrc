@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class storyteller extends script.base_script
 {
-
+    public storyteller()
+    {
+    }
     public static final String STORYTELLER_DATATABLE = "datatables/item/master_item/storyteller_item.iff";
     public static final String STATIC_ITEM_DATATABLE = "datatables/item/master_item/master_item.iff";
     public static final String THEATER_MODE = "theater_mode";

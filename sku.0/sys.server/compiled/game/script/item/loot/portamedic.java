@@ -12,7 +12,9 @@ public class portamedic extends script.base_script
     public static int COOLDOWN_TIME = 3600 * 2; // 2 hours
     public static float BUFF_MODIFIER = 75.0f;
     public static int currentGameTime = getCalendarTime();
-
+    public portamedic()
+    {
+    }
 
     public int OnAttach(obj_id self) throws InterruptedException
     {

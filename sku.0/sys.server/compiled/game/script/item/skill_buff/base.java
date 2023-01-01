@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class base extends script.base_script
 {
-
+    public base()
+    {
+    }
     public static final String OBJVAR_SKILL_BUFF_NAME = "skill_buff.name";
     public static final String OBJVAR_SKILL_BUFF_SKILL1 = "skill_buff.skill1";
     public static final String OBJVAR_SKILL_BUFF_AMOUNT1 = "skill_buff.amount1";

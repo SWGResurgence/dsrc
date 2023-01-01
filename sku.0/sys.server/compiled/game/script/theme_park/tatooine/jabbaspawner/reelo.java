@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class reelo extends script.base_script
 {
-
+    public reelo()
+    {
+    }
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id palace = getObjIdObjVar(self, "palace");

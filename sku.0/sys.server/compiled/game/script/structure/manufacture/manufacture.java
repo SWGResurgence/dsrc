@@ -8,7 +8,9 @@ import script.library.sui;
 
 public class manufacture extends script.base_script
 {
-    
+    public manufacture()
+    {
+    }
     public static final String SCRIPT_ME = "structure.manufacture.manufacture";
     public static final string_id SID_FACTORY_OPTIONS = new string_id("manf_station", "options");
     public static final string_id SID_SCHEMATIC = new string_id("manf_station", "schematic");

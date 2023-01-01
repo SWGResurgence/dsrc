@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class instrument extends script.base_script
 {
-
+    public instrument()
+    {
+    }
     public static final string_id SID_PLAY_INSTRUMENT = new string_id("radial_performance", "play_instrument");
     public static final string_id SID_STOP_PLAYING = new string_id("radial_performance", "stop_playing");
     public static final string_id SID_MUSIC_MUST_UNEQUIP = new string_id("performance", "music_must_unequip");

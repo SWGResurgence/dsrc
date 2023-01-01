@@ -7,7 +7,9 @@ import script.ranged_int_custom_var;
 
 public class dressup extends script.base_script
 {
-
+    public dressup()
+    {
+    }
     public static final String NPC_DATATABLE = "datatables/npc_customization/npc.iff";
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String STORMTROOPER = "datatables/npc_customization/clothing/stormtrooper.iff";

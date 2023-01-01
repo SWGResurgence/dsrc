@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class lunchbox extends script.item.container.got_specific.base
 {
-
+    public lunchbox()
+    {
+    }
     public static final int MY_TYPE = GOT_misc_food;
     public int OnAttach(obj_id self) throws InterruptedException
     {

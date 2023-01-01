@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class bib extends script.base_script
 {
-
+    public bib()
+    {
+    }
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id palace = getObjIdObjVar(self, "palace");

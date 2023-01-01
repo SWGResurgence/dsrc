@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class conversing extends script.base_script
 {
-    
+    public conversing()
+    {
+    }
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         detachScript(self, "theme_park.tatooine.jabbaspawner.behavior.conversing");

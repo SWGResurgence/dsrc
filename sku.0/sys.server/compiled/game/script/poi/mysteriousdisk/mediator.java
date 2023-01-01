@@ -12,7 +12,9 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
-
+    public mediator()
+    {
+    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final String LOG_NAME = "poiMysteriousDisk Mediator";
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";

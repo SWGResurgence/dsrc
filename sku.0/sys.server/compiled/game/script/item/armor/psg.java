@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class psg extends script.base_script
 {
-
+    public psg()
+    {
+    }
     public static final float BASE_UPDATE_TIME = 5.0f;
     public static final float RAND_UPDATE_TIME = 1.0f;
     public static final String PARAM_TIME = "time";

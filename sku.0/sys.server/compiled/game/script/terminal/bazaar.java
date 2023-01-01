@@ -7,7 +7,9 @@ import script.string_id;
 
 public class bazaar extends script.terminal.base.base_terminal
 {
-    
+    public bazaar()
+    {
+    }
     public static final string_id SID_BAZAAR_OPTIONS = new string_id("terminal_ui", "bazaar_options");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

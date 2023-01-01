@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class bank extends script.terminal.base.base_terminal
 {
-
+    public bank()
+    {
+    }
     public static final String SCRIPTVAR_BANK = "bank";
     public static final string_id SID_BANK_OPTIONS = new string_id("sui", "mnu_bank");
     public static final string_id SID_BANK_CREDITS = new string_id("sui", "bank_credits");

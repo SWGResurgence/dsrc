@@ -13,7 +13,9 @@ import java.util.Vector;
 
 public class barracks extends script.base_script
 {
-
+    public barracks()
+    {
+    }
     public static final string_id SID_BUILD_REINFORCEMENT = new string_id("battlefield", "build_reinforcement");
     public static final string_id SID_BUILD_REINFORCEMENT_STATUS = new string_id("battlefield", "build_reinforcement_status");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

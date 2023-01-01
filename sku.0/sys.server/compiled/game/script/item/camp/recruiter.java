@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class recruiter extends script.base_script
 {
-
+    public recruiter()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleSpawnRecruiter", null, 3.0f, false);

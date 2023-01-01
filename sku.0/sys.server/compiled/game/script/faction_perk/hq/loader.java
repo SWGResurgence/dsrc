@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class loader extends script.base_script
 {
-
+    public loader()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, factions.FACTION))

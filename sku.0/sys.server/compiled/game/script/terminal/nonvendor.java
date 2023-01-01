@@ -8,7 +8,9 @@ import script.library.vendor_lib;
 
 public class nonvendor extends script.terminal.base.base_terminal
 {
-
+    public nonvendor()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "nonvendor";
     public static final string_id SID_FACE_ME = new string_id("player_vendor", "face_me");

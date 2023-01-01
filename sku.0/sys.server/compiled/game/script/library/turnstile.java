@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class turnstile extends script.base_script
 {
-
+    public turnstile()
+    {
+    }
     public static final int TURNSTILE_DEFAULT_FEE = 5;
     public static final int TURNSTILE_DEFAULT_TIME = 0;
     public static final int TURNSTILE_DEFAULT_GRACE = 30;

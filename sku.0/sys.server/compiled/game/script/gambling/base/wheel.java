@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class wheel extends script.gambling.base.default_interface
 {
-
+    public wheel()
+    {
+    }
     private static final int TIMER_BETTING = 120;
     public int OnInitialize(obj_id self) throws InterruptedException
     {

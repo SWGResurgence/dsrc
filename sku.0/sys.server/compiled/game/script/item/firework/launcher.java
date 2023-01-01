@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class launcher extends script.base_script
 {
-    
+    public launcher()
+    {
+    }
     public int handleFireworkLaunch(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

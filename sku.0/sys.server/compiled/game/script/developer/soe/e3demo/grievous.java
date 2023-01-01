@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class grievous extends script.base_script
 {
-
+    public grievous()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setScale(self, 1.5f);

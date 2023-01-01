@@ -6,7 +6,9 @@ import java.util.Vector;
 
 public class theater extends script.base_script
 {
-
+    public theater()
+    {
+    }
     public static final float BASE_ITEM_AREA = 3.0f;
     public static final int PERSIST_TIME = 604800;
     public static final String DICT_MASTER = "master";

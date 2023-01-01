@@ -8,7 +8,9 @@ import script.*;
 
 public class dagorel extends script.base_script
 {
-
+    public dagorel()
+    {
+    }
     public static String c_stringFile = "conversation/dagorel";
     public boolean dagorel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

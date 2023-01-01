@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class missiontest extends script.base_script
 {
-
+    public missiontest()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         sendSystemMessageTestingOnly(self, "MISSION TEST SCRIPT ATTACHED");

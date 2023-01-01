@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class bank extends script.base_script
 {
-
+    public bank()
+    {
+    }
     public static final String SCRIPT_ME = "structure.municipal.bank";
     public static final String JUNK_DEALER = "junk_dealer";
     public static final String DATATABLE_TERMINAL_LIST = "datatables/structure/municipal/bank_terminal.iff";

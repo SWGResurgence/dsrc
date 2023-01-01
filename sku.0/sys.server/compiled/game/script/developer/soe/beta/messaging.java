@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class messaging extends script.base_script
 {
-
+    public messaging()
+    {
+    }
     public int setLoginTitle(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         location locTest = getLocation(self);

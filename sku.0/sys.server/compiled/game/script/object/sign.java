@@ -5,7 +5,9 @@ import script.library.utils;
 
 public class sign extends script.base_script
 {
-
+    public sign()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);

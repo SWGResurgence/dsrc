@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class medicine extends script.base_script
 {
-
+    public medicine()
+    {
+    }
     public static final String SCRIPT_BETA_MEDICINE = "beta.medicine";
     public int OnAttach(obj_id self) throws InterruptedException
     {

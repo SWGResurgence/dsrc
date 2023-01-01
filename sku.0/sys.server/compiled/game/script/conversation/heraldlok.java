@@ -7,7 +7,9 @@ import script.*;
 
 public class heraldlok extends script.base_script
 {
-    
+    public heraldlok()
+    {
+    }
     public static String c_stringFile = "conversation/heraldlok";
     public boolean heraldlok_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class qainventory extends script.base_script
 {
-
+    public qainventory()
+    {
+    }
     public static final String PROMPT = "Choose an Option";
     public static final String TITLE = "QA Inventory Tool";
     public static final String[] MAIN_MENU = 

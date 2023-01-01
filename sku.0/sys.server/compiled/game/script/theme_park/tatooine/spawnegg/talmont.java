@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class talmont extends script.base_script
 {
-
+    public talmont()
+    {
+    }
     public static final String SCRIPTPATH = "theme_park.tatooine.";
     public static final String TEMPLATE = "object/creature/npc/theme_park/prefect_talmont.iff";
     public static final String[] SCRIPTS = 

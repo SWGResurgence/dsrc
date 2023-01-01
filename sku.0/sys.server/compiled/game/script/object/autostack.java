@@ -5,7 +5,9 @@ import script.library.*;
 
 public class autostack extends script.base_script
 {
-
+    public autostack()
+    {
+    }
     public static final boolean BLOGGING_ON = false;
     public static final String BLOGGING_CATEGORY = "auto_stack";
     public int OnAttach(obj_id self) throws InterruptedException

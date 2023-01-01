@@ -10,7 +10,9 @@ import script.string_id;
 
 public class player extends script.base_script
 {
-
+    public player()
+    {
+    }
     public static final String STF = "dungeon/kash_the_arena";
     public static final String QUEST_MARK = "kash_arena.isQuestHolder";
     public static final string_id SID_DEATH_EJECT = new string_id(STF, "ejected_by_death");

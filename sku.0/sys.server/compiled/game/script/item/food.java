@@ -8,7 +8,9 @@ import script.*;
 
 public class food extends script.base_script
 {
-
+    public food()
+    {
+    }
     public static final string_id SID_PET_ONLY = new string_id("base_player", "food_pet_only");
     public static final string_id SID_TOO_FULL = new string_id("base_player", "food_too_full");
     public static final string_id SID_ALREADY_HAVE_BUFF = new string_id("base_player", "food_already_have_buff");

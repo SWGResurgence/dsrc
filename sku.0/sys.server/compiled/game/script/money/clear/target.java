@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class target extends script.base_script
 {
-
+    public target()
+    {
+    }
     public int handleCovertDepositReturn(obj_id self, dictionary params) throws InterruptedException
     {
         int cash = getCashBalance(self);

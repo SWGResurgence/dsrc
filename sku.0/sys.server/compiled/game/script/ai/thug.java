@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class thug extends script.base_script
 {
-
+    public thug()
+    {
+    }
     public static final String ACTION_ALERT = "alert";
     public static final String ACTION_THREATEN = "threaten";
     public int OnAttach(obj_id self) throws InterruptedException

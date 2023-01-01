@@ -16,7 +16,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Vector;
 
-@SuppressWarnings({"unused", "javadoc", "deprecated", "SpellCheckingInspection"})
+@SuppressWarnings({"JavadocReference", "unused"})
 public class base_class
 {
     /** return value for triggers */

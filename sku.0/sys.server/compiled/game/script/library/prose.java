@@ -6,7 +6,9 @@ import script.string_id;
 
 public class prose extends script.base_script
 {
-
+    public prose()
+    {
+    }
     public static prose_package setStringId(prose_package pp, string_id strSpam) throws InterruptedException
     {
         pp.stringId = strSpam;

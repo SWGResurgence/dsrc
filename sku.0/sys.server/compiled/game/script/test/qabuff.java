@@ -10,7 +10,9 @@ import java.util.Arrays;
 
 public class qabuff extends script.base_script
 {
-
+    public qabuff()
+    {
+    }
     public static final String MY_SCRIPTVAR = "qabuff";
     public static final String BUFF_TABLE = "datatables/buff/buff.iff";
     public static final String BUFF_TOOL_PROMPT = "Select Spacial Attack or Buff to be performed on your test character.\n\nTo remove all buffs use the command:\n\n/qatool buff clear";

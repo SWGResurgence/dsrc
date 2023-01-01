@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class stormtrooper extends script.base_script
 {
-
+    public stormtrooper()
+    {
+    }
     public static final String BASE_PATH = "npc.create";
     public static final String SCRIPT_ME = BASE_PATH + ".imperial.stormtrooper";
     public int OnAttach(obj_id self) throws InterruptedException

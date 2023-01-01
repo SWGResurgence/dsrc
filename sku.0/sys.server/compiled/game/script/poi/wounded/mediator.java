@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class mediator extends script.poi.base.scenario_actor
 {
-
+    public mediator()
+    {
+    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public static final int PROGRESS_NONE = 0;
     public static final int ANSWERED_YES = 1;

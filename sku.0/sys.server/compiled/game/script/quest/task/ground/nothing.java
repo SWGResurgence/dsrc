@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class nothing extends script.quest.task.ground.base_task
 {
-
+    public nothing()
+    {
+    }
     public static final String taskType = "nothing";
     public int OnTaskActivated(obj_id self, int questCrc, int taskId) throws InterruptedException
     {

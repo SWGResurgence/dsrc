@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class session extends script.base_script
 {
-
+    public session()
+    {
+    }
     public static final int ACTIVITY_NONE = 0;
     public static final int ACTIVITY_PVE = 1;
     public static final int ACTIVITY_PVP = 2;

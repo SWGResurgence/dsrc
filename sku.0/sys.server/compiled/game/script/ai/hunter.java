@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class hunter extends script.base_script
 {
-    
+    public hunter()
+    {
+    }
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -4,7 +4,9 @@ import script.*;
 
 public class scout extends script.base_script
 {
-    
+    public scout()
+    {
+    }
     public static final string_id SID_SYS_SCENTMASK_BREAK = new string_id("skl_use", "sys_scentmask_break");
     public static final string_id SID_SYS_SCENTMASK_BREAK_COMBAT = new string_id("skl_use", "sys_scentmask_break_combat");
     public static final string_id SID_SYS_SCENTMASK_SUCCESS = new string_id("skl_use", "sys_scentmask_success");

@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class battlefield extends script.base_script
 {
-
+    public battlefield()
+    {
+    }
     public static final String BATTLEFIELD_DATATABLE = "datatables/battlefield/battlefield.iff";
     public static final String BATTLEFIELD_MARKER_DATATABLE = "datatables/battlefield/marker.iff";
     public static final String BUILDABLE_STRUCTURE_DATATABLE = "datatables/battlefield/buildable_structure.iff";

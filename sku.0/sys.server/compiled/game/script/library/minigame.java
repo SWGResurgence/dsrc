@@ -1,10 +1,13 @@
 package script.library;
 
 import script.*;
+import script.library.groundquests;
 
 public class minigame extends script.base_script
 {
-
+    public minigame()
+    {
+    }
     public static final String SCRIPT_FISHING_PLAYER = "fishing.player";
     public static final String SCRIPT_FISHING_NPC = "fishing.npc";
     public static final String SCRIPT_FISHING_POLE = "fishing.pole";

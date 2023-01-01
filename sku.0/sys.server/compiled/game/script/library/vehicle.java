@@ -4,7 +4,9 @@ import script.*;
 
 public class vehicle extends script.base_script
 {
-
+    public vehicle()
+    {
+    }
     public static final int MAX_STORED_VEHICLES = 3;
     public static final int MAX_STORED_VEHICLES_MUSTAFAR_EXPANSION = 6;
     public static final int MAX_VEHICLES = 1;

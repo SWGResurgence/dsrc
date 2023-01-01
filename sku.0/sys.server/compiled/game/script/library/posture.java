@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class posture extends script.base_script
 {
-
+    public posture()
+    {
+    }
     public static boolean isStanding(obj_id object) throws InterruptedException
     {
         return (getPosture(object) == POSTURE_UPRIGHT);

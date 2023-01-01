@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class standard extends script.gambling.base.slot
 {
-    
+    public standard()
+    {
+    }
     private static final String GAME_TYPE = "slot_standard";
     public static final String TBL = "datatables/gambling/slot/" + GAME_TYPE + ".iff";
     public int OnInitialize(obj_id self) throws InterruptedException

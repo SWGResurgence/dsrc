@@ -6,7 +6,9 @@ import script.string_id;
 
 public class muftak extends script.base_script
 {
-
+    public muftak()
+    {
+    }
     public static final String CONVO = "celebrity/muftak";
     public int OnAttach(obj_id self) throws InterruptedException
     {

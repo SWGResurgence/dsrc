@@ -8,7 +8,9 @@ import script.string_id;
 
 public class holoemote extends script.base_script
 {
-
+    public holoemote()
+    {
+    }
     public static final String HOLO_EMOTE_SCRIPT = "systems.image_designer.holoemote";
     public static final String VAR_HOLO_HELP = "image_design.holohelp";
     public static final String HOLO_DATATABLE = "datatables/image_design/holoemote.iff";

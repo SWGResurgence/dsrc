@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class retreatspawner extends script.base_script
 {
-    
+    public retreatspawner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);

@@ -12,7 +12,9 @@ public class cmd extends script.base_script
 {
     private static final boolean VETERAN_REWARDS_ENABLED = utils.checkConfigFlag("GameServer", "enableVeteranRewards");
 
-
+    public cmd()
+    {
+    }
 
     private static void showAdminCmdSyntax(obj_id self) throws InterruptedException
     {

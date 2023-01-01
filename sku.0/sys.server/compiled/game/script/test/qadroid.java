@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class qadroid extends script.base_script
 {
-
+    public qadroid()
+    {
+    }
     public static final String[] DROID_TEMPLATE_ARRAY = 
     {
         "object/tangible/deed/pet_deed/deed_mse_advanced_basic.iff"

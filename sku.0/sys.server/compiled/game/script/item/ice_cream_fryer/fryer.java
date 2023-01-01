@@ -10,7 +10,9 @@ import java.util.HashSet;
 
 public class fryer extends script.base_script
 {
-
+    public fryer()
+    {
+    }
     public static final int NO_DECAY = 100;
     public static final int MAX_DECAY = 6;
     public static final int BASIC_BUFF_ROWS = 3;

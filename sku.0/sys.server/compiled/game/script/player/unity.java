@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class unity extends script.base_script
 {
-
+    public unity()
+    {
+    }
     public static final string_id SID_SUI_PROPOSE_PROMPT = new string_id("unity", "sui_propose_prompt");
     public static final string_id SID_SUI_RING_SPEC = new string_id("unity", "sui_ring_spec");
     public static final string_id SID_SUI_RING_EQUIP = new string_id("unity", "sui_ring_equip");

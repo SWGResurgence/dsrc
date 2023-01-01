@@ -5,7 +5,9 @@ import script.library.sui;
 
 public class fuel extends script.base_script
 {
-    
+    public fuel()
+    {
+    }
     public static final String MSGS = "dungeon/corvette";
     public int OnAttach(obj_id self) throws InterruptedException
     {

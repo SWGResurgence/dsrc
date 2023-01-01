@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class kimaru extends script.base_script
 {
-    
+    public kimaru()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, trial.HP_AXKVA_KIMARU);
