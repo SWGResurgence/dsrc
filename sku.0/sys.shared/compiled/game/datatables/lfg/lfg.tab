@@ -56,7 +56,6 @@ combat
 		combat_corellia			48						
 		combat_dantooine			49						
 		combat_dathomir			50						
-		combat_dxun				133
 		combat_endor			51						
 		combat_kashyyyk			52						
 		combat_lok			53						
@@ -119,7 +118,6 @@ social					106						Any
 		social_corellia			85
 		social_dantooine			86
 		social_dathomir			87
-		social_dxun				132
 		social_endor			88
 		social_kashyyyk			89
 		social_lok			90
