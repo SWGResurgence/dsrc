@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class storyteller_vendor extends script.base_script
 {
-
+    public storyteller_vendor()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);

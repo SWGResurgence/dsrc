@@ -5,7 +5,9 @@ import script.library.*;
 
 public class escort extends script.quest.task.ground.base_task
 {
-
+    public escort()
+    {
+    }
     public static final String dataTableColumnServerTemplate = "SERVER_TEMPLATE";
     public static final String dataTableColumnDestinationNodeName = "DESTINATION_NODE_NAME";
     public static final String dataTableColumnMovementType = "MOVEMENT_TYPE";

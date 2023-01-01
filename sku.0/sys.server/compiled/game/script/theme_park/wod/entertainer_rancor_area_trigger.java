@@ -1,13 +1,22 @@
 package script.theme_park.wod;
 
+import script.*;
+import script.base_class.*;
+import script.combat_engine.*;
+import java.util.Arrays;
+import java.util.Hashtable;
+import java.util.Vector;
+import script.base_script;
+
 import script.library.ai_lib;
 import script.library.attrib;
 import script.library.utils;
-import script.obj_id;
 
 public class entertainer_rancor_area_trigger extends script.base_script
 {
-
+    public entertainer_rancor_area_trigger()
+    {
+    }
     public static final boolean debug = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

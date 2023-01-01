@@ -22,7 +22,11 @@ import script.*;
 
 public class janshai_mistsplitter extends script.base_script
 {
+	public janshai_mistsplitter()
 
+	{
+
+	}
 
 // ======================================================================
 // Script Constants

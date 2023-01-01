@@ -5,7 +5,9 @@ import script.*;
 
 public class corvette_tallon_rebel1 extends script.base_script
 {
-
+    public corvette_tallon_rebel1()
+    {
+    }
     public static String c_stringFile = "conversation/corvette_tallon_rebel1";
     public boolean corvette_tallon_rebel1_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

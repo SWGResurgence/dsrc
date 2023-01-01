@@ -5,7 +5,9 @@ import script.library.*;
 
 public class player_corpse extends script.base_script
 {
-
+    public player_corpse()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.LOOT);

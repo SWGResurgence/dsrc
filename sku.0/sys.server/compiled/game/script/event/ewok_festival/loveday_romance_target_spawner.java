@@ -12,7 +12,9 @@ import java.util.Vector;
 
 public class loveday_romance_target_spawner extends script.base_script
 {
-
+    public loveday_romance_target_spawner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnRomanceTargetNpcs", null, 120, false);

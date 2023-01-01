@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class comm_array_spawn_died extends script.base_script
 {
-
+    public comm_array_spawn_died()
+    {
+    }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (hasObjVar(self, "respawn_called"))

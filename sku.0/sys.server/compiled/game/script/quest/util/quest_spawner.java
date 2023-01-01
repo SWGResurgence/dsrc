@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class quest_spawner extends script.base_script
 {
-
+    public quest_spawner()
+    {
+    }
     public static final String SCRIPT_CREATURE = "quest.util.quest_creature";
     public static final String VAR_SPAWNER_MAX_POPULATION = "quest_spawner.max_pop";
     public static final String VAR_SPAWNER_MAX = "quest_spawner.max_spawn";

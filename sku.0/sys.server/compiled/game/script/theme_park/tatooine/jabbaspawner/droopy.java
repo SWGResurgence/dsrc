@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class droopy extends script.base_script
 {
-
+    public droopy()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         grantSkill(self, "social_entertainer_novice");

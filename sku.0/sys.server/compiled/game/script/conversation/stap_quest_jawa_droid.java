@@ -5,7 +5,9 @@ import script.library.*;
 
 public class stap_quest_jawa_droid extends script.base_script
 {
-
+    public stap_quest_jawa_droid()
+    {
+    }
     public static String c_stringFile = "conversation/stap_quest_jawa_droid";
     public boolean stap_quest_jawa_droid_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

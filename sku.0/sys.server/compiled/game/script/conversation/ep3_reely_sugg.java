@@ -7,7 +7,9 @@ import script.*;
 
 public class ep3_reely_sugg extends script.base_script
 {
-
+    public ep3_reely_sugg()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_reely_sugg";
     public boolean ep3_reely_sugg_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

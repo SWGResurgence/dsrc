@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class raider_male extends script.base_script
 {
-
+    public raider_male()
+    {
+    }
     public static final String BASE_PATH = "npc.create";
     public static final String SCRIPT_ME = BASE_PATH + ".tusken.raider_male";
     public int OnAttach(obj_id self) throws InterruptedException

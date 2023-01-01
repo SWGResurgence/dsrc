@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class furniture_item_nohue extends script.systems.crafting.furniture.crafting_base_furniture
 {
-
+    public furniture_item_nohue()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

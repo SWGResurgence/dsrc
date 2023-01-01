@@ -8,7 +8,9 @@ import script.*;
 
 public class borvos_acklay_dakk extends script.base_script
 {
-
+    public borvos_acklay_dakk()
+    {
+    }
     public static String c_stringFile = "conversation/borvos_acklay_dakk";
     public boolean borvos_acklay_dakk_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

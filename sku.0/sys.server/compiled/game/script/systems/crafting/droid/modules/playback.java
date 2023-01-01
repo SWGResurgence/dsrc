@@ -5,7 +5,9 @@ import script.library.*;
 
 public class playback extends script.base_script
 {
-
+    public playback()
+    {
+    }
     public static final String MODULE_OBJVAR = "module_data.playback";
     public static final String SCRIPT_NAME = "systems.crafting.droid.modules.playback";
     public static final String STF = "pet/droid_modules";

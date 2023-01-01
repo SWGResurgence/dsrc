@@ -8,7 +8,9 @@ import script.*;
 
 public class npe_job_pointer extends script.base_script
 {
-
+    public npe_job_pointer()
+    {
+    }
     public static String c_stringFile = "conversation/npe_job_pointer";
     public boolean npe_job_pointer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

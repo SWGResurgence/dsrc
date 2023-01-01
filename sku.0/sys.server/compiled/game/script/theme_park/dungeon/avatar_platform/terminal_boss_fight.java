@@ -8,7 +8,9 @@ import script.string_id;
 
 public class terminal_boss_fight extends script.base_script
 {
-
+    public terminal_boss_fight()
+    {
+    }
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id UNLOCK_DOOR = new string_id(STF, "unlock_door");
     public static final string_id CANNOT_UNLOCK = new string_id(STF, "cannot_unlock");

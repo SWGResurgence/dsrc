@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class senate_controller extends script.base_script
 {
-
+    public senate_controller()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         makeAllCellsPublic(self);

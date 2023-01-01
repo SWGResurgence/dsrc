@@ -8,7 +8,9 @@ import script.string_id;
 
 public class event_two_boss extends script.base_script
 {
-
+    public event_two_boss()
+    {
+    }
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

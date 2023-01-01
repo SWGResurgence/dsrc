@@ -11,7 +11,9 @@ import java.util.Objects;
 
 public class travel_player_space_dungeon extends script.base_script
 {
-
+    public travel_player_space_dungeon()
+    {
+    }
     public static final string_id SID_UNABLE_TO_FIND_DUNGEON = new string_id("dungeon/space_dungeon", "unable_to_find_dungeon");
     public static final string_id SID_NO_TICKET = new string_id("dungeon/space_dungeon", "no_ticket");
     public static final string_id SID_REQUEST_TRAVEL = new string_id("dungeon/space_dungeon", "request_travel");

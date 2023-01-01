@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class ttyson_test extends script.base.remote_object_requester
 {
-
+    public ttyson_test()
+    {
+    }
     public static final String STARTING_EQUIPMENT_FILE = "datatables/equipment/newbie_equipment.iff";
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {

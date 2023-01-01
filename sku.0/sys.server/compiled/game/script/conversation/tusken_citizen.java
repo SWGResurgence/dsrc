@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class tusken_citizen extends script.base_script
 {
-
+    public tusken_citizen()
+    {
+    }
     public static String c_stringFile = "conversation/tusken_citizen";
     public boolean tusken_citizen_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

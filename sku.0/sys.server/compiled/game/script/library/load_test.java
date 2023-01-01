@@ -7,7 +7,9 @@ import script.vector;
 
 public class load_test extends script.base_script
 {
-
+    public load_test()
+    {
+    }
     public static final String VAR_AI_SHIPS = "load_test.aiShips";
     public static final String[] REBEL_PILOT = 
     {

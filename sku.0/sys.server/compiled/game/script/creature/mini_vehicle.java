@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class mini_vehicle extends script.base_script
 {
-
+    public mini_vehicle()
+    {
+    }
     public static final int MAX_WAYPOINTS = 20;
     public static final String OBJVAR_VEHICLE_PATROL_POINTS = "vehicle.patrolPoints";
     public static final String OBJVAR_VEHICLE_PATROL_LOOP = "vehicle.patrol_loop";

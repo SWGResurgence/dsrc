@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class allow_player_custom_color extends script.base_script
 {
-
+    public allow_player_custom_color()
+    {
+    }
     public static final string_id PCOLOR = new string_id("sui", "set_primary_color");
     public static final string_id SCOLOR = new string_id("sui", "set_secondary_color");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

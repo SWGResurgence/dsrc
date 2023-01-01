@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class ship_ai extends script.base_script
 {
-
+    public ship_ai()
+    {
+    }
     public static final float DEFAULT_FOLLOW_DISTANCE = 20.0f;
     public static final int BEHAVIOR_IDLE = 0;
     public static final int BEHAVIOR_TRACK = 1;

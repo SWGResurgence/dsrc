@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class barada extends script.base_script
 {
-
+    public barada()
+    {
+    }
     public static final String SCRIPTPATH = "theme_park.tatooine.";
     public static final String TEMPLATE = "object/creature/npc/theme_park/barada.iff";
     public static final String[] SCRIPTS = 

@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class bib_fortuna extends script.base_script
 {
-
+    public bib_fortuna()
+    {
+    }
     public static final String SCRIPTPATH = "theme_park.tatooine.";
     public static final String TEMPLATE = "object/creature/npc/theme_park/bib_fortuna.iff";
     public static final String[] SCRIPTS = 

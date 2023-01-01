@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class talus_easy extends script.creature_spawner.base_newbie_creature_spawner
 {
-
+    public talus_easy()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

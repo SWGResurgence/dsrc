@@ -7,7 +7,9 @@ import java.util.HashSet;
 
 public class sarlacc_mini_game extends script.base_script
 {
-
+    public sarlacc_mini_game()
+    {
+    }
     public static final boolean BLOGGING_ON = true;
     public static final String BLOG_CATEGORY = "sarlacc";
     public static final string_id SID_MENU_FEED = new string_id("sarlacc_minigame", "mnu_feed");

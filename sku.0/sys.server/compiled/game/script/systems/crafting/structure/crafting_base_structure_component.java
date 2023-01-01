@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class crafting_base_structure_component extends script.systems.crafting.crafting_base
 {
-
+    public crafting_base_structure_component()
+    {
+    }
     public static final String VERSION = "v1.00.00";
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {

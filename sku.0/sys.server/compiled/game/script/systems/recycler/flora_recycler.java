@@ -5,7 +5,9 @@ import script.library.utils;
 
 public class flora_recycler extends script.base_script
 {
-
+    public flora_recycler()
+    {
+    }
     public static final String STF = "recycler_messages";
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id player, obj_id item) throws InterruptedException
     {

@@ -11,7 +11,9 @@ import script.string_id;
 
 public class fs_village_panicked extends script.base_script
 {
-
+    public fs_village_panicked()
+    {
+    }
     public static final String PP_FILE_LOC = "quest/force_sensitive/fs_panicked";
     public static final String RESPONSE_TEXT = "datatables/fs_quests/fs_panicked.iff";
     public static int INITIAL_DELAY = 10;

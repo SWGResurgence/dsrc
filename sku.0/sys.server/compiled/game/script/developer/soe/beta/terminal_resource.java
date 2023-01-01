@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class terminal_resource extends script.terminal.base.terminal_add_use
 {
-
+    public terminal_resource()
+    {
+    }
     public static final int AMT = 100000;
     public static final String[] RESOURCE_BASE_TYPES = 
     {

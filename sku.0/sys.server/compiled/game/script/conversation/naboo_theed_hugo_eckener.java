@@ -5,7 +5,9 @@ import script.*;
 
 public class naboo_theed_hugo_eckener extends script.base_script
 {
-
+    public naboo_theed_hugo_eckener()
+    {
+    }
     public static String c_stringFile = "conversation/naboo_theed_hugo_eckener";
     public boolean naboo_theed_hugo_eckener_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

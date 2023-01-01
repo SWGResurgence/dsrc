@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class fs_dyn_village extends script.base_script
 {
-
+    public fs_dyn_village()
+    {
+    }
     public static final String CITY_STAGES_DATATABLE = "datatables/fs_quests/fs_dyn_city.iff";
     public static final String CITY_BAD_GUY_SPAWN_TABLE = "datatables/quest/force_sensitive/base_spawn.iff";
     public static final String CITY_DESTRUCTION_COORDS = "datatables/quest/force_sensitive/village_destruction_coords.iff";

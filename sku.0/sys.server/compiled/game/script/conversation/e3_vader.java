@@ -7,7 +7,9 @@ import script.*;
 
 public class e3_vader extends script.base_script
 {
-
+    public e3_vader()
+    {
+    }
     public static String c_stringFile = "conversation/e3_vader";
     public boolean e3_vader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class armor_base_conversion extends script.base_script
 {
-
+    public armor_base_conversion()
+    {
+    }
     public static final String ARMOR_SET_PREFIX = "object/tangible/wearables/armor/";
     public static final String[] ARMOR_SET_ASSAULT = 
     {

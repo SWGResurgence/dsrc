@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class retrieve_item extends script.base_script
 {
-
+    public retrieve_item()
+    {
+    }
     public int OnContainerChildGainItem(obj_id self, obj_id item, obj_id source, obj_id transferer) throws InterruptedException
     {
         LOG("newquests", "received item(" + item + ", " + getTemplateName(item) + ") source(" + source + ", " + getTemplateName(source) + ") transferer(" + transferer + ", " + getTemplateName(transferer) + ")");

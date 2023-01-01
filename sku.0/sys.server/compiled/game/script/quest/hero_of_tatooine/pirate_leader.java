@@ -10,7 +10,9 @@ import script.string_id;
 
 public class pirate_leader extends script.base_script
 {
-
+    public pirate_leader()
+    {
+    }
     public static final String STF_FILE = "quest/pirates";
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {

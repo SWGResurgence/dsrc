@@ -8,7 +8,9 @@ import script.*;
 
 public class tatooine_24_azure_cabal_tweego_01 extends script.base_script
 {
-
+    public tatooine_24_azure_cabal_tweego_01()
+    {
+    }
     public static String c_stringFile = "conversation/tatooine_24_azure_cabal_tweego_01";
     public boolean tatooine_24_azure_cabal_tweego_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class flag_game extends script.base_script
 {
-
+    public flag_game()
+    {
+    }
     public static final String[] TEMPLATE = 
     {
         "object/tangible/furniture/all/event_flag_game_neut_banner.iff",

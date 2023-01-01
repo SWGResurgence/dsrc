@@ -10,7 +10,9 @@ import script.obj_id;
 
 public class gcw_city_kit extends script.base_script
 {
-
+    public gcw_city_kit()
+    {
+    }
     public static final int CONSTRUCTION_HP_BASE = 5000;
     public void destroyKitObj(obj_id self) throws InterruptedException
     {

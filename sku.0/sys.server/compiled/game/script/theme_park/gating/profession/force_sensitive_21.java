@@ -7,7 +7,9 @@ import script.string_id;
 
 public class force_sensitive_21 extends script.base_script
 {
-
+    public force_sensitive_21()
+    {
+    }
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item) || isIdValid(destinationCell))

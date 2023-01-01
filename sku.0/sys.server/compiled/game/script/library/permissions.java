@@ -7,7 +7,9 @@ import script.string_id;
 
 public class permissions extends script.base_script
 {
-
+    public permissions()
+    {
+    }
     public static final String VAR_PERMISSION_BASE = "permissions_list";
     public static final String VAR_PERMISSION_BANNED = "permissions_list.banned";
     public static final String VAR_PERMISSION_USERS = "permissions_list.users";

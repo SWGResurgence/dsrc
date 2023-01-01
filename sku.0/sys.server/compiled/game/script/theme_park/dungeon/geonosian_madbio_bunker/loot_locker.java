@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class loot_locker extends script.base_script
 {
-
+    public loot_locker()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "item.container.loot_crate");

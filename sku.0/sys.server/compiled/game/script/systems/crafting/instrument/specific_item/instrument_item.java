@@ -7,7 +7,9 @@ import script.resource_weight;
 
 public class instrument_item extends script.systems.crafting.instrument.crafting_base_instrument
 {
-
+    public instrument_item()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

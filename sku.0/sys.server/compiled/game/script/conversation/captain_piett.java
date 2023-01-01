@@ -5,7 +5,9 @@ import script.*;
 
 public class captain_piett extends script.base_script
 {
-
+    public captain_piett()
+    {
+    }
     public static String c_stringFile = "conversation/captain_piett";
     public boolean captain_piett_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

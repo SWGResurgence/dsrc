@@ -6,7 +6,9 @@ import java.util.Vector;
 
 public class create extends script.base_script
 {
-    
+    public create()
+    {
+    }
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String STAT_BALANCE_TABLE = "datatables/mob/stat_balance.iff";
     public static final String VEHICLE_TABLE = "datatables/vehicle/vehicle_template.iff";

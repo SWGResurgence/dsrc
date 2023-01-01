@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class region_tracker extends script.base_script
 {
-
+    public region_tracker()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "setting city name on " + self);

@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class loam_redge extends script.base_script
 {
-
+    public loam_redge()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Inquisitor Loam Redge");

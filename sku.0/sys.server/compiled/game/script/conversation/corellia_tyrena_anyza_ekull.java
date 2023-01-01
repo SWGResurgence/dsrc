@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_tyrena_anyza_ekull extends script.base_script
 {
-
+    public corellia_tyrena_anyza_ekull()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_tyrena_anyza_ekull";
     public boolean corellia_tyrena_anyza_ekull_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

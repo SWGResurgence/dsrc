@@ -8,7 +8,9 @@ import script.*;
 
 public class nym_themepark_quatermaster extends script.base_script
 {
-
+    public nym_themepark_quatermaster()
+    {
+    }
     public static String c_stringFile = "conversation/nym_themepark_quatermaster";
     public boolean nym_themepark_quatermaster_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

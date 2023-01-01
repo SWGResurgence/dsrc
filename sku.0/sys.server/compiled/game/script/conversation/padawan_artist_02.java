@@ -7,7 +7,9 @@ import script.*;
 
 public class padawan_artist_02 extends script.base_script
 {
-
+    public padawan_artist_02()
+    {
+    }
     public static String c_stringFile = "conversation/padawan_artist_02";
     public boolean padawan_artist_02_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

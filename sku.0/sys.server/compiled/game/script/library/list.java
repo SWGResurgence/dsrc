@@ -5,7 +5,9 @@ import script.obj_var_list;
 
 public class list extends script.base_script
 {
-
+    public list()
+    {
+    }
     public static obj_var[] sortToArray(obj_var_list ovl) throws InterruptedException
     {
         obj_var[] listArray = listToArray(ovl);

@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class newbie_hall_skipped extends script.theme_park.newbie_tutorial.tutorial_base
 {
-
+    public newbie_hall_skipped()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "newbie.hallSetupStep", 0);

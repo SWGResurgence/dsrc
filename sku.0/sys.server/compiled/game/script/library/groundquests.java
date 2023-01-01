@@ -6,7 +6,9 @@ import java.util.Vector;
 
 public class groundquests extends script.base_script
 {
-
+    public groundquests()
+    {
+    }
     public static final String DISABLED_QUEST_TABLE = "datatables/quest/ground/disabled.iff";
     public static final String DISABLED_QUEST_COLUMN = "disabled_quests";
     public static final String questBaseObjVar = "quest";

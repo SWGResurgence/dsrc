@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class entrance_terminal extends script.base_script
 {
-
+    public entrance_terminal()
+    {
+    }
     public static final string_id MNU_OPEN_DOOR = new string_id("dungeon/death_watch", "mnu_open_door");
     public static final string_id ACCESS_GRANTED = new string_id("dungeon/death_watch", "access_granted");
     public static final string_id ENTRANCE_DENIED = new string_id("dungeon/death_watch", "entrance_denied");

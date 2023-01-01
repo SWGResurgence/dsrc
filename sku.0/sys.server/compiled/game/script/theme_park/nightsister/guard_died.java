@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class guard_died extends script.base_script
 {
-
+    public guard_died()
+    {
+    }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id cave = getObjIdObjVar(self, "cave");

@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class droid_convo extends script.base_script
 {
-
+    public droid_convo()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id commoner = spawnGuyOne(self);

@@ -6,7 +6,9 @@ import java.util.Vector;
 
 public class sui extends script.base_script
 {
-
+    public sui()
+    {
+    }
     public static final int MAX_INPUT_LENGTH = 127;
     public static final String DEFAULT_TITLE = "@base_player:swg";
     public static final String OWNER = "owner";

@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class junk_nathan_taike extends script.base_script
 {
-
+    public junk_nathan_taike()
+    {
+    }
     public static String c_stringFile = "conversation/junk_nathan_taike";
     public boolean junk_nathan_taike_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

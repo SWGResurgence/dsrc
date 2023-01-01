@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class fortress extends script.base_script
 {
-    
+    public fortress()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnEveryone(self);

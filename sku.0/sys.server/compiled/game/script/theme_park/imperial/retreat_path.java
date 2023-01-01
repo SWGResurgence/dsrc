@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class retreat_path extends script.base_script
 {
-
+    public retreat_path()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int timeOut = rand(20, 40);

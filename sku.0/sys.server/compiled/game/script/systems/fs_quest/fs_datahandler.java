@@ -11,7 +11,9 @@ import java.util.Enumeration;
 
 public class fs_datahandler extends script.base_script
 {
-
+    public fs_datahandler()
+    {
+    }
     public void tryDetachScript() throws InterruptedException
     {
         obj_id selph = getSelf();

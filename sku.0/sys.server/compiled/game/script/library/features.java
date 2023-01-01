@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class features extends script.base_script
 {
-
+    public features()
+    {
+    }
     public static final int GAME_BASE = 0x0001;
     public static final int GAME_COLLECTORS_EDITION = 0x0002;
     public static final int GAME_SPACE_EXPANSION_BETA = 0x0004;

@@ -7,7 +7,9 @@ import script.string_id;
 
 public class reb_safehouse extends script.base_script
 {
-
+    public reb_safehouse()
+    {
+    }
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item) || isIdValid(destinationCell))

@@ -4,7 +4,9 @@ import script.*;
 
 public class bio_engineer extends script.base_script
 {
-
+    public bio_engineer()
+    {
+    }
     public static final float DNA_HARVEST_CHECK_FRENZY = 0.3f;
     public static final float DNA_HARVEST_CHECK_ATTACK = 0.7f;
     public static final float CREATURE_MIN_TO_HIT_MOD = -0.25f;

@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class mission_bounty_droid_terminal extends script.systems.missions.base.mission_dynamic_base
 {
-
+    public mission_bounty_droid_terminal()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         string_id strBuyDroid = new string_id("mission/mission_generic", "buy_probe_droid");

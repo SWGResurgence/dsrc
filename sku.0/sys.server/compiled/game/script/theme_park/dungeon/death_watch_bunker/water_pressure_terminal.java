@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class water_pressure_terminal extends script.base_script
 {
-
+    public water_pressure_terminal()
+    {
+    }
     public static final string_id ACCESS_DENIED = new string_id("dungeon/death_watch", "access_denied");
     public static final string_id MNU_WATER_VALVE = new string_id("dungeon/death_watch", "mnu_water_valve");
     public int OnInitialize(obj_id self) throws InterruptedException

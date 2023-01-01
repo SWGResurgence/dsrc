@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class ep3_forest_outcast_dealer extends script.base_script
 {
-
+    public ep3_forest_outcast_dealer()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_forest_outcast_dealer";
     public boolean ep3_forest_outcast_dealer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

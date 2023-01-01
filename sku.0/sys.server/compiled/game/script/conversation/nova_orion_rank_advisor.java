@@ -5,7 +5,9 @@ import script.*;
 
 public class nova_orion_rank_advisor extends script.base_script
 {
-
+    public nova_orion_rank_advisor()
+    {
+    }
     public static String c_stringFile = "conversation/nova_orion_rank_advisor";
     public boolean nova_orion_rank_advisor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

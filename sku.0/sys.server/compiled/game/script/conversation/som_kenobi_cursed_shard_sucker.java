@@ -5,7 +5,9 @@ import script.*;
 
 public class som_kenobi_cursed_shard_sucker extends script.base_script
 {
-
+    public som_kenobi_cursed_shard_sucker()
+    {
+    }
     public static String c_stringFile = "conversation/som_kenobi_cursed_shard_sucker";
     public boolean som_kenobi_cursed_shard_sucker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

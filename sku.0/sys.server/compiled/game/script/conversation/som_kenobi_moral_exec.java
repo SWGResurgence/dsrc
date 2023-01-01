@@ -8,7 +8,9 @@ import script.*;
 
 public class som_kenobi_moral_exec extends script.base_script
 {
-
+    public som_kenobi_moral_exec()
+    {
+    }
     public static String c_stringFile = "conversation/som_kenobi_moral_exec";
     public boolean som_kenobi_moral_exec_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

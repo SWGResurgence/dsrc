@@ -9,7 +9,9 @@ import script.string_id;
 
 public class camokit extends script.base_script
 {
-
+    public camokit()
+    {
+    }
     public static final string_id SID_APPLY_CAMO = new string_id("skl_use", "skl_apply_camo");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

@@ -7,7 +7,9 @@ import script.library.factions;
 
 public class imperial_research_terminal extends script.base_script
 {
-
+    public imperial_research_terminal()
+    {
+    }
     public static final String IMPERIAL_SHARED_STF = "theme_park/alderaan/act3/shared_imperial_missions";
     public static final string_id MISSION_COMPLETE = new string_id(IMPERIAL_SHARED_STF, "mission_complete");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

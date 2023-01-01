@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class boss_movement_buff extends script.base_script
 {
-
+    public boss_movement_buff()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         buff.applyBuff(self, "boss_armor_break_immunity");

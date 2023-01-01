@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class static_escort_on_target extends script.base_script
 {
-
+    public static_escort_on_target()
+    {
+    }
     public static final String dataTableColumnPathToPointPre = "PATH_TO_POINT_POINT_";
     public static final String dataTableColumnLocationXPre = "LOCATION_X_POINT_";
     public static final String dataTableColumnLocationYPre = "LOCATION_Y_POINT_";

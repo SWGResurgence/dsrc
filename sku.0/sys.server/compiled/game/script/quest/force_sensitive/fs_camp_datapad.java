@@ -7,7 +7,9 @@ import script.*;
 
 public class fs_camp_datapad extends script.base_script
 {
-
+    public fs_camp_datapad()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("sui", "use"));

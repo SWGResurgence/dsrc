@@ -6,7 +6,9 @@ import script.*;
 
 public class onewayunstack extends script.base_script
 {
-
+    public onewayunstack()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!canUnstack(player))

@@ -7,7 +7,9 @@ import script.*;
 
 public class tatooine_jawa_droid3 extends script.base_script
 {
-
+    public tatooine_jawa_droid3()
+    {
+    }
     public static String c_stringFile = "conversation/tatooine_jawa_droid3";
     public boolean tatooine_jawa_droid3_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

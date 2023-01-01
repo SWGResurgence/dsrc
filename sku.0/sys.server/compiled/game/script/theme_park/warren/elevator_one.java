@@ -7,7 +7,9 @@ import script.*;
 
 public class elevator_one extends script.base_script
 {
-
+    public elevator_one()
+    {
+    }
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public static final String ACTIVATE = "elev_one_secure";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

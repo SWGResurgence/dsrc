@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class caretaker extends script.base_script
 {
-
+    public caretaker()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setMovementPercent(self, 0.0f);

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class rtp_luke_plants extends script.base_script
 {
-
+    public rtp_luke_plants()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "dyingPlantSpawned"))

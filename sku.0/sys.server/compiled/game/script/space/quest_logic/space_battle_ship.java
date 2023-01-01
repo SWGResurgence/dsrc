@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class space_battle_ship extends script.base_script
 {
-
+    public space_battle_ship()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "warpOut", null, 1500.0f, false);

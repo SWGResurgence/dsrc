@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class bestine_south_spawner extends script.base_script
 {
-
+    public bestine_south_spawner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Bestine South Slums Spawner Script Attached");

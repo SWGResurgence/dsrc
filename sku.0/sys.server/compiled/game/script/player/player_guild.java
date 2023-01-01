@@ -14,7 +14,9 @@ import java.util.Vector;
 
 public class player_guild extends script.base_script
 {
-
+    public player_guild()
+    {
+    }
     public static final string_id SID_GUILDREMOVE_NOT_IN_GUILD = new string_id("base_player", "guildremove_not_in_guild");
     public static final string_id SID_GUILDSTATUS_NOT_PLAYER = new string_id("base_player", "guildstatus_not_player");
     public static final string_id SID_GUILDSTATUS_NOT_IN_GUILD = new string_id("base_player", "guildstatus_not_in_guild");

@@ -8,7 +8,9 @@ import script.string_id;
 
 public class newbie extends script.theme_park.newbie_tutorial.tutorial_base
 {
-    
+    public newbie()
+    {
+    }
     public static final String questNewbieHall01 = "c_newbie_hall_01";
     public int OnAttach(obj_id self) throws InterruptedException
     {

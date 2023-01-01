@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class cleanup extends script.base_script
 {
-    
+    public cleanup()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleCleanup", null, 60.0f, false);

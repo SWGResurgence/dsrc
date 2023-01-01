@@ -7,7 +7,9 @@ import script.string_id;
 
 public class officer_pet extends script.base_script
 {
-
+    public officer_pet()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "getAndFollowMaster", null, 3, false);

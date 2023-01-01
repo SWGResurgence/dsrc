@@ -8,7 +8,9 @@ import script.*;
 
 public class gcw_introduction_talon_karrde extends script.base_script
 {
-
+    public gcw_introduction_talon_karrde()
+    {
+    }
     public static String c_stringFile = "conversation/gcw_introduction_talon_karrde";
     public boolean gcw_introduction_talon_karrde_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

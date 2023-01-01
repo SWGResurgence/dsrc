@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class fs_survey_npc_convo extends script.base_script
 {
-    
+    public fs_survey_npc_convo()
+    {
+    }
     public static final String CONVO = "quest/force_sensitive/fs_survey";
     public static final String table = "datatables/quest/force_sensitive/fs_survey_quest_types.iff";
     public int OnInitialize(obj_id self) throws InterruptedException

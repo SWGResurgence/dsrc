@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class cwdm_test2 extends script.base_script
 {
-
+    public cwdm_test2()
+    {
+    }
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (strText.equals("cwdm_doit"))

@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class combat_base_old extends script.base_script
 {
-
+    public combat_base_old()
+    {
+    }
     public static final int CONE = 0;
     public static final int SINGLE_TARGET = 1;
     public static final int AREA = 2;

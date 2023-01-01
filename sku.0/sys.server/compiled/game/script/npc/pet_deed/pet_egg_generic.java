@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class pet_egg_generic extends script.base_script
 {
-
+    public pet_egg_generic()
+    {
+    }
     public static final String STF = "pet/pet_menu";
     public static final string_id HATCH_EGG = new string_id(STF, "hatch_egg");
     public static final string_id EGG_HATCHED = new string_id(STF, "egg_hatched");

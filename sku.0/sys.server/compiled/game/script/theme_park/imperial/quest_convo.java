@@ -5,7 +5,9 @@ import script.library.*;
 
 public class quest_convo extends script.base_script
 {
-
+    public quest_convo()
+    {
+    }
     public static final String REWARD_TABLE = "datatables/theme_park/item_reward.iff";
     public static final String MESSAGE_FILE = "theme_park/messages";
     public static final int REWARD_TYPE_NONE = 0;

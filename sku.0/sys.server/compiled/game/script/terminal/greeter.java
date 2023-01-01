@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class greeter extends script.terminal.base.base_terminal
 {
-    
+    public greeter()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "greeter";
     public static final string_id SID_GREETER_STATUS = new string_id("player_structure", "greeter_status");

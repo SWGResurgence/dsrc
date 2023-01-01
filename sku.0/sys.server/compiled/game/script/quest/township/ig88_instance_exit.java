@@ -5,7 +5,9 @@ import script.*;
 
 public class ig88_instance_exit extends script.base_script
 {
-
+    public ig88_instance_exit()
+    {
+    }
     public static final String INSTANCE_NAME = "heroic_ig88";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

@@ -1,8 +1,13 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+import script.*;
+import script.library.utils;
+
 public class door_lock_crafting_armor extends script.base_script
 {/*
-
+    public door_lock_crafting_armor()
+    {
+    }
     public static final String MSGS = "dungeon/death_watch";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

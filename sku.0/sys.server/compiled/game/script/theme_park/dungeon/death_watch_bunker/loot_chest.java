@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class loot_chest extends script.base_script
 {
-
+    public loot_chest()
+    {
+    }
     public static final string_id NO_PERMISSION = new string_id("dungeon/death_watch", "no_permission");
     public int OnAttach(obj_id self) throws InterruptedException
     {

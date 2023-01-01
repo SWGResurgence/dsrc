@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class millbarge_test extends script.base_script
 {
-
+    public millbarge_test()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {

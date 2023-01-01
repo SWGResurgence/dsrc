@@ -5,7 +5,9 @@ import script.*;
 
 public class tatooine_imperial_trainer_2b extends script.base_script
 {
-
+    public tatooine_imperial_trainer_2b()
+    {
+    }
     public static String c_stringFile = "conversation/tatooine_imperial_trainer_2b";
     public boolean tatooine_imperial_trainer_2b_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

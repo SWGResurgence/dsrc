@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class spawn_tangible extends script.base_script
 {
-
+    public spawn_tangible()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         requestPreloadCompleteTrigger(self);

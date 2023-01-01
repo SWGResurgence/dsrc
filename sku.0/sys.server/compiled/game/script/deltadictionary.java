@@ -8,7 +8,9 @@ public final class deltadictionary
 	private transient HashSet potentiallyDirty = new HashSet();
 	private transient dictionary currentValue = new dictionary();
 
-	
+	public deltadictionary()
+	{
+	}
 
 	public int size()
 	{

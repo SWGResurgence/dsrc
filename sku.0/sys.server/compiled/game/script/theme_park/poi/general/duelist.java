@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class duelist extends script.theme_park.poi.base
 {
-
+    public duelist()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "createDuelists", null, 3, true);

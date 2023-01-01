@@ -5,7 +5,9 @@ import script.string_id;
 
 public class reverse_engineering extends script.base_script
 {
-
+    public reverse_engineering()
+    {
+    }
     public static final String[] POWERUP_TYPES = 
     {
         "armor",

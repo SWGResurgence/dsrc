@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class vehicle_customizer extends script.base_script
 {
-
+    public vehicle_customizer()
+    {
+    }
     public static final String SCRIPTVAR_PID = "vehicletool.pid";
     public static final String SCRIPTVAR_PLAYER = "vehicletool.player";
     public static final String SCRIPTVAR_TARGET = "vehicletool.target";

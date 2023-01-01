@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class basic_task extends script.base_script
 {
-
+    public basic_task()
+    {
+    }
     public static final String FS_QUEST_SAD_QUANTITY_KILLABLE = "fs_quest_sad.quantity_killable";
     public static final String FS_QUEST_SAD_THEATER_LOCATION = "fs_quest_sad.theater_location";
     public static final location FS_VILLAGE_LOCATION = new location(5238.26f, 78.5f, -4189.03f);

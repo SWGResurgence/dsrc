@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class theater_spawn3 extends script.base_script
 {
-
+    public theater_spawn3()
+    {
+    }
     public int OnTheaterCreated(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newquests", "theater_spawn1");

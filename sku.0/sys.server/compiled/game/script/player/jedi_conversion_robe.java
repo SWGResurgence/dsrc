@@ -7,7 +7,9 @@ import script.string_id;
 
 public class jedi_conversion_robe extends script.base_script
 {
-
+    public jedi_conversion_robe()
+    {
+    }
     public static final String STF_FILE = "jedi_spam";
     public int OnAttach(obj_id self) throws InterruptedException
     {

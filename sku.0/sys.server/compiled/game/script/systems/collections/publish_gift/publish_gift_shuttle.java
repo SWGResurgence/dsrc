@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class publish_gift_shuttle extends script.base_script
 {
-
+    public publish_gift_shuttle()
+    {
+    }
     public int startLandingSequence(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = params.getObjId("owner");

@@ -5,7 +5,9 @@ import script.*;
 
 public class station_indie_slaver extends script.base_script
 {
-
+    public station_indie_slaver()
+    {
+    }
     public static String c_stringFile = "conversation/station_indie_slaver";
     public boolean station_indie_slaver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

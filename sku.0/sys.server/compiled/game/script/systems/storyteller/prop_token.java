@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class prop_token extends script.base_script
 {
-
+    public prop_token()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         storyteller.resetTokenDailyCount(self);

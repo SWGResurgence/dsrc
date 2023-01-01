@@ -7,7 +7,9 @@ import script.obj_var_list;
 
 public class factory_crate extends script.item.container.remove_only
 {
-    
+    public factory_crate()
+    {
+    }
     public static final String SCRIPT_FACTORY_CRATE = "item.container.factory_crate";
     public static final String VAR_TO_ATTACH = "to_attach";
     public static final String VAR_ITEMS_LEFT = "items_left";

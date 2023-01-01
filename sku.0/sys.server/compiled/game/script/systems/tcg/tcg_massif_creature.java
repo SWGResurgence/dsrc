@@ -5,7 +5,9 @@ import script.library.*;
 
 public class tcg_massif_creature extends script.base_script
 {
-
+    public tcg_massif_creature()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "sissynoid";
     public static final String TCG_STR = new String("tcg");

@@ -5,7 +5,9 @@ import script.library.*;
 
 public class familiar extends script.base_script
 {
-
+    public familiar()
+    {
+    }
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public static final String MESSAGE_PET_ID = "petId";
     public static final String MENU_FILE = "pet/pet_menu";

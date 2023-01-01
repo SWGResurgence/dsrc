@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class spice extends script.base_script
 {
-    
+    public spice()
+    {
+    }
     public static final string_id SID_SYS_ALREADY_SPICED = new string_id("spice/spice", "sys_already_spiced");
     public static final String EXAM_ATTRIB_MOD = "attribmods";
     public static final String EXAM_NONE = "@consumable:none";

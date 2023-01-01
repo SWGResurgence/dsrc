@@ -5,7 +5,9 @@ import script.*;
 
 public class mtp_kissing_booth extends script.base_script
 {
-
+    public mtp_kissing_booth()
+    {
+    }
     public static String c_stringFile = "conversation/mtp_kissing_booth";
     public boolean mtp_kissing_booth_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

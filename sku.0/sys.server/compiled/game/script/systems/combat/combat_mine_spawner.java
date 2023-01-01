@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class combat_mine_spawner extends script.base_script
 {
-
+    public combat_mine_spawner()
+    {
+    }
     public static final String dataTable = "datatables/combat/npc_landmines.iff";
     public static final boolean doLogging = false;
     public int OnAttach(obj_id self) throws InterruptedException

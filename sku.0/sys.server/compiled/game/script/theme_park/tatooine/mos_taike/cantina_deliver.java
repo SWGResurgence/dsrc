@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class cantina_deliver extends script.base_script
 {
-
+    public cantina_deliver()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");

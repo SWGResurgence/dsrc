@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class university_trainer_spawner extends script.base_script
 {
-
+    public university_trainer_spawner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnThings", null, 20, true);

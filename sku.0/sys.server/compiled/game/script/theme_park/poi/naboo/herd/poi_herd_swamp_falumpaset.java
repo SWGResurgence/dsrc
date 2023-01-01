@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class poi_herd_swamp_falumpaset extends script.theme_park.poi.base
 {
-
+    public poi_herd_swamp_falumpaset()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         poiCreateObject("object/creature/monster/falumpaset/falumpaset_swamp_large.iff", 8, 8);

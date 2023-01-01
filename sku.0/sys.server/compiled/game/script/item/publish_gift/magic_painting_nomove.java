@@ -6,7 +6,9 @@ import script.string_id;
 
 public class magic_painting_nomove extends script.base_script
 {
-
+    public magic_painting_nomove()
+    {
+    }
     public static final string_id MOVED_PAINTING = new string_id("spam", "magic_painting_moved");
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -7,7 +7,9 @@ import script.*;
 
 public class biogenic_assistant extends script.base_script
 {
-
+    public biogenic_assistant()
+    {
+    }
     public static String c_stringFile = "conversation/biogenic_assistant";
     public boolean biogenic_assistant_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

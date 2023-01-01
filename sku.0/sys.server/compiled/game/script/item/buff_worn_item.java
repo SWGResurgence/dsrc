@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class buff_worn_item extends script.base_script
 {
-
+    public buff_worn_item()
+    {
+    }
     public static final String NON_ENHANCEMENT_BUFF = "buff.non_enhancement";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

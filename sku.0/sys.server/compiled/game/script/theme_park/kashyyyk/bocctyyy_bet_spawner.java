@@ -12,7 +12,9 @@ import java.util.Vector;
 
 public class bocctyyy_bet_spawner extends script.base_script
 {
-
+    public bocctyyy_bet_spawner()
+    {
+    }
     public int doBocctyyySpawnEvent(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || !params.containsKey("questName"))

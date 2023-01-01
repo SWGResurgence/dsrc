@@ -5,7 +5,9 @@ import script.library.*;
 
 public class vehicle_base extends script.base_script
 {
-
+    public vehicle_base()
+    {
+    }
     public static final String MENU_FILE = "pet/pet_menu";
     public static final String VCDPING_VEHICLE_SCRIPT_NAME = "systems.vehicle_system.vehicle_ping";
     public static final String MESSAGE_VEHICLE_ID = "vehicleId";

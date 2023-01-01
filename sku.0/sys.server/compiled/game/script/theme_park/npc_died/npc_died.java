@@ -7,7 +7,9 @@ import java.util.Objects;
 
 public class npc_died extends script.base_script
 {
-
+    public npc_died()
+    {
+    }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (hasObjVar(self, "useOnIncapTrigger"))

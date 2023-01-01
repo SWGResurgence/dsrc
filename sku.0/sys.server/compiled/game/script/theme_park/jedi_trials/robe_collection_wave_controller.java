@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class robe_collection_wave_controller extends script.base_script
 {
-
+    public robe_collection_wave_controller()
+    {
+    }
     public static final String DATATABLE = "datatables/quest/jedi_collection/jedi_robe_collection.iff";
     public static final String DATA_SLOT_PREREQ = "slot_prereq";
     public static final String DATA_SLOT_AWARDED = "slot_awarded";

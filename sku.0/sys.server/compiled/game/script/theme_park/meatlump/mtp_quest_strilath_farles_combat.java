@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class mtp_quest_strilath_farles_combat extends script.base_script
 {
-
+    public mtp_quest_strilath_farles_combat()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleFarlesFaceTo", null, 1, false);

@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class junk_dealer_generic extends script.base_script
 {
-
+    public junk_dealer_generic()
+    {
+    }
     public static String c_stringFile = "conversation/junk_dealer_generic";
     public boolean junk_dealer_generic_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

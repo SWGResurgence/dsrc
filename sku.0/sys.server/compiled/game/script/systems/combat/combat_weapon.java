@@ -6,7 +6,9 @@ import script.library.*;
 
 public class combat_weapon extends script.base_script
 {
-
+    public combat_weapon()
+    {
+    }
     public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###.##");
     public static final java.text.NumberFormat noDecimalFormat = new java.text.DecimalFormat("###");
     public static final java.text.NumberFormat percentFormat = new java.text.DecimalFormat("###.#%");

@@ -7,7 +7,9 @@ import script.*;
 
 public class menagerie_terminal_test extends script.base_script
 {
-
+    public menagerie_terminal_test()
+    {
+    }
     public static String c_stringFile = "conversation/menagerie_terminal_test";
     public boolean menagerie_terminal_test_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

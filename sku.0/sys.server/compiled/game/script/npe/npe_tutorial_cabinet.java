@@ -11,7 +11,9 @@ import script.string_id;
 
 public class npe_tutorial_cabinet extends script.base_script
 {
-
+    public npe_tutorial_cabinet()
+    {
+    }
     public static final string_id OPEN_CABINET = new string_id("npe_hangar_1", "open_cabinet");
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -8,7 +8,9 @@ import script.library.sui;
 
 public class ig88_scanner extends script.base_script
 {
-
+    public ig88_scanner()
+    {
+    }
     public static final int COUNTDOWN_TIME = 5;
     public static final String QUEST_NAME = "found_ig88_encounter";
     public static final String QUEST_TASK_NAME = "ig88_enter_compound";

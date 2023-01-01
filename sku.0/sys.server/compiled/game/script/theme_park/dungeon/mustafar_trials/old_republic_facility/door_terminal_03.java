@@ -6,7 +6,9 @@ import script.*;
 
 public class door_terminal_03 extends script.base_script
 {
-
+    public door_terminal_03()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);

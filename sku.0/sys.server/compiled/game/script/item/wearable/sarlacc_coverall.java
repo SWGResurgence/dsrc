@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class sarlacc_coverall extends script.base_script
 {
-
+    public sarlacc_coverall()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setSkillModBonus(self, "resistance_disease", 25);

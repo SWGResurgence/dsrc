@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class kazic_pendre_area_spawner extends script.base_script
 {
-
+    public kazic_pendre_area_spawner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (canSpawnByConfigSetting())

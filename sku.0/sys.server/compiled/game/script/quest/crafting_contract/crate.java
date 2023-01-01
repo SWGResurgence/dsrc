@@ -8,7 +8,9 @@ import script.string_id;
 
 public class crate extends script.base_script
 {
-
+    public crate()
+    {
+    }
     public static final String ITEM_OBJVAR = "contract.item";
     public static final String MAX_NUM_OBJVAR = "contract.max";
     public static final String CURRENT_NUM_OBJVAR = "contract.current";

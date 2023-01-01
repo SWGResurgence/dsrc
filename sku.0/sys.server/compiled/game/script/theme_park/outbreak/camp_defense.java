@@ -9,7 +9,9 @@ import script.string_id;
 
 public class camp_defense extends script.base_script
 {
-
+    public camp_defense()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String TRIGGER_NAME_PREFIX = "camp_defense_trigger_";
     public static final String SCRIPT_LOG = "outbreak_trigger";

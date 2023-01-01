@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class jedi_test extends script.base_script
 {
-
+    public jedi_test()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (getJediState(self) < JEDI_STATE_JEDI)

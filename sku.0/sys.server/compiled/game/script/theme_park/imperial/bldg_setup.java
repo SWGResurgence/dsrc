@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class bldg_setup extends script.base_script
 {
-
+    public bldg_setup()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "ATTACHING");

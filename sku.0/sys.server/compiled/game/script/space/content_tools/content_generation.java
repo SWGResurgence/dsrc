@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class content_generation extends script.base_script
 {
-
+    public content_generation()
+    {
+    }
     public static final float AUTOSAVE_DELAY = 300;
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -1,12 +1,20 @@
 package script.theme_park.wod;
 
-import script.dictionary;
+import script.*;
+import script.base_class.*;
+import script.combat_engine.*;
+import java.util.Arrays;
+import java.util.Hashtable;
+import java.util.Vector;
+import script.base_script;
+
 import script.library.create;
-import script.obj_id;
 
 public class herb_spawning extends script.base_script
 {
-
+    public herb_spawning()
+    {
+    }
     public static final String[] HERBS = 
     {
         "object/tangible/furniture/wod_themepark/wod_themepark_herb_01.iff",

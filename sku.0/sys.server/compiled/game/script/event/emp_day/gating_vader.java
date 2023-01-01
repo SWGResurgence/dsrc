@@ -10,7 +10,9 @@ import script.string_id;
 
 public class gating_vader extends script.base_script
 {
-
+    public gating_vader()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnStormtroopers", null, 30, false);

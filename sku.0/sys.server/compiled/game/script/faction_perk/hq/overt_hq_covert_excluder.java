@@ -7,7 +7,9 @@ import script.string_id;
 
 public class overt_hq_covert_excluder extends script.base_script
 {
-
+    public overt_hq_covert_excluder()
+    {
+    }
     private static final string_id SID_YOURE_NEUTRAL_EXCLUDED = new string_id("faction/faction_hq/faction_hq_response", "youre_neutral_excluded");
     private static final string_id SID_YOURE_COVERT_EXCLUDED = new string_id("faction/faction_hq/faction_hq_response", "youre_covert_excluded");
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException

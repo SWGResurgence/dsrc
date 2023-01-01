@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class qa_damage extends script.base_script
 {
-
+    public qa_damage()
+    {
+    }
     public static final String DAMAGE_PID_SCRIPTVAR = "doDamage.pid";
     public static final String DAMAGE_SCRIPTVAR = "doDamageVar";
     public static final String HEAL_PID_SCRIPTVAR = "healDamage.pid";

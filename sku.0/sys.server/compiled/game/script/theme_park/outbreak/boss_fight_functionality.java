@@ -8,7 +8,9 @@ import script.string_id;
 
 public class boss_fight_functionality extends script.base_script
 {
-
+    public boss_fight_functionality()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_trigger";
     public static final String FAIL_SIGNAL = "fail_signal";

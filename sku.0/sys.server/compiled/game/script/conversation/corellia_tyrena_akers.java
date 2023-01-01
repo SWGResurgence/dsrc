@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_tyrena_akers extends script.base_script
 {
-
+    public corellia_tyrena_akers()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_tyrena_akers";
     public boolean corellia_tyrena_akers_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

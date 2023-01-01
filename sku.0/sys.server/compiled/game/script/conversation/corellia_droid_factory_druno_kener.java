@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_droid_factory_druno_kener extends script.base_script
 {
-
+    public corellia_droid_factory_druno_kener()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_droid_factory_druno_kener";
     public boolean corellia_droid_factory_druno_kener_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

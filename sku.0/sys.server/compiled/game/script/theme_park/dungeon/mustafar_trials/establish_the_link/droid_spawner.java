@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class droid_spawner extends script.base_script
 {
-
+    public droid_spawner()
+    {
+    }
     public static final boolean LOGGING = false;
     public static final String RELAY_DROID = "som_link_relay_droid";
     public int OnAttach(obj_id self) throws InterruptedException

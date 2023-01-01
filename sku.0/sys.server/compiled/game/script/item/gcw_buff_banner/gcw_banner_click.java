@@ -5,7 +5,9 @@ import script.library.*;
 
 public class gcw_banner_click extends script.base_script
 {
-
+    public gcw_banner_click()
+    {
+    }
     public static final int FACTION_NONE = -1;
     public static final int FACTION_REBEL = 0;
     public static final int FACTION_IMPERIAL = 1;

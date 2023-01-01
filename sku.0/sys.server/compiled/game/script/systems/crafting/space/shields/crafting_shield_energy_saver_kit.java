@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_shield_energy_saver_kit extends script.systems.crafting.space.shields.crafting_base_shields_component
 {
-
+    public crafting_shield_energy_saver_kit()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

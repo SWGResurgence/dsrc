@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_camp_item extends script.systems.crafting.item.crafting_base_station
 {
-
+    public crafting_camp_item()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

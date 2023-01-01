@@ -5,7 +5,9 @@ import script.library.*;
 
 public class target_map_puzzle extends script.base_script
 {
-
+    public target_map_puzzle()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String VAR_PREFIX = "meatlump_target_map";
     public static final String NONIMPERATIVE_VAR_PREFIX = "meatlump_target_map_nonimperative";

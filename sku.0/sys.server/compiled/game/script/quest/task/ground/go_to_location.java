@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class go_to_location extends script.quest.task.ground.base_task
 {
-
+    public go_to_location()
+    {
+    }
     public static final String dataTableColumnPlanetName = "PLANET_NAME";
     public static final String dataTableColumnLocationX = "LOCATION_X";
     public static final String dataTableColumnLocationY = "LOCATION_Y";

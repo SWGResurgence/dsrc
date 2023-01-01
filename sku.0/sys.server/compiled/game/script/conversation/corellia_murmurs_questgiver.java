@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_murmurs_questgiver extends script.base_script
 {
-
+    public corellia_murmurs_questgiver()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_murmurs_questgiver";
     public boolean corellia_murmurs_questgiver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

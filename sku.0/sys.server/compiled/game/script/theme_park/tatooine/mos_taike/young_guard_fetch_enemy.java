@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class young_guard_fetch_enemy extends script.base_script
 {
-
+    public young_guard_fetch_enemy()
+    {
+    }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         String datatable = "datatables/theme_park/mos_taike_young_guard.iff";

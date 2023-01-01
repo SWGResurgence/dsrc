@@ -8,7 +8,9 @@ import script.*;
 
 public class mtp_hideout_access_strilath_farles_02 extends script.base_script
 {
-
+    public mtp_hideout_access_strilath_farles_02()
+    {
+    }
     public static String c_stringFile = "conversation/mtp_hideout_access_strilath_farles_02";
     public boolean mtp_hideout_access_strilath_farles_02_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,7 +8,9 @@ import script.string_id;
 
 public class droid_factory_history_terminal extends script.base_script
 {
-
+    public droid_factory_history_terminal()
+    {
+    }
     public static final String STF = "som/som_quest";
     public static final string_id ACCESS = new string_id(STF, "df_terminal_use");
     public static final string_id SLICE = new string_id(STF, "df_terminal_slice");

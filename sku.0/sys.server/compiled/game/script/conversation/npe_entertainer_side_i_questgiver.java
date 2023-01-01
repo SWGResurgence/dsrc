@@ -8,7 +8,9 @@ import script.*;
 
 public class npe_entertainer_side_i_questgiver extends script.base_script
 {
-
+    public npe_entertainer_side_i_questgiver()
+    {
+    }
     public static String c_stringFile = "conversation/npe_entertainer_side_i_questgiver";
     public boolean npe_entertainer_side_i_questgiver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

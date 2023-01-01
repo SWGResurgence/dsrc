@@ -8,7 +8,9 @@ import script.*;
 
 public class mtp_hideout_access_lieutenant_kaiya extends script.base_script
 {
-
+    public mtp_hideout_access_lieutenant_kaiya()
+    {
+    }
     public static String c_stringFile = "conversation/mtp_hideout_access_lieutenant_kaiya";
     public boolean mtp_hideout_access_lieutenant_kaiya_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,7 +5,9 @@ import script.*;
 
 public class naboo_legacy_wilson_tchorshel extends script.base_script
 {
-
+    public naboo_legacy_wilson_tchorshel()
+    {
+    }
     public static String c_stringFile = "conversation/naboo_legacy_wilson_tchorshel";
     public boolean naboo_legacy_wilson_tchorshel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

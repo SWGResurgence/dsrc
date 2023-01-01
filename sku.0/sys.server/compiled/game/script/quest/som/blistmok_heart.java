@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class blistmok_heart extends script.base_script
 {
-
+    public blistmok_heart()
+    {
+    }
     public static final String STF = "som/som_quest";
     public static final string_id EXAMINE = new string_id(STF, "blistmok_heart_examine");
     public static final string_id DESTROY = new string_id(STF, "blistmok_heart_destroy");

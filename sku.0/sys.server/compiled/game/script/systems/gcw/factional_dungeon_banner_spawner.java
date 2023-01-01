@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class factional_dungeon_banner_spawner extends script.base_script
 {
-
+    public factional_dungeon_banner_spawner()
+    {
+    }
     public int swapFlag(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objFlag = getObjIdObjVar(self, "objFlag");

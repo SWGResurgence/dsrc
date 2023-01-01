@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class padawan_the_ring_02 extends script.base_script
 {
-
+    public padawan_the_ring_02()
+    {
+    }
     public static String c_stringFile = "conversation/padawan_the_ring_02";
     public boolean padawan_the_ring_02_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

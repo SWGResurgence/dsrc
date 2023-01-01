@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class gcw_spawner extends script.base_script
 {
-
+    public gcw_spawner()
+    {
+    }
     public static final int MAX_SPAWN_TRIES = 5;
     public int OnAttach(obj_id self) throws InterruptedException
     {

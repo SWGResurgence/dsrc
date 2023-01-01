@@ -6,7 +6,9 @@ import java.util.Vector;
 
 public class cloninglib extends script.base_script
 {
-
+    public cloninglib()
+    {
+    }
     public static final String SCRIPT_CLONING_FACILITY = "structure.municipal.cloning_facility";
     public static final String SCRVAR_CLONE_COUPON = "clone_coupon";
     public static final String DATATABLE_CLONE_SPAWN = "datatables/structure/municipal/cloning_facility_respawn.iff";

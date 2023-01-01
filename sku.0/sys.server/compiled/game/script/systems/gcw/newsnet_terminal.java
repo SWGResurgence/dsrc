@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class newsnet_terminal extends script.base_script
 {
-
+    public newsnet_terminal()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         callAttentionBarker(self);

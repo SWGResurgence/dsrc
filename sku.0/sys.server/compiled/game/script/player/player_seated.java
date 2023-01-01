@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class player_seated extends script.base_script
 {
-
+    public player_seated()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, furniture.VAR_PLAYER_SEAT_ID))

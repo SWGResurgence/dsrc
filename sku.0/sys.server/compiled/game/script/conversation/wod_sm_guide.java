@@ -5,7 +5,9 @@ import script.*;
 
 public class wod_sm_guide extends script.base_script
 {
-    
+    public wod_sm_guide()
+    {
+    }
     public static String c_stringFile = "conversation/wod_sm_guide";
     public boolean wod_sm_guide_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

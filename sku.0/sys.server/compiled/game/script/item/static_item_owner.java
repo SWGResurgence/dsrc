@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class static_item_owner extends script.base_script
 {
-
+    public static_item_owner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);

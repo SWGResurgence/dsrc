@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class gcw_camp extends script.base_script
 {
-
+    public gcw_camp()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "initializeAdvancedCamp", null, 30.0f, false);

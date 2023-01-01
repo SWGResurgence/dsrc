@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class objective_manager extends script.base_script
 {
-
+    public objective_manager()
+    {
+    }
     private static final int VULN_DELAY = 14400;
     public int OnAttach(obj_id self) throws InterruptedException
     {

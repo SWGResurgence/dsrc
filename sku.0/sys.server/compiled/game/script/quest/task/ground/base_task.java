@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class base_task extends script.base.remote_object_requester
 {
-
+    public base_task()
+    {
+    }
     public static final String taskType = "base_task";
     public static final String dataTableColumnQuestOnComplete = "GRANT_QUEST_ON_COMPLETE";
     public static final String dataTableColumnQuestOnFail = "GRANT_QUEST_ON_FAIL";

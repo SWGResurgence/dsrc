@@ -6,7 +6,9 @@ import script.library.sui;
 
 public class uber_survey_tool extends script.base_script
 {
-
+    public uber_survey_tool()
+    {
+    }
     public static final String HANDLER_SET_TOOL_CLASS = "handleSetToolClass";
     public static final string_id SID_TOOL_OPTIONS = new string_id("sui", "tool_options");
     public static final string_id SID_TOOL_CLASS = new string_id("sui", "survey_class");

@@ -6,7 +6,9 @@ import script.library.player_structure;
 
 public class terminal_core_overload extends script.base_script
 {
-
+    public terminal_core_overload()
+    {
+    }
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id INCREASE_POWER = new string_id(STF, "core_overload");
     public static final string_id WARNING_OVERLOAD = new string_id(STF, "warning_overload");

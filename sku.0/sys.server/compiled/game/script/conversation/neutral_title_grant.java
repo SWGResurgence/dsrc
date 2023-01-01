@@ -5,7 +5,9 @@ import script.*;
 
 public class neutral_title_grant extends script.base_script
 {
-
+    public neutral_title_grant()
+    {
+    }
     public static String c_stringFile = "conversation/neutral_title_grant";
     public boolean neutral_title_grant_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

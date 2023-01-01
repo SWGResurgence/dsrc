@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class assault_killer_bot extends script.base_script
 {
-
+    public assault_killer_bot()
+    {
+    }
     public static final boolean LOGGING = false;
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {

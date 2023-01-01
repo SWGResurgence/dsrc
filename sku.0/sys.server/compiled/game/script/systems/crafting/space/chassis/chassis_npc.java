@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class chassis_npc extends script.base_script
 {
-
+    public chassis_npc()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

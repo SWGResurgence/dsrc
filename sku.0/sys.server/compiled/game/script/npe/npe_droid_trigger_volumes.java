@@ -10,7 +10,9 @@ import script.obj_id;
 
 public class npe_droid_trigger_volumes extends script.base_script
 {
-
+    public npe_droid_trigger_volumes()
+    {
+    }
     public int OnCreatureDamaged(obj_id self, obj_id player, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "droidVolumeBreach"))

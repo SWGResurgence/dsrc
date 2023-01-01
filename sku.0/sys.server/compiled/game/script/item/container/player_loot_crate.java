@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class player_loot_crate extends script.item.container.locked_slicable
 {
-
+    public player_loot_crate()
+    {
+    }
     public static final String LOOT_CRATE = "object/tangible/container/loot/loot_crate.iff";
     public int handleSlicingSuccess(obj_id self, dictionary params) throws InterruptedException
     {

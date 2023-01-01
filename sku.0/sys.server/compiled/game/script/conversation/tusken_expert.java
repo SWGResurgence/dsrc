@@ -5,7 +5,9 @@ import script.library.*;
 
 public class tusken_expert extends script.base_script
 {
-
+    public tusken_expert()
+    {
+    }
     public static String c_stringFile = "conversation/tusken_expert";
     public boolean tusken_expert_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

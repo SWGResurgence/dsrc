@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class yoda_fountain extends script.base_script
 {
-
+    public yoda_fountain()
+    {
+    }
     public static final String MUSIC_BATTLE_HEROES = "object/soundobject/soundobject_battle_heroes.iff";
     public static final String MUSIC_HAN_LEIA = "object/soundobject/soundobject_empire_day_romance_b.iff";
     public static final String EMP_DAY = "event/emperors_day";

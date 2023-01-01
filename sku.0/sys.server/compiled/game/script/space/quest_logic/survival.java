@@ -5,7 +5,9 @@ import script.library.*;
 
 public class survival extends script.base_script
 {
-
+    public survival()
+    {
+    }
     public static final string_id SID_TARGETS_REMAINING = new string_id("space/quest", "destroy_duty_targets_remaining");
     public static final string_id SID_ABANDONED_SURVIVAL = new string_id("space/quest", "survival_abandoned");
     public static final String SOUND_SPAWN_WAVE = "clienteffect/ui_quest_spawn_wave.cef";

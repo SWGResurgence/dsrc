@@ -1,10 +1,7 @@
 package script.quest.task.ground;
 
 import script.dictionary;
-import script.library.ai_lib;
-import script.library.create;
-import script.library.groundquests;
-import script.library.utils;
+import script.library.*;
 import script.location;
 import script.obj_id;
 
@@ -12,7 +9,9 @@ import java.util.Vector;
 
 public class encounter extends script.quest.task.ground.base_task
 {
-
+    public encounter()
+    {
+    }
     public static final String dataTableColumnCreatureType = "CREATURE_TYPE";
     public static final String dataTableColumnCount = "COUNT";
     public static final String dataTableColumnMinDistance = "MIN_DISTANCE";

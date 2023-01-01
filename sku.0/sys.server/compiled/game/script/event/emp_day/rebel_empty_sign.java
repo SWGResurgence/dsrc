@@ -5,7 +5,9 @@ import script.library.*;
 
 public class rebel_empty_sign extends script.base_script
 {
-
+    public rebel_empty_sign()
+    {
+    }
     public static final String EMPIREDAY = "event/empire_day";
     public static final String LIFEDAY = "event/life_day";
     public static final string_id SID_WRONG_FACTION = new string_id(EMPIREDAY, "wrong_faction");

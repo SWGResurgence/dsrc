@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class combat_delayed_tracker extends script.systems.combat.combat_base
 {
-
+    public combat_delayed_tracker()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         destroyObject(self);

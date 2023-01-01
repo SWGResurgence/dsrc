@@ -8,7 +8,9 @@ import script.*;
 
 public class itp_loam_courier extends script.base_script
 {
-
+    public itp_loam_courier()
+    {
+    }
     public static String c_stringFile = "conversation/itp_loam_courier";
     public boolean itp_loam_courier_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

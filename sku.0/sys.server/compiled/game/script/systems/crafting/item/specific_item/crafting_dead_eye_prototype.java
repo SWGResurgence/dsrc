@@ -8,7 +8,9 @@ import script.resource_weight;
 
 public class crafting_dead_eye_prototype extends script.systems.crafting.crafting_base
 {
-
+    public crafting_dead_eye_prototype()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

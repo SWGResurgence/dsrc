@@ -5,7 +5,9 @@ import script.*;
 
 public class restuss_rebel_ground_destroy_1 extends script.base_script
 {
-
+    public restuss_rebel_ground_destroy_1()
+    {
+    }
     public static String c_stringFile = "conversation/restuss_rebel_ground_destroy_1";
     public boolean restuss_rebel_ground_destroy_1_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

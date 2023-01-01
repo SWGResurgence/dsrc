@@ -8,7 +8,9 @@ import script.string_id;
 
 public class cheerleader extends script.base_script
 {
-
+    public cheerleader()
+    {
+    }
     private static final int NUMSPEECHES = 1;
     public static final String STF_FILE = "event/gcw_raids";
     private static final float MY_VISIT_TIME = 60 * 15;

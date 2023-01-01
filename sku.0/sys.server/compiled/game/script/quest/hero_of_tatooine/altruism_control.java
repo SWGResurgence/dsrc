@@ -5,7 +5,9 @@ import script.library.*;
 
 public class altruism_control extends script.base_script
 {
-
+    public altruism_control()
+    {
+    }
     public static final String MARK_OF_ALTRUISM = "object/tangible/loot/quest/hero_of_tatooine/mark_altruism.iff";
     public static final String ALTRUISM_OBJVAR = "quest.hero_of_tatooine.altruism";
     public static final String ALTRUISM_WAYPOINT = ALTRUISM_OBJVAR + "_waypoint";

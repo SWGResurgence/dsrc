@@ -5,7 +5,9 @@ import script.library.groundquests;
 
 public class gas_filter extends script.base_script
 {
-
+    public gas_filter()
+    {
+    }
     public static final String STF_FILE = "theme_park_nym/messages";
     public static final string_id RETRIEVE = new string_id("celebrity/kole", "retrieve");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException

@@ -5,7 +5,9 @@ import script.library.*;
 
 public class wod_kyrisa extends script.base_script
 {
-
+    public wod_kyrisa()
+    {
+    }
     public static String c_stringFile = "conversation/wod_kyrisa";
     public boolean wod_kyrisa_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

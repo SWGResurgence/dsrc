@@ -7,7 +7,9 @@ import script.*;
 
 public class tusken_medical extends script.base_script
 {
-
+    public tusken_medical()
+    {
+    }
     public static String c_stringFile = "conversation/tusken_medical";
     public boolean tusken_medical_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

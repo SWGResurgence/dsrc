@@ -5,7 +5,9 @@ import script.library.*;
 
 public class e3_demoer extends script.base_script
 {
-
+    public e3_demoer()
+    {
+    }
     public static final String[] MANDALORIAN_ARMOR = 
     {
         "object/tangible/wearables/armor/mandalorian/armor_mandalorian_bracer_l.iff",

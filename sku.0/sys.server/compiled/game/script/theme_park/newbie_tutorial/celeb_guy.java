@@ -9,7 +9,9 @@ import script.string_id;
 
 public class celeb_guy extends script.theme_park.newbie_tutorial.tutorial_base
 {
-    
+    public celeb_guy()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleSpamming", null, rand(20, 30), false);

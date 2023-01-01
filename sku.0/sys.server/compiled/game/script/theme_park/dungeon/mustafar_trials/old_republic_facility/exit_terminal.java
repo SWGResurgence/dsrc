@@ -5,7 +5,9 @@ import script.*;
 
 public class exit_terminal extends script.base_script
 {
-
+    public exit_terminal()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);

@@ -8,7 +8,9 @@ import script.*;
 
 public class radio_delivery_deathtrooper_conversation extends script.base_script
 {
-
+    public radio_delivery_deathtrooper_conversation()
+    {
+    }
     public static String c_stringFile = "conversation/radio_delivery_deathtrooper_conversation";
     public boolean radio_delivery_deathtrooper_conversation_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

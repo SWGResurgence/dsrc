@@ -5,7 +5,9 @@ import script.*;
 
 public class npe_side_jolka extends script.base_script
 {
-
+    public npe_side_jolka()
+    {
+    }
     public static String c_stringFile = "conversation/npe_side_jolka";
     public boolean npe_side_jolka_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

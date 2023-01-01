@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class medicine_revive extends script.base_script
 {
-
+    public medicine_revive()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attrib_mod[] am = new attrib_mod[6];

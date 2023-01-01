@@ -5,7 +5,9 @@ import script.library.sui;
 
 public class mandalorian_crafting extends script.base_script
 {
-
+    public mandalorian_crafting()
+    {
+    }
     public static final String MSGS = "dungeon/death_watch";
     public int OnDeath(obj_id self, obj_id killer, obj_id corpse_id) throws InterruptedException
     {

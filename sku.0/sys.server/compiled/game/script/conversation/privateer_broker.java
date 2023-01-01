@@ -5,7 +5,9 @@ import script.*;
 
 public class privateer_broker extends script.base_script
 {
-
+    public privateer_broker()
+    {
+    }
     public static String c_stringFile = "conversation/privateer_broker";
     public boolean privateer_broker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

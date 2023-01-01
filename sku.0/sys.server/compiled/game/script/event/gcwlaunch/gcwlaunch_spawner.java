@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class gcwlaunch_spawner extends script.base_script
 {
-
+    public gcwlaunch_spawner()
+    {
+    }
     public static final int[] LOCS = 
     {
         110,

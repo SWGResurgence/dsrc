@@ -5,7 +5,9 @@ import script.library.groundquests;
 
 public class bleach_vat extends script.base_script
 {
-
+    public bleach_vat()
+    {
+    }
     public static final String STF = "som/som_quest";
     public static final string_id BLEACH_SKULL = new string_id(STF, "jundak_skull_bleach");
     public static final string_id GET_SKULL = new string_id(STF, "jundak_skull_retrieve");

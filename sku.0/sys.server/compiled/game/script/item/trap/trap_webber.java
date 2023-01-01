@@ -9,7 +9,9 @@ import script.string_id;
 
 public class trap_webber extends script.item.trap.trap_base
 {
-
+    public trap_webber()
+    {
+    }
     public static final int TRAP_DIFF = 25;
     public static final string_id SID_SYS_EFFECT = new string_id("trap/trap", "trap_webber_effect");
     public static final string_id SID_NO_EFFECT = new string_id("trap/trap", "trap_webber_effect_no");

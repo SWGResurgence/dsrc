@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class nomove_cube_loot extends script.base_script
 {
-
+    public nomove_cube_loot()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "notrade"))

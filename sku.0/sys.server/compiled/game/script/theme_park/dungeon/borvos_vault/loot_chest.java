@@ -10,7 +10,9 @@ import script.obj_id;
 
 public class loot_chest extends script.base_script
 {
-
+    public loot_chest()
+    {
+    }
     public static final String DATATABLE_LOOT = "datatables/loot/dungeon/borvo_vault.iff";
     public int OnAttach(obj_id self) throws InterruptedException
     {

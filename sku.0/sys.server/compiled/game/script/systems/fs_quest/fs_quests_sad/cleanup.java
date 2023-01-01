@@ -9,7 +9,9 @@ import script.string_id;
 
 public class cleanup extends script.base_script
 {
-    
+    public cleanup()
+    {
+    }
     public void cleanup(obj_id self) throws InterruptedException
     {
         clearWaypoint(self);

@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class hep extends script.base_script
 {
-
+    public hep()
+    {
+    }
     public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###.##");
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {

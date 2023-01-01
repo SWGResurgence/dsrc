@@ -6,7 +6,9 @@ import java.util.Vector;
 
 public class firework extends script.base_script
 {
-
+    public firework()
+    {
+    }
     public static final int SHOW_EVENT_MAX = 20;
     public static final float SHOW_DELAY_MIN = 1.0f;
     public static final float SHOW_DELAY_MAX = 10.0f;

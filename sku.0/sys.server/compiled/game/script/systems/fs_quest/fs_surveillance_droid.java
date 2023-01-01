@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class fs_surveillance_droid extends script.base_script
 {
-
+    public fs_surveillance_droid()
+    {
+    }
     public void squeal() throws InterruptedException
     {
         obj_id self = getSelf();

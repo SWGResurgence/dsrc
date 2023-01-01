@@ -9,7 +9,9 @@ import script.string_id;
 
 public class nym_elevator_up extends script.base_script
 {
-
+    public nym_elevator_up()
+    {
+    }
     public static final String STF_FILE = "theme_park_nym/messages";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

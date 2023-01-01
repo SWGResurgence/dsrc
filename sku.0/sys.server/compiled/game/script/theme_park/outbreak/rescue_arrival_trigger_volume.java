@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class rescue_arrival_trigger_volume extends script.base_script
 {
-
+    public rescue_arrival_trigger_volume()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_pathing";
     public static final String TRIGGER_NAME_PREFIX = "rescue_arrival_trigger_";

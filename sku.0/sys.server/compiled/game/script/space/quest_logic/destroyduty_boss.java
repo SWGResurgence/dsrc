@@ -9,7 +9,9 @@ import script.string_id;
 
 public class destroyduty_boss extends script.space.quest_logic.destroyduty_ship
 {
-
+    public destroyduty_boss()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "deliverTaunt", null, 3.0f, false);

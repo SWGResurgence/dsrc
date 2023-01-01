@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class harvest_component extends script.base_script
 {
-
+    public harvest_component()
+    {
+    }
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (hasObjVar(self, "crafting_components.extractRate"))

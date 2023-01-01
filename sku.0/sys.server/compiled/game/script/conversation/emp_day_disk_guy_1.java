@@ -8,7 +8,9 @@ import script.*;
 
 public class emp_day_disk_guy_1 extends script.base_script
 {
-
+    public emp_day_disk_guy_1()
+    {
+    }
     public static String c_stringFile = "conversation/emp_day_disk_guy_1";
     public boolean emp_day_disk_guy_1_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

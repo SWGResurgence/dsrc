@@ -9,7 +9,9 @@ import script.string_id;
 
 public class st_object_movement extends script.base_script
 {
-
+    public st_object_movement()
+    {
+    }
     public static final String DATATABLE_HEIGHT = "datatables/structure/cell_height.iff";
     public static final String STORYTELLER_DATATABLE = "datatables/item/master_item/storyteller_item.iff";
     public static final String THEATER_MODE = "theater_mode";

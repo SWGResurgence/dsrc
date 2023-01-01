@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class qange extends script.base_script
 {
-
+    public qange()
+    {
+    }
     public static final String SCRIPTVAR = "qange";
     public static final String NGE_TOOL_TITLE = "QA NGE TOOL";
     public static final String RESPEC_TOOL_PROMPT = "This tool allows the tester to attain a Respec item in their inventory.\n\nPlease select a number (between 1 - 90) that will represent the level that the player character will respec to (Example: 61).";

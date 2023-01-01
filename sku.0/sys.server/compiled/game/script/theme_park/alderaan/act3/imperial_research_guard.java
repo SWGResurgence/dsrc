@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class imperial_research_guard extends script.base_script
 {
-
+    public imperial_research_guard()
+    {
+    }
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         obj_id facility = getObjIdObjVar(self, "coa3.imperial.facility");

@@ -6,7 +6,9 @@ import script.library.chat;
 
 public class pirate_01 extends script.base_script
 {
-
+    public pirate_01()
+    {
+    }
     public static final string_id NPC_NAME = new string_id("quest/hero_of_tatooine/npc_names", "detr");
     public int OnAttach(obj_id self) throws InterruptedException
     {

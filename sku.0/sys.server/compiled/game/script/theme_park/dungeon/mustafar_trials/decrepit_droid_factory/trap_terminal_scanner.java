@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class trap_terminal_scanner extends script.base_script
 {
-
+    public trap_terminal_scanner()
+    {
+    }
     public static final String DECREPIT_STF = "mustafar/decrepit_droid_factory";
     public static final string_id SID_SENSOR_OBSCURE = new string_id(DECREPIT_STF, "sensor_obscure");
     public static final string_id SID_SENSOR_RESET = new string_id(DECREPIT_STF, "sensor_reset");

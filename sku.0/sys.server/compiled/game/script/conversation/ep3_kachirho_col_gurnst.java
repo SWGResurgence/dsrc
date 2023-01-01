@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_kachirho_col_gurnst extends script.base_script
 {
-
+    public ep3_kachirho_col_gurnst()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_kachirho_col_gurnst";
     public boolean ep3_kachirho_col_gurnst_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

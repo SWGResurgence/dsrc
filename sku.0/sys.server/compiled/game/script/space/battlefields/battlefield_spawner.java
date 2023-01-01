@@ -13,7 +13,9 @@ import java.util.Vector;
 
 public class battlefield_spawner extends script.base_script
 {
-
+    public battlefield_spawner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "strDefaultBehavior", "specialty");

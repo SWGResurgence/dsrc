@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class exar_controller extends script.base_script
 {
-
+    public exar_controller()
+    {
+    }
     public int exarDied(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] players = trial.getPlayersInDungeon(self);

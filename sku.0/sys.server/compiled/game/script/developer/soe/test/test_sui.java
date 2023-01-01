@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class test_sui extends script.base_script
 {
-
+    public test_sui()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isGod(self) || getGodLevel(self) < 50 || !isPlayer(self)) {

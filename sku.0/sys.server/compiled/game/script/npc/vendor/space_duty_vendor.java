@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class space_duty_vendor extends script.base_script
 {
-
+    public space_duty_vendor()
+    {
+    }
     public int buySpaceDutyItem(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)

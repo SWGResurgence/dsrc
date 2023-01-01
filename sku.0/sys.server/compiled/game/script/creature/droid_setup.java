@@ -6,7 +6,9 @@ import script.ranged_int_custom_var;
 
 public class droid_setup extends script.base_script
 {
-
+    public droid_setup()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         getDroidName(self);

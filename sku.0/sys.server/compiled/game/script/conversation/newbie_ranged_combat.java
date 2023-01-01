@@ -8,7 +8,9 @@ import script.*;
 
 public class newbie_ranged_combat extends script.base_script
 {
-
+    public newbie_ranged_combat()
+    {
+    }
     public static String c_stringFile = "conversation/newbie_ranged_combat";
     public boolean newbie_ranged_combat_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

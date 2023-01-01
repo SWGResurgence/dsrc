@@ -8,7 +8,9 @@ import script.string_id;
 
 public class npe_tutorial_pistol extends script.base_script
 {
-
+    public npe_tutorial_pistol()
+    {
+    }
     public static final string_id SID_ITEM_MUST_NOT_BE_EQUIP = new string_id("base_player", "not_while_equipped");
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -9,7 +9,9 @@ import script.string_id;
 
 public class kole extends script.base_script
 {
-
+    public kole()
+    {
+    }
     public static final String CONVO = "celebrity/kole";
     public static final String FACETO_VOLUME_NAME = "faceToTriggerVolume";
     public int OnAttach(obj_id self) throws InterruptedException

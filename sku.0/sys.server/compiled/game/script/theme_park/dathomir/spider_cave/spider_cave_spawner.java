@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class spider_cave_spawner extends script.base_script
 {
-
+    public spider_cave_spawner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         spawnNightsisterElder(self);

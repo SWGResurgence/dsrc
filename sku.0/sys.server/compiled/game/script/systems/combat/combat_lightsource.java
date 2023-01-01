@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class combat_lightsource extends script.base_script
 {
-
+    public combat_lightsource()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         float fltRange = getIntObjVar(self, "combat.lightRange");

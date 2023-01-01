@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class meatlump_vendor extends script.base_script
 {
-
+    public meatlump_vendor()
+    {
+    }
     public static String c_stringFile = "conversation/meatlump_vendor";
     public boolean meatlump_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

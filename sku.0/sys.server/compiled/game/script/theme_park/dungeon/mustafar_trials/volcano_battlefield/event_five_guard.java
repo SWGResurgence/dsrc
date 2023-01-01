@@ -8,7 +8,9 @@ import script.string_id;
 
 public class event_five_guard extends script.base_script
 {
-
+    public event_five_guard()
+    {
+    }
     public static final boolean LOGGING = false;
     public static final int BUFF_STRIP_RECAST = 16;
     public static final string_id REMOVED_BUFF = new string_id("mustafar/volcano_battlefield", "buff_removed");

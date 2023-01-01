@@ -7,7 +7,9 @@ import script.*;
 
 public class npe_falcon_c3po extends script.base_script
 {
-
+    public npe_falcon_c3po()
+    {
+    }
     public static String c_stringFile = "conversation/npe_falcon_c3po";
     public boolean npe_falcon_c3po_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

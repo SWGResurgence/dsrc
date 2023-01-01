@@ -5,7 +5,9 @@ import script.library.*;
 
 public class gcw_city_pylon extends script.base_script
 {
-
+    public gcw_city_pylon()
+    {
+    }
     public static final int PYLON_CONSTRUCTION_TIME = 10;
     public static final string_id SID_PYLON_CANNOT_USE = new string_id("gcw", "pylon_construction_cannot_use");
     public static final string_id SID_PYLON_CONSTRUCTION_COMPLETE = new string_id("gcw", "pylon_construction_complete");

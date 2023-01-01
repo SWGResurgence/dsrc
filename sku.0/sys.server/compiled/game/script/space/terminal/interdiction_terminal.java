@@ -6,7 +6,9 @@ import script.*;
 
 public class interdiction_terminal extends script.base_script
 {
-
+    public interdiction_terminal()
+    {
+    }
     public static final string_id SID_ACTIVATE_FALSE = new string_id("space/space_terminal", "activate_unencoded");
     public static final string_id SID_ACTIVATE_WAYPOINT = new string_id("space/space_terminal", "create_waypoint");
     public static final string_id SID_ACTIVATE_EVENT = new string_id("space/space_terminal", "activate_event");

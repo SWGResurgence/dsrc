@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class terminal_frs_challenge extends script.base_script
 {
-
+    public terminal_frs_challenge()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOG("force_rank", "terminal_frs_challenge::OnInitialize: -> Initializing.");

@@ -5,7 +5,9 @@ import script.*;
 
 public class story_loot_espa extends script.base_script
 {
-
+    public story_loot_espa()
+    {
+    }
     public static String c_stringFile = "conversation/story_loot_espa";
     public boolean story_loot_espa_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

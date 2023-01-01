@@ -5,7 +5,9 @@ import script.library.chat;
 
 public class officer extends script.theme_park.newbie_tutorial.tutorial_base
 {
-
+    public officer()
+    {
+    }
     public int initiateConvo(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getPlayer(self);

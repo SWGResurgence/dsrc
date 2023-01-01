@@ -8,7 +8,9 @@ import script.*;
 
 public class bestine_stone_merchant extends script.base_script
 {
-
+    public bestine_stone_merchant()
+    {
+    }
     public static String c_stringFile = "conversation/bestine_stone_merchant";
     public boolean bestine_stone_merchant_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

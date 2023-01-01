@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class spawn_manager extends script.base_script
 {
-
+    public spawn_manager()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         hq.loadInteriorHqSpawns(self);

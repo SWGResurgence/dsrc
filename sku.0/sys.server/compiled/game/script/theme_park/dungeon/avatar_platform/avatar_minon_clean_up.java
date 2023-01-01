@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class avatar_minon_clean_up extends script.base_script
 {
-
+    public avatar_minon_clean_up()
+    {
+    }
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (!ai_lib.isAiDead(self))

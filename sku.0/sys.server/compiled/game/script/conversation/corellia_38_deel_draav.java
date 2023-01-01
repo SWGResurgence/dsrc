@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_38_deel_draav extends script.base_script
 {
-
+    public corellia_38_deel_draav()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_38_deel_draav";
     public boolean corellia_38_deel_draav_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

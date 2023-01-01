@@ -5,7 +5,9 @@ import script.library.*;
 
 public class treasure_map extends script.base_script
 {
-
+    public treasure_map()
+    {
+    }
     public static final string_id SID_USE = new string_id("treasure_map/treasure_map", "use");
     public static final string_id SID_SEARCH_AREA = new string_id("treasure_map/treasure_map", "search_area");
     public static final string_id SID_EXTRACT_TREASURE = new string_id("treasure_map/treasure_map", "extract_treasure");

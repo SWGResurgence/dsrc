@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class npe_spy_terminal extends script.base_script
 {
-
+    public npe_spy_terminal()
+    {
+    }
     public static final string_id SID_MNU_HAX = new string_id("npe", "hax");
     public static final string_id SID_MNU_PART = new string_id("npe", "part");
     public static final string_id SID_MNU_SPLICE = new string_id("npe", "splice");

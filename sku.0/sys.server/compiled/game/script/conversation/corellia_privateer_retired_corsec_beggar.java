@@ -5,7 +5,9 @@ import script.*;
 
 public class corellia_privateer_retired_corsec_beggar extends script.base_script
 {
-
+    public corellia_privateer_retired_corsec_beggar()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_privateer_retired_corsec_beggar";
     public boolean corellia_privateer_retired_corsec_beggar_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

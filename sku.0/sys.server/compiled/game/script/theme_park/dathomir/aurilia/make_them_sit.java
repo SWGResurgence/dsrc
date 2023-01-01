@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class make_them_sit extends script.base_script
 {
-
+    public make_them_sit()
+    {
+    }
     public int doSpawnEvent(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "handleAreaSpawnerHaveThemSit", null, 2, false);

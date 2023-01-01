@@ -8,7 +8,9 @@ import script.string_id;
 
 public class antidecay_examine extends script.base_script
 {
-
+    public antidecay_examine()
+    {
+    }
     public static final String STF_VETERAN = "veteran_new";
     public static final string_id SID_INVENTORY_FULL = new string_id(STF_VETERAN, "inventory_full");
     public static final string_id SID_FAILED_KIT_CREATE = new string_id(STF_VETERAN, "failed_kit_create");

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class load_test_player extends script.base_script
 {
-
+    public load_test_player()
+    {
+    }
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         destroyAiShips(self);

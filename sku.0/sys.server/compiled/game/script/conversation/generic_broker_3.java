@@ -5,7 +5,9 @@ import script.*;
 
 public class generic_broker_3 extends script.base_script
 {
-
+    public generic_broker_3()
+    {
+    }
     public static String c_stringFile = "conversation/generic_broker_3";
     public boolean generic_broker_3_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

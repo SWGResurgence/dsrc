@@ -7,7 +7,9 @@ import script.*;
 
 public class victor_questp_hospital extends script.base_script
 {
-
+    public victor_questp_hospital()
+    {
+    }
     public static String c_stringFile = "conversation/victor_questp_hospital";
     public boolean victor_questp_hospital_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

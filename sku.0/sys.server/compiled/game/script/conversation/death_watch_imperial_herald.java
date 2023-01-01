@@ -8,7 +8,9 @@ import script.*;
 
 public class death_watch_imperial_herald extends script.base_script
 {
-
+    public death_watch_imperial_herald()
+    {
+    }
     public static String c_stringFile = "conversation/death_watch_imperial_herald";
     public boolean death_watch_imperial_herald_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

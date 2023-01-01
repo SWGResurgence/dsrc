@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class mission_dynamic_base extends script.systems.missions.base.mission_base
 {
-
+    public mission_dynamic_base()
+    {
+    }
     public static final float MIN_DESTROY_DISTANCE = 350.0f;
     public static final int FACTION_DELIVER_REWARD_VALUE = 150;
     public static final int FACTION_REWARD_VALUE = 100;

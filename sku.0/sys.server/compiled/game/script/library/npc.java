@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class npc extends script.base_script
 {
-
+    public npc()
+    {
+    }
     public static final String species_table = "datatables/npc_customization/species_choices2.iff";
     public static final String random_type = "datatables/npc_customization/random_type.iff";
     public static final String job_table = "datatables/npc_customization/job_table.iff";

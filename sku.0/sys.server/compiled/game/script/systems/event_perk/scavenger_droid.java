@@ -6,7 +6,9 @@ import script.library.sui;
 
 public class scavenger_droid extends script.base_script
 {
-
+    public scavenger_droid()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "storytellerid"))

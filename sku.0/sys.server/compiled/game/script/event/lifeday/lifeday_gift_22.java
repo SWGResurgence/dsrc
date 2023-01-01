@@ -28,7 +28,9 @@ public class lifeday_gift_22 extends script.base_script
                     "weapon_publish_gift_27_04_01"
             };
 
-
+    public lifeday_gift_22()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Life Day Gift");

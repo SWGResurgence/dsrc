@@ -5,7 +5,9 @@ public class rori_hard extends script.creature_spawner.base_newbie_creature_spaw
     public static final boolean SPAWNER_DISABLED = false;
     public int maxPop = 6;
 
-
+    public rori_hard()
+    {
+    }
     public String pickCreature() throws InterruptedException
     {
         switch (rand(1, 5))

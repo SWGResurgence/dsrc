@@ -5,7 +5,9 @@ import script.*;
 
 public class npe_spy extends script.base_script
 {
-
+    public npe_spy()
+    {
+    }
     public static String c_stringFile = "conversation/npe_spy";
     public boolean npe_spy_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

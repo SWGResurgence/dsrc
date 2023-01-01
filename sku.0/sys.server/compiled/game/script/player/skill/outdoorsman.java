@@ -9,7 +9,9 @@ import script.string_id;
 
 public class outdoorsman extends script.base_script
 {
-
+    public outdoorsman()
+    {
+    }
     public static final string_id PROSE_HARVEST_FAILED = new string_id("error_message", "prose_harvest_corpse_failed");
     public static final string_id SID_HARVEST_FAILED = new string_id("error_message", "harvest_corpse_failed");
     public static final string_id SID_NO_RESOURCE = new string_id("error_message", "no_resource");

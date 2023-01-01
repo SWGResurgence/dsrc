@@ -8,7 +8,9 @@ import script.*;
 
 public class huffs_guard extends script.base_script
 {
-
+    public huffs_guard()
+    {
+    }
     public static String c_stringFile = "conversation/huffs_guard";
     public boolean huffs_guard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

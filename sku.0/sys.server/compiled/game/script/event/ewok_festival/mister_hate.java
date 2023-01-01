@@ -8,7 +8,9 @@ import script.string_id;
 
 public class mister_hate extends script.base_script
 {
-
+    public mister_hate()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleFarlesFaceTo", null, 1, false);

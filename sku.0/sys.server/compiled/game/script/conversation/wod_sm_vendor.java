@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class wod_sm_vendor extends script.base_script
 {
-
+    public wod_sm_vendor()
+    {
+    }
     public static String c_stringFile = "conversation/wod_sm_vendor";
     public boolean wod_sm_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

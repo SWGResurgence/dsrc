@@ -5,7 +5,9 @@ import script.*;
 
 public class loveday_romance_seeker extends script.base_script
 {
-
+    public loveday_romance_seeker()
+    {
+    }
     public static String c_stringFile = "conversation/loveday_romance_seeker";
     public boolean loveday_romance_seeker_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

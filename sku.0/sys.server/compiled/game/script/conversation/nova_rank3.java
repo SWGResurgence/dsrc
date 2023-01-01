@@ -5,7 +5,9 @@ import script.*;
 
 public class nova_rank3 extends script.base_script
 {
-
+    public nova_rank3()
+    {
+    }
     public static String c_stringFile = "conversation/nova_rank3";
     public boolean nova_rank3_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

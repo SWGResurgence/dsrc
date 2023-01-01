@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class serialize extends script.base_script
 {
-
+    public serialize()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id serial = getTopMostContainer(self);

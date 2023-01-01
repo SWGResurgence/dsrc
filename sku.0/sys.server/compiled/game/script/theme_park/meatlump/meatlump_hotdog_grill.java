@@ -10,7 +10,9 @@ import script.string_id;
 
 public class meatlump_hotdog_grill extends script.base_script
 {
-
+    public meatlump_hotdog_grill()
+    {
+    }
     public static final string_id SID_GET_FOOD_ITEM = new string_id("collection", "get_food_item");
     public static final string_id SID_MTP_ALREADY_ATE = new string_id("collection", "already_ate");
     public static final string_id NOT_WHILE_INCAPPED = new string_id("quest/ground/util/quest_giver_object", "not_while_incapped");

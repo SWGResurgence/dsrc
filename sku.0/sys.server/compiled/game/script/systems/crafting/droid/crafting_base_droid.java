@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class crafting_base_droid extends script.systems.crafting.crafting_base
 {
-
+    public crafting_base_droid()
+    {
+    }
     public static final String VERSION = "v1.00.00";
     public static final int COMBAT_MODULE_PROTECT_LVL = 500;
     public static final int DEFENSE_MODULE_PROTECT_LVL = 1000;

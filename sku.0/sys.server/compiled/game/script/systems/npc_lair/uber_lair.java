@@ -11,7 +11,9 @@ import script.region;
 
 public class uber_lair extends script.theme_park.poi.base
 {
-
+    public uber_lair()
+    {
+    }
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public int OnAttach(obj_id self) throws InterruptedException
     {

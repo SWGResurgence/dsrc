@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class jukebox_room extends script.base_script
 {
-
+    public jukebox_room()
+    {
+    }
     public static final String JUKBOX_SONG_OBJVAR = "storyteller.jukebox_song";
     public static final String ROOMS_JUKEBOX_OBJVAR = "storyteller.room.myJukebox";
     public int OnInitialize(obj_id self) throws InterruptedException

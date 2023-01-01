@@ -10,7 +10,9 @@ import java.util.StringTokenizer;
 
 public class battle extends script.base_script
 {
-
+    public battle()
+    {
+    }
     public static final String[] VICTIM1 = 
     {
         "ep3_npc_wookiee_battleleader",

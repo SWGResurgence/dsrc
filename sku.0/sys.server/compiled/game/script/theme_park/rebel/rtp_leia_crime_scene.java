@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class rtp_leia_crime_scene extends script.base_script
 {
-
+    public rtp_leia_crime_scene()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "stormtrooperHelmetSpawned"))

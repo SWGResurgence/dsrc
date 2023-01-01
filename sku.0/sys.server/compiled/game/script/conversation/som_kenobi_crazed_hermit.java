@@ -5,7 +5,9 @@ import script.*;
 
 public class som_kenobi_crazed_hermit extends script.base_script
 {
-
+    public som_kenobi_crazed_hermit()
+    {
+    }
     public static String c_stringFile = "conversation/som_kenobi_crazed_hermit";
     public boolean som_kenobi_crazed_hermit_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

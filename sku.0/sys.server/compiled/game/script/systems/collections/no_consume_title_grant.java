@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class no_consume_title_grant extends script.base_script
 {
-
+    public no_consume_title_grant()
+    {
+    }
     public static final String PID_NAME = "collectionConsume";
     public static final String SCRIPT_VAR_NUM_ALT_TITLE = "collection.numAltTitle";
     public static final String OBJVAR_TITLE_GRANTED = "titleGrantedTo";

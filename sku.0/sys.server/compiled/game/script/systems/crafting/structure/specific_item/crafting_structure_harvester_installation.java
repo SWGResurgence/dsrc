@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_structure_harvester_installation extends script.systems.crafting.structure.crafting_base_harvester
 {
-    
+    public crafting_structure_harvester_installation()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

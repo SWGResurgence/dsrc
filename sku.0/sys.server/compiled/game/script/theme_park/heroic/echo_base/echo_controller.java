@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class echo_controller extends script.base_script
 {
-
+    public echo_controller()
+    {
+    }
     public static final boolean LOGGING = true;
     public int updateCloneLocation(obj_id self, dictionary params) throws InterruptedException
     {

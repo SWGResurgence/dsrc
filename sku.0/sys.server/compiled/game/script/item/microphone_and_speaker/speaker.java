@@ -6,7 +6,9 @@ import script.library.debug;
 
 public class speaker extends script.base_script
 {
-
+    public speaker()
+    {
+    }
     public static final String VAR_ACCEPTING_SIGNAL = "speaker.acceptingSignal";
     public static final string_id SID_DEACTIVATE = new string_id("sui", "speaker_deactivate");
     public static final string_id SID_ACTIVATE = new string_id("sui", "speaker_activate");

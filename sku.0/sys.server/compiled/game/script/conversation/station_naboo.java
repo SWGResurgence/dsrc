@@ -5,7 +5,9 @@ import script.*;
 
 public class station_naboo extends script.base_script
 {
-
+    public station_naboo()
+    {
+    }
     public static String c_stringFile = "conversation/station_naboo";
     public boolean station_naboo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

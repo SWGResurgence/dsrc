@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class koseyet_spawner extends script.base_script
 {
-
+    public koseyet_spawner()
+    {
+    }
     public static final String SPAWNED = "koseyetSpawned";
     public int OnAttach(obj_id self) throws InterruptedException
     {

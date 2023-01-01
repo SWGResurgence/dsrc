@@ -8,7 +8,9 @@ import script.*;
 
 public class tat_icon_missingdroid_lyrissa extends script.base_script
 {
-
+    public tat_icon_missingdroid_lyrissa()
+    {
+    }
     public static String c_stringFile = "conversation/tat_icon_missingdroid_lyrissa";
     public boolean tat_icon_missingdroid_lyrissa_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

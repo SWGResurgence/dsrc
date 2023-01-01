@@ -5,7 +5,9 @@ import script.*;
 
 public class slaver_elevator_down_4 extends script.base_script
 {
-
+    public slaver_elevator_down_4()
+    {
+    }
     public static final String STF_FILE = "elevator_text";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

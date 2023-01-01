@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class dynamic_ship extends script.base_script
 {
-
+    public dynamic_ship()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "pendingWarp", null, 600.0f, false);

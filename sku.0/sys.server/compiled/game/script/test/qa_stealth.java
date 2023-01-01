@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class qa_stealth extends script.base_script
 {
-
+    public qa_stealth()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (isGod(self))

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class hk_beetle extends script.base_script
 {
-
+    public hk_beetle()
+    {
+    }
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -9,7 +9,9 @@ import script.string_id;
 
 public class rebel_mission extends script.base_script
 {
-
+    public rebel_mission()
+    {
+    }
     public static final String REBEL_STF = "theme_park/alderaan/act2/rebel_missions";
     public static final String REBEL_SHARED_STF = "theme_park/alderaan/act2/shared_rebel_missions";
     public int OnAttach(obj_id self) throws InterruptedException

@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class antagonist_structure extends script.theme_park.poi.base
 {
-
+    public antagonist_structure()
+    {
+    }
     public static final int ATTACK_DELAY = 600;
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class cheerleader_escort extends script.base_script
 {
-
+    public cheerleader_escort()
+    {
+    }
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         dictionary params = new dictionary();

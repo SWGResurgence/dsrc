@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class grant_space_quest extends script.quest.task.ground.base_task
 {
-
+    public grant_space_quest()
+    {
+    }
     public static final int winner = 1;
     public static final int failure = 2;
     public static final int split = 3;

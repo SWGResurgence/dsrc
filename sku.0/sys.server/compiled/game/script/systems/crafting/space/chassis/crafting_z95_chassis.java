@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_z95_chassis extends script.systems.crafting.space.chassis.crafting_base_z95_chassis
 {
-
+    public crafting_z95_chassis()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

@@ -4,7 +4,9 @@ import script.*;
 
 public class terminal_add_use extends script.terminal.base.base_terminal
 {
-
+    public terminal_add_use()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);

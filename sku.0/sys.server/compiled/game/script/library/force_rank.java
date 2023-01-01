@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class force_rank extends script.base_script
 {
-
+    public force_rank()
+    {
+    }
     public static final String FRS_DATATABLE = "datatables/pvp/force_rank.iff";
     public static final String FRS_DARK_DATATABLE = "datatables/pvp/force_rank_dark.iff";
     public static final String JEDI_TERMINAL_DATATABLE = "datatables/pvp/jedi_enclave_terminals.iff";

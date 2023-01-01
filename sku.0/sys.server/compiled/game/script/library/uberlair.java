@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class uberlair extends script.base_script
 {
-
+    public uberlair()
+    {
+    }
     public static void spawnBossMobiles(obj_id poiBaseObject, obj_id[] objLargeMobSpawners) throws InterruptedException
     {
         LOG("uber", "SPAWN BOSS MOBILES FUNCTION");

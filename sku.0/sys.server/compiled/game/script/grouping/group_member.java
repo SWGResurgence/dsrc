@@ -5,7 +5,9 @@ import script.library.*;
 
 public class group_member extends script.base_script
 {
-
+    public group_member()
+    {
+    }
     private static final string_id SID_GROUP_CREDIT_SPLIT_FAILED = new string_id("group", "credit_split_failed");
     private static final string_id SID_LOOT_FREE_FOR_ALL = new string_id("group", "loot_free_for_all");
     private static final string_id SID_LOOT_MASTER_LOOTER = new string_id("group", "loot_master_looter");

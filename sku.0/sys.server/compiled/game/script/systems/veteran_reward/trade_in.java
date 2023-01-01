@@ -9,7 +9,9 @@ import script.string_id;
 
 public class trade_in extends script.base_script
 {
-
+    public trade_in()
+    {
+    }
     public static final string_id REWARD_TRADE_IN = new string_id("veteran_new", "trade_in_reward");
     public static final String SCRIPTVAR_REWARD_TRADE_IN_SUI_ID = "rewardTradeInSuiId";
     public static final String SCRIPTVAR_REWARD_TRADE_IN_ITEM_ID = "rewardTradeInItemId";

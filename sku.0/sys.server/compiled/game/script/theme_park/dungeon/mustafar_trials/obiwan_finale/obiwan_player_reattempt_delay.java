@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class obiwan_player_reattempt_delay extends script.base_script
 {
-
+    public obiwan_player_reattempt_delay()
+    {
+    }
     public static final int REATTEMPT_DELAY_MINUTES = 120;
     public int OnAttach(obj_id self) throws InterruptedException
     {

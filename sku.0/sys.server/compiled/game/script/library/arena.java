@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class arena extends script.base_script
 {
-
+    public arena()
+    {
+    }
     public static final String VAR_ARENA_OPEN_FOR_CHALLENGES = "arena.isOpen";
     public static final String VAR_CHALLENGE_DATA = "arena.challengeData";
     public static final String VAR_ARENA_LAST_OPEN_TIME = "arena.lastChallengeStartTime";

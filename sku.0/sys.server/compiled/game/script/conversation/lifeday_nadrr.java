@@ -28,7 +28,11 @@ public static String c_stringFile = "conversation/lifeday_nadrr";
 // Script Constants
 // ======================================================================
 
+	public lifeday_nadrr()
 
+	{
+
+	}
 
 // ======================================================================
 // Script Conditions

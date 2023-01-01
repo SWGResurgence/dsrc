@@ -9,7 +9,9 @@ import script.string_id;
 
 public class evac_shuttle extends script.base_script
 {
-
+    public evac_shuttle()
+    {
+    }
     public static final String DECREPIT_STF = "sequencer_spam";
     public static final string_id SID_EXIT_TRIAL = new string_id(DECREPIT_STF, "exit_echo");
     public int OnAttach(obj_id self) throws InterruptedException

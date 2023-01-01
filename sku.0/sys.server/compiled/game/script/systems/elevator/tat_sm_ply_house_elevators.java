@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class tat_sm_ply_house_elevators extends script.base_script
 {
-
+    public tat_sm_ply_house_elevators()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);

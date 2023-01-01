@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class premade_show extends script.base_script
 {
-
+    public premade_show()
+    {
+    }
     public static final int AWESOMENESS_FACTOR = 44;
     public int OnAttach(obj_id self) throws InterruptedException
     {

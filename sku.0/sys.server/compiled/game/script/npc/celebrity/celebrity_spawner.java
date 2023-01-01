@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class celebrity_spawner extends script.base_script
 {
-
+    public celebrity_spawner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);

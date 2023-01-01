@@ -6,7 +6,9 @@ import script.string_id;
 
 public class event_perk_chest extends script.base_script
 {
-
+    public event_perk_chest()
+    {
+    }
     public static final String STF_FILE = "event_perk";
     public int OnAttach(obj_id self) throws InterruptedException
     {

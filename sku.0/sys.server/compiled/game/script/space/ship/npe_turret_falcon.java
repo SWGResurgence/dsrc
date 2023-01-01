@@ -9,7 +9,9 @@ import script.string_id;
 
 public class npe_turret_falcon extends script.base_script
 {
-
+    public npe_turret_falcon()
+    {
+    }
     public static final string_id SID_PILOT = new string_id("space/space_interaction", "pilot_ship");
     public static final string_id SID_TURRET_UPPER = new string_id("space/space_interaction", "turret_upper");
     public static final string_id SID_TURRET_LOWER = new string_id("space/space_interaction", "turret_lower");

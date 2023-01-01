@@ -8,7 +8,9 @@ import script.*;
 
 public class c_prof_ent_espacontact extends script.base_script
 {
-
+    public c_prof_ent_espacontact()
+    {
+    }
     public static String c_stringFile = "conversation/c_prof_ent_espacontact";
     public boolean c_prof_ent_espacontact_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

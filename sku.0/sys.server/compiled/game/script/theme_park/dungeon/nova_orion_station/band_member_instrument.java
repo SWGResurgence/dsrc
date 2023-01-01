@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class band_member_instrument extends script.base_script
 {
-
+    public band_member_instrument()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

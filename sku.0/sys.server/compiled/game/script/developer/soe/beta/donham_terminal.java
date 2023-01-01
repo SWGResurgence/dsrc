@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class donham_terminal extends script.base_script
 {
-
+    public donham_terminal()
+    {
+    }
     public static final String DATATABLE_ITEMS_TO_TEST = "datatables/beta/items_to_test.iff";
     public static final string_id SID_ORDER_ITEM = new string_id("sui", "order_item");
     public static final String CATEGORY_PROMPT = "Select an item category.";

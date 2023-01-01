@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class hall_mini_boss extends script.base_script
 {
-
+    public hall_mini_boss()
+    {
+    }
     public static final String TBL_HALL_WAVE = "datatables/dungeon/death_watch/hall_wave.iff";
     public int OnAttach(obj_id self) throws InterruptedException
     {

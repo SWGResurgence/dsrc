@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class mediator_structure extends script.theme_park.poi.base
 {
-
+    public mediator_structure()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

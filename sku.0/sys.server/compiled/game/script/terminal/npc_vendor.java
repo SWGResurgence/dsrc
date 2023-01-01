@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class npc_vendor extends script.base_script
 {
-
+    public npc_vendor()
+    {
+    }
     public static final String LOGGING_CATEGORY = "vendor";
     public static final boolean LOGGING_ON = false;
     public static final string_id SID_ITEM_DROP = new string_id("ui_radial", "item_drop");

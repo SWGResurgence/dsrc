@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class quest_warehouse extends script.base_script
 {
-
+    public quest_warehouse()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "bldgSetup", null, 3, true);

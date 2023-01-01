@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class avatar_controller extends script.base_script
 {
-
+    public avatar_controller()
+    {
+    }
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (isGod(speaker))

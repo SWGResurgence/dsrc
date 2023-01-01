@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class mining_squad_member extends script.base_script
 {
-
+    public mining_squad_member()
+    {
+    }
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

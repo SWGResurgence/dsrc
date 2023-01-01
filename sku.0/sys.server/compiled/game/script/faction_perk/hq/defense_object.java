@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class defense_object extends script.base_script
 {
-
+    public defense_object()
+    {
+    }
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id parent = getObjIdObjVar(self, hq.VAR_DEFENSE_PARENT);

@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class machine extends script.base_script
 {
-
+    public machine()
+    {
+    }
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         obj_id contentManager = getObjIdObjVar(self, "grievous_encounter.contentManager");

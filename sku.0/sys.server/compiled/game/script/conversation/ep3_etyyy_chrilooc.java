@@ -5,7 +5,9 @@ import script.*;
 
 public class ep3_etyyy_chrilooc extends script.base_script
 {
-
+    public ep3_etyyy_chrilooc()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_etyyy_chrilooc";
     public boolean ep3_etyyy_chrilooc_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

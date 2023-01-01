@@ -8,7 +8,9 @@ import script.*;
 
 public class talus_nashal_droid_head extends script.base_script
 {
-
+    public talus_nashal_droid_head()
+    {
+    }
     public static String c_stringFile = "conversation/talus_nashal_droid_head";
     public boolean talus_nashal_droid_head_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

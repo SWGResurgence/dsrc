@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class battlefield_destructable extends script.base_script
 {
-
+    public battlefield_destructable()
+    {
+    }
     public static final String VOLUME_NAME = "addGeneratorHate";
     public static final float VOLUME_RANGE = 40.0f;
     public int OnAttach(obj_id self) throws InterruptedException

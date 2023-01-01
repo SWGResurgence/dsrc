@@ -8,7 +8,9 @@ import script.*;
 
 public class happer_mos_eisley extends script.base_script
 {
-
+    public happer_mos_eisley()
+    {
+    }
     public static String c_stringFile = "conversation/happer_mos_eisley";
     public boolean happer_mos_eisley_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

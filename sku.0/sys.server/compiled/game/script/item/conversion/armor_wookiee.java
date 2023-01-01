@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class armor_wookiee extends script.base_script
 {
-
+    public armor_wookiee()
+    {
+    }
     public static final String[] WOOKIEE_ASSAULT = 
     {
         "object/tangible/wearables/armor/kashyyykian_hunting/armor_kashyyykian_hunting_chestplate.iff",

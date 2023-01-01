@@ -12,7 +12,9 @@ import java.util.Vector;
 
 public class fs_outpost_master extends script.base_script
 {
-
+    public fs_outpost_master()
+    {
+    }
     public void requestRegistration(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, fs_dyn_village.OBJVAR_MY_MASTER_OBJECT) || !hasObjVar(self, fs_counterstrike.OBJVAR_CAMP_NAME))

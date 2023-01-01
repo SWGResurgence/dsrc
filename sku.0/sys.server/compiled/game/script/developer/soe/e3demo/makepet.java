@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class makepet extends script.base_script
 {
-
+    public makepet()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createBantha(self);

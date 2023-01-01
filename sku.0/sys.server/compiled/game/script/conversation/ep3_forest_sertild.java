@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_forest_sertild extends script.base_script
 {
-
+    public ep3_forest_sertild()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_forest_sertild";
     public boolean ep3_forest_sertild_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

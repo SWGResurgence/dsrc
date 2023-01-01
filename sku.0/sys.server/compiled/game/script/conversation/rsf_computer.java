@@ -5,7 +5,9 @@ import script.*;
 
 public class rsf_computer extends script.base_script
 {
-
+    public rsf_computer()
+    {
+    }
     public static String c_stringFile = "conversation/rsf_computer";
     public boolean rsf_computer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

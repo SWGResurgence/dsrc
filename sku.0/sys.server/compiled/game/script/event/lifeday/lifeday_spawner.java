@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class lifeday_spawner extends script.base_script
 {
-
+    public lifeday_spawner()
+    {
+    }
     private static final int[][] LOCS =
     {
             {-2580,77,-5519},

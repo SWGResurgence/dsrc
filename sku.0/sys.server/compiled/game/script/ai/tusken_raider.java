@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class tusken_raider extends script.base_script
 {
-
+    public tusken_raider()
+    {
+    }
     public static final String SOCIAL_VOLUME = "npc_socialization";
     public static final float SOCIAL_RANGE = 15.0f;
     public static final String ACTION_ALERT = "alert";

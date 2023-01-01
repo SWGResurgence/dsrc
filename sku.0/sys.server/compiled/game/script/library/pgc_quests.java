@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class pgc_quests extends script.base_script
 {
-
+    public pgc_quests()
+    {
+    }
     public static final int CHRONICLE_HOLOCRON_VERSION = 0;
     public static final int CHRONICLE_CREATION_XP_BASE = 99;
     public static final int CHRONICLE_SHARED_XP_BASE = 4;

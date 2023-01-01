@@ -6,7 +6,9 @@ import script.library.chat;
 
 public class racing_mosespa extends script.base_script
 {
-
+    public racing_mosespa()
+    {
+    }
     public static String c_stringFile = "conversation/racing_mosespa";
     public boolean racing_mosespa_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

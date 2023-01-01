@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class npc extends script.base_script
 {
-
+    public npc()
+    {
+    }
     public int OnDetach(obj_id self) throws InterruptedException
     {
         minigame.cleanupFishing(self);

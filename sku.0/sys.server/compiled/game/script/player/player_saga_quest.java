@@ -5,7 +5,9 @@ import script.library.*;
 
 public class player_saga_quest extends script.base_script
 {
-
+    public player_saga_quest()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleChronicleProfessionGranted", null, 14, false);

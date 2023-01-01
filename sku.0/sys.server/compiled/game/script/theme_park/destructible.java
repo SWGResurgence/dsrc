@@ -10,7 +10,9 @@ import script.obj_id;
 
 public class destructible extends script.base_script
 {
-    
+    public destructible()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int hp = hasObjVar(self, "hp") ? getIntObjVar(self, "hp") : 5000;

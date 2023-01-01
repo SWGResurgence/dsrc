@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class nomove_base extends script.base_script
 {
-
+    public nomove_base()
+    {
+    }
     public int OnAboutToBeTransferred(obj_id self, obj_id dest, obj_id transferer) throws InterruptedException
     {
         if (!isIdValid(transferer))

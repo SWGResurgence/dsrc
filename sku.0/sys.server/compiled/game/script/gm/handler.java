@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class handler extends script.base_script
 {
-
+    public handler()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, gm.SCRIPT_HANDLER);

@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class player extends script.base_script
 {
-
+    public player()
+    {
+    }
     private static final String STF_FISH = "fishing";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

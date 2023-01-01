@@ -11,7 +11,9 @@ import script.string_id;
 
 public class engine_analysis_tool extends script.base_script
 {
-
+    public engine_analysis_tool()
+    {
+    }
     public static final string_id LOOT_LIST = new string_id("sui", "analyze_loot");
     public static final String TOOL = "reverse_engineering_tool";
     public static final String LOOT = "datatables/space_loot/reverse_engineering/reverse_loot.iff";

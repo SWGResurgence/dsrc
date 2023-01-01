@@ -8,7 +8,9 @@ import script.*;
 
 public class delivery_pirrohn extends script.base_script
 {
-
+    public delivery_pirrohn()
+    {
+    }
     public static String c_stringFile = "conversation/delivery_pirrohn";
     public boolean delivery_pirrohn_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -6,7 +6,9 @@ import script.library.*;
 
 public class event_perk_deed extends script.base_script
 {
-
+    public event_perk_deed()
+    {
+    }
     public static final String TBL_PLAYER_TYPES = "datatables/vendor/vendor_player_types.iff";
     public static final String TBL_ALLNPC_TYPES = "datatables/vendor/vendor_allnpc_types.iff";
     public static final String DATATABLE = "datatables/event_perk/perk_data.iff";

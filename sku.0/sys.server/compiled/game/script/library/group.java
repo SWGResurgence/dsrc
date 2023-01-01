@@ -6,7 +6,9 @@ import java.util.Vector;
 
 public class group extends script.base_script
 {
-
+    public group()
+    {
+    }
     public static final String SCRIPT_GROUP_OBJECT = "grouping.group_object";
     public static final String SCRIPT_GROUP_MEMBER = "grouping.group_member";
     public static final String GROUP_STF = "group";

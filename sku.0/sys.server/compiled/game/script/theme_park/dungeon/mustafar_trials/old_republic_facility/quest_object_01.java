@@ -7,7 +7,9 @@ import script.library.sui;
 
 public class quest_object_01 extends script.base_script
 {
-
+    public quest_object_01()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int menu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("mustafar/old_republic_facility", "quest_object_01_use"));

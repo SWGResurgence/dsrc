@@ -5,7 +5,9 @@ import script.library.*;
 
 public class force_shrine extends script.base_script
 {
-
+    public force_shrine()
+    {
+    }
     public static final string_id MEDITATE_MENU = new string_id("jedi_trials", "meditate");
     public static final string_id ISSUE_ROBE_MENU = new string_id("jedi_trials", "issue_robe");
     public static final string_id SHOW_RESPECT = new string_id("jedi_trials", "show_respect");

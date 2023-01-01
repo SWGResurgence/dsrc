@@ -8,7 +8,9 @@ import script.*;
 
 public class nym extends script.base_script
 {
-    
+    public nym()
+    {
+    }
     public static String c_stringFile = "conversation/nym";
     public boolean nym_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

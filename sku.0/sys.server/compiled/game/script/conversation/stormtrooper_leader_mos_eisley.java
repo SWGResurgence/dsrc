@@ -7,7 +7,9 @@ import script.*;
 
 public class stormtrooper_leader_mos_eisley extends script.base_script
 {
-
+    public stormtrooper_leader_mos_eisley()
+    {
+    }
     public static String c_stringFile = "conversation/stormtrooper_leader_mos_eisley";
     public boolean stormtrooper_leader_mos_eisley_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

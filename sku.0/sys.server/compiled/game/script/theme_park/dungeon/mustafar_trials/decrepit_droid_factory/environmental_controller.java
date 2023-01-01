@@ -9,7 +9,9 @@ import script.string_id;
 
 public class environmental_controller extends script.base_script
 {
-
+    public environmental_controller()
+    {
+    }
     public static final String DECREPIT_STF = "mustafar/decrepit_droid_factory";
     public static final string_id SID_DISABLE_HEAT_EFFECT = new string_id(DECREPIT_STF, "disable_heat_effect");
     public static final string_id SID_HEAT_OFF_LINE = new string_id(DECREPIT_STF, "heat_effect_disabled");

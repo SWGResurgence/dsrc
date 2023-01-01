@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class datatable extends script.base_script
 {
-
+    public datatable()
+    {
+    }
     public static String getRandomTemplate(String datatable) throws InterruptedException
     {
         String[] templateFilenames = dataTableGetStringColumn(datatable, "templateFilename");

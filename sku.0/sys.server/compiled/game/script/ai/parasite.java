@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class parasite extends script.base_script
 {
-    
+    public parasite()
+    {
+    }
     public static final String SCRIPT_NAME = "ai.parasite";
     public int OnAttach(obj_id self) throws InterruptedException
     {

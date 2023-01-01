@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class harvest_module extends script.base_script
 {
-
+    public harvest_module()
+    {
+    }
     public static final String STF = "pet/droid_modules";
     public static final String AUTO_HARVEST = "droidAutoHarvest";
     public static final float MAX_HARVEST_DISTANCE = 256.0f;

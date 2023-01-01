@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class republic_assembly_tool extends script.base_script
 {
-
+    public republic_assembly_tool()
+    {
+    }
     public static final int USAGE_DELAY = 15;
     public static final String ITEM_COMBINATION_TABLE = "datatables/item/loot_cube/republic_assembly_tool.iff";
     public static final String ITEM_STF = "item_n";

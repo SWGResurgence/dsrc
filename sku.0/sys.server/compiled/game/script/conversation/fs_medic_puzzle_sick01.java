@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class fs_medic_puzzle_sick01 extends script.base_script
 {
-
+    public fs_medic_puzzle_sick01()
+    {
+    }
     public static String c_stringFile = "conversation/fs_medic_puzzle_sick01";
     public boolean fs_medic_puzzle_sick01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

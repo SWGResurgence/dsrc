@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class turret_control extends script.terminal.base.base_terminal
 {
-
+    public turret_control()
+    {
+    }
     private static final String BTN_ATTACK = "@" + "hq" + ":btn_attack";
     private static final string_id MNU_TURRET_CONTROL = new string_id("hq", "mnu_turret_control");
     private static final string_id ATTACK_TARGETS = new string_id("hq", "attack_targets");

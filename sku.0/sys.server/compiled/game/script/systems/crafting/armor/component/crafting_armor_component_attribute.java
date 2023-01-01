@@ -8,7 +8,9 @@ import script.obj_var_list;
 
 public class crafting_armor_component_attribute extends script.base_script
 {
-
+    public crafting_armor_component_attribute()
+    {
+    }
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

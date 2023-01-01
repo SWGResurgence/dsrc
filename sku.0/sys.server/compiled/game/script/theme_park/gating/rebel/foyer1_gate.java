@@ -6,7 +6,9 @@ import script.string_id;
 
 public class foyer1_gate extends script.base_script
 {
-
+    public foyer1_gate()
+    {
+    }
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isIdValid(item) || !isPlayer(item))

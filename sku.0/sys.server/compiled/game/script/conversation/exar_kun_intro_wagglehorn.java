@@ -8,7 +8,9 @@ import script.*;
 
 public class exar_kun_intro_wagglehorn extends script.base_script
 {
-    
+    public exar_kun_intro_wagglehorn()
+    {
+    }
     public static String c_stringFile = "conversation/exar_kun_intro_wagglehorn";
     public boolean exar_kun_intro_wagglehorn_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

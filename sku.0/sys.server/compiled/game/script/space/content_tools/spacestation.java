@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class spacestation extends script.base_script
 {
-
+    public spacestation()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         requestPreloadCompleteTrigger(self);

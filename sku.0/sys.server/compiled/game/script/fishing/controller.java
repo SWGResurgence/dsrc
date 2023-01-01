@@ -1,12 +1,15 @@
 package script.fishing;
 
 import script.dictionary;
+import script.library.fishing;
 import script.location;
 import script.obj_id;
 
 public class controller extends script.base_script {
 
-
+    public controller()
+    {
+    }
 
     /*
     * The purpose of the controller is really only to spawn and setup the master object

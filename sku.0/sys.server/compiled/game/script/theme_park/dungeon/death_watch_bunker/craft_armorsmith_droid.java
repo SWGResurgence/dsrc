@@ -10,7 +10,9 @@ import script.string_id;
 
 public class craft_armorsmith_droid extends script.base_script
 {
-
+    public craft_armorsmith_droid()
+    {
+    }
     public static final String TBL_ARMOR_WAVE = "datatables/dungeon/death_watch/armorsmith_crafting_attack_wave.iff";
     public static final String MSGS = "dungeon/death_watch";
     public int OnAttach(obj_id self) throws InterruptedException

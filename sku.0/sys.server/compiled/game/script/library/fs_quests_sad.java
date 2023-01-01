@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class fs_quests_sad extends script.base_script
 {
-
+    public fs_quests_sad()
+    {
+    }
     public static final String SAD_OBJVAR_TASK_ACTIVE = "fs_quest_sad.task_active";
     public static final String SAD_OBJVAR_TIMESTAMP = "fs_quest_sad.timestamp";
     public static final String SAD_OBJVAR_TAKEN_SINCE_TIMESTAMP = "fs_quest_sad.taken_since_timestamp";

@@ -5,7 +5,9 @@ import script.library.*;
 
 public class serving_droid extends script.base_script
 {
-
+    public serving_droid()
+    {
+    }
     public static final int MAX_WAYPOINTS = 20;
     public static final String OBJVAR_DROID_PATROL_POINTS = "droid.patrolPoints";
     public static final String OBJVAR_DROID_PATROL_LOOP = "droid.patrol_loop";

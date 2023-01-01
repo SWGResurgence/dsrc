@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class space_dungeon extends script.base_script
 {
-
+    public space_dungeon()
+    {
+    }
     public static final String TEMPLATE_TICKET = "object/tangible/travel/travel_ticket/dungeon_ticket.iff";
     public static final String TRAVEL_DUNGEON = "item.travel_ticket.travel_space_dungeon";
     public static final String PLAYER_TRAVEL_DUNGEON = "item.travel_ticket.travel_player_space_dungeon";

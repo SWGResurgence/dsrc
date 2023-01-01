@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class spawning extends script.base_script
 {
-
+    public spawning()
+    {
+    }
     public static void activateSpawnerHack(obj_id objPlayer) throws InterruptedException
     {
         obj_id[] objSpawners = getAllObjectsWithObjVar(getLocation(objPlayer), 24000, "intSpawnSystem");

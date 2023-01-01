@@ -5,7 +5,9 @@ public class naboo_hard extends script.creature_spawner.base_newbie_creature_spa
     public static final boolean SPAWNER_DISABLED = false;
     public int maxPop = 3;
 
-
+    public naboo_hard()
+    {
+    }
     public String pickCreature() throws InterruptedException
     {
         switch (rand(1, 3))

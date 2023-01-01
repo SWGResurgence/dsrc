@@ -5,7 +5,9 @@ import script.string_id;
 
 public class deed extends script.faction_perk.base.factional_deed
 {
-    
+    public deed()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String faction = "imperial";

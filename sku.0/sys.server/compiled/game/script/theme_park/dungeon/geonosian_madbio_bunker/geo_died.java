@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class geo_died extends script.base_script
 {
-
+    public geo_died()
+    {
+    }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         if (hasObjVar(self, "respawn_called"))

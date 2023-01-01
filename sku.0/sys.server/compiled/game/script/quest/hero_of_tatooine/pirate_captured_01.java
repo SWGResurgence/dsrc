@@ -9,7 +9,9 @@ import script.string_id;
 
 public class pirate_captured_01 extends script.base_script
 {
-
+    public pirate_captured_01()
+    {
+    }
     public static final String STF_FILE = "quest/pirates";
     public int OnAttach(obj_id self) throws InterruptedException
     {

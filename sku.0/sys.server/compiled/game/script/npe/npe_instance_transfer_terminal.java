@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class npe_instance_transfer_terminal extends script.base_script
 {
-
+    public npe_instance_transfer_terminal()
+    {
+    }
     public static final String NPE_TRANSFER_INITIAL_PROMPT = "@npe:npe_instance_transfer_initial_prompt";
     public static final String NPE_TRANSFER_PLAYER_PROMPT = "@npe:npe_instance_transfer_select_player_prompt";
     public static final String NPE_TRANSFER_FULL_PROMPT = "@npe:npe_instance_transfer_instance_full";

@@ -8,7 +8,9 @@ import script.*;
 
 public class trial_volcano_autopilot extends script.base_script
 {
-
+    public trial_volcano_autopilot()
+    {
+    }
     public static String c_stringFile = "conversation/trial_volcano_autopilot";
     public boolean trial_volcano_autopilot_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

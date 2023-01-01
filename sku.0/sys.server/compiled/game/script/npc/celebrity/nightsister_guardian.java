@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class nightsister_guardian extends script.base_script
 {
-
+    public nightsister_guardian()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Nightsister Guardian");

@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class interplanetary_survey extends script.base_script
 {
-
+    public interplanetary_survey()
+    {
+    }
     public static final String STF_FILE = "pet/droid_modules";
     public static final string_id SID_PLANET_TITLE = new string_id(STF_FILE, "survey_planet_title");
     public static final string_id SID_PLANET_PROMPT = new string_id(STF_FILE, "survey_planet_prompt");

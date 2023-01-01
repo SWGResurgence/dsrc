@@ -7,7 +7,9 @@ import script.library.weapons;
 
 public class travel_terminal extends script.theme_park.newbie_tutorial.tutorial_base
 {
-
+    public travel_terminal()
+    {
+    }
     public static final string_id SID_USE_MENU = new string_id("sui", "use");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

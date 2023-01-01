@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class junk_compactor extends script.base_script
 {
-
+    public junk_compactor()
+    {
+    }
     public static final String TBL = "datatables/npc/junk_dealer/ep3_myyydril_compactor.iff";
     public static final String SCRIPTVAR_JUNK_SUI = "relicdealer.biogenic.sui";
     public static final String SCRIPTVAR_JUNK_IDS = "relicdealer.biogenic.ids";

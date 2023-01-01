@@ -14,7 +14,9 @@ public class heroic_grant extends script.base_script
     public static final string_id SID_TOOL_OPTIONS = new string_id("sui", "Unlock_Heroics");
     public static final string_id SID_TOOL_CLASS = new string_id("sui", "Set_Heroic");
 
-
+    public heroic_grant()
+    {
+    }
 
     public int OnInitialize(obj_id self) throws InterruptedException
     {

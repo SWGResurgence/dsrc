@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class cureward extends script.base_script
 {
-
+    public cureward()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (getConfigSetting("GameServer", "combatUpgradeReward") == null)

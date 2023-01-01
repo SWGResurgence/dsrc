@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class rhanz_test extends script.base.remote_object_requester
 {
-
+    public rhanz_test()
+    {
+    }
     public static final String STARTING_EQUIPMENT_FILE = "datatables/equipment/newbie_equipment.iff";
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class minder extends script.base_script
 {
-
+    public minder()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setupSquad", null, 1.0f, false);

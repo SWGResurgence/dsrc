@@ -9,7 +9,9 @@ import script.string_id;
 
 public class dynamic_armor extends script.base_script
 {
-
+    public dynamic_armor()
+    {
+    }
     public static final string_id SID_ITEM_LEVEL_TOO_LOW = new string_id("base_player", "level_too_low");
     public static final string_id SID_ITEM_NOT_ENOUGH_SKILL = new string_id("base_player", "not_correct_skill");
     public static final string_id SID_ITEM_MUST_NOT_BE_EQUIP = new string_id("base_player", "not_while_equipped");

@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class advanced_turret extends script.base_script
 {
-
+    public advanced_turret()
+    {
+    }
     public static final String ALERT_VOLUME_NAME = "turretAggroVolume";
     public static final float DEFAULT_TURRET_RANGE = 64.0f;
     public static final float RANGE_TOO_CLOSE = 10.0f;

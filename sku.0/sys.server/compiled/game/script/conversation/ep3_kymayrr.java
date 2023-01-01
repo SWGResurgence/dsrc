@@ -5,7 +5,9 @@ import script.*;
 
 public class ep3_kymayrr extends script.base_script
 {
-
+    public ep3_kymayrr()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_kymayrr";
     public boolean ep3_kymayrr_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

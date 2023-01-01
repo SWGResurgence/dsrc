@@ -7,7 +7,9 @@ import script.string_id;
 
 public class buff_builder_response extends script.base_script
 {
-
+    public buff_builder_response()
+    {
+    }
     public static final String DATATABLE_BUFF_BUILDER = "datatables/buff/buff_builder.iff";
     public static final String SCRIPT_BUFF_BUILDER_RESPONSE = "systems.buff_builder.buff_builder_response";
     public static final String SCRIPT_BUFF_BUILDER_CANCEL = "systems.buff_builder.buff_builder_cancel";
@@ -69,10 +71,6 @@ public class buff_builder_response extends script.base_script
             utils.setScriptVar(recipientId, "performance.buildabuff.buffComponentKeys", buffComponentKeys);
             utils.setScriptVar(recipientId, "performance.buildabuff.buffComponentValues", buffComponentValues);
             utils.setScriptVar(recipientId, "performance.buildabuff.bufferId", bufferId);
-            //Save to obj_id for persistance. WIP
-            setObjVar(recipientId, "performance.buildabuff.buffComponentKeys", buffComponentKeys);
-            setObjVar(recipientId, "performance.buildabuff.buffComponentValues", buffComponentValues);
-            setObjVar(recipientId, "performance.buildabuff.bufferId", bufferId);
             float currentBuffTime = 30.0f;
             if (utils.hasScriptVar(recipientId, performance.VAR_PERFORM_INSPIRATION))
             {

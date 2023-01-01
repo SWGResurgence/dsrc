@@ -27,7 +27,11 @@ public static String c_stringFile = "conversation/lifeday_wrosaste";
 // Script Constants
 // ======================================================================
 
+	public lifeday_wrosaste()
 
+	{
+
+	}
 
 // ======================================================================
 // Script Conditions

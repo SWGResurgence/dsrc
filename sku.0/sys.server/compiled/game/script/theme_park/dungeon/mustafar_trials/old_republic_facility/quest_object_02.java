@@ -7,7 +7,9 @@ import script.string_id;
 
 public class quest_object_02 extends script.base_script
 {
-
+    public quest_object_02()
+    {
+    }
     public int OnOpenedContainer(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id building = getTopMostContainer(self);

@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class pvp_battlefield extends script.base_script
 {
-
+    public pvp_battlefield()
+    {
+    }
     public static final float CYCLE_HEARTBEAT = 30.0f;
     public static final String PVP_AREA_RECORD = "gcw_pvp_region.activity_list";
     public static final String CYCLE_STATUS = "gcw_pvp_region.isActive";

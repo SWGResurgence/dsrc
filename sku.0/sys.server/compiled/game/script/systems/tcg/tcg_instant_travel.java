@@ -5,7 +5,9 @@ import script.library.*;
 
 public class tcg_instant_travel extends script.base_script
 {
-
+    public tcg_instant_travel()
+    {
+    }
     public static final String PID_VAR = "tcg_instant_travel";
     public static final string_id SID_WHILE_DEAD = new string_id("spam", "while_dead");
 

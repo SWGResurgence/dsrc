@@ -7,7 +7,9 @@ import script.obj_var_list;
 
 public class helper_droid_pcd extends script.base_script
 {
-
+    public helper_droid_pcd()
+    {
+    }
     public static final int ALLOW_DELETE_AGE = 3 * 60 * 60;
     public static final String NEW_PLAYER_SCRIPT = "theme_park.new_player.new_player";
     public static final int ACCOUNT_AGE_CAP = 30;

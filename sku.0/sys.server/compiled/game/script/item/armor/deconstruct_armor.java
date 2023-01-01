@@ -11,7 +11,9 @@ import script.obj_id;
 
 public class deconstruct_armor extends script.base_script
 {
-
+    public deconstruct_armor()
+    {
+    }
     public static final String PID_NAME = "armorDeconstruct";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {

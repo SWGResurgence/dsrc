@@ -8,7 +8,9 @@ import script.*;
 
 public class mun_quest_marauder extends script.base_script
 {
-
+    public mun_quest_marauder()
+    {
+    }
     public static String c_stringFile = "conversation/mun_quest_marauder";
     public boolean mun_quest_marauder_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

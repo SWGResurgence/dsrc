@@ -7,7 +7,9 @@ import script.*;
 
 public class fish extends script.base_script
 {
-
+    public fish()
+    {
+    }
     private static final string_id SID_FILET = new string_id(minigame.STF_FISH, "mnu_filet");
     public static final string_id SID_TROPHY = new string_id(minigame.STF_FISH, "mnu_trophy");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

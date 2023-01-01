@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_cb_sinis extends script.base_script
 {
-
+    public corellia_cb_sinis()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_cb_sinis";
     public boolean corellia_cb_sinis_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

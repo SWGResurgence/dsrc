@@ -5,7 +5,9 @@ import script.*;
 
 public class mtp_hideout_col_doll_reset extends script.base_script
 {
-    
+    public mtp_hideout_col_doll_reset()
+    {
+    }
     public static String c_stringFile = "conversation/mtp_hideout_col_doll_reset";
     public boolean mtp_hideout_col_doll_reset_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

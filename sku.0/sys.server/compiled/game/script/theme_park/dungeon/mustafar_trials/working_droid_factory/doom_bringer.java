@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class doom_bringer extends script.base_script
 {
-
+    public doom_bringer()
+    {
+    }
     public static final string_id SID_DOOM = new string_id("mob/creature_names", "som_working_doom_bringer");
     public static final string_id SID_HAND = new string_id("mob/creature_names", "som_working_hand_of_doom");
     public static final int HOD_CYCLE_DELAY = 15;

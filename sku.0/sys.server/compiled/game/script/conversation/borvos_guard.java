@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class borvos_guard extends script.base_script
 {
-
+    public borvos_guard()
+    {
+    }
     public static String c_stringFile = "conversation/borvos_guard";
     public boolean borvos_guard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

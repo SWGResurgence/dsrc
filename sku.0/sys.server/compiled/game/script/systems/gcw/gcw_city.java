@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class gcw_city extends script.base_script
 {
-
+    public gcw_city()
+    {
+    }
     public static final location KEREN_ANNOUNCEMENT_ORIGIN = new location(1616, 24, 2705, "naboo", null);
     public static final location BESTINE_ANNOUNCEMENT_ORIGIN = new location(-1097, 12, -3583, "tatooine", null);
     public static final location DEARIC_ANNOUNCEMENT_ORIGIN = new location(435, 6, -2966, "talus", null);

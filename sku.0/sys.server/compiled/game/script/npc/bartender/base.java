@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class base extends script.base_script
 {
-
+    public base()
+    {
+    }
     public static final int TICK_TIME = 900;
     public static final String VAR_BARTENDER_BASE = "bartender";
     public static final String VAR_RUMOR_BASE = "bartender.rumor";

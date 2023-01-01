@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class death_watch_death extends script.base_script
 {
-
+    public death_watch_death()
+    {
+    }
     public static final String TBL_DEATH_LOOT = "datatables/loot/dungeon/death_watch_bunker.iff";
     public static final String TBL_DEATH_SPAWN = "datatables/spawning/dungeon/death_watch_bunker.iff";
     public int OnAttach(obj_id self) throws InterruptedException

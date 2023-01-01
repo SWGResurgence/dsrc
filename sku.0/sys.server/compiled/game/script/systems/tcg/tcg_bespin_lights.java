@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class tcg_bespin_lights extends script.base_script
 {
-
+    public tcg_bespin_lights()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if(!hasObjVar(self, "status")){

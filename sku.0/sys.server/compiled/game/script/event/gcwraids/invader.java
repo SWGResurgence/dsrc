@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class invader extends script.base_script
 {
-
+    public invader()
+    {
+    }
     public static final String DATATABLE = "datatables/event/invasion/ewok_bonus_loot.iff";
     public int OnAttach(obj_id self) throws InterruptedException
     {

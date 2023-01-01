@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class crafting_structure extends script.base_script
 {
-
+    public crafting_structure()
+    {
+    }
     public static final String OBJVAR_CRAFTING_TYPE = "crafting.type";
     public static final String INVISIBLE_CRAFTING_STATION_TEMPLATE = "object/tangible/crafting/station/inivisible_crafting_station.iff";
     public static final String DINER_TEMPLATE_NO_PATH = "diner_no_planet_restriction";

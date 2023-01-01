@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class city_raid_mob extends script.base_script
 {
-
+    public city_raid_mob()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

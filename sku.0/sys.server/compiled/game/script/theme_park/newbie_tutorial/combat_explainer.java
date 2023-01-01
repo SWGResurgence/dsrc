@@ -7,7 +7,9 @@ import script.library.weapons;
 
 public class combat_explainer extends script.theme_park.newbie_tutorial.tutorial_base
 {
-
+    public combat_explainer()
+    {
+    }
     public int handlePlayerArrival(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = getPlayer(self);

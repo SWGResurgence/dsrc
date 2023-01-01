@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class scheduled_drop extends script.base_script
 {
-
+    public scheduled_drop()
+    {
+    }
 
     /**
      * *******************************************************************************************

@@ -10,7 +10,9 @@ import script.string_id;
 
 public class fs_patrol_spawns1 extends script.base_script
 {
-
+    public fs_patrol_spawns1()
+    {
+    }
     public static final boolean DEBUGGING = false;
     public static final String[] ENEMY_LIST = 
     {

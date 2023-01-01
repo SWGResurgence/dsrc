@@ -5,7 +5,9 @@ import script.library.*;
 
 public class vehicle_deed extends script.base_script
 {
-
+    public vehicle_deed()
+    {
+    }
     public static final String MENU_FILE = "pet/pet_menu";
     public static final string_id SID_NO_GROUND_VEHICLE_IN_SPACE = new string_id("space/space_interaction", "no_ground_vehicle_in_space");
     public static final string_id SID_NOT_BIO_LINKED = new string_id("spam", "vehicle_not_biolink");

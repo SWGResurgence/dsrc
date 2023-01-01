@@ -8,7 +8,9 @@ public class talus_npc_hard extends base_newbie_npc_spawner
     public int maxPop = 3;
     public boolean newbie = false;
 
-
+    public talus_npc_hard()
+    {
+    }
     public String pickCreature() throws InterruptedException
     {
         switch (rand(1,4))

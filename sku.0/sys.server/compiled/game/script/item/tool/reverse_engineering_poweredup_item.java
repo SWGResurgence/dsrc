@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class reverse_engineering_poweredup_item extends script.base_script
 {
-
+    public reverse_engineering_poweredup_item()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         float dieTime = reverse_engineering.getDieTime(reverse_engineering.EXPIRATION_TIME, self);

@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class grievous extends script.base_script
 {
-
+    public grievous()
+    {
+    }
     public int OnIncapacitated(obj_id self, obj_id player) throws InterruptedException
     {
         messageTo(self, "destroyCorpse", null, 5.0f, true);

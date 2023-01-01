@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class dynamic_spawn_off_quest_item extends script.base_script
 {
-
+    public dynamic_spawn_off_quest_item()
+    {
+    }
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public int handleQuestFlavorObject(obj_id self, dictionary params) throws InterruptedException
     {

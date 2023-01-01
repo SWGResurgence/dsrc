@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class player_cmd_bomber_strike_target extends script.base_script
 {
-
+    public player_cmd_bomber_strike_target()
+    {
+    }
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(null, "ONdESTROY - tie bomber");

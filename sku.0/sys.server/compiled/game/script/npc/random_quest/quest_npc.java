@@ -8,7 +8,9 @@ import script.string_id;
 
 public class quest_npc extends script.base_script
 {
-
+    public quest_npc()
+    {
+    }
     public static final String FACETO_VOLUME_NAME = "faceToTriggerVolume";
     public int OnAttach(obj_id self) throws InterruptedException
     {

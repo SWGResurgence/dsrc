@@ -5,7 +5,9 @@ import script.*;
 
 public class ep3_ghrag_traitor extends script.base_script
 {
-
+    public ep3_ghrag_traitor()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_ghrag_traitor";
     public boolean ep3_ghrag_traitor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

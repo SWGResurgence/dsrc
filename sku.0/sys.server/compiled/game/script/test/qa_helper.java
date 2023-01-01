@@ -8,7 +8,9 @@ import script.string_id;
 
 public class qa_helper extends script.base_script
 {
-
+    public qa_helper()
+    {
+    }
     public static final String PID_SCRIPTVAR = "qa_helper";
     public static final String SCRIPTVAR = "qahelper";
     public static final String SCRIPTVAR_MOB = "qahelper_record";

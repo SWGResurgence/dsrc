@@ -8,7 +8,9 @@ import script.*;
 
 public class kd121_scouttrooper extends script.base_script
 {
-
+    public kd121_scouttrooper()
+    {
+    }
     public static String c_stringFile = "conversation/kd121_scouttrooper";
     public boolean kd121_scouttrooper_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

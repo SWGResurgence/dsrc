@@ -8,7 +8,9 @@ import script.string_id;
 
 public class terminal_techhall08_unlock extends script.base_script
 {
-
+    public terminal_techhall08_unlock()
+    {
+    }
     public static final String STF = "terminal_ui";
     public static final string_id USE_PASSCARD = new string_id(STF, "swipe_passcard");
     public static final string_id DISABLED = new string_id(STF, "door_locks_disabled");

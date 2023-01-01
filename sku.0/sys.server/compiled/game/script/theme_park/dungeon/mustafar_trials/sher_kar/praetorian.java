@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class praetorian extends script.base_script
 {
-
+    public praetorian()
+    {
+    }
     public static final int RECAST = 8;
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class tcg_combine_tcg_items extends script.base_script
 {
-
+    public tcg_combine_tcg_items()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "combine";
     public static final String TEMPLATE_PATTERN = "object/tangible/tcg/series3/combine_object_";

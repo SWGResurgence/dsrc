@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class smoking extends script.base_script
 {
-
+    public smoking()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);

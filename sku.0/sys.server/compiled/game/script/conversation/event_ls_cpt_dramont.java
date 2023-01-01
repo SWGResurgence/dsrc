@@ -5,7 +5,9 @@ import script.library.*;
 
 public class event_ls_cpt_dramont extends script.base_script
 {
-
+    public event_ls_cpt_dramont()
+    {
+    }
     public static String c_stringFile = "conversation/event_ls_cpt_dramont";
     public boolean event_ls_cpt_dramont_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class proc extends script.base_script
 {
-
+    public proc()
+    {
+    }
     public static final String CYBERNETICS_TABLE = "datatables/cybernetic/cybernetic.iff";
     public static final String PROC_TABLE = "datatables/proc/proc.iff";
     public static final String REAC_BASE = "reactive_proc.";

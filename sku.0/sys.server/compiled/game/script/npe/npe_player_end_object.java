@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class npe_player_end_object extends script.base_script
 {
-
+    public npe_player_end_object()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("npeFalconRamp", 2.0f, true);

@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class xandank_jaw extends script.base_script
 {
-
+    public xandank_jaw()
+    {
+    }
     public static final String STF = "som/som_quest";
     public static final string_id EXAMINE = new string_id(STF, "xandank_jaw_examine");
     public static final string_id DESTROY = new string_id(STF, "xandank_jaw_destroy");

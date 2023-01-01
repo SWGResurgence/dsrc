@@ -22,7 +22,9 @@ import script.library.utils;
 
 public class wod_mutant_rancor_combat extends script.base_script
 {
-
+    public wod_mutant_rancor_combat()
+    {
+    }
     public static final String NS_BICEP_SCHEMATIC = "item_wod_bossloot_ns_bracer";
     public static final String SMC_BICEP_SCHEMATIC = "item_wod_bossloot_smc_bicep_";
     public static final String SMC_BRACER_SCHEMATIC = "item_wod_bossloot_smc_bracer_";

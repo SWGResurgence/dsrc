@@ -12,7 +12,9 @@ import java.util.Vector;
 
 public class loveday_cupid_spawner extends script.base_script
 {
-
+    public loveday_cupid_spawner()
+    {
+    }
     public static final int CUPID_APPEARANCE_LENGTH = 900;
     public int OnAttach(obj_id self) throws InterruptedException
     {

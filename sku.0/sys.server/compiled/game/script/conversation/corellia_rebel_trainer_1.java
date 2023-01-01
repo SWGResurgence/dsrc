@@ -5,7 +5,9 @@ import script.*;
 
 public class corellia_rebel_trainer_1 extends script.base_script
 {
-
+    public corellia_rebel_trainer_1()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_rebel_trainer_1";
     public boolean corellia_rebel_trainer_1_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,7 +5,9 @@ import script.*;
 
 public class house_packup_reward_npc extends script.base_script
 {
-
+    public house_packup_reward_npc()
+    {
+    }
     public static String c_stringFile = "conversation/house_packup_reward_npc";
     public boolean house_packup_reward_npc_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

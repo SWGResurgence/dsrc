@@ -8,7 +8,9 @@ import script.*;
 
 public class c_story1_3_imprisoned_wookiee extends script.base_script
 {
-
+    public c_story1_3_imprisoned_wookiee()
+    {
+    }
     public static String c_stringFile = "conversation/c_story1_3_imprisoned_wookiee";
     public boolean c_story1_3_imprisoned_wookiee_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

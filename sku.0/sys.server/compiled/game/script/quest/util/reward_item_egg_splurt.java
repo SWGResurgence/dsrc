@@ -6,7 +6,9 @@ import script.*;
 
 public class reward_item_egg_splurt extends script.base_script
 {
-
+    public reward_item_egg_splurt()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info menuInfo) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))

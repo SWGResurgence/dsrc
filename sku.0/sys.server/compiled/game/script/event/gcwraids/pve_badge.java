@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class pve_badge extends script.base_script
 {
-
+    public pve_badge()
+    {
+    }
     public int receiveCreditForKill(obj_id self, dictionary params) throws InterruptedException
     {
         int cmReb4 = questGetQuestId("quest/event_gcwcheerleader_cmreb4");

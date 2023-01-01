@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class npe_public_instance extends script.base_script
 {
-    
+    public npe_public_instance()
+    {
+    }
     public static final boolean LOGGING = true;
     public static final float POPULATION_UPDATE_TIME = 20.0f;
     public static final float STATION_SCAN_RADIUS = 500.0f;

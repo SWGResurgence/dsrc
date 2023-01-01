@@ -5,7 +5,9 @@ import script.library.*;
 
 public class fs_crafting4_tracking_device extends script.base_script
 {
-
+    public fs_crafting4_tracking_device()
+    {
+    }
     public static final string_id SID_MENU_USE_TRACKING = new string_id("quest/force_sensitive/fs_crafting", "tracking_device_menu_use");
     public static final string_id SID_NEEDS_TRACKING_DATA = new string_id("quest/force_sensitive/fs_crafting", "tracking_device_needs_data");
     public static final string_id SID_WRONG_PLANET_MSG = new string_id("quest/force_sensitive/fs_crafting", "tracking_device_wrong_planet");

@@ -7,7 +7,9 @@ import script.*;
 
 public class nova_orion_flavor_npc_conversation_02b extends script.base_script
 {
-
+    public nova_orion_flavor_npc_conversation_02b()
+    {
+    }
     public static String c_stringFile = "conversation/nova_orion_flavor_npc_conversation_02b";
     public boolean nova_orion_flavor_npc_conversation_02b_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

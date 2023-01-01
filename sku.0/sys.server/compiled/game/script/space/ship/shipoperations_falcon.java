@@ -10,7 +10,9 @@ import script.string_id;
 
 public class shipoperations_falcon extends script.base_script
 {
-
+    public shipoperations_falcon()
+    {
+    }
     public static final string_id SID_OPERATIONS = new string_id("space/space_interaction", "operations");
     public int OnInitialize(obj_id self) throws InterruptedException
     {

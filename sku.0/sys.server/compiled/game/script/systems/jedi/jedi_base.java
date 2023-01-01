@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class jedi_base extends script.base_script
 {
-
+    public jedi_base()
+    {
+    }
     public static final int DAMAGE = 0;
     public static final int WOUNDS = 1;
     public static final int BATTLE_FATIGUE = NUM_ATTRIBUTES;

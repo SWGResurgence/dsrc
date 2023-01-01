@@ -5,7 +5,9 @@ import script.*;
 
 public class fs_phase4_chief_engineer extends script.base_script
 {
-
+    public fs_phase4_chief_engineer()
+    {
+    }
     public static String c_stringFile = "conversation/fs_phase4_chief_engineer";
     public boolean fs_phase4_chief_engineer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

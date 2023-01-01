@@ -5,7 +5,9 @@ import script.*;
 
 public class blistmok_rug extends script.base_script
 {
-    
+    public blistmok_rug()
+    {
+    }
     public static final String STF = "som/som_quest";
     public static final string_id EXAMINE = new string_id(STF, "blistmok_rug_examine");
     public static final string_id ALREADY = new string_id(STF, "blistmok_rug_already");

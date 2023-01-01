@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class loveday_card_bundler extends script.base_script
 {
-
+    public loveday_card_bundler()
+    {
+    }
     public static final String LOVEDAY_CARD_01 = "item_event_loveday_card_01";
     public static final String LOVEDAY_CARD_02 = "item_event_loveday_card_02";
     public static final String LOVEDAY_CARD_03 = "item_event_loveday_card_03";

@@ -10,7 +10,9 @@ import script.obj_id;
 
 public class empire_day_interior_npc_spawner extends script.base_script
 {
-
+    public empire_day_interior_npc_spawner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         //CustomerServiceLog("holidayEvent", "empire_day_interior_npc_spawner.OnAttach: Initialized.");

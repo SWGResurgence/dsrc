@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class stormtrooper_farmhouse extends script.theme_park.poi.base
 {
-
+    public stormtrooper_farmhouse()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "First POI Test Attached");

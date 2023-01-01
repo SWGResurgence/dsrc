@@ -5,7 +5,9 @@ import script.*;
 
 public class heroic_sd_intro_neutral extends script.base_script
 {
-
+    public heroic_sd_intro_neutral()
+    {
+    }
     public static String c_stringFile = "conversation/heroic_sd_intro_neutral";
     public boolean heroic_sd_intro_neutral_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

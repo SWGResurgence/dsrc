@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class stormtrooper_formation extends script.theme_park.poi.base
 {
-
+    public stormtrooper_formation()
+    {
+    }
     public static final int FORMATION_COLUMN = 0;
     public static final int FORMATION_WEDGE = 1;
     public int OnInitialize(obj_id self) throws InterruptedException

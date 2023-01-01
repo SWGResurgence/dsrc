@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class legacy_head_ev9d9 extends script.base_script
 {
-
+    public legacy_head_ev9d9()
+    {
+    }
     public static String c_stringFile = "conversation/legacy_head_ev9d9";
     public boolean legacy_head_ev9d9_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

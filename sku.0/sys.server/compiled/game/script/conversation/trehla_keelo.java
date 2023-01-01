@@ -5,7 +5,9 @@ import script.*;
 
 public class trehla_keelo extends script.base_script
 {
-
+    public trehla_keelo()
+    {
+    }
     public static String c_stringFile = "conversation/trehla_keelo";
     public boolean trehla_keelo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

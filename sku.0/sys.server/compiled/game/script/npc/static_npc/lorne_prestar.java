@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class lorne_prestar extends script.base_script
 {
-
+    public lorne_prestar()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/armor/padded/armor_padded_s01_chest_plate.iff", self, "");

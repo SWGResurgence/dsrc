@@ -9,7 +9,9 @@ import script.string_id;
 
 public class firework_show extends script.base_script
 {
-
+    public firework_show()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String setting = getConfigSetting("EventTeam", "empireDay");

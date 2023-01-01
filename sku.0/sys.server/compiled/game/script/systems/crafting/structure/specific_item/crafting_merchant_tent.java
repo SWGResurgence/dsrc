@@ -7,7 +7,9 @@ import script.resource_weight;
 
 public class crafting_merchant_tent extends script.systems.crafting.structure.crafting_base_structure
 {
-
+    public crafting_merchant_tent()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

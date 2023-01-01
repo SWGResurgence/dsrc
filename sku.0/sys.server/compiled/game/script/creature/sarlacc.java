@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class sarlacc extends script.base_script
 {
-
+    public sarlacc()
+    {
+    }
     public static final string_id SID_EXTRACT_BILE = new string_id("mob/sarlacc", "extract_bile");
     public static final string_id SID_BILE_FAIL = new string_id("mob/sarlacc", "bile_fail");
     public static final string_id SID_BILE_SUCCESS = new string_id("mob/sarlacc", "bile_success");

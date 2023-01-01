@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class tusken_king extends script.base_script
 {
-
+    public tusken_king()
+    {
+    }
     public int setupSquad(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "establishUnity", null, 0.0f, false);

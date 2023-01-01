@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class imperial_outpost_medium_02 extends script.theme_park.poi.base
 {
-
+    public imperial_outpost_medium_02()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

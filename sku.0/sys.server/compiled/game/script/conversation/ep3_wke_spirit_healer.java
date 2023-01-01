@@ -5,7 +5,9 @@ import script.library.*;
 
 public class ep3_wke_spirit_healer extends script.base_script
 {
-
+    public ep3_wke_spirit_healer()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_wke_spirit_healer";
     public boolean ep3_wke_spirit_healer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

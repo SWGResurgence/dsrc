@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class antidecay extends script.base_script
 {
-
+    public antidecay()
+    {
+    }
     public static final String OBJVAR_GROUP_REWARDED = "rewarded";
     public static final String VETERAN_STRING_TABLE = "veteran_new";
     public static final String VETERAN_CSLOG = "veteran";

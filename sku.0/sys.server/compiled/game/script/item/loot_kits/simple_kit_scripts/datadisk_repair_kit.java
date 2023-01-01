@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class datadisk_repair_kit extends script.base_script
 {
-
+    public datadisk_repair_kit()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "setUp", null, 2, false);

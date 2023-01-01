@@ -5,7 +5,9 @@ import script.library.*;
 
 public class npc_controller extends script.base_script
 {
-
+    public npc_controller()
+    {
+    }
     public static final float MIN_NPC_DISTANCE = 6.0f;
     public static final String INVENTORY_SCRIPT = "systems.storyteller.npc_inventory_controller";
     public static final int OPEN_NPC_MENU = menu_info_types.SERVER_MENU1;

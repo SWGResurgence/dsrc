@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class player_performance extends script.base_script
 {
-
+    public player_performance()
+    {
+    }
     public static final String PERFORMANCE_OBJVAR = "quest.crowd_pleaser.performance";
     public static final String CONTROL_OBJVAR = PERFORMANCE_OBJVAR + ".control";
     public int OnImmediateLogout(obj_id self) throws InterruptedException

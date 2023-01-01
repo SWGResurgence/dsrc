@@ -7,7 +7,9 @@ import script.*;
 
 public class c_kashyyyk_hunter extends script.base_script
 {
-
+    public c_kashyyyk_hunter()
+    {
+    }
     public static String c_stringFile = "conversation/c_kashyyyk_hunter";
     public boolean c_kashyyyk_hunter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

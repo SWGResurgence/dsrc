@@ -8,7 +8,9 @@ import script.*;
 
 public class emp_day_imperial_guard extends script.base_script
 {
-
+    public emp_day_imperial_guard()
+    {
+    }
     public static String c_stringFile = "conversation/emp_day_imperial_guard";
     public boolean emp_day_imperial_guard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

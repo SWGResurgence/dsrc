@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class collection_gcw extends script.base_script
 {
-
+    public collection_gcw()
+    {
+    }
     public static final String PID_NAME = "gcw_consume";
     public static final string_id SID_GCW_CONSUME_PROMPT = new string_id("collection", "consume_gcw_prompt");
     public static final string_id SID_GCW_CONSUME_TITLE = new string_id("collection", "consume_gcw_title");

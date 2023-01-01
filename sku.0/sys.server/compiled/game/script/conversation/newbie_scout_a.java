@@ -8,7 +8,9 @@ import script.*;
 
 public class newbie_scout_a extends script.base_script
 {
-
+    public newbie_scout_a()
+    {
+    }
     public static String c_stringFile = "conversation/newbie_scout_a";
     public boolean newbie_scout_a_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

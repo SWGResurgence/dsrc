@@ -5,7 +5,9 @@ import script.library.*;
 
 public class navicomputer_control_device extends script.base_script
 {
-
+    public navicomputer_control_device()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (ai_lib.aiIsDead(player))

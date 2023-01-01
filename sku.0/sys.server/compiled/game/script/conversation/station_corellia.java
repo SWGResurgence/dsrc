@@ -5,7 +5,9 @@ import script.*;
 
 public class station_corellia extends script.base_script
 {
-    
+    public station_corellia()
+    {
+    }
     public static String c_stringFile = "conversation/station_corellia";
     public boolean station_corellia_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class blueprint_split_controller extends script.base_script
 {
-
+    public blueprint_split_controller()
+    {
+    }
     public int handleSplitBlueprintItemCreation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class player_teaching extends script.base_script
 {
-
+    public player_teaching()
+    {
+    }
     public static final String VAR_TEACHING = "teaching";
     public static final String VAR_VALID_SKILLS = "teaching.valid_skills";
     public static final String VAR_SKILL_TO_LEARN = "teaching.skill_to_learn";

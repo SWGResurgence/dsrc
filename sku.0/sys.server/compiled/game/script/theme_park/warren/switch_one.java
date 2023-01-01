@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class switch_one extends script.base_script
 {
-
+    public switch_one()
+    {
+    }
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

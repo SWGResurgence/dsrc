@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class ship_spawner extends script.base_script
 {
-    
+    public ship_spawner()
+    {
+    }
 
     public int OnInitialize(obj_id self) throws InterruptedException {
         messageTo(self, "evaluateSpawn", null, 0.0f, false);

@@ -8,7 +8,9 @@ import script.*;
 
 public class quest_u10_lucien_bender extends script.base_script
 {
-
+    public quest_u10_lucien_bender()
+    {
+    }
     public static String c_stringFile = "conversation/quest_u10_lucien_bender";
     public boolean quest_u10_lucien_bender_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

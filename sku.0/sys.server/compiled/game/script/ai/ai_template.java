@@ -8,7 +8,9 @@ import script.string_id;
 
 public class ai_template extends script.base_script
 {
-
+    public ai_template()
+    {
+    }
     public static final String ALERT_VOLUME_NAME = "alertTriggerVolume";
     public static final String ACTION_ALERT = "alert";
     public static final String ACTION_THREATEN = "threaten";

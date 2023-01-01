@@ -5,7 +5,9 @@ import script.*;
 
 public class station_imperial_base extends script.base_script
 {
-
+    public station_imperial_base()
+    {
+    }
     public static String c_stringFile = "conversation/station_imperial_base";
     public boolean station_imperial_base_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

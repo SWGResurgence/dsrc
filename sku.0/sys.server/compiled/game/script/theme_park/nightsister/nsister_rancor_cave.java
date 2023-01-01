@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class nsister_rancor_cave extends script.base_script
 {
-
+    public nsister_rancor_cave()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "spawn_table"))

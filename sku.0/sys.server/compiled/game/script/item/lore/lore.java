@@ -6,7 +6,9 @@ import script.string_id;
 
 public class lore extends script.base_script
 {
-
+    public lore()
+    {
+    }
     public static final string_id ITEM_LORE = new string_id("error_message", "item_lore");
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {

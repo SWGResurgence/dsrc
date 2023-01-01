@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class mini_vehicle_control extends script.base_script
 {
-
+    public mini_vehicle_control()
+    {
+    }
     public static final String VEHICLE_ID = "mini_vehicle.vehicle";
     public int OnAttach(obj_id self) throws InterruptedException
     {

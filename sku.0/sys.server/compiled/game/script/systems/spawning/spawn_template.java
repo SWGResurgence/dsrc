@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class spawn_template extends script.systems.spawning.spawn_base
 {
-
+    public spawn_template()
+    {
+    }
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

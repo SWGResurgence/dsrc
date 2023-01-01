@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class klaatu extends script.base_script
 {
-
+    public klaatu()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/shirt/shirt_s09.iff", self, "");

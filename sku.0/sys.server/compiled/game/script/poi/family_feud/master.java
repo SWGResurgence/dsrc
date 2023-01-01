@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class master extends script.theme_park.poi.base
 {
-
+    public master()
+    {
+    }
     public static final String SCENARIO_NAME = "family_feud";
     public static final String BASE_PATH = "poi." + SCENARIO_NAME;
     public static final String SCRIPT_MASTER = BASE_PATH + ".master";

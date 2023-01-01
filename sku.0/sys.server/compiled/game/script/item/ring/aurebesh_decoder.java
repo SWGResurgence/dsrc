@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class aurebesh_decoder extends script.base_script
 {
-
+    public aurebesh_decoder()
+    {
+    }
     public static final string_id SID_AUREBESH_TO_ENGLISH = new string_id("collection", "aurebesh_to_english");
     public static final string_id SID_ENGLISH_TO_AUREBESH = new string_id("collection", "english_to_aurebesh");
     public static final String SID_A_TO_E_PROMPT = "@collection:a_to_e_prompt";

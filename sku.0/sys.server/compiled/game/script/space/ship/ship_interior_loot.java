@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class ship_interior_loot extends script.base_script
 {
-
+    public ship_interior_loot()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setupShip", null, 1, false);

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class gramm_rile extends script.base_script
 {
-
+    public gramm_rile()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/shirt/shirt_s07.iff", self, "");

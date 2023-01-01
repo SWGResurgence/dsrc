@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class terminal extends script.terminal.base.base_terminal
 {
-
+    public terminal()
+    {
+    }
     private static final string_id MNU_DONATE = new string_id("hq", "mnu_donate");
     private static final string_id MNU_DONATE_MONEY = new string_id("hq", "mnu_donate_money");
     public static final string_id MNU_DONATE_RESOURCE = new string_id("hq", "mnu_donate_resource");

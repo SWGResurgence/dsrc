@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class gcw_patrol_point_npc_ai extends script.systems.gcw.gcw_city_kit
 {
-
+    public gcw_patrol_point_npc_ai()
+    {
+    }
     public void setupConstructionQuests(obj_id self, obj_id pylon) throws InterruptedException
     {
         setName(pylon, "Turret Construction Site");

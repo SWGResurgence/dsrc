@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class player extends script.base_script
 {
-
+    public player()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id controller = space_dungeon.getDungeonIdForPlayer(self);

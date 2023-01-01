@@ -8,7 +8,9 @@ import script.string_id;
 
 public class ranch_house extends script.base_script
 {
-
+    public ranch_house()
+    {
+    }
     public static final String RUG = "object/tangible/furniture/all/frn_all_rug_rectangle_large_style_04.iff";
     public static final String STATUE01 = "object/tangible/furniture/all/frn_all_decorative_lg_s1.iff";
     public static final String STATUE02 = "object/tangible/furniture/all/frn_all_decorative_lg_s2.iff";

@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_fishing_pole extends script.systems.crafting.item.crafting_base_fishing
 {
-
+    public crafting_fishing_pole()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

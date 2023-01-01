@@ -8,7 +8,9 @@ import script.string_id;
 
 public class crackdown_cantina extends script.base_script
 {
-
+    public crackdown_cantina()
+    {
+    }
     public static String CONVO = "npc_reaction/imperial_crackdown_cantina";
     public int OnAttach(obj_id self) throws InterruptedException
     {

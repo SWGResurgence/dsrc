@@ -6,7 +6,9 @@ import script.library.sui;
 
 public class exit_terminal extends script.base_script
 {
-
+    public exit_terminal()
+    {
+    }
     public static final String DECREPIT_STF = "mustafar/decrepit_droid_factory";
     public static final string_id SID_EXIT_TRIAL = new string_id(DECREPIT_STF, "decrepit_exit");
     public static final string_id SID_EXIT_TRIAL_CONFIRM = new string_id(DECREPIT_STF, "decrepit_exit_confirm");

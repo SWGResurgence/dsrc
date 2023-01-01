@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_armor_layer_component_artisan extends script.systems.crafting.armor.crafting_base_armor_component
 {
-
+    public crafting_armor_layer_component_artisan()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

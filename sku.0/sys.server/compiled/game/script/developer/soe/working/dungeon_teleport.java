@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class dungeon_teleport extends script.base_script
 {
-
+    public dungeon_teleport()
+    {
+    }
 
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {

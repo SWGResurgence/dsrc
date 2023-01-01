@@ -7,7 +7,9 @@ import script.*;
 
 public class emp_day_reb_imp_convert extends script.base_script
 {
-
+    public emp_day_reb_imp_convert()
+    {
+    }
     public static String c_stringFile = "conversation/emp_day_reb_imp_convert";
     public boolean emp_day_reb_imp_convert_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class mtp_instance_enter extends script.base_script
 {
-    
+    public mtp_instance_enter()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (getDistance(player, self) > 6.0f)

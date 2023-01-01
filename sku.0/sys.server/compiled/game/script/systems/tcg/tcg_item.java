@@ -6,7 +6,9 @@ import script.*;
 
 public class tcg_item extends script.base_script
 {
-
+    public tcg_item()
+    {
+    }
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (isIdValid(utils.getContainingPlayer(sourceContainer)))

@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class spy_decoy extends script.base_script
 {
-
+    public spy_decoy()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "systems.combat.credit_for_kills");

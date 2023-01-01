@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class warren_turret extends script.base_script
 {
-
+    public warren_turret()
+    {
+    }
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id who) throws InterruptedException
     {
         if (!isIdValid(who))

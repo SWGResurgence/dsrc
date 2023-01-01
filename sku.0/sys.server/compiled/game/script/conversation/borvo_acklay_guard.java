@@ -8,7 +8,9 @@ import script.*;
 
 public class borvo_acklay_guard extends script.base_script
 {
-
+    public borvo_acklay_guard()
+    {
+    }
     public static String c_stringFile = "conversation/borvo_acklay_guard";
     public boolean borvo_acklay_guard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class fs_grant_experiment_10 extends script.base_script
 {
-
+    public fs_grant_experiment_10()
+    {
+    }
     public static final String DATATABLE_SKILLS = "datatables/skill/skills.iff";
     public static final String SKILL = "force_sensitive_crafting_mastery_experimentation_01";
     public int OnAttach(obj_id self) throws InterruptedException

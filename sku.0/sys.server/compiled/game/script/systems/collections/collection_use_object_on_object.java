@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class collection_use_object_on_object extends script.base_script
 {
-
+    public collection_use_object_on_object()
+    {
+    }
     public static final string_id SID_INVALID_TARGET = new string_id("collection", "invalid_target");
     public static final string_id NOT_WHILE_INCAPPED = new string_id("quest/ground/util/quest_giver_object", "not_while_incapped");
     public static final string_id MUST_DISMOUNT = new string_id("collection", "must_dismount");

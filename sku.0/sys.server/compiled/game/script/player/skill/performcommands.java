@@ -8,7 +8,9 @@ import script.string_id;
 
 public class performcommands extends script.base_script
 {
-
+    public performcommands()
+    {
+    }
     public static final String MIN_PERFORM_DELAY = "performance.performance_delay";
     public static final String STF = "performance";
     public static final String SCRIPT_BUFF_BUILDER_RESPONSE = "systems.buff_builder.buff_builder_response";

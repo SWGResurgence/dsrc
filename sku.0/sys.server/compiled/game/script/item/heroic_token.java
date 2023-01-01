@@ -7,7 +7,9 @@ import script.*;
 
 public class heroic_token extends script.base_script
 {
-
+    public heroic_token()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasTokenBoxInInventory(player))

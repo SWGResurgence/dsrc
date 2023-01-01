@@ -9,7 +9,9 @@ import script.string_id;
 
 public class reverse_engineering_powerup extends script.base_script
 {
-
+    public reverse_engineering_powerup()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))

@@ -5,7 +5,9 @@ import script.*;
 
 public class rtp_nien_nunb_main extends script.base_script
 {
-
+    public rtp_nien_nunb_main()
+    {
+    }
     public static String c_stringFile = "conversation/rtp_nien_nunb_main";
     public boolean rtp_nien_nunb_main_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,7 +5,9 @@ import script.library.*;
 
 public class fs_quests_sad2_conv extends script.base_script
 {
-
+    public fs_quests_sad2_conv()
+    {
+    }
     public static String c_stringFile = "conversation/fs_quests_sad2_conv";
     public boolean fs_quests_sad2_conv_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

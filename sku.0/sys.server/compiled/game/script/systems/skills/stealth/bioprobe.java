@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class bioprobe extends script.base_script
 {
-
+    public bioprobe()
+    {
+    }
     public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###");
     public int msgDecaySample(obj_id self, dictionary params) throws InterruptedException
     {

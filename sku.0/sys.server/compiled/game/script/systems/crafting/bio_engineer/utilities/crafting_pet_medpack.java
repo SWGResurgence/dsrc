@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_pet_medpack extends script.systems.crafting.bio_engineer.crafting_base_pet_meds
 {
-
+    public crafting_pet_medpack()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

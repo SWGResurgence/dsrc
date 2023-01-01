@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_murmurs_1_jainn extends script.base_script
 {
-
+    public corellia_murmurs_1_jainn()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_murmurs_1_jainn";
     public boolean corellia_murmurs_1_jainn_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

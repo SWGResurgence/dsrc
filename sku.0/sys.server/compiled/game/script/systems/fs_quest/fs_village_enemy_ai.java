@@ -11,7 +11,9 @@ import script.obj_id;
 
 public class fs_village_enemy_ai extends script.base_script
 {
-
+    public fs_village_enemy_ai()
+    {
+    }
     public void setPatrolPaths() throws InterruptedException
     {
         obj_id self = getSelf();

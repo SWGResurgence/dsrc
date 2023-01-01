@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class path extends script.base_script
 {
-    
+    public path()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "larkAbout", null, 5, false);

@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class shared_flora_guard extends script.base_script
 {
-
+    public shared_flora_guard()
+    {
+    }
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException
     {
         obj_id warehouse = getObjIdObjVar(self, "coa3.shared.warehouse");

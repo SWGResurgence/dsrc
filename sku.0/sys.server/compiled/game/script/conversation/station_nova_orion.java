@@ -5,7 +5,9 @@ import script.*;
 
 public class station_nova_orion extends script.base_script
 {
-
+    public station_nova_orion()
+    {
+    }
     public static String c_stringFile = "conversation/station_nova_orion";
     public boolean station_nova_orion_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class uber_lair_mob extends script.base_script
 {
-
+    public uber_lair_mob()
+    {
+    }
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id objParent = getObjIdObjVar(self, "uberlair.objParent");

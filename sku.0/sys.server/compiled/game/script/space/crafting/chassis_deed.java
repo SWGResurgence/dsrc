@@ -11,7 +11,9 @@ import script.string_id;
 
 public class chassis_deed extends script.base_script
 {
-
+    public chassis_deed()
+    {
+    }
     public static final string_id MNU_CREATE_VEHICLE = new string_id("sui", "create_vehicle");
     public static final String STF = "chassis_npc";
     public int OnInitialize(obj_id self) throws InterruptedException

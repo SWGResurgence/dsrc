@@ -8,7 +8,9 @@ import script.*;
 
 public class legacy_naboo_eirtae extends script.base_script
 {
-
+    public legacy_naboo_eirtae()
+    {
+    }
     public static String c_stringFile = "conversation/legacy_naboo_eirtae";
     public boolean legacy_naboo_eirtae_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

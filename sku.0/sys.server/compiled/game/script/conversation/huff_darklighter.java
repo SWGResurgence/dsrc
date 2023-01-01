@@ -8,7 +8,9 @@ import script.*;
 
 public class huff_darklighter extends script.base_script
 {
-
+    public huff_darklighter()
+    {
+    }
     public static String c_stringFile = "conversation/huff_darklighter";
     public boolean huff_darklighter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

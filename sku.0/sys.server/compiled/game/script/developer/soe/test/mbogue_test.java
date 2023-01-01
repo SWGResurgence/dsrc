@@ -14,7 +14,9 @@ import java.util.Vector;
 
 public class mbogue_test extends script.base_script
 {
-
+    public mbogue_test()
+    {
+    }
     public static final String s_logLabel = "space_debug_ai";
     public static final String s_tooFewParameters = "too few parameters\n";
     public static final String s_usageSpaceUnitAddPatrolPath = "Usage: spaceUnitAddPatrolPath <unitObjId>";

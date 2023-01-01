@@ -8,7 +8,9 @@ import script.string_id;
 
 public class quest_u10_bossk_henchman extends script.base_script
 {
-
+    public quest_u10_bossk_henchman()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         chat.setChatMood(self, chat.MOOD_PETULANT);

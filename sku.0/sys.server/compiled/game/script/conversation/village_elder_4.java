@@ -7,7 +7,9 @@ import script.*;
 
 public class village_elder_4 extends script.base_script
 {
-
+    public village_elder_4()
+    {
+    }
     public static String c_stringFile = "conversation/village_elder_4";
     public boolean village_elder_4_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

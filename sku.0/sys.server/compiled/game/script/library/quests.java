@@ -6,7 +6,9 @@ import java.util.Vector;
 
 public class quests extends script.base_script
 {
-
+    public quests()
+    {
+    }
     public static final int IS_ON_QUEST = 1;
     public static final int COMPLETED_QUEST = 2;
     public static final int FAILED_QUEST = 3;

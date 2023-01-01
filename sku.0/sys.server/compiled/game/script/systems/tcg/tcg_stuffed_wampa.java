@@ -4,7 +4,9 @@ import script.*;
 
 public class tcg_stuffed_wampa extends script.base_script
 {
-
+    public tcg_stuffed_wampa()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player))

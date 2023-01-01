@@ -10,7 +10,9 @@ import script.obj_id;
 
 public class stimpack_pet extends script.base_script
 {
-
+    public stimpack_pet()
+    {
+    }
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

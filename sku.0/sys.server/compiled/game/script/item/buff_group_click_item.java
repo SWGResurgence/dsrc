@@ -1,14 +1,13 @@
 package script.item;
 
 import script.*;
-import script.library.buff;
-import script.library.prose;
-import script.library.static_item;
-import script.library.utils;
+import script.library.*;
 
 public class buff_group_click_item extends script.base_script
 {
-
+    public buff_group_click_item()
+    {
+    }
     public static final string_id SID_NOT_YET = new string_id("base_player", "not_yet");
     public static final string_id SID_NOT_LINKED = new string_id("base_player", "not_linked");
     public static final string_id SID_NOT_LINKED_TO_HOLDER = new string_id("base_player", "not_linked_to_holder");

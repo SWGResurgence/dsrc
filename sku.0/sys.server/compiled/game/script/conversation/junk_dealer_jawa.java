@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class junk_dealer_jawa extends script.base_script
 {
-
+    public junk_dealer_jawa()
+    {
+    }
     public static String c_stringFile = "conversation/junk_dealer_jawa";
     public boolean junk_dealer_jawa_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

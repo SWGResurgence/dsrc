@@ -8,7 +8,9 @@ import script.*;
 
 public class hx_138 extends script.base_script
 {
-
+    public hx_138()
+    {
+    }
     public static String c_stringFile = "conversation/hx_138";
     public boolean hx_138_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

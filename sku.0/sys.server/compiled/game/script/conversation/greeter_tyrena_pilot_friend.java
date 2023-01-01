@@ -5,7 +5,9 @@ import script.*;
 
 public class greeter_tyrena_pilot_friend extends script.base_script
 {
-
+    public greeter_tyrena_pilot_friend()
+    {
+    }
     public static String c_stringFile = "conversation/greeter_tyrena_pilot_friend";
     public boolean greeter_tyrena_pilot_friend_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

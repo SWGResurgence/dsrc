@@ -6,7 +6,9 @@ import java.util.Vector;
 
 public class corpse extends script.base_script
 {
-    
+    public corpse()
+    {
+    }
     public static final String SCRIPT_PLAYER_CORPSE = "corpse.player_corpse";
     public static final String SCRIPT_AI_CORPSE = "corpse.ai_corpse";
     public static final String SCRIPT_AI_CORPSE_INVENTORY = "corpse.ai_corpse_inventory";

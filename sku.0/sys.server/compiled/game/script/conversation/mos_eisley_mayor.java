@@ -5,7 +5,9 @@ import script.*;
 
 public class mos_eisley_mayor extends script.base_script
 {
-
+    public mos_eisley_mayor()
+    {
+    }
     public static String c_stringFile = "conversation/mos_eisley_mayor";
     public boolean mos_eisley_mayor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

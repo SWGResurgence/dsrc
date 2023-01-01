@@ -5,7 +5,9 @@ import script.library.*;
 
 public class c_story1_4_imp_contact extends script.base_script
 {
-
+    public c_story1_4_imp_contact()
+    {
+    }
     public static String c_stringFile = "conversation/c_story1_4_imp_contact";
     public boolean c_story1_4_imp_contact_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -2,7 +2,9 @@ package script.item.conversion;
 
 public class armor_bicep_l_conversion extends script.item.conversion.armor_base_conversion
 {
-
+    public armor_bicep_l_conversion()
+    {
+    }
     public static final String[] ARMOR_SET_ASSAULT = 
     {
         "composite/armor_composite_bicep_l.iff",
