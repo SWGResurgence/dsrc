@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_droid_factory_lieutenant_varias extends script.base_script
 {
-
+    public corellia_droid_factory_lieutenant_varias()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_droid_factory_lieutenant_varias";
     public boolean corellia_droid_factory_lieutenant_varias_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

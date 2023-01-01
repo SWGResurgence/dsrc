@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class poi_city_convo extends script.base_script
 {
-
+    public poi_city_convo()
+    {
+    }
     public static final String npcTable = "datatables/poi/city/convo_npc.iff";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

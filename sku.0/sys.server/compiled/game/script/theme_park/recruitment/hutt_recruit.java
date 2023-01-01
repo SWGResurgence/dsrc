@@ -8,7 +8,9 @@ import script.string_id;
 
 public class hutt_recruit extends script.base_script
 {
-
+    public hutt_recruit()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         persistObject(self);

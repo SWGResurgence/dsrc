@@ -8,7 +8,9 @@ import script.string_id;
 
 public class mission_crafting_pickup extends script.systems.missions.base.mission_dynamic_base
 {
-
+    public mission_crafting_pickup()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");

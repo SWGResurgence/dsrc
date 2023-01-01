@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class npe_npc_blurts extends script.base_script
 {
-
+    public npe_npc_blurts()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setCondition(self, CONDITION_CONVERSABLE);

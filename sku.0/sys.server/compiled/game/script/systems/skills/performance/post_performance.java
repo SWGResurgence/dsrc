@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class post_performance extends script.base_script
 {
-
+    public post_performance()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, performance.POST_PERFORMANCE);

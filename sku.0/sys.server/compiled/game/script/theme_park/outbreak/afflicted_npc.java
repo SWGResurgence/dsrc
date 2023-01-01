@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class afflicted_npc extends script.base_script
 {
-
+    public afflicted_npc()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         stopFloating(self);

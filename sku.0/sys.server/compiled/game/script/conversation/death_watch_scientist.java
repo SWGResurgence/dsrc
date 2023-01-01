@@ -7,7 +7,9 @@ import script.*;
 
 public class death_watch_scientist extends script.base_script
 {
-
+    public death_watch_scientist()
+    {
+    }
     public static String c_stringFile = "conversation/death_watch_scientist";
     public boolean death_watch_scientist_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

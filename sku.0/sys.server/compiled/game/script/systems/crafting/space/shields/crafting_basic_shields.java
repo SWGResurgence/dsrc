@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_basic_shields extends script.systems.crafting.space.shields.crafting_base_shields
 {
-
+    public crafting_basic_shields()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

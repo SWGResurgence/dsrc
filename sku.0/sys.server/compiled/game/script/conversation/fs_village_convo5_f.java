@@ -6,7 +6,9 @@ import script.*;
 
 public class fs_village_convo5_f extends script.base_script
 {
-
+    public fs_village_convo5_f()
+    {
+    }
     public static String c_stringFile = "conversation/fs_village_convo5_f";
     public boolean fs_village_convo5_f_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

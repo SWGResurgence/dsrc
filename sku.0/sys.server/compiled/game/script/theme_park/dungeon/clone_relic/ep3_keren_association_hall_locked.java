@@ -6,7 +6,9 @@ import script.string_id;
 
 public class ep3_keren_association_hall_locked extends script.base_script
 {
-
+    public ep3_keren_association_hall_locked()
+    {
+    }
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))

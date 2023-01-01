@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class tusken_bantha extends script.base_script
 {
-
+    public tusken_bantha()
+    {
+    }
     public static final String SOCIAL_VOLUME = "npc_socialization";
     public static final float SOCIAL_RANGE = 15.0f;
     public int OnAttach(obj_id self) throws InterruptedException

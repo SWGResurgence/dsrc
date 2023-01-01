@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class exar_observer extends script.base_script
 {
-
+    public exar_observer()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCreatureCoverVisibility(self, false);

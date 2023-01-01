@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class combat_simulator_actor extends script.base_script
 {
-
+    public combat_simulator_actor()
+    {
+    }
     public static boolean debug = false;
     public int prepareForCombat(obj_id self, dictionary params) throws InterruptedException
     {

@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class obiwan_instance_spawned extends script.base_script
 {
-
+    public obiwan_instance_spawned()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "cleanUp", null, 300, false);

@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class boss_loot extends script.base_script
 {
-
+    public boss_loot()
+    {
+    }
     public static final String BLOOD = "object/tangible/loot/dungeon/death_watch_bunker/blood_vial.iff";
     public static final String STABLE = "object/tangible/loot/dungeon/death_watch_bunker/jetpack_stabilizer.iff";
     public int OnIncapacitated(obj_id self, obj_id attacker) throws InterruptedException

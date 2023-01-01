@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class loot_crate extends script.base_script
 {
-
+    public loot_crate()
+    {
+    }
     public static final String COLLECTION_COLUMN = "collections";
     public static final String PLAYER_ACCESS_ID = "player_access_id";
     public static final int lootMin = 0;

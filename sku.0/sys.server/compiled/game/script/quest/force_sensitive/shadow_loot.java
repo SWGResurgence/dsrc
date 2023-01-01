@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class shadow_loot extends script.base_script
 {
-
+    public shadow_loot()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         fs_dyn_village.getRegisteredIntegerFromClusterWideData(fs_dyn_village.CLUSTER_INT_KEY_PHASE_UID, "findCurrentPhase", self);

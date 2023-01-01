@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class emperorsday_yt1300 extends script.systems.spawning.dropship.base
 {
-
+    public emperorsday_yt1300()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleAttachDelay", null, 5.0f, false);

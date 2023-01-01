@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class player_countdown extends script.base_script
 {
-
+    public player_countdown()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, sui.COUNTDOWNTIMER_PLAYER_SCRIPT);

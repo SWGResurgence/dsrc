@@ -10,7 +10,9 @@ import script.string_id;
 
 public class forest_outcast_barker extends script.base_script
 {
-
+    public forest_outcast_barker()
+    {
+    }
     public static final String STF = "ep3/sidequests";
     public static final string_id CONTACT = new string_id(STF, "outcast");
     public int OnAttach(obj_id self) throws InterruptedException

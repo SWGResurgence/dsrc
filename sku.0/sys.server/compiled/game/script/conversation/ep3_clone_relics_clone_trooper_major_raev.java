@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_clone_relics_clone_trooper_major_raev extends script.base_script
 {
-
+    public ep3_clone_relics_clone_trooper_major_raev()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_clone_relics_clone_trooper_major_raev";
     public boolean ep3_clone_relics_clone_trooper_major_raev_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

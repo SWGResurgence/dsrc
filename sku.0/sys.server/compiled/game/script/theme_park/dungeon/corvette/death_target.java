@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class death_target extends script.base_script
 {
-
+    public death_target()
+    {
+    }
     public int OnDeath(obj_id self, obj_id killer, obj_id corpse) throws InterruptedException
     {
         obj_id top = getTopMostContainer(self);

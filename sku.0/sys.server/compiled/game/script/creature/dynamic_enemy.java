@@ -8,7 +8,9 @@ import script.string_id;
 
 public class dynamic_enemy extends script.base_script
 {
-
+    public dynamic_enemy()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "clientEffect", null, 400, true);

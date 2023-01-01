@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class e3_stormtrooper extends script.base_script
 {
-
+    public e3_stormtrooper()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "doFaceTo", null, 5, false);

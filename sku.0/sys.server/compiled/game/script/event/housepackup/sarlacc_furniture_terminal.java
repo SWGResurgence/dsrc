@@ -7,7 +7,9 @@ import java.util.HashSet;
 
 public class sarlacc_furniture_terminal extends script.base_script
 {
-
+    public sarlacc_furniture_terminal()
+    {
+    }
     public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "sarlacc";
     public static final string_id SID_MENU_FEED = new string_id("sarlacc_minigame", "mnu_feed");

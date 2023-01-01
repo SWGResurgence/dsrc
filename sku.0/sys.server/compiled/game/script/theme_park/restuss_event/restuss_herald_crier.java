@@ -7,7 +7,9 @@ import script.string_id;
 
 public class restuss_herald_crier extends script.base_script
 {
-
+    public restuss_herald_crier()
+    {
+    }
     public static final String STF = "restuss_event/stage_one_herald";
     public static final string_id ST_ONE = new string_id(STF, "stormtrooper_01");
     public static final string_id ST_TWO = new string_id(STF, "stormtrooper_02");

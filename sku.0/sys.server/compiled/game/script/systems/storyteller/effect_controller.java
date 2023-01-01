@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class effect_controller extends script.base_script
 {
-
+    public effect_controller()
+    {
+    }
     public static final String invisibleObject = "object/tangible/theme_park/invisible_object.iff";
     public static final String effectControlleScript = "systems.storyteller.effect_controller";
     public int OnAttach(obj_id self) throws InterruptedException

@@ -7,7 +7,9 @@ import script.string_id;
 
 public class buy_back_device extends script.base_script
 {
-
+    public buy_back_device()
+    {
+    }
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         String myTemplate = getTemplateName(self);

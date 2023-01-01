@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class e3_hangar_worker_3 extends script.base_script
 {
-
+    public e3_hangar_worker_3()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "moveToLocationOne", null, 5, false);

@@ -10,7 +10,9 @@ import script.obj_id;
 
 public class rescue_trigger_volume extends script.base_script
 {
-
+    public rescue_trigger_volume()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String TRIGGER_NAME_PREFIX = "rescue_trigger_";
     public static final String TRIGGER = "meatlump_spy_trigger";

@@ -7,7 +7,9 @@ import script.string_id;
 
 public class npc_convo_assassin_mission extends script.systems.missions.base.mission_dynamic_base
 {
-
+    public npc_convo_assassin_mission()
+    {
+    }
     public static final String BASE_CONVO = "missions/assassin_mission_npc_convo";
     public static final String ASSASSIN_MISSION_DEVICE = "object/tangible/mission/assassin_missions_device.iff";
     public static final int DEVICE_LOC_FEE = 119;

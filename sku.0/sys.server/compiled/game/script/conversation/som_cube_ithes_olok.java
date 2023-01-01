@@ -8,7 +8,9 @@ import script.*;
 
 public class som_cube_ithes_olok extends script.base_script
 {
-
+    public som_cube_ithes_olok()
+    {
+    }
     public static String c_stringFile = "conversation/som_cube_ithes_olok";
     public boolean som_cube_ithes_olok_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

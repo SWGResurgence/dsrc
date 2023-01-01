@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class supply_crate extends script.base_script
 {
-
+    public supply_crate()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleCleanUp", null, 300.0f, false);

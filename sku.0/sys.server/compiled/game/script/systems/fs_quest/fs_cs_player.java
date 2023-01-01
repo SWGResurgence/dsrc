@@ -8,7 +8,9 @@ import script.string_id;
 
 public class fs_cs_player extends script.base_script
 {
-
+    public fs_cs_player()
+    {
+    }
     public static final float HELP_SPAWN_TIME_MIN = 180;
     public static final float HELP_SPAWN_TIME_MAX = 300;
     public int OnInitialize(obj_id self) throws InterruptedException

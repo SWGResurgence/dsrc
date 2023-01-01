@@ -9,7 +9,9 @@ import script.string_id;
 
 public class rebel_general_speech_manager extends script.base_script
 {
-
+    public rebel_general_speech_manager()
+    {
+    }
     public static final String STF_GENERAL_CONVO = "restuss_event/rebel_general_speech";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

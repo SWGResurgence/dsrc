@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class skill_test extends script.base_script
 {
-
+    public skill_test()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Skill Test Script Attached");

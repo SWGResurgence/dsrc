@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class effect_token extends script.base_script
 {
-
+    public effect_token()
+    {
+    }
     public static final String EFFECT_CONTROL_SCRIPT = "systems.storyteller.effect_controller";
     public int OnAttach(obj_id self) throws InterruptedException
     {

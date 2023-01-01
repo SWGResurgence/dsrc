@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class nym_arena_referee extends script.base_script
 {
-
+    public nym_arena_referee()
+    {
+    }
     public static String c_stringFile = "conversation/nym_arena_referee";
     public boolean nym_arena_referee_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

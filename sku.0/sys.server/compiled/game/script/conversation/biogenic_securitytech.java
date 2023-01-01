@@ -7,7 +7,9 @@ import script.*;
 
 public class biogenic_securitytech extends script.base_script
 {
-
+    public biogenic_securitytech()
+    {
+    }
     public static String c_stringFile = "conversation/biogenic_securitytech";
     public boolean biogenic_securitytech_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class delivery_no_pickup extends script.space.quest_logic.delivery
 {
-
+    public delivery_no_pickup()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "delivering", 1);

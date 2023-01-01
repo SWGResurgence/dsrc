@@ -10,7 +10,9 @@ import script.string_id;
 
 public class goodbye_path_destroy extends script.base_script
 {
-
+    public goodbye_path_destroy()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String MEATLUMP_LOG = "empire_day_trigger";
     public static final String CLIENT_EFFECT = "appearance/pt_smoke_puff.prt";

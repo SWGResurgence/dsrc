@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class magic_item extends script.base_script
 {
-
+    public magic_item()
+    {
+    }
     public static final float PT_DELTA = 0.15f;
     public static final String TBL_COST = "datatables/magic_item/mod_cost.iff";
     public static final String COL_MAX = "MAX";

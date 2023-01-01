@@ -8,7 +8,9 @@ import script.string_id;
 
 public class comp_room_trigger extends script.base_script
 {
-
+    public comp_room_trigger()
+    {
+    }
     public static final String STF = "terminal_ui";
     public static final string_id ENTER_CODE = new string_id(STF, "security_code_enter");
     public static final string_id DISABLED = new string_id(STF, "security_disabled");

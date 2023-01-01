@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class biolink_item_non_faction extends script.base_script
 {
-
+    public biolink_item_non_faction()
+    {
+    }
     public static final String VAR_TEMP_BASE = "biotemp";
     public static final string_id SID_ITEM_BIO_LINKED = new string_id("base_player", "item_bio_linked");
     public static final string_id SID_MUST_EQUIP_FROM_INVENTORY = new string_id("base_player", "must_equip_from_inventory");

@@ -7,7 +7,9 @@ import script.*;
 
 public class npe_new_jtl_tutorial extends script.base_script
 {
-
+    public npe_new_jtl_tutorial()
+    {
+    }
     public static String c_stringFile = "conversation/npe_new_jtl_tutorial";
     public boolean npe_new_jtl_tutorial_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

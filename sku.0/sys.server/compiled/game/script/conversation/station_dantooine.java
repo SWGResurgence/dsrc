@@ -5,7 +5,9 @@ import script.*;
 
 public class station_dantooine extends script.base_script
 {
-
+    public station_dantooine()
+    {
+    }
     public static String c_stringFile = "conversation/station_dantooine";
     public boolean station_dantooine_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

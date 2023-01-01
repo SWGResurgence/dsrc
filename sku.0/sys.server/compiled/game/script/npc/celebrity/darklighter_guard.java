@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class darklighter_guard extends script.base_script
 {
-
+    public darklighter_guard()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id bicep_l = createObject("object/tangible/wearables/armor/marine/armor_marine_bicep_l.iff", self, "");

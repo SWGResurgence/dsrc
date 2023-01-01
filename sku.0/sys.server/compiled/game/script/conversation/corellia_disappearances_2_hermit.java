@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_disappearances_2_hermit extends script.base_script
 {
-
+    public corellia_disappearances_2_hermit()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_disappearances_2_hermit";
     public boolean corellia_disappearances_2_hermit_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

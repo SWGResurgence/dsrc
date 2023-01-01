@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class terminal_guild_registry extends script.base_script
 {
-
+    public terminal_guild_registry()
+    {
+    }
     public static final string_id SID_GUILD_CREATE = new string_id("guild", "menu_create");
     public static final String STR_GUILD_CREATE_NAME_PROMPT = "@guild:create_name_prompt";
     public static final String STR_GUILD_CREATE_NAME_TITLE = "@guild:create_name_title";

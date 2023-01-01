@@ -8,7 +8,9 @@ import script.string_id;
 
 public class rebel_sympathizer extends script.base_script
 {
-
+    public rebel_sympathizer()
+    {
+    }
     public static final String REBEL_STF = "theme_park/alderaan/act2/rebel_missions";
     public static final String REBEL_SHARED_STF = "theme_park/alderaan/act2/shared_rebel_missions";
     public static final String ENCODED_DEAD_EYE_DISK = "object/tangible/encoded_disk/dead_eye_disk.iff";

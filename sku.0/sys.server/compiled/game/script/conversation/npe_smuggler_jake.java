@@ -8,7 +8,9 @@ import script.*;
 
 public class npe_smuggler_jake extends script.base_script
 {
-
+    public npe_smuggler_jake()
+    {
+    }
     public static String c_stringFile = "conversation/npe_smuggler_jake";
     public boolean npe_smuggler_jake_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

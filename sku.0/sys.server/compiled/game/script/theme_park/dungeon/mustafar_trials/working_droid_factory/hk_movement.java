@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class hk_movement extends script.base_script
 {
-
+    public hk_movement()
+    {
+    }
     public int setRun(obj_id self, dictionary params) throws InterruptedException
     {
         setMovementRun(self);

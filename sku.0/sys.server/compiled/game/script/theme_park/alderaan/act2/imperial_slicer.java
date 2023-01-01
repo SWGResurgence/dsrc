@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class imperial_slicer extends script.base_script
 {
-
+    public imperial_slicer()
+    {
+    }
     public static final String[] TEMPLATE_LIST = 
     {
         "coa2_imperial_slicer_gang",

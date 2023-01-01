@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class mtp_meatlump_king extends script.base_script
 {
-
+    public mtp_meatlump_king()
+    {
+    }
     public static String c_stringFile = "conversation/mtp_meatlump_king";
     public boolean mtp_meatlump_king_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

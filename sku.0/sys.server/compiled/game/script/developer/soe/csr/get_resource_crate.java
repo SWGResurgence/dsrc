@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class get_resource_crate extends script.base_script
 {
-
+    public get_resource_crate()
+    {
+    }
     public static final int MAX_AMOUNT = 100000;
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {

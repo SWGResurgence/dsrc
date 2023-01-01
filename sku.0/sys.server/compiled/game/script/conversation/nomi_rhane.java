@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class nomi_rhane extends script.base_script
 {
-
+    public nomi_rhane()
+    {
+    }
     public static String c_stringFile = "conversation/nomi_rhane";
     public boolean nomi_rhane_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

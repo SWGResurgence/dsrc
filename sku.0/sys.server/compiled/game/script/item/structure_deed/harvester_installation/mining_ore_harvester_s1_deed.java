@@ -4,7 +4,9 @@ import script.*;
 
 public class mining_ore_harvester_s1_deed extends script.base_script
 {
-
+    public mining_ore_harvester_s1_deed()
+    {
+    }
     public static final String VERSION = "v1.00.00";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

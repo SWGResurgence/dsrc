@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class customization_kit extends script.base_script
 {
-
+    public customization_kit()
+    {
+    }
     public static final string_id MNU_COLOR = new string_id("sui", "set_color");
     public static final string_id MNU_COLOR_ONE = new string_id("sui", "color_ship_one");
     public static final string_id MNU_COLOR_TWO = new string_id("sui", "color_ship_two");

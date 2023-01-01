@@ -6,7 +6,9 @@ import script.string_id;
 
 public class naboo_convo extends script.base_script
 {
-
+    public naboo_convo()
+    {
+    }
     public static final String CONVO = "naboo_convo";
     public static final location theed = new location(3355, 6, -5018, "naboo", null);
     public static final location deeja = new location(-2882, 7, 2097, "naboo");

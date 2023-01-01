@@ -5,7 +5,9 @@ import script.*;
 
 public class battlefield_entry_station_neutral extends script.base_script
 {
-
+    public battlefield_entry_station_neutral()
+    {
+    }
     public static String c_stringFile = "conversation/battlefield_entry_station_neutral";
     public boolean battlefield_entry_station_neutral_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

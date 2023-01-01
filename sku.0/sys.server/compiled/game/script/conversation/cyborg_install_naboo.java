@@ -5,7 +5,9 @@ import script.library.*;
 
 public class cyborg_install_naboo extends script.base_script
 {
-
+    public cyborg_install_naboo()
+    {
+    }
     public static String c_stringFile = "conversation/cyborg_install_naboo";
     public boolean cyborg_install_naboo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

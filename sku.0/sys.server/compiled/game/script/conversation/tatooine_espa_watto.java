@@ -5,7 +5,9 @@ import script.*;
 
 public class tatooine_espa_watto extends script.base_script
 {
-
+    public tatooine_espa_watto()
+    {
+    }
     public static String c_stringFile = "conversation/tatooine_espa_watto";
     public boolean tatooine_espa_watto_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

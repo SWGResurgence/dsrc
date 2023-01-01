@@ -7,7 +7,9 @@ import script.string_id;
 
 public class buff_builder_response extends script.base_script
 {
-
+    public buff_builder_response()
+    {
+    }
     public static final String DATATABLE_BUFF_BUILDER = "datatables/buff/buff_builder.iff";
     public static final String SCRIPT_BUFF_BUILDER_RESPONSE = "systems.buff_builder.buff_builder_response";
     public static final String SCRIPT_BUFF_BUILDER_CANCEL = "systems.buff_builder.buff_builder_cancel";

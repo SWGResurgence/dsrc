@@ -13,7 +13,9 @@ import java.util.StringTokenizer;
 
 public class parrot_cage extends script.base_script
 {
-
+    public parrot_cage()
+    {
+    }
     public static final String PARROT_VOLUME = "parrot_trigger_volume";
     public static final float HEARING_RADIUS = 6.0f;
     public static final String VAR_MESSAGE = "spoken_message";

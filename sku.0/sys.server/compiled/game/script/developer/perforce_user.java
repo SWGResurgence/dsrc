@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class perforce_user extends script.base_script
 {
-
+    public perforce_user()
+    {
+    }
 
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {

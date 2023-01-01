@@ -7,7 +7,9 @@ import script.string_id;
 
 public class encoded_disk extends script.base_script
 {
-
+    public encoded_disk()
+    {
+    }
     public static final string_id SID_DECODE = new string_id("treasure_map/treasure_map", "decode");
     public static final string_id SID_SYS_DECODE_SUCCESS = new string_id("treasure_map/treasure_map", "sys_decode_success");
     public static final string_id SID_SYS_INVENTROY_FULL = new string_id("treasure_map/treasure_map", "sys_inventory_full");

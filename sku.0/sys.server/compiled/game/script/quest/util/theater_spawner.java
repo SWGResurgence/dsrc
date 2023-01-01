@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class theater_spawner extends script.base_script
 {
-
+    public theater_spawner()
+    {
+    }
     public static final String VAR_SPAWNER_CURRENT_POPULATION = "quest_spawner.current_pop";
     public static final String VAR_SPAWNED_BY = "quest_spawner.spawned_by";
     public int OnInitialize(obj_id self) throws InterruptedException

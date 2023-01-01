@@ -6,7 +6,9 @@ import script.*;
 
 public class species_innate extends script.base_script
 {
-
+    public species_innate()
+    {
+    }
     public static final String SCRIPT_ME = "player.species_innate";
     public static final string_id SID_NONE = new string_id("innate", "none");
     public static final string_id SID_VALID_INNATE_PARAMS = new string_id("innate", "valid_innate_params");

@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class unique_loot extends script.base_script
 {
-
+    public unique_loot()
+    {
+    }
 
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {

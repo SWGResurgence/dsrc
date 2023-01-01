@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class mde_fixer_one extends script.base_script
 {
-
+    public mde_fixer_one()
+    {
+    }
     public static final boolean LOGGING = false;
     public int OnDestroy(obj_id self) throws InterruptedException
     {

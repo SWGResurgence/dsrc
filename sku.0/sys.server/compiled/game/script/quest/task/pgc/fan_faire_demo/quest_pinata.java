@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class quest_pinata extends script.base_script
 {
-
+    public quest_pinata()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "initializeQuestPinata", null, 2, false);

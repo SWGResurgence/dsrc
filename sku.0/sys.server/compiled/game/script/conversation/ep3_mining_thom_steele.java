@@ -5,7 +5,9 @@ import script.*;
 
 public class ep3_mining_thom_steele extends script.base_script
 {
-
+    public ep3_mining_thom_steele()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_mining_thom_steele";
     public boolean ep3_mining_thom_steele_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

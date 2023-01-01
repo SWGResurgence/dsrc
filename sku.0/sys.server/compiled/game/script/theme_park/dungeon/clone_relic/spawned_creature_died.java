@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class spawned_creature_died extends script.base_script
 {
-
+    public spawned_creature_died()
+    {
+    }
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "respawn_called"))

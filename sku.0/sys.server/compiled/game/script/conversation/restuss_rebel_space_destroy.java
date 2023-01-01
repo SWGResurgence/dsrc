@@ -5,7 +5,9 @@ import script.*;
 
 public class restuss_rebel_space_destroy extends script.base_script
 {
-
+    public restuss_rebel_space_destroy()
+    {
+    }
     public static String c_stringFile = "conversation/restuss_rebel_space_destroy";
     public boolean restuss_rebel_space_destroy_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

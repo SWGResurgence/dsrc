@@ -8,7 +8,9 @@ import script.string_id;
 
 public class tcg_packaged_items extends script.base_script
 {
-
+    public tcg_packaged_items()
+    {
+    }
     public static final String STF_FILE = "npe";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

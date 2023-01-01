@@ -5,7 +5,9 @@ import script.*;
 
 public class exit_terminal extends script.base_script
 {
-
+    public exit_terminal()
+    {
+    }
     public static final String STF = "dungeon/space_dungeon";
     public static final string_id SID_EJECT = new string_id(STF, "hracca_exit");
     public static final string_id SID_EJECT_CONFIRM = new string_id(STF, "hracca_exit_confirm");

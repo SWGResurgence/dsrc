@@ -8,7 +8,9 @@ import script.string_id;
 
 public class rescue_faction_npc_trigger_volume extends script.base_script
 {
-
+    public rescue_faction_npc_trigger_volume()
+    {
+    }
     public static final boolean LOGGING_ON = false;
     public static final String MEATLUMP_LOG = "empire_day_trigger";
     public int OnInitialize(obj_id self) throws InterruptedException

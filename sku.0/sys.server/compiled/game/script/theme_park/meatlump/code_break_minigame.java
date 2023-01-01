@@ -5,7 +5,9 @@ import script.library.*;
 
 public class code_break_minigame extends script.base_script
 {
-
+    public code_break_minigame()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String VAR_PREFIX = "meatlump_code";
     public static final String NONIMPERATIVE_VAR_PREFIX = "meatlump_safe_nonimperative";

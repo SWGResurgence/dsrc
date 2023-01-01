@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class mine_mini_boss extends script.base_script
 {
-
+    public mine_mini_boss()
+    {
+    }
     public static final String TBL_MINE_WAVE = "datatables/dungeon/death_watch/mine_wave.iff";
     public int OnAttach(obj_id self) throws InterruptedException
     {

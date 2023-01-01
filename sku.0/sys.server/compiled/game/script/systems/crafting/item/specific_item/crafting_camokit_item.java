@@ -7,7 +7,9 @@ import script.resource_weight;
 
 public class crafting_camokit_item extends script.systems.crafting.item.crafting_base_station
 {
-
+    public crafting_camokit_item()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

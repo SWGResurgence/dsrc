@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class bounty_probot extends script.systems.missions.base.mission_dynamic_base
 {
-
+    public bounty_probot()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

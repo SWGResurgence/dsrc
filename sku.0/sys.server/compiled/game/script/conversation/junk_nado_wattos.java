@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class junk_nado_wattos extends script.base_script
 {
-
+    public junk_nado_wattos()
+    {
+    }
     public static String c_stringFile = "conversation/junk_nado_wattos";
     public boolean junk_nado_wattos_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

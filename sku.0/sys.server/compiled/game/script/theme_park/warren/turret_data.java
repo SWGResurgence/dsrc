@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class turret_data extends script.base_script
 {
-
+    public turret_data()
+    {
+    }
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

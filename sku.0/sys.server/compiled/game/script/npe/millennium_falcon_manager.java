@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class millennium_falcon_manager extends script.base_script
 {
-    
+    public millennium_falcon_manager()
+    {
+    }
     public static final String STF = "npe/millennium_falcon";
     public int OnAttach(obj_id self) throws InterruptedException
     {

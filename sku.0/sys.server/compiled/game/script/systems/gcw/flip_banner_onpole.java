@@ -11,7 +11,9 @@ import script.transform;
 
 public class flip_banner_onpole extends script.systems.gcw.flip_banner
 {
-
+    public flip_banner_onpole()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkBannerImpulse", null, 1.0f, false);

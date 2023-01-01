@@ -8,7 +8,9 @@ import script.*;
 
 public class npe_brawler_tiasris extends script.base_script
 {
-
+    public npe_brawler_tiasris()
+    {
+    }
     public static String c_stringFile = "conversation/npe_brawler_tiasris";
     public boolean npe_brawler_tiasris_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

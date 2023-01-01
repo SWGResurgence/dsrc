@@ -6,7 +6,9 @@ import script.*;
 
 public class interdiction_data_disk extends script.base_script
 {
-
+    public interdiction_data_disk()
+    {
+    }
     public static final string_id SID_READY_ITEM = new string_id("space/space_terminal", "encode_item");
     public static final String[] VALID_REGIONS = 
     {

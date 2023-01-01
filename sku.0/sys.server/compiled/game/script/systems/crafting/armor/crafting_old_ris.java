@@ -5,7 +5,9 @@ import script.string_id;
 
 public class crafting_old_ris extends script.base_script
 {
-
+    public crafting_old_ris()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final string_id SID_RIS_SCHEMATICS_UPDATED = new string_id("crafting", "ris_schematics_updated");
     public int OnRequestResourceWeights(obj_id self, obj_id player, String[] desiredAttribs, String[] attribs, int[] slots, int[] counts, int[] data) throws InterruptedException

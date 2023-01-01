@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class new_player extends script.base_script
 {
-
+    public new_player()
+    {
+    }
     public static final int PERIODIC_CHECK_DELAY = 30 * 60;
     public static final int PERIODIC_CHECK_CAP = 3 * 60 * 60;
     public static final int ACCOUNT_AGE_CAP = 30;

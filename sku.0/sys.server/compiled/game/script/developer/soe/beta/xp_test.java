@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class xp_test extends script.base_script
 {
-
+    public xp_test()
+    {
+    }
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if ((text.startsWith("grantXP")) || (text.startsWith("revokeXP")))

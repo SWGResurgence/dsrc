@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class patrol_point_setup extends script.base_script
 {
-
+    public patrol_point_setup()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "setPatrolName", null, 1, false);

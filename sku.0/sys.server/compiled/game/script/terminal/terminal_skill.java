@@ -5,7 +5,9 @@ import script.string_id;
 
 public class terminal_skill extends script.terminal.base.terminal_add_use
 {
-
+    public terminal_skill()
+    {
+    }
     public static final String SKILL_TBL = "datatables/skill/skills.iff";
     public static final String SKILL_TERMINAL_TBL = "datatables/skill/skill_terminal.iff";
     public static final string_id SID_TERMINAL_PROMPT = new string_id("skill_teacher", "skill_terminal_prompt");

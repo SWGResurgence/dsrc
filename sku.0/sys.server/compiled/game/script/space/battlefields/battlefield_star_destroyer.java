@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class battlefield_star_destroyer extends script.base_script
 {
-
+    public battlefield_star_destroyer()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         final String[] strPaths = 

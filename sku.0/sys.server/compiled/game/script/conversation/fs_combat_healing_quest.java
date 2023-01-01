@@ -5,7 +5,9 @@ import script.*;
 
 public class fs_combat_healing_quest extends script.base_script
 {
-
+    public fs_combat_healing_quest()
+    {
+    }
     public static String c_stringFile = "conversation/fs_combat_healing_quest";
     public boolean fs_combat_healing_quest_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

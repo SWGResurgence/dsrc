@@ -8,7 +8,9 @@ import script.*;
 
 public class water_treatment extends script.base_script
 {
-    
+    public water_treatment()
+    {
+    }
     public static String c_stringFile = "conversation/water_treatment";
     public boolean water_treatment_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

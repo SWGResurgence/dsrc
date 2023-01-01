@@ -8,7 +8,9 @@ import script.string_id;
 
 public class dance_prop extends script.base_script
 {
-
+    public dance_prop()
+    {
+    }
     public static final string_id SID_NO_PROP_SKILL = new string_id("error_message", "prop_no_prop_skill");
     public static final string_id SID_NO_DUAL_SKILL = new string_id("error_message", "prop_no_dual_skill");
     public static final string_id SID_NOT_IN_COMBAT = new string_id("error_message", "prop_not_in_combat");

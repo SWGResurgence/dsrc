@@ -8,7 +8,9 @@ import script.*;
 
 public class c_talus_grave_robbers_omkoo extends script.base_script
 {
-
+    public c_talus_grave_robbers_omkoo()
+    {
+    }
     public static String c_stringFile = "conversation/c_talus_grave_robbers_omkoo";
     public boolean c_talus_grave_robbers_omkoo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

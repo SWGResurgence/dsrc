@@ -8,7 +8,9 @@ import script.string_id;
 
 public class quest_ragtag_attack_event extends script.base_script
 {
-
+    public quest_ragtag_attack_event()
+    {
+    }
     public static final String OWNER_OBJVAR = "meatlump.owner";
     public static final String COMLINK_OBJVAR = "meatlump.comlink";
     public int OnAttach(obj_id self) throws InterruptedException

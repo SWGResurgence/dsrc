@@ -11,7 +11,9 @@ import script.string_id;
 
 public class legacy_sick extends script.base_script
 {
-
+    public legacy_sick()
+    {
+    }
     public static final String PP_FILE_LOC = "quest/legacy/legacy_sick";
     public static final String RESPONSE_TEXT = "datatables/npc/legacy/legacy_sick.iff";
     public static int INITIAL_DELAY = 10;

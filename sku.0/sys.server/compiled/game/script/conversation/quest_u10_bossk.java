@@ -8,7 +8,9 @@ import script.*;
 
 public class quest_u10_bossk extends script.base_script
 {
-
+    public quest_u10_bossk()
+    {
+    }
     public static String c_stringFile = "conversation/quest_u10_bossk";
     public boolean quest_u10_bossk_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

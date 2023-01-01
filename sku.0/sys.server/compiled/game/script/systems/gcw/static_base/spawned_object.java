@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class spawned_object extends script.base_script
 {
-
+    public spawned_object()
+    {
+    }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         location loc = getLocation(self);

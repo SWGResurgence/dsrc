@@ -5,7 +5,9 @@ import script.*;
 
 public class jedi_watch_dog_datapad extends script.base_script
 {
-
+    public jedi_watch_dog_datapad()
+    {
+    }
     public static final String STF = "som/som_quest";
     public static final string_id LISTEN = new string_id(STF, "jedi_datapad_listen");
     public static final string_id CLICK = new string_id(STF, "jedi_datapad_click");

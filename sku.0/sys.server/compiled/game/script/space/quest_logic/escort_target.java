@@ -5,7 +5,9 @@ import script.library.*;
 
 public class escort_target extends script.base_script
 {
-
+    public escort_target()
+    {
+    }
     public int objectDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id quest = getObjIdObjVar(self, "quest");

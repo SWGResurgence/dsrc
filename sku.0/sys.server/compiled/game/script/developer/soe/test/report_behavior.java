@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class report_behavior extends script.base_script
 {
-
+    public report_behavior()
+    {
+    }
     public void dumpState(obj_id self, String label, int behavior) throws InterruptedException
     {
         if (behavior < 0)

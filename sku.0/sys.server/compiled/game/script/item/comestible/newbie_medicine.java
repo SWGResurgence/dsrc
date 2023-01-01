@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class newbie_medicine extends script.base_script
 {
-
+    public newbie_medicine()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, consumable.VAR_CONSUMABLE_BASE))

@@ -11,7 +11,9 @@ import script.string_id;
 
 public class foraging_enemy extends script.base_script
 {
-
+    public foraging_enemy()
+    {
+    }
     public static final String STRING_PREFIX = "foraging/forage_enemy";
     public static final string_id SID_STEAL_SLOT = new string_id(STRING_PREFIX, "slot_removed");
     public static final String FORAGING_ENEMY_TABLE = "datatables/foraging/forage_enemy.iff";

@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_coronet_daclif_gallamby extends script.base_script
 {
-
+    public corellia_coronet_daclif_gallamby()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_coronet_daclif_gallamby";
     public boolean corellia_coronet_daclif_gallamby_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

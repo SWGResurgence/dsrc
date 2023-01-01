@@ -9,7 +9,9 @@ import script.string_id;
 
 public class disk_loot extends script.base_script
 {
-
+    public disk_loot()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String newLoot = pickNewLoot();

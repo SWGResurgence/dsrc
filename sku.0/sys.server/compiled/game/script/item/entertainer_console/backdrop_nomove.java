@@ -6,7 +6,9 @@ import script.string_id;
 
 public class backdrop_nomove extends script.base_script
 {
-
+    public backdrop_nomove()
+    {
+    }
     public static final string_id MOVED_BACKDROP = new string_id("spam", "backdrop_moved");
     public int OnAttach(obj_id self) throws InterruptedException
     {

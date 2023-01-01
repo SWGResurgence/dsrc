@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class fs_quest_player extends script.base_script
 {
-
+    public fs_quest_player()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, "systems.fs_quest.fs_quest_player");

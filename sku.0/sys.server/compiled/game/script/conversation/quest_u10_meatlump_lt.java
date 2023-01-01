@@ -8,7 +8,9 @@ import script.*;
 
 public class quest_u10_meatlump_lt extends script.base_script
 {
-
+    public quest_u10_meatlump_lt()
+    {
+    }
     public static String c_stringFile = "conversation/quest_u10_meatlump_lt";
     public boolean quest_u10_meatlump_lt_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

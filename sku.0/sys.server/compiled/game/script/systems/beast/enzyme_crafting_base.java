@@ -7,7 +7,9 @@ import script.string_id;
 
 public class enzyme_crafting_base extends script.base_script
 {
-
+    public enzyme_crafting_base()
+    {
+    }
     public static final int ITEM_CENTRIFUGE = 0;
     public static final int ITEM_PROCESSOR = 1;
     public static final int ITEM_COMBINER = 2;

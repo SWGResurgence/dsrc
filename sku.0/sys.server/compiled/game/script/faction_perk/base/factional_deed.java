@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class factional_deed extends script.item.structure_deed.player_structure_deed
 {
-
+    public factional_deed()
+    {
+    }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

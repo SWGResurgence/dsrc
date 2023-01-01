@@ -7,7 +7,9 @@ import script.*;
 
 public class beast_dye extends script.base_script
 {
-
+    public beast_dye()
+    {
+    }
     public static final string_id SID_DYE_BEAST = new string_id("beast", "menu_dye");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class myyydril_player extends script.base_script
 {
-
+    public myyydril_player()
+    {
+    }
     public static final boolean LOGGING = false;
     public int OnLogin(obj_id self) throws InterruptedException
     {

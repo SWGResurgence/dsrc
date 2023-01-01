@@ -7,7 +7,9 @@ import script.string_id;
 
 public class rtp_han_solo_general_otto extends script.base_script
 {
-
+    public rtp_han_solo_general_otto()
+    {
+    }
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id wpn, int[] damage) throws InterruptedException
     {
         final float DAMAGE_THRESHOLD = 0.20f;

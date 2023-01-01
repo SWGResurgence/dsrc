@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class junk_dealer_summon extends script.base_script
 {
-
+    public junk_dealer_summon()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "timeUp", null, 300, true);

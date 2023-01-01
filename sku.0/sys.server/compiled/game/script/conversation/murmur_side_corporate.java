@@ -8,7 +8,9 @@ import script.*;
 
 public class murmur_side_corporate extends script.base_script
 {
-
+    public murmur_side_corporate()
+    {
+    }
     public static String c_stringFile = "conversation/murmur_side_corporate";
     public boolean murmur_side_corporate_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

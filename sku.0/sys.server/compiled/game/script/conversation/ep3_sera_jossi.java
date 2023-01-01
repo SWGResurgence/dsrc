@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_sera_jossi extends script.base_script
 {
-
+    public ep3_sera_jossi()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_sera_jossi";
     public boolean ep3_sera_jossi_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

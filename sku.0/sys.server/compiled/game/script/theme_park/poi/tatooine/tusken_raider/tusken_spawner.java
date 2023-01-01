@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class tusken_spawner extends script.theme_park.poi.base
 {
-
+    public tusken_spawner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "doSpawning", null, 10, true);

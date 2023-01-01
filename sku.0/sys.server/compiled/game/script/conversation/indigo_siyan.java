@@ -6,7 +6,9 @@ import script.*;
 
 public class indigo_siyan extends script.base_script
 {
-
+    public indigo_siyan()
+    {
+    }
     public static String c_stringFile = "conversation/indigo_siyan";
     public boolean indigo_siyan_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,7 +7,9 @@ import script.*;
 
 public class mtp_corsec_intelligence_officer extends script.base_script
 {
-
+    public mtp_corsec_intelligence_officer()
+    {
+    }
     public static String c_stringFile = "conversation/mtp_corsec_intelligence_officer";
     public boolean mtp_corsec_intelligence_officer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

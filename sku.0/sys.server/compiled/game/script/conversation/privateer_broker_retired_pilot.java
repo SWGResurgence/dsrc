@@ -6,7 +6,9 @@ import script.*;
 
 public class privateer_broker_retired_pilot extends script.base_script
 {
-
+    public privateer_broker_retired_pilot()
+    {
+    }
     public static String c_stringFile = "conversation/privateer_broker_retired_pilot";
     public boolean privateer_broker_retired_pilot_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

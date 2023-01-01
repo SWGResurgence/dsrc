@@ -8,7 +8,9 @@ import script.string_id;
 
 public class nervous_guy extends script.theme_park.newbie_tutorial.tutorial_base
 {
-
+    public nervous_guy()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleSpamming", null, rand(30, 60), false);

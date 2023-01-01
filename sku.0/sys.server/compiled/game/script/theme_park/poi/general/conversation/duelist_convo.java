@@ -8,7 +8,9 @@ import script.string_id;
 
 public class duelist_convo extends script.base_script
 {
-
+    public duelist_convo()
+    {
+    }
     public static final String CONVO = "npc_reaction/duelist";
     public int OnAttach(obj_id self) throws InterruptedException
     {

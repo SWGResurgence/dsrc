@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class mission_entertainer extends script.systems.missions.base.mission_dynamic_base
 {
-
+    public mission_entertainer()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

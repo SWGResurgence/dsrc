@@ -8,7 +8,9 @@ import script.*;
 
 public class injured_agent extends script.base_script
 {
-
+    public injured_agent()
+    {
+    }
     public static String c_stringFile = "conversation/injured_agent";
     public boolean injured_agent_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

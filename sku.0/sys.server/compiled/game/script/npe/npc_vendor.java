@@ -7,7 +7,9 @@ import script.string_id;
 
 public class npc_vendor extends script.base_script
 {
-
+    public npc_vendor()
+    {
+    }
     public static final String STF = "npe";
     public int npeHandleBuy(obj_id self, dictionary params) throws InterruptedException
     {

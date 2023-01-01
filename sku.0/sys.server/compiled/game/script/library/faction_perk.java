@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class faction_perk extends script.base_script
 {
-
+    public faction_perk()
+    {
+    }
     public static final String TBL_PREJUDICE = "datatables/faction/prejudice.iff";
     public static final String TBL_PERK_INVENTORY_BASE = "datatables/npc/faction_recruiter/perk_inventory/";
     public static final String VAR_COVERT_DETECTOR = "covert_detector";

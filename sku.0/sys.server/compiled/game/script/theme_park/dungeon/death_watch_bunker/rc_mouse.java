@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class rc_mouse extends script.base_script
 {
-
+    public rc_mouse()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);

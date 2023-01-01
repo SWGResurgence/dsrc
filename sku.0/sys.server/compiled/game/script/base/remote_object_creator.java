@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class remote_object_creator extends script.base.remote_object
 {
-
+    public remote_object_creator()
+    {
+    }
     public void registerForRemoteObjectCreation(obj_id self) throws InterruptedException
     {
         log("registerForRemoteObjectCreation: setting cluster wide data.");

@@ -8,7 +8,9 @@ import script.*;
 
 public class tyrena_lyman_zavala extends script.base_script
 {
-
+    public tyrena_lyman_zavala()
+    {
+    }
     public static String c_stringFile = "conversation/tyrena_lyman_zavala";
     public boolean tyrena_lyman_zavala_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

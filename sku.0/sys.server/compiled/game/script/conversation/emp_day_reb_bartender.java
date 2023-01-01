@@ -5,7 +5,9 @@ import script.*;
 
 public class emp_day_reb_bartender extends script.base_script
 {
-
+    public emp_day_reb_bartender()
+    {
+    }
     public static String c_stringFile = "conversation/emp_day_reb_bartender";
     public boolean emp_day_reb_bartender_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

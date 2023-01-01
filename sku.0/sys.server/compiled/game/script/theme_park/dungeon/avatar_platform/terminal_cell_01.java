@@ -4,7 +4,9 @@ import script.*;
 
 public class terminal_cell_01 extends script.base_script
 {
-
+    public terminal_cell_01()
+    {
+    }
     public static final String STF = "dungeon/avatar_platform";
     public static final string_id UNLOCK_CELL = new string_id(STF, "unlock_cell");
     public static final string_id DESTROY_WKE = new string_id(STF, "destroy_wke");

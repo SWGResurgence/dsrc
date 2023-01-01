@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_38_teilo_monnro extends script.base_script
 {
-
+    public corellia_38_teilo_monnro()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_38_teilo_monnro";
     public boolean corellia_38_teilo_monnro_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -9,7 +9,9 @@ import script.string_id;
 
 public class give_item_to_npc extends script.base_script
 {
-
+    public give_item_to_npc()
+    {
+    }
     public static final String dataTableItemToGive = "ITEM_TO_GIVE";
     public static final string_id noGiveDuringCombat = new string_id("quest/ground/system_message", "no_give_during_combat");
     public int OnGiveItem(obj_id self, obj_id item, obj_id giver) throws InterruptedException

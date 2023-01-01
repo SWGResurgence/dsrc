@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class mtp_instance_controller extends script.base_script
 {
-
+    public mtp_instance_controller()
+    {
+    }
     public int setMtpInstanceCombatLevel(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())

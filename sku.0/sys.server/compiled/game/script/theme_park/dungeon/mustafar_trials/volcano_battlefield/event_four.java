@@ -10,7 +10,9 @@ import script.obj_id;
 
 public class event_four extends script.base_script
 {
-
+    public event_four()
+    {
+    }
     public static final String BOSS = "som_volcano_four_cym_prototype";
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException

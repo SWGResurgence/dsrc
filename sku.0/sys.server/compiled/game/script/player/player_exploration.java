@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class player_exploration extends script.base_script
 {
-
+    public player_exploration()
+    {
+    }
     public int explorerBadge(obj_id self, dictionary params) throws InterruptedException
     {
         String badgeName = "";

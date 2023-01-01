@@ -10,7 +10,9 @@ import script.string_id;
 
 public class pet_test extends script.base_script
 {
-
+    public pet_test()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Pet test ready.");

@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_clone_relics_boba_fett_claw_guard extends script.base_script
 {
-
+    public ep3_clone_relics_boba_fett_claw_guard()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_clone_relics_boba_fett_claw_guard";
     public boolean ep3_clone_relics_boba_fett_claw_guard_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

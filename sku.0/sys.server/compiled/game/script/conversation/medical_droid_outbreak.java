@@ -5,7 +5,9 @@ import script.*;
 
 public class medical_droid_outbreak extends script.base_script
 {
-
+    public medical_droid_outbreak()
+    {
+    }
     public static String c_stringFile = "conversation/medical_droid_outbreak";
     public boolean medical_droid_outbreak_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class lady_valarian extends script.base_script
 {
-
+    public lady_valarian()
+    {
+    }
     public static final String CONVO = "celebrity/lady_valarian";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

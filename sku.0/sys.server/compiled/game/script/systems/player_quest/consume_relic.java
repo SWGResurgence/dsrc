@@ -5,7 +5,9 @@ import script.library.*;
 
 public class consume_relic extends script.base_script
 {
-
+    public consume_relic()
+    {
+    }
     public static final String PID_NAME = "chronicleRelicConsume";
     public static final int RELIC_CONSUME_ONE = menu_info_types.SERVER_MENU11;
     public static final int RELIC_DECONSTRUCT_ONE = menu_info_types.SERVER_MENU12;

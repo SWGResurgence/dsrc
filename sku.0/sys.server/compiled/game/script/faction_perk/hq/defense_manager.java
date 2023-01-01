@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class defense_manager extends script.base_script
 {
-
+    public defense_manager()
+    {
+    }
     private static final float RESOURCE_REPAIR_RATIO = 0.5f;
     public int OnAttach(obj_id self) throws InterruptedException
     {

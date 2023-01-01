@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class camp_controlpanel extends script.base_script
 {
-
+    public camp_controlpanel()
+    {
+    }
     public static final float FIELD_COST_MULTIPLER = 1.15f;
     public static final string_id SID_MNU_DISBAND = new string_id("camp", "mnu_disband");
     public static final string_id SID_MNU_STATUS = new string_id("camp", "mnu_status");

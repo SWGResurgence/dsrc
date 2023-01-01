@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class combat_mine extends script.base_script
 {
-
+    public combat_mine()
+    {
+    }
     public static final String detonateVolName = "landMineDetonationRadius";
     public static final String mineDataTable = "datatables/combat/npc_landmines.iff";
     public static final String flagPlayer = "targetFlag.playerAndPet";

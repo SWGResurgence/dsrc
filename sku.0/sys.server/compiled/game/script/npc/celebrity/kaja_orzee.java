@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class kaja_orzee extends script.base_script
 {
-
+    public kaja_orzee()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Kaja Or'Zee");

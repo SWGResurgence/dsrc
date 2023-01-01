@@ -10,7 +10,9 @@ import script.string_id;
 
 public class generic_raid extends script.base_script
 {
-
+    public generic_raid()
+    {
+    }
     public static final String DATATABLE = "datatables/event/generic_raid/city_data.iff";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

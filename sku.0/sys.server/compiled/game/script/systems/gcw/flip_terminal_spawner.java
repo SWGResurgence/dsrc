@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class flip_terminal_spawner extends script.base_script
 {
-
+    public flip_terminal_spawner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkTerminal", null, 1.0f, false);

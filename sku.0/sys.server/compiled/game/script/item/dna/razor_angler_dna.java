@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class razor_angler_dna extends script.base_script
 {
-
+    public razor_angler_dna()
+    {
+    }
     public static final String RAZOR_ANGLER_DNA_LOOT_ITEM = "item_razor_angler_dna";
     public static final int RAZOR_ANGLER_DNA_LOOT_CHANCE = 5;
 

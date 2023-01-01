@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class droid_battery extends script.base_script
 {
-
+    public droid_battery()
+    {
+    }
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

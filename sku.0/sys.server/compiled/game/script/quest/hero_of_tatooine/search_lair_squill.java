@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class search_lair_squill extends script.base_script
 {
-
+    public search_lair_squill()
+    {
+    }
     public static final string_id SEARCH_ITEM = new string_id("quest/hero_of_tatooine/system_messages", "search");
     public static final string_id ALREADY_SEARCHED_MSG = new string_id("quest/hero_of_tatooine/system_messages", "already_search");
     public static final string_id DEFAULT_RECEIVE_MSG = new string_id("quest/hero_of_tatooine/system_messages", "receive");

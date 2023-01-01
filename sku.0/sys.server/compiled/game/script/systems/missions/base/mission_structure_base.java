@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class mission_structure_base extends script.systems.missions.base.mission_dynamic_base
 {
-
+    public mission_structure_base()
+    {
+    }
     public void addListener(obj_id objListener, obj_id objTarget) throws InterruptedException
     {
         dictionary dctParams = new dictionary();

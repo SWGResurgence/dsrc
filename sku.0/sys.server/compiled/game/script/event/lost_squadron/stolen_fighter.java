@@ -9,7 +9,9 @@ import script.library.utils;
 
 public class stolen_fighter extends script.base_script
 {
-
+    public stolen_fighter()
+    {
+    }
     public static final float LIFESPAN = 60 * 60 * 3;
     public static final float FIFTEEN_MINUTES = 60 * 15;
     public static final String[] THUG = 

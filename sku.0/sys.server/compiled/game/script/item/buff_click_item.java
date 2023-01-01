@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class buff_click_item extends script.base_script
 {
-
+    public buff_click_item()
+    {
+    }
     public static final string_id SID_NOT_YET = new string_id("base_player", "not_yet");
     public static final string_id SID_NOT_LINKED = new string_id("base_player", "not_linked");
     public static final string_id SID_NOT_LINKED_TO_HOLDER = new string_id("base_player", "not_linked_to_holder");

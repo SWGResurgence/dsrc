@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_38_osto_grissom extends script.base_script
 {
-
+    public corellia_38_osto_grissom()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_38_osto_grissom";
     public boolean corellia_38_osto_grissom_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

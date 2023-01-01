@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_basic_ship_repair extends script.systems.crafting.space.repair.crafting_base_ship_repair
 {
-
+    public crafting_basic_ship_repair()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class bh_shields extends script.base_script
 {
-
+    public bh_shields()
+    {
+    }
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         String shield_buff = "bh_shields";

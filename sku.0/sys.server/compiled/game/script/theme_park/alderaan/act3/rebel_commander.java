@@ -10,7 +10,9 @@ import script.region;
 
 public class rebel_commander extends script.base_script
 {
-
+    public rebel_commander()
+    {
+    }
     public static final String COMMANDER_TABLE = "datatables/convo/alderaan/act2/commander_locs.iff";
     public int OnAttach(obj_id self) throws InterruptedException
     {

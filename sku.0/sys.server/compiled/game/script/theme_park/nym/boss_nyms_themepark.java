@@ -8,7 +8,9 @@ import script.string_id;
 
 public class boss_nyms_themepark extends script.base_script
 {
-
+    public boss_nyms_themepark()
+    {
+    }
     public static final int RADIUS = 100;
     public static final int MIN_DIST = 25;
     public static final string_id SID_SYS_TOO_FAR = new string_id("spam", "too_far_from_spawn_point");

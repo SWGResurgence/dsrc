@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class art_crate extends script.base_script
 {
-
+    public art_crate()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Art Crate");

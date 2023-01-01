@@ -6,7 +6,9 @@ import script.*;
 
 public class sample_links extends script.base_script
 {
-
+    public sample_links()
+    {
+    }
     public static String c_stringFile = "conversation/sample_links";
     public boolean sample_links_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -6,7 +6,9 @@ import script.library.chat;
 
 public class racing_keren extends script.base_script
 {
-
+    public racing_keren()
+    {
+    }
     public static String c_stringFile = "conversation/racing_keren";
     public boolean racing_keren_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

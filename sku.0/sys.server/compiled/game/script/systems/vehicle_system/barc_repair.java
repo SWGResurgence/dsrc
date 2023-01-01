@@ -8,7 +8,9 @@ import script.string_id;
 
 public class barc_repair extends script.base_script
 {
-
+    public barc_repair()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDisabled(self) && utils.playerHasItemByTemplate(player, "object/tangible/item/ep3/barc_repair_tool.iff"))

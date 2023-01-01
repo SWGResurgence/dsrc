@@ -5,7 +5,9 @@ import script.string_id;
 
 public class poi_lock extends script.base_script
 {
-
+    public poi_lock()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "lock"))

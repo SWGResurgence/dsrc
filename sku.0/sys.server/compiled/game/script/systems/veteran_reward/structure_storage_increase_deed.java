@@ -5,7 +5,9 @@ import script.library.*;
 
 public class structure_storage_increase_deed extends script.base_script
 {
-
+    public structure_storage_increase_deed()
+    {
+    }
     public static final string_id STORAGE_INCREASE = new string_id(player_structure.STF_FILE, "use_storage_increase_deed");
     public static final string_id SID_STORAGE_INCREASE_TITLE = new string_id(player_structure.STF_FILE, "sui_storage_title");
     public static final string_id SID_STORAGE_INCREASE_PROMPT = new string_id(player_structure.STF_FILE, "sui_storage_prompt");

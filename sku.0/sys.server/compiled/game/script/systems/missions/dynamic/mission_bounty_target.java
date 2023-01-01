@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class mission_bounty_target extends script.systems.missions.base.mission_dynamic_base
 {
-
+    public mission_bounty_target()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id objHunter = getObjIdObjVar(self, "objHunter");

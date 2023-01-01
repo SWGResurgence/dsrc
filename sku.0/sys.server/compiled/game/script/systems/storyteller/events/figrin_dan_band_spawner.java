@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class figrin_dan_band_spawner extends script.base_script
 {
-
+    public figrin_dan_band_spawner()
+    {
+    }
     public static final String DATATABLE_BASE = "datatables/spawning/holiday/";
     public static final String DATATABLE_OBJVAR = "figrinDatatable";
     public int OnInitialize(obj_id self) throws InterruptedException

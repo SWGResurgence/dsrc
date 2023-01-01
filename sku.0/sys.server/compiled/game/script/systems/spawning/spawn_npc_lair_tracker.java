@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class spawn_npc_lair_tracker extends script.base_script
 {
-
+    public spawn_npc_lair_tracker()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

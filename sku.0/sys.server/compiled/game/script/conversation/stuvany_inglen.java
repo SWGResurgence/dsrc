@@ -8,7 +8,9 @@ import script.*;
 
 public class stuvany_inglen extends script.base_script
 {
-
+    public stuvany_inglen()
+    {
+    }
     public static String c_stringFile = "conversation/stuvany_inglen";
     public boolean stuvany_inglen_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

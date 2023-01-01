@@ -10,7 +10,9 @@ import script.string_id;
 
 public class fs_village_wounded extends script.base_script
 {
-
+    public fs_village_wounded()
+    {
+    }
     public static final String PP_FILE_LOC = "quest/force_sensitive/fs_lamentations";
     public static final String RESPONSE_TEXT = "datatables/fs_quests/fs_lamentations.iff";
     public static int INITIAL_DELAY = 10;

@@ -5,7 +5,9 @@ import script.*;
 
 public class ep3_clone_relics_hunter_qakkee extends script.base_script
 {
-
+    public ep3_clone_relics_hunter_qakkee()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_clone_relics_hunter_qakkee";
     public boolean ep3_clone_relics_hunter_qakkee_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

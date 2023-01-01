@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class quest_nav_point extends script.base_script
 {
-
+    public quest_nav_point()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         requestPreloadCompleteTrigger(self);

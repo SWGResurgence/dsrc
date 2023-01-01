@@ -5,7 +5,9 @@ import script.library.*;
 
 public class terminal_structure_vehicle_garage extends script.base_script
 {
-
+    public terminal_structure_vehicle_garage()
+    {
+    }
     public static final String PID_NAME = "garage";
     public static final String SCRIPT_VAR_VCD_LIST = "garage.vcds";
     public static final String SCRIPT_VAR_RESTORING_VEHICLE = "garage.restoring";

@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class key_object extends script.base_script
 {
-
+    public key_object()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         float expirationTime = getFloatObjVar(self, "event.invasion.keyObject.expirationTime");

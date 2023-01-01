@@ -8,7 +8,9 @@ import script.*;
 
 public class tatooine_espa_syndil extends script.base_script
 {
-
+    public tatooine_espa_syndil()
+    {
+    }
     public static String c_stringFile = "conversation/tatooine_espa_syndil";
     public boolean tatooine_espa_syndil_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

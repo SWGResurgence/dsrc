@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class death_watch_foreman extends script.base_script
 {
-
+    public death_watch_foreman()
+    {
+    }
     public static String c_stringFile = "conversation/death_watch_foreman";
     public boolean death_watch_foreman_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class borvos_guard extends script.base_script
 {
-
+    public borvos_guard()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Borvo The Hutt's Guard");

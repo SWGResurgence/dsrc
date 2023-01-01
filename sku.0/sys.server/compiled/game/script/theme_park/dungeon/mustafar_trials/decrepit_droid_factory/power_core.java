@@ -8,7 +8,9 @@ import script.*;
 
 public class power_core extends script.base_script
 {
-
+    public power_core()
+    {
+    }
     public static final String DECREPIT_STF = "mustafar/decrepit_droid_factory";
     public static final string_id SID_ACTIVATE_CORE = new string_id(DECREPIT_STF, "activate_core");
     public static final string_id SID_CORE_ACTIVE = new string_id(DECREPIT_STF, "core_active");

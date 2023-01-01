@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class rebel_emperorsday_vendor extends script.base_script
 {
-
+    public rebel_emperorsday_vendor()
+    {
+    }
     public static String c_stringFile = "conversation/rebel_emperorsday_vendor";
     public boolean rebel_emperorsday_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

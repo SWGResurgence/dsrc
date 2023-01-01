@@ -8,7 +8,9 @@ import script.*;
 
 public class c_bounty_hunter_taibela extends script.base_script
 {
-
+    public c_bounty_hunter_taibela()
+    {
+    }
     public static String c_stringFile = "conversation/c_bounty_hunter_taibela";
     public boolean c_bounty_hunter_taibela_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

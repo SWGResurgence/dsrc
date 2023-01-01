@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_coronet_the_informant extends script.base_script
 {
-
+    public corellia_coronet_the_informant()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_coronet_the_informant";
     public boolean corellia_coronet_the_informant_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

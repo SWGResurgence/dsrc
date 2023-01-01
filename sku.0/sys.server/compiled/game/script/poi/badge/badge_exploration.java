@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class badge_exploration extends script.base_script
 {
-
+    public badge_exploration()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume("badge1", 10.0f, true);

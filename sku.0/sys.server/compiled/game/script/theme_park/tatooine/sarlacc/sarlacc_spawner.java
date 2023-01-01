@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class sarlacc_spawner extends script.base_script
 {
-
+    public sarlacc_spawner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "sarlacc"))

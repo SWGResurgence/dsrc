@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class mtp_instance_rescue_endpoint extends script.base_script
 {
-
+    public mtp_instance_rescue_endpoint()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("mtp_trappedMeatlump", 5.0f, true);

@@ -5,7 +5,9 @@ import script.*;
 
 public class naboo_rebel_tier1_kiizete extends script.base_script
 {
-
+    public naboo_rebel_tier1_kiizete()
+    {
+    }
     public static String c_stringFile = "conversation/naboo_rebel_tier1_kiizete";
     public boolean naboo_rebel_tier1_kiizete_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

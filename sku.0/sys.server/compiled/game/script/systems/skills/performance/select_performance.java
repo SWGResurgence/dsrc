@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class select_performance extends script.base_script
 {
-
+    public select_performance()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, performance.PERFORMANCE_SELECT);

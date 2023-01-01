@@ -5,7 +5,9 @@ import script.library.*;
 
 public class wod_queen_mother extends script.base_script
 {
-
+    public wod_queen_mother()
+    {
+    }
     public static String c_stringFile = "conversation/wod_queen_mother";
     public boolean wod_queen_mother_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

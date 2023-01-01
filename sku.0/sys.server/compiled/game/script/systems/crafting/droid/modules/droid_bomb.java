@@ -7,7 +7,9 @@ import script.library.*;
 
 public class droid_bomb extends script.base_script
 {
-
+    public droid_bomb()
+    {
+    }
     public static final String STF_FILE = "pet/droid_modules";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

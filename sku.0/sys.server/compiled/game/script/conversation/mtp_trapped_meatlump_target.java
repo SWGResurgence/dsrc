@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class mtp_trapped_meatlump_target extends script.base_script
 {
-
+    public mtp_trapped_meatlump_target()
+    {
+    }
     public static String c_stringFile = "conversation/mtp_trapped_meatlump_target";
     public boolean mtp_trapped_meatlump_target_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

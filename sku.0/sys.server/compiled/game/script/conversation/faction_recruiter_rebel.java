@@ -5,7 +5,9 @@ import script.library.*;
 
 public class faction_recruiter_rebel extends script.base_script
 {
-
+    public faction_recruiter_rebel()
+    {
+    }
     public static String c_stringFile = "conversation/faction_recruiter_rebel";
     public boolean faction_recruiter_rebel_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

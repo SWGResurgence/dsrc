@@ -6,7 +6,9 @@ import script.*;
 
 public class gamma_shuttle extends script.base_script
 {
-
+    public gamma_shuttle()
+    {
+    }
     public static final string_id LAUNCH = new string_id("npe", "launch");
     public static final String NPE_STATION = "object/building/general/npe_space_station.iff";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

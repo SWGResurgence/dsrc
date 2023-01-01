@@ -6,7 +6,9 @@ import script.string_id;
 
 public class give_multiple_items_to_supply_npc extends script.base_script
 {
-
+    public give_multiple_items_to_supply_npc()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "holidayTrader";
     public static final string_id noGiveDuringCombat = new string_id("quest/ground/system_message", "no_give_during_combat");

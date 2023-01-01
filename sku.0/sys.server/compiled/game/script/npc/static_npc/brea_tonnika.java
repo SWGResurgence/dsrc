@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class brea_tonnika extends script.base_script
 {
-
+    public brea_tonnika()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id shirt = createObject("object/tangible/wearables/shirt/shirt_s07.iff", self, "");

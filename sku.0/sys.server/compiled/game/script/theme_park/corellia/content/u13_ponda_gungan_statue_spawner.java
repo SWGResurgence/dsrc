@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class u13_ponda_gungan_statue_spawner extends script.base_script
 {
-
+    public u13_ponda_gungan_statue_spawner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (canSpawnByConfigSetting())

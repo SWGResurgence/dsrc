@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class bounty_hunter extends script.base_script
 {
-
+    public bounty_hunter()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

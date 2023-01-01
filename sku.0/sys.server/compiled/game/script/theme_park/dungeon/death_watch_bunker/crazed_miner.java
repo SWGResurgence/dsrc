@@ -10,7 +10,9 @@ import script.string_id;
 
 public class crazed_miner extends script.base_script
 {
-
+    public crazed_miner()
+    {
+    }
     public static final String FACETO_VOLUME_NAME = "faceToTriggerVolume";
     public static final string_id HELP_ME = new string_id("dungeon/death_watch", "help_me");
     public static final string_id RECOVERED_BATTERY = new string_id("dungeon/death_watch", "recovered_battery");

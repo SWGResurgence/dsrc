@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_droid_battery extends script.systems.crafting.item.crafting_base_battery
 {
-
+    public crafting_droid_battery()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

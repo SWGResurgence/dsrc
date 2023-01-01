@@ -7,7 +7,8 @@ import script.library.utils;
 import script.obj_id;
 
 public class emperors_hand_loot extends script.base_script {
-
+	public emperors_hand_loot() {
+	}
 	public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException {
 		obj_id corpseInventory = utils.
 		getInventoryContainer(self);

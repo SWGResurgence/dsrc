@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class junk_dender_theed extends script.base_script
 {
-
+    public junk_dender_theed()
+    {
+    }
     public static String c_stringFile = "conversation/junk_dender_theed";
     public boolean junk_dender_theed_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

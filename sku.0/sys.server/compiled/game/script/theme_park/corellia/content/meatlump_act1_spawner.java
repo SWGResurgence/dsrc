@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class meatlump_act1_spawner extends script.base_script
 {
-
+    public meatlump_act1_spawner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "tempStartUpMarker"))

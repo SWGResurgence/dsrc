@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class association_hall_elevators extends script.base_script
 {
-
+    public association_hall_elevators()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);

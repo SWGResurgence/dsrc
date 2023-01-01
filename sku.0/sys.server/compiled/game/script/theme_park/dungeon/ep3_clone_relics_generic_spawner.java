@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class ep3_clone_relics_generic_spawner extends script.base_script
 {
-
+    public ep3_clone_relics_generic_spawner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String name = getTemplateName(self);

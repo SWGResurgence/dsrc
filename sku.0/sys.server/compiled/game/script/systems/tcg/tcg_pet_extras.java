@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class tcg_pet_extras extends script.base_script
 {
-
+    public tcg_pet_extras()
+    {
+    }
     public static final string_id SID_PICK_UP_EGG = new string_id("tcg", "pick_up_eggs");
     public static final string_id SID_DISCARD_EGG = new string_id("tcg", "discard_eggs");
     public static final string_id SID_WHILE_DEAD = new string_id("spam", "while_dead");

@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class remotedebug_test extends script.base_script
 {
-
+    public remotedebug_test()
+    {
+    }
     public void end(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Testing of RemoteDebug messages has finished");

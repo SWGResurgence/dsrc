@@ -8,7 +8,9 @@ import java.util.HashSet;
 
 public class lifeday_gift_06 extends script.base_script
 {
-
+    public lifeday_gift_06()
+    {
+    }
     private static final string_id CRATE_USED = new string_id("spam", "opened_crate");
     private static final string_id GIVE_AWAY = new string_id("spam", "give_away");
     private static final string_id OUTSIDE = new string_id("spam", "must_be_outside");

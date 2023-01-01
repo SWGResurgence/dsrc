@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class auto_level extends script.base_script
 {
-
+    public auto_level()
+    {
+    }
     public static final String PID_NAME = "autoLevel";
     public static final String OBJVAR_AUTO_LEVEL_TO = "autoLevelTo";
     public static final string_id SID_CONSUME_PROMPT = new string_id("spam", "consume_auto_level_prompt");

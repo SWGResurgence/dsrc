@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class hutt_minion extends script.base_script
 {
-
+    public hutt_minion()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

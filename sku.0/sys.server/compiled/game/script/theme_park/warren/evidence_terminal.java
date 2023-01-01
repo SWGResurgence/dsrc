@@ -6,7 +6,9 @@ import script.*;
 
 public class evidence_terminal extends script.base_script
 {
-
+    public evidence_terminal()
+    {
+    }
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public static final String PASSKEYCODE = "object/intangible/data_item/warren_evidence_0";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException

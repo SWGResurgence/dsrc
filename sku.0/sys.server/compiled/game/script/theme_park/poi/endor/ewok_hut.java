@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class ewok_hut extends script.theme_park.poi.base
 {
-
+    public ewok_hut()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "First POI Test Attached");

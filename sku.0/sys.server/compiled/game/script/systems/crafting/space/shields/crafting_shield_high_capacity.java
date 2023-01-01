@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_shield_high_capacity extends script.systems.crafting.space.shields.crafting_base_shields_component
 {
-
+    public crafting_shield_high_capacity()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

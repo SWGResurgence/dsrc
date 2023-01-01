@@ -5,7 +5,9 @@ import script.library.*;
 
 public class rescue_duty extends script.space.quest_logic.rescue
 {
-
+    public rescue_duty()
+    {
+    }
     public static final string_id SID_RESCUE_REWARD = new string_id("space/quest", "rescue_reward");
     public static final string_id SID_ABANDONED_DUTY = new string_id("space/quest", "destroy_abandoned");
     public int OnAttach(obj_id self) throws InterruptedException

@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class treasure_drum extends script.base_script
 {
-
+    public treasure_drum()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "cleanUpChest", null, 1000, true);

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class poi_tuskenraider_camp3 extends script.theme_park.poi.base
 {
-
+    public poi_tuskenraider_camp3()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String objective = poiGetObjective(self);

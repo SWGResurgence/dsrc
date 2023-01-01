@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class wait_for_signal extends script.base_script
 {
-
+    public wait_for_signal()
+    {
+    }
     public int OnFinishQuestSignal(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newquests", "wait_for_signal - OnFinishQuestSignal()");

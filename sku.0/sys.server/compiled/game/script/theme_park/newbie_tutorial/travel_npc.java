@@ -5,7 +5,9 @@ import script.library.chat;
 
 public class travel_npc extends script.theme_park.newbie_tutorial.tutorial_base
 {
-
+    public travel_npc()
+    {
+    }
     public int handleInitiateDialog(obj_id self, dictionary params) throws InterruptedException
     {
         faceToBehavior(self, getPlayer(self));

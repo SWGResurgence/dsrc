@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class veteran_deprecated extends script.base_script
 {
-
+    public veteran_deprecated()
+    {
+    }
     public static final int UNENTITLED_TIME_LIMIT = 14;
     public static final int MONTHS_PER_MILESTONE = 3;
     public static final int DAYS_PER_MONTH = 30;

@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class retrieve_item_red_explosion extends script.base_script
 {
-
+    public retrieve_item_red_explosion()
+    {
+    }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         location here = getLocation(player);

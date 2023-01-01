@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class fs_force_crystal extends script.base_script
 {
-
+    public fs_force_crystal()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

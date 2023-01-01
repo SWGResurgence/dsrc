@@ -8,7 +8,9 @@ public class stage_one_watcher extends script.base_script
 {
     private boolean evaluating = false;
 
-
+    public stage_one_watcher()
+    {
+    }
     public static final String FACTION_REBEL = "completed_factions.rebel";
     public static final String FACTION_IMPERIAL = "completed_factions.imperial";
     public int OnAttach(obj_id self) throws InterruptedException

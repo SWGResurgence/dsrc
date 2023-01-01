@@ -8,7 +8,9 @@ import script.*;
 
 public class elder_robe_exchange extends script.base_script
 {
-
+    public elder_robe_exchange()
+    {
+    }
     public static String c_stringFile = "conversation/elder_robe_exchange";
     public boolean elder_robe_exchange_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

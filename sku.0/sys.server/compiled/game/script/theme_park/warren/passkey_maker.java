@@ -7,7 +7,9 @@ import script.string_id;
 
 public class passkey_maker extends script.base_script
 {
-
+    public passkey_maker()
+    {
+    }
     public static final String PASSKEYCODE = "object/tangible/mission/quest_item/warren_passkey_s02.iff";
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public int OnInitialize(obj_id self) throws InterruptedException

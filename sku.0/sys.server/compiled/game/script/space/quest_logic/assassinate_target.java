@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class assassinate_target extends script.base_script
 {
-
+    public assassinate_target()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "warpOut", null, 1200.0f, false);

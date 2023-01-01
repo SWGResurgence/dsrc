@@ -1,8 +1,16 @@
 package script.theme_park.dungeon.death_watch_bunker;
 
+import script.dictionary;
+import script.library.group;
+import script.library.utils;
+import script.location;
+import script.obj_id;
+
 public class locked_crafting_room extends script.base_script
 {/*
-
+    public locked_crafting_room()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         permissionsMakePrivate(self);

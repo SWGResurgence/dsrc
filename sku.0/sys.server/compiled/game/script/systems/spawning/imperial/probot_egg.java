@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class probot_egg extends script.base_script
 {
-
+    public probot_egg()
+    {
+    }
     public static final float VOL_SPAWN_RANGE = 80.0f;
     public static final String VOL_SPAWN = "volSpawnProbot";
     public static final float VOL_EFFECT_RANGE = 100.0f;

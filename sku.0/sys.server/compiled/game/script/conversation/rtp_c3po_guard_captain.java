@@ -8,7 +8,9 @@ import script.*;
 
 public class rtp_c3po_guard_captain extends script.base_script
 {
-
+    public rtp_c3po_guard_captain()
+    {
+    }
     public static String c_stringFile = "conversation/rtp_c3po_guard_captain";
     public boolean rtp_c3po_guard_captain_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class stormtrooper_harass_local extends script.theme_park.poi.base
 {
-
+    public stormtrooper_harass_local()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

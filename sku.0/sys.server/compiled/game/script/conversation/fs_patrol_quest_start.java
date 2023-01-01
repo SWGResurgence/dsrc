@@ -5,7 +5,9 @@ import script.*;
 
 public class fs_patrol_quest_start extends script.base_script
 {
-
+    public fs_patrol_quest_start()
+    {
+    }
     public static String c_stringFile = "conversation/fs_patrol_quest_start";
     public boolean fs_patrol_quest_start_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

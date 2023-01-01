@@ -8,7 +8,9 @@ import script.*;
 
 public class delivery_sickle extends script.base_script
 {
-
+    public delivery_sickle()
+    {
+    }
     public static String c_stringFile = "conversation/delivery_sickle";
     public boolean delivery_sickle_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

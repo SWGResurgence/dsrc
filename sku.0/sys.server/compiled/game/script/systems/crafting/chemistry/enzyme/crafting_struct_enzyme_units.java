@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_struct_enzyme_units extends script.systems.crafting.chemistry.enzyme.crafting_base_enzyme_units
 {
-
+    public crafting_struct_enzyme_units()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

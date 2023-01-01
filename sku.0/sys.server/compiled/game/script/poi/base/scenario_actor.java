@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class scenario_actor extends script.theme_park.poi.base
 {
-
+    public scenario_actor()
+    {
+    }
     public static final String SCRIPT_CONVERSE = "npc.converse.npc_converse_menu";
     public int OnAttach(obj_id self) throws InterruptedException
     {

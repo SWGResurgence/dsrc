@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class suin_guard extends script.base_script
 {
-
+    public suin_guard()
+    {
+    }
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         String aspBuff = utils.getStringScriptVar(self, "aspect");

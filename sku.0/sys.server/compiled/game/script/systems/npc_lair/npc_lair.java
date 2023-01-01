@@ -5,7 +5,9 @@ import script.library.*;
 
 public class npc_lair extends script.theme_park.poi.base
 {
-
+    public npc_lair()
+    {
+    }
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final int MAX_ITERATIONS = 5;
     public static final int MIN_NON_DIFFICULTY_CREATURES = 2;

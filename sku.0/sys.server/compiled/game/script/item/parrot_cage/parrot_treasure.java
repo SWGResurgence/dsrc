@@ -8,7 +8,9 @@ import script.string_id;
 
 public class parrot_treasure extends script.base_script
 {
-
+    public parrot_treasure()
+    {
+    }
     public static final int TREASURE_RADIUS = 100;
     public static final String PARROT_TREASURE_SCRIPT = "item.parrot_cage.parrot_treasure";
     public static final String TREASURE_PARTICLE_TEMPLATE = "object/static/particle/particle_magic_sparks.iff";

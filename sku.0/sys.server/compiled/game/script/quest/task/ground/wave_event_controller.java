@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class wave_event_controller extends script.base_script
 {
-
+    public wave_event_controller()
+    {
+    }
     public static final String dataTableWaveEventPrimaryTargetPre = "PRIMARY_TARGET_WAVE_";
     public static final String dataTableWaveEventGuardPre = "GUARDS_SPAWNED_WAVE_";
     public static final String dataTableWaveEventNumGuardsPre = "NUM_GUARDS_WAVE_";

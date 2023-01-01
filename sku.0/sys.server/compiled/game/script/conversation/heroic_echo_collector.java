@@ -8,7 +8,9 @@ import script.*;
 
 public class heroic_echo_collector extends script.base_script
 {
-    
+    public heroic_echo_collector()
+    {
+    }
     public static String c_stringFile = "conversation/heroic_echo_collector";
     public boolean heroic_echo_collector_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

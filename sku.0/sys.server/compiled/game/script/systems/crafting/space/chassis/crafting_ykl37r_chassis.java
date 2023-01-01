@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_ykl37r_chassis extends script.systems.crafting.space.chassis.crafting_base_ykl37r_chassis
 {
-
+    public crafting_ykl37r_chassis()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

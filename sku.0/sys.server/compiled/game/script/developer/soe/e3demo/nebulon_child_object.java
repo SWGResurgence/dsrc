@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class nebulon_child_object extends script.base_script
 {
-
+    public nebulon_child_object()
+    {
+    }
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "intReset"))

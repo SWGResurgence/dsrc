@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_coronet_gallura_handerin extends script.base_script
 {
-
+    public corellia_coronet_gallura_handerin()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_coronet_gallura_handerin";
     public boolean corellia_coronet_gallura_handerin_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class holographic_backup extends script.base_script
 {
-
+    public holographic_backup()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id master = getMaster(self);

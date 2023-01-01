@@ -5,7 +5,9 @@ import script.*;
 
 public class corvette_bronell_neutral_assassin extends script.base_script
 {
-
+    public corvette_bronell_neutral_assassin()
+    {
+    }
     public static String c_stringFile = "conversation/corvette_bronell_neutral_assassin";
     public boolean corvette_bronell_neutral_assassin_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

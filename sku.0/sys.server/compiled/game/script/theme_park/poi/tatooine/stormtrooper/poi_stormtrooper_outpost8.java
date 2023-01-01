@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class poi_stormtrooper_outpost8 extends script.theme_park.poi.base
 {
-
+    public poi_stormtrooper_outpost8()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String objective = poiGetObjective(self);

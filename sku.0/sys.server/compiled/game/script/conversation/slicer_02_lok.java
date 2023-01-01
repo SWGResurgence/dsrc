@@ -8,7 +8,9 @@ import script.*;
 
 public class slicer_02_lok extends script.base_script
 {
-
+    public slicer_02_lok()
+    {
+    }
     public static String c_stringFile = "conversation/slicer_02_lok";
     public boolean slicer_02_lok_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

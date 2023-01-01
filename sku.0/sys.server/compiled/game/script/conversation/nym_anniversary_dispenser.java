@@ -8,7 +8,9 @@ import script.*;
 
 public class nym_anniversary_dispenser extends script.base_script
 {
-
+    public nym_anniversary_dispenser()
+    {
+    }
     public static String c_stringFile = "conversation/nym_anniversary_dispenser";
     public boolean nym_anniversary_dispenser_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

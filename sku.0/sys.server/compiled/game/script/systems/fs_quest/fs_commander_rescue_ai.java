@@ -8,7 +8,9 @@ import script.string_id;
 
 public class fs_commander_rescue_ai extends script.base_script
 {
-
+    public fs_commander_rescue_ai()
+    {
+    }
     public static final float MAX_LIFE_TIME = 300;
     public static final float MIN_SPOUT_OFF = 20;
     public static final float MAX_SPOUT_OFF = 60;

@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_medpack_cure_poison_chemistry extends script.systems.crafting.chemistry.crafting_base_cure_chemical
 {
-
+    public crafting_medpack_cure_poison_chemistry()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

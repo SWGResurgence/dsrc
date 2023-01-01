@@ -5,7 +5,9 @@ import script.*;
 
 public class greeter_kadaara_imperial_officer extends script.base_script
 {
-
+    public greeter_kadaara_imperial_officer()
+    {
+    }
     public static String c_stringFile = "conversation/greeter_kadaara_imperial_officer";
     public boolean greeter_kadaara_imperial_officer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

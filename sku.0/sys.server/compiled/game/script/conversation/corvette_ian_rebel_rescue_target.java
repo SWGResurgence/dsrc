@@ -8,7 +8,9 @@ import script.*;
 
 public class corvette_ian_rebel_rescue_target extends script.base_script
 {
-
+    public corvette_ian_rebel_rescue_target()
+    {
+    }
     public static String c_stringFile = "conversation/corvette_ian_rebel_rescue_target";
     public boolean corvette_ian_rebel_rescue_target_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

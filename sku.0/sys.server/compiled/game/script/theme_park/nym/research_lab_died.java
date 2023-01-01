@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class research_lab_died extends script.base_script
 {
-
+    public research_lab_died()
+    {
+    }
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id mom = getObjIdObjVar(self, "mom");

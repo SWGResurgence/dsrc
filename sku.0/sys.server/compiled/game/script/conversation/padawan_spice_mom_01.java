@@ -8,7 +8,9 @@ import script.*;
 
 public class padawan_spice_mom_01 extends script.base_script
 {
-
+    public padawan_spice_mom_01()
+    {
+    }
     public static String c_stringFile = "conversation/padawan_spice_mom_01";
     public boolean padawan_spice_mom_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

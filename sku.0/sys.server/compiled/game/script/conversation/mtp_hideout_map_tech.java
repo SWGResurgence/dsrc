@@ -5,7 +5,9 @@ import script.*;
 
 public class mtp_hideout_map_tech extends script.base_script
 {
-
+    public mtp_hideout_map_tech()
+    {
+    }
     public static String c_stringFile = "conversation/mtp_hideout_map_tech";
     public boolean mtp_hideout_map_tech_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

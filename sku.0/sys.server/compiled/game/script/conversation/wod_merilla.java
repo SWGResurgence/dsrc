@@ -22,7 +22,11 @@ import script.*;
 
 public class wod_merilla extends script.base_script
 {
+	public wod_merilla()
 
+	{
+
+	}
 
 // ======================================================================
 // Script Constants

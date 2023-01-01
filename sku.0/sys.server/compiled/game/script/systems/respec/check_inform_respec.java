@@ -6,7 +6,9 @@ import script.string_id;
 
 public class check_inform_respec extends script.base_script
 {
-
+    public check_inform_respec()
+    {
+    }
     public static final string_id POPUP_RESPEC_HAS_TOKEN_PROMPT = new string_id("ui_respec", "server_inform_respec_token");
     public static final string_id POPUP_RESPEC_AUTHORIZED_PROMPT = new string_id("ui_respec", "server_inform_respec_authorized");
     public static final string_id POPUP_RESPEC_AUTHORIZED_NO_COUNT_PROMPT = new string_id("ui_respec", "server_inform_respec_authorized_no_count");

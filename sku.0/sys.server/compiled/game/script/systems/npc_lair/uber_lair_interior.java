@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class uber_lair_interior extends script.base_script
 {
-
+    public uber_lair_interior()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnStuff", null, 20, false);

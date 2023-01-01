@@ -9,7 +9,9 @@ import script.string_id;
 
 public class old_republic_facility_launcher extends script.base_script
 {
-
+    public old_republic_facility_launcher()
+    {
+    }
     public static final string_id SID_UNABLE_TO_FIND_DUNGEON = new string_id("dungeon/space_dungeon", "unable_to_find_dungeon");
     public static final string_id SID_NO_TICKET = new string_id("dungeon/space_dungeon", "no_ticket");
     public static final string_id SID_REQUEST_TRAVEL = new string_id("dungeon/space_dungeon", "request_travel");

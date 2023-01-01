@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class thicks_test extends script.base_script
 {
-
+    public thicks_test()
+    {
+    }
     public static String[] OPTIONS = 
     {
         "listScripts",

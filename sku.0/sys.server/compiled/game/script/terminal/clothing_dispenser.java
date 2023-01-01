@@ -5,7 +5,9 @@ import script.*;
 
 public class clothing_dispenser extends script.base_script
 {
-    
+    public clothing_dispenser()
+    {
+    }
     public static final String DATATABLE_INVENTORY = "datatables/dispenser/clothing.iff";
     public static final String SCRIPT_DISPENSER_SELECT = "player.player_dispenser";
     public static final string_id SID_PURCHASE_CLOTHING = new string_id("dispenser", "purchase_clothing");

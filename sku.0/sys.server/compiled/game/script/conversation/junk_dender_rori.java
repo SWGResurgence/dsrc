@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class junk_dender_rori extends script.base_script
 {
-
+    public junk_dender_rori()
+    {
+    }
     public static String c_stringFile = "conversation/junk_dender_rori";
     public boolean junk_dender_rori_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

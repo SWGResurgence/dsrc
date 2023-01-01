@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class legacy_wattofight_timeout extends script.base_script
 {
-
+    public legacy_wattofight_timeout()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "msgCheckCombat", null, 30, false);

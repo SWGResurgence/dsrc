@@ -8,7 +8,9 @@ import script.*;
 
 public class npe_profession_entertainer_officer extends script.base_script
 {
-
+    public npe_profession_entertainer_officer()
+    {
+    }
     public static String c_stringFile = "conversation/npe_profession_entertainer_officer";
     public boolean npe_profession_entertainer_officer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

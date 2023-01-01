@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class blackwing_canister_destroy extends script.base_script
 {
-
+    public blackwing_canister_destroy()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("outbreak_themepark", "blackwing_canister_destroy.OnAttach() Canister (" + self + ") has the proper script");

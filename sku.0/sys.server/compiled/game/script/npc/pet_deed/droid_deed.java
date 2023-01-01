@@ -5,7 +5,9 @@ import script.library.*;
 
 public class droid_deed extends script.base_script
 {
-
+    public droid_deed()
+    {
+    }
     public static final String MENU_FILE = "pet/pet_menu";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

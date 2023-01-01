@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class kusak_nyms_themepark extends script.base_script
 {
-
+    public kusak_nyms_themepark()
+    {
+    }
     public static final int RADIUS = 100;
     public static final int MIN_DIST = 25;
     public static final String DISTANCE_CHECK = "distance_check";

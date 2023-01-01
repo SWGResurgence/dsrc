@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class pvp_aura_buff_controller extends script.base_script
 {
-
+    public pvp_aura_buff_controller()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (factions.isRebel(self))

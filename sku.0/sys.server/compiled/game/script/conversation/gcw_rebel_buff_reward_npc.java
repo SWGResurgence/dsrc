@@ -8,7 +8,9 @@ import script.*;
 
 public class gcw_rebel_buff_reward_npc extends script.base_script
 {
-
+    public gcw_rebel_buff_reward_npc()
+    {
+    }
     public static String c_stringFile = "conversation/gcw_rebel_buff_reward_npc";
     public boolean gcw_rebel_buff_reward_npc_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

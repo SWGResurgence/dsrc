@@ -8,7 +8,9 @@ import script.*;
 
 public class npe_force_sensitive extends script.base_script
 {
-
+    public npe_force_sensitive()
+    {
+    }
     public static String c_stringFile = "conversation/npe_force_sensitive";
     public boolean npe_force_sensitive_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

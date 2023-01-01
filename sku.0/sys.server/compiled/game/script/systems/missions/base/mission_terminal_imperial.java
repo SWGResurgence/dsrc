@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class mission_terminal_imperial extends script.base_script
 {
-
+    public mission_terminal_imperial()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "strFaction", factions.FACTION_IMPERIAL);

@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class mine_disarm_kit extends script.base_script
 {
-
+    public mine_disarm_kit()
+    {
+    }
     public static final string_id SID_CANNOT_USE_YET = new string_id("faction/faction_hq/faction_hq_response", "mine_disarm_cannot_use_yet");
     public static final string_id SID_FOUND_NO_MINES = new string_id("faction/faction_hq/faction_hq_response", "mine_disarm_found_no_mines");
     public static final string_id SID_FRIENDLY_MINEFIELD = new string_id("faction/faction_hq/faction_hq_response", "mine_disarm_friendly_minefield");

@@ -5,7 +5,9 @@ import script.*;
 
 public class trial_foreman_koseyet extends script.base_script
 {
-
+    public trial_foreman_koseyet()
+    {
+    }
     public static String c_stringFile = "conversation/trial_foreman_koseyet";
     public boolean trial_foreman_koseyet_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

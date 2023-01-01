@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class barn_structure extends script.base_script
 {
-
+    public barn_structure()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         checkStructureForRanchHandScript(self);

@@ -8,7 +8,9 @@ import script.string_id;
 
 public class combat_space_loot extends script.base_script
 {
-
+    public combat_space_loot()
+    {
+    }
     public static final string_id SID_NO_PERMISSION_OPEN = new string_id("space/space_loot", "no_permission_open");
     public int OnAttach(obj_id self) throws InterruptedException
     {

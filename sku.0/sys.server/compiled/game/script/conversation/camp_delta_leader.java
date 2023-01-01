@@ -8,7 +8,9 @@ import script.*;
 
 public class camp_delta_leader extends script.base_script
 {
-
+    public camp_delta_leader()
+    {
+    }
     public static String c_stringFile = "conversation/camp_delta_leader";
     public boolean camp_delta_leader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

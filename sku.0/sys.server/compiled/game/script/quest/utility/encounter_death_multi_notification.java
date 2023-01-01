@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class encounter_death_multi_notification extends script.base_script
 {
-
+    public encounter_death_multi_notification()
+    {
+    }
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         String objvarName = "quest.owner";

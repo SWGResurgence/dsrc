@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_awing_chassis extends script.systems.crafting.space.chassis.crafting_base_awing_chassis
 {
-
+    public crafting_awing_chassis()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

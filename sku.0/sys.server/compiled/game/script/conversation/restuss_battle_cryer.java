@@ -7,7 +7,9 @@ import script.*;
 
 public class restuss_battle_cryer extends script.base_script
 {
-
+    public restuss_battle_cryer()
+    {
+    }
     public static String c_stringFile = "conversation/restuss_battle_cryer";
     public boolean restuss_battle_cryer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

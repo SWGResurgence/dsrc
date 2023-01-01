@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class pvp_region_bonus_controller extends script.base_script
 {
-
+    public pvp_region_bonus_controller()
+    {
+    }
     public static final float CYCLE_HEARTBEAT = 30.0f;
     public static final float CYCLE_MAX_RUN = 600.0f;
     public static final String PVP_AREA_RECORD = "gcw_pvp_region.activity_list";

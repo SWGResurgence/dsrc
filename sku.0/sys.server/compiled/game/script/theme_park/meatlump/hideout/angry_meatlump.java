@@ -8,7 +8,9 @@ import script.string_id;
 
 public class angry_meatlump extends script.base_script
 {
-
+    public angry_meatlump()
+    {
+    }
     public static final String ANGRY_MEATLUMP_DATATABLE = "datatables/theme_park/meatlump/angry_meatlump.iff";
     public static final String EMOTES_COLUMN = "requiredEmote";
     public static final String HINTS_COLUMN = "hintString";

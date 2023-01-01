@@ -8,7 +8,9 @@ import java.util.Enumeration;
 
 public class target_creature_deed extends script.base_script
 {
-
+    public target_creature_deed()
+    {
+    }
     public static final int PERIODIC_PURGE_CHECK = 600;
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class som_lava_beetle_explosion_script extends script.base_script
 {
-
+    public som_lava_beetle_explosion_script()
+    {
+    }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         int explodeRoll = rand(1, 100);

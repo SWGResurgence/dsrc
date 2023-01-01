@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_tyrena_kyran_silene extends script.base_script
 {
-
+    public corellia_tyrena_kyran_silene()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_tyrena_kyran_silene";
     public boolean corellia_tyrena_kyran_silene_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

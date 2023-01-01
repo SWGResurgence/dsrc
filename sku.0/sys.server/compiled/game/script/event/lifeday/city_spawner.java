@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class city_spawner extends script.base_script
 {
-
+    public city_spawner()
+    {
+    }
     private static final int[][] startLocations =
     {
         {131,52,-5384},

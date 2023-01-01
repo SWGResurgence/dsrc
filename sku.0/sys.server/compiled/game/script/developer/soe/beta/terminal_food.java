@@ -6,7 +6,9 @@ import script.string_id;
 
 public class terminal_food extends script.terminal.base.terminal_add_use
 {
-
+    public terminal_food()
+    {
+    }
     public static final string_id SID_ORDER_FOOD = new string_id("sui", "order_food");
     public static final String[] TEMPLATES = 
     {

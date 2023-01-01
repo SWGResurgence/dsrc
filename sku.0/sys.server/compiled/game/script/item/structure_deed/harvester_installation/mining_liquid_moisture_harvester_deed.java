@@ -4,7 +4,9 @@ import script.*;
 
 public class mining_liquid_moisture_harvester_deed extends script.base_script
 {
-
+    public mining_liquid_moisture_harvester_deed()
+    {
+    }
     public static final String VERSION = "v1.00.00";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

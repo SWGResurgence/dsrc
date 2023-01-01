@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class e3_ship_nodamage extends script.base_script
 {
-
+    public e3_ship_nodamage()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setAnimationMood(self, "npc_imperial");

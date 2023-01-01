@@ -5,7 +5,9 @@ import script.*;
 
 public class ep3_rryatt_krepauk extends script.base_script
 {
-
+    public ep3_rryatt_krepauk()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_rryatt_krepauk";
     public boolean ep3_rryatt_krepauk_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

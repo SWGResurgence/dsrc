@@ -7,7 +7,9 @@ import script.*;
 
 public class jedi_robe_collection_giver extends script.base_script
 {
-
+    public jedi_robe_collection_giver()
+    {
+    }
     public static String c_stringFile = "conversation/jedi_robe_collection_giver";
     public boolean jedi_robe_collection_giver_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,7 +5,9 @@ import script.*;
 
 public class tatooine_eisley_gendra extends script.base_script
 {
-
+    public tatooine_eisley_gendra()
+    {
+    }
     public static String c_stringFile = "conversation/tatooine_eisley_gendra";
     public boolean tatooine_eisley_gendra_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

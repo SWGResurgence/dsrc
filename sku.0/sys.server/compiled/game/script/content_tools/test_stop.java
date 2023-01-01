@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class test_stop extends script.base_script
 {
-
+    public test_stop()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

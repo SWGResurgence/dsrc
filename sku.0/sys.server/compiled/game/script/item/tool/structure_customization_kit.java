@@ -5,7 +5,9 @@ import script.library.*;
 
 public class structure_customization_kit extends script.base_script
 {
-
+    public structure_customization_kit()
+    {
+    }
     public static final boolean BLOGGING_ON = true;
     public static final String BLOGGING_CATEGORY = "structure_recolor";
     public static final int OBJECT_COLOR_MAX = 4;

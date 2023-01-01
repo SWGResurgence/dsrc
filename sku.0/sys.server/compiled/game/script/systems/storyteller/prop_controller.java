@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class prop_controller extends script.base_script
 {
-
+    public prop_controller()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "storytellerCreationTime", getGameTime());

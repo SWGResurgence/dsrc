@@ -5,7 +5,9 @@ import script.*;
 
 public class ep3_disabled_transport_alpha extends script.base_script
 {
-
+    public ep3_disabled_transport_alpha()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_disabled_transport_alpha";
     public boolean ep3_disabled_transport_alpha_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,7 +8,9 @@ import java.time.LocalTime;
 
 public class planet_event_handler extends script.base_script
 {
-
+    public planet_event_handler()
+    {
+    }
     private static final String EVENT_TIMESTAMP = "lifeday.time_stamp";
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class cloning_tube extends script.base_script
 {
-
+    public cloning_tube()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeCloningTube", null, 3.0f, false);

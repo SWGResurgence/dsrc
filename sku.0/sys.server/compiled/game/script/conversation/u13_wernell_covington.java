@@ -8,7 +8,9 @@ import script.*;
 
 public class u13_wernell_covington extends script.base_script
 {
-
+    public u13_wernell_covington()
+    {
+    }
     public static String c_stringFile = "conversation/u13_wernell_covington";
     public boolean u13_wernell_covington_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

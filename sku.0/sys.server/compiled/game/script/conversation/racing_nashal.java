@@ -6,7 +6,9 @@ import script.library.chat;
 
 public class racing_nashal extends script.base_script
 {
-
+    public racing_nashal()
+    {
+    }
     public static String c_stringFile = "conversation/racing_nashal";
     public boolean racing_nashal_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

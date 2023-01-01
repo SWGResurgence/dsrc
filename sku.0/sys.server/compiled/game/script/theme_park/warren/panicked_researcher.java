@@ -7,7 +7,9 @@ import script.*;
 
 public class panicked_researcher extends script.base_script
 {
-
+    public panicked_researcher()
+    {
+    }
     public static final String CONVO_FILE = "theme_park/warren/warren";
     public static final String SYSTEM_MESSAGES = "theme_park/warren/warren_system_messages";
     public int OnAttach(obj_id self) throws InterruptedException

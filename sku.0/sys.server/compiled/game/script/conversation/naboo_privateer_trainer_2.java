@@ -5,7 +5,9 @@ import script.*;
 
 public class naboo_privateer_trainer_2 extends script.base_script
 {
-
+    public naboo_privateer_trainer_2()
+    {
+    }
     public static String c_stringFile = "conversation/naboo_privateer_trainer_2";
     public boolean naboo_privateer_trainer_2_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

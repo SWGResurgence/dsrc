@@ -8,7 +8,9 @@ import script.obj_var_list;
 
 public class talk_to_npc extends script.quest.task.ground.base_task
 {
-
+    public talk_to_npc()
+    {
+    }
     public static final String dataTableColumnExperienceType = "NPC_NAME";
     public static final String taskType = "talk_to_npc";
     public static final String dot = ".";

@@ -10,7 +10,9 @@ import script.string_id;
 
 public class droid_command extends script.base_script
 {
-
+    public droid_command()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "programSize"))

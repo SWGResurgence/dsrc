@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class event_promoter extends script.base_script
 {
-
+    public event_promoter()
+    {
+    }
     public static String c_stringFile = "conversation/event_promoter";
     public boolean event_promoter_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

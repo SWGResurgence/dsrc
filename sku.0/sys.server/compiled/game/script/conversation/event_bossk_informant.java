@@ -5,7 +5,9 @@ import script.*;
 
 public class event_bossk_informant extends script.base_script
 {
-
+    public event_bossk_informant()
+    {
+    }
     public static String c_stringFile = "conversation/event_bossk_informant";
     public boolean event_bossk_informant_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

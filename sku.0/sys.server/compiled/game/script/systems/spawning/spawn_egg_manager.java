@@ -5,7 +5,9 @@ import script.*;
 
 public class spawn_egg_manager extends script.base_script
 {
-
+    public spawn_egg_manager()
+    {
+    }
     public static final string_id SID_MUST_BE_IN_CITY = new string_id("city/city", "must_be_in_city");
     public int OnInitialize(obj_id self) throws InterruptedException
     {

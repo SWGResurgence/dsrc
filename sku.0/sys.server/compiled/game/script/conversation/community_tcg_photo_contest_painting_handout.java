@@ -8,7 +8,9 @@ import script.*;
 
 public class community_tcg_photo_contest_painting_handout extends script.base_script
 {
-
+    public community_tcg_photo_contest_painting_handout()
+    {
+    }
     public static String c_stringFile = "conversation/community_tcg_photo_contest_painting_handout";
     public boolean community_tcg_photo_contest_painting_handout_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

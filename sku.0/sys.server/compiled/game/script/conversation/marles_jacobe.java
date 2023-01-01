@@ -7,7 +7,9 @@ import script.*;
 
 public class marles_jacobe extends script.base_script
 {
-
+    public marles_jacobe()
+    {
+    }
     public static String c_stringFile = "conversation/marles_jacobe";
     public boolean marles_jacobe_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -6,7 +6,9 @@ import script.*;
 
 public class static_quests_record_keeper_tatooine extends script.base_script
 {
-
+    public static_quests_record_keeper_tatooine()
+    {
+    }
     public static String c_stringFile = "conversation/static_quests_record_keeper_tatooine";
     public boolean static_quests_record_keeper_tatooine_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

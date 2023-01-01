@@ -15,7 +15,9 @@ import script.string_id;
 
 public class tracking_tool extends script.base_script
 {
-
+    public tracking_tool()
+    {
+    }
 
     public static int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

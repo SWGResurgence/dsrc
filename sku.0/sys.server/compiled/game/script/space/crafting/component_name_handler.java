@@ -9,7 +9,9 @@ import script.string_id;
 
 public class component_name_handler extends script.base_script
 {
-
+    public component_name_handler()
+    {
+    }
     public int handleComponentNameSui(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);

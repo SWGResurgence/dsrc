@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class som_mustafar_junk_dealer extends script.base_script
 {
-
+    public som_mustafar_junk_dealer()
+    {
+    }
     public static String c_stringFile = "conversation/som_mustafar_junk_dealer";
     public boolean som_mustafar_junk_dealer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

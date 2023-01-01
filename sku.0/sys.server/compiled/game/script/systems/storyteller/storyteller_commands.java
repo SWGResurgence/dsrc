@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class storyteller_commands extends script.base_script
 {
-
+    public storyteller_commands()
+    {
+    }
     public static final string_id SID_STORYTELLER_HELP = new string_id("storyteller", "storyteller_help");
     public static final string_id SID_STORYTELLER_TITLE = new string_id("storyteller", "storyteller_title");
     public static final string_id SID_STORYTELLER_MENU_CMDS = new string_id("storyteller", "storyteller_menu_commands");

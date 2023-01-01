@@ -8,7 +8,9 @@ import script.*;
 
 public class tatooine_eisley_aigorn extends script.base_script
 {
-
+    public tatooine_eisley_aigorn()
+    {
+    }
     public static String c_stringFile = "conversation/tatooine_eisley_aigorn";
     public boolean tatooine_eisley_aigorn_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class default_interface extends script.terminal.base.base_terminal
 {
-
+    public default_interface()
+    {
+    }
     private static final float BET_RANGE = 15.0f;
     private static final string_id MNU_JOIN = new string_id(gambling.STF_INTERFACE, "mnu_join");
     private static final string_id MNU_LEAVE = new string_id(gambling.STF_INTERFACE, "mnu_leave");

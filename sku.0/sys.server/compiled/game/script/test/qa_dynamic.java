@@ -11,7 +11,9 @@ import java.util.Arrays;
 
 public class qa_dynamic extends script.base_script
 {
-
+    public qa_dynamic()
+    {
+    }
     public static final String SCRIPTVAR = "qadynamic";
     public static final String DYNAMIC_DESCRIPTION = "This tool allows a tester to spawn armor, clothing and weapons based on a selected level.  The items spawned resemble what a player would find on a mob in-game as random loot.";
     public static final String[] DATA_SOURCE_MENU_LIST = 

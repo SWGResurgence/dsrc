@@ -11,7 +11,9 @@ import java.util.Vector;
 
 public class dance_module extends script.base_script
 {
-
+    public dance_module()
+    {
+    }
     public static final String STF_FILE = "pet/droid_modules";
     public static final String PROMPT = "@pet/droid_modules:dance_prompt";
     public static final String TITLE = "@pet/droid_modules:dance_title";

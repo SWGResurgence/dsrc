@@ -5,7 +5,9 @@ import script.*;
 
 public class corellia_privateer_trainer extends script.base_script
 {
-
+    public corellia_privateer_trainer()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_privateer_trainer";
     public boolean corellia_privateer_trainer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

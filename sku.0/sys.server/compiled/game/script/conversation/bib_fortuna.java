@@ -8,7 +8,9 @@ import script.*;
 
 public class bib_fortuna extends script.base_script
 {
-
+    public bib_fortuna()
+    {
+    }
     public static String c_stringFile = "conversation/bib_fortuna";
     public boolean bib_fortuna_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

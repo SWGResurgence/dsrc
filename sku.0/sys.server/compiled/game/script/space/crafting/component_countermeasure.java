@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class component_countermeasure extends script.base_script
 {
-
+    public component_countermeasure()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

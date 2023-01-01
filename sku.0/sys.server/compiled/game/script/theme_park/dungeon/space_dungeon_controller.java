@@ -10,7 +10,9 @@ import script.string_id;
 
 public class space_dungeon_controller extends script.base_script
 {
-
+    public space_dungeon_controller()
+    {
+    }
     public static final string_id SID_SESSION_UPDATE = new string_id("dungeon/space_dungeon", "session_time_update");
     public static final boolean LOGGING = true;
     public int OnInitialize(obj_id self) throws InterruptedException

@@ -6,7 +6,9 @@ import script.string_id;
 
 public class scavenger_player extends script.base_script
 {
-
+    public scavenger_player()
+    {
+    }
     public static final float TIMELIMIT = 60 * 60 * 8;
     public int OnAttach(obj_id self) throws InterruptedException
     {

@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class dungeon_scientist_trigger_volume extends script.base_script
 {
-
+    public dungeon_scientist_trigger_volume()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String SCRIPT_LOG = "outbreak_trigger";
     public static final String TRIGGER_NAME_PREFIX = "scientist_spawning_trigger_";

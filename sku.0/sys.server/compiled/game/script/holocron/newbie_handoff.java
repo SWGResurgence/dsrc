@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class newbie_handoff extends script.base_script
 {
-
+    public newbie_handoff()
+    {
+    }
     private static final int MAX_DESTROY_TARGETS = 10;
     private static final int MAX_SEARCH_RANGE = 500;
     public static final String STF_PLANET_MAP_CAT = "map_loc_cat_n";

@@ -7,7 +7,9 @@ import script.resource_weight;
 
 public class crafting_dwarf_spider_droid extends script.systems.crafting.droid.crafting_base_droid
 {
-
+    public crafting_dwarf_spider_droid()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class pounce_creature extends script.base_script
 {
-
+    public pounce_creature()
+    {
+    }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         debugSpeakMsg(self, "INCAPACITATED WENT OFF DAMMIT");

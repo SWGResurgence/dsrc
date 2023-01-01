@@ -11,7 +11,9 @@ import script.string_id;
 
 public class reunite_shard_dark_jedi_event extends script.base_script
 {
-
+    public reunite_shard_dark_jedi_event()
+    {
+    }
     public static final String STF_INQ_MSGS = "mustafar/inquisitor_event";
     public static final string_id DARK_SPAWN = new string_id(STF_INQ_MSGS, "dark_trooper_spawn");
     public static final string_id INQ_ATTACK = new string_id(STF_INQ_MSGS, "inquisitor_attack");

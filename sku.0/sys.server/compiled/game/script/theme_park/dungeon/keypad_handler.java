@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class keypad_handler extends script.base_script
 {
-
+    public keypad_handler()
+    {
+    }
     public static final String MSGS = "dungeon/geonosian_madbio";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

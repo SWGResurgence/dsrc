@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class npc_difficulty_token extends script.base_script
 {
-
+    public npc_difficulty_token()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))

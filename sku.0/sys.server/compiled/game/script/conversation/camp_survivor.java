@@ -5,7 +5,9 @@ import script.library.*;
 
 public class camp_survivor extends script.base_script
 {
-
+    public camp_survivor()
+    {
+    }
     public static String c_stringFile = "conversation/camp_survivor";
     public boolean camp_survivor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -5,7 +5,9 @@ import script.library.*;
 
 public class tatooine_knives_fencing_valarian extends script.base_script
 {
-
+    public tatooine_knives_fencing_valarian()
+    {
+    }
     public static String c_stringFile = "conversation/tatooine_knives_fencing_valarian";
     public boolean tatooine_knives_fencing_valarian_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

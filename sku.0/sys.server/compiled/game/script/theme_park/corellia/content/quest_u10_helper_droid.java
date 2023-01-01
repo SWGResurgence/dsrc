@@ -7,7 +7,9 @@ import script.string_id;
 
 public class quest_u10_helper_droid extends script.base_script
 {
-
+    public quest_u10_helper_droid()
+    {
+    }
     public static final String[] HELPER_DROID_QUOTES = 
     {
         "artisan_added",

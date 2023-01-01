@@ -8,7 +8,9 @@ import java.util.Vector;
 
 public class permanent_structure extends script.base_script
 {
-
+    public permanent_structure()
+    {
+    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "special_sign";
     public static final String SCRIPT_ITEM_STRUCTURE = "structure.item_structure";

@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class no_consume_loot extends script.base_script
 {
-
+    public no_consume_loot()
+    {
+    }
     public static final String PID_NAME = "collectionConsume";
     public static final String SCRIPTVAR_LIST = "collections.availableCollections";
     public static final String OBJVAR_SLOT_GRANTED = "collectionSlotGrantedTo";

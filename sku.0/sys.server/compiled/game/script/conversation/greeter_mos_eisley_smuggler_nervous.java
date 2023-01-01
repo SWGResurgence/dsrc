@@ -5,7 +5,9 @@ import script.*;
 
 public class greeter_mos_eisley_smuggler_nervous extends script.base_script
 {
-
+    public greeter_mos_eisley_smuggler_nervous()
+    {
+    }
     public static String c_stringFile = "conversation/greeter_mos_eisley_smuggler_nervous";
     public boolean greeter_mos_eisley_smuggler_nervous_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

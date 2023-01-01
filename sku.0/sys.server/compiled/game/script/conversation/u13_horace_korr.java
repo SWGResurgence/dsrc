@@ -8,7 +8,9 @@ import script.*;
 
 public class u13_horace_korr extends script.base_script
 {
-
+    public u13_horace_korr()
+    {
+    }
     public static String c_stringFile = "conversation/u13_horace_korr";
     public boolean u13_horace_korr_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

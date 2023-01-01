@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class pirate_captured_02 extends script.base_script
 {
-
+    public pirate_captured_02()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.ai_combat");

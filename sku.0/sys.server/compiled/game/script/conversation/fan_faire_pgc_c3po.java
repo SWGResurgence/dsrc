@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class fan_faire_pgc_c3po extends script.base_script
 {
-
+    public fan_faire_pgc_c3po()
+    {
+    }
     public static String c_stringFile = "conversation/fan_faire_pgc_c3po";
     public boolean fan_faire_pgc_c3po_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

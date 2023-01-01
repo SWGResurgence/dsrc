@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class factional_dungeon_grandparent extends script.base_script
 {
-
+    public factional_dungeon_grandparent()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String strType = getStringObjVar(self, "type");

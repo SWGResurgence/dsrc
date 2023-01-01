@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class box_of_stuff extends script.theme_park.newbie_tutorial.tutorial_base
 {
-
+    public box_of_stuff()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         for (String boxContent : BOX_CONTENTS) {

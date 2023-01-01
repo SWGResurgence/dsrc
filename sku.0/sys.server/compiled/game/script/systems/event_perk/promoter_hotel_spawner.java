@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class promoter_hotel_spawner extends script.base_script
 {
-    
+    public promoter_hotel_spawner()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "event_perk.promoter"))

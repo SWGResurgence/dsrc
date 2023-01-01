@@ -22,7 +22,11 @@ import script.*;
 
 public class wod_drislyn extends script.base_script
 {
+	public wod_drislyn()
 
+	{
+
+	}
 
 // ======================================================================
 // Script Constants

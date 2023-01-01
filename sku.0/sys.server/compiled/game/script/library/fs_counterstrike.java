@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class fs_counterstrike extends script.base_script
 {
-
+    public fs_counterstrike()
+    {
+    }
     public static final String MOUSE_DROID_NAME_ID = "name_mdroid_";
     public static final String SHIELD_TR_VOLUME = "fs_camp.tr_volume";
     public static final String CAMP_DOOR_TEMPLATE = "object/installation/battlefield/destructible/bfield_base_gate_impl.iff";

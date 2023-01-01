@@ -10,7 +10,9 @@ import script.obj_id;
 
 public class spawner_area extends script.base_script
 {
-
+    public spawner_area()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "registerWithController"))

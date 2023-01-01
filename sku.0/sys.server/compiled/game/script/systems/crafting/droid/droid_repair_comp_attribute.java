@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class droid_repair_comp_attribute extends script.base_script
 {
-
+    public droid_repair_comp_attribute()
+    {
+    }
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

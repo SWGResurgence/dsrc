@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class zone_transition extends script.base_script
 {
-
+    public zone_transition()
+    {
+    }
     public static final float distanceMax = 6.0f;
     public static final String dataTable = "datatables/travel/zone_transition.iff";
     public static final String STF = "travel/zone_transition";

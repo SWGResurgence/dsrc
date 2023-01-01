@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_stimpack_pet extends script.systems.crafting.bio_engineer.crafting_base_stimpack_pet
 {
-
+    public crafting_stimpack_pet()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

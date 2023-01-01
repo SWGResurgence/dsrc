@@ -5,7 +5,9 @@ import script.*;
 
 public class mtp_hideout_col_eavesdrop extends script.base_script
 {
-    
+    public mtp_hideout_col_eavesdrop()
+    {
+    }
     public static String c_stringFile = "conversation/mtp_hideout_col_eavesdrop";
     public boolean mtp_hideout_col_eavesdrop_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

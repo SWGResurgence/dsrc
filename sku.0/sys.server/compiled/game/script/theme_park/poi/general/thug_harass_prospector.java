@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class thug_harass_prospector extends script.theme_park.poi.base
 {
-
+    public thug_harass_prospector()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "First POI Test Attached");

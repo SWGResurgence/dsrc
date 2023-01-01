@@ -6,7 +6,9 @@ import script.resource_weight;
 
 public class crafting_dna_template_generic extends script.systems.crafting.bio_engineer.crafting_base_dna_template
 {
-
+    public crafting_dna_template_generic()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

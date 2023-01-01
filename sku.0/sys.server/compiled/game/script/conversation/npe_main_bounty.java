@@ -8,7 +8,9 @@ import script.*;
 
 public class npe_main_bounty extends script.base_script
 {
-
+    public npe_main_bounty()
+    {
+    }
     public static String c_stringFile = "conversation/npe_main_bounty";
     public boolean npe_main_bounty_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

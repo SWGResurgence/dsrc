@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_38_retired_officer extends script.base_script
 {
-
+    public corellia_38_retired_officer()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_38_retired_officer";
     public boolean corellia_38_retired_officer_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

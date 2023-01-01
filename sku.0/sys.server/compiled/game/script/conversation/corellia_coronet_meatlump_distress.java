@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_coronet_meatlump_distress extends script.base_script
 {
-
+    public corellia_coronet_meatlump_distress()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_coronet_meatlump_distress";
     public boolean corellia_coronet_meatlump_distress_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

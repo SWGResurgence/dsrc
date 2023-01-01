@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class wait_for_tasks extends script.quest.task.ground.base_task
 {
-
+    public wait_for_tasks()
+    {
+    }
     public static final String dataTableQuestNamePre = "TASK_QUEST_NAME_";
     public static final String dataTableTaskNamePre = "TASK_TASK_NAME_";
     public static final String dataTableDisplayStringIdPre = "TASK_DISPLAY_STRING_";

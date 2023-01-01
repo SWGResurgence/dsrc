@@ -8,7 +8,9 @@ import script.library.sui;
 
 public class destructible_building extends script.base_script
 {
-
+    public destructible_building()
+    {
+    }
     public static final String VAR_SMOKE_LEVEL = "battlefield.smoke_level";
     public static final string_id SID_CONSTRUCTION_SITE = new string_id("battlefield", "construction_site");
     public static final string_id SID_DESTROY_STRUCTURE = new string_id("battlefield", "destroy_structure");

@@ -2,7 +2,9 @@ package script.item.conversion;
 
 public class armor_boots_ith_conversion extends script.item.conversion.armor_base_conversion
 {
-
+    public armor_boots_ith_conversion()
+    {
+    }
     public static final String[] ARMOR_SET_ASSAULT = 
     {
         "ithorian_sentinel/ith_armor_s03_boots.iff"

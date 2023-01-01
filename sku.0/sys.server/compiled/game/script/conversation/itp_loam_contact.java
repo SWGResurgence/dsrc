@@ -8,7 +8,9 @@ import script.*;
 
 public class itp_loam_contact extends script.base_script
 {
-
+    public itp_loam_contact()
+    {
+    }
     public static String c_stringFile = "conversation/itp_loam_contact";
     public boolean itp_loam_contact_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

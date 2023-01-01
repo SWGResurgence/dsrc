@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_rroow extends script.base_script
 {
-
+    public ep3_rroow()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_rroow";
     public boolean ep3_rroow_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

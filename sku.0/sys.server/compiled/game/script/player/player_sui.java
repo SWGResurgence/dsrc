@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class player_sui extends script.base_script
 {
-
+    public player_sui()
+    {
+    }
     public static final String TERMINAL_LOGGING = "special_sign";
     public static final boolean LOGGING_ON = true;
     public int handleCloseSui(obj_id self, dictionary params) throws InterruptedException

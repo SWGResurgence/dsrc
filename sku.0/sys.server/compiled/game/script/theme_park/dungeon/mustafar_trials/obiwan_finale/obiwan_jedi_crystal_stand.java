@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class obiwan_jedi_crystal_stand extends script.base_script
 {
-
+    public obiwan_jedi_crystal_stand()
+    {
+    }
     public static final String TRIGGER_VOLUME_CRYSTAL_STAND = "obiwan_crystal_stand_volume";
     public static final float OBI_INTEREST_RADIUS = 8.0f;
     public static final boolean CONST_FLAG_DO_LOGGING = false;

@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class vehicle_mine extends script.base_script
 {
-
+    public vehicle_mine()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         createTriggerVolume("hoth_vehicle_mine", 10.0f, true);

@@ -5,7 +5,9 @@ import script.*;
 
 public class som_kenobi_ikt extends script.base_script
 {
-
+    public som_kenobi_ikt()
+    {
+    }
     public static String c_stringFile = "conversation/som_kenobi_ikt";
     public boolean som_kenobi_ikt_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class hall_fire extends script.base_script
 {
-
+    public hall_fire()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         findWarden(self);

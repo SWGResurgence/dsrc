@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class rtp_luke_woolamander_ghost extends script.base_script
 {
-
+    public rtp_luke_woolamander_ghost()
+    {
+    }
     public static String c_stringFile = "conversation/rtp_luke_woolamander_ghost";
     public boolean rtp_luke_woolamander_ghost_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

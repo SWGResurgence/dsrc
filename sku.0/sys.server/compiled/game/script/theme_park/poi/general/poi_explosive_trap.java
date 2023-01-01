@@ -6,7 +6,9 @@ import script.string_id;
 
 public class poi_explosive_trap extends script.base_script
 {
-
+    public poi_explosive_trap()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "trap"))

@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class mara_jade extends script.base_script
 {
-
+    public mara_jade()
+    {
+    }
     public static final String CONVO = "celebrity/mara_jade";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

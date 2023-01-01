@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class barbed_quenker_dna extends script.base_script
 {
-
+    public barbed_quenker_dna()
+    {
+    }
     public static final String BARBED_QUENKER_DNA_LOOT_ITEM = "item_barbed_quenker_dna";
     public static final int BARBED_QUENKER_DNA_LOOT_CHANCE = 5;
 

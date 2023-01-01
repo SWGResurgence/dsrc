@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class hracca_controller extends script.base_script
 {
-
+    public hracca_controller()
+    {
+    }
     public static final int CHISS_FOG_ON = 0;
     public static final int CHISS_FOG_OFF = 1;
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException

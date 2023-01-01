@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class dance_reward extends script.base_script
 {
-
+    public dance_reward()
+    {
+    }
     public static final String DANCE_NAME = "theatrical";
     public static final String ADVANCED_DANCE_NAME = "theatrical2";
     public static final String ADVANCEMENT_OBJVAR = "dance_advancement";

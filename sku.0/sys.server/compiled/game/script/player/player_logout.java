@@ -7,7 +7,9 @@ import script.string_id;
 
 public class player_logout extends script.base_script
 {
-
+    public player_logout()
+    {
+    }
     public static final string_id SID_LOGOUT_TIME_LEFT = new string_id("logout", "time_left");
     public static final string_id SID_LOGOUT_SAFE_TO_LOG_OUT = new string_id("logout", "safe_to_log_out");
     public static final string_id SID_LOGOUT_ABORTED = new string_id("logout", "aborted");

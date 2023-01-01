@@ -5,7 +5,9 @@ import script.library.utils;
 
 public class politician_event_grandparent extends script.base_script
 {
-
+    public politician_event_grandparent()
+    {
+    }
     public static final String MASTER_OBJECT_TEMPLATE = "object/tangible/poi/tatooine/bestine/bestine_politician_event_master_object.iff";
     public static final String VARNAME_ELECTION_STATUS = "strElectionStatus";
     public static final String VARNAME_ELECTION_WINNER = "strElectionWinner";

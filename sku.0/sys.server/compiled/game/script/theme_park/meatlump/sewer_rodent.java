@@ -7,7 +7,9 @@ import script.string_id;
 
 public class sewer_rodent extends script.base_script
 {
-
+    public sewer_rodent()
+    {
+    }
     public static final String STARTER_SLOT = "meatlump_wine_starter_slot";
     public static final String COLLECTION_NAME = "col_meatlump_wine_01";
     public static final String SLOT_NAME = "meatlump_wine_juicer_slot";

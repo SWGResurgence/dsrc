@@ -7,7 +7,9 @@ import script.resource_weight;
 
 public class crafting_pants_formal_clothing extends script.systems.crafting.clothing.crafting_base_clothing
 {
-
+    public crafting_pants_formal_clothing()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

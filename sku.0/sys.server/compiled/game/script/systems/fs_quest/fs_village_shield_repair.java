@@ -11,7 +11,9 @@ import script.string_id;
 
 public class fs_village_shield_repair extends script.base_script
 {
-
+    public fs_village_shield_repair()
+    {
+    }
     public static final String PP_FILE_LOC = "quest/force_sensitive/fs_shield_repair";
     public static final String RESPONSE_TEXT = "datatables/fs_quests/fs_shield_repair.iff";
     public static final int INITIAL_DELAY = 10;

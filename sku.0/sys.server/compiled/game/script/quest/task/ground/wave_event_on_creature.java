@@ -7,7 +7,9 @@ import script.prose_package;
 
 public class wave_event_on_creature extends script.base_script
 {
-
+    public wave_event_on_creature()
+    {
+    }
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException
     {

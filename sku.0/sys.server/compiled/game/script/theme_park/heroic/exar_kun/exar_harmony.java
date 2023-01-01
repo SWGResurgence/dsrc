@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class exar_harmony extends script.base_script
 {
-
+    public exar_harmony()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, 525000);

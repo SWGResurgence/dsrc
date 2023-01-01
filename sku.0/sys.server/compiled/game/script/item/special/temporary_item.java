@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class temporary_item extends script.base_script
 {
-
+    public temporary_item()
+    {
+    }
     public static final float LIFESPAN = 3600.0f;
     public int OnAttach(obj_id self) throws InterruptedException
     {

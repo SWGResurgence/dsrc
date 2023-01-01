@@ -13,7 +13,9 @@ import java.util.Objects;
 
 public class instance_test extends script.base_script
 {
-
+    public instance_test()
+    {
+    }
     public static final String dataTable = "datatables/dungeon/space_dungeon.iff";
     public static final string_id SID_UNABLE_TO_FIND_DUNGEON = new string_id("dungeon/space_dungeon", "unable_to_find_dungeon");
     public static final boolean doLogging = false;

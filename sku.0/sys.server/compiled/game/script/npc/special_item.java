@@ -6,7 +6,9 @@ import script.string_id;
 
 public class special_item extends script.base_script
 {
-
+    public special_item()
+    {
+    }
     public static final String VAR_FACTION = "faction_recruiter.faction";
     public static final String VAR_DECLARED = "faction_recruiter.declared";
     public static final string_id SID_MUST_BE_DECLARED = new string_id("faction_recruiter", "must_be_declared");

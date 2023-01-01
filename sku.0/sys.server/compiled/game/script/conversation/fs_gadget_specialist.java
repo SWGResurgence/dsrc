@@ -5,7 +5,9 @@ import script.*;
 
 public class fs_gadget_specialist extends script.base_script
 {
-
+    public fs_gadget_specialist()
+    {
+    }
     public static String c_stringFile = "conversation/fs_gadget_specialist";
     public boolean fs_gadget_specialist_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

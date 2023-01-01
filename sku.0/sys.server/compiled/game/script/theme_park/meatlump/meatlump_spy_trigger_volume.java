@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class meatlump_spy_trigger_volume extends script.base_script
 {
-
+    public meatlump_spy_trigger_volume()
+    {
+    }
     public static final boolean LOGGING_ON = false;
     public static final String TRIGGER_NAME_PREFIX = "meatlump_spy_trigger_";
     public static final String TRIGGER = "meatlump_spy_trigger";

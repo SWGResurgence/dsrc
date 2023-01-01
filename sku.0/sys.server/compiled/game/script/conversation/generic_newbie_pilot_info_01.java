@@ -5,7 +5,9 @@ import script.*;
 
 public class generic_newbie_pilot_info_01 extends script.base_script
 {
-
+    public generic_newbie_pilot_info_01()
+    {
+    }
     public static String c_stringFile = "conversation/generic_newbie_pilot_info_01";
     public boolean generic_newbie_pilot_info_01_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

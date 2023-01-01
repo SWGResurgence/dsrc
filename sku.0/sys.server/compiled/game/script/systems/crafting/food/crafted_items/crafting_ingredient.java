@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_ingredient extends script.systems.crafting.food.crafting_base_ingredient
 {
-
+    public crafting_ingredient()
+    {
+    }
     public static final resource_weight[] OBJ_ASSEMBLY_ATTRIBUTE_RESOURCES = 
     {
         new resource_weight("hitPoints", new resource_weight.weight[]

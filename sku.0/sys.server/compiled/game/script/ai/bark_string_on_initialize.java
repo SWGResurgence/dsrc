@@ -7,7 +7,9 @@ import script.string_id;
 
 public class bark_string_on_initialize extends script.base_script
 {
-
+    public bark_string_on_initialize()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "barkString", null, 1, false);

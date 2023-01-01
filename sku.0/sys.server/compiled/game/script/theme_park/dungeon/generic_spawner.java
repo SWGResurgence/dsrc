@@ -8,7 +8,9 @@ import script.obj_var_list;
 
 public class generic_spawner extends script.base_script
 {
-
+    public generic_spawner()
+    {
+    }
     public static final String SPAWNED_LIST = "spawned";
     public static final String SPAWNED = SPAWNED_LIST + "." + "spawnNumber_";
     public static final String GENERIC_SPAWNER_ACTIVE = "genericSpawner.isActive";

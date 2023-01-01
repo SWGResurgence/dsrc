@@ -6,7 +6,9 @@ import script.library.chat;
 
 public class mission_escort_npc extends script.systems.missions.base.mission_dynamic_base
 {
-
+    public mission_escort_npc()
+    {
+    }
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "intOnMissionQueue");

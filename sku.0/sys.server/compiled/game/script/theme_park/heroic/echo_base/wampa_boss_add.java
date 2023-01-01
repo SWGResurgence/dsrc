@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class wampa_boss_add extends script.base_script
 {
-
+    public wampa_boss_add()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         trial.setHp(self, rand(trial.HP_JOES_ADDS - 10000, trial.HP_JOES_ADDS + 20000));

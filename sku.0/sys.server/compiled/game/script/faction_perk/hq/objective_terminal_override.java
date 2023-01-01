@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class objective_terminal_override extends script.faction_perk.hq.objective_object
 {
-
+    public objective_terminal_override()
+    {
+    }
     private static final string_id MNU_DNA = new string_id("hq", "mnu_dna");
     private static final string_id NO_TAMPER = new string_id("faction/faction_hq/faction_hq_response", "no_tamper");
     private static final string_id FAIL_SAFE_ALREADY_OVERRIDDEN = new string_id("faction/faction_hq/faction_hq_response", "fail_safe_already_overridden");

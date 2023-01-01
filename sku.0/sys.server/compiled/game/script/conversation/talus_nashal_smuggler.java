@@ -8,7 +8,9 @@ import script.*;
 
 public class talus_nashal_smuggler extends script.base_script
 {
-
+    public talus_nashal_smuggler()
+    {
+    }
     public static String c_stringFile = "conversation/talus_nashal_smuggler";
     public boolean talus_nashal_smuggler_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

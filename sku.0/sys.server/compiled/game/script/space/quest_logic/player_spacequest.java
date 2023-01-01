@@ -8,7 +8,9 @@ import script.string_id;
 
 public class player_spacequest extends script.base_script
 {
-
+    public player_spacequest()
+    {
+    }
     public static final string_id SID_REPORT_CARGO = new string_id("space/cargo", "report_cargo");
     public static final string_id SID_REPORT_CARGO_GROUP = new string_id("space/cargo", "report_cargo_group");
     public static final string_id SID_INSPECT_ALREADY = new string_id("space/cargo", "inspect_already");

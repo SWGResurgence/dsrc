@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_reactor_overcharger extends script.systems.crafting.space.reactor.crafting_base_reactor_component
 {
-
+    public crafting_reactor_overcharger()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

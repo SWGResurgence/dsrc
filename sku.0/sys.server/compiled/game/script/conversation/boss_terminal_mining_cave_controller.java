@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class boss_terminal_mining_cave_controller extends script.base_script
 {
-
+    public boss_terminal_mining_cave_controller()
+    {
+    }
     public static String c_stringFile = "conversation/boss_terminal_mining_cave_controller";
     public boolean boss_terminal_mining_cave_controller_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

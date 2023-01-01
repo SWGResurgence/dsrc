@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class wave_event_player extends script.quest.task.ground.base_task
 {
-
+    public wave_event_player()
+    {
+    }
     public static final String dataTableColumnServerTemplate = "SERVER_TEMPLATE";
     public static final String dataTableColumnMenuText = "RETRIEVE_MENU_TEXT";
     public static final String taskType = "wave_event";

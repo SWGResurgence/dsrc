@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class at_at extends script.base_script
 {
-
+    public at_at()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, "ai.creature_combat");

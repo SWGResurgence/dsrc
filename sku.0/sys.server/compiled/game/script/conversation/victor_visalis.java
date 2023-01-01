@@ -8,7 +8,9 @@ import script.*;
 
 public class victor_visalis extends script.base_script
 {
-
+    public victor_visalis()
+    {
+    }
     public static String c_stringFile = "conversation/victor_visalis";
     public boolean victor_visalis_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

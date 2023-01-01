@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class door_check extends script.base_script
 {
-
+    public door_check()
+    {
+    }
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))

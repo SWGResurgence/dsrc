@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class button_check_3 extends script.base_script
 {
-
+    public button_check_3()
+    {
+    }
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))

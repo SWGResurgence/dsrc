@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class combat_quest_p3 extends script.base_script
 {
-
+    public combat_quest_p3()
+    {
+    }
     public static String c_stringFile = "conversation/combat_quest_p3";
     public boolean combat_quest_p3_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class tusken_master_spawner extends script.base_script
 {
-
+    public tusken_master_spawner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         deltadictionary tuskenSpawn = self.getScriptVars();

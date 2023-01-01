@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class camp_frequency_dp extends script.base_script
 {
-
+    public camp_frequency_dp()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, fs_counterstrike.OBJVAR_BORN_ON, getGameTime());

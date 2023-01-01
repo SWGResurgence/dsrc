@@ -8,7 +8,9 @@ import script.*;
 
 public class station_tatooine_mining extends script.base_script
 {
-
+    public station_tatooine_mining()
+    {
+    }
     public static String c_stringFile = "conversation/station_tatooine_mining";
     public boolean station_tatooine_mining_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

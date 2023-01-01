@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class combat_ship_boss extends script.base_script
 {
-
+    public combat_ship_boss()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String bossType = null;

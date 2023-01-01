@@ -5,7 +5,9 @@ import script.library.*;
 
 public class gcw_smuggler_device extends script.base_script
 {
-
+    public gcw_smuggler_device()
+    {
+    }
     public static final String PARENT = "parent";
     public int OnInitialize(obj_id self) throws InterruptedException
     {

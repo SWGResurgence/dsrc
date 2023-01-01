@@ -10,7 +10,9 @@ import java.util.Vector;
 
 public class gcw_defensive_general_boss extends script.base_script
 {
-
+    public gcw_defensive_general_boss()
+    {
+    }
     public static final boolean LOGGING_ON = false;
     public static final int MAX_HIT_POINTS = 1000000;
     public static final int MAX_GENERAL_BUFF_STACK = 100;

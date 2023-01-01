@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class texture_kit extends script.base_script
 {
-
+    public texture_kit()
+    {
+    }
     public static final String STF = "texture_kit";
     public static final string_id MNU_TEXTURE = new string_id("sui", "set_texture");
     public static final String BTN_TEXTURE = "@" + STF + ":btn_texture";

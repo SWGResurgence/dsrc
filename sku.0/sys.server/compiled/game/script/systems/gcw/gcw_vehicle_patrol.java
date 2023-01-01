@@ -5,7 +5,9 @@ import script.library.*;
 
 public class gcw_vehicle_patrol extends script.base_script
 {
-
+    public gcw_vehicle_patrol()
+    {
+    }
     public static final String[] lowImperials = 
     {
         "gcw_city_at_st_1"

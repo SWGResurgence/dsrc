@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class ch5_powerup_unstack extends script.base_script
 {
-
+    public ch5_powerup_unstack()
+    {
+    }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (getCount(self) > 1)

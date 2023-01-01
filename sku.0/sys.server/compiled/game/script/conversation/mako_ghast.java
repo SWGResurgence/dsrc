@@ -8,7 +8,9 @@ import script.*;
 
 public class mako_ghast extends script.base_script
 {
-    
+    public mako_ghast()
+    {
+    }
     public static String c_stringFile = "conversation/mako_ghast";
     public boolean mako_ghast_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

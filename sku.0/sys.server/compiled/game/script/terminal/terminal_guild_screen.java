@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class terminal_guild_screen extends script.base_script
 {
-
+    public terminal_guild_screen()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "validateScreen", null, 1, false);

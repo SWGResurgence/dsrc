@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class destroy_notification extends script.base_script
 {
-
+    public destroy_notification()
+    {
+    }
     public int addNotification(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newquests", "destroy_notification - addNotification()");

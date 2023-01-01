@@ -6,7 +6,9 @@ import script.library.utils;
 
 public class quest_use_item extends script.base_script
 {
-
+    public quest_use_item()
+    {
+    }
     public static final String QUI = "QuestUseItem";
     public static final String QUEST_NAME = "questName";
     public static final String QUEST_CRC = "questCrc";

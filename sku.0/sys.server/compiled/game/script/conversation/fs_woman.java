@@ -8,7 +8,9 @@ import script.*;
 
 public class fs_woman extends script.base_script
 {
-
+    public fs_woman()
+    {
+    }
     public static String c_stringFile = "conversation/fs_woman";
     public boolean fs_woman_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

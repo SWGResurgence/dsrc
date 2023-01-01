@@ -4,7 +4,9 @@ import script.obj_id;
 
 public class candle_decay extends script.base_script
 {
-
+    public candle_decay()
+    {
+    }
     public static final int DECAY_LOOP_TIME = 30 * 60;
     public int OnInitialize(obj_id self) throws InterruptedException
     {

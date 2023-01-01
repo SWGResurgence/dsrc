@@ -5,7 +5,9 @@ import script.library.*;
 
 public class survey_tool_script extends script.base_script
 {
-
+    public survey_tool_script()
+    {
+    }
     public static final int MIN_SURVEY_POINTS = 3;
     public static final int MAX_SURVEY_POINTS = 9;
     public static final int MIN_SURVEY_RANGE = 32;

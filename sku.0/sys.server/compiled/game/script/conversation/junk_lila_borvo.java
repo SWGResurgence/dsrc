@@ -8,7 +8,9 @@ import script.library.utils;
 
 public class junk_lila_borvo extends script.base_script
 {
-
+    public junk_lila_borvo()
+    {
+    }
     public static String c_stringFile = "conversation/junk_lila_borvo";
     public boolean junk_lila_borvo_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

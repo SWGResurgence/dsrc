@@ -8,7 +8,9 @@ import script.*;
 
 public class ep3_trandoshan_unluto_bartender extends script.base_script
 {
-
+    public ep3_trandoshan_unluto_bartender()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_trandoshan_unluto_bartender";
     public boolean ep3_trandoshan_unluto_bartender_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

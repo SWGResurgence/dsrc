@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_bio_component_armor extends script.systems.crafting.bio_engineer.crafting_base_bio_component_armor
 {
-
+    public crafting_bio_component_armor()
+    {
+    }
     public static final String[] REQUIRED_SKILLS = 
     {
         "outdoors_bio_engineer_master"

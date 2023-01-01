@@ -227,7 +227,9 @@ public class talisa_test extends script.base_script
                     "emote_greeter_jawa"
             };
 
-
+    public talisa_test()
+    {
+    }
 
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {

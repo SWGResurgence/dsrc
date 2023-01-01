@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_cb_cora extends script.base_script
 {
-
+    public corellia_cb_cora()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_cb_cora";
     public boolean corellia_cb_cora_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

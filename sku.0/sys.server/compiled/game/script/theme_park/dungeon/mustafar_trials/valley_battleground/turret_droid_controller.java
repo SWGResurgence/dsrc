@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class turret_droid_controller extends script.base_script
 {
-
+    public turret_droid_controller()
+    {
+    }
     public static final String controllerObject = "object/tangible/dungeon/mustafar/valley_battlefield/turret_controller_object.iff";
     public static final boolean LOGGING = false;
     public int OnAttach(obj_id self) throws InterruptedException

@@ -8,7 +8,9 @@ import script.library.sui;
 
 public class dumpster_quest_object extends script.base_script
 {
-
+    public dumpster_quest_object()
+    {
+    }
     public static final String QUEST_NAME = "u16_nym_themepark_weed_pulling_ver2";
     public static final String QUEST_TASK = "disposeOfWeeds";
     public static final String QUEST_SIGNAL = "hasDisposedOfWeeds";

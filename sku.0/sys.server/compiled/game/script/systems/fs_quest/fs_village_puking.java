@@ -11,7 +11,9 @@ import script.string_id;
 
 public class fs_village_puking extends script.base_script
 {
-
+    public fs_village_puking()
+    {
+    }
     public static final String PP_FILE_LOC = "quest/force_sensitive/fs_sick";
     public static final String RESPONSE_TEXT = "datatables/fs_quests/fs_sick.iff";
     public static int INITIAL_DELAY = 10;

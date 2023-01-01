@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class cs_dna extends script.base_script
 {
-
+    public cs_dna()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeValues", null, 1, false);

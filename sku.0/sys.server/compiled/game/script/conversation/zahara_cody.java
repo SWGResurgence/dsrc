@@ -5,7 +5,9 @@ import script.library.*;
 
 public class zahara_cody extends script.base_script
 {
-
+    public zahara_cody()
+    {
+    }
     public static String c_stringFile = "conversation/zahara_cody";
     public boolean zahara_cody_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,7 +8,9 @@ import script.*;
 
 public class corellia_droid_factory_cornel_savas extends script.base_script
 {
-
+    public corellia_droid_factory_cornel_savas()
+    {
+    }
     public static String c_stringFile = "conversation/corellia_droid_factory_cornel_savas";
     public boolean corellia_droid_factory_cornel_savas_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

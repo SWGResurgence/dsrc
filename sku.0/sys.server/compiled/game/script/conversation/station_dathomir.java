@@ -5,7 +5,9 @@ import script.*;
 
 public class station_dathomir extends script.base_script
 {
-
+    public station_dathomir()
+    {
+    }
     public static String c_stringFile = "conversation/station_dathomir";
     public boolean station_dathomir_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

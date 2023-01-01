@@ -9,7 +9,9 @@ import java.util.Vector;
 
 public class terminal_frs_chal_vote extends script.base_script
 {
-
+    public terminal_frs_chal_vote()
+    {
+    }
     public static final String SCRIPT_VAR_SUI_PID = "force_rank.vote_sui";
     public static final String SCRIPT_VAR_CHAL_TERMINAL = "force_rank.challenge_vote_terminal";
     public static final String SCRIPT_VAR_NAMES = "force_rank.challenge_vote_name";

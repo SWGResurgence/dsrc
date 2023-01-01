@@ -8,7 +8,9 @@ import script.*;
 
 public class c_ddroid_selan extends script.base_script
 {
-
+    public c_ddroid_selan()
+    {
+    }
     public static String c_stringFile = "conversation/c_ddroid_selan";
     public boolean c_ddroid_selan_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

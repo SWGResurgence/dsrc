@@ -12,7 +12,9 @@ import java.util.Vector;
 
 public class starport_april_fools extends script.base_script
 {
-
+    public starport_april_fools()
+    {
+    }
     public static final String CITY_OBJVAR = "aprilFools.city";
     public static final String LAST_SPAWN = "aprilFools.lastSpawn";
     public static final String CREATURE_LIST = "aprilFools.creatures";

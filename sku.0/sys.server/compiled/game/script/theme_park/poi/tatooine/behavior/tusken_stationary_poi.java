@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class tusken_stationary_poi extends script.base_script
 {
-
+    public tusken_stationary_poi()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         stop(self);

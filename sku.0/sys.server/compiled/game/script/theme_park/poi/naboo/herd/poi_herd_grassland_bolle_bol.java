@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class poi_herd_grassland_bolle_bol extends script.theme_park.poi.base
 {
-
+    public poi_herd_grassland_bolle_bol()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         poiCreateObject("object/creature/monster/bolle_bol/bolle_bol_grassland_large.iff", 8, 8);

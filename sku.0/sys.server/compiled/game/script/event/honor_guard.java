@@ -10,7 +10,9 @@ import script.obj_id;
 
 public class honor_guard extends script.base_script
 {
-
+    public honor_guard()
+    {
+    }
     public static final String[] PROMPT_TEXT = 
     {
         "Enter \"setup\" to setup data, \"singleSetup\" to setup single spawn data, \"spawn\" to spawn NPCs using current data, \"data\" to view current data or \"quit\" end.",

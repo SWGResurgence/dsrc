@@ -5,7 +5,9 @@ import script.resource_weight;
 
 public class crafting_artisan_vehicle extends script.systems.crafting.vehicle.crafting_base_vehicle
 {
-
+    public crafting_artisan_vehicle()
+    {
+    }
     public static final String VERSION = "v0.00.00";
     public static final String[] REQUIRED_SKILLS = 
     {

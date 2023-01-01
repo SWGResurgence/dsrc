@@ -8,7 +8,9 @@ import script.*;
 
 public class tatooine_knives_parry_larit extends script.base_script
 {
-
+    public tatooine_knives_parry_larit()
+    {
+    }
     public static String c_stringFile = "conversation/tatooine_knives_parry_larit";
     public boolean tatooine_knives_parry_larit_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

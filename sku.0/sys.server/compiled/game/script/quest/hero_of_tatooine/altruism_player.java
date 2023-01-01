@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class altruism_player extends script.base_script
 {
-
+    public altruism_player()
+    {
+    }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "quest.hero_of_tatooine.altruism") && !badge.hasBadge(self, "poi_factoryliberation"))

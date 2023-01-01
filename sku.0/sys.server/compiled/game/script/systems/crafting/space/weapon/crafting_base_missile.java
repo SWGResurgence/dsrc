@@ -7,7 +7,9 @@ import script.obj_id;
 
 public class crafting_base_missile extends script.systems.crafting.crafting_base
 {
-
+    public crafting_base_missile()
+    {
+    }
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
         for (draft_schematic.attribute itemAttribute : itemAttributes) {

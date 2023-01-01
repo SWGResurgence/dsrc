@@ -5,7 +5,9 @@ import script.*;
 
 public class ep3_etyyy_sordaan_xris extends script.base_script
 {
-
+    public ep3_etyyy_sordaan_xris()
+    {
+    }
     public static String c_stringFile = "conversation/ep3_etyyy_sordaan_xris";
     public boolean ep3_etyyy_sordaan_xris_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

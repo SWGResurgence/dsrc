@@ -5,7 +5,9 @@ import script.library.utils;
 
 public class corvette_document_search extends script.base_script
 {
-
+    public corvette_document_search()
+    {
+    }
     public static final String DATATABLE_NAME = "datatables/dungeon/corellian_corvette_quest.iff";
     public static final string_id SEARCH_ITEM = new string_id("bestine", "search_item");
     public static final string_id ALREADY_SEARCHED_MSG = new string_id("bestine", "already_searched");

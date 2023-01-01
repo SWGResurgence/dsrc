@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class obi_wan_prelude_quest_grant extends script.base_script
 {
-
+    public obi_wan_prelude_quest_grant()
+    {
+    }
     public int OnReceivedItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))

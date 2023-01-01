@@ -5,7 +5,9 @@ import script.library.*;
 
 public class player_beastmaster extends script.base_script
 {
-
+    public player_beastmaster()
+    {
+    }
     public static final String ABILITY_TO_EXECUTE = "abilityToExecute";
     public static final String TRAIN_DIALOGUE_PID = "petTraining.sui_pid";
     public static final boolean BEAST_DEBUG = false;

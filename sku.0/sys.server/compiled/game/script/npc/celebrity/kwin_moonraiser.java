@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class kwin_moonraiser extends script.base_script
 {
-
+    public kwin_moonraiser()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Kwin Moonraiser");

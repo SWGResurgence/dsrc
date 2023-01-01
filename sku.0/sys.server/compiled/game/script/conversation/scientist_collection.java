@@ -8,7 +8,9 @@ import script.*;
 
 public class scientist_collection extends script.base_script
 {
-
+    public scientist_collection()
+    {
+    }
     public static String c_stringFile = "conversation/scientist_collection";
     public boolean scientist_collection_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

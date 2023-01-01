@@ -8,7 +8,9 @@ import script.*;
 
 public class nym_themepark_disgruntled extends script.base_script
 {
-
+    public nym_themepark_disgruntled()
+    {
+    }
     public static String c_stringFile = "conversation/nym_themepark_disgruntled";
     public boolean nym_themepark_disgruntled_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

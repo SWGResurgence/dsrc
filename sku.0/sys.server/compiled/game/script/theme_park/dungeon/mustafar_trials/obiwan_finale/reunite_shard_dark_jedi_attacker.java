@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class reunite_shard_dark_jedi_attacker extends script.base_script
 {
-
+    public reunite_shard_dark_jedi_attacker()
+    {
+    }
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         messageTo(self, "despawn", null, 120, false);

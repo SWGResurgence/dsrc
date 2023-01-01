@@ -10,7 +10,9 @@ import script.string_id;
 
 public class obiwan_player extends script.base_script
 {
-
+    public obiwan_player()
+    {
+    }
     public static final String STF = "dungeon/kash_the_arena";
     public static final string_id SID_DEATH_EJECT = new string_id(STF, "ejected_by_death");
     public static final boolean CONST_FLAG_DO_LOGGING = true;

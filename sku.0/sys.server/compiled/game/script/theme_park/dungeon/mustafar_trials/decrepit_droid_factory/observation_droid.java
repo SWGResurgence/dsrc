@@ -10,7 +10,9 @@ import script.obj_id;
 
 public class observation_droid extends script.base_script
 {
-
+    public observation_droid()
+    {
+    }
     public static final boolean LOGGING = true;
     public static final String TRIGGER_DETONATE = "trigger_volume_duality_detonate";
     public int OnDestroy(obj_id self) throws InterruptedException

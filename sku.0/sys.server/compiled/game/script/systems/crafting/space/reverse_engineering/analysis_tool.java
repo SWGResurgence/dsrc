@@ -7,7 +7,9 @@ import script.library.utils;
 
 public class analysis_tool extends script.base_script
 {
-
+    public analysis_tool()
+    {
+    }
     public static final string_id LOOT_LIST = new string_id("sui", "analyze_loot");
     public static final String SCRIPTVAR_ANALYZE_SUI = "analyzer.sui";
     public static final String SCRIPTVAR_ANALYZE_IDS = "analyzer.ids";

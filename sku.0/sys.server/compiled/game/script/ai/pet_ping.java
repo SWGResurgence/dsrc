@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class pet_ping extends script.base_script
 {
-
+    public pet_ping()
+    {
+    }
     public static final String PCDPING_PCD_SCRIPT_NAME = "ai.pcd_ping_response";
     public static final String PCDPING_SEND_MESSAGE_NUMBER = "pcdping.sendMsgNumber";
     public static final String PCDPING_LAST_ACK_MESSAGE_NUMBER = "pcdping.lastAckNumber";

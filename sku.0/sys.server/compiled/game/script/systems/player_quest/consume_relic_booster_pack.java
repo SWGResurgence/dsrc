@@ -7,7 +7,9 @@ import java.util.Vector;
 
 public class consume_relic_booster_pack extends script.base_script
 {
-
+    public consume_relic_booster_pack()
+    {
+    }
     public static final String PID_NAME = "chronicleBoosterPack";
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {

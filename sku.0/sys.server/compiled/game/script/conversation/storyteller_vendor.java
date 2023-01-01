@@ -8,7 +8,9 @@ import script.*;
 
 public class storyteller_vendor extends script.base_script
 {
-
+    public storyteller_vendor()
+    {
+    }
     public static String c_stringFile = "conversation/storyteller_vendor";
     public boolean storyteller_vendor_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

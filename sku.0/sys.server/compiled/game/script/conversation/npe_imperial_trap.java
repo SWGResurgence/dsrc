@@ -8,7 +8,9 @@ import script.*;
 
 public class npe_imperial_trap extends script.base_script
 {
-
+    public npe_imperial_trap()
+    {
+    }
     public static String c_stringFile = "conversation/npe_imperial_trap";
     public boolean npe_imperial_trap_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

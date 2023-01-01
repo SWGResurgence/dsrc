@@ -5,7 +5,9 @@ import script.library.*;
 
 public class city_hall extends script.base_script
 {
-
+    public city_hall()
+    {
+    }
     public static final string_id NEW_CITY_SUBJECT = new string_id("city/city", "new_city_subject");
     public static final string_id NEW_CITY_BODY = new string_id("city/city", "new_city_body");
     public static final string_id NEW_CITY_SUCCESS_SUBJECT = new string_id("city/city", "new_city_success_subject");

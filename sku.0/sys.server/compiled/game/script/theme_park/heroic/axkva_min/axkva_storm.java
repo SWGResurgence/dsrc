@@ -9,7 +9,9 @@ import script.obj_id;
 
 public class axkva_storm extends script.base_script
 {
-
+    public axkva_storm()
+    {
+    }
     public static final float STORM_PULSE = 1.0f;
     public int OnAttach(obj_id self) throws InterruptedException
     {

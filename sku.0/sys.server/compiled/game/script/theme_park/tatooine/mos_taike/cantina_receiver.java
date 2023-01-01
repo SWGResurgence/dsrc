@@ -8,7 +8,9 @@ import script.string_id;
 
 public class cantina_receiver extends script.base_script
 {
-
+    public cantina_receiver()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);

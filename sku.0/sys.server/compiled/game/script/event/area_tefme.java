@@ -5,7 +5,9 @@ import script.obj_id;
 
 public class area_tefme extends script.base_script
 {
-
+    public area_tefme()
+    {
+    }
     private static final String[] HELP_TEXT =
     {
         "=========================================",

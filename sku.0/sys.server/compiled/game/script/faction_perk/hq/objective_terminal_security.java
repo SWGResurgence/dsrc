@@ -5,7 +5,9 @@ import script.library.*;
 
 public class objective_terminal_security extends script.faction_perk.hq.objective_object
 {
-
+    public objective_terminal_security()
+    {
+    }
     private static final string_id SID_SLICE = new string_id("slicing/slicing", "slice");
     private static final string_id SID_FAIL_SLICE = new string_id("slicing/slicing", "hq_security_fail");
     private static final string_id SID_SUCCESS_SLICE = new string_id("slicing/slicing", "hq_security_success");

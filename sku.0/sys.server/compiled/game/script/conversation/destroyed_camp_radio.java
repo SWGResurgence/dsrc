@@ -8,7 +8,9 @@ import script.*;
 
 public class destroyed_camp_radio extends script.base_script
 {
-
+    public destroyed_camp_radio()
+    {
+    }
     public static String c_stringFile = "conversation/destroyed_camp_radio";
     public boolean destroyed_camp_radio_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {

@@ -8,7 +8,9 @@ import script.obj_id;
 
 public class recruiter_setup extends script.base_script
 {
-
+    public recruiter_setup()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setUpRecruiter(self);

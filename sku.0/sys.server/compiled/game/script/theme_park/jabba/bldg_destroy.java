@@ -5,7 +5,9 @@ import script.library.chat;
 
 public class bldg_destroy extends script.base_script
 {
-
+    public bldg_destroy()
+    {
+    }
     public static final String STF_FILE = "theme_park_jabba/bldg_destroy";
     public int OnAttach(obj_id self) throws InterruptedException
     {

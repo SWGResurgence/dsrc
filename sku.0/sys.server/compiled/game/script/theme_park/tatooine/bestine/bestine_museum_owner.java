@@ -6,7 +6,9 @@ import script.obj_id;
 
 public class bestine_museum_owner extends script.base_script
 {
-
+    public bestine_museum_owner()
+    {
+    }
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id robe = createObject("object/tangible/wearables/jacket/jacket_s22.iff", self, "");

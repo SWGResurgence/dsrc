@@ -5,7 +5,9 @@ import script.library.*;
 
 public class player_faction extends script.base_script
 {
-
+    public player_faction()
+    {
+    }
     public static final string_id SID_ABORT_RESIGNATION = new string_id("faction_recruiter", "abort_resignation");
     public static final string_id SID_SUI_RESIG_COMPLETE_IN_5 = new string_id("faction_recruiter", "sui_resig_complete_in_5");
     public static final string_id SID_NOT_ALIGNED = new string_id("faction_recruiter", "not_aligned");

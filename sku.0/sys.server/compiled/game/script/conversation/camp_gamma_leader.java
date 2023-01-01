@@ -8,7 +8,9 @@ import script.*;
 
 public class camp_gamma_leader extends script.base_script
 {
-
+    public camp_gamma_leader()
+    {
+    }
     public static String c_stringFile = "conversation/camp_gamma_leader";
     public boolean camp_gamma_leader_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
