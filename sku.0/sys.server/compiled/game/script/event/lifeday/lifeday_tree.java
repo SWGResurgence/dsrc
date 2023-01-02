@@ -23,7 +23,7 @@ public class lifeday_tree extends script.base_script
 
     private String currentYearObjVar() throws InterruptedException
     {
-        return utils.XMAS_RECEIVED_XX_01;
+        return utils.XMAS_22_VAR;
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
