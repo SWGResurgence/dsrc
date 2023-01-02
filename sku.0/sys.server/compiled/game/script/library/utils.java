@@ -68,7 +68,6 @@ public class utils extends script.base_script
     //public static final String XMAS_RECEIVED_VIII2 = "gift.xmas08v2";
     public static final String XMAS_RECEIVED_IX_01 = "gift.xmas09";
     public static final String XMAS_RECEIVED_XX_01 = "gift.xmas20";
-    public static final String XMAS_22_VAR = "gift.xmas22";
     //public static final String EMPIRE_DAY_RECEIVED_VI = "gift.empire08";
     public static final string_id GIFT_GRANTED = new string_id("system_msg", "gift_granted");
     public static final string_id GIFT_GRANTED_SUB = new string_id("system_msg", "gift_granted_sub");
