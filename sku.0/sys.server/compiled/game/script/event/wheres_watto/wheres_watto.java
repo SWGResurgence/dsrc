@@ -93,7 +93,7 @@ public class wheres_watto extends script.base_script
                 }
                 else
                 {
-                    sendSystemMessageGalaxyTestingOnly(colors_hex.HEADER + colors_hex.ORANGERED + "[Event]\\#. Watto has been found by " + getFirstName(player) +  ". He is off to find a new spot to hide on\\#. " + getCurrentSceneName() + "(" + quadrantName(npc) + ")");
+                    sendSystemMessageGalaxyTestingOnly(colors_hex.HEADER + colors_hex.ORANGERED + "[Event]\\#. Watto has been found on " + toUpper(getCurrentSceneName(), 0) + " by " + getFirstName(player) + "!");
                 }
                 if (isJanuary() || isDecember())
                 {
