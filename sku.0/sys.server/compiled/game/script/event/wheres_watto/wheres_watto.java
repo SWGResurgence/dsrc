@@ -138,6 +138,7 @@ public class wheres_watto extends script.base_script
         {
             setObjVar(self, "watto_tag", 1);
         }
+        startBark(self);
         return SCRIPT_CONTINUE;
     }
 
@@ -347,6 +348,17 @@ public class wheres_watto extends script.base_script
             }
         }
         return toUpper(quadrant);
+    }
+    private void startBark(obj_id self) throws InterruptedException
+    {
+        sendSystemMessageGalaxyTestingOnly(colors_hex.HEADER + colors_hex.ROSYBROWN + "[Event]\\#.Watto has been spotted on " + toUpper(getCurrentSceneName(), 0) + " (" + toUpper(quadrantName(self)) + ")");
+        messageTo(self, "continueBark", null, 1200.0f, false);
+    }
+    public int continueBark(obj_id self, dictionary params) throws InterruptedException
+    {
+        playClientEffectObj(self, "clienteffect/halloween_fog_machine.cef", self, "", null, "halloweenFog");
+        messageTo(self, "continueBark", null, 1200.0f, false);
+        return SCRIPT_CONTINUE;
     }
     //@deprecation
 }
