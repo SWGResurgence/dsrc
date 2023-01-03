@@ -18,7 +18,7 @@ Scripts in here should also only be useable by godmode players.
 Make a new package in the developer directory, with your developer handle, then put your scripts in there.
 ### For GMs and Admins
     
-Greetings from the past! Before you look for a script, _please_ read what it does! Thank you.
+Greetings from the past! Before you look for a script and go all gung-ho, _please_ read what it does! Thank you.
 
 ## Archive
 Older development scripts are in the package below:
