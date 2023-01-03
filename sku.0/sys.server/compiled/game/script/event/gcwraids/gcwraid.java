@@ -8,7 +8,7 @@ import script.library.locations;
 import script.location;
 import script.obj_id;
 import script.string_id;
-
+@SuppressWarnings("CheckedExceptionNotThrown")
 public class gcwraid extends script.base_script
 {
     public gcwraid()
