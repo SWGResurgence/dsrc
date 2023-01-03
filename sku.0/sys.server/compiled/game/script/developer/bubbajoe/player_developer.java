@@ -657,6 +657,15 @@ public class player_developer extends base_script
                 launchClientWebBrowser(iTar, url);
             }
         }
+        if (cmd.equalsIgnoreCase("pathToTargetPlanet"))
+        {
+            obj_id targetId = getIntendedTarget(self);
+            obj_id[] players = getPlayerCreaturesInRange(getLocation(targetId), 16000f);
+            for (obj_id player : players)
+            {
+                createClientPathAdvanced(player, getLocation(player), getLocation(targetId), "default");
+            }
+        }
         if (cmd.equalsIgnoreCase("playeffect"))
         {
             if (!tok.hasMoreTokens())

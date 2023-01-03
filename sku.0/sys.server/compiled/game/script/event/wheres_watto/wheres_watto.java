@@ -211,7 +211,7 @@ public class wheres_watto extends script.base_script
         {
             if (text.equals("watto"))
             {
-                sendSystemMessageGalaxyTestingOnly("Watto has been spotted on " + toUpper(getCurrentSceneName(), 0) + " (" + toUpper(quadrantName(self)) + ")");
+                sendSystemMessageGalaxyTestingOnly(colors_hex.HEADER + colors_hex.ROSYBROWN + "[Event]\\#.Watto has been spotted on " + toUpper(getCurrentSceneName(), 0) + " (" + toUpper(quadrantName(self)) + ")");
             }
         }
         return SCRIPT_CONTINUE;
