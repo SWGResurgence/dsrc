@@ -7,7 +7,7 @@ package script.event.wheres_watto;/*
 import script.library.*;
 import script.*;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "deprecated"})
 public class wheres_watto extends script.base_script
 {
     public static String c_stringFile = "conversation/wheres_watto";
@@ -77,6 +77,7 @@ public class wheres_watto extends script.base_script
             //-- [NOTE] warp the creo to a different spot.
             if (wheres_watto_condition__defaultCondition(player, npc))
             {
+                location oldLoc = getLocation(npc);
                 string_id message = new string_id(c_stringFile, "s_5");
                 utils.removeScriptVar(player, "conversation.wheres_watto.branchId");
                 setObjVar(player, "wheres_watto.found", 1);
@@ -86,15 +87,25 @@ public class wheres_watto extends script.base_script
                 watto_loc.y = getHeightAtLocation(watto_loc.x, watto_loc.z);
                 createReward(npc, player);
                 System.out.println("\nMaking a new Watto at " + watto_loc + "\n");
+                if (isGod(player))
+                {
+                    broadcast(player, "God Mode: Not broadcasting Watto missions. This Watto was on " + getCurrentSceneName() + "(" + quadrantName(npc) + ")");
+                }
+                else
+                {
+                    sendSystemMessageGalaxyTestingOnly(colors_hex.HEADER + colors_hex.ORANGERED + "[Event]\\#. Watto has been found by " + getFirstName(player) +  ". He is off to find a new spot to hide on\\#. " + getCurrentSceneName() + "(" + quadrantName(npc) + ")");
+                }
                 if (isJanuary() || isDecember())
                 {
                     //-- NPC: Bet you can't find me this time!
                     obj_id newWatto = create.object("object/mobile/watto.iff", watto_loc, true);
                     ai_lib.wander(newWatto, 1.0f, 64.0f);
                     setMovementWalk(newWatto);
-                    setMovementPercent(newWatto, 0.6f);
-                    ai_lib.barkString(npc, "Aye! I'm walking here!");
+                    setMovementPercent(newWatto, 0.4f);
+                    ai_lib.barkString(npc, "Aye! I'm flying here!");
                     attachScript(newWatto, "event.wheres_watto.wheres_watto");
+                    setScale(newWatto, (rand(1.5f, 3.5f)));
+                    persistObject(newWatto);//persist so it will be there after a reboot if unfound.
                     npcEndConversationWithMessage(player, message);
                     npcEndConversation(player);
                     destroyObject(npc);
@@ -194,6 +205,18 @@ public class wheres_watto extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
+    public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
+    {
+        if (isGod(speaker))
+        {
+            if (text.equals("watto"))
+            {
+                sendSystemMessageGalaxyTestingOnly("Watto has been spotted on " + toUpper(getCurrentSceneName(), 0) + " (" + toUpper(quadrantName(self)) + ")");
+            }
+        }
+        return SCRIPT_CONTINUE;
+    }
+
     boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses)
     {
         Object[] objects = new Object[responses.length];
@@ -203,6 +226,8 @@ public class wheres_watto extends script.base_script
 
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
+        faceTo(self, player);
+        ai_lib.stop(self);
         obj_id npc = self;
         if (ai_lib.isInCombat(npc) || ai_lib.isInCombat(player))
             return SCRIPT_OVERRIDE;
@@ -293,6 +318,35 @@ public class wheres_watto extends script.base_script
             return true;
         }
         return false;
+    }
+
+    public String quadrantName(obj_id npc) throws InterruptedException
+    {
+        location here = getLocation(npc);
+        String quadrant = "";
+        if (here.x > 0)
+        {
+            if (here.z > 0)
+            {
+                quadrant = "NE";
+            }
+            else
+            {
+                quadrant = "SE";
+            }
+        }
+        else
+        {
+            if (here.z > 0)
+            {
+                quadrant = "NW";
+            }
+            else
+            {
+                quadrant = "SW";
+            }
+        }
+        return toUpper(quadrant);
     }
     //@deprecation
 }
