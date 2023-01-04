@@ -48,9 +48,9 @@ public class tcg_instant_travel extends script.base_script
         {
             callable.storeCallables(player);
         }
-        if (!hasScript(player, "name.name"))
+        if (!hasScript(self, "name.name"))
         {
-            attachScript(player, "name.name");
+            attachScript(self, "name.name");
         }
         obj_id tcg_itv = getSelf();
         if (item == menu_info_types.SERVER_MENU8)
