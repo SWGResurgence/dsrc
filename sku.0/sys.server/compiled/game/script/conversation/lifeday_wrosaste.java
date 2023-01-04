@@ -5,7 +5,7 @@
 // All Rights Reserved.
 //
 // Created with SwgConversationEditor 1.37 - DO NOT EDIT THIS AUTO-GENERATED FILE!
-//Roachie says herro UwU
+//BubbaJoe says herro UwU
 // ======================================================================
 
 package script.conversation;
