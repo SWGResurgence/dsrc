@@ -1384,6 +1384,10 @@ public class base_player extends script.base_script
 
     public int OnLogin(obj_id self) throws InterruptedException
     {
+        if (hasScript(self, "name.name"))
+        {
+            detachScript(self, "name.name");
+        }
         location loginLoc = getLocation(self);
         System.out.println("\nZoning: " + self + " " + getName(self) + " has zoned to " + getCurrentSceneName() + " at " + loginLoc.x + ", " + loginLoc.y + ", " + loginLoc.z + "\n");
         if (!hasObjVar(self, "resurgence_welcome_onetimer"))
