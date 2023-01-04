@@ -19,19 +19,11 @@ public class name extends script.base_script
     {
         if (static_item.isStaticItem(self))
         {
-            return SCRIPT_CONTINUE;
+            LOG("static_item", "name.OnObjectMenuRequest() - " + player + " - static item, Adding menu because why not, Old name: " + getName(self));
         }
         if (utils.isNestedWithin(self, player) || isInPlayersHouse(self, player))
         {
-            menu_info_data data = mi.getMenuItemByType(menu_info_types.SET_NAME);
-            if (data != null)
-            {
-                data.setServerNotify(true);
-            }
-            else 
-            {
-                mi.addRootMenu(menu_info_types.SET_NAME, null);
-            }
+            mi.addRootMenu(menu_info_types.SET_NAME, new string_id("Rename"));
         }
         return SCRIPT_CONTINUE;
     }
@@ -39,7 +31,7 @@ public class name extends script.base_script
     {
         if (item == menu_info_types.SET_NAME)
         {
-            if (utils.isNestedWithin(self, player) || isInPlayersHouse(self, player))
+            if (utils.isNestedWithin(self, player) || isInPlayersHouse(self, player) && player_structure.isAdmin(getTopMostContainer(self), player))
             {
                 showNameInputUI(player, self);
             }

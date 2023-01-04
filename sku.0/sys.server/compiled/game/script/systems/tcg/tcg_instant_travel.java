@@ -35,7 +35,6 @@ public class tcg_instant_travel extends script.base_script
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
-        callable.storeCallables(player);
         if (!isIdValid(player))
         {
             return SCRIPT_CONTINUE;
@@ -51,6 +50,7 @@ public class tcg_instant_travel extends script.base_script
         if (!hasScript(self, "name.name"))
         {
             attachScript(self, "name.name");
+            detachScript(player, "name.name");
         }
         obj_id tcg_itv = getSelf();
         if (item == menu_info_types.SERVER_MENU8)
