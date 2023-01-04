@@ -29,6 +29,7 @@ public class hub_main extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
+        //setupHub(self);
         //DISCORD_LOG("HUB", "Hub Online");
         return SCRIPT_CONTINUE;
     }
