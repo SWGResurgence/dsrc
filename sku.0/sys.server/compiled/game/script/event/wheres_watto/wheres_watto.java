@@ -181,6 +181,7 @@ public class wheres_watto extends script.base_script
             }
             obj_id one_time_item = static_item.createNewItemFunction(reward, utils.getInventoryContainer(player));
             detachScript(one_time_item, "item.special.nomove");
+            detachScript(one_time_item, "item.static_item_base");//prevents roll-over data restoration (i.e. custom no-trade removal)
             removeObjVar(one_time_item, "noTrade");
             setObjVar(player, "watto_found_main", 1);
         }

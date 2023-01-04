@@ -179,6 +179,10 @@ public class city_furniture extends script.base_script
         {
             return false;
         }
+        if (city.isMilitiaOfCity(player, getIntObjVar(self, "city_id")))
+        {
+            return true;
+        }
         return city.isTheCityMayor(player, city_id);
     }
 
