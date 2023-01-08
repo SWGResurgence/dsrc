@@ -116,12 +116,13 @@ public class combat_player extends script.systems.combat.combat_base
                 }
                 else 
                 {
-                    if (!jedi.hasColorCrystal(objItem))
+                    /*if (!jedi.hasColorCrystal(objItem)) //@REVERT_ME_ONCE_ACM_IS_BUILT
                     {
                         string_id strSpam = new string_id("jedi_spam", "lightsaber_no_color");
                         sendSystemMessage(self, strSpam);
                         return SCRIPT_OVERRIDE;
-                    }
+                    }*/
+                    return SCRIPT_CONTINUE;
                 }
             }
         }

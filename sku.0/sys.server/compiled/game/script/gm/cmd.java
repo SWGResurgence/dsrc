@@ -5151,7 +5151,7 @@ public class cmd extends script.base_script
         float y = where.y;
         float z = where.z;
         float angle = 0;
-        float angleInc = 360 / num;
+        float angleInc = 360 / (float) num;
         for (int i = 0; i < num; i++)
         {
             angle = angle + angleInc;

@@ -102,6 +102,22 @@ public class player_developer extends base_script
             return SCRIPT_CONTINUE;
         }
 
+        if (cmd.equalsIgnoreCase("resourceDatapad"))
+        {
+            obj_id myTarget = getIntendedTarget(self);
+            obj_id pInv = utils.getInventoryContainer(myTarget);
+            obj_id datapad = createObject("object/tangible/loot/npc_loot/datapad_flashy_generic.iff", pInv, "");
+            setName(datapad, "Resource Analyzer");
+            setBioLink(datapad, myTarget);
+            setObjVar(datapad, "resource_amount", 10000);
+            setObjVar(datapad, "noTrade", 1);
+            attachScript(datapad, "developer.bubbajoe.dev_res");
+            attachScript(datapad, "item.special.nomove");
+            static_item.setStaticItemName(datapad, "Resource Analyzer");
+            static_item.setDescriptionStringId(datapad, new string_id("This item is used to generate resources that have erroneously been removed from the game.\n\n" + "It is a developer tool and should not be used by players."));
+            broadcast(self,"Resource Analyzer has been added to your inventory. All actions regarding this tool are logged. [Player: " +  myTarget + "]");
+            return SCRIPT_CONTINUE;
+        }
         if (cmd.equalsIgnoreCase("pumpkin"))
         {
             obj_id pumpkinMaster = target;
