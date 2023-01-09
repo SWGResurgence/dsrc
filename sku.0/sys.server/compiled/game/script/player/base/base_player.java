@@ -1299,7 +1299,9 @@ public class base_player extends script.base_script
         {
             int pid = mi.addRootMenu(menu_info_types.SERVER_MENU30, new string_id("Internal"));
             mi.addSubMenu(pid, menu_info_types.SERVER_MENU31, new string_id("Freeze Player"));
-            mi.addSubMenu(pid, menu_info_types.SERVER_MENU32, new string_id("Get Player Information"));
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU32, new string_id("Player Information"));
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU33, new string_id("Edit Inventory"));
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU34, new string_id("Edit Datapad"));
         }
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.COMBAT_DEATH_BLOW);
         if (mid == null)
@@ -12370,7 +12372,6 @@ public class base_player extends script.base_script
         utils.setScriptVar(self, "recieved_city_motd", 1);
         return SCRIPT_CONTINUE;
     }
-
     //    public int stampDungeonArea(obj_id self, dictionary params) throws InterruptedException
 //    {
 //        LOG("space_dungeon", "base_player.stampDungeonArea -- Stamping player with obj vars.");
@@ -12994,17 +12995,19 @@ public class base_player extends script.base_script
         }
         else if (item == menu_info_types.SERVER_MENU32)
         {
-            String prompt = gold(" ------------------  SKYNET: " + getName(self) + " ------------------ ") + "\n";
+            String prompt = gold(" ------------------  SKYNET ------------------ ") + "\n";
             prompt += "Full Name: " + getPlayerFullName(self) + "\n";
             prompt += "NetworkId: " + self + "\n";
             prompt += "Location: " + getLocation(self) + "\n";
-            prompt += "Creation Date: " + getCalendarTimeStringLocal(getPlayerBirthDate(self)) + "\n";
-            prompt += "Housing Lots: " + getAccountNumLots(self) + "\n";
+            prompt += "Creation Date: " + getPlayerBirthDate(self) + "\n";
+            prompt += "Housing Lots: " + getMaxHousingLots() + "\n";
             prompt += " ------------------ " + gold("Avatar") + " ------------------ " + "\n";
             prompt += "Posture: " + getPosture(self) + "\n";
             prompt += "Locomotion " + getLocomotion(self) + "\n";
             prompt += "Scale: " + getScale(self) + "\n";
             prompt += "Race: " + getRace(self) + "\n";
+            prompt += "Mood: " + getAnimationMood(self) + "\n";
+            prompt += "Race: " + getSpecies(self) + "\n";
             prompt += " ------------------ " + gold("Player") + " ------------------ " + "\n";
             prompt += "Health: " + getAttrib(self, HEALTH) + "\n";
             prompt += "Action: " + getAttrib(self, ACTION) + "\n";
@@ -13153,6 +13156,16 @@ public class base_player extends script.base_script
             saveTextOnClient(player, "csr_dump_" + toString(getPlayerAccountUsername(self)) + ".txt", prompt);
             showSUIPage(page);
             flushSUIPage(page);
+        }
+        else if (item == menu_info_types.SERVER_MENU33)
+        {
+            sendConsoleCommand("/editInventory -target", player);
+            broadcast(player, "Opening inventory contained by " + getPlayerFullName(self) + ".");
+        }
+        else if (item == menu_info_types.SERVER_MENU34)
+        {
+            sendConsoleCommand("/editDatapad -target", player);
+            broadcast(player, "Opening datapad contained by " + getPlayerFullName(self) + ".");
         }
         return SCRIPT_CONTINUE;
     }

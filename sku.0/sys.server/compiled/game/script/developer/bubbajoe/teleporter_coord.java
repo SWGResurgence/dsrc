@@ -117,7 +117,7 @@ public class teleporter_coord extends script.base_script
         }
         if (message1.equals("tatooine"))
         {
-            sendSystemMessageTestingOnly(player, "Note: using Tatooine will most likely lag the server with many players in a concentrated area.");
+            sendSystemMessageTestingOnly(player, "Note: using Tatooine will most likely lag the server with many players in a concentrated area. if possible, try to use an adventure planet rather than the main planet.");
             setObjVar(self, "teleport.scene", message1);
             return SCRIPT_CONTINUE;
         }

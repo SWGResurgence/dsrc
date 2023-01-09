@@ -6,7 +6,7 @@ import script.library.*;
 public class city_furniture extends script.base_script
 {
     public static final string_id SID_PLACE = new string_id("city/city", "place");
-    public static final string_id SID_MT_REMOVE = new string_id("city/city", "mt_remove");
+    public static final string_id SID_MT_REMOVE = new string_id("Remove Decoration");
     public static final string_id SID_MT_REMOVED = new string_id("city/city", "mt_removed");
     public static final string_id SID_DECO_TOO_CLOSE = new string_id("city/city", "deco_too_close");
     public static final string_id SID_NO_MORE_DECOS = new string_id("city/city", "no_more_decos");
@@ -130,6 +130,13 @@ public class city_furniture extends script.base_script
                 mi.addSubMenu(movement, menu_info_types.SERVER_MENU16, SID_MOVE_DOWN);
                 mi.addSubMenu(movement, menu_info_types.SERVER_MENU17, SID_MOVE_TO_ME);
                 mi.addSubMenu(movement, menu_info_types.SERVER_MENU19, SID_MOVE_TO_Y);
+                if (!utils.isNestedWithinAPlayer(player))
+                {
+                    if (canManipulate(self, player))
+                    {
+                        mi.addSubMenu(movement, menu_info_types.SERVER_MENU2, new string_id("Remove Decoration"));
+                    }
+                }
                 mi.addRootMenu(menu_info_types.SERVER_MENU18, SID_NAME);
                 int menu = mi.addRootMenu(menu_info_types.SERVER_MENU3, SID_ALIGN);
                 mi.addSubMenu(menu, menu_info_types.SERVER_MENU4, SID_NORTH);
@@ -150,16 +157,6 @@ public class city_furniture extends script.base_script
                 }
             }
             return SCRIPT_CONTINUE;
-        }
-        else
-        {
-            if (isInWorldCell(player) && !utils.isNestedWithinAPlayer(player))
-            {
-                if (canManipulate(self, player))
-                {
-                    mi.addRootMenu(menu_info_types.SERVER_MENU2, SID_MT_REMOVE);
-                }
-            }
         }
         return SCRIPT_CONTINUE;
     }

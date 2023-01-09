@@ -2606,6 +2606,8 @@ public class ai extends script.base_script
             else
             {
                 broadcast(giver, "The data buffer on this extraction unit is at max capacity.");
+                putIn(item, utils.getInventoryContainer(giver), giver);
+                return SCRIPT_CONTINUE;
             }
             return SCRIPT_OVERRIDE;
         }
