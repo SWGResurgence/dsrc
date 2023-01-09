@@ -106,7 +106,6 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
-
         if (cmd.equalsIgnoreCase("resourceDatapad"))
         {
             obj_id myTarget = getIntendedTarget(self);
@@ -185,7 +184,6 @@ public class player_developer extends base_script
                 commPlayer(self, pumpkinMaster, pp, "object/mobile/jabba_the_hutt.iff");
             }
         }
-
         if (cmd.equalsIgnoreCase("wiki"))
         {
             String speech = tok.nextToken();
@@ -195,7 +193,6 @@ public class player_developer extends base_script
             launchClientWebBrowser(self, pathed);
             return SCRIPT_CONTINUE;
         }
-
         if (cmd.equalsIgnoreCase("shuttleRebelDrop"))
         {
             String message = "Mayday! Mayday! Mayday! I have to drop my payload, " + getFirstName(target) + "!";
@@ -293,7 +290,6 @@ public class player_developer extends base_script
             broadcast(myTarget, "You have been passed a ball! Use \"Throw Ball\" to throw it at a player.");
             return SCRIPT_CONTINUE;
         }
-
         if (cmd.equalsIgnoreCase("shell"))
         {
             String where = tok.nextToken();
@@ -1025,13 +1021,11 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
-
-        if (cmd.equals("posture"))
+        if (cmd.equalsIgnoreCase("posture"))
         {
             int posture = Integer.parseInt(tok.nextToken());
             setPosture(self, posture);
         }
-
         if (cmd.equalsIgnoreCase("randomizecontainer"))
         {
             obj_id[] contents = utils.getContents(target, true);
@@ -1269,7 +1263,6 @@ public class player_developer extends base_script
                 sendSystemMessageTestingOnly(self, "You are not riding a vehicle.");
             }
         }
-
         if (cmd.equalsIgnoreCase("copyOnMe"))
         {
             String template = getTemplateName(iTarget);
@@ -1283,7 +1276,6 @@ public class player_developer extends base_script
             sendConsoleCommand("/object createIn " + template + " " + pInv, self);
             return SCRIPT_CONTINUE;
         }
-
         if (cmd.equalsIgnoreCase("-help"))
         {
             debugConsoleMsg(self, "Developer Commands:  ");
