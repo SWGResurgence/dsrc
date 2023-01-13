@@ -151,7 +151,7 @@ public class resource extends script.base_script
     public static final String DATATABLE_COL_ENUM = "Enum";
     public static final String DATATABLE_COL_RESOURCE_CRATE_TYPE = "Resource Container Type";
     public static final String DEFAULT_CONTAINER = "object/resource_container/simple.iff";
-    public static final int CONTAINER_VOLUME_MAX = 100000000;
+    public static final int CONTAINER_VOLUME_MAX = 1000000;
     public static final String MSG_SELECT_RANGE = "@" + STF_SURVEY + ":select_range";
     public static final String MSG_SELECT_CLASS = "@" + STF_SURVEY + ":select_class";
     public static final int SAMPLE_STOP_LOOP = 0;
