@@ -1521,7 +1521,7 @@ slot																																		template	0	barrel_rifle_blaster	object/tan
 slot																																		template	0	weapon_core	object/tangible/component/weapon/core/weapon_core_ranged_base.iff	1																												
 slot																																		template	1	scope	object/tangible/component/weapon/scope_weapon_base.iff	1	scope																											
 slot																																		template	1	stock	object/tangible/component/weapon/stock_base.iff	1	stock																											
-weapon	rifle	weapon_appearance_rifle_lightning_heavy		systems.crafting.weapon.core.crafting_new_weapon_final	0	weapon	10	weapon_crafting		object/weapon/ranged/rifle/rifle_lightning_heavy.iff	object/weapon/ranged/rifle/rifle_lightning_heavy.iff	20	450	800	1100	0	0	0	0	0	0	energy	electric	-1	-1	rifle	rifle	1	1	100	100		64							sys.server/compiled/game/object/draft_schematic/weapon/appearance/																							0	42	0	20
+weapon	rifle	weapon_appearance_rifle_lightning_guardian		systems.crafting.weapon.core.crafting_new_weapon_final	0	weapon	10	weapon_crafting		object/weapon/ranged/rifle/rifle_lightning_heavy.iff	object/weapon/ranged/rifle/rifle_lightning_heavy.iff	20	450	800	1100	0	0	0	0	0	0	energy	electric	-1	-1	rifle	rifle	1	1	100	100		64							sys.server/compiled/game/object/draft_schematic/weapon/appearance/																							0	42	0	20
 slot																																		resource	0	frame_assembly	steel_duralloy	175																												
 slot																																		resource	0	receiver_assembly	iron_colat	70																												
 slot																																		resource	0	conduction_mass	copper	28																												
