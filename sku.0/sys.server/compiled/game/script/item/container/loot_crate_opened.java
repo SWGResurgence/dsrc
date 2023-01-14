@@ -23,6 +23,7 @@ public class loot_crate_opened extends script.base_script
         }
         debugServerConsoleMsg(self, "\n[SKYNET] Player " + transferer + " is attempting to move " + getName(item) + "(" + item +  ") to " + destContainer + "\n");
         broadcast(transferer, "This item will have it's No Trade tag reapplied 24 hours after it is moved.");
+        //@NOTE: This is a hack to transfer the item to the players inventory without breaking the no trade tag. If the item is STATIC, the tag will get reapplied on next load.
         return SCRIPT_CONTINUE;
     }
 }
