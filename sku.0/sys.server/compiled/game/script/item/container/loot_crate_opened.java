@@ -13,7 +13,16 @@ public class loot_crate_opened extends script.base_script
     }
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
-        debugServerConsoleMsg(self, "[SKYNET] Player " + transferer + " is attempting to move " + getName(item) + "(" + item +  ") to " + destContainer);
+        if (hasScript(item, "item.special.nomove"))
+        {
+            detachScript(item, "item.special.nomove");
+        }
+        if (hasObjVar(item, "noTrade"))
+        {
+            removeObjVar(item, "noTrade");
+        }
+        debugServerConsoleMsg(self, "\n[SKYNET] Player " + transferer + " is attempting to move " + getName(item) + "(" + item +  ") to " + destContainer + "\n");
+        broadcast(transferer, "This item will have it's No Trade tag reapplied 24 hours after it is moved.");
         return SCRIPT_CONTINUE;
     }
 }
