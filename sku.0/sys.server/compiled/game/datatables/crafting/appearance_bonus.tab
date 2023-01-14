@@ -257,6 +257,7 @@ weapon_appearance_rifle_lightning	object/weapon/ranged/rifle/rifle_lightning.iff
 weapon_appearance_rifle_lightning_basic	object/weapon/ranged/rifle/rifle_lightning_light.iff		
 weapon_appearance_rifle_lightning_heavy	object/weapon/ranged/rifle/rifle_lightning_heavy.iff		
 weapon_appearance_rifle_lightning_heavy_static	object/weapon/ranged/rifle/rifle_lightning_heavy_static.iff
+weapon_appearance_rifle_lightning_guardian_elite	object/weapon/ranged/rifle/rifle_lightning_guardian_elite.iff		84
 weapon_appearance_rifle_mandalorian	object/weapon/ranged/rifle/rifle_mandalorian.iff
 weapon_appearance_rifle_massassi_ink	object/weapon/ranged/rifle/rifle_massassi_ink.iff		
 weapon_appearance_rifle_naktra_crystal	object/weapon/ranged/rifle/ep3/rifle_naktra_crystal.iff		
