@@ -90,7 +90,12 @@ public class master_controller_peko extends script.base_script
             if (!utils.hasScriptVar(self, "hasLastStand"))
             {
                 obj_id[] players = getPlayerCreaturesInRange(self, 64.0f);
-                resurgence.createCircleSpawn(self, self, "peko_peko_albatross_high", 6, 24);
+                resurgence.createCircleSpawn(self, self, "peko_peko_albatross_high", 2, 24);
+                obj_id[] creatures = getCreaturesInRange(self, 64.0f);
+                for (obj_id creature : creatures) {
+                    combat.startCombat(creature, players[rand(0, players.length - 1)]);
+                    chat.chat(creature, "<Indicates that " + getName(self) + " is the true Empress of the Peko-Peko>");
+                }
                 staggerPlayers(self, players);
                 for (obj_id who : players)
                 {
@@ -104,15 +109,14 @@ public class master_controller_peko extends script.base_script
 
     public void staggerPlayers(obj_id self, obj_id[] targets) throws InterruptedException
     {
-        location stagger = new location();
-        location slapLoc = getLocation(self);
-        stagger.x = slapLoc.x + rand(-64.0f, 64.0f);
-        stagger.z = slapLoc.z + rand(-64.0f, 64.0f);
-        stagger.y = getHeightAtLocation(slapLoc.x, slapLoc.z);
+        location stagger = getLocation(self);
+        stagger.x = stagger.x + rand(-64.0f, 64.0f);
+        stagger.z = stagger.z + rand(-64.0f, 64.0f);
+        stagger.y = getHeightAtLocation(stagger.x, stagger.z);
         stagger.area = getCurrentSceneName();
         for (obj_id iTarget : targets)
         {
-            warpPlayer(iTarget, slapLoc.area, slapLoc.x, slapLoc.y, slapLoc.z, null, 0, 0, 0);
+            warpPlayer(iTarget, stagger.area, stagger.x, stagger.y, stagger.z, null, 0, 0, 0);
             broadcast(iTarget, "The wind from the Mutated Peko-Peko's wings knocked you back!");
             setYaw(self, rand(0.0f, 180.0f));
         }
