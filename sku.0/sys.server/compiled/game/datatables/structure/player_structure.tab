@@ -379,7 +379,7 @@ object/building/faction_perk/hq/hq_s05_rebel_pvp.iff	object/building/player/cons
 																							object/tangible/terminal/terminal_hq_rebel.iff	0	1	12.5	mainhall	180	
 object/building/faction_perk/hq/hq_s05_imp_pvp.iff	object/building/player/construction/construction_player_house_tatooine_large_style_01.iff	object/building/faction_perk/hq/hq_s05_fp.iff		7	32							0	0	200	100000		1					4							
 																							object/tangible/terminal/terminal_hq_imperial.iff	0	1	12.5	mainhall	180	
-object/building/player/player_house_mustafar_lg.iff	object/building/player/construction/construction_player_house_tatooine_large_style_01.iff			-1	8								13	5	7200	0	1					4							
+object/building/player/player_house_mustafar_lg.iff	object/building/player/construction/construction_player_house_tatooine_large_style_01.iff			-1	8								13	5	7200		1					4
 																							object/tangible/terminal/terminal_player_structure.iff	-4.5	0.46	6.33	entrance	90	
 																							object/tangible/terminal/terminal_elevator_up.iff	-1.19	-33	1.61	elevator	160	
 																							object/tangible/terminal/terminal_elevator_down.iff	1.18	-26	1.65	elevator	-166	
@@ -460,3 +460,4 @@ object/building/player/player_resurgence_bunker_a.iff	object/building/player/con
 																							object/tangible/terminal/terminal_elevator_down.iff	1.18	-26	1.65	elevator	-166	
 																							object/tangible/terminal/terminal_elevator_down.iff	1.18	0.47	1.65	elevator	-166	
 																							object/tangible/terminal/terminal_elevator_up.iff	-1.19	-26	1.61	elevator	160	
+																		
