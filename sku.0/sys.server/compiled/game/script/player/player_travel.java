@@ -1204,7 +1204,7 @@ public class player_travel extends script.base_script
         }
         else if (type == SHIP_TYPE_WALKER_SHIP)
         {
-            pickupCraftType = "object/tangible/terminal/instant_travel_terminal_atat_walker.iff";
+            pickupCraftType = "object/tangible/terminal/terminal_instant_travel_terminal_atat_walker.iff";
             playClientEffectObj(player, "sound/veh_atrt_decel.snd", player, "");
         }
         else if (type == SHIP_TYPE_TCG_SLAVE1_SHIP)
