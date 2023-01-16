@@ -4,3 +4,9 @@
 @class object_template 7
 
 sharedTemplate = "object/tangible/deed/player_house_deed/shared_structure_deed_resurgence_bunker.iff"
+
+objvars = +[
+	"player_structure.deed.template" = "object/building/player/player_resurgence_bunker_a.iff",
+	"player_structure.deed.buildtime" = 90]
+
+scripts = +["item.structure_deed.player_structure_deed"]
