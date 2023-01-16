@@ -5,7 +5,7 @@
 gender = GE_female
 species = SP_ewok
 race = RA_ewok_ewok
-animationMapFilenam = "ewok.map"
+animationMapFilename = "ewok.map"
 
 @class tangible_object_template 7
 @class object_template 7
