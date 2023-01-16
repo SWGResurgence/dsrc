@@ -11,4 +11,4 @@ weaponEffect = "rocket"
 objectName = "weapon_name" "rifle_lightning_guardian_elite"
 detailedDescription = "weapon_detail" "rifle_lightning_guardian_elite"
 
-appearanceFilename - "appearance/wp_rifle_lightning_cannon.apt"
+appearanceFilename = "appearance/wp_rifle_lightning_cannon.apt"
