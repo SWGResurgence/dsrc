@@ -109,17 +109,28 @@ public class master_controller_peko extends script.base_script
 
     public void staggerPlayers(obj_id self, obj_id[] targets) throws InterruptedException
     {
-        location stagger = getLocation(self);
-        stagger.x = stagger.x + rand(-64.0f, 64.0f);
-        stagger.z = stagger.z + rand(-64.0f, 64.0f);
-        stagger.y = getHeightAtLocation(stagger.x, stagger.z);
-        stagger.area = getCurrentSceneName();
+        playClientEffectObj(targets, "clienteffect/cr_bodyfall_huge.cef", self, "");
+        if (targets == null || targets.length == 0)
+        {
+            return;
+        }
         for (obj_id iTarget : targets)
         {
+            int playerHealth = getHealth(iTarget);
+            int playerAction = getAction(iTarget);
+            int statDrain = playerHealth / 2;
+            int actionDrain = playerAction / 2;
+            setHealth(iTarget, playerHealth - statDrain);
+            setAction(iTarget, playerAction - actionDrain);
+            location stagger = getLocation(iTarget);
+            stagger.x = stagger.x + rand(-64.0f, 64.0f);
+            stagger.z = stagger.z + rand(-64.0f, 64.0f);
+            stagger.y = getHeightAtLocation(stagger.x, stagger.z);
+            stagger.area = getCurrentSceneName();
             warpPlayer(iTarget, stagger.area, stagger.x, stagger.y, stagger.z, null, 0, 0, 0);
             broadcast(iTarget, "The wind from the Mutated Peko-Peko's wings knocked you back!");
-            setYaw(self, rand(0.0f, 180.0f));
+            sendConsoleCommand("/prone", iTarget);
+            faceTo(iTarget, self);
         }
-
     }
 }
