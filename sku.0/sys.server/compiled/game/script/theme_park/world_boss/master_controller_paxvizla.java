@@ -57,7 +57,12 @@ public class master_controller_paxvizla extends script.base_script
         {
             if (!utils.hasScriptVar(self, "hasSpawned"))
             {
-                resurgence.createCircleSpawn(self, self, "peko_peko", 12, 24);
+                chat.chat(self, "I will not be challenged in such uncivil ways!");
+                for (obj_id who : players)
+                {
+                    broadcast(who, "Pax has lost his enhancements. Strike now!");
+                }
+                buff.removeAllBuffs(self);
                 utils.setScriptVar(self, "hasSpawned", 1);
                 return SCRIPT_CONTINUE;
             }
@@ -67,6 +72,8 @@ public class master_controller_paxvizla extends script.base_script
             if (!utils.hasScriptVar(self, "hasBeenBombed"))
             {
                 chat.chat(self, MAND_MSGS[rand(0, MAND_MSGS.length - 1)]);
+                chat.chat(self, "Eat Durasteel!");
+                bombard(self, players);
                 bombard(self, players);
                 utils.setScriptVar(self, "hasBeenBombed", 1);
             }
@@ -102,7 +109,19 @@ public class master_controller_paxvizla extends script.base_script
                 utils.setScriptVar(self, "hasLastStand", 1);
             }
         }
-        return SCRIPT_CONTINUE;
+        if (percentHealth <= 1)
+        {
+            if (!utils.hasScriptVar(self, "lastMandMsg"))
+            {
+                chat.chat(self, MAND_MSGS[(MAND_MSGS.length - 1)]);
+                utils.setScriptVar(self, "hasLastStand", 1);
+            }
+        }
+        else
+        {
+            return SCRIPT_CONTINUE;
+        }
+        return  SCRIPT_CONTINUE;
     }
     public void stunPlayers(obj_id self, obj_id[] targets) throws InterruptedException
     {

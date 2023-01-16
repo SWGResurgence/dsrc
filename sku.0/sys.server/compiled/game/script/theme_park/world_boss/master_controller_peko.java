@@ -7,8 +7,6 @@ import script.obj_id;
 public class master_controller_peko extends script.base_script
 {
     public static final String VOLUME_NAME = "aggressive_area";
-
-
     public String[] SQUAWK_MSGS = {
             "<LOUDS AVIAN NOISES>",
             "<ANGRY AVIAN NOISES>",
@@ -20,10 +18,7 @@ public class master_controller_peko extends script.base_script
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        if (!hasObjVar(self, "peko"))
-        {
-            sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress, her nesting site has been reported to have last been  on Naboo. Czerka Corporation is paying for it's remains.");
-        }
+        sendSystemMessageGalaxyTestingOnly("ATTENTION GALACTIC BOUNTY HUNTERS: The Abomination, The Mutated Peko-Peko Empress, her nesting site has been reported to have last been on Naboo. The Czerka Corporation is paying a high price for it's remains.");
         return SCRIPT_CONTINUE;
     }
 
@@ -116,12 +111,8 @@ public class master_controller_peko extends script.base_script
         {
             if (!utils.hasScriptVar(self, "hasLastStand"))
             {
+                buff.removeAllBuffs(self);
                 resurgence.createCircleSpawn(self, self, "peko_peko_albatross_high", 2, 24);
-                obj_id[] creatures = getCreaturesInRange(self, 64.0f);
-                for (obj_id creature : creatures) {
-                    combat.startCombat(creature, players[rand(0, players.length - 1)]);
-                    chat.chat(creature, "<Indicates that " + getName(self) + " is the true ruler of the Peko-Peko>");
-                }
                 staggerPlayers(self, players);
                 for (obj_id who : players)
                 {

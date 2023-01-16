@@ -109,6 +109,11 @@ public class master_controller_krayt extends script.base_script
             obj_id player = attackerList[rand(0, attackerList.length - 1)];
             //Add 1 in the junk table index to make sure we don't hit the "none" row.
             String junk = dataTableGetString(JUNK_TABLE, rand(1, dataTableGetNumRows(JUNK_TABLE)), column);
+            if (junk.contains("heroic_") || junk.contains("_heroic_") || junk.contains("meatlump"))
+            {
+                --JUNK_COUNT;
+                return;
+            }
             obj_id junkItem = static_item.createNewItemFunction(junk, utils.getInventoryContainer(player));
             if (isIdValid(junkItem))
             {
