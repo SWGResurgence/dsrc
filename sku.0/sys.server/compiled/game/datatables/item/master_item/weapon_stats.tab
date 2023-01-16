@@ -133,7 +133,8 @@ weapon_tow_polearm_obsidian_03_01	1	1000	683	1366	0	kinetic			100	1	100	0	5				1
 weapon_tow_carbine_e5_04_01	1	1000	385	770	0				60	1	100	0	50				12	938	963
 weapon_tow_pistol_de10_04_01	1	1000	257	513	0				40	1	100	0	35				12	938	963
 weapon_tow_sword_rsf_04_01	1	1000	683	1366	0	kinetic			100	1	100	0	5				12	1000	1025
-weapon_tow_rifle_lightning_cannon_04_01	1	1000	510	1045	0		electric	155	80	1	100	0	64				12	1353	1359
+weapon_tow_rifle_lightning_cannon_04_01	1	1000	210	745	0		electric	30	80	1	100	0	64		int:wp.canBeDismantled=2		12	1353	1359
+weapon_tow_rifle_lightning_cannon_guardian_elite	1	1000	310	847	0	kinetic	electric	155	80	1	100	0	70		int:wp.canBeDisMantled=2		12	1475	1505
 weapon_tow_blasterfist_04_01	1	1000	642	1283	0		heat	45	100	1	100	0	5				12	938	963
 weapon_tow_rifle_ld1_04_01	1	1000	514	1027	0				80	1	100	0	64				12	938	963
 weapon_tow_pistol_04_03	1	1000	257	513	0				40	1	100	0	35				12	938	963

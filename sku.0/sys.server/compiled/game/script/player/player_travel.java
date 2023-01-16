@@ -45,6 +45,7 @@ public class player_travel extends script.base_script
     public static final int SHIP_TYPE_TCG_LOCATION_SHIP = 6;
     public static final int SHIP_TYPE_SNOWSPEEDER_SHIP = 7;
     public static final int SHIP_TYPE_TCG_SLAVE1_SHIP = 8;
+    public static final int SHIP_TYPE_WALKER_SHIP = 9;
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_travel.OnInitialize");
@@ -1057,6 +1058,10 @@ public class player_travel extends script.base_script
     public int callForRoyalPickup(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         return doCFP(self, SHIP_TYPE_INSTANT_ROYAL_SHIP);
+    }
+    public int callForWalkerPickup(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        return doCFP(self, SHIP_TYPE_WALKER_SHIP);
     }
     public int callForTcgHomePickup(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
