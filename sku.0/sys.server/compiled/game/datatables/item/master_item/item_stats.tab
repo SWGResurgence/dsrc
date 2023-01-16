@@ -5115,3 +5115,4 @@ item_force_sensitive_staff_pants_02_01	"combat_block_value=1000,combat_evasion_v
 item_force_sensitive_staff_jacket_02_01	"combat_block_value=1000,combat_evasion_value=1000,agility_modified=1000,constitution_modified=1000,strength_modified=1000,stamina_modified=1000,precision_modified=1000"		"int:armor.general_protection_clothing=20000,int:item.set.set_id=90001"	"index_color_1=60,index_color_2=6"							
 item_force_sensitive_staff_boots_02_01	"combat_block_value=1000,combat_evasion_value=1000,agility_modified=1000,constitution_modified=1000,strength_modified=1000,stamina_modified=1000,precision_modified=1000"			"index_color_1=50,index_color_2=47"							
 item_staff_krayt_pearl_01_01			"int:jedi.crystal.stats.min_dmg=1000,int:jedi.crystal.stats.max_dmg=1200,int:jedi.crystal.stats.quality=7,int:jedi.crystal.stats.level=-1"								
+item_staff_color_crystal_01_01			"int:jedi.crystal.stats.color=36,int:jedi.crystal.stats.level=-1"	index_color_1=36							
