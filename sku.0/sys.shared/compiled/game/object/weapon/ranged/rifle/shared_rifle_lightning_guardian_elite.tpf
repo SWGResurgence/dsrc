@@ -9,6 +9,6 @@ weaponEffect = "rocket"
 @class object_template 10
 
 objectName = "weapon_name" "rifle_lightning_guardian_elite"
-ddetailedDescription = "weapon_detail" "rifle_lightning_guardian_elite"
+detailedDescription = "weapon_detail" "rifle_lightning_guardian_elite"
 
 appearanceFilename - "appearance/wp_rifle_lightning_cannon.apt"
