@@ -30,6 +30,10 @@ public class master_controller_krayt extends script.base_script
     }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
+        if (isGod(killer))
+        {
+            return SCRIPT_CONTINUE;
+        }
         showFlyText(self, new string_id("+ REGURGITATION + "), 10.5f, colors.DEEPPINK);
         if (pet_lib.isPet(killer))
         {
