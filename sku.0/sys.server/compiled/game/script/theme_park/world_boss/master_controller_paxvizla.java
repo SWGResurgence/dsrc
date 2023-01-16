@@ -9,12 +9,15 @@ public class master_controller_paxvizla extends script.base_script
     public static final String VOLUME_NAME = "aggressive_area";
 
     public String[] MAND_MSGS = {
-            "<LOUDS AVIAN NOISES>",
-            "<ANGRY AVIAN NOISES>",
-            "<UPSET AVIAN NOISES>",
-            "<DISPLEASED AVIAN NOISES>",
-            "<RIGHTEOUS AVIAN NOISES>",
-            "<DISTURBING AVIAN NOISES>",
+            "Cowards!",
+            "You will not escape me!",
+            "I will not be defeated!",
+            "I will not be stopped!",
+            "I will not be denied!",
+            "I will not be ignored!",
+            "I will not be forgotten!",
+            "I will not be defeated!",
+            "I am Mand'alor!",
     };
     public int OnAttach(obj_id self) throws InterruptedException
     {
