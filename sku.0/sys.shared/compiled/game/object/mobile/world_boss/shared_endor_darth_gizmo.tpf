@@ -11,7 +11,7 @@ animationMapFilename = "ewok.map"
 @class object_template 7
 
 objectName = "world_boss_name" "world_boss_darth_gizmo"
-lootAtText = "world_boss_lookat" "world_boss_darth_gizmo"
+lookAtText = "world_boss_lookat" "world_boss_darth_gizmo"
 
 clientDataFile = "clientdata/npc/client_shared_npc_dressed_ewok_f_01.cdf"
 
