@@ -1066,6 +1066,10 @@ public class player_developer extends base_script
                 broadcast(self, "Invalid script name.");
                 return SCRIPT_CONTINUE;
             }
+            if (getGameObjectType(item) == GOT_building)
+            {
+                broadcast(self, "Cannot spawn this game object type.");
+            }
             attachScript(item, script);
             setYaw(item, getYaw(self));
         }
