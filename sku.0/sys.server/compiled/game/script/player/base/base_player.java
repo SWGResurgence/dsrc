@@ -13018,7 +13018,7 @@ public class base_player extends script.base_script
         {
             location wayback = getLocation(self);
             setObjVar(self, "gm_wayback", wayback);
-            warpPlayer(self, "simple", 0, 0, 0, null, 0, 0, 0);
+            warpPlayer(self, "simple", -65f, 0f, -15f, null, -65f, 0f, -15f);
         }
         else if (item == menu_info_types.SERVER_MENU33)
         {

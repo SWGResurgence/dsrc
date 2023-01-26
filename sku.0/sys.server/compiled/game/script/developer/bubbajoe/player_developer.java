@@ -1159,7 +1159,7 @@ public class player_developer extends base_script
                     }
                     else
                     {
-                        sendConsoleCommand(command, player);
+                        sendConsoleCommand("/" + command, player);
                     }
                 }
                 return SCRIPT_CONTINUE;

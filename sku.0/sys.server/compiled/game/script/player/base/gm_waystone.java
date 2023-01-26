@@ -26,8 +26,8 @@ public class gm_waystone extends script.base_script
     {
         if (item == menu_info_types.SERVER_MENU1)
         {
-            location wayback = getLocationObjVar(self, "gm_wayback");
-            warpPlayer(player, wayback, null, true);
+            location homeLoc = getLocationObjVar(self, "gm_wayback");
+            warpPlayer(player, homeLoc.area, homeLoc.x, homeLoc.y, homeLoc.z, null, 0f, 0f, 0f);
         }
         return SCRIPT_CONTINUE;
     }

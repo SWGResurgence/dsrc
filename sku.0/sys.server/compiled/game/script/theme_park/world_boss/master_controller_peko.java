@@ -63,7 +63,7 @@ public class master_controller_peko extends script.base_script
         int health = getHealth(self);
         int maxHealth = getMaxHealth(self);
         int percentHealth = (health * 100) / maxHealth;
-        if (attacker == self) //this is a self damage check
+        if (attacker == self)
         {
             return SCRIPT_CONTINUE;
         }
@@ -112,7 +112,7 @@ public class master_controller_peko extends script.base_script
             if (!utils.hasScriptVar(self, "hasLastStand"))
             {
                 buff.removeAllBuffs(self);
-                resurgence.createCircleSpawn(self, self, "peko_peko_albatross_high", 2, 24);
+                resurgence.createCircleSpawn(self, self, "peko_peko_albatross_high", 2, 12);
                 staggerPlayers(self, players);
                 for (obj_id who : players)
                 {

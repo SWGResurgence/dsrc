@@ -4537,7 +4537,7 @@ public class cmd extends script.base_script
                 if(result.contains("BUILD SUCCESSFUL"))
                 {
                     sendSystemMessageTestingOnly(self, "compileAndReloadScript: ant compile_java BUILD SUCCESSFUL. Reloading "+script+"...");
-                    sendConsoleCommand("/script reload "+script, self);
+                    sendConsoleCommand("/script reload " + script, self);
                 }
                 else
                 {

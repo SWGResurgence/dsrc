@@ -1,7 +1,6 @@
 package script.theme_park.world_boss;
 
 import script.library.*;
-import script.location;
 import script.obj_id;
 
 public class master_controller_paxvizla extends script.base_script
