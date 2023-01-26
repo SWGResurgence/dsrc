@@ -348,6 +348,29 @@ public class base_player extends script.base_script
         saveTextOnClient(self, "export/housing_layout.txt", ar.toString());
     }
 
+    public static String red(String str)
+    {
+        return "\\#FF0000 " + str + "\\#FFFFFF";
+    }
+
+    public static String azure(String str)
+    {
+        return "\\#00FFFF " + str + "\\#FFFFFF";
+    }
+
+    public static String construction(String str)
+    {
+        String yellow = "\\#FFFF00";
+        String black = "\\#000000";
+        for (char c : str.toCharArray())
+        {
+            yellow += c;
+            black += c;
+            str = yellow + black;
+        }
+        return "\\#00FFFF " + str + "\\#FFFFFF";
+    }
+
     public int OnCustomizeFinished(obj_id self, obj_id object, String params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "armor_colorize.tool_oid") || utils.hasScriptVar(self, "structure_colorize.tool_oid"))
@@ -1180,6 +1203,7 @@ public class base_player extends script.base_script
         messageTo(self, "recapacitationDelay", null, recapacitateTimer, false);
         clearAllAiEnemyFlags(self);
         dot.removeAllDots(self);
+        System.out.print("Player " + self + " has fallen incapacitated by " + killer);//remove after lag inspection
         if (stealth.hasInvisibleBuff(self))
         {
             stealth.checkForAndMakeVisible(self);
@@ -1267,6 +1291,7 @@ public class base_player extends script.base_script
             obj_id beastBCD = beast_lib.getBeastBCD(beast);
             messageTo(beastBCD, "ownerGrouped", null, 1, false);
         }
+        System.out.print("Player " + self + " has been added to group " + groupId);
         return SCRIPT_CONTINUE;
     }
 
@@ -1278,6 +1303,7 @@ public class base_player extends script.base_script
         }
         squad_leader.clearRallyPoint(self);
         detachScript(self, group.SCRIPT_GROUP_MEMBER);
+        System.out.print("\nPlayer " + self + " has been removed from group " + groupId);//remove after lag inspection
         return SCRIPT_CONTINUE;
     }
 
@@ -1288,6 +1314,7 @@ public class base_player extends script.base_script
 
     public int OnGroupDisbanded(obj_id self, obj_id group) throws InterruptedException
     {
+        System.out.print("\nPlayer " + self + " has disbanded group " + group);//remove after lag inspection
         squad_leader.clearRallyPoint(self);
         return SCRIPT_CONTINUE;
     }
@@ -1299,9 +1326,20 @@ public class base_player extends script.base_script
         {
             int pid = mi.addRootMenu(menu_info_types.SERVER_MENU30, new string_id("Internal"));
             mi.addSubMenu(pid, menu_info_types.SERVER_MENU31, new string_id("Freeze Player"));
-            mi.addSubMenu(pid, menu_info_types.SERVER_MENU32, new string_id("Player Information"));
-            mi.addSubMenu(pid, menu_info_types.SERVER_MENU33, new string_id("Edit Inventory"));
-            mi.addSubMenu(pid, menu_info_types.SERVER_MENU34, new string_id("Edit Datapad"));
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU32, new string_id("Jail Player"));
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU33, new string_id("Player Information"));
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU34, new string_id("Edit Inventory"));
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU35, new string_id("Edit Datapad"));
+            if (!isInWorldCell(self))
+            {
+                mi.addSubMenu(pid, menu_info_types.SERVER_MENU36, new string_id("Eject from Building"));
+            }
+            if (vehicle.isRidingVehicle(self))
+            {
+                mi.addSubMenu(pid, menu_info_types.SERVER_MENU37, new string_id("Eject from Vehicle"));
+            }
+            mi.addSubMenu(pid, menu_info_types.SERVER_MENU38, new string_id("Grant Static Item"));
+            System.out.print("Player " + self + " has requested the god menu on " + toUpper(getFirstName(player), 0));//remove after lag inspection
         }
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.COMBAT_DEATH_BLOW);
         if (mid == null)
@@ -1364,10 +1402,6 @@ public class base_player extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public static String red(String str)
-    {
-        return "\\#FF0000 " + str + "\\#FFFFFF";
-    }
     public int exportCsDumpFile(obj_id self, dictionary params)
     {
         // This is a stub for the exportCsDumpFile function.
@@ -2223,6 +2257,10 @@ public class base_player extends script.base_script
 
     public int handleStatProfileSUI(obj_id self, dictionary params) throws InterruptedException
     {
+        if (isGod(self)) // get off my back server, gawd.
+        {
+            return SCRIPT_CONTINUE;
+        }
         if (!utils.hasScriptVar(self, "screwedStats.opt"))
         {
             return SCRIPT_CONTINUE;
@@ -2309,7 +2347,7 @@ public class base_player extends script.base_script
     public int OnLogout(obj_id self) throws InterruptedException
     {
         location logoutLoc = getLocation(self);
-        System.out.println("\nOnLogout: " + self + " " + getName(self) + " on planet " + getCurrentSceneName() + " at " + logoutLoc.x + ", " + logoutLoc.y + ", " + logoutLoc.z + "\n");
+        System.out.println("\nZoning: " + self + " " + getName(self) + " has left the galaxy on planet " + getCurrentSceneName() + " at " + logoutLoc.x + ", " + logoutLoc.y + ", " + logoutLoc.z + "\n");
         if (hasObjVar(self, pclib.VAR_CONSENT_FROM_ID))
         {
             pclib.relinquishConsents(self);
@@ -2385,7 +2423,7 @@ public class base_player extends script.base_script
             {
                 if ((endMoney - startMoney) > utils.stringToInt(profitThreshold))
                 {
-                    CustomerServiceLog("Wealth", "Extraordinary Profit: " + getName(self) + " (" + self + ") logged in with " + startMoney + " credits and logged out with " + endMoney + " credits, for a profit of " + (endMoney - startMoney) + " credits");
+                    System.out.print("\nExtraordinary Profit: " + getName(self) + " (" + self + ") logged in with " + startMoney + " credits and logged out with " + endMoney + " credits, for a profit of " + (endMoney - startMoney) + " credits\n" ); //remove after lag investigation
                 }
             }
         }
@@ -12372,6 +12410,7 @@ public class base_player extends script.base_script
         utils.setScriptVar(self, "recieved_city_motd", 1);
         return SCRIPT_CONTINUE;
     }
+
     //    public int stampDungeonArea(obj_id self, dictionary params) throws InterruptedException
 //    {
 //        LOG("space_dungeon", "base_player.stampDungeonArea -- Stamping player with obj vars.");
@@ -12810,6 +12849,8 @@ public class base_player extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
+    // BEGIN ENZYME LOOT TOGGLE \\
+
     public int removeLotteryListener(obj_id self, dictionary params) throws InterruptedException
     {
         stopListeningToMessage(getObjIdObjVar(self, "lottery.broker"), "updateLotteryStatus");
@@ -12821,8 +12862,6 @@ public class base_player extends script.base_script
         setObjVar(self, "lottery.availableTickets", params.getInt("available"));
         return SCRIPT_CONTINUE;
     }
-
-    // BEGIN ENZYME LOOT TOGGLE \\
 
     public boolean blog(String txt) throws InterruptedException
     {
@@ -12914,24 +12953,6 @@ public class base_player extends script.base_script
         return utils.getInventoryContainer(getGroupLeaderId(self));
     }
 
-    public static String azure(String str)
-    {
-        return "\\#00FFFF " + str + "\\#FFFFFF";
-    }
-
-    public static String construction(String str)
-    {
-        String yellow = "\\#FFFF00";
-        String black = "\\#000000";
-        for (char c : str.toCharArray())
-        {
-            yellow += c;
-            black += c;
-            str = yellow + black;
-        }
-        return "\\#00FFFF " + str + "\\#FFFFFF";
-    }
-
     public int handleReadyCheck(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("readyCheckLeaderId_" + getGroupObject(self));
@@ -12994,6 +13015,12 @@ public class base_player extends script.base_script
             setState(self, STATE_FROZEN, getState(self, STATE_FROZEN) != 1);
         }
         else if (item == menu_info_types.SERVER_MENU32)
+        {
+            location wayback = getLocation(self);
+            setObjVar(self, "gm_wayback", wayback);
+            warpPlayer(self, "simple", 0, 0, 0, null, 0, 0, 0);
+        }
+        else if (item == menu_info_types.SERVER_MENU33)
         {
             String prompt = gold(" ------------------  SKYNET ------------------ ") + "\n";
             prompt += "Full Name: " + getPlayerFullName(self) + "\n";
@@ -13157,15 +13184,67 @@ public class base_player extends script.base_script
             showSUIPage(page);
             flushSUIPage(page);
         }
-        else if (item == menu_info_types.SERVER_MENU33)
+        else if (item == menu_info_types.SERVER_MENU34)
         {
             sendConsoleCommand("/editInventory -target", player);
             broadcast(player, "Opening inventory contained by " + getPlayerFullName(self) + ".");
+            sendConsoleMessage(player, "If a UI window did not pop-up, re-radial the player with the reticule in bounds with the menu.");
         }
-        else if (item == menu_info_types.SERVER_MENU34)
+        else if (item == menu_info_types.SERVER_MENU35)
         {
             sendConsoleCommand("/editDatapad -target", player);
             broadcast(player, "Opening datapad contained by " + getPlayerFullName(self) + ".");
+            sendConsoleMessage(player, "If a UI window did not pop-up, re-radial the player with the reticule in bounds with the menu.");
+        }
+        else if (item == menu_info_types.SERVER_MENU36)
+        {
+            ejectPlayerFromBuilding(self, getTopMostContainer(self));
+        }
+        else if (item == menu_info_types.SERVER_MENU37)
+        {
+            dismountCreature(self);
+        }
+        else if (item == menu_info_types.SERVER_MENU38)
+        {
+            String[] selectionIndices = {
+                    "1",
+                    "5",
+                    "10",
+                    "25",
+                    "50",
+                    "100",
+                    "250",
+                    "500",
+                    "1000",
+            };
+            sui.inputbox(self, player, "Enter the string you wish to grant this player*.\n\n\n\n*No quantities", sui.OK_CANCEL, "Static Item Grant", sui.INPUT_NORMAL, null, "handleStaticItemCreation", null);
+        }
+        return SCRIPT_CONTINUE;
+    }
+
+    public int handleStaticItemCreation(obj_id self, dictionary params) throws InterruptedException
+    {
+        obj_id player = sui.getPlayerId(params);
+        int bp = sui.getIntButtonPressed(params);
+        if (bp == sui.BP_CANCEL)
+        {
+            return SCRIPT_CONTINUE;
+        }
+        String item = sui.getInputBoxText(params);
+        if (item == null || item.equals(""))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        obj_id itemObj = static_item.createNewItemFunction(item, self);
+        if (isIdValid(itemObj))
+        {
+            sendSystemMessage(player, "You have created " + item + " for " + getPlayerFullName(self) + ".", null);
+            sendSystemMessage(self, "You have been awarded " + item + " by " + getPlayerFullName(player) + ".", null);
+            System.out.print("\nADMIN/DEV/GM: " + getPlayerFullName(player) + " has created " + item + " for " + getPlayerFullName(self) + ".\n");
+        }
+        else
+        {
+            sendSystemMessage(player, "You have failed to create " + item + " for " + getPlayerFullName(self) + ".", null);
         }
         return SCRIPT_CONTINUE;
     }
