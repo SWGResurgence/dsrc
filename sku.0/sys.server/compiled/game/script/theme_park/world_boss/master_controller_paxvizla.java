@@ -73,7 +73,6 @@ public class master_controller_paxvizla extends script.base_script
                 chat.chat(self, MAND_MSGS[rand(0, MAND_MSGS.length - 1)]);
                 chat.chat(self, "Eat Durasteel!");
                 bombard(self, players);
-                bombard(self, players);
                 utils.setScriptVar(self, "hasBeenBombed", 1);
             }
         }
@@ -113,7 +112,7 @@ public class master_controller_paxvizla extends script.base_script
             if (!utils.hasScriptVar(self, "lastMandMsg"))
             {
                 chat.chat(self, MAND_MSGS[(MAND_MSGS.length - 1)]);
-                utils.setScriptVar(self, "hasLastStand", 1);
+                utils.setScriptVar(self, "lastMandMsg", 1);
             }
         }
         else

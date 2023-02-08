@@ -276,7 +276,7 @@ public class grievous_encounter_lock extends script.base_script
         if (utils.hasScriptVar(player, god_authorized))
         {
             doLogging("validatePlayerSessionId", "Player(" + getName(player) + "/" + player + ") is god authoratative");
-            System.out.println("Player(" + getName(player) + "/" + player + ") is god authoratative");
+            System.out.println("\nPlayer (" + getName(player) + "/" + player + ") is god authoratative\n");
             return true;
         }
         if (hasObjVar(dungeon, encounter_active))

@@ -1165,6 +1165,40 @@ public class player_developer extends base_script
                 return SCRIPT_CONTINUE;
             }
         }
+        if (cmd.equalsIgnoreCase("createLootableCorpse"))
+        {
+            String[] NAMEs = {
+                    "an explorer",
+                    "a scavenger",
+                    "a slicer",
+                    "a soldier",
+                    "a technician",
+                    "a thief",
+                    "a trader",
+                    "a smuggler",
+                    "a bounty hunter",
+                    "a mercenary",
+                    "a spy",
+                    "a senator"
+            };
+            if (!tok.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /developer createLootableCorpse <table> <amount>");
+            }
+            else
+            {
+                String table = tok.nextToken();
+                int amt = Integer.parseInt(tok.nextToken());
+                String corpseTemplate = "object/tangible/container/drum/warren_drum_skeleton.iff";
+                location treasureLoc = getLocation(self);
+                obj_id treasureChest = createObject(corpseTemplate, treasureLoc);
+                attachScript (treasureChest, "item.container.loot_crate_opened");
+                setName(treasureChest, "a corpse of " + NAMEs[rand(0, NAMEs.length - 1)]);
+                loot.makeLootInContainer(treasureChest, table, amt, 300);
+                sendSystemMessageTestingOnly(self, "A loot chest was made with " + amt + " items from the loot table: " + table);
+            }
+            return SCRIPT_CONTINUE;
+        }
         if (cmd.equalsIgnoreCase("playmusic"))
         {
             if (!tok.hasMoreTokens())
@@ -1176,6 +1210,34 @@ public class player_developer extends base_script
             {
                 String music = tok.nextToken();
                 playMusic(self, music);
+            }
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equals("botHumanoid"))
+        {
+            String[] RACES = {
+                    "bothan",
+                    "human",
+                    "ithorian",
+                    "moncal",
+                    "rodian",
+                    "sullustan",
+                    "twilek",
+                    "wookiee",
+                    "zabrak"
+            };
+            int randomIndex = rand(0, RACES.length - 1);
+            String randomString = RACES[randomIndex];
+            int genderChance = rand(1,100);
+            if (genderChance < 49)
+            {
+                obj_id bot = create.object("object/creature/player/" + randomString + "_male.iff", getLocation(self));
+                attachScript(bot, "bot.clone");
+            }
+            else
+            {
+                obj_id bot = create.object("object/creature/player/" + randomString + "_female.iff", getLocation(self));
+                attachScript(bot, "bot.clone");
             }
             return SCRIPT_CONTINUE;
         }

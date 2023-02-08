@@ -26,8 +26,12 @@ public class gm_waystone extends script.base_script
     {
         if (item == menu_info_types.SERVER_MENU1)
         {
-            location homeLoc = getLocationObjVar(self, "gm_wayback");
-            warpPlayer(player, homeLoc.area, homeLoc.x, homeLoc.y, homeLoc.z, null, 0f, 0f, 0f);
+            location homeLoc = getLocationObjVar(self, "jail.gm_wayback");
+            warpPlayer(player, homeLoc.area, homeLoc.x, homeLoc.y, homeLoc.z, homeLoc.cell, 0f, 0f, 0f);
+        }
+        else
+        {
+            broadcast(player, "You are not authorized to use this item.");
         }
         return SCRIPT_CONTINUE;
     }
