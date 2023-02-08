@@ -106,7 +106,7 @@ public class dt_gift extends script.base_script
             else
             {
                 obj_id[] players = getAllPlayers(getLocation(player), 124.0f);
-                playClientEffectLoc(players, "appearance/rebel_transport_touch_and_go.prt", getLocation(player), 2.0f);
+                playClientEffectLoc(players, "appearance/rebel_transport_touch_and_go.prt", getLocation(player), 0.9f);
                 int charges = getIntObjVar(self, "charges");
                 if (charges < 0)
                 {
@@ -140,6 +140,7 @@ public class dt_gift extends script.base_script
                     }
                 }
                 setObjVar(self, "used.timestamp", currentGameTime);
+                System.out.print("Remote Tactical Deployment Tool used by " + player + " at " + loc);
             }
         }
         return SCRIPT_CONTINUE;
