@@ -1,0 +1,8 @@
+@base object/tangible/deed/base_deed.iff
+
+@class tangible_object_template 2
+@class object_template 7
+
+sharedTemplate = "object/tangible/item/shared_instance_deed.iff"
+
+scripts = +[item.flag_instance"]
