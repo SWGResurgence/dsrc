@@ -5,4 +5,4 @@
 
 sharedTemplate = "object/tangible/item/shared_heroic_unlock_datapad.iff"
 
-scripts = +[item.heroic_gift]
+scripts = +["item.heroic_gift"]

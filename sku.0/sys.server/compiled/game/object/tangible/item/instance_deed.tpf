@@ -5,4 +5,4 @@
 
 sharedTemplate = "object/tangible/item/shared_instance_deed.iff"
 
-scripts = +[item.flag_instance"]
+scripts = +["item.flag_instance"]
