@@ -2023,3 +2023,4 @@ event_halloween_boss_last_chance	event_halloween_boss			1	command.powerBoost	-1	
 event_halloween_sidekick_buff	event_halloween_boss			1	command.powerBoost	60	expertise_damage_all	10	expertise_action_all	10		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 event_lifeday_wookiee_pipe_combat	event_lifeday			1	command.sp_smoke_mirrors	30	combat_block_reduction	300	combat_dodge_reduction	300	combat_glancing_blow_reduction	300	combat_parry_reduction	300		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 event_lifeday_wookiee_pipe_crafting	event_lifeday			1	command.sp_smoke_mirrors	30	stamina_modified	150	agility_modified	150	constitution_modified	150	trader_heal	0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
+acePilotBonus	genBuff_4			80	buffs.genericBuff	-1	space_combat_general	25	movement	10	constitution_modified	75		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1

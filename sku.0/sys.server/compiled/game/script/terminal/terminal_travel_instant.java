@@ -224,9 +224,9 @@ public class terminal_travel_instant extends script.base_script
         }
         else if (hasObjVar(ship, "itv_atat_walker"))
         {
-            itvName = "travel_snowspeeder";
-            prompt = "@spam:location_snowspeeder_manage_d";
-            title = "@spam:snowspeeder_itv_t";
+            itvName = "travel_atat_walker";
+            prompt = "@spam:location_atat_walker_manage_d";
+            title = "@spam:atat_walker_itv_t";
             availableLocations = 2;
         }
         else

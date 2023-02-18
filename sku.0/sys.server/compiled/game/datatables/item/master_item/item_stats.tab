@@ -2157,9 +2157,9 @@ item_consumable_detect_hidden_02_04					detectHiddenConsumable100	short_reuse_4	
 item_content_spy_bracer_r_03_01	agility_modified=4										
 item_content_spy_bracer_l_03_01	agility_modified=4										
 item_event_microservo_gloves_03_01	"precision_modified=30,constitution_modified=25"										
-item_quest_reward_imperial_pilot_medal_01_01											
-item_quest_reward_rebel_pilot_medal_01_01											
-item_quest_reward_neutral_pilot_medal_01_01											
+item_quest_reward_imperial_pilot_medal_01_01					acePilotBonus						
+item_quest_reward_rebel_pilot_medal_01_01					acePilotBonus						
+item_quest_reward_neutral_pilot_medal_01_01					acePilotBonus						
 item_publish_gift_27_04_01						publish_gift	900			appearance/pt_heal.prt	
 item_pub28_meat_pie_02_01					pub28MeatPie	short_reuse_4	5				
 item_pub28_corsec_ring_02_01	"constitution_modified=9,strength_modified=9"										
@@ -5116,3 +5116,4 @@ item_force_sensitive_staff_jacket_02_01	"combat_block_value=1000,combat_evasion_
 item_force_sensitive_staff_boots_02_01	"combat_block_value=1000,combat_evasion_value=1000,agility_modified=1000,constitution_modified=1000,strength_modified=1000,stamina_modified=1000,precision_modified=1000"			"index_color_1=50,index_color_2=47"							
 item_staff_krayt_pearl_01_01			"int:jedi.crystal.stats.min_dmg=1000,int:jedi.crystal.stats.max_dmg=1200,int:jedi.crystal.stats.quality=7,int:jedi.crystal.stats.level=-1"								
 item_staff_color_crystal_01_01			"int:jedi.crystal.stats.color=36,int:jedi.crystal.stats.level=-1"	index_color_1=36							
+weapon_black_metal_baton											

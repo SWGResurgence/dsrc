@@ -1075,6 +1075,10 @@ public class player_travel extends script.base_script
     {
         return doCFP(self, SHIP_TYPE_SNOWSPEEDER_SHIP);
     }
+    public int callForATATWalkerPickup(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        return doCFP(self, SHIP_TYPE_WALKER_SHIP);
+    }
     public int callForTcgSlave1Pickup(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         return doCFP(self, SHIP_TYPE_TCG_SLAVE1_SHIP);
@@ -1197,6 +1201,11 @@ public class player_travel extends script.base_script
         {
             pickupCraftType = "object/tangible/terminal/terminal_travel_instant_snowspeeder.iff";
             playClientEffectObj(player, "sound/veh_t47snowspeeder_decel.snd", player, "");
+        }
+        else if (type == SHIP_TYPE_WALKER_SHIP)
+        {
+            pickupCraftType = "object/tangible/terminal/terminal_travel_instant_terminal_atat_walker.iff";
+            playClientEffectObj(player, "sound/veh_atrt_decel.snd", player, "");
         }
         else if (type == SHIP_TYPE_TCG_SLAVE1_SHIP)
         {
