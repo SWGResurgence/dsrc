@@ -5,6 +5,7 @@ package script.systems.city;/*
 */
 
 import script.library.city;
+import script.library.colors_hex;
 import script.library.create;
 import script.menu_info;
 import script.menu_info_types;
@@ -14,14 +15,28 @@ import script.string_id;
 public class city_hire extends script.base_script
 {
     public static String TOOL = "object/tangible/loot/tool/city_actor_bio_extractor.iff";
+    public static String BASEMSG = colors_hex.HEADER + colors_hex.SEASHELL + "INFORMATION:: \n" + colors_hex.FOOTER + "This extraction unit can be used to extract the bio-logical matter of a creature for decoration purposes inside the city you belong to.\n\n" + colors_hex.HEADER + colors_hex.SEASHELL +  "USAGE:\n" + colors_hex.FOOTER + "Drag the extractor onto an interactable NPC (AI Only) to copy it's bio-logical data.\n" + colors_hex.HEADER + colors_hex.RED + "\n\nREQUIREMENTS:\n\n" + colors_hex.FOOTER + " You must be Mayor or Militia and have Politican Novice to use this deed." + colors_hex.FOOTER;
+    public static string_id DESC = new string_id(BASEMSG);
 
     public int OnAttach(obj_id self)
     {
+        if (!hasObjVar(self, "tokenUsed"))
+        {
+            setName(self, "Bio-logical Extraction Unit");
+            setStaticItemName(self, "Bio-logical Extraction Unit");
+            setDescriptionStringId(self, DESC);
+        }
         return SCRIPT_CONTINUE;
     }
 
     public int OnInitialize(obj_id self)
     {
+        if (!hasObjVar(self, "tokenUsed"))
+        {
+            setName(self, "Bio-logical Extraction Unit");
+            setStaticItemName(self, "Bio-logical Extraction Unit");
+            setDescriptionStringId(self, DESC);
+        }
         return SCRIPT_CONTINUE;
     }
 
@@ -71,6 +86,7 @@ public class city_hire extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canManipulateToken(obj_id self, obj_id player) throws InterruptedException
     {
         //@note: keep these in order of importance, with the most important last
@@ -88,11 +104,7 @@ public class city_hire extends script.base_script
         {
             return true;
         }
-        if (isGod(player))
-        {
-            return true;
-        }
-        else return false;
+        return isGod(player);
     }
 }
 

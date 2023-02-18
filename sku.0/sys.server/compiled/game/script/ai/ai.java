@@ -3,6 +3,7 @@ package script.ai;
 import script.*;
 import script.library.*;
 
+import static script.systems.city.city_hire.DESC;
 import static script.systems.city.city_hire.TOOL;
 
 public class ai extends script.base_script
@@ -2599,11 +2600,14 @@ public class ai extends script.base_script
                 setObjVar(token, "tokenUsed", 1);
                 setObjVar(token, "actorMade", 1);
                 attachScript(token, "systems.city.city_hire");
-                setName(token, "City Actor Deed: " + utils.getStringName(mobile));
+                setName(token, "Bio-logical Sequence: " + utils.getStringName(mobile));
+                setDescriptionStringId(token, DESC);
             }
             else
             {
                 broadcast(giver, "The data buffer on this extraction unit is at max capacity.");
+                putIn(item, utils.getInventoryContainer(giver), giver);
+                return SCRIPT_CONTINUE;
             }
             return SCRIPT_OVERRIDE;
         }

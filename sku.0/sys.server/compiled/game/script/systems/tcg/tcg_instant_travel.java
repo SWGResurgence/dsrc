@@ -17,6 +17,18 @@ public class tcg_instant_travel extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
+        if (!hasScript(self, "name.name"))
+        {
+            attachScript(self, "name.name");
+        }
+        if (hasScript(player, "name.name"))//hacky way of removing the name script from players.
+        {
+            detachScript(player, "name.name");
+        }
+        if (hasScript(self, "item.static_item_base"));
+        {
+            detachScript(self, "item.static_item_base");
+        }
         if (isDead(player) || isIncapacitated(player))
         {
             sendSystemMessage(player, SID_WHILE_DEAD);
@@ -35,7 +47,6 @@ public class tcg_instant_travel extends script.base_script
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
-        callable.storeCallables(player);
         if (!isIdValid(player))
         {
             return SCRIPT_CONTINUE;
@@ -47,10 +58,6 @@ public class tcg_instant_travel extends script.base_script
         if (callable.hasAnyCallable(player))
         {
             callable.storeCallables(player);
-        }
-        if (!hasScript(player, "name.name"))
-        {
-            attachScript(player, "name.name");
         }
         obj_id tcg_itv = getSelf();
         if (item == menu_info_types.SERVER_MENU8)

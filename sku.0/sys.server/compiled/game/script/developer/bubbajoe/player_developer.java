@@ -10,17 +10,22 @@ import script.*;
 import script.library.*;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.time.Clock;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import static script.systems.city.city_hire.DESC;
 
 public class player_developer extends base_script
 {
+    //public String APIKEY = "https://discord.com/api/webhooks/1054125244060799076/YUI-Gwy8iJTHzBJkPkFBp7kjH27uGNFlO6z6-LFx39kAel5PlQ_xk_sFqxzdf5igiapD";
+    public String APIKEY = "https://discord.com/api/webhooks/1056764306320003132/LRryi0SZDM920lm7Z6wRcs4eCKJAEkHcRCwLuyiKMYgzK5MGHvRj9kUx0gd3wFl_4wjE";
     public player_developer()
     {
     }
-    //public String APIKEY = "https://discord.com/api/webhooks/1054125244060799076/YUI-Gwy8iJTHzBJkPkFBp7kjH27uGNFlO6z6-LFx39kAel5PlQ_xk_sFqxzdf5igiapD";
-    public String APIKEY = "https://discord.com/api/webhooks/1056764306320003132/LRryi0SZDM920lm7Z6wRcs4eCKJAEkHcRCwLuyiKMYgzK5MGHvRj9kUx0gd3wFl_4wjE";
 
-    public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException, InvocationTargetException
     {
         obj_id iTarget = getIntendedTarget(self);
         java.util.StringTokenizer tok = new java.util.StringTokenizer(params);
@@ -101,7 +106,30 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
-
+        if (cmd.equalsIgnoreCase("resourceDatapad"))
+        {
+            obj_id myTarget = getIntendedTarget(self);
+            obj_id pInv = utils.getInventoryContainer(myTarget);
+            obj_id datapad = createObject("object/tangible/loot/npc_loot/datapad_flashy_generic.iff", pInv, "");
+            setName(datapad, "Resource Analyzer");
+            setBioLink(datapad, myTarget);
+            setObjVar(datapad, "resource_amount", 10000);
+            setObjVar(datapad, "noTrade", 1);
+            attachScript(datapad, "developer.bubbajoe.dev_res");
+            attachScript(datapad, "item.special.nomove");
+            static_item.setStaticItemName(datapad, "Resource Analyzer");
+            static_item.setDescriptionStringId(datapad, new string_id("This item is used to generate resources that have erroneously been removed from the game.\n\n" + "It is a developer tool and should not be used by players."));
+            broadcast(self,"Resource Analyzer has been added to your inventory. All actions regarding this tool are logged. [Player: " +  myTarget + "]");
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("describe"))
+        {
+            dictionary paramsDict = new dictionary();
+            obj_id myTarget = getIntendedTarget(self);
+            paramsDict.put("target", myTarget);
+            sui.inputbox(self, self, "Enter a description for the target.", sui.OK_ONLY, "Describe", sui.INPUT_NORMAL, null, "handleDescribe", paramsDict);
+            return SCRIPT_CONTINUE;
+        }
         if (cmd.equalsIgnoreCase("pumpkin"))
         {
             obj_id pumpkinMaster = target;
@@ -156,7 +184,6 @@ public class player_developer extends base_script
                 commPlayer(self, pumpkinMaster, pp, "object/mobile/jabba_the_hutt.iff");
             }
         }
-
         if (cmd.equalsIgnoreCase("wiki"))
         {
             String speech = tok.nextToken();
@@ -166,7 +193,6 @@ public class player_developer extends base_script
             launchClientWebBrowser(self, pathed);
             return SCRIPT_CONTINUE;
         }
-
         if (cmd.equalsIgnoreCase("shuttleRebelDrop"))
         {
             String message = "Mayday! Mayday! Mayday! I have to drop my payload, " + getFirstName(target) + "!";
@@ -187,18 +213,83 @@ public class player_developer extends base_script
             playClientEffectLoc(players, "appearance/imperial_transport_touch_and_go.prt", getLocation(target), 2.0f);
             return SCRIPT_CONTINUE;
         }
-
+        if (cmd.equalsIgnoreCase("seedAllSchematics"))
+        {
+            obj_id inventory = utils.getInventoryContainer(self);
+            if (!isIdValid(inventory))
+            {
+                return SCRIPT_CONTINUE;
+            }
+            String schematicTable = "datatables/crafting/schematic_group.iff";
+            String column = "SchematicName";
+            String[] schematics = dataTableGetStringColumnNoDefaults(schematicTable, column);
+            obj_id myBag = createObjectInInventoryAllowOverload("object/tangible/test/qabag.iff", self);
+            String[] items = dataTableGetStringColumnNoDefaults(schematicTable, column);
+            int bagLimit = 0;
+            for (String item : items)
+            {
+                String description = "This item was created by " + colors_hex.HEADER + colors_hex.PEACHPUFF + getRandomHumanName(self) + colors_hex.FOOTER + " on " + colors_hex.HEADER + colors_hex.SANDYBROWN + getCalendarTimeStringGMT_YYYYMMDDHHMMSS(getCalendarTime()) + "\\#.";
+                if (bagLimit > 500 && !utils.hasScriptVar(self, "bagLimit"))
+                {
+                    broadcast(self, "Breached 500 items.");
+                    utils.setScriptVar(self, "bagLimit", 1);
+                }
+                obj_id madeItem = makeCraftedItem(item, 100f, myBag);
+                setDescriptionStringId(madeItem, new string_id(description));
+                bagLimit++;
+            }
+            broadcast(self, "Seeding " + items.length + " items with 100% quality.");
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("seedAllSchematicsByType"))
+        {
+            String type = "object/draft_schematic/" + tok.nextToken();
+            obj_id inventory = utils.getInventoryContainer(self);
+            if (!isIdValid(inventory))
+            {
+                return SCRIPT_CONTINUE;
+            }
+            String schematicTable = "datatables/crafting/schematic_group.iff";
+            String column = "SchematicName";
+            String[] schematics = dataTableGetStringColumnNoDefaults(schematicTable, column);
+            obj_id myBag = createObjectInInventoryAllowOverload("object/tangible/test/qabag.iff", self);
+            String[] items = dataTableGetStringColumnNoDefaults(schematicTable, column);
+            int bagLimit = 0;
+            for (String item : items)
+            {
+                if (item.startsWith(type)) //object/draft_schematic/TYPE/subtype/etc/etc
+                {
+                    String description = "This item was created by " + colors_hex.HEADER + colors_hex.PEACHPUFF + getRandomHumanName(self) + colors_hex.FOOTER + " on " + colors_hex.HEADER + colors_hex.SANDYBROWN + getCalendarTimeStringGMT_YYYYMMDDHHMMSS(getCalendarTime() - (rand(0, 86400))) + "\\#.";
+                    if (bagLimit > 500 && !utils.hasScriptVar(self, "bagLimit"))
+                    {
+                        broadcast(self, "Breached 500 items.");
+                        utils.setScriptVar(self, "bagLimit", 1);
+                    }
+                    obj_id madeItem = makeCraftedItem(item, 100.0f, myBag);
+                    setDescriptionStringId(madeItem, new string_id(description));
+                    bagLimit++;
+                }
+                else
+                {
+                    sendConsoleMessage(self,"Skipping " + item);
+                }
+            }
+            broadcast(self, "Seeding " + bagLimit + " items with 100% quality.");
+            return SCRIPT_CONTINUE;
+        }
         if (cmd.equalsIgnoreCase("ballgame"))
         {
-            obj_id pInv = utils.getInventoryContainer(self);
+            obj_id myTarget = getIntendedTarget(self);
+            obj_id pInv = utils.getInventoryContainer(myTarget);
             obj_id hotPotato = createObject("object/tangible/loot/dungeon/geonosian_mad_bunker/relic_gbb_small_ball.iff", pInv, "");
             setName(hotPotato, "a throwable ball");
             attachScript(hotPotato, "developer.bubbajoe.pass_the_ball");
             detachScript(hotPotato, "object.autostack");
-            broadcast(self, "a throwable ball has been created in your inventory.");
+            String descUnloc = "This is a ball that can be thrown at other players. Use \"Throw Ball\" to throw it at a player.";
+            setDescriptionStringId(hotPotato, new string_id(descUnloc));
+            broadcast(myTarget, "You have been passed a ball! Use \"Throw Ball\" to throw it at a player.");
             return SCRIPT_CONTINUE;
         }
-
         if (cmd.equalsIgnoreCase("shell"))
         {
             String where = tok.nextToken();
@@ -559,13 +650,13 @@ public class player_developer extends base_script
             switch (toggle)
             {
                 case "on":
-                    sendConsoleCommand("/object setCoverVisibility " + self + " " + 0, self);
-                    sendConsoleCommand("/object hide " + self + " " + 1, self);
+                    sendConsoleCommand("/object setCoverVisibility " + self + " 0", self);
+                    sendConsoleCommand("/object hide " + self + " 0", self);
                     sendConsoleCommand("/echo You are visible.", self);
                     break;
                 case "off":
-                    sendConsoleCommand("/object setCoverVisibility " + self + " " + 1, self);
-                    sendConsoleCommand("/object hide " + self + " " + 0, self);
+                    sendConsoleCommand("/object setCoverVisibility " + self + " 1", self);
+                    sendConsoleCommand("/object hide " + self + " 1", self);
                     sendConsoleCommand("/echo You are visible.", self);
                     break;
                 default:
@@ -655,6 +746,15 @@ public class player_developer extends base_script
                 String url = tok.nextToken();
                 obj_id iTar = getIntendedTarget(self);
                 launchClientWebBrowser(iTar, url);
+            }
+        }
+        if (cmd.equalsIgnoreCase("pathToTargetPlanet"))
+        {
+            obj_id targetId = getIntendedTarget(self);
+            obj_id[] players = getPlayerCreaturesInRange(getLocation(targetId), 16000f);
+            for (obj_id player : players)
+            {
+                createClientPathAdvanced(player, getLocation(player), getLocation(targetId), "default");
             }
         }
         if (cmd.equalsIgnoreCase("playeffect"))
@@ -921,13 +1021,11 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
-
-        if (cmd.equals("posture"))
+        if (cmd.equalsIgnoreCase("posture"))
         {
             int posture = Integer.parseInt(tok.nextToken());
             setPosture(self, posture);
         }
-
         if (cmd.equalsIgnoreCase("randomizecontainer"))
         {
             obj_id[] contents = utils.getContents(target, true);
@@ -967,6 +1065,10 @@ public class player_developer extends base_script
             {
                 broadcast(self, "Invalid script name.");
                 return SCRIPT_CONTINUE;
+            }
+            if (getGameObjectType(item) == GOT_building)
+            {
+                broadcast(self, "Cannot spawn this game object type.");
             }
             attachScript(item, script);
             setYaw(item, getYaw(self));
@@ -1057,11 +1159,45 @@ public class player_developer extends base_script
                     }
                     else
                     {
-                        sendConsoleCommand(command, player);
+                        sendConsoleCommand("/" + command, player);
                     }
                 }
                 return SCRIPT_CONTINUE;
             }
+        }
+        if (cmd.equalsIgnoreCase("createLootableCorpse"))
+        {
+            String[] NAMEs = {
+                    "an explorer",
+                    "a scavenger",
+                    "a slicer",
+                    "a soldier",
+                    "a technician",
+                    "a thief",
+                    "a trader",
+                    "a smuggler",
+                    "a bounty hunter",
+                    "a mercenary",
+                    "a spy",
+                    "a senator"
+            };
+            if (!tok.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /developer createLootableCorpse <table> <amount>");
+            }
+            else
+            {
+                String table = tok.nextToken();
+                int amt = Integer.parseInt(tok.nextToken());
+                String corpseTemplate = "object/tangible/container/drum/warren_drum_skeleton.iff";
+                location treasureLoc = getLocation(self);
+                obj_id treasureChest = createObject(corpseTemplate, treasureLoc);
+                attachScript (treasureChest, "item.container.loot_crate_opened");
+                setName(treasureChest, "a corpse of " + NAMEs[rand(0, NAMEs.length - 1)]);
+                loot.makeLootInContainer(treasureChest, table, amt, 300);
+                sendSystemMessageTestingOnly(self, "A loot chest was made with " + amt + " items from the loot table: " + table);
+            }
+            return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("playmusic"))
         {
@@ -1074,6 +1210,34 @@ public class player_developer extends base_script
             {
                 String music = tok.nextToken();
                 playMusic(self, music);
+            }
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equals("botHumanoid"))
+        {
+            String[] RACES = {
+                    "bothan",
+                    "human",
+                    "ithorian",
+                    "moncal",
+                    "rodian",
+                    "sullustan",
+                    "twilek",
+                    "wookiee",
+                    "zabrak"
+            };
+            int randomIndex = rand(0, RACES.length - 1);
+            String randomString = RACES[randomIndex];
+            int genderChance = rand(1,100);
+            if (genderChance < 49)
+            {
+                obj_id bot = create.object("object/creature/player/" + randomString + "_male.iff", getLocation(self));
+                attachScript(bot, "bot.clone");
+            }
+            else
+            {
+                obj_id bot = create.object("object/creature/player/" + randomString + "_female.iff", getLocation(self));
+                attachScript(bot, "bot.clone");
             }
             return SCRIPT_CONTINUE;
         }
@@ -1165,7 +1329,6 @@ public class player_developer extends base_script
                 sendSystemMessageTestingOnly(self, "You are not riding a vehicle.");
             }
         }
-
         if (cmd.equalsIgnoreCase("copyOnMe"))
         {
             String template = getTemplateName(iTarget);
@@ -1179,7 +1342,6 @@ public class player_developer extends base_script
             sendConsoleCommand("/object createIn " + template + " " + pInv, self);
             return SCRIPT_CONTINUE;
         }
-
         if (cmd.equalsIgnoreCase("-help"))
         {
             debugConsoleMsg(self, "Developer Commands:  ");
@@ -1217,6 +1379,11 @@ public class player_developer extends base_script
             broadcast(self, "Command not found.  Use -help for a list of commands.");
         }
         return SCRIPT_CONTINUE;
+    }
+
+    public String getRandomHumanName(obj_id self)
+    {
+        return npc.generateRandomName("object/creature/player/human_male.iff");
     }
 
     private boolean echo(obj_id self, String s)
@@ -1341,6 +1508,18 @@ public class player_developer extends base_script
         float y = here.y - there.y;
         float z = here.z - there.z;
         return new location(x, y, z);
+    }
+    public int handleDescribe(obj_id self, dictionary paramsDict) throws InterruptedException
+    {
+        obj_id myTarget = getIntendedTarget(self);
+        String descInput = sui.getInputBoxText(paramsDict);
+        if (descInput == null || descInput.equals(""))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        string_id desc = new string_id(descInput);
+        setDescriptionStringId(myTarget, desc);
+        return SCRIPT_CONTINUE;
     }
 }
 

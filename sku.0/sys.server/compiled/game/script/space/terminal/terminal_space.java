@@ -22,10 +22,18 @@ public class terminal_space extends script.terminal.base.base_terminal {
             if (isIdValid(building)) {
                 setObjVar(building, "travel.point_name", "Portable Launch Location");
             }
+            else
+            {
+                LOG("space__to_ground", "terminal_space.OnPreloadComplete -- portable terminal not in a building");
+            }
         }
         String strName = "mos_eisley";
         dictionary dctTeleportInfo = null;
         location locTest = getLocation(self);
+        if (locTest == null)
+        {
+            LOG("space__to_ground", "terminal_space.OnPreloadComplete -- getLocation returned null");
+        }
         region[] rgnCities = getRegionsWithGeographicalAtPoint(locTest, regions.GEO_CITY);
         if (rgnCities != null && rgnCities.length > 0) {
             for (int i = 0; i < rgnCities.length; i++) {

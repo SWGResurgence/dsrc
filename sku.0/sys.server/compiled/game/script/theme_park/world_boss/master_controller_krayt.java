@@ -30,6 +30,10 @@ public class master_controller_krayt extends script.base_script
     }
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
+        if (isGod(killer))
+        {
+            return SCRIPT_CONTINUE;
+        }
         showFlyText(self, new string_id("+ REGURGITATION + "), 10.5f, colors.DEEPPINK);
         if (pet_lib.isPet(killer))
         {
@@ -84,7 +88,8 @@ public class master_controller_krayt extends script.base_script
 
     public void createStomachContents(obj_id self, obj_id container) throws InterruptedException
     {
-        int JUNK_COUNT = getAllPlayers(getLocation(self), 120.0f).length * 3;
+        obj_id[] attackerList = utils.getObjIdBatchScriptVar(self, "creditForKills.attackerList.attackers");
+        int JUNK_COUNT = getAllPlayers(getLocation(self), 64.0f).length * 4;
         if (container == null)
         {
             return;
@@ -101,12 +106,18 @@ public class master_controller_krayt extends script.base_script
         String column = "note";
         for (int i = 0; i < JUNK_COUNT; i++)
         {
+            obj_id player = attackerList[rand(0, attackerList.length - 1)];
             //Add 1 in the junk table index to make sure we don't hit the "none" row.
             String junk = dataTableGetString(JUNK_TABLE, rand(1, dataTableGetNumRows(JUNK_TABLE)), column);
-            obj_id junkItem = static_item.createNewItemFunction(junk, container);
+            if (junk.contains("heroic_") || junk.contains("_heroic_") || junk.contains("meatlump"))
+            {
+                --JUNK_COUNT;
+                return;
+            }
+            obj_id junkItem = static_item.createNewItemFunction(junk, utils.getInventoryContainer(player));
             if (isIdValid(junkItem))
             {
-                setCount(junkItem, rand(1, 5));
+                setCount(junkItem, rand(1, 3));
             }
         }
     }

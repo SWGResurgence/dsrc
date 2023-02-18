@@ -2093,7 +2093,7 @@ public class terminal_character_builder extends script.base_script
 
     public int OnObjectMenuSelect(final obj_id self, obj_id player, int item) throws InterruptedException {
         if (item == menu_info_types.ITEM_USE && (isGod(player) || checkConfigSetting("builderEnabled"))) {
-            System.out.println("Player: " + getName(player) + "(" + player + ") used Character Builder Terminal");
+            System.out.println("\nPlayer: " + getName(player) + "(" + player + ") used Character Builder Terminal\n");
         }
         startCharacterBuilder(player);
         return SCRIPT_CONTINUE;
