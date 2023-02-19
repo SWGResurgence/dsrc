@@ -97,12 +97,7 @@ public class master_controller_peko extends script.base_script
                 chat.chat(self, SQUAWK_MSGS[rand(0, SQUAWK_MSGS.length - 1)]);
                 for (obj_id who : players)
                 {
-                    broadcast(who, "The most recent attack from " + getFirstName(attacker) +  " caused the Peko-Peko Empress to become enraged shocking everyone to dropping their weapons onto the ground!");
-                    obj_id weapon = getCurrentWeapon(who);
-                    if (isIdValid(weapon))
-                    {
-                        putInOverloaded(weapon, utils.getInventoryContainer(who));
-                    }
+                    broadcast(who, "The most recent attack from " + getFirstName(attacker) +  " caused the Peko-Peko Empress to become enraged to try to know everyone's weapon out of their hands.");
                 }
                 utils.setScriptVar(self, "hasDisarmed", 1);
             }
