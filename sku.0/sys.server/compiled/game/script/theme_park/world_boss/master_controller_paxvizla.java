@@ -132,7 +132,7 @@ public class master_controller_paxvizla extends script.base_script
         {
             sendConsoleCommand("/kneel", iTarget);
             broadcast(iTarget, "Pax Vizla brings you to your knees!");
-            chat.chat(self, "Now, witness the TRUE power of the Mandalorian!");
+            chat.chat(self, "Now, witness the power of a TRUE Mandalorian!");
             faceTo(iTarget, self);
         }
     }
