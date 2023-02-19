@@ -376,7 +376,7 @@ ep3_rryatt_katarn	Rryatt Trail - Katarn Boss	bm_dampen_pain_4	2	100	once	bm_stom
 world_boss_peko	Naboo Creature World Boss	bm_bolster_armor_5	2	100	once	trample_random	3	100		bm_siphon_master	6	100		bm_dampen_pain_5	2	100	once	bm_stomp_5	9	100		bm_shaken_3	6	100	once	bm_shaken_3	18	100
 world_boss_krayt	Tatooine Creature World Boss	bm_bolster_armor_5	2	100		trample_random	3	100		bm_enfeeble_5	9	100		bm_damage_disease_5	15	100	once	bm_siphon_master	6	100		bm_stomp_5	4	100		me_hot_1	20	100		bm_claw_5	4	100		bm_dampen_pain_5	2	100	once
 world_boss_paxvizla	Dxun NPC World Boss	ig88_droideka_shield	6	50		bh_dm_2	9	75		bh_dread_strike_2	3	75		bh_dm_crit_1	2	50		me_bacta_grenade_1	6	100
-world_boss_darth_gizmo	Endor NPC World Boss	fs_sh_2	1	10		fs_saber_reflect	10	50		fs_buff_3	10	75		fs_dm_4	25	100		fs_maelstrom_3	15	5		axkva_forcestorm	10	100	once
+world_boss_darth_gizmo	Endor NPC World Boss	fs_sh_2	1	10		fs_saber_reflect	10	50		fs_buff_3	10	75		fs_dm_3	25	100		fs_maelstrom_2	15	5		axkva_forcestorm	10	100	once
 clan_vizla_mandalorian	Clan Vizla Mandalorian	bh_dm_2	9	100		bh_dm_crit_2	2	100		me_hot_1	20	100																																														
 dxun_boma	Boma																																																									
 dxun_cannok	Cannok																																																									
