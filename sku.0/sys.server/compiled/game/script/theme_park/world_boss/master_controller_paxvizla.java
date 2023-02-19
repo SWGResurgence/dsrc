@@ -103,7 +103,7 @@ public class master_controller_paxvizla extends script.base_script
                     broadcast(who, "Pax Vizla has entered his last stand!");
                 }
                 chat.chat(self, "This Is The Way.");
-                buff.applyBuff(self, "crystal_buff", 60, 20);
+                buff.applyBuff(self, "crystal_buff", 30, 10);
                 utils.setScriptVar(self, "hasLastStand", 1);
             }
         }
