@@ -2,7 +2,11 @@ package script.item;
 
 import script.*;
 import script.library.*;
+import script.base_script;
 
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.Vector;
 import java.lang.String;
 
 public class flag_instance extends script.base_script {
