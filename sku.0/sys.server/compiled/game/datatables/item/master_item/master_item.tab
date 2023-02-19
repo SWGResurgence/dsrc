@@ -8166,7 +8166,7 @@ item_tcg_loot_reward_series7_deed_vip_bunker	object/tangible/tcg/series7/structu
 item_tcg_loot_reward_series7_purple_cape	object/tangible/tcg/series7/wearable_purple_cape.iff							4		item.special.nomove			Regal Purple Cape	A regal purple cape.	
 item_tcg_loot_reward_series7_gold_cape	object/tangible/tcg/series7/wearable_gold_cape.iff							4		item.special.nomove			Elegant Golden Cape	An elegant golden cape.	
 item_tcg_loot_reward_series7_handmade_sash	object/tangible/tcg/series7/wearable_sash_handmade.iff							4		item.special.nomove			Handmade Corellian Sash	"A beautiful, handmade Corellian sash."	
-item_tcg_loot_reward_series7_embroidered_sash	object/tangible/tcg/series7/wearable_sash_embroidered.iff							4		item.special.nomove			Embroidered Sash	An embroidered sash.	
+item_tcg_loot_reward_series7_embroidered_sash	object/tangible/tcg/series7/wearable_sash_embroidered.iff							4					Embroidered Sash	An embroidered sash.	
 item_tcg_loot_reward_series7_tie_fighter_familiar	object/tangible/tcg/series7/familiar_deed_tie_fighter.iff							4		"item.special.nomove,npc.pet_deed.reward_pet_deed"	2		TIE Fighter Familiar Deed	This deed grants its holder a non-combat TIE Fighter familiar.	
 item_tcg_loot_reward_series7_xwing_fighter_familiar	object/tangible/tcg/series7/familiar_deed_xwing_fighter.iff							4		"item.special.nomove,npc.pet_deed.reward_pet_deed"	2		X-Wing Fighter Familiar Deed	This deed grants its holder a non-combat X-Wing Fighter familiar.	
 item_tcg_loot_reward_series7_hutt_fighter_familiar	object/tangible/tcg/series7/familiar_deed_hutt_fighter.iff							4		"item.special.nomove,npc.pet_deed.reward_pet_deed"	2		Hutt Fighter Familiar Deed	This deed grants its holder a non-combat Hutt Dunelizard Fighter familiar.	
