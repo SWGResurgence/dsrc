@@ -84,11 +84,6 @@ public class master_controller_paxvizla extends script.base_script
                 for (obj_id who : players)
                 {
                     broadcast(who, "The most recent attack from " + getFirstName(attacker) +  " has enraged Pax Vizla, causing him to increase his focus.");
-                    obj_id weapon = getCurrentWeapon(who);
-                    if (isIdValid(weapon))
-                    {
-                        powerup.cleanupWeaponPowerup(weapon);
-                    }
                 }
                 utils.setScriptVar(self, "hasDisarmed", 1);
             }
