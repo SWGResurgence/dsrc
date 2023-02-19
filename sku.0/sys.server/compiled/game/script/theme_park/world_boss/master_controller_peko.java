@@ -133,7 +133,6 @@ public class master_controller_peko extends script.base_script
         }
         for (obj_id iTarget : targets)
         {
-            sendConsoleCommand("/prone", iTarget);
             int playerHealth = getHealth(iTarget);
             int playerAction = getAction(iTarget);
             int statDrain = playerHealth / 2;
