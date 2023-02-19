@@ -403,7 +403,7 @@ public class araneya_bendix extends script.base_script {
         {
             araneya_bendix_action_sendRewardSignal (player, npc);
 
-            //-- NPC: I see you survived! I have reported your success to Darth Vader and he has authorized the following reward. Long live the Empire.
+            //-- NPC: I see you survived! I have reported your success to Darth Vader, and he has authorized the following reward. Long live the Empire.
             string_id message = new string_id (c_stringFile, "s_14");
             chat.chat (npc, player, message);
 
