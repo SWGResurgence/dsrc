@@ -83,7 +83,7 @@ public class master_controller_paxvizla extends script.base_script
                 chat.chat(self, MAND_MSGS[rand(0, MAND_MSGS.length - 1)]);
                 for (obj_id who : players)
                 {
-                    broadcast(who, "The most recent attack from " + getFirstName(attacker) +  " has enraged Pax Vizla, causing him to do enough damage to remove your weapon's Power-Up!");
+                    broadcast(who, "The most recent attack from " + getFirstName(attacker) +  " has enraged Pax Vizla, causing him to increase his focus.");
                     obj_id weapon = getCurrentWeapon(who);
                     if (isIdValid(weapon))
                     {
