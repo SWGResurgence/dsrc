@@ -1983,7 +1983,7 @@ pvp_rebel_unstoppable_ability																					command_pvp_unstoppable_rebel_
 pvp_rebel_last_man_ability																					command_pvp_last_man_rebel_ability				0	
 pvp_rebel_aura_buff_self																					pvp_aura_buff_rebel_self				0	
 pvp_rebel_airstrike_ability																					pvp_airstrike_rebel_ability				0	
-expertise_me_hot_duration_1	expertise									expertise_me_heal_damage_1												expertise_healing_line_me_hot=10			0	
+expertise_me_hot_duration_1	expertise									expertise_me_heal_damage_4												expertise_healing_line_me_hot=10			0	
 expertise_me_hot_duration_2	expertise_me_hot_duration_1																					expertise_healing_line_me_hot=10			0	
 expertise_me_hot_duration_3	expertise_me_hot_duration_2																					expertise_healing_line_me_hot=15			0	
 expertise_me_hot_duration_4	expertise_me_hot_duration_3																					expertise_healing_line_me_hot=15			0	
