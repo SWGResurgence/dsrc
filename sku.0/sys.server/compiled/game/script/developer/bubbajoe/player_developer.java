@@ -1260,6 +1260,21 @@ public class player_developer extends base_script
             chat.chat(self, "removed this.");
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equalsIgnoreCase("gotoName"))
+        {
+            String parse = tok.nextToken();
+            obj_id[] targetPool = getCreaturesInRange(getLocation(self), 1000.0f);
+            for (obj_id aTargetPool : targetPool)
+            {
+                if (getFirstName(aTargetPool).equalsIgnoreCase(parse))
+                {
+                    setLocation(self, getLocation(aTargetPool));
+                    sendSystemMessageTestingOnly(self, "Teleported to " + getEncodedName(aTargetPool));
+                    return SCRIPT_CONTINUE;
+                }
+            }
+            return SCRIPT_CONTINUE;
+        }
         if (cmd.equalsIgnoreCase("removeinvuln"))
         {
             setInvulnerable(iTarget, false);
@@ -1285,6 +1300,24 @@ public class player_developer extends base_script
                 prose.setStringId(pp, new string_id(message));
                 commPlayer(self, recipient, pp);
             }
+        }
+        if (cmd.equalsIgnoreCase("gonkie"))
+        {
+            obj_id gonkieControlDevice = create.object("object/tangible/loot/generic_usable/frequency_jammer_wire_generic.iff", getLocation(self));
+            if (hasScript(gonkieControlDevice, "item.buff_click_item"))
+            {
+                detachScript(gonkieControlDevice, "item.buff_click_item");
+            }
+            setName(gonkieControlDevice, "Experimental EG-7 Grenadier Control Device");
+            attachScript(gonkieControlDevice, "developer.bubbajoe.xp_gonk");
+            setDescriptionStringId(gonkieControlDevice, new string_id("This control device allows users to request an experimental EG-6 unit. The unit will be delivered to the user's current location."));
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("meddroid"))
+        {
+            obj_id healer = create.object("object/mobile/fx_7_droid.iff", getLocation(self));
+            attachScript(healer, "developer.bubbajoe.doctor_droid");
+            return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("boxspawn"))
         {
@@ -1519,6 +1552,7 @@ public class player_developer extends base_script
         }
         string_id desc = new string_id(descInput);
         setDescriptionStringId(myTarget, desc);
+        setObjVar(myTarget, "null_desc", descInput);
         return SCRIPT_CONTINUE;
     }
 }
