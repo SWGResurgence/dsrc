@@ -912,7 +912,7 @@ drink_jaar	food			3	buffs.foodBeverage	3600	agility_modified	5	constitution_modi
 dish_dustcrepe	food			3	buffs.foodMeal	3600	luck_modified	15	stamina_modified	15		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 dessert_parwan_nutricake	food			15	buffs.foodDessert	3600	constitution_modified	70	expertise_healing_all	4		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
 drink_tilla_tiil	food			20	buffs.foodBeverage	3600	stamina_modified	80	precision_modified	40		0		0		0	STATE_NONE	none			1	0		1	0	1	0	1	1	0	1	1	1
-invis_sp_diversion_stealth	invisibility			6	command.sp_without_a_trace	10	invis	0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+invis_sp_diversion_stealth	invisibility			6	command.sp_without_a_trace	5	invis	0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 invis_sp_buff_invis_notrace_1	invisibility			6	command.sp_without_a_trace	-1	invis	0		0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 invis_sp_buff_invis_1	invisibility			5	command.sp_buff_invis	-1	invis	0	movement	0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 invis_sp_buff_invis_2	invisibility			5	command.sp_buff_invis	10	invis	0	movement	0		0		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
