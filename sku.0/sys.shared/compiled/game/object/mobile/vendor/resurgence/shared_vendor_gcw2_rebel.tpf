@@ -1,4 +1,5 @@
 @base object/mobile/skeleton/shared_humanoid.iff
+
 @class creature_object_template 3
 
 species = SP_human
@@ -7,12 +8,10 @@ gender = GE_female
 @class tangible_object_template 3
 @class object_template 3
 
-objectName = "npc_vendor_name" "chef_vendor"
+objectName = "npc_name" "human_base_female"
 detailedDescription = "" ""
-lookAtText = "npc_vendor_name" "chef_vendor"
+lookAtText = "npc_lookat" "human_base_female"
 
 appearanceFilename = "appearance/hum_f.sat"
 
-clientDataFile = "clientdata/npc/client_shared_npc_dressed_noble_human_f_01.cdf"
-
-scale = 1.00..1.12
+clientDataFile = "clientdata/npc/client_shared_npc_dressed_rebel_recruiter_human_female_02.cdf"
