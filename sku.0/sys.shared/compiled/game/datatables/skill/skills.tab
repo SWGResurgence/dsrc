@@ -1536,16 +1536,15 @@ expertise_bh_ass_act_1	expertise																					expertise_action_line_dm=5	
 expertise_bh_ass_act_2	expertise_bh_ass_act_1																					expertise_action_line_dm=5			0	
 expertise_bh_ass_act_3	expertise_bh_ass_act_2																					expertise_action_line_dm=5			0	
 expertise_bh_ass_act_4	expertise_bh_ass_act_3																					expertise_action_line_dm=5			0	
-expertise_bh_ass_dam_1	expertise																					expertise_damage_line_dm=2			0	
-expertise_bh_ass_dam_2	expertise_bh_ass_dam_1																					expertise_damage_line_dm=3			0	
+expertise_bh_ass_dam_1	expertise																					expertise_damage_line_dm=5			0	
+expertise_bh_ass_dam_2	expertise_bh_ass_dam_1																					expertise_damage_line_dm=5			0	
 expertise_bh_ass_dam_3	expertise_bh_ass_dam_2																					expertise_damage_line_dm=5			0	
 expertise_bh_ass_cool_1	expertise																					expertise_cooldown_line_dm=5			0	
 expertise_bh_ass_cool_2	expertise_bh_ass_cool_1																					expertise_cooldown_line_dm=5			0	
 expertise_bh_innate_1	expertise_bh_ass_cool_2									expertise_bh_ass_cool_2												expertise_freeshot_dm=20			0	
-expertise_bh_return_fire_1	expertise_bh_ass_dam_3									expertise_bh_ass_dam_3											bh_return_fire_command_1				0	
+expertise_bh_return_fire_1	expertise_bh_ass_dam_3																				bh_return_fire_command_1				0	
 expertise_bh_taunt_1	expertise																				bh_taunt_1				0	
-expertise_bh_fumble_1	expertise_bh_taunt_1									expertise_bh_taunt_1											bh_fumble_1				0	
-expertise_bh_stun_1	expertise																				bh_stun_1				0	
+expertise_bh_fumble_1	expertise_bh_taunt_1																				bh_fumble_1				0	
 expertise_bh_prescience	expertise_bh_fumble_1									expertise_bh_fumble_1											bh_prescience				0	
 expertise_bh_absorbtion_1	expertise																					expertise_innate_protection_kinetic=125			0	
 expertise_bh_absorbtion_2	expertise_bh_absorbtion_1																					expertise_innate_protection_kinetic=125			0	
@@ -1560,44 +1559,31 @@ expertise_bh_amb_act_1	expertise																					expertise_action_line_dm_cr
 expertise_bh_amb_act_2	expertise_bh_amb_act_1																					expertise_action_line_dm_crit=5			0	
 expertise_bh_amb_act_3	expertise_bh_amb_act_2																					expertise_action_line_dm_crit=5			0	
 expertise_bh_amb_act_4	expertise_bh_amb_act_3																					expertise_action_line_dm_crit=5			0	
-expertise_bh_amb_dam_1	expertise																					expertise_damage_line_dm_crit=2			0	
-expertise_bh_amb_dam_2	expertise_bh_amb_dam_1																					expertise_damage_line_dm_crit=3			0	
-expertise_bh_amb_dam_3	expertise_bh_amb_dam_2																					expertise_damage_line_dm_crit=5			0	
+expertise_bh_amb_dam_1	expertise																					expertise_damage_line_dm_crit=10			0	
+expertise_bh_amb_dam_2	expertise_bh_amb_dam_1																					expertise_damage_line_dm_crit=10			0	
+expertise_bh_amb_dam_3	expertise_bh_amb_dam_2																					expertise_damage_line_dm_crit=10			0	
 expertise_bh_amb_cool_1	expertise																					expertise_cooldown_line_dm_crit=10			0	
 expertise_bh_amb_cool_2	expertise_bh_amb_cool_1																					expertise_cooldown_line_dm_crit=10			0	
 expertise_bh_surprise_1	expertise_bh_amb_cool_2									expertise_bh_amb_cool_2											bh_dm_crit_3				0	
-expertise_bh_amb_dam_cool	expertise_bh_surprise_1									expertise_bh_surprise_1												"expertise_damage_line_dm_crit=2,expertise_critical_line_dm_crit=10"			0	
-expertise_bh_man_crit_1	expertise																					"expertise_critical_niche_pvp=1,expertise_critical_niche_npc=1"			0	
-expertise_bh_man_crit_2	expertise_bh_man_crit_1																					"expertise_critical_niche_pvp=1,expertise_critical_niche_npc=1"			0	
-expertise_bh_man_crit_3	expertise_bh_man_crit_2																					"expertise_critical_niche_pvp=1,expertise_critical_niche_npc=1"			0	
-expertise_bh_man_crit_4	expertise_bh_man_crit_3																					"expertise_critical_niche_pvp=2,expertise_critical_niche_npc=2"			0	
-expertise_bh_trap_dam_1	expertise																					expertise_damage_line_dm_cc=5			0	
-expertise_bh_trap_dam_2	expertise_bh_trap_dam_1																					expertise_damage_line_dm_cc=5			0	
-expertise_bh_trap_dam_3	expertise_bh_trap_dam_2																					expertise_damage_line_dm_cc=5			0	
-expertise_bh_trap_dam_4	expertise_bh_trap_dam_3																					expertise_damage_line_dm_cc=10			0	
-expertise_bh_trap_rng_1	expertise																					expertise_area_size_line_trap=1			0	
-expertise_bh_trap_rng_2	expertise_bh_trap_rng_1																					expertise_area_size_line_trap=1			0	
+expertise_bh_man_crit_1	expertise																					"expertise_strikethrough_chance=2,detect_hidden=10"			0	
+expertise_bh_man_crit_2	expertise_bh_man_crit_1																					"expertise_strikethrough_chance=2,detect_hidden=10"			0	
+expertise_bh_man_crit_3	expertise_bh_man_crit_2																					"expertise_strikethrough_chance=2,detect_hidden=10"			0	
+expertise_bh_amb_dam_cool	expertise_bh_surprise_1									expertise_bh_surprise_1												"expertise_critical_line_dm_crit=10,expertise_damage_line_dm_crit=1"			0	
+expertise_bh_trap_dam_1	expertise																					"expertise_damage_line_dm_cc=5,expertise_damage_line_action_cc=5"			0	
+expertise_bh_trap_dam_2	expertise_bh_trap_dam_1																					"expertise_damage_line_dm_cc=5,expertise_damage_line_action_cc=5"			0	
+expertise_bh_trap_dam_3	expertise_bh_trap_dam_2																					"expertise_damage_line_dm_cc=5,expertise_damage_line_action_cc=5"			0	
+expertise_bh_trap_dam_4	expertise_bh_trap_dam_3																					"expertise_damage_line_dm_cc=10,expertise_damage_line_action_cc=5"			0	
+expertise_bh_trap_rng_1	expertise																					"expertise_area_size_line_trap=1,expertise_area_size_line_trap_dire=1,expertise_area_size_line_trap_action=10"			0	
+expertise_bh_trap_rng_2	expertise_bh_trap_rng_1																					"expertise_area_size_line_trap=1,expertise_area_size_line_trap_dire=1,expertise_area_trap_action=10"			0	
 expertise_bh_trap_duration_1	expertise																					expertise_buff_duration_group_snare=1			0	
 expertise_bh_trap_duration_2	expertise_bh_trap_duration_1																					expertise_buff_duration_group_snare=1			0	
 expertise_bh_trap_duration_3	expertise_bh_trap_duration_2																					expertise_buff_duration_group_snare=1			0	
 expertise_bh_intimidate_1	expertise_bh_trap_duration_3									expertise_bh_trap_duration_3											bh_intimidate_1				0	
 expertise_bh_dread_strike_1	expertise_bh_intimidate_1									expertise_bh_intimidate_1											bh_dread_strike_1				0	
-expertise_bh_stamina_1	expertise																					stamina_modified=10			0	
-expertise_bh_stamina_2	expertise_bh_stamina_1																					stamina_modified=10			0	
-expertise_bh_stamina_3	expertise_bh_stamina_2																					stamina_modified=10			0	
-expertise_bh_stamina_4	expertise_bh_stamina_3																					stamina_modified=20			0	
-expertise_bh_precision_1	expertise																					precision_modified=10			0	
-expertise_bh_precision_2	expertise_bh_precision_1																					precision_modified=10			0	
-expertise_bh_precision_3	expertise_bh_precision_2																					precision_modified=10			0	
-expertise_bh_precision_4	expertise_bh_precision_3																					precision_modified=20			0	
-expertise_bh_agility_1	expertise																					agility_modified=10			0	
-expertise_bh_agility_2	expertise_bh_agility_1																					agility_modified=10			0	
-expertise_bh_agility_3	expertise_bh_agility_2																					agility_modified=10			0	
-expertise_bh_agility_4	expertise_bh_agility_3																					agility_modified=20			0	
-expertise_bh_constitution_1	expertise																					constitution_modified=10			0	
-expertise_bh_constitution_2	expertise_bh_constitution_1																					constitution_modified=10			0	
-expertise_bh_constitution_3	expertise_bh_constitution_2																					constitution_modified=10			0	
-expertise_bh_constitution_4	expertise_bh_constitution_3																					constitution_modified=20			0	
+expertise_bh_stamina_1	expertise																					stamina_modified=25			0	
+expertise_bh_stamina_2	expertise_bh_stamina_1																					stamina_modified=25			0	
+expertise_bh_stamina_3	expertise_bh_stamina_2																					stamina_modified=25			0	
+expertise_bh_stamina_4	expertise_bh_stamina_3																					stamina_modified=25			0	
 expertise_bh_carbine_act_1	expertise																					"expertise_action_weapon_1=3,expertise_action_weapon_2=3"			0	
 expertise_bh_carbine_act_2	expertise_bh_carbine_act_1																					"expertise_action_weapon_1=3,expertise_action_weapon_2=3"			0	
 expertise_bh_carbine_act_3	expertise_bh_carbine_act_2																					"expertise_action_weapon_1=4,expertise_action_weapon_2=4"			0	
@@ -1606,6 +1592,10 @@ expertise_bh_carbine_dam_1	expertise																					"expertise_damage_weapo
 expertise_bh_carbine_dam_2	expertise_bh_carbine_dam_1																					"expertise_damage_weapon_1=3,expertise_damage_weapon_2=3"			0	
 expertise_bh_carbine_crit_1	expertise_bh_carbine_dam_2									expertise_bh_carbine_dam_2												"expertise_range_bonus_carbine=10,expertise_undiminished_critical_carbine=10,expertise_undiminished_critical_pistol=10,expertise_range_bonus_pistol=5"			0	
 expertise_bh_relentless_1	expertise_bh_carbine_crit_1									expertise_bh_carbine_crit_1											bh_relentless_1				0	
+expertise_bh_precision_1	expertise																					precision_modified=25			0	
+expertise_bh_precision_2	expertise_bh_precision_1																					precision_modified=25			0	
+expertise_bh_precision_3	expertise_bh_precision_2																					precision_modified=25			0	
+expertise_bh_precision_4	expertise_bh_precision_3																					precision_modified=25			0	
 expertise_bh_rifle_act_1	expertise																					expertise_action_weapon_0=3			0	
 expertise_bh_rifle_act_2	expertise_bh_rifle_act_1																					expertise_action_weapon_0=3			0	
 expertise_bh_rifle_act_3	expertise_bh_rifle_act_2																					expertise_action_weapon_0=4			0	
@@ -1613,22 +1603,32 @@ expertise_bh_rifle_act_4	expertise_bh_rifle_act_3																					expertise_
 expertise_bh_rifle_dam_1	expertise																					expertise_damage_weapon_0=2			0	
 expertise_bh_rifle_dam_2	expertise_bh_rifle_dam_1																					expertise_damage_weapon_0=3			0	
 expertise_bh_sniper_1	expertise_bh_rifle_dam_2									expertise_bh_rifle_dam_2											bh_sniper_1				0	
-expertise_bh_cover_1	expertise_bh_sniper_1									expertise_bh_sniper_1											bh_cover_1				0	
-expertise_bh_armor_kin_1	expertise																					expertise_innate_protection_kinetic=250			0	
-expertise_bh_armor_kin_2	expertise_bh_armor_kin_1																					expertise_innate_protection_kinetic=250			0	
-expertise_bh_armor_kin_3	expertise_bh_armor_kin_2																					expertise_innate_protection_kinetic=250			0	
-expertise_bh_armor_kin_4	expertise_bh_armor_kin_3																					expertise_innate_protection_kinetic=250			0	
-expertise_bh_armor_mgb_1	expertise																					expertise_armorset_melee_block_2=1			0	
-expertise_bh_armor_mgb_2	expertise_bh_armor_mgb_1																					expertise_armorset_melee_block_2=1			0	
-expertise_bh_armor_mgb_3	expertise_bh_armor_mgb_2																					expertise_armorset_melee_block_2=1			0	
+expertise_bh_cover_1	expertise_bh_sniper_1																				bh_cover_1				0	
+expertise_bh_agility_1	expertise																					agility_modified=25			0	
+expertise_bh_agility_2	expertise_bh_agility_1																					agility_modified=25			0	
+expertise_bh_agility_3	expertise_bh_agility_2																					agility_modified=25			0	
+expertise_bh_agility_4	expertise_bh_agility_3																					agility_modified=25			0	
+expertise_bh_armor_kin_1	expertise																					expertise_innate_protection_kinetic=500			0	
+expertise_bh_armor_kin_2	expertise_bh_armor_kin_1																					expertise_innate_protection_kinetic=500			0	
+expertise_bh_armor_kin_3	expertise_bh_armor_kin_2																					expertise_innate_protection_kinetic=500			0	
+expertise_bh_armor_kin_4	expertise_bh_armor_kin_3																					expertise_innate_protection_kinetic=500			0	
+expertise_bh_armor_rgb_1	expertise																					expertise_armorset_ranged_dodge_2=2			0	
+expertise_bh_armor_rgb_2	expertise_bh_armor_rgb_1																					expertise_armorset_ranged_dodge_2=2			0	
+expertise_bh_armor_rgb_3	expertise_bh_armor_rgb_2																					expertise_armorset_ranged_dodge_2=2			0	
 expertise_bh_armor_sprint_1	expertise																				bh_armor_sprint_1				0	
+expertise_bh_reactive_armor_1	expertise																					combat_critical_hit_reduction=2				
+expertise_bh_reactive_armor_2	expertise_bh_reactive_armor_1																					combat_critical_hit_reduction=2				
+expertise_bh_reactive_armor_3	expertise_bh_reactive_armor_2																					combat_critical_hit_reduction=2				
+expertise_bh_constitution_1	expertise																					constitution_modified=25			0	
+expertise_bh_constitution_2	expertise_bh_constitution_1																					constitution_modified=25			0	
+expertise_bh_constitution_3	expertise_bh_constitution_2																					constitution_modified=25			0	
+expertise_bh_constitution_4	expertise_bh_constitution_3																					constitution_modified=25			0	
 expertise_bh_armor_eng_1	expertise																					expertise_innate_protection_energy=500			0	
 expertise_bh_armor_eng_2	expertise_bh_armor_eng_1																					expertise_innate_protection_energy=500			0	
 expertise_bh_armor_eng_3	expertise_bh_armor_eng_2																					expertise_innate_protection_energy=500			0	
 expertise_bh_armor_eng_4	expertise_bh_armor_eng_3																					expertise_innate_protection_energy=500			0	
-expertise_bh_armor_rgb_1	expertise																					expertise_armorset_ranged_dodge_2=1			0	
-expertise_bh_armor_rgb_2	expertise_bh_armor_rgb_1																					expertise_armorset_ranged_dodge_2=1			0	
-expertise_bh_armor_rgb_3	expertise_bh_armor_rgb_2																					expertise_armorset_ranged_dodge_2=1			0	
+expertise_bh_survival_instinct_1	expertise																					expertise_cooldown_line_of_heal=2				
+expertise_bh_survival_instinct_2	expertise_bh_survival_instinct_1																					expertise_cooldown_line_of_heal=2				
 expertise_bh_armor_duelist_1	expertise																				bh_armor_duelist_1				0	
 expertise_fs_general_crippling_accuracy_1	expertise																								0	
 expertise_fs_general_crippling_accuracy_2	expertise_fs_general_crippling_accuracy_1																								0	
