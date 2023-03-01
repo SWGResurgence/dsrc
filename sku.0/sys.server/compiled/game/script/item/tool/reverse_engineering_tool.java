@@ -1,9 +1,7 @@
 package script.item.tool;
 
 import script.*;
-import script.library.reverse_engineering;
-import script.library.static_item;
-import script.library.utils;
+import script.library.*;
 
 public class reverse_engineering_tool extends script.base_script
 {
@@ -813,10 +811,6 @@ public class reverse_engineering_tool extends script.base_script
     }
     public float getReverseEngineeringBonusMultiplier() throws InterruptedException
     {
-        String config = getConfigSetting("Custom", "reverseEngineeringBonusMultiplier");
-        if (config != null && config.length() > 0) {
-            return utils.stringToFloat(config);
-        }
-        return 1.0f;
+        return utils.getFloatConfigSetting("Custom", "reverseEngineeringBonusMultiplier", 1.0f);
     }
 }
