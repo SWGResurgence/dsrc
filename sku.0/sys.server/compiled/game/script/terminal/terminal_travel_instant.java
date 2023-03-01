@@ -2,6 +2,7 @@ package script.terminal;
 
 import script.*;
 import script.library.*;
+import script.library.travel;
 
 public class terminal_travel_instant extends script.base_script
 {

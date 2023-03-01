@@ -189,7 +189,7 @@ public class gcw_spawner extends script.base_script
                 spawnedCreature = create.object(spawn, spawnPoint);
             }
         }
-        else 
+        else
         {
             spawnedCreature = create.object(spawn, spawnPoint);
         }
@@ -269,7 +269,7 @@ public class gcw_spawner extends script.base_script
                 spawned[actorNum] = newActor;
                 utils.setScriptVar(self, "spawnList", spawned);
             }
-            else 
+            else
             {
                 messageTo(self, "tellingMomIDied", params, 3, false);
             }
@@ -291,7 +291,7 @@ public class gcw_spawner extends script.base_script
                 hard = true;
             }
         }
-        else 
+        else
         {
             faction = "rebel";
             if (reb_r > 2.0)
@@ -299,29 +299,25 @@ public class gcw_spawner extends script.base_script
                 hard = true;
             }
         }
-        String empiredayRunning = getConfigSetting("GameServer", "empireday_ceremony");
-        if (empiredayRunning != null)
+        if (events.isEventActive(events.EMPIRE_DAY))
         {
-            if (empiredayRunning.equals("true") || empiredayRunning.equals("1"))
+            location here = getLocation(self);
+            String city = locations.getCityName(here);
+            if (city == null)
             {
-                location here = getLocation(self);
-                String city = locations.getCityName(here);
-                if (city == null)
+                city = locations.getGuardSpawnerRegionName(here);
+            }
+            if (city != null && city.length() > 0)
+            {
+                if (city.equals("coronet"))
                 {
-                    city = locations.getGuardSpawnerRegionName(here);
+                    faction = "rebel";
+                    hard = false;
                 }
-                if (city != null && city.length() > 0)
+                else if (city.equals("theed"))
                 {
-                    if (city.equals("coronet"))
-                    {
-                        faction = "rebel";
-                        hard = false;
-                    }
-                    else if (city.equals("theed"))
-                    {
-                        faction = "imperial";
-                        hard = false;
-                    }
+                    faction = "imperial";
+                    hard = false;
                 }
             }
         }
