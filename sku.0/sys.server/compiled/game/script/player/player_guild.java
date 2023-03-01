@@ -1,10 +1,7 @@
 package script.player;
 
 import script.dictionary;
-import script.library.guild;
-import script.library.player_structure;
-import script.library.sui;
-import script.library.utils;
+import script.library.*;
 import script.obj_id;
 import script.prose_package;
 import script.string_id;
@@ -1955,7 +1952,7 @@ public class player_guild extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        if (guildGetCountMembersOnly(guildId) < utils.stringToInt(getConfigSetting("GameServer", "gcwGuildMinMembersForGcwRegionDefender")))
+        if (guildGetCountMembersOnly(guildId) < utils.getIntConfigSetting("GameServer", "gcwGuildMinMembersForGcwRegionDefender", 10))
         {
             return SCRIPT_CONTINUE;
         }
