@@ -223,6 +223,10 @@ public class player_structure extends script.base_script
     public static final string_id SID_NO_CITY = new string_id("city/city", "no_city_during_packup");
     public static final string_id SID_GENERIC_CITY_PACKUP_ERROR = new string_id("city/city", "city_packup_generic_fail");
     public static final string_id SID_MAYOR_PROTECTED = new string_id("city/city", "city_packup_mayor_protected");
+    public static final boolean STRUCTURE_FEES_DISABLED = utils.checkConfigFlag("GameServer", "disableStructureFees");
+    public static final int STRUCTURE_MAINTENANCE_HEARTBEAT = utils.getIntConfigSetting("GameServer", "maintenanceHeartbeat", 1800);
+    public static final boolean ENABLE_ABANDONED_STRUCTURES_SYSTEM = utils.checkConfigFlag("GameServer", "enableAbandonedHousePackup");
+    public static final boolean ALLOW_PACKING_ABANDONED_STRUCTURES = utils.checkConfigFlag("GameServer", "allowPlayersToPackAbandonedStructures");
     public static final String VAR_ADMIN_ALL_CHARACTERS_ON_ACCOUNT = "player_structure.admin_all_characters";
     public static obj_id createPlayerStructure(String template, obj_id owner, location loc, int rotation, dictionary deed_info) throws InterruptedException
     {
@@ -3662,7 +3666,7 @@ public class player_structure extends script.base_script
     }
     public static int decrementMaintenancePool(obj_id structure, int amt) throws InterruptedException
     {
-        if (getConfigSetting("GameServer", "disableStructureFees") != null)
+        if (STRUCTURE_FEES_DISABLED)
         {
             return 1;
         }
@@ -5473,17 +5477,7 @@ public class player_structure extends script.base_script
     }
     public static int getMaintenanceHeartbeat() throws InterruptedException
     {
-        final int MAINTENANCE_HEARTBEAT = 1800;
-        String strConfigSetting = getConfigSetting("GameServer", "maintenanceHeartbeat");
-        if ((strConfigSetting != null) && (!strConfigSetting.equals("")))
-        {
-            int intHeartBeat = utils.stringToInt(strConfigSetting);
-            if (intHeartBeat > 0)
-            {
-                return intHeartBeat;
-            }
-        }
-        return MAINTENANCE_HEARTBEAT;
+        return STRUCTURE_MAINTENANCE_HEARTBEAT;
     }
     public static void sendOutOfMaintenanceMail(obj_id objStructure) throws InterruptedException
     {
@@ -5589,10 +5583,10 @@ public class player_structure extends script.base_script
         {
             return false;
         }
-        if (!utils.checkConfigFlag("GameServer", "enableHousePackup"))
+        /*if (!utils.checkConfigFlag("GameServer", "enableHousePackup"))
         {
             return false;
-        }
+        }*/
         if (isAbandoned(structure) || isPreAbandoned(structure))
         {
             return true;
@@ -5605,7 +5599,7 @@ public class player_structure extends script.base_script
         {
             return false;
         }
-        if (!utils.checkConfigFlag("GameServer", "enableAbandonedHousePackup"))
+        if (!ENABLE_ABANDONED_STRUCTURES_SYSTEM)
         {
             return false;
         }
@@ -5703,7 +5697,7 @@ public class player_structure extends script.base_script
         {
             return false;
         }
-        if (!utils.checkConfigFlag("GameServer", "allowPlayersToPackAbandonedStructures"))
+        if (!ALLOW_PACKING_ABANDONED_STRUCTURES)
         {
             return false;
         }

@@ -1087,7 +1087,7 @@ public class city extends script.base_script
         {
             return 0;
         }
-        if (getConfigSetting("GameServer", "disableStructureFees") != null)
+        if (player_structure.STRUCTURE_FEES_DISABLED)
         {
             return 0;
         }

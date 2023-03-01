@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class gcw extends script.base_script
 {
-    public gcw()
-    {
-    }
     public static final int GCW_UPDATE_PULSE = 300;
     public static final float DECAY_PER_UPDATE = 0.02f;
     public static final String SCRIPTVAR_SCAN_INTEREST = "scan.interest";
@@ -258,6 +255,10 @@ public class gcw extends script.base_script
     public static final String GCW_TUTORIAL_FLAG = "gcw_tutorial_flag.has_received_tutorial";
     public static final String COLOR_REBELS = colors_hex.HEADER + colors_hex.COLOR_REBELS;
     public static final String COLOR_IMPERIALS = colors_hex.HEADER + colors_hex.COLOR_IMPERIALS;
+    public static final float GCW_POINT_BONUS = utils.getFloatConfigSetting("GameServer", "gcwPointBonus", 1.0f);
+    public static final float GCW_TOKEN_BONUS = utils.getFloatConfigSetting("GameServer", "gcwTokenBonus", 1.0f);
+    public static final int GCW_CYCLE_INVASION_TIME = utils.getIntConfigSetting("GameServer", "gcwInvasionCycleTime", 3);
+    public static final int GCW_MAX_INVASION_CITY_RUNNING = utils.getIntConfigSetting("GameServer", "gcwInvasionCityMaximumRunning", 3);
     public static void assignScanInterests(obj_id npc) throws InterruptedException
     {
         if (!isIdValid(npc) || isPlayer(npc) || pet_lib.isPet(npc))
@@ -1280,11 +1281,7 @@ public class gcw extends script.base_script
         {
             return;
         }
-        float multiplier = utils.stringToFloat(getConfigSetting("GameServer", "gcwPointBonus"));
-        if (multiplier > 1)
-        {
-            pointValue *= multiplier;
-        }
+        pointValue *= GCW_POINT_BONUS;
         pvpModifyCurrentGcwPoints(attacker, pointValue);
         prose_package pp = new prose_package();
         pp.target.set(getName(victim));
@@ -2460,11 +2457,7 @@ public class gcw extends script.base_script
         else {
             tokenStaticName = GCW_REBEL_TOKEN;
         }
-        float multiplier = utils.stringToFloat(getConfigSetting("GameServer", "gcwTokenBonus"));
-        if (multiplier > 1)
-        {
-            gcwTokenAmt *= multiplier;
-        }
+        gcwTokenAmt *= GCW_TOKEN_BONUS;
         for (Object o : participantList) {
             if (!isValidId(((obj_id) o)) || !exists(((obj_id) o))) {
                 CustomerServiceLog("gcw_city_invasion", "gcw.awardGcwInvasionParticipants: Player: " + ((obj_id) o) + " is NOT receiving " + gcwTokenAmt + " " + tokenStaticName + " tokens or " + gcwPointAmt + " " + factionFlag + " GCW points (GCW points only awarded to pure faction players, not factionalHelpers) because this player OID is invalid or doesn't exist. Probably due to the player exiting the battle field, traveling or moving to another server process (crossing server boundary).");
@@ -2642,12 +2635,7 @@ public class gcw extends script.base_script
     }
     public static int gcwGetTimeToInvasion() throws InterruptedException
     {
-        String timeConfig = getConfigSetting("GameServer", "gcwInvasionCycleTime");
-        if (timeConfig == null || timeConfig.length() <= 0)
-        {
-            return 3;
-        }
-        int time = utils.stringToInt(timeConfig);
+        int time = GCW_CYCLE_INVASION_TIME;
         if (time > 6)
         {
             time = 6;
@@ -2660,13 +2648,7 @@ public class gcw extends script.base_script
     }
     public static int gcwGetInvasionMaximumRunning() throws InterruptedException
     {
-        String maxConfig = getConfigSetting("GameServer", "gcwInvasionCityMaximumRunning");
-        int max = 3;
-        if (maxConfig == null || maxConfig.length() <= 0)
-        {
-            return max;
-        }
-        return utils.stringToInt(maxConfig);
+        return GCW_MAX_INVASION_CITY_RUNNING;
     }
     public static boolean gcwIsInvasionCityOn(String city) throws InterruptedException
     {
@@ -2674,17 +2656,20 @@ public class gcw extends script.base_script
         {
             return false;
         }
-        String cityConfig = getConfigSetting("GameServer", "gcwcity" + city);
-        if (cityConfig == null || (!cityConfig.equals("1") && !cityConfig.toLowerCase().equals("true")))
-        {
-            CustomerServiceLog("gcw_city_invasion", "gcw.gcwIsInvasionCityOn: GCW City: " + city + " is not configured to run a city invasion. Function returning False.");
+        if (city.equalsIgnoreCase("keren") || city.equalsIgnoreCase("bestine")) {
+            return utils.checkConfigFlag("GameServer", "gcwcity"+city);
+        }
+        else if (city.equalsIgnoreCase("dearic")) {
+            if(events.isEventActive(events.LIFEDAY)) {
+                return false;
+            } else {
+                return utils.checkConfigFlag("GameServer", "gcwcity"+city);
+            }
+        }
+        else {
+            WARNING("gcwIsInvasionCityOn() Got call to check invasion for city "+city+" but there is no logic accounting for it here.");
             return false;
         }
-        if (city.equalsIgnoreCase("dearic") && utils.checkConfigFlag("GameServer", "lifeday")) {
-            CustomerServiceLog("gcw_city_invasion", "gcw.gcwIsInvasionCityOn: GCW City: " + city + " is not running because life day is turned on.");
-            return false;
-        }
-        return true;
     }
     public static int gcwGetNextInvasionHour(String cityName) throws InterruptedException
     {
@@ -2854,8 +2839,7 @@ public class gcw extends script.base_script
     {
         Vector<String> activeCities = new Vector<>();
         for (String cityName : INVASION_CITIES){
-            String value = getConfigSetting("GameServer", "gcwcity" + cityName);
-            if (value != null && (value.equals("1") || value.toLowerCase().equals("true"))) {
+            if (utils.checkConfigFlag("GameServer", "gcwcity" + cityName)) {
                 activeCities.add(cityName);
             }
         }

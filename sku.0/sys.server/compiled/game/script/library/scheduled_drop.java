@@ -496,6 +496,6 @@ public class scheduled_drop extends script.base_script
         return card;
     }
     public static boolean isSystemEnabled() throws InterruptedException {
-        return utils.checkConfigFlag("Custom", "enableScheduledDropSystem");
+        return SYSTEM_ENABLED;
     }
 }
