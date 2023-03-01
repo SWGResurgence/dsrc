@@ -1,9 +1,7 @@
 package script.systems.gcw;
 
 import script.*;
-import script.library.gcw;
-import script.library.locations;
-import script.library.utils;
+import script.library.*;
 
 public class flip_banner extends script.base_script
 {
@@ -73,8 +71,7 @@ public class flip_banner extends script.base_script
     }
     public void spawnBanner(obj_id self, String faction) throws InterruptedException
     {
-        String empiredayRunning = getConfigSetting("GameServer", "empireday_ceremony");
-        if (empiredayRunning != null && (empiredayRunning.equals("true") || empiredayRunning.equals("1")))
+        if (events.isEventActive(events.EMPIRE_DAY))
         {
             location here = getLocation(self);
             String city = locations.getCityName(here);
@@ -106,6 +103,5 @@ public class flip_banner extends script.base_script
         }
         setObjVar(banner, "spawner", self);
         utils.setScriptVar(self, "banner", banner);
-        return;
     }
 }

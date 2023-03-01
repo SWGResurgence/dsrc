@@ -1,10 +1,7 @@
 package script.systems.spawning;
 
 import script.dictionary;
-import script.library.ai_lib;
-import script.library.create;
-import script.library.spawning;
-import script.library.utils;
+import script.library.*;
 import script.location;
 import script.obj_id;
 
@@ -370,8 +367,7 @@ public class spawner_patrol extends script.base_script
         return SCRIPT_CONTINUE;
     }
     public boolean canSpawnByConfigSetting() throws InterruptedException {
-        String disableSpawners = getConfigSetting("GameServer", "disablePatrolSpawners");
-        return disableSpawners == null || !(disableSpawners.equals("true") || disableSpawners.equals("1"));
+        return !spawning.PATROL_SPAWNERS_DISABLED;
     }
     public int OnDestroy(obj_id self) throws InterruptedException
     {

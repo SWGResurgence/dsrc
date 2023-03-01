@@ -5,12 +5,14 @@ import script.obj_id;
 
 public class anniversary_event_nyms extends script.base_script
 {
-    public anniversary_event_nyms()
-    {
-    }
+
+    /**
+     * deprecated script
+     */
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        if (!isObjectPersisted(self))
+        /*if (!isObjectPersisted(self))
         {
             messageTo(self, "handlePersistEventProp", null, 1, false);
         }
@@ -21,12 +23,12 @@ public class anniversary_event_nyms extends script.base_script
             {
                 messageTo(self, "handleDeleteEventProps", null, 2, false);
             }
-        }
+        }*/
         return SCRIPT_CONTINUE;
     }
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        messageTo(self, "handlePersistEventProp", null, 1, false);
+        //messageTo(self, "handlePersistEventProp", null, 1, false);
         return SCRIPT_CONTINUE;
     }
     public int handlePersistEventProp(obj_id self, dictionary params) throws InterruptedException
