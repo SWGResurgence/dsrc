@@ -1,9 +1,7 @@
 package script.event.emp_day;
 
 import script.dictionary;
-import script.library.create;
-import script.library.firework;
-import script.library.utils;
+import script.library.*;
 import script.obj_id;
 import script.string_id;
 
@@ -14,8 +12,7 @@ public class firework_show extends script.base_script
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        String setting = getConfigSetting("EventTeam", "empireDay");
-        if (setting == null || setting.equals("") || !setting.equals("true"))
+        if (!events.isEventActive(events.EMPIRE_DAY))
         {
             return SCRIPT_CONTINUE;
         }
