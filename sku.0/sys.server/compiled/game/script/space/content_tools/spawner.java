@@ -7,11 +7,12 @@ import java.util.Vector;
 
 public class spawner extends script.base_script
 {
+    public static final boolean DISABLE_SPACE_SPAWNERS = utils.checkConfigFlag("GameServer", "disableSpaceSpawners");
     public int getSpawnerData(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "strAsteroidType"))
         {
-            if (utils.checkConfigFlag("ScriptFlags", "spawnersOn"))
+            if (!DISABLE_SPACE_SPAWNERS)
             {
                 messageTo(self, "startSpawning", null, 3, false);
             }
@@ -49,7 +50,7 @@ public class spawner extends script.base_script
             }
             utils.setScriptVar(self, "trPatrolPoints", trPatrolPoints);
         }
-        if (utils.checkConfigFlag("ScriptFlags", "spawnersOn"))
+        if (!DISABLE_SPACE_SPAWNERS)
         {
             messageTo(self, "startSpawning", null, 3, false);
             return SCRIPT_CONTINUE;

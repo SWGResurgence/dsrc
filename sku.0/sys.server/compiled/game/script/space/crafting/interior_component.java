@@ -1,9 +1,7 @@
 package script.space.crafting;
 
 import script.*;
-import script.library.space_crafting;
-import script.library.space_transition;
-import script.library.utils;
+import script.library.*;
 
 import java.util.Vector;
 
@@ -53,7 +51,7 @@ public class interior_component extends script.base_script
             else 
             {
                 LOG("space", "Component " + intSlot + " is not installed on " + objShip + " cleaning up interior piece");
-                if (utils.checkConfigFlag("ScriptFlags", "liveSpaceServer"))
+                if (space_flags.LIVE_SPACE_SERVER_MODE_OFF)
                 {
                     destroyObject(self);
                 }
