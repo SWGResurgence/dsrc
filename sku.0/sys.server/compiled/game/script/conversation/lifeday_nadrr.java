@@ -5,7 +5,7 @@
 // All Rights Reserved.
 //
 // Created with SwgConversationEditor 1.37 - DO NOT EDIT THIS AUTO-GENERATED FILE!
-//Roachie says herro UwU
+//BubbaJoe says herro UwU
 // ======================================================================
 
 package script.conversation;
@@ -139,7 +139,7 @@ int lifeday_nadrr_handleBranch1 (obj_id player, obj_id npc, string_id response) 
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------
@@ -218,7 +218,7 @@ int lifeday_nadrr_handleBranch2 (obj_id player, obj_id npc, string_id response) 
 
 	}
 
-	return SCRIPT_DEFAULT;
+	return SCRIPT_CONTINUE;
 }
 
 // ----------------------------------------------------------------------

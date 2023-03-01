@@ -9,3 +9,4 @@ itv_snowspeeder	callforsnowspeeder
 itv_slave_1	callforslave1pickup
 default_itv	callforpickup
 basiliskWarDroid	carforbasiliskwardroid
+itv_atat_walker	callforatat

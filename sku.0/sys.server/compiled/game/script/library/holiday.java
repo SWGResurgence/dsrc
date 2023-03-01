@@ -261,14 +261,14 @@ public class holiday extends script.base_script
     };
     public static final String[] MATCHMAKING_COMPANIONS_SLOTS = 
     {
-        "loveday_2010_matched_jeffrey",
-        "loveday_2010_matched_matthew",
-        "loveday_2010_matched_gerald",
-        "loveday_2010_matched_daniel",
-        "loveday_2010_matched_caroline",
-        "loveday_2010_matched_francine",
-        "loveday_2010_matched_julia",
-        "loveday_2010_matched_ellen"
+        "loveday_2023_matched_jeffrey",
+        "loveday_2023_matched_matthew",
+        "loveday_2023_matched_gerald",
+        "loveday_2023_matched_daniel",
+        "loveday_2023_matched_caroline",
+        "loveday_2023_matched_francine",
+        "loveday_2023_matched_julia",
+        "loveday_2023_matched_ellen"
     };
     public static final String[] ALL_IMPERIAL_CRATE_TEMPLATES = 
     {
@@ -637,7 +637,7 @@ public class holiday extends script.base_script
         {
             return false;
         }
-        if (isPlayerConnected(player) && !isAwayFromKeyBoard(player) && !hasCompletedCollectionSlot(player, holiday.EMPIRE_DAY_CHAMPION_BADGE) && !hasCompletedCollectionSlot(player, holiday.REMEMBRANCE_DAY_CHAMPION_BADGE) && !isGod(player) && !isDead(player) && !ai_lib.isInCombat(player) && !isIncapacitated(player) && !utils.isFreeTrial(player) && isInWorldCell(player))
+        if (isPlayerConnected(player) && !isAwayFromKeyBoard(player) && !hasCompletedCollectionSlot(player, holiday.EMPIRE_DAY_CHAMPION_BADGE) && !hasCompletedCollectionSlot(player, holiday.REMEMBRANCE_DAY_CHAMPION_BADGE) && !isGod(player) && !isDead(player) && !ai_lib.isInCombat(player) && !isIncapacitated(player) && isInWorldCell(player))
         {
             return true;
         }

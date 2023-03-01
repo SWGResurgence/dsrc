@@ -87,7 +87,7 @@ public class convert_no_trade extends script.base_script
 
         }
 
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
 
 // ----------------------------------------------------------------------

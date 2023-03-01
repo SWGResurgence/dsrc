@@ -6,6 +6,7 @@
  */
 package script.item;
 
+import script.library.static_item;
 import script.obj_id;
 
 public class wardrobe extends script.base_script
@@ -24,7 +25,7 @@ public class wardrobe extends script.base_script
         {
             setObjVar(item, "wardrobe.ownedBy", transferer);
         }
-        setName(item, "Clothing " + "[modified]");
+        setName(item, getNewName(item));
         return SCRIPT_CONTINUE;
     }
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
@@ -47,5 +48,16 @@ public class wardrobe extends script.base_script
             attachScript(item, "systems.armor_rehue.composite_rehue");
         }
         return SCRIPT_CONTINUE;
+    }
+    public String getNewName(obj_id item) throws InterruptedException
+    {
+        if (static_item.isStaticItem(item))
+        {
+            return static_item.getStaticItemName(item) + " (modified)";
+        }
+        else
+        {
+            return getEncodedName(item) + " (modified)";
+        }
     }
 }

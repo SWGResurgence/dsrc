@@ -2091,12 +2091,11 @@ public class terminal_character_builder extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-    public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
-    {
-        if (item == menu_info_types.ITEM_USE && (isGod(player) || checkConfigSetting("builderEnabled")))
-        {
-            startCharacterBuilder(player);
+    public int OnObjectMenuSelect(final obj_id self, obj_id player, int item) throws InterruptedException {
+        if (item == menu_info_types.ITEM_USE && (isGod(player) || checkConfigSetting("builderEnabled"))) {
+            System.out.println("\nPlayer: " + getName(player) + "(" + player + ") used Character Builder Terminal\n");
         }
+        startCharacterBuilder(player);
         return SCRIPT_CONTINUE;
     }
 

@@ -3,6 +3,7 @@ package script.ai;
 import script.*;
 import script.library.*;
 
+import static script.systems.city.city_hire.DESC;
 import static script.systems.city.city_hire.TOOL;
 
 public class ai extends script.base_script
@@ -764,7 +765,122 @@ public class ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+    public int OnSawEmote(obj_id self, obj_id performer, String emote) throws InterruptedException
+    {
+        boolean enableSlapDamage = false;
+        String[] EMOTE_PET_HUMANOID_RESPONSES = {
+                "I don't like that.",
+                "Please don't touch me.",
+                "In some places we'd be betrothed",
+                "Ew, your ugly."
+        };
+        String[] EMOTE_SLAP_HUMANOID_RESPONSES = {
+                "Ow!",
+                "Please have mercy!",
+                "Ouch!",
+                "-winces in pain-"
+        };
+        String[] EMOTE_BMOC_HUMANOID_RESPONSES = {
+                "You picked the wrong one!",
+                "Wanna tussle!?",
+                "Bring it on!",
+                "I am stronger than you!"
+        };
+        String[] EMOTE_DANCE_HUMANOID_RESPONSES = {
+                "I love this dance.",
+                "Are you trying to seduce me?",
+                "Feel the vibes.",
+                "Ok, if you say so.."
+        };
+        if (pet_lib.isPet(self) || beast_lib.isBeast(self))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        if (emote.startsWith("pet"))
+        {
+            if (!ai_lib.isHumanoid(self))
+            {
+                showFlyText(self, new string_id("<3"), 1.0f, colors.DEEPPINK);
+            }
+            else
+            {
+                chat.chat(self, getRandomArray(EMOTE_PET_HUMANOID_RESPONSES));
+                doAnimationAction(self, anims.HUMAN_EMT_THREATEN);
+            }
+            return SCRIPT_CONTINUE;
+        }
+        else if (emote.startsWith("summon") || emote.startsWith("beckon"))
+        {
+            showFlyText(self, new string_id("- ! -"), 12.0f, colors.WHITE);
+            ai_lib.follow(self, performer, 1.0f, 12.0f);
+            return SCRIPT_CONTINUE;
+        }
+        else if (emote.startsWith("shoo") || emote.startsWith("dismiss"))
+        {
+            showFlyText(self, new string_id("- ! -"), 12.0f, colors.RED);
+            ai_lib.aiStopFollowing(self);
+            ai_lib.wander(self);
+            return SCRIPT_CONTINUE;
+        }
+        else if (emote.startsWith("slap") || emote.startsWith("backhand"))
+        {
+            if (ai_lib.isHumanoid(self))
+            {
+                chat.chat(self, getRandomArray(EMOTE_SLAP_HUMANOID_RESPONSES));
+                if (enableSlapDamage)
+                {
+                    int damage = rand(256, 1024);
+                    int health = getAttrib(self, HEALTH);
+                    int newHealth = health - damage;
+                    if (newHealth < 0)
+                    {
+                        newHealth = 0;
+                    }
+                    setAttrib(self, HEALTH, newHealth);
+                }
+                else
+                {
+                    doAnimationAction(self, anims.PLAYER_GET_HIT_HEAVY_BACKWARD);
+                }
+            }
+            else
+            {
+                showFlyText(self, new string_id("Ouch!"), 1.0f, colors.DEEPPINK);
+            }
+            return SCRIPT_CONTINUE;
+        }
+        else if (emote.startsWith("bmoc"))
+        {
+            if (ai_lib.isHumanoid(self))
+            {
+                chat.chat(self, getRandomArray(EMOTE_BMOC_HUMANOID_RESPONSES));
+                startCombat(self, performer);
+            }
+            else
+            {
+                showFlyText(self, new string_id("!"), 1.0f, colors.DEEPPINK);
+            }
+            return SCRIPT_CONTINUE;
 
+        }
+        else if (emote.startsWith("dance"))
+        {
+            if (ai_lib.isHumanoid(self))
+            {
+                setAnimationMood(self, "themepark_oola");
+                ai_lib.setDefaultCalmMood(self, "themepark_oola");
+                ai_lib.setMood(self, "themepark_oola");
+                chat.chat(self, getRandomArray(EMOTE_DANCE_HUMANOID_RESPONSES));
+            }
+            else
+            {
+                chat.chat(self, "<This creature cannot dance with you.>");
+            }
+            return SCRIPT_CONTINUE;
+
+        }
+        return SCRIPT_CONTINUE;
+    }
     public int OnSawAttack(obj_id self, obj_id defender, obj_id[] attackers) throws InterruptedException
     {
         LOGC(aiLoggingEnabled(self), "debug_ai", "ai::OnSawAttack() self(" + self + ":" + getName(self) + ") defender (" + defender + ") attackers.length(" + attackers.length + ")");
@@ -1110,7 +1226,7 @@ public class ai extends script.base_script
             int delayCount = 0;
             for (obj_id pk1 : pks)
             {
-                if (isIdValid(pk1) && (corpseLevel + 5 < getLevel(pk1) || utils.isFreeTrial(pk1)))
+                if (isIdValid(pk1) && (corpseLevel + 5 < getLevel(pk1)))
                 {
                     doNotDropCard = true;
                 }
@@ -1138,7 +1254,7 @@ public class ai extends script.base_script
                     }
                     if (isGod(pk) && hasObjVar(pk, "qa_tcg"))
                     {
-                        sendSystemMessageTestingOnly(pk, "QA TCG COMBAT.  Do not drop card? " + doNotDropCard + " hasCardDelay? " + scheduled_drop.hasCardDelay(pk, sourceSystem) + " isTrial? " + utils.isFreeTrial(pk) + " bad level? " + (corpseLevel + 5 < getLevel(pk)));
+                        sendSystemMessageTestingOnly(pk, "QA TCG COMBAT.  Do not drop card? " + doNotDropCard + " hasCardDelay? " + scheduled_drop.hasCardDelay(pk, sourceSystem) + " bad level? " + (corpseLevel + 5 < getLevel(pk)));
                     }
                 }
             }
@@ -1866,7 +1982,7 @@ public class ai extends script.base_script
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        if (isGod(player) && !isInvulnerable(self) && !isPlayer(self))
+        if (isGod(player) && !isInvulnerable(self) && !isPlayer(self) && !hasScript(self, "systems.city.city_actor"))
         {
             int root = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("Loot *"));
             mi.addSubMenu(root, menu_info_types.SERVER_MENU21, new string_id("* Increase Drop Count by 1"));
@@ -1902,62 +2018,69 @@ public class ai extends script.base_script
 
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
-        if (item == menu_info_types.SERVER_MENU20)
+        if (isGod(player))
         {
-            blog("SERVER_MENU20");
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU21)
-        {
-            int loot = getIntObjVar(self, "loot.numItems");
-            if (loot == 0)
+            if (item == menu_info_types.SERVER_MENU20)
             {
-                setObjVar(self, "loot.numItems", 1);
+                blog("SERVER_MENU20");
+                return SCRIPT_CONTINUE;
             }
-            else
+            if (item == menu_info_types.SERVER_MENU21)
             {
-                setObjVar(self, "loot.numItems", loot + 1);
+                int loot = getIntObjVar(self, "loot.numItems");
+                if (loot == 0)
+                {
+                    setObjVar(self, "loot.numItems", 1);
+                }
+                else
+                {
+                    setObjVar(self, "loot.numItems", loot + 1);
+                }
+                return SCRIPT_CONTINUE;
             }
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU22)
-        {
-            int loot = getIntObjVar(self, "loot.numItems");
-            if (loot == 0)
+            if (item == menu_info_types.SERVER_MENU22)
             {
-                setObjVar(self, "loot.numItems", 0);
+                int loot = getIntObjVar(self, "loot.numItems");
+                if (loot == 0)
+                {
+                    setObjVar(self, "loot.numItems", 0);
+                }
+                else
+                {
+                    setObjVar(self, "loot.numItems", loot - 1);
+                }
+                return SCRIPT_CONTINUE;
             }
-            else
+            if (item == menu_info_types.SERVER_MENU23)
             {
-                setObjVar(self, "loot.numItems", loot - 1);
+                stopCombat(player);
+                return SCRIPT_CONTINUE;
             }
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU23)
-        {
-            stopCombat(player);
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU24)
-        {
-            String lootTable = getStringObjVar(self, "loot.lootTable");
-            if (lootTable == null)
+            if (item == menu_info_types.SERVER_MENU24)
             {
-                lootTable = "none";
+                String lootTable = getStringObjVar(self, "loot.lootTable");
+                if (lootTable == null)
+                {
+                    lootTable = "none. (default)";
+                }
+                String prompt = "Current loot table: " + lootTable + "\n\nEnter new loot table:";
+                int pid = sui.inputbox(player, prompt, "handleLootTableInput");
+                sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
+                return SCRIPT_CONTINUE;
             }
-            String prompt = "Current loot table: " + lootTable + "\n\nEnter new loot table:";
-            sui.inputbox(player, prompt, "handleLootTableInput");
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU25)
-        {
-            return SCRIPT_CONTINUE;
-        }
-        if (item == menu_info_types.SERVER_MENU26)
-        {
-            String prompt = "Enter creature name to make a ring spawn.";
-            sui.inputbox(self, player, prompt, "prepareRingSpawn");
-
+            if (item == menu_info_types.SERVER_MENU25)
+            {
+                return SCRIPT_CONTINUE;
+            }
+            if (item == menu_info_types.SERVER_MENU26)
+            {
+                if (!hasScript(self, "systems.city.city_actor"))
+                {
+                    String prompt = "Enter creature name to make a ring spawn.\n For a complete list of creature names, seek out mobs.iff!";
+                    int pid = sui.inputbox(player, player, prompt, "prepareRingSpawn");
+                    sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
+                }
+            }
         }
         return SCRIPT_CONTINUE;
     }
@@ -1983,50 +2106,81 @@ public class ai extends script.base_script
     public void OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         String nextWord = text;
+        if (getDistance(self, speaker) > 10.0f)
+        {
+            return;
+        }
+        if (isInvulnerable(self))
+        {
+            return;
+        }
+        if (isDead(self))
+        {
+            return;
+        }
+        if (!isInWorldCell(self))
+        {
+            return;
+        }
+        if (pet_lib.isPet(self) || beast_lib.isBeast(self))
+        {
+            return;
+        }
         if (nextWord.equals("gm_follow"))
         {
-            ai.follow(self, speaker, 1.0f, 10.0f);
-            chat.chat(self, "[GM|AI] Following " + getName(speaker));
+            ai.follow(self, getIntendedTarget(speaker), 1f, 6f);
+            setMovementRun(self);
+            setMovementPercent(self, 16.0f);
+            showFlyText(self, new string_id("!"), 1f, colors.RED);
         }
         if (nextWord.equals("gm_aggro"))
         {
-            startCombat(self, speaker);
-            chat.chat(self, "[GM|AI] Aggroing " + getName(speaker));
+            startCombat(self, getIntendedTarget(speaker));
+            showFlyText(self, new string_id("!"), 1f, colors.RED);
         }
         if (nextWord.equals("gm_stop"))
         {
             ai.stop(self);
-            chat.chat(self, "[GM|AI] Stopping");
+            showFlyText(self, new string_id("!"), 1f, colors.RED);
         }
         if (nextWord.equals("gm_interesting"))
         {
             setCondition(self, CONDITION_INTERESTING);
-            chat.chat(self, "[GM|AI] Setting interest to " + getName(speaker));
+            showFlyText(self, new string_id("!"), 1f, colors.RED);
         }
-        if (nextWord.equals("gm_slay"))
+        if (nextWord.equals("gm_damage"))
+        {
+            damage(self, DAMAGE_KINETIC, HIT_LOCATION_BODY, 1000000);
+            showFlyText(self, new string_id("X_X"), 1f, colors.RED);
+        }
+        if (nextWord.equals("gm_kill"))
         {
             kill(self);
         }
         if (nextWord.equals("gm_wander"))
         {
             ai.wander(self);
-            chat.chat(self, "[GM|AI] Wandering");
+            showFlyText(self, new string_id("!"), 1.5f, colors.RED);
         }
         if (nextWord.equals("gm_patrol"))
         {
             // ai.patrol(self, "patrol");
-            chat.chat(self, "[GM|AI] Patrolling");
+            showFlyText(self, new string_id("!"), 1.5f, colors.RED);
         }
         if (nextWord.equals("gm_flee"))
         {
-            ai.flee(self,speaker, 10, 15);
-            chat.chat(self, "[GM|AI] Fleeing");
+            ai.flee(self,getTarget(speaker), 10, 15);
+            showFlyText(self, new string_id("!"), 1.5f, colors.RED);
         }
-        if (nextWord.equals("gm_chat"))
+        if (nextWord.equals("gm_test"))
         {
-            chat.chat(self, "[GM|AI] Testing chat");
+            showFlyText(self, new string_id("! ^_^ !"), 1.5f, colors.HOTPINK);
         }
-        if (nextWord.equals("gm_damage"))
+        if (nextWord.equals("gm_ai_test"))
+        {
+            showFlyText(self, new string_id("^_^"), 1.5f, colors.ORANGE);
+        }
+        if (nextWord.equals("gm_rand_damage"))
         {
             int damage = rand(100, 1000);
             damage(self, DAMAGE_KINETIC, HIT_LOCATION_HEAD, damage);
@@ -2436,14 +2590,25 @@ public class ai extends script.base_script
     {
         if (getTemplateName(item).equals(TOOL))
         {
-            obj_id player = giver;
-            obj_id mobile = self;
-            String string_template = getTemplateName(self);
-            obj_id token = create.createObject(TOOL, utils.getInventoryContainer(player), "");
-            setObjVar(token, "city_hire.mobile", string_template);
-            setObjVar(token, "tokenUsed", 1);
-            attachScript(token, "systems.city.city_hire");
-            setName(token, "City Actor Deed: " + getCreatureName(mobile));
+            if (!hasObjVar(item, "actorMade"))
+            {
+                obj_id player = giver;
+                obj_id mobile = self;
+                String string_template = getTemplateName(self);
+                obj_id token = create.createObject(TOOL, utils.getInventoryContainer(player), "");
+                setObjVar(token, "city_hire.mobile", string_template);
+                setObjVar(token, "tokenUsed", 1);
+                setObjVar(token, "actorMade", 1);
+                attachScript(token, "systems.city.city_hire");
+                setName(token, "Bio-logical Sequence: " + utils.getStringName(mobile));
+                setDescriptionStringId(token, DESC);
+            }
+            else
+            {
+                broadcast(giver, "The data buffer on this extraction unit is at max capacity.");
+                putIn(item, utils.getInventoryContainer(giver), giver);
+                return SCRIPT_CONTINUE;
+            }
             return SCRIPT_OVERRIDE;
         }
         if (!hasCompletedCollectionSlot(giver, "meatlump_recruiter_starter"))

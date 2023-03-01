@@ -6,10 +6,10 @@
 
 sharedTemplate = "object/mobile/vendor/resurgence/shared_vendor_chronicle_rewards.iff"
 
-contents = [
-                [slotName = "inventory",
-                equipObject = true,
-                content = "object/tangible/inventory/vendor_inventory.iff"],
-                [slotName = "mission_bag",
-                equipObject = true,
-                content = "object/tangible/mission_bag/mission_bag.iff"]]
+content = [
+           [slotName = "inventory",
+           equipObject = true,
+           content = "object/tangible/inventory/vendor_inventory.iff"],
+           [slotName = "mission_bag",
+           equipObject = true,
+           content = "object/tangible/mission_bag/mission_bag.iff"]]

@@ -939,7 +939,7 @@ slot																																						resource	0	frame_assembly	aluminum_lin
 slot																																						resource	0	receiver_assembly	metal_nonferrous	35			
 slot																																						resource	0	grip_assembly	metal	15			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
-slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
+slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1
 weapon	rifle_lightning_basic		systems.crafting.weapon.crafting_blaster_weapon	25	weapon	8	weapon_crafting	3	object/weapon/ranged/rifle/rifle_lightning_light.iff	object/weapon/ranged/rifle/rifle_lightning_light.iff	26	214	800	1100	125	250	375	500	125	250	375	500	0	0	energy	electric	8	30	80	80	7	1	1	100	100	0	64								object/draft_schematic/weapon/rifle_lightning_basic.iff
 slot																																						resource	0	frame_assembly	steel	65			
 slot																																						resource	0	receiver_assembly	iron	35			
@@ -949,6 +949,15 @@ slot																																						resource	0	shock_buffer	petrochem_iner
 slot																																						resource	0	grip_assembly	metal	15			
 slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3			
 slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1			
+weapon	rifle_lightning_guardian_elite		systems.crafting.weapon.crafting_blaster_weapon	25	weapon	8	weapon_crafting	3	object/weapon/ranged/rifle/rifle_lightning_guardian_elite.iff	object/weapon/ranged/rifle/rifle_lightning_guardian_elite.iff	26	214	800	1100	125	250	375	500	125	250	375	500	0	0	energy	electric	8	30	80	80	7	1	1	100	100	0	64								object/draft_schematic/weapon/rifle_lightning_guardian_elite.iff
+slot																																						resource	0	frame_assembly	steel	65
+slot																																						resource	0	receiver_assembly	iron	35
+slot																																						resource	0	conduction_mass	copper	25
+slot																																						resource	0	pulse_insulator	ore_siliclastic	45
+slot																																						resource	0	shock_buffer	petrochem_inert	150
+slot																																						resource	0	grip_assembly	metal	15
+slot																																						template	0	powerhandler_advanced	object/tangible/component/weapon/blaster_power_handler_advanced.iff	3
+slot																																						template	0	barrel_rifle_blaster_advanced	object/tangible/component/weapon/blaster_rifle_barrel_advanced.iff	1
 weapon	knife_naktra_crystal		systems.crafting.weapon.crafting_melee_standard_weapon	25	weapon	6	weapon_crafting	3	object/weapon/melee/knife/ep3/knife_naktra_crystal.iff	object/weapon/melee/knife/ep3/knife_naktra_crystal.iff	34	402	800	1100	299	597	895	1193	299	597	895	1193	0	0	kinetic				100	100	11	1	1	100	100	0	5							object/draft_schematic/weapon/appearance/weapon_appearance_knife_naktra_crystal.iff	object/draft_schematic/weapon/knife_naktra_crystal.iff
 slot																																						resource	0	sword_core_jacket	iron	42			
 slot																																						template_generic	0	naktra_crystal1	object/tangible/loot/quest/naktra_crystal.iff	1			

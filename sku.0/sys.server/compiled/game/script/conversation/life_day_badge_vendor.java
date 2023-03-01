@@ -1,12 +1,7 @@
 package script.conversation;
 
+import script.library.*;
 import script.*;
-import script.library.ai_lib;
-import script.library.chat;
-import script.library.factions;
-import script.library.utils;
-import script.library.badge;
-import script.library.trial;
 
 public class life_day_badge_vendor extends script.base_script
 {
@@ -131,7 +126,7 @@ public class life_day_badge_vendor extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int life_day_badge_vendor_handleBranch2(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -188,7 +183,7 @@ public class life_day_badge_vendor extends script.base_script
                 }
             return SCRIPT_CONTINUE;
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int life_day_badge_vendor_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -223,7 +218,7 @@ public class life_day_badge_vendor extends script.base_script
         else {
             utils.removeScriptVar(player, "conversation.life_day_badge_vendor.branchId");
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public void life_day_badge_vendor_action_badgeOne(obj_id player, obj_id npc) throws InterruptedException
     {

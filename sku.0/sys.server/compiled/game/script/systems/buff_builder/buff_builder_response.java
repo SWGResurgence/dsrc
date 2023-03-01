@@ -99,7 +99,7 @@ public class buff_builder_response extends script.base_script
                     canDrop = true;
                     hasDelay = false;
                 }
-                if (isIdValid(inv) && canDrop && !hasDelay && isPlayerActive(bufferId))
+                if (isIdValid(inv) && canDrop && !hasDelay)// && isPlayerActive(bufferId)) @TODO: add back in or another anti-afk method.
                 {
                     obj_id card = scheduled_drop.dropCard(scheduled_drop.SYSTEM_ENTERTAINER, inv);
                     if (isIdValid(card))

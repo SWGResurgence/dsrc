@@ -8,13 +8,11 @@ import script.*;
 
 public class hero_mark extends script.base_script
 {
-    public hero_mark()
-    {
-    }
-    public static int BUFF_TIME = 10800;
-    public static int BUFF_TIME_VANILLA = 82800;
-    public static int REVIVE_HEALTH = 2000;
-    public static int REVIVE_ACTION = 1600;
+
+    public static int BUFF_TIME = 5400; // 1.5 hours
+    public static int BUFF_TIME_VANILLA = 82800; // 23 hours
+    public static int REVIVE_HEALTH = 15000;
+    public static int REVIVE_ACTION = 12000;
     public static final string_id SID_MENU_RESTORE = new string_id("quest/hero_of_tatooine/system_messages", "menu_restore");
     public static final string_id SID_RESTORE_MSG = new string_id("quest/hero_of_tatooine/system_messages", "restore_msg");
     public static final string_id SID_RESTORE_NOT_YET = new string_id("quest/hero_of_tatooine/system_messages", "restore_not_yet");
@@ -29,7 +27,7 @@ public class hero_mark extends script.base_script
             return SCRIPT_CONTINUE;
         }
         names[idx] = "effect";
-        attribs[idx] = utils.packStringId(SID_RESTORE);
+        attribs[idx] = utils.packStringId(new string_id("Twin Sun Resurrection"));
         idx++;
         if (idx >= names.length)
         {
@@ -39,17 +37,12 @@ public class hero_mark extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        names[idx] = "charges";
-        if (hasObjVar(self, "charges"))
+        if (hasObjVar(self, "owner"))
         {
-            int charges = getIntObjVar(self, "charges");
-            attribs[idx] = " " + charges;
+            names[idx] = utils.packStringId(new string_id("Owner"));
+            attribs[idx] = "\\#00FF00" +  getName(getObjIdObjVar(self, "owner"));
+            idx++;
         }
-        else 
-        {
-            attribs[idx] = " 0";
-        }
-        idx++;
         if (idx >= names.length)
         {
             return SCRIPT_CONTINUE;
@@ -58,7 +51,7 @@ public class hero_mark extends script.base_script
         {
             names[idx] = "time_remaining";
             int last_used = getIntObjVar(self, "lastUsed");
-            int secRemain = 82800 - (getGameTime() - last_used);
+            int secRemain = BUFF_TIME - (getGameTime() - last_used);
             attribs[idx] = " " + parseTimeMsg(parseTimeRemaining(secRemain), false);
             idx++;
             if (idx >= names.length)
@@ -70,27 +63,21 @@ public class hero_mark extends script.base_script
     }
     public int OnAttach(obj_id self) throws InterruptedException
     {
-        setObjVar(self, "charges", 50);
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int id = mi.addRootMenu(menu_info_types.SERVER_MENU10, SID_MENU_RESTORE);
+        if (isGod(player))
+        {
+            mi.addRootMenu(menu_info_types.SERVER_MENU11, new string_id("Remove Cooldown"));
+        }
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU10)
         {
-            if (!hasObjVar(self, "charges"))
-            {
-                return SCRIPT_CONTINUE;
-            }
-            /*if (!utils.isEquipped(self))
-            {
-                sendSystemMessage(player, SID_RESTORE_NOT_EQUIPPED);
-                return SCRIPT_CONTINUE;
-            }*/
             if (hasObjVar(self, "lastUsed"))
             {
                 int last_used = getIntObjVar(self, "lastUsed");
@@ -111,27 +98,22 @@ public class hero_mark extends script.base_script
                 sendSystemMessage(player, SID_RESTORE_NOT_DEAD);
                 return SCRIPT_CONTINUE;
             }
-            String hardpoint = "";
-            if (getObjectInSlot(player, "ring_l") == self)
-            {
-                hardpoint = "hold_l";
-            }
-            else if (getObjectInSlot(player, "ring_r") == self)
-            {
-                hardpoint = "hold_r";
-            }
-            else 
-            {
-                sendSystemMessage(player, SID_RESTORE_NOT_EQUIPPED);
-                return SCRIPT_CONTINUE;
-            }
             pclib.clearEffectsForDeath(player);
             setAttrib(player, HEALTH, REVIVE_HEALTH);
             setAttrib(player, ACTION, REVIVE_ACTION);
-            playClientEffectObj(player, "clienteffect/item_ring_hero_mark.cef", player, hardpoint);
+            playClientEffectLoc(player, "clienteffect/mustafar/som_force_crystal_buff.cef", getLocation(player), 2f);
+            playClientEffectLoc(player, "clienteffect/entertainer_featured_solo.cef", getLocation(player), 4f);
             sendSystemMessage(player, SID_RESTORE_MSG);
             messageTo(player, "handlePlayerResuscitated", null, 0, true);
             setObjVar(self, "lastUsed", getGameTime());
+            setObjVar(self, "owner", player);
+        }
+        if (item == menu_info_types.SERVER_MENU11)
+        {
+            if (isGod(player))
+            {
+                removeObjVar(self, "lastUsed");
+            }
         }
         return SCRIPT_CONTINUE;
     }

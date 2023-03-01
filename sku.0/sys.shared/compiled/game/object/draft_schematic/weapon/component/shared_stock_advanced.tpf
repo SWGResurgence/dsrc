@@ -4,7 +4,7 @@
 
 attributes = [
 	[name = "crafting" "hitPoints", experiment = "" "", value = 30..600],
-	[name = "crafting" "complexity", experiment = "" "", value = 3..3],
+	[name = "crafting" "complexity", experiment = "" "", value = 1..1],
 	[name = "crafting" "xp", experiment = "" "", value = 40..40]]
 
 slots = [

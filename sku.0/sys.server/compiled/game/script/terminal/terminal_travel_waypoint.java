@@ -1,18 +1,19 @@
 package script.terminal;
 
-import script.*;
 import script.ai.ai;
-import script.library.ai_lib;
+import script.library.callable;
 import script.library.chat;
-import script.library.sui;
 import script.library.utils;
+import script.*;
 
 public class terminal_travel_waypoint extends script.base_script
 {
+    public static String TICKET = "object/tangible/loot/tool/datapad_broken.iff";
+
     public terminal_travel_waypoint()
     {
     }
-    public static String TICKET = "object/tangible/loot/tool/datapad_broken.iff";
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         if (isMob(self))
@@ -40,10 +41,12 @@ public class terminal_travel_waypoint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isMob(self))
         {
+            callable.storeCallables(player);
             mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("travel", "travel"));
             if (isGod(player))
             {
@@ -52,6 +55,7 @@ public class terminal_travel_waypoint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -69,6 +73,7 @@ public class terminal_travel_waypoint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int makeTickets(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id[] waypoints = getWaypointsInDatapad(player);
@@ -77,7 +82,8 @@ public class terminal_travel_waypoint extends script.base_script
             sendSystemMessage(player, new string_id("travel", "no_waypoints"));
             return SCRIPT_CONTINUE;
         }
-        for (obj_id waypoint : waypoints) {
+        for (obj_id waypoint : waypoints)
+        {
             String name = getWaypointName(waypoint);
             location travelDest = getWaypointLocation(waypoint);
             obj_id ticket = createObject(TICKET, utils.getInventoryContainer(player), "");
@@ -87,6 +93,7 @@ public class terminal_travel_waypoint extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroyAllInContainerByObjVar(obj_id self, obj_id player, String objvarName) throws InterruptedException
     {
         obj_id[] contents = getContents(utils.getInventoryContainer(player));
@@ -94,8 +101,10 @@ public class terminal_travel_waypoint extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id content : contents) {
-            if (hasObjVar(content, objvarName)) {
+        for (obj_id content : contents)
+        {
+            if (hasObjVar(content, objvarName))
+            {
                 destroyObject(content);
             }
         }

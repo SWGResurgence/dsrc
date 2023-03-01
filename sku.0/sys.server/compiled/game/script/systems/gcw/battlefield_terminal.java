@@ -38,8 +38,8 @@ public class battlefield_terminal extends script.base_script
     public static final String VAR_ACCESS_DELAY = "gcw.static_base.access_delay";
     public static final String VAR_ICON_OBJECT = "gcw.static_base.icon_object";
     public static final String SCRIPT_VAR_CAPTURING = "gcw.static_base.control_terminal.capturing";
-    public static final String COLOR_REBELS = "\\" + colors_hex.COLOR_REBELS;
-    public static final String COLOR_IMPERIALS = "\\" + colors_hex.COLOR_IMPERIALS;
+    public static final String COLOR_REBELS = colors_hex.HEADER + colors_hex.COLOR_REBELS;
+    public static final String COLOR_IMPERIALS = colors_hex.HEADER + colors_hex.COLOR_IMPERIALS;
     public void blog(obj_id controller, String text) throws InterruptedException
     {
         pvp.bfLog(controller, text);

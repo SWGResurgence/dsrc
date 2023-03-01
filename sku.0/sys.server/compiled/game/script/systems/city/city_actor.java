@@ -17,7 +17,15 @@ public class city_actor extends script.base_script
     {
         int city_id = getCityAtLocation(getLocation(self), 0);
         setInvulnerable(self, true);
-        setName(self, "City Actor");
+        setName(self, "Bio-logical Display Matrix");
+        setDescriptionStringId(self, new string_id("This is a Bio-logical Display Matrix. It is used to display creatures in a city. This creature cannot be attacked, or aggroed."));
+        return SCRIPT_CONTINUE;
+    }
+    public int OnInitialize(obj_id self)
+    {
+        int city_id = getCityAtLocation(getLocation(self), 0);
+        setInvulnerable(self, true);
+        setDescriptionStringId(self, new string_id("This is a Bio-logical Display Matrix. It is used to display creatures in a city. This creature cannot be attacked, or aggroed."));
         return SCRIPT_CONTINUE;
     }
 
@@ -27,11 +35,11 @@ public class city_actor extends script.base_script
         boolean isMayor = city.isTheCityMayor(giver, city_id);
         if (canManipulateActor(self, giver))
         {
-            if (isIdValid(item))
+            if (isIdValid(item) && !getTemplateName(item).contains("city_actor"))
             {
                 if (isPlayer(giver))
                 {
-                    sendSystemMessageTestingOnly(giver, "You gave [" + getName(self) + " ] to [" + getName(item) + "].");
+                    sendSystemMessageTestingOnly(giver, "You gave [" + getName(item) + "] to [" + getName(self) + "].");
                     equipOverride(item, self);
                 }
                 else
@@ -47,8 +55,6 @@ public class city_actor extends script.base_script
     {
         if (!utils.hasScriptVar(self, "city_actor_setup"))
         {
-            int city_id = getCityAtLocation(getLocation(player), 0);
-            city.addDecoration(city_id, player, self);
             utils.setScriptVar(self, "city_actor_setup", true);
         }
         if (canManipulateActor(self, player))
@@ -62,7 +68,11 @@ public class city_actor extends script.base_script
                 mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU24, new string_id("* Customize: Size"));
                 mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU26, new string_id("* Customize: AI"));
                 mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU25, new string_id("* Reset All Settings"));
-                mi.addRootMenu(menu_info_types.SERVER_MENU27, new string_id("Remove *"));
+                if (hasObjVar(self, "city_id"))
+                {
+                    mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU27, new string_id("* Remove Actor"));
+                }
+
             }
         }
         return SCRIPT_CONTINUE;
@@ -85,7 +95,7 @@ public class city_actor extends script.base_script
             }
             else if (item == menu_info_types.SERVER_MENU21)
             {
-                sui.inputbox(self, player, "Enter the posture for the hireling.\n(Example, standing: 0)", "handleSetPosture");                //@call msgbox for posture
+                sui.inputbox(self, player, "Enter the posture for the hireling.\n(Example: '0' [which is standing])", "handleSetPosture");                //@call msgbox for posture
             }
             else if (item == menu_info_types.SERVER_MENU22)
             {
@@ -97,7 +107,7 @@ public class city_actor extends script.base_script
             }
             else if (item == menu_info_types.SERVER_MENU24)
             {
-                sui.inputbox(self, player, "Enter the size you want the hireling to be.\n(Example: 1.0f", "handleSetSize");
+                sui.inputbox(self, player, "Enter the size you want the hireling to be.\n(Example: 1.0)", "handleSetSize");
             }
             else if (item == menu_info_types.SERVER_MENU25)
             {
@@ -112,26 +122,34 @@ public class city_actor extends script.base_script
             }
             else if (item == menu_info_types.SERVER_MENU26)
             {
+                if (!hasScript(self, "ai.ai"))
+                {
+                    attachScript(self, "ai.ai");
+                }
                 sui.inputbox(self, player, "Enter the A.I. you want this actor to have.\n\n\nOptions: [wander, loiter, none]", "handleSetAI");
             }
             else if (item == menu_info_types.SERVER_MENU27)
             {
-                removalCleanup(self, player, true);
+                sui.msgbox(self, player, "\\#FFD700Are you sure you want to remove this actor?", sui.YES_NO, "handleRemoveActor");
             }
         }
         return SCRIPT_CONTINUE;
     }
-
-    public void removalCleanup(obj_id object, obj_id player, boolean spam) throws InterruptedException
+    public int handleRemoveActor(obj_id self, dictionary params) throws InterruptedException
     {
-        removeObjVar(object, "city_id");
-        city.removeDecoration(object);
-        if (spam)
+        obj_id player = sui.getPlayerId(params);
+        if (sui.getIntButtonPressed(params) == sui.BP_OK)
         {
-            broadcast(player, "The city actor has been removed.");
+            removeObjVar(self, "city_id");
+            city.removeDecoration(self);
+            destroyObject(self);
         }
+        else
+        {
+            broadcast(player, "Bio-logical Actor removal cancelled.");
+        }
+        return SCRIPT_CONTINUE;
     }
-
     public boolean canManipulateActor(obj_id self, obj_id player) throws InterruptedException
     {
         //@note: keep these in order of importance, with the most important last

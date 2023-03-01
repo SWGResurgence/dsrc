@@ -5,7 +5,6 @@ import script.library.*;
 import script.systems.gcw.space.battle_controller;
 import script.systems.gcw.space.battle_spawner;
 
-import java.util.Iterator;
 import java.util.Vector;
 
 public class combat_ship_player extends script.base_script
@@ -3014,7 +3013,10 @@ public class combat_ship_player extends script.base_script
         if (objChipsToRemove != null)
         {
             for (obj_id anObjChipsToRemove : objChipsToRemove) {
-                space_combat.destroyObject(anObjChipsToRemove);
+                if(hasObjVar(anObjChipsToRemove, "strDroidCommand"))
+                {
+                    space_combat.destroyObject(anObjChipsToRemove);
+                }
             }
         }
         if (strCommands != null)

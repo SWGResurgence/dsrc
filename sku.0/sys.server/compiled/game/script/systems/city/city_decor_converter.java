@@ -2,6 +2,7 @@ package script.systems.city;
 
 import script.*;
 import script.library.create;
+import script.library.static_item;
 import script.library.utils;
 
 import static script.library.storyteller.STORYTELLER_DATATABLE;
@@ -56,6 +57,11 @@ public class city_decor_converter extends script.base_script
                 broadcast(transferer, "This feature is not yet implemented.");
                 return SCRIPT_OVERRIDE;
             }
+            if (getTemplateName(item).contains("furniture/city/statue") || getTemplateName(item).contains("furniture/city/streetlamp")|| getTemplateName(item).contains("furniture/city/fountain"))
+            {
+                broadcast(transferer, "These items do not require conversion.");
+                return SCRIPT_OVERRIDE;
+            }
             else if (getTemplateName(item).contains("object/tangible/"))
             {
                 attachScript(item, "systems.city.city_furniture");
@@ -100,12 +106,14 @@ public class city_decor_converter extends script.base_script
 
         if (item == menu_info_types.SERVER_MENU1)
         {
-            obj_id deed = createObject("object/tangible/loot/tool/datapad_broken.iff", utils.getInventoryContainer(player), "");
+            obj_id deed = static_item.createNewItemFunction("item_city_actor_deed", utils.getInventoryContainer(player));
             if (isIdValid(deed))
             {
-
                 debugConsoleMsg(player, "Deed Object: " + deed);
-                attachScript(deed, "systems.city.city_hire");
+                if (!hasScript(deed, "systems.city.city_hire"))
+                {
+                    attachScript(deed, "systems.city.city_hire");
+                }
             }
         }
         return SCRIPT_CONTINUE;

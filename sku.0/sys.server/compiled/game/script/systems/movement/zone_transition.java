@@ -128,13 +128,13 @@ public class zone_transition extends script.base_script
             {
                 if (population < LIGHT)
                 {
-                    return "\\" + colors_hex.LIMEGREEN + "Light" + "\\#";
+                    return colors_hex.HEADER + colors_hex.LIMEGREEN + "Light" + colors_hex.FOOTER;
                 }
-                return "\\" + colors_hex.WHITE + "Medium" + "\\#";
+                return colors_hex.HEADER + colors_hex.WHITE + "Medium" + colors_hex.FOOTER;
             }
-            return "\\" + colors_hex.YELLOW + "Heavy" + "\\#";
+            return colors_hex.HEADER + colors_hex.YELLOW + "Heavy" + colors_hex.FOOTER;
         }
-        return "\\" + colors_hex.RED + "Full" + "\\#";
+        return colors_hex.HEADER + colors_hex.RED + "Full" + colors_hex.FOOTER;
     }
     public int handleSelectDestinationZone(obj_id self, dictionary params) throws InterruptedException
     {

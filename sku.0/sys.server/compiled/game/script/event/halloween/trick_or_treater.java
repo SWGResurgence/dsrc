@@ -17,7 +17,8 @@ public class trick_or_treater extends script.base_script
     {
         if (!costumeBuffExists(self))
         {
-            detachScript(self, "event.halloween.trick_or_treater");
+            sui.msgbox(self, "[DEVL] no buff on login.");
+            //detachScript(self, "event.halloween.trick_or_treater");
         }
         if (buff.hasBuff(self, "event_halloween_coin_limit"))
         {
@@ -51,19 +52,18 @@ public class trick_or_treater extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public int OnInitialize(obj_id self) throws InterruptedException
+    public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (!costumeBuffExists(self))
         {
-            detachScript(self, "event.halloween.trick_or_treater");
+            if (isGod(self))
+            {
+                sui.msgbox(self, "[DEVL] no buff on speaking.");
+            }
         }
-        return SCRIPT_CONTINUE;
-    }
-    public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
-    {
-        if (speaker == self)
+        if (text != null)
         {
-            if (isGod(speaker))
+            if (isGod(self))
             {
                 if (text.equals("setDailyLimitTwoMinutes"))
                 {
@@ -78,46 +78,47 @@ public class trick_or_treater extends script.base_script
                     }
                 }
             }
-            if (!costumeBuffExists(self))
-            {
-                detachScript(self, "event.halloween.trick_or_treater");
-                return SCRIPT_CONTINUE;
-            }
             if ((toLower(text)).contains("trick or treat"))
             {
-                location speakerLocation = getLocation(speaker);
+                location speakerLocation = getLocation(self);
                 if (isInCity(speakerLocation))
                 {
                     obj_id target = getIntendedTarget(self);
                     float distance = utils.getDistance2D(getLocation(self), getLocation(target));
                     if (distance > 11.0f)
                     {
+                        broadcast(self, "No one can hear you from that far away!");
                         return SCRIPT_CONTINUE;
                     }
-                    if (!isPlayerActive(speaker))
-                    {
-                        return SCRIPT_CONTINUE;
-                    }
+                    //if (!isPlayerActive(self))
+                    //{
+                    //    broadcast(self, "You are not active or you have macros running that impede your ability to trick or treat!");
+                    //    return SCRIPT_CONTINUE;
+                    //} //@note: deprecated as of [unknown]
                     int stealth = buff.getBuffOnTargetFromGroup(self, "invisibility");
                     if (stealth != 0)
                     {
-                        sendSystemMessage(speaker, event_perk.STEALTHED);
+                        sendSystemMessage(self, event_perk.STEALTHED);
                         return SCRIPT_CONTINUE;
                     }
                     if (vehicle.isVehicle(target))
                     {
+                        broadcast(self, "This vehicle seems to have been recently cleaned, leaving no signs of candy.");
                         return SCRIPT_CONTINUE;
                     }
                     if (isDead(target))
                     {
+                        broadcast(self, "Sadly, this person is more than unlikely to give you candy.");
                         return SCRIPT_CONTINUE;
                     }
                     if (beast_lib.isBeast(target))
                     {
+                        chat.chat(self, "CANDY!?!");
                         return SCRIPT_CONTINUE;
                     }
                     if (hasScript(target, "theme_park.outbreak_prolog.dead_npc_script"))
                     {
+                        broadcast(self, "You can't ask for candy from a dead person!");
                         return SCRIPT_CONTINUE;
                     }
                     String targetName = getCreatureName(target);
@@ -133,6 +134,7 @@ public class trick_or_treater extends script.base_script
                     }
                     else if (!event_perk.timeStampCheck(self))
                     {
+                        broadcast(self, "You can't ask for candy again so soon!");
                         return SCRIPT_CONTINUE;
                     }
                     int myNiche = ai_lib.aiGetNiche(target);
@@ -159,12 +161,12 @@ public class trick_or_treater extends script.base_script
                                         utils.setScriptVar(self, event_perk.LIST_VAR + "." + target, newLockOutTime);
                                         event_perk.handlePayout(self, target);
                                     }
-                                    else 
+                                    else
                                     {
                                         chat.chat(target, self, chat.CHAT_SAY, event_perk.TOO_SOON, chat.ChatFlag_targetOnly);
                                     }
                                 }
-                                else 
+                                else
                                 {
                                     utils.setScriptVar(self, event_perk.LIST_VAR + "." + target, newLockOutTime);
                                     event_perk.handlePayout(self, target);
@@ -172,8 +174,9 @@ public class trick_or_treater extends script.base_script
                             }
                         }
                     }
-                    else 
+                    else
                     {
+                        broadcast(self, "You can't ask for candy from that!");
                         return SCRIPT_CONTINUE;
                     }
                     String path = event_perk.LIST_VAR;
@@ -218,8 +221,8 @@ public class trick_or_treater extends script.base_script
         }
         return false;
     }
-    if(buff.getBuffOnTargetFromGroup(self, "shapechange") == 0)
-            {
-                return SCRIPT_CONTINUE;
-            }
+    private boolean costumeBuffExists(obj_id player) throws InterruptedException
+    {
+        return buff.getBuffOnTargetFromGroup(player, "shapechange") != 0;
+    }
 }

@@ -11,7 +11,7 @@ slots = [
 	[name = "craft_furniture_ingredients_n" "reactive_chemicals", hardpoint = ""],
 	[name = "craft_furniture_ingredients_n" "flouro_dye", hardpoint = ""]]
 
-craftedSharedTemplate="object/tangible/holiday/love_day/rewards_11/love_day_prop_2011_flowers_s01.iff"
+craftedSharedTemplate="object/tangible/holiday/love_day/rewards_11/shared_love_day_prop_2011_flowers_s01.iff"
 
 @class intangible_object_template 0
 @class object_template 8

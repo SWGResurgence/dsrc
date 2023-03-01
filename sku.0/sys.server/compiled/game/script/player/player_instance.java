@@ -717,7 +717,7 @@ public class player_instance extends script.base_script
         sendSystemMessageProse(self, pp);
         if (tokenIndex == 5 && count == 9)
         {
-            badge.grantBadge(self, "champion_of_hoth");
+            badge.grantBadge(self, "champion_of_hoth");// Does this badge get granted?
             obj_id[] rewards = new obj_id[1];
             rewards[0] = static_item.createNewItemFunction("item_hoth_flawless_painting", inventory);
             showLootBox(self, rewards);

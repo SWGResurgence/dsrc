@@ -12,14 +12,28 @@ public class heroic_token extends script.base_script
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
-        int menuStoreToken = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("spam", "heroic_token_store"));
-        if (getCount(self) > 1)
+        if (hasTokenBoxInInventory(player))
         {
-            mi.addSubMenu(menuStoreToken, menu_info_types.SERVER_MENU1, new string_id("spam", "heroic_token_store_all"));
+            int pid = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Store Single Token"));
+            if (getCount( self ) > 1)
+            {
+                mi.addSubMenu(pid, menu_info_types.SERVER_MENU1, new string_id("Store Multiple Tokens"));
+            }
         }
         return SCRIPT_CONTINUE;
     }
+
+    public boolean hasTokenBoxInInventory(obj_id player) throws InterruptedException
+    {
+        obj_id[] contents = utils.getContents(player, true);
+        for (obj_id indi : contents) {
+            if (hasScript(indi, "item.heroic_token_box")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))

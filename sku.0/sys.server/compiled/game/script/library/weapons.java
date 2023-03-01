@@ -57,7 +57,7 @@ public class weapons extends script.base_script
     public static final float MIN_AOE_PERCENT = 0.1f;
     public static final float MAX_AOE_PERCENT = 1.0f;
     public static final float MAX_WEAPON_RANGE = 64;
-    public static final float MAX_STAT_VALIDATION_INTENSITY = 1.00f;
+    public static final float MAX_STAT_VALIDATION_INTENSITY = 20.00f;
     public static final String OBJVAR_NEW_WP = "newWeapon";
     public static final String OBJVAR_NEW_WP_COMPONENT = OBJVAR_NEW_WP + ".component";
     public static final String OBJVAR_NEW_WP_WEAPON = OBJVAR_NEW_WP + ".weapon";
@@ -1037,7 +1037,7 @@ public class weapons extends script.base_script
             setWeaponRangeInfo(weapon, rangeData);
         }
     }
-    public static void validateWeaponFacoryCrateRange(obj_id crate, dictionary weaponDat) throws InterruptedException
+    public static void validateWeaponFactoryCrateRange(obj_id crate, dictionary weaponDat) throws InterruptedException
     {
         float baseMinDamage = getFloatObjVar(crate, "crafting_attributes.crafting:minDamage");
         float baseMaxDamage = getFloatObjVar(crate, "crafting_attributes.crafting:maxDamage");
@@ -1104,7 +1104,7 @@ public class weapons extends script.base_script
                 {
                     dictionary weaponDat = getWeaponDat(weaponObjectTemplate);
                     if (weaponDat != null) {
-                        validateWeaponFacoryCrateRange(crate, weaponDat);
+                        validateWeaponFactoryCrateRange(crate, weaponDat);
                     }
                 }
             }

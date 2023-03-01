@@ -412,7 +412,7 @@ public class combat_weapon extends script.base_script
         if (staticItem)
         {
             dictionary itemData = static_item.getStaticItemWeaponDictionary(self);
-            String procEffect = itemData.getString("proc_effect");
+            String procEffect = itemData.getString("proc_effect"); //@TODO: Find the source of the missing proc value that is causing the server to spit out errors. @Talisa
             if (procEffect != null && !procEffect.equals(""))
             {
                 names[free] = utils.packStringId(new string_id("proc/proc", "proc_name"));

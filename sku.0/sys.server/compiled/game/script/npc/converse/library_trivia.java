@@ -2,7 +2,6 @@ package script.npc.converse;
 
 import script.library.ai_lib;
 import script.library.badge;
-import script.library.static_item;
 import script.library.utils;
 import script.obj_id;
 import script.string_id;
@@ -24,13 +23,13 @@ public class library_trivia extends script.base_script
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         string_id message = new string_id(CONVO, "want_trivia");
-        string_id[] response = new string_id[2];
+        string_id response[] = new string_id[2];
         response[0] = new string_id(CONVO, "yes");
         response[1] = new string_id(CONVO, "no");
         npcStartConversation(speaker, self, "Convo", message, response);
         return SCRIPT_CONTINUE;
     }
-    public int OnNpcConversationResponse(obj_id self, obj_id player, String convo, obj_id speaker, string_id response) throws InterruptedException
+    public int OnNpcConversationResponse(obj_id self, String convo, obj_id speaker, string_id response) throws InterruptedException
     {
         int intQuestion = utils.getIntScriptVar(speaker, "libTrivQuestion");
         if (intQuestion == 0)
@@ -81,7 +80,7 @@ public class library_trivia extends script.base_script
                 npcAddConversationResponse(speaker, new string_id(CONVO, right_answer));
                 npcAddConversationResponse(speaker, new string_id(CONVO, wrong_three));
             }
-            else 
+            else
             {
                 npcAddConversationResponse(speaker, new string_id(CONVO, wrong_two));
                 npcAddConversationResponse(speaker, new string_id(CONVO, wrong_one));
@@ -104,20 +103,20 @@ public class library_trivia extends script.base_script
             switch (randomCorrect)
             {
                 case 1:
-                veryGood = new string_id(CONVO, "you_are_right");
-                break;
+                    veryGood = new string_id(CONVO, "you_are_right");
+                    break;
                 case 2:
-                veryGood = new string_id(CONVO, "good_answer");
-                break;
+                    veryGood = new string_id(CONVO, "good_answer");
+                    break;
                 case 3:
-                veryGood = new string_id(CONVO, "correct");
-                break;
+                    veryGood = new string_id(CONVO, "correct");
+                    break;
                 case 4:
-                veryGood = new string_id(CONVO, "correctamundo");
-                break;
+                    veryGood = new string_id(CONVO, "correctamundo");
+                    break;
                 case 5:
-                veryGood = new string_id(CONVO, "you_got_it");
-                break;
+                    veryGood = new string_id(CONVO, "you_got_it");
+                    break;
             }
             npcSpeak(speaker, veryGood);
             npcRemoveConversationResponse(speaker, new string_id(CONVO, "wrong_one_" + intQuestion));
@@ -140,20 +139,20 @@ public class library_trivia extends script.base_script
             switch (randomCorrect)
             {
                 case 1:
-                veryGood = new string_id(CONVO, "thats_not_it");
-                break;
+                    veryGood = new string_id(CONVO, "thats_not_it");
+                    break;
                 case 2:
-                veryGood = new string_id(CONVO, "no_sir");
-                break;
+                    veryGood = new string_id(CONVO, "no_sir");
+                    break;
                 case 3:
-                veryGood = new string_id(CONVO, "you_are_wrong");
-                break;
+                    veryGood = new string_id(CONVO, "you_are_wrong");
+                    break;
                 case 4:
-                veryGood = new string_id(CONVO, "incorrect");
-                break;
+                    veryGood = new string_id(CONVO, "incorrect");
+                    break;
                 case 5:
-                veryGood = new string_id(CONVO, "buzz_wrong_answer");
-                break;
+                    veryGood = new string_id(CONVO, "buzz_wrong_answer");
+                    break;
             }
             npcSpeak(speaker, veryGood);
             npcRemoveConversationResponse(speaker, new string_id(CONVO, "wrong_one_" + intQuestion));
@@ -170,20 +169,20 @@ public class library_trivia extends script.base_script
             switch (randomCorrect)
             {
                 case 1:
-                veryGood = new string_id(CONVO, "couldnt_be_wronger");
-                break;
+                    veryGood = new string_id(CONVO, "couldnt_be_wronger");
+                    break;
                 case 2:
-                veryGood = new string_id(CONVO, "most_wrong");
-                break;
+                    veryGood = new string_id(CONVO, "most_wrong");
+                    break;
                 case 3:
-                veryGood = new string_id(CONVO, "most_unfortunate");
-                break;
+                    veryGood = new string_id(CONVO, "most_unfortunate");
+                    break;
                 case 4:
-                veryGood = new string_id(CONVO, "most_incorrect");
-                break;
+                    veryGood = new string_id(CONVO, "most_incorrect");
+                    break;
                 case 5:
-                veryGood = new string_id(CONVO, "bad_answer");
-                break;
+                    veryGood = new string_id(CONVO, "bad_answer");
+                    break;
             }
             npcSpeak(speaker, veryGood);
             npcRemoveConversationResponse(speaker, new string_id(CONVO, "wrong_one_" + intQuestion));
@@ -200,20 +199,20 @@ public class library_trivia extends script.base_script
             switch (randomCorrect)
             {
                 case 1:
-                veryGood = new string_id(CONVO, "worst_answer_ever");
-                break;
+                    veryGood = new string_id(CONVO, "worst_answer_ever");
+                    break;
                 case 2:
-                veryGood = new string_id(CONVO, "wrongest");
-                break;
+                    veryGood = new string_id(CONVO, "wrongest");
+                    break;
                 case 3:
-                veryGood = new string_id(CONVO, "wrong_squared");
-                break;
+                    veryGood = new string_id(CONVO, "wrong_squared");
+                    break;
                 case 4:
-                veryGood = new string_id(CONVO, "you_are_weakest_link");
-                break;
+                    veryGood = new string_id(CONVO, "you_are_weakest_link");
+                    break;
                 case 5:
-                veryGood = new string_id(CONVO, "not_even_trying");
-                break;
+                    veryGood = new string_id(CONVO, "not_even_trying");
+                    break;
             }
             npcSpeak(speaker, veryGood);
             npcRemoveConversationResponse(speaker, new string_id(CONVO, "wrong_one_" + intQuestion));
@@ -230,20 +229,6 @@ public class library_trivia extends script.base_script
             if (!badge.hasBadge(speaker, "bdg_library_trivia"))
             {
                 badge.grantBadge(speaker, "bdg_library_trivia");
-                static_item.createNewItemFunction("item_tcg_loot_reward_series4_senate_pod_02_01", utils.getInventoryContainer(self));
-            }
-            if (badge.hasBadge(speaker, "bdg_library_trivia"))
-            {
-                if (!hasObjVar(speaker, "podReward"))
-                {
-                    static_item.createNewItemFunction("item_tcg_loot_reward_series4_senate_pod_02_01", utils.getInventoryContainer(self));
-                    setObjVar(speaker, "podReward", 1);
-                    string_id already = new string_id(CONVO, "dont_forget_this");
-                    npcSpeak(speaker, already);
-                }
-                string_id already = new string_id(CONVO, "nothing_more_i_can_offer");
-                npcSpeak(speaker, already);
-
             }
             npcEndConversation(speaker);
         }

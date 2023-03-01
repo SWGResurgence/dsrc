@@ -83,7 +83,7 @@ public class mission_base extends script.base_script
             boolGroup = true;
             strMessage = new string_id(GENERIC_MISSION_MESSAGE_STRING_FILE, "group_success");
         }
-        else 
+        else
         {
             strMessage = new string_id(GENERIC_MISSION_MESSAGE_STRING_FILE, "success");
         }
@@ -105,7 +105,7 @@ public class mission_base extends script.base_script
                 msg += " " + jediBonusReward;
                 sendSystemMessage(objPlayer, msg, null);
             }
-            else 
+            else
             {
                 sendSystemMessage(objPlayer, new string_id("mission/mission_generic", "easy_reward"));
             }
@@ -136,7 +136,7 @@ public class mission_base extends script.base_script
                     messageTo(objTarget, "updateBHKillData", dctParams, 0, true);
                 }
             }
-            else 
+            else
             {
             }
         }
@@ -172,7 +172,7 @@ public class mission_base extends script.base_script
             sendSystemMessageProse(objPlayer, successProse);
             missions.incrementDaily(objPlayer);
         }
-        else 
+        else
         {
             int currentGroupSize = getPCGroupSize(objGroup);
             if (originalGroupSize < 0)
@@ -189,7 +189,7 @@ public class mission_base extends script.base_script
                     strMessage = new string_id(GENERIC_MISSION_MESSAGE_STRING_FILE, "group_expanded");
                 }
             }
-            else 
+            else
             {
                 missionDivisor = 1;
                 dctParams.put("intPlayerDifficulty", intPlayerDifficulty);
@@ -217,7 +217,7 @@ public class mission_base extends script.base_script
                     gcw._grantGcwPoints(null, objPlayer, intGCWPoints, false, gcw.GCW_POINT_TYPE_GROUND_PVE, "mission terminal");
                 }
             }
-            else 
+            else
             {
                 factions.awardFactionStanding(objPlayer, strFaction, intFactionReward);
                 if (!strMissionType.equals("deliver"))
@@ -228,7 +228,7 @@ public class mission_base extends script.base_script
                     {
                         LOG("DESIGNER_FATAL", "Group object " + objGroup + " with player " + objPlayer + " is a zero length group!!!");
                     }
-                    else 
+                    else
                     {
                         intNewReward = intFactionReward / objGroupMembers.length;
                     }
@@ -274,14 +274,6 @@ public class mission_base extends script.base_script
             return player;
         }
         for (Object target : targets) {
-            if (!utils.isFreeTrial(((obj_id) target)) && !hasScript(((obj_id) target), "ai.pet")) {
-                return ((obj_id) target);
-            }
-            if (utils.isFreeTrial(((obj_id) target))) {
-                if (group.getSafeDifference(((obj_id) target), money) == money) {
-                    return ((obj_id) target);
-                }
-            }
             if (!hasScript(((obj_id) target), "ai.pet")) {
                 if (group.getSafeDifference(((obj_id) target), money) > group.getSafeDifference(mostMoney, money)) {
                     mostMoney = ((obj_id) target);

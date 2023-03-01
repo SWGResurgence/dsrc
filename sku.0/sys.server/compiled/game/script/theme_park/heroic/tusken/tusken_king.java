@@ -3,6 +3,7 @@ package script.theme_park.heroic.tusken;
 import script.dictionary;
 import script.library.ai_lib;
 import script.library.buff;
+import script.library.chat;
 import script.library.factions;
 import script.obj_id;
 
@@ -21,6 +22,7 @@ public class tusken_king extends script.base_script
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         messageTo(self, "establishUnity", null, 0.0f, false);
+        chat.chat(self, "ORK ORK!");
         return SCRIPT_CONTINUE;
     }
     public int establishUnity(obj_id self, dictionary params) throws InterruptedException

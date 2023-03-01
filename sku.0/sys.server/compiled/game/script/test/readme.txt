@@ -1,3 +1,3 @@
-Scripts in this directory should only be used to test/debug systems. Please do not put any gameplay scripts in here.
+Scripts in here are for the QA-Tool. All other working/test scripts have been moved to developer.soe.test
 
-Scripts in here should also only be useable by godmode players. Please wrap your code with the isGod() script function.
+Please wrap all code with isGod(self) to prevent accidental execution.

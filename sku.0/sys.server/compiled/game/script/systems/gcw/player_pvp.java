@@ -57,8 +57,8 @@ public class player_pvp extends script.base_script
         "battlefield4",
         "battlefield5"
     };
-    public static final String COLOR_REBELS = "\\" + colors_hex.COLOR_REBELS;
-    public static final String COLOR_IMPERIALS = "\\" + colors_hex.COLOR_IMPERIALS;
+    public static final String COLOR_REBELS = colors_hex.HEADER + colors_hex.COLOR_REBELS;
+    public static final String COLOR_IMPERIALS = colors_hex.HEADER + colors_hex.COLOR_IMPERIALS;
     public void blog(obj_id controller, String text) throws InterruptedException
     {
         String battlefieldName = "none";
@@ -708,10 +708,10 @@ public class player_pvp extends script.base_script
     }
     public boolean canReceiveReward(obj_id self) throws InterruptedException
     {
-        if (!isPlayerActive(self))
-        {
-            return false;
-        }
+        //if (!isPlayerActive(self))
+        //{
+        //   return false;
+        //} @TODO: add back in or another anti-afk method.
         int damage = utils.getIntScriptVar(self, "battlefield.damage");
         int healing = utils.getIntScriptVar(self, "battlefield.healing");
         int captures = utils.getIntScriptVar(self, "battlefield.captures");
@@ -827,11 +827,11 @@ public class player_pvp extends script.base_script
                 {
                     if (faction == factions.FACTION_FLAG_REBEL)
                     {
-                        static_item.createNewItemFunction("item_battlefield_rebel_token", container);
+                        static_item.createNewItemFunction("item_battlefield_rebel_token_" + battlefieldName, container);
                     }
                     else 
                     {
-                        static_item.createNewItemFunction("item_battlefield_imperial_token", container);
+                        static_item.createNewItemFunction("item_battlefield_imperial_token_" + battlefieldName, container);
                     }
                 }
             }

@@ -1,19 +1,7 @@
 package script.conversation;
 
 import script.*;
-import script.base_class.*;
-import script.combat_engine.*;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Vector;
-import script.base_script;
-
-import script.library.ai_lib;
-import script.library.chat;
-import script.library.conversation;
-import script.library.groundquests;
-import script.library.trial;
-import script.library.utils;
+import script.library.*;
 
 public class wod_queen_mother extends script.base_script
 {
@@ -115,7 +103,7 @@ public class wod_queen_mother extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_queen_mother_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -153,7 +141,7 @@ public class wod_queen_mother extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_queen_mother_handleBranch4(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -206,7 +194,7 @@ public class wod_queen_mother extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_queen_mother_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -220,7 +208,7 @@ public class wod_queen_mother extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
