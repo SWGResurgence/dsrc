@@ -51,28 +51,21 @@ public class crackdown_cantina extends script.base_script
             messageTo(self, "createTrouble", null, 15, false);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
-            String trouble = getConfigSetting("Imperial Crackdown", "troubleChance");
-            int chanceOfTrouble = utils.stringToInt(trouble);
-            if (chanceOfTrouble == 0 || chanceOfTrouble == -1)
-            {
-                chanceOfTrouble = 20;
-            }
-            int rollForTrouble = rand(1, 100);
-            if (rollForTrouble < chanceOfTrouble)
+            int chanceOfTrouble = utils.getIntConfigSetting("EventTeam", "crackdownTroubleChance", 20);
+            if (rand(1, 100) < chanceOfTrouble)
             {
                 messageTo(self, "createTrouble", null, 15, false);
-                return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (hasObjVar(self, "checkingForTrouble"))
                 {
                     removeObjVar(self, "checkingForTrouble");
                 }
-                return SCRIPT_CONTINUE;
             }
+            return SCRIPT_CONTINUE;
         }
     }
     public int createTrouble(obj_id self, dictionary params) throws InterruptedException
@@ -108,7 +101,7 @@ public class crackdown_cantina extends script.base_script
             troublemaker = "crackdown_stormtrooper";
             faction = "imperial";
         }
-        else 
+        else
         {
             troublemaker = "crackdown_rebel_command_security_guard";
             faction = "rebel";
@@ -149,7 +142,7 @@ public class crackdown_cantina extends script.base_script
         {
             troublemaker = "crackdown_rebel_command_security_guard";
         }
-        else 
+        else
         {
             troublemaker = "crackdown_stormtrooper";
         }
