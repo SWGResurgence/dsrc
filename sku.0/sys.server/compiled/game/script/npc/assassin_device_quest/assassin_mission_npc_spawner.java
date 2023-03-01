@@ -1,7 +1,6 @@
 package script.npc.assassin_device_quest;
 
-import script.library.ai_lib;
-import script.library.create;
+import script.library.*;
 import script.obj_id;
 
 public class assassin_mission_npc_spawner extends script.base_script
@@ -11,6 +10,8 @@ public class assassin_mission_npc_spawner extends script.base_script
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
+        // pre-cu deprecated
+        /*
         String strConfigSetting = getConfigSetting("GameServer", "assassinMissionsEnabled");
         if ((strConfigSetting == null) || (strConfigSetting.equals("")))
         {
@@ -23,6 +24,7 @@ public class assassin_mission_npc_spawner extends script.base_script
             setInvulnerable(celeb, true);
             ai_lib.setDefaultCalmBehavior(celeb, ai_lib.BEHAVIOR_SENTINEL);
         }
+         */
         return SCRIPT_CONTINUE;
     }
 }

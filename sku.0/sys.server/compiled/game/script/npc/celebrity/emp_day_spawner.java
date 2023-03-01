@@ -1,8 +1,7 @@
 package script.npc.celebrity;
 
 import script.dictionary;
-import script.library.ai_lib;
-import script.library.create;
+import script.library.*;
 import script.obj_id;
 
 public class emp_day_spawner extends script.base_script
@@ -12,12 +11,7 @@ public class emp_day_spawner extends script.base_script
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        String setting = getConfigSetting("EventTeam", "empireDay");
-        if (setting == null || setting.equals(""))
-        {
-            return SCRIPT_CONTINUE;
-        }
-        if (setting.equals("true") || setting.equals("1"))
+        if (events.isEventActive(events.EMPIRE_DAY))
         {
             String spawn = getStringObjVar(self, "spawns");
             obj_id celeb = create.object(spawn, getLocation(self));

@@ -1,7 +1,6 @@
 package script.npc.stormtrooper_respect;
 
-import script.library.factions;
-import script.library.utils;
+import script.library.*;
 import script.obj_id;
 import script.string_id;
 
@@ -19,19 +18,6 @@ public class overdue_fines extends script.base_script
     public static int DAY_IN_SECONDS = 60 * 60 * 24;
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        if (isGod(self))
-        {
-            String delayWeekStr = getConfigSetting("GameServer", "STRespectWeekDelay");
-            String delayDayStr = getConfigSetting("GameServer", "STRespectDayDelay");
-            if (delayWeekStr != null && !delayWeekStr.equals(""))
-            {
-                WEEK_IN_SECONDS = Integer.parseInt(delayWeekStr);
-            }
-            if (delayDayStr != null && !delayDayStr.equals(""))
-            {
-                DAY_IN_SECONDS = Integer.parseInt(delayDayStr);
-            }
-        }
         if (hasObjVar(self, "overdue_fine"))
         {
             if ((getGameTime() - getIntObjVar(self, "overdue_fine") > WEEK_IN_SECONDS))
