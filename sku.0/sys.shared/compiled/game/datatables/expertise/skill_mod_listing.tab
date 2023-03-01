@@ -545,8 +545,8 @@ special_vendor_tcg_series4_kitonak	ALL	misc	1	6090			TCG Set 4 Vendor
 special_vendor_tcg_series10_wookiee	ALL	misc	1	6090			TCG Set 10 Vendor
 special_sign_tcg_series3	ALL	misc	1	7000			TCG Set 3 animated signs
 special_sign_tcg_series5	ALL	misc	1	7001			TCG Set 5 signs
-special_sign_halloween_hanging_sign	ALL	misc	1	7010			Galactic Moon Festival Signs, version 2
-special_sign_halloween_standing_sign	ALL	misc	1	7020			Galactic Moon Festival Signs, version 2
+special_sign_halloween_hanging_sign	ALL	misc	1	7010			"Galactic Moon Festival Signs, version 2"
+special_sign_halloween_standing_sign	ALL	misc	1	7020			"Galactic Moon Festival Signs, version 2"
 special_sign_imp_empire_day_standing	ALL	misc	1	7021			Empire Day 2009
 special_sign_imp_empire_day_hanging	ALL	misc	1	7022			Empire Day 2009
 special_sign_reb_empire_day_standing	ALL	misc	1	7023			Empire Day 2009
@@ -564,3 +564,6 @@ resistance_incapacitation	ALL	attributes	1	8050			modifier for incapacitation
 bm_incubator_dps_armor	ALL	beastmaster	1	8060			Ability Acquisition Bonus
 bm_mutation_chance_increase	ALL	beastmaster	1	8070			Ability Acquisition Bonus
 incubation_time_reduction	ALL	beastmaster	1	8080			Ability Acquisition Bonus
+expertise_damage_line_action_cc	bounty_hunter_1a	bounty_hunter	1	8090			Cripple Action Cost
+expertise_area_size_line_trap_dire	bounty_hunter_1a	bounty_hunter	1	8100			Dire Trap Area Effect
+expertise_area_size_line_trap_action	bounty_hunter_1a	bounty_hunter	1	8110			Trap Action Cost

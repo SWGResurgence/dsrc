@@ -610,46 +610,35 @@ public class incubator extends script.base_script
         }
         return false;
     }
-    public static boolean setNextSessionTime(obj_id station, obj_id player) throws InterruptedException
-    {
-        if (isIdValid(player) && isIdValid(station))
-        {
+    public static boolean setNextSessionTime(obj_id station, obj_id player) throws InterruptedException {
+        if (isIdValid(player) && isIdValid(station)) {
             int currentTime = getGameTime();
-            int expertiseModifier = (int)getSkillStatisticModifier(player, "expertise_bm_incubation_time");
+            int expertiseModifier = (int) getSkillStatisticModifier(player, "expertise_bm_incubation_time");
             float stationFunctionality = getFloatObjVar(station, STATION_FUNCTIONALITY_OBJVAR);
             int modifiedTime = currentTime + NEXT_SESSION_TIME;
-            if (expertiseModifier > 0)
-            {
+            if (expertiseModifier > 0) {
                 modifiedTime -= expertiseModifier * 3600;
             }
-            int skillModifier = (int)getSkillStatisticModifier(player, "incubation_time_reduction");
-            if (skillModifier > 0)
-            {
+            int skillModifier = (int) getSkillStatisticModifier(player, "incubation_time_reduction");
+            if (skillModifier > 0) {
                 modifiedTime -= skillModifier * 60;
             }
             int city_id = city.checkCity(player, false);
-                      int cityTime = 0;
-            if (city.cityHasSpec(city_id, city.SF_SPEC_INCUBATOR))
-            {
+            if (city.cityHasSpec(city_id, city.SF_SPEC_INCUBATOR)) {
                 modifiedTime -= (5 * 60 * 60);
-                                cityTime = 5;
             }
-            if (stationFunctionality != 0)
-            {
+            if (stationFunctionality != 0) {
                 modifiedTime -= Math.round(stationFunctionality * 3600);
             }
-            if (modifiedTime > currentTime + MAX_SESSION_TIME)
-            {
+            if (modifiedTime > currentTime + MAX_SESSION_TIME) {
                 modifiedTime = currentTime + MAX_SESSION_TIME;
             }
-            if (modifiedTime <= 0)
-            {
+            if (modifiedTime <= 0) {
                 modifiedTime = 3600;
             }
-            if (modifiedTime > 0)
-            {
+            if (modifiedTime > 0) {
                 setObjVar(player, NEXT_SESSION, modifiedTime);
-                sendSystemMessageTestingOnly(player, "[INCUBATION TIME REDUCTION REPORT] Exotic modifier: " + skillModifier + " seconds. Expertise modifier: " + expertiseModifier + " hours. City Bonus: " + cityTime + " hours.");
+                CustomerServiceLog("INCUBATOR: ", "Incubator Session Completed, next session can be performed in " + ((modifiedTime - currentTime) / 3600) + " hours");
                 return true;
             }
         }
