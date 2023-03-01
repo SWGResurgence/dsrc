@@ -256,8 +256,8 @@ public class gcw extends script.base_script
     public static final String CITY_BESTINE = "bestine";
     public static final String CITY_KEREN = "keren";
     public static final String GCW_TUTORIAL_FLAG = "gcw_tutorial_flag.has_received_tutorial";
-    public static final String COLOR_REBELS = "\\" + colors_hex.COLOR_REBELS;
-    public static final String COLOR_IMPERIALS = "\\" + colors_hex.COLOR_IMPERIALS;
+    public static final String COLOR_REBELS = colors_hex.HEADER + colors_hex.COLOR_REBELS;
+    public static final String COLOR_IMPERIALS = colors_hex.HEADER + colors_hex.COLOR_IMPERIALS;
     public static void assignScanInterests(obj_id npc) throws InterruptedException
     {
         if (!isIdValid(npc) || isPlayer(npc) || pet_lib.isPet(npc))

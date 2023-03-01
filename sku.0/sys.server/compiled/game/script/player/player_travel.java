@@ -45,6 +45,7 @@ public class player_travel extends script.base_script
     public static final int SHIP_TYPE_TCG_LOCATION_SHIP = 6;
     public static final int SHIP_TYPE_SNOWSPEEDER_SHIP = 7;
     public static final int SHIP_TYPE_TCG_SLAVE1_SHIP = 8;
+    public static final int SHIP_TYPE_WALKER_SHIP = 9;
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "player_travel.OnInitialize");
@@ -1058,6 +1059,10 @@ public class player_travel extends script.base_script
     {
         return doCFP(self, SHIP_TYPE_INSTANT_ROYAL_SHIP);
     }
+    public int callForWalkerPickup(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        return doCFP(self, SHIP_TYPE_WALKER_SHIP);
+    }
     public int callForTcgHomePickup(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         return doCFP(self, SHIP_TYPE_TCG_HOME_SHIP);
@@ -1069,6 +1074,10 @@ public class player_travel extends script.base_script
     public int callForSnowspeederPickup(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         return doCFP(self, SHIP_TYPE_SNOWSPEEDER_SHIP);
+    }
+    public int callForATATWalkerPickup(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
+    {
+        return doCFP(self, SHIP_TYPE_WALKER_SHIP);
     }
     public int callForTcgSlave1Pickup(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
@@ -1192,6 +1201,11 @@ public class player_travel extends script.base_script
         {
             pickupCraftType = "object/tangible/terminal/terminal_travel_instant_snowspeeder.iff";
             playClientEffectObj(player, "sound/veh_t47snowspeeder_decel.snd", player, "");
+        }
+        else if (type == SHIP_TYPE_WALKER_SHIP)
+        {
+            pickupCraftType = "object/tangible/terminal/terminal_travel_instant_terminal_atat_walker.iff";
+            playClientEffectObj(player, "sound/veh_atrt_decel.snd", player, "");
         }
         else if (type == SHIP_TYPE_TCG_SLAVE1_SHIP)
         {

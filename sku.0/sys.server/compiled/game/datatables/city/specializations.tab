@@ -4,7 +4,7 @@ null	0	0
 city_spec_sample_rich	256	7000
 city_spec_farming	512	10000
 city_spec_industry	1024	5000
-city_spec_research	2048	0
+city_spec_research	2048	2000
 city_spec_cloning	4096	8000
 city_spec_missions	8192	8000
 city_spec_entertainer	16384	8000

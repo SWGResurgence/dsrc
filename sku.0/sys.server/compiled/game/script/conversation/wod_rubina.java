@@ -1,18 +1,10 @@
 package script.conversation;
 
-import script.*;
-import script.base_class.*;
-import script.combat_engine.*;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Vector;
-import script.base_script;
-
 import script.library.ai_lib;
 import script.library.chat;
-import script.library.conversation;
 import script.library.groundquests;
 import script.library.utils;
+import script.*;
 
 public class wod_rubina extends script.base_script
 {
@@ -336,7 +328,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch3(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -351,7 +343,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -366,7 +358,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch7(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -381,7 +373,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch9(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -396,7 +388,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch11(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -411,7 +403,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch13(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -426,7 +418,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch15(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -464,7 +456,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch16(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -503,7 +495,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch17(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -518,7 +510,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch19(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -556,7 +548,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch20(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -594,7 +586,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch21(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -609,7 +601,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch24(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -934,7 +926,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch25(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1027,7 +1019,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch26(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1133,7 +1125,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch27(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1171,7 +1163,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch28(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1186,7 +1178,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch30(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1224,7 +1216,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch31(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1239,7 +1231,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch33(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1277,7 +1269,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch34(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1292,7 +1284,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch36(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1400,7 +1392,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch37(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1438,7 +1430,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch38(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1452,7 +1444,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch47(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1523,7 +1515,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch49(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1848,7 +1840,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch50(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -1919,7 +1911,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int wod_rubina_handleBranch52(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -2244,7 +2236,7 @@ public class wod_rubina extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

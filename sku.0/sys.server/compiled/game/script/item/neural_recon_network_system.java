@@ -265,7 +265,7 @@ public class neural_recon_network_system extends script.base_script
 
 		}
 		setObjVar(self, "used.timestamp", getCalendarTime());
-        destroyObject(self);
+        //destroyObject(self);
         return SCRIPT_CONTINUE;
     }
 }

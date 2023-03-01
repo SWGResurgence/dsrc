@@ -82,11 +82,9 @@ skillCommands = ["unskilled"]
 manufactureScripts = ["systems.crafting.weapon.core.crafting_new_weapon_final"]
 
 @class intangible_object_template 1
-
 @class object_template 8
 
-complexity = 40
+complexity = 20
 volume = 1
 sharedTemplate = "object/draft_schematic/weapon/appearance/shared_weapon_appearance_loot_void.iff"
 xpPoints = [[type = XP_craftingWeapons, level = 0, value = 0]]
-

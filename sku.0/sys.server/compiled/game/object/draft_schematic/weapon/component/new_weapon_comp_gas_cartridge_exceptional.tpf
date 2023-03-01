@@ -53,7 +53,7 @@ manufactureScripts = ["systems.crafting.weapon.core.crafting_comp_gas_cartridge"
 
 @class object_template 8
 
-complexity = 42
+complexity = 21
 volume = 1
 sharedTemplate = "object/draft_schematic/weapon/component/shared_new_weapon_comp_gas_cartridge_exceptional.iff"
 xpPoints = [[type = XP_craftingWeapons, level = 0, value = 0]]

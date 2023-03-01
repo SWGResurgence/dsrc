@@ -11,6 +11,7 @@ public class perforce extends script.base_script
     public perforce()
     {
     }
+
     public static String getIdOptions() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -22,6 +23,7 @@ public class perforce extends script.base_script
         String password = getStringObjVar(self, "P4PASSWD");
         return "-P " + password + " -u " + userId;
     }
+
     public static boolean isPerforceConfigured() throws InterruptedException
     {
         boolean result = false;
@@ -47,19 +49,17 @@ public class perforce extends script.base_script
         }
         return result;
     }
+
     public static boolean isLocked(String fileName) throws InterruptedException
     {
         if (!isGod(getSelf()))
         {
             return false;
         }
-        boolean result = false;
-        if (whoLocked(fileName) != null)
-        {
-            result = true;
-        }
+        boolean result = whoLocked(fileName) != null;
         return result;
     }
+
     public static String whoLocked(String fileName) throws InterruptedException
     {
         if (!isGod(getSelf()))
@@ -70,6 +70,7 @@ public class perforce extends script.base_script
         String lockContents = file_access.readTextFile(lockFileName);
         return lockContents;
     }
+
     public static boolean openExistingFileForExclusiveEdit(String fileName) throws InterruptedException
     {
         boolean result = false;
@@ -83,14 +84,7 @@ public class perforce extends script.base_script
         if (isLocked(fileName))
         {
             String who = whoLocked(fileName);
-            if (!who.equals(userId))
-            {
-                return false;
-            }
-            else 
-            {
-                return true;
-            }
+            return who.equals(userId);
         }
         if (file_access.isWritable(fileName))
         {
@@ -107,6 +101,7 @@ public class perforce extends script.base_script
         }
         return result;
     }
+
     public static String[] opened() throws InterruptedException
     {
         if (!isPerforceConfigured())
@@ -129,6 +124,7 @@ public class perforce extends script.base_script
         }
         return result;
     }
+
     public static void setupPerforce() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -147,6 +143,7 @@ public class perforce extends script.base_script
             flushSUIPage(page);
         }
     }
+
     public static String change(int changeList) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -174,10 +171,12 @@ public class perforce extends script.base_script
         }
         return result;
     }
+
     public static String where(String fileLocation) throws InterruptedException
     {
         return system_process.runAndGetOutput("p4 " + getIdOptions() + " where " + fileLocation);
     }
+
     public static boolean submit(String changeDescription, Vector resultText) throws InterruptedException
     {
         if (!isGod(getSelf()))
@@ -207,8 +206,7 @@ public class perforce extends script.base_script
                             fileLocks.add(fileName);
                         }
                     }
-                }
-                catch(java.util.NoSuchElementException e)
+                } catch (java.util.NoSuchElementException e)
                 {
                 }
             }
@@ -230,7 +228,7 @@ public class perforce extends script.base_script
                 resultText.add(p.getOutput());
                 for (iter = 0; iter < fileLocks.size(); ++iter)
                 {
-                    File f = new File(((String)fileLocks.get(iter)));
+                    File f = new File(((String) fileLocks.get(iter)));
                     if (f.exists())
                     {
                         if (f.canWrite())
@@ -239,37 +237,38 @@ public class perforce extends script.base_script
                             {
                                 if (!f.delete())
                                 {
-                                    resultText.add("failed to remove lock " + ((String)fileLocks.get(iter)) + ": could not delete file");
+                                    resultText.add("failed to remove lock " + fileLocks.get(iter) + ": could not delete file");
                                 }
                             }
-                            else 
+                            else
                             {
-                                resultText.add("failed to remove lock " + ((String)fileLocks.get(iter)) + ": not a file");
+                                resultText.add("failed to remove lock " + fileLocks.get(iter) + ": not a file");
                             }
                         }
-                        else 
+                        else
                         {
-                            resultText.add(((String)fileLocks.get(iter)) + ": not writeable");
+                            resultText.add(fileLocks.get(iter) + ": not writeable");
                         }
                     }
-                    else 
+                    else
                     {
-                        resultText.add("failed to remove file lock " + ((String)fileLocks.get(iter)) + ": it does not exist");
+                        resultText.add("failed to remove file lock " + fileLocks.get(iter) + ": it does not exist");
                     }
                 }
             }
-            else 
+            else
             {
                 resultText.add(p.getOutput());
                 resultText.add("Failed to execute " + cmdLine);
             }
         }
-        else 
+        else
         {
             resultText.add("Could not execute " + cmdLine);
         }
         return result;
     }
+
     public static String diff(String fileSpec) throws InterruptedException
     {
         if (!isGod(getSelf()))
@@ -281,7 +280,7 @@ public class perforce extends script.base_script
         {
             result = system_process.runAndGetOutput("p4 " + getIdOptions() + " diff -dU150 " + fileSpec);
         }
-        else 
+        else
         {
             result = system_process.runAndGetOutput("p4 " + getIdOptions() + " diff -dU150");
         }

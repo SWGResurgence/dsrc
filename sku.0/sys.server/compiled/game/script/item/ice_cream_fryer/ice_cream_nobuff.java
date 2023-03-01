@@ -142,7 +142,7 @@ public class ice_cream_nobuff extends script.base_script
             }
             switch (getGender(player))
             {
-                case GENDER_FEMALE:
+                case FEMALE:
                 snd += "female_eat.cef";
                 break;
                 default:

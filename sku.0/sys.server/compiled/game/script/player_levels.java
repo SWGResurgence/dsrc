@@ -27,9 +27,9 @@ public class player_levels
 		}
 		else
 		{
-			if(level > 115)
+			if(level > 90)
 			{
-				level = 115;
+				level = 90;
 			}
 		}
 
@@ -67,9 +67,9 @@ public class player_levels
 		}
 		else
 		{
-			if(level > 115)
+			if(level > 90)
 			{
-				level = 115;
+				level = 90;
 			}
 		}
 

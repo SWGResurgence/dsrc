@@ -1,4 +1,3 @@
-
 @base object/mobile/skeleton/shared_protocol_droid.iff
 
 @class creature_object_template 10

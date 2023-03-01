@@ -147,11 +147,11 @@ public class control_terminal extends script.base_script
         String color = "";
         if (terminalFaction == (-615855020))
         {
-            color = "\\" + colors_hex.COLOR_IMPERIALS + " ";
+            color = colors_hex.HEADER + colors_hex.COLOR_IMPERIALS + " ";
         }
         else if (terminalFaction == (370444368))
         {
-            color = "\\" + colors_hex.COLOR_REBELS + " ";
+            color = colors_hex.HEADER + colors_hex.COLOR_REBELS + " ";
         }
         String name = color + getString(utils.unpackString(getEncodedName(self)));
         location here = getWorldLocation(self);

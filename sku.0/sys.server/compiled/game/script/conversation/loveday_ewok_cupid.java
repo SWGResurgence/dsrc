@@ -18,7 +18,7 @@ public class loveday_ewok_cupid extends script.base_script
     }
     public boolean loveday_ewok_cupid_condition_alreadyHasBadge(obj_id player, obj_id npc) throws InterruptedException
     {
-        return badge.hasBadge(player, "loveday_cupid_badge_10");
+        return badge.hasBadge(player, "loveday_cupid_badge_23");
     }
     public boolean loveday_ewok_cupid_condition_hasCardBundle(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -44,7 +44,7 @@ public class loveday_ewok_cupid extends script.base_script
     }
     public boolean loveday_ewok_cupid_condition_preparingToLeave_hasBadge(obj_id player, obj_id npc) throws InterruptedException
     {
-        return hasObjVar(npc, "preparingForDespawn") && badge.hasBadge(player, "loveday_cupid_badge_10");
+        return hasObjVar(npc, "preparingForDespawn") && badge.hasBadge(player, "loveday_cupid_badge_23");
     }
     public void loveday_ewok_cupid_action_hearts_grantCupidBadge(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -56,10 +56,10 @@ public class loveday_ewok_cupid extends script.base_script
             {
                 destroyObject(lovedayChakHearts);
             }
-            badge.grantBadge(player, "loveday_cupid_badge_10");
-            if (!hasCompletedCollectionSlot(player, "loveday_2010_found_kyoopid"))
+            badge.grantBadge(player, "loveday_cupid_badge_23");
+            if (!hasCompletedCollectionSlot(player, "loveday_2023_found_kyoopid"))
             {
-                modifyCollectionSlotValue(player, "loveday_2010_found_kyoopid", 1);
+                modifyCollectionSlotValue(player, "loveday_2023_found_kyoopid", 1);
             }
         }
         return;
@@ -70,19 +70,19 @@ public class loveday_ewok_cupid extends script.base_script
         if (isIdValid(lovedayCardBundle))
         {
             destroyObject(lovedayCardBundle);
-            badge.grantBadge(player, "loveday_cupid_badge_10");
-            if (!hasCompletedCollectionSlot(player, "loveday_2010_found_kyoopid"))
+            badge.grantBadge(player, "loveday_cupid_badge_23");
+            if (!hasCompletedCollectionSlot(player, "loveday_2023_found_kyoopid"))
             {
-                modifyCollectionSlotValue(player, "loveday_2010_found_kyoopid", 1);
+                modifyCollectionSlotValue(player, "loveday_2023_found_kyoopid", 1);
             }
         }
         return;
     }
     public void loveday_ewok_cupid_action_grant_collectionSlot(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (!hasCompletedCollectionSlot(player, "loveday_2010_found_kyoopid"))
+        if (!hasCompletedCollectionSlot(player, "loveday_2023_found_kyoopid"))
         {
-            modifyCollectionSlotValue(player, "loveday_2010_found_kyoopid", 1);
+            modifyCollectionSlotValue(player, "loveday_2023_found_kyoopid", 1);
         }
         return;
     }
@@ -155,7 +155,7 @@ public class loveday_ewok_cupid extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int loveday_ewok_cupid_handleBranch5(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -209,7 +209,7 @@ public class loveday_ewok_cupid extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        return SCRIPT_DEFAULT;
+        return SCRIPT_CONTINUE;
     }
     public int OnInitialize(obj_id self) throws InterruptedException
     {

@@ -2,10 +2,9 @@ package script.item.loot;
 
 import script.library.buff;
 import script.library.utils;
-import script.obj_id;
 import script.menu_info;
 import script.menu_info_types;
-import script.menu_info_data;
+import script.obj_id;
 import script.string_id;
 
 public class toy extends script.base_script
@@ -13,7 +12,7 @@ public class toy extends script.base_script
     public toy()
     {
     }
-    public static int COOLDOWN_TIME = 14400;
+    public static int COOLDOWN_TIME = 14400; // 4 hours
     public static int currentGameTime = getCalendarTime();
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
@@ -48,7 +47,7 @@ public class toy extends script.base_script
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("spam", "use"));
+        mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Feel Lucky"));
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int mi) throws InterruptedException
@@ -68,7 +67,7 @@ public class toy extends script.base_script
             }
             else
             {
-                buff.applyBuff(player, "nova_orion_rank6_lucky_salvage");
+                buff.applyBuff(player, "nova_orion_rank6_lucky_salvage", 3600, 50);
                 setObjVar(self, "used.timestamp", currentGameTime);
             }
         }

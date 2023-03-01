@@ -19,8 +19,8 @@ public class gcw_city extends script.base_script
     public static final float KEREN_ANNOUNCEMENT_RADIUS = 700.0f;
     public static final float BESTINE_ANNOUNCEMENT_RADIUS = 450.0f;
     public static final float DEARIC_ANNOUNCEMENT_RADIUS = 650.0f;
-    public static final String COLOR_REBELS = "\\" + colors_hex.COLOR_REBELS;
-    public static final String COLOR_IMPERIALS = "\\" + colors_hex.COLOR_IMPERIALS;
+    public static final String COLOR_REBELS = colors_hex.HEADER + colors_hex.COLOR_REBELS;
+    public static final String COLOR_IMPERIALS = colors_hex.HEADER + colors_hex.COLOR_IMPERIALS;
 
     /*
     CITY_OBJECT_BESTINE 9835358 tatooine(-1292.5868, 12.0, -3590.0999)

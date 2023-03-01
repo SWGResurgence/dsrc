@@ -10,7 +10,7 @@
 @class draft_schematic_object_template 3
 
 attributes = [
-	[name = "crafting" "complexity", experiment = "" "", value = 40..40],
+	[name = "crafting" "complexity", experiment = "" "", value = 20..20],
 	[name = "crafting" "xp", experiment = "" "", value = 450..450],
 	[name = "crafting" "appearanceBonusLow", experiment = "crafting" "appearanceBonusLow", value = 0..62],
 	[name = "crafting" "appearanceBonusHigh", experiment = "crafting" "appearanceBonusHigh", value = 0..50],

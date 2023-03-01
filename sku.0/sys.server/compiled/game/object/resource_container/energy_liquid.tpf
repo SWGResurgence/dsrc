@@ -1,17 +1,3 @@
-//            Filename:     energy_liquid
-//            Directory:    object/resource_container/
-//
-//            Description:
-//            Debris
-//
-//            Notes:
-//
-//
-//            Category:                   Resource-Container
-//            Sub-Category:               ?
-//            Classification:             ?
-//
-
 @base object/resource_container/base/base_resource_container.iff
 @class resource_container_object_template 0
 

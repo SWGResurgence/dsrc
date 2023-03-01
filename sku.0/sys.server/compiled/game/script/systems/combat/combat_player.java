@@ -122,6 +122,7 @@ public class combat_player extends script.systems.combat.combat_base
                         sendSystemMessage(self, strSpam);
                         return SCRIPT_OVERRIDE;
                     }
+                    return SCRIPT_CONTINUE;
                 }
             }
         }

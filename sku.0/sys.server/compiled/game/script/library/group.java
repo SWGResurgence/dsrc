@@ -110,7 +110,7 @@ public class group extends script.base_script
                     return false;
                 }
             }
-            else 
+            else
             {
                 return false;
             }
@@ -130,7 +130,7 @@ public class group extends script.base_script
                     return false;
                 }
             }
-            else 
+            else
             {
                 return false;
             }
@@ -146,7 +146,7 @@ public class group extends script.base_script
             {
                 gid = target;
             }
-            else 
+            else
             {
                 gid = getGroupObject(target);
             }
@@ -337,7 +337,7 @@ public class group extends script.base_script
             prose_package ppNoLoot = prose.getPackage(PROSE_NOTIFY_NO_LOOT, actor, getName(actor), null, target, getAssignedName(target), getNameStringId(target), null, null, null, leftCount, 0.0f);
             sendSystemMessageProse(gid, ppNoLoot);
         }
-        else 
+        else
         {
             int cnt = items.length;
             prose_package ppItemLoot = prose.getPackage(PROSE_NOTIFY_ITEM_LOOT, actor, getName(actor), null, target, getAssignedName(target), getNameStringId(target), null, null, null, cnt, 0.0f);
@@ -443,7 +443,7 @@ public class group extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 int placeHolder = amt;
                 int toPay = 0;
@@ -466,7 +466,7 @@ public class group extends script.base_script
                 {
                     remainder = (int)(placeHolder / safeMoney.length);
                 }
-                else 
+                else
                 {
                     remainder = placeHolder;
                 }
@@ -524,7 +524,7 @@ public class group extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 int toPay = 0;
                 int placeHolder = amt;
@@ -548,7 +548,7 @@ public class group extends script.base_script
                 {
                     remainder = (int)placeHolder / safeMoney.length;
                 }
-                else 
+                else
                 {
                     remainder = (int)placeHolder;
                 }
@@ -571,15 +571,6 @@ public class group extends script.base_script
     }
     public static boolean isDepositSafe(Vector members, int money) throws InterruptedException
     {
-        for (Object member : members) {
-            if (utils.isFreeTrial(((obj_id) member))) {
-                int math = getTotalMoney(((obj_id) member));
-                int quickCheck = math + money;
-                if (quickCheck > 50000) {
-                    return false;
-                }
-            }
-        }
         return true;
     }
     public static obj_id[] getSafeMoney(Vector members, int money) throws InterruptedException
@@ -587,9 +578,7 @@ public class group extends script.base_script
         Vector returnArray = new Vector();
         returnArray.setSize(0);
         for (Object member : members) {
-            if (!utils.isFreeTrial(((obj_id) member))) {
-                utils.addElement(returnArray, ((obj_id) member));
-            }
+            utils.addElement(returnArray, ((obj_id) member));
         }
         obj_id[] _returnArray = new obj_id[0];
         if (returnArray != null)
@@ -604,9 +593,7 @@ public class group extends script.base_script
         Vector returnArray = new Vector();
         returnArray.setSize(0);
         for (Object member : members) {
-            if (utils.isFreeTrial(((obj_id) member))) {
-                utils.addElement(returnArray, ((obj_id) member));
-            }
+            utils.addElement(returnArray, ((obj_id) member));
         }
         obj_id[] _returnArray = new obj_id[0];
         if (returnArray != null)
@@ -618,24 +605,7 @@ public class group extends script.base_script
     }
     public static int getSafeDifference(obj_id members, int money) throws InterruptedException
     {
-        if (utils.isFreeTrial(members))
-        {
-            int math = getTotalMoney(members);
-            int quickCheck = math + money;
-            int safe = 50000 - math;
-            if (quickCheck > 50000)
-            {
-                return safe;
-            }
-            else 
-            {
-                return money;
-            }
-        }
-        else 
-        {
-            return money;
-        }
+        return money;
     }
     public static boolean systemPayoutToGroup(String acct, obj_id player, int amt, String reason, String returnHandler, dictionary params) throws InterruptedException
     {
@@ -703,7 +673,7 @@ public class group extends script.base_script
             {
                 CustomerServiceLog("Mission", "We transferred " + amt + " credits to a group, but there was no message to tell them that", player);
             }
-            else 
+            else
             {
                 obj_id[] gmembers = group.getGroupMemberIds(gid);
                 if (gmembers != null && gmembers.length > 0)

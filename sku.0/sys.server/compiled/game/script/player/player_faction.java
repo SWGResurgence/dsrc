@@ -16,8 +16,8 @@ public class player_faction extends script.base_script
     public static final string_id SID_COVERT_TO_OVERT = new string_id("faction_recruiter", "covert_to_overt");
     public static final string_id SID_OVERT_TO_COVERT = new string_id("faction_recruiter", "overt_to_covert");
     public static final string_id SID_DUNGEON_NOCHANGE = new string_id("faction_recruiter", "dungeon_nochange");
-    public static final String COLOR_REBELS = "\\" + colors_hex.COLOR_REBELS;
-    public static final String COLOR_IMPERIALS = "\\" + colors_hex.COLOR_IMPERIALS;
+    public static final String COLOR_REBELS = colors_hex.HEADER + colors_hex.COLOR_REBELS;
+    public static final String COLOR_IMPERIALS = colors_hex.HEADER + colors_hex.COLOR_IMPERIALS;
     public int cmdPVP(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (factions.isInAdhocPvpArea(self))

@@ -1,11 +1,11 @@
 strObject	fltJX	fltJY	fltJZ	fltKX	fltKY	fltKZ	fltPX	fltPY	fltPZ	strObjVars	strScripts
 s	f	f	f	f	f	f	f	f	f	s	s
-object/tangible/beta/beta_terminal_resource.iff	           0	           1	           0	           0	           0	           1	    -236.717	     217.328	    -140.341	$|	script.beta.terminal_resource
+object/tangible/beta/beta_terminal_resource.iff	           0	           1	           0	           0	           0	           1	    -236.717	     217.328	    -140.341	$|	script.developer.soe.beta.terminal_resource
 object/tangible/crafting/station/space_station.iff	           0	           1	           0	           0	           0	           1	    -233.398	     229.525	    -142.119	crafting.private|0|0|crafting.station|0|1|crafting.type|0|131072|$|	script.systems.crafting.base_station
 object/tangible/furniture/tatooine/frn_tato_chair_cafe_style_02.iff	           0	           1	           0	           0	           0	           1	    -234.443	     220.598	    -146.656	occupied.limit|0|1|$|	
 object/tangible/furniture/tatooine/frn_tato_chair_cafe_style_02.iff	           0	           1	           0	           0	           0	           1	    -232.885	     222.251	    -149.315	occupied.limit|0|1|$|	
 object/tangible/furniture/tatooine/frn_tato_chair_cafe_style_01.iff	           0	           1	           0	           0	           0	           1	    -238.971	     220.157	    -146.632	occupied.limit|0|1|$|	
-object/tangible/beta/beta_terminal_resource.iff	           0	           1	           0	           0	           0	           1	    -241.955	     222.348	    -150.182	$|	script.beta.terminal_resource
+object/tangible/beta/beta_terminal_resource.iff	           0	           1	           0	           0	           0	           1	    -241.955	     222.348	    -150.182	$|	script.developer.soe.beta.terminal_resource
 object/static/structure/general/distant_ship_controller_general.iff	           0	           1	           0	           0	           0	           1	    -12.2272	      205.29	     27.9167	$|	
 object/static/structure/tatooine/tato_imprv_flagpole_s01.iff	           0	           1	           0	     0.95209	           0	    0.305816	     35.8744	     203.183	    -5.58333	$|	
 object/mobile/dressed_rebel_specforce_general_sullustan_male_01.iff	           0	           1	           0	   -0.545613	           0	   -0.838037	     34.7249	     202.956	    -4.84515	$|	script.conversation.tatooine_rebel_tier3,script.systems.combat.credit_for_kills
@@ -56,8 +56,8 @@ object/mobile/dressed_space_rebel_trainer_lady_viopa.iff	           0	          
 object/mobile/dressed_nym_technician_3.iff	           0	           1	           0	  -0.0919856	           0	    -0.99576	    -8.56589	     194.971	     10.5967	$|	script.conversation.nym_technician_3,script.space.characters.technician
 object/mobile/dressed_commoner_naboo_twilek_male_01.iff	           0	           1	           0	    -0.32561	           0	   -0.945504	       1.003	     194.998	     11.5267	$|	script.conversation.corellia_privateer_trainer_2,script.systems.combat.credit_for_kills
 object/tangible/crafting/station/space_station.iff	           0	           1	           0	    0.461779	           0	    0.886995	     4.80514	     195.088	     7.30125	crafting.private|0|0|crafting.station|0|1|crafting.type|0|131072|$|	script.systems.crafting.base_station
-object/tangible/beta/beta_terminal_resource.iff	           0	           1	           0	     -0.9001	           0	    0.435683	     2.35542	         195	    -4.10189	$|	script.beta.terminal_resource
-object/tangible/beta/beta_terminal_money.iff	           0	           1	           0	   -0.881958	           0	    0.471328	     1.54966	         195	    -6.40823	$|	script.player.player_money,script.beta.terminal_money
+object/tangible/beta/beta_terminal_resource.iff	           0	           1	           0	     -0.9001	           0	    0.435683	     2.35542	         195	    -4.10189	$|	script.developer.soe.beta.terminal_resource
+object/tangible/beta/beta_terminal_money.iff	           0	           1	           0	   -0.881958	           0	    0.471328	     1.54966	         195	    -6.40823	$|	script.player.player_money,script.developer.soe.beta.terminal_money
 object/static/structure/general/banner_rebel_style_01.iff	           0	           1	           0	           0	           0	           1	     -5.0381	     195.009	     12.2803	$|	
 object/static/structure/general/banner_imperial_style_01.iff	           0	           1	           0	    0.227978	           0	    0.973666	    -4.42631	     194.678	    -12.3991	$|	
 object/static/structure/general/tankfarm_s01.iff	           0	           1	           0	   -0.454306	           0	   -0.890846	     12.0334	      194.96	    -1.12245	$|	

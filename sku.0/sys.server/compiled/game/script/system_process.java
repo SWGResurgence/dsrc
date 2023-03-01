@@ -1,26 +1,38 @@
 package script;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 
 public class system_process
 {
-	public static String runAndGetOutput(String commandLine) 
+	public system_process(String commandLine, File f)
+	{
+		run = Runtime.getRuntime();
+		if(run != null)
+		{
+			try
+			{
+				process = run.exec(commandLine, null, f);
+			}
+			catch(Exception e)
+			{
+			}
+		}
+	}
+
+	public static String runAndGetOutput(String commandLine)
 	{
 		system_process p = new system_process(commandLine);
 		p.waitFor();
 		return p.getOutput();
 	}
 
-	public static int runAndGetExitCode(String commandLine)
+	public static String runAndGetOutput(String commandLine, File dir)
 	{
-		system_process p = new system_process(commandLine);
+		system_process p = new system_process(commandLine, dir);
 		p.waitFor();
-		return p.getExitValue();
-	}		
-	
+		return p.getOutput();
+	}
+
 	public system_process(String commandLine)
 	{
 		run = Runtime.getRuntime();
@@ -36,6 +48,13 @@ public class system_process
 		}
 	}
 
+	public static int runAndGetExitCode(String commandLine)
+	{
+		system_process p = new system_process(commandLine);
+		p.waitFor();
+		return p.getExitValue();
+	}
+
 	public void waitFor()
 	{
 		if(process != null)
@@ -49,7 +68,7 @@ public class system_process
 			}
 		}
 	}
-	
+
 	public void putAndCloseInput(String input)
 	{
 		if(process != null)
@@ -85,7 +104,7 @@ public class system_process
 		}
 		else if(result != null && errorOutput != null)
 		{
-				result += errorOutput;
+			result += errorOutput;
 		}
 		return result;
 	}
@@ -109,7 +128,7 @@ public class system_process
 		}
 		return result;
 	}
-	
+
 	private String getProcessOutput(InputStream processOutput)
 	{
 		String result = null;
@@ -133,7 +152,7 @@ public class system_process
 		}
 		return result;
 	}
-	
+
 	private Runtime run = null;
 	private Process process = null;
 }
