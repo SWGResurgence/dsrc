@@ -10,7 +10,7 @@ attributes = [
 slots = [
 	[name = "craft_furniture_ingredients_n" "frame", hardpoint = ""]]
 
-craftedSharedTemplate="object/tangible/furniture/cheap/shared_armoire_efol.iff"
+craftedSharedTemplate="object/tangible/furniture/efol/shared_armoire_efol.iff"
 
 @class intangible_object_template 0
 @class object_template 5

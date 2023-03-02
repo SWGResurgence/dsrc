@@ -10,7 +10,7 @@ slots = [
 	[name = "craft_furniture_ingredients_n" "handle", hardpoint = ""],
 	[name = "craft_furniture_ingredients_n" "ribbon", hardpoint = ""]]
 
-craftedSharedTemplate="object/tangible/holiday/love_day/rewards_11/love_day_prop_2011_flowers_s01_r.iff"
+craftedSharedTemplate="object/tangible/holiday/love_day/rewards_11/shared_love_day_prop_2011_flowers_s01_r.iff"
 
 @class intangible_object_template 0
 @class object_template 8

@@ -567,7 +567,11 @@ badge_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0
 			loveday_badge_11	22259	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0			
 			loveday_cupid_badge_11	22260	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0			
 			loveday_matchmaker_badge_11	22261	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0			
-		purchase_title_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						1	0			
+		col_loveday_23		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						1	0
+			loveday_badge_23	22818	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0
+			loveday_cupid_badge_23	22819	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0
+			loveday_matchmaker_badge_23	22820	-1	-1																		sound/music_acq_miner.snd	none	0	1						1	0
+		purchase_title_collection		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						1	0
 			imp_million_title	6312	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0			
 			reb_million_title	6313	-1	-1																		sound/music_acq_miner.snd	none	0	1						0	0			
 			neut_million_title	6314	-1	-1																		sound/music_acq_miner.snd	gray	0	1						0	0			
@@ -4157,7 +4161,22 @@ achievement_book				0	-1	-1																		sound/music_acq_miner.snd	gray	0	0	
 			loveday_2011_matched_michael	22256	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			loveday_2011_matched_james	22257	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			loveday_2011_matched_steven	22258	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
-	empire_day_activities			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
+	festival_of_love_2023			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+		loveday_2023_activities		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			loveday_2023_disillusion_quest	22821	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			loveday_2023_card_gathering	22822	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			loveday_2023_playing_cupid	22823	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			loveday_2023_found_kyoopid	22824	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+		loveday_2023_matchmaking		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			loveday_2023_matched_amy	22825	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			loveday_2023_matched_cristina	22826	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			loveday_2023_matched_cera	22827	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			loveday_2023_matched_edie	22828	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			loveday_2023_matched_logan	22229	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			loveday_2023_matched_michael	22830	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			loveday_2023_matched_james	22831	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+			loveday_2023_matched_steven	22832	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
+	empire_day_activities			0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0
 		empire_day_recruiting_event		0	-1	-1																		sound/music_acq_miner.snd	gray	0	0						0	0			
 			empire_day_recruitment_starter	6813	-1	-1																		sound/music_acq_miner.snd	gray	1	0						0	0			
 			empire_day_recruitment_counter	6763	6767	6												empire_day_recruitment_starter						sound/music_acq_miner.snd	gray	0	0						0	0			
