@@ -1553,6 +1553,7 @@ public class player_developer extends base_script
         string_id desc = new string_id(descInput);
         setDescriptionStringId(myTarget, desc);
         setObjVar(myTarget, "null_desc", descInput);
+        attachScript(myTarget, "developer.bubbajoe.sync");
         return SCRIPT_CONTINUE;
     }
 }
