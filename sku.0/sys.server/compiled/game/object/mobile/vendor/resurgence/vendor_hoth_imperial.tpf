@@ -6,7 +6,7 @@
 
 sharedTemplate = "object/mobile/vendor/resurgence/shared_vendor_hoth_imperial.iff"
 
-content = [
+contents = [
            [slotName = "inventory",
            equipObject = true,
            content = "object/tangible/inventory/vendor_inventory.iff"],

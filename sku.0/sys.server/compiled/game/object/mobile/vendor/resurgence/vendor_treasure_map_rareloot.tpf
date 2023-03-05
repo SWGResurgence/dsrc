@@ -6,7 +6,7 @@
 
 sharedTemplate = "object/mobile/vendor/resurgence/shared_vendor_treasure_map_rareloot.iff"
 
-content = [
+contents = [
            [slotName = "inventory",
            equipObject = true,
            content = "object/tangible/inventory/vendor_inventory.iff"],

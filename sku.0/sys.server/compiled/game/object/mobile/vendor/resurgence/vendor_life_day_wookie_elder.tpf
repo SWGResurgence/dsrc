@@ -6,7 +6,7 @@
 
 sharedTemplate = "object/mobile/vendor/resurgence/shared_vendor_life_day_wookie_elder.iff"
 
-content = [
+contents = [
            [slotName = "inventory",
            equipObject = true,
            content = "object/tangible/inventory/vendor_inventory.iff"],
