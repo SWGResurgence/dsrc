@@ -14,7 +14,7 @@ public class ship_control_device extends script.base_script
             };
     public static final String SPACE_MINING = "space_mining";
     public static final String IN_USE_OBJVAR = "ship_redeed.inUse";
-    public static final int MAX_RESOURCE = 1000000;
+    public static final int MAX_RESOURCE = 10000000;
     public static final string_id SID_TERMINAL_REDEED_STORAGE = new string_id("player_structure", "redeed_storage");
     public static final string_id SID_STORAGE_INCREASE_REDEED_TITLE = new string_id("player_structure", "sui_storage_redeed_title");
     public static final string_id SID_STORAGE_INCREASE_REDEED_PROMPT = new string_id("player_structure", "sui_storage_redeed_prompt");
