@@ -803,7 +803,7 @@ public class pclib extends script.base_script
             group.notifyDeath(gid, player);
         }
 		
-		// RESTUSS PVP COMMENDATION SYSTEM BEGIN
+		/* // RESTUSS PVP COMMENDATION SYSTEM BEGIN
 		
 		region[] regionList = getRegionsAtPoint(getLocation(killer));
         if (regionList != null && regionList.length > 0)
@@ -831,7 +831,7 @@ public class pclib extends script.base_script
             }
         }
 		
-		// RESTUSS PVP COMMENDATION SYSTEM END
+		// RESTUSS PVP COMMENDATION SYSTEM END */
 		
         messageTo(player, HANDLER_PLAYER_DEATH, null, TIME_DEATH, true);
         dictionary params = new dictionary();

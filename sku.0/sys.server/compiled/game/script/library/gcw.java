@@ -10,6 +10,7 @@ public class gcw extends script.base_script
     public gcw()
     {
     }
+    public static final int RESTUS_COMM_BONUS = utils.getIntConfigSetting("GameServer", "restussCommBonus");
     public static final int GCW_UPDATE_PULSE = 300;
     public static final float DECAY_PER_UPDATE = 0.02f;
     public static final String SCRIPTVAR_SCAN_INTEREST = "scan.interest";
@@ -1055,7 +1056,7 @@ public class gcw extends script.base_script
             return true;
         }
         Vector attackerList = utils.getResizeableStringBatchScriptVar(player, gcw.LIST_CREDIT_FOR_KILLS);
-        if (attackerList == null || attackerList.size() == 0)
+        if (attackerList == null || attackerList.isEmpty())
         {
             return false;
         }
@@ -1076,12 +1077,38 @@ public class gcw extends script.base_script
                 if (isIdValid(killer) && exists(killer)) {
                     pvpModifyCurrentPvpKills(killer, 1);
                     incrementKillMeter(killer, 1);
+                    giveRestussCommendation(killer, player, attackerList.size());
                 }
             }
         }
         utils.removeBatchScriptVar(player, gcw.LIST_CREDIT_FOR_KILLS);
         return true;
     }
+
+    // RESTUSS PVP COMMENDATION SYSTEM - BEGIN \\
+
+    private static void giveRestussCommendation(obj_id killer, obj_id victim, int splitSize) throws InterruptedException {
+        region[] regionList = getRegionsAtPoint(getLocation(killer));
+        if (regionList != null && regionList.length > 0) {
+            for (region thisRegion : regionList) {
+                if (thisRegion.getName().equals(restuss_event.PVP_REGION_NAME)) {
+                    int commCount = pvpGetCurrentGcwRank(victim) - 1;
+                    String pFac = factions.getFaction(killer);
+                    obj_id inventory = utils.getInventoryContainer(killer);
+                    if (commCount > 0) {
+                        commCount /= splitSize + 1;
+                        static_item.createNewItemFunction("item_restuss_" + pFac.toLowerCase() + "_commendation_02_01", inventory, commCount);
+                        sendSystemMessageTestingOnly(killer, "You have recieved " + commCount + " " + pFac + " Restuss Commendations for defeating player " + getPlayerName(victim) + " in combat.");
+                    }
+                    return;
+                }
+            }
+        }
+    }
+
+    // RESTUSS PVP COMMENDATION SYSTEM - END \\
+
+
     public static void notifyPvpRegionWatcherOfDeath(obj_id player) throws InterruptedException
     {
         obj_id pvpRegionController = gcw.getPvpRegionControllerIdByPlayer(player);
