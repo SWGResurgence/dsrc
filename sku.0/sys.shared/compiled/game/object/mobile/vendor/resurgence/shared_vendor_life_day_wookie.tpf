@@ -1,4 +1,4 @@
-lifeday@base object/creature/npc/base/shared_base_npc_theme_park.iff
+@base object/creature/npc/base/shared_base_npc_theme_park.iff
 
 @class creature_object_template 10
 
