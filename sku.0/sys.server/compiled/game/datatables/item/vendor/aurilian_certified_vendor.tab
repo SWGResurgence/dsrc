@@ -5,14 +5,17 @@ item_axkva_heroic_token_box_01_01			2								Axkva Exchange Heroic Token Box
 item_tusken_heroic_token_box_01_01		3	3								Tusken Exchange Heroic Token Box
 item_black_sun_heroic_token_box_01_01		5	5	2							Star Destroyer Exchange Heroic Token Box
 item_exar_kun_heroic_token_box_01_01		7	7	5	3						Exar Heroic Exchange Token Box
-heroic_encounter_auth_ig88							1			item.flag_instance	IG-88 Instance Unlock
-heroic_encounter_auth_tusken_army							1			item.flag_instance	Tusken King Instance Unlock
-heroic_encounter_auth_star_destroyer							3			item.flag_instance	Lost Star Destroyer Instance Unlock
-heroic_encounter_auth_axkva_min							5			item.flag_instance	Axkva Min Instance Unlock
-heroic_encounter_auth_exar_kun							5			item.flag_instance	Exar Kun Instance Unlock
-heroic_encounter_auth_uplink_cavern							1			item.flag_instance	Beetle Cave Instance Unlock
-mustafar_encounter_auth_decrepit_droid_factory							1			item.flag_instance	Decrepit Droid Factory Instance Unlock
-mustafar_encounter_auth_working_droid_factory							2			item.flag_instance	Working Droid Factory Instance Unlock
-mustafar_encounter_auth_droid_army							2			item.flag_instance	Droid Army Instance Unlock
-mustafar_encounter_auth_volcano							3			item.flag_instance	HK Instance Unlock
-mustafar_encounter_auth_sher_kar_cave							1			item.flag_instance	Sher Kar Instance Unlock
+heroic_ig88							1			item.flag_instance	IG-88 Instance Unlock
+heroic_tusken_army							1			item.flag_instance	Tusken King Instance Unlock
+heroic_star_destroyer							3			item.flag_instance	Lost Star Destroyer Instance Unlock
+heroic_axkva_min							5			item.flag_instance	Axkva Min Instance Unlock
+heroic_exar_kun							5			item.flag_instance	Exar Kun Instance Unlock
+heroic_uplink_cavern							1			item.flag_instance	Beetle Cave Instance Unlock
+decrepit_droid_factory							1			item.flag_instance	Decrepit Droid Factory Instance Unlock
+working_droid_factory							2			item.flag_instance	Working Droid Factory Instance Unlock
+mustafar_droid_army							2			item.flag_instance	Droid Army Instance Unlock
+mustafar_volcano							3			item.flag_instance	HK Instance Unlock
+sher_kar_cave							1			item.flag_instance	Sher Kar Instance Unlock
+rare_loot_chest_quality_1							1				Rare Loot Chest
+rare_loot_chest_quality_2							2				Exceptional Loot Chest
+rare_loot_chest_quality_3							4				Legendary Loot Chest
