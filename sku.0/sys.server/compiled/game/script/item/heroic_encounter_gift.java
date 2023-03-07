@@ -12,11 +12,11 @@ public class heroic_encounter_gift extends script.base_script {
         obj_id pInv = utils.getInventoryContainer(player);
         HashSet theSet = new HashSet();
 
-        theSet.add(static_item.createNewItemFunction("heroic_encounter_auth_ig88", pInv));
-        theSet.add(static_item.createNewItemFunction("heroic_encounter_ig88", pInv));
-        theSet.add(static_item.createNewItemFunction("heroic_encounter_tusken_army", pInv));
-        theSet.add(static_item.createNewItemFunction("heroic_encounter_star_destroyer", pInv));
-        theSet.add(static_item.createNewItemFunction("heroic_encounter_exar_kun", pInv));
+        theSet.add(static_item.createNewItemFunction("heroic_axkva_min", pInv));
+        theSet.add(static_item.createNewItemFunction("heroic_ig88", pInv));
+        theSet.add(static_item.createNewItemFunction("heroic_tusken_army", pInv));
+        theSet.add(static_item.createNewItemFunction("heroic_star_destroyer", pInv));
+        theSet.add(static_item.createNewItemFunction("heroic_exar_kun", pInv));
 
         obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
