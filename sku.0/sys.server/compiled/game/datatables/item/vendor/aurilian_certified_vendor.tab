@@ -10,7 +10,7 @@ heroic_tusken_army							1			item.flag_instance	Tusken King Instance Unlock
 heroic_star_destroyer							3			item.flag_instance	Lost Star Destroyer Instance Unlock
 heroic_axkva_min							5			item.flag_instance	Axkva Min Instance Unlock
 heroic_exar_kun							5			item.flag_instance	Exar Kun Instance Unlock
-heroic_uplink_cavern							1			item.flag_instance	Beetle Cave Instance Unlock
+uplink_cavern							1			item.flag_instance	Beetle Cave Instance Unlock
 decrepit_droid_factory							1			item.flag_instance	Decrepit Droid Factory Instance Unlock
 working_droid_factory							2			item.flag_instance	Working Droid Factory Instance Unlock
 mustafar_droid_army							2			item.flag_instance	Droid Army Instance Unlock
