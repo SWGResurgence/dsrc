@@ -6,7 +6,6 @@
 
 sharedTemplate = "object/tangible/ship/crafted/chassis/shared_jedi_starfighter_reward_deed.iff"
 
-objvars =+ [ "ship_chassis.groundQuestRestricted" = "ep3_clone_relics_jedi_starfighter_4", "ship_chassis.type" = "jedi_starfighter", "ship_chassis.hp" = 1650.0, "ship_chassis.mass" = 90000.0 ]
+objvars =+ [ "ship_chassis.type" = "jedi_starfighter", "ship_chassis.hp" = 1650.0, "ship_chassis.mass" = 90000.0 ]
 
 moveFlags = [ MF_player ]
-
