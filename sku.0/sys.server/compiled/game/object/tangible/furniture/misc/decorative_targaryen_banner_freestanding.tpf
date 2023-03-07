@@ -3,4 +3,4 @@
 @class tangible_object_template 1
 @class object_template 2
 
-sharedTemplate = "object/tangible/furniture/dxun/shared_decorative_czerka_banner_freestanding_01.iff"
+sharedTemplate = "object/tangible/furniture/misc/shared_decorative_targaryen_banner_freestanding_01.iff"
