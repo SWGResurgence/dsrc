@@ -5118,3 +5118,5 @@ item_force_sensitive_staff_boots_02_01	"combat_block_value=1000,combat_evasion_v
 item_staff_krayt_pearl_01_01			"int:jedi.crystal.stats.min_dmg=1000,int:jedi.crystal.stats.max_dmg=1200,int:jedi.crystal.stats.quality=7,int:jedi.crystal.stats.level=-1"								
 item_staff_color_crystal_01_01			"int:jedi.crystal.stats.color=36,int:jedi.crystal.stats.level=-1"	index_color_1=36							
 weapon_black_metal_baton											
+item_resurgence_targaryen_banner_01_01											
+item_resurgence_targaryen_banner_01_02											

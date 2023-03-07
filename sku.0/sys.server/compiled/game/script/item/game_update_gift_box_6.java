@@ -27,7 +27,7 @@ public class game_update_gift_box_6 extends base_script {
 		HashSet theSet = new HashSet();
 		theSet.add(static_item.createNewItemFunction("item_cts_sarlacc_mini_game", pInv));
 		theSet.add(static_item.createNewItemFunction("item_gas_recycler_01_01", pInv));
-		theSet.add(static_item.createNewItemFunction("sher_kar_cave", pInv));
+		theSet.add(static_item.createNewItemFunction("heroic_encounter_auth_gift", pInv));
 		obj_id[] items = new obj_id[theSet.size()];
         theSet.toArray(items);
         showLootBox(player, items);
