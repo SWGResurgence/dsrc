@@ -133,6 +133,11 @@ public class clone extends script.base_script
                 setHealth(self, getMaxHealth(self));
             }
         }
+        else if(text.equals("level"))
+        {
+            int level = getLevel(speaker);
+            setLevel(self, level);
+        }
         else if(text.equals("ai"))
         {
             int on = utils.getIntScriptVar(self, "playerAi.on");
@@ -171,7 +176,7 @@ public class clone extends script.base_script
             {
                 completeToken += " " + st.nextToken();
             }
-            sendConsoleCommand(completeToken, self);
+            queueCommand(self, getStringCrc((toLower(completeToken))), self, "", COMMAND_PRIORITY_NORMAL);
         }
         else if(text.equals("teach"))
         {
