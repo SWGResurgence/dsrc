@@ -70,9 +70,9 @@ public class loveday_matchmaker_droid extends script.base_script
             destroyObject(romanceSeekerCompanionControlDevice);
         }
         groundquests.sendSignal(player, "loveday_playing_cupid_02");
-        if (!hasCompletedCollectionSlot(player, "loveday_2010_playing_cupid"))
+        if (!hasCompletedCollectionSlot(player, "loveday_2023_playing_cupid"))
         {
-            modifyCollectionSlotValue(player, "loveday_2010_playing_cupid", 1);
+            modifyCollectionSlotValue(player, "loveday_2023_playing_cupid", 1);
         }
         if (companionType != null && companionType.length() > 0)
         {

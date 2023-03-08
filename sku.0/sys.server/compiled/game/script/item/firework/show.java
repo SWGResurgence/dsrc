@@ -134,7 +134,7 @@ public class show extends script.base_script
                             entries = utils.addElement(entries, utils.getStringName(tmpFirework) + " (" + getCount(tmpFirework) + ")");
                         }
                     }
-                    if (entries != null && fireworks != null && entries.size() == fireworks.size())
+                    if (fireworks != null && entries.size() == fireworks.size())
                     {
                         String title = "Select Show Addition";
                         String prompt = "Select the firework to append to the end of the show package.";

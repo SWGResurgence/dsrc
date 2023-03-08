@@ -1,11 +1,31 @@
 item	token8	limit	note
 s	i	i[0]	c
 item_trader_advanced_buff_01_01	500		Advanced Superior Crafting Unit
-item_bestine_decorative_sword_01_01	75		Bestine Decorative Sword
 item_respec_token_01_01	100	1	Character Respec Device
+object/tangible/item/quest/force_sensitive/bacta_tank.iff	100		Decoration: A Bacta Tank
+item_bestine_decorative_statue_01_01	120		Bestine: Decorative Statue
+item_bestine_decorative_sword_01_01	75		Decoration: Bestine Decorative Sword
+item_bestine_decorative_sword_01_01	120		Decoration: Bestine Four Pronged Mace
+item_bestine_planet_star_painting_01_01	120		Bestine: Planet and Star Painting
+item_content_bubble_tank_02_01	175		Decoration: Bubble Tank
+item_content_decor_hologram_disk_03_01	175		Decoration: Data Disk Hologram
+item_tow_decor_jedi_relic_02_03	210		Decoration: Jedi Relic
+item_tow_decor_lava_geode_02_01	50		Decoration: Lava Geode
+item_ep3_rewards_prayor_mobile	50		Decoration: Prayer Mobile
+item_rare_painting_01_01	275		Decoration: Rare Painting
+object/tangible/item/quest/force_sensitive/fs_sculpture_1.iff	200		Decorative: Sculpture
+object/tangible/item/quest/force_sensitive/fs_sculpture_2.iff	200		Decorative: Sculpture
+object/tangible/item/quest/force_sensitive/fs_sculpture_3.iff	200		Decorative: Sculpture
+object/tangible/item/quest/force_sensitive/fs_sculpture_4.iff	200		Decorative: Sculpture
+object/tangible/painting/painting_han_wanted.iff	120		Decoration: Wanted Poster: Han
+object/tangible/painting/painting_leia_wanted.iff	120		Decoration: Wanted Poster: Leia
+object/tangible/painting/painting_luke_wanted.iff	120		Decoration: Wanted Poster: Luke
+item_tow_decor_sith_relic_02_01	210		Decoration: Sith Relic
 item_creature_harvester_deed_01_01	750		Deed: Automated Creature Harvester Deed
+item_gas_recycler_01_01	250		Gas Recycler
 item_holopet_emitter_01_01	50		Holo-Pet Emitter
-item_neural_recon_network_control_interface_01_01	75	1	Neural Recon Network Control Interface
+item_publish_gift_37_04_01	200		Misc: War Terminal
+item_neural_recon_network_control_interface_01_01	20	1	Neural Recon Network Control Interface
 item_ornate_rug_01_01	150		Ornate Rug
 item_vet_reward_resource_fabricator	75		Resource Fabricator
 item_vet_reward_resource_industrial_replicator	100		Resource Industrial Replicator
@@ -14,25 +34,3 @@ item_restuss_schematic_saber_04_01	250		Technical Readout of a One-Handed Lights
 item_target_dummy_blacksun	350		Target Dummy: Blacksun
 item_target_dummy_stormtrooper	350		Target Dummy: Stormtrooper
 item_target_dummy_rebel_trooper	350		Target Dummy: Rebel Trooper
-item_publish_gift_37_04_01	200		Misc: War Terminal
-item_content_decor_hologram_disk_03_01	175		Decoration: Data Disk Hologram
-item_content_bubble_tank_02_01	175		Decoration: Bubble Tank
-object/tangible/item/quest/force_sensitive/bacta_tank.iff	100		Decoration: A Bacta Tank
-object/tangible/veteran_reward/frn_vet_rug_imperial.iff	125		Decoration: Imperial Rug
-object/tangible/veteran_reward/frn_vet_rug_rebel.iff	125		Decoration: Rebel Rug
-item_ornate_rug_01_01	320		Decoration: Ornate Rug
-item_tow_decor_jedi_relic_02_03	210		Decoration: Jedi Relic
-item_tow_decor_lava_geode_02_01	50		Decoration: Lava Geode
-item_ep3_rewards_prayor_mobile	50		Decoration: Prayer Mobile
-item_tow_decor_sith_relic_02_01	210		Decoration: Sith Relic
-object/tangible/item/quest/force_sensitive/fs_sculpture_1.iff	200		Sculpture 1
-object/tangible/item/quest/force_sensitive/fs_sculpture_2.iff	200		Sculpture 1
-object/tangible/item/quest/force_sensitive/fs_sculpture_3.iff	200		Sculpture 1
-object/tangible/item/quest/force_sensitive/fs_sculpture_4.iff	200		Sculpture 1
-object/tangible/painting/painting_han_wanted.iff	120		Decoration: Wanted Poster: Han
-object/tangible/painting/painting_leia_wanted.iff	120		Wanted Poster: Leia
-object/tangible/painting/painting_luke_wanted.iff	120		Wanted Poster: Luke
-item_rare_painting_01_01	275		Decoration: Rare Painting
-item_bestine_decorative_sword_01_01	120		Decoration: Four Pronged Mace
-item_bestine_decorative_statue_01_01	120		Bestine: Decorative Statue
-item_bestine_planet_star_painting_01_01	120		Bestine: Planet and Star Painting

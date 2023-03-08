@@ -23,7 +23,7 @@ public class lifeday_tree extends script.base_script
 
     private String currentYearObjVar() throws InterruptedException
     {
-        return utils.XMAS_RECEIVED_XX_01;
+        return "gift.xmas22";
     }
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
@@ -39,10 +39,7 @@ public class lifeday_tree extends script.base_script
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, TREE_USE);
         }
-        if (!hasCompletedCollectionSlot(player, LIFEDAY_BADGE))
-        {
-            mi.addRootMenu(menu_info_types.SERVER_MENU2, TREE_BADGE);
-        }
+        //mi.addRootMenu(menu_info_types.SERVER_MENU2, TREE_BADGE);
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
@@ -62,10 +59,17 @@ public class lifeday_tree extends script.base_script
                 grantGift(player);
             }
         }
-        if (item == menu_info_types.SERVER_MENU2)
+        /*if (item == menu_info_types.SERVER_MENU2)
         {
-            badge.grantBadge(player, LIFEDAY_BADGE);
-        }
+            if (!hasCompletedCollectionSlot(player, LIFEDAY_BADGE))
+            {
+                badge.grantBadge(player, LIFEDAY_BADGE);
+            }
+            else
+            {
+                sendSystemMessage(player, new string_id("spam", "already_have_badge"));
+            }
+        }*/ // NO NEW BADGES = NO NEW BADGES. BUY THEM OFF THE ELDER WOOKIEE FFS.
         return SCRIPT_CONTINUE;
     }
     private boolean grantGift(obj_id player) throws InterruptedException

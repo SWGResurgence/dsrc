@@ -106,6 +106,11 @@ public class terminal_travel_instant extends script.base_script
                     LocationItvOptions(self, player);
                     return SCRIPT_CONTINUE;
                 }
+                else if (hasObjVar(self, "tcg_itv_location") || hasObjVar(self, "itv_atat_walker"))
+                {
+                    LocationItvOptions(self, player);
+                    return SCRIPT_CONTINUE;
+                }
             }
             // This section is for "regular" ITV's - Privateer, Royal Ship, etc.
             String planet = getCurrentSceneName();
@@ -217,6 +222,13 @@ public class terminal_travel_instant extends script.base_script
             title = "@spam:snowspeeder_itv_t";
             availableLocations = 2;
         }
+        else if (hasObjVar(ship, "itv_atat_walker"))
+        {
+            itvName = "travel_atat_walker";
+            prompt = "@spam:location_atat_walker_manage_d";
+            title = "@spam:atat_walker_itv_t";
+            availableLocations = 2;
+        }
         else
         {
             return;
@@ -276,6 +288,20 @@ public class terminal_travel_instant extends script.base_script
             {
                 location travelLoc = getLocationObjVar(player, ("travel_snowspeeder.itv.location." + idx));
                 String destPlanet = getStringObjVar(player, ("travel_snowspeeder.itv.scene." + idx));
+                warpPlayer(player, destPlanet, travelLoc.x, travelLoc.y, travelLoc.z, null, 0, 0, 0, "", false);
+                messageTo(self, "cleanupShip", null, 0.0f, false);
+            }
+            else
+            {
+                sendSystemMessage(player, new string_id("tcg", "corrupt_itv_location_data"));
+            }
+        }
+        else if (hasObjVar(self, "itv_atat_walker"))
+        {
+            if (hasObjVar(player, ("travel_atat_walker.itv.location." + idx)) && hasObjVar(player, ("travel_atat_walker.itv.scene." + idx)))
+            {
+                location travelLoc = getLocationObjVar(player, ("travel_atat_walker.itv.location." + idx));
+                String destPlanet = getStringObjVar(player, ("travel_atat_walker.itv.scene." + idx));
                 warpPlayer(player, destPlanet, travelLoc.x, travelLoc.y, travelLoc.z, null, 0, 0, 0, "", false);
                 messageTo(self, "cleanupShip", null, 0.0f, false);
             }
@@ -486,6 +512,11 @@ public class terminal_travel_instant extends script.base_script
                     name = "travel_snowspeeder";
                     size = 2;
                 }
+                else if (hasObjVar(self, "itv_atat_walker"))
+                {
+                    name = "travel_atat_walker";
+                    size = 2;
+                }
                 else
                 {
                     break;
@@ -659,6 +690,10 @@ public class terminal_travel_instant extends script.base_script
                 else if (hasObjVar(self, "itv_snowspeeder"))
                 {
                     name = "travel_snowspeeder";
+                }
+                else if (hasObjVar(self, "itv_atat_walker"))
+                {
+                    name = "travel_atat_walker";
                 }
                 setObjVar(player, name + ".itv.location." + n, markLocation);
                 setObjVar(player, name + ".itv.scene." + n, markScene);

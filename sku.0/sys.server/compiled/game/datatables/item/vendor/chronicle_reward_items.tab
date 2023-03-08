@@ -1,5 +1,8 @@
 item	cash	token24	token25	token26	class	script	note
 s[none]	i[0]	i[0]	i[0]	i[0]	i[0]	s	c
+rare_loot_chest_quality_1			10				
+rare_loot_chest_quality_2				1			
+rare_loot_chest_quality_3				50			
 item_pgc_booster_pack			20		0		"See library.utils for the int value of the classes. 0 is ""all"" but will only show if there are no items for the opener's class."
 item_pgc_booster_pack_comm			20				
 item_pgc_booster_pack_goto			20				
@@ -30,6 +33,7 @@ item_holopet_ins444_data_cube_01_01				20
 item_housepack_emperor_desk_01_01				25			
 item_housepack_emperor_chair_01_01				25			
 item_housepack_emperor_desk_lamp_01_01				5			
+item_resurgence_targaryen_banner_01_01			1000				
 object/tangible/veteran_reward/one_year_anniversary/painting_10.iff			125				
 object/tangible/veteran_reward/one_year_anniversary/painting_01.iff			125				
 object/tangible/veteran_reward/one_year_anniversary/painting_06.iff			125				

@@ -6,7 +6,6 @@
 
 sharedTemplate = "object/tangible/ship/crafted/chassis/shared_arc170_reward_deed.iff"
 
-objvars =+ [ "ship_chassis.spaceQuestRestrictedType" = "space_battle", "ship_chassis.spaceQuestRestricted" = "ep3_clone_relics_queen_3", "ship_chassis.type" = "arc170", "ship_chassis.hp" = 2000.0, "ship_chassis.mass" = 125000.0 ]
+objvars =+ [ "ship_chassis.type" = "arc170", "ship_chassis.hp" = 2000.0, "ship_chassis.mass" = 125000.0 ]
 
 moveFlags = [ MF_player ]
-

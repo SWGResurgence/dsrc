@@ -75,9 +75,9 @@ public class loveday_ewok_cardless_child extends script.base_script
             return false;
         }
         groundquests.sendSignal(player, "loveday_ewok_bundle_of_cards_complete");
-        if (!hasCompletedCollectionSlot(player, "loveday_2010_card_gathering"))
+        if (!hasCompletedCollectionSlot(player, "loveday_2023_card_gathering"))
         {
-            modifyCollectionSlotValue(player, "loveday_2010_card_gathering", 1);
+            modifyCollectionSlotValue(player, "loveday_2023_card_gathering", 1);
         }
         int now = getCalendarTime();
         int secondsUntil = secondsUntilNextDailyTime(4, 0, 0);

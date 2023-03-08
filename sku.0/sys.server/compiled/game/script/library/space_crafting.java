@@ -1993,16 +1993,16 @@ public class space_crafting extends script.base_script
         };
         final int[] intValue = 
         {
-            1000,
-            2000,
-            3000,
-            4000,
-            5000,
-            6000,
-            7000,
-            8000,
-            9000,
-            10000
+            22500,
+            42500,
+            62500,
+            82500,
+            102500,
+            122500,
+            142500,
+            162500,
+            182500,
+            202500
         };
         String[] strCerts = getRequiredCertifications(objComponent);
         if ((strCerts != null) && (strCerts.length > 0))

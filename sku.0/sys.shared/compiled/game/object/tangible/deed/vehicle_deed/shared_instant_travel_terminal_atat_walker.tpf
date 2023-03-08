@@ -1,0 +1,12 @@
+@base object/tangible/base/shared_tangible_base.iff
+
+@class tangible_object_template 10
+@class object_template 10
+
+objectName = "item_n" "instant_travel_terminal_atat_walker_n"
+detailedDescription = "item_d" "instant_travel_terminal_atat_walker_d"
+lookAtText = "" ""
+
+appearanceFilename = "appearance/eqp_tool_datapad.apt"
+
+gameObjectType = GOT_misc

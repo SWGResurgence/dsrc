@@ -17,7 +17,15 @@ public class city_actor extends script.base_script
     {
         int city_id = getCityAtLocation(getLocation(self), 0);
         setInvulnerable(self, true);
-        setName(self, "City Actor");
+        setName(self, "Bio-logical Display Matrix");
+        setDescriptionStringId(self, new string_id("This is a Bio-logical Display Matrix. It is used to display creatures in a city. This creature cannot be attacked, or aggroed."));
+        return SCRIPT_CONTINUE;
+    }
+    public int OnInitialize(obj_id self)
+    {
+        int city_id = getCityAtLocation(getLocation(self), 0);
+        setInvulnerable(self, true);
+        setDescriptionStringId(self, new string_id("This is a Bio-logical Display Matrix. It is used to display creatures in a city. This creature cannot be attacked, or aggroed."));
         return SCRIPT_CONTINUE;
     }
 
@@ -27,11 +35,11 @@ public class city_actor extends script.base_script
         boolean isMayor = city.isTheCityMayor(giver, city_id);
         if (canManipulateActor(self, giver))
         {
-            if (isIdValid(item))
+            if (isIdValid(item) && !getTemplateName(item).contains("city_actor"))
             {
                 if (isPlayer(giver))
                 {
-                    sendSystemMessageTestingOnly(giver, "You gave [" + getName(item) + " ] to [" + getName(self) + "].");
+                    sendSystemMessageTestingOnly(giver, "You gave [" + getName(item) + "] to [" + getName(self) + "].");
                     equipOverride(item, self);
                 }
                 else
@@ -62,7 +70,7 @@ public class city_actor extends script.base_script
                 mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU25, new string_id("* Reset All Settings"));
                 if (hasObjVar(self, "city_id"))
                 {
-                    mi.addRootMenu(menu_info_types.SERVER_MENU27, new string_id("Remove *"));
+                    mi.addSubMenu(hireling_main, menu_info_types.SERVER_MENU27, new string_id("* Remove Actor"));
                 }
 
             }
@@ -138,7 +146,7 @@ public class city_actor extends script.base_script
         }
         else
         {
-            broadcast(player, "Actor removal cancelled.");
+            broadcast(player, "Bio-logical Actor removal cancelled.");
         }
         return SCRIPT_CONTINUE;
     }

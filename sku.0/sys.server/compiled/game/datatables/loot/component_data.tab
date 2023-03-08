@@ -348,23 +348,23 @@ object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_one_s23.iff	
 	attribute.bonus.0	296	300
 	attribute.bonus.2	296	300
 object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_two_s01.iff	amount 	1	1
-	combat_critical_melee	10	15
+	combat_critical_ranged	10	15
 object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_two_s02.iff	amount 	1	1
-	combat_critical_melee	10	15
+	combat_critical_ranged	10	15
 object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_two_s03.iff	amount 	1	1
-	combat_critical_melee	10	15
+	combat_critical_ranged	10	15
 object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_two_s04.iff	amount 	1	1
-	combat_critical_melee	10	15
+	combat_critical_ranged	10	15
 object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_two_s05.iff	amount 	1	1
-	combat_critical_melee	15	20
+	combat_critical_ranged	15	20
 object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_two_s06.iff	amount 	1	1
-	combat_critical_melee	15	20
+	combat_critical_ranged	15	20
 object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_two_s07.iff	amount 	1	1
-	combat_critical_melee	15	20
+	combat_critical_ranged	15	20
 object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_two_s08.iff	amount 	1	1
-	combat_critical_melee	21	25
+	combat_critical_ranged	21	25
 object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_two_s09.iff	amount 	1	1
-	combat_critical_melee	26	30
+	combat_critical_ranged	26	30
 object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_two_s10.iff	amount 	1	1
 	combat_critical_ranged	31	35
 object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_two_s11.iff	amount 	1	1
