@@ -1,9 +1,0 @@
-@base object/tangible/furniture/base/shared_furniture_base.iff
-
-@class tangible_object_template 6
-@class object_template 5
-
-objectName = "frn_n"  "painting_resurgence_rebel"
-detailedDescription = "frn_d"  "painting_resurgence_rebel"
-
-appearanceFilename = "appearance/painting_resurgence_rebel.apt"
