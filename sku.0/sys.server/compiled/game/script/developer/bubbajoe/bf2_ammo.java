@@ -99,10 +99,14 @@ public class bf2_ammo extends script.base_script
         obj_id[] creatures = getCreaturesInRange(getLocation(self), 64.0f);
         if (creatures == null || creatures.length == 0)
         {
-            showFlyText(self, new string_id("- NO POINTER ON TARGETING MATRIX -"), 1.5f, colors.RED);
+            showFlyText(self, new string_id("- NO POINTER ON TARGETING MATRIX -"), 2.5f, colors.RED);
             return SCRIPT_CONTINUE;
         }
         obj_id target = creatures[rand(0, creatures.length - 1)];
+        if (target == self)
+        {
+            showFlyText(self, new string_id("- NO POINTER ON TARGETING MATRIX -"), 2.5f, colors.RED);
+        }
         combat.startCombat(self, target);
         int damage = getMaxHealth(target) + getHealth(target) - (rand(0, 1000));
         playClientEffectLoc(target, "clienteffect/avatar_explosion_01.cef", getLocation(target), 5.0f);
