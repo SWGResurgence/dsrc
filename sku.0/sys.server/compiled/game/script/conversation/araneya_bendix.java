@@ -15,7 +15,7 @@ public class araneya_bendix extends script.base_script {
 // Script Constants
 // ======================================================================
 
-    public static String c_stringFile = "conversation/aranerya_bendix";
+    public static String c_stringFile = "conversation/araneya_bendix";
 
 // ======================================================================
 // Script Conditions
