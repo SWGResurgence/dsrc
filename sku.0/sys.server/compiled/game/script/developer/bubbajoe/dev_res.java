@@ -287,6 +287,36 @@ public class dev_res extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+    public static final String[] SPACE_RESOURCE_LOCALIZED = {
+            "@resource/resource_names:space_chemical_acid",
+            "@resource/resource_names:space_chemical_cyanomethanic",
+            "@resource/resource_names:space_chemical_petrochem",
+            "@resource/resource_names:space_chemical_sulfuric",
+            "@resource/resource_names:space_gas_methane",
+            "@resource/resource_names:space_gas_organometallic",
+            "@resource/resource_names:space_gem_crystal",
+            "@resource/resource_names:space_gem_diamond",
+            "@resource/resource_names:space_metal_carbonaceous",
+            "@resource/resource_names:space_metal_ice",
+            "@resource/resource_names:space_metal_iron",
+            "@resource/resource_names:space_metal_obsidian",
+            "@resource/resource_names:space_metal_silicaceous"
+    };
+    public static final String[] SPACE_RESOURCE_CONST = {
+            "space_chemical_acid",
+            "space_chemical_cyanomethanic",
+            "space_chemical_petrochem",
+            "space_chemical_sulfuric",
+            "space_gas_methane",
+            "space_gas_organometallic",
+            "space_gem_crystal",
+            "space_gem_diamond",
+            "space_metal_carbonaceous",
+            "space_metal_ice",
+            "space_metal_iron",
+            "space_metal_obsidian",
+            "space_metal_silicaceous"
+    };
     public int handleCreateChosenResourceConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         int RESOURCE_AMOUNT = getIntObjVar(self, "resource_amount");
