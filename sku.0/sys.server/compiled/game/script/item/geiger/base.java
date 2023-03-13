@@ -10,12 +10,14 @@ public class base extends script.base_script
     public base()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenuOrServerNotify(menu_info_types.ITEM_USE, null);
         mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("quest/quest_journal/fs_quests_sad", "instructions_title"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("geiger", "OnObjectMenuSelect");
@@ -35,12 +37,14 @@ public class base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id player = utils.getObjIdObjVar(self, geiger.OBJVAR_GEIGER_PLAYER);
         utils.removeObjVar(player, geiger.OBJVAR_GEIGER_OBJECT);
         return SCRIPT_CONTINUE;
     }
+
     public int updateGeiger(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("geiger", "geiger updateGeiger");
@@ -67,6 +71,7 @@ public class base extends script.base_script
         messageTo(self, "updateGeiger", params, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int geigerCallback(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("geiger", "geigerCallback");
@@ -82,6 +87,7 @@ public class base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void openWindow(obj_id player, obj_id geigerObj) throws InterruptedException
     {
         if (utils.hasObjVar(player, geiger.OBJVAR_GEIGER_PID))

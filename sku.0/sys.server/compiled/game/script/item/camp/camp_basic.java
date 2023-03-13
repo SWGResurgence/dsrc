@@ -7,6 +7,7 @@ public class camp_basic extends script.item.camp.camp_base
     public camp_basic()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "campPower", 1);

@@ -7,10 +7,12 @@ import script.obj_id;
 
 public class foraged extends script.item.comestible.comestible
 {
+    public static final String FORAGED_DATA = "datatables/foraging/forage_global.iff";
+
     public foraged()
     {
     }
-    public static final String FORAGED_DATA = "datatables/foraging/forage_global.iff";
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         attrib_mod[] am = consumable.getForagedFoodMods(self);
@@ -29,7 +31,7 @@ public class foraged extends script.item.comestible.comestible
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             int numMods = am.length;
             attribs[n] = Integer.toString(numMods);
@@ -38,21 +40,26 @@ public class foraged extends script.item.comestible.comestible
             {
                 return SCRIPT_CONTINUE;
             }
-            for (attrib_mod attrib_mod : am) {
+            for (attrib_mod attrib_mod : am)
+            {
                 int attrib = attrib_mod.getAttribute();
                 int val = attrib_mod.getValue();
                 int newVal = Integer.MIN_VALUE;
                 int duration = (int) (attrib_mod.getDuration());
                 String sVal = "";
-                if (newVal > 0) {
+                if (newVal > 0)
+                {
                     sVal = "+" + newVal;
-                } else if (newVal < 0) {
+                }
+                else if (newVal < 0)
+                {
                     sVal = Integer.toString(newVal);
                 }
                 names[n] = toLower(consumable.STAT_NAME[attrib]);
                 attribs[n] = sVal + "%, " + duration + "s";
                 n++;
-                if (n > names.length) {
+                if (n > names.length)
+                {
                     return SCRIPT_CONTINUE;
                 }
             }

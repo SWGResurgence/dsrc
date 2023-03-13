@@ -11,15 +11,18 @@ import java.util.HashSet;
 
 public class senator_crate extends script.base_script
 {
+    public static final String STF_FILE = "npe";
+
     public senator_crate()
     {
     }
-    public static final String STF_FILE = "npe";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu2 = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id(STF_FILE, "crate_use"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -31,6 +34,7 @@ public class senator_crate extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void grantSenatorClothes(obj_id player) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -47,7 +51,7 @@ public class senator_crate extends script.base_script
             theSet.add(static_item.createNewItemFunction("item_senator_ithorian_robe", pInv));
             theSet.add(static_item.createNewItemFunction("item_senator_ithorian_gloves", pInv));
         }
-        else 
+        else
         {
             theSet.add(static_item.createNewItemFunction("item_senator_robe", pInv));
             theSet.add(static_item.createNewItemFunction("item_senator_gloves", pInv));

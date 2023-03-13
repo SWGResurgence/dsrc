@@ -10,12 +10,14 @@ public class nomove_container extends script.item.special.nomove_base
     public nomove_container()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "noTrade", true);
         propogateNoTrade(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (containsNoTradeItem(self))
@@ -27,16 +29,20 @@ public class nomove_container extends script.item.special.nomove_base
         detachScript(self, "item.special.nomove_container");
         return SCRIPT_CONTINUE;
     }
+
     public boolean containsNoTradeItem(obj_id container) throws InterruptedException
     {
         obj_id[] contents = getContents(container);
-        for (obj_id content : contents) {
-            if (hasObjVar(content, "noTrade")) {
+        for (obj_id content : contents)
+        {
+            if (hasObjVar(content, "noTrade"))
+            {
                 return true;
             }
         }
         return false;
     }
+
     public void propogateNoTrade(obj_id container, boolean isNoTrade) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(container);
@@ -52,7 +58,7 @@ public class nomove_container extends script.item.special.nomove_base
                     return;
                 }
             }
-            else 
+            else
             {
                 if (containsNoTradeItem(parent))
                 {
@@ -63,7 +69,7 @@ public class nomove_container extends script.item.special.nomove_base
                     removeObjVar(parent, "noTrade");
                     detachScript(parent, "item.special.nomove_container");
                 }
-                else 
+                else
                 {
                     return;
                 }

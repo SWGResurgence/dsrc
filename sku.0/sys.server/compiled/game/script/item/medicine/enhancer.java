@@ -6,10 +6,12 @@ import script.*;
 
 public class enhancer extends script.base_script
 {
+    public static final string_id CANNOT_USE_ITEM = new string_id("base_player", "cannot_use_item");
+
     public enhancer()
     {
     }
-    public static final string_id CANNOT_USE_ITEM = new string_id("base_player", "cannot_use_item");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))
@@ -22,6 +24,7 @@ public class enhancer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) != player || !hasObjVar(self, "commandName"))
@@ -41,6 +44,7 @@ public class enhancer extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

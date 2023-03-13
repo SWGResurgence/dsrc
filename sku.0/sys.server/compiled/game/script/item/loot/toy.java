@@ -9,11 +9,12 @@ import script.string_id;
 
 public class toy extends script.base_script
 {
+    public static int COOLDOWN_TIME = 14400; // 4 hours
+    public static int currentGameTime = getCalendarTime();
     public toy()
     {
     }
-    public static int COOLDOWN_TIME = 14400; // 4 hours
-    public static int currentGameTime = getCalendarTime();
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -26,7 +27,7 @@ public class toy extends script.base_script
         idx++;
         String NO = "\\#DD1234" + "No" + "\\#FFFFFF";
         String YES = "\\#32CD32" + "Yes" + "\\#FFFFFF";
-        if(currentGameTime < (lastUsed + COOLDOWN_TIME))
+        if (currentGameTime < (lastUsed + COOLDOWN_TIME))
         {
             names[idx] = "ready";
             attribs[idx] = NO;
@@ -40,16 +41,19 @@ public class toy extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setName(self, "Katiara's Toy (Enhancement)");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Feel Lucky"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int mi) throws InterruptedException
     {
         if (mi == menu_info_types.ITEM_USE)

@@ -7,12 +7,11 @@ import script.obj_id;
 
 public class cracktooth_dna extends script.base_script
 {
+    public static final String CRACKTOOTH_NARGLATCH_DNA_LOOT_ITEM = "item_cs_dna_mutated_narglatch";
+    public static final int CRACKTOOTH_NARGLATCH_DNA_LOOT_CHANCE = 5;
     public cracktooth_dna()
     {
     }
-    public static final String CRACKTOOTH_NARGLATCH_DNA_LOOT_ITEM = "item_cs_dna_mutated_narglatch";
-    public static final int CRACKTOOTH_NARGLATCH_DNA_LOOT_CHANCE = 5;
-
 
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {

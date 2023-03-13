@@ -11,6 +11,7 @@ public class spice extends script.base_script
     public static final string_id SID_ALREADY_HAVE_BUFF = new string_id("base_player", "food_already_have_buff");
     public static final string_id SID_BUFF_WONT_STACK = new string_id("base_player", "food_buff_wont_stack");
     public static final string_id SID_NO_EAT_DOWNER = new string_id("base_player", "food_no_eat_downer");
+
     public spice()
     {
     }

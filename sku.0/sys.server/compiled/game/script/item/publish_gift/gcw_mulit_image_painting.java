@@ -5,9 +5,6 @@ import script.library.*;
 
 public class gcw_mulit_image_painting extends script.base_script
 {
-    public gcw_mulit_image_painting()
-    {
-    }
     public static final String CUST_TEXTURE_VAR = "/private/index_texture_1";
     public static final String SUI_MENU_PID = "gcw_painting_controls_pid";
     public static final String PAINTING_CUR_MODE_OBJVAR = "gcw_painting_current_mode";
@@ -21,19 +18,24 @@ public class gcw_mulit_image_painting extends script.base_script
     public static final int MODE_CYCLE_PAINTINGS = 2;
     public static final int MODE_PLANETARY_CONTROL = 3;
     public static final int MODE_GALACTIC_CONTROL = 4;
-    public static final String[] MODE_OPTIONS = 
+    public static final String[] MODE_OPTIONS =
+            {
+                    "Rebel Painting",
+                    "Imperial Painting",
+                    "Cycle Paintings",
+                    "Reflect Planetary Control",
+                    "Reflect Galactic Control"
+            };
+    public gcw_mulit_image_painting()
     {
-        "Rebel Painting",
-        "Imperial Painting",
-        "Cycle Paintings",
-        "Reflect Planetary Control",
-        "Reflect Galactic Control"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleOnAttachSetup", null, 4, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleOnAttachSetup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);
@@ -44,6 +46,7 @@ public class gcw_mulit_image_painting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (checkLocation(self))
@@ -61,6 +64,7 @@ public class gcw_mulit_image_painting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -90,6 +94,7 @@ public class gcw_mulit_image_painting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -105,6 +110,7 @@ public class gcw_mulit_image_painting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU8 && isIdValid(player))
@@ -116,7 +122,7 @@ public class gcw_mulit_image_painting extends script.base_script
                     sendSystemMessage(player, new string_id("reward_sys", "painting_not_in_house"));
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     showControlMenu(self, player);
                 }
@@ -124,6 +130,7 @@ public class gcw_mulit_image_painting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canUsePainting(obj_id painting, obj_id player) throws InterruptedException
     {
         obj_id paintingOwner = getOwner(painting);
@@ -131,12 +138,9 @@ public class gcw_mulit_image_painting extends script.base_script
         {
             return true;
         }
-        if (isGod(player))
-        {
-            return true;
-        }
-        return false;
+        return isGod(player);
     }
+
     public boolean checkLocation(obj_id item) throws InterruptedException
     {
         if (!isIdValid(item))
@@ -153,14 +157,12 @@ public class gcw_mulit_image_painting extends script.base_script
             if (isIdValid(house) && player_structure.isBuilding(house))
             {
                 location here = getLocation(item);
-                if (isIdValid(here.cell) && getContainedBy(item) == here.cell)
-                {
-                    return true;
-                }
+                return isIdValid(here.cell) && getContainedBy(item) == here.cell;
             }
         }
         return false;
     }
+
     public void showControlMenu(obj_id self, obj_id player) throws InterruptedException
     {
         closeOldWindow(self);
@@ -183,6 +185,7 @@ public class gcw_mulit_image_painting extends script.base_script
         sui.showSUIPage(pid);
         utils.setScriptVar(self, SUI_MENU_PID, pid);
     }
+
     public void closeOldWindow(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, SUI_MENU_PID))
@@ -192,6 +195,7 @@ public class gcw_mulit_image_painting extends script.base_script
             utils.removeScriptVar(self, SUI_MENU_PID);
         }
     }
+
     public int paintingControlsHandler(obj_id self, dictionary params) throws InterruptedException
     {
         int button = sui.getIntButtonPressed(params);
@@ -214,6 +218,7 @@ public class gcw_mulit_image_painting extends script.base_script
         setupPaintingMode(self, player, modeChoice);
         return SCRIPT_CONTINUE;
     }
+
     public void setupPaintingMode(obj_id self, obj_id player, int modeChoice) throws InterruptedException
     {
         if (hasObjVar(self, PAINTING_CUR_CYCLE_VAR))
@@ -223,25 +228,26 @@ public class gcw_mulit_image_painting extends script.base_script
         switch (modeChoice)
         {
             case 0:
-            setToRebelPaintingMode(self, player);
-            break;
+                setToRebelPaintingMode(self, player);
+                break;
             case 1:
-            setToImperialPaintingMode(self, player);
-            break;
+                setToImperialPaintingMode(self, player);
+                break;
             case 2:
-            setToCyclingPaintingMode(self, player);
-            break;
+                setToCyclingPaintingMode(self, player);
+                break;
             case 3:
-            setToPlanetaryControlPaintingMode(self, player);
-            break;
+                setToPlanetaryControlPaintingMode(self, player);
+                break;
             case 4:
-            setToGalacticControlPaintingMode(self, player);
-            break;
+                setToGalacticControlPaintingMode(self, player);
+                break;
             default:
-            setToCyclingPaintingMode(self, player);
-            break;
+                setToCyclingPaintingMode(self, player);
+                break;
         }
     }
+
     public void setToRebelPaintingMode(obj_id self, obj_id player) throws InterruptedException
     {
         hue.setRangedIntCustomVar(self, CUST_TEXTURE_VAR, PAINTING_TEXTURE_INDEX_REBEL);
@@ -251,6 +257,7 @@ public class gcw_mulit_image_painting extends script.base_script
             sendSystemMessage(player, new string_id("reward_sys", "painting_set_to_rebel"));
         }
     }
+
     public void setToImperialPaintingMode(obj_id self, obj_id player) throws InterruptedException
     {
         hue.setRangedIntCustomVar(self, CUST_TEXTURE_VAR, PAINTING_TEXTURE_INDEX_IMPERIAL);
@@ -260,6 +267,7 @@ public class gcw_mulit_image_painting extends script.base_script
             sendSystemMessage(player, new string_id("reward_sys", "painting_set_to_imperial"));
         }
     }
+
     public void setToCyclingPaintingMode(obj_id self, obj_id player) throws InterruptedException
     {
         int startTexture = getStartTexture(self, player);
@@ -275,6 +283,7 @@ public class gcw_mulit_image_painting extends script.base_script
             sendSystemMessage(player, new string_id("reward_sys", "painting_set_to_cycle"));
         }
     }
+
     public void setToPlanetaryControlPaintingMode(obj_id self, obj_id player) throws InterruptedException
     {
         int startTexture = getPlanetaryControlTexture(self, player);
@@ -290,6 +299,7 @@ public class gcw_mulit_image_painting extends script.base_script
             sendSystemMessage(player, new string_id("reward_sys", "painting_set_to_planet_control"));
         }
     }
+
     public void setToGalacticControlPaintingMode(obj_id self, obj_id player) throws InterruptedException
     {
         int startTexture = getGcwControlTexture(self, player, "galaxy");
@@ -305,6 +315,7 @@ public class gcw_mulit_image_painting extends script.base_script
             sendSystemMessage(player, new string_id("reward_sys", "painting_set_to_galactic_control"));
         }
     }
+
     public int getStartTexture(obj_id self, obj_id player) throws InterruptedException
     {
         int startingTexture = rand(PAINTING_TEXTURE_INDEX_REBEL, PAINTING_TEXTURE_INDEX_IMPERIAL);
@@ -325,6 +336,7 @@ public class gcw_mulit_image_painting extends script.base_script
         }
         return startingTexture;
     }
+
     public int getPlanetaryControlTexture(obj_id self, obj_id player) throws InterruptedException
     {
         location here = getLocation(self);
@@ -339,6 +351,7 @@ public class gcw_mulit_image_painting extends script.base_script
         }
         return getGcwControlTexture(self, player, planet);
     }
+
     public int getGcwControlTexture(obj_id self, obj_id player, String category) throws InterruptedException
     {
         int texture = getStartTexture(self, player);
@@ -353,6 +366,7 @@ public class gcw_mulit_image_painting extends script.base_script
         }
         return texture;
     }
+
     public int cyclingPaintingHandler(obj_id self, dictionary params) throws InterruptedException
     {
         if (checkLocation(self))
@@ -376,6 +390,7 @@ public class gcw_mulit_image_painting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int gcwFactionControlPaintingHandler(obj_id self, dictionary params) throws InterruptedException
     {
         if (checkLocation(self))

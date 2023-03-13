@@ -7,9 +7,6 @@ import script.*;
 
 public class snow_machine extends script.base_script
 {
-    public snow_machine()
-    {
-    }
     public static final string_id SID_WHILE_DEAD = new string_id("spam", "while_dead");
     public static final string_id SID_HAS_SNOWBALL_ALREADY = new string_id("spam", "has_snowball");
     public static final string_id SID_SNOWBALL_VERY_HOT = new string_id("spam", "snowball_hot_environment");
@@ -23,6 +20,10 @@ public class snow_machine extends script.base_script
     public static final String SNOW_PARTICLE_01 = "object/static/particle/particle_snow_machine_light.iff";
     public static final String SNOW_PARTICLE_02 = "object/static/particle/particle_snow_machine_medium.iff";
     public static final String SNOW_PARTICLE_03 = "object/static/particle/particle_snow_machine_heavy.iff";
+    public snow_machine()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "snow_machine_on"))
@@ -31,6 +32,7 @@ public class snow_machine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id snowMachine = self;
@@ -54,7 +56,7 @@ public class snow_machine extends script.base_script
             {
                 int stormOnOff = mi.addRootMenu(menu_info_types.ITEM_USE, SID_TURN_OFF);
             }
-            else 
+            else
             {
                 int stormOnOff = mi.addRootMenu(menu_info_types.ITEM_USE, SID_TURN_ON);
             }
@@ -75,6 +77,7 @@ public class snow_machine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id snowMachine = self;
@@ -116,7 +119,7 @@ public class snow_machine extends script.base_script
                     obj_id pInv = utils.getInventoryContainer(player);
                     obj_id snowballs = static_item.createNewItemFunction("publish_gift_chapter_11_snow_balls_02_01", pInv);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, SID_HAS_SNOWBALL_ALREADY);
                 }
@@ -142,6 +145,7 @@ public class snow_machine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (hasObjVar(self, "snow_machine_on"))
@@ -161,6 +165,7 @@ public class snow_machine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void cleanUpScriptsAndSuch(obj_id snowMachine) throws InterruptedException
     {
         if (hasObjVar(snowMachine, "weatherParticleId"))
@@ -174,7 +179,7 @@ public class snow_machine extends script.base_script
                     removeObjVar(snowMachine, "weatherParticleId");
                 }
             }
-            else 
+            else
             {
                 removeObjVar(snowMachine, "weatherParticleId");
             }
@@ -188,6 +193,7 @@ public class snow_machine extends script.base_script
             removeObjVar(snowMachine, "unmoveable");
         }
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "snow_machine_on"))
@@ -207,6 +213,7 @@ public class snow_machine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void checkRefreshParticle(obj_id snowMachine) throws InterruptedException
     {
         if (hasObjVar(snowMachine, "snow_machine_on"))
@@ -217,6 +224,7 @@ public class snow_machine extends script.base_script
             playSnowParticle(snowMachine);
         }
     }
+
     public void stopSnowParticle(obj_id snowMachine) throws InterruptedException
     {
         if (hasObjVar(snowMachine, "snowParticleId"))
@@ -229,6 +237,7 @@ public class snow_machine extends script.base_script
             }
         }
     }
+
     public void playSnowParticle(obj_id snowMachine) throws InterruptedException
     {
         if (!isIdValid(snowMachine))
@@ -269,6 +278,7 @@ public class snow_machine extends script.base_script
             setObjVar(snowMachine, "snowParticleId", snowParticle);
         }
     }
+
     public void removeStormObjVar(obj_id snowMachine) throws InterruptedException
     {
         if (hasObjVar(snowMachine, "snowMachine.storm1"))

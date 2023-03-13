@@ -6,19 +6,21 @@ import script.string_id;
 
 public class loot_kit_base extends script.base_script
 {
-    public loot_kit_base()
-    {
-    }
     public static final String STF = "loot_kit";
     public static final string_id INCORRECT_ITEM = new string_id(STF, "incorrect_item");
     public static final string_id ALREADY_CONTAINS = new string_id(STF, "already_contains");
     public static final string_id NEW_ITEM_CREATED = new string_id(STF, "new_item_created");
     public static final string_id ITEM_USED = new string_id(STF, "item_used");
     public static final string_id AUTOSTACK_ATTACHED_EJECTED = new string_id(STF, "austostack_attached_ejected");
+    public loot_kit_base()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "loot_kit");
-        if(datatable == null || datatable.length() == 0){
+        if (datatable == null || datatable.length() == 0)
+        {
             return SCRIPT_CONTINUE;
         }
         String[] objvarToSet = dataTableGetStringColumnNoDefaults(datatable, "objvar_name");
@@ -37,6 +39,7 @@ public class loot_kit_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -230,6 +233,7 @@ public class loot_kit_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, transferer))
@@ -346,13 +350,14 @@ public class loot_kit_base extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             sendSystemMessage(transferer, INCORRECT_ITEM);
             return SCRIPT_OVERRIDE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         String datatable = getStringObjVar(self, "loot_kit");
@@ -418,13 +423,15 @@ public class loot_kit_base extends script.base_script
         if (contents != null && contents.length > 0)
         {
             obj_id playerInv = utils.getInventoryContainer(transferer);
-            for (obj_id content : contents) {
+            for (obj_id content : contents)
+            {
                 putInOverloaded(content, playerInv);
             }
         }
         checkForCompletion(self, transferer);
         return SCRIPT_CONTINUE;
     }
+
     public void checkForCompletion(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))

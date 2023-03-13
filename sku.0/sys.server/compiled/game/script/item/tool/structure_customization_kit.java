@@ -5,9 +5,6 @@ import script.library.*;
 
 public class structure_customization_kit extends script.base_script
 {
-    public structure_customization_kit()
-    {
-    }
     public static final boolean BLOGGING_ON = true;
     public static final String BLOGGING_CATEGORY = "structure_recolor";
     public static final int OBJECT_COLOR_MAX = 4;
@@ -19,6 +16,10 @@ public class structure_customization_kit extends script.base_script
     public static final string_id SID_MUST_BE_INSIDE_STRUCTURE = new string_id("tool/customizer", "inside_structure_that_you_own");
     public static final string_id SID_MUST_BE_INSIDE_INVENTORY = new string_id("tool/customizer", "must_be_in_inventory");
     public static final string_id SID_STRUCTURE_PAINTING_FAILED = new string_id("tool/customizer", "there_was_a_problem_with_structure_kit");
+    public structure_customization_kit()
+    {
+    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -39,6 +40,7 @@ public class structure_customization_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         blog("OnObjectMenuRequest - functions");
@@ -58,6 +60,7 @@ public class structure_customization_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         blog("OnObjectMenuSelect - functions too");
@@ -89,6 +92,7 @@ public class structure_customization_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean validateStructureOrCell(obj_id player) throws InterruptedException
     {
         blog("validateStructureOrCell - init");
@@ -113,6 +117,7 @@ public class structure_customization_kit extends script.base_script
         blog("validateStructureOrCell - looks good, returning");
         return true;
     }
+
     public boolean beginStructureColorization(obj_id tool, obj_id player) throws InterruptedException
     {
         blog("beginStructureColorization - init");
@@ -200,6 +205,7 @@ public class structure_customization_kit extends script.base_script
         openCustomizationWindow(player, house, indexName[0], -1, -1, indexName[1], -1, -1, indexName[2], -1, -1, indexName[3], -1, -1);
         return true;
     }
+
     public int decrementTool(obj_id self, dictionary params) throws InterruptedException
     {
         blog("decrementTool - init");
@@ -220,13 +226,14 @@ public class structure_customization_kit extends script.base_script
         {
             setObjVar(self, "crafting_components.charges", count);
         }
-        else 
+        else
         {
             destroyObject(self);
         }
         removePlayerVars(player);
         return SCRIPT_CONTINUE;
     }
+
     public int cancelTool(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getObjIdScriptVar(self, PLAYER_ID);
@@ -237,6 +244,7 @@ public class structure_customization_kit extends script.base_script
         removePlayerVars(player);
         return SCRIPT_CONTINUE;
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         blog("closeOldWindow - init");
@@ -249,6 +257,7 @@ public class structure_customization_kit extends script.base_script
             sui.removePid(player, PID_NAME);
         }
     }
+
     public void removePlayerVars(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -260,6 +269,7 @@ public class structure_customization_kit extends script.base_script
         utils.removeScriptVarTree(self, VAR_PREFIX);
         utils.removeObjVar(player, VAR_PREFIX);
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (!BLOGGING_ON)

@@ -21,6 +21,7 @@ public class buff_group_click_item extends script.base_script
     public static final string_id SID_NO_USE_WHILE_DEAD = new string_id("player_structure", "while_dead");
     public static final string_id SID_BUFF_NOT_OWNER = new string_id("base_player", "food_buff_not_owner");
     public static final String OWNER_OID = "owner";
+
     public buff_group_click_item()
     {
     }

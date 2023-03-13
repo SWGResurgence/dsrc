@@ -7,38 +7,40 @@ import java.util.Vector;
 
 public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
 {
+    public static final String[] COLORS =
+            {
+                    "@tool/customizer:rebpvp_color_grey",
+                    "@tool/customizer:rebpvp_color_green"
+            };
+    public static final String[] COLORS_CHEST =
+            {
+                    "@tool/customizer:rebpvp_color_black_grey",
+                    "@tool/customizer:rebpvp_color_black_green",
+                    "@tool/customizer:rebpvp_color_black_black"
+            };
+    public static final String[] ARMOR_TYPES =
+            {
+                    "belt",
+                    "bicep_l",
+                    "bicep_r",
+                    "boots",
+                    "bracer_l",
+                    "bracer_r",
+                    "chest_plate",
+                    "gloves",
+                    "helmet",
+                    "leggings"
+            };
     public pvp_spec_ops_rebel_armor_dye_kit()
     {
     }
-    public static final String[] COLORS = 
-    {
-        "@tool/customizer:rebpvp_color_grey",
-        "@tool/customizer:rebpvp_color_green"
-    };
-    public static final String[] COLORS_CHEST = 
-    {
-        "@tool/customizer:rebpvp_color_black_grey",
-        "@tool/customizer:rebpvp_color_black_green",
-        "@tool/customizer:rebpvp_color_black_black"
-    };
-    public static final String[] ARMOR_TYPES = 
-    {
-        "belt",
-        "bicep_l",
-        "bicep_r",
-        "boots",
-        "bracer_l",
-        "bracer_r",
-        "chest_plate",
-        "gloves",
-        "helmet",
-        "leggings"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCount(self, 10);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -52,6 +54,7 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -64,6 +67,7 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void beginArmorColorization(obj_id self, obj_id player) throws InterruptedException
     {
         Vector wornItems = new Vector();
@@ -71,12 +75,15 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
         obj_id[] equippedItems = metrics.getWornItems(player);
         if (equippedItems != null && equippedItems.length > 0)
         {
-            for (obj_id equippedItem : equippedItems) {
+            for (obj_id equippedItem : equippedItems)
+            {
                 String name = getStaticItemName(equippedItem);
-                if (name == null || name.equals("")) {
+                if (name == null || name.equals(""))
+                {
                     continue;
                 }
-                if (name.startsWith("armor_pvp_spec_ops_rebel")) {
+                if (name.startsWith("armor_pvp_spec_ops_rebel"))
+                {
                     wornItems.addElement(equippedItem);
                 }
             }
@@ -84,12 +91,15 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
         obj_id[] invItems = utils.getContents(utils.getInventoryContainer(player), true);
         if (invItems != null && invItems.length > 0)
         {
-            for (obj_id invItem : invItems) {
+            for (obj_id invItem : invItems)
+            {
                 String name = getStaticItemName(invItem);
-                if (name == null || name.equals("")) {
+                if (name == null || name.equals(""))
+                {
                     continue;
                 }
-                if (name.startsWith("armor_pvp_spec_ops_rebel")) {
+                if (name.startsWith("armor_pvp_spec_ops_rebel"))
+                {
                     items.addElement(invItem);
                 }
             }
@@ -105,7 +115,8 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
         Vector armorNames = new Vector();
         if (!wornItems.isEmpty())
         {
-            for (Object wornItem : wornItems) {
+            for (Object wornItem : wornItems)
+            {
                 obj_id piece = (obj_id) wornItem;
                 utils.setScriptVar(piece, "rebpvp_worn", 1);
                 armor.addElement(piece);
@@ -115,7 +126,8 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
         }
         if (!items.isEmpty())
         {
-            for (Object item : items) {
+            for (Object item : items)
+            {
                 obj_id piece = (obj_id) item;
                 armor.addElement(piece);
                 String name = "@" + getName(piece);
@@ -127,11 +139,12 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
         {
             cleanup(self, player);
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "rebpvp_armor", armor);
         }
     }
+
     public int handleArmorSelection(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -176,25 +189,26 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
             {
                 cleanup(self, player);
             }
-            else 
+            else
             {
                 utils.setScriptVar(self, "rebpvp_piece", armor[idx]);
             }
         }
-        else 
+        else
         {
             int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, COLORS, "handleColorSelection", true, false);
             if (pid < 0)
             {
                 cleanup(self, player);
             }
-            else 
+            else
             {
                 utils.setScriptVar(self, "rebpvp_piece", armor[idx]);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleColorSelection(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -221,11 +235,7 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
             sendSystemMessageProse(player, pp);
             return SCRIPT_CONTINUE;
         }
-        boolean worn = false;
-        if (utils.hasScriptVar(piece, "rebpvp_worn"))
-        {
-            worn = true;
-        }
+        boolean worn = utils.hasScriptVar(piece, "rebpvp_worn");
         String newArmorName = constructNewArmorString(piece, idx);
         if (newArmorName == null)
         {
@@ -246,13 +256,14 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
             {
                 setCount(self, count);
             }
-            else 
+            else
             {
                 destroyObject(self);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void cleanup(obj_id self, obj_id player) throws InterruptedException
     {
         utils.removeScriptVar(self, "rebpvp_armor");
@@ -260,11 +271,13 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
         obj_id[] equippedItems = metrics.getWornItems(player);
         if (equippedItems != null && equippedItems.length > 0)
         {
-            for (obj_id equippedItem : equippedItems) {
+            for (obj_id equippedItem : equippedItems)
+            {
                 utils.removeScriptVar(equippedItem, "rebpvp_worn");
             }
         }
     }
+
     public String constructNewArmorString(obj_id armor, int idx) throws InterruptedException
     {
         String name = getStaticItemName(armor);
@@ -272,22 +285,24 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
         String color = null;
         if (name.startsWith("armor_pvp_spec_ops_rebel_black_black_chest") || name.startsWith("armor_pvp_spec_ops_rebel_black_green_chest") || name.startsWith("armor_pvp_spec_ops_rebel_black_grey_chest"))
         {
-            for (String armorType : ARMOR_TYPES) {
-                if (name.contains(armorType)) {
+            for (String armorType : ARMOR_TYPES)
+            {
+                if (name.contains(armorType))
+                {
                     type = armorType;
                 }
             }
             switch (idx)
             {
                 case 0:
-                color = "black_grey_chest_plate";
-                break;
+                    color = "black_grey_chest_plate";
+                    break;
                 case 1:
-                color = "black_green_chest_plate";
-                break;
+                    color = "black_green_chest_plate";
+                    break;
                 case 2:
-                color = "black_black_chest_plate";
-                break;
+                    color = "black_black_chest_plate";
+                    break;
             }
             if (type == null || color == null)
             {
@@ -295,21 +310,23 @@ public class pvp_spec_ops_rebel_armor_dye_kit extends script.base_script
             }
             return "armor_pvp_spec_ops_rebel_" + color + "_05_01";
         }
-        else 
+        else
         {
-            for (String armorType : ARMOR_TYPES) {
-                if (name.contains(armorType)) {
+            for (String armorType : ARMOR_TYPES)
+            {
+                if (name.contains(armorType))
+                {
                     type = armorType;
                 }
             }
             switch (idx)
             {
                 case 0:
-                color = "grey_";
-                break;
+                    color = "grey_";
+                    break;
                 case 1:
-                color = "green_";
-                break;
+                    color = "green_";
+                    break;
             }
             if (type == null || color == null)
             {

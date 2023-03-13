@@ -9,10 +9,12 @@ public class armor_mand extends script.base_script
     public armor_mand()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) == player)
@@ -21,13 +23,14 @@ public class armor_mand extends script.base_script
             {
                 mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("craft_armor_ingredients_d", "dismantle_mand"));
             }
-            else 
+            else
             {
                 detachScript(self, "item.conversion.armor_mand");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) == player)
@@ -39,6 +42,7 @@ public class armor_mand extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showConfirmationWindow(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -48,6 +52,7 @@ public class armor_mand extends script.base_script
         int pid = sui.msgbox(self, player, prompt, sui.OK_CANCEL, title, 0, "handleConfirmationSelect");
         setWindowPid(player, pid);
     }
+
     public void dismantleMand(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -59,9 +64,10 @@ public class armor_mand extends script.base_script
             sendSystemMessage(player, new string_id("quest_armorsmith", "inventory_full"));
             return;
         }
-        else 
+        else
         {
-            switch (templatename) {
+            switch (templatename)
+            {
                 case "object/tangible/wearables/armor/mandalorian/armor_mandalorian_helmet.iff":
                     schematicTemplate = "object/tangible/loot/loot_schematic/death_watch_mandalorian_helmet_schematic.iff";
                     break;
@@ -106,13 +112,14 @@ public class armor_mand extends script.base_script
                 setCrafter(newSchematic, player);
                 sendSystemMessage(player, new string_id("quest_armorsmith", "schematic_issued"));
             }
-            else 
+            else
             {
                 CustomerServiceLog("armor_converion", "Server attempted to create Mandalorian " + newSchematic + " for %TU but failed", player);
                 return;
             }
         }
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "mand_armor.pid"))
@@ -122,6 +129,7 @@ public class armor_mand extends script.base_script
             utils.removeScriptVar(player, "mand_armor.pid");
         }
     }
+
     public void setWindowPid(obj_id player, int pid) throws InterruptedException
     {
         if (pid > -1)
@@ -129,6 +137,7 @@ public class armor_mand extends script.base_script
             utils.setScriptVar(player, "mand_armor.pid", pid);
         }
     }
+
     public int handleConfirmationSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);

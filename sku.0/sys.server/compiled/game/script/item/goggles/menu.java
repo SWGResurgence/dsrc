@@ -8,24 +8,25 @@ import script.library.utils;
 
 public class menu extends script.base_script
 {
-    public menu()
-    {
-    }
     public static final string_id MNU_COLOR = new string_id("sui", "set_color");
     public static final string_id MNU_COLOR_LENS = new string_id("sui", "color_lens");
     public static final string_id MNU_COLOR_FRAME = new string_id("sui", "color_frame");
     public static final String SCRIPTVAR_FRAME_PID = "goggles.frame.pid";
     public static final String SCRIPTVAR_LENS_PID = "goggles.lens.pid";
     public static final String TBL = "datatables/item/goggles/indices.iff";
-    public static final String[] COLLECTOR_EDITION_ITEMS = 
+    public static final String[] COLLECTOR_EDITION_ITEMS =
+            {
+                    "object/tangible/wearables/goggles/goggles_s01.iff",
+                    "object/tangible/wearables/goggles/goggles_s02.iff",
+                    "object/tangible/wearables/goggles/goggles_s03.iff",
+                    "object/tangible/wearables/goggles/goggles_s04.iff",
+                    "object/tangible/wearables/goggles/goggles_s05.iff",
+                    "object/tangible/wearables/goggles/goggles_s06.iff"
+            };
+    public menu()
     {
-        "object/tangible/wearables/goggles/goggles_s01.iff",
-        "object/tangible/wearables/goggles/goggles_s02.iff",
-        "object/tangible/wearables/goggles/goggles_s03.iff",
-        "object/tangible/wearables/goggles/goggles_s04.iff",
-        "object/tangible/wearables/goggles/goggles_s05.iff",
-        "object/tangible/wearables/goggles/goggles_s06.iff"
-    };
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "validateGoggles", null, 5, false);
@@ -33,6 +34,7 @@ public class menu extends script.base_script
         setAutoInsured(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -59,6 +61,7 @@ public class menu extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -72,7 +75,7 @@ public class menu extends script.base_script
             {
                 sendSystemMessage(player, new string_id("error_message", "equipped_goggles"));
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("error_message", "goggle_submenu"));
             }
@@ -115,6 +118,7 @@ public class menu extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleColorizeFrame(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, SCRIPTVAR_FRAME_PID);
@@ -140,6 +144,7 @@ public class menu extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleColorizeLens(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, SCRIPTVAR_LENS_PID);
@@ -165,6 +170,7 @@ public class menu extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int validateGoggles(obj_id self, dictionary params) throws InterruptedException
     {
         boolean validGoggles = true;
@@ -177,7 +183,7 @@ public class menu extends script.base_script
         {
             validGoggles = false;
         }
-        else 
+        else
         {
             obj_id inv = utils.getInventoryContainer(owner);
             obj_id bank = utils.getPlayerBank(owner);
@@ -190,7 +196,7 @@ public class menu extends script.base_script
             {
                 validGoggles = false;
             }
-            else 
+            else
             {
                 obj_id container = getContainedBy(self);
                 if (!(container == inv || container == bank || objOnFace == self))
@@ -210,10 +216,13 @@ public class menu extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isSEGoggle(obj_id item) throws InterruptedException
     {
-        for (String collectorEditionItem : COLLECTOR_EDITION_ITEMS) {
-            if (getTemplateName(item) == collectorEditionItem) {
+        for (String collectorEditionItem : COLLECTOR_EDITION_ITEMS)
+        {
+            if (getTemplateName(item) == collectorEditionItem)
+            {
                 return true;
             }
         }

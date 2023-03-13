@@ -37,6 +37,7 @@ public class heroic_random_stat_item extends script.base_script
                     25,
                     2
             };
+
     public heroic_random_stat_item()
     {
     }

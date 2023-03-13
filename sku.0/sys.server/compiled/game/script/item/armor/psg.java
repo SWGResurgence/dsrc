@@ -7,9 +7,6 @@ import script.obj_id;
 
 public class psg extends script.base_script
 {
-    public psg()
-    {
-    }
     public static final float BASE_UPDATE_TIME = 5.0f;
     public static final float RAND_UPDATE_TIME = 1.0f;
     public static final String PARAM_TIME = "time";
@@ -17,11 +14,16 @@ public class psg extends script.base_script
     public static final String PSG_EFFECT_TIME = "psgEffectTime";
     public static final String SCRIPTVAR_RECHARGE_RATE = armor.OBJVAR_ARMOR_BASE + "." + armor.OBJVAR_PSG_RECHARGE_RATE;
     public static final String SCRIPTVAR_MESSAGE_ID = armor.OBJVAR_ARMOR_BASE + "." + PARAM_MESSAGE_ID;
+    public psg()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializePsg", null, 0.1f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         float recharge = utils.getFloatScriptVar(self, SCRIPTVAR_RECHARGE_RATE);
@@ -58,6 +60,7 @@ public class psg extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleInitializePsg(obj_id self, dictionary params) throws InterruptedException
     {
         armor.setPsgEfficiency(self, 0);
@@ -86,7 +89,7 @@ public class psg extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
@@ -101,6 +104,7 @@ public class psg extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleEfficiencyUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, armor.SCRIPTVAR_PSG_EFFICIENCY) || !utils.hasScriptVar(self, SCRIPTVAR_MESSAGE_ID))
@@ -129,6 +133,7 @@ public class psg extends script.base_script
         startRegeneration(self);
         return SCRIPT_CONTINUE;
     }
+
     public void startRegeneration(obj_id self) throws InterruptedException
     {
         float time = BASE_UPDATE_TIME + rand(0.0f, RAND_UPDATE_TIME);

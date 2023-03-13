@@ -12,6 +12,7 @@ public class socket_retrofit_tool extends script.base_script
     public socket_retrofit_tool()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, transferer))
@@ -26,6 +27,7 @@ public class socket_retrofit_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canPutInTool(obj_id item, obj_id transferer, obj_id self) throws InterruptedException
     {
         obj_id[] stuff = getContents(self);
@@ -44,13 +46,11 @@ public class socket_retrofit_tool extends script.base_script
         int myGot = getGameObjectType(item);
         if (isGameObjectTypeOf(item, GOT_armor) || isGameObjectTypeOf(item, GOT_weapon) || isGameObjectTypeOf(item, GOT_clothing) || isGameObjectTypeOf(item, GOT_cybernetic))
         {
-            if (hasObjVar(item, "skillmod.bonus"))
-            {
-                return true;
-            }
+            return hasObjVar(item, "skillmod.bonus");
         }
         return false;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -61,6 +61,7 @@ public class socket_retrofit_tool extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU3, strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -96,6 +97,7 @@ public class socket_retrofit_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean retrofitItUp(obj_id item) throws InterruptedException
     {
         boolean success = false;
@@ -106,7 +108,7 @@ public class socket_retrofit_tool extends script.base_script
             {
                 setSkillModSockets(item, 2);
             }
-            else 
+            else
             {
                 setSkillModSockets(item, 1);
             }

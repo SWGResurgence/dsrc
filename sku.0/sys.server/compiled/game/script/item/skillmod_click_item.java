@@ -21,6 +21,7 @@ public class skillmod_click_item extends script.base_script
     public static final string_id CANT_APPLY_SKILLMOD = new string_id("base_player", "cant_use_item");
     public static final string_id SID_ITEM_NOT_OWNER = new string_id("base_player", "item_not_owner");
     public static final String OWNER_OID = "owner";
+
     public skillmod_click_item()
     {
     }

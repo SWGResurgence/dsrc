@@ -9,10 +9,12 @@ import script.string_id;
 
 public class wedding extends script.base_script
 {
+    public static final string_id SID_CANNOT_REMOVE_RING = new string_id("unity", "cannot_remove_ring");
+
     public wedding()
     {
     }
-    public static final string_id SID_CANNOT_REMOVE_RING = new string_id("unity", "cannot_remove_ring");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         detachScript(self, marriage.SCRIPT_RING_BASE);
@@ -20,7 +22,7 @@ public class wedding extends script.base_script
         {
             setObjVar(self, "wasNoMove", 1);
         }
-        else 
+        else
         {
             attachScript(self, "item.special.nomove");
         }
@@ -28,6 +30,7 @@ public class wedding extends script.base_script
         setHitpoints(self, getMaxHitpoints(self));
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         attachScript(self, marriage.SCRIPT_RING_BASE);
@@ -39,12 +42,14 @@ public class wedding extends script.base_script
         setInsured(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setAutoInsured(self);
         setHitpoints(self, getMaxHitpoints(self));
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);
@@ -58,6 +63,7 @@ public class wedding extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.isNestedWithin(self, player))
@@ -69,6 +75,7 @@ public class wedding extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU2)

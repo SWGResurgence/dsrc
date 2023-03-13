@@ -8,10 +8,12 @@ import script.*;
 
 public class base extends script.base_script
 {
+    public static final string_id SID_ALREADY_PROPOSING = new string_id("unity", "already_proposing");
+
     public base()
     {
     }
-    public static final string_id SID_ALREADY_PROPOSING = new string_id("unity", "already_proposing");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(player);
@@ -35,6 +37,7 @@ public class base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)

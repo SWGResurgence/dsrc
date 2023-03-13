@@ -9,6 +9,7 @@ public class costume_grant_item extends script.base_script
     public costume_grant_item()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))
@@ -20,7 +21,7 @@ public class costume_grant_item extends script.base_script
                 {
                     mid.setServerNotify(true);
                 }
-                else 
+                else
                 {
                     mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("spam", "costume_learn"));
                 }
@@ -28,6 +29,7 @@ public class costume_grant_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) != player)
@@ -57,7 +59,7 @@ public class costume_grant_item extends script.base_script
             {
                 sendSystemMessage(player, new string_id("spam", "costume_already_known"));
             }
-            else 
+            else
             {
                 grantSkill(player, costumeName);
                 destroyObject(self);
@@ -65,6 +67,7 @@ public class costume_grant_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -89,7 +92,7 @@ public class costume_grant_item extends script.base_script
         {
             attribs[idx] = " \\#B22222 Already Known";
         }
-        else 
+        else
         {
             attribs[idx] = " \\#00FF00 Not Yet Known";
         }

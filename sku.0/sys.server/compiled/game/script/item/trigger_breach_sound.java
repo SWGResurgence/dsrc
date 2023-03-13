@@ -9,6 +9,7 @@ public class trigger_breach_sound extends script.base_script
     public static final string_id SID_TURN_OFF = new string_id("spam", "turn_off_sound_object");
     public static final String OBJVAR_SOUND_FILE = "soundFile";
     public static final String OBJVAR_IS_TURNED_ON = "itemIsOn";
+
     public trigger_breach_sound()
     {
     }

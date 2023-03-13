@@ -493,8 +493,8 @@ public class reverse_engineering_tool extends script.base_script
             obj_id powerup = static_item.createNewItemFunction(getGemTemplateByClass(player, ratio, 1), inventory);
             if (isIdValid(powerup))
             {
-				if(power > 117)
-					power = 117;
+                if(power > 117)
+                    power = 117;
                 setObjVar(powerup, "reverse_engineering.reverse_engineering_power", power);
                 setObjVar(powerup, "reverse_engineering.reverse_engineering_modifier", mod);
                 setObjVar(powerup, "reverse_engineering.reverse_engineering_ratio", ratio);
@@ -570,13 +570,13 @@ public class reverse_engineering_tool extends script.base_script
         }
         float quality = getFloatObjVar(self, "res_quality");
         int randomRollMin = 35;
-		int moduleBonus = 0;
-		int luckMod = getEnhancedSkillStatisticModifierUncapped(player, "luck");
-		luckMod += getEnhancedSkillStatisticModifierUncapped(player, "luck_modified");
+        int moduleBonus = 0;
+        int luckMod = getEnhancedSkillStatisticModifierUncapped(player, "luck");
+        luckMod += getEnhancedSkillStatisticModifierUncapped(player, "luck_modified");
         LOG("reverse_engineering", "generatePowerBit quality: " + quality);
         if (quality > 0)
         {
-			moduleBonus = rand(1, (int)((luckMod / 250) * (quality / 10)));
+            moduleBonus = rand(1, (int)((luckMod / 250) * (quality / 10)));
             randomRollMin += (int)(40.0f * (quality / 100.0f));
             removeObjVar(self, "res_quality");
             LOG("reverse_engineering", "generatePowerBit randomRollMin: " + randomRollMin);

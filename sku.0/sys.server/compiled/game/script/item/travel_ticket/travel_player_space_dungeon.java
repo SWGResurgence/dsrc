@@ -11,13 +11,14 @@ import java.util.Objects;
 
 public class travel_player_space_dungeon extends script.base_script
 {
-    public travel_player_space_dungeon()
-    {
-    }
     public static final string_id SID_UNABLE_TO_FIND_DUNGEON = new string_id("dungeon/space_dungeon", "unable_to_find_dungeon");
     public static final string_id SID_NO_TICKET = new string_id("dungeon/space_dungeon", "no_ticket");
     public static final string_id SID_REQUEST_TRAVEL = new string_id("dungeon/space_dungeon", "request_travel");
     public static final string_id SID_REQUEST_TRAVEL_OUTSTANDING = new string_id("dungeon/space_dungeon", "request_travel_outstanding");
+    public travel_player_space_dungeon()
+    {
+    }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String dungeon_type, int request_id, String[] element_name_list, dictionary[] dungeon_data, int lock_key) throws InterruptedException
     {
         LOG("space_dungeon", "travel_space_dungeon.OnClusterWideDataResponse");
@@ -37,7 +38,7 @@ public class travel_player_space_dungeon extends script.base_script
         {
             ticket = getObjIdObjVar(player, space_dungeon.VAR_TICKET_USED);
         }
-        else 
+        else
         {
             ticket = player;
         }
@@ -127,6 +128,7 @@ public class travel_player_space_dungeon extends script.base_script
         sendSystemMessage(player, Objects.requireNonNullElse(success, SID_UNABLE_TO_FIND_DUNGEON));
         return SCRIPT_CONTINUE;
     }
+
     public int msgStartDungeonTravel(obj_id self, dictionary params) throws InterruptedException
     {
         int session_id = params.getInt("session_id");
@@ -163,6 +165,7 @@ public class travel_player_space_dungeon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgDungeonTravelComplete(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, space_dungeon.VAR_RESET_DUNGEON))

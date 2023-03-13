@@ -26,6 +26,7 @@ public class food extends script.base_script
             {
                     "none"
             };
+
     public food()
     {
     }

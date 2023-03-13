@@ -7,9 +7,6 @@ import script.library.utils;
 
 public class loot_crate extends script.base_script
 {
-    public loot_crate()
-    {
-    }
     public static final String COLLECTION_COLUMN = "collections";
     public static final String PLAYER_ACCESS_ID = "player_access_id";
     public static final int lootMin = 0;
@@ -21,6 +18,10 @@ public class loot_crate extends script.base_script
     public static string_id COUNTDOWN_HAS_BEGUN = new string_id("collection", "magseal_timer_warning");
     public static string_id NO_ACCESS_MAGSEAL = new string_id("collection", "magseal_no_access");
     public static string_id MAGSEAL_OCCUPIED = new string_id("collection", "magseal_occupied");
+    public loot_crate()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!utils.isContainer(self))
@@ -37,12 +38,13 @@ public class loot_crate extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             destroyObject(self);
             return SCRIPT_CONTINUE;
         }
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id pInv, obj_id player, obj_id item) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, PLAYER_ACCESS_ID))
@@ -67,6 +69,7 @@ public class loot_crate extends script.base_script
         setOwner(item, player);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id pInv, obj_id player, obj_id item) throws InterruptedException
     {
         obj_id[] containerContents = getContents(self);
@@ -82,12 +85,14 @@ public class loot_crate extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         LOG("sissynoid", "Magseal - Requesting Magseal Menu");
         mi.addRootMenu(menu_info_types.ITEM_OPEN, MAGSEAL_RADIAL_OPEN);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("sissynoid", "ENTER Magseal Menu Selection");
@@ -130,7 +135,7 @@ public class loot_crate extends script.base_script
                 }
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 obj_id currentUser = utils.getObjIdScriptVar(container, PLAYER_ACCESS_ID);
                 LOG("sissynoid", "Magseal - Magseal is Currently Being Used by (" + currentUser + ")");
@@ -145,6 +150,7 @@ public class loot_crate extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean consumeKey(obj_id player, obj_id keyCard, String planetName) throws InterruptedException
     {
         obj_id container = getSelf();
@@ -162,6 +168,7 @@ public class loot_crate extends script.base_script
         modifyCollectionSlotValue(player, "magseal_" + planetName, 1);
         return true;
     }
+
     public int resetContainer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id container = getSelf();
@@ -182,7 +189,8 @@ public class loot_crate extends script.base_script
         }
         if (remainingItems.length > 0)
         {
-            for (obj_id remainingItem : remainingItems) {
+            for (obj_id remainingItem : remainingItems)
+            {
                 CustomerServiceLog("CollectionLootChannel: ", "Magseal: " + "Magseal Timer Expired for " + player + " item: " + remainingItem + " was deleted - as designed.");
                 destroyObject(remainingItem);
             }
@@ -191,12 +199,14 @@ public class loot_crate extends script.base_script
         setOwner(container, obj_id.NULL_ID);
         return SCRIPT_CONTINUE;
     }
+
     public int initializeLootContainer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] contents = getContents(self);
         if (contents != null)
         {
-            for (obj_id content : contents) {
+            for (obj_id content : contents)
+            {
                 String template = getTemplateName(content);
                 LOG("sissynoid", "Magseal - CONTAINER HAD CONTENTS UPON LOADING! (" + contents.length + ") - (" + template + ") Items");
                 destroyObject(content);

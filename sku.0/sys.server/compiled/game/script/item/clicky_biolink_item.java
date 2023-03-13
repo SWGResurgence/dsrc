@@ -16,6 +16,7 @@ public class clicky_biolink_item extends script.base_script
     public static final string_id SID_BIO_LINK_MSG_TITLE = new string_id("sui", "bio_link_item_title");
     public static final string_id SID_SPECIES_CANNOT_EQUIP = new string_id("base_player", "species_cannot_equip");
     public static final string_id SID_NO_DROP_TRADE_BIOLINKED_ITEM = new string_id("base_player", "bio_link_no_drop_trade");
+
     public clicky_biolink_item()
     {
     }

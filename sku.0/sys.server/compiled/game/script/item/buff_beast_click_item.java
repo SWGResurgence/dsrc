@@ -20,6 +20,7 @@ public class buff_beast_click_item extends script.base_script
     public static final string_id CANT_APPLY_BUFF = new string_id("base_player", "beast_buff_cant_apply_buff");
     public static final string_id SID_NO_ACTIVE_BEAST = new string_id("base_player", "beast_buff_no_active_beast");
     public static final String OWNER_OID = "owner";
+
     public buff_beast_click_item()
     {
     }

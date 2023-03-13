@@ -11,6 +11,7 @@ public class target_buff extends script.base_script
     public static final string_id SID_BUFF_PLAYER_ONLY = new string_id("spam", "item_buff_player_only");
     public static final string_id USED_EFFECT = new string_id("spam", "item_buff_used_other_player");
     public static final string_id BUFF_OUT_OF_RANGE = new string_id("spam", "item_buff_out_of_range");
+
     public target_buff()
     {
     }

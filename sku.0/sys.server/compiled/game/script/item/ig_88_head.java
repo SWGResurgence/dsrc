@@ -10,6 +10,7 @@ public class ig_88_head extends script.base_script
     public static final string_id SID_MUST_BIO_LINK_FROM_INVENTORY = new string_id("base_player", "must_biolink_to_use_from_inventory");
     public static final string_id SID_NOT_YET = new string_id("base_player", "not_yet");
     public static final int REUSE_TIME = 1800;
+
     public ig_88_head()
     {
     }

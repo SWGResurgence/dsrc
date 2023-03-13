@@ -6,18 +6,22 @@ import script.string_id;
 
 public class magic_painting_nomove extends script.base_script
 {
+    public static final string_id MOVED_PAINTING = new string_id("spam", "magic_painting_moved");
+
     public magic_painting_nomove()
     {
     }
-    public static final string_id MOVED_PAINTING = new string_id("spam", "magic_painting_moved");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!isGod(transferer))

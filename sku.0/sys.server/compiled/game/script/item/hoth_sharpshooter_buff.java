@@ -10,6 +10,7 @@ public class hoth_sharpshooter_buff extends script.base_script
     public static final string_id SID_MUST_BIO_LINK_FROM_INVENTORY = new string_id("base_player", "must_biolink_to_use_from_inventory");
     public static final string_id SID_NOT_YET = new string_id("base_player", "not_yet");
     public static final float REUSE_TIME = 1800;
+
     public hoth_sharpshooter_buff()
     {
     }

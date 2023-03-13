@@ -7,12 +7,11 @@ import script.obj_id;
 
 public class barbed_quenker_dna extends script.base_script
 {
+    public static final String BARBED_QUENKER_DNA_LOOT_ITEM = "item_barbed_quenker_dna";
+    public static final int BARBED_QUENKER_DNA_LOOT_CHANCE = 5;
     public barbed_quenker_dna()
     {
     }
-    public static final String BARBED_QUENKER_DNA_LOOT_ITEM = "item_barbed_quenker_dna";
-    public static final int BARBED_QUENKER_DNA_LOOT_CHANCE = 5;
-
 
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {

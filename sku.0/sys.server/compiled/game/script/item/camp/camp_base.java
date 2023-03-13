@@ -7,9 +7,6 @@ import script.library.utils;
 
 public class camp_base extends script.base_script
 {
-    public camp_base()
-    {
-    }
     public static final string_id SID_DEPLOY = new string_id("camp", "deploy");
     public static final string_id SID_SYS_ALREADY_CAMPING = new string_id("camp", "sys_already_camping");
     public static final string_id SID_SYS_CANT_CAMP = new string_id("camp", "sys_cant_camp");
@@ -17,6 +14,10 @@ public class camp_base extends script.base_script
     public static final string_id SID_SYS_DEPLOY = new string_id("camp", "sys_deploy");
     public static final string_id SID_SYS_NOT_IN_COMBAT = new string_id("camp", "sys_not_in_combat");
     public static final string_id SID_SYS_NSF_SKILL = new string_id("camp", "sys_nsf_skill");
+    public camp_base()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -26,6 +27,7 @@ public class camp_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -34,6 +36,7 @@ public class camp_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void deployCamp(obj_id self, obj_id player) throws InterruptedException
     {
         if (isSpaceScene())
@@ -62,14 +65,14 @@ public class camp_base extends script.base_script
             if ((myCamp == null) || (myCamp == obj_id.NULL_ID))
             {
             }
-            else 
+            else
             {
                 if (exists(myCamp) && myCamp.isLoaded())
                 {
                     sendSystemMessage(player, SID_SYS_ALREADY_CAMPING);
                     return;
                 }
-                else 
+                else
                 {
                     removeObjVar(player, camping.VAR_CAMP_BASE);
                 }
@@ -88,7 +91,7 @@ public class camp_base extends script.base_script
         if (master == null)
         {
         }
-        else 
+        else
         {
             setObjVar(player, camping.VAR_PLAYER_CAMP, master);
             if (hasScript(player, "theme_park.new_player.new_player"))

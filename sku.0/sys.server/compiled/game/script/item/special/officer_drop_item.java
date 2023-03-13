@@ -1,13 +1,13 @@
 package script.item.special;
 
 import script.dictionary;
-import script.obj_id;
-
 import script.library.utils;
+import script.obj_id;
 
 public class officer_drop_item extends script.base_script
 {
     public static final float LIFESPAN = 18000.0f;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         float rightNow = getGameTime();
@@ -20,6 +20,7 @@ public class officer_drop_item extends script.base_script
         messageTo(self, "cleanUp", null, dieTime, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         float dieTime = getDieTime(self);
@@ -30,6 +31,7 @@ public class officer_drop_item extends script.base_script
         messageTo(self, "cleanUp", null, dieTime, false);
         return SCRIPT_CONTINUE;
     }
+
     public float getDieTime(obj_id tempObject) throws InterruptedException
     {
         float timeStamp = getFloatObjVar(tempObject, "item.temporary.time_stamp");
@@ -38,6 +40,7 @@ public class officer_drop_item extends script.base_script
         float dieTime = deathStamp - rightNow;
         return dieTime;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         if (self.isBeingDestroyed())
@@ -49,12 +52,13 @@ public class officer_drop_item extends script.base_script
         {
             destroyObject(self);
         }
-        else 
+        else
         {
             messageTo(self, "cleanUp", null, dieTime, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -62,7 +66,7 @@ public class officer_drop_item extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        int timeLeft = (int)getDieTime(self);
+        int timeLeft = (int) getDieTime(self);
         names[idx] = "storyteller_time_remaining";
         attribs[idx++] = utils.formatTimeVerbose(timeLeft);
         return SCRIPT_CONTINUE;

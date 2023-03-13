@@ -7,36 +7,38 @@ import java.util.Vector;
 
 public class crusader_armor_dye_kit extends script.base_script
 {
+    public static final String[] COLORS =
+            {
+                    "@tool/customizer:cadk_color_original",
+                    "@tool/customizer:cadk_color_white",
+                    "@tool/customizer:cadk_color_black",
+                    "@tool/customizer:cadk_color_red",
+                    "@tool/customizer:cadk_color_blue",
+                    "@tool/customizer:cadk_color_green"
+            };
+    public static final String[] ARMOR_TYPES =
+            {
+                    "belt",
+                    "bicep_l",
+                    "bicep_r",
+                    "boots",
+                    "bracer_l",
+                    "bracer_r",
+                    "chest_plate",
+                    "gloves",
+                    "helmet",
+                    "leggings"
+            };
     public crusader_armor_dye_kit()
     {
     }
-    public static final String[] COLORS = 
-    {
-        "@tool/customizer:cadk_color_original",
-        "@tool/customizer:cadk_color_white",
-        "@tool/customizer:cadk_color_black",
-        "@tool/customizer:cadk_color_red",
-        "@tool/customizer:cadk_color_blue",
-        "@tool/customizer:cadk_color_green"
-    };
-    public static final String[] ARMOR_TYPES = 
-    {
-        "belt",
-        "bicep_l",
-        "bicep_r",
-        "boots",
-        "bracer_l",
-        "bracer_r",
-        "chest_plate",
-        "gloves",
-        "helmet",
-        "leggings"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCount(self, 10);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -50,6 +52,7 @@ public class crusader_armor_dye_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -62,6 +65,7 @@ public class crusader_armor_dye_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void beginArmorColorization(obj_id self, obj_id player) throws InterruptedException
     {
         Vector wornItems = new Vector();
@@ -69,12 +73,15 @@ public class crusader_armor_dye_kit extends script.base_script
         obj_id[] equippedItems = metrics.getWornItems(player);
         if (equippedItems != null && equippedItems.length > 0)
         {
-            for (obj_id equippedItem : equippedItems) {
+            for (obj_id equippedItem : equippedItems)
+            {
                 String name = getStaticItemName(equippedItem);
-                if (name == null || name.equals("")) {
+                if (name == null || name.equals(""))
+                {
                     continue;
                 }
-                if (name.startsWith("armor_mandalorian")) {
+                if (name.startsWith("armor_mandalorian"))
+                {
                     wornItems.addElement(equippedItem);
                 }
             }
@@ -82,12 +89,15 @@ public class crusader_armor_dye_kit extends script.base_script
         obj_id[] invItems = utils.getContents(utils.getInventoryContainer(player), true);
         if (invItems != null && invItems.length > 0)
         {
-            for (obj_id invItem : invItems) {
+            for (obj_id invItem : invItems)
+            {
                 String name = getStaticItemName(invItem);
-                if (name == null || name.equals("")) {
+                if (name == null || name.equals(""))
+                {
                     continue;
                 }
-                if (name.startsWith("armor_mandalorian")) {
+                if (name.startsWith("armor_mandalorian"))
+                {
                     items.addElement(invItem);
                 }
             }
@@ -103,7 +113,8 @@ public class crusader_armor_dye_kit extends script.base_script
         Vector armorNames = new Vector();
         if (!wornItems.isEmpty())
         {
-            for (Object wornItem : wornItems) {
+            for (Object wornItem : wornItems)
+            {
                 obj_id piece = (obj_id) wornItem;
                 utils.setScriptVar(piece, "cadk_worn", 1);
                 armor.addElement(piece);
@@ -113,7 +124,8 @@ public class crusader_armor_dye_kit extends script.base_script
         }
         if (!items.isEmpty())
         {
-            for (Object item : items) {
+            for (Object item : items)
+            {
                 obj_id piece = (obj_id) item;
                 armor.addElement(piece);
                 String name = "@" + getName(piece);
@@ -125,11 +137,12 @@ public class crusader_armor_dye_kit extends script.base_script
         {
             cleanup(self, player);
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "cadk_armor", armor);
         }
     }
+
     public int handleArmorSelection(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -172,12 +185,13 @@ public class crusader_armor_dye_kit extends script.base_script
         {
             cleanup(self, player);
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "cadk_piece", armor[idx]);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleColorSelection(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -204,11 +218,7 @@ public class crusader_armor_dye_kit extends script.base_script
             sendSystemMessageProse(player, pp);
             return SCRIPT_CONTINUE;
         }
-        boolean worn = false;
-        if (utils.hasScriptVar(piece, "cadk_worn"))
-        {
-            worn = true;
-        }
+        boolean worn = utils.hasScriptVar(piece, "cadk_worn");
         String newArmorName = constructNewArmorString(piece, idx);
         if (newArmorName == null)
         {
@@ -229,13 +239,14 @@ public class crusader_armor_dye_kit extends script.base_script
             {
                 setCount(self, count);
             }
-            else 
+            else
             {
                 destroyObject(self);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void cleanup(obj_id self, obj_id player) throws InterruptedException
     {
         utils.removeScriptVar(self, "cadk_armor");
@@ -243,19 +254,23 @@ public class crusader_armor_dye_kit extends script.base_script
         obj_id[] equippedItems = metrics.getWornItems(player);
         if (equippedItems != null && equippedItems.length > 0)
         {
-            for (obj_id equippedItem : equippedItems) {
+            for (obj_id equippedItem : equippedItems)
+            {
                 utils.removeScriptVar(equippedItem, "cadk_worn");
             }
         }
     }
+
     public String constructNewArmorString(obj_id armor, int idx) throws InterruptedException
     {
         String name = getStaticItemName(armor);
         String faction = null;
         String type = null;
         String color = null;
-        for (String armorType : ARMOR_TYPES) {
-            if (name.contains(armorType)) {
+        for (String armorType : ARMOR_TYPES)
+        {
+            if (name.contains(armorType))
+            {
                 type = armorType;
             }
         }
@@ -270,23 +285,23 @@ public class crusader_armor_dye_kit extends script.base_script
         switch (idx)
         {
             case 0:
-            color = "";
-            break;
+                color = "";
+                break;
             case 1:
-            color = "white_";
-            break;
+                color = "white_";
+                break;
             case 2:
-            color = "black_";
-            break;
+                color = "black_";
+                break;
             case 3:
-            color = "red_";
-            break;
+                color = "red_";
+                break;
             case 4:
-            color = "blue_";
-            break;
+                color = "blue_";
+                break;
             case 5:
-            color = "green_";
-            break;
+                color = "green_";
+                break;
         }
         if (type == null || faction == null || color == null)
         {

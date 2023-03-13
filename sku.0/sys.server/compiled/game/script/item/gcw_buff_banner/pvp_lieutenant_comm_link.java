@@ -5,9 +5,6 @@ import script.*;
 
 public class pvp_lieutenant_comm_link extends script.base_script
 {
-    public pvp_lieutenant_comm_link()
-    {
-    }
     public static final int FACTION_NONE = -1;
     public static final int FACTION_REBEL = 0;
     public static final int FACTION_IMPERIAL = 1;
@@ -16,6 +13,10 @@ public class pvp_lieutenant_comm_link extends script.base_script
     public static final string_id SID_TOO_LOW_LEVEL = new string_id("gcw", "player_too_low");
     public static final string_id SID_INDOORS = new string_id("gcw", "player_is_indoors");
     public static final string_id SID_NOT_DECLARED = new string_id("gcw", "sf_restricted");
+    public pvp_lieutenant_comm_link()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -25,6 +26,7 @@ public class pvp_lieutenant_comm_link extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
