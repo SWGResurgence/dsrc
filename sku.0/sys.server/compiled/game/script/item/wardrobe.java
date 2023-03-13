@@ -1,4 +1,3 @@
-
 /*
 @Purpose: Wardrobe script for the Lifeday 2022 Reward
 
@@ -14,6 +13,7 @@ public class wardrobe extends script.base_script
     public wardrobe()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!getTemplateName(item).contains("object/tangible/wearables/"))
@@ -28,6 +28,7 @@ public class wardrobe extends script.base_script
         setName(item, getNewName(item));
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (!getTemplateName(item).contains("object/tangible/wearables/"))
@@ -49,6 +50,7 @@ public class wardrobe extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String getNewName(obj_id item) throws InterruptedException
     {
         if (static_item.isStaticItem(item))

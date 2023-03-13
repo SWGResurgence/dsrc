@@ -1,3 +1,4 @@
+`
 food	painting	other	fishing	fishing_pole	fishing_bait	holocron	container
 s	s	s	s	s	s	s	s
 object/tangible/food/foraged/edible_jar_berries.iff	object/tangible/painting/painting_valley_view.iff	object/tangible/dice/eqp_chance_cube.iff	datatables/loot/generic.iff:fishing_pole	object/tangible/fishing/fishing_pole.iff	object/tangible/fishing/bait/bait_chum.iff	object/tangible/jedi/jedi_holocron_light.iff	object/tangible/container/general/cargo_pocket.iff

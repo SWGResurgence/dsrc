@@ -7,18 +7,20 @@ import script.*;
 
 public class ig_88_head extends script.base_script
 {
-    public ig_88_head()
-    {
-    }
     public static final string_id SID_MUST_BIO_LINK_FROM_INVENTORY = new string_id("base_player", "must_biolink_to_use_from_inventory");
     public static final string_id SID_NOT_YET = new string_id("base_player", "not_yet");
     public static final int REUSE_TIME = 1800;
+    public ig_88_head()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("set_bonus", "ig_head_activate"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player) || !utils.isNestedWithin(self, player))
@@ -46,9 +48,9 @@ public class ig_88_head extends script.base_script
                 playClientEffectObj(player, "clienteffect/medic_reckless_stimulation.cef", player, "");
                 activateHead(self, player);
             }
-            else 
+            else
             {
-                int timeDiff = (int)buffTime - getGameTime();
+                int timeDiff = (int) buffTime - getGameTime();
                 prose_package pp = prose.getPackage(SID_NOT_YET, timeDiff);
                 sendSystemMessageProse(player, pp);
                 return SCRIPT_CONTINUE;
@@ -56,6 +58,7 @@ public class ig_88_head extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void activateHead(obj_id self, obj_id player) throws InterruptedException
     {
         int roll = rand(0, 100);
@@ -101,12 +104,13 @@ public class ig_88_head extends script.base_script
             prose.setStringId(pp, new string_id("set_bonus", "ig_head_message_" + messageNum));
             commPlayers(player, "object/mobile/ig_88.iff", "sound/sys_comm_other.snd", 5.0f, player, pp);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("set_bonus", "ig_head_message_nothing"));
         }
         return;
     }
+
     public void sendComToPlayer(obj_id player, int messageNum) throws InterruptedException
     {
         if (messageNum > -1)

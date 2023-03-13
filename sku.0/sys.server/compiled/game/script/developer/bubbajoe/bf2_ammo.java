@@ -96,6 +96,7 @@ public class bf2_ammo extends script.base_script
     {
         obj_id wod = createObject("object/weapon/ranged/grenade/grenade_cryoban.iff", getLocation(self));
         int cooldown = rand(15, 25);
+        float time = (float) cooldown;
         obj_id[] creatures = getCreaturesInRange(getLocation(self), 64.0f);
         if (creatures == null || creatures.length == 0)
         {
@@ -105,7 +106,8 @@ public class bf2_ammo extends script.base_script
         obj_id target = creatures[rand(0, creatures.length - 1)];
         if (target == self)
         {
-            showFlyText(self, new string_id("- NO POINTER ON TARGETING MATRIX -"), 2.5f, colors.RED);
+            showFlyText(self, new string_id("- ERROR -"), 2.5f, colors.RED);
+            return SCRIPT_CONTINUE;
         }
         combat.startCombat(self, target);
         int damage = getMaxHealth(target) + getHealth(target) - (rand(0, 1000));
@@ -132,7 +134,7 @@ public class bf2_ammo extends script.base_script
         doDamage(self, target, wod, cbtHitData);
         showFlyText(self, new string_id("- LAUNCHING GRENADE -"), 1.5f, colors.YELLOW);
         broadcast(getObjIdObjVar(self, "owner"), "The EG-6 Power Droid has thrown a grenade at " + getName(target) + "!");
-        messageTo(self, "goBoom", null, cooldown, true);
+        messageTo(self, "goBoom", null, time, true);
         return SCRIPT_CONTINUE;
     }
 }

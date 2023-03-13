@@ -1,7 +1,7 @@
 package script.df;/*
 @Filename: script.df.handler
 @Author: BubbaJoeX
-@Purpose:
+@Purpose: dungeon finder and status window.
 */
 
 import script.obj_id;

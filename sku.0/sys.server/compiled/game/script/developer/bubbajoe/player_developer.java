@@ -259,7 +259,7 @@ public class player_developer extends base_script
             {
                 if (item.startsWith(type)) //object/draft_schematic/TYPE/subtype/etc/etc
                 {
-                    String description = "This item was created by " + colors_hex.HEADER + colors_hex.PEACHPUFF + getRandomHumanName(self) + colors_hex.FOOTER + " on " + colors_hex.HEADER + colors_hex.SANDYBROWN + getCalendarTimeStringGMT_YYYYMMDDHHMMSS(getCalendarTime() - (rand(0, 86400))) + "\\#.";
+                    String description = "This item was created by " + colors_hex.HEADER + colors_hex.PEACHPUFF + getRandomHumanName(self) + colors_hex.FOOTER + " on " + colors_hex.HEADER + colors_hex.SANDYBROWN + getCalendarTimeStringGMT_YYYYMMDDHHMMSS(getCalendarTime() - (rand(0, 106560))) + "\\#.";
                     if (bagLimit > 500 && !utils.hasScriptVar(self, "bagLimit"))
                     {
                         broadcast(self, "Breached 500 items.");
@@ -650,13 +650,13 @@ public class player_developer extends base_script
             switch (toggle)
             {
                 case "on":
-                    sendConsoleCommand("/object setCoverVisibility " + self + " 0", self);
+                    sendConsoleCommand("/object setCoverVisibility " + self + " 1", self);
                     sendConsoleCommand("/object hide " + self + " 0", self);
                     sendConsoleCommand("/echo You are visible.", self);
                     break;
                 case "off":
-                    sendConsoleCommand("/object setCoverVisibility " + self + " 1", self);
-                    sendConsoleCommand("/object hide " + self + " 1", self);
+                    sendConsoleCommand("/object setCoverVisibility " + self + " 0", self);
+                    sendConsoleCommand("/object hide " + self + " 0", self);
                     sendConsoleCommand("/echo You are visible.", self);
                     break;
                 default:
@@ -903,7 +903,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin rewardarea <item> <count>");
+                sendSystemMessageTestingOnly(self, "Syntax: /developer rewardarea <item> <count>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -976,7 +976,7 @@ public class player_developer extends base_script
             int level = Integer.parseInt(tok.nextToken());
             if (level == 0)
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin setnumitems <loot level>");
+                sendSystemMessageTestingOnly(self, "Syntax: /admin setnumitems <loot count>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1035,7 +1035,6 @@ public class player_developer extends base_script
                 {
                     setCount(content, rand(1, 9999));
                 }
-
             }
         }
         if (cmd.equalsIgnoreCase("sendwarning"))
@@ -1196,6 +1195,22 @@ public class player_developer extends base_script
                 setName(treasureChest, "a corpse of " + NAMEs[rand(0, NAMEs.length - 1)]);
                 loot.makeLootInContainer(treasureChest, table, amt, 300);
                 sendSystemMessageTestingOnly(self, "A loot chest was made with " + amt + " items from the loot table: " + table);
+                obj_id[] contents = getContents(treasureChest);
+                {
+                    for (obj_id content : contents)
+                    {
+                        if (hasScript(content, "item.special.nomove"))
+                        {
+                            detachScript(content, "item.special.nomove");
+                            broadcast(self, "Removing nomove script from " + content);
+                        }
+                        if (hasObjVar(content, "noTrade"))
+                        {
+                            removeObjVar(self, "noTrade");
+                            broadcast(self, "Removing No-Trade from " + content);
+                        }
+                    }
+                }
             }
             return SCRIPT_CONTINUE;
         }
@@ -1279,6 +1294,26 @@ public class player_developer extends base_script
         {
             setInvulnerable(iTarget, false);
         }
+        if (cmd.equalsIgnoreCase("makeEnt"))
+        {
+            String[] TEMPLATES = {
+                    "object/mobile/dressed_commoner_naboo_human_female_01.iff",
+                    "object/mobile/dressed_commoner_naboo_human_female_02.iff",
+                    "object/mobile/dressed_commoner_naboo_human_female_03.iff",
+                    "object/mobile/dressed_commoner_naboo_human_female_04.iff",
+                    "object/mobile/dressed_commoner_naboo_human_female_05.iff",
+                    "object/mobile/dressed_commoner_naboo_human_male_01.iff",
+                    "object/mobile/dressed_commoner_naboo_human_male_02.iff",
+                    "object/mobile/dressed_commoner_naboo_human_male_03.iff",
+                    "object/mobile/dressed_commoner_naboo_human_male_04.iff",
+                    "object/mobile/dressed_commoner_naboo_human_male_05.iff"
+            };
+            obj_id entertainer = createObject(TEMPLATES[rand(0, TEMPLATES.length - 1)], getLocation(self));
+            setName(entertainer, "a Master Entertainer");
+            setInvulnerable(entertainer, true);
+            ai_lib.setMood(entertainer, "themepark_oola");
+            attachScript(entertainer, "bot.entertainer");
+        }
         if (cmd.equalsIgnoreCase("setinvuln"))
         {
             setInvulnerable(iTarget, true);
@@ -1286,12 +1321,9 @@ public class player_developer extends base_script
         if (cmd.equalsIgnoreCase("commPlanet"))
         {
             String message = tok.nextToken();
-            if (tok.hasMoreTokens())
+            while (tok.hasMoreTokens())
             {
-                while (tok.hasMoreTokens())
-                {
-                    message += " " + tok.nextToken();
-                }
+                message += " " + tok.nextToken();
             }
             obj_id[] recipients = getPlayerCreaturesInRange(getLocation(self), 16000.0f);
             for (obj_id recipient : recipients)

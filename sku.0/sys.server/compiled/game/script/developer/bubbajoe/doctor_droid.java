@@ -13,7 +13,7 @@ public class doctor_droid extends script.base_script
     {
         createTriggerVolume("healDroid", 3.0f, true);
         setName(self, colors_hex.HEADER + colors_hex.ORCHID + "FX-7 Medical Droid");
-        setDescriptionStringId(self, new string_id("This FX-7 medical droid is a prototype model. It is designed to stay stationary and heal all those who enter."));
+        setDescriptionStringId(self, new string_id("This FX-7 medical droid is a prototype model. It is designed to stay stationary and heal all those who are nearby."));
         return SCRIPT_CONTINUE;
     }
 
