@@ -7,10 +7,12 @@ import script.library.utils;
 
 public class bioprobe extends script.base_script
 {
+    public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###");
+
     public bioprobe()
     {
     }
-    public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###");
+
     public int msgDecaySample(obj_id self, dictionary params) throws InterruptedException
     {
         stealth.cleanComponentFromContainer(self, getContainedBy(self));
@@ -27,11 +29,13 @@ public class bioprobe extends script.base_script
         sendSystemMessageProse(player, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         stealth.cleanComponentFromContainer(self, getContainedBy(self));
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int free = getFirstFreeIndex(names);
@@ -51,19 +55,19 @@ public class bioprobe extends script.base_script
             {
                 attribs[free++] = "@spam:already_expired";
             }
-            else 
+            else
             {
                 if (timespan < 60)
                 {
                     attribs[free++] = floatFormat.format(timespan) + " secs left";
                 }
-                else 
+                else
                 {
                     attribs[free++] = floatFormat.format(timespan / 60) + " mins left";
                 }
             }
         }
-        else 
+        else
         {
             attribs[free++] = "" + floatFormat.format((thisProbeStorage / 60)) + " minutes";
         }
@@ -74,18 +78,19 @@ public class bioprobe extends script.base_script
             {
                 attribs[free++] = "@spam:already_expired";
             }
-            else 
+            else
             {
                 attribs[free++] = "Not Yet Sampled";
             }
         }
-        else 
+        else
         {
             attribs[free++] = "" + getStringObjVar(self, stealth.BIO_PROBE_TARGET_NAME);
         }
         utils.addClassRequirementAttributes(player, self, names, attribs, free, "");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -107,6 +112,7 @@ public class bioprobe extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

@@ -7,15 +7,18 @@ import script.string_id;
 
 public class fs_medic_puzzle_cleanup extends script.base_script
 {
+    public static final boolean DEBUGGING = false;
+
     public fs_medic_puzzle_cleanup()
     {
     }
-    public static final boolean DEBUGGING = false;
+
     public int msgQuestAbortPhaseChange(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "systems.fs_quest.fs_medic_puzzle_cleanup");
         return SCRIPT_CONTINUE;
     }
+
     public void cleanUpStuff(obj_id player) throws InterruptedException
     {
         removeObjVar(player, "fs.numberHealed");
@@ -41,6 +44,7 @@ public class fs_medic_puzzle_cleanup extends script.base_script
         }
         revokeSchematic(player, "object/draft_schematic/item/quest_item/fs_medic_puzzle_heal_pack.iff");
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         cleanUpStuff(self);

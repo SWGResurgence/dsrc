@@ -8,21 +8,23 @@ import script.string_id;
 
 public class antidecay_examine extends script.base_script
 {
-    public antidecay_examine()
-    {
-    }
     public static final String STF_VETERAN = "veteran_new";
     public static final string_id SID_INVENTORY_FULL = new string_id(STF_VETERAN, "inventory_full");
     public static final string_id SID_FAILED_KIT_CREATE = new string_id(STF_VETERAN, "failed_kit_create");
     public static final string_id SID_KIT_CREATED = new string_id(STF_VETERAN, "kit_created");
     public static final string_id SID_DETACH_KIT = new string_id(STF_VETERAN, "detach_kit");
     public static final String ANTIDECAYKIT = "object/tangible/veteran_reward/antidecay.iff";
+    public antidecay_examine()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setHitpoints(self, getMaxHitpoints(self));
         setInvulnerableHitpoints(self, getMaxHitpoints(self));
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id playerId, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = getFirstFreeIndex(names);
@@ -37,6 +39,7 @@ public class antidecay_examine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (canManipulate(player, self, false, true, 0, true))
@@ -45,6 +48,7 @@ public class antidecay_examine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU9)
@@ -60,6 +64,7 @@ public class antidecay_examine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!utils.isAntiDecay(self))
@@ -72,6 +77,7 @@ public class antidecay_examine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean detachKit(obj_id item) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(item);

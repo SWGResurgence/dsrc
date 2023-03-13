@@ -9,11 +9,13 @@ public class spawn_tangible extends script.base_script
     public spawn_tangible()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         requestPreloadCompleteTrigger(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnPreloadComplete(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "spawn.object"))
@@ -28,7 +30,7 @@ public class spawn_tangible extends script.base_script
             {
                 removeObjVar(self, "spawn.oid");
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }
@@ -57,6 +59,7 @@ public class spawn_tangible extends script.base_script
         LOG("bomb_spawner", "spawnedObject: " + spawnedObject);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTangibleRespawn(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "spawn.object"))
@@ -73,7 +76,7 @@ public class spawn_tangible extends script.base_script
                 LOG("bomb_spawner", "removing Oid: " + currentObject);
                 removeObjVar(self, "spawn.oid");
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }
@@ -101,6 +104,7 @@ public class spawn_tangible extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTangibleDestroy(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "spawn.oid"))
@@ -116,6 +120,7 @@ public class spawn_tangible extends script.base_script
         removeObjVar(self, "spawn.oid");
         return SCRIPT_CONTINUE;
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "spawn.oid"))

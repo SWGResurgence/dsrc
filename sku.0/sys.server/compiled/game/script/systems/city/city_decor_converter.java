@@ -57,7 +57,7 @@ public class city_decor_converter extends script.base_script
                 broadcast(transferer, "This feature is not yet implemented.");
                 return SCRIPT_OVERRIDE;
             }
-            if (getTemplateName(item).contains("furniture/city/statue") || getTemplateName(item).contains("furniture/city/streetlamp")|| getTemplateName(item).contains("furniture/city/fountain"))
+            if (getTemplateName(item).contains("furniture/city/statue") || getTemplateName(item).contains("furniture/city/streetlamp") || getTemplateName(item).contains("furniture/city/fountain"))
             {
                 broadcast(transferer, "These items do not require conversion.");
                 return SCRIPT_OVERRIDE;
@@ -77,6 +77,7 @@ public class city_decor_converter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     //@Converts a story teller object to a city actor object
     public void createActorProp(obj_id self, obj_id item, obj_id transferer) throws InterruptedException
     {
@@ -101,6 +102,7 @@ public class city_decor_converter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
 

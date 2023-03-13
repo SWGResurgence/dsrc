@@ -6,20 +6,22 @@ import script.string_id;
 
 public class saber_inventory extends script.base_script
 {
-    public saber_inventory()
-    {
-    }
     public static final string_id SID_SABER_NOT_CRYSTAL = new string_id("jedi_spam", "saber_not_crystal");
     public static final string_id SID_SABER_NOT_WHILE_EQUIP = new string_id("jedi_spam", "saber_not_while_equpped");
     public static final string_id SID_SABER_CRYSTAL_NOT_TUNED = new string_id("jedi_spam", "saber_crystal_not_tuned");
     public static final string_id SID_SABER_CRYSTAL_NOT_OWNER = new string_id("jedi_spam", "saber_crystal_not_owner");
     public static final string_id SID_SABER_ALREADY_HAS_COLOR = new string_id("jedi_spam", "saber_already_has_color");
+    public saber_inventory()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id saber = getContainedBy(self);
         jedi.resetSaberStats(saber);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id saber = getContainedBy(self);
@@ -51,6 +53,7 @@ public class saber_inventory extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id saber = getContainedBy(self);
@@ -60,6 +63,7 @@ public class saber_inventory extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id saber = getContainedBy(self);
@@ -71,6 +75,7 @@ public class saber_inventory extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id saber = getContainedBy(self);

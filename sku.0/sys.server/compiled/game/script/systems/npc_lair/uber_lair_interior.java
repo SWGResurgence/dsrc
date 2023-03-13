@@ -12,15 +12,18 @@ public class uber_lair_interior extends script.base_script
     public uber_lair_interior()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnStuff", null, 20, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int spawnStuff(obj_id self, dictionary params) throws InterruptedException
     {
         final int MAX_SPAWNS_PER_FRAME = 3;
@@ -66,7 +69,7 @@ public class uber_lair_interior extends script.base_script
             {
                 ai_lib.setDefaultCalmBehavior(objMob, ai_lib.BEHAVIOR_SENTINEL);
             }
-            else 
+            else
             {
             }
         }
@@ -87,15 +90,20 @@ public class uber_lair_interior extends script.base_script
         attachScript(objObjective, "npc_lair.uber_lair_objective");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         boolean boolDestroy = true;
         obj_id[] objStuff = player_structure.getObjectsInBuilding(self);
-        for (obj_id obj_id : objStuff) {
-            if (isPlayer(obj_id)) {
+        for (obj_id obj_id : objStuff)
+        {
+            if (isPlayer(obj_id))
+            {
                 boolDestroy = false;
                 expelFromBuilding(obj_id);
-            } else if ((getGameObjectType(obj_id) == GOT_corpse)) {
+            }
+            else if ((getGameObjectType(obj_id) == GOT_corpse))
+            {
                 boolDestroy = false;
                 expelFromBuilding(obj_id);
             }
@@ -104,12 +112,13 @@ public class uber_lair_interior extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             messageTo(self, "reDestroySelf", null, 1, false);
             return SCRIPT_OVERRIDE;
         }
     }
+
     public int reDestroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

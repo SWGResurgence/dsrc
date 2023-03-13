@@ -9,9 +9,6 @@ import java.util.Vector;
 
 public class combat_mine extends script.base_script
 {
-    public combat_mine()
-    {
-    }
     public static final String detonateVolName = "landMineDetonationRadius";
     public static final String mineDataTable = "datatables/combat/npc_landmines.iff";
     public static final String flagPlayer = "targetFlag.playerAndPet";
@@ -25,23 +22,30 @@ public class combat_mine extends script.base_script
     public static final string_id deactivated = new string_id(STF, "deactivated");
     public static final string_id reversed = new string_id(STF, "reversed");
     public static final boolean loggingOn = false;
+    public combat_mine()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         verifyMine(self);
         setDetonateVolumeByType(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         verifyMine(self);
         setDetonateVolumeByType(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         messageTo(getObjIdObjVar(self, "parentSpawner"), "handleMineRespawn", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDeactivated() || isFlagSwitched())
@@ -66,6 +70,7 @@ public class combat_mine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.LANDMINE_DISARM)
@@ -78,6 +83,7 @@ public class combat_mine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doCommandoDeactivateAction(obj_id player) throws InterruptedException
     {
         doLogging("doCommandoDeactivationAction", "Deactivating mine, sending signal to destroy self in 10 minutes");
@@ -89,6 +95,7 @@ public class combat_mine extends script.base_script
         params.put("type", "commando");
         messageTo(mine, "showStatusFlyText", params, 0, false);
     }
+
     public void doSmugglerFlagSwitchAction(obj_id player) throws InterruptedException
     {
         doLogging("doSmugglerFlagSwitchAction", "Flipping mine flag, sending signal to destroy self in 10 minutes");
@@ -100,6 +107,7 @@ public class combat_mine extends script.base_script
         params.put("type", "smuggler");
         messageTo(mine, "showStatusFlyText", params, 0, false);
     }
+
     public int showStatusFlyText(obj_id self, dictionary params) throws InterruptedException
     {
         String type = params.getString("type");
@@ -118,21 +126,25 @@ public class combat_mine extends script.base_script
         doLogging("showStatusFlyText", "Fly text was called but neither commando or smuggler was the type");
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(getSelf());
         return SCRIPT_CONTINUE;
     }
+
     public boolean isDeactivated() throws InterruptedException
     {
         doLogging("isDeactivated", "Checking is deactivated " + hasObjVar(getSelf(), "deactivated"));
         return hasObjVar(getSelf(), "deactivated");
     }
+
     public boolean isFlagSwitched() throws InterruptedException
     {
         doLogging("isFlagSwitched", "Current flag is: " + getStringObjVar(getSelf(), "targetFlag"));
         return ((getStringObjVar(getSelf(), "targetFlag")).equals(flagNpc));
     }
+
     public void verifyMine(obj_id landMine) throws InterruptedException
     {
         if (!hasObjVar(landMine, "mineType"))
@@ -150,6 +162,7 @@ public class combat_mine extends script.base_script
             return;
         }
     }
+
     public void setDetonateVolumeByType(obj_id landMine) throws InterruptedException
     {
         String mineType = getStringObjVar(landMine, "mineType");
@@ -161,9 +174,11 @@ public class combat_mine extends script.base_script
             createTriggerVolume(detonateVolName, detonateRange, true);
         }
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
-        if(!isIdValid(self) || !exists(self)){
+        if (!isIdValid(self) || !exists(self))
+        {
             return SCRIPT_CONTINUE;
         }
         if (isDeactivated())
@@ -189,6 +204,7 @@ public class combat_mine extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id[] getTargetsInBlastRadius() throws InterruptedException
     {
         obj_id landMine = getSelf();
@@ -202,9 +218,12 @@ public class combat_mine extends script.base_script
         obj_id[] objects = getObjectsInRange(loc, blastRadius);
         Vector targetsInRadius = new Vector();
         targetsInRadius.setSize(0);
-        for (obj_id object : objects) {
-            if (isValidTargetTypeByMineFlag(object)) {
-                if (!isIncapacitated(object) && !isDead(object)) {
+        for (obj_id object : objects)
+        {
+            if (isValidTargetTypeByMineFlag(object))
+            {
+                if (!isIncapacitated(object) && !isDead(object))
+                {
                     targetsInRadius = utils.addElement(targetsInRadius, object);
                     doLogging("getTargetsInBlastRadius", "Target(" + getName(object) + "/" + object + ") added to targetsInRadius array");
                 }
@@ -215,7 +234,7 @@ public class combat_mine extends script.base_script
             doLogging("getTargetsInBlastRadius", "targetsInRadius is less than 1, returning null");
             return null;
         }
-        else 
+        else
         {
             obj_id[] _targetsInRadius = new obj_id[0];
             if (targetsInRadius != null)
@@ -226,6 +245,7 @@ public class combat_mine extends script.base_script
             return _targetsInRadius;
         }
     }
+
     public void applyMineEffects(obj_id[] targets) throws InterruptedException
     {
         obj_id landMine = getSelf();
@@ -244,14 +264,17 @@ public class combat_mine extends script.base_script
             return;
         }
         playClientEffectLoc(targets[0], mineDetonationEffect, mineLoc, 0.4f);
-        for (obj_id target : targets) {
+        for (obj_id target : targets)
+        {
             int damageToApply = rand(minDamage, maxDamage);
-            if (damage(target, damageType, HIT_LOCATION_BODY, damageToApply)) {
+            if (damage(target, damageType, HIT_LOCATION_BODY, damageToApply))
+            {
                 doLogging("applyMineEffects", "Applied " + damageToApply + " points of damage to " + getName(target));
             }
         }
         destroyObject(landMine);
     }
+
     public int getDamageTypeFromString(String damageType) throws InterruptedException
     {
         if (damageType.equals("blast"))
@@ -288,6 +311,7 @@ public class combat_mine extends script.base_script
         }
         return -1;
     }
+
     public boolean isValidTargetTypeByMineFlag(obj_id subject) throws InterruptedException
     {
         String targetType = flagPlayer;
@@ -315,6 +339,7 @@ public class combat_mine extends script.base_script
         doLogging("isValidTargetTypeByMineFlag", "Subject bypassed all flag checks: " + getName(subject));
         return false;
     }
+
     public boolean willTriggerMineBlast(obj_id breacher) throws InterruptedException
     {
         if (getPosture(breacher) == POSTURE_PRONE)
@@ -323,7 +348,7 @@ public class combat_mine extends script.base_script
             {
                 return (1 == rand(1, 20));
             }
-            else 
+            else
             {
                 return false;
             }
@@ -331,6 +356,7 @@ public class combat_mine extends script.base_script
         doLogging("willTriggerMineBlast", "willTrigger returned the default true for breacher " + getName(breacher));
         return true;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (loggingOn)
@@ -338,14 +364,17 @@ public class combat_mine extends script.base_script
             LOG("debug/combat_mine/" + section, message);
         }
     }
+
     public boolean isCommandoOrSmuggler(obj_id subject) throws InterruptedException
     {
         return (isCommando(subject) || isSmuggler(subject));
     }
+
     public boolean isCommando(obj_id subject) throws InterruptedException
     {
         return (hasSkill(subject, "class_commando_phase1_novice") || hasSkill(subject, "class_munitions_phase3_master"));
     }
+
     public boolean isSmuggler(obj_id subject) throws InterruptedException
     {
         return false;

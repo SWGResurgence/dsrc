@@ -12,6 +12,7 @@ public class mission_escort_target extends script.systems.missions.base.mission_
     public mission_escort_target()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "systems.missions.base.mission_cleanup_tracker"))
@@ -20,6 +21,7 @@ public class mission_escort_target extends script.systems.missions.base.mission_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "mission_escort_target_script succesfully attached");
@@ -27,6 +29,7 @@ public class mission_escort_target extends script.systems.missions.base.mission_
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         obj_id objEscorter = getObjIdObjVar(self, "objEscorter");
@@ -38,11 +41,11 @@ public class mission_escort_target extends script.systems.missions.base.mission_
         if (!hasObjVar(self, "intPickedUp"))
         {
             string_id greeting = new string_id("mission/mission_generic", "hello");
-            string_id response[] = new string_id[1];
+            string_id[] response = new string_id[1];
             response[0] = new string_id("mission/mission_generic", "escort_pickup_request");
             npcStartConversation(speaker, self, "escort_convo", greeting, response);
         }
-        else 
+        else
         {
             string_id strSpam = new string_id("mission/mission_generic", "escort_follow_again");
             chat.chat(self, speaker, strSpam);
@@ -50,6 +53,7 @@ public class mission_escort_target extends script.systems.missions.base.mission_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnNpcConversationResponse(obj_id self, String convo, obj_id player, string_id response) throws InterruptedException
     {
         if ((response.getAsciiId()).equals("escort_pickup_request"))
@@ -69,18 +73,20 @@ public class mission_escort_target extends script.systems.missions.base.mission_
                 dictionary dctParams = new dictionary();
                 messageTo(objMission, "escort_Pickup", dctParams, 0, true);
             }
-            else 
+            else
             {
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         obj_id objMission = getObjIdObjVar(self, "objMission");
         sendEscortFail(objMission);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String strName) throws InterruptedException
     {
         if (strName.equals("strEscortDestination"))
@@ -93,6 +99,7 @@ public class mission_escort_target extends script.systems.missions.base.mission_
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

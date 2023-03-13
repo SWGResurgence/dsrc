@@ -11,21 +11,24 @@ import script.string_id;
 
 public class pet_tradein extends script.base_script
 {
-    public pet_tradein()
-    {
-    }
     public static final String CREATURE_TRADEIN = "creature_tradein";
     public static final String TRADE_DATA = "datatables/dispenser/creature_trade_in.iff";
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final String CREATURE_NAME_FILE = "mob/creature_names";
+    public pet_tradein()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id pet, obj_id player) throws InterruptedException
     {
         String oldPet = getStringObjVar(pet, "pet.creatureName");
@@ -35,7 +38,7 @@ public class pet_tradein extends script.base_script
             sendSystemMessage(player, sysmessage);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (oldPet == null)
             {
@@ -43,7 +46,7 @@ public class pet_tradein extends script.base_script
                 sendSystemMessage(player, sysmessage);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (hasSkill(player, "outdoors_creaturehandler_novice") == true)
                 {
@@ -51,19 +54,15 @@ public class pet_tradein extends script.base_script
                     sendSystemMessage(player, sysmessage);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     if (dataTableGetString(TRADE_DATA, oldPet, "trade") != null)
                     {
-                        boolean isMount = false;
-                        if (getIntObjVar(pet, "ai.pet.trainedMount") == 1)
-                        {
-                            isMount = true;
-                        }
+                        boolean isMount = getIntObjVar(pet, "ai.pet.trainedMount") == 1;
                         tradePet(pet, player, isMount);
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         string_id message = new string_id(CREATURE_TRADEIN, "invalid");
                         chat.chat(self, message);
@@ -73,6 +72,7 @@ public class pet_tradein extends script.base_script
             }
         }
     }
+
     public void tradePet(obj_id trade, obj_id player, boolean isMount) throws InterruptedException
     {
         String oldPet = getStringObjVar(trade, "pet.creatureName");
@@ -96,7 +96,7 @@ public class pet_tradein extends script.base_script
         {
             setName(pet, newRealName);
         }
-        else 
+        else
         {
             setName(pet, oldName);
         }

@@ -12,6 +12,7 @@ public class station_cell extends script.base_script
     public station_cell()
     {
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (getGameObjectType(item) == GOT_misc_crafting_station)
@@ -25,7 +26,7 @@ public class station_cell extends script.base_script
                     utils.setScriptVar(self, craftinglib.SCRIPTVAR_CELL_STATIONS, stations);
                 }
             }
-            else 
+            else
             {
                 Vector stations = new Vector();
                 stations.setSize(0);
@@ -47,11 +48,14 @@ public class station_cell extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            for (obj_id cellContent : cellContents) {
-                if (!isPlayer(cellContent)) {
+            for (obj_id cellContent : cellContents)
+            {
+                if (!isPlayer(cellContent))
+                {
                     continue;
                 }
-                for (String buffName : buffNames) {
+                for (String buffName : buffNames)
+                {
                     buff.applyBuff(cellContent, item, buffName);
                 }
             }
@@ -69,24 +73,30 @@ public class station_cell extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (obj_id station : stations) {
-            if (!isIdValid(station) || !exists(station)) {
+        for (obj_id station : stations)
+        {
+            if (!isIdValid(station) || !exists(station))
+            {
                 continue;
             }
             int craftingType = getIntObjVar(station, craftinglib.OBJVAR_CRAFTING_TYPE);
-            if (craftingType < 0) {
+            if (craftingType < 0)
+            {
                 return SCRIPT_CONTINUE;
             }
             String[] buffNames = craftinglib.getAllStationBuffNames(craftingType);
-            if (buffNames == null || buffNames.length <= 0) {
+            if (buffNames == null || buffNames.length <= 0)
+            {
                 return SCRIPT_CONTINUE;
             }
-            for (String buffName : buffNames) {
+            for (String buffName : buffNames)
+            {
                 buff.applyBuff(item, station, buffName);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (getGameObjectType(item) == GOT_misc_crafting_station)
@@ -108,9 +118,11 @@ public class station_cell extends script.base_script
                 obj_id secondStationId = obj_id.NULL_ID;
                 if (stations != null && stations.size() > 0)
                 {
-                    for (Object station : stations) {
+                    for (Object station : stations)
+                    {
                         int craftingTypeSearch = getIntObjVar(((obj_id) station), craftinglib.OBJVAR_CRAFTING_TYPE);
-                        if (craftingTypeSearch == craftingTypeItem && ((obj_id) station) != item) {
+                        if (craftingTypeSearch == craftingTypeItem && station != item)
+                        {
                             secondStation = true;
                             secondStationId = ((obj_id) station);
                             break;
@@ -122,15 +134,20 @@ public class station_cell extends script.base_script
                 obj_id[] cellContents = getContents(self);
                 if (cellContents != null && cellContents.length > 0)
                 {
-                    for (obj_id cellContent : cellContents) {
-                        if (!isPlayer(cellContent)) {
+                    for (obj_id cellContent : cellContents)
+                    {
+                        if (!isPlayer(cellContent))
+                        {
                             continue;
                         }
-                        for (String buffName1 : buffNames) {
+                        for (String buffName1 : buffNames)
+                        {
                             buff.removeBuff(cellContent, buffName1);
                         }
-                        if (secondStation && isIdValid(secondStationId) && exists(secondStationId)) {
-                            for (String buffName : buffNames) {
+                        if (secondStation && isIdValid(secondStationId) && exists(secondStationId))
+                        {
+                            for (String buffName : buffNames)
+                            {
                                 buff.applyBuff(cellContent, secondStationId, buffName);
                             }
                         }
@@ -147,7 +164,8 @@ public class station_cell extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (int stationBuff : stationBuffs) {
+        for (int stationBuff : stationBuffs)
+        {
             buff.removeBuff(item, stationBuff);
         }
         return SCRIPT_CONTINUE;

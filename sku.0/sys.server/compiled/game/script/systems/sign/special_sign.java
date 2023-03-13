@@ -6,9 +6,6 @@ import script.library.utils;
 
 public class special_sign extends script.base_script
 {
-    public special_sign()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "special_sign";
     public static final string_id SID_NO_USE_WHILE_DEAD = new string_id("player_structure", "while_dead");
@@ -17,6 +14,10 @@ public class special_sign extends script.base_script
     public static final string_id SID_SKILLMOD_INVOCATION_CANCELED = new string_id("base_player", "skillmod_canceled");
     public static final string_id SID_OBJECT_CONSUMED = new string_id("player_structure", "token_object_consumed");
     public static final string_id SID_CONSUME_OBJECT = new string_id("player_structure", "consume_token");
+    public special_sign()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         blog("tcg_vendor_contract.OnObjectMenuRequest: Init.");
@@ -33,12 +34,13 @@ public class special_sign extends script.base_script
         {
             mid.setServerNotify(true);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_CONSUME_OBJECT);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         blog("tcg_vendor_contract.OnObjectMenuSelect: Init.");
@@ -63,6 +65,7 @@ public class special_sign extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean grantSignSkillMod(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isValidId(player) || !exists(player))
@@ -97,7 +100,7 @@ public class special_sign extends script.base_script
             java.util.Enumeration keys = dict.keys();
             while (keys.hasMoreElements())
             {
-                skillModName = (String)keys.nextElement();
+                skillModName = (String) keys.nextElement();
                 skillModValue = dict.getInt(skillModName);
             }
         }
@@ -133,6 +136,7 @@ public class special_sign extends script.base_script
         }
         return true;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))

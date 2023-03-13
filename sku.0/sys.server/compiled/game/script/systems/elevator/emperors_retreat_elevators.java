@@ -8,6 +8,7 @@ public class emperors_retreat_elevators extends script.base_script
     public emperors_retreat_elevators()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -24,7 +25,7 @@ public class emperors_retreat_elevators extends script.base_script
             setObjVar(self, "terminal1", elevatorTerminalA);
             setObjVar(self, "terminal2", elevatorTerminalB);
         }
-        else 
+        else
         {
             LOG("elevator", "emperors_retreat_elevators could not get 'elevator' cell");
         }
@@ -43,7 +44,7 @@ public class emperors_retreat_elevators extends script.base_script
             setObjVar(self, "terminal3", elevatorTerminalC);
             setObjVar(self, "terminal4", elevatorTerminalD);
         }
-        else 
+        else
         {
             LOG("elevator", "emperors_retreat_elevators could not get 'backelevator' cell");
         }

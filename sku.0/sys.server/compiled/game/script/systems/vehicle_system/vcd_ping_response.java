@@ -6,9 +6,6 @@ import script.obj_id;
 
 public class vcd_ping_response extends script.base_script
 {
-    public vcd_ping_response()
-    {
-    }
     public static final String VCDPING_MESSAGE_VCD_ID_NAME = "vcdId";
     public static final String VCDPING_MESSAGE_VEHICLE_ID_NAME = "vehicleId";
     public static final String VCDPING_MESSAGE_MESSAGE_ID_NAME = "messageId";
@@ -17,6 +14,10 @@ public class vcd_ping_response extends script.base_script
     public static final String VCDPING_VEHICLE_MESSAGEHANDLER_NEGATIVE_ACK_NAME = "handleNegativeAcknowledgementFromVcd";
     public static final String VCDPING_VEHICLE_MESSAGEHANDLER_PACK_REQUEST_NAME = "handlePackRequest";
     public static final boolean debug = false;
+    public vcd_ping_response()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (debug)
@@ -29,6 +30,7 @@ public class vcd_ping_response extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleVehiclePing(obj_id self, dictionary params) throws InterruptedException
     {
         final obj_id pingVehicleId = params.getObjId(VCDPING_MESSAGE_VEHICLE_ID_NAME);
@@ -42,7 +44,7 @@ public class vcd_ping_response extends script.base_script
                 sendPositiveAcknowledgement(self, pingVehicleId, pingMessageNumber);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (isIdValid(riderId) && isRiderOkayForVcd(self, riderId))
                 {
@@ -51,13 +53,13 @@ public class vcd_ping_response extends script.base_script
                     callable.setCDCallable(self, pingVehicleId);
                     sendPositiveAcknowledgement(self, pingVehicleId, pingMessageNumber);
                 }
-                else 
+                else
                 {
                     sendNegativeAcknowledgement(self, pingVehicleId, pingMessageNumber, "VCD does not expect vehicle=[" + pingVehicleId + "] to be the called vehicle.  It thinks vehicle=[" + currentVehicleId + "] is called.");
                 }
             }
         }
-        else 
+        else
         {
             if (isIdValid(riderId) && isRiderOkayForVcd(self, riderId))
             {
@@ -65,13 +67,14 @@ public class vcd_ping_response extends script.base_script
                 callable.setCDCallable(self, pingVehicleId);
                 sendPositiveAcknowledgement(self, pingVehicleId, pingMessageNumber);
             }
-            else 
+            else
             {
                 sendNegativeAcknowledgement(self, pingVehicleId, pingMessageNumber, "VCD does not expecting its vehicle to exist");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public dictionary createResponseDictionary(obj_id vcdId, int messageNumber) throws InterruptedException
     {
         dictionary messageData = new dictionary();
@@ -79,6 +82,7 @@ public class vcd_ping_response extends script.base_script
         messageData.put(VCDPING_MESSAGE_MESSAGE_ID_NAME, messageNumber);
         return messageData;
     }
+
     public void sendPositiveAcknowledgement(obj_id vcdId, obj_id vehicleId, int messageNumber) throws InterruptedException
     {
         dictionary messageData = createResponseDictionary(vcdId, messageNumber);
@@ -88,12 +92,14 @@ public class vcd_ping_response extends script.base_script
         }
         messageTo(vehicleId, VCDPING_VEHICLE_MESSAGEHANDLER_POSITIVE_ACK_NAME, messageData, 1, false);
     }
+
     public void sendNegativeAcknowledgement(obj_id vcdId, obj_id vehicleId, int messageNumber, String reason) throws InterruptedException
     {
         dictionary messageData = createResponseDictionary(vcdId, messageNumber);
         LOG("vcdping-vcd", "vcd_ping_response.sendNegativeAcknowledgement(): vcdId=[" + vcdId + "], vehicleId=[" + vehicleId + "], messageNumber=[" + messageNumber + "]: sending negative ack now: reason=[" + reason + "].");
         messageTo(vehicleId, VCDPING_VEHICLE_MESSAGEHANDLER_NEGATIVE_ACK_NAME, messageData, 1, false);
     }
+
     public boolean isRiderOkayForVcd(obj_id vcdId, obj_id riderId) throws InterruptedException
     {
         if (!isIdValid(vcdId) || !isIdValid(riderId))

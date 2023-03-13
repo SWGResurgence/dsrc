@@ -8,13 +8,14 @@ import script.library.sui;
 
 public class destructible_building extends script.base_script
 {
-    public destructible_building()
-    {
-    }
     public static final String VAR_SMOKE_LEVEL = "battlefield.smoke_level";
     public static final string_id SID_CONSTRUCTION_SITE = new string_id("battlefield", "construction_site");
     public static final string_id SID_DESTROY_STRUCTURE = new string_id("battlefield", "destroy_structure");
     public static final string_id SID_REPAIR_STRUCTURE = new string_id("battlefield", "repair_structure");
+    public destructible_building()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasObjVar(self, battlefield.VAR_BUILDTIME))
@@ -37,6 +38,7 @@ public class destructible_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_TERMINAL_MANAGEMENT_STATUS)
@@ -81,6 +83,7 @@ public class destructible_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         if (hasObjVar(self, battlefield.VAR_REPAIRING))
@@ -89,6 +92,7 @@ public class destructible_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield.destructible_building::OnObjectDisabled -- " + self);
@@ -118,6 +122,7 @@ public class destructible_building extends script.base_script
         messageTo(self, "battlefieldObjectDestroyed", null, 2.5f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgRefreshSmoke(obj_id self, dictionary params) throws InterruptedException
     {
         int smoke_level = 0;
@@ -137,7 +142,8 @@ public class destructible_building extends script.base_script
             obj_id[] players = battlefield.getPlayersOnBattlefield(master_object);
             if (players != null)
             {
-                for (obj_id player : players) {
+                for (obj_id player : players)
+                {
                     playClientEffectLoc(player, "clienteffect/lair_med_damage_smoke.cef", loc, 0);
                 }
             }
@@ -148,7 +154,8 @@ public class destructible_building extends script.base_script
             obj_id[] players = battlefield.getPlayersOnBattlefield(master_object);
             if (players != null)
             {
-                for (obj_id player : players) {
+                for (obj_id player : players)
+                {
                     playClientEffectLoc(player, "clienteffect/lair_hvy_damage_fire.cef", loc, 0);
                 }
             }
@@ -156,6 +163,7 @@ public class destructible_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgConstructionComplete(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield.destructible_building::msgConstructionComplete");
@@ -171,7 +179,7 @@ public class destructible_building extends script.base_script
         int repair_cost = params.getInt("cost") / 10;
         float hitpoints = getHitpoints(self);
         float maxHitpoints = getMaxHitpoints(self);
-        int percent = (int)((hitpoints / maxHitpoints) * 100.0f);
+        int percent = (int) ((hitpoints / maxHitpoints) * 100.0f);
         if (percent < 5)
         {
             percent = 5;
@@ -191,6 +199,7 @@ public class destructible_building extends script.base_script
         battlefield.sendFactionMessage(master_object, faction, "Construction complete on " + name);
         return SCRIPT_CONTINUE;
     }
+
     public int msgRepairPulse(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield.destructible_building::msgRepairPulse -- " + self);
@@ -206,14 +215,14 @@ public class destructible_building extends script.base_script
         {
             hitpoints = max_hitpoints;
         }
-        else 
+        else
         {
             messageTo(self, "msgRepairPulse", null, battlefield.REPAIR_PULSE, true);
         }
         setHitpoints(self, hitpoints);
         if (hasObjVar(self, VAR_SMOKE_LEVEL))
         {
-            float percent_hp = (float)hitpoints / max_hitpoints;
+            float percent_hp = (float) hitpoints / max_hitpoints;
             if (percent_hp > 0.5)
             {
                 removeObjVar(self, VAR_SMOKE_LEVEL);
@@ -225,6 +234,7 @@ public class destructible_building extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int battlefieldObjectDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         battlefield.removeBattlefieldObject(self);

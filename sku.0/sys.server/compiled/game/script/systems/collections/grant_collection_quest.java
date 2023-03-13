@@ -7,9 +7,6 @@ import script.library.utils;
 
 public class grant_collection_quest extends script.base_script
 {
-    public grant_collection_quest()
-    {
-    }
     public static final boolean LOGGING_ENABLED = true;
     public static final String STF = "som/som_quest";
     public static final string_id EXAMINE = new string_id(STF, "blistmok_heart_examine");
@@ -18,6 +15,10 @@ public class grant_collection_quest extends script.base_script
     public static final string_id UNABLE = new string_id(STF, "unable_to_examine");
     public static final string_id DECLINE = new string_id(STF, "quest_decline");
     public static final String QUEST_OBJVAR = "collection.quest";
+    public grant_collection_quest()
+    {
+    }
+
     public void blog(String identifier, String text) throws InterruptedException
     {
         if (LOGGING_ENABLED)
@@ -25,6 +26,7 @@ public class grant_collection_quest extends script.base_script
             LOG(identifier, text);
         }
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -45,6 +47,7 @@ public class grant_collection_quest extends script.base_script
         mid.setServerNotify(true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         blog("COLLECTIONS", "OnObjectMenuSelect");
@@ -70,12 +73,13 @@ public class grant_collection_quest extends script.base_script
         if (!groundquests.isQuestActive(player, quest))
         {
         }
-        else 
+        else
         {
             sendSystemMessage(player, ALREADY);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestOfferResponse(obj_id self, dictionary params) throws InterruptedException
     {
         blog("COLLECTIONS", "handleQuestOfferResponse");
@@ -95,13 +99,13 @@ public class grant_collection_quest extends script.base_script
         switch (bp)
         {
             case sui.BP_OK:
-            groundquests.grantQuest(player, quest);
-            sendSystemMessage(player, DESTROY);
-            destroyObject(self);
-            break;
+                groundquests.grantQuest(player, quest);
+                sendSystemMessage(player, DESTROY);
+                destroyObject(self);
+                break;
             case sui.BP_CANCEL:
-            sendSystemMessage(player, DECLINE);
-            break;
+                sendSystemMessage(player, DECLINE);
+                break;
         }
         return SCRIPT_CONTINUE;
     }

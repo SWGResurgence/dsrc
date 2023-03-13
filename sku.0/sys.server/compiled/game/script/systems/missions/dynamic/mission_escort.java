@@ -11,6 +11,7 @@ public class mission_escort extends script.systems.missions.base.mission_dynamic
     public mission_escort()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "systems.missions.base.mission_cleanup_tracker"))
@@ -19,6 +20,7 @@ public class mission_escort extends script.systems.missions.base.mission_dynamic
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objMissionData = getMissionData(self);
@@ -28,7 +30,7 @@ public class mission_escort extends script.systems.missions.base.mission_dynamic
             setupSpawn(self, locSpawnLocation);
             updateMissionWaypoint(self, locSpawnLocation);
         }
-        else 
+        else
         {
             obj_id objMissionCreator = getObjIdObjVar(self, "objOwner");
             dictionary dctParams = new dictionary();
@@ -37,11 +39,13 @@ public class mission_escort extends script.systems.missions.base.mission_dynamic
         }
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         sendEscortIncomplete(self);
         return SCRIPT_CONTINUE;
     }
+
     public int escort_Pickup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objMissionData = getMissionData(self);
@@ -49,6 +53,7 @@ public class mission_escort extends script.systems.missions.base.mission_dynamic
         updateMissionWaypoint(self, locDeliverLocation);
         return SCRIPT_CONTINUE;
     }
+
     public int escortIncomplete(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -57,6 +62,7 @@ public class mission_escort extends script.systems.missions.base.mission_dynamic
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int escortFailure(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -65,6 +71,7 @@ public class mission_escort extends script.systems.missions.base.mission_dynamic
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int escortSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "intCompleted"))
@@ -88,10 +95,12 @@ public class mission_escort extends script.systems.missions.base.mission_dynamic
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndMission(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int onArrivedAtLocation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);

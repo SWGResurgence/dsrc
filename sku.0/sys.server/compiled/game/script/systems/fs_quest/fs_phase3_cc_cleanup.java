@@ -11,22 +11,25 @@ import java.util.Vector;
 
 public class fs_phase3_cc_cleanup extends script.base_script
 {
-    public fs_phase3_cc_cleanup()
-    {
-    }
     public static final String OBJVAR_LAST_PHASE = community_crafting.OBJVAR_COMMUNITY_CRAFTING_BASE + ".lastPhase";
     public static final String SCRIPTVAR_CRAFTING_TRACKER = fs_dyn_village.OBJVAR_MY_MASTER_OBJECT;
     public static final String SCRIPTVAR_VILLAGE_PHASE = "community_crafting.village_phase";
+    public fs_phase3_cc_cleanup()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         startPhase3Cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         startPhase3Cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGetVillageManager(obj_id self, dictionary params) throws InterruptedException
     {
         boolean rslt = false;
@@ -58,11 +61,13 @@ public class fs_phase3_cc_cleanup extends script.base_script
         messageTo(self, "handleRetryGetVillageManager", null, 30, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRetryGetVillageManager(obj_id self, dictionary params) throws InterruptedException
     {
         requestVillageMaster(self);
         return SCRIPT_CONTINUE;
     }
+
     public void startPhase3Cleanup(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPTVAR_CRAFTING_TRACKER))
@@ -70,12 +75,13 @@ public class fs_phase3_cc_cleanup extends script.base_script
             debugServerConsoleMsg(self, "startPhase3Cleanup asking for village manager");
             requestVillageMaster(self);
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "startPhase3Cleanup found village manager");
             cleanupCraftingQuest(self);
         }
     }
+
     public void requestVillageMaster(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPTVAR_CRAFTING_TRACKER))
@@ -85,6 +91,7 @@ public class fs_phase3_cc_cleanup extends script.base_script
             fs_dyn_village.getRegisteredObjIdFromClusterWideData(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER, "handleGetVillageManager", self);
         }
     }
+
     public boolean isCommunityCraftingEnabled(obj_id npc) throws InterruptedException
     {
         if (utils.getIntScriptVar(npc, SCRIPTVAR_VILLAGE_PHASE) != 4)
@@ -98,6 +105,7 @@ public class fs_phase3_cc_cleanup extends script.base_script
         }
         return false;
     }
+
     public void cleanupCraftingQuest(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPTVAR_CRAFTING_TRACKER))
@@ -129,10 +137,10 @@ public class fs_phase3_cc_cleanup extends script.base_script
             {
                 for (int i = 0; i < shieldNames.size(); ++i)
                 {
-                    setObjVar(villageId, fs_dyn_village.OBJVAR_VILLAGE_SHIELDS + "." + (((string_id)(shieldNames.get(i)))).getAsciiId(), (((Float)(shieldValues.get(i)))).floatValue());
+                    setObjVar(villageId, fs_dyn_village.OBJVAR_VILLAGE_SHIELDS + "." + (((string_id) (shieldNames.get(i)))).getAsciiId(), (((Float) (shieldValues.get(i)))).floatValue());
                 }
             }
-            else 
+            else
             {
                 CustomerServiceLog("fs_village", "WARNING: unable to get final " + "attributes for the phase 3 community crafting quest");
             }

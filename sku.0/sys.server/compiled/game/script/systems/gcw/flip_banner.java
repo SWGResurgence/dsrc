@@ -10,16 +10,19 @@ public class flip_banner extends script.base_script
     public flip_banner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkBannerImpulse", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkBannerImpulse", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "banner"))
@@ -32,6 +35,7 @@ public class flip_banner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "banner"))
@@ -44,6 +48,7 @@ public class flip_banner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkBannerImpulse(obj_id self, dictionary params) throws InterruptedException
     {
         float imp_r = gcw.getImperialPercentileByRegion(self);
@@ -71,6 +76,7 @@ public class flip_banner extends script.base_script
         messageTo(self, "checkBannerImpulse", null, 3600.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void spawnBanner(obj_id self, String faction) throws InterruptedException
     {
         String empiredayRunning = getConfigSetting("GameServer", "empireday_ceremony");

@@ -8,11 +8,12 @@ import script.*;
 
 public class tcg_instant_xp_grant extends script.base_script
 {
+    public static final String TBL_PLAYER_LEVEL_XP = "datatables/player/player_level.iff";
+    public static final string_id SID_REWARD_XP = new string_id("collection", "reward_xp_amount");
     public tcg_instant_xp_grant()
     {
     }
-    public static final String TBL_PLAYER_LEVEL_XP = "datatables/player/player_level.iff";
-    public static final string_id SID_REWARD_XP = new string_id("collection", "reward_xp_amount");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.isNestedWithinAPlayer(self))
@@ -22,13 +23,14 @@ public class tcg_instant_xp_grant extends script.base_script
             {
                 mid.setServerNotify(true);
             }
-            else 
+            else
             {
                 mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("ui_radial", "item_use"));
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) != player)
@@ -53,13 +55,13 @@ public class tcg_instant_xp_grant extends script.base_script
                     decrementCount(self);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     float xpPercent = getFloatObjVar(self, "grant_xp_percent");
                     int xpForCurrentLevel = dataTableGetInt(TBL_PLAYER_LEVEL_XP, playerLevel - 1, "xp_required");
                     int xpForNextLevel = dataTableGetInt(TBL_PLAYER_LEVEL_XP, playerLevel, "xp_required");
                     int xpForLevel = xpForNextLevel - xpForCurrentLevel;
-                    int xpToGrant = (int)(xpPercent * xpForLevel);
+                    int xpToGrant = (int) (xpPercent * xpForLevel);
                     if (xpToGrant > 0)
                     {
                         playClientEffectObj(player, "clienteffect/tcg_t16_skyhopper_toy_flyby.cef", player, "root");
@@ -71,13 +73,13 @@ public class tcg_instant_xp_grant extends script.base_script
                         CustomerServiceLog("tcg", "Player " + getFirstName(player) + "(" + player + ") was granted XP: " + xpToGrant + " XP from TCG Item: (" + self + ")");
                         decrementCount(self);
                     }
-                    else 
+                    else
                     {
                         CustomerServiceLog("tcg", "Player " + getFirstName(player) + "(" + player + ") attempted to receive XP from TCG Item: (" + self + ") but failed because XP amount was less than Zero.");
                     }
                 }
             }
-            else 
+            else
             {
                 CustomerServiceLog("tcg", "Player " + getFirstName(player) + "(" + player + ") attempted to use TCG Item(" + self + ") but can not - item is missing 'grant_xp_percent' objvar)");
                 return SCRIPT_CONTINUE;

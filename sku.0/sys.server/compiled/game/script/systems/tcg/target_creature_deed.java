@@ -8,16 +8,19 @@ import java.util.Enumeration;
 
 public class target_creature_deed extends script.base_script
 {
+    public static final int PERIODIC_PURGE_CHECK = 600;
+
     public target_creature_deed()
     {
     }
-    public static final int PERIODIC_PURGE_CHECK = 600;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handlePeriodicallyPurgeData", null, PERIODIC_PURGE_CHECK, false);
         target_dummy.setTargetDummyOwner(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "handlePeriodicallyPurgeData", null, PERIODIC_PURGE_CHECK, false);
@@ -43,19 +46,20 @@ public class target_creature_deed extends script.base_script
                         target_dummy.recreateTargetDummy(self, owner);
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         removeObjVar(self, target_dummy.TARGET_DUMMY_ID_OBJVAR);
                     }
                 }
             }
-            else 
+            else
             {
                 removeObjVar(self, target_dummy.TARGET_DUMMY_ID_OBJVAR);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isInWorldCell(self) || isInWorldCell(player))
@@ -76,7 +80,7 @@ public class target_creature_deed extends script.base_script
                 {
                     int menuPlacement = mi.addRootMenu(menu_info_types.SERVER_MENU2, new string_id("target_dummy", "menu_cleanup_" + creatureName));
                 }
-                else 
+                else
                 {
                     int menuPlacement = mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("target_dummy", "menu_place_" + creatureName));
                 }
@@ -84,6 +88,7 @@ public class target_creature_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isInWorldCell(self) || isInWorldCell(player))
@@ -104,7 +109,7 @@ public class target_creature_deed extends script.base_script
                             sendSystemMessage(player, new string_id("target_dummy", "failed_to_create_npc"));
                         }
                     }
-                    else 
+                    else
                     {
                         sendDirtyObjectMenuNotification(self);
                     }
@@ -123,6 +128,7 @@ public class target_creature_deed extends script.base_script
         sendDirtyObjectMenuNotification(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -139,6 +145,7 @@ public class target_creature_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnPack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id targetDummy = target_dummy.getTargetDummyId(self);
@@ -148,6 +155,7 @@ public class target_creature_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePeriodicallyPurgeData(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "handlePeriodicallyPurgeData", null, PERIODIC_PURGE_CHECK, false);
@@ -155,7 +163,7 @@ public class target_creature_deed extends script.base_script
         Enumeration keys = vars.keys();
         while (keys.hasMoreElements())
         {
-            String key = (String)(keys.nextElement());
+            String key = (String) (keys.nextElement());
             int stringCheck = key.indexOf(target_dummy.LAST_ATTACK_TIME_VAR);
             if (stringCheck > -1)
             {

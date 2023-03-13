@@ -10,18 +10,15 @@ import java.util.Vector;
 
 public class sequence_controller extends script.base_script
 {
-    public sequence_controller()
-    {
-    }
-    public static final String[] TRIGGER_DATA_TYPES = 
-    {
-        "name",
-        "triggerInterest",
-        "size",
-        "occurance",
-        "triggerDelay",
-        "triggerType"
-    };
+    public static final String[] TRIGGER_DATA_TYPES =
+            {
+                    "name",
+                    "triggerInterest",
+                    "size",
+                    "occurance",
+                    "triggerDelay",
+                    "triggerType"
+            };
     public static final int TYPE_AI = 0;
     public static final int TYPE_TRIGGER = 1;
     public static final int TYPE_EFFECT_MANAGER = 2;
@@ -31,6 +28,10 @@ public class sequence_controller extends script.base_script
     public static final String ABSOLUTE_TIMER = "absolute_time_sent_record";
     public static final String TABLE_DATA = "instance_data.table_data";
     public static final boolean LOGGING = true;
+    public sequence_controller()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "autoBeginSpawn"))
@@ -39,6 +40,7 @@ public class sequence_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "autoBeginSpawn"))
@@ -47,10 +49,12 @@ public class sequence_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isController(obj_id object) throws InterruptedException
     {
         return hasScript(object, "systems.dungeon_sequencer.sequence_controller");
     }
+
     public void cacheInstanceTable() throws InterruptedException
     {
         if (!isController(getSelf()))
@@ -101,6 +105,7 @@ public class sequence_controller extends script.base_script
         utils.setScriptVar(getSelf(), TABLE_DATA, dict);
         utils.setScriptVar(getSelf(), trial.PROT_CHILD_ARRAY, child_list);
     }
+
     public dictionary getTriggerKeyList(dictionary dict, String[] triggerId) throws InterruptedException
     {
         Vector trigger_key = new Vector();
@@ -116,7 +121,7 @@ public class sequence_controller extends script.base_script
                 key_list.add("" + i);
                 dict.put("triggerId-" + triggerId[i], key_list);
             }
-            else 
+            else
             {
                 key_list = dict.getResizeableStringArray("triggerId-" + triggerId[i]);
                 key_list.add("" + i);
@@ -125,6 +130,7 @@ public class sequence_controller extends script.base_script
         }
         return dict;
     }
+
     public dictionary cachedDataGetRow(int row) throws InterruptedException
     {
         if (!isController(getSelf()))
@@ -172,13 +178,15 @@ public class sequence_controller extends script.base_script
         }
         return row_data;
     }
+
     public int beginSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         handleCleanup(self);
         cacheInstanceTable();
-        messageTo(self, "delaySpawnActors", params != null ? params : null, 5.0f, false);
+        messageTo(self, "delaySpawnActors", params, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int delaySpawnActors(obj_id self, dictionary params) throws InterruptedException
     {
         String defaultTrigger = "default";
@@ -190,42 +198,56 @@ public class sequence_controller extends script.base_script
         spawnActors(self, defaultTrigger);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanupSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         handleCleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         handleCleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public void handleCleanup(obj_id self) throws InterruptedException
     {
         trial.bumpSession(self);
         obj_id[] children = getSpawnedChildren(self);
         if (children != null && children.length > 0)
         {
-            for (obj_id child : children) {
-                if (hasScript(child, "systems.dungeon_sequencer.sequence_controller")) {
+            for (obj_id child : children)
+            {
+                if (hasScript(child, "systems.dungeon_sequencer.sequence_controller"))
+                {
                     obj_id[] cells = getCellIds(child);
-                    if (cells == null || cells.length == 0) {
+                    if (cells == null || cells.length == 0)
+                    {
                         destroyObject(child);
-                    } else {
+                    }
+                    else
+                    {
                         obj_id[] objects = trial.getAllObjectsInDungeon(child);
-                        if (objects != null && objects.length > 0) {
-                            for (obj_id object : objects) {
-                                if (isPlayer(object)) {
+                        if (objects != null && objects.length > 0)
+                        {
+                            for (obj_id object : objects)
+                            {
+                                if (isPlayer(object))
+                                {
                                     expelFromBuilding(object);
                                 }
                             }
                         }
-                        if (!exists(child)) {
+                        if (!exists(child))
+                        {
                             LIVE_LOG("handleCleanup::exists", "Tried to send a message to to an object that no longer exists on this game server");
                         }
                         messageTo(child, "handleDelayCleanup", null, 1.0f, false);
                     }
-                } else {
+                }
+                else
+                {
                     trial.cleanupObject(child);
                 }
             }
@@ -240,35 +262,49 @@ public class sequence_controller extends script.base_script
         obj_id[] tempObjects = getObjectsInRange(getLocation(self), 1000.0f);
         if (tempObjects != null && tempObjects.length > 0)
         {
-            for (obj_id tempObject : tempObjects) {
-                if (!isIdValid(tempObject) || !exists(tempObject)) {
+            for (obj_id tempObject : tempObjects)
+            {
+                if (!isIdValid(tempObject) || !exists(tempObject))
+                {
                     continue;
                 }
-                if (!trial.isTempObject(tempObject)) {
+                if (!trial.isTempObject(tempObject))
+                {
                     continue;
                 }
-                if (trial.getParent(tempObject) != self) {
+                if (trial.getParent(tempObject) != self)
+                {
                     continue;
                 }
-                if (hasScript(tempObject, "systems.dungeon_sequencer.sequence_controller")) {
+                if (hasScript(tempObject, "systems.dungeon_sequencer.sequence_controller"))
+                {
                     obj_id[] cells = getCellIds(tempObject);
-                    if (cells == null || cells.length == 0) {
+                    if (cells == null || cells.length == 0)
+                    {
                         destroyObject(tempObject);
-                    } else {
+                    }
+                    else
+                    {
                         obj_id[] objects = trial.getAllObjectsInDungeon(tempObject);
-                        if (objects != null && objects.length > 0) {
-                            for (obj_id object : objects) {
-                                if (isPlayer(object)) {
+                        if (objects != null && objects.length > 0)
+                        {
+                            for (obj_id object : objects)
+                            {
+                                if (isPlayer(object))
+                                {
                                     expelFromBuilding(object);
                                 }
                             }
                         }
-                        if (!exists(tempObject)) {
+                        if (!exists(tempObject))
+                        {
                             LIVE_LOG("handleCleanup::exists", "Tried to send a message to to an object that no longer exists on this game server");
                         }
                         messageTo(tempObject, "handleDelayCleanup", null, 1.0f, false);
                     }
-                } else {
+                }
+                else
+                {
                     trial.cleanupObject(tempObject);
                 }
             }
@@ -276,23 +312,27 @@ public class sequence_controller extends script.base_script
         obj_id[] selfCellList = getCellIds(self);
         if (selfCellList != null && selfCellList.length > 0)
         {
-            for (obj_id obj_id : selfCellList) {
+            for (obj_id obj_id : selfCellList)
+            {
                 permissionsMakePublic(obj_id);
             }
         }
         return;
     }
+
     public int handleDelayCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int restartSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "cleanupSpawn", null, 0.0f, false);
         messageTo(self, "beginSpawn", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id[] getSpawnedChildren(obj_id self) throws InterruptedException
     {
         dictionary spawnList = utils.getDictionaryScriptVar(self, trial.PROT_CHILD_ARRAY);
@@ -307,9 +347,11 @@ public class sequence_controller extends script.base_script
         {
             return null;
         }
-        for (Object o : keyList) {
-            Vector thisList = spawnList.getResizeableObjIdArray(((String) o));
-            if (thisList == null || thisList.size() == 0) {
+        for (Object o : keyList)
+        {
+            Vector thisList = spawnList.getResizeableObjIdArray(o);
+            if (thisList == null || thisList.size() == 0)
+            {
                 continue;
             }
             allChildren.addAll(thisList);
@@ -322,6 +364,7 @@ public class sequence_controller extends script.base_script
         }
         return returnList;
     }
+
     public void removeSpawnChild(obj_id object, String spawn_id) throws InterruptedException
     {
         dictionary spawnList = utils.getDictionaryScriptVar(getSelf(), trial.PROT_CHILD_ARRAY);
@@ -339,7 +382,7 @@ public class sequence_controller extends script.base_script
         {
             thisList.remove(object);
         }
-        else 
+        else
         {
             return;
         }
@@ -351,12 +394,13 @@ public class sequence_controller extends script.base_script
             }
             spawnList.remove(spawn_id);
         }
-        else 
+        else
         {
             spawnList.put(spawn_id, thisList);
         }
         utils.setScriptVar(getSelf(), trial.PROT_CHILD_ARRAY, spawnList);
     }
+
     public void spawnActors(obj_id self, String triggerId) throws InterruptedException
     {
         if (!isController(self))
@@ -370,10 +414,12 @@ public class sequence_controller extends script.base_script
             doLogging("spawnActors", "No such tableData triggerId-" + triggerId);
             return;
         }
-        for (String trigger_row : trigger_rows) {
+        for (String trigger_row : trigger_rows)
+        {
             spawnActorRow(utils.stringToInt(trigger_row));
         }
     }
+
     public void spawnActorRow(int row) throws InterruptedException
     {
         dictionary dict = cachedDataGetRow(row);
@@ -383,6 +429,7 @@ public class sequence_controller extends script.base_script
         }
         spawnActorRow(dict);
     }
+
     public void spawnActorRow(dictionary dict) throws InterruptedException
     {
         boolean newPathData = false;
@@ -403,7 +450,7 @@ public class sequence_controller extends script.base_script
         String spawn_id = dict.getString("spawn_id");
         int respawn = dict.getInt("respawn");
         int row = dict.getInt("row");
-        boolean missionCritical = dict.containsKey("mission_critical") ? dict.getInt("mission_critical") == 1 : false;
+        boolean missionCritical = dict.containsKey("mission_critical") && dict.getInt("mission_critical") == 1;
         obj_id newObject = null;
         location here = getLocation(getSelf());
         boolean indoor = false;
@@ -419,7 +466,7 @@ public class sequence_controller extends script.base_script
             }
             spawnLoc = new location(locX, locY, locZ, here.area);
         }
-        else 
+        else
         {
             indoor = true;
             spawnLoc = new location(locX, locY, locZ, here.area, getCellId(getSelf(), room));
@@ -432,7 +479,7 @@ public class sequence_controller extends script.base_script
             {
                 newObject = create.object(object, spawnLoc);
             }
-            else 
+            else
             {
                 newObject = createObjectInCell(object, getSelf(), room, spawnLoc);
             }
@@ -454,7 +501,7 @@ public class sequence_controller extends script.base_script
             {
                 newObject = createObject("object/tangible/theme_park/invisible_object.iff", spawnLoc);
             }
-            else 
+            else
             {
                 newObject = createObjectInCell("object/tangible/theme_park/invisible_object.iff", getSelf(), room, spawnLoc);
             }
@@ -470,7 +517,7 @@ public class sequence_controller extends script.base_script
             {
                 newObject = createObject("object/tangible/theme_park/invisible_object.iff", spawnLoc);
             }
-            else 
+            else
             {
                 newObject = createObjectInCell("object/tangible/theme_park/invisible_object.iff", getSelf(), room, spawnLoc);
             }
@@ -591,7 +638,7 @@ public class sequence_controller extends script.base_script
             {
                 trial.bumpSession(self);
             }
-            else 
+            else
             {
                 trial.bumpSession(self, channel);
             }
@@ -649,7 +696,7 @@ public class sequence_controller extends script.base_script
             PROFILER_STOP("SPAWN_ACTOR_ROW");
             return;
         }
-        else 
+        else
         {
             PROFILER_START("MAKE_CREATURE");
             String[] multiSpawn = split(object, ',');
@@ -657,7 +704,7 @@ public class sequence_controller extends script.base_script
             {
                 newObject = create.object(object, spawnLoc);
             }
-            else 
+            else
             {
                 newObject = doRandomSpawn(multiSpawn, spawnLoc);
             }
@@ -727,10 +774,12 @@ public class sequence_controller extends script.base_script
         PROFILER_STOP("SPAWN_ACTOR_ROW");
         return;
     }
+
     public void attachSpawnScripts(obj_id subject, String spawnScripts) throws InterruptedException
     {
         attachSpawnScripts(subject, spawnScripts, -1);
     }
+
     public void attachSpawnScripts(obj_id subject, String spawnScripts, int type) throws InterruptedException
     {
         if (type > -1)
@@ -738,17 +787,17 @@ public class sequence_controller extends script.base_script
             switch (type)
             {
                 case TYPE_AI:
-                attachScript(subject, "systems.dungeon_sequencer.ai_controller");
-                break;
+                    attachScript(subject, "systems.dungeon_sequencer.ai_controller");
+                    break;
                 case TYPE_TRIGGER:
-                attachScript(subject, "theme_park.restuss_event.trigger_controller");
-                break;
+                    attachScript(subject, "theme_park.restuss_event.trigger_controller");
+                    break;
                 case TYPE_EFFECT_MANAGER:
-                attachScript(subject, "theme_park.restuss_event.restuss_clientfx_controller");
-                break;
+                    attachScript(subject, "theme_park.restuss_event.restuss_clientfx_controller");
+                    break;
                 case TYPE_OBJECT:
-                attachScript(subject, "systems.dungeon_sequencer.ai_controller");
-                break;
+                    attachScript(subject, "systems.dungeon_sequencer.ai_controller");
+                    break;
             }
         }
         if (spawnScripts == null || spawnScripts.equals("none"))
@@ -756,10 +805,12 @@ public class sequence_controller extends script.base_script
             return;
         }
         String[] scripts = split(spawnScripts, ',');
-        for (String script : scripts) {
+        for (String script : scripts)
+        {
             attachScript(subject, script);
         }
     }
+
     public void setSpawnObjVar(obj_id newObject, String objvarString) throws InterruptedException
     {
         if (objvarString == null || objvarString.equals("none"))
@@ -777,27 +828,38 @@ public class sequence_controller extends script.base_script
         String[] nameValueSplit;
         String name;
         String value;
-        for (String parsedObjVar : parsedObjVars) {
+        for (String parsedObjVar : parsedObjVars)
+        {
             typeDataSplit = split(parsedObjVar, ':');
             type = typeDataSplit[0];
             data = typeDataSplit[1];
             nameValueSplit = split(data, '=');
             name = nameValueSplit[0];
             value = nameValueSplit[1];
-            
-            if (type.equals("int")) {
+
+            if (type.equals("int"))
+            {
                 setObjVar(newObject, name, utils.stringToInt(value));
-            } else if (type.equals("float")) {
+            }
+            else if (type.equals("float"))
+            {
                 setObjVar(newObject, name, utils.stringToFloat(value));
-            } else if (type.equals("string")) {
+            }
+            else if (type.equals("string"))
+            {
                 setObjVar(newObject, name, value);
-            } else if (type.equals("boolean") && (value.equals("true") || value.equals("1"))) {
+            }
+            else if (type.equals("boolean") && (value.equals("true") || value.equals("1")))
+            {
                 setObjVar(newObject, name, true);
-            } else if (type.equals("boolean") && (value.equals("false") || value.equals("0"))) {
+            }
+            else if (type.equals("boolean") && (value.equals("false") || value.equals("0")))
+            {
                 setObjVar(newObject, name, false);
             }
         }
     }
+
     public dictionary parseTriggerData(String data) throws InterruptedException
     {
         if (data == null || data.equals(""))
@@ -818,6 +880,7 @@ public class sequence_controller extends script.base_script
         }
         return dict;
     }
+
     public void setClientEffectData(obj_id object, String passedString) throws InterruptedException
     {
         String[] parse = split(passedString, ':');
@@ -831,11 +894,12 @@ public class sequence_controller extends script.base_script
         {
             setObjVar(object, restuss_event.EFFECT_DELTA, parse[3]);
         }
-        else 
+        else
         {
             setObjVar(object, restuss_event.EFFECT_DELTA, "0");
         }
     }
+
     public void setTriggerEventData(obj_id object, String passedEventData) throws InterruptedException
     {
         if (passedEventData == null || passedEventData.equals("none"))
@@ -843,10 +907,12 @@ public class sequence_controller extends script.base_script
             return;
         }
         String[] allEntries = split(passedEventData, ',');
-        for (String allEntry : allEntries) {
+        for (String allEntry : allEntries)
+        {
             storeTriggerEvents(object, allEntry);
         }
     }
+
     public int triggerFired(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -862,6 +928,7 @@ public class sequence_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doMessageTo(String message) throws InterruptedException
     {
         int SPAWN_ID = 1;
@@ -877,17 +944,21 @@ public class sequence_controller extends script.base_script
             doLogging("doMessageTo", "No spawn_id could be found");
             return;
         }
-        for (obj_id obj_id : spawn_id) {
+        for (obj_id obj_id : spawn_id)
+        {
             String checkSpawn = getStringObjVar(obj_id, "spawn_id");
-            if (checkSpawn.equals(completeParse[SPAWN_ID])) {
+            if (checkSpawn.equals(completeParse[SPAWN_ID]))
+            {
                 _doMessageTo(obj_id, completeParse);
             }
         }
     }
+
     public void doMessgeTo(obj_id target, String message) throws InterruptedException
     {
         _doMessageTo(target, split(message, ';'));
     }
+
     public void _doMessageTo(obj_id target, String[] completeParse) throws InterruptedException
     {
         int HANDLER_NAME = 2;
@@ -897,20 +968,25 @@ public class sequence_controller extends script.base_script
         if (!completeParse[PARAMS].equals("none"))
         {
             String[] paramsParse = split(completeParse[PARAMS], ',');
-            
+
             {
-                for (String s : paramsParse) {
+                for (String s : paramsParse)
+                {
                     String[] parse = split(s, ':');
                     String paramType = parse[0];
                     String[] valueSplit = split(parse[1], '=');
                     String elementName = valueSplit[0];
                     String elementValue = valueSplit[1];
-                    if (paramType.equals("int")) {
+                    if (paramType.equals("int"))
+                    {
                         dict.put(elementName, utils.stringToInt(elementValue));
                     }
-                    if (paramType.equals("float")) {
+                    if (paramType.equals("float"))
+                    {
                         dict.put(elementName, utils.stringToFloat(elementValue));
-                    } else {
+                    }
+                    else
+                    {
                         dict.put(elementName, elementValue);
                     }
                 }
@@ -918,6 +994,7 @@ public class sequence_controller extends script.base_script
         }
         messageTo(target, handlerName, dict, 0.0f, false);
     }
+
     public void signalMaster(String message) throws InterruptedException
     {
         int HANDLER_NAME = 1;
@@ -933,20 +1010,25 @@ public class sequence_controller extends script.base_script
         if (!completeParse[PARAMS].equals("none"))
         {
             String[] paramsParse = split(completeParse[PARAMS], ',');
-            
+
             {
-                for (String s : paramsParse) {
+                for (String s : paramsParse)
+                {
                     String[] parse = split(s, ':');
                     String paramType = parse[0];
                     String[] valueSplit = split(parse[1], '=');
                     String elementName = valueSplit[0];
                     String elementValue = valueSplit[1];
-                    if (paramType.equals("int")) {
+                    if (paramType.equals("int"))
+                    {
                         dict.put(elementName, utils.stringToInt(elementValue));
                     }
-                    if (paramType.equals("float")) {
+                    if (paramType.equals("float"))
+                    {
                         dict.put(elementName, utils.stringToFloat(elementValue));
-                    } else {
+                    }
+                    else
+                    {
                         dict.put(elementName, elementValue);
                     }
                 }
@@ -954,6 +1036,7 @@ public class sequence_controller extends script.base_script
         }
         messageTo(trial.getParent(getSelf()), handlerName, dict, 0.0f, false);
     }
+
     public void doPlayMusicInArea(String message) throws InterruptedException
     {
         String[] parse = split(message, ':');
@@ -967,7 +1050,7 @@ public class sequence_controller extends script.base_script
         {
             players = instance.getPlayersInInstanceArea(getSelf());
         }
-        else 
+        else
         {
             float range = utils.stringToFloat(parse[2]);
             players = getPlayerCreaturesInRange(getSelf(), range);
@@ -976,11 +1059,13 @@ public class sequence_controller extends script.base_script
         {
             return;
         }
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             playMusic(player, player, parse[1], 0, false);
         }
         utils.setScriptVar(getSelf(), "instance_persistedMusic", parse[1]);
     }
+
     public void doPlayEffectOnPlayers(String message, location spawnLoc) throws InterruptedException
     {
         String[] parse = split(message, ':');
@@ -994,7 +1079,7 @@ public class sequence_controller extends script.base_script
         {
             players = instance.getPlayersInInstanceArea(getSelf());
         }
-        else 
+        else
         {
             float range = utils.stringToFloat(parse[2]);
             players = getPlayerCreaturesInRange(spawnLoc, range);
@@ -1003,12 +1088,14 @@ public class sequence_controller extends script.base_script
         {
             return;
         }
-        for (obj_id player : players) {
+        for (obj_id player : players)
+        {
             obj_id[] onePlayer = new obj_id[1];
             onePlayer[0] = player;
             playClientEffectObj(onePlayer, parse[1], onePlayer[0], "");
         }
     }
+
     public void doPlayEffectInAreaWithLabel(String message, location spawnLoc) throws InterruptedException
     {
         String[] parse = split(message, ':');
@@ -1038,7 +1125,7 @@ public class sequence_controller extends script.base_script
         {
             players = getPlayerCreaturesInRange(spawnLoc, range);
         }
-        else 
+        else
         {
             players = instance.getPlayersInInstanceArea(self);
         }
@@ -1046,10 +1133,13 @@ public class sequence_controller extends script.base_script
         {
             return;
         }
-        for (obj_id player : players) {
-            if (isIdValid(player)) {
+        for (obj_id player : players)
+        {
+            if (isIdValid(player))
+            {
                 stopClientEffectObjByLabel(player, player, label);
-                if (effectName != null && effectName.length() > 0 && !effectName.equals("none")) {
+                if (effectName != null && effectName.length() > 0 && !effectName.equals("none"))
+                {
                     playClientEffectObj(player, effectName, player, "", null, label);
                 }
             }
@@ -1059,6 +1149,7 @@ public class sequence_controller extends script.base_script
             utils.setScriptVar(self, "instance_persistedLabeledEffect", effectName + ":" + label);
         }
     }
+
     public void storeTriggerEvents(obj_id object, String event) throws InterruptedException
     {
         if (event.startsWith("OnDeath"))
@@ -1082,6 +1173,7 @@ public class sequence_controller extends script.base_script
             storeCustomSignal(object, event);
         }
     }
+
     public void storeDeathTrigger(obj_id object, String event) throws InterruptedException
     {
         String[] parse = split(event, ':');
@@ -1092,9 +1184,10 @@ public class sequence_controller extends script.base_script
             OnDeathTrig = utils.getResizeableStringArrayScriptVar(object, restuss_event.TRIG_ONDEATH);
             utils.removeScriptVar(object, restuss_event.TRIG_ONDEATH);
         }
-        utils.addElement(OnDeathTrig, event.substring(8, event.length()));
+        utils.addElement(OnDeathTrig, event.substring(8));
         utils.setScriptVar(object, restuss_event.TRIG_ONDEATH, OnDeathTrig);
     }
+
     public void storeEnterCombatTrigger(obj_id object, String event) throws InterruptedException
     {
         String[] parse = split(event, ':');
@@ -1105,9 +1198,10 @@ public class sequence_controller extends script.base_script
             OnEnterCombatTrig = utils.getResizeableStringArrayScriptVar(object, restuss_event.TRIG_ENTERCOMBAT);
             utils.removeScriptVar(object, restuss_event.TRIG_ENTERCOMBAT);
         }
-        utils.addElement(OnEnterCombatTrig, event.substring(14, event.length()));
+        utils.addElement(OnEnterCombatTrig, event.substring(14));
         utils.setScriptVar(object, restuss_event.TRIG_ENTERCOMBAT, OnEnterCombatTrig);
     }
+
     public void storeExitCombatTrigger(obj_id object, String event) throws InterruptedException
     {
         String[] parse = split(event, ':');
@@ -1118,9 +1212,10 @@ public class sequence_controller extends script.base_script
             OnExitCombatTrig = utils.getResizeableStringArrayScriptVar(object, restuss_event.TRIG_EXITCOMBAT);
             utils.removeScriptVar(object, restuss_event.TRIG_EXITCOMBAT);
         }
-        utils.addElement(OnExitCombatTrig, event.substring(13, event.length()));
+        utils.addElement(OnExitCombatTrig, event.substring(13));
         utils.setScriptVar(object, restuss_event.TRIG_EXITCOMBAT, OnExitCombatTrig);
     }
+
     public void storeArrivedLocationTrigger(obj_id object, String event) throws InterruptedException
     {
         if (!isIdValid(object) || event.equals(""))
@@ -1148,7 +1243,7 @@ public class sequence_controller extends script.base_script
             locZ = here.z + locZ;
             spawnLoc = new location(locX, locY, locZ, here.area);
         }
-        else 
+        else
         {
             indoor = true;
             spawnLoc = new location(locX, locY, locZ, here.area, getCellId(getSelf(), room));
@@ -1167,9 +1262,10 @@ public class sequence_controller extends script.base_script
             OnArriveLocTrig = utils.getResizeableStringArrayScriptVar(object, restuss_event.TRIG_ARRIVELOCATION);
             utils.removeScriptVar(object, restuss_event.TRIG_ARRIVELOCATION);
         }
-        utils.addElement(OnArriveLocTrig, constructedTrigger.substring(1, constructedTrigger.length()) + ":" + pointName);
+        utils.addElement(OnArriveLocTrig, constructedTrigger.substring(1) + ":" + pointName);
         utils.setScriptVar(object, restuss_event.TRIG_ARRIVELOCATION, OnArriveLocTrig);
     }
+
     public void storeCustomSignal(obj_id object, String event) throws InterruptedException
     {
         String[] parse = split(event, ':');
@@ -1180,9 +1276,10 @@ public class sequence_controller extends script.base_script
             customSignal = utils.getResizeableStringArrayScriptVar(object, restuss_event.TRIG_CUSTOMSIGNAL);
             utils.removeScriptVar(object, restuss_event.TRIG_CUSTOMSIGNAL);
         }
-        utils.addElement(customSignal, event.substring(13, event.length()));
+        utils.addElement(customSignal, event.substring(13));
         utils.setScriptVar(object, restuss_event.TRIG_CUSTOMSIGNAL, customSignal);
     }
+
     public void doDeleteSpawn(String deleteString) throws InterruptedException
     {
         String[] parse = split(deleteString, ':');
@@ -1202,29 +1299,38 @@ public class sequence_controller extends script.base_script
         {
             return;
         }
-        for (obj_id obj_id : spawn_id) {
+        for (obj_id obj_id : spawn_id)
+        {
             String checkSpawn = getStringObjVar(obj_id, "spawn_id");
-            if (checkSpawn.equals(spawnId)) {
-                if (!effect.equals("none")) {
+            if (checkSpawn.equals(spawnId))
+            {
+                if (!effect.equals("none"))
+                {
                     dictionary dict = trial.getSessionDict(getSelf());
                     dict.put("to_delete", obj_id);
                     location object_loc = getLocation(obj_id);
-                    obj_id newFxController = obj_id.NULL_ID;
-                    if (isIdValid(object_loc.cell)) {
+                    obj_id newFxController = script.obj_id.NULL_ID;
+                    if (isIdValid(object_loc.cell))
+                    {
                         newFxController = createObjectInCell("object/tangible/theme_park/invisible_object.iff", getSelf(), getCellName(object_loc.cell), object_loc);
-                    } else {
+                    }
+                    else
+                    {
                         newFxController = createObject("object/tangible/theme_park/invisible_object.iff", object_loc);
                     }
                     setYaw(newFxController, getYaw(obj_id));
                     setClientEffectData(newFxController, "clientfx:" + effect + ":forced_visability-150");
                     attachScript(newFxController, "theme_park.restuss_event.restuss_clientfx_controller");
                     messageTo(getSelf(), "handleDelayedDeleteSpawn", dict, 0.75f, false);
-                } else {
+                }
+                else
+                {
                     trial.cleanupObject(obj_id);
                 }
             }
         }
     }
+
     public int handleDelayedDeleteSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -1235,6 +1341,7 @@ public class sequence_controller extends script.base_script
         trial.cleanupObject(to_delete);
         return SCRIPT_CONTINUE;
     }
+
     public void storeSpawnedChild(obj_id self, obj_id child, String spawn_id) throws InterruptedException
     {
         dictionary childArray = utils.getDictionaryScriptVar(self, trial.PROT_CHILD_ARRAY);
@@ -1259,6 +1366,7 @@ public class sequence_controller extends script.base_script
         childArray.put(trial.PROT_CHILD_KEY_LIST, all_spawn_id);
         utils.setScriptVar(self, trial.PROT_CHILD_ARRAY, childArray);
     }
+
     public void sendDelayedSpawnActors(String triggerId) throws InterruptedException
     {
         Vector sentIds = new Vector();
@@ -1278,6 +1386,7 @@ public class sequence_controller extends script.base_script
         dict.put("triggerId", triggerId);
         messageTo(getSelf(), "doDelayedSpawnActors", dict, delay, false);
     }
+
     public int doDelayedSpawnActors(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -1288,6 +1397,7 @@ public class sequence_controller extends script.base_script
         spawnActors(self, triggerId);
         return SCRIPT_CONTINUE;
     }
+
     public void setUpWaitTree(String object) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -1306,9 +1416,9 @@ public class sequence_controller extends script.base_script
             masterList = utils.getResizeableStringArrayScriptVar(self, WFC_MASTER);
             utils.removeScriptVar(self, WFC_MASTER);
         }
-        if (!masterList.contains(object.substring(16, object.length())))
+        if (!masterList.contains(object.substring(16)))
         {
-            utils.addElement(masterList, object.substring(16, object.length()));
+            utils.addElement(masterList, object.substring(16));
         }
         utils.setScriptVar(self, WFC_MASTER, masterList);
         for (int i = 0; i < tasks.length; i++)
@@ -1316,6 +1426,7 @@ public class sequence_controller extends script.base_script
             utils.setScriptVar(self, WFC_TREE + "." + signalName + "." + i + tasks[i], 0);
         }
     }
+
     public void sendTaskCompleteSignal(String object) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -1328,6 +1439,7 @@ public class sequence_controller extends script.base_script
         dict.put("waitForComplete", parse[1]);
         messageTo(self, "waitForComplete", dict, 0.0f, false);
     }
+
     public int waitForComplete(obj_id self, dictionary params) throws InterruptedException
     {
         String signal = params.getString("waitForComplete");
@@ -1336,18 +1448,22 @@ public class sequence_controller extends script.base_script
             return SCRIPT_CONTINUE;
         }
         Vector masterList = utils.getResizeableStringArrayScriptVar(self, WFC_MASTER);
-        for (Object o : masterList) {
+        for (Object o : masterList)
+        {
             handleCheckForComplete(((String) o), signal);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void completeTaskId(String signal) throws InterruptedException
     {
         Vector masterList = utils.getResizeableStringArrayScriptVar(getSelf(), WFC_MASTER);
-        for (Object o : masterList) {
+        for (Object o : masterList)
+        {
             handleCheckForComplete(((String) o), signal);
         }
     }
+
     public void handleCheckForComplete(String masterList, String signal) throws InterruptedException
     {
         String[] parse = split(masterList, ':');
@@ -1364,7 +1480,7 @@ public class sequence_controller extends script.base_script
                     isComplete++;
                     continue;
                 }
-                else 
+                else
                 {
                     utils.setScriptVar(getSelf(), WFC_TREE + "." + triggerName + "." + i + tasks[i], 1);
                     isComplete++;
@@ -1372,7 +1488,7 @@ public class sequence_controller extends script.base_script
                     continue;
                 }
             }
-            else 
+            else
             {
                 isComplete += utils.getIntScriptVar(getSelf(), WFC_TREE + "." + triggerName + "." + i + tasks[i]);
             }
@@ -1389,13 +1505,14 @@ public class sequence_controller extends script.base_script
             {
                 utils.removeScriptVar(getSelf(), WFC_MASTER);
             }
-            else 
+            else
             {
                 utils.setScriptVar(getSelf(), WFC_MASTER, vectorList);
             }
         }
         return;
     }
+
     public obj_id establishPatrolPoint(String ppData, location spawnLoc, boolean isIndoor) throws InterruptedException
     {
         String[] parse = split(ppData, ':');
@@ -1407,11 +1524,13 @@ public class sequence_controller extends script.base_script
         trial.setParent(getSelf(), patrolPoint, true);
         return patrolPoint;
     }
+
     public obj_id[] getObjectsInSpawnedListWithObjVar(obj_id self, String objvar) throws InterruptedException
     {
         obj_id[] children = getSpawnedChildren(self);
         return trial.getObjectsInListWithObjVar(children, objvar);
     }
+
     public void queueDelayAction(String object) throws InterruptedException
     {
         String[] parse = split(object, ':');
@@ -1421,6 +1540,7 @@ public class sequence_controller extends script.base_script
         dict.put("triggerId", triggerId);
         messageTo(getSelf(), "doDelayedSpawnActors", dict, delay, false);
     }
+
     public void setWayPointLinks(obj_id self) throws InterruptedException
     {
         if (true)
@@ -1432,31 +1552,39 @@ public class sequence_controller extends script.base_script
         {
             return;
         }
-        for (obj_id obj_id : pp) {
-            if (!isIdValid(obj_id) || !exists(obj_id)) {
+        for (obj_id obj_id : pp)
+        {
+            if (!isIdValid(obj_id) || !exists(obj_id))
+            {
                 continue;
             }
             establishConnectionData(obj_id, pp);
         }
     }
+
     public void establishConnectionData(obj_id point, obj_id[] ppl) throws InterruptedException
     {
         Vector ppData = new Vector();
         ppData.setSize(0);
-        for (obj_id obj_id : ppl) {
-            if (!isIdValid(obj_id) || !exists(obj_id)) {
+        for (obj_id obj_id : ppl)
+        {
+            if (!isIdValid(obj_id) || !exists(obj_id))
+            {
                 continue;
             }
-            if (!canSee(point, obj_id)) {
+            if (!canSee(point, obj_id))
+            {
                 continue;
             }
-            if (point == obj_id) {
+            if (point == obj_id)
+            {
                 continue;
             }
             ppData.add("" + obj_id + "-" + getDistance(point, obj_id));
         }
         utils.setScriptVar(point, trial.WP_DATA, ppData);
     }
+
     public int terminationCallback(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -1481,6 +1609,7 @@ public class sequence_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedSpawnRow(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -1491,17 +1620,23 @@ public class sequence_controller extends script.base_script
         spawnActorRow(row);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id doRandomSpawn(String[] list, location spawnLoc) throws InterruptedException
     {
         Vector spawnList = new Vector();
         spawnList.setSize(0);
-        for (String s : list) {
+        for (String s : list)
+        {
             String[] subSplit = split(s, ':');
-            if (subSplit.length == 1) {
+            if (subSplit.length == 1)
+            {
                 spawnList.add(s);
-            } else {
+            }
+            else
+            {
                 int numberAdd = utils.stringToInt(subSplit[1]);
-                for (int q = 0; q < numberAdd; q++) {
+                for (int q = 0; q < numberAdd; q++)
+                {
                     spawnList.add(subSplit[0]);
                 }
             }
@@ -1510,9 +1645,10 @@ public class sequence_controller extends script.base_script
         {
             return null;
         }
-        String toSpawn = ((String)spawnList.get(rand(0, spawnList.size() - 1)));
+        String toSpawn = ((String) spawnList.get(rand(0, spawnList.size() - 1)));
         return create.object(toSpawn, spawnLoc);
     }
+
     public void executeRandomTrigger(String object) throws InterruptedException
     {
         String[] parse = split(object, ':');
@@ -1523,6 +1659,7 @@ public class sequence_controller extends script.base_script
         dict.put("triggerName", toExecute);
         messageTo(getSelf(), "triggerFired", dict, 0.0f, false);
     }
+
     public void sendInstanceMessage(String object) throws InterruptedException
     {
         String[] parse = split(object, ':');
@@ -1545,16 +1682,17 @@ public class sequence_controller extends script.base_script
             {
                 utils.messagePlayer(getSelf(), players, message, templateOverride, duration);
             }
-            else 
+            else
             {
                 utils.messagePlayer(getSelf(), players, message, templateOverride);
             }
         }
-        else 
+        else
         {
             utils.sendSystemMessage(players, message);
         }
     }
+
     public void performTheaterAction(obj_id self, String object) throws InterruptedException
     {
         String[] parse = split(object, ':');
@@ -1566,8 +1704,10 @@ public class sequence_controller extends script.base_script
             return;
         }
         obj_id objActor = null;
-        for (obj_id allId : allIds) {
-            if ((getStringObjVar(allId, "spawn_id")).equals(actor)) {
+        for (obj_id allId : allIds)
+        {
+            if ((getStringObjVar(allId, "spawn_id")).equals(actor))
+            {
                 objActor = allId;
             }
         }
@@ -1596,6 +1736,7 @@ public class sequence_controller extends script.base_script
             movement.performRun(objActor, parse[3]);
         }
     }
+
     public void performFacingAction(obj_id self, obj_id actor, String object) throws InterruptedException
     {
         String[] parse = split(object, ':');
@@ -1605,8 +1746,10 @@ public class sequence_controller extends script.base_script
         obj_id objTarget = null;
         if (target.equals("spawn_id"))
         {
-            for (obj_id allId : allIds) {
-                if ((getStringObjVar(allId, "spawn_id")).equals(affector)) {
+            for (obj_id allId : allIds)
+            {
+                if ((getStringObjVar(allId, "spawn_id")).equals(affector))
+                {
                     objTarget = allId;
                 }
             }
@@ -1629,6 +1772,7 @@ public class sequence_controller extends script.base_script
             }
         }
     }
+
     public void performChatAction(obj_id self, obj_id actor, String object) throws InterruptedException
     {
         String[] parse = split(object, ':');
@@ -1636,12 +1780,14 @@ public class sequence_controller extends script.base_script
         string_id stringId = new string_id("sequencer_spam", parse[4]);
         chat.chat(actor, chatAction, stringId);
     }
+
     public void performAnimation(obj_id self, obj_id actor, String object) throws InterruptedException
     {
         String[] parse = split(object, ':');
         String action = parse[3];
         doAnimationAction(actor, action);
     }
+
     public void doObjVarAction(obj_id self, String object) throws InterruptedException
     {
         String[] parse = split(object, ':');
@@ -1650,27 +1796,38 @@ public class sequence_controller extends script.base_script
         String type = parse[3];
         String name = parse[4];
         obj_id[] spawn_ids = getObjectsInSpawnedListWithObjVar(self, "spawn_id");
-        for (obj_id spawn_id : spawn_ids) {
-            if (!(getStringObjVar(spawn_id, "spawn_id")).equals(id)) {
+        for (obj_id spawn_id : spawn_ids)
+        {
+            if (!(getStringObjVar(spawn_id, "spawn_id")).equals(id))
+            {
                 continue;
             }
-            if (action.equals("set")) {
+            if (action.equals("set"))
+            {
                 String value = parse[5];
-                if (type.equals("int")) {
+                if (type.equals("int"))
+                {
                     setObjVar(spawn_id, name, utils.stringToInt(value));
-                } else if (type.equals("float")) {
+                }
+                else if (type.equals("float"))
+                {
                     setObjVar(spawn_id, name, utils.stringToFloat(value));
-                } else {
+                }
+                else
+                {
                     setObjVar(spawn_id, name, value);
                 }
             }
-            if (action.equals("remove")) {
-                if (hasObjVar(spawn_id, name)) {
+            if (action.equals("remove"))
+            {
+                if (hasObjVar(spawn_id, name))
+                {
                     removeObjVar(spawn_id, name);
                 }
             }
         }
     }
+
     public void doScriptAction(obj_id self, String object) throws InterruptedException
     {
         String[] parse = split(object, ':');
@@ -1678,20 +1835,26 @@ public class sequence_controller extends script.base_script
         String action = parse[2];
         String name = parse[3];
         obj_id[] spawn_ids = getObjectsInSpawnedListWithObjVar(self, "spawn_id");
-        for (obj_id spawn_id : spawn_ids) {
-            if (!(getStringObjVar(spawn_id, "spawn_id")).equals(id)) {
+        for (obj_id spawn_id : spawn_ids)
+        {
+            if (!(getStringObjVar(spawn_id, "spawn_id")).equals(id))
+            {
                 continue;
             }
-            if (action.equals("attach")) {
+            if (action.equals("attach"))
+            {
                 attachScript(spawn_id, name);
             }
-            if (action.equals("detach")) {
-                if (hasScript(spawn_id, name)) {
+            if (action.equals("detach"))
+            {
+                if (hasScript(spawn_id, name))
+                {
                     detachScript(spawn_id, name);
                 }
             }
         }
     }
+
     public void setBuffHandler(obj_id self, String object) throws InterruptedException
     {
         String[] parse = split(object, ':');
@@ -1706,8 +1869,10 @@ public class sequence_controller extends script.base_script
                 obj_id[] players = instance.getPlayersInInstanceArea(self);
                 if (players != null && players.length > 0)
                 {
-                    for (obj_id player : players) {
-                        if (isIdValid(player) && exists(player)) {
+                    for (obj_id player : players)
+                    {
+                        if (isIdValid(player) && exists(player))
+                        {
                             buff.applyBuff(player, buffList);
                         }
                     }
@@ -1720,8 +1885,10 @@ public class sequence_controller extends script.base_script
                 obj_id[] allIds = trial.getObjectsInInstanceBySpawnId(self, spawn_id);
                 if (allIds != null && allIds.length > 0)
                 {
-                    for (obj_id allId : allIds) {
-                        if (isIdValid(allId) && exists(allId)) {
+                    for (obj_id allId : allIds)
+                    {
+                        if (isIdValid(allId) && exists(allId))
+                        {
                             buff.applyBuff(allId, buffList);
                         }
                     }
@@ -1729,6 +1896,7 @@ public class sequence_controller extends script.base_script
             }
         }
     }
+
     public void setCellPermission(obj_id self, String object) throws InterruptedException
     {
         String[] parse = split(object, ':');
@@ -1749,6 +1917,7 @@ public class sequence_controller extends script.base_script
             }
         }
     }
+
     public int sendProxySignal(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params))
@@ -1772,6 +1941,7 @@ public class sequence_controller extends script.base_script
         doMessgeTo(target, message);
         return SCRIPT_CONTINUE;
     }
+
     public void setFullPathData(obj_id object) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -1782,6 +1952,7 @@ public class sequence_controller extends script.base_script
         }
         utils.setScriptVar(object, trial.PATROL_PATH_FULL_DATA, pathArray);
     }
+
     public String[] getFullPathData(obj_id instance) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -1796,15 +1967,17 @@ public class sequence_controller extends script.base_script
         }
         return path_column;
     }
+
     public int[] fillRowArray(int num_rows) throws InterruptedException
     {
-        int int_array[] = new int[num_rows];
+        int[] int_array = new int[num_rows];
         for (int i = 0; i < num_rows; i++)
         {
             int_array[i] = i + 1;
         }
         return int_array;
     }
+
     public String[] getPathPointLocationArrayKeyList(String[] object, String[] room, float[] loc_x, float[] loc_y, float[] loc_z) throws InterruptedException
     {
         Vector newPathData = new Vector();
@@ -1839,6 +2012,7 @@ public class sequence_controller extends script.base_script
         }
         return _newPathData;
     }
+
     public int view(obj_id self, dictionary params) throws InterruptedException
     {
         dictionary dict = utils.getDictionaryScriptVar(self, trial.SEQUENCER_PATH_DATA);
@@ -1847,12 +2021,14 @@ public class sequence_controller extends script.base_script
         String[] patrolNameMaster = dict.getStringArray("patrolNameMaster");
         String[] patrolTypeMaster = dict.getStringArray("patrolTypeMaster");
         String[] patrolListMaster = dict.getStringArray("patrolListMaster");
-        for (String s : patrolListMaster) {
+        for (String s : patrolListMaster)
+        {
             doLogging("xx", "" + s);
         }
         doLogging("xx", "" + patrolListMaster.length);
         return SCRIPT_CONTINUE;
     }
+
     public void setFullPathDataDictionary(String[] pp_location, String[] path_data) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -1862,6 +2038,7 @@ public class sequence_controller extends script.base_script
         dict = fillPathKeyList(dict, path_data, points, locs);
         utils.setScriptVar(getSelf(), trial.SEQUENCER_PATH_DATA, dict);
     }
+
     public dictionary getPpLocDict(dictionary dict, String[] pp_location) throws InterruptedException
     {
         String[] thesePoints = new String[pp_location.length];
@@ -1877,6 +2054,7 @@ public class sequence_controller extends script.base_script
         dict.put("pathPointLocationArray", locArray);
         return dict;
     }
+
     public location[] getLocArrayFromLocString(String[] locationString) throws InterruptedException
     {
         location[] locArray = new location[locationString.length];
@@ -1893,7 +2071,7 @@ public class sequence_controller extends script.base_script
             {
                 newLoc = new location(locx, locy, locz, area);
             }
-            else 
+            else
             {
                 newLoc = new location(locx, locy, locz, area, cell);
             }
@@ -1901,6 +2079,7 @@ public class sequence_controller extends script.base_script
         }
         return locArray;
     }
+
     public dictionary fillPathKeyList(dictionary dict, String[] path_data, String[] points, location[] locs) throws InterruptedException
     {
         if (path_data == null || path_data.length == 0)
@@ -1922,6 +2101,7 @@ public class sequence_controller extends script.base_script
         dict.put("patrolListMaster", nameArray);
         return dict;
     }
+
     public void handleSetCellLabel(obj_id self, String object) throws InterruptedException
     {
         String[] parse = split(object, ':');
@@ -1941,6 +2121,7 @@ public class sequence_controller extends script.base_script
             setCellLabelOffset(cellId, flox, floy, floz);
         }
     }
+
     public int registerObjectWithSequencer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id object = params.getObjId("object");
@@ -1948,6 +2129,7 @@ public class sequence_controller extends script.base_script
         storeSpawnedChild(self, object, spawn_id);
         return SCRIPT_CONTINUE;
     }
+
     public int unregisterObjectWithSequencer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id object = params.getObjId("object");
@@ -1955,6 +2137,7 @@ public class sequence_controller extends script.base_script
         removeSpawnChild(object, spawn_id);
         return SCRIPT_CONTINUE;
     }
+
     public void setPlayerListOnObject(obj_id sequencer, obj_id object) throws InterruptedException
     {
         obj_id[] playerList = instance.getPlayerIdList(sequencer);
@@ -1964,6 +2147,7 @@ public class sequence_controller extends script.base_script
         }
         utils.setScriptVar(object, instance.PLAYER_ID_LIST, playerList);
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

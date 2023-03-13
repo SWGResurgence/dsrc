@@ -11,6 +11,7 @@ public class blueprint_split_controller extends script.base_script
     public blueprint_split_controller()
     {
     }
+
     public int handleSplitBlueprintItemCreation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -56,7 +57,7 @@ public class blueprint_split_controller extends script.base_script
             webster.put("targetYaw", targetYaw);
             messageTo(self, "handleSplitBlueprintItemCreation", webster, 1, false);
         }
-        else 
+        else
         {
             if (exists(player) && utils.hasScriptVar(player, "storyteller.godModeStopOverrideMessages"))
             {

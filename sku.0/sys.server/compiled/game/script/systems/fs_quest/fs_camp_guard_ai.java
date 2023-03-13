@@ -8,10 +8,12 @@ import script.string_id;
 
 public class fs_camp_guard_ai extends script.base_script
 {
+    public static final String VAR_SPAWNED_BY = "quest_spawner.spawned_by";
+
     public fs_camp_guard_ai()
     {
     }
-    public static final String VAR_SPAWNED_BY = "quest_spawner.spawned_by";
+
     public void setPatrolPaths() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -42,6 +44,7 @@ public class fs_camp_guard_ai extends script.base_script
         trace.log(fs_dyn_village.LOG_CHAN, "Sending camp defenders to " + targetLocation.toString());
         ai_lib.aiPathTo(self, targetLocation);
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "msgSpoutOff", null, rand(10, 30), false);
@@ -77,9 +80,9 @@ public class fs_camp_guard_ai extends script.base_script
                     }
                     z += 15;
                     utils.setScriptVar(self, "patrolTargets", new location[]
-                    {
-                        new location(campLoc.x, campLoc.y, z)
-                    });
+                            {
+                                    new location(campLoc.x, campLoc.y, z)
+                            });
                     setPatrolPaths();
                 }
             }
@@ -87,6 +90,7 @@ public class fs_camp_guard_ai extends script.base_script
         setPatrolPaths();
         return SCRIPT_CONTINUE;
     }
+
     public int msgSpoutOff(obj_id self, dictionary params) throws InterruptedException
     {
         if (rand(0, 100) > 75)
@@ -97,6 +101,7 @@ public class fs_camp_guard_ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         obj_id camp = fs_counterstrike.getMyOutpostId(self);
@@ -112,22 +117,26 @@ public class fs_camp_guard_ai extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathNotFound(obj_id self) throws InterruptedException
     {
         setPatrolPaths();
         return SCRIPT_CONTINUE;
     }
+
     public int tryPathAgain(obj_id self, dictionary params) throws InterruptedException
     {
         setPatrolPaths();
         return SCRIPT_CONTINUE;
     }
+
     public int resumeDefaultCalmBehavior(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("fs_quest", "resumeDefaultCalmBehavior");
         setPatrolPaths();
         return SCRIPT_CONTINUE;
     }
+
     public int msgSelfDestruct(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

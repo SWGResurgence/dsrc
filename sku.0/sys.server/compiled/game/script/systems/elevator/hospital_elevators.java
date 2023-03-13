@@ -8,6 +8,7 @@ public class hospital_elevators extends script.base_script
     public hospital_elevators()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -37,7 +38,7 @@ public class hospital_elevators extends script.base_script
             setObjVar(self, "terminalA2", elevatorTerminalA2b);
             setObjVar(self, "terminal3", elevatorTerminalA3);
         }
-        else 
+        else
         {
             LOG("elevator", "hospital_elevators could not get 'elevatora' cell");
         }
@@ -67,7 +68,7 @@ public class hospital_elevators extends script.base_script
             setObjVar(self, "terminalB2", elevatorTerminalB2b);
             setObjVar(self, "terminal6", elevatorTerminalB3);
         }
-        else 
+        else
         {
             LOG("elevator", "hospital_elevators could not get 'elevatorb' cell");
         }

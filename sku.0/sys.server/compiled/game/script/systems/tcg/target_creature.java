@@ -5,9 +5,6 @@ import script.library.*;
 
 public class target_creature extends script.base_script
 {
-    public target_creature()
-    {
-    }
     public static final String TERMINAL_LOGGING = "target_creature";
     public static final boolean LOGGING_ON = false;
     public static final int OPTIONS_REPORT_COMBAT_DATA = menu_info_types.SERVER_MENU1;
@@ -24,15 +21,21 @@ public class target_creature extends script.base_script
     public static final int OPTIONS_EXTRAS_RANDOM = menu_info_types.SERVER_MENU12;
     public static final int OPTIONS_EXTRAS_TRICK = menu_info_types.SERVER_MENU13;
     public static final int OPTIONS_ANIMATIONS = menu_info_types.SERVER_MENU14;
+    public target_creature()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleTargetCreatureSetUp", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handleTargetCreatureSetUp(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id controller = target_dummy.getTargetDummyController(self);
@@ -65,12 +68,13 @@ public class target_creature extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             destroyObject(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -95,7 +99,7 @@ public class target_creature extends script.base_script
                         {
                             mi.addSubMenu(menuNpcOptions, OPTIONS_ANIMATIONS, new string_id("target_dummy", "menu_turnon_target_dummy_anims"));
                         }
-                        else 
+                        else
                         {
                             mi.addSubMenu(menuNpcOptions, OPTIONS_ANIMATIONS, new string_id("target_dummy", "menu_turnoff_target_dummy_anims"));
                         }
@@ -105,7 +109,7 @@ public class target_creature extends script.base_script
                     {
                         mi.addSubMenu(menuNpcOptions, OPTIONS_CLEANUP, new string_id("target_dummy", "menu_cleanup_target_creature"));
                     }
-                    else 
+                    else
                     {
                         mi.addSubMenu(menuNpcOptions, OPTIONS_CLEANUP, new string_id("target_dummy", "menu_cleanup_target_object"));
                     }
@@ -139,6 +143,7 @@ public class target_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int menu) throws InterruptedException
     {
         if (menu == OPTIONS_REPORT_COMBAT_DATA)
@@ -156,7 +161,7 @@ public class target_creature extends script.base_script
                 setObjVar(self, target_dummy.TARGET_DUMMY_NO_SOUND, true);
                 sendSystemMessage(player, target_dummy.SID_SOUND_ANIMS_OFF);
             }
-            else 
+            else
             {
                 removeObjVar(self, target_dummy.TARGET_DUMMY_NO_SOUND);
                 sendSystemMessage(player, target_dummy.SID_SOUND_ANIMS_ON);
@@ -230,12 +235,14 @@ public class target_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         blog("OnDestroy - creature reports being destroyed");
         target_dummy.removeTargetDummyFromPermissions(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTargetDummyCombatReport(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -251,7 +258,7 @@ public class target_creature extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 obj_id controller = target_dummy.getTargetDummyController(self);
                 if (isIdValid(controller))
@@ -262,12 +269,12 @@ public class target_creature extends script.base_script
                         {
                             target_dummy.confirmClearYourCombatData(self, player);
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(player, new string_id("target_dummy", "placement_no_combat_data"));
                         }
                     }
-                    else 
+                    else
                     {
                         target_dummy.reportCombatDataViaController(player, self, controller);
                     }
@@ -276,6 +283,7 @@ public class target_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int confirmClearYourCombatData(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -293,7 +301,7 @@ public class target_creature extends script.base_script
                 {
                     target_dummy.clearYourCombatData(self, player);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id("target_dummy", "placement_no_combat_data"));
                 }
@@ -301,6 +309,7 @@ public class target_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int confirmClearAllCombatData(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -318,7 +327,7 @@ public class target_creature extends script.base_script
                 {
                     target_dummy.clearAllCombatData(self, player);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id("target_dummy", "placement_no_combat_data"));
                 }
@@ -326,6 +335,7 @@ public class target_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTargetDummyLevelSelect(obj_id self, dictionary params) throws InterruptedException
     {
         blog("handleTargetDummyLevelSelect - init");
@@ -345,7 +355,7 @@ public class target_creature extends script.base_script
         {
             sendSystemMessage(player, new string_id("target_dummy", "combat_level_invalid"));
         }
-        else 
+        else
         {
             blog("handleTargetDummyLevelSelect - setting");
             int difficulty = target_dummy.getTargetDummyDifficulty(self);
@@ -356,6 +366,7 @@ public class target_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTargetDummyDifficultySelect(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -376,6 +387,7 @@ public class target_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int targetDummyDefenseTypeSelected(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -392,6 +404,7 @@ public class target_creature extends script.base_script
         target_dummy.promptForDefensiveValue(self, player, skill_mod_selected);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTargetDummyDefensiveSkillModSet(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -409,23 +422,28 @@ public class target_creature extends script.base_script
         target_dummy.setTargetDummyDefensiveValue(self, player, value);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         obj_id hateTarget = getHateTarget(self);
         messageTo(self, "handleTargetDummyCombatTick", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTargetDummyCombatTick(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] enemies = getHateList(self);
         if (enemies != null && enemies.length > 0)
         {
             messageTo(self, "handleTargetDummyCombatTick", null, 3, false);
-            for (obj_id enemy : enemies) {
-                if (isIdValid(enemy)) {
+            for (obj_id enemy : enemies)
+            {
+                if (isIdValid(enemy))
+                {
                     location there = getLocation(enemy);
                     location here = getLocation(self);
-                    if (!isValidLocation(there) || !isValidLocation(here) || there.cell != here.cell || utils.getDistance2D(here, there) > 60) {
+                    if (!isValidLocation(there) || !isValidLocation(here) || there.cell != here.cell || utils.getDistance2D(here, there) > 60)
+                    {
                         target_dummy.removeAttackerFromCombat(self, enemy);
                     }
                 }
@@ -433,18 +451,22 @@ public class target_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnHateTargetChanged(obj_id self, obj_id target) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnHateTargetRemoved(obj_id self, obj_id target) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         blog("OnCreatureDamaged - creature dmg");
@@ -454,7 +476,8 @@ public class target_creature extends script.base_script
             playTargetDummySound(self, attacker);
         }
         int currentHealth = getAttrib(self, HEALTH);
-        for (int i1 : damage) {
+        for (int i1 : damage)
+        {
             currentHealth = currentHealth - i1;
         }
         blog("OnCreatureDamaged - currentHealth: " + currentHealth);
@@ -466,10 +489,12 @@ public class target_creature extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;
     }
+
     public int faceThePlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = getObjIdObjVar(self, target_dummy.OWNER_OBJVAR);
@@ -481,6 +506,7 @@ public class target_creature extends script.base_script
         messageTo(self, "waveThePlayer", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int waveThePlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = getObjIdObjVar(self, target_dummy.OWNER_OBJVAR);
@@ -492,11 +518,13 @@ public class target_creature extends script.base_script
         playClientEffectObj(self, "sound/dro_fs_biped.snd", owner, "");
         return SCRIPT_CONTINUE;
     }
+
     public int removeSoundDelay(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, target_dummy.TARGET_DUMMY_SOUND_DELAY);
         return SCRIPT_CONTINUE;
     }
+
     public int checkCurrentLocation(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isInWorldCell(self))
@@ -511,6 +539,7 @@ public class target_creature extends script.base_script
         target_dummy.cleanupTargetDummy(controller, self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean playTargetDummySound(obj_id dummy, obj_id attacker) throws InterruptedException
     {
         if (!isValidId(dummy) || !isValidId(attacker))
@@ -541,6 +570,7 @@ public class target_creature extends script.base_script
         messageTo(dummy, "removeSoundDelay", null, rand(3, 10), false);
         return true;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (msg == null || msg.equals(""))

@@ -10,22 +10,28 @@ import java.util.Vector;
 
 public class crafting_base_food extends script.systems.crafting.crafting_base
 {
+    public static final String VERSION = "v1.00.00";
+
     public crafting_base_food()
     {
     }
-    public static final String VERSION = "v1.00.00";
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (((itemAttribute.name).getAsciiId()).equals("filling")) {
+            if (((itemAttribute.name).getAsciiId()).equals("filling"))
+            {
                 itemAttribute.currentValue = (itemAttribute.minValue + itemAttribute.maxValue) - itemAttribute.currentValue;
             }
         }
         super.calcAndSetPrototypeProperties(prototype, itemAttributes, craftingValuesDictionary);
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         int filling = 0;
@@ -44,8 +50,9 @@ public class crafting_base_food extends script.systems.crafting.crafting_base
             {
                 obj_var objVar = attributeList.getObjVar(i);
                 String name = objVar.getName();
-                int value = (int)objVar.getFloatData();
-                switch (name) {
+                int value = (int) objVar.getFloatData();
+                switch (name)
+                {
                     case "crafting:filling":
                         filling = value;
                         break;
@@ -86,29 +93,29 @@ public class crafting_base_food extends script.systems.crafting.crafting_base
                 switch (effect_type[i])
                 {
                     case bio_engineer.BIO_COMP_EFFECT_DURATION:
-                    health_dur += (int)((health_dur * effect_mod[i]) / 100);
-                    con_dur += (int)((con_dur * effect_mod[i]) / 100);
-                    action_dur += (int)((action_dur * effect_mod[i]) / 100);
-                    stam_dur += (int)((stam_dur * effect_mod[i]) / 100);
-                    break;
+                        health_dur += (health_dur * effect_mod[i]) / 100;
+                        con_dur += (con_dur * effect_mod[i]) / 100;
+                        action_dur += (action_dur * effect_mod[i]) / 100;
+                        stam_dur += (stam_dur * effect_mod[i]) / 100;
+                        break;
                     case bio_engineer.BIO_COMP_EFFECT_FLAVOR:
-                    health_e += (int)((health_e * effect_mod[i]) / 100);
-                    con_e += (int)((con_e * effect_mod[i]) / 100);
-                    action_e += (int)((action_e * effect_mod[i]) / 100);
-                    stam_e += (int)((stam_e * effect_mod[i]) / 100);
-                    break;
+                        health_e += (health_e * effect_mod[i]) / 100;
+                        con_e += (con_e * effect_mod[i]) / 100;
+                        action_e += (action_e * effect_mod[i]) / 100;
+                        stam_e += (stam_e * effect_mod[i]) / 100;
+                        break;
                     case bio_engineer.BIO_COMP_EFFECT_HEALTH_MOD:
-                    health_e += effect_mod[i];
-                    break;
+                        health_e += effect_mod[i];
+                        break;
                     case bio_engineer.BIO_COMP_EFFECT_CON_MOD:
-                    con_e += effect_mod[i];
-                    break;
+                        con_e += effect_mod[i];
+                        break;
                     case bio_engineer.BIO_COMP_EFFECT_ACTION_MOD:
-                    action_e += effect_mod[i];
-                    break;
+                        action_e += effect_mod[i];
+                        break;
                     case bio_engineer.BIO_COMP_EFFECT_STAM_MOD:
-                    stam_e += effect_mod[i];
-                    break;
+                        stam_e += effect_mod[i];
+                        break;
                 }
             }
         }
@@ -140,6 +147,7 @@ public class crafting_base_food extends script.systems.crafting.crafting_base
         }
         fillStomach(prototype, filling);
     }
+
     public void fillStomach(obj_id prototype, int filling) throws InterruptedException
     {
     }

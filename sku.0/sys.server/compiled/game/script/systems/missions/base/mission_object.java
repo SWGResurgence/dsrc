@@ -12,11 +12,13 @@ public class mission_object extends script.systems.missions.base.mission_dynamic
     public mission_object()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("mission_spam", "Mission data is live, obj_id is " + self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "isPlayerCreated"))
@@ -25,6 +27,7 @@ public class mission_object extends script.systems.missions.base.mission_dynamic
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id player = getMissionHolder(self);
@@ -36,12 +39,14 @@ public class mission_object extends script.systems.missions.base.mission_dynamic
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGrantMission(obj_id self, obj_id target) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Assigning mission to " + target.toString());
         assignMission(self, target);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (player == null || names == null || attribs == null || names.length != attribs.length)
@@ -71,10 +76,12 @@ public class mission_object extends script.systems.missions.base.mission_dynamic
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMissionAssigned(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int objectCreated(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("missions", "Got message");

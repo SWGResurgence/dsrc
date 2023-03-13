@@ -10,6 +10,7 @@ public class trap extends script.systems.combat.combat_base
     public trap()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "armed") && getIntObjVar(self, "armed") == 1)
@@ -18,6 +19,7 @@ public class trap extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (hasObjVar(self, "armed"))
@@ -27,11 +29,13 @@ public class trap extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         stealth.onGetTrapAttributes(self, player, names, attribs, getFirstFreeIndex(names));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -66,16 +70,17 @@ public class trap extends script.systems.combat.combat_base
         switch (triggerType)
         {
             case stealth.TRIGGER_TYPE_TIMER:
-            mi.addRootMenu(menu_info_types.SERVER_MENU5, new string_id("spam", "set_time"));
-            break;
+                mi.addRootMenu(menu_info_types.SERVER_MENU5, new string_id("spam", "set_time"));
+                break;
             case stealth.TRIGGER_TYPE_PROXIMITY:
-            mi.addRootMenu(menu_info_types.SERVER_MENU6, new string_id("spam", "set_trigger_distance"));
-            break;
+                mi.addRootMenu(menu_info_types.SERVER_MENU6, new string_id("spam", "set_trigger_distance"));
+                break;
             case stealth.TRIGGER_TYPE_REMOTE:
-            break;
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -112,39 +117,41 @@ public class trap extends script.systems.combat.combat_base
         if (item == menu_info_types.SERVER_MENU5 && triggerType == stealth.TRIGGER_TYPE_TIMER)
         {
             String[] items = new String[]
-            {
-                "@spam:seconds_3",
-                "@spam:seconds_5",
-                "@spam:seconds_7",
-                "@spam:seconds_10",
-                "@spam:seconds_15",
-                "@spam:seconds_20",
-                "@spam:seconds_30",
-                "@spam:seconds_45",
-                "@spam:seconds_60"
-            };
+                    {
+                            "@spam:seconds_3",
+                            "@spam:seconds_5",
+                            "@spam:seconds_7",
+                            "@spam:seconds_10",
+                            "@spam:seconds_15",
+                            "@spam:seconds_20",
+                            "@spam:seconds_30",
+                            "@spam:seconds_45",
+                            "@spam:seconds_60"
+                    };
             forceCloseSUIPage(utils.getIntScriptVar(player, "trapSui"));
             utils.setScriptVar(player, "trapSui", sui.listbox(self, player, "@spam:select_timer", "@spam:trigger_setup", items, "msgTimerSetup"));
         }
         else if (item == menu_info_types.SERVER_MENU6 && triggerType == stealth.TRIGGER_TYPE_PROXIMITY)
         {
             String[] items = new String[]
-            {
-                "@spam:meters_1",
-                "@spam:meters_5",
-                "@spam:meters_10"
-            };
+                    {
+                            "@spam:meters_1",
+                            "@spam:meters_5",
+                            "@spam:meters_10"
+                    };
             forceCloseSUIPage(utils.getIntScriptVar(player, "trapSui"));
             utils.setScriptVar(player, "trapSui", sui.listbox(self, player, "@spam:proximity_range", "@spam:trigger_setup", items, "msgProximitySetup"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgSelfDestructTimeout(obj_id self, dictionary params) throws InterruptedException
     {
         stealth.playSelfDestruct(self);
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgTryDetonateTimer(obj_id self, dictionary params) throws InterruptedException
     {
         int msgArmedAt = params.getInt("armed");
@@ -160,6 +167,7 @@ public class trap extends script.systems.combat.combat_base
         stealth.tryDetonateTrap(self, null);
         return SCRIPT_CONTINUE;
     }
+
     public int msgTryRemoteDetonate(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, stealth.TRAP_MY_PROXIMITY_TRIGGER))
@@ -177,17 +185,20 @@ public class trap extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgArmProximity(obj_id self, dictionary params) throws InterruptedException
     {
         createTriggerVolume(stealth.TRAP_PROXIMITY_VOLUME, getIntObjVar(self, stealth.PROXIMITY_RANGE), true);
         messageTo(self, "msgSetArmed", params, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgSetArmed(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "armed", params.getInt("armed"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (!volumeName.equals(stealth.TRAP_PROXIMITY_VOLUME))
@@ -206,6 +217,7 @@ public class trap extends script.systems.combat.combat_base
         stealth.tryDetonateTrap(self, breacher);
         return SCRIPT_CONTINUE;
     }
+
     public int msgProximitySetup(obj_id self, dictionary params) throws InterruptedException
     {
         int triggerType = getIntObjVar(self, stealth.TRIGGER_TYPE);
@@ -218,14 +230,14 @@ public class trap extends script.systems.combat.combat_base
         switch (row)
         {
             case 0:
-            distance = 1;
-            break;
+                distance = 1;
+                break;
             case 1:
-            distance = 5;
-            break;
+                distance = 5;
+                break;
             case 2:
-            distance = 10;
-            break;
+                distance = 10;
+                break;
         }
         setObjVar(self, stealth.PROXIMITY_RANGE, distance);
         obj_id container = getContainedBy(self);
@@ -235,6 +247,7 @@ public class trap extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgTimerSetup(obj_id self, dictionary params) throws InterruptedException
     {
         int triggerType = getIntObjVar(self, stealth.TRIGGER_TYPE);
@@ -247,34 +260,34 @@ public class trap extends script.systems.combat.combat_base
         switch (row)
         {
             case 0:
-            seconds = 3;
-            break;
+                seconds = 3;
+                break;
             case 1:
-            seconds = 5;
-            break;
+                seconds = 5;
+                break;
             case 2:
-            seconds = 7;
-            break;
+                seconds = 7;
+                break;
             case 3:
-            seconds = 10;
-            break;
+                seconds = 10;
+                break;
             case 4:
-            seconds = 15;
-            break;
+                seconds = 15;
+                break;
             case 5:
-            seconds = 20;
-            break;
+                seconds = 20;
+                break;
             case 6:
-            seconds = 30;
-            break;
+                seconds = 30;
+                break;
             case 7:
-            seconds = 45;
-            break;
+                seconds = 45;
+                break;
             case 8:
-            seconds = 60;
-            break;
+                seconds = 60;
+                break;
             case -1:
-            return SCRIPT_CONTINUE;
+                return SCRIPT_CONTINUE;
         }
         setObjVar(self, stealth.TIMER_TIME, seconds);
         obj_id container = getContainedBy(self);
@@ -284,6 +297,7 @@ public class trap extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int co_mine_hx2(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("target");

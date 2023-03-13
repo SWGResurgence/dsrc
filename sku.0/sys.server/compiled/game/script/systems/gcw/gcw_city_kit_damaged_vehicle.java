@@ -7,39 +7,45 @@ import script.obj_id;
 
 public class gcw_city_kit_damaged_vehicle extends script.systems.gcw.gcw_city_kit
 {
+    public static final String[] imperialVehicles =
+            {
+                    "gcw_city_at_st_1",
+                    "gcw_city_at_st_2",
+                    "gcw_city_at_st_3"
+            };
+    public static final String[] rebelVehicles =
+            {
+                    "gcw_city_at_xt_1",
+                    "gcw_city_at_xt_2",
+                    "gcw_city_at_xt_3"
+            };
     public gcw_city_kit_damaged_vehicle()
     {
     }
-    public static final String[] imperialVehicles = 
-    {
-        "gcw_city_at_st_1",
-        "gcw_city_at_st_2",
-        "gcw_city_at_st_3"
-    };
-    public static final String[] rebelVehicles = 
-    {
-        "gcw_city_at_xt_1",
-        "gcw_city_at_xt_2",
-        "gcw_city_at_xt_3"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasConstructionQuests() throws InterruptedException
     {
         return false;
     }
+
     public void setupConstructionQuests(obj_id self, obj_id pylon) throws InterruptedException
     {
     }
+
     public void setupInvasionQuests(obj_id kit) throws InterruptedException
     {
     }
+
     public int getConstructionQuestsCompleted(obj_id pylon) throws InterruptedException
     {
         return 100;
     }
+
     public obj_id createFactionKit(int faction, location loc) throws InterruptedException
     {
         dictionary params = new dictionary();
@@ -49,6 +55,7 @@ public class gcw_city_kit_damaged_vehicle extends script.systems.gcw.gcw_city_ki
         messageTo(self, "createDamagedVehicle", params, 1.0f, false);
         return null;
     }
+
     public int createDamagedVehicle(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -58,7 +65,7 @@ public class gcw_city_kit_damaged_vehicle extends script.systems.gcw.gcw_city_ki
         obj_id kit = getObjIdObjVar(self, "gcw.kitObj");
         if (isIdValid(kit) && exists(kit))
         {
-            messageTo(self, "createDamagedVehicle", params, (float)rand(0, 30) + 15, false);
+            messageTo(self, "createDamagedVehicle", params, (float) rand(0, 30) + 15, false);
             return SCRIPT_CONTINUE;
         }
         int faction = params.getInt("faction");
@@ -96,9 +103,10 @@ public class gcw_city_kit_damaged_vehicle extends script.systems.gcw.gcw_city_ki
             setObjVar(kit, gcw.GCW_TOOL_TEMPLATE_OBJVAR, "object/tangible/gcw/crafting_quest/gcw_vehicle_tool.iff");
             attachScript(kit, "systems.dungeon_sequencer.ai_controller");
         }
-        messageTo(self, "createDamagedVehicle", params, (float)rand(0, 30) + 60, false);
+        messageTo(self, "createDamagedVehicle", params, (float) rand(0, 30) + 60, false);
         return SCRIPT_CONTINUE;
     }
+
     public int createRepairedVehicle(obj_id self, dictionary params) throws InterruptedException
     {
         int faction = getIntObjVar(self, "factionFlag");

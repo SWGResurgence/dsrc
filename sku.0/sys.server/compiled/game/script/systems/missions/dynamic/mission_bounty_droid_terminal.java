@@ -10,12 +10,14 @@ public class mission_bounty_droid_terminal extends script.systems.missions.base.
     public mission_bounty_droid_terminal()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         string_id strBuyDroid = new string_id("mission/mission_generic", "buy_probe_droid");
         int mnu = mi.addRootMenu(menu_info_types.SERVER_PROBE_DROID_BUY, strBuyDroid);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_PROBE_DROID_BUY)
@@ -37,6 +39,7 @@ public class mission_bounty_droid_terminal extends script.systems.missions.base.
         }
         return SCRIPT_CONTINUE;
     }
+
     public int buyDroid(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -67,7 +70,7 @@ public class mission_bounty_droid_terminal extends script.systems.missions.base.
             strPrompt = utils.packStringId(strPromptId);
             setObjVar(playerId, "intDroidToBuy", DROID_PROBOT);
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
@@ -79,6 +82,7 @@ public class mission_bounty_droid_terminal extends script.systems.missions.base.
         sui.listbox(self, playerId, strPrompt, strText, "finalize_Purchase");
         return SCRIPT_CONTINUE;
     }
+
     public int finalize_Purchase(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("droid_purchase", "Droid purchased");
@@ -110,7 +114,7 @@ public class mission_bounty_droid_terminal extends script.systems.missions.base.
             {
                 intPrice = 200;
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }
@@ -123,6 +127,7 @@ public class mission_bounty_droid_terminal extends script.systems.missions.base.
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_Purchase_Success(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = params.getObjId("objPlayer");
@@ -143,7 +148,7 @@ public class mission_bounty_droid_terminal extends script.systems.missions.base.
         {
             strTemplate = "object/tangible/mission/mission_bounty_droid_probot.iff";
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
@@ -156,13 +161,14 @@ public class mission_bounty_droid_terminal extends script.systems.missions.base.
             utils.moneyInMetric(objPlayer, money.ACCT_BOUNTY, intPrice);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             string_id strSpam = new string_id("mission/mission_generic", "droid_purchase_complete");
             sendSystemMessage(objPlayer, strSpam);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int droid_Purchase_Fail(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = params.getObjId("objPlayer");

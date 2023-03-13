@@ -7,9 +7,6 @@ import script.library.utils;
 
 public class base_repair extends script.base_script
 {
-    public base_repair()
-    {
-    }
     public static final String SCRIPT_ME = "systems.crafting.base_repair";
     public static final String REPAIR_LIST_TITLE = "@sui:repairable_objects";
     public static final String REPAIR_LIST_PROMPT = "@sui:select_repair";
@@ -23,16 +20,22 @@ public class base_repair extends script.base_script
     public static final string_id SID_PERFECT_REPAIR = new string_id("error_message", "sys_repair_perfect");
     public static final string_id PROSE_ITEM_UNREPAIRABLE = new string_id("error_message", "sys_repair_unrepairable");
     public static final float MAX_ROLL = 10000;
+    public base_repair()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCount(self, 5);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         removeObjVar(self, OBJVAR_REPAIR_IDS);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -53,6 +56,7 @@ public class base_repair extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu;
@@ -63,6 +67,7 @@ public class base_repair extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item != menu_info_types.ITEM_USE)
@@ -88,7 +93,7 @@ public class base_repair extends script.base_script
                     objectIds[i] = objects[0][i].substring(0, markerPos);
                     objects[0][i] = "" + objects[0][i].substring(markerPos + 1);
                 }
-                else 
+                else
                 {
                     String err = "ERROR " + (getClass()).getName() + ".OnObjectMenuSelect: handling ITEM_USE " + "objects for player " + player + " returned invalid object string <" + objects[0][i] + ">";
                     debugServerConsoleMsg(null, err);
@@ -102,12 +107,13 @@ public class base_repair extends script.base_script
             sui.setSUIProperty(pid, sui.LISTBOX_BTN_OK, sui.PROP_TEXT, "@sui:repair");
             sui.showSUIPage(pid);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_SYS_NOTHING_REPAIR);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRepair(obj_id self, dictionary params) throws InterruptedException
     {
         String[] objectIds = getStringArrayObjVar(self, OBJVAR_REPAIR_IDS);
@@ -145,7 +151,7 @@ public class base_repair extends script.base_script
             debugServerConsoleMsg(null, err);
             LOG("crafting", err);
         }
-        else 
+        else
         {
             obj_id object = obj_id.getObjId(Long.parseLong(objectIds[idx]));
             if (object == obj_id.NULL_ID)
@@ -154,7 +160,7 @@ public class base_repair extends script.base_script
                 debugServerConsoleMsg(null, err);
                 LOG("crafting", err);
             }
-            else 
+            else
             {
                 debugServerConsoleMsg(null, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 debugServerConsoleMsg(null, "@@@");
@@ -170,7 +176,7 @@ public class base_repair extends script.base_script
                     debugServerConsoleMsg(null, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                     return SCRIPT_CONTINUE;
                 }
-                float roll = rand(1, (int)MAX_ROLL);
+                float roll = rand(1, (int) MAX_ROLL);
                 float skillMod = getEnhancedSkillStatisticModifier(player, "force_repair_bonus");
                 roll = roll + (skillMod * 10);
                 float complexity = getRepairComplexity(player, object);
@@ -195,7 +201,7 @@ public class base_repair extends script.base_script
                     maxHpMod = 0.95f;
                     sendSystemMessage(player, SID_PERFECT_REPAIR);
                     debugServerConsoleMsg(null, "@@@ Result: -- PERFECT REPAIR");
-                    new_max_hp = (int)(maxHp * maxHpMod);
+                    new_max_hp = (int) (maxHp * maxHpMod);
                     new_max_hp = validateMaxHp(new_max_hp, object);
                     setMaxHitpoints(object, new_max_hp);
                     setInvulnerableHitpoints(object, getMaxHitpoints(object));
@@ -205,7 +211,7 @@ public class base_repair extends script.base_script
                     maxHpMod = 0.80f;
                     sendSystemMessage(player, SID_SLIGHT_REPAIR);
                     debugServerConsoleMsg(null, "@@@ Result: -- SLIGHT REPAIR");
-                    new_max_hp = (int)(maxHp * maxHpMod);
+                    new_max_hp = (int) (maxHp * maxHpMod);
                     new_max_hp = validateMaxHp(new_max_hp, object);
                     setMaxHitpoints(object, new_max_hp);
                     setInvulnerableHitpoints(object, getMaxHitpoints(object));
@@ -215,7 +221,7 @@ public class base_repair extends script.base_script
                     maxHpMod = 0.66f;
                     sendSystemMessage(player, SID_IMPERFECT_REPAIR);
                     debugServerConsoleMsg(null, "@@@ Result: -- IMPERFECT REPAIR");
-                    new_max_hp = (int)(maxHp * maxHpMod);
+                    new_max_hp = (int) (maxHp * maxHpMod);
                     new_max_hp = validateMaxHp(new_max_hp, object);
                     setMaxHitpoints(object, new_max_hp);
                     setInvulnerableHitpoints(object, getMaxHitpoints(object));
@@ -239,6 +245,7 @@ public class base_repair extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public float getRepairComplexity(obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(player) || !isIdValid(target))
@@ -314,6 +321,7 @@ public class base_repair extends script.base_script
         }
         return complexity;
     }
+
     public void disableRepairTarget(obj_id target) throws InterruptedException
     {
         if (isIdValid(target))
@@ -331,11 +339,12 @@ public class base_repair extends script.base_script
             else if (isGameObjectTypeOf(got, GOT_installation))
             {
             }
-            else 
+            else
             {
             }
         }
     }
+
     public int validateMaxHp(int maxHp, obj_id object) throws InterruptedException
     {
         if (maxHp <= 1)

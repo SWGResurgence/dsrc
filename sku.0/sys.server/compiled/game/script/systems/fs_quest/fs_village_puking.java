@@ -11,12 +11,13 @@ import script.string_id;
 
 public class fs_village_puking extends script.base_script
 {
-    public fs_village_puking()
-    {
-    }
     public static final String PP_FILE_LOC = "quest/force_sensitive/fs_sick";
     public static final String RESPONSE_TEXT = "datatables/fs_quests/fs_sick.iff";
     public static int INITIAL_DELAY = 10;
+    public fs_village_puking()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasScript(self, "ai.creature_combat"))
@@ -35,6 +36,7 @@ public class fs_village_puking extends script.base_script
         messageTo(self, "fsOldSoup", null, INITIAL_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int fsOldSoup(obj_id self, dictionary params) throws InterruptedException
     {
         int randSick = rand(0, 6);
@@ -44,6 +46,7 @@ public class fs_village_puking extends script.base_script
         messageTo(self, "fsOldSoup", null, randRepeatMsg, false);
         return SCRIPT_CONTINUE;
     }
+
     public prose_package getRandSick(obj_id target, int sickRow) throws InterruptedException
     {
         string_id response = new string_id(PP_FILE_LOC, utils.dataTableGetString(RESPONSE_TEXT, sickRow, 1));

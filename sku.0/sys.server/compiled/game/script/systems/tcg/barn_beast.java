@@ -8,11 +8,13 @@ public class barn_beast extends script.base_script
     public barn_beast()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id barn = utils.getObjIdScriptVar(self, "barnId");
@@ -26,6 +28,7 @@ public class barn_beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -66,6 +69,7 @@ public class barn_beast extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnPack(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -85,11 +89,13 @@ public class barn_beast extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         target_dummy.removeTargetDummyFromPermissions(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!isMob(self))
@@ -115,7 +121,7 @@ public class barn_beast extends script.base_script
             }
         }
         names[idx] = "health";
-        attribs[idx] = " " + (int)getMaxAttrib(self, HEALTH);
+        attribs[idx] = " " + getMaxAttrib(self, HEALTH);
         idx++;
         int level = getLevel(self);
         if (level < 90)
@@ -143,7 +149,7 @@ public class barn_beast extends script.base_script
             int experiencePercentage = 0;
             if (experienceProgress > 0)
             {
-                experiencePercentage = (int)(((float)experienceProgress / experienceNeeded) * 100);
+                experiencePercentage = (int) (((float) experienceProgress / experienceNeeded) * 100);
             }
             names[idx] = "level_progress";
             attribs[idx] = "" + experiencePercentage + "%";
@@ -155,7 +161,7 @@ public class barn_beast extends script.base_script
             attribs[idx] = "true";
             idx++;
         }
-        else 
+        else
         {
             names[idx] = "exp_off";
             attribs[idx] = "true";
@@ -202,8 +208,8 @@ public class barn_beast extends script.base_script
             int minDamage = getWeaponMinDamage(beastWeapon);
             int maxDamage = getWeaponMaxDamage(beastWeapon);
             int expertiseDamageBonus = getEnhancedSkillStatisticModifierUncapped(self, "expertise_damage_all");
-            minDamage = (int)(minDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
-            maxDamage = (int)(maxDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
+            minDamage = (int) (minDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
+            maxDamage = (int) (maxDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
             float weaponSpeed = getWeaponAttackSpeed(beastWeapon);
             names[idx] = "damage";
             attribs[idx] = "" + minDamage + " - " + maxDamage;
@@ -216,7 +222,7 @@ public class barn_beast extends script.base_script
             attribs[idx] = "" + beastDPS;
             idx++;
         }
-        else 
+        else
         {
             obj_id defaultWeapon = getDefaultWeapon(self);
             if (isIdValid(defaultWeapon))
@@ -225,8 +231,8 @@ public class barn_beast extends script.base_script
                 int maxDamage = getWeaponMaxDamage(defaultWeapon);
                 float weaponSpeed = getWeaponAttackSpeed(defaultWeapon);
                 int expertiseDamageBonus = getEnhancedSkillStatisticModifierUncapped(self, "expertise_damage_all");
-                minDamage = (int)(minDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
-                maxDamage = (int)(maxDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
+                minDamage = (int) (minDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
+                maxDamage = (int) (maxDamage * (1.0f + (expertiseDamageBonus / 100.0f)));
                 names[idx] = "damage";
                 attribs[idx] = "" + minDamage + " - " + maxDamage;
                 idx++;
@@ -252,7 +258,7 @@ public class barn_beast extends script.base_script
                         attribs[idx] = "" + utils.roundFloatByDecimal((utils.getFloatScriptVar(self, beast_lib.ARRAY_BEAST_INCUBATION_STATS[i]) * beast_lib.DISPLAY_CONVERSION_RATES[i])) + "%";
                         idx++;
                     }
-                    else 
+                    else
                     {
                         names[idx] = beast_lib.DISPLAY_NAMES[i];
                         attribs[idx] = "" + utils.roundFloatByDecimal(utils.getFloatScriptVar(self, beast_lib.ARRAY_BEAST_INCUBATION_STATS[i]));
@@ -260,7 +266,7 @@ public class barn_beast extends script.base_script
                     }
                     continue;
                 }
-                else 
+                else
                 {
                     names[idx] = beast_lib.DISPLAY_NAMES[i];
                     attribs[idx] = "" + utils.roundFloatByDecimal(utils.getFloatScriptVar(self, beast_lib.ARRAY_BEAST_INCUBATION_STATS[i]));

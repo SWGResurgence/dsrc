@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class storyteller_commands extends script.base_script
 {
-    public storyteller_commands()
-    {
-    }
     public static final string_id SID_STORYTELLER_HELP = new string_id("storyteller", "storyteller_help");
     public static final string_id SID_STORYTELLER_TITLE = new string_id("storyteller", "storyteller_title");
     public static final string_id SID_STORYTELLER_MENU_CMDS = new string_id("storyteller", "storyteller_menu_commands");
@@ -58,6 +55,10 @@ public class storyteller_commands extends script.base_script
     public static final String INCLUDE_ALL_STORYTELLERS = "all_storytellers";
     public static final string_id SID_PGC_RATING_TARGET_INVALID = new string_id("saga_system", "pgc_rating_target_invalid");
     public static final string_id SID_PGC_RATING_TARGET_NOT_A_PLAYER = new string_id("saga_system", "pgc_rating_target_not_a_player");
+    public storyteller_commands()
+    {
+    }
+
     public int OnNewbieTutorialResponse(obj_id self, String action) throws InterruptedException
     {
         if (action.equals("clientReady"))
@@ -75,6 +76,7 @@ public class storyteller_commands extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int storytellerMode(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         String title = utils.packStringId(SID_STORYTELLER_TITLE);
@@ -86,18 +88,20 @@ public class storyteller_commands extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String[] getHelpTypeArray() throws InterruptedException
     {
-        string_id[] sid_storyteller_help_options = 
-        {
-            SID_STORYTELLER_MENU_CMDS,
-            SID_STORYTELLER_MENU_PROPS,
-            SID_STORYTELLER_MENU_NPCS,
-            SID_STORYTELLER_MENU_FXS
-        };
+        string_id[] sid_storyteller_help_options =
+                {
+                        SID_STORYTELLER_MENU_CMDS,
+                        SID_STORYTELLER_MENU_PROPS,
+                        SID_STORYTELLER_MENU_NPCS,
+                        SID_STORYTELLER_MENU_FXS
+                };
         Vector storytellerHelpTypes = new Vector();
         storytellerHelpTypes.setSize(0);
-        for (string_id sid_storyteller_help_option : sid_storyteller_help_options) {
+        for (string_id sid_storyteller_help_option : sid_storyteller_help_options)
+        {
             String tokenType = utils.packStringId(sid_storyteller_help_option);
             storytellerHelpTypes = utils.addElement(storytellerHelpTypes, tokenType);
         }
@@ -109,6 +113,7 @@ public class storyteller_commands extends script.base_script
         }
         return _storytellerHelpTypes;
     }
+
     public int msgStorytellerHelpOptionSelected(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -130,17 +135,17 @@ public class storyteller_commands extends script.base_script
         switch (idx)
         {
             case 0:
-            prompt = utils.packStringId(SID_STORYTELLER_HELP_CMDS);
-            break;
+                prompt = utils.packStringId(SID_STORYTELLER_HELP_CMDS);
+                break;
             case 1:
-            prompt = utils.packStringId(SID_STORYTELLER_HELP_PROPS);
-            break;
+                prompt = utils.packStringId(SID_STORYTELLER_HELP_PROPS);
+                break;
             case 2:
-            prompt = utils.packStringId(SID_STORYTELLER_HELP_NPCS);
-            break;
+                prompt = utils.packStringId(SID_STORYTELLER_HELP_NPCS);
+                break;
             case 3:
-            prompt = utils.packStringId(SID_STORYTELLER_HELP_FXS);
-            break;
+                prompt = utils.packStringId(SID_STORYTELLER_HELP_FXS);
+                break;
         }
         String title = utils.packStringId(SID_STORYTELLER_TITLE);
         int pid = sui.listbox(self, self, prompt, sui.OK_CANCEL, title, getHelpTypeArray(), "msgStorytellerHelpOptionSelected");
@@ -150,6 +155,7 @@ public class storyteller_commands extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int storyAutoDeclineInvites(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (hasObjVar(self, storyteller.VAR_AUTODECLINE_STORY_INVITES))
@@ -157,13 +163,14 @@ public class storyteller_commands extends script.base_script
             removeObjVar(self, storyteller.VAR_AUTODECLINE_STORY_INVITES);
             sendSystemMessage(self, new string_id("storyteller", "autodecline_story_invites_off"));
         }
-        else 
+        else
         {
             setObjVar(self, storyteller.VAR_AUTODECLINE_STORY_INVITES, 1);
             sendSystemMessage(self, new string_id("storyteller", "autodecline_story_invites_on"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int makeStoryAssistant(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "storytellerAssistant"))
@@ -185,7 +192,7 @@ public class storyteller_commands extends script.base_script
             {
                 target = getLookAtTarget(self);
             }
-            else 
+            else
             {
                 target = intendedTarget;
             }
@@ -208,6 +215,7 @@ public class storyteller_commands extends script.base_script
         messageTo(target, "handleStoryTellerAssistantRequest", webster, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorytellerAlreadyAnAssistant(obj_id self, dictionary params) throws InterruptedException
     {
         boolean alreadyAStorytellersAssistant = params.getBoolean("alreadyAStorytellersAssistant");
@@ -222,6 +230,7 @@ public class storyteller_commands extends script.base_script
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorytellerAssistantDeclined(obj_id self, dictionary params) throws InterruptedException
     {
         String targetName = params.getString("targetName");
@@ -230,6 +239,7 @@ public class storyteller_commands extends script.base_script
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int storyAssistantHandler(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -249,6 +259,7 @@ public class storyteller_commands extends script.base_script
         messageTo(player, "handleStoryTellerAssistantAccepted", webster, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorytellerAssistantHasBeenAdded(obj_id self, dictionary params) throws InterruptedException
     {
         String addedPlayerName = params.getString("assistantPlayerName");
@@ -260,6 +271,7 @@ public class storyteller_commands extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int quitStoryAssistant(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "storytellerAssistant"))
@@ -268,12 +280,13 @@ public class storyteller_commands extends script.base_script
             utils.removeScriptVar(self, "storytellerAssistantName");
             sendSystemMessage(self, SID_YOU_QUIT_STORY_ASSISTANT);
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_YOU_NOT_A_STORY_ASSISTANT);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeStoryAssistant(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         target = null;
@@ -290,7 +303,7 @@ public class storyteller_commands extends script.base_script
             {
                 target = getLookAtTarget(self);
             }
-            else 
+            else
             {
                 target = intendedTarget;
             }
@@ -311,6 +324,7 @@ public class storyteller_commands extends script.base_script
         messageTo(target, "handleStoryTellerRemoveAssistant", webster, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorytellerRemovePlayerNotAssistant(obj_id self, dictionary params) throws InterruptedException
     {
         String targetName = params.getString("targetName");
@@ -319,6 +333,7 @@ public class storyteller_commands extends script.base_script
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorytellerAssistantHasBeenRemoved(obj_id self, dictionary params) throws InterruptedException
     {
         String removedPlayerName = params.getString("removedPlayerName");
@@ -330,6 +345,7 @@ public class storyteller_commands extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int inviteToStory(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id storytellerId = self;
@@ -355,8 +371,10 @@ public class storyteller_commands extends script.base_script
                 obj_id[] playersInRange = getAllPlayers(getLocation(self), 120.0f);
                 if (playersInRange != null && playersInRange.length > 0)
                 {
-                    for (obj_id playerToInvite : playersInRange) {
-                        if (isIdValid(playerToInvite) && playerToInvite != self) {
+                    for (obj_id playerToInvite : playersInRange)
+                    {
+                        if (isIdValid(playerToInvite) && playerToInvite != self)
+                        {
                             dictionary webster = new dictionary();
                             webster.put("storytellerPlayer", storytellerId);
                             webster.put("storytellerName", storytellerName);
@@ -380,7 +398,7 @@ public class storyteller_commands extends script.base_script
                         {
                             guildInvited = guildInvited + st.nextToken();
                         }
-                        else 
+                        else
                         {
                             guildInvited = guildInvited + " " + st.nextToken();
                         }
@@ -393,7 +411,7 @@ public class storyteller_commands extends script.base_script
                         prose.setTO(pp, guildInvited);
                         sendSystemMessageProse(self, pp);
                     }
-                    else 
+                    else
                     {
                         string_id message = new string_id("storyteller", "invite_god_only_other_guild");
                         prose_package pp = prose.getPackage(message, self, self);
@@ -406,8 +424,10 @@ public class storyteller_commands extends script.base_script
                     obj_id[] guildMembers = guild.getMemberIds(guildId, false, true);
                     if (guildMembers != null && guildMembers.length > 0)
                     {
-                        for (obj_id guildMember : guildMembers) {
-                            if (isIdValid(guildMember) && guildMember != self) {
+                        for (obj_id guildMember : guildMembers)
+                        {
+                            if (isIdValid(guildMember) && guildMember != self)
+                            {
                                 dictionary webster = new dictionary();
                                 webster.put("storytellerPlayer", storytellerId);
                                 webster.put("storytellerName", storytellerName);
@@ -416,13 +436,13 @@ public class storyteller_commands extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                     sendSystemMessage(self, SID_INVITE_NOT_IN_A_GUILD);
                 }
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 target = getPlayerIdFromFirstName(invitee);
             }
@@ -434,7 +454,7 @@ public class storyteller_commands extends script.base_script
             {
                 target = getLookAtTarget(self);
             }
-            else 
+            else
             {
                 target = intendedTarget;
             }
@@ -461,6 +481,7 @@ public class storyteller_commands extends script.base_script
         messageTo(target, "handleStoryTellerInviteRequest", webster, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorytellerInviteDeclined(obj_id self, dictionary params) throws InterruptedException
     {
         String targetName = params.getString("targetName");
@@ -469,6 +490,7 @@ public class storyteller_commands extends script.base_script
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorytellerInviteAlreadyInAStory(obj_id self, dictionary params) throws InterruptedException
     {
         boolean alreadyInStorytellersStory = params.getBoolean("alreadyInStorytellersStory");
@@ -490,6 +512,7 @@ public class storyteller_commands extends script.base_script
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int storyInviteHandler(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id storytellerId = self;
@@ -522,6 +545,7 @@ public class storyteller_commands extends script.base_script
         messageTo(player, "handleStoryTellerInviteAccepted", webster, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorytellerPlayerHasBeenAdded(obj_id self, dictionary params) throws InterruptedException
     {
         String addedPlayerName = params.getString("addedPlayerName");
@@ -540,6 +564,7 @@ public class storyteller_commands extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int leaveStory(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id storytellerPlayer = obj_id.NULL_ID;
@@ -554,12 +579,13 @@ public class storyteller_commands extends script.base_script
                 storyteller.stopStorytellerEffectsInAreaToPlayer(self, storytellerPlayer);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, SID_YOU_NOT_IN_A_STORY);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeFromStory(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         target = null;
@@ -571,7 +597,7 @@ public class storyteller_commands extends script.base_script
             {
                 target = self;
             }
-            else 
+            else
             {
                 target = getPlayerIdFromFirstName(invitee);
             }
@@ -583,7 +609,7 @@ public class storyteller_commands extends script.base_script
             {
                 target = getLookAtTarget(self);
             }
-            else 
+            else
             {
                 target = intendedTarget;
             }
@@ -604,6 +630,7 @@ public class storyteller_commands extends script.base_script
         messageTo(target, "handleStoryTellerRemovedFromStory", webster, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorytellerRemovePlayerNotInStory(obj_id self, dictionary params) throws InterruptedException
     {
         String targetName = params.getString("targetName");
@@ -612,6 +639,7 @@ public class storyteller_commands extends script.base_script
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStorytellerPlayerHasBeenRemoved(obj_id self, dictionary params) throws InterruptedException
     {
         String removedPlayerName = params.getString("removedPlayerName");
@@ -623,6 +651,7 @@ public class storyteller_commands extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int storytellerDestroyNpcs(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isGod(self))
@@ -648,10 +677,13 @@ public class storyteller_commands extends script.base_script
         Vector elligibleStorytellerObjects = getElligibleStorytellerObjectsInRange(self, storytellerId, storytellerName);
         if (elligibleStorytellerObjects != null && elligibleStorytellerObjects.size() > 0)
         {
-            for (Object elligibleStorytellerObject1 : elligibleStorytellerObjects) {
+            for (Object elligibleStorytellerObject1 : elligibleStorytellerObjects)
+            {
                 obj_id elligibleStorytellerObject = ((obj_id) elligibleStorytellerObject1);
-                if (isIdValid(elligibleStorytellerObject)) {
-                    if (isMob(elligibleStorytellerObject)) {
+                if (isIdValid(elligibleStorytellerObject))
+                {
+                    if (isMob(elligibleStorytellerObject))
+                    {
                         destroyObject(elligibleStorytellerObject);
                         npcDestroyed = true;
                     }
@@ -663,17 +695,18 @@ public class storyteller_commands extends script.base_script
                 String logMsg = "(" + self + ")" + getName(self) + " has removed storyteller NPCs belonging to: " + storytellerName + "(" + storytellerId + ")";
                 CustomerServiceLog("storyteller", logMsg);
             }
-            else 
+            else
             {
                 sendSystemMessage(self, "GodMode Message: No storyteller NPCs were found belonging to " + storytellerName + ".", "");
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, "GodMode Message: No storyteller objects were found that belong to " + storytellerName + ".", "");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int storytellerDestroyProps(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isGod(self))
@@ -699,10 +732,13 @@ public class storyteller_commands extends script.base_script
         Vector elligibleStorytellerObjects = getElligibleStorytellerObjectsInRange(self, storytellerId, storytellerName);
         if (elligibleStorytellerObjects != null && elligibleStorytellerObjects.size() > 0)
         {
-            for (Object elligibleStorytellerObject1 : elligibleStorytellerObjects) {
+            for (Object elligibleStorytellerObject1 : elligibleStorytellerObjects)
+            {
                 obj_id elligibleStorytellerObject = ((obj_id) elligibleStorytellerObject1);
-                if (isIdValid(elligibleStorytellerObject)) {
-                    if (!isMob(elligibleStorytellerObject)) {
+                if (isIdValid(elligibleStorytellerObject))
+                {
+                    if (!isMob(elligibleStorytellerObject))
+                    {
                         destroyObject(elligibleStorytellerObject);
                         propDestroyed = true;
                     }
@@ -714,17 +750,18 @@ public class storyteller_commands extends script.base_script
                 String logMsg = "(" + self + ")" + getName(self) + " has removed storyteller props belonging to: " + storytellerName + "(" + storytellerId + ")";
                 CustomerServiceLog("storyteller", logMsg);
             }
-            else 
+            else
             {
                 sendSystemMessage(self, "GodMode Message: No storyteller PROPS were found belonging to " + storytellerName + ".", "");
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, "GodMode Message: No storyteller objects were found that belong to " + storytellerName + ".", "");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int storytellerDestroyParticles(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isGod(self))
@@ -750,10 +787,13 @@ public class storyteller_commands extends script.base_script
         Vector elligibleStorytellerObjects = getElligibleStorytellerObjectsInRange(self, storytellerId, storytellerName);
         if (elligibleStorytellerObjects != null && elligibleStorytellerObjects.size() > 0)
         {
-            for (Object elligibleStorytellerObject1 : elligibleStorytellerObjects) {
+            for (Object elligibleStorytellerObject1 : elligibleStorytellerObjects)
+            {
                 obj_id elligibleStorytellerObject = ((obj_id) elligibleStorytellerObject1);
-                if (isIdValid(elligibleStorytellerObject)) {
-                    if (hasObjVar(elligibleStorytellerObject, "storytellerPersistedEffectActive")) {
+                if (isIdValid(elligibleStorytellerObject))
+                {
+                    if (hasObjVar(elligibleStorytellerObject, "storytellerPersistedEffectActive"))
+                    {
                         messageTo(elligibleStorytellerObject, "handleRemoveStorytellerPersistedEffect", null, 1, false);
                         particleDestroyed = true;
                     }
@@ -765,17 +805,18 @@ public class storyteller_commands extends script.base_script
                 String logMsg = "(" + self + ")" + getName(self) + " has removed storyteller particles belonging to: " + storytellerName + "(" + storytellerId + ")";
                 CustomerServiceLog("storyteller", logMsg);
             }
-            else 
+            else
             {
                 sendSystemMessage(self, "GodMode Message: No storyteller PARTICLES were found belonging to " + storytellerName + ".", "");
             }
         }
-        else 
+        else
         {
             sendSystemMessage(self, "GodMode Message: No storyteller objects were found that belong to " + storytellerName + ".", "");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int storytellerDestroyAllObjects(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isGod(self))
@@ -800,9 +841,11 @@ public class storyteller_commands extends script.base_script
         Vector elligibleStorytellerObjects = getElligibleStorytellerObjectsInRange(self, storytellerId, storytellerName);
         if (elligibleStorytellerObjects != null && elligibleStorytellerObjects.size() > 0)
         {
-            for (Object elligibleStorytellerObject1 : elligibleStorytellerObjects) {
+            for (Object elligibleStorytellerObject1 : elligibleStorytellerObjects)
+            {
                 obj_id elligibleStorytellerObject = ((obj_id) elligibleStorytellerObject1);
-                if (isIdValid(elligibleStorytellerObject)) {
+                if (isIdValid(elligibleStorytellerObject))
+                {
                     destroyObject(elligibleStorytellerObject);
                 }
             }
@@ -810,12 +853,13 @@ public class storyteller_commands extends script.base_script
             String logMsg = "(" + self + ")" + getName(self) + " has removed storyteller objects belonging to: " + storytellerName + "(" + storytellerId + ")";
             CustomerServiceLog("storyteller", logMsg);
         }
-        else 
+        else
         {
             sendSystemMessage(self, "GodMode Message: No storyteller objects were found belonging to " + storytellerName + ".", "");
         }
         return SCRIPT_CONTINUE;
     }
+
     public dictionary getDestroyStorytellerObjectParams(String params) throws InterruptedException
     {
         dictionary webster = new dictionary();
@@ -841,6 +885,7 @@ public class storyteller_commands extends script.base_script
         webster.put("storytellerName", storytellerName);
         return webster;
     }
+
     public Vector getElligibleStorytellerObjectsInRange(obj_id self, obj_id storytellerId, String storytellerName) throws InterruptedException
     {
         Vector elligibleObjects = new Vector();
@@ -848,19 +893,29 @@ public class storyteller_commands extends script.base_script
         obj_id[] storytellerObjects = getAllObjectsWithObjVar(getLocation(self), 250.0f, "storytellerid");
         if (storytellerObjects != null && storytellerObjects.length > 0)
         {
-            for (obj_id storytellerObject : storytellerObjects) {
-                if (isIdValid(storytellerObject)) {
-                    if (storytellerName.equals(INCLUDE_ALL_STORYTELLERS)) {
+            for (obj_id storytellerObject : storytellerObjects)
+            {
+                if (isIdValid(storytellerObject))
+                {
+                    if (storytellerName.equals(INCLUDE_ALL_STORYTELLERS))
+                    {
                         utils.addElement(elligibleObjects, storytellerObject);
-                    } else {
+                    }
+                    else
+                    {
                         obj_id storytellerObjectOwner = getObjIdObjVar(storytellerObject, "storytellerid");
                         String storytellerObjectOwnerName = getStringObjVar(storytellerObject, "storytellerName");
-                        if (isIdValid(storytellerId)) {
-                            if (isIdValid(storytellerObjectOwner) && storytellerId == storytellerObjectOwner) {
+                        if (isIdValid(storytellerId))
+                        {
+                            if (isIdValid(storytellerObjectOwner) && storytellerId == storytellerObjectOwner)
+                            {
                                 utils.addElement(elligibleObjects, storytellerObject);
                             }
-                        } else {
-                            if (storytellerObjectOwnerName.length() > 0 && storytellerName.equals(storytellerObjectOwnerName.toLowerCase())) {
+                        }
+                        else
+                        {
+                            if (storytellerObjectOwnerName.length() > 0 && storytellerName.equals(storytellerObjectOwnerName.toLowerCase()))
+                            {
                                 utils.addElement(elligibleObjects, storytellerObject);
                             }
                         }
@@ -870,6 +925,7 @@ public class storyteller_commands extends script.base_script
         }
         return elligibleObjects;
     }
+
     public int chroniclerVentriloquism(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         target = getIntendedTarget(self);
@@ -889,6 +945,7 @@ public class storyteller_commands extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int chroniclerGetRating(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         java.util.StringTokenizer st = new java.util.StringTokenizer(params);
@@ -897,20 +954,20 @@ public class storyteller_commands extends script.base_script
             String name = (st.nextToken()).toLowerCase();
             if (name.equals("myself") || name.equals("self"))
             {
-                obj_id[] chroniclers = 
-                {
-                    self
-                };
+                obj_id[] chroniclers =
+                        {
+                                self
+                        };
                 String firstName = getFirstName(self);
                 pgc_quests.showChroniclerRatingTable(self, firstName, chroniclers);
             }
-            else 
+            else
             {
                 obj_id[] chroniclers = pgcGetChroniclerId(name);
                 pgc_quests.showChroniclerRatingTable(self, name, chroniclers);
             }
         }
-        else 
+        else
         {
             target = null;
             obj_id intendedTarget = getIntendedTarget(self);
@@ -918,7 +975,7 @@ public class storyteller_commands extends script.base_script
             {
                 target = getLookAtTarget(self);
             }
-            else 
+            else
             {
                 target = intendedTarget;
             }
@@ -932,18 +989,19 @@ public class storyteller_commands extends script.base_script
                 sendSystemMessage(self, SID_PGC_RATING_TARGET_NOT_A_PLAYER);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
-                obj_id[] chroniclers = 
-                {
-                    target
-                };
+                obj_id[] chroniclers =
+                        {
+                                target
+                        };
                 String firstName = getFirstName(target);
                 pgc_quests.showChroniclerRatingTable(self, firstName, chroniclers);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int chroniclerGetStoredXp(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (sui.hasPid(self, "commandPid_chroniclerGetStoredXp"))
@@ -994,6 +1052,7 @@ public class storyteller_commands extends script.base_script
         sui.setPid(self, pid, "commandPid_chroniclerGetStoredXp");
         return SCRIPT_CONTINUE;
     }
+
     public int handleChroniclerGetStoredXp(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1054,7 +1113,7 @@ public class storyteller_commands extends script.base_script
             pgcAdjustRatingData(player, playerName, pgc_quests.PGC_STORED_CHRONICLE_XP_INDEX, storedXp * -1);
             pgc_quests.logProgression(player, null, "Reserved Chronicle XP claimed = " + storedXp);
         }
-        else 
+        else
         {
             if (!doneWithChronicleXP)
             {
@@ -1079,6 +1138,7 @@ public class storyteller_commands extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int chroniclesLootToggle(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (sui.hasPid(self, "chroniclesLootToggle"))
@@ -1109,6 +1169,7 @@ public class storyteller_commands extends script.base_script
         sui.setPid(self, pid, "chroniclesLootToggle");
         return SCRIPT_CONTINUE;
     }
+
     public int handleChroniclesLootToggleConfirmation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -1131,7 +1192,7 @@ public class storyteller_commands extends script.base_script
             loot.enableChroniclesLoot(self);
             message = "chronicles_loot_back_on";
         }
-        else 
+        else
         {
             loot.disableChroniclesLoot(self);
             message = "chronicles_loot_now_off";

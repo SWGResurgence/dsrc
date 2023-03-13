@@ -8,6 +8,7 @@ public class region_tracker extends script.base_script
     public region_tracker()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "setting city name on " + self);
@@ -22,12 +23,12 @@ public class region_tracker extends script.base_script
                 intRegionSize = intRegionSize / 2;
                 setObjVar(self, "intSize", intRegionSize);
             }
-            else 
+            else
             {
                 debugServerConsoleMsg(self, "OBJ_ID " + self + " IS A DELIVER REGION SPAWNER PLACED OUTSIDE OF A CITY. IT SHOULD BE DELETED");
             }
         }
-        else 
+        else
         {
             String strCity = getStringObjVar(self, "strCity");
             LOG("regions", "strCity is " + strCity);
@@ -40,6 +41,7 @@ public class region_tracker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "strCity"))
@@ -49,7 +51,7 @@ public class region_tracker extends script.base_script
             {
                 setObjVar(self, "strCity", strCity);
             }
-            else 
+            else
             {
                 debugServerConsoleMsg(self, "OBJ_ID " + self + " IS A DELIVER REGION SPAWNER PLACED OUTSIDE OF A CITY. IT SHOULD BE DELETED");
             }

@@ -13,6 +13,7 @@ public class city_actor extends script.base_script
     public city_actor()
     {
     }
+
     public int OnAttach(obj_id self)
     {
         int city_id = getCityAtLocation(getLocation(self), 0);
@@ -21,6 +22,7 @@ public class city_actor extends script.base_script
         setDescriptionStringId(self, new string_id("This is a Bio-logical Display Matrix. It is used to display creatures in a city. This creature cannot be attacked, or aggroed."));
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self)
     {
         int city_id = getCityAtLocation(getLocation(self), 0);
@@ -51,6 +53,7 @@ public class city_actor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "city_actor_setup"))
@@ -77,6 +80,7 @@ public class city_actor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (canManipulateActor(self, player))
@@ -135,6 +139,7 @@ public class city_actor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRemoveActor(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -150,6 +155,7 @@ public class city_actor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canManipulateActor(obj_id self, obj_id player) throws InterruptedException
     {
         //@note: keep these in order of importance, with the most important last
@@ -167,12 +173,9 @@ public class city_actor extends script.base_script
         {
             return true;
         }
-        if (isGod(player))
-        {
-            return true;
-        }
-        else return false;
+        return isGod(player);
     }
+
     public int handleSetName(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -188,6 +191,7 @@ public class city_actor extends script.base_script
         setName(self, name);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetSize(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -216,6 +220,7 @@ public class city_actor extends script.base_script
         setScale(self, sizeFloat);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetAi(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -251,6 +256,7 @@ public class city_actor extends script.base_script
         }
 
     }
+
     public int handleSetAnimation(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -266,6 +272,7 @@ public class city_actor extends script.base_script
         doAnimationAction(self, anim);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetMood(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -281,6 +288,7 @@ public class city_actor extends script.base_script
         setAnimationMood(self, mood);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetPosture(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)

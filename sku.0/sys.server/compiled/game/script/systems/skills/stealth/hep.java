@@ -9,10 +9,12 @@ import script.obj_id;
 
 public class hep extends script.base_script
 {
+    public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###.##");
+
     public hep()
     {
     }
-    public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###.##");
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int free = getFirstFreeIndex(names);
@@ -27,6 +29,7 @@ public class hep extends script.base_script
         utils.addClassRequirementAttributes(player, self, names, attribs, free, "");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -48,6 +51,7 @@ public class hep extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)

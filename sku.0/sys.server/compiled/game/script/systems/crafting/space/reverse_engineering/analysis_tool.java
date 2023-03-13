@@ -7,9 +7,6 @@ import script.library.utils;
 
 public class analysis_tool extends script.base_script
 {
-    public analysis_tool()
-    {
-    }
     public static final string_id LOOT_LIST = new string_id("sui", "analyze_loot");
     public static final String SCRIPTVAR_ANALYZE_SUI = "analyzer.sui";
     public static final String SCRIPTVAR_ANALYZE_IDS = "analyzer.ids";
@@ -18,14 +15,20 @@ public class analysis_tool extends script.base_script
     public static final String ANALYZE_PROMPT = "@" + STF + ":analyze_prompt";
     public static final String NO_ITEMS_PROMPT = "@" + STF + ":no_items";
     public static final String BTN_ANALYZE = "@" + STF + ":analyze";
+    public analysis_tool()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -39,6 +42,7 @@ public class analysis_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -56,6 +60,7 @@ public class analysis_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showComponentSui(obj_id target, obj_id player, obj_id[] items) throws InterruptedException
     {
         String[] entries = new String[0];
@@ -84,17 +89,19 @@ public class analysis_tool extends script.base_script
                 utils.setBatchScriptVar(player, SCRIPTVAR_ANALYZE_IDS, items);
             }
         }
-        else 
+        else
         {
             int msgPid = sui.msgbox(target, player, NO_ITEMS_PROMPT, sui.OK_ONLY, ANALYZE_TITLE, "noHandler");
             cleanupComponentSui(player);
         }
     }
+
     public void cleanupComponentSui(obj_id player) throws InterruptedException
     {
         utils.removeScriptVar(player, SCRIPTVAR_ANALYZE_SUI);
         utils.removeBatchScriptVar(player, SCRIPTVAR_ANALYZE_IDS);
     }
+
     public int handleAnalyzeComponent(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -110,12 +117,13 @@ public class analysis_tool extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             grantSchematic(player, items[idx]);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void grantSchematic(obj_id player, obj_id item) throws InterruptedException
     {
         boolean condition = playMusic(player, "sound/item_analysis_tool.snd");

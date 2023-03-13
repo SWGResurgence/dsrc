@@ -8,9 +8,6 @@ import script.library.utils;
 
 public class mission_terminal extends script.base_script
 {
-    public mission_terminal()
-    {
-    }
     public static final string_id SID_MNU_REDEEM = new string_id("sui", "mnu_redeem");
     public static final string_id SID_REDEEM_PROMPT = new string_id("sui", "redeem_data_item_prompt");
     public static final string_id SID_REDEEM_TITLE = new string_id("sui", "redeem_data_item_title");
@@ -18,6 +15,10 @@ public class mission_terminal extends script.base_script
     public static final string_id SID_FAIL_SLICE = new string_id("slicing/slicing", "terminal_fail");
     public static final string_id SID_SUCCESS_SLICE = new string_id("slicing/slicing", "terminal_success");
     public static final string_id SID_NOT_YET = new string_id("slicing/slicing", "not_yet");
+    public mission_terminal()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, structure.VAR_TERMINAL_HEADING))
@@ -29,6 +30,7 @@ public class mission_terminal extends script.base_script
         attachScript(self, "planet_map.map_loc_attach");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = -1;
@@ -47,6 +49,7 @@ public class mission_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -69,7 +72,7 @@ public class mission_terminal extends script.base_script
                     sendSystemMessageProse(player, pp);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     utils.removeScriptVar(player, "slicing.terminal_time");
                 }
@@ -78,6 +81,7 @@ public class mission_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int finishSlicing(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -92,7 +96,7 @@ public class mission_terminal extends script.base_script
             utils.setScriptVar(player, "slicing.terminal", self);
             utils.setScriptVar(player, "slicing.terminal_bonus", 1.5f);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_FAIL_SLICE);
         }

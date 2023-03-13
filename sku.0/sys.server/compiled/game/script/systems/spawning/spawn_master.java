@@ -7,6 +7,7 @@ public class spawn_master extends script.systems.spawning.spawn_base
     public spawn_master()
     {
     }
+
     public int OnUniverseComplete(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "boolSpawnerIsOn"))
@@ -17,7 +18,7 @@ public class spawn_master extends script.systems.spawning.spawn_base
         {
             setObjVar(self, "intMaxPlanetSpawnCount", 10000);
         }
-        else 
+        else
         {
             int intSpawnLimit = getIntObjVar(self, "intMaxPlanetSpawnCount");
             if (intSpawnLimit > 10000)
@@ -43,6 +44,7 @@ public class spawn_master extends script.systems.spawning.spawn_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "boolSpawnerIsOn"))
@@ -53,7 +55,7 @@ public class spawn_master extends script.systems.spawning.spawn_base
         {
             setObjVar(self, "intMaxPlanetSpawnCount", 10000);
         }
-        else 
+        else
         {
             int intSpawnLimit = getIntObjVar(self, "intMaxPlanetSpawnCount");
             if (intSpawnLimit > 10000)

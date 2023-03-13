@@ -9,10 +9,12 @@ import script.obj_var_list;
 
 public class crafting_new_cybernetics_final extends script.systems.crafting.crafting_base
 {
+    public static final String VERSION = "v0.00.00";
+
     public crafting_new_cybernetics_final()
     {
     }
-    public static final String VERSION = "v0.00.00";
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
         setObjVar(prototype, craftinglib.OBJVAR_CRAFTER, getOwner(prototype));
@@ -54,6 +56,7 @@ public class crafting_new_cybernetics_final extends script.systems.crafting.craf
         super.calcAndSetPrototypeProperties(prototype, itemAttributes, craftingValuesDictionary);
         LOG("sissynoid", "calcAndSetPrototypeProperties #1 - END");
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         LOG("sissynoid", "calcAndSetPrototypeProperties #2");
@@ -70,26 +73,38 @@ public class crafting_new_cybernetics_final extends script.systems.crafting.craf
             setObjVar(prototype, armor.OBJVAR_ARMOR_BASE + "." + armor.OBJVAR_ARMOR_LEVEL, armorLevel);
             setObjVar(prototype, armor.OBJVAR_ARMOR_BASE + "." + armor.OBJVAR_ARMOR_CATEGORY, armorCategory);
         }
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
             CustomerServiceLog("crafting", "WARNING: Item attributes");
-            if (itemAttribute == null) {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (!calcAndSetPrototypeProperty(prototype, itemAttribute)) {
-                if (itemAttribute.currentValue < itemAttribute.minValue) {
+            if (!calcAndSetPrototypeProperty(prototype, itemAttribute))
+            {
+                if (itemAttribute.currentValue < itemAttribute.minValue)
+                {
                     itemAttribute.currentValue = itemAttribute.minValue;
-                } else if (itemAttribute.currentValue > itemAttribute.maxValue) {
+                }
+                else if (itemAttribute.currentValue > itemAttribute.maxValue)
+                {
                     itemAttribute.currentValue = itemAttribute.maxValue;
                 }
                 setObjVar(prototype, armor.OBJVAR_ARMOR_BASE + "." + (itemAttribute.name).getAsciiId(), itemAttribute.currentValue);
-                if ((itemAttribute.name).equals(armor.OBJVAR_CONDITION)) {
+                if ((itemAttribute.name).equals(armor.OBJVAR_CONDITION))
+                {
                     float hp = armor.getAbsoluteArmorAttribute(itemAttribute.currentValue, finalRow, armor.DATATABLE_MIN_CONDITION_COL);
-                    if (hp != Float.MIN_VALUE) {
-                        if (hasObjVar(getSelf(), armor.OBJVAR_CONDITION_MULTIPLIER)) {
+                    if (hp != Float.MIN_VALUE)
+                    {
+                        if (hasObjVar(getSelf(), armor.OBJVAR_CONDITION_MULTIPLIER))
+                        {
                             float multiplier = getFloatObjVar(getSelf(), armor.OBJVAR_CONDITION_MULTIPLIER);
-                            if (multiplier > 0) {
+                            if (multiplier > 0)
+                            {
                                 hp *= multiplier;
-                            } else {
+                            }
+                            else
+                            {
                                 CustomerServiceLog("crafting", "Armor schematic " + getDraftSchematic(getSelf()) + " has an invalid condition multiplier " + multiplier);
                             }
                         }
@@ -128,7 +143,7 @@ public class crafting_new_cybernetics_final extends script.systems.crafting.craf
                 reductionAmount = 1.0f - (reductionAmount - percentReductionExpertise);
                 LOG("sissynoid", "**OLD REDUCT MULTIPLIER: " + (1.0f - reductionAmount) + " **New Reduction MULTIPLIER** " + reductionAmount);
             }
-            else 
+            else
             {
                 reductionAmount = 1.0f - 0.4f;
                 LOG("sissynoid", "Reduction Expertise is not being found!");

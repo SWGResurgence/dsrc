@@ -8,11 +8,13 @@ public class treasure_drum extends script.base_script
     public treasure_drum()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "cleanUpChest", null, 1000, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isPlayer(transferer))
@@ -21,6 +23,7 @@ public class treasure_drum extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpChest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id chest = self;

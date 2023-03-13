@@ -11,6 +11,7 @@ public class enclave_sentinel extends script.base_script
     public enclave_sentinel()
     {
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         boolean isLightJedi = hasObjVar(self, "jedi.enclave.light");
@@ -38,6 +39,7 @@ public class enclave_sentinel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSawAttack(obj_id self, obj_id defender, obj_id[] attackers) throws InterruptedException
     {
         boolean isLightJedi = hasObjVar(self, "jedi.enclave.light");
@@ -122,6 +124,7 @@ public class enclave_sentinel extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleEntertainmentStart(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_OVERRIDE;

@@ -10,6 +10,7 @@ public class spawned_tracker extends script.base_script
     public spawned_tracker()
     {
     }
+
     public int OnIncapacitated(obj_id self, obj_id objAttacker) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "intCleanedUp"))
@@ -29,6 +30,7 @@ public class spawned_tracker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "dontCountDeath"))
@@ -56,6 +58,7 @@ public class spawned_tracker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int selfDestruct(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "force_cleanup"))
@@ -65,6 +68,7 @@ public class spawned_tracker extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

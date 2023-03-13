@@ -8,12 +8,14 @@ public class mission_cleanup_tracker extends script.base_script
     public mission_cleanup_tracker()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int startTime = getGameTime();
         setObjVar(self, "time_created", startTime);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "time_created"))
@@ -35,13 +37,14 @@ public class mission_cleanup_tracker extends script.base_script
             {
                 messageTo(self, "abortMission", null, 10, true);
             }
-            else 
+            else
             {
                 messageTo(self, "cleanMe", null, rand(10, 100), true);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanMe(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

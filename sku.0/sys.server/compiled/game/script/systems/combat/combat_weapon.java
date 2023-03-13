@@ -6,13 +6,14 @@ import script.library.*;
 
 public class combat_weapon extends script.base_script
 {
-    public combat_weapon()
-    {
-    }
     public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###.##");
     public static final java.text.NumberFormat noDecimalFormat = new java.text.DecimalFormat("###");
     public static final java.text.NumberFormat percentFormat = new java.text.DecimalFormat("###.#%");
     public static final String PID_NAME = "wpConversion";
+    public combat_weapon()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (!utils.isNestedWithinAPlayer(self))
@@ -54,6 +55,7 @@ public class combat_weapon extends script.base_script
         int management_root = item.addRootMenu(menu_info_types.SERVER_MENU5, weapons.SID_WEAPON_TO_SCHEM);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU5)
@@ -104,6 +106,7 @@ public class combat_weapon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void expertiseRangeModify(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -124,12 +127,12 @@ public class combat_weapon extends script.base_script
                     }
                     weaponRange = weapons.getMaxRangeDistance(weaponDat);
                 }
-                else 
+                else
                 {
                     weaponRange = static_item.getDynamicWeaponRange(self);
                 }
             }
-            else 
+            else
             {
                 String staticItemName = static_item.getStaticItemName(self);
                 weaponRange = dataTableGetInt("datatables/item/master_item/weapon_stats.iff", staticItemName, "max_range_distance");
@@ -138,7 +141,7 @@ public class combat_weapon extends script.base_script
             {
                 setObjVar(self, "weapon.original_max_range", weaponRange);
             }
-            else 
+            else
             {
                 CustomerServiceLog("weap_conversion_bad", "POSSIBLE :BROKEN WEAPON: COULD NOT GET MAX RANGE FOR " + self + " template: " + getTemplateName(self));
                 return;
@@ -147,25 +150,20 @@ public class combat_weapon extends script.base_script
         obj_id holder = getContainedBy(self);
         if (!isIdNull(holder) && isPlayer(holder))
         {
-            if (self == getObjectInSlot(holder, "hold_r"))
-            {
-                weapons.adjustWeaponRangeForExpertise(holder, self, true);
-            }
-            else 
-            {
-                weapons.adjustWeaponRangeForExpertise(holder, self, false);
-            }
+            weapons.adjustWeaponRangeForExpertise(holder, self, self == getObjectInSlot(holder, "hold_r"));
         }
-        else 
+        else
         {
             weapons.adjustWeaponRangeForExpertise(null, self, false);
         }
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "weaponConversion", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int weaponConversion(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = utils.getContainingPlayerOrCreature(self);
@@ -187,7 +185,7 @@ public class combat_weapon extends script.base_script
             expertiseRangeModify(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             int currentVersion = getConversionId(self);
             int masterVersion = 0;
@@ -196,7 +194,7 @@ public class combat_weapon extends script.base_script
             {
                 masterVersion = weapons.CORED_WEAPON_CONVERSION_VERSION;
             }
-            else 
+            else
             {
                 masterVersion = weapons.CONVERSION_VERSION;
             }
@@ -210,7 +208,7 @@ public class combat_weapon extends script.base_script
                 {
                     weapons.coredWeaponConversion(self);
                 }
-                else 
+                else
                 {
                     weapons.clickCombatWeaponConversion(self);
                 }
@@ -226,6 +224,7 @@ public class combat_weapon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (isPlayer(destContainer) && !combat.hasCertification(destContainer, self))
@@ -238,6 +237,7 @@ public class combat_weapon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         expertiseRangeModify(self);
@@ -253,6 +253,7 @@ public class combat_weapon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setDamageSkillMods(obj_id player, obj_id weapon) throws InterruptedException
     {
         int intMultiplier = combat.PLAYER_ATTACKER_DAMAGE_LEVEL_MULTIPLIER;
@@ -274,6 +275,7 @@ public class combat_weapon extends script.base_script
         applySkillStatisticModifier(player, "minDamage", minDamage);
         applySkillStatisticModifier(player, "maxDamage", maxDamage);
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         String at = "@obj_attr_n:";
@@ -296,7 +298,7 @@ public class combat_weapon extends script.base_script
             {
                 levelRequired = getIntObjVar(self, weapons.OBJVAR_WP_LEVEL);
             }
-            else 
+            else
             {
                 levelRequired = dataTableGetInt(combat.WEAPON_LEVEL_TABLE, template, "weapon_level");
                 if (staticItem)
@@ -322,7 +324,7 @@ public class combat_weapon extends script.base_script
             {
                 skillRequiredAttribute = "@ui_roadmap:title_" + skillRequired;
             }
-            else 
+            else
             {
                 skillRequiredAttribute = "None";
             }
@@ -354,7 +356,7 @@ public class combat_weapon extends script.base_script
         weapon_data weaponData = getWeaponData(self);
         if (weaponData != null)
         {
-            
+
             {
                 String wpn_damage_type = "cat_wpn_damage.wpn_damage_type";
                 String wpn_damage_min = "cat_wpn_damage.wpn_damage_min";
@@ -374,7 +376,7 @@ public class combat_weapon extends script.base_script
                 names[free] = "cat_wpn_damage.wpn_attack_speed";
                 attribs[free++] = floatFormat.format(weaponData.attackSpeed);
                 names[free] = "cat_wpn_damage.damage";
-                String weaponDamage = Integer.toString(weaponData.minDamage) + " - " + Integer.toString(weaponData.maxDamage);
+                String weaponDamage = weaponData.minDamage + " - " + weaponData.maxDamage;
                 attribs[free++] = weaponDamage;
                 names[free] = "tooltip.damage";
                 attribs[free++] = weaponDamage;
@@ -398,9 +400,9 @@ public class combat_weapon extends script.base_script
                 names[free] = "cat_wpn_damage.weapon_dps";
                 float avg = (weaponData.minDamage + weaponData.maxDamage) / 2;
                 avg += (elementalValue * 2);
-                attribs[free++] = "" + (int)(avg / weaponData.attackSpeed);
+                attribs[free++] = "" + (int) (avg / weaponData.attackSpeed);
             }
-            
+
             {
                 names[free] = "cat_wpn_other.wpn_range";
                 String weaponRange = noDecimalFormat.format(weaponData.minRange) + "-" + noDecimalFormat.format(weaponData.maxRange) + "m";
@@ -421,6 +423,7 @@ public class combat_weapon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getContainingMobile(obj_id item) throws InterruptedException
     {
         obj_id containedBy = getContainedBy(item);
@@ -434,6 +437,7 @@ public class combat_weapon extends script.base_script
         }
         return getContainingMobile(containedBy);
     }
+
     public int handleConvertSchemSui(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -501,7 +505,7 @@ public class combat_weapon extends script.base_script
             }
         }
         String response = sui.getInputBoxText(params);
-        if (!(response.toLowerCase()).equals("deconstruct"))
+        if (!(response).equalsIgnoreCase("deconstruct"))
         {
             forceCloseSUIPage(pid);
             sui.removePid(player, PID_NAME);
@@ -517,7 +521,7 @@ public class combat_weapon extends script.base_script
             destroyObject(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessage(player, weapons.SID_CONVERT_CONVERT_FAIL);
             CustomerServiceLog("new_weapon_conversion", "Player " + getFirstName(player) + "(" + player + ") attempted to convert their old weapon(" + self + ") to a new cored schematic, and it failed.");

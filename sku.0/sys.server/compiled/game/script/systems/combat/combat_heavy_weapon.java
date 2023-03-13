@@ -7,11 +7,13 @@ public class combat_heavy_weapon extends script.systems.combat.combat_base
     public combat_heavy_weapon()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCount(self, 25);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasObjVar(self, "intUsed"))
@@ -30,6 +32,7 @@ public class combat_heavy_weapon extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -44,11 +47,13 @@ public class combat_heavy_weapon extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "intUsed");
         return SCRIPT_CONTINUE;
     }
+
     public int heavyWeaponUsed(obj_id self, dictionary params) throws InterruptedException
     {
         int intUses = getCount(self);
@@ -58,7 +63,7 @@ public class combat_heavy_weapon extends script.systems.combat.combat_base
             setObjVar(self, "intUsed", 1);
             destroyObject(self);
         }
-        else 
+        else
         {
             setCount(self, intUses);
         }

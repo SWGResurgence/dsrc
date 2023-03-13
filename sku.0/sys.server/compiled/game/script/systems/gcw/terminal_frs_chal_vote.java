@@ -9,12 +9,13 @@ import java.util.Vector;
 
 public class terminal_frs_chal_vote extends script.base_script
 {
-    public terminal_frs_chal_vote()
-    {
-    }
     public static final String SCRIPT_VAR_SUI_PID = "force_rank.vote_sui";
     public static final String SCRIPT_VAR_CHAL_TERMINAL = "force_rank.challenge_vote_terminal";
     public static final String SCRIPT_VAR_NAMES = "force_rank.challenge_vote_name";
+    public terminal_frs_chal_vote()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOG("force_rank", "terminal_frs_chal_vote.OnInitialize -- " + self);
@@ -34,6 +35,7 @@ public class terminal_frs_chal_vote extends script.base_script
         utils.setScriptVar(enclave, force_rank.SCRIPT_VAR_CHAL_VOTE_TERMINAL, self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -71,6 +73,7 @@ public class terminal_frs_chal_vote extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -102,7 +105,7 @@ public class terminal_frs_chal_vote extends script.base_script
                 utils.setScriptVar(player, SCRIPT_VAR_CHAL_TERMINAL, self);
                 utils.setScriptVar(player, SCRIPT_VAR_NAMES, names);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("force_rank", "no_challenge_votes"));
             }
@@ -121,10 +124,13 @@ public class terminal_frs_chal_vote extends script.base_script
             {
                 Vector dsrc = new Vector();
                 dsrc.setSize(0);
-                for (String name : names) {
+                for (String name : names)
+                {
                     int rank = force_rank.getChallengeVoteRank(self, name);
-                    if (rank > 0) {
-                        if (force_rank.getChallengeVoteWeight(player_rank, rank) > 0) {
+                    if (rank > 0)
+                    {
+                        if (force_rank.getChallengeVoteWeight(player_rank, rank) > 0)
+                        {
                             dsrc.add(name);
                         }
                     }
@@ -137,7 +143,7 @@ public class terminal_frs_chal_vote extends script.base_script
                     utils.setScriptVar(player, SCRIPT_VAR_NAMES, dsrc);
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("force_rank", "no_challenge_votes"));
             }

@@ -11,9 +11,6 @@ import java.util.Vector;
 
 public class base_master extends script.base_script
 {
-    public base_master()
-    {
-    }
     public static final int NO_CONTROL = 0;
     public static final int IMPERIAL_CONTROL = 1;
     public static final int REBEL_CONTROL = 2;
@@ -25,6 +22,10 @@ public class base_master extends script.base_script
     public static final String VAR_ACCESS_DELAY = "gcw.static_base.access_delay";
     public static final String SCRIPT_VAR_VALIDATION = "gcw.static_base.validation";
     public static final String TABLE_TERMINAL_SPAWN = "datatables/gcw/static_base/terminal_spawn.iff";
+    public base_master()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id master = findMasterObject(self);
@@ -34,12 +35,13 @@ public class base_master extends script.base_script
             d.put("tries", 0);
             messageTo(self, "handleBaseInitializationRetry", d, 30.0f, false);
         }
-        else 
+        else
         {
             initializeBase(self, master);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id master = findMasterObject(self);
@@ -49,12 +51,13 @@ public class base_master extends script.base_script
             d.put("tries", 0);
             messageTo(self, "handleBaseInitializationRetry", d, 30.0f, false);
         }
-        else 
+        else
         {
             initializeBase(self, master);
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id findMasterObject(obj_id self) throws InterruptedException
     {
         obj_id[] objects = getObjectsInRange(getLocation(self), 100.0f);
@@ -62,15 +65,19 @@ public class base_master extends script.base_script
         {
             return obj_id.NULL_ID;
         }
-        for (obj_id object : objects) {
-            if (isIdValid(object)) {
-                if (hasScript(object, "systems.gcw.static_base.master")) {
+        for (obj_id object : objects)
+        {
+            if (isIdValid(object))
+            {
+                if (hasScript(object, "systems.gcw.static_base.master"))
+                {
                     return object;
                 }
             }
         }
         return obj_id.NULL_ID;
     }
+
     public void initializeBase(obj_id self, obj_id master) throws InterruptedException
     {
         if (isIdValid(master))
@@ -94,6 +101,7 @@ public class base_master extends script.base_script
         }
         messageTo(self, "handleTerminalSetup", null, 1.0f, false);
     }
+
     public void beginTerminalSpawnSequence(obj_id self) throws InterruptedException
     {
         float spawnTime = 10.0f;
@@ -104,6 +112,7 @@ public class base_master extends script.base_script
         }
         messageTo(self, "handleTerminalSpawnRequest", null, spawnTime, false);
     }
+
     public void validateTerminals(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, VAR_TERMINAL_IDS))
@@ -129,6 +138,7 @@ public class base_master extends script.base_script
         utils.setScriptVar(self, SCRIPT_VAR_VALIDATION, validate);
         messageTo(self, "handleTerminalValidation", null, 60.0f, false);
     }
+
     public void destroyTerminals(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, VAR_TERMINAL_IDS))
@@ -140,8 +150,10 @@ public class base_master extends script.base_script
         {
             return;
         }
-        for (obj_id terminal : terminals) {
-            if (isIdValid(terminal)) {
+        for (obj_id terminal : terminals)
+        {
+            if (isIdValid(terminal))
+            {
                 messageTo(terminal, "handleTerminalDestructionRequest", null, 20.0f, false);
             }
         }
@@ -150,6 +162,7 @@ public class base_master extends script.base_script
             removeObjVar(self, VAR_TERMINAL_STATUS);
         }
     }
+
     public void testBaseStatusChange(obj_id self) throws InterruptedException
     {
         int status = NO_CONTROL;
@@ -168,8 +181,10 @@ public class base_master extends script.base_script
             return;
         }
         int testCase = terminalStatus[0];
-        for (int terminalStatus1 : terminalStatus) {
-            if (testCase != terminalStatus1) {
+        for (int terminalStatus1 : terminalStatus)
+        {
+            if (testCase != terminalStatus1)
+            {
                 return;
             }
         }
@@ -178,6 +193,7 @@ public class base_master extends script.base_script
             beginBaseFactionSwitcheroo(self, testCase);
         }
     }
+
     public void beginBaseFactionSwitcheroo(obj_id self, int status) throws InterruptedException
     {
         setObjVar(self, VAR_BASE_STATUS, status);
@@ -203,8 +219,10 @@ public class base_master extends script.base_script
             obj_id[] terminals = getObjIdArrayObjVar(self, VAR_TERMINAL_IDS);
             if (terminals != null && terminals.length > 0)
             {
-                for (obj_id terminal : terminals) {
-                    if (isIdValid(terminal)) {
+                for (obj_id terminal : terminals)
+                {
+                    if (isIdValid(terminal))
+                    {
                         setObjVar(terminal, VAR_ACCESS_DELAY, (getGameTime() + 30));
                     }
                 }
@@ -213,6 +231,7 @@ public class base_master extends script.base_script
         messageTo(self, "handleBaseCleanupRequest", null, 0.0f, false);
         messageTo(self, "handleBeginSpawnRequest", null, 2.0f, false);
     }
+
     public int handleBaseInitializationRetry(obj_id self, dictionary params) throws InterruptedException
     {
         int tries = params.getInt("tries");
@@ -224,24 +243,26 @@ public class base_master extends script.base_script
             d.put("tries", tries);
             messageTo(self, "handleBaseInitializationRetry", d, 30.0f, false);
         }
-        else 
+        else
         {
             initializeBase(self, master);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTerminalSetup(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, VAR_TERMINAL_IDS))
         {
             beginTerminalSpawnSequence(self);
         }
-        else 
+        else
         {
             validateTerminals(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTerminalSpawnRequest(obj_id self, dictionary params) throws InterruptedException
     {
         int status = NO_CONTROL;
@@ -300,6 +321,7 @@ public class base_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleTerminalValidationResponse(obj_id self, dictionary params) throws InterruptedException
     {
         int response = params.getInt("response");
@@ -317,6 +339,7 @@ public class base_master extends script.base_script
         utils.setScriptVar(self, SCRIPT_VAR_VALIDATION, validate);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTerminalValidation(obj_id self, dictionary params) throws InterruptedException
     {
         int[] validate = utils.getIntArrayScriptVar(self, SCRIPT_VAR_VALIDATION);
@@ -324,14 +347,17 @@ public class base_master extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        for (int i1 : validate) {
-            if (i1 < 1) {
+        for (int i1 : validate)
+        {
+            if (i1 < 1)
+            {
                 beginTerminalSpawnSequence(self);
                 break;
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleControlUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         int id = params.getInt("id");
@@ -341,7 +367,7 @@ public class base_master extends script.base_script
         {
             terminalStatus = getIntArrayObjVar(self, VAR_TERMINAL_STATUS);
         }
-        else 
+        else
         {
             if (hasObjVar(self, VAR_TERMINAL_IDS))
             {
@@ -352,7 +378,7 @@ public class base_master extends script.base_script
                     terminalStatus[i] = 0;
                 }
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }
@@ -375,6 +401,7 @@ public class base_master extends script.base_script
         testBaseStatusChange(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean setPlanetaryTerminalStatus(obj_id object, int[] terminalStatus) throws InterruptedException
     {
         if (!isValidId(object))
@@ -390,6 +417,7 @@ public class base_master extends script.base_script
         }
         return true;
     }
+
     public boolean setPlanetaryBaseStatus(obj_id object, int baseStatus) throws InterruptedException
     {
         if (!isValidId(object))
@@ -405,6 +433,7 @@ public class base_master extends script.base_script
         }
         return true;
     }
+
     public boolean setPlanetaryCaptureTime(obj_id object) throws InterruptedException
     {
         if (!isValidId(object))

@@ -10,10 +10,12 @@ public class chassis_npc extends script.base_script
     public chassis_npc()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id deed, obj_id player) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);
@@ -33,7 +35,7 @@ public class chassis_npc extends script.base_script
                 {
                     debugSpeakMsg(self, "Failed to create pcd");
                 }
-                else 
+                else
                 {
                     obj_id xwing = createObjectOverloaded("object/ship/player/player_xwing.iff", pcd);
                     space_crafting.uninstallAll(xwing);
@@ -44,7 +46,7 @@ public class chassis_npc extends script.base_script
                     {
                         setOwner(xwing, player);
                     }
-                    else 
+                    else
                     {
                         debugSpeakMsg(self, "Failed to create xwing");
                     }

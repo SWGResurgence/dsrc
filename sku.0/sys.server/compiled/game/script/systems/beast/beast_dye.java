@@ -7,10 +7,12 @@ import script.*;
 
 public class beast_dye extends script.base_script
 {
+    public static final string_id SID_DYE_BEAST = new string_id("beast", "menu_dye");
+
     public beast_dye()
     {
     }
-    public static final string_id SID_DYE_BEAST = new string_id("beast", "menu_dye");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -20,6 +22,7 @@ public class beast_dye extends script.base_script
         int management_root = mi.addRootMenu(menu_info_types.ITEM_USE, SID_DYE_BEAST);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -44,13 +47,13 @@ public class beast_dye extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            String[] palettes = 
-            {
-                "",
-                "",
-                "",
-                ""
-            };
+            String[] palettes =
+                    {
+                            "",
+                            "",
+                            "",
+                            ""
+                    };
             for (int i = 0; i < palColors.length; i++)
             {
                 ranged_int_custom_var ri = palColors[i];

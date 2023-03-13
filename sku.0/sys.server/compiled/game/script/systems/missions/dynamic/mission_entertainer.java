@@ -9,19 +9,23 @@ public class mission_entertainer extends script.systems.missions.base.mission_dy
     public mission_entertainer()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         sendEntertainerIncomplete(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Setting up mission data in mission object for entertainer mission");
@@ -30,6 +34,7 @@ public class mission_entertainer extends script.systems.missions.base.mission_dy
         updateMissionWaypoint(self, locDestination);
         return SCRIPT_CONTINUE;
     }
+
     public int entertainerSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "intCompleted"))
@@ -42,11 +47,13 @@ public class mission_entertainer extends script.systems.missions.base.mission_dy
         }
         return SCRIPT_CONTINUE;
     }
+
     public int entertainerFail(obj_id self, dictionary params) throws InterruptedException
     {
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int entertainerIncomplete(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -54,10 +61,12 @@ public class mission_entertainer extends script.systems.missions.base.mission_dy
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndMission(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int entertainerEvent(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

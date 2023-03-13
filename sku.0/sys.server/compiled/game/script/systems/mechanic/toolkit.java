@@ -12,9 +12,9 @@ public class toolkit extends script.base_script
 {
     public static int PAYOUT_AMOUNT = 24000;
     public static String[] TOOLKIT_TYPES =
-    {
-        "speed", "height", "acceleration", "banking", "turning", "deceleration", "damping_height"
-    };
+            {
+                    "speed", "height", "acceleration", "banking", "turning", "deceleration", "damping_height"
+            };
 
     public toolkit()
     {
@@ -331,7 +331,7 @@ public class toolkit extends script.base_script
         {
             float modifier = getFloatObjVar(self, "mechanic.modifier");
             names[idx] = "toolkit_power";
-            attribs[idx] =  Float.toString(modifier);
+            attribs[idx] = Float.toString(modifier);
             idx++;
         }
         return SCRIPT_CONTINUE;

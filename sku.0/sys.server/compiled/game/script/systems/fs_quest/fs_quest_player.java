@@ -11,11 +11,13 @@ public class fs_quest_player extends script.base_script
     public fs_quest_player()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, "systems.fs_quest.fs_quest_player");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, fs_quests.VAR_QUEST_ACCEPTED))
@@ -30,6 +32,7 @@ public class fs_quest_player extends script.base_script
         CustomerServiceLog("fs_quests", "Removing FS quest accepted/completed flag from %TU.", self, null);
         return SCRIPT_CONTINUE;
     }
+
     public int msgValidateFSQuestPhase(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey(fs_dyn_village.CLUSTER_INT_KEY_PHASE_UID))
@@ -61,6 +64,7 @@ public class fs_quest_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgSetQuestPhaseId(obj_id self, dictionary params) throws InterruptedException
     {
         boolean rslt = false;
@@ -81,17 +85,18 @@ public class fs_quest_player extends script.base_script
                     CustomerServiceLog("fs_quests", "Marking %TU as having accept a quest for phase uid " + val + ".", self, null);
                 }
             }
-            else 
+            else
             {
                 LOG("force_sensitive", "**** COULD NOT FIND PHASE UID for player " + self + " quest will abort on next login. ****");
             }
         }
-        else 
+        else
         {
             LOG("force_sensitive", "fs_quest_player.msgSetQuestPhaseId -- Failed to find integer '" + key + "' cluster wide data.  Value might not have been registered yet.");
         }
         return SCRIPT_CONTINUE;
     }
+
     public void resetQuest(obj_id self, int phase) throws InterruptedException
     {
         for (int i = 1; i <= 8; i++)
@@ -124,6 +129,7 @@ public class fs_quest_player extends script.base_script
             }
         }
     }
+
     public boolean hasSurveyQuest(obj_id player) throws InterruptedException
     {
         boolean yesNo = false;
@@ -147,6 +153,7 @@ public class fs_quest_player extends script.base_script
         }
         return yesNo;
     }
+
     public void checkFsQuestCraftingBug(int phase) throws InterruptedException
     {
         obj_id self = getSelf();

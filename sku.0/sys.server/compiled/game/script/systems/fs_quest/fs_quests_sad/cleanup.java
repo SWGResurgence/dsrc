@@ -12,6 +12,7 @@ public class cleanup extends script.base_script
     public cleanup()
     {
     }
+
     public void cleanup(obj_id self) throws InterruptedException
     {
         clearWaypoint(self);
@@ -62,11 +63,13 @@ public class cleanup extends script.base_script
         }
         detachScript(self, "systems.fs_quest.fs_quests_sad.cleanup");
     }
+
     public int msgQuestAbortPhaseChange(obj_id self, dictionary params) throws InterruptedException
     {
         cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public void clearWaypoint(obj_id player) throws InterruptedException
     {
         String questName = "fs_quests_sad_return1";

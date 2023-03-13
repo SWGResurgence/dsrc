@@ -8,13 +8,14 @@ import script.*;
 
 public class jedi_cloak extends script.base_script
 {
-    public jedi_cloak()
-    {
-    }
     public static final string_id SID_USE_HOOD_UP = new string_id("spam", "hood_up");
     public static final string_id SID_USE_HOOD_DOWN = new string_id("spam", "hood_down");
     public static final string_id SID_NO_TWO_CLOAK = new string_id("spam", "no_two_cloak");
     public static final String OBJVAR_BEING_REPLACED = "aboutToBeReplaced";
+    public jedi_cloak()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, OBJVAR_BEING_REPLACED))
@@ -23,6 +24,7 @@ public class jedi_cloak extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(destContainer);
@@ -71,6 +73,7 @@ public class jedi_cloak extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.isEquipped(self))
@@ -81,7 +84,7 @@ public class jedi_cloak extends script.base_script
             {
                 mid.setServerNotify(true);
             }
-            else 
+            else
             {
                 if (itemName.equals(jedi.JEDI_CLOAK_LIGHT_HOOD_UP) || itemName.equals(jedi.JEDI_CLOAK_DARK_HOOD_UP))
                 {
@@ -95,6 +98,7 @@ public class jedi_cloak extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isEquipped(self))

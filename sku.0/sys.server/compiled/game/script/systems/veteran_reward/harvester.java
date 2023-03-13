@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class harvester extends script.base_script
 {
-    public harvester()
-    {
-    }
     public static final String OBJVAR_GROUP_REWARDED = "rewarded";
     public static final string_id SID_CONVERT = new string_id("ui_radial", "convert_harvester");
     public static final string_id SID_MAKE_ELITE = new string_id("ui_radial", "make_elite");
@@ -22,6 +19,10 @@ public class harvester extends script.base_script
     public static final string_id SID_HARVESTER_ALREADY_SELFPOWERED = new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "harvester_already_selfpowered");
     public static final string_id SID_CANT_SELF_POWER_ELITE = new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "harvester_cant_self_power_elite");
     public static final string_id SID_CANT_SELF_POWER = new string_id(veteran_deprecated.VETERAN_STRING_TABLE, "harvester_cant_self_power_normal");
+    public harvester()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, OBJVAR_GROUP_REWARDED))
@@ -30,6 +31,7 @@ public class harvester extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (hasObjVar(self, OBJVAR_GROUP_REWARDED))
@@ -83,6 +85,7 @@ public class harvester extends script.base_script
         item.addRootMenu(menu_info_types.ITEM_USE, SID_CONVERT);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         boolean isEliteDeed = false;
@@ -157,6 +160,7 @@ public class harvester extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleVeteranHarvestDestroy(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, OBJVAR_GROUP_REWARDED))
@@ -165,6 +169,7 @@ public class harvester extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public Vector getDeedsInInventory(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -178,14 +183,17 @@ public class harvester extends script.base_script
         }
         Vector deedList = new Vector();
         deedList.setSize(0);
-        for (obj_id objContent : objContents) {
+        for (obj_id objContent : objContents)
+        {
             String strItemTemplate = getTemplateName(objContent);
-            if (strItemTemplate.equals(player_structure.SELFPOWERED_DEED)) {
+            if (strItemTemplate.equals(player_structure.SELFPOWERED_DEED))
+            {
                 deedList.add(objContent);
             }
         }
         return deedList;
     }
+
     public boolean convertNonEliteToEliteDeeds(Vector deedList, obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))

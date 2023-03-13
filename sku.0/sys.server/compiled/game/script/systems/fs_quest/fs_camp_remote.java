@@ -14,21 +14,25 @@ public class fs_camp_remote extends script.base_script
     public fs_camp_remote()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, fs_counterstrike.OBJVAR_BORN_ON, getGameTime());
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         fs_counterstrike.checkPhaseItemDisable(self, 3);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnuUse = mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("fs_quest_village", "fs_cs_remote_use"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -56,7 +60,7 @@ public class fs_camp_remote extends script.base_script
             {
                 attribs[idx] = "Already Decayed";
             }
-            else 
+            else
             {
                 attribs[idx] = player_structure.assembleTimeRemaining(player_structure.convertSecondsTime(remainingLife));
             }
@@ -64,6 +68,7 @@ public class fs_camp_remote extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (fs_counterstrike.getPhaseItemPercentDecay(self, 3) >= 100)

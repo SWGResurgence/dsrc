@@ -10,11 +10,13 @@ public class spawn_player extends script.systems.spawning.spawn_base
     public spawn_player()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "spawning.verboseMode");
         return SCRIPT_CONTINUE;
     }
+
     public int showSpawnRegion(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         region[] rgnRegionList = getRegionsWithSpawnableAtPoint(getLocation(self), regions.SPAWN_TRUE);
@@ -39,13 +41,14 @@ public class spawn_player extends script.systems.spawning.spawn_base
             sendSystemMessageTestingOnly(self, "Multiple Spawn Regions found : ");
             sendSystemMessageTestingOnly(self, "Overload region is " + rgnOverloadRegion.getName());
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(self, "Spawn Region:");
         }
         sendSystemMessageTestingOnly(self, "Region: " + rgnSpawnRegion.getName());
         return SCRIPT_CONTINUE;
     }
+
     public int secretSpawnSpam(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (hasObjVar(self, "spawning.verboseMode"))
@@ -53,22 +56,25 @@ public class spawn_player extends script.systems.spawning.spawn_base
             removeObjVar(self, "spawning.verboseMode");
             sendSystemMessageTestingOnly(self, "Verbose spawn checks disabled");
         }
-        else 
+        else
         {
             setObjVar(self, "spawning.verboseMode", 1);
             sendSystemMessageTestingOnly(self, "Verbose spawning checks enabled");
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkStationCells", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int createSpawningElement(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (params.equals(""))
@@ -80,7 +86,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         String strTable = params.substring(0, intIndex);
         strTable = "datatables/spawning/spawn_lists/" + strTable + ".iff";
         debugSpeakMsg(self, "strTable is " + strTable);
-        String strNumber = params.substring(intIndex + 1, params.length());
+        String strNumber = params.substring(intIndex + 1);
         debugSpeakMsg(self, "strNumber is " + strNumber);
         if (!dataTableOpen(strTable))
         {
@@ -91,8 +97,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         try
         {
             intTestIndex = Integer.valueOf(strNumber);
-        }
-        catch(NumberFormatException err)
+        } catch (NumberFormatException err)
         {
             sendSystemMessageTestingOnly(self, strNumber + " is not a valid index");
             return SCRIPT_CONTINUE;
@@ -132,13 +137,14 @@ public class spawn_player extends script.systems.spawning.spawn_base
                 setObjVar(objCreatedTemplate, "spawning.buildingType", strBuildingType);
             }
         }
-        else 
+        else
         {
             debugSpeakMsg(self, "I made a null object");
-            debugSpeakMsg(self, "row was " + dctRow.toString());
+            debugSpeakMsg(self, "row was " + dctRow);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int createSpawningElementWithDifficulty(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (params.equals(""))
@@ -149,10 +155,10 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int intIndex = params.indexOf(" ");
         String strTable = params.substring(0, intIndex);
         strTable = "datatables/spawning/spawn_lists/" + strTable + ".iff";
-        String strRemainingString = params.substring(intIndex + 1, params.length());
+        String strRemainingString = params.substring(intIndex + 1);
         int intNextIndex = strRemainingString.indexOf(" ");
         String strNumber = strRemainingString.substring(0, intNextIndex);
-        String strDifficultyInt = strRemainingString.substring(intNextIndex + 1, strRemainingString.length());
+        String strDifficultyInt = strRemainingString.substring(intNextIndex + 1);
         if (!dataTableOpen(strTable))
         {
             sendSystemMessageTestingOnly(self, strTable + " is not a valid dataTable");
@@ -162,8 +168,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         try
         {
             intTestIndex = Integer.valueOf(strNumber);
-        }
-        catch(NumberFormatException err)
+        } catch (NumberFormatException err)
         {
             sendSystemMessageTestingOnly(self, strNumber + " is not a valid index");
             return SCRIPT_CONTINUE;
@@ -172,8 +177,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         try
         {
             intTestIndex = Integer.valueOf(strDifficultyInt);
-        }
-        catch(NumberFormatException err)
+        } catch (NumberFormatException err)
         {
             sendSystemMessageTestingOnly(self, strDifficultyInt + " is not a valid index");
             return SCRIPT_CONTINUE;
@@ -212,13 +216,14 @@ public class spawn_player extends script.systems.spawning.spawn_base
                 setObjVar(objCreatedTemplate, "spawning.buildingType", strBuildingType);
             }
         }
-        else 
+        else
         {
             debugSpeakMsg(self, "I made a null object");
-            debugSpeakMsg(self, "row was " + dctRow.toString());
+            debugSpeakMsg(self, "row was " + dctRow);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int startSpawner(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         obj_id objMasterSpawner = getPlanetByName(getLocation(self).area);
@@ -236,7 +241,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
             setObjVar(objMasterSpawner, "boolSpawnerIsOn", false);
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             if (!getBooleanObjVar(objMasterSpawner, "boolSpawnerIsOn"))
             {
@@ -244,19 +249,21 @@ public class spawn_player extends script.systems.spawning.spawn_base
                 sendSystemMessageTestingOnly(self, "The master spawner is now on!");
                 return SCRIPT_OVERRIDE;
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "The master spawner is already on!");
                 return SCRIPT_OVERRIDE;
             }
         }
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkStationCells", null, 2, false);
         removeObjVar(self, "spawning.locSpawnLocation");
         return SCRIPT_CONTINUE;
     }
+
     public int spawn_Trigger(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -312,6 +319,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String strText) throws InterruptedException
     {
         if (!isGod(self))
@@ -340,7 +348,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
             {
                 strDataTable = "datatables/spawning/ground_spawning/buildouts/" + strCommands[1] + ".tab";
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(self, "You must provide a filename. Syntax: dumpBuildout <fileName>");
                 return SCRIPT_CONTINUE;
@@ -353,38 +361,38 @@ public class spawn_player extends script.systems.spawning.spawn_base
             {
                 objBuilding = getContainedBy(objCell);
             }
-            String[] strHeaderTypes = 
-            {
-                "s",
-                "f",
-                "f",
-                "f",
-                "f",
-                "f",
-                "f",
-                "f",
-                "f",
-                "f",
-                "p",
-                "s",
-                "s"
-            };
-            String[] strHeaders = 
-            {
-                "strTemplate",
-                "fltJX",
-                "fltJY",
-                "fltJZ",
-                "fltKX",
-                "fltKY",
-                "fltKZ",
-                "fltPX",
-                "fltPY",
-                "fltPZ",
-                "strObjVars",
-                "strScripts",
-                "strCellName"
-            };
+            String[] strHeaderTypes =
+                    {
+                            "s",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "f",
+                            "p",
+                            "s",
+                            "s"
+                    };
+            String[] strHeaders =
+                    {
+                            "strTemplate",
+                            "fltJX",
+                            "fltJY",
+                            "fltJZ",
+                            "fltKX",
+                            "fltKY",
+                            "fltKZ",
+                            "fltPX",
+                            "fltPY",
+                            "fltPZ",
+                            "strObjVars",
+                            "strScripts",
+                            "strCellName"
+                    };
             if (!datatable.createDataTable(strDataTable, strHeaders, strHeaderTypes))
             {
                 sendSystemMessageTestingOnly(self, "No datatable made");
@@ -395,17 +403,19 @@ public class spawn_player extends script.systems.spawning.spawn_base
             {
                 objObjects = spawning.getAllContents(objBuilding);
             }
-            else 
+            else
             {
                 objObjects = getAllObjectsWithObjVar(getLocation(self), 15000, "intSpawnLocation");
             }
             sendSystemMessageTestingOnly(self, "dumping contents of " + objBuilding);
             dictionary dctRow;
-            for (obj_id objObject : objObjects) {
-                if (hasObjVar(objObject, "intSpawnLocation")) {
+            for (obj_id objObject : objObjects)
+            {
+                if (hasObjVar(objObject, "intSpawnLocation"))
+                {
                     dctRow = new dictionary();
                     locTest = getLocation(objObject);
-                    dctRow.put("strCellName",(boolInBuilding ? space_utils.getCellName(objBuilding, locTest.cell) : ""));
+                    dctRow.put("strCellName", (boolInBuilding ? space_utils.getCellName(objBuilding, locTest.cell) : ""));
                     transform vctTest = getTransform_o2p(objObject);
                     vector vctJ = vctTest.getLocalFrameJ_p();
                     vector vctK = vctTest.getLocalFrameK_p();
@@ -446,6 +456,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int specifyGroundSpawnerName(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -472,13 +483,13 @@ public class spawn_player extends script.systems.spawning.spawn_base
             float fltSpawnerMinTime = utils.getFloatScriptVar(self, "fltMinSpawnTime");
             float fltSpawnerMaxTime = utils.getFloatScriptVar(self, "fltMaxSpawnTime");
             int intSpawnerBehavior = utils.getIntScriptVar(self, "intDefaultBehavior");
-            String[] behaviors = 
-            {
-                "wander",
-                "sentinel",
-                "loiter",
-                "stop"
-            };
+            String[] behaviors =
+                    {
+                            "wander",
+                            "sentinel",
+                            "loiter",
+                            "stop"
+                    };
             String strSpawnerBehavior = behaviors[intSpawnerBehavior];
             String title = "Test";
             String prompt = "Current Spawn Data \n \\#pcontrast1 Type: \\#. " + strSpawnerType + " \n \\#pcontrast1 Spawn: \\#. " + strSpawnerSpawns + " \n \\#pcontrast1 Default Behavior: \\#. " + strSpawnerBehavior + " \n \\#pcontrast1 Radius: \\#. " + fltSpawnerRadius + " \n \\#pcontrast1 Count: \\#. " + intSpawnerCount + " \n \\#pcontrast1 Respawn (Min - Max): \\#. " + fltSpawnerMinTime + " - " + fltSpawnerMaxTime;
@@ -504,6 +515,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         sui.inputbox(self, self, "What type of spawner? Valid types are : area, patrol", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyGroundSpawnerType", null);
         return SCRIPT_CONTINUE;
     }
+
     public int duplicateLastSpawner(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -524,7 +536,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
                 {
                     strSpawnerType = "area";
                 }
-                else 
+                else
                 {
                     strSpawnerType = "patrol";
                 }
@@ -534,7 +546,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
             {
                 sui.inputbox(self, self, "What is the Patrol Path Type: Cycle or Oscillate", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "handlePatrolPathType", null);
             }
-            else 
+            else
             {
                 int intSpawnerBehavior = utils.getIntScriptVar(self, "intDefaultBehavior");
                 if (intSpawnerBehavior == 3)
@@ -548,6 +560,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int specifyGroundSpawnerType(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -563,13 +576,14 @@ public class spawn_player extends script.systems.spawning.spawn_base
             sui.inputbox(self, self, "INVALID SPAWN TYPE " + strType + ". What type of spawner? Valid types are : area, patrol, location ", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyGroundSpawnerType", null);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "strType", strType);
             sui.inputbox(self, self, "What type of spawns should this spawner use?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyGroundSpawnerSpawns", null);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int specifyGroundSpawnerSpawns(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -585,7 +599,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
             sui.inputbox(self, self, "INVALID SPAWNS! What type of spawns should this spawner use?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyGroundSpawnerSpawns", null);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             String strFileName = "datatables/spawning/ground_spawning/types/" + strSpawns + ".iff";
             String creatureTable = "datatables/mob/creatures.iff";
@@ -608,12 +622,13 @@ public class spawn_player extends script.systems.spawning.spawn_base
             utils.setScriptVar(self, "intDefaultBehavior", isValidBehavior("stop"));
             utils.setScriptVar(self, "intGoodLocationSpawner", 0);
         }
-        else 
+        else
         {
             sui.inputbox(self, self, "What default behavior do you wish your creatures to have? Valid Behaviors are : wander, loiter, stop, sentinel", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyGroundSpawnerDefaultBehavior", null);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int specifyGroundSpawnerDefaultBehavior(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -634,19 +649,21 @@ public class spawn_player extends script.systems.spawning.spawn_base
         sui.inputbox(self, self, "Do you want to use getgoodlocation for this spawner? Valid answers are : yes, no", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyGroundSpawnerGoodLocationType", null);
         return SCRIPT_CONTINUE;
     }
+
     public int isValidBehavior(String strBehavior) throws InterruptedException
     {
-        final String[] BEHAVIORS = 
-        {
-            "wander",
-            "sentinel",
-            "loiter",
-            "stop"
-        };
+        final String[] BEHAVIORS =
+                {
+                        "wander",
+                        "sentinel",
+                        "loiter",
+                        "stop"
+                };
         int intIndex = utils.getElementPositionInArray(BEHAVIORS, strBehavior);
         sendSystemMessageTestingOnly(getSelf(), "For behavior " + strBehavior + " intIndex is " + intIndex);
         return intIndex;
     }
+
     public int specifyGroundSpawnerGoodLocationType(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -666,7 +683,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         {
             utils.setScriptVar(self, "intGoodLocationSpawner", 1);
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "intGoodLocationSpawner", 0);
         }
@@ -675,12 +692,13 @@ public class spawn_player extends script.systems.spawning.spawn_base
         {
             sui.inputbox(self, self, "What spawner location file do you want to use for this spawner?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyGroundSpawnerLocations", null);
         }
-        else 
+        else
         {
             sui.inputbox(self, self, "SCALE: Meters \nWhat is this spawner's spawn radius?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyGroundSpawnerRadius", null);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int specifyGroundSpawnerLocations(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -696,7 +714,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
             sui.inputbox(self, self, "INVALID LOCATIONS FILE. What spawner location file do you want to use for this spawner?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyGroundSpawnerLocations", null);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             String strFileName = "datatables/spawning/ground_spawning/buildouts/" + strSpawnLocations + ".iff";
             if (!dataTableOpen(strFileName))
@@ -709,6 +727,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         sui.inputbox(self, self, "What is the spawn count for this spawner?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyGroundSpawnerSpawnCount", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyGroundSpawnerRadius(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -729,6 +748,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         sui.inputbox(self, self, "What is the spawn count for this spawner?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyGroundSpawnerSpawnCount", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyGroundSpawnerSpawnCount(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -749,6 +769,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         sui.inputbox(self, self, "SCALE: Seconds \nWhat is this spawner's minimum spawn time?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyGroundSpawnerMinSpawnTime", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyGroundSpawnerMinSpawnTime(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -769,6 +790,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         sui.inputbox(self, self, "Min Spawn Time :" + fltMinSpawnTime + "\n SCALE: Seconds \nWhat is this spawner's maximum spawn recycle time?", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "specifyGroundSpawnerMaxSpawnTime", null);
         return SCRIPT_CONTINUE;
     }
+
     public int specifyGroundSpawnerMaxSpawnTime(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -796,12 +818,13 @@ public class spawn_player extends script.systems.spawning.spawn_base
         {
             sui.inputbox(self, self, "What is the Patrol Path Type: Cycle or Oscillate", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "handlePatrolPathType", null);
         }
-        else 
+        else
         {
             writeSpawner(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePatrolPathType(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -830,6 +853,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         showSUIPage(pid);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlaceNewPatrolPoint(obj_id self, dictionary params) throws InterruptedException
     {
         int intButton = sui.getIntButtonPressed(params);
@@ -874,6 +898,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean canDuplicateLastSpawner(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "strType"))
@@ -913,12 +938,9 @@ public class spawn_player extends script.systems.spawning.spawn_base
         {
             return false;
         }
-        if (!utils.hasScriptVar(self, "intGoodLocationSpawner"))
-        {
-            return false;
-        }
-        return true;
+        return utils.hasScriptVar(self, "intGoodLocationSpawner");
     }
+
     public void clearSpawnerScriptVar(obj_id self, boolean boolDestroySpawners) throws InterruptedException
     {
         utils.removeScriptVar(self, "strType");
@@ -937,13 +959,15 @@ public class spawn_player extends script.systems.spawning.spawn_base
             Vector objPatrolPoints = utils.getResizeableObjIdArrayScriptVar(self, "objPatrolPoints");
             if (objPatrolPoints != null)
             {
-                for (Object objPatrolPoint : objPatrolPoints) {
+                for (Object objPatrolPoint : objPatrolPoints)
+                {
                     destroyObject(((obj_id) objPatrolPoint));
                 }
             }
         }
         utils.removeScriptVar(self, "objPatrolPoints");
     }
+
     public void writeSpawner(obj_id self) throws InterruptedException
     {
         sendSystemMessageTestingOnly(self, "Writing spawner");
@@ -958,11 +982,11 @@ public class spawn_player extends script.systems.spawning.spawn_base
             objSpawner = createObject("object/tangible/ground_spawning/area_spawner.iff", trTest, locTest.cell);
             persistObject(objSpawner);
         }
-        else 
+        else
         {
             patrolPoints = utils.getResizeableObjIdArrayScriptVar(self, "objPatrolPoints");
             String strPatrolPathType = utils.getStringScriptVar(self, "strPatrolPathType");
-            objSpawner = ((obj_id)patrolPoints.get(0));
+            objSpawner = ((obj_id) patrolPoints.get(0));
             persistObject(objSpawner);
             setObjVar(objSpawner, "patrolPathType", strPatrolPathType);
         }
@@ -986,11 +1010,11 @@ public class spawn_player extends script.systems.spawning.spawn_base
             int k = 0;
             for (int i = 1; i < patrolPoints.size(); i++)
             {
-                setName(((obj_id)patrolPoints.get(i)), strSpawnerName + "_" + objSpawner + "_" + i);
+                setName(((obj_id) patrolPoints.get(i)), strSpawnerName + "_" + objSpawner + "_" + i);
                 patrolPointNames[k] = strSpawnerName + "_" + objSpawner + "_" + i;
-                setObjVar(((obj_id)patrolPoints.get(i)), "pointName", strSpawnerName + "_" + objSpawner + "_" + i);
-                persistObject(((obj_id)patrolPoints.get(i)));
-                attachScript(((obj_id)patrolPoints.get(i)), "systems.spawning.patrol_point_setup");
+                setObjVar(((obj_id) patrolPoints.get(i)), "pointName", strSpawnerName + "_" + objSpawner + "_" + i);
+                persistObject(((obj_id) patrolPoints.get(i)));
+                attachScript(((obj_id) patrolPoints.get(i)), "systems.spawning.patrol_point_setup");
                 k++;
             }
             setObjVar(objSpawner, "strPatrolPointNames", patrolPointNames);
@@ -1015,10 +1039,12 @@ public class spawn_player extends script.systems.spawning.spawn_base
         int intGoodLocationSpawner = utils.getIntScriptVar(self, "intGoodLocationSpawner");
         setObjVar(objSpawner, "intGoodLocationSpawner", intGoodLocationSpawner);
     }
+
     public boolean isValidSpawnerType(String strText) throws InterruptedException
     {
         return strText.equals("area") || strText.equals("patrol");
     }
+
     public void handleMineFieldCreation() throws InterruptedException
     {
         String datatable = "datatables/combat/npc_landmines.iff";
@@ -1043,6 +1069,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
             }
         }
     }
+
     public int handleSelectMineType(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -1055,6 +1082,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         sui.inputbox(player, player, "What is the Radius of this field", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "handleSetFieldRadius", null);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetFieldRadius(obj_id self, dictionary params) throws InterruptedException
     {
         int button = sui.getIntButtonPressed(params);
@@ -1070,6 +1098,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         sui.inputbox(self, self, "What is the Mine Count of this field", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "handleSetMineCount", null);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetMineCount(obj_id self, dictionary params) throws InterruptedException
     {
         int button = sui.getIntButtonPressed(params);
@@ -1085,6 +1114,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         sui.inputbox(self, self, "What is the respawn time of this field", sui.OK_CANCEL, "Test", sui.INPUT_NORMAL, null, "handleSetMineRespawn", null);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetMineRespawn(obj_id self, dictionary params) throws InterruptedException
     {
         int button = sui.getIntButtonPressed(params);
@@ -1101,6 +1131,7 @@ public class spawn_player extends script.systems.spawning.spawn_base
         generateMineField();
         return SCRIPT_CONTINUE;
     }
+
     public void generateMineField() throws InterruptedException
     {
         obj_id player = getSelf();
@@ -1121,13 +1152,16 @@ public class spawn_player extends script.systems.spawning.spawn_base
         attachScript(mineFieldController, "systems.combat.combat_mine_spawner");
         clearMineScriptVar(player);
     }
+
     public void clearMineScriptVar(obj_id player) throws InterruptedException
     {
         utils.removeScriptVar(player, "mineCreation");
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
     }
+
     public int checkStationCells(obj_id self, dictionary params) throws InterruptedException
     {
         if (isInWorldCell(self))
@@ -1147,13 +1181,16 @@ public class spawn_player extends script.systems.spawning.spawn_base
                 return SCRIPT_CONTINUE;
             }
             String buffName;
-            for (obj_id station : stations) {
-                if (!isIdValid(station)) {
+            for (obj_id station : stations)
+            {
+                if (!isIdValid(station))
+                {
                     continue;
                 }
                 int craftingType = getIntObjVar(station, craftinglib.OBJVAR_CRAFTING_TYPE);
                 buffName = craftinglib.getCraftingStationBuffName(craftingType);
-                if (buffName == null || buffName.equals("")) {
+                if (buffName == null || buffName.equals(""))
+                {
                     continue;
                 }
                 buff.applyBuff(self, station, buffName);

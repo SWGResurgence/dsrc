@@ -7,9 +7,6 @@ import script.library.utils;
 
 public class lair_interactivity extends script.base_script
 {
-    public lair_interactivity()
-    {
-    }
     public static final boolean LOGGING_ON = false;
     public static final String LOGGING_CATEGORY = "lair_interactivity";
     public static final String LAIR_SEARCHED = "lair.searched";
@@ -19,21 +16,25 @@ public class lair_interactivity extends script.base_script
     public static final string_id SID_INVENTORY_FULL = new string_id("lair_n", "inventory_full");
     public static final string_id SID_FOUND_EGGS = new string_id("lair_n", "found_eggs");
     public static final string_id SID_FOUND_BUGS = new string_id("lair_n", "found_bugs");
-    public static final String[] BUG_SAMPLE_OBJECTS = 
+    public static final String[] BUG_SAMPLE_OBJECTS =
+            {
+                    "object/tangible/bug_jar/sample_bats.iff",
+                    "object/tangible/bug_jar/sample_bees.iff",
+                    "object/tangible/bug_jar/sample_butterflies.iff",
+                    "object/tangible/bug_jar/sample_flies.iff",
+                    "object/tangible/bug_jar/sample_glowzees.iff",
+                    "object/tangible/bug_jar/sample_moths.iff"
+            };
+    public static final String[] RARE_BUG_SAMPLE_OBJECTS =
+            {
+                    "object/tangible/fishing/bait/bait_grub.iff",
+                    "object/tangible/fishing/bait/bait_worm.iff",
+                    "object/tangible/fishing/bait/bait_insect.iff"
+            };
+    public lair_interactivity()
     {
-        "object/tangible/bug_jar/sample_bats.iff",
-        "object/tangible/bug_jar/sample_bees.iff",
-        "object/tangible/bug_jar/sample_butterflies.iff",
-        "object/tangible/bug_jar/sample_flies.iff",
-        "object/tangible/bug_jar/sample_glowzees.iff",
-        "object/tangible/bug_jar/sample_moths.iff"
-    };
-    public static final String[] RARE_BUG_SAMPLE_OBJECTS = 
-    {
-        "object/tangible/fishing/bait/bait_grub.iff",
-        "object/tangible/fishing/bait/bait_worm.iff",
-        "object/tangible/fishing/bait/bait_insect.iff"
-    };
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!hasObjVar(self, "npc_lair.isCreatureLair"))
@@ -43,10 +44,12 @@ public class lair_interactivity extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int searchLair(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -57,6 +60,7 @@ public class lair_interactivity extends script.base_script
         searchLair(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public void searchLair(obj_id self, obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(self, LAIR_SEARCHED))
@@ -105,25 +109,27 @@ public class lair_interactivity extends script.base_script
                 CustomerServiceLog("milking_and_lair_search", "handleMilking: Player: " + getName(player) + " OID: " + player + " attempted to milk but could not retrieve location data while milking " + self + " " + getName(self));
                 return;
             }
-            for (obj_id obj_id : resourceList) {
+            for (obj_id obj_id : resourceList)
+            {
                 blog("" + obj_id);
                 setLocation(obj_id, curloc);
                 putIn(obj_id, pInv, player);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_FOUND_BUGS);
             if (rand(1, 100) < 50)
             {
                 createObject(RARE_BUG_SAMPLE_OBJECTS[rand(0, RARE_BUG_SAMPLE_OBJECTS.length - 1)], pInv, "");
             }
-            else 
+            else
             {
                 createObject(BUG_SAMPLE_OBJECTS[rand(0, BUG_SAMPLE_OBJECTS.length - 1)], pInv, "");
             }
         }
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && !msg.equals(""))

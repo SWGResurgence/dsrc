@@ -5,11 +5,12 @@ import script.string_id;
 
 public class crafting_old_ris extends script.base_script
 {
+    public static final String VERSION = "v0.00.00";
+    public static final string_id SID_RIS_SCHEMATICS_UPDATED = new string_id("crafting", "ris_schematics_updated");
     public crafting_old_ris()
     {
     }
-    public static final String VERSION = "v0.00.00";
-    public static final string_id SID_RIS_SCHEMATICS_UPDATED = new string_id("crafting", "ris_schematics_updated");
+
     public int OnRequestResourceWeights(obj_id self, obj_id player, String[] desiredAttribs, String[] attribs, int[] slots, int[] counts, int[] data) throws InterruptedException
     {
         if (hasOldRisBoot(player))
@@ -19,21 +20,24 @@ public class crafting_old_ris extends script.base_script
                 fullSchematicConversion(player);
                 sendSystemMessage(player, SID_RIS_SCHEMATICS_UPDATED);
             }
-            else 
+            else
             {
                 bootSchematicConversion(player);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean hasOldRisChest(obj_id player) throws InterruptedException
     {
         return (hasSchematic(player, "object/draft_schematic/clothing/clothing_armor_ris_chest_plate.iff"));
     }
+
     public boolean hasOldRisBoot(obj_id player) throws InterruptedException
     {
         return (hasSchematic(player, "object/draft_schematic/clothing/clothing_armor_ris_boots.iff"));
     }
+
     public void fullSchematicConversion(obj_id player) throws InterruptedException
     {
         revokeSchematic(player, "object/draft_schematic/armor/component/armor_layer_ris.iff");
@@ -56,6 +60,7 @@ public class crafting_old_ris extends script.base_script
         grantSchematic(player, "object/draft_schematic/armor/armor_appearance_ris_leggings.iff");
         return;
     }
+
     public void bootSchematicConversion(obj_id player) throws InterruptedException
     {
         revokeSchematic(player, "object/draft_schematic/clothing/clothing_armor_ris_boots.iff");

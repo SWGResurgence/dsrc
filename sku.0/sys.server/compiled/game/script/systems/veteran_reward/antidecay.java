@@ -6,9 +6,6 @@ import script.library.utils;
 
 public class antidecay extends script.base_script
 {
-    public antidecay()
-    {
-    }
     public static final String OBJVAR_GROUP_REWARDED = "rewarded";
     public static final String VETERAN_STRING_TABLE = "veteran_new";
     public static final String VETERAN_CSLOG = "veteran";
@@ -29,6 +26,10 @@ public class antidecay extends script.base_script
     public static final string_id SID_USE_KIT_CONFIRM_PROMPT_ONE = new string_id(VETERAN_STRING_TABLE, "use_kit_confirm_prompt_one");
     public static final string_id SID_USE_KIT_CONFIRM_PROMPT_TWO = new string_id(VETERAN_STRING_TABLE, "use_kit_confirm_prompt_two");
     public static final string_id SID_USE_KIT_CONFIRM_TITLE = new string_id(VETERAN_STRING_TABLE, "use_kit_confirm_title");
+    public antidecay()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, OBJVAR_GROUP_REWARDED))
@@ -53,6 +54,7 @@ public class antidecay extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (hasObjVar(self, OBJVAR_GROUP_REWARDED))
@@ -63,6 +65,7 @@ public class antidecay extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (hasScript(self, NOMOVE_SCRIPT))
@@ -71,12 +74,14 @@ public class antidecay extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         item.addRootMenu(menu_info_types.ITEM_USE, null);
         setName(self, "");
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -96,6 +101,7 @@ public class antidecay extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);
@@ -113,13 +119,14 @@ public class antidecay extends script.base_script
             {
                 CustomerServiceLog(VETERAN_CSLOG, "Anti Decay Kit " + self + " was destroyed by player %TU without being used.", player);
             }
-            else 
+            else
             {
                 CustomerServiceLog(VETERAN_CSLOG, "Anti Decay Kit " + self + " was destroyed without being used. Player unknown.");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleVeteranAntidecayDestroy(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, OBJVAR_GROUP_REWARDED))
@@ -138,6 +145,7 @@ public class antidecay extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean putItemsInKitIntoPlayerInventory(obj_id kit, obj_id player) throws InterruptedException
     {
         if (!isIdValid(kit))
@@ -151,8 +159,10 @@ public class antidecay extends script.base_script
         obj_id[] kitContents = getContents(kit);
         if (kitContents != null && kitContents.length > 0)
         {
-            for (obj_id kitContent : kitContents) {
-                if (!utils.putInPlayerInventory(player, kitContent)) {
+            for (obj_id kitContent : kitContents)
+            {
+                if (!utils.putInPlayerInventory(player, kitContent))
+                {
                     sendSystemMessage(player, SID_FAILED_ITEM_CANNOT_BE_PLACED_IN_INVENTORY);
                     return false;
                 }

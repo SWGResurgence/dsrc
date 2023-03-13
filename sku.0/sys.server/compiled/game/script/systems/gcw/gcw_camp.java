@@ -13,11 +13,13 @@ public class gcw_camp extends script.base_script
     public gcw_camp()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "initializeAdvancedCamp", null, 30.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int initializeAdvancedCamp(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("gcw_camp_functionality", "initializeAdvancedCamp");
@@ -68,7 +70,8 @@ public class gcw_camp extends script.base_script
             location nodeLoc = camping.getAdvancedCampNodeLocation(self, tempLoc, nodeCount);
             int nodeYaw = camping.getAdvancedCampNodeYaw(self, nodeCount);
             String module_template = "";
-            switch (modules[i]) {
+            switch (modules[i])
+            {
                 case "shuttle_beacon":
                     module_template = "object/building/poi/player_camp_shuttle_beacon.iff";
                     break;
@@ -76,25 +79,35 @@ public class gcw_camp extends script.base_script
                     module_template = "object/building/poi/player_camp_clone_tube.iff";
                     break;
                 case "entertainer":
-                    if (factionFlag == factions.FACTION_FLAG_REBEL) {
+                    if (factionFlag == factions.FACTION_FLAG_REBEL)
+                    {
                         LOG("gcw_camp_functionality", "initializeAdvancedCamp - Entertainment Camp is FACTION_FLAG_REBEL");
                         module_template = "object/building/poi/gcw_camp_entertainment_rebel.iff";
-                    } else if (factionFlag == factions.FACTION_FLAG_IMPERIAL) {
+                    }
+                    else if (factionFlag == factions.FACTION_FLAG_IMPERIAL)
+                    {
                         LOG("gcw_camp_functionality", "initializeAdvancedCamp - Entertainment Camp is FACTION_FLAG_IMPERIAL");
                         module_template = "object/building/poi/gcw_camp_entertainment_imperial.iff";
-                    } else {
+                    }
+                    else
+                    {
                         LOG("gcw_camp_functionality", "initializeAdvancedCamp - Entertainment Camp is FACTION_FLAG_UNKNOWN");
                         module_template = "object/building/poi/player_camp_entertainment_area.iff";
                     }
                     break;
                 case "junk_dealer":
-                    if (factionFlag == factions.FACTION_FLAG_REBEL) {
+                    if (factionFlag == factions.FACTION_FLAG_REBEL)
+                    {
                         LOG("gcw_camp_functionality", "initializeAdvancedCamp - Junk Dealer is FACTION_FLAG_REBEL");
                         module_template = "object/building/poi/gcw_camp_junk_dealer_rebel.iff";
-                    } else if (factionFlag == factions.FACTION_FLAG_IMPERIAL) {
+                    }
+                    else if (factionFlag == factions.FACTION_FLAG_IMPERIAL)
+                    {
                         LOG("gcw_camp_functionality", "initializeAdvancedCamp - Junk Dealer is FACTION_FLAG_IMPERIAL");
                         module_template = "object/building/poi/gcw_camp_junk_dealer_imperial.iff";
-                    } else {
+                    }
+                    else
+                    {
                         LOG("gcw_camp_functionality", "initializeAdvancedCamp - Junk Dealer is FACTION_FLAG_UNKNOWN");
                         module_template = "object/building/poi/player_camp_junk_dealer.iff";
                     }
@@ -149,7 +162,8 @@ public class gcw_camp extends script.base_script
         setObjVar(self, camping.VAR_CREATION_TIME, getCalendarTime());
         Vector children = getResizeableObjIdArrayObjVar(self, theater.VAR_CHILDREN);
         LOG("gcw_camp_functionality", "initializeAdvancedCamp - children.length: " + children.size());
-        for (obj_id nodeObject : nodeObjects) {
+        for (obj_id nodeObject : nodeObjects)
+        {
             children = utils.addElement(children, nodeObject);
         }
         setObjVar(self, theater.VAR_CHILDREN, children);

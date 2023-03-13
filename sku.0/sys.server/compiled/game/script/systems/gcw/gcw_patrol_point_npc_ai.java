@@ -10,14 +10,17 @@ public class gcw_patrol_point_npc_ai extends script.systems.gcw.gcw_city_kit
     public gcw_patrol_point_npc_ai()
     {
     }
+
     public void setupConstructionQuests(obj_id self, obj_id pylon) throws InterruptedException
     {
         setName(pylon, "Turret Construction Site");
         attachScript(pylon, "systems.gcw.gcw_city_pylon_turret");
     }
+
     public void setupInvasionQuests(obj_id kit) throws InterruptedException
     {
     }
+
     public obj_id createFactionKit(int faction, location loc) throws InterruptedException
     {
         if (loc == null)

@@ -7,20 +7,24 @@ import script.obj_id;
 
 public class instance_manager extends script.base_script
 {
+    public static boolean LOGGING = true;
+
     public instance_manager()
     {
     }
-    public static boolean LOGGING = true;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         instance.registerInstance(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         instance.registerInstance(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String name, int request_id, String[] element_name_list, dictionary[] data, int lock_key) throws InterruptedException
     {
         if (manage_name.startsWith("instance_manager-" + instance.getInstanceName(self)))
@@ -48,6 +52,7 @@ public class instance_manager extends script.base_script
         releaseClusterWideDataLock(manage_name, lock_key);
         return SCRIPT_CONTINUE;
     }
+
     public int requestEnterPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -92,6 +97,7 @@ public class instance_manager extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int debugMovePlayerToInstanceHandler(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -103,6 +109,7 @@ public class instance_manager extends script.base_script
         CustomerServiceLog(instance.INSTANCE_DEBUG_LOG, "debugMovePlayerToInstanceHandler-messageTo 'movePlayerToInstance' couldnt find player " + getFirstName(player) + "(" + player + "). This means we died without sending the player to the instance.");
         return SCRIPT_CONTINUE;
     }
+
     public int startNewInstance(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -128,6 +135,7 @@ public class instance_manager extends script.base_script
         messageTo(self, "beginSpawn", params, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int endInstanceSession(obj_id self, dictionary params) throws InterruptedException
     {
         String groupOne = instance.getPlayerList(self, 1);
@@ -148,11 +156,13 @@ public class instance_manager extends script.base_script
         messageTo(self, "cleanupSpawn", null, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int removePlayerFromList(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player_id");
         return SCRIPT_CONTINUE;
     }
+
     public int startClock(obj_id self, dictionary params) throws InterruptedException
     {
         int instance_time = instance.getInstanceDuration(self);
@@ -162,13 +172,14 @@ public class instance_manager extends script.base_script
         {
             messageTo(self, "handleClockTic", dict, 0.0f, false);
         }
-        else 
+        else
         {
             dict.put("instance_time", instance_time - 300);
             messageTo(self, "handleClockTic", dict, 300.0f, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int clockOverride(obj_id self, dictionary params) throws InterruptedException
     {
         int new_time = params.getInt("new_time");
@@ -177,6 +188,7 @@ public class instance_manager extends script.base_script
         messageTo(self, "handleClockTic", dict, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleClockTic(obj_id self, dictionary params) throws InterruptedException
     {
         if (!trial.verifySession(self, params, "clock"))
@@ -196,7 +208,7 @@ public class instance_manager extends script.base_script
             instance.closeInstance(self);
             return SCRIPT_CONTINUE;
         }
-        if(players != null)
+        if (players != null)
             dict.put("player", players);
         messageTo(self, "validatePlayer", dict, 0.0f, false);
         int minPlayers = instance.getMinPlayers(self);
@@ -206,7 +218,8 @@ public class instance_manager extends script.base_script
             boolean godPresent = false;
             if (players != null && players.length > 0)
             {
-                for (obj_id player : players) {
+                for (obj_id player : players)
+                {
                     godPresent |= isGod(player);
                     godPresent |= hasObjVar(player, "testingHoth");
                 }
@@ -220,7 +233,7 @@ public class instance_manager extends script.base_script
                 lastCheck++;
                 utils.setScriptVar(self, "failed_min_player_check", lastCheck);
             }
-            else 
+            else
             {
                 utils.removeScriptVar(self, "failed_min_player_check");
             }
@@ -243,6 +256,7 @@ public class instance_manager extends script.base_script
         messageTo(self, "handleClockTic", dict, nextTic, false);
         return SCRIPT_CONTINUE;
     }
+
     public int validatePlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -281,12 +295,13 @@ public class instance_manager extends script.base_script
             instance.requestExitPlayer(instance.getInstanceName(self), player, 1);
             instance.removeFromPlayerIdList(self, player);
         }
-        else 
+        else
         {
             instance.addToPlayerIdList(self, player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

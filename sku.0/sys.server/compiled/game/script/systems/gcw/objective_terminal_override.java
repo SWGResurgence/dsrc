@@ -7,26 +7,27 @@ import java.util.Vector;
 
 public class objective_terminal_override extends script.faction_perk.hq.objective_object
 {
-    public objective_terminal_override()
-    {
-    }
     public static final string_id MNU_DNA = new string_id("hq", "mnu_dna");
     public static final int NUM_SEQUENCE = 23;
     public static final String VAR_DNA = "hq.objective.dna";
-    public static final String[] NUCLEOTIDES = 
+    public static final String[] NUCLEOTIDES =
+            {
+                    "A",
+                    "G",
+                    "C",
+                    "T"
+            };
+    public static final String[] PAIRS =
+            {
+                    "AT",
+                    "TA",
+                    "GC",
+                    "CG"
+            };
+    public objective_terminal_override()
     {
-        "A",
-        "G",
-        "C",
-        "T"
-    };
-    public static final String[] PAIRS = 
-    {
-        "AT",
-        "TA",
-        "GC",
-        "CG"
-    };
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "type", "terminal");
@@ -34,11 +35,13 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
         constructDNAStrand(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.SERVER_MENU1, MNU_DNA);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (pvpGetType(player) != PVPTYPE_DECLARED)
@@ -72,7 +75,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
                 prose_package ppDisableOther = prose.getPackage(hq.PROSE_DISABLE_OTHER, priorObjective, self);
                 sendSystemMessageProse(player, ppDisableOther);
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(player, "Other objectives must be disabled prior to gaining access to this one.");
             }
@@ -84,6 +87,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
         }
         return SCRIPT_CONTINUE;
     }
+
     public String[] constructDNAStrand(obj_id self) throws InterruptedException
     {
         String[] dna = new String[NUM_SEQUENCE];
@@ -94,6 +98,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
         setObjVar(self, VAR_DNA, dna);
         return dna;
     }
+
     public void startDNASequencing(obj_id self, obj_id player) throws InterruptedException
     {
         String scriptvar = "dna." + player;
@@ -119,6 +124,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
         d.put("player", player);
         messageTo(self, "handleSequenceDelay", d, 3.0f, false);
     }
+
     public void doSequencing(obj_id self, obj_id player) throws InterruptedException
     {
         if (ai_lib.isInCombat(player))
@@ -161,11 +167,13 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
             {
                 entries = utils.addElement(entries, dna[i]);
             }
-            else 
+            else
             {
                 numLocks++;
-                for (String pair : PAIRS) {
-                    if (pair.startsWith(dna[i])) {
+                for (String pair : PAIRS)
+                {
+                    if (pair.startsWith(dna[i]))
+                    {
                         entries = utils.addElement(entries, pair);
                         break;
                     }
@@ -204,6 +212,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
             utils.setScriptVar(self, scriptvar_chain, chain);
         }
     }
+
     public int handleSequencing(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -260,7 +269,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
                         newLocks++;
                     }
                 }
-                else 
+                else
                 {
                     break;
                 }
@@ -269,8 +278,10 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
         }
         sendSystemMessageTestingOnly(player, "You match " + newLocks + " new sets of nucleotides.");
         int totalLocks = 0;
-        for (int lock : locks) {
-            if (lock != 0) {
+        for (int lock : locks)
+        {
+            if (lock != 0)
+            {
                 totalLocks++;
             }
         }
@@ -288,6 +299,7 @@ public class objective_terminal_override extends script.faction_perk.hq.objectiv
         messageTo(self, "handleSequenceDelay", d, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSequenceDelay(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");

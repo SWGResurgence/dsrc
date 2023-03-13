@@ -7,10 +7,12 @@ import script.library.utils;
 
 public class trackingbeacon extends script.base_script
 {
+    public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("#####");
+
     public trackingbeacon()
     {
     }
-    public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("#####");
+
     public int msgDecaySample(obj_id self, dictionary params) throws InterruptedException
     {
         stealth.cleanComponentFromContainer(self, getContainedBy(self));
@@ -30,6 +32,7 @@ public class trackingbeacon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int free = getFirstFreeIndex(names);
@@ -43,13 +46,13 @@ public class trackingbeacon extends script.base_script
         {
             attribs[free++] = "@spam:power_drained";
         }
-        else 
+        else
         {
             if (power < 60)
             {
                 attribs[free++] = floatFormat.format(power) + " secs left";
             }
-            else 
+            else
             {
                 attribs[free++] = floatFormat.format(power / 60) + " mins left";
             }
@@ -84,13 +87,13 @@ public class trackingbeacon extends script.base_script
             {
                 attribs[free++] = "@spam:already_expired";
             }
-            else 
+            else
             {
                 if (timespan < 60)
                 {
                     attribs[free++] = floatFormat.format(timespan) + " secs left";
                 }
-                else 
+                else
                 {
                     attribs[free++] = floatFormat.format(timespan / 60) + " mins left";
                 }
@@ -98,6 +101,7 @@ public class trackingbeacon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -123,6 +127,7 @@ public class trackingbeacon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -153,7 +158,7 @@ public class trackingbeacon extends script.base_script
                 sendSystemMessage(player, new string_id("spam", "tracking_must_turn_off"));
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 obj_id target = getLookAtTarget(player);
                 if (stealth.canBioProbe(player, self, target))
@@ -165,6 +170,7 @@ public class trackingbeacon extends script.base_script
         sendDirtyObjectMenuNotification(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgTrackingBeaconLocationReply(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("stealth", "Object " + self + " " + getName(self) + " got msgTrackingBeaconLocationReply");
@@ -174,6 +180,7 @@ public class trackingbeacon extends script.base_script
         stealth.updateTrackingBeaconData(self, sendingTarget, loc, targetName);
         return SCRIPT_CONTINUE;
     }
+
     public int msgTrackingBeaconUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("stealth", "Object " + self + " " + getName(self) + " got msgTrackingBeaconUpdate");

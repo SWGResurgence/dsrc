@@ -28,6 +28,7 @@ public class city_furniture extends script.base_script
     public static final string_id NO_SKILL_DECO = new string_id("You do not have the skill to place this decoration.");
     public static final String CITY_DECORATIONS = "datatables/city/decorations.iff";
     public static final string_id SID_CIVIC_ONLY = new string_id("city/city", "civic_only");
+
     public city_furniture()
     {
     }
@@ -275,7 +276,7 @@ public class city_furniture extends script.base_script
         }
         else if (item == menu_info_types.SERVER_MENU18)
         {
-            int pid =sui.inputbox(self, player, "Please enter a name for this decoration. \n\n\n Enter one space into the field for this object to have no name,", "Decoration Name", "handleDecorationName", 126, false, getName(self));
+            int pid = sui.inputbox(self, player, "Please enter a name for this decoration. \n\n\n Enter one space into the field for this object to have no name,", "Decoration Name", "handleDecorationName", 126, false, getName(self));
             sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
         }
         else if (item == menu_info_types.SERVER_MENU18)
@@ -316,7 +317,7 @@ public class city_furniture extends script.base_script
     public void snapToGround(obj_id self)
     {
         location loc = getLocation(self);
-        location groundLoc = new location( loc.x, getHeightAtLocation(loc.x, loc.z), loc.z, getCurrentSceneName(), loc.cell);
+        location groundLoc = new location(loc.x, getHeightAtLocation(loc.x, loc.z), loc.z, getCurrentSceneName(), loc.cell);
         setLocation(self, groundLoc);
     }
 

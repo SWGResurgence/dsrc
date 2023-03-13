@@ -9,6 +9,7 @@ public class tcg_item extends script.base_script
     public tcg_item()
     {
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (isIdValid(utils.getContainingPlayer(sourceContainer)))
@@ -37,6 +38,7 @@ public class tcg_item extends script.base_script
         CustomerServiceLog("tcg_transfer", ",Card ID: " + self + ",Card Name: " + getName(self) + ",Source Container: " + sourceContainer + ",Source Name: " + sourceName + ",Destination Container: " + destContainer + ",Destination Name: " + destName + ",Transferer: " + transferer + ",Transferer Name: " + transfererName);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player) || ai_lib.aiIsDead(player))
@@ -54,6 +56,7 @@ public class tcg_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(player) || ai_lib.aiIsDead(player))

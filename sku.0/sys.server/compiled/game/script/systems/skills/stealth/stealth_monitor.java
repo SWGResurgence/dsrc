@@ -10,16 +10,19 @@ public class stealth_monitor extends script.base_script
     public stealth_monitor()
     {
     }
+
     public int OnLocomotionChanged(obj_id self, int newLocomotion, int oldLocomotion) throws InterruptedException
     {
         stealth.OnLocomotionChange(self, oldLocomotion, newLocomotion);
         return SCRIPT_CONTINUE;
     }
+
     public int OnChangedPosture(obj_id self, int before, int after) throws InterruptedException
     {
         stealth.OnPostureChanged(self, before, after);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogout(obj_id self) throws InterruptedException
     {
         String invis = stealth.getInvisBuff(self);
@@ -29,6 +32,7 @@ public class stealth_monitor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (sui.hasEventFlag(self, sui.CD_EVENT_STEALTHED))
@@ -37,6 +41,7 @@ public class stealth_monitor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (sui.hasEventFlag(self, sui.CD_EVENT_STEALTHED))
@@ -45,6 +50,7 @@ public class stealth_monitor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int updatePassiveRevealList(obj_id self, dictionary params) throws InterruptedException
     {
         String invis = stealth.getInvisBuff(self);
@@ -90,7 +96,7 @@ public class stealth_monitor extends script.base_script
                     }
                     location here = getLocation(self);
                     location there = getLocation(ids[i]);
-                    currentRange = (int)getDistance(here, there);
+                    currentRange = (int) getDistance(here, there);
                     int revealRange = range[i];
                     if (currentRange <= revealRange)
                     {
@@ -104,14 +110,14 @@ public class stealth_monitor extends script.base_script
                     {
                         if (stealth.testBubbleBreached(self, ids[i], stealth.PASSIVE_BREACH_FAR))
                         {
-                            addPassiveReveal(self, ids[i], (int)getTriggerVolumeRadius(self, stealth.INVIS_BREAK_RADIUS_FAR));
+                            addPassiveReveal(self, ids[i], (int) getTriggerVolumeRadius(self, stealth.INVIS_BREAK_RADIUS_FAR));
                         }
-                        else 
+                        else
                         {
                             removePassiveReveal(self, ids[i]);
                         }
                     }
-                    else 
+                    else
                     {
                         removePassiveReveal(self, ids[i]);
                     }
@@ -120,6 +126,7 @@ public class stealth_monitor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         String invis = stealth.getInvisBuff(self);
@@ -151,7 +158,7 @@ public class stealth_monitor extends script.base_script
             {
                 if (stealth.testBubbleBreached(self, breacher, stealth.PASSIVE_BREACH_FAR))
                 {
-                    addPassiveReveal(self, breacher, (int)getTriggerVolumeRadius(self, stealth.INVIS_BREAK_RADIUS_FAR));
+                    addPassiveReveal(self, breacher, (int) getTriggerVolumeRadius(self, stealth.INVIS_BREAK_RADIUS_FAR));
                 }
             }
         }
@@ -161,12 +168,13 @@ public class stealth_monitor extends script.base_script
             {
                 if (stealth.testBubbleBreached(self, breacher, stealth.PASSIVE_BREACH_NEAR))
                 {
-                    addPassiveReveal(self, breacher, (int)getTriggerVolumeRadius(self, stealth.INVIS_BREAK_RADIUS_NEAR));
+                    addPassiveReveal(self, breacher, (int) getTriggerVolumeRadius(self, stealth.INVIS_BREAK_RADIUS_NEAR));
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         String invis = stealth.getInvisBuff(self);
@@ -198,7 +206,7 @@ public class stealth_monitor extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            if (breacherRevealRange <= (int)getTriggerVolumeRadius(self, stealth.INVIS_BREAK_RADIUS_FAR))
+            if (breacherRevealRange <= (int) getTriggerVolumeRadius(self, stealth.INVIS_BREAK_RADIUS_FAR))
             {
                 removePassiveReveal(self, breacher);
                 return SCRIPT_CONTINUE;
@@ -207,7 +215,7 @@ public class stealth_monitor extends script.base_script
         if (volumeName.equals(stealth.INVIS_BREAK_RADIUS_NEAR))
         {
             int breacherRevealRange = getPassiveRevealRange(self, breacher);
-            if (breacherRevealRange < (int)getTriggerVolumeRadius(self, stealth.INVIS_BREAK_RADIUS_NEAR))
+            if (breacherRevealRange < (int) getTriggerVolumeRadius(self, stealth.INVIS_BREAK_RADIUS_NEAR))
             {
                 return SCRIPT_CONTINUE;
             }
@@ -218,9 +226,9 @@ public class stealth_monitor extends script.base_script
             {
                 if (stealth.testBubbleBreached(self, breacher, stealth.PASSIVE_BREACH_FAR))
                 {
-                    addPassiveReveal(self, breacher, (int)getTriggerVolumeRadius(self, stealth.INVIS_BREAK_RADIUS_FAR));
+                    addPassiveReveal(self, breacher, (int) getTriggerVolumeRadius(self, stealth.INVIS_BREAK_RADIUS_FAR));
                 }
-                else 
+                else
                 {
                     removePassiveReveal(self, breacher);
                 }

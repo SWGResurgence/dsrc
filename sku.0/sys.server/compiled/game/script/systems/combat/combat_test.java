@@ -5,31 +5,37 @@ import script.obj_id;
 
 public class combat_test extends script.base_script
 {
+    public static final String VERSION = "v0.00.00";
+
     public combat_test()
     {
     }
-    public static final String VERSION = "v0.00.00";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, "systems.combat.combat_test");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "combat_test: entered trigger OnAttach");
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "combat_test: entered trigger OnAttach");
         debugServerConsoleMsg(self, "combat_test: Bye!");
         return SCRIPT_CONTINUE;
     }
+
     public int OnRecapacitated(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "I'm no longer incapacitated!");
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String message) throws InterruptedException
     {
         if (message.equals("com recover"))
@@ -58,7 +64,7 @@ public class combat_test extends script.base_script
                 }
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 debugSpeakMsg(self, "I'm not incapacitated!");
             }
@@ -70,6 +76,7 @@ public class combat_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         String killerName;
@@ -95,43 +102,47 @@ public class combat_test extends script.base_script
         debugServerConsoleMsg(self, "My stats are currently: " + report + "");
         return SCRIPT_CONTINUE;
     }
+
     public int OnWeaponCombatAction(obj_id self, obj_id attacker, obj_id defender) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnDefenderCombatAction(obj_id self, obj_id attacker, obj_id weapon, int where) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public String returnDamType(int attribute) throws InterruptedException
     {
         String damType;
         switch (attribute)
         {
             case HEALTH:
-            damType = "Health";
-            break;
+                damType = "Health";
+                break;
             case CONSTITUTION:
-            damType = "Constitution";
-            break;
+                damType = "Constitution";
+                break;
             case ACTION:
-            damType = "Action";
-            break;
+                damType = "Action";
+                break;
             case STAMINA:
-            damType = "Stamina";
-            break;
+                damType = "Stamina";
+                break;
             case MIND:
-            damType = "Mind";
-            break;
+                damType = "Mind";
+                break;
             case WILLPOWER:
-            damType = "Willpower";
-            break;
+                damType = "Willpower";
+                break;
             default:
-            damType = "None";
-            break;
+                damType = "None";
+                break;
         }
         return (damType);
     }
+
     public String victimReportDamage(obj_id self, obj_id attacker, attrib_mod[] attackEffects) throws InterruptedException
     {
         int effectsLength = 0;
@@ -139,7 +150,7 @@ public class combat_test extends script.base_script
         {
             effectsLength = attackEffects.length;
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "attackEffects was NULL! Exiting...");
             return null;
@@ -154,8 +165,10 @@ public class combat_test extends script.base_script
         int damIntType = 0;
         String damType = "unknown";
         String damageReport = "Damage Report: ";
-        for (attrib_mod attackEffect : attackEffects) {
-            if (attackEffect == null) {
+        for (attrib_mod attackEffect : attackEffects)
+        {
+            if (attackEffect == null)
+            {
                 break;
             }
             int attribute = attackEffect.getAttribute();
@@ -163,7 +176,8 @@ public class combat_test extends script.base_script
             float duration = attackEffect.getDuration();
             float attack = attackEffect.getAttack();
             float decay = attackEffect.getDecay();
-            if (damPoints != 0) {
+            if (damPoints != 0)
+            {
                 int curAttributeLevel;
                 int maxAttributeLevel;
                 int newAttributeLevel;
@@ -171,7 +185,8 @@ public class combat_test extends script.base_script
                 curAttributeLevel = getAttrib(self, attribute);
                 maxAttributeLevel = getMaxAttrib(self, attribute);
                 newAttributeLevel = (curAttributeLevel - damPoints);
-                if (!damType.equals("none")) {
+                if (!damType.equals("none"))
+                {
                     String damageElement = "" + damPoints + " of " + damType + " (" + newAttributeLevel + "/" + maxAttributeLevel + "), ";
                     damageReport = join(damageReport, damageElement);
                 }
@@ -179,36 +194,38 @@ public class combat_test extends script.base_script
         }
         return damageReport;
     }
+
     public String getHitLocationName(obj_id self, int hitLocation) throws InterruptedException
     {
         String hitLocationName;
         switch (hitLocation)
         {
             case 0:
-            hitLocationName = "body";
-            break;
+                hitLocationName = "body";
+                break;
             case 1:
-            hitLocationName = "head";
-            break;
+                hitLocationName = "head";
+                break;
             case 2:
-            hitLocationName = "right arm";
-            break;
+                hitLocationName = "right arm";
+                break;
             case 3:
-            hitLocationName = "left arm";
-            break;
+                hitLocationName = "left arm";
+                break;
             case 4:
-            hitLocationName = "right leg";
-            break;
+                hitLocationName = "right leg";
+                break;
             case 5:
-            hitLocationName = "left leg";
-            break;
+                hitLocationName = "left leg";
+                break;
             default:
-            hitLocationName = "none";
-            debugServerConsoleMsg(self, "combat_test couldn't determine the hit location!");
-            break;
+                hitLocationName = "none";
+                debugServerConsoleMsg(self, "combat_test couldn't determine the hit location!");
+                break;
         }
         return (hitLocationName);
     }
+
     public int doStateCheck(obj_id self, int hitLocation, obj_id weapon, attrib_mod[] attackEffects) throws InterruptedException
     {
         String hitLocationName;
@@ -216,30 +233,31 @@ public class combat_test extends script.base_script
         switch (hitLocation)
         {
             case 0:
-            hitLocationName = "body";
-            break;
+                hitLocationName = "body";
+                break;
             case 1:
-            hitLocationName = "head";
-            break;
+                hitLocationName = "head";
+                break;
             case 2:
-            hitLocationName = "right arm";
-            break;
+                hitLocationName = "right arm";
+                break;
             case 3:
-            hitLocationName = "left arm";
-            break;
+                hitLocationName = "left arm";
+                break;
             case 4:
-            hitLocationName = "right leg";
-            break;
+                hitLocationName = "right leg";
+                break;
             case 5:
-            hitLocationName = "left leg";
-            break;
+                hitLocationName = "left leg";
+                break;
             default:
-            hitLocationName = "none";
-            debugServerConsoleMsg(self, "combat_test couldn't determine the hit location!");
-            break;
+                hitLocationName = "none";
+                debugServerConsoleMsg(self, "combat_test couldn't determine the hit location!");
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public String reportAttribs(obj_id target) throws InterruptedException
     {
         String reportsum = "";

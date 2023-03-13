@@ -10,6 +10,7 @@ public class barn_cell extends script.base_script
     public barn_cell()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (spawnRanchHand(self))
@@ -18,6 +19,7 @@ public class barn_cell extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, tcg.RANCHHAND_CELLCHECK))
@@ -33,6 +35,7 @@ public class barn_cell extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (hasObjVar(self, tcg.RANCHHAND_CELLCHECK))
@@ -49,6 +52,7 @@ public class barn_cell extends script.base_script
         spawnRanchHand(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean spawnRanchHand(obj_id self) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -90,6 +94,7 @@ public class barn_cell extends script.base_script
         CustomerServiceLog("playerStructure", "Ranch Hand for barn: " + self + " located at: " + getLocation(self) + " spawned a ranchhand " + getName(ranchHand) + " ( " + ranchHand + " ) mob in Entry Cell of barn.");
         return true;
     }
+
     public boolean validatedRanchHand(obj_id self) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))

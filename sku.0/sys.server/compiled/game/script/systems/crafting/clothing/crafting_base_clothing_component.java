@@ -7,34 +7,48 @@ import script.obj_id;
 
 public class crafting_base_clothing_component extends script.systems.crafting.crafting_base
 {
+    public static final String VERSION = "v1.00.00";
+
     public crafting_base_clothing_component()
     {
     }
-    public static final String VERSION = "v1.00.00";
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
         }
         super.calcAndSetPrototypeProperties(prototype, itemAttributes, craftingValuesDictionary);
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         debugServerConsoleMsg(null, "Beginning assembly-phase prototype property setting");
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (!calcAndSetPrototypeProperty(prototype, itemAttribute)) {
-                if (((itemAttribute.name).getAsciiId()).equals("armor_rating") || ((itemAttribute.name).getAsciiId()).equals("armor_special_type") || ((itemAttribute.name).getAsciiId()).equals("armor_elemental_type")) {
+            if (!calcAndSetPrototypeProperty(prototype, itemAttribute))
+            {
+                if (((itemAttribute.name).getAsciiId()).equals("armor_rating") || ((itemAttribute.name).getAsciiId()).equals("armor_special_type") || ((itemAttribute.name).getAsciiId()).equals("armor_elemental_type"))
+                {
                     setObjVar(prototype, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId(), (int) itemAttribute.currentValue);
-                } else {
-                    if (itemAttribute.minValue == itemAttribute.maxValue) {
+                }
+                else
+                {
+                    if (itemAttribute.minValue == itemAttribute.maxValue)
+                    {
                         setObjVar(prototype, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId(), (int) itemAttribute.currentValue);
-                    } else {
-                        setObjVar(prototype, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId(), (float) itemAttribute.currentValue);
+                    }
+                    else
+                    {
+                        setObjVar(prototype, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId(), itemAttribute.currentValue);
                     }
                 }
             }

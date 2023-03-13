@@ -8,19 +8,20 @@ import script.library.utils;
 
 public class shuttle_beacon extends script.base_script
 {
-    public shuttle_beacon()
-    {
-    }
     public static final String SHUTTLE_TABLE = "datatables/event_perk/shuttle_options.iff";
     public static final String DATATABLE = "datatables/event_perk/perk_data.iff";
     public static final String STF_FILE = "event_perk";
-    public static final String[] SHUTTLE_TEMPLATE = 
+    public static final String[] SHUTTLE_TEMPLATE =
+            {
+                    "object/creature/npc/theme_park/lambda_shuttle.iff",
+                    "object/creature/npc/theme_park/player_shuttle.iff",
+                    "object/creature/npc/theme_park/event_transport.iff",
+                    "object/creature/npc/theme_park/event_transport_theed_hangar.iff"
+            };
+    public shuttle_beacon()
     {
-        "object/creature/npc/theme_park/lambda_shuttle.iff",
-        "object/creature/npc/theme_park/player_shuttle.iff",
-        "object/creature/npc/theme_park/event_transport.iff",
-        "object/creature/npc/theme_park/event_transport_theed_hangar.iff"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         String name = getStringObjVar(self, "event_perk.deedName");
@@ -29,9 +30,9 @@ public class shuttle_beacon extends script.base_script
         setObjVar(self, "event_perk.terminal_registration", terminalRegistration);
         if (!hasObjVar(self, "event_perk.timeStamp"))
         {
-            
+
         }
-        
+
         {
             float timeStamp = getGameTime();
             setObjVar(self, "event_perk.timeStamp", timeStamp);
@@ -53,6 +54,7 @@ public class shuttle_beacon extends script.base_script
         setObjVar(self, "event_perk.shuttleStatus", 0);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id dest, obj_id transferer) throws InterruptedException
     {
         String shuttleBeacon = getTemplateName(self);
@@ -63,11 +65,14 @@ public class shuttle_beacon extends script.base_script
             obj_id[] objContents = utils.getContents(objInventory, true);
             if (objContents != null)
             {
-                for (obj_id objContent : objContents) {
+                for (obj_id objContent : objContents)
+                {
                     String strItemTemplate = getTemplateName(objContent);
-                    if (strItemTemplate.equals(shuttleBeacon)) {
+                    if (strItemTemplate.equals(shuttleBeacon))
+                    {
                         max++;
-                        if (max > 1) {
+                        if (max > 1)
+                        {
                             sendSystemMessage(transferer, new string_id(STF_FILE, "only_one_shuttle_beacon"));
                             destroyObject(self);
                             return SCRIPT_CONTINUE;
@@ -78,12 +83,14 @@ public class shuttle_beacon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id shuttle = getObjIdObjVar(self, "event_perk.shuttle.shuttle");
         destroyObject(shuttle);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         checkTimeLimit(self, player);
@@ -98,12 +105,13 @@ public class shuttle_beacon extends script.base_script
         {
             mid.setServerNotify(true);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, callShuttle);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         int shuttleStatus = getIntObjVar(self, "event_perk.shuttleStatus");
@@ -128,6 +136,7 @@ public class shuttle_beacon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void callShuttle(obj_id self, obj_id player) throws InterruptedException
     {
         int deedNumber = getIntObjVar(self, "event_perk.deedNumber");
@@ -150,6 +159,7 @@ public class shuttle_beacon extends script.base_script
         sui.listbox(self, player, "@event_perk:shuttle_beacon_d", sui.OK_CANCEL, "@event_perk:shuttle_beacon_t", shuttleOptions, "handleCallShuttle", true);
         return;
     }
+
     public int handleCallShuttle(obj_id self, dictionary params) throws InterruptedException
     {
         int idx = sui.getListboxSelectedRow(params);
@@ -186,7 +196,7 @@ public class shuttle_beacon extends script.base_script
             {
                 setYaw(shuttle, heading + 180);
             }
-            else 
+            else
             {
                 setYaw(shuttle, heading);
             }
@@ -204,17 +214,19 @@ public class shuttle_beacon extends script.base_script
             messageTo(self, "toggleShuttleStatus", null, 0, false);
             messageTo(shuttle, "landShuttle", null, 0.25f, false);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id(STF_FILE, "shuttle_not_called"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public void dismissShuttle(obj_id self, obj_id player) throws InterruptedException
     {
         messageTo(self, "handleDismissShuttle", null, 0, false);
         return;
     }
+
     public int handleDismissShuttle(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id shuttle = getObjIdObjVar(self, "event_perk.shuttle.shuttle");
@@ -222,11 +234,13 @@ public class shuttle_beacon extends script.base_script
         messageTo(self, "toggleShuttleStatus", null, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         checkTimeLimit(self, player);
         return SCRIPT_CONTINUE;
     }
+
     public void checkTimeLimit(obj_id self, obj_id player) throws InterruptedException
     {
         float lifeSpan = getFloatObjVar(self, "event_perk.lifeSpan");
@@ -241,6 +255,7 @@ public class shuttle_beacon extends script.base_script
         }
         return;
     }
+
     public int toggleShuttleStatus(obj_id self, dictionary params) throws InterruptedException
     {
         int shuttleStatus = getIntObjVar(self, "event_perk.shuttleStatus");
@@ -254,6 +269,7 @@ public class shuttle_beacon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getRidOfShuttle(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "event_perk.shuttle");

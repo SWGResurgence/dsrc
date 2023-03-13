@@ -5,10 +5,6 @@ package script.systems.furniture;/*
 */
 
 import script.obj_id;
-import script.location;
-import script.menu_info_types;
-import script.menu_info_data;
-import script.dictionary;
 
 public class rename extends script.base_script
 {

@@ -5,32 +5,34 @@ import script.library.*;
 
 public class base_tool extends script.base_script
 {
-    public base_tool()
-    {
-    }
     public static final String PROTOTYPE_SLOT = "anythingNoMod2";
     public static final String OBJVAR_CRAFTING_FAKE_PROTOTYPE = "crafting.isFakePrototype";
     public static final string_id INVENTORY_FULL = new string_id("spam", "inv_full");
     public static final string_id NO_SCHEMATICS = new string_id("system_msg", "no_valid_schematics");
-    public static final float[] COMPLEXITY_LIMIT = 
+    public static final float[] COMPLEXITY_LIMIT =
+            {
+                    15,
+                    20,
+                    25
+            };
+    public static final String[] STATION_BUFFS =
+            {
+                    "food_station",
+                    "armor_station",
+                    "structure_station",
+                    "weapon_station",
+                    "space_station"
+            };
+    public base_tool()
     {
-        15,
-        20,
-        25
-    };
-    public static final String[] STATION_BUFFS = 
-    {
-        "food_station",
-        "armor_station",
-        "structure_station",
-        "weapon_station",
-        "space_station"
-    };
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, craftinglib.OBJVAR_PROTOTYPE_TIME, 0.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         float time = getFloatObjVar(self, craftinglib.OBJVAR_PROTOTYPE_TIME);
@@ -48,6 +50,7 @@ public class base_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int determineCraftingLevel(obj_id tool, obj_id player) throws InterruptedException
     {
         int craftingLevel = 0;
@@ -66,7 +69,8 @@ public class base_tool extends script.base_script
             int[] stationBuffs = buff.getAllBuffsByEffect(player, "station_buff");
             if (stationBuffs != null || stationBuffs.length > 0)
             {
-                for (int stationBuff1 : stationBuffs) {
+                for (int stationBuff1 : stationBuffs)
+                {
                     buff.removeBuff(player, stationBuff1);
                 }
             }
@@ -116,13 +120,17 @@ public class base_tool extends script.base_script
                 if (testIds != null)
                 {
                     float closestLength = craftinglib.STATION_AREA + 100.0f;
-                    for (obj_id testId : testIds) {
-                        if (isIdValid(testId) && hasObjVar(testId, craftinglib.OBJVAR_STATION)) {
+                    for (obj_id testId : testIds)
+                    {
+                        if (isIdValid(testId) && hasObjVar(testId, craftinglib.OBJVAR_STATION))
+                        {
                             debugServerConsoleMsg(tool, "Testing crafting station " + testId + " at " + getLocation(testId));
                             float dist = getDistance(testId, myPos);
                             debugServerConsoleMsg(tool, "\tstation distance = " + dist);
-                            if (dist >= 0 && dist < closestLength) {
-                                if ((ai_lib.aiGetNiche(stationId) == NICHE_DROID || ai_lib.aiGetNiche(stationId) == NICHE_ANDROID) && pet_lib.isLowOnPower(stationId)) {
+                            if (dist >= 0 && dist < closestLength)
+                            {
+                                if ((ai_lib.aiGetNiche(stationId) == NICHE_DROID || ai_lib.aiGetNiche(stationId) == NICHE_ANDROID) && pet_lib.isLowOnPower(stationId))
+                                {
                                     continue;
                                 }
                                 closestLength = dist;
@@ -151,17 +159,17 @@ public class base_tool extends script.base_script
                                     debugServerConsoleMsg(tool, "OnObjectMenuRequest crafting level 4");
                                 }
                             }
-                            else 
+                            else
                             {
                                 craftingLevel++;
                             }
                         }
-                        else 
+                        else
                         {
                             debugServerConsoleMsg(tool, "OnObjectMenuRequest station is wrong type " + stationType);
                         }
                     }
-                    else 
+                    else
                     {
                         debugServerConsoleMsg(tool, "OnObjectMenuRequest no station objvar");
                     }
@@ -183,6 +191,7 @@ public class base_tool extends script.base_script
         }
         return craftingLevel;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int craftingLevel = determineCraftingLevel(self, player);
@@ -201,6 +210,7 @@ public class base_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (hasObjVar(self, craftinglib.OBJVAR_PROTOTYPE_TIME))
@@ -212,6 +222,7 @@ public class base_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnRequestDraftSchematics(obj_id self, obj_id player, int[] schematics, float[] complexities) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -239,13 +250,13 @@ public class base_tool extends script.base_script
                     {
                         allowedSchematics[i] = schematics[i];
                     }
-                    else 
+                    else
                     {
                         allowedSchematics[i] = 0;
                     }
                 }
             }
-            else 
+            else
             {
                 allowedSchematics = schematics;
             }
@@ -258,6 +269,7 @@ public class base_tool extends script.base_script
         debugServerConsoleMsg(self, "OnRequestDraftSchematics exit - override");
         return SCRIPT_OVERRIDE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (transferer == obj_id.NULL_ID || transferer == srcContainer)
@@ -266,6 +278,7 @@ public class base_tool extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Crafting station OnAboutToLoseItem enter");
@@ -278,6 +291,7 @@ public class base_tool extends script.base_script
         debugServerConsoleMsg(self, "Crafting station OnAboutToLoseItem allowing prototype to be removed");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToOpenContainer(obj_id self, obj_id whoOpenedMe) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Crafting station OnAboutToOpenContainer enter");
@@ -289,6 +303,7 @@ public class base_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCraftingAddResource(obj_id self, obj_id player, obj_id resource, draft_schematic.slot ingredientSlot, modifiable_int[] resourceAmount) throws InterruptedException
     {
         int numResources = resourceAmount.length;
@@ -298,11 +313,13 @@ public class base_tool extends script.base_script
         {
             ++resourcesPer;
         }
-        for (modifiable_int modifiable_int : resourceAmount) {
+        for (modifiable_int modifiable_int : resourceAmount)
+        {
             modifiable_int.set(resourcesPer);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnCraftingDone(obj_id self, obj_id player, String schematicName, int craftingStage, boolean normalExit) throws InterruptedException
     {
         session.logActivity(player, session.ACTIVITY_CRAFTING);
@@ -312,6 +329,7 @@ public class base_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -319,39 +337,48 @@ public class base_tool extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        try {
-            if (hasObjVar(self, "quality")) {
+        try
+        {
+            if (hasObjVar(self, "quality"))
+            {
                 names[idx] = "quality";
                 float attrib = getFloatObjVar(self, "quality");
                 attribs[idx] = " " + attrib;
                 idx++;
-                if (idx >= names.length) {
+                if (idx >= names.length)
+                {
                     return SCRIPT_CONTINUE;
                 }
             }
             int critAssembly = getIntObjVar(self, craftinglib.OBJVAR_FORCE_CRITICAL_ASSEMBLY);
-            if (critAssembly > 0) {
+            if (critAssembly > 0)
+            {
                 names[idx] = "@crafting:crit_assembly";
                 attribs[idx] = "" + critAssembly;
                 idx++;
-                if (idx >= names.length) {
+                if (idx >= names.length)
+                {
                     return SCRIPT_CONTINUE;
                 }
             }
             int critExperiment = getIntObjVar(self, craftinglib.OBJVAR_FORCE_CRITICAL_EXPERIMENT);
-            if (critExperiment > 0) {
+            if (critExperiment > 0)
+            {
                 names[idx] = "@crafting:crit_experiment";
                 attribs[idx] = "" + critExperiment;
                 idx++;
-                if (idx >= names.length) {
+                if (idx >= names.length)
+                {
                     return SCRIPT_CONTINUE;
                 }
             }
-        }
-        catch(Exception e){
+        } catch (Exception e)
+        {
             System.out.println("Found problem while trying to get attributes.");
-            if(isIdValid(self)){
-                for(attribute attrib : getAttribs(self)){
+            if (isIdValid(self))
+            {
+                for (attribute attrib : getAttribs(self))
+                {
                     System.out.println("Found: " + attrib.toString());
                 }
             }
@@ -360,6 +387,7 @@ public class base_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int prototypeDone(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id prototype = params.getObjId("prototype");
@@ -383,7 +411,7 @@ public class base_tool extends script.base_script
                     webster.put("prototypeTemplate", templateName);
                     messageTo(crafter, "handleQuestCraftingAction", webster, 1, false);
                 }
-                else 
+                else
                 {
                     LOG("new_player", "New player " + crafter + " successfully made prototype item " + prototype + " but its template name is null, so the new player crafting action failed!");
                 }
@@ -399,18 +427,23 @@ public class base_tool extends script.base_script
         obj_id relic = loot.chroniclesCraftingLootDrop(crafter);
         obj_id inv = utils.getInventoryContainer(crafter);
 
-        if(scheduled_drop.isSystemEnabled()) {
+        if (scheduled_drop.isSystemEnabled())
+        {
             boolean canDrop = scheduled_drop.canDropCard(scheduled_drop.SYSTEM_CRAFTER);
             boolean hasDelay = scheduled_drop.hasCardDelay(crafter, scheduled_drop.SYSTEM_CRAFTER);
-            if (isGod(crafter) && hasObjVar(crafter, "qa_tcg_always_drop")) {
+            if (isGod(crafter) && hasObjVar(crafter, "qa_tcg_always_drop"))
+            {
                 canDrop = true;
                 hasDelay = false;
             }
-            if (isIdValid(inv) && canDrop && !hasDelay && isPlayerActive(crafter)) {
+            if (isIdValid(inv) && canDrop && !hasDelay && isPlayerActive(crafter))
+            {
                 obj_id card = scheduled_drop.dropCard(scheduled_drop.SYSTEM_CRAFTER, inv);
-                if (isIdValid(card)) {
+                if (isIdValid(card))
+                {
                     String[] cardNameList = split(getName(card), ':');
-                    if (cardNameList != null && cardNameList.length > 1) {
+                    if (cardNameList != null && cardNameList.length > 1)
+                    {
                         string_id cardName = new string_id(cardNameList[0], cardNameList[1]);
                         String name = getString(cardName);
                         prose_package pp = new prose_package();
@@ -418,13 +451,19 @@ public class base_tool extends script.base_script
                         pp = prose.setTU(pp, name);
                         sendSystemMessageProse(crafter, pp);
                     }
-                } else {
-                    if (isGod(crafter) && hasObjVar(crafter, "qa_tcg")) {
+                }
+                else
+                {
+                    if (isGod(crafter) && hasObjVar(crafter, "qa_tcg"))
+                    {
                         sendSystemMessageTestingOnly(crafter, "QA TCG CRAFTING NOT DROPPED.  Card is null. Random chance passed? " + canDrop + " Has Card Delay? " + hasDelay);
                     }
                 }
-            } else {
-                if (isGod(crafter) && hasObjVar(crafter, "qa_tcg")) {
+            }
+            else
+            {
+                if (isGod(crafter) && hasObjVar(crafter, "qa_tcg"))
+                {
                     sendSystemMessageTestingOnly(crafter, "QA TCG CRAFTING NOT DROPPED.  Random chance passed? " + canDrop + " Has Card Delay? " + hasDelay);
                 }
             }
@@ -432,12 +471,14 @@ public class base_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id getFirstParentInWorldOrPlayer(obj_id obj) throws InterruptedException
     {
         obj_id firstParent = getFirstParentInWorld(obj);
-        while (obj != firstParent && !isPlayer(obj))obj = getContainedBy(obj);
+        while (obj != firstParent && !isPlayer(obj)) obj = getContainedBy(obj);
         return obj;
     }
+
     public int getPrototype(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id crafter = params.getObjId("crafter");
@@ -467,19 +508,19 @@ public class base_tool extends script.base_script
                 {
                     destroyObject(prototype);
                 }
-                else 
+                else
                 {
                     if (putInOverloaded(prototype, inventory))
                     {
                         sendSystemMessage(owner, new string_id("system_msg", "prototype_transferred"));
                     }
-                    else 
+                    else
                     {
                         sendSystemMessage(owner, new string_id("system_msg", "prototype_not_transferred"));
                     }
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(owner, new string_id("system_msg", "prototype_done"));
             }

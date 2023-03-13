@@ -11,6 +11,7 @@ public class beast_display extends script.base_script
     public beast_display()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (getOwner(self) == player)
@@ -19,6 +20,7 @@ public class beast_display extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -28,6 +30,7 @@ public class beast_display extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "beast"))
@@ -36,6 +39,7 @@ public class beast_display extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void turnOff(obj_id source) throws InterruptedException
     {
         if (isIdValid(source) && hasObjVar(source, "displayed"))
@@ -48,6 +52,7 @@ public class beast_display extends script.base_script
             }
         }
     }
+
     public void displayBeast(obj_id source) throws InterruptedException
     {
         location loc = getLocation(source);
@@ -92,11 +97,13 @@ public class beast_display extends script.base_script
         }
         attachScript(displayedBeast, "systems.beast.beast_stuffed");
     }
+
     public int beast_display(obj_id self, dictionary params) throws InterruptedException
     {
         displayBeast(self);
         return SCRIPT_CONTINUE;
     }
+
     public int furniture_rotated(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id beastDisplayed = getObjIdObjVar(self, "displayed");
@@ -108,6 +115,7 @@ public class beast_display extends script.base_script
         setYaw(beastDisplayed, yaw);
         return SCRIPT_CONTINUE;
     }
+
     public int furniture_moved(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id beastDisplayed = getObjIdObjVar(self, "displayed");
@@ -118,11 +126,13 @@ public class beast_display extends script.base_script
         displayBeast(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         messageTo(self, "beast_display", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetBeastName(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -155,11 +165,13 @@ public class beast_display extends script.base_script
         setObjVar(self, incubator.DNA_PARENT_NAME, beastName);
         return SCRIPT_CONTINUE;
     }
+
     public int OnPack(obj_id self, dictionary params) throws InterruptedException
     {
         turnOff(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnpack(obj_id self, dictionary params) throws InterruptedException
     {
         displayBeast(self);

@@ -8,6 +8,7 @@ public class tat_sm_ply_house_elevators extends script.base_script
     public tat_sm_ply_house_elevators()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -30,7 +31,7 @@ public class tat_sm_ply_house_elevators extends script.base_script
             setObjVar(self, "terminal2", elevatorTerminalB);
             setObjVar(self, "terminal3", elevatorTerminalC);
         }
-        else 
+        else
         {
             LOG("elevator", "tat_sm_ply_house_elevators could not get 'elevator1' cell");
         }

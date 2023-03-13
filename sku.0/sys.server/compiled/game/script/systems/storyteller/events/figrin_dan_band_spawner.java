@@ -7,28 +7,31 @@ import script.obj_id;
 
 public class figrin_dan_band_spawner extends script.base_script
 {
+    public static final String DATATABLE_BASE = "datatables/spawning/holiday/";
+    public static final String DATATABLE_OBJVAR = "figrinDatatable";
     public figrin_dan_band_spawner()
     {
     }
-    public static final String DATATABLE_BASE = "datatables/spawning/holiday/";
-    public static final String DATATABLE_OBJVAR = "figrinDatatable";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Initialized Figrin Dan Band spawner script");
         messageTo(self, "spawnFigrinDanBand", null, 9, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volName, obj_id breecher) throws InterruptedException
     {
         if (!isPlayer(breecher))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (!hasObjVar(self, DATATABLE_OBJVAR))
             {
@@ -47,7 +50,7 @@ public class figrin_dan_band_spawner extends script.base_script
                         messageTo(breecher, "explorerBadge", explorerBadges, 0, false);
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         return SCRIPT_CONTINUE;
                     }
@@ -56,11 +59,13 @@ public class figrin_dan_band_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void spawnEveryone(obj_id self) throws InterruptedException
     {
         spawnBithBand(self);
         return;
     }
+
     public void spawnBithBand(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, DATATABLE_OBJVAR))
@@ -83,8 +88,8 @@ public class figrin_dan_band_spawner extends script.base_script
             float z_offset = webster.getFloat("z_offset");
             location tempLoc = new location((here.x + x_offset), here.y, (here.z + z_offset), here.area, null);
             float bandMemberYaw = webster.getFloat("yaw");
-            location bandMemberLoc = (location)tempLoc.clone();
-            location omni_box_loc = (location)tempLoc.clone();
+            location bandMemberLoc = (location) tempLoc.clone();
+            location omni_box_loc = (location) tempLoc.clone();
             if (myYaw != 0)
             {
                 bandMemberLoc = storyteller.rotateLocationXZ(here, tempLoc, myYaw);
@@ -122,7 +127,7 @@ public class figrin_dan_band_spawner extends script.base_script
                     setCreatureStatic(bandMember, true);
                 }
             }
-            else 
+            else
             {
                 setCreatureStatic(bandMember, true);
             }
@@ -145,13 +150,13 @@ public class figrin_dan_band_spawner extends script.base_script
                         obj_id inv = utils.getInventoryContainer(bandMember);
                         instrument = static_item.createNewItemFunction(instrumentTemplate, inv);
                     }
-                    else 
+                    else
                     {
                         instrument = createObject(instrumentTemplate, bandMember, "");
                     }
                     equip(instrument, bandMember);
                 }
-                else 
+                else
                 {
                     float instrument_x_offset = webster.getFloat("instrument_x_offset");
                     float instrument_z_offset = webster.getFloat("instrument_z_offset");
@@ -180,19 +185,21 @@ public class figrin_dan_band_spawner extends script.base_script
         }
         return;
     }
+
     public location rotateXZ(location locOrigin, location locPoint, float fltAngle) throws InterruptedException
     {
         float dx = locPoint.x - locOrigin.x;
         float dz = locPoint.z - locOrigin.z;
-        float fltRadians = (float)Math.toRadians(fltAngle);
+        float fltRadians = (float) Math.toRadians(fltAngle);
         float fltC = (float) StrictMath.cos(fltRadians);
         float fltS = (float) StrictMath.sin(fltRadians);
-        location locNewOffset = (location)locOrigin.clone();
+        location locNewOffset = (location) locOrigin.clone();
         locNewOffset.x += (dx * fltC) + (dz * fltS);
         locNewOffset.y = locPoint.y;
         locNewOffset.z += -(dx * fltS) + (dz * fltC);
         return locNewOffset;
     }
+
     public void destroyTheBand(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, DATATABLE_OBJVAR))
@@ -241,11 +248,13 @@ public class figrin_dan_band_spawner extends script.base_script
         }
         return;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         destroyTheBand(self);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnFigrinDanBand(obj_id self, dictionary params) throws InterruptedException
     {
         createTriggerVolume("figrin_dan_band_badge", 10.0f, true);
@@ -253,6 +262,7 @@ public class figrin_dan_band_spawner extends script.base_script
         spawnEveryone(self);
         return SCRIPT_CONTINUE;
     }
+
     public int setOriginalMood(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id soldier = params.getObjId("soldierObjId");
@@ -271,6 +281,7 @@ public class figrin_dan_band_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id speaker, String text) throws InterruptedException
     {
         if (!isGod(speaker))

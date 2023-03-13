@@ -11,6 +11,7 @@ public class mission_crafting extends script.systems.missions.base.mission_dynam
     public mission_crafting()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "systems.missions.base.mission_cleanup_tracker"))
@@ -19,15 +20,18 @@ public class mission_crafting extends script.systems.missions.base.mission_dynam
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         sendCraftingIncomplete(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         debugServerConsoleMsg(self, "Setting up mission data in mission object for DELIVER mission");
@@ -43,6 +47,7 @@ public class mission_crafting extends script.systems.missions.base.mission_dynam
         sendSystemMessage(getMissionHolder(self), strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int craftingSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "intCompleted"))
@@ -55,6 +60,7 @@ public class mission_crafting extends script.systems.missions.base.mission_dynam
         }
         return SCRIPT_CONTINUE;
     }
+
     public int craftingFail(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -63,6 +69,7 @@ public class mission_crafting extends script.systems.missions.base.mission_dynam
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int craftingIncomplete(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -71,6 +78,7 @@ public class mission_crafting extends script.systems.missions.base.mission_dynam
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndMission(obj_id self, dictionary params) throws InterruptedException
     {
         cleanupObjects(self);
@@ -79,6 +87,7 @@ public class mission_crafting extends script.systems.missions.base.mission_dynam
         obj_id objMissionData = getMissionData(self);
         return SCRIPT_CONTINUE;
     }
+
     public int onArrivedAtLocation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -86,6 +95,7 @@ public class mission_crafting extends script.systems.missions.base.mission_dynam
         dctParams.put("objMission", self);
         return SCRIPT_CONTINUE;
     }
+
     public int pickup_event(obj_id self, dictionary params) throws InterruptedException
     {
         int intDelay = rand(DELIVERY_INTEREST_MIN_DELAY, DELIVERY_INTEREST_MAX_DELAY);

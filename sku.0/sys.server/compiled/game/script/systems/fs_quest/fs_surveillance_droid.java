@@ -12,6 +12,7 @@ public class fs_surveillance_droid extends script.base_script
     public fs_surveillance_droid()
     {
     }
+
     public void squeal() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -25,15 +26,18 @@ public class fs_surveillance_droid extends script.base_script
         d.put("sender", self);
         messageTo(master, "msgSurveillandeDroidDied", d, 0.0f, false);
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         playClientEffectLoc(self, "clienteffect/combat_explosion_lair_large.cef", getLocation(self), 10.0f);
@@ -44,17 +48,20 @@ public class fs_surveillance_droid extends script.base_script
         squeal();
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         utils.setScriptVar(self, "silentDestroy", true);
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgSilentSelfDestruct(obj_id self, dictionary params) throws InterruptedException
     {
         utils.setScriptVar(self, "silentDestroy", true);

@@ -7,17 +7,19 @@ import java.util.Vector;
 
 public class battlefield_region extends script.base_script
 {
-    public battlefield_region()
-    {
-    }
     public static final string_id SID_BATTLEFIELD_STATUS = new string_id("battlefield", "status");
     public static final string_id SID_GAME_STATUS = new string_id("battlefield", "game_status");
     public static final String VAR_TIME_WARNING_LEVEL = "battlefield.game.time_warning_level";
+    public battlefield_region()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield_region::OnAttach");
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield_region::OnInitialize -- " + self);
@@ -42,7 +44,7 @@ public class battlefield_region extends script.base_script
                 {
                     setObjVar(self, battlefield.VAR_VERSION, battlefield.CURRENT_VERSION);
                 }
-                else 
+                else
                 {
                     LOG("LOG_CHANNEL", "battlefield.battlefield_region::OnInitialize -- Unable to update " + self);
                 }
@@ -54,7 +56,7 @@ public class battlefield_region extends script.base_script
                 {
                     setObjVar(self, battlefield.VAR_VERSION, battlefield.CURRENT_VERSION);
                 }
-                else 
+                else
                 {
                     LOG("LOG_CHANNEL", "battlefield.battlefield_region::OnInitialize -- Unable to update " + self);
                 }
@@ -64,6 +66,7 @@ public class battlefield_region extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String triggerVolumeName, obj_id breacher) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield_region::OnTriggerVolumeEntered -- " + triggerVolumeName + "(" + breacher + ")");
@@ -99,7 +102,7 @@ public class battlefield_region extends script.base_script
                                 messageTo(breacher, "msgSelectFactionPrompt", d, 0.0f, false);
                             }
                         }
-                        else 
+                        else
                         {
                             if (battlefield.isFactionAllowed(self, faction))
                             {
@@ -113,14 +116,14 @@ public class battlefield_region extends script.base_script
                                         messageTo(breacher, "msgVerifyFactionPrompt", d, 0.0f, false);
                                     }
                                 }
-                                else 
+                                else
                                 {
                                     LOG("LOG_CHANNEL", breacher + " ->Your faction has been eliminated from the battle. You must wait until the next battle to join.");
                                     sendSystemMessageTestingOnly(breacher, "Your faction has been eliminated from the battle. You must wait until the next battle to join.");
                                     return SCRIPT_CONTINUE;
                                 }
                             }
-                            else 
+                            else
                             {
                                 LOG("LOG_CHANNEL", breacher + " ->Your faction is not permitted within this battlefield.");
                                 sendSystemMessageTestingOnly(breacher, "Your faction is not permitted within this battlefield.");
@@ -130,7 +133,7 @@ public class battlefield_region extends script.base_script
                         setObjVar(breacher, battlefield.VAR_BATTLEFIELD_TO_ENTER, self);
                     }
                 }
-                else 
+                else
                 {
                     if (battlefield.canExitBattlefield(self, breacher, false))
                     {
@@ -160,7 +163,7 @@ public class battlefield_region extends script.base_script
                             messageTo(breacher, "msgSelectFactionPrompt", d, 0.0f, false);
                         }
                     }
-                    else 
+                    else
                     {
                         if (battlefield.isFactionAllowed(self, faction))
                         {
@@ -174,14 +177,14 @@ public class battlefield_region extends script.base_script
                                     messageTo(breacher, "msgVerifyFactionPrompt", d, 0.0f, false);
                                 }
                             }
-                            else 
+                            else
                             {
                                 LOG("LOG_CHANNEL", breacher + " ->Your faction has been eliminated from the battle. You must wait until the next battle to join.");
                                 sendSystemMessageTestingOnly(breacher, "Your faction has been eliminated from the battle. You must wait until the next battle to join.");
                                 return SCRIPT_CONTINUE;
                             }
                         }
-                        else 
+                        else
                         {
                             LOG("LOG_CHANNEL", breacher + " ->Your faction is not permitted within this battlefield.");
                             sendSystemMessageTestingOnly(breacher, "Your faction is not permitted within this battlefield.");
@@ -194,6 +197,7 @@ public class battlefield_region extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeExited(obj_id self, String triggerVolumeName, obj_id breacher) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield_region::OnTriggerVolumeExited -- " + triggerVolumeName + "(" + breacher + ")");
@@ -225,7 +229,7 @@ public class battlefield_region extends script.base_script
                     LOG("LOG_CHANNEL", breacher + " ->You are about to leave the battlefield. If you do so, you will be unable to return until the current battle is over.");
                     sendSystemMessageTestingOnly(breacher, "You are about to leave the battlefield. If you do so, you will be unable to return until the current battle is over.");
                 }
-                else 
+                else
                 {
                     confineToTriggerVolume(self, battlefield.STRING_TRIG_BOUNDARY, breacher);
                 }
@@ -264,12 +268,14 @@ public class battlefield_region extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int battlefield_root = mi.addRootMenu(menu_info_types.SERVER_TRAVEL_OPTIONS, SID_BATTLEFIELD_STATUS);
         mi.addSubMenu(battlefield_root, menu_info_types.SERVER_BAZAAR_OPTIONS, SID_GAME_STATUS);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_TRAVEL_OPTIONS)
@@ -283,6 +289,7 @@ public class battlefield_region extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgInitializeRegion(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield_region::msgInitializeRegion -- " + params);
@@ -303,7 +310,7 @@ public class battlefield_region extends script.base_script
                 setObjVar(self, battlefield.VAR_NEXT_GAME, getGameTime() + start_time);
                 messageTo(self, "msgStartGame", null, start_time, false);
             }
-            else 
+            else
             {
                 LOG("LOG_CHANNEL", "battlefield::msgInitializeRegion -- Unable to find the region for " + self);
                 return SCRIPT_CONTINUE;
@@ -325,24 +332,27 @@ public class battlefield_region extends script.base_script
         {
             if (allowed_factions.length > 1)
             {
-                for (String allowed_faction : allowed_factions) {
+                for (String allowed_faction : allowed_factions)
+                {
                     chatCreateRoom(true, battlefield.getChatRoomNameFaction(self, allowed_faction), name + "-" + allowed_faction);
                 }
             }
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "battlefield_region::msgInitializeRegion -- factions_allowed is null." + chat_room_all);
         }
         messageTo(self, "msgCreateBattlefieldChat", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgStartGame(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield_region::msgStartGame");
         battlefield.startBattlefield(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgGameTimePulse(obj_id self, dictionary params) throws InterruptedException
     {
         int timer_set = battlefield.setGameTimer(self, false);
@@ -351,22 +361,23 @@ public class battlefield_region extends script.base_script
             String[] factions_allowed = battlefield.getFactionsAllowed(self);
             if (factions_allowed != null)
             {
-                for (String s : factions_allowed) {
+                for (String s : factions_allowed)
+                {
                     battlefield.incrementFactionBuildPoints(self, s, 2);
                 }
             }
             int warning_level = 0;
-            int[] warning_times = 
-            {
-                3600,
-                1800,
-                900,
-                600,
-                300,
-                60,
-                30,
-                10
-            };
+            int[] warning_times =
+                    {
+                            3600,
+                            1800,
+                            900,
+                            600,
+                            300,
+                            60,
+                            30,
+                            10
+                    };
             if (hasObjVar(self, VAR_TIME_WARNING_LEVEL))
             {
                 warning_level = getIntObjVar(self, VAR_TIME_WARNING_LEVEL);
@@ -389,17 +400,18 @@ public class battlefield_region extends script.base_script
                     setObjVar(self, VAR_TIME_WARNING_LEVEL, warning_level);
                 }
             }
-            messageTo(self, "msgGameTimePulse", null, (int)battlefield.GAME_TIME_PULSE, false);
+            messageTo(self, "msgGameTimePulse", null, battlefield.GAME_TIME_PULSE, false);
             dictionary new_params = new dictionary();
             new_params.put("time", timer_set);
             messageTo(self, "msgGameScriptPulse", new_params, 0.0f, false);
         }
-        else 
+        else
         {
             messageTo(self, "msgTimeExpired", null, 0.0f, true);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgAddPlayerToBattlefield(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -409,10 +421,12 @@ public class battlefield_region extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgBattlefieldKill(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int msgCreateBattlefieldChat(obj_id self, dictionary params) throws InterruptedException
     {
         String chat_room_all = battlefield.getChatRoomNameAllFactions(self);
@@ -424,17 +438,19 @@ public class battlefield_region extends script.base_script
         {
             if (allowed_factions.length > 1)
             {
-                for (String allowed_faction : allowed_factions) {
+                for (String allowed_faction : allowed_factions)
+                {
                     chatCreateRoom(true, battlefield.getChatRoomNameFaction(self, allowed_faction), name + "-" + allowed_faction);
                 }
             }
         }
-        else 
+        else
         {
             LOG("LOG_CHANNEL", "battlefield_region::msgInitializeRegion -- factions_allowed is null." + chat_room_all);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgGameStatHistory(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -448,7 +464,7 @@ public class battlefield_region extends script.base_script
         {
             dsrc = utils.addElement(dsrc, "No previous battle data available.");
         }
-        else 
+        else
         {
             String type = getStringObjVar(self, battlefield.VAR_STAT_TYPE);
             if (type == null)
@@ -466,7 +482,7 @@ public class battlefield_region extends script.base_script
                 {
                     dsrc = utils.addElement(dsrc, "Winning Faction: " + winner);
                 }
-                else 
+                else
                 {
                     dsrc = utils.addElement(dsrc, "Winning Faction: None");
                 }
@@ -476,7 +492,8 @@ public class battlefield_region extends script.base_script
                 String[] factions_allowed = battlefield.getAllFactionsAllowed(self);
                 if (factions_allowed != null)
                 {
-                    for (String s : factions_allowed) {
+                    for (String s : factions_allowed)
+                    {
                         dsrc = utils.addElement(dsrc, "   " + s);
                         int kills = getIntObjVar(self, battlefield.VAR_STAT_KILLS + s);
                         int deaths = getIntObjVar(self, battlefield.VAR_STAT_DEATHS + s);
@@ -497,7 +514,7 @@ public class battlefield_region extends script.base_script
                 {
                     dsrc = utils.addElement(dsrc, "Result: " + player_faction[0] + " win");
                 }
-                else 
+                else
                 {
                     dsrc = utils.addElement(dsrc, "Result: " + player_faction[0] + " loss");
                 }
@@ -507,7 +524,8 @@ public class battlefield_region extends script.base_script
                 String[] factions_allowed = battlefield.getAllFactionsAllowed(self);
                 if (factions_allowed != null)
                 {
-                    for (String s : factions_allowed) {
+                    for (String s : factions_allowed)
+                    {
                         dsrc = utils.addElement(dsrc, "   " + s);
                         int kills = getIntObjVar(self, battlefield.VAR_STAT_KILLS + s);
                         int deaths = getIntObjVar(self, battlefield.VAR_STAT_DEATHS + s);
@@ -516,7 +534,7 @@ public class battlefield_region extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 dsrc = utils.addElement(dsrc, "No previous battle data available.");
             }
