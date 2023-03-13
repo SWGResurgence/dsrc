@@ -32132,6 +32132,12 @@ public class base_class
         return _addPlayerQuestTask(getLongWithNull(questObject), title, description, taskCounterMax, waypointLoc);
     }
 
+
+    /**
+     * Readable string for string_id required casts.
+     *
+     * @see dummy_string_table
+     */
     public string_id unlocalized(String str)
     {
         return new string_id(str);
