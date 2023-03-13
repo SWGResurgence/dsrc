@@ -16,7 +16,6 @@ public class dev_res extends script.base_script
 {
     public static final String ROOT_RESOURCE_CLASS = "resource";
     public static final String ROOT_SPACE_RESOURCE_CLASS = "space_resource";
-    public static final String ROOT_ENERGY_RESOURCE_CLASS = "energy_renewable";
     public static final String ROOT_ORGANIC_CLASS = "organic";
     public static final String ROOT_INORGANIC_CLASS = "inorganic";
     public static final String OBJVAR_RESOURCE_REWARDED = "rewarded";
@@ -66,8 +65,6 @@ public class dev_res extends script.base_script
             }
             ((getSelf()).getScriptVars()).put(SCRIPTVAR_INUSE, 1);
             chooseResourceClass(player, ROOT_RESOURCE_CLASS, true);
-            chooseResourceClass(player, ROOT_SPACE_RESOURCE_CLASS, true);
-            chooseResourceClass(player, ROOT_ENERGY_RESOURCE_CLASS, true);
         }
         if (item == menu_info_types.SERVER_MENU11)
         {
@@ -146,36 +143,6 @@ public class dev_res extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public static final String[] SPACE_RESOURCE_LOCALIZED = {
-            "@resource/resource_names:space_chemical_acid",
-            "@resource/resource_names:space_chemical_cyanomethanic",
-            "@resource/resource_names:space_chemical_petrochem",
-            "@resource/resource_names:space_chemical_sulfuric",
-            "@resource/resource_names:space_gas_methane",
-            "@resource/resource_names:space_gas_organometallic",
-            "@resource/resource_names:space_gem_crystal",
-            "@resource/resource_names:space_gem_diamond",
-            "@resource/resource_names:space_metal_carbonaceous",
-            "@resource/resource_names:space_metal_ice",
-            "@resource/resource_names:space_metal_iron",
-            "@resource/resource_names:space_metal_obsidian",
-            "@resource/resource_names:space_metal_silicaceous"
-    };
-    public static final String[] SPACE_RESOURCE_CONST = {
-            "space_chemical_acid",
-            "space_chemical_cyanomethanic",
-            "space_chemical_petrochem",
-            "space_chemical_sulfuric",
-            "space_gas_methane",
-            "space_gas_organometallic",
-            "space_gem_crystal",
-            "space_gem_diamond",
-            "space_metal_carbonaceous",
-            "space_metal_ice",
-            "space_metal_iron",
-            "space_metal_obsidian",
-            "space_metal_silicaceous"
-    };
     public int handleChooseResourceType(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
