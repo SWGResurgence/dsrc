@@ -59,7 +59,8 @@ public class resource extends script.base_script
         "flora_resources",
         "flora_structural",
         "energy_renewable_unlimited_wind",
-        "energy_renewable_unlimited_solar"
+        "energy_renewable_unlimited_solar",
+        "energy_renewable_site_limited_geothermal"
     };
     public static final String RT_ORGANIC = "organic";
     public static final String RT_INORGANIC = "inorganic";
