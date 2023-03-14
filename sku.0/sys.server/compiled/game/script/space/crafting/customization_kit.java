@@ -258,7 +258,8 @@ public class customization_kit extends script.base_script
                             chassis.equals("player_tieinterceptor") ||
                             chassis.equals("player_tie_light_duty") ||
                             chassis.equals("player_tieoppressor") ||
-                            chassis.equals("player_tiedefender")
+                            chassis.equals("player_tiedefender") ||
+                            chassis.equals("player_tiedefender_imperial_guard")
                         )
                     {
                         string_id message = new string_id(STF, "imperial");

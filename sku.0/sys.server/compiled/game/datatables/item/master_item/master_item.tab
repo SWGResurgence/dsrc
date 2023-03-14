@@ -9021,4 +9021,4 @@ item_imperial_battlefield_token_box_01_01	object/tangible/loot/misc/heroic_token
 item_imperial_battlefield_token_box_01_02	object/tangible/loot/misc/heroic_token_box.iff							1		"item.special.nomove,item.imperial_battlefield_tokens"		1	Imperial Battlefield Token Box	You may open this to exchange your old battlefield tokens for a box containing the new ones.
 item_imperial_battlefield_token_box_01_03	object/tangible/loot/misc/heroic_token_box.iff							1		"item.special.nomove,item.imperial_battlefield_tokens"		1	Imperial Battlefield Token Box	You may open this to exchange your old battlefield tokens for a box containing the new ones.
 item_imperial_battlefield_token_box_01_04	object/tangible/loot/misc/heroic_token_box.iff							1		"item.special.nomove,item.imperial_battlefield_tokens"		1	Imperial Battlefield Token Box	You may open this to exchange your old battlefield tokens for a box containing the new ones.
-
+item_ship_deed_tiedefender_imperial_guard	object/tangible/ship/crafted/chassis/tiedefender_imperial_guard_deed.iff							1				1	Deed for Royal Guard Tie Defender Chassis		

@@ -5121,3 +5121,4 @@ weapon_black_metal_baton
 item_resurgence_targaryen_banner_01_01											
 item_resurgence_targaryen_banner_01_02
 item_krayt_dragon_skull_itv
+item_ship_deed_tiedefender_imperial_guard			float:ship_chassis.hp=2250.0,float:ship_chassis.mass=180000.0,string:ship_chassis.type=tiedefender_imperial_guard								
