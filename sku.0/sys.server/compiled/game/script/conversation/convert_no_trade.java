@@ -6,10 +6,6 @@
 
 package script.conversation;
 
-// ======================================================================
-// Library Includes
-// ======================================================================
-
 import script.library.ai_lib;
 import script.library.chat;
 import script.library.utils;
@@ -19,20 +15,11 @@ public class convert_no_trade extends script.base_script
 {
     public static String c_stringFile = "conversation/convert_no_trade";
 
-// ======================================================================
-// Script Constants
-// ======================================================================
-
     public convert_no_trade()
 
     {
 
     }
-
-// ======================================================================
-// Script Conditions
-// ======================================================================
-
     public boolean convert_no_trade_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "can_convert_no_trade"))
@@ -41,26 +28,6 @@ public class convert_no_trade extends script.base_script
         }
         else return getConfigSetting("GameServer", "enableConvertNoTradeConvo").equals("true");
 	}
-
-// ======================================================================
-// Script Actions
-// ======================================================================
-
-// ======================================================================
-// Script %TO Tokens
-// ======================================================================
-
-// ======================================================================
-// Script %DI Tokens
-// ======================================================================
-
-// ======================================================================
-// Script %DF Tokens
-// ======================================================================
-
-// ======================================================================
-// handleBranch<n> Functions 
-// ======================================================================
 
     int convert_no_trade_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
     {
@@ -71,7 +38,6 @@ public class convert_no_trade extends script.base_script
         //-- PLAYER: I have some assets I need like to liquidate, but the Empire put embargos on all exports. Can you help me? \#DD1234[Remove No-Trade]\#FF0000
         if (response.equals("s_5"))
         {
-            //-- [NOTE]
             if (convert_no_trade_condition__defaultCondition(player, npc))
             {
                 //-- NPC: Let me see what we are working with here. Give me one moment and I can complete your request.
@@ -89,12 +55,6 @@ public class convert_no_trade extends script.base_script
 
         return SCRIPT_CONTINUE;
     }
-
-// ----------------------------------------------------------------------
-
-// ======================================================================
-// User Script Triggers
-// ======================================================================
 
     public int OnInitialize(obj_id self) throws InterruptedException
     {
@@ -157,10 +117,6 @@ public class convert_no_trade extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-// ======================================================================
-// Script Triggers
-// ======================================================================
-
     //-- This function should move to base_class.java
     boolean npcStartConversation(obj_id player, obj_id npc, String convoName, string_id greetingId, prose_package greetingProse, string_id[] responses)
     {
@@ -169,8 +125,6 @@ public class convert_no_trade extends script.base_script
         return npcStartConversation(player, npc, convoName, greetingId, greetingProse, objects);
     }
 
-// ----------------------------------------------------------------------
-
     public int OnStartNpcConversation(obj_id self, obj_id player) throws InterruptedException
     {
         obj_id npc = self;
@@ -178,7 +132,6 @@ public class convert_no_trade extends script.base_script
         if (ai_lib.isInCombat(npc) || ai_lib.isInCombat(player))
             return SCRIPT_OVERRIDE;
 
-        //-- [NOTE]
         if (convert_no_trade_condition__defaultCondition(player, npc))
         {
             //-- NPC: What do you need?
@@ -215,7 +168,6 @@ public class convert_no_trade extends script.base_script
 
             return SCRIPT_CONTINUE;
         }
-        //-- [NOTE]
         else if (!convert_no_trade_condition__defaultCondition(player, npc))
         {
             //-- NPC: Move Along.

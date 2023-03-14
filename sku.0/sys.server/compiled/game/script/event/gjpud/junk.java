@@ -6,6 +6,9 @@ package script.event.gjpud;/*
 */
 
 import script.*;
+import script.library.static_item;
+import script.library.trial;
+import script.library.utils;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -30,7 +33,11 @@ public class junk extends script.base_script
     {
         if (item == menu_info_types.ITEM_USE)
         {
-            broadcast(player, "An amazing loot message here with some cool effects and flavah text.");
+            int currentSmashed = getIntObjVar(player, "gjpud.total");
+            setObjVar(player, "gjpud.total", currentSmashed + 1);
+            broadcast(player, "You have collected this piece of scrap.");
+            destroyObject(self);
+            static_item.createNewItemFunction(trial.GJPUD_ITEM, utils.getInventoryContainer(player));
         }
         return SCRIPT_CONTINUE;
     }
