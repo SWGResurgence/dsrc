@@ -5,8 +5,8 @@
 
 objectName = "item_n"  "default"
 detailedDescription = "item_d"  "default"
-appearanceFilename = "appearance/aurilia_token.apt"
+
+appearanceFilename = "appearance/world_boss_token.apt"
  
 gameObjectType = GOT_misc_item_usable
 
-clientDataFile = "clientdata/index/client_shared_index_1_17.cdf"
