@@ -1,24 +1,28 @@
-item	cash	token10	class	script	note
-s[none]	i[0]	i[0]	i[0]	s	c
-armor_galactic_marine_belt		60			"See library.utils for the int value of the classes. 0 is ""all"" but will only show if there are no items for the opener's class."
-armor_galactic_marine_bicep_l		60			"So in the case of this table only traders will see the ""all"" items."
-armor_galactic_marine_bicep_r		60			
-armor_galactic_marine_boots		60			
-armor_galactic_marine_bracer_l		60			
-armor_galactic_marine_bracer_r		60			
-armor_galactic_marine_chest_plate		60			
-armor_galactic_marine_gloves		60			
-armor_galactic_marine_helmet		60			
-armor_galactic_marine_leggings		60			
-weapon_carbine_ngant_zarvel_04_01		100			
-weapon_heavy_cr1_04_01		75			
-weapon_heavy_cr2_04_01		125			
-weapon_magna_guard_polearm_04_01		100			
-weapon_westar_pistol_04_01		100			
-weapon_westar_rifle_04_01		100			
-item_schematic_pvp_bf_saber_03_01		100	7		
-item_schematic_pvp_bf_saber_03_02		100	7		
-item_schematic_pvp_bf_saber_03_03		100	7		
-weapon_knuckler_buzz_knuck		100			
-weapon_sword_1h_pvp_04_01		100			
-weapon_sword_2h_pvp_04_01		100			
+item	cash	token10	token45	token46	token47	token48	class	script	note
+s[none]	i[0]	i[0]					i[0]	s	c
+item_imperial_battlefield_token_box_01_01			1
+item_imperial_battlefield_token_box_01_02				1
+item_imperial_battlefield_token_box_01_03					1
+item_imperial_battlefield_token_box_01_04						1
+armor_galactic_marine_belt		60							"See library.utils for the int value of the classes. 0 is ""all"" but will only show if there are no items for the opener's class."
+armor_galactic_marine_bicep_l		60							"So in the case of this table only traders will see the ""all"" items."
+armor_galactic_marine_bicep_r		60
+armor_galactic_marine_boots		60
+armor_galactic_marine_bracer_l		60
+armor_galactic_marine_bracer_r		60
+armor_galactic_marine_chest_plate		60
+armor_galactic_marine_gloves		60
+armor_galactic_marine_helmet		60
+armor_galactic_marine_leggings		60
+weapon_carbine_ngant_zarvel_04_01		100
+weapon_heavy_cr1_04_01		75
+weapon_heavy_cr2_04_01		125
+weapon_magna_guard_polearm_04_01		100
+weapon_westar_pistol_04_01		100
+weapon_westar_rifle_04_01		100
+item_schematic_pvp_bf_saber_03_01		100					7
+item_schematic_pvp_bf_saber_03_02		100					7
+item_schematic_pvp_bf_saber_03_03		100					7
+weapon_knuckler_buzz_knuck		100
+weapon_sword_1h_pvp_04_01		100
+weapon_sword_2h_pvp_04_01		100
