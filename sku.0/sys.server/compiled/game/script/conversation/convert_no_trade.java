@@ -102,6 +102,7 @@ public class convert_no_trade extends script.base_script
         {
             detachScript(self, "conversation.convert_no_trade");
         }
+        createTriggerVolume("convert_no_trade", 10, true);
         setCondition(self, CONDITION_CONVERSABLE);
         return SCRIPT_CONTINUE;
     }
@@ -111,7 +112,6 @@ public class convert_no_trade extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         setInvulnerable(self, true);
         setName(self, "a local exporter");
-        createTriggerVolume("convert_no_trade", 5, true);
         return SCRIPT_CONTINUE;
     }
 
@@ -149,6 +149,7 @@ public class convert_no_trade extends script.base_script
             int TIME_TO_CHECK = 2592000; // 30 days to be able to convert no-trade items.
             if (getPlayerBirthDate(who) + TIME_TO_CHECK > getCalendarTime())
             {
+                broadcast(who, "Your character age is too low to partake in this offer.");
                 return SCRIPT_CONTINUE;
             }
             utils.setScriptVar(who, "can_convert_no_trade", 1);
@@ -266,7 +267,7 @@ public class convert_no_trade extends script.base_script
                 detachScript(contents[i], "item.special.nomove");
             }
         }
-        broadcast(player, "Items flagged as *No Trade* inside your inventory are now be tradeable.");
+        broadcast(player, "Items flagged as *No Trade* inside your inventory are now be tradeable. Please note: this is temporary and will get reapplied upon initialization.");
         return SCRIPT_CONTINUE;
     }
 // ======================================================================

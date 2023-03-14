@@ -23,17 +23,15 @@ public class junk extends script.base_script
 
     public int OnObjectMenuRequest( obj_id self, obj_id player, menu_info mi )
     {
-        if (isGod(player))
-        {
-            int main = mi.addRootMenu( menu_info_types.ITEM_USE, new string_id( "event/gjpud", "gjpud_menu" ));
-            mi.addSubMenu(main, menu_info_types.SERVER_MENU1, new string_id( "event/gjpud", "gjpud_spawn" ));
-            mi.addSubMenu(main, menu_info_types.SERVER_MENU2, new string_id( "event/gjpud", "gjpud_destroy" ));
-        }
+        mi.addRootMenu( menu_info_types.ITEM_USE, new string_id( "Collect" ));
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException, InvocationTargetException
     {
-
+        if (item == menu_info_types.ITEM_USE)
+        {
+            broadcast(player, "An amazing loot message here with some cool effects and flavah text.");
+        }
         return SCRIPT_CONTINUE;
     }
 }

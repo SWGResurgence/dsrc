@@ -17,7 +17,7 @@ public class controller extends script.base_script
             "Rusty Scrap",
             "Solid Scrap",
             "Dented Scrap",
-            "Oxidiized Scrap",
+            "Oxidized Scrap",
             "Dusty Scrap",
             "Tarnished Scrap",
     };
@@ -60,7 +60,7 @@ public class controller extends script.base_script
                 setSUIProperty(pid, "Prompt.lblPrompt", "Font", "bold_15");
                 setSUIProperty(pid, "Prompt.lblPrompt", "Editable", "true");
                 setSUIProperty(pid, "Prompt.lblPrompt", "Text", prompt);
-                subscribeToSUIProperty(pid, "btnOk", "Pressed");
+                subscribeToSUIProperty(pid, "btnOk", "Ok");
                 showSUIPage(pid);
             }
             if (item == menu_info_types.SERVER_MENU2)

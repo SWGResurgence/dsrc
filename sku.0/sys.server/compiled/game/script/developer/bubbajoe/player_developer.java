@@ -329,6 +329,16 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equalsIgnoreCase("makeAugs"))
+        {
+            String template = "object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_one_s23.iff";
+            obj_id augment = createObject(template, getLocation(self));
+            attachScript(augment, "systems.crafting.weapon.component.crafting_weapon_component_attribute");
+            setObjVar(augment, "attribute.bonus.0", 300);
+            setObjVar(augment, "attribute.bonus.2", 300);
+            setName(augment, "Melee Weapon Augmentation");
+            return SCRIPT_CONTINUE;
+        }
         if (cmd.equalsIgnoreCase("scale"))
         {
             float original = getScale(target);
@@ -676,7 +686,7 @@ public class player_developer extends base_script
             {
                 broadcast(self, "No mod specified. See console for valid mods.");
                 debugConsoleMsg(self, "/developer editWeapon <mod> <value>");
-                debugConsoleMsg(self, "List of valid mods:\nminDamage\nmaxDamage\nattackSpeed\nwoundChance\nattackCost\naccuracy\nelementalType\nelementalValue\nrangeInfo\nq\ndamageRadius");
+                debugConsoleMsg(self, "List of valid mods:\nminDamage\nmaxDamage\nattackSpeed\nwoundChance\nattackCost\naccuracy\nelementalType\nelementalValue\nrangeInfo\nresetAllStats\ndamageRadius");
                 return SCRIPT_CONTINUE;
             }
             switch (mod)
@@ -738,7 +748,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin openlink url");
+                sendSystemMessageTestingOnly(self, "Syntax: /developer openlink url");
                 return SCRIPT_CONTINUE;
             }
             else
