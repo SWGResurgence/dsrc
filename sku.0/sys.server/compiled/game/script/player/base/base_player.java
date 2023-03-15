@@ -374,6 +374,12 @@ public class base_player extends script.base_script
 
     public int OnCustomizeFinished(obj_id self, obj_id object, String params) throws InterruptedException
     {
+        if (utils.hasScriptVar(self, "recolor_process.tool_oid"))
+        {
+            final obj_id objToColor = utils.getObjIdScriptVar(self, "recolor_process.tool_oid");
+            colorizeObject(self, objToColor, objToColor, params);
+            return SCRIPT_CONTINUE;
+        }
         if (utils.hasScriptVar(self, "armor_colorize.tool_oid") || utils.hasScriptVar(self, "structure_colorize.tool_oid"))
         {
             obj_id tool = obj_id.NULL_ID;
@@ -567,7 +573,7 @@ public class base_player extends script.base_script
                 }
             }
         }
-        utils.unequipAndNotifyUncerted(self);
+        //utils.unequipAndNotifyUncerted(self);
         if (strSkill.equals("outdoors_ranger_movement_03"))
         {
             if (hasSchematic(self, "object/draft_schematic/scout/item_camokit_kashyyyk.iff"))
@@ -743,7 +749,7 @@ public class base_player extends script.base_script
                 CustomerServiceLog("Wealth", "Extraordinary Wealth: " + getName(self) + " (" + self + ") logged in with " + totalMoney + " credits");
             }
         }
-        utils.unequipAndNotifyUncerted(self);
+        //utils.unequipAndNotifyUncerted(self);
         utils.checkInventoryForSnowflakeItemSwaps(self);
         if (hasObjVar(self, "item_reimbursement_list"))
         {
@@ -3490,7 +3496,7 @@ public class base_player extends script.base_script
                 spawn = spawnLocs[idx];
                 location deathLoc = getLocation(self);
                 region[] respawnRegions = getRegionsWithPvPAtPoint(deathLoc, regions.PVP_REGION_TYPE_ADVANCED);
-                if ((respawnRegions != null && respawnRegions.length > 0) || utils.hasScriptVar(self, "battlefield.active"))
+                if ((respawnRegions != null && respawnRegions.length > 0) || utils.hasScriptVar(self, "battlefield.active") || isPvpRelatedDeath(self))
                 {
                     delayedClone = 15;
                     utils.setScriptVar(self, "no_cloning_sickness", 1);
@@ -3605,7 +3611,6 @@ public class base_player extends script.base_script
             healing.healClone(self, true);
         }
         setPosture(self, POSTURE_UPRIGHT);
-        utils.removeScriptVar(self, "pvp_death");
         queueCommand(self, (-1465754503), self, "", COMMAND_PRIORITY_IMMEDIATE);
         playClientEffectObj(self, "clienteffect/player_clone_compile.cef", self, null);
         if (!utils.hasScriptVar(self, "no_cloning_sickness") && !instance.isInInstanceArea(self))
