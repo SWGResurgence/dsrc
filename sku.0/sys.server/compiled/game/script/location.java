@@ -153,9 +153,9 @@ public final class location implements Comparable, Serializable
      * @return the location as a readable unformated  string.
      */
 
-    public String toBeautifulString()
+    public String toLineBreakFormat()
     {
-        return "X:" + x + "| Y: " + y + "| Z: " + z + "| Planet: " + area + "| Cell: " + cell + "";
+        return "X:" + x + "\nY: " + y + "\n Z: " + z + "\nPlanet: " + area + "\nCell: " + cell;
     }
 
     /**
