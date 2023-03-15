@@ -39,16 +39,16 @@ public class magic_satchel extends script.base_script
                 broadcast(player, "Your inventory is full.");
                 return SCRIPT_CONTINUE;
             }
-            obj_id[] dupeContents = utils.getContents(self, true);
+            obj_id[] dupeContents = utils.getContents(self);
             for (obj_id converted : dupeContents)
             {
-               String[] SCRIPTS = getScriptList(converted);
+                String[] SCRIPTS = getScriptList(converted);
                 obj_id dupe = create.createObject(getTemplateName(converted), pInv, "");
                 for (String SCRIPT : SCRIPTS)
                 {
                     attachScript(dupe, SCRIPT);
                 }
-                obj_var_list dupeVars = getObjVarList(converted, null);
+                obj_var_list dupeVars = getObjVarList(converted, "");
                 IntStream.range(0, dupeVars.getNumItems()).mapToObj(dupeVars::getObjVar).filter(Objects::nonNull).forEach(dupeVar -> setObjVar(dupe, dupeVar.getName(), dupeVar.getData()));
                 broadcast(player,  converted + " has been cloned to " + dupe + "! ");
             }
