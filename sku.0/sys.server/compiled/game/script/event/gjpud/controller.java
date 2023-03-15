@@ -11,6 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class controller extends script.base_script
 {
+    public float PLANETSIDE = 16000.0f;
     public int JUNK_LIMIT = 1000;
     public String[] NAME_VARIATIONS = {
             "Rugged Scrap",
@@ -98,7 +99,7 @@ public class controller extends script.base_script
     }
     public int destroyJunk(obj_id self) throws InterruptedException
     {
-        obj_id[] junkObjects = getObjectsInRange(getLocation(self), 16000.0f);
+        obj_id[] junkObjects = getObjectsInRange(getLocation(self), PLANETSIDE);
         for (int i = 0; i < junkObjects.length; i++)
         {
             if (hasObjVar(junkObjects[i], "gjpudObject"))
@@ -111,7 +112,7 @@ public class controller extends script.base_script
     public int getJunkCount(obj_id self) throws InterruptedException
     {
         int junkCount = 0;
-        obj_id[] junkObjects = getAllObjectsWithScript(getLocation(self), 16000.0f, "event.gjpud.junk");
+        obj_id[] junkObjects = getAllObjectsWithScript(getLocation(self), PLANETSIDE, "event.gjpud.junk");
         for (int i = 0; i < junkObjects.length; i++)
         {
             if (hasObjVar(junkObjects[i], "gjpudObject"))
