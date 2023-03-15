@@ -7,9 +7,9 @@ import script.location;
 import script.obj_id;
 import script.string_id;
 
-public class cantina_jar_controller extends script.base_script
+public class cantina_lando_controller extends script.base_script
 {
-    public cantina_jar_controller()
+    public cantina_lando_controller()
     {
     }
     public static final float TWENTY_FOUR_HOURS = 60 * 60 * 24;
@@ -84,13 +84,13 @@ public class cantina_jar_controller extends script.base_script
         {
             utils.removeScriptVar(self, "bhcelebs.beingDestroyed");
         }
-        obj_id bossk = create.object("jar_jar", new location(43.8f, 0.1f, 0.5f, getLocation(self).area, getCellId(self, "foyer1")));
+        obj_id bossk = create.object("lando", new location(43.8f, 0.1f, 0.5f, getLocation(self).area, getCellId(self, "foyer1")));
         if (isIdValid(bossk))
         {
             setInvulnerable(bossk, true);
-            setName(bossk, "Jar Jar Binks");
+            setName(bossk, "Lando Calrissian");
             setObjVar(bossk, "bhcelebs.actor_role", "bossk");
-            attachScript(bossk, "event.bh_event.cantina_actor_jar_jar");
+            attachScript(bossk, "event.bh_event.cantina_actor_lando");
             setObjVar(bossk, "bhcelebs.cantina", self);
             dictionary webster = new dictionary();
             webster.put("locationTargetName", "startBosskLine1");
@@ -130,7 +130,7 @@ public class cantina_jar_controller extends script.base_script
                 {
                     messageTo(self, "startBosskEvent", null, 1, false);
                     setObjVar(self, "bhcelebs.invasion_active", 1);
-                    announceStatusToPlayers(self, "meesa_here");
+                    announceStatusToPlayers(self, "business_man_responsible_leader");
                 }
                 else
                 {
