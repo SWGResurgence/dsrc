@@ -3,10 +3,12 @@ package script.event.gjpud.rewards;
 @Filename: script.event.gjpud.rewards.
 @Author: BubbaJoeX
 @Purpose: Extractor Tongs script for GJPUD.
-@Functionality: Using this tool will allow players to extract metal (Scrap Heaps) from conspicuous areas.
+@Functionality: Using this will have chance to apply 1 of 2 buffs. Both _BUFFS_ not debuffs.
+!syncstate wip
 */
 
 import script.*;
+import script.library.buff;
 import script.library.city;
 import script.library.utils;
 
@@ -80,21 +82,21 @@ public class extractor_tongs extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
-    public int attemptExtraction(obj_id self, obj_id player)
+    public int attemptExtraction(obj_id self, obj_id player) throws InterruptedException
     {
-        String CEF = "";
-        String success = "You have successfully extracted one piece of scrap metal.";
-        String failure = "You have failed to extract scrap metal.";
+        String CEF = "clienteffect/somebombassclienteffect.cef";
+        String success = "You have recieved a bonus to your Critical Chance!";
+        String failure = "You have recieved a bonus to foraging.";
         int chance = rand(0, 99);
         if (chance <= 49)
         {
             broadcast(player, success);
-            //handleRewardTrigger
+            buff.applyBuff(player, "event_gjpud_crit_chance");
         }
         else if (chance >= 49)
         {
             broadcast(player, failure);
-
+            buff.applyBuff(player, "event_gjpud_forage");
         }
         return SCRIPT_CONTINUE;
     }
