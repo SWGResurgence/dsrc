@@ -87,13 +87,12 @@ public class metal_detector extends script.base_script
     {
         String table = GJPUD_LOOT_TABLE;
         int amt = getPlanetBonus(self, player);
-        String corpseTemplate = "object/tangible/container/drum/warren_drum_skeleton.iff";
         location treasureLoc = getLocationObjVar(self, "gjpud.cacheLocation");
         if (treasureLoc == null)
         {
             broadcast(player, "Your device is unable to retrieve location data at this time.");
         }
-        obj_id treasureChest = createObject(corpseTemplate, treasureLoc);
+        obj_id treasureChest = createObject(GJPUD_LOOT_DRUM, treasureLoc);
         attachScript (treasureChest, "item.container.loot_crate_opened");
         setName(treasureChest, "an item cache");
         loot.makeLootInContainer(treasureChest, table, amt, 300);
