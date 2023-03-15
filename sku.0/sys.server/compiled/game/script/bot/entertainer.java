@@ -9,8 +9,8 @@ import script.library.*;
 
 public class entertainer extends script.base_script
 {
-    //public static final float buffDuration = 3600f;
-    public static final String BUFF_PROMPT = colors_hex.HEADER + colors_hex.AQUAMARINE + "Do you wish to recieve a reduced strength enhancement? " + colors_hex.FOOTER;
+    public static final float buffDuration = 3600f;
+    public static final String BUFF_PROMPT = colors_hex.HEADER + colors_hex.AQUAMARINE + "Do you wish to recieve a reduced entertainment enhancement? " + colors_hex.FOOTER;
     public static final String BUFF_TITLE = "MicroData Technologies SELF-ENTERTAINMENT MODULE";
     public static final String[] buffComponentKeys = {
             "kinetic",
@@ -99,8 +99,7 @@ public class entertainer extends script.base_script
 
     public int triggerBuff(obj_id self, obj_id target) throws InterruptedException
     {
-        float currentBuffTime = performance.inspireGetMaxDuration(target);
-        buff.applyBuff(target, "buildabuff_inspiration", currentBuffTime);
+        buff.applyBuff(target, "buildabuff_inspiration", buffDuration);
         utils.setScriptVar(target, "performance.buildabuff.buffComponentKeys", buffComponentKeys);
         utils.setScriptVar(target, "performance.buildabuff.buffComponentValues", buffComponentValues);
         utils.setScriptVar(target, "performance.buildabuff.player", target);
