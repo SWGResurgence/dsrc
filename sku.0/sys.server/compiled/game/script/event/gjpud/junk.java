@@ -35,7 +35,7 @@ public class junk extends script.base_script
         {
             int currentSmashed = getIntObjVar(player, "gjpud.total");
             setObjVar(player, "gjpud.total", currentSmashed + 1);
-            broadcast(player, "You have collected this piece of scrap.");
+            broadcast(player, "You have collected a piece of scrap.");
             destroyObject(self);
             static_item.createNewItemFunction(trial.GJPUD_ITEM, utils.getInventoryContainer(player));
         }
