@@ -9026,3 +9026,4 @@ contraband_art_chest	object/tangible/smuggler/contraband/contraband_general.iff	
 contraband_spice_chest	object/tangible/smuggler/contraband/contraband_general.iff									systems.loot.contraband_spice_chest			Spice Contraband	Rare Loot Chest... Open it up!	
 contraband_spice_schematic_chest	object/tangible/smuggler/contraband/contraband_general.iff									systems.loot.contraband_spice_chest			Spice Contraband	Exceptional Loot Chest... Open it up!	
 painting_art_expo_01	object/static/item/painting_art_expo_01.iff													Art Expo Painting Submission	
+item_resurgence_stark_banner_01_01	object/tangible/furniture/misc/decorative_stark_banner_freestanding.iff							1				1	House Stark Free-Standing Banner	"This is the Free-Standing Banner for House Stark. The Royal Coat of Arms for House Stark is a Running Grey Direwolf, on tan and green. There words are Winter Is Comming."	
