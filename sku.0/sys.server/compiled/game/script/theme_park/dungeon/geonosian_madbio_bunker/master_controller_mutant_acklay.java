@@ -32,6 +32,11 @@ public class master_controller_mutant_acklay extends script.base_script
 
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
+        /*if (pet_lib.isPet(killer))
+        {
+            sendSystemMessageGalaxyTestingOnly("ATTENTION ADVENTURERS: The Mutant Acklay Abomination has been destroyed. " + getPlayerName(pet_lib.getMaster(killer)));
+        }*
+        sendSystemMessageGalaxyTestingOnly("ATTENTION ADVENTURERS: The Mutant Acklay Abomination has been destroyed. " + getName(killer));*/
         return SCRIPT_CONTINUE;
     }
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id who) throws InterruptedException
@@ -43,21 +48,6 @@ public class master_controller_mutant_acklay extends script.base_script
                 if (!utils.hasScriptVar(self, "spotted"))
                 {
                     broadcast(who, "You have spotted The Mutant Acklay Abomination!");
-                    utils.setScriptVar(self, "spotted", true);
-                }
-            }
-        }
-        return SCRIPT_CONTINUE;
-    }
-    public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id who) throws InterruptedException
-    {
-        if (isPlayer(who))
-        {
-            if (volumeName.equals(SIGHTING_NAME))
-            {
-                if (!utils.hasScriptVar(self, "spotted"))
-                {
-                    sendSystemMessageGalaxyTestingOnly("ATTENTION ADVENTURERS: The Mutant Acklay Abomination has been sighted within the Geonosian Caves.");
                     utils.setScriptVar(self, "spotted", true);
                 }
             }
