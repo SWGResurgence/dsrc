@@ -144,7 +144,30 @@ public final class location implements Comparable, Serializable
 	public String toString()
 	{
 		return "(x=" + x + ", y=" + y + ", z=" + z + ", area=" + area + ", cell=" + cell + ")";
-	}	// toString
+	}
+
+
+    /**
+     * Conversion function.
+     *
+     * @return the location as a readable unformated  string.
+     */
+
+    public String toBeautifulString()
+    {
+        return "X:" + x + "| Y: " + y + "| Z: " + z + "| Planet: " + area + "| Cell: " + cell + "";
+    }
+
+    /**
+     * Conversion function.
+     *
+     * @return the location as a readable unformated  string.
+     */
+
+    public String toClipboardFormat()
+    {
+        return "/wp " + area + " " + x + " " +  z + " " +  y + " " + "orange " + "Waypoint";
+    }
 
 	/**
 	 * Compares this to a generic object.

@@ -318,6 +318,7 @@ public class trial extends script.base_script
     public static final String TOKEN_BOX = "item_heroic_token_box_01_01";
 	public static final int GJPUD_MAX = 25;
     public static final String GJPUD_ITEM = "item_gjpud_scrap_heap";
+    public static final int GJPUD_MAX = 25;
     public static void initializeBox(obj_id self) throws InterruptedException
     {
         int[] tokenTypes = new int[HEROIC_TOKENS.length];

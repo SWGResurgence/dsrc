@@ -26,7 +26,7 @@ public class junk extends script.base_script
 
     public int OnObjectMenuRequest( obj_id self, obj_id player, menu_info mi )
     {
-        mi.addRootMenu( menu_info_types.ITEM_USE, new string_id( "Collect" ));
+        mi.addRootMenu( menu_info_types.ITEM_USE, new string_id("Collect"));
         return SCRIPT_CONTINUE;
     }
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException, InvocationTargetException

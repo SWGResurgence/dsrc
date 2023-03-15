@@ -52,13 +52,13 @@ public class doctor_droid extends script.base_script
             ai_lib.aiStopFollowing(self);
             stop(self);
             faceToBehavior(self, breacher);
-            buff.applyBuff(breacher,"me_buff_health_2", 3600, 55);
-            buff.applyBuff(breacher,"me_buff_action_3", 3600, 55);
-            buff.applyBuff(breacher,"me_buff_strength_3", 3600);
-            buff.applyBuff(breacher,"me_buff_agility_3", 3600);
-            buff.applyBuff(breacher,"me_buff_precision_3", 3600);
-            buff.applyBuff(breacher,"me_buff_melee_gb_1", 3600);
-            buff.applyBuff(breacher,"me_buff_ranged_gb_1", 3600);
+            buff.applyBuff(breacher,"me_buff_health_2", 3600, 225);
+            buff.applyBuff(breacher,"me_buff_action_3", 3600, 225);
+            buff.applyBuff(breacher,"me_buff_strength_3", 3600, 225);
+            buff.applyBuff(breacher,"me_buff_agility_3", 3600, 225);
+            buff.applyBuff(breacher,"me_buff_precision_3", 3600, 225);
+            buff.applyBuff(breacher,"me_buff_melee_gb_1", 3600, 225);
+            buff.applyBuff(breacher,"me_buff_ranged_gb_1", 3600, 225);
             chat.chat(self, convertToBinary("You have been healed and recieved low-grade enhancements."));
             setObjVar(breacher, "healDroid.cooldown", getGameTime() + cooldownTime);
         }
