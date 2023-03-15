@@ -3039,10 +3039,6 @@ public class base_player extends script.base_script
             utils.setScriptVar(self, "buffDecay", 1);
             buff.decayAllBuffsFromPvpDeath(self);
         }
-        else
-        {
-            buff.removeAllBuffs(self, true);
-        }
         if (!hasObjVar(self, pclib.VAR_BEEN_COUPDEGRACED))
         {
             return SCRIPT_CONTINUE;
@@ -3615,11 +3611,16 @@ public class base_player extends script.base_script
         playClientEffectObj(self, "clienteffect/player_clone_compile.cef", self, null);
         if (!utils.hasScriptVar(self, "no_cloning_sickness") && !instance.isInInstanceArea(self))
         {
-            buff.applyBuff(self, "cloning_sickness");
+            if (!isPvpRelatedDeath(self)) {
+                buff.applyBuff(self, "cloning_sickness");
+            }
         }
         else if (utils.hasScriptVar(self, "no_cloning_sickness"))
         {
-            utils.removeScriptVar(self, "no_cloning_sickness");
+            if (!isPvpRelatedDeath(self))
+            {
+                utils.removeScriptVar(self, "no_cloning_sickness");
+            }
         }
         if (0 == pvpGetAlignedFaction(self))
         {
@@ -3630,6 +3631,8 @@ public class base_player extends script.base_script
             }
         }
         CustomerServiceLog("Death", "(" + self + ") " + getName(self) + " has clone respawned at " + (getLocation(self)).toString());
+        utils.removeScriptVar(self, "pvp_death");
+        utils.removeScriptVar(self, "no_cloning_sickness");
         return SCRIPT_CONTINUE;
     }
 
