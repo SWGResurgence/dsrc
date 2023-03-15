@@ -4,8 +4,6 @@ import script.library.ai_lib;
 import script.library.chat;
 import script.library.groundquests;
 import script.library.utils;
-import script.library.factions;
-import script.library.*;
 import script.*;
 
 public class event_jar_jar extends script.base_script
@@ -48,10 +46,10 @@ public class event_jar_jar extends script.base_script
             return false;
         }
     }
-    public boolean event_jar_jar_condition_gunganFriend(obj_id player, obj_id npc) throws InterruptedException
+    public boolean event_jar_jar_condition_notEntertainer(obj_id player, obj_id npc) throws InterruptedException
     {
-        float gunganFaction = factions.getFactionStanding(player, "gungan");
-        if (gunganFaction >= 2500)
+        String pTemplate = getSkillTemplate(player);
+        if (pTemplate.contains("entertainer"))
         {
             return true;
         }
@@ -59,12 +57,6 @@ public class event_jar_jar extends script.base_script
         {
             return false;
         }
-    }
-    public void event_jar_jar_action_vendor(obj_id player, obj_id npc) throws InterruptedException
-    {
-        dictionary d = new dictionary();
-        d.put("player", player);
-        messageTo(npc, "showInventorySUI", d, 0, false);
     }
     public void event_jar_jar_action_signalReward(obj_id player, obj_id npc) throws InterruptedException
     {
@@ -81,7 +73,7 @@ public class event_jar_jar extends script.base_script
         {
             if (event_jar_jar_condition__defaultCondition(player, npc))
             {
-                doAnimationAction(npc, "trick_1");
+                doAnimationAction(npc, "loser");
                 string_id message = new string_id(c_stringFile, "s_167");
                 utils.removeScriptVar(player, "conversation.event_jar_jar.branchId");
                 chat.chat(npc, player, message);
@@ -93,7 +85,7 @@ public class event_jar_jar extends script.base_script
         {
             if (event_jar_jar_condition__defaultCondition(player, npc))
             {
-                doAnimationAction(npc, "trick_2");
+                doAnimationAction(npc, "dance");
                 event_jar_jar_action_signalReward(player, npc);
                 string_id message = new string_id(c_stringFile, "s_171");
                 utils.removeScriptVar(player, "conversation.event_jar_jar.branchId");
@@ -146,7 +138,7 @@ public class event_jar_jar extends script.base_script
         {
             if (event_jar_jar_condition__defaultCondition(player, npc))
             {
-                doAnimationAction(npc, "weeping");
+                doAnimationAction(npc, "dismiss");
                 string_id message = new string_id(c_stringFile, "s_273");
                 utils.removeScriptVar(player, "conversation.event_jar_jar.branchId");
                 chat.chat(npc, player, message);
@@ -213,7 +205,7 @@ public class event_jar_jar extends script.base_script
 
             if (event_jar_jar_condition_entertainer(player, npc))
             {
-                doAnimationAction(npc, "hug");
+                doAnimationAction(npc, "nod_head_once");
                 groundquests.grantQuest(player, "event_cantina_jar_jar");
                 string_id message = new string_id(c_stringFile, "s_265");
                 utils.removeScriptVar(player, "conversation.event_jar_jar.branchId");
@@ -223,7 +215,7 @@ public class event_jar_jar extends script.base_script
             }
             else
             {
-                doAnimationAction(npc, "laugh");
+                doAnimationAction(npc, "dismiss");
                 string_id message = new string_id(c_stringFile, "s_269");
                 utils.removeScriptVar(player, "conversation.event_jar_jar.branchId");
                 chat.chat(npc, player, message);
@@ -233,19 +225,9 @@ public class event_jar_jar extends script.base_script
         }
         if (response.equals("s_267"))
         {
-            if (event_jar_jar_condition_gunganFriend(player, npc))
+            if (event_jar_jar_condition__defaultCondition(player, npc))
             {
-                event_jar_jar_action_vendor(player, npc);
-                doAnimationAction(npc, "hug");
-                string_id message = new string_id(c_stringFile, "fence_jar");
-                utils.removeScriptVar(player, "conversation.event_jar_jar.branchId");
-                chat.chat(npc, player, message);
-                npcEndConversation(player);
-                return SCRIPT_CONTINUE;
-            }
-            else
-            {
-                doAnimationAction(npc, "soapbox");
+                doAnimationAction(npc, "dismiss");
                 string_id message = new string_id(c_stringFile, "s_269");
                 utils.removeScriptVar(player, "conversation.event_jar_jar.branchId");
                 chat.chat(npc, player, message);

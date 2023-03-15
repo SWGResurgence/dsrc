@@ -8,9 +8,9 @@ import script.location;
 import script.obj_id;
 import script.string_id;
 
-public class cantina_actor_lando extends script.base_script
+public class cantina_actor2 extends script.base_script
 {
-    public cantina_actor_lando()
+    public cantina_actor2()
     {
     }
     public static final String STF_FILE = "event/bhcelebs";
@@ -44,10 +44,10 @@ public class cantina_actor_lando extends script.base_script
     {
         if (name.equals("startBosskLine1"))
         {
-            if (!hasScript(self, "conversation.event_lando"))
+            if (!hasScript(self, "conversation.event_jar_jar"))
             {
-                chat.chat(self, chat.CHAT_SAY, chat.MOOD_SLY, new string_id(STF_FILE, "just_made_a_new_deal"));
-                attachScript(self, "conversation.event_lando");
+                chat.chat(self, chat.CHAT_SAY, chat.MOOD_CONDESCENDING, new string_id(STF_FILE, "bossk1_1"));
+                attachScript(self, "conversation.event_jar_jar");
                 setObjVar(self, "bhcelebs.run_away", 0);
                 ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
                 stop(self);
