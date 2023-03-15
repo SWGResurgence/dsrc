@@ -37,7 +37,6 @@ public class gating extends script.base_script
 
     public int OnInitialize(obj_id self) throws InterruptedException
     {
-        setName(self, "Mos Deltro Housing");
         return SCRIPT_CONTINUE;
     }
 }
