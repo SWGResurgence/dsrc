@@ -48,10 +48,11 @@ public class player_developer extends base_script
             }
             if (subcommand.equalsIgnoreCase("task"))
             {
-                String task = tok.nextToken();
-                if (task.equalsIgnoreCase("complete"))
+                String taskSub = tok.nextToken();
+                String taskName = tok.nextToken();
+                if (taskSub.equalsIgnoreCase("complete"))
                 {
-                    groundquests.completeTask(target, questString, tok.nextToken());
+                    groundquests.completeTask(target, questString, taskName);
                 }
             }
             return SCRIPT_CONTINUE;
@@ -265,8 +266,10 @@ public class player_developer extends base_script
                         broadcast(self, "Breached 500 items.");
                         utils.setScriptVar(self, "bagLimit", 1);
                     }
-                    obj_id madeItem = makeCraftedItem(item, 100.0f, myBag);
+                    obj_id madeItem = makeCraftedItem(item, 1000.0f, myBag);
                     setDescriptionStringId(madeItem, new string_id(description));
+                    setObjVar(madeItem, "null_desc", description);
+                    attachScript(madeItem, "developer.bubbajoe.sync");
                     bagLimit++;
                 }
                 else
@@ -426,7 +429,7 @@ public class player_developer extends base_script
             {
                 setObjVar(city_hall, VAR_CITY_OLD, getIntObjVar(city_hall, VAR_CITY));
                 removeObjVar(city_hall, VAR_CITY);
-                sendSystemMessageTestingOnly(self, "Removed Spec Stamp from City Hall with preservation of old specstamp.");
+                sendSystemMessageTestingOnly(self, "Removed specstamp from City Hall with preservation of old specstamp.");
             }
             else
             {
