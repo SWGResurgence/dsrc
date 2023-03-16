@@ -6,9 +6,7 @@
 
 package script.conversation;
 
-import script.library.ai_lib;
-import script.library.chat;
-import script.library.utils;
+import script.library.*;
 import script.*;
 
 public class convert_no_trade extends script.base_script
@@ -22,11 +20,7 @@ public class convert_no_trade extends script.base_script
     }
     public boolean convert_no_trade_condition__defaultCondition(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (utils.hasScriptVar(player, "can_convert_no_trade"))
-        {
-            return true;
-        }
-        else return getConfigSetting("GameServer", "enableConvertNoTradeConvo").equals("true");
+        return true;
 	}
 
     int convert_no_trade_handleBranch1(obj_id player, obj_id npc, string_id response) throws InterruptedException
@@ -46,7 +40,7 @@ public class convert_no_trade extends script.base_script
                 expelFromTriggerVolume(npc, "convert_no_trade", player);
                 utils.removeScriptVar(player, "can_convert_no_trade");
                 handleNoTradeRemoval(player);
-                npcEndConversationWithMessage(player, message);
+                npcEndConversation(player);
 
                 return SCRIPT_CONTINUE;
             }
@@ -72,6 +66,7 @@ public class convert_no_trade extends script.base_script
         setCondition(self, CONDITION_CONVERSABLE);
         setInvulnerable(self, true);
         setName(self, "a local exporter");
+        createTriggerVolume("convert_no_trade", 10, true);
         return SCRIPT_CONTINUE;
     }
 
@@ -102,18 +97,14 @@ public class convert_no_trade extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        debugConsoleMsg(who, "You have entered the proximity of a local exporter. Speak to them to convert your no-trade items into tradeable items.");
-
-        if (!utils.hasScriptVar(who, "can_convert_no_trade"))
+        debugConsoleMsg(who, "You have entered the proximity of a local exporter.");
+        int TIME_TO_CHECK = 2592000; // 30 days to be able to convert no-trade items.
+        if (getPlayerBirthDate(who) + TIME_TO_CHECK > getCalendarTime())
         {
-            int TIME_TO_CHECK = 2592000; // 30 days to be able to convert no-trade items.
-            if (getPlayerBirthDate(who) + TIME_TO_CHECK > getCalendarTime())
-            {
-                broadcast(who, "Your character age is too low to partake in this offer.");
-                return SCRIPT_CONTINUE;
-            }
-            utils.setScriptVar(who, "can_convert_no_trade", 1);
+            broadcast(who, "Your character age is too low to partake in this offer.");
+            return SCRIPT_CONTINUE;
         }
+        chat.chat(who, "Utinni!");
         return SCRIPT_CONTINUE;
     }
 
@@ -182,8 +173,6 @@ public class convert_no_trade extends script.base_script
         return SCRIPT_CONTINUE;
     }
 
-// ----------------------------------------------------------------------
-
     public int OnNpcConversationResponse(obj_id self, String conversationId, obj_id player, string_id response) throws InterruptedException
     {
         if (!conversationId.equals("convert_no_trade"))
@@ -208,20 +197,19 @@ public class convert_no_trade extends script.base_script
         //@TODO: Read table for template lists that we want to make retroactive.
         obj_id inventory = utils.getInventoryContainer(player);
         obj_id[] contents = getContents(inventory);
-        for (int i = 0; i < contents.length; i++)
+        for (obj_id content : contents)
         {
-            if (hasObjVar(contents[i], "noTrade"))
+            if (hasObjVar(content, "noTrade"))
             {
-                removeObjVar(contents[i], "noTrade");
+                removeObjVar(content, "noTrade");
             }
-            if (hasScript(contents[i], "item.special.nomove"))
+            if (hasScript(content, "item.special.nomove"))
             {
-                detachScript(contents[i], "item.special.nomove");
+                detachScript(content, "item.special.nomove");
             }
         }
-        broadcast(player, "Items flagged as *No Trade* inside your inventory are now be tradeable. Please note: this is temporary and will get reapplied upon initialization.");
+        String prompt = colors_hex.HEADER + colors_hex.AQUAMARINE + "Items flagged as *No Trade* inside your inventory are now be tradeable. \n\n\n" + colors_hex.HEADER + colors_hex.RED + "Please note: this is temporary and the tag will be reapplied upon server startup. \n\n\nPlease do not submit bug reports or tickets regarding the No-Trade tag getting reverted.";
+        sui.msgbox(player, player, prompt);
         return SCRIPT_CONTINUE;
     }
-// ======================================================================
-
 }
