@@ -1,6 +1,7 @@
 package script.systems.mechanic;
 
 import script.*;
+import script.library.callable;
 import script.library.sui;
 import script.library.utils;
 import script.library.vehicle;
@@ -11,6 +12,8 @@ import static script.library.vehicle.s_varInfoNames;
 public class toolkit extends script.base_script
 {
     public static int PAYOUT_AMOUNT = 24000;
+    public static int VEH_MAX_SPEED = 44;
+    public static String MECHANIC_VAR = "vehicle_mechanic";
     public static String[] TOOLKIT_TYPES =
             {
                     "speed", "height", "acceleration", "banking", "turning", "deceleration", "damping_height"
@@ -63,7 +66,7 @@ public class toolkit extends script.base_script
                 broadcast(player, "You must near a garage bay to apply this tune-up.");
                 return SCRIPT_CONTINUE;
             }
-            if (vehicle.getMaximumSpeed(vehicle.getMountId(player)) > 100)
+            if (vehicle.getMaximumSpeed(vehicle.getMountId(player)) > VEH_MAX_SPEED)
             {
                 broadcast(player, "Your vehicle cannot possibly accept any more tuning.");
                 return SCRIPT_CONTINUE;
@@ -120,14 +123,6 @@ public class toolkit extends script.base_script
             }
             listAndSaveAllModifiers(self, player);
             obj_id cod = getCrafter(self);
-            if (cod != player)
-            {
-                depositCashToBank(cod, PAYOUT_AMOUNT, null, null, null);
-            }
-            else
-            {
-                sendSystemMessage(player, "You have tuned this vehicle.", null);
-            }
             if (getCount(self) > 1)
             {
                 setCount(self, getCount(self) - 1);
@@ -136,7 +131,6 @@ public class toolkit extends script.base_script
             {
                 destroyObject(self);
             }
-
         }
         if (item == menu_info_types.SERVER_MENU2)
         {
@@ -234,7 +228,7 @@ public class toolkit extends script.base_script
         setObjVar(self, "mechanic.toolkit." + type, true);
     }
 
-    public void setToolkitPower(obj_id self, float power) throws InterruptedException
+    public void setToolkitPower(obj_id self, float power)
     {
         setObjVar(self, "mechanic.modifier", power);
     }
@@ -254,27 +248,44 @@ public class toolkit extends script.base_script
 
     public void listAndSaveAllModifiers(obj_id self, obj_id player) throws InterruptedException
     {
+        String vehicleType = getShortenTemplateName(self, getMountId(player));
         if (!vehicle.isRidingVehicle(player))
         {
             broadcast(player, "You must be in your vehicle to save your diagnostics.");
         }
         obj_id veh_id = getMountId(player);
+        obj_id vehicleControlDevice = callable.getCallableCD(self);
         float minspeed = vehicle.getMinimumSpeed(veh_id);
+        setObjVar(vehicleControlDevice, MECHANIC_VAR + "." + vehicleType + ".minspeed", minspeed);
         float maxspeed = vehicle.getMaximumSpeed(veh_id);
+        setObjVar(vehicleControlDevice, MECHANIC_VAR + "." + vehicleType + ".maxspeed", maxspeed);
         float height = vehicle.getHoverHeight(veh_id);
+        setObjVar(vehicleControlDevice, MECHANIC_VAR + "." + vehicleType + ".height", height);
         float acceleration = vehicle.getAccelMin(veh_id);
+        setObjVar(vehicleControlDevice, MECHANIC_VAR + "." + vehicleType + ".acceleration", acceleration);
         float accelerationmax = vehicle.getAccelMax(veh_id);
+        setObjVar(vehicleControlDevice, MECHANIC_VAR + "." + vehicleType + ".accelerationmax", accelerationmax);
         float banking = vehicle.getBankingAngle(veh_id);
+        setObjVar(vehicleControlDevice, MECHANIC_VAR + "." + vehicleType + ".banking", banking);
         float turning = vehicle.getTurnRateMin(veh_id);
+        setObjVar(vehicleControlDevice, MECHANIC_VAR + "." + vehicleType + ".turning", turning);
         float turning_max = vehicle.getTurnRateMax(veh_id);
+        setObjVar(vehicleControlDevice, MECHANIC_VAR + "." + vehicleType + ".turning_max", turning_max);
         float deceleration = vehicle.getDecel(veh_id);
+        setObjVar(vehicleControlDevice, MECHANIC_VAR + "." + vehicleType + ".deceleration", deceleration);
         float glide = vehicle.getGlide(veh_id);
+        setObjVar(vehicleControlDevice, MECHANIC_VAR + "." + vehicleType + ".glide", glide);
         float autolevel = vehicle.getAutoLevelling(veh_id);
+        setObjVar(vehicleControlDevice, MECHANIC_VAR + "." + vehicleType + ".autolevel", autolevel);
         float dampingheight = vehicle.getDampingHeight(veh_id);
+        setObjVar(vehicleControlDevice, MECHANIC_VAR + "." + vehicleType + ".dampingheight", dampingheight);
         float dampingpitch = vehicle.getDampingPitch(veh_id);
+        setObjVar(vehicleControlDevice, MECHANIC_VAR + "." + vehicleType + ".dampingpitch", dampingpitch);
         float dampingroll = vehicle.getDampingRoll(veh_id);
+        setObjVar(vehicleControlDevice, MECHANIC_VAR + "." + vehicleType + ".dampingroll", dampingroll);
         boolean strafe = vehicle.getStrafe(veh_id);
-        broadcast(player, "All modifiers saved.");
+        setObjVar(vehicleControlDevice, MECHANIC_VAR + "." + vehicleType + ".strafe", strafe);
+        broadcast(player, "Vehicle diagnostics saved.");
 
     }
 
@@ -422,5 +433,12 @@ public class toolkit extends script.base_script
             }
         }
         return true;
+    }
+    public String getShortenTemplateName(obj_id self, obj_id vehicle)
+    {
+        String template = getTemplateName(vehicle);
+        template = template.replaceAll("object/mobile/vehicle/shared_", "");
+        template = template.replaceAll(".iff", "");
+        return template;
     }
 }
