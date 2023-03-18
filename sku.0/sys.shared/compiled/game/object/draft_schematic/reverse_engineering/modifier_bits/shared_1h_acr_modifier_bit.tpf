@@ -14,5 +14,5 @@ slots = [
 
 craftedSharedTemplate = "object/tangible/component/reverse_engineering/modifier_bits/shared_1h_acr_modifier_bit.iff"
 
-class intangible_object_template 0
-class object_template 5
+@class intangible_object_template 0
+@class object_template 5
