@@ -1,0 +1,18 @@
+@base object/draft_schematic/base/shared_base_draft_schematic.iff
+
+@class draft_schematic_object_template 2
+
+attributes = [
+	[name = "crafting" "hitPoints", experiment = "" "", value = 800..1100],
+	[name = "crafting" "complexity", experiment = "" "", value = 4..4],
+	[name = "crafting" "xp", experiment = "" "", value = 50..50]]
+
+slots = [
+	[name = "craft_reverse_engineering_ingredients_n" "bit_core", hardpoint = ""],
+	[name = "craft_reverse_engineering_ingredients_n" "junk_loot_one", hardpoint = ""],
+	[name = "craft_reverse_engineering_ingredients_n" "junk_loot_two", hardpoint = ""]]
+
+craftedSharedTemplate = "object/tangible/component/reverse_engineering/modifier_bits/shared_1h_acr_modifier_bit.iff"
+
+class intangible_object_template 0
+class object_template 5

@@ -1995,5 +1995,6 @@ craftFurnitureGroupE	object/draft_schematic/furniture/tarkin_custom/door_panel_s
 craftFurnitureGroupE	object/draft_schematic/furniture/tarkin_custom/door_panel_schematic_09.iff 
 craftFurnitureGroupE	object/draft_schematic/furniture/tarkin_custom/wall_panel_schematic_10.iff 
 craftFurnitureGroupE	object/draft_schematic/furniture/tarkin_custom/floor_schematic_07.iff 
-craftFurnitureGroupE	object/draft_schematic/furniture/tarkin_custom/floor_schematic_08.iff 
+craftFurnitureGroupE	object/draft_schematic/furniture/tarkin_custom/floor_schematic_08.iff
+craftModBitsGroupB	object/draft_schematic/reverse_engineering/modifier_bits/1h_acr_modifier_bit.iff
 end	end
