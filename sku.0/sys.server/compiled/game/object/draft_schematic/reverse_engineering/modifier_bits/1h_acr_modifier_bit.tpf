@@ -10,23 +10,23 @@ craftedObjectTemplate = "object/tangible/component/reverse_engineering/modifier_
 slots = [
 	[
 	optional = false,
-	name = "craft_reverse_engineering_ingredients_n" "bit_core",
+	name = "craft_item_ingredients_n" "bit_core",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "bit_core", ingredient="metal", count=8]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "bit_core", ingredient="metal", count=8]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0],
 	[
 	optional = false,
-	name = "craft_reverse_engineering_ingredients_n" "junk_loot_one",
+	name = "craft_item_ingredients_n" "junk_loot_one",
 	options = [
-		[ingredientType=IT_template, ingredients = [[name="craft_reverse_engineering_ingredients_n" "junk_loot_one", ingredient="item_junk_droid_6thru10_01_04", count=1]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_template, ingredients = [[name="craft_item_ingredients_n" "junk_loot_one", ingredient="item_junk_droid_6thru10_01_04", count=1]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
     complexity = 0],
     [
     optional = false,
-    name = "craft_reverse_engineering_ingredients_n" "junk_loot_two",
+    name = "craft_item_ingredients_n" "junk_loot_two",
     options = [
-    	[ingredientType=IT_template, ingredients = [[name="craft_reverse_engineering_ingredients_n" "junk_loot_two", ingredient="item_junk_npc_16thru20_01_04", count=1]], complexity = 0, skillCommand = "unskilled"]],
+    	[ingredientType=IT_template, ingredients = [[name="craft_item_ingredients_n" "junk_loot_two", ingredient="item_junk_npc_16thru20_01_04", count=1]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
        complexity = 0]]
 
