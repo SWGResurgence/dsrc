@@ -1,0 +1,9 @@
+@base object/tangible/component/base/shared_weapon_core_base.iff
+
+@class tangible_object_template 10
+@class object_template 10
+
+objectName = "reverse_engineering/components_n"  "core_unit"
+detailedDescription = "reverse_engineering/components_d" "core_unit"
+
+appearanceFilename = "appearance/eqp_weapon_ranged_core.apt"

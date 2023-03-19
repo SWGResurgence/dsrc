@@ -1,0 +1,63 @@
+@base object/draft_schematic/item/base_item_schematic.iff
+@class draft_schematic_object_template 7
+
+itemsPerContainer = 100
+
+category = CT_misc
+
+craftedObjectTemplate = "object/tangible/component/reverse_engineering/modifier_bits/subs/modifier_assembly_unit.iff"
+
+slots = [
+	[
+	optional=false,
+	name = craft_reverse_engineering_ingredients_n" "assembly_enclosure",
+	options = [
+	    [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "assembly_enclosure", ingredient="metal_ferrous", count=100]], complexity = 0, skillCommand = "unskilled"]],
+	optionalSkillCommand = "",
+	complexity = 0,
+	appearance = "" ],
+	[
+    optional=false,
+    name = craft_reverse_engineering_ingredients_n" "assembly_frame",
+    options = [
+        [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "assembly_frame", ingredient="steel", count=75]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0,
+    appearance = "" ],
+    [
+    optional=false,
+    name = craft_reverse_engineering_ingredients_n" "assembly_lattice",
+    options = [
+        [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "assembly_lattice", ingredient="copper", count=50]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0,
+    appearance = "" ],
+    [
+    optional=false,
+    name = craft_reverse_engineering_ingredients_n" "assembly_machinery",
+    options = [
+        [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "assembly_machinery", ingredient="copper_diatium", count=35]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0,
+    appearance = "" ],
+    [
+    optional=false,
+    name = craft_reverse_engineering_ingredients_n" "assembly_mounting_lattice",
+    options = [
+        [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "assembly_mounting_lattice", ingredient="petrochem_inert_polymer", count=25]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0,
+    appearance = "" ]]
+
+skillCommands = ["unskilled"]
+
+manufactureScripts = [ "systems.crafting.item.specific_item.crafting_station_item" ]
+
+@class intangible_object_template 0
+@class object_template 5
+
+complexity = 2
+
+sharedTemplate = "object/draft_schematic/reverse_engineering/modifier_bits/components/shared_modifier_assembly_unit.iff"
+
+volume = 1

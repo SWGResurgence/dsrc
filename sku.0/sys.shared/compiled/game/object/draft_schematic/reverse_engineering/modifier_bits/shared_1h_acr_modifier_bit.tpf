@@ -8,9 +8,15 @@ attributes = [
 	[name = "crafting" "xp", experiment = "" "", value = 50..50]]
 
 slots = [
-	[name = "craft_item_ingredients_n" "bit_core", hardpoint = ""],
-	[name = "craft_item_ingredients_n" "junk_loot_one", hardpoint = ""],
-	[name = "craft_item_ingredients_n" "junk_loot_two", hardpoint = ""]]
+	[name = "craft_reverse_engineering_ingredients_n" "modifier_data_storage_unit, hardpoint = ""],
+	[name = "craft_reverse_engineering_ingredients_n" "modifier_durasteel_alloy", hardpoint = ""],
+	[name = "craft_reverse_engineering_ingredients_n" "modifier_hardening_compound", hardpoint = ""],
+    [name = "craft_reverse_engineering_ingredients_n" "modifier_restorative_chemicals", hardpoint = ""],
+	[name = "craft_reverse_engineering_ingredients_n" "modifier_assembly_unit", hardpoint = ""],
+	[name = "craft_reverse_engineering_ingredients_n" "modifier_capacitor_unit", hardpoint = ""],
+	[name = "craft_reverse_engineering_ingredients_n" "modifier_charge_unit", hardpoint = ""],
+    [name = "craft_reverse_engineering_ingredients_n" "modifier_core_unit", hardpoint = ""],
+	[name = "craft_reverse_engineering_ingredients_n" "modifier_radioactive_isotope", hardpoint = ""],
 
 craftedSharedTemplate = "object/tangible/component/reverse_engineering/modifier_bits/shared_1h_acr_modifier_bit.iff"
 

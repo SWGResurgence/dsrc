@@ -1,0 +1,6 @@
+@base object/tangible/component/base/base_component.iff
+
+@class tangible_object_template 1
+@class object_template 5
+
+sharedTemplate = "object/tangible/component/reverse_engineering/modifier_bits/subs/shared_modifier_assembly_unit"

@@ -10,25 +10,67 @@ craftedObjectTemplate = "object/tangible/component/reverse_engineering/modifier_
 slots = [
 	[
 	optional = false,
-	name = "craft_item_ingredients_n" "bit_core",
+	name = "craft_reverse_engineering_ingredients_n" "modifier_data_storage_unit",
 	options = [
-		[ingredientType=IT_resourceClass, ingredients = [[name="craft_item_ingredients_n" "bit_core", ingredient="metal", count=8]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "modifier_data_storage_unit", ingredient="metal", count=100]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
 	complexity = 0],
 	[
 	optional = false,
-	name = "craft_item_ingredients_n" "junk_loot_one",
+	name = "craft_reverse_engineering_ingredients_n" "modifier_durasteel_alloy",
 	options = [
-		[ingredientType=IT_template, ingredients = [[name="craft_item_ingredients_n" "junk_loot_one", ingredient="item_junk_droid_6thru10_01_04", count=1]], complexity = 0, skillCommand = "unskilled"]],
+		[ingredientType=IT_template, ingredients = [[name="craft_reverse_engineering_ingredients_n" "modifier_durasteel_alloy", ingredient="steel_duralloy", count=200]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
     complexity = 0],
     [
     optional = false,
-    name = "craft_item_ingredients_n" "junk_loot_two",
+    name = "craft_reverse_engineering_ingredients_n" "modifier_hardening_compound",
     options = [
-    	[ingredientType=IT_template, ingredients = [[name="craft_item_ingredients_n" "junk_loot_two", ingredient="item_junk_npc_16thru20_01_04", count=1]], complexity = 0, skillCommand = "unskilled"]],
+    	[ingredientType=IT_template, ingredients = [[name="craft_reverse_engineering_ingredients_n" "modifier_hardening_compound", ingredient="fiberplast_gravitonic", count=100]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
-       complexity = 0]]
+    complexity = 0],
+    [
+    optional = false,
+    name = "craft_reverse_engineering_ingredients_n" "modifier_restorative_chemicals",
+    options = [
+    	[ingredientType=IT_template, ingredients = [[name="craft_reverse_engineering_ingredients_n" "modifier_hardening_compound", ingredient="petrochem_inert_polymer", count=100]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0],
+    [
+    optional = false,
+    name = "craft_reverse_engineering_ingredients_n" "modifier_radioactive_isotope",
+    options = [
+       	[ingredientType=IT_template, ingredients = [[name="craft_reverse_engineering_ingredients_n" "modifier_radioactive_isotope", ingredient="radioactive_polymetric", count=1]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0]
+    [
+    optional = false,
+    name = "craft_reverse_engineering_ingredients_n" "modifier_assembly_unit",
+    options = [
+       	[ingredientType=IT_template, ingredients = [[name="craft_reverse_engineering_ingredients_n" "modifier_assembly_unit", ingredient="object/component/reverse_engineering/modifier_bits/subs/modifier_assembly_unit.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0],
+    [
+    optional = false,
+    name = "craft_reverse_engineering_ingredients_n" "modifier_capacitor_unit",
+    options = [
+       	[ingredientType=IT_template, ingredients = [[name="craft_reverse_engineering_ingredients_n" "modifier_capacitor_unit", ingredient="object/component/reverse_engineering/modifier_bits/subs/modifier_capacitor_unit.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0],
+    [
+    optional = false,
+    name = "craft_reverse_engineering_ingredients_n" "modifier_charge_unit",
+    options = [
+       	[ingredientType=IT_template, ingredients = [[name="craft_reverse_engineering_ingredients_n" "modifier_charge_unit", ingredient="object/component/reverse_engineering/modifier_bits/subs/modifier_charge_unit.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0],
+    [
+    optional = false,
+    name = "craft_reverse_engineering_ingredients_n" "modifier_core_unit",
+    options = [
+       	[ingredientType=IT_template, ingredients = [[name="craft_reverse_engineering_ingredients_n" "modifier_core_unit", ingredient="object/component/reverse_engineering/modifier_bits/subs/modifier_core_unit.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
+    optionalSkillCommand = "",
+    complexity = 0]]
 
 skillCommands = ["unskilled"]
 
@@ -39,6 +81,6 @@ manufactureScripts = [ "systems.crafting.item.specific_item.reverse_engineering.
 
 complexity = 4
 
-sharedTemplate = "object/draft_schematic/reverse_engineering/modifier_bits/1h_acr_modifier_bit.iff"
+sharedTemplate = "object/draft_schematic/reverse_engineering/modifier_bits/shared_1h_acr_modifier_bit.iff"
 
 volume = 1
