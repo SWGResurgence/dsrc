@@ -157,6 +157,10 @@ public class sign extends script.base_script
                     commPlayer(player, player, pp);
                     return SCRIPT_CONTINUE;
                 }
+                else
+                {
+                    broadcast(player, "There is no one inside this structure.");
+                }
                 for (obj_id occupant : occupants)
                 {
 
