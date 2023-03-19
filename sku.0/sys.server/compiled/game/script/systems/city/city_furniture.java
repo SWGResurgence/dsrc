@@ -24,6 +24,7 @@ public class city_furniture extends script.base_script
     public static final string_id SID_MOVE_DOWN = new string_id("Move Down");
     public static final string_id SID_MOVE_TO_ME = new string_id("Move Decoration to Self");
     public static final string_id SID_MOVE_TO_Y = new string_id("Move Decoration to Ground");
+    public static final string_id SID_FACE_ME = new string_id("Face Decoration to Self");
     public static final string_id SID_NAME = new string_id("Set Decoration Name");
     public static final string_id NO_SKILL_DECO = new string_id("You do not have the skill to place this decoration.");
     public static final String CITY_DECORATIONS = "datatables/city/decorations.iff";
@@ -131,6 +132,7 @@ public class city_furniture extends script.base_script
                 mi.addSubMenu(movement, menu_info_types.SERVER_MENU16, SID_MOVE_DOWN);
                 mi.addSubMenu(movement, menu_info_types.SERVER_MENU17, SID_MOVE_TO_ME);
                 mi.addSubMenu(movement, menu_info_types.SERVER_MENU19, SID_MOVE_TO_Y);
+                mi.addSubMenu(movement, menu_info_types.SERVER_MENU40, SID_FACE_ME);
                 if (!utils.isNestedWithinAPlayer(player))
                 {
                     if (canManipulate(self, player))
@@ -282,6 +284,10 @@ public class city_furniture extends script.base_script
         else if (item == menu_info_types.SERVER_MENU18)
         {
             snapToGround(self);
+        }
+        else if (item == menu_info_types.SERVER_MENU40)
+        {
+            faceTo(self, player);
         }
         return SCRIPT_CONTINUE;
     }
