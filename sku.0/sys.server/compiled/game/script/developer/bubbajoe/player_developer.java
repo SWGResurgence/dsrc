@@ -826,7 +826,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectlocatloc <effect name> <x> <y> <z>");
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectatloc <effect name> <x> <y> <z>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -882,7 +882,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundloc <sound name>");
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundeveryone <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1324,6 +1324,7 @@ public class player_developer extends base_script
             obj_id entertainer = createObject(TEMPLATES[rand(0, TEMPLATES.length - 1)], getLocation(self));
             setName(entertainer, "a Master Entertainer");
             setInvulnerable(entertainer, true);
+            attachScript(entertainer, "ai.ai");
             ai_lib.setMood(entertainer, "themepark_oola");
             attachScript(entertainer, "bot.entertainer");
         }
