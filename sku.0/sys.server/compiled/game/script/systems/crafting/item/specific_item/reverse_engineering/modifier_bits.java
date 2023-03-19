@@ -1,16 +1,14 @@
-package script.systems.crafting.item.specific_item;
+package script.systems.crafting.item.specific_item.reverse_engineering;
 
-import script.dictionary;
 import script.library.craftinglib;
-import script.obj_id;
 import script.resource_weight;
 
 
 
-public class reverse_engineering_modifier_bits extends script.systems.crafting.item.crafting_base_item_component
+public class modifier_bits extends script.systems.crafting.item.crafting_base_item_component
 
 {
-    public reverse_engineering_modifier_bits()
+    public modifier_bits()
     {
     }
     public static final String VERSION = "v0.00.00";
