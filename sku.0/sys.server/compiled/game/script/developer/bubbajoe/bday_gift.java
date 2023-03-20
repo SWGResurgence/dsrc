@@ -98,7 +98,7 @@ public class bday_gift extends script.base_script
             }
             else
             {
-                broadcast(player, "You probably should refridgerate this slice of cake. ");
+                broadcast(player, "You probably should refridgerate this slice of cake.");
             }
         }
         return SCRIPT_CONTINUE;
