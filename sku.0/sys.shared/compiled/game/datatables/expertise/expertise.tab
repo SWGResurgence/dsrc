@@ -816,6 +816,7 @@ expertise_trader_harvester_maintenance_1	29	3	5	1			trader
 expertise_trader_factory_energy_1	29	4	3	1			trader
 expertise_trader_factory_energy_2	29	4	3	2			trader
 expertise_trader_harvester_energy_1	29	4	5	1			trader
+expertise_trader_harvester_energy_2	29	4	5	2			trader
 expertise_trader_factory_production_1	29	5	3	1			trader
 expertise_domestic_tailor_dexterity_1	25	1	1	1			trader_dom
 expertise_domestic_artisan_dexterity_1	25	1	4	1			trader_dom
