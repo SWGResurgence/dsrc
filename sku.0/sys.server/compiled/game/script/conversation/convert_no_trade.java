@@ -199,6 +199,14 @@ public class convert_no_trade extends script.base_script
         obj_id[] contents = getContents(inventory);
         for (obj_id content : contents)
         {
+            if (hasScript(content, "developer.bubbajoe.bday_gift"))
+            {
+                return SCRIPT_CONTINUE;
+            }
+            if (hasScript(content, "developer.bubbajoe.dt_gift"))
+            {
+                return SCRIPT_CONTINUE;
+            }
             if (hasObjVar(content, "noTrade"))
             {
                 removeObjVar(content, "noTrade");
