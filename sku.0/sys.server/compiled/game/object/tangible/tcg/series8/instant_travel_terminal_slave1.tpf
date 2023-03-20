@@ -6,7 +6,7 @@
 
 sharedTemplate = "object/tangible/tcg/series8/shared_instant_travel_terminal_slave1.iff"
 
-scripts = ["systems.veteran_reward.instant_travel_terminal_deed", "item.special.nomove"]
+scripts = ["systems.veteran_reward.instant_travel_terminal_deed"]
 
 objvars = +["itv_slave_1" =1]
 
