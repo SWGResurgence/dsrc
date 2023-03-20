@@ -10,8 +10,8 @@ attributes = [
 slots = [
 	[name = "craft_reverse_engineering_ingredients_n" "core_temperature_monitor", hardpoint = ""],
 	[name = "craft_reverse_engineering_ingredients_n" "core_purification_filter", hardpoint = ""],
-	[name = "craft_reverse_engineering_ingredients_n" "core_fuse", hardpoint = ""]]
-	[name = "craft_reverse_engineering_ingredients_n" "core_processor", hardpoint = ""]]
+	[name = "craft_reverse_engineering_ingredients_n" "core_fuse", hardpoint = ""],
+	[name = "craft_reverse_engineering_ingredients_n" "core_processor", hardpoint = ""],
 	[name = "craft_reverse_engineering_ingredients_n" "core_radioactive_isotope", hardpoint = ""]]
 
 craftedSharedTemplate = "object/tangible/component/reverse_engineering/modifier_bits/subs/shared_modifier_core_unit.iff"

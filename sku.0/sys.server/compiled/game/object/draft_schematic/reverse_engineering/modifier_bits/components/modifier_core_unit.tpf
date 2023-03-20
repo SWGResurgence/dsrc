@@ -10,7 +10,7 @@ craftedObjectTemplate = "object/tangible/component/reverse_engineering/modifier_
 slots = [
 	[
 	optional=false,
-	name = craft_reverse_engineering_ingredients_n" "core_temperature_monitor",
+	name = "craft_reverse_engineering_ingredients_n" "core_temperature_monitor",
 	options = [
 	    [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "core_temperature_monitor", ingredient="metal_ferrous", count=100]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
@@ -18,7 +18,7 @@ slots = [
 	appearance = "" ],
 	[
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "core_purification_filter",
+    name = "craft_reverse_engineering_ingredients_n" "core_purification_filter",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "core_purification_filter", ingredient="steel", count=75]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
@@ -26,7 +26,7 @@ slots = [
     appearance = "" ],
     [
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "core_fuse",
+    name = "craft_reverse_engineering_ingredients_n" "core_fuse",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "core_fuse", ingredient="copper", count=50]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
@@ -34,7 +34,7 @@ slots = [
     appearance = "" ],
     [
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "core_processor",
+    name = "craft_reverse_engineering_ingredients_n" "core_processor",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "core_processor", ingredient="copper_diatium", count=35]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
@@ -42,7 +42,7 @@ slots = [
     appearance = "" ],
     [
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "core_radioactive_isotope",
+    name = "craft_reverse_engineering_ingredients_n" "core_radioactive_isotope",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "core_radioactive_isotope", ingredient="object/tangible/component/reverse_engineering/modifier_bits/components/modifier_radioactive_isotope.iff", count=1]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",

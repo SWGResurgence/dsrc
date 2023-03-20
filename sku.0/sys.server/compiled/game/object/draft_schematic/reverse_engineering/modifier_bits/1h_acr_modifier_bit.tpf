@@ -42,7 +42,7 @@ slots = [
     options = [
        	[ingredientType=IT_template, ingredients = [[name="craft_reverse_engineering_ingredients_n" "modifier_radioactive_isotope", ingredient="radioactive_polymetric", count=1]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
-    complexity = 0]
+    complexity = 0],
     [
     optional = false,
     name = "craft_reverse_engineering_ingredients_n" "modifier_assembly_unit",

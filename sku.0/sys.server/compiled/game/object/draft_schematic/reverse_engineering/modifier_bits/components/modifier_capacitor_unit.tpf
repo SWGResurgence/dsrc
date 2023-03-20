@@ -10,7 +10,7 @@ craftedObjectTemplate = "object/tangible/component/reverse_engineering/modifier_
 slots = [
 	[
 	optional=false,
-	name = craft_reverse_engineering_ingredients_n" "capacitor_battery",
+	name = "craft_reverse_engineering_ingredients_n" "capacitor_battery",
 	options = [
 	    [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "capacitor_battery", ingredient="copper", count=100]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
@@ -18,7 +18,7 @@ slots = [
 	appearance = "" ],
 	[
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "capacitor_bank",
+    name = "craft_reverse_engineering_ingredients_n" "capacitor_bank",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "capacitor_bank", ingredient="fuel_petrochem_solid_known", count=75]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
@@ -26,7 +26,7 @@ slots = [
     appearance = "" ],
     [
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "capacitor_core_charge",
+    name = "craft_reverse_engineering_ingredients_n" "capacitor_core_charge",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "capacitor_core_charge", ingredient="fuel_petrochem_solid_known", count=50]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
@@ -34,7 +34,7 @@ slots = [
     appearance = "" ],
     [
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "capacitor_outer_shielding",
+    name = "craft_reverse_engineering_ingredients_n" "capacitor_outer_shielding",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "capacitor_outer_shielding", ingredient="fuel_petrochem_solid", count=35]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
@@ -42,7 +42,7 @@ slots = [
     appearance = "" ],
     [
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "capacitor_inner_shielding",
+    name = "craft_reverse_engineering_ingredients_n" "capacitor_inner_shielding",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "assembly_mounting_lattice", ingredient="fuel_petrochem_solid", count=25]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",

@@ -10,8 +10,8 @@ attributes = [
 slots = [
 	[name = "craft_reverse_engineering_ingredients_n" "assembly_enclosure", hardpoint = ""],
 	[name = "craft_reverse_engineering_ingredients_n" "assembly_frame", hardpoint = ""],
-	[name = "craft_reverse_engineering_ingredients_n" "assembly_lattice", hardpoint = ""]]
-	[name = "craft_reverse_engineering_ingredients_n" "assembly_machinery", hardpoint = ""]]
+	[name = "craft_reverse_engineering_ingredients_n" "assembly_lattice", hardpoint = ""],
+	[name = "craft_reverse_engineering_ingredients_n" "assembly_machinery", hardpoint = ""],
 	[name = "craft_reverse_engineering_ingredients_n" "assembly_mounting_lattice", hardpoint = ""]]
 
 craftedSharedTemplate = "object/tangible/component/reverse_engineering/modifier_bits/subs/shared_modifier_assembly_unit.iff"

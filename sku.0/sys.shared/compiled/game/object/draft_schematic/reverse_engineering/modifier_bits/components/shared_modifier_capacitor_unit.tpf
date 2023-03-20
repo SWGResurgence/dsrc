@@ -10,8 +10,8 @@ attributes = [
 slots = [
 	[name = "craft_reverse_engineering_ingredients_n" "capacitor_battery", hardpoint = ""],
 	[name = "craft_reverse_engineering_ingredients_n" "capacitor_bank", hardpoint = ""],
-	[name = "craft_reverse_engineering_ingredients_n" "capacitor_core_charge", hardpoint = ""]]
-	[name = "craft_reverse_engineering_ingredients_n" "capacitor_inner_shielding", hardpoint = ""]]
+	[name = "craft_reverse_engineering_ingredients_n" "capacitor_core_charge", hardpoint = ""],
+	[name = "craft_reverse_engineering_ingredients_n" "capacitor_inner_shielding", hardpoint = ""],
 	[name = "craft_reverse_engineering_ingredients_n" "capacitor_outer_shielding", hardpoint = ""]]
 
 craftedSharedTemplate = "object/tangible/component/reverse_engineering/modifier_bits/subs/shared_modifier_capacitor_unit.iff"

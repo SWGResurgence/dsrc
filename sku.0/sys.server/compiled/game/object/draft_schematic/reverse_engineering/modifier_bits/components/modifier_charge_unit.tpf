@@ -10,7 +10,7 @@ craftedObjectTemplate = "object/tangible/component/reverse_engineering/modifier_
 slots = [
 	[
 	optional=false,
-	name = craft_reverse_engineering_ingredients_n" "charge_accumator",
+	name = "craft_reverse_engineering_ingredients_n" "charge_accumator",
 	options = [
 	    [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "charge_accumator", ingredient="aluminum_titanium", count=100]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
@@ -18,7 +18,7 @@ slots = [
 	appearance = "" ],
 	[
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "charge_thermal_regulation_medium",
+    name = "craft_reverse_engineering_ingredients_n" "charge_thermal_regulation_medium",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "charge_thermal_regulation_medium", ingredient="petrochem_inert_polymer", count=75]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
@@ -26,7 +26,7 @@ slots = [
     appearance = "" ],
     [
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "charge_filtering_prism",
+    name = "craft_reverse_engineering_ingredients_n" "charge_filtering_prism",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "charge_filtering_prism", ingredient="chemical", count=50]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
@@ -34,7 +34,7 @@ slots = [
     appearance = "" ],
     [
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "charge_leak_containment_arrester",
+    name = "craft_reverse_engineering_ingredients_n" "charge_leak_containment_arrester",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "charge_leak_containment_arrester", ingredient="steel_duralloy", count=35]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
@@ -42,7 +42,7 @@ slots = [
     appearance = "" ],
     [
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "charge_neutralization_barrier",
+    name = "craft_reverse_engineering_ingredients_n" "charge_neutralization_barrier",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "charge_neutralization_barrier", ingredient="iron_polonium", count=25]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
@@ -50,7 +50,7 @@ slots = [
     appearance = "" ],
     [
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "charge_retention_mass",
+    name = "craft_reverse_engineering_ingredients_n" "charge_retention_mass",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "charge_retention_mass", ingredient="gas_reactive", count=25]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",

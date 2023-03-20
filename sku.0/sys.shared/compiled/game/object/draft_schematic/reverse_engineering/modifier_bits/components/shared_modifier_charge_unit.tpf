@@ -10,9 +10,9 @@ attributes = [
 slots = [
 	[name = "craft_reverse_engineering_ingredients_n" "charge_accumator", hardpoint = ""],
 	[name = "craft_reverse_engineering_ingredients_n" "charge_thermal_regulation_medium", hardpoint = ""],
-	[name = "craft_reverse_engineering_ingredients_n" "charge_filtering_prism", hardpoint = ""]]
-	[name = "craft_reverse_engineering_ingredients_n" "charge_leak_containment_arrestor", hardpoint = ""]]
-	[name = "craft_reverse_engineering_ingredients_n" "charge_neutralization_barrier", hardpoint = ""]]
+	[name = "craft_reverse_engineering_ingredients_n" "charge_filtering_prism", hardpoint = ""],
+	[name = "craft_reverse_engineering_ingredients_n" "charge_leak_containment_arrestor", hardpoint = ""],
+	[name = "craft_reverse_engineering_ingredients_n" "charge_neutralization_barrier", hardpoint = ""],
 	[name = "craft_reverse_engineering_ingredients_n" "charge_retention_mass", hardpoint = ""]]
 
 craftedSharedTemplate = "object/tangible/component/reverse_engineering/modifier_bits/subs/shared_modifier_charge_unit.iff"

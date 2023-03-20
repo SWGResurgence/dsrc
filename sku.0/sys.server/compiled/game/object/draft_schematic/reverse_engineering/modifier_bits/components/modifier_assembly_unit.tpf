@@ -10,7 +10,7 @@ craftedObjectTemplate = "object/tangible/component/reverse_engineering/modifier_
 slots = [
 	[
 	optional=false,
-	name = craft_reverse_engineering_ingredients_n" "assembly_enclosure",
+	name = "craft_reverse_engineering_ingredients_n" "assembly_enclosure",
 	options = [
 	    [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "assembly_enclosure", ingredient="metal_ferrous", count=100]], complexity = 0, skillCommand = "unskilled"]],
 	optionalSkillCommand = "",
@@ -18,7 +18,7 @@ slots = [
 	appearance = "" ],
 	[
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "assembly_frame",
+    name = "craft_reverse_engineering_ingredients_n" "assembly_frame",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "assembly_frame", ingredient="steel", count=75]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
@@ -26,7 +26,7 @@ slots = [
     appearance = "" ],
     [
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "assembly_lattice",
+    name = "craft_reverse_engineering_ingredients_n" "assembly_lattice",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "assembly_lattice", ingredient="copper", count=50]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
@@ -34,7 +34,7 @@ slots = [
     appearance = "" ],
     [
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "assembly_machinery",
+    name = "craft_reverse_engineering_ingredients_n" "assembly_machinery",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "assembly_machinery", ingredient="copper_diatium", count=35]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
@@ -42,7 +42,7 @@ slots = [
     appearance = "" ],
     [
     optional=false,
-    name = craft_reverse_engineering_ingredients_n" "assembly_mounting_lattice",
+    name = "craft_reverse_engineering_ingredients_n" "assembly_mounting_lattice",
     options = [
         [ingredientType=IT_resourceClass, ingredients = [[name="craft_reverse_engineering_ingredients_n" "assembly_mounting_lattice", ingredient="petrochem_inert_polymer", count=25]], complexity = 0, skillCommand = "unskilled"]],
     optionalSkillCommand = "",
