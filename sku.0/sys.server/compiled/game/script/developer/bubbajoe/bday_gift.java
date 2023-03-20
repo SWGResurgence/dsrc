@@ -18,6 +18,7 @@ public class bday_gift extends script.base_script
     public static String NULL_DESC_PREFIX = "Cut from the most beautiful cake Master Abbub has ever made, this tasty slice will make you feel all cozy inside. \n\n\\#7FFFD4Happy Birthday, ";
     public int OnAttach(obj_id self)
     {
+        setObjVar(self, "used.timestamp", getGameTime() - COOLDOWN_TIME);
         setName(self, "Slice of Birthday Cake");
         if (hasScript(self, "item.food"))
         {
@@ -36,6 +37,7 @@ public class bday_gift extends script.base_script
 
     public int OnInitialize(obj_id self)
     {
+        setObjVar(self, "used.timestamp", getGameTime() - COOLDOWN_TIME);
         setName(self, "Slice of Birthday Cake");
         if (hasScript(self, "item.food"))
         {
