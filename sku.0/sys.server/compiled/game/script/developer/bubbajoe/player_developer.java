@@ -27,7 +27,7 @@ public class player_developer extends base_script
 
     public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException, InvocationTargetException
     {
-        obj_id iTarget = getIntendedTarget(self);
+        obj_id iTarget = target;
         java.util.StringTokenizer tok = new java.util.StringTokenizer(params);
         String cmd = tok.nextToken();
         if (cmd.equalsIgnoreCase("quest"))
@@ -769,6 +769,15 @@ public class player_developer extends base_script
             {
                 createClientPathAdvanced(player, getLocation(player), getLocation(targetId), "default");
             }
+        }
+        if (cmd.equalsIgnoreCase("awardBirthday"))
+        {
+            obj_id slice = create.createObject("object/tangible/food/crafted/dessert_air_cake.iff", utils.getInventoryContainer(target), "");
+            setName(slice, "Slice of Birthday Cake");
+            setDescriptionStringId(slice, new string_id("Cut from the most beautiful cake Master Abbub has ever made, this tasty slice will make you feel all cozy inside."));
+            attachScript(slice, "developer.bubbajoe.bday_gift");
+            broadcast(target, "Happy Birthday from the SWG: Resurgence Team!");
+
         }
         if (cmd.equalsIgnoreCase("playeffect"))
         {
