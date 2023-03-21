@@ -134,8 +134,10 @@ public class navicomputer_control_device extends script.base_script
             int datastorage = getIntObjVar(self, "dataModuleRating");
         }
         obj_id[] loadedDroidCommands = space_crafting.getDatapadDroidCommands(self);
+
         if ((loadedDroidCommands != null) && (loadedDroidCommands.length > 0))
         {
+
             names[idx] = "droid_program_loaded";
             attribs[idx] = " ";
             idx++;
@@ -143,9 +145,13 @@ public class navicomputer_control_device extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
+
             for (obj_id loadedDroidCommand : loadedDroidCommands) {
+
                 if (hasObjVar(loadedDroidCommand, "strDroidCommand")) {
                     String programName = getStringObjVar(loadedDroidCommand, "strDroidCommand");
+
+
                     names[idx] = "droid_program";
                     attribs[idx] = utils.packStringId(new string_id("space/droid_commands", programName));
                     idx++;
