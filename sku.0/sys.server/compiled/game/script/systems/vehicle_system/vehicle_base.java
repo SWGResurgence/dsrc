@@ -346,19 +346,19 @@ public class vehicle_base extends script.base_script
             names[idx] = "owner";
             attribs[idx] = getStringObjVar(self, "ai.pet.masterName");
             idx++;
-            names[idx] = "speed_min";
+            names[idx] = utils.packStringId(new string_id("Speed (min)"));
             attribs[idx] = String.valueOf(vehicle.getMinimumSpeed(self));
             idx++;
-            names[idx] = "speed_max";
+            names[idx] = utils.packStringId(new string_id("Speed (min)"));
             attribs[idx] = String.valueOf(vehicle.getMaximumSpeed(self));
             idx++;
-            names[idx] = "accel_min";
+            names[idx] = utils.packStringId(new string_id("Acceleration (min)"));
             attribs[idx] = String.valueOf(vehicle.getAccelMin(self));
             idx++;
-            names[idx] = "accel_max";
+            names[idx] = utils.packStringId(new string_id("Acceleration (max)"));
             attribs[idx] = String.valueOf(vehicle.getAccelMin(self));
             idx++;
-            names[idx] = "hover_height";
+            names[idx] = utils.packStringId(new string_id("Hover Height"));
             attribs[idx] = String.valueOf(vehicle.getHoverHeight(self));
             return SCRIPT_CONTINUE;
         }
