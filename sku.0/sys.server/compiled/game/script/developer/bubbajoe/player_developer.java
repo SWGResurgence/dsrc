@@ -11,11 +11,7 @@ import script.library.*;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
-import java.time.Clock;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import static script.systems.city.city_hire.DESC;
 
 public class player_developer extends base_script
 {
@@ -369,6 +365,12 @@ public class player_developer extends base_script
             broadcast(self, "Hash Value: " + hashValue);
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equalsIgnoreCase("convertcrctostring"))
+        {
+            String hash = tok.nextToken();
+
+            return SCRIPT_CONTINUE;
+        }
         if (cmd.equalsIgnoreCase("travel"))
         {
             String which = tok.nextToken();
@@ -589,7 +591,14 @@ public class player_developer extends base_script
             {
                 if (buffName.contains(query))
                 {
-                    buff.applyBuff(target, buffName);
+                    if (buff.isDebuff(buffName))
+                    {
+                        return SCRIPT_CONTINUE;
+                    }
+                    else
+                    {
+                        buff.applyBuff(target, buffName);
+                    }
                     broadcast(self, "Applied " + buffName + " to " + getName(target));
                 }
                 else
@@ -612,6 +621,8 @@ public class player_developer extends base_script
             badSkills.add("utility_beta_demo_combat");
             badSkills.add("utility_beta_demo_combat");
             badSkills.add("utility_player");
+            badSkills.add("swg_dev");
+            badSkills.add("swg_cs");
             String query = tok.nextToken();
             String SKILL_TABLE = "datatables/skill/skills.iff";
             String SKILL_TABLE_COLUMN = "NAME";
@@ -778,6 +789,35 @@ public class player_developer extends base_script
             attachScript(slice, "developer.bubbajoe.bday_gift");
             broadcast(target, "Happy Birthday from the SWG: Resurgence Team!");
 
+        }
+        if (cmd.equals("tableView"))
+        {
+            String DATATABLE_MASTER_ITEM = "datatables/item/master_item/master_item.iff";
+            final String[] columnHeader = {
+                    "name",
+                    "string_name",
+                    "string_detail"
+            };
+            final String[] columnHeaderType = {
+                    "text",
+                    "text",
+                    "text"
+            };
+            int numRows = dataTableGetNumRows(DATATABLE_MASTER_ITEM);
+            int numColumns = dataTableGetNumColumns(DATATABLE_MASTER_ITEM);
+            final String[][] columnData = new String[numRows][numColumns];
+            for (int i = 0; i < numRows; i++)
+            {
+                broadcast(self, String.valueOf(numRows));
+                for (int j = 0; j < numColumns; j++)
+                {
+                    broadcast(self, String.valueOf(numColumns));
+                    String columnName = (columnHeader[j]);
+                    columnData[i][j] = dataTableGetString(DATATABLE_MASTER_ITEM, i, columnName);
+                    broadcast(self, dataTableGetString(DATATABLE_MASTER_ITEM, i, columnName));
+                }
+            }
+            sui.tableColumnMajor(self, self, sui.OK_CANCEL, "DATATABLE VIEWER", "noHandler", "Master Item Table Loaded", columnHeader, columnHeaderType, columnData, true);
         }
         if (cmd.equalsIgnoreCase("playeffect"))
         {
