@@ -449,23 +449,19 @@ public class recycler extends script.base_script
     }
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
-        if (hasObjVar(self, "bday_gift.consumed"))
+        int idx = utils.getValidAttributeIndex(names);
+        int lastUsed = getIntObjVar(self, "used.timestamp");
+        names[idx] = "current_collected";
+        attribs[idx] = getIntObjVar(self, "event.total_recycled") + " pieces of junk.";
+        idx++;
+        if (isGod(player))
         {
-            int idx = utils.getValidAttributeIndex(names);
-            int lastUsed = getIntObjVar(self, "used.timestamp");
-            names[idx] = "current_collected";
-            attribs[idx] = getIntObjVar(self, "event.total_recycled") + " pieces of junk.";
+            names[idx] = "template";
+            attribs[idx] = getStringObjVar(self, "item_to_use");
             idx++;
-            if (isGod(player))
-            {
-                names[idx] = "template";
-                attribs[idx] = getStringObjVar(self, "item_to_use");
-                idx++;
-                names[idx] = "last_recycler";
-                attribs[idx] = getStringObjVar(self, "last_used");
-                idx++;
-            }
-
+            names[idx] = "last_recycler";
+            attribs[idx] = getStringObjVar(self, "last_used");
+            idx++;
         }
         return SCRIPT_CONTINUE;
     }
