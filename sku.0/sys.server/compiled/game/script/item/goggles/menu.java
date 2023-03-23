@@ -192,18 +192,6 @@ public class menu extends script.base_script
             {
                 validGoggles = false;
             }
-            if (!features.isCollectorEdition(owner))
-            {
-                validGoggles = false;
-            }
-            else
-            {
-                obj_id container = getContainedBy(self);
-                if (!(container == inv || container == bank || objOnFace == self))
-                {
-                    validGoggles = false;
-                }
-            }
         }
         if (!validGoggles)
         {
