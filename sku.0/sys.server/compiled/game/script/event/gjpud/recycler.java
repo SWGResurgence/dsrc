@@ -1,5 +1,11 @@
-package script.event.gjpud;
-
+package script.event.gjpud;/*
+@Filename: script.event.gjpud.recycler
+@Author: BubbaJoeX
+@Purpose: GJPUD Mini-event
+@
+@ TODO: add in a reward info menu getting the string name of the static item. Explain rewards rotate.  Add checks to make sure you don't get repeats. Adjust values for scrap trade-in. 25-50 step intervals.
+@
+*/
 import script.*;
 
 import script.library.*;
@@ -22,7 +28,8 @@ public class recycler extends script.base_script
         {
             int menu3 = mi.addRootMenu(menu_info_types.SERVER_MENU2, new string_id("[GodMode] Recycler Menu"));
             mi.addSubMenu(menu3, menu_info_types.SERVER_MENU3, new string_id("Clear Rewards"));
-            mi.addSubMenu(menu3, menu_info_types.SERVER_MENU4, new string_id("Clear Points"));
+            mi.addSubMenu(menu3, menu_info_types.SERVER_MENU4, new string_id("Clear Points (Self)"));
+            mi.addSubMenu(menu3, menu_info_types.SERVER_MENU12, new string_id("Clear Total Scrapped"));
             mi.addSubMenu(menu3, menu_info_types.SERVER_MENU5, new string_id("Set Item to Recycle"));
             int tiersettings = mi.addRootMenu(menu_info_types.SERVER_MENU6, new string_id("[GodMode] Modify Rewards"));
             mi.addSubMenu(tiersettings, menu_info_types.SERVER_MENU7, new string_id("Set Tier 1 Reward"));
@@ -93,7 +100,7 @@ public class recycler extends script.base_script
                 else
                 {
                     int current = getIntObjVar(self, "event.total_recycled");
-                    setObjVar(self, "event.total_recycled", current++);
+                    setObjVar(self, "event.total_recycled", current + 1);
                 }
                 setObjVar(self, "last_used", getPlayerFullName(player));
             }
@@ -167,6 +174,10 @@ public class recycler extends script.base_script
             String buffer = REWARD_SETUP_PROMPT + " 5";
             String title = REWARD_SETUP_TITLE;
             sui.inputbox(self, player, buffer, title, "handleT5Request", t5ToCheck);
+        }
+        if (item == menu_info_types.SERVER_MENU12)
+        {
+            setObjVar(self, "event.total_recycled", 0);
         }
         return SCRIPT_CONTINUE;
     }
@@ -448,16 +459,18 @@ public class recycler extends script.base_script
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
-        int lastUsed = getIntObjVar(self, "used.timestamp");
-        names[idx] = "current_collected";
+        names[idx] = utils.packStringId(new string_id("Total Junk Scrapped"));
         attribs[idx] = getIntObjVar(self, "event.total_recycled") + " pieces of junk.";
         idx++;
         if (isGod(player))
         {
-            names[idx] = "template";
+            names[idx] = utils.packStringId(new string_id("Template To Check"));
             attribs[idx] = getStringObjVar(self, "item_to_use");
             idx++;
-            names[idx] = "last_recycler";
+            names[idx] = utils.packStringId(new string_id("Last Participant"));
+            attribs[idx] = getStringObjVar(self, "last_used");
+            idx++;
+            names[idx] = utils.packStringId(new string_id("Top Participant"));
             attribs[idx] = getStringObjVar(self, "last_used");
             idx++;
         }
