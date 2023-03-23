@@ -207,6 +207,14 @@ public class convert_no_trade extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
+            if (hasScript(content, "item.heroic_token"))
+            {
+                return SCRIPT_CONTINUE;
+            }
+            if (hasScript(content, "item.heroic_token_box"))
+            {
+                return SCRIPT_CONTINUE;
+            }
             if (hasObjVar(content, "noTrade"))
             {
                 removeObjVar(content, "noTrade");
