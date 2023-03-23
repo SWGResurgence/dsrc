@@ -1,8 +1,6 @@
 package script.event.gjpud;
 
 import script.*;
-import script.base_class.*;
-import script.base_script;
 
 import script.library.*;
 
