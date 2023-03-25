@@ -2,6 +2,7 @@ package script.player.base;
 
 import script.*;
 import script.library.*;
+import script.library.gcw;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12361,7 +12362,7 @@ public class base_player extends script.base_script
         if (isGod(player))
         {
             String stationName = getPlayerAccountUsername(self);
-            names[idx] = "station_name";
+            names[idx] = utils.packStringId(new string_id("Station: "));
             attribs[idx] = stationName;
             idx++;
             if (idx >= names.length)
