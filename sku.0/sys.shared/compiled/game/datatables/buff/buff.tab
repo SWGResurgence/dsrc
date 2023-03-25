@@ -2036,3 +2036,4 @@ tcg_hanger_1_buff	tcg_hanger_1_buff			1	buffs.tcg_diner	-1	advanced_assembly	20	
 tcg_hanger_2_buff	tcg_hanger_2_buff			1	buffs.tcg_diner	-1	armor_assembly	40	shield_assembly	20	weapon_systems	20	booster_experimentation	10		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tcg_hanger_3_buff	tcg_hanger_3_buff			1	buffs.tcg_diner	-1	weapon_assembly	40	engine_experimentation	5	power_systems_experimentation	10	shield_experimentation	10		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tcg_hanger_4_buff	tcg_hanger_4_buff			1	buffs.tcg_diner	-1	power_systems	20	chassis_experimentation	10	weapon_systems_experimentation	10	luck_modified	150	station_buff	0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+tcg_merchant_tent_buff	tcg_structure_buff			1	buffs.tcg_diner	7200	surveying	25	creature_harvesting	25	stamina_modified	75																					
