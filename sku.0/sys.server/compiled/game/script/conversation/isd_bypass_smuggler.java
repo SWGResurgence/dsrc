@@ -95,7 +95,7 @@ public class isd_bypass_smuggler extends script.base_script
                 string_id message = new string_id(c_stringFile, "s_6");
                 utils.removeScriptVar(player, "conversation.isd_bypass_smuggler.branchId");
                 npcEndConversationWithMessage(player, message);
-                sui.msgbox(npc, player, "Do you wish to lead your group into Blackguard? This will cost you " + colors_hex.HEADER + colors_hex.AQUAMARINE + " 10,000 credits.\\#.", "handleTransport");
+                sui.msgbox(npc, player, "Do you wish to lead your group into the Blackguard? This will cost you " + colors_hex.HEADER + colors_hex.AQUAMARINE + " 10,000 credits.\\#.", "handleTransport");
                 return SCRIPT_CONTINUE;
             }
 
@@ -338,6 +338,15 @@ public class isd_bypass_smuggler extends script.base_script
     {
         for (obj_id singlePlayer : players)
         {
+            boolean isSmuggler = utils.isProfession(singlePlayer, utils.SMUGGLER);
+            if (isSmuggler)
+            {
+                buff.applyBuff(players, "sm_smuggled");
+            }
+            else
+            {
+                buff.applyBuff(players, "sm_smuggled_01");
+            }
             instance.requestInstanceMovement(singlePlayer, "heroic_star_destroyer");
         }
     }
