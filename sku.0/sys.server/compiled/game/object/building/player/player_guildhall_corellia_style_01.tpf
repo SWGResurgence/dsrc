@@ -6,4 +6,4 @@
 
 sharedTemplate = "object/building/player/shared_player_guildhall_corellia_style_01.iff"
 
-scripts = +["systems.elevator.association_hall_elevators", "structure.tcg.player_tcg_guild_halls"]
+scripts = +["systems.elevator.association_hall_elevators", "structure.tcg.player_tcg_guild_hall"]
