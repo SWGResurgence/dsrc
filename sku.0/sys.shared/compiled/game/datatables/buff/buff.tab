@@ -2028,3 +2028,4 @@ tcg_garage_artisan_buff	tcg_garage_artisan_buff			1	buffs.tcg_diner	-1	general_a
 tcg_garage_armor_buff	tcg_garage_armor_buff			1	buffs.tcg_diner	-1	armor_assembly	40	expertise_experimentation_increase_armorsmith	8	luck_modified	50																					
 tcg_garage_weapons_buff	tcg_garage_weapons_buff			1	buffs.tcg_diner	-1	weapon_assembly	40	expertise_experimentation_increase_weaponsmith	8	luck_modified	50																					
 tcg_barn_buff	tcg_barn_buff			1	buffs.tcg_diner	7200	dna_harvesting	25	incubation_time_reduction	11	bm_incubator_dps_armor	3																					
+tcg_relaxation_pool_buff	tcg_relaxation_pool_buff			1	buffs.tcg_diner	-1	clothing_assembly	100	luck_modified	150																							
