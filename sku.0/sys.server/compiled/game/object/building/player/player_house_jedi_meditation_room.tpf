@@ -11,4 +11,4 @@ updateRanges[UR_normal] = 0
 
 objvars =+["tcg.static_item_deed"="item_tcg_loot_reward_series3_jedi_meditation_room_deed", "structure.capacity_override"=250]
 
-scripts = ["structure.municipal.meditation_rooms"]
+scripts = ["structure.player_tcg_meditation_rooms"]

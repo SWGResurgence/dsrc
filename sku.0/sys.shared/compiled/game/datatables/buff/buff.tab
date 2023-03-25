@@ -2016,7 +2016,7 @@ bm_helper_monkey_domestic	bm_player_buff	tcg_diner_station		1	command.bm_helper_
 entertainer_buff	entertainer_buff			1	command.powerBoost	-1	expertise_en_inspire_base_point_increase	10	expertise_en_inspire_pulse_duration_increase	8	expertise_en_inspire_buff_duration_increase	60																					
 of_deb_off_1	targetTracking			90	command.of_deb_def	20			expertise_dodge	-7	critical_hit_vulnerable	16		0		0	STATE_NONE	none	appearance/pt_officer_paint_target.prt		1	1		1	1	1	0	1	1	0	1	1	1
 of_deb_off_2	identityTracking			90	command.of_deb_def	20	detect_hidden	-50	camouflage	-100		0		0		0	STATE_NONE	none	appearance/pt_officer_paint_target.prt		1	1		1	1	1	0	1	1	0	1	1	1
-tcg_diner_meditation_rooms	tcg_diner_meditation_rooms			1	buffs.tcg_meditation_rooms	-1	jedi_saber_assembly	10	jedi_saber_experimentation	1	luck_modified	100	station_buff	0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
+																																	
 vr_dxun_drexl	vr_familiar			12	buffs.genericBuff	-1	expertise_action_all	10	exotic_dodge_reduction	4	exotic_parry_reduction	4												0	0	0							
 event_halloween_pumpkin_puree	event_halloween_pumpkin_puree	12	buffs.costume	7200	movement	25	slope_move	25														0	0										
 event_halloween_boss_last_chance	event_halloween_boss			1	command.powerBoost	-1	combat_divide_damage_taken	15	expertise_dodge	10		0		0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
@@ -2025,7 +2025,8 @@ event_lifeday_wookiee_pipe_combat	event_lifeday			1	command.sp_smoke_mirrors	30	
 event_lifeday_wookiee_pipe_crafting	event_lifeday			1	command.sp_smoke_mirrors	30	stamina_modified	150	agility_modified	150	constitution_modified	150	trader_heal	0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 ace_pilot_bonus	genBuff_4			80	buffs.genericBuff	-1	space_combat_general	25	movement	10	constitution_modified	75		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
 tcg_garage_artisan_buff	tcg_garage_artisan_buff			1	buffs.tcg_diner	-1	general_assembly	20	expertise_experimentation_increase_artisan	8	luck_modified	50																					
-tcg_garage_armor_buff	tcg_garage_armor_buff			1	buffs.tcg_diner	-1	armor_assembly	40	expertise_experimentation_increase_armorsmith	8	luck_modified	50																					
-tcg_garage_weapons_buff	tcg_garage_weapons_buff			1	buffs.tcg_diner	-1	weapon_assembly	40	expertise_experimentation_increase_weaponsmith	8	luck_modified	50																					
+tcg_garage_armor_buff	tcg_garage_armor_buff			1	buffs.tcg_diner	-1	armor_assembly	40	expertise_experimentation_increase_armorsmith	8	luck_modified	50	station_buff																				
+tcg_garage_weapons_buff	tcg_garage_weapons_buff			1	buffs.tcg_diner	-1	weapon_assembly	40	expertise_experimentation_increase_weaponsmith	8	luck_modified	50	station_buff																				
 tcg_barn_buff	tcg_barn_buff			1	buffs.tcg_diner	7200	dna_harvesting	25	incubation_time_reduction	11	bm_incubator_dps_armor	3																					
-tcg_relaxation_pool_buff	tcg_relaxation_pool_buff			1	buffs.tcg_diner	-1	clothing_assembly	100	luck_modified	150																							
+tcg_relaxation_pool_buff	tcg_relaxation_pool_buff			1	buffs.tcg_diner	-1	clothing_assembly	100	luck_modified	150	station_buff																						
+tcg_meditation_rooms_buff	tcg_meditation_rooms_buff			1	buffs.tcg_diner	-1	jedi_saber_assembly	20	jedi_saber_experimentation	10	luck_modified	150	station_buff	0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
