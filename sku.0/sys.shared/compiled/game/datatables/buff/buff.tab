@@ -2030,3 +2030,4 @@ tcg_barn_buff	tcg_barn_buff			1	buffs.tcg_diner	7200	dna_harvesting	25	incubatio
 tcg_relaxation_pool_buff	tcg_relaxation_pool_buff			1	buffs.tcg_diner	-1	clothing_assembly	100	luck_modified	150	station_buff																						
 tcg_meditation_rooms_buff	tcg_meditation_rooms_buff			1	buffs.tcg_diner	-1	jedi_saber_assembly	20	jedi_saber_experimentation	10	luck_modified	150	station_buff	0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tcg_spires_buff	tcg_spires_buff			1	buffs.tcg_diner	7200	tcg_gcw_bonus	25																									
+tcg_guild_halls_buff	tcg_guild_halls_buff			1	command.armorBreak	7200	expertise_innate_protection_all	1000																									
