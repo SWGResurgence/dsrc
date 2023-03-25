@@ -2031,3 +2031,4 @@ tcg_relaxation_pool_buff	tcg_relaxation_pool_buff			1	buffs.tcg_diner	-1	clothin
 tcg_meditation_rooms_buff	tcg_meditation_rooms_buff			1	buffs.tcg_diner	-1	jedi_saber_assembly	20	jedi_saber_experimentation	10	luck_modified	150	station_buff	0		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 tcg_spires_buff	tcg_spires_buff			1	buffs.tcg_diner	7200	tcg_gcw_bonus	25																									
 tcg_guild_halls_buff	tcg_guild_halls_buff			1	command.armorBreak	7200	expertise_innate_protection_all	1000																									
+tcg_yoda_hut_buff	tcg_yoda_hut_buff			1	command.inspire	7200	xp_bonus_general	10																									
