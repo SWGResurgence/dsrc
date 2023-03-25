@@ -178,12 +178,13 @@ public class isd_bypass_smuggler extends script.base_script
         setCondition(self, CONDITION_SPACE_INTERESTING);
         setName(self, "Soc-ah (a crazed smuggler)");
         setCondition(self, CONDITION_CONVERSABLE);
-
+        setInvulnerable(self, true);
         return SCRIPT_CONTINUE;
     }
 
     public int OnAttach(obj_id self) throws InterruptedException
     {
+        setInvulnerable(self, true);
         setCondition(self, CONDITION_CONVERSABLE);
         setCondition(self, CONDITION_SPACE_INTERESTING);
         setName(self, "Soc-ah (a crazed smuggler)");
@@ -276,12 +277,8 @@ public class isd_bypass_smuggler extends script.base_script
             {
                 chat.chat(npc, player, message);
             }
-
             return SCRIPT_CONTINUE;
         }
-
-        chat.chat(npc, "Error:  All conditions for OnStartNpcConversation were false.");
-
         return SCRIPT_CONTINUE;
     }
 
@@ -314,7 +311,7 @@ public class isd_bypass_smuggler extends script.base_script
         }
         obj_id player = sui.getPlayerId(params);
         int button = sui.getIntButtonPressed(params);
-        if (button == sui.BP_OK) ;
+        if (button == sui.BP_OK)
         {
             if (money.getCashBalance(player) >= 10000)
             {
@@ -328,6 +325,11 @@ public class isd_bypass_smuggler extends script.base_script
                 broadcast(player, "You do not have the funds to pay this smuggler.");
                 chat.chat(player, "Another cheapskate I see... Begone!");
             }
+        }
+        else
+        {
+            chat.chat(self, "Another time then.");
+            broadcast(player, "You have declined Soc-ah's offer.");
         }
         return SCRIPT_CONTINUE;
     }
