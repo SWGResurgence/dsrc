@@ -326,7 +326,7 @@ public class isd_bypass_smuggler extends script.base_script
                 chat.chat(player, "Another cheapskate I see... Begone!");
             }
         }
-        else
+        else if (button == sui.BP_CANCEL || button == sui.BP_REVERT)
         {
             chat.chat(self, "Another time then.");
             broadcast(player, "You have declined Soc-ah's offer.");
