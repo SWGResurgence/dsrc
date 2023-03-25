@@ -2024,3 +2024,6 @@ event_halloween_sidekick_buff	event_halloween_boss			1	command.powerBoost	60	exp
 event_lifeday_wookiee_pipe_combat	event_lifeday			1	command.sp_smoke_mirrors	30	combat_block_reduction	300	combat_dodge_reduction	300	combat_glancing_blow_reduction	300	combat_parry_reduction	300		0	STATE_NONE	none			1	0		1	1	1	0	1	1	0	1	1	1
 event_lifeday_wookiee_pipe_crafting	event_lifeday			1	command.sp_smoke_mirrors	30	stamina_modified	150	agility_modified	150	constitution_modified	150	trader_heal	0		0	STATE_NONE	none			1	0		0	0	1	0	1	1	0	1	1	1
 ace_pilot_bonus	genBuff_4			80	buffs.genericBuff	-1	space_combat_general	25	movement	10	constitution_modified	75		0		0	STATE_NONE	none			1	0		0	1	1	0	1	1	0	1	1	1
+tcg_garage_artisan_buff	tcg_garage_artisan_buff			1	buffs.tcg_diner	-1	general_assembly	20	expertise_experimentation_increase_artisan	8	luck_modified	50																					
+tcg_garage_armor_buff	tcg_garage_armor_buff			1	buffs.tcg_diner	-1	armor_assembly	40	expertise_experimentation_increase_armorsmith	8	luck_modified	50																					
+tcg_garage_weapons_buff	tcg_garage_weapons_buff			1	buffs.tcg_diner	-1	weapon_assembly	40	expertise_experimentation_increase_weaponsmith	8	luck_modified	50																					
