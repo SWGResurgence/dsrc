@@ -12,6 +12,7 @@ public class battlefield_utility extends script.base_script
     public battlefield_utility()
     {
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         location loc = getLocation(self);
@@ -22,7 +23,7 @@ public class battlefield_utility extends script.base_script
             {
                 loc = getLocation(target);
             }
-            else 
+            else
             {
                 java.util.StringTokenizer st = new java.util.StringTokenizer(text);
                 LOG("LOG_CHANNEL", "tokens -> " + st.countTokens() + " nextToken ->" + st.nextToken());
@@ -106,7 +107,7 @@ public class battlefield_utility extends script.base_script
                     removeObjVar(target, battlefield.VAR_BATTLEFIELD);
                 }
             }
-            else 
+            else
             {
                 if (hasObjVar(self, battlefield.VAR_BATTLEFIELD))
                 {
@@ -117,8 +118,10 @@ public class battlefield_utility extends script.base_script
         if (text.equals("nuke"))
         {
             obj_id[] objects = getObjectsInRange(loc, 20.0f);
-            for (obj_id object : objects) {
-                if (!isPlayer(object)) {
+            for (obj_id object : objects)
+            {
+                if (!isPlayer(object))
+                {
                     LOG("LOG_CHANNEL", "object deleted ->" + object);
                     destroyObject(object);
                 }
@@ -127,8 +130,10 @@ public class battlefield_utility extends script.base_script
         if (text.equals("meganuke"))
         {
             obj_id[] objects = getObjectsInRange(loc, 250.0f);
-            for (obj_id object : objects) {
-                if (!isPlayer(object)) {
+            for (obj_id object : objects)
+            {
+                if (!isPlayer(object))
+                {
                     LOG("LOG_CHANNEL", "object deleted ->" + object);
                     destroyObject(object);
                 }
@@ -145,7 +150,7 @@ public class battlefield_utility extends script.base_script
                 sendSystemMessageTestingOnly(self, "faction ->" + faction);
                 factions.addFactionStanding(self, faction, 250.0f);
             }
-            else 
+            else
             {
                 int faction_id = pvpGetAlignedFaction(self);
                 String faction = factions.getFactionNameByHashCode(faction_id);

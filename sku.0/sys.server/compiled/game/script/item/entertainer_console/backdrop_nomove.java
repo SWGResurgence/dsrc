@@ -6,18 +6,22 @@ import script.string_id;
 
 public class backdrop_nomove extends script.base_script
 {
+    public static final string_id MOVED_BACKDROP = new string_id("spam", "backdrop_moved");
+
     public backdrop_nomove()
     {
     }
-    public static final string_id MOVED_BACKDROP = new string_id("spam", "backdrop_moved");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!isGod(transferer))

@@ -10,12 +10,13 @@ import java.util.Vector;
 
 public class gcw_defensive_general_boss extends script.base_script
 {
-    public gcw_defensive_general_boss()
-    {
-    }
     public static final boolean LOGGING_ON = false;
     public static final int MAX_HIT_POINTS = 1000000;
     public static final int MAX_GENERAL_BUFF_STACK = 100;
+    public gcw_defensive_general_boss()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         blog("OnAttach init");
@@ -28,6 +29,7 @@ public class gcw_defensive_general_boss extends script.base_script
         messageTo(self, "checkConstructionPhase", null, 20.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHateTargetAdded(obj_id self, obj_id target) throws InterruptedException
     {
         Vector allPlayersHatedList = new Vector();
@@ -41,6 +43,7 @@ public class gcw_defensive_general_boss extends script.base_script
         trial.addNonInstanceFactionParticipant(target, self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id[] attackerList = utils.getObjIdBatchScriptVar(self, "creditForKills.attackerList.attackers");
@@ -52,26 +55,35 @@ public class gcw_defensive_general_boss extends script.base_script
         HashSet allParticipants = new HashSet();
         if (allPlayersHatedList != null && allPlayersHatedList.size() > 0)
         {
-            for (Object o : allPlayersHatedList) {
-                if (isIdValid(((obj_id) o))) {
-                    allParticipants.add(((obj_id) o));
+            for (Object o : allPlayersHatedList)
+            {
+                if (isIdValid(((obj_id) o)))
+                {
+                    allParticipants.add(o);
                 }
             }
         }
         if (attackerList != null && attackerList.length > 0)
         {
-            for (obj_id obj_id : attackerList) {
-                if (!isIdValid(obj_id)) {
+            for (obj_id obj_id : attackerList)
+            {
+                if (!isIdValid(obj_id))
+                {
                     continue;
                 }
-                if (group.isGroupObject(obj_id)) {
+                if (group.isGroupObject(obj_id))
+                {
                     obj_id[] members = getGroupMemberIds(obj_id);
-                    for (obj_id member : members) {
-                        if (isIdValid(member)) {
+                    for (obj_id member : members)
+                    {
+                        if (isIdValid(member))
+                        {
                             allParticipants.add(member);
                         }
                     }
-                } else {
+                }
+                else
+                {
                     allParticipants.add(obj_id);
                 }
             }
@@ -81,7 +93,7 @@ public class gcw_defensive_general_boss extends script.base_script
         int j = 0;
         while (participantIterator.hasNext())
         {
-            participantList[j] = (obj_id)participantIterator.next();
+            participantList[j] = (obj_id) participantIterator.next();
             j++;
         }
         if (participantList == null || participantList.length <= 0)
@@ -112,36 +124,46 @@ public class gcw_defensive_general_boss extends script.base_script
             return SCRIPT_CONTINUE;
         }
         String information = getName(self);
-        for (obj_id obj_id : participantList) {
-            if (!isIdValid(obj_id) || !exists(obj_id) || !isPlayer(obj_id)) {
+        for (obj_id obj_id : participantList)
+        {
+            if (!isIdValid(obj_id) || !exists(obj_id) || !isPlayer(obj_id))
+            {
                 continue;
             }
-            if (utils.getDistance2D(self, obj_id) > 150.0) {
+            if (utils.getDistance2D(self, obj_id) > 150.0)
+            {
                 continue;
             }
             int damage = 0;
             int damageBase = 10000;
             int actualDmg = utils.getIntScriptVar(self, "creditForKills.attackerList." + obj_id + ".damage");
-            if (actualDmg > damageBase) {
+            if (actualDmg > damageBase)
+            {
                 damage = actualDmg;
-            } else {
+            }
+            else
+            {
                 damage = damageBase;
             }
-            if (damage <= 0) {
+            if (damage <= 0)
+            {
                 continue;
             }
             gcw.grantModifiedGcwPoints(self, obj_id, gcw.GCW_GENERAL_GCW_BASE_AMOUNT, false, gcw.GCW_POINT_TYPE_GROUND_PVE, information);
             xp.grantQuestKillCredit(obj_id, self);
             obj_id inv = getObjectInSlot(obj_id, "inventory");
-            if (!isIdValid(inv)) {
+            if (!isIdValid(inv))
+            {
                 continue;
             }
             obj_id tokenObject = static_item.createNewItemFunction(token, inv);
-            if (!isValidId(tokenObject)) {
+            if (!isValidId(tokenObject))
+            {
                 continue;
             }
             int count = damage / gcw.GCW_GENERAL_TOKEN_BONUS_DIVISOR;
-            if (!incrementCount(tokenObject, count)) {
+            if (!incrementCount(tokenObject, count))
+            {
                 continue;
             }
             groundquests.sendPlacedMoreThanOneInInventorySystemMessage(obj_id, tokenObject, count);
@@ -149,6 +171,7 @@ public class gcw_defensive_general_boss extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkConstructionPhase(obj_id self, dictionary params) throws InterruptedException
     {
         blog("checkConstructionPhase init");
@@ -199,6 +222,7 @@ public class gcw_defensive_general_boss extends script.base_script
         messageTo(self, "checkConstructionPhase", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int calculateGeneralHealthAndAbilities(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self) || ai_lib.isDead(self))
@@ -238,7 +262,7 @@ public class gcw_defensive_general_boss extends script.base_script
             blog("calculateGeneralHealthAndAbilities PATROLS FOUND: " + patrols.length);
             combinedAmt += patrols.length / 2;
         }
-        else 
+        else
         {
             blog("calculateGeneralHealthAndAbilities PATROLS NOT FOUND");
         }
@@ -348,11 +372,11 @@ public class gcw_defensive_general_boss extends script.base_script
                 }
                 float percent = currentDefenseCount / defenseObjectCount;
                 blog("calculateGeneralHealthAndAbilities Percent: " + percent);
-                int mobGeneralArmor = (int)getFloatObjVar(self, armor.OBJVAR_ARMOR_BASE + "." + armor.OBJVAR_GENERAL_PROTECTION);
+                int mobGeneralArmor = (int) getFloatObjVar(self, armor.OBJVAR_ARMOR_BASE + "." + armor.OBJVAR_GENERAL_PROTECTION);
                 blog("calculateGeneralHealthAndAbilities mobGeneralArmor: " + mobGeneralArmor);
                 float newMobGeneralArmor = mobGeneralArmor * percent;
                 blog("calculateGeneralHealthAndAbilities newMobGeneralArmor: " + newMobGeneralArmor);
-                int newstackAmt = (int)(MAX_GENERAL_BUFF_STACK * percent);
+                int newstackAmt = (int) (MAX_GENERAL_BUFF_STACK * percent);
                 blog("calculateGeneralHealthAndAbilities newstackAmt: " + newstackAmt);
                 buff.removeBuff(self, gcwBuffName);
                 blog("calculateGeneralHealthAndAbilities making buff stack: " + newstackAmt);
@@ -362,6 +386,7 @@ public class gcw_defensive_general_boss extends script.base_script
         messageTo(self, "calculateGeneralHealthAndAbilities", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public void blog(String text) throws InterruptedException
     {
         if (LOGGING_ON)

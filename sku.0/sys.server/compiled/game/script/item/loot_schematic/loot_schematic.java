@@ -5,9 +5,6 @@ import script.library.*;
 
 public class loot_schematic extends script.base_script
 {
-    public loot_schematic()
-    {
-    }
     public static final String VAR_SCHEMATIC = "loot_schematic.schematic";
     public static final String VAR_SKILL = "loot_schematic.skill";
     public static final String VAR_ABILITY = "loot_schematic.ability";
@@ -52,6 +49,10 @@ public class loot_schematic extends script.base_script
     public static final string_id SID_WAYPOINT_GRANTED = new string_id("loot_schematic", "waypoint_granted");
     public static final string_id SID_SKILL_GRANTED = new string_id("loot_schematic", "skill_granted");
     public static final string_id SID_SCHEMATIC_ERROR = new string_id("loot_schematic", "schematic_error");
+    public loot_schematic()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, VAR_SKILL_REQ) && !static_item.isStaticItem(self))
@@ -83,6 +84,7 @@ public class loot_schematic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasObjVar(self, township.OBJECT_FOR_SALE_ON_VENDOR))
@@ -97,25 +99,26 @@ public class loot_schematic extends script.base_script
         switch (type)
         {
             case TYPE_SCHEMATIC:
-            mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE_SCHEMATIC);
-            break;
+                mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE_SCHEMATIC);
+                break;
             case TYPE_SKILL:
-            mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE_SKILL);
-            break;
+                mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE_SKILL);
+                break;
             case TYPE_ABILITY:
-            mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE_ABILITY);
-            break;
+                mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE_ABILITY);
+                break;
             case TYPE_WAYPOINT:
-            mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE_WAYPOINT);
-            break;
+                mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE_WAYPOINT);
+                break;
             case TYPE_BEAST_ABILITY:
-            mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE_BEAST_ABILITY);
-            break;
+                mi.addRootMenu(menu_info_types.ITEM_USE, SID_USE_BEAST_ABILITY);
+                break;
             default:
-            break;
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -163,154 +166,155 @@ public class loot_schematic extends script.base_script
             switch (type)
             {
                 case TYPE_SCHEMATIC:
-                if (!hasObjVar(self, VAR_SCHEMATIC))
-                {
-                    sendSystemMessage(player, SID_NOTHING_TO_LEARN);
-                    return SCRIPT_CONTINUE;
-                }
-                String schematic = getStringObjVar(self, VAR_SCHEMATIC);
-                int uses = 0;
-                if (hasObjVar(self, VAR_USES))
-                {
-                    uses = getIntObjVar(self, VAR_USES);
-                }
-                if (schematic == null || uses == -1)
-                {
-                    sendSystemMessage(player, SID_NOTHING_TO_LEARN);
-                    return SCRIPT_CONTINUE;
-                }
-                if (hasSchematic(player, schematic))
-                {
-                    sendSystemMessage(player, SID_ALREADY_HAVE_SCHEMATIC);
-                    return SCRIPT_CONTINUE;
-                }
-                if (uses > 0)
-                {
-                    obj_id bioLink = getBioLink(self);
-                    temp_schematic.grant(player, bioLink, schematic, uses);
-                    sendSystemMessage(player, SID_SCHEMATIC_LEARNED);
-                }
-                else 
-                {
-                    if (grantSchematic(player, schematic))
+                    if (!hasObjVar(self, VAR_SCHEMATIC))
                     {
-                        sendSystemMessage(player, SID_SCHEMATIC_LEARNED);
-                    }
-                    else 
-                    {
-                        sendSystemMessage(player, SID_SCHEMATIC_ERROR);
+                        sendSystemMessage(player, SID_NOTHING_TO_LEARN);
                         return SCRIPT_CONTINUE;
                     }
-                }
-                break;
+                    String schematic = getStringObjVar(self, VAR_SCHEMATIC);
+                    int uses = 0;
+                    if (hasObjVar(self, VAR_USES))
+                    {
+                        uses = getIntObjVar(self, VAR_USES);
+                    }
+                    if (schematic == null || uses == -1)
+                    {
+                        sendSystemMessage(player, SID_NOTHING_TO_LEARN);
+                        return SCRIPT_CONTINUE;
+                    }
+                    if (hasSchematic(player, schematic))
+                    {
+                        sendSystemMessage(player, SID_ALREADY_HAVE_SCHEMATIC);
+                        return SCRIPT_CONTINUE;
+                    }
+                    if (uses > 0)
+                    {
+                        obj_id bioLink = getBioLink(self);
+                        temp_schematic.grant(player, bioLink, schematic, uses);
+                        sendSystemMessage(player, SID_SCHEMATIC_LEARNED);
+                    }
+                    else
+                    {
+                        if (grantSchematic(player, schematic))
+                        {
+                            sendSystemMessage(player, SID_SCHEMATIC_LEARNED);
+                        }
+                        else
+                        {
+                            sendSystemMessage(player, SID_SCHEMATIC_ERROR);
+                            return SCRIPT_CONTINUE;
+                        }
+                    }
+                    break;
                 case TYPE_SKILL:
-                if (!hasObjVar(self, VAR_SKILL))
-                {
-                    sendSystemMessage(player, SID_NOTHING_TO_LEARN);
-                    return SCRIPT_CONTINUE;
-                }
-                String item_skill = getStringObjVar(self, VAR_SKILL);
-                if (item_skill == null)
-                {
-                    sendSystemMessage(player, SID_NOTHING_TO_LEARN);
-                    return SCRIPT_CONTINUE;
-                }
-                if (hasSkill(player, item_skill))
-                {
-                    sendSystemMessage(player, SID_ALREADY_HAVE_SKILL);
-                    return SCRIPT_CONTINUE;
-                }
-                LOG("LOG_CHANNEL", "skill ->" + item_skill);
-                if (!skill.grantSkillToPlayer(player, item_skill))
-                {
-                    sendSystemMessage(player, SID_UNABLE_TO_LEARN_SKILL);
-                    return SCRIPT_CONTINUE;
-                }
-                string_id skill_id = utils.unpackString("@skl_n:" + item_skill);
-                prose_package pp2 = prose.getPackage(SID_SKILL_GRANTED, skill_id);
-                sendSystemMessageProse(player, pp2);
-                break;
+                    if (!hasObjVar(self, VAR_SKILL))
+                    {
+                        sendSystemMessage(player, SID_NOTHING_TO_LEARN);
+                        return SCRIPT_CONTINUE;
+                    }
+                    String item_skill = getStringObjVar(self, VAR_SKILL);
+                    if (item_skill == null)
+                    {
+                        sendSystemMessage(player, SID_NOTHING_TO_LEARN);
+                        return SCRIPT_CONTINUE;
+                    }
+                    if (hasSkill(player, item_skill))
+                    {
+                        sendSystemMessage(player, SID_ALREADY_HAVE_SKILL);
+                        return SCRIPT_CONTINUE;
+                    }
+                    LOG("LOG_CHANNEL", "skill ->" + item_skill);
+                    if (!skill.grantSkillToPlayer(player, item_skill))
+                    {
+                        sendSystemMessage(player, SID_UNABLE_TO_LEARN_SKILL);
+                        return SCRIPT_CONTINUE;
+                    }
+                    string_id skill_id = utils.unpackString("@skl_n:" + item_skill);
+                    prose_package pp2 = prose.getPackage(SID_SKILL_GRANTED, skill_id);
+                    sendSystemMessageProse(player, pp2);
+                    break;
                 case TYPE_ABILITY:
-                if (!hasObjVar(self, VAR_ABILITY))
-                {
-                    sendSystemMessage(player, SID_NOTHING_TO_LEARN);
-                    return SCRIPT_CONTINUE;
-                }
-                String ability = getStringObjVar(self, VAR_ABILITY);
-                if (ability == null)
-                {
-                    sendSystemMessage(player, SID_NOTHING_TO_LEARN);
-                    return SCRIPT_CONTINUE;
-                }
-                if (hasCommand(player, ability))
-                {
-                    sendSystemMessage(player, SID_ALREADY_HAVE_ABILITY);
-                    return SCRIPT_CONTINUE;
-                }
-                grantCommand(player, ability);
-                break;
+                    if (!hasObjVar(self, VAR_ABILITY))
+                    {
+                        sendSystemMessage(player, SID_NOTHING_TO_LEARN);
+                        return SCRIPT_CONTINUE;
+                    }
+                    String ability = getStringObjVar(self, VAR_ABILITY);
+                    if (ability == null)
+                    {
+                        sendSystemMessage(player, SID_NOTHING_TO_LEARN);
+                        return SCRIPT_CONTINUE;
+                    }
+                    if (hasCommand(player, ability))
+                    {
+                        sendSystemMessage(player, SID_ALREADY_HAVE_ABILITY);
+                        return SCRIPT_CONTINUE;
+                    }
+                    grantCommand(player, ability);
+                    break;
                 case TYPE_WAYPOINT:
-                if (!hasObjVar(self, VAR_WAYPOINT_NAME) || !hasObjVar(self, VAR_WAYPOINT_LOC_X))
-                {
-                    sendSystemMessage(player, SID_NOTHING_TO_LEARN);
-                    return SCRIPT_CONTINUE;
-                }
-                String name = getStringObjVar(self, VAR_WAYPOINT_NAME);
-                int loc_x = getIntObjVar(self, VAR_WAYPOINT_LOC_X);
-                int loc_y = getIntObjVar(self, VAR_WAYPOINT_LOC_Y);
-                int loc_z = getIntObjVar(self, VAR_WAYPOINT_LOC_Z);
-                String planet = getStringObjVar(self, VAR_WAYPOINT_LOC_PLANET);
-                String loc_str = getStringObjVar(self, VAR_WAYPOINT_LOC_X);
-                if (name == null || planet == null)
-                {
-                    sendSystemMessage(player, SID_NOTHING_TO_LEARN);
-                    return SCRIPT_CONTINUE;
-                }
-                location loc = new location(loc_x, loc_y, loc_z, planet);
-                obj_id waypoint = createWaypointInDatapad(player, loc);
-                if (!isIdValid(waypoint))
-                {
-                    sendSystemMessage(player, SID_UNABLE_TO_ADD_WAYPOINT);
-                    return SCRIPT_CONTINUE;
-                }
-                setWaypointVisible(waypoint, true);
-                setWaypointActive(waypoint, true);
-                setWaypointName(waypoint, name);
-                prose_package pp = prose.getPackage(SID_WAYPOINT_GRANTED, name);
-                sendSystemMessageProse(player, pp);
-                break;
+                    if (!hasObjVar(self, VAR_WAYPOINT_NAME) || !hasObjVar(self, VAR_WAYPOINT_LOC_X))
+                    {
+                        sendSystemMessage(player, SID_NOTHING_TO_LEARN);
+                        return SCRIPT_CONTINUE;
+                    }
+                    String name = getStringObjVar(self, VAR_WAYPOINT_NAME);
+                    int loc_x = getIntObjVar(self, VAR_WAYPOINT_LOC_X);
+                    int loc_y = getIntObjVar(self, VAR_WAYPOINT_LOC_Y);
+                    int loc_z = getIntObjVar(self, VAR_WAYPOINT_LOC_Z);
+                    String planet = getStringObjVar(self, VAR_WAYPOINT_LOC_PLANET);
+                    String loc_str = getStringObjVar(self, VAR_WAYPOINT_LOC_X);
+                    if (name == null || planet == null)
+                    {
+                        sendSystemMessage(player, SID_NOTHING_TO_LEARN);
+                        return SCRIPT_CONTINUE;
+                    }
+                    location loc = new location(loc_x, loc_y, loc_z, planet);
+                    obj_id waypoint = createWaypointInDatapad(player, loc);
+                    if (!isIdValid(waypoint))
+                    {
+                        sendSystemMessage(player, SID_UNABLE_TO_ADD_WAYPOINT);
+                        return SCRIPT_CONTINUE;
+                    }
+                    setWaypointVisible(waypoint, true);
+                    setWaypointActive(waypoint, true);
+                    setWaypointName(waypoint, name);
+                    prose_package pp = prose.getPackage(SID_WAYPOINT_GRANTED, name);
+                    sendSystemMessageProse(player, pp);
+                    break;
                 case TYPE_BEAST_ABILITY:
-                if (!hasObjVar(self, VAR_BEAST_ABILITY))
-                {
-                    sendSystemMessage(player, SID_NOTHING_TO_LEARN);
-                    return SCRIPT_CONTINUE;
-                }
-                String beastAbility = getStringObjVar(self, VAR_BEAST_ABILITY);
-                if (beastAbility == null)
-                {
-                    sendSystemMessage(player, SID_NOTHING_TO_LEARN);
-                    return SCRIPT_CONTINUE;
-                }
-                if (!beast_lib.isLearnableBeastMasterSkill(beastAbility))
-                {
-                    sendSystemMessage(player, SID_NOT_LEARNABLE_ABILITY);
-                    return SCRIPT_CONTINUE;
-                }
-                if (beast_lib.hasBeastMasterSkill(player, beastAbility))
-                {
-                    sendSystemMessage(player, SID_ALREADY_HAVE_ABILITY);
-                    return SCRIPT_CONTINUE;
-                }
-                beast_lib.playerLearnBeastMasterSkill(player, beastAbility);
-                break;
+                    if (!hasObjVar(self, VAR_BEAST_ABILITY))
+                    {
+                        sendSystemMessage(player, SID_NOTHING_TO_LEARN);
+                        return SCRIPT_CONTINUE;
+                    }
+                    String beastAbility = getStringObjVar(self, VAR_BEAST_ABILITY);
+                    if (beastAbility == null)
+                    {
+                        sendSystemMessage(player, SID_NOTHING_TO_LEARN);
+                        return SCRIPT_CONTINUE;
+                    }
+                    if (!beast_lib.isLearnableBeastMasterSkill(beastAbility))
+                    {
+                        sendSystemMessage(player, SID_NOT_LEARNABLE_ABILITY);
+                        return SCRIPT_CONTINUE;
+                    }
+                    if (beast_lib.hasBeastMasterSkill(player, beastAbility))
+                    {
+                        sendSystemMessage(player, SID_ALREADY_HAVE_ABILITY);
+                        return SCRIPT_CONTINUE;
+                    }
+                    beast_lib.playerLearnBeastMasterSkill(player, beastAbility);
+                    break;
                 default:
-                sendSystemMessage(player, SID_NOTHING_TO_LEARN);
-                return SCRIPT_CONTINUE;
+                    sendSystemMessage(player, SID_NOTHING_TO_LEARN);
+                    return SCRIPT_CONTINUE;
             }
             destroyObject(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -323,14 +327,14 @@ public class loot_schematic extends script.base_script
         {
             return SCRIPT_CONTINUE;
         }
-        String[] type_str = 
-        {
-            localize(SID_SCHEMATIC),
-            localize(SID_SKILL),
-            localize(SID_ABILITY),
-            localize(SID_WAYPOINT),
-            localize(SID_ABILITY)
-        };
+        String[] type_str =
+                {
+                        localize(SID_SCHEMATIC),
+                        localize(SID_SKILL),
+                        localize(SID_ABILITY),
+                        localize(SID_WAYPOINT),
+                        localize(SID_ABILITY)
+                };
         names[idx] = "knowlege_type";
         attribs[idx] = type_str[type - 1];
         idx++;
@@ -344,6 +348,7 @@ public class loot_schematic extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlerReInitialize(obj_id self, dictionary params) throws InterruptedException
     {
         Object[] newParams = new Object[1];
@@ -351,6 +356,7 @@ public class loot_schematic extends script.base_script
         utils.callTrigger("OnInitialize", newParams);
         return SCRIPT_CONTINUE;
     }
+
     public int getLootItemType(obj_id item) throws InterruptedException
     {
         if (!isIdValid(item))
@@ -361,11 +367,12 @@ public class loot_schematic extends script.base_script
         {
             return getIntObjVar(item, VAR_TYPE);
         }
-        else 
+        else
         {
             return 1;
         }
     }
+
     public void test(obj_id player) throws InterruptedException
     {
         String selected_skill = utils.getStringScriptVar(player, VAR_SKILL);

@@ -8,22 +8,23 @@ import script.*;
 
 public class tcg_pet_controller extends script.base_script
 {
-    public tcg_pet_controller()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "massiff_pet";
-    public static final String TCG_STR = new String("tcg");
-    public static final String LAUGH = new String("sound/voc_kowakian_laugh.snd");
-    public static final String ANIMATION_1 = new String("wave2");
-    public static final String ANIMATION_2 = new String("laugh_cackle");
-    public static final String ANIMATION_3 = new String("pound_fist_palm");
-    public static final String ANIMATION_4 = new String("bow2");
-    public static final String ANIMATION_5 = new String("wave1");
+    public static final String TCG_STR = "tcg";
+    public static final String LAUGH = "sound/voc_kowakian_laugh.snd";
+    public static final String ANIMATION_1 = "wave2";
+    public static final String ANIMATION_2 = "laugh_cackle";
+    public static final String ANIMATION_3 = "pound_fist_palm";
+    public static final String ANIMATION_4 = "bow2";
+    public static final String ANIMATION_5 = "wave1";
     public static final string_id SID_TURN_ON = new string_id(TCG_STR, "call_pet");
     public static final string_id SID_TURN_OFF = new string_id(TCG_STR, "store_pet");
     public static final string_id SID_FEED = new string_id(TCG_STR, "feed_pet");
     public static final string_id SID_SNACK = new string_id(TCG_STR, "scurrier_snack");
+    public tcg_pet_controller()
+    {
+    }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         blog("OnDestroy - init");
@@ -45,6 +46,7 @@ public class tcg_pet_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -82,7 +84,7 @@ public class tcg_pet_controller extends script.base_script
                 {
                     attribs[idx] = "Now";
                 }
-                else 
+                else
                 {
                     attribs[idx] = "Hopefully Soon";
                 }
@@ -91,7 +93,7 @@ public class tcg_pet_controller extends script.base_script
                 attribs[idx] = getCalendarTimeStringLocal(getCalendarTime());
                 idx++;
             }
-            else 
+            else
             {
                 names[idx] = "last_fed";
                 attribs[idx] = "Never";
@@ -122,11 +124,13 @@ public class tcg_pet_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         house_pet.setObjectOwner(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         blog("OnInitialize - init");
@@ -137,6 +141,7 @@ public class tcg_pet_controller extends script.base_script
         spawnPetSomewhere(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         blog("OnAboutToBeTransferred - init");
@@ -166,6 +171,7 @@ public class tcg_pet_controller extends script.base_script
         removeObjVar(self, house_pet.MASSIFF_CURRENT_PHASE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         blog("OnObjectMenuRequest - init");
@@ -209,6 +215,7 @@ public class tcg_pet_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         blog("OnObjectMenuSelect - init");
@@ -266,6 +273,7 @@ public class tcg_pet_controller extends script.base_script
         sendDirtyObjectMenuNotification(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean spawnPetSomewhere(obj_id controller) throws InterruptedException
     {
         if (!isValidId(controller) || !exists(controller))
@@ -347,6 +355,7 @@ public class tcg_pet_controller extends script.base_script
         pathTo(newPet, pathToLoc);
         return true;
     }
+
     public boolean spawnPetByOwner(obj_id controller, obj_id owner) throws InterruptedException
     {
         blog("spawnPetAtLocation - init");
@@ -410,8 +419,9 @@ public class tcg_pet_controller extends script.base_script
             return false;
         }
         obj_id pet = create.object(petCreatureName, spawnLoc);
-        if(!isIdValid(pet)){
-            LOG("tcg-pet","Unable to spawn pet (" + pet + ") with template (" + petCreatureName + ") near the owner (" + owner + ") in building (" + objBuilding + ") at location (" + spawnLoc.toString() + ").");
+        if (!isIdValid(pet))
+        {
+            LOG("tcg-pet", "Unable to spawn pet (" + pet + ") with template (" + petCreatureName + ") near the owner (" + owner + ") in building (" + objBuilding + ") at location (" + spawnLoc + ").");
             return false;
         }
         setOwner(pet, owner);
@@ -426,6 +436,7 @@ public class tcg_pet_controller extends script.base_script
         messageTo(pet, "startLoitering", null, 30, false);
         return true;
     }
+
     public boolean spawnFoodAtLocation(obj_id controller, location foodLoc) throws InterruptedException
     {
         blog("spawnFoodAtLocation - init");
@@ -487,6 +498,7 @@ public class tcg_pet_controller extends script.base_script
         messageTo(pet, "feedingTime", null, 2, false);
         return true;
     }
+
     public boolean spawnSnackAtLocation(obj_id controller, location foodLoc) throws InterruptedException
     {
         LOG("sissynoid", "Spawning Snack at a location");
@@ -515,7 +527,7 @@ public class tcg_pet_controller extends script.base_script
             foodLoc.y = foodLoc.y + 0.04f;
             food = create.object("object/static/item/item_scurrier_food.iff", foodLoc);
         }
-        else 
+        else
         {
             return false;
         }
@@ -525,6 +537,7 @@ public class tcg_pet_controller extends script.base_script
         messageTo(pet, "snackTime", null, 1, false);
         return true;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))

@@ -10,6 +10,7 @@ public class cannot_place_in_space extends script.base_script
     public cannot_place_in_space()
     {
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         location here = getLocation(self);

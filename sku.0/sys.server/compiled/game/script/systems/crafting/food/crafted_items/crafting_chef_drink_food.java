@@ -8,14 +8,15 @@ public class crafting_chef_drink_food extends script.systems.crafting.food.craft
     public crafting_chef_drink_food()
     {
     }
+
     public void fillStomach(obj_id prototype, int filling) throws InterruptedException
     {
-        int[] stomach = 
-        {
-            0,
-            filling,
-            0
-        };
+        int[] stomach =
+                {
+                        0,
+                        filling,
+                        0
+                };
         setObjVar(prototype, consumable.VAR_CONSUMABLE_STOMACH_VALUES, stomach);
     }
 }

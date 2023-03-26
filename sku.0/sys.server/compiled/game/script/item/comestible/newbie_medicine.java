@@ -13,6 +13,7 @@ public class newbie_medicine extends script.base_script
     public newbie_medicine()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, consumable.VAR_CONSUMABLE_BASE))
@@ -22,7 +23,8 @@ public class newbie_medicine extends script.base_script
         String template = getTemplateName(self);
         String attribute = "";
         int charges = 1;
-        switch (template) {
+        switch (template)
+        {
             case "object/tangible/medicine/newbie_medpack_damage.iff":
                 charges = 5;
                 attribute = "damage";
@@ -49,7 +51,7 @@ public class newbie_medicine extends script.base_script
                 am = utils.addElement(am, tmp);
             }
         }
-        else 
+        else
         {
             int attrib_type = healing.stringToAttribute(attribute.toUpperCase());
             if (attrib_type == -1)
@@ -64,22 +66,22 @@ public class newbie_medicine extends script.base_script
         setObjVar(self, consumable.VAR_CONSUMABLE_MODS, am);
         setObjVar(self, consumable.VAR_CONSUMABLE_MEDICINE, true);
         setCount(self, charges);
-        int[] stomach = 
-        {
-            0,
-            0,
-            0
-        };
+        int[] stomach =
+                {
+                        0,
+                        0,
+                        0
+                };
         setObjVar(self, consumable.VAR_CONSUMABLE_STOMACH_VALUES, stomach);
-        String[] skill_mod = 
-        {
-            "healing_ability"
-        };
+        String[] skill_mod =
+                {
+                        "healing_ability"
+                };
         setObjVar(self, consumable.VAR_SKILL_MOD_REQUIRED, skill_mod);
-        int[] skill_mod_min = 
-        {
-            5
-        };
+        int[] skill_mod_min =
+                {
+                        5
+                };
         setObjVar(self, consumable.VAR_SKILL_MOD_MIN, skill_mod_min);
         detachScript(self, "item.comestible.newbie_medicine");
         return SCRIPT_CONTINUE;

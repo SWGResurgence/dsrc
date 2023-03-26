@@ -8,9 +8,6 @@ import script.string_id;
 
 public class holoemote extends script.base_script
 {
-    public holoemote()
-    {
-    }
     public static final String HOLO_EMOTE_SCRIPT = "systems.image_designer.holoemote";
     public static final String VAR_HOLO_HELP = "image_design.holohelp";
     public static final String HOLO_DATATABLE = "datatables/image_design/holoemote.iff";
@@ -36,6 +33,10 @@ public class holoemote extends script.base_script
     public static final String HOLO_EMOTE_HELP = "help";
     public static final String STF_FILE = "image_designer";
     public static final int MINUTE = 60;
+    public holoemote()
+    {
+    }
+
     public int holoHelpOff(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id holoSelf = sui.getPlayerId(params);
@@ -45,6 +46,7 @@ public class holoemote extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdHoloEmote(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!utils.hasObjVar(self, "holoEmote"))
@@ -61,7 +63,7 @@ public class holoemote extends script.base_script
                 {
                     sui.msgbox(self, self, "Your Holo-Emote generator can play all Holo-Emotes available. \n You have " + holoHelpCharges + " charges remaining. \n To play a Holo-Emote, type /holoemote <name>. \n To delete your Holo-Emote type /holoemote delete. \n Purchasing a new Holo-Emote will automatically delete your current Holo-Emote. \n \n The available Holo-Emote names are: \n \n Beehive	Blossom	Brainstorm \n Bubblehead	Bullhorns	Butterflies \n Champagne	Haunted	Hearts \n Hologlitter	Holonotes	Imperial \n Kitty	Phonytail	Rebel \n Sparky", sui.OK_ONLY, "Holo-Emote Help", sui.MSG_NORMAL, "holoHelpOff");
                 }
-                else 
+                else
                 {
                     String holoType = (utils.getStringObjVar(self, "holoEmote")).substring(10);
                     sui.msgbox(self, self, "Your current Holo-Emote is " + holoType + ". \n You have " + holoHelpCharges + " charges remaining. \n To play your Holo-Emote type /holoemote. \n To delete your Holo-Emote type /holoemote delete. \n Purchasing a new Holo-Emote will automatically delete your current Holo-Emote.", sui.OK_ONLY, "Holo-Emote Help", sui.MSG_NORMAL, "holoHelpOff");
@@ -69,7 +71,7 @@ public class holoemote extends script.base_script
                 utils.setScriptVar(self, VAR_HOLO_HELP, self);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 return SCRIPT_CONTINUE;
             }
@@ -99,7 +101,7 @@ public class holoemote extends script.base_script
             }
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             int charges = 0;
             if (hasObjVar(self, "holoEmote") && (toLower(utils.getStringObjVar(self, "holoEmote"))).equals(HOLO_EMOTE_ALL))
@@ -123,13 +125,13 @@ public class holoemote extends script.base_script
                     utils.setObjVar(self, "holoEmoteCharges", charges);
                     utils.setScriptVar(self, "holoEmoteTimer", getGameTime());
                 }
-                else 
+                else
                 {
                     sendSystemMessage(self, new string_id(STF_FILE, "holoemote_help"));
                 }
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 String holoString = utils.getStringObjVar(self, "holoEmote");
                 if (holoString.length() < 11)
@@ -151,7 +153,7 @@ public class holoemote extends script.base_script
                     utils.setObjVar(self, "holoEmoteCharges", charges);
                     utils.setScriptVar(self, "holoEmoteTimer", getGameTime());
                 }
-                else 
+                else
                 {
                     LOG("HOLOEMOTE_ERROR", "A Holo-Emote did not fire! HoloString: " + holoString + " HoloPath: " + holoPath + " Charges: " + charges);
                 }
@@ -159,6 +161,7 @@ public class holoemote extends script.base_script
             }
         }
     }
+
     public String getHoloEmotePath(String holoEmote) throws InterruptedException
     {
         int holo_row = dataTableSearchColumnForString(holoEmote, 0, HOLO_DATATABLE);

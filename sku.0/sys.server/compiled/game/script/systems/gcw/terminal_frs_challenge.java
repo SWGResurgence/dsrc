@@ -10,12 +10,14 @@ public class terminal_frs_challenge extends script.base_script
     public terminal_frs_challenge()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         LOG("force_rank", "terminal_frs_challenge::OnInitialize: -> Initializing.");
         arena.initializeArena(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -68,6 +70,7 @@ public class terminal_frs_challenge extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -143,7 +146,7 @@ public class terminal_frs_challenge extends script.base_script
                 {
                     sendSystemMessageTestingOnly(player, "QA open slot Vote-Force override.");
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id("pvp_rating", "ch_terminal_no_need_challenge"));
                     return SCRIPT_CONTINUE;
@@ -166,12 +169,12 @@ public class terminal_frs_challenge extends script.base_script
                     utils.setScriptVar(player, arena.SCRIPT_VAR_SUI_CH_PID, pid);
                     utils.setScriptVar(player, arena.SCRIPT_VAR_CH_TERMINAL, self);
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id("pvp_rating", "ch_terminal_no_challenges_for_rank"));
                 }
             }
-            else 
+            else
             {
                 sendSystemMessage(player, new string_id("pvp_rating", "ch_terminal_no_challenges_for_rank"));
             }
@@ -193,19 +196,19 @@ public class terminal_frs_challenge extends script.base_script
                 {
                     timeLeftId = new string_id("pvp_rating", "ch_terminal_arena_close_imminent");
                 }
-                else 
+                else
                 {
                     timeLeftId = new string_id("pvp_rating", "ch_terminal_arena_close_in");
                 }
             }
-            else 
+            else
             {
                 secsLeft = lastOpen + arena.getArenaOpenLength() + arena.getArenaOpenEvery() - now;
                 if (secsLeft < 1)
                 {
                     timeLeftId = new string_id("pvp_rating", "ch_terminal_arena_open_imminent");
                 }
-                else 
+                else
                 {
                     timeLeftId = new string_id("pvp_rating", "ch_terminal_arena_open_in");
                 }
@@ -214,7 +217,7 @@ public class terminal_frs_challenge extends script.base_script
             {
                 sendSystemMessage(player, timeLeftId);
             }
-            else 
+            else
             {
                 String timeLeftString = player_structure.assembleTimeRemaining(player_structure.convertSecondsTime(secsLeft));
                 prose_package pp = prose.getPackage(timeLeftId, timeLeftString);

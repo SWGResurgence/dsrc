@@ -1,18 +1,18 @@
 item	cash	token37	limit	class	script	note
 s[none]	i[0]	i[0]	i[0]	i[0]	s	c
+item_collection_jedi_holocron_01_04		35				Strange Jedi Waistpack Holocron 4/5
+item_collection_jedi_holocron_02_04		15				Strange Jedi Meditative Holocron 4/5
+item_collection_sith_holocron_01_04		75				Strange Sith Waistpack Holocron 4/5
+item_collection_sith_holocron_02_04		15				Strange Sith Meditative Holocron 4/5
 item_krayt_pearl_04_19		20				Ancient Krayt Dragon Pearl
 item_krayt_pearl_04_20		40				Ancient Krayt Dragon Pearl
 item_power_crystal_04_21		20				Power Crystal
-item_treasure_map_bonus_buff_04_06		75				Rare Ankarres Sapphire
-item_treasure_map_bonus_buff_04_04		75				Rare Corusca Gem
+item_treasure_map_bonus_buff_04_01		75				Rare Rol Stone
 item_treasure_map_bonus_buff_04_02		75				Rare Nova Crystal
 item_treasure_map_bonus_buff_04_03		75				Rare Power Gem
-item_treasure_map_bonus_buff_04_01		75				Rare Rol Stone
+item_treasure_map_bonus_buff_04_04		75				Rare Corusca Gem
 item_treasure_map_bonus_buff_04_05		75				Rare Sasho Gem
+item_treasure_map_bonus_buff_04_06		75				Rare Ankarres Sapphire
 item_treasure_map_bonus_consumable_04_01		35				Flask of Elba Water
 item_treasure_map_bonus_consumable_04_02		35				Flask of Naris-bud Tea
 item_treasure_map_bonus_consumable_04_03		25				Small flask of Nerfmilk
-item_collection_jedi_holocron_02_04		15				Strange Jedi Meditative Holocron 4/5
-item_collection_sith_holocron_02_04		15				Strange Sith Meditative Holocron 4/5
-item_collection_jedi_holocron_01_04		35				Strange Jedi Waistpack Holocron 4/5
-item_collection_sith_holocron_01_04		75				Strange Sith Waistpack Holocron 4/5

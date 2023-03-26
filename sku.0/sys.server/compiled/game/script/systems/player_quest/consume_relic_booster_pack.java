@@ -7,10 +7,12 @@ import java.util.Vector;
 
 public class consume_relic_booster_pack extends script.base_script
 {
+    public static final String PID_NAME = "chronicleBoosterPack";
+
     public consume_relic_booster_pack()
     {
     }
-    public static final String PID_NAME = "chronicleBoosterPack";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         string_id openMenu = new string_id("saga_system", "booster_pack_open");
@@ -24,6 +26,7 @@ public class consume_relic_booster_pack extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -43,6 +46,7 @@ public class consume_relic_booster_pack extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -55,6 +59,7 @@ public class consume_relic_booster_pack extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean getUiConsumeMessageBox(obj_id self, obj_id player, String prompt, String title, String handler) throws InterruptedException
     {
         if (!isValidId(self) || !isValidId(player))
@@ -67,6 +72,7 @@ public class consume_relic_booster_pack extends script.base_script
         sui.setPid(player, pid, PID_NAME);
         return true;
     }
+
     public int handlerSuiBoosterPackOpen(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -93,11 +99,7 @@ public class consume_relic_booster_pack extends script.base_script
             sui.removePid(player, PID_NAME);
             return SCRIPT_CONTINUE;
         }
-        boolean isStarterKit = false;
-        if (hasObjVar(self, "chronicles.isStarterPack"))
-        {
-            isStarterKit = true;
-        }
+        boolean isStarterKit = hasObjVar(self, "chronicles.isStarterPack");
         String professionTemplate = getSkillTemplate(player);
         obj_id playerInventory = utils.getInventoryContainer(player);
         int relicQualitySkillmod = getEnhancedSkillStatisticModifierUncapped(player, pgc_quests.PGC_SKILLMOD_RELIC_QUALITY);
@@ -137,8 +139,10 @@ public class consume_relic_booster_pack extends script.base_script
                         {
                             String[] relicLootCategories = split(row_lootCategory, ',');
                             boolean no_loot = false;
-                            for (String relicCategory : relicLootCategories) {
-                                if (relicCategory.equals(relicFilter)) {
+                            for (String relicCategory : relicLootCategories)
+                            {
+                                if (relicCategory.equals(relicFilter))
+                                {
                                     filteredRelicReferences = utils.addElement(filteredRelicReferences, token_reference);
                                 }
                             }
@@ -158,11 +162,11 @@ public class consume_relic_booster_pack extends script.base_script
             int choice = rand(0, 99);
             if (choice <= filterChance && filteredRelicReferences.size() > 0)
             {
-                relicName = ((String)filteredRelicReferences.get(rand(0, filteredRelicReferences.size() - 1)));
+                relicName = ((String) filteredRelicReferences.get(rand(0, filteredRelicReferences.size() - 1)));
             }
-            else 
+            else
             {
-                relicName = ((String)relicReferences.get(rand(0, relicReferences.size() - 1)));
+                relicName = ((String) relicReferences.get(rand(0, relicReferences.size() - 1)));
             }
             int relicCount = rand(3, 6);
             if (relicName.startsWith("saga_relic_comm") || relicName.startsWith("saga_relic_goto"))
@@ -174,7 +178,7 @@ public class consume_relic_booster_pack extends script.base_script
             {
                 pgc_quests.addRelicToQuestBuilder(player, relic, true);
             }
-            else 
+            else
             {
                 pgc_quests.sendPlacedInInventorySystemMessage(player, relic);
             }

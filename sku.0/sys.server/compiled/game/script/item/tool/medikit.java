@@ -8,9 +8,6 @@ import script.string_id;
 
 public class medikit extends script.base_script
 {
-    public medikit()
-    {
-    }
     public static final String SCRIPTVAR_PID = "tool.pid";
     public static final String SCRIPTVAR_PLAYER = "tool.player";
     public static final String SCRIPTVAR_TARGET = "tool.lookattarget";
@@ -22,11 +19,16 @@ public class medikit extends script.base_script
     public static final string_id SID_OTHER_PLAYERS_ONLY = new string_id(STF, "other_players_only");
     public static final string_id SID_DO_NOT_HEAL = new string_id(STF, "do_not_heal");
     public static final string_id SID_MUST_BE_PLAYER_OR_PET = new string_id(STF, "must_be_player_or_pet");
+    public medikit()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         clearTrackingScriptVars(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         String parentDirectory = getTemplateParentDirectory(item);
@@ -36,6 +38,7 @@ public class medikit extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         int countDelta = foragedItemsMod(item);
@@ -43,6 +46,7 @@ public class medikit extends script.base_script
         destroyObject(item);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -63,6 +67,7 @@ public class medikit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -90,6 +95,7 @@ public class medikit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -128,6 +134,7 @@ public class medikit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cmdDiagnosePatient(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(target))
@@ -157,6 +164,7 @@ public class medikit extends script.base_script
         clearTrackingScriptVars(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean canDiagnose(obj_id medic, obj_id target) throws InterruptedException
     {
         if ((medic != target) && (isIdValid(target)))
@@ -165,14 +173,14 @@ public class medikit extends script.base_script
             {
                 sendSystemMessage(medic, consumable.SID_TARGET_OUT_OF_RANGE);
             }
-            else 
+            else
             {
                 if (!pvpCanHelp(medic, target))
                 {
                     LOG("LOG_CHANNEL", medic + " ->It would be unwise to help such a patient.");
                     sendSystemMessage(medic, SID_DO_NOT_HEAL);
                 }
-                else 
+                else
                 {
                     if (!isPlayer(target))
                     {
@@ -181,12 +189,12 @@ public class medikit extends script.base_script
                             LOG("LOG_CHANNEL", "Target must be a player or a creature pet in order to tend wounds.");
                             sendSystemMessage(medic, SID_MUST_BE_PLAYER_OR_PET);
                         }
-                        else 
+                        else
                         {
                             return true;
                         }
                     }
-                    else 
+                    else
                     {
                         return true;
                     }
@@ -195,10 +203,12 @@ public class medikit extends script.base_script
         }
         return false;
     }
+
     public boolean haveChargedMedTool(obj_id player, obj_id medikitTool) throws InterruptedException
     {
         return (getCount(medikitTool) > 0) && (utils.isNestedWithin(medikitTool, player));
     }
+
     public void clearTrackingScriptVars(obj_id self) throws InterruptedException
     {
         utils.removeScriptVar(self, SCRIPTVAR_PID);
@@ -206,6 +216,7 @@ public class medikit extends script.base_script
         utils.removeScriptVar(self, SCRIPTVAR_TARGET);
         utils.removeScriptVar(self, SCRIPTVAR_LASTCOMMAND);
     }
+
     public String getTemplateParentDirectory(obj_id target) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -224,6 +235,7 @@ public class medikit extends script.base_script
         }
         return parentDirectory;
     }
+
     public int foragedItemsMod(obj_id item) throws InterruptedException
     {
         if (!isIdValid(item))
@@ -260,12 +272,13 @@ public class medikit extends script.base_script
         {
             forageMod = 2;
         }
-        else 
+        else
         {
             forageMod = 3;
         }
         return forageMod;
     }
+
     public boolean isCreaturePet(obj_id npc) throws InterruptedException
     {
         return (ai_lib.isMonster(npc) || hasObjVar(npc, "ai.pet"));

@@ -8,11 +8,13 @@ public class broken_viewscreen extends script.base_script
     public broken_viewscreen()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "setUp", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int setUp(obj_id self, dictionary params) throws InterruptedException
     {
         String[] needs = new String[4];
@@ -26,6 +28,7 @@ public class broken_viewscreen extends script.base_script
         setObjVar(self, "reward", painting);
         return SCRIPT_CONTINUE;
     }
+
     public String pickPaintingToMake() throws InterruptedException
     {
         String painting = "object/tangible/painting/painting_tree.iff";
@@ -33,14 +36,14 @@ public class broken_viewscreen extends script.base_script
         switch (which)
         {
             case 1:
-            painting = "object/tangible/painting/painting_bioengineer_orange.iff";
-            break;
+                painting = "object/tangible/painting/painting_bioengineer_orange.iff";
+                break;
             case 2:
-            painting = "object/tangible/painting/painting_double_helix.iff";
-            break;
+                painting = "object/tangible/painting/painting_double_helix.iff";
+                break;
             case 3:
-            painting = "object/tangible/painting/painting_droid_bright.iff";
-            break;
+                painting = "object/tangible/painting/painting_droid_bright.iff";
+                break;
         }
         return painting;
     }

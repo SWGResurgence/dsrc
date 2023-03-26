@@ -14,6 +14,7 @@ public class base_station extends script.base_script
     public base_station()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (transferer == obj_id.NULL_ID || transferer == srcContainer)
@@ -22,6 +23,7 @@ public class base_station extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.isInHouseCellSpace(self))
@@ -30,6 +32,7 @@ public class base_station extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -50,6 +53,7 @@ public class base_station extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (isInWorldCell(self))
@@ -86,7 +90,7 @@ public class base_station extends script.base_script
                 utils.setScriptVar(cell, craftinglib.SCRIPTVAR_CELL_STATIONS, stations);
             }
         }
-        else 
+        else
         {
             Vector stations = new Vector();
             stations.setSize(0);
@@ -95,6 +99,7 @@ public class base_station extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (isInWorldCell(self) || !isIdValid(destContainer))
@@ -131,7 +136,7 @@ public class base_station extends script.base_script
                 utils.setScriptVar(cell, craftinglib.SCRIPTVAR_CELL_STATIONS, stations);
             }
         }
-        else 
+        else
         {
             Vector stations = new Vector();
             stations.setSize(0);
@@ -146,7 +151,8 @@ public class base_station extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            for (String buffName : buffNames) {
+            for (String buffName : buffNames)
+            {
                 buff.applyBuff(transferer, self, buffName);
             }
         }

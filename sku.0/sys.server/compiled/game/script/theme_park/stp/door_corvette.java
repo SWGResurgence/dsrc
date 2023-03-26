@@ -1,6 +1,7 @@
 package script.theme_park.stp;
 
 import script.*;
+import script.library.colors_hex;
 import script.library.sui;
 
 /**
@@ -15,7 +16,7 @@ public class door_corvette extends script.base_script
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
-        int menu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("item", "use"));
+        int menu = mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Depart"));
         return SCRIPT_CONTINUE;
     }
 
@@ -24,7 +25,7 @@ public class door_corvette extends script.base_script
         if (item == menu_info_types.ITEM_USE)
         {
             String title = "Confirm Departure";
-            String prompt = "Are you sure you want to head back to Pendath?";
+            String prompt = colors_hex.HEADER + colors_hex.AQUAMARINE +  "Are you sure you want to head back to Mos Deltro?" + colors_hex.FOOTER;
             sui.msgbox(self, player, prompt, sui.OK_CANCEL, title, "handleConfirm");
         }
         return SCRIPT_CONTINUE;
@@ -40,7 +41,7 @@ public class door_corvette extends script.base_script
         int btn = sui.getIntButtonPressed(params);
         if (btn == sui.BP_OK)
         {
-            warpPlayer(player, "taanab", 5277.0f, 75.0f, -4198.0f, null, 0, 0, 0, "", true);
+            warpPlayer(player, "tatooine", -2667.0f, 0.0f, -5758.0f, null, 0, 0, 0, "noHandler", true);
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;

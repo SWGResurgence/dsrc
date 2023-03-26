@@ -11,9 +11,6 @@ import java.util.Vector;
 
 public class combat_base_old extends script.base_script
 {
-    public combat_base_old()
-    {
-    }
     public static final int CONE = 0;
     public static final int SINGLE_TARGET = 1;
     public static final int AREA = 2;
@@ -96,6 +93,10 @@ public class combat_base_old extends script.base_script
     public static final int COMBAT_ATTITUDE_DODGE = 3;
     public static final int COMBAT_ATTITUDE_UNARMED = 4;
     public static final int CLOSE_QUARTER_FIGHTING_MOD = 0 - 20;
+    public combat_base_old()
+    {
+    }
+
     public obj_id[] validateDefenders(obj_id attacker, obj_id[] objDefenders) throws InterruptedException
     {
         String attackerSocialGroup = null;
@@ -105,17 +106,22 @@ public class combat_base_old extends script.base_script
         }
         Vector objValidDefenders = new Vector();
         objValidDefenders.setSize(0);
-        for (obj_id objDefender : objDefenders) {
-            if (!isIdValid(objDefender)) {
+        for (obj_id objDefender : objDefenders)
+        {
+            if (!isIdValid(objDefender))
+            {
                 continue;
             }
-            if (isDead(objDefender)) {
+            if (isDead(objDefender))
+            {
                 continue;
             }
-            if (isIncapacitated(objDefender)) {
+            if (isIncapacitated(objDefender))
+            {
                 continue;
             }
-            if (attackerSocialGroup != null && attackerSocialGroup.equals(ai_lib.getSocialGroup(objDefender))) {
+            if (attackerSocialGroup != null && attackerSocialGroup.equals(ai_lib.getSocialGroup(objDefender)))
+            {
                 continue;
             }
             objValidDefenders = utils.addElement(objValidDefenders, objDefender);
@@ -128,31 +134,27 @@ public class combat_base_old extends script.base_script
         }
         return _objValidDefenders;
     }
+
     public boolean checkPosture(obj_id objAttacker, obj_id objDefender) throws InterruptedException
     {
         if (isDead(objDefender))
         {
             return false;
         }
-        if (isIncapacitated(objDefender))
-        {
-            return false;
-        }
-        return true;
+        return !isIncapacitated(objDefender);
     }
+
     public boolean checkTargets(obj_id objAttacker, obj_id objDefender) throws InterruptedException
     {
         obj_id objTarget = getTarget(objAttacker);
-        if (objTarget == objDefender)
-        {
-            return true;
-        }
-        return false;
+        return objTarget == objDefender;
     }
+
     public int doCombatPreCheck(obj_id objPlayer, obj_id objTarget, int intCommand) throws InterruptedException
     {
         return doCombatPreCheck(objPlayer, objTarget, intCommand, true);
     }
+
     public int doCombatPreCheck(obj_id objPlayer, obj_id objTarget, int intCommand, boolean changeCombatTarget) throws InterruptedException
     {
         if (vehicle.isRidingVehicle(objPlayer))
@@ -177,7 +179,7 @@ public class combat_base_old extends script.base_script
             }
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             if (!(checkPosture(objPlayer, objTarget)))
             {
@@ -217,12 +219,12 @@ public class combat_base_old extends script.base_script
                             string_id strSpam = new string_id("combat_effects", "prone_ranged_too_close");
                             sendSystemMessage(objPlayer, strSpam);
                         }
-                        else 
+                        else
                         {
                         }
                         return SCRIPT_CONTINUE;
                     }
-                    else 
+                    else
                     {
                         if (objPlayer.hasScriptVar("minRangeWarning"))
                         {
@@ -232,7 +234,7 @@ public class combat_base_old extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 if (objPlayer.hasScriptVar("minRangeWarning"))
                 {
@@ -241,7 +243,7 @@ public class combat_base_old extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             if (objPlayer.hasScriptVar("minRangeWarning"))
             {
@@ -251,6 +253,7 @@ public class combat_base_old extends script.base_script
         }
         return -1;
     }
+
     public boolean drainCombatActionAttributes(obj_id objPlayer, int intHealthCost, int intActionCost, int intMindCost, int intAction, float fltDelay) throws InterruptedException
     {
         if (!(drainAttributesFastRegen(objPlayer, intHealthCost, intActionCost, intMindCost)))
@@ -260,22 +263,17 @@ public class combat_base_old extends script.base_script
             sendSystemMessage(objPlayer, strSpam);
             return false;
         }
-        else 
+        else
         {
             return true;
         }
     }
+
     public boolean drainAttributesFastRegen(obj_id objPlayer, int intHealthCost, int intActionCost, int intMindCost) throws InterruptedException
     {
-        if (drainAttributes(objPlayer, intActionCost, intMindCost))
-        {
-            return true;
-        }
-        else 
-        {
-            return false;
-        }
+        return drainAttributes(objPlayer, intActionCost, intMindCost);
     }
+
     public boolean checkAttributeCost(obj_id objTarget, dictionary dctCost) throws InterruptedException
     {
         int intHealthCost = dctCost.getInt("intHealthCost");
@@ -292,30 +290,28 @@ public class combat_base_old extends script.base_script
         {
             return false;
         }
-        if (intCurrentMind < intMindCost)
-        {
-            return false;
-        }
-        return true;
+        return intCurrentMind >= intMindCost;
     }
+
     public dictionary getRawActionCost(obj_id objPlayer, String strWeaponType, String[] strCostMods, int intRawHealth, int intRawAction, int intRawMind, float fltHealthModifier, float fltActionModifier, float fltMindModifier) throws InterruptedException
     {
-        intRawHealth = (int)(intRawHealth * UNIVERSAL_ACTION_COST_MULTIPLIER);
-        intRawAction = (int)(intRawAction * UNIVERSAL_ACTION_COST_MULTIPLIER);
-        intRawMind = (int)(intRawMind * UNIVERSAL_ACTION_COST_MULTIPLIER);
-        int intHealthCost = (int)(intRawHealth * fltHealthModifier);
-        int intActionCost = (int)(intRawAction * fltActionModifier);
-        int intMindCost = (int)(intRawMind * fltMindModifier);
+        intRawHealth = (int) (intRawHealth * UNIVERSAL_ACTION_COST_MULTIPLIER);
+        intRawAction = (int) (intRawAction * UNIVERSAL_ACTION_COST_MULTIPLIER);
+        intRawMind = (int) (intRawMind * UNIVERSAL_ACTION_COST_MULTIPLIER);
+        int intHealthCost = (int) (intRawHealth * fltHealthModifier);
+        int intActionCost = (int) (intRawAction * fltActionModifier);
+        int intMindCost = (int) (intRawMind * fltMindModifier);
         float fltSkillCostMod = getSkillModifiers(objPlayer, strWeaponType + "_", strCostMods);
-        intHealthCost = intHealthCost + (int)(intHealthCost * fltSkillCostMod);
-        intActionCost = intActionCost + (int)(intActionCost * fltSkillCostMod);
-        intMindCost = intMindCost + (int)(intMindCost * fltSkillCostMod);
+        intHealthCost = intHealthCost + (int) (intHealthCost * fltSkillCostMod);
+        intActionCost = intActionCost + (int) (intActionCost * fltSkillCostMod);
+        intMindCost = intMindCost + (int) (intMindCost * fltSkillCostMod);
         dictionary dctReturnValues = new dictionary();
         dctReturnValues.put("intHealthCost", intHealthCost);
         dctReturnValues.put("intActionCost", intActionCost);
         dctReturnValues.put("intMindCost", intMindCost);
         return dctReturnValues;
     }
+
     public float getSkillModifiers(obj_id objPlayer, String strAdditiveString, String[] strSkillMods) throws InterruptedException
     {
         int intI = 0;
@@ -327,6 +323,7 @@ public class combat_base_old extends script.base_script
         }
         return fltSkillMod;
     }
+
     public float calculateTime(obj_id objPlayer, String strWeaponType, float fltDefaultTime, String[] strTimeMods) throws InterruptedException
     {
         float fltTimeMod = getSkillModifiers(objPlayer, strWeaponType + "_", strTimeMods);
@@ -338,6 +335,7 @@ public class combat_base_old extends script.base_script
         }
         return fltDefaultTime;
     }
+
     public weapon_data getRawDamage(obj_id objPlayer, weapon_data cbtWeaponData, float fltDamageModifier, String[] strDamageMods, boolean boolDontIgnoreCerts) throws InterruptedException
     {
         obj_id objWeapon = cbtWeaponData.id;
@@ -374,7 +372,7 @@ public class combat_base_old extends script.base_script
             fltMinDamage = fltMinDamage * 1.5f;
             fltMaxDamage = fltMaxDamage * 1.5f;
         }
-        else 
+        else
         {
             fltMinDamage = fltMaxDamage / 2;
             fltMinDamage = fltMinDamage * 1.0f;
@@ -394,18 +392,20 @@ public class combat_base_old extends script.base_script
         fltMaxDamage = fltMaxDamage * fltDamageModifier;
         fltMinDamage = fltMinDamage * fltStateMod;
         fltMaxDamage = fltMaxDamage * fltStateMod;
-        cbtWeaponData.minDamage = (int)fltMinDamage;
-        cbtWeaponData.maxDamage = (int)fltMaxDamage;
+        cbtWeaponData.minDamage = (int) fltMinDamage;
+        cbtWeaponData.maxDamage = (int) fltMaxDamage;
         if (cbtWeaponData.minDamage <= 0)
         {
             cbtWeaponData.minDamage = 1;
         }
         return cbtWeaponData;
     }
+
     public int getHitMod(obj_id objPlayer, String strWeaponType, String[] strToHitMods) throws InterruptedException
     {
         return getHitMod(objPlayer, strWeaponType, strToHitMods, null);
     }
+
     public int getHitMod(obj_id objPlayer, String strWeaponType, String[] strToHitMods, dictionary dctCombatInfo) throws InterruptedException
     {
         int intToHitBonus = 0;
@@ -415,7 +415,7 @@ public class combat_base_old extends script.base_script
         {
             fltToHitMod = getMobHitMod(objPlayer);
         }
-        else 
+        else
         {
             String strOverloadAccuracyMod = null;
             if (dctCombatInfo != null)
@@ -426,7 +426,7 @@ public class combat_base_old extends script.base_script
             {
                 fltToHitMod = getEnhancedSkillStatisticModifier(objPlayer, strOverloadAccuracyMod);
             }
-            else 
+            else
             {
                 fltToHitMod = 0;
                 fltToHitMod = fltToHitMod + getSkillModifiers(objPlayer, strWeaponType + "_", strToHitMods);
@@ -436,7 +436,7 @@ public class combat_base_old extends script.base_script
                 }
             }
         }
-        intToHitBonus = (int)(fltToHitMod + fltStateMod);
+        intToHitBonus = (int) (fltToHitMod + fltStateMod);
         if (utils.hasScriptVar(objPlayer, "inAlignedStructure"))
         {
             if (strWeaponType.equals("pistol"))
@@ -445,7 +445,7 @@ public class combat_base_old extends script.base_script
                 {
                     float fltHitBonus = intToHitBonus;
                     fltHitBonus = fltHitBonus * 1.15f;
-                    intToHitBonus = (int)fltHitBonus;
+                    intToHitBonus = (int) fltHitBonus;
                 }
             }
             else if (strWeaponType.equals("carbine"))
@@ -454,16 +454,18 @@ public class combat_base_old extends script.base_script
                 {
                     float fltHitBonus = intToHitBonus;
                     fltHitBonus = fltHitBonus * 1.15f;
-                    intToHitBonus = (int)fltHitBonus;
+                    intToHitBonus = (int) fltHitBonus;
                 }
             }
         }
         return intToHitBonus;
     }
+
     public hit_result[] runHitEngine(attacker_data cbtAttackerData, weapon_data cbtWeaponData, defender_data[] cbtDefenderData) throws InterruptedException
     {
         return runHitEngine(cbtAttackerData, cbtWeaponData, cbtDefenderData, false);
     }
+
     public hit_result[] runHitEngine(attacker_data cbtAttackerData, weapon_data cbtWeaponData, defender_data[] cbtDefenderData, boolean boolAllowHitSelf) throws InterruptedException
     {
         float fltDefenseModifier = 0;
@@ -503,12 +505,12 @@ public class combat_base_old extends script.base_script
                 {
                     fltDefenseModifier = -100000.0f;
                 }
-                else 
+                else
                 {
                     fltDefenseModifier = FEIGN_DEATH_PENALTY;
                 }
             }
-            else 
+            else
             {
                 combatLog(cbtAttackerData.id, cbtDefenderData[intI].id, "runHitEngine", "State Defense Mods = " + fltDefenseModifier);
             }
@@ -520,7 +522,7 @@ public class combat_base_old extends script.base_script
                 strDefenseBonus = "ranged_defense";
                 strMitigationMod = "ranged_damage_mitigation";
             }
-            else 
+            else
             {
                 strMitigationMod = "melee_damage_mitigation";
                 strDefenseBonus = "melee_defense";
@@ -580,7 +582,7 @@ public class combat_base_old extends script.base_script
                         fltDefenseModifier -= eff;
                     }
                 }
-                else 
+                else
                 {
                     if (utils.hasScriptVar(checkId, "trapmod.melee_defense"))
                     {
@@ -599,7 +601,7 @@ public class combat_base_old extends script.base_script
                     combatLog(cbtAttackerData.id, cbtDefenderData[intI].id, "runHitEngine", "SL Ranged Bonus = +" + eff);
                     fltDefenseModifier += eff;
                 }
-                else 
+                else
                 {
                     int eff = getEnhancedSkillStatisticModifier(groupLeader, "group_melee_defense");
                     combatLog(cbtAttackerData.id, cbtDefenderData[intI].id, "runHitEngine", "SL Melee Bonus = +" + eff);
@@ -607,7 +609,7 @@ public class combat_base_old extends script.base_script
                 }
             }
             combatLog(cbtAttackerData.id, cbtDefenderData[intI].id, "runHitEngine", "Final Defense Mod = " + fltDefenseModifier);
-            cbtDefenderData[intI].scriptMod = (int)fltDefenseModifier;
+            cbtDefenderData[intI].scriptMod = (int) fltDefenseModifier;
             cbtHitData[intI] = calculateHit(cbtAttackerData, cbtDefenderData[intI], cbtWeaponData);
             if (cbtAttackerData.id == cbtDefenderData[intI].id)
             {
@@ -616,7 +618,7 @@ public class combat_base_old extends script.base_script
                     cbtHitData[intI].success = false;
                 }
             }
-            else 
+            else
             {
                 if (pvpCanAttack(cbtAttackerData.id, cbtDefenderData[intI].id))
                 {
@@ -633,14 +635,14 @@ public class combat_base_old extends script.base_script
                 if ((intAttackerWeaponCategory != combat.RANGED_WEAPON) && (intDefenderWeaponCategory == combat.RANGED_WEAPON))
                 {
                     float fltDamageBonus = getDamageBonus(intDefenderWeaponType);
-                    cbtHitData[intI].damage = (int)(cbtHitData[intI].damage * fltDamageBonus);
+                    cbtHitData[intI].damage = (int) (cbtHitData[intI].damage * fltDamageBonus);
                 }
                 int intDefenderPosture = getPosture(cbtDefenderData[intI].id);
                 if (intDefenderPosture == POSTURE_KNOCKED_DOWN)
                 {
                     float fltDamage = cbtHitData[intI].damage;
                     fltDamage = fltDamage * KNOCKED_DOWN_DAMAGE_INCREASE;
-                    cbtHitData[intI].damage = (int)fltDamage;
+                    cbtHitData[intI].damage = (int) fltDamage;
                 }
             }
             if (intI == 0)
@@ -656,7 +658,7 @@ public class combat_base_old extends script.base_script
                         strSpam = new string_id("cbt_spam", "los_recycle");
                         return null;
                     }
-                    else 
+                    else
                     {
                         int intLineOfSightFailed = getIntObjVar(cbtAttackerData.id, "combat.intLineOfSightFailed");
                         intLineOfSightFailed = intLineOfSightFailed + 1;
@@ -669,7 +671,7 @@ public class combat_base_old extends script.base_script
                             setCombatTarget(cbtAttackerData.id, null);
                             return null;
                         }
-                        else 
+                        else
                         {
                             setObjVar(cbtAttackerData.id, "combat.intLineOfSightFailed", intLineOfSightFailed);
                         }
@@ -677,7 +679,7 @@ public class combat_base_old extends script.base_script
                         return null;
                     }
                 }
-                else 
+                else
                 {
                     if (hasObjVar(cbtAttackerData.id, "combat.intLineOfSightFailed"))
                     {
@@ -689,7 +691,7 @@ public class combat_base_old extends script.base_script
             {
                 if (cbtDefenderData[intI].posture != POSTURE_INCAPACITATED)
                 {
-                    cbtHitData[intI].damage = cbtHitData[intI].damage + (int)(cbtHitData[intI].damage * FEIGN_DEATH_DAMAGE_MODIFIER);
+                    cbtHitData[intI].damage = cbtHitData[intI].damage + (int) (cbtHitData[intI].damage * FEIGN_DEATH_DAMAGE_MODIFIER);
                     obj_id[] objEnemies = getWhoIsTargetingMe(cbtDefenderData[intI].id);
                     if (objEnemies != null)
                     {
@@ -707,7 +709,7 @@ public class combat_base_old extends script.base_script
                         }
                     }
                 }
-                else 
+                else
                 {
                 }
             }
@@ -724,13 +726,14 @@ public class combat_base_old extends script.base_script
                         {
                             fltDamage = MIN_PVP_DAMAGE + rand(1, 4);
                         }
-                        cbtHitData[intI].damage = (int)fltDamage;
+                        cbtHitData[intI].damage = (int) fltDamage;
                     }
                 }
             }
         }
         return cbtHitData;
     }
+
     public boolean didHit(hit_result[] cbtHitData) throws InterruptedException
     {
         int intI = 0;
@@ -744,6 +747,7 @@ public class combat_base_old extends script.base_script
         }
         return false;
     }
+
     public void finalizeDamage(obj_id objAttacker, weapon_data cbtWeaponData, defender_data[] cbtDefenderData, hit_result[] cbtHitData, defender_results[] cbtDefenderResults, dictionary dctCombatInfo) throws InterruptedException
     {
         obj_id[] objDefenders = new obj_id[cbtDefenderData.length];
@@ -755,7 +759,7 @@ public class combat_base_old extends script.base_script
                 float fltDamageMultiplier = getFloatObjVar(cbtDefenderData[intI].id, "fltDamageModifier");
                 if (fltDamageMultiplier > 0)
                 {
-                    cbtHitData[intI].damage = (int)(cbtHitData[intI].damage * fltDamageMultiplier);
+                    cbtHitData[intI].damage = (int) (cbtHitData[intI].damage * fltDamageMultiplier);
                 }
                 int intWeaponCategory = combat.getWeaponCategory(cbtWeaponData.weaponType);
                 if ((intWeaponCategory != combat.RANGED_WEAPON) || (isJedi(cbtDefenderData[intI].id)))
@@ -771,14 +775,14 @@ public class combat_base_old extends script.base_script
                         fltModifier = 95;
                     }
                     fltModifier = fltModifier / 100;
-                    cbtHitData[intI].damage = cbtHitData[intI].damage - (int)(cbtHitData[intI].damage * fltModifier);
+                    cbtHitData[intI].damage = cbtHitData[intI].damage - (int) (cbtHitData[intI].damage * fltModifier);
                 }
                 if (dctCombatInfo == null)
                 {
                     doWrappedDamage(objAttacker, cbtDefenderData[intI].id, cbtWeaponData.id, cbtHitData[intI], dctCombatInfo);
                     dot.applyCombatDots(objAttacker, cbtDefenderData[intI].id, cbtHitData[intI], cbtWeaponData, 1.0f);
                 }
-                else 
+                else
                 {
                     int intHitHead = dctCombatInfo.getInt("intHitHead");
                     int intHitBody = dctCombatInfo.getInt("intHitBody");
@@ -789,39 +793,39 @@ public class combat_base_old extends script.base_script
                         doWrappedDamage(objAttacker, cbtDefenderData[intI].id, cbtWeaponData.id, cbtHitData[intI], dctCombatInfo);
                         dot.applyCombatDots(objAttacker, cbtDefenderData[intI].id, cbtHitData[intI], cbtWeaponData, 1.0f);
                     }
-                    else 
+                    else
                     {
                         int intRawDamage = cbtHitData[intI].damage;
                         int intLocationTotals = intHitHead + intHitBody + intHitLegs;
                         if (intHitHead > 0)
                         {
-                            int[] intHitLocations = 
-                            {
-                                HIT_LOCATION_HEAD
-                            };
+                            int[] intHitLocations =
+                                    {
+                                            HIT_LOCATION_HEAD
+                                    };
                             cbtHitData[intI].hitLocation = intHitLocations[rand(0, intHitLocations.length - 1)];
                             cbtHitData[intI].damage = intRawDamage / intLocationTotals;
                             doWrappedDamage(objAttacker, cbtDefenderData[intI].id, cbtWeaponData.id, cbtHitData[intI], dctCombatInfo);
                         }
                         if (intHitLegs > 0)
                         {
-                            int[] intHitLocations = 
-                            {
-                                HIT_LOCATION_R_LEG,
-                                HIT_LOCATION_L_LEG
-                            };
+                            int[] intHitLocations =
+                                    {
+                                            HIT_LOCATION_R_LEG,
+                                            HIT_LOCATION_L_LEG
+                                    };
                             cbtHitData[intI].hitLocation = intHitLocations[rand(0, intHitLocations.length - 1)];
                             cbtHitData[intI].damage = intRawDamage / intLocationTotals;
                             doWrappedDamage(objAttacker, cbtDefenderData[intI].id, cbtWeaponData.id, cbtHitData[intI], dctCombatInfo);
                         }
                         if (intHitBody > 0)
                         {
-                            int[] intHitLocations = 
-                            {
-                                HIT_LOCATION_L_ARM,
-                                HIT_LOCATION_R_ARM,
-                                HIT_LOCATION_BODY
-                            };
+                            int[] intHitLocations =
+                                    {
+                                            HIT_LOCATION_L_ARM,
+                                            HIT_LOCATION_R_ARM,
+                                            HIT_LOCATION_BODY
+                                    };
                             cbtHitData[intI].hitLocation = intHitLocations[rand(0, intHitLocations.length - 1)];
                             cbtHitData[intI].damage = intRawDamage / intLocationTotals;
                             doWrappedDamage(objAttacker, cbtDefenderData[intI].id, cbtWeaponData.id, cbtHitData[intI], dctCombatInfo);
@@ -838,7 +842,7 @@ public class combat_base_old extends script.base_script
                         float fltRawDamage = cbtHitData[intI].damage;
                         fltRawDamage = fltRawDamage * fltBleedingValue;
                         fltRawDamage = fltRawDamage / intBleedTotals;
-                        int intBleedDamage = (int)fltRawDamage;
+                        int intBleedDamage = (int) fltRawDamage;
                         if (intBleedMind > 0)
                         {
                             dot.applyBleedingEffect(cbtDefenderData[0].id, "bleedingMindSpecial" + objAttacker, MIND, intBleedDamage, intBleedingDuration);
@@ -854,7 +858,7 @@ public class combat_base_old extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
             }
             objDefenders[intI] = cbtDefenderData[intI].id;
@@ -864,6 +868,7 @@ public class combat_base_old extends script.base_script
         callDefenderCombatAction(objDefenders, intResults, objAttacker, cbtWeaponData.id);
         return;
     }
+
     public void doWrappedDamage(obj_id objAttacker, obj_id objDefender, obj_id objWeapon, hit_result cbtHitData, dictionary dctCombatInfo) throws InterruptedException
     {
         if (utils.hasScriptVar(objDefender, "food.mitigate_damage.eff"))
@@ -876,11 +881,11 @@ public class combat_base_old extends script.base_script
                 clearBuffIcon(objDefender, "food.mitigate_damage");
                 utils.removeScriptVarTree(objDefender, "food.mitigate_damage");
             }
-            else 
+            else
             {
                 utils.setScriptVar(objDefender, "food.mitigate_damage.dur", dur);
             }
-            int mitigated = (int)(cbtHitData.damage * (eff / 100.0f));
+            int mitigated = (int) (cbtHitData.damage * (eff / 100.0f));
             cbtHitData.damage -= mitigated;
             if (cbtHitData.damage < 0)
             {
@@ -892,7 +897,7 @@ public class combat_base_old extends script.base_script
             doDamage(objAttacker, objDefender, objWeapon, cbtHitData);
             return;
         }
-        else 
+        else
         {
             int intOverloadWeapon = dctCombatInfo.getInt("intOverloadWeapon");
             if (intOverloadWeapon > 0)
@@ -913,19 +918,20 @@ public class combat_base_old extends script.base_script
                     xp.updateCombatXpList(objDefender, objAttacker, "jedi_general", cbtHitData.damage);
                     return;
                 }
-                else 
+                else
                 {
                     doDamage(objAttacker, objDefender, objWeapon, cbtHitData);
                     return;
                 }
             }
-            else 
+            else
             {
                 doDamage(objAttacker, objDefender, objWeapon, cbtHitData);
                 return;
             }
         }
     }
+
     public void finalizeMineDamage(obj_id objAttacker, weapon_data cbtWeaponData, defender_data[] cbtDefenderData, hit_result[] cbtHitData, defender_results[] cbtDefenderResults) throws InterruptedException
     {
         obj_id[] objDefenders = new obj_id[cbtDefenderData.length];
@@ -938,11 +944,11 @@ public class combat_base_old extends script.base_script
                 if (damage(cbtDefenderData[intI].id, cbtWeaponData.damageType, cbtHitData[intI].hitLocation, cbtHitData[intI].damage))
                 {
                 }
-                else 
+                else
                 {
                 }
             }
-            else 
+            else
             {
             }
             objDefenders[intI] = cbtDefenderData[intI].id;
@@ -951,25 +957,27 @@ public class combat_base_old extends script.base_script
         }
         return;
     }
+
     public color getHitColor(int intHitLocation) throws InterruptedException
     {
         switch (intHitLocation)
         {
             case HIT_LOCATION_BODY:
-            return colors.RED;
+                return colors.RED;
             case HIT_LOCATION_HEAD:
-            return colors.BLUE;
+                return colors.BLUE;
             case HIT_LOCATION_R_ARM:
-            return colors.RED;
+                return colors.RED;
             case HIT_LOCATION_L_ARM:
-            return colors.RED;
+                return colors.RED;
             case HIT_LOCATION_R_LEG:
-            return colors.GREEN;
+                return colors.GREEN;
             case HIT_LOCATION_L_LEG:
-            return colors.GREEN;
+                return colors.GREEN;
         }
         return colors.WHITE;
     }
+
     public void doCombatFlyText(defender_data[] cbtDefenderData, obj_id objAttacker, hit_result[] cbtHitData, defender_results[] cbtDefenderResults) throws InterruptedException
     {
         for (int intI = 0; intI < cbtHitData.length; intI++)
@@ -982,7 +990,7 @@ public class combat_base_old extends script.base_script
                 strSpam = new string_id("combat_effects", "hit_" + strId);
                 colFlyText = getHitColor(cbtHitData[intI].hitLocation);
             }
-            else 
+            else
             {
                 if (cbtDefenderResults[intI].result == COMBAT_RESULT_MISS)
                 {
@@ -998,6 +1006,7 @@ public class combat_base_old extends script.base_script
             }
         }
     }
+
     public String getHitSpam(hit_result cbtHitData) throws InterruptedException
     {
         int intHitLocation = cbtHitData.hitLocation;
@@ -1005,24 +1014,26 @@ public class combat_base_old extends script.base_script
         switch (intHitLocation)
         {
             case HIT_LOCATION_BODY:
-            return "body";
+                return "body";
             case HIT_LOCATION_HEAD:
-            return "head";
+                return "head";
             case HIT_LOCATION_R_ARM:
-            return "rarm";
+                return "rarm";
             case HIT_LOCATION_L_ARM:
-            return "larm";
+                return "larm";
             case HIT_LOCATION_R_LEG:
-            return "rleg";
+                return "rleg";
             case HIT_LOCATION_L_LEG:
-            return "lleg";
+                return "lleg";
         }
         return strId;
     }
+
     public boolean checkForFumbles(hit_result[] hitData) throws InterruptedException
     {
         return false;
     }
+
     public void setDefenderCombatResults(weapon_data cbtWeaponData, attacker_data cbtAttackerData, attacker_results cbtAttackerResults, hit_result[] cbtHitData, defender_data[] cbtDefenderData, defender_results[] cbtDefenderResults, String[] strBlockMods, int intBlockMod, String[] strEvadeMods, int intEvadeMod, String[] strCounterAttackMods, int intCounterAttackMod, boolean boolDefendable) throws InterruptedException
     {
         int intDefenderCombatState;
@@ -1049,57 +1060,57 @@ public class combat_base_old extends script.base_script
                         switch (intCombatAttitude)
                         {
                             case COMBAT_ATTITUDE_DODGE:
-                            strSkillMods = strEvadeMods;
-                            intEventMod = intEvadeMod;
-                            intDefenderMod = EVASIVE_EVADE_MOD;
-                            strAttackerMod = "anti_dodge";
-                            strDefenderMod = "dodge";
-                            break;
-                            case COMBAT_ATTITUDE_BLOCK:
-                            strSkillMods = strBlockMods;
-                            intEventMod = intBlockMod;
-                            intDefenderMod = 0;
-                            strAttackerMod = "anti_block";
-                            strDefenderMod = "block";
-                            break;
-                            case COMBAT_ATTITUDE_COUNTERATTACK:
-                            strSkillMods = strCounterAttackMods;
-                            intEventMod = intCounterAttackMod;
-                            intDefenderMod = AGGRESSIVE_COUNTERATTACK_MOD;
-                            strAttackerMod = "anti_counterattack";
-                            strDefenderMod = "counterattack";
-                            break;
-                            case COMBAT_ATTITUDE_UNARMED:
-                            int intRoll = rand(1, 3);
-                            if (intRoll == 1)
-                            {
                                 strSkillMods = strEvadeMods;
                                 intEventMod = intEvadeMod;
                                 intDefenderMod = EVASIVE_EVADE_MOD;
                                 strAttackerMod = "anti_dodge";
-                                strDefenderMod = "private_unarmed_passive_defense";
-                                intCombatAttitude = COMBAT_ATTITUDE_DODGE;
+                                strDefenderMod = "dodge";
                                 break;
-                            }
-                            if (intRoll == 2)
-                            {
+                            case COMBAT_ATTITUDE_BLOCK:
                                 strSkillMods = strBlockMods;
                                 intEventMod = intBlockMod;
                                 intDefenderMod = 0;
                                 strAttackerMod = "anti_block";
-                                strDefenderMod = "private_unarmed_passive_defense";
-                                intCombatAttitude = COMBAT_ATTITUDE_BLOCK;
-                            }
-                            if (intRoll == 3)
-                            {
+                                strDefenderMod = "block";
+                                break;
+                            case COMBAT_ATTITUDE_COUNTERATTACK:
                                 strSkillMods = strCounterAttackMods;
                                 intEventMod = intCounterAttackMod;
                                 intDefenderMod = AGGRESSIVE_COUNTERATTACK_MOD;
                                 strAttackerMod = "anti_counterattack";
-                                strDefenderMod = "private_unarmed_passive_defense";
-                                intCombatAttitude = COMBAT_ATTITUDE_COUNTERATTACK;
-                            }
-                            break;
+                                strDefenderMod = "counterattack";
+                                break;
+                            case COMBAT_ATTITUDE_UNARMED:
+                                int intRoll = rand(1, 3);
+                                if (intRoll == 1)
+                                {
+                                    strSkillMods = strEvadeMods;
+                                    intEventMod = intEvadeMod;
+                                    intDefenderMod = EVASIVE_EVADE_MOD;
+                                    strAttackerMod = "anti_dodge";
+                                    strDefenderMod = "private_unarmed_passive_defense";
+                                    intCombatAttitude = COMBAT_ATTITUDE_DODGE;
+                                    break;
+                                }
+                                if (intRoll == 2)
+                                {
+                                    strSkillMods = strBlockMods;
+                                    intEventMod = intBlockMod;
+                                    intDefenderMod = 0;
+                                    strAttackerMod = "anti_block";
+                                    strDefenderMod = "private_unarmed_passive_defense";
+                                    intCombatAttitude = COMBAT_ATTITUDE_BLOCK;
+                                }
+                                if (intRoll == 3)
+                                {
+                                    strSkillMods = strCounterAttackMods;
+                                    intEventMod = intCounterAttackMod;
+                                    intDefenderMod = AGGRESSIVE_COUNTERATTACK_MOD;
+                                    strAttackerMod = "anti_counterattack";
+                                    strDefenderMod = "private_unarmed_passive_defense";
+                                    intCombatAttitude = COMBAT_ATTITUDE_COUNTERATTACK;
+                                }
+                                break;
                         }
                         int intPostureDefenseMod = 0;
                         switch (cbtDefenderData[intI].posture)
@@ -1155,31 +1166,31 @@ public class combat_base_old extends script.base_script
                                 combatLog(cbtAttackerData.id, cbtDefenderData[intI].id, "setDefenderCombatResults", "Successful Counterattack");
                                 cbtHitData[intI].success = false;
                             }
-                            else 
+                            else
                             {
                                 cbtDefenderResults[intI].result = COMBAT_RESULT_HIT;
                                 combatLog(cbtAttackerData.id, cbtDefenderData[intI].id, "setDefenderCombatResults", "Attack Hit");
                             }
                         }
-                        else 
+                        else
                         {
                             cbtDefenderResults[intI].result = COMBAT_RESULT_HIT;
                             combatLog(cbtAttackerData.id, cbtDefenderData[intI].id, "setDefenderCombatResults", "Attack Hit");
                         }
                     }
-                    else 
+                    else
                     {
                         cbtDefenderResults[intI].result = COMBAT_RESULT_HIT;
                         combatLog(cbtAttackerData.id, cbtDefenderData[intI].id, "setDefenderCombatResults", "Attack Hit");
                     }
                 }
-                else 
+                else
                 {
                     cbtDefenderResults[intI].result = COMBAT_RESULT_HIT;
                     combatLog(cbtAttackerData.id, cbtDefenderData[intI].id, "setDefenderCombatResults", "Attack Hit");
                 }
             }
-            else 
+            else
             {
                 cbtDefenderResults[intI].result = COMBAT_RESULT_MISS;
                 combatLog(cbtAttackerData.id, cbtDefenderData[intI].id, "setDefenderCombatResults", "Attack Missed");
@@ -1209,6 +1220,7 @@ public class combat_base_old extends script.base_script
             intI = intI + 1;
         }
     }
+
     public int getCombatAttitude(obj_id objPlayer, int intWeaponType) throws InterruptedException
     {
         if (vehicle.isVehicle(objPlayer))
@@ -1218,32 +1230,33 @@ public class combat_base_old extends script.base_script
         switch (intWeaponType)
         {
             case WEAPON_TYPE_RIFLE:
-            return COMBAT_ATTITUDE_BLOCK;
+                return COMBAT_ATTITUDE_BLOCK;
             case WEAPON_TYPE_LIGHT_RIFLE:
-            return COMBAT_ATTITUDE_COUNTERATTACK;
+                return COMBAT_ATTITUDE_COUNTERATTACK;
             case WEAPON_TYPE_PISTOL:
-            return COMBAT_ATTITUDE_DODGE;
+                return COMBAT_ATTITUDE_DODGE;
             case WEAPON_TYPE_HEAVY:
-            return COMBAT_ATTITUDE_NONE;
+                return COMBAT_ATTITUDE_NONE;
             case WEAPON_TYPE_1HAND_MELEE:
-            return COMBAT_ATTITUDE_DODGE;
+                return COMBAT_ATTITUDE_DODGE;
             case WEAPON_TYPE_2HAND_MELEE:
-            return COMBAT_ATTITUDE_COUNTERATTACK;
+                return COMBAT_ATTITUDE_COUNTERATTACK;
             case WEAPON_TYPE_UNARMED:
-            return COMBAT_ATTITUDE_UNARMED;
+                return COMBAT_ATTITUDE_UNARMED;
             case WEAPON_TYPE_POLEARM:
-            return COMBAT_ATTITUDE_BLOCK;
+                return COMBAT_ATTITUDE_BLOCK;
             case WEAPON_TYPE_THROWN:
-            return COMBAT_ATTITUDE_NONE;
+                return COMBAT_ATTITUDE_NONE;
             case WEAPON_TYPE_WT_1HAND_LIGHTSABER:
-            return COMBAT_ATTITUDE_NONE;
+                return COMBAT_ATTITUDE_NONE;
             case WEAPON_TYPE_WT_2HAND_LIGHTSABER:
-            return COMBAT_ATTITUDE_NONE;
+                return COMBAT_ATTITUDE_NONE;
             case WEAPON_TYPE_WT_POLEARM_LIGHTSABER:
-            return COMBAT_ATTITUDE_NONE;
+                return COMBAT_ATTITUDE_NONE;
         }
         return COMBAT_ATTITUDE_NONE;
     }
+
     public void applyPostures(attacker_data cbtAttackerData, attacker_results cbtAttackerResults, hit_result[] cbtHitData, defender_data[] cbtDefenderData, defender_results[] cbtDefenderResults, int intAttackerEndPosture, int intDefenderEndPosture, weapon_data cbtWeaponData) throws InterruptedException
     {
         int intState = 0;
@@ -1303,7 +1316,7 @@ public class combat_base_old extends script.base_script
                             sendSystemMessage(cbtDefenderData[intI].id, strSpam);
                         }
                     }
-                    else 
+                    else
                     {
                         cbtDefenderResults[intI].endPosture = cbtDefenderData[intI].posture;
                     }
@@ -1312,14 +1325,14 @@ public class combat_base_old extends script.base_script
                         cbtDefenderResults[intI].endPosture = POSTURE_INCAPACITATED;
                     }
                 }
-                else 
+                else
                 {
                     cbtDefenderResults[intI].endPosture = cbtDefenderData[intI].posture;
                 }
                 cbtDefenderResults[intI].id = cbtDefenderData[intI].id;
             }
         }
-        else 
+        else
         {
             for (int intI = 0; intI < cbtHitData.length; intI++)
             {
@@ -1327,7 +1340,7 @@ public class combat_base_old extends script.base_script
                 {
                     cbtDefenderResults[intI].endPosture = POSTURE_INCAPACITATED;
                 }
-                else 
+                else
                 {
                     cbtDefenderResults[intI].endPosture = cbtDefenderData[intI].posture;
                 }
@@ -1346,13 +1359,13 @@ public class combat_base_old extends script.base_script
                 int intNewPosture = getHigherPosture(cbtAttackerData.posture);
                 cbtAttackerResults.endPosture = intNewPosture;
             }
-            else 
+            else
             {
                 cbtAttackerResults.endPosture = intAttackerEndPosture;
             }
             cbtAttackerResults.id = cbtAttackerData.id;
         }
-        else 
+        else
         {
             cbtAttackerResults.endPosture = cbtAttackerData.posture;
             cbtAttackerResults.id = cbtAttackerData.id;
@@ -1360,12 +1373,14 @@ public class combat_base_old extends script.base_script
         cbtAttackerResults.weapon = cbtWeaponData.id;
         return;
     }
+
     public void doFumble(attacker_data cbtAttackerData, weapon_data cbtWeaponData, int intAttackerPosture, String strAnimationAction) throws InterruptedException
     {
         string_id strSpam = new string_id("cbt_spam", "fumble");
         int intFumbleDamage = rand(cbtWeaponData.minDamage, cbtWeaponData.maxDamage);
         return;
     }
+
     public void doCounterAttack(obj_id objAttacker, obj_id objDefender) throws InterruptedException
     {
         if (isPlayer(objAttacker))
@@ -1373,12 +1388,13 @@ public class combat_base_old extends script.base_script
             setObjVar(objAttacker, "combat.boolCounterAttack", true);
             queueCommand(objDefender, (1957054281), objAttacker, "", COMMAND_PRIORITY_FRONT);
         }
-        else 
+        else
         {
             setObjVar(objAttacker, "combat.doCounterAttack", 1);
         }
         return;
     }
+
     public boolean isImmuneToStateChange(obj_id target) throws InterruptedException
     {
         if (vehicle.isDriveableVehicle(target))
@@ -1397,12 +1413,9 @@ public class combat_base_old extends script.base_script
         {
             return true;
         }
-        if (ai_lib.isTurret(target))
-        {
-            return true;
-        }
-        return false;
+        return ai_lib.isTurret(target);
     }
+
     public boolean runDizzyCheck(obj_id objPlayer) throws InterruptedException
     {
         int intState = 0;
@@ -1416,7 +1429,7 @@ public class combat_base_old extends script.base_script
                     messageTo(objPlayer, "dizzyCheckFailed", null, 1, false);
                     return false;
                 }
-                else 
+                else
                 {
                     string_id strSpam = new string_id("cbt_spam", "dizzy_fall_down_single");
                     sendSystemMessage(objPlayer, strSpam);
@@ -1427,6 +1440,7 @@ public class combat_base_old extends script.base_script
         }
         return false;
     }
+
     public int getLowerPosture(int intPosture) throws InterruptedException
     {
         if (intPosture == POSTURE_CROUCHED)
@@ -1437,12 +1451,9 @@ public class combat_base_old extends script.base_script
         {
             return POSTURE_CROUCHED;
         }
-        if (intPosture == POSTURE_PRONE)
-        {
-            return POSTURE_PRONE;
-        }
         return intPosture;
     }
+
     public int getHigherPosture(int intPosture) throws InterruptedException
     {
         if (intPosture == POSTURE_CROUCHED)
@@ -1459,6 +1470,7 @@ public class combat_base_old extends script.base_script
         }
         return intPosture;
     }
+
     public defender_results[] createDefenderResultsArray(int intSize) throws InterruptedException
     {
         int intI = 0;
@@ -1470,6 +1482,7 @@ public class combat_base_old extends script.base_script
         }
         return cbtDefenderResults;
     }
+
     public hit_result[] createHitResultsArray(int intSize) throws InterruptedException
     {
         int intI = 0;
@@ -1481,6 +1494,7 @@ public class combat_base_old extends script.base_script
         }
         return cbtHitData;
     }
+
     public attacker_results[] createAttackerResultsArray(int intSize) throws InterruptedException
     {
         int intI = 0;
@@ -1492,6 +1506,7 @@ public class combat_base_old extends script.base_script
         }
         return cbtAttackerResults;
     }
+
     public void doMultiDefenderCombatResults(String[] strPlaybackNames, attacker_results cbtAttackerResults, defender_results[] cbtDefenderResults, dictionary dctCombatInfo) throws InterruptedException
     {
         int intLeftFoot = dctCombatInfo.getInt("intLeftFoot");
@@ -1550,17 +1565,18 @@ public class combat_base_old extends script.base_script
                 {
                     doCombatResults("dodge", cbtAnimationResults, null);
                 }
-                else 
+                else
                 {
                 }
                 intI = intI + 1;
             }
         }
-        else 
+        else
         {
             doCombatResults(strPlaybackNames[0], cbtAttackerResults, cbtDefenderResults);
         }
     }
+
     public void doWarcryCombatResults(String strAnimationAction, attacker_results cbtAttackerResults, defender_results[] cbtDefenderResults) throws InterruptedException
     {
         int intI = 1;
@@ -1581,17 +1597,18 @@ public class combat_base_old extends script.base_script
                 else if (cbtDefenderResults[intI].result == COMBAT_RESULT_MISS)
                 {
                 }
-                else 
+                else
                 {
                 }
                 intI = intI + 1;
             }
         }
-        else 
+        else
         {
             doCombatResults(strAnimationAction, cbtAttackerResults, cbtDefenderResults);
         }
     }
+
     public String getActionName(String strActionName, int intAttackNumber, hit_result[] cbtHitData, weapon_data cbtWeaponData) throws InterruptedException
     {
         int intHitLocation = cbtHitData[0].hitLocation;
@@ -1638,13 +1655,14 @@ public class combat_base_old extends script.base_script
         {
             strNewAction = strNewAction + "_medium";
         }
-        else 
+        else
         {
             strNewAction = strNewAction + "_light";
         }
         strNewAction = strNewAction + "_" + intAttackNumber;
         return strNewAction;
     }
+
     public String[] makePlaybackNames(String strAnimationName, hit_result[] cbtHitData, weapon_data cbtWeaponData) throws InterruptedException
     {
         String[] strPlaybackNames = new String[cbtHitData.length];
@@ -1655,7 +1673,7 @@ public class combat_base_old extends script.base_script
         {
             strPlaybackNames[0] = strAnimationName + "_medium";
         }
-        else 
+        else
         {
             strPlaybackNames[0] = strAnimationName + "_light";
         }
@@ -1667,7 +1685,7 @@ public class combat_base_old extends script.base_script
             {
                 strPlaybackNames[intI] = strAnimationName + "_medium";
             }
-            else 
+            else
             {
                 strPlaybackNames[intI] = strAnimationName + "_light";
             }
@@ -1675,6 +1693,7 @@ public class combat_base_old extends script.base_script
         }
         return strPlaybackNames;
     }
+
     public String[] makePlaybackNames(String strAnimationName, hit_result[] cbtHitData, weapon_data cbtWeaponData, defender_results[] cbtDefenderResults) throws InterruptedException
     {
         String[] strPlaybackNames = new String[cbtHitData.length];
@@ -1687,13 +1706,13 @@ public class combat_base_old extends script.base_script
                 continue;
             }
             intDamage = cbtHitData[i].damage;
-            
+
             {
                 if (intDamage > intMidpoint)
                 {
                     strPlaybackNames[i] = strAnimationName + "_medium";
                 }
-                else 
+                else
                 {
                     strPlaybackNames[i] = strAnimationName + "_light";
                 }
@@ -1701,6 +1720,7 @@ public class combat_base_old extends script.base_script
         }
         return strPlaybackNames;
     }
+
     public void doSuppressionFireResults(String strPlaybackName, attacker_results cbtAttackerResults, defender_results[] cbtDefenderResults, dictionary dctCombatInfo) throws InterruptedException
     {
         int intLeftFoot = dctCombatInfo.getInt("intLeftFoot");
@@ -1760,17 +1780,18 @@ public class combat_base_old extends script.base_script
                 {
                     doCombatResults("dodge", cbtAnimationResults, null);
                 }
-                else 
+                else
                 {
                 }
                 intI = intI + 1;
             }
         }
-        else 
+        else
         {
             doCombatResults(strPlaybackName, cbtAttackerResults, cbtDefenderResults);
         }
     }
+
     public void doChargeResults(String strPlaybackName, attacker_results cbtAttackerResults, defender_results[] cbtDefenderResults) throws InterruptedException
     {
         if (cbtDefenderResults.length > 1)
@@ -1803,26 +1824,28 @@ public class combat_base_old extends script.base_script
                 intI = intI + 1;
             }
         }
-        else 
+        else
         {
             doCombatResults(strPlaybackName, cbtAttackerResults, cbtDefenderResults);
         }
     }
+
     public String getPlaybackIntensity(String strPlaybackName, hit_result[] cbtHitData, weapon_data cbtWeaponData) throws InterruptedException
     {
-        String strNewAction = new String();
+        String strNewAction = "";
         strNewAction = strPlaybackName;
         int intMidDamage = (cbtWeaponData.minDamage + cbtWeaponData.maxDamage) / 2;
         if (cbtHitData[0].damage > intMidDamage)
         {
             strNewAction = strNewAction + "_medium";
         }
-        else 
+        else
         {
             strNewAction = strNewAction + "_light";
         }
         return strNewAction;
     }
+
     public String getThrownWeaponStringType(obj_id objWeapon) throws InterruptedException
     {
         String strType = "";
@@ -1834,6 +1857,7 @@ public class combat_base_old extends script.base_script
         strType = strType + strTemplate;
         return strType;
     }
+
     public String getHeavyWeaponStringType(obj_id objWeapon) throws InterruptedException
     {
         String strType = "heavy_";
@@ -1845,37 +1869,39 @@ public class combat_base_old extends script.base_script
         strType = strType + strTemplate;
         return strType;
     }
+
     public String getWeaponStringType(int intWeaponType) throws InterruptedException
     {
         switch (intWeaponType)
         {
             case WEAPON_TYPE_RIFLE:
-            return "rifle";
+                return "rifle";
             case WEAPON_TYPE_LIGHT_RIFLE:
-            return "carbine";
+                return "carbine";
             case WEAPON_TYPE_PISTOL:
-            return "pistol";
+                return "pistol";
             case WEAPON_TYPE_HEAVY:
-            return "heavyweapon";
+                return "heavyweapon";
             case WEAPON_TYPE_1HAND_MELEE:
-            return "onehandmelee";
+                return "onehandmelee";
             case WEAPON_TYPE_2HAND_MELEE:
-            return "twohandmelee";
+                return "twohandmelee";
             case WEAPON_TYPE_UNARMED:
-            return "unarmed";
+                return "unarmed";
             case WEAPON_TYPE_POLEARM:
-            return "polearm";
+                return "polearm";
             case WEAPON_TYPE_THROWN:
-            return "thrown";
+                return "thrown";
             case WEAPON_TYPE_WT_1HAND_LIGHTSABER:
-            return "onehandlightsaber";
+                return "onehandlightsaber";
             case WEAPON_TYPE_WT_2HAND_LIGHTSABER:
-            return "onehandlightsaber";
+                return "onehandlightsaber";
             case WEAPON_TYPE_WT_POLEARM_LIGHTSABER:
-            return "polearmlightsaber";
+                return "polearmlightsaber";
         }
         return "";
     }
+
     public String[] makeStringArray(int intLength) throws InterruptedException
     {
         int intI = 0;
@@ -1887,11 +1913,13 @@ public class combat_base_old extends script.base_script
         }
         return strArray;
     }
+
     public obj_id getCorrectCombatTarget(obj_id objPlayer, obj_id objTarget, int intAction) throws InterruptedException
     {
         obj_id objActualTarget = getCorrectCombatTarget(objPlayer, objTarget, intAction, "");
         return objActualTarget;
     }
+
     public obj_id getCorrectCombatTarget(obj_id objPlayer, obj_id objTarget, int intAction, String strParams) throws InterruptedException
     {
         if (!isIdValid(objTarget))
@@ -1924,6 +1952,7 @@ public class combat_base_old extends script.base_script
         }
         return null;
     }
+
     public boolean checkWeaponData(obj_id objPlayer, obj_id objTarget, int intAttackCategory, weapon_data cbtWeaponData, String strCommand, String strWeaponType) throws InterruptedException
     {
         float fltDistance = getDistance(objPlayer, objTarget);
@@ -1988,6 +2017,7 @@ public class combat_base_old extends script.base_script
         }
         return true;
     }
+
     public boolean checkCommands(obj_id objPlayer, String strCommand, String strWeaponType) throws InterruptedException
     {
         if (!strCommand.equals(""))
@@ -2002,6 +2032,7 @@ public class combat_base_old extends script.base_script
         }
         return true;
     }
+
     public boolean checkForCombatActions(obj_id objPlayer) throws InterruptedException
     {
         if (queueHasCommandFromGroup(objPlayer, (-1170591580)))
@@ -2012,12 +2043,9 @@ public class combat_base_old extends script.base_script
         {
             return true;
         }
-        if (queueHasCommandFromGroup(objPlayer, (-506878646)))
-        {
-            return true;
-        }
-        return false;
+        return queueHasCommandFromGroup(objPlayer, (-506878646));
     }
+
     public String getGrenadeType(obj_id objGrenade) throws InterruptedException
     {
         String strTemplate = getTemplateName(objGrenade);
@@ -2055,6 +2083,7 @@ public class combat_base_old extends script.base_script
         }
         return "fragmentation";
     }
+
     public String getHeavyWeaponType(obj_id objHeavyWeapon) throws InterruptedException
     {
         String strTemplate = getTemplateName(objHeavyWeapon);
@@ -2092,6 +2121,7 @@ public class combat_base_old extends script.base_script
         }
         return "rocket_launcher";
     }
+
     public void doBasicGrenadeCombatResults(attacker_results cbtAttackerResults, defender_results[] cbtDefenderResults, hit_result[] cbtHitData, obj_id objTarget, weapon_data cbtWeaponData) throws InterruptedException
     {
         String strDefense = "get_hit_grenade";
@@ -2130,13 +2160,14 @@ public class combat_base_old extends script.base_script
                 cbtAttackerResult.endPosture = cbtDefenderResults[intI].endPosture;
                 doCombatResults(strPlaybackNames[intI], cbtAttackerResult, null);
             }
-            else 
+            else
             {
             }
             intI = intI + 1;
         }
         return;
     }
+
     public void doMineFieldResults(String strParticle, attacker_results cbtAttackerResults, defender_results[] cbtDefenderResults, hit_result[] cbtHitData, obj_id objTarget, weapon_data cbtWeaponData) throws InterruptedException
     {
         String[] strPlaybackNames = makePlaybackNames("get_hit", cbtHitData, cbtWeaponData);
@@ -2166,24 +2197,27 @@ public class combat_base_old extends script.base_script
             {
                 doCombatResults(strPlaybackNames[intI], cbtAnimationResults, null);
             }
-            else 
+            else
             {
             }
         }
         return;
     }
+
     public void yellText(obj_id objSpeaker, String strText) throws InterruptedException
     {
         String strType = "none none " + strText;
         chat._chat(objSpeaker, null, chat.CHAT_YELL, null, strText, null, null);
         return;
     }
+
     public void clearQueue(obj_id objPlayer) throws InterruptedException
     {
         queueClearCommandsFromGroup(objPlayer, (-506878646));
         queueClearCommandsFromGroup(objPlayer, (-1170591580));
         queueClearCommandsFromGroup(objPlayer, (391413347));
     }
+
     public obj_id[] truncateTargetArray(obj_id[] objArray, obj_id objTarget, int intLength) throws InterruptedException
     {
         Vector objTruncatedArray = new Vector();
@@ -2208,6 +2242,7 @@ public class combat_base_old extends script.base_script
         }
         return _objTruncatedArray;
     }
+
     public void clearFeignIncapacitation(obj_id objPlayer, int intPosture) throws InterruptedException
     {
         string_id strSpam = new string_id("cbt_spam", "stand");
@@ -2219,6 +2254,7 @@ public class combat_base_old extends script.base_script
             broadcastMessage("handleSawRecapacitation", parms);
         }
     }
+
     public void setTurretTarget(obj_id objTurret, obj_id objTarget) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
@@ -2226,59 +2262,68 @@ public class combat_base_old extends script.base_script
         messageTo(objTurret, "setTarget", dctParams, 0, true);
         return;
     }
+
     public void startTurretAttack(obj_id objTurret, obj_id objTarget) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         dctParams.put("objTarget", objTarget);
         messageTo(objTurret, "startAttack", dctParams, 0, true);
     }
+
     public void applyWound(hit_result cbtHitData, defender_data cbtDefenderData, attacker_data cbtAttackerData) throws InterruptedException
     {
         return;
     }
+
     public String getStatName(int intStat) throws InterruptedException
     {
         switch (intStat)
         {
             case HEALTH:
-            return "health";
+                return "health";
             case CONSTITUTION:
-            return "constitution";
+                return "constitution";
             case ACTION:
-            return "action";
+                return "action";
             case STAMINA:
-            return "stamina";
+                return "stamina";
             case MIND:
-            return "mind";
+                return "mind";
             case WILLPOWER:
-            return "willpower";
+                return "willpower";
         }
         return "";
     }
+
     public int getMobHitMod(obj_id objMob) throws InterruptedException
     {
         int intToHitChance = getSkillStatMod(objMob, "toHitChance");
         return intToHitChance;
     }
+
     public int checkTrapMod(int mod, String modName, obj_id checkId) throws InterruptedException
     {
         if (isIdValid(checkId) && utils.hasScriptVar(checkId, "trapmod.enable"))
         {
             if (utils.hasScriptVar(checkId, "trapmod.enable"))
             {
-                switch (modName) {
+                switch (modName)
+                {
                     case "stun_defense":
-                        if (utils.hasScriptVar(checkId, "trapmod.stun_defense")) {
+                        if (utils.hasScriptVar(checkId, "trapmod.stun_defense"))
+                        {
                             mod -= utils.getIntScriptVar(checkId, "trapmod.stun_defense");
                         }
                         break;
                     case "dizzy_defense":
-                        if (utils.hasScriptVar(checkId, "trapmod.dizzy_defense")) {
+                        if (utils.hasScriptVar(checkId, "trapmod.dizzy_defense"))
+                        {
                             mod -= utils.getIntScriptVar(checkId, "trapmod.dizzy_defense");
                         }
                         break;
                     case "intimidate_defense":
-                        if (utils.hasScriptVar(checkId, "trapmod.intimidate_defense")) {
+                        if (utils.hasScriptVar(checkId, "trapmod.intimidate_defense"))
+                        {
                             mod -= utils.getIntScriptVar(checkId, "trapmod.intimidate_defense");
                         }
                         break;
@@ -2288,6 +2333,7 @@ public class combat_base_old extends script.base_script
         }
         return 0;
     }
+
     public int[] getCombatEffectsFromDataTable(dictionary dctCombatInfo) throws InterruptedException
     {
         Vector intEffects = new Vector();
@@ -2316,6 +2362,7 @@ public class combat_base_old extends script.base_script
         }
         return _intEffects;
     }
+
     public float[] getCombatEffectDurationsFromDataTable(dictionary dctCombatInfo, int[] intEffects) throws InterruptedException
     {
         Vector fltDurations = new Vector();
@@ -2337,6 +2384,7 @@ public class combat_base_old extends script.base_script
         }
         return _fltDurations;
     }
+
     public obj_id[] getCombatDefenders(obj_id objPlayer, obj_id objTarget, dictionary dctCombatInfo) throws InterruptedException
     {
         int intAttackType = dctCombatInfo.getInt("intAttackType");
@@ -2422,87 +2470,90 @@ public class combat_base_old extends script.base_script
                 {
                     objDefenders[1] = objTest;
                 }
-                else 
+                else
                 {
                     objDefenders[1] = objTarget;
                 }
             }
-            else 
+            else
             {
                 objDefenders[1] = objTarget;
             }
             return objDefenders;
         }
-        else 
+        else
         {
             obj_id[] objDefenders = new obj_id[1];
             objDefenders[0] = objTarget;
             return objDefenders;
         }
     }
+
     public float getDamageBonus(int intWeaponType) throws InterruptedException
     {
         switch (intWeaponType)
         {
             case WEAPON_TYPE_RIFLE:
-            return 1.0f;
+                return 1.0f;
             case WEAPON_TYPE_LIGHT_RIFLE:
-            return 1.0f;
+                return 1.0f;
             case WEAPON_TYPE_PISTOL:
-            return 1.00f;
+                return 1.00f;
             case WEAPON_TYPE_HEAVY:
-            return 1.0f;
+                return 1.0f;
             case WEAPON_TYPE_1HAND_MELEE:
-            return 1.0f;
+                return 1.0f;
             case WEAPON_TYPE_2HAND_MELEE:
-            return 1.0f;
+                return 1.0f;
             case WEAPON_TYPE_UNARMED:
-            return 1.0f;
+                return 1.0f;
             case WEAPON_TYPE_POLEARM:
-            return 1.0f;
+                return 1.0f;
             case WEAPON_TYPE_THROWN:
-            return 1.0f;
+                return 1.0f;
             case WEAPON_TYPE_WT_1HAND_LIGHTSABER:
-            return 1.0f;
+                return 1.0f;
             case WEAPON_TYPE_WT_2HAND_LIGHTSABER:
-            return 1.0f;
+                return 1.0f;
             case WEAPON_TYPE_WT_POLEARM_LIGHTSABER:
-            return 1.0f;
+                return 1.0f;
         }
         return 1.0f;
     }
+
     public boolean isMeleeWeapon(obj_id objWeapon) throws InterruptedException
     {
         int intWeaponType = getWeaponType(objWeapon);
         switch (intWeaponType)
         {
             case WEAPON_TYPE_RIFLE:
-            return false;
+                return false;
             case WEAPON_TYPE_LIGHT_RIFLE:
-            return false;
+                return false;
             case WEAPON_TYPE_PISTOL:
-            return false;
+                return false;
             case WEAPON_TYPE_HEAVY:
-            return false;
+                return false;
             case WEAPON_TYPE_1HAND_MELEE:
-            return true;
+                return true;
             case WEAPON_TYPE_2HAND_MELEE:
-            return true;
+                return true;
             case WEAPON_TYPE_UNARMED:
-            return true;
+                return true;
             case WEAPON_TYPE_POLEARM:
-            return true;
+                return true;
             case WEAPON_TYPE_THROWN:
-            return false;
+                return false;
             case WEAPON_TYPE_WT_1HAND_LIGHTSABER:
-            return true;
+                return true;
             case WEAPON_TYPE_WT_2HAND_LIGHTSABER:
-            return true;
+                return true;
             case WEAPON_TYPE_WT_POLEARM_LIGHTSABER:
-            return true;
+                return true;
         }
         return false;
     }
+
     public float getLungeRange(weapon_data cbtWeaponData) throws InterruptedException
     {
         float fltRange = cbtWeaponData.maxRange;
@@ -2517,6 +2568,7 @@ public class combat_base_old extends script.base_script
         }
         return fltRange;
     }
+
     public boolean damageWeapon(obj_id owner, obj_id weaponid, int amount) throws InterruptedException
     {
         if (!isPlayer(owner))
@@ -2553,6 +2605,7 @@ public class combat_base_old extends script.base_script
         }
         return false;
     }
+
     public boolean canChangeTargetPosture(obj_id objAttacker, obj_id objDefender, int intChangeType) throws InterruptedException
     {
         if (vehicle.isDriveableVehicle(objDefender))
@@ -2651,6 +2704,7 @@ public class combat_base_old extends script.base_script
         }
         return false;
     }
+
     public boolean applyCombatEffectDelay(obj_id objAttacker, obj_id objTarget, float fltDelay, boolean showAttackerSuccessMessage, boolean showDefenderSuccessMessage, String appliedDelay) throws InterruptedException
     {
         int intLastDelay = utils.getIntScriptVar(objTarget, "combat.intLastDelay");
@@ -2665,12 +2719,12 @@ public class combat_base_old extends script.base_script
             }
             return false;
         }
-        else 
+        else
         {
             utils.setScriptVar(objTarget, "combat.intLastDelay", intCurrentTime);
             utils.setScriptVar(objTarget, appliedDelay, fltDelay);
             string_id strSpam = new string_id("combat_effects", "delay_applied_self");
-            int intDelay = (int)fltDelay;
+            int intDelay = (int) fltDelay;
             prose_package proseTest = prose.getPackage(strSpam, intDelay);
             if (isPlayer(objTarget))
             {
@@ -2691,6 +2745,7 @@ public class combat_base_old extends script.base_script
         }
         return true;
     }
+
     public void doCombatAnimationResults(String strPlaybackName, attacker_results cbtAttackerResults, hit_result[] cbtHitData, weapon_data cbtWeaponData, defender_results[] cbtDefenderResults, dictionary dctCombatInfo) throws InterruptedException
     {
         int intUseAbsoluteAnimation = dctCombatInfo.getInt("intUseAbsoluteAnimation");
@@ -2698,13 +2753,14 @@ public class combat_base_old extends script.base_script
         {
             doSuppressionFireResults(strPlaybackName, cbtAttackerResults, cbtDefenderResults, dctCombatInfo);
         }
-        else 
+        else
         {
             String[] strPlaybackNames = makePlaybackNames(strPlaybackName, cbtHitData, cbtWeaponData);
             doMultiDefenderCombatResults(strPlaybackNames, cbtAttackerResults, cbtDefenderResults, dctCombatInfo);
         }
         return;
     }
+
     public weapon_data getOverloadedWeaponData(weapon_data cbtWeaponData, dictionary dctCombatInfo) throws InterruptedException
     {
         int intOverloadWeapon = dctCombatInfo.getInt("intOverloadWeapon");
@@ -2720,11 +2776,12 @@ public class combat_base_old extends script.base_script
             cbtWeaponData.isDisabled = false;
             return cbtWeaponData;
         }
-        else 
+        else
         {
             return cbtWeaponData;
         }
     }
+
     public void doForceChokeSpam(obj_id objTarget) throws InterruptedException
     {
         string_id strText = new string_id("combat_effects", "choke");
@@ -2734,18 +2791,20 @@ public class combat_base_old extends script.base_script
         showFlyText(objTarget, strText, 1, colTest);
         return;
     }
+
     public void doForceWeaken(obj_id objTarget, obj_id objAttacker, float fltMultiplier) throws InterruptedException
     {
         for (int intI = 0; intI <= WILLPOWER; intI++)
         {
             int intBaseValue = rand(-200, -100);
-            int intValue = (int)(intBaseValue * fltMultiplier);
+            int intValue = (int) (intBaseValue * fltMultiplier);
             float fltBaseDuration = rand(15, 30);
             float fltDuration = fltBaseDuration * fltMultiplier;
             addAttribModifier(objTarget, intI, intValue, fltDuration, rand(15.0f, 30.0f), rand(15.0f, 30.0f));
         }
         return;
     }
+
     public weapon_data calculateDamageMitigation(obj_id objDefender, String strDefenderCommand, weapon_data cbtWeaponData, int intMinDamage, int intMaxDamage) throws InterruptedException
     {
         float fltMinDamage = intMinDamage;
@@ -2766,9 +2825,10 @@ public class combat_base_old extends script.base_script
         float fltDifference = fltMaxDamage - fltMinDamage;
         float fltDamage = fltDifference * fltLimit;
         fltMaxDamage = fltMinDamage + fltDamage;
-        cbtWeaponData.maxDamage = (int)fltMaxDamage;
+        cbtWeaponData.maxDamage = (int) fltMaxDamage;
         return cbtWeaponData;
     }
+
     public float getHitBonus(int intWeaponCategory, obj_id objDefender) throws InterruptedException
     {
         int intWeaponType = getWeaponType(getCurrentWeapon(objDefender));
@@ -2777,67 +2837,69 @@ public class combat_base_old extends script.base_script
             switch (intWeaponType)
             {
                 case WEAPON_TYPE_RIFLE:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_LIGHT_RIFLE:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_PISTOL:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_HEAVY:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_1HAND_MELEE:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_2HAND_MELEE:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_UNARMED:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_POLEARM:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_THROWN:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_WT_1HAND_LIGHTSABER:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_WT_2HAND_LIGHTSABER:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_WT_POLEARM_LIGHTSABER:
-                return 0.0f;
+                    return 0.0f;
             }
         }
-        else 
+        else
         {
             switch (intWeaponType)
             {
                 case WEAPON_TYPE_RIFLE:
-                return 100.0f;
+                    return 100.0f;
                 case WEAPON_TYPE_LIGHT_RIFLE:
-                return 75.0f;
+                    return 75.0f;
                 case WEAPON_TYPE_PISTOL:
-                return 20.0f;
+                    return 20.0f;
                 case WEAPON_TYPE_HEAVY:
-                return 100.0f;
+                    return 100.0f;
                 case WEAPON_TYPE_1HAND_MELEE:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_2HAND_MELEE:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_UNARMED:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_POLEARM:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_THROWN:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_WT_1HAND_LIGHTSABER:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_WT_2HAND_LIGHTSABER:
-                return 0.0f;
+                    return 0.0f;
                 case WEAPON_TYPE_WT_POLEARM_LIGHTSABER:
-                return 0.0f;
+                    return 0.0f;
             }
         }
         return 0.0f;
     }
+
     public void combatLog(obj_id attacker, obj_id defender, String logName, String logMsg) throws InterruptedException
     {
-        
+
     }
+
     public String listArrayContents(obj_id[] array) throws InterruptedException
     {
         String output = "";

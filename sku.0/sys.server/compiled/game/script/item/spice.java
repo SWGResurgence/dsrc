@@ -7,13 +7,15 @@ import script.*;
 
 public class spice extends script.base_script
 {
-    public spice()
-    {
-    }
     public static final string_id PROSE_CONSUME_ITEM = new string_id("base_player", "prose_consume_item");
     public static final string_id SID_ALREADY_HAVE_BUFF = new string_id("base_player", "food_already_have_buff");
     public static final string_id SID_BUFF_WONT_STACK = new string_id("base_player", "food_buff_wont_stack");
     public static final string_id SID_NO_EAT_DOWNER = new string_id("base_player", "food_no_eat_downer");
+
+    public spice()
+    {
+    }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         String buff_name = getStringObjVar(self, "spice.name");
@@ -27,7 +29,7 @@ public class spice extends script.base_script
             return SCRIPT_CONTINUE;
         }
         float duration = buff.getDuration(buff_name);
-        String durString = formatTime((int)duration);
+        String durString = formatTime((int) duration);
         names[idx] = "duration";
         attribs[idx] = durString + "\n";
         idx++;
@@ -57,11 +59,11 @@ public class spice extends script.base_script
             {
                 attribs[idx] = "+";
             }
-            else 
+            else
             {
                 attribs[idx] = "";
             }
-            attribs[idx] += (int)value;
+            attribs[idx] += (int) value;
             if (param.contains("percent"))
             {
                 attribs[idx] += "%";
@@ -74,6 +76,7 @@ public class spice extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -88,6 +91,7 @@ public class spice extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -104,6 +108,7 @@ public class spice extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void comedere(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(player))
@@ -137,21 +142,21 @@ public class spice extends script.base_script
             case SPECIES_MON_CALAMARI:
             case SPECIES_RODIAN:
             case SPECIES_TRANDOSHAN:
-            snd += "reptile_";
-            break;
+                snd += "reptile_";
+                break;
             case SPECIES_WOOKIEE:
-            snd += "wookiee_";
-            break;
+                snd += "wookiee_";
+                break;
             default:
-            snd += "human_";
+                snd += "human_";
         }
         switch (getGender(player))
         {
             case FEMALE:
-            snd += "female_eat.cef";
-            break;
+                snd += "female_eat.cef";
+                break;
             default:
-            snd += "male_eat.cef";
+                snd += "male_eat.cef";
         }
         playClientEffectLoc(player, snd, getLocation(player), getScale(player));
         prose_package pp = prose.getPackage(PROSE_CONSUME_ITEM, player, self);
@@ -162,11 +167,12 @@ public class spice extends script.base_script
         {
             destroyObject(self);
         }
-        else 
+        else
         {
             setCount(self, count);
         }
     }
+
     public String formatTime(int seconds) throws InterruptedException
     {
         String result = "";

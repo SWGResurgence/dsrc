@@ -7,10 +7,12 @@ import script.string_id;
 
 public class set_bonus_item extends script.base_script
 {
+    public static final String SET_BONUS_TABLE = "datatables/item/item_sets.iff";
+
     public set_bonus_item()
     {
     }
-    public static final String SET_BONUS_TABLE = "datatables/item/item_sets.iff";
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int free = getFirstFreeIndex(names);

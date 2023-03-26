@@ -8,6 +8,7 @@ public class lucky_despot_elevators extends script.base_script
     public lucky_despot_elevators()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -27,7 +28,7 @@ public class lucky_despot_elevators extends script.base_script
             setObjVar(self, "terminal1", elevatorTerminalA1);
             setObjVar(self, "terminal2", elevatorTerminalB1);
         }
-        else 
+        else
         {
             LOG("elevator", "lucky_despot_elevators could not get 'elevator01' cell");
         }
@@ -47,7 +48,7 @@ public class lucky_despot_elevators extends script.base_script
             setObjVar(self, "terminal3", elevatorTerminalA2);
             setObjVar(self, "terminal4", elevatorTerminalB2);
         }
-        else 
+        else
         {
             LOG("elevator", "lucky_despot_elevators could not get 'elevator02' cell");
         }
@@ -67,7 +68,7 @@ public class lucky_despot_elevators extends script.base_script
             setObjVar(self, "terminal5", elevatorTerminalA3);
             setObjVar(self, "terminal6", elevatorTerminalB3);
         }
-        else 
+        else
         {
             LOG("elevator", "lucky_despot_elevators could not get 'elevator03' cell");
         }
@@ -89,7 +90,7 @@ public class lucky_despot_elevators extends script.base_script
             setObjVar(self, "terminal7", elevatorTerminalA4);
             setObjVar(self, "terminal8", elevatorTerminalB4);
         }
-        else 
+        else
         {
             LOG("elevator", "lucky_despot_elevators could not get 'elevator04' cell");
         }

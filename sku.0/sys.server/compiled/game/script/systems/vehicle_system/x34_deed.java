@@ -11,10 +11,12 @@ import script.string_id;
 
 public class x34_deed extends script.base_script
 {
+    public static final String MENU_FILE = "pet/pet_menu";
+
     public x34_deed()
     {
     }
-    public static final String MENU_FILE = "pet/pet_menu";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))
@@ -23,6 +25,7 @@ public class x34_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.VEHICLE_GENERATE)
@@ -39,13 +42,14 @@ public class x34_deed extends script.base_script
                 CustomerServiceLog("vehicle_deed", "vehicle deed used: deed=" + self + " pcd=" + pet + " player=" + player + "(" + getPlayerName(player) + ")");
                 destroyObject(self);
             }
-            else 
+            else
             {
                 debugServerConsoleMsg(self, "+++ VEHICLE_DEED . onObjectMenuSelect +++ Failed to make PCD for Vehicle Prototype.");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id createCraftedCreatureDevice(obj_id player, obj_id deed) throws InterruptedException
     {
         debugServerConsoleMsg(player, "+++ VEHICLE_DEED . createCraftedCreatureDevice +++ Entered PCD/Pet creation function.");
@@ -62,7 +66,7 @@ public class x34_deed extends script.base_script
             sendSystemMessageTestingOnly(player, "Failed to create pet control device for vehicle");
             return null;
         }
-        else 
+        else
         {
             setObjVar(petControlDevice, "pet.crafted", true);
             setObjVar(petControlDevice, "vehicle.template", "landspeeder_x34");
@@ -88,7 +92,7 @@ public class x34_deed extends script.base_script
             debugServerConsoleMsg(null, "+++ VEHICLE . onAttach +++ makePetMountable(pet) returned FALSE.");
             return pet;
         }
-        else 
+        else
         {
             setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
         }

@@ -8,11 +8,12 @@ import script.string_id;
 
 public class magic_painting extends script.base_script
 {
+    public static final string_id MOVED_CTRL_OBJ = new string_id("spam", "magic_painting_ctrl_moved");
+    public static final string_id ROOM_HAS_CTRL_OBJ = new string_id("spam", "magic_painting_ctrl_already");
     public magic_painting()
     {
     }
-    public static final string_id MOVED_CTRL_OBJ = new string_id("spam", "magic_painting_ctrl_moved");
-    public static final string_id ROOM_HAS_CTRL_OBJ = new string_id("spam", "magic_painting_ctrl_already");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!utils.isNestedWithinAPlayer(self))
@@ -34,7 +35,7 @@ public class magic_painting extends script.base_script
                             messageTo(self, "createPainting", null, 3, false);
                         }
                     }
-                    else 
+                    else
                     {
                         messageTo(self, "createPainting", null, 3, false);
                     }
@@ -43,11 +44,13 @@ public class magic_painting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "intializePaintingController", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (hasObjVar(self, "paintingId"))
@@ -61,7 +64,7 @@ public class magic_painting extends script.base_script
                 messageTo(containingCell, "paintingControllerMoved", null, 1, false);
                 sendSystemMessage(transferer, MOVED_CTRL_OBJ);
             }
-            else 
+            else
             {
                 removeObjVar(self, "paintingId");
                 LOG("create", "Magic Painting control object was transferred by a player. It thought it had a painting created but could not find one");
@@ -102,7 +105,7 @@ public class magic_painting extends script.base_script
                                 messageTo(self, "createPainting", null, 3, false);
                             }
                         }
-                        else 
+                        else
                         {
                             messageTo(self, "createPainting", null, 3, false);
                         }
@@ -112,6 +115,7 @@ public class magic_painting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int createPainting(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id house = getTopMostContainer(self);
@@ -135,7 +139,7 @@ public class magic_painting extends script.base_script
                 LOG("create", "Magic Painting control object tried to create a painting that returned null. There's probably a bad painting in the batch");
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 setYaw(painting, myYaw);
                 setObjVar(self, "timeStamp", getGameTime());
@@ -145,6 +149,7 @@ public class magic_painting extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int switchPainting(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "paintingId"))
@@ -155,7 +160,7 @@ public class magic_painting extends script.base_script
                 destroyObject(oldPainting);
                 messageTo(self, "createPainting", null, 1, false);
             }
-            else 
+            else
             {
                 LOG("create", "Magic Painting control object tried to switch out a painting that didn't exist. Customer can pack up control object and replace it to reset it.");
             }
@@ -163,6 +168,7 @@ public class magic_painting extends script.base_script
         LOG("create", "Magic Painting control object tried to switch out a painting that didn't exist. Customer can pack up control object and replace it to reset it.");
         return SCRIPT_CONTINUE;
     }
+
     public int intializePaintingController(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.isNestedWithinAPlayer(self))
@@ -196,7 +202,7 @@ public class magic_painting extends script.base_script
                             messageTo(self, "createPainting", null, 3, false);
                         }
                     }
-                    else 
+                    else
                     {
                         messageTo(self, "createPainting", null, 3, false);
                     }

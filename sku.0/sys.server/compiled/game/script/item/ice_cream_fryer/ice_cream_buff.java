@@ -8,12 +8,13 @@ import script.string_id;
 
 public class ice_cream_buff extends script.base_script
 {
-    public ice_cream_buff()
-    {
-    }
     public static final String ALREADY_SETUP = "itemFoodScriptRemoved";
     public static final String ITEM_FOOD_SCRIPT = "item.food";
     public static final String OWNER_OID = "owner";
+    public ice_cream_buff()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, ALREADY_SETUP))
@@ -24,6 +25,7 @@ public class ice_cream_buff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int iceCreamCategory = collection.ICE_CREAM_ALL_PLAYERS;
@@ -55,11 +57,13 @@ public class ice_cream_buff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeItemFoodScript(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, ITEM_FOOD_SCRIPT);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String message) throws InterruptedException
     {
         return true;

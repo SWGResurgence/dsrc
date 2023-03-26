@@ -8,18 +8,20 @@ import script.library.utils;
 
 public class objective_terminal_security extends script.faction_perk.hq.objective_object
 {
-    public objective_terminal_security()
-    {
-    }
     public static final string_id SID_SLICE = new string_id("slicing/slicing", "slice");
     public static final string_id SID_FAIL_SLICE = new string_id("slicing/slicing", "hq_security_fail");
     public static final string_id SID_SUCCESS_SLICE = new string_id("slicing/slicing", "hq_security_success");
     public static final string_id SID_NOT_AGAIN = new string_id("slicing/slicing", "not_again");
+    public objective_terminal_security()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int mnu = mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_SLICE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "slice_start");
@@ -28,6 +30,7 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
         setObjVar(self, "intTerminal", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (pvpGetType(player) != PVPTYPE_DECLARED)
@@ -61,7 +64,7 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
                 prose_package ppDisableOther = prose.getPackage(hq.PROSE_DISABLE_OTHER, priorObjective, self);
                 sendSystemMessageProse(player, ppDisableOther);
             }
-            else 
+            else
             {
                 sendSystemMessageTestingOnly(player, "Other objectives must be disabled prior to gaining access to this one.");
             }
@@ -81,7 +84,7 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
                             sendSystemMessageTestingOnly(player, "You are already repairing a prior slice attempt's damage...");
                             return SCRIPT_CONTINUE;
                         }
-                        else 
+                        else
                         {
                             if (repairer.isLoaded())
                             {
@@ -103,10 +106,12 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleObjectiveDisabled(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int finishSlicing(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -124,13 +129,14 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
                 hq.disableObjective(structure, self);
             }
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_FAIL_SLICE);
             setObjVar(self, "slicing.failed", player);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSlicingRepair(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -152,7 +158,7 @@ public class objective_terminal_security extends script.faction_perk.hq.objectiv
             removeObjVar(self, "slicing.failed");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(player, "Security terminal repairs continue...");
             params.put("cnt", cnt);

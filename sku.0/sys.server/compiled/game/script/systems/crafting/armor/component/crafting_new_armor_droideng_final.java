@@ -7,64 +7,70 @@ import script.resource_weight;
 
 public class crafting_new_armor_droideng_final extends script.systems.crafting.armor.crafting_new_armor_final
 {
+    public static final String VERSION = "v0.00.00";
+    public static final String[] REQUIRED_SKILLS =
+            {
+                    "crafting_droidengineer_novice"
+            };
+    public static final String[] ASSEMBLY_SKILL_MODS =
+            {
+                    "droid_assembly"
+            };
+    public static final String[] EXPERIMENT_SKILL_MODS =
+            {
+                    "droid_experimentation"
+            };
+    public static final String[] CUSTOMIZATION_SKILL_MODS =
+            {
+                    "droid_customization"
+            };
+    public static final resource_weight[] OBJ_ASSEMBLY_ATTRIBUTE_RESOURCES =
+            {
+                    new resource_weight("condition", new resource_weight.weight[]
+                            {
+                                    new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1),
+                                    new resource_weight.weight(craftinglib.RESOURCE_DECAY_RESIST, 1),
+                                    new resource_weight.weight(craftinglib.RESOURCE_SHOCK_RESIST, 1)
+                            })
+            };
+    public static final resource_weight[] OBJ_MAX_ATTRIBUTE_RESOURCES =
+            {
+                    new resource_weight("condition", new resource_weight.weight[]
+                            {
+                                    new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1),
+                                    new resource_weight.weight(craftinglib.RESOURCE_DECAY_RESIST, 1),
+                                    new resource_weight.weight(craftinglib.RESOURCE_SHOCK_RESIST, 1)
+                            })
+            };
     public crafting_new_armor_droideng_final()
     {
     }
-    public static final String VERSION = "v0.00.00";
-    public static final String[] REQUIRED_SKILLS = 
-    {
-        "crafting_droidengineer_novice"
-    };
-    public static final String[] ASSEMBLY_SKILL_MODS = 
-    {
-        "droid_assembly"
-    };
-    public static final String[] EXPERIMENT_SKILL_MODS = 
-    {
-        "droid_experimentation"
-    };
-    public static final String[] CUSTOMIZATION_SKILL_MODS = 
-    {
-        "droid_customization"
-    };
-    public static final resource_weight[] OBJ_ASSEMBLY_ATTRIBUTE_RESOURCES = 
-    {
-        new resource_weight("condition", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_DECAY_RESIST, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_SHOCK_RESIST, 1)
-        })
-    };
-    public static final resource_weight[] OBJ_MAX_ATTRIBUTE_RESOURCES = 
-    {
-        new resource_weight("condition", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_DECAY_RESIST, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_SHOCK_RESIST, 1)
-        })
-    };
+
     public String[] getRequiredSkills() throws InterruptedException
     {
         return REQUIRED_SKILLS;
     }
+
     public String[] getAssemblySkillMods() throws InterruptedException
     {
         return ASSEMBLY_SKILL_MODS;
     }
+
     public String[] getExperimentSkillMods() throws InterruptedException
     {
         return EXPERIMENT_SKILL_MODS;
     }
+
     public String[] getCustomizationSkillMods() throws InterruptedException
     {
         return CUSTOMIZATION_SKILL_MODS;
     }
+
     public resource_weight[] getResourceMaxResourceWeights() throws InterruptedException
     {
         return OBJ_MAX_ATTRIBUTE_RESOURCES;
     }
+
     public draft_schematic.custom[] getCustomizations(obj_id player, draft_schematic.custom[] customizations) throws InterruptedException
     {
         if (customizations == null || customizations.length == 0)
@@ -76,7 +82,8 @@ public class crafting_new_armor_droideng_final extends script.systems.crafting.a
         if (skills != null)
         {
             int[] mods = getEnhancedSkillStatisticModifiers(player, skills);
-            for (int mod : mods) {
+            for (int mod : mods)
+            {
                 playerCustomizationMod += mod;
             }
         }
@@ -97,10 +104,10 @@ public class crafting_new_armor_droideng_final extends script.systems.crafting.a
             {
                 customizations[i] = null;
             }
-            else 
+            else
             {
                 int max_maxValue = customizations[i].maxValue;
-                customizations[i].maxValue = (int)(playerCustomizationMod * ((customizations[i].maxValue + 1) / 255.0f));
+                customizations[i].maxValue = (int) (playerCustomizationMod * ((customizations[i].maxValue + 1) / 255.0f));
                 if (customizations[i].maxValue > max_maxValue)
                 {
                     customizations[i].maxValue = max_maxValue;
@@ -114,6 +121,7 @@ public class crafting_new_armor_droideng_final extends script.systems.crafting.a
         }
         return customizations;
     }
+
     public resource_weight[] getAssemblyResourceWeights() throws InterruptedException
     {
         return OBJ_ASSEMBLY_ATTRIBUTE_RESOURCES;

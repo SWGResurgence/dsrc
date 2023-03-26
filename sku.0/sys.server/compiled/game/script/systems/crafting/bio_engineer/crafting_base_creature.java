@@ -11,37 +11,43 @@ import script.obj_id;
 
 public class crafting_base_creature extends script.systems.crafting.crafting_base
 {
+    public static final String VERSION = "v1.00.00";
+
     public crafting_base_creature()
     {
     }
-    public static final String VERSION = "v1.00.00";
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
         super.calcAndSetPrototypeProperties(prototype, itemAttributes, craftingValuesDictionary);
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         obj_id self = getSelf();
         String root = craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".";
-        int[] dna_attributes = 
-        {
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-        };
+        int[] dna_attributes =
+                {
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                };
         float dnaAttrib = 0;
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (!calcAndSetPrototypeProperty(prototype, itemAttribute)) {
+            if (!calcAndSetPrototypeProperty(prototype, itemAttribute))
+            {
                 setObjVar(prototype, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId(), itemAttribute.currentValue);
             }
         }
@@ -112,18 +118,21 @@ public class crafting_base_creature extends script.systems.crafting.crafting_bas
         float finalScale = minScale + (scaleRange * levelRank);
         setObjVar(prototype, "creature_attribs.scale", finalScale);
         LOG("creature_crafting", "Final Scale = " + finalScale);
-        int finalLevel = level - (int)(level * (quality / 100) + 0.5f);
+        int finalLevel = level - (int) (level * (quality / 100) + 0.5f);
         setObjVar(prototype, "creature_attribs.level", finalLevel);
     }
+
     public String getCreatureName() throws InterruptedException
     {
         LOG("crafting", "Called into crafting_base script getSlotResourceWeights()! This function should have been overridden!");
         return null;
     }
+
     public int OnManufactureObject(obj_id self, obj_id player, obj_id newObject, draft_schematic schematic, boolean isPrototype, boolean isRealObject) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnManufacturingSchematicCreation(obj_id self, obj_id player, obj_id prototype, draft_schematic schematic, modifiable_int assemblyResult, modifiable_int experimentPoints) throws InterruptedException
     {
         debugServerConsoleMsg(self, "OnManufacturingSchematicCreation enter");
@@ -137,13 +146,16 @@ public class crafting_base_creature extends script.systems.crafting.crafting_bas
             obj_attributes[i] = (objectAttribs[i].name).getAsciiId();
         }
         debugServerConsoleMsg(self, "Ingredient slot info (" + slots.length + " slots):");
-        for (draft_schematic.slot slot : slots) {
+        for (draft_schematic.slot slot : slots)
+        {
             debugServerConsoleMsg(self, "\tslot " + slot.name + ", ingredient " + slot.ingredients[0].ingredient + ", amount = " + slot.ingredients[0].count);
         }
         debugServerConsoleMsg(self, "Item attribute info (" + objectAttribs.length + " attribs):");
         craftingValuesDictionary.put("craftingType", schematic.getCategory());
-        for (draft_schematic.attribute objectAttrib : objectAttribs) {
-            switch (((objectAttrib.name).getAsciiId())) {
+        for (draft_schematic.attribute objectAttrib : objectAttribs)
+        {
+            switch (((objectAttrib.name).getAsciiId()))
+            {
                 case "complexity":
                     craftingValuesDictionary.put("itemDefaultComplexity", objectAttrib.minValue);
                     craftingValuesDictionary.put("itemCurrentComplexity", objectAttrib.currentValue);
@@ -154,26 +166,33 @@ public class crafting_base_creature extends script.systems.crafting.crafting_bas
                     break;
                 case "sockets":
                     int[] mods = getEnhancedSkillStatisticModifiers(player, getExperimentSkillMods());
-                    if (mods != null) {
+                    if (mods != null)
+                    {
                         int experimentModTotal = 0;
-                        for (int mod : mods) {
+                        for (int mod : mods)
+                        {
                             experimentModTotal += mod;
                         }
-                        if (experimentModTotal > craftinglib.socketThreshold) {
+                        if (experimentModTotal > craftinglib.socketThreshold)
+                        {
                             int sockets = 0;
                             int chances = 1 + (experimentModTotal - craftinglib.socketThreshold) / craftinglib.socketDelta;
-                            for (int j = 0; j < chances; ++j) {
-                                if (rand(1, 100) > craftinglib.socketChance) {
+                            for (int j = 0; j < chances; ++j)
+                            {
+                                if (rand(1, 100) > craftinglib.socketChance)
+                                {
                                     ++sockets;
                                 }
                             }
-                            if (sockets > craftinglib.maxSockets) {
+                            if (sockets > craftinglib.maxSockets)
+                            {
                                 sockets = craftinglib.maxSockets;
                             }
                             objectAttrib.minValue = sockets;
                             objectAttrib.maxValue = sockets;
                             objectAttrib.currentValue = sockets;
-                            if (sockets > 0) {
+                            if (sockets > 0)
+                            {
                                 setCondition(prototype, CONDITION_MAGIC_ITEM);
                             }
                         }
@@ -202,7 +221,7 @@ public class crafting_base_creature extends script.systems.crafting.crafting_bas
         {
             debugServerConsoleMsg(self, "OnManufacturingSchematicCreation set initial attributes of schematic");
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "OnManufacturingSchematicCreation failed to set initial attributes of schematic!");
         }
@@ -211,7 +230,7 @@ public class crafting_base_creature extends script.systems.crafting.crafting_bas
         {
             debugServerConsoleMsg(self, "OnManufacturingSchematicCreation set experimental attributes of schematic");
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "OnManufacturingSchematicCreation failed to set experimental attributes of schematic!");
         }
@@ -236,13 +255,13 @@ public class crafting_base_creature extends script.systems.crafting.crafting_bas
                 setSchematicCustomizations(self, customizations);
             }
         }
-        else 
+        else
         {
             if (customizations == null)
             {
                 debugServerConsoleMsg(self, "OnManufacturingSchematicCreation customizations == null");
             }
-            else 
+            else
             {
                 debugServerConsoleMsg(self, "OnManufacturingSchematicCreation customizations.length == 0");
             }
@@ -253,7 +272,7 @@ public class crafting_base_creature extends script.systems.crafting.crafting_bas
         String root = craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".";
         for (int i = 0; i < bio_engineer.CREATURE_ATTRIB_NUM; i++)
         {
-            int attrib = (int)getFloatObjVar(self, root_internal + bio_engineer.CREATURE_ATTRIB_OBJVAR_NAMES[i]);
+            int attrib = (int) getFloatObjVar(self, root_internal + bio_engineer.CREATURE_ATTRIB_OBJVAR_NAMES[i]);
             setObjVar(self, root + bio_engineer.CREATURE_ATTRIB_OBJVAR_NAMES[i], attrib);
         }
         int quality = getIntObjVar(self, root_internal + "quality");

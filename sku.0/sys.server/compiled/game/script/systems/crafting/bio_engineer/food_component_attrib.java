@@ -8,6 +8,7 @@ public class food_component_attrib extends script.base_script
     public food_component_attrib()
     {
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int i = 0;
@@ -23,7 +24,7 @@ public class food_component_attrib extends script.base_script
             {
                 attribs[i] = "Imperial";
             }
-            else 
+            else
             {
                 attribs[i] = "None";
             }

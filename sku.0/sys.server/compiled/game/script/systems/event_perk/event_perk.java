@@ -9,6 +9,7 @@ public class event_perk extends script.base_script
     public event_perk()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         float lifeSpan = getFloatObjVar(self, "event_perk.lifeSpan");
@@ -19,6 +20,7 @@ public class event_perk extends script.base_script
         messageTo(self, "cleanUp", null, dieTime, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         float lifeSpan = getFloatObjVar(self, "event_perk.lifeSpan");
@@ -29,6 +31,7 @@ public class event_perk extends script.base_script
         messageTo(self, "cleanUp", null, dieTime, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "event_perk.noBuild"))
@@ -38,6 +41,7 @@ public class event_perk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id owner = getObjIdObjVar(self, "event_perk.owner");
@@ -84,6 +88,7 @@ public class event_perk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         String type = getStringObjVar(self, "event_perk.perk_type");
@@ -93,7 +98,7 @@ public class event_perk extends script.base_script
             float timeStamp = getFloatObjVar(self, "event_perk.timeStamp");
             float rightNow = getGameTime();
             float expirationTimeMinutesFloat = ((lifeSpan + timeStamp) - rightNow) / 60;
-            int expirationTimeMinutes = (int)expirationTimeMinutesFloat;
+            int expirationTimeMinutes = (int) expirationTimeMinutesFloat;
             prose_package showExpiration = new prose_package();
             showExpiration = prose.getPackage(new string_id("event_perk", "show_exp_time"));
             prose.setDI(showExpiration, expirationTimeMinutes);
@@ -130,6 +135,7 @@ public class event_perk extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         if (self.isBeingDestroyed())
@@ -146,12 +152,13 @@ public class event_perk extends script.base_script
             CustomerServiceLog("EventPerk", "(Spawned Object - [" + self + "]) lifespan expired so it was destroyed.");
             destroyObject(self);
         }
-        else 
+        else
         {
             messageTo(self, "cleanUp", null, dieTime, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void redeedPerk(obj_id player, obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "event_perk.chest.rewarded"))
@@ -165,11 +172,14 @@ public class event_perk extends script.base_script
         }
         obj_id[] allContents = utils.getAllItemsInBankAndInventory(player);
         int perkCount = 0;
-        for (obj_id allContent : allContents) {
-            if (hasObjVar(allContent, "event_perk")) {
+        for (obj_id allContent : allContents)
+        {
+            if (hasObjVar(allContent, "event_perk"))
+            {
                 perkCount++;
             }
-            if (perkCount >= 5) {
+            if (perkCount >= 5)
+            {
                 sendSystemMessage(player, new string_id("event_perk", "redeed_too_many_deeds"));
                 return;
             }
@@ -194,12 +204,13 @@ public class event_perk extends script.base_script
             }
             destroyObject(self);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("event_perk", "redeed_failed"));
         }
         return;
     }
+
     public void disbandHonorguard(obj_id player, obj_id self) throws InterruptedException
     {
         int headCount = getIntObjVar(self, "event_perk.honorguard_headCount");
@@ -210,6 +221,7 @@ public class event_perk extends script.base_script
         }
         return;
     }
+
     public void checkTimeLimit(obj_id self) throws InterruptedException
     {
         float lifeSpan = getFloatObjVar(self, "event_perk.lifeSpan");
@@ -223,6 +235,7 @@ public class event_perk extends script.base_script
         }
         return;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         checkTimeLimit(self);

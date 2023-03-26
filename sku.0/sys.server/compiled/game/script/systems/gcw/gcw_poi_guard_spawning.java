@@ -10,11 +10,13 @@ public class gcw_poi_guard_spawning extends script.base_script
     public gcw_poi_guard_spawning()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "spawnSentry", null, 10, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "child"))
@@ -29,6 +31,7 @@ public class gcw_poi_guard_spawning extends script.base_script
         destroyObject(child);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnSentry(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("guard_spawning", "spawnSentry init");

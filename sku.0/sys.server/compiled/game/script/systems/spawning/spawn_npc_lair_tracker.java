@@ -8,10 +8,12 @@ public class spawn_npc_lair_tracker extends script.base_script
     public spawn_npc_lair_tracker()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int spawn_Cleanup(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "intDeleting", 1);
@@ -19,12 +21,14 @@ public class spawn_npc_lair_tracker extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int spawn_removeNPC(obj_id self, dictionary params) throws InterruptedException
     {
         debugSpeakMsg(self, "I am walking to an interesting place and despawning. Pay no attention to me!");
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnUnloadedFromMemory(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "intDeleting"))
@@ -33,6 +37,7 @@ public class spawn_npc_lair_tracker extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "intDeleting"))

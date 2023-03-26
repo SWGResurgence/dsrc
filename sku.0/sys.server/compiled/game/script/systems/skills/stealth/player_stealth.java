@@ -5,10 +5,12 @@ import script.library.*;
 
 public class player_stealth extends script.systems.combat.combat_base
 {
+    public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("#####");
+
     public player_stealth()
     {
     }
-    public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("#####");
+
     public int smokeBombTimerExpired(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "sp_smoke_bomb"))
@@ -17,6 +19,7 @@ public class player_stealth extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int withoutTraceTimerExpired(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "sp_without_a_trace"))
@@ -35,6 +38,7 @@ public class player_stealth extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgMotionSensorTripped(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id sensor = params.getObjId("sensor");
@@ -51,7 +55,7 @@ public class player_stealth extends script.systems.combat.combat_base
             pp = prose.setTT(pp, locString);
             pp = prose.setTU(pp, planetString);
         }
-        else 
+        else
         {
             pp = prose.getPackage(new string_id("spam", "sensor_tripped_filtered"));
             pp = prose.setTT(pp, locString);
@@ -61,6 +65,7 @@ public class player_stealth extends script.systems.combat.combat_base
         sendSystemMessageProse(self, pp);
         return SCRIPT_CONTINUE;
     }
+
     public int msgTrackingBeaconLocationRequest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id sendingPlayer = params.getObjId("sendingPlayer");
@@ -73,6 +78,7 @@ public class player_stealth extends script.systems.combat.combat_base
         messageTo(sendingBeacon, "msgTrackingBeaconLocationReply", dic, 0, false);
         return SCRIPT_CONTINUE;
     }
+
     public int invisibilityUpkeep(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, stealth.INVIS_UPKEEP_MSG_DISPATCHED);
@@ -86,25 +92,25 @@ public class player_stealth extends script.systems.combat.combat_base
         switch (invis)
         {
             case (342850470):
-            perpetuate = stealth.checkForceCloakUpkeep(self);
-            break;
+                perpetuate = stealth.checkForceCloakUpkeep(self);
+                break;
             case (815407714):
-            break;
+                break;
             case (-1923109470):
-            break;
+                break;
             case (-121504680):
-            break;
+                break;
             case (1206342977):
-            perpetuate = stealth.checkUrbanStealthUpkeep(self);
-            break;
+                perpetuate = stealth.checkUrbanStealthUpkeep(self);
+                break;
             case (-50098035):
-            perpetuate = stealth.checkWildernessStealthUpkeep(self);
-            break;
+                perpetuate = stealth.checkWildernessStealthUpkeep(self);
+                break;
             case (2068822907):
-            //perpetuate = stealth.checkSpyStealthUpkeep(self); //@Commented out due to Breaking Action Regeneration a few Updates ago.
-            break;
+                //perpetuate = stealth.checkSpyStealthUpkeep(self); //@Commented out due to Breaking Action Regeneration a few Updates ago.
+                break;
             default:
-            break;
+                break;
         }
         //perpetuate = stealth.checkSpyStealthUpkeep(self);
         if (perpetuate && !utils.hasScriptVar(self, stealth.INVIS_UPKEEP_MSG_DISPATCHED))
@@ -114,18 +120,21 @@ public class player_stealth extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleStealCashSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         int amt = params.getInt(money.DICT_AMOUNT);
         withdrawCashFromBank(self, amt, "handleStealCashFinal", "handleStealCashFail", params);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStealCashFail(obj_id self, dictionary params) throws InterruptedException
     {
         int amt = params.getInt(money.DICT_AMOUNT);
         CustomerServiceLog("stealing", "%TU failed to steal " + amt + " credits.", self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStealCashFinal(obj_id self, dictionary params) throws InterruptedException
     {
         int amt = params.getInt(money.DICT_AMOUNT);

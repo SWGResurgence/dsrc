@@ -722,6 +722,7 @@ public class vehicle extends script.base_script
         {
             player = vehicle;
         }
+        obj_id vehicleControlDevice = callable.getCallableCD(vehicle);
         String datatable = VEHICLE_STAT_TABLE;
         String row = getTemplateName(vehicle);
         if (dataTableHasColumn(datatable, "min_speed"))
@@ -808,6 +809,25 @@ public class vehicle extends script.base_script
         {
             int strafe = dataTableGetInt(datatable, row, "strafe");
             setStrafe(vehicle, strafe != 0);
+        }
+        if (hasObjVar(vehicleControlDevice, "vehicle_mechanic"))
+        {
+            String var = "vehicle_mechanic." + getShortenTemplateName(player, vehicle) + ".";
+            setMinimumSpeed(vehicle, getFloatObjVar(vehicleControlDevice, var + "minspeed"));
+            setMaximumSpeed(vehicle, getFloatObjVar(vehicleControlDevice, var + "maxspeed"));
+            setAccelMin(vehicle, getFloatObjVar(vehicleControlDevice, var + "acceleration"));
+            setAccelMax(vehicle, getFloatObjVar(vehicleControlDevice, var + "accelerationmax"));
+            setBankingAngle(vehicle, getFloatObjVar(vehicleControlDevice, var + "turning"));
+            setTurnRateMin(vehicle, getFloatObjVar(vehicleControlDevice, var + "banking"));
+            setTurnRateMax(vehicle, getFloatObjVar(vehicleControlDevice, var + "turning_max"));
+            setDecel(vehicle, getFloatObjVar(vehicleControlDevice, var + "deceleration"));
+            setGlide(vehicle, getFloatObjVar(vehicleControlDevice, var + "glide"));
+            setAutoLevelling(vehicle, getFloatObjVar(vehicleControlDevice, var + "autolevel"));
+            setDampingHeight(vehicle, getFloatObjVar(vehicleControlDevice, var + "dampingheight"));
+            setDampingPitch(vehicle, getFloatObjVar(vehicleControlDevice, var + "dampingpitch"));
+            setDampingRoll(vehicle, getFloatObjVar(vehicleControlDevice, var + "dampingroll"));
+            setStrafe(vehicle, getBooleanObjVar(vehicleControlDevice, var + "strafe"));
+            debugConsoleMsg(player, "Your vehicle has been analyzed and tuned.");
         }
     }
     public static boolean mountPermissionCheck(obj_id vehicle, obj_id rider, boolean verbose) throws InterruptedException
@@ -1151,4 +1171,11 @@ public class vehicle extends script.base_script
         return false;
     }
 
+    public static String getShortenTemplateName(obj_id self, obj_id vehicle)
+    {
+        String template = getTemplateName(vehicle);
+        template = template.replaceAll("object/mobile/vehicle/shared_", "");
+        template = template.replaceAll(".iff", "");
+        return template;
+    }
 }

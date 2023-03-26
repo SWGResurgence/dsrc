@@ -7,10 +7,12 @@ import script.obj_id;
 
 public class buff_worn_item extends script.base_script
 {
+    public static final String NON_ENHANCEMENT_BUFF = "buff.non_enhancement";
+
     public buff_worn_item()
     {
     }
-    public static final String NON_ENHANCEMENT_BUFF = "buff.non_enhancement";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (isPlayer(getContainedBy(self)))
@@ -26,6 +28,7 @@ public class buff_worn_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id player = destContainer;
@@ -70,6 +73,7 @@ public class buff_worn_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (isIdValid(item))
@@ -80,6 +84,7 @@ public class buff_worn_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);

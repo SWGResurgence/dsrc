@@ -11,12 +11,13 @@ import script.string_id;
 
 public class fs_village_shield_repair extends script.base_script
 {
-    public fs_village_shield_repair()
-    {
-    }
     public static final String PP_FILE_LOC = "quest/force_sensitive/fs_shield_repair";
     public static final String RESPONSE_TEXT = "datatables/fs_quests/fs_shield_repair.iff";
     public static final int INITIAL_DELAY = 10;
+    public fs_village_shield_repair()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasScript(self, "ai.creature_combat"))
@@ -35,6 +36,7 @@ public class fs_village_shield_repair extends script.base_script
         messageTo(self, "fsShieldRepair", null, INITIAL_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int fsShieldRepair(obj_id self, dictionary params) throws InterruptedException
     {
         int randAnim = rand(0, 4);
@@ -55,6 +57,7 @@ public class fs_village_shield_repair extends script.base_script
         messageTo(self, "fsShieldRepair", null, randRepeatMsg, false);
         return SCRIPT_CONTINUE;
     }
+
     public prose_package getRandRepair(obj_id target, int repairRow) throws InterruptedException
     {
         string_id response = new string_id(PP_FILE_LOC, utils.dataTableGetString(RESPONSE_TEXT, repairRow, 1));

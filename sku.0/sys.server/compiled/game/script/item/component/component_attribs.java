@@ -11,6 +11,7 @@ public class component_attribs extends script.base_script
     public component_attribs()
     {
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (names == null || attribs == null || names.length != attribs.length)
@@ -45,21 +46,22 @@ public class component_attribs extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String template = getTemplateName(self);
         String[] needToBeFixed = new String[]
-        {
-            "object/tangible/component/armor/armor_layer_nightsister.iff",
-            "object/tangible/component/armor/feather_peko_albatross.iff",
-            "object/tangible/component/armor/armor_layer_ris.iff"
-        };
+                {
+                        "object/tangible/component/armor/armor_layer_nightsister.iff",
+                        "object/tangible/component/armor/feather_peko_albatross.iff",
+                        "object/tangible/component/armor/armor_layer_ris.iff"
+                };
         if (utils.getElementPositionInArray(needToBeFixed, template) > -1)
         {
             float val = getFloatObjVar(self, "attribute.bonus.0");
             if (val != 0)
             {
-                int intVal = (int)val;
+                int intVal = (int) val;
                 removeObjVar(self, "attribute.bonus.0");
                 setObjVar(self, "attribute.bonus.0", intVal);
             }

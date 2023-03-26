@@ -8,11 +8,13 @@ public class broken_datapad extends script.base_script
     public broken_datapad()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "setUp", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int setUp(obj_id self, dictionary params) throws InterruptedException
     {
         String[] needs = new String[4];

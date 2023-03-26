@@ -10,12 +10,13 @@ import script.string_id;
 
 public class fs_village_wounded extends script.base_script
 {
-    public fs_village_wounded()
-    {
-    }
     public static final String PP_FILE_LOC = "quest/force_sensitive/fs_lamentations";
     public static final String RESPONSE_TEXT = "datatables/fs_quests/fs_lamentations.iff";
     public static int INITIAL_DELAY = 10;
+    public fs_village_wounded()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasScript(self, "ai.ai"))
@@ -38,6 +39,7 @@ public class fs_village_wounded extends script.base_script
         messageTo(self, "fsLamentations", null, INITIAL_DELAY, false);
         return SCRIPT_CONTINUE;
     }
+
     public int fsLamentations(obj_id self, dictionary params) throws InterruptedException
     {
         int randMoan = rand(0, 9);
@@ -46,6 +48,7 @@ public class fs_village_wounded extends script.base_script
         messageTo(self, "fsLamentations", null, randMsg, false);
         return SCRIPT_CONTINUE;
     }
+
     public prose_package getRandLamentation(obj_id target, int moanRow) throws InterruptedException
     {
         string_id response = new string_id(PP_FILE_LOC, utils.dataTableGetString(RESPONSE_TEXT, moanRow, 1));

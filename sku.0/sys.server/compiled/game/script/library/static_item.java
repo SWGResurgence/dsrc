@@ -133,6 +133,8 @@ public class static_item extends script.base_script
     public static void initializeObject(obj_id object, dictionary itemData) throws InterruptedException
     {
         String itemName = itemData.getString("name");
+        String bypassName = itemData.getString("string_name");
+        String bypassDesc = itemData.getString("string_detail");
         if (itemName == null || itemName.equals(""))
         {
             LOG("create", object + " InitializeObject FAILED: No NAME field in datatable or bad dictionary passed in");
@@ -155,9 +157,9 @@ public class static_item extends script.base_script
         }
         if (exists(object) && !hasObjVar(object, "playerQuest"))
         {
-            setName(object, new string_id("static_item_n", itemName));
+            setName(object, new string_id(bypassName));
         }
-        setDescriptionStringId(object, new string_id("static_item_d", itemName));
+        setDescriptionStringId(object, new string_id(bypassDesc));
         LOG("npe", "MAKING THING");
         switch (itemData.getInt("type"))
         {

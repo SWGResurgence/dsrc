@@ -4,17 +4,19 @@ import script.obj_id;
 
 public class trigger_volume_vistas extends script.base_script
 {
-    public trigger_volume_vistas()
-    {
-    }
     public static final String COLLECTION_PREFIX = "col_panoramic_vistas_";
     public static final String SLOT_OBJVAR = "collection.marker";
     public static final float UPDATE_RADIUS = 2.0f;
+    public trigger_volume_vistas()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume("vistas_trigger_volume", UPDATE_RADIUS, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volName, obj_id breecher) throws InterruptedException
     {
         if (!isIdValid(breecher) || !exists(breecher))

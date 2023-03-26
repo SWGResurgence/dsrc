@@ -11,6 +11,7 @@ public class enzyme extends script.base_script
     public enzyme()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, incubator.ENZYME_COLOR_OBJVAR))
@@ -19,6 +20,7 @@ public class enzyme extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void renameEnzyme(obj_id which) throws InterruptedException
     {
         String name = "";
@@ -43,24 +45,29 @@ public class enzyme extends script.base_script
             }
         }
     }
+
     public int rename_enzyme(obj_id self, dictionary params) throws InterruptedException
     {
         renameEnzyme(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeValues", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -133,6 +140,7 @@ public class enzyme extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleInitializeValues(obj_id self, dictionary params) throws InterruptedException
     {
         renameEnzyme(self);
@@ -148,6 +156,7 @@ public class enzyme extends script.base_script
         incubator.awardEnzymeCollection(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         incubator.awardEnzymeCollection(self);

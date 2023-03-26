@@ -14,11 +14,13 @@ public class lambda extends script.systems.spawning.dropship.base
     public lambda()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleAttachDelay", null, 2.0f, false);
         return super.OnAttach(self);
     }
+
     public int handleAttachDelay(obj_id self, dictionary params) throws InterruptedException
     {
         stop(self);
@@ -27,12 +29,14 @@ public class lambda extends script.systems.spawning.dropship.base
         queueCommand(self, (-1465754503), self, "", COMMAND_PRIORITY_FRONT);
         return SCRIPT_CONTINUE;
     }
+
     public int changePosture(obj_id self, dictionary params) throws InterruptedException
     {
         setPosture(self, POSTURE_UPRIGHT);
         messageTo(self, "selfCleanUp", null, 60.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnPayload(obj_id self, dictionary params) throws InterruptedException
     {
         String[] spawnNames = utils.getStringArrayScriptVar(self, "spawnNames");
@@ -72,7 +76,7 @@ public class lambda extends script.systems.spawning.dropship.base
                     dictionary spawnParams = utils.getDictionaryScriptVar(self, "spawnParameters");
                     if (spawnParams != null && !spawnParams.isEmpty())
                     {
-                        messageTo(((obj_id)spawns.get(0)), "handleSpawnParameters", spawnParams, 1.0f, false);
+                        messageTo(((obj_id) spawns.get(0)), "handleSpawnParameters", spawnParams, 1.0f, false);
                     }
                 }
             }
@@ -80,6 +84,7 @@ public class lambda extends script.systems.spawning.dropship.base
         messageTo(self, "changePosture", null, 5, false);
         return SCRIPT_CONTINUE;
     }
+
     public int selfCleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         if (isIdValid(self))

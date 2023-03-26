@@ -7,44 +7,47 @@ import script.library.utils;
 
 public class player_structure_deed extends script.base_script
 {
+    public static final string_id SID_NO_PLACING_STRUCTURES_IN_SPACE = new string_id("space/space_interaction", "no_placing_structures_in_space");
+    public static final String[] LIGHT_HARVESTERS =
+            {
+                    "object/installation/mining_gas/mining_gas_harvester_style_1.iff",
+                    "object/installation/mining_liquid/mining_liquid_harvester_style_1.iff",
+                    "object/installation/mining_liquid/mining_liquid_moisture_harvester.iff",
+                    "object/installation/mining_ore/mining_ore_harvester_style_1.iff",
+                    "object/installation/mining_organic/mining_organic_flora_farm.iff"
+            };
+    public static final String[] MEDIUM_HARVESTERS =
+            {
+                    "object/installation/mining_gas/mining_gas_harvester_style_2.iff",
+                    "object/installation/mining_liquid/mining_liquid_harvester_style_2.iff",
+                    "object/installation/mining_liquid/mining_liquid_moisture_harvester_medium.iff",
+                    "object/installation/mining_ore/mining_ore_harvester_style_2.iff",
+                    "object/installation/mining_organic/mining_organic_flora_farm_medium.iff"
+            };
+    public static final String[] HEAVY_HARVESTERS =
+            {
+                    "object/installation/mining_gas/mining_gas_harvester_style_3.iff",
+                    "object/installation/mining_liquid/mining_liquid_harvester_style_3.iff",
+                    "object/installation/mining_liquid/mining_liquid_moisture_harvester_heavy.iff",
+                    "object/installation/mining_ore/mining_ore_harvester_heavy.iff",
+                    "object/installation/mining_organic/mining_organic_flora_farm_heavy.iff"
+            };
     public player_structure_deed()
     {
     }
-    public static final string_id SID_NO_PLACING_STRUCTURES_IN_SPACE = new string_id("space/space_interaction", "no_placing_structures_in_space");
-    public static final String LIGHT_HARVESTERS[] = 
-    {
-        "object/installation/mining_gas/mining_gas_harvester_style_1.iff",
-        "object/installation/mining_liquid/mining_liquid_harvester_style_1.iff",
-        "object/installation/mining_liquid/mining_liquid_moisture_harvester.iff",
-        "object/installation/mining_ore/mining_ore_harvester_style_1.iff",
-        "object/installation/mining_organic/mining_organic_flora_farm.iff"
-    };
-    public static final String MEDIUM_HARVESTERS[] = 
-    {
-        "object/installation/mining_gas/mining_gas_harvester_style_2.iff",
-        "object/installation/mining_liquid/mining_liquid_harvester_style_2.iff",
-        "object/installation/mining_liquid/mining_liquid_moisture_harvester_medium.iff",
-        "object/installation/mining_ore/mining_ore_harvester_style_2.iff",
-        "object/installation/mining_organic/mining_organic_flora_farm_medium.iff"
-    };
-    public static final String HEAVY_HARVESTERS[] = 
-    {
-        "object/installation/mining_gas/mining_gas_harvester_style_3.iff",
-        "object/installation/mining_liquid/mining_liquid_harvester_style_3.iff",
-        "object/installation/mining_liquid/mining_liquid_moisture_harvester_heavy.iff",
-        "object/installation/mining_ore/mining_ore_harvester_heavy.iff",
-        "object/installation/mining_organic/mining_organic_flora_farm_heavy.iff"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         String deed_scene = getStringObjVar(self, "player_structure.deed.scene");
         if (deed_scene != null && deed_scene.length() > 0)
         {
-            switch (deed_scene) {
+            switch (deed_scene)
+            {
                 case "tatooine":
                     deed_scene = "tatooine,lok,dantooine";
                     setObjVar(self, "player_structure.deed.scene", deed_scene);
@@ -63,7 +66,7 @@ public class player_structure_deed extends script.base_script
                     break;
             }
         }
-        else 
+        else
         {
             setObjVar(self, "player_structure.deed.scene", deed_scene);
         }
@@ -81,6 +84,7 @@ public class player_structure_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!exists(self))
@@ -100,7 +104,7 @@ public class player_structure_deed extends script.base_script
             if (maintenance_rate > 0 && civic == 0)
             {
                 names[idx] = "examine_maintenance_rate";
-                attribs[idx] = Integer.toString(maintenance_rate * 2) + " / hour";
+                attribs[idx] = maintenance_rate * 2 + " / hour";
                 idx++;
             }
         }
@@ -158,6 +162,7 @@ public class player_structure_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -172,6 +177,7 @@ public class player_structure_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (hasObjVar(self, "player_structure.deed.scene"))
@@ -201,6 +207,7 @@ public class player_structure_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleNoReclaimConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVarTree(self, "noreclaim");
@@ -225,6 +232,7 @@ public class player_structure_deed extends script.base_script
         queueCommand(player, (123886506), self, "", COMMAND_PRIORITY_DEFAULT);
         return SCRIPT_CONTINUE;
     }
+
     public int validateHopper(obj_id self, dictionary params) throws InterruptedException
     {
         int objvar_hopper = getIntObjVar(self, player_structure.VAR_DEED_MAX_HOPPER);

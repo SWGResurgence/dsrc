@@ -4,10 +4,12 @@ import script.obj_id;
 
 public class player_quest_base extends script.base_script
 {
+    public static final String HOLOCRON_NAME = "holocronName";
+
     public player_quest_base()
     {
     }
-    public static final String HOLOCRON_NAME = "holocronName";
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, HOLOCRON_NAME))
@@ -17,6 +19,7 @@ public class player_quest_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

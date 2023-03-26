@@ -53,5 +53,6 @@ FORM "PLTS"
 		Planet("adventure2")
 		Planet("dxun")
 		Planet("space_dxun")
+		Planet("taanab")
 	}
 }

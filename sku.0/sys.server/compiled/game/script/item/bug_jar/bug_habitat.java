@@ -8,26 +8,28 @@ import script.string_id;
 
 public class bug_habitat extends script.base_script
 {
-    public bug_habitat()
-    {
-    }
     public static final string_id SID_RELEASE_CREATURES = new string_id("lair_n", "release_creatures");
     public static final string_id SID_RELEASE = new string_id("lair_n", "release");
     public static final string_id SID_NO_ACCESS = new string_id("lair_n", "no_access");
-    public static final String[] BUG_FX = 
+    public static final String[] BUG_FX =
+            {
+                    "clienteffect/item_bugs_bats.cef",
+                    "clienteffect/item_bugs_bees.cef",
+                    "clienteffect/item_bugs_butterflies.cef",
+                    "clienteffect/item_bugs_flies.cef",
+                    "clienteffect/item_bugs_glowzees.cef",
+                    "clienteffect/item_bugs_moths.cef"
+            };
+    public bug_habitat()
     {
-        "clienteffect/item_bugs_bats.cef",
-        "clienteffect/item_bugs_bees.cef",
-        "clienteffect/item_bugs_butterflies.cef",
-        "clienteffect/item_bugs_flies.cef",
-        "clienteffect/item_bugs_glowzees.cef",
-        "clienteffect/item_bugs_moths.cef"
-    };
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_RELEASE_CREATURES);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isSpaceScene())
@@ -46,7 +48,7 @@ public class bug_habitat extends script.base_script
             {
                 releaseCreatures(self, player);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_NO_ACCESS);
             }
@@ -54,6 +56,7 @@ public class bug_habitat extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void releaseCreatures(obj_id self, obj_id player) throws InterruptedException
     {
         sendSystemMessage(player, SID_RELEASE);

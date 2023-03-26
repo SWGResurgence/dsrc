@@ -9,20 +9,24 @@ import script.string_id;
 
 public class base extends script.base_script
 {
+    public static final string_id SID_NO_FIREWORKS_IN_SPACE = new string_id("space/space_interaction", "no_fireworks_in_space");
+
     public base()
     {
     }
-    public static final string_id SID_NO_FIREWORKS_IN_SPACE = new string_id("space/space_interaction", "no_fireworks_in_space");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCount(self, 5);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenuOrServerNotify(menu_info_types.ITEM_USE, null);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isSpaceScene())
@@ -41,6 +45,7 @@ public class base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         String fx = "";
@@ -52,7 +57,7 @@ public class base extends script.base_script
                 setObjVar(self, firework.VAR_FIREWORK_FX, fx);
             }
         }
-        else 
+        else
         {
             fx = getStringObjVar(self, firework.VAR_FIREWORK_FX);
         }

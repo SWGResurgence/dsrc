@@ -5,13 +5,14 @@ import script.library.utils;
 
 public class animate_object extends script.base_script
 {
-    public animate_object()
-    {
-    }
     public static final String LOCKOUT = "animation_lockout";
     public static final String LOCKOUT_TIME = "lockout_time";
     public static final String USE_STRING = "use_string";
     public static final String ANIMATION_NAME = "animation_name";
+    public animate_object()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -26,6 +27,7 @@ public class animate_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -50,6 +52,7 @@ public class animate_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int animationLockout(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, LOCKOUT))

@@ -4,9 +4,6 @@ import script.*;
 
 public class travel_bag extends script.base_script
 {
-    public travel_bag()
-    {
-    }
     public static final String DATATABLE_START_LOCATIONS = "datatables/creation/starting_locations.iff";
     public static final String SCRIPT_TRAVEL_BAG = "item.container.travel_bag";
     public static final string_id SID_TRAVEL_TATOOINE = new string_id("travel", "travel_tatooine");
@@ -18,6 +15,10 @@ public class travel_bag extends script.base_script
     public static final string_id SID_TRAVEL_RORI = new string_id("travel", "travel_rori");
     public static final string_id SID_NO_LOCATION_FOUND = new string_id("travel", "no_location_found");
     public static final string_id SID_ALREADY_THERE = new string_id("travel", "already_there");
+    public travel_bag()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int root_menu = mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_TRAVEL_TATOOINE);
@@ -29,6 +30,7 @@ public class travel_bag extends script.base_script
         mi.addSubMenu(root_menu, menu_info_types.SERVER_MENU7, SID_TRAVEL_RORI);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         String travel_point;
@@ -60,7 +62,7 @@ public class travel_bag extends script.base_script
         {
             travel_point = "narmle";
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
@@ -75,7 +77,7 @@ public class travel_bag extends script.base_script
             z = row.getFloat("z");
             planet = row.getString("planet");
         }
-        else 
+        else
         {
             if (travel_point.equals("lok"))
             {
@@ -89,7 +91,7 @@ public class travel_bag extends script.base_script
                 x = -617;
                 z = 2478;
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_NO_LOCATION_FOUND);
                 return SCRIPT_CONTINUE;

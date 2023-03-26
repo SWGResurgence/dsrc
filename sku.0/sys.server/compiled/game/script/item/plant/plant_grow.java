@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class plant_grow extends script.base_script
 {
-    public plant_grow()
-    {
-    }
     public static final int PULSE_RATE = 21600;
     public static final String VAR_CRITICAL_ATTRIBS = "plant_grow.critical_attribs";
     public static final String VAR_WATER_LEVEL = "plant_grow.water_level";
@@ -28,6 +25,10 @@ public class plant_grow extends script.base_script
     public static final String VAR_SIZE = "plant_grow.size";
     public static final String VAR_LAST_PULSE = "plant_grow.last_pulse";
     public static final String VAR_FAST_PULSE = "plant_grow.fast_pulse";
+    public plant_grow()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "plant_grow.initialized"))
@@ -53,6 +54,7 @@ public class plant_grow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (getIntObjVar(self, VAR_SIZE) == 0)
@@ -71,6 +73,7 @@ public class plant_grow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (getIntObjVar(self, VAR_SIZE) == 0)
@@ -147,6 +150,7 @@ public class plant_grow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -192,7 +196,7 @@ public class plant_grow extends script.base_script
             int abs_val = Math.abs(growth_rate);
             attribs[idx] = "@plant_grow:growth_loss_" + abs_val;
         }
-        else 
+        else
         {
             attribs[idx] = "@plant_grow:growth_rate_" + growth_rate;
         }
@@ -227,6 +231,7 @@ public class plant_grow extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgPlantGrowPulse(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("plant_grow", "plant_grow.msgPlantGrowPulse");
@@ -289,7 +294,7 @@ public class plant_grow extends script.base_script
                 setObjVar(self, VAR_GROWTH, growth);
             }
         }
-        else 
+        else
         {
             if (diff_water < 20)
             {
@@ -344,7 +349,7 @@ public class plant_grow extends script.base_script
                 changeSize(self, size + 1);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 fruit++;
                 if (fruit > 10)
@@ -358,6 +363,7 @@ public class plant_grow extends script.base_script
         messageTo(self, "msgPlantGrowPulse", null, getPulseRate(self), false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean showPlantResourceSUI(obj_id player, obj_id plant, String type) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -386,19 +392,28 @@ public class plant_grow extends script.base_script
             Vector container_list = new Vector();
             container_list.setSize(0);
             obj_id[] objects = utils.getContents(inv, false);
-            for (obj_id object : objects) {
-                if (isResourceContainer(object)) {
+            for (obj_id object : objects)
+            {
+                if (isResourceContainer(object))
+                {
                     obj_id resource_type = getResourceContainerResourceType(object);
-                    if (isIdValid(resource_type)) {
+                    if (isIdValid(resource_type))
+                    {
                         String resource_class = getResourceClass(resource_type);
-                        if (resource_class != null) {
-                            if (type.equals("nutrient")) {
-                                if (resource.isOrganic(resource_class)) {
+                        if (resource_class != null)
+                        {
+                            if (type.equals("nutrient"))
+                            {
+                                if (resource.isOrganic(resource_class))
+                                {
                                     dsrc.add(getResourceName(resource_type));
                                     container_list.add(object);
                                 }
-                            } else {
-                                if (isResourceClassDerivedFrom(resource_class, resource.RT_LIQUID_WATER)) {
+                            }
+                            else
+                            {
+                                if (isResourceClassDerivedFrom(resource_class, resource.RT_LIQUID_WATER))
+                                {
                                     dsrc.add(getResourceName(resource_type));
                                     container_list.add(object);
                                 }
@@ -418,13 +433,13 @@ public class plant_grow extends script.base_script
                     attachScript(player, "item.plant.player_plant_grow");
                 }
             }
-            else 
+            else
             {
                 if (type.equals("nutrient"))
                 {
                     sendSystemMessage(player, new string_id("plant_grow", "no_nutrients"));
                 }
-                else 
+                else
                 {
                     sendSystemMessage(player, new string_id("plant_grow", "no_water"));
                 }
@@ -432,29 +447,30 @@ public class plant_grow extends script.base_script
         }
         return true;
     }
+
     public boolean intializePlant(obj_id plant) throws InterruptedException
     {
         if (!isIdValid(plant))
         {
             return false;
         }
-        String[] critical_attribs = 
-        {
-            "res_decay_resist",
-            "res_flavor",
-            "res_potential_energy",
-            "res_toughness",
-            "res_shock_resistance",
-            "res_malleability",
-            "res_quality"
-        };
+        String[] critical_attribs =
+                {
+                        "res_decay_resist",
+                        "res_flavor",
+                        "res_potential_energy",
+                        "res_toughness",
+                        "res_shock_resistance",
+                        "res_malleability",
+                        "res_quality"
+                };
         String[] plant_attribs = new String[2];
         int plant_attrib_1 = rand(0, critical_attribs.length - 1);
         plant_attribs[0] = critical_attribs[plant_attrib_1];
         int plant_attrib_2 = rand(0, critical_attribs.length - 1);
         if (plant_attrib_1 == plant_attrib_2)
         {
-            while (plant_attrib_1 == plant_attrib_2)plant_attrib_2 = rand(0, critical_attribs.length - 1);
+            while (plant_attrib_1 == plant_attrib_2) plant_attrib_2 = rand(0, critical_attribs.length - 1);
         }
         plant_attribs[1] = critical_attribs[plant_attrib_2];
         setObjVar(plant, VAR_CRITICAL_ATTRIBS, plant_attribs);
@@ -465,7 +481,7 @@ public class plant_grow extends script.base_script
             ideal_water_level = rand(30, 70);
             ideal_nutrient_level = rand(30, 70);
         }
-        else 
+        else
         {
             ideal_water_level = rand(10, 90);
             ideal_nutrient_level = rand(10, 90);
@@ -474,6 +490,7 @@ public class plant_grow extends script.base_script
         setObjVar(plant, VAR_IDEAL_NUTRIENT_LEVEL, ideal_nutrient_level);
         return true;
     }
+
     public boolean changeSize(obj_id plant, int size) throws InterruptedException
     {
         if (!isIdValid(plant))
@@ -484,13 +501,13 @@ public class plant_grow extends script.base_script
         {
             return false;
         }
-        String[] templates = 
-        {
-            "object/tangible/loot/plant_grow/plant_stage_dead.iff",
-            "object/tangible/loot/plant_grow/plant_stage_1.iff",
-            "object/tangible/loot/plant_grow/plant_stage_2.iff",
-            "object/tangible/loot/plant_grow/plant_stage_3.iff"
-        };
+        String[] templates =
+                {
+                        "object/tangible/loot/plant_grow/plant_stage_dead.iff",
+                        "object/tangible/loot/plant_grow/plant_stage_1.iff",
+                        "object/tangible/loot/plant_grow/plant_stage_2.iff",
+                        "object/tangible/loot/plant_grow/plant_stage_3.iff"
+                };
         location loc = getLocation(plant);
         obj_id new_plant = createObject(templates[size], loc);
         if (size > 0)
@@ -503,13 +520,14 @@ public class plant_grow extends script.base_script
         destroyObject(plant);
         return true;
     }
+
     public int getPulseRate(obj_id plant) throws InterruptedException
     {
         if (hasObjVar(plant, VAR_FAST_PULSE))
         {
             return 30;
         }
-        else 
+        else
         {
             return PULSE_RATE;
         }

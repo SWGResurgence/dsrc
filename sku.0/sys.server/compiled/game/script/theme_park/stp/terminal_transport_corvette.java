@@ -10,7 +10,7 @@ import script.obj_id;
  */
 public class terminal_transport_corvette extends script.base_script
 {
-    public static String CORVETTE = "object/building/general/space_dungeon_corellian_corvette_base.iff";
+    public static String CORVETTE = "object/building/general/space_dungeon_corellian_corvette.iff";
 
     public terminal_transport_corvette()
     {

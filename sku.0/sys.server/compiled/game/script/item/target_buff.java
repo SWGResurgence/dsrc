@@ -6,18 +6,21 @@ import script.*;
 
 public class target_buff extends script.base_script
 {
-    public target_buff()
-    {
-    }
     public static final string_id SID_BUFF_NPC_ONLY = new string_id("spam", "item_buff_npc_only");
     public static final string_id SID_BUFF_WONT_STACK = new string_id("spam", "item_buff_no_stack");
     public static final string_id SID_BUFF_PLAYER_ONLY = new string_id("spam", "item_buff_player_only");
     public static final string_id USED_EFFECT = new string_id("spam", "item_buff_used_other_player");
     public static final string_id BUFF_OUT_OF_RANGE = new string_id("spam", "item_buff_out_of_range");
+
+    public target_buff()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -27,6 +30,7 @@ public class target_buff extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, null);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -52,6 +56,7 @@ public class target_buff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void buff(obj_id self, obj_id player, obj_id target) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(player))
@@ -133,7 +138,7 @@ public class target_buff extends script.base_script
             {
                 destroyObject(self);
             }
-            else 
+            else
             {
                 setCount(self, count);
             }

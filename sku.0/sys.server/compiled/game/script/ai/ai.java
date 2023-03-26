@@ -1982,9 +1982,9 @@ public class ai extends script.base_script
 
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        if (isGod(player) && !isInvulnerable(self) && !isPlayer(self) && !hasScript(self, "systems.city.city_actor"))
+        if (isGod(player) && !isInvulnerable(self) && !isPlayer(self) && !hasScript(self, "systems.city.city_actor") && (!pet_lib.isPet(self) || !beast_lib.isBeast(self)))
         {
-            int root = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("Loot *"));
+            int root = mi.addRootMenu(menu_info_types.SERVER_MENU20, new string_id("Manage Loot *"));
             mi.addSubMenu(root, menu_info_types.SERVER_MENU21, new string_id("* Increase Drop Count by 1"));
             mi.addSubMenu(root, menu_info_types.SERVER_MENU22, new string_id("* Decrease Drop Count by 1"));
             mi.addSubMenu(root, menu_info_types.SERVER_MENU24, new string_id("* Set Loot Table"));
@@ -2076,7 +2076,7 @@ public class ai extends script.base_script
             {
                 if (!hasScript(self, "systems.city.city_actor"))
                 {
-                    String prompt = "Enter creature name to make a ring spawn.\n For a complete list of creature names, seek out mobs.iff!";
+                    String prompt = "Enter creature name to make a ring spawn.\n For a complete list of creature names, seek out creatures.iff!";
                     int pid = sui.inputbox(player, player, prompt, "prepareRingSpawn");
                     sui.setSUIProperty(pid, sui.INPUTBOX_PROMPT, "Font", "starwarslogo_optimized_56");
                 }

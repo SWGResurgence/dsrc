@@ -8,9 +8,6 @@ import script.library.utils;
 
 public class no_consume_title_grant extends script.base_script
 {
-    public no_consume_title_grant()
-    {
-    }
     public static final String PID_NAME = "collectionConsume";
     public static final String SCRIPT_VAR_NUM_ALT_TITLE = "collection.numAltTitle";
     public static final String OBJVAR_TITLE_GRANTED = "titleGrantedTo";
@@ -20,11 +17,16 @@ public class no_consume_title_grant extends script.base_script
     public static final string_id SID_REPORT_CONSUME_ITEM_FAIL = new string_id("collection", "report_consume_item_fail");
     public static final string_id SID_ALREADY_HAVE_SLOT = new string_id("collection", "already_have_slot");
     public static final string_id COLLECTION_TITLE_GRANTED = new string_id("collection", "collection_title_granted");
+    public no_consume_title_grant()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "checkAltTitleCount", null, 3, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPT_VAR_NUM_ALT_TITLE))
@@ -33,6 +35,7 @@ public class no_consume_title_grant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id collectionItem = self;
@@ -46,6 +49,7 @@ public class no_consume_title_grant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -67,6 +71,7 @@ public class no_consume_title_grant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -101,6 +106,7 @@ public class no_consume_title_grant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkAltTitleCount(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, collection.OBJVAR_SLOT_NAME))
@@ -115,10 +121,13 @@ public class no_consume_title_grant extends script.base_script
         String[] catagories = getCollectionSlotCategoryInfo(slotName);
         if (catagories != null && catagories.length > 0)
         {
-            for (String catagory : catagories) {
-                if (catagory.contains(collection.CATEGORY_NUM_ALT_TITLES)) {
+            for (String catagory : catagories)
+            {
+                if (catagory.contains(collection.CATEGORY_NUM_ALT_TITLES))
+                {
                     String[] splitAltTitles = split(catagory, ':');
-                    if (splitAltTitles == null || splitAltTitles.length != 2) {
+                    if (splitAltTitles == null || splitAltTitles.length != 2)
+                    {
                         continue;
                     }
                     int numAltTitles = utils.stringToInt(splitAltTitles[1]);
@@ -128,6 +137,7 @@ public class no_consume_title_grant extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlerSuiAddTitle(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -174,7 +184,7 @@ public class no_consume_title_grant extends script.base_script
                     sendSystemMessageProse(player, pp);
                 }
             }
-            else 
+            else
             {
                 CustomerServiceLog("CollectionConsume: ", "titleGrantItem (" + collectionItem + ")" + " was NOT used to grant a title, for player " + getFirstName(player) + "(" + player + ").");
                 sendSystemMessage(player, SID_REPORT_CONSUME_ITEM_FAIL);
@@ -182,7 +192,7 @@ public class no_consume_title_grant extends script.base_script
             sui.removePid(player, PID_NAME);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_ALREADY_HAVE_SLOT);
             sui.removePid(player, PID_NAME);

@@ -6,14 +6,15 @@ import script.library.utils;
 
 public class locked_slicable extends script.base_script
 {
-    public locked_slicable()
-    {
-    }
     public static final string_id SID_SLICE = new string_id("slicing/slicing", "slice");
     public static final string_id SID_LOCKED = new string_id("slicing/slicing", "locked");
     public static final string_id SID_BROKEN = new string_id("slicing/slicing", "broken");
     public static final string_id SID_SUCCESS = new string_id("slicing/slicing", "container_success");
     public static final string_id SID_FAIL = new string_id("slicing/slicing", "container_fail");
+    public locked_slicable()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "slicing.locked"))
@@ -26,6 +27,7 @@ public class locked_slicable extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasSkill(player, "class_smuggler_phase1_novice") && hasObjVar(self, "slicing.locked"))
@@ -46,6 +48,7 @@ public class locked_slicable extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -75,6 +78,7 @@ public class locked_slicable extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToOpenContainer(obj_id self, obj_id opener) throws InterruptedException
     {
         if (hasObjVar(self, "slicing.locked"))
@@ -84,6 +88,7 @@ public class locked_slicable extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int finishSlicing(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -98,7 +103,7 @@ public class locked_slicable extends script.base_script
             sendSystemMessage(player, SID_SUCCESS);
             messageTo(self, "handleSlicingSuccess", null, 0.0f, true);
         }
-        else 
+        else
         {
             removeObjVar(self, "slicing.slicable");
             sendSystemMessage(player, SID_FAIL);

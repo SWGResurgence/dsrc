@@ -9,21 +9,24 @@ import script.string_id;
 
 public class homing_beacon extends script.base_script
 {
-    public homing_beacon()
-    {
-    }
     public static final string_id NOT_OWNER = new string_id("spam", "homing_not_owner");
     public static final string_id BEACON_ACTIVE = new string_id("spam", "homing_activated");
     public static final string_id BEACON_DESTROY = new string_id("spam", "homing_destroy");
     public static final string_id BEACON_DEACTIVE = new string_id("spam", "homing_deactivated");
+    public homing_beacon()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!utils.isNestedWithinAPlayer(destContainer))
@@ -46,7 +49,7 @@ public class homing_beacon extends script.base_script
                             setObjVar(transferer, "homingBeacon.houseId", house);
                             sendSystemMessage(transferer, BEACON_ACTIVE);
                         }
-                        else 
+                        else
                         {
                             sendSystemMessage(transferer, NOT_OWNER);
                             return SCRIPT_OVERRIDE;
@@ -70,6 +73,7 @@ public class homing_beacon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         String myTemplate = static_item.getStaticItemName(self);

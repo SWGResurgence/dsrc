@@ -10,11 +10,13 @@ public class mission_terminal_rebel extends script.base_script
     public mission_terminal_rebel()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "strFaction", factions.FACTION_REBEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         float fltDistance = getDistance(player, self);

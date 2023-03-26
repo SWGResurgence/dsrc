@@ -10,6 +10,7 @@ public class uber_lair_formation_leader extends script.theme_park.poi.base
     public uber_lair_formation_leader()
     {
     }
+
     public int createFormation(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("uber", "GOT SPAWN COMMAND");
@@ -30,6 +31,7 @@ public class uber_lair_formation_leader extends script.theme_park.poi.base
         ai_lib.setPatrolPath(self, locWaypoints);
         return SCRIPT_CONTINUE;
     }
+
     public location[] organizeLocations(location[] locWaypoints, int intOffset) throws InterruptedException
     {
         location[] locNewWaypoints = new location[locWaypoints.length];

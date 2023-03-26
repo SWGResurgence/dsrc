@@ -9,28 +9,39 @@ import script.obj_id;
 
 public class crafting_wound_chemical extends script.systems.crafting.crafting_base
 {
+    public static final String VERSION = "v1.00.00";
+
     public crafting_wound_chemical()
     {
     }
-    public static final String VERSION = "v1.00.00";
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
         super.calcAndSetPrototypeProperties(prototype, itemAttributes, craftingValuesDictionary);
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         int tempPower = 0;
         debugServerConsoleMsg(null, "Beginning assembly-phase prototype property setting");
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (!calcAndSetPrototypeProperty(prototype, itemAttribute)) {
-                if (((itemAttribute.name).getAsciiId()).equals("power")) {
+            if (!calcAndSetPrototypeProperty(prototype, itemAttribute))
+            {
+                if (((itemAttribute.name).getAsciiId()).equals("power"))
+                {
                     tempPower = (int) (itemAttribute.currentValue);
-                } else if (((itemAttribute.name).getAsciiId()).equals("charges")) {
+                }
+                else if (((itemAttribute.name).getAsciiId()).equals("charges"))
+                {
                     setCount(prototype, (int) itemAttribute.currentValue);
-                } else {
+                }
+                else
+                {
                     setObjVar(prototype, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId(), itemAttribute.currentValue);
                 }
             }
@@ -62,6 +73,7 @@ public class crafting_wound_chemical extends script.systems.crafting.crafting_ba
         attrib_mod[] am = new attrib_mod[1];
         am[0] = utils.createHealWoundAttribMod(wound_type, tempPower);
     }
+
     public attrib_mod[] createHealDamageMedicineMod(int power) throws InterruptedException
     {
         attrib_mod[] am = new attrib_mod[2];

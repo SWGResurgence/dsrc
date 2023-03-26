@@ -9,22 +9,25 @@ import java.util.Vector;
 
 public class simple_kit extends script.base_script
 {
-    public simple_kit()
-    {
-    }
     public static final String STF = "loot_kit";
     public static final string_id INCORRECT_ITEM = new string_id(STF, "incorrect_item");
     public static final string_id ALREADY_CONTAINS = new string_id(STF, "already_contains");
     public static final string_id NEW_ITEM_CREATED = new string_id(STF, "new_item_created");
     public static final string_id ITEM_USED = new string_id(STF, "item_used");
+    public simple_kit()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -218,6 +221,7 @@ public class simple_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id player, obj_id item) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -244,9 +248,11 @@ public class simple_kit extends script.base_script
         }
         int numNeeded = itemsNeeded.size();
         boolean useful = false;
-        for (Object o : itemsNeeded) {
+        for (Object o : itemsNeeded)
+        {
             String thisItem = ((String) o);
-            if (thisItem.equals(itemTemplate)) {
+            if (thisItem.equals(itemTemplate))
+            {
                 useful = true;
                 return SCRIPT_CONTINUE;
             }
@@ -257,6 +263,7 @@ public class simple_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);
@@ -269,7 +276,7 @@ public class simple_kit extends script.base_script
         int numNeeded = itemsNeeded.size();
         for (int x = 0; x < numNeeded; x++)
         {
-            String thisItem = ((String)itemsNeeded.get(x));
+            String thisItem = ((String) itemsNeeded.get(x));
             if (thisItem.equals(itemTemplate))
             {
                 checkForCompletion(self, player, x, item);
@@ -278,6 +285,7 @@ public class simple_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void checkForCompletion(obj_id self, obj_id player, int x, obj_id item) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -295,7 +303,7 @@ public class simple_kit extends script.base_script
         {
             setObjVar(self, "needs", needs);
         }
-        else 
+        else
         {
             removeObjVar(self, "needs");
         }
@@ -314,15 +322,17 @@ public class simple_kit extends script.base_script
             }
             return;
         }
-        else 
+        else
         {
         }
         return;
     }
+
     public int destroyPart(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id srcContainer, obj_id player, obj_id item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -356,9 +366,11 @@ public class simple_kit extends script.base_script
             LOG("DESIGNER_FATAL", "Simple Kit script failed to find a Needed objvar (that's actually an objvar named 'needs') on a kit it was making.");
             return SCRIPT_CONTINUE;
         }
-        for (Object o : overview) {
+        for (Object o : overview)
+        {
             String thisItem = ((String) o);
-            if (itemTemplate.equals(thisItem) && itemsNeeded.indexOf(thisItem) < 0) {
+            if (itemTemplate.equals(thisItem) && itemsNeeded.indexOf(thisItem) < 0)
+            {
                 itemsNeeded = utils.addElement(itemsNeeded, thisItem);
             }
         }

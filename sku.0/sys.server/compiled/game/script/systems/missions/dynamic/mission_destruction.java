@@ -10,6 +10,7 @@ public class mission_destruction extends script.systems.missions.base.mission_dy
     public mission_destruction()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!hasScript(self, "systems.missions.base.mission_cleanup_tracker"))
@@ -18,10 +19,12 @@ public class mission_destruction extends script.systems.missions.base.mission_dy
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int onArrivedAtLocation(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -30,12 +33,14 @@ public class mission_destruction extends script.systems.missions.base.mission_dy
         messageTo(objPlayer, "destruction_Arrival", dctParams, 0, true);
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("mission", "ABORT MISSION RECEIVED!");
         sendDestructionIncomplete(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("mission", "Received start mission message");
@@ -58,6 +63,7 @@ public class mission_destruction extends script.systems.missions.base.mission_dy
         dictionary dctParams = new dictionary();
         return SCRIPT_CONTINUE;
     }
+
     public int destructionIncomplete(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -66,6 +72,7 @@ public class mission_destruction extends script.systems.missions.base.mission_dy
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int destructionFailure(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objPlayer = getMissionHolder(self);
@@ -78,6 +85,7 @@ public class mission_destruction extends script.systems.missions.base.mission_dy
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int destructionSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "intFinished"))
@@ -105,6 +113,7 @@ public class mission_destruction extends script.systems.missions.base.mission_dy
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndMission(obj_id self, dictionary params) throws InterruptedException
     {
         cleanupLocationTargets(self);

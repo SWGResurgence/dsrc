@@ -12,6 +12,7 @@ public class storyteller_vendor extends script.base_script
     public storyteller_vendor()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -19,6 +20,7 @@ public class storyteller_vendor extends script.base_script
         messageTo(self, "handlSpecialName", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
@@ -26,6 +28,7 @@ public class storyteller_vendor extends script.base_script
         messageTo(self, "handlSpecialName", null, 2, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlSpecialName(obj_id self, dictionary params) throws InterruptedException
     {
         if (rand(0, 5) == 1)
@@ -34,6 +37,7 @@ public class storyteller_vendor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void attachStorytellerVendorConvo(obj_id vendor) throws InterruptedException
     {
         if (!hasScript(vendor, "conversation.storyteller_vendor"))
@@ -42,6 +46,7 @@ public class storyteller_vendor extends script.base_script
         }
         return;
     }
+
     public int[] convertSecondsTime(int time) throws InterruptedException
     {
         if (time < 1)
@@ -54,15 +59,16 @@ public class storyteller_vendor extends script.base_script
         int hours = mod_day / 3600;
         int minutes = mod_hour / 60;
         int seconds = mod_hour % 60;
-        int[] converted_time = 
-        {
-            days,
-            hours,
-            minutes,
-            seconds
-        };
+        int[] converted_time =
+                {
+                        days,
+                        hours,
+                        minutes,
+                        seconds
+                };
         return converted_time;
     }
+
     public int msgStorytellerTokenTypeSelected(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -86,11 +92,13 @@ public class storyteller_vendor extends script.base_script
         storyteller.displayStorytellerTokenPurchaseSUI(player, tokenType, self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgStorytellerTokenPurchaseSelected(obj_id self, dictionary params) throws InterruptedException
     {
         storyteller.storytellerTokenPurchased(params, self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgStorytellerChargesSelected(obj_id self, dictionary params) throws InterruptedException
     {
         storyteller.storytellerSellTokenWithCharges(params, self);

@@ -9,11 +9,13 @@ public class mission_terminal_bounty extends script.base_script
     public mission_terminal_bounty()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "intBounty", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         int intMissionLevel = getSkillStatMod(player, "bounty_mission_level");

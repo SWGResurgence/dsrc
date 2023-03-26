@@ -8,11 +8,12 @@ import script.obj_id;
 
 public class combat_mine_spawner extends script.base_script
 {
+    public static final String dataTable = "datatables/combat/npc_landmines.iff";
+    public static final boolean doLogging = false;
     public combat_mine_spawner()
     {
     }
-    public static final String dataTable = "datatables/combat/npc_landmines.iff";
-    public static final boolean doLogging = false;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (canSpawnByConfigSetting())
@@ -21,6 +22,7 @@ public class combat_mine_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (canSpawnByConfigSetting())
@@ -29,6 +31,7 @@ public class combat_mine_spawner extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnMines(obj_id self, dictionary params) throws InterruptedException
     {
         if (!canSpawnNewMine(self))
@@ -44,14 +47,17 @@ public class combat_mine_spawner extends script.base_script
         messageTo(self, "handleSpawnMines", null, getRespawn(self), false);
         return SCRIPT_CONTINUE;
     }
+
     public boolean canSpawnNewMine(obj_id self) throws InterruptedException
     {
         return (getCurrentMineCount(self) < getIntObjVar(self, "mineField.mineCount"));
     }
+
     public int getRespawn(obj_id self) throws InterruptedException
     {
         return getIntObjVar(self, "mineField.mineRespawn");
     }
+
     public obj_id createMine(String mineType, location spawnPoint) throws InterruptedException
     {
         String mineTemplate = dataTableGetString(dataTable, mineType, "mineTemplate");
@@ -65,17 +71,19 @@ public class combat_mine_spawner extends script.base_script
         incrimentMineCount(getSelf());
         return mine;
     }
+
     public int getCurrentMineCount(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "currentMineCount"))
         {
             return utils.getIntScriptVar(self, "currentMineCount");
         }
-        else 
+        else
         {
             return 0;
         }
     }
+
     public int incrimentMineCount(obj_id self) throws InterruptedException
     {
         int current = getCurrentMineCount(self);
@@ -83,6 +91,7 @@ public class combat_mine_spawner extends script.base_script
         utils.setScriptVar(self, "currentMineCount", current);
         return getCurrentMineCount(self);
     }
+
     public int decrimentMineCount(obj_id self) throws InterruptedException
     {
         int current = getCurrentMineCount(self);
@@ -93,6 +102,7 @@ public class combat_mine_spawner extends script.base_script
         utils.setScriptVar(self, "currentMineCount", current);
         return getCurrentMineCount(self);
     }
+
     public int handleMineRespawn(obj_id self, dictionary params) throws InterruptedException
     {
         doLogging("handleMineRespawn", "Mine respawn call recieved");
@@ -100,6 +110,7 @@ public class combat_mine_spawner extends script.base_script
         messageTo(self, "handleSpawnMines", null, getRespawn(self), false);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (doLogging)
@@ -107,6 +118,7 @@ public class combat_mine_spawner extends script.base_script
             LOG("debug/combat_mine_spawner/" + section, message);
         }
     }
+
     public boolean canSpawnByConfigSetting() throws InterruptedException
     {
         String disableSpawners = getConfigSetting("GameServer", "disableMineFields");
@@ -114,10 +126,6 @@ public class combat_mine_spawner extends script.base_script
         {
             return true;
         }
-        if (disableSpawners.equals("true") || disableSpawners.equals("1"))
-        {
-            return false;
-        }
-        return true;
+        return !disableSpawners.equals("true") && !disableSpawners.equals("1");
     }
 }

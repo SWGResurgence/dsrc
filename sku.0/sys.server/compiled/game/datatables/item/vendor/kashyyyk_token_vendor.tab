@@ -1,24 +1,24 @@
 item	cash	token38	limit	class	script	note
 s[none]	i[0]	i[0]	i[0]	i[0]	s	c
-item_lifeday_gift_04_07						Ancient Life Day
-item_tcg_loot_reward_series5_armored_varactyl_statue						Armored Varactyl Statue
-item_tcg_loot_reward_series4_chewbacca_statuette_02_01						Chewbacca Statuette
-item_lifeday_painting_2010_04						Compassion
-item_lifeday_painting_2010_01						Courage
-item_event_lifeday_family_painting						Family Bonds
-item_lifeday_gift_04_11						Hanging Life Day Orb
 item_costume_kit_holiday						Holiday Holoshroud
-item_lifeday_gift_04_10						Kachirho Wall Cornucopia
-item_tcg_loot_reward_series4_kashyyyk_travel_advertisement_02_01						Kashyyyk Travel Advertisement
+item_event_lifeday_family_painting						Family Bonds
 item_lifeday_09_painting						Life Day 2009 Painting
-item_lifeday_gift_04_09						Life Day Lamp
-item_lifeday_painting_03_01_01						Life Day Painting (Proud Wookiee)
-item_lifeday_painting_01_01_01						Life Day Painting (Red Robed Wookiee
-item_lifeday_painting_2010_03						Loyalty
-item_lifeday_gift_04_07						Miniature Wroshyr Tree
-item_lifeday_painting_2010_02						Morality
 item_lifeday_gift_04_02						Pilgrimage
 item_lifeday_gift_04_04						Triumph
+item_lifeday_gift_04_07						Ancient Life Day
+item_lifeday_gift_04_07						Miniature Wroshyr Tree
+item_lifeday_gift_04_09						Life Day Lamp
+item_lifeday_gift_04_10						Kachirho Wall Cornucopia
+item_lifeday_gift_04_11						Hanging Life Day Orb
+item_lifeday_gift_04_11						Wookiee Life Day Orb
 item_lifeday_gift_04_12						Wookiee Home Banner Kit
 item_lifeday_gift_04_13						Wookiee Life Day Necklace
-item_lifeday_gift_04_11						Wookiee Life Day Orb
+item_lifeday_painting_01_01_01						Life Day Painting (Red Robed Wookiee
+item_lifeday_painting_03_01_01						Life Day Painting (Proud Wookiee)
+item_lifeday_painting_2010_01						Courage
+item_lifeday_painting_2010_02						Morality
+item_lifeday_painting_2010_03						Loyalty
+item_lifeday_painting_2010_04						Compassion
+item_tcg_loot_reward_series4_chewbacca_statuette_02_01						Chewbacca Statuette
+item_tcg_loot_reward_series4_kashyyyk_travel_advertisement_02_01						Kashyyyk Travel Advertisement
+item_tcg_loot_reward_series5_armored_varactyl_statue						Armored Varactyl Statue

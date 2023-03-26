@@ -8,11 +8,13 @@ public class skill_test extends script.base_script
     public skill_test()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         debugSpeakMsg(self, "Skill Test Script Attached");
         return SCRIPT_CONTINUE;
     }
+
     public int OnSpeaking(obj_id self, String text) throws InterruptedException
     {
         if (text.equals("reportskills"))
@@ -58,6 +60,7 @@ public class skill_test extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String[] getAllSkills(obj_id self) throws InterruptedException
     {
         String[] skillnames = getSkillListingForPlayer(self);
@@ -68,6 +71,7 @@ public class skill_test extends script.base_script
         }
         return skillnames;
     }
+
     public void reportSkillNames(obj_id self, String[] skillnames) throws InterruptedException
     {
         String skillname;

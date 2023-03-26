@@ -8,6 +8,7 @@ public class association_hall_elevators extends script.base_script
     public association_hall_elevators()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         location here = getLocation(self);
@@ -26,7 +27,7 @@ public class association_hall_elevators extends script.base_script
             setObjVar(self, "terminal1", elevatorTerminalA);
             setObjVar(self, "terminal2", elevatorTerminalB);
         }
-        else 
+        else
         {
             LOG("elevator", "association_hall_elevators could not get 'elevator' cell");
         }

@@ -10,9 +10,6 @@ import java.util.Vector;
 
 public class dummy_treasure_drum extends script.base_script
 {
-    public dummy_treasure_drum()
-    {
-    }
     public static final String SCRIPT_TREASUREGUARD = "systems.treasure_map.base.treasure_guard";
     public static final String REAL_CHEST = "object/tangible/container/drum/treasure_drum.iff";
     public static final String SCRIPT_REAL_CHEST = "systems.treasure_map.base.treasure_drum";
@@ -28,11 +25,16 @@ public class dummy_treasure_drum extends script.base_script
     public static final int EIGHT_GROUP_PERCENT_CHANCE_FOR_SUPER_RARE = 2;
     public static final int EIGHT_GROUP_PERCENT_CHANCE_FOR_RARE = 20;
     public static final int FOUR_GROUP_PERCENT_CHANCE_FOR_RARE = 25;
+    public dummy_treasure_drum()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "cleanUpFakeChest", null, 1000, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         obj_id fake_chest = self;
@@ -57,11 +59,13 @@ public class dummy_treasure_drum extends script.base_script
             sendSystemMessage(player, SID_UNLOCK_CHEST, null);
             messageTo(fake_chest, "setupChest", null, 1, false);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_KILL_GUARDS, null);
-            for (obj_id guard : guards) {
-                if ((isIdNull(guard)) || !exists(guard) || isDead(guard)) {
+            for (obj_id guard : guards)
+            {
+                if ((isIdNull(guard)) || !exists(guard) || isDead(guard))
+                {
                     continue;
                 }
                 messageTo(guard, "attackThief", null, 0, false);
@@ -69,6 +73,7 @@ public class dummy_treasure_drum extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int setupChest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id fake_chest = self;
@@ -107,13 +112,14 @@ public class dummy_treasure_drum extends script.base_script
                 messageTo(fake_chest, "cleanUpFakeChest", null, 0, false);
             }
         }
-        else 
+        else
         {
             CustomerServiceLog("treasureMap", "a treasure chest failed spawn and fill with loot for player " + player + ". [ setupChest() ]");
             messageTo(fake_chest, "cleanUpFakeChest", null, 0, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUpFakeChest(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id fake_chest = self;
@@ -139,6 +145,7 @@ public class dummy_treasure_drum extends script.base_script
         destroyObject(fake_chest);
         return SCRIPT_CONTINUE;
     }
+
     public int spawnTreasureGuards(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id fake_chest = self;
@@ -173,7 +180,7 @@ public class dummy_treasure_drum extends script.base_script
             {
                 antagonist = create.object(boss_mob, guardLocation, mobLevel);
             }
-            else 
+            else
             {
                 antagonist = create.object(type, guardLocation, mobLevel);
             }
@@ -196,12 +203,14 @@ public class dummy_treasure_drum extends script.base_script
         if (guards != null && guards.size() > 0)
         {
             setObjVar(fake_chest, "guards", guards);
-            for (Object guard : guards) {
-                CustomerServiceLog("treasureMap", "Player: " + player + " " + getName(player) + " has spawned boss mob level: " + ((obj_id) guard) + " at: " + getLocation(((obj_id) guard)) + ". [ spawnTreasureGuards() ]");
+            for (Object guard : guards)
+            {
+                CustomerServiceLog("treasureMap", "Player: " + player + " " + getName(player) + " has spawned boss mob level: " + guard + " at: " + getLocation(((obj_id) guard)) + ". [ spawnTreasureGuards() ]");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int recalculateGuardArray(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id fake_chest = self;
@@ -218,8 +227,10 @@ public class dummy_treasure_drum extends script.base_script
             messageTo(fake_chest, "setupChest", null, 0, false);
             return SCRIPT_CONTINUE;
         }
-        for (obj_id guard : guards) {
-            if ((isIdNull(guard)) || !exists(guard) || isDead(guard)) {
+        for (obj_id guard : guards)
+        {
+            if ((isIdNull(guard)) || !exists(guard) || isDead(guard))
+            {
                 continue;
             }
             utils.addElement(latestGuardList, guard);
@@ -235,6 +246,7 @@ public class dummy_treasure_drum extends script.base_script
         setObjVar(fake_chest, "guards", newGuardArray);
         return SCRIPT_CONTINUE;
     }
+
     public boolean fillTreasureChestWithLoot(obj_id player, obj_id treasureChest, int groupModifier, String loot_table, int treasureLevel) throws InterruptedException
     {
         loot.makeLootInContainer(treasureChest, loot_table, TREASURE_LOOT_ITEMS, treasureLevel);
@@ -263,6 +275,7 @@ public class dummy_treasure_drum extends script.base_script
         }
         return true;
     }
+
     public boolean eightParticipantBonusLootItem(obj_id treasureChest, int treasureLevel, int randomNumber) throws InterruptedException
     {
         if (randomNumber <= EIGHT_GROUP_PERCENT_CHANCE_FOR_SUPER_RARE)
@@ -281,6 +294,7 @@ public class dummy_treasure_drum extends script.base_script
         CustomerServiceLog("treasureMap", "Treasure Chest: " + treasureChest + " has received a regular roll: " + randomNumber + ". They still have a slight chance of receiving a somewhat rare item." + " The player should have this rare item added to their chest. [ eightParticipantBonusLootItem() ]");
         return true;
     }
+
     public boolean fourParticipantBonusLootItem(obj_id treasureChest, int treasureLevel, int randomNumber) throws InterruptedException
     {
         if (randomNumber <= FOUR_GROUP_PERCENT_CHANCE_FOR_RARE)

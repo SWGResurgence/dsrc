@@ -1,7 +1,5 @@
 name	skill_mods	attribute_bonus	objvars	color	buff_name	cool_down_group	reuse_time	required_level_for_effect	hide_buff_identity	client_effect	client_animation
 s[unique]	s	s	s	s	s	s	i	i	i[0]	s	s
-"item_event_lifeday_present_pile index_color_1=3,index_color_2=7"
-"item_tauntaun_dna string:beast.dna.creature_template=object/mobile/beast_master/bm_tauntaun.iff,float:beast.dna.quality=90.000000,int:beast.dna.cs_item=1"
 armor_deathtrooper_utility_belt_04_01
 armor_galactic_marine_backpack	"strength_modified=35,constitution_modified=30,stamina_modified=30,agility_modified=25,luck_modified=25,precision_modified=35"		string:faction_recruiter.faction=Imperial
 armor_galactic_marine_belt			string:faction_recruiter.faction=Imperial
@@ -2411,6 +2409,7 @@ item_event_lifeday_gcw_rebel_disk			"string:faction=rebel,int:collection.gcw_poi
 item_event_lifeday_holo_table
 item_event_lifeday_imperial_token
 item_event_lifeday_monkey_cage
+item_event_lifeday_present_pile				index_color_1=3,index_color_2=7
 item_event_lifeday_proton_chair
 item_event_lifeday_rebel_token
 item_event_lifeday_stap_speeder			"string:vehicle_attribs.object_ref=stap_speeder_gift,float:hit_points=10000"
@@ -4128,6 +4127,7 @@ item_tatooine_junk_womprat_city_01_01
 item_tatooine_junk_worrt_01_01
 item_tatooine_junk_zucca_boar_01_01
 item_tauntaun_costume					costume_tauntaun
+item_tauntaun_dna			string:beast.dna.creature_template=object/mobile/beast_master/bm_tauntaun.iff,float:beast.dna.quality=90.000000,int:beast.dna.cs_item=1
 item_tcg_loot_reward_series10_vendor_wookiee_02_01	special_vendor_tcg_series10_wookiee=1		string:nonvendor.give_nontrader=nonvendor_wookiee
 item_tcg_loot_reward_series1_bas_relief
 item_tcg_loot_reward_series1_beru_whitesuns_cookbook			"int:increaseAmount=100,int:nonGenericStorageItem=1"							clienteffect/tcg_add_storage_cookbook.cef

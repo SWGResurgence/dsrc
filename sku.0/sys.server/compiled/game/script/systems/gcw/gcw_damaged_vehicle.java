@@ -11,12 +11,14 @@ public class gcw_damaged_vehicle extends script.base_script
     public gcw_damaged_vehicle()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleSetup", null, 1.0f, false);
         setObjVar(self, gcw.GCW_TOOL_TEMPLATE_OBJVAR, "object/tangible/gcw/crafting_quest/gcw_vehicle_tool.iff");
         return SCRIPT_CONTINUE;
     }
+
     public void updateName(obj_id self) throws InterruptedException
     {
         String name = utils.getStringScriptVar(self, "gcw.name");
@@ -30,12 +32,13 @@ public class gcw_damaged_vehicle extends script.base_script
         {
             suffix = " (0% Repaired)";
         }
-        else 
+        else
         {
-            suffix = " (" + (int)((questsCompleted / 4.0f) * 100.0f) + "% Repaired)";
+            suffix = " (" + (int) ((questsCompleted / 4.0f) * 100.0f) + "% Repaired)";
         }
         setName(self, name + suffix);
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!exists(self))
@@ -53,13 +56,14 @@ public class gcw_damaged_vehicle extends script.base_script
         {
             attribs[idx] = "" + repairCount + " out of 4";
         }
-        else 
+        else
         {
             attribs[idx] = "Never Repaired";
         }
         idx++;
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetup(obj_id self, dictionary params) throws InterruptedException
     {
         gcw.playQuestIconParticle(self);
@@ -69,6 +73,7 @@ public class gcw_damaged_vehicle extends script.base_script
         updateName(self);
         return SCRIPT_CONTINUE;
     }
+
     public int playQuestIcon(obj_id self, dictionary params) throws InterruptedException
     {
         int repairs = getIntObjVar(self, gcw.GCW_OBJECT_REPAIR_COUNT);
@@ -78,6 +83,7 @@ public class gcw_damaged_vehicle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         LOG("gcw_damaged_vehicle", "OnObjectMenuRequest");
@@ -95,7 +101,7 @@ public class gcw_damaged_vehicle extends script.base_script
             LOG("gcw_damaged_vehicle", "faction invalid on turret obj");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (utils.isProfession(player, utils.TRADER))
             {
@@ -123,6 +129,7 @@ public class gcw_damaged_vehicle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("gcw_damaged_vehicle", "OnObjectMenuSelect");
@@ -146,7 +153,7 @@ public class gcw_damaged_vehicle extends script.base_script
             LOG("gcw_damaged_vehicle", "Wrong Faction");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (utils.isProfession(player, utils.TRADER))
             {
@@ -182,6 +189,7 @@ public class gcw_damaged_vehicle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int repairComplete(obj_id self, dictionary params) throws InterruptedException
     {
         int repairs = getIntObjVar(self, gcw.GCW_OBJECT_REPAIR_COUNT);

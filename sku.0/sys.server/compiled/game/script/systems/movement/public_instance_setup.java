@@ -9,12 +9,14 @@ public class public_instance_setup extends script.base_script
     public public_instance_setup()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         getClusterWideData("public_instances", getStringObjVar(self, "instance_name") + "_" + self, true, self);
         doLogging("OnInitialize", "Requested cluster wide data for " + getStringObjVar(self, "instance_name") + "_" + self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnClusterWideDataResponse(obj_id self, String manage_name, String name, int request_id, String[] element_name_list, dictionary[] data, int lock_key) throws InterruptedException
     {
         int playersInZone = space_dungeon.pollZoneOccupantsForInstancePopulation(self);
@@ -26,6 +28,7 @@ public class public_instance_setup extends script.base_script
         releaseClusterWideDataLock(manage_name, lock_key);
         return SCRIPT_CONTINUE;
     }
+
     public int getTargetCoordinates(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = params.getObjId("return_address");
@@ -37,6 +40,7 @@ public class public_instance_setup extends script.base_script
         messageTo(target, "recievedTargetCoordinates", dict, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
     }

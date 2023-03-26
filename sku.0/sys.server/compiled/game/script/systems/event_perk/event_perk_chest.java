@@ -6,10 +6,12 @@ import script.string_id;
 
 public class event_perk_chest extends script.base_script
 {
+    public static final String STF_FILE = "event_perk";
+
     public event_perk_chest()
     {
     }
-    public static final String STF_FILE = "event_perk";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id[] rewarded = new obj_id[1];
@@ -17,6 +19,7 @@ public class event_perk_chest extends script.base_script
         setObjVar(self, "event_perk.chest.rewarded", rewarded);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToOpenContainer(obj_id self, obj_id whoIsOpeningMe) throws InterruptedException
     {
         obj_id owner = getObjIdObjVar(self, "event_perk.owner");
@@ -26,6 +29,7 @@ public class event_perk_chest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnClosedContainer(obj_id self, obj_id whoClosedMe) throws InterruptedException
     {
         obj_id owner = getObjIdObjVar(self, "event_perk.owner");
@@ -37,6 +41,7 @@ public class event_perk_chest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToLoseItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id owner = getObjIdObjVar(self, "event_perk.owner");
@@ -47,13 +52,15 @@ public class event_perk_chest extends script.base_script
         }
         if (transferer != owner)
         {
-            for (obj_id obj_id : rewarded) {
-                if (obj_id == transferer) {
+            for (obj_id obj_id : rewarded)
+            {
+                if (obj_id == transferer)
+                {
                     sendSystemMessage(transferer, new string_id(STF_FILE, "chest_only_one_item"));
                     return SCRIPT_OVERRIDE;
                 }
             }
-            obj_id newRewarded[] = new obj_id[rewarded.length + 1];
+            obj_id[] newRewarded = new obj_id[rewarded.length + 1];
             newRewarded[rewarded.length] = transferer;
             for (int i = 0; i < rewarded.length; i++)
             {
@@ -64,6 +71,7 @@ public class event_perk_chest extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         obj_id owner = getObjIdObjVar(self, "event_perk.owner");

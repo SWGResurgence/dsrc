@@ -9,11 +9,13 @@ public class puzzle2 extends script.base_script
     public puzzle2()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         launchCalibPuzzle2(self);
         return SCRIPT_CONTINUE;
     }
+
     public boolean launchCalibPuzzle2(obj_id self) throws InterruptedException
     {
         int pid = createSUIPage("/Script.calibration.game2", self, self, "calibpuzzle2Callback");
@@ -110,6 +112,7 @@ public class puzzle2 extends script.base_script
         showSUIPage(pid);
         return true;
     }
+
     public int calibpuzzle2Callback(obj_id self, dictionary params) throws InterruptedException
     {
         debugSpeakMsg(self, "calibpuzzle2Callback");
@@ -178,7 +181,7 @@ public class puzzle2 extends script.base_script
             flushSUIPage(pid);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             debugSpeakMsg(self, "calibpuzzle2 got invalid widget, widget = '" + widgetName + "'");
         }

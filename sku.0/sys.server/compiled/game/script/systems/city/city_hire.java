@@ -7,6 +7,7 @@ package script.systems.city;/*
 import script.library.city;
 import script.library.colors_hex;
 import script.library.create;
+import script.library.utils;
 import script.menu_info;
 import script.menu_info_types;
 import script.obj_id;
@@ -15,7 +16,7 @@ import script.string_id;
 public class city_hire extends script.base_script
 {
     public static String TOOL = "object/tangible/loot/tool/city_actor_bio_extractor.iff";
-    public static String BASEMSG = colors_hex.HEADER + colors_hex.SEASHELL + "INFORMATION:: \n" + colors_hex.FOOTER + "This extraction unit can be used to extract the bio-logical matter of a creature for decoration purposes inside the city you belong to.\n\n" + colors_hex.HEADER + colors_hex.SEASHELL +  "USAGE:\n" + colors_hex.FOOTER + "Drag the extractor onto an interactable NPC (AI Only) to copy it's bio-logical data.\n" + colors_hex.HEADER + colors_hex.RED + "\n\nREQUIREMENTS:\n\n" + colors_hex.FOOTER + " You must be Mayor or Militia and have Politican Novice to use this deed." + colors_hex.FOOTER;
+    public static String BASEMSG = colors_hex.HEADER + colors_hex.SEASHELL + "INFORMATION: \n" + colors_hex.FOOTER + "This extraction unit can be used to extract the bio-logical matter of a creature for decoration purposes inside the city you belong to.\n\n" + colors_hex.HEADER + colors_hex.SEASHELL + "USAGE:\n" + colors_hex.FOOTER + "Drag the extractor onto an interactable NPC (AI Only) to copy it's bio-logical data.\n" + colors_hex.HEADER + colors_hex.RED + "\n\nREQUIREMENTS:\n\n" + colors_hex.FOOTER + " You must be Mayor or Militia and have Politican Novice to use this deed." + colors_hex.FOOTER;
     public static string_id DESC = new string_id(BASEMSG);
 
     public int OnAttach(obj_id self)
@@ -23,9 +24,9 @@ public class city_hire extends script.base_script
         if (!hasObjVar(self, "tokenUsed"))
         {
             setName(self, "Bio-logical Extraction Unit");
-            setStaticItemName(self, "Bio-logical Extraction Unit");
-            setDescriptionStringId(self, DESC);
         }
+        setStaticItemName(self, "Bio-logical Extraction Unit");
+        setDescriptionStringId(self, DESC);
         return SCRIPT_CONTINUE;
     }
 
@@ -34,9 +35,9 @@ public class city_hire extends script.base_script
         if (!hasObjVar(self, "tokenUsed"))
         {
             setName(self, "Bio-logical Extraction Unit");
-            setStaticItemName(self, "Bio-logical Extraction Unit");
-            setDescriptionStringId(self, DESC);
         }
+        setStaticItemName(self, "Bio-logical Extraction Unit");
+        setDescriptionStringId(self, DESC);
         return SCRIPT_CONTINUE;
     }
 
@@ -51,7 +52,7 @@ public class city_hire extends script.base_script
             }
             else
             {
-                broadcast(player, "You must drag the Extraction Unit onto the creature you wish to hire.");
+                broadcast(player, "You must drag the Bio-logical Extraction Unit onto the creature you wish to capture.");
             }
         }
         return SCRIPT_CONTINUE;
@@ -67,20 +68,21 @@ public class city_hire extends script.base_script
                 {
                     if (hasObjVar(self, "city_hire.mobile"))
                     {
-                        obj_id actor = create.createObject(getStringObjVar(self, "city_hire.mobile"), getLocation(player));
+                        String template = getStringObjVar(self, "city_hire.mobile");
+                        obj_id actor = create.createObject(template, getLocation(player));
                         attachScript(actor, "systems.city.city_actor");
                         attachScript(actor, "systems.city.city_furniture");
                         int city_id = getCityAtLocation(getLocation(player), 0);
                         setObjVar(actor, "city_id", city_id);
                         city.addDecoration(city_id, player, self);
                         persistObject(actor);
-                        broadcast(player, "You have placed " + getCreatureName(actor) + " in the city.");
+                        broadcast(player, "You have placed " + utils.getStringName(actor)+ " in this city.");
                         destroyObject(self);
                     }
                 }
                 else
                 {
-                    broadcast(player, "You must drag this datapad onto a creature or person to copy its bio-data.");
+                    broadcast(player, "You must drag the Bio-logical Extraction Unit onto the creature you wish to capture.");
                 }
             }
         }

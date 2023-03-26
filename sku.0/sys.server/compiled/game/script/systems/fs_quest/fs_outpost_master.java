@@ -15,6 +15,7 @@ public class fs_outpost_master extends script.base_script
     public fs_outpost_master()
     {
     }
+
     public void requestRegistration(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, fs_dyn_village.OBJVAR_MY_MASTER_OBJECT) || !hasObjVar(self, fs_counterstrike.OBJVAR_CAMP_NAME))
@@ -37,16 +38,19 @@ public class fs_outpost_master extends script.base_script
         messageTo(campMaster, "msgRequestTheatreRegistration", d, 0.0f, false);
         return;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "msgSelfDestruct", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgCheckForMasterAgain(obj_id self, dictionary params) throws InterruptedException
     {
         fs_dyn_village.getRegisteredObjIdFromClusterWideData(fs_dyn_village.CLUSTER_OBJID_KEY_MASTER, "msgGotMasterIdResponse", self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgGotMasterIdResponse(obj_id self, dictionary params) throws InterruptedException
     {
         boolean rslt = false;
@@ -70,6 +74,7 @@ public class fs_outpost_master extends script.base_script
         messageTo(self, "msgCheckForMasterAgain", null, 60.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         trace.log("fs_quest", "=*=*=*=*=*=*= PHASE 3 THEATRE (" + self + ") BEING DESTROYED =*=*=*=*=*=*=");
@@ -82,6 +87,7 @@ public class fs_outpost_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgSelfDestruct(obj_id self, dictionary params) throws InterruptedException
     {
         trace.log("fs_quest", "fs_outpost_master::OnInit:- > Got self destruct message. *** DESTROYING *** camp.");
@@ -90,13 +96,15 @@ public class fs_outpost_master extends script.base_script
         {
             existingDroids = utils.getResizeableObjIdBatchObjVar(self, fs_counterstrike.OBJVAR_CAMP_DROIDS);
         }
-        for (Object existingDroid : existingDroids) {
+        for (Object existingDroid : existingDroids)
+        {
             messageTo((obj_id) existingDroid, "msgSilentSelfDestruct", null, 0.0f, false);
         }
         fs_counterstrike.resetCamp(self, false);
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         if (isGod(whoTriggeredMe))
@@ -112,11 +120,13 @@ public class fs_outpost_master extends script.base_script
         expelFromTriggerVolume(self, fs_counterstrike.SHIELD_TR_VOLUME, whoTriggeredMe);
         return SCRIPT_CONTINUE;
     }
+
     public int msgDoLootSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         fs_counterstrike.doCampLootSpawn(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgReplyTheatreRegistration(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey("success"))
@@ -152,6 +162,7 @@ public class fs_outpost_master extends script.base_script
         fs_counterstrike.spawnSurveillanceDroids(self);
         return SCRIPT_CONTINUE;
     }
+
     public int msgSurveillandeDroidDied(obj_id self, dictionary params) throws InterruptedException
     {
         if (!params.containsKey("sender"))
@@ -162,6 +173,7 @@ public class fs_outpost_master extends script.base_script
         fs_counterstrike.droidDied(self, sender);
         return SCRIPT_CONTINUE;
     }
+
     public int msgPowerDownShield(obj_id self, dictionary params) throws InterruptedException
     {
         fs_counterstrike.powerDownShield();
@@ -170,16 +182,19 @@ public class fs_outpost_master extends script.base_script
         messageTo(self, "msgResetCamp", null, fs_counterstrike.getCampResetTime(), false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgDoCampDefenseSpawn(obj_id self, dictionary params) throws InterruptedException
     {
         fs_counterstrike.doCampDefenseSpawn(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int msgResetCamp(obj_id self, dictionary params) throws InterruptedException
     {
         fs_counterstrike.resetCamp(self, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTheaterCreated(obj_id self, obj_id[] objects, obj_id player, obj_id creator) throws InterruptedException
     {
         utils.setBatchObjVar(self, fs_counterstrike.OBJVAR_CAMP_OBJS, objects);

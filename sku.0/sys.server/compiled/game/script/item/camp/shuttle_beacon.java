@@ -9,11 +9,13 @@ public class shuttle_beacon extends script.base_script
     public shuttle_beacon()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeShuttleBeacon", null, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleInitializeShuttleBeacon(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id parent = getObjIdObjVar(self, "theater.parent");

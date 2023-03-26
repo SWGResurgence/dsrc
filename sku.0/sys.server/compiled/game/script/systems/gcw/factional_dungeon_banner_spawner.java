@@ -10,6 +10,7 @@ public class factional_dungeon_banner_spawner extends script.base_script
     public factional_dungeon_banner_spawner()
     {
     }
+
     public int swapFlag(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objFlag = getObjIdObjVar(self, "objFlag");
@@ -25,13 +26,14 @@ public class factional_dungeon_banner_spawner extends script.base_script
         {
             setObjVar(self, "type", factions.FACTION_IMPERIAL);
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
         makeFlag(self);
         return SCRIPT_CONTINUE;
     }
+
     public void checkFactionalSpawners(obj_id self) throws InterruptedException
     {
         obj_id objContainer = getTopMostContainer(self);
@@ -51,6 +53,7 @@ public class factional_dungeon_banner_spawner extends script.base_script
             }
         }
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "intBanner", 1);
@@ -58,6 +61,7 @@ public class factional_dungeon_banner_spawner extends script.base_script
         checkFactionalSpawners(self);
         return SCRIPT_CONTINUE;
     }
+
     public void makeFlag(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "objFlag"))
@@ -82,7 +86,7 @@ public class factional_dungeon_banner_spawner extends script.base_script
         {
             strTemplate = "object/static/structure/general/banner_imperial_style_01.iff";
         }
-        else 
+        else
         {
             LOG("gcw", "object " + self + " at location " + getLocation(self) + " has a bad faction set on it");
             return;

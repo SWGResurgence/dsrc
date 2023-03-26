@@ -7,9 +7,6 @@ import script.library.vendor_lib;
 
 public class tcg_greeter_contract extends script.base_script
 {
-    public tcg_greeter_contract()
-    {
-    }
     public static final boolean LOGGING_ON = true;
     public static final String LOGGING_CATEGORY = "greeter";
     public static final String GREETER_APPEARANCE_PID = "greeter_ui_pid.appearance_pid";
@@ -26,11 +23,16 @@ public class tcg_greeter_contract extends script.base_script
     public static final string_id SID_GREETER_APPEARANCE_TYPE_D = new string_id("player_vendor", "greeter_appear_description");
     public static final string_id SID_INVALID_LOCATION_SAME_CELL = new string_id("player_vendor", "greeter_same_cell_only");
     public static final string_id SID_OUT_OF_RANGE = new string_id("player_vendor", "greeter_terminal_out_of_range");
+    public tcg_greeter_contract()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         vendor_lib.setObjectOwner(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         blog("tcg_greeter_contract.OnInitialize: Init.");
@@ -69,6 +71,7 @@ public class tcg_greeter_contract extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         blog("tcg_greeter_contract.OnObjectMenuRequest: Init.");
@@ -89,12 +92,13 @@ public class tcg_greeter_contract extends script.base_script
         {
             int menuPlacement = mi.addRootMenu(menu_info_types.SERVER_MENU2, new string_id("player_structure", "menu_cleanup_greeter"));
         }
-        else 
+        else
         {
             int menuPlacement = mi.addRootMenu(menu_info_types.SERVER_MENU1, new string_id("player_structure", "menu_place_greeter"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         blog("tcg_greeter_contract.OnObjectMenuSelect: Init.");
@@ -170,6 +174,7 @@ public class tcg_greeter_contract extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!isValidId(destContainer) || !exists(destContainer))
@@ -187,6 +192,7 @@ public class tcg_greeter_contract extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, vendor_lib.CHILD_GREETER_NONVENDOR_ID_OBJVAR))
@@ -197,6 +203,7 @@ public class tcg_greeter_contract extends script.base_script
         vendor_lib.removeObjectFromController(self, greeter);
         return SCRIPT_CONTINUE;
     }
+
     public int OnPack(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, vendor_lib.CHILD_GREETER_NONVENDOR_ID_OBJVAR))
@@ -207,6 +214,7 @@ public class tcg_greeter_contract extends script.base_script
         vendor_lib.removeObjectFromController(self, greeter);
         return SCRIPT_CONTINUE;
     }
+
     public int handleGreeterAppearanceSelection(obj_id self, dictionary params) throws InterruptedException
     {
         blog("tcg_greeter_contract.handleGreeterAppearanceSelection: Init.");
@@ -264,6 +272,7 @@ public class tcg_greeter_contract extends script.base_script
         sui.setPid(player, pid, GREETER_NAME_PID);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetGreeterName(obj_id self, dictionary params) throws InterruptedException
     {
         blog("tcg_greeter_contract.handleSetNonVendorName: init");
@@ -316,6 +325,7 @@ public class tcg_greeter_contract extends script.base_script
         blog("tcg_greeter_contract.getGreeterData: Player was able to create a greeter - SUCCESS");
         return SCRIPT_CONTINUE;
     }
+
     public boolean getGreeterData(obj_id self, obj_id player) throws InterruptedException
     {
         if (sui.hasPid(player, GREETER_APPEARANCE_PID))
@@ -430,6 +440,7 @@ public class tcg_greeter_contract extends script.base_script
         sui.setPid(player, pid, GREETER_APPEARANCE_PID);
         return true;
     }
+
     public boolean outOfRange(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isValidId(self) || !exists(self))
@@ -449,6 +460,7 @@ public class tcg_greeter_contract extends script.base_script
         }
         return false;
     }
+
     public boolean blog(String msg) throws InterruptedException
     {
         if (LOGGING_ON && msg != null && !msg.equals(""))

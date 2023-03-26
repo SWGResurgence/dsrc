@@ -9,10 +9,12 @@ public class bounty_informant_spawner extends script.systems.missions.base.missi
     public bounty_informant_spawner()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public obj_id makeInformant(obj_id self) throws InterruptedException
     {
         String strNPC = "spynet_operative";
@@ -26,6 +28,7 @@ public class bounty_informant_spawner extends script.systems.missions.base.missi
         setObjVar(objInformant, "intInformantLevel", intInformantLevel);
         return objInformant;
     }
+
     public int remakeInformant(obj_id self, dictionary params) throws InterruptedException
     {
         debugSpeakMsg(self, "Makign informant again");

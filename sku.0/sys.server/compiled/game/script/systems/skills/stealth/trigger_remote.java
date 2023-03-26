@@ -10,11 +10,13 @@ public class trigger_remote extends script.base_script
     public trigger_remote()
     {
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         stealth.onGetTrapAttributes(self, player, names, attribs, getFirstFreeIndex(names));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -42,6 +44,7 @@ public class trigger_remote extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -85,6 +88,7 @@ public class trigger_remote extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgDetonated(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);
@@ -95,6 +99,7 @@ public class trigger_remote extends script.base_script
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int trapDisarmed(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);

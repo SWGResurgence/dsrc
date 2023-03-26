@@ -11,10 +11,12 @@ import script.obj_id;
 
 public class deconstruct_armor extends script.base_script
 {
+    public static final String PID_NAME = "armorDeconstruct";
+
     public deconstruct_armor()
     {
     }
-    public static final String PID_NAME = "armorDeconstruct";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (!utils.isNestedWithinAPlayer(self))
@@ -40,6 +42,7 @@ public class deconstruct_armor extends script.base_script
         int management_root = item.addRootMenu(menu_info_types.SERVER_MENU5, armor.SID_ARMOR_TO_SCHEM);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU5)
@@ -74,6 +77,7 @@ public class deconstruct_armor extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleConvertSchemSui(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -141,7 +145,7 @@ public class deconstruct_armor extends script.base_script
             }
         }
         String response = sui.getInputBoxText(params);
-        if (!(response.toLowerCase()).equals("deconstruct"))
+        if (!(response).equalsIgnoreCase("deconstruct"))
         {
             forceCloseSUIPage(pid);
             sui.removePid(player, PID_NAME);
@@ -157,7 +161,7 @@ public class deconstruct_armor extends script.base_script
             destroyObject(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             sendSystemMessage(player, armor.SID_CONVERT_CONVERT_FAIL);
             CustomerServiceLog("armor_conversion", "Player " + getFirstName(player) + "(" + player + ") attempted to convert their old armor(" + self + ") to a new cored schematic, and it failed.");

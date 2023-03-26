@@ -11,30 +11,31 @@ public class bio_component_attrib extends script.base_script
     public bio_component_attrib()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + craftinglib.TISSUE_SKILL_MODS))
         {
             return SCRIPT_CONTINUE;
         }
-        int[] effect_type = 
-        {
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-        };
-        int[] effect_mod = 
-        {
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-        };
+        int[] effect_type =
+                {
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                };
+        int[] effect_mod =
+                {
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                };
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "mod_idx_one"))
         {
             effect_type[0] = getIntObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "mod_idx_one");
@@ -46,7 +47,7 @@ public class bio_component_attrib extends script.base_script
             }
             else if (data instanceof Float)
             {
-                effect_mod[0] = (int)ov.getFloatData();
+                effect_mod[0] = (int) ov.getFloatData();
             }
             removeObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "mod_idx_one");
             removeObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "mod_val_one");
@@ -62,7 +63,7 @@ public class bio_component_attrib extends script.base_script
             }
             else if (data instanceof Float)
             {
-                effect_mod[1] = (int)ov.getFloatData();
+                effect_mod[1] = (int) ov.getFloatData();
             }
             removeObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "mod_idx_one");
             removeObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "mod_val_one");
@@ -78,7 +79,7 @@ public class bio_component_attrib extends script.base_script
             }
             else if (data instanceof Float)
             {
-                effect_mod[2] = (int)ov.getFloatData();
+                effect_mod[2] = (int) ov.getFloatData();
             }
             removeObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "mod_idx_one");
             removeObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "mod_val_one");
@@ -94,7 +95,7 @@ public class bio_component_attrib extends script.base_script
             }
             else if (data instanceof Float)
             {
-                effect_mod[3] = (int)ov.getFloatData();
+                effect_mod[3] = (int) ov.getFloatData();
             }
             removeObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "mod_idx_one");
             removeObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "mod_val_one");
@@ -110,7 +111,7 @@ public class bio_component_attrib extends script.base_script
             }
             else if (data instanceof Float)
             {
-                effect_mod[4] = (int)ov.getFloatData();
+                effect_mod[4] = (int) ov.getFloatData();
             }
             removeObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "mod_idx_one");
             removeObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "mod_val_one");
@@ -126,7 +127,7 @@ public class bio_component_attrib extends script.base_script
             }
             else if (data instanceof Float)
             {
-                effect_mod[5] = (int)ov.getFloatData();
+                effect_mod[5] = (int) ov.getFloatData();
             }
             removeObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "mod_idx_one");
             removeObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + "mod_val_one");
@@ -152,6 +153,7 @@ public class bio_component_attrib extends script.base_script
         setObjVar(self, root + craftinglib.TISSUE_SKILL_VALUE, effect_mod);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -174,15 +176,15 @@ public class bio_component_attrib extends script.base_script
                 {
                     names[idx] = "bio_comp_" + bio_engineer.BIO_COMP_EFFECT_SKILL_MODS[(mod_idx[i] - (bio_engineer.BIO_COMP_EFFECT_CLOTHING + 1))];
                 }
-                else 
+                else
                 {
                     names[idx] = "bio_comp_" + bio_engineer.BIO_COMP_EFFECT_FOOD_MODS[(mod_idx[i] - 1)];
                 }
                 if (mod_val[i] >= 0)
                 {
-                    attribs[idx] = "+" + Integer.toString(mod_val[i]);
+                    attribs[idx] = "+" + mod_val[i];
                 }
-                else 
+                else
                 {
                     attribs[idx] = Integer.toString(mod_val[i]);
                 }

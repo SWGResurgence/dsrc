@@ -11,9 +11,6 @@ import script.string_id;
 
 public class shields_analysis_tool extends script.base_script
 {
-    public shields_analysis_tool()
-    {
-    }
     public static final string_id LOOT_LIST = new string_id("sui", "analyze_loot");
     public static final String TOOL = "reverse_engineering_tool";
     public static final String TABLE = "datatables/ship/components/shield.iff";
@@ -26,14 +23,20 @@ public class shields_analysis_tool extends script.base_script
     public static final String ANALYZE_PROMPT = "@" + STF + ":analyze_prompt";
     public static final String NO_ITEMS_PROMPT = "@" + STF + ":no_items";
     public static final String BTN_ANALYZE = "@" + STF + ":analyze";
+    public shields_analysis_tool()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (utils.hasLocalVar(self, "ctsBeingUnpacked"))
@@ -54,6 +57,7 @@ public class shields_analysis_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -70,6 +74,7 @@ public class shields_analysis_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -83,6 +88,7 @@ public class shields_analysis_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -100,16 +106,20 @@ public class shields_analysis_tool extends script.base_script
             {
                 temp = getTemplateName(x[0]);
             }
-            for (obj_id x2 : x) {
-                if (space_crafting.getShipComponentStringType(x2) != "shield") {
+            for (obj_id x2 : x)
+            {
+                if (space_crafting.getShipComponentStringType(x2) != "shield")
+                {
                     string_id errormessage2 = new string_id(TOOL, "wrong_component_type");
                     sendSystemMessage(player, errormessage2);
                     return SCRIPT_CONTINUE;
                 }
-                if ((getTemplateName(x2)).equals(temp)) {
+                if ((getTemplateName(x2)).equals(temp))
+                {
                     countX++;
                 }
-                if (getBooleanObjVar(x2, "cannotReverseEngineer") == true) {
+                if (getBooleanObjVar(x2, "cannotReverseEngineer") == true)
+                {
                     string_id errormessage = new string_id(TOOL, "already_engineered");
                     sendSystemMessage(player, errormessage);
                     return SCRIPT_CONTINUE;
@@ -127,7 +137,7 @@ public class shields_analysis_tool extends script.base_script
                     return SCRIPT_CONTINUE;
                 }
                 float pct = dataTableGetFloat(LOOT, temp, 1);
-                int intPct = (int)(pct * 10);
+                int intPct = (int) (pct * 10);
                 int pctCheck = rand(0, 1000);
                 if (intPct >= pctCheck)
                 {
@@ -142,7 +152,7 @@ public class shields_analysis_tool extends script.base_script
                     string_id sysmessage = new string_id(TOOL, "special");
                     sendSystemMessage(player, sysmessage);
                 }
-                else 
+                else
                 {
                     createImprovedLoot(player, temp);
                     string_id sysmessage = new string_id(TOOL, "improved");
@@ -178,7 +188,8 @@ public class shields_analysis_tool extends script.base_script
                 setObjVar(self, "reverse_engineering.charges", charges);
                 if (charges > 0)
                 {
-                    for (obj_id x1 : x) {
+                    for (obj_id x1 : x)
+                    {
                         destroyObject(x1);
                     }
                 }
@@ -202,6 +213,7 @@ public class shields_analysis_tool extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id createLegendaryLoot(obj_id player, obj_id tool, String category) throws InterruptedException
     {
         String[] items = dataTableGetStringColumn(LOOT_LOOKUP, category);
@@ -214,6 +226,7 @@ public class shields_analysis_tool extends script.base_script
         destroyObject(tool);
         return newLoot;
     }
+
     public obj_id createImprovedLoot(obj_id player, String template) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);
@@ -242,6 +255,7 @@ public class shields_analysis_tool extends script.base_script
         setObjVar(newWeapon, "cannotReverseEngineer", true);
         return newWeapon;
     }
+
     public obj_id createSpecialLoot(obj_id player, String template) throws InterruptedException
     {
         obj_id playerInv = utils.getInventoryContainer(player);

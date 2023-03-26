@@ -12,18 +12,20 @@ public class combat_grenade extends script.systems.combat.combat_base
     public combat_grenade()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (static_item.isStaticItem(self))
         {
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             setCount(self, 10);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (getMinRange(self) != 0)
@@ -38,6 +40,7 @@ public class combat_grenade extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasObjVar(self, "intUsed"))
@@ -56,6 +59,7 @@ public class combat_grenade extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -114,11 +118,13 @@ public class combat_grenade extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         removeObjVar(self, "intUsed");
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);

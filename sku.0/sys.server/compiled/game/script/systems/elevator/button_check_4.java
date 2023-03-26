@@ -9,6 +9,7 @@ public class button_check_4 extends script.base_script
     public button_check_4()
     {
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id destinationCell, obj_id transferrer, obj_id item) throws InterruptedException
     {
         if (!isPlayer(item))
@@ -30,6 +31,7 @@ public class button_check_4 extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int luckyDespot(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id home = params.getObjId("home");
@@ -53,7 +55,7 @@ public class button_check_4 extends script.base_script
                 setObjVar(home, "terminal7", elevatorTerminalA);
             }
         }
-        else 
+        else
         {
             obj_id elevatorCell = getCellId(home, "elevator04");
             location here = getLocation(home);
@@ -82,7 +84,7 @@ public class button_check_4 extends script.base_script
                 setObjVar(home, "terminal8", elevatorTerminalB);
             }
         }
-        else 
+        else
         {
             obj_id elevatorCell = getCellId(home, "elevator04");
             location here = getLocation(home);

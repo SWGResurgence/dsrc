@@ -8,11 +8,13 @@ public class set_non_armor_wearable_socket extends script.base_script
     public set_non_armor_wearable_socket()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "setSocket", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int setSocket(obj_id self, dictionary params) throws InterruptedException
     {
         int socketCount = 0;

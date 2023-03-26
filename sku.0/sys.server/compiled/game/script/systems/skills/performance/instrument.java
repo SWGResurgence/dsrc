@@ -6,15 +6,16 @@ import script.library.utils;
 
 public class instrument extends script.base_script
 {
-    public instrument()
-    {
-    }
     public static final string_id SID_PLAY_INSTRUMENT = new string_id("radial_performance", "play_instrument");
     public static final string_id SID_STOP_PLAYING = new string_id("radial_performance", "stop_playing");
     public static final string_id SID_MUSIC_MUST_UNEQUIP = new string_id("performance", "music_must_unequip");
     public static final string_id SID_MUSIC_TOO_FAR_AWAY = new string_id("performance", "music_too_far_away");
     public static final float INSTRUMENT_CHECK_TIME = 5.0f;
     public static final float MAX_INSTRUMENT_DISTANCE = 3.0f;
+    public instrument()
+    {
+    }
+
     public boolean isActiveInstrument(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -27,12 +28,9 @@ public class instrument extends script.base_script
         {
             return (obj == getSelf());
         }
-        if (getFirstParentInWorld(self) == player)
-        {
-            return false;
-        }
-        return true;
+        return getFirstParentInWorld(self) != player;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isActiveInstrument(player) && hasScript(player, performance.MUSIC_HEARTBEAT_SCRIPT))
@@ -49,6 +47,7 @@ public class instrument extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         boolean isActive = isActiveInstrument(player);
@@ -100,11 +99,13 @@ public class instrument extends script.base_script
                 custom_var[] customVars = getAllCustomVars(self);
                 if (customVars != null && customVars.length > 0)
                 {
-                    for (custom_var customVar : customVars) {
+                    for (custom_var customVar : customVars)
+                    {
                         ranged_int_custom_var ricv = (ranged_int_custom_var) customVar;
                         String var = ricv.getVarName();
                         int value = ricv.getValue();
-                        if (value != 0) {
+                        if (value != 0)
+                        {
                             setRangedIntCustomVarValue(newPlacedObj, var, value);
                         }
                     }
@@ -125,13 +126,14 @@ public class instrument extends script.base_script
             {
                 sendSystemMessage(player, SID_MUSIC_TOO_FAR_AWAY);
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_MUSIC_MUST_UNEQUIP);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (hasObjVar(self, "instrument.owner"))
@@ -146,6 +148,7 @@ public class instrument extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkLocation(obj_id self, dictionary params) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "instrument.loc"))
@@ -165,6 +168,7 @@ public class instrument extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkInstrumentCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "instrument.owner"))

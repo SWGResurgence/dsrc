@@ -9,6 +9,7 @@ public class nomove_cube_loot extends script.base_script
     public nomove_cube_loot()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "notrade"))
@@ -21,6 +22,7 @@ public class nomove_cube_loot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, "notrade"))
@@ -33,6 +35,7 @@ public class nomove_cube_loot extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id dest, obj_id transferer) throws InterruptedException
     {
         if (!isPlayer(transferer) || isGod(transferer))
@@ -63,6 +66,7 @@ public class nomove_cube_loot extends script.base_script
         sui.msgbox(owner, owner, prompt, sui.OK_ONLY, title, "noHandler");
         return SCRIPT_OVERRIDE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         obj_id inv = utils.getInventoryContainer(transferer);

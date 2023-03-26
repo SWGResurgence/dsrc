@@ -5,9 +5,6 @@ import script.library.*;
 
 public class gcw_city_pylon extends script.base_script
 {
-    public gcw_city_pylon()
-    {
-    }
     public static final int PYLON_CONSTRUCTION_TIME = 10;
     public static final string_id SID_PYLON_CANNOT_USE = new string_id("gcw", "pylon_construction_cannot_use");
     public static final string_id SID_PYLON_CONSTRUCTION_COMPLETE = new string_id("gcw", "pylon_construction_complete");
@@ -17,11 +14,16 @@ public class gcw_city_pylon extends script.base_script
     public static final string_id SID_PYLON_MOVED = new string_id("gcw", "pylon_construction_moved");
     public static final string_id SID_PYLON_INCAPACITATED = new string_id("gcw", "pylon_construction_incapacitated");
     public static final string_id SID_TOO_FATIGUED = new string_id("gcw", "too_fatigued_to_construct");
+    public gcw_city_pylon()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleSetup", null, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (!isGod(objSpeaker))
@@ -43,6 +45,7 @@ public class gcw_city_pylon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void updatePylonName(obj_id self) throws InterruptedException
     {
         String name = utils.getStringScriptVar(self, "gcw.name");
@@ -61,20 +64,23 @@ public class gcw_city_pylon extends script.base_script
         {
             suffix = " (0 Resources)";
         }
-        else 
+        else
         {
             suffix = " (" + questsCompleted + " Resources)";
         }
         setName(self, name + suffix);
     }
+
     public String getImperialIcon() throws InterruptedException
     {
         return "pt_icon_quest_red.prt";
     }
+
     public String getRebelIcon() throws InterruptedException
     {
         return "pt_icon_quest_red.prt";
     }
+
     public int handleSetup(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "faction"))
@@ -94,11 +100,13 @@ public class gcw_city_pylon extends script.base_script
         updatePylonName(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleUpdateName(obj_id self, dictionary params) throws InterruptedException
     {
         updatePylonName(self);
         return SCRIPT_CONTINUE;
     }
+
     public int playQuestIcon(obj_id self, dictionary params) throws InterruptedException
     {
         int questsCompleted = getIntObjVar(self, "gcw.constructionQuestsCompleted");
@@ -108,10 +116,12 @@ public class gcw_city_pylon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int getMaximumQuests(obj_id self) throws InterruptedException
     {
         return gcw.GCW_CONSTRUCTION_MAXIMUM;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -131,7 +141,7 @@ public class gcw_city_pylon extends script.base_script
             attribs[idx] = "" + questsCompleted + " (" + questsMaximum + " Maximum)";
             idx++;
         }
-        else 
+        else
         {
             names[idx] = "construction_completed";
             attribs[idx] = "0 (" + questsMaximum + " Maximum)";
@@ -163,18 +173,22 @@ public class gcw_city_pylon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String getConstructionQuest() throws InterruptedException
     {
         return "gcw_construct_barricade";
     }
+
     public boolean hasConstructionResources(obj_id player) throws InterruptedException
     {
         return false;
     }
+
     public boolean consumeConstructionResources(obj_id player) throws InterruptedException
     {
         return false;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -197,6 +211,7 @@ public class gcw_city_pylon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -248,6 +263,7 @@ public class gcw_city_pylon extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void startConstructionAttempt(obj_id self, obj_id player) throws InterruptedException
     {
         int gameTime = getGameTime();
@@ -269,6 +285,7 @@ public class gcw_city_pylon extends script.base_script
         }
         int pid = sui.smartCountdownTimerSUI(self, player, "gcwPylonConstruction", SID_PYLON_SUI_PROMPT, 0, captureTime, "handleConstructionAttemptResults", 4.0f, flags);
     }
+
     public int handleConstructionAttemptResults(obj_id self, dictionary params) throws InterruptedException
     {
         int pid = params.getInt("id");
@@ -357,21 +374,25 @@ public class gcw_city_pylon extends script.base_script
         }
         desiredTemplate = getStringObjVar(self, gcw.GCW_TOOL_TEMPLATE_OBJVAR);
         obj_id[] toolList = utils.getAllItemsPlayerHasByTemplate(player, desiredTemplate);
-        if(toolList == null)
+        if (toolList == null)
         {
             return SCRIPT_CONTINUE;
         }
         int bestToolValue = 0;
         int toolValue = 0;
         obj_id bestTool = null;
-        for (obj_id obj_id : toolList) {
+        for (obj_id obj_id : toolList)
+        {
             toolValue = 0;
             String itemTemplate = getTemplateName(obj_id);
-            if (itemTemplate != null && itemTemplate.equals(desiredTemplate)) {
-                if (hasObjVar(obj_id, "crafting_components.power")) {
+            if (itemTemplate != null && itemTemplate.equals(desiredTemplate))
+            {
+                if (hasObjVar(obj_id, "crafting_components.power"))
+                {
                     toolValue = (int) getFloatObjVar(obj_id, "crafting_components.power");
                 }
-                if (toolValue > bestToolValue) {
+                if (toolValue > bestToolValue)
+                {
                     bestToolValue = toolValue;
                     bestTool = obj_id;
                 }
@@ -392,7 +413,7 @@ public class gcw_city_pylon extends script.base_script
             buff.applyBuff(player, "gcw_fatigue");
             completed += bestToolValue;
         }
-        else 
+        else
         {
             buff.applyBuffWithStackCount(player, "gcw_fatigue", 5);
             completed += bestToolValue;

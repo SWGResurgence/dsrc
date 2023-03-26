@@ -12,6 +12,7 @@ public class nomove_base extends script.base_script
     public nomove_base()
     {
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id dest, obj_id transferer) throws InterruptedException
     {
         if (!isIdValid(transferer))
@@ -80,7 +81,7 @@ public class nomove_base extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 obj_id currentParent = getContainedBy(dest);
                 while (isIdValid(currentParent) && !inPlayerHouseOrPOB)
@@ -111,6 +112,7 @@ public class nomove_base extends script.base_script
         sui.msgbox(owner, owner, msg, sui.OK_ONLY, title, "noHandler");
         return SCRIPT_OVERRIDE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (isIdValid(self))

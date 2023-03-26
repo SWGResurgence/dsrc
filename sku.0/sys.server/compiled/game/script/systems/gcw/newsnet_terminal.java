@@ -8,50 +8,53 @@ import script.library.utils;
 
 public class newsnet_terminal extends script.base_script
 {
+    public static final float MIN_BARK_TIME = 30.0f;
+    public static final float MAX_BARK_TIME = 240.0f;
+    public static final float[] RATINGS =
+            {
+                    0.10f,
+                    0.25f,
+                    0.50f,
+                    0.75f,
+                    1.0f,
+                    1.25f,
+                    1.5f,
+                    2.0f,
+                    2.5f
+            };
+    public static final String[] RATING_STRINGS =
+            {
+                    "rebel_losing_4",
+                    "rebel_losing_3",
+                    "rebel_losing_2",
+                    "rebel_losing_1",
+                    "equal",
+                    "rebel_winning_1",
+                    "rebel_winning_2",
+                    "rebel_winning_3",
+                    "rebel_winning_4"
+            };
+    public static final String[] BARK_STRINGS =
+            {
+                    "newsnet_extra",
+                    "newsnet_read_all"
+            };
     public newsnet_terminal()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         callAttentionBarker(self);
         return SCRIPT_CONTINUE;
     }
-    public static final float MIN_BARK_TIME = 30.0f;
-    public static final float MAX_BARK_TIME = 240.0f;
-    public static final float[] RATINGS = 
-    {
-            0.10f,
-            0.25f,
-            0.50f,
-            0.75f,
-        1.0f,
-        1.25f,
-        1.5f,
-        2.0f,
-        2.5f
-    };
-    public static final String[] RATING_STRINGS = 
-    {
-        "rebel_losing_4",
-        "rebel_losing_3",
-        "rebel_losing_2",
-        "rebel_losing_1",
-        "equal",
-        "rebel_winning_1",
-        "rebel_winning_2",
-        "rebel_winning_3",
-        "rebel_winning_4"
-    };
-    public static final String[] BARK_STRINGS = 
-    {
-        "newsnet_extra",
-        "newsnet_read_all"
-    };
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         int menuOption = item.addRootMenu(menu_info_types.ITEM_USE, new string_id("gcw", "read_headline"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -61,6 +64,7 @@ public class newsnet_terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void doNewsNetUI(obj_id self, obj_id player) throws InterruptedException
     {
         float fltRatio = gcw.getRebelRatio(self);
@@ -79,6 +83,7 @@ public class newsnet_terminal extends script.base_script
         string_id strBodyID = new string_id("gcw", strBody);
         sui.msgbox(player, player, utils.packStringId(strBodyID), sui.OK_ONLY, utils.packStringId(strTitleId), "noHandler");
     }
+
     public String getHeadlineString(float fltRatio) throws InterruptedException
     {
         if (fltRatio <= RATINGS[0])
@@ -117,16 +122,18 @@ public class newsnet_terminal extends script.base_script
         {
             return RATING_STRINGS[8];
         }
-        else 
+        else
         {
             return null;
         }
     }
+
     public void callAttentionBarker(obj_id self) throws InterruptedException
     {
         float bark_delay = rand(MIN_BARK_TIME, MIN_BARK_TIME);
         messageTo(self, "barkForAttention", null, bark_delay, false);
     }
+
     public int factionBaseUnitRefund(obj_id self, dictionary params) throws InterruptedException
     {
         string_id barkMessage = new string_id("gcw", BARK_STRINGS[rand(0, BARK_STRINGS.length)]);

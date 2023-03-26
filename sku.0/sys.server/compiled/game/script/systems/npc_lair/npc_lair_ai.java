@@ -8,9 +8,18 @@ import script.obj_id;
 
 public class npc_lair_ai extends script.theme_park.poi.base
 {
+    public static final int JOB_NONE = 0;
+    public static final int JOB_LOITER = 1;
+    public static final int JOB_SCOUT = 2;
+    public static final int JOB_REST = 3;
+    public static final int JOB_DEFEND = 4;
+    public static final int JOB_HEAL = 5;
+    public static final int JOB_CONVERSE = 6;
+    public static final int JOB_DANCE = 7;
     public npc_lair_ai()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id baseObj = poiGetBaseObject(self);
@@ -27,11 +36,13 @@ public class npc_lair_ai extends script.theme_park.poi.base
         listenToMessage(baseObj, "handleNpcLairCustomAi");
         return SCRIPT_CONTINUE;
     }
+
     public int handleDestruction(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (hasScript(self, "ai.pet"))
@@ -46,6 +57,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDetach(obj_id self) throws InterruptedException
     {
         obj_id baseObj = poiGetBaseObject(self);
@@ -55,19 +67,13 @@ public class npc_lair_ai extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDetachment(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "systems.npc_lair.npc_lair_ai");
         return SCRIPT_CONTINUE;
     }
-    public static final int JOB_NONE = 0;
-    public static final int JOB_LOITER = 1;
-    public static final int JOB_SCOUT = 2;
-    public static final int JOB_REST = 3;
-    public static final int JOB_DEFEND = 4;
-    public static final int JOB_HEAL = 5;
-    public static final int JOB_CONVERSE = 6;
-    public static final int JOB_DANCE = 7;
+
     public void doImmediateCommand(obj_id mobile, int job, dictionary params) throws InterruptedException
     {
         switch (job)
@@ -89,6 +95,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
                 break;
         }
     }
+
     public void respondToScoutAlarm(obj_id mobile, obj_id target) throws InterruptedException
     {
         if (!isIdValid(target) || ai_lib.isAiDead(target) || mobile.equals(target))
@@ -106,12 +113,13 @@ public class npc_lair_ai extends script.theme_park.poi.base
                 utils.setScriptVar(mobile, "pathingToAttack", target);
                 pathTo(mobile, getLocation(target));
             }
-            else 
+            else
             {
                 startCombat(mobile, target);
             }
         }
     }
+
     public int handleNpcLairCustomAi(obj_id self, dictionary params) throws InterruptedException
     {
         if (pet_lib.isPet(self))
@@ -171,133 +179,136 @@ public class npc_lair_ai extends script.theme_park.poi.base
         switch (job)
         {
             case JOB_NONE:
-            break;
+                break;
             case JOB_LOITER:
-            setHomeLocation(self, getLocation(baseObj));
-            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
-            break;
+                setHomeLocation(self, getLocation(baseObj));
+                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
+                break;
             case JOB_SCOUT:
-            setHomeLocation(self, getLocation(baseObj));
-            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_WANDER);
-            String myName = getAssignedName(self);
-            if (myName != null && !myName.equals(""))
-            {
-                if (!myName.equals("null"))
+                setHomeLocation(self, getLocation(baseObj));
+                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_WANDER);
+                String myName = getAssignedName(self);
+                if (myName != null && !myName.equals(""))
                 {
-                    setName(self, myName + " (scout)");
-                }
-                else 
-                {
-                    String crName = ai_lib.getCreatureName(self);
-                    debugServerConsoleMsg(self, "WARNING: " + crName + " has an assigned name of Null - why is that?");
-                }
-            }
-            else 
-            {
-                if (!myName.equals("null"))
-                {
-                    setName(self, (getString(getNameStringId(self)) + " (scout)"));
-                }
-                else 
-                {
-                    String crName = ai_lib.getCreatureName(self);
-                    debugServerConsoleMsg(self, "WARNING: " + crName + " has an assigned name of Null - why is that?");
-                }
-            }
-            break;
-            case JOB_REST:
-            if (ai_lib.isMonster(self))
-            {
-                if (ai_lib.canSit(self))
-                {
-                    setHomeLocationNearLair(self, baseObj);
-                    ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
-                }
-                else if (ai_lib.canLieDown(self))
-                {
-                    setHomeLocationNearLair(self, baseObj);
-                    ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
-                }
-                else 
-                {
-                    setHomeLocation(self, getLocation(baseObj));
-                    ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
-                }
-            }
-            else if (ai_lib.aiGetNiche(self) == NICHE_NPC)
-            {
-                location danceLoc = getLocationObjVar(baseObj, "npc_lair.danceLoc");
-                obj_id dancer = getObjIdObjVar(baseObj, "npc_lair.dancer");
-                if (isIdValid(dancer))
-                {
-                    setObjVar(self, "npc_lair.dancer", dancer);
-                }
-                setObjVar(baseObj, "npc_lair.watcher", self);
-                boolean entertainment = getBooleanObjVar(baseObj, "npc_lair.entertainment");
-                location startLoc = getLocation(self);
-                if (startLoc.x > danceLoc.x)
-                {
-                    danceLoc.x += (rand(2, 3));
-                }
-                else 
-                {
-                    danceLoc.x -= (rand(2, 3));
-                }
-                if (startLoc.z > danceLoc.z)
-                {
-                    danceLoc.z += (rand(2, 3));
-                }
-                else 
-                {
-                    danceLoc.z -= (rand(2, 3));
-                }
-                setHomeLocation(self, danceLoc);
-                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
-                
-                {
-                    switch (rand(1, 10))
+                    if (!myName.equals("null"))
                     {
-                        case 1:
-                        ai_lib.setDefaultCalmMood(self, "conversation");
-                        break;
-                        case 2:
-                        ai_lib.setDefaultCalmMood(self, "npc_accusing");
-                        break;
-                        case 3:
-                        ai_lib.setDefaultCalmMood(self, "npc_angry");
-                        break;
-                        case 4:
-                        ai_lib.setDefaultCalmMood(self, "npc_consoling");
-                        break;
-                        case 5:
-                        ai_lib.setDefaultCalmMood(self, "npc_sad");
-                        break;
-                        case 6:
-                        case 7:
-                        case 8:
-                        case 9:
-                        case 10:
-                        ai_lib.setDefaultCalmMood(self, "npc_sitting_ground");
-                        break;
+                        setName(self, myName + " (scout)");
+                    }
+                    else
+                    {
+                        String crName = ai_lib.getCreatureName(self);
+                        debugServerConsoleMsg(self, "WARNING: " + crName + " has an assigned name of Null - why is that?");
                     }
                 }
-            }
-            break;
+                else
+                {
+                    if (!myName.equals("null"))
+                    {
+                        setName(self, (getString(getNameStringId(self)) + " (scout)"));
+                    }
+                    else
+                    {
+                        String crName = ai_lib.getCreatureName(self);
+                        debugServerConsoleMsg(self, "WARNING: " + crName + " has an assigned name of Null - why is that?");
+                    }
+                }
+                break;
+            case JOB_REST:
+                if (ai_lib.isMonster(self))
+                {
+                    if (ai_lib.canSit(self))
+                    {
+                        setHomeLocationNearLair(self, baseObj);
+                        ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
+                    }
+                    else if (ai_lib.canLieDown(self))
+                    {
+                        setHomeLocationNearLair(self, baseObj);
+                        ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
+                    }
+                    else
+                    {
+                        setHomeLocation(self, getLocation(baseObj));
+                        ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_LOITER);
+                    }
+                }
+                else if (ai_lib.aiGetNiche(self) == NICHE_NPC)
+                {
+                    location danceLoc = getLocationObjVar(baseObj, "npc_lair.danceLoc");
+                    obj_id dancer = getObjIdObjVar(baseObj, "npc_lair.dancer");
+                    if (isIdValid(dancer))
+                    {
+                        setObjVar(self, "npc_lair.dancer", dancer);
+                    }
+                    setObjVar(baseObj, "npc_lair.watcher", self);
+                    boolean entertainment = getBooleanObjVar(baseObj, "npc_lair.entertainment");
+                    location startLoc = getLocation(self);
+                    if (startLoc.x > danceLoc.x)
+                    {
+                        danceLoc.x += (rand(2, 3));
+                    }
+                    else
+                    {
+                        danceLoc.x -= (rand(2, 3));
+                    }
+                    if (startLoc.z > danceLoc.z)
+                    {
+                        danceLoc.z += (rand(2, 3));
+                    }
+                    else
+                    {
+                        danceLoc.z -= (rand(2, 3));
+                    }
+                    setHomeLocation(self, danceLoc);
+                    ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
+
+                    {
+                        switch (rand(1, 10))
+                        {
+                            case 1:
+                                ai_lib.setDefaultCalmMood(self, "conversation");
+                                break;
+                            case 2:
+                                ai_lib.setDefaultCalmMood(self, "npc_accusing");
+                                break;
+                            case 3:
+                                ai_lib.setDefaultCalmMood(self, "npc_angry");
+                                break;
+                            case 4:
+                                ai_lib.setDefaultCalmMood(self, "npc_consoling");
+                                break;
+                            case 5:
+                                ai_lib.setDefaultCalmMood(self, "npc_sad");
+                                break;
+                            case 6:
+                            case 7:
+                            case 8:
+                            case 9:
+                            case 10:
+                                ai_lib.setDefaultCalmMood(self, "npc_sitting_ground");
+                                break;
+                        }
+                    }
+                }
+                break;
             case JOB_CONVERSE:
-            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
-            if (mobileNum != 0)
-            {
-                return SCRIPT_CONTINUE;
-            }
-            obj_id[] allNpcs = getAllNpcs(getLocation(self), 45.0f);
-            if (allNpcs == null || allNpcs.length == 0)
-            {
-                return SCRIPT_CONTINUE;
-            }
-                for (obj_id allNpc : allNpcs) {
-                    if (allNpc != self) {
+                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
+                if (mobileNum != 0)
+                {
+                    return SCRIPT_CONTINUE;
+                }
+                obj_id[] allNpcs = getAllNpcs(getLocation(self), 45.0f);
+                if (allNpcs == null || allNpcs.length == 0)
+                {
+                    return SCRIPT_CONTINUE;
+                }
+                for (obj_id allNpc : allNpcs)
+                {
+                    if (allNpc != self)
+                    {
                         int yourNum = getIntObjVar(allNpc, "npc_lair.mobileNumber");
-                        if (yourNum == 1) {
+                        if (yourNum == 1)
+                        {
                             faceToBehavior(self, allNpc);
                             ai_lib.setDefaultCalmMood(self, "conversation");
                             dictionary parms = new dictionary();
@@ -308,43 +319,44 @@ public class npc_lair_ai extends script.theme_park.poi.base
                         }
                     }
                 }
-            break;
+                break;
             case JOB_DANCE:
-            location danceLoc = getLocationObjVar(baseObj, "npc_lair.danceLoc");
-            setObjVar(baseObj, "npc_lair.dancer", self);
-            danceLoc.x += rand(-2, 2);
-            danceLoc.z += rand(-2, 2);
-            setHomeLocation(self, danceLoc);
-            ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
-            switch (rand(1, 6))
-            {
-                case 1:
-                ai_lib.setDefaultCalmMood(self, "conversation");
-                break;
-                case 2:
-                case 3:
-                case 4:
-                if (getGender(self) == Gender.FEMALE)
+                location danceLoc = getLocationObjVar(baseObj, "npc_lair.danceLoc");
+                setObjVar(baseObj, "npc_lair.dancer", self);
+                danceLoc.x += rand(-2, 2);
+                danceLoc.z += rand(-2, 2);
+                setHomeLocation(self, danceLoc);
+                ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
+                switch (rand(1, 6))
                 {
-                    ai_lib.setDefaultCalmMood(self, "themepark_oola");
+                    case 1:
+                        ai_lib.setDefaultCalmMood(self, "conversation");
+                        break;
+                    case 2:
+                    case 3:
+                    case 4:
+                        if (getGender(self) == Gender.FEMALE)
+                        {
+                            ai_lib.setDefaultCalmMood(self, "themepark_oola");
+                        }
+                        else
+                        {
+                            ai_lib.setDefaultCalmMood(self, "entertained");
+                        }
+                        setObjVar(baseObj, "npc_lair.entertainment", true);
+                        break;
+                    case 5:
+                        ai_lib.setDefaultCalmMood(self, "npc_accusing");
+                        break;
+                    case 6:
+                        ai_lib.setDefaultCalmMood(self, "npc_angry");
+                        break;
                 }
-                else 
-                {
-                    ai_lib.setDefaultCalmMood(self, "entertained");
-                }
-                setObjVar(baseObj, "npc_lair.entertainment", true);
                 break;
-                case 5:
-                ai_lib.setDefaultCalmMood(self, "npc_accusing");
-                break;
-                case 6:
-                ai_lib.setDefaultCalmMood(self, "npc_angry");
-                break;
-            }
-            break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathComplete(obj_id self) throws InterruptedException
     {
         int job = getIntObjVar(self, "npc_lair.job");
@@ -382,7 +394,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
                     pathTo(self, getLocation(target));
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     startCombat(self, target);
                 }
@@ -403,7 +415,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
                     {
                         ai_lib.aiSetPosture(self, POSTURE_SITTING);
                     }
-                    else 
+                    else
                     {
                         ai_lib.aiSetPosture(self, POSTURE_LYING_DOWN);
                     }
@@ -433,14 +445,16 @@ public class npc_lair_ai extends script.theme_park.poi.base
             {
                 faceToBehavior(self, dancer);
             }
-            else 
+            else
             {
                 obj_id[] creatures = getCreaturesInRange(getLocation(self), 6.0f);
                 if (creatures != null && creatures.length > 0)
                 {
-                    for (obj_id creature : creatures) {
+                    for (obj_id creature : creatures)
+                    {
                         int yourJob = getIntObjVar(creature, "npc_lair.job");
-                        if (yourJob == JOB_DANCE) {
+                        if (yourJob == JOB_DANCE)
+                        {
                             faceToBehavior(self, creature);
                             faceToBehavior(creature, self);
                             return SCRIPT_CONTINUE;
@@ -459,13 +473,15 @@ public class npc_lair_ai extends script.theme_park.poi.base
                 {
                     faceToBehavior(self, watcher);
                 }
-                else 
+                else
                 {
                     obj_id[] creatures = getCreaturesInRange(getLocation(self), 6.0f);
                     if (creatures != null && creatures.length > 0)
                     {
-                        for (obj_id creature : creatures) {
-                            if (hasObjVar(creature, "npc_lair.dancer")) {
+                        for (obj_id creature : creatures)
+                        {
+                            if (hasObjVar(creature, "npc_lair.dancer"))
+                            {
                                 faceToBehavior(self, creature);
                                 faceToBehavior(creature, self);
                                 return SCRIPT_CONTINUE;
@@ -477,6 +493,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathBlocked(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "pathingToHealLair"))
@@ -488,6 +505,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnMovePathNotFound(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "pathingToHealLair"))
@@ -499,6 +517,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void setHomeLocationNearLair(obj_id mobile, obj_id baseObj) throws InterruptedException
     {
         if (!isIdValid(baseObj))
@@ -514,6 +533,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
         baseLoc.z += rand(7, 7);
         setHomeLocation(mobile, baseLoc);
     }
+
     public void doLairHealing(obj_id mobile, dictionary params) throws InterruptedException
     {
         if (!isIdValid(mobile) || !exists(mobile))
@@ -530,7 +550,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
             {
                 utils.setScriptVar(mobile, "npc_lair.willheal", true);
             }
-            else 
+            else
             {
                 return;
             }
@@ -545,14 +565,14 @@ public class npc_lair_ai extends script.theme_park.poi.base
                 {
                     setObjVar(mobile, "npc_lair.target", lair);
                 }
-                else 
+                else
                 {
                     removeObjVar(mobile, "ai.combat.ignoreCombat");
                     utils.setScriptVar(mobile, "npc_lair.willheal", false);
                     return;
                 }
             }
-            else 
+            else
             {
                 return;
             }
@@ -589,29 +609,30 @@ public class npc_lair_ai extends script.theme_park.poi.base
         switch (rand(0, 3))
         {
             case 0:
-            debugSpeakMsgc(aiLoggingEnabled(mobile), mobile, "eat");
-            stop(mobile);
-            doAnimationAction(mobile, "eat");
-            break;
+                debugSpeakMsgc(aiLoggingEnabled(mobile), mobile, "eat");
+                stop(mobile);
+                doAnimationAction(mobile, "eat");
+                break;
             case 1:
-            debugSpeakMsgc(aiLoggingEnabled(mobile), mobile, "vocalize");
-            stop(mobile);
-            doAnimationAction(mobile, "vocalize");
-            break;
+                debugSpeakMsgc(aiLoggingEnabled(mobile), mobile, "vocalize");
+                stop(mobile);
+                doAnimationAction(mobile, "vocalize");
+                break;
             case 2:
-            debugSpeakMsgc(aiLoggingEnabled(mobile), mobile, "loiter");
-            final location anchorLocation = getLocation(lair);
-            final float minDistance = 1.0f;
-            final float maxDistance = 3.0f;
-            final float minDelay = 1.0f;
-            final float maxDelay = 2.0f;
-            loiterLocation(mobile, anchorLocation, minDistance, maxDistance, minDelay, maxDelay);
-            break;
+                debugSpeakMsgc(aiLoggingEnabled(mobile), mobile, "loiter");
+                final location anchorLocation = getLocation(lair);
+                final float minDistance = 1.0f;
+                final float maxDistance = 3.0f;
+                final float minDelay = 1.0f;
+                final float maxDelay = 2.0f;
+                loiterLocation(mobile, anchorLocation, minDistance, maxDistance, minDelay, maxDelay);
+                break;
         }
         obj_id[] players = getAllPlayers(baseLoc, healing.VAR_EFFECT_DISPLAY_RADIUS);
         if (players != null)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 playClientEffectObj(player, "clienteffect/healing_healdamage.cef", lair, "");
                 playClientEffectObj(player, "clienteffect/healing_healdamage.cef", mobile, "");
             }
@@ -621,7 +642,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
         {
             setHitpoints(lair, curHP);
         }
-        else 
+        else
         {
             setHitpoints(lair, maxHP);
         }
@@ -629,6 +650,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
         parms.put("lair", lair);
         messageTo(mobile, "handleRecoverFromHealingLair", parms, rand(3, 5), false);
     }
+
     public int resumeDefaultCalmBehavior(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id lair = getObjIdObjVar(self, "npc_lair.target");
@@ -648,6 +670,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRecoverFromHealingLair(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id lair = params.getObjId("lair");
@@ -657,7 +680,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
         {
             doLairHealing(self, params);
         }
-        else 
+        else
         {
             removeObjVar(self, "ai.combat.ignoreCombat");
             utils.removeScriptVar(self, "pathingToHealLair");
@@ -669,6 +692,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void pathToWithinTwoMetersOf(obj_id mobile, location destLoc) throws InterruptedException
     {
         location startLoc = getLocation(mobile);
@@ -677,7 +701,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
         {
             baseLoc.x += 1.5f;
         }
-        else 
+        else
         {
             baseLoc.x -= 1.5f;
         }
@@ -685,23 +709,25 @@ public class npc_lair_ai extends script.theme_park.poi.base
         {
             baseLoc.z += 1.5f;
         }
-        else 
+        else
         {
             baseLoc.z -= 1.5f;
         }
         pathTo(mobile, baseLoc);
     }
+
     public int OnSawAttack(obj_id self, obj_id defender, obj_id[] attackers) throws InterruptedException
     {
         if (hasObjVar(self, "ai.combat.ignoreCombat"))
         {
             return SCRIPT_OVERRIDE;
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
     }
+
     public int OnCreatureDamaged(obj_id self, obj_id attacker, obj_id weapon, int[] damage) throws InterruptedException
     {
         if (hasObjVar(self, "ai.combat.ignoreCombat"))
@@ -712,9 +738,11 @@ public class npc_lair_ai extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRequestToConverse(obj_id self, dictionary params) throws InterruptedException
     {
-        if(!isValidId(self) || isIncapacitated(self) || isDead(self) || !exists(self)){
+        if (!isValidId(self) || isIncapacitated(self) || isDead(self) || !exists(self))
+        {
             return SCRIPT_CONTINUE;
         }
         obj_id partner = params.getObjId("converseWith");
@@ -726,14 +754,15 @@ public class npc_lair_ai extends script.theme_park.poi.base
         utils.setScriptVar(self, "npc_lair.pathingToConverse", true);
         location destLoc = new location(getLocation(partner));
         location myLoc = getLocation(self);
-        if(myLoc == null || !isValidLocation(myLoc)){
+        if (myLoc == null || !isValidLocation(myLoc))
+        {
             return SCRIPT_CONTINUE;
         }
         if (myLoc.x < destLoc.x)
         {
             destLoc.x -= 1;
         }
-        else 
+        else
         {
             destLoc.x += 1;
         }
@@ -741,7 +770,7 @@ public class npc_lair_ai extends script.theme_park.poi.base
         {
             destLoc.z -= 1;
         }
-        else 
+        else
         {
             destLoc.z += 1;
         }

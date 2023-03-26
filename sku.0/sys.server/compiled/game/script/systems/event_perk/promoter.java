@@ -12,6 +12,7 @@ public class promoter extends script.base_script
     public promoter()
     {
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -25,6 +26,7 @@ public class promoter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setInvulnerable(self, true);
@@ -38,6 +40,7 @@ public class promoter extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int showPromoterItemList(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = params.getObjId("player");
@@ -57,6 +60,7 @@ public class promoter extends script.base_script
         sui.listbox(self, player, "@event_perk:pro_show_list_desc", sui.OK_CANCEL, "@event_perk:pro_show_list_title", concatMsg, "selectPromoterItem", true);
         return SCRIPT_CONTINUE;
     }
+
     public int selectPromoterItem(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);
@@ -83,20 +87,25 @@ public class promoter extends script.base_script
         }
         obj_id[] allContents = utils.getAllItemsInBankAndInventory(player);
         int perkCount = 0;
-        for (obj_id allContent1 : allContents) {
-            if (hasObjVar(allContent1, "event_perk")) {
+        for (obj_id allContent1 : allContents)
+        {
+            if (hasObjVar(allContent1, "event_perk"))
+            {
                 perkCount++;
             }
-            if (perkCount >= 5) {
+            if (perkCount >= 5)
+            {
                 sendSystemMessage(player, new string_id("event_perk", "pro_too_many_perks"));
                 return SCRIPT_CONTINUE;
             }
         }
         String template = templateTable[idx];
         int cost = costTable[idx];
-        for (obj_id allContent : allContents) {
+        for (obj_id allContent : allContents)
+        {
             String whatsThis = getTemplateName(allContent);
-            if (whatsThis.equals("object/tangible/deed/event_perk/shuttle_beacon.iff") && whatsThis.equals(template)) {
+            if (whatsThis.equals("object/tangible/deed/event_perk/shuttle_beacon.iff") && whatsThis.equals(template))
+            {
                 sendSystemMessage(player, new string_id("event_perk", "promoter_only_one"));
                 return SCRIPT_CONTINUE;
             }
@@ -119,7 +128,7 @@ public class promoter extends script.base_script
             money.pay(player, self, cost, "derpDerpDerp", null);
             CustomerServiceLog("EventPerk", "(Promoter - [" + self + "]) Player [" + player + "] purchased " + purchasedItem + " at a cost of " + cost);
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("event_perk", "promoter_full_inv"));
         }

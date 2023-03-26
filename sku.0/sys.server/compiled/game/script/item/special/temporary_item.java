@@ -6,10 +6,12 @@ import script.obj_id;
 
 public class temporary_item extends script.base_script
 {
+    public static final float LIFESPAN = 3600.0f;
+
     public temporary_item()
     {
     }
-    public static final float LIFESPAN = 3600.0f;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id npcOwner = utils.getContainingNpcCreature(self);
@@ -19,7 +21,7 @@ public class temporary_item extends script.base_script
             removeObjVar(self, "item.lifespan");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             float lifeSpan = getLifeSpan(self);
             float rightNow = getGameTime();
@@ -33,6 +35,7 @@ public class temporary_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         obj_id npcOwner = utils.getContainingNpcCreature(self);
@@ -42,7 +45,7 @@ public class temporary_item extends script.base_script
             removeObjVar(self, "item.lifespan");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             float lifeSpan = getLifeSpan(self);
             float dieTime = getDieTime(lifeSpan, self);
@@ -54,6 +57,7 @@ public class temporary_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public float getLifeSpan(obj_id self) throws InterruptedException
     {
         float lifeSpan = LIFESPAN;
@@ -63,6 +67,7 @@ public class temporary_item extends script.base_script
         }
         return lifeSpan;
     }
+
     public float getDieTime(float lifeSpan, obj_id tempObject) throws InterruptedException
     {
         float timeStamp = getFloatObjVar(tempObject, "item.temporary.time_stamp");
@@ -71,6 +76,7 @@ public class temporary_item extends script.base_script
         float dieTime = deathStamp - rightNow;
         return dieTime;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         if (self.isBeingDestroyed())
@@ -92,12 +98,13 @@ public class temporary_item extends script.base_script
         {
             destroyObject(self);
         }
-        else 
+        else
         {
             messageTo(self, "cleanUp", null, dieTime, false);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         obj_id npcOwner = utils.getContainingNpcCreature(self);
@@ -107,7 +114,7 @@ public class temporary_item extends script.base_script
             removeObjVar(self, "item.lifespan");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             int idx = utils.getValidAttributeIndex(names);
             if (idx == -1)
@@ -116,7 +123,7 @@ public class temporary_item extends script.base_script
             }
             float lifeSpan = getLifeSpan(self);
             float dieTime = getDieTime(lifeSpan, self);
-            int timeLeft = (int)dieTime;
+            int timeLeft = (int) dieTime;
             names[idx] = "storyteller_time_remaining";
             attribs[idx] = utils.formatTimeVerbose(timeLeft);
             idx++;

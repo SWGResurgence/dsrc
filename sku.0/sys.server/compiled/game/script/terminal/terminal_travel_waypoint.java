@@ -47,10 +47,10 @@ public class terminal_travel_waypoint extends script.base_script
         if (isMob(self))
         {
             callable.storeCallables(player);
-            mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("travel", "travel"));
+            mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("Depart"));
             if (isGod(player))
             {
-                mi.addRootMenu(menu_info_types.ITEM_USE_OTHER, new string_id("travel", "travel_god"));
+                mi.addRootMenu(menu_info_types.ITEM_USE_OTHER, new string_id("[GodMode] Create Drag-n-Drop Waypoint Tokens"));
             }
         }
         return SCRIPT_CONTINUE;

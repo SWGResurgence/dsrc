@@ -9,10 +9,12 @@ import script.obj_var_list;
 
 public class crafting_new_armor_segment extends script.systems.crafting.crafting_base
 {
+    public static final String VERSION = "v0.00.00";
+
     public crafting_new_armor_segment()
     {
     }
-    public static final String VERSION = "v0.00.00";
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
         int segmentRow = dataTableSearchColumnForInt(getStringCrc(armor.DATATABLE_SEGMENT_ROW), armor.DATATABLE_TYPE_COL, armor.DATATABLE_ARMOR);
@@ -30,24 +32,33 @@ public class crafting_new_armor_segment extends script.systems.crafting.crafting
         armor.updateItemAttributes(getSelf(), itemAttributes, segmentRow);
         super.calcAndSetPrototypeProperties(prototype, itemAttributes, craftingValuesDictionary);
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         debugServerConsoleMsg(null, "Beginning assembly-phase prototype property setting");
         int segmentRow = dataTableSearchColumnForInt(getStringCrc(armor.DATATABLE_SEGMENT_ROW), armor.DATATABLE_TYPE_COL, armor.DATATABLE_ARMOR);
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (!calcAndSetPrototypeProperty(prototype, itemAttribute)) {
-                if (itemAttribute.currentValue < itemAttribute.minValue) {
+            if (!calcAndSetPrototypeProperty(prototype, itemAttribute))
+            {
+                if (itemAttribute.currentValue < itemAttribute.minValue)
+                {
                     itemAttribute.currentValue = itemAttribute.minValue;
-                } else if (itemAttribute.currentValue > itemAttribute.maxValue) {
+                }
+                else if (itemAttribute.currentValue > itemAttribute.maxValue)
+                {
                     itemAttribute.currentValue = itemAttribute.maxValue;
                 }
                 setObjVar(prototype, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + "." + (itemAttribute.name).getAsciiId(), itemAttribute.currentValue);
-                if ((itemAttribute.name).equals(armor.OBJVAR_CONDITION)) {
+                if ((itemAttribute.name).equals(armor.OBJVAR_CONDITION))
+                {
                     float hp = armor.getAbsoluteArmorAttribute(itemAttribute.currentValue, segmentRow, armor.DATATABLE_MIN_CONDITION_COL);
-                    if (hp != Float.MIN_VALUE) {
+                    if (hp != Float.MIN_VALUE)
+                    {
                         setMaxHitpoints(prototype, (int) hp);
                     }
                 }

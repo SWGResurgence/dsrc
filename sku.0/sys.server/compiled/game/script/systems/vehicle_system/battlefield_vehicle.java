@@ -5,12 +5,13 @@ import script.library.*;
 
 public class battlefield_vehicle extends script.base_script
 {
-    public battlefield_vehicle()
-    {
-    }
     public static final String MENU_FILE = "pet/pet_menu";
     public static final String TABLE = "datatables/vehicle/battlefield_vehicle.iff";
     public static final boolean debug = false;
+    public battlefield_vehicle()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         checkForAllowedZones(self);
@@ -25,6 +26,7 @@ public class battlefield_vehicle extends script.base_script
         vehicle.initializeVehicle(self);
         return SCRIPT_CONTINUE;
     }
+
     public void setArmor(obj_id target, int amount) throws InterruptedException
     {
         if (!isIdValid(target))
@@ -39,6 +41,7 @@ public class battlefield_vehicle extends script.base_script
         armor.recalculateArmorForMob(target);
         return;
     }
+
     public void establishFaction(obj_id self) throws InterruptedException
     {
         String vehicleFaction = dataTableGetString(TABLE, getVehicleType(self), "faction");
@@ -48,6 +51,7 @@ public class battlefield_vehicle extends script.base_script
         }
         factions.setFaction(self, vehicleFaction);
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         checkForAllowedZones(self);
@@ -90,6 +94,7 @@ public class battlefield_vehicle extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU10, new string_id(MENU_FILE, "menu_enter_exit"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         checkForAllowedZones(self);
@@ -121,7 +126,7 @@ public class battlefield_vehicle extends script.base_script
             {
                 queueCommand(player, (1988230683), self, creature_name, COMMAND_PRIORITY_FRONT);
             }
-            else 
+            else
             {
                 if (!utils.hasScriptVar(self, "battlefield_vehicle.aboutToBeDestroyed"))
                 {
@@ -131,6 +136,7 @@ public class battlefield_vehicle extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean isMountedOnCreatureQueried(obj_id pet, obj_id player) throws InterruptedException
     {
         if (!isIdValid(pet))
@@ -146,26 +152,26 @@ public class battlefield_vehicle extends script.base_script
         {
             return false;
         }
-        if (playerCurrentMount != pet)
-        {
-            return false;
-        }
-        return true;
+        return playerCurrentMount == pet;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         removePlayersFromVehicleAndDestroySelf(self, 5.0f);
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         removePlayersFromVehicle(self);
         return SCRIPT_CONTINUE;
     }
+
     public void removePlayersFromVehicleAndDestroySelf(obj_id self, float delay) throws InterruptedException
     {
         utils.setScriptVar(self, "battlefield_vehicle.aboutToBeDestroyed", true);
@@ -177,6 +183,7 @@ public class battlefield_vehicle extends script.base_script
         kill(self);
         messageTo(self, "destroyNow", null, delay, false);
     }
+
     public void removePlayersFromVehicle(obj_id self) throws InterruptedException
     {
         obj_id rider = getRiderId(self);
@@ -193,41 +200,49 @@ public class battlefield_vehicle extends script.base_script
         checkForPassengers(self);
         return;
     }
+
     public void areaDebugMessaging(obj_id self, String message) throws InterruptedException
     {
         obj_id[] players = getAllPlayers(getLocation(self), 5.0f);
         if (players != null && players.length > 0)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 sendSystemMessage(player, message, "");
             }
         }
     }
+
     public int handleCheckForAllowedZones(obj_id self, dictionary params) throws InterruptedException
     {
         checkForAllowedZones(self);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         checkForAllowedZones(self);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         checkForAllowedZones(self);
         return SCRIPT_OVERRIDE;
     }
+
     public void debugMessaging(obj_id self, String message) throws InterruptedException
     {
         obj_id[] players = getAllPlayers(getLocation(self), 10.0f);
         if (players != null && players.length > 0)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 sendSystemMessage(player, message, "");
             }
         }
     }
+
     public void checkForAllowedZones(obj_id self) throws InterruptedException
     {
         String allowedZonesString = "all";
@@ -240,7 +255,7 @@ public class battlefield_vehicle extends script.base_script
         {
             allowedZonesString = utils.getStringScriptVar(self, "battlefield_vehicle.allowedZones");
         }
-        else 
+        else
         {
             allowedZonesString = dataTableGetString(TABLE, getVehicleType(self), "allowed_zones");
             utils.setScriptVar(self, "battlefield_vehicle.allowedZones", allowedZonesString);
@@ -252,18 +267,20 @@ public class battlefield_vehicle extends script.base_script
                 location here = getLocation(self);
                 String zone = here.area;
                 String[] allowedZones = split(allowedZonesString, ',');
-                for (String allowedZone : allowedZones) {
-                    if (allowedZone.equals(zone)) {
+                for (String allowedZone : allowedZones)
+                {
+                    if (allowedZone.equals(zone))
+                    {
                         allowedHere = true;
                     }
                 }
             }
-            else 
+            else
             {
                 allowedHere = true;
             }
         }
-        else 
+        else
         {
             allowedHere = true;
         }
@@ -273,11 +290,13 @@ public class battlefield_vehicle extends script.base_script
         }
         return;
     }
+
     public int destroyNow(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_OVERRIDE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id player) throws InterruptedException
     {
         checkForAllowedZones(self);
@@ -314,6 +333,7 @@ public class battlefield_vehicle extends script.base_script
         setBeastmasterPetCommands(player, abilities);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLostItem(obj_id self, obj_id destContainer, obj_id transferer, obj_id player) throws InterruptedException
     {
         setBeastmasterPet(player, null);
@@ -323,14 +343,17 @@ public class battlefield_vehicle extends script.base_script
         checkForAllowedZones(self);
         return SCRIPT_CONTINUE;
     }
+
     public void checkForPassengers(obj_id self) throws InterruptedException
     {
         int numPlayers = 0;
         obj_id[] stuff = getContents(self);
         if (stuff != null && stuff.length > 0)
         {
-            for (obj_id obj_id : stuff) {
-                if (isPlayer(obj_id)) {
+            for (obj_id obj_id : stuff)
+            {
+                if (isPlayer(obj_id))
+                {
                     ++numPlayers;
                 }
             }
@@ -341,17 +364,19 @@ public class battlefield_vehicle extends script.base_script
         }
         return;
     }
+
     public String getOverrideAttack(dictionary dict, boolean isDriver) throws InterruptedException
     {
         if (isDriver)
         {
             return dict.getString("driver_default_attack");
         }
-        else 
+        else
         {
             return dict.getString("gunner_default_attack");
         }
     }
+
     public String[] getVehicleCommands(dictionary dict, boolean isDriver) throws InterruptedException
     {
         String commandString = "none";
@@ -359,22 +384,22 @@ public class battlefield_vehicle extends script.base_script
         {
             commandString = dict.getString("driver_special_list");
         }
-        else 
+        else
         {
             commandString = dict.getString("gunner_special_list");
         }
-        String[] commandList = 
-        {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-        };
+        String[] commandList =
+                {
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                };
         if (commandString.equals("none"))
         {
             return commandList;
@@ -386,6 +411,7 @@ public class battlefield_vehicle extends script.base_script
         }
         return commandList;
     }
+
     public String getVehicleType(obj_id vehicle) throws InterruptedException
     {
         return utils.getTemplateFilenameNoPath(vehicle);

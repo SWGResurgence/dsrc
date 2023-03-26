@@ -10,12 +10,13 @@ import script.string_id;
 
 public class trap_ranged_def_1 extends script.item.trap.trap_base
 {
-    public trap_ranged_def_1()
-    {
-    }
     public static final int TRAP_DIFF = 10;
     public static final string_id SID_SYS_EFFECT = new string_id("trap/trap", "trap_ranged_def_1_effect");
     public static final string_id SID_NO_EFFECT = new string_id("trap/trap", "trap_effect_no");
+    public trap_ranged_def_1()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "droid_trap"))
@@ -26,6 +27,7 @@ public class trap_ranged_def_1 extends script.item.trap.trap_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trapHit(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -61,7 +63,7 @@ public class trap_ranged_def_1 extends script.item.trap.trap_base
                 startCombat(target, player);
             }
         }
-        else 
+        else
         {
             if (!ai_lib.isInCombat(target))
             {

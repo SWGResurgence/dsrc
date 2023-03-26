@@ -8,6 +8,7 @@ public class cybernetic_component_attribute extends script.base_script
     public cybernetic_component_attribute()
     {
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -26,7 +27,7 @@ public class cybernetic_component_attribute extends script.base_script
             names[idx] = "special_protection_type" + "_" + protectionString;
             float preAttrib = getFloatObjVar(self, "cybernetic.special_protection.value");
             preAttrib *= 100.0f;
-            int attrib = (int)preAttrib;
+            int attrib = (int) preAttrib;
             attribs[idx] = " " + attrib;
             idx++;
             if (idx >= names.length)
@@ -36,24 +37,25 @@ public class cybernetic_component_attribute extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public String getSpecialProtectionString(int protectionType) throws InterruptedException
     {
         switch (protectionType)
         {
             case 0:
-            return "kinetic";
+                return "kinetic";
             case 1:
-            return "energy";
+                return "energy";
             case 2:
-            return "electricity";
+                return "electricity";
             case 4:
-            return "heat";
+                return "heat";
             case 5:
-            return "cold";
+                return "cold";
             case 6:
-            return "acid";
+                return "acid";
             default:
-            return "unknown";
+                return "unknown";
         }
     }
 }

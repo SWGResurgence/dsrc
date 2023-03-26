@@ -6,10 +6,12 @@ import script.obj_id;
 
 public class combat_stress_test extends script.base_script
 {
+    public static final int START_COMBAT_DELAY = 300;
+
     public combat_stress_test()
     {
     }
-    public static final int START_COMBAT_DELAY = 300;
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         int intRoll = rand(1, 2);
@@ -26,12 +28,14 @@ public class combat_stress_test extends script.base_script
         pvpMakeDeclared(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAddedToWorld(obj_id self) throws InterruptedException
     {
         dictionary dctParams = new dictionary();
         messageTo(self, "start_combat", dctParams, START_COMBAT_DELAY, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (strText.equals("startCombat"))

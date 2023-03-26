@@ -8,6 +8,7 @@ public class navicomputer_control_device extends script.base_script
     public navicomputer_control_device()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (ai_lib.aiIsDead(player))
@@ -30,6 +31,7 @@ public class navicomputer_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (ai_lib.aiIsDead(player))
@@ -59,6 +61,7 @@ public class navicomputer_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (utils.hasLocalVar(self, "ctsBeingUnpacked"))
@@ -86,6 +89,7 @@ public class navicomputer_control_device extends script.base_script
         debugServerConsoleMsg(null, "navicomputer_control_device.OnAboutToReceiveItem ***************** Everything looked good. Sending a script-continue");
         return SCRIPT_CONTINUE;
     }
+
     public int OnGiveItem(obj_id self, obj_id item, obj_id player) throws InterruptedException
     {
         debugServerConsoleMsg(null, "**********  OnGiveItem trigger on the Navicomputer Control Device has fired.");
@@ -107,6 +111,7 @@ public class navicomputer_control_device extends script.base_script
         debugServerConsoleMsg(null, "navicomputer_control_device.OnGiveItem ***************** Everything looked good. Sending a script-continue");
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         obj_id datapad = getContainedBy(self);
@@ -122,6 +127,7 @@ public class navicomputer_control_device extends script.base_script
         sendSystemMessage(master, new string_id("pet/pet_menu", "device_added"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -145,17 +151,16 @@ public class navicomputer_control_device extends script.base_script
             {
                 return SCRIPT_CONTINUE;
             }
-
-            for (obj_id loadedDroidCommand : loadedDroidCommands) {
-
-                if (hasObjVar(loadedDroidCommand, "strDroidCommand")) {
+            for (obj_id loadedDroidCommand : loadedDroidCommands)
+            {
+                if (hasObjVar(loadedDroidCommand, "strDroidCommand"))
+                {
                     String programName = getStringObjVar(loadedDroidCommand, "strDroidCommand");
-
-
                     names[idx] = "droid_program";
                     attribs[idx] = utils.packStringId(new string_id("space/droid_commands", programName));
                     idx++;
-                    if (idx >= names.length) {
+                    if (idx >= names.length)
+                    {
                         return SCRIPT_CONTINUE;
                     }
                 }
@@ -163,11 +168,13 @@ public class navicomputer_control_device extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (!isIdValid(destContainer))

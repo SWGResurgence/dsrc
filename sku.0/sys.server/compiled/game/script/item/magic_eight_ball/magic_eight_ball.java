@@ -5,15 +5,18 @@ import script.library.sui;
 
 public class magic_eight_ball extends script.base_script
 {
+    public static final string_id SID_READ_OPTION = new string_id("sui", "read_option");
+
     public magic_eight_ball()
     {
     }
-    public static final string_id SID_READ_OPTION = new string_id("sui", "read_option");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_READ_OPTION);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.SERVER_MENU1)
@@ -22,12 +25,14 @@ public class magic_eight_ball extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void openFortuneWindow(obj_id self, obj_id player) throws InterruptedException
     {
         String title = "@magic_eight_ball:title";
         String prompt = "@magic_eight_ball:prompt1";
         int pid = sui.inputbox(self, player, prompt, title, "handleQuestion", 64, false, "");
     }
+
     public int handleQuestion(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);

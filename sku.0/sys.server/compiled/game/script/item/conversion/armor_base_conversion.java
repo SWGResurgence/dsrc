@@ -7,34 +7,35 @@ import script.library.utils;
 
 public class armor_base_conversion extends script.base_script
 {
+    public static final String ARMOR_SET_PREFIX = "object/tangible/wearables/armor/";
+    public static final String[] ARMOR_SET_ASSAULT =
+            {
+            };
+    public static final String[] ARMOR_SET_BATTLE =
+            {
+            };
+    public static final String[] ARMOR_SET_RECON =
+            {
+            };
+    public static final String[] ARMOR_TYPE =
+            {
+                    "Assault",
+                    "Battle",
+                    "Reconnaissance"
+            };
+    public static final String[] ASSAULT_TYPE =
+            {
+            };
+    public static final String[] BATTLE_TYPE =
+            {
+            };
+    public static final String[] RECON_TYPE =
+            {
+            };
     public armor_base_conversion()
     {
     }
-    public static final String ARMOR_SET_PREFIX = "object/tangible/wearables/armor/";
-    public static final String[] ARMOR_SET_ASSAULT = 
-    {
-    };
-    public static final String[] ARMOR_SET_BATTLE = 
-    {
-    };
-    public static final String[] ARMOR_SET_RECON = 
-    {
-    };
-    public static final String[] ARMOR_TYPE = 
-    {
-        "Assault",
-        "Battle",
-        "Reconnaissance"
-    };
-    public static final String[] ASSAULT_TYPE = 
-    {
-    };
-    public static final String[] BATTLE_TYPE = 
-    {
-    };
-    public static final String[] RECON_TYPE = 
-    {
-    };
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) == player)
@@ -43,6 +44,7 @@ public class armor_base_conversion extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) == player)
@@ -54,6 +56,7 @@ public class armor_base_conversion extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showConfirmationWindow(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -63,6 +66,7 @@ public class armor_base_conversion extends script.base_script
         int pid = sui.msgbox(self, player, prompt, sui.OK_CANCEL, title, 0, "handleConfirmationSelect");
         setWindowPid(player, pid);
     }
+
     public void refitArmor(obj_id player, String newItemTemplate, obj_id oldObject, int armorCategory) throws InterruptedException
     {
         obj_id pInv = utils.getInventoryContainer(player);
@@ -71,7 +75,7 @@ public class armor_base_conversion extends script.base_script
             sendSystemMessage(player, new string_id("quest_armorsmith", "inventory_full"));
             return;
         }
-        else 
+        else
         {
             if (newItemTemplate.length() < 1)
             {
@@ -112,19 +116,20 @@ public class armor_base_conversion extends script.base_script
                 {
                     setSkillModSockets(newObj, 1);
                 }
-                else 
+                else
                 {
                     setSkillModSockets(newObj, 0);
                 }
                 sendSystemMessage(player, new string_id("quest_armorsmith", "armor_issued"));
             }
-            else 
+            else
             {
                 CustomerServiceLog("armor_converion", "Server attempted to create Armor " + newItemTemplate + " for %TU but failed", player);
                 return;
             }
         }
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "refit_armor.pid"))
@@ -134,6 +139,7 @@ public class armor_base_conversion extends script.base_script
             utils.removeScriptVar(player, "refit_armor.pid");
         }
     }
+
     public void setWindowPid(obj_id player, int pid) throws InterruptedException
     {
         if (pid > -1)
@@ -141,6 +147,7 @@ public class armor_base_conversion extends script.base_script
             utils.setScriptVar(player, "refit_armor.pid", pid);
         }
     }
+
     public int handleConfirmationSelect(obj_id self, dictionary params) throws InterruptedException
     {
         String prompt = "Armor Types you may wear are assigned by Combat Profession. \n\n" + "Bounty Hunters, Commandos, Squad Leaders wear ASSAULT. \n\n" + "Swordsmen, Carbineers, Fencers, Pikemen, Combat Medics, Doctors wear BATTLE. \n\n" + "Pistoleers, Riflemen, Smugglers wear RECONNAISSANCE.";
@@ -157,6 +164,7 @@ public class armor_base_conversion extends script.base_script
         setWindowPid(player, pid);
         return SCRIPT_CONTINUE;
     }
+
     public int handleArmorType(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -182,24 +190,25 @@ public class armor_base_conversion extends script.base_script
         switch (idx)
         {
             case 0:
-            choices = getAssaultTypes();
-            handler = "handleAssaultSelect";
-            break;
+                choices = getAssaultTypes();
+                handler = "handleAssaultSelect";
+                break;
             case 1:
-            choices = getBattleTypes();
-            handler = "handleBattleSelect";
-            break;
+                choices = getBattleTypes();
+                handler = "handleBattleSelect";
+                break;
             case 2:
-            choices = getReconTypes();
-            handler = "handleReconSelect";
-            break;
+                choices = getReconTypes();
+                handler = "handleReconSelect";
+                break;
             default:
-            return SCRIPT_CONTINUE;
+                return SCRIPT_CONTINUE;
         }
         int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, choices, handler, true, false);
         setWindowPid(player, pid);
         return SCRIPT_CONTINUE;
     }
+
     public int handleAssaultSelect(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -222,6 +231,7 @@ public class armor_base_conversion extends script.base_script
         refitArmor(player, assaultTemplates[idx], self, AC_assault);
         return SCRIPT_CONTINUE;
     }
+
     public int handleBattleSelect(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -244,6 +254,7 @@ public class armor_base_conversion extends script.base_script
         refitArmor(player, battleTemplates[idx], self, AC_battle);
         return SCRIPT_CONTINUE;
     }
+
     public int handleReconSelect(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -266,26 +277,32 @@ public class armor_base_conversion extends script.base_script
         refitArmor(player, reconTemplates[idx], self, AC_reconnaissance);
         return SCRIPT_CONTINUE;
     }
+
     public String[] getAssaultTemplates() throws InterruptedException
     {
         return ARMOR_SET_ASSAULT;
     }
+
     public String[] getBattleTemplates() throws InterruptedException
     {
         return ARMOR_SET_BATTLE;
     }
+
     public String[] getReconTemplates() throws InterruptedException
     {
         return ARMOR_SET_RECON;
     }
+
     public String[] getAssaultTypes() throws InterruptedException
     {
         return ASSAULT_TYPE;
     }
+
     public String[] getBattleTypes() throws InterruptedException
     {
         return BATTLE_TYPE;
     }
+
     public String[] getReconTypes() throws InterruptedException
     {
         return RECON_TYPE;

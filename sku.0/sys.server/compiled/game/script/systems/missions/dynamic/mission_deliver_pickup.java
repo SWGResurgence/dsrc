@@ -11,11 +11,13 @@ public class mission_deliver_pickup extends script.systems.missions.base.mission
     public mission_deliver_pickup()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         attachScript(self, "npc.converse.npc_converse_menu");
@@ -24,6 +26,7 @@ public class mission_deliver_pickup extends script.systems.missions.base.mission
         ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         return SCRIPT_CONTINUE;
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "intKilled"))
@@ -37,6 +40,7 @@ public class mission_deliver_pickup extends script.systems.missions.base.mission
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartNpcConversation(obj_id self, obj_id speaker) throws InterruptedException
     {
         obj_id objMission = getObjIdObjVar(self, "objMission");
@@ -72,14 +76,14 @@ public class mission_deliver_pickup extends script.systems.missions.base.mission
             {
                 setObjVar(objMission, "intMissionComplete", 1);
             }
-            else 
+            else
             {
                 setupSpawn(objMission, locDropoffLocation);
             }
             updateMissionWaypoint(objMission, locDropoffLocation);
             messageTo(self, "destroySelf", null, 120, true);
         }
-        else 
+        else
         {
             string_id message = new string_id("mission/mission_generic", "deliver_already_picked_up");
             chat.chat(self, speaker, message);
@@ -88,6 +92,7 @@ public class mission_deliver_pickup extends script.systems.missions.base.mission
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

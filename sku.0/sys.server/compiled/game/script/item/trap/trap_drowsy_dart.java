@@ -9,12 +9,13 @@ import script.string_id;
 
 public class trap_drowsy_dart extends script.item.trap.trap_base
 {
-    public trap_drowsy_dart()
-    {
-    }
     public static final int TRAP_DIFF = 5;
     public static final string_id SID_SYS_EFFECT = new string_id("trap/trap", "trap_drowsy_effect");
     public static final string_id SID_NO_EFFECT = new string_id("trap/trap", "trap_drowsy_effect_no");
+    public trap_drowsy_dart()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, "droid_trap"))
@@ -25,6 +26,7 @@ public class trap_drowsy_dart extends script.item.trap.trap_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int trapHit(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -56,7 +58,7 @@ public class trap_drowsy_dart extends script.item.trap.trap_base
                 startCombat(target, player);
             }
         }
-        else 
+        else
         {
             if (!ai_lib.isInCombat(target))
             {

@@ -71,63 +71,63 @@ public class gcw extends script.base_script
     public static final int GCW_POINT_TYPE_ENTERTAINING = 8;
     public static final int GCW_POINT_TYPE_MAX = 9;
     public static final String[] validScenes =
-    {
-        "tatooine",
-        "corellia",
-        "dantooine",
-        "dathomir",
-        "endor",
-        "lok",
-        "naboo",
-        "rori",
-        "talus",
-        "yavin4",
-        "space_tatooine",
-        "space_corellia",
-        "space_dantooine",
-        "space_dathomir",
-        "space_endor",
-        "space_lok",
-        "space_naboo",
-        "space_yavin4",
-        "dxun",
-        "space_dxun"
-    };
+            {
+                    "tatooine",
+                    "corellia",
+                    "dantooine",
+                    "dathomir",
+                    "endor",
+                    "lok",
+                    "naboo",
+                    "rori",
+                    "talus",
+                    "yavin4",
+                    "space_tatooine",
+                    "space_corellia",
+                    "space_dantooine",
+                    "space_dathomir",
+                    "space_endor",
+                    "space_lok",
+                    "space_naboo",
+                    "space_yavin4",
+                    "dxun",
+                    "space_dxun"
+            };
     public static final String[] defaultRegions =
-    {
-        "gcw_region_tatooine_13",
-        "gcw_region_corellia_13",
-        "gcw_region_dantooine_16",
-        "gcw_region_dathomir_13",
-        "gcw_region_endor_15",
-        "gcw_region_lok_13",
-        "gcw_region_naboo_13",
-        "gcw_region_rori_13",
-        "gcw_region_talus_16",
-        "gcw_region_yavin4_17",
-        "gcw_region_tatooine_12",
-        "gcw_region_corellia_14",
-        "gcw_region_dantooine_17",
-        "gcw_region_dathomir_12",
-        "gcw_region_endor_16",
-        "gcw_region_lok_14",
-        "gcw_region_naboo_14",
-        "gcw_region_yavin4_18",
-        "gcw_region_dxun_15",
-        "gcw_region_dxun_16"
-    };
+            {
+                    "gcw_region_tatooine_13",
+                    "gcw_region_corellia_13",
+                    "gcw_region_dantooine_16",
+                    "gcw_region_dathomir_13",
+                    "gcw_region_endor_15",
+                    "gcw_region_lok_13",
+                    "gcw_region_naboo_13",
+                    "gcw_region_rori_13",
+                    "gcw_region_talus_16",
+                    "gcw_region_yavin4_17",
+                    "gcw_region_tatooine_12",
+                    "gcw_region_corellia_14",
+                    "gcw_region_dantooine_17",
+                    "gcw_region_dathomir_12",
+                    "gcw_region_endor_16",
+                    "gcw_region_lok_14",
+                    "gcw_region_naboo_14",
+                    "gcw_region_yavin4_18",
+                    "gcw_region_dxun_15",
+                    "gcw_region_dxun_16"
+            };
     public static final String[] pointTypes =
-    {
-        "pve",
-        "pvp",
-        "pvp_battlefield",
-        "pvp",
-        "space_pve",
-        "space_pvp",
-        "pve",
-        "trading",
-        "entertaining"
-    };
+            {
+                    "pve",
+                    "pvp",
+                    "pvp_battlefield",
+                    "pvp",
+                    "space_pve",
+                    "space_pvp",
+                    "pve",
+                    "trading",
+                    "entertaining"
+            };
     public static final float COLLECTION_DAMAGE_RATIO_MIN = 0.41f;
     public static final String PVP_PUSHBACK_REGION = "pvp_pushback";
     public static final String PVP_BATTLEFIELD_REGION = "pvp_battlefield";
@@ -693,21 +693,21 @@ public class gcw extends script.base_script
     public static boolean isGcwRestrictedSceneName(String scene) throws InterruptedException
     {
         String[] restrictedScene =
-        {
-            "kashyyyk_main",
-            "kashyyyk_north_dungeons",
-            "kashyyyk_pob_dungeons",
-            "kashyyyk_south_dungeons",
-            "kashyyyk_rryatt_trail",
-            "kashyyyk_hunting",
-            "space_light1",
-            "space_heavy1",
-            "dathomir",
-            "yavin4",
-            "endor",
-            "mustafar",
-            "dxun"
-        };
+                {
+                        "kashyyyk_main",
+                        "kashyyyk_north_dungeons",
+                        "kashyyyk_pob_dungeons",
+                        "kashyyyk_south_dungeons",
+                        "kashyyyk_rryatt_trail",
+                        "kashyyyk_hunting",
+                        "space_light1",
+                        "space_heavy1",
+                        "dathomir",
+                        "yavin4",
+                        "endor",
+                        "mustafar",
+                        "dxun"
+                };
         for (String s : restrictedScene) {
             if (s.equals(scene)) {
                 return true;
@@ -889,15 +889,15 @@ public class gcw extends script.base_script
         switch (inPhase)
         {
             case 1:
-            return (PHASE_2 + lastCapture) - getGameTime();
+                return (PHASE_2 + lastCapture) - getGameTime();
             case 2:
-            return (PHASE_3 + lastCapture) - getGameTime();
+                return (PHASE_3 + lastCapture) - getGameTime();
             case 3:
-            return (PHASE_4 + lastCapture) - getGameTime();
+                return (PHASE_4 + lastCapture) - getGameTime();
             case 4:
-            return (PHASE_5 + lastCapture) - getGameTime();
+                return (PHASE_5 + lastCapture) - getGameTime();
             default:
-            return -1;
+                return -1;
         }
     }
     public static String getPub30TimeToNextPhaseString(obj_id subject) throws InterruptedException
@@ -916,23 +916,23 @@ public class gcw extends script.base_script
         switch (currentPhase)
         {
             case 1:
-            newTime = getGameTime() - PHASE_2;
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 2;
+                newTime = getGameTime() - PHASE_2;
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 2;
             case 2:
-            newTime = getGameTime() - PHASE_3;
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 3;
+                newTime = getGameTime() - PHASE_3;
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 3;
             case 3:
-            newTime = getGameTime() - PHASE_4;
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 4;
+                newTime = getGameTime() - PHASE_4;
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 4;
             case 4:
-            newTime = getGameTime() - PHASE_5;
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 5;
+                newTime = getGameTime() - PHASE_5;
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 5;
             default:
-            return -1;
+                return -1;
         }
     }
     public static int regressPub30StaticBaseCapturePhase(obj_id subject) throws InterruptedException
@@ -946,23 +946,23 @@ public class gcw extends script.base_script
         switch (currentPhase)
         {
             case 2:
-            newTime = getGameTime();
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 1;
+                newTime = getGameTime();
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 1;
             case 3:
-            newTime = getGameTime() - PHASE_2;
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 2;
+                newTime = getGameTime() - PHASE_2;
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 2;
             case 4:
-            newTime = getGameTime() - PHASE_3;
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 3;
+                newTime = getGameTime() - PHASE_3;
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 3;
             case 5:
-            newTime = getGameTime() - PHASE_4;
-            setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
-            return 4;
+                newTime = getGameTime() - PHASE_4;
+                setPub30StaticBaseTimeSinceLastCapture(subject, newTime);
+                return 4;
             default:
-            return -1;
+                return -1;
         }
     }
     public static void clearCreditForKills(obj_id player) throws InterruptedException
@@ -1335,27 +1335,27 @@ public class gcw extends script.base_script
         switch (pointType)
         {
             case GCW_POINT_TYPE_GROUND_PVE:
-            CustomerServiceLog("GCW_points_ground_pve", "%TU has acquired " + pointValue + " points for defeating " + information + " in pve action", player);
-            break;
+                CustomerServiceLog("GCW_points_ground_pve", "%TU has acquired " + pointValue + " points for defeating " + information + " in pve action", player);
+                break;
             case GCW_POINT_TYPE_GROUND_PVP:
-            CustomerServiceLog("GCW_points_ground_pvp", "%TU has acquired " + pointValue + " points for defeating " + information + " in combat", player);
-            break;
+                CustomerServiceLog("GCW_points_ground_pvp", "%TU has acquired " + pointValue + " points for defeating " + information + " in combat", player);
+                break;
             case GCW_POINT_TYPE_GROUND_PVP_REGION:
-            CustomerServiceLog("GCW_points_ground_pvp_region", "%TU has acquired " + pointValue + " points in the " + information + " battlefield region.", player);
-            break;
+                CustomerServiceLog("GCW_points_ground_pvp_region", "%TU has acquired " + pointValue + " points in the " + information + " battlefield region.", player);
+                break;
             case GCW_POINT_TYPE_BASE_BUSTING:
-            CustomerServiceLog("GCW_points_player_base_busting", "%TU has acquired " + pointValue + " points for destroying " + information, player);
-            break;
+                CustomerServiceLog("GCW_points_player_base_busting", "%TU has acquired " + pointValue + " points for destroying " + information, player);
+                break;
             case GCW_POINT_TYPE_SPACE_PVE:
-            CustomerServiceLog("GCW_points_space_pve", "%TU has acquired " + pointValue + " points for destroying " + information, player);
-            break;
+                CustomerServiceLog("GCW_points_space_pve", "%TU has acquired " + pointValue + " points for destroying " + information, player);
+                break;
             case GCW_POINT_TYPE_SPACE_PVP:
-            CustomerServiceLog("GCW_points_space_pvp", "%TU has acquired " + pointValue + " points for defeating " + information + " in space combat", player);
-            break;
+                CustomerServiceLog("GCW_points_space_pvp", "%TU has acquired " + pointValue + " points for defeating " + information + " in space combat", player);
+                break;
             case GCW_POINT_TYPE_GROUND_QUEST:
-            CustomerServiceLog("GCW_points_ground_quest", "%TU has acquired " + pointValue + " points for completing the " + information + " groundquest", player);
+                CustomerServiceLog("GCW_points_ground_quest", "%TU has acquired " + pointValue + " points for completing the " + information + " groundquest", player);
             default:
-            break;
+                break;
         }
     }
     public static String getGcwCategory(int pointType) throws InterruptedException
@@ -1506,13 +1506,13 @@ public class gcw extends script.base_script
         switch (difficultyClass)
         {
             case 0:
-            return NORMAL_GCW_VALUE;
+                return NORMAL_GCW_VALUE;
             case 1:
-            return ELITE_GCW_VALUE;
+                return ELITE_GCW_VALUE;
             case 2:
-            return BOSS_GCW_VALUE;
+                return BOSS_GCW_VALUE;
             default:
-            return 0;
+                return 0;
         }
     }
     public static int getModifiedGcwPointValue(obj_id player, int passedValue) throws InterruptedException
@@ -1660,23 +1660,23 @@ public class gcw extends script.base_script
         switch (defLevel)
         {
             case 0:
-            return false;
+                return false;
             case 1:
-            if (atkLevel > 2)
-            {
-                return false;
-            }
+                if (atkLevel > 2)
+                {
+                    return false;
+                }
             case 2:
-            if (atkLevel > 3)
-            {
-                return false;
-            }
+                if (atkLevel > 3)
+                {
+                    return false;
+                }
             case 3:
-            break;
+                break;
             case 4:
-            break;
+                break;
             case 5:
-            break;
+                break;
         }
         return true;
     }
@@ -1827,22 +1827,22 @@ public class gcw extends script.base_script
         switch (quest_tier)
         {
             case 1:
-            tierValue = 0.03f;
-            break;
+                tierValue = 0.03f;
+                break;
             case 2:
-            tierValue = 0.039f;
-            break;
+                tierValue = 0.039f;
+                break;
             case 3:
-            tierValue = 0.047f;
-            break;
+                tierValue = 0.047f;
+                break;
             case 4:
-            tierValue = 0.054f;
-            break;
+                tierValue = 0.054f;
+                break;
             case 5:
-            tierValue = 0.06f;
-            break;
+                tierValue = 0.06f;
+                break;
             default:
-            break;
+                break;
         }
         return tierValue;
     }

@@ -8,23 +8,28 @@ import script.library.weapons;
 
 public class crafting_base_weapon extends script.systems.crafting.crafting_base
 {
+    public static final String VERSION = "v1.00.00";
+    public static final float MAX_STAT_INTENSITY = 1.00f;
     public crafting_base_weapon()
     {
     }
-    public static final String VERSION = "v1.00.00";
-    public static final float MAX_STAT_INTENSITY = 1.00f;
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (((itemAttribute.name).getAsciiId()).equals("attackSpeed") || ((itemAttribute.name).getAsciiId()).equals("attackCost")) {
+            if (((itemAttribute.name).getAsciiId()).equals("attackSpeed") || ((itemAttribute.name).getAsciiId()).equals("attackCost"))
+            {
                 itemAttribute.currentValue = (itemAttribute.minValue + itemAttribute.maxValue) - itemAttribute.currentValue;
             }
         }
         super.calcAndSetPrototypeProperties(prototype, itemAttributes, craftingValuesDictionary);
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         base_class.range_info rangeData = new base_class.range_info();
@@ -42,17 +47,22 @@ public class crafting_base_weapon extends script.systems.crafting.crafting_base
         int elementalValue = weapons.getElementalValueLow(weaponDat);
         int accuracy = 0;
         debugServerConsoleMsg(null, "Beginning assembly-phase prototype property setting");
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (!calcAndSetPrototypeProperty(prototype, itemAttribute)) {
-                switch (((itemAttribute.name).getAsciiId())) {
+            if (!calcAndSetPrototypeProperty(prototype, itemAttribute))
+            {
+                switch (((itemAttribute.name).getAsciiId()))
+                {
                     case "minDamage":
                         curCraftVal = itemAttribute.currentValue;
                         curMasterVal = weapons.getMinDamageHighCap(weaponDat);
                         curMaxVal = (curMasterVal * MAX_STAT_INTENSITY);
-                        if (curCraftVal > curMaxVal) {
+                        if (curCraftVal > curMaxVal)
+                        {
                             notifyStatCapped(curCraftVal, curMaxVal, "Minimum Damage", prototype);
                             curCraftVal = curMaxVal;
                         }
@@ -62,7 +72,8 @@ public class crafting_base_weapon extends script.systems.crafting.crafting_base
                         curCraftVal = itemAttribute.currentValue;
                         curMasterVal = weapons.getMaxDamageHighCap(weaponDat);
                         curMaxVal = (curMasterVal * MAX_STAT_INTENSITY);
-                        if (curCraftVal > curMaxVal) {
+                        if (curCraftVal > curMaxVal)
+                        {
                             notifyStatCapped(curCraftVal, curMaxVal, "Maximum Damage", prototype);
                             curCraftVal = curMaxVal;
                         }
@@ -72,7 +83,8 @@ public class crafting_base_weapon extends script.systems.crafting.crafting_base
                         curCraftVal = itemAttribute.currentValue;
                         curMasterVal = weapons.getSpeedLow(weaponDat);
                         curMaxVal = (float) Math.floor(curMasterVal / MAX_STAT_INTENSITY);
-                        if (curCraftVal < curMaxVal) {
+                        if (curCraftVal < curMaxVal)
+                        {
                             notifyStatCapped(curCraftVal / 100.0f, curMaxVal / 100.0f, "Attack Speed", prototype);
                             curCraftVal = curMaxVal;
                         }
@@ -82,7 +94,8 @@ public class crafting_base_weapon extends script.systems.crafting.crafting_base
                         curCraftVal = itemAttribute.currentValue;
                         curMasterVal = weapons.getWoundChanceHigh(weaponDat);
                         curMaxVal = (curMasterVal * MAX_STAT_INTENSITY);
-                        if (curCraftVal > curMaxVal) {
+                        if (curCraftVal > curMaxVal)
+                        {
                             notifyStatCapped(curCraftVal, curMaxVal, "Wound Chance", prototype);
                             curCraftVal = curMaxVal;
                         }
@@ -99,7 +112,8 @@ public class crafting_base_weapon extends script.systems.crafting.crafting_base
                         curCraftVal = itemAttribute.currentValue;
                         curMasterVal = weapons.getAttackCostLow(weaponDat);
                         curMaxVal = (float) Math.floor(curMasterVal / MAX_STAT_INTENSITY);
-                        if (curCraftVal < curMaxVal) {
+                        if (curCraftVal < curMaxVal)
+                        {
                             notifyStatCapped(curCraftVal, curMaxVal, "Attack Cost", prototype);
                             curCraftVal = curMaxVal;
                         }
@@ -115,7 +129,8 @@ public class crafting_base_weapon extends script.systems.crafting.crafting_base
                         curCraftVal = itemAttribute.currentValue;
                         curMasterVal = weapons.getElementalValueHigh(weaponDat);
                         curMaxVal = (curMasterVal * MAX_STAT_INTENSITY);
-                        if (curCraftVal > curMaxVal) {
+                        if (curCraftVal > curMaxVal)
+                        {
                             notifyStatCapped(curCraftVal, curMaxVal, "Elemental Value", prototype);
                             curCraftVal = curMaxVal;
                         }
@@ -133,7 +148,8 @@ public class crafting_base_weapon extends script.systems.crafting.crafting_base
         {
             int sockets = 0;
             int experimentModTotal = 0;
-            for (int mod : mods) {
+            for (int mod : mods)
+            {
                 experimentModTotal += mod;
             }
             if (experimentModTotal > craftinglib.socketThreshold)
@@ -169,6 +185,7 @@ public class crafting_base_weapon extends script.systems.crafting.crafting_base
         setConversionId(prototype, weapons.CONVERSION_VERSION);
         weapons.setWeaponData(prototype);
     }
+
     public void notifyStatCapped(float attemptedValue, float maxValue, String stat, obj_id prototype) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(getSelf());
@@ -184,6 +201,7 @@ public class crafting_base_weapon extends script.systems.crafting.crafting_base
         pp = prose.setDF(pp, maxValue);
         sendSystemMessageProse(player, pp);
     }
+
     public int OnFinalizeSchematic(obj_id self, obj_id player, obj_id prototype, draft_schematic schematic) throws InterruptedException
     {
         setConversionId(self, weapons.CONVERSION_VERSION);

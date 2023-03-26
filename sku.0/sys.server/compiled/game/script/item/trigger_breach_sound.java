@@ -5,13 +5,15 @@ import script.*;
 
 public class trigger_breach_sound extends script.base_script
 {
-    public trigger_breach_sound()
-    {
-    }
     public static final string_id SID_TURN_ON = new string_id("spam", "turn_on_sound_object");
     public static final string_id SID_TURN_OFF = new string_id("spam", "turn_off_sound_object");
     public static final String OBJVAR_SOUND_FILE = "soundFile";
     public static final String OBJVAR_IS_TURNED_ON = "itemIsOn";
+
+    public trigger_breach_sound()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (!utils.isInHouseCellSpace(self))
@@ -24,6 +26,7 @@ public class trigger_breach_sound extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id whoTriggeredMe) throws InterruptedException
     {
         if (!hasObjVar(self, OBJVAR_IS_TURNED_ON))
@@ -49,6 +52,7 @@ public class trigger_breach_sound extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isInHouseCellSpace(self))
@@ -59,12 +63,13 @@ public class trigger_breach_sound extends script.base_script
         {
             mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_TURN_ON);
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_TURN_OFF);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -74,17 +79,11 @@ public class trigger_breach_sound extends script.base_script
         }
         if (item == menu_info_types.SERVER_MENU1)
         {
-            if (!hasObjVar(self, OBJVAR_IS_TURNED_ON) || getIntObjVar(self, OBJVAR_IS_TURNED_ON) == 0)
-            {
-                toggleSound(self, true);
-            }
-            else 
-            {
-                toggleSound(self, false);
-            }
+            toggleSound(self, !hasObjVar(self, OBJVAR_IS_TURNED_ON) || getIntObjVar(self, OBJVAR_IS_TURNED_ON) == 0);
         }
         return SCRIPT_CONTINUE;
     }
+
     public boolean toggleSound(obj_id item, boolean turnOn) throws InterruptedException
     {
         if (turnOn)
@@ -95,7 +94,7 @@ public class trigger_breach_sound extends script.base_script
                 createTriggerVolume("itemBreach", 5.0f, true);
             }
         }
-        else 
+        else
         {
             setObjVar(item, OBJVAR_IS_TURNED_ON, false);
             if (hasTriggerVolume(item, "itemBreach"))

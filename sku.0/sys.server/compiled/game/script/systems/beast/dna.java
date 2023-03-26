@@ -9,16 +9,18 @@ import script.string_id;
 
 public class dna extends script.base_script
 {
+    public static final string_id SID_GOD_DNA_DATA = new string_id("incubator", "GODMODE_ADD_DATA");
+    public static final string_id SID_GOD_FIX = new string_id("incubator", "GODMODE_FIX_DATA");
     public dna()
     {
     }
-    public static final string_id SID_GOD_DNA_DATA = new string_id("incubator", "GODMODE_ADD_DATA");
-    public static final string_id SID_GOD_FIX = new string_id("incubator", "GODMODE_FIX_DATA");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleInitializeValues", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -76,6 +78,7 @@ public class dna extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleInitializeValues(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = utils.getContainingPlayer(self);

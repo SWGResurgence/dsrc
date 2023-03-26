@@ -7,6 +7,7 @@ public class tcg_stuffed_wampa extends script.base_script
     public tcg_stuffed_wampa()
     {
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -17,6 +18,7 @@ public class tcg_stuffed_wampa extends script.base_script
         mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("spam", "squeeze_rancor"));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player))

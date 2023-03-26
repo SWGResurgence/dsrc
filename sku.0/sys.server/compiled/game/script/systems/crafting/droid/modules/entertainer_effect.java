@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class entertainer_effect extends script.base_script
 {
-    public entertainer_effect()
-    {
-    }
     public static final String STF_FILE = "pet/droid_modules";
     public static final float EFFECT_RANGE = 30.0f;
     public static final String SCRIPT_VAR_EFFECTS_ON = "module_data.effects_on";
@@ -23,6 +20,10 @@ public class entertainer_effect extends script.base_script
     public static final String VAR_EFFECTS = "module_data.entertainer_effects";
     public static final String VAR_PROGRAMMED_EFFECTS = "module_data.programmed_effects";
     public static final String VAR_PROGRAMMED_EFFECT_DELAYS = "module_data.programmed_effect_delays";
+    public entertainer_effect()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(self) || ai_lib.aiIsDead(self))
@@ -52,6 +53,7 @@ public class entertainer_effect extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item != menu_info_types.SERVER_MENU7 && item != menu_info_types.SERVER_MENU8)
@@ -96,7 +98,7 @@ public class entertainer_effect extends script.base_script
                 utils.removeScriptVar(self, SCRIPT_VAR_EFFECTS_ON);
                 sendSystemMessage(player, new string_id(STF_FILE, "effects_off"));
             }
-            else 
+            else
             {
                 if (!hasObjVar(self, VAR_PROGRAMMED_EFFECTS))
                 {
@@ -120,6 +122,7 @@ public class entertainer_effect extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgEntertainerDroidEffectChange(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = getMaster(self);
@@ -142,7 +145,7 @@ public class entertainer_effect extends script.base_script
                 sendSystemMessage(master, new string_id(STF_FILE, "no_available_effects"));
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (row_selected >= 10)
                 {
@@ -159,12 +162,13 @@ public class entertainer_effect extends script.base_script
                 int pid = sui.listbox(self, master, "Select an effect.", sui.OK_CANCEL, "Effect Selection", dsrc, "msgEntertainerDroidEffectSlot");
             }
         }
-        else 
+        else
         {
             closeAllEffectSUI(master);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgEntertainerDroidEffectSlot(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = getMaster(self);
@@ -223,18 +227,19 @@ public class entertainer_effect extends script.base_script
                 setObjVar(pet_control, VAR_PROGRAMMED_EFFECT_DELAYS, delay_list);
                 displayCurrentEffects(self);
             }
-            else 
+            else
             {
                 utils.setScriptVar(master, SCRIPT_VAR_EFFECTS_DELAY, effect_selected);
                 int pid = sui.inputbox(self, master, "Input the time delay until the next effect is played.", "Delay Setting", "msgEntertainerDroidEffectDelay", 6, false, "");
             }
         }
-        else 
+        else
         {
             closeEffectSelectSUI(master);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgEntertainerDroidEffectDelay(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id master = getMaster(self);
@@ -270,7 +275,7 @@ public class entertainer_effect extends script.base_script
             displayCurrentEffects(self);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             obj_id pet_control = callable.getCallableCD(self);
             if (!isIdValid(pet_control))
@@ -296,6 +301,7 @@ public class entertainer_effect extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgNextEntertainerDroidEffect(obj_id self, dictionary params) throws InterruptedException
     {
         if (ai_lib.isAiDead(self))
@@ -361,7 +367,7 @@ public class entertainer_effect extends script.base_script
             {
                 i = 0;
             }
-            else 
+            else
             {
                 i++;
             }
@@ -372,13 +378,14 @@ public class entertainer_effect extends script.base_script
             messageTo(self, "msgNextEntertainerDroidEffect", params, delay, false);
             playEntertainerEffect(self, effect);
         }
-        else 
+        else
         {
             sendSystemMessage(master, new string_id(STF_FILE, "no_effects_program"));
             utils.removeScriptVar(self, SCRIPT_VAR_EFFECTS_ON);
         }
         return SCRIPT_CONTINUE;
     }
+
     public String[] getAvailableEffects(obj_id droid) throws InterruptedException
     {
         if (!isIdValid(droid))
@@ -399,7 +406,7 @@ public class entertainer_effect extends script.base_script
         available_effects.setSize(0);
         while (i <= pet_lib.LIGHTING_EFFECTS.length)
         {
-            int result = (int)((raw_effects % StrictMath.pow(10, i)) / StrictMath.pow(10, i - 1));
+            int result = (int) ((raw_effects % StrictMath.pow(10, i)) / StrictMath.pow(10, i - 1));
             if (result >= 1)
             {
                 available_effects = utils.addElement(available_effects, pet_lib.LIGHTING_EFFECTS[i - 1]);
@@ -410,7 +417,7 @@ public class entertainer_effect extends script.base_script
         {
             return null;
         }
-        else 
+        else
         {
             available_effects = utils.addElement(available_effects, "empty_slot");
             String[] _available_effects = new String[0];
@@ -422,6 +429,7 @@ public class entertainer_effect extends script.base_script
             return _available_effects;
         }
     }
+
     public void displayCurrentEffects(obj_id droid) throws InterruptedException
     {
         if (!isIdValid(droid))
@@ -465,6 +473,7 @@ public class entertainer_effect extends script.base_script
         utils.setScriptVar(master, SCRIPT_VAR_EFFECTS_SUI, pid);
         return;
     }
+
     public void closeAllEffectSUI(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -490,6 +499,7 @@ public class entertainer_effect extends script.base_script
         }
         return;
     }
+
     public void closeEffectSelectSUI(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -510,6 +520,7 @@ public class entertainer_effect extends script.base_script
         }
         return;
     }
+
     public void closeEffectDelaySUI(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -523,6 +534,7 @@ public class entertainer_effect extends script.base_script
         }
         return;
     }
+
     public String[] getProgrammedEffects(obj_id droid) throws InterruptedException
     {
         if (!isIdValid(droid))
@@ -540,6 +552,7 @@ public class entertainer_effect extends script.base_script
         }
         return effects_list;
     }
+
     public int[] getProgrammedDelays(obj_id droid) throws InterruptedException
     {
         if (!isIdValid(droid))
@@ -553,6 +566,7 @@ public class entertainer_effect extends script.base_script
         }
         return delay_list;
     }
+
     public void playEntertainerEffect(obj_id droid, String effect) throws InterruptedException
     {
         if (!isIdValid(droid))

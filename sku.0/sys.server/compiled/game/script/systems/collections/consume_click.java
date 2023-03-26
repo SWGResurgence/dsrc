@@ -5,9 +5,6 @@ import script.library.*;
 
 public class consume_click extends script.base_script
 {
-    public consume_click()
-    {
-    }
     public static final String OBJVAR_SLOT_NAME = "collection.slotName";
     public static final String VAR_ACCESS_DELAY = "delay.access_delay";
     public static final String COLLECTION_HANDLER = "modifySlot";
@@ -31,6 +28,10 @@ public class consume_click extends script.base_script
     public static final string_id SID_CONTROL_ACCESS_DELAY = new string_id("collection", "access_delay");
     public static final string_id SID_GCW_SENSITIVE_DATA = new string_id("collection", "gcw_sensitive_data");
     public static final string_id SID_GCW_NO_DATA = new string_id("collection", "gcw_no_data");
+    public consume_click()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id collectionItem = self;
@@ -47,12 +48,13 @@ public class consume_click extends script.base_script
                 }
             }
         }
-        else 
+        else
         {
             mi.addRootMenu(menu_info_types.ITEM_USE, SID_CONSUME_ITEM);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -73,14 +75,14 @@ public class consume_click extends script.base_script
                 sendSystemMessage(player, SID_GCW_SENSITIVE_DATA);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 if (utils.hasScriptVar(collectionItem, "collection.gcw_lockout_time"))
                 {
                     sendSystemMessage(player, SID_GCW_NO_DATA);
                     return SCRIPT_CONTINUE;
                 }
-                else 
+                else
                 {
                     isGCW = true;
                 }
@@ -99,7 +101,7 @@ public class consume_click extends script.base_script
                 sendSystemMessageProse(player, pp);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 utils.removeScriptVar(player, VAR_ACCESS_DELAY);
             }
@@ -169,13 +171,13 @@ public class consume_click extends script.base_script
                 utils.setScriptVar(player, "col.isGCW", 1);
             }
         }
-        else 
+        else
         {
             if (modifyCollectionSlotValue(player, slotName, 1))
             {
                 CustomerServiceLog("CollectionConsume: ", "collectionItem (" + collectionItem + ")" + " was consumed into a collection, for player " + getFirstName(player) + "(" + player + ").");
             }
-            else 
+            else
             {
                 CustomerServiceLog("CollectionConsume: ", "collectionItem (" + collectionItem + ")" + " was NOT consumed into a collection, for player " + getFirstName(player) + "(" + player + ").");
                 sendSystemMessage(player, SID_REPORT_CONSUME_ITEM_FAIL);
@@ -183,6 +185,7 @@ public class consume_click extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int removeGcwCollectionLockout(obj_id self, dictionary params) throws InterruptedException
     {
         utils.removeScriptVar(self, "collection.gcw_lockout_time");

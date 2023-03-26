@@ -15,6 +15,7 @@ public class fs_village_turret_ai extends script.systems.turret.generic_turret_a
     public fs_village_turret_ai()
     {
     }
+
     public float doAttack(obj_id target) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -28,7 +29,7 @@ public class fs_village_turret_ai extends script.systems.turret.generic_turret_a
         }
         float accuracy = getFloatObjVar(self, fs_dyn_village.OBJVAR_TURRET_ACCURACY);
         float speed = getFloatObjVar(self, fs_dyn_village.OBJVAR_TURRET_SPEED);
-        int power = (int)getFloatObjVar(self, fs_dyn_village.OBJVAR_TURRET_POWER);
+        int power = (int) getFloatObjVar(self, fs_dyn_village.OBJVAR_TURRET_POWER);
         int curHP = getHitpoints(self);
         if (curHP < 1)
         {
@@ -47,7 +48,7 @@ public class fs_village_turret_ai extends script.systems.turret.generic_turret_a
                 target = tmptarget;
                 turret.engageTarget(self, target);
             }
-            else 
+            else
             {
                 return 1.5f;
             }
@@ -84,14 +85,14 @@ public class fs_village_turret_ai extends script.systems.turret.generic_turret_a
         {
             cbtDefenderResults[0].result = COMBAT_RESULT_HIT;
         }
-        else 
+        else
         {
             cbtDefenderResults[0].result = COMBAT_RESULT_MISS;
         }
         hit_result[] cbtHitData = new hit_result[1];
         cbtHitData[0] = new hit_result();
         cbtHitData[0].success = false;
-        cbtHitData[0].baseRoll = (int)toHitRoll;
+        cbtHitData[0].baseRoll = (int) toHitRoll;
         cbtHitData[0].finalRoll = cbtHitData[0].baseRoll;
         cbtHitData[0].canSee = true;
         cbtHitData[0].hitLocation = combat_engine.getHitLocation(cbtDefenderData[0]);

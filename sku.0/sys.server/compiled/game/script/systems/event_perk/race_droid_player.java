@@ -7,32 +7,38 @@ import script.library.utils;
 
 public class race_droid_player extends script.base_script
 {
+    public static final String RACING_STF = "theme_park/racing/racing";
+
     public race_droid_player()
     {
     }
-    public static final String RACING_STF = "theme_park/racing/racing";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, "event_perk.racing.suppressMusic", 0);
         startRace(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnLogin(obj_id self) throws InterruptedException
     {
         messageTo(self, "handleCleanUp", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         setObjVar(self, "event_perk.racing.suppressMusic", 1);
         playMusic(self, "sound/music_silence.snd");
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         setObjVar(self, "event_perk.racing.suppressMusic", 0);
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String name) throws InterruptedException
     {
         float startTime = getFloatObjVar(self, "event_perk.racing.startTime");
@@ -99,6 +105,7 @@ public class race_droid_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int playRaceMusic(obj_id self, dictionary params) throws InterruptedException
     {
         int suppressMusic = getIntObjVar(self, "event_perk.racing.suppressMusic");
@@ -108,6 +115,7 @@ public class race_droid_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         removeMissionWaypoint(self);
@@ -115,6 +123,7 @@ public class race_droid_player extends script.base_script
         detachScript(self, "systems.event_perk.race_droid_player");
         return SCRIPT_CONTINUE;
     }
+
     public int handleRestartMission(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "event_perk.racing.success", 1);
@@ -122,6 +131,7 @@ public class race_droid_player extends script.base_script
         startRace(self);
         return SCRIPT_CONTINUE;
     }
+
     public int createReturnMission(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "event_perk.racing.waypoint"))
@@ -139,6 +149,7 @@ public class race_droid_player extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void startRace(obj_id player) throws InterruptedException
     {
         int missionNum = getIntObjVar(player, "event_perk.racing.missionNum");
@@ -154,12 +165,13 @@ public class race_droid_player extends script.base_script
             setObjVar(player, "event_perk.racing.waypointDesc", waypointDesc);
             addLocationTarget("checkPointOne", checkPointOne, 14);
         }
-        else 
+        else
         {
             string_id error = new string_id(RACING_STF, "waypoint_failure");
             sendSystemMessage(player, error);
         }
     }
+
     public obj_id createMissionWaypoint(obj_id player, location loc, float radius, String waypointName, String volumeName) throws InterruptedException
     {
         addLocationTarget(volumeName, loc, radius);
@@ -173,6 +185,7 @@ public class race_droid_player extends script.base_script
         }
         return waypoint;
     }
+
     public void removeMissionWaypoint(obj_id player) throws InterruptedException
     {
         obj_id waypoint = getObjIdObjVar(player, "event_perk.racing.waypoint");
@@ -192,6 +205,7 @@ public class race_droid_player extends script.base_script
         }
         return;
     }
+
     public int OnWaypointGetAttributes(obj_id self, obj_id waypoint, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         obj_id wp = getObjIdObjVar(player, "event_perk.racing.waypoint");

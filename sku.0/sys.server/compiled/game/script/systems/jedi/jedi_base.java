@@ -8,9 +8,6 @@ import java.util.Vector;
 
 public class jedi_base extends script.base_script
 {
-    public jedi_base()
-    {
-    }
     public static final int DAMAGE = 0;
     public static final int WOUNDS = 1;
     public static final int BATTLE_FATIGUE = NUM_ATTRIBUTES;
@@ -18,21 +15,25 @@ public class jedi_base extends script.base_script
     public static final int BLEEDING = 11;
     public static final int DISEASE = 12;
     public static final int POISON = 13;
-    public static final String[] STAT_STRINGS = 
+    public static final String[] STAT_STRINGS =
+            {
+                    "health",
+                    "constitution",
+                    "action",
+                    "stamina",
+                    "mind",
+                    "willpower",
+                    "battle_fatigue"
+            };
+    public static final String[] STAT_TYPE =
+            {
+                    "damage",
+                    "wounds"
+            };
+    public jedi_base()
     {
-        "health",
-        "constitution",
-        "action",
-        "stamina",
-        "mind",
-        "willpower",
-        "battle_fatigue"
-    };
-    public static final String[] STAT_TYPE = 
-    {
-        "damage",
-        "wounds"
-    };
+    }
+
     public void doJediHealingSpam(int intStat, int intDamageType, int intAmount, obj_id objPlayer, obj_id objTarget) throws InterruptedException
     {
         if (intStat < NUM_ATTRIBUTES)
@@ -52,7 +53,7 @@ public class jedi_base extends script.base_script
                     sendSystemMessageProse(objTarget, proseTest);
                 }
             }
-            else 
+            else
             {
                 string_id strSpam = new string_id("jedi_spam", "heal_self");
                 prose_package proseTest = prose.getPackage(strSpam, objPlayer, null, strStat, intAmount);
@@ -75,7 +76,7 @@ public class jedi_base extends script.base_script
                     sendSystemMessageProse(objTarget, proseTest);
                 }
             }
-            else 
+            else
             {
                 string_id strSpam = new string_id("jedi_spam", "heal_self");
                 prose_package proseTest = prose.getPackage(strSpam, objPlayer, null, strStat, intAmount);
@@ -92,7 +93,7 @@ public class jedi_base extends script.base_script
                     prose_package proseTest = prose.getPackage(strSpam, objTarget);
                     sendSystemMessageProse(objPlayer, proseTest);
                 }
-                else 
+                else
                 {
                     string_id strSpam = new string_id("jedi_spam", "staunch_bleeding_other");
                     prose_package proseTest = prose.getPackage(strSpam, objTarget);
@@ -122,7 +123,7 @@ public class jedi_base extends script.base_script
                     prose_package proseTest = prose.getPackage(strSpam, objTarget);
                     sendSystemMessageProse(objPlayer, proseTest);
                 }
-                else 
+                else
                 {
                     string_id strSpam = new string_id("jedi_spam", "staunch_disease_other");
                     prose_package proseTest = prose.getPackage(strSpam, objTarget);
@@ -140,7 +141,7 @@ public class jedi_base extends script.base_script
                     prose_package proseTest = prose.getPackage(strSpam, objTarget);
                     sendSystemMessageProse(objPlayer, proseTest);
                 }
-                else 
+                else
                 {
                     string_id strSpam = new string_id("jedi_spam", "staunch_poison_other");
                     prose_package proseTest = prose.getPackage(strSpam, objTarget);
@@ -150,81 +151,83 @@ public class jedi_base extends script.base_script
         }
         return;
     }
+
     public dictionary modifyJediHealDataFromAlignment(obj_id objPlayer, dictionary dctJediInfo) throws InterruptedException
     {
         float fltAlignmentModifier = jedi.getJediAlignmentModifier(objPlayer, dctJediInfo);
         int intMinMindHeal = dctJediInfo.getInt("intMinMindHeal");
         float fltTest = intMinMindHeal;
         fltTest = fltTest * fltAlignmentModifier;
-        intMinMindHeal = (int)fltTest;
+        intMinMindHeal = (int) fltTest;
         dctJediInfo.put("intMinMindHeal", intMinMindHeal);
         int intMaxMindHeal = dctJediInfo.getInt("intMaxMindHeal");
         fltTest = intMaxMindHeal;
         fltTest = fltTest * fltAlignmentModifier;
-        intMaxMindHeal = (int)fltTest;
+        intMaxMindHeal = (int) fltTest;
         dctJediInfo.put("intMaxMindHeal", intMaxMindHeal);
         int intMinMindWoundHeal = dctJediInfo.getInt("intMinMindWoundHeal");
         fltTest = intMinMindWoundHeal;
         fltTest = fltTest * fltAlignmentModifier;
-        intMinMindWoundHeal = (int)fltTest;
+        intMinMindWoundHeal = (int) fltTest;
         dctJediInfo.put("intMinMindWoundHeal", intMinMindWoundHeal);
         int intMaxMindWoundHeal = dctJediInfo.getInt("intMaxMindWoundHeal");
         fltTest = intMaxMindWoundHeal;
         fltTest = fltTest * fltAlignmentModifier;
-        intMaxMindWoundHeal = (int)fltTest;
+        intMaxMindWoundHeal = (int) fltTest;
         dctJediInfo.put("intMaxMindWoundHeal", intMaxMindWoundHeal);
         int intMinHealthHeal = dctJediInfo.getInt("intMinHealthHeal");
         fltTest = intMinHealthHeal;
         fltTest = fltTest * fltAlignmentModifier;
-        intMinHealthHeal = (int)fltTest;
+        intMinHealthHeal = (int) fltTest;
         dctJediInfo.put("intMinHealthHeal", intMinHealthHeal);
         int intMaxHealthHeal = dctJediInfo.getInt("intMaxHealthHeal");
         fltTest = intMaxHealthHeal;
         fltTest = fltTest * fltAlignmentModifier;
-        intMaxHealthHeal = (int)fltTest;
+        intMaxHealthHeal = (int) fltTest;
         dctJediInfo.put("intMaxHealthHeal", intMaxHealthHeal);
         int intMinHealthWoundHeal = dctJediInfo.getInt("intMinHealthWoundHeal");
         fltTest = intMinHealthWoundHeal;
         fltTest = fltTest * fltAlignmentModifier;
-        intMinHealthWoundHeal = (int)fltTest;
+        intMinHealthWoundHeal = (int) fltTest;
         dctJediInfo.put("intMinHealthWoundHeal", intMinHealthWoundHeal);
         int intMaxHealthWoundHeal = dctJediInfo.getInt("intMaxHealthWoundHeal");
         fltTest = intMaxHealthWoundHeal;
         fltTest = fltTest * fltAlignmentModifier;
-        intMaxHealthWoundHeal = (int)fltTest;
+        intMaxHealthWoundHeal = (int) fltTest;
         dctJediInfo.put("intMaxHealthWoundHeal", intMaxHealthWoundHeal);
         int intMinActionHeal = dctJediInfo.getInt("intMinActionHeal");
         fltTest = intMinActionHeal;
         fltTest = fltTest * fltAlignmentModifier;
-        intMinActionHeal = (int)fltTest;
+        intMinActionHeal = (int) fltTest;
         dctJediInfo.put("intMinActionHeal", intMinActionHeal);
         int intMaxActionHeal = dctJediInfo.getInt("intMaxActionHeal");
         fltTest = intMaxActionHeal;
         fltTest = fltTest * fltAlignmentModifier;
-        intMaxActionHeal = (int)fltTest;
+        intMaxActionHeal = (int) fltTest;
         dctJediInfo.put("intMaxActionHeal", intMaxActionHeal);
         int intMinActionWoundHeal = dctJediInfo.getInt("intMinActionWoundHeal");
         fltTest = intMinActionWoundHeal;
         fltTest = fltTest * fltAlignmentModifier;
-        intMinActionWoundHeal = (int)fltTest;
+        intMinActionWoundHeal = (int) fltTest;
         dctJediInfo.put("intMinActionWoundHeal", intMinActionWoundHeal);
         int intMaxActionWoundHeal = dctJediInfo.getInt("intMaxActionWoundHeal");
         fltTest = intMaxActionWoundHeal;
         fltTest = fltTest * fltAlignmentModifier;
-        intMaxActionWoundHeal = (int)fltTest;
+        intMaxActionWoundHeal = (int) fltTest;
         dctJediInfo.put("intMaxActionWoundHeal", intMaxActionWoundHeal);
         int intMinBattleFatigueHeal = dctJediInfo.getInt("intMinBattleFatigueHeal");
         fltTest = intMinBattleFatigueHeal;
         fltTest = fltTest * fltAlignmentModifier;
-        intMinBattleFatigueHeal = (int)fltTest;
+        intMinBattleFatigueHeal = (int) fltTest;
         dctJediInfo.put("intMinBattleFatigueHeal", intMinBattleFatigueHeal);
         int intMaxBattleFatigueHeal = dctJediInfo.getInt("intMaxBattleFatigueHeal");
         fltTest = intMaxBattleFatigueHeal;
         fltTest = fltTest * fltAlignmentModifier;
-        intMaxBattleFatigueHeal = (int)fltTest;
+        intMaxBattleFatigueHeal = (int) fltTest;
         dctJediInfo.put("intMaxBattleFatigueHeal", intMaxBattleFatigueHeal);
         return dctJediInfo;
     }
+
     public int performJediHealCommand(obj_id player, obj_id target, dictionary actionData) throws InterruptedException
     {
         final int BLEED_HEAL_STRENGTH = 250;
@@ -263,7 +266,7 @@ public class jedi_base extends script.base_script
                 }
                 healForceCost += healthToHeal * extraForceCost;
             }
-            if ((totalForceCost + (int)healForceCost) > jediForcePower)
+            if ((totalForceCost + (int) healForceCost) > jediForcePower)
             {
                 healForceCost = (jediForcePower - totalForceCost);
                 while (healthToHeal * extraForceCost > healForceCost)
@@ -278,7 +281,7 @@ public class jedi_base extends script.base_script
             if (healthToHeal > 0)
             {
                 boolHealedStats = true;
-                totalForceCost += (int)healForceCost;
+                totalForceCost += (int) healForceCost;
                 if (healthToHeal > 0)
                 {
                     healing.healDamage(player, target, HEALTH, healthToHeal);
@@ -299,7 +302,7 @@ public class jedi_base extends script.base_script
                 }
                 fatigueHealForceCost += fatigueToHeal * extraForceCost;
             }
-            if ((totalForceCost + (int)fatigueHealForceCost) > jediForcePower)
+            if ((totalForceCost + (int) fatigueHealForceCost) > jediForcePower)
             {
                 fatigueHealForceCost = jediForcePower - totalForceCost;
                 while (fatigueToHeal * extraForceCost > fatigueHealForceCost)
@@ -314,7 +317,7 @@ public class jedi_base extends script.base_script
             if (fatigueToHeal > 0)
             {
                 boolHealedBattleFatigue = true;
-                totalForceCost += (int)fatigueHealForceCost;
+                totalForceCost += (int) fatigueHealForceCost;
                 healShockWound(target, fatigueToHeal);
                 doJediHealingSpam(BATTLE_FATIGUE, WOUNDS, fatigueToHeal, player, target);
             }
@@ -331,7 +334,7 @@ public class jedi_base extends script.base_script
                     stateHealForceCost += healStates;
                 }
             }
-            if ((totalForceCost + (int)stateHealForceCost) > jediForcePower)
+            if ((totalForceCost + (int) stateHealForceCost) > jediForcePower)
             {
                 stateHealForceCost = jediForcePower - totalForceCost;
                 while (stateHealForceCost > jediForcePower - totalForceCost)
@@ -407,7 +410,7 @@ public class jedi_base extends script.base_script
         {
             jedi.playJediActionEffect(player, target, actionData);
         }
-        else 
+        else
         {
             totalForceCost = 0;
             if (target != player)
@@ -415,7 +418,7 @@ public class jedi_base extends script.base_script
                 string_id strSpam = new string_id("jedi_spam", "no_damage_heal_other");
                 sendSystemMessage(player, strSpam);
             }
-            else 
+            else
             {
                 string_id strSpam = new string_id("jedi_spam", "no_damage_heal_self");
                 sendSystemMessage(player, strSpam);
@@ -423,6 +426,7 @@ public class jedi_base extends script.base_script
         }
         return totalForceCost;
     }
+
     public boolean doJediHealCommand(obj_id self, obj_id target, String strCommand) throws InterruptedException
     {
         int intCommand = getStringCrc(strCommand);
@@ -487,7 +491,7 @@ public class jedi_base extends script.base_script
             pvpHelpPerformed(self, target);
             jedi.doJediNonCombatAnimation(self, target, dctJediInfo);
             int health_after = getAttrib(target, HEALTH);
-            int health_delta = (int)((health_after - health_before) * 0.5f);
+            int health_delta = (int) ((health_after - health_before) * 0.5f);
             healing._addMedicalHate(self, target, health_delta);
             int xpOverride = dctJediInfo.getInt("xpOverride");
             if (xpOverride < 0)
@@ -497,23 +501,24 @@ public class jedi_base extends script.base_script
             jedi.grantJediXP(self, xpOverride);
             stealth.testInvisNonCombatAction(self, target);
         }
-        else 
+        else
         {
             return false;
         }
         return true;
     }
+
     public void findNewSkillTrainer(obj_id self) throws InterruptedException
     {
-        final String[] TRAINER_TYPES = 
-        {
-            "trainer_brawler",
-            "trainer_artisan",
-            "trainer_scout",
-            "trainer_marksman",
-            "trainer_entertainer",
-            "trainer_medic"
-        };
+        final String[] TRAINER_TYPES =
+                {
+                        "trainer_brawler",
+                        "trainer_artisan",
+                        "trainer_scout",
+                        "trainer_marksman",
+                        "trainer_entertainer",
+                        "trainer_medic"
+                };
         location locTest = getLocation(self);
         if (locTest.area.equals("tutorial"))
         {
@@ -526,11 +531,13 @@ public class jedi_base extends script.base_script
         Vector mapLocations = new Vector();
         mapLocations.setSize(0);
         location testloc = new location();
-        for (map_location rawMapLocation : rawMapLocations) {
+        for (map_location rawMapLocation : rawMapLocations)
+        {
             testloc.x = rawMapLocation.getX();
             testloc.z = rawMapLocation.getY();
             testloc.area = getLocation(self).area;
-            if (getCityAtLocation(testloc, 0) > 0) {
+            if (getCityAtLocation(testloc, 0) > 0)
+            {
                 continue;
             }
             mapLocations = utils.addElement(mapLocations, rawMapLocation);
@@ -543,13 +550,15 @@ public class jedi_base extends script.base_script
         locTest.y = 0;
         Vector locNewLocations = new Vector();
         locNewLocations.setSize(0);
-        for (Object mapLocation : mapLocations) {
+        for (Object mapLocation : mapLocations)
+        {
             location locNewLocation = new location();
             locNewLocation.area = locTest.area;
             locNewLocation.x = ((map_location) mapLocation).getX();
             locNewLocation.z = ((map_location) mapLocation).getY();
             float fltDistance = getDistance(locTest, locNewLocation);
-            if (fltDistance > 128) {
+            if (fltDistance > 128)
+            {
                 locNewLocations = utils.addElement(locNewLocations, locNewLocation);
             }
         }
@@ -558,7 +567,7 @@ public class jedi_base extends script.base_script
             removeObjVar(self, "jedi.locTrainerLocation");
             return;
         }
-        location locFinalLocation = ((location)locNewLocations.get(rand(0, locNewLocations.size() - 1)));
+        location locFinalLocation = ((location) locNewLocations.get(rand(0, locNewLocations.size() - 1)));
         setObjVar(self, "jedi.locTrainerLocation", locFinalLocation);
         string_id strSpam = new string_id("jedi_spam", "trainer_updated");
         sendSystemMessage(self, strSpam);

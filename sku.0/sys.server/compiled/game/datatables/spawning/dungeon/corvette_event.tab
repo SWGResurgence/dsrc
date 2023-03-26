@@ -1,0 +1,54 @@
+spawns	name	room	loc_x	loc_y	loc_z	script	yaw	mood	respawn_time	spawn_objvar	special_room	special_room_script	room_objvar	room_objvar_name	room_objvar_value
+s	s	s	f	f	f	s	f	s	i	s	s	s	s	s	s
+object/tangible/terminal/terminal_elevator_up.iff		elevator18	5	0	-13.4		180				elevator57	theme_park.dungeon.corvette.locked	"string:room=elevator57,int:corvette.door_quest=1"
+object/tangible/terminal/terminal_elevator_down.iff		elevator18	5	12	-13.4		180				meetingroom38	theme_park.dungeon.corvette.locked	"string:room=meetingroom38,int:corvette.door_quest=1"
+object/tangible/terminal/terminal_elevator_up.iff		elevator19	0	-12	37.67		180				bridge66	theme_park.dungeon.corvette.locked	string:room=bridge66
+object/tangible/terminal/terminal_elevator_down.iff		elevator19	0	0	37.67		180				officerquarters64	theme_park.dungeon.corvette.locked	string:room=officerquarters64
+object/tangible/terminal/terminal_elevator_down.iff		elevator56	18	-12	120.63		180				officerquarters65	theme_park.dungeon.corvette.locked	string:room=officerquarters65
+object/tangible/terminal/terminal_elevator_up.iff		elevator56	18	-24	120.63		180				armorybackroom55	theme_park.dungeon.corvette.locked	string:room=armorybackroom55
+object/tangible/terminal/terminal_elevator_up.iff		elevator57	-18	-12	120.67		180				officerquarters63	theme_park.dungeon.corvette.locked	string:room=officerquarters63
+object/tangible/terminal/terminal_elevator_down.iff		elevator57	-18	0	120.67		180				airlock1	theme_park.dungeon.corvette.setup
+object/tangible/terminal/terminal_geo_bunker.iff	console	hall4	-10.02	0	5.8	theme_park.dungeon.corvette.escape					self	theme_park.dungeon.corvette.dungeon_timer
+object/tangible/terminal/terminal_geo_bunker.iff	broken	hall10	20.04	0	45.2		-176.05				hall2	theme_park.dungeon.corvette.setup
+object/tangible/terminal/terminal_geo_bunker.iff	console	hall10	19.89	0	4.8	theme_park.dungeon.corvette.escape	0.99
+object/tangible/terminal/terminal_geo_bunker.iff	console	escapepods34	24.95	-12	-20.2	theme_park.dungeon.corvette.escape	0.21
+object/tangible/terminal/terminal_geo_bunker.iff	console	escapepods34	25.02	-12	36.2	theme_park.dungeon.corvette.escape	-178.82
+object/tangible/terminal/terminal_geo_bunker.iff	console	escapepods39	-25.02	-12	36.17	theme_park.dungeon.corvette.escape	-178.85
+object/tangible/terminal/terminal_geo_bunker.iff	console	escapepods39	-25.06	-12	-20.19	theme_park.dungeon.corvette.escape	-0.88
+object/tangible/dungeon/keypad_terminal.iff	keypad	hall53	-16.9	-10.8	115.65	theme_park.dungeon.corvette.keypad	180			"string:room=elevator57,int:vette.door_quest=1"
+object/tangible/dungeon/keypad_terminal.iff	keypad	hall62	1.75	1.2	129.5	theme_park.dungeon.corvette.keypad	-90			string:room=officerquarters64
+object/tangible/dungeon/keypad_terminal.iff	keypad	hall62	-1.75	1.2	126.53	theme_park.dungeon.corvette.keypad	90			string:room=officerquarters65
+object/tangible/dungeon/keypad_terminal.iff	keypad	hall62	1.1	1.2	142.57	theme_park.dungeon.corvette.keypad	180			string:room=bridge66
+object/tangible/dungeon/keypad_terminal.iff	keypad	hall61	16.9	1.2	115.75	theme_park.dungeon.corvette.keypad	180			string:room=officerquarters63
+object/tangible/dungeon/keypad_terminal.iff	keypad	armory54	-9.35	-10.8	128.65	theme_park.dungeon.corvette.keypad	180			string:room=armorybackroom55
+object/tangible/dungeon/keypad_terminal.iff	keypad	hall37	-13.05	-10.8	6.65	theme_park.dungeon.corvette.keypad	270			"string:room=meetingroom38,int:vette.door_quest=1"
+object/tangible/dungeon/computer_mainframe.iff		radarroom46	-15.4	-12	66.65	theme_park.dungeon.corvette.computer				string:computer=six
+object/tangible/dungeon/computer_mainframe.iff		navroom45	26.2	-12	65.84	theme_park.dungeon.corvette.computer				string:computer=seven
+object/tangible/container/general/tech_armoire.iff		spawnroom49	22.74	-12	52.08	theme_park.dungeon.corvette.loot	-90
+object/tangible/dungeon/computer_mainframe.iff	Hyperdrive Console	hyperdrive47	5.2	-12	69.7	theme_park.dungeon.corvette.hyperdrive	0
+object/tangible/dungeon/computer_mainframe.iff		lowerturret60	-1.6	-27	78.5	theme_park.dungeon.corvette.computer	0			string:computer=eight
+object/tangible/container/general/tech_armoire.iff		armorybackroom55	12.9	-12	132.97	theme_park.dungeon.corvette.loot	-90
+object/tangible/dungeon/computer_desktop.iff		thrusterroom24	8.21	0.8	-36.11	theme_park.dungeon.corvette.computer	-90			string:computer=one
+object/tangible/dungeon/computer_desktop.iff		thrusterroom24	8.21	0.77	-41.03	theme_park.dungeon.corvette.computer	-90			string:computer=two
+object/tangible/dungeon/computer_desktop.iff		thrusterroom24	-8.5	0.75	-36.54	theme_park.dungeon.corvette.computer	90			string:computer=three
+object/tangible/dungeon/computer_desktop.iff		thrusterroom24	-8.4	0.75	-40.89	theme_park.dungeon.corvette.computer	90			string:computer=four
+object/tangible/dungeon/computer_desktop.iff		vipquarters22	2.81	12.75	4.73	theme_park.dungeon.corvette.computer	180			string:computer=five
+object/tangible/dungeon/computer_mainframe.iff	SECURITY CONSOLE	thrustersubroom28	-4.5	-14	-36.24	theme_park.dungeon.corvette.meetingroomopen	180
+object/tangible/dungeon/wall_terminal_s4.iff		bridge66	-7.5	0	152	theme_park.dungeon.corvette.engine	90
+object/tangible/dungeon/computer_mainframe.iff	Fuel Intake Control	thrustersubroom27	-8.5	-6.7	-38.11	theme_park.dungeon.corvette.fuel	180
+object/tangible/container/loot/astromech_container.iff	spare droid (for parts)	spawnroom8	-13.9	0	51.44	theme_park.dungeon.corvette.r2_loot	90
+object/tangible/container/general/tech_chest.iff		vipquarters21	0.5	12	-8.91	theme_park.dungeon.corvette.disk_loot	0
+object/tangible/container/general/tech_armoire.iff		vipquarters22	5.9	12	13.2	theme_park.dungeon.corvette.loot	270
+object/tangible/dungeon/terminal_free_s1.iff	Elevator Control	meetingroom38	-11.9	-12	4.29	theme_park.dungeon.corvette.elevatoropen	90
+object/tangible/container/loot/astromech_container.iff		spawnroom49	22.1	-12	51.87	theme_park.dungeon.corvette.loot	0
+protocol_droid_3po		bridge66	3	0.2	151.41	theme_park.dungeon.corvette.path	-5.89
+protocol_droid_3po_red		spawnroom49	20.61	-12	50.32	theme_park.dungeon.corvette.path	-177.83
+protocol_droid_3po_silver		messhall33	3.17	-12	6.62	theme_park.dungeon.corvette.path	90.79
+r2		radarroom46	-18.86	-12	66.59	theme_park.dungeon.corvette.path	86.2
+r3		thrustersubroom28	5.58	-14	-36.82	theme_park.dungeon.corvette.broken_droid
+r3		hall10	19.92	0	16.15	theme_park.dungeon.corvette.path	0.44
+r2		thrusterroom24	-6.71	-14	-54.59	theme_park.dungeon.corvette.path	95.32
+r5		thrustersubroom27	-0.81	-6.7	-36.36	theme_park.dungeon.corvette.path	-119.65
+r3		bridge66	-4.68	0	146.7	theme_park.dungeon.corvette.path	0
+r4		escapepods34	11.88	-12	-15.89	theme_park.dungeon.corvette.path	-89.91
+clone_droid		airlock1	-41.5	0	2.6	"ai.ai,ai.creature_combat,systems.combat.combat_actions_humanoid,systems.skills.stealth.player_stealth,conversation.clone_droid,systems.combat.credit_for_kills"	-170		20

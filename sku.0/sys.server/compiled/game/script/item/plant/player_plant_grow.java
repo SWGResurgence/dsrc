@@ -9,9 +9,6 @@ import script.string_id;
 
 public class player_plant_grow extends script.base_script
 {
-    public player_plant_grow()
-    {
-    }
     public static final String VAR_CRITICAL_ATTRIBS = "plant_grow.critical_attribs";
     public static final String VAR_WATER_LEVEL = "plant_grow.water_level";
     public static final String VAR_IDEAL_WATER_LEVEL = "plant_grow.water_level_ideal";
@@ -23,11 +20,16 @@ public class player_plant_grow extends script.base_script
     public static final String VAR_FRUIT = "plant_grow.fruit";
     public static final String VAR_GROWTH = "plant_grow.growth";
     public static final String VAR_SIZE = "plant_grow.size";
+    public player_plant_grow()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         detachScript(self, "item.plant.player_plant_grow");
         return SCRIPT_CONTINUE;
     }
+
     public int msgPlantResourceSelected(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, "item.plant.player_plant_grow");
@@ -41,7 +43,7 @@ public class player_plant_grow extends script.base_script
             nutrient_list = utils.getStringArrayScriptVar(self, "plant_grow.nutrient_list");
             utils.removeScriptVar(self, "plant_grow.nutrient_list");
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
@@ -51,7 +53,7 @@ public class player_plant_grow extends script.base_script
             plant = utils.getObjIdScriptVar(self, "plant_grow.plant");
             utils.removeScriptVar(self, "plant_grow.plant");
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
@@ -61,7 +63,7 @@ public class player_plant_grow extends script.base_script
             container_list = utils.getObjIdArrayScriptVar(self, "plant_grow.container_list");
             utils.removeScriptVar(self, "plant_grow.container_list");
         }
-        else 
+        else
         {
             return SCRIPT_CONTINUE;
         }
@@ -144,7 +146,7 @@ public class player_plant_grow extends script.base_script
             setObjVar(plant, VAR_NUTRIENT_QUALITY, new_quality);
             sendSystemMessage(self, new string_id("plant_grow", "apply_nutrients"));
         }
-        else 
+        else
         {
             if (water_level > 100)
             {
@@ -161,7 +163,7 @@ public class player_plant_grow extends script.base_script
         {
             destroyObject(container);
         }
-        else 
+        else
         {
             removeResourceFromContainer(container, resource_type, 25);
         }

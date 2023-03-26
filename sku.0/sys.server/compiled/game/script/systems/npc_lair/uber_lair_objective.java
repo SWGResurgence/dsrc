@@ -9,6 +9,7 @@ public class uber_lair_objective extends script.base_script
     public uber_lair_objective()
     {
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         location death = getLocation(self);
@@ -22,11 +23,13 @@ public class uber_lair_objective extends script.base_script
         messageTo(objPoi, "handleTargetDestroyed", null, 0, true);
         return SCRIPT_CONTINUE;
     }
+
     public int destroyDisabledLair(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         int curHP = getHitpoints(self);
@@ -43,7 +46,7 @@ public class uber_lair_objective extends script.base_script
                     setObjVar(self, "playingEffect", 1);
                     messageTo(self, "effectManager", null, 15, true);
                 }
-                else 
+                else
                 {
                     location death = getLocation(self);
                     setObjVar(self, "playingEffect", 1);
@@ -53,6 +56,7 @@ public class uber_lair_objective extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int effectManager(obj_id self, dictionary params) throws InterruptedException
     {
         removeObjVar(self, "playingEffect");

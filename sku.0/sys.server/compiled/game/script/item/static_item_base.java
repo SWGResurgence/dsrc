@@ -1,19 +1,19 @@
 package script.item;
 
-import script.dictionary;
+import script.*;
 import script.library.*;
-import script.obj_id;
-import script.string_id;
 
 public class static_item_base extends script.base_script
 {
-    public static_item_base()
-    {
-    }
     public static final string_id SID_ITEM_LEVEL_TOO_LOW = new string_id("base_player", "level_too_low");
     public static final string_id SID_ITEM_NOT_ENOUGH_SKILL = new string_id("base_player", "not_correct_skill");
     public static final string_id SID_ITEM_MUST_NOT_BE_EQUIP = new string_id("base_player", "not_while_equipped");
     public static final string_id SID_ITEM_NO_UNIQUE_TRANSFER = new string_id("base_player", "unique_no_transfer");
+
+    public static_item_base()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         dictionary itemData = static_item.getMasterItemDictionary(self);
@@ -28,12 +28,13 @@ public class static_item_base extends script.base_script
             messageTo(self, "handlerVersionUpdate", itemData, 0.1f, true);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             static_item.initializeObject(self, itemData);
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         boolean canTransfer = true;
@@ -109,9 +110,12 @@ public class static_item_base extends script.base_script
             obj_id[] destContents = getContents(destContainer);
             if (destContents != null && destContents.length > 0)
             {
-                for (obj_id destContent : destContents) {
-                    if (static_item.isStaticItem(destContent)) {
-                        if ((getStaticItemName(destContent)).equals(getStaticItemName(self))) {
+                for (obj_id destContent : destContents)
+                {
+                    if (static_item.isStaticItem(destContent))
+                    {
+                        if ((getStaticItemName(destContent)).equals(getStaticItemName(self)))
+                        {
                             canTransfer = false;
                         }
                     }
@@ -129,6 +133,7 @@ public class static_item_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         if (isIdValid(destContainer) && isPlayer(destContainer))
@@ -141,6 +146,7 @@ public class static_item_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (isPlayer(getContainedBy(self)))
@@ -152,6 +158,7 @@ public class static_item_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int free = getFirstFreeIndex(names);
@@ -168,14 +175,14 @@ public class static_item_base extends script.base_script
         switch (itemData.getInt("type"))
         {
             case 1:
-            typeData = static_item.getStaticItemWeaponDictionary(self);
-            break;
+                typeData = static_item.getStaticItemWeaponDictionary(self);
+                break;
             case 2:
-            typeData = static_item.getStaticArmorDictionary(self);
-            break;
+                typeData = static_item.getStaticArmorDictionary(self);
+                break;
             case 3:
-            typeData = static_item.getStaticItemDictionary(self);
-            break;
+                typeData = static_item.getStaticItemDictionary(self);
+                break;
         }
         if (typeData == null)
         {
@@ -225,7 +232,7 @@ public class static_item_base extends script.base_script
             {
                 attribs[free] = "0";
             }
-            else 
+            else
             {
                 attribs[free] = utils.assembleTimeRemainToUse(time_remaining);
             }
@@ -258,43 +265,47 @@ public class static_item_base extends script.base_script
         {
             names[free] = "armor_category";
             attribs[free++] = utils.packStringId(new string_id("obj_attr_n", "special"));
-            String[][] entries = 
+            String[][] entries =
+                    {
+
+                            {
+                                    "kinetic",
+                                    "energy"
+                            },
+
+                            {
+                                    "heat",
+                                    "cold",
+                                    "acid",
+                                    "electricity"
+                            }
+                    };
+            String[] protections =
+                    {
+                            "kinetic",
+                            "energy",
+                            "heat",
+                            "cold",
+                            "acid",
+                            "electricity"
+                    };
+            String[] tooltipProtections =
+                    {
+                            "armor_eff_kinetic",
+                            "armor_eff_energy",
+                            "armor_eff_elemental_heat",
+                            "armor_eff_elemental_cold",
+                            "armor_eff_elemental_acid",
+                            "armor_eff_elemental_electrical"
+                    };
+            for (String[] entry : entries)
             {
-                
+                for (String s : entry)
                 {
-                    "kinetic",
-                    "energy"
-                },
-                
-                {
-                    "heat",
-                    "cold",
-                    "acid",
-                    "electricity"
-                }
-            };
-            String[] protections = 
-            {
-                "kinetic",
-                "energy",
-                "heat",
-                "cold",
-                "acid",
-                "electricity"
-            };
-            String[] tooltipProtections = 
-            {
-                "armor_eff_kinetic",
-                "armor_eff_energy",
-                "armor_eff_elemental_heat",
-                "armor_eff_elemental_cold",
-                "armor_eff_elemental_acid",
-                "armor_eff_elemental_electrical"
-            };
-            for (String[] entry : entries) {
-                for (String s : entry) {
-                    if (free < names.length) {
-                        if (hasObjVar(self, "armor.fake_armor." + s)) {
+                    if (free < names.length)
+                    {
+                        if (hasObjVar(self, "armor.fake_armor." + s))
+                        {
                             int displayedProtections = getIntObjVar(self, "armor.fake_armor." + s);
                             names[free] = (String) (armor.SPECIAL_PROTECTION_MAP.get(s));
                             attribs[free++] = Integer.toString(displayedProtections);
@@ -355,11 +366,13 @@ public class static_item_base extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlerVersionUpdate(obj_id self, dictionary params) throws InterruptedException
     {
         static_item.versionUpdate(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int handleStaticReEquipItem(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -368,6 +381,26 @@ public class static_item_base extends script.base_script
         }
         obj_id player = params.getObjId("player");
         equip(self, player);
+        return SCRIPT_CONTINUE;
+    }
+    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
+    {
+        if (isGod(player))
+        {
+            mi.addRootMenu(menu_info_types.SERVER_MENU50, new string_id("[GodMode] Reinitialize Static Item"));
+        }
+        return SCRIPT_CONTINUE;
+    }
+    public int OnObjectMenuSelect(obj_id self, obj_id player, int mi) throws InterruptedException
+    {
+        if (isGod(player))
+        {
+            if (mi == menu_info_types.SERVER_MENU50)
+            {
+                dictionary itemData = static_item.getMasterItemDictionary(self);
+                static_item.initializeObject(self, itemData);
+            }
+        }
         return SCRIPT_CONTINUE;
     }
 }

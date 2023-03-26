@@ -10,12 +10,13 @@ import java.util.Vector;
 
 public class ai_controller extends script.base_script
 {
-    public ai_controller()
-    {
-    }
     public static final String PATH = "patrol_path";
     public static final String MOVETO = "moveTo";
     public static final boolean LOGGING = true;
+    public ai_controller()
+    {
+    }
+
     public int OnHearSpeech(obj_id self, obj_id objSpeaker, String strText) throws InterruptedException
     {
         if (!isGod(objSpeaker))
@@ -34,6 +35,7 @@ public class ai_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!isIdValid(self) || !exists(self))
@@ -44,7 +46,7 @@ public class ai_controller extends script.base_script
         {
             ai_lib.setDefaultCalmBehavior(self, getIntObjVar(self, "ai_controller.behavior"));
         }
-        else 
+        else
         {
             ai_lib.setDefaultCalmBehavior(self, ai_lib.BEHAVIOR_SENTINEL);
         }
@@ -111,6 +113,7 @@ public class ai_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnRemovingFromWorld(obj_id self) throws InterruptedException
     {
         dictionary dict = new dictionary();
@@ -120,11 +123,13 @@ public class ai_controller extends script.base_script
         messageTo(trial.getParent(self), "unregisterObjectWithSequencer", dict, 0.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnAiTetherStart(obj_id self) throws InterruptedException
     {
         messageTo(self, "tether_delay", null, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int tether_delay(obj_id self, dictionary params) throws InterruptedException
     {
         if (aiIsTethered(self))
@@ -133,6 +138,7 @@ public class ai_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void resetSequenceMovement() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -160,11 +166,13 @@ public class ai_controller extends script.base_script
             }
         }
     }
+
     public int OnMoveMoving(obj_id self) throws InterruptedException
     {
         resetSequenceMovement();
         return SCRIPT_CONTINUE;
     }
+
     public int resumeDefaultCalmBehavior(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isIdValid(self))
@@ -180,6 +188,7 @@ public class ai_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int doPathAction(obj_id self, dictionary params) throws InterruptedException
     {
         String pathAction = params.getString("pathAction");
@@ -194,30 +203,36 @@ public class ai_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int wsDoAnimation(obj_id self, dictionary params) throws InterruptedException
     {
         String anim = params.getString("animation");
         doAnimationAction(self, anim);
         return SCRIPT_CONTINUE;
     }
+
     public int wsPlayEmote(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int wsSignalMaster(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int wsDespawn(obj_id self, dictionary params) throws InterruptedException
     {
         messageTo(self, "destroySelf", null, 5.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int wsToggleInvulnerability(obj_id self, dictionary params) throws InterruptedException
     {
         boolean toggleVulnerable = !isInvulnerable(self);
@@ -229,6 +244,7 @@ public class ai_controller extends script.base_script
         setInvulnerable(self, toggleVulnerable);
         return SCRIPT_CONTINUE;
     }
+
     public int customSignal(obj_id self, dictionary params) throws InterruptedException
     {
         String signalName = params.getString("triggerName");
@@ -241,25 +257,30 @@ public class ai_controller extends script.base_script
             Vector customTrigger = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_CUSTOMSIGNAL);
             if (customTrigger != null && customTrigger.size() > 0)
             {
-                for (Object o : customTrigger) {
-                    if (((String) o).startsWith(signalName)) {
-                        executeTriggerData(self, ((String) o).substring(signalName.length() + 1, ((String) o).length()));
+                for (Object o : customTrigger)
+                {
+                    if (((String) o).startsWith(signalName))
+                    {
+                        executeTriggerData(self, ((String) o).substring(signalName.length() + 1));
                     }
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         handleDeathTrigger(self, killer);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         handleDeathTrigger(self, killer);
         return SCRIPT_CONTINUE;
     }
+
     public void handleDeathTrigger(obj_id self, obj_id killer) throws InterruptedException
     {
         if (utils.hasScriptVar(self, restuss_event.TRIG_ONDEATH))
@@ -267,7 +288,8 @@ public class ai_controller extends script.base_script
             Vector deathTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ONDEATH);
             if (deathTriggers != null && deathTriggers.size() > 0)
             {
-                for (Object deathTrigger : deathTriggers) {
+                for (Object deathTrigger : deathTriggers)
+                {
                     executeTriggerData(self, ((String) deathTrigger).concat(":" + killer));
                 }
             }
@@ -283,6 +305,7 @@ public class ai_controller extends script.base_script
         }
         return;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         resetSequenceMovement();
@@ -291,13 +314,15 @@ public class ai_controller extends script.base_script
             Vector combatTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ENTERCOMBAT);
             if (combatTriggers != null && combatTriggers.size() > 0)
             {
-                for (Object combatTrigger : combatTriggers) {
+                for (Object combatTrigger : combatTriggers)
+                {
                     executeTriggerData(self, ((String) combatTrigger));
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         if (ai_lib.isDead(self))
@@ -310,13 +335,15 @@ public class ai_controller extends script.base_script
             Vector combatTriggers = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_EXITCOMBAT);
             if (combatTriggers != null && combatTriggers.size() > 0)
             {
-                for (Object combatTrigger : combatTriggers) {
+                for (Object combatTrigger : combatTriggers)
+                {
                     executeTriggerData(self, ((String) combatTrigger));
                 }
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnArrivedAtLocation(obj_id self, String location) throws InterruptedException
     {
         boolean executedAction = false;
@@ -329,8 +356,10 @@ public class ai_controller extends script.base_script
             Vector arriveTrigger = utils.getResizeableStringArrayScriptVar(self, restuss_event.TRIG_ARRIVELOCATION);
             if (arriveTrigger != null && arriveTrigger.size() > 0)
             {
-                for (Object o : arriveTrigger) {
-                    if (((String) o).endsWith(location)) {
+                for (Object o : arriveTrigger)
+                {
+                    if (((String) o).endsWith(location))
+                    {
                         dictionary dict = new dictionary();
                         dict.put("triggerData", ((String) o));
                         dict.put("suspend", true);
@@ -351,15 +380,18 @@ public class ai_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedCleanup(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void executeTriggerData(obj_id self, String triggerData) throws InterruptedException
     {
         executeTriggerData(self, triggerData, false);
     }
+
     public int handleTriggerData(obj_id self, dictionary params) throws InterruptedException
     {
         String triggerData = params.getString("triggerData");
@@ -367,6 +399,7 @@ public class ai_controller extends script.base_script
         executeTriggerData(self, triggerData, suspend);
         return SCRIPT_CONTINUE;
     }
+
     public void executeTriggerData(obj_id self, String triggerData, boolean suspend) throws InterruptedException
     {
         String[] parse = split(triggerData, ':');
@@ -414,18 +447,21 @@ public class ai_controller extends script.base_script
             executeSignalCompleteMessage(self, parse);
         }
     }
+
     public void executeEmoteTrigger(obj_id self, String[] parse) throws InterruptedException
     {
         String chatType = parse[1];
         String chatMessage = parse[2];
         chat.chat(self, chatType, new string_id("sequencer_spam", chatMessage));
     }
+
     public void executeSignalCompleteMessage(obj_id self, String[] parse) throws InterruptedException
     {
         dictionary dict = trial.getSessionDict(trial.getParent(self), "wfc_signal");
         dict.put("waitForComplete", parse[1]);
         messageTo(trial.getParent(self), "waitForComplete", dict, 0.0f, false);
     }
+
     public void executeSignalMasterTrigger(obj_id self, String[] parse) throws InterruptedException
     {
         String handlerName = parse[1];
@@ -441,13 +477,14 @@ public class ai_controller extends script.base_script
             {
                 dict.put(parse[1], utils.stringToFloat(valueSplit[1]));
             }
-            else 
+            else
             {
                 dict.put(parse[1], valueSplit[1]);
             }
         }
         messageTo(trial.getParent(self), handlerName, dict, 0.0f, false);
     }
+
     public void executeAnimationTrigger(obj_id self, String[] parse) throws InterruptedException
     {
         String animation = parse[1];
@@ -455,16 +492,20 @@ public class ai_controller extends script.base_script
         dict.put("animation", animation);
         messageTo(self, "wsDoAnimation", dict, 1.0f, false);
     }
+
     public void executeFacingTrigger(obj_id self, String[] parse) throws InterruptedException
     {
         String target = parse[1];
         String condition = parse[2];
         float yaw = 0.0f;
-        switch (target) {
+        switch (target)
+        {
             case "player":
-                if (condition.equals("nearest")) {
+                if (condition.equals("nearest"))
+                {
                     obj_id player = getClosestPlayer(getLocation(self));
-                    if (isIdValid(player)) {
+                    if (isIdValid(player))
+                    {
                         faceTo(self, player);
                     }
                 }
@@ -472,34 +513,42 @@ public class ai_controller extends script.base_script
             case "spawn_id":
                 Vector children = new Vector();
                 children.setSize(0);
-                if (utils.hasResizeableObjIdBatchScriptVar(trial.getParent(self), trial.PROT_CHILD_ARRAY)) {
+                if (utils.hasResizeableObjIdBatchScriptVar(trial.getParent(self), trial.PROT_CHILD_ARRAY))
+                {
                     children = utils.getResizeableObjIdBatchScriptVar(trial.getParent(self), trial.PROT_CHILD_ARRAY);
                 }
                 obj_id[] list = new obj_id[0];
-                if (children != null) {
+                if (children != null)
+                {
                     list = new obj_id[children.size()];
                     children.toArray(list);
                 }
                 obj_id[] spawnId = trial.getObjectsInListWithObjVar(list, "spawn_id");
-                if (spawnId != null) {
+                if (spawnId != null)
+                {
                     obj_id intended = getSpawnIdFromList(spawnId, condition);
-                    if (isIdValid(intended) && exists(intended)) {
+                    if (isIdValid(intended) && exists(intended))
+                    {
                         faceTo(self, intended);
                     }
                 }
                 break;
             case "yaw":
-                if (condition.equals("default")) {
+                if (condition.equals("default"))
+                {
                     yaw = getFloatObjVar(self, "yaw");
                     setYaw(self, yaw);
                 }
-                if (condition.equals("previous")) {
-                    if (utils.hasScriptVar(self, "rec_yaw")) {
+                if (condition.equals("previous"))
+                {
+                    if (utils.hasScriptVar(self, "rec_yaw"))
+                    {
                         yaw = utils.getFloatScriptVar(self, "rec_yaw");
                         setYaw(self, yaw);
                     }
                 }
-                if (condition.equals("random")) {
+                if (condition.equals("random"))
+                {
                     yaw = rand(-180, 180);
                     setYaw(self, yaw);
                 }
@@ -507,6 +556,7 @@ public class ai_controller extends script.base_script
         }
         utils.setScriptVar(self, "rec_yaw", yaw);
     }
+
     public void executeMessageSelfTrigger(obj_id self, String[] parse) throws InterruptedException
     {
         String handlerName = parse[1];
@@ -522,13 +572,14 @@ public class ai_controller extends script.base_script
             {
                 dict.put(parse[2], utils.stringToFloat(valueSplit[1]));
             }
-            else 
+            else
             {
                 dict.put(parse[2], valueSplit[1]);
             }
         }
         messageTo(self, handlerName, dict, 5.0f, false);
     }
+
     public void executeIdTrigger(obj_id self, String[] parse) throws InterruptedException
     {
         dictionary dict = trial.getSessionDict(trial.getParent(self));
@@ -536,6 +587,7 @@ public class ai_controller extends script.base_script
         dict.put("triggerType", "triggerId");
         messageTo(trial.getParent(self), "triggerFired", dict, 0.0f, false);
     }
+
     public int resumeMovement(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasSuspendedMovement(self))
@@ -544,15 +596,18 @@ public class ai_controller extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void pathToPoint(obj_id self, String pointName) throws InterruptedException
     {
         location toPoint = getPointLocation(pointName);
         pathTo(self, toPoint);
         return;
     }
+
     public void calculatePathPoint(obj_id self, String pointName) throws InterruptedException
     {
     }
+
     public void beginPathRoutine(obj_id self, String pathName) throws InterruptedException
     {
         setObjVar(self, "patrol_path", pathName);
@@ -587,6 +642,7 @@ public class ai_controller extends script.base_script
         location[] pathPointLocationList = getLocationListFromPointList(pathPointList);
         initiatePatrol(self, patrolType, pathPointLocationList);
     }
+
     public String[] filterRandomPoints(String patrolListString) throws InterruptedException
     {
         String[] thisList = split(patrolListString, ',');
@@ -597,6 +653,7 @@ public class ai_controller extends script.base_script
         }
         return thisList;
     }
+
     public location[] getLocationListFromPointList(String[] pointList) throws InterruptedException
     {
         location[] locList = new location[pointList.length];
@@ -606,11 +663,13 @@ public class ai_controller extends script.base_script
         }
         return locList;
     }
+
     public location[] getPatrolPathData(String patrolData) throws InterruptedException
     {
         debugSpeakMsg(getSelf(), patrolData);
         return null;
     }
+
     public void initiatePatrol(obj_id self, String patrolType, location[] patrolPoints) throws InterruptedException
     {
         location[] ppl = getPplForNpc(self, patrolType, patrolPoints);
@@ -642,6 +701,7 @@ public class ai_controller extends script.base_script
         }
         return;
     }
+
     public int setLocationTarget(obj_id self, dictionary params) throws InterruptedException
     {
         String wp_name = params.getString("wp_name");
@@ -649,6 +709,7 @@ public class ai_controller extends script.base_script
         addLocationTarget(wp_name, spawnLoc, 1.0f);
         return SCRIPT_CONTINUE;
     }
+
     public void reportDeath(obj_id self, obj_id killer) throws InterruptedException
     {
         int row = getIntObjVar(self, "row");
@@ -666,15 +727,19 @@ public class ai_controller extends script.base_script
         dict.put("killer", killer);
         messageTo(trial.getParent(self), "terminationCallback", dict, 0.0f, false);
     }
+
     public obj_id getSpawnIdFromList(obj_id[] list, String spawn) throws InterruptedException
     {
-        for (obj_id obj_id : list) {
-            if ((getStringObjVar(obj_id, "spawn_id")).equals(spawn)) {
+        for (obj_id obj_id : list)
+        {
+            if ((getStringObjVar(obj_id, "spawn_id")).equals(spawn))
+            {
                 return obj_id;
             }
         }
         return null;
     }
+
     public location getPointLocation(String pointName) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -703,12 +768,14 @@ public class ai_controller extends script.base_script
         }
         return locationList[idx];
     }
+
     public location[] getPplForNpc(obj_id sender, String patrolType, location[] patrolPoints) throws InterruptedException
     {
         int idx = getNearestPatrolPointIndex(sender, patrolPoints);
         patrolPoints = trial.shuffleByIndex(patrolType, patrolPoints, idx);
         return patrolPoints;
     }
+
     public int getNearestPatrolPointIndex(obj_id sender, location[] patrolLoc) throws InterruptedException
     {
         float distance = 2000.0f;
@@ -728,6 +795,7 @@ public class ai_controller extends script.base_script
         }
         return idx;
     }
+
     public void doLogging(String section, String message) throws InterruptedException
     {
         if (LOGGING)

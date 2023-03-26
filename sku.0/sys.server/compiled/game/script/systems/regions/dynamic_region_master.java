@@ -12,15 +12,16 @@ import java.util.Vector;
 
 public class dynamic_region_master extends script.base_script
 {
-    public dynamic_region_master()
-    {
-    }
     public static final String BIRTH = "dynamic_region.birth";
     public static final String PLANET = "dynamic_region.planet";
     public static final String NAME = "dynamic_region.name";
     public static final String DURATION = "dynamic_region.duration";
     public static final String MAX_DURATION = "dynamic_region.maxDuration";
     public static final String CREATURE_LIST = "dynamic_region.creatureList";
+    public dynamic_region_master()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasObjVar(self, BIRTH))
@@ -29,11 +30,13 @@ public class dynamic_region_master extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "heartbeat", null, 60.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int destroySelf(obj_id self, dictionary params) throws InterruptedException
     {
         int currentEpoch = getCalendarTime();
@@ -42,8 +45,10 @@ public class dynamic_region_master extends script.base_script
         obj_id[] myCreatures = getObjIdArrayObjVar(self, CREATURE_LIST);
         if (currentEpoch < (birth + maxDuration * 60) && myCreatures != null && myCreatures.length > 0)
         {
-            for (obj_id myCreature : myCreatures) {
-                if (isIdValid(myCreature) && ai_lib.isInCombat(myCreature)) {
+            for (obj_id myCreature : myCreatures)
+            {
+                if (isIdValid(myCreature) && ai_lib.isInCombat(myCreature))
+                {
                     messageTo(self, "destroySelf", null, 60.0f, false);
                     return SCRIPT_CONTINUE;
                 }
@@ -51,8 +56,10 @@ public class dynamic_region_master extends script.base_script
         }
         if (myCreatures != null && myCreatures.length > 0)
         {
-            for (obj_id myCreature : myCreatures) {
-                if (isIdValid(myCreature)) {
+            for (obj_id myCreature : myCreatures)
+            {
+                if (isIdValid(myCreature))
+                {
                     destroyObject(myCreature);
                 }
             }
@@ -65,6 +72,7 @@ public class dynamic_region_master extends script.base_script
         deleteRegion(regionSelf);
         return SCRIPT_CONTINUE;
     }
+
     public int heartbeat(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, DURATION))
@@ -82,20 +90,21 @@ public class dynamic_region_master extends script.base_script
         {
             messageTo(self, "destroySelf", null, 0.0f, false);
         }
-        else 
+        else
         {
             int totalTimeSecondsLeft = (birth + (duration * 60)) - currentEpoch;
             if (totalTimeSecondsLeft > 60)
             {
                 messageTo(self, "heartbeat", null, 60.0f, false);
             }
-            else 
+            else
             {
                 messageTo(self, "heartbeat", null, totalTimeSecondsLeft, false);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDynamicSpawnRegionCreated(obj_id self, obj_id regionObject, String spawnDatatable, float x, float y, float z) throws InterruptedException
     {
         LOG("DynamicSpawn", "Hit OnDynamicSpawnRegionCreated with paramers: " + regionObject + " " + spawnDatatable + " " + x + " " + y + " " + z);

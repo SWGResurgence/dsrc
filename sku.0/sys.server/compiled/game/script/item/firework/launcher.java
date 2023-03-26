@@ -11,6 +11,7 @@ public class launcher extends script.base_script
     public launcher()
     {
     }
+
     public int handleFireworkLaunch(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -46,7 +47,7 @@ public class launcher extends script.base_script
         location there = utils.getRandomLocationInRing(here, 0.5f, 1.0f);
         if (there == null)
         {
-            there = (location)here.clone();
+            there = (location) here.clone();
         }
         params.put("loc", there);
         String fx = fxs[idx];

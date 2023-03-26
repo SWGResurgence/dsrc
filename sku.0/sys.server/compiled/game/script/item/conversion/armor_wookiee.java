@@ -7,31 +7,33 @@ import script.library.utils;
 
 public class armor_wookiee extends script.base_script
 {
+    public static final String[] WOOKIEE_ASSAULT =
+            {
+                    "object/tangible/wearables/armor/kashyyykian_hunting/armor_kashyyykian_hunting_chestplate.iff",
+                    "object/tangible/wearables/armor/kashyyykian_hunting/armor_kashyyykian_hunting_bicep_l.iff",
+                    "object/tangible/wearables/armor/kashyyykian_hunting/armor_kashyyykian_hunting_bicep_r.iff"
+            };
+    public static final String[] WOOKIEE_BATTLE =
+            {
+                    "object/tangible/wearables/armor/kashyyykian_black_mtn/armor_kashyyykian_black_mtn_chestplate.iff",
+                    "object/tangible/wearables/armor/kashyyykian_black_mtn/armor_kashyyykian_black_mtn_bicep_l.iff",
+                    "object/tangible/wearables/armor/kashyyykian_black_mtn/armor_kashyyykian_black_mtn_bicep_r.iff"
+            };
+    public static final String[] WOOKIEE_RECON =
+            {
+                    "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_chestplate.iff",
+                    "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_bicep_l.iff",
+                    "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_bicep_r.iff"
+            };
     public armor_wookiee()
     {
     }
-    public static final String[] WOOKIEE_ASSAULT = 
-    {
-        "object/tangible/wearables/armor/kashyyykian_hunting/armor_kashyyykian_hunting_chestplate.iff",
-        "object/tangible/wearables/armor/kashyyykian_hunting/armor_kashyyykian_hunting_bicep_l.iff",
-        "object/tangible/wearables/armor/kashyyykian_hunting/armor_kashyyykian_hunting_bicep_r.iff"
-    };
-    public static final String[] WOOKIEE_BATTLE = 
-    {
-        "object/tangible/wearables/armor/kashyyykian_black_mtn/armor_kashyyykian_black_mtn_chestplate.iff",
-        "object/tangible/wearables/armor/kashyyykian_black_mtn/armor_kashyyykian_black_mtn_bicep_l.iff",
-        "object/tangible/wearables/armor/kashyyykian_black_mtn/armor_kashyyykian_black_mtn_bicep_r.iff"
-    };
-    public static final String[] WOOKIEE_RECON = 
-    {
-        "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_chestplate.iff",
-        "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_bicep_l.iff",
-        "object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_bicep_r.iff"
-    };
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) == player)
@@ -40,13 +42,14 @@ public class armor_wookiee extends script.base_script
             {
                 mi.addRootMenu(menu_info_types.SERVER_MENU9, new string_id("craft_armor_ingredients_d", "wookiee_cybernetic_enable"));
             }
-            else 
+            else
             {
                 detachScript(self, "item.conversion.armor_wookiee");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (utils.getContainingPlayer(self) == player)
@@ -58,6 +61,7 @@ public class armor_wookiee extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void showConfirmationWindow(obj_id player) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -67,16 +71,17 @@ public class armor_wookiee extends script.base_script
         int pid = sui.msgbox(self, player, prompt, sui.OK_CANCEL, title, 0, "handleWookieeConfirmationSelect");
         setWindowPid(player, pid);
     }
+
     public void dismantleWookiee(obj_id player) throws InterruptedException
     {
         obj_id oldObject = getSelf();
         String templatename = getTemplateName(oldObject);
         String[] armorPieces = new String[]
-        {
-            "",
-            "",
-            ""
-        };
+                {
+                        "",
+                        "",
+                        ""
+                };
         obj_id pInv = utils.getInventoryContainer(player);
         if (hasScript(oldObject, "item.conversion.armor_chest_wookie_conversion"))
         {
@@ -88,9 +93,10 @@ public class armor_wookiee extends script.base_script
             sendSystemMessage(player, new string_id("quest_armorsmith", "inventory_full"));
             return;
         }
-        else 
+        else
         {
-            switch (templatename) {
+            switch (templatename)
+            {
                 case "object/tangible/wearables/armor/kashyyykian_hunting/armor_kashyyykian_hunting_chest_plate.iff":
                     armorPieces = WOOKIEE_ASSAULT;
                     break;
@@ -121,7 +127,7 @@ public class armor_wookiee extends script.base_script
                         setMaxHitpoints(armorItem, hitPoints * 2);
                         setHitpoints(armorItem, hitPoints * 2);
                     }
-                    else 
+                    else
                     {
                         setMaxHitpoints(armorItem, hitPoints);
                         setHitpoints(armorItem, hitPoints);
@@ -136,6 +142,7 @@ public class armor_wookiee extends script.base_script
             sendSystemMessage(player, new string_id("quest_armorsmith", "wookiee_resized"));
         }
     }
+
     public void closeOldWindow(obj_id player) throws InterruptedException
     {
         if (utils.hasScriptVar(player, "wookiee_armor.pid"))
@@ -145,6 +152,7 @@ public class armor_wookiee extends script.base_script
             utils.removeScriptVar(player, "wookiee_armor.pid");
         }
     }
+
     public void setWindowPid(obj_id player, int pid) throws InterruptedException
     {
         if (pid > -1)
@@ -152,6 +160,7 @@ public class armor_wookiee extends script.base_script
             utils.setScriptVar(player, "wookiee_armor.pid", pid);
         }
     }
+
     public int handleWookieeConfirmationSelect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);

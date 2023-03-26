@@ -5,13 +5,14 @@ import script.library.*;
 
 public class vehicle_deed extends script.base_script
 {
-    public vehicle_deed()
-    {
-    }
     public static final String MENU_FILE = "pet/pet_menu";
     public static final string_id SID_NO_GROUND_VEHICLE_IN_SPACE = new string_id("space/space_interaction", "no_ground_vehicle_in_space");
     public static final string_id SID_NOT_BIO_LINKED = new string_id("spam", "vehicle_not_biolink");
     public static final string_id SID_FAILED_PCD_CREATION = new string_id("spam", "failed_pcd_creation");
+    public vehicle_deed()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (canManipulate(player, self, true, true, 15, true))
@@ -20,6 +21,7 @@ public class vehicle_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isSpaceScene())
@@ -74,7 +76,7 @@ public class vehicle_deed extends script.base_script
                 CustomerServiceLog("vehicle_deed", "vehicle deed used: deed=" + self + " pcd=" + pet + " player=" + player + "(" + getPlayerName(player) + ")");
                 destroyObject(self);
             }
-            else 
+            else
             {
                 CustomerServiceLog("vehicle_deed", "Player could not create a valid vehicle with deed: " + self + " deed name: " + getName(self) + " player:" + player + "(" + getPlayerName(player) + ")");
                 debugServerConsoleMsg(self, "+++ VEHICLE_DEED . onObjectMenuSelect +++ Failed to make PCD for Vehicle Prototype.");
@@ -82,6 +84,7 @@ public class vehicle_deed extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id createCraftedCreatureDevice(obj_id player, obj_id deed) throws InterruptedException
     {
         if (!isIdValid(player) || !exists(player))
@@ -126,7 +129,7 @@ public class vehicle_deed extends script.base_script
             CustomerServiceLog("vehicle_deed", "Player could not create a valid Player Control Device when using deed: " + deed + " deed name: " + getName(deed) + " player:" + player + "(" + getPlayerName(player) + ")");
             return null;
         }
-        else 
+        else
         {
             setObjVar(petControlDevice, "pet.crafted", true);
             setObjVar(petControlDevice, "vehicle_attribs.object_ref", objectRef);
@@ -165,7 +168,7 @@ public class vehicle_deed extends script.base_script
             debugServerConsoleMsg(null, "+++ VEHICLE . onAttach +++ makePetMountable(pet) returned FALSE.");
             return pet;
         }
-        else 
+        else
         {
             setObjVar(petControlDevice, "ai.pet.trainedMount", 1);
         }
@@ -181,13 +184,14 @@ public class vehicle_deed extends script.base_script
         callable.setCallableLinks(player, petControlDevice, pet);
         return petControlDevice;
     }
+
     public void initCraftedStats(obj_id device, obj_id deed, obj_id pet) throws InterruptedException
     {
         debugServerConsoleMsg(null, "+++ VEHICLE_DEED . initCraftedStats +++ entered initCraftedStats while generating inital deed-derived vehicle.");
         int hitPoints = 1500;
         if (isIdValid(deed) && hasObjVar(deed, "hit_points"))
         {
-            hitPoints = (int)getFloatObjVar(deed, "hit_points");
+            hitPoints = (int) getFloatObjVar(deed, "hit_points");
         }
         debugServerConsoleMsg(null, "+++ VEHICLE_DEED . initCraftedStats +++ Retrieved hit_points objvar value from deed object. Value is: " + hitPoints);
         if (hitPoints <= 1)

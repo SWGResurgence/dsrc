@@ -5,11 +5,12 @@ import script.library.*;
 
 public class gcw_turret extends script.base_script
 {
+    public static final string_id SID_MNU_REPAIR = new string_id("sui", "mnu_repair");
+    public static final string_id SID_MNU_DEFEND = new string_id("sui", "mnu_defend");
     public gcw_turret()
     {
     }
-    public static final string_id SID_MNU_REPAIR = new string_id("sui", "mnu_repair");
-    public static final string_id SID_MNU_DEFEND = new string_id("sui", "mnu_defend");
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setObjVar(self, gcw.GCW_TOOL_TEMPLATE_OBJVAR, "object/tangible/gcw/crafting_quest/gcw_turret_tool.iff");
@@ -23,6 +24,7 @@ public class gcw_turret extends script.base_script
         messageTo(self, "playQuestIcon", params, 1.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (!exists(self))
@@ -37,12 +39,12 @@ public class gcw_turret extends script.base_script
         int displayPower = utils.getIntScriptVar(self, "gcw.displayPower");
         if (displayPower > 0 && displayPower < 4)
         {
-            String[] powerLevels = 
-            {
-                "Low Firepower",
-                "Normal Firepower",
-                "Maximum Firepower"
-            };
+            String[] powerLevels =
+                    {
+                            "Low Firepower",
+                            "Normal Firepower",
+                            "Maximum Firepower"
+                    };
             names[idx] = "turret_level";
             attribs[idx] = powerLevels[displayPower - 1];
             idx++;
@@ -53,13 +55,14 @@ public class gcw_turret extends script.base_script
         {
             attribs[idx] = "" + repairCount + " out of " + gcw.REPAIR_COUNT_MAX;
         }
-        else 
+        else
         {
             attribs[idx] = "Never Repaired";
         }
         idx++;
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, "faction"))
@@ -72,7 +75,7 @@ public class gcw_turret extends script.base_script
             LOG("gcw_patrol_point", "faction invalid on turret obj");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (utils.isProfession(player, utils.TRADER))
             {
@@ -91,13 +94,14 @@ public class gcw_turret extends script.base_script
                 }
                 mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_MNU_REPAIR);
             }
-            else 
+            else
             {
                 mi.addRootMenu(menu_info_types.SERVER_MENU2, SID_MNU_DEFEND);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("gcw_patrol_point", "OnObjectMenuSelect");
@@ -125,7 +129,7 @@ public class gcw_turret extends script.base_script
             LOG("gcw_patrol_point", "Wrong Faction");
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             if (item == menu_info_types.SERVER_MENU1)
             {
@@ -160,7 +164,7 @@ public class gcw_turret extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 LOG("gcw_patrol_point", "OnObjectMenuSelect server menu 2");
                 String questName = gcw.GCW_DEFEND_TURRET_REBEL;
@@ -185,6 +189,7 @@ public class gcw_turret extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         int faction = utils.getIntScriptVar(self, "faction");
@@ -202,12 +207,14 @@ public class gcw_turret extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int playQuestIcon(obj_id self, dictionary params) throws InterruptedException
     {
         params.put("offset", 2.0f);
         gcw.playQuestIconHandler(self, params);
         return SCRIPT_CONTINUE;
     }
+
     public int handleQuestCallBack(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)

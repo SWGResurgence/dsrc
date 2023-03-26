@@ -5,15 +5,16 @@ import script.library.*;
 
 public class vehicle_garage extends script.base_script
 {
-    public vehicle_garage()
-    {
-    }
     public static final String STF_PET = "pet/pet_menu";
     public static final String VOL_GARAGE = "garageRepairEntry";
     public static final string_id SID_PROCESSING_OVERPAYMENT = new string_id(STF_PET, "processing_overpayment");
     public static final string_id SID_REPAIRED_TO_MAX = new string_id(STF_PET, "repaired_to_max");
     public static final string_id SID_REPAIRS_COMPLETE = new string_id(STF_PET, "repairs_complete");
     public static final string_id SID_REPAIR_FAILED_DUE_TO_FUNDS = new string_id(STF_PET, "repair_failed_due_to_funds");
+    public vehicle_garage()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         if (hasScript(self, "planet_map.map_loc"))
@@ -28,6 +29,7 @@ public class vehicle_garage extends script.base_script
         setAttributeInterested(self, attrib.VEHICLE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volName, obj_id who) throws InterruptedException
     {
         if (volName.equals(VOL_GARAGE) && hasScript(who, "systems.vehicle_system.vehicle_base"))
@@ -36,6 +38,7 @@ public class vehicle_garage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void enterRepairZone(obj_id ride) throws InterruptedException
     {
         if (!isIdValid(ride) || utils.hasScriptVar(ride, "inRepairZone"))
@@ -51,6 +54,7 @@ public class vehicle_garage extends script.base_script
         sendSystemMessage(owner, new string_id(STF_PET, "garage_proximity"));
         utils.setScriptVar(ride, "inRepairZone", self);
     }
+
     public int OnTriggerVolumeExited(obj_id self, String volName, obj_id who) throws InterruptedException
     {
         if (volName.equals(VOL_GARAGE) && hasScript(who, "systems.vehicle_system.vehicle_base"))
@@ -59,6 +63,7 @@ public class vehicle_garage extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleRepairConfirm(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -94,6 +99,7 @@ public class vehicle_garage extends script.base_script
         money.requestPayment(player, self, cost, "handleRepairPayment", d, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRepairPayment(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -120,7 +126,7 @@ public class vehicle_garage extends script.base_script
             prose_package ppConditionChanged = prose.getPackage(new string_id(STF_PET, "repair_condition_changed"), cost);
             sendSystemMessageProse(player, ppConditionChanged);
         }
-        int city_take = (int)utils.getFloatScriptVar(vid, "vehicleRepair.city_tax");
+        int city_take = (int) utils.getFloatScriptVar(vid, "vehicleRepair.city_tax");
         int base_cost = cost - city_take;
         obj_id cityId = utils.getObjIdScriptVar(vid, "vehicleRepair.city_id");
         float repair_rate = vehicle.getVehicleRepairRate(vid);
@@ -150,7 +156,7 @@ public class vehicle_garage extends script.base_script
         {
             sendSystemMessage(player, SID_REPAIRED_TO_MAX);
         }
-        else 
+        else
         {
             sendSystemMessage(player, SID_REPAIRS_COMPLETE);
         }
@@ -162,6 +168,7 @@ public class vehicle_garage extends script.base_script
         utils.moneyOutMetric(self, money.ACCT_VEHICLE_REPAIRS, base_cost);
         return SCRIPT_CONTINUE;
     }
+
     public boolean isGarageInRange(obj_id vehicle) throws InterruptedException
     {
         location loc = getLocation(vehicle);
@@ -169,10 +176,6 @@ public class vehicle_garage extends script.base_script
         obj_id localGarage = null;
         String script = "systems.vehicle_system.vehicle_garage";
         localGarage = getFirstObjectWithScript(loc, range, script);
-        if (!isIdValid(localGarage))
-        {
-            return false;
-        }
-        return true;
+        return isIdValid(localGarage);
     }
 }

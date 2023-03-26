@@ -6,15 +6,16 @@ import script.library.utils;
 
 public class ice_cream_nobuff extends script.base_script
 {
-    public ice_cream_nobuff()
-    {
-    }
     public static final string_id SID_ALREADY_HAVE_BUFF = new string_id("base_player", "food_already_have_buff");
     public static final string_id SID_BUFF_WONT_STACK = new string_id("base_player", "food_buff_wont_stack");
     public static final String ALREADY_SETUP = "itemFoodScriptRemoved";
     public static final String ITEM_FOOD_SCRIPT = "item.food";
     public static final String BUFF_NAME = "loot_buff";
     public static final String OWNER_OID = "owner";
+    public ice_cream_nobuff()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         if (!hasObjVar(self, ALREADY_SETUP))
@@ -25,6 +26,7 @@ public class ice_cream_nobuff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -37,6 +39,7 @@ public class ice_cream_nobuff extends script.base_script
         idx++;
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.ITEM_USE);
@@ -51,6 +54,7 @@ public class ice_cream_nobuff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (isDead(player) || isIncapacitated(player))
@@ -63,6 +67,7 @@ public class ice_cream_nobuff extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void eat(obj_id self, obj_id player) throws InterruptedException
     {
         if (!isIdValid(self) || !isIdValid(player))
@@ -90,7 +95,7 @@ public class ice_cream_nobuff extends script.base_script
             filling[0] = 0;
             filling[1] = 0;
         }
-        else 
+        else
         {
             filling[0] = 0;
             filling[1] = 0;
@@ -132,21 +137,21 @@ public class ice_cream_nobuff extends script.base_script
                 case SPECIES_MON_CALAMARI:
                 case SPECIES_RODIAN:
                 case SPECIES_TRANDOSHAN:
-                snd += "reptile_";
-                break;
+                    snd += "reptile_";
+                    break;
                 case SPECIES_WOOKIEE:
-                snd += "wookiee_";
-                break;
+                    snd += "wookiee_";
+                    break;
                 default:
-                snd += "human_";
+                    snd += "human_";
             }
             switch (getGender(player))
             {
                 case FEMALE:
-                snd += "female_eat.cef";
-                break;
+                    snd += "female_eat.cef";
+                    break;
                 default:
-                snd += "male_eat.cef";
+                    snd += "male_eat.cef";
             }
             playClientEffectLoc(player, snd, getLocation(player), getScale(player));
             int count = getCount(self);
@@ -155,12 +160,13 @@ public class ice_cream_nobuff extends script.base_script
             {
                 destroyObject(self);
             }
-            else 
+            else
             {
                 setCount(self, count);
             }
         }
     }
+
     public String formatTime(int seconds) throws InterruptedException
     {
         String result = "";
@@ -187,11 +193,13 @@ public class ice_cream_nobuff extends script.base_script
         result += seconds;
         return result;
     }
+
     public int removeItemFoodScript(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, ITEM_FOOD_SCRIPT);
         return SCRIPT_CONTINUE;
     }
+
     public int setUpBuff(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "buff_name", BUFF_NAME);
@@ -199,6 +207,7 @@ public class ice_cream_nobuff extends script.base_script
         setObjVar(self, ALREADY_SETUP, true);
         return SCRIPT_CONTINUE;
     }
+
     public boolean blog(String message) throws InterruptedException
     {
         LOG("fryer_log", message);

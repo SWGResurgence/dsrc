@@ -8,19 +8,21 @@ import script.library.utils;
 
 public class terminal extends script.base_script
 {
-    public terminal()
-    {
-    }
     public static final string_id MNU_OVERLOAD = new string_id("hq", "mnu_overload");
     public static final string_id MNU_SHUTDOWN = new string_id("hq", "mnu_shutdown");
     public static final string_id MNU_DONATE = new string_id("hq", "mnu_donate");
     public static final String SCRIPTVAR_COUNTDOWN = "countdownInProgress";
+    public terminal()
+    {
+    }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         setObjVar(self, "type", "terminal");
         setObjVar(self, "intTerminal", 1);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id structure = getObjIdObjVar(self, "objParent");
@@ -58,18 +60,19 @@ public class terminal extends script.base_script
                 LOG("gcw", "Added overload");
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 LOG("gcw", "NO OBJVAR");
             }
         }
-        else 
+        else
         {
             sendSystemMessageTestingOnly(player, "You are not an enemy of this structure. Why would you want to tamper?");
             return SCRIPT_CONTINUE;
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         LOG("gcw", "OnObject menu selected");
@@ -112,6 +115,7 @@ public class terminal extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void shutdownFacility(obj_id self) throws InterruptedException
     {
         attachScript(self, hq.SCRIPT_TERMINAL_DISABLE);
@@ -123,6 +127,7 @@ public class terminal extends script.base_script
         abortCountdown(self);
         messageTo(self, "handleFacilityReboot", null, 300.0f, false);
     }
+
     public void startCountdown(obj_id self, obj_id player) throws InterruptedException
     {
         int meleemod = getSkillStatMod(player, "group_melee_defense");
@@ -132,7 +137,8 @@ public class terminal extends script.base_script
         obj_id[] players = player_structure.getPlayersInBuilding(getTopMostContainer(self));
         if (players != null && players.length > 0)
         {
-            for (obj_id player1 : players) {
+            for (obj_id player1 : players)
+            {
                 sendSystemMessageTestingOnly(player1, "COUNTDOWN INITIATED: estimated time to detonation: " + minutes + " minutes.");
             }
         }
@@ -142,17 +148,20 @@ public class terminal extends script.base_script
         d.put("cnt", minutes);
         messageTo(self, "handleCountdown", d, 10.0f, false);
     }
+
     public void abortCountdown(obj_id self) throws InterruptedException
     {
         utils.removeScriptVar(self, SCRIPTVAR_COUNTDOWN);
         obj_id[] players = player_structure.getPlayersInBuilding(getTopMostContainer(self));
         if (players != null && players.length > 0)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 sendSystemMessageTestingOnly(player, "COUNTDOWN ABORTED: FACILITY SHUTTING DOWN!!");
             }
         }
     }
+
     public int handleFacilityReboot(obj_id self, dictionary params) throws InterruptedException
     {
         detachScript(self, hq.SCRIPT_TERMINAL_DISABLE);
@@ -164,12 +173,14 @@ public class terminal extends script.base_script
         obj_id[] players = player_structure.getPlayersInBuilding(getTopMostContainer(self));
         if (players != null && players.length > 0)
         {
-            for (obj_id player : players) {
+            for (obj_id player : players)
+            {
                 sendSystemMessageTestingOnly(player, "FACILITY RESTART: RELOADING PRIMARY FACILITY SYSTEMS");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCountdown(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPTVAR_COUNTDOWN))
@@ -211,7 +222,8 @@ public class terminal extends script.base_script
             obj_id[] players = player_structure.getPlayersInBuilding(structure);
             if (players != null && players.length > 0)
             {
-                for (obj_id player1 : players) {
+                for (obj_id player1 : players)
+                {
                     sendSystemMessageTestingOnly(player1, msg);
                 }
             }

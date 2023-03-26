@@ -1,15 +1,12 @@
 package script.systems.bookworm;/*
 @Filename: script.systems.bookworm.book
 @Author: BubbaJoeX
-@Purpose:
+@Purpose: Allows players to read/write books. Currently, the book is editable only by the owner.
 */
 
-import script.dictionary;
-import script.library.colors_hex;
+import script.*;
+import script.library.sui;
 import script.library.utils;
-import script.menu_info;
-import script.menu_info_types;
-import script.obj_id;
 
 public class book extends script.base_script
 {
@@ -22,28 +19,60 @@ public class book extends script.base_script
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
-        mi.addRootMenu(menu_info_types.ITEM_USE, unlocalized("Read"));
+        mi.addRootMenu(menu_info_types.ITEM_USE, unlocalized("Open Book"));
+        if (getCrafter(self) == player) //only the creator of the book can edit it.
+        {
+            mi.addRootMenu(menu_info_types.SERVER_MENU2, unlocalized("Name Book"));
+            mi.addRootMenu(menu_info_types.SERVER_MENU3, unlocalized("Describe Book"));
+        }
+        if (isGod(player))
+        {
+            mi.addRootMenu(menu_info_types.SERVER_MENU4,  unlocalized("[GodMode] Claim Book"));
+        }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int menu) throws InterruptedException
     {
         if (menu == menu_info_types.ITEM_USE)
         {
             openBook(self, player);
         }
+        if (menu == menu_info_types.SERVER_MENU2)
+        {
+            sui.inputbox(self, player, "Enter a name for your book.", "handleName");
+        }
+        if (menu == menu_info_types.SERVER_MENU3)
+        {
+            sui.inputbox(self, player, "Enter a description for your book.", "handleDescribe");
+        }
+        if (menu == menu_info_types.SERVER_MENU4)
+        {
+            setCrafter(self, player);
+        }
         return SCRIPT_CONTINUE;
     }
+
     public int openBook(obj_id book, obj_id who) throws InterruptedException
     {
         int page = createSUIPage("/Script.editScript", book, who);
-        setSUIProperty(page, "pageText.text", "Text", colors_hex.Default(getStringObjVar(book, "book.text")));
+        setSUIProperty(page, "pageText.text", "Text", getStringObjVar(book, "book.text"));
         setSUIProperty(page, "pageText.text", "Font", "starwarslogo_optimized_56");
-        setSUIProperty(page, "pageText.text", "Editable", "True");
+        if (getCrafter(book) == who) //only the creator of the book can edit it.
+        {
+            setSUIProperty(page, "pageText.text", "Editable", "True");
+        }
+        else
+        {
+            setSUIProperty(page, "pageText.text", "Editable", "False");
+        }
         setSUIProperty(page, "pageText.text", "GetsInput", "True");
+        setSUIProperty(page, "outputPage.text.LocalText", "Text", getStringObjVar(book, "book.title"));
         setSUIProperty(page, "btnOk", "Text", "Save");
-        setSUIProperty(page, "bg.caption.text", "LocalText", getStringObjVar(book, "book.title"));
+        setSUIProperty(page, "bg.caption.text", "LocalText", "Edit Book");
         subscribeToSUIEvent(page, sui_event_type.SET_onButton, "btnOk", "saveText");
         subscribeToSUIPropertyForEvent(page, sui_event_type.SET_onButton, "btnOk", "pageText.text", "LocalText");
         subscribeToSUIPropertyForEvent(page, sui_event_type.SET_onButton, "btnOk", "outputPage.text", "LocalText");
@@ -55,12 +84,51 @@ public class book extends script.base_script
         {
             utils.setScriptVar(book, "pageId", page);
         }
+        setObjVar(book, "bookPage", page);
 
         return SCRIPT_OVERRIDE;
     }
+
     public int saveText(obj_id self, dictionary params) throws InterruptedException
     {
-        //_saveBookText(long obj_id, dictionary params);
+        String bookText = params.getString("pageText.text.LocalText");
+        obj_id player = sui.getPlayerId(params);
+        if (bookText.length() < 2000)
+        {
+            setObjVar(self, "book.text", bookText);
+            broadcast(player, "You have modified this text within this book.");
+        }
+        else
+        {
+            broadcast(player, "The maximum word count for this book is 2000 words.");
+        }
+        sui.closeSUI(player, getIntObjVar(self, "bookPage"));
         return SCRIPT_CONTINUE;
     }
+    public int handleName(obj_id self, dictionary paramsDict) throws InterruptedException
+    {
+        obj_id player = sui.getPlayerId(paramsDict);
+        String bookTitle = sui.getInputBoxText(paramsDict);
+        setName(self, bookTitle);
+        setObjVar(self, "book.title", bookTitle);
+        broadcast(player, "You have renamed this book to: " + bookTitle);
+        return SCRIPT_CONTINUE;
+    }
+    public int handleDescribe(obj_id self, dictionary paramsDict) throws InterruptedException
+    {
+        String descInput = sui.getInputBoxText(paramsDict);
+        if (descInput == null || descInput.equals(""))
+        {
+            return SCRIPT_CONTINUE;
+        }
+        string_id desc = new string_id(descInput);
+        setDescriptionStringId(self, desc);
+        setObjVar(self, "null_desc", descInput);
+        if (!hasScript(self, "developer.bubbajoe.sync"))
+        {
+            attachScript(self, "developer.bubbajoe.sync");
+        }
+        return SCRIPT_CONTINUE;
+    }
+
 }

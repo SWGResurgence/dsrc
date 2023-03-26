@@ -11,6 +11,7 @@ public class cleanup2 extends script.base_script
     public cleanup2()
     {
     }
+
     public void cleanup(obj_id self) throws InterruptedException
     {
         if (!fs_quests_sad.hasCompletedAllTasks2(self))
@@ -49,11 +50,13 @@ public class cleanup2 extends script.base_script
         }
         detachScript(self, "systems.fs_quest.fs_quests_sad.cleanup2");
     }
+
     public int msgQuestAbortPhaseChange(obj_id self, dictionary params) throws InterruptedException
     {
         cleanup(self);
         return SCRIPT_CONTINUE;
     }
+
     public void clearWaypoint(obj_id player) throws InterruptedException
     {
         String questName = "fs_quests_sad2_return1";

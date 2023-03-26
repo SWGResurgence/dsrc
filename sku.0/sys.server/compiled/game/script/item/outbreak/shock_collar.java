@@ -7,10 +7,11 @@ import script.obj_id;
 
 public class shock_collar extends script.base_script
 {
+    private static final int SHOCK_COLLAR_LOOT_CHANCE = 5;
+
     public shock_collar()
     {
     }
-    private static final int SHOCK_COLLAR_LOOT_CHANCE = 5;
 
     public int aiCorpsePrepared(obj_id self, dictionary params) throws InterruptedException
     {

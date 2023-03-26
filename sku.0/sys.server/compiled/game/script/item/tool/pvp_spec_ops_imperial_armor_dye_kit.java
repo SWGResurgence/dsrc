@@ -7,47 +7,49 @@ import java.util.Vector;
 
 public class pvp_spec_ops_imperial_armor_dye_kit extends script.base_script
 {
+    public static final String[] COLORS =
+            {
+                    "@tool/customizer:imppvp_color_white",
+                    "@tool/customizer:imppvp_color_black"
+            };
+    public static final String[] COLORS_CHEST =
+            {
+                    "@tool/customizer:imppvp_color_white_orange",
+                    "@tool/customizer:imppvp_color_white_white",
+                    "@tool/customizer:imppvp_color_white_black",
+                    "@tool/customizer:imppvp_color_white_red",
+                    "@tool/customizer:imppvp_color_white_blue",
+                    "@tool/customizer:imppvp_color_white_yellow",
+                    "@tool/customizer:imppvp_color_black_orange",
+                    "@tool/customizer:imppvp_color_black_white",
+                    "@tool/customizer:imppvp_color_black_black",
+                    "@tool/customizer:imppvp_color_black_red",
+                    "@tool/customizer:imppvp_color_black_blue",
+                    "@tool/customizer:imppvp_color_black_yellow"
+            };
+    public static final String[] ARMOR_TYPES =
+            {
+                    "belt",
+                    "bicep_l",
+                    "bicep_r",
+                    "boots",
+                    "bracer_l",
+                    "bracer_r",
+                    "chest_plate",
+                    "gloves",
+                    "helmet",
+                    "leggings"
+            };
     public pvp_spec_ops_imperial_armor_dye_kit()
     {
     }
-    public static final String[] COLORS = 
-    {
-        "@tool/customizer:imppvp_color_white",
-        "@tool/customizer:imppvp_color_black"
-    };
-    public static final String[] COLORS_CHEST = 
-    {
-        "@tool/customizer:imppvp_color_white_orange",
-        "@tool/customizer:imppvp_color_white_white",
-        "@tool/customizer:imppvp_color_white_black",
-        "@tool/customizer:imppvp_color_white_red",
-        "@tool/customizer:imppvp_color_white_blue",
-        "@tool/customizer:imppvp_color_white_yellow",
-        "@tool/customizer:imppvp_color_black_orange",
-        "@tool/customizer:imppvp_color_black_white",
-        "@tool/customizer:imppvp_color_black_black",
-        "@tool/customizer:imppvp_color_black_red",
-        "@tool/customizer:imppvp_color_black_blue",
-        "@tool/customizer:imppvp_color_black_yellow"
-    };
-    public static final String[] ARMOR_TYPES = 
-    {
-        "belt",
-        "bicep_l",
-        "bicep_r",
-        "boots",
-        "bracer_l",
-        "bracer_r",
-        "chest_plate",
-        "gloves",
-        "helmet",
-        "leggings"
-    };
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         setCount(self, 10);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -61,6 +63,7 @@ public class pvp_spec_ops_imperial_armor_dye_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!utils.isNestedWithin(self, player))
@@ -73,6 +76,7 @@ public class pvp_spec_ops_imperial_armor_dye_kit extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void beginArmorColorization(obj_id self, obj_id player) throws InterruptedException
     {
         Vector wornItems = new Vector();
@@ -80,12 +84,15 @@ public class pvp_spec_ops_imperial_armor_dye_kit extends script.base_script
         obj_id[] equippedItems = metrics.getWornItems(player);
         if (equippedItems != null && equippedItems.length > 0)
         {
-            for (obj_id equippedItem : equippedItems) {
+            for (obj_id equippedItem : equippedItems)
+            {
                 String name = getStaticItemName(equippedItem);
-                if (name == null || name.equals("")) {
+                if (name == null || name.equals(""))
+                {
                     continue;
                 }
-                if (name.startsWith("armor_pvp_spec_ops_imperial")) {
+                if (name.startsWith("armor_pvp_spec_ops_imperial"))
+                {
                     wornItems.addElement(equippedItem);
                 }
             }
@@ -93,12 +100,15 @@ public class pvp_spec_ops_imperial_armor_dye_kit extends script.base_script
         obj_id[] invItems = utils.getContents(utils.getInventoryContainer(player), true);
         if (invItems != null && invItems.length > 0)
         {
-            for (obj_id invItem : invItems) {
+            for (obj_id invItem : invItems)
+            {
                 String name = getStaticItemName(invItem);
-                if (name == null || name.equals("")) {
+                if (name == null || name.equals(""))
+                {
                     continue;
                 }
-                if (name.startsWith("armor_pvp_spec_ops_imperial")) {
+                if (name.startsWith("armor_pvp_spec_ops_imperial"))
+                {
                     items.addElement(invItem);
                 }
             }
@@ -114,7 +124,8 @@ public class pvp_spec_ops_imperial_armor_dye_kit extends script.base_script
         Vector armorNames = new Vector();
         if (!wornItems.isEmpty())
         {
-            for (Object wornItem : wornItems) {
+            for (Object wornItem : wornItems)
+            {
                 obj_id piece = (obj_id) wornItem;
                 utils.setScriptVar(piece, "imppvp_worn", 1);
                 armor.addElement(piece);
@@ -124,7 +135,8 @@ public class pvp_spec_ops_imperial_armor_dye_kit extends script.base_script
         }
         if (!items.isEmpty())
         {
-            for (Object item : items) {
+            for (Object item : items)
+            {
                 obj_id piece = (obj_id) item;
                 armor.addElement(piece);
                 String name = "@" + getName(piece);
@@ -136,11 +148,12 @@ public class pvp_spec_ops_imperial_armor_dye_kit extends script.base_script
         {
             cleanup(self, player);
         }
-        else 
+        else
         {
             utils.setScriptVar(self, "imppvp_armor", armor);
         }
     }
+
     public int handleArmorSelection(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -185,25 +198,26 @@ public class pvp_spec_ops_imperial_armor_dye_kit extends script.base_script
             {
                 cleanup(self, player);
             }
-            else 
+            else
             {
                 utils.setScriptVar(self, "imppvp_piece", armor[idx]);
             }
         }
-        else 
+        else
         {
             int pid = sui.listbox(self, player, prompt, sui.OK_CANCEL, title, COLORS, "handleColorSelection", true, false);
             if (pid < 0)
             {
                 cleanup(self, player);
             }
-            else 
+            else
             {
                 utils.setScriptVar(self, "imppvp_piece", armor[idx]);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleColorSelection(obj_id self, dictionary params) throws InterruptedException
     {
         int bp = sui.getIntButtonPressed(params);
@@ -230,11 +244,7 @@ public class pvp_spec_ops_imperial_armor_dye_kit extends script.base_script
             sendSystemMessageProse(player, pp);
             return SCRIPT_CONTINUE;
         }
-        boolean worn = false;
-        if (utils.hasScriptVar(piece, "imppvp_worn"))
-        {
-            worn = true;
-        }
+        boolean worn = utils.hasScriptVar(piece, "imppvp_worn");
         String newArmorName = constructNewArmorString(piece, idx);
         if (newArmorName == null)
         {
@@ -255,13 +265,14 @@ public class pvp_spec_ops_imperial_armor_dye_kit extends script.base_script
             {
                 setCount(self, count);
             }
-            else 
+            else
             {
                 destroyObject(self);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public void cleanup(obj_id self, obj_id player) throws InterruptedException
     {
         utils.removeScriptVar(self, "imppvp_armor");
@@ -269,11 +280,13 @@ public class pvp_spec_ops_imperial_armor_dye_kit extends script.base_script
         obj_id[] equippedItems = metrics.getWornItems(player);
         if (equippedItems != null && equippedItems.length > 0)
         {
-            for (obj_id equippedItem : equippedItems) {
+            for (obj_id equippedItem : equippedItems)
+            {
                 utils.removeScriptVar(equippedItem, "imppvp_worn");
             }
         }
     }
+
     public String constructNewArmorString(obj_id armor, int idx) throws InterruptedException
     {
         String name = getStaticItemName(armor);
@@ -281,49 +294,51 @@ public class pvp_spec_ops_imperial_armor_dye_kit extends script.base_script
         String color = null;
         if (name.startsWith("armor_pvp_spec_ops_imperial_black_chest") || name.startsWith("armor_pvp_spec_ops_imperial_white_chest"))
         {
-            for (String armorType : ARMOR_TYPES) {
-                if (name.contains(armorType)) {
+            for (String armorType : ARMOR_TYPES)
+            {
+                if (name.contains(armorType))
+                {
                     type = armorType;
                 }
             }
             switch (idx)
             {
                 case 0:
-                color = "white_chest_plate_orange_pad";
-                break;
+                    color = "white_chest_plate_orange_pad";
+                    break;
                 case 1:
-                color = "white_chest_plate_white_pad";
-                break;
+                    color = "white_chest_plate_white_pad";
+                    break;
                 case 2:
-                color = "white_chest_plate_black_pad";
-                break;
+                    color = "white_chest_plate_black_pad";
+                    break;
                 case 3:
-                color = "white_chest_plate_red_pad";
-                break;
+                    color = "white_chest_plate_red_pad";
+                    break;
                 case 4:
-                color = "white_chest_plate_blue_pad";
-                break;
+                    color = "white_chest_plate_blue_pad";
+                    break;
                 case 5:
-                color = "white_chest_plate_yellow_pad";
-                break;
+                    color = "white_chest_plate_yellow_pad";
+                    break;
                 case 6:
-                color = "black_chest_plate_orange_pad";
-                break;
+                    color = "black_chest_plate_orange_pad";
+                    break;
                 case 7:
-                color = "black_chest_plate_white_pad";
-                break;
+                    color = "black_chest_plate_white_pad";
+                    break;
                 case 8:
-                color = "black_chest_plate_black_pad";
-                break;
+                    color = "black_chest_plate_black_pad";
+                    break;
                 case 9:
-                color = "black_chest_plate_red_pad";
-                break;
+                    color = "black_chest_plate_red_pad";
+                    break;
                 case 10:
-                color = "black_chest_plate_blue_pad";
-                break;
+                    color = "black_chest_plate_blue_pad";
+                    break;
                 case 11:
-                color = "black_chest_plate_yellow_pad";
-                break;
+                    color = "black_chest_plate_yellow_pad";
+                    break;
             }
             if (type == null || color == null)
             {
@@ -331,21 +346,23 @@ public class pvp_spec_ops_imperial_armor_dye_kit extends script.base_script
             }
             return "armor_pvp_spec_ops_imperial_" + color + "_05_01";
         }
-        else 
+        else
         {
-            for (String armorType : ARMOR_TYPES) {
-                if (name.contains(armorType)) {
+            for (String armorType : ARMOR_TYPES)
+            {
+                if (name.contains(armorType))
+                {
                     type = armorType;
                 }
             }
             switch (idx)
             {
                 case 0:
-                color = "white_";
-                break;
+                    color = "white_";
+                    break;
                 case 1:
-                color = "black_";
-                break;
+                    color = "black_";
+                    break;
             }
             if (type == null || color == null)
             {

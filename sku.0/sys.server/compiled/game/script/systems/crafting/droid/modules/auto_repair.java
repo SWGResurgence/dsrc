@@ -5,14 +5,15 @@ import script.library.*;
 
 public class auto_repair extends script.base_script
 {
-    public auto_repair()
-    {
-    }
     public static final String STF_FILE = "pet/droid_modules";
     public static final String SCRIPT_VAR_REPAIR_ON = "module_data.repair_on";
     public static final String SCRIPT_VAR_LAST_REPAIR = "module_data.last_repair";
     public static final String VAR_REPAIR_POWER = "module_data.auto_repair_power";
     public static final String VAR_REPAIR_PULSE = "module_data.auto_repair_pulse";
+    public auto_repair()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (isDead(self) || ai_lib.aiIsDead(self))
@@ -38,6 +39,7 @@ public class auto_repair extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item != menu_info_types.SERVER_MENU6)
@@ -77,7 +79,7 @@ public class auto_repair extends script.base_script
                 utils.removeScriptVar(self, SCRIPT_VAR_REPAIR_ON);
                 sendSystemMessage(player, new string_id(STF_FILE, "autorepair_off"));
             }
-            else 
+            else
             {
                 utils.setScriptVar(self, SCRIPT_VAR_REPAIR_ON, getGameTime());
                 sendSystemMessage(player, new string_id(STF_FILE, "autorepair_on"));
@@ -88,6 +90,7 @@ public class auto_repair extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -108,6 +111,7 @@ public class auto_repair extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgAutoRepairPulse(obj_id self, dictionary params) throws InterruptedException
     {
         if (!utils.hasScriptVar(self, SCRIPT_VAR_REPAIR_ON))
@@ -154,26 +158,36 @@ public class auto_repair extends script.base_script
         obj_id[] creatures = getCreaturesInRange(loc, healing.VAR_STIMPACK_DROID_RADIUS);
         if (creatures != null)
         {
-            for (obj_id creature : creatures) {
-                if (pet_lib.isDroidPet(creature)) {
+            for (obj_id creature : creatures)
+            {
+                if (pet_lib.isDroidPet(creature))
+                {
                     obj_id target_master = getMaster(creature);
-                    if (isIdValid(target_master)) {
-                        if (master != target_master && !group.inSameGroup(master, target_master)) {
+                    if (isIdValid(target_master))
+                    {
+                        if (master != target_master && !group.inSameGroup(master, target_master))
+                        {
                             continue;
                         }
-                    } else {
+                    }
+                    else
+                    {
                         continue;
                     }
-                    if (ai_lib.aiIsDead(creature)) {
+                    if (ai_lib.aiIsDead(creature))
+                    {
                         continue;
                     }
                     int last_repair = 0;
-                    if (utils.hasScriptVar(creature, SCRIPT_VAR_LAST_REPAIR)) {
+                    if (utils.hasScriptVar(creature, SCRIPT_VAR_LAST_REPAIR))
+                    {
                         last_repair = utils.getIntScriptVar(creature, SCRIPT_VAR_LAST_REPAIR);
                     }
                     int interval = getGameTime() - last_repair;
-                    if (interval > healing.VAR_AUTO_REPAIR_MIN_INTERVAL) {
-                        if (healing.isDamaged(creature)) {
+                    if (interval > healing.VAR_AUTO_REPAIR_MIN_INTERVAL)
+                    {
+                        if (healing.isDamaged(creature))
+                        {
                             attrib_mod am = utils.createHealDamageAttribMod(HEALTH, repair_power);
                             utils.addAttribMod(creature, am);
                             repair_pulses += 1;

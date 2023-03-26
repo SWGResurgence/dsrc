@@ -11,26 +11,30 @@ import java.util.Vector;
 
 public class effect_controller extends script.base_script
 {
+    public static final String invisibleObject = "object/tangible/theme_park/invisible_object.iff";
+    public static final String effectControlleScript = "systems.storyteller.effect_controller";
     public effect_controller()
     {
     }
-    public static final String invisibleObject = "object/tangible/theme_park/invisible_object.iff";
-    public static final String effectControlleScript = "systems.storyteller.effect_controller";
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "handlePlayEffect", null, 1, false);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayEffect(obj_id self, dictionary params) throws InterruptedException
     {
         playEffect(self);
         return SCRIPT_CONTINUE;
     }
+
     public void playEffect(obj_id self) throws InterruptedException
     {
         String storytellerTokenName = getStringObjVar(self, storyteller.EFFECT_TOKEN_NAME);
@@ -47,12 +51,12 @@ public class effect_controller extends script.base_script
                     float cleanup_time = getStandardCleanupTime(self);
                     messageTo(self, "cleanupEffectController", null, cleanup_time, false);
                 }
-                else 
+                else
                 {
                     playClientEffectObj(playersInStory, effectName, self, "");
                 }
             }
-            else 
+            else
             {
                 playClientEffectObj(playersInStory, effectName, self, "", null, "storyteller_persisted_effect");
                 setObjVar(self, storyteller.EFFECT_ACTIVE_OBJVAR, effectName);
@@ -61,6 +65,7 @@ public class effect_controller extends script.base_script
         }
         return;
     }
+
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
     {
         if (!isIdValid(breacher) || !isPlayer(breacher))
@@ -80,16 +85,17 @@ public class effect_controller extends script.base_script
         {
             if (storyteller.allowedToSeeStorytellerObject(self, breacher))
             {
-                obj_id[] playerInStory = 
-                {
-                    breacher
-                };
+                obj_id[] playerInStory =
+                        {
+                                breacher
+                        };
                 stopClientEffectObjByLabel(playerInStory, self, "storyteller_persisted_effect", false);
                 playClientEffectObj(playerInStory, effectName, self, "", null, "storyteller_persisted_effect");
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlayNewStorytellerEffect(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id[] playersInStory = getPlayersInRangeInStory(self, getLocation(self));
@@ -99,15 +105,18 @@ public class effect_controller extends script.base_script
         playEffect(self);
         return SCRIPT_CONTINUE;
     }
+
     public float getStandardCleanupTime(obj_id effect_controller) throws InterruptedException
     {
         return 30.0f;
     }
+
     public int cleanupEffectController(obj_id self, dictionary params) throws InterruptedException
     {
         trial.cleanupObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public obj_id[] getPlayersInRangeInStory(obj_id self, location here) throws InterruptedException
     {
         Vector playerInStory = new Vector();
@@ -117,8 +126,10 @@ public class effect_controller extends script.base_script
         {
             return null;
         }
-        for (obj_id player : players) {
-            if (storyteller.allowedToSeeStorytellerObject(self, player)) {
+        for (obj_id player : players)
+        {
+            if (storyteller.allowedToSeeStorytellerObject(self, player))
+            {
                 utils.addElement(playerInStory, player);
             }
         }

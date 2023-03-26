@@ -8,10 +8,12 @@ import script.string_id;
 
 public class salvage_kit extends script.base_script
 {
+    public static final string_id SID_SALVAGE = new string_id("slicing/slicing", "salvage");
+
     public salvage_kit()
     {
     }
-    public static final string_id SID_SALVAGE = new string_id("slicing/slicing", "salvage");
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         obj_id inventory = getObjectInSlot(player, "inventory");
@@ -22,6 +24,7 @@ public class salvage_kit extends script.base_script
         mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_SALVAGE);
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         obj_id inventory = getObjectInSlot(player, "inventory");
@@ -47,7 +50,7 @@ public class salvage_kit extends script.base_script
                 {
                     new_obj = "object/tangible/smuggler/finely_crafted_toolset.iff";
                 }
-                else 
+                else
                 {
                     new_obj = "object/tangible/smuggler/illegal_core_booster.iff";
                 }
@@ -75,7 +78,7 @@ public class salvage_kit extends script.base_script
                 {
                     new_obj = "object/tangible/smuggler/reactive_micro_plating.iff";
                 }
-                else 
+                else
                 {
                     new_obj = "object/tangible/smuggler/trandoshan_interframe.iff";
                 }

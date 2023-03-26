@@ -12,11 +12,13 @@ public class combat_delayed_tracker extends script.systems.combat.combat_base
     public combat_delayed_tracker()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedAttack(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objOwner = utils.getObjIdScriptVar(self, "objOwner");
@@ -63,6 +65,7 @@ public class combat_delayed_tracker extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleDelayedParticle(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id objOwner = utils.getObjIdScriptVar(self, "objOwner");

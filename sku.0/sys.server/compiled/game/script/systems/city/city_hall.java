@@ -5,9 +5,6 @@ import script.library.*;
 
 public class city_hall extends script.base_script
 {
-    public city_hall()
-    {
-    }
     public static final string_id NEW_CITY_SUBJECT = new string_id("city/city", "new_city_subject");
     public static final string_id NEW_CITY_BODY = new string_id("city/city", "new_city_body");
     public static final string_id NEW_CITY_SUCCESS_SUBJECT = new string_id("city/city", "new_city_success_subject");
@@ -23,11 +20,16 @@ public class city_hall extends script.base_script
     public static final string_id CITIZEN_OVERAGE_WARNING_SUBJECT = new string_id("city/city", "safe_citizen_overage_subject");
     public static final string_id CITIZEN_OVERAGE_WARNING_BODY = new string_id("city/city", "safe_citizen_overage_body");
     public static final int SAFE_HOUSE_GRACE_PERIOD = 60 * 60 * 24 * 4;
+    public city_hall()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         messageTo(self, "initializeNewCity", null, 3.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         int city_id = findCityByCityHall(self);
@@ -54,7 +56,8 @@ public class city_hall extends script.base_script
             obj_id[] citizens = cityGetCitizenIds(city_id);
             if (citizens != null)
             {
-                for (obj_id citizen : citizens) {
+                for (obj_id citizen : citizens)
+                {
                     String cname = cityGetCitizenName(city_id, citizen);
                     prose_package bodypp = prose.getPackage(new string_id("city/city", "city_version_update_body_" + city.CITY_VERSION), city.CITY_VERSION);
                     utils.sendMail(new string_id("city/city", "city_version_update_subject_" + city.CITY_VERSION), bodypp, cname, "Planetary Civic Authority");
@@ -62,7 +65,8 @@ public class city_hall extends script.base_script
             }
             if (city.CITY_VERSION == 3)
             {
-                for (obj_id citizen : citizens) {
+                for (obj_id citizen : citizens)
+                {
                     city.setCitizenAllegiance(city_id, citizen, null);
                 }
                 removeObjVar(self, "candidate_list");
@@ -119,6 +123,7 @@ public class city_hall extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         CustomerServiceLog("player_city", "Handling OnDestroy for a city hall.  Hall: " + self);
@@ -130,16 +135,22 @@ public class city_hall extends script.base_script
         obj_id[] structures = cityGetStructureIds(city_id);
         if (structures != null)
         {
-            for (obj_id structure : structures) {
-                if (!isIdValid(structure)) {
+            for (obj_id structure : structures)
+            {
+                if (!isIdValid(structure))
+                {
                     continue;
                 }
-                if (structure == self) {
+                if (structure == self)
+                {
                     continue;
                 }
-                if (player_structure.isCivic(structure)) {
+                if (player_structure.isCivic(structure))
+                {
                     messageTo(structure, "msgDestroyStructure", null, 0.0f, true);
-                } else if (!city.isNormalStructure(city_id, structure)) {
+                }
+                else if (!city.isNormalStructure(city_id, structure))
+                {
                     messageTo(structure, "requestDestroy", null, 0.0f, true);
                 }
             }
@@ -151,12 +162,14 @@ public class city_hall extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int updateCityLocation(obj_id self, dictionary params) throws InterruptedException
     {
         int city_id = findCityByCityHall(self);
         city.updateLocation(city_id, getLocation(self));
         return SCRIPT_CONTINUE;
     }
+
     public int initializeNewCity(obj_id self, dictionary params) throws InterruptedException
     {
         CustomerServiceLog("player_city", "Initializing new city for structure " + self);
@@ -211,6 +224,7 @@ public class city_hall extends script.base_script
         setObjVar(self, "founder.time", getGameTime());
         return SCRIPT_CONTINUE;
     }
+
     public int addNewCityStructures(obj_id self, dictionary params) throws InterruptedException
     {
         int city_id = params.getInt("city_id");
@@ -219,9 +233,12 @@ public class city_hall extends script.base_script
         obj_id[] range_objects = getObjectsInRange(cityLoc, radius);
         if (range_objects != null)
         {
-            for (obj_id range_object : range_objects) {
-                if (isIdValid(range_object) && hasScript(range_object, player_structure.SCRIPT_PERMANENT_STRUCTURE)) {
-                    if (getContainedBy(range_object) == obj_id.NULL_ID) {
+            for (obj_id range_object : range_objects)
+            {
+                if (isIdValid(range_object) && hasScript(range_object, player_structure.SCRIPT_PERMANENT_STRUCTURE))
+                {
+                    if (getContainedBy(range_object) == obj_id.NULL_ID)
+                    {
                         city.addStructureToCity(range_object, city_id);
                     }
                 }
@@ -229,9 +246,10 @@ public class city_hall extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int validateCity(obj_id self, dictionary params) throws InterruptedException
     {
-        if(hasObjVar(self, city.OBJVAR_DERANK_EXEMPT))
+        if (hasObjVar(self, city.OBJVAR_DERANK_EXEMPT))
         {
             return SCRIPT_CONTINUE; // don't destroy a city a GM flagged as de-rank exempt
         }
@@ -258,6 +276,7 @@ public class city_hall extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int registerVoteTerminal(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -268,6 +287,7 @@ public class city_hall extends script.base_script
         setObjVar(self, "vote_terminal", terminal);
         return SCRIPT_CONTINUE;
     }
+
     public int resetVoteTerminal(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "currentInterval", params.getInt("currentInterval"));
@@ -276,6 +296,7 @@ public class city_hall extends script.base_script
         messageTo(terminal, "resetVoteTerminal", null, 0.0f, true);
         return SCRIPT_CONTINUE;
     }
+
     public int expandCity(obj_id self, dictionary params) throws InterruptedException
     {
         int rank = params.getInt("rank") + 1;
@@ -285,11 +306,14 @@ public class city_hall extends script.base_script
         obj_id mayor = cityGetLeader(city_id);
         city.setRadius(city_id, radius);
         obj_id[] structures = cityGetStructureIds(city_id);
-        for (obj_id structure : structures) {
-            if (!isIdValid(structure)) {
+        for (obj_id structure : structures)
+        {
+            if (!isIdValid(structure))
+            {
                 continue;
             }
-            if (!structure.isLoaded()) {
+            if (!structure.isLoaded())
+            {
                 continue;
             }
             city.checkStructureValid(city_id, structure, rank);
@@ -297,9 +321,12 @@ public class city_hall extends script.base_script
         obj_id[] range_objects = getObjectsInRange(cityLoc, radius);
         if (range_objects != null)
         {
-            for (obj_id range_object : range_objects) {
-                if (isIdValid(range_object) && hasScript(range_object, player_structure.SCRIPT_PERMANENT_STRUCTURE)) {
-                    if (getContainedBy(range_object) == obj_id.NULL_ID) {
+            for (obj_id range_object : range_objects)
+            {
+                if (isIdValid(range_object) && hasScript(range_object, player_structure.SCRIPT_PERMANENT_STRUCTURE))
+                {
+                    if (getContainedBy(range_object) == obj_id.NULL_ID)
+                    {
                         city.addStructureToCity(range_object, city_id);
                     }
                 }
@@ -307,6 +334,7 @@ public class city_hall extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int contractCity(obj_id self, dictionary params) throws InterruptedException
     {
         int rank = params.getInt("rank") + 1;
@@ -325,16 +353,21 @@ public class city_hall extends script.base_script
         utils.setScriptVar(self, "city.st_count", 0);
         utils.setScriptVar(self, "city.deco_count", 0);
         obj_id[] structures = cityGetStructureIds(city_id);
-        for (obj_id structure : structures) {
-            if (!isIdValid(structure)) {
+        for (obj_id structure : structures)
+        {
+            if (!isIdValid(structure))
+            {
                 continue;
             }
-            if (!structure.isLoaded()) {
+            if (!structure.isLoaded())
+            {
                 continue;
             }
             float dist = utils.getDistance2D(self, structure);
-            if (dist > radius) {
-                if (!city.isNormalStructure(city_id, structure)) {
+            if (dist > radius)
+            {
+                if (!city.isNormalStructure(city_id, structure))
+                {
                     CustomerServiceLog("player_city", "City destroyed special outside new radius. City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Object: " + structure);
                     destroyObject(structure);
                     String structure_name = localize(getNameStringId(structure));
@@ -343,14 +376,17 @@ public class city_hall extends script.base_script
                     continue;
                 }
                 city.removeStructureFromCity(city_id, structure);
-                if (player_structure.isCivic(structure)) {
+                if (player_structure.isCivic(structure))
+                {
                     CustomerServiceLog("player_city", "City destroyed structure outside new radius. City: " + city_name + " (" + city_id + "/" + city_hall + ")" + " Structure: " + structure);
                     messageTo(structure, "msgDestroyStructure", null, 0.0f, false);
                     String structure_name = localize(getNameStringId(structure));
                     prose_package bodypp = prose.getPackage(STRUCTURE_DESTROYED_RADIUS_BODY, structure_name, mayor_name);
                     utils.sendMail(STRUCTURE_DESTROYED_RADIUS_SUBJECT, bodypp, mayor_name, "City Hall");
                 }
-            } else {
+            }
+            else
+            {
                 city.checkStructureValid(city_id, structure, rank);
             }
         }
@@ -371,6 +407,7 @@ public class city_hall extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int checkCivicCap(obj_id self, dictionary params) throws InterruptedException
     {
         int city_id = findCityByCityHall(self);
@@ -390,25 +427,32 @@ public class city_hall extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int payMaintenance(obj_id self, dictionary params) throws InterruptedException
     {
         int city_id = findCityByCityHall(self);
         utils.setScriptVar(self, "maint.paid", 0);
         payStructureMaint(self, city_id, self, true);
         obj_id[] structures = cityGetStructureIds(city_id);
-        for (obj_id structure : structures) {
-            if (structure == self) {
+        for (obj_id structure : structures)
+        {
+            if (structure == self)
+            {
                 continue;
             }
-            if (city.isNormalStructure(city_id, structure)) {
+            if (city.isNormalStructure(city_id, structure))
+            {
                 payStructureMaint(self, city_id, structure, false);
-            } else {
+            }
+            else
+            {
                 paySpecialMaint(self, city_id, structure);
             }
         }
         messageTo(self, "reportTotalPaid", null, 120, false);
         return SCRIPT_CONTINUE;
     }
+
     public int reportTotalPaid(obj_id self, dictionary params) throws InterruptedException
     {
         int city_id = findCityByCityHall(self);
@@ -419,6 +463,7 @@ public class city_hall extends script.base_script
         utils.sendMail(CITY_MAINT_SUBJECT, bodypp, mayor_name, "City Hall");
         return SCRIPT_CONTINUE;
     }
+
     public void payStructureMaint(obj_id self, int city_id, obj_id structure, boolean spec) throws InterruptedException
     {
         int cost = city.getStructureCost(city_id, structure);
@@ -436,6 +481,7 @@ public class city_hall extends script.base_script
         payparams.put("structure", structure);
         transferBankCreditsToNamedAccount(self, money.ACCT_CITY, cost, "handleMaintSuccess", "handleMaintFail", payparams);
     }
+
     public int handleMaintSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         int cost = params.getInt("cost");
@@ -447,6 +493,7 @@ public class city_hall extends script.base_script
         utils.moneyOutMetric(self, money.ACCT_CITY, cost);
         return SCRIPT_CONTINUE;
     }
+
     public int handleMaintFail(obj_id self, dictionary params) throws InterruptedException
     {
         int city_id = params.getInt("city_id");
@@ -458,6 +505,7 @@ public class city_hall extends script.base_script
         damageCityStructure(self, structure, cost);
         return SCRIPT_CONTINUE;
     }
+
     public void damageCityStructure(obj_id self, obj_id structure, int cost) throws InterruptedException
     {
         int city_id = findCityByCityHall(self);
@@ -468,6 +516,7 @@ public class city_hall extends script.base_script
         outparams.put("cost", cost);
         messageTo(structure, "takeCityDamage", outparams, 0.0f, true);
     }
+
     public void paySpecialMaint(obj_id self, int city_id, obj_id structure) throws InterruptedException
     {
         int cost = city.getStructureCost(city_id, structure);
@@ -481,6 +530,7 @@ public class city_hall extends script.base_script
         payparams.put("structure", structure);
         transferBankCreditsToNamedAccount(self, money.ACCT_CITY, cost, "handleSpecMaintSuccess", "handleSpecMaintFail", payparams);
     }
+
     public int handleSpecMaintSuccess(obj_id self, dictionary params) throws InterruptedException
     {
         int cost = params.getInt("cost");
@@ -490,6 +540,7 @@ public class city_hall extends script.base_script
         utils.moneyOutMetric(self, money.ACCT_CITY, cost);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpecMaintFail(obj_id self, dictionary params) throws InterruptedException
     {
         int city_id = params.getInt("city_id");
@@ -505,6 +556,7 @@ public class city_hall extends script.base_script
         utils.sendMail(city.STRUCTURE_DESTROYED_MAINT_SUBJECT, bodypp, mayor_name, "City Hall");
         return SCRIPT_CONTINUE;
     }
+
     public int setVoteInterval(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null)
@@ -515,6 +567,7 @@ public class city_hall extends script.base_script
         setObjVar(self, "cityVoteInterval", cityVoteInterval);
         return SCRIPT_CONTINUE;
     }
+
     public int msgCheckMyCityMotd(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "city_citizen_message"))
@@ -530,6 +583,7 @@ public class city_hall extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int st_citySpecBonusCheck(obj_id self, dictionary params) throws InterruptedException
     {
         int city_id = getCityAtLocation(getLocation(self), 0);
@@ -540,6 +594,7 @@ public class city_hall extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public void validateSafeCitizenCount(obj_id city_hall, int city_id) throws InterruptedException
     {
         if (!isIdValid(city_hall))
@@ -583,6 +638,7 @@ public class city_hall extends script.base_script
             }
         }
     }
+
     public void forceRemoveSafeCitizen(int city_id, int numCitizensToRemove, obj_id city_hall) throws InterruptedException
     {
         if (!cityExists(city_id))
@@ -645,6 +701,7 @@ public class city_hall extends script.base_script
             }
         }
     }
+
     public int handleMultipleSafeHouseCitizenRemoval(obj_id self, dictionary params) throws InterruptedException
     {
         int city_id = params.getInt("city_id");
@@ -653,6 +710,7 @@ public class city_hall extends script.base_script
         forceRemoveSafeCitizen(city_id, removeCount, city_hall);
         return SCRIPT_CONTINUE;
     }
+
     public int QaTestSafeHouseOverload(obj_id self, dictionary params) throws InterruptedException
     {
         int city_id = getCityAtLocation(getLocation(self), 0);
@@ -660,6 +718,7 @@ public class city_hall extends script.base_script
         validateSafeCitizenCount(city_hall, city_id);
         return SCRIPT_CONTINUE;
     }
+
     public int retryDepersistCityFactionalAlignment(obj_id self, dictionary params) throws InterruptedException
     {
         int numberOfRetry = params.getInt("number_of_retry");
@@ -692,6 +751,7 @@ public class city_hall extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int retryDepersistCityGcwRegionDefender(obj_id self, dictionary params) throws InterruptedException
     {
         int numberOfRetry = params.getInt("number_of_retry");

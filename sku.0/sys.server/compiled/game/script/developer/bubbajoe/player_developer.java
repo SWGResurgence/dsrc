@@ -9,13 +9,10 @@ package script.developer.bubbajoe;
 import script.*;
 import script.library.*;
 
-import java.io.File;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
-import java.time.Clock;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import static script.systems.city.city_hire.DESC;
+import java.util.Locale;
 
 public class player_developer extends base_script
 {
@@ -25,9 +22,9 @@ public class player_developer extends base_script
     {
     }
 
-    public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException, InvocationTargetException
+    public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException, InvocationTargetException, IOException
     {
-        obj_id iTarget = getIntendedTarget(self);
+        obj_id iTarget = target;
         java.util.StringTokenizer tok = new java.util.StringTokenizer(params);
         String cmd = tok.nextToken();
         if (cmd.equalsIgnoreCase("quest"))
@@ -48,10 +45,11 @@ public class player_developer extends base_script
             }
             if (subcommand.equalsIgnoreCase("task"))
             {
-                String task = tok.nextToken();
-                if (task.equalsIgnoreCase("complete"))
+                String taskSub = tok.nextToken();
+                String taskName = tok.nextToken();
+                if (taskSub.equalsIgnoreCase("complete"))
                 {
-                    groundquests.completeTask(target, questString, tok.nextToken());
+                    groundquests.completeTask(target, questString, taskName);
                 }
             }
             return SCRIPT_CONTINUE;
@@ -259,14 +257,16 @@ public class player_developer extends base_script
             {
                 if (item.startsWith(type)) //object/draft_schematic/TYPE/subtype/etc/etc
                 {
-                    String description = "This item was created by " + colors_hex.HEADER + colors_hex.PEACHPUFF + getRandomHumanName(self) + colors_hex.FOOTER + " on " + colors_hex.HEADER + colors_hex.SANDYBROWN + getCalendarTimeStringGMT_YYYYMMDDHHMMSS(getCalendarTime() - (rand(0, 86400))) + "\\#.";
+                    String description = "This item was created by " + colors_hex.HEADER + colors_hex.PEACHPUFF + getRandomHumanName(self) + colors_hex.FOOTER + " on " + colors_hex.HEADER + colors_hex.SANDYBROWN + getCalendarTimeStringGMT_YYYYMMDDHHMMSS(getCalendarTime() - (rand(0, 106560))) + "\\#.";
                     if (bagLimit > 500 && !utils.hasScriptVar(self, "bagLimit"))
                     {
                         broadcast(self, "Breached 500 items.");
                         utils.setScriptVar(self, "bagLimit", 1);
                     }
-                    obj_id madeItem = makeCraftedItem(item, 100.0f, myBag);
+                    obj_id madeItem = makeCraftedItem(item, 1000.0f, myBag);
                     setDescriptionStringId(madeItem, new string_id(description));
+                    setObjVar(madeItem, "null_desc", description);
+                    attachScript(madeItem, "developer.bubbajoe.sync");
                     bagLimit++;
                 }
                 else
@@ -329,6 +329,16 @@ public class player_developer extends base_script
             }
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equalsIgnoreCase("makeAugs"))
+        {
+            String template = "object/tangible/component/weapon/new_weapon/enhancement_ranged_slot_one_s23.iff";
+            obj_id augment = createObject(template, getLocation(self));
+            attachScript(augment, "systems.crafting.weapon.component.crafting_weapon_component_attribute");
+            setObjVar(augment, "attribute.bonus.0", 300);
+            setObjVar(augment, "attribute.bonus.2", 300);
+            setName(augment, "Melee Weapon Augmentation");
+            return SCRIPT_CONTINUE;
+        }
         if (cmd.equalsIgnoreCase("scale"))
         {
             float original = getScale(target);
@@ -354,6 +364,12 @@ public class player_developer extends base_script
             String hash = tok.nextToken();
             int hashValue = getStringCrc(hash);
             broadcast(self, "Hash Value: " + hashValue);
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("convertcrctostring"))
+        {
+            String hash = tok.nextToken();
+
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("travel"))
@@ -416,7 +432,7 @@ public class player_developer extends base_script
             {
                 setObjVar(city_hall, VAR_CITY_OLD, getIntObjVar(city_hall, VAR_CITY));
                 removeObjVar(city_hall, VAR_CITY);
-                sendSystemMessageTestingOnly(self, "Removed Spec Stamp from City Hall with preservation of old specstamp.");
+                sendSystemMessageTestingOnly(self, "Removed specstamp from City Hall with preservation of old specstamp.");
             }
             else
             {
@@ -576,7 +592,14 @@ public class player_developer extends base_script
             {
                 if (buffName.contains(query))
                 {
-                    buff.applyBuff(target, buffName);
+                    if (buff.isDebuff(buffName))
+                    {
+                        return SCRIPT_CONTINUE;
+                    }
+                    else
+                    {
+                        buff.applyBuff(target, buffName);
+                    }
                     broadcast(self, "Applied " + buffName + " to " + getName(target));
                 }
                 else
@@ -599,6 +622,8 @@ public class player_developer extends base_script
             badSkills.add("utility_beta_demo_combat");
             badSkills.add("utility_beta_demo_combat");
             badSkills.add("utility_player");
+            badSkills.add("swg_dev");
+            badSkills.add("swg_cs");
             String query = tok.nextToken();
             String SKILL_TABLE = "datatables/skill/skills.iff";
             String SKILL_TABLE_COLUMN = "NAME";
@@ -650,13 +675,13 @@ public class player_developer extends base_script
             switch (toggle)
             {
                 case "on":
-                    sendConsoleCommand("/object setCoverVisibility " + self + " 0", self);
+                    sendConsoleCommand("/object setCoverVisibility " + self + " 1", self);
                     sendConsoleCommand("/object hide " + self + " 0", self);
                     sendConsoleCommand("/echo You are visible.", self);
                     break;
                 case "off":
-                    sendConsoleCommand("/object setCoverVisibility " + self + " 1", self);
-                    sendConsoleCommand("/object hide " + self + " 1", self);
+                    sendConsoleCommand("/object setCoverVisibility " + self + " 0", self);
+                    sendConsoleCommand("/object hide " + self + " 0", self);
                     sendConsoleCommand("/echo You are visible.", self);
                     break;
                 default:
@@ -676,7 +701,7 @@ public class player_developer extends base_script
             {
                 broadcast(self, "No mod specified. See console for valid mods.");
                 debugConsoleMsg(self, "/developer editWeapon <mod> <value>");
-                debugConsoleMsg(self, "List of valid mods:\nminDamage\nmaxDamage\nattackSpeed\nwoundChance\nattackCost\naccuracy\nelementalType\nelementalValue\nrangeInfo\nq\ndamageRadius");
+                debugConsoleMsg(self, "List of valid mods:\nminDamage\nmaxDamage\nattackSpeed\nwoundChance\nattackCost\naccuracy\nelementalType\nelementalValue\nrangeInfo\nresetAllStats\ndamageRadius");
                 return SCRIPT_CONTINUE;
             }
             switch (mod)
@@ -738,7 +763,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin openlink url");
+                sendSystemMessageTestingOnly(self, "Syntax: /developer openlink url");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -756,6 +781,44 @@ public class player_developer extends base_script
             {
                 createClientPathAdvanced(player, getLocation(player), getLocation(targetId), "default");
             }
+        }
+        if (cmd.equalsIgnoreCase("awardBirthday"))
+        {
+            obj_id slice = create.createObject("object/tangible/food/crafted/dessert_air_cake.iff", utils.getInventoryContainer(target), "");
+            setName(slice, "Slice of Birthday Cake");
+            setDescriptionStringId(slice, new string_id("Cut from the most beautiful cake Master Abbub has ever made, this tasty slice will make you feel all cozy inside."));
+            attachScript(slice, "developer.bubbajoe.bday_gift");
+            broadcast(target, "Happy Birthday from the SWG: Resurgence Team!");
+
+        }
+        if (cmd.equals("tableView"))
+        {
+            String DATATABLE_MASTER_ITEM = "datatables/item/master_item/master_item.iff";
+            final String[] columnHeader = {
+                    "name",
+                    "string_name",
+                    "string_detail"
+            };
+            final String[] columnHeaderType = {
+                    "text",
+                    "text",
+                    "text"
+            };
+            int numRows = dataTableGetNumRows(DATATABLE_MASTER_ITEM);
+            int numColumns = dataTableGetNumColumns(DATATABLE_MASTER_ITEM);
+            final String[][] columnData = new String[numRows][numColumns];
+            for (int i = 0; i < numRows; i++)
+            {
+                broadcast(self, String.valueOf(numRows));
+                for (int j = 0; j < numColumns; j++)
+                {
+                    broadcast(self, String.valueOf(numColumns));
+                    String columnName = (columnHeader[j]);
+                    columnData[i][j] = dataTableGetString(DATATABLE_MASTER_ITEM, i, columnName);
+                    broadcast(self, dataTableGetString(DATATABLE_MASTER_ITEM, i, columnName));
+                }
+            }
+            sui.tableColumnMajor(self, self, sui.OK_CANCEL, "DATATABLE VIEWER", "noHandler", "Master Item Table Loaded", columnHeader, columnHeaderType, columnData, true);
         }
         if (cmd.equalsIgnoreCase("playeffect"))
         {
@@ -813,7 +876,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectlocatloc <effect name> <x> <y> <z>");
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playeffectatloc <effect name> <x> <y> <z>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -869,7 +932,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundloc <sound name>");
+                sendSystemMessageTestingOnly(self, "Syntax: /admin playsoundeveryone <sound name>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -903,7 +966,7 @@ public class player_developer extends base_script
         {
             if (!tok.hasMoreTokens())
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin rewardarea <item> <count>");
+                sendSystemMessageTestingOnly(self, "Syntax: /developer rewardarea <item> <count>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -976,7 +1039,7 @@ public class player_developer extends base_script
             int level = Integer.parseInt(tok.nextToken());
             if (level == 0)
             {
-                sendSystemMessageTestingOnly(self, "Syntax: /admin setnumitems <loot level>");
+                sendSystemMessageTestingOnly(self, "Syntax: /admin setnumitems <loot count>");
                 return SCRIPT_CONTINUE;
             }
             else
@@ -1035,7 +1098,6 @@ public class player_developer extends base_script
                 {
                     setCount(content, rand(1, 9999));
                 }
-
             }
         }
         if (cmd.equalsIgnoreCase("sendwarning"))
@@ -1196,6 +1258,22 @@ public class player_developer extends base_script
                 setName(treasureChest, "a corpse of " + NAMEs[rand(0, NAMEs.length - 1)]);
                 loot.makeLootInContainer(treasureChest, table, amt, 300);
                 sendSystemMessageTestingOnly(self, "A loot chest was made with " + amt + " items from the loot table: " + table);
+                obj_id[] contents = getContents(treasureChest);
+                {
+                    for (obj_id content : contents)
+                    {
+                        if (hasScript(content, "item.special.nomove"))
+                        {
+                            detachScript(content, "item.special.nomove");
+                            broadcast(self, "Removing nomove script from " + content);
+                        }
+                        if (hasObjVar(content, "noTrade"))
+                        {
+                            removeObjVar(self, "noTrade");
+                            broadcast(self, "Removing No-Trade from " + content);
+                        }
+                    }
+                }
             }
             return SCRIPT_CONTINUE;
         }
@@ -1279,6 +1357,27 @@ public class player_developer extends base_script
         {
             setInvulnerable(iTarget, false);
         }
+        if (cmd.equalsIgnoreCase("makeEnt"))
+        {
+            String[] TEMPLATES = {
+                    "object/mobile/dressed_commoner_naboo_human_female_01.iff",
+                    "object/mobile/dressed_commoner_naboo_human_female_02.iff",
+                    "object/mobile/dressed_commoner_naboo_human_female_03.iff",
+                    "object/mobile/dressed_commoner_naboo_human_female_04.iff",
+                    "object/mobile/dressed_commoner_naboo_human_female_05.iff",
+                    "object/mobile/dressed_commoner_naboo_human_male_01.iff",
+                    "object/mobile/dressed_commoner_naboo_human_male_02.iff",
+                    "object/mobile/dressed_commoner_naboo_human_male_03.iff",
+                    "object/mobile/dressed_commoner_naboo_human_male_04.iff",
+                    "object/mobile/dressed_commoner_naboo_human_male_05.iff"
+            };
+            obj_id entertainer = createObject(TEMPLATES[rand(0, TEMPLATES.length - 1)], getLocation(self));
+            setName(entertainer, "a Master Entertainer");
+            setInvulnerable(entertainer, true);
+            attachScript(entertainer, "ai.ai");
+            ai_lib.setMood(entertainer, "themepark_oola");
+            attachScript(entertainer, "bot.entertainer");
+        }
         if (cmd.equalsIgnoreCase("setinvuln"))
         {
             setInvulnerable(iTarget, true);
@@ -1286,12 +1385,9 @@ public class player_developer extends base_script
         if (cmd.equalsIgnoreCase("commPlanet"))
         {
             String message = tok.nextToken();
-            if (tok.hasMoreTokens())
+            while (tok.hasMoreTokens())
             {
-                while (tok.hasMoreTokens())
-                {
-                    message += " " + tok.nextToken();
-                }
+                message += " " + tok.nextToken();
             }
             obj_id[] recipients = getPlayerCreaturesInRange(getLocation(self), 16000.0f);
             for (obj_id recipient : recipients)
@@ -1373,6 +1469,38 @@ public class player_developer extends base_script
             String template = getTemplateName(iTarget);
             obj_id pInv = utils.getInventoryContainer(self);
             sendConsoleCommand("/object createIn " + template + " " + pInv, self);
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("prepareStaticStrings"))
+        {
+            String table = "datatables/item/master_item/master_item.iff";
+            String clobberedText = "/home/swg/swg-main/exe/linux/static_item_n.txt";
+            String clobberedDesc = "/home/swg/swg-main/exe/linux/static_item_d.txt";
+            String[] columns = {
+                    "name",
+                    "string_name",
+                    "string_detail"
+            };
+            int rows = dataTableGetNumRows(table);
+            for (int i = 0; i < rows; i++)
+            {
+                String itemCode =dataTableGetString(table, i, columns[0]);
+                String itemName =dataTableGetString(table, i, columns[1]);
+                String itemDesc =dataTableGetString(table, i, columns[2]);
+                String finalizedFormatName = itemCode + "\t" + itemName + "\n";
+                String finalizedFormatDesc = itemCode + "\t" + itemDesc + "\n";
+                String strName = finalizedFormatName;
+                String strDesc = finalizedFormatDesc;
+                BufferedWriter nameWriter = new BufferedWriter(new FileWriter(clobberedText, true));
+                nameWriter.append(' ');
+                nameWriter.append(strName);
+                nameWriter.close();
+                BufferedWriter descWriter = new BufferedWriter(new FileWriter(clobberedDesc, true));
+                descWriter.append(' ');
+                descWriter.append(strDesc);
+                descWriter.close();
+            }
+            broadcast(self, "Attempting to export " + columns.length + " columns worth of data split between " + clobberedText + " and " + clobberedDesc);
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("-help"))

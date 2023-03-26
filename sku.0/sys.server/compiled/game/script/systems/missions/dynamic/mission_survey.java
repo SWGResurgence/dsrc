@@ -9,6 +9,7 @@ public class mission_survey extends script.systems.missions.base.mission_dynamic
     public mission_survey()
     {
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         if (player == null || names == null || attribs == null || names.length != attribs.length)
@@ -25,11 +26,13 @@ public class mission_survey extends script.systems.missions.base.mission_dynamic
         ++i;
         return SCRIPT_CONTINUE;
     }
+
     public int abortMission(obj_id self, dictionary params) throws InterruptedException
     {
         sendSurveyIncomplete(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnStartMission(obj_id self, dictionary params) throws InterruptedException
     {
         setupInvisibleWaypoint(self);
@@ -41,6 +44,7 @@ public class mission_survey extends script.systems.missions.base.mission_dynamic
         sendSystemMessage(objPlayer, strSpam);
         return SCRIPT_CONTINUE;
     }
+
     public int surveySuccess(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "intCompleted"))
@@ -53,20 +57,24 @@ public class mission_survey extends script.systems.missions.base.mission_dynamic
         }
         return SCRIPT_CONTINUE;
     }
+
     public int surveyFail(obj_id self, dictionary params) throws InterruptedException
     {
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int surveyIncomplete(obj_id self, dictionary params) throws InterruptedException
     {
         endMission(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnEndMission(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int surveyEvent(obj_id self, dictionary params) throws InterruptedException
     {
         return SCRIPT_CONTINUE;

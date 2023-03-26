@@ -7,9 +7,6 @@ import java.util.Vector;
 
 public class interplanetary_survey extends script.base_script
 {
-    public interplanetary_survey()
-    {
-    }
     public static final String STF_FILE = "pet/droid_modules";
     public static final string_id SID_PLANET_TITLE = new string_id(STF_FILE, "survey_planet_title");
     public static final string_id SID_PLANET_PROMPT = new string_id(STF_FILE, "survey_planet_prompt");
@@ -19,32 +16,36 @@ public class interplanetary_survey extends script.base_script
     public static final string_id SID_NO_SURVEY_TOOLS = new string_id(STF_FILE, "survey_no_survey_tools");
     public static final string_id SID_YOU_MUST_BE_OUTDOORS = new string_id(STF_FILE, "you_must_be_outdoors");
     public static final string_id SID_SURVEY_DROID_LAUNCHED = new string_id(STF_FILE, "survey_droid_launched");
-    public static final String[] PLANET_NAMES = 
+    public static final String[] PLANET_NAMES =
+            {
+                    "Tatooine",
+                    "Naboo",
+                    "Corellia",
+                    "Rori",
+                    "Talus",
+                    "Endor",
+                    "Dantooine",
+                    "Dathomir",
+                    "Lok",
+                    "Yavin IV"
+            };
+    public static final String[] PLANET_INTERNAL =
+            {
+                    "tatooine",
+                    "naboo",
+                    "corellia",
+                    "rori",
+                    "talus",
+                    "endor",
+                    "dantooine",
+                    "dathomir",
+                    "lok",
+                    "yavin4"
+            };
+    public interplanetary_survey()
     {
-        "Tatooine",
-        "Naboo",
-        "Corellia",
-        "Rori",
-        "Talus",
-        "Endor",
-        "Dantooine",
-        "Dathomir",
-        "Lok",
-        "Yavin IV"
-    };
-    public static final String[] PLANET_INTERNAL = 
-    {
-        "tatooine",
-        "naboo",
-        "corellia",
-        "rori",
-        "talus",
-        "endor",
-        "dantooine",
-        "dathomir",
-        "lok",
-        "yavin4"
-    };
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (hasSkill(player, "class_trader"))
@@ -54,13 +55,14 @@ public class interplanetary_survey extends script.base_script
             {
                 mi.addRootMenu(menu_info_types.ITEM_USE, new string_id("", ""));
             }
-            else 
+            else
             {
                 mid.setServerNotify(true);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (item == menu_info_types.ITEM_USE)
@@ -81,13 +83,14 @@ public class interplanetary_survey extends script.base_script
                 }
                 sui.listbox(self, player, prompt, sui.OK_CANCEL, title, planetNames, "handlePlanetSelection");
             }
-            else 
+            else
             {
                 sendSystemMessage(player, SID_NO_SURVEY_SKILL);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePlanetSelection(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -128,6 +131,7 @@ public class interplanetary_survey extends script.base_script
         sui.listbox(self, player, prompt, sui.OK_CANCEL, title, surveyTools, "handleSurveySelection");
         return SCRIPT_CONTINUE;
     }
+
     public int handleSurveySelection(obj_id self, dictionary params) throws InterruptedException
     {
         if ((params == null) || (params.isEmpty()))
@@ -151,7 +155,7 @@ public class interplanetary_survey extends script.base_script
         String planet = utils.getStringScriptVar(self, "planet");
         Vector surveyResourceList = utils.getResizeableStringArrayScriptVar(self, "surveyResource");
         Vector surveyToolList = utils.getResizeableObjIdArrayScriptVar(self, "surveyToolId");
-        obj_id[] resourceIdList = getAvailablePlanetResources(planet, (String)surveyResourceList.get(idx));
+        obj_id[] resourceIdList = getAvailablePlanetResources(planet, (String) surveyResourceList.get(idx));
         int time = getSurveyTime();
         if (isGod(player))
         {
@@ -164,15 +168,15 @@ public class interplanetary_survey extends script.base_script
         dictionary data = new dictionary();
         data.put("resourceList", resourceIdList);
         data.put("planetName", planet);
-        data.put("resourceClass", ((String)surveyResourceList.get(idx)));
+        data.put("resourceClass", ((String) surveyResourceList.get(idx)));
         messageTo(player, "handleSurveyDroidReport", data, time, true);
-        destroyObject(((obj_id)surveyToolList.get(idx)));
+        destroyObject(((obj_id) surveyToolList.get(idx)));
         int charges = getCount(self);
         if (charges > 1)
         {
             incrementCount(self, -1);
         }
-        else 
+        else
         {
             destroyObject(self);
         }
@@ -182,6 +186,7 @@ public class interplanetary_survey extends script.base_script
         sendSystemMessageProse(player, ppDroidLaunched);
         return SCRIPT_CONTINUE;
     }
+
     public void cleanScriptVars() throws InterruptedException
     {
         obj_id self = getSelf();
@@ -189,6 +194,7 @@ public class interplanetary_survey extends script.base_script
         utils.removeScriptVar(self, "surveyResource");
         utils.removeScriptVar(self, "planet");
     }
+
     public String[] getAvailableSurveyTools(obj_id player) throws InterruptedException
     {
         if (!isIdValid(player) || !isPlayer(player))
@@ -213,10 +219,13 @@ public class interplanetary_survey extends script.base_script
         {
             return null;
         }
-        for (obj_id content : contents) {
+        for (obj_id content : contents)
+        {
             String template = getTemplateName(content);
-            if (template.contains("survey_tool")) {
-                if (surveyTemplateList.indexOf(template) == -1) {
+            if (template.contains("survey_tool"))
+            {
+                if (surveyTemplateList.indexOf(template) == -1)
+                {
                     String resourceClass = getStringObjVar(content, "survey.resource_class");
                     surveyToolList.add(utils.packStringId(getNameFromTemplate(template)));
                     surveyTemplateList.add(template);
@@ -236,6 +245,7 @@ public class interplanetary_survey extends script.base_script
         }
         return _surveyToolList;
     }
+
     public obj_id[] getAvailablePlanetResources(String planet, String resourceClass) throws InterruptedException
     {
         resource_density[] resources = requestResourceList(new location(0, 0, 0, toLower(planet)), 0.0f, 1.0f, resourceClass);
@@ -246,6 +256,7 @@ public class interplanetary_survey extends script.base_script
         }
         return resourceList;
     }
+
     public int getSurveyTime() throws InterruptedException
     {
         final int minTime = 15 * 60;
@@ -256,9 +267,10 @@ public class interplanetary_survey extends script.base_script
         {
             quality = 100;
         }
-        int time = minTime + (int)((maxTime - minTime) * ((100 - quality) / 100));
+        int time = minTime + (int) ((maxTime - minTime) * ((100 - quality) / 100));
         return time;
     }
+
     public int OnGetAttributes(obj_id self, obj_id player, String[] names, String[] attribs) throws InterruptedException
     {
         int idx = utils.getValidAttributeIndex(names);
@@ -280,7 +292,7 @@ public class interplanetary_survey extends script.base_script
         if (hasObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".mechanism_quality"))
         {
             names[idx] = "mechanism_quality";
-            int value = (int)getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".mechanism_quality");
+            int value = (int) getFloatObjVar(self, craftinglib.COMPONENT_ATTRIBUTE_OBJVAR_NAME + ".mechanism_quality");
             attribs[idx] = "" + value;
             idx++;
             if (idx >= names.length)

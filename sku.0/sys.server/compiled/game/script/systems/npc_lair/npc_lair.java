@@ -5,15 +5,25 @@ import script.library.*;
 
 public class npc_lair extends script.theme_park.poi.base
 {
-    public npc_lair()
-    {
-    }
     public static final String CREATURE_TABLE = "datatables/mob/creatures.iff";
     public static final int MAX_ITERATIONS = 5;
     public static final int MIN_NON_DIFFICULTY_CREATURES = 2;
     public static final int MAX_NON_DIFFICULTY_CREATURES = 5;
     public static final int MAX_LAIR_HEALTH = 850000;
     public static final float CREATURE_LAIR_EXCHANGE = 0.25f;
+    public static final int JOB_NONE = 0;
+    public static final int JOB_LOITER = 1;
+    public static final int JOB_SCOUT = 2;
+    public static final int JOB_REST = 3;
+    public static final int JOB_DEFEND = 4;
+    public static final int JOB_HEAL = 5;
+    public static final int JOB_CONVERSE = 6;
+    public static final int JOB_DANCE = 7;
+
+    public npc_lair()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         location locTest = getLocation(self);
@@ -51,13 +61,18 @@ public class npc_lair extends script.theme_park.poi.base
         // fix for lairs that accidentally spawn inside quarantine zone walls because
         // the walls don't match the shape of the region and this is easier to fix than
         // relocating a ton of walls
-        if(locTest.area.equalsIgnoreCase("dathomir")) {
+        if (locTest.area.equalsIgnoreCase("dathomir"))
+        {
             region[] regions = getRegionsAtPoint(locTest);
-            for(region r : regions) {
-                if(r.getName().equalsIgnoreCase("@dathomir_region_names:mountain_2")) {
+            for (region r : regions)
+            {
+                if (r.getName().equalsIgnoreCase("@dathomir_region_names:mountain_2"))
+                {
                     obj_id[] objects = getObjectsInRange(self, 15f);
-                    for (obj_id o : objects) {
-                        if(getTemplateName(o).contains("military_wall")) {
+                    for (obj_id o : objects)
+                    {
+                        if (getTemplateName(o).contains("military_wall"))
+                        {
                             destroyObject(self);
                         }
                     }
@@ -67,11 +82,13 @@ public class npc_lair extends script.theme_park.poi.base
         initializePoi(self);
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         initializePoi(self);
         return SCRIPT_CONTINUE;
     }
+
     public void initializePoi(obj_id poiBaseObject) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -123,6 +140,7 @@ public class npc_lair extends script.theme_park.poi.base
         messageTo(poiBaseObject, "handleNpcAiManagement", null, 20, false);
         PROFILER_STOP("npc_lair.script.initializePoi." + lairType);
     }
+
     public int doTheater(obj_id self, dictionary params) throws InterruptedException
     {
         String lairType = params.getString("lairType");
@@ -130,6 +148,7 @@ public class npc_lair extends script.theme_park.poi.base
         createTheater(self, lairType, diff);
         return SCRIPT_CONTINUE;
     }
+
     public int makeSomeMobiles(obj_id self, dictionary params) throws InterruptedException
     {
         String lairType = params.getString("lairType");
@@ -142,6 +161,7 @@ public class npc_lair extends script.theme_park.poi.base
         spawnNpcLairMobiles(self, lairType, lairLevel, groupSize);
         return SCRIPT_CONTINUE;
     }
+
     public void flagCreatureLairs(obj_id poiBaseObject) throws InterruptedException
     {
         PROFILER_START("npc_lair.flagCreatureLairs");
@@ -159,11 +179,13 @@ public class npc_lair extends script.theme_park.poi.base
         }
         PROFILER_STOP("npc_lair.flagCreatureLairs");
     }
+
     public int handleTargetDestroyed(obj_id self, dictionary params) throws InterruptedException
     {
         poiComplete(POI_SUCCESS);
         return SCRIPT_CONTINUE;
     }
+
     public int handleTheaterComplete(obj_id self, dictionary params) throws InterruptedException
     {
         PROFILER_START("npc_lair.handleTheaterComplete.Start");
@@ -178,6 +200,7 @@ public class npc_lair extends script.theme_park.poi.base
         PROFILER_STOP("npc_lair.handleTheaterComplete.Start");
         return SCRIPT_CONTINUE;
     }
+
     public void createTheater(obj_id poiBaseObject, String lairType, String diff) throws InterruptedException
     {
         PROFILER_START("npc_lair.script.createTheatre");
@@ -186,7 +209,7 @@ public class npc_lair extends script.theme_park.poi.base
         {
             buildingToSpawn = getStringObjVar(poiBaseObject, "spawning.buildingType");
         }
-        else 
+        else
         {
             String lairDatatable = "datatables/npc_lair/" + lairType + ".iff";
             String[] buildings = dataTableGetStringColumnNoDefaults(lairDatatable, diff);
@@ -225,38 +248,45 @@ public class npc_lair extends script.theme_park.poi.base
                     setHpAndXpValues(poiBaseObject, mainBuilding);
                 }
             }
-            else 
+            else
             {
                 setObjVar(poiBaseObject, "theater.objTheater", mainBuilding);
             }
         }
         PROFILER_STOP("npc_lair.script.createTheatre");
     }
+
     public int handleBuildingDestruction(obj_id self, dictionary params) throws InterruptedException
     {
         setObjVar(self, "npc_lair.buildingType", "none");
         poiComplete(POI_SUCCESS);
         return SCRIPT_CONTINUE;
     }
+
     public float getAverageDifficulty(float[] fltDifficulties) throws InterruptedException
     {
         float fltAverage = 0;
-        for (float fltDifficulty : fltDifficulties) {
+        for (float fltDifficulty : fltDifficulties)
+        {
             fltAverage = fltAverage + fltDifficulty;
         }
         fltAverage = fltAverage / fltDifficulties.length;
         return fltAverage;
     }
+
     public float getMaxDifficulty(float[] fltDifficulties) throws InterruptedException
     {
         float fltMaxDifficulty = 0;
-        for (float fltDifficulty : fltDifficulties) {
-            if (fltDifficulty > fltMaxDifficulty) {
+        for (float fltDifficulty : fltDifficulties)
+        {
+            if (fltDifficulty > fltMaxDifficulty)
+            {
                 fltMaxDifficulty = fltDifficulty;
             }
         }
         return fltMaxDifficulty;
     }
+
     public void spawnNpcLairMobiles(obj_id poiBaseObject, String lairType, int lairLevel, int groupSize) throws InterruptedException
     {
         PROFILER_START("npc_lair.spawnNpcLairMobiles.setup");
@@ -314,8 +344,8 @@ public class npc_lair extends script.theme_park.poi.base
         }
         int xpValue = 0;
         int hpValue = 1500;
-        int minSpawn = (int)((groupSize * 1.5f) + 0.5f);
-        int maxSpawn = (int)((groupSize * 2.5f) + 0.5f);
+        int minSpawn = (int) ((groupSize * 1.5f) + 0.5f);
+        int maxSpawn = (int) ((groupSize * 2.5f) + 0.5f);
         int spawnAmount = rand(minSpawn, maxSpawn);
         for (int intTotalCount = 0; intTotalCount < spawnAmount; intTotalCount++)
         {
@@ -328,7 +358,7 @@ public class npc_lair extends script.theme_park.poi.base
             int intIndex = rand(0, intArrayLength);
             PROFILER_START("npc_lair.spawnNpcLairMobiles.makeMobs.getting");
             int creatureXpValue = xp.getLevelBasedXP(lairLevel);
-            xpValue += (int)(CREATURE_LAIR_EXCHANGE * creatureXpValue);
+            xpValue += (int) (CREATURE_LAIR_EXCHANGE * creatureXpValue);
             utils.setScriptVar(poiBaseObject, "npc_lair.mobile." + mobileNumber, creatureList[intIndex]);
             numSpawned[intIndex]++;
             mobileNumber++;
@@ -377,7 +407,7 @@ public class npc_lair extends script.theme_park.poi.base
                 if (isIdValid(mobile))
                 {
                     int creatureXpValue = xp.getLevelBasedXP(lairLevel);
-                    xpValue += (int)(CREATURE_LAIR_EXCHANGE * creatureXpValue);
+                    xpValue += (int) (CREATURE_LAIR_EXCHANGE * creatureXpValue);
                     utils.setScriptVar(poiBaseObject, "npc_lair.mobile." + mobileNumber, creatureList[intRoll]);
                     numSpawned[intRoll]++;
                     mobileNumber++;
@@ -398,8 +428,8 @@ public class npc_lair extends script.theme_park.poi.base
             lairLevel = 90;
         }
         int avgAttrib = dataTableGetInt(create.STAT_BALANCE_TABLE, lairLevel - 1, "HP");
-        int intMinHP = (int)(avgAttrib * 0.9f);
-        int intMaxHP = (int)(avgAttrib * 1.1f);
+        int intMinHP = (int) (avgAttrib * 0.9f);
+        int intMaxHP = (int) (avgAttrib * 1.1f);
         hpValue += 6 * (rand(intMinHP, intMaxHP));
         if (groupSize > 1)
         {
@@ -414,13 +444,14 @@ public class npc_lair extends script.theme_park.poi.base
         setObjVar(poiBaseObject, "npc_lair.lairDifficulty", lairLevel);
         if (isIdValid(target))
         {
-            try {
+            try
+            {
                 setObjVar(target, "intCombatDifficulty", lairLevel);
                 setMaxHitpoints(target, hpValue);
                 setHitpoints(target, hpValue);
-            }
-            catch(Exception e){
-                LOG("npc_lair","Couldn't set obj vars on target with obj_id " + target.toString()
+            } catch (Exception e)
+            {
+                LOG("npc_lair", "Couldn't set obj vars on target with obj_id " + target.toString()
                         + "\nTarget does " + (isIdValid(target) ? "" : "not") + " have a valid obj id."
                         + "\nTarget is " + (isPlayer(target) ? "" : "not") + " a player."
                         + "\nTarget is " + (isIncapacitated(target) ? "" : "not") + " incapacitated."
@@ -431,7 +462,7 @@ public class npc_lair extends script.theme_park.poi.base
                 );
             }
         }
-        else 
+        else
         {
             dictionary params = new dictionary();
             params.put("hpValue", hpValue);
@@ -442,6 +473,7 @@ public class npc_lair extends script.theme_park.poi.base
         respawnAllMobiles(poiBaseObject);
         PROFILER_STOP("npc_lair.spawnNpcLairMobiles.makeMobs");
     }
+
     public int handleDelayedTargetSetup(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id target = getObjIdObjVar(self, "npc_lair.target");
@@ -460,6 +492,7 @@ public class npc_lair extends script.theme_park.poi.base
         setHitpoints(target, hpValue);
         return SCRIPT_CONTINUE;
     }
+
     public int[] getSpawnLimit(String lairDatatable, String[] creatureList) throws InterruptedException
     {
         if (creatureList == null)
@@ -484,22 +517,24 @@ public class npc_lair extends script.theme_park.poi.base
         }
         return spawnLimitList;
     }
+
     public float[] getDifficultyList(dictionary[] dctCreatureInfo) throws InterruptedException
     {
-        float diffArray[] = new float[dctCreatureInfo.length];
+        float[] diffArray = new float[dctCreatureInfo.length];
         for (int i = 0; i < dctCreatureInfo.length; i++)
         {
             if (dctCreatureInfo[i] != null)
             {
                 diffArray[i] = dctCreatureInfo[i].getInt("level");
             }
-            else 
+            else
             {
                 diffArray[i] = 0;
             }
         }
         return diffArray;
     }
+
     public float getLowestLevel(obj_id poiBaseObj, float[] difficultyList, int[] spawnLimit, int[] numSpawned) throws InterruptedException
     {
         float lowestLevel = 999;
@@ -515,6 +550,7 @@ public class npc_lair extends script.theme_park.poi.base
         }
         return lowestLevel;
     }
+
     public int spawnCreatures(obj_id self, dictionary params) throws InterruptedException
     {
         int mobSpawnLoopNumber = params.getInt("mobSpawnLoopNumber");
@@ -566,7 +602,7 @@ public class npc_lair extends script.theme_park.poi.base
                 }
             }
         }
-        else 
+        else
         {
             target = getObjIdObjVar(poiBaseObject, "npc_lair.target");
         }
@@ -593,14 +629,14 @@ public class npc_lair extends script.theme_park.poi.base
             {
                 mobile = spawnMobile(mobileName, target, lairLevel);
             }
-            else 
+            else
             {
                 int baseLevel = utils.dataTableGetInt(CREATURE_TABLE, mobileName, "BaseLevel");
                 if (baseLevel < lairLevel)
                 {
                     mobile = spawnMobile(mobileName, target, lairLevel);
                 }
-                else 
+                else
                 {
                     mobile = spawnMobile(mobileName, target, false);
                 }
@@ -625,11 +661,11 @@ public class npc_lair extends script.theme_park.poi.base
             params.put("mobileNumber", mobileNumber);
             messageTo(self, "spawnCreatures", params, 0.50f, false);
         }
-        else 
+        else
         {
             if (isIdValid(target))
             {
-                xpValue = (int)(xpValue * CREATURE_LAIR_EXCHANGE);
+                xpValue = (int) (xpValue * CREATURE_LAIR_EXCHANGE);
                 attachScript(target, "systems.combat.credit_for_kills");
                 flagCreatureLairs(self);
             }
@@ -640,6 +676,7 @@ public class npc_lair extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public void respawnAllMobiles(obj_id poiBaseObject) throws InterruptedException
     {
         obj_id self = getSelf();
@@ -652,12 +689,14 @@ public class npc_lair extends script.theme_park.poi.base
         messageTo(poiBaseObject, "spawnCreatures", dctParams, 4, false);
         return;
     }
+
     public int handleSpawnWaveOfDefenders(obj_id self, dictionary params) throws InterruptedException
     {
         params.put("mobileNumber", 0);
         messageTo(self, "handleSpawnNextDefender", params, rand(1, 10), false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnNextDefender(obj_id self, dictionary params) throws InterruptedException
     {
         int mobileNumber = params.getInt("mobileNumber");
@@ -683,7 +722,8 @@ public class npc_lair extends script.theme_park.poi.base
         int maxHP = getMaxHitpoints(lair);
         int curHP = getHitpoints(lair);
         int numSpawned = getIntObjVar(self, "npc_lair.numberOfMobiles");
-        if(numSpawned == 0) {
+        if (numSpawned == 0)
+        {
             return SCRIPT_CONTINUE;
         }
         int costPerMobile = maxHP / (numSpawned * 5);
@@ -698,11 +738,11 @@ public class npc_lair extends script.theme_park.poi.base
         if (isIdValid(mobile))
         {
             int creatureXpValue = getIntObjVar(mobile, "combat.intCombatXP");
-            xpValue += (int)(CREATURE_LAIR_EXCHANGE * creatureXpValue);
+            xpValue += (int) (CREATURE_LAIR_EXCHANGE * creatureXpValue);
             attachNPCLairAiScript(mobile, mobileNumber);
             ai_lib.setDefaultCalmBehavior(mobile, ai_lib.BEHAVIOR_LOITER);
         }
-        else 
+        else
         {
             debugServerConsoleMsg(self, "designer WARNING: NPC LAIR handleSpawnNextDefender: I couldn't spawn a defender called " + mobileName);
             return SCRIPT_CONTINUE;
@@ -730,6 +770,7 @@ public class npc_lair extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSpawnBossMonster(obj_id self, dictionary params) throws InterruptedException
     {
         String lairType = getStringObjVar(self, "spawning.lairType");
@@ -750,24 +791,30 @@ public class npc_lair extends script.theme_park.poi.base
         location spawnLoc = getLocation(self);
         obj_id target = params.getObjId("npc_lair");
         int lairLevel = getIntObjVar(self, "spawning.intDifficultyLevel");
-        for (String bossMonster : bossMonsters) {
+        for (String bossMonster : bossMonsters)
+        {
             int baseLevel = utils.dataTableGetInt(CREATURE_TABLE, bossMonster, "BaseLevel");
             obj_id mobile = null;
-            if (baseLevel < lairLevel) {
+            if (baseLevel < lairLevel)
+            {
                 mobile = create.object(bossMonster, spawnLoc, lairLevel);
-            } else {
+            }
+            else
+            {
                 mobile = create.object(bossMonster, spawnLoc);
             }
             setObjVar(mobile, "npc_lair.target", target);
             stopFloating(mobile);
             obj_id[] enemies = getPlayerCreaturesInRange(self, 65.0f);
-            if (enemies != null && enemies.length > 0) {
+            if (enemies != null && enemies.length > 0)
+            {
                 obj_id victim = enemies[rand(0, (enemies.length - 1))];
                 startCombat(mobile, victim);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleCreatureDeath(obj_id self, dictionary params) throws InterruptedException
     {
         int numRespawned = getIntObjVar(self, "npc_lair.numRespawned");
@@ -783,7 +830,7 @@ public class npc_lair extends script.theme_park.poi.base
             {
                 poiComplete(self, POI_SUCCESS);
             }
-            else 
+            else
             {
                 obj_id objTarget = getObjIdObjVar(self, "npc_lair.target");
                 if (isIdValid(objTarget) && exists(objTarget))
@@ -794,7 +841,7 @@ public class npc_lair extends script.theme_park.poi.base
             messageTo(self, "handlePoiTimeOutDestruction", null, 14400.0f, false);
             return SCRIPT_CONTINUE;
         }
-        else 
+        else
         {
             setObjVar(self, "npc_lair.numRespawned", numRespawned);
         }
@@ -810,6 +857,7 @@ public class npc_lair extends script.theme_park.poi.base
         messageTo(self, "handleRespawnCreature", params, rand(120, 240), false);
         return SCRIPT_CONTINUE;
     }
+
     public int handleRespawnCreature(obj_id self, dictionary params) throws InterruptedException
     {
         if (poiIsCompleted(self) || self == null || self == obj_id.NULL_ID || !isIdValid(self))
@@ -823,7 +871,7 @@ public class npc_lair extends script.theme_park.poi.base
         {
             spawnMobile(name, target, lairLevel);
         }
-        else 
+        else
         {
             name = params.getString("creatureName");
             if (name != null)
@@ -833,18 +881,22 @@ public class npc_lair extends script.theme_park.poi.base
         }
         return SCRIPT_CONTINUE;
     }
+
     public obj_id spawnMobile(String name, obj_id target) throws InterruptedException
     {
         return spawnMobile(name, target, -1);
     }
+
     public obj_id spawnMobile(String name, obj_id target, int level) throws InterruptedException
     {
         return spawnMobile(name, target, level, true);
     }
+
     public obj_id spawnMobile(String name, obj_id target, boolean randomLoc) throws InterruptedException
     {
         return spawnMobile(name, target, -1, randomLoc);
     }
+
     public obj_id spawnMobile(String name, obj_id target, int level, boolean randomLoc) throws InterruptedException
     {
         boolean boolMobSpawners = false;
@@ -877,7 +929,7 @@ public class npc_lair extends script.theme_park.poi.base
                 x = rand(-25.0f, 25.0f);
                 y = rand(-25.0f, 25.0f);
             }
-            else 
+            else
             {
                 x = rand(-15.0f, 15.0f);
                 y = rand(-15.0f, 15.0f);
@@ -919,17 +971,20 @@ public class npc_lair extends script.theme_park.poi.base
         }
         return null;
     }
+
     public int handleNpcLairDecay(obj_id self, dictionary params) throws InterruptedException
     {
         poiComplete(POI_INCOMPLETE);
         messageTo(self, "handlePoiTimeOutDestruction", null, 14400.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int handlePoiTimeOutDestruction(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public void makeBaby(obj_id mobile) throws InterruptedException
     {
         obj_id baseObj = poiGetBaseObject();
@@ -952,18 +1007,20 @@ public class npc_lair extends script.theme_park.poi.base
         utils.setScriptVar(baseObj, "npc_lair.numbabies", numBabiesSpawned);
         attachScript(mobile, "ai.pet_advance");
     }
+
     public int handleNpcAiManagement(obj_id self, dictionary params) throws InterruptedException
     {
         if (hasObjVar(self, "npc_lair.isCreatureLair"))
         {
             doCreatureLairAiManagement(self);
         }
-        else 
+        else
         {
             doNPCLairAiManagement(self);
         }
         return SCRIPT_CONTINUE;
     }
+
     public void attachNPCLairAiScript(obj_id mobile, int mobileNumber) throws InterruptedException
     {
         if (hasScript(mobile, "ai.pet_advance"))
@@ -981,20 +1038,14 @@ public class npc_lair extends script.theme_park.poi.base
         setObjVar(mobile, "npc_lair.mobileNumber", mobileNumber);
         attachScript(mobile, "systems.npc_lair.npc_lair_ai");
     }
-    public static final int JOB_NONE = 0;
-    public static final int JOB_LOITER = 1;
-    public static final int JOB_SCOUT = 2;
-    public static final int JOB_REST = 3;
-    public static final int JOB_DEFEND = 4;
-    public static final int JOB_HEAL = 5;
-    public static final int JOB_CONVERSE = 6;
-    public static final int JOB_DANCE = 7;
+
     public int handleScoutAlarm(obj_id self, dictionary params) throws InterruptedException
     {
         params.put("job", JOB_DEFEND);
         broadcastMessage("handleNpcLairCustomAi", params);
         return SCRIPT_CONTINUE;
     }
+
     public int handleCallForHealing(obj_id self, dictionary params) throws InterruptedException
     {
         if (!hasObjVar(self, "npc_lair.isCreatureLair"))
@@ -1005,6 +1056,7 @@ public class npc_lair extends script.theme_park.poi.base
         broadcastMessage("handleNpcLairCustomAi", params);
         return SCRIPT_CONTINUE;
     }
+
     public void doCreatureLairAiManagement(obj_id poiBaseObject) throws InterruptedException
     {
         int numMobiles = getIntObjVar(poiBaseObject, "npc_lair.numberOfMobiles");
@@ -1027,7 +1079,7 @@ public class npc_lair extends script.theme_park.poi.base
             {
                 jobAssignment[currentMob] = JOB_REST;
             }
-            else 
+            else
             {
                 jobAssignment[currentMob] = JOB_NONE;
             }
@@ -1038,6 +1090,7 @@ public class npc_lair extends script.theme_park.poi.base
         broadcastMessage("handleNpcLairCustomAi", params);
         return;
     }
+
     public void doNPCLairAiManagement(obj_id poiBaseObject) throws InterruptedException
     {
         int numMobiles = getIntObjVar(poiBaseObject, "npc_lair.numberOfMobiles");
@@ -1049,21 +1102,21 @@ public class npc_lair extends script.theme_park.poi.base
         switch (rand(1, 4))
         {
             case 1:
-            danceLoc.x += rand(7, 10);
-            danceLoc.z += rand(7, 10);
-            break;
+                danceLoc.x += rand(7, 10);
+                danceLoc.z += rand(7, 10);
+                break;
             case 2:
-            danceLoc.x -= rand(7, 10);
-            danceLoc.z += rand(7, 10);
-            break;
+                danceLoc.x -= rand(7, 10);
+                danceLoc.z += rand(7, 10);
+                break;
             case 3:
-            danceLoc.x += rand(7, 10);
-            danceLoc.z -= rand(7, 10);
-            break;
+                danceLoc.x += rand(7, 10);
+                danceLoc.z -= rand(7, 10);
+                break;
             case 4:
-            danceLoc.x -= rand(7, 10);
-            danceLoc.z -= rand(7, 10);
-            break;
+                danceLoc.x -= rand(7, 10);
+                danceLoc.z -= rand(7, 10);
+                break;
         }
         setObjVar(poiBaseObject, "npc_lair.danceLoc", danceLoc);
         int[] jobAssignment = new int[numMobiles];
@@ -1073,18 +1126,18 @@ public class npc_lair extends script.theme_park.poi.base
             {
                 case 0:
                 case 1:
-                jobAssignment[currentMob] = JOB_CONVERSE;
-                break;
+                    jobAssignment[currentMob] = JOB_CONVERSE;
+                    break;
                 case 2:
-                jobAssignment[currentMob] = JOB_DANCE;
-                break;
+                    jobAssignment[currentMob] = JOB_DANCE;
+                    break;
                 case 3:
                 case 4:
-                jobAssignment[currentMob] = JOB_REST;
-                break;
+                    jobAssignment[currentMob] = JOB_REST;
+                    break;
                 default:
-                jobAssignment[currentMob] = JOB_NONE;
-                break;
+                    jobAssignment[currentMob] = JOB_NONE;
+                    break;
             }
         }
         dictionary params = new dictionary();
@@ -1093,6 +1146,7 @@ public class npc_lair extends script.theme_park.poi.base
         broadcastMessage("handleNpcLairCustomAi", params);
         return;
     }
+
     public void setHpAndXpValues(obj_id poiBaseObject, obj_id target) throws InterruptedException
     {
         if (hasObjVar(poiBaseObject, "npc_lair.targetHps"))
@@ -1116,6 +1170,7 @@ public class npc_lair extends script.theme_park.poi.base
             setObjVar(target, "intCombatDifficulty", diff);
         }
     }
+
     public boolean canOfferMission(obj_id mobile) throws InterruptedException
     {
         if (rand(1, 10) > 5)

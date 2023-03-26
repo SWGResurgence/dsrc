@@ -1519,7 +1519,7 @@ public class base_player extends script.base_script
         chatEnterRoom("SWG.system");
         chatEnterRoom("SWG." + getGalaxyName() + ".system");
         chatEnterRoom("SWG." + getGalaxyName() + "." + getCurrentSceneName() + ".system");
-		chatEnterRoom("SWG." + getGalaxyName() + ".Galaxy");
+        chatEnterRoom("SWG." + getGalaxyName() + ".Galaxy");
         float curScale = getScale(self);
         Gender gender = getGender(self);
         int intSpecies = getSpecies(self);
@@ -13064,7 +13064,7 @@ public class base_player extends script.base_script
             prompt += "Full Name: " + getPlayerFullName(self) + "\n";
             prompt += "NetworkId: " + self + "\n";
             prompt += "Location: " + getLocation(self) + "\n";
-			//prompt += "Location (/loc): " + getLocation(self).toClipboardFormat() + "\n";
+            //prompt += "Location (/loc): " + getLocation(self).toClipboardFormat() + "\n";
             prompt += "Creation Date: " + getPlayerBirthDate(self) + "\n";
             prompt += "Housing Lots: " + getMaxHousingLots() + "\n";
             prompt += " ------------------ " + gold("Avatar") + " ------------------ " + "\n";
@@ -13147,10 +13147,10 @@ public class base_player extends script.base_script
             }
             prompt += " ------------------ " + gold("Event") + " ------------------ " + "\n";
             int pumpkinPulped = getIntObjVar(self, "halloween.pulped");
-			int scrapCollected = getIntObjVar(self, "gjpud.total");
+            int scrapCollected = getIntObjVar(self, "gjpud.total");
             prompt += "Pumpkin Pulped: " + pumpkinPulped + "\n";
             prompt += "Pumpkin Pulper Award: " + (!hasObjVar(self, "halloween.22_award") ? "no" : "yes") + "\n";
-			prompt += "Scrap Collected: " + scrapCollected + "\n";
+            prompt += "Scrap Collected: " + scrapCollected + "\n";
             prompt += "Scrap Heap: " + (!hasObjVar(self, "gjpud.scrapheaps") ? "no" : "yes") + "\n";
             prompt += " ------------------ " + gold("Scripts") + " ------------------ " + "\n";
             String[] list = getScriptList(self);
@@ -13188,11 +13188,11 @@ public class base_player extends script.base_script
             }
             else
             {
-               for (int i = 0; i < ovl.getNumItems(); i++)
-               {
-                   obj_var ov = ovl.getObjVar(i);
-                   prompt += ov.getName() + " = " + ov.toString() + "\n";
-               }
+                for (int i = 0; i < ovl.getNumItems(); i++)
+                {
+                    obj_var ov = ovl.getObjVar(i);
+                    prompt += ov.getName() + " = " + ov.toString() + "\n";
+                }
             }
             prompt += " ------------------ " + gold("Inventory") + " ------------------ " + "\n";
             obj_id[] contents = utils.getContents(self, true);

@@ -10,20 +10,21 @@ import java.util.Vector;
 
 public class paired_object_movement extends script.base_script
 {
-    public paired_object_movement()
-    {
-    }
     public static final int STATUS_NONE = 0;
     public static final int STATUS_ONE = 1;
     public static final int STATUS_MANY = 2;
-    public static final int[] MULTI_MENU = 
+    public static final int[] MULTI_MENU =
+            {
+                    menu_info_types.SERVER_MENU1,
+                    menu_info_types.SERVER_MENU2,
+                    menu_info_types.SERVER_MENU3,
+                    menu_info_types.SERVER_MENU4,
+                    menu_info_types.SERVER_MENU5
+            };
+    public paired_object_movement()
     {
-        menu_info_types.SERVER_MENU1,
-        menu_info_types.SERVER_MENU2,
-        menu_info_types.SERVER_MENU3,
-        menu_info_types.SERVER_MENU4,
-        menu_info_types.SERVER_MENU5
-    };
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info item) throws InterruptedException
     {
         if (isIncapacitated(player) || isDead(player))
@@ -52,6 +53,7 @@ public class paired_object_movement extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!wasValidSelection(item))
@@ -63,26 +65,29 @@ public class paired_object_movement extends script.base_script
         switch (status)
         {
             case STATUS_NONE:
-            break;
+                break;
             case STATUS_ONE:
-            doPairedTransition(player, transitions[0]);
-            break;
+                doPairedTransition(player, transitions[0]);
+                break;
             case STATUS_MANY:
-            obj_id chosenItem = getObjectSelected(transitions, item);
-            doPairedTransition(player, chosenItem);
-            break;
+                obj_id chosenItem = getObjectSelected(transitions, item);
+                doPairedTransition(player, chosenItem);
+                break;
         }
         return SCRIPT_CONTINUE;
     }
+
     public String getTransitionKey(obj_id self) throws InterruptedException
     {
         return hasObjVar(self, "transition_key") ? getStringObjVar(self, "transition_key") : "none";
     }
+
     public string_id getUniqueId(obj_id self) throws InterruptedException
     {
         String message = hasObjVar(self, "unique_id") ? getStringObjVar(self, "unique_id") : "none";
         return new string_id("movement", message);
     }
+
     public string_id getFailMessage(obj_id self) throws InterruptedException
     {
         string_id failMessage = new string_id("movement", "paired_object_default_fail_menu");
@@ -92,6 +97,7 @@ public class paired_object_movement extends script.base_script
         }
         return failMessage;
     }
+
     public obj_id[] getPairedObjects(obj_id self) throws InterruptedException
     {
         obj_id[] allObjects = new obj_id[0];
@@ -99,7 +105,7 @@ public class paired_object_movement extends script.base_script
         {
             allObjects = utils.getAllObjectsInBuildoutArea(self);
         }
-        else 
+        else
         {
             allObjects = getObjectsInRange(trial.getTop(self), 1000.0f);
         }
@@ -117,11 +123,14 @@ public class paired_object_movement extends script.base_script
         String testKey = getTransitionKey(self);
         Vector matches = new Vector();
         matches.setSize(0);
-        for (obj_id pairedObject : pairedObjects) {
-            if (!testKey.equals(getTransitionKey(pairedObject))) {
+        for (obj_id pairedObject : pairedObjects)
+        {
+            if (!testKey.equals(getTransitionKey(pairedObject)))
+            {
                 continue;
             }
-            if (pairedObject == self) {
+            if (pairedObject == self)
+            {
                 continue;
             }
             matches.add(pairedObject);
@@ -139,6 +148,7 @@ public class paired_object_movement extends script.base_script
         }
         return allObjects;
     }
+
     public boolean wasValidSelection(int selection) throws InterruptedException
     {
         boolean wasValid = false;
@@ -146,13 +156,16 @@ public class paired_object_movement extends script.base_script
         {
             return true;
         }
-        for (int multiMenu : MULTI_MENU) {
-            if (selection == multiMenu) {
+        for (int multiMenu : MULTI_MENU)
+        {
+            if (selection == multiMenu)
+            {
                 return true;
             }
         }
         return false;
     }
+
     public obj_id getObjectSelected(obj_id[] selections, int menu_item) throws InterruptedException
     {
         for (int i = 0; i < MULTI_MENU.length; i++)
@@ -164,6 +177,7 @@ public class paired_object_movement extends script.base_script
         }
         return null;
     }
+
     public void doPairedTransition(obj_id player, obj_id warpToObject) throws InterruptedException
     {
         vehicle.checkForMountAndDismountPlayer(player);
@@ -174,11 +188,12 @@ public class paired_object_movement extends script.base_script
             location topLoc = getLocation(trial.getTop(warpToObject));
             warpPlayer(player, destLoc.area, topLoc.x, topLoc.y, topLoc.z, destLoc.cell, destLoc.x, destLoc.y, destLoc.z, "nullCallback", false);
         }
-        else 
+        else
         {
             setLocation(player, getLocation(warpToObject));
         }
     }
+
     public void clog(String message) throws InterruptedException
     {
         LOG("doLogging", message);

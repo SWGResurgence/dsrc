@@ -6,12 +6,13 @@ import script.obj_id;
 
 public class notify_killable extends script.base_script
 {
-    public notify_killable()
-    {
-    }
     public static final String VAR_SPAWNED_BY = "quest_spawner.spawned_by";
     public static final String VAR_SPAWNER_PARENT = "quest_spawner.parent";
     public static final String VAR_NOTIFY_KILLABLE_OID = "quest_spawner.notify_killable_oid";
+    public notify_killable()
+    {
+    }
+
     public int OnAttach(obj_id self) throws InterruptedException
     {
         LOG("newquests", "notify_killable OnAttach");
@@ -34,6 +35,7 @@ public class notify_killable extends script.base_script
         messageTo(parent, "OnCreatedKillableObject", params, 1, true);
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         LOG("newquests", "notify_killable OnIncapacitated");

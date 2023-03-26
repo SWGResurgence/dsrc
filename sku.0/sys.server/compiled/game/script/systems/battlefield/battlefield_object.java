@@ -11,6 +11,7 @@ public class battlefield_object extends script.base_script
     public battlefield_object()
     {
     }
+
     public int OnFollowMoving(obj_id self, obj_id target) throws InterruptedException
     {
         region bf = battlefield.getBattlefield(self);
@@ -20,6 +21,7 @@ public class battlefield_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnIncapacitated(obj_id self, obj_id killer) throws InterruptedException
     {
         LOG("LOG_CHANNEL", "battlefield.battlefield_object::OnIncapacitated -- " + self + "   " + killer);
@@ -31,6 +33,7 @@ public class battlefield_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDestroy(obj_id self) throws InterruptedException
     {
         if (battlefield.isBattlefieldSpawned(self))
@@ -48,7 +51,7 @@ public class battlefield_object extends script.base_script
                 {
                     LOG("LOG_CHANNEL", "battlefield.battlefield_object::OnDestroy (" + self + ") -- Spawned_by is null.");
                 }
-                else 
+                else
                 {
                     if (spawner.isLoaded())
                     {
@@ -59,7 +62,7 @@ public class battlefield_object extends script.base_script
                             LOG("LOG_CHANNEL", "population ->" + population);
                         }
                     }
-                    else 
+                    else
                     {
                         LOG("LOG_CHANNEL", "battlefield.battlefield_object::OnDestroy -- spawner " + spawner + " is not loaded.");
                     }
@@ -69,6 +72,7 @@ public class battlefield_object extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int msgDestroyBattlefieldObject(obj_id self, dictionary params) throws InterruptedException
     {
         if (player_structure.isBuilding(self))
@@ -76,7 +80,8 @@ public class battlefield_object extends script.base_script
             obj_id[] players = player_structure.getPlayersInBuilding(self);
             if (players != null)
             {
-                for (obj_id player : players) {
+                for (obj_id player : players)
+                {
                     expelFromBuilding(player);
                 }
             }

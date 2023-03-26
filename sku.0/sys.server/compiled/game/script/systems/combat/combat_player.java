@@ -9,6 +9,7 @@ public class combat_player extends script.systems.combat.combat_base
     public combat_player()
     {
     }
+
     public int OnExitedCombat(obj_id self) throws InterruptedException
     {
         combat.clearCombatDebuffs(self);
@@ -26,7 +27,7 @@ public class combat_player extends script.systems.combat.combat_base
             {
                 pet_lib.setMountedMovementRate(self, objMount);
             }
-            else 
+            else
             {
                 pet_lib.setUnmountedMovementRate(self, objMount);
             }
@@ -34,6 +35,7 @@ public class combat_player extends script.systems.combat.combat_base
         utils.setScriptVar(self, pet_lib.COMBAT_ENDED, getGameTime());
         return SCRIPT_CONTINUE;
     }
+
     public int OnEnteredCombat(obj_id self) throws InterruptedException
     {
         if (utils.hasScriptVar(self, "holoMessageTime"))
@@ -77,10 +79,12 @@ public class combat_player extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int combatModeCheck(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnDefenderCombatAction(obj_id self, obj_id objAttacker, obj_id objWeapon, int intCombatResult) throws InterruptedException
     {
         if (vehicle.isRidingVehicle(self))
@@ -94,7 +98,7 @@ public class combat_player extends script.systems.combat.combat_base
         }
         if ((intCombatResult == COMBAT_RESULT_EVADE || intCombatResult == COMBAT_RESULT_MISS) && buff.isInStance(self))
         {
-            int riposte = (int)getSkillStatisticModifier(self, "expertise_stance_riposte");
+            int riposte = getSkillStatisticModifier(self, "expertise_stance_riposte");
             if (riposte > 0 && riposte > rand(0, 99))
             {
                 queueCommand(self, (1127093938), objAttacker, "", COMMAND_PRIORITY_DEFAULT);
@@ -102,6 +106,7 @@ public class combat_player extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToReceiveItem(obj_id self, obj_id objContainer, obj_id objTransferer, obj_id objItem) throws InterruptedException
     {
         if (isWeapon(objItem))
@@ -114,7 +119,7 @@ public class combat_player extends script.systems.combat.combat_base
                     sendSystemMessage(self, strSpam);
                     return SCRIPT_OVERRIDE;
                 }
-                else 
+                else
                 {
                     if (!jedi.hasColorCrystal(objItem))
                     {
@@ -128,6 +133,7 @@ public class combat_player extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnReceivedItem(obj_id self, obj_id objSrcContainer, obj_id objTransferer, obj_id objItem) throws InterruptedException
     {
         if (isWeapon(objItem))
@@ -149,6 +155,7 @@ public class combat_player extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnDeath(obj_id self, obj_id killer, obj_id corpseId) throws InterruptedException
     {
         if (hasSkill(self, "expertise_of_last_words_1"))
@@ -157,6 +164,7 @@ public class combat_player extends script.systems.combat.combat_base
         }
         return SCRIPT_CONTINUE;
     }
+
     public int target(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException
     {
         if (isIdValid(target))

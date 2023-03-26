@@ -6,10 +6,12 @@ import script.library.utils;
 
 public class colorize_item extends script.base_script
 {
+    public static final String USE_STRING = "use_string";
+
     public colorize_item()
     {
     }
-    public static final String USE_STRING = "use_string";
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (!isIdValid(player))
@@ -29,6 +31,7 @@ public class colorize_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         if (!isIdValid(player))

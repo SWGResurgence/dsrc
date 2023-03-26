@@ -9,6 +9,7 @@ public class publish_gift_shuttle extends script.base_script
     public publish_gift_shuttle()
     {
     }
+
     public int startLandingSequence(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = params.getObjId("owner");
@@ -19,6 +20,7 @@ public class publish_gift_shuttle extends script.base_script
         messageTo(self, "takeOff", d, 25.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int takeOff(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = params.getObjId("owner");
@@ -29,6 +31,7 @@ public class publish_gift_shuttle extends script.base_script
         messageTo(self, "startTakeOffSequence", d, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int startTakeOffSequence(obj_id self, dictionary params) throws InterruptedException
     {
         queueCommand(self, (-1465754503), self, "", COMMAND_PRIORITY_FRONT);
@@ -36,11 +39,13 @@ public class publish_gift_shuttle extends script.base_script
         messageTo(self, "cleanUp", null, 20.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int cleanUp(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);
         return SCRIPT_CONTINUE;
     }
+
     public int warpPlayer(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id owner = params.getObjId("owner");

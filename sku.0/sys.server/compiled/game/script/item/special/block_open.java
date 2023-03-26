@@ -7,6 +7,7 @@ public class block_open extends script.base_script
     public block_open()
     {
     }
+
     public int OnAboutToOpenContainer(obj_id self, obj_id who) throws InterruptedException
     {
         if (isGod(who))

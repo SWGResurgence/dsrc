@@ -11,13 +11,14 @@ import java.lang.reflect.InvocationTargetException;
 
 public class controller extends script.base_script
 {
+    public float PLANETSIDE = 16000.0f;
     public int JUNK_LIMIT = 1000;
     public String[] NAME_VARIATIONS = {
             "Rugged Scrap",
             "Rusty Scrap",
             "Solid Scrap",
             "Dented Scrap",
-            "Oxidiized Scrap",
+            "Oxidized Scrap",
             "Dusty Scrap",
             "Tarnished Scrap",
     };
@@ -35,10 +36,10 @@ public class controller extends script.base_script
     {
         if (isGod(player))
         {
-            int main = mi.addRootMenu( menu_info_types.ITEM_USE, new string_id( "Galactic Junk Pickup Day" ));
-            mi.addSubMenu(main, menu_info_types.SERVER_MENU1, new string_id( "Stats" ));
-            mi.addSubMenu(main, menu_info_types.SERVER_MENU2, new string_id( "Create Junkfield" ));
-            mi.addSubMenu(main, menu_info_types.SERVER_MENU3, new string_id( "Force Cleanup" ));
+            int main = mi.addRootMenu( menu_info_types.ITEM_USE, new string_id("Galactic Junk Pickup Day"));
+            mi.addSubMenu(main, menu_info_types.SERVER_MENU1, new string_id("Stats"));
+            mi.addSubMenu(main, menu_info_types.SERVER_MENU2, new string_id("Create Junkfield"));
+            mi.addSubMenu(main, menu_info_types.SERVER_MENU3, new string_id( "Force Cleanup"));
         }
         return SCRIPT_CONTINUE;
     }
@@ -49,18 +50,18 @@ public class controller extends script.base_script
             if (item == menu_info_types.SERVER_MENU1)
             {
                 String prompt = "Junkfield Stats:\n";
-                prompt += "Junkfield Size: 8km x 8km\n";
-                prompt += "Junkfield Center: " + getLocation(self) + "\n";
-                prompt += "Junkfield Radius: " + getDistance(getLocation(self), getLocation(self)) + "\n";
+                prompt += "Junkfield Size: 7.25km x 7.25km\n";
+                prompt += "Junkfield Center: " + getLocation(self).toClipboardFormat() + "\n";
                 prompt += "Junkfield Objects: " + getJunkCount(self) + "\n";
                 prompt += "Junkfield Limit: " + JUNK_LIMIT + "\n";
-                prompt += "Junkfield Variations: " + NAME_VARIATIONS.length + "\n";
+
+                prompt += "Junkfield Variations: 5 templates with " + NAME_VARIATIONS.length + " different naming variations.\n";
                 int pid = createSUIPage("/Script.messageBox", player, player, "noHandler");
                 setSUIProperty(pid, "bg.caption.lblTitle", "Text", "Junkfield Stats");
                 setSUIProperty(pid, "Prompt.lblPrompt", "Font", "bold_15");
                 setSUIProperty(pid, "Prompt.lblPrompt", "Editable", "true");
                 setSUIProperty(pid, "Prompt.lblPrompt", "Text", prompt);
-                subscribeToSUIProperty(pid, "btnOk", "Pressed");
+                subscribeToSUIProperty(pid, "btnOk", "Ok");
                 showSUIPage(pid);
             }
             if (item == menu_info_types.SERVER_MENU2)
@@ -82,7 +83,7 @@ public class controller extends script.base_script
             junkLoc.x = junkLoc.x + (rand(-7250.0f, 7250.0f));
             junkLoc.z = junkLoc.z + (rand(-7250.0f, 7250.0f));
             junkLoc.y = getHeightAtLocation(junkLoc.x, junkLoc.z);
-            obj_id junk = createObject("object/tangible/event_perk/gjpud_junk_s0" + rand(1,5) + ".iff", getLocation(self));
+            obj_id junk = createObject("object/tangible/gjpud/gjpud_junk_s0" + rand(1,5) + ".iff", junkLoc);
             attachScript(junk, "event.gjpud.junk");
             setObjVar(junk, "gjpudObject", 1);
             setYaw(junk, rand(0.0f, 359.9f));
@@ -91,14 +92,14 @@ public class controller extends script.base_script
             {
                 randomName = "Junk";
             }
-            broadcast(player,"Junk spawned at " + junkLoc.x + ", " + junkLoc.z);
             setName(junk, randomName);
         };
+        broadcast(player,"Junk spawned.");
         return SCRIPT_CONTINUE;
     }
     public int destroyJunk(obj_id self) throws InterruptedException
     {
-        obj_id[] junkObjects = getObjectsInRange(getLocation(self), 16000.0f);
+        obj_id[] junkObjects = getObjectsInRange(getLocation(self), PLANETSIDE);
         for (int i = 0; i < junkObjects.length; i++)
         {
             if (hasObjVar(junkObjects[i], "gjpudObject"))
@@ -111,7 +112,7 @@ public class controller extends script.base_script
     public int getJunkCount(obj_id self) throws InterruptedException
     {
         int junkCount = 0;
-        obj_id[] junkObjects = getAllObjectsWithScript(getLocation(self), 16000.0f, "event.gjpud.junk");
+        obj_id[] junkObjects = getAllObjectsWithScript(getLocation(self), PLANETSIDE, "event.gjpud.junk");
         for (int i = 0; i < junkObjects.length; i++)
         {
             if (hasObjVar(junkObjects[i], "gjpudObject"))

@@ -12,6 +12,7 @@ public class power_shrine extends script.base_script
     public power_shrine()
     {
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         messageTo(self, "msgFSBattleHealPulse", null, 5.0f, false);
@@ -19,11 +20,12 @@ public class power_shrine extends script.base_script
         setHitpoints(self, getMaxHitpoints(self));
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDamaged(obj_id self, obj_id attacker, obj_id weapon, int damage) throws InterruptedException
     {
         int hitpoints = getHitpoints(self);
         int max_hitpoints = getMaxHitpoints(self);
-        float percent_hp = (float)hitpoints / max_hitpoints;
+        float percent_hp = (float) hitpoints / max_hitpoints;
         int alert_range = 0;
         if (percent_hp > 0.75)
         {
@@ -37,7 +39,7 @@ public class power_shrine extends script.base_script
         {
             alert_range = 25;
         }
-        else 
+        else
         {
             alert_range = 30;
         }
@@ -45,12 +47,14 @@ public class power_shrine extends script.base_script
         {
             obj_id[] defenders = new obj_id[0];
             defenders = getNPCsInRange(self, alert_range);
-            for (obj_id defender : defenders) {
+            for (obj_id defender : defenders)
+            {
                 startCombat(defender, attacker);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectDisabled(obj_id self, obj_id killer) throws InterruptedException
     {
         obj_id theater_object = getObjIdObjVar(self, theater.VAR_PARENT);
@@ -63,7 +67,7 @@ public class power_shrine extends script.base_script
             {
                 obj_var_name = "fs_quest.final_battle.red_stones";
             }
-            else 
+            else
             {
                 obj_var_name = "fs_quest.final_battle.green_stones";
             }
@@ -76,7 +80,8 @@ public class power_shrine extends script.base_script
                     obj_id[] red_stones = getObjIdArrayObjVar(theater_object, "fs_quest.final_battle.red_stones");
                     if (red_stones != null)
                     {
-                        for (obj_id red_stone : red_stones) {
+                        for (obj_id red_stone : red_stones)
+                        {
                             playClientEffectObj(killer, "clienteffect/combat_lightning_rifle_hit.cef", red_stone, "");
                         }
                     }
@@ -90,7 +95,7 @@ public class power_shrine extends script.base_script
                         messageTo(second, "msgAidGreen", null, 1, false);
                     }
                 }
-                else 
+                else
                 {
                     messageTo(theater_object, "msgQuestRedStonesDestroyed", null, 0.0f, false);
                     if (isIdValid(leader))
@@ -103,7 +108,7 @@ public class power_shrine extends script.base_script
                     }
                 }
             }
-            else 
+            else
             {
                 stones.remove(self);
                 setObjVar(theater_object, obj_var_name, stones);
@@ -113,6 +118,7 @@ public class power_shrine extends script.base_script
         messageTo(self, "msgQuestDestroyShrine", null, 3.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgFSBattleHealPulse(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id theater_object = getObjIdObjVar(self, theater.VAR_PARENT);
@@ -130,7 +136,7 @@ public class power_shrine extends script.base_script
                 playClientEffectObj(player, "clienteffect/healing_healdamage.cef", leader, "");
             }
         }
-        else 
+        else
         {
             obj_id leader = getObjIdObjVar(theater_object, "fs_quest.final_battle.leader");
             boolean source_effect = false;
@@ -153,7 +159,8 @@ public class power_shrine extends script.base_script
             obj_id[] stones = getObjIdArrayObjVar(theater_object, "fs_quest.final_battle.red_stones");
             if (stones != null)
             {
-                for (obj_id stone : stones) {
+                for (obj_id stone : stones)
+                {
                     setHitpoints(stone, getMaxHitpoints(stone));
                     playClientEffectObj(player, "clienteffect/healing_healdamage.cef", stone, "");
                 }
@@ -162,6 +169,7 @@ public class power_shrine extends script.base_script
         messageTo(self, "msgFSBattleHealPulse", null, 10.0f, false);
         return SCRIPT_CONTINUE;
     }
+
     public int msgQuestDestroyShrine(obj_id self, dictionary params) throws InterruptedException
     {
         destroyObject(self);

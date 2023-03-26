@@ -5,11 +5,12 @@ import script.obj_id;
 
 public class senate_cell extends script.base_script
 {
+    public static final String JEDI_ROOM_PERMISSIONS_TABLE = "datatables/pvp/jedi_enclave_room_permissions.iff";
+    public static final String DATA_COLUMN_COMMUNITY_CELLS = "_community_cells";
     public senate_cell()
     {
     }
-    public static final String JEDI_ROOM_PERMISSIONS_TABLE = "datatables/pvp/jedi_enclave_room_permissions.iff";
-    public static final String DATA_COLUMN_COMMUNITY_CELLS = "_community_cells";
+
     public int OnAboutToReceiveItem(obj_id self, obj_id srcContainer, obj_id transferer, obj_id item) throws InterruptedException
     {
         if (checkCellPermission(item, self, false))
@@ -18,6 +19,7 @@ public class senate_cell extends script.base_script
         }
         return SCRIPT_OVERRIDE;
     }
+
     public boolean checkCellPermission(obj_id item, obj_id cell, boolean silent) throws InterruptedException
     {
         if (!isIdValid(item))
@@ -44,14 +46,11 @@ public class senate_cell extends script.base_script
             {
                 return true;
             }
-            else 
+            else
             {
                 int[] allowedRanks = dataTableGetIntColumnNoDefaults(JEDI_ROOM_PERMISSIONS_TABLE, columnName);
                 int rank = getIntObjVar(item, "senator_rank");
-                if (utils.getElementPositionInArray(allowedRanks, rank) >= 0)
-                {
-                    return true;
-                }
+                return utils.getElementPositionInArray(allowedRanks, rank) >= 0;
             }
         }
         return false;

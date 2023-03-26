@@ -5,14 +5,15 @@ import script.library.*;
 
 public class decoration_item extends script.base_script
 {
-    public decoration_item()
-    {
-    }
     public static final string_id SID_CONVERT_PET_ITEM_TO_DNA = new string_id("incubator", "convert_pet_item_to_dna");
     public static final string_id SID_CONVERT_PROMPT = new string_id("incubator", "convert_pet_item_prompt");
     public static final string_id SID_CONVERT_TITLE = new string_id("incubator", "convert_pet_item_title");
     public static final string_id SID_REPORT_PET_CONVERSION_FAIL = new string_id("incubator", "report_pet_conversion_fail");
     public static final string_id PCOLOR = new string_id("sui", "set_primary_color");
+    public decoration_item()
+    {
+    }
+
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         if (utils.isNestedWithinAPlayer(self))
@@ -22,14 +23,17 @@ public class decoration_item extends script.base_script
                 int management_root = mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_CONVERT_PET_ITEM_TO_DNA);
             }
         }
-        if (getOwner(self) == player){
-            if (!hasObjVar(self, beast_lib.OBJVAR_OLD_PET_REHUED)){
+        if (getOwner(self) == player)
+        {
+            if (!hasObjVar(self, beast_lib.OBJVAR_OLD_PET_REHUED))
+            {
                 mi.addRootMenu(menu_info_types.SERVER_MENU2, PCOLOR);
             }
             mi.addRootMenu(menu_info_types.SERVER_MENU3, new string_id("beast", "name_beast"));
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnObjectMenuSelect(obj_id self, obj_id player, int item) throws InterruptedException
     {
         sendDirtyObjectMenuNotification(self);
@@ -41,29 +45,38 @@ public class decoration_item extends script.base_script
                 return SCRIPT_CONTINUE;
             }
         }
-        if (getOwner(self) == player) {
-            if (item == menu_info_types.SERVER_MENU2) {
-                if (!hasObjVar(self, beast_lib.OBJVAR_OLD_PET_REHUED)){
+        if (getOwner(self) == player)
+        {
+            if (item == menu_info_types.SERVER_MENU2)
+            {
+                if (!hasObjVar(self, beast_lib.OBJVAR_OLD_PET_REHUED))
+                {
                     sui.colorize(self, player, self, hue.INDEX_1, "handlePrimaryColorize");
                 }
-            } else if (item == menu_info_types.SERVER_MENU3) {
+            }
+            else if (item == menu_info_types.SERVER_MENU3)
+            {
                 sui.inputbox(self, player, "@beast:name_d", sui.OK_CANCEL, "@beast:name_t", sui.INPUT_NORMAL, null, "handleSetBeastName", null);
             }
         }
         return SCRIPT_CONTINUE;
     }
+
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnAboutToBeTransferred(obj_id self, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int OnTransferred(obj_id self, obj_id sourceContainer, obj_id destContainer, obj_id transferer) throws InterruptedException
     {
         return SCRIPT_CONTINUE;
     }
+
     public int handlerSuiConvertPetItemToDna(obj_id self, dictionary params) throws InterruptedException
     {
         if (params == null || params.isEmpty())
@@ -85,7 +98,7 @@ public class decoration_item extends script.base_script
                 destroyObject(petItem);
                 return SCRIPT_CONTINUE;
             }
-            else 
+            else
             {
                 CustomerServiceLog("BeastPetConversion: ", "petItem (" + petItem + ")" + " was NOT converted into a dna object, for player " + getFirstName(player) + "(" + player + "). PetItem(" + petItem + ") will NOT be destroyed.");
                 sendSystemMessage(player, SID_REPORT_PET_CONVERSION_FAIL);
@@ -93,6 +106,7 @@ public class decoration_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handlePrimaryColorize(obj_id self, dictionary params) throws InterruptedException
     {
         if (!isValidId(self))
@@ -113,6 +127,7 @@ public class decoration_item extends script.base_script
         }
         return SCRIPT_CONTINUE;
     }
+
     public int handleSetBeastName(obj_id self, dictionary params) throws InterruptedException
     {
         obj_id player = sui.getPlayerId(params);

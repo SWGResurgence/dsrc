@@ -10,6 +10,7 @@ public class theater_spawn6 extends script.base_script
     public theater_spawn6()
     {
     }
+
     public int OnTheaterCreated(obj_id self, dictionary params) throws InterruptedException
     {
         LOG("newquests", "theater_spawn1");

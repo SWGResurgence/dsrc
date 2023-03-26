@@ -17,7 +17,7 @@ public class terminal_item_recovery extends script.base_script
     {
     }
     public static final String STF = "terminal_ui";
-    public static final string_id SID_RECOVER = new string_id(STF, "recover");
+    public static final string_id SID_RECOVER = new string_id("Pickup Parcel");
     public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
     {
         mi.addRootMenu(menu_info_types.SERVER_MENU1, SID_RECOVER);

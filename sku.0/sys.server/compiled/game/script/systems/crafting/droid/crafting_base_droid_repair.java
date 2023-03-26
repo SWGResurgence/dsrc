@@ -11,28 +11,35 @@ import script.obj_id;
 
 public class crafting_base_droid_repair extends script.systems.crafting.crafting_base
 {
+    public static final String VERSION = "v1.00.00";
+
     public crafting_base_droid_repair()
     {
     }
-    public static final String VERSION = "v1.00.00";
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes, dictionary craftingValuesDictionary) throws InterruptedException
     {
         super.calcAndSetPrototypeProperties(prototype, itemAttributes, craftingValuesDictionary);
     }
+
     public void calcAndSetPrototypeProperties(obj_id prototype, draft_schematic.attribute[] itemAttributes) throws InterruptedException
     {
         int tempPower = 0;
-        int[] skill_value = 
-        {
-            0
-        };
+        int[] skill_value =
+                {
+                        0
+                };
         debugServerConsoleMsg(null, "Beginning assembly-phase prototype property setting");
-        for (draft_schematic.attribute itemAttribute : itemAttributes) {
-            if (itemAttribute == null) {
+        for (draft_schematic.attribute itemAttribute : itemAttributes)
+        {
+            if (itemAttribute == null)
+            {
                 continue;
             }
-            if (!calcAndSetPrototypeProperty(prototype, itemAttribute)) {
-                switch (((itemAttribute.name).getAsciiId())) {
+            if (!calcAndSetPrototypeProperty(prototype, itemAttribute))
+            {
+                switch (((itemAttribute.name).getAsciiId()))
+                {
                     case "power":
                         tempPower = (int) (itemAttribute.currentValue);
                         break;
@@ -50,14 +57,15 @@ public class crafting_base_droid_repair extends script.systems.crafting.crafting
         }
         attrib_mod[] am = createDroidMedicineMod(prototype, tempPower);
         setObjVar(prototype, consumable.VAR_CONSUMABLE_MODS, am);
-        int[] stomach = 
-        {
-            0,
-            0,
-            0
-        };
+        int[] stomach =
+                {
+                        0,
+                        0,
+                        0
+                };
         setObjVar(prototype, consumable.VAR_CONSUMABLE_STOMACH_VALUES, stomach);
     }
+
     public attrib_mod[] createDroidMedicineMod(obj_id prototype, int power) throws InterruptedException
     {
         attrib_mod[] am = new attrib_mod[1];
