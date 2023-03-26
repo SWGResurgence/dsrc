@@ -296,14 +296,14 @@ public class trial extends script.base_script
         "item_kashyyyk_reward_token_01_01"     ,            //#38   Token: Kashyyyk Token of Freedom
         "item_aurillian_certified_scroll_01_01",	        //#39	Token: Aurilian Certified Scroll
         "item_world_boss_token_01_01",                      //#40   Token: World Boss Token of Achievement
-        "item_battlefield_rebel_token_massassi_isle",       //#41  Token: Rebel Massassi Battlefield Token
+        "item_battlefield_rebel_token_massassi_isle",       //#41   Token: Rebel Massassi Battlefield Token
         "item_battlefield_rebel_token_battlefield2",        //#42   Token: Rebel #2 Battlefield Token
         "item_battlefield_rebel_token_battlefield3",        //#43   Token: Rebel #3 Battlefield Token
         "item_battlefield_rebel_token_battlefield4",        //#44   Token: Rebel #4 Battlefield Token
-        "item_battlefield_imperial_token_massassi_isle",    //#45 Token: Imperial Massassi Battlefield Token
-        "item_battlefield_imperial_token_battlefield2",     //#46 Token: Imperial #2 Battlefield Token
-        "item_battlefield_imperial_token_battlefield3",     //#47 Token: Imperial #3 Battlefield Token
-        "item_battlefield_imperial_token_battlefield4",     //#48 Token: Imperial #4 Battlefield Token
+        "item_battlefield_imperial_token_massassi_isle",    //#45   Token: Imperial Massassi Battlefield Token
+        "item_battlefield_imperial_token_battlefield2",     //#46   Token: Imperial #2 Battlefield Token
+        "item_battlefield_imperial_token_battlefield3",     //#47   Token: Imperial #3 Battlefield Token
+        "item_battlefield_imperial_token_battlefield4",     //#48   Token: Imperial #4 Battlefield Token
     };
     public static final int NUM_HEROIC_TOKEN_TYPES = HEROIC_TOKENS.length;
     public static final String KIMARU_HATE_LIST = "kimaru_hate_list";
@@ -315,6 +315,8 @@ public class trial extends script.base_script
     public static final String SEQUENCER_PATH_DATA = "sequencer_path_data";
     public static final String SPACE_DUTY_TOKEN = "item_token_duty_space_01_01";
     public static final String TOKEN_BOX = "item_heroic_token_box_01_01";
+	public static final String GJPUD_ITEM = "item.gjpud_scrap_heap";
+	public static final int GJPUD_MAX = 25;
     public static void initializeBox(obj_id self) throws InterruptedException
     {
         int[] tokenTypes = new int[HEROIC_TOKENS.length];

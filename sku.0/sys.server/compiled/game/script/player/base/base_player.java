@@ -2,6 +2,7 @@ package script.player.base;
 
 import script.*;
 import script.library.*;
+import script.library.gcw;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -1452,10 +1453,7 @@ public class base_player extends script.base_script
                 }
                 else
                 {
-                    /*String strGalaxyMessage = "\\#FF0000" + "Welcome to SWG: Resurgence!" + "\r\n" + "\\#CC9900" + "If you encounter any bugs, please report them on our Mantis Bug Tracker, and thank you for participating in our testing phase!" + "\\#FFFFFF";
-                    sendConsoleMessage(self, strGalaxyMessage);*/
-
-                    String strGalaxyMessage = "\\#FF0000" + "Welcome to the Apotheosis of SWG: Resurgence!" + "\r\n" + "\\#4044BF" + "Just a reminder to keep checking the Bonuses that change periodically, which is available at:  https://swgresurgence.com/index.php?title=Server_Bonuses" + "\r\n" + "\\#CC9900" + "If you encounter any bugs please them on our Mantis Bug Tracker, and enjoy your time on Apotheosis!" + "\\#FFFFFF";
+                    String strGalaxyMessage = "\\#FF0000" + "Welcome to SWG: Resurgence!" + "\r\n" + "\\#CC9900" + "If you encounter any bugs, please report them on Mantis." + "\\#FFFFFF";
                     sendConsoleMessage(self, strGalaxyMessage);
                 }
                 boolean warden = isWarden(self);
@@ -1475,7 +1473,7 @@ public class base_player extends script.base_script
                         strGalaxyMessage += "Welcome warden";
                     }
                     strGalaxyMessage += "\\#FFFFFF";
-                    sendConsoleMessage(self, strGalaxyMessage);
+                    //sendConsoleMessage(self, strGalaxyMessage);
                 }
             }
         }
@@ -1521,6 +1519,7 @@ public class base_player extends script.base_script
         chatEnterRoom("SWG.system");
         chatEnterRoom("SWG." + getGalaxyName() + ".system");
         chatEnterRoom("SWG." + getGalaxyName() + "." + getCurrentSceneName() + ".system");
+		chatEnterRoom("SWG." + getGalaxyName() + ".Galaxy");
         float curScale = getScale(self);
         Gender gender = getGender(self);
         int intSpecies = getSpecies(self);
@@ -12294,7 +12293,7 @@ public class base_player extends script.base_script
         if (isGod(player))
         {
             String stationName = getPlayerAccountUsername(self);
-            names[idx] = "station_name";
+            names[idx] = utils.packStringId(new string_id("Station: "));
             attribs[idx] = stationName;
             idx++;
             if (idx >= names.length)
@@ -12317,10 +12316,7 @@ public class base_player extends script.base_script
             }
             else
             {
-                /*String strGalaxyMessage = "\\#FF0000" + "Welcome to SWG: Resurgence!" + "\r\n" + "\\#CC9900" + "If you encounter any bugs, please report them on our Mantis Bug Tracker, and thank you for participating in our testing phase!" + "\\#FFFFFF";
-                sendConsoleMessage(self, strGalaxyMessage);*/
-
-                String strGalaxyMessage = "\\#FF0000" + "Welcome to the Apotheosis of SWG: Resurgence!" + "\r\n" + "\\#4044BF" + "Just a reminder to keep checking the Bonuses that change periodically, which is available at:  https://swgresurgence.com/index.php?title=Server_Bonuses" + "\r\n" + "\\#CC9900" + "If you encounter any bugs please them on our Mantis Bug Tracker, and enjoy your time on Apotheosis!" + "\\#FFFFFF";
+                String strGalaxyMessage = "\\#FF0000" + "Welcome to SWG: Resurgence!" + "\r\n" + "\\#CC9900" + "If you encounter any bugs, please report them on Mantis." + "\\#FFFFFF";
                 sendConsoleMessage(self, strGalaxyMessage);
             }
             boolean warden = isWarden(self);
@@ -12340,7 +12336,7 @@ public class base_player extends script.base_script
                     strGalaxyMessage += "Welcome warden";
                 }
                 strGalaxyMessage += "\\#FFFFFF";
-                sendConsoleMessage(self, strGalaxyMessage);
+                //sendConsoleMessage(self, strGalaxyMessage);
             }
         }
         else
@@ -12547,10 +12543,6 @@ public class base_player extends script.base_script
             return false;
         }
         if (!isValidId(tool) || !exists(tool))
-        {
-            return false;
-        }
-        if ((params == null) || (params.equals("")))
         {
             return false;
         }
@@ -12891,10 +12883,7 @@ public class base_player extends script.base_script
             loot.disableEnzymeLoot(self);
             message = "enzyme_loot_now_off";
         }
-        if (message.length() > 0)
-        {
-            sendSystemMessage(self, new string_id("base_player", message));
-        }
+        sendSystemMessage(self, new string_id("base_player", message));
         return SCRIPT_CONTINUE;
     }
 
@@ -12947,7 +12936,7 @@ public class base_player extends script.base_script
             }
 
             mi.addSubMenu(pid, menu_info_types.SERVER_MENU38, new string_id("Grant Static Item"));
-            System.out.print("\nPlayer " + self + " has requested the god menu on " + toUpper(getFirstName(player), 0) + "\n");//remove after lag inspection
+            System.out.print("\nPlayer " + self + " has requested the god menu on " + toUpper(getFirstName(player), 0) + "\n");
         }
         menu_info_data mid = mi.getMenuItemByType(menu_info_types.COMBAT_DEATH_BLOW);
         if (mid == null)
@@ -13075,6 +13064,7 @@ public class base_player extends script.base_script
             prompt += "Full Name: " + getPlayerFullName(self) + "\n";
             prompt += "NetworkId: " + self + "\n";
             prompt += "Location: " + getLocation(self) + "\n";
+			//prompt += "Location (/loc): " + getLocation(self).toClipboardFormat() + "\n";
             prompt += "Creation Date: " + getPlayerBirthDate(self) + "\n";
             prompt += "Housing Lots: " + getMaxHousingLots() + "\n";
             prompt += " ------------------ " + gold("Avatar") + " ------------------ " + "\n";
@@ -13090,7 +13080,7 @@ public class base_player extends script.base_script
             prompt += "Money (total): " + getTotalMoney(self) + "\n";
             prompt += "Money (bank): " + getBankBalance(self) + "\n";
             prompt += "Money (cash): " + getCashBalance(self) + "\n";
-            prompt += "Container: " + getVolumeFree(utils.getInventoryContainer(self)) + "/125 slots used\n";
+            prompt += "Container: " + getVolumeFree(utils.getInventoryContainer(self)) + "/125 slots free\n";
             prompt += " ------------------ " + gold("Faction") + " ------------------ " + "\n";
             if (factions.isRebel(self))
             {
@@ -13157,8 +13147,11 @@ public class base_player extends script.base_script
             }
             prompt += " ------------------ " + gold("Event") + " ------------------ " + "\n";
             int pumpkinPulped = getIntObjVar(self, "halloween.pulped");
+			int scrapCollected = getIntObjVar(self, "gjpud.total");
             prompt += "Pumpkin Pulped: " + pumpkinPulped + "\n";
             prompt += "Pumpkin Pulper Award: " + (!hasObjVar(self, "halloween.22_award") ? "no" : "yes") + "\n";
+			prompt += "Scrap Collected: " + scrapCollected + "\n";
+            prompt += "Scrap Heap: " + (!hasObjVar(self, "gjpud.scrapheaps") ? "no" : "yes") + "\n";
             prompt += " ------------------ " + gold("Scripts") + " ------------------ " + "\n";
             String[] list = getScriptList(self);
             for (String s : list)
@@ -13207,31 +13200,31 @@ public class base_player extends script.base_script
             {
                 if (hasObjVar(content, "noTrade"))
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " Template [" +  getTemplateName(content) + "] " + red(" [NO TRADE] ") + "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " [Template [" +  getTemplateName(content) + "] " + red(" [NO TRADE] ") + colors_hex.FOOTER +  "\n";
                 }
                 else if (getTemplateName(content).contains("character_builder"))
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " Template [" +  getTemplateName(content) + "] " + azure(" [INSTANT DELETE LIST] ") + "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " [Template: [" +  getTemplateName(content) + "] " + construction(" [INSTANT DELETE LIST] ") + colors_hex.FOOTER + "\n";
                 }
                 else if (hasScript(content, "item.loot.portamedic"))
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " Template [" +  getTemplateName(content) + "] " + azure(" [DEVELOPMENT ITEM] ") + "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " [Template: [" +  getTemplateName(content) + "] " + azure(" [DEVELOPMENT ITEM] ") + colors_hex.FOOTER + "\n";
                 }
                 else if (hasScript(content, "item.loot.toy"))
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " Template [" +  getTemplateName(content) + "] " + azure(" [DEVELOPMENT ITEM] ") + "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " [Template: [" +  getTemplateName(content) + "] " + azure(" [DEVELOPMENT ITEM] ") + colors_hex.FOOTER + "\n";
                 }
                 else if (hasScript(content, "systems.city.city_hire"))
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " Template [" +  getTemplateName(content) + "] " + azure(" [DEVELOPMENT ITEM] ") + "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " [Template: [" +  getTemplateName(content) + "] " + azure(" [DEVELOPMENT ITEM] ") + colors_hex.FOOTER + "\n";
                 }
                 else if (hasObjVar(content, "item.temporary.time_stamp"))
                 {
-                    prompt += "[NwID  " + content + "] " + "] " + " " + getEncodedName(content) + " Template [" +  getTemplateName(content) + "] " + azure(" [TEMPORARY ITEM] ") + "\n";
+                    prompt += "[NwID  " + content + "]" + " " + getEncodedName(content) + " [Template: [" +  getTemplateName(content) + "] " + azure(" [TEMPORARY ITEM] ") + colors_hex.FOOTER + "\n";
                 }
                 else
                 {
-                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " Template [" +  getTemplateName(content) + "] " + "\n";
+                    prompt += "[NwID  " + content + "] " + " " + getEncodedName(content) + " [Template: [" +  getTemplateName(content) + "] " + "\n";
                 }
             }
             prompt += " ------------------ " + gold("End of Inventory") + " ------------------ " + "\n";
@@ -13289,7 +13282,8 @@ public class base_player extends script.base_script
             callable.storeCallables(self);
             pet_lib.storeAllPets(self);
             beast_lib.storeBeasts(self);
-            broadcast(player, "Stored all callables, pets, and beasts for " + getPlayerFullName(self) + ".");
+            vehicle.storeAllVehicles(self);
+            broadcast(player, "Stored all vehicles, callables, pets, and beasts for " + getPlayerFullName(self) + ".");
         }
         return SCRIPT_CONTINUE;
     }

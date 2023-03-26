@@ -89,7 +89,7 @@ public class cmd extends script.base_script
         StringTokenizer st = new StringTokenizer(params);
         if(!st.hasMoreTokens()) {
             sendSystemMessageTestingOnly(self, "Syntax: /forceCommand <-target OR <oid>> </command with params>");
-            sendSystemMessageTestingOnly(self, "Example: /forceCommand 9248492842 /tell aconite hi");
+            sendSystemMessageTestingOnly(self, "Example: /forceCommand 9248492842 /tell bubba-joe hi");
         } else {
             String focus = st.nextToken();
             if(focus.contains("target")) {
@@ -1909,7 +1909,7 @@ public class cmd extends script.base_script
             sendSystemMessageTestingOnly(self, "Level must be greater than 0.");
             return SCRIPT_CONTINUE;
         }
-        if (level > 100)
+        if (level > 300)
         {
             sendSystemMessageTestingOnly(self, "Level cannot exceed 100.");
             return SCRIPT_CONTINUE;
@@ -1921,7 +1921,7 @@ public class cmd extends script.base_script
             sendSystemMessageTestingOnly(self, "Bonus must be level 1 or higher.");
             return SCRIPT_CONTINUE;
         }
-        if (bonus > 10)
+        if (bonus > 25)
         {
             sendSystemMessageTestingOnly(self, "Bonus cannot exceed 10.");
             return SCRIPT_CONTINUE;
@@ -1952,7 +1952,7 @@ public class cmd extends script.base_script
         {
             string_id item_sid = getNameStringId(target);
             string_id prefix;
-            if (bonus > 9)
+            if (bonus > 19)
             {
                 prefix = new string_id("obj_n", "legendary_prefix");
             }
