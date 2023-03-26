@@ -1,22 +1,5 @@
 item	cash	token37	limit	class	script	note
 s[none]	i[0]	i[0]	i[0]	i[0]	s	c
-col_treasure_hunter_dolovite_mask_02_01		1				A Dolovite Mask
-col_treasure_hunter_hendanyn_mask_02_01		1				A Hendanyn Death Mask
-col_lightsaber_1h_01_03		1				A Jedi Relic
-col_treasure_hunter_mandalore_mask_02_01		1				A Mandalorian Mask
-col_treasure_hunter_sith_mask_02_01		1				A Sith Mask
-col_treasure_hunter_oval_gem_02_01		1				A rare red oval gem
-col_treasure_hunter_trilliant_gem_02_01		1				A rare red trilliant gem
-col_treasure_hunter_oval_gem_02_02		1				A rare green oval gem
-col_treasure_hunter_trilliant_gem_02_02		1				A rare green trilliant gem
-col_treasure_hunter_oval_gem_02_03		1				A rare blue oval gem
-col_treasure_hunter_trilliant_gem_02_03		1				A rare blue trilliant gem
-col_treasure_hunter_oval_gem_02_04		1				A rare yellow oval gem
-col_treasure_hunter_trilliant_gem_02_04		1				A rare yellow triliant gem
-col_treasure_hunter_antique_melee_02_01		1				An antique melee weapon
-col_treasure_hunter_antique_pistol_02_01		1				An antique pistol
-col_treasure_hunter_antique_carbine_02_01		1				An antique carbine
-col_treasure_hunter_antique_rifle_02_01		1				An antique rifle
 col_dooku_datadisk_02_04		1				Dooku's Story - Data disk 4/5
 col_dooku_datadisk_02_05		1				Dooku's Story - Data disk 5/5
 col_green_sq_cut_gem_style1_02_01		1				Green Pikach
@@ -29,14 +12,7 @@ col_green_sq_cut_gem_style1_02_07		1				Green Vertex
 col_green_sq_cut_gem_style1_02_08		1				Green Dragite
 col_green_sq_cut_gem_style1_02_09		1				Green Firefacet
 col_green_sq_cut_gem_style1_02_10		1				Green Jenruax
-item_collection_housing_improvement_02_06		3				Housing Improvement: Shelving Techniques 6/10
-item_collection_housing_improvement_02_10		3				Housing Improvement: Shelving Techniques 10/10
-item_collection_housing_improvement_03_05		3				Housing Improvement: Craftsman Tools 5/10
-item_collection_housing_improvement_03_09		3				Housing Improvement: Craftsman Tools 9/10
-item_collection_housing_improvement_04_04		3				Housing Improvement: Cabinetry Techniques 4/10
-item_collection_housing_improvement_04_08		3				Housing Improvement: Cabinetry Techniques 8/10
-item_collection_housing_improvement_05_03		3				Housing Improvement: Storage Techniques 3/10
-item_collection_housing_improvement_05_07		3				Housing Improvement: Storage Techniques 7/10
+col_lightsaber_1h_01_03		1				A Jedi Relic
 col_purple_rnd_cut_gem_style1_02_01		1				Purple Pikach
 col_purple_rnd_cut_gem_style1_02_02		1				Purple Artusian
 col_purple_rnd_cut_gem_style1_02_03		1				Purple Bal'ta'ran
@@ -62,3 +38,27 @@ col_shattered_shard_unknown_02_03		1				Unknown Crystal Fragment 3/10
 col_shattered_shard_unknown_02_05		1				Unknown Crystal Fragment 5/10
 col_shattered_shard_unknown_02_06		1				Unknown Crystal Fragment 6/10
 col_shattered_shard_unknown_02_09		1				Unknown Crystal Fragment 9/10
+col_treasure_hunter_antique_carbine_02_01		1				An antique carbine
+col_treasure_hunter_antique_melee_02_01		1				An antique melee weapon
+col_treasure_hunter_antique_pistol_02_01		1				An antique pistol
+col_treasure_hunter_antique_rifle_02_01		1				An antique rifle
+col_treasure_hunter_dolovite_mask_02_01		1				A Dolovite Mask
+col_treasure_hunter_hendanyn_mask_02_01		1				A Hendanyn Death Mask
+col_treasure_hunter_mandalore_mask_02_01		1				A Mandalorian Mask
+col_treasure_hunter_oval_gem_02_01		1				A rare red oval gem
+col_treasure_hunter_oval_gem_02_02		1				A rare green oval gem
+col_treasure_hunter_oval_gem_02_03		1				A rare blue oval gem
+col_treasure_hunter_oval_gem_02_04		1				A rare yellow oval gem
+col_treasure_hunter_sith_mask_02_01		1				A Sith Mask
+col_treasure_hunter_trilliant_gem_02_01		1				A rare red trilliant gem
+col_treasure_hunter_trilliant_gem_02_02		1				A rare green trilliant gem
+col_treasure_hunter_trilliant_gem_02_03		1				A rare blue trilliant gem
+col_treasure_hunter_trilliant_gem_02_04		1				A rare yellow triliant gem
+item_collection_housing_improvement_02_06		3				Housing Improvement: Shelving Techniques 6/10
+item_collection_housing_improvement_02_10		3				Housing Improvement: Shelving Techniques 10/10
+item_collection_housing_improvement_03_05		3				Housing Improvement: Craftsman Tools 5/10
+item_collection_housing_improvement_03_09		3				Housing Improvement: Craftsman Tools 9/10
+item_collection_housing_improvement_04_04		3				Housing Improvement: Cabinetry Techniques 4/10
+item_collection_housing_improvement_04_08		3				Housing Improvement: Cabinetry Techniques 8/10
+item_collection_housing_improvement_05_03		3				Housing Improvement: Storage Techniques 3/10
+item_collection_housing_improvement_05_07		3				Housing Improvement: Storage Techniques 7/10
