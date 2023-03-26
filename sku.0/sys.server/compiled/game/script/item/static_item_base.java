@@ -397,7 +397,8 @@ public class static_item_base extends script.base_script
         {
             if (mi == menu_info_types.SERVER_MENU50)
             {
-                static_item.initializeItem(self, getStaticItemName(self));
+                dictionary itemData = static_item.getMasterItemDictionary(self);
+                static_item.initializeObject(self, itemData);
             }
         }
         return SCRIPT_CONTINUE;
