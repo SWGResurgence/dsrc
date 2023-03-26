@@ -6275,7 +6275,7 @@ public class combat_actions extends script.systems.combat.combat_base {
     }
 
     public int sm_how_are_you(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException {
-        if (!combatStandardAction("sm_how_are_you", self, target, params, "", "")) {
+        if (!combatStandardAction("sm_how_are_you", self, target, params, "", "") || !buff.hasBuff(self, "set_bonus_smuggler_utility_b_3")) {
             return SCRIPT_OVERRIDE;
         }
         doMedicEvasion(self);
