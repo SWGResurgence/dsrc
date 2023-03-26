@@ -1,6 +1,5 @@
 name	template_name	type	unique	required_level	required_skill	creation_objvars	charges	tier	value	scripts	version	can_reverse_engineer	string_name	string_detail	comments
-s[unique]	s	"e(weapon=1,armor=2,item=3,storyteller=4,object=5)[item]"	i[0]	i	s	s	i	i	i[0]	s	i[1]	i[0]	c	c	c
-0
+s[unique]	s	"e(weapon=1,armor=2,item=3,storyteller=4,object=5)[item]"	i[0]	i	s	s	i	i	i[0]	s	i[1]	i[0]	s	s	s
 armor_assault_agi_lvl20_bicep_l_02_01	object/tangible/wearables/armor/composite/armor_composite_bicep_l.iff	armor		20				2	1575			1	Nimble Composite Left Bicep	Nimble Composite Left Bicep
 armor_assault_agi_lvl20_bicep_r_02_01	object/tangible/wearables/armor/composite/armor_composite_bicep_r.iff	armor		20				2	1575			1	Nimble Composite Right Bicep	Nimble Composite Right Bicep
 armor_assault_agi_lvl20_boots_02_01	object/tangible/wearables/armor/composite/armor_composite_boots.iff	armor		20				2	1575			1	Nimble Composite Boots	Nimble Composite Boots
@@ -5156,7 +5155,7 @@ item_officer_pendant_01_02	object/tangible/wearables/necklace/necklace_s08.iff		
 item_officer_profession_roadmap_supplies_01_01	object/tangible/veteran_reward/trader_care_package.iff							1		item.profession_roadmap_supplies_officer		1	Profession Roadmap Supplies	You may open this to retrieve the profession roadmap items and equipment that you may be missing due to changing your profession.
 item_officer_ring_01_02	object/tangible/wearables/ring/ring_s04.iff				officer			2	2500			1	Issued Officer Ring	This ring provides a bonus to your precision and constitution.
 item_officer_shirt_02_01	object/tangible/wearables/shirt/shirt_s34.iff				officer			2	45			1	Issued Officer Shirt	A piece of issued clothing.  This clothing will provide you with a small defensive modifier in combat.	npe clothing
-item_old_foes_painting object/tangible/furniture/decorative/painting_old_foes.iff 2 Old Foes A painting depicting a fight between two old foes. Reward for completing NK Necrosis slayer
+item_old_foes_painting	object/tangible/furniture/decorative/painting_old_foes.iff											1	Old Foes	A Decorative Painting of depicting old foes.
 item_organic_survey_tool_01_01	object/tangible/survey_tool/survey_tool_organic.iff							1		item.special.nomove	1	1	Inorganic Survey Device	This advanced device allows the local environment to be scanned for any existing organic resources.
 item_ornate_rug_01_01	object/tangible/furniture/modern/bestine_quest_rug.iff							1					Bestine Ornate Rug	"A well-made rug given as a gift from Sean Trenwell. The rug would be perfect for a house, providing comfort and style to any dwelling."
 item_outbreak_cornburr_brain	object/tangible/loot/undead/outbreak_undead_brain.iff							1		systems.collections.consume_loot			Cornburr's Brain	This brain seems a little small for a Death Trooper.

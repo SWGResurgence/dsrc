@@ -9,9 +9,10 @@ package script.developer.bubbajoe;
 import script.*;
 import script.library.*;
 
-import java.io.File;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class player_developer extends base_script
 {
@@ -21,7 +22,7 @@ public class player_developer extends base_script
     {
     }
 
-    public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException, InvocationTargetException
+    public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException, InvocationTargetException, IOException
     {
         obj_id iTarget = target;
         java.util.StringTokenizer tok = new java.util.StringTokenizer(params);
@@ -1468,6 +1469,32 @@ public class player_developer extends base_script
             String template = getTemplateName(iTarget);
             obj_id pInv = utils.getInventoryContainer(self);
             sendConsoleCommand("/object createIn " + template + " " + pInv, self);
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("prepareStaticStrings"))
+        {
+            String table = "datatables/item/master_item/master_item.iff";
+            String clobberedText = "/home/swg/swg-main/exe/linux/stringTool.txt";
+            String[] columns = {
+                    "name",
+                    "string_name",
+                    "string_detail"
+            };
+            int rows = dataTableGetNumRows(table);
+            for (int i = 0; i < rows; i++)
+            {
+                String itemCode =dataTableGetString(table, i, columns[0]);
+                String itemName =dataTableGetString(table, i, columns[1]);
+                String itemDesc =dataTableGetString(table, i, columns[2]);
+                String finalizedFormat = itemCode + "\t" + itemName + "\t" + itemDesc + "\n";
+                String str = finalizedFormat;
+                BufferedWriter writer = new BufferedWriter(new FileWriter(clobberedText, true));
+                writer.append(' ');
+                writer.append(str);
+
+                writer.close();
+            }
+            broadcast(self, "Attempting to export " + columns.length + " columns worth of data to " + clobberedText);
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("-help"))
