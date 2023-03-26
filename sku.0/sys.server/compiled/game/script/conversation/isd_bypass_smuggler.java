@@ -42,9 +42,18 @@ public class isd_bypass_smuggler extends script.base_script
 
 // ----------------------------------------------------------------------
 
+    public String[] GEN_RESPONSE = {
+            "Uh-huh. What do you want?",
+            "I'm busy.",
+            "Yeah, yeah.",
+            "Not really interested.",
+            "I'm not exactly in the mood for chit-chat.",
+            "Sorry to be blunt, but I'm not really interested.",
+            "I have better things to do."
+    };
     public boolean isd_bypass_smuggler_condition_canTalk(obj_id player, obj_id npc) throws InterruptedException
     {
-        if (instance.isFlaggedForInstance(player, "heroic_star_destroyer")) ;
+        if (instance.isFlaggedForInstance(player, "heroic_star_destroyer"))
         {
             if (group.isLeader(player))
             {
@@ -55,7 +64,13 @@ public class isd_bypass_smuggler extends script.base_script
                 chat.chat(npc, "Sorry, I only speak to those in charge.");
             }
         }
-        chat.chat(npc, "You don't look like you should be troubling yourself with the Blackguard. Talk to me when you have more experience.");
+        else
+        {
+            chat.chat(npc, "You don't look like you should be troubling yourself with the Blackguard. Talk to me when you have more experience.");
+            return false;
+        }
+        int random = rand(0, GEN_RESPONSE.length - 1);
+        chat.chat(npc, GEN_RESPONSE[random]);
         return false;
     }
 
@@ -95,7 +110,10 @@ public class isd_bypass_smuggler extends script.base_script
                 string_id message = new string_id(c_stringFile, "s_6");
                 utils.removeScriptVar(player, "conversation.isd_bypass_smuggler.branchId");
                 npcEndConversationWithMessage(player, message);
-                sui.msgbox(npc, player, "Do you wish to lead your group into the Blackguard? This will cost you " + colors_hex.HEADER + colors_hex.AQUAMARINE + " 10,000 credits.\\#.", "handleTransport");
+                String prompt = "Do you wish to lead your group into the Blackguard? This will cost you " + colors_hex.HEADER + colors_hex.AQUAMARINE + " 10,000 credits.\\#.";
+                String title = "Soc-ah's Transit Services";
+                int pid = sui.msgbox(npc, player, prompt, sui.OK_ONLY, title, "handleTransport");
+                setSUIProperty(pid, "pageText.text", "Font", "starwarslogo_optimized_56");
                 return SCRIPT_CONTINUE;
             }
 
