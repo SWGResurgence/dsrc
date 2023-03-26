@@ -1,9 +1,7 @@
 package script.item;
 
-import script.dictionary;
+import script.*;
 import script.library.*;
-import script.obj_id;
-import script.string_id;
 
 public class static_item_base extends script.base_script
 {
@@ -383,6 +381,25 @@ public class static_item_base extends script.base_script
         }
         obj_id player = params.getObjId("player");
         equip(self, player);
+        return SCRIPT_CONTINUE;
+    }
+    public int OnObjectMenuRequest(obj_id self, obj_id player, menu_info mi) throws InterruptedException
+    {
+        if (isGod(player))
+        {
+            mi.addRootMenu(menu_info_types.SERVER_MENU50, new string_id("[GodMode] Reinitialize Static Item"));
+        }
+        return SCRIPT_CONTINUE;
+    }
+    public int OnObjectMenuSelect(obj_id self, obj_id player, int mi) throws InterruptedException
+    {
+        if (isGod(player))
+        {
+            if (mi == menu_info_types.SERVER_MENU50)
+            {
+                static_item.initializeItem(self, getStaticItemName(self));
+            }
+        }
         return SCRIPT_CONTINUE;
     }
 }
