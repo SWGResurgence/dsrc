@@ -1474,7 +1474,8 @@ public class player_developer extends base_script
         if (cmd.equalsIgnoreCase("prepareStaticStrings"))
         {
             String table = "datatables/item/master_item/master_item.iff";
-            String clobberedText = "/home/swg/swg-main/exe/linux/stringTool.txt";
+            String clobberedText = "/home/swg/swg-main/exe/linux/static_item_n.txt";
+            String clobberedDesc = "/home/swg/swg-main/exe/linux/static_item_d.txt";
             String[] columns = {
                     "name",
                     "string_name",
@@ -1486,15 +1487,20 @@ public class player_developer extends base_script
                 String itemCode =dataTableGetString(table, i, columns[0]);
                 String itemName =dataTableGetString(table, i, columns[1]);
                 String itemDesc =dataTableGetString(table, i, columns[2]);
-                String finalizedFormat = itemCode + "\t" + itemName + "\t" + itemDesc + "\n";
-                String str = finalizedFormat;
-                BufferedWriter writer = new BufferedWriter(new FileWriter(clobberedText, true));
-                writer.append(' ');
-                writer.append(str);
-
-                writer.close();
+                String finalizedFormatName = itemCode + "\t" + itemName + "\n";
+                String finalizedFormatDesc = itemCode + "\t" + itemDesc + "\n";
+                String strName = finalizedFormatName;
+                String strDesc = finalizedFormatDesc;
+                BufferedWriter nameWriter = new BufferedWriter(new FileWriter(clobberedText, true));
+                nameWriter.append(' ');
+                nameWriter.append(strName);
+                nameWriter.close();
+                BufferedWriter descWriter = new BufferedWriter(new FileWriter(clobberedDesc, true));
+                descWriter.append(' ');
+                descWriter.append(strDesc);
+                descWriter.close();
             }
-            broadcast(self, "Attempting to export " + columns.length + " columns worth of data to " + clobberedText);
+            broadcast(self, "Attempting to export " + columns.length + " columns worth of data split between " + clobberedText + " and " + clobberedDesc);
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("-help"))
