@@ -48,7 +48,7 @@ public class master_controller_gizmo extends script.base_script {
         }
         if (percentHealth <= 75) {
             if (!utils.hasScriptVar(self, "hasSpawned")) {
-                chat.chat(self, "I will not be challenged!");
+                chat.chat(self, "Sta gata ta Rata!");
                 for (obj_id who : players) {
                     broadcast(who, "Darth Gizmo has lost his enhancements. The Living Force says the time to strike is now!");
                 }
@@ -79,7 +79,6 @@ public class master_controller_gizmo extends script.base_script {
                 for (obj_id who : players) {
                     broadcast(who, "Darth Gizmo has entered his last stand, calling upon the full power of the Darkside of the Force!");
                 }
-                chat.chat(self, "Sta gata ta Rata!");
                 buff.applyBuff(self, "jediForce_11", 60, 20);
                 utils.setScriptVar(self, "hasLastStand", 1);
             }
