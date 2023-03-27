@@ -7,6 +7,9 @@ import java.util.Vector;
 
 public class stealth extends script.base_script
 {
+    public stealth()
+    {
+    }
     public static final java.text.NumberFormat floatFormat = new java.text.DecimalFormat("###.##");
     public static final int MAX_BUILDINGS_FOR_WILDNERNESS = 5;
     public static final int MIN_BLENDIN_CROWD_SIZE = 10;
@@ -31,7 +34,7 @@ public class stealth extends script.base_script
     public static final float MAX_CHANCE_TO_DETECT_HIDDEN = 99.0f;
     public static final float PASSIVE_DETECT_CHANCE = 20.0f;
     public static final float ACTIVE_DETECT_CHANCE = 50.0f;
-    public static final float MAX_HIDING_DETECT_SCORE = 1000;
+    public static final float MAX_HIDING_DETECT_SCORE = 220;
     public static final int HEP_UPKEEP_COST = 10;
     public static final String HEP_BASE_POWER = "basePower";
     public static final String HEP_EFFECTIVENESS = "effectiveness";
@@ -96,18 +99,18 @@ public class stealth extends script.base_script
     public static final int TRAP_HX2 = 3;
     public static final int TRAP_KAMINODART = 4;
     public static final int[] ALL_TRAP_TYPES = new int[]
-    {
-        TRAP_CALTROP,
-        TRAP_FLASHBANG,
-        TRAP_HX2,
-        TRAP_KAMINODART
-    };
+            {
+                    TRAP_CALTROP,
+                    TRAP_FLASHBANG,
+                    TRAP_HX2,
+                    TRAP_KAMINODART
+            };
     public static final int[] ALL_TRIGGER_TYPES = new int[]
-    {
-        TRIGGER_TYPE_TIMER,
-        TRIGGER_TYPE_REMOTE,
-        TRIGGER_TYPE_PROXIMITY
-    };
+            {
+                    TRIGGER_TYPE_TIMER,
+                    TRIGGER_TYPE_REMOTE,
+                    TRIGGER_TYPE_PROXIMITY
+            };
     public static final float TRAP_MIN_DISTANCE_BETWEEN = 10.0f;
     public static final float TRAP_SELF_DESTRUCT_TIMEOUT = 60 * 10;
     public static final float TRAP_HX2_BLAST_RADIUS = 15.0f;
@@ -133,10 +136,10 @@ public class stealth extends script.base_script
     public static final float CHAFF_FLARE_DISTANCE = 15.0f;
     public static final float MAX_BIO_PROBE_STORAGE_TIME = 3600;
     public static final float MAX_PROBE_DISTANCE = 10.0f;
-    public static final String[] TRAP_RESTRICTED_REGIONS = 
-    {
-        "dathomir_fs_village_unpassable"
-    };
+    public static final String[] TRAP_RESTRICTED_REGIONS =
+            {
+                    "dathomir_fs_village_unpassable"
+            };
     public static void setBioProbeData(obj_id trap, obj_id target, String targetName) throws InterruptedException
     {
     }
@@ -147,15 +150,15 @@ public class stealth extends script.base_script
         switch (triggerType)
         {
             case TRIGGER_TYPE_TIMER:
-            setObjVar(trap, TIMER_TIME, param);
-            break;
+                setObjVar(trap, TIMER_TIME, param);
+                break;
             case TRIGGER_TYPE_REMOTE:
-            String frequency = "" + rand(0, 999) + "." + rand(0, 999) + "." + rand(0, 999);
-            setObjVar(trap, stealth.TRAP_FREQUENCY, frequency);
-            break;
+                String frequency = "" + rand(0, 999) + "." + rand(0, 999) + "." + rand(0, 999);
+                setObjVar(trap, stealth.TRAP_FREQUENCY, frequency);
+                break;
             case TRIGGER_TYPE_PROXIMITY:
-            setObjVar(trap, PROXIMITY_RANGE, param);
-            break;
+                setObjVar(trap, PROXIMITY_RANGE, param);
+                break;
         }
     }
     public static void createRangerLoot(int level, String object, obj_id container, int count) throws InterruptedException
@@ -267,7 +270,7 @@ public class stealth extends script.base_script
                 setCount(hep, power);
                 setObjVar(hep, HEP_EFFECTIVENESS, Math.round((power / 2)));
             }
-            else 
+            else
             {
                 setObjVar(hep, HEP_EFFECTIVENESS, power);
                 power = Math.round((power / 2));
@@ -535,7 +538,7 @@ public class stealth extends script.base_script
         {
             sendSystemMessage(player, new string_id("spam", "tracking_failed"));
         }
-        else 
+        else
         {
             setObjVar(beacon, BEACON_LAST_KNOWN_LOC, getLocationObjVar(beacon, BEACON_LOCATION));
             setObjVar(beacon, BEACON_LAST_KNOWN_TARGET_NAME, getStringObjVar(beacon, BEACON_TARGET_NAME));
@@ -557,7 +560,7 @@ public class stealth extends script.base_script
                 messageTo(getObjIdObjVar(beacon, BEACON_TARGET), "msgTrackingBeaconLocationRequest", dic, 0, false);
             }
         }
-        else 
+        else
         {
             stopTrackingBeacon(beacon, player);
         }
@@ -653,7 +656,7 @@ public class stealth extends script.base_script
             sendSystemMessage(player, new string_id("spam", "chaff_foundsomething"));
             doAnimationAction(player, "point_forward");
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("spam", "chaff_nothing"));
         }
@@ -716,7 +719,7 @@ public class stealth extends script.base_script
             playTrapFizzle(trap);
             destroyObject(trap);
         }
-        else 
+        else
         {
             if (hasObjVar(trap, stealth.TRAP_FREQUENCY))
             {
@@ -755,7 +758,7 @@ public class stealth extends script.base_script
             {
                 playClientEffectLoc(player, "appearance/pt_spy_expose_shadows.prt", getLocation(player), 0.0f);
             }
-            else 
+            else
             {
                 Vector clients = new Vector();
                 clients = utils.addElement(clients, player);
@@ -771,7 +774,7 @@ public class stealth extends script.base_script
                 playClientEffectLoc(utils.toStaticObjIdArray(clients), "appearance/pt_spy_expose_shadows.prt", getLocation(player), 0.0f);
             }
         }
-        else 
+        else
         {
             playClientEffectLoc(player, "appearance/pt_fireworks_secondary_shockwave2.prt", getLocation(player), 0.0f);
         }
@@ -837,7 +840,7 @@ public class stealth extends script.base_script
             sendSystemMessage(player, new string_id("spam", "detected_something"));
             doAnimationAction(player, "point_forward");
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("spam", "no_detect"));
         }
@@ -1140,7 +1143,7 @@ public class stealth extends script.base_script
                     break;
             }
         }
-        else 
+        else
         {
             playClientEffectLoc(trap, "clienteffect/lair_damage_heavy.cef", getLocation(trap), 0.0f);
         }
@@ -1437,7 +1440,7 @@ public class stealth extends script.base_script
         {
             destroyObject(invTrap);
         }
-        else 
+        else
         {
             setCount(invTrap, count);
         }
@@ -1624,11 +1627,11 @@ public class stealth extends script.base_script
                     case STEAL_MARKED_ITEMS:
                         obj_id[] stuff = utils.getFilteredPlayerContents(mark);
                         Vector eligibleItems = new Vector();
-                            for (obj_id aStuff : stuff) {
-                                if (isItemStealable(aStuff)) {
-                                    eligibleItems.add(aStuff);
-                                }
+                        for (obj_id aStuff : stuff) {
+                            if (isItemStealable(aStuff)) {
+                                eligibleItems.add(aStuff);
                             }
+                        }
                         if (eligibleItems.size() < 1)
                         {
                             break;
@@ -1820,7 +1823,7 @@ public class stealth extends script.base_script
                     prose_package pp = prose.getPackage(new string_id("spam", "almost_got_item_stolen"), thief);
                     sendSystemMessageProse(mark, pp);
                 }
-                else 
+                else
                 {
                     startCombat(mark, thief);
                     startCombat(thief, mark);
@@ -1950,7 +1953,7 @@ public class stealth extends script.base_script
             }
             mod = getApplicableInvisSkillMod(thing, invis);
         }
-        else 
+        else
         {
             mod = getIntObjVar(thing, "camouflageMod");
         }
@@ -1985,7 +1988,7 @@ public class stealth extends script.base_script
             {
                 levelChanceToDetectMod = (levelDiff * 5.0f);
             }
-            else 
+            else
             {
                 levelChanceToDetectMod = (levelDiff * 1.5f);
             }
@@ -2085,7 +2088,7 @@ public class stealth extends script.base_script
                 levelChanceToDetectMod = (levelDiff * 5.0f);
                 sendConsoleMessage(objectToReceiveDetailedOutput, "passiveDetectInfo: stealtherLevel > detectorLevel, levelDiff=" + levelDiff + ", baseChanceToDetect > 30, levelChanceToDetectMod (levelDiff * 5.0f)=" + levelChanceToDetectMod);
             }
-            else 
+            else
             {
                 levelChanceToDetectMod = (levelDiff * 1.5f);
                 sendConsoleMessage(objectToReceiveDetailedOutput, "passiveDetectInfo: stealtherLevel > detectorLevel, levelDiff=" + levelDiff + ", baseChanceToDetect <= 30, levelChanceToDetectMod (levelDiff * 1.5f)=" + levelChanceToDetectMod);
@@ -2175,7 +2178,7 @@ public class stealth extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             if (!ai_lib.isAggroToward(detector, target))
             {
@@ -2206,7 +2209,7 @@ public class stealth extends script.base_script
                 return false;
             }
         }
-        else 
+        else
         {
             if (!ai_lib.isAggroToward(detector, target))
             {
@@ -2232,7 +2235,7 @@ public class stealth extends script.base_script
         {
             sendConsoleMessage(objectToReceiveDetailedOutput, "passiveDetectInfo: getDetectChanceWithDetailedOutput() returned finalChanceToDetect=" + finalChanceToDetect + ", dice roll=" + roll + ", dice roll < finalChanceToDetect so returning detection SUCCESS");
         }
-        else 
+        else
         {
             sendConsoleMessage(objectToReceiveDetailedOutput, "passiveDetectInfo: getDetectChanceWithDetailedOutput() returned finalChanceToDetect=" + finalChanceToDetect + ", dice roll=" + roll + ", dice roll >= finalChanceToDetect so returning detection FAIL");
         }
@@ -2257,7 +2260,7 @@ public class stealth extends script.base_script
             }
             return passiveDetectHiddenTargetWithDetailedOutput(bubbleHolder, breacher, volume, objectToReceiveDetailedOutput);
         }
-        else 
+        else
         {
             return passiveDetectHiddenTarget(bubbleHolder, breacher, volume);
         }
@@ -2354,14 +2357,14 @@ public class stealth extends script.base_script
             {
                 buff.applyBuff(player, invisName, timeLeft);
             }
-            else 
+            else
             {
                 float duration = buff.getDuration(invisName);
                 if (duration < 0)
                 {
                     buff.applyBuff(player, invisName, -1);
                 }
-                else 
+                else
                 {
                     clearPreviousInvis(player);
                 }
@@ -2548,7 +2551,7 @@ public class stealth extends script.base_script
             }
             playClientEffectObj(player, "appearance/pt_sonic_pulse.prt", player, "");
         }
-        else 
+        else
         {
             utils.removeScriptVar(player, "supressVisible");
         }
@@ -2779,7 +2782,6 @@ public class stealth extends script.base_script
         {
             decoyStealth(mobile);
         }
-			makeBeastInvisible(mobile, effectName);
     }
     public static boolean canPerformCamouflageSelf(obj_id player) throws InterruptedException
     {
@@ -2829,7 +2831,7 @@ public class stealth extends script.base_script
         {
             _makeInvisible(player, new string_id("spam", "camouflaged"), "appearance/pt_smoke_puff.prt", null, calcBreachDistanceForSkill(player, "camouflage"));
         }
-        else 
+        else
         {
             sendSystemMessage(player, new string_id("spam", "failedcamo"));
         }
@@ -3027,7 +3029,7 @@ public class stealth extends script.base_script
             consumeCamoKit(kit);
             penalty = 50;
         }
-        else 
+        else
         {
             utils.setScriptVar(player, "supressVisible", 1);
         }
@@ -3036,7 +3038,7 @@ public class stealth extends script.base_script
         {
             _makeInvisible(player, new string_id("spam", "stealthon"), "appearance/pt_smoke_puff.prt", null, calcBreachDistanceForSkill(player, "stealth"));
         }
-        else 
+        else
         {
             utils.removeScriptVar(player, "supressVisible");
             sendSystemMessage(player, new string_id("spam", "stealthfail"));
@@ -3114,7 +3116,7 @@ public class stealth extends script.base_script
     {
         float camouflage = getEnhancedSkillStatisticModifierUncapped(player, "camouflage");
         camouflage += getEnhancedSkillStatisticModifierUncapped(player, "stealth");
-        float drainRatio = 9.0f;
+        float drainRatio = 10.0f;
         if (camouflage < 100.0f)
         {
             drainRatio = 7.91f - (0.1f / (0.1f + ((camouflage) / 100.0f)));
@@ -3307,7 +3309,7 @@ public class stealth extends script.base_script
         {
             destroyObject(kit);
         }
-        else 
+        else
         {
             count--;
             setCount(kit, count);
@@ -3354,7 +3356,7 @@ public class stealth extends script.base_script
     {
         location myLoc = getLocation(spy);
         int species = getSpecies(spy);
-        Gender gender = getGender(spy);
+        int gender = getGender(spy);
         String template = "object/mobile/hologram/";
         String speciesString = "human";
         String genderString = "male";
@@ -3388,7 +3390,7 @@ public class stealth extends script.base_script
                 speciesString = "sullustan";
                 break;
         }
-        if (gender == Gender.FEMALE)
+        if (gender == GENDER_FEMALE)
         {
             genderString = "female";
         }
@@ -3480,7 +3482,7 @@ public class stealth extends script.base_script
             {
                 holoWeapon = getCurrentWeapon(hologram);
             }
-            else 
+            else
             {
                 holoWeapon = createObject(getTemplateName(spyWeapon), hologram, "");
             }
@@ -3536,7 +3538,7 @@ public class stealth extends script.base_script
             {
                 utils.setScriptVar(hologram, "flank", true);
             }
-            else 
+            else
             {
                 utils.setScriptVar(hologram, "flank", false);
             }
