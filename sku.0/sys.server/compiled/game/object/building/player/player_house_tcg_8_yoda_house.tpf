@@ -6,4 +6,4 @@
 
 sharedTemplate = "object/building/player/shared_player_house_tcg_8_yoda_house.iff"
 
-scripts = +[structure.tcg.player_tcg_yoda_hut"]
+scripts = +["structure.tcg.player_tcg_yoda_hut"]
