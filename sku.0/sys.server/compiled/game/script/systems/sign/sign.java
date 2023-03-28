@@ -145,26 +145,19 @@ public class sign extends script.base_script
         }
         if (item == menu_info_types.SERVER_MENU3)
         {
-            String commPrompt = colors_hex.HEADER + colors_hex.ORANGERED + toUpper(getPlayerName(player), 0) + " is at this structure's entrance.";
+            String commPrompt = colors_hex.HEADER + colors_hex.AQUAMARINE + getPlayerFullName(player) + " is at this structure's entrance.";
             obj_id house = utils.getObjIdScriptVar(self, "player_structure.parent");
             obj_id[] occupants = player_structure.getPlayersInBuilding(house);
             if (isIdValid(house))
             {
-                if (occupants.length <= 0)
+                if (occupants.length == 0)
                 {
-                    prose_package pp = new prose_package();
-                    prose.setStringId(pp, new string_id(commPrompt));
-                    commPlayer(player, player, pp);
+                    broadcast(player, "There does not appear to be anyone home.");
                     return SCRIPT_CONTINUE;
-                }
-                else
-                {
-                    broadcast(player, "There is no one inside this structure.");
                 }
                 for (obj_id occupant : occupants)
                 {
-
-                    String doorbellSnd = getStringObjVar(house, "player_structure_doorbell_snd");
+                    String doorbellSnd = getStringObjVar(house, "player_structure.doorbell_snd");
                     if (doorbellSnd == null || doorbellSnd.equals(""))
                     {
                         doorbellSnd = "sound/item_ding.snd";
@@ -172,7 +165,9 @@ public class sign extends script.base_script
                     playClientEffectObj(occupant, doorbellSnd, occupant, "");
                     prose_package pp = new prose_package();
                     prose.setStringId(pp, new string_id(commPrompt));
-                    commPlayer(occupant, player, pp);
+                    commPlayer(player, occupant, pp);
+                    broadcast(player, "You have rang this structure's doorbell.");
+                    return SCRIPT_CONTINUE;
                 }
             }
         }

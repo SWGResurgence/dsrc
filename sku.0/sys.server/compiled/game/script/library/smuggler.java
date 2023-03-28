@@ -203,7 +203,7 @@ public class smuggler extends script.base_script
                 String name = getAssignedName(junk[i]);
                 if (name.equals("") || name == null)
                 {
-                    name = getString(getNameStringId(junk[i]));
+                    name = getString(getNameFromTemplate(getTemplateName(junk[i])));
                 }
                 String entry = "[" + price + "] " + name;
                 entries[i] = entry;
@@ -1249,7 +1249,7 @@ public class smuggler extends script.base_script
             String name = getAssignedName(junk[i]);
             if (name.equals("") || name == null)
             {
-                name = getString(getNameStringId(junk[i]));
+                name = getString(getNameFromTemplate(getTemplateName(junk[i])));
             }
             String entry = "[" + price + "] " + name;
             entries[i] = entry;
