@@ -9,4 +9,4 @@
 objectName = "static_item_n" "armor_rebel_spec_force_belt"
 detailedDescription = "static_item_d" "armor_rebel_spec_force_belt"
 appearanceFilename = "appearance/armor_rebel_specforce_belt_m.sat"
-
+gameObjectType = GOT_armor_misc
