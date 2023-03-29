@@ -669,6 +669,27 @@ public class player_developer extends base_script
             broadcast(self, "Granted all items with search parameter " + query + " to " + getName(target));
             return SCRIPT_CONTINUE;
         }
+        if (cmd.equalsIgnoreCase("listStaticContents"))
+        {
+            obj_id[] contents = getContents(target);
+            String prompt = "Contents of " + getName(target) + " are: \n";
+            for (obj_id content : contents)
+            {
+                String itemName = getStaticItemName(content);
+                prompt += itemName + "\n";
+            }
+            int page = createSUIPage("/Script.messageBox", self, self);
+            setSUIProperty(page, "Prompt.lblPrompt", "LocalText", prompt);
+            setSUIProperty(page, "Prompt.lblPrompt", "Font", "starwarslogo_optimized_56");
+            setSUIProperty(page, "bg.caption.lblTitle", "Text", "Shell Commander");
+            setSUIProperty(page, "Prompt.lblPrompt", "Editable", "true");
+            setSUIProperty(page, "Prompt.lblPrompt", "GetsInput", "true");
+            setSUIProperty(page, "btnCancel", "Visible", "false");
+            setSUIProperty(page, "btnRevert", "Visible", "false");
+            showSUIPage(page);
+            flushSUIPage(page);
+            return SCRIPT_CONTINUE;
+        }
         if (cmd.equalsIgnoreCase("toggle"))
         {
             String toggle = tok.nextToken();
