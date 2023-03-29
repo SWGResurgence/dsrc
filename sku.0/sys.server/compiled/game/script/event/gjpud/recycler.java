@@ -50,7 +50,7 @@ public class recycler extends script.base_script
     {
         if (!hasObjVar(self, "event.reward_cycle"))
         {
-            setObjVar(self, "event.reward_cycle", "I");
+            setObjVar(self, "event.reward_cycle", "\\#7FFFD4I\\#. II III IV V VI");
         }
         setName(self, "Galactic Junk Pickup Day Workstation");
         return SCRIPT_CONTINUE;
@@ -188,13 +188,13 @@ public class recycler extends script.base_script
             String title = "Current Rewards";
             if (hasObjVar(self, "event.earth_day_t1_reward"))
             {
-                prompt = "Reward Schedule: " + getStringObjVar(self, "event.reward_cycle" + "\n");
+                prompt = "\\#F1E5ACReward Schedule\\#.: " + getStringObjVar(self, "event.reward_cycle") + "\n";
                 prompt += "\\#FFA500Tier I\\#.: " + getRewardName(self, getStringObjVar(self,  "event.earth_day_t1_reward")) + "\n";
                 prompt += "\t\\#FFD700" + getRewardDesc(self, getStringObjVar(self,  "event.earth_day_t1_reward")) + "\n\\#.\n";
             }
             else
             {
-                prompt = "Tier I: None\n\\#.";
+                prompt = "Tier I: \\#ff0000None\n\\#.";
             }
             if (hasObjVar(self, "event.earth_day_t2_reward"))
             {
@@ -203,7 +203,7 @@ public class recycler extends script.base_script
             }
             else
             {
-                prompt += "Tier II: None\n\\#.";
+                prompt += "Tier II: \\#ff0000None\n\\#.";
             }
             if (hasObjVar(self, "event.earth_day_t3_reward"))
             {
@@ -212,7 +212,7 @@ public class recycler extends script.base_script
             }
             else
             {
-                prompt += "Tier III: None\n\\#.";
+                prompt += "Tier III: \\#ff0000None\n\\#.";
             }
             if (hasObjVar(self, "event.earth_day_t4_reward"))
             {
@@ -221,7 +221,7 @@ public class recycler extends script.base_script
             }
             else
             {
-                prompt += "Tier IV: None\n\\#.";
+                prompt += "Tier IV: \\#ff0000None\n\\#.";
             }
             if (hasObjVar(self, "event.earth_day_t5_reward"))
             {
@@ -230,7 +230,7 @@ public class recycler extends script.base_script
             }
             else
             {
-                prompt += "Tier V: None\n";
+                prompt += "Tier V: \\#ff0000None\n";
             }
             int page = sui.createSUIPage(sui.SUI_MSGBOX, self, player, "noHandler");
             setSUIProperty(page, "", "Size", "1024,768");
