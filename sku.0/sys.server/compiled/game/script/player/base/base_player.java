@@ -111,7 +111,7 @@ public class base_player extends script.base_script
     public static final string_id SID_SYS_EJECT_FAIL_PROXIMITY = new string_id("error_message", "sys_eject_fail_proximity");
     public static final string_id SID_SYS_EJECT_FAIL_GROUND = new string_id("error_message", "sys_eject_fail_ground");
     public static final string_id SID_SYS_EJECT_SUCCESS = new string_id("error_message", "sys_eject_success");
-    public static final string_id SID_SYS_EJECT_DUNGEON = new string_id("error_messaage", "sys_eject_dungeon_pp");
+    public static final string_id SID_SYS_EJECT_DUNGEON = new string_id("error_message", "sys_eject_dungeon_pp");
     public static final string_id SID_NOT_MILITIA = new string_id("city/city", "not_militia");
     public static final string_id SID_CITY_WARNED = new string_id("city/city", "city_warned");
     public static final string_id SID_CITY_WARN_DONE = new string_id("city/city", "city_warn_done");
