@@ -51,6 +51,7 @@ public class recycler extends script.base_script
         if (!hasObjVar(self, "event.reward_cycle"))
         {
             setObjVar(self, "event.reward_cycle", "\\#7FFFD4I\\#. II III IV V VI");
+            setObjVar(self, "event.reward_cycle_int", 1);
         }
         setName(self, "Galactic Junk Pickup Day Workstation");
         return SCRIPT_CONTINUE;
