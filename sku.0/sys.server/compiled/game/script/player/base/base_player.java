@@ -111,7 +111,7 @@ public class base_player extends script.base_script
     public static final string_id SID_SYS_EJECT_FAIL_PROXIMITY = new string_id("error_message", "sys_eject_fail_proximity");
     public static final string_id SID_SYS_EJECT_FAIL_GROUND = new string_id("error_message", "sys_eject_fail_ground");
     public static final string_id SID_SYS_EJECT_SUCCESS = new string_id("error_message", "sys_eject_success");
-    public static final string_id SID_SYS_EJECT_DUNGEON = new string_id("error_messaage", "sys_eject_dungeon_pp");
+    public static final string_id SID_SYS_EJECT_DUNGEON = new string_id("error_message", "sys_eject_dungeon_pp");
     public static final string_id SID_NOT_MILITIA = new string_id("city/city", "not_militia");
     public static final string_id SID_CITY_WARNED = new string_id("city/city", "city_warned");
     public static final string_id SID_CITY_WARN_DONE = new string_id("city/city", "city_warn_done");
@@ -12293,13 +12293,117 @@ public class base_player extends script.base_script
         if (isGod(player))
         {
             String stationName = getPlayerAccountUsername(self);
-            names[idx] = utils.packStringId(new string_id("Station: "));
+            names[idx] = utils.packStringId(new string_id("Station"));
             attribs[idx] = stationName;
             idx++;
             if (idx >= names.length)
             {
                 return SCRIPT_CONTINUE;
             }
+        }
+        ;
+        names[idx] = utils.packStringId(new string_id("Profession"));
+        int profession = utils.getPlayerProfession(self);
+        String professionName = "";
+        switch (profession)
+        {
+            case 1:
+                professionName = "Commando";
+                break;
+            case 2:
+                professionName = "Smuggler";
+                break;
+            case 3:
+                professionName = "Medic";
+                break;
+            case 4:
+                professionName = "Officer";
+                break;
+            case 5:
+                professionName = "Spy";
+                break;
+            case 6:
+                professionName = "Bounty Hunter";
+                break;
+            case 7:
+                professionName = "Jedi";
+                break;
+            case 8:
+                professionName = "Trader";
+                break;
+            case 9:
+                professionName = "Entertainer";
+                break;
+        }
+        if (isGod(self))
+        {
+            attribs[idx] = "Game Master";
+        }
+        else
+        {
+            attribs[idx] = professionName;
+        }
+        idx++;
+        names[idx] = utils.packStringId(new string_id("Level"));
+        attribs[idx] = Integer.toString(getLevel(self));
+        idx++;
+        names[idx] = utils.packStringId(new string_id("Faction"));
+        int faction = pvpGetAlignedFaction(self);
+        String factionName = "";
+        switch (faction)
+        {
+            case 0:
+                factionName = "Neutral";
+                break;
+            case 1:
+                factionName = "Imperial";
+                break;
+            case 2:
+                factionName = "Rebel";
+                break;
+        }
+        attribs[idx] = factionName;
+        idx++;
+        if (faction == 1 || faction == 2)
+        {
+            names[idx] = utils.packStringId(new string_id("Faction Rank"));
+            int factionRank = pvpGetCurrentGcwRank(self);
+            String factionRankName = "";
+            switch (factionRank)
+            {
+                case 0:
+                    factionRankName = "None";
+                    break;
+                case 1:
+                    factionRankName = "Private";
+                    break;
+                case 2:
+                    factionRankName = "Corporal";
+                    break;
+                case 3:
+                    factionRankName = "Sergeant";
+                    break;
+                case 4:
+                    factionRankName = "Lieutenant";
+                    break;
+                case 5:
+                    factionRankName = "Captain";
+                    break;
+                case 6:
+                    factionRankName = "Major";
+                    break;
+                case 7:
+                    factionRankName = "Colonel";
+                    break;
+                case 8:
+                    factionRankName = "General";
+                    break;
+                case 9:
+                    factionRankName = "Field Marshal";
+                    break;
+            }
+            attribs[idx] = factionRankName;
+            idx++;
         }
         return SCRIPT_CONTINUE;
     }
