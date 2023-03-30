@@ -174,6 +174,24 @@ public final class location implements Comparable, Serializable
         return "/wp " + area + " " + x + " " + z + " " + y + " " + "orange " + name;
     }
 
+    /**
+     * Conversion function.
+     *
+     * @return the location as a string for general readability.
+     */
+
+    public String toReadableFormat(boolean includePlanet)
+    {
+        if (includePlanet)
+        {
+            return x + ", " + y + ", " + z + " " + area;
+        }
+        else
+        {
+            return x + ", " + y + ", " + z;
+        }
+    }
+
 	/**
 	 * Compares this to a generic object.
 	 *
