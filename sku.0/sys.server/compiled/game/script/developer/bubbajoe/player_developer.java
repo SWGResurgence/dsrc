@@ -24,7 +24,7 @@ public class player_developer extends base_script
 
     public int cmdDeveloper(obj_id self, obj_id target, String params, float defaultTime) throws InterruptedException, InvocationTargetException, IOException
     {
-        obj_id iTarget = target;
+        obj_id iTarget = getIntendedTarget(self);
         java.util.StringTokenizer tok = new java.util.StringTokenizer(params);
         String cmd = tok.nextToken();
         if (cmd.equalsIgnoreCase("quest"))
@@ -143,7 +143,6 @@ public class player_developer extends base_script
             if (flag.equals(""))
             {
                 broadcast(self, "/developer pumpkin [single | ring]");
-
                 return SCRIPT_CONTINUE;
             }
             if (flag.equalsIgnoreCase("single"))
@@ -366,12 +365,6 @@ public class player_developer extends base_script
             broadcast(self, "Hash Value: " + hashValue);
             return SCRIPT_CONTINUE;
         }
-        if (cmd.equalsIgnoreCase("convertcrctostring"))
-        {
-            String hash = tok.nextToken();
-
-            return SCRIPT_CONTINUE;
-        }
         if (cmd.equalsIgnoreCase("travel"))
         {
             String which = tok.nextToken();
@@ -560,13 +553,12 @@ public class player_developer extends base_script
             String ITEM_TABLE_COLUMN = "name";
             obj_id myBag = createObjectInInventoryAllowOverload("object/tangible/test/qabag.iff", self);
             String[] items = dataTableGetStringColumnNoDefaults(ITEM_TABLE, ITEM_TABLE_COLUMN);
-            int bagLimit = 0;
+            int bagLimit = 80;
             for (String item : items)
             {
-                if (bagLimit > 250)
+                if (bagLimit > getContents(myBag).length)
                 {
                     broadcast(self, "Bag limit reached.  Stopping!");
-                    bagLimit = 0;
                     break;
                 }
                 static_item.createNewItemFunction(item, myBag);
@@ -688,6 +680,26 @@ public class player_developer extends base_script
             setSUIProperty(page, "btnRevert", "Visible", "false");
             showSUIPage(page);
             flushSUIPage(page);
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("flytext"))
+        {
+            String flytext = tok.nextToken();
+            while (tok.hasMoreTokens())
+            {
+                flytext += " " + tok.nextToken();
+            }
+            showFlyText(self, unlocalized(flytext), 35.0f, colors.WHITE);
+            return SCRIPT_CONTINUE;
+        }
+        if (cmd.equalsIgnoreCase("flytextTarget"))
+        {
+            String flytext = tok.nextToken();
+            while (tok.hasMoreTokens())
+            {
+                flytext += " " + tok.nextToken();
+            }
+            showFlyText(target, unlocalized(flytext), 35.0f, colors.WHITE);
             return SCRIPT_CONTINUE;
         }
         if (cmd.equalsIgnoreCase("toggle"))
@@ -836,7 +848,6 @@ public class player_developer extends base_script
                     broadcast(self, String.valueOf(numColumns));
                     String columnName = (columnHeader[j]);
                     columnData[i][j] = dataTableGetString(DATATABLE_MASTER_ITEM, i, columnName);
-                    broadcast(self, dataTableGetString(DATATABLE_MASTER_ITEM, i, columnName));
                 }
             }
             sui.tableColumnMajor(self, self, sui.OK_CANCEL, "DATATABLE VIEWER", "noHandler", "Master Item Table Loaded", columnHeader, columnHeaderType, columnData, true);
@@ -981,6 +992,18 @@ public class player_developer extends base_script
                     String sound = tok.nextToken();
                     playClientEffectObj(player, sound, player, "head");
                 }
+            }
+        }
+        if (cmd.equalsIgnoreCase("stopmacros"))
+        {
+            if (!tok.hasMoreTokens())
+            {
+                sendSystemMessageTestingOnly(self, "Syntax: /admin stopmacros (target)");
+                return SCRIPT_CONTINUE;
+            }
+            else
+            {
+                sendConsoleCommand("dumpPausedCommands", target);
             }
         }
         if (cmd.equalsIgnoreCase("rewardarea"))
