@@ -11678,6 +11678,10 @@ public class base_class
         _setDescriptionStringId(getLongWithNull(target), descriptionId);
     }
 
+    public static void setDescriptionString(obj_id target, String description)
+    {
+        _setDescriptionStringId(getLongWithNull(target), new string_id(description));
+    }
     /**
      * Returns the name of an object.
      *
